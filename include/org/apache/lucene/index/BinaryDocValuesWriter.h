@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexBinaryDocValuesWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexBinaryDocValuesWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValuesWriter || defined(INCLUDE_OrgApacheLuceneIndexBinaryDocValuesWriter))
 #define OrgApacheLuceneIndexBinaryDocValuesWriter_
 
@@ -28,14 +34,14 @@
 
 /*!
  @brief Buffers up pending byte[] per doc, then flushes when
- segment flushes.
+   segment flushes.
  */
 @interface OrgApacheLuceneIndexBinaryDocValuesWriter : OrgApacheLuceneIndexDocValuesWriter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
-                       withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)iwBytesUsed;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
+                                               withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)iwBytesUsed;
 
 - (void)addValueWithInt:(jint)docID
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
@@ -45,18 +51,26 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
 - (void)flushWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
             withOrgApacheLuceneCodecsDocValuesConsumer:(OrgApacheLuceneCodecsDocValuesConsumer *)dvConsumer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivate NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexBinaryDocValuesWriter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexBinaryDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexBinaryDocValuesWriter *self, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexBinaryDocValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexBinaryDocValuesWriter *self, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValuesWriter *new_OrgApacheLuceneIndexBinaryDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValuesWriter *new_OrgApacheLuceneIndexBinaryDocValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValuesWriter *create_OrgApacheLuceneIndexBinaryDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
+FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValuesWriter *create_OrgApacheLuceneIndexBinaryDocValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBinaryDocValuesWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValuesWriter")

@@ -3,17 +3,22 @@
 //  source: ./core/src/java/org/apache/lucene/search/TwoPhaseDocIdSetIterator.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/TwoPhaseDocIdSetIterator.h"
 
-@interface OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1 : OrgApacheLuceneSearchDocIdSetIterator {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TwoPhaseDocIdSetIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1 : OrgApacheLuceneSearchDocIdSetIterator {
  @public
   OrgApacheLuceneSearchDocIdSetIterator *val$approximation_;
   OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *val$twoPhaseIterator_;
 }
+
+- (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0
+            withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *)capture$1;
 
 - (jint)docID;
 
@@ -25,27 +30,26 @@
 
 - (jlong)cost;
 
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0
-            withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *)capture$1;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1, val$approximation_, OrgApacheLuceneSearchDocIdSetIterator *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1, val$twoPhaseIterator_, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *)
+__attribute__((unused)) static void OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1 *self, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1);
 
-__attribute__((unused)) static jint OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_doNextWithInt_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1 *self, jint doc);
+__attribute__((unused)) static OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1 *new_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static void OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1 *self, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1);
+__attribute__((unused)) static OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1 *create_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1);
 
-__attribute__((unused)) static OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1 *new_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1 *create_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1)
+__attribute__((unused)) static jint OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_doNextWithInt_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1 *self, jint doc);
 
 @implementation OrgApacheLuceneSearchTwoPhaseDocIdSetIterator
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneSearchDocIdSetIterator *)asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *)twoPhaseIterator {
   return OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(twoPhaseIterator);
@@ -63,64 +67,66 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1)
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:", "asDocIdSetIterator", "Lorg.apache.lucene.search.DocIdSetIterator;", 0x9, NULL, NULL },
-    { "approximation", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x401, NULL, NULL },
-    { "matches", NULL, "Z", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", "TwoPhaseDocIdSetIterator", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSetIterator;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSetIterator;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTwoPhaseDocIdSetIterator = { 2, "TwoPhaseDocIdSetIterator", "org.apache.lucene.search", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:);
+  methods[2].selector = @selector(approximation);
+  methods[3].selector = @selector(matches);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "asDocIdSetIterator", "LOrgApacheLuceneSearchTwoPhaseDocIdSetIterator;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTwoPhaseDocIdSetIterator = { "TwoPhaseDocIdSetIterator", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x401, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator;
 }
 
 @end
 
-OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *twoPhaseIterator) {
-  OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_initialize();
-  OrgApacheLuceneSearchDocIdSetIterator *approximation = [((OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *) nil_chk(twoPhaseIterator)) approximation];
-  return create_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(approximation, twoPhaseIterator);
-}
-
 void OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_init(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *self) {
   NSObject_init(self);
 }
 
+OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *twoPhaseIterator) {
+  OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_initialize();
+  OrgApacheLuceneSearchDocIdSetIterator *approximation = [((OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *) nil_chk(twoPhaseIterator)) approximation];
+  return create_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(approximation, twoPhaseIterator);
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator)
 
-@implementation OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1
+@implementation OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1
+
+- (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0
+            withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *)capture$1 {
+  OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(self, capture$0, capture$1);
+  return self;
+}
 
 - (jint)docID {
   return [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(val$approximation_)) docID];
 }
 
 - (jint)nextDoc {
-  return OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_doNextWithInt_(self, [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(val$approximation_)) nextDoc]);
+  return OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_doNextWithInt_(self, [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(val$approximation_)) nextDoc]);
 }
 
 - (jint)advanceWithInt:(jint)target {
-  return OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_doNextWithInt_(self, [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(val$approximation_)) advanceWithInt:target]);
+  return OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_doNextWithInt_(self, [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(val$approximation_)) advanceWithInt:target]);
 }
 
 - (jint)doNextWithInt:(jint)doc {
-  return OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_doNextWithInt_(self, doc);
+  return OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_doNextWithInt_(self, doc);
 }
 
 - (jlong)cost {
   return [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(val$approximation_)) cost];
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0
-            withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *)capture$1 {
-  OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(self, capture$0, capture$1);
-  return self;
 }
 
 - (void)dealloc {
@@ -130,26 +136,50 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "doNextWithInt:", "doNext", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchDocIdSetIterator:withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 3, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchDocIdSetIterator:withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:);
+  methods[1].selector = @selector(docID);
+  methods[2].selector = @selector(nextDoc);
+  methods[3].selector = @selector(advanceWithInt:);
+  methods[4].selector = @selector(doNextWithInt:);
+  methods[5].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$approximation_", NULL, 0x1012, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$twoPhaseIterator_", NULL, 0x1012, "Lorg.apache.lucene.search.TwoPhaseDocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$approximation_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$twoPhaseIterator_", "LOrgApacheLuceneSearchTwoPhaseDocIdSetIterator;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchTwoPhaseDocIdSetIterator", "asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1 = { 2, "", "org.apache.lucene.search", "TwoPhaseDocIdSetIterator", 0x8008, 6, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchDocIdSetIterator;LOrgApacheLuceneSearchTwoPhaseDocIdSetIterator;", "LJavaIoIOException;", "advance", "I", "doNext", "LOrgApacheLuceneSearchTwoPhaseDocIdSetIterator;", "asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8018, 6, 2, 5, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1;
 }
 
 @end
 
-jint OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_doNextWithInt_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1 *self, jint doc) {
+void OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1 *self, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1) {
+  JreStrongAssign(&self->val$approximation_, capture$0);
+  JreStrongAssign(&self->val$twoPhaseIterator_, capture$1);
+  OrgApacheLuceneSearchDocIdSetIterator_init(self);
+}
+
+OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1 *new_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1, initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_, capture$0, capture$1)
+}
+
+OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1 *create_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1, initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_, capture$0, capture$1)
+}
+
+jint OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1_doNextWithInt_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_1 *self, jint doc) {
   for (; ; doc = [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(self->val$approximation_)) nextDoc]) {
     if (doc == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
       return OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
@@ -159,19 +189,3 @@ jint OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_doNextWithInt_(OrgApacheLu
     }
   }
 }
-
-void OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1 *self, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1) {
-  JreStrongAssign(&self->val$approximation_, capture$0);
-  JreStrongAssign(&self->val$twoPhaseIterator_, capture$1);
-  OrgApacheLuceneSearchDocIdSetIterator_init(self);
-}
-
-OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1 *new_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1, initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_, capture$0, capture$1)
-}
-
-OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1 *create_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1_initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1, initWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_, capture$0, capture$1)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_$1)

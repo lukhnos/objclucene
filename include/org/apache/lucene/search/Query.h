@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchQuery || defined(INCLUDE_OrgApacheLuceneSearchQuery))
 #define OrgApacheLuceneSearchQuery_
 
@@ -23,41 +29,41 @@
 /*!
  @brief The abstract base class for queries.
  <p>Instantiable subclasses are:
- <ul>
- <li> <code>TermQuery</code>
- <li> <code>BooleanQuery</code>
- <li> <code>WildcardQuery</code>
- <li> <code>PhraseQuery</code>
- <li> <code>PrefixQuery</code>
- <li> <code>MultiPhraseQuery</code>
- <li> <code>FuzzyQuery</code>
- <li> <code>RegexpQuery</code>
- <li> <code>TermRangeQuery</code>
- <li> <code>NumericRangeQuery</code>
- <li> <code>ConstantScoreQuery</code>
- <li> <code>DisjunctionMaxQuery</code>
- <li> <code>MatchAllDocsQuery</code>
- </ul>
- <p>See also the family of <code>Span Queries</code>
- and additional queries available in the <a href="/../queries/overview-summary.html">Queries module</a>
+     <ul>
+     <li> <code>TermQuery</code>
+     <li> <code>BooleanQuery</code>
+     <li> <code>WildcardQuery</code>
+     <li> <code>PhraseQuery</code>
+     <li> <code>PrefixQuery</code>
+     <li> <code>MultiPhraseQuery</code>
+     <li> <code>FuzzyQuery</code>
+     <li> <code>RegexpQuery</code>
+     <li> <code>TermRangeQuery</code>
+     <li> <code>NumericRangeQuery</code>
+     <li> <code>ConstantScoreQuery</code>
+     <li> <code>DisjunctionMaxQuery</code>
+     <li> <code>MatchAllDocsQuery</code>
+     </ul>
+     <p>See also the family of <code>Span Queries</code>
+        and additional queries available in the <a href="{@@docRoot}/../queries/overview-summary.html">Queries module</a>
  */
 @interface OrgApacheLuceneSearchQuery : NSObject < NSCopying >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns a clone of this query.
  */
-- (OrgApacheLuceneSearchQuery *)clone;
+- (OrgApacheLuceneSearchQuery *)java_clone;
 
 /*!
  @brief Expert: Constructs an appropriate Weight implementation for this query.
  <p>
- Only implemented by primitive queries, which re-write to themselves.
- @param needsScores   True if document scores (<code>Scorer.score</code>) or match
- frequencies (<code>Scorer.freq</code>) are needed.
+  Only implemented by primitive queries, which re-write to themselves.
+ @param needsScores True if document scores (<code>Scorer.score</code> ) or match                       frequencies (
+ <code>Scorer.freq</code> ) are needed.
  */
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -65,28 +71,26 @@
 - (jboolean)isEqual:(id)obj;
 
 /*!
- @brief Gets the boost for this clause.
- Documents matching
- this clause will (in addition to the normal weightings) have their score
- multiplied by <code>b</code>.   The boost is 1.0 by default.
+ @brief Gets the boost for this clause.Documents matching
+  this clause will (in addition to the normal weightings) have their score
+  multiplied by <code>b</code>.
+ The boost is 1.0 by default.
  */
 - (jfloat)getBoost;
 
 - (NSUInteger)hash;
 
 /*!
- @brief Expert: called to re-write queries into primitive queries.
- For example,
- a PrefixQuery will be rewritten into a BooleanQuery that consists
- of TermQuerys.
+ @brief Expert: called to re-write queries into primitive queries.For example,
+  a PrefixQuery will be rewritten into a BooleanQuery that consists
+  of TermQuerys.
  */
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 /*!
- @brief Sets the boost for this query clause to <code>b</code>.
- Documents
- matching this clause will (in addition to the normal weightings) have
- their score multiplied by <code>b</code>.
+ @brief Sets the boost for this query clause to <code>b</code>.Documents
+  matching this clause will (in addition to the normal weightings) have
+  their score multiplied by <code>b</code>.
  */
 - (void)setBoostWithFloat:(jfloat)b;
 
@@ -97,7 +101,7 @@
 
 /*!
  @brief Prints a query to a string, with <code>field</code> assumed to be the 
- default field and omitted.
+  default field and omitted.
  */
 - (NSString *)toStringWithNSString:(NSString *)field;
 
@@ -111,4 +115,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchQuery")

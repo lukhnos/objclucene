@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreInputStreamDataInput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreInputStreamDataInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreInputStreamDataInput || defined(INCLUDE_OrgApacheLuceneStoreInputStreamDataInput))
 #define OrgApacheLuceneStoreInputStreamDataInput_
 
@@ -34,15 +40,21 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)is;
+- (instancetype __nonnull)initWithJavaIoInputStream:(JavaIoInputStream *)is;
 
 - (void)close;
+
+- (OrgApacheLuceneStoreDataInput *)java_clone;
 
 - (jbyte)readByte;
 
 - (void)readBytesWithByteArray:(IOSByteArray *)b
                        withInt:(jint)offset
                        withInt:(jint)len;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -58,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreInputStreamDataInput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreInputStreamDataInput")

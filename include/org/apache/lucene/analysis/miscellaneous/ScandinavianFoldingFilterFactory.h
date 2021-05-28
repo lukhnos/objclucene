@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_
 
@@ -27,19 +33,19 @@
 /*!
  @brief Factory for <code>ScandinavianFoldingFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_scandfold" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.ScandinavianFoldingFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_scandfold" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.ScandinavianFoldingFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -57,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldi
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory")

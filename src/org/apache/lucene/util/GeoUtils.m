@@ -18,6 +18,10 @@
 #include "org/apache/lucene/util/GeoUtils.h"
 #include "org/apache/lucene/util/SloppyMath.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/GeoUtils must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilGeoUtils ()
 
 - (instancetype)init;
@@ -73,27 +77,27 @@
 
 @end
 
-inline jshort OrgApacheLuceneUtilGeoUtils_get_MIN_LON();
+inline jshort OrgApacheLuceneUtilGeoUtils_get_MIN_LON(void);
 #define OrgApacheLuceneUtilGeoUtils_MIN_LON -180
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MIN_LON, jshort)
 
-inline jshort OrgApacheLuceneUtilGeoUtils_get_MIN_LAT();
+inline jshort OrgApacheLuceneUtilGeoUtils_get_MIN_LAT(void);
 #define OrgApacheLuceneUtilGeoUtils_MIN_LAT -90
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MIN_LAT, jshort)
 
-inline jdouble OrgApacheLuceneUtilGeoUtils_get_LON_SCALE();
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_LON_SCALE(void);
 #define OrgApacheLuceneUtilGeoUtils_LON_SCALE 1.1930464708333334E7
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, LON_SCALE, jdouble)
 
-inline jdouble OrgApacheLuceneUtilGeoUtils_get_LAT_SCALE();
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_LAT_SCALE(void);
 #define OrgApacheLuceneUtilGeoUtils_LAT_SCALE 2.3860929416666668E7
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, LAT_SCALE, jdouble)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilGeoUtils_init(OrgApacheLuceneUtilGeoUtils *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilGeoUtils *new_OrgApacheLuceneUtilGeoUtils_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilGeoUtils *new_OrgApacheLuceneUtilGeoUtils_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilGeoUtils *create_OrgApacheLuceneUtilGeoUtils_init();
+__attribute__((unused)) static OrgApacheLuceneUtilGeoUtils *create_OrgApacheLuceneUtilGeoUtils_init(void);
 
 __attribute__((unused)) static jlong OrgApacheLuceneUtilGeoUtils_scaleLonWithDouble_(jdouble val);
 
@@ -363,51 +367,86 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "GeoUtils", NULL, 0x2, NULL, NULL },
-    { "mortonHashWithDouble:withDouble:", "mortonHash", "Ljava.lang.Long;", 0x9, NULL, NULL },
-    { "mortonUnhashLonWithLong:", "mortonUnhashLon", "D", 0x9, NULL, NULL },
-    { "mortonUnhashLatWithLong:", "mortonUnhashLat", "D", 0x9, NULL, NULL },
-    { "scaleLonWithDouble:", "scaleLon", "J", 0xa, NULL, NULL },
-    { "scaleLatWithDouble:", "scaleLat", "J", 0xa, NULL, NULL },
-    { "unscaleLonWithLong:", "unscaleLon", "D", 0xa, NULL, NULL },
-    { "unscaleLatWithLong:", "unscaleLat", "D", 0xa, NULL, NULL },
-    { "compareWithDouble:withDouble:", "compare", "D", 0x9, NULL, NULL },
-    { "normalizeLonWithDouble:", "normalizeLon", "D", 0x9, NULL, NULL },
-    { "normalizeLatWithDouble:", "normalizeLat", "D", 0x9, NULL, NULL },
-    { "bboxContainsWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "bboxContains", "Z", 0x19, NULL, NULL },
-    { "pointInPolygonWithDoubleArray:withDoubleArray:withDouble:withDouble:", "pointInPolygon", "Z", 0x9, NULL, NULL },
-    { "geoTermToStringWithLong:", "geoTermToString", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "rectDisjointWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectDisjoint", "Z", 0x9, NULL, NULL },
-    { "rectWithinWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectWithin", "Z", 0x9, NULL, NULL },
-    { "rectCrossesWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectCrosses", "Z", 0x9, NULL, NULL },
-    { "rectContainsWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectContains", "Z", 0x9, NULL, NULL },
-    { "rectIntersectsWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectIntersects", "Z", 0x9, NULL, NULL },
-    { "rectCrossesPolyWithDouble:withDouble:withDouble:withDouble:withDoubleArray:withDoubleArray:withDouble:withDouble:withDouble:withDouble:", "rectCrossesPoly", "Z", 0x9, NULL, NULL },
-    { "circleToPolyWithDouble:withDouble:withDouble:", "circleToPoly", "Ljava.util.ArrayList;", 0x9, NULL, "(DDD)Ljava/util/ArrayList<[LD;>;" },
-    { "rectWithinPolyWithDouble:withDouble:withDouble:withDouble:withDoubleArray:withDoubleArray:withDouble:withDouble:withDouble:withDouble:", "rectWithinPoly", "Z", 0x9, NULL, NULL },
-    { "rectAnyCornersOutsideCircleWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectAnyCornersOutsideCircle", "Z", 0xa, NULL, NULL },
-    { "rectAnyCornersInCircleWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectAnyCornersInCircle", "Z", 0xa, NULL, NULL },
-    { "rectWithinCircleWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectWithinCircle", "Z", 0x9, NULL, NULL },
-    { "rectCrossesCircleWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectCrossesCircle", "Z", 0x9, NULL, NULL },
-    { "circleWithinRectWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "circleWithinRect", "Z", 0x9, NULL, NULL },
-    { "lineCrossesSphereWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "lineCrossesSphere", "Z", 0xa, NULL, NULL },
-    { "isValidLatWithDouble:", "isValidLat", "Z", 0x9, NULL, NULL },
-    { "isValidLonWithDouble:", "isValidLon", "Z", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 4, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0xa, 5, 6, -1, -1, -1, -1 },
+    { NULL, "J", 0xa, 7, 6, -1, -1, -1, -1 },
+    { NULL, "D", 0xa, 8, 3, -1, -1, -1, -1 },
+    { NULL, "D", 0xa, 9, 3, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 10, 1, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 11, 6, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 12, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x19, 13, 14, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 15, 16, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 17, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 18, 19, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 20, 19, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 21, 19, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 22, 19, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 23, 19, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 24, 25, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilArrayList;", 0x9, 26, 27, -1, 28, -1, -1 },
+    { NULL, "Z", 0x9, 29, 25, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 30, 31, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 32, 31, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 33, 31, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 34, 31, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 35, 31, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 36, 37, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 38, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 39, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(mortonHashWithDouble:withDouble:);
+  methods[2].selector = @selector(mortonUnhashLonWithLong:);
+  methods[3].selector = @selector(mortonUnhashLatWithLong:);
+  methods[4].selector = @selector(scaleLonWithDouble:);
+  methods[5].selector = @selector(scaleLatWithDouble:);
+  methods[6].selector = @selector(unscaleLonWithLong:);
+  methods[7].selector = @selector(unscaleLatWithLong:);
+  methods[8].selector = @selector(compareWithDouble:withDouble:);
+  methods[9].selector = @selector(normalizeLonWithDouble:);
+  methods[10].selector = @selector(normalizeLatWithDouble:);
+  methods[11].selector = @selector(bboxContainsWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[12].selector = @selector(pointInPolygonWithDoubleArray:withDoubleArray:withDouble:withDouble:);
+  methods[13].selector = @selector(geoTermToStringWithLong:);
+  methods[14].selector = @selector(rectDisjointWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[15].selector = @selector(rectWithinWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[16].selector = @selector(rectCrossesWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[17].selector = @selector(rectContainsWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[18].selector = @selector(rectIntersectsWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[19].selector = @selector(rectCrossesPolyWithDouble:withDouble:withDouble:withDouble:withDoubleArray:withDoubleArray:withDouble:withDouble:withDouble:withDouble:);
+  methods[20].selector = @selector(circleToPolyWithDouble:withDouble:withDouble:);
+  methods[21].selector = @selector(rectWithinPolyWithDouble:withDouble:withDouble:withDouble:withDoubleArray:withDoubleArray:withDouble:withDouble:withDouble:withDouble:);
+  methods[22].selector = @selector(rectAnyCornersOutsideCircleWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[23].selector = @selector(rectAnyCornersInCircleWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[24].selector = @selector(rectWithinCircleWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[25].selector = @selector(rectCrossesCircleWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[26].selector = @selector(circleWithinRectWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[27].selector = @selector(lineCrossesSphereWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:);
+  methods[28].selector = @selector(isValidLatWithDouble:);
+  methods[29].selector = @selector(isValidLonWithDouble:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MIN_LON", "MIN_LON", 0x1a, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneUtilGeoUtils_MIN_LON },
-    { "MIN_LAT", "MIN_LAT", 0x1a, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneUtilGeoUtils_MIN_LAT },
-    { "BITS", "BITS", 0x19, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneUtilGeoUtils_BITS },
-    { "LON_SCALE", "LON_SCALE", 0x1a, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_LON_SCALE },
-    { "LAT_SCALE", "LAT_SCALE", 0x1a, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_LAT_SCALE },
-    { "TOLERANCE", "TOLERANCE", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_TOLERANCE },
-    { "MIN_LON_INCL", "MIN_LON_INCL", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_MIN_LON_INCL },
-    { "MAX_LON_INCL", "MAX_LON_INCL", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_MAX_LON_INCL },
-    { "MIN_LAT_INCL", "MIN_LAT_INCL", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_MIN_LAT_INCL },
-    { "MAX_LAT_INCL", "MAX_LAT_INCL", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_MAX_LAT_INCL },
+    { "MIN_LON", "S", .constantValue.asShort = OrgApacheLuceneUtilGeoUtils_MIN_LON, 0x1a, -1, -1, -1, -1 },
+    { "MIN_LAT", "S", .constantValue.asShort = OrgApacheLuceneUtilGeoUtils_MIN_LAT, 0x1a, -1, -1, -1, -1 },
+    { "BITS", "S", .constantValue.asShort = OrgApacheLuceneUtilGeoUtils_BITS, 0x19, -1, -1, -1, -1 },
+    { "LON_SCALE", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_LON_SCALE, 0x1a, -1, -1, -1, -1 },
+    { "LAT_SCALE", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_LAT_SCALE, 0x1a, -1, -1, -1, -1 },
+    { "TOLERANCE", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_TOLERANCE, 0x19, -1, -1, -1, -1 },
+    { "MIN_LON_INCL", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_MIN_LON_INCL, 0x19, -1, -1, -1, -1 },
+    { "MAX_LON_INCL", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_MAX_LON_INCL, 0x19, -1, -1, -1, -1 },
+    { "MIN_LAT_INCL", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_MIN_LAT_INCL, 0x19, -1, -1, -1, -1 },
+    { "MAX_LAT_INCL", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoUtils_MAX_LAT_INCL, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilGeoUtils = { 2, "GeoUtils", "org.apache.lucene.util", NULL, 0x11, 30, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "mortonHash", "DD", "mortonUnhashLon", "J", "mortonUnhashLat", "scaleLon", "D", "scaleLat", "unscaleLon", "unscaleLat", "compare", "normalizeLon", "normalizeLat", "bboxContains", "DDDDDD", "pointInPolygon", "[D[DDD", "geoTermToString", "rectDisjoint", "DDDDDDDD", "rectWithin", "rectCrosses", "rectContains", "rectIntersects", "rectCrossesPoly", "DDDD[D[DDDDD", "circleToPoly", "DDD", "(DDD)Ljava/util/ArrayList<[D>;", "rectWithinPoly", "rectAnyCornersOutsideCircle", "DDDDDDD", "rectAnyCornersInCircle", "rectWithinCircle", "rectCrossesCircle", "circleWithinRect", "lineCrossesSphere", "DDDDDDDDDD", "isValidLat", "isValidLon" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilGeoUtils = { "GeoUtils", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 30, 10, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilGeoUtils;
 }
 
@@ -499,7 +538,7 @@ jboolean OrgApacheLuceneUtilGeoUtils_bboxContainsWithDouble_withDouble_withDoubl
 
 jboolean OrgApacheLuceneUtilGeoUtils_pointInPolygonWithDoubleArray_withDoubleArray_withDouble_withDouble_(IOSDoubleArray *x, IOSDoubleArray *y, jdouble lat, jdouble lon) {
   OrgApacheLuceneUtilGeoUtils_initialize();
-  JreAssert((((IOSDoubleArray *) nil_chk(x))->size_ == ((IOSDoubleArray *) nil_chk(y))->size_), (@"org/apache/lucene/util/GeoUtils.java:128 condition failed: assert x.length == y.length;"));
+  JreAssert(((IOSDoubleArray *) nil_chk(x))->size_ == ((IOSDoubleArray *) nil_chk(y))->size_, @"org/apache/lucene/util/GeoUtils.java:128 condition failed: assert x.length == y.length;");
   jboolean inPoly = false;
   for (jint i = 1; i < x->size_; i++) {
     if ((IOSDoubleArray_Get(x, i) < lon && IOSDoubleArray_Get(x, i - 1) >= lon) || (IOSDoubleArray_Get(x, i - 1) < lon && IOSDoubleArray_Get(x, i) >= lon)) {
@@ -556,8 +595,23 @@ jboolean OrgApacheLuceneUtilGeoUtils_rectCrossesPolyWithDouble_withDouble_withDo
   }
   IOSObjectArray *bbox = [IOSObjectArray arrayWithObjects:(id[]){ [IOSDoubleArray arrayWithDoubles:(jdouble[]){ rMinX, rMinY } count:2], [IOSDoubleArray arrayWithDoubles:(jdouble[]){ rMaxX, rMinY } count:2], [IOSDoubleArray arrayWithDoubles:(jdouble[]){ rMaxX, rMaxY } count:2], [IOSDoubleArray arrayWithDoubles:(jdouble[]){ rMinX, rMaxY } count:2], [IOSDoubleArray arrayWithDoubles:(jdouble[]){ rMinX, rMinY } count:2] } count:5 type:IOSClass_doubleArray(1)];
   jint polyLength = ((IOSDoubleArray *) nil_chk(shapeX))->size_ - 1;
-  jdouble d, s, t, a1, b1, c1, a2, b2, c2;
-  jdouble x00, y00, x01, y01, x10, y10, x11, y11;
+  jdouble d;
+  jdouble s;
+  jdouble t;
+  jdouble a1;
+  jdouble b1;
+  jdouble c1;
+  jdouble a2;
+  jdouble b2;
+  jdouble c2;
+  jdouble x00;
+  jdouble y00;
+  jdouble x01;
+  jdouble y01;
+  jdouble x10;
+  jdouble y10;
+  jdouble x11;
+  jdouble y11;
   for (jshort b = 0; b < 4; ++b) {
     a1 = IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(bbox, b + 1)), 1) - IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(bbox, b)), 1);
     b1 = IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(bbox, b)), 0) - IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(bbox, b + 1)), 0);
@@ -598,7 +652,7 @@ JavaUtilArrayList *OrgApacheLuceneUtilGeoUtils_circleToPolyWithDouble_withDouble
   IOSDoubleArray *pt = [IOSDoubleArray arrayWithLength:2];
   jint sidesLen = sides - 1;
   for (jint i = 0; i < sidesLen; ++i) {
-    angle = (i * 360 / sides);
+    angle = (JreIntDiv(i * 360, sides));
     pt = OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(lon, lat, angle, radius, pt);
     *IOSDoubleArray_GetRef(lons, i) = IOSDoubleArray_Get(nil_chk(pt), 0);
     *IOSDoubleArray_GetRef(lats, i) = IOSDoubleArray_Get(pt, 1);

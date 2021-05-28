@@ -3,12 +3,16 @@
 //  source: ./core/src/java/org/apache/lucene/util/FilterIterator.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Iterator.h"
 #include "java/util/NoSuchElementException.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/util/FilterIterator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/FilterIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilFilterIterator () {
  @public
@@ -49,7 +53,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
   if (!OrgApacheLuceneUtilFilterIterator_hasNext(self)) {
     @throw create_JavaUtilNoSuchElementException_init();
   }
-  JreAssert((nextIsSet_), (@"org/apache/lucene/util/FilterIterator.java:54 condition failed: assert nextIsSet;"));
+  JreAssert(nextIsSet_, @"org/apache/lucene/util/FilterIterator.java:54 condition failed: assert nextIsSet;");
   @try {
     return next_;
   }
@@ -67,6 +71,10 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
   return OrgApacheLuceneUtilFilterIterator_setNext(self);
 }
 
+- (void)forEachRemainingWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaUtilIterator_forEachRemainingWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
 - (void)dealloc {
   RELEASE_(iterator_);
   RELEASE_(next_);
@@ -74,20 +82,31 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "predicateFunctionWithId:", "predicateFunction", "Z", 0x404, NULL, "(TInnerT;)Z" },
-    { "initWithJavaUtilIterator:", "FilterIterator", NULL, 0x1, NULL, "(Ljava/util/Iterator<TInnerT;>;)V" },
-    { "hasNext", NULL, "Z", 0x11, NULL, NULL },
-    { "next", NULL, "TT;", 0x11, NULL, "()TT;" },
-    { "remove", NULL, "V", 0x11, NULL, NULL },
-    { "setNext", NULL, "Z", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x404, 0, 1, -1, 2, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, 4, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x11, -1, -1, -1, 5, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(predicateFunctionWithId:);
+  methods[1].selector = @selector(initWithJavaUtilIterator:);
+  methods[2].selector = @selector(hasNext);
+  methods[3].selector = @selector(next);
+  methods[4].selector = @selector(remove);
+  methods[5].selector = @selector(setNext);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "iterator_", NULL, 0x12, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<TInnerT;>;", .constantValue.asLong = 0 },
-    { "next_", NULL, 0x2, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
-    { "nextIsSet_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "iterator_", "LJavaUtilIterator;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
+    { "next_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, 7, -1 },
+    { "nextIsSet_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFilterIterator = { 2, "FilterIterator", "org.apache.lucene.util", NULL, 0x401, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;InnerT:TT;>Ljava/lang/Object;Ljava/util/Iterator<TT;>;" };
+  static const void *ptrTable[] = { "predicateFunction", "LNSObject;", "(TInnerT;)Z", "LJavaUtilIterator;", "(Ljava/util/Iterator<TInnerT;>;)V", "()TT;", "Ljava/util/Iterator<TInnerT;>;", "TT;", "<T:Ljava/lang/Object;InnerT:TT;>Ljava/lang/Object;Ljava/util/Iterator<TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFilterIterator = { "FilterIterator", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x401, 6, 3, -1, -1, -1, 8, -1 };
   return &_OrgApacheLuceneUtilFilterIterator;
 }
 

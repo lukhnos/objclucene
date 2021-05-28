@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_
 
@@ -21,7 +27,6 @@
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class IOSByteArray;
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
@@ -35,36 +40,21 @@
    */
   OrgApacheLuceneAnalysisUtilCharArraySet *protWords_;
 }
-
-+ (jint)LOWER;
-
-+ (jint)UPPER;
-
-+ (jint)DIGIT;
-
-+ (jint)SUBWORD_DELIM;
-
-+ (jint)ALPHA;
-
-+ (jint)ALPHANUM;
-
-+ (jint)GENERATE_WORD_PARTS;
-
-+ (jint)GENERATE_NUMBER_PARTS;
-
-+ (jint)CATENATE_WORDS;
-
-+ (jint)CATENATE_NUMBERS;
-
-+ (jint)CATENATE_ALL;
-
-+ (jint)PRESERVE_ORIGINAL;
-
-+ (jint)SPLIT_ON_CASE_CHANGE;
-
-+ (jint)SPLIT_ON_NUMERICS;
-
-+ (jint)STEM_ENGLISH_POSSESSIVE;
+@property (readonly, class) jint LOWER NS_SWIFT_NAME(LOWER);
+@property (readonly, class) jint UPPER NS_SWIFT_NAME(UPPER);
+@property (readonly, class) jint DIGIT NS_SWIFT_NAME(DIGIT);
+@property (readonly, class) jint SUBWORD_DELIM NS_SWIFT_NAME(SUBWORD_DELIM);
+@property (readonly, class) jint ALPHA NS_SWIFT_NAME(ALPHA);
+@property (readonly, class) jint ALPHANUM NS_SWIFT_NAME(ALPHANUM);
+@property (readonly, class) jint GENERATE_WORD_PARTS NS_SWIFT_NAME(GENERATE_WORD_PARTS);
+@property (readonly, class) jint GENERATE_NUMBER_PARTS NS_SWIFT_NAME(GENERATE_NUMBER_PARTS);
+@property (readonly, class) jint CATENATE_WORDS NS_SWIFT_NAME(CATENATE_WORDS);
+@property (readonly, class) jint CATENATE_NUMBERS NS_SWIFT_NAME(CATENATE_NUMBERS);
+@property (readonly, class) jint CATENATE_ALL NS_SWIFT_NAME(CATENATE_ALL);
+@property (readonly, class) jint PRESERVE_ORIGINAL NS_SWIFT_NAME(PRESERVE_ORIGINAL);
+@property (readonly, class) jint SPLIT_ON_CASE_CHANGE NS_SWIFT_NAME(SPLIT_ON_CASE_CHANGE);
+@property (readonly, class) jint SPLIT_ON_NUMERICS NS_SWIFT_NAME(SPLIT_ON_NUMERICS);
+@property (readonly, class) jint STEM_ENGLISH_POSSESSIVE NS_SWIFT_NAME(STEM_ENGLISH_POSSESSIVE);
 
 #pragma mark Public
 
@@ -75,26 +65,25 @@
  @param configurationFlags Flags configuring the filter
  @param protWords If not null is the set of tokens to protect from being delimited
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                             withByteArray:(IOSByteArray *)charTypeTable
-                                                   withInt:(jint)configurationFlags
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)protWords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                       withByteArray:(IOSByteArray *)charTypeTable
+                                                             withInt:(jint)configurationFlags
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)protWords;
 
 /*!
  @brief Creates a new WordDelimiterFilter using <code>WordDelimiterIterator.DEFAULT_WORD_DELIM_TABLE</code>
- as its charTypeTable
+  as its charTypeTable
  @param inArg TokenStream to be filtered
  @param configurationFlags Flags configuring the filter
  @param protWords If not null is the set of tokens to protect from being delimited
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)configurationFlags
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)protWords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                             withInt:(jint)configurationFlags
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)protWords;
 
 - (jboolean)incrementToken;
 
 /*!
- 
  */
 - (void)reset;
 
@@ -128,112 +117,116 @@
  */
 + (jboolean)isUpperWithInt:(jint)type;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, protWords_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_LOWER();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_LOWER(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_LOWER 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, LOWER, jint)
 
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_UPPER();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_UPPER(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_UPPER 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, UPPER, jint)
 
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_DIGIT();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_DIGIT(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_DIGIT 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, DIGIT, jint)
 
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_SUBWORD_DELIM();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_SUBWORD_DELIM(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_SUBWORD_DELIM 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, SUBWORD_DELIM, jint)
 
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_ALPHA();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_ALPHA(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_ALPHA 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, ALPHA, jint)
 
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_ALPHANUM();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_ALPHANUM(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_ALPHANUM 7
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, ALPHANUM, jint)
 
 /*!
  @brief Causes parts of words to be generated:
  <p>
- "PowerShot" =&gt; "Power" "Shot"
+  "PowerShot" =&gt; "Power" "Shot"
  */
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_GENERATE_WORD_PARTS();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_GENERATE_WORD_PARTS(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_GENERATE_WORD_PARTS 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, GENERATE_WORD_PARTS, jint)
 
 /*!
  @brief Causes number subwords to be generated:
  <p>
- "500-42" =&gt; "500" "42"
+  "500-42" =&gt; "500" "42"
  */
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_GENERATE_NUMBER_PARTS();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_GENERATE_NUMBER_PARTS(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_GENERATE_NUMBER_PARTS 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, GENERATE_NUMBER_PARTS, jint)
 
 /*!
  @brief Causes maximum runs of word parts to be catenated:
  <p>
- "wi-fi" =&gt; "wifi"
+  "wi-fi" =&gt; "wifi"
  */
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_CATENATE_WORDS();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_CATENATE_WORDS(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_CATENATE_WORDS 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, CATENATE_WORDS, jint)
 
 /*!
  @brief Causes maximum runs of word parts to be catenated:
  <p>
- "wi-fi" =&gt; "wifi"
+  "wi-fi" =&gt; "wifi"
  */
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_CATENATE_NUMBERS();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_CATENATE_NUMBERS(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_CATENATE_NUMBERS 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, CATENATE_NUMBERS, jint)
 
 /*!
  @brief Causes all subword parts to be catenated:
  <p>
- "wi-fi-4000" =&gt; "wifi4000"
+  "wi-fi-4000" =&gt; "wifi4000"
  */
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_CATENATE_ALL();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_CATENATE_ALL(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_CATENATE_ALL 16
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, CATENATE_ALL, jint)
 
 /*!
  @brief Causes original words are preserved and added to the subword list (Defaults to false)
  <p>
- "500-42" =&gt; "500" "42" "500-42"
+  "500-42" =&gt; "500" "42" "500-42"
  */
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_PRESERVE_ORIGINAL();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_PRESERVE_ORIGINAL(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_PRESERVE_ORIGINAL 32
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, PRESERVE_ORIGINAL, jint)
 
 /*!
  @brief If not set, causes case changes to be ignored (subwords will only be generated
- given SUBWORD_DELIM tokens)
+  given SUBWORD_DELIM tokens)
  */
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_SPLIT_ON_CASE_CHANGE();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_SPLIT_ON_CASE_CHANGE(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_SPLIT_ON_CASE_CHANGE 64
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, SPLIT_ON_CASE_CHANGE, jint)
 
 /*!
  @brief If not set, causes numeric changes to be ignored (subwords will only be generated
- given SUBWORD_DELIM tokens).
+  given SUBWORD_DELIM tokens).
  */
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_SPLIT_ON_NUMERICS();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_SPLIT_ON_NUMERICS(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_SPLIT_ON_NUMERICS 128
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, SPLIT_ON_NUMERICS, jint)
 
 /*!
  @brief Causes trailing "'s" to be removed for each subword
  <p>
- "O'Neil's" =&gt; "O", "Neil"
+  "O'Neil's" =&gt; "O", "Neil"
  */
-inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_STEM_ENGLISH_POSSESSIVE();
+inline jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_get_STEM_ENGLISH_POSSESSIVE(void);
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_STEM_ENGLISH_POSSESSIVE 256
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, STEM_ENGLISH_POSSESSIVE, jint)
 
@@ -282,7 +275,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelim
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter:(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter:(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *)outer$;
 
 /*!
  @brief Appends the given text of the given length, to the concetenation at the given offset
@@ -315,6 +308,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelim
  */
 - (void)writeAndClear;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation)
@@ -331,4 +328,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelim
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_
 
@@ -31,7 +37,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
@@ -50,4 +56,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFiel
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource")

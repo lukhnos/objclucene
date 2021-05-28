@@ -9,6 +9,10 @@
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SingleTermsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexSingleTermsEnum () {
  @public
   OrgApacheLuceneUtilBytesRef *singleRef_;
@@ -36,14 +40,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingleTermsEnum, singleRef_, OrgApacheLu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilBytesRef:", "SingleTermsEnum", NULL, 0x1, NULL, NULL },
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x4, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(acceptWithOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "singleRef_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "singleRef_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSingleTermsEnum = { 2, "SingleTermsEnum", "org.apache.lucene.index", NULL, 0x11, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTermsEnum;LOrgApacheLuceneUtilBytesRef;", "accept", "LOrgApacheLuceneUtilBytesRef;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSingleTermsEnum = { "SingleTermsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 2, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSingleTermsEnum;
 }
 

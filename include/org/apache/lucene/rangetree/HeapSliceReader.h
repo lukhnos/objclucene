@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeHeapSliceReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeHeapSliceReader_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceReader || defined(INCLUDE_OrgApacheLuceneRangetreeHeapSliceReader))
 #define OrgApacheLuceneRangetreeHeapSliceReader_
 
@@ -45,11 +51,15 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithLongArray:(IOSLongArray *)values
-                    withLongArray:(IOSLongArray *)ords
-                     withIntArray:(IOSIntArray *)docIDs
-                          withInt:(jint)start
-                          withInt:(jint)end;
+- (instancetype __nonnull)initPackagePrivateWithLongArray:(IOSLongArray *)values
+                                            withLongArray:(IOSLongArray *)ords
+                                             withIntArray:(IOSIntArray *)docIDs
+                                                  withInt:(jint)start
+                                                  withInt:(jint)end;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -59,14 +69,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeHeapSliceReader, values_, IOSLongArr
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeHeapSliceReader, ords_, IOSLongArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeHeapSliceReader, docIDs_, IOSIntArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(OrgApacheLuceneRangetreeHeapSliceReader *self, IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeHeapSliceReader_initPackagePrivateWithLongArray_withLongArray_withIntArray_withInt_withInt_(OrgApacheLuceneRangetreeHeapSliceReader *self, IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeHeapSliceReader *new_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeHeapSliceReader *new_OrgApacheLuceneRangetreeHeapSliceReader_initPackagePrivateWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeHeapSliceReader *create_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end);
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeHeapSliceReader *create_OrgApacheLuceneRangetreeHeapSliceReader_initPackagePrivateWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeHeapSliceReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceReader")

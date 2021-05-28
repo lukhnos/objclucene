@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchGeoPointTermQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchGeoPointTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermQuery || defined(INCLUDE_OrgApacheLuceneSearchGeoPointTermQuery))
 #define OrgApacheLuceneSearchGeoPointTermQuery_
 
@@ -24,7 +30,7 @@
 
 /*!
  @brief TermQuery for GeoPointField for overriding <code>org.apache.lucene.search.MultiTermQuery</code> methods specific to
- Geospatial operations
+  Geospatial operations
  */
 @interface OrgApacheLuceneSearchGeoPointTermQuery : OrgApacheLuceneSearchMultiTermQuery {
  @public
@@ -33,34 +39,41 @@
   jdouble maxLon_;
   jdouble maxLat_;
 }
-
-+ (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)GEO_CONSTANT_SCORE_REWRITE;
+@property (readonly, class, strong) OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *GEO_CONSTANT_SCORE_REWRITE NS_SWIFT_NAME(GEO_CONSTANT_SCORE_REWRITE);
 
 #pragma mark Public
 
 /*!
  @brief Constructs a query matching terms that cannot be represented with a single
- Term.
+  Term.
  */
-- (instancetype)initWithNSString:(NSString *)field
-                      withDouble:(jdouble)minLon
-                      withDouble:(jdouble)minLat
-                      withDouble:(jdouble)maxLon
-                      withDouble:(jdouble)maxLat;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field
+                                              withDouble:(jdouble)minLon
+                                              withDouble:(jdouble)minLat
+                                              withDouble:(jdouble)maxLon
+                                              withDouble:(jdouble)maxLat;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermQuery)
 
-inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchGeoPointTermQuery_get_GEO_CONSTANT_SCORE_REWRITE();
+inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchGeoPointTermQuery_get_GEO_CONSTANT_SCORE_REWRITE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchGeoPointTermQuery_GEO_CONSTANT_SCORE_REWRITE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchGeoPointTermQuery, GEO_CONSTANT_SCORE_REWRITE, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermQuery *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermQuery_initPackagePrivateWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermQuery *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermQuery")

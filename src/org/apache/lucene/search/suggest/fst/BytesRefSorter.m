@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/suggest/fst/BytesRefSorter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/fst/BytesRefSorter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestFstBytesRefSorter : NSObject
 
 @end
@@ -13,12 +17,20 @@
 @implementation OrgApacheLuceneSearchSuggestFstBytesRefSorter
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addWithOrgApacheLuceneUtilBytesRef:", "add", "V", 0x401, "Ljava.io.IOException;Ljava.lang.IllegalStateException;", NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.util.BytesRefIterator;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getComparator", NULL, "Ljava.util.Comparator;", 0x401, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRefIterator;", 0x401, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LJavaUtilComparator;", 0x401, -1, -1, -1, 4, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstBytesRefSorter = { 2, "BytesRefSorter", "org.apache.lucene.search.suggest.fst", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(addWithOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(getComparator);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "add", "LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;LJavaLangIllegalStateException;", "LJavaIoIOException;", "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstBytesRefSorter = { "BytesRefSorter", "org.apache.lucene.search.suggest.fst", ptrTable, methods, NULL, 7, 0x609, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestFstBytesRefSorter;
 }
 

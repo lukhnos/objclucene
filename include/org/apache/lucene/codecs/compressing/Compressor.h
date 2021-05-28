@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingCompressor_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressor || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressor))
 #define OrgApacheLuceneCodecsCompressingCompressor_
 
@@ -27,10 +33,9 @@
 #pragma mark Public
 
 /*!
- @brief Compress bytes into <code>out</code>.
- It it the responsibility of the
- compressor to add all necessary information so that a <code>Decompressor</code>
- will know when to stop decompressing bytes from the stream.
+ @brief Compress bytes into <code>out</code>.It it the responsibility of the
+  compressor to add all necessary information so that a <code>Decompressor</code>
+  will know when to stop decompressing bytes from the stream.
  */
 - (void)compressWithByteArray:(IOSByteArray *)bytes
                       withInt:(jint)off
@@ -42,7 +47,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 /*!
  @brief Sole constructor, typically called from sub-classes.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -54,4 +59,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressor")

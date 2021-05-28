@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 1
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
@@ -33,13 +38,18 @@
 
 /*!
  @brief The words set passed to this constructor will be directly used by this filter
- and should not be modified,
+  and should not be modified,
  */
-- (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+- (instancetype __nonnull)initWithBoolean:(jboolean)enablePositionIncrements
+   withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
 withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)words;
 
 - (jboolean)accept;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithBoolean:(jboolean)arg0
+   withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -55,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordF
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter")

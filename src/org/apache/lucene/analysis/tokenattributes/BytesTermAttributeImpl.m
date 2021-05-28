@@ -11,6 +11,10 @@
 #include "org/apache/lucene/util/AttributeReflector.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/BytesTermAttributeImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl () {
  @public
   OrgApacheLuceneUtilBytesRef *bytes_;
@@ -46,8 +50,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&((OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *) nil_chk(other))->bytes_, OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(bytes_));
 }
 
-- (OrgApacheLuceneUtilAttributeImpl *)clone {
-  OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *c = (OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *) cast_chk([super clone], [OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl class]);
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone {
+  OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *c = (OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *) cast_chk([super java_clone], [OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl class]);
   [self copyToWithOrgApacheLuceneUtilAttributeImpl:c];
   return c;
 }
@@ -62,19 +66,31 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BytesTermAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "getBytesRef", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "setBytesRefWithOrgApacheLuceneUtilBytesRef:", "setBytesRef", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.util.AttributeImpl;", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeImpl;", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getBytesRef);
+  methods[2].selector = @selector(setBytesRefWithOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(clear);
+  methods[4].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[5].selector = @selector(java_clone);
+  methods[6].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bytes_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "bytes_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl = { 2, "BytesTermAttributeImpl", "org.apache.lucene.analysis.tokenattributes", NULL, 0x1, 7, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setBytesRef", "LOrgApacheLuceneUtilBytesRef;", "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", "clone", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl = { "BytesTermAttributeImpl", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, fields, 7, 0x1, 7, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl;
 }
 

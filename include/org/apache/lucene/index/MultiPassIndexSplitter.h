@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMultiPassIndexSplitter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMultiPassIndexSplitter_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiPassIndexSplitter || defined(INCLUDE_OrgApacheLuceneIndexMultiPassIndexSplitter))
 #define OrgApacheLuceneIndexMultiPassIndexSplitter_
 
@@ -20,38 +26,35 @@
 @class OrgApacheLuceneIndexIndexReader;
 
 /*!
- @brief This tool splits input index into multiple equal parts.
- The method employed
- here uses <code>IndexWriter.addIndexes(CodecReader[])</code> where the input data
- comes from the input index with artificially applied deletes to the document
- id-s that fall outside the selected partition.
+ @brief This tool splits input index into multiple equal parts.The method employed
+  here uses <code>IndexWriter.addIndexes(CodecReader[])</code> where the input data
+  comes from the input index with artificially applied deletes to the document
+  id-s that fall outside the selected partition.
  <p>Note 1: Deletes are only applied to a buffered list of deleted docs and
- don't affect the source index - this tool works also with read-only indexes.
+  don't affect the source index - this tool works also with read-only indexes. 
  <p>Note 2: the disadvantage of this tool is that source index needs to be
- read as many times as there are parts to be created, hence the name of this
- tool.
+  read as many times as there are parts to be created, hence the name of this
+  tool. 
  <p><b>NOTE</b>: this tool is unaware of documents added
- atomically via <code>IndexWriter.addDocuments</code> or <code>IndexWriter.updateDocuments</code>
+  atomically via <code>IndexWriter.addDocuments</code> or <code>IndexWriter.updateDocuments</code>
  , which means it can easily
- break up such document groups.
+  break up such document groups.
  */
 @interface OrgApacheLuceneIndexMultiPassIndexSplitter : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (void)mainWithNSStringArray:(IOSObjectArray *)args;
 
 /*!
  @brief Split source index into multiple parts.
- @param inArg source index, can have deletions, can have
- multiple segments (or multiple readers).
+ @param inArg source index, can have deletions, can have  multiple segments (or multiple readers).
  @param outputs list of directories where the output parts will be stored.
- @param seq if true, then the source index will be split into equal
- increasing ranges of document id-s. If false, source document id-s will be
- assigned in a deterministic round-robin fashion to one of the output splits.
- @throws IOException If there is a low-level I/O error
+ @param seq if true, then the source index will be split into equal  increasing ranges of document id-s. If false, source document id-s will be
+   assigned in a deterministic round-robin fashion to one of the output splits.
+ @throw IOExceptionIf there is a low-level I/O error
  */
 - (void)splitWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)inArg
           withOrgApacheLuceneStoreDirectoryArray:(IOSObjectArray *)outputs
@@ -61,16 +64,20 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiPassIndexSplitter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiPassIndexSplitter_mainWithNSStringArray_(IOSObjectArray *args);
-
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiPassIndexSplitter_init(OrgApacheLuceneIndexMultiPassIndexSplitter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMultiPassIndexSplitter *new_OrgApacheLuceneIndexMultiPassIndexSplitter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiPassIndexSplitter *new_OrgApacheLuceneIndexMultiPassIndexSplitter_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMultiPassIndexSplitter *create_OrgApacheLuceneIndexMultiPassIndexSplitter_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiPassIndexSplitter *create_OrgApacheLuceneIndexMultiPassIndexSplitter_init(void);
+
+FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiPassIndexSplitter_mainWithNSStringArray_(IOSObjectArray *args);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiPassIndexSplitter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiPassIndexSplitter")

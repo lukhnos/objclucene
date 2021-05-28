@@ -3,7 +3,6 @@
 //  source: ./sandbox/src/java/org/apache/lucene/search/GeoPointTermsEnum.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Long.h"
@@ -19,6 +18,10 @@
 #include "org/apache/lucene/util/GeoUtils.h"
 #include "org/apache/lucene/util/NumericUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/GeoPointTermsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchGeoPointTermsEnum () {
  @public
   OrgApacheLuceneUtilBytesRef *currentCell_;
@@ -33,7 +36,7 @@
 
 /*!
  @brief recurse to higher level precision cells to find ranges along the space-filling curve that fall within the
- query box
+  query box
  @param start starting value on the space-filling curve for a cell at a given res
  @param end ending value on the space-filling curve for a cell at a given res
  @param res spatial res represented as a bit shift (MSB is lower res)
@@ -49,7 +52,7 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointTermsEnum, currentCell_, OrgApacheLuceneUtilBytesRef *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointTermsEnum, rangeBounds_, id<JavaUtilList>)
 
-inline jshort OrgApacheLuceneSearchGeoPointTermsEnum_get_MAX_SHIFT();
+inline jshort OrgApacheLuceneSearchGeoPointTermsEnum_get_MAX_SHIFT(void);
 #define OrgApacheLuceneSearchGeoPointTermsEnum_MAX_SHIFT 36
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchGeoPointTermsEnum, MAX_SHIFT, jshort)
 
@@ -65,12 +68,12 @@ __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermsEnum_nextR
   return OrgApacheLuceneSearchGeoPointTermsEnum_DETAIL_LEVEL;
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
-                                           withDouble:(jdouble)minLon
-                                           withDouble:(jdouble)minLat
-                                           withDouble:(jdouble)maxLon
-                                           withDouble:(jdouble)maxLat {
-  OrgApacheLuceneSearchGeoPointTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, tenum, minLon, minLat, maxLon, maxLat);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
+                                                         withDouble:(jdouble)minLon
+                                                         withDouble:(jdouble)minLat
+                                                         withDouble:(jdouble)maxLon
+                                                         withDouble:(jdouble)maxLat {
+  OrgApacheLuceneSearchGeoPointTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, tenum, minLon, minLat, maxLon, maxLat);
   return self;
 }
 
@@ -150,7 +153,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermsEnum_nextR
     }
     return (term != nil && [term compareToWithId:currentCell_] > 0) ? term : currentCell_;
   }
-  JreAssert(([rangeBounds_ isEmpty]), (@"org/apache/lucene/search/GeoPointTermsEnum.java:172 condition failed: assert rangeBounds.isEmpty();"));
+  JreAssert([rangeBounds_ isEmpty], @"org/apache/lucene/search/GeoPointTermsEnum.java:172 condition failed: assert rangeBounds.isEmpty();");
   JreStrongAssign(&currentCell_, nil);
   return nil;
 }
@@ -183,40 +186,57 @@ __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermsEnum_nextR
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsEnum:withDouble:withDouble:withDouble:withDouble:", "GeoPointTermsEnum", NULL, 0x0, NULL, NULL },
-    { "computeRangeWithLong:withShort:", "computeRange", "V", 0x12, NULL, NULL },
-    { "relateAndRecurseWithLong:withLong:withShort:", "relateAndRecurse", "V", 0x2, NULL, NULL },
-    { "cellCrossesWithDouble:withDouble:withDouble:withDouble:", "cellCrosses", "Z", 0x404, NULL, NULL },
-    { "cellWithinWithDouble:withDouble:withDouble:withDouble:", "cellWithin", "Z", 0x404, NULL, NULL },
-    { "cellIntersectsShapeWithDouble:withDouble:withDouble:withDouble:", "cellIntersectsShape", "Z", 0x404, NULL, NULL },
-    { "cellIntersectsMBRWithDouble:withDouble:withDouble:withDouble:", "cellIntersectsMBR", "Z", 0x4, NULL, NULL },
-    { "cellContainsWithDouble:withDouble:withDouble:withDouble:", "cellContains", "Z", 0x4, NULL, NULL },
-    { "boundaryTerm", NULL, "Z", 0x1, NULL, NULL },
-    { "nextRange", NULL, "V", 0x2, NULL, NULL },
-    { "nextSeekTermWithOrgApacheLuceneUtilBytesRef:", "nextSeekTerm", "Lorg.apache.lucene.util.BytesRef;", 0x14, NULL, NULL },
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x4, NULL, NULL },
-    { "postFilterWithDouble:withDouble:", "postFilter", "Z", 0x404, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x12, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x404, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x404, 7, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x404, 8, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 9, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 10, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x14, 11, 12, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x4, 13, 12, -1, -1, -1, -1 },
+    { NULL, "Z", 0x404, 14, 15, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexTermsEnum:withDouble:withDouble:withDouble:withDouble:);
+  methods[1].selector = @selector(computeRangeWithLong:withShort:);
+  methods[2].selector = @selector(relateAndRecurseWithLong:withLong:withShort:);
+  methods[3].selector = @selector(cellCrossesWithDouble:withDouble:withDouble:withDouble:);
+  methods[4].selector = @selector(cellWithinWithDouble:withDouble:withDouble:withDouble:);
+  methods[5].selector = @selector(cellIntersectsShapeWithDouble:withDouble:withDouble:withDouble:);
+  methods[6].selector = @selector(cellIntersectsMBRWithDouble:withDouble:withDouble:withDouble:);
+  methods[7].selector = @selector(cellContainsWithDouble:withDouble:withDouble:withDouble:);
+  methods[8].selector = @selector(boundaryTerm);
+  methods[9].selector = @selector(nextRange);
+  methods[10].selector = @selector(nextSeekTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[11].selector = @selector(acceptWithOrgApacheLuceneUtilBytesRef:);
+  methods[12].selector = @selector(postFilterWithDouble:withDouble:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "minLon_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "minLat_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxLon_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxLat_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentRange_", NULL, 0x4, "Lorg.apache.lucene.search.GeoPointTermsEnum$Range;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentCell_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "rangeBounds_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/search/GeoPointTermsEnum$Range;>;", .constantValue.asLong = 0 },
-    { "MAX_SHIFT", "MAX_SHIFT", 0x1a, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneSearchGeoPointTermsEnum_MAX_SHIFT },
-    { "DETAIL_LEVEL", "DETAIL_LEVEL", 0x1c, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneSearchGeoPointTermsEnum_DETAIL_LEVEL },
+    { "minLon_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "minLat_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "maxLon_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "maxLat_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "currentRange_", "LOrgApacheLuceneSearchGeoPointTermsEnum_Range;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "currentCell_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "rangeBounds_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 16, -1 },
+    { "MAX_SHIFT", "S", .constantValue.asShort = OrgApacheLuceneSearchGeoPointTermsEnum_MAX_SHIFT, 0x1a, -1, -1, -1, -1 },
+    { "DETAIL_LEVEL", "S", .constantValue.asShort = OrgApacheLuceneSearchGeoPointTermsEnum_DETAIL_LEVEL, 0x1c, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.GeoPointTermsEnum$Range;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermsEnum = { 2, "GeoPointTermsEnum", "org.apache.lucene.search", NULL, 0x400, 13, methods, 9, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTermsEnum;DDDD", "computeRange", "JS", "relateAndRecurse", "JJS", "cellCrosses", "DDDD", "cellWithin", "cellIntersectsShape", "cellIntersectsMBR", "cellContains", "nextSeekTerm", "LOrgApacheLuceneUtilBytesRef;", "accept", "postFilter", "DD", "Ljava/util/List<Lorg/apache/lucene/search/GeoPointTermsEnum$Range;>;", "LOrgApacheLuceneSearchGeoPointTermsEnum_Range;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermsEnum = { "GeoPointTermsEnum", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x400, 13, 9, -1, 17, -1, -1, -1 };
   return &_OrgApacheLuceneSearchGeoPointTermsEnum;
 }
 
 @end
 
-void OrgApacheLuceneSearchGeoPointTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
+void OrgApacheLuceneSearchGeoPointTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
   OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, tenum);
   JreStrongAssignAndConsume(&self->rangeBounds_, new_JavaUtilLinkedList_init());
   jlong rectMinHash = [((JavaLangLong *) nil_chk(OrgApacheLuceneUtilGeoUtils_mortonHashWithDouble_withDouble_(minLon, minLat))) longLongValue];
@@ -231,7 +251,7 @@ void OrgApacheLuceneSearchGeoPointTermsEnum_initWithOrgApacheLuceneIndexTermsEnu
 
 void OrgApacheLuceneSearchGeoPointTermsEnum_computeRangeWithLong_withShort_(OrgApacheLuceneSearchGeoPointTermsEnum *self, jlong term, jshort shift) {
   jlong split = term | (JreLShift64((jlong) 0x1LL, shift));
-  JreAssert((shift < 64), (@"org/apache/lucene/search/GeoPointTermsEnum.java:73 condition failed: assert shift < 64;"));
+  JreAssert(shift < 64, @"org/apache/lucene/search/GeoPointTermsEnum.java:73 condition failed: assert shift < 64;");
   jlong upperMax;
   if (shift < 63) {
     upperMax = term | ((JreLShift64(1LL, (shift + 1))) - 1);
@@ -250,7 +270,7 @@ void OrgApacheLuceneSearchGeoPointTermsEnum_relateAndRecurseWithLong_withLong_wi
   jdouble maxLon = OrgApacheLuceneUtilGeoUtils_mortonUnhashLonWithLong_(end);
   jdouble maxLat = OrgApacheLuceneUtilGeoUtils_mortonUnhashLatWithLong_(end);
   jshort level = (jshort) (JreURShift32((JreLShift32(OrgApacheLuceneUtilGeoUtils_BITS, 1)) - res, 1));
-  jboolean within = res % OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP == 0 && [self cellWithinWithDouble:minLon withDouble:minLat withDouble:maxLon withDouble:maxLat];
+  jboolean within = JreIntMod(res, OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP) == 0 && [self cellWithinWithDouble:minLon withDouble:minLat withDouble:maxLon withDouble:maxLat];
   if (within || (level == OrgApacheLuceneSearchGeoPointTermsEnum_DETAIL_LEVEL && [self cellIntersectsShapeWithDouble:minLon withDouble:minLat withDouble:maxLon withDouble:maxLat])) {
     [((id<JavaUtilList>) nil_chk(self->rangeBounds_)) addWithId:create_OrgApacheLuceneSearchGeoPointTermsEnum_Range_initWithOrgApacheLuceneSearchGeoPointTermsEnum_withLong_withShort_withShort_withBoolean_(self, start, res, level, !within)];
   }
@@ -288,16 +308,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointTermsEnum)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchGeoPointTermsEnum:withLong:withShort:withShort:withBoolean:", "Range", NULL, 0x0, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchGeoPointTermsEnum:withLong:withShort:withShort:withBoolean:);
+  methods[1].selector = @selector(compareToWithId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "cell_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "level_", NULL, 0x10, "S", NULL, NULL, .constantValue.asLong = 0 },
-    { "boundary_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "cell_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "level_", "S", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "boundary_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermsEnum_Range = { 2, "Range", "org.apache.lucene.search", "GeoPointTermsEnum", 0x14, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/GeoPointTermsEnum$Range;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchGeoPointTermsEnum;JSSZ", "compareTo", "LOrgApacheLuceneSearchGeoPointTermsEnum_Range;", "LOrgApacheLuceneSearchGeoPointTermsEnum;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/GeoPointTermsEnum$Range;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermsEnum_Range = { "Range", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x14, 2, 3, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneSearchGeoPointTermsEnum_Range;
 }
 

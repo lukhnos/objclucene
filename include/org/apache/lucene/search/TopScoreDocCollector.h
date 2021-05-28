@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTopScoreDocCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTopScoreDocCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopScoreDocCollector || defined(INCLUDE_OrgApacheLuceneSearchTopScoreDocCollector))
 #define OrgApacheLuceneSearchTopScoreDocCollector_
 
@@ -23,19 +29,20 @@
 @class IOSObjectArray;
 @class OrgApacheLuceneSearchScoreDoc;
 @class OrgApacheLuceneSearchTopDocs;
+@class OrgApacheLuceneUtilPriorityQueue;
 
 /*!
  @brief A <code>Collector</code> implementation that collects the top-scoring hits,
- returning them as a <code>TopDocs</code>.
- This is used by <code>IndexSearcher</code> to
- implement <code>TopDocs</code>-based search. Hits are sorted by score descending
- and then (when the scores are tied) docID ascending. When you create an
- instance of this collector you should know in advance whether documents are
- going to be collected in doc Id order or not.
- <p><b>NOTE</b>: The values <code>Float.NaN</code> and
+  returning them as a <code>TopDocs</code>.This is used by <code>IndexSearcher</code> to
+  implement <code>TopDocs</code>-based search.
+ Hits are sorted by score descending
+  and then (when the scores are tied) docID ascending. When you create an
+  instance of this collector you should know in advance whether documents are
+  going to be collected in doc Id order or not. 
+ <p><b>NOTE</b>: The values <code>Float.NaN</code> and 
  <code>Float.NEGATIVE_INFINITY</code> are not valid scores.  This
- collector will not properly collect hits with such
- scores.
+  collector will not properly collect hits with such
+  scores.
  */
 @interface OrgApacheLuceneSearchTopScoreDocCollector : OrgApacheLuceneSearchTopDocsCollector {
  @public
@@ -46,23 +53,23 @@
 
 /*!
  @brief Creates a new <code>TopScoreDocCollector</code> given the number of hits to
- collect and whether documents are scored in order by the input
+  collect and whether documents are scored in order by the input 
  <code>Scorer</code> to <code>LeafCollector.setScorer(Scorer)</code>.
  <p><b>NOTE</b>: The instances returned by this method
- pre-allocate a full array of length
+  pre-allocate a full array of length 
  <code>numHits</code>, and fill the array with sentinel
- objects.
+  objects.
  */
 + (OrgApacheLuceneSearchTopScoreDocCollector *)createWithInt:(jint)numHits;
 
 /*!
  @brief Creates a new <code>TopScoreDocCollector</code> given the number of hits to
- collect, the bottom of the previous page, and whether documents are scored in order by the input
+  collect, the bottom of the previous page, and whether documents are scored in order by the input 
  <code>Scorer</code> to <code>LeafCollector.setScorer(Scorer)</code>.
  <p><b>NOTE</b>: The instances returned by this method
- pre-allocate a full array of length
+  pre-allocate a full array of length 
  <code>numHits</code>, and fill the array with sentinel
- objects.
+  objects.
  */
 + (OrgApacheLuceneSearchTopScoreDocCollector *)createWithInt:(jint)numHits
                            withOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after;
@@ -76,7 +83,11 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)numHits;
+- (instancetype __nonnull)initWithInt:(jint)numHits;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilPriorityQueue:(OrgApacheLuceneUtilPriorityQueue *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -114,7 +125,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -128,4 +139,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafC
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopScoreDocCollector")

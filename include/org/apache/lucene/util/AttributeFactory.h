@@ -16,10 +16,17 @@
 #define INCLUDE_OrgApacheLuceneUtilAttributeFactory 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAttributeFactory_) && (INCLUDE_ALL_OrgApacheLuceneUtilAttributeFactory || defined(INCLUDE_OrgApacheLuceneUtilAttributeFactory))
 #define OrgApacheLuceneUtilAttributeFactory_
 
 @class IOSClass;
+@class JavaLangThrowable;
 @class OrgApacheLuceneUtilAttributeImpl;
 @class OrgLukhnosPortmobileInvokeMethodHandle;
 
@@ -27,12 +34,11 @@
  @brief An AttributeFactory creates instances of <code>AttributeImpl</code>s.
  */
 @interface OrgApacheLuceneUtilAttributeFactory : NSObject
-
-+ (OrgApacheLuceneUtilAttributeFactory *)DEFAULT_ATTRIBUTE_FACTORY;
+@property (readonly, class, strong) OrgApacheLuceneUtilAttributeFactory *DEFAULT_ATTRIBUTE_FACTORY NS_SWIFT_NAME(DEFAULT_ATTRIBUTE_FACTORY);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns an <code>AttributeImpl</code> for the supplied <code>Attribute</code> interface class.
@@ -41,13 +47,12 @@
 
 /*!
  @brief Returns an AttributeFactory returning an instance of the given <code>clazz</code> for the
- attributes it implements.
- The given <code>clazz</code> must have a public no-arg constructor.
+  attributes it implements.The given <code>clazz</code> must have a public no-arg constructor.
  For all other attributes it calls the given delegate factory as fallback.
- This method can be used to prefer a specific <code>AttributeImpl</code> which combines
- multiple attributes over separate classes.
+  This method can be used to prefer a specific <code>AttributeImpl</code> which combines
+  multiple attributes over separate classes. 
  <p>Please save instances created by this method in a static final field, because
- on each call, this does reflection for creating a <code>MethodHandle</code>.
+  on each call, this does reflection for creating a <code>MethodHandle</code>.
  */
 + (OrgApacheLuceneUtilAttributeFactory *)getStaticImplementationWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)delegate
                                                                                            withIOSClass:(IOSClass *)clazz;
@@ -59,7 +64,7 @@
  */
 + (OrgLukhnosPortmobileInvokeMethodHandle *)findAttributeImplCtorWithIOSClass:(IOSClass *)clazz;
 
-+ (void)rethrowWithNSException:(NSException *)t;
++ (void)rethrowWithJavaLangThrowable:(JavaLangThrowable *)t;
 
 @end
 
@@ -67,20 +72,20 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilAttributeFactory)
 
 /*!
  @brief This is the default factory that creates <code>AttributeImpl</code>s using the
- class name of the supplied <code>Attribute</code> interface class by appending <code>Impl</code> to it.
+  class name of the supplied <code>Attribute</code> interface class by appending <code>Impl</code> to it.
  */
-inline OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneUtilAttributeFactory_get_DEFAULT_ATTRIBUTE_FACTORY();
+inline OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneUtilAttributeFactory_get_DEFAULT_ATTRIBUTE_FACTORY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneUtilAttributeFactory_DEFAULT_ATTRIBUTE_FACTORY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAttributeFactory, DEFAULT_ATTRIBUTE_FACTORY, OrgApacheLuceneUtilAttributeFactory *)
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilAttributeFactory_init(OrgApacheLuceneUtilAttributeFactory *self);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandle *OrgApacheLuceneUtilAttributeFactory_findAttributeImplCtorWithIOSClass_(IOSClass *clazz);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneUtilAttributeFactory_getStaticImplementationWithOrgApacheLuceneUtilAttributeFactory_withIOSClass_(OrgApacheLuceneUtilAttributeFactory *delegate, IOSClass *clazz);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilAttributeFactory_rethrowWithNSException_(NSException *t);
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilAttributeFactory_init(OrgApacheLuceneUtilAttributeFactory *self);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilAttributeFactory_rethrowWithJavaLangThrowable_(JavaLangThrowable *t);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeFactory)
 
@@ -95,10 +100,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeFactory)
 
 /*!
  @brief <b>Expert</b>: AttributeFactory returning an instance of the given <code>clazz</code> for the
- attributes it implements.
- For all other attributes it calls the given delegate factory
- as fallback. This class can be used to prefer a specific <code>AttributeImpl</code> which
- combines multiple attributes over separate classes.
+  attributes it implements.For all other attributes it calls the given delegate factory
+  as fallback.
+ This class can be used to prefer a specific <code>AttributeImpl</code> which
+  combines multiple attributes over separate classes.
  */
 @interface OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory : OrgApacheLuceneUtilAttributeFactory
 
@@ -106,10 +111,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeFactory)
 
 /*!
  @brief <b>Expert</b>: Creates an AttributeFactory returning <code>clazz</code> as instance for the
- attributes it implements and for all other attributes calls the given delegate factory.
+  attributes it implements and for all other attributes calls the given delegate factory.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)delegate
-                                               withIOSClass:(IOSClass *)clazz;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)delegate
+                                                         withIOSClass:(IOSClass *)clazz;
 
 - (OrgApacheLuceneUtilAttributeImpl *)createAttributeInstanceWithIOSClass:(IOSClass *)attClass;
 
@@ -122,7 +127,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeFactory)
 /*!
  @brief Creates an instance of <code>A</code>.
  */
-- (id)createInstance;
+- (OrgApacheLuceneUtilAttributeImpl *)createInstance;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -134,4 +143,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeFactory_StaticImplementat
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAttributeFactory")

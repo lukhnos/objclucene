@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstBytesStore
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstBytesStore_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstBytesStore || defined(INCLUDE_OrgApacheLuceneUtilFstBytesStore))
 #define OrgApacheLuceneUtilFstBytesStore_
 
@@ -36,17 +42,16 @@
 /*!
  @brief Pulls bytes from the provided IndexInput.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                                             withLong:(jlong)numBytes
-                                              withInt:(jint)maxBlockSize;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                                                     withLong:(jlong)numBytes
+                                                                      withInt:(jint)maxBlockSize;
 
-- (instancetype)initWithInt:(jint)blockBits;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)blockBits;
 
 /*!
  @brief Absolute copy bytes self to self, without changing the
- position.
- Note: this cannot "grow" the bytes, so must
- only call it on already written parts. 
+   position.Note: this cannot "grow" the bytes, so must
+   only call it on already written parts.
  */
 - (void)copyBytesWithLong:(jlong)src
                  withLong:(jlong)dest
@@ -76,7 +81,7 @@
 
 /*!
  @brief Pos must be less than the max position written so far!
- Ie, you cannot "grow" the file with this! 
+ Ie, you cannot "grow" the file with this!
  */
 - (void)truncateWithLong:(jlong)newLen;
 
@@ -84,7 +89,7 @@
 
 /*!
  @brief Absolute write byte; you must ensure dest is &lt; max
- position written so far.
+   position written so far.
  */
 - (void)writeByteWithInt:(jint)dest
                 withByte:(jbyte)b;
@@ -95,7 +100,7 @@
 
 /*!
  @brief Writes an int at the absolute position without
- changing the current pointer.
+   changing the current pointer.
  */
 - (void)writeIntWithLong:(jlong)pos
                  withInt:(jint)value;
@@ -113,33 +118,40 @@
 
 /*!
  @brief Absolute writeBytes without changing the current
- position.
- Note: this cannot "grow" the bytes, so you
- must only call it on already written parts. 
+   position.Note: this cannot "grow" the bytes, so you
+   must only call it on already written parts.
  */
 - (void)writeBytesWithLong:(jlong)dest
              withByteArray:(IOSByteArray *)b
                    withInt:(jint)offset
                    withInt:(jint)len;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstBytesStore)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBytesStore_initWithInt_(OrgApacheLuceneUtilFstBytesStore *self, jint blockBits);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithInt_(OrgApacheLuceneUtilFstBytesStore *self, jint blockBits);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *new_OrgApacheLuceneUtilFstBytesStore_initWithInt_(jint blockBits) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *new_OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithInt_(jint blockBits) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *create_OrgApacheLuceneUtilFstBytesStore_initWithInt_(jint blockBits);
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *create_OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithInt_(jint blockBits);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneUtilFstBytesStore *self, OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneUtilFstBytesStore *self, OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *new_OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *new_OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *create_OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize);
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *create_OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBytesStore)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstBytesStore")

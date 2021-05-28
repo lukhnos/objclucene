@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity))
 #define OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_
 
@@ -25,15 +31,15 @@
 @protocol OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;
 
 /*!
- @brief Language model based on the Jelinek-Mercer smoothing method.
- From Chengxiang
- Zhai and John Lafferty. 2001. A study of smoothing methods for language
- models applied to Ad Hoc information retrieval. In Proceedings of the 24th
- annual international ACM SIGIR conference on Research and development in
- information retrieval (SIGIR '01). ACM, New York, NY, USA, 334-342.
+ @brief Language model based on the Jelinek-Mercer smoothing method.From Chengxiang
+  Zhai and John Lafferty. 2001.
+ A study of smoothing methods for language
+  models applied to Ad Hoc information retrieval. In Proceedings of the 24th
+  annual international ACM SIGIR conference on Research and development in
+  information retrieval (SIGIR '01). ACM, New York, NY, USA, 334-342. 
  <p>The model has a single parameter, &lambda;. According to said paper, the
- optimal value depends on both the collection and the query. The optimal value
- is around <code>0.1</code> for title queries and <code>0.7</code> for long queries.</p>
+  optimal value depends on both the collection and the query. The optimal value
+  is around <code>0.1</code> for title queries and <code>0.7</code> for long queries.</p>
  */
 @interface OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity : OrgApacheLuceneSearchSimilaritiesLMSimilarity
 
@@ -42,13 +48,13 @@
 /*!
  @brief Instantiates with the specified collectionModel and &lambda; parameter.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel>)collectionModel
-                                                                            withFloat:(jfloat)lambda;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel>)collectionModel
+                                                                                      withFloat:(jfloat)lambda;
 
 /*!
  @brief Instantiates with the specified &lambda; parameter.
  */
-- (instancetype)initWithFloat:(jfloat)lambda;
+- (instancetype __nonnull)initWithFloat:(jfloat)lambda;
 
 /*!
  @brief Returns the &lambda; parameter.
@@ -68,6 +74,12 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)freq
                                                      withFloat:(jfloat)docLen;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel>)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -89,4 +101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity")

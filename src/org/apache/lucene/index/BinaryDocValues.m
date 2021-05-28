@@ -7,6 +7,10 @@
 #include "org/apache/lucene/index/BinaryDocValues.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/BinaryDocValues must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexBinaryDocValues
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -23,11 +27,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BinaryDocValues", NULL, 0x4, NULL, NULL },
-    { "getWithInt:", "get", "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexBinaryDocValues = { 2, "BinaryDocValues", "org.apache.lucene.index", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "get", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexBinaryDocValues = { "BinaryDocValues", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x401, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexBinaryDocValues;
 }
 

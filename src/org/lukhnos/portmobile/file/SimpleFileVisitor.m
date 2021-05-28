@@ -3,14 +3,24 @@
 //  source: ./core/src/java/org/lukhnos/portmobile/file/SimpleFileVisitor.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "org/lukhnos/portmobile/file/FileVisitResult.h"
 #include "org/lukhnos/portmobile/file/SimpleFileVisitor.h"
 #include "org/lukhnos/portmobile/file/attribute/BasicFileAttributes.h"
 
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/SimpleFileVisitor must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgLukhnosPortmobileFileSimpleFileVisitor
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgLukhnosPortmobileFileSimpleFileVisitor_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgLukhnosPortmobileFileFileVisitResult *)preVisitDirectoryWithId:(id)dir
             withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs {
@@ -32,22 +42,25 @@
   return JreLoadEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgLukhnosPortmobileFileSimpleFileVisitor_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "preVisitDirectoryWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:", "preVisitDirectory", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x1, "Ljava.io.IOException;", "(TT;Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
-    { "visitFileWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:", "visitFile", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x1, "Ljava.io.IOException;", "(TT;Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
-    { "visitFileFailedWithId:withJavaIoIOException:", "visitFileFailed", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x1, "Ljava.io.IOException;", "(TT;Ljava/io/IOException;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
-    { "postVisitDirectoryWithId:withJavaIoIOException:", "postVisitDirectory", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x1, "Ljava.io.IOException;", "(TT;Ljava/io/IOException;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
-    { "init", "SimpleFileVisitor", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileFileVisitResult;", 0x1, 0, 1, 2, 3, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileFileVisitResult;", 0x1, 4, 1, 2, 3, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileFileVisitResult;", 0x1, 5, 6, 2, 7, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileFileVisitResult;", 0x1, 8, 6, 2, 7, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileSimpleFileVisitor = { 2, "SimpleFileVisitor", "org.lukhnos.portmobile.file", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/lukhnos/portmobile/file/FileVisitor<TT;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(preVisitDirectoryWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:);
+  methods[2].selector = @selector(visitFileWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:);
+  methods[3].selector = @selector(visitFileFailedWithId:withJavaIoIOException:);
+  methods[4].selector = @selector(postVisitDirectoryWithId:withJavaIoIOException:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "preVisitDirectory", "LNSObject;LOrgLukhnosPortmobileFileAttributeBasicFileAttributes;", "LJavaIoIOException;", "(TT;Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;)Lorg/lukhnos/portmobile/file/FileVisitResult;", "visitFile", "visitFileFailed", "LNSObject;LJavaIoIOException;", "(TT;Ljava/io/IOException;)Lorg/lukhnos/portmobile/file/FileVisitResult;", "postVisitDirectory", "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/lukhnos/portmobile/file/FileVisitor<TT;>;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileSimpleFileVisitor = { "SimpleFileVisitor", "org.lukhnos.portmobile.file", ptrTable, methods, NULL, 7, 0x1, 5, 0, -1, -1, -1, 9, -1 };
   return &_OrgLukhnosPortmobileFileSimpleFileVisitor;
 }
 

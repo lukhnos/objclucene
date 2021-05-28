@@ -8,7 +8,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/Comparable.h"
 #include "java/lang/Integer.h"
@@ -24,7 +23,9 @@
 #include "java/util/Map.h"
 #include "java/util/Set.h"
 #include "java/util/SortedSet.h"
+#include "java/util/Spliterator.h"
 #include "java/util/TreeSet.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/codecs/DocValuesConsumer.h"
 #include "org/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer.h"
@@ -47,6 +48,10 @@
 #include "org/apache/lucene/util/packed/DirectWriter.h"
 #include "org/apache/lucene/util/packed/MonotonicBlockPackedWriter.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer ()
 
@@ -92,42 +97,41 @@ __attribute__((unused)) static id<JavaLangIterable> OrgApacheLuceneCodecsLucene5
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_addAddressesWithOrgApacheLuceneIndexFieldInfo_withJavaLangIterable_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *self, OrgApacheLuceneIndexFieldInfo *field, id<JavaLangIterable> values);
 
-@interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 : NSObject < JavaLangIterable > {
+@interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 : NSObject < JavaLangIterable > {
  @public
   id<JavaLangIterable> val$docToValueCount_;
   id<JavaLangIterable> val$values_;
   id<JavaUtilMap> val$setIds_;
 }
 
-- (id<JavaUtilIterator>)iterator;
-
 - (instancetype)initWithJavaLangIterable:(id<JavaLangIterable>)capture$0
                     withJavaLangIterable:(id<JavaLangIterable>)capture$1
                          withJavaUtilMap:(id<JavaUtilMap>)capture$2;
 
+- (id<JavaUtilIterator>)iterator;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1, val$docToValueCount_, id<JavaLangIterable>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1, val$values_, id<JavaLangIterable>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1, val$setIds_, id<JavaUtilMap>)
+__attribute__((unused)) static void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *self, id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2);
 
-__attribute__((unused)) static void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *self, id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2);
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2);
 
-__attribute__((unused)) static OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1)
-
-@interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1 : NSObject < JavaUtilIterator > {
+@interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1 : NSObject < JavaUtilIterator > {
  @public
-  OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *this$0_;
+  OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *this$0_;
   id<JavaUtilIterator> val$valueCountIterator_;
   OrgApacheLuceneUtilLongsRef *val$docValues_;
   id<JavaUtilIterator> val$valueIterator_;
 }
+
+- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *)outer$
+                                                            withJavaUtilIterator:(id<JavaUtilIterator>)capture$0
+                                                 withOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *)capture$1
+                                                            withJavaUtilIterator:(id<JavaUtilIterator>)capture$2;
 
 - (jboolean)hasNext;
 
@@ -135,36 +139,24 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsume
 
 - (void)remove;
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *)outer$
-                                                             withJavaUtilIterator:(id<JavaUtilIterator>)capture$0
-                                                  withOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *)capture$1
-                                                             withJavaUtilIterator:(id<JavaUtilIterator>)capture$2;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1, this$0_, OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1, val$valueCountIterator_, id<JavaUtilIterator>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1, val$docValues_, OrgApacheLuceneUtilLongsRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1, val$valueIterator_, id<JavaUtilIterator>)
+__attribute__((unused)) static void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1 *self, OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2);
 
-__attribute__((unused)) static void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1 *self, OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2);
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1 *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1 *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1 *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1)
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1 *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2);
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
-                                                 withNSString:(NSString *)dataCodec
-                                                 withNSString:(NSString *)dataExtension
-                                                 withNSString:(NSString *)metaCodec
-                                                 withNSString:(NSString *)metaExtension {
-  OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(self, state, dataCodec, dataExtension, metaCodec, metaExtension);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
+                                                               withNSString:(NSString *)dataCodec
+                                                               withNSString:(NSString *)dataExtension
+                                                               withNSString:(NSString *)metaCodec
+                                                               withNSString:(NSString *)metaExtension {
+  OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(self, state, dataCodec, dataExtension, metaCodec, metaExtension);
   return self;
 }
 
@@ -199,7 +191,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsume
         }
       }
       if (gcd != 1) {
-        if (v < JavaLangLong_MIN_VALUE / 2 || v > JavaLangLong_MAX_VALUE / 2) {
+        if (v < JreLongDiv(JavaLangLong_MIN_VALUE, 2) || v > JreLongDiv(JavaLangLong_MAX_VALUE, 2)) {
           gcd = 1;
         }
         else if (count != 0) {
@@ -237,7 +229,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsume
     format = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_TABLE_COMPRESSED;
   }
   else if (gcd != 0 && gcd != 1) {
-    jlong gcdDelta = (maxValue - minValue) / gcd;
+    jlong gcdDelta = JreLongDiv((maxValue - minValue), gcd);
     jlong gcdBitsRequired = OrgApacheLuceneUtilPackedDirectWriter_unsignedBitsRequiredWithLong_(gcdDelta);
     format = gcdBitsRequired < deltaBitsRequired ? OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_GCD_COMPRESSED : OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DELTA_COMPRESSED;
   }
@@ -270,18 +262,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsume
     OrgApacheLuceneUtilPackedDirectWriter *ordsWriter;
     switch (format) {
       case OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_CONST_COMPRESSED:
-      [((OrgApacheLuceneStoreIndexOutput *) nil_chk(meta_)) writeLongWithLong:[minValue < 0 ? ((JavaLangLong *) JavaUtilCollections_minWithJavaUtilCollection_(uniqueValues)) : ((JavaLangLong *) JavaUtilCollections_maxWithJavaUtilCollection_(uniqueValues)) longLongValue]];
+      [((OrgApacheLuceneStoreIndexOutput *) nil_chk(meta_)) writeLongWithLong:minValue < 0 ? [((JavaLangLong *) nil_chk(JavaUtilCollections_minWithJavaUtilCollection_(uniqueValues))) longLongValue] : [((JavaLangLong *) nil_chk(JavaUtilCollections_maxWithJavaUtilCollection_(uniqueValues))) longLongValue]];
       break;
       case OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_GCD_COMPRESSED:
       [((OrgApacheLuceneStoreIndexOutput *) nil_chk(meta_)) writeLongWithLong:minValue];
       [((OrgApacheLuceneStoreIndexOutput *) nil_chk(meta_)) writeLongWithLong:gcd];
-      maxDelta = (maxValue - minValue) / gcd;
+      maxDelta = JreLongDiv((maxValue - minValue), gcd);
       bits = OrgApacheLuceneUtilPackedDirectWriter_unsignedBitsRequiredWithLong_(maxDelta);
       [((OrgApacheLuceneStoreIndexOutput *) nil_chk(meta_)) writeVIntWithInt:bits];
       quotientWriter = OrgApacheLuceneUtilPackedDirectWriter_getInstanceWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(data_, count, bits);
       for (NSNumber * __strong nv in values) {
         jlong value = nv == nil ? 0 : [nv longLongValue];
-        [((OrgApacheLuceneUtilPackedDirectWriter *) nil_chk(quotientWriter)) addWithLong:(value - minValue) / gcd];
+        [((OrgApacheLuceneUtilPackedDirectWriter *) nil_chk(quotientWriter)) addWithLong:JreLongDiv((value - minValue), gcd)];
       }
       [((OrgApacheLuceneUtilPackedDirectWriter *) nil_chk(quotientWriter)) finish];
       break;
@@ -522,36 +514,57 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsume
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSegmentWriteState:withNSString:withNSString:withNSString:withNSString:", "Lucene50DocValuesConsumer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "addNumericFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addNumericField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "addNumericFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withBoolean:", "addNumericField", "V", 0x0, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;Z)V" },
-    { "writeMissingBitsetWithJavaLangIterable:", "writeMissingBitset", "V", 0x0, "Ljava.io.IOException;", "(Ljava/lang/Iterable<*>;)V" },
-    { "addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addBinaryField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;)V" },
-    { "addTermsDictWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addTermsDict", "V", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;)V" },
-    { "flushTermsDictBlockWithOrgApacheLuceneStoreRAMOutputStream:withOrgApacheLuceneStoreRAMOutputStream:withIntArray:", "flushTermsDictBlock", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "addReverseTermIndexWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withInt:", "addReverseTermIndex", "V", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;I)V" },
-    { "addSortedFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:", "addSortedField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "addSortedNumericFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:", "addSortedNumericField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "addSortedSetFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:withJavaLangIterable:", "addSortedSetField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "uniqueValueSetsWithJavaLangIterable:withJavaLangIterable:", "uniqueValueSets", "Ljava.util.SortedSet;", 0x2, NULL, "(Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)Ljava/util/SortedSet<Lorg/apache/lucene/util/LongsRef;>;" },
-    { "writeDictionaryWithJavaUtilSortedSet:", "writeDictionary", "V", 0x2, "Ljava.io.IOException;", "(Ljava/util/SortedSet<Lorg/apache/lucene/util/LongsRef;>;)V" },
-    { "docToSetIdWithJavaUtilSortedSet:withJavaLangIterable:withJavaLangIterable:", "docToSetId", "Ljava.lang.Iterable;", 0x2, NULL, "(Ljava/util/SortedSet<Lorg/apache/lucene/util/LongsRef;>;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)Ljava/lang/Iterable<Ljava/lang/Number;>;" },
-    { "addAddressesWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addAddresses", "V", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 1, 4, -1, -1 },
+    { NULL, "V", 0x0, 2, 5, 1, 6, -1, -1 },
+    { NULL, "V", 0x0, 7, 8, 1, 9, -1, -1 },
+    { NULL, "V", 0x1, 10, 3, 1, 11, -1, -1 },
+    { NULL, "V", 0x2, 12, 3, 1, 11, -1, -1 },
+    { NULL, "V", 0x2, 13, 14, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 15, 16, 1, 17, -1, -1 },
+    { NULL, "V", 0x1, 18, 19, 1, 20, -1, -1 },
+    { NULL, "V", 0x1, 21, 19, 1, 22, -1, -1 },
+    { NULL, "V", 0x1, 23, 24, 1, 25, -1, -1 },
+    { NULL, "LJavaUtilSortedSet;", 0x2, 26, 27, -1, 28, -1, -1 },
+    { NULL, "V", 0x2, 29, 30, 1, 31, -1, -1 },
+    { NULL, "LJavaLangIterable;", 0x2, 32, 33, -1, 34, -1, -1 },
+    { NULL, "V", 0x2, 35, 3, 1, 4, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState:withNSString:withNSString:withNSString:withNSString:);
+  methods[1].selector = @selector(addNumericFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:);
+  methods[2].selector = @selector(addNumericFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withBoolean:);
+  methods[3].selector = @selector(writeMissingBitsetWithJavaLangIterable:);
+  methods[4].selector = @selector(addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:);
+  methods[5].selector = @selector(addTermsDictWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:);
+  methods[6].selector = @selector(flushTermsDictBlockWithOrgApacheLuceneStoreRAMOutputStream:withOrgApacheLuceneStoreRAMOutputStream:withIntArray:);
+  methods[7].selector = @selector(addReverseTermIndexWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withInt:);
+  methods[8].selector = @selector(addSortedFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:);
+  methods[9].selector = @selector(addSortedNumericFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:);
+  methods[10].selector = @selector(addSortedSetFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:withJavaLangIterable:);
+  methods[11].selector = @selector(uniqueValueSetsWithJavaLangIterable:withJavaLangIterable:);
+  methods[12].selector = @selector(writeDictionaryWithJavaUtilSortedSet:);
+  methods[13].selector = @selector(docToSetIdWithJavaUtilSortedSet:withJavaLangIterable:withJavaLangIterable:);
+  methods[14].selector = @selector(addAddressesWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:);
+  methods[15].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "data_", NULL, 0x0, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "meta_", NULL, 0x0, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "data_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "meta_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer = { 2, "Lucene50DocValuesConsumer", "org.apache.lucene.codecs.lucene50", NULL, 0x0, 16, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentWriteState;LNSString;LNSString;LNSString;LNSString;", "LJavaIoIOException;", "addNumericField", "LOrgApacheLuceneIndexFieldInfo;LJavaLangIterable;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;)V", "LOrgApacheLuceneIndexFieldInfo;LJavaLangIterable;Z", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;Z)V", "writeMissingBitset", "LJavaLangIterable;", "(Ljava/lang/Iterable<*>;)V", "addBinaryField", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;)V", "addTermsDict", "flushTermsDictBlock", "LOrgApacheLuceneStoreRAMOutputStream;LOrgApacheLuceneStoreRAMOutputStream;[I", "addReverseTermIndex", "LOrgApacheLuceneIndexFieldInfo;LJavaLangIterable;I", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;I)V", "addSortedField", "LOrgApacheLuceneIndexFieldInfo;LJavaLangIterable;LJavaLangIterable;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V", "addSortedNumericField", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V", "addSortedSetField", "LOrgApacheLuceneIndexFieldInfo;LJavaLangIterable;LJavaLangIterable;LJavaLangIterable;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V", "uniqueValueSets", "LJavaLangIterable;LJavaLangIterable;", "(Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)Ljava/util/SortedSet<Lorg/apache/lucene/util/LongsRef;>;", "writeDictionary", "LJavaUtilSortedSet;", "(Ljava/util/SortedSet<Lorg/apache/lucene/util/LongsRef;>;)V", "docToSetId", "LJavaUtilSortedSet;LJavaLangIterable;LJavaLangIterable;", "(Ljava/util/SortedSet<Lorg/apache/lucene/util/LongsRef;>;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)Ljava/lang/Iterable<Ljava/lang/Number;>;", "addAddresses" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer = { "Lucene50DocValuesConsumer", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x0, 16, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer;
 }
 
 @end
 
-void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *self, OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
+void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *self, OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
   OrgApacheLuceneCodecsDocValuesConsumer_init(self);
   jboolean success = false;
   @try {
@@ -571,12 +584,12 @@ void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuc
   }
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer, initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
+OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer, initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer, initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
+OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer, initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
 }
 
 void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_addTermsDictWithOrgApacheLuceneIndexFieldInfo_withJavaLangIterable_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *self, OrgApacheLuceneIndexFieldInfo *field, id<JavaLangIterable> values) {
@@ -595,7 +608,7 @@ void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_addTermsDictWithOrgA
     [self addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:field withJavaLangIterable:values];
   }
   else {
-    JreAssert((numValues > 0), (@"org/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer.java:326 condition failed: assert numValues > 0;"));
+    JreAssert(numValues > 0, @"org/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer.java:326 condition failed: assert numValues > 0;");
     [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeVIntWithInt:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->number_];
     [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeByteWithByte:OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BINARY];
     [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeVIntWithInt:OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BINARY_PREFIX_COMPRESSED];
@@ -698,7 +711,7 @@ void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_addReverseTermIndexW
   [addresses finish];
   jlong numBytes = [pagedBytes getPointer];
   [pagedBytes freezeWithBoolean:true];
-  OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *in = [pagedBytes getDataInput];
+  OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *in = JreRetainedLocalValue([pagedBytes getDataInput]);
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeLongWithLong:startFP];
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) writeVLongWithLong:numBytes];
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) copyBytesWithOrgApacheLuceneStoreDataInput:in withLong:numBytes];
@@ -707,8 +720,8 @@ void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_addReverseTermIndexW
 id<JavaUtilSortedSet> OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_uniqueValueSetsWithJavaLangIterable_withJavaLangIterable_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *self, id<JavaLangIterable> docToValueCount, id<JavaLangIterable> values) {
   id<JavaUtilSet> uniqueValueSet = create_JavaUtilHashSet_init();
   OrgApacheLuceneUtilLongsRef *docValues = create_OrgApacheLuceneUtilLongsRef_initWithInt_(256);
-  id<JavaUtilIterator> valueCountIterator = [((id<JavaLangIterable>) nil_chk(docToValueCount)) iterator];
-  id<JavaUtilIterator> valueIterator = [((id<JavaLangIterable>) nil_chk(values)) iterator];
+  id<JavaUtilIterator> valueCountIterator = JreRetainedLocalValue([((id<JavaLangIterable>) nil_chk(docToValueCount)) iterator]);
+  id<JavaUtilIterator> valueIterator = JreRetainedLocalValue([((id<JavaLangIterable>) nil_chk(values)) iterator]);
   jint totalDictSize = 0;
   while ([((id<JavaUtilIterator>) nil_chk(valueCountIterator)) hasNext]) {
     docValues->length_ = [((NSNumber *) nil_chk([valueCountIterator next])) intValue];
@@ -727,7 +740,7 @@ id<JavaUtilSortedSet> OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_uni
     }
     [uniqueValueSet addWithId:create_OrgApacheLuceneUtilLongsRef_initWithLongArray_withInt_withInt_(JavaUtilArrays_copyOfWithLongArray_withInt_(docValues->longs_, docValues->length_), 0, docValues->length_)];
   }
-  JreAssert(([((id<JavaUtilIterator>) nil_chk(valueIterator)) hasNext] == false), (@"org/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer.java:553 condition failed: assert valueIterator.hasNext() == false;"));
+  JreAssert([((id<JavaUtilIterator>) nil_chk(valueIterator)) hasNext] == false, @"org/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer.java:553 condition failed: assert valueIterator.hasNext() == false;");
   return create_JavaUtilTreeSet_initWithJavaUtilCollection_(uniqueValueSet);
 }
 
@@ -754,8 +767,8 @@ id<JavaLangIterable> OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_docT
   for (OrgApacheLuceneUtilLongsRef * __strong set in nil_chk(uniqueValueSets)) {
     [setIds putWithId:set withId:JavaLangInteger_valueOfWithInt_(i++)];
   }
-  JreAssert((i == [uniqueValueSets size]), (@"org/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer.java:582 condition failed: assert i == uniqueValueSets.size();"));
-  return create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(docToValueCount, values, setIds);
+  JreAssert(i == [uniqueValueSets size], @"org/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer.java:582 condition failed: assert i == uniqueValueSets.size();");
+  return create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(docToValueCount, values, setIds);
 }
 
 void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_addAddressesWithOrgApacheLuceneIndexFieldInfo_withJavaLangIterable_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *self, OrgApacheLuceneIndexFieldInfo *field, id<JavaLangIterable> values) {
@@ -780,24 +793,32 @@ void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_addAddressesWithOrgA
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer)
 
-@implementation OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1
+@implementation OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1
+
+- (instancetype)initWithJavaLangIterable:(id<JavaLangIterable>)capture$0
+                    withJavaLangIterable:(id<JavaLangIterable>)capture$1
+                         withJavaUtilMap:(id<JavaUtilMap>)capture$2 {
+  OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(self, capture$0, capture$1, capture$2);
+  return self;
+}
 
 - (id<JavaUtilIterator>)iterator {
   id<JavaUtilIterator> valueCountIterator = [((id<JavaLangIterable>) nil_chk(val$docToValueCount_)) iterator];
   id<JavaUtilIterator> valueIterator = [((id<JavaLangIterable>) nil_chk(val$values_)) iterator];
   OrgApacheLuceneUtilLongsRef *docValues = create_OrgApacheLuceneUtilLongsRef_initWithInt_(256);
-  return create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(self, valueCountIterator, docValues, valueIterator);
+  return create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(self, valueCountIterator, docValues, valueIterator);
 }
 
-- (instancetype)initWithJavaLangIterable:(id<JavaLangIterable>)capture$0
-                    withJavaLangIterable:(id<JavaLangIterable>)capture$1
-                         withJavaUtilMap:(id<JavaUtilMap>)capture$2 {
-  OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(self, capture$0, capture$1, capture$2);
-  return self;
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -808,40 +829,52 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesC
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/Number;>;" },
-    { "initWithJavaLangIterable:withJavaLangIterable:withJavaUtilMap:", "", NULL, 0x0, NULL, "(Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/util/Map<Lorg/apache/lucene/util/LongsRef;Ljava/lang/Integer;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaLangIterable:withJavaLangIterable:withJavaUtilMap:);
+  methods[1].selector = @selector(iterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$docToValueCount_", NULL, 0x1012, "Ljava.lang.Iterable;", NULL, "Ljava/lang/Iterable<Ljava/lang/Number;>;", .constantValue.asLong = 0 },
-    { "val$values_", NULL, 0x1012, "Ljava.lang.Iterable;", NULL, "Ljava/lang/Iterable<Ljava/lang/Number;>;", .constantValue.asLong = 0 },
-    { "val$setIds_", NULL, 0x1012, "Ljava.util.Map;", NULL, "Ljava/util/Map<Lorg/apache/lucene/util/LongsRef;Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
+    { "val$docToValueCount_", "LJavaLangIterable;", .constantValue.asLong = 0, 0x1012, -1, -1, 2, -1 },
+    { "val$values_", "LJavaLangIterable;", .constantValue.asLong = 0, 0x1012, -1, -1, 2, -1 },
+    { "val$setIds_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x1012, -1, -1, 3, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer", "docToSetIdWithJavaUtilSortedSet:withJavaLangIterable:withJavaLangIterable:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 = { 2, "", "org.apache.lucene.codecs.lucene50", "Lucene50DocValuesConsumer", 0x8008, 2, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/lang/Iterable<Ljava/lang/Number;>;" };
-  return &_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1;
+  static const void *ptrTable[] = { "LJavaLangIterable;LJavaLangIterable;LJavaUtilMap;", "()Ljava/util/Iterator<Ljava/lang/Number;>;", "Ljava/lang/Iterable<Ljava/lang/Number;>;", "Ljava/util/Map<Lorg/apache/lucene/util/LongsRef;Ljava/lang/Integer;>;", "LOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer;", "docToSetIdWithJavaUtilSortedSet:withJavaLangIterable:withJavaLangIterable:", "Ljava/lang/Object;Ljava/lang/Iterable<Ljava/lang/Number;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 = { "", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x8010, 2, 3, 4, -1, 5, 6, -1 };
+  return &_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1;
 }
 
 @end
 
-void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *self, id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2) {
+void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *self, id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2) {
   JreStrongAssign(&self->val$docToValueCount_, capture$0);
   JreStrongAssign(&self->val$values_, capture$1);
   JreStrongAssign(&self->val$setIds_, capture$2);
   NSObject_init(self);
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1, initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_, capture$0, capture$1, capture$2)
+OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1, initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_, capture$0, capture$1, capture$2)
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1, initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_, capture$0, capture$1, capture$2)
+OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_(id<JavaLangIterable> capture$0, id<JavaLangIterable> capture$1, id<JavaUtilMap> capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1, initWithJavaLangIterable_withJavaLangIterable_withJavaUtilMap_, capture$0, capture$1, capture$2)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1)
+@implementation OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1
 
-@implementation OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1
+- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *)outer$
+                                                            withJavaUtilIterator:(id<JavaUtilIterator>)capture$0
+                                                 withOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *)capture$1
+                                                            withJavaUtilIterator:(id<JavaUtilIterator>)capture$2 {
+  OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(self, outer$, capture$0, capture$1, capture$2);
+  return self;
+}
 
 - (jboolean)hasNext {
   return [((id<JavaUtilIterator>) nil_chk(val$valueCountIterator_)) hasNext];
@@ -853,20 +886,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesC
     *IOSLongArray_GetRef(nil_chk(val$docValues_->longs_), i) = [((NSNumber *) nil_chk([((id<JavaUtilIterator>) nil_chk(val$valueIterator_)) next])) longLongValue];
   }
   JavaLangInteger *id_ = [((id<JavaUtilMap>) nil_chk(this$0_->val$setIds_)) getWithId:val$docValues_];
-  JreAssert((id_ != nil), (@"org/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer.java:605 condition failed: assert id != null;"));
-  return id_;
+  JreAssert(id_ != nil, @"org/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer.java:605 condition failed: assert id != null;");
+  return JreRetainedLocalValue(id_);
 }
 
 - (void)remove {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *)outer$
-                                                             withJavaUtilIterator:(id<JavaUtilIterator>)capture$0
-                                                  withOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *)capture$1
-                                                             withJavaUtilIterator:(id<JavaUtilIterator>)capture$2 {
-  OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(self, outer$, capture$0, capture$1, capture$2);
-  return self;
+- (void)forEachRemainingWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaUtilIterator_forEachRemainingWithJavaUtilFunctionConsumer_(self, arg0);
 }
 
 - (void)dealloc {
@@ -878,26 +907,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesC
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "hasNext", NULL, "Z", 0x1, NULL, NULL },
-    { "next", NULL, "Ljava.lang.Number;", 0x1, NULL, NULL },
-    { "remove", NULL, "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1:withJavaUtilIterator:withOrgApacheLuceneUtilLongsRef:withJavaUtilIterator:", "", NULL, 0x0, NULL, "(Lorg/apache/lucene/codecs/lucene50/Lucene50DocValuesConsumer$1;Ljava/util/Iterator<Ljava/lang/Number;>;Lorg/apache/lucene/util/LongsRef;Ljava/util/Iterator<Ljava/lang/Number;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSNumber;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1:withJavaUtilIterator:withOrgApacheLuceneUtilLongsRef:withJavaUtilIterator:);
+  methods[1].selector = @selector(hasNext);
+  methods[2].selector = @selector(next);
+  methods[3].selector = @selector(remove);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.lucene50.Lucene50DocValuesConsumer$1;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$valueCountIterator_", NULL, 0x1012, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<Ljava/lang/Number;>;", .constantValue.asLong = 0 },
-    { "val$docValues_", NULL, 0x1012, "Lorg.apache.lucene.util.LongsRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$valueIterator_", NULL, 0x1012, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<Ljava/lang/Number;>;", .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$valueCountIterator_", "LJavaUtilIterator;", .constantValue.asLong = 0, 0x1012, -1, -1, 1, -1 },
+    { "val$docValues_", "LOrgApacheLuceneUtilLongsRef;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$valueIterator_", "LJavaUtilIterator;", .constantValue.asLong = 0, 0x1012, -1, -1, 1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1", "iterator" };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1 = { 2, "", "org.apache.lucene.codecs.lucene50", "Lucene50DocValuesConsumer$", 0x8008, 4, methods, 4, fields, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/util/Iterator<Ljava/lang/Number;>;" };
-  return &_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1;LJavaUtilIterator;LOrgApacheLuceneUtilLongsRef;LJavaUtilIterator;", "Ljava/util/Iterator<Ljava/lang/Number;>;", "LOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1;", "iterator", "Ljava/lang/Object;Ljava/util/Iterator<Ljava/lang/Number;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1 = { "", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x8010, 4, 4, 2, -1, 3, 4, -1 };
+  return &_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1;
 }
 
 @end
 
-void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1 *self, OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2) {
+void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1 *self, OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$valueCountIterator_, capture$0);
   JreStrongAssign(&self->val$docValues_, capture$1);
@@ -905,12 +942,10 @@ void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1_initWithOrgApa
   NSObject_init(self);
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1 *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1, initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_, outer$, capture$0, capture$1, capture$2)
+OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1 *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1, initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_, outer$, capture$0, capture$1, capture$2)
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1 *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1, initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_, outer$, capture$0, capture$1, capture$2)
+OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1 *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1 *outer$, id<JavaUtilIterator> capture$0, OrgApacheLuceneUtilLongsRef *capture$1, id<JavaUtilIterator> capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_1, initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_1_withJavaUtilIterator_withOrgApacheLuceneUtilLongsRef_withJavaUtilIterator_, outer$, capture$0, capture$1, capture$2)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_$1_$1)

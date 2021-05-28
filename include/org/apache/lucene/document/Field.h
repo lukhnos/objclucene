@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentField || defined(INCLUDE_OrgApacheLuceneDocumentField))
 #define OrgApacheLuceneDocumentField_
 
@@ -21,7 +27,6 @@
 #include "org/apache/lucene/index/IndexableField.h"
 
 @class IOSByteArray;
-@class IOSObjectArray;
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneAnalysisTokenStream;
@@ -32,23 +37,22 @@
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
- @brief Expert: directly create a field for a document.
- Most
- users should use one of the sugar subclasses: <code>IntField</code>
+ @brief Expert: directly create a field for a document.Most
+  users should use one of the sugar subclasses: <code>IntField</code>
  , <code>LongField</code>, <code>FloatField</code>, <code>DoubleField</code>
  , <code>BinaryDocValuesField</code>, <code>NumericDocValuesField</code>
  , <code>SortedDocValuesField</code>, <code>StringField</code>
  , <code>TextField</code>, <code>StoredField</code>.
  <p> A field is a section of a Document. Each field has three
- parts: name, type and value. Values may be text
- (String, Reader or pre-analyzed TokenStream), binary
- (byte[]), or numeric (a Number).  Fields are optionally stored in the
- index, so that they may be returned with hits on the document.
+  parts: name, type and value. Values may be text
+  (String, Reader or pre-analyzed TokenStream), binary
+  (byte[]), or numeric (a Number).  Fields are optionally stored in the
+  index, so that they may be returned with hits on the document. 
  <p>
- NOTE: the field type is an <code>IndexableFieldType</code>.  Making changes
- to the state of the IndexableFieldType will impact any
- Field it is used in.  It is strongly recommended that no
- changes be made after Field instantiation.
+  NOTE: the field type is an <code>IndexableFieldType</code>.  Making changes
+  to the state of the IndexableFieldType will impact any
+  Field it is used in.  It is strongly recommended that no
+  changes be made after Field instantiation.
  */
 @interface OrgApacheLuceneDocumentField : NSObject < OrgApacheLuceneIndexIndexableField > {
  @public
@@ -66,9 +70,9 @@
   id fieldsData_;
   /*!
    @brief Pre-analyzed tokenStream for indexed fields; this is
- separate from fieldsData because you are allowed to
- have both; eg maybe field has a String value but you
- customize how it's tokenized
+  separate from fieldsData because you are allowed to
+  have both; eg maybe field has a String value but you
+  customize how it's tokenized
    */
   OrgApacheLuceneAnalysisTokenStream *tokenStream_;
   /*!
@@ -81,116 +85,113 @@
 #pragma mark Public
 
 /*!
- @brief Create a stored field with binary value.
- Optionally the value may be compressed.
+ @brief Create a stored field with binary value.Optionally the value may be compressed.
  @param name The name of the field
  @param value The binary value
  */
-- (instancetype)initWithNSString:(NSString *)name
-                   withByteArray:(IOSByteArray *)value;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                             withByteArray:(IOSByteArray *)value;
 
 /*!
  @brief Create field with binary value.
  <p>NOTE: the provided byte[] is not copied so be sure
- not to change it until you're done with this field.
+  not to change it until you're done with this field.
  @param name field name
  @param value byte array pointing to binary content (not copied)
  @param type field type
- @throws IllegalArgumentException if the field name is null,
- or the field's type is indexed()
- @throws NullPointerException if the type is null
+ @throw IllegalArgumentExceptionif the field name is null,
+          or the field's type is indexed()
+ @throw NullPointerExceptionif the type is null
  */
-- (instancetype)initWithNSString:(NSString *)name
-                   withByteArray:(IOSByteArray *)value
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                             withByteArray:(IOSByteArray *)value
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
 
 /*!
- @brief Create a stored field with binary value.
- Optionally the value may be compressed.
+ @brief Create a stored field with binary value.Optionally the value may be compressed.
  @param name The name of the field
  @param value The binary value
  @param offset Starting offset in value where this Field's bytes are
  @param length Number of bytes to use for this Field, starting at offset
  */
-- (instancetype)initWithNSString:(NSString *)name
-                   withByteArray:(IOSByteArray *)value
-                         withInt:(jint)offset
-                         withInt:(jint)length;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                             withByteArray:(IOSByteArray *)value
+                                   withInt:(jint)offset
+                                   withInt:(jint)length;
 
 /*!
  @brief Create field with binary value.
  <p>NOTE: the provided byte[] is not copied so be sure
- not to change it until you're done with this field.
+  not to change it until you're done with this field.
  @param name field name
  @param value byte array pointing to binary content (not copied)
  @param offset starting position of the byte array
  @param length valid length of the byte array
  @param type field type
- @throws IllegalArgumentException if the field name is null,
- or the field's type is indexed()
- @throws NullPointerException if the type is null
+ @throw IllegalArgumentExceptionif the field name is null,
+          or the field's type is indexed()
+ @throw NullPointerExceptionif the type is null
  */
-- (instancetype)initWithNSString:(NSString *)name
-                   withByteArray:(IOSByteArray *)value
-                         withInt:(jint)offset
-                         withInt:(jint)length
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                             withByteArray:(IOSByteArray *)value
+                                   withInt:(jint)offset
+                                   withInt:(jint)length
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
 
 /*!
  @brief Create field with binary value.
  <p>NOTE: the provided BytesRef is not copied so be sure
- not to change it until you're done with this field.
+  not to change it until you're done with this field.
  @param name field name
  @param bytes BytesRef pointing to binary content (not copied)
  @param type field type
- @throws IllegalArgumentException if the field name is null,
- or the field's type is indexed()
- @throws NullPointerException if the type is null
+ @throw IllegalArgumentExceptionif the field name is null,
+          or the field's type is indexed()
+ @throw NullPointerExceptionif the type is null
  */
-- (instancetype)initWithNSString:(NSString *)name
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
 
 /*!
- @brief Create a tokenized and indexed field that is not stored.
- Term vectors will
- not be stored.  The Reader is read only when the Document is added to the index,
- i.e. you may not close the Reader until <code>IndexWriter.addDocument</code>
- has been called.
+ @brief Create a tokenized and indexed field that is not stored.Term vectors will
+  not be stored.
+ The Reader is read only when the Document is added to the index,
+  i.e. you may not close the Reader until <code>IndexWriter.addDocument</code>
+  has been called.
  @param name The name of the field
  @param reader The reader with the content
- @throws NullPointerException if name or reader is <code>null</code>
+ @throw NullPointerExceptionif name or reader is <code>null</code>
  */
-- (instancetype)initWithNSString:(NSString *)name
-                withJavaIoReader:(JavaIoReader *)reader;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                          withJavaIoReader:(JavaIoReader *)reader;
 
 /*!
  @brief Create field with Reader value.
  @param name field name
  @param reader reader value
  @param type field type
- @throws IllegalArgumentException if either the name or type
- is null, or if the field's type is stored(), or
- if tokenized() is false.
- @throws NullPointerException if the reader is null
+ @throw IllegalArgumentExceptionif either the name or type
+          is null, or if the field's type is stored(), or
+          if tokenized() is false.
+ @throw NullPointerExceptionif the reader is null
  */
-- (instancetype)initWithNSString:(NSString *)name
-                withJavaIoReader:(JavaIoReader *)reader
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                          withJavaIoReader:(JavaIoReader *)reader
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
 
 /*!
  @brief Create a tokenized and indexed field that is not stored, optionally with 
- storing term vectors.
- The Reader is read only when the Document is added to the index,
- i.e. you may not close the Reader until <code>IndexWriter.addDocument</code>
- has been called.
+  storing term vectors.The Reader is read only when the Document is added to the index,
+  i.e. you may not close the Reader until <code>IndexWriter.addDocument</code>
+  has been called.
  @param name The name of the field
  @param reader The reader with the content
  @param termVector Whether term vector should be stored
- @throws NullPointerException if name or reader is <code>null</code>
+ @throw NullPointerExceptionif name or reader is <code>null</code>
  */
-- (instancetype)initWithNSString:(NSString *)name
-                withJavaIoReader:(JavaIoReader *)reader
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                          withJavaIoReader:(JavaIoReader *)reader
 withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)termVector;
 
 /*!
@@ -198,104 +199,99 @@ withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVe
  @param name field name
  @param value string value
  @param type field type
- @throws IllegalArgumentException if either the name or value
- is null, or if the field's type is neither indexed() nor stored(), 
- or if indexed() is false but storeTermVectors() is true.
- @throws NullPointerException if the type is null
+ @throw IllegalArgumentExceptionif either the name or value
+          is null, or if the field's type is neither indexed() nor stored(), 
+          or if indexed() is false but storeTermVectors() is true.
+ @throw NullPointerExceptionif the type is null
  */
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                              withNSString:(NSString *)value
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
 
 /*!
  @brief Create a field by specifying its name, value and how it will
- be saved in the index.
- Term vectors will not be stored in the index.
+  be saved in the index.Term vectors will not be stored in the index.
  @param name The name of the field
  @param value The string to process
- @param store Whether <code>value</code> should be stored in the index
- @param index Whether the field should be indexed, and if so, if it should
- be tokenized before indexing
- @throws NullPointerException if name or value is <code>null</code>
- @throws IllegalArgumentException if the field is neither stored nor indexed
+ @param store Whether  <code> value </code>  should be stored in the index
+ @param index Whether the field should be indexed, and if so, if it should   be tokenized before indexing
+ @throw NullPointerExceptionif name or value is <code>null</code>
+ @throw IllegalArgumentExceptionif the field is neither stored nor indexed
  */
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value
-withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store
-withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)index;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                              withNSString:(NSString *)value
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)index;
 
 /*!
  @brief Create a field by specifying its name, value and how it will
- be saved in the index.
+  be saved in the index.
  @param name The name of the field
  @param value The string to process
- @param store Whether <code>value</code> should be stored in the index
- @param index Whether the field should be indexed, and if so, if it should
- be tokenized before indexing
+ @param store Whether  <code> value </code>  should be stored in the index
+ @param index Whether the field should be indexed, and if so, if it should   be tokenized before indexing
  @param termVector Whether term vector should be stored
- @throws NullPointerException if name or value is <code>null</code>
- @throws IllegalArgumentException in any of the following situations:
+ @throw NullPointerExceptionif name or value is <code>null</code>
+ @throw IllegalArgumentExceptionin any of the following situations: 
  <ul> 
- <li>the field is neither stored nor indexed</li> 
- <li>the field is not indexed but termVector is <code>TermVector.YES</code></li>
- </ul>
+   <li>the field is neither stored nor indexed</li> 
+   <li>the field is not indexed but termVector is <code>TermVector.YES</code></li>
+  </ul>
  */
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value
-withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store
-withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)index
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                              withNSString:(NSString *)value
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)index
 withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)termVector;
 
 /*!
- @brief Create a tokenized and indexed field that is not stored.
- Term vectors will
- not be stored. This is useful for pre-analyzed fields.
- The TokenStream is read only when the Document is added to the index,
- i.e. you may not close the TokenStream until <code>IndexWriter.addDocument</code>
- has been called.
+ @brief Create a tokenized and indexed field that is not stored.Term vectors will
+  not be stored.
+ This is useful for pre-analyzed fields.
+  The TokenStream is read only when the Document is added to the index,
+  i.e. you may not close the TokenStream until <code>IndexWriter.addDocument</code>
+  has been called.
  @param name The name of the field
  @param tokenStream The TokenStream with the content
- @throws NullPointerException if name or tokenStream is <code>null</code>
+ @throw NullPointerExceptionif name or tokenStream is <code>null</code>
  */
-- (instancetype)initWithNSString:(NSString *)name
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
 
 /*!
  @brief Create field with TokenStream value.
  @param name field name
  @param tokenStream TokenStream value
  @param type field type
- @throws IllegalArgumentException if either the name or type
- is null, or if the field's type is stored(), or
- if tokenized() is false, or if indexed() is false.
- @throws NullPointerException if the tokenStream is null
+ @throw IllegalArgumentExceptionif either the name or type
+          is null, or if the field's type is stored(), or
+          if tokenized() is false, or if indexed() is false.
+ @throw NullPointerExceptionif the tokenStream is null
  */
-- (instancetype)initWithNSString:(NSString *)name
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
 
 /*!
  @brief Create a tokenized and indexed field that is not stored, optionally with 
- storing term vectors.
- This is useful for pre-analyzed fields.
+  storing term vectors.This is useful for pre-analyzed fields.
  The TokenStream is read only when the Document is added to the index,
- i.e. you may not close the TokenStream until <code>IndexWriter.addDocument</code>
- has been called.
+  i.e. you may not close the TokenStream until <code>IndexWriter.addDocument</code>
+  has been called.
  @param name The name of the field
  @param tokenStream The TokenStream with the content
  @param termVector Whether term vector should be stored
- @throws NullPointerException if name or tokenStream is <code>null</code>
+ @throw NullPointerExceptionif name or tokenStream is <code>null</code>
  */
-- (instancetype)initWithNSString:(NSString *)name
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
 withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)termVector;
 
 - (OrgApacheLuceneUtilBytesRef *)binaryValue;
 
 /*!
- @brief 
- <p>
- The default value is <code>1.0f</code> (no boost).
+ @brief <p>
+  The default value is <code>1.0f</code> (no boost).
  - seealso: #setBoost(float)
  */
 - (jfloat)boost;
@@ -310,117 +306,107 @@ withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVe
 - (NSNumber *)numericValue;
 
 /*!
- @brief The value of the field as a Reader, or null.
- If null, the String value or
- binary value is used. Exactly one of stringValue(), readerValue(), and
- getBinaryValue() must be set.
+ @brief The value of the field as a Reader, or null.If null, the String value or
+  binary value is used.
+ Exactly one of stringValue(), readerValue(), and
+  getBinaryValue() must be set.
  */
 - (JavaIoReader *)readerValue;
 
 /*!
  @brief Sets the boost factor on this field.
- @throws IllegalArgumentException if this field is not indexed, 
- or if it omits norms.
+ @throw IllegalArgumentExceptionif this field is not indexed, 
+          or if it omits norms.
  - seealso: #boost()
  */
 - (void)setBoostWithFloat:(jfloat)boost;
 
 /*!
- @brief Expert: change the value of this field.
- See 
+ @brief Expert: change the value of this field.See  
  <code>setStringValue(String)</code>.
  */
 - (void)setBytesValueWithByteArray:(IOSByteArray *)value;
 
 /*!
- @brief Expert: change the value of this field.
- See 
+ @brief Expert: change the value of this field.See  
  <code>setStringValue(String)</code>.
  <p>NOTE: the provided BytesRef is not copied so be sure
- not to change it until you're done with this field.
+  not to change it until you're done with this field.
  */
 - (void)setBytesValueWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
 
 /*!
- @brief Expert: change the value of this field.
- See 
+ @brief Expert: change the value of this field.See  
  <code>setStringValue(String)</code>.
  */
 - (void)setByteValueWithByte:(jbyte)value;
 
 /*!
- @brief Expert: change the value of this field.
- See 
+ @brief Expert: change the value of this field.See  
  <code>setStringValue(String)</code>.
  */
 - (void)setDoubleValueWithDouble:(jdouble)value;
 
 /*!
- @brief Expert: change the value of this field.
- See 
+ @brief Expert: change the value of this field.See  
  <code>setStringValue(String)</code>.
  */
 - (void)setFloatValueWithFloat:(jfloat)value;
 
 /*!
- @brief Expert: change the value of this field.
- See 
+ @brief Expert: change the value of this field.See  
  <code>setStringValue(String)</code>.
  */
 - (void)setIntValueWithInt:(jint)value;
 
 /*!
- @brief Expert: change the value of this field.
- See 
+ @brief Expert: change the value of this field.See  
  <code>setStringValue(String)</code>.
  */
 - (void)setLongValueWithLong:(jlong)value;
 
 /*!
- @brief Expert: change the value of this field.
- See 
+ @brief Expert: change the value of this field.See  
  <code>setStringValue(String)</code>.
  */
 - (void)setReaderValueWithJavaIoReader:(JavaIoReader *)value;
 
 /*!
- @brief Expert: change the value of this field.
- See 
+ @brief Expert: change the value of this field.See  
  <code>setStringValue(String)</code>.
  */
 - (void)setShortValueWithShort:(jshort)value;
 
 /*!
  @brief <p>
- Expert: change the value of this field.
+  Expert: change the value of this field.
  This can be used during indexing to
- re-use a single Field instance to improve indexing speed by avoiding GC
- cost of new'ing and reclaiming Field instances. Typically a single
+  re-use a single Field instance to improve indexing speed by avoiding GC
+  cost of new'ing and reclaiming Field instances. Typically a single 
  <code>Document</code> instance is re-used as well. This helps most on small
- documents.
+  documents. 
  </p>
+   
  <p>
- Each Field instance should only be used once within a single
- <code>Document</code> instance. See <a
- href="http://wiki.apache.org/lucene-java/ImproveIndexingSpeed"
- >ImproveIndexingSpeed</a> for details.
+  Each Field instance should only be used once within a single 
+ <code>Document</code> instance. See <a href="http://wiki.apache.org/lucene-java/ImproveIndexingSpeed">
+ ImproveIndexingSpeed</a> for details. 
  </p>
  */
 - (void)setStringValueWithNSString:(NSString *)value;
 
 /*!
  @brief Expert: sets the token stream to be used for indexing and causes
- isIndexed() and isTokenized() to return true.
- May be combined with stored
- values from stringValue() or getBinaryValue()
+  isIndexed() and isTokenized() to return true.May be combined with stored
+  values from stringValue() or getBinaryValue()
  */
 - (void)setTokenStreamWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
 
 /*!
- @brief The value of the field as a String, or null.
- If null, the Reader value or
- binary value is used. Exactly one of stringValue(), readerValue(), and
- getBinaryValue() must be set.
+ @brief The value of the field as a String, or null.If null, the Reader value or
+  binary value is used.
+ Exactly one of stringValue(), readerValue(), and
+  getBinaryValue() must be set.
  */
 - (NSString *)stringValue;
 
@@ -428,9 +414,8 @@ withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVe
                                                 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)reuse;
 
 /*!
- @brief The TokenStream for this field to be used when indexing, or null.
- If null,
- the Reader value or String value is analyzed to produce the indexed tokens.
+ @brief The TokenStream for this field to be used when indexing, or null.If null,
+  the Reader value or String value is analyzed to produce the indexed tokens.
  */
 - (OrgApacheLuceneAnalysisTokenStream *)tokenStreamValue;
 
@@ -441,8 +426,8 @@ withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVe
 
 /*!
  @brief Translates the pre-4.0 enums for specifying how a
- field should be indexed into the 4.0 <code>FieldType</code>
- approach.
+   field should be indexed into the 4.0 <code>FieldType</code>
+   approach.
  */
 + (OrgApacheLuceneDocumentFieldType *)translateFieldTypeWithOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store
                                                         withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)index
@@ -455,11 +440,15 @@ withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVe
  Intended only for custom Field subclasses.
  @param name field name
  @param type field type
- @throws IllegalArgumentException if either the name or type
- is null.
+ @throw IllegalArgumentExceptionif either the name or type
+          is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -573,6 +562,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneDocumentField_Store_Enum) {
   OrgApacheLuceneDocumentField_Store_Enum_YES = 0,
   OrgApacheLuceneDocumentField_Store_Enum_NO = 1,
@@ -581,19 +572,18 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneDocumentField_Store_Enum) {
 /*!
  @brief Specifies whether and how a field should be stored.
  */
-@interface OrgApacheLuceneDocumentField_Store : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_Store : JavaLangEnum
 
-+ (OrgApacheLuceneDocumentField_Store *)YES_;
-
-+ (OrgApacheLuceneDocumentField_Store *)NO_;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_Store *YES_ NS_SWIFT_NAME(YES_);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_Store *NO_ NS_SWIFT_NAME(NO_);
+#pragma mark Public
 
 + (OrgApacheLuceneDocumentField_Store *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneDocumentField_Store_Enum)toNSEnum;
 
 @end
@@ -604,22 +594,22 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentField_Store)
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField_Store *OrgApacheLuceneDocumentField_Store_values_[];
 
 /*!
- @brief Store the original field value in the index.
- This is useful for short texts
- like a document's title which should be displayed with the results. The
- value is stored in its original form, i.e. no analyzer is used before it is
- stored.
+ @brief Store the original field value in the index.This is useful for short texts
+  like a document's title which should be displayed with the results.
+ The
+  value is stored in its original form, i.e. no analyzer is used before it is
+  stored.
  */
-inline OrgApacheLuceneDocumentField_Store *OrgApacheLuceneDocumentField_Store_get_YES();
+inline OrgApacheLuceneDocumentField_Store *OrgApacheLuceneDocumentField_Store_get_YES(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_Store, YES)
 
 /*!
  @brief Do not store the field's value in the index.
  */
-inline OrgApacheLuceneDocumentField_Store *OrgApacheLuceneDocumentField_Store_get_NO();
+inline OrgApacheLuceneDocumentField_Store *OrgApacheLuceneDocumentField_Store_get_NO(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_Store, NO)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneDocumentField_Store_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneDocumentField_Store_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField_Store *OrgApacheLuceneDocumentField_Store_valueOfWithNSString_(NSString *name);
 
@@ -649,18 +639,13 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneDocumentField_Index_Enum) {
 /*!
  @brief Specifies whether and how a field should be indexed.
  */
-@interface OrgApacheLuceneDocumentField_Index : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_Index : JavaLangEnum
 
-+ (OrgApacheLuceneDocumentField_Index *)NO_;
-
-+ (OrgApacheLuceneDocumentField_Index *)ANALYZED;
-
-+ (OrgApacheLuceneDocumentField_Index *)NOT_ANALYZED;
-
-+ (OrgApacheLuceneDocumentField_Index *)NOT_ANALYZED_NO_NORMS;
-
-+ (OrgApacheLuceneDocumentField_Index *)ANALYZED_NO_NORMS;
-
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_Index *NO_ NS_SWIFT_NAME(NO_);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_Index *ANALYZED NS_SWIFT_NAME(ANALYZED);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_Index *NOT_ANALYZED NS_SWIFT_NAME(NOT_ANALYZED);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_Index *NOT_ANALYZED_NO_NORMS NS_SWIFT_NAME(NOT_ANALYZED_NO_NORMS);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_Index *ANALYZED_NO_NORMS NS_SWIFT_NAME(ANALYZED_NO_NORMS);
 #pragma mark Public
 
 - (jboolean)isAnalyzed;
@@ -682,13 +667,12 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneDocumentField_Index_Enum) {
                                                withBoolean:(jboolean)analyzed
                                                withBoolean:(jboolean)omitNorms;
 
-#pragma mark Package-Private
++ (OrgApacheLuceneDocumentField_Index *)valueOfWithNSString:(NSString *)name;
 
 + (IOSObjectArray *)values;
 
-+ (OrgApacheLuceneDocumentField_Index *)valueOfWithNSString:(NSString *)name;
+#pragma mark Package-Private
 
-- (id)copyWithZone:(NSZone *)zone;
 - (OrgApacheLuceneDocumentField_Index_Enum)toNSEnum;
 
 @end
@@ -699,67 +683,64 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentField_Index)
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_values_[];
 
 /*!
- @brief Do not index the field value.
- This field can thus not be searched,
- but one can still access its contents provided it is
- <code>stored</code>. 
+ @brief Do not index the field value.This field can thus not be searched,
+  but one can still access its contents provided it is 
+ <code>stored</code>.
  */
-inline OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_get_NO();
+inline OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_get_NO(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_Index, NO)
 
 /*!
  @brief Index the tokens produced by running the field's
- value through an Analyzer.
- This is useful for
- common text. 
+  value through an Analyzer.This is useful for
+  common text.
  */
-inline OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_get_ANALYZED();
+inline OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_get_ANALYZED(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_Index, ANALYZED)
 
 /*!
  @brief Index the field's value without using an Analyzer, so it can be searched.
  As no analyzer is used the value will be stored as a single term. This is
- useful for unique Ids like product numbers.
+  useful for unique Ids like product numbers.
  */
-inline OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_get_NOT_ANALYZED();
+inline OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_get_NOT_ANALYZED(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_Index, NOT_ANALYZED)
 
 /*!
  @brief Expert: Index the field's value without an Analyzer,
- and also disable the indexing of norms.
- Note that you
- can also separately enable/disable norms by calling
- <code>FieldType.setOmitNorms</code>.  No norms means that
- index-time field and document boosting and field
- length normalization are disabled.  The benefit is
- less memory usage as norms take up one byte of RAM
- per indexed field for every document in the index,
- during searching.  Note that once you index a given
- field <i>with</i> norms enabled, disabling norms will
- have no effect.  In other words, for this to have the
- above described effect on a field, all instances of
- that field must be indexed with NOT_ANALYZED_NO_NORMS
- from the beginning. 
+  and also disable the indexing of norms.Note that you
+  can also separately enable/disable norms by calling 
+ <code>FieldType.setOmitNorms</code>.
+ No norms means that
+  index-time field and document boosting and field
+  length normalization are disabled.  The benefit is
+  less memory usage as norms take up one byte of RAM
+  per indexed field for every document in the index,
+  during searching.  Note that once you index a given
+  field <i>with</i> norms enabled, disabling norms will
+  have no effect.  In other words, for this to have the
+  above described effect on a field, all instances of
+  that field must be indexed with NOT_ANALYZED_NO_NORMS
+  from the beginning.
  */
-inline OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_get_NOT_ANALYZED_NO_NORMS();
+inline OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_get_NOT_ANALYZED_NO_NORMS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_Index, NOT_ANALYZED_NO_NORMS)
 
 /*!
  @brief Expert: Index the tokens produced by running the
- field's value through an Analyzer, and also
- separately disable the storing of norms.
- See
- <code>NOT_ANALYZED_NO_NORMS</code> for what norms are
- and why you may want to disable them. 
+   field's value through an Analyzer, and also
+   separately disable the storing of norms.See
+   <code>NOT_ANALYZED_NO_NORMS</code> for what norms are
+   and why you may want to disable them.
  */
-inline OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_get_ANALYZED_NO_NORMS();
+inline OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_get_ANALYZED_NO_NORMS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_Index, ANALYZED_NO_NORMS)
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_toIndexWithBoolean_withBoolean_(jboolean indexed, jboolean analyzed);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_toIndexWithBoolean_withBoolean_withBoolean_(jboolean indexed, jboolean analyzed, jboolean omitNorms);
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneDocumentField_Index_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneDocumentField_Index_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_valueOfWithNSString_(NSString *name);
 
@@ -789,18 +770,13 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneDocumentField_TermVector_Enum) {
 /*!
  @brief Specifies whether and how a field should have term vectors.
  */
-@interface OrgApacheLuceneDocumentField_TermVector : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_TermVector : JavaLangEnum
 
-+ (OrgApacheLuceneDocumentField_TermVector *)NO_;
-
-+ (OrgApacheLuceneDocumentField_TermVector *)YES_;
-
-+ (OrgApacheLuceneDocumentField_TermVector *)WITH_POSITIONS;
-
-+ (OrgApacheLuceneDocumentField_TermVector *)WITH_OFFSETS;
-
-+ (OrgApacheLuceneDocumentField_TermVector *)WITH_POSITIONS_OFFSETS;
-
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_TermVector *NO_ NS_SWIFT_NAME(NO_);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_TermVector *YES_ NS_SWIFT_NAME(YES_);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_TermVector *WITH_POSITIONS NS_SWIFT_NAME(WITH_POSITIONS);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_TermVector *WITH_OFFSETS NS_SWIFT_NAME(WITH_OFFSETS);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentField_TermVector *WITH_POSITIONS_OFFSETS NS_SWIFT_NAME(WITH_POSITIONS_OFFSETS);
 #pragma mark Public
 
 - (jboolean)isStored;
@@ -812,17 +788,16 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneDocumentField_TermVector_Enum) {
                                                          withBoolean:(jboolean)withOffsets
                                                          withBoolean:(jboolean)withPositions;
 
++ (OrgApacheLuceneDocumentField_TermVector *)valueOfWithNSString:(NSString *)name;
+
++ (IOSObjectArray *)values;
+
 - (jboolean)withOffsets;
 
 - (jboolean)withPositions;
 
 #pragma mark Package-Private
 
-+ (IOSObjectArray *)values;
-
-+ (OrgApacheLuceneDocumentField_TermVector *)valueOfWithNSString:(NSString *)name;
-
-- (id)copyWithZone:(NSZone *)zone;
 - (OrgApacheLuceneDocumentField_TermVector_Enum)toNSEnum;
 
 @end
@@ -835,29 +810,28 @@ FOUNDATION_EXPORT OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocume
 /*!
  @brief Do not store term vectors.
  */
-inline OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_get_NO();
+inline OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_get_NO(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_TermVector, NO)
 
 /*!
- @brief Store the term vectors of each document.
- A term vector is a list
- of the document's terms and their number of occurrences in that document. 
+ @brief Store the term vectors of each document.A term vector is a list
+  of the document's terms and their number of occurrences in that document.
  */
-inline OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_get_YES();
+inline OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_get_YES(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_TermVector, YES)
 
 /*!
  @brief Store the term vector + token position information
  - seealso: #YES
  */
-inline OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_get_WITH_POSITIONS();
+inline OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_get_WITH_POSITIONS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_TermVector, WITH_POSITIONS)
 
 /*!
  @brief Store the term vector + Token offset information
  - seealso: #YES
  */
-inline OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_get_WITH_OFFSETS();
+inline OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_get_WITH_OFFSETS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_TermVector, WITH_OFFSETS)
 
 /*!
@@ -866,12 +840,12 @@ J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_TermVector, WITH_OFFSETS)
  - seealso: #WITH_POSITIONS
  - seealso: #WITH_OFFSETS
  */
-inline OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_get_WITH_POSITIONS_OFFSETS();
+inline OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_get_WITH_POSITIONS_OFFSETS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentField_TermVector, WITH_POSITIONS_OFFSETS)
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_toTermVectorWithBoolean_withBoolean_withBoolean_(jboolean stored, jboolean withOffsets, jboolean withPositions);
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneDocumentField_TermVector_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneDocumentField_TermVector_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_valueOfWithNSString_(NSString *name);
 
@@ -881,4 +855,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentField")

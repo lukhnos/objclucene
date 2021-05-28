@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/util/MutableBits.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/MutableBits must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilMutableBits : NSObject
 
 @end
@@ -13,10 +17,16 @@
 @implementation OrgApacheLuceneUtilMutableBits
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "clearWithInt:", "clear", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMutableBits = { 2, "MutableBits", "org.apache.lucene.util", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(clearWithInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "clear", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMutableBits = { "MutableBits", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilMutableBits;
 }
 

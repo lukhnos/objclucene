@@ -3,9 +3,7 @@
 //  source: ./join/src/java/org/apache/lucene/search/join/ToParentBlockJoinSortField.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
@@ -26,6 +24,10 @@
 #include "org/apache/lucene/util/BitSet.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/NumericUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/ToParentBlockJoinSortField must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField () {
  @public
@@ -59,37 +61,38 @@ __attribute__((unused)) static OrgApacheLuceneSearchFieldComparator *OrgApacheLu
 
 __attribute__((unused)) static OrgApacheLuceneSearchFieldComparator *OrgApacheLuceneSearchJoinToParentBlockJoinSortField_getDoubleComparatorWithInt_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *self, jint numHits);
 
-@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1 : OrgApacheLuceneSearchFieldComparator_TermOrdValComparator {
+@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1 : OrgApacheLuceneSearchFieldComparator_TermOrdValComparator {
  @public
   OrgApacheLuceneSearchJoinToParentBlockJoinSortField *this$0_;
 }
+
+- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
+                                                                    withInt:(jint)numHits
+                                                               withNSString:(NSString *)field
+                                                                withBoolean:(jboolean)sortMissingLast;
 
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                         withNSString:(NSString *)field;
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
-                                                                    withInt:(jint)arg$0
-                                                               withNSString:(NSString *)arg$1
-                                                                withBoolean:(jboolean)arg$2;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1, this$0_, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, jboolean sortMissingLast);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, jboolean arg$2);
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, jboolean sortMissingLast) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, jboolean arg$2) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, jboolean sortMissingLast);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, jboolean arg$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1)
-
-@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2 : OrgApacheLuceneSearchFieldComparator_IntComparator {
+@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2 : OrgApacheLuceneSearchFieldComparator_IntComparator {
  @public
   OrgApacheLuceneSearchJoinToParentBlockJoinSortField *this$0_;
 }
+
+- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
+                                                                    withInt:(jint)numHits
+                                                               withNSString:(NSString *)field
+                                                        withJavaLangInteger:(JavaLangInteger *)missingValue;
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field;
@@ -97,29 +100,25 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$
 - (id<OrgApacheLuceneUtilBits>)getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                             withNSString:(NSString *)field;
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
-                                                                    withInt:(jint)arg$0
-                                                               withNSString:(NSString *)arg$1
-                                                        withJavaLangInteger:(JavaLangInteger *)arg$2;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2, this$0_, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangInteger *missingValue);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2);
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangInteger *missingValue) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangInteger *missingValue);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2)
-
-@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3 : OrgApacheLuceneSearchFieldComparator_LongComparator {
+@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3 : OrgApacheLuceneSearchFieldComparator_LongComparator {
  @public
   OrgApacheLuceneSearchJoinToParentBlockJoinSortField *this$0_;
 }
+
+- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
+                                                                    withInt:(jint)numHits
+                                                               withNSString:(NSString *)field
+                                                           withJavaLangLong:(JavaLangLong *)missingValue;
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field;
@@ -127,79 +126,67 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$
 - (id<OrgApacheLuceneUtilBits>)getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                             withNSString:(NSString *)field;
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
-                                                                    withInt:(jint)arg$0
-                                                               withNSString:(NSString *)arg$1
-                                                           withJavaLangLong:(JavaLangLong *)arg$2;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3, this$0_, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangLong *missingValue);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2);
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangLong *missingValue) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangLong *missingValue);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3)
-
-@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4 : OrgApacheLuceneSearchFieldComparator_FloatComparator {
+@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4 : OrgApacheLuceneSearchFieldComparator_FloatComparator {
  @public
   OrgApacheLuceneSearchJoinToParentBlockJoinSortField *this$0_;
 }
 
+- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
+                                                                    withInt:(jint)numHits
+                                                               withNSString:(NSString *)field
+                                                          withJavaLangFloat:(JavaLangFloat *)missingValue;
+
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field;
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
-                                                                    withInt:(jint)arg$0
-                                                               withNSString:(NSString *)arg$1
-                                                          withJavaLangFloat:(JavaLangFloat *)arg$2;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4, this$0_, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangFloat *missingValue);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangFloat *arg$2);
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangFloat *missingValue) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangFloat *arg$2) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangFloat *missingValue);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangFloat *arg$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4)
-
-@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1 : OrgApacheLuceneIndexNumericDocValues {
+@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1 : OrgApacheLuceneIndexNumericDocValues {
  @public
   OrgApacheLuceneIndexNumericDocValues *val$view_;
 }
 
-- (jlong)getWithInt:(jint)docID;
-
 - (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0;
+
+- (jlong)getWithInt:(jint)docID;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1, val$view_, OrgApacheLuceneIndexNumericDocValues *)
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0);
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1)
-
-@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5 : OrgApacheLuceneSearchFieldComparator_DoubleComparator {
+@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5 : OrgApacheLuceneSearchFieldComparator_DoubleComparator {
  @public
   OrgApacheLuceneSearchJoinToParentBlockJoinSortField *this$0_;
 }
+
+- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
+                                                                    withInt:(jint)numHits
+                                                               withNSString:(NSString *)field
+                                                         withJavaLangDouble:(JavaLangDouble *)missingValue;
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field;
@@ -207,47 +194,34 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$
 - (id<OrgApacheLuceneUtilBits>)getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                             withNSString:(NSString *)field;
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
-                                                                    withInt:(jint)arg$0
-                                                               withNSString:(NSString *)arg$1
-                                                         withJavaLangDouble:(JavaLangDouble *)arg$2;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5, this$0_, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangDouble *missingValue);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangDouble *arg$2);
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangDouble *missingValue) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangDouble *arg$2) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangDouble *missingValue);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangDouble *arg$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5)
-
-@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1 : OrgApacheLuceneIndexNumericDocValues {
+@interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1 : OrgApacheLuceneIndexNumericDocValues {
  @public
   OrgApacheLuceneIndexNumericDocValues *val$view_;
 }
 
-- (jlong)getWithInt:(jint)docID;
-
 - (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0;
+
+- (jlong)getWithInt:(jint)docID;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1, val$view_, OrgApacheLuceneIndexNumericDocValues *)
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0);
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0);
 
 @implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField
 
@@ -315,22 +289,35 @@ withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetP
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchSortField_Type:withBoolean:withOrgApacheLuceneSearchJoinBitSetProducer:withOrgApacheLuceneSearchJoinBitSetProducer:", "ToParentBlockJoinSortField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneSearchSortField_Type:withBoolean:withBoolean:withOrgApacheLuceneSearchJoinBitSetProducer:withOrgApacheLuceneSearchJoinBitSetProducer:", "ToParentBlockJoinSortField", NULL, 0x1, NULL, NULL },
-    { "getComparatorWithInt:withInt:", "getComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", "(II)Lorg/apache/lucene/search/FieldComparator<*>;" },
-    { "getStringComparatorWithInt:", "getStringComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x2, NULL, "(I)Lorg/apache/lucene/search/FieldComparator<*>;" },
-    { "getIntComparatorWithInt:", "getIntComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x2, NULL, "(I)Lorg/apache/lucene/search/FieldComparator<*>;" },
-    { "getLongComparatorWithInt:", "getLongComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x2, NULL, "(I)Lorg/apache/lucene/search/FieldComparator<*>;" },
-    { "getFloatComparatorWithInt:", "getFloatComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x2, NULL, "(I)Lorg/apache/lucene/search/FieldComparator<*>;" },
-    { "getDoubleComparatorWithInt:", "getDoubleComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x2, NULL, "(I)Lorg/apache/lucene/search/FieldComparator<*>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldComparator;", 0x1, 2, 3, 4, 5, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldComparator;", 0x2, 6, 7, -1, 8, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldComparator;", 0x2, 9, 7, -1, 8, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldComparator;", 0x2, 10, 7, -1, 8, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldComparator;", 0x2, 11, 7, -1, 8, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldComparator;", 0x2, 12, 7, -1, 8, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneSearchSortField_Type:withBoolean:withOrgApacheLuceneSearchJoinBitSetProducer:withOrgApacheLuceneSearchJoinBitSetProducer:);
+  methods[1].selector = @selector(initWithNSString:withOrgApacheLuceneSearchSortField_Type:withBoolean:withBoolean:withOrgApacheLuceneSearchJoinBitSetProducer:withOrgApacheLuceneSearchJoinBitSetProducer:);
+  methods[2].selector = @selector(getComparatorWithInt:withInt:);
+  methods[3].selector = @selector(getStringComparatorWithInt:);
+  methods[4].selector = @selector(getIntComparatorWithInt:);
+  methods[5].selector = @selector(getLongComparatorWithInt:);
+  methods[6].selector = @selector(getFloatComparatorWithInt:);
+  methods[7].selector = @selector(getDoubleComparatorWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "order_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "parentFilter_", NULL, 0x12, "Lorg.apache.lucene.search.join.BitSetProducer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "childFilter_", NULL, 0x12, "Lorg.apache.lucene.search.join.BitSetProducer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "order_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "parentFilter_", "LOrgApacheLuceneSearchJoinBitSetProducer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "childFilter_", "LOrgApacheLuceneSearchJoinBitSetProducer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField = { 2, "ToParentBlockJoinSortField", "org.apache.lucene.search.join", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneSearchSortField_Type;ZLOrgApacheLuceneSearchJoinBitSetProducer;LOrgApacheLuceneSearchJoinBitSetProducer;", "LNSString;LOrgApacheLuceneSearchSortField_Type;ZZLOrgApacheLuceneSearchJoinBitSetProducer;LOrgApacheLuceneSearchJoinBitSetProducer;", "getComparator", "II", "LJavaIoIOException;", "(II)Lorg/apache/lucene/search/FieldComparator<*>;", "getStringComparator", "I", "(I)Lorg/apache/lucene/search/FieldComparator<*>;", "getIntComparator", "getLongComparator", "getFloatComparator", "getDoubleComparator" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField = { "ToParentBlockJoinSortField", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x1, 8, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField;
 }
 
@@ -377,28 +364,36 @@ OrgApacheLuceneSearchJoinToParentBlockJoinSortField *create_OrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchFieldComparator *OrgApacheLuceneSearchJoinToParentBlockJoinSortField_getStringComparatorWithInt_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *self, jint numHits) {
-  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(self, numHits, [self getField], self->missingValue_ == JreLoadStatic(OrgApacheLuceneSearchSortField, STRING_LAST));
+  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(self, numHits, [self getField], JreObjectEqualsEquals(self->missingValue_, JreLoadStatic(OrgApacheLuceneSearchSortField, STRING_LAST)));
 }
 
 OrgApacheLuceneSearchFieldComparator *OrgApacheLuceneSearchJoinToParentBlockJoinSortField_getIntComparatorWithInt_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *self, jint numHits) {
-  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(self, numHits, [self getField], (JavaLangInteger *) cast_chk(self->missingValue_, [JavaLangInteger class]));
+  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(self, numHits, [self getField], (JavaLangInteger *) cast_chk(self->missingValue_, [JavaLangInteger class]));
 }
 
 OrgApacheLuceneSearchFieldComparator *OrgApacheLuceneSearchJoinToParentBlockJoinSortField_getLongComparatorWithInt_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *self, jint numHits) {
-  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(self, numHits, [self getField], (JavaLangLong *) cast_chk(self->missingValue_, [JavaLangLong class]));
+  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(self, numHits, [self getField], (JavaLangLong *) cast_chk(self->missingValue_, [JavaLangLong class]));
 }
 
 OrgApacheLuceneSearchFieldComparator *OrgApacheLuceneSearchJoinToParentBlockJoinSortField_getFloatComparatorWithInt_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *self, jint numHits) {
-  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(self, numHits, [self getField], (JavaLangFloat *) cast_chk(self->missingValue_, [JavaLangFloat class]));
+  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(self, numHits, [self getField], (JavaLangFloat *) cast_chk(self->missingValue_, [JavaLangFloat class]));
 }
 
 OrgApacheLuceneSearchFieldComparator *OrgApacheLuceneSearchJoinToParentBlockJoinSortField_getDoubleComparatorWithInt_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *self, jint numHits) {
-  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(self, numHits, [self getField], (JavaLangDouble *) cast_chk(self->missingValue_, [JavaLangDouble class]));
+  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(self, numHits, [self getField], (JavaLangDouble *) cast_chk(self->missingValue_, [JavaLangDouble class]));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortField)
 
-@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1
+@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1
+
+- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
+                                                                    withInt:(jint)numHits
+                                                               withNSString:(NSString *)field
+                                                                withBoolean:(jboolean)sortMissingLast {
+  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(self, outer$, numHits, field, sortMissingLast);
+  return self;
+}
 
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                         withNSString:(NSString *)field {
@@ -412,50 +407,54 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortF
   return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(sortedSet, type, parents, children);
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
-                                                                    withInt:(jint)arg$0
-                                                               withNSString:(NSString *)arg$1
-                                                                withBoolean:(jboolean)arg$2 {
-  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getSortedDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:", "getSortedDocValues", "Lorg.apache.lucene.index.SortedDocValues;", 0x4, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:withInt:withNSString:withBoolean:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedDocValues;", 0x4, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:withInt:withNSString:withBoolean:);
+  methods[1].selector = @selector(getSortedDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.join.ToParentBlockJoinSortField;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinToParentBlockJoinSortField", "getStringComparatorWithInt:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1 = { 2, "", "org.apache.lucene.search.join", "ToParentBlockJoinSortField", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;ILNSString;Z", "getSortedDocValues", "LOrgApacheLuceneIndexLeafReaderContext;LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;", "getStringComparatorWithInt:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1 = { "", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8010, 2, 1, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, jboolean arg$2) {
+void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, jboolean sortMissingLast) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(self, arg$0, arg$1, arg$2);
+  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(self, numHits, field, sortMissingLast);
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, jboolean arg$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_, outer$, arg$0, arg$1, arg$2)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, jboolean sortMissingLast) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_, outer$, numHits, field, sortMissingLast)
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, jboolean arg$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_, outer$, arg$0, arg$1, arg$2)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, jboolean sortMissingLast) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_1, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withBoolean_, outer$, numHits, field, sortMissingLast)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$1)
+@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2
 
-@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2
+- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
+                                                                    withInt:(jint)numHits
+                                                               withNSString:(NSString *)field
+                                                        withJavaLangInteger:(JavaLangInteger *)missingValue {
+  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(self, outer$, numHits, field, missingValue);
+  return self;
+}
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field {
@@ -480,51 +479,56 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortF
   return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(docsWithValue, parents, children);
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
-                                                                    withInt:(jint)arg$0
-                                                               withNSString:(NSString *)arg$1
-                                                        withJavaLangInteger:(JavaLangInteger *)arg$2 {
-  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x4, "Ljava.io.IOException;", NULL },
-    { "getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:withNSString:", "getDocsWithValue", "Lorg.apache.lucene.util.Bits;", 0x4, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:withInt:withNSString:withJavaLangInteger:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x4, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x4, 4, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:withInt:withNSString:withJavaLangInteger:);
+  methods[1].selector = @selector(getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:);
+  methods[2].selector = @selector(getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.join.ToParentBlockJoinSortField;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinToParentBlockJoinSortField", "getIntComparatorWithInt:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2 = { 2, "", "org.apache.lucene.search.join", "ToParentBlockJoinSortField", 0x8008, 3, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;ILNSString;LJavaLangInteger;", "getNumericDocValues", "LOrgApacheLuceneIndexLeafReaderContext;LNSString;", "LJavaIoIOException;", "getDocsWithValue", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;", "getIntComparatorWithInt:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2 = { "", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8010, 3, 1, 5, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2) {
+void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangInteger *missingValue) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchFieldComparator_IntComparator_initWithInt_withNSString_withJavaLangInteger_(self, arg$0, arg$1, arg$2);
+  OrgApacheLuceneSearchFieldComparator_IntComparator_initWithInt_withNSString_withJavaLangInteger_(self, numHits, field, missingValue);
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_, outer$, arg$0, arg$1, arg$2)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangInteger *missingValue) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_, outer$, numHits, field, missingValue)
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_, outer$, arg$0, arg$1, arg$2)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangInteger *missingValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_2, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangInteger_, outer$, numHits, field, missingValue)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$2)
+@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3
 
-@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3
+- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
+                                                                    withInt:(jint)numHits
+                                                               withNSString:(NSString *)field
+                                                           withJavaLangLong:(JavaLangLong *)missingValue {
+  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(self, outer$, numHits, field, missingValue);
+  return self;
+}
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field {
@@ -549,51 +553,56 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortF
   return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(docsWithValue, parents, children);
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
-                                                                    withInt:(jint)arg$0
-                                                               withNSString:(NSString *)arg$1
-                                                           withJavaLangLong:(JavaLangLong *)arg$2 {
-  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x4, "Ljava.io.IOException;", NULL },
-    { "getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:withNSString:", "getDocsWithValue", "Lorg.apache.lucene.util.Bits;", 0x4, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:withInt:withNSString:withJavaLangLong:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x4, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x4, 4, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:withInt:withNSString:withJavaLangLong:);
+  methods[1].selector = @selector(getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:);
+  methods[2].selector = @selector(getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.join.ToParentBlockJoinSortField;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinToParentBlockJoinSortField", "getLongComparatorWithInt:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3 = { 2, "", "org.apache.lucene.search.join", "ToParentBlockJoinSortField", 0x8008, 3, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;ILNSString;LJavaLangLong;", "getNumericDocValues", "LOrgApacheLuceneIndexLeafReaderContext;LNSString;", "LJavaIoIOException;", "getDocsWithValue", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;", "getLongComparatorWithInt:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3 = { "", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8010, 3, 1, 5, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2) {
+void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangLong *missingValue) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchFieldComparator_LongComparator_initWithInt_withNSString_withJavaLangLong_(self, arg$0, arg$1, arg$2);
+  OrgApacheLuceneSearchFieldComparator_LongComparator_initWithInt_withNSString_withJavaLangLong_(self, numHits, field, missingValue);
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_, outer$, arg$0, arg$1, arg$2)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangLong *missingValue) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_, outer$, numHits, field, missingValue)
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_, outer$, arg$0, arg$1, arg$2)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangLong *missingValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_3, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangLong_, outer$, numHits, field, missingValue)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$3)
+@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4
 
-@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4
+- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
+                                                                    withInt:(jint)numHits
+                                                               withNSString:(NSString *)field
+                                                          withJavaLangFloat:(JavaLangFloat *)missingValue {
+  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(self, outer$, numHits, field, missingValue);
+  return self;
+}
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field {
@@ -605,15 +614,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortF
     return OrgApacheLuceneIndexDocValues_emptyNumeric();
   }
   OrgApacheLuceneIndexNumericDocValues *view = OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(sortedNumeric, type, parents, children);
-  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1_initWithOrgApacheLuceneIndexNumericDocValues_(view);
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
-                                                                    withInt:(jint)arg$0
-                                                               withNSString:(NSString *)arg$1
-                                                          withJavaLangFloat:(JavaLangFloat *)arg$2 {
-  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
+  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1_initWithOrgApacheLuceneIndexNumericDocValues_(view);
 }
 
 - (void)dealloc {
@@ -622,82 +623,98 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortF
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x4, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:withInt:withNSString:withJavaLangFloat:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x4, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:withInt:withNSString:withJavaLangFloat:);
+  methods[1].selector = @selector(getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.join.ToParentBlockJoinSortField;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinToParentBlockJoinSortField", "getFloatComparatorWithInt:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4 = { 2, "", "org.apache.lucene.search.join", "ToParentBlockJoinSortField", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;ILNSString;LJavaLangFloat;", "getNumericDocValues", "LOrgApacheLuceneIndexLeafReaderContext;LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;", "getFloatComparatorWithInt:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4 = { "", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8010, 2, 1, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangFloat *arg$2) {
+void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangFloat *missingValue) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchFieldComparator_FloatComparator_initWithInt_withNSString_withJavaLangFloat_(self, arg$0, arg$1, arg$2);
+  OrgApacheLuceneSearchFieldComparator_FloatComparator_initWithInt_withNSString_withJavaLangFloat_(self, numHits, field, missingValue);
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangFloat *arg$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_, outer$, arg$0, arg$1, arg$2)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangFloat *missingValue) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_, outer$, numHits, field, missingValue)
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangFloat *arg$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_, outer$, arg$0, arg$1, arg$2)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangFloat *missingValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangFloat_, outer$, numHits, field, missingValue)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4)
+@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1
 
-@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1
+- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0 {
+  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1_initWithOrgApacheLuceneIndexNumericDocValues_(self, capture$0);
+  return self;
+}
 
 - (jlong)getWithInt:(jint)docID {
   return OrgApacheLuceneUtilNumericUtils_sortableFloatBitsWithInt_((jint) [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(val$view_)) getWithInt:docID]);
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0 {
-  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1_initWithOrgApacheLuceneIndexNumericDocValues_(self, capture$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(val$view_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexNumericDocValues:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexNumericDocValues:);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$view_", NULL, 0x1012, "Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$view_", "LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4", "getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1 = { 2, "", "org.apache.lucene.search.join", "ToParentBlockJoinSortField$", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexNumericDocValues;", "get", "I", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField_4;", "getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1 = { "", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8010, 2, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0) {
+void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0) {
   JreStrongAssign(&self->val$view_, capture$0);
   OrgApacheLuceneIndexNumericDocValues_init(self);
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_4_1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$4_$1)
+@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5
 
-@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5
+- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
+                                                                    withInt:(jint)numHits
+                                                               withNSString:(NSString *)field
+                                                         withJavaLangDouble:(JavaLangDouble *)missingValue {
+  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(self, outer$, numHits, field, missingValue);
+  return self;
+}
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field {
@@ -709,7 +726,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortF
     return OrgApacheLuceneIndexDocValues_emptyNumeric();
   }
   OrgApacheLuceneIndexNumericDocValues *view = OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(sortedNumeric, type, parents, children);
-  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1_initWithOrgApacheLuceneIndexNumericDocValues_(view);
+  return create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1_initWithOrgApacheLuceneIndexNumericDocValues_(view);
 }
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
@@ -723,59 +740,56 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortF
   return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(docsWithValue, parents, children);
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *)outer$
-                                                                    withInt:(jint)arg$0
-                                                               withNSString:(NSString *)arg$1
-                                                         withJavaLangDouble:(JavaLangDouble *)arg$2 {
-  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x4, "Ljava.io.IOException;", NULL },
-    { "getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:withNSString:", "getDocsWithValue", "Lorg.apache.lucene.util.Bits;", 0x4, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:withInt:withNSString:withJavaLangDouble:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x4, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x4, 4, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField:withInt:withNSString:withJavaLangDouble:);
+  methods[1].selector = @selector(getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:);
+  methods[2].selector = @selector(getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.join.ToParentBlockJoinSortField;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinToParentBlockJoinSortField", "getDoubleComparatorWithInt:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5 = { 2, "", "org.apache.lucene.search.join", "ToParentBlockJoinSortField", 0x8008, 3, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;ILNSString;LJavaLangDouble;", "getNumericDocValues", "LOrgApacheLuceneIndexLeafReaderContext;LNSString;", "LJavaIoIOException;", "getDocsWithValue", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField;", "getDoubleComparatorWithInt:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5 = { "", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8010, 3, 1, 5, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangDouble *arg$2) {
+void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5 *self, OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangDouble *missingValue) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchFieldComparator_DoubleComparator_initWithInt_withNSString_withJavaLangDouble_(self, arg$0, arg$1, arg$2);
+  OrgApacheLuceneSearchFieldComparator_DoubleComparator_initWithInt_withNSString_withJavaLangDouble_(self, numHits, field, missingValue);
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangDouble *arg$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_, outer$, arg$0, arg$1, arg$2)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangDouble *missingValue) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_, outer$, numHits, field, missingValue)
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint arg$0, NSString *arg$1, JavaLangDouble *arg$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_, outer$, arg$0, arg$1, arg$2)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *outer$, jint numHits, NSString *field, JavaLangDouble *missingValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5, initWithOrgApacheLuceneSearchJoinToParentBlockJoinSortField_withInt_withNSString_withJavaLangDouble_, outer$, numHits, field, missingValue)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5)
+@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1
 
-@implementation OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1
+- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0 {
+  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1_initWithOrgApacheLuceneIndexNumericDocValues_(self, capture$0);
+  return self;
+}
 
 - (jlong)getWithInt:(jint)docID {
   return OrgApacheLuceneUtilNumericUtils_sortableDoubleBitsWithLong_([((OrgApacheLuceneIndexNumericDocValues *) nil_chk(val$view_)) getWithInt:docID]);
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0 {
-  OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1_initWithOrgApacheLuceneIndexNumericDocValues_(self, capture$0);
-  return self;
 }
 
 - (void)dealloc {
@@ -784,31 +798,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortF
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexNumericDocValues:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexNumericDocValues:);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$view_", NULL, 0x1012, "Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$view_", "LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5", "getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1 = { 2, "", "org.apache.lucene.search.join", "ToParentBlockJoinSortField$", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexNumericDocValues;", "get", "I", "LOrgApacheLuceneSearchJoinToParentBlockJoinSortField_5;", "getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1 = { "", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8010, 2, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0) {
+void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0) {
   JreStrongAssign(&self->val$view_, capture$0);
   OrgApacheLuceneIndexNumericDocValues_init(self);
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1 *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
 }
 
-OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
+OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1 *create_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_5_1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinSortField_$5_$1)

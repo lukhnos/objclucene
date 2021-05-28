@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_
 
@@ -27,12 +33,12 @@
 /*!
  @brief Factory for <code>CodepointCountFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_lngth" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.CodepointCountFilterFactory" min="0" max="1" /&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_lngth" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.CodepointCountFilterFactory" min="0" max="1" /&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
@@ -40,17 +46,15 @@
   jint min_;
   jint max_;
 }
-
-+ (NSString *)MIN_KEY;
-
-+ (NSString *)MAX_KEY;
+@property (readonly, copy, class) NSString *MIN_KEY NS_SWIFT_NAME(MIN_KEY);
+@property (readonly, copy, class) NSString *MAX_KEY NS_SWIFT_NAME(MAX_KEY);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new CodepointCountFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -58,12 +62,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_get_MIN_KEY();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_get_MIN_KEY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MIN_KEY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory, MIN_KEY, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_get_MAX_KEY();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_get_MAX_KEY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MAX_KEY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory, MAX_KEY, NSString *)
@@ -78,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory")

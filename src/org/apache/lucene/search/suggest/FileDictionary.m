@@ -25,6 +25,10 @@
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/FileDictionary must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestFileDictionary () {
  @public
   JavaIoBufferedReader *in_;
@@ -55,7 +59,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFileDictionary, fieldDelimiter_,
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFileDictionary_FileIterator, this$0_, OrgApacheLuceneSearchSuggestFileDictionary *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFileDictionary_FileIterator, spare_, OrgApacheLuceneUtilBytesRefBuilder *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFileDictionary_FileIterator, curPayload_, OrgApacheLuceneUtilBytesRefBuilder *)
 
@@ -102,7 +105,7 @@ NSString *OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER = @
     return create_OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLuceneSearchSuggestFileDictionary_(self);
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -114,22 +117,31 @@ NSString *OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER = @
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaIoInputStream:", "FileDictionary", NULL, 0x1, NULL, NULL },
-    { "initWithJavaIoReader:", "FileDictionary", NULL, 0x1, NULL, NULL },
-    { "initWithJavaIoReader:withNSString:", "FileDictionary", NULL, 0x1, NULL, NULL },
-    { "initWithJavaIoInputStream:withNSString:", "FileDictionary", NULL, 0x1, NULL, NULL },
-    { "getEntryIterator", NULL, "Lorg.apache.lucene.search.suggest.InputIterator;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestInputIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaIoInputStream:);
+  methods[1].selector = @selector(initWithJavaIoReader:);
+  methods[2].selector = @selector(initWithJavaIoReader:withNSString:);
+  methods[3].selector = @selector(initWithJavaIoInputStream:withNSString:);
+  methods[4].selector = @selector(getEntryIterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_FIELD_DELIMITER", "DEFAULT_FIELD_DELIMITER", 0x19, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER, NULL, .constantValue.asLong = 0 },
-    { "in_", NULL, 0x2, "Ljava.io.BufferedReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "line_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "done_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldDelimiter_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_FIELD_DELIMITER", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "in_", "LJavaIoBufferedReader;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "line_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "done_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldDelimiter_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.FileDictionary$FileIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFileDictionary = { 2, "FileDictionary", "org.apache.lucene.search.suggest", NULL, 0x1, 5, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoInputStream;", "LJavaIoReader;", "LJavaIoReader;LNSString;", "LJavaIoInputStream;LNSString;", &OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER, "LOrgApacheLuceneSearchSuggestFileDictionary_FileIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFileDictionary = { "FileDictionary", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x1, 5, 5, -1, 5, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestFileDictionary;
 }
 
@@ -212,7 +224,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFileDictionary)
   }
   JreStrongAssign(&this$0_->line_, [((JavaIoBufferedReader *) nil_chk(this$0_->in_)) readLine]);
   if (this$0_->line_ != nil) {
-    IOSObjectArray *fields = [this$0_->line_ split:this$0_->fieldDelimiter_];
+    IOSObjectArray *fields = [this$0_->line_ java_split:this$0_->fieldDelimiter_];
     if (((IOSObjectArray *) nil_chk(fields))->size_ > 3) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"More than 3 fields in one line");
     }
@@ -274,25 +286,38 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFileDictionary)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestFileDictionary:", "FileIterator", NULL, 0x2, NULL, NULL },
-    { "weight", NULL, "J", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "readWeightWithNSString:", "readWeight", "V", 0x2, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
-    { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestFileDictionary:);
+  methods[1].selector = @selector(weight);
+  methods[2].selector = @selector(next);
+  methods[3].selector = @selector(payload);
+  methods[4].selector = @selector(hasPayloads);
+  methods[5].selector = @selector(readWeightWithNSString:);
+  methods[6].selector = @selector(contexts);
+  methods[7].selector = @selector(hasContexts);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.suggest.FileDictionary;", NULL, NULL, .constantValue.asLong = 0 },
-    { "curWeight_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "spare_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "curPayload_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "isFirstLine_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasPayloads_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchSuggestFileDictionary;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "curWeight_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "spare_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "curPayload_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "isFirstLine_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "hasPayloads_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFileDictionary_FileIterator = { 2, "FileIterator", "org.apache.lucene.search.suggest", "FileDictionary", 0x10, 8, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestFileDictionary;", "LJavaIoIOException;", "readWeight", "LNSString;", "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFileDictionary_FileIterator = { "FileIterator", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x10, 8, 6, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestFileDictionary_FileIterator;
 }
 
@@ -311,7 +336,7 @@ void OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLu
     OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ outer$->in_ } count:1 type:JavaIoCloseable_class_()]);
   }
   else {
-    IOSObjectArray *fields = [outer$->line_ split:outer$->fieldDelimiter_];
+    IOSObjectArray *fields = [outer$->line_ java_split:outer$->fieldDelimiter_];
     if (((IOSObjectArray *) nil_chk(fields))->size_ > 3) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"More than 3 fields in one line");
     }

@@ -13,6 +13,10 @@
 #include "org/apache/lucene/util/IntsRefBuilder.h"
 #include "org/apache/lucene/util/UnicodeUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/IntsRefBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilIntsRefBuilder () {
  @public
   OrgApacheLuceneUtilIntsRef *ref_;
@@ -83,7 +87,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneUtilIntsRef *)get {
-  JreAssert((((OrgApacheLuceneUtilIntsRef *) nil_chk(ref_))->offset_ == 0), (@"Modifying the offset of the returned ref is illegal"));
+  JreAssert(((OrgApacheLuceneUtilIntsRef *) nil_chk(ref_))->offset_ == 0, @"Modifying the offset of the returned ref is illegal");
   return ref_;
 }
 
@@ -105,28 +109,49 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "IntsRefBuilder", NULL, 0x1, NULL, NULL },
-    { "ints", NULL, "[I", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "setLengthWithInt:", "setLength", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "intAtWithInt:", "intAt", "I", 0x1, NULL, NULL },
-    { "setIntAtWithInt:withInt:", "setIntAt", "V", 0x1, NULL, NULL },
-    { "appendWithInt:", "append", "V", 0x1, NULL, NULL },
-    { "growWithInt:", "grow", "V", 0x1, NULL, NULL },
-    { "copyIntsWithIntArray:withInt:withInt:", "copyInts", "V", 0x1, NULL, NULL },
-    { "copyIntsWithOrgApacheLuceneUtilIntsRef:", "copyInts", "V", 0x1, NULL, NULL },
-    { "copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:", "copyUTF8Bytes", "V", 0x1, NULL, NULL },
-    { "get", NULL, "Lorg.apache.lucene.util.IntsRef;", 0x1, NULL, NULL },
-    { "toIntsRef", NULL, "Lorg.apache.lucene.util.IntsRef;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 14, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(ints);
+  methods[2].selector = @selector(length);
+  methods[3].selector = @selector(setLengthWithInt:);
+  methods[4].selector = @selector(clear);
+  methods[5].selector = @selector(intAtWithInt:);
+  methods[6].selector = @selector(setIntAtWithInt:withInt:);
+  methods[7].selector = @selector(appendWithInt:);
+  methods[8].selector = @selector(growWithInt:);
+  methods[9].selector = @selector(copyIntsWithIntArray:withInt:withInt:);
+  methods[10].selector = @selector(copyIntsWithOrgApacheLuceneUtilIntsRef:);
+  methods[11].selector = @selector(copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:);
+  methods[12].selector = @selector(get);
+  methods[13].selector = @selector(toIntsRef);
+  methods[14].selector = @selector(isEqual:);
+  methods[15].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ref_", NULL, 0x12, "Lorg.apache.lucene.util.IntsRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "ref_", "LOrgApacheLuceneUtilIntsRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntsRefBuilder = { 2, "IntsRefBuilder", "org.apache.lucene.util", NULL, 0x1, 16, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setLength", "I", "intAt", "setIntAt", "II", "append", "grow", "copyInts", "[III", "LOrgApacheLuceneUtilIntsRef;", "copyUTF8Bytes", "LOrgApacheLuceneUtilBytesRef;", "equals", "LNSObject;", "hashCode" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntsRefBuilder = { "IntsRefBuilder", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 16, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilIntsRefBuilder;
 }
 

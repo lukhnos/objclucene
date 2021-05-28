@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsNormsConsumer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsNormsConsumer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsNormsConsumer || defined(INCLUDE_OrgApacheLuceneCodecsNormsConsumer))
 #define OrgApacheLuceneCodecsNormsConsumer_
 
@@ -28,19 +34,19 @@
 /*!
  @brief Abstract API that consumes normalization values.
  Concrete implementations of this
- actually do "something" with the norms (write it into
- the index in a specific format).
+  actually do "something" with the norms (write it into
+  the index in a specific format). 
  <p>
- The lifecycle is:
+  The lifecycle is: 
  <ol>
- <li>NormsConsumer is created by 
- <code>NormsFormat.normsConsumer(SegmentWriteState)</code>.
- <li><code>addNormsField</code> is called for each field with
- normalization values. The API is a "pull" rather
- than "push", and the implementation is free to iterate over the 
- values multiple times (<code>Iterable.iterator()</code>).
- <li>After all fields are added, the consumer is <code>close</code>d.
- </ol>
+    <li>NormsConsumer is created by 
+        <code>NormsFormat.normsConsumer(SegmentWriteState)</code>.
+    <li><code>addNormsField</code> is called for each field with
+        normalization values. The API is a "pull" rather
+        than "push", and the implementation is free to iterate over the 
+        values multiple times (<code>Iterable.iterator()</code>).
+    <li>After all fields are added, the consumer is <code>close</code>d.
+  </ol>
  */
 @interface OrgApacheLuceneCodecsNormsConsumer : NSObject < JavaIoCloseable >
 
@@ -50,27 +56,26 @@
  @brief Writes normalization values for a field.
  @param field field information
  @param values Iterable of numeric values (one for each document).
- @throws IOException if an I/O error occurred.
+ @throw IOExceptionif an I/O error occurred.
  */
 - (void)addNormsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                   withJavaLangIterable:(id<JavaLangIterable>)values;
 
 /*!
  @brief Merges in the fields from the readers in 
- <code>mergeState</code>.
- The default implementation 
- calls <code>mergeNormsField</code> for each field,
- filling segments with missing norms for the field with zeros. 
+   <code>mergeState</code>.The default implementation 
+   calls <code>mergeNormsField</code> for each field,
+   filling segments with missing norms for the field with zeros.
  Implementations can override this method 
- for more sophisticated merging (bulk-byte copying, etc). 
+   for more sophisticated merging (bulk-byte copying, etc).
  */
 - (void)mergeWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
 /*!
  @brief Merges the norms from <code>toMerge</code>.
  <p>
- The default implementation calls <code>addNormsField</code>, passing
- an Iterable that merges and filters deleted documents on the fly.
+  The default implementation calls <code>addNormsField</code>, passing
+  an Iterable that merges and filters deleted documents on the fly.
  */
 - (void)mergeNormsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                       withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
@@ -81,9 +86,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -95,4 +100,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsNormsConsumer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsNormsConsumer")

@@ -11,6 +11,10 @@
 #include "org/apache/lucene/analysis/miscellaneous/LimitTokenCountAnalyzer.h"
 #include "org/apache/lucene/analysis/miscellaneous/LimitTokenCountFilter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/LimitTokenCountAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer () {
  @public
   OrgApacheLuceneAnalysisAnalyzer *delegate_;
@@ -56,19 +60,29 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer,
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withInt:", "LimitTokenCountAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withInt:withBoolean:", "LimitTokenCountAnalyzer", NULL, 0x1, NULL, NULL },
-    { "getWrappedAnalyzerWithNSString:", "getWrappedAnalyzer", "Lorg.apache.lucene.analysis.Analyzer;", 0x4, NULL, NULL },
-    { "wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:", "wrapComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withInt:withBoolean:);
+  methods[2].selector = @selector(getWrappedAnalyzerWithNSString:);
+  methods[3].selector = @selector(wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:);
+  methods[4].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "delegate_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTokenCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "consumeAllTokens_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "delegate_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxTokenCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "consumeAllTokens_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer = { 2, "LimitTokenCountAnalyzer", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;I", "LOrgApacheLuceneAnalysisAnalyzer;IZ", "getWrappedAnalyzer", "LNSString;", "wrapComponents", "LNSString;LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer = { "LimitTokenCountAnalyzer", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 5, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer;
 }
 

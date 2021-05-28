@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator || defined(INCLUDE_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator))
 #define OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_
 
@@ -37,13 +43,17 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)termsList;
+- (instancetype __nonnull)initPackagePrivateWithJavaUtilList:(id<JavaUtilList>)termsList;
 
 - (jlong)delGen;
 
 - (NSString *)field;
 
 - (OrgApacheLuceneUtilBytesRef *)next;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivate NS_UNAVAILABLE;
 
 @end
 
@@ -53,11 +63,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator, termQueu
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator, fieldQueue_, OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator, field_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *self, id<JavaUtilList> termsList);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initPackagePrivateWithJavaUtilList_(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *self, id<JavaUtilList> termsList);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *new_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(id<JavaUtilList> termsList) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *new_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initPackagePrivateWithJavaUtilList_(id<JavaUtilList> termsList) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *create_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(id<JavaUtilList> termsList);
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *create_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initPackagePrivateWithJavaUtilList_(id<JavaUtilList> termsList);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator)
 
@@ -74,14 +84,30 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator)
 
 @interface OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue : OrgApacheLuceneUtilPriorityQueue
 
+#pragma mark Public
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)addWithId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)arg0;
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)insertWithOverflowWithId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)arg0;
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)pop;
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)top;
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)updateTop;
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)updateTopWithId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)arg0;
+
 #pragma mark Protected
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)getSentinelObject;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)a
                     withId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)b;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
 
 @end
 
@@ -108,14 +134,30 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_Te
 
 @interface OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue : OrgApacheLuceneUtilPriorityQueue
 
+#pragma mark Public
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)addWithId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)arg0;
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)insertWithOverflowWithId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)arg0;
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)pop;
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)top;
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)updateTop;
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)updateTopWithId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)arg0;
+
 #pragma mark Protected
+
+- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)getSentinelObject;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)a
                     withId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)b;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
 
 @end
 
@@ -131,4 +173,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_Fi
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator")

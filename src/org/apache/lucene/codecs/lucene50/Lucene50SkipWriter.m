@@ -3,14 +3,16 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/lucene50/Lucene50SkipWriter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/codecs/MultiLevelSkipListWriter.h"
 #include "org/apache/lucene/codecs/lucene50/Lucene50SkipWriter.h"
 #include "org/apache/lucene/store/IndexOutput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50SkipWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsLucene50Lucene50SkipWriter () {
  @public
@@ -47,13 +49,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter, payOut_, Or
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50SkipWriter
 
-- (instancetype)initWithInt:(jint)maxSkipLevels
-                    withInt:(jint)blockSize
-                    withInt:(jint)docCount
-withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)docOut
-withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)posOut
-withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)payOut {
-  OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(self, maxSkipLevels, blockSize, docCount, docOut, posOut, payOut);
+- (instancetype)initPackagePrivateWithInt:(jint)maxSkipLevels
+                                  withInt:(jint)blockSize
+                                  withInt:(jint)docCount
+      withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)docOut
+      withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)posOut
+      withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)payOut {
+  OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initPackagePrivateWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(self, maxSkipLevels, blockSize, docCount, docOut, posOut, payOut);
   return self;
 }
 
@@ -144,44 +146,55 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)skipBuffe
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withInt:withOrgApacheLuceneStoreIndexOutput:withOrgApacheLuceneStoreIndexOutput:withOrgApacheLuceneStoreIndexOutput:", "Lucene50SkipWriter", NULL, 0x1, NULL, NULL },
-    { "setFieldWithBoolean:withBoolean:withBoolean:", "setField", "V", 0x1, NULL, NULL },
-    { "resetSkip", NULL, "V", 0x1, NULL, NULL },
-    { "initSkip", NULL, "V", 0x1, NULL, NULL },
-    { "bufferSkipWithInt:withInt:withLong:withLong:withInt:withInt:", "bufferSkip", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeSkipDataWithInt:withOrgApacheLuceneStoreIndexOutput:", "writeSkipData", "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "V", 0x4, 6, 7, 5, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:withInt:withInt:withOrgApacheLuceneStoreIndexOutput:withOrgApacheLuceneStoreIndexOutput:withOrgApacheLuceneStoreIndexOutput:);
+  methods[1].selector = @selector(setFieldWithBoolean:withBoolean:withBoolean:);
+  methods[2].selector = @selector(resetSkip);
+  methods[3].selector = @selector(initSkip);
+  methods[4].selector = @selector(bufferSkipWithInt:withInt:withLong:withLong:withInt:withInt:);
+  methods[5].selector = @selector(writeSkipDataWithInt:withOrgApacheLuceneStoreIndexOutput:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "lastSkipDoc_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastSkipDocPointer_", NULL, 0x2, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastSkipPosPointer_", NULL, 0x2, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastSkipPayPointer_", NULL, 0x2, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPayloadByteUpto_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docOut_", NULL, 0x12, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posOut_", NULL, 0x12, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payOut_", NULL, 0x12, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "curDoc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curDocPointer_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "curPosPointer_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "curPayPointer_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "curPosBufferUpto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curPayloadByteUpto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldHasPositions_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldHasOffsets_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldHasPayloads_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "initialized_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastDocFP_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPosFP_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPayFP_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "lastSkipDoc_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastSkipDocPointer_", "[J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastSkipPosPointer_", "[J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastSkipPayPointer_", "[J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastPayloadByteUpto_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "docOut_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posOut_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payOut_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "curDoc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curDocPointer_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curPosPointer_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curPayPointer_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curPosBufferUpto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curPayloadByteUpto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldHasPositions_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldHasOffsets_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldHasPayloads_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "initialized_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastDocFP_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastPosFP_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastPayFP_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50SkipWriter = { 2, "Lucene50SkipWriter", "org.apache.lucene.codecs.lucene50", NULL, 0x10, 6, methods, 21, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IIILOrgApacheLuceneStoreIndexOutput;LOrgApacheLuceneStoreIndexOutput;LOrgApacheLuceneStoreIndexOutput;", "setField", "ZZZ", "bufferSkip", "IIJJII", "LJavaIoIOException;", "writeSkipData", "ILOrgApacheLuceneStoreIndexOutput;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50SkipWriter = { "Lucene50SkipWriter", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x10, 6, 21, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter;
 }
 
 @end
 
-void OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *self, jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) {
+void OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initPackagePrivateWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *self, jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) {
   OrgApacheLuceneCodecsMultiLevelSkipListWriter_initWithInt_withInt_withInt_withInt_(self, blockSize, 8, maxSkipLevels, docCount);
   JreStrongAssign(&self->docOut_, docOut);
   JreStrongAssign(&self->posOut_, posOut);
@@ -197,12 +210,12 @@ void OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt
   }
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *new_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter, initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_, maxSkipLevels, blockSize, docCount, docOut, posOut, payOut)
+OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *new_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initPackagePrivateWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter, initPackagePrivateWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_, maxSkipLevels, blockSize, docCount, docOut, posOut, payOut)
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *create_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter, initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_, maxSkipLevels, blockSize, docCount, docOut, posOut, payOut)
+OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *create_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initPackagePrivateWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter, initPackagePrivateWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_, maxSkipLevels, blockSize, docCount, docOut, posOut, payOut)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter)

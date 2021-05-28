@@ -3,9 +3,14 @@
 //  source: ./core/src/java/org/apache/lucene/index/ReaderSlice.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/index/ReaderSlice.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/ReaderSlice must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexReaderSlice)
 
@@ -28,26 +33,33 @@ IOSObjectArray *OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY;
   return JreStrcat("$I$I$I", @"slice start=", start_, @" length=", length_, @" readerIndex=", readerIndex_);
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:withInt:);
+  methods[1].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_ARRAY", "[LOrgApacheLuceneIndexReaderSlice;", .constantValue.asLong = 0, 0x19, -1, 2, -1, -1 },
+    { "start_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "readerIndex_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "III", "toString", &OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexReaderSlice = { "ReaderSlice", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 2, 4, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexReaderSlice;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexReaderSlice class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexReaderSlice_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexReaderSlice)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withInt:", "ReaderSlice", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_ARRAY", "EMPTY_ARRAY", 0x19, "[Lorg.apache.lucene.index.ReaderSlice;", &OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY, NULL, .constantValue.asLong = 0 },
-    { "start_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "readerIndex_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexReaderSlice = { 2, "ReaderSlice", "org.apache.lucene.index", NULL, 0x11, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexReaderSlice;
 }
 
 @end

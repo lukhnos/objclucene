@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode : NSObject
 
 @end
@@ -13,25 +17,46 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x401, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.List;", 0x401, NULL, "()Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
-    { "isLeaf", NULL, "Z", 0x401, NULL, NULL },
-    { "containsTagWithNSString:", "containsTag", "Z", 0x401, NULL, NULL },
-    { "getTagWithNSString:", "getTag", "Ljava.lang.Object;", 0x401, NULL, NULL },
-    { "getParent", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x401, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x401, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "add", "V", 0x401, NULL, NULL },
-    { "addWithJavaUtilList:", "add", "V", 0x401, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)V" },
-    { "setWithJavaUtilList:", "set", "V", 0x401, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)V" },
-    { "setTagWithNSString:withId:", "setTag", "V", 0x401, NULL, NULL },
-    { "unsetTagWithNSString:", "unsetTag", "V", 0x401, NULL, NULL },
-    { "getTagMap", NULL, "Ljava.util.Map;", 0x401, NULL, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;" },
-    { "removeFromParent", NULL, "V", 0x401, NULL, NULL },
-    { "removeChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "removeChildren", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LJavaLangCharSequence;", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 2, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x401, -1, -1, -1, 3, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 6, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x401, -1, -1, 7, -1, -1, -1 },
+    { NULL, "V", 0x401, 8, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 8, 10, -1, 11, -1, -1 },
+    { NULL, "V", 0x401, 12, 10, -1, 11, -1, -1 },
+    { NULL, "V", 0x401, 13, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 15, 5, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x401, -1, -1, -1, 16, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 17, 9, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode = { 2, "QueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 16, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[1].selector = @selector(description);
+  methods[2].selector = @selector(getChildren);
+  methods[3].selector = @selector(isLeaf);
+  methods[4].selector = @selector(containsTagWithNSString:);
+  methods[5].selector = @selector(getTagWithNSString:);
+  methods[6].selector = @selector(getParent);
+  methods[7].selector = @selector(cloneTree);
+  methods[8].selector = @selector(addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[9].selector = @selector(addWithJavaUtilList:);
+  methods[10].selector = @selector(setWithJavaUtilList:);
+  methods[11].selector = @selector(setTagWithNSString:withId:);
+  methods[12].selector = @selector(unsetTagWithNSString:);
+  methods[13].selector = @selector(getTagMap);
+  methods[14].selector = @selector(removeFromParent);
+  methods[15].selector = @selector(removeChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "toQueryString", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;", "toString", "()Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;", "containsTag", "LNSString;", "getTag", "LJavaLangCloneNotSupportedException;", "add", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)V", "set", "setTag", "LNSString;LNSObject;", "unsetTag", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "removeChildren" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode = { "QueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, NULL, 7, 0x609, 16, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 }
 

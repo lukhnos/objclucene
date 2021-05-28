@@ -13,10 +13,15 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSegmentCommitInfo
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSegmentCommitInfo_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentCommitInfo || defined(INCLUDE_OrgApacheLuceneIndexSegmentCommitInfo))
 #define OrgApacheLuceneIndexSegmentCommitInfo_
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexSegmentInfo;
 @class OrgApacheLuceneStoreDirectory;
 @protocol JavaUtilCollection;
@@ -25,8 +30,7 @@
 
 /*!
  @brief Embeds a [read-only] SegmentInfo and adds per-commit
- fields.
-  
+   fields.
  */
 @interface OrgApacheLuceneIndexSegmentCommitInfo : NSObject {
  @public
@@ -40,24 +44,20 @@
 
 /*!
  @brief Sole constructor.
- @param info
- <code>SegmentInfo</code> that we wrap
- @param delCount
- number of deleted documents in this segment
- @param delGen
- deletion generation number (used to name deletion files)
- @param fieldInfosGen
- FieldInfos generation number (used to name field-infos files)
- @param docValuesGen
- DocValues generation number (used to name doc-values updates files)
+ @param info<code>SegmentInfo</code>
+   that we wrap
+ @param delCount number of deleted documents in this segment
+ @param delGen deletion generation number (used to name deletion files)
+ @param fieldInfosGen FieldInfos generation number (used to name field-infos files)
+ @param docValuesGen DocValues generation number (used to name doc-values updates files)
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
-                                                withInt:(jint)delCount
-                                               withLong:(jlong)delGen
-                                               withLong:(jlong)fieldInfosGen
-                                               withLong:(jlong)docValuesGen;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
+                                                          withInt:(jint)delCount
+                                                         withLong:(jlong)delGen
+                                                         withLong:(jlong)fieldInfosGen
+                                                         withLong:(jlong)docValuesGen;
 
-- (OrgApacheLuceneIndexSegmentCommitInfo *)clone;
+- (OrgApacheLuceneIndexSegmentCommitInfo *)java_clone;
 
 /*!
  @brief Returns all files in use by this segment.
@@ -71,13 +71,13 @@
 
 /*!
  @brief Returns generation number of the live docs file 
- or -1 if there are no deletes yet.
+  or -1 if there are no deletes yet.
  */
 - (jlong)getDelGen;
 
 /*!
  @brief Returns the generation number of the DocValues file or -1 if there are no
- doc-values updates yet.
+  doc-values updates yet.
  */
 - (jlong)getDocValuesGen;
 
@@ -93,13 +93,13 @@
 
 /*!
  @brief Returns the generation number of the field infos file or -1 if there are no
- field updates yet.
+  field updates yet.
  */
 - (jlong)getFieldInfosGen;
 
 /*!
  @brief Returns the next available generation number
- of the live docs file.
+  of the live docs file.
  */
 - (jlong)getNextDelGen;
 
@@ -115,7 +115,7 @@
 
 /*!
  @brief Returns true if there are any deletions for the 
- segment at this commit.
+  segment at this commit.
  */
 - (jboolean)hasDeletions;
 
@@ -125,8 +125,7 @@
 - (jboolean)hasFieldUpdates;
 
 /*!
- @brief Sets the DocValues updates file names, per field number.
- Does not deep clone the map. 
+ @brief Sets the DocValues updates file names, per field number.Does not deep clone the map.
  */
 - (void)setDocValuesUpdatesFilesWithJavaUtilMap:(id<JavaUtilMap>)dvUpdatesFiles;
 
@@ -136,14 +135,13 @@
 - (void)setFieldInfosFilesWithJavaUtilSet:(id<JavaUtilSet>)fieldInfosFiles;
 
 /*!
- @brief Sets the updates file names per generation.
- Does not deep clone the map.
+ @brief Sets the updates file names per generation.Does not deep clone the map.
  */
 - (void)setGenUpdatesFilesWithJavaUtilMap:(id<JavaUtilMap>)genUpdatesFiles;
 
 /*!
  @brief Returns total size in bytes of all files for this
- segment.
+   segment.
  */
 - (jlong)sizeInBytes;
 
@@ -179,20 +177,20 @@
 
 /*!
  @brief Called if there was an exception while writing
- deletes, so that we don't try to write to the same
- file more than once.
+   deletes, so that we don't try to write to the same
+   file more than once.
  */
 - (void)advanceNextWriteDelGen;
 
 /*!
  @brief Called if there was an exception while writing a new generation of
- DocValues, so that we don't try to write to the same file more than once.
+  DocValues, so that we don't try to write to the same file more than once.
  */
 - (void)advanceNextWriteDocValuesGen;
 
 /*!
  @brief Called if there was an exception while writing a new generation of
- FieldInfos, so that we don't try to write to the same file more than once.
+  FieldInfos, so that we don't try to write to the same file more than once.
  */
 - (void)advanceNextWriteFieldInfosGen;
 
@@ -232,6 +230,10 @@
  */
 - (void)setNextWriteFieldInfosGenWithLong:(jlong)v;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSegmentCommitInfo)
@@ -248,4 +250,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentCommitInfo)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentCommitInfo")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentLazyDocument
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentLazyDocument_) && (INCLUDE_ALL_OrgApacheLuceneDocumentLazyDocument || defined(INCLUDE_OrgApacheLuceneDocumentLazyDocument))
 #define OrgApacheLuceneDocumentLazyDocument_
 
@@ -23,31 +29,30 @@
 
 /*!
  @brief Defers actually loading a field's value until you ask
- for it.
- You must not use the returned Field instances
- after the provided reader has been closed. 
+   for it.You must not use the returned Field instances
+   after the provided reader has been closed.
  - seealso: #getField
  */
 @interface OrgApacheLuceneDocumentLazyDocument : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                withInt:(jint)docID;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                                          withInt:(jint)docID;
 
 /*!
  @brief Creates an IndexableField whose value will be lazy loaded if and 
- when it is used.
+  when it is used.
  <p>
- <b>NOTE:</b> This method must be called once for each value of the field 
- name specified in sequence that the values exist.  This method may not be 
- used to generate multiple, lazy, IndexableField instances refering to 
- the same underlying IndexableField instance.
+  <b>NOTE:</b> This method must be called once for each value of the field 
+  name specified in sequence that the values exist.  This method may not be 
+  used to generate multiple, lazy, IndexableField instances refering to 
+  the same underlying IndexableField instance. 
  </p>
- <p>
- The lazy loading of field values from all instances of IndexableField 
- objects returned by this method are all backed by a single Document 
- per LazyDocument instance.
+  <p>
+  The lazy loading of field values from all instances of IndexableField 
+  objects returned by this method are all backed by a single Document 
+  per LazyDocument instance. 
  </p>
  */
 - (id<OrgApacheLuceneIndexIndexableField>)getFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
@@ -56,9 +61,12 @@
 
 /*!
  @brief non-private for test only access
-  
  */
 - (OrgApacheLuceneDocumentDocument *)getDocument;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -88,7 +96,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentLazyDocument)
 @protocol OrgApacheLuceneIndexIndexableFieldType;
 
 /*!
-  
  */
 @interface OrgApacheLuceneDocumentLazyDocument_LazyField : NSObject < OrgApacheLuceneIndexIndexableField > {
  @public
@@ -105,7 +112,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentLazyDocument)
 
 /*!
  @brief non-private for test only access
-  
  */
 - (jboolean)hasBeenLoaded;
 
@@ -120,6 +126,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentLazyDocument)
 - (OrgApacheLuceneAnalysisTokenStream *)tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)reuse;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentLazyDocument_LazyField)
@@ -130,4 +140,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentLazyDocument_LazyField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentLazyDocument")

@@ -3,9 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/util/ElisionFilterFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -16,6 +14,10 @@
 #include "org/apache/lucene/analysis/util/ElisionFilterFactory.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/ElisionFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisUtilElisionFilterFactory () {
  @public
@@ -60,18 +62,27 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilElisionFilterFactory, articles_, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ElisionFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.util.ElisionFilter;", 0x1, NULL, NULL },
-    { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilElisionFilter;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(informWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[2].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[3].selector = @selector(getMultiTermComponent);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "articlesFile_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "articles_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
+    { "articlesFile_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "ignoreCase_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "articles_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilElisionFilterFactory = { 2, "ElisionFilterFactory", "org.apache.lucene.analysis.util", NULL, 0x1, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "inform", "LOrgApacheLuceneAnalysisUtilResourceLoader;", "LJavaIoIOException;", "create", "LOrgApacheLuceneAnalysisTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilElisionFilterFactory = { "ElisionFilterFactory", "org.apache.lucene.analysis.util", ptrTable, methods, fields, 7, 0x1, 4, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisUtilElisionFilterFactory;
 }
 

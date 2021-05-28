@@ -3,15 +3,17 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/BoostingQueryBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queries/BoostingQuery.h"
 #include "org/apache/lucene/queryparser/xml/DOMUtils.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 #include "org/apache/lucene/queryparser/xml/builders/BoostingQueryBuilder.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/w3c/dom/Element.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/BoostingQueryBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder () {
  @public
@@ -22,9 +24,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder, factory_, id<OrgApacheLuceneQueryparserXmlQueryBuilder>)
 
-inline jfloat OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_get_DEFAULT_BOOST();
+inline jfloat OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_get_DEFAULT_BOOST(void);
 inline jfloat OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_set_DEFAULT_BOOST(jfloat value);
-inline jfloat *OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_getRef_DEFAULT_BOOST();
+inline jfloat *OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_getRef_DEFAULT_BOOST(void);
 static jfloat OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_DEFAULT_BOOST = 0.01f;
 J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder, DEFAULT_BOOST, jfloat)
 
@@ -38,11 +40,11 @@ J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneQueryparserXmlBuildersBoostingQuery
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   id<OrgW3cDomElement> mainQueryElem = OrgApacheLuceneQueryparserXmlDOMUtils_getChildByTagOrFailWithOrgW3cDomElement_withNSString_(e, @"Query");
   mainQueryElem = OrgApacheLuceneQueryparserXmlDOMUtils_getFirstChildOrFailWithOrgW3cDomElement_(mainQueryElem);
-  OrgApacheLuceneSearchQuery *mainQuery = [((id<OrgApacheLuceneQueryparserXmlQueryBuilder>) nil_chk(factory_)) getQueryWithOrgW3cDomElement:mainQueryElem];
+  OrgApacheLuceneSearchQuery *mainQuery = JreRetainedLocalValue([((id<OrgApacheLuceneQueryparserXmlQueryBuilder>) nil_chk(factory_)) getQueryWithOrgW3cDomElement:mainQueryElem]);
   id<OrgW3cDomElement> boostQueryElem = OrgApacheLuceneQueryparserXmlDOMUtils_getChildByTagOrFailWithOrgW3cDomElement_withNSString_(e, @"BoostQuery");
   jfloat boost = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(boostQueryElem, @"boost", OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_DEFAULT_BOOST);
   boostQueryElem = OrgApacheLuceneQueryparserXmlDOMUtils_getFirstChildOrFailWithOrgW3cDomElement_(boostQueryElem);
-  OrgApacheLuceneSearchQuery *boostQuery = [factory_ getQueryWithOrgW3cDomElement:boostQueryElem];
+  OrgApacheLuceneSearchQuery *boostQuery = JreRetainedLocalValue([factory_ getQueryWithOrgW3cDomElement:boostQueryElem]);
   OrgApacheLuceneQueriesBoostingQuery *bq = create_OrgApacheLuceneQueriesBoostingQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withFloat_(mainQuery, boostQuery, boost);
   [bq setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
   return bq;
@@ -54,15 +56,22 @@ J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneQueryparserXmlBuildersBoostingQuery
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserXmlQueryBuilder:", "BoostingQueryBuilder", NULL, 0x1, NULL, NULL },
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserXmlQueryBuilder:);
+  methods[1].selector = @selector(getQueryWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_BOOST", "DEFAULT_BOOST", 0xa, "F", &OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_DEFAULT_BOOST, NULL, .constantValue.asLong = 0 },
-    { "factory_", NULL, 0x12, "Lorg.apache.lucene.queryparser.xml.QueryBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_BOOST", "F", .constantValue.asLong = 0, 0xa, -1, 4, -1, -1 },
+    { "factory_", "LOrgApacheLuceneQueryparserXmlQueryBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder = { 2, "BoostingQueryBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserXmlQueryBuilder;", "getQuery", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;", &OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_DEFAULT_BOOST };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder = { "BoostingQueryBuilder", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x1, 2, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder;
 }
 

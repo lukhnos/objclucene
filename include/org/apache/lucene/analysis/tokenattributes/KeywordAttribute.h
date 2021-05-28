@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute))
 #define OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_
 
@@ -21,29 +27,29 @@
 #include "org/apache/lucene/util/Attribute.h"
 
 /*!
- @brief This attribute can be used to mark a token as a keyword.
- Keyword aware
+ @brief This attribute can be used to mark a token as a keyword.Keyword aware 
  <code>TokenStream</code>s can decide to modify a token based on the return value
- of <code>isKeyword()</code> if the token is modified. Stemming filters for
- instance can use this attribute to conditionally skip a term if
+  of <code>isKeyword()</code> if the token is modified.
+ Stemming filters for
+  instance can use this attribute to conditionally skip a term if 
  <code>isKeyword()</code> returns <code>true</code>.
  */
-@protocol OrgApacheLuceneAnalysisTokenattributesKeywordAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisTokenattributesKeywordAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
- @brief Returns <code>true</code> if the current token is a keyword, otherwise
+ @brief Returns <code>true</code> if the current token is a keyword, otherwise 
  <code>false</code>
  @return <code>true</code> if the current token is a keyword, otherwise
- <code>false</code>
+          <code>false</code>
  - seealso: #setKeyword(boolean)
  */
 - (jboolean)isKeyword;
 
 /*!
  @brief Marks the current token as keyword if set to <code>true</code>.
- @param isKeyword
- <code>true</code> if the current token is a keyword, otherwise
- <code>false</code>.
+ @param isKeyword <code>
+  true </code>  if the current token is a keyword, otherwise            <code>
+  false </code> .
  - seealso: #isKeyword()
  */
 - (void)setKeywordWithBoolean:(jboolean)isKeyword;
@@ -56,4 +62,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesKeywordAttribut
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute")

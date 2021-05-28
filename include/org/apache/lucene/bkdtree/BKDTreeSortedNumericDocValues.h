@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues || defined(INCLUDE_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues))
 #define OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_
 
@@ -30,8 +36,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneBkdtreeBKDTreeReader:(OrgApacheLuceneBkdtreeBKDTreeReader *)bkdTreeReader
-             withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)delegate;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneBkdtreeBKDTreeReader:(OrgApacheLuceneBkdtreeBKDTreeReader *)bkdTreeReader
+                                     withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)delegate;
 
 - (jint)count;
 
@@ -41,6 +47,10 @@
 
 - (jlong)valueAtWithInt:(jint)index;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues)
@@ -48,14 +58,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues, bkdTreeReader_, OrgApacheLuceneBkdtreeBKDTreeReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues, delegate_, OrgApacheLuceneIndexSortedNumericDocValues *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *self, OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate);
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *self, OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate);
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *new_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *new_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *create_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate);
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *create_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl))
 #define OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_
 
@@ -37,16 +43,16 @@
 /*!
  @brief Initialize this attribute with no payload.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Initialize this attribute with the given payload.
  */
-- (instancetype)initWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 
 - (void)clear;
 
-- (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *)clone;
+- (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *)java_clone;
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target OBJC_METHOD_FAMILY_NONE;
 
@@ -66,9 +72,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeI
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *self, OrgApacheLuceneUtilBytesRef *payload);
 
@@ -80,4 +86,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPayloadAttribut
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl")

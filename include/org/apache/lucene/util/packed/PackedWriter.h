@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedPackedWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedPackedWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedWriter))
 #define OrgApacheLuceneUtilPackedPackedWriter_
 
@@ -52,11 +58,17 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
-                                withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
-                                                           withInt:(jint)valueCount
-                                                           withInt:(jint)bitsPerValue
-                                                           withInt:(jint)mem;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
+                                                        withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
+                                                                                   withInt:(jint)valueCount
+                                                                                   withInt:(jint)bitsPerValue
+                                                                                   withInt:(jint)mem;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)arg0
+                                                         withInt:(jint)arg1
+                                                         withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -67,14 +79,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedWriter, encoder_, OrgApacheLu
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedWriter, nextBlocks_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedWriter, nextValues_, IOSLongArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedWriter *self, OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedWriter_initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedWriter *self, OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedWriter *new_OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedWriter *new_OrgApacheLuceneUtilPackedPackedWriter_initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedWriter *create_OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedWriter *create_OrgApacheLuceneUtilPackedPackedWriter_initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedWriter")

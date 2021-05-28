@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsMultiLevelSkipListReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsMultiLevelSkipListReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsMultiLevelSkipListReader || defined(INCLUDE_OrgApacheLuceneCodecsMultiLevelSkipListReader))
 #define OrgApacheLuceneCodecsMultiLevelSkipListReader_
 
@@ -26,9 +32,9 @@
 /*!
  @brief This abstract class reads skip lists with multiple levels.
  See <code>MultiLevelSkipListWriter</code> for the information about the encoding 
- of the multi level skip lists. 
- Subclasses must implement the abstract method <code>readSkipData(int,IndexInput)</code>
- which defines the actual format of the skip data.
+  of the multi level skip lists.  
+  Subclasses must implement the abstract method <code>readSkipData(int, IndexInput)</code>
+  which defines the actual format of the skip data.
  */
 @interface OrgApacheLuceneCodecsMultiLevelSkipListReader : NSObject < JavaIoCloseable > {
  @public
@@ -48,7 +54,7 @@
 
 /*!
  @brief Returns the id of the doc to which the last call of <code>skipTo(int)</code>
- has skipped.
+   has skipped.
  */
 - (jint)getDoc;
 
@@ -60,8 +66,7 @@
 
 /*!
  @brief Skips entries to the first beyond the current whose document number is
- greater than or equal to <i>target</i>.
- Returns the current doc count. 
+   greater than or equal to <i>target</i>.Returns the current doc count.
  */
 - (jint)skipToWithInt:(jint)target;
 
@@ -69,20 +74,20 @@
 
 /*!
  @brief Creates a <code>MultiLevelSkipListReader</code>, where
- <code>skipInterval</code> and <code>skipMultiplier</code> are
- the same.
+   <code>skipInterval</code> and <code>skipMultiplier</code> are
+   the same.
  */
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream
-                                               withInt:(jint)maxSkipLevels
-                                               withInt:(jint)skipInterval;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream
+                                                         withInt:(jint)maxSkipLevels
+                                                         withInt:(jint)skipInterval;
 
 /*!
  @brief Creates a <code>MultiLevelSkipListReader</code>.
  */
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream
-                                               withInt:(jint)maxSkipLevels
-                                               withInt:(jint)skipInterval
-                                               withInt:(jint)skipMultiplier;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream
+                                                         withInt:(jint)maxSkipLevels
+                                                         withInt:(jint)skipInterval
+                                                         withInt:(jint)skipMultiplier;
 
 /*!
  @brief Subclasses must implement the actual skip data encoding in this method.
@@ -102,6 +107,10 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream;
  */
 - (void)setLastSkipDataWithInt:(jint)level;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsMultiLevelSkipListReader)
@@ -116,4 +125,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsMultiLevelSkipListReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsMultiLevelSkipListReader")

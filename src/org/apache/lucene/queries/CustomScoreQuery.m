@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/StringBuilder.h"
@@ -27,6 +26,10 @@
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/Weight.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/CustomScoreQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueriesCustomScoreQuery () {
  @public
@@ -72,7 +75,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesCustomScoreQuery, scoringQueries_, IOS
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight, this$0_, OrgApacheLuceneQueriesCustomScoreQuery *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight, subQueryWeight_, OrgApacheLuceneSearchWeight *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight, valSrcWeights_, IOSObjectArray *)
 
@@ -149,32 +151,32 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   OrgApacheLuceneQueriesCustomScoreQuery *clone = nil;
   OrgApacheLuceneSearchQuery *sq = [((OrgApacheLuceneSearchQuery *) nil_chk(subQuery_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader];
-  if (sq != subQuery_) {
-    clone = [self clone];
+  if (!JreObjectEqualsEquals(sq, subQuery_)) {
+    clone = [self java_clone];
     JreStrongAssign(&((OrgApacheLuceneQueriesCustomScoreQuery *) nil_chk(clone))->subQuery_, sq);
   }
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(scoringQueries_))->size_; i++) {
     OrgApacheLuceneSearchQuery *v = [((OrgApacheLuceneSearchQuery *) nil_chk(IOSObjectArray_Get(scoringQueries_, i))) rewriteWithOrgApacheLuceneIndexIndexReader:reader];
-    if (v != IOSObjectArray_Get(nil_chk(scoringQueries_), i)) {
-      if (clone == nil) clone = [self clone];
+    if (!JreObjectEqualsEquals(v, IOSObjectArray_Get(nil_chk(scoringQueries_), i))) {
+      if (clone == nil) clone = [self java_clone];
       IOSObjectArray_Set(nil_chk(((OrgApacheLuceneQueriesCustomScoreQuery *) nil_chk(clone))->scoringQueries_), i, v);
     }
   }
   return (clone == nil) ? self : clone;
 }
 
-- (OrgApacheLuceneQueriesCustomScoreQuery *)clone {
-  OrgApacheLuceneQueriesCustomScoreQuery *clone = (OrgApacheLuceneQueriesCustomScoreQuery *) cast_chk([super clone], [OrgApacheLuceneQueriesCustomScoreQuery class]);
-  JreStrongAssign(&((OrgApacheLuceneQueriesCustomScoreQuery *) nil_chk(clone))->subQuery_, [((OrgApacheLuceneSearchQuery *) nil_chk(subQuery_)) clone]);
+- (OrgApacheLuceneQueriesCustomScoreQuery *)java_clone {
+  OrgApacheLuceneQueriesCustomScoreQuery *clone = (OrgApacheLuceneQueriesCustomScoreQuery *) cast_chk([super java_clone], [OrgApacheLuceneQueriesCustomScoreQuery class]);
+  JreStrongAssign(&((OrgApacheLuceneQueriesCustomScoreQuery *) nil_chk(clone))->subQuery_, [((OrgApacheLuceneSearchQuery *) nil_chk(subQuery_)) java_clone]);
   JreStrongAssignAndConsume(&clone->scoringQueries_, [IOSObjectArray newArrayWithLength:((IOSObjectArray *) nil_chk(scoringQueries_))->size_ type:OrgApacheLuceneSearchQuery_class_()]);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(scoringQueries_))->size_; i++) {
-    IOSObjectArray_Set(clone->scoringQueries_, i, [((OrgApacheLuceneSearchQuery *) nil_chk(IOSObjectArray_Get(scoringQueries_, i))) clone]);
+    IOSObjectArray_Set(clone->scoringQueries_, i, [((OrgApacheLuceneSearchQuery *) nil_chk(IOSObjectArray_Get(scoringQueries_, i))) java_clone]);
   }
   return clone;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *sb = [create_JavaLangStringBuilder_initWithNSString_([self name]) appendWithNSString:@"("];
+  JavaLangStringBuilder *sb = JreRetainedLocalValue([create_JavaLangStringBuilder_initWithNSString_([self name]) appendWithNSString:@"("]);
   [((JavaLangStringBuilder *) nil_chk(sb)) appendWithNSString:[((OrgApacheLuceneSearchQuery *) nil_chk(subQuery_)) toStringWithNSString:field]];
   {
     IOSObjectArray *a__ = scoringQueries_;
@@ -191,9 +193,9 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return true;
+  if (JreObjectEqualsEquals(self, o)) return true;
   if (![super isEqual:o]) return false;
-  if ([self getClass] != (id) [nil_chk(o) getClass]) {
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(o) java_getClass])) {
     return false;
   }
   OrgApacheLuceneQueriesCustomScoreQuery *other = (OrgApacheLuceneQueriesCustomScoreQuery *) cast_chk(o, [OrgApacheLuceneQueriesCustomScoreQuery class]);
@@ -204,7 +206,7 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
 }
 
 - (NSUInteger)hash {
-  return (((jint) [[self getClass] hash]) + ((jint) [((OrgApacheLuceneSearchQuery *) nil_chk(subQuery_)) hash]) + JavaUtilArrays_hashCodeWithNSObjectArray_(scoringQueries_)) ^ JavaLangFloat_floatToIntBitsWithFloat_([self getBoost]) ^ (strict_ ? 1234 : 4321);
+  return (((jint) [[self java_getClass] hash]) + ((jint) [((OrgApacheLuceneSearchQuery *) nil_chk(subQuery_)) hash]) + JavaUtilArrays_hashCodeWithNSObjectArray_(scoringQueries_)) ^ JavaLangFloat_floatToIntBitsWithFloat_([self getBoost]) ^ (strict_ ? 1234 : 4321);
 }
 
 - (OrgApacheLuceneQueriesCustomScoreProvider *)getCustomScoreProviderWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
@@ -243,30 +245,49 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQuery:", "CustomScoreQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneQueriesFunctionFunctionQuery:", "CustomScoreQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneQueriesFunctionFunctionQueryArray:", "CustomScoreQuery", NULL, 0x81, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.queries.CustomScoreQuery;", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "getCustomScoreProviderWithOrgApacheLuceneIndexLeafReaderContext:", "getCustomScoreProvider", "Lorg.apache.lucene.queries.CustomScoreProvider;", 0x4, "Ljava.io.IOException;", NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isStrict", NULL, "Z", 0x1, NULL, NULL },
-    { "setStrictWithBoolean:", "setStrict", "V", 0x1, NULL, NULL },
-    { "getSubQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "getScoringQueries", NULL, "[Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesCustomScoreQuery;", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 11, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesCustomScoreProvider;", 0x4, 12, 13, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 14, 15, 5, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchQuery;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneQueriesFunctionFunctionQuery:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneQueriesFunctionFunctionQueryArray:);
+  methods[3].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[4].selector = @selector(java_clone);
+  methods[5].selector = @selector(toStringWithNSString:);
+  methods[6].selector = @selector(isEqual:);
+  methods[7].selector = @selector(hash);
+  methods[8].selector = @selector(getCustomScoreProviderWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[9].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[10].selector = @selector(isStrict);
+  methods[11].selector = @selector(setStrictWithBoolean:);
+  methods[12].selector = @selector(getSubQuery);
+  methods[13].selector = @selector(getScoringQueries);
+  methods[14].selector = @selector(name);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "subQuery_", NULL, 0x2, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scoringQueries_", NULL, 0x2, "[Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "strict_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "subQuery_", "LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "scoringQueries_", "[LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "strict_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queries.CustomScoreQuery$CustomWeight;", "Lorg.apache.lucene.queries.CustomScoreQuery$CustomScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery = { 2, "CustomScoreQuery", "org.apache.lucene.queries", NULL, 0x1, 15, methods, 3, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchQuery;", "LOrgApacheLuceneSearchQuery;LOrgApacheLuceneQueriesFunctionFunctionQuery;", "LOrgApacheLuceneSearchQuery;[LOrgApacheLuceneQueriesFunctionFunctionQuery;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "clone", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "getCustomScoreProvider", "LOrgApacheLuceneIndexLeafReaderContext;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "setStrict", "Z", "LOrgApacheLuceneQueriesCustomScoreQuery_CustomWeight;LOrgApacheLuceneQueriesCustomScoreQuery_CustomScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery = { "CustomScoreQuery", "org.apache.lucene.queries", ptrTable, methods, fields, 7, 0x1, 15, 3, -1, 18, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesCustomScoreQuery;
 }
 
@@ -376,7 +397,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreQuery)
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneSearchScorer *subQueryScorer = [((OrgApacheLuceneSearchWeight *) nil_chk(subQueryWeight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+  OrgApacheLuceneSearchScorer *subQueryScorer = JreRetainedLocalValue([((OrgApacheLuceneSearchWeight *) nil_chk(subQueryWeight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
   if (subQueryScorer == nil) {
     return nil;
   }
@@ -406,23 +427,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesCustomScoreQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:", "CustomWeight", NULL, 0x1, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
-    { "doExplainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "doExplain", "Lorg.apache.lucene.search.Explanation;", 0x2, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, 4, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 7, 8, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 9, 10, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x2, 11, 10, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesCustomScoreQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(getValueForNormalization);
+  methods[3].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[4].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[5].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  methods[6].selector = @selector(doExplainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.CustomScoreQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "subQueryWeight_", NULL, 0x0, "Lorg.apache.lucene.search.Weight;", NULL, NULL, .constantValue.asLong = 0 },
-    { "valSrcWeights_", NULL, 0x0, "[Lorg.apache.lucene.search.Weight;", NULL, NULL, .constantValue.asLong = 0 },
-    { "qStrict_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryWeight_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesCustomScoreQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "subQueryWeight_", "LOrgApacheLuceneSearchWeight;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "valSrcWeights_", "[LOrgApacheLuceneSearchWeight;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "qStrict_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "queryWeight_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight = { 2, "CustomWeight", "org.apache.lucene.queries", "CustomScoreQuery", 0x2, 7, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesCustomScoreQuery;LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "normalize", "FF", "scorer", "LOrgApacheLuceneIndexLeafReaderContext;", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "doExplain", "LOrgApacheLuceneQueriesCustomScoreQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight = { "CustomWeight", "org.apache.lucene.queries", ptrTable, methods, fields, 7, 0x2, 7, 5, 12, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight;
 }
 
@@ -448,7 +481,7 @@ OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight *create_OrgApacheLuceneQueri
 }
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight_doExplainWithOrgApacheLuceneIndexLeafReaderContext_withInt_(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight *self, OrgApacheLuceneIndexLeafReaderContext *info, jint doc) {
-  OrgApacheLuceneSearchExplanation *subQueryExpl = [((OrgApacheLuceneSearchWeight *) nil_chk(self->subQueryWeight_)) explainWithOrgApacheLuceneIndexLeafReaderContext:info withInt:doc];
+  OrgApacheLuceneSearchExplanation *subQueryExpl = JreRetainedLocalValue([((OrgApacheLuceneSearchWeight *) nil_chk(self->subQueryWeight_)) explainWithOrgApacheLuceneIndexLeafReaderContext:info withInt:doc]);
   if (![((OrgApacheLuceneSearchExplanation *) nil_chk(subQueryExpl)) isMatch]) {
     return subQueryExpl;
   }
@@ -456,7 +489,7 @@ OrgApacheLuceneSearchExplanation *OrgApacheLuceneQueriesCustomScoreQuery_CustomW
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(self->valSrcWeights_))->size_; i++) {
     IOSObjectArray_Set(valSrcExpls, i, [((OrgApacheLuceneSearchWeight *) nil_chk(IOSObjectArray_Get(self->valSrcWeights_, i))) explainWithOrgApacheLuceneIndexLeafReaderContext:info withInt:doc]);
   }
-  OrgApacheLuceneSearchExplanation *customExp = [((OrgApacheLuceneQueriesCustomScoreProvider *) nil_chk([self->this$0_ getCustomScoreProviderWithOrgApacheLuceneIndexLeafReaderContext:info])) customExplainWithInt:doc withOrgApacheLuceneSearchExplanation:subQueryExpl withOrgApacheLuceneSearchExplanationArray:valSrcExpls];
+  OrgApacheLuceneSearchExplanation *customExp = JreRetainedLocalValue([((OrgApacheLuceneQueriesCustomScoreProvider *) nil_chk([self->this$0_ getCustomScoreProviderWithOrgApacheLuceneIndexLeafReaderContext:info])) customExplainWithInt:doc withOrgApacheLuceneSearchExplanation:subQueryExpl withOrgApacheLuceneSearchExplanationArray:valSrcExpls]);
   jfloat sc = self->queryWeight_ * [((OrgApacheLuceneSearchExplanation *) nil_chk(customExp)) getValue];
   return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(sc, JreStrcat("$$", [self->this$0_ description], @", product of:"), [IOSObjectArray arrayWithObjects:(id[]){ customExp, OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(self->queryWeight_, @"queryWeight", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]) } count:2 type:OrgApacheLuceneSearchExplanation_class_()]);
 }
@@ -508,20 +541,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreQuery_CustomWe
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesCustomScoreQuery:withOrgApacheLuceneQueriesCustomScoreProvider:withOrgApacheLuceneQueriesCustomScoreQuery_CustomWeight:withFloat:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorerArray:", "CustomScorer", NULL, 0x2, NULL, NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 2, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesCustomScoreQuery:withOrgApacheLuceneQueriesCustomScoreProvider:withOrgApacheLuceneQueriesCustomScoreQuery_CustomWeight:withFloat:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorerArray:);
+  methods[1].selector = @selector(score);
+  methods[2].selector = @selector(getChildren);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "qWeight_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "subQueryScorer_", NULL, 0x12, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "valSrcScorers_", NULL, 0x12, "[Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "provider_", NULL, 0x12, "Lorg.apache.lucene.queries.CustomScoreProvider;", NULL, NULL, .constantValue.asLong = 0 },
-    { "vScores_", NULL, 0x12, "[F", NULL, NULL, .constantValue.asLong = 0 },
-    { "valSrcDocID_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "qWeight_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "subQueryScorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "valSrcScorers_", "[LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "provider_", "LOrgApacheLuceneQueriesCustomScoreProvider;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "vScores_", "[F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "valSrcDocID_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery_CustomScorer = { 2, "CustomScorer", "org.apache.lucene.queries", "CustomScoreQuery", 0x2, 3, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesCustomScoreQuery;LOrgApacheLuceneQueriesCustomScoreProvider;LOrgApacheLuceneQueriesCustomScoreQuery_CustomWeight;FLOrgApacheLuceneSearchScorer;[LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;", "LOrgApacheLuceneQueriesCustomScoreQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery_CustomScorer = { "CustomScorer", "org.apache.lucene.queries", ptrTable, methods, fields, 7, 0x2, 3, 6, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesCustomScoreQuery_CustomScorer;
 }
 

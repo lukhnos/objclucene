@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTopTermsRewrite
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTopTermsRewrite_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopTermsRewrite || defined(INCLUDE_OrgApacheLuceneSearchTopTermsRewrite))
 #define OrgApacheLuceneSearchTopTermsRewrite_
 
@@ -26,8 +32,7 @@
 
 /*!
  @brief Base rewrite method for collecting only the top terms
- via a priority queue.
-  Only public to be accessible by spans package.
+  via a priority queue.
  */
 @interface OrgApacheLuceneSearchTopTermsRewrite : OrgApacheLuceneSearchTermCollectingRewrite
 
@@ -35,12 +40,12 @@
 
 /*!
  @brief Create a TopTermsBooleanQueryRewrite for 
- at most <code>size</code> terms.
+  at most <code>size</code> terms.
  <p>
- NOTE: if <code>BooleanQuery.getMaxClauseCount</code> is smaller than 
- <code>size</code>, then it will be used instead. 
+  NOTE: if <code>BooleanQuery.getMaxClauseCount</code> is smaller than  
+ <code>size</code>, then it will be used instead.
  */
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -60,6 +65,10 @@
  @brief return the maximum size of the priority queue (for boolean rewrites this is BooleanQuery#getMaxClauseCount).
  */
 - (jint)getMaxSize;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivate NS_UNAVAILABLE;
 
 @end
 
@@ -90,9 +99,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopTermsRewrite)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)termState;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)termState;
 
 - (jint)compareToWithId:(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *)other;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -111,4 +124,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopTermsRewrite")

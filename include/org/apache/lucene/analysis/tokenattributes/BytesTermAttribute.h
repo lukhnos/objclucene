@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute))
 #define OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_
 
@@ -25,9 +31,9 @@
 /*!
  @brief This attribute can be used if you have the raw term bytes to be indexed.
  It can be used as replacement for <code>CharTermAttribute</code>, if binary
- terms should be indexed.
+  terms should be indexed.
  */
-@protocol OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute < OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute < OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute, JavaObject >
 
 /*!
  @brief Sets the <code>BytesRef</code> of the term
@@ -42,4 +48,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesBytesTermAttrib
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute")

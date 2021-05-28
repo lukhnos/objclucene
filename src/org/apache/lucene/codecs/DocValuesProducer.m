@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/DocValuesProducer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/DocValuesProducer.h"
 #include "org/apache/lucene/index/BinaryDocValues.h"
 #include "org/apache/lucene/index/FieldInfo.h"
@@ -14,6 +12,10 @@
 #include "org/apache/lucene/index/SortedNumericDocValues.h"
 #include "org/apache/lucene/index/SortedSetDocValues.h"
 #include "org/apache/lucene/util/Bits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/DocValuesProducer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
@@ -72,18 +74,32 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DocValuesProducer", NULL, 0x4, NULL, NULL },
-    { "getNumericWithOrgApacheLuceneIndexFieldInfo:", "getNumeric", "Lorg.apache.lucene.index.NumericDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getBinaryWithOrgApacheLuceneIndexFieldInfo:", "getBinary", "Lorg.apache.lucene.index.BinaryDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getSortedWithOrgApacheLuceneIndexFieldInfo:", "getSorted", "Lorg.apache.lucene.index.SortedDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getSortedNumericWithOrgApacheLuceneIndexFieldInfo:", "getSortedNumeric", "Lorg.apache.lucene.index.SortedNumericDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getSortedSetWithOrgApacheLuceneIndexFieldInfo:", "getSortedSet", "Lorg.apache.lucene.index.SortedSetDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:", "getDocsWithField", "Lorg.apache.lucene.util.Bits;", 0x401, "Ljava.io.IOException;", NULL },
-    { "checkIntegrity", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexBinaryDocValues;", 0x401, 3, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedDocValues;", 0x401, 4, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedNumericDocValues;", 0x401, 5, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedSetDocValues;", 0x401, 6, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x401, 7, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesProducer;", 0x1, -1, -1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsDocValuesProducer = { 2, "DocValuesProducer", "org.apache.lucene.codecs", NULL, 0x401, 9, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getNumericWithOrgApacheLuceneIndexFieldInfo:);
+  methods[2].selector = @selector(getBinaryWithOrgApacheLuceneIndexFieldInfo:);
+  methods[3].selector = @selector(getSortedWithOrgApacheLuceneIndexFieldInfo:);
+  methods[4].selector = @selector(getSortedNumericWithOrgApacheLuceneIndexFieldInfo:);
+  methods[5].selector = @selector(getSortedSetWithOrgApacheLuceneIndexFieldInfo:);
+  methods[6].selector = @selector(getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:);
+  methods[7].selector = @selector(checkIntegrity);
+  methods[8].selector = @selector(getMergeInstance);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getNumeric", "LOrgApacheLuceneIndexFieldInfo;", "LJavaIoIOException;", "getBinary", "getSorted", "getSortedNumeric", "getSortedSet", "getDocsWithField" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsDocValuesProducer = { "DocValuesProducer", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 9, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsDocValuesProducer;
 }
 

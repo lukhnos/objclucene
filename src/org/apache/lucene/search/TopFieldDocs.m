@@ -8,6 +8,10 @@
 #include "org/apache/lucene/search/TopDocs.h"
 #include "org/apache/lucene/search/TopFieldDocs.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TopFieldDocs must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchTopFieldDocs
 
 - (instancetype)initWithInt:(jint)totalHits
@@ -24,13 +28,19 @@ withOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneSearchScoreDocArray:withOrgApacheLuceneSearchSortFieldArray:withFloat:", "TopFieldDocs", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withOrgApacheLuceneSearchScoreDocArray:withOrgApacheLuceneSearchSortFieldArray:withFloat:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fields_", NULL, 0x1, "[Lorg.apache.lucene.search.SortField;", NULL, NULL, .constantValue.asLong = 0 },
+    { "fields_", "[LOrgApacheLuceneSearchSortField;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopFieldDocs = { 2, "TopFieldDocs", "org.apache.lucene.search", NULL, 0x1, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I[LOrgApacheLuceneSearchScoreDoc;[LOrgApacheLuceneSearchSortField;F" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopFieldDocs = { "TopFieldDocs", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 1, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTopFieldDocs;
 }
 

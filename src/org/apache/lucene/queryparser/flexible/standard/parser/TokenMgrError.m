@@ -9,12 +9,16 @@
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/queryparser/flexible/standard/parser/TokenMgrError.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/parser/TokenMgrError must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 /*!
  @brief The version identifier for this Serializable class.
  Increment only if the <i>serialized</i> form of the
- class changes.
+  class changes.
  */
-inline jlong OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_get_serialVersionUID();
+inline jlong OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_get_serialVersionUID(void);
 #define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_serialVersionUID 1LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError, serialVersionUID, jlong)
 
@@ -78,23 +82,34 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addEscapesWithNSString:", "addEscapes", "Ljava.lang.String;", 0x1c, NULL, NULL },
-    { "LexicalErrorWithBoolean:withInt:withInt:withInt:withNSString:withChar:", "LexicalError", "Ljava.lang.String;", 0xc, NULL, NULL },
-    { "getMessage", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "TokenMgrError", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withInt:", "TokenMgrError", NULL, 0x1, NULL, NULL },
-    { "initWithBoolean:withInt:withInt:withInt:withNSString:withChar:withInt:", "TokenMgrError", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x1c, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0xc, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(addEscapesWithNSString:);
+  methods[1].selector = @selector(LexicalErrorWithBoolean:withInt:withInt:withInt:withNSString:withChar:);
+  methods[2].selector = @selector(getMessage);
+  methods[3].selector = @selector(init);
+  methods[4].selector = @selector(initWithNSString:withInt:);
+  methods[5].selector = @selector(initWithBoolean:withInt:withInt:withInt:withNSString:withChar:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "serialVersionUID", "serialVersionUID", 0x1a, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_serialVersionUID },
-    { "LEXICAL_ERROR", "LEXICAL_ERROR", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_LEXICAL_ERROR },
-    { "STATIC_LEXER_ERROR", "STATIC_LEXER_ERROR", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_STATIC_LEXER_ERROR },
-    { "INVALID_LEXICAL_STATE", "INVALID_LEXICAL_STATE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_INVALID_LEXICAL_STATE },
-    { "LOOP_DETECTED", "LOOP_DETECTED", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_LOOP_DETECTED },
-    { "errorCode_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "serialVersionUID", "J", .constantValue.asLong = OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_serialVersionUID, 0x1a, -1, -1, -1, -1 },
+    { "LEXICAL_ERROR", "I", .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_LEXICAL_ERROR, 0x18, -1, -1, -1, -1 },
+    { "STATIC_LEXER_ERROR", "I", .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_STATIC_LEXER_ERROR, 0x18, -1, -1, -1, -1 },
+    { "INVALID_LEXICAL_STATE", "I", .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_INVALID_LEXICAL_STATE, 0x18, -1, -1, -1, -1 },
+    { "LOOP_DETECTED", "I", .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_LOOP_DETECTED, 0x18, -1, -1, -1, -1 },
+    { "errorCode_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError = { 2, "TokenMgrError", "org.apache.lucene.queryparser.flexible.standard.parser", NULL, 0x1, 6, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "addEscapes", "LNSString;", "LexicalError", "ZIIILNSString;C", "LNSString;I", "ZIIILNSString;CI" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError = { "TokenMgrError", "org.apache.lucene.queryparser.flexible.standard.parser", ptrTable, methods, fields, 7, 0x1, 6, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError;
 }
 
@@ -104,7 +119,7 @@ NSString *OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_addEscap
   OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_initialize();
   JavaLangStringBuilder *retval = create_JavaLangStringBuilder_init();
   jchar ch;
-  for (jint i = 0; i < ((jint) [((NSString *) nil_chk(str)) length]); i++) {
+  for (jint i = 0; i < [((NSString *) nil_chk(str)) java_length]; i++) {
     switch ([str charAtWithInt:i]) {
       case 0:
       continue;
@@ -135,7 +150,7 @@ NSString *OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_addEscap
       default:
       if ((ch = [str charAtWithInt:i]) < (jint) 0x20 || ch > (jint) 0x7e) {
         NSString *s = JreStrcat("$$", @"0000", JavaLangInteger_toStringWithInt_withInt_(ch, 16));
-        [retval appendWithNSString:JreStrcat("$$", @"\\u", [s substring:((jint) [s length]) - 4 endIndex:((jint) [s length])])];
+        [retval appendWithNSString:JreStrcat("$$", @"\\u", [s java_substring:[s java_length] - 4 endIndex:[s java_length]])];
       }
       else {
         [retval appendWithChar:ch];
@@ -148,7 +163,7 @@ NSString *OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_addEscap
 
 NSString *OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_LexicalErrorWithBoolean_withInt_withInt_withInt_withNSString_withChar_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar) {
   OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_initialize();
-  return (JreStrcat("$I$I$$$$C", @"Lexical error at line ", errorLine, @", column ", errorColumn, @".  Encountered: ", (EOFSeen ? @"<EOF> " : JreStrcat("$$I$", (JreStrcat("C$C", '"', OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_addEscapesWithNSString_(NSString_valueOfChar_(curChar)), '"')), @" (", (jint) curChar, @"), ")), @"after : \"", OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_addEscapesWithNSString_(errorAfter), '"'));
+  return (JreStrcat("$I$I$$$$C", @"Lexical error at line ", errorLine, @", column ", errorColumn, @".  Encountered: ", (EOFSeen ? @"<EOF> " : JreStrcat("$$I$", (JreStrcat("C$C", '"', OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_addEscapesWithNSString_(NSString_java_valueOfChar_(curChar)), '"')), @" (", (jint) curChar, @"), ")), @"after : \"", OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_addEscapesWithNSString_(errorAfter), '"'));
 }
 
 void OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_init(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError *self) {

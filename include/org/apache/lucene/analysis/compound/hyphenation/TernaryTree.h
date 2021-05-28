@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree))
 #define OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_
 
@@ -25,46 +31,50 @@
 /*!
  @brief <h2>Ternary Search Tree.
  </h2>
+   
  <p>
- A ternary search tree is a hybrid between a binary tree and a digital search
- tree (trie). Keys are limited to strings. A data value of type char is stored
- in each leaf node. It can be used as an index (or pointer) to the data.
- Branches that only contain one key are compressed to one node by storing a
- pointer to the trailer substring of the key. This class is intended to serve
- as base class or helper class to implement Dictionary collections or the
- like. Ternary trees have some nice properties as the following: the tree can
- be traversed in sorted order, partial matches (wildcard) can be implemented,
- retrieval of all keys within a given distance from the target, etc. The
- storage requirements are higher than a binary tree but a lot less than a
- trie. Performance is comparable with a hash table, sometimes it outperforms a
- hash function (most of the time can determine a miss faster than a hash).
+  A ternary search tree is a hybrid between a binary tree and a digital search
+  tree (trie). Keys are limited to strings. A data value of type char is stored
+  in each leaf node. It can be used as an index (or pointer) to the data.
+  Branches that only contain one key are compressed to one node by storing a
+  pointer to the trailer substring of the key. This class is intended to serve
+  as base class or helper class to implement Dictionary collections or the
+  like. Ternary trees have some nice properties as the following: the tree can
+  be traversed in sorted order, partial matches (wildcard) can be implemented,
+  retrieval of all keys within a given distance from the target, etc. The
+  storage requirements are higher than a binary tree but a lot less than a
+  trie. Performance is comparable with a hash table, sometimes it outperforms a
+  hash function (most of the time can determine a miss faster than a hash). 
  </p>
+   
  <p>
- The main purpose of this java port is to serve as a base for implementing
- TeX's hyphenation algorithm (see The TeXBook, appendix H). Each language
- requires from 5000 to 15000 hyphenation patterns which will be keys in this
- tree. The strings patterns are usually small (from 2 to 5 characters), but
- each char in the tree is stored in a node. Thus memory usage is the main
- concern. We will sacrifice 'elegance' to keep memory requirements to the
- minimum. Using java's char type as pointer (yes, I know pointer it is a
- forbidden word in java) we can keep the size of the node to be just 8 bytes
- (3 pointers and the data char). This gives room for about 65000 nodes. In my
- tests the english patterns took 7694 nodes and the german patterns 10055
- nodes, so I think we are safe.
+  The main purpose of this java port is to serve as a base for implementing
+  TeX's hyphenation algorithm (see The TeXBook, appendix H). Each language
+  requires from 5000 to 15000 hyphenation patterns which will be keys in this
+  tree. The strings patterns are usually small (from 2 to 5 characters), but
+  each char in the tree is stored in a node. Thus memory usage is the main
+  concern. We will sacrifice 'elegance' to keep memory requirements to the
+  minimum. Using java's char type as pointer (yes, I know pointer it is a
+  forbidden word in java) we can keep the size of the node to be just 8 bytes
+  (3 pointers and the data char). This gives room for about 65000 nodes. In my
+  tests the english patterns took 7694 nodes and the german patterns 10055
+  nodes, so I think we are safe. 
  </p>
+   
  <p>
- All said, this is a map with strings as keys and char as value. Pretty
- limited!. It can be extended to a general map by using the string
- representation of an object and using the char value as an index to an array
- that contains the object values.
+  All said, this is a map with strings as keys and char as value. Pretty
+  limited!. It can be extended to a general map by using the string
+  representation of an object and using the char value as an index to an array
+  that contains the object values. 
  </p>
- This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified. 
+  
+  This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified.
  */
 @interface OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree : NSObject < NSCopying > {
  @public
   /*!
    @brief Pointer to low branch and to rest of the key when it is stored directly in
- this node, we don't have unions in java!
+  this node, we don't have unions in java!
    */
   IOSCharArray *lo_;
   /*!
@@ -77,17 +87,17 @@
   IOSCharArray *eq_;
   /*!
    @brief <P>
- The character stored in this node: splitchar.
+  The character stored in this node: splitchar.
    Two special values are
- reserved:
+  reserved: 
  </P>
- <ul>
- <li>0x0000 as string terminator</li>
- <li>0xFFFF to indicate that the branch starting at this node is compressed</li>
- </ul>
- <p>
- This shouldn't be a problem if we give the usual semantics to strings since
- 0xFFFF is guaranteed not to be an Unicode character.
+  <ul>
+  <li>0x0000 as string terminator</li>
+  <li>0xFFFF to indicate that the branch starting at this node is compressed</li>
+  </ul>
+  <p>
+  This shouldn't be a problem if we give the usual semantics to strings since
+  0xFFFF is guaranteed not to be an Unicode character. 
  </p>
    */
   IOSCharArray *sc_;
@@ -99,8 +109,7 @@
   jchar freenode_;
   jint length_;
 }
-
-+ (jint)BLOCK_SIZE;
+@property (readonly, class) jint BLOCK_SIZE NS_SWIFT_NAME(BLOCK_SIZE);
 
 #pragma mark Public
 
@@ -109,7 +118,7 @@
  */
 - (void)balance;
 
-- (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *)clone;
+- (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *)java_clone;
 
 - (jint)findWithCharArray:(IOSCharArray *)key
                   withInt:(jint)start;
@@ -122,10 +131,10 @@
 
 /*!
  @brief Branches are initially compressed, needing one node per key plus the size
- of the string key.
- They are decompressed as needed when another key with
- same prefix is inserted. This saves a lot of space, specially for long
- keys.
+  of the string key.They are decompressed as needed when another key with
+  same prefix is inserted.
+ This saves a lot of space, specially for long
+  keys.
  */
 - (void)insertWithNSString:(NSString *)key
                   withChar:(jchar)val;
@@ -164,15 +173,15 @@
                     withInt:(jint)start;
 
 /*!
- @brief Each node stores a character (splitchar) which is part of some key(s).
- In a
- compressed branch (one that only contain a single string key) the trailer
- of the key which is not already in nodes is stored externally in the kv
- array. As items are inserted, key substrings decrease. Some substrings may
- completely disappear when the whole branch is totally decompressed. The
- tree is traversed to find the key substrings actually used. In addition,
- duplicate substrings are removed using a map (implemented with a
- TernaryTree!).
+ @brief Each node stores a character (splitchar) which is part of some key(s).In a
+  compressed branch (one that only contain a single string key) the trailer
+  of the key which is not already in nodes is stored externally in the kv
+  array.
+ As items are inserted, key substrings decrease. Some substrings may
+  completely disappear when the whole branch is totally decompressed. The
+  tree is traversed to find the key substrings actually used. In addition,
+  duplicate substrings are removed using a map (implemented with a
+  TernaryTree!).
  */
 - (void)trimToSize;
 
@@ -182,9 +191,8 @@
 
 /*!
  @brief Recursively insert the median first and then the median of the lower and
- upper halves, and so on in order to get a balanced tree.
- The array of keys
- is assumed to be sorted in ascending order.
+  upper halves, and so on in order to get a balanced tree.The array of keys
+  is assumed to be sorted in ascending order.
  */
 - (void)insertBalancedWithNSStringArray:(IOSObjectArray *)k
                           withCharArray:(IOSCharArray *)v
@@ -193,7 +201,7 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -205,15 +213,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree, eq_, 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree, sc_, IOSCharArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree, kv_, OrgApacheLuceneAnalysisCompoundHyphenationCharVector *)
 
-inline jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_get_BLOCK_SIZE();
+inline jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_get_BLOCK_SIZE(void);
 #define OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_BLOCK_SIZE 2048
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree, BLOCK_SIZE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init(void);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_strcmpWithCharArray_withInt_withCharArray_withInt_(IOSCharArray *a, jint startA, IOSCharArray *b, jint startB);
 
@@ -262,7 +270,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree:(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree:(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *)outer$;
 
 - (jchar)getValue;
 
@@ -271,6 +279,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree
 - (NSString *)nextElement;
 
 - (void)rewind;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -290,4 +302,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree")

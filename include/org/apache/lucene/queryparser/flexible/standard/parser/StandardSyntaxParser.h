@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser))
 #define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_
 
@@ -53,17 +59,17 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Constructor with user supplied CharStream.
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream;
 
 /*!
  @brief Constructor with generated Token Manager.
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager:(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *)tm;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager:(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *)tm;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)ClauseWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
@@ -102,8 +108,8 @@
 
 /*!
  @brief Parses a query string, returning a <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code>.
- @param query  the query string to be parsed.
- @throws ParseException if the parsing fails
+ @param query the query string to be parsed.
+ @throw ParseExceptionif the parsing fails
  */
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)parseWithJavaLangCharSequence:(id<JavaLangCharSequence>)query
                                                                  withJavaLangCharSequence:(id<JavaLangCharSequence>)field;
@@ -134,9 +140,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSynt
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_init(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self, id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> stream);
 
@@ -169,7 +175,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserStand
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -180,12 +186,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSynt
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_init(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser")

@@ -7,9 +7,9 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Collections.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
@@ -27,6 +27,10 @@
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/store/IndexOutput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50FieldInfosFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat ()
 
@@ -103,9 +107,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   NSString *fileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(segmentInfo))->name_, segmentSuffix, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_EXTENSION);
   {
     OrgApacheLuceneStoreChecksumIndexInput *input = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) openChecksumInputWithNSString:fileName withOrgApacheLuceneStoreIOContext:context];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      NSException *priorE = nil;
+      JavaLangThrowable *priorE = nil;
       IOSObjectArray *infos = nil;
       @try {
         jint format = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(input, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_START, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_CURRENT, [segmentInfo getId], segmentSuffix);
@@ -113,7 +117,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         infos = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexFieldInfo_class_()];
         id<JavaUtilMap> lastAttributes = JavaUtilCollections_emptyMap();
         for (jint i = 0; i < size; i++) {
-          NSString *name = [input readString];
+          NSString *name = JreRetainedLocalValue([input readString]);
           jint fieldNumber = [input readVInt];
           if (fieldNumber < 0) {
             @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$$$I", @"invalid field number for field: ", name, @", fieldNumber=", fieldNumber), input);
@@ -141,19 +145,19 @@ J2OBJC_IGNORE_DESIGNATED_END
             [((OrgApacheLuceneIndexFieldInfo *) nil_chk(IOSObjectArray_Get(infos, i))) checkConsistency];
           }
           @catch (JavaLangIllegalStateException *e) {
-            @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_withNSException_(JreStrcat("$$$I", @"invalid fieldinfo for field: ", name, @", fieldNumber=", fieldNumber), input, e);
+            @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_withJavaLangThrowable_(JreStrcat("$$$I", @"invalid fieldinfo for field: ", name, @", fieldNumber=", fieldNumber), input, e);
           }
         }
       }
-      @catch (NSException *exception) {
+      @catch (JavaLangThrowable *exception) {
         priorE = exception;
       }
       @finally {
-        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withNSException_(input, priorE);
+        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(input, priorE);
       }
       return create_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_(infos);
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -162,10 +166,12 @@ J2OBJC_IGNORE_DESIGNATED_END
         if (__primaryException1 != nil) {
           @try {
             [input close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [input close];
         }
       }
@@ -199,7 +205,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   NSString *fileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(segmentInfo))->name_, segmentSuffix, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_EXTENSION);
   {
     OrgApacheLuceneStoreIndexOutput *output = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) createOutputWithNSString:fileName withOrgApacheLuceneStoreIOContext:context];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(output, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_CURRENT, [segmentInfo getId], segmentSuffix);
       [((OrgApacheLuceneStoreIndexOutput *) nil_chk(output)) writeVIntWithInt:[((OrgApacheLuceneIndexFieldInfos *) nil_chk(infos)) size]];
@@ -219,7 +225,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(output);
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -228,10 +234,12 @@ J2OBJC_IGNORE_DESIGNATED_END
         if (__primaryException1 != nil) {
           @try {
             [output close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [output close];
         }
       }
@@ -239,40 +247,52 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFieldInfos;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "B", 0xa, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocValuesType;", 0xa, 5, 6, 2, -1, -1, -1 },
+    { NULL, "B", 0xa, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexOptions;", 0xa, 9, 6, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, 2, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(readWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[2].selector = @selector(docValuesByteWithOrgApacheLuceneIndexDocValuesType:);
+  methods[3].selector = @selector(getDocValuesTypeWithOrgApacheLuceneStoreIndexInput:withByte:);
+  methods[4].selector = @selector(indexOptionsByteWithOrgApacheLuceneIndexIndexOptions:);
+  methods[5].selector = @selector(getIndexOptionsWithOrgApacheLuceneStoreIndexInput:withByte:);
+  methods[6].selector = @selector(writeWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withNSString:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 12, -1, -1 },
+    { "CODEC_NAME", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 13, -1, -1 },
+    { "FORMAT_START", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_START, 0x18, -1, -1, -1, -1 },
+    { "FORMAT_SAFE_MAPS", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_SAFE_MAPS, 0x18, -1, -1, -1, -1 },
+    { "FORMAT_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_CURRENT, 0x18, -1, -1, -1, -1 },
+    { "STORE_TERMVECTOR", "B", .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_STORE_TERMVECTOR, 0x18, -1, -1, -1, -1 },
+    { "OMIT_NORMS", "B", .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_OMIT_NORMS, 0x18, -1, -1, -1, -1 },
+    { "STORE_PAYLOADS", "B", .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_STORE_PAYLOADS, 0x18, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "read", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LNSString;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "docValuesByte", "LOrgApacheLuceneIndexDocValuesType;", "getDocValuesType", "LOrgApacheLuceneStoreIndexInput;B", "indexOptionsByte", "LOrgApacheLuceneIndexIndexOptions;", "getIndexOptions", "write", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LNSString;LOrgApacheLuceneIndexFieldInfos;LOrgApacheLuceneStoreIOContext;", &OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_EXTENSION, &OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat = { "Lucene50FieldInfosFormat", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x11, 7, 8, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat class]) {
     {
-      JreAssert((((IOSObjectArray *) nil_chk(OrgApacheLuceneIndexDocValuesType_values()))->size_ == 6), (@"org/apache/lucene/codecs/lucene50/Lucene50FieldInfosFormat.java:173 condition failed: assert DocValuesType.values().length == 6;"));
+      JreAssert(((IOSObjectArray *) nil_chk(OrgApacheLuceneIndexDocValuesType_values()))->size_ == 6, @"org/apache/lucene/codecs/lucene50/Lucene50FieldInfosFormat.java:173 condition failed: assert DocValuesType.values().length == 6;");
     }
     {
-      JreAssert((((IOSObjectArray *) nil_chk(OrgApacheLuceneIndexIndexOptions_values()))->size_ == 5), (@"org/apache/lucene/codecs/lucene50/Lucene50FieldInfosFormat.java:218 condition failed: assert IndexOptions.values().length == 5;"));
+      JreAssert(((IOSObjectArray *) nil_chk(OrgApacheLuceneIndexIndexOptions_values()))->size_ == 5, @"org/apache/lucene/codecs/lucene50/Lucene50FieldInfosFormat.java:218 condition failed: assert IndexOptions.values().length == 5;");
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lucene50FieldInfosFormat", NULL, 0x1, NULL, NULL },
-    { "readWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withNSString:withOrgApacheLuceneStoreIOContext:", "read", "Lorg.apache.lucene.index.FieldInfos;", 0x1, "Ljava.io.IOException;", NULL },
-    { "docValuesByteWithOrgApacheLuceneIndexDocValuesType:", "docValuesByte", "B", 0xa, NULL, NULL },
-    { "getDocValuesTypeWithOrgApacheLuceneStoreIndexInput:withByte:", "getDocValuesType", "Lorg.apache.lucene.index.DocValuesType;", 0xa, "Ljava.io.IOException;", NULL },
-    { "indexOptionsByteWithOrgApacheLuceneIndexIndexOptions:", "indexOptionsByte", "B", 0xa, NULL, NULL },
-    { "getIndexOptionsWithOrgApacheLuceneStoreIndexInput:withByte:", "getIndexOptions", "Lorg.apache.lucene.index.IndexOptions;", 0xa, "Ljava.io.IOException;", NULL },
-    { "writeWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withNSString:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:", "write", "V", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EXTENSION", "EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "CODEC_NAME", "CODEC_NAME", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME, NULL, .constantValue.asLong = 0 },
-    { "FORMAT_START", "FORMAT_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_START },
-    { "FORMAT_SAFE_MAPS", "FORMAT_SAFE_MAPS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_SAFE_MAPS },
-    { "FORMAT_CURRENT", "FORMAT_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_CURRENT },
-    { "STORE_TERMVECTOR", "STORE_TERMVECTOR", 0x18, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_STORE_TERMVECTOR },
-    { "OMIT_NORMS", "OMIT_NORMS", 0x18, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_OMIT_NORMS },
-    { "STORE_PAYLOADS", "STORE_PAYLOADS", 0x18, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_STORE_PAYLOADS },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat = { 2, "Lucene50FieldInfosFormat", "org.apache.lucene.codecs.lucene50", NULL, 0x11, 7, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat;
 }
 
 @end

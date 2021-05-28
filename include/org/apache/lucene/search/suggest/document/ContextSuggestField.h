@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentContextSuggestField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentContextSuggestField_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentContextSuggestField || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentContextSuggestField))
 #define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_
 
@@ -27,23 +33,21 @@
 
 /*!
  @brief <code>SuggestField</code> which additionally takes in a set of
- contexts.
- Example usage of adding a suggestion with contexts is as follows:
+  contexts.Example usage of adding a suggestion with contexts is as follows: 
  <pre class="prettyprint">
- document.add(
- new ContextSuggestField(name, "suggestion", Arrays.asList("context1", "context2"),  4));
+   document.add(
+    new ContextSuggestField(name, "suggestion", Arrays.asList("context1", "context2"),  4)); 
  
 @endcode
- Use <code>ContextQuery</code> to boost and/or filter suggestions
- at query-time. Use <code>PrefixCompletionQuery</code>, <code>RegexCompletionQuery</code>
- or <code>FuzzyCompletionQuery</code> if context boost/filtering
- are not needed.
+  Use <code>ContextQuery</code> to boost and/or filter suggestions
+  at query-time.
+ Use <code>PrefixCompletionQuery</code>, <code>RegexCompletionQuery</code>
+  or <code>FuzzyCompletionQuery</code> if context boost/filtering
+  are not needed.
  */
 @interface OrgApacheLuceneSearchSuggestDocumentContextSuggestField : OrgApacheLuceneSearchSuggestDocumentSuggestField
-
-+ (jint)CONTEXT_SEPARATOR;
-
-+ (jbyte)TYPE;
+@property (readonly, class) jint CONTEXT_SEPARATOR NS_SWIFT_NAME(CONTEXT_SEPARATOR);
+@property (readonly, class) jbyte TYPE NS_SWIFT_NAME(TYPE);
 
 #pragma mark Public
 
@@ -53,26 +57,32 @@
  @param value field value to get suggestion on
  @param weight field weight
  @param contexts associated contexts
- @throws IllegalArgumentException if either the name or value is null,
- if value is an empty string, if the weight is negative, if value or
- contexts contains any reserved characters
+ @throw IllegalArgumentExceptionif either the name or value is null,
+  if value is an empty string, if the weight is negative, if value or
+  contexts contains any reserved characters
  */
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value
-                         withInt:(jint)weight
-   withJavaLangCharSequenceArray:(IOSObjectArray *)contexts;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                              withNSString:(NSString *)value
+                                   withInt:(jint)weight
+             withJavaLangCharSequenceArray:(IOSObjectArray *)contexts;
 
 #pragma mark Protected
 
 /*!
  @brief Expert: Sub-classes can inject contexts at
- index-time
+  index-time
  */
 - (id<JavaLangIterable>)contexts;
 
 - (jbyte)type;
 
 - (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *)wrapTokenStreamWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+                                   withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -81,11 +91,11 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentContextSuggestField
 /*!
  @brief Separator used between context value and the suggest field value
  */
-inline jint OrgApacheLuceneSearchSuggestDocumentContextSuggestField_get_CONTEXT_SEPARATOR();
+inline jint OrgApacheLuceneSearchSuggestDocumentContextSuggestField_get_CONTEXT_SEPARATOR(void);
 #define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR 29
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentContextSuggestField, CONTEXT_SEPARATOR, jint)
 
-inline jbyte OrgApacheLuceneSearchSuggestDocumentContextSuggestField_get_TYPE();
+inline jbyte OrgApacheLuceneSearchSuggestDocumentContextSuggestField_get_TYPE(void);
 #define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_TYPE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentContextSuggestField, TYPE, jbyte)
 
@@ -99,4 +109,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextSuggestFie
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentContextSuggestField")

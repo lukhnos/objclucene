@@ -25,6 +25,10 @@
 #include "org/xml/sax/XMLReader.h"
 #include "org/xml/sax/helpers/DefaultHandler.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/hyphenation/PatternParser must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisCompoundHyphenationPatternParser ()
 
 /*!
@@ -33,6 +37,8 @@
 - (NSString *)getLocationStringWithOrgXmlSaxSAXParseException:(OrgXmlSaxSAXParseException *)ex;
 
 @end
+
+__attribute__((unused)) static NSString *OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getLocationStringWithOrgXmlSaxSAXParseException_(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *self, OrgXmlSaxSAXParseException *ex);
 
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationPatternParser
 
@@ -77,7 +83,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     [((id<OrgXmlSaxXMLReader>) nil_chk(parser_)) parseWithOrgXmlSaxInputSource:source];
   }
   @catch (OrgXmlSaxSAXException *e) {
-    @throw create_JavaIoIOException_initWithNSException_(e);
+    @throw create_JavaIoIOException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -89,7 +95,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   NSString *word;
   jboolean space = false;
   jint i;
-  for (i = 0; i < [((JavaLangStringBuilder *) nil_chk(chars)) length]; i++) {
+  for (i = 0; i < [((JavaLangStringBuilder *) nil_chk(chars)) java_length]; i++) {
     if (JavaLangCharacter_isWhitespaceWithChar_([chars charAtWithInt:i])) {
       space = true;
     }
@@ -98,28 +104,28 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
   }
   if (space) {
-    for (jint countr = i; countr < [chars length]; countr++) {
+    for (jint countr = i; countr < [chars java_length]; countr++) {
       [chars setCharAtWithInt:countr - i withChar:[chars charAtWithInt:countr]];
     }
-    [chars setLengthWithInt:[chars length] - i];
-    if ([((JavaLangStringBuilder *) nil_chk(token_)) length] > 0) {
+    [chars setLengthWithInt:[chars java_length] - i];
+    if ([((JavaLangStringBuilder *) nil_chk(token_)) java_length] > 0) {
       word = [((JavaLangStringBuilder *) nil_chk(token_)) description];
       [((JavaLangStringBuilder *) nil_chk(token_)) setLengthWithInt:0];
       return word;
     }
   }
   space = false;
-  for (i = 0; i < [chars length]; i++) {
+  for (i = 0; i < [chars java_length]; i++) {
     if (JavaLangCharacter_isWhitespaceWithChar_([chars charAtWithInt:i])) {
       space = true;
       break;
     }
   }
-  [((JavaLangStringBuilder *) nil_chk(token_)) appendWithNSString:[((NSString *) nil_chk([chars description])) substring:0 endIndex:i]];
-  for (jint countr = i; countr < [chars length]; countr++) {
+  [((JavaLangStringBuilder *) nil_chk(token_)) appendWithNSString:[((NSString *) nil_chk([chars description])) java_substring:0 endIndex:i]];
+  for (jint countr = i; countr < [chars java_length]; countr++) {
     [chars setCharAtWithInt:countr - i withChar:[chars charAtWithInt:countr]];
   }
-  [chars setLengthWithInt:[chars length] - i];
+  [chars setLengthWithInt:[chars java_length] - i];
   if (space) {
     word = [((JavaLangStringBuilder *) nil_chk(token_)) description];
     [((JavaLangStringBuilder *) nil_chk(token_)) setLengthWithInt:0];
@@ -136,11 +142,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (JavaUtilArrayList *)normalizeExceptionWithJavaUtilArrayList:(JavaUtilArrayList *)ex {
   JavaUtilArrayList *res = create_JavaUtilArrayList_init();
   for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(ex)) size]; i++) {
-    id item = [ex getWithInt:i];
+    id item = JreRetainedLocalValue([ex getWithInt:i]);
     if ([item isKindOfClass:[NSString class]]) {
-      NSString *str = (NSString *) cast_chk(item, [NSString class]);
+      NSString *str = (NSString *) item;
       JavaLangStringBuilder *buf = create_JavaLangStringBuilder_init();
-      for (jint j = 0; j < ((jint) [((NSString *) nil_chk(str)) length]); j++) {
+      for (jint j = 0; j < [((NSString *) nil_chk(str)) java_length]; j++) {
         jchar c = [str charAtWithInt:j];
         if (c != hyphenChar_) {
           [buf appendWithChar:c];
@@ -150,10 +156,10 @@ J2OBJC_IGNORE_DESIGNATED_END
           [buf setLengthWithInt:0];
           IOSCharArray *h = [IOSCharArray arrayWithLength:1];
           *IOSCharArray_GetRef(h, 0) = hyphenChar_;
-          [res addWithId:create_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_withNSString_withNSString_([NSString stringWithCharacters:h], nil, nil)];
+          [res addWithId:create_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_withNSString_withNSString_([NSString java_stringWithCharacters:h], nil, nil)];
         }
       }
-      if ([buf length] > 0) {
+      if ([buf java_length] > 0) {
         [res addWithId:[buf description]];
       }
     }
@@ -167,9 +173,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (NSString *)getExceptionWordWithJavaUtilArrayList:(JavaUtilArrayList *)ex {
   JavaLangStringBuilder *res = create_JavaLangStringBuilder_init();
   for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(ex)) size]; i++) {
-    id item = [ex getWithInt:i];
+    id item = JreRetainedLocalValue([ex getWithInt:i]);
     if ([item isKindOfClass:[NSString class]]) {
-      [res appendWithNSString:(NSString *) cast_chk(item, [NSString class])];
+      [res appendWithNSString:(NSString *) item];
     }
     else {
       if (((OrgApacheLuceneAnalysisCompoundHyphenationHyphen *) nil_chk(((OrgApacheLuceneAnalysisCompoundHyphenationHyphen *) cast_chk(item, [OrgApacheLuceneAnalysisCompoundHyphenationHyphen class]))))->noBreak_ != nil) {
@@ -186,8 +192,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgXmlSaxInputSource *)resolveEntityWithNSString:(NSString *)publicId
                                        withNSString:(NSString *)systemId {
-  if ((systemId != nil && [systemId matches:@"(?i).*\\bhyphenation.dtd\\b.*"]) || ([@"hyphenation-info" isEqual:publicId])) {
-    return create_OrgXmlSaxInputSource_initWithNSString_([((JavaNetURL *) nil_chk([[self getClass] getResource:@"hyphenation.dtd"])) toExternalForm]);
+  if ((systemId != nil && [systemId java_matches:@"(?i).*\\bhyphenation.dtd\\b.*"]) || ([@"hyphenation-info" isEqual:publicId])) {
+    return create_OrgXmlSaxInputSource_initWithNSString_([((JavaNetURL *) nil_chk([[self java_getClass] getResource:@"hyphenation.dtd"])) toExternalForm]);
   }
   return nil;
 }
@@ -197,8 +203,8 @@ J2OBJC_IGNORE_DESIGNATED_END
                     withNSString:(NSString *)raw
          withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)attrs {
   if ([((NSString *) nil_chk(local)) isEqual:@"hyphen-char"]) {
-    NSString *h = [((id<OrgXmlSaxAttributes>) nil_chk(attrs)) getValueWithNSString:@"value"];
-    if (h != nil && ((jint) [h length]) == 1) {
+    NSString *h = JreRetainedLocalValue([((id<OrgXmlSaxAttributes>) nil_chk(attrs)) getValueWithNSString:@"value"]);
+    if (h != nil && [h java_length] == 1) {
       hyphenChar_ = [h charAtWithInt:0];
     }
   }
@@ -213,7 +219,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssignAndConsume(&exception_, new_JavaUtilArrayList_init());
   }
   else if ([local isEqual:@"hyphen"]) {
-    if ([((JavaLangStringBuilder *) nil_chk(token_)) length] > 0) {
+    if ([((JavaLangStringBuilder *) nil_chk(token_)) java_length] > 0) {
       [((JavaUtilArrayList *) nil_chk(exception_)) addWithId:[((JavaLangStringBuilder *) nil_chk(token_)) description]];
     }
     [((JavaUtilArrayList *) nil_chk(exception_)) addWithId:create_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_withNSString_withNSString_([((id<OrgXmlSaxAttributes>) nil_chk(attrs)) getValueWithNSString:@"pre"], [attrs getValueWithNSString:@"no"], [attrs getValueWithNSString:@"post"])];
@@ -225,8 +231,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)endElementWithNSString:(NSString *)uri
                   withNSString:(NSString *)local
                   withNSString:(NSString *)raw {
-  if ([((JavaLangStringBuilder *) nil_chk(token_)) length] > 0) {
-    NSString *word = [((JavaLangStringBuilder *) nil_chk(token_)) description];
+  if ([((JavaLangStringBuilder *) nil_chk(token_)) java_length] > 0) {
+    NSString *word = JreRetainedLocalValue([((JavaLangStringBuilder *) nil_chk(token_)) description]);
     switch (currElement_) {
       case OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_CLASSES:
       [((id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>) nil_chk(consumer_)) addClassWithNSString:word];
@@ -234,7 +240,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       case OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_EXCEPTIONS:
       [((JavaUtilArrayList *) nil_chk(exception_)) addWithId:word];
       JreStrongAssign(&exception_, [self normalizeExceptionWithJavaUtilArrayList:exception_]);
-      [((id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>) nil_chk(consumer_)) addExceptionWithNSString:[self getExceptionWordWithJavaUtilArrayList:exception_] withJavaUtilArrayList:(JavaUtilArrayList *) cast_chk([((JavaUtilArrayList *) nil_chk(exception_)) clone], [JavaUtilArrayList class])];
+      [((id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>) nil_chk(consumer_)) addExceptionWithNSString:[self getExceptionWordWithJavaUtilArrayList:exception_] withJavaUtilArrayList:(JavaUtilArrayList *) cast_chk([((JavaUtilArrayList *) nil_chk(exception_)) java_clone], [JavaUtilArrayList class])];
       break;
       case OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_PATTERNS:
       [((id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>) nil_chk(consumer_)) addPatternWithNSString:OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getPatternWithNSString_(word) withNSString:OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getInterletterValuesWithNSString_(word)];
@@ -259,7 +265,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                         withInt:(jint)length {
   JavaLangStringBuilder *chars = create_JavaLangStringBuilder_initWithInt_(length);
   [chars appendWithCharArray:ch withInt:start withInt:length];
-  NSString *word = [self readTokenWithJavaLangStringBuilder:chars];
+  NSString *word = JreRetainedLocalValue([self readTokenWithJavaLangStringBuilder:chars]);
   while (word != nil) {
     switch (currElement_) {
       case OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_CLASSES:
@@ -268,7 +274,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       case OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_EXCEPTIONS:
       [((JavaUtilArrayList *) nil_chk(exception_)) addWithId:word];
       JreStrongAssign(&exception_, [self normalizeExceptionWithJavaUtilArrayList:exception_]);
-      [((id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>) nil_chk(consumer_)) addExceptionWithNSString:[self getExceptionWordWithJavaUtilArrayList:exception_] withJavaUtilArrayList:(JavaUtilArrayList *) cast_chk([((JavaUtilArrayList *) nil_chk(exception_)) clone], [JavaUtilArrayList class])];
+      [((id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>) nil_chk(consumer_)) addExceptionWithNSString:[self getExceptionWordWithJavaUtilArrayList:exception_] withJavaUtilArrayList:(JavaUtilArrayList *) cast_chk([((JavaUtilArrayList *) nil_chk(exception_)) java_clone], [JavaUtilArrayList class])];
       [((JavaUtilArrayList *) nil_chk(exception_)) clear];
       break;
       case OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_PATTERNS:
@@ -280,20 +286,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)getLocationStringWithOrgXmlSaxSAXParseException:(OrgXmlSaxSAXParseException *)ex {
-  JavaLangStringBuilder *str = create_JavaLangStringBuilder_init();
-  NSString *systemId = [((OrgXmlSaxSAXParseException *) nil_chk(ex)) getSystemId];
-  if (systemId != nil) {
-    jint index = [systemId lastIndexOf:'/'];
-    if (index != -1) {
-      systemId = [systemId substring:index + 1];
-    }
-    [str appendWithNSString:systemId];
-  }
-  [str appendWithChar:':'];
-  [str appendWithInt:[ex getLineNumber]];
-  [str appendWithChar:':'];
-  [str appendWithInt:[ex getColumnNumber]];
-  return [str description];
+  return OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getLocationStringWithOrgXmlSaxSAXParseException_(self, ex);
 }
 
 - (void)dealloc {
@@ -306,38 +299,59 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PatternParser", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer:", "PatternParser", NULL, 0x1, NULL, NULL },
-    { "setConsumerWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer:", "setConsumer", "V", 0x1, NULL, NULL },
-    { "parseWithNSString:", "parse", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "parseWithOrgXmlSaxInputSource:", "parse", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createParser", NULL, "Lorg.xml.sax.XMLReader;", 0x8, NULL, NULL },
-    { "readTokenWithJavaLangStringBuilder:", "readToken", "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "getPatternWithNSString:", "getPattern", "Ljava.lang.String;", 0xc, NULL, NULL },
-    { "normalizeExceptionWithJavaUtilArrayList:", "normalizeException", "Ljava.util.ArrayList;", 0x4, NULL, "(Ljava/util/ArrayList<*>;)Ljava/util/ArrayList<Ljava/lang/Object;>;" },
-    { "getExceptionWordWithJavaUtilArrayList:", "getExceptionWord", "Ljava.lang.String;", 0x4, NULL, "(Ljava/util/ArrayList<*>;)Ljava/lang/String;" },
-    { "getInterletterValuesWithNSString:", "getInterletterValues", "Ljava.lang.String;", 0xc, NULL, NULL },
-    { "resolveEntityWithNSString:withNSString:", "resolveEntity", "Lorg.xml.sax.InputSource;", 0x1, NULL, NULL },
-    { "startElementWithNSString:withNSString:withNSString:withOrgXmlSaxAttributes:", "startElement", "V", 0x1, NULL, NULL },
-    { "endElementWithNSString:withNSString:withNSString:", "endElement", "V", 0x1, NULL, NULL },
-    { "charactersWithCharArray:withInt:withInt:", "characters", "V", 0x1, NULL, NULL },
-    { "getLocationStringWithOrgXmlSaxSAXParseException:", "getLocationString", "Ljava.lang.String;", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 5, 4, -1, -1, -1 },
+    { NULL, "LOrgXmlSaxXMLReader;", 0x8, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0xc, 8, 3, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilArrayList;", 0x4, 9, 10, -1, 11, -1, -1 },
+    { NULL, "LNSString;", 0x4, 12, 10, -1, 13, -1, -1 },
+    { NULL, "LNSString;", 0xc, 14, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgXmlSaxInputSource;", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 22, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x2, 23, 24, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer:);
+  methods[2].selector = @selector(setConsumerWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer:);
+  methods[3].selector = @selector(parseWithNSString:);
+  methods[4].selector = @selector(parseWithOrgXmlSaxInputSource:);
+  methods[5].selector = @selector(createParser);
+  methods[6].selector = @selector(readTokenWithJavaLangStringBuilder:);
+  methods[7].selector = @selector(getPatternWithNSString:);
+  methods[8].selector = @selector(normalizeExceptionWithJavaUtilArrayList:);
+  methods[9].selector = @selector(getExceptionWordWithJavaUtilArrayList:);
+  methods[10].selector = @selector(getInterletterValuesWithNSString:);
+  methods[11].selector = @selector(resolveEntityWithNSString:withNSString:);
+  methods[12].selector = @selector(startElementWithNSString:withNSString:withNSString:withOrgXmlSaxAttributes:);
+  methods[13].selector = @selector(endElementWithNSString:withNSString:withNSString:);
+  methods[14].selector = @selector(charactersWithCharArray:withInt:withInt:);
+  methods[15].selector = @selector(getLocationStringWithOrgXmlSaxSAXParseException:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "parser_", NULL, 0x0, "Lorg.xml.sax.XMLReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currElement_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "consumer_", NULL, 0x0, "Lorg.apache.lucene.analysis.compound.hyphenation.PatternConsumer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "token_", NULL, 0x0, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "exception_", NULL, 0x0, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Ljava/lang/Object;>;", .constantValue.asLong = 0 },
-    { "hyphenChar_", NULL, 0x0, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "errMsg_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ELEM_CLASSES", "ELEM_CLASSES", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_CLASSES },
-    { "ELEM_EXCEPTIONS", "ELEM_EXCEPTIONS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_EXCEPTIONS },
-    { "ELEM_PATTERNS", "ELEM_PATTERNS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_PATTERNS },
-    { "ELEM_HYPHEN", "ELEM_HYPHEN", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_HYPHEN },
+    { "parser_", "LOrgXmlSaxXMLReader;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "currElement_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "consumer_", "LOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "token_", "LJavaLangStringBuilder;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "exception_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x0, -1, -1, 25, -1 },
+    { "hyphenChar_", "C", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "errMsg_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ELEM_CLASSES", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_CLASSES, 0x18, -1, -1, -1, -1 },
+    { "ELEM_EXCEPTIONS", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_EXCEPTIONS, 0x18, -1, -1, -1, -1 },
+    { "ELEM_PATTERNS", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_PATTERNS, 0x18, -1, -1, -1, -1 },
+    { "ELEM_HYPHEN", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_HYPHEN, 0x18, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationPatternParser = { 2, "PatternParser", "org.apache.lucene.analysis.compound.hyphenation", NULL, 0x1, 16, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer;", "setConsumer", "parse", "LNSString;", "LJavaIoIOException;", "LOrgXmlSaxInputSource;", "readToken", "LJavaLangStringBuilder;", "getPattern", "normalizeException", "LJavaUtilArrayList;", "(Ljava/util/ArrayList<*>;)Ljava/util/ArrayList<Ljava/lang/Object;>;", "getExceptionWord", "(Ljava/util/ArrayList<*>;)Ljava/lang/String;", "getInterletterValues", "resolveEntity", "LNSString;LNSString;", "startElement", "LNSString;LNSString;LNSString;LOrgXmlSaxAttributes;", "endElement", "LNSString;LNSString;LNSString;", "characters", "[CII", "getLocationString", "LOrgXmlSaxSAXParseException;", "Ljava/util/ArrayList<Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationPatternParser = { "PatternParser", "org.apache.lucene.analysis.compound.hyphenation", ptrTable, methods, fields, 7, 0x1, 16, 11, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser;
 }
 
@@ -382,14 +396,14 @@ id<OrgXmlSaxXMLReader> OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_c
     return [((JavaxXmlParsersSAXParser *) nil_chk([factory newSAXParser])) getXMLReader];
   }
   @catch (JavaLangException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"Couldn't create XMLReader: ", [((JavaLangException *) nil_chk(e)) getMessage]));
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"Couldn't create XMLReader: ", [e getMessage]));
   }
 }
 
 NSString *OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getPatternWithNSString_(NSString *word) {
   OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_initialize();
   JavaLangStringBuilder *pat = create_JavaLangStringBuilder_init();
-  jint len = ((jint) [((NSString *) nil_chk(word)) length]);
+  jint len = [((NSString *) nil_chk(word)) java_length];
   for (jint i = 0; i < len; i++) {
     if (!JavaLangCharacter_isDigitWithChar_([word charAtWithInt:i])) {
       [pat appendWithChar:[word charAtWithInt:i]];
@@ -402,7 +416,7 @@ NSString *OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getInterletter
   OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_initialize();
   JavaLangStringBuilder *il = create_JavaLangStringBuilder_init();
   NSString *word = JreStrcat("$C", pat, 'a');
-  jint len = ((jint) [word length]);
+  jint len = [word java_length];
   for (jint i = 0; i < len; i++) {
     jchar c = [word charAtWithInt:i];
     if (JavaLangCharacter_isDigitWithChar_(c)) {
@@ -414,6 +428,23 @@ NSString *OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getInterletter
     }
   }
   return [il description];
+}
+
+NSString *OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getLocationStringWithOrgXmlSaxSAXParseException_(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *self, OrgXmlSaxSAXParseException *ex) {
+  JavaLangStringBuilder *str = create_JavaLangStringBuilder_init();
+  NSString *systemId = JreRetainedLocalValue([((OrgXmlSaxSAXParseException *) nil_chk(ex)) getSystemId]);
+  if (systemId != nil) {
+    jint index = [systemId java_lastIndexOf:'/'];
+    if (index != -1) {
+      systemId = [systemId java_substring:index + 1];
+    }
+    [str appendWithNSString:systemId];
+  }
+  [str appendWithChar:':'];
+  [str appendWithInt:[ex getLineNumber]];
+  [str appendWithChar:':'];
+  [str appendWithInt:[ex getColumnNumber]];
+  return [str description];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser)

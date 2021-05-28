@@ -13,8 +13,11 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/GroupQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/OrQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/OrQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode
 
@@ -39,7 +42,7 @@
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"";
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   NSString *filler = @"";
-  for (id<JavaUtilIterator> it = [((id<JavaUtilList>) nil_chk([self getChildren])) iterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
+  for (id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk([self getChildren])) iterator]); [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
     [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:filler])) appendWithJavaLangCharSequence:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([it next])) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:escapeSyntaxParser]];
     filler = @" OR ";
   }
@@ -48,12 +51,20 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "OrQueryNode", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)V" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 3, 4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode = { 2, "OrQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:);
+  methods[1].selector = @selector(description);
+  methods[2].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)V", "toString", "toQueryString", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode = { "OrQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode;
 }
 

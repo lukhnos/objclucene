@@ -19,7 +19,11 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
-inline jboolean OrgApacheLuceneIndexBufferedUpdates_get_VERBOSE_DELETES();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/BufferedUpdates must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline jboolean OrgApacheLuceneIndexBufferedUpdates_get_VERBOSE_DELETES(void);
 #define OrgApacheLuceneIndexBufferedUpdates_VERBOSE_DELETES false
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexBufferedUpdates, VERBOSE_DELETES, jboolean)
 
@@ -68,12 +72,10 @@ JavaLangInteger *OrgApacheLuceneIndexBufferedUpdates_MAX_INT;
   return OrgApacheLuceneIndexBufferedUpdates_MAX_INT;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexBufferedUpdates_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneIndexBufferedUpdates_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   {
@@ -102,7 +104,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addQueryWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                        withInt:(jint)docIDUpto {
-  JavaLangInteger *current = [((id<JavaUtilMap>) nil_chk(queries_)) putWithId:query withId:JavaLangInteger_valueOfWithInt_(docIDUpto)];
+  JavaLangInteger *current = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(queries_)) putWithId:query withId:JavaLangInteger_valueOfWithInt_(docIDUpto)]);
   if (current == nil) {
     [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY];
   }
@@ -115,20 +117,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addTermWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                     withInt:(jint)docIDUpto {
-  JavaLangInteger *current = [((id<JavaUtilMap>) nil_chk(terms_)) getWithId:term];
+  JavaLangInteger *current = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(terms_)) getWithId:term]);
   if (current != nil && docIDUpto < [current intValue]) {
     return;
   }
   [terms_ putWithId:term withId:JavaLangInteger_valueOfWithInt_(docIDUpto)];
   [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(numTermDeletes_)) incrementAndGet];
   if (current == nil) {
-    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM + ((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneIndexTerm *) nil_chk(term))->bytes_))->length_ + (OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR * ((jint) [((NSString *) nil_chk([term field])) length]))];
+    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM + ((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneIndexTerm *) nil_chk(term))->bytes_))->length_ + (OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR * [((NSString *) nil_chk([term field])) java_length])];
   }
 }
 
 - (void)addNumericUpdateWithOrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate:(OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *)update
                                                                                withInt:(jint)docIDUpto {
-  JavaUtilLinkedHashMap *fieldUpdates = [((id<JavaUtilMap>) nil_chk(numericUpdates_)) getWithId:((OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *) nil_chk(update))->field_];
+  JavaUtilLinkedHashMap *fieldUpdates = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(numericUpdates_)) getWithId:((OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *) nil_chk(update))->field_]);
   if (fieldUpdates == nil) {
     fieldUpdates = create_JavaUtilLinkedHashMap_init();
     [numericUpdates_ putWithId:update->field_ withId:fieldUpdates];
@@ -151,7 +153,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addBinaryUpdateWithOrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate:(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *)update
                                                                              withInt:(jint)docIDUpto {
-  JavaUtilLinkedHashMap *fieldUpdates = [((id<JavaUtilMap>) nil_chk(binaryUpdates_)) getWithId:((OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *) nil_chk(update))->field_];
+  JavaUtilLinkedHashMap *fieldUpdates = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(binaryUpdates_)) getWithId:((OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *) nil_chk(update))->field_]);
   if (fieldUpdates == nil) {
     fieldUpdates = create_JavaUtilLinkedHashMap_init();
     [binaryUpdates_ putWithId:update->field_ withId:fieldUpdates];
@@ -201,6 +203,57 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(description);
+  methods[2].selector = @selector(addQueryWithOrgApacheLuceneSearchQuery:withInt:);
+  methods[3].selector = @selector(addDocIDWithInt:);
+  methods[4].selector = @selector(addTermWithOrgApacheLuceneIndexTerm:withInt:);
+  methods[5].selector = @selector(addNumericUpdateWithOrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate:withInt:);
+  methods[6].selector = @selector(addBinaryUpdateWithOrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate:withInt:);
+  methods[7].selector = @selector(clear);
+  methods[8].selector = @selector(any);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BYTES_PER_DEL_TERM", "I", .constantValue.asLong = 0, 0x18, -1, 11, -1, -1 },
+    { "BYTES_PER_DEL_DOCID", "I", .constantValue.asLong = 0, 0x18, -1, 12, -1, -1 },
+    { "BYTES_PER_DEL_QUERY", "I", .constantValue.asLong = 0, 0x18, -1, 13, -1, -1 },
+    { "BYTES_PER_NUMERIC_FIELD_ENTRY", "I", .constantValue.asLong = 0, 0x18, -1, 14, -1, -1 },
+    { "BYTES_PER_NUMERIC_UPDATE_ENTRY", "I", .constantValue.asLong = 0, 0x18, -1, 15, -1, -1 },
+    { "BYTES_PER_BINARY_FIELD_ENTRY", "I", .constantValue.asLong = 0, 0x18, -1, 16, -1, -1 },
+    { "BYTES_PER_BINARY_UPDATE_ENTRY", "I", .constantValue.asLong = 0, 0x18, -1, 17, -1, -1 },
+    { "numTermDeletes_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numNumericUpdates_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numBinaryUpdates_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "terms_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x10, -1, -1, 18, -1 },
+    { "queries_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x10, -1, -1, 19, -1 },
+    { "docIDs_", "LJavaUtilList;", .constantValue.asLong = 0, 0x10, -1, -1, 20, -1 },
+    { "numericUpdates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x10, -1, -1, 21, -1 },
+    { "binaryUpdates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x10, -1, -1, 22, -1 },
+    { "MAX_INT", "LJavaLangInteger;", .constantValue.asLong = 0, 0x19, -1, 23, -1, -1 },
+    { "bytesUsed_", "LJavaUtilConcurrentAtomicAtomicLong;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "VERBOSE_DELETES", "Z", .constantValue.asBOOL = OrgApacheLuceneIndexBufferedUpdates_VERBOSE_DELETES, 0x1a, -1, -1, -1, -1 },
+    { "gen_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "toString", "addQuery", "LOrgApacheLuceneSearchQuery;I", "addDocID", "I", "addTerm", "LOrgApacheLuceneIndexTerm;I", "addNumericUpdate", "LOrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate;I", "addBinaryUpdate", "LOrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate;I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM, &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID, &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY, &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY, &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY, &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY, &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY, "Ljava/util/Map<Lorg/apache/lucene/index/Term;Ljava/lang/Integer;>;", "Ljava/util/Map<Lorg/apache/lucene/search/Query;Ljava/lang/Integer;>;", "Ljava/util/List<Ljava/lang/Integer;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/LinkedHashMap<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/DocValuesUpdate$NumericDocValuesUpdate;>;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/LinkedHashMap<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/DocValuesUpdate$BinaryDocValuesUpdate;>;>;", &OrgApacheLuceneIndexBufferedUpdates_MAX_INT };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexBufferedUpdates = { "BufferedUpdates", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 9, 19, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexBufferedUpdates;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexBufferedUpdates class]) {
     OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM = 9 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + 10 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
@@ -215,46 +268,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BufferedUpdates", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "addQueryWithOrgApacheLuceneSearchQuery:withInt:", "addQuery", "V", 0x1, NULL, NULL },
-    { "addDocIDWithInt:", "addDocID", "V", 0x1, NULL, NULL },
-    { "addTermWithOrgApacheLuceneIndexTerm:withInt:", "addTerm", "V", 0x1, NULL, NULL },
-    { "addNumericUpdateWithOrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate:withInt:", "addNumericUpdate", "V", 0x1, NULL, NULL },
-    { "addBinaryUpdateWithOrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate:withInt:", "addBinaryUpdate", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x0, NULL, NULL },
-    { "any", NULL, "Z", 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BYTES_PER_DEL_TERM", "BYTES_PER_DEL_TERM", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_DEL_DOCID", "BYTES_PER_DEL_DOCID", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_DEL_QUERY", "BYTES_PER_DEL_QUERY", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_NUMERIC_FIELD_ENTRY", "BYTES_PER_NUMERIC_FIELD_ENTRY", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_NUMERIC_UPDATE_ENTRY", "BYTES_PER_NUMERIC_UPDATE_ENTRY", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_BINARY_FIELD_ENTRY", "BYTES_PER_BINARY_FIELD_ENTRY", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_BINARY_UPDATE_ENTRY", "BYTES_PER_BINARY_UPDATE_ENTRY", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY, NULL, .constantValue.asLong = 0 },
-    { "numTermDeletes_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numNumericUpdates_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numBinaryUpdates_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "terms_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Lorg/apache/lucene/index/Term;Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
-    { "queries_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Lorg/apache/lucene/search/Query;Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
-    { "docIDs_", NULL, 0x10, "Ljava.util.List;", NULL, "Ljava/util/List<Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
-    { "numericUpdates_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/util/LinkedHashMap<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/DocValuesUpdate$NumericDocValuesUpdate;>;>;", .constantValue.asLong = 0 },
-    { "binaryUpdates_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/util/LinkedHashMap<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/DocValuesUpdate$BinaryDocValuesUpdate;>;>;", .constantValue.asLong = 0 },
-    { "MAX_INT", "MAX_INT", 0x19, "Ljava.lang.Integer;", &OrgApacheLuceneIndexBufferedUpdates_MAX_INT, NULL, .constantValue.asLong = 0 },
-    { "bytesUsed_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicLong;", NULL, NULL, .constantValue.asLong = 0 },
-    { "VERBOSE_DELETES", "VERBOSE_DELETES", 0x1a, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneIndexBufferedUpdates_VERBOSE_DELETES },
-    { "gen_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexBufferedUpdates = { 2, "BufferedUpdates", "org.apache.lucene.index", NULL, 0x0, 9, methods, 19, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexBufferedUpdates;
-}
-
 @end
 
-void OrgApacheLuceneIndexBufferedUpdates_init(OrgApacheLuceneIndexBufferedUpdates *self) {
+void OrgApacheLuceneIndexBufferedUpdates_initPackagePrivate(OrgApacheLuceneIndexBufferedUpdates *self) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->numTermDeletes_, new_JavaUtilConcurrentAtomicAtomicInteger_init());
   JreStrongAssignAndConsume(&self->numNumericUpdates_, new_JavaUtilConcurrentAtomicAtomicInteger_init());
@@ -267,12 +283,12 @@ void OrgApacheLuceneIndexBufferedUpdates_init(OrgApacheLuceneIndexBufferedUpdate
   JreStrongAssignAndConsume(&self->bytesUsed_, new_JavaUtilConcurrentAtomicAtomicLong_init());
 }
 
-OrgApacheLuceneIndexBufferedUpdates *new_OrgApacheLuceneIndexBufferedUpdates_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexBufferedUpdates, init)
+OrgApacheLuceneIndexBufferedUpdates *new_OrgApacheLuceneIndexBufferedUpdates_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexBufferedUpdates, initPackagePrivate)
 }
 
-OrgApacheLuceneIndexBufferedUpdates *create_OrgApacheLuceneIndexBufferedUpdates_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexBufferedUpdates, init)
+OrgApacheLuceneIndexBufferedUpdates *create_OrgApacheLuceneIndexBufferedUpdates_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexBufferedUpdates, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexBufferedUpdates)

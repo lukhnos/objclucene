@@ -3,13 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/index/MergeScheduler.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/IndexWriter.h"
 #include "org/apache/lucene/index/MergeScheduler.h"
 #include "org/apache/lucene/index/MergeTrigger.h"
 #include "org/apache/lucene/util/InfoStream.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MergeScheduler must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneIndexMergeScheduler
 
@@ -50,18 +52,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "MergeScheduler", NULL, 0x4, NULL, NULL },
-    { "mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTrigger:withBoolean:", "merge", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "setInfoStreamWithOrgApacheLuceneUtilInfoStream:", "setInfoStream", "V", 0x10, NULL, NULL },
-    { "verbose", NULL, "Z", 0x4, NULL, NULL },
-    { "messageWithNSString:", "message", "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x10, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTrigger:withBoolean:);
+  methods[2].selector = @selector(close);
+  methods[3].selector = @selector(setInfoStreamWithOrgApacheLuceneUtilInfoStream:);
+  methods[4].selector = @selector(verbose);
+  methods[5].selector = @selector(messageWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "infoStream_", NULL, 0x4, "Lorg.apache.lucene.util.InfoStream;", NULL, NULL, .constantValue.asLong = 0 },
+    { "infoStream_", "LOrgApacheLuceneUtilInfoStream;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeScheduler = { 2, "MergeScheduler", "org.apache.lucene.index", NULL, 0x401, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "merge", "LOrgApacheLuceneIndexIndexWriter;LOrgApacheLuceneIndexMergeTrigger;Z", "LJavaIoIOException;", "setInfoStream", "LOrgApacheLuceneUtilInfoStream;", "message", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeScheduler = { "MergeScheduler", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 6, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMergeScheduler;
 }
 

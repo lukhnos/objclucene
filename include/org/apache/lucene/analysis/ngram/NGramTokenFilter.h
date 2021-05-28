@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisNgramNGramTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNgramNGramTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisNgramNGramTokenFilter))
 #define OrgApacheLuceneAnalysisNgramNGramTokenFilter_
 
@@ -25,44 +31,42 @@
 /*!
  @brief Tokenizes the input into n-grams of the given size(s).
  As of Lucene 4.4, this token filter:<ul>
- <li>handles supplementary characters correctly,</li>
- <li>emits all n-grams for the same token at the same position,</li>
- <li>does not modify offsets,</li>
- <li>sorts n-grams by their offset in the original token first, then
- increasing length (meaning that "abc" will give "a", "ab", "abc", "b", "bc",
- "c").</li></ul>
- <p>You can make this filter use the old behavior by using
+  <li>handles supplementary characters correctly,</li>
+  <li>emits all n-grams for the same token at the same position,</li>
+  <li>does not modify offsets,</li>
+  <li>sorts n-grams by their offset in the original token first, then
+  increasing length (meaning that "abc" will give "a", "ab", "abc", "b", "bc",
+  "c").</li></ul>
+  <p>You can make this filter use the old behavior by using 
  <code>org.apache.lucene.analysis.ngram.Lucene43NGramTokenFilter</code> but this is not recommended as
- it will lead to broken <code>TokenStream</code>s that will cause highlighting
- bugs.
+  it will lead to broken <code>TokenStream</code>s that will cause highlighting
+  bugs. 
  <p>If you were using this <code>TokenFilter</code> to perform partial highlighting,
- this won't work anymore since this filter doesn't update offsets. You should
- modify your analysis chain to use <code>NGramTokenizer</code>, and potentially
- override <code>NGramTokenizer.isTokenChar(int)</code> to perform pre-tokenization.
+  this won't work anymore since this filter doesn't update offsets. You should
+  modify your analysis chain to use <code>NGramTokenizer</code>, and potentially
+  override <code>NGramTokenizer.isTokenChar(int)</code> to perform pre-tokenization.
  */
 @interface OrgApacheLuceneAnalysisNgramNGramTokenFilter : OrgApacheLuceneAnalysisTokenFilter
-
-+ (jint)DEFAULT_MIN_NGRAM_SIZE;
-
-+ (jint)DEFAULT_MAX_NGRAM_SIZE;
+@property (readonly, class) jint DEFAULT_MIN_NGRAM_SIZE NS_SWIFT_NAME(DEFAULT_MIN_NGRAM_SIZE);
+@property (readonly, class) jint DEFAULT_MAX_NGRAM_SIZE NS_SWIFT_NAME(DEFAULT_MAX_NGRAM_SIZE);
 
 #pragma mark Public
 
 /*!
  @brief Creates NGramTokenFilter with default min and max n-grams.
- @param input <code>TokenStream</code> holding the input to be tokenized
+ @param input<code>TokenStream</code>  holding the input to be tokenized
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 /*!
  @brief Creates NGramTokenFilter with given min and max n-grams.
- @param input <code>TokenStream</code> holding the input to be tokenized
+ @param input<code>TokenStream</code>  holding the input to be tokenized
  @param minGram the smallest n-gram to generate
  @param maxGram the largest n-gram to generate
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)minGram
-                                                   withInt:(jint)maxGram;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                             withInt:(jint)minGram
+                                                             withInt:(jint)maxGram;
 
 /*!
  @brief Returns the next token in the stream, or null at EOS.
@@ -75,11 +79,11 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramNGramTokenFilter)
 
-inline jint OrgApacheLuceneAnalysisNgramNGramTokenFilter_get_DEFAULT_MIN_NGRAM_SIZE();
+inline jint OrgApacheLuceneAnalysisNgramNGramTokenFilter_get_DEFAULT_MIN_NGRAM_SIZE(void);
 #define OrgApacheLuceneAnalysisNgramNGramTokenFilter_DEFAULT_MIN_NGRAM_SIZE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramNGramTokenFilter, DEFAULT_MIN_NGRAM_SIZE, jint)
 
-inline jint OrgApacheLuceneAnalysisNgramNGramTokenFilter_get_DEFAULT_MAX_NGRAM_SIZE();
+inline jint OrgApacheLuceneAnalysisNgramNGramTokenFilter_get_DEFAULT_MAX_NGRAM_SIZE(void);
 #define OrgApacheLuceneAnalysisNgramNGramTokenFilter_DEFAULT_MAX_NGRAM_SIZE 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramNGramTokenFilter, DEFAULT_MAX_NGRAM_SIZE, jint)
 
@@ -99,4 +103,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramNGramTokenFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramTokenFilter")

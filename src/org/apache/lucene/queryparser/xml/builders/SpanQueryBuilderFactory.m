@@ -3,7 +3,6 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/SpanQueryBuilderFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
@@ -13,6 +12,10 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 #include "org/w3c/dom/Element.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/SpanQueryBuilderFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory () {
  @public
@@ -25,6 +28,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory
 
 @implementation OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   return [self getSpanQueryWithOrgW3cDomElement:e];
 }
@@ -35,19 +45,12 @@ withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:(id<OrgApacheLuceneQue
 }
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
-  id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder> builder = [((id<JavaUtilMap>) nil_chk(builders_)) getWithId:[((id<OrgW3cDomElement>) nil_chk(e)) getNodeName]];
+  id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder> builder = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(builders_)) getWithId:[((id<OrgW3cDomElement>) nil_chk(e)) getNodeName]]);
   if (builder == nil) {
     @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"No SpanQueryObjectBuilder defined for node ", [e getNodeName]));
   }
   return [builder getSpanQueryWithOrgW3cDomElement:e];
 }
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(builders_);
@@ -55,16 +58,25 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "addBuilderWithNSString:withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:", "addBuilder", "V", 0x1, NULL, NULL },
-    { "getSpanQueryWithOrgW3cDomElement:", "getSpanQuery", "Lorg.apache.lucene.search.spans.SpanQuery;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", "SpanQueryBuilderFactory", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpansSpanQuery;", 0x1, 5, 1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getQueryWithOrgW3cDomElement:);
+  methods[2].selector = @selector(addBuilderWithNSString:withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:);
+  methods[3].selector = @selector(getSpanQueryWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "builders_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/queryparser/xml/builders/SpanQueryBuilder;>;", .constantValue.asLong = 0 },
+    { "builders_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory = { 2, "SpanQueryBuilderFactory", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "getQuery", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;", "addBuilder", "LNSString;LOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder;", "getSpanQuery", "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/queryparser/xml/builders/SpanQueryBuilder;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory = { "SpanQueryBuilderFactory", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory;
 }
 

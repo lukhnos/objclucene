@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonAutomatonProvider
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonAutomatonProvider_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomatonProvider || defined(INCLUDE_OrgApacheLuceneUtilAutomatonAutomatonProvider))
 #define OrgApacheLuceneUtilAutomatonAutomatonProvider_
 
@@ -21,15 +27,15 @@
 /*!
  @brief Automaton provider for <code>RegExp.
  </code>
- <code>RegExp.toAutomaton(AutomatonProvider,int)</code>
+  <code>RegExp.toAutomaton(AutomatonProvider,int)</code>
  */
-@protocol OrgApacheLuceneUtilAutomatonAutomatonProvider < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilAutomatonAutomatonProvider < JavaObject >
 
 /*!
  @brief Returns automaton of the given name.
  @param name automaton name
  @return automaton
- @throws IOException if errors occur
+ @throw IOExceptionif errors occur
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)getAutomatonWithNSString:(NSString *)name;
 
@@ -41,4 +47,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomatonProvider)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomatonProvider")

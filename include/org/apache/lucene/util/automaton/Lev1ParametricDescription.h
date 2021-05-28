@@ -13,12 +13,20 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonLev1ParametricDescription
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonLev1ParametricDescription_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLev1ParametricDescription || defined(INCLUDE_OrgApacheLuceneUtilAutomatonLev1ParametricDescription))
 #define OrgApacheLuceneUtilAutomatonLev1ParametricDescription_
 
 #define RESTRICT_OrgApacheLuceneUtilAutomatonLevenshteinAutomata 1
 #define INCLUDE_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription 1
 #include "org/apache/lucene/util/automaton/LevenshteinAutomata.h"
+
+@class IOSIntArray;
 
 /*!
  @brief Parametric description for generating a Levenshtein automaton of degree 1
@@ -27,7 +35,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)w;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)w;
 
 #pragma mark Package-Private
 
@@ -35,18 +43,28 @@
                   withInt:(jint)position
                   withInt:(jint)vector;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                              withInt:(jint)arg1
+                         withIntArray:(IOSIntArray *)arg2 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilAutomatonLev1ParametricDescription)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonLev1ParametricDescription_initWithInt_(OrgApacheLuceneUtilAutomatonLev1ParametricDescription *self, jint w);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonLev1ParametricDescription_initPackagePrivateWithInt_(OrgApacheLuceneUtilAutomatonLev1ParametricDescription *self, jint w);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonLev1ParametricDescription *new_OrgApacheLuceneUtilAutomatonLev1ParametricDescription_initWithInt_(jint w) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonLev1ParametricDescription *new_OrgApacheLuceneUtilAutomatonLev1ParametricDescription_initPackagePrivateWithInt_(jint w) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonLev1ParametricDescription *create_OrgApacheLuceneUtilAutomatonLev1ParametricDescription_initWithInt_(jint w);
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonLev1ParametricDescription *create_OrgApacheLuceneUtilAutomatonLev1ParametricDescription_initPackagePrivateWithInt_(jint w);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonLev1ParametricDescription)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLev1ParametricDescription")

@@ -3,9 +3,7 @@
 //  source: ./misc/src/java/org/apache/lucene/index/MergeReaderWrapper.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IndexOutOfBoundsException.h"
 #include "org/apache/lucene/codecs/DocValuesProducer.h"
 #include "org/apache/lucene/codecs/FieldsProducer.h"
@@ -17,7 +15,6 @@
 #include "org/apache/lucene/index/FieldInfo.h"
 #include "org/apache/lucene/index/FieldInfos.h"
 #include "org/apache/lucene/index/Fields.h"
-#include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/MergeReaderWrapper.h"
 #include "org/apache/lucene/index/NumericDocValues.h"
@@ -27,6 +24,10 @@
 #include "org/apache/lucene/index/SortedSetDocValues.h"
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
 #include "org/apache/lucene/util/Bits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MergeReaderWrapper must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexMergeReaderWrapper ()
 
@@ -38,8 +39,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
 
 @implementation OrgApacheLuceneIndexMergeReaderWrapper
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)inArg {
-  OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(self, inArg);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)inArg {
+  OrgApacheLuceneIndexMergeReaderWrapper_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_(self, inArg);
   return self;
 }
 
@@ -57,7 +58,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field];
+  OrgApacheLuceneIndexFieldInfo *fi = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field]);
   if (fi == nil) {
     return nil;
   }
@@ -69,7 +70,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field];
+  OrgApacheLuceneIndexFieldInfo *fi = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field]);
   if (fi == nil) {
     return nil;
   }
@@ -81,7 +82,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
 
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field];
+  OrgApacheLuceneIndexFieldInfo *fi = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field]);
   if (fi == nil) {
     return nil;
   }
@@ -93,7 +94,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
 
 - (OrgApacheLuceneIndexSortedNumericDocValues *)getSortedNumericDocValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field];
+  OrgApacheLuceneIndexFieldInfo *fi = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field]);
   if (fi == nil) {
     return nil;
   }
@@ -105,7 +106,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
 
 - (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetDocValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field];
+  OrgApacheLuceneIndexFieldInfo *fi = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field]);
   if (fi == nil) {
     return nil;
   }
@@ -117,7 +118,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field];
+  OrgApacheLuceneIndexFieldInfo *fi = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field]);
   if (fi == nil) {
     return nil;
   }
@@ -129,7 +130,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNormValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field];
+  OrgApacheLuceneIndexFieldInfo *fi = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk([self getFieldInfos])) fieldInfoWithNSString:field]);
   if (fi == nil || ![fi hasNorms]) {
     return nil;
   }
@@ -203,81 +204,109 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSegmentReader:", "MergeReaderWrapper", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "fields", NULL, "Lorg.apache.lucene.index.Fields;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getNumericDocValuesWithNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getBinaryDocValuesWithNSString:", "getBinaryDocValues", "Lorg.apache.lucene.index.BinaryDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSortedDocValuesWithNSString:", "getSortedDocValues", "Lorg.apache.lucene.index.SortedDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSortedNumericDocValuesWithNSString:", "getSortedNumericDocValues", "Lorg.apache.lucene.index.SortedNumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSortedSetDocValuesWithNSString:", "getSortedSetDocValues", "Lorg.apache.lucene.index.SortedSetDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getDocsWithFieldWithNSString:", "getDocsWithField", "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getNormValuesWithNSString:", "getNormValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getFieldInfos", NULL, "Lorg.apache.lucene.index.FieldInfos;", 0x1, NULL, NULL },
-    { "getLiveDocs", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, NULL, NULL },
-    { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getTermVectorsWithInt:", "getTermVectors", "Lorg.apache.lucene.index.Fields;", 0x1, "Ljava.io.IOException;", NULL },
-    { "numDocs", NULL, "I", 0x1, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x1, NULL, NULL },
-    { "documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:", "document", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "doClose", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "getCoreCacheKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getCombinedCoreAndDeletesKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "checkBoundsWithInt:", "checkBounds", "V", 0x2, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x1, 5, 6, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexBinaryDocValues;", 0x1, 7, 6, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedDocValues;", 0x1, 8, 6, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedNumericDocValues;", 0x1, 9, 6, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedSetDocValues;", 0x1, 10, 6, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, 11, 6, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x1, 12, 6, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFieldInfos;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x1, 13, 14, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 16, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 17, 14, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 18, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexSegmentReader:);
+  methods[1].selector = @selector(addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[2].selector = @selector(removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[3].selector = @selector(fields);
+  methods[4].selector = @selector(getNumericDocValuesWithNSString:);
+  methods[5].selector = @selector(getBinaryDocValuesWithNSString:);
+  methods[6].selector = @selector(getSortedDocValuesWithNSString:);
+  methods[7].selector = @selector(getSortedNumericDocValuesWithNSString:);
+  methods[8].selector = @selector(getSortedSetDocValuesWithNSString:);
+  methods[9].selector = @selector(getDocsWithFieldWithNSString:);
+  methods[10].selector = @selector(getNormValuesWithNSString:);
+  methods[11].selector = @selector(getFieldInfos);
+  methods[12].selector = @selector(getLiveDocs);
+  methods[13].selector = @selector(checkIntegrity);
+  methods[14].selector = @selector(getTermVectorsWithInt:);
+  methods[15].selector = @selector(numDocs);
+  methods[16].selector = @selector(maxDoc);
+  methods[17].selector = @selector(documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:);
+  methods[18].selector = @selector(doClose);
+  methods[19].selector = @selector(getCoreCacheKey);
+  methods[20].selector = @selector(getCombinedCoreAndDeletesKey);
+  methods[21].selector = @selector(checkBoundsWithInt:);
+  methods[22].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.index.SegmentReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fields_", NULL, 0x10, "Lorg.apache.lucene.codecs.FieldsProducer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "norms_", NULL, 0x10, "Lorg.apache.lucene.codecs.NormsProducer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docValues_", NULL, 0x10, "Lorg.apache.lucene.codecs.DocValuesProducer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "store_", NULL, 0x10, "Lorg.apache.lucene.codecs.StoredFieldsReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "vectors_", NULL, 0x10, "Lorg.apache.lucene.codecs.TermVectorsReader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneIndexSegmentReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fields_", "LOrgApacheLuceneCodecsFieldsProducer;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "norms_", "LOrgApacheLuceneCodecsNormsProducer;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docValues_", "LOrgApacheLuceneCodecsDocValuesProducer;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "store_", "LOrgApacheLuceneCodecsStoredFieldsReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "vectors_", "LOrgApacheLuceneCodecsTermVectorsReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeReaderWrapper = { 2, "MergeReaderWrapper", "org.apache.lucene.index", NULL, 0x0, 23, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentReader;", "LJavaIoIOException;", "addCoreClosedListener", "LOrgApacheLuceneIndexLeafReader_CoreClosedListener;", "removeCoreClosedListener", "getNumericDocValues", "LNSString;", "getBinaryDocValues", "getSortedDocValues", "getSortedNumericDocValues", "getSortedSetDocValues", "getDocsWithField", "getNormValues", "getTermVectors", "I", "document", "ILOrgApacheLuceneIndexStoredFieldVisitor;", "checkBounds", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeReaderWrapper = { "MergeReaderWrapper", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 23, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMergeReaderWrapper;
 }
 
 @end
 
-void OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexMergeReaderWrapper *self, OrgApacheLuceneIndexSegmentReader *inArg) {
+void OrgApacheLuceneIndexMergeReaderWrapper_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexMergeReaderWrapper *self, OrgApacheLuceneIndexSegmentReader *inArg) {
   OrgApacheLuceneIndexLeafReader_init(self);
   JreStrongAssign(&self->in_, inArg);
-  OrgApacheLuceneCodecsFieldsProducer *fields = [((OrgApacheLuceneIndexSegmentReader *) nil_chk(inArg)) getPostingsReader];
+  OrgApacheLuceneCodecsFieldsProducer *fields = JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentReader *) nil_chk(inArg)) getPostingsReader]);
   if (fields != nil) {
     fields = [fields getMergeInstance];
   }
   JreStrongAssign(&self->fields_, fields);
-  OrgApacheLuceneCodecsNormsProducer *norms = [inArg getNormsReader];
+  OrgApacheLuceneCodecsNormsProducer *norms = JreRetainedLocalValue([inArg getNormsReader]);
   if (norms != nil) {
     norms = [norms getMergeInstance];
   }
   JreStrongAssign(&self->norms_, norms);
-  OrgApacheLuceneCodecsDocValuesProducer *docValues = [inArg getDocValuesReader];
+  OrgApacheLuceneCodecsDocValuesProducer *docValues = JreRetainedLocalValue([inArg getDocValuesReader]);
   if (docValues != nil) {
     docValues = [docValues getMergeInstance];
   }
   JreStrongAssign(&self->docValues_, docValues);
-  OrgApacheLuceneCodecsStoredFieldsReader *store = [inArg getFieldsReader];
+  OrgApacheLuceneCodecsStoredFieldsReader *store = JreRetainedLocalValue([inArg getFieldsReader]);
   if (store != nil) {
     store = [store getMergeInstance];
   }
   JreStrongAssign(&self->store_, store);
-  OrgApacheLuceneCodecsTermVectorsReader *vectors = [inArg getTermVectorsReader];
+  OrgApacheLuceneCodecsTermVectorsReader *vectors = JreRetainedLocalValue([inArg getTermVectorsReader]);
   if (vectors != nil) {
     vectors = [vectors getMergeInstance];
   }
   JreStrongAssign(&self->vectors_, vectors);
 }
 
-OrgApacheLuceneIndexMergeReaderWrapper *new_OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergeReaderWrapper, initWithOrgApacheLuceneIndexSegmentReader_, inArg)
+OrgApacheLuceneIndexMergeReaderWrapper *new_OrgApacheLuceneIndexMergeReaderWrapper_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergeReaderWrapper, initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_, inArg)
 }
 
-OrgApacheLuceneIndexMergeReaderWrapper *create_OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergeReaderWrapper, initWithOrgApacheLuceneIndexSegmentReader_, inArg)
+OrgApacheLuceneIndexMergeReaderWrapper *create_OrgApacheLuceneIndexMergeReaderWrapper_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergeReaderWrapper, initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_, inArg)
 }
 
 void OrgApacheLuceneIndexMergeReaderWrapper_checkBoundsWithInt_(OrgApacheLuceneIndexMergeReaderWrapper *self, jint docID) {

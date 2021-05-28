@@ -3,7 +3,6 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/surround/query/FieldsQuery.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/ArrayList.h"
@@ -15,6 +14,10 @@
 #include "org/apache/lucene/queryparser/surround/query/OrQuery.h"
 #include "org/apache/lucene/queryparser/surround/query/SrndQuery.h"
 #include "org/apache/lucene/search/Query.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/FieldsQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserSurroundQueryFieldsQuery () {
  @public
@@ -56,10 +59,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, OrOperat
   }
   else {
     id<JavaUtilList> queries = create_JavaUtilArrayList_init();
-    id<JavaUtilIterator> fni = [((id<JavaUtilList>) nil_chk([self getFieldNames])) listIterator];
+    id<JavaUtilIterator> fni = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk([self getFieldNames])) listIterator]);
     OrgApacheLuceneQueryparserSurroundQuerySrndQuery *qc;
     while ([((id<JavaUtilIterator>) nil_chk(fni)) hasNext]) {
-      qc = [((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(q_)) clone];
+      qc = [((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(q_)) java_clone];
       [queries addWithId:create_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_(qc, [fni next], fieldOp_)];
     }
     OrgApacheLuceneQueryparserSurroundQueryOrQuery *oq = create_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(queries, true, OrOperatorName_);
@@ -90,7 +93,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, OrOperat
 }
 
 - (void)fieldNamesToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r {
-  id<JavaUtilIterator> fni = [((id<JavaUtilList>) nil_chk([self getFieldNames])) listIterator];
+  id<JavaUtilIterator> fni = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk([self getFieldNames])) listIterator]);
   while ([((id<JavaUtilIterator>) nil_chk(fni)) hasNext]) {
     [((JavaLangStringBuilder *) nil_chk(r)) appendWithNSString:[fni next]];
     [r appendWithChar:[self getFieldOperator]];
@@ -105,24 +108,38 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, OrOperat
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withJavaUtilList:withChar:", "FieldsQuery", NULL, 0x1, NULL, "(Lorg/apache/lucene/queryparser/surround/query/SrndQuery;Ljava/util/List<Ljava/lang/String;>;C)V" },
-    { "initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withNSString:withChar:", "FieldsQuery", NULL, 0x1, NULL, NULL },
-    { "isFieldsSubQueryAcceptable", NULL, "Z", 0x1, NULL, NULL },
-    { "makeLuceneQueryNoBoostWithOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryNoBoost", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryFieldNoBoost", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "getFieldNames", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Ljava/lang/String;>;" },
-    { "getFieldOperator", NULL, "C", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "fieldNamesToStringWithJavaLangStringBuilder:", "fieldNamesToString", "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 7, -1, -1 },
+    { NULL, "C", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 9, 10, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withJavaUtilList:withChar:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withNSString:withChar:);
+  methods[2].selector = @selector(isFieldsSubQueryAcceptable);
+  methods[3].selector = @selector(makeLuceneQueryNoBoostWithOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  methods[4].selector = @selector(makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  methods[5].selector = @selector(getFieldNames);
+  methods[6].selector = @selector(getFieldOperator);
+  methods[7].selector = @selector(description);
+  methods[8].selector = @selector(fieldNamesToStringWithJavaLangStringBuilder:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "q_", NULL, 0x2, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldNames_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "fieldOp_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "OrOperatorName_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "q_", "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldNames_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 11, -1 },
+    { "fieldOp_", "C", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "OrOperatorName_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryFieldsQuery = { 2, "FieldsQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 9, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;LJavaUtilList;C", "(Lorg/apache/lucene/queryparser/surround/query/SrndQuery;Ljava/util/List<Ljava/lang/String;>;C)V", "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;LNSString;C", "makeLuceneQueryNoBoost", "LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;", "makeLuceneQueryFieldNoBoost", "LNSString;LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;", "()Ljava/util/List<Ljava/lang/String;>;", "toString", "fieldNamesToString", "LJavaLangStringBuilder;", "Ljava/util/List<Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryFieldsQuery = { "FieldsQuery", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, fields, 7, 0x1, 9, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery;
 }
 

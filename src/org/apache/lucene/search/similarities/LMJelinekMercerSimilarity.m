@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/similarities/LMJelinekMercerSimilarity.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Float.h"
@@ -13,6 +14,10 @@
 #include "org/apache/lucene/search/similarities/BasicStats.h"
 #include "org/apache/lucene/search/similarities/LMJelinekMercerSimilarity.h"
 #include "org/apache/lucene/search/similarities/LMSimilarity.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/LMJelinekMercerSimilarity must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity () {
  @public
@@ -60,22 +65,33 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 }
 
 - (NSString *)getName {
-  return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Jelinek-Mercer(%f)", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangFloat_valueOfWithFloat_([self getLambda]) } count:1 type:NSObject_class_()]);
+  return NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Jelinek-Mercer(%f)", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangFloat_valueOfWithFloat_([self getLambda]) } count:1 type:NSObject_class_()]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:withFloat:", "LMJelinekMercerSimilarity", NULL, 0x1, NULL, NULL },
-    { "initWithFloat:", "LMJelinekMercerSimilarity", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x4, NULL, NULL },
-    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" },
-    { "getLambda", NULL, "F", 0x1, NULL, NULL },
-    { "getName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, -1, 6, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:withFloat:);
+  methods[1].selector = @selector(initWithFloat:);
+  methods[2].selector = @selector(scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:);
+  methods[3].selector = @selector(explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:);
+  methods[4].selector = @selector(getLambda);
+  methods[5].selector = @selector(getName);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "lambda_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "lambda_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity = { 2, "LMJelinekMercerSimilarity", "org.apache.lucene.search.similarities", NULL, 0x1, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;F", "F", "score", "LOrgApacheLuceneSearchSimilaritiesBasicStats;FF", "explain", "LJavaUtilList;LOrgApacheLuceneSearchSimilaritiesBasicStats;IFF", "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity = { "LMJelinekMercerSimilarity", "org.apache.lucene.search.similarities", ptrTable, methods, fields, 7, 0x1, 6, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity;
 }
 

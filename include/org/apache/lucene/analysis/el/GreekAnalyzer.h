@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisElGreekAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisElGreekAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisElGreekAnalyzer))
 #define OrgApacheLuceneAnalysisElGreekAnalyzer_
 
@@ -26,32 +32,32 @@
 /*!
  @brief <code>Analyzer</code> for the Greek language.
  <p>
- Supports an external list of stopwords (words
- that will not be indexed at all).
- A default set of stopwords is used unless an alternative list is specified.
+  Supports an external list of stopwords (words
+  that will not be indexed at all).
+  A default set of stopwords is used unless an alternative list is specified. 
  </p>
+   
  <p><b>NOTE</b>: This class uses the same <code>org.apache.lucene.util.Version</code>
- dependent settings as <code>StandardAnalyzer</code>.</p>
+  dependent settings as <code>StandardAnalyzer</code>.</p>
  */
 @interface OrgApacheLuceneAnalysisElGreekAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
-
-+ (NSString *)DEFAULT_STOPWORD_FILE;
+@property (readonly, copy, class) NSString *DEFAULT_STOPWORD_FILE NS_SWIFT_NAME(DEFAULT_STOPWORD_FILE);
 
 #pragma mark Public
 
 /*!
  @brief Builds an analyzer with the default stop words.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Builds an analyzer with the given stop words.
  <p>
- <b>NOTE:</b> The stopwords set should be pre-processed with the logic of 
+  <b>NOTE:</b> The stopwords set should be pre-processed with the logic of  
  <code>GreekLowerCaseFilter</code> for best results.
  @param stopwords a stopword set
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
 /*!
  @brief Returns a set of default Greek-stopwords
@@ -63,12 +69,12 @@
 
 /*!
  @brief Creates
- <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- used to tokenize all the text in the provided <code>Reader</code>.
+  <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+  used to tokenize all the text in the provided <code>Reader</code>.
  @return <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- built from a <code>StandardTokenizer</code> filtered with
- <code>GreekLowerCaseFilter</code>, <code>StandardFilter</code>,
- <code>StopFilter</code>, and <code>GreekStemFilter</code>
+          built from a <code>StandardTokenizer</code> filtered with
+          <code>GreekLowerCaseFilter</code>, <code>StandardFilter</code>,
+          <code>StopFilter</code>, and <code>GreekStemFilter</code>
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
@@ -79,18 +85,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisElGreekAnalyzer)
 /*!
  @brief File containing default Greek stopwords.
  */
-inline NSString *OrgApacheLuceneAnalysisElGreekAnalyzer_get_DEFAULT_STOPWORD_FILE();
+inline NSString *OrgApacheLuceneAnalysisElGreekAnalyzer_get_DEFAULT_STOPWORD_FILE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekAnalyzer_getDefaultStopSet();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekAnalyzer_getDefaultStopSet(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisElGreekAnalyzer_init(OrgApacheLuceneAnalysisElGreekAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekAnalyzer *new_OrgApacheLuceneAnalysisElGreekAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekAnalyzer *new_OrgApacheLuceneAnalysisElGreekAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekAnalyzer *create_OrgApacheLuceneAnalysisElGreekAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekAnalyzer *create_OrgApacheLuceneAnalysisElGreekAnalyzer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisElGreekAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisElGreekAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
@@ -102,4 +108,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisElGreekAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekAnalyzer")

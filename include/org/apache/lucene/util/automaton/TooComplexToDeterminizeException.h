@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException || defined(INCLUDE_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException))
 #define OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_
 
@@ -20,12 +26,13 @@
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+@class JavaLangThrowable;
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 @class OrgApacheLuceneUtilAutomatonRegExp;
 
 /*!
  @brief This exception is thrown when determinizing an automaton would result in one
- has too many states.
+  has too many states.
  */
 @interface OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException : JavaLangRuntimeException
 
@@ -34,14 +41,14 @@
 /*!
  @brief Use this constructor when the automaton failed to determinize.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
-                                                      withInt:(jint)maxDeterminizedStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
+                                                                withInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief Use this constructor when the RegExp failed to convert to an automaton.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonRegExp:(OrgApacheLuceneUtilAutomatonRegExp *)regExp
-withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:(OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *)cause;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonRegExp:(OrgApacheLuceneUtilAutomatonRegExp *)regExp
+    withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:(OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *)cause;
 
 /*!
  @brief Returns the automaton that caused this exception, if any.
@@ -57,6 +64,22 @@ withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:(OrgApacheLucen
  @brief Return the RegExp that caused this exception if any.
  */
 - (OrgApacheLuceneUtilAutomatonRegExp *)getRegExp;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1
+                               withBoolean:(jboolean)arg2
+                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -78,4 +101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeEx
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException")

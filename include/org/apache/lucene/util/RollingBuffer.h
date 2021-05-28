@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilRollingBuffer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilRollingBuffer_) && (INCLUDE_ALL_OrgApacheLuceneUtilRollingBuffer || defined(INCLUDE_OrgApacheLuceneUtilRollingBuffer))
 #define OrgApacheLuceneUtilRollingBuffer_
 
@@ -20,27 +26,26 @@
 
 /*!
  @brief Acts like forever growing T[], but internally uses a
- circular buffer to reuse instances of T.
-  
+   circular buffer to reuse instances of T.
  */
 @interface OrgApacheLuceneUtilRollingBuffer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)freeBeforeWithInt:(jint)pos;
 
 /*!
  @brief Get T instance for this absolute position;
- this is allowed to be arbitrarily far "in the
- future" but cannot be before the last freeBefore.
+   this is allowed to be arbitrarily far "in the
+   future" but cannot be before the last freeBefore.
  */
-- (id)getWithInt:(jint)pos;
+- (id<OrgApacheLuceneUtilRollingBuffer_Resettable>)getWithInt:(jint)pos;
 
 /*!
  @brief Returns the maximum position looked up, or -1 if no
- position has been looked up sinc reset/init.
+   position has been looked up sinc reset/init.
  */
 - (jint)getMaxPos;
 
@@ -48,7 +53,7 @@
 
 #pragma mark Protected
 
-- (id)newInstance OBJC_METHOD_FAMILY_NONE;
+- (id<OrgApacheLuceneUtilRollingBuffer_Resettable>)newInstance OBJC_METHOD_FAMILY_NONE;
 
 @end
 
@@ -66,7 +71,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRollingBuffer)
 /*!
  @brief Implement to reset an instance
  */
-@protocol OrgApacheLuceneUtilRollingBuffer_Resettable < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilRollingBuffer_Resettable < JavaObject >
 
 - (void)reset;
 
@@ -78,4 +83,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRollingBuffer_Resettable)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilRollingBuffer")

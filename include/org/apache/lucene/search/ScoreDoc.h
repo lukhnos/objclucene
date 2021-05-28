@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchScoreDoc
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchScoreDoc_) && (INCLUDE_ALL_OrgApacheLuceneSearchScoreDoc || defined(INCLUDE_OrgApacheLuceneSearchScoreDoc))
 #define OrgApacheLuceneSearchScoreDoc_
 
@@ -41,17 +47,21 @@
 /*!
  @brief Constructs a ScoreDoc.
  */
-- (instancetype)initWithInt:(jint)doc
-                  withFloat:(jfloat)score;
+- (instancetype __nonnull)initWithInt:(jint)doc
+                            withFloat:(jfloat)score;
 
 /*!
  @brief Constructs a ScoreDoc.
  */
-- (instancetype)initWithInt:(jint)doc
-                  withFloat:(jfloat)score
-                    withInt:(jint)shardIndex;
+- (instancetype __nonnull)initWithInt:(jint)doc
+                            withFloat:(jfloat)score
+                              withInt:(jint)shardIndex;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -73,4 +83,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoreDoc)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchScoreDoc")

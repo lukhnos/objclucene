@@ -9,6 +9,10 @@
 #include "org/apache/lucene/analysis/AnalyzerWrapper.h"
 #include "org/apache/lucene/analysis/DelegatingAnalyzerWrapper.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/DelegatingAnalyzerWrapper must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_DelegatingReuseStrategy : OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy {
  @public
   OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper *wrapper_;
@@ -57,13 +61,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_Dele
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:", "DelegatingAnalyzerWrapper", NULL, 0x4, NULL, NULL },
-    { "wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:", "wrapComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x14, NULL, NULL },
-    { "wrapReaderWithNSString:withJavaIoReader:", "wrapReader", "Ljava.io.Reader;", 0x14, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x14, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LJavaIoReader;", 0x14, 3, 4, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.DelegatingAnalyzerWrapper$DelegatingReuseStrategy;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper = { 2, "DelegatingAnalyzerWrapper", "org.apache.lucene.analysis", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:);
+  methods[1].selector = @selector(wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:);
+  methods[2].selector = @selector(wrapReaderWithNSString:withJavaIoReader:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;", "wrapComponents", "LNSString;LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", "wrapReader", "LNSString;LJavaIoReader;", "LOrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_DelegatingReuseStrategy;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper = { "DelegatingAnalyzerWrapper", "org.apache.lucene.analysis", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, 5, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper;
 }
 
@@ -85,7 +96,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisDelegatingAnalyzerWrappe
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)getReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                                                                        withNSString:(NSString *)fieldName {
-  if (analyzer == wrapper_) {
+  if (JreObjectEqualsEquals(analyzer, wrapper_)) {
     OrgApacheLuceneAnalysisAnalyzer *wrappedAnalyzer = [((OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper *) nil_chk(wrapper_)) getWrappedAnalyzerWithNSString:fieldName];
     return [((OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *) nil_chk([((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(wrappedAnalyzer)) getReuseStrategy])) getReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:wrappedAnalyzer withNSString:fieldName];
   }
@@ -97,7 +108,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisDelegatingAnalyzerWrappe
 - (void)setReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                     withNSString:(NSString *)fieldName
        withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components {
-  if (analyzer == wrapper_) {
+  if (JreObjectEqualsEquals(analyzer, wrapper_)) {
     OrgApacheLuceneAnalysisAnalyzer *wrappedAnalyzer = [((OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper *) nil_chk(wrapper_)) getWrappedAnalyzerWithNSString:fieldName];
     [((OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *) nil_chk([((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(wrappedAnalyzer)) getReuseStrategy])) setReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:wrappedAnalyzer withNSString:fieldName withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:components];
   }
@@ -113,16 +124,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisDelegatingAnalyzerWrappe
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:", "DelegatingReuseStrategy", NULL, 0x0, NULL, NULL },
-    { "getReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:withNSString:", "getReusableComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x1, NULL, NULL },
-    { "setReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:withNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:", "setReusableComponents", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:);
+  methods[1].selector = @selector(getReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:withNSString:);
+  methods[2].selector = @selector(setReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:withNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "wrapper_", NULL, 0x0, "Lorg.apache.lucene.analysis.DelegatingAnalyzerWrapper;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fallbackStrategy_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer$ReuseStrategy;", NULL, NULL, .constantValue.asLong = 0 },
+    { "wrapper_", "LOrgApacheLuceneAnalysisDelegatingAnalyzerWrapper;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fallbackStrategy_", "LOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_DelegatingReuseStrategy = { 2, "DelegatingReuseStrategy", "org.apache.lucene.analysis", "DelegatingAnalyzerWrapper", 0x1a, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;", "getReusableComponents", "LOrgApacheLuceneAnalysisAnalyzer;LNSString;", "setReusableComponents", "LOrgApacheLuceneAnalysisAnalyzer;LNSString;LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", "LOrgApacheLuceneAnalysisDelegatingAnalyzerWrapper;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_DelegatingReuseStrategy = { "DelegatingReuseStrategy", "org.apache.lucene.analysis", ptrTable, methods, fields, 7, 0x1a, 3, 2, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_DelegatingReuseStrategy;
 }
 

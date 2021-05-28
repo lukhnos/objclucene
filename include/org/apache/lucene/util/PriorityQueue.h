@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPriorityQueue
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPriorityQueue_) && (INCLUDE_ALL_OrgApacheLuceneUtilPriorityQueue || defined(INCLUDE_OrgApacheLuceneUtilPriorityQueue))
 #define OrgApacheLuceneUtilPriorityQueue_
 
@@ -20,28 +26,26 @@
 
 /*!
  @brief A PriorityQueue maintains a partial ordering of its elements such that the
- least element can always be found in constant time.
- Put()'s and pop()'s
- require log(size) time but the remove() cost implemented here is linear.
+  least element can always be found in constant time.Put()'s and pop()'s
+  require log(size) time but the remove() cost implemented here is linear.
  <p>
- <b>NOTE</b>: This class will pre-allocate a full array of length
- <code>maxSize+1</code> if instantiated via the
+  <b>NOTE</b>: This class will pre-allocate a full array of length 
+ <code>maxSize+1</code> if instantiated via the 
  <code>PriorityQueue(int,boolean)</code> constructor with <code>prepopulate</code>
- set to <code>true</code>.
+  set to <code>true</code>.
  */
 @interface OrgApacheLuceneUtilPriorityQueue : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxSize;
+- (instancetype __nonnull)initWithInt:(jint)maxSize;
 
-- (instancetype)initWithInt:(jint)maxSize
-                withBoolean:(jboolean)prepopulate;
+- (instancetype __nonnull)initWithInt:(jint)maxSize
+                          withBoolean:(jboolean)prepopulate;
 
 /*!
- @brief Adds an Object to a PriorityQueue in log(size) time.
- If one tries to add
- more objects than maxSize from initialize an
+ @brief Adds an Object to a PriorityQueue in log(size) time.If one tries to add
+  more objects than maxSize from initialize an 
  <code>ArrayIndexOutOfBoundsException</code> is thrown.
  @return the new 'top' element in the queue.
  */
@@ -55,27 +59,27 @@
 /*!
  @brief Adds an Object to a PriorityQueue in log(size) time.
  It returns the object (if any) that was
- dropped off the heap because it was full. This can be
- the given parameter (in case it is smaller than the
- full heap's minimum, and couldn't be added), or another
- object that was previously the smallest value in the
- heap and now has been replaced by a larger one, or null
- if the queue wasn't yet full with maxSize elements.
+  dropped off the heap because it was full. This can be
+  the given parameter (in case it is smaller than the
+  full heap's minimum, and couldn't be added), or another
+  object that was previously the smallest value in the
+  heap and now has been replaced by a larger one, or null
+  if the queue wasn't yet full with maxSize elements.
  */
 - (id)insertWithOverflowWithId:(id)element;
 
 /*!
  @brief Removes and returns the least element of the PriorityQueue in log(size)
- time.
+     time.
  */
 - (id)pop;
 
 /*!
- @brief Removes an existing element currently stored in the PriorityQueue.
- Cost is
- linear with the size of the queue. (A specialization of PriorityQueue which
- tracks element positions would provide a constant remove time but the
- trade-off would be extra cost to all additions/insertions)
+ @brief Removes an existing element currently stored in the PriorityQueue.Cost is
+  linear with the size of the queue.
+ (A specialization of PriorityQueue which
+  tracks element positions would provide a constant remove time but the
+  trade-off would be extra cost to all additions/insertions)
  */
 - (jboolean)removeWithId:(id)element;
 
@@ -90,19 +94,19 @@
 - (id)top;
 
 /*!
- @brief Should be called when the Object at top changes values.
- Still log(n) worst
- case, but it's at least twice as fast to
+ @brief Should be called when the Object at top changes values.Still log(n) worst
+  case, but it's at least twice as fast to  
  <pre class="prettyprint">
- pq.top().change();
- pq.updateTop();
+  pq.top().change();
+  pq.updateTop(); 
  
 @endcode
- instead of
+  
+  instead of  
  <pre class="prettyprint">
- o = pq.pop();
- o.change();
- pq.push(o);
+  o = pq.pop();
+  o.change();
+  pq.push(o); 
  
 @endcode
  @return the new 'top' element.
@@ -123,50 +127,57 @@
 
 /*!
  @brief This method can be overridden by extending classes to return a sentinel
- object which will be used by the <code>PriorityQueue.PriorityQueue(int,boolean)</code> 
- constructor to fill the queue, so that the code which uses that queue can always
- assume it's full and only change the top without attempting to insert any new
- object.
+  object which will be used by the <code>PriorityQueue.PriorityQueue(int,boolean)</code> 
+  constructor to fill the queue, so that the code which uses that queue can always
+  assume it's full and only change the top without attempting to insert any new
+  object.
  <br>
- Those sentinel values should always compare worse than any non-sentinel
- value (i.e., <code>lessThan</code> should always favor the
- non-sentinel values).<br>
- By default, this method returns null, which means the queue will not be
- filled with sentinel values. Otherwise, the value returned will be used to
- pre-populate the queue. Adds sentinel values to the queue.<br>
- If this method is extended to return a non-null value, then the following
- usage pattern is recommended:
+  
+  Those sentinel values should always compare worse than any non-sentinel
+  value (i.e., <code>lessThan</code> should always favor the
+  non-sentinel values).<br>
+  
+  By default, this method returns null, which means the queue will not be
+  filled with sentinel values.Otherwise, the value returned will be used to
+  pre-populate the queue. Adds sentinel values to the queue.<br>
+  
+  If this method is extended to return a non-null value, then the following
+  usage pattern is recommended:  
  <pre class="prettyprint">
- // extends getSentinelObject() to return a non-null value.
- PriorityQueue&lt;MyObject&gt; pq = new MyQueue&lt;MyObject&gt;(numHits);
- // save the 'top' element, which is guaranteed to not be null.
- MyObject pqTop = pq.top();
+  // extends getSentinelObject() to return a non-null value.
+  PriorityQueue&lt;MyObject&gt; pq = new MyQueue&lt;MyObject&gt;(numHits);
+  // save the 'top' element, which is guaranteed to not be null.
+  MyObject pqTop = pq.top(); 
  &lt;...&gt;
- // now in order to add a new element, which is 'better' than top (after 
- // you've verified it is better), it is as simple as:
- pqTop.change().
- pqTop = pq.updateTop();
+  // now in order to add a new element, which is 'better' than top (after 
+  // you've verified it is better), it is as simple as:
+  pqTop.change().
+  pqTop = pq.updateTop(); 
  
 @endcode
+   
  <b>NOTE:</b> if this method returns a non-null value, it will be called by
- the <code>PriorityQueue.PriorityQueue(int,boolean)</code> constructor 
+  the <code>PriorityQueue.PriorityQueue(int,boolean)</code> constructor  
  <code>size()</code> times, relying on a new object to be returned and will not
- check if it's null again. Therefore you should ensure any call to this
- method creates a new instance and behaves consistently, e.g., it cannot
- return null if it previously returned non-null.
+  check if it's null again. Therefore you should ensure any call to this
+  method creates a new instance and behaves consistently, e.g., it cannot
+  return null if it previously returned non-null.
  @return the sentinel object to use to pre-populate the queue, or null if
- sentinel objects are not supported.
+          sentinel objects are not supported.
  */
 - (id)getSentinelObject;
 
 /*!
- @brief Determines the ordering of objects in this priority queue.
- Subclasses
- must define this one method.
+ @brief Determines the ordering of objects in this priority queue.Subclasses
+   must define this one method.
  @return <code>true</code> iff parameter <tt>a</tt> is less than parameter <tt>b</tt>.
  */
 - (jboolean)lessThanWithId:(id)a
                     withId:(id)b;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -180,4 +191,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPriorityQueue)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPriorityQueue")

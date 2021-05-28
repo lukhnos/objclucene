@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSegmentReadState
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSegmentReadState_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentReadState || defined(INCLUDE_OrgApacheLuceneIndexSegmentReadState))
 #define OrgApacheLuceneIndexSegmentReadState_
 
@@ -36,7 +42,7 @@
   OrgApacheLuceneIndexSegmentInfo *segmentInfo_;
   /*!
    @brief <code>FieldInfos</code> describing all fields in this
- segment.
+   segment.
    */
   OrgApacheLuceneIndexFieldInfos *fieldInfos_;
   /*!
@@ -46,12 +52,12 @@
   OrgApacheLuceneStoreIOContext *context_;
   /*!
    @brief Unique suffix for any postings files read for this
- segment.
+   segment.
    <code>PerFieldPostingsFormat</code> sets this for
- each of the postings formats it wraps.  If you create
- a new <code>PostingsFormat</code> then any files you
- write/read must be derived using this suffix (use
- <code>IndexFileNames.segmentFileName(String,String,String)</code>). 
+   each of the postings formats it wraps.  If you create
+   a new <code>PostingsFormat</code> then any files you
+   write/read must be derived using this suffix (use  
+ <code>IndexFileNames.segmentFileName(String,String,String)</code>).
    */
   NSString *segmentSuffix_;
 }
@@ -61,25 +67,29 @@
 /*!
  @brief Create a <code>SegmentReadState</code>.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                  withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
-                   withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
-                    withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
+                             withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
+                              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 /*!
  @brief Create a <code>SegmentReadState</code>.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                  withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
-                   withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
-                    withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
-                                         withNSString:(NSString *)segmentSuffix;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
+                             withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
+                              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
+                                                   withNSString:(NSString *)segmentSuffix;
 
 /*!
  @brief Create a <code>SegmentReadState</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)other
-                                                withNSString:(NSString *)newSegmentSuffix;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)other
+                                                          withNSString:(NSString *)newSegmentSuffix;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -113,4 +123,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentReadState)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentReadState")

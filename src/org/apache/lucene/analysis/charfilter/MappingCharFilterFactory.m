@@ -3,10 +3,8 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/charfilter/MappingCharFilterFactory.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -21,7 +19,10 @@
 #include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/CharFilterFactory.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
-#include "org/apache/lucene/util/fst/FST.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/charfilter/MappingCharFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory () {
  @public
@@ -54,10 +55,10 @@ JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
   if (mapping_ != nil) {
     id<JavaUtilList> wlist = nil;
-    id<JavaUtilList> files = [self splitFileNamesWithNSString:mapping_];
+    id<JavaUtilList> files = JreRetainedLocalValue([self splitFileNamesWithNSString:mapping_]);
     wlist = create_JavaUtilArrayList_init();
     for (NSString * __strong file in nil_chk(files)) {
-      id<JavaUtilList> lines = [self getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:[((NSString *) nil_chk(file)) trim]];
+      id<JavaUtilList> lines = JreRetainedLocalValue([self getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:[((NSString *) nil_chk(file)) java_trim]]);
       [wlist addAllWithJavaUtilCollection:lines];
     }
     OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *builder = create_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init();
@@ -76,7 +77,7 @@ JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_
 - (void)parseRulesWithJavaUtilList:(id<JavaUtilList>)rules
 withOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder:(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *)builder {
   for (NSString * __strong rule in nil_chk(rules)) {
-    JavaUtilRegexMatcher *m = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_p)) matcherWithJavaLangCharSequence:rule];
+    JavaUtilRegexMatcher *m = JreRetainedLocalValue([((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_p)) matcherWithJavaLangCharSequence:rule]);
     if (![((JavaUtilRegexMatcher *) nil_chk(m)) find]) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$", @"Invalid Mapping Rule : [", rule, @"], file = ", mapping_));
     [((OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *) nil_chk(builder)) addWithNSString:[self parseStringWithNSString:[m groupWithInt:1]] withNSString:[self parseStringWithNSString:[m groupWithInt:2]]];
   }
@@ -84,7 +85,7 @@ withOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder:(OrgApacheLuceneAn
 
 - (NSString *)parseStringWithNSString:(NSString *)s {
   jint readPos = 0;
-  jint len = ((jint) [((NSString *) nil_chk(s)) length]);
+  jint len = [((NSString *) nil_chk(s)) java_length];
   jint writePos = 0;
   while (readPos < len) {
     jchar c = [s charAtWithInt:readPos++];
@@ -115,14 +116,14 @@ withOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder:(OrgApacheLuceneAn
         break;
         case 'u':
         if (readPos + 3 >= len) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Invalid escaped char in [", s, ']'));
-        c = (jchar) JavaLangInteger_parseIntWithNSString_withInt_([s substring:readPos endIndex:readPos + 4], 16);
+        c = (jchar) JavaLangInteger_parseIntWithNSString_withInt_([s java_substring:readPos endIndex:readPos + 4], 16);
         readPos += 4;
         break;
       }
     }
     *IOSCharArray_GetRef(nil_chk(out_), writePos++) = c;
   }
-  return [NSString stringWithCharacters:out_ offset:0 length:writePos];
+  return [NSString java_stringWithCharacters:out_ offset:0 length:writePos];
 }
 
 - (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
@@ -136,30 +137,41 @@ withOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder:(OrgApacheLuceneAn
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LJavaIoReader;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 7, 8, -1, 9, -1, -1 },
+    { NULL, "LNSString;", 0x4, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(informWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[2].selector = @selector(createWithJavaIoReader:);
+  methods[3].selector = @selector(parseRulesWithJavaUtilList:withOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder:);
+  methods[4].selector = @selector(parseStringWithNSString:);
+  methods[5].selector = @selector(getMultiTermComponent);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "normMap_", "LOrgApacheLuceneAnalysisCharfilterNormalizeCharMap;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "mapping_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "p", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x8, -1, 12, -1, -1 },
+    { "out_", "[C", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "inform", "LOrgApacheLuceneAnalysisUtilResourceLoader;", "LJavaIoIOException;", "create", "LJavaIoReader;", "parseRules", "LJavaUtilList;LOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder;", "(Ljava/util/List<Ljava/lang/String;>;Lorg/apache/lucene/analysis/charfilter/NormalizeCharMap$Builder;)V", "parseString", "LNSString;", &OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_p };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory = { "MappingCharFilterFactory", "org.apache.lucene.analysis.charfilter", ptrTable, methods, fields, 7, 0x1, 6, 4, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory class]) {
     JreStrongAssign(&OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_p, JavaUtilRegexPattern_compileWithNSString_(@"\"(.*)\"\\s*=>\\s*\"(.*)\"\\s*$"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "MappingCharFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWithJavaIoReader:", "create", "Ljava.io.Reader;", 0x1, NULL, NULL },
-    { "parseRulesWithJavaUtilList:withOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder:", "parseRules", "V", 0x4, NULL, "(Ljava/util/List<Ljava/lang/String;>;Lorg/apache/lucene/analysis/charfilter/NormalizeCharMap$Builder;)V" },
-    { "parseStringWithNSString:", "parseString", "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "normMap_", NULL, 0x4, "Lorg.apache.lucene.analysis.charfilter.NormalizeCharMap;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mapping_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "p", "p", 0x8, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_p, NULL, .constantValue.asLong = 0 },
-    { "out_", NULL, 0x0, "[C", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory = { 2, "MappingCharFilterFactory", "org.apache.lucene.analysis.charfilter", NULL, 0x1, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory;
 }
 
 @end

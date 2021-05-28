@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper || defined(INCLUDE_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper))
 #define OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_
 
@@ -25,12 +31,12 @@
 @class OrgApacheLuceneSearchWeight;
 
 /*!
- @brief This class also provides the functionality behind
+ @brief This class also provides the functionality behind 
  <code>MultiTermQuery.CONSTANT_SCORE_REWRITE</code>.
  It tries to rewrite per-segment as a boolean query
- that returns a constant score and otherwise fills a
- bit set with matches and builds a Scorer on top of
- this bit set.
+  that returns a constant score and otherwise fills a
+  bit set with matches and builds a Scorer on top of
+  this bit set.
  */
 @interface OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper : OrgApacheLuceneSearchQuery {
  @public
@@ -58,22 +64,30 @@
 /*!
  @brief Wrap a <code>MultiTermQuery</code> as a Filter.
  */
-- (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper, query_, id)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper, query_, OrgApacheLuceneSearchMultiTermQuery *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *self, OrgApacheLuceneSearchMultiTermQuery *query);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *self, OrgApacheLuceneSearchMultiTermQuery *query);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query);
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper")

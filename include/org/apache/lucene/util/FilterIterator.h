@@ -13,12 +13,20 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFilterIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFilterIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilFilterIterator || defined(INCLUDE_OrgApacheLuceneUtilFilterIterator))
 #define OrgApacheLuceneUtilFilterIterator_
 
 #define RESTRICT_JavaUtilIterator 1
 #define INCLUDE_JavaUtilIterator 1
 #include "java/util/Iterator.h"
+
+@protocol JavaUtilFunctionConsumer;
 
 /*!
  @brief An <code>Iterator</code> implementation that filters elements with a boolean predicate.
@@ -28,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilIterator:(id<JavaUtilIterator>)baseIterator;
+- (instancetype __nonnull)initWithJavaUtilIterator:(id<JavaUtilIterator>)baseIterator;
 
 - (jboolean)hasNext;
 
@@ -43,6 +51,10 @@
  */
 - (jboolean)predicateFunctionWithId:(id)object;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFilterIterator)
@@ -53,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFilterIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFilterIterator")

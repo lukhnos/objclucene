@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_
 
@@ -31,11 +37,11 @@
 #pragma mark Public
 
 /*!
- @param a  the base.
- @param b  the exponent.
+ @param a the base.
+ @param b the exponent.
  */
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)b;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
+                              withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)b;
 
 #pragma mark Protected
 
@@ -59,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunc
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction")

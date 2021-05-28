@@ -17,6 +17,12 @@
 #include "org/apache/lucene/util/VirtualMethod.h"
 #include "org/lukhnos/portmobile/lang/ClassValue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/VirtualMethod must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneUtilVirtualMethod () {
  @public
   IOSClass *baseClass_;
@@ -32,32 +38,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilVirtualMethod, method_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilVirtualMethod, parameters_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilVirtualMethod, distanceOfClass_, OrgLukhnosPortmobileLangClassValue *)
 
-inline id<JavaUtilSet> OrgApacheLuceneUtilVirtualMethod_get_singletonSet();
+inline id<JavaUtilSet> OrgApacheLuceneUtilVirtualMethod_get_singletonSet(void);
 static id<JavaUtilSet> OrgApacheLuceneUtilVirtualMethod_singletonSet;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilVirtualMethod, singletonSet, id<JavaUtilSet>)
 
-@interface OrgApacheLuceneUtilVirtualMethod_$1 : OrgLukhnosPortmobileLangClassValue {
+@interface OrgApacheLuceneUtilVirtualMethod_1 : OrgLukhnosPortmobileLangClassValue {
  @public
   OrgApacheLuceneUtilVirtualMethod *this$0_;
 }
 
+- (instancetype)initWithOrgApacheLuceneUtilVirtualMethod:(OrgApacheLuceneUtilVirtualMethod *)outer$;
+
 - (JavaLangInteger *)computeValueWithIOSClass:(IOSClass *)subclazz;
 
-- (instancetype)initWithOrgApacheLuceneUtilVirtualMethod:(OrgApacheLuceneUtilVirtualMethod *)outer$;
+- (JavaLangInteger *)getWithIOSClass:(IOSClass *)arg0;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilVirtualMethod_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilVirtualMethod_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilVirtualMethod_$1, this$0_, OrgApacheLuceneUtilVirtualMethod *)
+__attribute__((unused)) static void OrgApacheLuceneUtilVirtualMethod_1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod_1 *self, OrgApacheLuceneUtilVirtualMethod *outer$);
 
-__attribute__((unused)) static void OrgApacheLuceneUtilVirtualMethod_$1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod_$1 *self, OrgApacheLuceneUtilVirtualMethod *outer$);
+__attribute__((unused)) static OrgApacheLuceneUtilVirtualMethod_1 *new_OrgApacheLuceneUtilVirtualMethod_1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilVirtualMethod_$1 *new_OrgApacheLuceneUtilVirtualMethod_$1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod *outer$) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneUtilVirtualMethod_$1 *create_OrgApacheLuceneUtilVirtualMethod_$1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilVirtualMethod_$1)
+__attribute__((unused)) static OrgApacheLuceneUtilVirtualMethod_1 *create_OrgApacheLuceneUtilVirtualMethod_1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod *outer$);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilVirtualMethod)
 
@@ -82,7 +86,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilVirtualMethod)
   if (![((IOSClass *) nil_chk(baseClass_)) isAssignableFrom:subclazz]) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", [((IOSClass *) nil_chk(subclazz)) getName], @" is not a subclass of ", [baseClass_ getName]));
   jboolean overridden = false;
   jint distance = 0;
-  for (IOSClass *clazz = subclazz; clazz != baseClass_ && clazz != nil; clazz = [clazz getSuperclass]) {
+  for (IOSClass *clazz = JreRetainedLocalValue(subclazz); !JreObjectEqualsEquals(clazz, baseClass_) && clazz != nil; clazz = [clazz getSuperclass]) {
     if (!overridden) {
       @try {
         [clazz getDeclaredMethod:method_ parameterTypes:parameters_];
@@ -110,6 +114,35 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilVirtualMethod)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x81, -1, 0, -1, 1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, -1, 4, -1, -1 },
+    { NULL, "Z", 0x1, 5, 3, -1, 6, -1, -1 },
+    { NULL, "I", 0x0, 7, 3, -1, 8, -1, -1 },
+    { NULL, "I", 0x9, 9, 10, -1, 11, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIOSClass:withNSString:withIOSClassArray:);
+  methods[1].selector = @selector(getImplementationDistanceWithIOSClass:);
+  methods[2].selector = @selector(isOverriddenAsOfWithIOSClass:);
+  methods[3].selector = @selector(reflectImplementationDistanceWithIOSClass:);
+  methods[4].selector = @selector(compareImplementationDistanceWithIOSClass:withOrgApacheLuceneUtilVirtualMethod:withOrgApacheLuceneUtilVirtualMethod:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "singletonSet", "LJavaUtilSet;", .constantValue.asLong = 0, 0x1a, -1, 12, 13, -1 },
+    { "baseClass_", "LIOSClass;", .constantValue.asLong = 0, 0x12, -1, -1, 14, -1 },
+    { "method_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "parameters_", "[LIOSClass;", .constantValue.asLong = 0, 0x12, -1, -1, 15, -1 },
+    { "distanceOfClass_", "LOrgLukhnosPortmobileLangClassValue;", .constantValue.asLong = 0, 0x12, -1, -1, 16, -1 },
+  };
+  static const void *ptrTable[] = { "LIOSClass;LNSString;[LIOSClass;", "(Ljava/lang/Class<TC;>;Ljava/lang/String;[Ljava/lang/Class<*>;)V", "getImplementationDistance", "LIOSClass;", "(Ljava/lang/Class<+TC;>;)I", "isOverriddenAsOf", "(Ljava/lang/Class<+TC;>;)Z", "reflectImplementationDistance", "(Ljava/lang/Class<*>;)I", "compareImplementationDistance", "LIOSClass;LOrgApacheLuceneUtilVirtualMethod;LOrgApacheLuceneUtilVirtualMethod;", "<C:Ljava/lang/Object;>(Ljava/lang/Class<+TC;>;Lorg/apache/lucene/util/VirtualMethod<TC;>;Lorg/apache/lucene/util/VirtualMethod<TC;>;)I", &OrgApacheLuceneUtilVirtualMethod_singletonSet, "Ljava/util/Set<Ljava/lang/reflect/Method;>;", "Ljava/lang/Class<TC;>;", "[Ljava/lang/Class<*>;", "Lorg/lukhnos/portmobile/lang/ClassValue<Ljava/lang/Integer;>;", "<C:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilVirtualMethod = { "VirtualMethod", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 5, 5, -1, -1, -1, 17, -1 };
+  return &_OrgApacheLuceneUtilVirtualMethod;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilVirtualMethod class]) {
     JreStrongAssign(&OrgApacheLuceneUtilVirtualMethod_singletonSet, JavaUtilCollections_synchronizedSetWithJavaUtilSet_(create_JavaUtilHashSet_init()));
@@ -117,30 +150,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilVirtualMethod)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithIOSClass:withNSString:withIOSClassArray:", "VirtualMethod", NULL, 0x81, NULL, "(Ljava/lang/Class<TC;>;Ljava/lang/String;[Ljava/lang/Class<*>;)V" },
-    { "getImplementationDistanceWithIOSClass:", "getImplementationDistance", "I", 0x1, NULL, "(Ljava/lang/Class<+TC;>;)I" },
-    { "isOverriddenAsOfWithIOSClass:", "isOverriddenAsOf", "Z", 0x1, NULL, "(Ljava/lang/Class<+TC;>;)Z" },
-    { "reflectImplementationDistanceWithIOSClass:", "reflectImplementationDistance", "I", 0x0, NULL, "(Ljava/lang/Class<*>;)I" },
-    { "compareImplementationDistanceWithIOSClass:withOrgApacheLuceneUtilVirtualMethod:withOrgApacheLuceneUtilVirtualMethod:", "compareImplementationDistance", "I", 0x9, NULL, "<C:Ljava/lang/Object;>(Ljava/lang/Class<+TC;>;Lorg/apache/lucene/util/VirtualMethod<TC;>;Lorg/apache/lucene/util/VirtualMethod<TC;>;)I" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "singletonSet", "singletonSet", 0x1a, "Ljava.util.Set;", &OrgApacheLuceneUtilVirtualMethod_singletonSet, "Ljava/util/Set<Ljava/lang/reflect/Method;>;", .constantValue.asLong = 0 },
-    { "baseClass_", NULL, 0x12, "Ljava.lang.Class;", NULL, "Ljava/lang/Class<TC;>;", .constantValue.asLong = 0 },
-    { "method_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "parameters_", NULL, 0x12, "[Ljava.lang.Class;", NULL, "[Ljava/lang/Class<*>;", .constantValue.asLong = 0 },
-    { "distanceOfClass_", NULL, 0x12, "Lorg.lukhnos.portmobile.lang.ClassValue;", NULL, "Lorg/lukhnos/portmobile/lang/ClassValue<Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilVirtualMethod = { 2, "VirtualMethod", "org.apache.lucene.util", NULL, 0x11, 5, methods, 5, fields, 0, NULL, 0, NULL, NULL, "<C:Ljava/lang/Object;>Ljava/lang/Object;" };
-  return &_OrgApacheLuceneUtilVirtualMethod;
-}
-
 @end
 
 void OrgApacheLuceneUtilVirtualMethod_initWithIOSClass_withNSString_withIOSClassArray_(OrgApacheLuceneUtilVirtualMethod *self, IOSClass *baseClass, NSString *method, IOSObjectArray *parameters) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->distanceOfClass_, new_OrgApacheLuceneUtilVirtualMethod_$1_initWithOrgApacheLuceneUtilVirtualMethod_(self));
+  JreStrongAssignAndConsume(&self->distanceOfClass_, new_OrgApacheLuceneUtilVirtualMethod_1_initWithOrgApacheLuceneUtilVirtualMethod_(self));
   JreStrongAssign(&self->baseClass_, baseClass);
   JreStrongAssign(&self->method_, method);
   JreStrongAssign(&self->parameters_, parameters);
@@ -148,7 +162,7 @@ void OrgApacheLuceneUtilVirtualMethod_initWithIOSClass_withNSString_withIOSClass
     if (![((id<JavaUtilSet>) nil_chk(OrgApacheLuceneUtilVirtualMethod_singletonSet)) addWithId:[((IOSClass *) nil_chk(baseClass)) getDeclaredMethod:method parameterTypes:parameters]]) @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"VirtualMethod instances must be singletons and therefore assigned to static final members in the same class, they use as baseClass ctor param.");
   }
   @catch (JavaLangNoSuchMethodException *nsme) {
-    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", [baseClass getName], @" has no such method: ", [((JavaLangNoSuchMethodException *) nil_chk(nsme)) getMessage]));
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", [baseClass getName], @" has no such method: ", [nsme getMessage]));
   }
 }
 
@@ -167,15 +181,15 @@ jint OrgApacheLuceneUtilVirtualMethod_compareImplementationDistanceWithIOSClass_
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilVirtualMethod)
 
-@implementation OrgApacheLuceneUtilVirtualMethod_$1
+@implementation OrgApacheLuceneUtilVirtualMethod_1
+
+- (instancetype)initWithOrgApacheLuceneUtilVirtualMethod:(OrgApacheLuceneUtilVirtualMethod *)outer$ {
+  OrgApacheLuceneUtilVirtualMethod_1_initWithOrgApacheLuceneUtilVirtualMethod_(self, outer$);
+  return self;
+}
 
 - (JavaLangInteger *)computeValueWithIOSClass:(IOSClass *)subclazz {
   return JavaLangInteger_valueOfWithInt_([this$0_ reflectImplementationDistanceWithIOSClass:subclazz]);
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilVirtualMethod:(OrgApacheLuceneUtilVirtualMethod *)outer$ {
-  OrgApacheLuceneUtilVirtualMethod_$1_initWithOrgApacheLuceneUtilVirtualMethod_(self, outer$);
-  return self;
 }
 
 - (void)dealloc {
@@ -184,31 +198,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilVirtualMethod)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "computeValueWithIOSClass:", "computeValue", "Ljava.lang.Integer;", 0x4, NULL, "(Ljava/lang/Class<*>;)Ljava/lang/Integer;" },
-    { "initWithOrgApacheLuceneUtilVirtualMethod:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangInteger;", 0x4, 1, 2, -1, 3, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilVirtualMethod:);
+  methods[1].selector = @selector(computeValueWithIOSClass:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.VirtualMethod;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneUtilVirtualMethod;", .constantValue.asLong = 0, 0x1012, -1, -1, 4, -1 },
   };
-  static const char *superclass_type_args[] = {"Ljava.lang.Integer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilVirtualMethod_$1 = { 2, "", "org.apache.lucene.util", "VirtualMethod", 0x8008, 2, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/lukhnos/portmobile/lang/ClassValue<Ljava/lang/Integer;>;" };
-  return &_OrgApacheLuceneUtilVirtualMethod_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilVirtualMethod;", "computeValue", "LIOSClass;", "(Ljava/lang/Class<*>;)Ljava/lang/Integer;", "Lorg/apache/lucene/util/VirtualMethod<TC;>;", "Lorg/lukhnos/portmobile/lang/ClassValue<Ljava/lang/Integer;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilVirtualMethod_1 = { "", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, -1, 5, -1 };
+  return &_OrgApacheLuceneUtilVirtualMethod_1;
 }
 
 @end
 
-void OrgApacheLuceneUtilVirtualMethod_$1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod_$1 *self, OrgApacheLuceneUtilVirtualMethod *outer$) {
+void OrgApacheLuceneUtilVirtualMethod_1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod_1 *self, OrgApacheLuceneUtilVirtualMethod *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgLukhnosPortmobileLangClassValue_init(self);
 }
 
-OrgApacheLuceneUtilVirtualMethod_$1 *new_OrgApacheLuceneUtilVirtualMethod_$1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilVirtualMethod_$1, initWithOrgApacheLuceneUtilVirtualMethod_, outer$)
+OrgApacheLuceneUtilVirtualMethod_1 *new_OrgApacheLuceneUtilVirtualMethod_1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilVirtualMethod_1, initWithOrgApacheLuceneUtilVirtualMethod_, outer$)
 }
 
-OrgApacheLuceneUtilVirtualMethod_$1 *create_OrgApacheLuceneUtilVirtualMethod_$1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilVirtualMethod_$1, initWithOrgApacheLuceneUtilVirtualMethod_, outer$)
+OrgApacheLuceneUtilVirtualMethod_1 *create_OrgApacheLuceneUtilVirtualMethod_1_initWithOrgApacheLuceneUtilVirtualMethod_(OrgApacheLuceneUtilVirtualMethod *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilVirtualMethod_1, initWithOrgApacheLuceneUtilVirtualMethod_, outer$)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilVirtualMethod_$1)

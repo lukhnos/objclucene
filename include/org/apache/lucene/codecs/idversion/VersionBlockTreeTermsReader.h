@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader || defined(INCLUDE_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader))
 #define OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_
 
@@ -42,8 +48,8 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneCodecsPostingsReaderBase:(OrgApacheLuceneCodecsPostingsReaderBase *)postingsReader
-                       withOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
+- (instancetype __nonnull)initWithOrgApacheLuceneCodecsPostingsReaderBase:(OrgApacheLuceneCodecsPostingsReaderBase *)postingsReader
+                                 withOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
 - (void)checkIntegrity;
 
@@ -65,6 +71,10 @@
 
 - (NSString *)brToStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader)
@@ -82,4 +92,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsRe
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader")

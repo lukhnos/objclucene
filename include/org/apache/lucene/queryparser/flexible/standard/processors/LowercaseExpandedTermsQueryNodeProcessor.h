@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor))
 #define OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor_
 
@@ -20,24 +26,24 @@
 #define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
+@class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief This processor verifies if 
- <code>ConfigurationKeys.LOWERCASE_EXPANDED_TERMS</code> is defined in the
- <code>QueryConfigHandler</code>.
- If it is and the expanded terms should be
- lower-cased, it looks for every <code>WildcardQueryNode</code>,
- <code>FuzzyQueryNode</code> and children of a <code>RangeQueryNode</code> and lower-case its
- term.
+ @brief This processor verifies if  
+ <code>ConfigurationKeys.LOWERCASE_EXPANDED_TERMS</code> is defined in the 
+ <code>QueryConfigHandler</code>.If it is and the expanded terms should be
+  lower-cased, it looks for every <code>WildcardQueryNode</code>,
+  <code>FuzzyQueryNode</code> and children of a <code>RangeQueryNode</code> and lower-case its
+  term.
  - seealso: ConfigurationKeys#LOWERCASE_EXPANDED_TERMS
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor : OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree;
 
@@ -49,18 +55,26 @@
 
 - (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor")

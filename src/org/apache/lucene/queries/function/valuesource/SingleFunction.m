@@ -5,11 +5,14 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/queries/function/ValueSource.h"
 #include "org/apache/lucene/queries/function/valuesource/SingleFunction.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/SingleFunction must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceSingleFunction
 
@@ -33,7 +36,7 @@
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(o) java_getClass])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceSingleFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceSingleFunction *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceSingleFunction class]);
   return [((NSString *) nil_chk([self name])) isEqual:[other name]] && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) isEqual:other->source_];
 }
@@ -49,18 +52,29 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSource:", "SingleFunction", NULL, 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x404, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x404, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, 7, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(description__);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(isEqual:);
+  methods[5].selector = @selector(createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "source_", NULL, 0x14, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
+    { "source_", "LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceSingleFunction = { 2, "SingleFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x401, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValueSource;", "description", "hashCode", "equals", "LNSObject;", "createWeight", "LJavaUtilMap;LOrgApacheLuceneSearchIndexSearcher;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceSingleFunction = { "SingleFunction", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x401, 6, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction;
 }
 

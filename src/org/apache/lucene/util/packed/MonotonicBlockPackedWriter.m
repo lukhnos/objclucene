@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/MonotonicBlockPackedWriter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
 #include "java/lang/Math.h"
 #include "org/apache/lucene/store/DataOutput.h"
@@ -14,6 +12,10 @@
 #include "org/apache/lucene/util/packed/MonotonicBlockPackedReader.h"
 #include "org/apache/lucene/util/packed/MonotonicBlockPackedWriter.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/MonotonicBlockPackedWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter
 
@@ -24,12 +26,12 @@
 }
 
 - (void)addWithLong:(jlong)l {
-  JreAssert((l >= 0), (@"org/apache/lucene/util/packed/MonotonicBlockPackedWriter.java:69 condition failed: assert l >= 0;"));
+  JreAssert(l >= 0, @"org/apache/lucene/util/packed/MonotonicBlockPackedWriter.java:69 condition failed: assert l >= 0;");
   [super addWithLong:l];
 }
 
 - (void)flush {
-  JreAssert((off_ > 0), (@"org/apache/lucene/util/packed/MonotonicBlockPackedWriter.java:74 condition failed: assert off > 0;"));
+  JreAssert(off_ > 0, @"org/apache/lucene/util/packed/MonotonicBlockPackedWriter.java:74 condition failed: assert off > 0;");
   jfloat avg = off_ == 1 ? 0.0f : (jfloat) (IOSLongArray_Get(nil_chk(values_), off_ - 1) - IOSLongArray_Get(values_, 0)) / (off_ - 1);
   jlong min = IOSLongArray_Get(nil_chk(values_), 0);
   for (jint i = 1; i < off_; ++i) {
@@ -58,19 +60,27 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDataOutput:withInt:", "MonotonicBlockPackedWriter", NULL, 0x1, NULL, NULL },
-    { "addWithLong:", "add", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "flush", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 3, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter = { 2, "MonotonicBlockPackedWriter", "org.apache.lucene.util.packed", NULL, 0x11, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDataOutput:withInt:);
+  methods[1].selector = @selector(addWithLong:);
+  methods[2].selector = @selector(flush);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDataOutput;I", "add", "J", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter = { "MonotonicBlockPackedWriter", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x11, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter *self, OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) {
-  OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(self, outArg, blockSize);
+  OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_initPackagePrivateWithOrgApacheLuceneStoreDataOutput_withInt_(self, outArg, blockSize);
 }
 
 OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter *new_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) {

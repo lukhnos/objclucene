@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinToParentBlockJoinQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinToParentBlockJoinQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinQuery || defined(INCLUDE_OrgApacheLuceneSearchJoinToParentBlockJoinQuery))
 #define OrgApacheLuceneSearchJoinToParentBlockJoinQuery_
 
@@ -28,38 +34,39 @@
 
 /*!
  @brief This query requires that you index
- children and parent docs as a single block, using the
+  children and parent docs as a single block, using the 
  <code>IndexWriter.addDocuments()</code> or <code>IndexWriter.updateDocuments()</code>
-  API.
- In each block, the
- child documents must appear first, ending with the parent
- document.  At search time you provide a Filter
- identifying the parents, however this Filter must provide
- an <code>BitSet</code> per sub-reader.
+  API.In each block, the
+  child documents must appear first, ending with the parent
+  document.
+ At search time you provide a Filter
+  identifying the parents, however this Filter must provide
+  an <code>BitSet</code> per sub-reader. 
  <p>Once the block index is built, use this query to wrap
- any sub-query matching only child docs and join matches in that
- child document space up to the parent document space.
- You can then use this Query as a clause with
- other queries in the parent document space.</p>
+  any sub-query matching only child docs and join matches in that
+  child document space up to the parent document space.
+  You can then use this Query as a clause with
+  other queries in the parent document space.</p>
+  
  <p>See <code>ToChildBlockJoinQuery</code> if you need to join
- in the reverse order.
+  in the reverse order. 
  <p>The child documents must be orthogonal to the parent
- documents: the wrapped child query must never
- return a parent document.</p>
- If you'd like to retrieve <code>TopGroups</code> for the
- resulting query, use the <code>ToParentBlockJoinCollector</code>.
- Note that this is not necessary, ie, if you simply want
- to collect the parent documents and don't need to see
- which child documents matched under that parent, then
- you can use any collector.
+  documents: the wrapped child query must never
+  return a parent document.</p>
+  If you'd like to retrieve <code>TopGroups</code> for the
+  resulting query, use the <code>ToParentBlockJoinCollector</code>.
+  Note that this is not necessary, ie, if you simply want
+  to collect the parent documents and don't need to see
+  which child documents matched under that parent, then
+  you can use any collector. 
  <p><b>NOTE</b>: If the overall query contains parent-only
- matches, for example you OR a parent-only query with a
- joined child-only query, then the resulting collected documents
- will be correct, however the <code>TopGroups</code> you get
- from <code>ToParentBlockJoinCollector</code> will not contain every
- child for parents that had matched.
+  matches, for example you OR a parent-only query with a
+  joined child-only query, then the resulting collected documents
+  will be correct, however the <code>TopGroups</code> you get
+  from <code>ToParentBlockJoinCollector</code> will not contain every
+  child for parents that had matched. 
  <p>See <code>org.apache.lucene.search.join</code> for an
- overview. </p>
+  overview. </p>
  */
 @interface OrgApacheLuceneSearchJoinToParentBlockJoinQuery : OrgApacheLuceneSearchQuery
 
@@ -69,12 +76,11 @@
  @brief Create a ToParentBlockJoinQuery.
  @param childQuery Query matching child documents.
  @param parentsFilter Filter identifying the parent documents.
- @param scoreMode How to aggregate multiple child scores
- into a single parent score.
+ @param scoreMode How to aggregate multiple child scores  into a single parent score.
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)childQuery
-       withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter
-            withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)childQuery
+                 withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter
+                      withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -91,6 +97,10 @@
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -125,11 +135,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)childScorer
-                      withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parentBits
-                                            withInt:(jint)firstChildDoc
-             withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                              withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)childScorer
+                                withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parentBits
+                                                      withInt:(jint)firstChildDoc
+                       withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
 
 - (jint)advanceWithInt:(jint)parentTarget;
 
@@ -162,6 +172,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
 
 - (IOSFloatArray *)swapChildScoresWithFloatArray:(IOSFloatArray *)other;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer)
@@ -176,4 +190,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery_Block
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinQuery")

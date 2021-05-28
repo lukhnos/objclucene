@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSortingMergePolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSortingMergePolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortingMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexSortingMergePolicy))
 #define OrgApacheLuceneIndexSortingMergePolicy_
 
@@ -32,19 +38,17 @@
 
 /*!
  @brief A <code>MergePolicy</code> that reorders documents according to a <code>Sort</code>
- before merging them.
- As a consequence, all segments resulting from a merge
- will be sorted while segments resulting from a flush will be in the order
- in which documents have been added.
+   before merging them.As a consequence, all segments resulting from a merge
+   will be sorted while segments resulting from a flush will be in the order
+   in which documents have been added.
  <p><b>NOTE</b>: Never use this policy if you rely on
- <code>IndexWriter.addDocuments</code>
- to have sequentially-assigned doc IDs, this policy will scatter doc IDs.
+   <code>IndexWriter.addDocuments</code>
+   to have sequentially-assigned doc IDs, this policy will scatter doc IDs.  
  <p><b>NOTE</b>: This policy should only be used with idempotent <code>Sort</code>s 
- so that the order of segments is predictable. For example, using 
+   so that the order of segments is predictable. For example, using   
  <code>Sort.INDEXORDER</code> in reverse (which is not idempotent) will make 
- the order of documents in a segment depend on the number of times the segment 
- has been merged.
-  
+   the order of documents in a segment depend on the number of times the segment 
+   has been merged.
  */
 @interface OrgApacheLuceneIndexSortingMergePolicy : OrgApacheLuceneIndexMergePolicy {
  @public
@@ -52,16 +56,15 @@
   OrgApacheLuceneIndexSorter *sorter_;
   OrgApacheLuceneSearchSort *sort_;
 }
-
-+ (NSString *)SORTER_ID_PROP;
+@property (readonly, copy, class) NSString *SORTER_ID_PROP NS_SWIFT_NAME(SORTER_ID_PROP);
 
 #pragma mark Public
 
 /*!
  @brief Create a new <code>MergePolicy</code> that sorts documents with the given <code>sort</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)inArg
-                          withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)inArg
+                                    withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
 
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
                                                                                 withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
@@ -82,9 +85,8 @@
 
 /*!
  @brief Returns <code>true</code> if the given <code>reader</code> is sorted by the
- <code>sort</code> given.
- Typically the given <code>sort</code> would be the
- <code>SortingMergePolicy.getSort()</code> order of a <code>SortingMergePolicy</code>. 
+   <code>sort</code> given.Typically the given <code>sort</code> would be the
+   <code>SortingMergePolicy.getSort()</code> order of a <code>SortingMergePolicy</code>.
  */
 + (jboolean)isSortedWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                          withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
@@ -100,6 +102,13 @@
 - (jlong)sizeWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
                    withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithDouble:(jdouble)arg0
+                                withLong:(jlong)arg1 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSortingMergePolicy)
@@ -110,9 +119,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingMergePolicy, sort_, OrgApacheLuce
 
 /*!
  @brief Put in the <code>diagnostics</code> to denote that
- this segment is sorted.
+  this segment is sorted.
  */
-inline NSString *OrgApacheLuceneIndexSortingMergePolicy_get_SORTER_ID_PROP();
+inline NSString *OrgApacheLuceneIndexSortingMergePolicy_get_SORTER_ID_PROP(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexSortingMergePolicy, SORTER_ID_PROP, NSString *)
@@ -163,9 +172,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingMergePolicy)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSortingMergePolicy:(OrgApacheLuceneIndexSortingMergePolicy *)outer$
-                                              withJavaUtilList:(id<JavaUtilList>)segments
-                             withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSortingMergePolicy:(OrgApacheLuceneIndexSortingMergePolicy *)outer$
+                                                        withJavaUtilList:(id<JavaUtilList>)segments
+                                       withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -211,8 +224,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerg
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSortingMergePolicy:(OrgApacheLuceneIndexSortingMergePolicy *)outer$
-                             withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSortingMergePolicy:(OrgApacheLuceneIndexSortingMergePolicy *)outer$
+                                       withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -230,4 +247,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSp
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortingMergePolicy")

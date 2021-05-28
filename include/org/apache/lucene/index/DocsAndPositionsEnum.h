@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneIndexDocsAndPositionsEnum 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocsAndPositionsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocsAndPositionsEnum || defined(INCLUDE_OrgApacheLuceneIndexDocsAndPositionsEnum))
 #define OrgApacheLuceneIndexDocsAndPositionsEnum_
 
@@ -23,7 +29,6 @@
 #define INCLUDE_OrgApacheLuceneIndexDocsEnum 1
 #include "org/apache/lucene/index/DocsEnum.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneUtilBytesRef;
 @protocol OrgApacheLuceneUtilBits;
@@ -32,44 +37,40 @@
  @brief Also iterates through positions.
  */
 @interface OrgApacheLuceneIndexDocsAndPositionsEnum : OrgApacheLuceneIndexDocsEnum
-
-+ (jint)FLAG_OFFSETS;
-
-+ (jint)FLAG_PAYLOADS;
-
-+ (jshort)OLD_NULL_SEMANTICS;
+@property (readonly, class) jint FLAG_OFFSETS NS_SWIFT_NAME(FLAG_OFFSETS);
+@property (readonly, class) jint FLAG_PAYLOADS NS_SWIFT_NAME(FLAG_PAYLOADS);
+@property (readonly, class) jshort OLD_NULL_SEMANTICS NS_SWIFT_NAME(OLD_NULL_SEMANTICS);
 
 #pragma mark Public
 
 /*!
  @brief Returns end offset for the current position, or -1 if
- offsets were not indexed.
+   offsets were not indexed.
  */
 - (jint)endOffset;
 
 /*!
  @brief Returns the payload at this position, or null if no
- payload was indexed.
- You should not modify anything 
- (neither members of the returned BytesRef nor bytes 
- in the byte[]). 
+   payload was indexed.You should not modify anything 
+   (neither members of the returned BytesRef nor bytes 
+   in the byte[]).
  */
 - (OrgApacheLuceneUtilBytesRef *)getPayload;
 
 /*!
- @brief Returns the next position.
- You should only call this
- up to <code>DocsEnum.freq()</code> times else
- the behavior is not defined.  If positions were not
- indexed this will return -1; this only happens if
- offsets were indexed and you passed needsOffset=true
- when pulling the enum.  
+ @brief Returns the next position.You should only call this
+   up to <code>DocsEnum.freq()</code> times else
+   the behavior is not defined.
+ If positions were not
+   indexed this will return -1; this only happens if
+   offsets were indexed and you passed needsOffset=true
+   when pulling the enum.
  */
 - (jint)nextPosition;
 
 /*!
  @brief Returns start offset for the current position, or -1
- if offsets were not indexed.
+   if offsets were not indexed.
  */
 - (jint)startOffset;
 
@@ -78,9 +79,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Package-Private
 
@@ -107,25 +108,25 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocsAndPositionsEnum)
 
 /*!
  @brief Flag to pass to <code>TermsEnum.docsAndPositions(Bits,DocsAndPositionsEnum,int)</code>
- if you require offsets in the returned enum.
+   if you require offsets in the returned enum.
  */
-inline jint OrgApacheLuceneIndexDocsAndPositionsEnum_get_FLAG_OFFSETS();
+inline jint OrgApacheLuceneIndexDocsAndPositionsEnum_get_FLAG_OFFSETS(void);
 #define OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_OFFSETS 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocsAndPositionsEnum, FLAG_OFFSETS, jint)
 
 /*!
  @brief Flag to pass to  <code>TermsEnum.docsAndPositions(Bits,DocsAndPositionsEnum,int)</code>
- if you require payloads in the returned enum.
+   if you require payloads in the returned enum.
  */
-inline jint OrgApacheLuceneIndexDocsAndPositionsEnum_get_FLAG_PAYLOADS();
+inline jint OrgApacheLuceneIndexDocsAndPositionsEnum_get_FLAG_PAYLOADS(void);
 #define OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_PAYLOADS 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocsAndPositionsEnum, FLAG_PAYLOADS, jint)
 
 /*!
  @brief Codec implementations should check for this flag,
- and return null when positions are requested but not present.
+  and return null when positions are requested but not present.
  */
-inline jshort OrgApacheLuceneIndexDocsAndPositionsEnum_get_OLD_NULL_SEMANTICS();
+inline jshort OrgApacheLuceneIndexDocsAndPositionsEnum_get_OLD_NULL_SEMANTICS(void);
 #define OrgApacheLuceneIndexDocsAndPositionsEnum_OLD_NULL_SEMANTICS 16384
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocsAndPositionsEnum, OLD_NULL_SEMANTICS, jshort)
 
@@ -179,8 +180,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocsAndPositionsEnum)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
-                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
+                                       withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -199,4 +204,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPosit
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocsAndPositionsEnum")

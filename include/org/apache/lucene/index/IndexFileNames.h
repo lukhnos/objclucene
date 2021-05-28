@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexFileNames
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexFileNames_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexFileNames || defined(INCLUDE_OrgApacheLuceneIndexIndexFileNames))
 #define OrgApacheLuceneIndexIndexFileNames_
 
@@ -20,36 +26,32 @@
 
 /*!
  @brief This class contains useful constants representing filenames and extensions
- used by lucene, as well as convenience methods for querying whether a file
- name matches an extension (<code>matchesExtension</code>
+  used by lucene, as well as convenience methods for querying whether a file
+  name matches an extension (<code>matchesExtension</code>
  ), as well as generating file names from a segment name,
- generation and extension (
+  generation and extension ( 
  <code>fileNameFromGeneration</code>,
- <code>segmentFileName</code>).
+  <code>segmentFileName</code>).
  <p><b>NOTE</b>: extensions used by codecs are not
- listed here.  You must interact with the <code>Codec</code>
- directly.
+  listed here.  You must interact with the <code>Codec</code>
+  directly.
  */
 @interface OrgApacheLuceneIndexIndexFileNames : NSObject
-
-+ (NSString *)SEGMENTS;
-
-+ (NSString *)PENDING_SEGMENTS;
-
-+ (NSString *)OLD_SEGMENTS_GEN;
-
-+ (JavaUtilRegexPattern *)CODEC_FILE_PATTERN;
+@property (readonly, copy, class) NSString *SEGMENTS NS_SWIFT_NAME(SEGMENTS);
+@property (readonly, copy, class) NSString *PENDING_SEGMENTS NS_SWIFT_NAME(PENDING_SEGMENTS);
+@property (readonly, copy, class) NSString *OLD_SEGMENTS_GEN NS_SWIFT_NAME(OLD_SEGMENTS_GEN);
+@property (readonly, class, strong) JavaUtilRegexPattern *CODEC_FILE_PATTERN NS_SWIFT_NAME(CODEC_FILE_PATTERN);
 
 #pragma mark Public
 
 /*!
- @brief Computes the full file name from base, extension and generation.
- If the
- generation is -1, the file name is null. If it's 0, the file name is
- &lt;base&gt;.&lt;ext&gt;. If it's &gt; 0, the file name is
+ @brief Computes the full file name from base, extension and generation.If the
+  generation is -1, the file name is null.
+ If it's 0, the file name is 
+ &lt;base&gt;.&lt;ext&gt;. If it's &gt; 0, the file name is 
  &lt;base&gt;_&lt;gen&gt;.&lt;ext&gt;.<br>
- <b>NOTE:</b> .&lt;ext&gt; is added to the name only if <code>ext</code> is
- not an empty string.
+  <b>NOTE:</b> .&lt;ext&gt; is added to the name only if <code>ext</code> is
+  not an empty string.
  @param base main part of the file name
  @param ext extension of the filename
  @param gen generation
@@ -60,46 +62,45 @@
 
 /*!
  @brief Return the extension (anything after the first '.'),
- or null if there is no '.' in the file name.
+  or null if there is no '.' in the file name.
  */
 + (NSString *)getExtensionWithNSString:(NSString *)filename;
 
 /*!
- @brief Returns true if the given filename ends with the given extension.
- One
- should provide a <i>pure</i> extension, without '.'.
+ @brief Returns true if the given filename ends with the given extension.One
+  should provide a <i>pure</i> extension, without '.'.
  */
 + (jboolean)matchesExtensionWithNSString:(NSString *)filename
                             withNSString:(NSString *)ext;
 
 /*!
  @brief Returns the generation from this file name, or 0 if there is no
- generation.
+   generation.
  */
 + (jlong)parseGenerationWithNSString:(NSString *)filename;
 
 /*!
  @brief Parses the segment name out of the given file name.
  @return the segment name only, or filename
- if it does not contain a '.' and '_'.
+          if it does not contain a '.' and '_'.
  */
 + (NSString *)parseSegmentNameWithNSString:(NSString *)filename;
 
 /*!
  @brief Returns a file name that includes the given segment name, your own custom
- name and extension.
- The format of the filename is:
- &lt;segmentName&gt;(_&lt;name&gt;)(.&lt;ext&gt;).
+  name and extension.The format of the filename is: 
+ &lt;segmentName&gt;(_&lt;name&gt;)(.
+ &lt;ext&gt;).
+  <p>
+  <b>NOTE:</b> .&lt;ext&gt; is added to the result file name only if 
+ <code>ext</code> is not empty. 
  <p>
- <b>NOTE:</b> .&lt;ext&gt; is added to the result file name only if
- <code>ext</code> is not empty.
+  <b>NOTE:</b> _&lt;segmentSuffix&gt; is added to the result file name only if
+  it's not the empty string 
  <p>
- <b>NOTE:</b> _&lt;segmentSuffix&gt; is added to the result file name only if
- it's not the empty string
- <p>
- <b>NOTE:</b> all custom files should be named using this method, or
- otherwise some structures may fail to handle them properly (such as if they
- are added to compound files).
+  <b>NOTE:</b> all custom files should be named using this method, or
+  otherwise some structures may fail to handle them properly (such as if they
+  are added to compound files).
  */
 + (NSString *)segmentFileNameWithNSString:(NSString *)segmentName
                              withNSString:(NSString *)segmentSuffix
@@ -107,18 +108,18 @@
 
 /*!
  @brief Removes the extension (anything after the first '.'),
- otherwise returns the original filename.
+  otherwise returns the original filename.
  */
 + (NSString *)stripExtensionWithNSString:(NSString *)filename;
 
 /*!
- @brief Strips the segment name out of the given file name.
- If you used
+ @brief Strips the segment name out of the given file name.If you used 
  <code>segmentFileName</code> or <code>fileNameFromGeneration</code> to create your
- files, then this method simply removes whatever comes before the first '.',
- or the second '_' (excluding both).
+  files, then this method simply removes whatever comes before the first '
+ .',
+  or the second '_' (excluding both).
  @return the filename with the segment name removed, or the given filename
- if it does not contain a '.' and '_'.
+          if it does not contain a '.' and '_'.
  */
 + (NSString *)stripSegmentNameWithNSString:(NSString *)filename;
 
@@ -129,7 +130,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexIndexFileNames)
 /*!
  @brief Name of the index segment file
  */
-inline NSString *OrgApacheLuceneIndexIndexFileNames_get_SEGMENTS();
+inline NSString *OrgApacheLuceneIndexIndexFileNames_get_SEGMENTS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexFileNames_SEGMENTS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexFileNames, SEGMENTS, NSString *)
@@ -137,7 +138,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexFileNames, SEGMENTS, NSSt
 /*!
  @brief Name of pending index segment file
  */
-inline NSString *OrgApacheLuceneIndexIndexFileNames_get_PENDING_SEGMENTS();
+inline NSString *OrgApacheLuceneIndexIndexFileNames_get_PENDING_SEGMENTS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexFileNames_PENDING_SEGMENTS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexFileNames, PENDING_SEGMENTS, NSString *)
@@ -145,16 +146,16 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexFileNames, PENDING_SEGMEN
 /*!
  @brief Name of the generation reference file name
  */
-inline NSString *OrgApacheLuceneIndexIndexFileNames_get_OLD_SEGMENTS_GEN();
+inline NSString *OrgApacheLuceneIndexIndexFileNames_get_OLD_SEGMENTS_GEN(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexFileNames_OLD_SEGMENTS_GEN;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexFileNames, OLD_SEGMENTS_GEN, NSString *)
 
 /*!
  @brief All files created by codecs much match this pattern (checked in
- SegmentInfo).
+  SegmentInfo).
  */
-inline JavaUtilRegexPattern *OrgApacheLuceneIndexIndexFileNames_get_CODEC_FILE_PATTERN();
+inline JavaUtilRegexPattern *OrgApacheLuceneIndexIndexFileNames_get_CODEC_FILE_PATTERN(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaUtilRegexPattern *OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexFileNames, CODEC_FILE_PATTERN, JavaUtilRegexPattern *)
@@ -179,4 +180,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexFileNames)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexFileNames")

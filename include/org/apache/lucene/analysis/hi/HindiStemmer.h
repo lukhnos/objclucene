@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisHiHindiStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisHiHindiStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisHiHindiStemmer))
 #define OrgApacheLuceneAnalysisHiHindiStemmer_
 
@@ -21,17 +27,17 @@
 /*!
  @brief Light Stemmer for Hindi.
  <p>
- Implements the algorithm specified in:
+  Implements the algorithm specified in: 
  <i>A Lightweight Stemmer for Hindi</i>
- Ananthakrishnan Ramanathan and Durgesh D Rao.
- http://computing.open.ac.uk/Sites/EACLSouthAsia/Papers/p6-Ramanathan.pdf
+  Ananthakrishnan Ramanathan and Durgesh D Rao.
+  http://computing.open.ac.uk/Sites/EACLSouthAsia/Papers/p6-Ramanathan.pdf 
  </p>
  */
 @interface OrgApacheLuceneAnalysisHiHindiStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)stemWithCharArray:(IOSCharArray *)buffer
                   withInt:(jint)len;
@@ -42,12 +48,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHiHindiStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiStemmer_init(OrgApacheLuceneAnalysisHiHindiStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiStemmer *new_OrgApacheLuceneAnalysisHiHindiStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiStemmer *new_OrgApacheLuceneAnalysisHiHindiStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiStemmer *create_OrgApacheLuceneAnalysisHiHindiStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiStemmer *create_OrgApacheLuceneAnalysisHiHindiStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHiHindiStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemmer")

@@ -10,6 +10,10 @@
 #include "java/util/Set.h"
 #include "org/apache/lucene/util/MapOfSets.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/MapOfSets must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilMapOfSets () {
  @public
   id<JavaUtilMap> theMap_;
@@ -64,16 +68,25 @@ withJavaUtilCollection:(id<JavaUtilCollection>)vals {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "MapOfSets", NULL, 0x1, NULL, "(Ljava/util/Map<TK;Ljava/util/Set<TV;>;>;)V" },
-    { "getMap", NULL, "Ljava.util.Map;", 0x1, NULL, "()Ljava/util/Map<TK;Ljava/util/Set<TV;>;>;" },
-    { "putWithId:withId:", "put", "I", 0x1, NULL, "(TK;TV;)I" },
-    { "putAllWithId:withJavaUtilCollection:", "putAll", "I", 0x1, NULL, "(TK;Ljava/util/Collection<+TV;>;)I" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "I", 0x1, 3, 4, -1, 5, -1, -1 },
+    { NULL, "I", 0x1, 6, 7, -1, 8, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(getMap);
+  methods[2].selector = @selector(putWithId:withId:);
+  methods[3].selector = @selector(putAllWithId:withJavaUtilCollection:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "theMap_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<TK;Ljava/util/Set<TV;>;>;", .constantValue.asLong = 0 },
+    { "theMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 9, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMapOfSets = { 2, "MapOfSets", "org.apache.lucene.util", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, "<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<TK;Ljava/util/Set<TV;>;>;)V", "()Ljava/util/Map<TK;Ljava/util/Set<TV;>;>;", "put", "LNSObject;LNSObject;", "(TK;TV;)I", "putAll", "LNSObject;LJavaUtilCollection;", "(TK;Ljava/util/Collection<+TV;>;)I", "Ljava/util/Map<TK;Ljava/util/Set<TV;>;>;", "<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMapOfSets = { "MapOfSets", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, 10, -1 };
   return &_OrgApacheLuceneUtilMapOfSets;
 }
 

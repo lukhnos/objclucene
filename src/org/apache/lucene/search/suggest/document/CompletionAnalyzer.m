@@ -7,34 +7,35 @@
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/AnalyzerWrapper.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/TokenStreamToAutomaton.h"
 #include "org/apache/lucene/analysis/Tokenizer.h"
 #include "org/apache/lucene/search/suggest/document/CompletionAnalyzer.h"
 #include "org/apache/lucene/search/suggest/document/CompletionTokenStream.h"
-#include "org/apache/lucene/search/suggest/document/NRTSuggesterBuilder.h"
-#include "org/apache/lucene/util/automaton/Operations.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/CompletionAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer () {
  @public
   OrgApacheLuceneAnalysisAnalyzer *analyzer_;
   /*!
    @brief Preserve separation between tokens
- when converting to an automaton
+  when converting to an automaton
  <p>
- Defaults to <code>true</code>
+  Defaults to <code>true</code>
    */
   jboolean preserveSep_;
   /*!
    @brief Preserve position increments for tokens
- when converting to an automaton
+  when converting to an automaton
  <p>
- Defaults to <code>true</code>
+  Defaults to <code>true</code>
    */
   jboolean preservePositionIncrements_;
   /*!
    @brief Sets the maximum number of graph expansions of a completion automaton
  <p>
- Defaults to <code>-1</code> (no limit)
+  Defaults to <code>-1</code> (no limit)
    */
   jint maxGraphExpansions_;
 }
@@ -115,28 +116,41 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, anal
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withBoolean:withBoolean:withInt:", "CompletionAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:", "CompletionAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withBoolean:withBoolean:", "CompletionAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withInt:", "CompletionAnalyzer", NULL, 0x1, NULL, NULL },
-    { "preserveSep", NULL, "Z", 0x1, NULL, NULL },
-    { "preservePositionIncrements", NULL, "Z", 0x1, NULL, NULL },
-    { "getWrappedAnalyzerWithNSString:", "getWrappedAnalyzer", "Lorg.apache.lucene.analysis.Analyzer;", 0x4, NULL, NULL },
-    { "wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:", "wrapComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x4, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 6, 7, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withBoolean:withBoolean:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withBoolean:withBoolean:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withInt:);
+  methods[4].selector = @selector(preserveSep);
+  methods[5].selector = @selector(preservePositionIncrements);
+  methods[6].selector = @selector(getWrappedAnalyzerWithNSString:);
+  methods[7].selector = @selector(wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "SEP_LABEL", "SEP_LABEL", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL },
-    { "HOLE_CHARACTER", "HOLE_CHARACTER", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_HOLE_CHARACTER },
-    { "DEFAULT_MAX_GRAPH_EXPANSIONS", "DEFAULT_MAX_GRAPH_EXPANSIONS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_MAX_GRAPH_EXPANSIONS },
-    { "DEFAULT_PRESERVE_SEP", "DEFAULT_PRESERVE_SEP", 0x18, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_PRESERVE_SEP },
-    { "DEFAULT_PRESERVE_POSITION_INCREMENTS", "DEFAULT_PRESERVE_POSITION_INCREMENTS", 0x18, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_PRESERVE_POSITION_INCREMENTS },
-    { "analyzer_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "preserveSep_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "preservePositionIncrements_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxGraphExpansions_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "SEP_LABEL", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL, 0x18, -1, -1, -1, -1 },
+    { "HOLE_CHARACTER", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_HOLE_CHARACTER, 0x18, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_GRAPH_EXPANSIONS", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_MAX_GRAPH_EXPANSIONS, 0x18, -1, -1, -1, -1 },
+    { "DEFAULT_PRESERVE_SEP", "Z", .constantValue.asBOOL = OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_PRESERVE_SEP, 0x18, -1, -1, -1, -1 },
+    { "DEFAULT_PRESERVE_POSITION_INCREMENTS", "Z", .constantValue.asBOOL = OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_PRESERVE_POSITION_INCREMENTS, 0x18, -1, -1, -1, -1 },
+    { "analyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "preserveSep_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "preservePositionIncrements_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxGraphExpansions_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer = { 2, "CompletionAnalyzer", "org.apache.lucene.search.suggest.document", NULL, 0x11, 8, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;ZZI", "LOrgApacheLuceneAnalysisAnalyzer;", "LOrgApacheLuceneAnalysisAnalyzer;ZZ", "LOrgApacheLuceneAnalysisAnalyzer;I", "getWrappedAnalyzer", "LNSString;", "wrapComponents", "LNSString;LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer = { "CompletionAnalyzer", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x11, 8, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer;
 }
 

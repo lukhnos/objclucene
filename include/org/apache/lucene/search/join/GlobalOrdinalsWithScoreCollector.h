@@ -28,6 +28,12 @@
 #define INCLUDE_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector))
 #define OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_
 
@@ -54,8 +60,7 @@
   OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Scores *scores_;
   OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Occurrences *occurrences_;
 }
-
-+ (jint)arraySize;
+@property (readonly, class) jint arraySize NS_SWIFT_NAME(arraySize);
 
 #pragma mark Public
 
@@ -77,12 +82,16 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
-                        withLong:(jlong)valueCount
-withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode
-                         withInt:(jint)min
-                         withInt:(jint)max;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field
+       withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
+                                                withLong:(jlong)valueCount
+                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode
+                                                 withInt:(jint)min
+                                                 withInt:(jint)max;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -94,11 +103,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector, c
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector, scores_, OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Scores *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector, occurrences_, OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Occurrences *)
 
-inline jint OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_get_arraySize();
+inline jint OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_get_arraySize(void);
 #define OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_arraySize 4096
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector, arraySize, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_withOrgApacheLuceneSearchJoinScoreMode_withInt_withInt_(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *self, NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount, OrgApacheLuceneSearchJoinScoreMode *scoreMode, jint min, jint max);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_withOrgApacheLuceneSearchJoinScoreMode_withInt_withInt_(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *self, NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount, OrgApacheLuceneSearchJoinScoreMode *scoreMode, jint min, jint max);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector)
 
@@ -126,9 +135,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreColle
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *)outer$
-                                          withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)docTermOrds
-                                                withOrgApacheLuceneUtilLongValues:(OrgApacheLuceneUtilLongValues *)segmentOrdToGlobalOrdLookup;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *)outer$
+                                                    withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)docTermOrds
+                                                          withOrgApacheLuceneUtilLongValues:(OrgApacheLuceneUtilLongValues *)segmentOrdToGlobalOrdLookup;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -165,8 +178,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreColle
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *)outer$
-                                          withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)docTermOrds;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *)outer$
+                                                    withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)docTermOrds;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -186,16 +203,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreColle
 #define OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Min_
 
 @class OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
+@class OrgApacheLuceneSearchJoinScoreMode;
 
 @interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Min : OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
+- (instancetype __nonnull)initWithNSString:(NSString *)field
 withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
-                        withLong:(jlong)valueCount
-                         withInt:(jint)min
-                         withInt:(jint)max;
+                                  withLong:(jlong)valueCount
+                                   withInt:(jint)min
+                                   withInt:(jint)max;
 
 #pragma mark Protected
 
@@ -204,6 +222,15 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocV
              withFloat:(jfloat)newScore;
 
 - (jfloat)unset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0
+       withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)arg1
+                                                withLong:(jlong)arg2
+                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)arg3
+                                                 withInt:(jint)arg4
+                                                 withInt:(jint)arg5 NS_UNAVAILABLE;
 
 @end
 
@@ -223,16 +250,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreColle
 #define OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Max_
 
 @class OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
+@class OrgApacheLuceneSearchJoinScoreMode;
 
 @interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Max : OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
+- (instancetype __nonnull)initWithNSString:(NSString *)field
 withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
-                        withLong:(jlong)valueCount
-                         withInt:(jint)min
-                         withInt:(jint)max;
+                                  withLong:(jlong)valueCount
+                                   withInt:(jint)min
+                                   withInt:(jint)max;
 
 #pragma mark Protected
 
@@ -241,6 +269,15 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocV
              withFloat:(jfloat)newScore;
 
 - (jfloat)unset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0
+       withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)arg1
+                                                withLong:(jlong)arg2
+                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)arg3
+                                                 withInt:(jint)arg4
+                                                 withInt:(jint)arg5 NS_UNAVAILABLE;
 
 @end
 
@@ -260,16 +297,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreColle
 #define OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Sum_
 
 @class OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
+@class OrgApacheLuceneSearchJoinScoreMode;
 
 @interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Sum : OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
+- (instancetype __nonnull)initWithNSString:(NSString *)field
 withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
-                        withLong:(jlong)valueCount
-                         withInt:(jint)min
-                         withInt:(jint)max;
+                                  withLong:(jlong)valueCount
+                                   withInt:(jint)min
+                                   withInt:(jint)max;
 
 #pragma mark Protected
 
@@ -278,6 +316,15 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocV
              withFloat:(jfloat)newScore;
 
 - (jfloat)unset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0
+       withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)arg1
+                                                withLong:(jlong)arg2
+                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)arg3
+                                                 withInt:(jint)arg4
+                                                 withInt:(jint)arg5 NS_UNAVAILABLE;
 
 @end
 
@@ -297,16 +344,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreColle
 #define OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Avg_
 
 @class OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
+@class OrgApacheLuceneSearchJoinScoreMode;
 
 @interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Avg : OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
+- (instancetype __nonnull)initWithNSString:(NSString *)field
 withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
-                        withLong:(jlong)valueCount
-                         withInt:(jint)min
-                         withInt:(jint)max;
+                                  withLong:(jlong)valueCount
+                                   withInt:(jint)min
+                                   withInt:(jint)max;
 
 - (jfloat)scoreWithInt:(jint)globalOrdinal;
 
@@ -317,6 +365,15 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocV
              withFloat:(jfloat)newScore;
 
 - (jfloat)unset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0
+       withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)arg1
+                                                withLong:(jlong)arg2
+                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)arg3
+                                                 withInt:(jint)arg4
+                                                 withInt:(jint)arg5 NS_UNAVAILABLE;
 
 @end
 
@@ -337,17 +394,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreColle
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
+@class OrgApacheLuceneSearchJoinScoreMode;
 @protocol OrgApacheLuceneSearchLeafCollector;
 
 @interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_NoScore : OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
+- (instancetype __nonnull)initWithNSString:(NSString *)field
 withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
-                        withLong:(jlong)valueCount
-                         withInt:(jint)min
-                         withInt:(jint)max;
+                                  withLong:(jlong)valueCount
+                                   withInt:(jint)min
+                                   withInt:(jint)max;
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -362,6 +420,15 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocV
              withFloat:(jfloat)newScore;
 
 - (jfloat)unset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0
+       withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)arg1
+                                                withLong:(jlong)arg2
+                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)arg3
+                                                 withInt:(jint)arg4
+                                                 withInt:(jint)arg5 NS_UNAVAILABLE;
 
 @end
 
@@ -395,6 +462,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreColle
 - (void)setScoreWithInt:(jint)globalOrdinal
               withFloat:(jfloat)score;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Scores)
@@ -421,6 +492,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreColle
 
 - (void)incrementWithInt:(jint)globalOrdinal;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_Occurrences)
@@ -431,4 +506,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreColle
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector")

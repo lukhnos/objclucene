@@ -3,13 +3,22 @@
 //  source: ./core/src/java/org/apache/lucene/search/FieldComparatorSource.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/FieldComparator.h"
 #include "org/apache/lucene/search/FieldComparatorSource.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/FieldComparatorSource must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchFieldComparatorSource
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchFieldComparatorSource_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchFieldComparator *)newComparatorWithNSString:(NSString *)fieldname
                                                             withInt:(jint)numHits
@@ -20,19 +29,19 @@
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchFieldComparatorSource_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "newComparatorWithNSString:withInt:withInt:withBoolean:", "newComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x401, "Ljava.io.IOException;", "(Ljava/lang/String;IIZ)Lorg/apache/lucene/search/FieldComparator<*>;" },
-    { "init", "FieldComparatorSource", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldComparator;", 0x401, 0, 1, 2, 3, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldComparatorSource = { 2, "FieldComparatorSource", "org.apache.lucene.search", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(newComparatorWithNSString:withInt:withInt:withBoolean:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "newComparator", "LNSString;IIZ", "LJavaIoIOException;", "(Ljava/lang/String;IIZ)Lorg/apache/lucene/search/FieldComparator<*>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldComparatorSource = { "FieldComparatorSource", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x401, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFieldComparatorSource;
 }
 

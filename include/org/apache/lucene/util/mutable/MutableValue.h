@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMutableMutableValue
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMutableMutableValue_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValue || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValue))
 #define OrgApacheLuceneUtilMutableMutableValue_
 
@@ -22,7 +28,6 @@
 
 /*!
  @brief Base class for all mutable values.
-  
  */
 @interface OrgApacheLuceneUtilMutableMutableValue : NSObject < JavaLangComparable > {
  @public
@@ -31,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)compareSameTypeWithId:(id)other;
 
@@ -63,4 +68,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValue)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValue")

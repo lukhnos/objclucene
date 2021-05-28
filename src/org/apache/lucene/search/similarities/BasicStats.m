@@ -7,6 +7,10 @@
 #include "org/apache/lucene/search/similarities/BasicStats.h"
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/BasicStats must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSimilaritiesBasicStats
 
 - (instancetype)initWithNSString:(NSString *)field
@@ -80,35 +84,55 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withFloat:", "BasicStats", NULL, 0x1, NULL, NULL },
-    { "getNumberOfDocuments", NULL, "J", 0x1, NULL, NULL },
-    { "setNumberOfDocumentsWithLong:", "setNumberOfDocuments", "V", 0x1, NULL, NULL },
-    { "getNumberOfFieldTokens", NULL, "J", 0x1, NULL, NULL },
-    { "setNumberOfFieldTokensWithLong:", "setNumberOfFieldTokens", "V", 0x1, NULL, NULL },
-    { "getAvgFieldLength", NULL, "F", 0x1, NULL, NULL },
-    { "setAvgFieldLengthWithFloat:", "setAvgFieldLength", "V", 0x1, NULL, NULL },
-    { "getDocFreq", NULL, "J", 0x1, NULL, NULL },
-    { "setDocFreqWithLong:", "setDocFreq", "V", 0x1, NULL, NULL },
-    { "getTotalTermFreq", NULL, "J", 0x1, NULL, NULL },
-    { "setTotalTermFreqWithLong:", "setTotalTermFreq", "V", 0x1, NULL, NULL },
-    { "getValueForNormalization", NULL, "F", 0x1, NULL, NULL },
-    { "rawNormalizationValue", NULL, "F", 0x4, NULL, NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "getTotalBoost", NULL, "F", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withFloat:);
+  methods[1].selector = @selector(getNumberOfDocuments);
+  methods[2].selector = @selector(setNumberOfDocumentsWithLong:);
+  methods[3].selector = @selector(getNumberOfFieldTokens);
+  methods[4].selector = @selector(setNumberOfFieldTokensWithLong:);
+  methods[5].selector = @selector(getAvgFieldLength);
+  methods[6].selector = @selector(setAvgFieldLengthWithFloat:);
+  methods[7].selector = @selector(getDocFreq);
+  methods[8].selector = @selector(setDocFreqWithLong:);
+  methods[9].selector = @selector(getTotalTermFreq);
+  methods[10].selector = @selector(setTotalTermFreqWithLong:);
+  methods[11].selector = @selector(getValueForNormalization);
+  methods[12].selector = @selector(rawNormalizationValue);
+  methods[13].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[14].selector = @selector(getTotalBoost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numberOfDocuments_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "numberOfFieldTokens_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "avgFieldLength_", NULL, 0x4, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "docFreq_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalTermFreq_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryBoost_", NULL, 0x14, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "topLevelBoost_", NULL, 0x4, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalBoost_", NULL, 0x4, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numberOfDocuments_", "J", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "numberOfFieldTokens_", "J", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "avgFieldLength_", "F", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "docFreq_", "J", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "totalTermFreq_", "J", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "queryBoost_", "F", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "topLevelBoost_", "F", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "totalBoost_", "F", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicStats = { 2, "BasicStats", "org.apache.lucene.search.similarities", NULL, 0x1, 15, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;F", "setNumberOfDocuments", "J", "setNumberOfFieldTokens", "setAvgFieldLength", "F", "setDocFreq", "setTotalTermFreq", "normalize", "FF" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicStats = { "BasicStats", "org.apache.lucene.search.similarities", ptrTable, methods, fields, 7, 0x1, 15, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesBasicStats;
 }
 

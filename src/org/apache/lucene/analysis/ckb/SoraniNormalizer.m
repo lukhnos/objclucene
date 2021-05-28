@@ -9,6 +9,10 @@
 #include "org/apache/lucene/analysis/ckb/SoraniNormalizer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ckb/SoraniNormalizer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisCkbSoraniNormalizer
 
 + (jchar)YEH {
@@ -99,6 +103,13 @@
   return OrgApacheLuceneAnalysisCkbSoraniNormalizer_SUKUN;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisCkbSoraniNormalizer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (jint)normalizeWithCharArray:(IOSCharArray *)s
                        withInt:(jint)len {
   for (jint i = 0; i < len; i++) {
@@ -158,43 +169,43 @@
   return len;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisCkbSoraniNormalizer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
-    { "init", "SoraniNormalizer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(normalizeWithCharArray:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "YEH", "YEH", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_YEH },
-    { "DOTLESS_YEH", "DOTLESS_YEH", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_DOTLESS_YEH },
-    { "FARSI_YEH", "FARSI_YEH", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_FARSI_YEH },
-    { "KAF", "KAF", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_KAF },
-    { "KEHEH", "KEHEH", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_KEHEH },
-    { "HEH", "HEH", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH },
-    { "AE", "AE", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_AE },
-    { "ZWNJ", "ZWNJ", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_ZWNJ },
-    { "HEH_DOACHASHMEE", "HEH_DOACHASHMEE", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH_DOACHASHMEE },
-    { "TEH_MARBUTA", "TEH_MARBUTA", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_TEH_MARBUTA },
-    { "REH", "REH", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_REH },
-    { "RREH", "RREH", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH },
-    { "RREH_ABOVE", "RREH_ABOVE", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH_ABOVE },
-    { "TATWEEL", "TATWEEL", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_TATWEEL },
-    { "FATHATAN", "FATHATAN", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_FATHATAN },
-    { "DAMMATAN", "DAMMATAN", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_DAMMATAN },
-    { "KASRATAN", "KASRATAN", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_KASRATAN },
-    { "FATHA", "FATHA", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_FATHA },
-    { "DAMMA", "DAMMA", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_DAMMA },
-    { "KASRA", "KASRA", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_KASRA },
-    { "SHADDA", "SHADDA", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_SHADDA },
-    { "SUKUN", "SUKUN", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_SUKUN },
+    { "YEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_YEH, 0x18, -1, -1, -1, -1 },
+    { "DOTLESS_YEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_DOTLESS_YEH, 0x18, -1, -1, -1, -1 },
+    { "FARSI_YEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_FARSI_YEH, 0x18, -1, -1, -1, -1 },
+    { "KAF", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_KAF, 0x18, -1, -1, -1, -1 },
+    { "KEHEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_KEHEH, 0x18, -1, -1, -1, -1 },
+    { "HEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH, 0x18, -1, -1, -1, -1 },
+    { "AE", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_AE, 0x18, -1, -1, -1, -1 },
+    { "ZWNJ", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_ZWNJ, 0x18, -1, -1, -1, -1 },
+    { "HEH_DOACHASHMEE", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH_DOACHASHMEE, 0x18, -1, -1, -1, -1 },
+    { "TEH_MARBUTA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_TEH_MARBUTA, 0x18, -1, -1, -1, -1 },
+    { "REH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_REH, 0x18, -1, -1, -1, -1 },
+    { "RREH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH, 0x18, -1, -1, -1, -1 },
+    { "RREH_ABOVE", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH_ABOVE, 0x18, -1, -1, -1, -1 },
+    { "TATWEEL", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_TATWEEL, 0x18, -1, -1, -1, -1 },
+    { "FATHATAN", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_FATHATAN, 0x18, -1, -1, -1, -1 },
+    { "DAMMATAN", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_DAMMATAN, 0x18, -1, -1, -1, -1 },
+    { "KASRATAN", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_KASRATAN, 0x18, -1, -1, -1, -1 },
+    { "FATHA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_FATHA, 0x18, -1, -1, -1, -1 },
+    { "DAMMA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_DAMMA, 0x18, -1, -1, -1, -1 },
+    { "KASRA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_KASRA, 0x18, -1, -1, -1, -1 },
+    { "SHADDA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_SHADDA, 0x18, -1, -1, -1, -1 },
+    { "SUKUN", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_SUKUN, 0x18, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniNormalizer = { 2, "SoraniNormalizer", "org.apache.lucene.analysis.ckb", NULL, 0x1, 2, methods, 22, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "normalize", "[CI" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniNormalizer = { "SoraniNormalizer", "org.apache.lucene.analysis.ckb", ptrTable, methods, fields, 7, 0x1, 2, 22, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCkbSoraniNormalizer;
 }
 

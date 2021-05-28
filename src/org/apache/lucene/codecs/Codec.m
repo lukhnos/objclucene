@@ -21,6 +21,10 @@
 #include "org/apache/lucene/util/NamedSPILoader.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/Codec must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCodecsCodec () {
  @public
   NSString *name_;
@@ -32,7 +36,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCodec, name_, NSString *)
 
 /*!
  @brief This static holder class prevents classloading deadlock by delaying
- init of default codecs and available codecs until needed.
+  init of default codecs and available codecs until needed.
  */
 @interface OrgApacheLuceneCodecsCodec_Holder : NSObject
 
@@ -44,22 +48,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCodec, name_, NSString *)
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsCodec_Holder)
 
-inline OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsCodec_Holder_get_LOADER();
+inline OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsCodec_Holder_get_LOADER(void);
 static OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsCodec_Holder_LOADER;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCodec_Holder, LOADER, OrgApacheLuceneUtilNamedSPILoader *)
 
-inline OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_Holder_get_defaultCodec();
+inline OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_Holder_get_defaultCodec(void);
 inline OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_Holder_set_defaultCodec(OrgApacheLuceneCodecsCodec *value);
 static OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_Holder_defaultCodec;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneCodecsCodec_Holder, defaultCodec, OrgApacheLuceneCodecsCodec *)
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsCodec_Holder_init(OrgApacheLuceneCodecsCodec_Holder *self);
 
-__attribute__((unused)) static OrgApacheLuceneCodecsCodec_Holder *new_OrgApacheLuceneCodecsCodec_Holder_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneCodecsCodec_Holder *new_OrgApacheLuceneCodecsCodec_Holder_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneCodecsCodec_Holder *create_OrgApacheLuceneCodecsCodec_Holder_init();
+__attribute__((unused)) static OrgApacheLuceneCodecsCodec_Holder *create_OrgApacheLuceneCodecsCodec_Holder_init(void);
 
-__attribute__((unused)) static OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsCodec_Holder_getLoader();
+__attribute__((unused)) static OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsCodec_Holder_getLoader(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCodec_Holder)
 
@@ -158,30 +162,51 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCodec_Holder)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "Codec", NULL, 0x4, NULL, NULL },
-    { "getName", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "postingsFormat", NULL, "Lorg.apache.lucene.codecs.PostingsFormat;", 0x401, NULL, NULL },
-    { "docValuesFormat", NULL, "Lorg.apache.lucene.codecs.DocValuesFormat;", 0x401, NULL, NULL },
-    { "storedFieldsFormat", NULL, "Lorg.apache.lucene.codecs.StoredFieldsFormat;", 0x401, NULL, NULL },
-    { "termVectorsFormat", NULL, "Lorg.apache.lucene.codecs.TermVectorsFormat;", 0x401, NULL, NULL },
-    { "fieldInfosFormat", NULL, "Lorg.apache.lucene.codecs.FieldInfosFormat;", 0x401, NULL, NULL },
-    { "segmentInfoFormat", NULL, "Lorg.apache.lucene.codecs.SegmentInfoFormat;", 0x401, NULL, NULL },
-    { "normsFormat", NULL, "Lorg.apache.lucene.codecs.NormsFormat;", 0x401, NULL, NULL },
-    { "liveDocsFormat", NULL, "Lorg.apache.lucene.codecs.LiveDocsFormat;", 0x401, NULL, NULL },
-    { "compoundFormat", NULL, "Lorg.apache.lucene.codecs.CompoundFormat;", 0x401, NULL, NULL },
-    { "forNameWithNSString:", "forName", "Lorg.apache.lucene.codecs.Codec;", 0x9, NULL, NULL },
-    { "availableCodecs", NULL, "Ljava.util.Set;", 0x9, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
-    { "reloadCodecsWithJavaLangClassLoader:", "reloadCodecs", "V", 0x9, NULL, NULL },
-    { "getDefault", NULL, "Lorg.apache.lucene.codecs.Codec;", 0x9, NULL, NULL },
-    { "setDefaultWithOrgApacheLuceneCodecsCodec:", "setDefault", "V", 0x9, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsPostingsFormat;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesFormat;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsFormat;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsFormat;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldInfosFormat;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsSegmentInfoFormat;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsNormsFormat;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsLiveDocsFormat;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCompoundFormat;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCodec;", 0x9, 1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x9, -1, -1, -1, 2, -1, -1 },
+    { NULL, "V", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCodec;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(getName);
+  methods[2].selector = @selector(postingsFormat);
+  methods[3].selector = @selector(docValuesFormat);
+  methods[4].selector = @selector(storedFieldsFormat);
+  methods[5].selector = @selector(termVectorsFormat);
+  methods[6].selector = @selector(fieldInfosFormat);
+  methods[7].selector = @selector(segmentInfoFormat);
+  methods[8].selector = @selector(normsFormat);
+  methods[9].selector = @selector(liveDocsFormat);
+  methods[10].selector = @selector(compoundFormat);
+  methods[11].selector = @selector(forNameWithNSString:);
+  methods[12].selector = @selector(availableCodecs);
+  methods[13].selector = @selector(reloadCodecsWithJavaLangClassLoader:);
+  methods[14].selector = @selector(getDefault);
+  methods[15].selector = @selector(setDefaultWithOrgApacheLuceneCodecsCodec:);
+  methods[16].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "name_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "name_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.Codec$Holder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCodec = { 2, "Codec", "org.apache.lucene.codecs", NULL, 0x401, 17, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "forName", "()Ljava/util/Set<Ljava/lang/String;>;", "reloadCodecs", "LJavaLangClassLoader;", "setDefault", "LOrgApacheLuceneCodecsCodec;", "toString", "LOrgApacheLuceneCodecsCodec_Holder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCodec = { "Codec", "org.apache.lucene.codecs", ptrTable, methods, fields, 7, 0x401, 17, 1, -1, 8, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCodec;
 }
 
@@ -195,7 +220,7 @@ void OrgApacheLuceneCodecsCodec_initWithNSString_(OrgApacheLuceneCodecsCodec *se
 
 OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_forNameWithNSString_(NSString *name) {
   OrgApacheLuceneCodecsCodec_initialize();
-  return [((OrgApacheLuceneUtilNamedSPILoader *) nil_chk(OrgApacheLuceneCodecsCodec_Holder_getLoader())) lookupWithNSString:name];
+  return ((OrgApacheLuceneCodecsCodec *) [((OrgApacheLuceneUtilNamedSPILoader *) nil_chk(OrgApacheLuceneCodecsCodec_Holder_getLoader())) lookupWithNSString:name]);
 }
 
 id<JavaUtilSet> OrgApacheLuceneCodecsCodec_availableCodecs() {
@@ -238,25 +263,32 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneCodecsCodec_Holder_getLoader();
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilNamedSPILoader;", 0x8, -1, -1, -1, 0, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getLoader);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "LOADER", "LOrgApacheLuceneUtilNamedSPILoader;", .constantValue.asLong = 0, 0x1a, -1, 1, 2, -1 },
+    { "defaultCodec", "LOrgApacheLuceneCodecsCodec;", .constantValue.asLong = 0, 0x8, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "()Lorg/apache/lucene/util/NamedSPILoader<Lorg/apache/lucene/codecs/Codec;>;", &OrgApacheLuceneCodecsCodec_Holder_LOADER, "Lorg/apache/lucene/util/NamedSPILoader<Lorg/apache/lucene/codecs/Codec;>;", &OrgApacheLuceneCodecsCodec_Holder_defaultCodec, "LOrgApacheLuceneCodecsCodec;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCodec_Holder = { "Holder", "org.apache.lucene.codecs", ptrTable, methods, fields, 7, 0x1a, 2, 2, 4, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsCodec_Holder;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsCodec_Holder class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneCodecsCodec_Holder_LOADER, new_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(OrgApacheLuceneCodecsCodec_class_()));
     JreStrongAssign(&OrgApacheLuceneCodecsCodec_Holder_defaultCodec, [OrgApacheLuceneCodecsCodec_Holder_LOADER lookupWithNSString:@"Lucene53"]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsCodec_Holder)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Holder", NULL, 0x2, NULL, NULL },
-    { "getLoader", NULL, "Lorg.apache.lucene.util.NamedSPILoader;", 0x8, NULL, "()Lorg/apache/lucene/util/NamedSPILoader<Lorg/apache/lucene/codecs/Codec;>;" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "LOADER", "LOADER", 0x1a, "Lorg.apache.lucene.util.NamedSPILoader;", &OrgApacheLuceneCodecsCodec_Holder_LOADER, "Lorg/apache/lucene/util/NamedSPILoader<Lorg/apache/lucene/codecs/Codec;>;", .constantValue.asLong = 0 },
-    { "defaultCodec", "defaultCodec", 0x8, "Lorg.apache.lucene.codecs.Codec;", &OrgApacheLuceneCodecsCodec_Holder_defaultCodec, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCodec_Holder = { 2, "Holder", "org.apache.lucene.codecs", "Codec", 0x1a, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneCodecsCodec_Holder;
 }
 
 @end

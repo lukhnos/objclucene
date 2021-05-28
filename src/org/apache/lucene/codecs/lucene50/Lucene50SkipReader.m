@@ -3,15 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/lucene50/Lucene50SkipReader.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/codecs/MultiLevelSkipListReader.h"
 #include "org/apache/lucene/codecs/lucene50/Lucene50PostingsFormat.h"
 #include "org/apache/lucene/codecs/lucene50/Lucene50SkipReader.h"
 #include "org/apache/lucene/store/IndexInput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50SkipReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsLucene50Lucene50SkipReader () {
  @public
@@ -37,17 +39,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50SkipReader, payloadByte
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50SkipReader
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream
-                                               withInt:(jint)maxSkipLevels
-                                           withBoolean:(jboolean)hasPos
-                                           withBoolean:(jboolean)hasOffsets
-                                           withBoolean:(jboolean)hasPayloads {
-  OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_(self, skipStream, maxSkipLevels, hasPos, hasOffsets, hasPayloads);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream
+                                                             withInt:(jint)maxSkipLevels
+                                                         withBoolean:(jboolean)hasPos
+                                                         withBoolean:(jboolean)hasOffsets
+                                                         withBoolean:(jboolean)hasPayloads {
+  OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_(self, skipStream, maxSkipLevels, hasPos, hasOffsets, hasPayloads);
   return self;
 }
 
 - (jint)trimWithInt:(jint)df {
-  return df % OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE == 0 ? df - 1 : df;
+  return JreIntMod(df, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE) == 0 ? df - 1 : df;
 }
 
 - (void)init__WithLong:(jlong)skipPointer
@@ -67,7 +69,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50SkipReader, payloadByte
     }
   }
   else {
-    JreAssert((posBasePointer == 0), (@"org/apache/lucene/codecs/lucene50/Lucene50SkipReader.java:115 condition failed: assert posBasePointer == 0;"));
+    JreAssert(posBasePointer == 0, @"org/apache/lucene/codecs/lucene50/Lucene50SkipReader.java:115 condition failed: assert posBasePointer == 0;");
   }
 }
 
@@ -152,39 +154,56 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:withInt:withBoolean:withBoolean:withBoolean:", "Lucene50SkipReader", NULL, 0x1, NULL, NULL },
-    { "trimWithInt:", "trim", "I", 0x4, NULL, NULL },
-    { "init__WithLong:withLong:withLong:withLong:withInt:", "init", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getDocPointer", NULL, "J", 0x1, NULL, NULL },
-    { "getPosPointer", NULL, "J", 0x1, NULL, NULL },
-    { "getPosBufferUpto", NULL, "I", 0x1, NULL, NULL },
-    { "getPayPointer", NULL, "J", 0x1, NULL, NULL },
-    { "getPayloadByteUpto", NULL, "I", 0x1, NULL, NULL },
-    { "getNextSkipDoc", NULL, "I", 0x1, NULL, NULL },
-    { "seekChildWithInt:", "seekChild", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "setLastSkipDataWithInt:", "setLastSkipData", "V", 0x4, NULL, NULL },
-    { "readSkipDataWithInt:withOrgApacheLuceneStoreIndexInput:", "readSkipData", "I", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 6, 2, 5, -1, -1, -1 },
+    { NULL, "V", 0x4, 7, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 8, 9, 5, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneStoreIndexInput:withInt:withBoolean:withBoolean:withBoolean:);
+  methods[1].selector = @selector(trimWithInt:);
+  methods[2].selector = @selector(init__WithLong:withLong:withLong:withLong:withInt:);
+  methods[3].selector = @selector(getDocPointer);
+  methods[4].selector = @selector(getPosPointer);
+  methods[5].selector = @selector(getPosBufferUpto);
+  methods[6].selector = @selector(getPayPointer);
+  methods[7].selector = @selector(getPayloadByteUpto);
+  methods[8].selector = @selector(getNextSkipDoc);
+  methods[9].selector = @selector(seekChildWithInt:);
+  methods[10].selector = @selector(setLastSkipDataWithInt:);
+  methods[11].selector = @selector(readSkipDataWithInt:withOrgApacheLuceneStoreIndexInput:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "docPointer_", NULL, 0x2, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "posPointer_", NULL, 0x2, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "payPointer_", NULL, 0x2, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "posBufferUpto_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadByteUpto_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPosPointer_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPayPointer_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPayloadByteUpto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastDocPointer_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPosBufferUpto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "docPointer_", "[J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "posPointer_", "[J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payPointer_", "[J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "posBufferUpto_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payloadByteUpto_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastPosPointer_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastPayPointer_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastPayloadByteUpto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastDocPointer_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastPosBufferUpto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50SkipReader = { 2, "Lucene50SkipReader", "org.apache.lucene.codecs.lucene50", NULL, 0x10, 12, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;IZZZ", "trim", "I", "init", "JJJJI", "LJavaIoIOException;", "seekChild", "setLastSkipData", "readSkipData", "ILOrgApacheLuceneStoreIndexInput;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50SkipReader = { "Lucene50SkipReader", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x10, 12, 10, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50SkipReader;
 }
 
 @end
 
-void OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneCodecsLucene50Lucene50SkipReader *self, OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jboolean hasPos, jboolean hasOffsets, jboolean hasPayloads) {
+void OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneCodecsLucene50Lucene50SkipReader *self, OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jboolean hasPos, jboolean hasOffsets, jboolean hasPayloads) {
   OrgApacheLuceneCodecsMultiLevelSkipListReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_(self, skipStream, maxSkipLevels, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE, 8);
   JreStrongAssignAndConsume(&self->docPointer_, [IOSLongArray newArrayWithLength:maxSkipLevels]);
   if (hasPos) {
@@ -208,12 +227,12 @@ void OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStor
   }
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50SkipReader *new_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jboolean hasPos, jboolean hasOffsets, jboolean hasPayloads) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SkipReader, initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_, skipStream, maxSkipLevels, hasPos, hasOffsets, hasPayloads)
+OrgApacheLuceneCodecsLucene50Lucene50SkipReader *new_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jboolean hasPos, jboolean hasOffsets, jboolean hasPayloads) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SkipReader, initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_, skipStream, maxSkipLevels, hasPos, hasOffsets, hasPayloads)
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50SkipReader *create_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jboolean hasPos, jboolean hasOffsets, jboolean hasPayloads) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SkipReader, initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_, skipStream, maxSkipLevels, hasPos, hasOffsets, hasPayloads)
+OrgApacheLuceneCodecsLucene50Lucene50SkipReader *create_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jboolean hasPos, jboolean hasOffsets, jboolean hasPayloads) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SkipReader, initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_, skipStream, maxSkipLevels, hasPos, hasOffsets, hasPayloads)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50SkipReader)

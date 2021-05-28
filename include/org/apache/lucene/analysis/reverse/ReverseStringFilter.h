@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisReverseReverseStringFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisReverseReverseStringFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisReverseReverseStringFilter || defined(INCLUDE_OrgApacheLuceneAnalysisReverseReverseStringFilter))
 #define OrgApacheLuceneAnalysisReverseReverseStringFilter_
 
@@ -26,45 +32,41 @@
 /*!
  @brief Reverse token string, for example "country" =&gt; "yrtnuoc".
  <p>
- If <code>marker</code> is supplied, then tokens will be also prepended by
- that character. For example, with a marker of &#x5C;u0001, "country" =&gt;
- "&#x5C;u0001yrtnuoc". This is useful when implementing efficient leading
- wildcards search.
+  If <code>marker</code> is supplied, then tokens will be also prepended by
+  that character. For example, with a marker of &#x5C;u0001, "country" =&gt;
+  "&#x5C;u0001yrtnuoc". This is useful when implementing efficient leading
+  wildcards search.
  */
 @interface OrgApacheLuceneAnalysisReverseReverseStringFilter : OrgApacheLuceneAnalysisTokenFilter
-
-+ (jchar)START_OF_HEADING_MARKER;
-
-+ (jchar)INFORMATION_SEPARATOR_MARKER;
-
-+ (jchar)PUA_EC00_MARKER;
-
-+ (jchar)RTL_DIRECTION_MARKER;
+@property (readonly, class) jchar START_OF_HEADING_MARKER NS_SWIFT_NAME(START_OF_HEADING_MARKER);
+@property (readonly, class) jchar INFORMATION_SEPARATOR_MARKER NS_SWIFT_NAME(INFORMATION_SEPARATOR_MARKER);
+@property (readonly, class) jchar PUA_EC00_MARKER NS_SWIFT_NAME(PUA_EC00_MARKER);
+@property (readonly, class) jchar RTL_DIRECTION_MARKER NS_SWIFT_NAME(RTL_DIRECTION_MARKER);
 
 #pragma mark Public
 
 /*!
  @brief Create a new ReverseStringFilter that reverses all tokens in the 
- supplied <code>TokenStream</code>.
+  supplied <code>TokenStream</code>.
  <p>
- The reversed tokens will not be marked. 
+  The reversed tokens will not be marked.  
  </p>
- @param inArg <code>TokenStream</code> to filter
+ @param inArg<code>TokenStream</code>  to filter
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 /*!
  @brief Create a new ReverseStringFilter that reverses and marks all tokens in the
- supplied <code>TokenStream</code>.
+  supplied <code>TokenStream</code>.
  <p>
- The reversed tokens will be prepended (marked) by the <code>marker</code>
- character.
+  The reversed tokens will be prepended (marked) by the <code>marker</code>
+  character. 
  </p>
- @param inArg <code>TokenStream</code> to filter
+ @param inArg<code>TokenStream</code>  to filter
  @param marker A character used to mark reversed tokens
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                  withChar:(jchar)marker;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                            withChar:(jchar)marker;
 
 - (jboolean)incrementToken;
 
@@ -76,21 +78,19 @@
 
 /*!
  @brief Partially reverses the given input buffer in-place from offset 0
- up to the given length.
+  up to the given length.
  @param buffer the input char array to reverse
- @param len the length in the buffer up to where the
- buffer should be reversed
+ @param len the length in the buffer up to where the         buffer should be reversed
  */
 + (void)reverseWithCharArray:(IOSCharArray *)buffer
                      withInt:(jint)len;
 
 /*!
  @brief Partially reverses the given input buffer in-place from the given offset
- up to the given length.
+  up to the given length.
  @param buffer the input char array to reverse
  @param start the offset from where to reverse the buffer
- @param len the length in the buffer up to where the
- buffer should be reversed
+ @param len the length in the buffer up to where the         buffer should be reversed
  */
 + (void)reverseWithCharArray:(IOSCharArray *)buffer
                      withInt:(jint)start
@@ -110,28 +110,28 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisReverseReverseStringFilter)
 /*!
  @brief Example marker character: U+0001 (START OF HEADING)
  */
-inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_START_OF_HEADING_MARKER();
+inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_START_OF_HEADING_MARKER(void);
 #define OrgApacheLuceneAnalysisReverseReverseStringFilter_START_OF_HEADING_MARKER 0x0001
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisReverseReverseStringFilter, START_OF_HEADING_MARKER, jchar)
 
 /*!
  @brief Example marker character: U+001F (INFORMATION SEPARATOR ONE)
  */
-inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_INFORMATION_SEPARATOR_MARKER();
+inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_INFORMATION_SEPARATOR_MARKER(void);
 #define OrgApacheLuceneAnalysisReverseReverseStringFilter_INFORMATION_SEPARATOR_MARKER 0x001f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisReverseReverseStringFilter, INFORMATION_SEPARATOR_MARKER, jchar)
 
 /*!
  @brief Example marker character: U+EC00 (PRIVATE USE AREA: EC00)
  */
-inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_PUA_EC00_MARKER();
+inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_PUA_EC00_MARKER(void);
 #define OrgApacheLuceneAnalysisReverseReverseStringFilter_PUA_EC00_MARKER 0xec00
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisReverseReverseStringFilter, PUA_EC00_MARKER, jchar)
 
 /*!
  @brief Example marker character: U+200F (RIGHT-TO-LEFT MARK)
  */
-inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_RTL_DIRECTION_MARKER();
+inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_RTL_DIRECTION_MARKER(void);
 #define OrgApacheLuceneAnalysisReverseReverseStringFilter_RTL_DIRECTION_MARKER 0x200f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisReverseReverseStringFilter, RTL_DIRECTION_MARKER, jchar)
 
@@ -159,4 +159,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisReverseReverseStringFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisReverseReverseStringFilter")

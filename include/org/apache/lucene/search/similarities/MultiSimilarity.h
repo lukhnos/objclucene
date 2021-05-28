@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesMultiSimilarity
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesMultiSimilarity_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesMultiSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesMultiSimilarity))
 #define OrgApacheLuceneSearchSimilaritiesMultiSimilarity_
 
@@ -29,9 +35,9 @@
 
 /*!
  @brief Implements the CombSUM method for combining evidence from multiple
- similarity values described in: Joseph A.
- Shaw, Edward A. Fox. 
- In Text REtrieval Conference (1993), pp. 243-252
+  similarity values described in: Joseph A.Shaw, Edward A.
+ Fox. 
+  In Text REtrieval Conference (1993), pp. 243-252
  */
 @interface OrgApacheLuceneSearchSimilaritiesMultiSimilarity : OrgApacheLuceneSearchSimilaritiesSimilarity {
  @public
@@ -45,9 +51,9 @@
 
 /*!
  @brief Creates a MultiSimilarity which will sum the scores
- of the provided <code>sims</code>.
+  of the provided <code>sims</code>.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray:(IOSObjectArray *)sims;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray:(IOSObjectArray *)sims;
 
 - (jlong)computeNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
 
@@ -57,6 +63,10 @@
 
 - (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)stats
                                                                                     withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -104,7 +114,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray:(IOSObjectArray *)subScorers;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray:(IOSObjectArray *)subScorers;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -143,7 +157,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_Mult
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray:(IOSObjectArray *)subStats;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray:(IOSObjectArray *)subStats;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -161,4 +179,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_Mult
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesMultiSimilarity")

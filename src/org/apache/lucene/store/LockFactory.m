@@ -3,21 +3,16 @@
 //  source: ./core/src/java/org/apache/lucene/store/LockFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/Lock.h"
 #include "org/apache/lucene/store/LockFactory.h"
 
-@implementation OrgApacheLuceneStoreLockFactory
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/LockFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-- (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                                                             withNSString:(NSString *)lockName {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
+@implementation OrgApacheLuceneStoreLockFactory
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -26,12 +21,26 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                                                             withNSString:(NSString *)lockName {
+  // can't call an abstract method
+  [self doesNotRecognizeSelector:_cmd];
+  return 0;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", "LockFactory", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreLock;", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockFactory = { 2, "LockFactory", "org.apache.lucene.store", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "obtainLock", "LOrgApacheLuceneStoreDirectory;LNSString;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockFactory = { "LockFactory", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x401, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreLockFactory;
 }
 

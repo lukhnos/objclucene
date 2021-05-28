@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_
 
@@ -25,13 +31,13 @@
 
 /*!
  @brief A <code>MatchAllDocsQueryNode</code> indicates that a query node tree or subtree
- will match all documents if executed in the index.
+  will match all documents if executed in the index.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *)cloneTree;
 
@@ -45,12 +51,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocs
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode")

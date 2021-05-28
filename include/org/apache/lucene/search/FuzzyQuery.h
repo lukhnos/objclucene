@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFuzzyQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFuzzyQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchFuzzyQuery || defined(INCLUDE_OrgApacheLuceneSearchFuzzyQuery))
 #define OrgApacheLuceneSearchFuzzyQuery_
 
@@ -20,94 +26,86 @@
 #define INCLUDE_OrgApacheLuceneSearchMultiTermQuery 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneIndexTerms;
 @class OrgApacheLuceneIndexTermsEnum;
 @class OrgApacheLuceneUtilAttributeSource;
 
 /*!
- @brief Implements the fuzzy search query.
- The similarity measurement
- is based on the Damerau-Levenshtein (optimal string alignment) algorithm,
- though you can explicitly choose classic Levenshtein by passing <code>false</code>
- to the <code>transpositions</code> parameter.
+ @brief Implements the fuzzy search query.The similarity measurement
+  is based on the Damerau-Levenshtein (optimal string alignment) algorithm,
+  though you can explicitly choose classic Levenshtein by passing <code>false</code>
+  to the <code>transpositions</code> parameter.
  <p>This query uses <code>MultiTermQuery.TopTermsScoringBooleanQueryRewrite</code>
- as default. So terms will be collected and scored according to their
- edit distance. Only the top terms are used for building the <code>BooleanQuery</code>.
- It is not recommended to change the rewrite mode for fuzzy queries.
- <p>At most, this query will match terms up to 
+  as default. So terms will be collected and scored according to their
+  edit distance. Only the top terms are used for building the <code>BooleanQuery</code>.
+  It is not recommended to change the rewrite mode for fuzzy queries.  
+ <p>At most, this query will match terms up to  
  org.apache.lucene.util.automaton.LevenshteinAutomata#MAXIMUM_SUPPORTED_DISTANCE edits. 
- Higher distances (especially with transpositions enabled), are generally not useful and 
- will match a significant amount of the term dictionary. If you really want this, consider
- using an n-gram indexing technique (such as the SpellChecker in the 
- <a href="/../suggest/overview-summary.html">suggest module</a>) instead.
+  Higher distances (especially with transpositions enabled), are generally not useful and 
+  will match a significant amount of the term dictionary. If you really want this, consider
+  using an n-gram indexing technique (such as the SpellChecker in the  
+ <a href="{@@docRoot}/../suggest/overview-summary.html">suggest module</a>) instead. 
  <p>NOTE: terms of length 1 or 2 will sometimes not match because of how the scaled
- distance between two terms is computed.  For a term to match, the edit distance between
- the terms must be less than the minimum length term (either the input term, or
- the candidate term).  For example, FuzzyQuery on term "abcd" with maxEdits=2 will
- not match an indexed term "ab", and FuzzyQuery on term "a" with maxEdits=2 will not
- match an indexed term "abc".
+  distance between two terms is computed.  For a term to match, the edit distance between
+  the terms must be less than the minimum length term (either the input term, or
+  the candidate term).  For example, FuzzyQuery on term "abcd" with maxEdits=2 will
+  not match an indexed term "ab", and FuzzyQuery on term "a" with maxEdits=2 will not
+  match an indexed term "abc".
  */
 @interface OrgApacheLuceneSearchFuzzyQuery : OrgApacheLuceneSearchMultiTermQuery
-
-+ (jint)defaultMaxEdits;
-
-+ (jint)defaultPrefixLength;
-
-+ (jint)defaultMaxExpansions;
-
-+ (jboolean)defaultTranspositions;
-
-+ (jfloat)defaultMinSimilarity;
+@property (readonly, class) jint defaultMaxEdits NS_SWIFT_NAME(defaultMaxEdits);
+@property (readonly, class) jint defaultPrefixLength NS_SWIFT_NAME(defaultPrefixLength);
+@property (readonly, class) jint defaultMaxExpansions NS_SWIFT_NAME(defaultMaxExpansions);
+@property (readonly, class) jboolean defaultTranspositions NS_SWIFT_NAME(defaultTranspositions);
+@property (readonly, class) jfloat defaultMinSimilarity NS_SWIFT_NAME(defaultMinSimilarity);
 
 #pragma mark Public
 
 /*!
  @brief Calls <code>FuzzyQuery(term, defaultMaxEdits)</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 /*!
  @brief Calls <code>FuzzyQuery(term, maxEdits, defaultPrefixLength)</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)maxEdits;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                   withInt:(jint)maxEdits;
 
 /*!
  @brief Calls <code>FuzzyQuery(term, maxEdits, prefixLength, defaultMaxExpansions, defaultTranspositions)</code>
  .
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)maxEdits
-                                         withInt:(jint)prefixLength;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                   withInt:(jint)maxEdits
+                                                   withInt:(jint)prefixLength;
 
 /*!
  @brief Create a new FuzzyQuery that will match terms with an edit distance 
- of at most <code>maxEdits</code> to <code>term</code>.
+  of at most <code>maxEdits</code> to <code>term</code>.
  If a <code>prefixLength</code> &gt; 0 is specified, a common prefix
- of that length is also required.
+  of that length is also required.
  @param term the term to search for
- @param maxEdits must be <code>>= 0</code> and <code><=</code> <code>LevenshteinAutomata.MAXIMUM_SUPPORTED_DISTANCE</code>.
+ @param maxEdits must be <code>>= 0</code>  and <code><=</code>  <code>LevenshteinAutomata.MAXIMUM_SUPPORTED_DISTANCE</code>
+  .
  @param prefixLength length of common (non-fuzzy) prefix
- @param maxExpansions the maximum number of terms to match. If this number is
- greater than <code>BooleanQuery.getMaxClauseCount</code> when the query is rewritten, 
- then the maxClauseCount will be used instead.
- @param transpositions true if transpositions should be treated as a primitive
- edit operation. If this is false, comparisons will implement the classic
- Levenshtein algorithm.
+ @param maxExpansions the maximum number of terms to match. If this number is   greater than 
+ <code>BooleanQuery.getMaxClauseCount</code>  when the query is rewritten,    then the maxClauseCount will be used instead.
+ @param transpositions true if transpositions should be treated as a primitive         edit operation. If this is false, comparisons will implement the classic
+          Levenshtein algorithm.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)maxEdits
-                                         withInt:(jint)prefixLength
-                                         withInt:(jint)maxExpansions
-                                     withBoolean:(jboolean)transpositions;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                   withInt:(jint)maxEdits
+                                                   withInt:(jint)prefixLength
+                                                   withInt:(jint)maxExpansions
+                                               withBoolean:(jboolean)transpositions;
 
 - (jboolean)isEqual:(id)obj;
 
 /*!
  @brief Helper function to convert from deprecated "minimumSimilarity" fractions
- to raw edit distances.
+  to raw edit distances.
  @param minimumSimilarity scaled similarity
  @param termLen length (in unicode codepoints) of the term.
  @return equivalent number of maxEdits
@@ -121,10 +119,9 @@
 - (jint)getMaxEdits;
 
 /*!
- @brief Returns the non-fuzzy prefix length.
- This is the number of characters at the start
- of a term that must be identical (not fuzzy) to the query term if the query
- is to match that term. 
+ @brief Returns the non-fuzzy prefix length.This is the number of characters at the start
+  of a term that must be identical (not fuzzy) to the query term if the query
+  is to match that term.
  */
 - (jint)getPrefixLength;
 
@@ -148,29 +145,33 @@
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
                                       withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFuzzyQuery)
 
-inline jint OrgApacheLuceneSearchFuzzyQuery_get_defaultMaxEdits();
+inline jint OrgApacheLuceneSearchFuzzyQuery_get_defaultMaxEdits(void);
 #define OrgApacheLuceneSearchFuzzyQuery_defaultMaxEdits 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchFuzzyQuery, defaultMaxEdits, jint)
 
-inline jint OrgApacheLuceneSearchFuzzyQuery_get_defaultPrefixLength();
+inline jint OrgApacheLuceneSearchFuzzyQuery_get_defaultPrefixLength(void);
 #define OrgApacheLuceneSearchFuzzyQuery_defaultPrefixLength 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchFuzzyQuery, defaultPrefixLength, jint)
 
-inline jint OrgApacheLuceneSearchFuzzyQuery_get_defaultMaxExpansions();
+inline jint OrgApacheLuceneSearchFuzzyQuery_get_defaultMaxExpansions(void);
 #define OrgApacheLuceneSearchFuzzyQuery_defaultMaxExpansions 50
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchFuzzyQuery, defaultMaxExpansions, jint)
 
-inline jboolean OrgApacheLuceneSearchFuzzyQuery_get_defaultTranspositions();
+inline jboolean OrgApacheLuceneSearchFuzzyQuery_get_defaultTranspositions(void);
 #define OrgApacheLuceneSearchFuzzyQuery_defaultTranspositions true
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchFuzzyQuery, defaultTranspositions, jboolean)
 
 /*!
  */
-inline jfloat OrgApacheLuceneSearchFuzzyQuery_get_defaultMinSimilarity();
+inline jfloat OrgApacheLuceneSearchFuzzyQuery_get_defaultMinSimilarity(void);
 #define OrgApacheLuceneSearchFuzzyQuery_defaultMinSimilarity 2.0f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchFuzzyQuery, defaultMinSimilarity, jfloat)
 
@@ -204,4 +205,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFuzzyQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFuzzyQuery")

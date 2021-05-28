@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPayloadsAbstractEncoder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPayloadsAbstractEncoder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsAbstractEncoder || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsAbstractEncoder))
 #define OrgApacheLuceneAnalysisPayloadsAbstractEncoder_
 
@@ -30,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer;
 
@@ -44,4 +50,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsAbstractEncoder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsAbstractEncoder")

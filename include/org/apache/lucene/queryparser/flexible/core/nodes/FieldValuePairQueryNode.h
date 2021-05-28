@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode_
 
@@ -26,11 +32,11 @@
 
 /*!
  @brief This interface should be implemented by <code>QueryNode</code> that holds a field
- and an arbitrary value.
+  and an arbitrary value.
  - seealso: FieldableNode
  - seealso: ValueQueryNode
  */
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode, OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode, NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode, OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode, JavaObject >
 
 @end
 
@@ -40,4 +46,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValue
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode")

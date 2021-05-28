@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinCheckJoinIndex
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinCheckJoinIndex_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinCheckJoinIndex || defined(INCLUDE_OrgApacheLuceneSearchJoinCheckJoinIndex))
 #define OrgApacheLuceneSearchJoinCheckJoinIndex_
 
@@ -28,7 +34,7 @@
 
 /*!
  @brief Check that the given index is good to use for block joins.
- @throws IllegalStateException if the index does not have an appropriate structure
+ @throw IllegalStateExceptionif the index does not have an appropriate structure
  */
 + (void)checkWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
      withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter;
@@ -43,4 +49,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinCheckJoinIndex)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinCheckJoinIndex")

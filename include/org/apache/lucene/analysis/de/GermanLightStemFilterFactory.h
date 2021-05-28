@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory))
 #define OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_
 
@@ -26,13 +32,13 @@
 /*!
  @brief Factory for <code>GermanLightStemFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_delgtstem" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
- &lt;filter class="solr.GermanLightStemFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_delgtstem" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+      &lt;filter class="solr.GermanLightStemFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
@@ -42,7 +48,7 @@
 /*!
  @brief Creates a new GermanLightStemFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory")

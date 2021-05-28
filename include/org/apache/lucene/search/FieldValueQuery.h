@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFieldValueQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFieldValueQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldValueQuery || defined(INCLUDE_OrgApacheLuceneSearchFieldValueQuery))
 #define OrgApacheLuceneSearchFieldValueQuery_
 
@@ -25,7 +31,7 @@
 
 /*!
  @brief A <code>Query</code> that matches documents that have a value for a given field
- as reported by <code>LeafReader.getDocsWithField(String)</code>.
+  as reported by <code>LeafReader.getDocsWithField(String)</code>.
  */
 @interface OrgApacheLuceneSearchFieldValueQuery : OrgApacheLuceneSearchQuery
 
@@ -33,9 +39,9 @@
 
 /*!
  @brief Create a query that will match that have a value for the given
- <code>field</code>.
+   <code>field</code>.
  */
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -45,6 +51,10 @@
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -60,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldValueQuery")

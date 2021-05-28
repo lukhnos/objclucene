@@ -3,18 +3,27 @@
 //  source: ./core/src/java/org/apache/lucene/search/SimpleFieldComparator.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/FieldComparator.h"
 #include "org/apache/lucene/search/LeafFieldComparator.h"
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/SimpleFieldComparator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/SimpleFieldComparator must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimpleFieldComparator
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSimpleFieldComparator_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   // can't call an abstract method
@@ -29,22 +38,23 @@
 - (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSimpleFieldComparator_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x404, "Ljava.io.IOException;", NULL },
-    { "getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafComparator", "Lorg.apache.lucene.search.LeafFieldComparator;", 0x11, "Ljava.io.IOException;", NULL },
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, NULL, NULL },
-    { "init", "SimpleFieldComparator", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x404, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchLeafFieldComparator;", 0x11, 3, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"TT;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimpleFieldComparator = { 2, "SimpleFieldComparator", "org.apache.lucene.search", NULL, 0x401, 4, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/search/FieldComparator<TT;>;Lorg/apache/lucene/search/LeafFieldComparator;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[2].selector = @selector(getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "doSetNextReader", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "getLeafComparator", "setScorer", "LOrgApacheLuceneSearchScorer;", "<T:Ljava/lang/Object;>Lorg/apache/lucene/search/FieldComparator<TT;>;Lorg/apache/lucene/search/LeafFieldComparator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimpleFieldComparator = { "SimpleFieldComparator", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x401, 4, 0, -1, -1, -1, 6, -1 };
   return &_OrgApacheLuceneSearchSimpleFieldComparator;
 }
 

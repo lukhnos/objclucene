@@ -3,9 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/spans/TermSpans.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
+#include "java/io/Serializable.h"
 #include "java/lang/Comparable.h"
 #include "java/lang/Integer.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
@@ -15,6 +14,10 @@
 #include "org/apache/lucene/search/spans/Spans.h"
 #include "org/apache/lucene/search/spans/TermSpans.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spans/TermSpans must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchSpansTermSpans
 
@@ -28,7 +31,7 @@
   doc_ = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postings_)) nextDoc];
   if (doc_ != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
     freq_ = [postings_ freq];
-    JreAssert((freq_ >= 1), (@"org/apache/lucene/search/spans/TermSpans.java:52 condition failed: assert freq >= 1;"));
+    JreAssert(freq_ >= 1, @"org/apache/lucene/search/spans/TermSpans.java:52 condition failed: assert freq >= 1;");
     count_ = 0;
   }
   position_ = -1;
@@ -36,11 +39,11 @@
 }
 
 - (jint)advanceWithInt:(jint)target {
-  JreAssert((target > doc_), (@"org/apache/lucene/search/spans/TermSpans.java:61 condition failed: assert target > doc;"));
+  JreAssert(target > doc_, @"org/apache/lucene/search/spans/TermSpans.java:61 condition failed: assert target > doc;");
   doc_ = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postings_)) advanceWithInt:target];
   if (doc_ != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
     freq_ = [postings_ freq];
-    JreAssert((freq_ >= 1), (@"org/apache/lucene/search/spans/TermSpans.java:65 condition failed: assert freq >= 1;"));
+    JreAssert(freq_ >= 1, @"org/apache/lucene/search/spans/TermSpans.java:65 condition failed: assert freq >= 1;");
     count_ = 0;
   }
   position_ = -1;
@@ -53,13 +56,13 @@
 
 - (jint)nextStartPosition {
   if (count_ == freq_) {
-    JreAssert((position_ != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/TermSpans.java:80 condition failed: assert position != NO_MORE_POSITIONS;"));
+    JreAssert(position_ != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, @"org/apache/lucene/search/spans/TermSpans.java:80 condition failed: assert position != NO_MORE_POSITIONS;");
     return position_ = OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS;
   }
   jint prevPosition = position_;
   position_ = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postings_)) nextPosition];
-  JreAssert((position_ >= prevPosition), (JreStrcat("$I$I", @"prevPosition=", prevPosition, @" > position=", position_)));
-  JreAssert((position_ != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/TermSpans.java:86 condition failed: assert position != NO_MORE_POSITIONS;"));
+  JreAssert(position_ >= prevPosition, JreStrcat("$I$I", @"prevPosition=", prevPosition, @" > position=", position_));
+  JreAssert(position_ != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, @"org/apache/lucene/search/spans/TermSpans.java:86 condition failed: assert position != NO_MORE_POSITIONS;");
   count_++;
   readPayload_ = false;
   return position_;
@@ -86,7 +89,7 @@
 }
 
 - (NSString *)description {
-  return JreStrcat("$$$$", @"spans(", [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) description], @")@", (doc_ == -1 ? @"START" : (doc_ == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) ? @"ENDDOC" : JreStrcat("I$@", doc_, @" - ", (position_ == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS ? @"ENDPOS" : JavaLangInteger_valueOfWithInt_(position_)))));
+  return JreStrcat("$$$$", @"spans(", [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) description], @")@", (doc_ == -1 ? @"START" : (doc_ == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) ? @"ENDDOC" : JreStrcat("I$@", doc_, @" - ", (position_ == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS ? @"ENDPOS" : (id) JavaLangInteger_valueOfWithInt_(position_)))));
 }
 
 - (OrgApacheLuceneIndexPostingsEnum *)getPostings {
@@ -100,30 +103,47 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexPostingsEnum:withOrgApacheLuceneIndexTerm:", "TermSpans", NULL, 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextStartPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "startPosition", NULL, "I", 0x1, NULL, NULL },
-    { "endPosition", NULL, "I", 0x1, NULL, NULL },
-    { "width", NULL, "I", 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getPostings", NULL, "Lorg.apache.lucene.index.PostingsEnum;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexPostingsEnum:withOrgApacheLuceneIndexTerm:);
+  methods[1].selector = @selector(nextDoc);
+  methods[2].selector = @selector(advanceWithInt:);
+  methods[3].selector = @selector(docID);
+  methods[4].selector = @selector(nextStartPosition);
+  methods[5].selector = @selector(startPosition);
+  methods[6].selector = @selector(endPosition);
+  methods[7].selector = @selector(width);
+  methods[8].selector = @selector(cost);
+  methods[9].selector = @selector(collectWithOrgApacheLuceneSearchSpansSpanCollector:);
+  methods[10].selector = @selector(description);
+  methods[11].selector = @selector(getPostings);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "postings_", NULL, 0x14, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "term_", NULL, 0x14, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "position_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "readPayload_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "postings_", "LOrgApacheLuceneIndexPostingsEnum;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "term_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "freq_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "count_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "position_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "readPayload_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansTermSpans = { 2, "TermSpans", "org.apache.lucene.search.spans", NULL, 0x1, 12, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexPostingsEnum;LOrgApacheLuceneIndexTerm;", "LJavaIoIOException;", "advance", "I", "collect", "LOrgApacheLuceneSearchSpansSpanCollector;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansTermSpans = { "TermSpans", "org.apache.lucene.search.spans", ptrTable, methods, fields, 7, 0x1, 12, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansTermSpans;
 }
 

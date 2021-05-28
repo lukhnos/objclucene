@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserClassicToken
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserClassicToken_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserClassicToken || defined(INCLUDE_OrgApacheLuceneQueryparserClassicToken))
 #define OrgApacheLuceneQueryparserClassicToken_
 
@@ -26,10 +32,9 @@
 @interface OrgApacheLuceneQueryparserClassicToken : NSObject < JavaIoSerializable > {
  @public
   /*!
-   @brief An integer that describes the kind of this token.
-   This numbering
- system is determined by JavaCCParser, and a table of these numbers is
- stored in the file ...Constants.java.
+   @brief An integer that describes the kind of this token.This numbering
+  system is determined by JavaCCParser, and a table of these numbers is
+  stored in the file ...Constants.java.
    */
   jint kind_;
   /*!
@@ -54,25 +59,25 @@
   NSString *image_;
   /*!
    @brief A reference to the next regular (non-special) token from the input
- stream.
-   If this is the last token from the input stream, or if the
- token manager has not read tokens beyond this one, this field is
- set to null.  This is true only if this token is also a regular
- token.  Otherwise, see below for a description of the contents of
- this field.
+  stream.If this is the last token from the input stream, or if the
+  token manager has not read tokens beyond this one, this field is
+  set to null.
+   This is true only if this token is also a regular
+  token.  Otherwise, see below for a description of the contents of
+  this field.
    */
   OrgApacheLuceneQueryparserClassicToken *next_;
   /*!
    @brief This field is used to access special tokens that occur prior to this
- token, but after the immediately preceding regular (non-special) token.
+  token, but after the immediately preceding regular (non-special) token.
    If there are no such special tokens, this field is set to null.
- When there are more than one such special token, this field refers
- to the last of these special tokens, which in turn refers to the next
- previous special token through its specialToken field, and so on
- until the first special token (whose specialToken field is null).
- The next fields of special tokens refer to other special tokens that
- immediately follow it (without an intervening regular token).  If there
- is no such token, this field is null.
+  When there are more than one such special token, this field refers
+  to the last of these special tokens, which in turn refers to the next
+  previous special token through its specialToken field, and so on
+  until the first special token (whose specialToken field is null).
+  The next fields of special tokens refer to other special tokens that
+  immediately follow it (without an intervening regular token).  If there
+  is no such token, this field is null.
    */
   OrgApacheLuceneQueryparserClassicToken *specialToken_;
 }
@@ -82,41 +87,40 @@
 /*!
  @brief No-argument constructor
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Constructs a new token for the specified Image.
  */
-- (instancetype)initWithInt:(jint)kind;
+- (instancetype __nonnull)initWithInt:(jint)kind;
 
 /*!
  @brief Constructs a new token for the specified Image and Kind.
  */
-- (instancetype)initWithInt:(jint)kind
-               withNSString:(NSString *)image;
+- (instancetype __nonnull)initWithInt:(jint)kind
+                         withNSString:(NSString *)image;
 
 /*!
  @brief An optional attribute value of the Token.
  Tokens which are not used as syntactic sugar will often contain
- meaningful values that will be used later on by the compiler or
- interpreter. This attribute value is often different from the image.
- Any subclass of Token that actually wants to return a non-null value can
- override this method as appropriate.
+  meaningful values that will be used later on by the compiler or
+  interpreter. This attribute value is often different from the image.
+  Any subclass of Token that actually wants to return a non-null value can
+  override this method as appropriate.
  */
 - (id)getValue;
 
 + (OrgApacheLuceneQueryparserClassicToken *)newTokenWithInt:(jint)ofKind OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief Returns a new Token object, by default.
- However, if you want, you
- can create and return subclass objects based on the value of ofKind.
+ @brief Returns a new Token object, by default.However, if you want, you
+  can create and return subclass objects based on the value of ofKind.
  Simply add the cases to the switch for all those special cases.
- For example, if you have a subclass of Token called IDToken that
- you want to create if ofKind is ID, simply add something like :
- case MyParserConstants.ID : return new IDToken(ofKind, image);
- to the following switch statement. Then you can cast matchedToken
- variable to the appropriate type and use sit in your lexical actions.
+  For example, if you have a subclass of Token called IDToken that
+  you want to create if ofKind is ID, simply add something like :
+     case MyParserConstants.ID : return new IDToken(ofKind, image);
+  to the following switch statement. Then you can cast matchedToken
+  variable to the appropriate type and use sit in your lexical actions.
  */
 + (OrgApacheLuceneQueryparserClassicToken *)newTokenWithInt:(jint)ofKind
                                                withNSString:(NSString *)image OBJC_METHOD_FAMILY_NONE;
@@ -136,9 +140,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicToken, specialToken_, OrgAp
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicToken_init(OrgApacheLuceneQueryparserClassicToken *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *create_OrgApacheLuceneQueryparserClassicToken_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *create_OrgApacheLuceneQueryparserClassicToken_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicToken_initWithInt_(OrgApacheLuceneQueryparserClassicToken *self, jint kind);
 
@@ -160,4 +164,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicToken)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserClassicToken")

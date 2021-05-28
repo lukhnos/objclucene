@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/automaton/LevenshteinAutomata.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -22,6 +23,10 @@
 #include "org/apache/lucene/util/automaton/Lev2TParametricDescription.h"
 #include "org/apache/lucene/util/automaton/LevenshteinAutomata.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/LevenshteinAutomata must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilAutomatonLevenshteinAutomata ()
 
 + (IOSIntArray *)codePointsWithNSString:(NSString *)input;
@@ -39,7 +44,7 @@ __attribute__((unused)) static IOSIntArray *OrgApacheLuceneUtilAutomatonLevensht
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription, minErrors_, IOSIntArray *)
 
-inline IOSLongArray *OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_get_MASKS();
+inline IOSLongArray *OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_get_MASKS(void);
 static IOSLongArray *OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_MASKS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription, MASKS, IOSLongArray *)
 
@@ -72,7 +77,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Pa
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)n
                                                  withNSString:(NSString *)prefix {
-  JreAssert((prefix != nil), (@"org/apache/lucene/util/automaton/LevenshteinAutomata.java:144 condition failed: assert prefix != null;"));
+  JreAssert(prefix != nil, @"org/apache/lucene/util/automaton/LevenshteinAutomata.java:144 condition failed: assert prefix != null;");
   if (n == 0) {
     return OrgApacheLuceneUtilAutomatonAutomata_makeStringWithNSString_(JreStrcat("$$", prefix, OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(word_, 0, ((IOSIntArray *) nil_chk(word_))->size_)));
   }
@@ -84,9 +89,9 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Pa
   jint lastState;
   if (prefix != nil) {
     lastState = [a createState];
-    for (jint i = 0, cp = 0; i < ((jint) [prefix length]); i += JavaLangCharacter_charCountWithInt_(cp)) {
+    for (jint i = 0, cp = 0; i < [prefix java_length]; i += JavaLangCharacter_charCountWithInt_(cp)) {
       jint state = [a createState];
-      cp = [prefix codePointAt:i];
+      cp = [prefix java_codePointAt:i];
       [a addTransitionWithInt:lastState withInt:state withInt:cp withInt:cp];
       lastState = state;
     }
@@ -120,7 +125,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Pa
     }
   }
   [a finishState];
-  JreAssert(([a isDeterministic]), (@"org/apache/lucene/util/automaton/LevenshteinAutomata.java:211 condition failed: assert a.isDeterministic();"));
+  JreAssert([a isDeterministic], @"org/apache/lucene/util/automaton/LevenshteinAutomata.java:211 condition failed: assert a.isDeterministic();");
   return a;
 }
 
@@ -145,26 +150,36 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Pa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withBoolean:", "LevenshteinAutomata", NULL, 0x1, NULL, NULL },
-    { "initWithIntArray:withInt:withBoolean:", "LevenshteinAutomata", NULL, 0x1, NULL, NULL },
-    { "codePointsWithNSString:", "codePoints", "[I", 0xa, NULL, NULL },
-    { "toAutomatonWithInt:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
-    { "toAutomatonWithInt:withNSString:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
-    { "getVectorWithInt:withInt:withInt:", "getVector", "I", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "[I", 0xa, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x1, 4, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withBoolean:);
+  methods[1].selector = @selector(initWithIntArray:withInt:withBoolean:);
+  methods[2].selector = @selector(codePointsWithNSString:);
+  methods[3].selector = @selector(toAutomatonWithInt:);
+  methods[4].selector = @selector(toAutomatonWithInt:withNSString:);
+  methods[5].selector = @selector(getVectorWithInt:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MAXIMUM_SUPPORTED_DISTANCE", "MAXIMUM_SUPPORTED_DISTANCE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE },
-    { "word_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "alphabet_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "alphaMax_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "rangeLower_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "rangeUpper_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numRanges_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "descriptions_", NULL, 0x0, "[Lorg.apache.lucene.util.automaton.LevenshteinAutomata$ParametricDescription;", NULL, NULL, .constantValue.asLong = 0 },
+    { "MAXIMUM_SUPPORTED_DISTANCE", "I", .constantValue.asInt = OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE, 0x19, -1, -1, -1, -1 },
+    { "word_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "alphabet_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "alphaMax_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "rangeLower_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "rangeUpper_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numRanges_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "descriptions_", "[LOrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.LevenshteinAutomata$ParametricDescription;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLevenshteinAutomata = { 2, "LevenshteinAutomata", "org.apache.lucene.util.automaton", NULL, 0x1, 6, methods, 8, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;Z", "[IIZ", "codePoints", "LNSString;", "toAutomaton", "I", "ILNSString;", "getVector", "III", "LOrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLevenshteinAutomata = { "LevenshteinAutomata", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x1, 6, 8, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonLevenshteinAutomata;
 }
 
@@ -196,7 +211,7 @@ void OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithIntArray_withInt_wi
     [set addWithId:JavaLangInteger_valueOfWithInt_(v)];
   }
   JreStrongAssignAndConsume(&self->alphabet_, [IOSIntArray newArrayWithLength:[set size]]);
-  id<JavaUtilIterator> iterator = [set iterator];
+  id<JavaUtilIterator> iterator = JreRetainedLocalValue([set iterator]);
   for (jint i = 0; i < self->alphabet_->size_; i++) *IOSIntArray_GetRef(self->alphabet_, i) = [((JavaLangInteger *) nil_chk([((id<JavaUtilIterator>) nil_chk(iterator)) next])) intValue];
   JreStrongAssignAndConsume(&self->rangeLower_, [IOSIntArray newArrayWithLength:self->alphabet_->size_ + 2]);
   JreStrongAssignAndConsume(&self->rangeUpper_, [IOSIntArray newArrayWithLength:self->alphabet_->size_ + 2]);
@@ -215,7 +230,7 @@ void OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithIntArray_withInt_wi
     *IOSIntArray_GetRef(self->rangeUpper_, self->numRanges_) = alphaMax;
     self->numRanges_++;
   }
-  JreStrongAssignAndConsume(&self->descriptions_, [IOSObjectArray newArrayWithObjects:(id[]){ nil, withTranspositions ? create_OrgApacheLuceneUtilAutomatonLev1TParametricDescription_initWithInt_(word->size_) : create_OrgApacheLuceneUtilAutomatonLev1ParametricDescription_initWithInt_(word->size_), withTranspositions ? create_OrgApacheLuceneUtilAutomatonLev2TParametricDescription_initWithInt_(word->size_) : create_OrgApacheLuceneUtilAutomatonLev2ParametricDescription_initWithInt_(word->size_) } count:3 type:OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_class_()]);
+  JreStrongAssignAndConsume(&self->descriptions_, [IOSObjectArray newArrayWithObjects:(id[]){ nil, withTranspositions ? create_OrgApacheLuceneUtilAutomatonLev1TParametricDescription_initPackagePrivateWithInt_(word->size_) : (id) create_OrgApacheLuceneUtilAutomatonLev1ParametricDescription_initPackagePrivateWithInt_(word->size_), withTranspositions ? create_OrgApacheLuceneUtilAutomatonLev2TParametricDescription_initPackagePrivateWithInt_(word->size_) : (id) create_OrgApacheLuceneUtilAutomatonLev2ParametricDescription_initPackagePrivateWithInt_(word->size_) } count:3 type:OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_class_()]);
 }
 
 OrgApacheLuceneUtilAutomatonLevenshteinAutomata *new_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithIntArray_withInt_withBoolean_(IOSIntArray *word, jint alphaMax, jboolean withTranspositions) {
@@ -228,10 +243,10 @@ OrgApacheLuceneUtilAutomatonLevenshteinAutomata *create_OrgApacheLuceneUtilAutom
 
 IOSIntArray *OrgApacheLuceneUtilAutomatonLevenshteinAutomata_codePointsWithNSString_(NSString *input) {
   OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initialize();
-  jint length = JavaLangCharacter_codePointCountWithJavaLangCharSequence_withInt_withInt_(input, 0, ((jint) [((NSString *) nil_chk(input)) length]));
+  jint length = JavaLangCharacter_codePointCountWithJavaLangCharSequence_withInt_withInt_(input, 0, [((NSString *) nil_chk(input)) java_length]);
   IOSIntArray *word = [IOSIntArray arrayWithLength:length];
-  for (jint i = 0, j = 0, cp = 0; i < ((jint) [input length]); i += JavaLangCharacter_charCountWithInt_(cp)) {
-    *IOSIntArray_GetRef(word, j++) = cp = [input codePointAt:i];
+  for (jint i = 0, j = 0, cp = 0; i < [input java_length]; i += JavaLangCharacter_charCountWithInt_(cp)) {
+    *IOSIntArray_GetRef(word, j++) = cp = [input java_codePointAt:i];
   }
   return word;
 }
@@ -254,14 +269,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Parametr
 }
 
 - (jboolean)isAcceptWithInt:(jint)absState {
-  jint state = absState / (w_ + 1);
-  jint offset = absState % (w_ + 1);
-  JreAssert((offset >= 0), (@"org/apache/lucene/util/automaton/LevenshteinAutomata.java:266 condition failed: assert offset >= 0;"));
+  jint state = JreIntDiv(absState, (w_ + 1));
+  jint offset = JreIntMod(absState, (w_ + 1));
+  JreAssert(offset >= 0, @"org/apache/lucene/util/automaton/LevenshteinAutomata.java:266 condition failed: assert offset >= 0;");
   return w_ - offset + IOSIntArray_Get(nil_chk(minErrors_), state) <= n_;
 }
 
 - (jint)getPositionWithInt:(jint)absState {
-  return absState % (w_ + 1);
+  return JreIntMod(absState, (w_ + 1));
 }
 
 - (jint)transitionWithInt:(jint)state
@@ -292,30 +307,41 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Parametr
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 3, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x400, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 6, 7, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:withIntArray:);
+  methods[1].selector = @selector(size);
+  methods[2].selector = @selector(isAcceptWithInt:);
+  methods[3].selector = @selector(getPositionWithInt:);
+  methods[4].selector = @selector(transitionWithInt:withInt:withInt:);
+  methods[5].selector = @selector(unpackWithLongArray:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "w_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "n_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "minErrors_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "MASKS", "[J", .constantValue.asLong = 0, 0x1a, -1, 8, -1, -1 },
+  };
+  static const void *ptrTable[] = { "II[I", "isAccept", "I", "getPosition", "transition", "III", "unpack", "[JII", &OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_MASKS, "LOrgApacheLuceneUtilAutomatonLevenshteinAutomata;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription = { "ParametricDescription", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x408, 6, 4, 9, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_MASKS, [IOSLongArray newArrayWithLongs:(jlong[]){ (jint) 0x1, (jint) 0x3, (jint) 0x7, (jint) 0xf, (jint) 0x1f, (jint) 0x3f, (jint) 0x7f, (jint) 0xff, (jint) 0x1ff, (jint) 0x3ff, (jint) 0x7ff, (jint) 0xfff, (jint) 0x1fff, (jint) 0x3fff, (jint) 0x7fff, (jint) 0xffff, (jint) 0x1ffff, (jint) 0x3ffff, (jint) 0x7ffff, (jint) 0xfffff, (jint) 0x1fffff, (jint) 0x3fffff, (jint) 0x7fffff, (jint) 0xffffff, (jint) 0x1ffffff, (jint) 0x3ffffff, (jint) 0x7ffffff, (jint) 0xfffffff, (jint) 0x1fffffff, (jint) 0x3fffffff, (jlong) 0x7fffffffLL, (jlong) 0xffffffffLL, (jlong) 0x1ffffffffLL, (jlong) 0x3ffffffffLL, (jlong) 0x7ffffffffLL, (jlong) 0xfffffffffLL, (jlong) 0x1fffffffffLL, (jlong) 0x3fffffffffLL, (jlong) 0x7fffffffffLL, (jlong) 0xffffffffffLL, (jlong) 0x1ffffffffffLL, (jlong) 0x3ffffffffffLL, (jlong) 0x7ffffffffffLL, (jlong) 0xfffffffffffLL, (jlong) 0x1fffffffffffLL, (jlong) 0x3fffffffffffLL, (jlong) 0x7fffffffffffLL, (jlong) 0xffffffffffffLL, (jlong) 0x1ffffffffffffLL, (jlong) 0x3ffffffffffffLL, (jlong) 0x7ffffffffffffLL, (jlong) 0xfffffffffffffLL, (jlong) 0x1fffffffffffffLL, (jlong) 0x3fffffffffffffLL, (jlong) 0x7fffffffffffffLL, (jlong) 0xffffffffffffffLL, (jlong) 0x1ffffffffffffffLL, (jlong) 0x3ffffffffffffffLL, (jlong) 0x7ffffffffffffffLL, (jlong) 0xfffffffffffffffLL, (jlong) 0x1fffffffffffffffLL, (jlong) 0x3fffffffffffffffLL, (jlong) 0x7fffffffffffffffLL } count:63]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withIntArray:", "ParametricDescription", NULL, 0x0, NULL, NULL },
-    { "size", NULL, "I", 0x0, NULL, NULL },
-    { "isAcceptWithInt:", "isAccept", "Z", 0x0, NULL, NULL },
-    { "getPositionWithInt:", "getPosition", "I", 0x0, NULL, NULL },
-    { "transitionWithInt:withInt:withInt:", "transition", "I", 0x400, NULL, NULL },
-    { "unpackWithLongArray:withInt:withInt:", "unpack", "I", 0x4, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "w_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "n_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minErrors_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "MASKS", "MASKS", 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_MASKS, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription = { 2, "ParametricDescription", "org.apache.lucene.util.automaton", "LevenshteinAutomata", 0x408, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription;
 }
 
 @end

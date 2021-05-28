@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/IndexReader.h"
@@ -16,11 +15,16 @@
 #include "org/apache/lucene/queryparser/surround/query/DistanceRewriteQuery.h"
 #include "org/apache/lucene/queryparser/surround/query/DistanceSubQuery.h"
 #include "org/apache/lucene/queryparser/surround/query/SpanNearClauseFactory.h"
-#include "org/apache/lucene/queryparser/surround/query/SrndQuery.h"
 #include "org/apache/lucene/search/MatchNoDocsQuery.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/spans/SpanNearQuery.h"
 #include "org/apache/lucene/search/spans/SpanQuery.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/DistanceQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneQueryparserSurroundQueryDistanceQuery () {
  @public
@@ -50,12 +54,12 @@
 }
 
 - (NSString *)distanceSubQueryNotAllowed {
-  id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
+  id<JavaUtilIterator> sqi = JreRetainedLocalValue([self getSubQueriesIterator]);
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
-    id leq = [sqi next];
+    id leq = JreRetainedLocalValue([sqi next]);
     if ([OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_() isInstance:leq]) {
       id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery> dsq = (id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) cast_check(leq, OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_());
-      NSString *m = [((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) nil_chk(dsq)) distanceSubQueryNotAllowed];
+      NSString *m = JreRetainedLocalValue([((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) nil_chk(dsq)) distanceSubQueryNotAllowed]);
       if (m != nil) {
         return m;
       }
@@ -68,7 +72,7 @@
 }
 
 - (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf {
-  OrgApacheLuceneSearchQuery *snq = [self getSpanNearQueryWithOrgApacheLuceneIndexIndexReader:[((OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *) nil_chk(sncf)) getIndexReader] withNSString:[sncf getFieldName] withFloat:[self getWeight] withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:[sncf getBasicQueryFactory]];
+  OrgApacheLuceneSearchQuery *snq = JreRetainedLocalValue([self getSpanNearQueryWithOrgApacheLuceneIndexIndexReader:[((OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *) nil_chk(sncf)) getIndexReader] withNSString:[sncf getFieldName] withFloat:[self getWeight] withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:[sncf getBasicQueryFactory]]);
   [sncf addSpanQueryWithOrgApacheLuceneSearchQuery:snq];
 }
 
@@ -77,7 +81,7 @@
                                                                           withFloat:(jfloat)boost
                        withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
   IOSObjectArray *spanClauses = [IOSObjectArray arrayWithLength:[self getNrSubQueries] type:OrgApacheLuceneSearchSpansSpanQuery_class_()];
-  id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
+  id<JavaUtilIterator> sqi = JreRetainedLocalValue([self getSubQueriesIterator]);
   jint qi = 0;
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
     OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *sncf = create_OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(reader, fieldName, qf);
@@ -99,24 +103,36 @@
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
            withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
-  return create_OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, fieldName, qf);
+  return create_OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, fieldName, qf);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withBoolean:withInt:withNSString:withBoolean:", "DistanceQuery", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZILjava/lang/String;Z)V" },
-    { "getOpDistance", NULL, "I", 0x1, NULL, NULL },
-    { "subQueriesOrdered", NULL, "Z", 0x1, NULL, NULL },
-    { "distanceSubQueryNotAllowed", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:", "addSpanQueries", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSpanNearQueryWithOrgApacheLuceneIndexIndexReader:withNSString:withFloat:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "getSpanNearQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryFieldNoBoost", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 5, 6, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withBoolean:withInt:withNSString:withBoolean:);
+  methods[1].selector = @selector(getOpDistance);
+  methods[2].selector = @selector(subQueriesOrdered);
+  methods[3].selector = @selector(distanceSubQueryNotAllowed);
+  methods[4].selector = @selector(addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:);
+  methods[5].selector = @selector(getSpanNearQueryWithOrgApacheLuceneIndexIndexReader:withNSString:withFloat:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  methods[6].selector = @selector(makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "opDistance_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ordered_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "opDistance_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "ordered_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryDistanceQuery = { 2, "DistanceQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;ZILNSString;Z", "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZILjava/lang/String;Z)V", "addSpanQueries", "LOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory;", "LJavaIoIOException;", "getSpanNearQuery", "LOrgApacheLuceneIndexIndexReader;LNSString;FLOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;", "makeLuceneQueryFieldNoBoost", "LNSString;LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryDistanceQuery = { "DistanceQuery", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, fields, 7, 0x1, 7, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery;
 }
 

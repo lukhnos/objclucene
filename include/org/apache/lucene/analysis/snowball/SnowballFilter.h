@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisSnowballSnowballFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisSnowballSnowballFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSnowballSnowballFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSnowballSnowballFilter))
 #define OrgApacheLuceneAnalysisSnowballSnowballFilter_
 
@@ -26,42 +32,47 @@
 /*!
  @brief A filter that stems words using a Snowball-generated stemmer.
  Available stemmers are listed in <code>org.tartarus.snowball.ext</code>.
- <p><b>NOTE</b>: SnowballFilter expects lowercased text.
+  <p><b>NOTE</b>: SnowballFilter expects lowercased text. 
  <ul>
- <li>For the Turkish language, see <code>TurkishLowerCaseFilter</code>.
- <li>For other languages, see <code>LowerCaseFilter</code>.
- </ul>
+   <li>For the Turkish language, see <code>TurkishLowerCaseFilter</code>.
+   <li>For other languages, see <code>LowerCaseFilter</code>.
+  </ul>
+  
  <p>
- Note: This filter is aware of the <code>KeywordAttribute</code>. To prevent
- certain terms from being passed to the stemmer
+  Note: This filter is aware of the <code>KeywordAttribute</code>. To prevent
+  certain terms from being passed to the stemmer 
  <code>KeywordAttribute.isKeyword()</code> should be set to <code>true</code>
- in a previous <code>TokenStream</code>.
- Note: For including the original term as well as the stemmed version, see
+  in a previous <code>TokenStream</code>.
+  Note: For including the original term as well as the stemmed version, see 
  <code>org.apache.lucene.analysis.miscellaneous.KeywordRepeatFilterFactory</code>
- </p>
+  </p>
  */
 @interface OrgApacheLuceneAnalysisSnowballSnowballFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                    withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)stemmer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                              withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)stemmer;
 
 /*!
  @brief Construct the named stemming filter.
  Available stemmers are listed in <code>org.tartarus.snowball.ext</code>.
- The name of a stemmer is the part of the class name before "Stemmer",
- e.g., the stemmer in <code>org.tartarus.snowball.ext.EnglishStemmer</code> is named "English".
+  The name of a stemmer is the part of the class name before "Stemmer",
+  e.g., the stemmer in <code>org.tartarus.snowball.ext.EnglishStemmer</code> is named "English".
  @param inArg the input tokens to stem
  @param name the name of a stemmer
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                              withNSString:(NSString *)name;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                        withNSString:(NSString *)name;
 
 /*!
  @brief Returns the next input Token, after being stemmed
  */
 - (jboolean)incrementToken;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -83,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSnowballSnowballFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSnowballSnowballFilter")

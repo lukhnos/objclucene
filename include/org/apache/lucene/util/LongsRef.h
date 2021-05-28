@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilLongsRef
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilLongsRef_) && (INCLUDE_ALL_OrgApacheLuceneUtilLongsRef || defined(INCLUDE_OrgApacheLuceneUtilLongsRef))
 #define OrgApacheLuceneUtilLongsRef_
 
@@ -24,16 +30,13 @@
 
 /*!
  @brief Represents long[], as a slice (offset + length) into an
- existing long[].
- The <code>longs</code> member should never be null; use
- <code>EMPTY_LONGS</code> if necessary.
-  
+   existing long[].The <code>longs</code> member should never be null; use
+   <code>EMPTY_LONGS</code> if necessary.
  */
 @interface OrgApacheLuceneUtilLongsRef : NSObject < JavaLangComparable, NSCopying > {
  @public
   /*!
-   @brief The contents of the LongsRef.
-   Should never be <code>null</code>. 
+   @brief The contents of the LongsRef.Should never be <code>null</code>.
    */
   IOSLongArray *longs_;
   /*!
@@ -45,37 +48,36 @@
    */
   jint length_;
 }
-
-+ (IOSLongArray *)EMPTY_LONGS;
+@property (readonly, class, strong) IOSLongArray *EMPTY_LONGS NS_SWIFT_NAME(EMPTY_LONGS);
 
 #pragma mark Public
 
 /*!
  @brief Create a LongsRef with <code>EMPTY_LONGS</code>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Create a LongsRef pointing to a new array of size <code>capacity</code>.
  Offset and length will both be zero.
  */
-- (instancetype)initWithInt:(jint)capacity;
+- (instancetype __nonnull)initWithInt:(jint)capacity;
 
 /*!
  @brief This instance will directly reference longs w/o making a copy.
- longs should not be null 
+ longs should not be null
  */
-- (instancetype)initWithLongArray:(IOSLongArray *)longs
-                          withInt:(jint)offset
-                          withInt:(jint)length;
+- (instancetype __nonnull)initWithLongArray:(IOSLongArray *)longs
+                                    withInt:(jint)offset
+                                    withInt:(jint)length;
 
 /*!
- @brief Returns a shallow clone of this instance (the underlying longs are
+ @brief Returns a shallow clone of this instance (the underlying longs are 
  <b>not</b> copied and will be shared by both the returned object and this
- object.
+  object.
  - seealso: #deepCopyOf
  */
-- (OrgApacheLuceneUtilLongsRef *)clone;
+- (OrgApacheLuceneUtilLongsRef *)java_clone;
 
 /*!
  @brief Signed int order comparison
@@ -83,11 +85,11 @@
 - (jint)compareToWithId:(OrgApacheLuceneUtilLongsRef *)other;
 
 /*!
- @brief Creates a new LongsRef that points to a copy of the longs from 
+ @brief Creates a new LongsRef that points to a copy of the longs from  
  <code>other</code>
  <p>
- The returned IntsRef will have a length of other.length
- and an offset of zero.
+  The returned IntsRef will have a length of other.length
+  and an offset of zero.
  */
 + (OrgApacheLuceneUtilLongsRef *)deepCopyOfWithOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *)other;
 
@@ -97,7 +99,7 @@
 
 /*!
  @brief Performs internal consistency checks.
- Always returns true (or throws IllegalStateException) 
+ Always returns true (or throws IllegalStateException)
  */
 - (jboolean)isValid;
 
@@ -114,16 +116,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilLongsRef, longs_, IOSLongArray *)
 /*!
  @brief An empty long array for convenience
  */
-inline IOSLongArray *OrgApacheLuceneUtilLongsRef_get_EMPTY_LONGS();
+inline IOSLongArray *OrgApacheLuceneUtilLongsRef_get_EMPTY_LONGS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneUtilLongsRef_EMPTY_LONGS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilLongsRef, EMPTY_LONGS, IOSLongArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilLongsRef_init(OrgApacheLuceneUtilLongsRef *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilLongsRef *new_OrgApacheLuceneUtilLongsRef_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilLongsRef *new_OrgApacheLuceneUtilLongsRef_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilLongsRef *create_OrgApacheLuceneUtilLongsRef_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilLongsRef *create_OrgApacheLuceneUtilLongsRef_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilLongsRef_initWithInt_(OrgApacheLuceneUtilLongsRef *self, jint capacity);
 
@@ -143,4 +145,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilLongsRef)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilLongsRef")

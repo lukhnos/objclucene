@@ -10,6 +10,10 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/InPlaceMergeSorter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/ArrayInPlaceMergeSorter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilArrayInPlaceMergeSorter () {
  @public
   IOSObjectArray *arr_;
@@ -23,9 +27,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilArrayInPlaceMergeSorter, comparator_, id<
 
 @implementation OrgApacheLuceneUtilArrayInPlaceMergeSorter
 
-- (instancetype)initWithNSObjectArray:(IOSObjectArray *)arr
-               withJavaUtilComparator:(id<JavaUtilComparator>)comparator {
-  OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(self, arr, comparator);
+- (instancetype)initPackagePrivateWithNSObjectArray:(IOSObjectArray *)arr
+                             withJavaUtilComparator:(id<JavaUtilComparator>)comparator {
+  OrgApacheLuceneUtilArrayInPlaceMergeSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(self, arr, comparator);
   return self;
 }
 
@@ -46,33 +50,41 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilArrayInPlaceMergeSorter, comparator_, id<
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSObjectArray:withJavaUtilComparator:", "ArrayInPlaceMergeSorter", NULL, 0x1, NULL, "([TT;Ljava/util/Comparator<-TT;>;)V" },
-    { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "I", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithNSObjectArray:withJavaUtilComparator:);
+  methods[1].selector = @selector(compareWithInt:withInt:);
+  methods[2].selector = @selector(swapWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "arr_", NULL, 0x12, "[Ljava.lang.Object;", NULL, "[TT;", .constantValue.asLong = 0 },
-    { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<-TT;>;", .constantValue.asLong = 0 },
+    { "arr_", "[LNSObject;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
+    { "comparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilArrayInPlaceMergeSorter = { 2, "ArrayInPlaceMergeSorter", "org.apache.lucene.util", NULL, 0x10, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/InPlaceMergeSorter;" };
+  static const void *ptrTable[] = { "[LNSObject;LJavaUtilComparator;", "([TT;Ljava/util/Comparator<-TT;>;)V", "compare", "II", "swap", "[TT;", "Ljava/util/Comparator<-TT;>;", "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/InPlaceMergeSorter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilArrayInPlaceMergeSorter = { "ArrayInPlaceMergeSorter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x10, 3, 2, -1, -1, -1, 7, -1 };
   return &_OrgApacheLuceneUtilArrayInPlaceMergeSorter;
 }
 
 @end
 
-void OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(OrgApacheLuceneUtilArrayInPlaceMergeSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
+void OrgApacheLuceneUtilArrayInPlaceMergeSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(OrgApacheLuceneUtilArrayInPlaceMergeSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
   OrgApacheLuceneUtilInPlaceMergeSorter_init(self);
   JreStrongAssign(&self->arr_, arr);
   JreStrongAssign(&self->comparator_, comparator);
 }
 
-OrgApacheLuceneUtilArrayInPlaceMergeSorter *new_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilArrayInPlaceMergeSorter, initWithNSObjectArray_withJavaUtilComparator_, arr, comparator)
+OrgApacheLuceneUtilArrayInPlaceMergeSorter *new_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilArrayInPlaceMergeSorter, initPackagePrivateWithNSObjectArray_withJavaUtilComparator_, arr, comparator)
 }
 
-OrgApacheLuceneUtilArrayInPlaceMergeSorter *create_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilArrayInPlaceMergeSorter, initWithNSObjectArray_withJavaUtilComparator_, arr, comparator)
+OrgApacheLuceneUtilArrayInPlaceMergeSorter *create_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilArrayInPlaceMergeSorter, initPackagePrivateWithNSObjectArray_withJavaUtilComparator_, arr, comparator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilArrayInPlaceMergeSorter)

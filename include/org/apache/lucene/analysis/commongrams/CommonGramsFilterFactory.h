@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory))
 #define OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_
 
@@ -33,12 +39,12 @@
 /*!
  @brief Constructs a <code>CommonGramsFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_cmmngrms" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.CommonGramsFilterFactory" words="commongramsstopwords.txt" ignoreCase="false"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_cmmngrms" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.CommonGramsFilterFactory" words="commongramsstopwords.txt" ignoreCase="false"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
@@ -48,7 +54,7 @@
 /*!
  @brief Creates a new CommonGramsFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -72,4 +78,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFa
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory")

@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/ConfigurationKey.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/config/ConfigurationKey must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey ()
 
 - (instancetype)init;
@@ -14,9 +18,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *self);
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *new_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *new_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *create_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init();
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *create_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init(void);
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey
 
@@ -32,11 +36,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ConfigurationKey", NULL, 0x2, NULL, NULL },
-    { "newInstance", NULL, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", 0x9, NULL, "<T:Ljava/lang/Object;>()Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<TT;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", 0x9, -1, -1, -1, 0, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey = { 2, "ConfigurationKey", "org.apache.lucene.queryparser.flexible.core.config", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(newInstance);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "<T:Ljava/lang/Object;>()Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<TT;>;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey = { "ConfigurationKey", "org.apache.lucene.queryparser.flexible.core.config", ptrTable, methods, NULL, 7, 0x11, 2, 0, -1, -1, -1, 1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;
 }
 

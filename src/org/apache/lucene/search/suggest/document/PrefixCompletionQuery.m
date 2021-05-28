@@ -3,9 +3,7 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/PrefixCompletionQuery.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/index/Term.h"
@@ -18,6 +16,10 @@
 #include "org/apache/lucene/search/suggest/document/CompletionWeight.h"
 #include "org/apache/lucene/search/suggest/document/PrefixCompletionQuery.h"
 #include "org/apache/lucene/util/automaton/Automaton.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/PrefixCompletionQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery
 
@@ -46,15 +48,23 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:", "PrefixCompletionQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:", "PrefixCompletionQuery", NULL, 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 2, 3, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:);
+  methods[2].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "analyzer_", NULL, 0x14, "Lorg.apache.lucene.search.suggest.document.CompletionAnalyzer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "analyzer_", "LOrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery = { 2, "PrefixCompletionQuery", "org.apache.lucene.search.suggest.document", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexTerm;", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexTerm;LOrgApacheLuceneSearchSuggestBitsProducer;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery = { "PrefixCompletionQuery", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery;
 }
 

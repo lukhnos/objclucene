@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_
 
@@ -28,18 +34,17 @@
 
 /*!
  @brief A <code>PathQueryNode</code> is used to store queries like
- /company/USA/California /product/shoes/brown.
- QueryText are objects that
- contain the text, begin position and end position in the query.
+  /company/USA/California /product/shoes/brown.QueryText are objects that
+  contain the text, begin position and end position in the query.
  <p>
- Example how the text parser creates these objects:
+  Example how the text parser creates these objects: 
  </p>
- <pre class="prettyprint">
- List values = ArrayList(); 
- values.add(new PathQueryNode.QueryText("company", 1, 7)); 
- values.add(new PathQueryNode.QueryText("USA", 9, 12)); 
- values.add(new PathQueryNode.QueryText("California", 14, 23)); 
- QueryNode q = new PathQueryNode(values);
+  <pre class="prettyprint">
+  List values = ArrayList(); 
+  values.add(new PathQueryNode.QueryText("company", 1, 7)); 
+  values.add(new PathQueryNode.QueryText("USA", 9, 12)); 
+  values.add(new PathQueryNode.QueryText("California", 14, 23)); 
+  QueryNode q = new PathQueryNode(values); 
  
 @endcode
  */
@@ -48,10 +53,9 @@
 #pragma mark Public
 
 /*!
- @param pathElements
- - List of QueryText objects
+ @param pathElements - List of QueryText objects
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)pathElements;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)pathElements;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -87,6 +91,10 @@
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -127,18 +135,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryN
 #pragma mark Public
 
 /*!
- @param value
- - text value
- @param begin
- - position in the query string
- @param end
- - position in the query string
+ @param value - text value
+ @param begin - position in the query string
+ @param end - position in the query string
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)value
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)value
+                                               withInt:(jint)begin
+                                               withInt:(jint)end;
 
-- (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *)clone;
+- (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *)java_clone;
 
 /*!
  @return the begin
@@ -157,6 +162,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryN
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText)
@@ -173,4 +182,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryN
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode")

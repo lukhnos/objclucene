@@ -3,12 +3,14 @@
 //  source: ./core/src/java/org/apache/lucene/util/RefCount.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/util/concurrent/atomic/AtomicInteger.h"
 #include "org/apache/lucene/util/RefCount.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/RefCount must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilRefCount () {
  @public
@@ -67,19 +69,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRefCount, refCount_, JavaUtilConcurrentAt
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithId:", "RefCount", NULL, 0x1, NULL, "(TT;)V" },
-    { "release__", "release", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "decRef", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "get", NULL, "TT;", 0x11, NULL, "()TT;" },
-    { "getRefCount", NULL, "I", 0x11, NULL, NULL },
-    { "incRef", NULL, "V", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x4, 2, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x11, -1, -1, -1, 4, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithId:);
+  methods[1].selector = @selector(release__);
+  methods[2].selector = @selector(decRef);
+  methods[3].selector = @selector(get);
+  methods[4].selector = @selector(getRefCount);
+  methods[5].selector = @selector(incRef);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "refCount_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "object_", NULL, 0x14, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
+    { "refCount_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "object_", "LNSObject;", .constantValue.asLong = 0, 0x14, -1, -1, 5, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRefCount = { 2, "RefCount", "org.apache.lucene.util", NULL, 0x1, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "LNSObject;", "(TT;)V", "release", "LJavaIoIOException;", "()TT;", "TT;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRefCount = { "RefCount", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 6, 2, -1, -1, -1, 6, -1 };
   return &_OrgApacheLuceneUtilRefCount;
 }
 

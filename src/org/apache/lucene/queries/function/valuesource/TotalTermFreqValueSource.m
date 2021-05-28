@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/index/IndexReaderContext.h"
@@ -19,27 +18,29 @@
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
-@interface OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1 : OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/TotalTermFreqValueSource must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1 : OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues {
  @public
   jlong val$ttf_;
 }
 
-- (jlong)longValWithInt:(jint)doc;
-
 - (instancetype)initWithLong:(jlong)capture$0
-withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0;
+withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
+
+- (jlong)longValWithInt:(jint)doc;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1)
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1 *self, jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1 *self, jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1 *new_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1)
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1 *create_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource
 
@@ -78,15 +79,15 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
     }
   }
   jlong ttf = totalTermFreq;
-  [((id<JavaUtilMap>) nil_chk(context)) putWithId:self withId:create_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(ttf, self)];
+  [((id<JavaUtilMap>) nil_chk(context)) putWithId:self withId:create_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(ttf, self)];
 }
 
 - (NSUInteger)hash {
-  return ((jint) [[self getClass] hash]) + ((jint) [((NSString *) nil_chk(indexedField_)) hash]) * 29 + ((jint) [((OrgApacheLuceneUtilBytesRef *) nil_chk(indexedBytes_)) hash]);
+  return ((jint) [[self java_getClass] hash]) + ((jint) [((NSString *) nil_chk(indexedField_)) hash]) * 29 + ((jint) [((OrgApacheLuceneUtilBytesRef *) nil_chk(indexedBytes_)) hash]);
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(o) java_getClass])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource class]);
   return [((NSString *) nil_chk(self->indexedField_)) isEqual:other->indexedField_] && [((OrgApacheLuceneUtilBytesRef *) nil_chk(self->indexedBytes_)) isEqual:other->indexedBytes_];
 }
@@ -100,22 +101,34 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:withNSString:withOrgApacheLuceneUtilBytesRef:", "TotalTermFreqValueSource", NULL, 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, 4, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 8, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:withNSString:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(description__);
+  methods[3].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[4].selector = @selector(createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:);
+  methods[5].selector = @selector(hash);
+  methods[6].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexedField_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexedBytes_", NULL, 0x14, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "indexedField_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "val_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "indexedBytes_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource = { 2, "TotalTermFreqValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 7, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LNSString;LNSString;LOrgApacheLuceneUtilBytesRef;", "description", "getValues", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "createWeight", "LJavaUtilMap;LOrgApacheLuceneSearchIndexSearcher;", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource = { "TotalTermFreqValueSource", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x1, 7, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource;
 }
 
@@ -139,44 +152,48 @@ OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource *create_OrgApa
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource)
 
-@implementation OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1
+@implementation OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1
+
+- (instancetype)initWithLong:(jlong)capture$0
+withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs {
+  OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(self, capture$0, vs);
+  return self;
+}
 
 - (jlong)longValWithInt:(jint)doc {
   return val$ttf_;
 }
 
-- (instancetype)initWithLong:(jlong)capture$0
-withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0 {
-  OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(self, capture$0, arg$0);
-  return self;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "longValWithInt:", "longVal", "J", 0x1, NULL, NULL },
-    { "initWithLong:withOrgApacheLuceneQueriesFunctionValueSource:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithLong:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(longValWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$ttf_", NULL, 0x1012, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$ttf_", "J", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource", "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1 = { 2, "", "org.apache.lucene.queries.function.valuesource", "TotalTermFreqValueSource", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1;
+  static const void *ptrTable[] = { "JLOrgApacheLuceneQueriesFunctionValueSource;", "longVal", "I", "LOrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource;", "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1 = { "", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x8010, 2, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1 *self, jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+void OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1 *self, jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) {
   self->val$ttf_ = capture$0;
-  OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, arg$0);
+  OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, vs);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1, initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1 *new_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1, initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, vs)
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1, initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1 *create_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_1, initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, vs)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_$1)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_
 
@@ -26,12 +32,12 @@
 
 @class JavaTextNumberFormat;
 @protocol JavaLangCharSequence;
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
 /*!
- @brief This query node represents a field query that holds a numeric value.
- It is
- similar to <code>FieldQueryNode</code>, however the <code>getValue()</code> returns a
+ @brief This query node represents a field query that holds a numeric value.It is
+  similar to <code>FieldQueryNode</code>, however the <code>getValue()</code> returns a 
  <code>Number</code>.
  - seealso: NumericConfig
  */
@@ -40,16 +46,16 @@
 #pragma mark Public
 
 /*!
- @brief Creates a <code>NumericQueryNode</code> object using the given field,
- <code>Number</code> value and <code>NumberFormat</code> used to convert the value to
+ @brief Creates a <code>NumericQueryNode</code> object using the given field, 
+ <code>Number</code> value and <code>NumberFormat</code> used to convert the value to 
  <code>String</code>.
  @param field the field associated with this query node
  @param value the value hold by this node
- @param numberFormat the <code>NumberFormat</code> used to convert the value to <code>String</code>
+ @param numberFormat the <code>NumberFormat</code>  used to convert the value to <code>String</code>
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                                withNSNumber:(NSNumber *)value
-                    withJavaTextNumberFormat:(JavaTextNumberFormat *)numberFormat;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
+                                          withNSNumber:(NSNumber *)value
+                              withJavaTextNumberFormat:(JavaTextNumberFormat *)numberFormat;
 
 /*!
  @brief Returns the field associated with this node.
@@ -69,6 +75,8 @@
  */
 - (NSNumber *)getValue;
 
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
+
 /*!
  @brief Sets the field associated with this node.
  @param fieldName the field associated with this node
@@ -77,7 +85,7 @@
 
 /*!
  @brief Sets the <code>NumberFormat</code> used to convert the value to <code>String</code>.
- @param format the <code>NumberFormat</code> used to convert the value to <code>String</code>
+ @param format the <code>NumberFormat</code>  used to convert the value to <code>String</code>
  */
 - (void)setNumberFormatWithJavaTextNumberFormat:(JavaTextNumberFormat *)format;
 
@@ -95,11 +103,15 @@
 
 /*!
  @brief This method is used to get the value converted to <code>String</code> and
- escaped using the given <code>EscapeQuerySyntax</code>.
- @param escaper the <code>EscapeQuerySyntax</code> used to escape the value <code>String</code>
+  escaped using the given <code>EscapeQuerySyntax</code>.
+ @param escaper the <code>EscapeQuerySyntax</code>  used to escape the value <code>String</code>
  @return the value converte to <code>String</code> and escaped
  */
 - (id<JavaLangCharSequence>)getTermEscapedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -115,4 +127,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesNumeri
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode")

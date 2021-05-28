@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilVirtualMethod
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilVirtualMethod_) && (INCLUDE_ALL_OrgApacheLuceneUtilVirtualMethod || defined(INCLUDE_OrgApacheLuceneUtilVirtualMethod))
 #define OrgApacheLuceneUtilVirtualMethod_
 
@@ -21,36 +27,36 @@
 
 /*!
  @brief A utility for keeping backwards compatibility on previously abstract methods
- (or similar replacements).
+  (or similar replacements).
  <p>Before the replacement method can be made abstract, the old method must kept deprecated.
- If somebody still overrides the deprecated method in a non-final class,
- you must keep track, of this and maybe delegate to the old method in the subclass.
- The cost of reflection is minimized by the following usage of this class:</p>
- <p>Define <strong>static final</strong> fields in the base class (<code>BaseClass</code>),
- where the old and new method are declared:</p>
- <pre class="prettyprint">
- static final VirtualMethod&lt;BaseClass&gt; newMethod =
- new VirtualMethod&lt;BaseClass&gt;(BaseClass.class, "newName", parameters...);
- static final VirtualMethod&lt;BaseClass&gt; oldMethod =
- new VirtualMethod&lt;BaseClass&gt;(BaseClass.class, "oldName", parameters...);
+  If somebody still overrides the deprecated method in a non-final class,
+  you must keep track, of this and maybe delegate to the old method in the subclass.
+  The cost of reflection is minimized by the following usage of this class:</p>
+  <p>Define <strong>static final</strong> fields in the base class (<code>BaseClass</code>),
+  where the old and new method are declared:</p>
+  <pre class="prettyprint">
+   static final VirtualMethod&lt;BaseClass&gt; newMethod =
+    new VirtualMethod&lt;BaseClass&gt;(BaseClass.class, "newName", parameters...);
+   static final VirtualMethod&lt;BaseClass&gt; oldMethod =
+    new VirtualMethod&lt;BaseClass&gt;(BaseClass.class, "oldName", parameters...); 
  
 @endcode
- <p>This enforces the singleton status of these objects, as the maintenance of the cache would be too costly else.
- If you try to create a second instance of for the same method/<code>baseClass</code> combination, an exception is thrown.
+  <p>This enforces the singleton status of these objects, as the maintenance of the cache would be too costly else.
+  If you try to create a second instance of for the same method/<code>baseClass</code> combination, an exception is thrown. 
  <p>To detect if e.g. the old method was overridden by a more far subclass on the inheritance path to the current
- instance's class, use a <strong>non-static</strong> field:</p>
- <pre class="prettyprint">
- final boolean isDeprecatedMethodOverridden =
- oldMethod.getImplementationDistance(this.getClass()) &gt; newMethod.getImplementationDistance(this.getClass());
- <em>// alternatively (more readable):</em>
- final boolean isDeprecatedMethodOverridden =
- VirtualMethod.compareImplementationDistance(this.getClass(), oldMethod, newMethod) &gt; 0
+  instance's class, use a <strong>non-static</strong> field:</p>
+  <pre class="prettyprint">
+   final boolean isDeprecatedMethodOverridden =
+    oldMethod.getImplementationDistance(this.getClass()) &gt; newMethod.getImplementationDistance(this.getClass());
+   <em>// alternatively (more readable):</em>
+   final boolean isDeprecatedMethodOverridden =
+    VirtualMethod.compareImplementationDistance(this.getClass(), oldMethod, newMethod) &gt; 0 
  
-@endcode 
+@endcode  
  <p><code>getImplementationDistance</code> returns the distance of the subclass that overrides this method.
- The one with the larger distance should be used preferable.
- This way also more complicated method rename scenarios can be handled
- (think of 2.9 <code>TokenStream</code> deprecations).</p>
+  The one with the larger distance should be used preferable.
+  This way also more complicated method rename scenarios can be handled
+  (think of 2.9 <code>TokenStream</code> deprecations).</p>
  */
 @interface OrgApacheLuceneUtilVirtualMethod : NSObject
 
@@ -58,20 +64,20 @@
 
 /*!
  @brief Creates a new instance for the given <code>baseClass</code> and method declaration.
- @throws UnsupportedOperationException if you create a second instance of the same
- <code>baseClass</code> and method declaration combination. This enforces the singleton status.
- @throws IllegalArgumentException if <code>baseClass</code> does not declare the given method.
+ @throw UnsupportedOperationExceptionif you create a second instance of the same
+   <code>baseClass</code> and method declaration combination. This enforces the singleton status.
+ @throw IllegalArgumentExceptionif <code>baseClass</code> does not declare the given method.
  */
-- (instancetype)initWithIOSClass:(IOSClass *)baseClass
-                    withNSString:(NSString *)method
-               withIOSClassArray:(IOSObjectArray *)parameters;
+- (instancetype __nonnull)initWithIOSClass:(IOSClass *)baseClass
+                              withNSString:(NSString *)method
+                         withIOSClassArray:(IOSObjectArray *)parameters;
 
 /*!
  @brief Utility method that compares the implementation/override distance of two methods.
  @return <ul>
- <li>&gt; 1, iff <code>m1</code> is overridden/implemented in a subclass of the class overriding/declaring <code>m2</code>
- <li>&lt; 1, iff <code>m2</code> is overridden in a subclass of the class overriding/declaring <code>m1</code>
- <li>0, iff both methods are overridden in the same class (or are not overridden at all)
+   <li>&gt; 1, iff <code>m1</code> is overridden/implemented in a subclass of the class overriding/declaring <code>m2</code>
+   <li>&lt; 1, iff <code>m2</code> is overridden in a subclass of the class overriding/declaring <code>m1</code>
+   <li>0, iff both methods are overridden in the same class (or are not overridden at all) 
  </ul>
  */
 + (jint)compareImplementationDistanceWithIOSClass:(IOSClass *)clazz
@@ -80,16 +86,16 @@
 
 /*!
  @brief Returns the distance from the <code>baseClass</code> in which this method is overridden/implemented
- in the inheritance path between <code>baseClass</code> and the given subclass <code>subclazz</code>.
+  in the inheritance path between <code>baseClass</code> and the given subclass <code>subclazz</code>.
  @return 0 iff not overridden, else the distance to the base class
  */
 - (jint)getImplementationDistanceWithIOSClass:(IOSClass *)subclazz;
 
 /*!
- @brief Returns, if this method is overridden/implemented in the inheritance path between
+ @brief Returns, if this method is overridden/implemented in the inheritance path between 
  <code>baseClass</code> and the given subclass <code>subclazz</code>.
  <p>You can use this method to detect if a method that should normally be final was overridden
- by the given instance's class.
+  by the given instance's class.
  @return <code>false</code> iff not overridden
  */
 - (jboolean)isOverriddenAsOfWithIOSClass:(IOSClass *)subclazz;
@@ -97,6 +103,10 @@
 #pragma mark Package-Private
 
 - (jint)reflectImplementationDistanceWithIOSClass:(IOSClass *)subclazz;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -114,4 +124,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilVirtualMethod)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilVirtualMethod")

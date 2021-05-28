@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanPositionRangeQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanPositionRangeQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionRangeQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanPositionRangeQuery))
 #define OrgApacheLuceneSearchSpansSpanPositionRangeQuery_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief Checks to see if the <code>getMatch()</code> lies between a start and end position
- See <code>SpanFirstQuery</code> for a derivation that is optimized for the case where start position is 0.
+  See <code>SpanFirstQuery</code> for a derivation that is optimized for the case where start position is 0.
  */
 @interface OrgApacheLuceneSearchSpansSpanPositionRangeQuery : OrgApacheLuceneSearchSpansSpanPositionCheckQuery {
  @public
@@ -36,11 +42,11 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)match
-                                                    withInt:(jint)start
-                                                    withInt:(jint)end;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)match
+                                                              withInt:(jint)start
+                                                              withInt:(jint)end;
 
-- (OrgApacheLuceneSearchSpansSpanPositionRangeQuery *)clone;
+- (OrgApacheLuceneSearchSpansSpanPositionRangeQuery *)java_clone;
 
 - (jboolean)isEqual:(id)o;
 
@@ -62,6 +68,10 @@
 
 - (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanPositionRangeQuery)
@@ -76,4 +86,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanPositionRangeQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionRangeQuery")

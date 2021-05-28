@@ -9,8 +9,11 @@
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/LimitTokenOffsetFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/LimitTokenOffsetFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/LimitTokenOffsetFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory () {
  @public
@@ -43,17 +46,24 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_CONS
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "LimitTokenOffsetFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MAX_START_OFFSET", "MAX_START_OFFSET", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_MAX_START_OFFSET, NULL, .constantValue.asLong = 0 },
-    { "CONSUME_ALL_TOKENS_KEY", "CONSUME_ALL_TOKENS_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_CONSUME_ALL_TOKENS_KEY, NULL, .constantValue.asLong = 0 },
-    { "maxStartOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "consumeAllTokens_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "MAX_START_OFFSET", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "CONSUME_ALL_TOKENS_KEY", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 5, -1, -1 },
+    { "maxStartOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "consumeAllTokens_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory = { 2, "LimitTokenOffsetFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LOrgApacheLuceneAnalysisTokenStream;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_MAX_START_OFFSET, &OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_CONSUME_ALL_TOKENS_KEY };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory = { "LimitTokenOffsetFilterFactory", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x1, 2, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory;
 }
 

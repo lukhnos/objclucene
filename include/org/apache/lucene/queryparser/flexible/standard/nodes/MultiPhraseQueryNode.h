@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_
 
@@ -30,17 +36,19 @@
 
 /*!
  @brief A <code>MultiPhraseQueryNode</code> indicates that its children should be used to
- build a <code>MultiPhraseQuery</code> instead of <code>PhraseQuery</code>.
+  build a <code>MultiPhraseQuery</code> instead of <code>PhraseQuery</code>.
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
 - (id<JavaLangCharSequence>)getField;
+
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
 
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
 
@@ -54,12 +62,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhr
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode")

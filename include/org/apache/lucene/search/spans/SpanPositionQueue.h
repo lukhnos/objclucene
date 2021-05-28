@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanPositionQueue
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanPositionQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionQueue || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanPositionQueue))
 #define OrgApacheLuceneSearchSpansSpanPositionQueue_
 
@@ -24,27 +30,54 @@
 
 @interface OrgApacheLuceneSearchSpansSpanPositionQueue : OrgApacheLuceneUtilPriorityQueue
 
+#pragma mark Public
+
+- (OrgApacheLuceneSearchSpansSpans *)addWithId:(OrgApacheLuceneSearchSpansSpans *)arg0;
+
+- (OrgApacheLuceneSearchSpansSpans *)insertWithOverflowWithId:(OrgApacheLuceneSearchSpansSpans *)arg0;
+
+- (OrgApacheLuceneSearchSpansSpans *)pop;
+
+- (OrgApacheLuceneSearchSpansSpans *)top;
+
+- (OrgApacheLuceneSearchSpansSpans *)updateTop;
+
+- (OrgApacheLuceneSearchSpansSpans *)updateTopWithId:(OrgApacheLuceneSearchSpansSpans *)arg0;
+
 #pragma mark Protected
+
+- (OrgApacheLuceneSearchSpansSpans *)getSentinelObject;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchSpansSpans *)s1
                     withId:(OrgApacheLuceneSearchSpansSpans *)s2;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)maxSize;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)maxSize;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanPositionQueue)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(OrgApacheLuceneSearchSpansSpanPositionQueue *self, jint maxSize);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanPositionQueue_initPackagePrivateWithInt_(OrgApacheLuceneSearchSpansSpanPositionQueue *self, jint maxSize);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanPositionQueue *new_OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanPositionQueue *new_OrgApacheLuceneSearchSpansSpanPositionQueue_initPackagePrivateWithInt_(jint maxSize) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanPositionQueue *create_OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(jint maxSize);
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanPositionQueue *create_OrgApacheLuceneSearchSpansSpanPositionQueue_initPackagePrivateWithInt_(jint maxSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanPositionQueue)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionQueue")

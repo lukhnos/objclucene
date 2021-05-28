@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -15,7 +14,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/Lucene43StopFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCoreLucene43StopFilter () {
  @public
@@ -28,6 +30,8 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreLucene43StopFilter, stopWords_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreLucene43StopFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisCoreLucene43StopFilter__Annotations$0(void);
+
 @implementation OrgApacheLuceneAnalysisCoreLucene43StopFilter
 
 - (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
@@ -38,11 +42,7 @@ withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArra
 }
 
 - (jboolean)accept {
-  return ![((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(stopWords_)) containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length]];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return ![((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(stopWords_)) containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ java_length]];
 }
 
 - (void)dealloc {
@@ -52,15 +52,22 @@ withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArra
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:", "Lucene43StopFilter", NULL, 0x1, NULL, NULL },
-    { "accept", NULL, "Z", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[1].selector = @selector(accept);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stopWords_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "stopWords_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLucene43StopFilter = { 2, "Lucene43StopFilter", "org.apache.lucene.analysis.core", NULL, 0x11, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ZLOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;", "LJavaIoIOException;", (void *)&OrgApacheLuceneAnalysisCoreLucene43StopFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLucene43StopFilter = { "Lucene43StopFilter", "org.apache.lucene.analysis.core", ptrTable, methods, fields, 7, 0x11, 2, 2, -1, -1, -1, -1, 2 };
   return &_OrgApacheLuceneAnalysisCoreLucene43StopFilter;
 }
 
@@ -78,6 +85,10 @@ OrgApacheLuceneAnalysisCoreLucene43StopFilter *new_OrgApacheLuceneAnalysisCoreLu
 
 OrgApacheLuceneAnalysisCoreLucene43StopFilter *create_OrgApacheLuceneAnalysisCoreLucene43StopFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreLucene43StopFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_, enablePositionIncrements, inArg, stopWords)
+}
+
+IOSObjectArray *OrgApacheLuceneAnalysisCoreLucene43StopFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreLucene43StopFilter)

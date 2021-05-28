@@ -3,30 +3,43 @@
 //  source: ./core/src/java/org/apache/lucene/search/FilterCache.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/search/FilterCache.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/FilterCache must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchFilterCache : NSObject
 
 @end
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchFilterCache__Annotations$0(void);
+
 @implementation OrgApacheLuceneSearchFilterCache
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "doCacheWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchFilterCachingPolicy:", "doCache", "Lorg.apache.lucene.search.Filter;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneSearchFilter;", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilterCache = { 2, "FilterCache", "org.apache.lucene.search", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(doCacheWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchFilterCachingPolicy:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "doCache", "LOrgApacheLuceneSearchFilter;LOrgApacheLuceneSearchFilterCachingPolicy;", (void *)&OrgApacheLuceneSearchFilterCache__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilterCache = { "FilterCache", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, 2 };
   return &_OrgApacheLuceneSearchFilterCache;
 }
 
 @end
+
+IOSObjectArray *OrgApacheLuceneSearchFilterCache__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilterCache)

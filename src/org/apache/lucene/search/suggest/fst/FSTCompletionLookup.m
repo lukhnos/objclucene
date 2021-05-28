@@ -8,7 +8,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -43,6 +42,10 @@
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/fst/FSTCompletionLookup must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestFstFSTCompletionLookup () {
  @public
   jint buckets_;
@@ -73,23 +76,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup, normalCo
 
 /*!
  @brief An invalid bucket count if we're creating an object
- of this class from an existing FST.
- - seealso: #FSTCompletionLookup(FSTCompletion,boolean)
+  of this class from an existing FST.
+ - seealso: #FSTCompletionLookup(FSTCompletion, boolean)
  */
-inline jint OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_get_INVALID_BUCKETS_COUNT();
+inline jint OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_get_INVALID_BUCKETS_COUNT(void);
 inline jint OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_set_INVALID_BUCKETS_COUNT(jint value);
-inline jint *OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_getRef_INVALID_BUCKETS_COUNT();
+inline jint *OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_getRef_INVALID_BUCKETS_COUNT(void);
 static jint OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_INVALID_BUCKETS_COUNT = -1;
 J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup, INVALID_BUCKETS_COUNT, jint)
 
 /*!
- @brief Shared tail length for conflating in the created automaton.
- Setting this
- to larger values (<code>Integer.MAX_VALUE</code>) will create smaller (or minimal) 
- automata at the cost of RAM for keeping nodes hash in the <code>FST</code>. 
+ @brief Shared tail length for conflating in the created automaton.Setting this
+  to larger values (<code>Integer.MAX_VALUE</code>) will create smaller (or minimal) 
+  automata at the cost of RAM for keeping nodes hash in the <code>FST</code>.
  <p>Empirical pick.
  */
-inline jint OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_get_sharedTailLength();
+inline jint OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_get_sharedTailLength(void);
 #define OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_sharedTailLength 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup, sharedTailLength, jint)
 
@@ -144,7 +146,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       [writer writeWithByteArray:buffer withInt:0 withInt:[output getPosition]];
     }
     [writer close];
-    OrgApacheLuceneUtilOfflineSorter_SortInfo *info = [create_OrgApacheLuceneUtilOfflineSorter_init() sortWithOrgLukhnosPortmobileFilePath:tempInput withOrgLukhnosPortmobileFilePath:tempSorted];
+    OrgApacheLuceneUtilOfflineSorter_SortInfo *info = JreRetainedLocalValue([create_OrgApacheLuceneUtilOfflineSorter_init() sortWithOrgLukhnosPortmobileFilePath:tempInput withOrgLukhnosPortmobileFilePath:tempSorted]);
     OrgLukhnosPortmobileFileFiles_delete__WithOrgLukhnosPortmobileFilePath_(tempInput);
     OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder *builder = create_OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_initWithInt_withOrgApacheLuceneSearchSuggestFstBytesRefSorter_withInt_(buckets_, sorter = create_OrgApacheLuceneSearchSuggestFstExternalRefSorter_initWithOrgApacheLuceneUtilOfflineSorter_(create_OrgApacheLuceneUtilOfflineSorter_init()), OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_sharedTailLength);
     jint inputLines = ((OrgApacheLuceneUtilOfflineSorter_SortInfo *) nil_chk(info))->lines_;
@@ -163,7 +165,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         bucket = previousBucket;
       }
       else {
-        bucket = (jint) (line * buckets_ / inputLines);
+        bucket = (jint) (JreLongDiv(line * buckets_, inputLines));
       }
       previousScore = currentScore;
       previousBucket = bucket;
@@ -244,7 +246,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (normalCompletion_ != nil) {
     mem += [((OrgApacheLuceneUtilFstFST *) nil_chk([normalCompletion_ getFST])) ramBytesUsed];
   }
-  if (higherWeightsCompletion_ != nil && (normalCompletion_ == nil || [normalCompletion_ getFST] != [((OrgApacheLuceneSearchSuggestFstFSTCompletion *) nil_chk(higherWeightsCompletion_)) getFST])) {
+  if (higherWeightsCompletion_ != nil && (normalCompletion_ == nil || !JreObjectEqualsEquals([normalCompletion_ getFST], [((OrgApacheLuceneSearchSuggestFstFSTCompletion *) nil_chk(higherWeightsCompletion_)) getFST]))) {
     mem += [((OrgApacheLuceneUtilFstFST *) nil_chk([higherWeightsCompletion_ getFST])) ramBytesUsed];
   }
   return mem;
@@ -255,7 +257,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (normalCompletion_ != nil) {
     [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"fst", [normalCompletion_ getFST])];
   }
-  if (higherWeightsCompletion_ != nil && (normalCompletion_ == nil || [normalCompletion_ getFST] != [((OrgApacheLuceneSearchSuggestFstFSTCompletion *) nil_chk(higherWeightsCompletion_)) getFST])) {
+  if (higherWeightsCompletion_ != nil && (normalCompletion_ == nil || !JreObjectEqualsEquals([normalCompletion_ getFST], [((OrgApacheLuceneSearchSuggestFstFSTCompletion *) nil_chk(higherWeightsCompletion_)) getFST]))) {
     [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"higher weights fst", [higherWeightsCompletion_ getFST])];
   }
   return JavaUtilCollections_unmodifiableListWithJavaUtilList_(resources);
@@ -272,30 +274,47 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "FSTCompletionLookup", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withBoolean:", "FSTCompletionLookup", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSuggestFstFSTCompletion:withBoolean:", "FSTCompletionLookup", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneSearchSuggestInputIterator:", "build", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "encodeWeightWithLong:", "encodeWeight", "I", 0xa, NULL, NULL },
-    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
-    { "getWithJavaLangCharSequence:", "get", "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "storeWithOrgApacheLuceneStoreDataOutput:", "store", "Z", 0x21, "Ljava.io.IOException;", NULL },
-    { "load__WithOrgApacheLuceneStoreDataInput:", "load", "Z", 0x21, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "getCount", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "I", 0xa, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 7, 8, -1, 9, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x21, 12, 13, 4, -1, -1, -1 },
+    { NULL, "Z", 0x21, 14, 15, 4, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 16, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:withBoolean:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneSearchSuggestFstFSTCompletion:withBoolean:);
+  methods[3].selector = @selector(buildWithOrgApacheLuceneSearchSuggestInputIterator:);
+  methods[4].selector = @selector(encodeWeightWithLong:);
+  methods[5].selector = @selector(lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:);
+  methods[6].selector = @selector(getWithJavaLangCharSequence:);
+  methods[7].selector = @selector(storeWithOrgApacheLuceneStoreDataOutput:);
+  methods[8].selector = @selector(load__WithOrgApacheLuceneStoreDataInput:);
+  methods[9].selector = @selector(ramBytesUsed);
+  methods[10].selector = @selector(getChildResources);
+  methods[11].selector = @selector(getCount);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "INVALID_BUCKETS_COUNT", "INVALID_BUCKETS_COUNT", 0xa, "I", &OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_INVALID_BUCKETS_COUNT, NULL, .constantValue.asLong = 0 },
-    { "sharedTailLength", "sharedTailLength", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_sharedTailLength },
-    { "buckets_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "exactMatchFirst_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "higherWeightsCompletion_", NULL, 0x2, "Lorg.apache.lucene.search.suggest.fst.FSTCompletion;", NULL, NULL, .constantValue.asLong = 0 },
-    { "normalCompletion_", NULL, 0x2, "Lorg.apache.lucene.search.suggest.fst.FSTCompletion;", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "INVALID_BUCKETS_COUNT", "I", .constantValue.asLong = 0, 0xa, -1, 17, -1, -1 },
+    { "sharedTailLength", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_sharedTailLength, 0x1a, -1, -1, -1, -1 },
+    { "buckets_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "exactMatchFirst_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "higherWeightsCompletion_", "LOrgApacheLuceneSearchSuggestFstFSTCompletion;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "normalCompletion_", "LOrgApacheLuceneSearchSuggestFstFSTCompletion;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "count_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstFSTCompletionLookup = { 2, "FSTCompletionLookup", "org.apache.lucene.search.suggest.fst", NULL, 0x1, 12, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IZ", "LOrgApacheLuceneSearchSuggestFstFSTCompletion;Z", "build", "LOrgApacheLuceneSearchSuggestInputIterator;", "LJavaIoIOException;", "encodeWeight", "J", "lookup", "LJavaLangCharSequence;LJavaUtilSet;ZI", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;", "get", "LJavaLangCharSequence;", "store", "LOrgApacheLuceneStoreDataOutput;", "load", "LOrgApacheLuceneStoreDataInput;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", &OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_INVALID_BUCKETS_COUNT };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstFSTCompletionLookup = { "FSTCompletionLookup", "org.apache.lucene.search.suggest.fst", ptrTable, methods, fields, 7, 0x1, 12, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup;
 }
 

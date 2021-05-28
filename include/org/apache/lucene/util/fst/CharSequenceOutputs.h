@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstCharSequenceOutputs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstCharSequenceOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstCharSequenceOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstCharSequenceOutputs))
 #define OrgApacheLuceneUtilFstCharSequenceOutputs_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief An FST <code>Outputs</code> implementation where each output
- is a sequence of characters.
+  is a sequence of characters.
  */
 @interface OrgApacheLuceneUtilFstCharSequenceOutputs : OrgApacheLuceneUtilFstOutputs
 
@@ -42,11 +48,16 @@
 
 + (OrgApacheLuceneUtilFstCharSequenceOutputs *)getSingleton;
 
+- (OrgApacheLuceneUtilCharsRef *)mergeWithId:(OrgApacheLuceneUtilCharsRef *)arg0
+                                      withId:(OrgApacheLuceneUtilCharsRef *)arg1;
+
 - (NSString *)outputToStringWithId:(OrgApacheLuceneUtilCharsRef *)output;
 
 - (jlong)ramBytesUsedWithId:(OrgApacheLuceneUtilCharsRef *)output;
 
 - (OrgApacheLuceneUtilCharsRef *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
+
+- (OrgApacheLuceneUtilCharsRef *)readFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)arg0;
 
 - (void)skipOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
@@ -60,10 +71,14 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstCharSequenceOutputs)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstCharSequenceOutputs *OrgApacheLuceneUtilFstCharSequenceOutputs_getSingleton();
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstCharSequenceOutputs *OrgApacheLuceneUtilFstCharSequenceOutputs_getSingleton(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstCharSequenceOutputs)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstCharSequenceOutputs")

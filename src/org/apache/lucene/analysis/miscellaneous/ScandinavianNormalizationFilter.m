@@ -6,13 +6,15 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/ScandinavianNormalizationFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/ScandinavianNormalizationFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter () {
  @public
@@ -23,43 +25,43 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, charTermAttribute_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_AA();
+inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_AA(void);
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_AA 0x00c5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, AA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_aa();
+inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_aa(void);
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_aa 0x00e5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, aa, jchar)
 
-inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_AE();
+inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_AE(void);
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_AE 0x00c6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, AE, jchar)
 
-inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_ae();
+inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_ae(void);
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_ae 0x00e6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, ae, jchar)
 
-inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_AE_se();
+inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_AE_se(void);
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_AE_se 0x00c4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, AE_se, jchar)
 
-inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_ae_se();
+inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_ae_se(void);
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_ae_se 0x00e4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, ae_se, jchar)
 
-inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_OE();
+inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_OE(void);
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_OE 0x00d8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, OE, jchar)
 
-inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_oe();
+inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_oe(void);
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_oe 0x00f8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, oe, jchar)
 
-inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_OE_se();
+inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_OE_se(void);
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_OE_se 0x00d6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, OE_se, jchar)
 
-inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_oe_se();
+inline jchar OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_get_oe_se(void);
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_oe_se 0x00f6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter, oe_se, jchar)
 
@@ -75,7 +77,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNor
     return false;
   }
   IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(charTermAttribute_)) buffer];
-  jint length = [charTermAttribute_ length];
+  jint length = [charTermAttribute_ java_length];
   jint i;
   for (i = 0; i < length; i++) {
     if (IOSCharArray_Get(nil_chk(buffer), i) == OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_ae_se) {
@@ -127,24 +129,31 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousScandinavianNor
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "ScandinavianNormalizationFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "charTermAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "AA", "AA", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_AA },
-    { "aa", "aa", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_aa },
-    { "AE", "AE", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_AE },
-    { "ae", "ae", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_ae },
-    { "AE_se", "AE_se", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_AE_se },
-    { "ae_se", "ae_se", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_ae_se },
-    { "OE", "OE", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_OE },
-    { "oe", "oe", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_oe },
-    { "OE_se", "OE_se", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_OE_se },
-    { "oe_se", "oe_se", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_oe_se },
+    { "charTermAttribute_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "AA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_AA, 0x1a, -1, -1, -1, -1 },
+    { "aa", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_aa, 0x1a, -1, -1, -1, -1 },
+    { "AE", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_AE, 0x1a, -1, -1, -1, -1 },
+    { "ae", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_ae, 0x1a, -1, -1, -1, -1 },
+    { "AE_se", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_AE_se, 0x1a, -1, -1, -1, -1 },
+    { "ae_se", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_ae_se, 0x1a, -1, -1, -1, -1 },
+    { "OE", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_OE, 0x1a, -1, -1, -1, -1 },
+    { "oe", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_oe, 0x1a, -1, -1, -1, -1 },
+    { "OE_se", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_OE_se, 0x1a, -1, -1, -1, -1 },
+    { "oe_se", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_oe_se, 0x1a, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter = { 2, "ScandinavianNormalizationFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter = { "ScandinavianNormalizationFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 2, 11, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter;
 }
 

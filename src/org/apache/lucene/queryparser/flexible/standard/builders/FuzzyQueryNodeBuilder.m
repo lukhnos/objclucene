@@ -3,14 +3,16 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/builders/FuzzyQueryNodeBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FuzzyQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/builders/FuzzyQueryNodeBuilder.h"
 #include "org/apache/lucene/search/FuzzyQuery.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/builders/FuzzyQueryNodeBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder
 
@@ -23,17 +25,24 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchFuzzyQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
   OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *fuzzyNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]);
-  NSString *text = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) nil_chk(fuzzyNode)) getTextAsString];
-  jint numEdits = OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_([fuzzyNode getSimilarity], [((NSString *) nil_chk(text)) codePointCount:0 endIndex:((jint) [text length])]);
+  NSString *text = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) nil_chk(fuzzyNode)) getTextAsString]);
+  jint numEdits = OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_([fuzzyNode getSimilarity], [((NSString *) nil_chk(text)) java_codePointCount:0 endIndex:[text java_length]]);
   return create_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([fuzzyNode getFieldAsString], [fuzzyNode getTextAsString]), numEdits, [fuzzyNode getPrefixLength]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "FuzzyQueryNodeBuilder", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Lorg.apache.lucene.search.FuzzyQuery;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFuzzyQuery;", 0x1, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder = { 2, "FuzzyQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "build", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", "LOrgApacheLuceneQueryparserFlexibleCoreQueryNodeException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder = { "FuzzyQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter))
 #define OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_
 
@@ -25,17 +31,17 @@
 /*!
  @brief Write skip lists with multiple levels, and support skip within block ints.
  Assume that docFreq = 28, skipInterval = blockSize = 12
- |       block#0       | |      block#1        | |vInts|
- d d d d d d d d d d d d d d d d d d d d d d d d d d d d (posting list)
- ^                       ^       (level 0 skip point)
- Note that skipWriter will ignore first document in block#0, since 
- it is useless as a skip point.  Also, we'll never skip into the vInts
- block, only record skip data at the start its start point(if it exist).
- For each skip point, we will record: 
- 1. docID in former position, i.e. for position 12, record docID[11], etc.
- 2. its related file points(position, payload), 
- 3. related numbers or uptos(position, payload).
- 4. start offset.
+   |       block#0       | |      block#1        | |vInts|
+   d d d d d d d d d d d d d d d d d d d d d d d d d d d d (posting list)
+                           ^                       ^       (level 0 skip point)
+  Note that skipWriter will ignore first document in block#0, since 
+  it is useless as a skip point.  Also, we'll never skip into the vInts
+  block, only record skip data at the start its start point(if it exist).
+  For each skip point, we will record: 
+  1. docID in former position, i.e. for position 12, record docID[11], etc.
+  2. its related file points(position, payload), 
+  3. related numbers or uptos(position, payload).
+  4. start offset.
  */
 @interface OrgApacheLuceneCodecsLucene50Lucene50SkipWriter : OrgApacheLuceneCodecsMultiLevelSkipListWriter {
  @public
@@ -46,12 +52,12 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxSkipLevels
-                    withInt:(jint)blockSize
-                    withInt:(jint)docCount
-withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)docOut
-withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)posOut
-withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)payOut;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)maxSkipLevels
+                                            withInt:(jint)blockSize
+                                            withInt:(jint)docCount
+                withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)docOut
+                withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)posOut
+                withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)payOut;
 
 /*!
  @brief Sets the values for the current skip data.
@@ -76,18 +82,33 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)payOut;
 - (void)writeSkipDataWithInt:(jint)level
 withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)skipBuffer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                              withInt:(jint)arg1
+                              withInt:(jint)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                              withInt:(jint)arg1
+                              withInt:(jint)arg2
+                              withInt:(jint)arg3 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *self, jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initPackagePrivateWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *self, jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *new_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *new_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initPackagePrivateWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *create_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *create_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initPackagePrivateWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser || defined(INCLUDE_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser))
 #define OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_
 
@@ -22,40 +28,42 @@
 
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneIndexTerm;
+@class OrgApacheLuceneQueryparserClassicQueryParserTokenManager;
 @class OrgApacheLuceneSearchQuery;
+@protocol OrgApacheLuceneQueryparserClassicCharStream;
 
 /*!
  @brief QueryParser which permits complex phrase query syntax eg "(john jon
- jonathan~) peters*".
+  jonathan~) peters*".
  <p>
- Performs potentially multiple passes over Query text to parse any nested
- logic in PhraseQueries. - First pass takes any PhraseQuery content between
- quotes and stores for subsequent pass. All other query content is parsed as
- normal - Second pass parses any stored PhraseQuery content, checking all
- embedded clauses are referring to the same field and therefore can be
- rewritten as Span queries. All PhraseQuery clauses are expressed as
- ComplexPhraseQuery objects
+  Performs potentially multiple passes over Query text to parse any nested
+  logic in PhraseQueries. - First pass takes any PhraseQuery content between
+  quotes and stores for subsequent pass. All other query content is parsed as
+  normal - Second pass parses any stored PhraseQuery content, checking all
+  embedded clauses are referring to the same field and therefore can be
+  rewritten as Span queries. All PhraseQuery clauses are expressed as
+  ComplexPhraseQuery objects 
  </p>
- <p>
- This could arguably be done in one pass using a new QueryParser but here I am
- working within the constraints of the existing parser as a base class. This
- currently simply feeds all phrase content through an analyzer to select
- phrase terms - any "special" syntax such as * ~ * etc are not given special
- status
+  <p>
+  This could arguably be done in one pass using a new QueryParser but here I am
+  working within the constraints of the existing parser as a base class. This
+  currently simply feeds all phrase content through an analyzer to select
+  phrase terms - any "special" syntax such as * ~ * etc are not given special
+  status 
  </p>
  */
 @interface OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser : OrgApacheLuceneQueryparserClassicQueryParser
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)f
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a;
+- (instancetype __nonnull)initWithNSString:(NSString *)f
+       withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a;
 
 - (OrgApacheLuceneSearchQuery *)parseWithNSString:(NSString *)query;
 
 /*!
  @brief When <code>inOrder</code> is true, the search terms must
- exists in the documents as the same order as in query.
+  exists in the documents as the same order as in query.
  @param inOrder parameter to choose between ordered or un-ordered proximity search
  */
 - (void)setInOrderWithBoolean:(jboolean)inOrder;
@@ -86,6 +94,12 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a;
                                               withBoolean:(jboolean)endInclusive OBJC_METHOD_FAMILY_NONE;
 
 - (OrgApacheLuceneSearchQuery *)newTermQueryWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserClassicQueryParserTokenManager:(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -120,10 +134,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQ
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)phrasedQueryStringContents
-                         withInt:(jint)slopFactor
-                     withBoolean:(jboolean)inOrder;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                              withNSString:(NSString *)phrasedQueryStringContents
+                                   withInt:(jint)slopFactor
+                               withBoolean:(jboolean)inOrder;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -136,6 +150,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQ
 #pragma mark Protected
 
 - (void)parsePhraseElementsWithOrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser:(OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser *)qp;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -154,4 +172,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQ
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser")

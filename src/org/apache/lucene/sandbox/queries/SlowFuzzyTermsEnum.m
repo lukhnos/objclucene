@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -26,6 +25,12 @@
 #include "org/apache/lucene/util/StringHelper.h"
 #include "org/apache/lucene/util/UnicodeUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/sandbox/queries/SlowFuzzyTermsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum__Annotations$0(void);
+
 /*!
  @brief Implement fuzzy enumeration with linear brute force.
  */
@@ -42,48 +47,49 @@
 
 /*!
  @brief Constructor for enumeration of all terms from specified <code>reader</code> which share a prefix of
- length <code>prefixLength</code> with <code>term</code> and which have a fuzzy similarity &gt;
- <code>minSimilarity</code>.
+  length <code>prefixLength</code> with <code>term</code> and which have a fuzzy similarity &gt;
+  <code>minSimilarity</code>.
  <p>
- After calling the constructor the enumeration is already pointing to the first 
- valid term if such a term exists.
- @throws IOException If there is a low-level I/O error.
+  After calling the constructor the enumeration is already pointing to the first 
+  valid term if such a term exists.
+ @throw IOExceptionIf there is a low-level I/O error.
  */
 - (instancetype)initWithOrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum:(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *)outer$;
 
 /*!
  @brief <p>The termCompare method in FuzzyTermEnum uses Levenshtein distance to 
- calculate the distance between the given term and the comparing term.
+  calculate the distance between the given term and the comparing term.
  </p>
- <p>If the minSimilarity is &gt;= 1.0, this uses the maxEdits as the comparison.
- Otherwise, this method uses the following logic to calculate similarity.
+  <p>If the minSimilarity is &gt;= 1.0, this uses the maxEdits as the comparison.
+  Otherwise, this method uses the following logic to calculate similarity. 
  @code
 
-   similarity = 1 - ((float)distance / (float) (prefixLength + Math.min(textlen, targetlen)));
+    similarity = 1 - ((float)distance / (float) (prefixLength + Math.min(textlen, targetlen)));   
    
 @endcode
- where distance is the Levenshtein distance for the two words.
+  where distance is the Levenshtein distance for the two words. 
  </p>
  */
 - (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 /*!
  @brief <p>calcDistance returns the Levenshtein distance between the query term
- and the target term.
+  and the target term.
  </p>
+   
  <p>Embedded within this algorithm is a fail-fast Levenshtein distance
- algorithm.  The fail-fast algorithm differs from the standard Levenshtein
- distance algorithm in that it is aborted if it is discovered that the
- minimum distance between the words is greater than some threshold.
+  algorithm.  The fail-fast algorithm differs from the standard Levenshtein
+  distance algorithm in that it is aborted if it is discovered that the
+  minimum distance between the words is greater than some threshold. 
  <p>Levenshtein distance (also known as edit distance) is a measure of similarity
- between two strings where the distance is measured as the number of character
- deletions, insertions or substitutions required to transform one string to
- the other string.
+  between two strings where the distance is measured as the number of character
+  deletions, insertions or substitutions required to transform one string to
+  the other string.
  @param target the target word or phrase
  @param offset the offset at which to start the comparison
  @param length the length of what's left of the string to compare
  @return the number of edits or Integer.MIN_VALUE if the edit distance is
- greater than maxDistance.
+  greater than maxDistance.
  */
 - (jint)calcDistanceWithIntArray:(IOSIntArray *)target
                          withInt:(jint)offset
@@ -95,8 +101,8 @@
 
 /*!
  @brief The max Distance is the maximum Levenshtein distance for the text
- compared to some other value that results in score that is
- better than the minimum similarity.
+  compared to some other value that results in score that is
+  better than the minimum similarity.
  @param m the length of the "other value"
  @return the maximum levenshtein distance that we care about
  */
@@ -106,7 +112,6 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_LinearFuzzyTermsEnum)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_LinearFuzzyTermsEnum, this$0_, OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_LinearFuzzyTermsEnum, d_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_LinearFuzzyTermsEnum, p_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_LinearFuzzyTermsEnum, text_, IOSIntArray *)
@@ -142,7 +147,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_Linea
 - (void)maxEditDistanceChangedWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lastTerm
                                                       withInt:(jint)maxEdits
                                                   withBoolean:(jboolean)init_ {
-  OrgApacheLuceneIndexTermsEnum *newEnum = [self getAutomatonEnumWithInt:maxEdits withOrgApacheLuceneUtilBytesRef:lastTerm];
+  OrgApacheLuceneIndexTermsEnum *newEnum = JreRetainedLocalValue([self getAutomatonEnumWithInt:maxEdits withOrgApacheLuceneUtilBytesRef:lastTerm]);
   if (newEnum != nil) {
     [self setEnumWithOrgApacheLuceneIndexTermsEnum:newEnum];
   }
@@ -151,17 +156,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_Linea
   }
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:withOrgApacheLuceneIndexTerm:withFloat:withInt:", "SlowFuzzyTermsEnum", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "maxEditDistanceChangedWithOrgApacheLuceneUtilBytesRef:withInt:withBoolean:", "maxEditDistanceChanged", "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, 2, 3, 1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.sandbox.queries.SlowFuzzyTermsEnum$LinearFuzzyTermsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum = { 2, "SlowFuzzyTermsEnum", "org.apache.lucene.sandbox.queries", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:withOrgApacheLuceneIndexTerm:withFloat:withInt:);
+  methods[1].selector = @selector(maxEditDistanceChangedWithOrgApacheLuceneUtilBytesRef:withInt:withBoolean:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerms;LOrgApacheLuceneUtilAttributeSource;LOrgApacheLuceneIndexTerm;FI", "LJavaIoIOException;", "maxEditDistanceChanged", "LOrgApacheLuceneUtilBytesRef;IZ", "LOrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_LinearFuzzyTermsEnum;", (void *)&OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum = { "SlowFuzzyTermsEnum", "org.apache.lucene.sandbox.queries", ptrTable, methods, NULL, 7, 0x11, 2, 0, -1, 4, -1, -1, 5 };
   return &_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum;
 }
 
@@ -177,6 +184,10 @@ OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *new_OrgApacheLuceneSandboxQueri
 
 OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *create_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_(OrgApacheLuceneIndexTerms *terms, OrgApacheLuceneUtilAttributeSource *atts, OrgApacheLuceneIndexTerm *term, jfloat minSimilarity, jint prefixLength) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum, initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_, terms, atts, term, minSimilarity, prefixLength)
+}
+
+IOSObjectArray *OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum)
@@ -240,23 +251,33 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum:", "LinearFuzzyTermsEnum", NULL, 0x1, NULL, NULL },
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x14, NULL, NULL },
-    { "calcDistanceWithIntArray:withInt:withInt:", "calcDistance", "I", 0x12, NULL, NULL },
-    { "calcSimilarityWithInt:withInt:withInt:", "calcSimilarity", "F", 0x2, NULL, NULL },
-    { "calculateMaxDistanceWithInt:", "calculateMaxDistance", "I", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x14, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x12, 4, 5, -1, -1, -1, -1 },
+    { NULL, "F", 0x2, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 8, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum:);
+  methods[1].selector = @selector(acceptWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(calcDistanceWithIntArray:withInt:withInt:);
+  methods[3].selector = @selector(calcSimilarityWithInt:withInt:withInt:);
+  methods[4].selector = @selector(calculateMaxDistanceWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.sandbox.queries.SlowFuzzyTermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "d_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "p_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "text_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "boostAtt_", NULL, 0x12, "Lorg.apache.lucene.search.BoostAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixBytesRef_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "utf32_", NULL, 0x12, "Lorg.apache.lucene.util.IntsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "d_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "p_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "text_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "boostAtt_", "LOrgApacheLuceneSearchBoostAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "prefixBytesRef_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "utf32_", "LOrgApacheLuceneUtilIntsRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_LinearFuzzyTermsEnum = { 2, "LinearFuzzyTermsEnum", "org.apache.lucene.sandbox.queries", "SlowFuzzyTermsEnum", 0x2, 5, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum;", "LJavaIoIOException;", "accept", "LOrgApacheLuceneUtilBytesRef;", "calcDistance", "[III", "calcSimilarity", "III", "calculateMaxDistance", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_LinearFuzzyTermsEnum = { "LinearFuzzyTermsEnum", "org.apache.lucene.sandbox.queries", ptrTable, methods, fields, 7, 0x2, 5, 7, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_LinearFuzzyTermsEnum;
 }
 

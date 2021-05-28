@@ -8,13 +8,13 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/Comparable.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Iterable.h"
 #include "java/lang/NullPointerException.h"
 #include "java/lang/System.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Arrays.h"
 #include "java/util/HashMap.h"
@@ -71,6 +71,13 @@
 
 @class OrgApacheLuceneIndexDefaultIndexingChain_PerField;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/DefaultIndexingChain must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/index/DefaultIndexingChain must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
 @interface OrgApacheLuceneIndexDefaultIndexingChain () {
  @public
   OrgApacheLuceneCodecsStoredFieldsWriter *storedFieldsWriter_;
@@ -91,8 +98,8 @@
 
 /*!
  @brief Catch up for all docs before us that had no stored
- fields, or hit non-aborting exceptions before writing
- stored fields.
+   fields, or hit non-aborting exceptions before writing
+   stored fields.
  */
 - (void)fillStoredFieldsWithInt:(jint)docID;
 
@@ -102,13 +109,13 @@
 
 /*!
  @brief Calls StoredFieldsWriter.startDocument, aborting the
- segment if it hits any exception.
+   segment if it hits any exception.
  */
 - (void)startStoredFields;
 
 /*!
  @brief Calls StoredFieldsWriter.finishDocument, aborting the
- segment if it hits any exception.
+   segment if it hits any exception.
  */
 - (void)finishStoredFields;
 
@@ -121,7 +128,7 @@
 
 /*!
  @brief Called from processDocument to index one field's doc
- value
+   value
  */
 - (void)indexDocValueWithOrgApacheLuceneIndexDefaultIndexingChain_PerField:(OrgApacheLuceneIndexDefaultIndexingChain_PerField *)fp
                                      withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)dvType
@@ -129,15 +136,15 @@
 
 /*!
  @brief Returns a previously created <code>PerField</code>, or null
- if this field name wasn't seen yet.
+   if this field name wasn't seen yet.
  */
 - (OrgApacheLuceneIndexDefaultIndexingChain_PerField *)getPerFieldWithNSString:(NSString *)name;
 
 /*!
  @brief Returns a previously created <code>PerField</code>,
- absorbing the type information from <code>FieldType</code>,
- and creates a new <code>PerField</code> if this field name
- wasn't seen yet.
+   absorbing the type information from <code>FieldType</code>,
+   and creates a new <code>PerField</code> if this field name
+   wasn't seen yet.
  */
 - (OrgApacheLuceneIndexDefaultIndexingChain_PerField *)getOrAddFieldWithNSString:(NSString *)name
                                       withOrgApacheLuceneIndexIndexableFieldType:(id<OrgApacheLuceneIndexIndexableFieldType>)fieldType
@@ -178,7 +185,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexDefaultIndexingChain_PerField
  */
 @interface OrgApacheLuceneIndexDefaultIndexingChain_PerField : NSObject < JavaLangComparable > {
  @public
-  OrgApacheLuceneIndexDefaultIndexingChain *this$0_;
+  WEAK_ OrgApacheLuceneIndexDefaultIndexingChain *this$0_;
   OrgApacheLuceneIndexFieldInfo *fieldInfo_;
   OrgApacheLuceneSearchSimilaritiesSimilarity *similarity_;
   OrgApacheLuceneIndexFieldInvertState *invertState_;
@@ -186,7 +193,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexDefaultIndexingChain_PerField
   OrgApacheLuceneIndexDocValuesWriter *docValuesWriter_;
   /*!
    @brief We use this to know when a PerField is seen for the
- first time in the current document.
+   first time in the current document.
    */
   jlong fieldGen_;
   OrgApacheLuceneIndexDefaultIndexingChain_PerField *next_;
@@ -207,8 +214,8 @@ __attribute__((unused)) static OrgApacheLuceneIndexDefaultIndexingChain_PerField
 
 /*!
  @brief Inverts one field for one document; first is true
- if this is the first time we are seeing this field
- name in this document.
+   if this is the first time we are seeing this field
+   name in this document.
  */
 - (void)invertWithOrgApacheLuceneIndexIndexableField:(id<OrgApacheLuceneIndexIndexableField>)field
                                          withBoolean:(jboolean)first;
@@ -217,7 +224,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexDefaultIndexingChain_PerField
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDefaultIndexingChain_PerField)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain_PerField, this$0_, OrgApacheLuceneIndexDefaultIndexingChain *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain_PerField, fieldInfo_, OrgApacheLuceneIndexFieldInfo *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain_PerField, similarity_, OrgApacheLuceneSearchSimilaritiesSimilarity *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain_PerField, invertState_, OrgApacheLuceneIndexFieldInvertState *)
@@ -238,8 +244,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDefaultIndexingChain_PerField)
 
 @implementation OrgApacheLuceneIndexDefaultIndexingChain
 
-- (instancetype)initWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter {
-  OrgApacheLuceneIndexDefaultIndexingChain_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(self, docWriter);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter {
+  OrgApacheLuceneIndexDefaultIndexingChain_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(self, docWriter);
   return self;
 }
 
@@ -286,7 +292,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDefaultIndexingChain_PerField)
   @try {
     [((OrgApacheLuceneIndexTermsHash *) nil_chk(termsHash_)) abort];
   }
-  @catch (NSException *t) {
+  @catch (JavaLangThrowable *t) {
   }
   JavaUtilArrays_fillWithNSObjectArray_withId_(fieldHash_, nil);
 }
@@ -330,8 +336,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDefaultIndexingChain_PerField)
   @try {
     [termsHash_ finishDocument];
   }
-  @catch (NSException *th) {
-    @throw OrgApacheLuceneIndexAbortingException_wrapWithNSException_(th);
+  @catch (JavaLangThrowable *th) {
+    @throw nil_chk(OrgApacheLuceneIndexAbortingException_wrapWithJavaLangThrowable_(th));
   }
 }
 
@@ -362,10 +368,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDefaultIndexingChain_PerField)
   return OrgApacheLuceneIndexDefaultIndexingChain_getOrAddFieldWithNSString_withOrgApacheLuceneIndexIndexableFieldType_withBoolean_(self, name, fieldType, invert);
 }
 
+- (void)__javaClone:(OrgApacheLuceneIndexDefaultIndexingChain *)original {
+  [super __javaClone:original];
+  [docWriter_ release];
+}
+
 - (void)dealloc {
   RELEASE_(bytesUsed_);
   RELEASE_(docState_);
-  RELEASE_(docWriter_);
   RELEASE_(fieldInfos_);
   RELEASE_(termsHash_);
   RELEASE_(storedFieldsWriter_);
@@ -375,64 +385,84 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDefaultIndexingChain_PerField)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexDocumentsWriterPerThread:", "DefaultIndexingChain", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initStoredFieldsWriter", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushWithOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x1, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "writeDocValuesWithOrgApacheLuceneIndexSegmentWriteState:", "writeDocValues", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "fillStoredFieldsWithInt:", "fillStoredFields", "V", 0x2, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "writeNormsWithOrgApacheLuceneIndexSegmentWriteState:", "writeNorms", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "abort", NULL, "V", 0x1, NULL, NULL },
-    { "rehash", NULL, "V", 0x2, NULL, NULL },
-    { "startStoredFields", NULL, "V", 0x2, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "finishStoredFields", NULL, "V", 0x2, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "processDocument", NULL, "V", 0x1, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "processFieldWithOrgApacheLuceneIndexIndexableField:withLong:withInt:", "processField", "I", 0x2, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "verifyUnIndexedFieldTypeWithNSString:withOrgApacheLuceneIndexIndexableFieldType:", "verifyUnIndexedFieldType", "V", 0xa, NULL, NULL },
-    { "indexDocValueWithOrgApacheLuceneIndexDefaultIndexingChain_PerField:withOrgApacheLuceneIndexDocValuesType:withOrgApacheLuceneIndexIndexableField:", "indexDocValue", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "getPerFieldWithNSString:", "getPerField", "Lorg.apache.lucene.index.DefaultIndexingChain$PerField;", 0x2, NULL, NULL },
-    { "getOrAddFieldWithNSString:withOrgApacheLuceneIndexIndexableFieldType:withBoolean:", "getOrAddField", "Lorg.apache.lucene.index.DefaultIndexingChain$PerField;", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x2, 5, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 6, 7, 4, -1, -1, -1 },
+    { NULL, "V", 0x2, 8, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "I", 0x2, 9, 10, 4, -1, -1, -1 },
+    { NULL, "V", 0xa, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 13, 14, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDefaultIndexingChain_PerField;", 0x2, 15, 16, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDefaultIndexingChain_PerField;", 0x2, 17, 18, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:);
+  methods[1].selector = @selector(initStoredFieldsWriter);
+  methods[2].selector = @selector(flushWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[3].selector = @selector(writeDocValuesWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[4].selector = @selector(fillStoredFieldsWithInt:);
+  methods[5].selector = @selector(writeNormsWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[6].selector = @selector(abort);
+  methods[7].selector = @selector(rehash);
+  methods[8].selector = @selector(startStoredFields);
+  methods[9].selector = @selector(finishStoredFields);
+  methods[10].selector = @selector(processDocument);
+  methods[11].selector = @selector(processFieldWithOrgApacheLuceneIndexIndexableField:withLong:withInt:);
+  methods[12].selector = @selector(verifyUnIndexedFieldTypeWithNSString:withOrgApacheLuceneIndexIndexableFieldType:);
+  methods[13].selector = @selector(indexDocValueWithOrgApacheLuceneIndexDefaultIndexingChain_PerField:withOrgApacheLuceneIndexDocValuesType:withOrgApacheLuceneIndexIndexableField:);
+  methods[14].selector = @selector(getPerFieldWithNSString:);
+  methods[15].selector = @selector(getOrAddFieldWithNSString:withOrgApacheLuceneIndexIndexableFieldType:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bytesUsed_", NULL, 0x10, "Lorg.apache.lucene.util.Counter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docState_", NULL, 0x10, "Lorg.apache.lucene.index.DocumentsWriterPerThread$DocState;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docWriter_", NULL, 0x10, "Lorg.apache.lucene.index.DocumentsWriterPerThread;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfos_", NULL, 0x10, "Lorg.apache.lucene.index.FieldInfos$Builder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termsHash_", NULL, 0x10, "Lorg.apache.lucene.index.TermsHash;", NULL, NULL, .constantValue.asLong = 0 },
-    { "storedFieldsWriter_", NULL, 0x2, "Lorg.apache.lucene.codecs.StoredFieldsWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastStoredDocID_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldHash_", NULL, 0x2, "[Lorg.apache.lucene.index.DefaultIndexingChain$PerField;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hashMask_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalFieldCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextFieldGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "fields_", NULL, 0x2, "[Lorg.apache.lucene.index.DefaultIndexingChain$PerField;", NULL, NULL, .constantValue.asLong = 0 },
+    { "bytesUsed_", "LOrgApacheLuceneUtilCounter;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docState_", "LOrgApacheLuceneIndexDocumentsWriterPerThread_DocState;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docWriter_", "LOrgApacheLuceneIndexDocumentsWriterPerThread;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fieldInfos_", "LOrgApacheLuceneIndexFieldInfos_Builder;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "termsHash_", "LOrgApacheLuceneIndexTermsHash;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "storedFieldsWriter_", "LOrgApacheLuceneCodecsStoredFieldsWriter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastStoredDocID_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldHash_", "[LOrgApacheLuceneIndexDefaultIndexingChain_PerField;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "hashMask_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "totalFieldCount_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextFieldGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fields_", "[LOrgApacheLuceneIndexDefaultIndexingChain_PerField;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.DefaultIndexingChain$PerField;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDefaultIndexingChain = { 2, "DefaultIndexingChain", "org.apache.lucene.index", NULL, 0x10, 16, methods, 12, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexDocumentsWriterPerThread;", "LJavaIoIOException;", "flush", "LOrgApacheLuceneIndexSegmentWriteState;", "LJavaIoIOException;LOrgApacheLuceneIndexAbortingException;", "writeDocValues", "fillStoredFields", "I", "writeNorms", "processField", "LOrgApacheLuceneIndexIndexableField;JI", "verifyUnIndexedFieldType", "LNSString;LOrgApacheLuceneIndexIndexableFieldType;", "indexDocValue", "LOrgApacheLuceneIndexDefaultIndexingChain_PerField;LOrgApacheLuceneIndexDocValuesType;LOrgApacheLuceneIndexIndexableField;", "getPerField", "LNSString;", "getOrAddField", "LNSString;LOrgApacheLuceneIndexIndexableFieldType;Z", "LOrgApacheLuceneIndexDefaultIndexingChain_PerField;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDefaultIndexingChain = { "DefaultIndexingChain", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 16, 12, -1, 19, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDefaultIndexingChain;
 }
 
 @end
 
-void OrgApacheLuceneIndexDefaultIndexingChain_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDefaultIndexingChain *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
-  OrgApacheLuceneIndexDocConsumer_init(self);
+void OrgApacheLuceneIndexDefaultIndexingChain_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDefaultIndexingChain *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
+  OrgApacheLuceneIndexDocConsumer_initPackagePrivate(self);
   JreStrongAssignAndConsume(&self->fieldHash_, [IOSObjectArray newArrayWithLength:2 type:OrgApacheLuceneIndexDefaultIndexingChain_PerField_class_()]);
   self->hashMask_ = 1;
   JreStrongAssignAndConsume(&self->fields_, [IOSObjectArray newArrayWithLength:1 type:OrgApacheLuceneIndexDefaultIndexingChain_PerField_class_()]);
-  JreStrongAssign(&self->docWriter_, docWriter);
+  self->docWriter_ = docWriter;
   JreStrongAssign(&self->fieldInfos_, [((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(docWriter)) getFieldInfosBuilder]);
   JreStrongAssign(&self->docState_, docWriter->docState_);
   JreStrongAssign(&self->bytesUsed_, docWriter->bytesUsed_);
-  OrgApacheLuceneIndexTermsHash *termVectorsWriter = create_OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(docWriter);
-  JreStrongAssignAndConsume(&self->termsHash_, new_OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(docWriter, termVectorsWriter));
+  OrgApacheLuceneIndexTermsHash *termVectorsWriter = create_OrgApacheLuceneIndexTermVectorsConsumer_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(docWriter);
+  JreStrongAssignAndConsume(&self->termsHash_, new_OrgApacheLuceneIndexFreqProxTermsWriter_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(docWriter, termVectorsWriter));
 }
 
-OrgApacheLuceneIndexDefaultIndexingChain *new_OrgApacheLuceneIndexDefaultIndexingChain_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDefaultIndexingChain, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_, docWriter)
+OrgApacheLuceneIndexDefaultIndexingChain *new_OrgApacheLuceneIndexDefaultIndexingChain_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDefaultIndexingChain, initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_, docWriter)
 }
 
-OrgApacheLuceneIndexDefaultIndexingChain *create_OrgApacheLuceneIndexDefaultIndexingChain_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDefaultIndexingChain, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_, docWriter)
+OrgApacheLuceneIndexDefaultIndexingChain *create_OrgApacheLuceneIndexDefaultIndexingChain_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDefaultIndexingChain, initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_, docWriter)
 }
 
 void OrgApacheLuceneIndexDefaultIndexingChain_initStoredFieldsWriter(OrgApacheLuceneIndexDefaultIndexingChain *self) {
@@ -454,7 +484,7 @@ void OrgApacheLuceneIndexDefaultIndexingChain_writeDocValuesWithOrgApacheLuceneI
             @throw create_JavaLangAssertionError_initWithId_(JreStrcat("$@$$$", @"segment=", state->segmentInfo_, @": field=\"", perField->fieldInfo_->name_, @"\" has no docValues but wrote them"));
           }
           if (dvConsumer == nil) {
-            OrgApacheLuceneCodecsDocValuesFormat *fmt = [((OrgApacheLuceneCodecsCodec *) nil_chk([state->segmentInfo_ getCodec])) docValuesFormat];
+            OrgApacheLuceneCodecsDocValuesFormat *fmt = JreRetainedLocalValue([((OrgApacheLuceneCodecsCodec *) nil_chk([state->segmentInfo_ getCodec])) docValuesFormat]);
             dvConsumer = [((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk(fmt)) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:state];
           }
           [((OrgApacheLuceneIndexDocValuesWriter *) nil_chk(perField->docValuesWriter_)) finishWithInt:maxDoc];
@@ -499,14 +529,14 @@ void OrgApacheLuceneIndexDefaultIndexingChain_writeNormsWithOrgApacheLuceneIndex
   OrgApacheLuceneCodecsNormsConsumer *normsConsumer = nil;
   @try {
     if ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->fieldInfos_)) hasNorms]) {
-      OrgApacheLuceneCodecsNormsFormat *normsFormat = [((OrgApacheLuceneCodecsCodec *) nil_chk([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(state->segmentInfo_)) getCodec])) normsFormat];
-      JreAssert((normsFormat != nil), (@"org/apache/lucene/index/DefaultIndexingChain.java:192 condition failed: assert normsFormat != null;"));
+      OrgApacheLuceneCodecsNormsFormat *normsFormat = JreRetainedLocalValue([((OrgApacheLuceneCodecsCodec *) nil_chk([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(state->segmentInfo_)) getCodec])) normsFormat]);
+      JreAssert(normsFormat != nil, @"org/apache/lucene/index/DefaultIndexingChain.java:197 condition failed: assert normsFormat != null;");
       normsConsumer = [((OrgApacheLuceneCodecsNormsFormat *) nil_chk(normsFormat)) normsConsumerWithOrgApacheLuceneIndexSegmentWriteState:state];
       for (OrgApacheLuceneIndexFieldInfo * __strong fi in state->fieldInfos_) {
         OrgApacheLuceneIndexDefaultIndexingChain_PerField *perField = OrgApacheLuceneIndexDefaultIndexingChain_getPerFieldWithNSString_(self, ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi))->name_);
-        JreAssert((perField != nil), (@"org/apache/lucene/index/DefaultIndexingChain.java:197 condition failed: assert perField != null;"));
+        JreAssert(perField != nil, @"org/apache/lucene/index/DefaultIndexingChain.java:202 condition failed: assert perField != null;");
         if ([fi omitsNorms] == false && [fi getIndexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
-          JreAssert((((OrgApacheLuceneIndexDefaultIndexingChain_PerField *) nil_chk(perField))->norms_ != nil), (JreStrcat("$$", @"field=", fi->name_)));
+          JreAssert(((OrgApacheLuceneIndexDefaultIndexingChain_PerField *) nil_chk(perField))->norms_ != nil, JreStrcat("$$", @"field=", fi->name_));
           [((OrgApacheLuceneIndexNormValuesWriter *) nil_chk(perField->norms_)) finishWithInt:[state->segmentInfo_ maxDoc]];
           [((OrgApacheLuceneIndexNormValuesWriter *) nil_chk(perField->norms_)) flushWithOrgApacheLuceneIndexSegmentWriteState:state withOrgApacheLuceneCodecsNormsConsumer:normsConsumer];
         }
@@ -526,14 +556,14 @@ void OrgApacheLuceneIndexDefaultIndexingChain_writeNormsWithOrgApacheLuceneIndex
 
 void OrgApacheLuceneIndexDefaultIndexingChain_rehash(OrgApacheLuceneIndexDefaultIndexingChain *self) {
   jint newHashSize = (((IOSObjectArray *) nil_chk(self->fieldHash_))->size_ * 2);
-  JreAssert((newHashSize > self->fieldHash_->size_), (@"org/apache/lucene/index/DefaultIndexingChain.java:233 condition failed: assert newHashSize > fieldHash.length;"));
+  JreAssert(newHashSize > self->fieldHash_->size_, @"org/apache/lucene/index/DefaultIndexingChain.java:238 condition failed: assert newHashSize > fieldHash.length;");
   IOSObjectArray *newHashArray = [IOSObjectArray arrayWithLength:newHashSize type:OrgApacheLuceneIndexDefaultIndexingChain_PerField_class_()];
   jint newHashMask = newHashSize - 1;
   for (jint j = 0; j < ((IOSObjectArray *) nil_chk(self->fieldHash_))->size_; j++) {
     OrgApacheLuceneIndexDefaultIndexingChain_PerField *fp0 = IOSObjectArray_Get(self->fieldHash_, j);
     while (fp0 != nil) {
       jint hashPos2 = ((jint) [((NSString *) nil_chk(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fp0->fieldInfo_))->name_)) hash]) & newHashMask;
-      OrgApacheLuceneIndexDefaultIndexingChain_PerField *nextFP0 = fp0->next_;
+      OrgApacheLuceneIndexDefaultIndexingChain_PerField *nextFP0 = JreRetainedLocalValue(fp0->next_);
       JreStrongAssign(&fp0->next_, IOSObjectArray_Get(newHashArray, hashPos2));
       IOSObjectArray_Set(newHashArray, hashPos2, fp0);
       fp0 = nextFP0;
@@ -548,8 +578,8 @@ void OrgApacheLuceneIndexDefaultIndexingChain_startStoredFields(OrgApacheLuceneI
     OrgApacheLuceneIndexDefaultIndexingChain_initStoredFieldsWriter(self);
     [((OrgApacheLuceneCodecsStoredFieldsWriter *) nil_chk(self->storedFieldsWriter_)) startDocument];
   }
-  @catch (NSException *th) {
-    @throw OrgApacheLuceneIndexAbortingException_wrapWithNSException_(th);
+  @catch (JavaLangThrowable *th) {
+    @throw nil_chk(OrgApacheLuceneIndexAbortingException_wrapWithJavaLangThrowable_(th));
   }
   self->lastStoredDocID_++;
 }
@@ -558,14 +588,14 @@ void OrgApacheLuceneIndexDefaultIndexingChain_finishStoredFields(OrgApacheLucene
   @try {
     [((OrgApacheLuceneCodecsStoredFieldsWriter *) nil_chk(self->storedFieldsWriter_)) finishDocument];
   }
-  @catch (NSException *th) {
-    @throw OrgApacheLuceneIndexAbortingException_wrapWithNSException_(th);
+  @catch (JavaLangThrowable *th) {
+    @throw nil_chk(OrgApacheLuceneIndexAbortingException_wrapWithJavaLangThrowable_(th));
   }
 }
 
 jint OrgApacheLuceneIndexDefaultIndexingChain_processFieldWithOrgApacheLuceneIndexIndexableField_withLong_withInt_(OrgApacheLuceneIndexDefaultIndexingChain *self, id<OrgApacheLuceneIndexIndexableField> field, jlong fieldGen, jint fieldCount) {
-  NSString *fieldName = [((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) name];
-  id<OrgApacheLuceneIndexIndexableFieldType> fieldType = [field fieldType];
+  NSString *fieldName = JreRetainedLocalValue([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) name]);
+  id<OrgApacheLuceneIndexIndexableFieldType> fieldType = JreRetainedLocalValue([field fieldType]);
   OrgApacheLuceneIndexDefaultIndexingChain_PerField *fp = nil;
   if ([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk(fieldType)) indexOptions] == nil) {
     @throw create_JavaLangNullPointerException_initWithNSString_(JreStrcat("$$$", @"IndexOptions must not be null (field: \"", [field name], @"\")"));
@@ -593,12 +623,12 @@ jint OrgApacheLuceneIndexDefaultIndexingChain_processFieldWithOrgApacheLuceneInd
       @try {
         [((OrgApacheLuceneCodecsStoredFieldsWriter *) nil_chk(self->storedFieldsWriter_)) writeFieldWithOrgApacheLuceneIndexFieldInfo:((OrgApacheLuceneIndexDefaultIndexingChain_PerField *) nil_chk(fp))->fieldInfo_ withOrgApacheLuceneIndexIndexableField:field];
       }
-      @catch (NSException *th) {
-        @throw OrgApacheLuceneIndexAbortingException_wrapWithNSException_(th);
+      @catch (JavaLangThrowable *th) {
+        @throw nil_chk(OrgApacheLuceneIndexAbortingException_wrapWithJavaLangThrowable_(th));
       }
     }
   }
-  OrgApacheLuceneIndexDocValuesType *dvType = [fieldType docValuesType];
+  OrgApacheLuceneIndexDocValuesType *dvType = JreRetainedLocalValue([fieldType docValuesType]);
   if (dvType == nil) {
     @throw create_JavaLangNullPointerException_initWithNSString_(JreStrcat("$$$", @"docValuesType cannot be null (field: \"", fieldName, @"\")"));
   }
@@ -636,31 +666,31 @@ void OrgApacheLuceneIndexDefaultIndexingChain_indexDocValueWithOrgApacheLuceneIn
   switch ([dvType ordinal]) {
     case OrgApacheLuceneIndexDocValuesType_Enum_NUMERIC:
     if (fp->docValuesWriter_ == nil) {
-      JreStrongAssignAndConsume(&fp->docValuesWriter_, new_OrgApacheLuceneIndexNumericDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fp->fieldInfo_, self->bytesUsed_));
+      JreStrongAssignAndConsume(&fp->docValuesWriter_, new_OrgApacheLuceneIndexNumericDocValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fp->fieldInfo_, self->bytesUsed_));
     }
     [((OrgApacheLuceneIndexNumericDocValuesWriter *) cast_chk(fp->docValuesWriter_, [OrgApacheLuceneIndexNumericDocValuesWriter class])) addValueWithInt:docID withLong:[((NSNumber *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) numericValue])) longLongValue]];
     break;
     case OrgApacheLuceneIndexDocValuesType_Enum_BINARY:
     if (fp->docValuesWriter_ == nil) {
-      JreStrongAssignAndConsume(&fp->docValuesWriter_, new_OrgApacheLuceneIndexBinaryDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fp->fieldInfo_, self->bytesUsed_));
+      JreStrongAssignAndConsume(&fp->docValuesWriter_, new_OrgApacheLuceneIndexBinaryDocValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fp->fieldInfo_, self->bytesUsed_));
     }
     [((OrgApacheLuceneIndexBinaryDocValuesWriter *) cast_chk(fp->docValuesWriter_, [OrgApacheLuceneIndexBinaryDocValuesWriter class])) addValueWithInt:docID withOrgApacheLuceneUtilBytesRef:[((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) binaryValue]];
     break;
     case OrgApacheLuceneIndexDocValuesType_Enum_SORTED:
     if (fp->docValuesWriter_ == nil) {
-      JreStrongAssignAndConsume(&fp->docValuesWriter_, new_OrgApacheLuceneIndexSortedDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fp->fieldInfo_, self->bytesUsed_));
+      JreStrongAssignAndConsume(&fp->docValuesWriter_, new_OrgApacheLuceneIndexSortedDocValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fp->fieldInfo_, self->bytesUsed_));
     }
     [((OrgApacheLuceneIndexSortedDocValuesWriter *) cast_chk(fp->docValuesWriter_, [OrgApacheLuceneIndexSortedDocValuesWriter class])) addValueWithInt:docID withOrgApacheLuceneUtilBytesRef:[((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) binaryValue]];
     break;
     case OrgApacheLuceneIndexDocValuesType_Enum_SORTED_NUMERIC:
     if (fp->docValuesWriter_ == nil) {
-      JreStrongAssignAndConsume(&fp->docValuesWriter_, new_OrgApacheLuceneIndexSortedNumericDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fp->fieldInfo_, self->bytesUsed_));
+      JreStrongAssignAndConsume(&fp->docValuesWriter_, new_OrgApacheLuceneIndexSortedNumericDocValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fp->fieldInfo_, self->bytesUsed_));
     }
     [((OrgApacheLuceneIndexSortedNumericDocValuesWriter *) cast_chk(fp->docValuesWriter_, [OrgApacheLuceneIndexSortedNumericDocValuesWriter class])) addValueWithInt:docID withLong:[((NSNumber *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) numericValue])) longLongValue]];
     break;
     case OrgApacheLuceneIndexDocValuesType_Enum_SORTED_SET:
     if (fp->docValuesWriter_ == nil) {
-      JreStrongAssignAndConsume(&fp->docValuesWriter_, new_OrgApacheLuceneIndexSortedSetDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fp->fieldInfo_, self->bytesUsed_));
+      JreStrongAssignAndConsume(&fp->docValuesWriter_, new_OrgApacheLuceneIndexSortedSetDocValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fp->fieldInfo_, self->bytesUsed_));
     }
     [((OrgApacheLuceneIndexSortedSetDocValuesWriter *) cast_chk(fp->docValuesWriter_, [OrgApacheLuceneIndexSortedSetDocValuesWriter class])) addValueWithInt:docID withOrgApacheLuceneUtilBytesRef:[((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) binaryValue]];
     break;
@@ -685,13 +715,13 @@ OrgApacheLuceneIndexDefaultIndexingChain_PerField *OrgApacheLuceneIndexDefaultIn
     fp = fp->next_;
   }
   if (fp == nil) {
-    OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos_Builder *) nil_chk(self->fieldInfos_)) getOrAddWithNSString:name];
+    OrgApacheLuceneIndexFieldInfo *fi = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos_Builder *) nil_chk(self->fieldInfos_)) getOrAddWithNSString:name]);
     [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:[((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk(fieldType)) indexOptions]];
     fp = create_OrgApacheLuceneIndexDefaultIndexingChain_PerField_initWithOrgApacheLuceneIndexDefaultIndexingChain_withOrgApacheLuceneIndexFieldInfo_withBoolean_(self, fi, invert);
     JreStrongAssign(&fp->next_, IOSObjectArray_Get(nil_chk(self->fieldHash_), hashPos));
     IOSObjectArray_Set(self->fieldHash_, hashPos, fp);
     self->totalFieldCount_++;
-    if (self->totalFieldCount_ >= self->fieldHash_->size_ / 2) {
+    if (self->totalFieldCount_ >= JreIntDiv(self->fieldHash_->size_, 2)) {
       OrgApacheLuceneIndexDefaultIndexingChain_rehash(self);
     }
     if (self->totalFieldCount_ > ((IOSObjectArray *) nil_chk(self->fields_))->size_) {
@@ -722,8 +752,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
   JreStrongAssignAndConsume(&invertState_, new_OrgApacheLuceneIndexFieldInvertState_initWithNSString_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo_))->name_));
   JreStrongAssign(&termsHashPerField_, [((OrgApacheLuceneIndexTermsHash *) nil_chk(this$0_->termsHash_)) addFieldWithOrgApacheLuceneIndexFieldInvertState:invertState_ withOrgApacheLuceneIndexFieldInfo:fieldInfo_]);
   if ([fieldInfo_ omitsNorms] == false) {
-    JreAssert((norms_ == nil), (@"org/apache/lucene/index/DefaultIndexingChain.java:557 condition failed: assert norms == null;"));
-    JreStrongAssignAndConsume(&norms_, new_OrgApacheLuceneIndexNormValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fieldInfo_, ((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(((OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *) nil_chk(this$0_->docState_))->docWriter_))->bytesUsed_));
+    JreAssert(norms_ == nil, @"org/apache/lucene/index/DefaultIndexingChain.java:563 condition failed: assert norms == null;");
+    JreStrongAssignAndConsume(&norms_, new_OrgApacheLuceneIndexNormValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(fieldInfo_, ((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(((OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *) nil_chk(this$0_->docState_))->docWriter_))->bytesUsed_));
   }
 }
 
@@ -744,8 +774,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
   if (first) {
     [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(invertState_)) reset];
   }
-  id<OrgApacheLuceneIndexIndexableFieldType> fieldType = [((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) fieldType];
-  OrgApacheLuceneIndexIndexOptions *indexOptions = [((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk(fieldType)) indexOptions];
+  id<OrgApacheLuceneIndexIndexableFieldType> fieldType = JreRetainedLocalValue([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) fieldType]);
+  OrgApacheLuceneIndexIndexOptions *indexOptions = JreRetainedLocalValue([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk(fieldType)) indexOptions]);
   [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo_)) setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:indexOptions];
   if ([fieldType omitNorms]) {
     [fieldInfo_ setOmitsNorms];
@@ -755,7 +785,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
   jboolean succeededInProcessingField = false;
   @try {
     OrgApacheLuceneAnalysisTokenStream *stream = JreStrongAssign(&tokenStream_, [field tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:((OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *) nil_chk(this$0_->docState_))->analyzer_ withOrgApacheLuceneAnalysisTokenStream:tokenStream_]);
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [stream reset];
       [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(invertState_)) setAttributeSourceWithOrgApacheLuceneUtilAttributeSource:stream];
@@ -795,16 +825,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
         }
         @catch (OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException *e) {
           IOSByteArray *prefix = [IOSByteArray arrayWithLength:30];
-          OrgApacheLuceneUtilBytesRef *bigTerm = [((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(((OrgApacheLuceneIndexFieldInvertState *) nil_chk(invertState_))->termAttribute_)) getBytesRef];
+          OrgApacheLuceneUtilBytesRef *bigTerm = JreRetainedLocalValue([((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(((OrgApacheLuceneIndexFieldInvertState *) nil_chk(invertState_))->termAttribute_)) getBytesRef]);
           JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(bigTerm))->bytes_, bigTerm->offset_, prefix, 0, 30);
-          NSString *msg = JreStrcat("$$$I$$$$", @"Document contains at least one immense term in field=\"", fieldInfo_->name_, @"\" (whose UTF8 encoding is longer than the max length ", OrgApacheLuceneIndexDocumentsWriterPerThread_MAX_TERM_LENGTH_UTF8, @"), all of which were skipped.  Please correct the analyzer to not produce such terms.  The prefix of the first immense term is: '", JavaUtilArrays_toStringWithByteArray_(prefix), @"...', original message: ", [((OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException *) nil_chk(e)) getMessage]);
+          NSString *msg = JreStrcat("$$$I$$$$", @"Document contains at least one immense term in field=\"", fieldInfo_->name_, @"\" (whose UTF8 encoding is longer than the max length ", OrgApacheLuceneIndexDocumentsWriterPerThread_MAX_TERM_LENGTH_UTF8, @"), all of which were skipped.  Please correct the analyzer to not produce such terms.  The prefix of the first immense term is: '", JavaUtilArrays_toStringWithByteArray_(prefix), @"...', original message: ", [e getMessage]);
           if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(this$0_->docState_->infoStream_)) isEnabledWithNSString:@"IW"]) {
             [((OrgApacheLuceneUtilInfoStream *) nil_chk(this$0_->docState_->infoStream_)) messageWithNSString:@"IW" withNSString:JreStrcat("$$", @"ERROR: ", msg)];
           }
-          @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(msg, e);
+          @throw create_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(msg, e);
         }
-        @catch (NSException *th) {
-          @throw OrgApacheLuceneIndexAbortingException_wrapWithNSException_(th);
+        @catch (JavaLangThrowable *th) {
+          @throw nil_chk(OrgApacheLuceneIndexAbortingException_wrapWithJavaLangThrowable_(th));
         }
       }
       [stream end];
@@ -812,7 +842,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
       ((OrgApacheLuceneIndexFieldInvertState *) nil_chk(invertState_))->offset_ += [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(invertState_->offsetAttribute_)) endOffset];
       succeededInProcessingField = true;
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -821,10 +851,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
         if (__primaryException1 != nil) {
           @try {
             [stream close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [stream close];
         }
       }
@@ -842,8 +874,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
   JreTimesAssignFloatF(&((OrgApacheLuceneIndexFieldInvertState *) nil_chk(invertState_))->boost_, [field boost]);
 }
 
+- (void)__javaClone:(OrgApacheLuceneIndexDefaultIndexingChain_PerField *)original {
+  [super __javaClone:original];
+  [this$0_ release];
+}
+
 - (void)dealloc {
-  RELEASE_(this$0_);
   RELEASE_(fieldInfo_);
   RELEASE_(similarity_);
   RELEASE_(invertState_);
@@ -857,34 +893,44 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexDefaultIndexingChain:withOrgApacheLuceneIndexFieldInfo:withBoolean:", "PerField", NULL, 0x1, NULL, NULL },
-    { "setInvertState", NULL, "V", 0x0, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
-    { "finish", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "invertWithOrgApacheLuceneIndexIndexableField:withBoolean:", "invert", "V", 0x1, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexDefaultIndexingChain:withOrgApacheLuceneIndexFieldInfo:withBoolean:);
+  methods[1].selector = @selector(setInvertState);
+  methods[2].selector = @selector(compareToWithId:);
+  methods[3].selector = @selector(finish);
+  methods[4].selector = @selector(invertWithOrgApacheLuceneIndexIndexableField:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.DefaultIndexingChain;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfo_", NULL, 0x10, "Lorg.apache.lucene.index.FieldInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "similarity_", NULL, 0x10, "Lorg.apache.lucene.search.similarities.Similarity;", NULL, NULL, .constantValue.asLong = 0 },
-    { "invertState_", NULL, 0x0, "Lorg.apache.lucene.index.FieldInvertState;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termsHashPerField_", NULL, 0x0, "Lorg.apache.lucene.index.TermsHashPerField;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docValuesWriter_", NULL, 0x0, "Lorg.apache.lucene.index.DocValuesWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldGen_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x0, "Lorg.apache.lucene.index.DefaultIndexingChain$PerField;", NULL, NULL, .constantValue.asLong = 0 },
-    { "norms_", NULL, 0x0, "Lorg.apache.lucene.index.NormValuesWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenStream_", NULL, 0x0, "Lorg.apache.lucene.analysis.TokenStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexOptions_", NULL, 0x0, "Lorg.apache.lucene.index.IndexOptions;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexDefaultIndexingChain;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "fieldInfo_", "LOrgApacheLuceneIndexFieldInfo;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "similarity_", "LOrgApacheLuceneSearchSimilaritiesSimilarity;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "invertState_", "LOrgApacheLuceneIndexFieldInvertState;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "termsHashPerField_", "LOrgApacheLuceneIndexTermsHashPerField;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "docValuesWriter_", "LOrgApacheLuceneIndexDocValuesWriter;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fieldGen_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "next_", "LOrgApacheLuceneIndexDefaultIndexingChain_PerField;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "norms_", "LOrgApacheLuceneIndexNormValuesWriter;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "tokenStream_", "LOrgApacheLuceneAnalysisTokenStream;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "indexOptions_", "LOrgApacheLuceneIndexIndexOptions;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDefaultIndexingChain_PerField = { 2, "PerField", "org.apache.lucene.index", "DefaultIndexingChain", 0x12, 5, methods, 11, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/DefaultIndexingChain$PerField;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexDefaultIndexingChain;LOrgApacheLuceneIndexFieldInfo;Z", "compareTo", "LOrgApacheLuceneIndexDefaultIndexingChain_PerField;", "LJavaIoIOException;", "invert", "LOrgApacheLuceneIndexIndexableField;Z", "LJavaIoIOException;LOrgApacheLuceneIndexAbortingException;", "LOrgApacheLuceneIndexDefaultIndexingChain;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/DefaultIndexingChain$PerField;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDefaultIndexingChain_PerField = { "PerField", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x12, 5, 11, 7, -1, -1, 8, -1 };
   return &_OrgApacheLuceneIndexDefaultIndexingChain_PerField;
 }
 
 @end
 
 void OrgApacheLuceneIndexDefaultIndexingChain_PerField_initWithOrgApacheLuceneIndexDefaultIndexingChain_withOrgApacheLuceneIndexFieldInfo_withBoolean_(OrgApacheLuceneIndexDefaultIndexingChain_PerField *self, OrgApacheLuceneIndexDefaultIndexingChain *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo, jboolean invert) {
-  JreStrongAssign(&self->this$0_, outer$);
+  self->this$0_ = outer$;
   NSObject_init(self);
   self->fieldGen_ = -1;
   JreStrongAssign(&self->fieldInfo_, fieldInfo);

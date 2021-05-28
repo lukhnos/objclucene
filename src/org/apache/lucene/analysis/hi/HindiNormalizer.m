@@ -8,7 +8,18 @@
 #include "org/apache/lucene/analysis/hi/HindiNormalizer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/hi/HindiNormalizer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisHiHindiNormalizer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisHiHindiNormalizer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)normalizeWithCharArray:(IOSCharArray *)s
                        withInt:(jint)len {
@@ -134,19 +145,19 @@
   return len;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisHiHindiNormalizer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
-    { "init", "HindiNormalizer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHiHindiNormalizer = { 2, "HindiNormalizer", "org.apache.lucene.analysis.hi", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(normalizeWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "normalize", "[CI" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHiHindiNormalizer = { "HindiNormalizer", "org.apache.lucene.analysis.hi", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisHiHindiNormalizer;
 }
 

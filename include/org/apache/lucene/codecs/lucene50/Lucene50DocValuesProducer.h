@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer))
 #define OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_
 
@@ -75,16 +81,16 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *)original;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *)original;
 
 /*!
  @brief expert: instantiates a new reader
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state
-                                                withNSString:(NSString *)dataCodec
-                                                withNSString:(NSString *)dataExtension
-                                                withNSString:(NSString *)metaCodec
-                                                withNSString:(NSString *)metaExtension;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state
+                                                                        withNSString:(NSString *)dataCodec
+                                                                        withNSString:(NSString *)dataExtension
+                                                                        withNSString:(NSString *)metaCodec
+                                                                        withNSString:(NSString *)metaExtension;
 
 - (OrgApacheLuceneUtilLongValues *)getNumericWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_NumericEntry:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_NumericEntry *)entry_;
 
@@ -92,25 +98,60 @@
 
 - (OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_SortedSetEntry *)readSortedSetEntryWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)meta;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *self, OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *original);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initPackagePrivateWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *self, OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *original);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *original) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initPackagePrivateWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *original) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *original);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initPackagePrivateWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *original);
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *self, OrgApacheLuceneIndexSegmentReadState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *self, OrgApacheLuceneIndexSegmentReadState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentReadState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentReadState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentReadState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentReadState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_BinaryEntry *OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_readBinaryEntryWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *meta);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer)
+
+#endif
+
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues))
+#define OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues_
+
+#define RESTRICT_OrgApacheLuceneIndexBinaryDocValues 1
+#define INCLUDE_OrgApacheLuceneIndexBinaryDocValues 1
+#include "org/apache/lucene/index/BinaryDocValues.h"
+
+@class OrgApacheLuceneUtilBytesRef;
+
+@interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues : OrgApacheLuceneIndexBinaryDocValues
+
+#pragma mark Public
+
+- (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)docID;
+
+#pragma mark Package-Private
+
+- (instancetype __nonnull)init;
+
+- (OrgApacheLuceneUtilBytesRef *)getWithLong:(jlong)id_;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues)
+
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues_init(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues)
 
 #endif
 
@@ -244,37 +285,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 
 #endif
 
-#if !defined (OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues))
-#define OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues_
-
-#define RESTRICT_OrgApacheLuceneIndexBinaryDocValues 1
-#define INCLUDE_OrgApacheLuceneIndexBinaryDocValues 1
-#include "org/apache/lucene/index/BinaryDocValues.h"
-
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues : OrgApacheLuceneIndexBinaryDocValues
-
-#pragma mark Public
-
-- (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)docID;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
-
-- (OrgApacheLuceneUtilBytesRef *)getWithLong:(jlong)id_;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues)
-
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues_init(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues *self);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues)
-
-#endif
-
 #if !defined (OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex))
 #define OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex_
 
@@ -302,7 +312,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -313,9 +323,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_Rever
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex_init(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex)
 
@@ -348,10 +358,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_BinaryEntry:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_BinaryEntry *)bytes
-                                   withOrgApacheLuceneUtilPackedMonotonicBlockPackedReader:(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *)addresses
-              withOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex *)index
-                                                        withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)data;
+- (instancetype __nonnull)initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_BinaryEntry:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_BinaryEntry *)bytes
+                                             withOrgApacheLuceneUtilPackedMonotonicBlockPackedReader:(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *)addresses
+                        withOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex *)index
+                                                                  withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)data;
 
 - (OrgApacheLuceneUtilBytesRef *)getWithLong:(jlong)id_;
 
@@ -360,6 +370,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnum;
 
 - (jlong)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -417,14 +431,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_CompressedBinaryDocValues:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_CompressedBinaryDocValues *)outer$
-                                                                      withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_CompressedBinaryDocValues:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_CompressedBinaryDocValues *)outer$
+                                                                                withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)input;
 
 - (jlong)binarySearchBlockWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text
                                                  withLong:(jlong)low
                                                  withLong:(jlong)high;
 
 - (jlong)binarySearchIndexWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -440,4 +458,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer")

@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/MappedMultiFields.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "org/apache/lucene/index/Fields.h"
 #include "org/apache/lucene/index/FilterLeafReader.h"
@@ -19,6 +17,10 @@
 #include "org/apache/lucene/index/PostingsEnum.h"
 #include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/index/TermsEnum.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MappedMultiFields must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms : OrgApacheLuceneIndexFilterLeafReader_FilterTerms {
  @public
@@ -106,7 +108,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerm
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -115,15 +117,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerm
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexMergeState:withOrgApacheLuceneIndexMultiFields:", "MappedMultiFields", NULL, 0x1, NULL, NULL },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexMergeState:withOrgApacheLuceneIndexMultiFields:);
+  methods[1].selector = @selector(termsWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "mergeState_", NULL, 0x10, "Lorg.apache.lucene.index.MergeState;", NULL, NULL, .constantValue.asLong = 0 },
+    { "mergeState_", "LOrgApacheLuceneIndexMergeState;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.MappedMultiFields$MappedMultiTerms;", "Lorg.apache.lucene.index.MappedMultiFields$MappedMultiTermsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMappedMultiFields = { 2, "MappedMultiFields", "org.apache.lucene.index", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexMergeState;LOrgApacheLuceneIndexMultiFields;", "terms", "LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms;LOrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMappedMultiFields = { "MappedMultiFields", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 2, 1, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMappedMultiFields;
 }
 
@@ -180,19 +188,30 @@ withOrgApacheLuceneIndexMultiTerms:(OrgApacheLuceneIndexMultiTerms *)multiTerms 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneIndexMergeState:withOrgApacheLuceneIndexMultiTerms:", "MappedMultiTerms", NULL, 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "size", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSumTotalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSumDocFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "getDocCount", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneIndexMergeState:withOrgApacheLuceneIndexMultiTerms:);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(size);
+  methods[3].selector = @selector(getSumTotalTermFreq);
+  methods[4].selector = @selector(getSumDocFreq);
+  methods[5].selector = @selector(getDocCount);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "mergeState_", NULL, 0x10, "Lorg.apache.lucene.index.MergeState;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "mergeState_", "LOrgApacheLuceneIndexMergeState;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms = { 2, "MappedMultiTerms", "org.apache.lucene.index", "MappedMultiFields", 0xa, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneIndexMergeState;LOrgApacheLuceneIndexMultiTerms;", "LJavaIoIOException;", "LOrgApacheLuceneIndexMappedMultiFields;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms = { "MappedMultiTerms", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 6, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms;
 }
 
@@ -235,16 +254,16 @@ withOrgApacheLuceneIndexMultiTermsEnum:(OrgApacheLuceneIndexMultiTermsEnum *)mul
                                                                            withInt:(jint)flags {
   OrgApacheLuceneIndexMappingMultiPostingsEnum *mappingDocsAndPositionsEnum;
   if ([reuse isKindOfClass:[OrgApacheLuceneIndexMappingMultiPostingsEnum class]]) {
-    OrgApacheLuceneIndexMappingMultiPostingsEnum *postings = (OrgApacheLuceneIndexMappingMultiPostingsEnum *) cast_chk(reuse, [OrgApacheLuceneIndexMappingMultiPostingsEnum class]);
+    OrgApacheLuceneIndexMappingMultiPostingsEnum *postings = (OrgApacheLuceneIndexMappingMultiPostingsEnum *) reuse;
     if ([((NSString *) nil_chk(((OrgApacheLuceneIndexMappingMultiPostingsEnum *) nil_chk(postings))->field_)) isEqual:self->field_]) {
       mappingDocsAndPositionsEnum = postings;
     }
     else {
-      mappingDocsAndPositionsEnum = create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(field_, mergeState_);
+      mappingDocsAndPositionsEnum = create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_(field_, mergeState_);
     }
   }
   else {
-    mappingDocsAndPositionsEnum = create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(field_, mergeState_);
+    mappingDocsAndPositionsEnum = create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_(field_, mergeState_);
   }
   OrgApacheLuceneIndexMultiPostingsEnum *docsAndPositionsEnum = (OrgApacheLuceneIndexMultiPostingsEnum *) cast_chk([((OrgApacheLuceneIndexTermsEnum *) nil_chk(in_)) postingsWithOrgApacheLuceneIndexPostingsEnum:mappingDocsAndPositionsEnum->multiDocsAndPositionsEnum_ withInt:flags], [OrgApacheLuceneIndexMultiPostingsEnum class]);
   [mappingDocsAndPositionsEnum resetWithOrgApacheLuceneIndexMultiPostingsEnum:docsAndPositionsEnum];
@@ -258,17 +277,26 @@ withOrgApacheLuceneIndexMultiTermsEnum:(OrgApacheLuceneIndexMultiTermsEnum *)mul
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneIndexMergeState:withOrgApacheLuceneIndexMultiTermsEnum:", "MappedMultiTermsEnum", NULL, 0x1, NULL, NULL },
-    { "docFreq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "totalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 2, 3, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneIndexMergeState:withOrgApacheLuceneIndexMultiTermsEnum:);
+  methods[1].selector = @selector(docFreq);
+  methods[2].selector = @selector(totalTermFreq);
+  methods[3].selector = @selector(postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "mergeState_", NULL, 0x10, "Lorg.apache.lucene.index.MergeState;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "mergeState_", "LOrgApacheLuceneIndexMergeState;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum = { 2, "MappedMultiTermsEnum", "org.apache.lucene.index", "MappedMultiFields", 0xa, 4, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneIndexMergeState;LOrgApacheLuceneIndexMultiTermsEnum;", "LJavaIoIOException;", "postings", "LOrgApacheLuceneIndexPostingsEnum;I", "LOrgApacheLuceneIndexMappedMultiFields;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum = { "MappedMultiTermsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 4, 2, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum;
 }
 

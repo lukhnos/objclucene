@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCommongramsCommonGramsFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCommongramsCommonGramsFilter))
 #define OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_
 
@@ -24,63 +30,65 @@
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
 /*!
- @brief Construct bigrams for frequently occurring terms while indexing.
- Single terms
- are still indexed too, with bigrams overlaid. This is achieved through the
- use of <code>PositionIncrementAttribute.setPositionIncrement(int)</code>. Bigrams have a type
- of <code>GRAM_TYPE</code> Example:
+ @brief Construct bigrams for frequently occurring terms while indexing.Single terms
+  are still indexed too, with bigrams overlaid.
+ This is achieved through the
+  use of <code>PositionIncrementAttribute.setPositionIncrement(int)</code>. Bigrams have a type
+  of <code>GRAM_TYPE</code> Example: 
  <ul>
- <li>input:"the quick brown fox"</li>
- <li>output:|"the","the-quick"|"brown"|"fox"|</li>
- <li>"the-quick" has a position increment of 0 so it is in the same position
- as "the" "the-quick" has a term.type() of "gram"</li>
+  <li>input:"the quick brown fox"</li>
+  <li>output:|"the","the-quick"|"brown"|"fox"|</li>
+  <li>"the-quick" has a position increment of 0 so it is in the same position
+  as "the" "the-quick" has a term.type() of "gram"</li>
+   
  </ul>
  */
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsFilter : OrgApacheLuceneAnalysisTokenFilter
-
-+ (NSString *)GRAM_TYPE;
+@property (readonly, copy, class) NSString *GRAM_TYPE NS_SWIFT_NAME(GRAM_TYPE);
 
 #pragma mark Public
 
 /*!
  @brief Construct a token stream filtering the given input using a Set of common
- words to create bigrams.
- Outputs both unigrams with position increment and
- bigrams with position increment 0 type=gram where one or both of the words
- in a potential bigram are in the set of common words .
+  words to create bigrams.Outputs both unigrams with position increment and
+  bigrams with position increment 0 type=gram where one or both of the words
+  in a potential bigram are in the set of common words .
  @param input TokenStream input in filter chain
  @param commonWords The set of common words.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)commonWords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)commonWords;
 
 /*!
- @brief Inserts bigrams for common words into a token stream.
- For each input token,
- output the token. If the token and/or the following token are in the list
- of common words also output a bigram with position increment 0 and
- type="gram"
- TODO:Consider adding an option to not emit unigram stopwords
- as in CDL XTF BigramStopFilter, CommonGramsQueryFilter would need to be
- changed to work with this.
- TODO: Consider optimizing for the case of three
- commongrams i.e "man of the year" normally produces 3 bigrams: "man-of",
- "of-the", "the-year" but with proper management of positions we could
- eliminate the middle bigram "of-the"and save a disk seek and a whole set of
- position lookups.
+ @brief Inserts bigrams for common words into a token stream.For each input token,
+  output the token.
+ If the token and/or the following token are in the list
+  of common words also output a bigram with position increment 0 and
+  type="gram"
+  TODO:Consider adding an option to not emit unigram stopwords
+  as in CDL XTF BigramStopFilter, CommonGramsQueryFilter would need to be
+  changed to work with this.
+  TODO: Consider optimizing for the case of three
+  commongrams i.e "man of the year" normally produces 3 bigrams: "man-of",
+  "of-the", "the-year" but with proper management of positions we could
+  eliminate the middle bigram "of-the"and save a disk seek and a whole set of
+  position lookups.
  */
 - (jboolean)incrementToken;
 
 /*!
- 
  */
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter)
 
-inline NSString *OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_get_GRAM_TYPE();
+inline NSString *OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_get_GRAM_TYPE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter, GRAM_TYPE, NSString *)
@@ -95,4 +103,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsFilter")

@@ -4,12 +4,17 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/store/FlushInfo.h"
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/MergeInfo.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/IOContext must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreIOContext ()
 
@@ -104,9 +109,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneStoreIOContext *other = (OrgApacheLuceneStoreIOContext *) cast_chk(obj, [OrgApacheLuceneStoreIOContext class]);
   if (context_ != other->context_) return false;
   if (flushInfo_ == nil) {
@@ -132,6 +137,47 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreFlushInfo:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneStoreIOContext_Context:);
+  methods[3].selector = @selector(initWithBoolean:);
+  methods[4].selector = @selector(initWithOrgApacheLuceneStoreMergeInfo:);
+  methods[5].selector = @selector(initWithOrgApacheLuceneStoreIOContext_Context:withOrgApacheLuceneStoreMergeInfo:);
+  methods[6].selector = @selector(initWithOrgApacheLuceneStoreIOContext:withBoolean:);
+  methods[7].selector = @selector(hash);
+  methods[8].selector = @selector(isEqual:);
+  methods[9].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "context_", "LOrgApacheLuceneStoreIOContext_Context;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "mergeInfo_", "LOrgApacheLuceneStoreMergeInfo;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "flushInfo_", "LOrgApacheLuceneStoreFlushInfo;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "readOnce_", "Z", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "DEFAULT", "LOrgApacheLuceneStoreIOContext;", .constantValue.asLong = 0, 0x19, -1, 10, -1, -1 },
+    { "READONCE", "LOrgApacheLuceneStoreIOContext;", .constantValue.asLong = 0, 0x19, -1, 11, -1, -1 },
+    { "READ", "LOrgApacheLuceneStoreIOContext;", .constantValue.asLong = 0, 0x19, -1, 12, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreFlushInfo;", "LOrgApacheLuceneStoreIOContext_Context;", "Z", "LOrgApacheLuceneStoreMergeInfo;", "LOrgApacheLuceneStoreIOContext_Context;LOrgApacheLuceneStoreMergeInfo;", "LOrgApacheLuceneStoreIOContext;Z", "hashCode", "equals", "LNSObject;", "toString", &OrgApacheLuceneStoreIOContext_DEFAULT, &OrgApacheLuceneStoreIOContext_READONCE, &OrgApacheLuceneStoreIOContext_READ };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreIOContext = { "IOContext", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 10, 7, -1, 1, -1, -1, -1 };
+  return &_OrgApacheLuceneStoreIOContext;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneStoreIOContext class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneStoreIOContext_DEFAULT, new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_Context_(JreLoadEnum(OrgApacheLuceneStoreIOContext_Context, DEFAULT)));
@@ -139,33 +185,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssignAndConsume(&OrgApacheLuceneStoreIOContext_READ, new_OrgApacheLuceneStoreIOContext_initWithBoolean_(false));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneStoreIOContext)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "IOContext", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreFlushInfo:", "IOContext", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreIOContext_Context:", "IOContext", NULL, 0x1, NULL, NULL },
-    { "initWithBoolean:", "IOContext", NULL, 0x2, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreMergeInfo:", "IOContext", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreIOContext_Context:withOrgApacheLuceneStoreMergeInfo:", "IOContext", NULL, 0x2, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreIOContext:withBoolean:", "IOContext", NULL, 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "context_", NULL, 0x11, "Lorg.apache.lucene.store.IOContext$Context;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mergeInfo_", NULL, 0x11, "Lorg.apache.lucene.store.MergeInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "flushInfo_", NULL, 0x11, "Lorg.apache.lucene.store.FlushInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "readOnce_", NULL, 0x11, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT", "DEFAULT", 0x19, "Lorg.apache.lucene.store.IOContext;", &OrgApacheLuceneStoreIOContext_DEFAULT, NULL, .constantValue.asLong = 0 },
-    { "READONCE", "READONCE", 0x19, "Lorg.apache.lucene.store.IOContext;", &OrgApacheLuceneStoreIOContext_READONCE, NULL, .constantValue.asLong = 0 },
-    { "READ", "READ", 0x19, "Lorg.apache.lucene.store.IOContext;", &OrgApacheLuceneStoreIOContext_READ, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.store.IOContext$Context;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreIOContext = { 2, "IOContext", "org.apache.lucene.store", NULL, 0x1, 10, methods, 7, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneStoreIOContext;
 }
 
 @end
@@ -184,7 +203,7 @@ OrgApacheLuceneStoreIOContext *create_OrgApacheLuceneStoreIOContext_init() {
 
 void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_(OrgApacheLuceneStoreIOContext *self, OrgApacheLuceneStoreFlushInfo *flushInfo) {
   NSObject_init(self);
-  JreAssert((flushInfo != nil), (@"org/apache/lucene/store/IOContext.java:58 condition failed: assert flushInfo != null;"));
+  JreAssert(flushInfo != nil, @"org/apache/lucene/store/IOContext.java:58 condition failed: assert flushInfo != null;");
   JreStrongAssign(&self->context_, JreLoadEnum(OrgApacheLuceneStoreIOContext_Context, FLUSH));
   JreStrongAssign(&self->mergeInfo_, nil);
   self->readOnce_ = false;
@@ -241,8 +260,8 @@ OrgApacheLuceneStoreIOContext *create_OrgApacheLuceneStoreIOContext_initWithOrgA
 
 void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_Context_withOrgApacheLuceneStoreMergeInfo_(OrgApacheLuceneStoreIOContext *self, OrgApacheLuceneStoreIOContext_Context *context, OrgApacheLuceneStoreMergeInfo *mergeInfo) {
   NSObject_init(self);
-  JreAssert((context != JreLoadEnum(OrgApacheLuceneStoreIOContext_Context, MERGE) || mergeInfo != nil), (@"MergeInfo must not be null if context is MERGE"));
-  JreAssert((context != JreLoadEnum(OrgApacheLuceneStoreIOContext_Context, FLUSH)), (@"Use IOContext(FlushInfo) to create a FLUSH IOContext"));
+  JreAssert(context != JreLoadEnum(OrgApacheLuceneStoreIOContext_Context, MERGE) || mergeInfo != nil, @"MergeInfo must not be null if context is MERGE");
+  JreAssert(context != JreLoadEnum(OrgApacheLuceneStoreIOContext_Context, FLUSH), @"Use IOContext(FlushInfo) to create a FLUSH IOContext");
   JreStrongAssign(&self->context_, context);
   self->readOnce_ = false;
   JreStrongAssign(&self->mergeInfo_, mergeInfo);
@@ -309,8 +328,26 @@ OrgApacheLuceneStoreIOContext_Context *OrgApacheLuceneStoreIOContext_Context_val
   return (OrgApacheLuceneStoreIOContext_Context_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneStoreIOContext_Context;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIOContext_Context;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "MERGE", "LOrgApacheLuceneStoreIOContext_Context;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "READ", "LOrgApacheLuceneStoreIOContext_Context;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "FLUSH", "LOrgApacheLuceneStoreIOContext_Context;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "DEFAULT", "LOrgApacheLuceneStoreIOContext_Context;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneStoreIOContext_Context, MERGE), &JreEnum(OrgApacheLuceneStoreIOContext_Context, READ), &JreEnum(OrgApacheLuceneStoreIOContext_Context, FLUSH), &JreEnum(OrgApacheLuceneStoreIOContext_Context, DEFAULT), "LOrgApacheLuceneStoreIOContext;", "Ljava/lang/Enum<Lorg/apache/lucene/store/IOContext$Context;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreIOContext_Context = { "Context", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x4019, 2, 4, 6, -1, -1, 7, -1 };
+  return &_OrgApacheLuceneStoreIOContext_Context;
 }
 
 + (void)initialize {
@@ -319,28 +356,12 @@ OrgApacheLuceneStoreIOContext_Context *OrgApacheLuceneStoreIOContext_Context_val
     size_t allocSize = 4 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneStoreIOContext_Context, MERGE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneStoreIOContext_Context_initWithNSString_withInt_(e, @"MERGE", 0);
-    (JreEnum(OrgApacheLuceneStoreIOContext_Context, READ) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneStoreIOContext_Context_initWithNSString_withInt_(e, @"READ", 1);
-    (JreEnum(OrgApacheLuceneStoreIOContext_Context, FLUSH) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneStoreIOContext_Context_initWithNSString_withInt_(e, @"FLUSH", 2);
-    (JreEnum(OrgApacheLuceneStoreIOContext_Context, DEFAULT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneStoreIOContext_Context_initWithNSString_withInt_(e, @"DEFAULT", 3);
+    for (jint i = 0; i < 4; i++) {
+      ((void)(OrgApacheLuceneStoreIOContext_Context_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneStoreIOContext_Context_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneStoreIOContext_Context_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneStoreIOContext_Context)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "MERGE", "MERGE", 0x4019, "Lorg.apache.lucene.store.IOContext$Context;", &JreEnum(OrgApacheLuceneStoreIOContext_Context, MERGE), NULL, .constantValue.asLong = 0 },
-    { "READ", "READ", 0x4019, "Lorg.apache.lucene.store.IOContext$Context;", &JreEnum(OrgApacheLuceneStoreIOContext_Context, READ), NULL, .constantValue.asLong = 0 },
-    { "FLUSH", "FLUSH", 0x4019, "Lorg.apache.lucene.store.IOContext$Context;", &JreEnum(OrgApacheLuceneStoreIOContext_Context, FLUSH), NULL, .constantValue.asLong = 0 },
-    { "DEFAULT", "DEFAULT", 0x4019, "Lorg.apache.lucene.store.IOContext$Context;", &JreEnum(OrgApacheLuceneStoreIOContext_Context, DEFAULT), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.store.IOContext$Context;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreIOContext_Context = { 2, "Context", "org.apache.lucene.store", "IOContext", 0x4019, 0, NULL, 4, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/store/IOContext$Context;>;" };
-  return &_OrgApacheLuceneStoreIOContext_Context;
 }
 
 @end
@@ -362,7 +383,7 @@ OrgApacheLuceneStoreIOContext_Context *OrgApacheLuceneStoreIOContext_Context_val
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

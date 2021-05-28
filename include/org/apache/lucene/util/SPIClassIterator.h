@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilSPIClassIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilSPIClassIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilSPIClassIterator || defined(INCLUDE_OrgApacheLuceneUtilSPIClassIterator))
 #define OrgApacheLuceneUtilSPIClassIterator_
 
@@ -22,12 +28,13 @@
 
 @class IOSClass;
 @class JavaLangClassLoader;
+@protocol JavaUtilFunctionConsumer;
 
 /*!
  @brief Helper class for loading SPI classes from classpath (META-INF files).
  This is a light impl of <code>java.util.ServiceLoader</code> but is guaranteed to
- be bug-free regarding classpath order and does not instantiate or initialize
- the classes found.
+  be bug-free regarding classpath order and does not instantiate or initialize
+  the classes found.
  */
 @interface OrgApacheLuceneUtilSPIClassIterator : NSObject < JavaUtilIterator >
 
@@ -42,7 +49,7 @@
 
 /*!
  @brief Utility method to check if some class loader is a (grand-)parent of or the same as another one.
- This means the child will be able to load all classes from the parent, too. 
+ This means the child will be able to load all classes from the parent, too.
  */
 + (jboolean)isParentClassLoaderWithJavaLangClassLoader:(JavaLangClassLoader *)parent
                                withJavaLangClassLoader:(JavaLangClassLoader *)child;
@@ -50,6 +57,10 @@
 - (IOSClass *)next;
 
 - (void)remove;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -65,4 +76,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSPIClassIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSPIClassIterator")

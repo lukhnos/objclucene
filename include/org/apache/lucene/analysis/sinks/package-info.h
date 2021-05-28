@@ -5,8 +5,8 @@
 
 /*!
  @brief <code>org.apache.lucene.analysis.sinks.TeeSinkTokenFilter</code> and implementations
- of <code>org.apache.lucene.analysis.sinks.TeeSinkTokenFilter.SinkFilter</code> that
- might be useful.
+  of <code>org.apache.lucene.analysis.sinks.TeeSinkTokenFilter.SinkFilter</code> that
+  might be useful.
  */
 #include "J2ObjC_header.h"
 
@@ -18,4 +18,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisSinksPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSinksPackage_info")

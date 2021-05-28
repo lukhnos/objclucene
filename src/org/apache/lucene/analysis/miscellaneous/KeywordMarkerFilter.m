@@ -5,12 +5,14 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/KeywordMarkerFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/KeywordAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/KeywordMarkerFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter () {
  @public
@@ -52,15 +54,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter, key
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "KeywordMarkerFilter", NULL, 0x4, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "isKeyword", NULL, "Z", 0x404, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x404, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  methods[2].selector = @selector(isKeyword);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "keywordAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.KeywordAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "keywordAttr_", "LOrgApacheLuceneAnalysisTokenattributesKeywordAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter = { 2, "KeywordMarkerFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x401, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter = { "KeywordMarkerFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x401, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter;
 }
 

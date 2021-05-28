@@ -3,9 +3,7 @@
 //  source: ./join/src/java/org/apache/lucene/search/join/TermsCollector.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/BinaryDocValues.h"
 #include "org/apache/lucene/index/DocValues.h"
 #include "org/apache/lucene/index/LeafReader.h"
@@ -15,6 +13,10 @@
 #include "org/apache/lucene/search/join/TermsCollector.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefHash.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/TermsCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchJoinTermsCollector_MV () {
  @public
@@ -36,8 +38,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsCollector_SV, fromDocTerms_, O
 
 @implementation OrgApacheLuceneSearchJoinTermsCollector
 
-- (instancetype)initWithNSString:(NSString *)field {
-  OrgApacheLuceneSearchJoinTermsCollector_initWithNSString_(self, field);
+- (instancetype)initPackagePrivateWithNSString:(NSString *)field {
+  OrgApacheLuceneSearchJoinTermsCollector_initPackagePrivateWithNSString_(self, field);
   return self;
 }
 
@@ -61,24 +63,32 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsCollector_SV, fromDocTerms_, O
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "TermsCollector", NULL, 0x0, NULL, NULL },
-    { "getCollectorTerms", NULL, "Lorg.apache.lucene.util.BytesRefHash;", 0x1, NULL, NULL },
-    { "createWithNSString:withBoolean:", "create", "Lorg.apache.lucene.search.join.TermsCollector;", 0x8, NULL, NULL },
-    { "needsScores", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRefHash;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchJoinTermsCollector;", 0x8, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithNSString:);
+  methods[1].selector = @selector(getCollectorTerms);
+  methods[2].selector = @selector(createWithNSString:withBoolean:);
+  methods[3].selector = @selector(needsScores);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "collectorTerms_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRefHash;", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "collectorTerms_", "LOrgApacheLuceneUtilBytesRefHash;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.join.TermsCollector$MV;", "Lorg.apache.lucene.search.join.TermsCollector$SV;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsCollector = { 2, "TermsCollector", "org.apache.lucene.search.join", NULL, 0x400, 4, methods, 2, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "create", "LNSString;Z", "LOrgApacheLuceneSearchJoinTermsCollector_MV;LOrgApacheLuceneSearchJoinTermsCollector_SV;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsCollector = { "TermsCollector", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x400, 4, 2, -1, 3, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinTermsCollector;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinTermsCollector_initWithNSString_(OrgApacheLuceneSearchJoinTermsCollector *self, NSString *field) {
+void OrgApacheLuceneSearchJoinTermsCollector_initPackagePrivateWithNSString_(OrgApacheLuceneSearchJoinTermsCollector *self, NSString *field) {
   OrgApacheLuceneSearchSimpleCollector_init(self);
   JreStrongAssignAndConsume(&self->collectorTerms_, new_OrgApacheLuceneUtilBytesRefHash_init());
   JreStrongAssign(&self->field_, field);
@@ -86,7 +96,7 @@ void OrgApacheLuceneSearchJoinTermsCollector_initWithNSString_(OrgApacheLuceneSe
 
 OrgApacheLuceneSearchJoinTermsCollector *OrgApacheLuceneSearchJoinTermsCollector_createWithNSString_withBoolean_(NSString *field, jboolean multipleValuesPerDocument) {
   OrgApacheLuceneSearchJoinTermsCollector_initialize();
-  return multipleValuesPerDocument ? create_OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(field) : create_OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(field);
+  return multipleValuesPerDocument ? create_OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(field) : (id) create_OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(field);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsCollector)
@@ -118,23 +128,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsCollector)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "MV", NULL, 0x0, NULL, NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(collectWithInt:);
+  methods[2].selector = @selector(doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "scratch_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docTermOrds_", NULL, 0x2, "Lorg.apache.lucene.index.SortedSetDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "scratch_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docTermOrds_", "LOrgApacheLuceneIndexSortedSetDocValues;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsCollector_MV = { 2, "MV", "org.apache.lucene.search.join", "TermsCollector", 0x8, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "collect", "I", "LJavaIoIOException;", "doSetNextReader", "LOrgApacheLuceneIndexLeafReaderContext;", "LOrgApacheLuceneSearchJoinTermsCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsCollector_MV = { "MV", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8, 3, 2, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinTermsCollector_MV;
 }
 
 @end
 
 void OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(OrgApacheLuceneSearchJoinTermsCollector_MV *self, NSString *field) {
-  OrgApacheLuceneSearchJoinTermsCollector_initWithNSString_(self, field);
+  OrgApacheLuceneSearchJoinTermsCollector_initPackagePrivateWithNSString_(self, field);
   JreStrongAssignAndConsume(&self->scratch_, new_OrgApacheLuceneUtilBytesRef_init());
 }
 
@@ -171,23 +189,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsCollector_MV)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "SV", NULL, 0x0, NULL, NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(collectWithInt:);
+  methods[2].selector = @selector(doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "spare_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fromDocTerms_", NULL, 0x2, "Lorg.apache.lucene.index.BinaryDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "spare_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fromDocTerms_", "LOrgApacheLuceneIndexBinaryDocValues;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsCollector_SV = { 2, "SV", "org.apache.lucene.search.join", "TermsCollector", 0x8, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "collect", "I", "LJavaIoIOException;", "doSetNextReader", "LOrgApacheLuceneIndexLeafReaderContext;", "LOrgApacheLuceneSearchJoinTermsCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsCollector_SV = { "SV", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8, 3, 2, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinTermsCollector_SV;
 }
 
 @end
 
 void OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(OrgApacheLuceneSearchJoinTermsCollector_SV *self, NSString *field) {
-  OrgApacheLuceneSearchJoinTermsCollector_initWithNSString_(self, field);
+  OrgApacheLuceneSearchJoinTermsCollector_initPackagePrivateWithNSString_(self, field);
   JreStrongAssignAndConsume(&self->spare_, new_OrgApacheLuceneUtilBytesRef_init());
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_
 
@@ -26,15 +32,14 @@
 
 /*!
  @brief A <code>DeletedQueryNode</code> represents a node that was deleted from the query
- node tree.
- It can be removed from the tree using the
+  node tree.It can be removed from the tree using the 
  <code>RemoveDeletedQueryNodesProcessor</code> processor.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -48,12 +53,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQuery
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode")

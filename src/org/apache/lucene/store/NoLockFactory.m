@@ -3,13 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/store/NoLockFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/Lock.h"
 #include "org/apache/lucene/store/LockFactory.h"
 #include "org/apache/lucene/store/NoLockFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/NoLockFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreNoLockFactory ()
 
@@ -19,9 +21,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneStoreNoLockFactory_init(OrgApacheLuceneStoreNoLockFactory *self);
 
-__attribute__((unused)) static OrgApacheLuceneStoreNoLockFactory *new_OrgApacheLuceneStoreNoLockFactory_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneStoreNoLockFactory *new_OrgApacheLuceneStoreNoLockFactory_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneStoreNoLockFactory *create_OrgApacheLuceneStoreNoLockFactory_init();
+__attribute__((unused)) static OrgApacheLuceneStoreNoLockFactory *create_OrgApacheLuceneStoreNoLockFactory_init(void);
 
 @interface OrgApacheLuceneStoreNoLockFactory_NoLock ()
 
@@ -31,9 +33,9 @@ __attribute__((unused)) static OrgApacheLuceneStoreNoLockFactory *create_OrgApac
 
 __attribute__((unused)) static void OrgApacheLuceneStoreNoLockFactory_NoLock_init(OrgApacheLuceneStoreNoLockFactory_NoLock *self);
 
-__attribute__((unused)) static OrgApacheLuceneStoreNoLockFactory_NoLock *new_OrgApacheLuceneStoreNoLockFactory_NoLock_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneStoreNoLockFactory_NoLock *new_OrgApacheLuceneStoreNoLockFactory_NoLock_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneStoreNoLockFactory_NoLock *create_OrgApacheLuceneStoreNoLockFactory_NoLock_init();
+__attribute__((unused)) static OrgApacheLuceneStoreNoLockFactory_NoLock *create_OrgApacheLuceneStoreNoLockFactory_NoLock_init(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneStoreNoLockFactory)
 
@@ -62,26 +64,32 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneStoreNoLockFactory_SINGLETON_LOCK;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreLock;", 0x1, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INSTANCE", "LOrgApacheLuceneStoreNoLockFactory;", .constantValue.asLong = 0, 0x19, -1, 2, -1, -1 },
+    { "SINGLETON_LOCK", "LOrgApacheLuceneStoreNoLockFactory_NoLock;", .constantValue.asLong = 0, 0x18, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "obtainLock", "LOrgApacheLuceneStoreDirectory;LNSString;", &OrgApacheLuceneStoreNoLockFactory_INSTANCE, &OrgApacheLuceneStoreNoLockFactory_SINGLETON_LOCK, "LOrgApacheLuceneStoreNoLockFactory_NoLock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreNoLockFactory = { "NoLockFactory", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x11, 2, 2, -1, 4, -1, -1, -1 };
+  return &_OrgApacheLuceneStoreNoLockFactory;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneStoreNoLockFactory class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneStoreNoLockFactory_INSTANCE, new_OrgApacheLuceneStoreNoLockFactory_init());
     JreStrongAssignAndConsume(&OrgApacheLuceneStoreNoLockFactory_SINGLETON_LOCK, new_OrgApacheLuceneStoreNoLockFactory_NoLock_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneStoreNoLockFactory)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NoLockFactory", NULL, 0x2, NULL, NULL },
-    { "obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "INSTANCE", "INSTANCE", 0x19, "Lorg.apache.lucene.store.NoLockFactory;", &OrgApacheLuceneStoreNoLockFactory_INSTANCE, NULL, .constantValue.asLong = 0 },
-    { "SINGLETON_LOCK", "SINGLETON_LOCK", 0x18, "Lorg.apache.lucene.store.NoLockFactory$NoLock;", &OrgApacheLuceneStoreNoLockFactory_SINGLETON_LOCK, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.store.NoLockFactory$NoLock;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreNoLockFactory = { 2, "NoLockFactory", "org.apache.lucene.store", NULL, 0x11, 2, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneStoreNoLockFactory;
 }
 
 @end
@@ -102,6 +110,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreNoLockFactory)
 
 @implementation OrgApacheLuceneStoreNoLockFactory_NoLock
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneStoreNoLockFactory_NoLock_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)close {
 }
 
@@ -112,21 +127,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreNoLockFactory)
   return @"NoLock";
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneStoreNoLockFactory_NoLock_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "close", NULL, "V", 0x1, NULL, NULL },
-    { "ensureValid", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "NoLock", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreNoLockFactory_NoLock = { 2, "NoLock", "org.apache.lucene.store", "NoLockFactory", 0xa, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(close);
+  methods[2].selector = @selector(ensureValid);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;", "toString", "LOrgApacheLuceneStoreNoLockFactory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreNoLockFactory_NoLock = { "NoLock", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0xa, 4, 0, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreNoLockFactory_NoLock;
 }
 

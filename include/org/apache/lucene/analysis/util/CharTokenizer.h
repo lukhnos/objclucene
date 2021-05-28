@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilCharTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilCharTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisUtilCharTokenizer))
 #define OrgApacheLuceneAnalysisUtilCharTokenizer_
 
@@ -32,14 +38,14 @@
 /*!
  @brief Creates a new <code>CharTokenizer</code> instance
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new <code>CharTokenizer</code> instance
- @param factory
- the attribute factory to use for this <code>Tokenizer</code>
+ @param factory the attribute factory to use for this 
+ <code>Tokenizer</code>
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 - (void)end;
 
@@ -50,19 +56,19 @@
 #pragma mark Protected
 
 /*!
- @brief Returns true iff a codepoint should be included in a token.
- This tokenizer
- generates as tokens adjacent sequences of codepoints which satisfy this
- predicate. Codepoints for which this is false are used to define token
- boundaries and are not included in tokens.
+ @brief Returns true iff a codepoint should be included in a token.This tokenizer
+  generates as tokens adjacent sequences of codepoints which satisfy this
+  predicate.
+ Codepoints for which this is false are used to define token
+  boundaries and are not included in tokens.
  */
 - (jboolean)isTokenCharWithInt:(jint)c;
 
 /*!
  @brief Called on each token character to normalize it before it is added to the
- token.
- The default implementation does nothing. Subclasses may use this to,
- e.g., lowercase tokens.
+  token.The default implementation does nothing.
+ Subclasses may use this to,
+  e.g., lowercase tokens.
  */
 - (jint)normalizeWithInt:(jint)c;
 
@@ -78,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharTokenizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharTokenizer")

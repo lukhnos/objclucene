@@ -3,17 +3,19 @@
 //  source: ./core/src/java/org/apache/lucene/search/NGramPhraseQuery.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/NGramPhraseQuery.h"
 #include "org/apache/lucene/search/PhraseQuery.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/NGramPhraseQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchNGramPhraseQuery () {
  @public
@@ -50,11 +52,11 @@ withOrgApacheLuceneSearchPhraseQuery:(OrgApacheLuceneSearchPhraseQuery *)query {
   }
   OrgApacheLuceneSearchPhraseQuery_Builder *builder = create_OrgApacheLuceneSearchPhraseQuery_Builder_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms))->size_; ++i) {
-    if (i % n_ == 0 || i == terms->size_ - 1) {
+    if (JreIntMod(i, n_) == 0 || i == terms->size_ - 1) {
       [builder addWithOrgApacheLuceneIndexTerm:IOSObjectArray_Get(terms, i) withInt:i];
     }
   }
-  OrgApacheLuceneSearchPhraseQuery *rewritten = [builder build];
+  OrgApacheLuceneSearchPhraseQuery *rewritten = JreRetainedLocalValue([builder build]);
   [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(rewritten)) setBoostWithFloat:[phraseQuery_ getBoost]];
   return rewritten;
 }
@@ -100,22 +102,36 @@ withOrgApacheLuceneSearchPhraseQuery:(OrgApacheLuceneSearchPhraseQuery *)query {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneSearchPhraseQuery:", "NGramPhraseQuery", NULL, 0x1, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "getTerms", NULL, "[Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "getPositions", NULL, "[I", 0x1, NULL, NULL },
-    { "getBoost", NULL, "F", 0x1, NULL, NULL },
-    { "setBoostWithFloat:", "setBoost", "V", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, 10, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withOrgApacheLuceneSearchPhraseQuery:);
+  methods[1].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(getTerms);
+  methods[5].selector = @selector(getPositions);
+  methods[6].selector = @selector(getBoost);
+  methods[7].selector = @selector(setBoostWithFloat:);
+  methods[8].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "n_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "phraseQuery_", NULL, 0x12, "Lorg.apache.lucene.search.PhraseQuery;", NULL, NULL, .constantValue.asLong = 0 },
+    { "n_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "phraseQuery_", "LOrgApacheLuceneSearchPhraseQuery;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchNGramPhraseQuery = { 2, "NGramPhraseQuery", "org.apache.lucene.search", NULL, 0x1, 9, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ILOrgApacheLuceneSearchPhraseQuery;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "equals", "LNSObject;", "hashCode", "setBoost", "F", "toString", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchNGramPhraseQuery = { "NGramPhraseQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 9, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchNGramPhraseQuery;
 }
 

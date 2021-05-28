@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchQueryRescorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchQueryRescorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchQueryRescorer || defined(INCLUDE_OrgApacheLuceneSearchQueryRescorer))
 #define OrgApacheLuceneSearchQueryRescorer_
 
@@ -27,8 +33,7 @@
 
 /*!
  @brief A <code>Rescorer</code> that uses a provided Query to assign
- scores to the first-pass hits.
-  
+   scores to the first-pass hits.
  */
 @interface OrgApacheLuceneSearchQueryRescorer : OrgApacheLuceneSearchRescorer
 
@@ -36,9 +41,9 @@
 
 /*!
  @brief Sole constructor, passing the 2nd pass query to
- assign scores to the 1st pass hits.
+   assign scores to the 1st pass hits.
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)firstPassExplanation
@@ -50,7 +55,7 @@
 
 /*!
  @brief Sugar API, calling {#rescore} using a simple linear
- combination of firstPassScore + weight * secondPassScore
+   combination of firstPassScore + weight * secondPassScore
  */
 + (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)topDocs
@@ -62,15 +67,18 @@
 
 /*!
  @brief Implement this in a subclass to combine the first pass and
- second pass scores.
- If secondPassMatches is false then
- the second pass query failed to match a hit from the
- first pass query, and you should ignore the
- secondPassScore.
+  second pass scores.If secondPassMatches is false then
+  the second pass query failed to match a hit from the
+  first pass query, and you should ignore the
+  secondPassScore.
  */
 - (jfloat)combineWithFloat:(jfloat)firstPassScore
                withBoolean:(jboolean)secondPassMatches
                  withFloat:(jfloat)secondPassScore;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -84,4 +92,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchQueryRescorer")

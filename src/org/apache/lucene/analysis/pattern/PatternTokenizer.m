@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -19,7 +18,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/pattern/PatternTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisPatternPatternTokenizer () {
  @public
@@ -59,7 +61,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternTokeniz
 }
 
 - (jboolean)incrementToken {
-  if (index_ >= [((JavaLangStringBuilder *) nil_chk(str_)) length]) return false;
+  if (index_ >= [((JavaLangStringBuilder *) nil_chk(str_)) java_length]) return false;
   [self clearAttributes];
   if (group_ >= 0) {
     while ([((JavaUtilRegexMatcher *) nil_chk(matcher_)) find]) {
@@ -83,12 +85,12 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternTokeniz
       }
       index_ = [matcher_ end];
     }
-    if ([str_ length] - index_ == 0) {
+    if ([str_ java_length] - index_ == 0) {
       index_ = JavaLangInteger_MAX_VALUE;
       return false;
     }
-    [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:str_ withInt:index_ withInt:[str_ length]];
-    [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:index_] withInt:[self correctOffsetWithInt:[str_ length]]];
+    [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:str_ withInt:index_ withInt:[str_ java_length]];
+    [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:index_] withInt:[self correctOffsetWithInt:[str_ java_length]]];
     index_ = JavaLangInteger_MAX_VALUE;
     return true;
   }
@@ -96,7 +98,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternTokeniz
 
 - (void)end {
   [super end];
-  jint ofs = [self correctOffsetWithInt:[((JavaLangStringBuilder *) nil_chk(str_)) length]];
+  jint ofs = [self correctOffsetWithInt:[((JavaLangStringBuilder *) nil_chk(str_)) java_length]];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:ofs withInt:ofs];
 }
 
@@ -122,24 +124,35 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternTokeniz
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilRegexPattern:withInt:", "PatternTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withJavaUtilRegexPattern:withInt:", "PatternTokenizer", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, NULL, NULL },
-    { "end", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "fillBufferWithJavaLangStringBuilder:withJavaIoReader:", "fillBuffer", "V", 0x2, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x2, 3, 4, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilRegexPattern:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withJavaUtilRegexPattern:withInt:);
+  methods[2].selector = @selector(incrementToken);
+  methods[3].selector = @selector(end);
+  methods[4].selector = @selector(reset);
+  methods[5].selector = @selector(fillBufferWithJavaLangStringBuilder:withJavaIoReader:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "str_", NULL, 0x12, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "index_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "group_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "matcher_", NULL, 0x12, "Ljava.util.regex.Matcher;", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x10, "[C", NULL, NULL, .constantValue.asLong = 0 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "str_", "LJavaLangStringBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "index_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "group_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "matcher_", "LJavaUtilRegexMatcher;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "buffer_", "[C", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternTokenizer = { 2, "PatternTokenizer", "org.apache.lucene.analysis.pattern", NULL, 0x11, 6, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilRegexPattern;I", "LOrgApacheLuceneUtilAttributeFactory;LJavaUtilRegexPattern;I", "LJavaIoIOException;", "fillBuffer", "LJavaLangStringBuilder;LJavaIoReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternTokenizer = { "PatternTokenizer", "org.apache.lucene.analysis.pattern", ptrTable, methods, fields, 7, 0x11, 6, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPatternPatternTokenizer;
 }
 

@@ -3,10 +3,8 @@
 //  source: ./misc/src/java/org/apache/lucene/search/EarlyTerminatingSortingCollector.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/util/Arrays.h"
@@ -23,6 +21,10 @@
 #include "org/apache/lucene/search/LeafCollector.h"
 #include "org/apache/lucene/search/Sort.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/EarlyTerminatingSortingCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchEarlyTerminatingSortingCollector () {
  @public
   OrgApacheLuceneSearchSort *mergePolicySort_;
@@ -34,30 +36,26 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchEarlyTerminatingSortingCollector, mergePolicySort_, OrgApacheLuceneSearchSort *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchEarlyTerminatingSortingCollector, terminatedEarly_, JavaUtilConcurrentAtomicAtomicBoolean *)
 
-@interface OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1 : OrgApacheLuceneSearchFilterLeafCollector {
+@interface OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1 : OrgApacheLuceneSearchFilterLeafCollector {
  @public
   OrgApacheLuceneSearchEarlyTerminatingSortingCollector *this$0_;
   jint numCollected_;
 }
 
-- (void)collectWithInt:(jint)doc;
-
 - (instancetype)initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector:(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *)outer$
-                                       withOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)arg$0;
+                                       withOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)inArg;
+
+- (void)collectWithInt:(jint)doc;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1, this$0_, OrgApacheLuceneSearchEarlyTerminatingSortingCollector *)
+__attribute__((unused)) static void OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1 *self, OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1 *self, OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1 *new_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1 *new_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1 *create_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1 *create_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg);
 
 @implementation OrgApacheLuceneSearchEarlyTerminatingSortingCollector
 
@@ -76,7 +74,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchEarlyTerminatingSortingCollector
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   if (OrgApacheLuceneIndexSortingMergePolicy_isSortedWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneSearchSort_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], mergePolicySort_)) {
-    return create_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(self, [super getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context]);
+    return create_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(self, [super getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context]);
   }
   else {
     return [super getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context];
@@ -95,19 +93,28 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchEarlyTerminatingSortingCollector
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "canEarlyTerminateWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchSort:", "canEarlyTerminate", "Z", 0x9, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchCollector:withOrgApacheLuceneSearchSort:withInt:withOrgApacheLuceneSearchSort:", "EarlyTerminatingSortingCollector", NULL, 0x1, NULL, NULL },
-    { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
-    { "terminatedEarly", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchLeafCollector;", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(canEarlyTerminateWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchSort:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneSearchCollector:withOrgApacheLuceneSearchSort:withInt:withOrgApacheLuceneSearchSort:);
+  methods[2].selector = @selector(getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(terminatedEarly);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "sort_", NULL, 0x14, "Lorg.apache.lucene.search.Sort;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numDocsToCollect_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "mergePolicySort_", NULL, 0x12, "Lorg.apache.lucene.search.Sort;", NULL, NULL, .constantValue.asLong = 0 },
-    { "terminatedEarly_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicBoolean;", NULL, NULL, .constantValue.asLong = 0 },
+    { "sort_", "LOrgApacheLuceneSearchSort;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "numDocsToCollect_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "mergePolicySort_", "LOrgApacheLuceneSearchSort;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "terminatedEarly_", "LJavaUtilConcurrentAtomicAtomicBoolean;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchEarlyTerminatingSortingCollector = { 2, "EarlyTerminatingSortingCollector", "org.apache.lucene.search", NULL, 0x1, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "canEarlyTerminate", "LOrgApacheLuceneSearchSort;LOrgApacheLuceneSearchSort;", "LOrgApacheLuceneSearchCollector;LOrgApacheLuceneSearchSort;ILOrgApacheLuceneSearchSort;", "getLeafCollector", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchEarlyTerminatingSortingCollector = { "EarlyTerminatingSortingCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 4, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchEarlyTerminatingSortingCollector;
 }
 
@@ -147,7 +154,13 @@ OrgApacheLuceneSearchEarlyTerminatingSortingCollector *create_OrgApacheLuceneSea
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchEarlyTerminatingSortingCollector)
 
-@implementation OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1
+@implementation OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1
+
+- (instancetype)initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector:(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *)outer$
+                                       withOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)inArg {
+  OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(self, outer$, inArg);
+  return self;
+}
 
 - (void)collectWithInt:(jint)doc {
   [super collectWithInt:doc];
@@ -157,44 +170,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchEarlyTerminatingSortingCol
   }
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector:(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *)outer$
-                                       withOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)arg$0 {
-  OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(self, outer$, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector:withOrgApacheLuceneSearchLeafCollector:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector:withOrgApacheLuceneSearchLeafCollector:);
+  methods[1].selector = @selector(collectWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.EarlyTerminatingSortingCollector;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numCollected_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchEarlyTerminatingSortingCollector;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "numCollected_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchEarlyTerminatingSortingCollector", "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1 = { 2, "", "org.apache.lucene.search", "EarlyTerminatingSortingCollector", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchEarlyTerminatingSortingCollector;LOrgApacheLuceneSearchLeafCollector;", "collect", "I", "LJavaIoIOException;", "LOrgApacheLuceneSearchEarlyTerminatingSortingCollector;", "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 2, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1 *self, OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) {
+void OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1 *self, OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchFilterLeafCollector_initWithOrgApacheLuceneSearchLeafCollector_(self, arg$0);
+  OrgApacheLuceneSearchFilterLeafCollector_initWithOrgApacheLuceneSearchLeafCollector_(self, inArg);
 }
 
-OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1 *new_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1, initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_, outer$, arg$0)
+OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1 *new_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1, initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_, outer$, inArg)
 }
 
-OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1 *create_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1, initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_, outer$, arg$0)
+OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1 *create_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1_initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_1, initWithOrgApacheLuceneSearchEarlyTerminatingSortingCollector_withOrgApacheLuceneSearchLeafCollector_, outer$, inArg)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchEarlyTerminatingSortingCollector_$1)

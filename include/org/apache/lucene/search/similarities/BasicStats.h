@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicStats
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesBasicStats_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicStats || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicStats))
 #define OrgApacheLuceneSearchSimilaritiesBasicStats_
 
@@ -56,9 +62,8 @@
   jfloat topLevelBoost_;
   /*!
    @brief For most Similarities, the immediate and the top level query boosts are
- not handled differently.
-   Hence, this field is just the product of the
- other two. 
+  not handled differently.Hence, this field is just the product of the
+  other two.
    */
   jfloat totalBoost_;
 }
@@ -66,11 +71,10 @@
 #pragma mark Public
 
 /*!
- @brief Constructor.
- Sets the query boost. 
+ @brief Constructor.Sets the query boost.
  */
-- (instancetype)initWithNSString:(NSString *)field
-                       withFloat:(jfloat)queryBoost;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                                 withFloat:(jfloat)queryBoost;
 
 /*!
  @brief Returns the average field length.
@@ -112,7 +116,7 @@
 /*!
  @brief No normalization is done.
  <code>topLevelBoost</code> is saved in the object,
- however. 
+  however.
  */
 - (void)normalizeWithFloat:(jfloat)queryNorm
                  withFloat:(jfloat)topLevelBoost;
@@ -146,13 +150,17 @@
 #pragma mark Protected
 
 /*!
- @brief Computes the raw normalization value.
- This basic implementation returns
- the query boost. Subclasses may override this method to include other
- factors (such as idf), or to save the value for inclusion in
- <code>normalize(float,float)</code>, etc.
+ @brief Computes the raw normalization value.This basic implementation returns
+  the query boost.
+ Subclasses may override this method to include other
+  factors (such as idf), or to save the value for inclusion in 
+ <code>normalize(float, float)</code>, etc.
  */
 - (jfloat)rawNormalizationValue;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -170,4 +178,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicStats)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicStats")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame))
 #define OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_
 
@@ -59,8 +65,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum:(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *)ste
-                                                               withInt:(jint)ord;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum:(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *)ste
+                                                                                       withInt:(jint)ord;
 
 - (void)decodeMetaData;
 
@@ -96,6 +102,10 @@
 
 - (void)rewind;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame)
@@ -112,14 +122,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame, longs_,
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame, bytes_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame, bytesReader_, OrgApacheLuceneStoreByteArrayDataInput *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *self, OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *ste, jint ord);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *self, OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *ste, jint ord);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *ste, jint ord) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *ste, jint ord) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *ste, jint ord);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *ste, jint ord);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame")

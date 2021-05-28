@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Comparable.h"
 #include "java/lang/Double.h"
@@ -21,12 +20,15 @@
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/search/MultiTermQuery.h"
 #include "org/apache/lucene/search/NumericRangeQuery.h"
-#include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/NumericUtils.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/NumericRangeQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchNumericRangeQuery ()
 
@@ -48,17 +50,18 @@ __attribute__((unused)) static OrgApacheLuceneSearchNumericRangeQuery *create_Or
 
 /*!
  @brief Subclass of FilteredTermsEnum for enumerating all terms that match the
- sub-ranges for trie range queries, using flex API.
+  sub-ranges for trie range queries, using flex API.
  <p>
- WARNING: This term enumeration is not guaranteed to be always ordered by
+  WARNING: This term enumeration is not guaranteed to be always ordered by 
  <code>Term.compareTo</code>.
- The ordering depends on how <code>NumericUtils.splitLongRange</code> and
- <code>NumericUtils.splitIntRange</code> generates the sub-ranges. For
+  The ordering depends on how <code>NumericUtils.splitLongRange</code> and 
+ <code>NumericUtils.splitIntRange</code> generates the sub-ranges. For 
  <code>MultiTermQuery</code> ordering is not relevant.
  */
 @interface OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum {
  @public
-  OrgApacheLuceneUtilBytesRef *currentLowerBound_, *currentUpperBound_;
+  OrgApacheLuceneUtilBytesRef *currentLowerBound_;
+  OrgApacheLuceneUtilBytesRef *currentUpperBound_;
   JavaUtilLinkedList *rangeBounds_;
 }
 
@@ -89,53 +92,45 @@ __attribute__((unused)) static void OrgApacheLuceneSearchNumericRangeQuery_Numer
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum)
 
-@interface OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1 : OrgApacheLuceneUtilNumericUtils_LongRangeBuilder {
+@interface OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1 : OrgApacheLuceneUtilNumericUtils_LongRangeBuilder {
  @public
   OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *this$0_;
 }
 
+- (instancetype)initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *)outer$;
+
 - (void)addRangeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minPrefixCoded
                 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxPrefixCoded;
 
-- (instancetype)initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1, this$0_, OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *)
+__attribute__((unused)) static void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1 *self, OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1 *self, OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$);
+__attribute__((unused)) static OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1 *new_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1 *new_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1 *create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1 *create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1)
-
-@interface OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2 : OrgApacheLuceneUtilNumericUtils_IntRangeBuilder {
+@interface OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2 : OrgApacheLuceneUtilNumericUtils_IntRangeBuilder {
  @public
   OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *this$0_;
 }
 
+- (instancetype)initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *)outer$;
+
 - (void)addRangeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minPrefixCoded
                 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxPrefixCoded;
 
-- (instancetype)initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2, this$0_, OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *)
+__attribute__((unused)) static void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2 *self, OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2 *self, OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$);
+__attribute__((unused)) static OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2 *new_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2 *new_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2 *create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2)
+__attribute__((unused)) static OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2 *create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchNumericRangeQuery)
 
@@ -257,11 +252,11 @@ withOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldTy
   return maxInclusive_;
 }
 
-- (id)getMin {
+- (NSNumber *)getMin {
   return min_;
 }
 
-- (id)getMax {
+- (NSNumber *)getMax {
   return max_;
 }
 
@@ -276,11 +271,11 @@ withOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldTy
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == self) return true;
+  if (JreObjectEqualsEquals(o, self)) return true;
   if (![super isEqual:o]) return false;
   if ([o isKindOfClass:[OrgApacheLuceneSearchNumericRangeQuery class]]) {
-    OrgApacheLuceneSearchNumericRangeQuery *q = (OrgApacheLuceneSearchNumericRangeQuery *) cast_chk(o, [OrgApacheLuceneSearchNumericRangeQuery class]);
-    return ((((OrgApacheLuceneSearchNumericRangeQuery *) nil_chk(q))->min_ == nil ? min_ == nil : [((NSNumber *) q->min_) isEqual:min_]) && (q->max_ == nil ? max_ == nil : [((NSNumber *) q->max_) isEqual:max_]) && minInclusive_ == q->minInclusive_ && maxInclusive_ == q->maxInclusive_ && precisionStep_ == q->precisionStep_);
+    OrgApacheLuceneSearchNumericRangeQuery *q = (OrgApacheLuceneSearchNumericRangeQuery *) o;
+    return ((((OrgApacheLuceneSearchNumericRangeQuery *) nil_chk(q))->min_ == nil ? min_ == nil : [q->min_ isEqual:min_]) && (q->max_ == nil ? max_ == nil : [q->max_ isEqual:max_]) && minInclusive_ == q->minInclusive_ && maxInclusive_ == q->maxInclusive_ && precisionStep_ == q->precisionStep_);
   }
   return false;
 }
@@ -300,6 +295,66 @@ withOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldTy
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeQuery;", 0x9, 2, 3, -1, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeQuery;", 0x9, 2, 5, -1, 6, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeQuery;", 0x9, 7, 8, -1, 9, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeQuery;", 0x9, 7, 10, -1, 11, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeQuery;", 0x9, 12, 13, -1, 14, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeQuery;", 0x9, 12, 15, -1, 16, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeQuery;", 0x9, 17, 18, -1, 19, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeQuery;", 0x9, 17, 20, -1, 21, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x4, 22, 23, 24, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSNumber;", 0x1, -1, -1, -1, 25, -1, -1 },
+    { NULL, "LNSNumber;", 0x1, -1, -1, -1, 25, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 26, 27, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 28, 29, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 30, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withInt:withOrgApacheLuceneDocumentFieldType_NumericType:withNSNumber:withNSNumber:withBoolean:withBoolean:);
+  methods[1].selector = @selector(newLongRangeWithNSString:withInt:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:);
+  methods[2].selector = @selector(newLongRangeWithNSString:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:);
+  methods[3].selector = @selector(newIntRangeWithNSString:withInt:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:);
+  methods[4].selector = @selector(newIntRangeWithNSString:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:);
+  methods[5].selector = @selector(newDoubleRangeWithNSString:withInt:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:);
+  methods[6].selector = @selector(newDoubleRangeWithNSString:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:);
+  methods[7].selector = @selector(newFloatRangeWithNSString:withInt:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:);
+  methods[8].selector = @selector(newFloatRangeWithNSString:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:);
+  methods[9].selector = @selector(getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:);
+  methods[10].selector = @selector(includesMin);
+  methods[11].selector = @selector(includesMax);
+  methods[12].selector = @selector(getMin);
+  methods[13].selector = @selector(getMax);
+  methods[14].selector = @selector(getPrecisionStep);
+  methods[15].selector = @selector(toStringWithNSString:);
+  methods[16].selector = @selector(isEqual:);
+  methods[17].selector = @selector(hash);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "precisionStep_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "dataType_", "LOrgApacheLuceneDocumentFieldType_NumericType;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "min_", "LNSNumber;", .constantValue.asLong = 0, 0x10, -1, -1, 31, -1 },
+    { "max_", "LNSNumber;", .constantValue.asLong = 0, 0x10, -1, -1, 31, -1 },
+    { "minInclusive_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxInclusive_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "LONG_NEGATIVE_INFINITY", "J", .constantValue.asLong = 0, 0x18, -1, 32, -1, -1 },
+    { "LONG_POSITIVE_INFINITY", "J", .constantValue.asLong = 0, 0x18, -1, 33, -1, -1 },
+    { "INT_NEGATIVE_INFINITY", "I", .constantValue.asLong = 0, 0x18, -1, 34, -1, -1 },
+    { "INT_POSITIVE_INFINITY", "I", .constantValue.asLong = 0, 0x18, -1, 35, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;ILOrgApacheLuceneDocumentFieldType_NumericType;LNSNumber;LNSNumber;ZZ", "(Ljava/lang/String;ILorg/apache/lucene/document/FieldType$NumericType;TT;TT;ZZ)V", "newLongRange", "LNSString;ILJavaLangLong;LJavaLangLong;ZZ", "(Ljava/lang/String;ILjava/lang/Long;Ljava/lang/Long;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Long;>;", "LNSString;LJavaLangLong;LJavaLangLong;ZZ", "(Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Long;>;", "newIntRange", "LNSString;ILJavaLangInteger;LJavaLangInteger;ZZ", "(Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Integer;>;", "LNSString;LJavaLangInteger;LJavaLangInteger;ZZ", "(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Integer;>;", "newDoubleRange", "LNSString;ILJavaLangDouble;LJavaLangDouble;ZZ", "(Ljava/lang/String;ILjava/lang/Double;Ljava/lang/Double;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Double;>;", "LNSString;LJavaLangDouble;LJavaLangDouble;ZZ", "(Ljava/lang/String;Ljava/lang/Double;Ljava/lang/Double;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Double;>;", "newFloatRange", "LNSString;ILJavaLangFloat;LJavaLangFloat;ZZ", "(Ljava/lang/String;ILjava/lang/Float;Ljava/lang/Float;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Float;>;", "LNSString;LJavaLangFloat;LJavaLangFloat;ZZ", "(Ljava/lang/String;Ljava/lang/Float;Ljava/lang/Float;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Float;>;", "getTermsEnum", "LOrgApacheLuceneIndexTerms;LOrgApacheLuceneUtilAttributeSource;", "LJavaIoIOException;", "()TT;", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "TT;", &OrgApacheLuceneSearchNumericRangeQuery_LONG_NEGATIVE_INFINITY, &OrgApacheLuceneSearchNumericRangeQuery_LONG_POSITIVE_INFINITY, &OrgApacheLuceneSearchNumericRangeQuery_INT_NEGATIVE_INFINITY, &OrgApacheLuceneSearchNumericRangeQuery_INT_POSITIVE_INFINITY, "LOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum;", "<T:Ljava/lang/Number;>Lorg/apache/lucene/search/MultiTermQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchNumericRangeQuery = { "NumericRangeQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 18, 10, -1, 36, -1, 37, -1 };
+  return &_OrgApacheLuceneSearchNumericRangeQuery;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchNumericRangeQuery class]) {
     OrgApacheLuceneSearchNumericRangeQuery_LONG_NEGATIVE_INFINITY = OrgApacheLuceneUtilNumericUtils_doubleToSortableLongWithDouble_(JavaLangDouble_NEGATIVE_INFINITY);
@@ -308,44 +363,6 @@ withOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldTy
     OrgApacheLuceneSearchNumericRangeQuery_INT_POSITIVE_INFINITY = OrgApacheLuceneUtilNumericUtils_floatToSortableIntWithFloat_(JavaLangFloat_POSITIVE_INFINITY);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchNumericRangeQuery)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withInt:withOrgApacheLuceneDocumentFieldType_NumericType:withNSNumber:withNSNumber:withBoolean:withBoolean:", "NumericRangeQuery", NULL, 0x2, NULL, "(Ljava/lang/String;ILorg/apache/lucene/document/FieldType$NumericType;TT;TT;ZZ)V" },
-    { "newLongRangeWithNSString:withInt:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:", "newLongRange", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Long;Ljava/lang/Long;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Long;>;" },
-    { "newLongRangeWithNSString:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:", "newLongRange", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Long;>;" },
-    { "newIntRangeWithNSString:withInt:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:", "newIntRange", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Integer;>;" },
-    { "newIntRangeWithNSString:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:", "newIntRange", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Integer;>;" },
-    { "newDoubleRangeWithNSString:withInt:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:", "newDoubleRange", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Double;Ljava/lang/Double;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Double;>;" },
-    { "newDoubleRangeWithNSString:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:", "newDoubleRange", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Double;Ljava/lang/Double;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Double;>;" },
-    { "newFloatRangeWithNSString:withInt:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:", "newFloatRange", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Float;Ljava/lang/Float;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Float;>;" },
-    { "newFloatRangeWithNSString:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:", "newFloatRange", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Float;Ljava/lang/Float;ZZ)Lorg/apache/lucene/search/NumericRangeQuery<Ljava/lang/Float;>;" },
-    { "getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x4, "Ljava.io.IOException;", NULL },
-    { "includesMin", NULL, "Z", 0x1, NULL, NULL },
-    { "includesMax", NULL, "Z", 0x1, NULL, NULL },
-    { "getMin", NULL, "TT;", 0x1, NULL, "()TT;" },
-    { "getMax", NULL, "TT;", 0x1, NULL, "()TT;" },
-    { "getPrecisionStep", NULL, "I", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x11, NULL, NULL },
-    { "hash", "hashCode", "I", 0x11, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "precisionStep_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "dataType_", NULL, 0x10, "Lorg.apache.lucene.document.FieldType$NumericType;", NULL, NULL, .constantValue.asLong = 0 },
-    { "min_", NULL, 0x10, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
-    { "max_", NULL, 0x10, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
-    { "minInclusive_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxInclusive_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "LONG_NEGATIVE_INFINITY", "LONG_NEGATIVE_INFINITY", 0x18, "J", &OrgApacheLuceneSearchNumericRangeQuery_LONG_NEGATIVE_INFINITY, NULL, .constantValue.asLong = 0 },
-    { "LONG_POSITIVE_INFINITY", "LONG_POSITIVE_INFINITY", 0x18, "J", &OrgApacheLuceneSearchNumericRangeQuery_LONG_POSITIVE_INFINITY, NULL, .constantValue.asLong = 0 },
-    { "INT_NEGATIVE_INFINITY", "INT_NEGATIVE_INFINITY", 0x18, "I", &OrgApacheLuceneSearchNumericRangeQuery_INT_NEGATIVE_INFINITY, NULL, .constantValue.asLong = 0 },
-    { "INT_POSITIVE_INFINITY", "INT_POSITIVE_INFINITY", 0x18, "I", &OrgApacheLuceneSearchNumericRangeQuery_INT_POSITIVE_INFINITY, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.NumericRangeQuery$NumericRangeTermsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchNumericRangeQuery = { 2, "NumericRangeQuery", "org.apache.lucene.search", NULL, 0x11, 18, methods, 10, fields, 0, NULL, 1, inner_classes, NULL, "<T:Ljava/lang/Number;>Lorg/apache/lucene/search/MultiTermQuery;" };
-  return &_OrgApacheLuceneSearchNumericRangeQuery;
 }
 
 @end
@@ -429,7 +446,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchNumericRangeQuery)
     if (term != nil && [term compareToWithId:currentUpperBound_] > 0) continue;
     return (term != nil && [term compareToWithId:currentLowerBound_] > 0) ? term : currentLowerBound_;
   }
-  JreAssert(([rangeBounds_ isEmpty]), (@"org/apache/lucene/search/NumericRangeQuery.java:506 condition failed: assert rangeBounds.isEmpty();"));
+  JreAssert([rangeBounds_ isEmpty], @"org/apache/lucene/search/NumericRangeQuery.java:506 condition failed: assert rangeBounds.isEmpty();");
   JreStrongAssign(&currentLowerBound_, JreStrongAssign(&currentUpperBound_, nil));
   return nil;
 }
@@ -451,18 +468,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchNumericRangeQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchNumericRangeQuery:withOrgApacheLuceneIndexTermsEnum:", "NumericRangeTermsEnum", NULL, 0x0, NULL, NULL },
-    { "nextRange", NULL, "V", 0x2, NULL, NULL },
-    { "nextSeekTermWithOrgApacheLuceneUtilBytesRef:", "nextSeekTerm", "Lorg.apache.lucene.util.BytesRef;", 0x14, NULL, NULL },
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x14, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x14, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x14, 3, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchNumericRangeQuery:withOrgApacheLuceneIndexTermsEnum:);
+  methods[1].selector = @selector(nextRange);
+  methods[2].selector = @selector(nextSeekTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(acceptWithOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "currentLowerBound_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentUpperBound_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "rangeBounds_", NULL, 0x12, "Ljava.util.LinkedList;", NULL, "Ljava/util/LinkedList<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
+    { "currentLowerBound_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentUpperBound_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "rangeBounds_", "LJavaUtilLinkedList;", .constantValue.asLong = 0, 0x12, -1, -1, 4, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum = { 2, "NumericRangeTermsEnum", "org.apache.lucene.search", "NumericRangeQuery", 0x12, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchNumericRangeQuery;LOrgApacheLuceneIndexTermsEnum;", "nextSeekTerm", "LOrgApacheLuceneUtilBytesRef;", "accept", "Ljava/util/LinkedList<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneSearchNumericRangeQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum = { "NumericRangeTermsEnum", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x12, 4, 3, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum;
 }
 
@@ -480,7 +506,7 @@ void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_initWithOrgApa
         minBound = (outer$->min_ == nil) ? JavaLangLong_MIN_VALUE : [((NSNumber *) nil_chk(outer$->min_)) longLongValue];
       }
       else {
-        JreAssert((outer$->dataType_ == JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE)), (@"org/apache/lucene/search/NumericRangeQuery.java:403 condition failed: assert dataType == NumericType.DOUBLE;"));
+        JreAssert(outer$->dataType_ == JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE), @"org/apache/lucene/search/NumericRangeQuery.java:403 condition failed: assert dataType == NumericType.DOUBLE;");
         minBound = (outer$->min_ == nil) ? JreLoadStatic(OrgApacheLuceneSearchNumericRangeQuery, LONG_NEGATIVE_INFINITY) : OrgApacheLuceneUtilNumericUtils_doubleToSortableLongWithDouble_([((NSNumber *) nil_chk(outer$->min_)) doubleValue]);
       }
       if (!outer$->minInclusive_ && outer$->min_ != nil) {
@@ -492,14 +518,14 @@ void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_initWithOrgApa
         maxBound = (outer$->max_ == nil) ? JavaLangLong_MAX_VALUE : [((NSNumber *) nil_chk(outer$->max_)) longLongValue];
       }
       else {
-        JreAssert((outer$->dataType_ == JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE)), (@"org/apache/lucene/search/NumericRangeQuery.java:417 condition failed: assert dataType == NumericType.DOUBLE;"));
+        JreAssert(outer$->dataType_ == JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE), @"org/apache/lucene/search/NumericRangeQuery.java:417 condition failed: assert dataType == NumericType.DOUBLE;");
         maxBound = (outer$->max_ == nil) ? JreLoadStatic(OrgApacheLuceneSearchNumericRangeQuery, LONG_POSITIVE_INFINITY) : OrgApacheLuceneUtilNumericUtils_doubleToSortableLongWithDouble_([((NSNumber *) nil_chk(outer$->max_)) doubleValue]);
       }
       if (!outer$->maxInclusive_ && outer$->max_ != nil) {
         if (maxBound == JavaLangLong_MIN_VALUE) break;
         maxBound--;
       }
-      OrgApacheLuceneUtilNumericUtils_splitLongRangeWithOrgApacheLuceneUtilNumericUtils_LongRangeBuilder_withInt_withLong_withLong_(create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(self), outer$->precisionStep_, minBound, maxBound);
+      OrgApacheLuceneUtilNumericUtils_splitLongRangeWithOrgApacheLuceneUtilNumericUtils_LongRangeBuilder_withInt_withLong_withLong_(create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(self), outer$->precisionStep_, minBound, maxBound);
       break;
     }
     case OrgApacheLuceneDocumentFieldType_NumericType_Enum_INT:
@@ -510,7 +536,7 @@ void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_initWithOrgApa
         minBound = (outer$->min_ == nil) ? JavaLangInteger_MIN_VALUE : [((NSNumber *) nil_chk(outer$->min_)) intValue];
       }
       else {
-        JreAssert((outer$->dataType_ == JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT)), (@"org/apache/lucene/search/NumericRangeQuery.java:443 condition failed: assert dataType == NumericType.FLOAT;"));
+        JreAssert(outer$->dataType_ == JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT), @"org/apache/lucene/search/NumericRangeQuery.java:443 condition failed: assert dataType == NumericType.FLOAT;");
         minBound = (outer$->min_ == nil) ? JreLoadStatic(OrgApacheLuceneSearchNumericRangeQuery, INT_NEGATIVE_INFINITY) : OrgApacheLuceneUtilNumericUtils_floatToSortableIntWithFloat_([((NSNumber *) nil_chk(outer$->min_)) floatValue]);
       }
       if (!outer$->minInclusive_ && outer$->min_ != nil) {
@@ -522,14 +548,14 @@ void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_initWithOrgApa
         maxBound = (outer$->max_ == nil) ? JavaLangInteger_MAX_VALUE : [((NSNumber *) nil_chk(outer$->max_)) intValue];
       }
       else {
-        JreAssert((outer$->dataType_ == JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT)), (@"org/apache/lucene/search/NumericRangeQuery.java:457 condition failed: assert dataType == NumericType.FLOAT;"));
+        JreAssert(outer$->dataType_ == JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT), @"org/apache/lucene/search/NumericRangeQuery.java:457 condition failed: assert dataType == NumericType.FLOAT;");
         maxBound = (outer$->max_ == nil) ? JreLoadStatic(OrgApacheLuceneSearchNumericRangeQuery, INT_POSITIVE_INFINITY) : OrgApacheLuceneUtilNumericUtils_floatToSortableIntWithFloat_([((NSNumber *) nil_chk(outer$->max_)) floatValue]);
       }
       if (!outer$->maxInclusive_ && outer$->max_ != nil) {
         if (maxBound == JavaLangInteger_MIN_VALUE) break;
         maxBound--;
       }
-      OrgApacheLuceneUtilNumericUtils_splitIntRangeWithOrgApacheLuceneUtilNumericUtils_IntRangeBuilder_withInt_withInt_withInt_(create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(self), outer$->precisionStep_, minBound, maxBound);
+      OrgApacheLuceneUtilNumericUtils_splitIntRangeWithOrgApacheLuceneUtilNumericUtils_IntRangeBuilder_withInt_withInt_withInt_(create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(self), outer$->precisionStep_, minBound, maxBound);
       break;
     }
     default:
@@ -546,25 +572,25 @@ OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *create_OrgApacheLu
 }
 
 void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_nextRange(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *self) {
-  JreAssert(([((JavaUtilLinkedList *) nil_chk(self->rangeBounds_)) size] % 2 == 0), (@"org/apache/lucene/search/NumericRangeQuery.java:483 condition failed: assert rangeBounds.size() % 2 == 0;"));
+  JreAssert(JreIntMod([((JavaUtilLinkedList *) nil_chk(self->rangeBounds_)) size], 2) == 0, @"org/apache/lucene/search/NumericRangeQuery.java:483 condition failed: assert rangeBounds.size() % 2 == 0;");
   JreStrongAssign(&self->currentLowerBound_, [self->rangeBounds_ removeFirst]);
-  JreAssert((self->currentUpperBound_ == nil || [self->currentUpperBound_ compareToWithId:self->currentLowerBound_] <= 0), (@"The current upper bound must be <= the new lower bound"));
+  JreAssert(self->currentUpperBound_ == nil || [self->currentUpperBound_ compareToWithId:self->currentLowerBound_] <= 0, @"The current upper bound must be <= the new lower bound");
   JreStrongAssign(&self->currentUpperBound_, [self->rangeBounds_ removeFirst]);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum)
 
-@implementation OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1
+@implementation OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1
+
+- (instancetype)initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *)outer$ {
+  OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(self, outer$);
+  return self;
+}
 
 - (void)addRangeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minPrefixCoded
                 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxPrefixCoded {
   [((JavaUtilLinkedList *) nil_chk(this$0_->rangeBounds_)) addWithId:minPrefixCoded];
   [this$0_->rangeBounds_ addWithId:maxPrefixCoded];
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *)outer$ {
-  OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(self, outer$);
-  return self;
 }
 
 - (void)dealloc {
@@ -573,46 +599,50 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchNumericRangeQuery_NumericR
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addRangeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "addRange", "V", 0x11, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:);
+  methods[1].selector = @selector(addRangeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.NumericRangeQuery$NumericRangeTermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum", "initWithOrgApacheLuceneIndexTermsEnum:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1 = { 2, "", "org.apache.lucene.search", "NumericRangeQuery$NumericRangeTermsEnum", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum;", "addRange", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "initWithOrgApacheLuceneSearchNumericRangeQuery:withOrgApacheLuceneIndexTermsEnum:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1 *self, OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
+void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1 *self, OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneUtilNumericUtils_LongRangeBuilder_init(self);
 }
 
-OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1 *new_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1, initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_, outer$)
+OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1 *new_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1, initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_, outer$)
 }
 
-OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1 *create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1, initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_, outer$)
+OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1 *create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_1, initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_, outer$)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$1)
+@implementation OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2
 
-@implementation OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2
+- (instancetype)initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *)outer$ {
+  OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(self, outer$);
+  return self;
+}
 
 - (void)addRangeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minPrefixCoded
                 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxPrefixCoded {
   [((JavaUtilLinkedList *) nil_chk(this$0_->rangeBounds_)) addWithId:minPrefixCoded];
   [this$0_->rangeBounds_ addWithId:maxPrefixCoded];
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *)outer$ {
-  OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(self, outer$);
-  return self;
 }
 
 - (void)dealloc {
@@ -621,31 +651,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchNumericRangeQuery_NumericR
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addRangeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "addRange", "V", 0x11, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum:);
+  methods[1].selector = @selector(addRangeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.NumericRangeQuery$NumericRangeTermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum", "initWithOrgApacheLuceneIndexTermsEnum:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2 = { 2, "", "org.apache.lucene.search", "NumericRangeQuery$NumericRangeTermsEnum", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum;", "addRange", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "initWithOrgApacheLuceneSearchNumericRangeQuery:withOrgApacheLuceneIndexTermsEnum:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2;
 }
 
 @end
 
-void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2 *self, OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
+void OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2 *self, OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneUtilNumericUtils_IntRangeBuilder_init(self);
 }
 
-OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2 *new_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2, initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_, outer$)
+OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2 *new_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2, initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_, outer$)
 }
 
-OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2 *create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2, initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_, outer$)
+OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2 *create_OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2_initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_2, initWithOrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_, outer$)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchNumericRangeQuery_NumericRangeTermsEnum_$2)

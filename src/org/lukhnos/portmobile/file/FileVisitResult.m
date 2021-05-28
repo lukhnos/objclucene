@@ -3,11 +3,15 @@
 //  source: ./core/src/java/org/lukhnos/portmobile/file/FileVisitResult.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/lukhnos/portmobile/file/FileVisitResult.h"
+
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/FileVisitResult must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static void OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(OrgLukhnosPortmobileFileFileVisitResult *self, NSString *__name, jint __ordinal);
 
@@ -33,8 +37,23 @@ OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult
   return (OrgLukhnosPortmobileFileFileVisitResult_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgLukhnosPortmobileFileFileVisitResult;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileFileVisitResult;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "CONTINUE", "LOrgLukhnosPortmobileFileFileVisitResult;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE), "Ljava/lang/Enum<Lorg/lukhnos/portmobile/file/FileVisitResult;>;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFileVisitResult = { "FileVisitResult", "org.lukhnos.portmobile.file", ptrTable, methods, fields, 7, 0x4011, 2, 1, -1, -1, -1, 3, -1 };
+  return &_OrgLukhnosPortmobileFileFileVisitResult;
 }
 
 + (void)initialize {
@@ -43,19 +62,12 @@ OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult
     size_t allocSize = 1 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(e, @"CONTINUE", 0);
+    for (jint i = 0; i < 1; i++) {
+      ((void)(OrgLukhnosPortmobileFileFileVisitResult_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(e, JreEnumConstantName(OrgLukhnosPortmobileFileFileVisitResult_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileFileFileVisitResult)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "CONTINUE", "CONTINUE", 0x4019, "Lorg.lukhnos.portmobile.file.FileVisitResult;", &JreEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.lukhnos.portmobile.file.FileVisitResult;"};
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFileVisitResult = { 2, "FileVisitResult", "org.lukhnos.portmobile.file", NULL, 0x4011, 0, NULL, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/lukhnos/portmobile/file/FileVisitResult;>;" };
-  return &_OrgLukhnosPortmobileFileFileVisitResult;
 }
 
 @end
@@ -77,7 +89,7 @@ OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

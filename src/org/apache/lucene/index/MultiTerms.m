@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/index/MultiTerms.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/MultiTerms.h"
@@ -15,6 +13,10 @@
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/automaton/CompiledAutomaton.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MultiTerms must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexMultiTerms () {
  @public
@@ -72,7 +74,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTerms, subSlices_, IOSObjectArray *
     OrgApacheLuceneIndexTerms * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneIndexTerms *terms = *b__++;
-      OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMin];
+      OrgApacheLuceneUtilBytesRef *term = JreRetainedLocalValue([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMin]);
       if (minTerm == nil || [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) compareToWithId:minTerm] < 0) {
         minTerm = term;
       }
@@ -89,7 +91,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTerms, subSlices_, IOSObjectArray *
     OrgApacheLuceneIndexTerms * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneIndexTerms *terms = *b__++;
-      OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMax];
+      OrgApacheLuceneUtilBytesRef *term = JreRetainedLocalValue([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMax]);
       if (maxTerm == nil || [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) compareToWithId:maxTerm] > 0) {
         maxTerm = term;
       }
@@ -195,32 +197,52 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTerms, subSlices_, IOSObjectArray *
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsArray:withOrgApacheLuceneIndexReaderSliceArray:", "MultiTerms", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getSubTerms", NULL, "[Lorg.apache.lucene.index.Terms;", 0x1, NULL, NULL },
-    { "getSubSlices", NULL, "[Lorg.apache.lucene.index.ReaderSlice;", 0x1, NULL, NULL },
-    { "intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:withOrgApacheLuceneUtilBytesRef:", "intersect", "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMin", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMax", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "size", NULL, "J", 0x1, NULL, NULL },
-    { "getSumTotalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSumDocFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "getDocCount", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "hasFreqs", NULL, "Z", 0x1, NULL, NULL },
-    { "hasOffsets", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPositions", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexTerms;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexReaderSlice;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTermsArray:withOrgApacheLuceneIndexReaderSliceArray:);
+  methods[1].selector = @selector(getSubTerms);
+  methods[2].selector = @selector(getSubSlices);
+  methods[3].selector = @selector(intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:withOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(getMin);
+  methods[5].selector = @selector(getMax);
+  methods[6].selector = @selector(iterator);
+  methods[7].selector = @selector(size);
+  methods[8].selector = @selector(getSumTotalTermFreq);
+  methods[9].selector = @selector(getSumDocFreq);
+  methods[10].selector = @selector(getDocCount);
+  methods[11].selector = @selector(hasFreqs);
+  methods[12].selector = @selector(hasOffsets);
+  methods[13].selector = @selector(hasPositions);
+  methods[14].selector = @selector(hasPayloads);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "subs_", NULL, 0x12, "[Lorg.apache.lucene.index.Terms;", NULL, NULL, .constantValue.asLong = 0 },
-    { "subSlices_", NULL, 0x12, "[Lorg.apache.lucene.index.ReaderSlice;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasFreqs_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasOffsets_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasPositions_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasPayloads_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "subs_", "[LOrgApacheLuceneIndexTerms;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "subSlices_", "[LOrgApacheLuceneIndexReaderSlice;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "hasFreqs_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "hasOffsets_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "hasPositions_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "hasPayloads_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTerms = { 2, "MultiTerms", "org.apache.lucene.index", NULL, 0x11, 15, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneIndexTerms;[LOrgApacheLuceneIndexReaderSlice;", "LJavaIoIOException;", "intersect", "LOrgApacheLuceneUtilAutomatonCompiledAutomaton;LOrgApacheLuceneUtilBytesRef;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTerms = { "MultiTerms", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 15, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMultiTerms;
 }
 
@@ -230,7 +252,7 @@ void OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneIndexTermsArray_withO
   OrgApacheLuceneIndexTerms_init(self);
   JreStrongAssign(&self->subs_, subs);
   JreStrongAssign(&self->subSlices_, subSlices);
-  JreAssert((((IOSObjectArray *) nil_chk(subs))->size_ > 0), (@"inefficient: don't use MultiTerms over one sub"));
+  JreAssert(((IOSObjectArray *) nil_chk(subs))->size_ > 0, @"inefficient: don't use MultiTerms over one sub");
   jboolean _hasFreqs = true;
   jboolean _hasOffsets = true;
   jboolean _hasPositions = true;

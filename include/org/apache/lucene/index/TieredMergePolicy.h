@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTieredMergePolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTieredMergePolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexTieredMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexTieredMergePolicy))
 #define OrgApacheLuceneIndexTieredMergePolicy_
 
@@ -30,48 +36,48 @@
 
 /*!
  @brief Merges segments of approximately equal size, subject to
- an allowed number of segments per tier.
- This is similar
- to <code>LogByteSizeMergePolicy</code>, except this merge
- policy is able to merge non-adjacent segment, and
- separates how many segments are merged at once (<code>setMaxMergeAtOnce</code>
+   an allowed number of segments per tier.This is similar
+   to <code>LogByteSizeMergePolicy</code>, except this merge
+   policy is able to merge non-adjacent segment, and
+   separates how many segments are merged at once (<code>setMaxMergeAtOnce</code>
  ) from how many segments are allowed
- per tier (<code>setSegmentsPerTier</code>).  This merge
- policy also does not over-merge (i.e. cascade merges). 
+   per tier (<code>setSegmentsPerTier</code>).
+ This merge
+   policy also does not over-merge (i.e. cascade merges).   
  <p>For normal merging, this policy first computes a
- "budget" of how many segments are allowed to be in the
- index.  If the index is over-budget, then the policy
- sorts segments by decreasing size (pro-rating by percent
- deletes), and then finds the least-cost merge.  Merge
- cost is measured by a combination of the "skew" of the
- merge (size of largest segment divided by smallest segment),
- total merge size and percent deletes reclaimed,
- so that merges with lower skew, smaller size
- and those reclaiming more deletes, are
- favored.
+   "budget" of how many segments are allowed to be in the
+   index.  If the index is over-budget, then the policy
+   sorts segments by decreasing size (pro-rating by percent
+   deletes), and then finds the least-cost merge.  Merge
+   cost is measured by a combination of the "skew" of the
+   merge (size of largest segment divided by smallest segment),
+   total merge size and percent deletes reclaimed,
+   so that merges with lower skew, smaller size
+   and those reclaiming more deletes, are
+   favored.  
  <p>If a merge will produce a segment that's larger than
- <code>setMaxMergedSegmentMB</code>, then the policy will
- merge fewer segments (down to 1 at once, if that one has
- deletions) to keep the segment size under budget.
+   <code>setMaxMergedSegmentMB</code>, then the policy will
+   merge fewer segments (down to 1 at once, if that one has
+   deletions) to keep the segment size under budget.
+         
  <p><b>NOTE</b>: this policy freely merges non-adjacent
- segments; if this is a problem, use <code>LogMergePolicy</code>
+   segments; if this is a problem, use <code>LogMergePolicy</code>
  .
- <p><b>NOTE</b>: This policy always merges by byte size
- of the segments, always pro-rates by percent deletes,
- and does not apply any maximum segment size during
- forceMerge (unlike <code>LogByteSizeMergePolicy</code>).
+   <p><b>NOTE</b>: This policy always merges by byte size
+   of the segments, always pro-rates by percent deletes,
+   and does not apply any maximum segment size during
+   forceMerge (unlike <code>LogByteSizeMergePolicy</code>).
  */
 @interface OrgApacheLuceneIndexTieredMergePolicy : OrgApacheLuceneIndexMergePolicy
-
-+ (jdouble)DEFAULT_NO_CFS_RATIO;
+@property (readonly, class) jdouble DEFAULT_NO_CFS_RATIO NS_SWIFT_NAME(DEFAULT_NO_CFS_RATIO);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor, setting all settings to their
- defaults.
+   defaults.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                                                                                 withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
@@ -128,68 +134,65 @@
 
 /*!
  @brief Segments smaller than this are "rounded up" to this
- size, ie treated as equal (floor) size for merge
- selection.
- This is to prevent frequent flushing of
- tiny segments from allowing a long tail in the index.
- Default is 2 MB. 
+   size, ie treated as equal (floor) size for merge
+   selection.This is to prevent frequent flushing of
+   tiny segments from allowing a long tail in the index.
+ Default is 2 MB.
  */
 - (OrgApacheLuceneIndexTieredMergePolicy *)setFloorSegmentMBWithDouble:(jdouble)v;
 
 /*!
  @brief When forceMergeDeletes is called, we only merge away a
- segment if its delete percentage is over this
- threshold.
- Default is 10%. 
+   segment if its delete percentage is over this
+   threshold.Default is 10%.
  */
 - (OrgApacheLuceneIndexTieredMergePolicy *)setForceMergeDeletesPctAllowedWithDouble:(jdouble)v;
 
 /*!
  @brief Maximum number of segments to be merged at a time
- during "normal" merging.
- For explicit merging (eg,
- forceMerge or forceMergeDeletes was called), see <code>setMaxMergeAtOnceExplicit</code>
- .  Default is 10. 
+   during "normal" merging.For explicit merging (eg,
+   forceMerge or forceMergeDeletes was called), see <code>setMaxMergeAtOnceExplicit</code>
+ .
+ Default is 10.
  */
 - (OrgApacheLuceneIndexTieredMergePolicy *)setMaxMergeAtOnceWithInt:(jint)v;
 
 /*!
  @brief Maximum number of segments to be merged at a time,
- during forceMerge or forceMergeDeletes.
- Default is 30. 
+   during forceMerge or forceMergeDeletes.Default is 30.
  */
 - (OrgApacheLuceneIndexTieredMergePolicy *)setMaxMergeAtOnceExplicitWithInt:(jint)v;
 
 /*!
  @brief Maximum sized segment to produce during
- normal merging.
- This setting is approximate: the
- estimate of the merged segment size is made by summing
- sizes of to-be-merged segments (compensating for
- percent deleted docs).  Default is 5 GB. 
+   normal merging.This setting is approximate: the
+   estimate of the merged segment size is made by summing
+   sizes of to-be-merged segments (compensating for
+   percent deleted docs).
+ Default is 5 GB.
  */
 - (OrgApacheLuceneIndexTieredMergePolicy *)setMaxMergedSegmentMBWithDouble:(jdouble)v;
 
 /*!
  @brief Controls how aggressively merges that reclaim more
- deletions are favored.
- Higher values will more
- aggressively target merges that reclaim deletions, but
- be careful not to go so high that way too much merging
- takes place; a value of 3.0 is probably nearly too
- high.  A value of 0.0 means deletions don't impact
- merge selection. 
+   deletions are favored.Higher values will more
+   aggressively target merges that reclaim deletions, but
+   be careful not to go so high that way too much merging
+   takes place; a value of 3.0 is probably nearly too
+   high.
+ A value of 0.0 means deletions don't impact
+   merge selection.
  */
 - (OrgApacheLuceneIndexTieredMergePolicy *)setReclaimDeletesWeightWithDouble:(jdouble)v;
 
 /*!
- @brief Sets the allowed number of segments per tier.
- Smaller
- values mean more merging but fewer segments.
+ @brief Sets the allowed number of segments per tier.Smaller
+   values mean more merging but fewer segments.
  <p><b>NOTE</b>: this value should be <code>>=</code> the <code>setMaxMergeAtOnce</code>
   otherwise you'll force too much
- merging to occur.</p>
- <p>Default is 10.0.</p> 
+   merging to occur.</p>
+   
+ <p>Default is 10.0.</p>
  */
 - (OrgApacheLuceneIndexTieredMergePolicy *)setSegmentsPerTierWithDouble:(jdouble)v;
 
@@ -205,25 +208,29 @@
                                                                    withLong:(jlong)mergingBytes
                                         withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithDouble:(jdouble)arg0
+                                withLong:(jlong)arg1 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTieredMergePolicy)
 
 /*!
- @brief Default noCFSRatio.
- If a merge's size is <code>>= 10%</code> of
- the index, then we disable compound file for it.
+ @brief Default noCFSRatio.If a merge's size is <code>>= 10%</code> of
+   the index, then we disable compound file for it.
  - seealso: MergePolicy#setNoCFSRatio
  */
-inline jdouble OrgApacheLuceneIndexTieredMergePolicy_get_DEFAULT_NO_CFS_RATIO();
+inline jdouble OrgApacheLuceneIndexTieredMergePolicy_get_DEFAULT_NO_CFS_RATIO(void);
 #define OrgApacheLuceneIndexTieredMergePolicy_DEFAULT_NO_CFS_RATIO 0.1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexTieredMergePolicy, DEFAULT_NO_CFS_RATIO, jdouble)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexTieredMergePolicy_init(OrgApacheLuceneIndexTieredMergePolicy *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexTieredMergePolicy *new_OrgApacheLuceneIndexTieredMergePolicy_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexTieredMergePolicy *new_OrgApacheLuceneIndexTieredMergePolicy_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexTieredMergePolicy *create_OrgApacheLuceneIndexTieredMergePolicy_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexTieredMergePolicy *create_OrgApacheLuceneIndexTieredMergePolicy_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy)
 
@@ -234,7 +241,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy)
 
 /*!
  @brief Holds score and explanation for a single candidate
- merge.
+   merge.
  */
 @interface OrgApacheLuceneIndexTieredMergePolicy_MergeScore : NSObject
 
@@ -243,21 +250,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy)
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Package-Private
 
 /*!
  @brief Human readable explanation of how the merge got this
- score.
+   score.
  */
 - (NSString *)getExplanation;
 
 /*!
  @brief Returns the score for this merge candidate; lower
- scores are better.
+   scores are better.
  */
 - (jdouble)getScore;
 
@@ -271,4 +278,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_MergeScore)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTieredMergePolicy")

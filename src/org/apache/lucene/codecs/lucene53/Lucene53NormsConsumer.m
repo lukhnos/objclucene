@@ -8,7 +8,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/Byte.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
@@ -28,6 +27,10 @@
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/util/IOUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene53/Lucene53NormsConsumer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer ()
 
@@ -55,12 +58,12 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsCo
 
 @implementation OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
-                                                 withNSString:(NSString *)dataCodec
-                                                 withNSString:(NSString *)dataExtension
-                                                 withNSString:(NSString *)metaCodec
-                                                 withNSString:(NSString *)metaExtension {
-  OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(self, state, dataCodec, dataExtension, metaCodec, metaExtension);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
+                                                               withNSString:(NSString *)dataCodec
+                                                               withNSString:(NSString *)dataExtension
+                                                               withNSString:(NSString *)metaCodec
+                                                               withNSString:(NSString *)metaExtension {
+  OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(self, state, dataCodec, dataExtension, metaCodec, metaExtension);
   return self;
 }
 
@@ -149,28 +152,41 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsCo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSegmentWriteState:withNSString:withNSString:withNSString:withNSString:", "Lucene53NormsConsumer", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "addNormsFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addNormsField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "addConstantWithLong:", "addConstant", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "addByte1WithJavaLangIterable:", "addByte1", "V", 0x2, "Ljava.io.IOException;", "(Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "addByte2WithJavaLangIterable:", "addByte2", "V", 0x2, "Ljava.io.IOException;", "(Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "addByte4WithJavaLangIterable:", "addByte4", "V", 0x2, "Ljava.io.IOException;", "(Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "addByte8WithJavaLangIterable:", "addByte8", "V", 0x2, "Ljava.io.IOException;", "(Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 1, 4, -1, -1 },
+    { NULL, "V", 0x2, 5, 6, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 7, 8, 1, 9, -1, -1 },
+    { NULL, "V", 0x2, 10, 8, 1, 9, -1, -1 },
+    { NULL, "V", 0x2, 11, 8, 1, 9, -1, -1 },
+    { NULL, "V", 0x2, 12, 8, 1, 9, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState:withNSString:withNSString:withNSString:withNSString:);
+  methods[1].selector = @selector(addNormsFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:);
+  methods[2].selector = @selector(addConstantWithLong:);
+  methods[3].selector = @selector(addByte1WithJavaLangIterable:);
+  methods[4].selector = @selector(addByte2WithJavaLangIterable:);
+  methods[5].selector = @selector(addByte4WithJavaLangIterable:);
+  methods[6].selector = @selector(addByte8WithJavaLangIterable:);
+  methods[7].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "data_", NULL, 0x0, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "meta_", NULL, 0x0, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "data_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "meta_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer = { 2, "Lucene53NormsConsumer", "org.apache.lucene.codecs.lucene53", NULL, 0x0, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentWriteState;LNSString;LNSString;LNSString;LNSString;", "LJavaIoIOException;", "addNormsField", "LOrgApacheLuceneIndexFieldInfo;LJavaLangIterable;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;)V", "addConstant", "J", "addByte1", "LJavaLangIterable;", "(Ljava/lang/Iterable<Ljava/lang/Number;>;)V", "addByte2", "addByte4", "addByte8" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer = { "Lucene53NormsConsumer", "org.apache.lucene.codecs.lucene53", ptrTable, methods, fields, 7, 0x0, 8, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer;
 }
 
 @end
 
-void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *self, OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
+void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *self, OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
   OrgApacheLuceneCodecsNormsConsumer_init(self);
   jboolean success = false;
   @try {
@@ -190,12 +206,12 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneI
   }
 }
 
-OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *new_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer, initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
+OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *new_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer, initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
 }
 
-OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *create_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer, initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
+OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *create_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer, initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
 }
 
 void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_addConstantWithLong_(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *self, jlong constant) {

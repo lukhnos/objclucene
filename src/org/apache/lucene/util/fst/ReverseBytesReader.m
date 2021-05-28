@@ -8,6 +8,10 @@
 #include "org/apache/lucene/util/fst/FST.h"
 #include "org/apache/lucene/util/fst/ReverseBytesReader.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/fst/ReverseBytesReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilFstReverseBytesReader () {
  @public
   IOSByteArray *bytes_;
@@ -20,8 +24,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstReverseBytesReader, bytes_, IOSByteArr
 
 @implementation OrgApacheLuceneUtilFstReverseBytesReader
 
-- (instancetype)initWithByteArray:(IOSByteArray *)bytes {
-  OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(self, bytes);
+- (instancetype)initPackagePrivateWithByteArray:(IOSByteArray *)bytes {
+  OrgApacheLuceneUtilFstReverseBytesReader_initPackagePrivateWithByteArray_(self, bytes);
   return self;
 }
 
@@ -59,36 +63,48 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstReverseBytesReader, bytes_, IOSByteArr
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithByteArray:", "ReverseBytesReader", NULL, 0x1, NULL, NULL },
-    { "readByte", NULL, "B", 0x1, NULL, NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, NULL, NULL },
-    { "skipBytesWithLong:", "skipBytes", "V", 0x1, NULL, NULL },
-    { "getPosition", NULL, "J", 0x1, NULL, NULL },
-    { "setPositionWithLong:", "setPosition", "V", 0x1, NULL, NULL },
-    { "reversed", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithByteArray:);
+  methods[1].selector = @selector(readByte);
+  methods[2].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  methods[3].selector = @selector(skipBytesWithLong:);
+  methods[4].selector = @selector(getPosition);
+  methods[5].selector = @selector(setPositionWithLong:);
+  methods[6].selector = @selector(reversed);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bytes_", NULL, 0x12, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "bytes_", "[B", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "pos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstReverseBytesReader = { 2, "ReverseBytesReader", "org.apache.lucene.util.fst", NULL, 0x10, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[B", "readBytes", "[BII", "skipBytes", "J", "setPosition" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstReverseBytesReader = { "ReverseBytesReader", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x10, 7, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilFstReverseBytesReader;
 }
 
 @end
 
-void OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(OrgApacheLuceneUtilFstReverseBytesReader *self, IOSByteArray *bytes) {
+void OrgApacheLuceneUtilFstReverseBytesReader_initPackagePrivateWithByteArray_(OrgApacheLuceneUtilFstReverseBytesReader *self, IOSByteArray *bytes) {
   OrgApacheLuceneUtilFstFST_BytesReader_init(self);
   JreStrongAssign(&self->bytes_, bytes);
 }
 
-OrgApacheLuceneUtilFstReverseBytesReader *new_OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(IOSByteArray *bytes) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstReverseBytesReader, initWithByteArray_, bytes)
+OrgApacheLuceneUtilFstReverseBytesReader *new_OrgApacheLuceneUtilFstReverseBytesReader_initPackagePrivateWithByteArray_(IOSByteArray *bytes) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstReverseBytesReader, initPackagePrivateWithByteArray_, bytes)
 }
 
-OrgApacheLuceneUtilFstReverseBytesReader *create_OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(IOSByteArray *bytes) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstReverseBytesReader, initWithByteArray_, bytes)
+OrgApacheLuceneUtilFstReverseBytesReader *create_OrgApacheLuceneUtilFstReverseBytesReader_initPackagePrivateWithByteArray_(IOSByteArray *bytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstReverseBytesReader, initPackagePrivateWithByteArray_, bytes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstReverseBytesReader)

@@ -13,46 +13,42 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40 || defined(INCLUDE_OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40))
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_
 
-@class IOSObjectArray;
 @class JavaIoReader;
 @protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
 
 @interface OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40 : NSObject
-
-+ (jint)YYEOF;
-
-+ (jint)YYINITIAL;
-
-+ (jint)WORD_TYPE;
-
-+ (jint)NUMERIC_TYPE;
-
-+ (jint)SOUTH_EAST_ASIAN_TYPE;
-
-+ (jint)IDEOGRAPHIC_TYPE;
-
-+ (jint)HIRAGANA_TYPE;
-
-+ (jint)KATAKANA_TYPE;
-
-+ (jint)HANGUL_TYPE;
+@property (readonly, class) jint YYEOF NS_SWIFT_NAME(YYEOF);
+@property (readonly, class) jint YYINITIAL NS_SWIFT_NAME(YYINITIAL);
+@property (readonly, class) jint WORD_TYPE NS_SWIFT_NAME(WORD_TYPE);
+@property (readonly, class) jint NUMERIC_TYPE NS_SWIFT_NAME(NUMERIC_TYPE);
+@property (readonly, class) jint SOUTH_EAST_ASIAN_TYPE NS_SWIFT_NAME(SOUTH_EAST_ASIAN_TYPE);
+@property (readonly, class) jint IDEOGRAPHIC_TYPE NS_SWIFT_NAME(IDEOGRAPHIC_TYPE);
+@property (readonly, class) jint HIRAGANA_TYPE NS_SWIFT_NAME(HIRAGANA_TYPE);
+@property (readonly, class) jint KATAKANA_TYPE NS_SWIFT_NAME(KATAKANA_TYPE);
+@property (readonly, class) jint HANGUL_TYPE NS_SWIFT_NAME(HANGUL_TYPE);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new scanner
- @param inArg  the java.io.Reader to read input from.
+ @param inArg the java.io.Reader to read input from.
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)inArg;
 
 /*!
  @brief Resumes scanning until the next regular expression is matched,
- the end of input is encountered or an I/O-Error occurs.
+  the end of input is encountered or an I/O-Error occurs.
  @return the next token
- @exception java.io.IOException  if any I/O-Error occurs
+ @throw java.io.IOExceptionif any I/O-Error occurs
  */
 - (jint)getNextToken;
 
@@ -73,10 +69,9 @@
 
 /*!
  @brief Returns the character at position <tt>pos</tt> from the 
- matched text.
+  matched text.
  It is equivalent to yytext().charAt(pos), but faster
- @param pos the position of the character to fetch. 
- A value from 0 to yylength()-1.
+ @param pos the position of the character to fetch.              A value from 0 to yylength()-1.
  @return the character at position pos
  */
 - (jchar)yycharatWithInt:(jint)pos;
@@ -94,19 +89,18 @@
 /*!
  @brief Pushes the specified amount of characters back into the input stream.
  They will be read again by then next call of the scanning method
- @param number  the number of characters to be read again.
- This number must not be greater than yylength()!
+ @param number the number of characters to be read again.                 This number must not be greater than yylength()!
  */
 - (void)yypushbackWithInt:(jint)number;
 
 /*!
  @brief Resets the scanner to read from a new input stream.
  Does not close the old reader.
- All internal variables are reset, the old input stream 
+  All internal variables are reset, the old input stream  
  <b>cannot</b> be reused (internal buffer is discarded and lost).
- Lexical state is set to <tt>ZZ_INITIAL</tt>.
- Internal scan buffer is resized down to its initial length, if it has grown.
- @param reader   the new input stream
+  Lexical state is set to <tt>ZZ_INITIAL</tt>.
+  Internal scan buffer is resized down to its initial length, if it has grown.
+ @param reader the new input stream
  */
 - (void)yyresetWithJavaIoReader:(JavaIoReader *)reader;
 
@@ -120,6 +114,10 @@
  */
 - (NSString *)yytext;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40)
@@ -127,57 +125,56 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40)
 /*!
  @brief This character denotes the end of file
  */
-inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_YYEOF();
+inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_YYEOF(void);
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_YYEOF -1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40, YYEOF, jint)
 
 /*!
  @brief lexical states
  */
-inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_YYINITIAL();
+inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_YYINITIAL(void);
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_YYINITIAL 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40, YYINITIAL, jint)
 
 /*!
  @brief Alphanumeric sequences
  */
-inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_WORD_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_WORD_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_WORD_TYPE 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40, WORD_TYPE, jint)
 
 /*!
  @brief Numbers
  */
-inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_NUMERIC_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_NUMERIC_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_NUMERIC_TYPE 6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40, NUMERIC_TYPE, jint)
 
 /*!
  @brief Chars in class \p{Line_Break = Complex_Context} are from South East Asian
- scripts (Thai, Lao, Myanmar, Khmer, etc.).
- Sequences of these are kept 
- together as as a single token rather than broken up, because the logic
- required to break them at word boundaries is too complex for UAX#29.
+  scripts (Thai, Lao, Myanmar, Khmer, etc.).Sequences of these are kept 
+  together as as a single token rather than broken up, because the logic
+  required to break them at word boundaries is too complex for UAX#29.
  <p>
- See Unicode Line Breaking Algorithm: http://www.unicode.org/reports/tr14/#SA
+  See Unicode Line Breaking Algorithm: http://www.unicode.org/reports/tr14/#SA
  */
-inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_SOUTH_EAST_ASIAN_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_SOUTH_EAST_ASIAN_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_SOUTH_EAST_ASIAN_TYPE 9
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40, SOUTH_EAST_ASIAN_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_IDEOGRAPHIC_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_IDEOGRAPHIC_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_IDEOGRAPHIC_TYPE 10
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40, IDEOGRAPHIC_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_HIRAGANA_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_HIRAGANA_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_HIRAGANA_TYPE 11
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40, HIRAGANA_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_KATAKANA_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_KATAKANA_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_KATAKANA_TYPE 12
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40, KATAKANA_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_HANGUL_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_get_HANGUL_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40_HANGUL_TYPE 13
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40, HANGUL_TYPE, jint)
 
@@ -191,4 +188,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStd40StandardTokenizerImpl40")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileCharsetStandardCharsets
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileCharsetStandardCharsets_) && (INCLUDE_ALL_OrgLukhnosPortmobileCharsetStandardCharsets || defined(INCLUDE_OrgLukhnosPortmobileCharsetStandardCharsets))
 #define OrgLukhnosPortmobileCharsetStandardCharsets_
 
@@ -20,40 +26,42 @@
 
 /*!
  @brief This is for Android compatibility because java.nio.charset.Charset is not available until API
- level 19.
+  level 19.
  */
 @interface OrgLukhnosPortmobileCharsetStandardCharsets : NSObject
-
-+ (JavaNioCharsetCharset *)ISO_8859_1;
-
-+ (JavaNioCharsetCharset *)UTF_8;
+@property (readonly, class, strong) JavaNioCharsetCharset *ISO_8859_1 NS_SWIFT_NAME(ISO_8859_1);
+@property (readonly, class, strong) JavaNioCharsetCharset *UTF_8 NS_SWIFT_NAME(UTF_8);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgLukhnosPortmobileCharsetStandardCharsets)
 
-inline JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_get_ISO_8859_1();
+inline JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_get_ISO_8859_1(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgLukhnosPortmobileCharsetStandardCharsets, ISO_8859_1, JavaNioCharsetCharset *)
 
-inline JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_get_UTF_8();
+inline JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_get_UTF_8(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8, JavaNioCharsetCharset *)
 
 FOUNDATION_EXPORT void OrgLukhnosPortmobileCharsetStandardCharsets_init(OrgLukhnosPortmobileCharsetStandardCharsets *self);
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileCharsetStandardCharsets *new_OrgLukhnosPortmobileCharsetStandardCharsets_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgLukhnosPortmobileCharsetStandardCharsets *new_OrgLukhnosPortmobileCharsetStandardCharsets_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileCharsetStandardCharsets *create_OrgLukhnosPortmobileCharsetStandardCharsets_init();
+FOUNDATION_EXPORT OrgLukhnosPortmobileCharsetStandardCharsets *create_OrgLukhnosPortmobileCharsetStandardCharsets_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileCharsetStandardCharsets)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileCharsetStandardCharsets")

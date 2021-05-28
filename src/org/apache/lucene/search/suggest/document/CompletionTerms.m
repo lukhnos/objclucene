@@ -3,15 +3,17 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/CompletionTerms.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/FilterLeafReader.h"
 #include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/search/suggest/document/CompletionTerms.h"
 #include "org/apache/lucene/search/suggest/document/CompletionsTermsReader.h"
 #include "org/apache/lucene/search/suggest/document/NRTSuggester.h"
 #include "org/apache/lucene/search/suggest/document/SuggestField.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/CompletionTerms must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionTerms () {
  @public
@@ -52,17 +54,27 @@ withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader:(OrgApacheLuceneS
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader:", "CompletionTerms", NULL, 0x0, NULL, NULL },
-    { "getType", NULL, "B", 0x1, NULL, NULL },
-    { "getMinWeight", NULL, "J", 0x1, NULL, NULL },
-    { "getMaxWeight", NULL, "J", 0x1, NULL, NULL },
-    { "suggester", NULL, "Lorg.apache.lucene.search.suggest.document.NRTSuggester;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester;", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader:);
+  methods[1].selector = @selector(getType);
+  methods[2].selector = @selector(getMinWeight);
+  methods[3].selector = @selector(getMaxWeight);
+  methods[4].selector = @selector(suggester);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reader_", NULL, 0x12, "Lorg.apache.lucene.search.suggest.document.CompletionsTermsReader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "reader_", "LOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTerms = { 2, "CompletionTerms", "org.apache.lucene.search.suggest.document", NULL, 0x11, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerms;LOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTerms = { "CompletionTerms", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x11, 5, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionTerms;
 }
 

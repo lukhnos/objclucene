@@ -5,7 +5,12 @@
 
 #include "J2ObjC_source.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Throwable.h"
 #include "org/apache/lucene/store/AlreadyClosedException.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/AlreadyClosedException must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneStoreAlreadyClosedException
 
@@ -15,17 +20,24 @@
 }
 
 - (instancetype)initWithNSString:(NSString *)message
-                 withNSException:(NSException *)cause {
-  OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(self, message, cause);
+           withJavaLangThrowable:(JavaLangThrowable *)cause {
+  OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(self, message, cause);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "AlreadyClosedException", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withNSException:", "AlreadyClosedException", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreAlreadyClosedException = { 2, "AlreadyClosedException", "org.apache.lucene.store", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(initWithNSString:withJavaLangThrowable:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;", "LNSString;LJavaLangThrowable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreAlreadyClosedException = { "AlreadyClosedException", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreAlreadyClosedException;
 }
 
@@ -43,16 +55,16 @@ OrgApacheLuceneStoreAlreadyClosedException *create_OrgApacheLuceneStoreAlreadyCl
   J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreAlreadyClosedException, initWithNSString_, message)
 }
 
-void OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(OrgApacheLuceneStoreAlreadyClosedException *self, NSString *message, NSException *cause) {
-  JavaLangIllegalStateException_initWithNSString_withNSException_(self, message, cause);
+void OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneStoreAlreadyClosedException *self, NSString *message, JavaLangThrowable *cause) {
+  JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(self, message, cause);
 }
 
-OrgApacheLuceneStoreAlreadyClosedException *new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(NSString *message, NSException *cause) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreAlreadyClosedException, initWithNSString_withNSException_, message, cause)
+OrgApacheLuceneStoreAlreadyClosedException *new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreAlreadyClosedException, initWithNSString_withJavaLangThrowable_, message, cause)
 }
 
-OrgApacheLuceneStoreAlreadyClosedException *create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(NSString *message, NSException *cause) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreAlreadyClosedException, initWithNSString_withNSException_, message, cause)
+OrgApacheLuceneStoreAlreadyClosedException *create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreAlreadyClosedException, initWithNSString_withJavaLangThrowable_, message, cause)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreAlreadyClosedException)

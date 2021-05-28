@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader))
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_
 
@@ -48,17 +54,17 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)d
-                  withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
-                                         withNSString:(NSString *)segmentSuffix
-                   withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fn
-                    withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
-                                         withNSString:(NSString *)formatName
-  withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)d
+                            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
+                                                   withNSString:(NSString *)segmentSuffix
+                             withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fn
+                              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
+                                                   withNSString:(NSString *)formatName
+            withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode;
 
 - (void)checkIntegrity;
 
-- (OrgApacheLuceneCodecsTermVectorsReader *)clone;
+- (OrgApacheLuceneCodecsTermVectorsReader *)java_clone;
 
 - (void)close;
 
@@ -90,6 +96,10 @@
 
 - (jint)getVersion;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader)
@@ -107,4 +117,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader")

@@ -3,9 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/commongrams/CommonGramsFilterFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
@@ -13,10 +11,13 @@
 #include "org/apache/lucene/analysis/commongrams/CommonGramsFilter.h"
 #include "org/apache/lucene/analysis/commongrams/CommonGramsFilterFactory.h"
 #include "org/apache/lucene/analysis/core/StopAnalyzer.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/commongrams/CommonGramsFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory () {
  @public
@@ -41,7 +42,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory, 
 
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
   if (commonWordFiles_ != nil) {
-    if ([@"snowball" equalsIgnoreCase:format_]) {
+    if ([@"snowball" java_equalsIgnoreCase:format_]) {
       JreStrongAssign(&commonWords_, [self getSnowballWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:commonWordFiles_ withBoolean:ignoreCase_]);
     }
     else {
@@ -74,20 +75,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "CommonGramsFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "isIgnoreCase", NULL, "Z", 0x1, NULL, NULL },
-    { "getCommonWords", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenFilter;", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(informWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[2].selector = @selector(isIgnoreCase);
+  methods[3].selector = @selector(getCommonWords);
+  methods[4].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "commonWords_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "commonWordFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "format_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "commonWords_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "commonWordFiles_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "format_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "ignoreCase_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory = { 2, "CommonGramsFilterFactory", "org.apache.lucene.analysis.commongrams", NULL, 0x1, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "inform", "LOrgApacheLuceneAnalysisUtilResourceLoader;", "LJavaIoIOException;", "create", "LOrgApacheLuceneAnalysisTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory = { "CommonGramsFilterFactory", "org.apache.lucene.analysis.commongrams", ptrTable, methods, fields, 7, 0x1, 5, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory;
 }
 

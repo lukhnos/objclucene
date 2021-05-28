@@ -12,7 +12,6 @@
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/Token.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/CharTermAttributeImpl.h"
 #include "org/apache/lucene/analysis/tokenattributes/FlagsAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/PackedTokenAttributeImpl.h"
 #include "org/apache/lucene/analysis/tokenattributes/PayloadAttribute.h"
@@ -20,6 +19,12 @@
 #include "org/apache/lucene/util/AttributeImpl.h"
 #include "org/apache/lucene/util/AttributeReflector.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+static void (*OrgApacheLuceneAnalysisToken_super$_copyToWithOrgApacheLuceneUtilAttributeImpl_)(id, SEL, id);
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/Token must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisToken () {
  @public
@@ -32,6 +37,10 @@
 @end
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisToken, payload_, OrgApacheLuceneUtilBytesRef *)
+
+__attribute__((unused)) static void OrgApacheLuceneAnalysisToken_copyToWithoutPayloadCloneWithOrgApacheLuceneUtilAttributeImpl_(OrgApacheLuceneAnalysisToken *self, OrgApacheLuceneUtilAttributeImpl *target);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisToken__Annotations$0(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisToken)
 
@@ -80,9 +89,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (obj == self) return true;
+  if (JreObjectEqualsEquals(obj, self)) return true;
   if ([obj isKindOfClass:[OrgApacheLuceneAnalysisToken class]]) {
-    OrgApacheLuceneAnalysisToken *other = (OrgApacheLuceneAnalysisToken *) cast_chk(obj, [OrgApacheLuceneAnalysisToken class]);
+    OrgApacheLuceneAnalysisToken *other = (OrgApacheLuceneAnalysisToken *) obj;
     return (flags_ == ((OrgApacheLuceneAnalysisToken *) nil_chk(other))->flags_ && (payload_ == nil ? other->payload_ == nil : [payload_ isEqual:other->payload_]) && [super isEqual:obj]);
   }
   else return false;
@@ -97,28 +106,26 @@ J2OBJC_IGNORE_DESIGNATED_END
   return code;
 }
 
-- (OrgApacheLuceneAnalysisToken *)clone {
-  OrgApacheLuceneAnalysisToken *t = (OrgApacheLuceneAnalysisToken *) cast_chk([super clone], [OrgApacheLuceneAnalysisToken class]);
+- (OrgApacheLuceneAnalysisToken *)java_clone {
+  OrgApacheLuceneAnalysisToken *t = (OrgApacheLuceneAnalysisToken *) cast_chk([super java_clone], [OrgApacheLuceneAnalysisToken class]);
   if (payload_ != nil) {
-    JreStrongAssign(&((OrgApacheLuceneAnalysisToken *) nil_chk(t))->payload_, [payload_ clone]);
+    JreStrongAssign(&((OrgApacheLuceneAnalysisToken *) nil_chk(t))->payload_, [payload_ java_clone]);
   }
   return t;
 }
 
 - (void)reinitWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)prototype {
-  [((OrgApacheLuceneAnalysisToken *) nil_chk(prototype)) copyToWithoutPayloadCloneWithOrgApacheLuceneUtilAttributeImpl:self];
+  OrgApacheLuceneAnalysisToken_copyToWithoutPayloadCloneWithOrgApacheLuceneUtilAttributeImpl_(nil_chk(prototype), self);
 }
 
 - (void)copyToWithoutPayloadCloneWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  [super copyToWithOrgApacheLuceneUtilAttributeImpl:target];
-  [((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_class_())))) setFlagsWithInt:flags_];
-  [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_())))) setPayloadWithOrgApacheLuceneUtilBytesRef:payload_];
+  OrgApacheLuceneAnalysisToken_copyToWithoutPayloadCloneWithOrgApacheLuceneUtilAttributeImpl_(self, target);
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
   [super copyToWithOrgApacheLuceneUtilAttributeImpl:target];
   [((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_class_())))) setFlagsWithInt:flags_];
-  [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_())))) setPayloadWithOrgApacheLuceneUtilBytesRef:(payload_ == nil) ? nil : [((OrgApacheLuceneUtilBytesRef *) nil_chk(payload_)) clone]];
+  [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_())))) setPayloadWithOrgApacheLuceneUtilBytesRef:(payload_ == nil) ? nil : [((OrgApacheLuceneUtilBytesRef *) nil_chk(payload_)) java_clone]];
 }
 
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector {
@@ -127,46 +134,62 @@ J2OBJC_IGNORE_DESIGNATED_END
   [reflector reflectWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_() withNSString:@"payload" withId:payload_];
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(payload_);
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisToken;", 0x1, 8, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithJavaLangCharSequence:withInt:withInt:);
+  methods[2].selector = @selector(getFlags);
+  methods[3].selector = @selector(setFlagsWithInt:);
+  methods[4].selector = @selector(getPayload);
+  methods[5].selector = @selector(setPayloadWithOrgApacheLuceneUtilBytesRef:);
+  methods[6].selector = @selector(clear);
+  methods[7].selector = @selector(isEqual:);
+  methods[8].selector = @selector(hash);
+  methods[9].selector = @selector(java_clone);
+  methods[10].selector = @selector(reinitWithOrgApacheLuceneAnalysisToken:);
+  methods[11].selector = @selector(copyToWithoutPayloadCloneWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[12].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[13].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "flags_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "TOKEN_ATTRIBUTE_FACTORY", "LOrgApacheLuceneUtilAttributeFactory;", .constantValue.asLong = 0, 0x19, -1, 16, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LJavaLangCharSequence;II", "setFlags", "I", "setPayload", "LOrgApacheLuceneUtilBytesRef;", "equals", "LNSObject;", "hashCode", "clone", "reinit", "LOrgApacheLuceneAnalysisToken;", "copyToWithoutPayloadClone", "LOrgApacheLuceneUtilAttributeImpl;", "copyTo", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;", &OrgApacheLuceneAnalysisToken_TOKEN_ATTRIBUTE_FACTORY, (void *)&OrgApacheLuceneAnalysisToken__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisToken = { "Token", "org.apache.lucene.analysis", ptrTable, methods, fields, 7, 0x1, 14, 3, -1, -1, -1, -1, 17 };
+  return &_OrgApacheLuceneAnalysisToken;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisToken class]) {
+    OrgApacheLuceneAnalysisToken_super$_copyToWithOrgApacheLuceneUtilAttributeImpl_ = (void (*)(id, SEL, id))[OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl instanceMethodForSelector:@selector(copyToWithOrgApacheLuceneUtilAttributeImpl:)];
     JreStrongAssign(&OrgApacheLuceneAnalysisToken_TOKEN_ATTRIBUTE_FACTORY, OrgApacheLuceneUtilAttributeFactory_getStaticImplementationWithOrgApacheLuceneUtilAttributeFactory_withIOSClass_(JreLoadStatic(OrgApacheLuceneUtilAttributeFactory, DEFAULT_ATTRIBUTE_FACTORY), OrgApacheLuceneAnalysisToken_class_()));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisToken)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Token", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangCharSequence:withInt:withInt:", "Token", NULL, 0x1, NULL, NULL },
-    { "getFlags", NULL, "I", 0x1, NULL, NULL },
-    { "setFlagsWithInt:", "setFlags", "V", 0x1, NULL, NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "setPayloadWithOrgApacheLuceneUtilBytesRef:", "setPayload", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.analysis.Token;", 0x1, NULL, NULL },
-    { "reinitWithOrgApacheLuceneAnalysisToken:", "reinit", "V", 0x1, NULL, NULL },
-    { "copyToWithoutPayloadCloneWithOrgApacheLuceneUtilAttributeImpl:", "copyToWithoutPayloadClone", "V", 0x2, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "flags_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payload_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "TOKEN_ATTRIBUTE_FACTORY", "TOKEN_ATTRIBUTE_FACTORY", 0x19, "Lorg.apache.lucene.util.AttributeFactory;", &OrgApacheLuceneAnalysisToken_TOKEN_ATTRIBUTE_FACTORY, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisToken = { 2, "Token", "org.apache.lucene.analysis", NULL, 0x1, 14, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisToken;
 }
 
 @end
@@ -195,6 +218,16 @@ OrgApacheLuceneAnalysisToken *new_OrgApacheLuceneAnalysisToken_initWithJavaLangC
 
 OrgApacheLuceneAnalysisToken *create_OrgApacheLuceneAnalysisToken_initWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> text, jint start, jint end) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisToken, initWithJavaLangCharSequence_withInt_withInt_, text, start, end)
+}
+
+void OrgApacheLuceneAnalysisToken_copyToWithoutPayloadCloneWithOrgApacheLuceneUtilAttributeImpl_(OrgApacheLuceneAnalysisToken *self, OrgApacheLuceneUtilAttributeImpl *target) {
+  OrgApacheLuceneAnalysisToken_super$_copyToWithOrgApacheLuceneUtilAttributeImpl_(self, @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:), target);
+  [((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_class_())))) setFlagsWithInt:self->flags_];
+  [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_())))) setPayloadWithOrgApacheLuceneUtilBytesRef:self->payload_];
+}
+
+IOSObjectArray *OrgApacheLuceneAnalysisToken__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisToken)

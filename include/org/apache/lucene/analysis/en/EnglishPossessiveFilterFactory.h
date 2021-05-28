@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory))
 #define OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_
 
@@ -26,13 +32,13 @@
 /*!
  @brief Factory for <code>EnglishPossessiveFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_enpossessive" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
- &lt;filter class="solr.EnglishPossessiveFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_enpossessive" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+      &lt;filter class="solr.EnglishPossessiveFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
@@ -42,7 +48,7 @@
 /*!
  @brief Creates a new EnglishPossessiveFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFacto
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory")

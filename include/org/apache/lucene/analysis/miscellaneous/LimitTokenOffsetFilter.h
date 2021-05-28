@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_
 
@@ -24,18 +30,17 @@
 
 /*!
  @brief Lets all tokens pass through until it sees one with a start offset &lt;= a
- configured limit, which won't pass and ends the stream.
- This can be useful to
- limit highlighting, for example.
+  configured limit, which won't pass and ends the stream.This can be useful to
+  limit highlighting, for example.
  <p>
- By default, this filter ignores any tokens in the wrapped <code>TokenStream</code>
- once the limit has been exceeded, which can result in <code>reset()</code> being
- called prior to <code>incrementToken()</code> returning <code>false</code>.  For most
+  By default, this filter ignores any tokens in the wrapped <code>TokenStream</code>
+  once the limit has been exceeded, which can result in <code>reset()</code> being
+  called prior to <code>incrementToken()</code> returning <code>false</code>.  For most 
  <code>TokenStream</code> implementations this should be acceptable, and faster
- then consuming the full stream. If you are wrapping a <code>TokenStream</code>
- which requires that the full stream of tokens be exhausted in order to
- function properly, use the
- <code>LimitTokenOffsetFilter(TokenStream,int,boolean)</code> option.
+  then consuming the full stream. If you are wrapping a <code>TokenStream</code>
+  which requires that the full stream of tokens be exhausted in order to
+  function properly, use the 
+ <code>LimitTokenOffsetFilter(TokenStream, int, boolean)</code> option.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -43,18 +48,21 @@
 
 /*!
  @brief Lets all tokens pass through until it sees one with a start offset &lt;= <code>maxStartOffset</code>
- which won't pass and ends the stream.
- It won't consume any tokens afterwards.
+  which won't pass and ends the stream.It won't consume any tokens afterwards.
  @param maxStartOffset the maximum start offset allowed
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)maxStartOffset;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                             withInt:(jint)maxStartOffset;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)maxStartOffset
-                                               withBoolean:(jboolean)consumeAllTokens;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                             withInt:(jint)maxStartOffset
+                                                         withBoolean:(jboolean)consumeAllTokens;
 
 - (jboolean)incrementToken;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -76,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetF
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter")

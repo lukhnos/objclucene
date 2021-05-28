@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocValuesRangeFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocValuesRangeFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRangeFilter || defined(INCLUDE_OrgApacheLuceneSearchDocValuesRangeFilter))
 #define OrgApacheLuceneSearchDocValuesRangeFilter_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class IOSObjectArray;
 @class JavaLangDouble;
 @class JavaLangFloat;
 @class JavaLangInteger;
@@ -32,29 +37,29 @@
 
 /*!
  @brief A range filter built on top of numeric doc values field 
- (from <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>).
+  (from <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>).
  <p><code>DocValuesRangeFilter</code> builds a single cache for the field the first time it is used.
- Each subsequent <code>DocValuesRangeFilter</code> on the same field then reuses this cache,
- even if the range itself changes. 
+  Each subsequent <code>DocValuesRangeFilter</code> on the same field then reuses this cache,
+  even if the range itself changes.   
  <p>This means that <code>DocValuesRangeFilter</code> is much faster (sometimes more than 100x as fast) 
- as building a <code>TermRangeFilter</code>, if using a <code>newStringRange</code>.
- However, if the range never changes it is slower (around 2x as slow) than building
- a CachingWrapperFilter on top of a single <code>TermRangeFilter</code>.
- For numeric data types, this filter may be significantly faster than <code>NumericRangeFilter</code>.
- Furthermore, it does not need the numeric values encoded
- by <code>IntField</code>, <code>FloatField</code>, <code>LongField</code>
+  as building a <code>TermRangeFilter</code>, if using a <code>newStringRange</code>.
+  However, if the range never changes it is slower (around 2x as slow) than building
+  a CachingWrapperFilter on top of a single <code>TermRangeFilter</code>.
+  For numeric data types, this filter may be significantly faster than <code>NumericRangeFilter</code>.
+  Furthermore, it does not need the numeric values encoded
+  by <code>IntField</code>, <code>FloatField</code>, <code>LongField</code>
   or <code>DoubleField</code>. But
- it has the problem that it only works with exact one value/document (see below).
- <p>As with all <code>org.apache.lucene.index.LeafReader.getNumericDocValues</code> based functionality, 
+  it has the problem that it only works with exact one value/document (see below). 
+ <p>As with all <code>org.apache.lucene.index.LeafReader.getNumericDocValues</code> based functionality,  
  <code>DocValuesRangeFilter</code> is only valid for 
- fields which exact one term for each document (except for <code>newStringRange</code>
- where 0 terms are also allowed). Due to historical reasons, for numeric ranges
- all terms that do not have a numeric value, 0 is assumed.
+  fields which exact one term for each document (except for <code>newStringRange</code>
+  where 0 terms are also allowed). Due to historical reasons, for numeric ranges
+  all terms that do not have a numeric value, 0 is assumed. 
  <p>Thus it works on dates, prices and other single value fields but will not work on
- regular text fields. It is preferable to use a <code>NOT_ANALYZED</code> field to ensure that
- there is only a single term. 
+  regular text fields. It is preferable to use a <code>NOT_ANALYZED</code> field to ensure that
+  there is only a single term.  
  <p>This class does not have an constructor, use one of the static factory methods available,
- that create a correct instance for different data types.
+  that create a correct instance for different data types.
  */
 @interface OrgApacheLuceneSearchDocValuesRangeFilter : OrgApacheLuceneSearchFilter {
  @public
@@ -103,10 +108,10 @@
 - (jboolean)includesUpper;
 
 /*!
- @brief Creates a BytesRef range filter using <code>org.apache.lucene.index.LeafReader.getSortedDocValues(String)</code>.
- This works with all
- fields containing zero or one term in the field. The range can be half-open by setting one
- of the values to <code>null</code>.
+ @brief Creates a BytesRef range filter using <code>org.apache.lucene.index.LeafReader.getSortedDocValues(String)</code>.This works with all
+  fields containing zero or one term in the field.
+ The range can be half-open by setting one
+  of the values to <code>null</code>.
  */
 + (OrgApacheLuceneSearchDocValuesRangeFilter *)newBytesRefRangeWithNSString:(NSString *)field
                                             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerVal
@@ -115,10 +120,10 @@
                                                                 withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief Creates a numeric range filter using <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>.
- This works with all
- double fields containing exactly one numeric term in the field. The range can be half-open by setting one
- of the values to <code>null</code>.
+ @brief Creates a numeric range filter using <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>.This works with all
+  double fields containing exactly one numeric term in the field.
+ The range can be half-open by setting one
+  of the values to <code>null</code>.
  */
 + (OrgApacheLuceneSearchDocValuesRangeFilter *)newDoubleRangeWithNSString:(NSString *)field
                                                        withJavaLangDouble:(JavaLangDouble *)lowerVal
@@ -127,10 +132,10 @@
                                                               withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief Creates a numeric range filter using <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>.
- This works with all
- float fields containing exactly one numeric term in the field. The range can be half-open by setting one
- of the values to <code>null</code>.
+ @brief Creates a numeric range filter using <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>.This works with all
+  float fields containing exactly one numeric term in the field.
+ The range can be half-open by setting one
+  of the values to <code>null</code>.
  */
 + (OrgApacheLuceneSearchDocValuesRangeFilter *)newFloatRangeWithNSString:(NSString *)field
                                                        withJavaLangFloat:(JavaLangFloat *)lowerVal
@@ -139,10 +144,10 @@
                                                              withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief Creates a numeric range filter using <code>org.apache.lucene.index.LeafReader.getSortedDocValues(String)</code>.
- This works with all
- int fields containing exactly one numeric term in the field. The range can be half-open by setting one
- of the values to <code>null</code>.
+ @brief Creates a numeric range filter using <code>org.apache.lucene.index.LeafReader.getSortedDocValues(String)</code>.This works with all
+  int fields containing exactly one numeric term in the field.
+ The range can be half-open by setting one
+  of the values to <code>null</code>.
  */
 + (OrgApacheLuceneSearchDocValuesRangeFilter *)newIntRangeWithNSString:(NSString *)field
                                                    withJavaLangInteger:(JavaLangInteger *)lowerVal
@@ -151,10 +156,10 @@
                                                            withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief Creates a numeric range filter using <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>.
- This works with all
- long fields containing exactly one numeric term in the field. The range can be half-open by setting one
- of the values to <code>null</code>.
+ @brief Creates a numeric range filter using <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>.This works with all
+  long fields containing exactly one numeric term in the field.
+ The range can be half-open by setting one
+  of the values to <code>null</code>.
  */
 + (OrgApacheLuceneSearchDocValuesRangeFilter *)newLongRangeWithNSString:(NSString *)field
                                                        withJavaLangLong:(JavaLangLong *)lowerVal
@@ -163,10 +168,10 @@
                                                             withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief Creates a string range filter using <code>org.apache.lucene.index.LeafReader.getSortedDocValues(String)</code>.
- This works with all
- fields containing zero or one term in the field. The range can be half-open by setting one
- of the values to <code>null</code>.
+ @brief Creates a string range filter using <code>org.apache.lucene.index.LeafReader.getSortedDocValues(String)</code>.This works with all
+  fields containing zero or one term in the field.
+ The range can be half-open by setting one
+  of the values to <code>null</code>.
  */
 + (OrgApacheLuceneSearchDocValuesRangeFilter *)newStringRangeWithNSString:(NSString *)field
                                                              withNSString:(NSString *)lowerVal
@@ -175,6 +180,10 @@
                                                               withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -200,4 +209,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRangeFilter")

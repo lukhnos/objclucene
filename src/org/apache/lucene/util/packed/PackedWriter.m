@@ -3,16 +3,18 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/PackedWriter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/EOFException.h"
-#include "java/io/IOException.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/packed/BulkOperation.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 #include "org/apache/lucene/util/packed/PackedWriter.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/PackedWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilPackedPackedWriter ()
 
@@ -24,12 +26,12 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedPackedWriter_flush(
 
 @implementation OrgApacheLuceneUtilPackedPackedWriter
 
-- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
-                                withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
-                                                           withInt:(jint)valueCount
-                                                           withInt:(jint)bitsPerValue
-                                                           withInt:(jint)mem {
-  OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(self, format, outArg, valueCount, bitsPerValue, mem);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
+                                              withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
+                                                                         withInt:(jint)valueCount
+                                                                         withInt:(jint)bitsPerValue
+                                                                         withInt:(jint)mem {
+  OrgApacheLuceneUtilPackedPackedWriter_initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(self, format, outArg, valueCount, bitsPerValue, mem);
   return self;
 }
 
@@ -38,8 +40,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedPackedWriter_flush(
 }
 
 - (void)addWithLong:(jlong)v {
-  JreAssert((OrgApacheLuceneUtilPackedPackedInts_unsignedBitsRequiredWithLong_(v) <= bitsPerValue_), (@"org/apache/lucene/util/packed/PackedWriter.java:59 condition failed: assert PackedInts.unsignedBitsRequired(v) <= bitsPerValue;"));
-  JreAssert((!finished_), (@"org/apache/lucene/util/packed/PackedWriter.java:60 condition failed: assert !finished;"));
+  JreAssert(OrgApacheLuceneUtilPackedPackedInts_unsignedBitsRequiredWithLong_(v) <= bitsPerValue_, @"org/apache/lucene/util/packed/PackedWriter.java:59 condition failed: assert PackedInts.unsignedBitsRequired(v) <= bitsPerValue;");
+  JreAssert(!finished_, @"org/apache/lucene/util/packed/PackedWriter.java:60 condition failed: assert !finished;");
   if (valueCount_ != -1 && written_ >= valueCount_) {
     @throw create_JavaIoEOFException_initWithNSString_(@"Writing past end of stream");
   }
@@ -51,7 +53,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedPackedWriter_flush(
 }
 
 - (void)finish {
-  JreAssert((!finished_), (@"org/apache/lucene/util/packed/PackedWriter.java:73 condition failed: assert !finished;"));
+  JreAssert(!finished_, @"org/apache/lucene/util/packed/PackedWriter.java:73 condition failed: assert !finished;");
   if (valueCount_ != -1) {
     while (written_ < valueCount_) {
       [self addWithLong:0LL];
@@ -78,31 +80,42 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedPackedWriter_flush(
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilPackedPackedInts_Format:withOrgApacheLuceneStoreDataOutput:withInt:withInt:withInt:", "PackedWriter", NULL, 0x0, NULL, NULL },
-    { "getFormat", NULL, "Lorg.apache.lucene.util.packed.PackedInts$Format;", 0x4, NULL, NULL },
-    { "addWithLong:", "add", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "finish", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "flush", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "ord", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedInts_Format;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format:withOrgApacheLuceneStoreDataOutput:withInt:withInt:withInt:);
+  methods[1].selector = @selector(getFormat);
+  methods[2].selector = @selector(addWithLong:);
+  methods[3].selector = @selector(finish);
+  methods[4].selector = @selector(flush);
+  methods[5].selector = @selector(ord);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "finished_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "format_", NULL, 0x10, "Lorg.apache.lucene.util.packed.PackedInts$Format;", NULL, NULL, .constantValue.asLong = 0 },
-    { "encoder_", NULL, 0x10, "Lorg.apache.lucene.util.packed.BulkOperation;", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextBlocks_", NULL, 0x10, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextValues_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "iterations_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "off_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "written_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "finished_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "format_", "LOrgApacheLuceneUtilPackedPackedInts_Format;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "encoder_", "LOrgApacheLuceneUtilPackedBulkOperation;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "nextBlocks_", "[B", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "nextValues_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "iterations_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "off_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "written_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedWriter = { 2, "PackedWriter", "org.apache.lucene.util.packed", NULL, 0x10, 6, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilPackedPackedInts_Format;LOrgApacheLuceneStoreDataOutput;III", "add", "J", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedWriter = { "PackedWriter", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x10, 6, 8, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPackedWriter;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedWriter *self, OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) {
+void OrgApacheLuceneUtilPackedPackedWriter_initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedWriter *self, OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) {
   OrgApacheLuceneUtilPackedPackedInts_Writer_initWithOrgApacheLuceneStoreDataOutput_withInt_withInt_(self, outArg, valueCount, bitsPerValue);
   JreStrongAssign(&self->format_, format);
   JreStrongAssign(&self->encoder_, OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(format, bitsPerValue));
@@ -114,12 +127,12 @@ void OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPack
   self->finished_ = false;
 }
 
-OrgApacheLuceneUtilPackedPackedWriter *new_OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPackedWriter, initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_, format, outArg, valueCount, bitsPerValue, mem)
+OrgApacheLuceneUtilPackedPackedWriter *new_OrgApacheLuceneUtilPackedPackedWriter_initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPackedWriter, initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_, format, outArg, valueCount, bitsPerValue, mem)
 }
 
-OrgApacheLuceneUtilPackedPackedWriter *create_OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPackedWriter, initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_, format, outArg, valueCount, bitsPerValue, mem)
+OrgApacheLuceneUtilPackedPackedWriter *create_OrgApacheLuceneUtilPackedPackedWriter_initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPackedWriter, initPackagePrivateWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_, format, outArg, valueCount, bitsPerValue, mem)
 }
 
 void OrgApacheLuceneUtilPackedPackedWriter_flush(OrgApacheLuceneUtilPackedPackedWriter *self) {

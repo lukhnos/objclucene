@@ -3,16 +3,18 @@
 //  source: ./core/src/java/org/apache/lucene/document/CompressionTools.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/ByteArrayOutputStream.h"
-#include "java/util/zip/DataFormatException.h"
 #include "java/util/zip/Deflater.h"
 #include "java/util/zip/Inflater.h"
 #include "org/apache/lucene/document/CompressionTools.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/UnicodeUtil.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/CompressionTools must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneDocumentCompressionTools ()
 
@@ -22,9 +24,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneDocumentCompressionTools_init(OrgApacheLuceneDocumentCompressionTools *self);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentCompressionTools *new_OrgApacheLuceneDocumentCompressionTools_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneDocumentCompressionTools *new_OrgApacheLuceneDocumentCompressionTools_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneDocumentCompressionTools *create_OrgApacheLuceneDocumentCompressionTools_init();
+__attribute__((unused)) static OrgApacheLuceneDocumentCompressionTools *create_OrgApacheLuceneDocumentCompressionTools_init(void);
 
 @implementation OrgApacheLuceneDocumentCompressionTools
 
@@ -90,21 +92,38 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CompressionTools", NULL, 0x2, NULL, NULL },
-    { "compressWithByteArray:withInt:withInt:withInt:", "compress", "[B", 0x9, NULL, NULL },
-    { "compressWithByteArray:withInt:withInt:", "compress", "[B", 0x9, NULL, NULL },
-    { "compressWithByteArray:", "compress", "[B", 0x9, NULL, NULL },
-    { "compressStringWithNSString:", "compressString", "[B", 0x9, NULL, NULL },
-    { "compressStringWithNSString:withInt:", "compressString", "[B", 0x9, NULL, NULL },
-    { "decompressWithOrgApacheLuceneUtilBytesRef:", "decompress", "[B", 0x9, "Ljava.util.zip.DataFormatException;", NULL },
-    { "decompressWithByteArray:", "decompress", "[B", 0x9, "Ljava.util.zip.DataFormatException;", NULL },
-    { "decompressWithByteArray:withInt:withInt:", "decompress", "[B", 0x9, "Ljava.util.zip.DataFormatException;", NULL },
-    { "decompressStringWithByteArray:", "decompressString", "Ljava.lang.String;", 0x9, "Ljava.util.zip.DataFormatException;", NULL },
-    { "decompressStringWithByteArray:withInt:withInt:", "decompressString", "Ljava.lang.String;", 0x9, "Ljava.util.zip.DataFormatException;", NULL },
-    { "decompressStringWithOrgApacheLuceneUtilBytesRef:", "decompressString", "Ljava.lang.String;", 0x9, "Ljava.util.zip.DataFormatException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, 0, 2, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, 0, 3, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, 4, 5, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, 4, 6, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, 7, 8, 9, -1, -1, -1 },
+    { NULL, "[B", 0x9, 7, 3, 9, -1, -1, -1 },
+    { NULL, "[B", 0x9, 7, 2, 9, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 10, 3, 9, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 10, 2, 9, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 10, 8, 9, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentCompressionTools = { 2, "CompressionTools", "org.apache.lucene.document", NULL, 0x1, 12, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compressWithByteArray:withInt:withInt:withInt:);
+  methods[2].selector = @selector(compressWithByteArray:withInt:withInt:);
+  methods[3].selector = @selector(compressWithByteArray:);
+  methods[4].selector = @selector(compressStringWithNSString:);
+  methods[5].selector = @selector(compressStringWithNSString:withInt:);
+  methods[6].selector = @selector(decompressWithOrgApacheLuceneUtilBytesRef:);
+  methods[7].selector = @selector(decompressWithByteArray:);
+  methods[8].selector = @selector(decompressWithByteArray:withInt:withInt:);
+  methods[9].selector = @selector(decompressStringWithByteArray:);
+  methods[10].selector = @selector(decompressStringWithByteArray:withInt:withInt:);
+  methods[11].selector = @selector(decompressStringWithOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compress", "[BIII", "[BII", "[B", "compressString", "LNSString;", "LNSString;I", "decompress", "LOrgApacheLuceneUtilBytesRef;", "LJavaUtilZipDataFormatException;", "decompressString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentCompressionTools = { "CompressionTools", "org.apache.lucene.document", ptrTable, methods, NULL, 7, 0x1, 12, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneDocumentCompressionTools;
 }
 
@@ -159,8 +178,8 @@ IOSByteArray *OrgApacheLuceneDocumentCompressionTools_compressStringWithNSString
 
 IOSByteArray *OrgApacheLuceneDocumentCompressionTools_compressStringWithNSString_withInt_(NSString *value, jint compressionLevel) {
   OrgApacheLuceneDocumentCompressionTools_initialize();
-  IOSByteArray *b = [IOSByteArray arrayWithLength:OrgApacheLuceneUtilUnicodeUtil_MAX_UTF8_BYTES_PER_CHAR * ((jint) [((NSString *) nil_chk(value)) length])];
-  jint len = OrgApacheLuceneUtilUnicodeUtil_UTF16toUTF8WithJavaLangCharSequence_withInt_withInt_withByteArray_(value, 0, ((jint) [value length]), b);
+  IOSByteArray *b = [IOSByteArray arrayWithLength:OrgApacheLuceneUtilUnicodeUtil_MAX_UTF8_BYTES_PER_CHAR * [((NSString *) nil_chk(value)) java_length]];
+  jint len = OrgApacheLuceneUtilUnicodeUtil_UTF16toUTF8WithJavaLangCharSequence_withInt_withInt_withByteArray_(value, 0, [value java_length], b);
   return OrgApacheLuceneDocumentCompressionTools_compressWithByteArray_withInt_withInt_withInt_(b, 0, len, compressionLevel);
 }
 
@@ -202,7 +221,7 @@ NSString *OrgApacheLuceneDocumentCompressionTools_decompressStringWithByteArray_
   IOSByteArray *bytes = OrgApacheLuceneDocumentCompressionTools_decompressWithByteArray_withInt_withInt_(value, offset, length);
   IOSCharArray *result = [IOSCharArray arrayWithLength:((IOSByteArray *) nil_chk(bytes))->size_];
   jint len = OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF16WithByteArray_withInt_withInt_withCharArray_(bytes, 0, bytes->size_, result);
-  return [NSString stringWithCharacters:result offset:0 length:len];
+  return [NSString java_stringWithCharacters:result offset:0 length:len];
 }
 
 NSString *OrgApacheLuceneDocumentCompressionTools_decompressStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *bytes) {

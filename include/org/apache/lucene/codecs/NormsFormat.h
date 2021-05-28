@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsNormsFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsNormsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsNormsFormat || defined(INCLUDE_OrgApacheLuceneCodecsNormsFormat))
 #define OrgApacheLuceneCodecsNormsFormat_
 
@@ -30,19 +36,19 @@
 
 /*!
  @brief Returns a <code>NormsConsumer</code> to write norms to the
- index.
+   index.
  */
 - (OrgApacheLuceneCodecsNormsConsumer *)normsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
 /*!
  @brief Returns a <code>NormsProducer</code> to read norms from the index.
  <p>
- NOTE: by the time this call returns, it must hold open any files it will 
- need to use; else, those files may be deleted. Additionally, required files 
- may be deleted during the execution of this call before there is a chance 
- to open them. Under these circumstances an IOException should be thrown by 
- the implementation. IOExceptions are expected and will automatically cause 
- a retry of the segment opening logic with the newly revised segments.
+  NOTE: by the time this call returns, it must hold open any files it will 
+  need to use; else, those files may be deleted. Additionally, required files 
+  may be deleted during the execution of this call before there is a chance 
+  to open them. Under these circumstances an IOException should be thrown by 
+  the implementation. IOExceptions are expected and will automatically cause 
+  a retry of the segment opening logic with the newly revised segments.
  */
 - (OrgApacheLuceneCodecsNormsProducer *)normsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
@@ -51,9 +57,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -65,4 +71,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsNormsFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsNormsFormat")

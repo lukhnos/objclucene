@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/highlight/PositionSpan.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/PositionSpan must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchHighlightPositionSpan
 
 - (instancetype)initWithInt:(jint)start
@@ -15,14 +19,20 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:", "PositionSpan", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "start_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "start_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "end_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightPositionSpan = { 2, "PositionSpan", "org.apache.lucene.search.highlight", NULL, 0x1, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "II" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightPositionSpan = { "PositionSpan", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x1, 1, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightPositionSpan;
 }
 

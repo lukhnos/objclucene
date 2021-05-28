@@ -14,6 +14,7 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Math.h"
 #include "java/lang/annotation/Annotation.h"
+#include "java/nio/charset/Charset.h"
 #include "java/util/Collections.h"
 #include "java/util/HashMap.h"
 #include "java/util/HashSet.h"
@@ -24,6 +25,10 @@
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/util/BitUtil.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/DataInput must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreDataInput () {
  @public
@@ -36,13 +41,24 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreDataInput, skipBuffer_, IOSByteArray *)
 
-inline jint OrgApacheLuceneStoreDataInput_get_SKIP_BUFFER_SIZE();
+inline jint OrgApacheLuceneStoreDataInput_get_SKIP_BUFFER_SIZE(void);
 #define OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE 1024
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreDataInput, SKIP_BUFFER_SIZE, jint)
 
 __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWithBoolean_(OrgApacheLuceneStoreDataInput *self, jboolean allowNegative);
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneStoreDataInput__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneStoreDataInput__Annotations$1(void);
+
 @implementation OrgApacheLuceneStoreDataInput
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneStoreDataInput_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jbyte)readByte {
   // can't call an abstract method
@@ -115,12 +131,12 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
   jint length = [self readVInt];
   IOSByteArray *bytes = [IOSByteArray arrayWithLength:length];
   [self readBytesWithByteArray:bytes withInt:0 withInt:length];
-  return [NSString stringWithBytes:bytes offset:0 length:length charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)];
+  return [NSString java_stringWithBytes:bytes offset:0 length:length charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)];
 }
 
-- (OrgApacheLuceneStoreDataInput *)clone {
+- (OrgApacheLuceneStoreDataInput *)java_clone {
   @try {
-    return (OrgApacheLuceneStoreDataInput *) cast_chk([super clone], [OrgApacheLuceneStoreDataInput class]);
+    return (OrgApacheLuceneStoreDataInput *) cast_chk([super java_clone], [OrgApacheLuceneStoreDataInput class]);
   }
   @catch (JavaLangCloneNotSupportedException *e) {
     @throw create_JavaLangError_initWithNSString_(@"This cannot happen: Failing to clone DataInput");
@@ -147,7 +163,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
     return JavaUtilCollections_singletonMapWithId_withId_([self readString], [self readString]);
   }
   else {
-    id<JavaUtilMap> map = count > 10 ? create_JavaUtilHashMap_init() : create_JavaUtilTreeMap_init();
+    id<JavaUtilMap> map = count > 10 ? create_JavaUtilHashMap_init() : (id) create_JavaUtilTreeMap_init();
     for (jint i = 0; i < count; i++) {
       NSString *key = [self readString];
       NSString *val = [self readString];
@@ -175,7 +191,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
     return JavaUtilCollections_singletonWithId_([self readString]);
   }
   else {
-    id<JavaUtilSet> set = count > 10 ? create_JavaUtilHashSet_init() : create_JavaUtilTreeSet_init();
+    id<JavaUtilSet> set = count > 10 ? create_JavaUtilHashSet_init() : (id) create_JavaUtilTreeSet_init();
     for (jint i = 0; i < count; i++) {
       [set addWithId:[self readString]];
     }
@@ -190,7 +206,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
   if (skipBuffer_ == nil) {
     JreStrongAssignAndConsume(&skipBuffer_, [IOSByteArray newArrayWithLength:OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE]);
   }
-  JreAssert((skipBuffer_->size_ == OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE), (@"org/apache/lucene/store/DataInput.java:347 condition failed: assert skipBuffer.length == SKIP_BUFFER_SIZE;"));
+  JreAssert(skipBuffer_->size_ == OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE, @"org/apache/lucene/store/DataInput.java:347 condition failed: assert skipBuffer.length == SKIP_BUFFER_SIZE;");
   for (jlong skipped = 0; skipped < numBytes; ) {
     jint step = (jint) JavaLangMath_minWithLong_withLong_(OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE, numBytes - skipped);
     [self readBytesWithByteArray:skipBuffer_ withInt:0 withInt:step withBoolean:false];
@@ -198,61 +214,74 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneStoreDataInput_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-+ (IOSObjectArray *)__annotations_readStringStringMap {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_readStringSet {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(skipBuffer_);
   [super dealloc];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "readByte", NULL, "B", 0x401, "Ljava.io.IOException;", NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "readBytesWithByteArray:withInt:withInt:withBoolean:", "readBytes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "readShort", NULL, "S", 0x1, "Ljava.io.IOException;", NULL },
-    { "readInt", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "readVInt", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "readZInt", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "readLong", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "readVLong", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "readVLongWithBoolean:", "readVLong", "J", 0x2, "Ljava.io.IOException;", NULL },
-    { "readZLong", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "readString", NULL, "Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.store.DataInput;", 0x1, NULL, NULL },
-    { "readStringStringMap", NULL, "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "readMapOfStrings", NULL, "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "readStringSet", NULL, "Ljava.util.Set;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Set<Ljava/lang/String;>;" },
-    { "readSetOfStrings", NULL, "Ljava.util.Set;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Set<Ljava/lang/String;>;" },
-    { "skipBytesWithLong:", "skipBytes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", "DataInput", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "B", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, 1, 2, 0, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 3, 0, -1, -1, -1 },
+    { NULL, "S", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "J", 0x2, 4, 5, 0, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreDataInput;", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, 0, 7, 8, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, 0, 7, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, 0, 9, 10, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, 0, 9, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, 0, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(readByte);
+  methods[2].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  methods[3].selector = @selector(readBytesWithByteArray:withInt:withInt:withBoolean:);
+  methods[4].selector = @selector(readShort);
+  methods[5].selector = @selector(readInt);
+  methods[6].selector = @selector(readVInt);
+  methods[7].selector = @selector(readZInt);
+  methods[8].selector = @selector(readLong);
+  methods[9].selector = @selector(readVLong);
+  methods[10].selector = @selector(readVLongWithBoolean:);
+  methods[11].selector = @selector(readZLong);
+  methods[12].selector = @selector(readString);
+  methods[13].selector = @selector(java_clone);
+  methods[14].selector = @selector(readStringStringMap);
+  methods[15].selector = @selector(readMapOfStrings);
+  methods[16].selector = @selector(readStringSet);
+  methods[17].selector = @selector(readSetOfStrings);
+  methods[18].selector = @selector(skipBytesWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "SKIP_BUFFER_SIZE", "SKIP_BUFFER_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE },
-    { "skipBuffer_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
+    { "SKIP_BUFFER_SIZE", "I", .constantValue.asInt = OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "skipBuffer_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreDataInput = { 2, "DataInput", "org.apache.lucene.store", NULL, 0x401, 19, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoIOException;", "readBytes", "[BII", "[BIIZ", "readVLong", "Z", "clone", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", (void *)&OrgApacheLuceneStoreDataInput__Annotations$0, "()Ljava/util/Set<Ljava/lang/String;>;", (void *)&OrgApacheLuceneStoreDataInput__Annotations$1, "skipBytes", "J" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreDataInput = { "DataInput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x401, 19, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreDataInput;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
+}
+
 @end
+
+void OrgApacheLuceneStoreDataInput_init(OrgApacheLuceneStoreDataInput *self) {
+  NSObject_init(self);
+}
 
 jlong OrgApacheLuceneStoreDataInput_readVLongWithBoolean_(OrgApacheLuceneStoreDataInput *self, jboolean allowNegative) {
   jbyte b = [self readByte];
@@ -293,8 +322,12 @@ jlong OrgApacheLuceneStoreDataInput_readVLongWithBoolean_(OrgApacheLuceneStoreDa
   }
 }
 
-void OrgApacheLuceneStoreDataInput_init(OrgApacheLuceneStoreDataInput *self) {
-  NSObject_init(self);
+IOSObjectArray *OrgApacheLuceneStoreDataInput__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneStoreDataInput__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreDataInput)

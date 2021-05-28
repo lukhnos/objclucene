@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchExplanation
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchExplanation_) && (INCLUDE_ALL_OrgApacheLuceneSearchExplanation || defined(INCLUDE_OrgApacheLuceneSearchExplanation))
 #define OrgApacheLuceneSearchExplanation_
 
@@ -48,9 +54,9 @@
 
 /*!
  @brief Create a new explanation for a match.
- @param value       the contribution to the score of the document
- @param description_ how <code>value</code> was computed
- @param details     sub explanations that contributed to this explanation
+ @param value the contribution to the score of the document
+ @param description_ how <code>value</code>  was computed
+ @param details sub explanations that contributed to this explanation
  */
 + (OrgApacheLuceneSearchExplanation *)matchWithFloat:(jfloat)value
                                         withNSString:(NSString *)description_
@@ -58,9 +64,9 @@
 
 /*!
  @brief Create a new explanation for a match.
- @param value       the contribution to the score of the document
- @param description_ how <code>value</code> was computed
- @param details     sub explanations that contributed to this explanation
+ @param value the contribution to the score of the document
+ @param description_ how <code>value</code>  was computed
+ @param details sub explanations that contributed to this explanation
  */
 + (OrgApacheLuceneSearchExplanation *)matchWithFloat:(jfloat)value
                                         withNSString:(NSString *)description_
@@ -88,6 +94,10 @@
  */
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchExplanation)
@@ -104,4 +114,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchExplanation)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchExplanation")

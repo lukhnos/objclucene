@@ -11,6 +11,10 @@
 #include "java/util/regex/Pattern.h"
 #include "org/apache/lucene/index/IndexFileNames.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexFileNames must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexIndexFileNames ()
 
 /*!
@@ -27,9 +31,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexFileNames_init(OrgApacheLuceneIndexIndexFileNames *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexIndexFileNames *new_OrgApacheLuceneIndexIndexFileNames_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexIndexFileNames *new_OrgApacheLuceneIndexIndexFileNames_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexIndexFileNames *create_OrgApacheLuceneIndexIndexFileNames_init();
+__attribute__((unused)) static OrgApacheLuceneIndexIndexFileNames *create_OrgApacheLuceneIndexIndexFileNames_init(void);
 
 __attribute__((unused)) static jint OrgApacheLuceneIndexIndexFileNames_indexOfSegmentNameWithNSString_(NSString *filename);
 
@@ -106,34 +110,49 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneIndexIndexFileNames_getExtensionWithNSString_(filename);
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 8, 7, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 9, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 10, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 11, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 12, 7, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(fileNameFromGenerationWithNSString:withNSString:withLong:);
+  methods[2].selector = @selector(segmentFileNameWithNSString:withNSString:withNSString:);
+  methods[3].selector = @selector(matchesExtensionWithNSString:withNSString:);
+  methods[4].selector = @selector(indexOfSegmentNameWithNSString:);
+  methods[5].selector = @selector(stripSegmentNameWithNSString:);
+  methods[6].selector = @selector(parseGenerationWithNSString:);
+  methods[7].selector = @selector(parseSegmentNameWithNSString:);
+  methods[8].selector = @selector(stripExtensionWithNSString:);
+  methods[9].selector = @selector(getExtensionWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "SEGMENTS", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 13, -1, -1 },
+    { "PENDING_SEGMENTS", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 14, -1, -1 },
+    { "OLD_SEGMENTS_GEN", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 15, -1, -1 },
+    { "CODEC_FILE_PATTERN", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 16, -1, -1 },
+  };
+  static const void *ptrTable[] = { "fileNameFromGeneration", "LNSString;LNSString;J", "segmentFileName", "LNSString;LNSString;LNSString;", "matchesExtension", "LNSString;LNSString;", "indexOfSegmentName", "LNSString;", "stripSegmentName", "parseGeneration", "parseSegmentName", "stripExtension", "getExtension", &OrgApacheLuceneIndexIndexFileNames_SEGMENTS, &OrgApacheLuceneIndexIndexFileNames_PENDING_SEGMENTS, &OrgApacheLuceneIndexIndexFileNames_OLD_SEGMENTS_GEN, &OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexFileNames = { "IndexFileNames", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 10, 4, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexIndexFileNames;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexIndexFileNames class]) {
     JreStrongAssign(&OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN, JavaUtilRegexPattern_compileWithNSString_(@"_[a-z0-9]+(_.*)?\\..*"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexIndexFileNames)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "IndexFileNames", NULL, 0x2, NULL, NULL },
-    { "fileNameFromGenerationWithNSString:withNSString:withLong:", "fileNameFromGeneration", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "segmentFileNameWithNSString:withNSString:withNSString:", "segmentFileName", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "matchesExtensionWithNSString:withNSString:", "matchesExtension", "Z", 0x9, NULL, NULL },
-    { "indexOfSegmentNameWithNSString:", "indexOfSegmentName", "I", 0xa, NULL, NULL },
-    { "stripSegmentNameWithNSString:", "stripSegmentName", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "parseGenerationWithNSString:", "parseGeneration", "J", 0x9, NULL, NULL },
-    { "parseSegmentNameWithNSString:", "parseSegmentName", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "stripExtensionWithNSString:", "stripExtension", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "getExtensionWithNSString:", "getExtension", "Ljava.lang.String;", 0x9, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "SEGMENTS", "SEGMENTS", 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexFileNames_SEGMENTS, NULL, .constantValue.asLong = 0 },
-    { "PENDING_SEGMENTS", "PENDING_SEGMENTS", 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexFileNames_PENDING_SEGMENTS, NULL, .constantValue.asLong = 0 },
-    { "OLD_SEGMENTS_GEN", "OLD_SEGMENTS_GEN", 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexFileNames_OLD_SEGMENTS_GEN, NULL, .constantValue.asLong = 0 },
-    { "CODEC_FILE_PATTERN", "CODEC_FILE_PATTERN", 0x19, "Ljava.util.regex.Pattern;", &OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexFileNames = { 2, "IndexFileNames", "org.apache.lucene.index", NULL, 0x11, 10, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexIndexFileNames;
 }
 
 @end
@@ -159,9 +178,9 @@ NSString *OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_
     return OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(base, @"", ext);
   }
   else {
-    JreAssert((gen > 0), (@"org/apache/lucene/index/IndexFileNames.java:74 condition failed: assert gen > 0;"));
-    JavaLangStringBuilder *res = [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([create_JavaLangStringBuilder_initWithInt_(((jint) [((NSString *) nil_chk(base)) length]) + 6 + ((jint) [((NSString *) nil_chk(ext)) length])) appendWithNSString:base])) appendWithChar:'_'])) appendWithNSString:JavaLangLong_toStringWithLong_withInt_(gen, JavaLangCharacter_MAX_RADIX)];
-    if (((jint) [ext length]) > 0) {
+    JreAssert(gen > 0, @"org/apache/lucene/index/IndexFileNames.java:74 condition failed: assert gen > 0;");
+    JavaLangStringBuilder *res = JreRetainedLocalValue([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([create_JavaLangStringBuilder_initWithInt_([((NSString *) nil_chk(base)) java_length] + 6 + [((NSString *) nil_chk(ext)) java_length]) appendWithNSString:base])) appendWithChar:'_'])) appendWithNSString:JavaLangLong_toStringWithLong_withInt_(gen, JavaLangCharacter_MAX_RADIX)]);
+    if ([ext java_length] > 0) {
       [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk(res)) appendWithChar:'.'])) appendWithNSString:ext];
     }
     return [((JavaLangStringBuilder *) nil_chk(res)) description];
@@ -170,14 +189,14 @@ NSString *OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_
 
 NSString *OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(NSString *segmentName, NSString *segmentSuffix, NSString *ext) {
   OrgApacheLuceneIndexIndexFileNames_initialize();
-  if (((jint) [((NSString *) nil_chk(ext)) length]) > 0 || ((jint) [((NSString *) nil_chk(segmentSuffix)) length]) > 0) {
-    JreAssert((![ext hasPrefix:@"."]), (@"org/apache/lucene/index/IndexFileNames.java:104 condition failed: assert !ext.startsWith(\".\");"));
-    JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithInt_(((jint) [((NSString *) nil_chk(segmentName)) length]) + 2 + ((jint) [((NSString *) nil_chk(segmentSuffix)) length]) + ((jint) [ext length]));
+  if ([((NSString *) nil_chk(ext)) java_length] > 0 || [((NSString *) nil_chk(segmentSuffix)) java_length] > 0) {
+    JreAssert(![ext java_hasPrefix:@"."], @"org/apache/lucene/index/IndexFileNames.java:104 condition failed: assert !ext.startsWith(\".\");");
+    JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithInt_([((NSString *) nil_chk(segmentName)) java_length] + 2 + [((NSString *) nil_chk(segmentSuffix)) java_length] + [ext java_length]);
     [sb appendWithNSString:segmentName];
-    if (((jint) [segmentSuffix length]) > 0) {
+    if ([segmentSuffix java_length] > 0) {
       [((JavaLangStringBuilder *) nil_chk([sb appendWithChar:'_'])) appendWithNSString:segmentSuffix];
     }
-    if (((jint) [ext length]) > 0) {
+    if ([ext java_length] > 0) {
       [((JavaLangStringBuilder *) nil_chk([sb appendWithChar:'.'])) appendWithNSString:ext];
     }
     return [sb description];
@@ -189,14 +208,14 @@ NSString *OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSS
 
 jboolean OrgApacheLuceneIndexIndexFileNames_matchesExtensionWithNSString_withNSString_(NSString *filename, NSString *ext) {
   OrgApacheLuceneIndexIndexFileNames_initialize();
-  return [((NSString *) nil_chk(filename)) hasSuffix:JreStrcat("C$", '.', ext)];
+  return [((NSString *) nil_chk(filename)) java_hasSuffix:JreStrcat("C$", '.', ext)];
 }
 
 jint OrgApacheLuceneIndexIndexFileNames_indexOfSegmentNameWithNSString_(NSString *filename) {
   OrgApacheLuceneIndexIndexFileNames_initialize();
-  jint idx = [((NSString *) nil_chk(filename)) indexOf:'_' fromIndex:1];
+  jint idx = [((NSString *) nil_chk(filename)) java_indexOf:'_' fromIndex:1];
   if (idx == -1) {
-    idx = [filename indexOf:'.'];
+    idx = [filename java_indexOf:'.'];
   }
   return idx;
 }
@@ -205,15 +224,15 @@ NSString *OrgApacheLuceneIndexIndexFileNames_stripSegmentNameWithNSString_(NSStr
   OrgApacheLuceneIndexIndexFileNames_initialize();
   jint idx = OrgApacheLuceneIndexIndexFileNames_indexOfSegmentNameWithNSString_(filename);
   if (idx != -1) {
-    filename = [((NSString *) nil_chk(filename)) substring:idx];
+    filename = [((NSString *) nil_chk(filename)) java_substring:idx];
   }
   return filename;
 }
 
 jlong OrgApacheLuceneIndexIndexFileNames_parseGenerationWithNSString_(NSString *filename) {
   OrgApacheLuceneIndexIndexFileNames_initialize();
-  JreAssert(([((NSString *) nil_chk(filename)) hasPrefix:@"_"]), (@"org/apache/lucene/index/IndexFileNames.java:160 condition failed: assert filename.startsWith(\"_\");"));
-  IOSObjectArray *parts = [((NSString *) nil_chk([((NSString *) nil_chk(OrgApacheLuceneIndexIndexFileNames_stripExtensionWithNSString_(filename))) substring:1])) split:@"_"];
+  JreAssert([((NSString *) nil_chk(filename)) java_hasPrefix:@"_"], @"org/apache/lucene/index/IndexFileNames.java:160 condition failed: assert filename.startsWith(\"_\");");
+  IOSObjectArray *parts = [((NSString *) nil_chk([((NSString *) nil_chk(OrgApacheLuceneIndexIndexFileNames_stripExtensionWithNSString_(filename))) java_substring:1])) java_split:@"_"];
   if (((IOSObjectArray *) nil_chk(parts))->size_ == 2 || parts->size_ == 4) {
     return JavaLangLong_parseLongWithNSString_withInt_(IOSObjectArray_Get(parts, 1), JavaLangCharacter_MAX_RADIX);
   }
@@ -226,28 +245,28 @@ NSString *OrgApacheLuceneIndexIndexFileNames_parseSegmentNameWithNSString_(NSStr
   OrgApacheLuceneIndexIndexFileNames_initialize();
   jint idx = OrgApacheLuceneIndexIndexFileNames_indexOfSegmentNameWithNSString_(filename);
   if (idx != -1) {
-    filename = [((NSString *) nil_chk(filename)) substring:0 endIndex:idx];
+    filename = [((NSString *) nil_chk(filename)) java_substring:0 endIndex:idx];
   }
   return filename;
 }
 
 NSString *OrgApacheLuceneIndexIndexFileNames_stripExtensionWithNSString_(NSString *filename) {
   OrgApacheLuceneIndexIndexFileNames_initialize();
-  jint idx = [((NSString *) nil_chk(filename)) indexOf:'.'];
+  jint idx = [((NSString *) nil_chk(filename)) java_indexOf:'.'];
   if (idx != -1) {
-    filename = [filename substring:0 endIndex:idx];
+    filename = [filename java_substring:0 endIndex:idx];
   }
   return filename;
 }
 
 NSString *OrgApacheLuceneIndexIndexFileNames_getExtensionWithNSString_(NSString *filename) {
   OrgApacheLuceneIndexIndexFileNames_initialize();
-  jint idx = [((NSString *) nil_chk(filename)) indexOf:'.'];
+  jint idx = [((NSString *) nil_chk(filename)) java_indexOf:'.'];
   if (idx == -1) {
     return nil;
   }
   else {
-    return [filename substring:idx + 1 endIndex:((jint) [filename length])];
+    return [filename java_substring:idx + 1 endIndex:[filename java_length]];
   }
 }
 

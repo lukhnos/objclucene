@@ -3,22 +3,19 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.h"
-#include "org/apache/lucene/queryparser/xml/builders/SpanQueryBuilder.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 #include "org/w3c/dom/Element.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/SpanBuilderBase must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase
-
-- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
-  return [self getSpanQueryWithOrgW3cDomElement:e];
-}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -27,12 +24,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
+  return [self getSpanQueryWithOrgW3cDomElement:e];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", "SpanBuilderBase", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase = { 2, "SpanBuilderBase", "org.apache.lucene.queryparser.xml.builders", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getQueryWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getQuery", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase = { "SpanBuilderBase", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, NULL, 7, 0x401, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase;
 }
 

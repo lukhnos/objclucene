@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchConstantScoreWeight
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchConstantScoreWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreWeight || defined(INCLUDE_OrgApacheLuceneSearchConstantScoreWeight))
 #define OrgApacheLuceneSearchConstantScoreWeight_
 
@@ -28,7 +34,7 @@
 /*!
  @brief A Weight that has a constant score equal to the boost of the wrapped query.
  This is typically useful when building queries which do not produce
- meaningful scores and are mostly useful for filtering.
+  meaningful scores and are mostly useful for filtering.
  */
 @interface OrgApacheLuceneSearchConstantScoreWeight : OrgApacheLuceneSearchWeight
 
@@ -46,7 +52,7 @@
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 /*!
  @brief Return the score produced by this <code>Weight</code>.
@@ -63,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreWeight)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreWeight")

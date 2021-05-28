@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexQueryTimeoutImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexQueryTimeoutImpl_) && (INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeoutImpl || defined(INCLUDE_OrgApacheLuceneIndexQueryTimeoutImpl))
 #define OrgApacheLuceneIndexQueryTimeoutImpl_
 
@@ -24,8 +30,8 @@
 
 /*!
  @brief An implementation of <code>QueryTimeout</code> that can be used by
- the <code>ExitableDirectoryReader</code> class to time out and exit out
- when a query takes a long time to rewrite.
+  the <code>ExitableDirectoryReader</code> class to time out and exit out
+  when a query takes a long time to rewrite.
  */
 @interface OrgApacheLuceneIndexQueryTimeoutImpl : NSObject < OrgApacheLuceneIndexQueryTimeout >
 
@@ -33,14 +39,13 @@
 
 /*!
  @brief Sets the time at which to time out by adding the given timeAllowed to the current time.
- @param timeAllowed Number of milliseconds after which to time out. Use <code>Long.MAX_VALUE</code>
- to effectively never time out.
+ @param timeAllowed Number of milliseconds after which to time out. Use <code>Long.MAX_VALUE</code>                     to effectively never time out.
  */
-- (instancetype)initWithLong:(jlong)timeAllowed;
+- (instancetype __nonnull)initWithLong:(jlong)timeAllowed;
 
 /*!
  @brief Returns time at which to time out, in nanoseconds relative to the (JVM-specific)
- epoch for <code>System.nanoTime()</code>, to compare with the value returned by
+  epoch for <code>System.nanoTime()</code>, to compare with the value returned by 
  <code>nanoTime()</code>.
  */
 - (JavaLangLong *)getTimeoutAt;
@@ -52,11 +57,15 @@
 
 /*!
  @brief Return true if <code>reset()</code> has not been called
- and the elapsed time has exceeded the time allowed.
+  and the elapsed time has exceeded the time allowed.
  */
 - (jboolean)shouldExit;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -72,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexQueryTimeoutImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeoutImpl")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchCollectionTerminatedException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchCollectionTerminatedException_) && (INCLUDE_ALL_OrgApacheLuceneSearchCollectionTerminatedException || defined(INCLUDE_OrgApacheLuceneSearchCollectionTerminatedException))
 #define OrgApacheLuceneSearchCollectionTerminatedException_
 
@@ -20,13 +26,15 @@
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+@class JavaLangThrowable;
+
 /*!
  @brief Throw this exception in <code>LeafCollector.collect(int)</code> to prematurely
- terminate collection of the current leaf.
+   terminate collection of the current leaf.
  <p>Note: IndexSearcher swallows this exception and never re-throws it.
- As a consequence, you should not catch it when calling
+   As a consequence, you should not catch it when calling  
  <code>IndexSearcher.search</code> as it is unnecessary and might hide misuse
- of this exception. 
+   of this exception.
  */
 @interface OrgApacheLuceneSearchCollectionTerminatedException : JavaLangRuntimeException
 
@@ -35,7 +43,21 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1
+                               withBoolean:(jboolean)arg2
+                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -43,12 +65,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCollectionTerminatedException)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchCollectionTerminatedException_init(OrgApacheLuceneSearchCollectionTerminatedException *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchCollectionTerminatedException *new_OrgApacheLuceneSearchCollectionTerminatedException_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchCollectionTerminatedException *new_OrgApacheLuceneSearchCollectionTerminatedException_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchCollectionTerminatedException *create_OrgApacheLuceneSearchCollectionTerminatedException_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchCollectionTerminatedException *create_OrgApacheLuceneSearchCollectionTerminatedException_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCollectionTerminatedException)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCollectionTerminatedException")

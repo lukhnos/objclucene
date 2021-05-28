@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/miscellaneous/KeepWordFilter.java
 //
 
+#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -10,7 +11,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/KeepWordFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter () {
  @public
@@ -32,7 +36,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter, termAtt_
 }
 
 - (jboolean)accept {
-  return [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(words_)) containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length]];
+  return [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(words_)) containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ java_length]];
 }
 
 - (void)dealloc {
@@ -42,15 +46,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter, termAtt_
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:", "KeepWordFilter", NULL, 0x1, NULL, NULL },
-    { "accept", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[1].selector = @selector(accept);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "words_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "words_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter = { 2, "KeepWordFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter = { "KeepWordFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 2, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter;
 }
 

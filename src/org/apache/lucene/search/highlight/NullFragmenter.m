@@ -7,7 +7,18 @@
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/search/highlight/NullFragmenter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/NullFragmenter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchHighlightNullFragmenter
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchHighlightNullFragmenter_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)startWithNSString:(NSString *)s
 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream {
@@ -17,20 +28,21 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
   return false;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchHighlightNullFragmenter_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "startWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "start", "V", 0x1, NULL, NULL },
-    { "isNewFragment", NULL, "Z", 0x1, NULL, NULL },
-    { "init", "NullFragmenter", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightNullFragmenter = { 2, "NullFragmenter", "org.apache.lucene.search.highlight", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(startWithNSString:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[2].selector = @selector(isNewFragment);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "start", "LNSString;LOrgApacheLuceneAnalysisTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightNullFragmenter = { "NullFragmenter", "org.apache.lucene.search.highlight", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightNullFragmenter;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFreqProxFields
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFreqProxFields_) && (INCLUDE_ALL_OrgApacheLuceneIndexFreqProxFields || defined(INCLUDE_OrgApacheLuceneIndexFreqProxFields))
 #define OrgApacheLuceneIndexFreqProxFields_
 
@@ -28,8 +34,8 @@
 /*!
  @brief Implements limited (iterators only, no stats) <code>Fields</code>
   interface over the in-RAM buffered
- fields/terms/postings, to flush postings through the
- PostingsFormat.
+   fields/terms/postings, to flush postings through the
+   PostingsFormat.
  */
 @interface OrgApacheLuceneIndexFreqProxFields : OrgApacheLuceneIndexFields {
  @public
@@ -38,7 +44,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)fieldList;
+- (instancetype __nonnull)initPackagePrivateWithJavaUtilList:(id<JavaUtilList>)fieldList;
 
 - (id<JavaUtilIterator>)iterator;
 
@@ -48,20 +54,28 @@
 
 #pragma mark Package-Private
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFreqProxFields)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFreqProxFields, fields_, id<JavaUtilMap>)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(OrgApacheLuceneIndexFreqProxFields *self, id<JavaUtilList> fieldList);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexFreqProxFields_initPackagePrivateWithJavaUtilList_(OrgApacheLuceneIndexFreqProxFields *self, id<JavaUtilList> fieldList);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxFields *new_OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(id<JavaUtilList> fieldList) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxFields *new_OrgApacheLuceneIndexFreqProxFields_initPackagePrivateWithJavaUtilList_(id<JavaUtilList> fieldList) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxFields *create_OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(id<JavaUtilList> fieldList);
+FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxFields *create_OrgApacheLuceneIndexFreqProxFields_initPackagePrivateWithJavaUtilList_(id<JavaUtilList> fieldList);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxFields)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFreqProxFields")

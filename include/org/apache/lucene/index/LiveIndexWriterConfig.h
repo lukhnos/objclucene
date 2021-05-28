@@ -13,10 +13,15 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexLiveIndexWriterConfig
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexLiveIndexWriterConfig_) && (INCLUDE_ALL_OrgApacheLuceneIndexLiveIndexWriterConfig || defined(INCLUDE_OrgApacheLuceneIndexLiveIndexWriterConfig))
 #define OrgApacheLuceneIndexLiveIndexWriterConfig_
 
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneCodecsCodec;
 @class OrgApacheLuceneIndexDocumentsWriterPerThreadPool;
@@ -33,24 +38,24 @@
 
 /*!
  @brief Holds all the configuration used by <code>IndexWriter</code> with few setters for
- settings that can be changed on an <code>IndexWriter</code> instance "live".
+  settings that can be changed on an <code>IndexWriter</code> instance "live".
  @since 4.0
  */
 @interface OrgApacheLuceneIndexLiveIndexWriterConfig : NSObject {
  @public
   /*!
    @brief <code>IndexDeletionPolicy</code> controlling when commit
- points are deleted.
+   points are deleted.
    */
   volatile_id delPolicy_;
   /*!
    @brief <code>IndexCommit</code> that <code>IndexWriter</code> is
- opened on.
+   opened on.
    */
   volatile_id commit_;
   /*!
    @brief <code>OpenMode</code> that <code>IndexWriter</code> is opened
- with.
+   with.
    */
   volatile_id openMode_;
   /*!
@@ -67,7 +72,7 @@
   volatile_jlong writeLockTimeout_;
   /*!
    @brief <code>IndexingChain</code> that determines how documents are
- indexed.
+   indexed.
    */
   volatile_id indexingChain_;
   /*!
@@ -84,7 +89,7 @@
   volatile_id mergePolicy_;
   /*!
    @brief <code>DocumentsWriterPerThreadPool</code> to control how
- threads are allocated to <code>DocumentsWriterPerThread</code>.
+   threads are allocated to <code>DocumentsWriterPerThread</code>.
    */
   volatile_id indexerThreadPool_;
   /*!
@@ -93,12 +98,12 @@
   volatile_jboolean readerPooling_;
   /*!
    @brief <code>FlushPolicy</code> to control when segments are
- flushed.
+   flushed.
    */
   volatile_id flushPolicy_;
   /*!
    @brief Sets the hard upper bound on RAM usage for a single
- segment, after which the segment is forced to flush.
+   segment, after which the segment is forced to flush.
    */
   volatile_jint perThreadHardLimitMB_;
   /*!
@@ -129,16 +134,16 @@
 - (jboolean)getCommitOnClose;
 
 /*!
- @brief Returns the <code>IndexCommit</code> as specified in
- <code>IndexWriterConfig.setIndexCommit(IndexCommit)</code> or the default,
+ @brief Returns the <code>IndexCommit</code> as specified in 
+ <code>IndexWriterConfig.setIndexCommit(IndexCommit)</code> or the default, 
  <code>null</code> which specifies to open the latest index commit point.
  */
 - (OrgApacheLuceneIndexIndexCommit *)getIndexCommit;
 
 /*!
- @brief Returns the <code>IndexDeletionPolicy</code> specified in
+ @brief Returns the <code>IndexDeletionPolicy</code> specified in 
  <code>IndexWriterConfig.setIndexDeletionPolicy(IndexDeletionPolicy)</code> or
- the default <code>KeepOnlyLastCommitDeletionPolicy</code>/
+  the default <code>KeepOnlyLastCommitDeletionPolicy</code>/
  */
 - (OrgApacheLuceneIndexIndexDeletionPolicy *)getIndexDeletionPolicy;
 
@@ -150,21 +155,20 @@
 
 /*!
  @brief Returns the number of buffered deleted terms that will trigger a flush of all
- buffered deletes if enabled.
+  buffered deletes if enabled.
  - seealso: #setMaxBufferedDeleteTerms(int)
  */
 - (jint)getMaxBufferedDeleteTerms;
 
 /*!
  @brief Returns the number of buffered added documents that will trigger a flush if
- enabled.
+  enabled.
  - seealso: #setMaxBufferedDocs(int)
  */
 - (jint)getMaxBufferedDocs;
 
 /*!
- @brief Returns the current merged segment warmer.
- See <code>IndexReaderWarmer</code>. 
+ @brief Returns the current merged segment warmer.See <code>IndexReaderWarmer</code>.
  */
 - (OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer *)getMergedSegmentWarmer;
 
@@ -175,7 +179,7 @@
 - (OrgApacheLuceneIndexMergePolicy *)getMergePolicy;
 
 /*!
- @brief Returns the <code>MergeScheduler</code> that was set by
+ @brief Returns the <code>MergeScheduler</code> that was set by 
  <code>IndexWriterConfig.setMergeScheduler(MergeScheduler)</code>.
  */
 - (OrgApacheLuceneIndexMergeScheduler *)getMergeScheduler;
@@ -192,27 +196,26 @@
 
 /*!
  @brief Returns the max amount of memory each <code>DocumentsWriterPerThread</code> can
- consume until forcefully flushed.
+  consume until forcefully flushed.
  - seealso: IndexWriterConfig#setRAMPerThreadHardLimitMB(int)
  */
 - (jint)getRAMPerThreadHardLimitMB;
 
 /*!
- @brief Returns <code>true</code> if <code>IndexWriter</code> should pool readers even if
- <code>DirectoryReader.open(IndexWriter,boolean)</code> has not been called.
+ @brief Returns <code>true</code> if <code>IndexWriter</code> should pool readers even if 
+ <code>DirectoryReader.open(IndexWriter, boolean)</code> has not been called.
  */
 - (jboolean)getReaderPooling;
 
 /*!
- @brief Expert: returns the <code>Similarity</code> implementation used by this
+ @brief Expert: returns the <code>Similarity</code> implementation used by this 
  <code>IndexWriter</code>.
  */
 - (OrgApacheLuceneSearchSimilaritiesSimilarity *)getSimilarity;
 
 /*!
  @brief Returns <code>true</code> iff the <code>IndexWriter</code> packs
- newly written segments in a compound file.
- Default is <code>true</code>.
+  newly written segments in a compound file.Default is <code>true</code>.
  */
 - (jboolean)getUseCompoundFile;
 
@@ -224,17 +227,17 @@
 
 /*!
  @brief Determines the maximum number of delete-by-term operations that will be
- buffered before both the buffered in-memory delete terms and queries are
- applied and flushed.
+  buffered before both the buffered in-memory delete terms and queries are
+  applied and flushed.
  <p>
- Disabled by default (writer flushes by RAM usage).
+  Disabled by default (writer flushes by RAM usage). 
  <p>
- NOTE: This setting won't trigger a segment flush.
+  NOTE: This setting won't trigger a segment flush.  
  <p>
- Takes effect immediately, but only the next time a document is added,
- updated or deleted. Also, if you only delete-by-query, this setting has no
- effect, i.e. delete queries are buffered until the next segment is flushed.
- @throws IllegalArgumentException
+  Takes effect immediately, but only the next time a document is added,
+  updated or deleted. Also, if you only delete-by-query, this setting has no
+  effect, i.e. delete queries are buffered until the next segment is flushed.
+ @throw IllegalArgumentException
  if maxBufferedDeleteTerms is enabled but smaller than 1
  - seealso: #setRAMBufferSizeMB
  */
@@ -242,109 +245,106 @@
 
 /*!
  @brief Determines the minimal number of documents required before the buffered
- in-memory documents are flushed as a new Segment.
- Large values generally
- give faster indexing.
+  in-memory documents are flushed as a new Segment.Large values generally
+  give faster indexing.
  <p>
- When this is set, the writer will flush every maxBufferedDocs added
- documents. Pass in <code>IndexWriterConfig.DISABLE_AUTO_FLUSH</code> to prevent
- triggering a flush due to number of buffered documents. Note that if
- flushing by RAM usage is also enabled, then the flush will be triggered by
- whichever comes first.
+  When this is set, the writer will flush every maxBufferedDocs added
+  documents. Pass in <code>IndexWriterConfig.DISABLE_AUTO_FLUSH</code> to prevent
+  triggering a flush due to number of buffered documents. Note that if
+  flushing by RAM usage is also enabled, then the flush will be triggered by
+  whichever comes first.  
  <p>
- Disabled by default (writer flushes by RAM usage).
+  Disabled by default (writer flushes by RAM usage).  
  <p>
- Takes effect immediately, but only the next time a document is added,
- updated or deleted.
+  Takes effect immediately, but only the next time a document is added,
+  updated or deleted.
  - seealso: #setRAMBufferSizeMB(double)
- @throws IllegalArgumentException
+ @throw IllegalArgumentException
  if maxBufferedDocs is enabled but smaller than 2, or it disables
- maxBufferedDocs when ramBufferSize is already disabled
+            maxBufferedDocs when ramBufferSize is already disabled
  */
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMaxBufferedDocsWithInt:(jint)maxBufferedDocs;
 
 /*!
- @brief Set the merged segment warmer.
- See <code>IndexReaderWarmer</code>.
+ @brief Set the merged segment warmer.See <code>IndexReaderWarmer</code>.
  <p>
- Takes effect on the next merge.
+  Takes effect on the next merge.
  */
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMergedSegmentWarmerWithOrgApacheLuceneIndexIndexWriter_IndexReaderWarmer:(OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer *)mergeSegmentWarmer;
 
 /*!
  @brief Expert: <code>MergePolicy</code> is invoked whenever there are changes to the
- segments in the index.
- Its role is to select which merges to do, if any,
- and return a <code>MergePolicy.MergeSpecification</code> describing the merges.
- It also selects merges to do for forceMerge.
+  segments in the index.Its role is to select which merges to do, if any,
+  and return a <code>MergePolicy.MergeSpecification</code> describing the merges.
+ It also selects merges to do for forceMerge.  
  <p>
- Takes effect on subsequent merge selections. Any merges in flight or any
- merges already registered by the previous <code>MergePolicy</code> are not
- affected.
+  Takes effect on subsequent merge selections. Any merges in flight or any
+  merges already registered by the previous <code>MergePolicy</code> are not
+  affected.
  */
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMergePolicyWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)mergePolicy;
 
 /*!
  @brief Determines the amount of RAM that may be used for buffering added documents
- and deletions before they are flushed to the Directory.
- Generally for
- faster indexing performance it's best to flush by RAM usage instead of
- document count and use as large a RAM buffer as you can.
+  and deletions before they are flushed to the Directory.Generally for
+  faster indexing performance it's best to flush by RAM usage instead of
+  document count and use as large a RAM buffer as you can.
  <p>
- When this is set, the writer will flush whenever buffered documents and
- deletions use this much RAM. Pass in
+  When this is set, the writer will flush whenever buffered documents and
+  deletions use this much RAM. Pass in 
  <code>IndexWriterConfig.DISABLE_AUTO_FLUSH</code> to prevent triggering a flush
- due to RAM usage. Note that if flushing by document count is also enabled,
- then the flush will be triggered by whichever comes first.
+  due to RAM usage. Note that if flushing by document count is also enabled,
+  then the flush will be triggered by whichever comes first. 
  <p>
- The maximum RAM limit is inherently determined by the JVMs available
- memory. Yet, an <code>IndexWriter</code> session can consume a significantly
- larger amount of memory than the given RAM limit since this limit is just
- an indicator when to flush memory resident documents to the Directory.
- Flushes are likely happen concurrently while other threads adding documents
- to the writer. For application stability the available memory in the JVM
- should be significantly larger than the RAM buffer used for indexing.
+  The maximum RAM limit is inherently determined by the JVMs available
+  memory. Yet, an <code>IndexWriter</code> session can consume a significantly
+  larger amount of memory than the given RAM limit since this limit is just
+  an indicator when to flush memory resident documents to the Directory.
+  Flushes are likely happen concurrently while other threads adding documents
+  to the writer. For application stability the available memory in the JVM
+  should be significantly larger than the RAM buffer used for indexing. 
  <p>
- <b>NOTE</b>: the account of RAM usage for pending deletions is only
- approximate. Specifically, if you delete by Query, Lucene currently has no
- way to measure the RAM usage of individual Queries so the accounting will
- under-estimate and you should compensate by either calling commit()
- periodically yourself, or by using <code>setMaxBufferedDeleteTerms(int)</code>
- to flush and apply buffered deletes by count instead of RAM usage (for each
- buffered delete Query a constant number of bytes is used to estimate RAM
- usage). Note that enabling <code>setMaxBufferedDeleteTerms(int)</code> will not
- trigger any segment flushes.
+  <b>NOTE</b>: the account of RAM usage for pending deletions is only
+  approximate. Specifically, if you delete by Query, Lucene currently has no
+  way to measure the RAM usage of individual Queries so the accounting will
+  under-estimate and you should compensate by either calling commit()
+  periodically yourself, or by using <code>setMaxBufferedDeleteTerms(int)</code>
+  to flush and apply buffered deletes by count instead of RAM usage (for each
+  buffered delete Query a constant number of bytes is used to estimate RAM
+  usage). Note that enabling <code>setMaxBufferedDeleteTerms(int)</code> will not
+  trigger any segment flushes. 
  <p>
- <b>NOTE</b>: It's not guaranteed that all memory resident documents are
- flushed once this limit is exceeded. Depending on the configured
+  <b>NOTE</b>: It's not guaranteed that all memory resident documents are
+  flushed once this limit is exceeded. Depending on the configured 
  <code>FlushPolicy</code> only a subset of the buffered documents are flushed and
- therefore only parts of the RAM buffer is released.
+  therefore only parts of the RAM buffer is released. 
  <p>
- The default value is <code>IndexWriterConfig.DEFAULT_RAM_BUFFER_SIZE_MB</code>.
+  
+  The default value is <code>IndexWriterConfig.DEFAULT_RAM_BUFFER_SIZE_MB</code>.
+   
  <p>
- Takes effect immediately, but only the next time a document is added,
- updated or deleted.
+  Takes effect immediately, but only the next time a document is added,
+  updated or deleted.
  - seealso: IndexWriterConfig#setRAMPerThreadHardLimitMB(int)
- @throws IllegalArgumentException
+ @throw IllegalArgumentException
  if ramBufferSize is enabled but non-positive, or it disables
- ramBufferSize when maxBufferedDocs is already disabled
+            ramBufferSize when maxBufferedDocs is already disabled
  */
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)setRAMBufferSizeMBWithDouble:(jdouble)ramBufferSizeMB;
 
 /*!
  @brief Sets if the <code>IndexWriter</code> should pack newly written segments in a
- compound file.
- Default is <code>true</code>.
+  compound file.Default is <code>true</code>.
  <p>
- Use <code>false</code> for batch indexing with very large ram buffer
- settings.
+  Use <code>false</code> for batch indexing with very large ram buffer
+  settings. 
  </p>
- <p>
- <b>Note: To control compound file usage during segment merges see
- <code>MergePolicy.setNoCFSRatio(double)</code> and
+  <p>
+  <b>Note: To control compound file usage during segment merges see 
+ <code>MergePolicy.setNoCFSRatio(double)</code> and 
  <code>MergePolicy.setMaxCFSSegmentSizeMB(double)</code>. This setting only
- applies to newly created segments.</b>
- </p>
+  applies to newly created segments.</b>
+  </p>
  */
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)setUseCompoundFileWithBoolean:(jboolean)useCompoundFile;
 
@@ -352,7 +352,7 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  - seealso: IndexWriterConfig#setFlushPolicy(FlushPolicy)
@@ -367,10 +367,14 @@
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool *)getIndexerThreadPool;
 
 /*!
- @brief Returns the indexing chain set on
+ @brief Returns the indexing chain set on 
  <code>IndexWriterConfig.setIndexingChain(IndexingChain)</code>.
  */
 - (OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *)getIndexingChain;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -398,4 +402,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexLiveIndexWriterConfig)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexLiveIndexWriterConfig")

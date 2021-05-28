@@ -8,11 +8,15 @@
 #include "org/apache/lucene/rangetree/RangeTreeReader.h"
 #include "org/apache/lucene/rangetree/RangeTreeSortedNumericDocValues.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/rangetree/RangeTreeSortedNumericDocValues must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues
 
-- (instancetype)initWithOrgApacheLuceneRangetreeRangeTreeReader:(OrgApacheLuceneRangetreeRangeTreeReader *)rangeTreeReader
-                 withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)delegate {
-  OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(self, rangeTreeReader, delegate);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader:(OrgApacheLuceneRangetreeRangeTreeReader *)rangeTreeReader
+                               withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)delegate {
+  OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(self, rangeTreeReader, delegate);
   return self;
 }
 
@@ -39,35 +43,45 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneRangetreeRangeTreeReader:withOrgApacheLuceneIndexSortedNumericDocValues:", "RangeTreeSortedNumericDocValues", NULL, 0x1, NULL, NULL },
-    { "getRangeTreeReader", NULL, "Lorg.apache.lucene.rangetree.RangeTreeReader;", 0x1, NULL, NULL },
-    { "setDocumentWithInt:", "setDocument", "V", 0x1, NULL, NULL },
-    { "valueAtWithInt:", "valueAt", "J", 0x1, NULL, NULL },
-    { "count", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneRangetreeRangeTreeReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader:withOrgApacheLuceneIndexSortedNumericDocValues:);
+  methods[1].selector = @selector(getRangeTreeReader);
+  methods[2].selector = @selector(setDocumentWithInt:);
+  methods[3].selector = @selector(valueAtWithInt:);
+  methods[4].selector = @selector(count);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "rangeTreeReader_", NULL, 0x10, "Lorg.apache.lucene.rangetree.RangeTreeReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "delegate_", NULL, 0x10, "Lorg.apache.lucene.index.SortedNumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "rangeTreeReader_", "LOrgApacheLuceneRangetreeRangeTreeReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "delegate_", "LOrgApacheLuceneIndexSortedNumericDocValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues = { 2, "RangeTreeSortedNumericDocValues", "org.apache.lucene.rangetree", NULL, 0x0, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneRangetreeRangeTreeReader;LOrgApacheLuceneIndexSortedNumericDocValues;", "setDocument", "I", "valueAt" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues = { "RangeTreeSortedNumericDocValues", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x0, 5, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues;
 }
 
 @end
 
-void OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *self, OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) {
+void OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *self, OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) {
   OrgApacheLuceneIndexSortedNumericDocValues_init(self);
   JreStrongAssign(&self->rangeTreeReader_, rangeTreeReader);
   JreStrongAssign(&self->delegate_, delegate);
 }
 
-OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *new_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues, initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_, rangeTreeReader, delegate)
+OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *new_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues, initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_, rangeTreeReader, delegate)
 }
 
-OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *create_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues, initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_, rangeTreeReader, delegate)
+OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *create_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues, initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_, rangeTreeReader, delegate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues)

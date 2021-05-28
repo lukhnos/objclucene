@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/io/StringReader.h"
 #include "java/lang/Float.h"
@@ -20,6 +19,10 @@
 #include "org/apache/lucene/search/BooleanClause.h"
 #include "org/apache/lucene/search/BooleanQuery.h"
 #include "org/apache/lucene/search/Query.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/mlt/MoreLikeThisQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueriesMltMoreLikeThisQuery () {
  @public
@@ -69,7 +72,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
     [newBq addWithOrgApacheLuceneSearchBooleanClause:clause];
   }
   [newBq setMinimumNumberShouldMatchWithInt:JreFpToInt(([((id<JavaUtilList>) nil_chk([bq clauses])) size] * percentTermsToMatch_))];
-  OrgApacheLuceneSearchQuery *rewritten = [newBq build];
+  OrgApacheLuceneSearchQuery *rewritten = JreRetainedLocalValue([newBq build]);
   [((OrgApacheLuceneSearchQuery *) nil_chk(rewritten)) setBoostWithFloat:[bq getBoost]];
   return rewritten;
 }
@@ -158,9 +161,9 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(obj) java_getClass])) return false;
   OrgApacheLuceneQueriesMltMoreLikeThisQuery *other = (OrgApacheLuceneQueriesMltMoreLikeThisQuery *) cast_chk(obj, [OrgApacheLuceneQueriesMltMoreLikeThisQuery class]);
   if (analyzer_ == nil) {
     if (other->analyzer_ != nil) return false;
@@ -196,41 +199,67 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSStringArray:withOrgApacheLuceneAnalysisAnalyzer:withNSString:", "MoreLikeThisQuery", NULL, 0x1, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getPercentTermsToMatch", NULL, "F", 0x1, NULL, NULL },
-    { "setPercentTermsToMatchWithFloat:", "setPercentTermsToMatch", "V", 0x1, NULL, NULL },
-    { "getAnalyzer", NULL, "Lorg.apache.lucene.analysis.Analyzer;", 0x1, NULL, NULL },
-    { "setAnalyzerWithOrgApacheLuceneAnalysisAnalyzer:", "setAnalyzer", "V", 0x1, NULL, NULL },
-    { "getLikeText", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "setLikeTextWithNSString:", "setLikeText", "V", 0x1, NULL, NULL },
-    { "getMaxQueryTerms", NULL, "I", 0x1, NULL, NULL },
-    { "setMaxQueryTermsWithInt:", "setMaxQueryTerms", "V", 0x1, NULL, NULL },
-    { "getMinTermFrequency", NULL, "I", 0x1, NULL, NULL },
-    { "setMinTermFrequencyWithInt:", "setMinTermFrequency", "V", 0x1, NULL, NULL },
-    { "getMoreLikeFields", NULL, "[Ljava.lang.String;", 0x1, NULL, NULL },
-    { "setMoreLikeFieldsWithNSStringArray:", "setMoreLikeFields", "V", 0x1, NULL, NULL },
-    { "getStopWords", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<*>;" },
-    { "setStopWordsWithJavaUtilSet:", "setStopWords", "V", 0x1, NULL, "(Ljava/util/Set<*>;)V" },
-    { "getMinDocFreq", NULL, "I", 0x1, NULL, NULL },
-    { "setMinDocFreqWithInt:", "setMinDocFreq", "V", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 12, -1, -1, -1, -1 },
+    { NULL, "[LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 16, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, 19, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 12, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 21, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 22, 23, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSStringArray:withOrgApacheLuceneAnalysisAnalyzer:withNSString:);
+  methods[1].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[2].selector = @selector(toStringWithNSString:);
+  methods[3].selector = @selector(getPercentTermsToMatch);
+  methods[4].selector = @selector(setPercentTermsToMatchWithFloat:);
+  methods[5].selector = @selector(getAnalyzer);
+  methods[6].selector = @selector(setAnalyzerWithOrgApacheLuceneAnalysisAnalyzer:);
+  methods[7].selector = @selector(getLikeText);
+  methods[8].selector = @selector(setLikeTextWithNSString:);
+  methods[9].selector = @selector(getMaxQueryTerms);
+  methods[10].selector = @selector(setMaxQueryTermsWithInt:);
+  methods[11].selector = @selector(getMinTermFrequency);
+  methods[12].selector = @selector(setMinTermFrequencyWithInt:);
+  methods[13].selector = @selector(getMoreLikeFields);
+  methods[14].selector = @selector(setMoreLikeFieldsWithNSStringArray:);
+  methods[15].selector = @selector(getStopWords);
+  methods[16].selector = @selector(setStopWordsWithJavaUtilSet:);
+  methods[17].selector = @selector(getMinDocFreq);
+  methods[18].selector = @selector(setMinDocFreqWithInt:);
+  methods[19].selector = @selector(hash);
+  methods[20].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "likeText_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "moreLikeFields_", NULL, 0x2, "[Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "analyzer_", NULL, 0x2, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldName_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "percentTermsToMatch_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "minTermFrequency_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxQueryTerms_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "stopWords_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<*>;", .constantValue.asLong = 0 },
-    { "minDocFreq_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "likeText_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "moreLikeFields_", "[LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "analyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldName_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "percentTermsToMatch_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "minTermFrequency_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxQueryTerms_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "stopWords_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 24, -1 },
+    { "minDocFreq_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesMltMoreLikeThisQuery = { 2, "MoreLikeThisQuery", "org.apache.lucene.queries.mlt", NULL, 0x1, 21, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;[LNSString;LOrgApacheLuceneAnalysisAnalyzer;LNSString;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "toString", "LNSString;", "setPercentTermsToMatch", "F", "setAnalyzer", "LOrgApacheLuceneAnalysisAnalyzer;", "setLikeText", "setMaxQueryTerms", "I", "setMinTermFrequency", "setMoreLikeFields", "[LNSString;", "()Ljava/util/Set<*>;", "setStopWords", "LJavaUtilSet;", "(Ljava/util/Set<*>;)V", "setMinDocFreq", "hashCode", "equals", "LNSObject;", "Ljava/util/Set<*>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesMltMoreLikeThisQuery = { "MoreLikeThisQuery", "org.apache.lucene.queries.mlt", ptrTable, methods, fields, 7, 0x1, 21, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesMltMoreLikeThisQuery;
 }
 

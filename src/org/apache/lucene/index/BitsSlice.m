@@ -9,6 +9,10 @@
 #include "org/apache/lucene/index/ReaderSlice.h"
 #include "org/apache/lucene/util/Bits.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/BitsSlice must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexBitsSlice () {
  @public
   id<OrgApacheLuceneUtilBits> parent_;
@@ -22,9 +26,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexBitsSlice, parent_, id<OrgApacheLuceneUt
 
 @implementation OrgApacheLuceneIndexBitsSlice
 
-- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)parent
-            withOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)slice {
-  OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(self, parent, slice);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)parent
+                          withOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)slice {
+  OrgApacheLuceneIndexBitsSlice_initPackagePrivateWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(self, parent, slice);
   return self;
 }
 
@@ -32,7 +36,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexBitsSlice, parent_, id<OrgApacheLuceneUt
   if (doc >= length_) {
     @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"doc ", doc, @" is out of bounds 0 .. ", (length_ - 1)));
   }
-  JreAssert((doc < length_), (JreStrcat("$I$I", @"doc=", doc, @" length=", length_)));
+  JreAssert(doc < length_, JreStrcat("$I$I", @"doc=", doc, @" length=", length_));
   return [((id<OrgApacheLuceneUtilBits>) nil_chk(parent_)) getWithInt:doc + start_];
 }
 
@@ -46,36 +50,44 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexBitsSlice, parent_, id<OrgApacheLuceneUt
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBits:withOrgApacheLuceneIndexReaderSlice:", "BitsSlice", NULL, 0x1, NULL, NULL },
-    { "getWithInt:", "get", "Z", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneUtilBits:withOrgApacheLuceneIndexReaderSlice:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(length);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "parent_", NULL, 0x12, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
-    { "start_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "parent_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "start_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexBitsSlice = { 2, "BitsSlice", "org.apache.lucene.index", NULL, 0x10, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBits;LOrgApacheLuceneIndexReaderSlice;", "get", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexBitsSlice = { "BitsSlice", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexBitsSlice;
 }
 
 @end
 
-void OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(OrgApacheLuceneIndexBitsSlice *self, id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) {
+void OrgApacheLuceneIndexBitsSlice_initPackagePrivateWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(OrgApacheLuceneIndexBitsSlice *self, id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) {
   NSObject_init(self);
   JreStrongAssign(&self->parent_, parent);
   self->start_ = ((OrgApacheLuceneIndexReaderSlice *) nil_chk(slice))->start_;
   self->length_ = slice->length_;
-  JreAssert((self->length_ >= 0), (JreStrcat("$I", @"length=", self->length_)));
+  JreAssert(self->length_ >= 0, JreStrcat("$I", @"length=", self->length_));
 }
 
-OrgApacheLuceneIndexBitsSlice *new_OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexBitsSlice, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_, parent, slice)
+OrgApacheLuceneIndexBitsSlice *new_OrgApacheLuceneIndexBitsSlice_initPackagePrivateWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexBitsSlice, initPackagePrivateWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_, parent, slice)
 }
 
-OrgApacheLuceneIndexBitsSlice *create_OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexBitsSlice, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_, parent, slice)
+OrgApacheLuceneIndexBitsSlice *create_OrgApacheLuceneIndexBitsSlice_initPackagePrivateWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexBitsSlice, initPackagePrivateWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_, parent, slice)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexBitsSlice)

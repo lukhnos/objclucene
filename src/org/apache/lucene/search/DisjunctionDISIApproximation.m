@@ -3,13 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/search/DisjunctionDISIApproximation.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/DisiPriorityQueue.h"
 #include "org/apache/lucene/search/DisiWrapper.h"
 #include "org/apache/lucene/search/DisjunctionDISIApproximation.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/DisjunctionDISIApproximation must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchDisjunctionDISIApproximation
 
@@ -27,7 +29,7 @@
 }
 
 - (jint)nextDoc {
-  OrgApacheLuceneSearchDisiWrapper *top = [((OrgApacheLuceneSearchDisiPriorityQueue *) nil_chk(subIterators_)) top];
+  OrgApacheLuceneSearchDisiWrapper *top = JreRetainedLocalValue([((OrgApacheLuceneSearchDisiPriorityQueue *) nil_chk(subIterators_)) top]);
   jint doc = ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(top))->doc_;
   do {
     top->doc_ = [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(top->approximation_)) nextDoc];
@@ -38,7 +40,7 @@
 }
 
 - (jint)advanceWithInt:(jint)target {
-  OrgApacheLuceneSearchDisiWrapper *top = [((OrgApacheLuceneSearchDisiPriorityQueue *) nil_chk(subIterators_)) top];
+  OrgApacheLuceneSearchDisiWrapper *top = JreRetainedLocalValue([((OrgApacheLuceneSearchDisiPriorityQueue *) nil_chk(subIterators_)) top]);
   do {
     ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(top))->doc_ = [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(top->approximation_)) advanceWithInt:target];
     top = [subIterators_ updateTop];
@@ -53,18 +55,28 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchDisiPriorityQueue:", "DisjunctionDISIApproximation", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/DisiPriorityQueue<TIter;>;)V" },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 4, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchDisiPriorityQueue:);
+  methods[1].selector = @selector(cost);
+  methods[2].selector = @selector(docID);
+  methods[3].selector = @selector(nextDoc);
+  methods[4].selector = @selector(advanceWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "subIterators_", NULL, 0x10, "Lorg.apache.lucene.search.DisiPriorityQueue;", NULL, "Lorg/apache/lucene/search/DisiPriorityQueue<TIter;>;", .constantValue.asLong = 0 },
-    { "cost_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "subIterators_", "LOrgApacheLuceneSearchDisiPriorityQueue;", .constantValue.asLong = 0, 0x10, -1, -1, 5, -1 },
+    { "cost_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisjunctionDISIApproximation = { 2, "DisjunctionDISIApproximation", "org.apache.lucene.search", NULL, 0x1, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<Iter:Lorg/apache/lucene/search/DocIdSetIterator;>Lorg/apache/lucene/search/DocIdSetIterator;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchDisiPriorityQueue;", "(Lorg/apache/lucene/search/DisiPriorityQueue<TIter;>;)V", "LJavaIoIOException;", "advance", "I", "Lorg/apache/lucene/search/DisiPriorityQueue<TIter;>;", "<Iter:Lorg/apache/lucene/search/DocIdSetIterator;>Lorg/apache/lucene/search/DocIdSetIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisjunctionDISIApproximation = { "DisjunctionDISIApproximation", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, -1, -1, 6, -1 };
   return &_OrgApacheLuceneSearchDisjunctionDISIApproximation;
 }
 

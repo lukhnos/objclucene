@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/OffsetAttribute must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisTokenattributesOffsetAttribute : NSObject
 
 @end
@@ -13,12 +17,20 @@
 @implementation OrgApacheLuceneAnalysisTokenattributesOffsetAttribute
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "startOffset", NULL, "I", 0x401, NULL, NULL },
-    { "setOffsetWithInt:withInt:", "setOffset", "V", 0x401, NULL, NULL },
-    { "endOffset", NULL, "I", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesOffsetAttribute = { 2, "OffsetAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(startOffset);
+  methods[1].selector = @selector(setOffsetWithInt:withInt:);
+  methods[2].selector = @selector(endOffset);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setOffset", "II" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesOffsetAttribute = { "OffsetAttribute", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, NULL, 7, 0x609, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute;
 }
 

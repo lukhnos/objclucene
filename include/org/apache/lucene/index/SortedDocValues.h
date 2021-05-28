@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSortedDocValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSortedDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValues || defined(INCLUDE_OrgApacheLuceneIndexSortedDocValues))
 #define OrgApacheLuceneIndexSortedDocValues_
 
@@ -26,10 +32,10 @@
 /*!
  @brief A per-document byte[] with presorted values.
  <p>
- Per-Document values in a SortedDocValues are deduplicated, dereferenced,
- and sorted into a dictionary of unique values. A pointer to the
- dictionary value (ordinal) can be retrieved for each document. Ordinals
- are dense and in increasing sorted order.
+  Per-Document values in a SortedDocValues are deduplicated, dereferenced,
+  and sorted into a dictionary of unique values. A pointer to the
+  dictionary value (ordinal) can be retrieved for each document. Ordinals
+  are dense and in increasing sorted order.
  */
 @interface OrgApacheLuceneIndexSortedDocValues : OrgApacheLuceneIndexBinaryDocValues
 
@@ -41,32 +47,31 @@
  @brief Returns the ordinal for the specified docID.
  @param docID document ID to lookup
  @return ordinal for the document: this is dense, starts at 0, then
- increments by 1 for the next value in sorted order. Note that
- missing values are indicated by -1.
+          increments by 1 for the next value in sorted order. Note that
+          missing values are indicated by -1.
  */
 - (jint)getOrdWithInt:(jint)docID;
 
 /*!
  @brief Returns the number of unique values.
  @return number of unique values in this SortedDocValues. This is
- also equivalent to one plus the maximum ordinal.
+          also equivalent to one plus the maximum ordinal.
  */
 - (jint)getValueCount;
 
 /*!
- @brief Retrieves the value for the specified ordinal.
- The returned
+ @brief Retrieves the value for the specified ordinal.The returned 
  <code>BytesRef</code> may be re-used across calls to <code>lookupOrd(int)</code>
- so make sure to <code>copy it</code> if you want
- to keep it around.
- @param ord ordinal to lookup (must be &gt;= 0 and &lt; <code>getValueCount()</code>)
+  so make sure to <code>copy it</code> if you want
+  to keep it around.
+ @param ord ordinal to lookup (must be  &gt; = 0 and  &lt;  <code>getValueCount()</code> )
  - seealso: #getOrd(int)
  */
 - (OrgApacheLuceneUtilBytesRef *)lookupOrdWithInt:(jint)ord;
 
 /*!
  @brief If <code>key</code> exists, returns its ordinal, else
- returns <code>-insertionPoint-1</code>, like <code>Arrays.binarySearch</code>
+   returns <code>-insertionPoint-1</code>, like <code>Arrays.binarySearch</code>
  .
  @param key Key to look up
  */
@@ -83,9 +88,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -97,4 +102,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedDocValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValues")

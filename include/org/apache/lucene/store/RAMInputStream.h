@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreRAMInputStream
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreRAMInputStream_) && (INCLUDE_ALL_OrgApacheLuceneStoreRAMInputStream || defined(INCLUDE_OrgApacheLuceneStoreRAMInputStream))
 #define OrgApacheLuceneStoreRAMInputStream_
 
@@ -25,20 +31,20 @@
 
 /*!
  @brief A memory-resident <code>IndexInput</code> implementation.
-  
  */
 @interface OrgApacheLuceneStoreRAMInputStream : OrgApacheLuceneStoreIndexInput < NSCopying >
-
-+ (jint)BUFFER_SIZE;
+@property (readonly, class) jint BUFFER_SIZE NS_SWIFT_NAME(BUFFER_SIZE);
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
- withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+           withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f;
 
 - (void)close;
 
 - (jlong)getFilePointer;
+
+- (OrgApacheLuceneStoreIndexInput *)java_clone;
 
 - (jlong)length;
 
@@ -56,15 +62,19 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)name
- withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
-                        withLong:(jlong)length;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+           withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
+                                  withLong:(jlong)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreRAMInputStream)
 
-inline jint OrgApacheLuceneStoreRAMInputStream_get_BUFFER_SIZE();
+inline jint OrgApacheLuceneStoreRAMInputStream_get_BUFFER_SIZE(void);
 #define OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE 1024
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreRAMInputStream, BUFFER_SIZE, jint)
 
@@ -84,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMInputStream)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRAMInputStream")

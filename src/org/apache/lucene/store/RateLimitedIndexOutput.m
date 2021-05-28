@@ -3,13 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/store/RateLimitedIndexOutput.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/store/RateLimitedIndexOutput.h"
 #include "org/apache/lucene/store/RateLimiter.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/RateLimitedIndexOutput must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreRateLimitedIndexOutput () {
  @public
@@ -21,7 +23,7 @@
   jlong bytesSinceLastPause_;
   /*!
    @brief Cached here not not always have to call RateLimiter#getMinPauseCheckBytes()
- which does volatile read.
+  which does volatile read.
    */
   jlong currentMinPauseCheckBytes_;
 }
@@ -80,22 +82,34 @@ __attribute__((unused)) static void OrgApacheLuceneStoreRateLimitedIndexOutput_c
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRateLimiter:withOrgApacheLuceneStoreIndexOutput:", "RateLimitedIndexOutput", NULL, 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
-    { "getChecksum", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeByteWithByte:", "writeByte", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeBytesWithByteArray:withInt:withInt:", "writeBytes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "checkRate", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRateLimiter:withOrgApacheLuceneStoreIndexOutput:);
+  methods[1].selector = @selector(close);
+  methods[2].selector = @selector(getFilePointer);
+  methods[3].selector = @selector(getChecksum);
+  methods[4].selector = @selector(writeByteWithByte:);
+  methods[5].selector = @selector(writeBytesWithByteArray:withInt:withInt:);
+  methods[6].selector = @selector(checkRate);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "delegate_", NULL, 0x12, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "rateLimiter_", NULL, 0x12, "Lorg.apache.lucene.store.RateLimiter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesSinceLastPause_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentMinPauseCheckBytes_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "delegate_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "rateLimiter_", "LOrgApacheLuceneStoreRateLimiter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "bytesSinceLastPause_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentMinPauseCheckBytes_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRateLimitedIndexOutput = { 2, "RateLimitedIndexOutput", "org.apache.lucene.store", NULL, 0x11, 7, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRateLimiter;LOrgApacheLuceneStoreIndexOutput;", "LJavaIoIOException;", "writeByte", "B", "writeBytes", "[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRateLimitedIndexOutput = { "RateLimitedIndexOutput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x11, 7, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreRateLimitedIndexOutput;
 }
 

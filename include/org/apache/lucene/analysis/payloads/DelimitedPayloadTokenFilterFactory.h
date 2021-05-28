@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory))
 #define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_
 
@@ -32,26 +38,24 @@
 /*!
  @brief Factory for <code>DelimitedPayloadTokenFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_dlmtd" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.DelimitedPayloadTokenFilterFactory" encoder="float" delimiter="|"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_dlmtd" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.DelimitedPayloadTokenFilterFactory" encoder="float" delimiter="|"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
-
-+ (NSString *)ENCODER_ATTR;
-
-+ (NSString *)DELIMITER_ATTR;
+@property (readonly, copy, class) NSString *ENCODER_ATTR NS_SWIFT_NAME(ENCODER_ATTR);
+@property (readonly, copy, class) NSString *DELIMITER_ATTR NS_SWIFT_NAME(DELIMITER_ATTR);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new DelimitedPayloadTokenFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -61,12 +65,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory)
 
-inline NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_get_ENCODER_ATTR();
+inline NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_get_ENCODER_ATTR(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, ENCODER_ATTR, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_get_DELIMITER_ATTR();
+inline NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_get_DELIMITER_ATTR(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, DELIMITER_ATTR, NSString *)
@@ -81,4 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenF
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory")

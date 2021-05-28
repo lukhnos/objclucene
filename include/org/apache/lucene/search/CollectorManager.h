@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchCollectorManager
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchCollectorManager_) && (INCLUDE_ALL_OrgApacheLuceneSearchCollectorManager || defined(INCLUDE_OrgApacheLuceneSearchCollectorManager))
 #define OrgApacheLuceneSearchCollectorManager_
 
@@ -20,35 +26,34 @@
 @protocol OrgApacheLuceneSearchCollector;
 
 /*!
- @brief A manager of collectors.
- This class is useful to parallelize execution of
- search requests and has two main methods:
+ @brief A manager of collectors.This class is useful to parallelize execution of
+  search requests and has two main methods: 
  <ul>
- <li><code>newCollector()</code> which must return a NEW collector which
- will be used to collect a certain set of leaves.</li>
- <li><code>reduce(Collection)</code> which will be used to reduce the
- results of individual collections into a meaningful result.
- This method is only called after all leaves have been fully
- collected.</li>
- </ul>
- - seealso: IndexSearcher#search(Query,CollectorManager)
+    <li><code>newCollector()</code> which must return a NEW collector which
+        will be used to collect a certain set of leaves.
+ </li>
+    <li><code>reduce(Collection)</code> which will be used to reduce the
+        results of individual collections into a meaningful result.
+        This method is only called after all leaves have been fully
+        collected.</li>
+  </ul>
+ - seealso: IndexSearcher#search(Query, CollectorManager)
  */
-@protocol OrgApacheLuceneSearchCollectorManager < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchCollectorManager < JavaObject >
 
 /*!
- @brief Return a new <code>Collector</code>.
- This must return a different instance on
- each call.
+ @brief Return a new <code>Collector</code>.This must return a different instance on
+  each call.
  */
-- (id)newCollector OBJC_METHOD_FAMILY_NONE;
+- (id<OrgApacheLuceneSearchCollector>)newCollector OBJC_METHOD_FAMILY_NONE;
 
 /*!
  @brief Reduce the results of individual collectors into a meaningful result.
- For instance a <code>TopDocsCollector</code> would compute the
+ For instance a <code>TopDocsCollector</code> would compute the 
  <code>top docs</code> of each collector and then
- merge them using <code>TopDocs.merge(int,TopDocs[])</code>.
- This method must be called after collection is finished on all provided
- collectors.
+  merge them using <code>TopDocs.merge(int, TopDocs[])</code>.
+  This method must be called after collection is finished on all provided
+  collectors.
  */
 - (id)reduceWithJavaUtilCollection:(id<JavaUtilCollection>)collectors;
 
@@ -60,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCollectorManager)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCollectorManager")

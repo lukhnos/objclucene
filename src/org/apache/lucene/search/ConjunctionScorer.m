@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/List.h"
@@ -16,6 +15,10 @@
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/Weight.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ConjunctionScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchConjunctionScorer () {
  @public
@@ -31,18 +34,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchConjunctionScorer, scorers_, IOSObjectA
 
 @implementation OrgApacheLuceneSearchConjunctionScorer
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                   withJavaUtilList:(id<JavaUtilList>)required
-                                   withJavaUtilList:(id<JavaUtilList>)scorers {
-  OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(self, weight, required, scorers);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                 withJavaUtilList:(id<JavaUtilList>)required
+                                                 withJavaUtilList:(id<JavaUtilList>)scorers {
+  OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(self, weight, required, scorers);
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                   withJavaUtilList:(id<JavaUtilList>)required
-                                   withJavaUtilList:(id<JavaUtilList>)scorers
-                                          withFloat:(jfloat)coord {
-  OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, weight, required, scorers, coord);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                 withJavaUtilList:(id<JavaUtilList>)required
+                                                 withJavaUtilList:(id<JavaUtilList>)scorers
+                                                        withFloat:(jfloat)coord {
+  OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, weight, required, scorers, coord);
   return self;
 }
 
@@ -105,56 +108,70 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchConjunctionScorer, scorers_, IOSObjectA
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:withJavaUtilList:withJavaUtilList:", "ConjunctionScorer", NULL, 0x0, NULL, "(Lorg/apache/lucene/search/Weight;Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;)V" },
-    { "initWithOrgApacheLuceneSearchWeight:withJavaUtilList:withJavaUtilList:withFloat:", "ConjunctionScorer", NULL, 0x0, NULL, "(Lorg/apache/lucene/search/Weight;Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;F)V" },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 2, -1, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 5, 6, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 6, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 6, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 7, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneSearchWeight:withJavaUtilList:withJavaUtilList:);
+  methods[1].selector = @selector(initPackagePrivateWithOrgApacheLuceneSearchWeight:withJavaUtilList:withJavaUtilList:withFloat:);
+  methods[2].selector = @selector(asTwoPhaseIterator);
+  methods[3].selector = @selector(advanceWithInt:);
+  methods[4].selector = @selector(docID);
+  methods[5].selector = @selector(nextDoc);
+  methods[6].selector = @selector(score);
+  methods[7].selector = @selector(freq);
+  methods[8].selector = @selector(cost);
+  methods[9].selector = @selector(getChildren);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "disi_", NULL, 0x12, "Lorg.apache.lucene.search.ConjunctionDISI;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scorers_", NULL, 0x12, "[Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "coord_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "disi_", "LOrgApacheLuceneSearchConjunctionDISI;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scorers_", "[LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "coord_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.ConjunctionScorer$DocsAndFreqs;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionScorer = { 2, "ConjunctionScorer", "org.apache.lucene.search", NULL, 0x0, 10, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchWeight;LJavaUtilList;LJavaUtilList;", "(Lorg/apache/lucene/search/Weight;Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;)V", "LOrgApacheLuceneSearchWeight;LJavaUtilList;LJavaUtilList;F", "(Lorg/apache/lucene/search/Weight;Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;F)V", "advance", "I", "LJavaIoIOException;", "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;", "LOrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionScorer = { "ConjunctionScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x0, 10, 3, -1, 8, -1, -1, -1 };
   return &_OrgApacheLuceneSearchConjunctionScorer;
 }
 
 @end
 
-void OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchConjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers) {
-  OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, weight, required, scorers, 1.0f);
+void OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchConjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers) {
+  OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, weight, required, scorers, 1.0f);
 }
 
-OrgApacheLuceneSearchConjunctionScorer *new_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConjunctionScorer, initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_, weight, required, scorers)
+OrgApacheLuceneSearchConjunctionScorer *new_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConjunctionScorer, initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_, weight, required, scorers)
 }
 
-OrgApacheLuceneSearchConjunctionScorer *create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConjunctionScorer, initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_, weight, required, scorers)
+OrgApacheLuceneSearchConjunctionScorer *create_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConjunctionScorer, initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_, weight, required, scorers)
 }
 
-void OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchConjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord) {
+void OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchConjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord) {
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, weight);
-  JreAssert(([((id<JavaUtilList>) nil_chk(required)) containsAllWithJavaUtilCollection:scorers]), (@"org/apache/lucene/search/ConjunctionScorer.java:39 condition failed: assert required.containsAll(scorers);"));
+  JreAssert([((id<JavaUtilList>) nil_chk(required)) containsAllWithJavaUtilCollection:scorers], @"org/apache/lucene/search/ConjunctionScorer.java:39 condition failed: assert required.containsAll(scorers);");
   self->coord_ = coord;
   JreStrongAssign(&self->disi_, OrgApacheLuceneSearchConjunctionDISI_intersectWithJavaUtilList_(required));
   JreStrongAssign(&self->scorers_, [((id<JavaUtilList>) nil_chk(scorers)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[scorers size] type:OrgApacheLuceneSearchScorer_class_()]]);
 }
 
-OrgApacheLuceneSearchConjunctionScorer *new_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConjunctionScorer, initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_, weight, required, scorers, coord)
+OrgApacheLuceneSearchConjunctionScorer *new_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConjunctionScorer, initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_, weight, required, scorers, coord)
 }
 
-OrgApacheLuceneSearchConjunctionScorer *create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConjunctionScorer, initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_, weight, required, scorers, coord)
+OrgApacheLuceneSearchConjunctionScorer *create_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConjunctionScorer, initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_, weight, required, scorers, coord)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConjunctionScorer)
@@ -172,15 +189,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConjunctionScorer)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchDocIdSetIterator:", "DocsAndFreqs", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchDocIdSetIterator:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "cost_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "iterator_", NULL, 0x10, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "cost_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "iterator_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs = { 2, "DocsAndFreqs", "org.apache.lucene.search", "ConjunctionScorer", 0x18, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchDocIdSetIterator;", "LOrgApacheLuceneSearchConjunctionScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs = { "DocsAndFreqs", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x18, 1, 3, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs;
 }
 

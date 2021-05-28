@@ -3,10 +3,8 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/miscellaneous/WordDelimiterFilterFactory.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Byte.h"
 #include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -26,11 +24,14 @@
 #include "org/apache/lucene/analysis/miscellaneous/WordDelimiterFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/WordDelimiterFilterFactory.h"
 #include "org/apache/lucene/analysis/miscellaneous/WordDelimiterIterator.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 #include "org/apache/lucene/util/Version.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/WordDelimiterFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory () {
  @public
@@ -52,7 +53,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFacto
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, types_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, protectedWords_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_get_typePattern();
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_get_typePattern(void);
 inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_set_typePattern(JavaUtilRegexPattern *value);
 static JavaUtilRegexPattern *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, typePattern, JavaUtilRegexPattern *)
@@ -88,10 +89,10 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES =
     JreStrongAssign(&protectedWords_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:wordFiles_ withBoolean:false]);
   }
   if (types_ != nil) {
-    id<JavaUtilList> files = [self splitFileNamesWithNSString:types_];
+    id<JavaUtilList> files = JreRetainedLocalValue([self splitFileNamesWithNSString:types_]);
     id<JavaUtilList> wlist = create_JavaUtilArrayList_init();
     for (NSString * __strong file in nil_chk(files)) {
-      id<JavaUtilList> lines = [self getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:[((NSString *) nil_chk(file)) trim]];
+      id<JavaUtilList> lines = JreRetainedLocalValue([self getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:[((NSString *) nil_chk(file)) java_trim]]);
       [wlist addAllWithJavaUtilCollection:lines];
     }
     JreStrongAssign(&typeTable_, OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseTypesWithJavaUtilList_(self, wlist));
@@ -128,35 +129,46 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES =
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenFilter;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "[B", 0x2, 7, 8, -1, 9, -1, -1 },
+    { NULL, "LJavaLangByte;", 0x2, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x2, 12, 11, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(informWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[2].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[3].selector = @selector(parseTypesWithJavaUtilList:);
+  methods[4].selector = @selector(parseTypeWithNSString:);
+  methods[5].selector = @selector(parseStringWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "PROTECTED_TOKENS", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 13, -1, -1 },
+    { "TYPES", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 14, -1, -1 },
+    { "wordFiles_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "types_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "flags_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "typeTable_", "[B", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "protectedWords_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "typePattern", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0xa, -1, 15, -1, -1 },
+    { "out_", "[C", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "inform", "LOrgApacheLuceneAnalysisUtilResourceLoader;", "LJavaIoIOException;", "create", "LOrgApacheLuceneAnalysisTokenStream;", "parseTypes", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/String;>;)[B", "parseType", "LNSString;", "parseString", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS, &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES, &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory = { "WordDelimiterFilterFactory", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x1, 6, 9, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory class]) {
     JreStrongAssign(&OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern, JavaUtilRegexPattern_compileWithNSString_(@"(.*)\\s*=>\\s*(.*)\\s*$"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "WordDelimiterFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
-    { "parseTypesWithJavaUtilList:", "parseTypes", "[B", 0x2, NULL, "(Ljava/util/List<Ljava/lang/String;>;)[B" },
-    { "parseTypeWithNSString:", "parseType", "Ljava.lang.Byte;", 0x2, NULL, NULL },
-    { "parseStringWithNSString:", "parseString", "Ljava.lang.String;", 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "PROTECTED_TOKENS", "PROTECTED_TOKENS", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS, NULL, .constantValue.asLong = 0 },
-    { "TYPES", "TYPES", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES, NULL, .constantValue.asLong = 0 },
-    { "wordFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "types_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "flags_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeTable_", NULL, 0x0, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "protectedWords_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typePattern", "typePattern", 0xa, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern, NULL, .constantValue.asLong = 0 },
-    { "out_", NULL, 0x0, "[C", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory = { 2, "WordDelimiterFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 6, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory;
 }
 
 @end
@@ -213,11 +225,11 @@ OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *create_OrgApache
 IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseTypesWithJavaUtilList_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *self, id<JavaUtilList> rules) {
   id<JavaUtilSortedMap> typeMap = create_JavaUtilTreeMap_init();
   for (NSString * __strong rule in nil_chk(rules)) {
-    JavaUtilRegexMatcher *m = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern)) matcherWithJavaLangCharSequence:rule];
+    JavaUtilRegexMatcher *m = JreRetainedLocalValue([((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern)) matcherWithJavaLangCharSequence:rule]);
     if (![((JavaUtilRegexMatcher *) nil_chk(m)) find]) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Invalid Mapping Rule : [", rule, ']'));
-    NSString *lhs = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseStringWithNSString_(self, [((NSString *) nil_chk([m groupWithInt:1])) trim]);
-    JavaLangByte *rhs = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseTypeWithNSString_(self, [((NSString *) nil_chk([m groupWithInt:2])) trim]);
-    if (((jint) [((NSString *) nil_chk(lhs)) length]) != 1) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Invalid Mapping Rule : [", rule, @"]. Only a single character is allowed."));
+    NSString *lhs = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseStringWithNSString_(self, [((NSString *) nil_chk([m groupWithInt:1])) java_trim]);
+    JavaLangByte *rhs = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseTypeWithNSString_(self, [((NSString *) nil_chk([m groupWithInt:2])) java_trim]);
+    if ([((NSString *) nil_chk(lhs)) java_length] != 1) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Invalid Mapping Rule : [", rule, @"]. Only a single character is allowed."));
     if (rhs == nil) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Invalid Mapping Rule : [", rule, @"]. Illegal type."));
     [typeMap putWithId:JavaLangCharacter_valueOfWithChar_([lhs charAtWithInt:0]) withId:rhs];
   }
@@ -239,7 +251,7 @@ JavaLangByte *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_par
 
 NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseStringWithNSString_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *self, NSString *s) {
   jint readPos = 0;
-  jint len = ((jint) [((NSString *) nil_chk(s)) length]);
+  jint len = [((NSString *) nil_chk(s)) java_length];
   jint writePos = 0;
   while (readPos < len) {
     jchar c = [s charAtWithInt:readPos++];
@@ -267,14 +279,14 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseSt
         break;
         case 'u':
         if (readPos + 3 >= len) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Invalid escaped char in [", s, ']'));
-        c = (jchar) JavaLangInteger_parseIntWithNSString_withInt_([s substring:readPos endIndex:readPos + 4], 16);
+        c = (jchar) JavaLangInteger_parseIntWithNSString_withInt_([s java_substring:readPos endIndex:readPos + 4], 16);
         readPos += 4;
         break;
       }
     }
     *IOSCharArray_GetRef(nil_chk(self->out_), writePos++) = c;
   }
-  return [NSString stringWithCharacters:self->out_ offset:0 length:writePos];
+  return [NSString java_stringWithCharacters:self->out_ offset:0 length:writePos];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory)

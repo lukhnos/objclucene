@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/PrefixFilter.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
@@ -12,6 +13,12 @@
 #include "org/apache/lucene/search/MultiTermQueryWrapperFilter.h"
 #include "org/apache/lucene/search/PrefixFilter.h"
 #include "org/apache/lucene/search/PrefixQuery.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/PrefixFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchPrefixFilter__Annotations$0(void);
 
 @implementation OrgApacheLuceneSearchPrefixFilter
 
@@ -32,18 +39,21 @@
   return [buffer description];
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:", "PrefixFilter", NULL, 0x1, NULL, NULL },
-    { "getPrefix", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, 2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.PrefixQuery;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPrefixFilter = { 2, "PrefixFilter", "org.apache.lucene.search", NULL, 0x1, 3, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/MultiTermQueryWrapperFilter<Lorg/apache/lucene/search/PrefixQuery;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:);
+  methods[1].selector = @selector(getPrefix);
+  methods[2].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;", "toString", "LNSString;", "Lorg/apache/lucene/search/MultiTermQueryWrapperFilter<Lorg/apache/lucene/search/PrefixQuery;>;", (void *)&OrgApacheLuceneSearchPrefixFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPrefixFilter = { "PrefixFilter", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, 3, 4 };
   return &_OrgApacheLuceneSearchPrefixFilter;
 }
 
@@ -59,6 +69,10 @@ OrgApacheLuceneSearchPrefixFilter *new_OrgApacheLuceneSearchPrefixFilter_initWit
 
 OrgApacheLuceneSearchPrefixFilter *create_OrgApacheLuceneSearchPrefixFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *prefix) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPrefixFilter, initWithOrgApacheLuceneIndexTerm_, prefix)
+}
+
+IOSObjectArray *OrgApacheLuceneSearchPrefixFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPrefixFilter)

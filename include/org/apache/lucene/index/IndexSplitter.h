@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexSplitter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexSplitter_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexSplitter || defined(INCLUDE_OrgApacheLuceneIndexIndexSplitter))
 #define OrgApacheLuceneIndexIndexSplitter_
 
@@ -23,18 +29,15 @@
 
 /*!
  @brief Command-line tool that enables listing segments in an
- index, copying specific segments to another index, and
- deleting segments from an index.
+  index, copying specific segments to another index, and
+  deleting segments from an index.
  <p>This tool does file-level copying of segments files.
- This means it's unable to split apart a single segment
- into multiple segments.  For example if your index is a
- single segment, this tool won't help.  Also, it does basic
- file-level copying (using simple
- File{In,Out}putStream) so it will not work with non
- FSDirectory Directory impls.</p>
-  You can easily
- accidentally remove segments from your index so be
- careful!
+  This means it's unable to split apart a single segment
+  into multiple segments.  For example if your index is a
+  single segment, this tool won't help.  Also, it does basic
+  file-level copying (using simple
+  File{In,Out}putStream) so it will not work with non
+  FSDirectory Directory impls.</p>
  */
 @interface OrgApacheLuceneIndexIndexSplitter : NSObject {
  @public
@@ -45,7 +48,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)dir;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)dir;
 
 - (void)listSegments;
 
@@ -55,6 +58,10 @@
 
 - (void)splitWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)destDir
                             withNSStringArray:(IOSObjectArray *)segs;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -76,4 +83,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexSplitter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexSplitter")

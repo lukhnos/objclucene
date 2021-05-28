@@ -3,14 +3,16 @@
 //  source: ./sandbox/src/java/org/apache/lucene/codecs/idversion/SingleDocsEnum.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "org/apache/lucene/codecs/idversion/SingleDocsEnum.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/idversion/SingleDocsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsIdversionSingleDocsEnum () {
  @public
@@ -21,6 +23,11 @@
 @end
 
 @implementation OrgApacheLuceneCodecsIdversionSingleDocsEnum
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneCodecsIdversionSingleDocsEnum_initPackagePrivate(self);
+  return self;
+}
 
 - (void)resetWithInt:(jint)singleDocID {
   doc_ = -1;
@@ -75,47 +82,56 @@
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneCodecsIdversionSingleDocsEnum_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "resetWithInt:", "reset", "V", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, NULL, NULL },
-    { "nextPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "startOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "endOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", "SingleDocsEnum", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(resetWithInt:);
+  methods[2].selector = @selector(nextDoc);
+  methods[3].selector = @selector(docID);
+  methods[4].selector = @selector(advanceWithInt:);
+  methods[5].selector = @selector(cost);
+  methods[6].selector = @selector(freq);
+  methods[7].selector = @selector(nextPosition);
+  methods[8].selector = @selector(startOffset);
+  methods[9].selector = @selector(endOffset);
+  methods[10].selector = @selector(getPayload);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "doc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "singleDocID_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "singleDocID_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionSingleDocsEnum = { 2, "SingleDocsEnum", "org.apache.lucene.codecs.idversion", NULL, 0x0, 11, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "reset", "I", "advance", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionSingleDocsEnum = { "SingleDocsEnum", "org.apache.lucene.codecs.idversion", ptrTable, methods, fields, 7, 0x0, 11, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsIdversionSingleDocsEnum;
 }
 
 @end
 
-void OrgApacheLuceneCodecsIdversionSingleDocsEnum_init(OrgApacheLuceneCodecsIdversionSingleDocsEnum *self) {
+void OrgApacheLuceneCodecsIdversionSingleDocsEnum_initPackagePrivate(OrgApacheLuceneCodecsIdversionSingleDocsEnum *self) {
   OrgApacheLuceneIndexPostingsEnum_init(self);
 }
 
-OrgApacheLuceneCodecsIdversionSingleDocsEnum *new_OrgApacheLuceneCodecsIdversionSingleDocsEnum_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionSingleDocsEnum, init)
+OrgApacheLuceneCodecsIdversionSingleDocsEnum *new_OrgApacheLuceneCodecsIdversionSingleDocsEnum_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionSingleDocsEnum, initPackagePrivate)
 }
 
-OrgApacheLuceneCodecsIdversionSingleDocsEnum *create_OrgApacheLuceneCodecsIdversionSingleDocsEnum_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionSingleDocsEnum, init)
+OrgApacheLuceneCodecsIdversionSingleDocsEnum *create_OrgApacheLuceneCodecsIdversionSingleDocsEnum_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionSingleDocsEnum, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionSingleDocsEnum)

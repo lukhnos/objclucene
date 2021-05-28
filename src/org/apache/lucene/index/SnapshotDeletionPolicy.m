@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/SnapshotDeletionPolicy.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
@@ -19,6 +17,10 @@
 #include "org/apache/lucene/index/IndexDeletionPolicy.h"
 #include "org/apache/lucene/index/SnapshotDeletionPolicy.h"
 #include "org/apache/lucene/store/Directory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SnapshotDeletionPolicy must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexSnapshotDeletionPolicy () {
  @public
@@ -46,7 +48,7 @@ __attribute__((unused)) static id<JavaUtilList> OrgApacheLuceneIndexSnapshotDele
 
 /*!
  @brief Wraps a provided <code>IndexCommit</code> and prevents it
- from being deleted.
+   from being deleted.
  */
 @interface OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint : OrgApacheLuceneIndexIndexCommit {
  @public
@@ -59,7 +61,7 @@ __attribute__((unused)) static id<JavaUtilList> OrgApacheLuceneIndexSnapshotDele
 
 /*!
  @brief Creates a <code>SnapshotCommitPoint</code> wrapping the provided
- <code>IndexCommit</code>.
+   <code>IndexCommit</code>.
  */
 - (instancetype)initWithOrgApacheLuceneIndexSnapshotDeletionPolicy:(OrgApacheLuceneIndexSnapshotDeletionPolicy *)outer$
                                withOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)cp;
@@ -86,7 +88,6 @@ __attribute__((unused)) static id<JavaUtilList> OrgApacheLuceneIndexSnapshotDele
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint, this$0_, OrgApacheLuceneIndexSnapshotDeletionPolicy *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint, cp_, OrgApacheLuceneIndexIndexCommit *)
 
 __attribute__((unused)) static void OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint_initWithOrgApacheLuceneIndexSnapshotDeletionPolicy_withOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint *self, OrgApacheLuceneIndexSnapshotDeletionPolicy *outer$, OrgApacheLuceneIndexIndexCommit *cp);
@@ -137,12 +138,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
   if (!initCalled_) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"this instance is not being used by IndexWriter; be sure to use the instance returned from writer.getConfig().getIndexDeletionPolicy()");
   }
-  JavaLangInteger *refCount = [((id<JavaUtilMap>) nil_chk(refCounts_)) getWithId:JavaLangLong_valueOfWithLong_(gen)];
+  JavaLangInteger *refCount = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(refCounts_)) getWithId:JavaLangLong_valueOfWithLong_(gen)]);
   if (refCount == nil) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$", @"commit gen=", gen, @" is not currently snapshotted"));
   }
   jint refCountInt = [refCount intValue];
-  JreAssert((refCountInt > 0), (@"org/apache/lucene/index/SnapshotDeletionPolicy.java:113 condition failed: assert refCountInt > 0;"));
+  JreAssert(refCountInt > 0, @"org/apache/lucene/index/SnapshotDeletionPolicy.java:113 condition failed: assert refCountInt > 0;");
   refCountInt--;
   if (refCountInt == 0) {
     [refCounts_ removeWithId:JavaLangLong_valueOfWithLong_(gen)];
@@ -156,7 +157,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
 - (void)incRefWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)ic {
   @synchronized(self) {
     jlong gen = [((OrgApacheLuceneIndexIndexCommit *) nil_chk(ic)) getGeneration];
-    JavaLangInteger *refCount = [((id<JavaUtilMap>) nil_chk(refCounts_)) getWithId:JavaLangLong_valueOfWithLong_(gen)];
+    JavaLangInteger *refCount = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(refCounts_)) getWithId:JavaLangLong_valueOfWithLong_(gen)]);
     jint refCountInt;
     if (refCount == nil) {
       [((id<JavaUtilMap>) nil_chk(indexCommits_)) putWithId:JavaLangLong_valueOfWithLong_(gen) withId:lastCommit_];
@@ -178,7 +179,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
       @throw create_JavaLangIllegalStateException_initWithNSString_(@"No index commit to snapshot");
     }
     [self incRefWithOrgApacheLuceneIndexIndexCommit:lastCommit_];
-    return lastCommit_;
+    return JreRetainedLocalValue(lastCommit_);
   }
 }
 
@@ -200,7 +201,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
 
 - (OrgApacheLuceneIndexIndexCommit *)getIndexCommitWithLong:(jlong)gen {
   @synchronized(self) {
-    return [((id<JavaUtilMap>) nil_chk(indexCommits_)) getWithId:JavaLangLong_valueOfWithLong_(gen)];
+    return JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(indexCommits_)) getWithId:JavaLangLong_valueOfWithLong_(gen)]);
   }
 }
 
@@ -217,28 +218,43 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexDeletionPolicy:", "SnapshotDeletionPolicy", NULL, 0x1, NULL, NULL },
-    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x21, "Ljava.io.IOException;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
-    { "onInitWithJavaUtilList:", "onInit", "V", 0x21, "Ljava.io.IOException;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
-    { "release__WithOrgApacheLuceneIndexIndexCommit:", "release", "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "releaseGenWithLong:", "releaseGen", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "incRefWithOrgApacheLuceneIndexIndexCommit:", "incRef", "V", 0x24, NULL, NULL },
-    { "snapshot", NULL, "Lorg.apache.lucene.index.IndexCommit;", 0x21, "Ljava.io.IOException;", NULL },
-    { "getSnapshots", NULL, "Ljava.util.List;", 0x21, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/IndexCommit;>;" },
-    { "getSnapshotCount", NULL, "I", 0x21, NULL, NULL },
-    { "getIndexCommitWithLong:", "getIndexCommit", "Lorg.apache.lucene.index.IndexCommit;", 0x21, NULL, NULL },
-    { "wrapCommitsWithJavaUtilList:", "wrapCommits", "Ljava.util.List;", 0x2, NULL, "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)Ljava/util/List<Lorg/apache/lucene/index/IndexCommit;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x21, 1, 2, 3, 4, -1, -1 },
+    { NULL, "V", 0x21, 5, 2, 3, 4, -1, -1 },
+    { NULL, "V", 0x21, 6, 7, 3, -1, -1, -1 },
+    { NULL, "V", 0x4, 8, 9, 3, -1, -1, -1 },
+    { NULL, "V", 0x24, 10, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexCommit;", 0x21, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x21, -1, -1, -1, 11, -1, -1 },
+    { NULL, "I", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexCommit;", 0x21, 12, 9, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x2, 13, 2, -1, 14, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexDeletionPolicy:);
+  methods[1].selector = @selector(onCommitWithJavaUtilList:);
+  methods[2].selector = @selector(onInitWithJavaUtilList:);
+  methods[3].selector = @selector(release__WithOrgApacheLuceneIndexIndexCommit:);
+  methods[4].selector = @selector(releaseGenWithLong:);
+  methods[5].selector = @selector(incRefWithOrgApacheLuceneIndexIndexCommit:);
+  methods[6].selector = @selector(snapshot);
+  methods[7].selector = @selector(getSnapshots);
+  methods[8].selector = @selector(getSnapshotCount);
+  methods[9].selector = @selector(getIndexCommitWithLong:);
+  methods[10].selector = @selector(wrapCommitsWithJavaUtilList:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "refCounts_", NULL, 0x14, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Long;Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
-    { "indexCommits_", NULL, 0x14, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Long;Lorg/apache/lucene/index/IndexCommit;>;", .constantValue.asLong = 0 },
-    { "primary_", NULL, 0x12, "Lorg.apache.lucene.index.IndexDeletionPolicy;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastCommit_", NULL, 0x4, "Lorg.apache.lucene.index.IndexCommit;", NULL, NULL, .constantValue.asLong = 0 },
-    { "initCalled_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "refCounts_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x14, -1, -1, 15, -1 },
+    { "indexCommits_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x14, -1, -1, 16, -1 },
+    { "primary_", "LOrgApacheLuceneIndexIndexDeletionPolicy;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lastCommit_", "LOrgApacheLuceneIndexIndexCommit;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "initCalled_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.SnapshotDeletionPolicy$SnapshotCommitPoint;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSnapshotDeletionPolicy = { 2, "SnapshotDeletionPolicy", "org.apache.lucene.index", NULL, 0x1, 11, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexDeletionPolicy;", "onCommit", "LJavaUtilList;", "LJavaIoIOException;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V", "onInit", "release", "LOrgApacheLuceneIndexIndexCommit;", "releaseGen", "J", "incRef", "()Ljava/util/List<Lorg/apache/lucene/index/IndexCommit;>;", "getIndexCommit", "wrapCommits", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)Ljava/util/List<Lorg/apache/lucene/index/IndexCommit;>;", "Ljava/util/Map<Ljava/lang/Long;Ljava/lang/Integer;>;", "Ljava/util/Map<Ljava/lang/Long;Lorg/apache/lucene/index/IndexCommit;>;", "LOrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSnapshotDeletionPolicy = { "SnapshotDeletionPolicy", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 11, 5, -1, 17, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSnapshotDeletionPolicy;
 }
 
@@ -324,23 +340,38 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSnapshotDeletionPolicy)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSnapshotDeletionPolicy:withOrgApacheLuceneIndexIndexCommit:", "SnapshotCommitPoint", NULL, 0x4, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "delete__", "delete", "V", 0x1, NULL, NULL },
-    { "getDirectory", NULL, "Lorg.apache.lucene.store.Directory;", 0x1, NULL, NULL },
-    { "getFileNames", NULL, "Ljava.util.Collection;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Collection<Ljava/lang/String;>;" },
-    { "getGeneration", NULL, "J", 0x1, NULL, NULL },
-    { "getSegmentsFileName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getUserData", NULL, "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "isDeleted", NULL, "Z", 0x1, NULL, NULL },
-    { "getSegmentCount", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreDirectory;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, 3, 4, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, 3, 5, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSnapshotDeletionPolicy:withOrgApacheLuceneIndexIndexCommit:);
+  methods[1].selector = @selector(description);
+  methods[2].selector = @selector(delete__);
+  methods[3].selector = @selector(getDirectory);
+  methods[4].selector = @selector(getFileNames);
+  methods[5].selector = @selector(getGeneration);
+  methods[6].selector = @selector(getSegmentsFileName);
+  methods[7].selector = @selector(getUserData);
+  methods[8].selector = @selector(isDeleted);
+  methods[9].selector = @selector(getSegmentCount);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.SnapshotDeletionPolicy;", NULL, NULL, .constantValue.asLong = 0 },
-    { "cp_", NULL, 0x4, "Lorg.apache.lucene.index.IndexCommit;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexSnapshotDeletionPolicy;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "cp_", "LOrgApacheLuceneIndexIndexCommit;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint = { 2, "SnapshotCommitPoint", "org.apache.lucene.index", "SnapshotDeletionPolicy", 0x2, 10, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSnapshotDeletionPolicy;LOrgApacheLuceneIndexIndexCommit;", "toString", "delete", "LJavaIoIOException;", "()Ljava/util/Collection<Ljava/lang/String;>;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "LOrgApacheLuceneIndexSnapshotDeletionPolicy;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint = { "SnapshotCommitPoint", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x2, 10, 2, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint;
 }
 

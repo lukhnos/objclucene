@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent || defined(INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent))
 #define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_
 
@@ -20,10 +26,10 @@
 
 /*!
  @brief Add to any analysis factory component to allow returning an
- analysis component factory for use with partial terms in prefix queries,
- wildcard queries, range query endpoints, regex queries, etc.
+  analysis component factory for use with partial terms in prefix queries,
+  wildcard queries, range query endpoints, regex queries, etc.
  */
-@protocol OrgApacheLuceneAnalysisUtilMultiTermAwareComponent < NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisUtilMultiTermAwareComponent < JavaObject >
 
 /*!
  @brief Returns an analysis component to handle analysis if multi-term queries.
@@ -39,4 +45,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilMultiTermAwareComponent)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent")

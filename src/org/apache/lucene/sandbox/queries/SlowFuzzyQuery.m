@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -19,11 +18,13 @@
 #include "org/apache/lucene/sandbox/queries/SlowFuzzyQuery.h"
 #include "org/apache/lucene/sandbox/queries/SlowFuzzyTermsEnum.h"
 #include "org/apache/lucene/search/MultiTermQuery.h"
-#include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
-#include "org/apache/lucene/util/automaton/LevenshteinAutomata.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/sandbox/queries/SlowFuzzyQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSandboxQueriesSlowFuzzyQuery () {
  @public
@@ -33,6 +34,8 @@
 }
 
 @end
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSandboxQueriesSlowFuzzyQuery__Annotations$0(void);
 
 @implementation OrgApacheLuceneSandboxQueriesSlowFuzzyQuery
 
@@ -117,9 +120,9 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(obj) java_getClass])) return false;
   OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *other = (OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *) cast_chk(obj, [OrgApacheLuceneSandboxQueriesSlowFuzzyQuery class]);
   if (JavaLangFloat_floatToIntBitsWithFloat_(minimumSimilarity_) != JavaLangFloat_floatToIntBitsWithFloat_(other->minimumSimilarity_)) return false;
   if (prefixLength_ != other->prefixLength_) return false;
@@ -130,39 +133,51 @@
   return true;
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(term_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:withFloat:withInt:withInt:", "SlowFuzzyQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withFloat:withInt:", "SlowFuzzyQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withFloat:", "SlowFuzzyQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:", "SlowFuzzyQuery", NULL, 0x1, NULL, NULL },
-    { "getMinSimilarity", NULL, "F", 0x1, NULL, NULL },
-    { "getPrefixLength", NULL, "I", 0x1, NULL, NULL },
-    { "getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x4, "Ljava.io.IOException;", NULL },
-    { "getTerm", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x4, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 10, 11, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:withFloat:withInt:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexTerm:withFloat:withInt:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexTerm:withFloat:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneIndexTerm:);
+  methods[4].selector = @selector(getMinSimilarity);
+  methods[5].selector = @selector(getPrefixLength);
+  methods[6].selector = @selector(getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:);
+  methods[7].selector = @selector(getTerm);
+  methods[8].selector = @selector(toStringWithNSString:);
+  methods[9].selector = @selector(hash);
+  methods[10].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "defaultMinSimilarity", "defaultMinSimilarity", 0x19, "F", NULL, NULL, .constantValue.asFloat = OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_defaultMinSimilarity },
-    { "defaultPrefixLength", "defaultPrefixLength", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_defaultPrefixLength },
-    { "defaultMaxExpansions", "defaultMaxExpansions", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_defaultMaxExpansions },
-    { "minimumSimilarity_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termLongEnough_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "term_", NULL, 0x4, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
+    { "defaultMinSimilarity", "F", .constantValue.asFloat = OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_defaultMinSimilarity, 0x19, -1, -1, -1, -1 },
+    { "defaultPrefixLength", "I", .constantValue.asInt = OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_defaultPrefixLength, 0x19, -1, -1, -1, -1 },
+    { "defaultMaxExpansions", "I", .constantValue.asInt = OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_defaultMaxExpansions, 0x19, -1, -1, -1, -1 },
+    { "minimumSimilarity_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "prefixLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termLongEnough_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "term_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesSlowFuzzyQuery = { 2, "SlowFuzzyQuery", "org.apache.lucene.sandbox.queries", NULL, 0x1, 11, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;FII", "LOrgApacheLuceneIndexTerm;FI", "LOrgApacheLuceneIndexTerm;F", "LOrgApacheLuceneIndexTerm;", "getTermsEnum", "LOrgApacheLuceneIndexTerms;LOrgApacheLuceneUtilAttributeSource;", "LJavaIoIOException;", "toString", "LNSString;", "hashCode", "equals", "LNSObject;", (void *)&OrgApacheLuceneSandboxQueriesSlowFuzzyQuery__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesSlowFuzzyQuery = { "SlowFuzzyQuery", "org.apache.lucene.sandbox.queries", ptrTable, methods, fields, 7, 0x1, 11, 7, -1, -1, -1, -1, 12 };
   return &_OrgApacheLuceneSandboxQueriesSlowFuzzyQuery;
 }
 
@@ -177,8 +192,8 @@ void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTer
   if (prefixLength < 0) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"prefixLength < 0");
   if (maxExpansions < 0) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxExpansions < 0");
   [self setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:create_OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_initWithInt_(maxExpansions)];
-  NSString *text = [term text];
-  jint len = [((NSString *) nil_chk(text)) codePointCount:0 endIndex:((jint) [text length])];
+  NSString *text = JreRetainedLocalValue([term text]);
+  jint len = [((NSString *) nil_chk(text)) java_codePointCount:0 endIndex:[text java_length]];
   if (len > 0 && (minimumSimilarity >= 1.0f || len > 1.0f / (1.0f - minimumSimilarity))) {
     self->termLongEnough_ = true;
   }
@@ -228,6 +243,10 @@ OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *new_OrgApacheLuceneSandboxQueriesSl
 
 OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *create_OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery, initWithOrgApacheLuceneIndexTerm_, term)
+}
+
+IOSObjectArray *OrgApacheLuceneSandboxQueriesSlowFuzzyQuery__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery)

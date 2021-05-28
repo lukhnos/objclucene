@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Arrays.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/search/spans/ConjunctionSpans.h"
@@ -15,12 +14,16 @@
 #include "org/apache/lucene/search/spans/Spans.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spans/ContainSpans must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSpansContainSpans
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)bigSpans
-                    withOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)littleSpans
-                    withOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)sourceSpans {
-  OrgApacheLuceneSearchSpansContainSpans_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_(self, bigSpans, littleSpans, sourceSpans);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)bigSpans
+                                  withOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)littleSpans
+                                  withOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)sourceSpans {
+  OrgApacheLuceneSearchSpansContainSpans_initPackagePrivateWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_(self, bigSpans, littleSpans, sourceSpans);
   return self;
 }
 
@@ -49,26 +52,36 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpans:", "ContainSpans", NULL, 0x0, NULL, NULL },
-    { "startPosition", NULL, "I", 0x1, NULL, NULL },
-    { "endPosition", NULL, "I", 0x1, NULL, NULL },
-    { "width", NULL, "I", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpans:);
+  methods[1].selector = @selector(startPosition);
+  methods[2].selector = @selector(endPosition);
+  methods[3].selector = @selector(width);
+  methods[4].selector = @selector(collectWithOrgApacheLuceneSearchSpansSpanCollector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "sourceSpans_", NULL, 0x0, "Lorg.apache.lucene.search.spans.Spans;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bigSpans_", NULL, 0x0, "Lorg.apache.lucene.search.spans.Spans;", NULL, NULL, .constantValue.asLong = 0 },
-    { "littleSpans_", NULL, 0x0, "Lorg.apache.lucene.search.spans.Spans;", NULL, NULL, .constantValue.asLong = 0 },
+    { "sourceSpans_", "LOrgApacheLuceneSearchSpansSpans;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bigSpans_", "LOrgApacheLuceneSearchSpansSpans;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "littleSpans_", "LOrgApacheLuceneSearchSpansSpans;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansContainSpans = { 2, "ContainSpans", "org.apache.lucene.search.spans", NULL, 0x400, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpansSpans;LOrgApacheLuceneSearchSpansSpans;LOrgApacheLuceneSearchSpansSpans;", "collect", "LOrgApacheLuceneSearchSpansSpanCollector;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansContainSpans = { "ContainSpans", "org.apache.lucene.search.spans", ptrTable, methods, fields, 7, 0x400, 5, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansContainSpans;
 }
 
 @end
 
-void OrgApacheLuceneSearchSpansContainSpans_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchSpansContainSpans *self, OrgApacheLuceneSearchSpansSpans *bigSpans, OrgApacheLuceneSearchSpansSpans *littleSpans, OrgApacheLuceneSearchSpansSpans *sourceSpans) {
-  OrgApacheLuceneSearchSpansConjunctionSpans_initWithJavaUtilList_(self, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ bigSpans, littleSpans } count:2 type:OrgApacheLuceneSearchSpansSpans_class_()]));
+void OrgApacheLuceneSearchSpansContainSpans_initPackagePrivateWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchSpansContainSpans *self, OrgApacheLuceneSearchSpansSpans *bigSpans, OrgApacheLuceneSearchSpansSpans *littleSpans, OrgApacheLuceneSearchSpansSpans *sourceSpans) {
+  OrgApacheLuceneSearchSpansConjunctionSpans_initPackagePrivateWithJavaUtilList_(self, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ bigSpans, littleSpans } count:2 type:OrgApacheLuceneSearchSpansSpans_class_()]));
   JreStrongAssign(&self->bigSpans_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(bigSpans));
   JreStrongAssign(&self->littleSpans_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(littleSpans));
   JreStrongAssign(&self->sourceSpans_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(sourceSpans));

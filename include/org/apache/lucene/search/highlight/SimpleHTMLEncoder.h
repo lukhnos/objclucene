@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder || defined(INCLUDE_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder))
 #define OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_
 
@@ -27,7 +33,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (NSString *)encodeTextWithNSString:(NSString *)originalText;
 
@@ -42,9 +48,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *new_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *new_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *create_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *create_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init(void);
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_htmlEncodeWithNSString_(NSString *plainText);
 
@@ -52,4 +58,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder")

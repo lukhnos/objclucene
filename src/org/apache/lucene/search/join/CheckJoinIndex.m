@@ -3,9 +3,7 @@
 //  source: ./join/src/java/org/apache/lucene/search/join/CheckJoinIndex.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/IndexReader.h"
@@ -18,6 +16,10 @@
 #include "org/apache/lucene/util/BitSetIterator.h"
 #include "org/apache/lucene/util/Bits.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/CheckJoinIndex must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchJoinCheckJoinIndex ()
 
 - (instancetype)init;
@@ -26,9 +28,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneSearchJoinCheckJoinIndex_init(OrgApacheLuceneSearchJoinCheckJoinIndex *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinCheckJoinIndex *new_OrgApacheLuceneSearchJoinCheckJoinIndex_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinCheckJoinIndex *new_OrgApacheLuceneSearchJoinCheckJoinIndex_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinCheckJoinIndex *create_OrgApacheLuceneSearchJoinCheckJoinIndex_init();
+__attribute__((unused)) static OrgApacheLuceneSearchJoinCheckJoinIndex *create_OrgApacheLuceneSearchJoinCheckJoinIndex_init(void);
 
 @implementation OrgApacheLuceneSearchJoinCheckJoinIndex
 
@@ -45,11 +47,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CheckJoinIndex", NULL, 0x2, NULL, NULL },
-    { "checkWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchJoinBitSetProducer:", "check", "V", 0x9, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinCheckJoinIndex = { 2, "CheckJoinIndex", "org.apache.lucene.search.join", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(checkWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchJoinBitSetProducer:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "check", "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneSearchJoinBitSetProducer;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinCheckJoinIndex = { "CheckJoinIndex", "org.apache.lucene.search.join", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinCheckJoinIndex;
 }
 

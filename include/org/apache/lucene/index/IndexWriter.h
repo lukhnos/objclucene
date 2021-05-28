@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexWriter || defined(INCLUDE_OrgApacheLuceneIndexIndexWriter))
 #define OrgApacheLuceneIndexIndexWriter_
 
@@ -29,6 +35,7 @@
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSObjectArray;
+@class JavaLangThrowable;
 @class JavaUtilConcurrentAtomicAtomicInteger;
 @class JavaUtilConcurrentAtomicAtomicLong;
 @class OrgApacheLuceneAnalysisAnalyzer;
@@ -62,93 +69,95 @@
 /*!
  @brief An <code>IndexWriter</code> creates and maintains an index.
  <p>The <code>OpenMode</code> option on 
- <code>IndexWriterConfig.setOpenMode(OpenMode)</code> determines 
- whether a new index is created, or whether an existing index is
- opened. Note that you can open an index with <code>OpenMode.CREATE</code>
- even while readers are using the index. The old readers will 
- continue to search the "point in time" snapshot they had opened, 
- and won't see the newly created index until they re-open. If 
+   <code>IndexWriterConfig.setOpenMode(OpenMode)</code> determines 
+   whether a new index is created, or whether an existing index is
+   opened. Note that you can open an index with <code>OpenMode.CREATE</code>
+   even while readers are using the index. The old readers will 
+   continue to search the "point in time" snapshot they had opened, 
+   and won't see the newly created index until they re-open. If   
  <code>OpenMode.CREATE_OR_APPEND</code> is used IndexWriter will create a 
- new index if there is not already an index at the provided path
- and otherwise open the existing index.</p>
- <p>In either case, documents are added with <code>addDocument</code>
+   new index if there is not already an index at the provided path
+   and otherwise open the existing index.</p>
+   <p>In either case, documents are added with <code>addDocument</code>
   and removed with <code>deleteDocuments(Term...)</code> or <code>deleteDocuments(Query...)</code>
  . A document can be updated with <code>updateDocument</code>
   (which just deletes
- and then adds the entire document). When finished adding, deleting 
- and updating documents, <code>close</code> should be called.</p>
- <a name="flush"></a>
- <p>These changes are buffered in memory and periodically
- flushed to the <code>Directory</code> (during the above method
- calls). A flush is triggered when there are enough added documents
- since the last flush. Flushing is triggered either by RAM usage of the
- documents (see <code>IndexWriterConfig.setRAMBufferSizeMB</code>) or the
- number of added documents (see <code>IndexWriterConfig.setMaxBufferedDocs(int)</code>).
- The default is to flush when RAM usage hits
+   and then adds the entire document). When finished adding, deleting 
+   and updating documents, <code>close</code> should be called.</p>
+   <a name="flush"></a>
+   <p>These changes are buffered in memory and periodically
+   flushed to the <code>Directory</code> (during the above method
+   calls). A flush is triggered when there are enough added documents
+   since the last flush. Flushing is triggered either by RAM usage of the
+   documents (see <code>IndexWriterConfig.setRAMBufferSizeMB</code>) or the
+   number of added documents (see <code>IndexWriterConfig.setMaxBufferedDocs(int)</code>).
+   The default is to flush when RAM usage hits  
  <code>IndexWriterConfig.DEFAULT_RAM_BUFFER_SIZE_MB</code> MB. For
- best indexing speed you should flush by RAM usage with a
- large RAM buffer. Additionally, if IndexWriter reaches the configured number of
- buffered deletes (see <code>IndexWriterConfig.setMaxBufferedDeleteTerms</code>)
- the deleted terms and queries are flushed and applied to existing segments.
- In contrast to the other flush options <code>IndexWriterConfig.setRAMBufferSizeMB</code> and 
- <code>IndexWriterConfig.setMaxBufferedDocs(int)</code>, deleted terms
- won't trigger a segment flush. Note that flushing just moves the
- internal buffered state in IndexWriter into the index, but
- these changes are not visible to IndexReader until either
+   best indexing speed you should flush by RAM usage with a
+   large RAM buffer. Additionally, if IndexWriter reaches the configured number of
+   buffered deletes (see <code>IndexWriterConfig.setMaxBufferedDeleteTerms</code>)
+   the deleted terms and queries are flushed and applied to existing segments.
+   In contrast to the other flush options <code>IndexWriterConfig.setRAMBufferSizeMB</code> and 
+   <code>IndexWriterConfig.setMaxBufferedDocs(int)</code>, deleted terms
+   won't trigger a segment flush. Note that flushing just moves the
+   internal buffered state in IndexWriter into the index, but
+   these changes are not visible to IndexReader until either  
  <code>commit()</code> or <code>close</code> is called.  A flush may
- also trigger one or more segment merges which by default
- run with a background thread so as not to block the
- addDocument calls (see <a href="#mergePolicy">below</a>
- for changing the <code>MergeScheduler</code>).</p>
- <p>Opening an <code>IndexWriter</code> creates a lock file for the directory in use. Trying to open
- another <code>IndexWriter</code> on the same directory will lead to a
- <code>LockObtainFailedException</code>.</p>
+   also trigger one or more segment merges which by default
+   run with a background thread so as not to block the
+   addDocument calls (see <a href="#mergePolicy">below</a>
+   for changing the <code>MergeScheduler</code>).</p>
+   <p>Opening an <code>IndexWriter</code> creates a lock file for the directory in use. Trying to open
+   another <code>IndexWriter</code> on the same directory will lead to a
+   <code>LockObtainFailedException</code>.</p>
+     
  <a name="deletionPolicy"></a>
- <p>Expert: <code>IndexWriter</code> allows an optional
- <code>IndexDeletionPolicy</code> implementation to be
- specified.  You can use this to control when prior commits
- are deleted from the index.  The default policy is <code>KeepOnlyLastCommitDeletionPolicy</code>
+   <p>Expert: <code>IndexWriter</code> allows an optional
+   <code>IndexDeletionPolicy</code> implementation to be
+   specified.  You can use this to control when prior commits
+   are deleted from the index.  The default policy is <code>KeepOnlyLastCommitDeletionPolicy</code>
   which removes all prior
- commits as soon as a new commit is done (this matches
- behavior before 2.2).  Creating your own policy can allow
- you to explicitly keep previous "point in time" commits
- alive in the index for some time, to allow readers to
- refresh to the new commit without having the old commit
- deleted out from under them.  This is necessary on
- filesystems like NFS that do not support "delete on last
- close" semantics, which Lucene's "point in time" search
- normally relies on. </p>
- <a name="mergePolicy"></a> <p>Expert:
- <code>IndexWriter</code> allows you to separately change
- the <code>MergePolicy</code> and the <code>MergeScheduler</code>.
- The <code>MergePolicy</code> is invoked whenever there are
- changes to the segments in the index.  Its role is to
- select which merges to do, if any, and return a <code>MergePolicy.MergeSpecification</code>
+   commits as soon as a new commit is done (this matches
+   behavior before 2.2).  Creating your own policy can allow
+   you to explicitly keep previous "point in time" commits
+   alive in the index for some time, to allow readers to
+   refresh to the new commit without having the old commit
+   deleted out from under them.  This is necessary on
+   filesystems like NFS that do not support "delete on last
+   close" semantics, which Lucene's "point in time" search
+   normally relies on. </p>
+   <a name="mergePolicy"></a> <p>Expert:
+   <code>IndexWriter</code> allows you to separately change
+   the <code>MergePolicy</code> and the <code>MergeScheduler</code>.
+   The <code>MergePolicy</code> is invoked whenever there are
+   changes to the segments in the index.  Its role is to
+   select which merges to do, if any, and return a <code>MergePolicy.MergeSpecification</code>
   describing the merges.
- The default is <code>LogByteSizeMergePolicy</code>.  Then, the <code>MergeScheduler</code>
+   The default is <code>LogByteSizeMergePolicy</code>.  Then, the <code>MergeScheduler</code>
   is invoked with the requested merges and
- it decides when and how to run the merges.  The default is
+   it decides when and how to run the merges.  The default is  
  <code>ConcurrentMergeScheduler</code>. </p>
- <a name="OOME"></a><p><b>NOTE</b>: if you hit an
- OutOfMemoryError, or disaster strikes during a checkpoint
- then IndexWriter will close itself.  This is a
- defensive measure in case any internal state (buffered
- documents, deletions, reference counts) were corrupted.  
- Any subsequent calls will throw an AlreadyClosedException.</p>
- <a name="thread-safety"></a><p><b>NOTE</b>: <code>IndexWriter</code>
+   <a name="OOME"></a><p><b>NOTE</b>: if you hit an
+   OutOfMemoryError, or disaster strikes during a checkpoint
+   then IndexWriter will close itself.  This is a
+   defensive measure in case any internal state (buffered
+   documents, deletions, reference counts) were corrupted.  
+   Any subsequent calls will throw an AlreadyClosedException.</p>
+   <a name="thread-safety"></a><p><b>NOTE</b>: <code>IndexWriter</code>
   instances are completely thread
- safe, meaning multiple threads can call any of its
- methods, concurrently.  If your application requires
- external synchronization, you should <b>not</b>
- synchronize on the <code>IndexWriter</code> instance as
- this may cause deadlock; use your own (non-Lucene) objects
- instead. </p>
+   safe, meaning multiple threads can call any of its
+   methods, concurrently.  If your application requires
+   external synchronization, you should <b>not</b>
+   synchronize on the <code>IndexWriter</code> instance as
+   this may cause deadlock; use your own (non-Lucene) objects
+   instead. </p>
+     
  <p><b>NOTE</b>: If you call
- <code>Thread.interrupt()</code> on a thread that's within
- IndexWriter, IndexWriter will try to catch this (eg, if
- it's in a wait() or Thread.sleep()), and will then throw
- the unchecked exception <code>ThreadInterruptedException</code>
- and <b>clear</b> the interrupt status on the thread.</p>
+   <code>Thread.interrupt()</code> on a thread that's within
+   IndexWriter, IndexWriter will try to catch this (eg, if
+   it's in a wait() or Thread.sleep()), and will then throw
+   the unchecked exception <code>ThreadInterruptedException</code>
+   and <b>clear</b> the interrupt status on the thread.</p>
  */
 @interface OrgApacheLuceneIndexIndexWriter : NSObject < JavaIoCloseable, OrgApacheLuceneIndexTwoPhaseCommit, OrgApacheLuceneUtilAccountable > {
  @public
@@ -168,11 +177,10 @@
   OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream_;
   /*!
    @brief How many documents are in the index, or are in the process of being
- added (reserved).
-   E.g., operations like addIndexes will first reserve
- the right to add N docs, before they actually change the index,
- much like how hotels place an "authorization hold" on your credit
- card to make sure they can later charge you when you check out. 
+   added (reserved).E.g., operations like addIndexes will first reserve
+   the right to add N docs, before they actually change the index,
+   much like how hotels place an "authorization hold" on your credit
+   card to make sure they can later charge you when you check out.
    */
   JavaUtilConcurrentAtomicAtomicLong *pendingNumDocs_;
   OrgApacheLuceneUtilCloseableThreadLocal *rateLimiters_;
@@ -182,136 +190,132 @@
    */
   OrgApacheLuceneUtilInfoStream *infoStream_;
 }
-
-+ (jint)MAX_DOCS;
-
-+ (jint)MAX_POSITION;
-
-+ (NSString *)WRITE_LOCK_NAME;
-
-+ (NSString *)SOURCE;
-
-+ (NSString *)SOURCE_MERGE;
-
-+ (NSString *)SOURCE_FLUSH;
-
-+ (NSString *)SOURCE_ADDINDEXES_READERS;
-
-+ (jint)MAX_TERM_LENGTH;
+@property (readonly, class) jint MAX_DOCS NS_SWIFT_NAME(MAX_DOCS);
+@property (readonly, class) jint MAX_POSITION NS_SWIFT_NAME(MAX_POSITION);
+@property (readonly, copy, class) NSString *WRITE_LOCK_NAME NS_SWIFT_NAME(WRITE_LOCK_NAME);
+@property (readonly, copy, class) NSString *SOURCE NS_SWIFT_NAME(SOURCE);
+@property (readonly, copy, class) NSString *SOURCE_MERGE NS_SWIFT_NAME(SOURCE_MERGE);
+@property (readonly, copy, class) NSString *SOURCE_FLUSH NS_SWIFT_NAME(SOURCE_FLUSH);
+@property (readonly, copy, class) NSString *SOURCE_ADDINDEXES_READERS NS_SWIFT_NAME(SOURCE_ADDINDEXES_READERS);
+@property (readonly, class) jint MAX_TERM_LENGTH NS_SWIFT_NAME(MAX_TERM_LENGTH);
 
 #pragma mark Public
 
 /*!
  @brief Constructs a new IndexWriter per the settings given in <code>conf</code>.
- If you want to make "live" changes to this writer instance, use
+ If you want to make "live" changes to this writer instance, use 
  <code>getConfig()</code>.
+   
  <p>
- <b>NOTE:</b> after ths writer is created, the given configuration instance
- cannot be passed to another writer. If you intend to do so, you should
+  <b>NOTE:</b> after ths writer is created, the given configuration instance
+  cannot be passed to another writer. If you intend to do so, you should 
  <code>clone</code> it beforehand.
- @param d
- the index directory. The index is either created or appended
- according <code>conf.getOpenMode()</code>.
- @param conf
- the configuration settings according to which IndexWriter should
- be initialized.
- @throws IOException
+ @param d the index directory. The index is either created or appended
+            according 
+  <code> conf.getOpenMode() </code> .
+ @param conf the configuration settings according to which IndexWriter should
+            be initialized.
+ @throw IOException
  if the directory cannot be read/written to, or if it does not
- exist and <code>conf.getOpenMode()</code> is
- <code>OpenMode.APPEND</code> or if there is any other low-level
- IO error
+            exist and <code>conf.getOpenMode()</code> is
+            <code>OpenMode.APPEND</code> or if there is any other low-level
+            IO error
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)d
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)conf;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)d
+                      withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)conf;
 
 /*!
  @brief Adds a document to this index.
  <p> Note that if an Exception is hit (for example disk full)
- then the index will be consistent, but this document
- may not have been added.  Furthermore, it's possible
- the index will have one segment in non-compound format
- even when using compound files (when a merge has
- partially succeeded).</p>
+  then the index will be consistent, but this document
+  may not have been added.  Furthermore, it's possible
+  the index will have one segment in non-compound format
+  even when using compound files (when a merge has
+  partially succeeded).</p>
+  
  <p> This method periodically flushes pending documents
- to the Directory (see <a href="#flush">above</a>), and
- also periodically triggers segment merges in the index
- according to the <code>MergePolicy</code> in use.</p>
+  to the Directory (see <a href="#flush">above</a>), and
+  also periodically triggers segment merges in the index
+  according to the <code>MergePolicy</code> in use.</p>
+  
  <p>Merges temporarily consume space in the
- directory. The amount of space required is up to 1X the
- size of all segments being merged, when no
- readers/searchers are open against the index, and up to
- 2X the size of all segments being merged when
- readers/searchers are open against the index (see
+  directory. The amount of space required is up to 1X the
+  size of all segments being merged, when no
+  readers/searchers are open against the index, and up to
+  2X the size of all segments being merged when
+  readers/searchers are open against the index (see 
  <code>forceMerge(int)</code> for details). The sequence of
- primitive merge operations performed is governed by the
- merge policy.
+  primitive merge operations performed is governed by the
+  merge policy. 
  <p>Note that each term in the document can be no longer
- than <code>MAX_TERM_LENGTH</code> in bytes, otherwise an
- IllegalArgumentException will be thrown.</p>
+  than <code>MAX_TERM_LENGTH</code> in bytes, otherwise an
+  IllegalArgumentException will be thrown.</p>
+  
  <p>Note that it's possible to create an invalid Unicode
- string in java if a UTF16 surrogate pair is malformed.
- In this case, the invalid characters are silently
- replaced with the Unicode replacement character
- U+FFFD.</p>
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+  string in java if a UTF16 surrogate pair is malformed.
+  In this case, the invalid characters are silently
+  replaced with the Unicode replacement character
+  U+FFFD.</p>
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  */
 - (void)addDocumentWithJavaLangIterable:(id<JavaLangIterable>)doc;
 
 /*!
  @brief Atomically adds a block of documents with sequentially
- assigned document IDs, such that an external reader
- will see all or none of the documents.
+  assigned document IDs, such that an external reader
+  will see all or none of the documents.
  <p><b>WARNING</b>: the index does not currently record
- which documents were added as a block.  Today this is
- fine, because merging will preserve a block. The order of
- documents within a segment will be preserved, even when child
- documents within a block are deleted. Most search features
- (like result grouping and block joining) require you to
- mark documents; when these documents are deleted these
- search features will not work as expected. Obviously adding
- documents to an existing block will require you the reindex
- the entire block.
+  which documents were added as a block.  Today this is
+  fine, because merging will preserve a block. The order of
+  documents within a segment will be preserved, even when child
+  documents within a block are deleted. Most search features
+  (like result grouping and block joining) require you to
+  mark documents; when these documents are deleted these
+  search features will not work as expected. Obviously adding
+  documents to an existing block will require you the reindex
+  the entire block. 
  <p>However it's possible that in the future Lucene may
- merge more aggressively re-order documents (for example,
- perhaps to obtain better index compression), in which case
- you may need to fully re-index your documents at that time.
+  merge more aggressively re-order documents (for example,
+  perhaps to obtain better index compression), in which case
+  you may need to fully re-index your documents at that time. 
  <p>See <code>addDocument(Iterable)</code> for details on
- index and IndexWriter state after an Exception, and
- flushing/merging temporary free space requirements.</p>
+  index and IndexWriter state after an Exception, and
+  flushing/merging temporary free space requirements.</p>
+  
  <p><b>NOTE</b>: tools that do offline splitting of an index
- (for example, IndexSplitter in contrib) or
- re-sorting of documents (for example, IndexSorter in
- contrib) are not aware of these atomically added documents
- and will likely break them up.  Use such tools at your
- own risk!
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+  (for example, IndexSplitter in contrib) or
+  re-sorting of documents (for example, IndexSorter in
+  contrib) are not aware of these atomically added documents
+  and will likely break them up.  Use such tools at your
+  own risk!
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  */
 - (void)addDocumentsWithJavaLangIterable:(id<JavaLangIterable>)docs;
 
 /*!
  @brief Merges the provided indexes into this index.
  <p>
- The provided IndexReaders are not closed.
+  The provided IndexReaders are not closed.  
  <p>
- See <code>addIndexes</code> for details on transactional semantics, temporary
- free space required in the Directory, and non-CFS segments on an Exception.
+  See <code>addIndexes</code> for details on transactional semantics, temporary
+  free space required in the Directory, and non-CFS segments on an Exception.  
  <p>
- <b>NOTE:</b> empty segments are dropped by this method and not added to this
- index.
+  <b>NOTE:</b> empty segments are dropped by this method and not added to this
+  index.  
  <p>
- <b>NOTE:</b> this method merges all given <code>LeafReader</code>s in one
- merge. If you intend to merge a large number of readers, it may be better
- to call this method multiple times, each time with a small set of readers.
- In principle, if you use a merge policy with a <code>mergeFactor</code> or
+  <b>NOTE:</b> this method merges all given <code>LeafReader</code>s in one
+  merge. If you intend to merge a large number of readers, it may be better
+  to call this method multiple times, each time with a small set of readers.
+  In principle, if you use a merge policy with a <code>mergeFactor</code> or 
  <code>maxMergeAtOnce</code> parameter, you should pass that many readers in one
- call.
- @throws CorruptIndexException
+  call.
+ @throw CorruptIndexException
  if the index is corrupt
- @throws IOException
+ @throw IOException
  if there is a low-level IO error
- @throws IllegalArgumentException
+ @throw IllegalArgumentException
  if addIndexes would cause the index to exceed <code>MAX_DOCS</code>
  */
 - (void)addIndexesWithOrgApacheLuceneIndexCodecReaderArray:(IOSObjectArray *)readers;
@@ -319,79 +323,81 @@
 /*!
  @brief Adds all segments from an array of indexes into this index.
  <p>This may be used to parallelize batch indexing. A large document
- collection can be broken into sub-collections. Each sub-collection can be
- indexed in parallel, on a different thread, process or machine. The
- complete index can then be created by merging sub-collection indexes
- with this method.
+  collection can be broken into sub-collections. Each sub-collection can be
+  indexed in parallel, on a different thread, process or machine. The
+  complete index can then be created by merging sub-collection indexes
+  with this method. 
  <p>
- <b>NOTE:</b> this method acquires the write lock in
- each directory, to ensure that no <code>IndexWriter</code>
- is currently open or tries to open while this is
- running.
+  <b>NOTE:</b> this method acquires the write lock in
+  each directory, to ensure that no <code>IndexWriter</code>
+  is currently open or tries to open while this is
+  running. 
  <p>This method is transactional in how Exceptions are
- handled: it does not commit a new segments_N file until
- all indexes are added.  This means if an Exception
- occurs (for example disk full), then either no indexes
- will have been added or they all will have been.
- <p>Note that this requires temporary free space in the
+  handled: it does not commit a new segments_N file until
+  all indexes are added.  This means if an Exception
+  occurs (for example disk full), then either no indexes
+  will have been added or they all will have been. 
+ <p>Note that this requires temporary free space in the 
  <code>Directory</code> up to 2X the sum of all input indexes
- (including the starting index). If readers/searchers
- are open against the starting index, then temporary
- free space required will be higher by the size of the
- starting index (see <code>forceMerge(int)</code> for details).
+  (including the starting index). If readers/searchers
+  are open against the starting index, then temporary
+  free space required will be higher by the size of the
+  starting index (see <code>forceMerge(int)</code> for details). 
  <p>This requires this index not be among those to be added.
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
- @throws IllegalArgumentException if addIndexes would cause
- the index to exceed <code>MAX_DOCS</code>
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
+ @throw IllegalArgumentExceptionif addIndexes would cause
+    the index to exceed <code>MAX_DOCS</code>
  */
 - (void)addIndexesWithOrgApacheLuceneStoreDirectoryArray:(IOSObjectArray *)dirs;
 
 /*!
  @brief Closes all open resources and releases the write lock.
  If <code>IndexWriterConfig.commitOnClose</code> is <code>true</code>,
- this will attempt to gracefully shut down by writing any
- changes, waiting for any running merges, committing, and closing.
- In this case, note that:
+  this will attempt to gracefully shut down by writing any
+  changes, waiting for any running merges, committing, and closing.
+  In this case, note that: 
  <ul>
- <li>If you called prepareCommit but failed to call commit, this
- method will throw <code>IllegalStateException</code> and the <code>IndexWriter</code>
- will not be closed.</li>
- <li>If this method throws any other exception, the <code>IndexWriter</code>
- will be closed, but changes may have been lost.</li>
- </ul>
+    <li>If you called prepareCommit but failed to call commit, this
+        method will throw <code>IllegalStateException</code> and the <code>IndexWriter</code>
+        will not be closed.</li>
+    <li>If this method throws any other exception, the <code>IndexWriter</code>
+        will be closed, but changes may have been lost.</li>
+  </ul>
+  
  <p>
- Note that this may be a costly
- operation, so, try to re-use a single writer instead of
- closing and opening a new one.  See <code>commit()</code> for
- caveats about write caching done by some IO devices.
+  Note that this may be a costly
+  operation, so, try to re-use a single writer instead of
+  closing and opening a new one.  See <code>commit()</code> for
+  caveats about write caching done by some IO devices. 
  <p><b>NOTE</b>: You must ensure no other threads are still making
- changes at the same time that this method is invoked.</p>
+  changes at the same time that this method is invoked.</p>
  */
 - (void)close;
 
 /*!
  @brief <p>Commits all pending changes (added and deleted
- documents, segment merges, added
- indexes, etc.) to the index, and syncs all referenced
- index files, such that a reader will see the changes
- and the index updates will survive an OS or machine
- crash or power loss.
+  documents, segment merges, added
+  indexes, etc.) to the index, and syncs all referenced
+  index files, such that a reader will see the changes
+  and the index updates will survive an OS or machine
+  crash or power loss.
  Note that this does not wait for
- any running background merges to finish.  This may be a
- costly operation, so you should test the cost in your
- application and do it only when really necessary.</p>
+  any running background merges to finish.  This may be a
+  costly operation, so you should test the cost in your
+  application and do it only when really necessary.</p>
+  
  <p> Note that this operation calls Directory.sync on
- the index files.  That call should not return until the
- file contents and metadata are on stable storage.  For
- FSDirectory, this calls the OS's fsync.  But, beware:
- some hardware devices may in fact cache writes even
- during fsync, and return before the bits are actually
- on stable storage, to give the appearance of faster
- performance.  If you have such a device, and it does
- not have a battery backup (for example) then on power
- loss it may still lose data.  Lucene cannot guarantee
- consistency on such devices.  </p>
+  the index files.  That call should not return until the
+  file contents and metadata are on stable storage.  For
+  FSDirectory, this calls the OS's fsync.  But, beware:
+  some hardware devices may in fact cache writes even
+  during fsync, and return before the bits are actually
+  on stable storage, to give the appearance of faster
+  performance.  If you have such a device, and it does
+  not have a battery backup (for example) then on power
+  loss it may still lose data.  Lucene cannot guarantee
+  consistency on such devices.  </p>
  - seealso: #prepareCommit
  */
 - (void)commit;
@@ -399,25 +405,27 @@
 /*!
  @brief Delete all documents in the index.
  <p>
- This method will drop all buffered documents and will remove all segments
- from the index. This change will not be visible until a <code>commit()</code>
- has been called. This method can be rolled back using <code>rollback()</code>.
- </p>
+  This method will drop all buffered documents and will remove all segments
+  from the index. This change will not be visible until a <code>commit()</code>
+  has been called. This method can be rolled back using <code>rollback()</code>.
+  </p>
+   
  <p>
- NOTE: this method is much faster than using deleteDocuments( new
- MatchAllDocsQuery() ). Yet, this method also has different semantics
- compared to <code>deleteDocuments(Query...)</code> since internal
- data-structures are cleared as well as all segment information is
- forcefully dropped anti-viral semantics like omitting norms are reset or
- doc value types are cleared. Essentially a call to <code>deleteAll()</code> is
- equivalent to creating a new <code>IndexWriter</code> with
+  NOTE: this method is much faster than using deleteDocuments( new
+  MatchAllDocsQuery() ). Yet, this method also has different semantics
+  compared to <code>deleteDocuments(Query...)</code> since internal
+  data-structures are cleared as well as all segment information is
+  forcefully dropped anti-viral semantics like omitting norms are reset or
+  doc value types are cleared. Essentially a call to <code>deleteAll()</code> is
+  equivalent to creating a new <code>IndexWriter</code> with 
  <code>OpenMode.CREATE</code> which a delete query only marks documents as
- deleted.
+  deleted. 
  </p>
+   
  <p>
- NOTE: this method will forcefully abort all merges in progress. If other
- threads are running <code>forceMerge</code>, <code>addIndexes(CodecReader[])</code>
- or <code>forceMergeDeletes</code> methods, they may receive
+  NOTE: this method will forcefully abort all merges in progress. If other
+  threads are running <code>forceMerge</code>, <code>addIndexes(CodecReader[])</code>
+  or <code>forceMergeDeletes</code> methods, they may receive 
  <code>MergePolicy.MergeAbortedException</code>s.
  */
 - (void)deleteAll;
@@ -425,139 +433,141 @@
 /*!
  @brief Deletes the document(s) matching any of the provided queries.
  All given deletes are applied and flushed atomically at the same time.
- @param queries array of queries to identify the documents
- to be deleted
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+ @param queries array of queries to identify the documents  to be deleted
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  */
 - (void)deleteDocumentsWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)queries;
 
 /*!
  @brief Deletes the document(s) containing any of the
- terms.
- All given deletes are applied and flushed atomically
- at the same time.
- @param terms array of terms to identify the documents
- to be deleted
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+  terms.All given deletes are applied and flushed atomically
+  at the same time.
+ @param terms array of terms to identify the documents  to be deleted
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  */
 - (void)deleteDocumentsWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
 
 /*!
  @brief Expert: remove any index files that are no longer
- used.
+   used.
  <p> IndexWriter normally deletes unused files itself,
- during indexing.  However, on Windows, which disallows
- deletion of open files, if there is a reader open on
- the index then those files cannot be deleted.  This is
- fine, because IndexWriter will periodically retry
- the deletion.</p>
+   during indexing.  However, on Windows, which disallows
+   deletion of open files, if there is a reader open on
+   the index then those files cannot be deleted.  This is
+   fine, because IndexWriter will periodically retry
+   the deletion.</p>
+   
  <p> However, IndexWriter doesn't try that often: only
- on open, close, flushing a new segment, and finishing
- a merge.  If you don't do any of these actions with your
- IndexWriter, you'll see the unused files linger.  If
- that's a problem, call this method to delete them
- (once you've closed the open readers that were
- preventing their deletion). 
+   on open, close, flushing a new segment, and finishing
+   a merge.  If you don't do any of these actions with your
+   IndexWriter, you'll see the unused files linger.  If
+   that's a problem, call this method to delete them
+   (once you've closed the open readers that were
+   preventing their deletion).     
  <p> In addition, you can call this method to delete 
- unreferenced index commits. This might be useful if you 
- are using an <code>IndexDeletionPolicy</code> which holds
- onto index commits until some criteria are met, but those
- commits are no longer needed. Otherwise, those commits will
- be deleted the next time commit() is called.
+   unreferenced index commits. This might be useful if you 
+   are using an <code>IndexDeletionPolicy</code> which holds
+   onto index commits until some criteria are met, but those
+   commits are no longer needed. Otherwise, those commits will
+   be deleted the next time commit() is called.
  */
 - (void)deleteUnusedFiles;
 
 /*!
- @brief Forces merge policy to merge segments until there are
- <code><= maxNumSegments</code>.
- The actual merges to be
- executed are determined by the <code>MergePolicy</code>.
+ @brief Forces merge policy to merge segments until there are 
+ <code><= maxNumSegments</code>.The actual merges to be
+  executed are determined by the <code>MergePolicy</code>.
  <p>This is a horribly costly operation, especially when
- you pass a small <code>maxNumSegments</code>; usually you
- should only call this if the index is static (will no
- longer be changed).</p>
+  you pass a small <code>maxNumSegments</code>; usually you
+  should only call this if the index is static (will no
+  longer be changed).</p>
+  
  <p>Note that this requires free space that is proportional
- to the size of the index in your Directory: 2X if you are
- not using compound file format, and 3X if you are.
- For example, if your index size is 10 MB then you need
- an additional 20 MB free for this to complete (30 MB if
- you're using compound file format). This is also affected
- by the <code>Codec</code> that is used to execute the merge,
- and may result in even a bigger index. Also, it's best
- to call <code>commit()</code> afterwards, to allow IndexWriter
- to free up disk space.</p>
+  to the size of the index in your Directory: 2X if you are
+  not using compound file format, and 3X if you are.
+  For example, if your index size is 10 MB then you need
+  an additional 20 MB free for this to complete (30 MB if
+  you're using compound file format). This is also affected
+  by the <code>Codec</code> that is used to execute the merge,
+  and may result in even a bigger index. Also, it's best
+  to call <code>commit()</code> afterwards, to allow IndexWriter
+  to free up disk space.</p>
+  
  <p>If some but not all readers re-open while merging
- is underway, this will cause <code>> 2X</code> temporary
- space to be consumed as those new readers will then
- hold open the temporary segments at that time.  It is
- best not to re-open readers while merging is running.</p>
+  is underway, this will cause <code>> 2X</code> temporary
+  space to be consumed as those new readers will then
+  hold open the temporary segments at that time.  It is
+  best not to re-open readers while merging is running.</p>
+  
  <p>The actual temporary usage could be much less than
- these figures (it depends on many factors).</p>
+  these figures (it depends on many factors).</p>
+  
  <p>In general, once this completes, the total size of the
- index will be less than the size of the starting index.
- It could be quite a bit smaller (if there were many
- pending deletes) or just slightly smaller.</p>
+  index will be less than the size of the starting index.
+  It could be quite a bit smaller (if there were many
+  pending deletes) or just slightly smaller.</p>
+  
  <p>If an Exception is hit, for example
- due to disk full, the index will not be corrupted and no
- documents will be lost.  However, it may have
- been partially merged (some segments were merged but
- not all), and it's possible that one of the segments in
- the index will be in non-compound format even when
- using compound file format.  This will occur when the
- Exception is hit during conversion of the segment into
- compound format.</p>
+  due to disk full, the index will not be corrupted and no
+  documents will be lost.  However, it may have
+  been partially merged (some segments were merged but
+  not all), and it's possible that one of the segments in
+  the index will be in non-compound format even when
+  using compound file format.  This will occur when the
+  Exception is hit during conversion of the segment into
+  compound format.</p>
+  
  <p>This call will merge those segments present in
- the index when the call started.  If other threads are
- still adding documents and flushing segments, those
- newly created segments will not be merged unless you
- call forceMerge again.</p>
- @param maxNumSegments maximum number of segments left
- in the index after merging finishes
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+  the index when the call started.  If other threads are
+  still adding documents and flushing segments, those
+  newly created segments will not be merged unless you
+  call forceMerge again.</p>
+ @param maxNumSegments maximum number of segments left  in the index after merging finishes
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  - seealso: MergePolicy#findMerges
  */
 - (void)forceMergeWithInt:(jint)maxNumSegments;
 
 /*!
  @brief Just like <code>forceMerge(int)</code>, except you can
- specify whether the call should block until
- all merging completes.
- This is only meaningful with a
- <code>MergeScheduler</code> that is able to run merges in
- background threads.
+   specify whether the call should block until
+   all merging completes.This is only meaningful with a
+   <code>MergeScheduler</code> that is able to run merges in
+   background threads.
  */
 - (void)forceMergeWithInt:(jint)maxNumSegments
               withBoolean:(jboolean)doWait;
 
 /*!
  @brief Forces merging of all segments that have deleted
- documents.
- The actual merges to be executed are
- determined by the <code>MergePolicy</code>.  For example,
- the default <code>TieredMergePolicy</code> will only
- pick a segment if the percentage of
- deleted docs is over 10%.
+   documents.The actual merges to be executed are
+   determined by the <code>MergePolicy</code>.
+ For example,
+   the default <code>TieredMergePolicy</code> will only
+   pick a segment if the percentage of
+   deleted docs is over 10%.  
  <p>This is often a horribly costly operation; rarely
- is it warranted.</p>
+   is it warranted.</p>
+   
  <p>To see how
- many deletions you have pending in your index, call
+   many deletions you have pending in your index, call  
  <code>IndexReader.numDeletedDocs</code>.</p>
+   
  <p><b>NOTE</b>: this method first flushes a new
- segment (if there are indexed documents), and applies
- all buffered deletes.
+   segment (if there are indexed documents), and applies
+   all buffered deletes.
  */
 - (void)forceMergeDeletes;
 
 /*!
  @brief Just like <code>forceMergeDeletes()</code>, except you can
- specify whether the call should block until the
- operation completes.
- This is only meaningful with a
- <code>MergeScheduler</code> that is able to run merges in
- background threads. 
+   specify whether the call should block until the
+   operation completes.This is only meaningful with a
+   <code>MergeScheduler</code> that is able to run merges in
+   background threads.
  */
 - (void)forceMergeDeletesWithBoolean:(jboolean)doWait;
 
@@ -570,13 +580,13 @@
 
 /*!
  @brief Returns the commit user data map that was last committed, or the one that
- was set on <code>setCommitData(Map)</code>.
+  was set on <code>setCommitData(Map)</code>.
  */
 - (id<JavaUtilMap>)getCommitData;
 
 /*!
  @brief Returns a <code>LiveIndexWriterConfig</code>, which can be used to query the IndexWriter
- current settings, as well as modify "live" ones.
+  current settings, as well as modify "live" ones.
  */
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)getConfig;
 
@@ -587,35 +597,34 @@
 
 /*!
  @brief Expert: to be used by a <code>MergePolicy</code> to avoid
- selecting merges for segments already being merged.
+   selecting merges for segments already being merged.
  The returned collection is not cloned, and thus is
- only safe to access if you hold IndexWriter's lock
- (which you do when IndexWriter invokes the
- MergePolicy).
- <p>Do not alter the returned collection! 
+   only safe to access if you hold IndexWriter's lock
+   (which you do when IndexWriter invokes the
+   MergePolicy).  
+ <p>Do not alter the returned collection!
  */
 - (id<JavaUtilCollection>)getMergingSegments;
 
 /*!
  @brief Expert: the <code>MergeScheduler</code> calls this method to retrieve the next
- merge requested by the MergePolicy
+  merge requested by the MergePolicy
  */
 - (OrgApacheLuceneIndexMergePolicy_OneMerge *)getNextMerge;
 
 /*!
  @brief If this <code>IndexWriter</code> was closed as a side-effect of a tragic exception,
- e.g. disk full while flushing a new segment, this returns the root cause exception.
- Otherwise (no tragic exception has occurred) it returns null. 
+   e.g.disk full while flushing a new segment, this returns the root cause exception.
+ Otherwise (no tragic exception has occurred) it returns null.
  */
-- (NSException *)getTragicException;
+- (JavaLangThrowable *)getTragicException;
 
 /*!
  @brief Returns true if this index has deletions (including
- buffered deletions).
- Note that this will return true
- if there are buffered Term/Query deletions, even if it
- turns out those buffered deletions don't match any
- documents.
+  buffered deletions).Note that this will return true
+  if there are buffered Term/Query deletions, even if it
+  turns out those buffered deletions don't match any
+  documents.
  */
 - (jboolean)hasDeletions;
 
@@ -626,23 +635,22 @@
 
 /*!
  @brief Returns true if there may be changes that have not been
- committed.
- There are cases where this may return true
- when there are no actual "real" changes to the index,
- for example if you've deleted by Term or Query but
- that Term or Query does not match any documents.
+   committed.There are cases where this may return true
+   when there are no actual "real" changes to the index,
+   for example if you've deleted by Term or Query but
+   that Term or Query does not match any documents.
  Also, if a merge kicked off as a result of flushing a
- new segment during <code>commit</code>, or a concurrent
- merged finished, this method may return true right
- after you had just called <code>commit</code>. 
+   new segment during <code>commit</code>, or a concurrent
+   merged finished, this method may return true right
+   after you had just called <code>commit</code>.
  */
 - (jboolean)hasUncommittedChanges;
 
 /*!
  @brief Returns <code>true</code> iff the index in the named directory is
- currently locked.
+  currently locked.
  @param directory the directory to check for a lock
- @throws IOException if there is a low-level IO error
+ @throw IOExceptionif there is a low-level IO error
  */
 + (jboolean)isLockedWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
@@ -653,69 +661,70 @@
 
 /*!
  @brief Returns total number of docs in this index, including
- docs not yet flushed (still in the RAM buffer),
- not counting deletions.
+   docs not yet flushed (still in the RAM buffer),
+   not counting deletions.
  - seealso: #numDocs
  */
 - (jint)maxDoc;
 
 /*!
  @brief Expert: asks the mergePolicy whether any merges are
- necessary now and if so, runs the requested merges and
- then iterate (test again if merges are needed) until no
- more merges are returned by the mergePolicy.
+  necessary now and if so, runs the requested merges and
+  then iterate (test again if merges are needed) until no
+  more merges are returned by the mergePolicy.
  Explicit calls to maybeMerge() are usually not
- necessary. The most common case is when merge policy
- parameters have changed.
- This method will call the <code>MergePolicy</code> with
+  necessary. The most common case is when merge policy
+  parameters have changed. 
+  This method will call the <code>MergePolicy</code> with 
  <code>MergeTrigger.EXPLICIT</code>.
  */
 - (void)maybeMerge;
 
 /*!
  @brief Merges the indicated segments, replacing them in the stack with a
- single segment.
+  single segment.
  */
 - (void)mergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
 /*!
  @brief Obtain the number of deleted docs for a pooled reader.
  If the reader isn't being pooled, the segmentInfo's 
- delCount is returned.
+  delCount is returned.
  */
 - (jint)numDeletedDocsWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info;
 
 /*!
  @brief Returns total number of docs in this index, including
- docs not yet flushed (still in the RAM buffer), and
- including deletions.
+   docs not yet flushed (still in the RAM buffer), and
+   including deletions.
  <b>NOTE:</b> buffered deletions
- are not counted.  If you really need these to be
- counted you should call <code>commit()</code> first.
+   are not counted.  If you really need these to be
+   counted you should call <code>commit()</code> first.
  - seealso: #numDocs
  */
 - (jint)numDocs;
 
 /*!
  @brief Expert:  Return the number of documents currently
- buffered in RAM.
+   buffered in RAM.
  */
 - (jint)numRamDocs;
 
 /*!
  @brief <p>Expert: prepare for commit.
  This does the
- first phase of 2-phase commit. This method does all
- steps necessary to commit changes since this writer
- was opened: flushes pending added and deleted docs,
- syncs the index files, writes most of next segments_N
- file.  After calling this you must call either <code>commit()</code>
+   first phase of 2-phase commit. This method does all
+   steps necessary to commit changes since this writer
+   was opened: flushes pending added and deleted docs,
+   syncs the index files, writes most of next segments_N
+   file.  After calling this you must call either <code>commit()</code>
   to finish the commit, or <code>rollback()</code>
   to revert the commit and undo all changes
- done since the writer was opened.</p>
+   done since the writer was opened.</p>
+  
  <p>You can also just call <code>commit()</code> directly
- without prepareCommit first in which case that method
- will internally call prepareCommit.
+   without prepareCommit first in which case that method
+   will internally call prepareCommit.
  */
 - (void)prepareCommit;
 
@@ -723,65 +732,61 @@
 
 /*!
  @brief Close the <code>IndexWriter</code> without committing
- any changes that have occurred since the last commit
- (or since it was opened, if commit hasn't been called).
+  any changes that have occurred since the last commit
+  (or since it was opened, if commit hasn't been called).
  This removes any temporary files that had been created,
- after which the state of the index will be the same as
- it was when commit() was last called or when this
- writer was first opened.  This also clears a previous
- call to <code>prepareCommit</code>.
- @throws IOException if there is a low-level IO error
+  after which the state of the index will be the same as
+  it was when commit() was last called or when this
+  writer was first opened.  This also clears a previous
+  call to <code>prepareCommit</code>.
+ @throw IOExceptionif there is a low-level IO error
  */
 - (void)rollback;
 
 /*!
- @brief Sets the commit user data map.
- That method is considered a transaction by
+ @brief Sets the commit user data map.That method is considered a transaction by 
  <code>IndexWriter</code> and will be <code>committed</code> even if no other
- changes were made to the writer instance. Note that you must call this method
- before <code>prepareCommit()</code>, or otherwise it won't be included in the
- follow-on <code>commit()</code>.
- <p>
- <b>NOTE:</b> the map is cloned internally, therefore altering the map's
- contents after calling this method has no effect.
+  changes were made to the writer instance.
+ Note that you must call this method
+  before <code>prepareCommit()</code>, or otherwise it won't be included in the
+  follow-on <code>commit()</code>.
+  <p>
+  <b>NOTE:</b> the map is cloned internally, therefore altering the map's
+  contents after calling this method has no effect.
  */
 - (void)setCommitDataWithJavaUtilMap:(id<JavaUtilMap>)commitUserData;
 
 /*!
  @brief Expert: attempts to delete by document ID, as long as
- the provided reader is a near-real-time reader (from <code>DirectoryReader.open(IndexWriter,boolean)</code>
- ).
- If the
- provided reader is an NRT reader obtained from this
- writer, and its segment has not been merged away, then
- the delete succeeds and this method returns true; else, it
- returns false the caller must then separately delete by
- Term or Query.
+   the provided reader is a near-real-time reader (from <code>DirectoryReader.open(IndexWriter,boolean)</code>
+ ).If the
+   provided reader is an NRT reader obtained from this
+   writer, and its segment has not been merged away, then
+   the delete succeeds and this method returns true; else, it
+   returns false the caller must then separately delete by
+   Term or Query.
  <b>NOTE</b>: this method can only delete documents
- visible to the currently open NRT reader.  If you need
- to delete documents indexed after opening the NRT
- reader you must use <code>deleteDocuments(Term...)</code>). 
+   visible to the currently open NRT reader.  If you need
+   to delete documents indexed after opening the NRT
+   reader you must use <code>deleteDocuments(Term...)</code>).
  */
 - (jboolean)tryDeleteDocumentWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)readerIn
                                                          withInt:(jint)docID;
 
 /*!
  @brief Updates a document's <code>BinaryDocValues</code> for <code>field</code> to the
- given <code>value</code>.
- You can only update fields that already exist in
- the index, not add new fields through this method.
+  given <code>value</code>.You can only update fields that already exist in
+  the index, not add new fields through this method.
  <p>
- <b>NOTE:</b> this method currently replaces the existing value of all
- affected documents with the new value.
- @param term
- the term to identify the document(s) to be updated
- @param field
- field name of the <code>BinaryDocValues</code> field
- @param value
- new value for the field
- @throws CorruptIndexException
+  <b>NOTE:</b> this method currently replaces the existing value of all
+  affected documents with the new value.
+ @param term the term to identify the document(s) to be updated
+ @param field field name of the 
+ <code>BinaryDocValues</code>  field
+ @param value new value for the field
+ @throw CorruptIndexException
  if the index is corrupt
- @throws IOException
+ @throw IOException
  if there is a low-level IO error
  */
 - (void)updateBinaryDocValueWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
@@ -790,43 +795,40 @@
 
 /*!
  @brief Updates a document by first deleting the document(s)
- containing <code>term</code> and then adding the new
- document.
- The delete and then add are atomic as seen
- by a reader on the same index (flush may happen only after
- the add).
- @param term the term to identify the document(s) to be
- deleted
+  containing <code>term</code> and then adding the new
+  document.The delete and then add are atomic as seen
+  by a reader on the same index (flush may happen only after
+  the add).
+ @param term the term to identify the document(s) to be  deleted
  @param doc the document to be added
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  */
 - (void)updateDocumentWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                               withJavaLangIterable:(id<JavaLangIterable>)doc;
 
 /*!
  @brief Atomically deletes documents matching the provided
- delTerm and adds a block of documents with sequentially
- assigned document IDs, such that an external reader
- will see all or none of the documents.
+  delTerm and adds a block of documents with sequentially
+  assigned document IDs, such that an external reader
+  will see all or none of the documents.
  See <code>addDocuments(Iterable)</code>.
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  */
 - (void)updateDocumentsWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)delTerm
                                withJavaLangIterable:(id<JavaLangIterable>)docs;
 
 /*!
- @brief Updates documents' DocValues fields to the given values.
- Each field update
- is applied to the set of documents that are associated with the
- <code>Term</code> to the same value. All updates are atomically applied and
- flushed together.
- @param updates
- the updates to apply
- @throws CorruptIndexException
+ @brief Updates documents' DocValues fields to the given values.Each field update
+  is applied to the set of documents that are associated with the 
+ <code>Term</code> to the same value.
+ All updates are atomically applied and
+  flushed together.
+ @param updates the updates to apply
+ @throw CorruptIndexException
  if the index is corrupt
- @throws IOException
+ @throw IOException
  if there is a low-level IO error
  */
 - (void)updateDocValuesWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
@@ -834,18 +836,15 @@
 
 /*!
  @brief Updates a document's <code>NumericDocValues</code> for <code>field</code> to the
- given <code>value</code>.
- You can only update fields that already exist in
- the index, not add new fields through this method.
- @param term
- the term to identify the document(s) to be updated
- @param field
- field name of the <code>NumericDocValues</code> field
- @param value
- new value for the field
- @throws CorruptIndexException
+  given <code>value</code>.You can only update fields that already exist in
+  the index, not add new fields through this method.
+ @param term the term to identify the document(s) to be updated
+ @param field field name of the 
+ <code>NumericDocValues</code>  field
+ @param value new value for the field
+ @throw CorruptIndexException
  if the index is corrupt
- @throws IOException
+ @throw IOException
  if there is a low-level IO error
  */
 - (void)updateNumericDocValueWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
@@ -856,45 +855,44 @@
 
 /*!
  @brief A hook for extending classes to execute operations after pending added and
- deleted documents have been flushed to the Directory but before the change
- is committed (new segments_N file written).
+  deleted documents have been flushed to the Directory but before the change
+  is committed (new segments_N file written).
  */
 - (void)doAfterFlush;
 
 /*!
  @brief A hook for extending classes to execute operations before pending added and
- deleted documents are flushed to the Directory.
+  deleted documents are flushed to the Directory.
  */
 - (void)doBeforeFlush;
 
 /*!
  @brief Used internally to throw an <code>AlreadyClosedException</code>
   if this IndexWriter has been
- closed (<code>closed=true</code>) or is in the process of
- closing (<code>closing=true</code>).
+  closed (<code>closed=true</code>) or is in the process of
+  closing (<code>closing=true</code>).
  <p>
- Calls <code>ensureOpen(true)</code>.
- @throws AlreadyClosedException if this IndexWriter is closed
+  Calls <code>ensureOpen(true)</code>.
+ @throw AlreadyClosedExceptionif this IndexWriter is closed
  */
 - (void)ensureOpen;
 
 /*!
  @brief Used internally to throw an <code>AlreadyClosedException</code> if this
- IndexWriter has been closed or is in the process of closing.
- @param failIfClosing
- if true, also fail when <code>IndexWriter</code> is in the process of
- closing (<code>closing=true</code>) but not yet done closing (
- <code>closed=false</code>)
- @throws AlreadyClosedException
+  IndexWriter has been closed or is in the process of closing.
+ @param failIfClosing if true, also fail when 
+ <code>IndexWriter</code>  is in the process of           closing (
+ <code>closing=true</code> ) but not yet done closing (           <code>closed=false</code>
+  )
+ @throw AlreadyClosedException
  if this IndexWriter is closed or in the process of closing
  */
 - (void)ensureOpenWithBoolean:(jboolean)failIfClosing;
 
 /*!
  @brief Flush all in-memory buffered updates (adds and deletes)
- to the Directory.
- @param triggerMerge if true, we may merge segments (if
- deletes or docs were flushed) if necessary
+  to the Directory.
+ @param triggerMerge if true, we may merge segments (if   deletes or docs were flushed) if necessary
  @param applyAllDeletes whether pending deletes should also
  */
 - (void)flushWithBoolean:(jboolean)triggerMerge
@@ -915,25 +913,24 @@
 
 /*!
  @brief Called whenever the SegmentInfos has been updated and
- the index files referenced exist (correctly) in the
- index directory.
+  the index files referenced exist (correctly) in the
+  index directory.
  */
 - (void)checkpoint;
 
 /*!
  @brief Checkpoints with IndexFileDeleter, so it's aware of
- new files, and increments changeCount, so on
- close/commit we will write a new segments file, but
- does NOT bump segmentInfos.version.
+   new files, and increments changeCount, so on
+   close/commit we will write a new segments file, but
+   does NOT bump segmentInfos.version.
  */
 - (void)checkpointNoSIS;
 
 /*!
  @brief NOTE: this method creates a compound file for all files returned by
- info.files().
- While, generally, this may include separate norms and
- deletion files, this SegmentInfo must not reference such files when this
- method is called, because they are not allowed within a compound file.
+  info.files().While, generally, this may include separate norms and
+  deletion files, this SegmentInfo must not reference such files when this
+  method is called, because they are not allowed within a compound file.
  */
 - (void)createCompoundFileWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
            withOrgApacheLuceneStoreTrackingDirectoryWrapper:(OrgApacheLuceneStoreTrackingDirectoryWrapper *)directory
@@ -945,7 +942,7 @@
 /*!
  @brief Tries to delete the given files if unreferenced
  @param files the files to delete
- @throws IOException if an <code>IOException</code> occurs
+ @throw IOExceptionif an <code>IOException</code> occurs
  - seealso: IndexFileDeleter#deleteNewFiles(Collection)
  */
 - (void)deleteNewFilesWithJavaUtilCollection:(id<JavaUtilCollection>)files;
@@ -981,49 +978,57 @@
 
 /*!
  @brief Expert: returns a readonly reader, covering all
- committed as well as un-committed changes to the index.
+  committed as well as un-committed changes to the index.
  This provides "near real-time" searching, in that
- changes made during an IndexWriter session can be
- quickly made available for searching without closing
- the writer nor calling <code>commit</code>.
+  changes made during an IndexWriter session can be
+  quickly made available for searching without closing
+  the writer nor calling <code>commit</code>.
+  
  <p>Note that this is functionally equivalent to calling
- {#flush} and then opening a new reader.  But the turnaround time of this
- method should be faster since it avoids the potentially
- costly <code>commit</code>.</p>
+  {#flush} and then opening a new reader.  But the turnaround time of this
+  method should be faster since it avoids the potentially
+  costly <code>commit</code>.</p>
+  
  <p>You must close the <code>IndexReader</code> returned by
- this method once you are done using it.</p>
+  this method once you are done using it.</p>
+  
  <p>It's <i>near</i> real-time because there is no hard
- guarantee on how quickly you can get a new reader after
- making changes with IndexWriter.  You'll have to
- experiment in your situation to determine if it's
- fast enough.  As this is a new and experimental
- feature, please report back on your findings so we can
- learn, improve and iterate.</p>
+  guarantee on how quickly you can get a new reader after
+  making changes with IndexWriter.  You'll have to
+  experiment in your situation to determine if it's
+  fast enough.  As this is a new and experimental
+  feature, please report back on your findings so we can
+  learn, improve and iterate.</p>
+  
  <p>The resulting reader supports <code>DirectoryReader.openIfChanged</code>
  , but that call will simply forward
- back to this method (though this may change in the
- future).</p>
+  back to this method (though this may change in the
+  future).</p>
+  
  <p>The very first time this method is called, this
- writer instance will make every effort to pool the
- readers that it opens for doing merges, applying
- deletes, etc.  This means additional resources (RAM,
- file descriptors, CPU time) will be consumed.</p>
+  writer instance will make every effort to pool the
+  readers that it opens for doing merges, applying
+  deletes, etc.  This means additional resources (RAM,
+  file descriptors, CPU time) will be consumed.</p>
+  
  <p>For lower latency on reopening a reader, you should
- call <code>IndexWriterConfig.setMergedSegmentWarmer</code> to
- pre-warm a newly merged segment before it's committed
- to the index.  This is important for minimizing
- index-to-search delay after a large merge.  </p>
+  call <code>IndexWriterConfig.setMergedSegmentWarmer</code> to
+  pre-warm a newly merged segment before it's committed
+  to the index.  This is important for minimizing
+  index-to-search delay after a large merge.  </p>
+  
  <p>If an addIndexes* call is running in another thread,
- then this reader will only search those segments from
- the foreign index that have been successfully copied
- over, so far</p>.
+  then this reader will only search those segments from
+  the foreign index that have been successfully copied
+  over, so far</p>.
+  
  <p><b>NOTE</b>: Once the writer is closed, any
- outstanding readers may continue to be used.  However,
- if you attempt to reopen any of those readers, you'll
- hit an <code>AlreadyClosedException</code>.</p>
+  outstanding readers may continue to be used.  However,
+  if you attempt to reopen any of those readers, you'll
+  hit an <code>AlreadyClosedException</code>.</p>
  @return IndexReader that covers entire index plus all
- changes made so far by this IndexWriter instance
- @throws IOException If there is a low-level I/O error
+  changes made so far by this IndexWriter instance
+ @throw IOExceptionIf there is a low-level I/O error
  */
 - (OrgApacheLuceneIndexDirectoryReader *)getReaderWithBoolean:(jboolean)applyAllDeletes;
 
@@ -1041,13 +1046,13 @@
 
 /*!
  @brief Does fininishing for a merge, which is fast but holds
- the synchronized lock on IndexWriter instance.
+   the synchronized lock on IndexWriter instance.
  */
 - (void)mergeFinishWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
 /*!
  @brief Does initial setup for a merge, which is fast but holds
- the synchronized lock on IndexWriter instance.
+   the synchronized lock on IndexWriter instance.
  */
 - (void)mergeInitWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
@@ -1064,7 +1069,7 @@
 
 /*!
  @brief Atomically adds the segment private delete packet and publishes the flushed
- segments SegmentInfo to the index writer.
+  segments SegmentInfo to the index writer.
  */
 - (void)publishFlushedSegmentWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)newSegment
                          withOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)packet
@@ -1078,33 +1083,29 @@
 
 /*!
  @brief Checks whether this merge involves any segments
- already participating in a merge.
- If not, this merge
- is "registered", meaning we record that its segments
- are now participating in a merge, and true is
- returned.  Else (the merge conflicts) false is
- returned. 
+   already participating in a merge.If not, this merge
+   is "registered", meaning we record that its segments
+   are now participating in a merge, and true is
+   returned.
+ Else (the merge conflicts) false is  returned.
  */
 - (jboolean)registerMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
 /*!
  @brief Returns a string description of all segments, for
- debugging.
-  
+   debugging.
  */
 - (NSString *)segString;
 
 /*!
  @brief Returns a string description of the specified
- segments, for debugging.
-  
+   segments, for debugging.
  */
 - (NSString *)segStringWithJavaLangIterable:(id<JavaLangIterable>)infos;
 
 /*!
  @brief Returns a string description of the specified
- segment, for debugging.
-  
+   segment, for debugging.
  */
 - (NSString *)segStringWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info;
 
@@ -1113,7 +1114,6 @@
 
 /*!
  @brief Only for testing.
-  
  */
 - (void)setKeepFullyDeletedSegmentsWithBoolean:(jboolean)v;
 
@@ -1124,30 +1124,34 @@
 
 /*!
  @brief Used only by asserts: returns true if the file exists
- (can be opened), false if it cannot be opened, and
- (unlike Java's File.exists) throws IOException if
- there's some unexpected error.
+   (can be opened), false if it cannot be opened, and
+   (unlike Java's File.exists) throws IOException if
+   there's some unexpected error.
  */
 + (jboolean)slowFileExistsWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                withNSString:(NSString *)fileName;
 
 - (OrgApacheLuceneIndexSegmentInfos *)toLiveInfosWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)sis;
 
-- (void)tragicEventWithNSException:(NSException *)tragedy
-                      withNSString:(NSString *)location;
+- (void)tragicEventWithJavaLangThrowable:(JavaLangThrowable *)tragedy
+                            withNSString:(NSString *)location;
 
 /*!
  @brief Wait for any currently outstanding merges to finish.
  <p>It is guaranteed that any merges started prior to calling this method
- will have completed once this method completes.</p>
+     will have completed once this method completes.</p>
  */
 - (void)waitForMerges;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexIndexWriter)
 
-J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter, tragedy_, NSException *)
+J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter, tragedy_, JavaLangThrowable *)
 J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter, pendingCommit_, OrgApacheLuceneIndexSegmentInfos *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter, segmentInfos_, OrgApacheLuceneIndexSegmentInfos *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter, globalFieldNumberMap_, OrgApacheLuceneIndexFieldInfos_FieldNumbers *)
@@ -1163,24 +1167,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter, infoStream_, OrgApacheLucen
 
 /*!
  @brief Hard limit on maximum number of documents that may be added to the
- index.
- If you try to add more than this you'll hit <code>IllegalArgumentException</code>. 
+   index.If you try to add more than this you'll hit <code>IllegalArgumentException</code>.
  */
-inline jint OrgApacheLuceneIndexIndexWriter_get_MAX_DOCS();
+inline jint OrgApacheLuceneIndexIndexWriter_get_MAX_DOCS(void);
 #define OrgApacheLuceneIndexIndexWriter_MAX_DOCS 2147483519
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriter, MAX_DOCS, jint)
 
 /*!
  @brief Maximum value of the token position in an indexed field.
  */
-inline jint OrgApacheLuceneIndexIndexWriter_get_MAX_POSITION();
+inline jint OrgApacheLuceneIndexIndexWriter_get_MAX_POSITION(void);
 #define OrgApacheLuceneIndexIndexWriter_MAX_POSITION 2147483519
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriter, MAX_POSITION, jint)
 
 /*!
  @brief Name of the write lock in the index.
  */
-inline NSString *OrgApacheLuceneIndexIndexWriter_get_WRITE_LOCK_NAME();
+inline NSString *OrgApacheLuceneIndexIndexWriter_get_WRITE_LOCK_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexWriter_WRITE_LOCK_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexWriter, WRITE_LOCK_NAME, NSString *)
@@ -1188,7 +1191,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexWriter, WRITE_LOCK_NAME, 
 /*!
  @brief Key for the source of a segment in the <code>diagnostics</code>.
  */
-inline NSString *OrgApacheLuceneIndexIndexWriter_get_SOURCE();
+inline NSString *OrgApacheLuceneIndexIndexWriter_get_SOURCE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexWriter_SOURCE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexWriter, SOURCE, NSString *)
@@ -1196,7 +1199,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexWriter, SOURCE, NSString 
 /*!
  @brief Source of a segment which results from a merge of other segments.
  */
-inline NSString *OrgApacheLuceneIndexIndexWriter_get_SOURCE_MERGE();
+inline NSString *OrgApacheLuceneIndexIndexWriter_get_SOURCE_MERGE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_MERGE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexWriter, SOURCE_MERGE, NSString *)
@@ -1204,36 +1207,35 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexWriter, SOURCE_MERGE, NSS
 /*!
  @brief Source of a segment which results from a flush.
  */
-inline NSString *OrgApacheLuceneIndexIndexWriter_get_SOURCE_FLUSH();
+inline NSString *OrgApacheLuceneIndexIndexWriter_get_SOURCE_FLUSH(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_FLUSH;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexWriter, SOURCE_FLUSH, NSString *)
 
 /*!
  @brief Source of a segment which results from a call to <code>addIndexes(CodecReader...)
- </code>. 
+ </code>.
  */
-inline NSString *OrgApacheLuceneIndexIndexWriter_get_SOURCE_ADDINDEXES_READERS();
+inline NSString *OrgApacheLuceneIndexIndexWriter_get_SOURCE_ADDINDEXES_READERS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexWriter, SOURCE_ADDINDEXES_READERS, NSString *)
 
 /*!
  @brief Absolute hard maximum length for a term, in bytes once
- encoded as UTF8.
- If a term arrives from the analyzer
- longer than this length, an
+  encoded as UTF8.If a term arrives from the analyzer
+  longer than this length, an 
  <code>IllegalArgumentException</code>  is thrown
- and a message is printed to infoStream, if set (see <code>IndexWriterConfig.setInfoStream(InfoStream)</code>
+  and a message is printed to infoStream, if set (see <code>IndexWriterConfig.setInfoStream(InfoStream)</code>
  ).
  */
-inline jint OrgApacheLuceneIndexIndexWriter_get_MAX_TERM_LENGTH();
+inline jint OrgApacheLuceneIndexIndexWriter_get_MAX_TERM_LENGTH(void);
 #define OrgApacheLuceneIndexIndexWriter_MAX_TERM_LENGTH 32766
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriter, MAX_TERM_LENGTH, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexWriter_setMaxDocsWithInt_(jint maxDocs);
 
-FOUNDATION_EXPORT jint OrgApacheLuceneIndexIndexWriter_getActualMaxDocs();
+FOUNDATION_EXPORT jint OrgApacheLuceneIndexIndexWriter_getActualMaxDocs(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneStoreDirectory *d, OrgApacheLuceneIndexIndexWriterConfig *conf);
 
@@ -1266,13 +1268,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter)
 @class OrgApacheLuceneIndexSegmentInfos;
 
 /*!
- @brief Holds shared SegmentReader instances.
- IndexWriter uses
- SegmentReaders for 1) applying deletes, 2) doing
- merges, 3) handing out a real-time reader.  This pool
- reuses instances of the SegmentReaders in all these
- places if it is in "near real-time mode" (getReader()
- has been called on this instance). 
+ @brief Holds shared SegmentReader instances.IndexWriter uses
+   SegmentReaders for 1) applying deletes, 2) doing
+   merges, 3) handing out a real-time reader.
+ This pool
+   reuses instances of the SegmentReaders in all these
+   places if it is in "near real-time mode" (getReader()
+   has been called on this instance).
  */
 @interface OrgApacheLuceneIndexIndexWriter_ReaderPool : NSObject < JavaIoCloseable >
 
@@ -1284,8 +1286,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter)
 
 /*!
  @brief Commit live docs changes for the segment readers for
- the provided infos.
- @throws IOException If there is a low-level I/O error
+  the provided infos.
+ @throw IOExceptionIf there is a low-level I/O error
  */
 - (void)commitWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos;
 
@@ -1293,8 +1295,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter)
 
 /*!
  @brief Obtain a ReadersAndLiveDocs instance from the
- readerPool.
- If create is true, you must later call
+  readerPool.If create is true, you must later call 
  <code>release(ReadersAndUpdates)</code>.
  */
 - (OrgApacheLuceneIndexReadersAndUpdates *)getWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
@@ -1309,13 +1310,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)outer$;
 
 /*!
  @brief Remove all our references to readers, and commits
- any pending changes.
+   any pending changes.
  */
 - (void)dropAllWithBoolean:(jboolean)doSave;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -1338,16 +1343,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter_ReaderPool)
 
 /*!
  @brief If <code>DirectoryReader.open(IndexWriter,boolean)</code> has
- been called (ie, this writer is in near real-time
- mode), then after a merge completes, this class can be
- invoked to warm the reader on the newly merged
- segment, before the merge commits.
- This is not
- required for near real-time search, but will reduce
- search latency on opening a new near real-time reader
- after a merge completes.
- <p><b>NOTE</b>: warm is called before any deletes have
- been carried over to the merged segment. 
+   been called (ie, this writer is in near real-time
+   mode), then after a merge completes, this class can be
+   invoked to warm the reader on the newly merged
+   segment, before the merge commits.This is not
+   required for near real-time search, but will reduce
+   search latency on opening a new near real-time reader
+   after a merge completes.
  */
 @interface OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer : NSObject
 
@@ -1355,8 +1357,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter_ReaderPool)
 
 /*!
  @brief Invoked on the <code>LeafReader</code> for the newly
- merged segment, before that segment is made visible
- to near-real-time readers.
+   merged segment, before that segment is made visible
+   to near-real-time readers.
  */
 - (void)warmWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
@@ -1365,9 +1367,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter_ReaderPool)
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -1385,24 +1387,23 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer)
 @class OrgApacheLuceneIndexIndexWriter;
 
 /*!
- @brief Interface for internal atomic events.
- See <code>DocumentsWriter</code> for details. Events are executed concurrently and no order is guaranteed.
- Each event should only rely on the serializeability within its process method. All actions that must happen before or after a certain action must be
- encoded inside the <code>process(IndexWriter,boolean,boolean)</code> method.
+ @brief Interface for internal atomic events.See <code>DocumentsWriter</code> for details.
+ Events are executed concurrently and no order is guaranteed.
+  Each event should only rely on the serializeability within its process method. All actions that must happen before or after a certain action must be
+  encoded inside the <code>process(IndexWriter, boolean, boolean)</code> method.
  */
-@protocol OrgApacheLuceneIndexIndexWriter_Event < NSObject, JavaObject >
+@protocol OrgApacheLuceneIndexIndexWriter_Event < JavaObject >
 
 /*!
- @brief Processes the event.
- This method is called by the <code>IndexWriter</code>
- passed as the first argument.
- @param writer
- the <code>IndexWriter</code> that executes the event.
- @param triggerMerge
- <code>false</code> iff this event should not trigger any segment merges
- @param clearBuffers
- <code>true</code> iff this event should clear all buffers associated with the event.
- @throws IOException
+ @brief Processes the event.This method is called by the <code>IndexWriter</code>
+  passed as the first argument.
+ @param writer the 
+ <code>IndexWriter</code>  that executes the event.
+ @param triggerMerge <code>
+  false </code>  iff this event should not trigger any segment merges
+ @param clearBuffers <code>
+  true </code>  iff this event should clear all buffers associated with the event.
+ @throw IOException
  if an <code>IOException</code> occurs
  */
 - (void)processWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
@@ -1417,4 +1418,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter_Event)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexWriter")

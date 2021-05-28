@@ -3,13 +3,16 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/parser/FastCharStream.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/System.h"
 #include "org/apache/lucene/queryparser/flexible/standard/parser/FastCharStream.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/parser/FastCharStream must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream ()
 
@@ -46,7 +49,7 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardPa
 }
 
 - (NSString *)GetImage {
-  return [NSString stringWithCharacters:buffer_ offset:tokenStart_ length:bufferPosition_ - tokenStart_];
+  return [NSString java_stringWithCharacters:buffer_ offset:tokenStart_ length:bufferPosition_ - tokenStart_];
 }
 
 - (IOSCharArray *)GetSuffixWithInt:(jint)len {
@@ -94,31 +97,50 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardPa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaIoReader:", "FastCharStream", NULL, 0x1, NULL, NULL },
-    { "readChar", NULL, "C", 0x11, "Ljava.io.IOException;", NULL },
-    { "refill", NULL, "V", 0x12, "Ljava.io.IOException;", NULL },
-    { "BeginToken", NULL, "C", 0x11, "Ljava.io.IOException;", NULL },
-    { "backupWithInt:", "backup", "V", 0x11, NULL, NULL },
-    { "GetImage", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "GetSuffixWithInt:", "GetSuffix", "[C", 0x11, NULL, NULL },
-    { "Done", NULL, "V", 0x11, NULL, NULL },
-    { "getColumn", NULL, "I", 0x11, NULL, NULL },
-    { "getLine", NULL, "I", 0x11, NULL, NULL },
-    { "getEndColumn", NULL, "I", 0x11, NULL, NULL },
-    { "getEndLine", NULL, "I", 0x11, NULL, NULL },
-    { "getBeginColumn", NULL, "I", 0x11, NULL, NULL },
-    { "getBeginLine", NULL, "I", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "C", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x12, -1, -1, 1, -1, -1, -1 },
+    { NULL, "C", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x11, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x11, 4, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaIoReader:);
+  methods[1].selector = @selector(readChar);
+  methods[2].selector = @selector(refill);
+  methods[3].selector = @selector(BeginToken);
+  methods[4].selector = @selector(backupWithInt:);
+  methods[5].selector = @selector(GetImage);
+  methods[6].selector = @selector(GetSuffixWithInt:);
+  methods[7].selector = @selector(Done);
+  methods[8].selector = @selector(getColumn);
+  methods[9].selector = @selector(getLine);
+  methods[10].selector = @selector(getEndColumn);
+  methods[11].selector = @selector(getEndLine);
+  methods[12].selector = @selector(getBeginColumn);
+  methods[13].selector = @selector(getBeginLine);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "buffer_", NULL, 0x0, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferLength_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferPosition_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenStart_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferStart_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "input_", NULL, 0x0, "Ljava.io.Reader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "buffer_", "[C", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bufferLength_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bufferPosition_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "tokenStart_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bufferStart_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "input_", "LJavaIoReader;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream = { 2, "FastCharStream", "org.apache.lucene.queryparser.flexible.standard.parser", NULL, 0x11, 14, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoReader;", "LJavaIoIOException;", "backup", "I", "GetSuffix" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream = { "FastCharStream", "org.apache.lucene.queryparser.flexible.standard.parser", ptrTable, methods, fields, 7, 0x11, 14, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream;
 }
 

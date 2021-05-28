@@ -3,9 +3,7 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/surround/query/SimpleTermRewriteQuery.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/IndexReader.h"
@@ -20,83 +18,88 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/TermQuery.h"
 
-@interface OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1 : NSObject < OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor > {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/SimpleTermRewriteQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1 : NSObject < OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor > {
  @public
   OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *this$0_;
   id<JavaUtilList> val$luceneSubQueries_;
 }
 
-- (void)visitMatchingTermWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
 - (instancetype)initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery:(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *)outer$
                                                                      withJavaUtilList:(id<JavaUtilList>)capture$0;
 
+- (void)visitMatchingTermWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1, this$0_, OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1, val$luceneSubQueries_, id<JavaUtilList>)
+__attribute__((unused)) static void OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1 *self, OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1 *self, OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0);
+__attribute__((unused)) static OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1 *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1 *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1 *create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1)
+__attribute__((unused)) static OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1 *create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0);
 
 @implementation OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery
 
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm:(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *)srndQuery
-                                                             withNSString:(NSString *)fieldName
-             withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
-  OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, srndQuery, fieldName, qf);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm:(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *)srndQuery
+                                                                           withNSString:(NSString *)fieldName
+                           withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
+  OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, srndQuery, fieldName, qf);
   return self;
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   id<JavaUtilList> luceneSubQueries = create_JavaUtilArrayList_init();
-  [((OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *) nil_chk(srndQuery_)) visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:reader withNSString:fieldName_ withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(self, luceneSubQueries)];
+  [((OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *) nil_chk(srndQuery_)) visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:reader withNSString:fieldName_ withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(self, luceneSubQueries)];
   return ([luceneSubQueries size] == 0) ? create_OrgApacheLuceneSearchMatchNoDocsQuery_init() : ([luceneSubQueries size] == 1) ? [luceneSubQueries getWithInt:0] : OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_makeBooleanQueryWithJavaUtilList_withOrgApacheLuceneSearchBooleanClause_Occur_(luceneSubQueries, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm:withNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "SimpleTermRewriteQuery", NULL, 0x0, NULL, "(Lorg/apache/lucene/queryparser/surround/query/SimpleTerm;Ljava/lang/String;Lorg/apache/lucene/queryparser/surround/query/BasicQueryFactory;)V" },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.surround.query.SimpleTerm;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery = { 2, "SimpleTermRewriteQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x0, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/queryparser/surround/query/RewriteQuery<Lorg/apache/lucene/queryparser/surround/query/SimpleTerm;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm:withNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  methods[1].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserSurroundQuerySimpleTerm;LNSString;LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "Lorg/apache/lucene/queryparser/surround/query/RewriteQuery<Lorg/apache/lucene/queryparser/surround/query/SimpleTerm;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery = { "SimpleTermRewriteQuery", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, NULL, 7, 0x0, 2, 0, -1, -1, -1, 4, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *self, OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
-  OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, srndQuery, fieldName, qf);
+void OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *self, OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
+  OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, srndQuery, fieldName, qf);
 }
 
-OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery, initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_, srndQuery, fieldName, qf)
+OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery, initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_, srndQuery, fieldName, qf)
 }
 
-OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery, initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_, srndQuery, fieldName, qf)
+OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery, initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_, srndQuery, fieldName, qf)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery)
 
-@implementation OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1
-
-- (void)visitMatchingTermWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  [((id<JavaUtilList>) nil_chk(val$luceneSubQueries_)) addWithId:[((OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *) nil_chk(this$0_->qf_)) newTermQueryWithOrgApacheLuceneIndexTerm:term]];
-}
+@implementation OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1
 
 - (instancetype)initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery:(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *)outer$
                                                                      withJavaUtilList:(id<JavaUtilList>)capture$0 {
-  OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(self, outer$, capture$0);
+  OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(self, outer$, capture$0);
   return self;
+}
+
+- (void)visitMatchingTermWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
+  [((id<JavaUtilList>) nil_chk(val$luceneSubQueries_)) addWithId:[((OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *) nil_chk(this$0_->qf_)) newTermQueryWithOrgApacheLuceneIndexTerm:term]];
 }
 
 - (void)dealloc {
@@ -106,33 +109,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQuerySimpleTe
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "visitMatchingTermWithOrgApacheLuceneIndexTerm:", "visitMatchingTerm", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery:withJavaUtilList:", "", NULL, 0x0, NULL, "(Lorg/apache/lucene/queryparser/surround/query/SimpleTermRewriteQuery;Ljava/util/List<Lorg/apache/lucene/search/Query;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery:withJavaUtilList:);
+  methods[1].selector = @selector(visitMatchingTermWithOrgApacheLuceneIndexTerm:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queryparser.surround.query.SimpleTermRewriteQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$luceneSubQueries_", NULL, 0x1012, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/search/Query;>;", .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$luceneSubQueries_", "LJavaUtilList;", .constantValue.asLong = 0, 0x1012, -1, -1, 4, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery", "rewriteWithOrgApacheLuceneIndexIndexReader:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1 = { 2, "", "org.apache.lucene.queryparser.surround.query", "SimpleTermRewriteQuery", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery;LJavaUtilList;", "visitMatchingTerm", "LOrgApacheLuceneIndexTerm;", "LJavaIoIOException;", "Ljava/util/List<Lorg/apache/lucene/search/Query;>;", "LOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery;", "rewriteWithOrgApacheLuceneIndexIndexReader:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1 = { "", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, fields, 7, 0x8010, 2, 2, 5, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1 *self, OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0) {
+void OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1 *self, OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$luceneSubQueries_, capture$0);
   NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1 *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1, initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_, outer$, capture$0)
+OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1 *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1, initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_, outer$, capture$0)
 }
 
-OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1 *create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1, initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_, outer$, capture$0)
+OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1 *create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *outer$, id<JavaUtilList> capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_1, initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_withJavaUtilList_, outer$, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_$1)

@@ -8,7 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/BufferedReader.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/io/InputStream.h"
 #include "java/io/Reader.h"
 #include "java/nio/charset/Charset.h"
@@ -20,6 +19,10 @@
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/StopwordAnalyzerBase must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
 
@@ -60,18 +63,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getStopwordSet", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "StopwordAnalyzerBase", NULL, 0x4, NULL, NULL },
-    { "init", "StopwordAnalyzerBase", NULL, 0x4, NULL, NULL },
-    { "loadStopwordSetWithBoolean:withIOSClass:withNSString:withNSString:", "loadStopwordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0xc, "Ljava.io.IOException;", "(ZLjava/lang/Class<+Lorg/apache/lucene/analysis/Analyzer;>;Ljava/lang/String;Ljava/lang/String;)Lorg/apache/lucene/analysis/util/CharArraySet;" },
-    { "loadStopwordSetWithOrgLukhnosPortmobileFilePath:", "loadStopwordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0xc, "Ljava.io.IOException;", NULL },
-    { "loadStopwordSetWithJavaIoReader:", "loadStopwordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0xc, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0xc, 1, 2, 3, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0xc, 1, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0xc, 1, 6, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getStopwordSet);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[2].selector = @selector(init);
+  methods[3].selector = @selector(loadStopwordSetWithBoolean:withIOSClass:withNSString:withNSString:);
+  methods[4].selector = @selector(loadStopwordSetWithOrgLukhnosPortmobileFilePath:);
+  methods[5].selector = @selector(loadStopwordSetWithJavaIoReader:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stopwords_", NULL, 0x14, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
+    { "stopwords_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase = { 2, "StopwordAnalyzerBase", "org.apache.lucene.analysis.util", NULL, 0x401, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisUtilCharArraySet;", "loadStopwordSet", "ZLIOSClass;LNSString;LNSString;", "LJavaIoIOException;", "(ZLjava/lang/Class<+Lorg/apache/lucene/analysis/Analyzer;>;Ljava/lang/String;Ljava/lang/String;)Lorg/apache/lucene/analysis/util/CharArraySet;", "LOrgLukhnosPortmobileFilePath;", "LJavaIoReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase = { "StopwordAnalyzerBase", "org.apache.lucene.analysis.util", ptrTable, methods, fields, 7, 0x401, 6, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanNearQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanNearQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNearQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanNearQuery))
 #define OrgApacheLuceneSearchSpansSpanNearQuery_
 
@@ -29,10 +35,9 @@
 @protocol JavaUtilList;
 
 /*!
- @brief Matches spans which are near one another.
- One can specify <i>slop</i>, the
- maximum number of intervening unmatched positions, as well as whether
- matches are required to be in-order.
+ @brief Matches spans which are near one another.One can specify <i>slop</i>, the
+  maximum number of intervening unmatched positions, as well as whether
+  matches are required to be in-order.
  */
 @interface OrgApacheLuceneSearchSpansSpanNearQuery : OrgApacheLuceneSearchSpansSpanQuery < NSCopying > {
  @public
@@ -45,30 +50,29 @@
 #pragma mark Public
 
 /*!
- @brief Construct a SpanNearQuery.
- Matches spans matching a span from each
- clause, with up to <code>slop</code> total unmatched positions between
- them.
+ @brief Construct a SpanNearQuery.Matches spans matching a span from each
+  clause, with up to <code>slop</code> total unmatched positions between
+  them.
  <br>When <code>inOrder</code> is true, the spans from each clause
- must be in the same order as in <code>clauses</code> and must be non-overlapping.
+  must be in the same order as in <code>clauses</code> and must be non-overlapping. 
  <br>When <code>inOrder</code> is false, the spans from each clause
- need not be ordered and may overlap.
+  need not be ordered and may overlap.
  @param clauses the clauses to find near each other, in the same field, at least 2.
  @param slop The slop value
  @param inOrder true if order is important
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clauses
-                                                         withInt:(jint)slop
-                                                     withBoolean:(jboolean)inOrder;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clauses
+                                                                   withInt:(jint)slop
+                                                               withBoolean:(jboolean)inOrder;
 
 /*!
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clausesIn
-                                                         withInt:(jint)slop
-                                                     withBoolean:(jboolean)inOrder
-                                                     withBoolean:(jboolean)collectPayloads;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clausesIn
+                                                                   withInt:(jint)slop
+                                                               withBoolean:(jboolean)inOrder
+                                                               withBoolean:(jboolean)collectPayloads;
 
-- (OrgApacheLuceneSearchSpansSpanNearQuery *)clone;
+- (OrgApacheLuceneSearchSpansSpanNearQuery *)java_clone;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -110,6 +114,10 @@
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -156,8 +164,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery)
  @param field the field to search in
  @param ordered whether or not clauses must be in-order to match
  */
-- (instancetype)initWithNSString:(NSString *)field
-                     withBoolean:(jboolean)ordered;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                               withBoolean:(jboolean)ordered;
 
 /*!
  @brief Add a new clause
@@ -178,6 +186,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery)
  @brief Set the slop for this query
  */
 - (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)setSlopWithInt:(jint)slop;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -203,6 +215,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_Builder)
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSpansSpanNearQuery;
+@class OrgApacheLuceneSearchSpansSpanQuery;
 @class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @class OrgApacheLuceneSearchSpansSpans;
 @protocol JavaUtilList;
@@ -216,10 +229,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_Builder)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)outer$
-                                               withJavaUtilList:(id<JavaUtilList>)subWeights
-                         withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                withJavaUtilMap:(id<JavaUtilMap>)terms;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)outer$
+                                                         withJavaUtilList:(id<JavaUtilList>)subWeights
+                                   withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                          withJavaUtilMap:(id<JavaUtilMap>)terms;
 
 - (void)extractTermContextsWithJavaUtilMap:(id<JavaUtilMap>)contexts;
 
@@ -227,6 +240,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_Builder)
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                      withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)arg0
+                               withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)arg1
+                                                      withJavaUtilMap:(id<JavaUtilMap>)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -284,7 +303,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeigh
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)width;
+- (instancetype __nonnull)initWithInt:(jint)width;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -300,4 +323,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNearQuery")

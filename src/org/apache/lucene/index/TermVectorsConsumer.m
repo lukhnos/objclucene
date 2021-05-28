@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/System.h"
 #include "java/util/Arrays.h"
 #include "java/util/Map.h"
@@ -33,6 +32,13 @@
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/TermVectorsConsumer must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/index/TermVectorsConsumer must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
 @interface OrgApacheLuceneIndexTermVectorsConsumer () {
  @public
   IOSObjectArray *perFields_;
@@ -48,8 +54,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexTermVectorsConsumer_init
 
 @implementation OrgApacheLuceneIndexTermVectorsConsumer
 
-- (instancetype)initWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter {
-  OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(self, docWriter);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter {
+  OrgApacheLuceneIndexTermVectorsConsumer_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(self, docWriter);
   return self;
 }
 
@@ -57,10 +63,10 @@ __attribute__((unused)) static void OrgApacheLuceneIndexTermVectorsConsumer_init
 withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
   if (writer_ != nil) {
     jint numDocs = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_)) maxDoc];
-    JreAssert((numDocs > 0), (@"org/apache/lucene/index/TermVectorsConsumer.java:60 condition failed: assert numDocs > 0;"));
+    JreAssert(numDocs > 0, @"org/apache/lucene/index/TermVectorsConsumer.java:64 condition failed: assert numDocs > 0;");
     @try {
       [self fillWithInt:numDocs];
-      JreAssert((state->segmentInfo_ != nil), (@"org/apache/lucene/index/TermVectorsConsumer.java:64 condition failed: assert state.segmentInfo != null;"));
+      JreAssert(state->segmentInfo_ != nil, @"org/apache/lucene/index/TermVectorsConsumer.java:68 condition failed: assert state.segmentInfo != null;");
       [((OrgApacheLuceneCodecsTermVectorsWriter *) nil_chk(writer_)) finishWithOrgApacheLuceneIndexFieldInfos:state->fieldInfos_ withInt:numDocs];
     }
     @finally {
@@ -96,7 +102,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
     [((OrgApacheLuceneIndexTermVectorsConsumerPerField *) nil_chk(IOSObjectArray_Get(nil_chk(perFields_), i))) finishDocument];
   }
   [((OrgApacheLuceneCodecsTermVectorsWriter *) nil_chk(writer_)) finishDocument];
-  JreAssert((lastDocID_ == docState_->docID_), (JreStrcat("$I$I", @"lastDocID=", lastDocID_, @" docState.docID=", docState_->docID_)));
+  JreAssert(lastDocID_ == docState_->docID_, JreStrcat("$I$I", @"lastDocID=", lastDocID_, @" docState.docID=", docState_->docID_));
   lastDocID_++;
   [super reset];
   [self resetFields];
@@ -124,7 +130,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 
 - (OrgApacheLuceneIndexTermsHashPerField *)addFieldWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)invertState
                                                           withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
-  return create_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(invertState, self, fieldInfo);
+  return create_OrgApacheLuceneIndexTermVectorsConsumerPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(invertState, self, fieldInfo);
 }
 
 - (void)addFieldToFlushWithOrgApacheLuceneIndexTermVectorsConsumerPerField:(OrgApacheLuceneIndexTermVectorsConsumerPerField *)fieldToFlush {
@@ -142,10 +148,14 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
   numVectorFields_ = 0;
 }
 
+- (void)__javaClone:(OrgApacheLuceneIndexTermVectorsConsumer *)original {
+  [super __javaClone:original];
+  [docWriter_ release];
+}
+
 - (void)dealloc {
   RELEASE_(writer_);
   RELEASE_(flushTerm_);
-  RELEASE_(docWriter_);
   RELEASE_(vectorSliceReaderPos_);
   RELEASE_(vectorSliceReaderOff_);
   RELEASE_(perFields_);
@@ -153,50 +163,65 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexDocumentsWriterPerThread:", "TermVectorsConsumer", NULL, 0x1, NULL, NULL },
-    { "flushWithJavaUtilMap:withOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x0, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/TermsHashPerField;>;Lorg/apache/lucene/index/SegmentWriteState;)V" },
-    { "fillWithInt:", "fill", "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "initTermVectorsWriter", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "finishDocument", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "abort", NULL, "V", 0x1, NULL, NULL },
-    { "resetFields", NULL, "V", 0x0, NULL, NULL },
-    { "addFieldWithOrgApacheLuceneIndexFieldInvertState:withOrgApacheLuceneIndexFieldInfo:", "addField", "Lorg.apache.lucene.index.TermsHashPerField;", 0x1, NULL, NULL },
-    { "addFieldToFlushWithOrgApacheLuceneIndexTermVectorsConsumerPerField:", "addFieldToFlush", "V", 0x0, NULL, NULL },
-    { "startDocument", NULL, "V", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 1, 2, 3, 4, -1, -1 },
+    { NULL, "V", 0x0, 5, 6, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsHashPerField;", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:);
+  methods[1].selector = @selector(flushWithJavaUtilMap:withOrgApacheLuceneIndexSegmentWriteState:);
+  methods[2].selector = @selector(fillWithInt:);
+  methods[3].selector = @selector(initTermVectorsWriter);
+  methods[4].selector = @selector(finishDocument);
+  methods[5].selector = @selector(abort);
+  methods[6].selector = @selector(resetFields);
+  methods[7].selector = @selector(addFieldWithOrgApacheLuceneIndexFieldInvertState:withOrgApacheLuceneIndexFieldInfo:);
+  methods[8].selector = @selector(addFieldToFlushWithOrgApacheLuceneIndexTermVectorsConsumerPerField:);
+  methods[9].selector = @selector(startDocument);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "writer_", NULL, 0x0, "Lorg.apache.lucene.codecs.TermVectorsWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "flushTerm_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docWriter_", NULL, 0x10, "Lorg.apache.lucene.index.DocumentsWriterPerThread;", NULL, NULL, .constantValue.asLong = 0 },
-    { "vectorSliceReaderPos_", NULL, 0x10, "Lorg.apache.lucene.index.ByteSliceReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "vectorSliceReaderOff_", NULL, 0x10, "Lorg.apache.lucene.index.ByteSliceReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasVectors_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "numVectorFields_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastDocID_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "perFields_", NULL, 0x2, "[Lorg.apache.lucene.index.TermVectorsConsumerPerField;", NULL, NULL, .constantValue.asLong = 0 },
+    { "writer_", "LOrgApacheLuceneCodecsTermVectorsWriter;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "flushTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docWriter_", "LOrgApacheLuceneIndexDocumentsWriterPerThread;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "vectorSliceReaderPos_", "LOrgApacheLuceneIndexByteSliceReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "vectorSliceReaderOff_", "LOrgApacheLuceneIndexByteSliceReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "hasVectors_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "numVectorFields_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastDocID_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "perFields_", "[LOrgApacheLuceneIndexTermVectorsConsumerPerField;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermVectorsConsumer = { 2, "TermVectorsConsumer", "org.apache.lucene.index", NULL, 0x10, 10, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexDocumentsWriterPerThread;", "flush", "LJavaUtilMap;LOrgApacheLuceneIndexSegmentWriteState;", "LJavaIoIOException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/TermsHashPerField;>;Lorg/apache/lucene/index/SegmentWriteState;)V", "fill", "I", "addField", "LOrgApacheLuceneIndexFieldInvertState;LOrgApacheLuceneIndexFieldInfo;", "addFieldToFlush", "LOrgApacheLuceneIndexTermVectorsConsumerPerField;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermVectorsConsumer = { "TermVectorsConsumer", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 10, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexTermVectorsConsumer;
 }
 
 @end
 
-void OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexTermVectorsConsumer *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
-  OrgApacheLuceneIndexTermsHash_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(self, docWriter, false, nil);
+void OrgApacheLuceneIndexTermVectorsConsumer_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexTermVectorsConsumer *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
+  OrgApacheLuceneIndexTermsHash_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(self, docWriter, false, nil);
   JreStrongAssignAndConsume(&self->flushTerm_, new_OrgApacheLuceneUtilBytesRef_init());
-  JreStrongAssignAndConsume(&self->vectorSliceReaderPos_, new_OrgApacheLuceneIndexByteSliceReader_init());
-  JreStrongAssignAndConsume(&self->vectorSliceReaderOff_, new_OrgApacheLuceneIndexByteSliceReader_init());
+  JreStrongAssignAndConsume(&self->vectorSliceReaderPos_, new_OrgApacheLuceneIndexByteSliceReader_initPackagePrivate());
+  JreStrongAssignAndConsume(&self->vectorSliceReaderOff_, new_OrgApacheLuceneIndexByteSliceReader_initPackagePrivate());
   JreStrongAssignAndConsume(&self->perFields_, [IOSObjectArray newArrayWithLength:1 type:OrgApacheLuceneIndexTermVectorsConsumerPerField_class_()]);
-  JreStrongAssign(&self->docWriter_, docWriter);
+  self->docWriter_ = docWriter;
 }
 
-OrgApacheLuceneIndexTermVectorsConsumer *new_OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTermVectorsConsumer, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_, docWriter)
+OrgApacheLuceneIndexTermVectorsConsumer *new_OrgApacheLuceneIndexTermVectorsConsumer_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTermVectorsConsumer, initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_, docWriter)
 }
 
-OrgApacheLuceneIndexTermVectorsConsumer *create_OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTermVectorsConsumer, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_, docWriter)
+OrgApacheLuceneIndexTermVectorsConsumer *create_OrgApacheLuceneIndexTermVectorsConsumer_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTermVectorsConsumer, initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_, docWriter)
 }
 
 void OrgApacheLuceneIndexTermVectorsConsumer_initTermVectorsWriter(OrgApacheLuceneIndexTermVectorsConsumer *self) {

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsPushPostingsWriterBase
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsPushPostingsWriterBase_) && (INCLUDE_ALL_OrgApacheLuceneCodecsPushPostingsWriterBase || defined(INCLUDE_OrgApacheLuceneCodecsPushPostingsWriterBase))
 #define OrgApacheLuceneCodecsPushPostingsWriterBase_
 
@@ -29,9 +35,8 @@
 
 /*!
  @brief Extension of <code>PostingsWriterBase</code>, adding a push
- API for writing each element of the postings.
- This API
- is somewhat analagous to an XML SAX API, while <code>PostingsWriterBase</code>
+  API for writing each element of the postings.This API
+  is somewhat analagous to an XML SAX API, while <code>PostingsWriterBase</code>
   is more like an XML DOM API.
  - seealso: PostingsReaderBase
  */
@@ -43,7 +48,7 @@
   OrgApacheLuceneIndexFieldInfo *fieldInfo_;
   /*!
    @brief <code>IndexOptions</code> of current field being
- written
+       written
    */
   OrgApacheLuceneIndexIndexOptions *indexOptions_;
   /*!
@@ -67,13 +72,13 @@
 #pragma mark Public
 
 /*!
- @brief Add a new position and payload, and start/end offset.
- A
- null payload means no payload; a non-null payload with
- zero length also means no payload.  Caller may reuse
- the <code>BytesRef</code> for the payload between calls
- (method must fully consume the payload). <code>startOffset</code>
- and <code>endOffset</code> will be -1 when offsets are not indexed. 
+ @brief Add a new position and payload, and start/end offset.A
+   null payload means no payload; a non-null payload with
+   zero length also means no payload.
+ Caller may reuse
+   the <code>BytesRef</code> for the payload between calls
+   (method must fully consume the payload). <code>startOffset</code>
+   and <code>endOffset</code> will be -1 when offsets are not indexed.
  */
 - (void)addPositionWithInt:(jint)position
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
@@ -82,15 +87,14 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
 
 /*!
  @brief Called when we are done adding positions and payloads
- for each doc.
+   for each doc.
  */
 - (void)finishDoc;
 
 /*!
- @brief Finishes the current term.
- The provided <code>BlockTermState</code>
+ @brief Finishes the current term.The provided <code>BlockTermState</code>
   contains the term's summary statistics, 
- and will holds metadata from PBF when returned 
+   and will holds metadata from PBF when returned
  */
 - (void)finishTermWithOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)state;
 
@@ -101,24 +105,23 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
 
 /*!
  @brief Sets the current field for writing, and returns the
- fixed length of long[] metadata (which is fixed per
- field), called when the writing switches to another field.
+  fixed length of long[] metadata (which is fixed per
+  field), called when the writing switches to another field.
  */
 - (jint)setFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 /*!
  @brief Adds a new doc in this term.
  <code>freq</code> will be -1 when term frequencies are omitted
- for the field. 
+  for the field.
  */
 - (void)startDocWithInt:(jint)docID
                 withInt:(jint)freq;
 
 /*!
- @brief Start a new term.
- Note that a matching call to <code>finishTerm(BlockTermState)</code>
+ @brief Start a new term.Note that a matching call to <code>finishTerm(BlockTermState)</code>
   is done, only if the term has at least one
- document. 
+   document.
  */
 - (void)startTerm;
 
@@ -131,9 +134,9 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -148,4 +151,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPushPostingsWriterBase)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPushPostingsWriterBase")

@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -18,6 +17,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/commongrams/CommonGramsFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsFilter () {
  @public
@@ -60,7 +63,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter, posIncA
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter, posLenAttribute_, id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter, savedState_, OrgApacheLuceneUtilAttributeSource_State *)
 
-inline jchar OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_get_SEPARATOR();
+inline jchar OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_get_SEPARATOR(void);
 #define OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_SEPARATOR '_'
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter, SEPARATOR, jchar)
 
@@ -94,7 +97,7 @@ NSString *OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE = @"gram
   else if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     return false;
   }
-  if (lastWasCommon_ || (OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_isCommon(self) && [((JavaLangStringBuilder *) nil_chk(buffer_)) length] > 0)) {
+  if (lastWasCommon_ || (OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_isCommon(self) && [((JavaLangStringBuilder *) nil_chk(buffer_)) java_length] > 0)) {
     JreStrongAssign(&savedState_, [self captureState]);
     OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_gramToken(self);
     return true;
@@ -135,29 +138,40 @@ NSString *OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE = @"gram
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:", "CommonGramsFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "isCommon", NULL, "Z", 0x2, NULL, NULL },
-    { "saveTermBuffer", NULL, "V", 0x2, NULL, NULL },
-    { "gramToken", NULL, "V", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[1].selector = @selector(incrementToken);
+  methods[2].selector = @selector(reset);
+  methods[3].selector = @selector(isCommon);
+  methods[4].selector = @selector(saveTermBuffer);
+  methods[5].selector = @selector(gramToken);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "GRAM_TYPE", "GRAM_TYPE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE, NULL, .constantValue.asLong = 0 },
-    { "SEPARATOR", "SEPARATOR", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_SEPARATOR },
-    { "commonWords_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x12, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posLenAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionLengthAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastStartOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastWasCommon_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "savedState_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
+    { "GRAM_TYPE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 2, -1, -1 },
+    { "SEPARATOR", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_SEPARATOR, 0x1a, -1, -1, -1, -1 },
+    { "commonWords_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "buffer_", "LJavaLangStringBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAttribute_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAttribute_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "typeAttribute_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncAttribute_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posLenAttribute_", "LOrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lastStartOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastWasCommon_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "savedState_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCommongramsCommonGramsFilter = { 2, "CommonGramsFilter", "org.apache.lucene.analysis.commongrams", NULL, 0x11, 6, methods, 12, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;", "LJavaIoIOException;", &OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCommongramsCommonGramsFilter = { "CommonGramsFilter", "org.apache.lucene.analysis.commongrams", ptrTable, methods, fields, 7, 0x11, 6, 12, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCommongramsCommonGramsFilter;
 }
 
@@ -183,22 +197,22 @@ OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *create_OrgApacheLuceneAnaly
 }
 
 jboolean OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_isCommon(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *self) {
-  return self->commonWords_ != nil && [self->commonWords_ containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAttribute_)) buffer] withInt:0 withInt:[self->termAttribute_ length]];
+  return self->commonWords_ != nil && [self->commonWords_ containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAttribute_)) buffer] withInt:0 withInt:[self->termAttribute_ java_length]];
 }
 
 void OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_saveTermBuffer(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *self) {
   [((JavaLangStringBuilder *) nil_chk(self->buffer_)) setLengthWithInt:0];
-  [self->buffer_ appendWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAttribute_)) buffer] withInt:0 withInt:[self->termAttribute_ length]];
+  [self->buffer_ appendWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAttribute_)) buffer] withInt:0 withInt:[self->termAttribute_ java_length]];
   [self->buffer_ appendWithChar:OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_SEPARATOR];
   self->lastStartOffset_ = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAttribute_)) startOffset];
   self->lastWasCommon_ = OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_isCommon(self);
 }
 
 void OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_gramToken(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *self) {
-  [((JavaLangStringBuilder *) nil_chk(self->buffer_)) appendWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAttribute_)) buffer] withInt:0 withInt:[self->termAttribute_ length]];
+  [((JavaLangStringBuilder *) nil_chk(self->buffer_)) appendWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAttribute_)) buffer] withInt:0 withInt:[self->termAttribute_ java_length]];
   jint endOffset = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAttribute_)) endOffset];
   [self clearAttributes];
-  jint length = [self->buffer_ length];
+  jint length = [self->buffer_ java_length];
   IOSCharArray *termText = [self->termAttribute_ buffer];
   if (length > ((IOSCharArray *) nil_chk(termText))->size_) {
     termText = [self->termAttribute_ resizeBufferWithInt:length];

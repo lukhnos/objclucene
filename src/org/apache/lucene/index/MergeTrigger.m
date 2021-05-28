@@ -3,11 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/index/MergeTrigger.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/index/MergeTrigger.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MergeTrigger must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static void OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(OrgApacheLuceneIndexMergeTrigger *self, NSString *__name, jint __ordinal);
 
@@ -49,8 +53,27 @@ OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_values_[5];
   return (OrgApacheLuceneIndexMergeTrigger_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneIndexMergeTrigger;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergeTrigger;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "SEGMENT_FLUSH", "LOrgApacheLuceneIndexMergeTrigger;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "FULL_FLUSH", "LOrgApacheLuceneIndexMergeTrigger;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "EXPLICIT", "LOrgApacheLuceneIndexMergeTrigger;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "MERGE_FINISHED", "LOrgApacheLuceneIndexMergeTrigger;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+    { "CLOSING", "LOrgApacheLuceneIndexMergeTrigger;", .constantValue.asLong = 0, 0x4019, -1, 6, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneIndexMergeTrigger, SEGMENT_FLUSH), &JreEnum(OrgApacheLuceneIndexMergeTrigger, FULL_FLUSH), &JreEnum(OrgApacheLuceneIndexMergeTrigger, EXPLICIT), &JreEnum(OrgApacheLuceneIndexMergeTrigger, MERGE_FINISHED), &JreEnum(OrgApacheLuceneIndexMergeTrigger, CLOSING), "Ljava/lang/Enum<Lorg/apache/lucene/index/MergeTrigger;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeTrigger = { "MergeTrigger", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x4011, 2, 5, -1, -1, -1, 7, -1 };
+  return &_OrgApacheLuceneIndexMergeTrigger;
 }
 
 + (void)initialize {
@@ -59,31 +82,12 @@ OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_values_[5];
     size_t allocSize = 5 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneIndexMergeTrigger, SEGMENT_FLUSH) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, @"SEGMENT_FLUSH", 0);
-    (JreEnum(OrgApacheLuceneIndexMergeTrigger, FULL_FLUSH) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, @"FULL_FLUSH", 1);
-    (JreEnum(OrgApacheLuceneIndexMergeTrigger, EXPLICIT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, @"EXPLICIT", 2);
-    (JreEnum(OrgApacheLuceneIndexMergeTrigger, MERGE_FINISHED) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, @"MERGE_FINISHED", 3);
-    (JreEnum(OrgApacheLuceneIndexMergeTrigger, CLOSING) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, @"CLOSING", 4);
+    for (jint i = 0; i < 5; i++) {
+      ((void)(OrgApacheLuceneIndexMergeTrigger_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneIndexMergeTrigger_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMergeTrigger)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "SEGMENT_FLUSH", "SEGMENT_FLUSH", 0x4019, "Lorg.apache.lucene.index.MergeTrigger;", &JreEnum(OrgApacheLuceneIndexMergeTrigger, SEGMENT_FLUSH), NULL, .constantValue.asLong = 0 },
-    { "FULL_FLUSH", "FULL_FLUSH", 0x4019, "Lorg.apache.lucene.index.MergeTrigger;", &JreEnum(OrgApacheLuceneIndexMergeTrigger, FULL_FLUSH), NULL, .constantValue.asLong = 0 },
-    { "EXPLICIT", "EXPLICIT", 0x4019, "Lorg.apache.lucene.index.MergeTrigger;", &JreEnum(OrgApacheLuceneIndexMergeTrigger, EXPLICIT), NULL, .constantValue.asLong = 0 },
-    { "MERGE_FINISHED", "MERGE_FINISHED", 0x4019, "Lorg.apache.lucene.index.MergeTrigger;", &JreEnum(OrgApacheLuceneIndexMergeTrigger, MERGE_FINISHED), NULL, .constantValue.asLong = 0 },
-    { "CLOSING", "CLOSING", 0x4019, "Lorg.apache.lucene.index.MergeTrigger;", &JreEnum(OrgApacheLuceneIndexMergeTrigger, CLOSING), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.MergeTrigger;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeTrigger = { 2, "MergeTrigger", "org.apache.lucene.index", NULL, 0x4011, 0, NULL, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/MergeTrigger;>;" };
-  return &_OrgApacheLuceneIndexMergeTrigger;
 }
 
 @end
@@ -105,7 +109,7 @@ OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_valueOfWithNS
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -21,6 +20,10 @@
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/Lucene43CompoundWordTokenFilterBase must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase () {
  @public
   id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt_;
@@ -31,6 +34,8 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase, posIncAtt_, id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase, current_, OrgApacheLuceneUtilAttributeSource_State *)
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase__Annotations$0(void);
 
 @implementation OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase
 
@@ -71,8 +76,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilt
 
 - (jboolean)incrementToken {
   if (![((JavaUtilLinkedList *) nil_chk(tokens_)) isEmpty]) {
-    JreAssert((current_ != nil), (@"org/apache/lucene/analysis/compound/Lucene43CompoundWordTokenFilterBase.java:96 condition failed: assert current != null;"));
-    OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken *token = [tokens_ removeFirst];
+    JreAssert(current_ != nil, @"org/apache/lucene/analysis/compound/Lucene43CompoundWordTokenFilterBase.java:96 condition failed: assert current != null;");
+    OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken *token = JreRetainedLocalValue([tokens_ removeFirst]);
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:current_];
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:((OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken *) nil_chk(token))->txt_];
     [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:token->startOffset_ withInt:token->endOffset_];
@@ -81,7 +86,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilt
   }
   JreStrongAssign(&current_, nil);
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    if ([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length] >= self->minWordSize_) {
+    if ([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) java_length] >= self->minWordSize_) {
       [self decompose];
       if (![tokens_ isEmpty]) {
         JreStrongAssign(&current_, [self captureState]);
@@ -105,10 +110,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilt
   JreStrongAssign(&current_, nil);
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(dictionary_);
   RELEASE_(tokens_);
@@ -120,31 +121,41 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilt
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:withBoolean:", "Lucene43CompoundWordTokenFilterBase", NULL, 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:", "Lucene43CompoundWordTokenFilterBase", NULL, 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:withInt:withInt:withInt:withBoolean:", "Lucene43CompoundWordTokenFilterBase", NULL, 0x4, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "decompose", NULL, "V", 0x404, NULL, NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x4, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x4, -1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x404, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:withBoolean:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:withInt:withInt:withInt:withBoolean:);
+  methods[3].selector = @selector(incrementToken);
+  methods[4].selector = @selector(decompose);
+  methods[5].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_MIN_WORD_SIZE", "DEFAULT_MIN_WORD_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_DEFAULT_MIN_WORD_SIZE },
-    { "DEFAULT_MIN_SUBWORD_SIZE", "DEFAULT_MIN_SUBWORD_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_DEFAULT_MIN_SUBWORD_SIZE },
-    { "DEFAULT_MAX_SUBWORD_SIZE", "DEFAULT_MAX_SUBWORD_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_DEFAULT_MAX_SUBWORD_SIZE },
-    { "dictionary_", NULL, 0x14, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokens_", NULL, 0x14, "Ljava.util.LinkedList;", NULL, "Ljava/util/LinkedList<Lorg/apache/lucene/analysis/compound/Lucene43CompoundWordTokenFilterBase$CompoundToken;>;", .constantValue.asLong = 0 },
-    { "minWordSize_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minSubwordSize_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxSubwordSize_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "onlyLongestMatch_", NULL, 0x14, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x14, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x14, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_MIN_WORD_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_DEFAULT_MIN_WORD_SIZE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MIN_SUBWORD_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_DEFAULT_MIN_SUBWORD_SIZE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_SUBWORD_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_DEFAULT_MAX_SUBWORD_SIZE, 0x19, -1, -1, -1, -1 },
+    { "dictionary_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "tokens_", "LJavaUtilLinkedList;", .constantValue.asLong = 0, 0x14, -1, -1, 4, -1 },
+    { "minWordSize_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "minSubwordSize_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "maxSubwordSize_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "onlyLongestMatch_", "Z", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "posIncAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "current_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.compound.Lucene43CompoundWordTokenFilterBase$CompoundToken;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase = { 2, "Lucene43CompoundWordTokenFilterBase", "org.apache.lucene.analysis.compound", NULL, 0x401, 6, methods, 13, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;Z", "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;", "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;IIIZ", "LJavaIoIOException;", "Ljava/util/LinkedList<Lorg/apache/lucene/analysis/compound/Lucene43CompoundWordTokenFilterBase$CompoundToken;>;", "LOrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken;", (void *)&OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase = { "Lucene43CompoundWordTokenFilterBase", "org.apache.lucene.analysis.compound", ptrTable, methods, fields, 7, 0x401, 6, 13, -1, 5, -1, -1, 6 };
   return &_OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase;
 }
 
@@ -180,6 +191,10 @@ void OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_initWith
   JreStrongAssign(&self->dictionary_, dictionary);
 }
 
+IOSObjectArray *OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase)
 
 @implementation OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken
@@ -197,15 +212,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundLucene43Compound
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase:withInt:withInt:", "CompoundToken", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "txt_", NULL, 0x11, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "startOffset_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endOffset_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "txt_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "startOffset_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "endOffset_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken = { 2, "CompoundToken", "org.apache.lucene.analysis.compound", "Lucene43CompoundWordTokenFilterBase", 0x4, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase;II", "LOrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken = { "CompoundToken", "org.apache.lucene.analysis.compound", ptrTable, methods, fields, 7, 0x4, 1, 3, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken;
 }
 
@@ -216,7 +237,7 @@ void OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_Compound
   JreStrongAssign(&self->txt_, [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(outer$->termAtt_)) subSequenceFrom:offset to:offset + length]);
   jint startOff = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(outer$->offsetAtt_)) startOffset];
   jint endOff = [outer$->offsetAtt_ endOffset];
-  if (endOff - startOff != [outer$->termAtt_ length]) {
+  if (endOff - startOff != [outer$->termAtt_ java_length]) {
     self->startOffset_ = startOff;
     self->endOffset_ = endOff;
   }

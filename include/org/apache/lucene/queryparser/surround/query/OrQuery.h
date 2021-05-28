@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryOrQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQueryOrQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryOrQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryOrQuery))
 #define OrgApacheLuceneQueryparserSurroundQueryOrQuery_
 
@@ -26,6 +32,7 @@
 
 @class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
 @class OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory;
+@class OrgApacheLuceneQueryparserSurroundQuerySrndQuery;
 @class OrgApacheLuceneSearchQuery;
 @protocol JavaUtilList;
 
@@ -36,13 +43,15 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)queries
-                         withBoolean:(jboolean)infix
-                        withNSString:(NSString *)opName;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)queries
+                                   withBoolean:(jboolean)infix
+                                  withNSString:(NSString *)opName;
 
 - (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf;
 
 - (NSString *)distanceSubQueryNotAllowed;
+
+- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)java_clone;
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
            withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
@@ -61,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryOrQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryOrQuery")

@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/Explanation.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/StringBuilder.h"
@@ -13,6 +14,10 @@
 #include "java/util/List.h"
 #include "org/apache/lucene/search/Explanation.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/Explanation must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchExplanation () {
  @public
@@ -131,28 +136,46 @@ __attribute__((unused)) static NSString *OrgApacheLuceneSearchExplanation_toStri
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "matchWithFloat:withNSString:withJavaUtilCollection:", "match", "Lorg.apache.lucene.search.Explanation;", 0x9, NULL, "(FLjava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/search/Explanation;>;)Lorg/apache/lucene/search/Explanation;" },
-    { "matchWithFloat:withNSString:withOrgApacheLuceneSearchExplanationArray:", "match", "Lorg.apache.lucene.search.Explanation;", 0x89, NULL, NULL },
-    { "noMatchWithNSString:withJavaUtilCollection:", "noMatch", "Lorg.apache.lucene.search.Explanation;", 0x9, NULL, "(Ljava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/search/Explanation;>;)Lorg/apache/lucene/search/Explanation;" },
-    { "noMatchWithNSString:withOrgApacheLuceneSearchExplanationArray:", "noMatch", "Lorg.apache.lucene.search.Explanation;", 0x89, NULL, NULL },
-    { "initWithBoolean:withFloat:withNSString:withJavaUtilCollection:", "Explanation", NULL, 0x2, NULL, "(ZFLjava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/search/Explanation;>;)V" },
-    { "isMatch", NULL, "Z", 0x1, NULL, NULL },
-    { "getValue", NULL, "F", 0x1, NULL, NULL },
-    { "getDescription", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getSummary", NULL, "Ljava.lang.String;", 0x2, NULL, NULL },
-    { "getDetails", NULL, "[Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x2, NULL, NULL },
-    { "toHtml", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x9, 0, 1, -1, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x89, 0, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x9, 4, 5, -1, 6, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x89, 4, 7, -1, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, 8, -1, 9, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchExplanation;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 10, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x2, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(matchWithFloat:withNSString:withJavaUtilCollection:);
+  methods[1].selector = @selector(matchWithFloat:withNSString:withOrgApacheLuceneSearchExplanationArray:);
+  methods[2].selector = @selector(noMatchWithNSString:withJavaUtilCollection:);
+  methods[3].selector = @selector(noMatchWithNSString:withOrgApacheLuceneSearchExplanationArray:);
+  methods[4].selector = @selector(initWithBoolean:withFloat:withNSString:withJavaUtilCollection:);
+  methods[5].selector = @selector(isMatch);
+  methods[6].selector = @selector(getValue);
+  methods[7].selector = @selector(getDescription);
+  methods[8].selector = @selector(getSummary);
+  methods[9].selector = @selector(getDetails);
+  methods[10].selector = @selector(description);
+  methods[11].selector = @selector(toStringWithInt:);
+  methods[12].selector = @selector(toHtml);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "match_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "value_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "description__", "description", 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "details_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;", .constantValue.asLong = 0 },
+    { "match_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "value_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "description__", "LNSString;", .constantValue.asLong = 0, 0x12, 12, -1, -1, -1 },
+    { "details_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 13, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchExplanation = { 2, "Explanation", "org.apache.lucene.search", NULL, 0x11, 13, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "match", "FLNSString;LJavaUtilCollection;", "(FLjava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/search/Explanation;>;)Lorg/apache/lucene/search/Explanation;", "FLNSString;[LOrgApacheLuceneSearchExplanation;", "noMatch", "LNSString;LJavaUtilCollection;", "(Ljava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/search/Explanation;>;)Lorg/apache/lucene/search/Explanation;", "LNSString;[LOrgApacheLuceneSearchExplanation;", "ZFLNSString;LJavaUtilCollection;", "(ZFLjava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/search/Explanation;>;)V", "toString", "I", "description", "Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchExplanation = { "Explanation", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 13, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchExplanation;
 }
 

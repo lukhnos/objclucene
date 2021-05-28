@@ -6,14 +6,16 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Character.h"
 #include "java/lang/System.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tr/TurkishLowerCaseFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tr/TurkishLowerCaseFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter () {
  @public
@@ -40,19 +42,19 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_LATIN_CAPITAL_LETTER_I();
+inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_LATIN_CAPITAL_LETTER_I(void);
 #define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_CAPITAL_LETTER_I 73
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, LATIN_CAPITAL_LETTER_I, jint)
 
-inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_LATIN_SMALL_LETTER_I();
+inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_LATIN_SMALL_LETTER_I(void);
 #define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_I 105
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, LATIN_SMALL_LETTER_I, jint)
 
-inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_LATIN_SMALL_LETTER_DOTLESS_I();
+inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_LATIN_SMALL_LETTER_DOTLESS_I(void);
 #define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_DOTLESS_I 305
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, LATIN_SMALL_LETTER_DOTLESS_I, jint)
 
-inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_COMBINING_DOT_ABOVE();
+inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_COMBINING_DOT_ABOVE(void);
 #define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_COMBINING_DOT_ABOVE 775
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, COMBINING_DOT_ABOVE, jint)
 
@@ -71,7 +73,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFil
   jboolean iOrAfter = false;
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-    jint length = [termAtt_ length];
+    jint length = [termAtt_ java_length];
     for (jint i = 0; i < length; ) {
       jint ch = JavaLangCharacter_codePointAtWithCharArray_withInt_withInt_(buffer, i, length);
       iOrAfter = (ch == OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_CAPITAL_LETTER_I || (iOrAfter && JavaLangCharacter_getTypeWithInt_(ch) == JavaLangCharacter_NON_SPACING_MARK));
@@ -118,20 +120,29 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFil
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "TurkishLowerCaseFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "isBeforeDotWithCharArray:withInt:withInt:", "isBeforeDot", "Z", 0x2, NULL, NULL },
-    { "delete__WithCharArray:withInt:withInt:", "delete", "I", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  methods[2].selector = @selector(isBeforeDotWithCharArray:withInt:withInt:);
+  methods[3].selector = @selector(delete__WithCharArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LATIN_CAPITAL_LETTER_I", "LATIN_CAPITAL_LETTER_I", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_CAPITAL_LETTER_I },
-    { "LATIN_SMALL_LETTER_I", "LATIN_SMALL_LETTER_I", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_I },
-    { "LATIN_SMALL_LETTER_DOTLESS_I", "LATIN_SMALL_LETTER_DOTLESS_I", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_DOTLESS_I },
-    { "COMBINING_DOT_ABOVE", "COMBINING_DOT_ABOVE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_COMBINING_DOT_ABOVE },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "LATIN_CAPITAL_LETTER_I", "I", .constantValue.asInt = OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_CAPITAL_LETTER_I, 0x1a, -1, -1, -1, -1 },
+    { "LATIN_SMALL_LETTER_I", "I", .constantValue.asInt = OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_I, 0x1a, -1, -1, -1, -1 },
+    { "LATIN_SMALL_LETTER_DOTLESS_I", "I", .constantValue.asInt = OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_DOTLESS_I, 0x1a, -1, -1, -1, -1 },
+    { "COMBINING_DOT_ABOVE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_COMBINING_DOT_ABOVE, 0x1a, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter = { 2, "TurkishLowerCaseFilter", "org.apache.lucene.analysis.tr", NULL, 0x11, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", "isBeforeDot", "[CII", "delete" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter = { "TurkishLowerCaseFilter", "org.apache.lucene.analysis.tr", ptrTable, methods, fields, 7, 0x11, 4, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester))
 #define OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_
 
@@ -24,7 +30,6 @@
 #define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
-@class IOSObjectArray;
 @class JavaLangStringBuilder;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneDocumentFieldType;
@@ -52,16 +57,15 @@
 
 /*!
  @brief Analyzes the input text and then suggests matches based
- on prefix matches to any tokens in the indexed text.
+   on prefix matches to any tokens in the indexed text.
  This also highlights the tokens that match.
- <p>This suggester supports payloads.  Matches are sorted only
- by the suggest weight; it would be nice to support
- blended score + weight sort in the future.  This means
- this suggester best applies when there is a strong
- a-priori ranking of all the suggestions.
+   <p>This suggester supports payloads.  Matches are sorted only
+   by the suggest weight; it would be nice to support
+   blended score + weight sort in the future.  This means
+   this suggester best applies when there is a strong
+   a-priori ranking of all the suggestions.  
  <p>This suggester supports contexts, including arbitrary binary
- terms.
-  
+   terms.
  */
 @interface OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester : OrgApacheLuceneSearchSuggestLookup < JavaIoCloseable > {
  @public
@@ -80,111 +84,100 @@
    */
   OrgApacheLuceneSearchSearcherManager *searcherMgr_;
 }
-
-+ (NSString *)TEXT_FIELD_NAME;
-
-+ (NSString *)EXACT_TEXT_FIELD_NAME;
-
-+ (NSString *)CONTEXTS_FIELD_NAME;
-
-+ (jint)DEFAULT_MIN_PREFIX_CHARS;
-
-+ (jboolean)DEFAULT_ALL_TERMS_REQUIRED;
-
-+ (jboolean)DEFAULT_HIGHLIGHT;
+@property (readonly, copy, class) NSString *TEXT_FIELD_NAME NS_SWIFT_NAME(TEXT_FIELD_NAME);
+@property (readonly, copy, class) NSString *EXACT_TEXT_FIELD_NAME NS_SWIFT_NAME(EXACT_TEXT_FIELD_NAME);
+@property (readonly, copy, class) NSString *CONTEXTS_FIELD_NAME NS_SWIFT_NAME(CONTEXTS_FIELD_NAME);
+@property (readonly, class) jint DEFAULT_MIN_PREFIX_CHARS NS_SWIFT_NAME(DEFAULT_MIN_PREFIX_CHARS);
+@property (readonly, class) jboolean DEFAULT_ALL_TERMS_REQUIRED NS_SWIFT_NAME(DEFAULT_ALL_TERMS_REQUIRED);
+@property (readonly, class) jboolean DEFAULT_HIGHLIGHT NS_SWIFT_NAME(DEFAULT_HIGHLIGHT);
 
 #pragma mark Public
 
 /*!
  @brief Create a new instance, loading from a previously built
- AnalyzingInfixSuggester directory, if it exists.
- This directory must be
- private to the infix suggester (i.e., not an external
- Lucene index).  Note that <code>close</code>
- will also close the provided directory. 
+   AnalyzingInfixSuggester directory, if it exists.This directory must be
+   private to the infix suggester (i.e., not an external
+   Lucene index).
+ Note that <code>close</code>
+   will also close the provided directory.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  @brief Create a new instance, loading from a previously built
- AnalyzingInfixSuggester directory, if it exists.
- This directory must be
- private to the infix suggester (i.e., not an external
- Lucene index).  Note that <code>close</code>
- will also close the provided directory.
- @param minPrefixChars Minimum number of leading characters
- before PrefixQuery is used (default 4).
- Prefixes shorter than this are indexed as character
- ngrams (increasing index size but making lookups
- faster).
- @param commitOnBuild Call commit after the index has finished building. This would persist the
- suggester index to disk and future instances of this suggester can use this pre-built dictionary.
+   AnalyzingInfixSuggester directory, if it exists.This directory must be
+   private to the infix suggester (i.e., not an external
+   Lucene index).
+ Note that <code>close</code>
+   will also close the provided directory.
+ @param minPrefixChars Minimum number of leading characters      before PrefixQuery is used (default 4).
+       Prefixes shorter than this are indexed as character
+       ngrams (increasing index size but making lookups
+       faster).
+ @param commitOnBuild Call commit after the index has finished building. This would persist the                        suggester index to disk and future instances of this suggester can use this pre-built dictionary.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                              withInt:(jint)minPrefixChars
-                                          withBoolean:(jboolean)commitOnBuild;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                        withInt:(jint)minPrefixChars
+                                                    withBoolean:(jboolean)commitOnBuild;
 
 /*!
  @brief Create a new instance, loading from a previously built
- AnalyzingInfixSuggester directory, if it exists.
- This directory must be
- private to the infix suggester (i.e., not an external
- Lucene index).  Note that <code>close</code>
- will also close the provided directory.
- @param minPrefixChars Minimum number of leading characters
- before PrefixQuery is used (default 4).
- Prefixes shorter than this are indexed as character
- ngrams (increasing index size but making lookups
- faster).
- @param commitOnBuild Call commit after the index has finished building. This would persist the
- suggester index to disk and future instances of this suggester can use this pre-built dictionary.
+   AnalyzingInfixSuggester directory, if it exists.This directory must be
+   private to the infix suggester (i.e., not an external
+   Lucene index).
+ Note that <code>close</code>
+   will also close the provided directory.
+ @param minPrefixChars Minimum number of leading characters      before PrefixQuery is used (default 4).
+       Prefixes shorter than this are indexed as character
+       ngrams (increasing index size but making lookups
+       faster).
+ @param commitOnBuild Call commit after the index has finished building. This would persist the                        suggester index to disk and future instances of this suggester can use this pre-built dictionary.
  @param allTermsRequired All terms in the suggest query must be matched.
  @param highlight Highlight suggest query in suggestions.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                              withInt:(jint)minPrefixChars
-                                          withBoolean:(jboolean)commitOnBuild
-                                          withBoolean:(jboolean)allTermsRequired
-                                          withBoolean:(jboolean)highlight;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                        withInt:(jint)minPrefixChars
+                                                    withBoolean:(jboolean)commitOnBuild
+                                                    withBoolean:(jboolean)allTermsRequired
+                                                    withBoolean:(jboolean)highlight;
 
 /*!
  */
-- (instancetype)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
-                 withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
+                           withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  */
-- (instancetype)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
-                 withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                           withInt:(jint)minPrefixChars
-                                       withBoolean:(jboolean)commitOnBuild;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
+                           withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                     withInt:(jint)minPrefixChars
+                                                 withBoolean:(jboolean)commitOnBuild;
 
 /*!
  */
-- (instancetype)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
-                 withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                           withInt:(jint)minPrefixChars
-                                       withBoolean:(jboolean)commitOnBuild
-                                       withBoolean:(jboolean)allTermsRequired
-                                       withBoolean:(jboolean)highlight;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
+                           withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                     withInt:(jint)minPrefixChars
+                                                 withBoolean:(jboolean)commitOnBuild
+                                                 withBoolean:(jboolean)allTermsRequired
+                                                 withBoolean:(jboolean)highlight;
 
 /*!
- @brief Adds a new suggestion.
- Be sure to use <code>update</code>
- instead if you want to replace a previous suggestion.
+ @brief Adds a new suggestion.Be sure to use <code>update</code>
+   instead if you want to replace a previous suggestion.
  After adding or updating a batch of new suggestions,
- you must call <code>refresh</code> in the end in order to
- see the suggestions in <code>lookup</code> 
+   you must call <code>refresh</code> in the end in order to
+   see the suggestions in <code>lookup</code>
  */
 - (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text
                            withJavaUtilSet:(id<JavaUtilSet>)contexts
@@ -193,7 +186,7 @@
 
 /*!
  @brief This method is handy as we do not need access to internal fields such as CONTEXTS_FIELD_NAME in order to build queries
- However, here may not be its best location.
+  However, here may not be its best location.
  @param query an instance of @@See <code>BooleanQuery</code>
  @param context the context
  @param clause one of <code>Occur</code>
@@ -220,14 +213,14 @@
 
 /*!
  @brief This is an advanced method providing the capability to send down to the suggester any 
- arbitrary lucene query to be used to filter the result of the suggester
+  arbitrary lucene query to be used to filter the result of the suggester
  @param key the keyword being looked for
- @param contextQuery an arbitrary Lucene query to be used to filter the result of the suggester. <code>addContextToQuery</code> could be used to build this contextQuery.
+ @param contextQuery an arbitrary Lucene query to be used to filter the result of the suggester. <code>addContextToQuery</code>  could be used to build this contextQuery.
  @param num number of items to return
  @param allTermsRequired all searched terms must match or not
  @param doHighlight if true, the matching term will be highlighted in the search result
  @return the result of the suggester
- @throws IOException f the is IO exception while reading data from the index
+ @throw IOExceptionf the is IO exception while reading data from the index
  */
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
              withOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)contextQuery
@@ -245,8 +238,8 @@
 
 /*!
  @brief Retrieve suggestions, specifying whether all terms
- must match (<code>allTermsRequired</code>) and whether the hits
- should be highlighted (<code>doHighlight</code>).
+   must match (<code>allTermsRequired</code>) and whether the hits
+   should be highlighted (<code>doHighlight</code>).
  */
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                    withJavaUtilMap:(id<JavaUtilMap>)contextInfo
@@ -260,9 +253,8 @@
                                            withInt:(jint)num;
 
 /*!
- @brief Lookup, with context but without booleans.
- Context booleans default to SHOULD,
- so each suggestion must have at least one of the contexts. 
+ @brief Lookup, with context but without booleans.Context booleans default to SHOULD,
+   so each suggestion must have at least one of the contexts.
  */
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                    withJavaUtilSet:(id<JavaUtilSet>)contexts
@@ -274,8 +266,8 @@
 
 /*!
  @brief Reopens the underlying searcher; it's best to "batch
- up" many additions/updates, and then call refresh
- once in the end.
+   up" many additions/updates, and then call refresh
+   once in the end.
  */
 - (void)refresh;
 
@@ -283,13 +275,13 @@
 
 /*!
  @brief Updates a previous suggestion, matching the exact same
- text as before.
- Use this to change the weight or
- payload of an already added suggestion.  If you know
- this text is not already present you can use <code>add</code>
+   text as before.Use this to change the weight or
+   payload of an already added suggestion.
+ If you know
+   this text is not already present you can use <code>add</code>
   instead.  After adding or updating a batch of
- new suggestions, you must call <code>refresh</code> in the
- end in order to see the suggestions in <code>lookup</code> 
+   new suggestions, you must call <code>refresh</code> in the
+   end in order to see the suggestions in <code>lookup</code>
  */
 - (void)updateWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text
                               withJavaUtilSet:(id<JavaUtilSet>)contexts
@@ -300,9 +292,9 @@
 
 /*!
  @brief Called while highlighting a single result, to append a
- non-matching chunk of text from the suggestion to the
- provided fragments list.
- @param sb The <code>StringBuilder</code> to append to
+   non-matching chunk of text from the suggestion to the
+   provided fragments list.
+ @param sb The <code>StringBuilder</code>  to append to
  @param text The text chunk to add
  */
 - (void)addNonMatchWithJavaLangStringBuilder:(JavaLangStringBuilder *)sb
@@ -310,11 +302,10 @@
 
 /*!
  @brief Called while highlighting a single result, to append a
- matched prefix token, to the provided fragments list.
- @param sb The <code>StringBuilder</code> to append to
- @param surface The fragment of the surface form
- (indexed during <code>build</code>, corresponding to
- this match
+   matched prefix token, to the provided fragments list.
+ @param sb The <code>StringBuilder</code>  to append to
+ @param surface The fragment of the surface form         (indexed during 
+ <code>build</code> , corresponding to         this match
  @param analyzed The analyzed token that matched
  @param prefixToken The prefix of the token that matched
  */
@@ -325,8 +316,8 @@
 
 /*!
  @brief Called while highlighting a single result, to append
- the whole matched token to the provided fragments list.
- @param sb The <code>StringBuilder</code> to append to
+   the whole matched token to the provided fragments list.
+ @param sb The <code>StringBuilder</code>  to append to
  @param surface The surface form (original) text
  @param analyzed The analyzed token corresponding to the surface form text
  */
@@ -337,10 +328,10 @@
 /*!
  @brief Create the results based on the search hits.
  Can be overridden by subclass to add particular behavior (e.g. weight transformation).
- Note that there is no prefix toke (the <code>prefixToken</code> argument will
- be null) whenever the final token in the incoming request was in fact finished
- (had trailing characters, such as white-space).
- @throws IOException If there are problems reading fields from the underlying Lucene index.
+  Note that there is no prefix toke (the <code>prefixToken</code> argument will
+  be null) whenever the final token in the incoming request was in fact finished
+  (had trailing characters, such as white-space).
+ @throw IOExceptionIf there are problems reading fields from the underlying Lucene index.
  */
 - (id<JavaUtilList>)createResultsWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                   withOrgApacheLuceneSearchTopFieldDocs:(OrgApacheLuceneSearchTopFieldDocs *)hits
@@ -352,7 +343,7 @@
 
 /*!
  @brief Subclass can override this to tweak the Query before
- searching.
+   searching.
  */
 - (OrgApacheLuceneSearchQuery *)finishQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:(OrgApacheLuceneSearchBooleanQuery_Builder *)inArg
                                                                              withBoolean:(jboolean)allTermsRequired;
@@ -364,35 +355,39 @@
 - (OrgApacheLuceneStoreDirectory *)getDirectoryWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
 /*!
- @brief Override this to customize index settings, e.g. which
- codec to use.
+ @brief Override this to customize index settings, e.g.which
+   codec to use.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
                                                 withOrgApacheLuceneIndexIndexWriterConfig_OpenMode:(OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)openMode;
 
 /*!
  @brief This is called if the last token isn't ended
- (e.g. user did not type a space after it).
+   (e.g.user did not type a space after it).
  Return an
- appropriate Query clause to add to the BooleanQuery. 
+   appropriate Query clause to add to the BooleanQuery.
  */
 - (OrgApacheLuceneSearchQuery *)getLastTokenQueryWithNSString:(NSString *)token;
 
 /*!
  @brief Subclass can override this method to change the field type of the text field
- e.g. to change the index options
+  e.g.to change the index options
  */
 - (OrgApacheLuceneDocumentFieldType *)getTextFieldType;
 
 /*!
  @brief Override this method to customize the Object
- representing a single highlighted suggestions; the
- result is set on each <code>org.apache.lucene.search.suggest.Lookup.LookupResult.highlightKey</code>
+   representing a single highlighted suggestions; the
+   result is set on each <code>org.apache.lucene.search.suggest.Lookup.LookupResult.highlightKey</code>
   member.
  */
 - (id)highlightWithNSString:(NSString *)text
             withJavaUtilSet:(id<JavaUtilSet>)matchedTokens
                withNSString:(NSString *)prefixToken;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -406,48 +401,48 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester
 /*!
  @brief Field name used for the indexed text.
  */
-inline NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_TEXT_FIELD_NAME();
+inline NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_TEXT_FIELD_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, TEXT_FIELD_NAME, NSString *)
 
 /*!
  @brief Field name used for the indexed text, as a
- StringField, for exact lookup.
+   StringField, for exact lookup.
  */
-inline NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_EXACT_TEXT_FIELD_NAME();
+inline NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_EXACT_TEXT_FIELD_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_EXACT_TEXT_FIELD_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, EXACT_TEXT_FIELD_NAME, NSString *)
 
 /*!
  @brief Field name used for the indexed context, as a
- StringField and a SortedSetDVField, for filtering.
+   StringField and a SortedSetDVField, for filtering.
  */
-inline NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_CONTEXTS_FIELD_NAME();
+inline NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_CONTEXTS_FIELD_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, CONTEXTS_FIELD_NAME, NSString *)
 
 /*!
  @brief Default minimum number of leading characters before
- PrefixQuery is used (4).
+   PrefixQuery is used (4).
  */
-inline jint OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_DEFAULT_MIN_PREFIX_CHARS();
+inline jint OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_DEFAULT_MIN_PREFIX_CHARS(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_MIN_PREFIX_CHARS 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, DEFAULT_MIN_PREFIX_CHARS, jint)
 
 /*!
  @brief Default boolean clause option for multiple terms matching (all terms required).
  */
-inline jboolean OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_DEFAULT_ALL_TERMS_REQUIRED();
+inline jboolean OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_DEFAULT_ALL_TERMS_REQUIRED(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_ALL_TERMS_REQUIRED true
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, DEFAULT_ALL_TERMS_REQUIRED, jboolean)
 
 /*!
  @brief Default higlighting option.
  */
-inline jboolean OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_DEFAULT_HIGHLIGHT();
+inline jboolean OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_DEFAULT_HIGHLIGHT(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_HIGHLIGHT true
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, DEFAULT_HIGHLIGHT, jboolean)
 
@@ -491,4 +486,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester")

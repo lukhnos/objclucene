@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/index/TermVectorsConsumerPerField.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/System.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
@@ -27,6 +25,10 @@
 #include "org/apache/lucene/util/BytesRefHash.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/TermVectorsConsumerPerField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexTermVectorsConsumerPerField () {
  @public
   OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *termVectorsPostingsArray_;
@@ -38,10 +40,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
 
 @implementation OrgApacheLuceneIndexTermVectorsConsumerPerField
 
-- (instancetype)initWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)invertState
-                 withOrgApacheLuceneIndexTermVectorsConsumer:(OrgApacheLuceneIndexTermVectorsConsumer *)termsWriter
-                           withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
-  OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(self, invertState, termsWriter, fieldInfo);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)invertState
+                               withOrgApacheLuceneIndexTermVectorsConsumer:(OrgApacheLuceneIndexTermVectorsConsumer *)termsWriter
+                                         withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
+  OrgApacheLuceneIndexTermVectorsConsumerPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(self, invertState, termsWriter, fieldInfo);
   return self;
 }
 
@@ -59,8 +61,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
   doVectors_ = false;
   jint numPostings = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(bytesHash_)) size];
   OrgApacheLuceneUtilBytesRef *flushTerm = ((OrgApacheLuceneIndexTermVectorsConsumer *) nil_chk(termsWriter_))->flushTerm_;
-  JreAssert((numPostings >= 0), (@"org/apache/lucene/index/TermVectorsConsumerPerField.java:70 condition failed: assert numPostings >= 0;"));
-  OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *postings = termVectorsPostingsArray_;
+  JreAssert(numPostings >= 0, @"org/apache/lucene/index/TermVectorsConsumerPerField.java:70 condition failed: assert numPostings >= 0;");
+  OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *postings = JreRetainedLocalValue(termVectorsPostingsArray_);
   OrgApacheLuceneCodecsTermVectorsWriter *tv = termsWriter_->writer_;
   IOSIntArray *termIDs = [self sortPostings];
   [((OrgApacheLuceneCodecsTermVectorsWriter *) nil_chk(tv)) startFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo_ withInt:numPostings withBoolean:doVectorPositions_ withBoolean:doVectorOffsets_ withBoolean:hasPayloads_];
@@ -89,7 +91,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
 
 - (jboolean)startWithOrgApacheLuceneIndexIndexableField:(id<OrgApacheLuceneIndexIndexableField>)field
                                             withBoolean:(jboolean)first {
-  JreAssert(([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) fieldType])) indexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)), (@"org/apache/lucene/index/TermVectorsConsumerPerField.java:114 condition failed: assert field.fieldType().indexOptions() != IndexOptions.NONE;"));
+  JreAssert([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) fieldType])) indexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE), @"org/apache/lucene/index/TermVectorsConsumerPerField.java:114 condition failed: assert field.fieldType().indexOptions() != IndexOptions.NONE;");
   if (first) {
     if ([((OrgApacheLuceneUtilBytesRefHash *) nil_chk(bytesHash_)) size] != 0) {
       [self reset];
@@ -140,7 +142,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
   if (doVectors_) {
     if (doVectorOffsets_) {
       JreStrongAssign(&offsetAttribute_, ((OrgApacheLuceneIndexFieldInvertState *) nil_chk(fieldState_))->offsetAttribute_);
-      JreAssert((offsetAttribute_ != nil), (@"org/apache/lucene/index/TermVectorsConsumerPerField.java:180 condition failed: assert offsetAttribute != null;"));
+      JreAssert(offsetAttribute_ != nil, @"org/apache/lucene/index/TermVectorsConsumerPerField.java:180 condition failed: assert offsetAttribute != null;");
     }
     if (doVectorPayloads_) {
       JreStrongAssign(&payloadAttribute_, ((OrgApacheLuceneIndexFieldInvertState *) nil_chk(fieldState_))->payloadAttribute_);
@@ -184,7 +186,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
 }
 
 - (void)newTermWithInt:(jint)termID {
-  OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *postings = termVectorsPostingsArray_;
+  OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *postings = JreRetainedLocalValue(termVectorsPostingsArray_);
   *IOSIntArray_GetRef(nil_chk(((OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *) nil_chk(postings))->freqs_), termID) = 1;
   *IOSIntArray_GetRef(nil_chk(postings->lastOffsets_), termID) = 0;
   *IOSIntArray_GetRef(nil_chk(postings->lastPositions_), termID) = 0;
@@ -192,7 +194,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
 }
 
 - (void)addTermWithInt:(jint)termID {
-  OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *postings = termVectorsPostingsArray_;
+  OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *postings = JreRetainedLocalValue(termVectorsPostingsArray_);
   (*IOSIntArray_GetRef(nil_chk(((OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *) nil_chk(postings))->freqs_), termID))++;
   [self writeProxWithOrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray:postings withInt:termID];
 }
@@ -214,46 +216,59 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFieldInvertState:withOrgApacheLuceneIndexTermVectorsConsumer:withOrgApacheLuceneIndexFieldInfo:", "TermVectorsConsumerPerField", NULL, 0x1, NULL, NULL },
-    { "finish", NULL, "V", 0x0, NULL, NULL },
-    { "finishDocument", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "startWithOrgApacheLuceneIndexIndexableField:withBoolean:", "start", "Z", 0x0, NULL, NULL },
-    { "writeProxWithOrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray:withInt:", "writeProx", "V", 0x0, NULL, NULL },
-    { "newTermWithInt:", "newTerm", "V", 0x0, NULL, NULL },
-    { "addTermWithInt:", "addTerm", "V", 0x0, NULL, NULL },
-    { "newPostingsArray", NULL, "V", 0x1, NULL, NULL },
-    { "createPostingsArrayWithInt:", "createPostingsArray", "Lorg.apache.lucene.index.ParallelPostingsArray;", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x0, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 8, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexParallelPostingsArray;", 0x0, 9, 7, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState:withOrgApacheLuceneIndexTermVectorsConsumer:withOrgApacheLuceneIndexFieldInfo:);
+  methods[1].selector = @selector(finish);
+  methods[2].selector = @selector(finishDocument);
+  methods[3].selector = @selector(startWithOrgApacheLuceneIndexIndexableField:withBoolean:);
+  methods[4].selector = @selector(writeProxWithOrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray:withInt:);
+  methods[5].selector = @selector(newTermWithInt:);
+  methods[6].selector = @selector(addTermWithInt:);
+  methods[7].selector = @selector(newPostingsArray);
+  methods[8].selector = @selector(createPostingsArrayWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termVectorsPostingsArray_", NULL, 0x2, "Lorg.apache.lucene.index.TermVectorsConsumerPerField$TermVectorsPostingsArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termsWriter_", NULL, 0x10, "Lorg.apache.lucene.index.TermVectorsConsumer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "doVectors_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "doVectorPositions_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "doVectorOffsets_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "doVectorPayloads_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAttribute_", NULL, 0x0, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadAttribute_", NULL, 0x0, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasPayloads_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "termVectorsPostingsArray_", "LOrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termsWriter_", "LOrgApacheLuceneIndexTermVectorsConsumer;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "doVectors_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "doVectorPositions_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "doVectorOffsets_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "doVectorPayloads_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "offsetAttribute_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "payloadAttribute_", "LOrgApacheLuceneAnalysisTokenattributesPayloadAttribute;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "hasPayloads_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.TermVectorsConsumerPerField$TermVectorsPostingsArray;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermVectorsConsumerPerField = { 2, "TermVectorsConsumerPerField", "org.apache.lucene.index", NULL, 0x10, 9, methods, 9, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFieldInvertState;LOrgApacheLuceneIndexTermVectorsConsumer;LOrgApacheLuceneIndexFieldInfo;", "LJavaIoIOException;", "start", "LOrgApacheLuceneIndexIndexableField;Z", "writeProx", "LOrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray;I", "newTerm", "I", "addTerm", "createPostingsArray", "LOrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermVectorsConsumerPerField = { "TermVectorsConsumerPerField", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 9, 9, -1, 10, -1, -1, -1 };
   return &_OrgApacheLuceneIndexTermVectorsConsumerPerField;
 }
 
 @end
 
-void OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexTermVectorsConsumerPerField *self, OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
-  OrgApacheLuceneIndexTermsHashPerField_initWithInt_withOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneIndexFieldInfo_(self, 2, invertState, termsWriter, nil, fieldInfo);
+void OrgApacheLuceneIndexTermVectorsConsumerPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexTermVectorsConsumerPerField *self, OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
+  OrgApacheLuceneIndexTermsHashPerField_initPackagePrivateWithInt_withOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneIndexFieldInfo_(self, 2, invertState, termsWriter, nil, fieldInfo);
   JreStrongAssign(&self->termsWriter_, termsWriter);
 }
 
-OrgApacheLuceneIndexTermVectorsConsumerPerField *new_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTermVectorsConsumerPerField, initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_, invertState, termsWriter, fieldInfo)
+OrgApacheLuceneIndexTermVectorsConsumerPerField *new_OrgApacheLuceneIndexTermVectorsConsumerPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTermVectorsConsumerPerField, initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_, invertState, termsWriter, fieldInfo)
 }
 
-OrgApacheLuceneIndexTermVectorsConsumerPerField *create_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTermVectorsConsumerPerField, initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_, invertState, termsWriter, fieldInfo)
+OrgApacheLuceneIndexTermVectorsConsumerPerField *create_OrgApacheLuceneIndexTermVectorsConsumerPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTermVectorsConsumerPerField, initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_, invertState, termsWriter, fieldInfo)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTermVectorsConsumerPerField)
@@ -271,7 +286,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTermVectorsConsumerPerField
 
 - (void)copyToWithOrgApacheLuceneIndexParallelPostingsArray:(OrgApacheLuceneIndexParallelPostingsArray *)toArray
                                                     withInt:(jint)numToCopy {
-  JreAssert(([toArray isKindOfClass:[OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray class]]), (@"org/apache/lucene/index/TermVectorsConsumerPerField.java:274 condition failed: assert toArray instanceof TermVectorsPostingsArray;"));
+  JreAssert([toArray isKindOfClass:[OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray class]], @"org/apache/lucene/index/TermVectorsConsumerPerField.java:274 condition failed: assert toArray instanceof TermVectorsPostingsArray;");
   OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *to = (OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *) cast_chk(toArray, [OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray class]);
   [super copyToWithOrgApacheLuceneIndexParallelPostingsArray:toArray withInt:numToCopy];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(freqs_, 0, ((OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *) nil_chk(to))->freqs_, 0, size_);
@@ -291,25 +306,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTermVectorsConsumerPerField
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TermVectorsPostingsArray", NULL, 0x1, NULL, NULL },
-    { "newInstanceWithInt:", "newInstance", "Lorg.apache.lucene.index.ParallelPostingsArray;", 0x0, NULL, NULL },
-    { "copyToWithOrgApacheLuceneIndexParallelPostingsArray:withInt:", "copyTo", "V", 0x0, NULL, NULL },
-    { "bytesPerPosting", NULL, "I", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexParallelPostingsArray;", 0x0, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(newInstanceWithInt:);
+  methods[2].selector = @selector(copyToWithOrgApacheLuceneIndexParallelPostingsArray:withInt:);
+  methods[3].selector = @selector(bytesPerPosting);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "freqs_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastOffsets_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPositions_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "freqs_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastOffsets_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastPositions_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray = { 2, "TermVectorsPostingsArray", "org.apache.lucene.index", "TermVectorsConsumerPerField", 0x18, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "newInstance", "copyTo", "LOrgApacheLuceneIndexParallelPostingsArray;I", "LOrgApacheLuceneIndexTermVectorsConsumerPerField;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray = { "TermVectorsPostingsArray", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x18, 4, 3, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray;
 }
 
 @end
 
 void OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_initWithInt_(OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *self, jint size) {
-  OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(self, size);
+  OrgApacheLuceneIndexParallelPostingsArray_initPackagePrivateWithInt_(self, size);
   JreStrongAssignAndConsume(&self->freqs_, [IOSIntArray newArrayWithLength:size]);
   JreStrongAssignAndConsume(&self->lastOffsets_, [IOSIntArray newArrayWithLength:size]);
   JreStrongAssignAndConsume(&self->lastPositions_, [IOSIntArray newArrayWithLength:size]);

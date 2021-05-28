@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreAlreadyClosedException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreAlreadyClosedException_) && (INCLUDE_ALL_OrgApacheLuceneStoreAlreadyClosedException || defined(INCLUDE_OrgApacheLuceneStoreAlreadyClosedException))
 #define OrgApacheLuceneStoreAlreadyClosedException_
 
@@ -20,18 +26,26 @@
 #define INCLUDE_JavaLangIllegalStateException 1
 #include "java/lang/IllegalStateException.h"
 
+@class JavaLangThrowable;
+
 /*!
  @brief This exception is thrown when there is an attempt to
- access something that has already been closed.
+  access something that has already been closed.
  */
 @interface OrgApacheLuceneStoreAlreadyClosedException : JavaLangIllegalStateException
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)message;
+- (instancetype __nonnull)initWithNSString:(NSString *)message;
 
-- (instancetype)initWithNSString:(NSString *)message
-                 withNSException:(NSException *)cause;
+- (instancetype __nonnull)initWithNSString:(NSString *)message
+                     withJavaLangThrowable:(JavaLangThrowable *)cause;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -43,14 +57,18 @@ FOUNDATION_EXPORT OrgApacheLuceneStoreAlreadyClosedException *new_OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreAlreadyClosedException *create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(NSString *message);
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(OrgApacheLuceneStoreAlreadyClosedException *self, NSString *message, NSException *cause);
+FOUNDATION_EXPORT void OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneStoreAlreadyClosedException *self, NSString *message, JavaLangThrowable *cause);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreAlreadyClosedException *new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(NSString *message, NSException *cause) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreAlreadyClosedException *new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreAlreadyClosedException *create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(NSString *message, NSException *cause);
+FOUNDATION_EXPORT OrgApacheLuceneStoreAlreadyClosedException *create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreAlreadyClosedException)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreAlreadyClosedException")

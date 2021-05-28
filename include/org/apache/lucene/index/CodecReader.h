@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexCodecReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexCodecReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexCodecReader || defined(INCLUDE_OrgApacheLuceneIndexCodecReader))
 #define OrgApacheLuceneIndexCodecReader_
 
@@ -67,19 +73,16 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Expert: retrieve underlying DocValuesProducer
-  
  */
 - (OrgApacheLuceneCodecsDocValuesProducer *)getDocValuesReader;
 
 /*!
  @brief Expert: retrieve thread-private StoredFieldsReader
-  
  */
 - (OrgApacheLuceneCodecsStoredFieldsReader *)getFieldsReader;
 
 /*!
  @brief Expert: retrieve underlying NormsProducer
-  
  */
 - (OrgApacheLuceneCodecsNormsProducer *)getNormsReader;
 
@@ -102,7 +105,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Expert: retrieve thread-private TermVectorsReader
-  
  */
 - (OrgApacheLuceneCodecsTermVectorsReader *)getTermVectorsReader;
 
@@ -113,9 +115,9 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)doClose;
 
@@ -133,4 +135,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCodecReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexCodecReader")

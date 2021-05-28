@@ -7,6 +7,10 @@
 #include "java/lang/Float.h"
 #include "org/apache/lucene/util/SmallFloat.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/SmallFloat must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilSmallFloat ()
 
 /*!
@@ -18,9 +22,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneUtilSmallFloat_init(OrgApacheLuceneUtilSmallFloat *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilSmallFloat *new_OrgApacheLuceneUtilSmallFloat_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilSmallFloat *new_OrgApacheLuceneUtilSmallFloat_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilSmallFloat *create_OrgApacheLuceneUtilSmallFloat_init();
+__attribute__((unused)) static OrgApacheLuceneUtilSmallFloat *create_OrgApacheLuceneUtilSmallFloat_init(void);
 
 @implementation OrgApacheLuceneUtilSmallFloat
 
@@ -60,16 +64,28 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SmallFloat", NULL, 0x2, NULL, NULL },
-    { "floatToByteWithFloat:withInt:withInt:", "floatToByte", "B", 0x9, NULL, NULL },
-    { "byteToFloatWithByte:withInt:withInt:", "byteToFloat", "F", 0x9, NULL, NULL },
-    { "floatToByte315WithFloat:", "floatToByte315", "B", 0x9, NULL, NULL },
-    { "byte315ToFloatWithByte:", "byte315ToFloat", "F", 0x9, NULL, NULL },
-    { "floatToByte52WithFloat:", "floatToByte52", "B", 0x9, NULL, NULL },
-    { "byte52ToFloatWithByte:", "byte52ToFloat", "F", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "B", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "B", 0x9, 4, 5, -1, -1, -1, -1 },
+    { NULL, "F", 0x9, 6, 7, -1, -1, -1, -1 },
+    { NULL, "B", 0x9, 8, 5, -1, -1, -1, -1 },
+    { NULL, "F", 0x9, 9, 7, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilSmallFloat = { 2, "SmallFloat", "org.apache.lucene.util", NULL, 0x1, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(floatToByteWithFloat:withInt:withInt:);
+  methods[2].selector = @selector(byteToFloatWithByte:withInt:withInt:);
+  methods[3].selector = @selector(floatToByte315WithFloat:);
+  methods[4].selector = @selector(byte315ToFloatWithByte:);
+  methods[5].selector = @selector(floatToByte52WithFloat:);
+  methods[6].selector = @selector(byte52ToFloatWithByte:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "floatToByte", "FII", "byteToFloat", "BII", "floatToByte315", "F", "byte315ToFloat", "B", "floatToByte52", "byte52ToFloat" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilSmallFloat = { "SmallFloat", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x1, 7, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilSmallFloat;
 }
 

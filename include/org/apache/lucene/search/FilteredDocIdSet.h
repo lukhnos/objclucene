@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFilteredDocIdSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFilteredDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilteredDocIdSet || defined(INCLUDE_OrgApacheLuceneSearchFilteredDocIdSet))
 #define OrgApacheLuceneSearchFilteredDocIdSet_
 
@@ -26,17 +32,17 @@
 
 /*!
  @brief Abstract decorator class for a DocIdSet implementation
- that provides on-demand filtering/validation
- mechanism on a given DocIdSet.
+  that provides on-demand filtering/validation
+  mechanism on a given DocIdSet.
  <p>
- Technically, this same functionality could be achieved
- with ChainedFilter (under queries/), however the
- benefit of this class is it never materializes the full
- bitset for the filter.  Instead, the <code>match</code>
- method is invoked on-demand, per docID visited during
- searching.  If you know few docIDs will be visited, and
- the logic behind <code>match</code> is relatively costly,
- this may be a better way to filter than ChainedFilter.
+  Technically, this same functionality could be achieved
+  with ChainedFilter (under queries/), however the
+  benefit of this class is it never materializes the full
+  bitset for the filter.  Instead, the <code>match</code>
+  method is invoked on-demand, per docID visited during
+  searching.  If you know few docIDs will be visited, and
+  the logic behind <code>match</code> is relatively costly,
+  this may be a better way to filter than ChainedFilter.
  - seealso: DocIdSet
  */
 @interface OrgApacheLuceneSearchFilteredDocIdSet : OrgApacheLuceneSearchDocIdSet
@@ -47,7 +53,7 @@
  @brief Constructor.
  @param innerSet Underlying DocIdSet
  */
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)innerSet;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)innerSet;
 
 - (id<OrgApacheLuceneUtilBits>)bits;
 
@@ -81,6 +87,10 @@
  */
 - (jboolean)matchWithInt:(jint)docid;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFilteredDocIdSet)
@@ -91,4 +101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSet)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilteredDocIdSet")

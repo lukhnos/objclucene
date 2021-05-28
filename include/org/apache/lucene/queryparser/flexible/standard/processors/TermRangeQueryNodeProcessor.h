@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor))
 #define OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_
 
@@ -20,24 +26,25 @@
 #define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
+@class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief This processors process <code>TermRangeQueryNode</code>s.
- It reads the lower and
- upper bounds value from the <code>TermRangeQueryNode</code> object and try
- to parse their values using a <code>DateFormat</code>. If the values cannot be
- parsed to a date value, it will only create the <code>TermRangeQueryNode</code>
- using the non-parsed values. <br>
- <br>
- If a <code>ConfigurationKeys.LOCALE</code> is defined in the
- <code>QueryConfigHandler</code> it will be used to parse the date, otherwise
+ @brief This processors process <code>TermRangeQueryNode</code>s.It reads the lower and
+  upper bounds value from the <code>TermRangeQueryNode</code> object and try
+  to parse their values using a <code>DateFormat</code>.
+ If the values cannot be
+  parsed to a date value, it will only create the <code>TermRangeQueryNode</code>
+  using the non-parsed values. <br>
+  <br>
+  If a <code>ConfigurationKeys.LOCALE</code> is defined in the 
+ <code>QueryConfigHandler</code> it will be used to parse the date, otherwise 
  <code>Locale.getDefault()</code> will be used. <br>
- <br>
- If a <code>ConfigurationKeys.DATE_RESOLUTION</code> is defined and the
+  <br>
+  If a <code>ConfigurationKeys.DATE_RESOLUTION</code> is defined and the 
  <code>Resolution</code> is not <code>null</code> it will also be used to parse the
- date value.
+  date value.
  - seealso: ConfigurationKeys#DATE_RESOLUTION
  - seealso: ConfigurationKeys#LOCALE
  - seealso: TermRangeQueryNode
@@ -46,7 +53,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Protected
 
@@ -56,18 +63,26 @@
 
 - (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor")

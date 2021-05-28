@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/tokenattributes/PayloadAttribute.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/PayloadAttribute must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisTokenattributesPayloadAttribute : NSObject
 
 @end
@@ -13,11 +17,18 @@
 @implementation OrgApacheLuceneAnalysisTokenattributesPayloadAttribute
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
-    { "setPayloadWithOrgApacheLuceneUtilBytesRef:", "setPayload", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesPayloadAttribute = { 2, "PayloadAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getPayload);
+  methods[1].selector = @selector(setPayloadWithOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setPayload", "LOrgApacheLuceneUtilBytesRef;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesPayloadAttribute = { "PayloadAttribute", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute;
 }
 

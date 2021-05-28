@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter))
 #define OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_
 
@@ -35,17 +41,16 @@
  @brief Creates a new HTMLStripCharFilter over the provided Reader.
  @param source Reader to strip html tags from.
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)source;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)source;
 
 /*!
  @brief Creates a new HTMLStripCharFilter over the provided Reader
- with the specified start and end tags.
+  with the specified start and end tags.
  @param source Reader to strip html tags from.
- @param escapedTags Tags in this set (both start and end tags)
- will not be filtered out.
+ @param escapedTags Tags in this set (both start and end tags)   will not be filtered out.
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)source
-                     withJavaUtilSet:(id<JavaUtilSet>)escapedTags;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)source
+                               withJavaUtilSet:(id<JavaUtilSet>)escapedTags;
 
 - (void)close;
 
@@ -75,10 +80,14 @@ FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *new_OrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *create_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_withJavaUtilSet_(JavaIoReader *source, id<JavaUtilSet> escapedTags);
 
-FOUNDATION_EXPORT jint OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_getInitialBufferSize();
+FOUNDATION_EXPORT jint OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_getInitialBufferSize(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter")

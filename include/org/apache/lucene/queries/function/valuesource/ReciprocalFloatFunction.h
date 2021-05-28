@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction_
 
@@ -27,16 +33,16 @@
 
 /*!
  @brief <code>ReciprocalFloatFunction</code> implements a reciprocal function f(x) = a/(mx+b), based on
- the float value of a field or function as exported by <code>org.apache.lucene.queries.function.ValueSource</code>.
+  the float value of a field or function as exported by <code>org.apache.lucene.queries.function.ValueSource</code>.
  <br>
- When a and b are equal, and x&gt;=0, this function has a maximum value of 1 that drops as x increases.
- Increasing the value of a and b together results in a movement of the entire function to a flatter part of the curve.
- <p>These properties make this an idea function for boosting more recent documents.
+  When a and b are equal, and x&gt;=0, this function has a maximum value of 1 that drops as x increases.
+  Increasing the value of a and b together results in a movement of the entire function to a flatter part of the curve. 
+ <p>These properties make this an idea function for boosting more recent documents. 
  <p>Example:<code>  recip(ms(NOW,mydatefield),3.16e-11,1,1)</code>
- <p>A multiplier of 3.16e-11 changes the units from milliseconds to years (since there are about 3.16e10 milliseconds
- per year).  Thus, a very recent date will yield a value close to 1/(0+1) or 1,
- a date a year in the past will get a multiplier of about 1/(1+1) or 1/2,
- and date two years old will yield 1/(2+1) or 1/3.
+  <p>A multiplier of 3.16e-11 changes the units from milliseconds to years (since there are about 3.16e10 milliseconds
+  per year).  Thus, a very recent date will yield a value close to 1/(0+1) or 1,
+  a date a year in the past will get a multiplier of about 1/(1+1) or 1/2,
+  and date two years old will yield 1/(2+1) or 1/3.
  - seealso: org.apache.lucene.queries.function.FunctionQuery
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
@@ -52,10 +58,10 @@
 /*!
  @brief f(source) = a/(m*float(source)+b)
  */
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
-                                                        withFloat:(jfloat)m
-                                                        withFloat:(jfloat)a
-                                                        withFloat:(jfloat)b;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
+                                                                  withFloat:(jfloat)m
+                                                                  withFloat:(jfloat)a
+                                                                  withFloat:(jfloat)b;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -68,6 +74,10 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
 
 - (NSUInteger)hash;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -85,4 +95,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceReciprocalFl
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFakeScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFakeScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchFakeScorer || defined(INCLUDE_OrgApacheLuceneSearchFakeScorer))
 #define OrgApacheLuceneSearchFakeScorer_
 
@@ -36,7 +42,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -54,18 +60,26 @@
 
 - (jfloat)score;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFakeScorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFakeScorer_init(OrgApacheLuceneSearchFakeScorer *self);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchFakeScorer_initPackagePrivate(OrgApacheLuceneSearchFakeScorer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchFakeScorer *new_OrgApacheLuceneSearchFakeScorer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchFakeScorer *new_OrgApacheLuceneSearchFakeScorer_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchFakeScorer *create_OrgApacheLuceneSearchFakeScorer_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchFakeScorer *create_OrgApacheLuceneSearchFakeScorer_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFakeScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFakeScorer")

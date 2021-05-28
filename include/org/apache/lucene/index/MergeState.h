@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMergeState
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMergeState_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergeState || defined(INCLUDE_OrgApacheLuceneIndexMergeState))
 #define OrgApacheLuceneIndexMergeState_
 
@@ -25,7 +31,6 @@
 
 /*!
  @brief Holds common state used during segment merging.
-  
  */
 @interface OrgApacheLuceneIndexMergeState : NSObject {
  @public
@@ -88,9 +93,13 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)readers
- withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
-   withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)readers
+           withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
+             withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -135,7 +144,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState)
 
 /*!
  @brief Creates a <code>DocMap</code> instance appropriate for
- this reader.
+   this reader.
  */
 + (OrgApacheLuceneIndexMergeState_DocMap *)buildWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader;
 
@@ -151,7 +160,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState)
 
 /*!
  @brief Returns the total number of documents, ignoring
- deletions.
+   deletions.
  */
 - (jint)maxDoc;
 
@@ -167,7 +176,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (OrgApacheLuceneIndexMergeState_DocMap *)buildWithInt:(jint)maxDoc
                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
@@ -186,4 +195,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState_DocMap)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeState")

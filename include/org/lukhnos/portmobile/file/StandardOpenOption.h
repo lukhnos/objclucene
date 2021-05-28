@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileFileStandardOpenOption
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFileStandardOpenOption_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileStandardOpenOption || defined(INCLUDE_OrgLukhnosPortmobileFileStandardOpenOption))
 #define OrgLukhnosPortmobileFileStandardOpenOption_
 
@@ -20,27 +26,27 @@
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgLukhnosPortmobileFileStandardOpenOption_Enum) {
   OrgLukhnosPortmobileFileStandardOpenOption_Enum_READ = 0,
   OrgLukhnosPortmobileFileStandardOpenOption_Enum_WRITE = 1,
   OrgLukhnosPortmobileFileStandardOpenOption_Enum_CREATE = 2,
 };
 
-@interface OrgLukhnosPortmobileFileStandardOpenOption : JavaLangEnum < NSCopying >
+@interface OrgLukhnosPortmobileFileStandardOpenOption : JavaLangEnum
 
-+ (OrgLukhnosPortmobileFileStandardOpenOption *)READ;
-
-+ (OrgLukhnosPortmobileFileStandardOpenOption *)WRITE;
-
-+ (OrgLukhnosPortmobileFileStandardOpenOption *)CREATE;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgLukhnosPortmobileFileStandardOpenOption *READ NS_SWIFT_NAME(READ);
+@property (readonly, class, nonnull) OrgLukhnosPortmobileFileStandardOpenOption *WRITE NS_SWIFT_NAME(WRITE);
+@property (readonly, class, nonnull) OrgLukhnosPortmobileFileStandardOpenOption *CREATE NS_SWIFT_NAME(CREATE);
+#pragma mark Public
 
 + (OrgLukhnosPortmobileFileStandardOpenOption *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgLukhnosPortmobileFileStandardOpenOption_Enum)toNSEnum;
 
 @end
@@ -50,16 +56,16 @@ J2OBJC_STATIC_INIT(OrgLukhnosPortmobileFileStandardOpenOption)
 /*! INTERNAL ONLY - Use enum accessors declared below. */
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_values_[];
 
-inline OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_get_READ();
+inline OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_get_READ(void);
 J2OBJC_ENUM_CONSTANT(OrgLukhnosPortmobileFileStandardOpenOption, READ)
 
-inline OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_get_WRITE();
+inline OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_get_WRITE(void);
 J2OBJC_ENUM_CONSTANT(OrgLukhnosPortmobileFileStandardOpenOption, WRITE)
 
-inline OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_get_CREATE();
+inline OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_get_CREATE(void);
 J2OBJC_ENUM_CONSTANT(OrgLukhnosPortmobileFileStandardOpenOption, CREATE)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgLukhnosPortmobileFileStandardOpenOption_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgLukhnosPortmobileFileStandardOpenOption_values(void);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_valueOfWithNSString_(NSString *name);
 
@@ -69,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileStandardOpenOption)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileStandardOpenOption")

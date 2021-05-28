@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/RandomAccessWeight.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/ConstantScoreScorer.h"
@@ -17,29 +15,29 @@
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/util/Bits.h"
 
-@interface OrgApacheLuceneSearchRandomAccessWeight_$1 : OrgApacheLuceneSearchTwoPhaseIterator {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/RandomAccessWeight must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneSearchRandomAccessWeight_1 : OrgApacheLuceneSearchTwoPhaseIterator {
  @public
   id<OrgApacheLuceneUtilBits> val$matchingDocs_;
 }
 
-- (jboolean)matches;
-
 - (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0
-      withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)arg$0;
+      withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+
+- (jboolean)matches;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchRandomAccessWeight_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchRandomAccessWeight_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchRandomAccessWeight_$1, val$matchingDocs_, id<OrgApacheLuceneUtilBits>)
+__attribute__((unused)) static void OrgApacheLuceneSearchRandomAccessWeight_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchRandomAccessWeight_1 *self, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *approximation);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchRandomAccessWeight_$1 *self, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchRandomAccessWeight_1 *new_OrgApacheLuceneSearchRandomAccessWeight_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *approximation) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchRandomAccessWeight_$1 *new_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchRandomAccessWeight_$1 *create_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchRandomAccessWeight_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchRandomAccessWeight_1 *create_OrgApacheLuceneSearchRandomAccessWeight_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *approximation);
 
 @implementation OrgApacheLuceneSearchRandomAccessWeight
 
@@ -60,17 +58,25 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchRandomAccessWeight_$1)
     return nil;
   }
   OrgApacheLuceneSearchDocIdSetIterator *approximation = OrgApacheLuceneSearchDocIdSetIterator_allWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) maxDoc]);
-  OrgApacheLuceneSearchTwoPhaseIterator *twoPhase = create_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(matchingDocs, approximation);
+  OrgApacheLuceneSearchTwoPhaseIterator *twoPhase = create_OrgApacheLuceneSearchRandomAccessWeight_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(matchingDocs, approximation);
   return create_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchTwoPhaseIterator_(self, [self score], twoPhase);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQuery:", "RandomAccessWeight", NULL, 0x4, NULL, NULL },
-    { "getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:", "getMatchingDocs", "Lorg.apache.lucene.util.Bits;", 0x404, "Ljava.io.IOException;", NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x11, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x404, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x11, 4, 2, 3, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchRandomAccessWeight = { 2, "RandomAccessWeight", "org.apache.lucene.search", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[2].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchQuery;", "getMatchingDocs", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "scorer" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchRandomAccessWeight = { "RandomAccessWeight", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchRandomAccessWeight;
 }
 
@@ -82,17 +88,17 @@ void OrgApacheLuceneSearchRandomAccessWeight_initWithOrgApacheLuceneSearchQuery_
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchRandomAccessWeight)
 
-@implementation OrgApacheLuceneSearchRandomAccessWeight_$1
+@implementation OrgApacheLuceneSearchRandomAccessWeight_1
+
+- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0
+      withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation {
+  OrgApacheLuceneSearchRandomAccessWeight_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(self, capture$0, approximation);
+  return self;
+}
 
 - (jboolean)matches {
   jint doc = [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(approximation_)) docID];
   return [((id<OrgApacheLuceneUtilBits>) nil_chk(val$matchingDocs_)) getWithInt:doc];
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0
-      withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)arg$0 {
-  OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(self, capture$0, arg$0);
-  return self;
 }
 
 - (void)dealloc {
@@ -101,31 +107,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchRandomAccessWeight)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "matches", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchDocIdSetIterator:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[1].selector = @selector(matches);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$matchingDocs_", NULL, 0x1012, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$matchingDocs_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchRandomAccessWeight", "scorerWithOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchRandomAccessWeight_$1 = { 2, "", "org.apache.lucene.search", "RandomAccessWeight", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchRandomAccessWeight_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBits;LOrgApacheLuceneSearchDocIdSetIterator;", "LJavaIoIOException;", "LOrgApacheLuceneSearchRandomAccessWeight;", "scorerWithOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchRandomAccessWeight_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 1, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneSearchRandomAccessWeight_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchRandomAccessWeight_$1 *self, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+void OrgApacheLuceneSearchRandomAccessWeight_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchRandomAccessWeight_1 *self, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
   JreStrongAssign(&self->val$matchingDocs_, capture$0);
-  OrgApacheLuceneSearchTwoPhaseIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(self, arg$0);
+  OrgApacheLuceneSearchTwoPhaseIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(self, approximation);
 }
 
-OrgApacheLuceneSearchRandomAccessWeight_$1 *new_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchRandomAccessWeight_$1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_, capture$0, arg$0)
+OrgApacheLuceneSearchRandomAccessWeight_1 *new_OrgApacheLuceneSearchRandomAccessWeight_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchRandomAccessWeight_1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_, capture$0, approximation)
 }
 
-OrgApacheLuceneSearchRandomAccessWeight_$1 *create_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchRandomAccessWeight_$1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_, capture$0, arg$0)
+OrgApacheLuceneSearchRandomAccessWeight_1 *create_OrgApacheLuceneSearchRandomAccessWeight_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchRandomAccessWeight_1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_, capture$0, approximation)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchRandomAccessWeight_$1)

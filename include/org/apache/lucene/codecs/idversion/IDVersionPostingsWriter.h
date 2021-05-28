@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter || defined(INCLUDE_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter))
 #define OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_
 
@@ -35,18 +41,14 @@
   OrgApacheLuceneCodecsIdversionIDVersionTermState *lastState_;
   jint lastDocID_;
 }
-
-+ (NSString *)TERMS_CODEC;
-
-+ (jint)VERSION_START;
-
-+ (jint)VERSION_CURRENT;
-
-+ (OrgApacheLuceneCodecsIdversionIDVersionTermState *)emptyState;
+@property (readonly, copy, class) NSString *TERMS_CODEC NS_SWIFT_NAME(TERMS_CODEC);
+@property (readonly, class) jint VERSION_START NS_SWIFT_NAME(VERSION_START);
+@property (readonly, class) jint VERSION_CURRENT NS_SWIFT_NAME(VERSION_CURRENT);
+@property (readonly, class, strong) OrgApacheLuceneCodecsIdversionIDVersionTermState *emptyState NS_SWIFT_NAME(emptyState);
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
 
 - (void)addPositionWithInt:(jint)position
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
@@ -80,38 +82,46 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 
 - (void)startTerm;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, lastState_, OrgApacheLuceneCodecsIdversionIDVersionTermState *)
 
-inline NSString *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_TERMS_CODEC();
+inline NSString *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_TERMS_CODEC(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_TERMS_CODEC;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, TERMS_CODEC, NSString *)
 
-inline jint OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_VERSION_START();
+inline jint OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_VERSION_START(void);
 #define OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_START 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, VERSION_START, jint)
 
-inline jint OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_VERSION_CURRENT();
+inline jint OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_VERSION_CURRENT(void);
 #define OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_CURRENT 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, VERSION_CURRENT, jint)
 
-inline OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_emptyState();
+inline OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_emptyState(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, emptyState, OrgApacheLuceneCodecsIdversionIDVersionTermState *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *self, id<OrgApacheLuceneUtilBits> liveDocs);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initPackagePrivateWithOrgApacheLuceneUtilBits_(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *self, id<OrgApacheLuceneUtilBits> liveDocs);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *new_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> liveDocs) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *new_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initPackagePrivateWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> liveDocs) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *create_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> liveDocs);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *create_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initPackagePrivateWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> liveDocs);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter")

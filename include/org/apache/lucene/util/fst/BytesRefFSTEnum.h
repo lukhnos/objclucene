@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstBytesRefFSTEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstBytesRefFSTEnum_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstBytesRefFSTEnum || defined(INCLUDE_OrgApacheLuceneUtilFstBytesRefFSTEnum))
 #define OrgApacheLuceneUtilFstBytesRefFSTEnum_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief Enumerates all input (BytesRef) + output pairs in an
- FST.
+   FST.
  */
 @interface OrgApacheLuceneUtilFstBytesRefFSTEnum : OrgApacheLuceneUtilFstFSTEnum
 
@@ -34,10 +40,10 @@
 
 /*!
  @brief doFloor controls the behavior of advance: if it's true
- doFloor is true, advance positions to the biggest
- term before target.
+   doFloor is true, advance positions to the biggest
+   term before target.
  */
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst;
 
 - (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)current;
 
@@ -50,10 +56,9 @@
 
 /*!
  @brief Seeks to exactly this term, returning null if the term
- doesn't exist.
- This is faster than using <code>seekFloor</code>
+   doesn't exist.This is faster than using <code>seekFloor</code>
   or <code>seekCeil</code> because it
- short-circuits as soon the match is not found. 
+   short-circuits as soon the match is not found.
  */
 - (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
 
@@ -71,6 +76,10 @@
 - (void)grow;
 
 - (void)setCurrentLabelWithInt:(jint)label;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -102,7 +111,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBytesRefFSTEnum)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -113,12 +122,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput, output_, 
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_init(OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *new_OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *new_OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *create_OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *create_OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstBytesRefFSTEnum")

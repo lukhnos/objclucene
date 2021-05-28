@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
@@ -20,6 +19,10 @@
 #include "org/apache/lucene/util/fst/FST.h"
 #include "org/apache/lucene/util/fst/ForwardBytesReader.h"
 #include "org/apache/lucene/util/fst/ReverseBytesReader.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/fst/BytesStore must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilFstBytesStore () {
  @public
@@ -36,17 +39,19 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesStore, blocks_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesStore, current_, IOSByteArray *)
 
-inline jlong OrgApacheLuceneUtilFstBytesStore_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilFstBytesStore_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilFstBytesStore_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFstBytesStore, BASE_RAM_BYTES_USED, jlong)
 
-@interface OrgApacheLuceneUtilFstBytesStore_$1 : OrgApacheLuceneUtilFstFST_BytesReader {
+@interface OrgApacheLuceneUtilFstBytesStore_1 : OrgApacheLuceneUtilFstFST_BytesReader {
  @public
   OrgApacheLuceneUtilFstBytesStore *this$0_;
   IOSByteArray *current_;
   jint nextBuffer_;
   jint nextRead_;
 }
+
+- (instancetype)initWithOrgApacheLuceneUtilFstBytesStore:(OrgApacheLuceneUtilFstBytesStore *)outer$;
 
 - (jbyte)readByte;
 
@@ -62,30 +67,27 @@ J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFstBytesStore, BASE_RAM_B
 
 - (jboolean)reversed;
 
-- (instancetype)initWithOrgApacheLuceneUtilFstBytesStore:(OrgApacheLuceneUtilFstBytesStore *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstBytesStore_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstBytesStore_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesStore_$1, this$0_, OrgApacheLuceneUtilFstBytesStore *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesStore_$1, current_, IOSByteArray *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesStore_1, current_, IOSByteArray *)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilFstBytesStore_$1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore_$1 *self, OrgApacheLuceneUtilFstBytesStore *outer$);
+__attribute__((unused)) static void OrgApacheLuceneUtilFstBytesStore_1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore_1 *self, OrgApacheLuceneUtilFstBytesStore *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstBytesStore_$1 *new_OrgApacheLuceneUtilFstBytesStore_$1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilFstBytesStore_1 *new_OrgApacheLuceneUtilFstBytesStore_1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstBytesStore_$1 *create_OrgApacheLuceneUtilFstBytesStore_$1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$);
+__attribute__((unused)) static OrgApacheLuceneUtilFstBytesStore_1 *create_OrgApacheLuceneUtilFstBytesStore_1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBytesStore_$1)
-
-@interface OrgApacheLuceneUtilFstBytesStore_$2 : OrgApacheLuceneUtilFstFST_BytesReader {
+@interface OrgApacheLuceneUtilFstBytesStore_2 : OrgApacheLuceneUtilFstFST_BytesReader {
  @public
   OrgApacheLuceneUtilFstBytesStore *this$0_;
   IOSByteArray *current_;
   jint nextBuffer_;
   jint nextRead_;
 }
+
+- (instancetype)initWithOrgApacheLuceneUtilFstBytesStore:(OrgApacheLuceneUtilFstBytesStore *)outer$;
 
 - (jbyte)readByte;
 
@@ -101,36 +103,31 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBytesStore_$1)
 
 - (jboolean)reversed;
 
-- (instancetype)initWithOrgApacheLuceneUtilFstBytesStore:(OrgApacheLuceneUtilFstBytesStore *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstBytesStore_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstBytesStore_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesStore_$2, this$0_, OrgApacheLuceneUtilFstBytesStore *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesStore_$2, current_, IOSByteArray *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesStore_2, current_, IOSByteArray *)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilFstBytesStore_$2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore_$2 *self, OrgApacheLuceneUtilFstBytesStore *outer$);
+__attribute__((unused)) static void OrgApacheLuceneUtilFstBytesStore_2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore_2 *self, OrgApacheLuceneUtilFstBytesStore *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstBytesStore_$2 *new_OrgApacheLuceneUtilFstBytesStore_$2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilFstBytesStore_2 *new_OrgApacheLuceneUtilFstBytesStore_2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstBytesStore_$2 *create_OrgApacheLuceneUtilFstBytesStore_$2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBytesStore_$2)
+__attribute__((unused)) static OrgApacheLuceneUtilFstBytesStore_2 *create_OrgApacheLuceneUtilFstBytesStore_2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
 
 @implementation OrgApacheLuceneUtilFstBytesStore
 
-- (instancetype)initWithInt:(jint)blockBits {
-  OrgApacheLuceneUtilFstBytesStore_initWithInt_(self, blockBits);
+- (instancetype)initPackagePrivateWithInt:(jint)blockBits {
+  OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithInt_(self, blockBits);
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                                             withLong:(jlong)numBytes
-                                              withInt:(jint)maxBlockSize {
-  OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_withLong_withInt_(self, inArg, numBytes, maxBlockSize);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                                           withLong:(jlong)numBytes
+                                                            withInt:(jint)maxBlockSize {
+  OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithOrgApacheLuceneStoreDataInput_withLong_withInt_(self, inArg, numBytes, maxBlockSize);
   return self;
 }
 
@@ -156,8 +153,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
   while (len > 0) {
     jint chunk = blockSize_ - nextWrite_;
     if (len <= chunk) {
-      JreAssert((b != nil), (@"org/apache/lucene/util/fst/BytesStore.java:103 condition failed: assert b != null;"));
-      JreAssert((current_ != nil), (@"org/apache/lucene/util/fst/BytesStore.java:104 condition failed: assert current != null;"));
+      JreAssert(b != nil, @"org/apache/lucene/util/fst/BytesStore.java:103 condition failed: assert b != null;");
+      JreAssert(current_ != nil, @"org/apache/lucene/util/fst/BytesStore.java:104 condition failed: assert current != null;");
       JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(b, offset, current_, nextWrite_, len);
       nextWrite_ += len;
       break;
@@ -183,7 +180,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
              withByteArray:(IOSByteArray *)b
                    withInt:(jint)offset
                    withInt:(jint)len {
-  JreAssert((dest + len <= [self getPosition]), (JreStrcat("$J$J$I", @"dest=", dest, @" pos=", [self getPosition], @" len=", len)));
+  JreAssert(dest + len <= [self getPosition], JreStrcat("$J$J$I", @"dest=", dest, @" pos=", [self getPosition], @" len=", len));
   jlong end = dest + len;
   jint blockIndex = (jint) (JreRShift64(end, blockBits_));
   jint downTo = (jint) (end & blockMask_);
@@ -210,7 +207,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
 - (void)copyBytesWithLong:(jlong)src
                  withLong:(jlong)dest
                   withInt:(jint)len {
-  JreAssert((src < dest), (@"org/apache/lucene/util/fst/BytesStore.java:189 condition failed: assert src < dest;"));
+  JreAssert(src < dest, @"org/apache/lucene/util/fst/BytesStore.java:189 condition failed: assert src < dest;");
   jlong end = src + len;
   jint blockIndex = (jint) (JreRShift64(end, blockBits_));
   jint downTo = (jint) (end & blockMask_);
@@ -253,15 +250,15 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
 
 - (void)reverseWithLong:(jlong)srcPos
                withLong:(jlong)destPos {
-  JreAssert((srcPos < destPos), (@"org/apache/lucene/util/fst/BytesStore.java:264 condition failed: assert srcPos < destPos;"));
-  JreAssert((destPos < [self getPosition]), (@"org/apache/lucene/util/fst/BytesStore.java:265 condition failed: assert destPos < getPosition();"));
+  JreAssert(srcPos < destPos, @"org/apache/lucene/util/fst/BytesStore.java:264 condition failed: assert srcPos < destPos;");
+  JreAssert(destPos < [self getPosition], @"org/apache/lucene/util/fst/BytesStore.java:265 condition failed: assert destPos < getPosition();");
   jint srcBlockIndex = (jint) (JreRShift64(srcPos, blockBits_));
   jint src = (jint) (srcPos & blockMask_);
   IOSByteArray *srcBlock = [((id<JavaUtilList>) nil_chk(blocks_)) getWithInt:srcBlockIndex];
   jint destBlockIndex = (jint) (JreRShift64(destPos, blockBits_));
   jint dest = (jint) (destPos & blockMask_);
   IOSByteArray *destBlock = [blocks_ getWithInt:destBlockIndex];
-  jint limit = (jint) (destPos - srcPos + 1) / 2;
+  jint limit = JreIntDiv((jint) (destPos - srcPos + 1), 2);
   for (jint i = 0; i < limit; i++) {
     jbyte b = IOSByteArray_Get(nil_chk(srcBlock), src);
     *IOSByteArray_GetRef(srcBlock, src) = IOSByteArray_Get(nil_chk(destBlock), dest);
@@ -302,8 +299,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
 }
 
 - (void)truncateWithLong:(jlong)newLen {
-  JreAssert((newLen <= [self getPosition]), (@"org/apache/lucene/util/fst/BytesStore.java:323 condition failed: assert newLen <= getPosition();"));
-  JreAssert((newLen >= 0), (@"org/apache/lucene/util/fst/BytesStore.java:324 condition failed: assert newLen >= 0;"));
+  JreAssert(newLen <= [self getPosition], @"org/apache/lucene/util/fst/BytesStore.java:323 condition failed: assert newLen <= getPosition();");
+  JreAssert(newLen >= 0, @"org/apache/lucene/util/fst/BytesStore.java:324 condition failed: assert newLen >= 0;");
   jint blockIndex = (jint) (JreRShift64(newLen, blockBits_));
   nextWrite_ = (jint) (newLen & blockMask_);
   if (nextWrite_ == 0) {
@@ -317,7 +314,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
   else {
     JreStrongAssign(&current_, [blocks_ getWithInt:blockIndex]);
   }
-  JreAssert((newLen == [self getPosition]), (@"org/apache/lucene/util/fst/BytesStore.java:337 condition failed: assert newLen == getPosition();"));
+  JreAssert(newLen == [self getPosition], @"org/apache/lucene/util/fst/BytesStore.java:337 condition failed: assert newLen == getPosition();");
 }
 
 - (void)finish {
@@ -337,9 +334,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
 
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getForwardReader {
   if ([((id<JavaUtilList>) nil_chk(blocks_)) size] == 1) {
-    return create_OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_([blocks_ getWithInt:0]);
+    return create_OrgApacheLuceneUtilFstForwardBytesReader_initPackagePrivateWithByteArray_([blocks_ getWithInt:0]);
   }
-  return create_OrgApacheLuceneUtilFstBytesStore_$1_initWithOrgApacheLuceneUtilFstBytesStore_(self);
+  return create_OrgApacheLuceneUtilFstBytesStore_1_initWithOrgApacheLuceneUtilFstBytesStore_(self);
 }
 
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getReverseReader {
@@ -348,9 +345,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
 
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getReverseReaderWithBoolean:(jboolean)allowSingle {
   if (allowSingle && [((id<JavaUtilList>) nil_chk(blocks_)) size] == 1) {
-    return create_OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_([((id<JavaUtilList>) nil_chk(blocks_)) getWithInt:0]);
+    return create_OrgApacheLuceneUtilFstReverseBytesReader_initPackagePrivateWithByteArray_([((id<JavaUtilList>) nil_chk(blocks_)) getWithInt:0]);
   }
-  return create_OrgApacheLuceneUtilFstBytesStore_$2_initWithOrgApacheLuceneUtilFstBytesStore_(self);
+  return create_OrgApacheLuceneUtilFstBytesStore_2_initWithOrgApacheLuceneUtilFstBytesStore_(self);
 }
 
 - (jlong)ramBytesUsed {
@@ -366,13 +363,76 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
 }
 
 - (NSString *)description {
-  return JreStrcat("$$IC", [[self getClass] getSimpleName], @"(numBlocks=", [((id<JavaUtilList>) nil_chk(blocks_)) size], ')');
+  return JreStrcat("$$IC", [[self java_getClass] getSimpleName], @"(numBlocks=", [((id<JavaUtilList>) nil_chk(blocks_)) size], ')');
 }
 
 - (void)dealloc {
   RELEASE_(blocks_);
   RELEASE_(current_);
   [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 6, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 19, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstFST_BytesReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstFST_BytesReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstFST_BytesReader;", 0x0, 20, 21, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 22, -1, -1 },
+    { NULL, "LNSString;", 0x1, 23, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:);
+  methods[1].selector = @selector(initPackagePrivateWithOrgApacheLuceneStoreDataInput:withLong:withInt:);
+  methods[2].selector = @selector(writeByteWithInt:withByte:);
+  methods[3].selector = @selector(writeByteWithByte:);
+  methods[4].selector = @selector(writeBytesWithByteArray:withInt:withInt:);
+  methods[5].selector = @selector(getBlockBits);
+  methods[6].selector = @selector(writeBytesWithLong:withByteArray:withInt:withInt:);
+  methods[7].selector = @selector(copyBytesWithLong:withLong:withInt:);
+  methods[8].selector = @selector(writeIntWithLong:withInt:);
+  methods[9].selector = @selector(reverseWithLong:withLong:);
+  methods[10].selector = @selector(skipBytesWithInt:);
+  methods[11].selector = @selector(getPosition);
+  methods[12].selector = @selector(truncateWithLong:);
+  methods[13].selector = @selector(finish);
+  methods[14].selector = @selector(writeToWithOrgApacheLuceneStoreDataOutput:);
+  methods[15].selector = @selector(getForwardReader);
+  methods[16].selector = @selector(getReverseReader);
+  methods[17].selector = @selector(getReverseReaderWithBoolean:);
+  methods[18].selector = @selector(ramBytesUsed);
+  methods[19].selector = @selector(getChildResources);
+  methods[20].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 24, -1, -1 },
+    { "blocks_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 25, -1 },
+    { "blockSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "blockBits_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "blockMask_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "current_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextWrite_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "I", "LOrgApacheLuceneStoreDataInput;JI", "LJavaIoIOException;", "writeByte", "IB", "B", "writeBytes", "[BII", "J[BII", "copyBytes", "JJI", "writeInt", "JI", "reverse", "JJ", "skipBytes", "truncate", "J", "writeTo", "LOrgApacheLuceneStoreDataOutput;", "getReverseReader", "Z", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString", &OrgApacheLuceneUtilFstBytesStore_BASE_RAM_BYTES_USED, "Ljava/util/List<[B>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstBytesStore = { "BytesStore", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x0, 21, 7, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilFstBytesStore;
 }
 
 + (void)initialize {
@@ -382,46 +442,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "BytesStore", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDataInput:withLong:withInt:", "BytesStore", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "writeByteWithInt:withByte:", "writeByte", "V", 0x1, NULL, NULL },
-    { "writeByteWithByte:", "writeByte", "V", 0x1, NULL, NULL },
-    { "writeBytesWithByteArray:withInt:withInt:", "writeBytes", "V", 0x1, NULL, NULL },
-    { "getBlockBits", NULL, "I", 0x0, NULL, NULL },
-    { "writeBytesWithLong:withByteArray:withInt:withInt:", "writeBytes", "V", 0x0, NULL, NULL },
-    { "copyBytesWithLong:withLong:withInt:", "copyBytes", "V", 0x1, NULL, NULL },
-    { "writeIntWithLong:withInt:", "writeInt", "V", 0x1, NULL, NULL },
-    { "reverseWithLong:withLong:", "reverse", "V", 0x1, NULL, NULL },
-    { "skipBytesWithInt:", "skipBytes", "V", 0x1, NULL, NULL },
-    { "getPosition", NULL, "J", 0x1, NULL, NULL },
-    { "truncateWithLong:", "truncate", "V", 0x1, NULL, NULL },
-    { "finish", NULL, "V", 0x1, NULL, NULL },
-    { "writeToWithOrgApacheLuceneStoreDataOutput:", "writeTo", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getForwardReader", NULL, "Lorg.apache.lucene.util.fst.FST$BytesReader;", 0x1, NULL, NULL },
-    { "getReverseReader", NULL, "Lorg.apache.lucene.util.fst.FST$BytesReader;", 0x1, NULL, NULL },
-    { "getReverseReaderWithBoolean:", "getReverseReader", "Lorg.apache.lucene.util.fst.FST$BytesReader;", 0x0, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilFstBytesStore_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "blocks_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<[LB;>;", .constantValue.asLong = 0 },
-    { "blockSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockBits_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockMask_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextWrite_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstBytesStore = { 2, "BytesStore", "org.apache.lucene.util.fst", NULL, 0x0, 21, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilFstBytesStore;
-}
-
 @end
 
-void OrgApacheLuceneUtilFstBytesStore_initWithInt_(OrgApacheLuceneUtilFstBytesStore *self, jint blockBits) {
+void OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithInt_(OrgApacheLuceneUtilFstBytesStore *self, jint blockBits) {
   OrgApacheLuceneStoreDataOutput_init(self);
   JreStrongAssignAndConsume(&self->blocks_, new_JavaUtilArrayList_init());
   self->blockBits_ = blockBits;
@@ -430,15 +453,15 @@ void OrgApacheLuceneUtilFstBytesStore_initWithInt_(OrgApacheLuceneUtilFstBytesSt
   self->nextWrite_ = self->blockSize_;
 }
 
-OrgApacheLuceneUtilFstBytesStore *new_OrgApacheLuceneUtilFstBytesStore_initWithInt_(jint blockBits) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstBytesStore, initWithInt_, blockBits)
+OrgApacheLuceneUtilFstBytesStore *new_OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithInt_(jint blockBits) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstBytesStore, initPackagePrivateWithInt_, blockBits)
 }
 
-OrgApacheLuceneUtilFstBytesStore *create_OrgApacheLuceneUtilFstBytesStore_initWithInt_(jint blockBits) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstBytesStore, initWithInt_, blockBits)
+OrgApacheLuceneUtilFstBytesStore *create_OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithInt_(jint blockBits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstBytesStore, initPackagePrivateWithInt_, blockBits)
 }
 
-void OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneUtilFstBytesStore *self, OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize) {
+void OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneUtilFstBytesStore *self, OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize) {
   OrgApacheLuceneStoreDataOutput_init(self);
   JreStrongAssignAndConsume(&self->blocks_, new_JavaUtilArrayList_init());
   jint blockSize = 2;
@@ -461,17 +484,22 @@ void OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_with
   self->nextWrite_ = ((IOSByteArray *) nil_chk([self->blocks_ getWithInt:[self->blocks_ size] - 1]))->size_;
 }
 
-OrgApacheLuceneUtilFstBytesStore *new_OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstBytesStore, initWithOrgApacheLuceneStoreDataInput_withLong_withInt_, inArg, numBytes, maxBlockSize)
+OrgApacheLuceneUtilFstBytesStore *new_OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstBytesStore, initPackagePrivateWithOrgApacheLuceneStoreDataInput_withLong_withInt_, inArg, numBytes, maxBlockSize)
 }
 
-OrgApacheLuceneUtilFstBytesStore *create_OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstBytesStore, initWithOrgApacheLuceneStoreDataInput_withLong_withInt_, inArg, numBytes, maxBlockSize)
+OrgApacheLuceneUtilFstBytesStore *create_OrgApacheLuceneUtilFstBytesStore_initPackagePrivateWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstBytesStore, initPackagePrivateWithOrgApacheLuceneStoreDataInput_withLong_withInt_, inArg, numBytes, maxBlockSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBytesStore)
 
-@implementation OrgApacheLuceneUtilFstBytesStore_$1
+@implementation OrgApacheLuceneUtilFstBytesStore_1
+
+- (instancetype)initWithOrgApacheLuceneUtilFstBytesStore:(OrgApacheLuceneUtilFstBytesStore *)outer$ {
+  OrgApacheLuceneUtilFstBytesStore_1_initWithOrgApacheLuceneUtilFstBytesStore_(self, outer$);
+  return self;
+}
 
 - (jbyte)readByte {
   if (nextRead_ == this$0_->blockSize_) {
@@ -516,16 +544,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBytesStore)
   nextBuffer_ = bufferIndex + 1;
   JreStrongAssign(&current_, [((id<JavaUtilList>) nil_chk(this$0_->blocks_)) getWithInt:bufferIndex]);
   nextRead_ = (jint) (pos & this$0_->blockMask_);
-  JreAssert(([self getPosition] == pos), (@"org/apache/lucene/util/fst/BytesStore.java:410 condition failed: assert getPosition() == pos;"));
+  JreAssert([self getPosition] == pos, @"org/apache/lucene/util/fst/BytesStore.java:410 condition failed: assert getPosition() == pos;");
 }
 
 - (jboolean)reversed {
   return false;
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilFstBytesStore:(OrgApacheLuceneUtilFstBytesStore *)outer$ {
-  OrgApacheLuceneUtilFstBytesStore_$1_initWithOrgApacheLuceneUtilFstBytesStore_(self, outer$);
-  return self;
 }
 
 - (void)dealloc {
@@ -535,45 +558,59 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBytesStore)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "readByte", NULL, "B", 0x1, NULL, NULL },
-    { "skipBytesWithLong:", "skipBytes", "V", 0x1, NULL, NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, NULL, NULL },
-    { "getPosition", NULL, "J", 0x1, NULL, NULL },
-    { "setPositionWithLong:", "setPosition", "V", 0x1, NULL, NULL },
-    { "reversed", NULL, "Z", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilFstBytesStore:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilFstBytesStore:);
+  methods[1].selector = @selector(readByte);
+  methods[2].selector = @selector(skipBytesWithLong:);
+  methods[3].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  methods[4].selector = @selector(getPosition);
+  methods[5].selector = @selector(setPositionWithLong:);
+  methods[6].selector = @selector(reversed);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.fst.BytesStore;", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextBuffer_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextRead_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneUtilFstBytesStore;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "current_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextBuffer_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextRead_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilFstBytesStore", "getForwardReader" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstBytesStore_$1 = { 2, "", "org.apache.lucene.util.fst", "BytesStore", 0x8008, 7, methods, 4, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilFstBytesStore_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilFstBytesStore;", "skipBytes", "J", "readBytes", "[BII", "setPosition", "getForwardReader" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstBytesStore_1 = { "", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x8010, 7, 4, 0, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneUtilFstBytesStore_1;
 }
 
 @end
 
-void OrgApacheLuceneUtilFstBytesStore_$1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore_$1 *self, OrgApacheLuceneUtilFstBytesStore *outer$) {
+void OrgApacheLuceneUtilFstBytesStore_1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore_1 *self, OrgApacheLuceneUtilFstBytesStore *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneUtilFstFST_BytesReader_init(self);
   self->nextRead_ = outer$->blockSize_;
 }
 
-OrgApacheLuceneUtilFstBytesStore_$1 *new_OrgApacheLuceneUtilFstBytesStore_$1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstBytesStore_$1, initWithOrgApacheLuceneUtilFstBytesStore_, outer$)
+OrgApacheLuceneUtilFstBytesStore_1 *new_OrgApacheLuceneUtilFstBytesStore_1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstBytesStore_1, initWithOrgApacheLuceneUtilFstBytesStore_, outer$)
 }
 
-OrgApacheLuceneUtilFstBytesStore_$1 *create_OrgApacheLuceneUtilFstBytesStore_$1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstBytesStore_$1, initWithOrgApacheLuceneUtilFstBytesStore_, outer$)
+OrgApacheLuceneUtilFstBytesStore_1 *create_OrgApacheLuceneUtilFstBytesStore_1_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstBytesStore_1, initWithOrgApacheLuceneUtilFstBytesStore_, outer$)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBytesStore_$1)
+@implementation OrgApacheLuceneUtilFstBytesStore_2
 
-@implementation OrgApacheLuceneUtilFstBytesStore_$2
+- (instancetype)initWithOrgApacheLuceneUtilFstBytesStore:(OrgApacheLuceneUtilFstBytesStore *)outer$ {
+  OrgApacheLuceneUtilFstBytesStore_2_initWithOrgApacheLuceneUtilFstBytesStore_(self, outer$);
+  return self;
+}
 
 - (jbyte)readByte {
   if (nextRead_ == -1) {
@@ -604,16 +641,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBytesStore_$1)
   nextBuffer_ = bufferIndex - 1;
   JreStrongAssign(&current_, [((id<JavaUtilList>) nil_chk(this$0_->blocks_)) getWithInt:bufferIndex]);
   nextRead_ = (jint) (pos & this$0_->blockMask_);
-  JreAssert(([self getPosition] == pos), (JreStrcat("$J$J", @"pos=", pos, @" getPos()=", [self getPosition])));
+  JreAssert([self getPosition] == pos, JreStrcat("$J$J", @"pos=", pos, @" getPos()=", [self getPosition]));
 }
 
 - (jboolean)reversed {
   return true;
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilFstBytesStore:(OrgApacheLuceneUtilFstBytesStore *)outer$ {
-  OrgApacheLuceneUtilFstBytesStore_$2_initWithOrgApacheLuceneUtilFstBytesStore_(self, outer$);
-  return self;
 }
 
 - (void)dealloc {
@@ -623,29 +655,40 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBytesStore_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "readByte", NULL, "B", 0x1, NULL, NULL },
-    { "skipBytesWithLong:", "skipBytes", "V", 0x1, NULL, NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, NULL, NULL },
-    { "getPosition", NULL, "J", 0x1, NULL, NULL },
-    { "setPositionWithLong:", "setPosition", "V", 0x1, NULL, NULL },
-    { "reversed", NULL, "Z", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilFstBytesStore:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilFstBytesStore:);
+  methods[1].selector = @selector(readByte);
+  methods[2].selector = @selector(skipBytesWithLong:);
+  methods[3].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  methods[4].selector = @selector(getPosition);
+  methods[5].selector = @selector(setPositionWithLong:);
+  methods[6].selector = @selector(reversed);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.fst.BytesStore;", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextBuffer_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextRead_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneUtilFstBytesStore;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "current_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextBuffer_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextRead_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilFstBytesStore", "getReverseReaderWithBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstBytesStore_$2 = { 2, "", "org.apache.lucene.util.fst", "BytesStore", 0x8008, 7, methods, 4, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilFstBytesStore_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilFstBytesStore;", "skipBytes", "J", "readBytes", "[BII", "setPosition", "getReverseReaderWithBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstBytesStore_2 = { "", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x8010, 7, 4, 0, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneUtilFstBytesStore_2;
 }
 
 @end
 
-void OrgApacheLuceneUtilFstBytesStore_$2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore_$2 *self, OrgApacheLuceneUtilFstBytesStore *outer$) {
+void OrgApacheLuceneUtilFstBytesStore_2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore_2 *self, OrgApacheLuceneUtilFstBytesStore *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneUtilFstFST_BytesReader_init(self);
   JreStrongAssign(&self->current_, [((id<JavaUtilList>) nil_chk(outer$->blocks_)) size] == 0 ? nil : [outer$->blocks_ getWithInt:0]);
@@ -653,12 +696,10 @@ void OrgApacheLuceneUtilFstBytesStore_$2_initWithOrgApacheLuceneUtilFstBytesStor
   self->nextRead_ = 0;
 }
 
-OrgApacheLuceneUtilFstBytesStore_$2 *new_OrgApacheLuceneUtilFstBytesStore_$2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstBytesStore_$2, initWithOrgApacheLuceneUtilFstBytesStore_, outer$)
+OrgApacheLuceneUtilFstBytesStore_2 *new_OrgApacheLuceneUtilFstBytesStore_2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstBytesStore_2, initWithOrgApacheLuceneUtilFstBytesStore_, outer$)
 }
 
-OrgApacheLuceneUtilFstBytesStore_$2 *create_OrgApacheLuceneUtilFstBytesStore_$2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstBytesStore_$2, initWithOrgApacheLuceneUtilFstBytesStore_, outer$)
+OrgApacheLuceneUtilFstBytesStore_2 *create_OrgApacheLuceneUtilFstBytesStore_2_initWithOrgApacheLuceneUtilFstBytesStore_(OrgApacheLuceneUtilFstBytesStore *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstBytesStore_2, initWithOrgApacheLuceneUtilFstBytesStore_, outer$)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBytesStore_$2)

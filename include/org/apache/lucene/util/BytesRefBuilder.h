@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilBytesRefBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilBytesRefBuilder_) && (INCLUDE_ALL_OrgApacheLuceneUtilBytesRefBuilder || defined(INCLUDE_OrgApacheLuceneUtilBytesRefBuilder))
 #define OrgApacheLuceneUtilBytesRefBuilder_
 
@@ -31,7 +37,7 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Append a single byte to this builder.
@@ -71,31 +77,28 @@
 - (void)clear;
 
 /*!
- @brief Replace the content of this builder with the provided bytes.
- Equivalent to
- calling <code>clear()</code> and then <code>append(byte[],int,int)</code>.
+ @brief Replace the content of this builder with the provided bytes.Equivalent to
+  calling <code>clear()</code> and then <code>append(byte[], int, int)</code>.
  */
 - (void)copyBytesWithByteArray:(IOSByteArray *)b
                        withInt:(jint)off
                        withInt:(jint)len OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief Replace the content of this builder with the provided bytes.
- Equivalent to
- calling <code>clear()</code> and then <code>append(BytesRef)</code>.
+ @brief Replace the content of this builder with the provided bytes.Equivalent to
+  calling <code>clear()</code> and then <code>append(BytesRef)</code>.
  */
 - (void)copyBytesWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)ref OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief Replace the content of this builder with the provided bytes.
- Equivalent to
- calling <code>clear()</code> and then <code>append(BytesRefBuilder)</code>.
+ @brief Replace the content of this builder with the provided bytes.Equivalent to
+  calling <code>clear()</code> and then <code>append(BytesRefBuilder)</code>.
  */
 - (void)copyBytesWithOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)builder OBJC_METHOD_FAMILY_NONE;
 
 /*!
  @brief Replace the content of this buffer with UTF-8 encoded bytes that would
- represent the provided text.
+  represent the provided text.
  */
 - (void)copyCharsWithCharArray:(IOSCharArray *)text
                        withInt:(jint)off
@@ -103,13 +106,13 @@
 
 /*!
  @brief Replace the content of this buffer with UTF-8 encoded bytes that would
- represent the provided text.
+  represent the provided text.
  */
 - (void)copyCharsWithJavaLangCharSequence:(id<JavaLangCharSequence>)text OBJC_METHOD_FAMILY_NONE;
 
 /*!
  @brief Replace the content of this buffer with UTF-8 encoded bytes that would
- represent the provided text.
+  represent the provided text.
  */
 - (void)copyCharsWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
                                   withInt:(jint)off
@@ -119,15 +122,14 @@
 
 /*!
  @brief Return a <code>BytesRef</code> that points to the internal content of this
- builder.
- Any update to the content of this builder might invalidate
- the provided <code>ref</code> and vice-versa.
+  builder.Any update to the content of this builder might invalidate
+  the provided <code>ref</code> and vice-versa.
  */
 - (OrgApacheLuceneUtilBytesRef *)get;
 
 /*!
  @brief Ensure that this builder can hold at least <code>capacity</code> bytes
- without resizing.
+  without resizing.
  */
 - (void)growWithInt:(jint)capacity;
 
@@ -160,12 +162,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBytesRefBuilder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilBytesRefBuilder_init(OrgApacheLuceneUtilBytesRefBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRefBuilder *new_OrgApacheLuceneUtilBytesRefBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRefBuilder *new_OrgApacheLuceneUtilBytesRefBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRefBuilder *create_OrgApacheLuceneUtilBytesRefBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRefBuilder *create_OrgApacheLuceneUtilBytesRefBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBytesRefBuilder")

@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexWriter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Math.h"
@@ -15,6 +13,10 @@
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/util/BitUtil.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter ()
 
@@ -53,7 +55,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingS
   if (firstStartPointer_ == -1) {
     firstStartPointer_ = maxStartPointer_ = startPointer;
   }
-  JreAssert((firstStartPointer_ > 0 && startPointer >= firstStartPointer_), (@"org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexWriter.java:185 condition failed: assert firstStartPointer > 0 && startPointer >= firstStartPointer;"));
+  JreAssert(firstStartPointer_ > 0 && startPointer >= firstStartPointer_, @"org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexWriter.java:185 condition failed: assert firstStartPointer > 0 && startPointer >= firstStartPointer;");
   *IOSIntArray_GetRef(nil_chk(docBaseDeltas_), blockChunks_) = numDocs;
   *IOSLongArray_GetRef(nil_chk(startPointerDeltas_), blockChunks_) = startPointer - maxStartPointer_;
   ++blockChunks_;
@@ -87,26 +89,37 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingS
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexOutput:withInt:", "CompressingStoredFieldsIndexWriter", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x2, NULL, NULL },
-    { "writeBlock", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "writeIndexWithInt:withLong:", "writeIndex", "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "finishWithInt:withLong:", "finish", "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x0, 2, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x0, 4, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexOutput:withInt:);
+  methods[1].selector = @selector(reset);
+  methods[2].selector = @selector(writeBlock);
+  methods[3].selector = @selector(writeIndexWithInt:withLong:);
+  methods[4].selector = @selector(finishWithInt:withLong:);
+  methods[5].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fieldsIndexOut_", NULL, 0x10, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockSize_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalDocs_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockDocs_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockChunks_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "firstStartPointer_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxStartPointer_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "docBaseDeltas_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startPointerDeltas_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
+    { "fieldsIndexOut_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "blockSize_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "totalDocs_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "blockDocs_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "blockChunks_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "firstStartPointer_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "maxStartPointer_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "docBaseDeltas_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "startPointerDeltas_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter = { 2, "CompressingStoredFieldsIndexWriter", "org.apache.lucene.codecs.compressing", NULL, 0x11, 6, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexOutput;I", "LJavaIoIOException;", "writeIndex", "IJ", "finish" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter = { "CompressingStoredFieldsIndexWriter", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x11, 6, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter;
 }
 
@@ -141,7 +154,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_reset(Or
 }
 
 void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_writeBlock(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter *self) {
-  JreAssert((self->blockChunks_ > 0), (@"org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexWriter.java:105 condition failed: assert blockChunks > 0;"));
+  JreAssert(self->blockChunks_ > 0, @"org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexWriter.java:105 condition failed: assert blockChunks > 0;");
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->fieldsIndexOut_)) writeVIntWithInt:self->blockChunks_];
   jint avgChunkDocs;
   if (self->blockChunks_ == 1) {
@@ -165,7 +178,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_writeBlo
   docBase = 0;
   for (jint i = 0; i < self->blockChunks_; ++i) {
     jlong delta = docBase - avgChunkDocs * i;
-    JreAssert((OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(OrgApacheLuceneUtilBitUtil_zigZagEncodeWithLong_(delta)) <= [((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) bitsPerValue]), (@"org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexWriter.java:139 condition failed: assert PackedInts.bitsRequired(zigZagEncode(delta)) <= writer.bitsPerValue();"));
+    JreAssert(OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(OrgApacheLuceneUtilBitUtil_zigZagEncodeWithLong_(delta)) <= [((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) bitsPerValue], @"org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexWriter.java:139 condition failed: assert PackedInts.bitsRequired(zigZagEncode(delta)) <= writer.bitsPerValue();");
     [writer addWithLong:OrgApacheLuceneUtilBitUtil_zigZagEncodeWithLong_(delta)];
     docBase += IOSIntArray_Get(nil_chk(self->docBaseDeltas_), i);
   }
@@ -176,7 +189,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_writeBlo
     avgChunkSize = 0;
   }
   else {
-    avgChunkSize = (self->maxStartPointer_ - self->firstStartPointer_) / (self->blockChunks_ - 1);
+    avgChunkSize = JreLongDiv((self->maxStartPointer_ - self->firstStartPointer_), (self->blockChunks_ - 1));
   }
   [self->fieldsIndexOut_ writeVLongWithLong:avgChunkSize];
   jlong startPointer = 0;
@@ -193,7 +206,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_writeBlo
   for (jint i = 0; i < self->blockChunks_; ++i) {
     startPointer += IOSLongArray_Get(nil_chk(self->startPointerDeltas_), i);
     jlong delta = startPointer - avgChunkSize * i;
-    JreAssert((OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(OrgApacheLuceneUtilBitUtil_zigZagEncodeWithLong_(delta)) <= [((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) bitsPerValue]), (@"org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexWriter.java:170 condition failed: assert PackedInts.bitsRequired(zigZagEncode(delta)) <= writer.bitsPerValue();"));
+    JreAssert(OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(OrgApacheLuceneUtilBitUtil_zigZagEncodeWithLong_(delta)) <= [((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) bitsPerValue], @"org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexWriter.java:170 condition failed: assert PackedInts.bitsRequired(zigZagEncode(delta)) <= writer.bitsPerValue();");
     [writer addWithLong:OrgApacheLuceneUtilBitUtil_zigZagEncodeWithLong_(delta)];
   }
   [((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) finish];

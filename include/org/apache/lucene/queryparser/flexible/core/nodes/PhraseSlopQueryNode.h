@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_
 
@@ -36,10 +42,10 @@
 #pragma mark Public
 
 /*!
- @exception QueryNodeError throw in overridden method to disallow
+ @throw QueryNodeErrorthrow in overridden method to disallow
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
-                                                                     withInt:(jint)value;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
+                                                                               withInt:(jint)value;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -49,11 +55,17 @@
 
 - (jint)getValue;
 
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
+
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -69,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlop
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode")

@@ -3,11 +3,10 @@
 //  source: ./core/src/java/org/apache/lucene/index/SegmentDocValues.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Character.h"
 #include "java/lang/Long.h"
+#include "java/lang/Throwable.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
@@ -23,6 +22,15 @@
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/RefCount.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SegmentDocValues must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/index/SegmentDocValues must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneIndexSegmentDocValues () {
  @public
@@ -40,34 +48,38 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentDocValues, genDVProducers_, id<Ja
 
 __attribute__((unused)) static OrgApacheLuceneUtilRefCount *OrgApacheLuceneIndexSegmentDocValues_newDocValuesProducerWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withJavaLangLong_withOrgApacheLuceneIndexFieldInfos_(OrgApacheLuceneIndexSegmentDocValues *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, JavaLangLong *gen, OrgApacheLuceneIndexFieldInfos *infos);
 
-@interface OrgApacheLuceneIndexSegmentDocValues_$1 : OrgApacheLuceneUtilRefCount {
+@interface OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount : OrgApacheLuceneUtilRefCount {
  @public
-  OrgApacheLuceneIndexSegmentDocValues *this$0_;
+  WEAK_ OrgApacheLuceneIndexSegmentDocValues *this$0_;
   JavaLangLong *val$gen_;
 }
 
-- (void)release__;
-
 - (instancetype)initWithOrgApacheLuceneIndexSegmentDocValues:(OrgApacheLuceneIndexSegmentDocValues *)outer$
                                             withJavaLangLong:(JavaLangLong *)capture$0
-                  withOrgApacheLuceneCodecsDocValuesProducer:(OrgApacheLuceneCodecsDocValuesProducer *)arg$0;
+                  withOrgApacheLuceneCodecsDocValuesProducer:(OrgApacheLuceneCodecsDocValuesProducer *)object;
+
+- (void)release__;
+
+- (OrgApacheLuceneCodecsDocValuesProducer *)get;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSegmentDocValues_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentDocValues_$1, this$0_, OrgApacheLuceneIndexSegmentDocValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentDocValues_$1, val$gen_, JavaLangLong *)
+__attribute__((unused)) static void OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount *self, OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *object);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexSegmentDocValues_$1_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues_$1 *self, OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *arg$0);
+__attribute__((unused)) static OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount *new_OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *object) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexSegmentDocValues_$1 *new_OrgApacheLuceneIndexSegmentDocValues_$1_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount *create_OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *object);
 
-__attribute__((unused)) static OrgApacheLuceneIndexSegmentDocValues_$1 *create_OrgApacheLuceneIndexSegmentDocValues_$1_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentDocValues_$1)
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount)
 
 @implementation OrgApacheLuceneIndexSegmentDocValues
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneIndexSegmentDocValues_initPackagePrivate(self);
+  return self;
+}
 
 - (OrgApacheLuceneUtilRefCount *)newDocValuesProducerWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
                                                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
@@ -81,46 +93,39 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentDocValues_$1)
                                        withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                       withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)infos {
   @synchronized(self) {
-    OrgApacheLuceneUtilRefCount *dvp = [((id<JavaUtilMap>) nil_chk(genDVProducers_)) getWithId:JavaLangLong_valueOfWithLong_(gen)];
+    OrgApacheLuceneUtilRefCount *dvp = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(genDVProducers_)) getWithId:JavaLangLong_valueOfWithLong_(gen)]);
     if (dvp == nil) {
       dvp = OrgApacheLuceneIndexSegmentDocValues_newDocValuesProducerWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withJavaLangLong_withOrgApacheLuceneIndexFieldInfos_(self, si, dir, JavaLangLong_valueOfWithLong_(gen), infos);
-      JreAssert((dvp != nil), (@"org/apache/lucene/index/SegmentDocValues.java:68 condition failed: assert dvp != null;"));
+      JreAssert(dvp != nil, @"org/apache/lucene/index/SegmentDocValues.java:78 condition failed: assert dvp != null;");
       [genDVProducers_ putWithId:JavaLangLong_valueOfWithLong_(gen) withId:dvp];
     }
     else {
       [dvp incRef];
     }
-    return [((OrgApacheLuceneUtilRefCount *) nil_chk(dvp)) get];
+    return JreRetainedLocalValue([((OrgApacheLuceneUtilRefCount *) nil_chk(dvp)) get]);
   }
 }
 
 - (void)decRefWithJavaUtilList:(id<JavaUtilList>)dvProducersGens {
   @synchronized(self) {
-    NSException *t = nil;
+    JavaLangThrowable *t = nil;
     for (JavaLangLong * __strong gen in nil_chk(dvProducersGens)) {
-      OrgApacheLuceneUtilRefCount *dvp = [((id<JavaUtilMap>) nil_chk(genDVProducers_)) getWithId:gen];
-      JreAssert((dvp != nil), (JreStrcat("$@", @"gen=", gen)));
+      OrgApacheLuceneUtilRefCount *dvp = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(genDVProducers_)) getWithId:gen]);
+      JreAssert(dvp != nil, JreStrcat("$@", @"gen=", gen));
       @try {
         [((OrgApacheLuceneUtilRefCount *) nil_chk(dvp)) decRef];
       }
-      @catch (NSException *th) {
+      @catch (JavaLangThrowable *th) {
         if (t != nil) {
           t = th;
         }
       }
     }
     if (t != nil) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(t);
+      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(t);
     }
   }
 }
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexSegmentDocValues_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(genDVProducers_);
@@ -128,49 +133,65 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "newDocValuesProducerWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreDirectory:withJavaLangLong:withOrgApacheLuceneIndexFieldInfos:", "newDocValuesProducer", "Lorg.apache.lucene.util.RefCount;", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/SegmentCommitInfo;Lorg/apache/lucene/store/Directory;Ljava/lang/Long;Lorg/apache/lucene/index/FieldInfos;)Lorg/apache/lucene/util/RefCount<Lorg/apache/lucene/codecs/DocValuesProducer;>;" },
-    { "getDocValuesProducerWithLong:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexFieldInfos:", "getDocValuesProducer", "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x20, "Ljava.io.IOException;", NULL },
-    { "decRefWithJavaUtilList:", "decRef", "V", 0x20, "Ljava.io.IOException;", "(Ljava/util/List<Ljava/lang/Long;>;)V" },
-    { "init", "SegmentDocValues", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilRefCount;", 0x2, 0, 1, 2, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesProducer;", 0x20, 4, 5, 2, -1, -1, -1 },
+    { NULL, "V", 0x20, 6, 7, 2, 8, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(newDocValuesProducerWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreDirectory:withJavaLangLong:withOrgApacheLuceneIndexFieldInfos:);
+  methods[2].selector = @selector(getDocValuesProducerWithLong:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexFieldInfos:);
+  methods[3].selector = @selector(decRefWithJavaUtilList:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "genDVProducers_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Long;Lorg/apache/lucene/util/RefCount<Lorg/apache/lucene/codecs/DocValuesProducer;>;>;", .constantValue.asLong = 0 },
+    { "genDVProducers_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 9, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentDocValues = { 2, "SegmentDocValues", "org.apache.lucene.index", NULL, 0x10, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "newDocValuesProducer", "LOrgApacheLuceneIndexSegmentCommitInfo;LOrgApacheLuceneStoreDirectory;LJavaLangLong;LOrgApacheLuceneIndexFieldInfos;", "LJavaIoIOException;", "(Lorg/apache/lucene/index/SegmentCommitInfo;Lorg/apache/lucene/store/Directory;Ljava/lang/Long;Lorg/apache/lucene/index/FieldInfos;)Lorg/apache/lucene/util/RefCount<Lorg/apache/lucene/codecs/DocValuesProducer;>;", "getDocValuesProducer", "JLOrgApacheLuceneIndexSegmentCommitInfo;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexFieldInfos;", "decRef", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Long;>;)V", "Ljava/util/Map<Ljava/lang/Long;Lorg/apache/lucene/util/RefCount<Lorg/apache/lucene/codecs/DocValuesProducer;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentDocValues = { "SegmentDocValues", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSegmentDocValues;
 }
 
 @end
 
+void OrgApacheLuceneIndexSegmentDocValues_initPackagePrivate(OrgApacheLuceneIndexSegmentDocValues *self) {
+  NSObject_init(self);
+  JreStrongAssignAndConsume(&self->genDVProducers_, new_JavaUtilHashMap_init());
+}
+
+OrgApacheLuceneIndexSegmentDocValues *new_OrgApacheLuceneIndexSegmentDocValues_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentDocValues, initPackagePrivate)
+}
+
+OrgApacheLuceneIndexSegmentDocValues *create_OrgApacheLuceneIndexSegmentDocValues_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentDocValues, initPackagePrivate)
+}
+
 OrgApacheLuceneUtilRefCount *OrgApacheLuceneIndexSegmentDocValues_newDocValuesProducerWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withJavaLangLong_withOrgApacheLuceneIndexFieldInfos_(OrgApacheLuceneIndexSegmentDocValues *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, JavaLangLong *gen, OrgApacheLuceneIndexFieldInfos *infos) {
-  OrgApacheLuceneStoreDirectory *dvDir = dir;
+  OrgApacheLuceneStoreDirectory *dvDir = JreRetainedLocalValue(dir);
   NSString *segmentSuffix = @"";
   if ([((JavaLangLong *) nil_chk(gen)) longLongValue] != -1) {
     dvDir = ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_))->dir_;
     segmentSuffix = JavaLangLong_toStringWithLong_withInt_([gen longLongValue], JavaLangCharacter_MAX_RADIX);
   }
   OrgApacheLuceneIndexSegmentReadState *srs = create_OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_(dvDir, ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_, infos, JreLoadStatic(OrgApacheLuceneStoreIOContext, READ), segmentSuffix);
-  OrgApacheLuceneCodecsDocValuesFormat *dvFormat = [((OrgApacheLuceneCodecsCodec *) nil_chk([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si->info_)) getCodec])) docValuesFormat];
-  return create_OrgApacheLuceneIndexSegmentDocValues_$1_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(self, gen, [((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk(dvFormat)) fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:srs]);
-}
-
-void OrgApacheLuceneIndexSegmentDocValues_init(OrgApacheLuceneIndexSegmentDocValues *self) {
-  NSObject_init(self);
-  JreStrongAssignAndConsume(&self->genDVProducers_, new_JavaUtilHashMap_init());
-}
-
-OrgApacheLuceneIndexSegmentDocValues *new_OrgApacheLuceneIndexSegmentDocValues_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentDocValues, init)
-}
-
-OrgApacheLuceneIndexSegmentDocValues *create_OrgApacheLuceneIndexSegmentDocValues_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentDocValues, init)
+  OrgApacheLuceneCodecsDocValuesFormat *dvFormat = JreRetainedLocalValue([((OrgApacheLuceneCodecsCodec *) nil_chk([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si->info_)) getCodec])) docValuesFormat]);
+  return create_OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(self, gen, [((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk(dvFormat)) fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:srs]);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentDocValues)
 
-@implementation OrgApacheLuceneIndexSegmentDocValues_$1
+@implementation OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount
+
+- (instancetype)initWithOrgApacheLuceneIndexSegmentDocValues:(OrgApacheLuceneIndexSegmentDocValues *)outer$
+                                            withJavaLangLong:(JavaLangLong *)capture$0
+                  withOrgApacheLuceneCodecsDocValuesProducer:(OrgApacheLuceneCodecsDocValuesProducer *)object {
+  OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(self, outer$, capture$0, object);
+  return self;
+}
 
 - (void)release__ {
   [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(object_)) close];
@@ -179,48 +200,50 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentDocValues)
   }
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentDocValues:(OrgApacheLuceneIndexSegmentDocValues *)outer$
-                                            withJavaLangLong:(JavaLangLong *)capture$0
-                  withOrgApacheLuceneCodecsDocValuesProducer:(OrgApacheLuceneCodecsDocValuesProducer *)arg$0 {
-  OrgApacheLuceneIndexSegmentDocValues_$1_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(self, outer$, capture$0, arg$0);
-  return self;
+- (void)__javaClone:(OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount *)original {
+  [super __javaClone:original];
+  [this$0_ release];
 }
 
 - (void)dealloc {
-  RELEASE_(this$0_);
   RELEASE_(val$gen_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "release__", "release", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexSegmentDocValues:withJavaLangLong:withOrgApacheLuceneCodecsDocValuesProducer:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSegmentDocValues:withJavaLangLong:withOrgApacheLuceneCodecsDocValuesProducer:);
+  methods[1].selector = @selector(release__);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.SegmentDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$gen_", NULL, 0x1012, "Ljava.lang.Long;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexSegmentDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$gen_", "LJavaLangLong;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.codecs.DocValuesProducer;"};
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexSegmentDocValues", "newDocValuesProducerWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreDirectory:withJavaLangLong:withOrgApacheLuceneIndexFieldInfos:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentDocValues_$1 = { 2, "", "org.apache.lucene.index", "SegmentDocValues", 0x8008, 2, methods, 2, fields, 1, superclass_type_args, 0, NULL, &enclosing_method, "Lorg/apache/lucene/util/RefCount<Lorg/apache/lucene/codecs/DocValuesProducer;>;" };
-  return &_OrgApacheLuceneIndexSegmentDocValues_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentDocValues;LJavaLangLong;LOrgApacheLuceneCodecsDocValuesProducer;", "release", "LJavaIoIOException;", "LOrgApacheLuceneIndexSegmentDocValues;", "newDocValuesProducerWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreDirectory:withJavaLangLong:withOrgApacheLuceneIndexFieldInfos:", "Lorg/apache/lucene/util/RefCount<Lorg/apache/lucene/codecs/DocValuesProducer;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount = { "DocValuesProducerRefCount", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 2, 2, 3, -1, 4, 5, -1 };
+  return &_OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount;
 }
 
 @end
 
-void OrgApacheLuceneIndexSegmentDocValues_$1_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues_$1 *self, OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *arg$0) {
-  JreStrongAssign(&self->this$0_, outer$);
+void OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount *self, OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *object) {
+  self->this$0_ = outer$;
   JreStrongAssign(&self->val$gen_, capture$0);
-  OrgApacheLuceneUtilRefCount_initWithId_(self, arg$0);
+  OrgApacheLuceneUtilRefCount_initWithId_(self, object);
 }
 
-OrgApacheLuceneIndexSegmentDocValues_$1 *new_OrgApacheLuceneIndexSegmentDocValues_$1_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentDocValues_$1, initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_, outer$, capture$0, arg$0)
+OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount *new_OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *object) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount, initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_, outer$, capture$0, object)
 }
 
-OrgApacheLuceneIndexSegmentDocValues_$1 *create_OrgApacheLuceneIndexSegmentDocValues_$1_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentDocValues_$1, initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_, outer$, capture$0, arg$0)
+OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount *create_OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount_initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_(OrgApacheLuceneIndexSegmentDocValues *outer$, JavaLangLong *capture$0, OrgApacheLuceneCodecsDocValuesProducer *object) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount, initWithOrgApacheLuceneIndexSegmentDocValues_withJavaLangLong_withOrgApacheLuceneCodecsDocValuesProducer_, outer$, capture$0, object)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentDocValues_$1)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentDocValues_1DocValuesProducerRefCount)

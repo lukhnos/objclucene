@@ -8,6 +8,10 @@
 #include "org/apache/lucene/search/similarities/BasicStats.h"
 #include "org/apache/lucene/search/similarities/Lambda.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/Lambda must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSimilaritiesLambda
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -36,13 +40,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lambda", NULL, 0x1, NULL, NULL },
-    { "lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats:", "lambda", "F", 0x401, NULL, NULL },
-    { "explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x401, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x401, 2, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 3, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLambda = { 2, "Lambda", "org.apache.lucene.search.similarities", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats:);
+  methods[2].selector = @selector(explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "lambda", "LOrgApacheLuceneSearchSimilaritiesBasicStats;", "explain", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLambda = { "Lambda", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x401, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesLambda;
 }
 

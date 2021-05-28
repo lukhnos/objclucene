@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_
 
@@ -27,19 +33,19 @@
 
 /*!
  @brief Function that returns <code>org.apache.lucene.index.PostingsEnum.freq()</code> for the
- supplied term in every document.
+  supplied term in every document.
  <p>
- If the term does not exist in the document, returns 0.
- If frequencies are omitted, returns 1.
+  If the term does not exist in the document, returns 0.
+  If frequencies are omitted, returns 1.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource : OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)val
-                    withNSString:(NSString *)indexedField
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                              withNSString:(NSString *)val
+                              withNSString:(NSString *)indexedField
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceTermFreqValu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource")

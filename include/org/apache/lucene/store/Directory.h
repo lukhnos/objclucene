@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreDirectory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreDirectory || defined(INCLUDE_OrgApacheLuceneStoreDirectory))
 #define OrgApacheLuceneStoreDirectory_
 
@@ -29,24 +35,24 @@
 @protocol JavaUtilCollection;
 
 /*!
- @brief A Directory is a flat list of files.
- Files may be written once, when they
- are created.  Once a file is created it may only be opened for read, or
- deleted.  Random access is permitted both when reading and writing.
+ @brief A Directory is a flat list of files.Files may be written once, when they
+  are created.
+ Once a file is created it may only be opened for read, or
+  deleted.  Random access is permitted both when reading and writing. 
  <p> Java's i/o APIs not used directly, but rather all i/o is
- through this API.  This permits things such as: <ul>
- <li> implementation of RAM-based indices;
- <li> implementation indices stored in a database, via JDBC;
- <li> implementation of an index as a single file;
+  through this API.  This permits things such as: <ul>
+  <li> implementation of RAM-based indices; 
+ <li> implementation indices stored in a database, via JDBC; 
+ <li> implementation of an index as a single file; 
  </ul>
- Directory locking is implemented by an instance of <code>LockFactory</code>
+  Directory locking is implemented by an instance of <code>LockFactory</code>
  .
  */
 @interface OrgApacheLuceneStoreDirectory : NSObject < JavaIoCloseable >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Closes the store.
@@ -55,20 +61,20 @@
 
 /*!
  @brief Copies the file <i>src</i> in <i>from</i> to this directory under the new
- file name <i>dest</i>.
+  file name <i>dest</i>.
  <p>
- If you want to copy the entire source directory to the destination one, you
- can do so like this:
+  If you want to copy the entire source directory to the destination one, you
+  can do so like this:  
  <pre class="prettyprint">
- Directory to; // the directory to copy to
- for (String file : dir.listAll()) {
- to.copyFrom(dir, file, newFile, IOContext.DEFAULT); // newFile can be either file, or a new name
- }
+  Directory to; // the directory to copy to
+  for (String file : dir.listAll()) {
+    to.copyFrom(dir, file, newFile, IOContext.DEFAULT); // newFile can be either file, or a new name
+  } 
  
 @endcode
- <p>
- <b>NOTE:</b> this method does not check whether <i>dest</i> exist and will
- overwrite it if it does.
+  <p>
+  <b>NOTE:</b> this method does not check whether <i>dest</i> exist and will
+  overwrite it if it does.
  */
 - (void)copyFromWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)from
                                      withNSString:(NSString *)src
@@ -77,7 +83,7 @@
 
 /*!
  @brief Creates a new, empty file in the directory with the given name.
- Returns a stream writing this file. 
+ Returns a stream writing this file.
  */
 - (OrgApacheLuceneStoreIndexOutput *)createOutputWithNSString:(NSString *)name
                             withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
@@ -88,32 +94,31 @@
 - (void)deleteFileWithNSString:(NSString *)name;
 
 /*!
- @brief Returns the length of a file in the directory.
- This method follows the
- following contract:
+ @brief Returns the length of a file in the directory.This method follows the
+  following contract: 
  <ul>
- <li>Throws <code>FileNotFoundException</code> or <code>NoSuchFileException</code>
- if the file does not exist.
- <li>Returns a value &ge;0 if the file exists, which specifies its length.
+  <li>Throws <code>FileNotFoundException</code> or <code>NoSuchFileException</code>
+  if the file does not exist.
+ <li>Returns a value &ge;0 if the file exists, which specifies its length. 
  </ul>
  @param name the name of the file for which to return the length.
- @throws IOException if there was an IO error while retrieving the file's
- length.
+ @throw IOExceptionif there was an IO error while retrieving the file's
+          length.
  */
 - (jlong)fileLengthWithNSString:(NSString *)name;
 
 /*!
  @brief Returns an array of strings, one for each entry in the directory.
- @throws IOException in case of IO error
+ @throw IOExceptionin case of IO error
  */
 - (IOSObjectArray *)listAll;
 
 /*!
  @brief Returns an obtained <code>Lock</code>.
  @param name the name of the lock file
- @throws LockObtainFailedException (optional specific exception) if the lock could
- not be obtained because it is currently held elsewhere.
- @throws IOException if any i/o error occurs attempting to gain the lock
+ @throw LockObtainFailedException(optional specific exception) if the lock could
+          not be obtained because it is currently held elsewhere.
+ @throw IOExceptionif any i/o error occurs attempting to gain the lock
  */
 - (OrgApacheLuceneStoreLock *)obtainLockWithNSString:(NSString *)name;
 
@@ -126,35 +131,34 @@
 /*!
  @brief Returns a stream reading an existing file.
  <p>Throws <code>FileNotFoundException</code> or <code>NoSuchFileException</code>
- if the file does not exist.
+  if the file does not exist.
  */
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 /*!
  @brief Renames <code>source</code> to <code>dest</code> as an atomic operation,
- where <code>dest</code> does not yet exist in the directory.
+  where <code>dest</code> does not yet exist in the directory.
  <p>
- Notes: This method is used by IndexWriter to publish commits.
- It is ok if this operation is not truly atomic, for example
- both <code>source</code> and <code>dest</code> can be visible temporarily.
- It is just important that the contents of <code>dest</code> appear
- atomically, or an exception is thrown.
+  Notes: This method is used by IndexWriter to publish commits.
+  It is ok if this operation is not truly atomic, for example
+  both <code>source</code> and <code>dest</code> can be visible temporarily.
+  It is just important that the contents of <code>dest</code> appear
+  atomically, or an exception is thrown.
  */
 - (void)renameFileWithNSString:(NSString *)source
                   withNSString:(NSString *)dest;
 
 /*!
  @brief Ensure that any writes to these files are moved to
- stable storage.
- Lucene uses this to properly commit
- changes to the index, to prevent a machine/OS crash
- from corrupting the index.
+  stable storage.Lucene uses this to properly commit
+  changes to the index, to prevent a machine/OS crash
+  from corrupting the index.
  <br>
- NOTE: Clients may call this method for same files over
- and over again, so some impls might optimize for that.
- For other impls the operation can be a noop, for various
- reasons.
+  NOTE: Clients may call this method for same files over
+  and over again, so some impls might optimize for that.
+  For other impls the operation can be a noop, for various
+  reasons.
  */
 - (void)syncWithJavaUtilCollection:(id<JavaUtilCollection>)names;
 
@@ -163,7 +167,7 @@
 #pragma mark Protected
 
 /*!
- @throws AlreadyClosedException if this Directory is closed
+ @throw AlreadyClosedExceptionif this Directory is closed
  */
 - (void)ensureOpen;
 
@@ -177,4 +181,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreDirectory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreDirectory")

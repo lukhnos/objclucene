@@ -9,6 +9,10 @@
 #include "java/util/Map.h"
 #include "org/lukhnos/portmobile/lang/ClassValue.h"
 
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/lang/ClassValue must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgLukhnosPortmobileLangClassValue
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -28,7 +32,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if ([((id<JavaUtilMap>) nil_chk(cache_)) containsKeyWithId:type]) {
     return [((id<JavaUtilMap>) nil_chk(cache_)) getWithId:type];
   }
-  id value = [self computeValueWithIOSClass:type];
+  id value = JreRetainedLocalValue([self computeValueWithIOSClass:type]);
   [((id<JavaUtilMap>) nil_chk(cache_)) putWithId:type withId:value];
   return value;
 }
@@ -44,18 +48,27 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ClassValue", NULL, 0x4, NULL, NULL },
-    { "computeValueWithIOSClass:", "computeValue", "TT;", 0x404, NULL, "(Ljava/lang/Class<*>;)TT;" },
-    { "getWithIOSClass:", "get", "TT;", 0x1, NULL, "(Ljava/lang/Class<*>;)TT;" },
-    { "removeWithIOSClass:", "remove", "V", 0x1, NULL, "(Ljava/lang/Class<*>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x404, 0, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 3, 1, -1, 2, -1, -1 },
+    { NULL, "V", 0x1, 4, 1, -1, 5, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(computeValueWithIOSClass:);
+  methods[2].selector = @selector(getWithIOSClass:);
+  methods[3].selector = @selector(removeWithIOSClass:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "defaultCached_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "defaultCachedMember_", NULL, 0x0, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
-    { "cache_", NULL, 0x0, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Class<*>;TT;>;", .constantValue.asLong = 0 },
+    { "defaultCached_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "defaultCachedMember_", "LNSObject;", .constantValue.asLong = 0, 0x0, -1, -1, 6, -1 },
+    { "cache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x0, -1, -1, 7, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileLangClassValue = { 2, "ClassValue", "org.lukhnos.portmobile.lang", NULL, 0x401, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "computeValue", "LIOSClass;", "(Ljava/lang/Class<*>;)TT;", "get", "remove", "(Ljava/lang/Class<*>;)V", "TT;", "Ljava/util/Map<Ljava/lang/Class<*>;TT;>;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileLangClassValue = { "ClassValue", "org.lukhnos.portmobile.lang", ptrTable, methods, fields, 7, 0x401, 4, 3, -1, -1, -1, 8, -1 };
   return &_OrgLukhnosPortmobileLangClassValue;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisRuRussianLightStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisRuRussianLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisRuRussianLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisRuRussianLightStemmer))
 #define OrgApacheLuceneAnalysisRuRussianLightStemmer_
 
@@ -21,15 +27,15 @@
 /*!
  @brief Light Stemmer for Russian.
  <p>
- This stemmer implements the following algorithm:
+  This stemmer implements the following algorithm: 
  <i>Indexing and Searching Strategies for the Russian Language.</i>
- Ljiljana Dolamic and Jacques Savoy.
+  Ljiljana Dolamic and Jacques Savoy.
  */
 @interface OrgApacheLuceneAnalysisRuRussianLightStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -40,12 +46,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisRuRussianLightStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisRuRussianLightStemmer_init(OrgApacheLuceneAnalysisRuRussianLightStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianLightStemmer *new_OrgApacheLuceneAnalysisRuRussianLightStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianLightStemmer *new_OrgApacheLuceneAnalysisRuRussianLightStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianLightStemmer *create_OrgApacheLuceneAnalysisRuRussianLightStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianLightStemmer *create_OrgApacheLuceneAnalysisRuRussianLightStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisRuRussianLightStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisRuRussianLightStemmer")

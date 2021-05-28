@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTopDocs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTopDocs_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopDocs || defined(INCLUDE_OrgApacheLuceneSearchTopDocs))
 #define OrgApacheLuceneSearchTopDocs_
 
@@ -38,21 +44,19 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)totalHits
+- (instancetype __nonnull)initWithInt:(jint)totalHits
 withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
-                  withFloat:(jfloat)maxScore;
+                            withFloat:(jfloat)maxScore;
 
 /*!
- @brief Returns the maximum score value encountered.
- Note that in case
- scores are not tracked, this returns <code>Float.NaN</code>.
+ @brief Returns the maximum score value encountered.Note that in case
+  scores are not tracked, this returns <code>Float.NaN</code>.
  */
 - (jfloat)getMaxScore;
 
 /*!
- @brief Same as <code>merge(int,TopDocs[])</code> but also ignores the top
- <code>start</code> top docs.
- This is typically useful for pagination.
+ @brief Same as <code>merge(int, TopDocs[])</code> but also ignores the top 
+ <code>start</code> top docs.This is typically useful for pagination.
  */
 + (OrgApacheLuceneSearchTopDocs *)mergeWithInt:(jint)start
                                        withInt:(jint)topN
@@ -60,18 +64,15 @@ withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
 
 /*!
  @brief Returns a new TopDocs, containing topN results across
- the provided TopDocs, sorting by score.
- Each <code>TopDocs</code>
- instance must be sorted.
-  
+   the provided TopDocs, sorting by score.Each <code>TopDocs</code>
+   instance must be sorted.
  */
 + (OrgApacheLuceneSearchTopDocs *)mergeWithInt:(jint)topN
          withOrgApacheLuceneSearchTopDocsArray:(IOSObjectArray *)shardHits;
 
 /*!
- @brief Same as <code>merge(Sort,int,TopFieldDocs[])</code> but also ignores the top
- <code>start</code> top docs.
- This is typically useful for pagination.
+ @brief Same as <code>merge(Sort, int, TopFieldDocs[])</code> but also ignores the top 
+ <code>start</code> top docs.This is typically useful for pagination.
  */
 + (OrgApacheLuceneSearchTopFieldDocs *)mergeWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
                                                                   withInt:(jint)start
@@ -80,13 +81,11 @@ withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
 
 /*!
  @brief Returns a new TopFieldDocs, containing topN results across
- the provided TopFieldDocs, sorting by the specified <code>Sort</code>
- .
- Each of the TopDocs must have been sorted by
- the same Sort, and sort field values must have been
- filled (ie, <code>fillFields=true</code> must be
- passed to <code>TopFieldCollector.create</code>).
-  
+   the provided TopFieldDocs, sorting by the specified <code>Sort</code>
+ .Each of the TopDocs must have been sorted by
+   the same Sort, and sort field values must have been
+   filled (ie, <code>fillFields=true</code> must be
+   passed to <code>TopFieldCollector.create</code>).
  */
 + (OrgApacheLuceneSearchTopFieldDocs *)mergeWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
                                                                   withInt:(jint)topN
@@ -102,8 +101,12 @@ withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
 /*!
  @brief Constructs a TopDocs with a default maxScore=Float.NaN.
  */
-- (instancetype)initWithInt:(jint)totalHits
+- (instancetype __nonnull)initWithInt:(jint)totalHits
 withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -135,4 +138,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopDocs)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopDocs")

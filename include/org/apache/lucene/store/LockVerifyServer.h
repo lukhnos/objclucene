@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreLockVerifyServer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreLockVerifyServer_) && (INCLUDE_ALL_OrgApacheLuceneStoreLockVerifyServer || defined(INCLUDE_OrgApacheLuceneStoreLockVerifyServer))
 #define OrgApacheLuceneStoreLockVerifyServer_
 
@@ -20,9 +26,8 @@
 
 /*!
  @brief Simple standalone server that must be running when you
- use <code>VerifyingLockFactory</code>.
- This server simply
- verifies at most one process holds the lock at a time.
+  use <code>VerifyingLockFactory</code>.This server simply
+  verifies at most one process holds the lock at a time.
  Run without any args to see usage.
  - seealso: VerifyingLockFactory
  - seealso: LockStressTest
@@ -31,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (void)mainWithNSStringArray:(IOSObjectArray *)args;
 
@@ -39,16 +44,20 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreLockVerifyServer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray *args);
-
 FOUNDATION_EXPORT void OrgApacheLuceneStoreLockVerifyServer_init(OrgApacheLuceneStoreLockVerifyServer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreLockVerifyServer *new_OrgApacheLuceneStoreLockVerifyServer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockVerifyServer *new_OrgApacheLuceneStoreLockVerifyServer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreLockVerifyServer *create_OrgApacheLuceneStoreLockVerifyServer_init();
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockVerifyServer *create_OrgApacheLuceneStoreLockVerifyServer_init(void);
+
+FOUNDATION_EXPORT void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray *args);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockVerifyServer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockVerifyServer")

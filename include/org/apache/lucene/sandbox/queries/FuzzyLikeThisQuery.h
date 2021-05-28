@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_) && (INCLUDE_ALL_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery || defined(INCLUDE_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery))
 #define OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_
 
@@ -29,16 +35,16 @@
 /*!
  @brief Fuzzifies ALL terms provided as strings and then picks the best n differentiating terms.
  In effect this mixes the behaviour of FuzzyQuery and MoreLikeThis but with special consideration
- of fuzzy scoring factors.
- This generally produces good results for queries where users may provide details in a number of 
- fields and have no knowledge of boolean query syntax and also want a degree of fuzzy matching and
- a fast query.
- For each source term the fuzzy variants are held in a BooleanQuery with no coord factor (because
- we are not looking for matches on multiple variants in any one doc). Additionally, a specialized
- TermQuery is used for variants and does not use that variant term's IDF because this would favour rarer 
- terms eg misspellings. Instead, all variants use the same IDF ranking (the one for the source query 
- term) and this is factored into the variant's boost. If the source query term does not exist in the
- index the average IDF of the variants is used.
+  of fuzzy scoring factors.
+  This generally produces good results for queries where users may provide details in a number of 
+  fields and have no knowledge of boolean query syntax and also want a degree of fuzzy matching and
+  a fast query. 
+  For each source term the fuzzy variants are held in a BooleanQuery with no coord factor (because
+  we are not looking for matches on multiple variants in any one doc). Additionally, a specialized
+  TermQuery is used for variants and does not use that variant term's IDF because this would favour rarer 
+  terms eg misspellings. Instead, all variants use the same IDF ranking (the one for the source query 
+  term) and this is factored into the variant's boost. If the source query term does not exist in the
+  index the average IDF of the variants is used.
  */
 @interface OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery : OrgApacheLuceneSearchQuery {
  @public
@@ -49,18 +55,15 @@
   jint MAX_VARIANTS_PER_TERM_;
   jboolean ignoreTF_;
 }
-
-+ (OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)sim;
-
-+ (void)setSim:(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)value;
+@property (class, strong) OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *sim NS_SWIFT_NAME(sim);
 
 #pragma mark Public
 
 /*!
  @param maxNumTerms The total number of terms clauses that will appear once rewritten as a BooleanQuery
  */
-- (instancetype)initWithInt:(jint)maxNumTerms
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithInt:(jint)maxNumTerms
+  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  @brief Adds user input for "fuzzification"
@@ -85,6 +88,10 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery)
@@ -94,7 +101,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery, fieldVals_,
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery, analyzer_, OrgApacheLuceneAnalysisAnalyzer *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery, q_, OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue *)
 
-inline OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_get_sim();
+inline OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_get_sim(void);
 inline OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_set_sim(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_sim;
@@ -125,15 +132,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery:(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *)outer$
-                                                           withNSString:(NSString *)name
-                                                              withFloat:(jfloat)similarity
-                                                                withInt:(jint)length
-                                                           withNSString:(NSString *)queryString;
+- (instancetype __nonnull)initWithOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery:(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *)outer$
+                                                                     withNSString:(NSString *)name
+                                                                        withFloat:(jfloat)similarity
+                                                                          withInt:(jint)length
+                                                                     withNSString:(NSString *)queryString;
 
 - (jboolean)isEqual:(id)obj;
 
 - (NSUInteger)hash;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -152,6 +163,41 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_Field
 
 #endif
 
+#if !defined (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm_) && (INCLUDE_ALL_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery || defined(INCLUDE_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm))
+#define OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm_
+
+@class OrgApacheLuceneIndexTerm;
+
+@interface OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm : NSObject {
+ @public
+  OrgApacheLuceneIndexTerm *term_;
+  jfloat score_;
+  OrgApacheLuceneIndexTerm *fuzziedSourceTerm_;
+}
+
+#pragma mark Public
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                 withFloat:(jfloat)score
+                              withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)fuzziedSourceTerm;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm)
+
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm, term_, OrgApacheLuceneIndexTerm *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm, fuzziedSourceTerm_, OrgApacheLuceneIndexTerm *)
+
+FOUNDATION_EXPORT void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm_initWithOrgApacheLuceneIndexTerm_withFloat_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *self, OrgApacheLuceneIndexTerm *term, jfloat score, OrgApacheLuceneIndexTerm *fuzziedSourceTerm);
+
+FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *new_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm_initWithOrgApacheLuceneIndexTerm_withFloat_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term, jfloat score, OrgApacheLuceneIndexTerm *fuzziedSourceTerm) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *create_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm_initWithOrgApacheLuceneIndexTerm_withFloat_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term, jfloat score, OrgApacheLuceneIndexTerm *fuzziedSourceTerm);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm)
+
+#endif
+
 #if !defined (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue_) && (INCLUDE_ALL_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery || defined(INCLUDE_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue))
 #define OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue_
 
@@ -165,9 +211,23 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_Field
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
+
+- (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)addWithId:(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)arg0;
+
+- (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)insertWithOverflowWithId:(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)arg0;
+
+- (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)pop;
+
+- (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)top;
+
+- (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)updateTop;
+
+- (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)updateTopWithId:(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)arg0;
 
 #pragma mark Protected
+
+- (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)getSentinelObject;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)termA
                     withId:(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)termB;
@@ -186,4 +246,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_Score
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery")

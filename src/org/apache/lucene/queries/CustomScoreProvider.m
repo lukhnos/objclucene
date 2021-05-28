@@ -7,12 +7,15 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/queries/CustomScoreProvider.h"
 #include "org/apache/lucene/search/Explanation.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/CustomScoreProvider must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneQueriesCustomScoreProvider
 
@@ -98,17 +101,27 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexLeafReaderContext:", "CustomScoreProvider", NULL, 0x1, NULL, NULL },
-    { "customScoreWithInt:withFloat:withFloatArray:", "customScore", "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "customScoreWithInt:withFloat:withFloat:", "customScore", "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "customExplainWithInt:withOrgApacheLuceneSearchExplanation:withOrgApacheLuceneSearchExplanationArray:", "customExplain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
-    { "customExplainWithInt:withOrgApacheLuceneSearchExplanation:withOrgApacheLuceneSearchExplanation:", "customExplain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "F", 0x1, 1, 4, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 5, 6, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 5, 7, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[1].selector = @selector(customScoreWithInt:withFloat:withFloatArray:);
+  methods[2].selector = @selector(customScoreWithInt:withFloat:withFloat:);
+  methods[3].selector = @selector(customExplainWithInt:withOrgApacheLuceneSearchExplanation:withOrgApacheLuceneSearchExplanationArray:);
+  methods[4].selector = @selector(customExplainWithInt:withOrgApacheLuceneSearchExplanation:withOrgApacheLuceneSearchExplanation:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "context_", NULL, 0x14, "Lorg.apache.lucene.index.LeafReaderContext;", NULL, NULL, .constantValue.asLong = 0 },
+    { "context_", "LOrgApacheLuceneIndexLeafReaderContext;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreProvider = { 2, "CustomScoreProvider", "org.apache.lucene.queries", NULL, 0x1, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexLeafReaderContext;", "customScore", "IF[F", "LJavaIoIOException;", "IFF", "customExplain", "ILOrgApacheLuceneSearchExplanation;[LOrgApacheLuceneSearchExplanation;", "ILOrgApacheLuceneSearchExplanation;LOrgApacheLuceneSearchExplanation;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreProvider = { "CustomScoreProvider", "org.apache.lucene.queries", ptrTable, methods, fields, 7, 0x1, 5, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesCustomScoreProvider;
 }
 

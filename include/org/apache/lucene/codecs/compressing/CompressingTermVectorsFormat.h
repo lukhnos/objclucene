@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat))
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_
 
@@ -30,7 +36,7 @@
 
 /*!
  @brief A <code>TermVectorsFormat</code> that compresses chunks of documents together in
- order to improve the compression ratio.
+  order to improve the compression ratio.
  */
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat : OrgApacheLuceneCodecsTermVectorsFormat
 
@@ -39,34 +45,34 @@
 /*!
  @brief Create a new <code>CompressingTermVectorsFormat</code>.
  <p>
- <code>formatName</code> is the name of the format. This name will be used
- in the file formats to perform
+  <code>formatName</code> is the name of the format. This name will be used
+  in the file formats to perform 
  <code>codec header checks</code>.
- <p>
- The <code>compressionMode</code> parameter allows you to choose between
- compression algorithms that have various compression and decompression
- speeds so that you can pick the one that best fits your indexing and
- searching throughput. You should never instantiate two
+  <p>
+  The <code>compressionMode</code> parameter allows you to choose between
+  compression algorithms that have various compression and decompression
+  speeds so that you can pick the one that best fits your indexing and
+  searching throughput. You should never instantiate two 
  <code>CompressingTermVectorsFormat</code>s that have the same name but
- different <code>CompressionMode</code>s.
- <p>
- <code>chunkSize</code> is the minimum byte size of a chunk of documents.
- Higher values of <code>chunkSize</code> should improve the compression
- ratio but will require more memory at indexing time and might make document
- loading a little slower (depending on the size of your OS cache compared
- to the size of your index).
+  different <code>CompressionMode</code>s.
+  <p>
+  <code>chunkSize</code> is the minimum byte size of a chunk of documents.
+  Higher values of <code>chunkSize</code> should improve the compression
+  ratio but will require more memory at indexing time and might make document
+  loading a little slower (depending on the size of your OS cache compared
+  to the size of your index).
  @param formatName the name of the <code>StoredFieldsFormat</code>
  @param segmentSuffix a suffix to append to files created by this format
- @param compressionMode the <code>CompressionMode</code> to use
+ @param compressionMode the <code>CompressionMode</code>  to use
  @param chunkSize the minimum number of bytes of a single chunk of stored documents
  @param blockSize the number of chunks to store in an index block.
  - seealso: CompressionMode
  */
-- (instancetype)initWithNSString:(NSString *)formatName
-                    withNSString:(NSString *)segmentSuffix
+- (instancetype __nonnull)initWithNSString:(NSString *)formatName
+                              withNSString:(NSString *)segmentSuffix
 withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode
-                         withInt:(jint)chunkSize
-                         withInt:(jint)blockSize;
+                                   withInt:(jint)chunkSize
+                                   withInt:(jint)blockSize;
 
 - (NSString *)description;
 
@@ -78,6 +84,10 @@ withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompre
 - (OrgApacheLuceneCodecsTermVectorsWriter *)vectorsWriterWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -93,4 +103,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat")

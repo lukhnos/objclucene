@@ -13,7 +13,11 @@
 #include "org/tartarus/snowball/Among.h"
 #include "org/tartarus/snowball/SnowballProgram.h"
 
-inline IOSObjectArray *OrgTartarusSnowballAmong_get_EMPTY_PARAMS();
+#if __has_feature(objc_arc)
+#error "org/tartarus/snowball/Among must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline IOSObjectArray *OrgTartarusSnowballAmong_get_EMPTY_PARAMS(void);
 static IOSObjectArray *OrgTartarusSnowballAmong_EMPTY_PARAMS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballAmong, EMPTY_PARAMS, IOSObjectArray *)
 
@@ -37,6 +41,29 @@ withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)met
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withInt:withInt:withNSString:withOrgTartarusSnowballSnowballProgram:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_PARAMS", "[LIOSClass;", .constantValue.asLong = 0, 0x1a, -1, 1, 2, -1 },
+    { "s_size_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "s_", "[C", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "substring_i_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "result_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "method_", "LJavaLangReflectMethod;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "methodobject_", "LOrgTartarusSnowballSnowballProgram;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;IILNSString;LOrgTartarusSnowballSnowballProgram;", &OrgTartarusSnowballAmong_EMPTY_PARAMS, "[Ljava/lang/Class<*>;" };
+  static const J2ObjcClassInfo _OrgTartarusSnowballAmong = { "Among", "org.tartarus.snowball", ptrTable, methods, fields, 7, 0x1, 1, 7, -1, -1, -1, -1, -1 };
+  return &_OrgTartarusSnowballAmong;
+}
+
 + (void)initialize {
   if (self == [OrgTartarusSnowballAmong class]) {
     JreStrongAssignAndConsume(&OrgTartarusSnowballAmong_EMPTY_PARAMS, [IOSObjectArray newArrayWithLength:0 type:IOSClass_class_()]);
@@ -44,41 +71,24 @@ withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)met
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withInt:withInt:withNSString:withOrgTartarusSnowballSnowballProgram:", "Among", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_PARAMS", "EMPTY_PARAMS", 0x1a, "[Ljava.lang.Class;", &OrgTartarusSnowballAmong_EMPTY_PARAMS, "[Ljava/lang/Class<*>;", .constantValue.asLong = 0 },
-    { "s_size_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "s_", NULL, 0x11, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "substring_i_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "result_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "method_", NULL, 0x11, "Ljava.lang.reflect.Method;", NULL, NULL, .constantValue.asLong = 0 },
-    { "methodobject_", NULL, 0x11, "Lorg.tartarus.snowball.SnowballProgram;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgTartarusSnowballAmong = { 2, "Among", "org.tartarus.snowball", NULL, 0x1, 1, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgTartarusSnowballAmong;
-}
-
 @end
 
 void OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(OrgTartarusSnowballAmong *self, NSString *s, jint substring_i, jint result, NSString *methodname, OrgTartarusSnowballSnowballProgram *methodobject) {
   NSObject_init(self);
-  self->s_size_ = ((jint) [((NSString *) nil_chk(s)) length]);
-  JreStrongAssign(&self->s_, [s toCharArray]);
+  self->s_size_ = [((NSString *) nil_chk(s)) java_length];
+  JreStrongAssign(&self->s_, [s java_toCharArray]);
   self->substring_i_ = substring_i;
   self->result_ = result;
   JreStrongAssign(&self->methodobject_, methodobject);
-  if (((jint) [((NSString *) nil_chk(methodname)) length]) == 0) {
+  if ([((NSString *) nil_chk(methodname)) java_length] == 0) {
     JreStrongAssign(&self->method_, nil);
   }
   else {
     @try {
-      JreStrongAssign(&self->method_, [[((OrgTartarusSnowballSnowballProgram *) nil_chk(methodobject)) getClass] getDeclaredMethod:methodname parameterTypes:OrgTartarusSnowballAmong_EMPTY_PARAMS]);
+      JreStrongAssign(&self->method_, [[((OrgTartarusSnowballSnowballProgram *) nil_chk(methodobject)) java_getClass] getDeclaredMethod:methodname parameterTypes:OrgTartarusSnowballAmong_EMPTY_PARAMS]);
     }
     @catch (JavaLangNoSuchMethodException *e) {
-      @throw create_JavaLangRuntimeException_initWithNSException_(e);
+      @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
     }
   }
 }

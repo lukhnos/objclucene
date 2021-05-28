@@ -13,6 +13,10 @@
 #include "java/lang/Thread.h"
 #include "org/apache/lucene/analysis/util/ClasspathResourceLoader.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/ClasspathResourceLoader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisUtilClasspathResourceLoader () {
  @public
   IOSClass *clazz_;
@@ -70,18 +74,18 @@ J2OBJC_IGNORE_DESIGNATED_END
     return [((IOSClass *) nil_chk(IOSClass_forName_initialize_classLoader_(cname, true, loader_))) asSubclass:expectedType];
   }
   @catch (JavaLangException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(JreStrcat("$$", @"Cannot load class: ", cname), e);
+    @throw create_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Cannot load class: ", cname), e);
   }
 }
 
 - (id)newInstanceWithNSString:(NSString *)cname
                  withIOSClass:(IOSClass *)expectedType {
-  IOSClass *clazz = [self findClassWithNSString:cname withIOSClass:expectedType];
+  IOSClass *clazz = JreRetainedLocalValue([self findClassWithNSString:cname withIOSClass:expectedType]);
   @try {
     return [((IOSClass *) nil_chk(clazz)) newInstance];
   }
   @catch (JavaLangException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(JreStrcat("$$", @"Cannot create instance: ", cname), e);
+    @throw create_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Cannot create instance: ", cname), e);
   }
 }
 
@@ -92,20 +96,32 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ClasspathResourceLoader", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangClassLoader:", "ClasspathResourceLoader", NULL, 0x1, NULL, NULL },
-    { "initWithIOSClass:", "ClasspathResourceLoader", NULL, 0x1, NULL, "(Ljava/lang/Class<*>;)V" },
-    { "initWithIOSClass:withJavaLangClassLoader:", "ClasspathResourceLoader", NULL, 0x2, NULL, "(Ljava/lang/Class<*>;Ljava/lang/ClassLoader;)V" },
-    { "openResourceWithNSString:", "openResource", "Ljava.io.InputStream;", 0x1, "Ljava.io.IOException;", NULL },
-    { "findClassWithNSString:withIOSClass:", "findClass", "Ljava.lang.Class;", 0x1, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)Ljava/lang/Class<+TT;>;" },
-    { "newInstanceWithNSString:withIOSClass:", "newInstance", "TT;", 0x1, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, 2, -1, -1 },
+    { NULL, NULL, 0x2, -1, 3, -1, 4, -1, -1 },
+    { NULL, "LJavaIoInputStream;", 0x1, 5, 6, 7, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, 8, 9, -1, 10, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 11, 9, -1, 12, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithJavaLangClassLoader:);
+  methods[2].selector = @selector(initWithIOSClass:);
+  methods[3].selector = @selector(initWithIOSClass:withJavaLangClassLoader:);
+  methods[4].selector = @selector(openResourceWithNSString:);
+  methods[5].selector = @selector(findClassWithNSString:withIOSClass:);
+  methods[6].selector = @selector(newInstanceWithNSString:withIOSClass:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "clazz_", NULL, 0x12, "Ljava.lang.Class;", NULL, "Ljava/lang/Class<*>;", .constantValue.asLong = 0 },
-    { "loader_", NULL, 0x12, "Ljava.lang.ClassLoader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "clazz_", "LIOSClass;", .constantValue.asLong = 0, 0x12, -1, -1, 13, -1 },
+    { "loader_", "LJavaLangClassLoader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilClasspathResourceLoader = { 2, "ClasspathResourceLoader", "org.apache.lucene.analysis.util", NULL, 0x11, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaLangClassLoader;", "LIOSClass;", "(Ljava/lang/Class<*>;)V", "LIOSClass;LJavaLangClassLoader;", "(Ljava/lang/Class<*>;Ljava/lang/ClassLoader;)V", "openResource", "LNSString;", "LJavaIoIOException;", "findClass", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)Ljava/lang/Class<+TT;>;", "newInstance", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "Ljava/lang/Class<*>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilClasspathResourceLoader = { "ClasspathResourceLoader", "org.apache.lucene.analysis.util", ptrTable, methods, fields, 7, 0x11, 7, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisUtilClasspathResourceLoader;
 }
 

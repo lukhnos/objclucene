@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisEnKStemData7
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisEnKStemData7_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemData7 || defined(INCLUDE_OrgApacheLuceneAnalysisEnKStemData7))
 #define OrgApacheLuceneAnalysisEnKStemData7_
 
@@ -22,16 +28,17 @@
  @brief A list of words used by Kstem
  */
 @interface OrgApacheLuceneAnalysisEnKStemData7 : NSObject
+@property (class, strong) IOSObjectArray *data NS_SWIFT_NAME(data);
 
-+ (IOSObjectArray *)data;
+// Disallowed inherited constructors, do not use.
 
-+ (void)setData:(IOSObjectArray *)value;
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisEnKStemData7)
 
-inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData7_get_data();
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData7_get_data(void);
 inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData7_set_data(IOSObjectArray *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData7_data;
@@ -41,4 +48,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemData7)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemData7")

@@ -3,12 +3,14 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/BitsProducer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/suggest/BitsProducer.h"
 #include "org/apache/lucene/util/Bits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/BitsProducer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchSuggestBitsProducer
 
@@ -26,11 +28,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BitsProducer", NULL, 0x4, NULL, NULL },
-    { "getBitsWithOrgApacheLuceneIndexLeafReaderContext:", "getBits", "Lorg.apache.lucene.util.Bits;", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestBitsProducer = { 2, "BitsProducer", "org.apache.lucene.search.suggest", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getBitsWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getBits", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestBitsProducer = { "BitsProducer", "org.apache.lucene.search.suggest", ptrTable, methods, NULL, 7, 0x401, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestBitsProducer;
 }
 

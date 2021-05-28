@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFieldDoc
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFieldDoc_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldDoc || defined(INCLUDE_OrgApacheLuceneSearchFieldDoc))
 #define OrgApacheLuceneSearchFieldDoc_
 
@@ -24,17 +30,16 @@
 
 /*!
  @brief Expert: A ScoreDoc which also contains information about
- how to sort the referenced document.
- In addition to the
- document number and score, this object contains an array
- of values for the document from the field(s) used to sort.
+  how to sort the referenced document.In addition to the
+  document number and score, this object contains an array
+  of values for the document from the field(s) used to sort.
  For example, if the sort criteria was to sort by fields
- "a", "b" then "c", the <code>fields</code> object array
- will have three elements, corresponding respectively to
- the term values for the document in fields "a", "b" and "c".
- The class of each element in the array will be either
- Integer, Float or String depending on the type of values
- in the terms of each field.
+  "a", "b" then "c", the <code>fields</code> object array
+  will have three elements, corresponding respectively to
+  the term values for the document in fields "a", "b" and "c".
+  The class of each element in the array will be either
+  Integer, Float or String depending on the type of values
+  in the terms of each field. 
  <p>Created: Feb 11, 2004 1:23:38 PM
  @since lucene 1.4
  - seealso: ScoreDoc
@@ -45,9 +50,9 @@
   /*!
    @brief Expert: The values which are used to sort the referenced document.
    The order of these will match the original sort criteria given by a
- Sort object.  Each Object will have been returned from
- the <code>value</code> method corresponding
- FieldComparator used to sort this field.
+  Sort object.  Each Object will have been returned from
+  the <code>value</code> method corresponding
+  FieldComparator used to sort this field.
    - seealso: Sort
    - seealso: IndexSearcher#search(Query,int,Sort)
    */
@@ -59,25 +64,31 @@
 /*!
  @brief Expert: Creates one of these objects with empty sort information.
  */
-- (instancetype)initWithInt:(jint)doc
-                  withFloat:(jfloat)score;
+- (instancetype __nonnull)initWithInt:(jint)doc
+                            withFloat:(jfloat)score;
 
 /*!
  @brief Expert: Creates one of these objects with the given sort information.
  */
-- (instancetype)initWithInt:(jint)doc
-                  withFloat:(jfloat)score
-          withNSObjectArray:(IOSObjectArray *)fields;
+- (instancetype __nonnull)initWithInt:(jint)doc
+                            withFloat:(jfloat)score
+                    withNSObjectArray:(IOSObjectArray *)fields;
 
 /*!
  @brief Expert: Creates one of these objects with the given sort information.
  */
-- (instancetype)initWithInt:(jint)doc
-                  withFloat:(jfloat)score
-          withNSObjectArray:(IOSObjectArray *)fields
-                    withInt:(jint)shardIndex;
+- (instancetype __nonnull)initWithInt:(jint)doc
+                            withFloat:(jfloat)score
+                    withNSObjectArray:(IOSObjectArray *)fields
+                              withInt:(jint)shardIndex;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                            withFloat:(jfloat)arg1
+                              withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -107,4 +118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldDoc)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldDoc")

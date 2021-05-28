@@ -3,10 +3,8 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/function/ValueSource.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Double.h"
 #include "java/util/IdentityHashMap.h"
 #include "java/util/Map.h"
@@ -19,14 +17,16 @@
 #include "org/apache/lucene/search/SimpleFieldComparator.h"
 #include "org/apache/lucene/search/SortField.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/ValueSource must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField () {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *this$0_;
 }
 
 @end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField, this$0_, OrgApacheLuceneQueriesFunctionValueSource *)
 
 @interface OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource () {
  @public
@@ -36,7 +36,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortFie
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource, this$0_, OrgApacheLuceneQueriesFunctionValueSource *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource, context_, id<JavaUtilMap>)
 
 @interface OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator () {
@@ -51,12 +50,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceCompara
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator, this$0_, OrgApacheLuceneQueriesFunctionValueSource *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator, values_, IOSDoubleArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator, docVals_, OrgApacheLuceneQueriesFunctionFunctionValues *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator, fcontext_, id<JavaUtilMap>)
 
 @implementation OrgApacheLuceneQueriesFunctionValueSource
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueriesFunctionValueSource_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
@@ -99,41 +104,47 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
   return create_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_(self, reverse);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueriesFunctionValueSource_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x401, NULL, NULL },
-    { "hash", "hashCode", "I", 0x401, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "newContextWithOrgApacheLuceneSearchIndexSearcher:", "newContext", "Ljava.util.Map;", 0x9, NULL, NULL },
-    { "getSortFieldWithBoolean:", "getSortField", "Lorg.apache.lucene.search.SortField;", 0x1, NULL, NULL },
-    { "init", "ValueSource", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "Z", 0x401, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, 5, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, 2, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x9, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSortField;", 0x1, 12, 13, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queries.function.ValueSource$ValueSourceSortField;", "Lorg.apache.lucene.queries.function.ValueSource$ValueSourceComparatorSource;", "Lorg.apache.lucene.queries.function.ValueSource$ValueSourceComparator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSource = { 2, "ValueSource", "org.apache.lucene.queries.function", NULL, 0x401, 9, methods, 0, NULL, 0, NULL, 3, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(description__);
+  methods[5].selector = @selector(description);
+  methods[6].selector = @selector(createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:);
+  methods[7].selector = @selector(newContextWithOrgApacheLuceneSearchIndexSearcher:);
+  methods[8].selector = @selector(getSortFieldWithBoolean:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getValues", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "equals", "LNSObject;", "hashCode", "description", "toString", "createWeight", "LJavaUtilMap;LOrgApacheLuceneSearchIndexSearcher;", "newContext", "LOrgApacheLuceneSearchIndexSearcher;", "getSortField", "Z", "LOrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField;LOrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource;LOrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSource = { "ValueSource", "org.apache.lucene.queries.function", ptrTable, methods, NULL, 7, 0x401, 9, 0, -1, 14, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValueSource;
 }
 
 @end
+
+void OrgApacheLuceneQueriesFunctionValueSource_init(OrgApacheLuceneQueriesFunctionValueSource *self) {
+  NSObject_init(self);
+}
 
 id<JavaUtilMap> OrgApacheLuceneQueriesFunctionValueSource_newContextWithOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchIndexSearcher *searcher) {
   OrgApacheLuceneQueriesFunctionValueSource_initialize();
   id<JavaUtilMap> context = create_JavaUtilIdentityHashMap_init();
   [context putWithId:@"searcher" withId:searcher];
   return context;
-}
-
-void OrgApacheLuceneQueriesFunctionValueSource_init(OrgApacheLuceneQueriesFunctionValueSource *self) {
-  NSObject_init(self);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource)
@@ -158,14 +169,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSource:withBoolean:", "ValueSourceSortField", NULL, 0x1, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneSearchIndexSearcher:", "rewrite", "Lorg.apache.lucene.search.SortField;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSortField;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValueSource:withBoolean:);
+  methods[1].selector = @selector(rewriteWithOrgApacheLuceneSearchIndexSearcher:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField = { 2, "ValueSourceSortField", "org.apache.lucene.queries.function", "ValueSource", 0x0, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValueSource;Z", "rewrite", "LOrgApacheLuceneSearchIndexSearcher;", "LJavaIoIOException;", "LOrgApacheLuceneQueriesFunctionValueSource;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField = { "ValueSourceSortField", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x0, 2, 1, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField;
 }
 
@@ -208,15 +226,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource_Value
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSource:withJavaUtilMap:", "ValueSourceComparatorSource", NULL, 0x1, NULL, NULL },
-    { "newComparatorWithNSString:withInt:withInt:withBoolean:", "newComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/String;IIZ)Lorg/apache/lucene/search/FieldComparator<Ljava/lang/Double;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldComparator;", 0x1, 1, 2, 3, 4, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValueSource:withJavaUtilMap:);
+  methods[1].selector = @selector(newComparatorWithNSString:withInt:withInt:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
-    { "context_", NULL, 0x12, "Ljava.util.Map;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "context_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource = { 2, "ValueSourceComparatorSource", "org.apache.lucene.queries.function", "ValueSource", 0x0, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValueSource;LJavaUtilMap;", "newComparator", "LNSString;IIZ", "LJavaIoIOException;", "(Ljava/lang/String;IIZ)Lorg/apache/lucene/search/FieldComparator<Ljava/lang/Double;>;", "LOrgApacheLuceneQueriesFunctionValueSource;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource = { "ValueSourceComparatorSource", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x0, 2, 2, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource;
 }
 
@@ -291,27 +316,40 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource_Value
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSource:withJavaUtilMap:withInt:", "ValueSourceComparator", NULL, 0x0, NULL, NULL },
-    { "compareWithInt:withInt:", "compare", "I", 0x1, NULL, NULL },
-    { "compareBottomWithInt:", "compareBottom", "I", 0x1, NULL, NULL },
-    { "copy__WithInt:withInt:", "copy", "V", 0x1, NULL, NULL },
-    { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "setBottomWithInt:", "setBottom", "V", 0x1, NULL, NULL },
-    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, NULL },
-    { "valueWithInt:", "value", "Ljava.lang.Double;", 0x1, NULL, NULL },
-    { "compareTopWithInt:", "compareTop", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, 8, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LJavaLangDouble;", 0x1, 12, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 13, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValueSource:withJavaUtilMap:withInt:);
+  methods[1].selector = @selector(compareWithInt:withInt:);
+  methods[2].selector = @selector(compareBottomWithInt:);
+  methods[3].selector = @selector(copy__WithInt:withInt:);
+  methods[4].selector = @selector(doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[5].selector = @selector(setBottomWithInt:);
+  methods[6].selector = @selector(setTopValueWithId:);
+  methods[7].selector = @selector(valueWithInt:);
+  methods[8].selector = @selector(compareTopWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
-    { "values_", NULL, 0x12, "[D", NULL, NULL, .constantValue.asLong = 0 },
-    { "docVals_", NULL, 0x2, "Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bottom_", NULL, 0x2, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "fcontext_", NULL, 0x12, "Ljava.util.Map;", NULL, NULL, .constantValue.asLong = 0 },
-    { "topValue_", NULL, 0x2, "D", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "values_", "[D", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "docVals_", "LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bottom_", "D", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fcontext_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "topValue_", "D", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Ljava.lang.Double;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator = { 2, "ValueSourceComparator", "org.apache.lucene.queries.function", "ValueSource", 0x0, 9, methods, 6, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/SimpleFieldComparator<Ljava/lang/Double;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValueSource;LJavaUtilMap;I", "compare", "II", "compareBottom", "I", "copy", "doSetNextReader", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "setBottom", "setTopValue", "LJavaLangDouble;", "value", "compareTop", "LOrgApacheLuceneQueriesFunctionValueSource;", "Lorg/apache/lucene/search/SimpleFieldComparator<Ljava/lang/Double;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator = { "ValueSourceComparator", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x0, 9, 6, 14, -1, -1, 15, -1 };
   return &_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator;
 }
 

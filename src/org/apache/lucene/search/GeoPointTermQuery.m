@@ -12,24 +12,26 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/util/GeoUtils.h"
 
-@interface OrgApacheLuceneSearchGeoPointTermQuery_$1 : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/GeoPointTermQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneSearchGeoPointTermQuery_1 : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
+
+- (instancetype)init;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                    withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermQuery_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermQuery_1)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermQuery_$1_init(OrgApacheLuceneSearchGeoPointTermQuery_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermQuery_1_init(OrgApacheLuceneSearchGeoPointTermQuery_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchGeoPointTermQuery_$1 *new_OrgApacheLuceneSearchGeoPointTermQuery_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchGeoPointTermQuery_1 *new_OrgApacheLuceneSearchGeoPointTermQuery_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchGeoPointTermQuery_$1 *create_OrgApacheLuceneSearchGeoPointTermQuery_$1_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermQuery_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchGeoPointTermQuery_1 *create_OrgApacheLuceneSearchGeoPointTermQuery_1_init(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchGeoPointTermQuery)
 
@@ -41,40 +43,46 @@ OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchGeoPoint
   return OrgApacheLuceneSearchGeoPointTermQuery_GEO_CONSTANT_SCORE_REWRITE;
 }
 
-- (instancetype)initWithNSString:(NSString *)field
-                      withDouble:(jdouble)minLon
-                      withDouble:(jdouble)minLat
-                      withDouble:(jdouble)maxLon
-                      withDouble:(jdouble)maxLat {
-  OrgApacheLuceneSearchGeoPointTermQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(self, field, minLon, minLat, maxLon, maxLat);
+- (instancetype)initPackagePrivateWithNSString:(NSString *)field
+                                    withDouble:(jdouble)minLon
+                                    withDouble:(jdouble)minLat
+                                    withDouble:(jdouble)maxLon
+                                    withDouble:(jdouble)maxLat {
+  OrgApacheLuceneSearchGeoPointTermQuery_initPackagePrivateWithNSString_withDouble_withDouble_withDouble_withDouble_(self, field, minLon, minLat, maxLon, maxLat);
   return self;
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithNSString:withDouble:withDouble:withDouble:withDouble:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "minLon_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "minLat_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "maxLon_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "maxLat_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "GEO_CONSTANT_SCORE_REWRITE", "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", .constantValue.asLong = 0, 0x19, -1, 1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;DDDD", &OrgApacheLuceneSearchGeoPointTermQuery_GEO_CONSTANT_SCORE_REWRITE };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermQuery = { "GeoPointTermQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x400, 1, 5, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchGeoPointTermQuery;
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchGeoPointTermQuery class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchGeoPointTermQuery_GEO_CONSTANT_SCORE_REWRITE, new_OrgApacheLuceneSearchGeoPointTermQuery_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchGeoPointTermQuery_GEO_CONSTANT_SCORE_REWRITE, new_OrgApacheLuceneSearchGeoPointTermQuery_1_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchGeoPointTermQuery)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDouble:withDouble:withDouble:withDouble:", "GeoPointTermQuery", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "minLon_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "minLat_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxLon_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxLat_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "GEO_CONSTANT_SCORE_REWRITE", "GEO_CONSTANT_SCORE_REWRITE", 0x19, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", &OrgApacheLuceneSearchGeoPointTermQuery_GEO_CONSTANT_SCORE_REWRITE, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermQuery = { 2, "GeoPointTermQuery", "org.apache.lucene.search", NULL, 0x400, 1, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchGeoPointTermQuery;
-}
-
 @end
 
-void OrgApacheLuceneSearchGeoPointTermQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermQuery *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
+void OrgApacheLuceneSearchGeoPointTermQuery_initPackagePrivateWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermQuery *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
   OrgApacheLuceneSearchMultiTermQuery_initWithNSString_(self, field);
   if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(minLon) == false) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLon ", minLon));
@@ -97,43 +105,48 @@ void OrgApacheLuceneSearchGeoPointTermQuery_initWithNSString_withDouble_withDoub
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointTermQuery)
 
-@implementation OrgApacheLuceneSearchGeoPointTermQuery_$1
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                   withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
-  OrgApacheLuceneSearchQuery *result = create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchGeoPointTermQuery_((OrgApacheLuceneSearchGeoPointTermQuery *) cast_chk(query, [OrgApacheLuceneSearchGeoPointTermQuery class]));
-  [result setBoostWithFloat:[((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query)) getBoost]];
-  return result;
-}
+@implementation OrgApacheLuceneSearchGeoPointTermQuery_1
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
-  OrgApacheLuceneSearchGeoPointTermQuery_$1_init(self);
+  OrgApacheLuceneSearchGeoPointTermQuery_1_init(self);
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                   withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
+  OrgApacheLuceneSearchQuery *result = create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery_((OrgApacheLuceneSearchGeoPointTermQuery *) cast_chk(query, [OrgApacheLuceneSearchGeoPointTermQuery class]));
+  [result setBoostWithFloat:[((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query)) getBoost]];
+  return JreRetainedLocalValue(result);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermQuery_$1 = { 2, "", "org.apache.lucene.search", "GeoPointTermQuery", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchGeoPointTermQuery_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "rewrite", "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneSearchMultiTermQuery;", "LOrgApacheLuceneSearchGeoPointTermQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermQuery_1 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchGeoPointTermQuery_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchGeoPointTermQuery_$1_init(OrgApacheLuceneSearchGeoPointTermQuery_$1 *self) {
+void OrgApacheLuceneSearchGeoPointTermQuery_1_init(OrgApacheLuceneSearchGeoPointTermQuery_1 *self) {
   OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_init(self);
 }
 
-OrgApacheLuceneSearchGeoPointTermQuery_$1 *new_OrgApacheLuceneSearchGeoPointTermQuery_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointTermQuery_$1, init)
+OrgApacheLuceneSearchGeoPointTermQuery_1 *new_OrgApacheLuceneSearchGeoPointTermQuery_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointTermQuery_1, init)
 }
 
-OrgApacheLuceneSearchGeoPointTermQuery_$1 *create_OrgApacheLuceneSearchGeoPointTermQuery_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointTermQuery_$1, init)
+OrgApacheLuceneSearchGeoPointTermQuery_1 *create_OrgApacheLuceneSearchGeoPointTermQuery_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointTermQuery_1, init)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointTermQuery_$1)

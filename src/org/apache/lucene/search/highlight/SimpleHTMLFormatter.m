@@ -8,6 +8,10 @@
 #include "org/apache/lucene/search/highlight/SimpleHTMLFormatter.h"
 #include "org/apache/lucene/search/highlight/TokenGroup.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/SimpleHTMLFormatter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchHighlightSimpleHTMLFormatter () {
  @public
   NSString *preTag_;
@@ -19,11 +23,11 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightSimpleHTMLFormatter, preTag_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightSimpleHTMLFormatter, postTag_, NSString *)
 
-inline NSString *OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_get_DEFAULT_PRE_TAG();
+inline NSString *OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_get_DEFAULT_PRE_TAG(void);
 static NSString *OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_DEFAULT_PRE_TAG = @"<B>";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchHighlightSimpleHTMLFormatter, DEFAULT_PRE_TAG, NSString *)
 
-inline NSString *OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_get_DEFAULT_POST_TAG();
+inline NSString *OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_get_DEFAULT_POST_TAG(void);
 static NSString *OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_DEFAULT_POST_TAG = @"</B>";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchHighlightSimpleHTMLFormatter, DEFAULT_POST_TAG, NSString *)
 
@@ -47,7 +51,7 @@ withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightToke
   if ([((OrgApacheLuceneSearchHighlightTokenGroup *) nil_chk(tokenGroup)) getTotalScore] <= 0) {
     return originalText;
   }
-  JavaLangStringBuilder *returnBuffer = create_JavaLangStringBuilder_initWithInt_(((jint) [((NSString *) nil_chk(preTag_)) length]) + ((jint) [((NSString *) nil_chk(originalText)) length]) + ((jint) [((NSString *) nil_chk(postTag_)) length]));
+  JavaLangStringBuilder *returnBuffer = create_JavaLangStringBuilder_initWithInt_([((NSString *) nil_chk(preTag_)) java_length] + [((NSString *) nil_chk(originalText)) java_length] + [((NSString *) nil_chk(postTag_)) java_length]);
   [returnBuffer appendWithNSString:preTag_];
   [returnBuffer appendWithNSString:originalText];
   [returnBuffer appendWithNSString:postTag_];
@@ -61,18 +65,26 @@ withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightToke
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:", "SimpleHTMLFormatter", NULL, 0x1, NULL, NULL },
-    { "init", "SimpleHTMLFormatter", NULL, 0x1, NULL, NULL },
-    { "highlightTermWithNSString:withOrgApacheLuceneSearchHighlightTokenGroup:", "highlightTerm", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(highlightTermWithNSString:withOrgApacheLuceneSearchHighlightTokenGroup:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_PRE_TAG", "DEFAULT_PRE_TAG", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_DEFAULT_PRE_TAG, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_POST_TAG", "DEFAULT_POST_TAG", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_DEFAULT_POST_TAG, NULL, .constantValue.asLong = 0 },
-    { "preTag_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "postTag_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_PRE_TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 3, -1, -1 },
+    { "DEFAULT_POST_TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 4, -1, -1 },
+    { "preTag_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "postTag_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleHTMLFormatter = { 2, "SimpleHTMLFormatter", "org.apache.lucene.search.highlight", NULL, 0x1, 3, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LNSString;", "highlightTerm", "LNSString;LOrgApacheLuceneSearchHighlightTokenGroup;", &OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_DEFAULT_PRE_TAG, &OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_DEFAULT_POST_TAG };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleHTMLFormatter = { "SimpleHTMLFormatter", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x1, 3, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter;
 }
 

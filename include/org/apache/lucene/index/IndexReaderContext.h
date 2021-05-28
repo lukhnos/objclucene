@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexReaderContext
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexReaderContext_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexReaderContext || defined(INCLUDE_OrgApacheLuceneIndexIndexReaderContext))
 #define OrgApacheLuceneIndexIndexReaderContext_
 
@@ -21,7 +27,7 @@
 @protocol JavaUtilList;
 
 /*!
- @brief A struct like class that represents a hierarchical relationship between
+ @brief A struct like class that represents a hierarchical relationship between 
  <code>IndexReader</code> instances.
  */
 @interface OrgApacheLuceneIndexIndexReaderContext : NSObject {
@@ -29,7 +35,7 @@
   /*!
    @brief The reader context for this reader's immediate parent, or null if none
    */
-  OrgApacheLuceneIndexCompositeReaderContext *parent_;
+  WEAK_ OrgApacheLuceneIndexCompositeReaderContext *parent_;
   /*!
    @brief <code>true</code> if this context struct represents the top level reader within the hierarchical context
    */
@@ -48,17 +54,17 @@
 
 /*!
  @brief Returns the context's children iff this context is a composite context
- otherwise <code>null</code>.
+  otherwise <code>null</code>.
  */
 - (id<JavaUtilList>)children;
 
 /*!
  @brief Returns the context's leaves if this context is a top-level context.
  For convenience, if this is an <code>LeafReaderContext</code> this
- returns itself as the only leaf.
+  returns itself as the only leaf. 
  <p>Note: this is convenience method since leaves can always be obtained by
- walking the context tree using <code>children()</code>.
- @throws UnsupportedOperationException if this is not a top-level context.
+  walking the context tree using <code>children()</code>.
+ @throw UnsupportedOperationExceptionif this is not a top-level context.
  - seealso: #children()
  */
 - (id<JavaUtilList>)leaves;
@@ -70,15 +76,17 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexCompositeReaderContext:(OrgApacheLuceneIndexCompositeReaderContext *)parent
-                                                           withInt:(jint)ordInParent
-                                                           withInt:(jint)docBaseInParent;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexCompositeReaderContext:(OrgApacheLuceneIndexCompositeReaderContext *)parent
+                                                                     withInt:(jint)ordInParent
+                                                                     withInt:(jint)docBaseInParent;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexIndexReaderContext)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexReaderContext, parent_, OrgApacheLuceneIndexCompositeReaderContext *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withInt_withInt_(OrgApacheLuceneIndexIndexReaderContext *self, OrgApacheLuceneIndexCompositeReaderContext *parent, jint ordInParent, jint docBaseInParent);
 
@@ -86,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexReaderContext)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexReaderContext")

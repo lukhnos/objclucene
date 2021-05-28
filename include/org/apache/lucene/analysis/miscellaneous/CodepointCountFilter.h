@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_
 
@@ -25,7 +31,7 @@
 /*!
  @brief Removes words that are too long or too short from the stream.
  <p>
- Note: Length is calculated as the number of Unicode codepoints.
+  Note: Length is calculated as the number of Unicode codepoints. 
  </p>
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter : OrgApacheLuceneAnalysisUtilFilteringTokenFilter
@@ -33,19 +39,22 @@
 #pragma mark Public
 
 /*!
- @brief Create a new <code>CodepointCountFilter</code>.
- This will filter out tokens whose
- <code>CharTermAttribute</code> is either too short (<code>Character.codePointCount(char[],int,int)</code>
- &lt; min) or too long (<code>Character.codePointCount(char[],int,int)</code> &gt; max).
- @param inArg      the <code>TokenStream</code> to consume
- @param min     the minimum length
- @param max     the maximum length
+ @brief Create a new <code>CodepointCountFilter</code>.This will filter out tokens whose 
+ <code>CharTermAttribute</code> is either too short (<code>Character.codePointCount(char[], int, int)</code>
+  &lt; min) or too long (<code>Character.codePointCount(char[], int, int)</code> &gt; max).
+ @param inArg the <code>TokenStream</code>  to consume
+ @param min the minimum length
+ @param max the maximum length
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)min
-                                                   withInt:(jint)max;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                             withInt:(jint)min
+                                                             withInt:(jint)max;
 
 - (jboolean)accept;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -61,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter")

@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/LiveDocsFormat.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collection.h"
 #include "org/apache/lucene/codecs/LiveDocsFormat.h"
 #include "org/apache/lucene/index/SegmentCommitInfo.h"
@@ -13,6 +11,10 @@
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/MutableBits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/LiveDocsFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneCodecsLiveDocsFormat
 
@@ -59,15 +61,26 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LiveDocsFormat", NULL, 0x4, NULL, NULL },
-    { "newLiveDocsWithInt:", "newLiveDocs", "Lorg.apache.lucene.util.MutableBits;", 0x401, "Ljava.io.IOException;", NULL },
-    { "newLiveDocsWithOrgApacheLuceneUtilBits:", "newLiveDocs", "Lorg.apache.lucene.util.MutableBits;", 0x401, "Ljava.io.IOException;", NULL },
-    { "readLiveDocsWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreIOContext:", "readLiveDocs", "Lorg.apache.lucene.util.Bits;", 0x401, "Ljava.io.IOException;", NULL },
-    { "writeLiveDocsWithOrgApacheLuceneUtilMutableBits:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withInt:withOrgApacheLuceneStoreIOContext:", "writeLiveDocs", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "filesWithOrgApacheLuceneIndexSegmentCommitInfo:withJavaUtilCollection:", "files", "V", 0x401, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/util/Collection<Ljava/lang/String;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilMutableBits;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilMutableBits;", 0x401, 0, 3, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x401, 4, 5, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 6, 7, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 8, 9, 2, 10, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLiveDocsFormat = { 2, "LiveDocsFormat", "org.apache.lucene.codecs", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(newLiveDocsWithInt:);
+  methods[2].selector = @selector(newLiveDocsWithOrgApacheLuceneUtilBits:);
+  methods[3].selector = @selector(readLiveDocsWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreIOContext:);
+  methods[4].selector = @selector(writeLiveDocsWithOrgApacheLuceneUtilMutableBits:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withInt:withOrgApacheLuceneStoreIOContext:);
+  methods[5].selector = @selector(filesWithOrgApacheLuceneIndexSegmentCommitInfo:withJavaUtilCollection:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "newLiveDocs", "I", "LJavaIoIOException;", "LOrgApacheLuceneUtilBits;", "readLiveDocs", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentCommitInfo;LOrgApacheLuceneStoreIOContext;", "writeLiveDocs", "LOrgApacheLuceneUtilMutableBits;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentCommitInfo;ILOrgApacheLuceneStoreIOContext;", "files", "LOrgApacheLuceneIndexSegmentCommitInfo;LJavaUtilCollection;", "(Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/util/Collection<Ljava/lang/String;>;)V" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLiveDocsFormat = { "LiveDocsFormat", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 6, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLiveDocsFormat;
 }
 

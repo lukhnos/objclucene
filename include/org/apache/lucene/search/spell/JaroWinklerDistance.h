@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpellJaroWinklerDistance
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpellJaroWinklerDistance_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellJaroWinklerDistance || defined(INCLUDE_OrgApacheLuceneSearchSpellJaroWinklerDistance))
 #define OrgApacheLuceneSearchSpellJaroWinklerDistance_
 
@@ -31,10 +37,10 @@
 
 /*!
  @brief Creates a new distance metric with the default threshold
- for the Jaro Winkler bonus (0.7)
+  for the Jaro Winkler bonus (0.7)
  - seealso: #setThreshold(float)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -65,12 +71,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellJaroWinklerDistance)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellJaroWinklerDistance_init(OrgApacheLuceneSearchSpellJaroWinklerDistance *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellJaroWinklerDistance *new_OrgApacheLuceneSearchSpellJaroWinklerDistance_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellJaroWinklerDistance *new_OrgApacheLuceneSearchSpellJaroWinklerDistance_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellJaroWinklerDistance *create_OrgApacheLuceneSearchSpellJaroWinklerDistance_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellJaroWinklerDistance *create_OrgApacheLuceneSearchSpellJaroWinklerDistance_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellJaroWinklerDistance)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellJaroWinklerDistance")

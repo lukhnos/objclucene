@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester))
 #define OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_
 
@@ -36,100 +42,91 @@
 
 /*!
  @brief Suggester that first analyzes the surface form, adds the
- analyzed form to a weighted FST, and then does the same
- thing at lookup time.
- This means lookup is based on the
- analyzed form while suggestions are still the surface
- form(s).
+  analyzed form to a weighted FST, and then does the same
+  thing at lookup time.This means lookup is based on the
+  analyzed form while suggestions are still the surface
+  form(s).
  <p>
- This can result in powerful suggester functionality.  For
- example, if you use an analyzer removing stop words, 
- then the partial text "ghost chr..." could see the
- suggestion "The Ghost of Christmas Past". Note that
- position increments MUST NOT be preserved for this example
- to work, so you should call the constructor with 
+  This can result in powerful suggester functionality.  For
+  example, if you use an analyzer removing stop words, 
+  then the partial text "ghost chr..." could see the
+  suggestion "The Ghost of Christmas Past". Note that
+  position increments MUST NOT be preserved for this example
+  to work, so you should call the constructor with  
  <code>preservePositionIncrements</code> parameter set to 
- false
+  false 
  <p>
- If SynonymFilter is used to map wifi and wireless network to
- hotspot then the partial text "wirele..." could suggest
- "wifi router".  Token normalization like stemmers, accent
- removal, etc., would allow suggestions to ignore such
- variations.
+  If SynonymFilter is used to map wifi and wireless network to
+  hotspot then the partial text "wirele..." could suggest
+  "wifi router".  Token normalization like stemmers, accent
+  removal, etc., would allow suggestions to ignore such
+  variations. 
  <p>
- When two matching suggestions have the same weight, they
- are tie-broken by the analyzed form.  If their analyzed
- form is the same then the order is undefined.
+  When two matching suggestions have the same weight, they
+  are tie-broken by the analyzed form.  If their analyzed
+  form is the same then the order is undefined. 
  <p>
- There are some limitations:
+  There are some limitations: 
  <ul>
- <li> A lookup from a query like "net" in English won't
- be any different than "net " (ie, user added a
- trailing space) because analyzers don't reflect
- when they've seen a token separator and when they
- haven't.
+    <li> A lookup from a query like "net" in English won't
+         be any different than "net " (ie, user added a
+         trailing space) because analyzers don't reflect
+         when they've seen a token separator and when they
+         haven't.   
  <li> If you're using <code>StopFilter</code>, and the user will
- type "fast apple", but so far all they've typed is
- "fast a", again because the analyzer doesn't convey whether
- it's seen a token separator after the "a",
+         type "fast apple", but so far all they've typed is
+         "fast a", again because the analyzer doesn't convey whether
+         it's seen a token separator after the "a",        
  <code>StopFilter</code> will remove that "a" causing
- far more matches than you'd expect.
+         far more matches than you'd expect.   
  <li> Lookups with the empty string return no results
- instead of all results.
+         instead of all results. 
  </ul>
  */
 @interface OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester : OrgApacheLuceneSearchSuggestLookup
-
-+ (jint)EXACT_FIRST;
-
-+ (jint)PRESERVE_SEP;
-
-+ (id<JavaUtilComparator>)weightComparator;
+@property (readonly, class) jint EXACT_FIRST NS_SWIFT_NAME(EXACT_FIRST);
+@property (readonly, class) jint PRESERVE_SEP NS_SWIFT_NAME(PRESERVE_SEP);
+@property (readonly, class, strong) id<JavaUtilComparator> weightComparator NS_SWIFT_NAME(weightComparator);
 
 #pragma mark Public
 
 /*!
  @brief Calls <code>AnalyzingSuggester(analyzer, analyzer, EXACT_FIRST |
- PRESERVE_SEP, 256, -1, true)</code>
+  PRESERVE_SEP, 256, -1, true)</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  @brief Calls <code>AnalyzingSuggester(indexAnalyzer, queryAnalyzer, EXACT_FIRST |
- PRESERVE_SEP, 256, -1, true)</code>
+  PRESERVE_SEP, 256, -1, true)</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                              withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer;
 
 /*!
  @brief Creates a new suggester.
- @param indexAnalyzer Analyzer that will be used for
- analyzing suggestions while building the index.
- @param queryAnalyzer Analyzer that will be used for
- analyzing query text during lookup
- @param options see <code>EXACT_FIRST</code>, <code>PRESERVE_SEP</code>
- @param maxSurfaceFormsPerAnalyzedForm Maximum number of
- surface forms to keep for a single analyzed form.
- When there are too many surface forms we discard the
- lowest weighted ones.
- @param maxGraphExpansions Maximum number of graph paths
- to expand from the analyzed form.  Set this to -1 for
- no limit.
- @param preservePositionIncrements Whether position holes
- should appear in the automata
+ @param indexAnalyzer Analyzer that will be used for    analyzing suggestions while building the index.
+ @param queryAnalyzer Analyzer that will be used for    analyzing query text during lookup
+ @param options see <code>EXACT_FIRST</code> , <code>PRESERVE_SEP</code>
+ @param maxSurfaceFormsPerAnalyzedForm Maximum number of    surface forms to keep for a single analyzed form.
+     When there are too many surface forms we discard the
+     lowest weighted ones.
+ @param maxGraphExpansions Maximum number of graph paths    to expand from the analyzed form.  Set this to -1 for
+     no limit.
+ @param preservePositionIncrements Whether position holes    should appear in the automata
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                                withInt:(jint)options
-                                                withInt:(jint)maxSurfaceFormsPerAnalyzedForm
-                                                withInt:(jint)maxGraphExpansions
-                                            withBoolean:(jboolean)preservePositionIncrements;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                              withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                          withInt:(jint)options
+                                                          withInt:(jint)maxSurfaceFormsPerAnalyzedForm
+                                                          withInt:(jint)maxGraphExpansions
+                                                      withBoolean:(jboolean)preservePositionIncrements;
 
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
 
 /*!
  @brief Returns the weight associated with an input string,
- or null if it does not exist.
+  or null if it does not exist.
  */
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
@@ -155,7 +152,7 @@
 
 /*!
  @brief Used by subclass to change the lookup automaton, if
- necessary.
+   necessary.
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)convertAutomatonWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
@@ -175,6 +172,10 @@
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toLookupAutomatonWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester)
@@ -182,25 +183,24 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester)
 /*!
  @brief Include this flag in the options parameter to <code>AnalyzingSuggester(Analyzer,Analyzer,int,int,int,boolean)</code>
   to always
- return the exact match first, regardless of score.
- This
- has no performance impact but could result in
- low-quality suggestions. 
+   return the exact match first, regardless of score.This
+   has no performance impact but could result in
+   low-quality suggestions.
  */
-inline jint OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_get_EXACT_FIRST();
+inline jint OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_get_EXACT_FIRST(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_EXACT_FIRST 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester, EXACT_FIRST, jint)
 
 /*!
  @brief Include this flag in the options parameter to <code>AnalyzingSuggester(Analyzer,Analyzer,int,int,int,boolean)</code>
   to preserve
- token separators when matching.
+   token separators when matching.
  */
-inline jint OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_get_PRESERVE_SEP();
+inline jint OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_get_PRESERVE_SEP(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_PRESERVE_SEP 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester, PRESERVE_SEP, jint)
 
-inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_get_weightComparator();
+inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_get_weightComparator(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_weightComparator;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester, weightComparator, id<JavaUtilComparator>)
@@ -227,4 +227,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggest
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester")

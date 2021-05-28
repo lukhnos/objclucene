@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Arrays.h"
 #include "java/util/List.h"
@@ -19,6 +18,10 @@
 #include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/TermContext must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexTermContext () {
  @public
@@ -68,9 +71,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermContext, states_, IOSObjectArray *)
 
 - (void)register__WithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state
                                             withInt:(jint)ord {
-  JreAssert((state != nil), (@"state must not be null"));
-  JreAssert((ord >= 0 && ord < ((IOSObjectArray *) nil_chk(states_))->size_), (@"org/apache/lucene/index/TermContext.java:131 condition failed: assert ord >= 0 && ord < states.length;"));
-  JreAssert((IOSObjectArray_Get(nil_chk(states_), ord) == nil), (JreStrcat("$I$", @"state for ord: ", ord, @" already registered")));
+  JreAssert(state != nil, @"state must not be null");
+  JreAssert(ord >= 0 && ord < ((IOSObjectArray *) nil_chk(states_))->size_, @"org/apache/lucene/index/TermContext.java:131 condition failed: assert ord >= 0 && ord < states.length;");
+  JreAssert(IOSObjectArray_Get(nil_chk(states_), ord) == nil, JreStrcat("$I$", @"state for ord: ", ord, @" already registered"));
   IOSObjectArray_Set(states_, ord, state);
 }
 
@@ -82,7 +85,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermContext, states_, IOSObjectArray *)
 }
 
 - (OrgApacheLuceneIndexTermState *)getWithInt:(jint)ord {
-  JreAssert((ord >= 0 && ord < ((IOSObjectArray *) nil_chk(states_))->size_), (@"org/apache/lucene/index/TermContext.java:156 condition failed: assert ord >= 0 && ord < states.length;"));
+  JreAssert(ord >= 0 && ord < ((IOSObjectArray *) nil_chk(states_))->size_, @"org/apache/lucene/index/TermContext.java:156 condition failed: assert ord >= 0 && ord < states.length;");
   return IOSObjectArray_Get(nil_chk(states_), ord);
 }
 
@@ -133,27 +136,44 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermContext, states_, IOSObjectArray *)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReaderContext:", "TermContext", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexIndexReaderContext:withOrgApacheLuceneIndexTermState:withInt:withInt:withLong:", "TermContext", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneIndexIndexReaderContext:withOrgApacheLuceneIndexTerm:", "build", "Lorg.apache.lucene.index.TermContext;", 0x9, "Ljava.io.IOException;", NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "register__WithOrgApacheLuceneIndexTermState:withInt:withInt:withLong:", "register", "V", 0x1, NULL, NULL },
-    { "register__WithOrgApacheLuceneIndexTermState:withInt:", "register", "V", 0x1, NULL, NULL },
-    { "accumulateStatisticsWithInt:withLong:", "accumulateStatistics", "V", 0x1, NULL, NULL },
-    { "getWithInt:", "get", "Lorg.apache.lucene.index.TermState;", 0x1, NULL, NULL },
-    { "docFreq", NULL, "I", 0x1, NULL, NULL },
-    { "totalTermFreq", NULL, "J", 0x1, NULL, NULL },
-    { "hasOnlyRealTerms", NULL, "Z", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermContext;", 0x9, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermState;", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 12, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReaderContext:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexIndexReaderContext:withOrgApacheLuceneIndexTermState:withInt:withInt:withLong:);
+  methods[2].selector = @selector(buildWithOrgApacheLuceneIndexIndexReaderContext:withOrgApacheLuceneIndexTerm:);
+  methods[3].selector = @selector(clear);
+  methods[4].selector = @selector(register__WithOrgApacheLuceneIndexTermState:withInt:withInt:withLong:);
+  methods[5].selector = @selector(register__WithOrgApacheLuceneIndexTermState:withInt:);
+  methods[6].selector = @selector(accumulateStatisticsWithInt:withLong:);
+  methods[7].selector = @selector(getWithInt:);
+  methods[8].selector = @selector(docFreq);
+  methods[9].selector = @selector(totalTermFreq);
+  methods[10].selector = @selector(hasOnlyRealTerms);
+  methods[11].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "topReaderContext_", NULL, 0x11, "Lorg.apache.lucene.index.IndexReaderContext;", NULL, NULL, .constantValue.asLong = 0 },
-    { "states_", NULL, 0x12, "[Lorg.apache.lucene.index.TermState;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docFreq_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalTermFreq_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "topReaderContext_", "LOrgApacheLuceneIndexIndexReaderContext;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "states_", "[LOrgApacheLuceneIndexTermState;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "docFreq_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "totalTermFreq_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermContext = { 2, "TermContext", "org.apache.lucene.index", NULL, 0x11, 12, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReaderContext;", "LOrgApacheLuceneIndexIndexReaderContext;LOrgApacheLuceneIndexTermState;IIJ", "build", "LOrgApacheLuceneIndexIndexReaderContext;LOrgApacheLuceneIndexTerm;", "LJavaIoIOException;", "register", "LOrgApacheLuceneIndexTermState;IIJ", "LOrgApacheLuceneIndexTermState;I", "accumulateStatistics", "IJ", "get", "I", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermContext = { "TermContext", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 12, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexTermContext;
 }
 
@@ -161,7 +181,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermContext, states_, IOSObjectArray *)
 
 void OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(OrgApacheLuceneIndexTermContext *self, OrgApacheLuceneIndexIndexReaderContext *context) {
   NSObject_init(self);
-  JreAssert((context != nil && context->isTopLevel_), (@"org/apache/lucene/index/TermContext.java:52 condition failed: assert context != null && context.isTopLevel;"));
+  JreAssert(context != nil && context->isTopLevel_, @"org/apache/lucene/index/TermContext.java:52 condition failed: assert context != null && context.isTopLevel;");
   JreStrongAssign(&self->topReaderContext_, context);
   self->docFreq_ = 0;
   self->totalTermFreq_ = 0;
@@ -198,7 +218,7 @@ OrgApacheLuceneIndexTermContext *create_OrgApacheLuceneIndexTermContext_initWith
 
 OrgApacheLuceneIndexTermContext *OrgApacheLuceneIndexTermContext_buildWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexIndexReaderContext *context, OrgApacheLuceneIndexTerm *term) {
   OrgApacheLuceneIndexTermContext_initialize();
-  JreAssert((context != nil && context->isTopLevel_), (@"org/apache/lucene/index/TermContext.java:84 condition failed: assert context != null && context.isTopLevel;"));
+  JreAssert(context != nil && context->isTopLevel_, @"org/apache/lucene/index/TermContext.java:84 condition failed: assert context != null && context.isTopLevel;");
   NSString *field = [((OrgApacheLuceneIndexTerm *) nil_chk(term)) field];
   OrgApacheLuceneUtilBytesRef *bytes = [term bytes];
   OrgApacheLuceneIndexTermContext *perReaderTermState = create_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(context);

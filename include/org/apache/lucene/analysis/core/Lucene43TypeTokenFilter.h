@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter))
 #define OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 1
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilSet;
 
@@ -31,10 +36,10 @@
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                withJavaUtilSet:(id<JavaUtilSet>)stopTypes
-                    withBoolean:(jboolean)useWhiteList;
+- (instancetype __nonnull)initWithBoolean:(jboolean)enablePositionIncrements
+   withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                          withJavaUtilSet:(id<JavaUtilSet>)stopTypes
+                              withBoolean:(jboolean)useWhiteList;
 
 #pragma mark Protected
 
@@ -43,6 +48,11 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
  When the useWhiteList parameter is set to true then accept the token if its type is contained in the stopTypes
  */
 - (jboolean)accept;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithBoolean:(jboolean)arg0
+   withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -58,4 +68,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter")

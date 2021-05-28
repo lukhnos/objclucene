@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat || defined(INCLUDE_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat))
 #define OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_
 
@@ -28,54 +34,52 @@
 /*!
  @brief Lucene 5.3 Score normalization format.
  <p>
- Encodes normalization values by encoding each value with the minimum
- number of bytes needed to represent the range (which can be zero).
+  Encodes normalization values by encoding each value with the minimum
+  number of bytes needed to represent the range (which can be zero). 
  <p>
- Files:
+  Files: 
  <ol>
- <li><tt>.nvd</tt>: Norms data</li>
- <li><tt>.nvm</tt>: Norms metadata</li>
- </ol>
- <ol>
- <li><a name="nvm"></a>
- <p>The Norms metadata or .nvm file.</p>
- <p>For each norms field, this stores metadata, such as the offset into the 
- Norms data (.nvd)</p>
- <p>Norms metadata (.dvm) --&gt; Header,&lt;Entry&gt;<sup>NumFields</sup>,Footer</p>
- <ul>
- <li>Header --&gt; <code>IndexHeader</code></li>
- <li>Entry --&gt; FieldNumber,BytesPerValue, Address</li>
- <li>FieldNumber --&gt; <code>vInt</code></li>
- <li>BytesPerValue --&gt; <code>byte</code></li>
- <li>Offset --&gt; <code>Int64</code></li>
- <li>Footer --&gt; <code>CodecFooter</code></li>
- </ul>
- <p>FieldNumber of -1 indicates the end of metadata.</p>
- <p>Offset is the pointer to the start of the data in the norms data (.nvd), or the singleton value 
- when BytesPerValue = 0</p>
- <li><a name="nvd"></a>
- <p>The Norms data or .nvd file.</p>
- <p>For each Norms field, this stores the actual per-document data (the heavy-lifting)</p>
- <p>Norms data (.nvd) --&gt; Header,&lt; Data &gt;<sup>NumFields</sup>,Footer</p>
- <ul>
- <li>Header --&gt; <code>IndexHeader</code></li>
- <li>Data --&gt; <code>byte</code><sup>MaxDoc * BytesPerValue</sup></li>
- <li>Footer --&gt; <code>CodecFooter</code></li>
- </ul>
- </ol>
+    <li><tt>.nvd</tt>: Norms data</li>
+    <li><tt>.nvm</tt>: Norms metadata</li>
+  </ol>
+  <ol>
+    <li><a name="nvm"></a>
+    <p>The Norms metadata or .nvm file.</p>
+    <p>For each norms field, this stores metadata, such as the offset into the 
+       Norms data (.nvd)</p>
+    <p>Norms metadata (.dvm) --&gt; Header,&lt;Entry&gt;<sup>NumFields</sup>,Footer</p>
+    <ul>
+      <li>Header --&gt; <code>IndexHeader</code></li>
+      <li>Entry --&gt; FieldNumber,BytesPerValue, Address</li>
+      <li>FieldNumber --&gt; <code>vInt</code></li>
+      <li>BytesPerValue --&gt; <code>byte</code></li>
+      <li>Offset --&gt; <code>Int64</code></li>
+      <li>Footer --&gt; <code>CodecFooter</code></li>
+    </ul>
+    <p>FieldNumber of -1 indicates the end of metadata.</p>
+    <p>Offset is the pointer to the start of the data in the norms data (.nvd), or the singleton value 
+       when BytesPerValue = 0</p>
+    <li><a name="nvd"></a>
+    <p>The Norms data or .nvd file.</p>
+    <p>For each Norms field, this stores the actual per-document data (the heavy-lifting)</p>
+    <p>Norms data (.nvd) --&gt; Header,&lt; Data &gt;<sup>NumFields</sup>,Footer</p>
+    <ul>
+      <li>Header --&gt; <code>IndexHeader</code></li>
+      <li>Data --&gt; <code>byte</code><sup>MaxDoc * BytesPerValue</sup></li>
+      <li>Footer --&gt; <code>CodecFooter</code></li>
+    </ul>
+  </ol>
  */
 @interface OrgApacheLuceneCodecsLucene53Lucene53NormsFormat : OrgApacheLuceneCodecsNormsFormat
-
-+ (jint)VERSION_START;
-
-+ (jint)VERSION_CURRENT;
+@property (readonly, class) jint VERSION_START NS_SWIFT_NAME(VERSION_START);
+@property (readonly, class) jint VERSION_CURRENT NS_SWIFT_NAME(VERSION_CURRENT);
 
 #pragma mark Public
 
 /*!
  @brief Sole Constructor
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneCodecsNormsConsumer *)normsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
@@ -85,22 +89,26 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat)
 
-inline jint OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_get_VERSION_START();
+inline jint OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_get_VERSION_START(void);
 #define OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_START 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, VERSION_START, jint)
 
-inline jint OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_get_VERSION_CURRENT();
+inline jint OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_get_VERSION_CURRENT(void);
 #define OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_CURRENT 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, VERSION_CURRENT, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53NormsFormat *new_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53NormsFormat *new_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53NormsFormat *create_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53NormsFormat *create_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat")

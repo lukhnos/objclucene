@@ -8,7 +8,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/CharSequence.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/TokenStreamToAutomaton.h"
@@ -19,7 +18,6 @@
 #include "org/apache/lucene/search/suggest/document/CompletionTokenStream.h"
 #include "org/apache/lucene/util/AttributeImpl.h"
 #include "org/apache/lucene/util/AttributeReflector.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
 #include "org/apache/lucene/util/CharsRef.h"
@@ -32,6 +30,10 @@
 #include "org/apache/lucene/util/automaton/Operations.h"
 #include "org/apache/lucene/util/automaton/Transition.h"
 #include "org/apache/lucene/util/fst/Util.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/CompletionTokenStream must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream () {
  @public
@@ -122,10 +124,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
 - (jboolean)incrementToken {
   [self clearAttributes];
   if (finiteStrings_ == nil) {
-    OrgApacheLuceneUtilAutomatonAutomaton *automaton = [self toAutomaton];
+    OrgApacheLuceneUtilAutomatonAutomaton *automaton = JreRetainedLocalValue([self toAutomaton]);
     JreStrongAssignAndConsume(&finiteStrings_, new_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(automaton, maxGraphExpansions_));
   }
-  OrgApacheLuceneUtilIntsRef *string = [finiteStrings_ next];
+  OrgApacheLuceneUtilIntsRef *string = JreRetainedLocalValue([finiteStrings_ next]);
   if (string == nil) {
     return false;
   }
@@ -203,31 +205,45 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "CompletionTokenStream", NULL, 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:withBoolean:withInt:", "CompletionTokenStream", NULL, 0x0, NULL, NULL },
-    { "setPayloadWithOrgApacheLuceneUtilBytesRef:", "setPayload", "V", 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "toAutomaton", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toAutomatonWithBoolean:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, "Ljava.io.IOException;", NULL },
-    { "replaceSepWithOrgApacheLuceneUtilAutomatonAutomaton:withBoolean:withInt:", "replaceSep", "Lorg.apache.lucene.util.automaton.Automaton;", 0xa, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x1, 5, 6, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0xa, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:withBoolean:withInt:);
+  methods[2].selector = @selector(setPayloadWithOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(incrementToken);
+  methods[4].selector = @selector(end);
+  methods[5].selector = @selector(close);
+  methods[6].selector = @selector(reset);
+  methods[7].selector = @selector(toAutomaton);
+  methods[8].selector = @selector(toAutomatonWithBoolean:);
+  methods[9].selector = @selector(replaceSepWithOrgApacheLuceneUtilAutomatonAutomaton:withBoolean:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "payloadAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesAtt_", NULL, 0x12, "Lorg.apache.lucene.search.suggest.document.CompletionTokenStream$BytesRefBuilderTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "input_", NULL, 0x12, "Lorg.apache.lucene.analysis.TokenStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "preserveSep_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "preservePositionIncrements_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxGraphExpansions_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "finiteStrings_", NULL, 0x2, "Lorg.apache.lucene.util.automaton.FiniteStringsIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payload_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "charTermAttribute_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "payloadAttr_", "LOrgApacheLuceneAnalysisTokenattributesPayloadAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "bytesAtt_", "LOrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "input_", "LOrgApacheLuceneAnalysisTokenStream;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "preserveSep_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "preservePositionIncrements_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxGraphExpansions_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "finiteStrings_", "LOrgApacheLuceneUtilAutomatonFiniteStringsIterator;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "charTermAttribute_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.document.CompletionTokenStream$EscapingTokenStreamToAutomaton;", "Lorg.apache.lucene.search.suggest.document.CompletionTokenStream$BytesRefBuilderTermAttribute;", "Lorg.apache.lucene.search.suggest.document.CompletionTokenStream$BytesRefBuilderTermAttributeImpl;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream = { 2, "CompletionTokenStream", "org.apache.lucene.search.suggest.document", NULL, 0x11, 10, methods, 9, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LOrgApacheLuceneAnalysisTokenStream;ZZI", "setPayload", "LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "toAutomaton", "Z", "replaceSep", "LOrgApacheLuceneUtilAutomatonAutomaton;ZI", "LOrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton;LOrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute;LOrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream = { "CompletionTokenStream", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x11, 10, 9, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream;
 }
 
@@ -279,7 +295,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentCompl
     for (jint j = 0; j < count; j++) {
       [a getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:t];
       if (t->min_ == OrgApacheLuceneAnalysisTokenStreamToAutomaton_POS_SEP) {
-        JreAssert((t->max_ == OrgApacheLuceneAnalysisTokenStreamToAutomaton_POS_SEP), (@"org/apache/lucene/search/suggest/document/CompletionTokenStream.java:242 condition failed: assert t.max == TokenStreamToAutomaton.POS_SEP;"));
+        JreAssert(t->max_ == OrgApacheLuceneAnalysisTokenStreamToAutomaton_POS_SEP, @"org/apache/lucene/search/suggest/document/CompletionTokenStream.java:242 condition failed: assert t.max == TokenStreamToAutomaton.POS_SEP;");
         if (preserveSep) {
           [result addTransitionWithInt:state withInt:t->dest_ withInt:sepLabel];
         }
@@ -288,7 +304,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentCompl
         }
       }
       else if (t->min_ == OrgApacheLuceneAnalysisTokenStreamToAutomaton_HOLE) {
-        JreAssert((t->max_ == OrgApacheLuceneAnalysisTokenStreamToAutomaton_HOLE), (@"org/apache/lucene/search/suggest/document/CompletionTokenStream.java:250 condition failed: assert t.max == TokenStreamToAutomaton.HOLE;"));
+        JreAssert(t->max_ == OrgApacheLuceneAnalysisTokenStreamToAutomaton_HOLE, @"org/apache/lucene/search/suggest/document/CompletionTokenStream.java:250 condition failed: assert t.max == TokenStreamToAutomaton.HOLE;");
         [result addEpsilonWithInt:state withInt:t->dest_];
       }
       else {
@@ -333,15 +349,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionT
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithChar:", "EscapingTokenStreamToAutomaton", NULL, 0x1, NULL, NULL },
-    { "changeTokenWithOrgApacheLuceneUtilBytesRef:", "changeToken", "Lorg.apache.lucene.util.BytesRef;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x4, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithChar:);
+  methods[1].selector = @selector(changeTokenWithOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "spare_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sepLabel_", NULL, 0x2, "C", NULL, NULL, .constantValue.asLong = 0 },
+    { "spare_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "sepLabel_", "C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton = { 2, "EscapingTokenStreamToAutomaton", "org.apache.lucene.search.suggest.document", "CompletionTokenStream", 0x1a, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "C", "changeToken", "LOrgApacheLuceneUtilBytesRef;", "LOrgApacheLuceneSearchSuggestDocumentCompletionTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton = { "EscapingTokenStreamToAutomaton", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x1a, 2, 2, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton;
 }
 
@@ -366,11 +389,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionT
 @implementation OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "builder", NULL, "Lorg.apache.lucene.util.BytesRefBuilder;", 0x401, NULL, NULL },
-    { "toUTF16", NULL, "Ljava.lang.CharSequence;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneUtilBytesRefBuilder;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute = { 2, "BytesRefBuilderTermAttribute", "org.apache.lucene.search.suggest.document", "CompletionTokenStream", 0x60a, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(builder);
+  methods[1].selector = @selector(toUTF16);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestDocumentCompletionTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute = { "BytesRefBuilderTermAttribute", "org.apache.lucene.search.suggest.document", ptrTable, methods, NULL, 7, 0x60a, 2, 0, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute;
 }
 
@@ -404,7 +434,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *) nil_chk(other))->bytes_)) copyBytesWithOrgApacheLuceneUtilBytesRefBuilder:bytes_];
 }
 
-- (OrgApacheLuceneUtilAttributeImpl *)clone {
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone {
   OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *other = create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init();
   [self copyToWithOrgApacheLuceneUtilAttributeImpl:other];
   return other;
@@ -429,21 +459,34 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BytesRefBuilderTermAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "builder", NULL, "Lorg.apache.lucene.util.BytesRefBuilder;", 0x1, NULL, NULL },
-    { "getBytesRef", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.util.AttributeImpl;", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
-    { "toUTF16", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRefBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeImpl;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(builder);
+  methods[2].selector = @selector(getBytesRef);
+  methods[3].selector = @selector(clear);
+  methods[4].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[5].selector = @selector(java_clone);
+  methods[6].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  methods[7].selector = @selector(toUTF16);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bytes_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "charsRef_", NULL, 0x82, "Lorg.apache.lucene.util.CharsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "bytes_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "charsRef_", "LOrgApacheLuceneUtilCharsRefBuilder;", .constantValue.asLong = 0, 0x82, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl = { 2, "BytesRefBuilderTermAttributeImpl", "org.apache.lucene.search.suggest.document", "CompletionTokenStream", 0x19, 8, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", "clone", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;", "LOrgApacheLuceneSearchSuggestDocumentCompletionTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl = { "BytesRefBuilderTermAttributeImpl", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x19, 8, 2, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl;
 }
 

@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/MatchNoDocsQuery.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/search/BooleanQuery.h"
@@ -13,11 +11,22 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/MatchNoDocsQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchMatchNoDocsQuery
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchMatchNoDocsQuery_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   OrgApacheLuceneSearchBooleanQuery_Builder *builder = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
-  OrgApacheLuceneSearchQuery *rewritten = [builder build];
+  OrgApacheLuceneSearchQuery *rewritten = JreRetainedLocalValue([builder build]);
   [((OrgApacheLuceneSearchQuery *) nil_chk(rewritten)) setBoostWithFloat:[self getBoost]];
   return rewritten;
 }
@@ -29,20 +38,21 @@
   return [buffer description];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchMatchNoDocsQuery_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "MatchNoDocsQuery", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, 4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMatchNoDocsQuery = { 2, "MatchNoDocsQuery", "org.apache.lucene.search", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[2].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "rewrite", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "toString", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMatchNoDocsQuery = { "MatchNoDocsQuery", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchMatchNoDocsQuery;
 }
 

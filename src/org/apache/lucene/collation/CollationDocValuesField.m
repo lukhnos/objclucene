@@ -13,6 +13,10 @@
 #include "org/apache/lucene/document/SortedDocValuesField.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/collation/CollationDocValuesField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCollationCollationDocValuesField () {
  @public
   NSString *name_CollationDocValuesField_;
@@ -52,17 +56,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCollationCollationDocValuesField, bytes_, Org
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaTextCollator:", "CollationDocValuesField", NULL, 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "setStringValueWithNSString:", "setStringValue", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withJavaTextCollator:);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(setStringValueWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "name_CollationDocValuesField_", "name", 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "collator_", NULL, 0x12, "Ljava.text.Collator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytes_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "name_CollationDocValuesField_", "LNSString;", .constantValue.asLong = 0, 0x12, 3, -1, -1, -1 },
+    { "collator_", "LJavaTextCollator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "bytes_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCollationCollationDocValuesField = { 2, "CollationDocValuesField", "org.apache.lucene.collation", NULL, 0x11, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LJavaTextCollator;", "setStringValue", "LNSString;", "name" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCollationCollationDocValuesField = { "CollationDocValuesField", "org.apache.lucene.collation", ptrTable, methods, fields, 7, 0x11, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCollationCollationDocValuesField;
 }
 
@@ -72,7 +84,7 @@ void OrgApacheLuceneCollationCollationDocValuesField_initWithNSString_withJavaTe
   OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, JreLoadStatic(OrgApacheLuceneDocumentSortedDocValuesField, TYPE));
   JreStrongAssignAndConsume(&self->bytes_, new_OrgApacheLuceneUtilBytesRef_init());
   JreStrongAssign(&self->name_CollationDocValuesField_, name);
-  JreStrongAssign(&self->collator_, (JavaTextCollator *) cast_chk([((JavaTextCollator *) nil_chk(collator)) clone], [JavaTextCollator class]));
+  JreStrongAssign(&self->collator_, (JavaTextCollator *) cast_chk([((JavaTextCollator *) nil_chk(collator)) java_clone], [JavaTextCollator class]));
   JreStrongAssign(&self->fieldsData_, self->bytes_);
 }
 

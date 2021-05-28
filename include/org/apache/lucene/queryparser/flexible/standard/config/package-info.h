@@ -6,12 +6,12 @@
 /*!
  @brief Standard Lucene Query Configuration.
  <h2>Standard Lucene Query Configuration</h2>
+  <p>
+  The package org.apache.lucene.queryparser.flexible.standard.config contains the Lucene
+  query configuration handler (StandardQueryConfigHandler). This configuration
+  handler reproduces almost everything that could be set on the old query parser. 
  <p>
- The package org.apache.lucene.queryparser.flexible.standard.config contains the Lucene
- query configuration handler (StandardQueryConfigHandler). This configuration
- handler reproduces almost everything that could be set on the old query parser.
- <p>
- StandardQueryConfigHandler is the class that should be used to configure the StandardQueryNodeProcessorPipeline.
+  StandardQueryConfigHandler is the class that should be used to configure the StandardQueryNodeProcessorPipeline.
  */
 #include "J2ObjC_header.h"
 
@@ -23,4 +23,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info")

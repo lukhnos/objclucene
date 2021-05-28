@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_
 
@@ -29,29 +35,30 @@
 /*!
  @brief Factory for <code>CapitalizationFilter</code>.
  <p>
- The factory takes parameters:
+  The factory takes parameters: 
  <ul>
- <li> "onlyFirstWord" - should each word be capitalized or all of the words?
- <li> "keep" - a keep word list.  Each word that should be kept separated by whitespace.
- <li> "keepIgnoreCase - true or false.  If true, the keep list will be considered case-insensitive.
- <li> "forceFirstLetter" - Force the first letter to be capitalized even if it is in the keep list
+  <li> "onlyFirstWord" - should each word be capitalized or all of the words? 
+ <li> "keep" - a keep word list.  Each word that should be kept separated by whitespace. 
+ <li> "keepIgnoreCase - true or false.  If true, the keep list will be considered case-insensitive. 
+ <li> "forceFirstLetter" - Force the first letter to be capitalized even if it is in the keep list 
  <li> "okPrefix" - do not change word capitalization if a word begins with something in this list.
- for example if "McK" is on the okPrefix list, the word "McKinley" should not be changed to
- "Mckinley"
+  for example if "McK" is on the okPrefix list, the word "McKinley" should not be changed to
+  "Mckinley" 
  <li> "minWordLength" - how long the word needs to be to get capitalization applied.  If the
- minWordLength is 3, "and" &gt; "And" but "or" stays "or"
+  minWordLength is 3, "and" &gt; "And" but "or" stays "or" 
  <li>"maxWordCount" - if the token contains more then maxWordCount words, the capitalization is
- assumed to be correct.
+  assumed to be correct. 
  </ul>
+  
  <pre class="prettyprint">
- &lt;fieldType name="text_cptlztn" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.CapitalizationFilterFactory" onlyFirstWord="true"
- keep="java solr lucene" keepIgnoreCase="false"
- okPrefix="McK McD McA"/&gt;   
+  &lt;fieldType name="text_cptlztn" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.CapitalizationFilterFactory" onlyFirstWord="true"
+            keep="java solr lucene" keepIgnoreCase="false"
+            okPrefix="McK McD McA"/&gt;      
  &lt;/analyzer&gt;
- 
+  &lt;/fieldType&gt;
 @endcode
  @since solr 1.3
  */
@@ -65,29 +72,21 @@
   jboolean onlyFirstWord_;
   jboolean forceFirstLetter_;
 }
-
-+ (NSString *)KEEP;
-
-+ (NSString *)KEEP_IGNORE_CASE;
-
-+ (NSString *)OK_PREFIX;
-
-+ (NSString *)MIN_WORD_LENGTH;
-
-+ (NSString *)MAX_WORD_COUNT;
-
-+ (NSString *)MAX_TOKEN_LENGTH;
-
-+ (NSString *)ONLY_FIRST_WORD;
-
-+ (NSString *)FORCE_FIRST_LETTER;
+@property (readonly, copy, class) NSString *KEEP NS_SWIFT_NAME(KEEP);
+@property (readonly, copy, class) NSString *KEEP_IGNORE_CASE NS_SWIFT_NAME(KEEP_IGNORE_CASE);
+@property (readonly, copy, class) NSString *OK_PREFIX NS_SWIFT_NAME(OK_PREFIX);
+@property (readonly, copy, class) NSString *MIN_WORD_LENGTH NS_SWIFT_NAME(MIN_WORD_LENGTH);
+@property (readonly, copy, class) NSString *MAX_WORD_COUNT NS_SWIFT_NAME(MAX_WORD_COUNT);
+@property (readonly, copy, class) NSString *MAX_TOKEN_LENGTH NS_SWIFT_NAME(MAX_TOKEN_LENGTH);
+@property (readonly, copy, class) NSString *ONLY_FIRST_WORD NS_SWIFT_NAME(ONLY_FIRST_WORD);
+@property (readonly, copy, class) NSString *FORCE_FIRST_LETTER NS_SWIFT_NAME(FORCE_FIRST_LETTER);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new CapitalizationFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -98,42 +97,42 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilte
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, keep_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, okPrefix_, id<JavaUtilCollection>)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_KEEP();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_KEEP(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, KEEP, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_KEEP_IGNORE_CASE();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_KEEP_IGNORE_CASE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP_IGNORE_CASE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, KEEP_IGNORE_CASE, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_OK_PREFIX();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_OK_PREFIX(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_OK_PREFIX;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, OK_PREFIX, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_MIN_WORD_LENGTH();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_MIN_WORD_LENGTH(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MIN_WORD_LENGTH;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, MIN_WORD_LENGTH, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_MAX_WORD_COUNT();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_MAX_WORD_COUNT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MAX_WORD_COUNT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, MAX_WORD_COUNT, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_MAX_TOKEN_LENGTH();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_MAX_TOKEN_LENGTH(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MAX_TOKEN_LENGTH;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, MAX_TOKEN_LENGTH, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_ONLY_FIRST_WORD();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_ONLY_FIRST_WORD(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_ONLY_FIRST_WORD;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, ONLY_FIRST_WORD, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_FORCE_FIRST_LETTER();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_get_FORCE_FIRST_LETTER(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_FORCE_FIRST_LETTER;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, FORCE_FIRST_LETTER, NSString *)
@@ -148,4 +147,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory")

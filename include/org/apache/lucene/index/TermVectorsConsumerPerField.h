@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTermVectorsConsumerPerField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTermVectorsConsumerPerField_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumerPerField || defined(INCLUDE_OrgApacheLuceneIndexTermVectorsConsumerPerField))
 #define OrgApacheLuceneIndexTermVectorsConsumerPerField_
 
@@ -25,6 +31,7 @@
 @class OrgApacheLuceneIndexParallelPostingsArray;
 @class OrgApacheLuceneIndexTermVectorsConsumer;
 @class OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray;
+@class OrgApacheLuceneIndexTermsHash;
 @protocol OrgApacheLuceneAnalysisTokenattributesOffsetAttribute;
 @protocol OrgApacheLuceneAnalysisTokenattributesPayloadAttribute;
 @protocol OrgApacheLuceneIndexIndexableField;
@@ -43,9 +50,9 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)invertState
-                 withOrgApacheLuceneIndexTermVectorsConsumer:(OrgApacheLuceneIndexTermVectorsConsumer *)termsWriter
-                           withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)invertState
+                                         withOrgApacheLuceneIndexTermVectorsConsumer:(OrgApacheLuceneIndexTermVectorsConsumer *)termsWriter
+                                                   withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 - (void)newPostingsArray OBJC_METHOD_FAMILY_NONE;
 
@@ -57,9 +64,9 @@
 
 /*!
  @brief Called once per field per document if term vectors
- are enabled, to write the vectors to
- RAMOutputStream, which is then quickly flushed to
- the real term vectors files in the Directory.
+   are enabled, to write the vectors to
+   RAMOutputStream, which is then quickly flushed to
+   the real term vectors files in the Directory.
  */
 - (void)finish;
 
@@ -73,6 +80,14 @@
 - (void)writeProxWithOrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray:(OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *)postings
                                                                                       withInt:(jint)termID;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+           withOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)arg1
+                  withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)arg2
+          withOrgApacheLuceneIndexTermsHashPerField:(OrgApacheLuceneIndexTermsHashPerField *)arg3
+                  withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)arg4 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTermVectorsConsumerPerField)
@@ -81,11 +96,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termsWriter
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, offsetAttribute_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, payloadAttribute_, id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexTermVectorsConsumerPerField *self, OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexTermVectorsConsumerPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexTermVectorsConsumerPerField *self, OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumerPerField *new_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumerPerField *new_OrgApacheLuceneIndexTermVectorsConsumerPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumerPerField *create_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo);
+FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumerPerField *create_OrgApacheLuceneIndexTermVectorsConsumerPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermVectorsConsumerPerField)
 
@@ -109,7 +124,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermVectorsConsumerPerField)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
 
 #pragma mark Package-Private
 
@@ -119,6 +134,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermVectorsConsumerPerField)
                                                     withInt:(jint)numToCopy OBJC_METHOD_FAMILY_NONE;
 
 - (OrgApacheLuceneIndexParallelPostingsArray *)newInstanceWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -138,4 +157,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermVectorsConsumerPerField_TermV
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumerPerField")

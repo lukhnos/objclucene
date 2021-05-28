@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchGeoBoundingBox
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchGeoBoundingBox_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoBoundingBox || defined(INCLUDE_OrgApacheLuceneSearchGeoBoundingBox))
 #define OrgApacheLuceneSearchGeoBoundingBox_
 
@@ -29,23 +35,31 @@
 
 #pragma mark Public
 
-- (instancetype)initWithDouble:(jdouble)minLon
-                    withDouble:(jdouble)maxLon
-                    withDouble:(jdouble)minLat
-                    withDouble:(jdouble)maxLat;
+- (instancetype __nonnull)initPackagePrivateWithDouble:(jdouble)minLon
+                                            withDouble:(jdouble)maxLon
+                                            withDouble:(jdouble)minLat
+                                            withDouble:(jdouble)maxLat;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoBoundingBox)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoBoundingBox *self, jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoBoundingBox *self, jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoBoundingBox *new_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoBoundingBox *new_OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoBoundingBox *create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat);
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoBoundingBox *create_OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoBoundingBox)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoBoundingBox")

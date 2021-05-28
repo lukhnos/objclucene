@@ -7,11 +7,11 @@
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/Paths.h"
 
-@implementation OrgLukhnosPortmobileFilePaths
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/Paths must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-+ (OrgLukhnosPortmobileFilePath *)getWithNSString:(NSString *)path {
-  return OrgLukhnosPortmobileFilePaths_getWithNSString_(path);
-}
+@implementation OrgLukhnosPortmobileFilePaths
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -20,21 +20,27 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (OrgLukhnosPortmobileFilePath *)getWithNSString:(NSString *)path {
+  return OrgLukhnosPortmobileFilePaths_getWithNSString_(path);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithNSString:", "get", "Lorg.lukhnos.portmobile.file.Path;", 0x9, NULL, NULL },
-    { "init", "Paths", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x9, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFilePaths = { 2, "Paths", "org.lukhnos.portmobile.file", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getWithNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "get", "LNSString;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFilePaths = { "Paths", "org.lukhnos.portmobile.file", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgLukhnosPortmobileFilePaths;
 }
 
 @end
-
-OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFilePaths_getWithNSString_(NSString *path) {
-  OrgLukhnosPortmobileFilePaths_initialize();
-  return create_OrgLukhnosPortmobileFilePath_initWithNSString_(path);
-}
 
 void OrgLukhnosPortmobileFilePaths_init(OrgLukhnosPortmobileFilePaths *self) {
   NSObject_init(self);
@@ -46,6 +52,11 @@ OrgLukhnosPortmobileFilePaths *new_OrgLukhnosPortmobileFilePaths_init() {
 
 OrgLukhnosPortmobileFilePaths *create_OrgLukhnosPortmobileFilePaths_init() {
   J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFilePaths, init)
+}
+
+OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFilePaths_getWithNSString_(NSString *path) {
+  OrgLukhnosPortmobileFilePaths_initialize();
+  return create_OrgLukhnosPortmobileFilePath_initWithNSString_(path);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFilePaths)

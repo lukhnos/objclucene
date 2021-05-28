@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreLockStressTest
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreLockStressTest_) && (INCLUDE_ALL_OrgApacheLuceneStoreLockStressTest || defined(INCLUDE_OrgApacheLuceneStoreLockStressTest))
 #define OrgApacheLuceneStoreLockStressTest_
 
@@ -20,19 +26,17 @@
 
 /*!
  @brief Simple standalone tool that forever acquires and releases a
- lock using a specific LockFactory.
- Run without any args
- to see usage.
+  lock using a specific LockFactory.Run without any args
+  to see usage.
  - seealso: VerifyingLockFactory
  - seealso: LockVerifyServer
  */
 @interface OrgApacheLuceneStoreLockStressTest : NSObject
-
-+ (NSString *)LOCK_FILE_NAME;
+@property (readonly, copy, class) NSString *LOCK_FILE_NAME NS_SWIFT_NAME(LOCK_FILE_NAME);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (void)mainWithNSStringArray:(IOSObjectArray *)args;
 
@@ -40,21 +44,25 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreLockStressTest)
 
-inline NSString *OrgApacheLuceneStoreLockStressTest_get_LOCK_FILE_NAME();
+inline NSString *OrgApacheLuceneStoreLockStressTest_get_LOCK_FILE_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreLockStressTest, LOCK_FILE_NAME, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *args);
-
 FOUNDATION_EXPORT void OrgApacheLuceneStoreLockStressTest_init(OrgApacheLuceneStoreLockStressTest *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreLockStressTest *new_OrgApacheLuceneStoreLockStressTest_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockStressTest *new_OrgApacheLuceneStoreLockStressTest_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreLockStressTest *create_OrgApacheLuceneStoreLockStressTest_init();
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockStressTest *create_OrgApacheLuceneStoreLockStressTest_init(void);
+
+FOUNDATION_EXPORT void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *args);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockStressTest)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockStressTest")

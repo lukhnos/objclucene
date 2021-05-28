@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl))
 #define OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_
 
@@ -36,7 +42,7 @@
 /*!
  @brief Initialize this attribute with the keyword value as false.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)clear;
 
@@ -48,6 +54,8 @@
 
 - (jboolean)isKeyword;
 
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone;
+
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector;
 
 - (void)setKeywordWithBoolean:(jboolean)isKeyword;
@@ -58,12 +66,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenattributesKeywordAttributeI
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init(OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl")

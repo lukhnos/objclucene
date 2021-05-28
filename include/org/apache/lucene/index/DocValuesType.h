@@ -13,12 +13,20 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexDocValuesType
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocValuesType_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesType || defined(INCLUDE_OrgApacheLuceneIndexDocValuesType))
 #define OrgApacheLuceneIndexDocValuesType_
 
 #define RESTRICT_JavaLangEnum 1
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
+
+@class IOSObjectArray;
 
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexDocValuesType_Enum) {
   OrgApacheLuceneIndexDocValuesType_Enum_NONE = 0,
@@ -30,31 +38,25 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexDocValuesType_Enum) {
 };
 
 /*!
- @brief DocValues types.
- Note that DocValues is strongly typed, so a
- field cannot have different types across different documents.
+ @brief DocValues types.Note that DocValues is strongly typed, so a
+  field cannot have different types across different documents.
  */
-@interface OrgApacheLuceneIndexDocValuesType : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneIndexDocValuesType : JavaLangEnum
 
-+ (OrgApacheLuceneIndexDocValuesType *)NONE;
-
-+ (OrgApacheLuceneIndexDocValuesType *)NUMERIC;
-
-+ (OrgApacheLuceneIndexDocValuesType *)BINARY;
-
-+ (OrgApacheLuceneIndexDocValuesType *)SORTED;
-
-+ (OrgApacheLuceneIndexDocValuesType *)SORTED_NUMERIC;
-
-+ (OrgApacheLuceneIndexDocValuesType *)SORTED_SET;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneIndexDocValuesType *NONE NS_SWIFT_NAME(NONE);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexDocValuesType *NUMERIC NS_SWIFT_NAME(NUMERIC);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexDocValuesType *BINARY NS_SWIFT_NAME(BINARY);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexDocValuesType *SORTED NS_SWIFT_NAME(SORTED);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexDocValuesType *SORTED_NUMERIC NS_SWIFT_NAME(SORTED_NUMERIC);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexDocValuesType *SORTED_SET NS_SWIFT_NAME(SORTED_SET);
+#pragma mark Public
 
 + (OrgApacheLuceneIndexDocValuesType *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneIndexDocValuesType_Enum)toNSEnum;
 
 @end
@@ -67,52 +69,50 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValu
 /*!
  @brief No doc values for this field.
  */
-inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_NONE();
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_NONE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, NONE)
 
 /*!
  @brief A per-document Number
  */
-inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_NUMERIC();
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_NUMERIC(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, NUMERIC)
 
 /*!
- @brief A per-document byte[].
- Values may be larger than
- 32766 bytes, but different codecs may enforce their own limits.
+ @brief A per-document byte[].Values may be larger than
+  32766 bytes, but different codecs may enforce their own limits.
  */
-inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_BINARY();
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_BINARY(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, BINARY)
 
 /*!
- @brief A pre-sorted byte[].
- Fields with this type only store distinct byte values 
- and store an additional offset pointer per document to dereference the shared 
- byte[]. The stored byte[] is presorted and allows access via document id, 
- ordinal and by-value.  Values must be <code><= 32766</code> bytes.
+ @brief A pre-sorted byte[].Fields with this type only store distinct byte values 
+  and store an additional offset pointer per document to dereference the shared 
+  byte[].
+ The stored byte[] is presorted and allows access via document id, 
+  ordinal and by-value.  Values must be <code><= 32766</code> bytes.
  */
-inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_SORTED();
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_SORTED(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, SORTED)
 
 /*!
- @brief A pre-sorted Number[].
- Fields with this type store numeric values in sorted
- order according to <code>Long.compare(long,long)</code>.
+ @brief A pre-sorted Number[].Fields with this type store numeric values in sorted
+  order according to <code>Long.compare(long, long)</code>.
  */
-inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_SORTED_NUMERIC();
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_SORTED_NUMERIC(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC)
 
 /*!
- @brief A pre-sorted Set&lt;byte[]&gt;.
- Fields with this type only store distinct byte values 
- and store additional offset pointers per document to dereference the shared 
- byte[]s. The stored byte[] is presorted and allows access via document id, 
- ordinal and by-value.  Values must be <code><= 32766</code> bytes.
+ @brief A pre-sorted Set&lt;byte[]&gt;.Fields with this type only store distinct byte values 
+  and store additional offset pointers per document to dereference the shared 
+  byte[]s.
+ The stored byte[] is presorted and allows access via document id, 
+  ordinal and by-value.  Values must be <code><= 32766</code> bytes.
  */
-inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_SORTED_SET();
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_SORTED_SET(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, SORTED_SET)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexDocValuesType_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexDocValuesType_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_valueOfWithNSString_(NSString *name);
 
@@ -122,4 +122,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesType)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesType")

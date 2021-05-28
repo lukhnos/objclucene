@@ -13,6 +13,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/payloads/IdentityEncoder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisPayloadsIdentityEncoder
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -47,15 +51,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "IdentityEncoder", NULL, 0x1, NULL, NULL },
-    { "initWithJavaNioCharsetCharset:", "IdentityEncoder", NULL, 0x1, NULL, NULL },
-    { "encodeWithCharArray:withInt:withInt:", "encode", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithJavaNioCharsetCharset:);
+  methods[2].selector = @selector(encodeWithCharArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "charset_", NULL, 0x4, "Ljava.nio.charset.Charset;", NULL, NULL, .constantValue.asLong = 0 },
+    { "charset_", "LJavaNioCharsetCharset;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsIdentityEncoder = { 2, "IdentityEncoder", "org.apache.lucene.analysis.payloads", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaNioCharsetCharset;", "encode", "[CII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsIdentityEncoder = { "IdentityEncoder", "org.apache.lucene.analysis.payloads", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPayloadsIdentityEncoder;
 }
 

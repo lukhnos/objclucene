@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSearcherManager
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSearcherManager_) && (INCLUDE_ALL_OrgApacheLuceneSearchSearcherManager || defined(INCLUDE_OrgApacheLuceneSearchSearcherManager))
 #define OrgApacheLuceneSearchSearcherManager_
 
@@ -29,29 +35,29 @@
 
 /*!
  @brief Utility class to safely share <code>IndexSearcher</code> instances across multiple
- threads, while periodically reopening.
- This class ensures each searcher is
- closed only once all threads have finished using it.
+  threads, while periodically reopening.This class ensures each searcher is
+  closed only once all threads have finished using it.
  <p>
- Use <code>acquire</code> to obtain the current searcher, and <code>release</code> to
- release it, like this:
+  Use <code>acquire</code> to obtain the current searcher, and <code>release</code> to
+  release it, like this:  
  <pre class="prettyprint">
- IndexSearcher s = manager.acquire();
- try {
- // Do searching, doc retrieval, etc. with s
- } finally {
- manager.release(s);
- }
- // Do not use s after this!
- s = null;
+  IndexSearcher s = manager.acquire();
+  try {
+    // Do searching, doc retrieval, etc. with s
+  } finally {
+    manager.release(s);
+  }
+  // Do not use s after this!
+  s = null; 
  
 @endcode
+   
  <p>
- In addition you should periodically call <code>maybeRefresh</code>. While it's
- possible to call this just before running each query, this is discouraged
- since it penalizes the unlucky queries that need to refresh. It's better to use
- a separate background thread, that periodically calls <code>maybeRefresh</code>. Finally,
- be sure to call <code>close</code> once you are done.
+  In addition you should periodically call <code>maybeRefresh</code>. While it's
+  possible to call this just before running each query, this is discouraged
+  since it penalizes the unlucky queries that need to refresh. It's better to use
+  a separate background thread, that periodically calls <code>maybeRefresh</code>. Finally,
+  be sure to call <code>close</code> once you are done.
  - seealso: SearcherFactory
  */
 @interface OrgApacheLuceneSearchSearcherManager : OrgApacheLuceneSearchReferenceManager
@@ -61,57 +67,55 @@
 /*!
  @brief Creates and returns a new SearcherManager from the given <code>Directory</code>.
  @param dir the directory to open the DirectoryReader on.
- @param searcherFactory An optional <code>SearcherFactory</code>. Pass
- <code>null</code> if you don't require the searcher to be warmed
- before going live or other custom behavior.
- @throws IOException if there is a low-level I/O error
+ @param searcherFactory An optional <code>SearcherFactory</code> . Pass
+           <code> null </code>  if you don't require the searcher to be warmed
+          before going live or other custom behavior.
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-             withOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                       withOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory;
 
 /*!
- @brief Creates and returns a new SearcherManager from an existing <code>DirectoryReader</code>.
- Note that
- this steals the incoming reference.
+ @brief Creates and returns a new SearcherManager from an existing <code>DirectoryReader</code>.Note that
+  this steals the incoming reference.
  @param reader the DirectoryReader.
- @param searcherFactory An optional <code>SearcherFactory</code>. Pass
- <code>null</code> if you don't require the searcher to be warmed
- before going live or other custom behavior.
- @throws IOException if there is a low-level I/O error
+ @param searcherFactory An optional <code>SearcherFactory</code> . Pass
+           <code> null </code>  if you don't require the searcher to be warmed
+          before going live or other custom behavior.
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)reader
-                   withOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)reader
+                             withOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory;
 
 /*!
- @brief Creates and returns a new SearcherManager from the given
+ @brief Creates and returns a new SearcherManager from the given 
  <code>IndexWriter</code>.
- @param writer
- the IndexWriter to open the IndexReader from.
- @param applyAllDeletes
- If <code>true</code>, all buffered deletes will be applied (made
- visible) in the <code>IndexSearcher</code> / <code>DirectoryReader</code>.
- If <code>false</code>, the deletes may or may not be applied, but
- remain buffered (in IndexWriter) so that they will be applied in
- the future. Applying deletes can be costly, so if your app can
- tolerate deleted documents being returned you might gain some
- performance by passing <code>false</code>. See
- <code>DirectoryReader.openIfChanged(DirectoryReader,IndexWriter,boolean)</code>.
- @param searcherFactory
- An optional <code>SearcherFactory</code>. Pass <code>null</code> if you
- don't require the searcher to be warmed before going live or other
- custom behavior.
- @throws IOException if there is a low-level I/O error
+ @param writer the IndexWriter to open the IndexReader from.
+ @param applyAllDeletes If 
+  <code> true </code> , all buffered deletes will be applied (made           visible) in the 
+ <code>IndexSearcher</code>  / <code>DirectoryReader</code> .           If 
+  <code> false </code> , the deletes may or may not be applied, but           remain buffered (in IndexWriter) so that they will be applied in
+            the future. Applying deletes can be costly, so if your app can
+            tolerate deleted documents being returned you might gain some
+            performance by passing 
+  <code> false </code> . See           <code>DirectoryReader.openIfChanged(DirectoryReader, IndexWriter, boolean)</code>
+  .
+ @param searcherFactory An optional 
+ <code>SearcherFactory</code> . Pass  <code> null </code>  if you           don't require the searcher to be warmed before going live or other
+            custom behavior.
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                                            withBoolean:(jboolean)applyAllDeletes
-               withOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
+                                                      withBoolean:(jboolean)applyAllDeletes
+                         withOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory;
+
+- (OrgApacheLuceneSearchIndexSearcher *)acquire;
 
 /*!
  @brief Expert: creates a searcher from the provided <code>IndexReader</code>
   using the provided <code>SearcherFactory</code>
- .
- NOTE: this decRefs incoming reader
- on throwing an exception. 
+ .NOTE: this decRefs incoming reader
+  on throwing an exception.
  */
 + (OrgApacheLuceneSearchIndexSearcher *)getSearcherWithOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory
                                                         withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
@@ -119,7 +123,7 @@
 
 /*!
  @brief Returns <code>true</code> if no changes have occured since this searcher
- ie. reader was opened, otherwise <code>false</code>.
+  ie.reader was opened, otherwise <code>false</code>.
  - seealso: DirectoryReader#isCurrent()
  */
 - (jboolean)isSearcherCurrent;
@@ -133,6 +137,10 @@
 - (OrgApacheLuceneSearchIndexSearcher *)refreshIfNeededWithId:(OrgApacheLuceneSearchIndexSearcher *)referenceToRefresh;
 
 - (jboolean)tryIncRefWithId:(OrgApacheLuceneSearchIndexSearcher *)reference;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -162,4 +170,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherManager)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSearcherManager")

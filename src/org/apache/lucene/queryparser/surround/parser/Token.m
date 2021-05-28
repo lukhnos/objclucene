@@ -3,16 +3,19 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/surround/parser/Token.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/surround/parser/Token.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/parser/Token must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 /*!
  @brief The version identifier for this Serializable class.
  Increment only if the <i>serialized</i> form of the
- class changes.
+  class changes.
  */
-inline jlong OrgApacheLuceneQueryparserSurroundParserToken_get_serialVersionUID();
+inline jlong OrgApacheLuceneQueryparserSurroundParserToken_get_serialVersionUID(void);
 #define OrgApacheLuceneQueryparserSurroundParserToken_serialVersionUID 1LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSurroundParserToken, serialVersionUID, jlong)
 
@@ -61,27 +64,39 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getValue", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "init", "Token", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "Token", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withNSString:", "Token", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "newTokenWithInt:withNSString:", "newToken", "Lorg.apache.lucene.queryparser.surround.parser.Token;", 0x9, NULL, NULL },
-    { "newTokenWithInt:", "newToken", "Lorg.apache.lucene.queryparser.surround.parser.Token;", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundParserToken;", 0x9, 3, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundParserToken;", 0x9, 3, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getValue);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(initWithInt:);
+  methods[3].selector = @selector(initWithInt:withNSString:);
+  methods[4].selector = @selector(description);
+  methods[5].selector = @selector(newTokenWithInt:withNSString:);
+  methods[6].selector = @selector(newTokenWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "serialVersionUID", "serialVersionUID", 0x1a, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneQueryparserSurroundParserToken_serialVersionUID },
-    { "kind_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "beginLine_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "beginColumn_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endLine_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endColumn_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "image_", NULL, 0x1, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x1, "Lorg.apache.lucene.queryparser.surround.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "specialToken_", NULL, 0x1, "Lorg.apache.lucene.queryparser.surround.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
+    { "serialVersionUID", "J", .constantValue.asLong = OrgApacheLuceneQueryparserSurroundParserToken_serialVersionUID, 0x1a, -1, -1, -1, -1 },
+    { "kind_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "beginLine_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "beginColumn_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "endLine_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "endColumn_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "image_", "LNSString;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "next_", "LOrgApacheLuceneQueryparserSurroundParserToken;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "specialToken_", "LOrgApacheLuceneQueryparserSurroundParserToken;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserToken = { 2, "Token", "org.apache.lucene.queryparser.surround.parser", NULL, 0x1, 7, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "ILNSString;", "toString", "newToken" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserToken = { "Token", "org.apache.lucene.queryparser.surround.parser", ptrTable, methods, fields, 7, 0x1, 7, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundParserToken;
 }
 

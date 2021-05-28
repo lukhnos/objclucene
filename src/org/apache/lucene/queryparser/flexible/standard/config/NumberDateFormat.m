@@ -13,6 +13,10 @@
 #include "java/util/Date.h"
 #include "org/apache/lucene/queryparser/flexible/standard/config/NumberDateFormat.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/config/NumberDateFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat () {
  @public
   JavaTextDateFormat *dateFormat_;
@@ -22,7 +26,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat, dateFormat_, JavaTextDateFormat *)
 
-inline jlong OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_get_serialVersionUID();
+inline jlong OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_get_serialVersionUID(void);
 #define OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_serialVersionUID 964823936071308283LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat, serialVersionUID, jlong)
 
@@ -63,18 +67,28 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardConfigNum
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaTextDateFormat:", "NumberDateFormat", NULL, 0x1, NULL, NULL },
-    { "formatWithDouble:withJavaLangStringBuffer:withJavaTextFieldPosition:", "format", "Ljava.lang.StringBuffer;", 0x1, NULL, NULL },
-    { "formatWithLong:withJavaLangStringBuffer:withJavaTextFieldPosition:", "format", "Ljava.lang.StringBuffer;", 0x1, NULL, NULL },
-    { "parseWithNSString:withJavaTextParsePosition:", "parse", "Ljava.lang.Number;", 0x1, NULL, NULL },
-    { "formatWithId:withJavaLangStringBuffer:withJavaTextFieldPosition:", "format", "Ljava.lang.StringBuffer;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangStringBuffer;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LJavaLangStringBuffer;", 0x1, 1, 3, -1, -1, -1, -1 },
+    { NULL, "LNSNumber;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LJavaLangStringBuffer;", 0x1, 1, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaTextDateFormat:);
+  methods[1].selector = @selector(formatWithDouble:withJavaLangStringBuffer:withJavaTextFieldPosition:);
+  methods[2].selector = @selector(formatWithLong:withJavaLangStringBuffer:withJavaTextFieldPosition:);
+  methods[3].selector = @selector(parseWithNSString:withJavaTextParsePosition:);
+  methods[4].selector = @selector(formatWithId:withJavaLangStringBuffer:withJavaTextFieldPosition:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "serialVersionUID", "serialVersionUID", 0x1a, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_serialVersionUID },
-    { "dateFormat_", NULL, 0x12, "Ljava.text.DateFormat;", NULL, NULL, .constantValue.asLong = 0 },
+    { "serialVersionUID", "J", .constantValue.asLong = OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_serialVersionUID, 0x1a, -1, -1, -1, -1 },
+    { "dateFormat_", "LJavaTextDateFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat = { 2, "NumberDateFormat", "org.apache.lucene.queryparser.flexible.standard.config", NULL, 0x1, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaTextDateFormat;", "format", "DLJavaLangStringBuffer;LJavaTextFieldPosition;", "JLJavaLangStringBuffer;LJavaTextFieldPosition;", "parse", "LNSString;LJavaTextParsePosition;", "LNSObject;LJavaLangStringBuffer;LJavaTextFieldPosition;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat = { "NumberDateFormat", "org.apache.lucene.queryparser.flexible.standard.config", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat;
 }
 

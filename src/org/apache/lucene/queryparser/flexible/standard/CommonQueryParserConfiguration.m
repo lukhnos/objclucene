@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/standard/CommonQueryParserConfiguration.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/CommonQueryParserConfiguration must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration : NSObject
 
 @end
@@ -13,29 +17,54 @@
 @implementation OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setLowercaseExpandedTermsWithBoolean:", "setLowercaseExpandedTerms", "V", 0x401, NULL, NULL },
-    { "getLowercaseExpandedTerms", NULL, "Z", 0x401, NULL, NULL },
-    { "setAllowLeadingWildcardWithBoolean:", "setAllowLeadingWildcard", "V", 0x401, NULL, NULL },
-    { "setEnablePositionIncrementsWithBoolean:", "setEnablePositionIncrements", "V", 0x401, NULL, NULL },
-    { "getEnablePositionIncrements", NULL, "Z", 0x401, NULL, NULL },
-    { "setMultiTermRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:", "setMultiTermRewriteMethod", "V", 0x401, NULL, NULL },
-    { "getMultiTermRewriteMethod", NULL, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", 0x401, NULL, NULL },
-    { "setFuzzyPrefixLengthWithInt:", "setFuzzyPrefixLength", "V", 0x401, NULL, NULL },
-    { "setLocaleWithJavaUtilLocale:", "setLocale", "V", 0x401, NULL, NULL },
-    { "getLocale", NULL, "Ljava.util.Locale;", 0x401, NULL, NULL },
-    { "setTimeZoneWithJavaUtilTimeZone:", "setTimeZone", "V", 0x401, NULL, NULL },
-    { "getTimeZone", NULL, "Ljava.util.TimeZone;", 0x401, NULL, NULL },
-    { "setPhraseSlopWithInt:", "setPhraseSlop", "V", 0x401, NULL, NULL },
-    { "getAnalyzer", NULL, "Lorg.apache.lucene.analysis.Analyzer;", 0x401, NULL, NULL },
-    { "getAllowLeadingWildcard", NULL, "Z", 0x401, NULL, NULL },
-    { "getFuzzyMinSim", NULL, "F", 0x401, NULL, NULL },
-    { "getFuzzyPrefixLength", NULL, "I", 0x401, NULL, NULL },
-    { "getPhraseSlop", NULL, "I", 0x401, NULL, NULL },
-    { "setFuzzyMinSimWithFloat:", "setFuzzyMinSim", "V", 0x401, NULL, NULL },
-    { "setDateResolutionWithOrgApacheLuceneDocumentDateTools_Resolution:", "setDateResolution", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilLocale;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilTimeZone;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 12, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 13, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 15, 16, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration = { 2, "CommonQueryParserConfiguration", "org.apache.lucene.queryparser.flexible.standard", NULL, 0x609, 20, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setLowercaseExpandedTermsWithBoolean:);
+  methods[1].selector = @selector(getLowercaseExpandedTerms);
+  methods[2].selector = @selector(setAllowLeadingWildcardWithBoolean:);
+  methods[3].selector = @selector(setEnablePositionIncrementsWithBoolean:);
+  methods[4].selector = @selector(getEnablePositionIncrements);
+  methods[5].selector = @selector(setMultiTermRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:);
+  methods[6].selector = @selector(getMultiTermRewriteMethod);
+  methods[7].selector = @selector(setFuzzyPrefixLengthWithInt:);
+  methods[8].selector = @selector(setLocaleWithJavaUtilLocale:);
+  methods[9].selector = @selector(getLocale);
+  methods[10].selector = @selector(setTimeZoneWithJavaUtilTimeZone:);
+  methods[11].selector = @selector(getTimeZone);
+  methods[12].selector = @selector(setPhraseSlopWithInt:);
+  methods[13].selector = @selector(getAnalyzer);
+  methods[14].selector = @selector(getAllowLeadingWildcard);
+  methods[15].selector = @selector(getFuzzyMinSim);
+  methods[16].selector = @selector(getFuzzyPrefixLength);
+  methods[17].selector = @selector(getPhraseSlop);
+  methods[18].selector = @selector(setFuzzyMinSimWithFloat:);
+  methods[19].selector = @selector(setDateResolutionWithOrgApacheLuceneDocumentDateTools_Resolution:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setLowercaseExpandedTerms", "Z", "setAllowLeadingWildcard", "setEnablePositionIncrements", "setMultiTermRewriteMethod", "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", "setFuzzyPrefixLength", "I", "setLocale", "LJavaUtilLocale;", "setTimeZone", "LJavaUtilTimeZone;", "setPhraseSlop", "setFuzzyMinSim", "F", "setDateResolution", "LOrgApacheLuceneDocumentDateTools_Resolution;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration = { "CommonQueryParserConfiguration", "org.apache.lucene.queryparser.flexible.standard", ptrTable, methods, NULL, 7, 0x609, 20, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration;
 }
 

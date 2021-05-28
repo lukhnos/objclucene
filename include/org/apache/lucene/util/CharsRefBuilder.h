@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilCharsRefBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilCharsRefBuilder_) && (INCLUDE_ALL_OrgApacheLuceneUtilCharsRefBuilder || defined(INCLUDE_OrgApacheLuceneUtilCharsRefBuilder))
 #define OrgApacheLuceneUtilCharsRefBuilder_
 
@@ -36,7 +42,7 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneUtilCharsRefBuilder *)appendWithChar:(jchar)c;
 
@@ -96,9 +102,8 @@
 
 /*!
  @brief Return a <code>CharsRef</code> that points to the internal content of this
- builder.
- Any update to the content of this builder might invalidate
- the provided <code>ref</code> and vice-versa.
+  builder.Any update to the content of this builder might invalidate
+  the provided <code>ref</code> and vice-versa.
  */
 - (OrgApacheLuceneUtilCharsRef *)get;
 
@@ -138,12 +143,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilCharsRefBuilder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilCharsRefBuilder_init(OrgApacheLuceneUtilCharsRefBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRefBuilder *new_OrgApacheLuceneUtilCharsRefBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRefBuilder *new_OrgApacheLuceneUtilCharsRefBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRefBuilder *create_OrgApacheLuceneUtilCharsRefBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRefBuilder *create_OrgApacheLuceneUtilCharsRefBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCharsRefBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilCharsRefBuilder")

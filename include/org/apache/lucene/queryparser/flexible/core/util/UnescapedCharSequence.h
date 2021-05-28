@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence))
 #define OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_
 
@@ -23,6 +29,7 @@
 @class IOSBooleanArray;
 @class IOSCharArray;
 @class JavaUtilLocale;
+@protocol JavaUtilStreamIntStream;
 
 /*!
  @brief CharsSequence with escaped chars information.
@@ -34,19 +41,19 @@
 /*!
  @brief Create a escaped CharSequence
  */
-- (instancetype)initWithCharArray:(IOSCharArray *)chars
-                 withBooleanArray:(IOSBooleanArray *)wasEscaped
-                          withInt:(jint)offset
-                          withInt:(jint)length;
+- (instancetype __nonnull)initWithCharArray:(IOSCharArray *)chars
+                           withBooleanArray:(IOSBooleanArray *)wasEscaped
+                                    withInt:(jint)offset
+                                    withInt:(jint)length;
 
 /*!
  @brief Create a non-escaped CharSequence
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
 - (jchar)charAtWithInt:(jint)index;
 
-- (jint)length;
+- (jint)java_length;
 
 - (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
                                          to:(jint)end;
@@ -64,8 +71,7 @@
 
 /*!
  @brief Return a escaped String
- @param enabledChars
- - array of chars to be escaped
+ @param enabledChars - array of chars to be escaped
  @return a escaped String
  */
 - (NSString *)toStringEscapedWithCharArray:(IOSCharArray *)enabledChars;
@@ -74,6 +80,10 @@
                                        withInt:(jint)index;
 
 - (jboolean)wasEscapedWithInt:(jint)index;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -99,4 +109,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCh
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence")

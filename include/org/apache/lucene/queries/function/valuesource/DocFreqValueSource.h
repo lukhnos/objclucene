@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues))
 #define OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_
 
@@ -48,8 +54,12 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)val
-withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)parent;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)val
+      withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)parent;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -58,11 +68,11 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocVal
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues, sval_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues, parent_, OrgApacheLuceneQueriesFunctionValueSource *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *self, jint val, OrgApacheLuceneQueriesFunctionValueSource *parent);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *self, jint val, OrgApacheLuceneQueriesFunctionValueSource *parent);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent);
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues)
 
@@ -103,8 +113,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocV
 
 #pragma mark Package-Private
 
-- (instancetype)initWithDouble:(jdouble)val
-withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)parent;
+- (instancetype __nonnull)initPackagePrivateWithDouble:(jdouble)val
+         withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)parent;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -113,11 +127,11 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDoc
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues, sval_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues, parent_, OrgApacheLuceneQueriesFunctionValueSource *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *self, jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *self, jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent);
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues)
 
@@ -149,10 +163,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleD
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)val
-                    withNSString:(NSString *)indexedField
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                              withNSString:(NSString *)val
+                              withNSString:(NSString *)indexedField
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -167,6 +181,10 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 - (NSUInteger)hash;
 
 - (NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -187,4 +205,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValue
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource")

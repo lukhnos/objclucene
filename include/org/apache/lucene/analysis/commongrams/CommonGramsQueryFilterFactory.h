@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory))
 #define OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_
 
@@ -27,12 +33,12 @@
 /*!
  @brief Construct <code>CommonGramsQueryFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_cmmngrmsqry" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.CommonGramsQueryFilterFactory" words="commongramsquerystopwords.txt" ignoreCase="false"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_cmmngrmsqry" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.CommonGramsQueryFilterFactory" words="commongramsquerystopwords.txt" ignoreCase="false"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory : OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory
@@ -42,7 +48,7 @@
 /*!
  @brief Creates a new CommonGramsQueryFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 /*!
  @brief Create a CommonGramsFilter and wrap it with a CommonGramsQueryFilter
@@ -63,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory")

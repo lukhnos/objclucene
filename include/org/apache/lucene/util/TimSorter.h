@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilTimSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilTimSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilTimSorter || defined(INCLUDE_OrgApacheLuceneUtilTimSorter))
 #define OrgApacheLuceneUtilTimSorter_
 
@@ -23,19 +29,19 @@
 @class IOSIntArray;
 
 /*!
- @brief <code>Sorter</code> implementation based on the
+ @brief <code>Sorter</code> implementation based on the 
  <a href="http://svn.python.org/projects/python/trunk/Objects/listsort.txt">TimSort</a>
- algorithm.
+  algorithm.
  <p>This implementation is especially good at sorting partially-sorted
- arrays and sorts small arrays with binary sort.
+  arrays and sorts small arrays with binary sort. 
  <p><b>NOTE</b>:There are a few differences with the original implementation:<ul>
- <li><a name="maxTempSlots"></a>The extra amount of memory to perform merges is
- configurable. This allows small merges to be very fast while large merges
- will be performed in-place (slightly slower). You can make sure that the
- fast merge routine will always be used by having <code>maxTempSlots</code>
- equal to half of the length of the slice of data to sort.
+  <li><a name="maxTempSlots"></a>The extra amount of memory to perform merges is
+  configurable. This allows small merges to be very fast while large merges
+  will be performed in-place (slightly slower). You can make sure that the
+  fast merge routine will always be used by having <code>maxTempSlots</code>
+  equal to half of the length of the slice of data to sort. 
  <li>Only the fast merge routine can gallop (the one that doesn't run
- in-place) and it only gallops on the longest slice.
+  in-place) and it only gallops on the longest slice. 
  </ul>
  */
 @interface OrgApacheLuceneUtilTimSorter : OrgApacheLuceneUtilSorter {
@@ -46,14 +52,10 @@
   jint stackSize_;
   IOSIntArray *runEnds_;
 }
-
-+ (jint)MINRUN;
-
-+ (jint)THRESHOLD;
-
-+ (jint)STACKSIZE;
-
-+ (jint)MIN_GALLOP;
+@property (readonly, class) jint MINRUN NS_SWIFT_NAME(MINRUN);
+@property (readonly, class) jint THRESHOLD NS_SWIFT_NAME(THRESHOLD);
+@property (readonly, class) jint STACKSIZE NS_SWIFT_NAME(STACKSIZE);
+@property (readonly, class) jint MIN_GALLOP NS_SWIFT_NAME(MIN_GALLOP);
 
 #pragma mark Public
 
@@ -64,14 +66,14 @@
 
 /*!
  @brief Create a new <code>TimSorter</code>.
- @param maxTempSlots the <a href="#maxTempSlots">maximum amount of extra memory to run merges</a>
+ @param maxTempSlots the  <a href="#maxTempSlots"> maximum amount of extra memory to run merges </a>
  */
-- (instancetype)initWithInt:(jint)maxTempSlots;
+- (instancetype __nonnull)initWithInt:(jint)maxTempSlots;
 
 /*!
  @brief Compare element <code>i</code> from the temporary storage with element
- <code>j</code> from the slice to sort, similarly to
- <code>compare(int,int)</code>.
+   <code>j</code> from the slice to sort, similarly to
+   <code>compare(int, int)</code>.
  */
 - (jint)compareSavedWithInt:(jint)i
                     withInt:(jint)j;
@@ -90,7 +92,7 @@
 
 /*!
  @brief Save all elements between slots <code>i</code> and <code>i+len</code>
- into the temporary storage.
+   into the temporary storage.
  */
 - (void)saveWithInt:(jint)i
             withInt:(jint)len;
@@ -134,7 +136,7 @@
 
 /*!
  @brief Compute the length of the next run, make the run sorted and return its
- length.
+   length.
  */
 - (jint)nextRun;
 
@@ -160,25 +162,29 @@
                    withInt:(jint)to
                    withInt:(jint)val;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilTimSorter)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilTimSorter, runEnds_, IOSIntArray *)
 
-inline jint OrgApacheLuceneUtilTimSorter_get_MINRUN();
+inline jint OrgApacheLuceneUtilTimSorter_get_MINRUN(void);
 #define OrgApacheLuceneUtilTimSorter_MINRUN 32
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilTimSorter, MINRUN, jint)
 
-inline jint OrgApacheLuceneUtilTimSorter_get_THRESHOLD();
+inline jint OrgApacheLuceneUtilTimSorter_get_THRESHOLD(void);
 #define OrgApacheLuceneUtilTimSorter_THRESHOLD 64
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilTimSorter, THRESHOLD, jint)
 
-inline jint OrgApacheLuceneUtilTimSorter_get_STACKSIZE();
+inline jint OrgApacheLuceneUtilTimSorter_get_STACKSIZE(void);
 #define OrgApacheLuceneUtilTimSorter_STACKSIZE 49
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilTimSorter, STACKSIZE, jint)
 
-inline jint OrgApacheLuceneUtilTimSorter_get_MIN_GALLOP();
+inline jint OrgApacheLuceneUtilTimSorter_get_MIN_GALLOP(void);
 #define OrgApacheLuceneUtilTimSorter_MIN_GALLOP 7
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilTimSorter, MIN_GALLOP, jint)
 
@@ -190,4 +196,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilTimSorter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilTimSorter")

@@ -13,6 +13,10 @@
 #include "org/apache/lucene/util/automaton/Operations.h"
 #include "org/apache/lucene/util/automaton/RunAutomaton.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/RunAutomaton must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_getCharClassWithInt_(OrgApacheLuceneUtilAutomatonRunAutomaton *self, jint c);
 
 @implementation OrgApacheLuceneUtilAutomatonRunAutomaton
@@ -57,7 +61,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_get
 }
 
 - (IOSIntArray *)getCharIntervals {
-  return [((IOSIntArray *) nil_chk(points_)) clone];
+  return [((IOSIntArray *) nil_chk(points_)) java_clone];
 }
 
 - (jint)getCharClassWithInt:(jint)c {
@@ -100,9 +104,9 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_get
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneUtilAutomatonRunAutomaton *other = (OrgApacheLuceneUtilAutomatonRunAutomaton *) cast_chk(obj, [OrgApacheLuceneUtilAutomatonRunAutomaton class]);
   if (initial_ != other->initial_) return false;
   if (maxInterval_ != other->maxInterval_) return false;
@@ -123,30 +127,46 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_get
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getSize", NULL, "I", 0x11, NULL, NULL },
-    { "isAcceptWithInt:", "isAccept", "Z", 0x11, NULL, NULL },
-    { "getInitialState", NULL, "I", 0x11, NULL, NULL },
-    { "getCharIntervals", NULL, "[I", 0x11, NULL, NULL },
-    { "getCharClassWithInt:", "getCharClass", "I", 0x10, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withBoolean:", "RunAutomaton", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withBoolean:withInt:", "RunAutomaton", NULL, 0x1, NULL, NULL },
-    { "stepWithInt:withInt:", "step", "I", 0x11, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x10, 3, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 8, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 10, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(description);
+  methods[1].selector = @selector(getSize);
+  methods[2].selector = @selector(isAcceptWithInt:);
+  methods[3].selector = @selector(getInitialState);
+  methods[4].selector = @selector(getCharIntervals);
+  methods[5].selector = @selector(getCharClassWithInt:);
+  methods[6].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withBoolean:);
+  methods[7].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withBoolean:withInt:);
+  methods[8].selector = @selector(stepWithInt:withInt:);
+  methods[9].selector = @selector(hash);
+  methods[10].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "automaton_", NULL, 0x10, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxInterval_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "size_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "accept_", NULL, 0x10, "[Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "initial_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "transitions_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "points_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "classmap_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "automaton_", "LOrgApacheLuceneUtilAutomatonAutomaton;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxInterval_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "size_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "accept_", "[Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "initial_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "transitions_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "points_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "classmap_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonRunAutomaton = { 2, "RunAutomaton", "org.apache.lucene.util.automaton", NULL, 0x401, 11, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "toString", "isAccept", "I", "getCharClass", "LOrgApacheLuceneUtilAutomatonAutomaton;IZ", "LOrgApacheLuceneUtilAutomatonAutomaton;IZI", "step", "II", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonRunAutomaton = { "RunAutomaton", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x401, 11, 8, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonRunAutomaton;
 }
 
@@ -175,7 +195,7 @@ void OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomat
     *IOSBooleanArray_GetRef(self->accept_, n) = [a isAcceptWithInt:n];
     for (jint c = 0; c < self->points_->size_; c++) {
       jint dest = [a stepWithInt:n withInt:IOSIntArray_Get(self->points_, c)];
-      JreAssert((dest == -1 || dest < self->size_), (@"org/apache/lucene/util/automaton/RunAutomaton.java:150 condition failed: assert dest == -1 || dest < size;"));
+      JreAssert(dest == -1 || dest < self->size_, @"org/apache/lucene/util/automaton/RunAutomaton.java:150 condition failed: assert dest == -1 || dest < size;");
       *IOSIntArray_GetRef(self->transitions_, n * self->points_->size_ + c) = dest;
     }
   }

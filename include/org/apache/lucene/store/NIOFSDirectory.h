@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreNIOFSDirectory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreNIOFSDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreNIOFSDirectory || defined(INCLUDE_OrgApacheLuceneStoreNIOFSDirectory))
 #define OrgApacheLuceneStoreNIOFSDirectory_
 
@@ -27,28 +33,28 @@
 
 /*!
  @brief An <code>FSDirectory</code> implementation that uses java.nio's FileChannel's
- positional read, which allows multiple threads to read from the same file
- without synchronizing.
+  positional read, which allows multiple threads to read from the same file
+  without synchronizing.
  <p>
- This class only uses FileChannel when reading; writing is achieved with
+  This class only uses FileChannel when reading; writing is achieved with 
  <code>FSDirectory.FSIndexOutput</code>.
- <p>
- <b>NOTE</b>: NIOFSDirectory is not recommended on Windows because of a bug in
- how FileChannel.read is implemented in Sun's JRE. Inside of the
- implementation the position is apparently synchronized. See <a
- href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6265734">here</a>
- for details.
+  <p>
+  <b>NOTE</b>: NIOFSDirectory is not recommended on Windows because of a bug in
+  how FileChannel.read is implemented in Sun's JRE. Inside of the
+  implementation the position is apparently synchronized. See <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6265734">
+ here</a>
+  for details. 
  </p>
- <p>
- <b>NOTE:</b> Accessing this class either directly or
- indirectly from a thread while it's interrupted can close the
- underlying file descriptor immediately if at the same time the thread is
- blocked on IO. The file descriptor will remain closed and subsequent access
- to <code>NIOFSDirectory</code> will throw a <code>ClosedChannelException</code>. If
- your application uses either <code>Thread.interrupt()</code> or
+  <p>
+  <b>NOTE:</b> Accessing this class either directly or
+  indirectly from a thread while it's interrupted can close the
+  underlying file descriptor immediately if at the same time the thread is
+  blocked on IO. The file descriptor will remain closed and subsequent access
+  to <code>NIOFSDirectory</code> will throw a <code>ClosedChannelException</code>. If
+  your application uses either <code>Thread.interrupt()</code> or 
  <code>Future.cancel(boolean)</code> you should use the legacy <code>RAFDirectory</code>
- from the Lucene <code>misc</code> module in favor of <code>NIOFSDirectory</code>.
- </p>
+  from the Lucene <code>misc</code> module in favor of <code>NIOFSDirectory</code>.
+  </p>
  */
 @interface OrgApacheLuceneStoreNIOFSDirectory : OrgApacheLuceneStoreFSDirectory
 
@@ -58,19 +64,19 @@
  @brief Create a new NIOFSDirectory for the named location and <code>FSLockFactory.getDefault()</code>.
  The directory is created at the named location if it does not yet exist.
  @param path the path of the directory
- @throws IOException if there is a low-level I/O error
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
 /*!
  @brief Create a new NIOFSDirectory for the named location.
  The directory is created at the named location if it does not yet exist.
  @param path the path of the directory
  @param lockFactory the lock factory to use
- @throws IOException if there is a low-level I/O error
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                 withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
+                           withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
 
 /*!
  @brief Creates an IndexInput for the file with the given name.
@@ -111,7 +117,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNIOFSDirectory)
 @class OrgApacheLuceneStoreIndexInput;
 
 /*!
- @brief Reads bytes with <code>FileChannel.read(ByteBuffer,long)</code>
+ @brief Reads bytes with <code>FileChannel.read(ByteBuffer, long)</code>
  */
 @interface OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput : OrgApacheLuceneStoreBufferedIndexInput {
  @public
@@ -135,17 +141,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNIOFSDirectory)
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)resourceDesc
-  withJavaNioChannelsFileChannel:(JavaNioChannelsFileChannel *)fc
-withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDesc
+            withJavaNioChannelsFileChannel:(JavaNioChannelsFileChannel *)fc
+         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
-- (instancetype)initWithNSString:(NSString *)resourceDesc
-  withJavaNioChannelsFileChannel:(JavaNioChannelsFileChannel *)fc
-                        withLong:(jlong)off
-                        withLong:(jlong)length
-                         withInt:(jint)bufferSize;
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDesc
+            withJavaNioChannelsFileChannel:(JavaNioChannelsFileChannel *)fc
+                                  withLong:(jlong)off
+                                  withLong:(jlong)length
+                                   withInt:(jint)bufferSize;
 
-- (OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *)clone;
+- (OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *)java_clone;
 
 - (void)close;
 
@@ -164,6 +170,16 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
                           withInt:(jint)len;
 
 - (void)seekInternalWithLong:(jlong)pos;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                                   withInt:(jint)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -187,4 +203,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreNIOFSDirectory")

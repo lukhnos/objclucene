@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedPackedDataOutput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedPackedDataOutput_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedDataOutput || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedDataOutput))
 #define OrgApacheLuceneUtilPackedPackedDataOutput_
 
@@ -20,7 +26,7 @@
 
 /*!
  @brief A <code>DataOutput</code> wrapper to write unaligned, variable-length packed
- integers.
+  integers.
  - seealso: PackedDataInput
  */
 @interface OrgApacheLuceneUtilPackedPackedDataOutput : NSObject {
@@ -35,7 +41,7 @@
 /*!
  @brief Create a new instance that wraps <code>out</code>.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 /*!
  @brief Flush pending bits to the underlying <code>DataOutput</code>.
@@ -47,6 +53,10 @@
  */
 - (void)writeLongWithLong:(jlong)value
                   withInt:(jint)bitsPerValue;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -64,4 +74,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedDataOutput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedDataOutput")

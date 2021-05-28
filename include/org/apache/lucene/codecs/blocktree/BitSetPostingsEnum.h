@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum))
 #define OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_
 
@@ -50,22 +56,30 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)bits;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)bits;
 
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *self, OrgApacheLuceneUtilBitSet *bits);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *self, OrgApacheLuceneUtilBitSet *bits);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum")

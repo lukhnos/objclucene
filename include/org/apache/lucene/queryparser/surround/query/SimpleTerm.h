@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm))
 #define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_
 
@@ -28,7 +34,6 @@
 #define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
-@class IOSObjectArray;
 @class JavaLangStringBuilder;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
@@ -43,7 +48,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)q;
+- (instancetype __nonnull)initWithBoolean:(jboolean)q;
 
 - (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf;
 
@@ -56,6 +61,8 @@
 - (NSString *)getFieldOperator;
 
 - (NSString *)getQuote;
+
+- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)java_clone;
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
            withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
@@ -76,6 +83,10 @@ withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<Or
 
 - (jboolean)isQuoted;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm)
@@ -93,9 +104,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm)
 
 /*!
  @brief Callback to visit each matching term during "rewrite"
- in <code>visitMatchingTerm(Term)</code>
+  in <code>visitMatchingTerm(Term)</code>
  */
-@protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor < JavaObject >
 
 - (void)visitMatchingTermWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t;
 
@@ -107,4 +118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_Mat
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm")

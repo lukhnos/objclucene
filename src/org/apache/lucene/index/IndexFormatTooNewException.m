@@ -9,6 +9,10 @@
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexFormatTooNewException must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexIndexFormatTooNewException () {
  @public
   NSString *resourceDescription_;
@@ -61,21 +65,32 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexFormatTooNewException, resourceDesc
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withInt:withInt:withInt:", "IndexFormatTooNewException", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDataInput:withInt:withInt:withInt:", "IndexFormatTooNewException", NULL, 0x1, NULL, NULL },
-    { "getResourceDescription", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getVersion", NULL, "I", 0x1, NULL, NULL },
-    { "getMaxVersion", NULL, "I", 0x1, NULL, NULL },
-    { "getMinVersion", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withInt:withInt:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreDataInput:withInt:withInt:withInt:);
+  methods[2].selector = @selector(getResourceDescription);
+  methods[3].selector = @selector(getVersion);
+  methods[4].selector = @selector(getMaxVersion);
+  methods[5].selector = @selector(getMinVersion);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "resourceDescription_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "version__", "version", 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minVersion_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxVersion_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "resourceDescription_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "version__", "I", .constantValue.asLong = 0, 0x12, 2, -1, -1, -1 },
+    { "minVersion_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxVersion_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexFormatTooNewException = { 2, "IndexFormatTooNewException", "org.apache.lucene.index", NULL, 0x1, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;III", "LOrgApacheLuceneStoreDataInput;III", "version" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexFormatTooNewException = { "IndexFormatTooNewException", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 6, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexFormatTooNewException;
 }
 

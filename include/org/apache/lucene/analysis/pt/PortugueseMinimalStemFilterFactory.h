@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilterFactory))
 #define OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilterFactory_
 
@@ -26,13 +32,13 @@
 /*!
  @brief Factory for <code>PortugueseMinimalStemFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_ptminstem" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
- &lt;filter class="solr.PortugueseMinimalStemFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_ptminstem" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+      &lt;filter class="solr.PortugueseMinimalStemFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
@@ -42,7 +48,7 @@
 /*!
  @brief Creates a new PortugueseMinimalStemFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilterF
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilterFactory")

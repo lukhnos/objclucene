@@ -6,12 +6,17 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/DocsEnum.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/DocsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexDocsEnum__Annotations$0(void);
 
 @implementation OrgApacheLuceneIndexDocsEnum
 
@@ -46,23 +51,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DocsEnum", NULL, 0x4, NULL, NULL },
-    { "nextPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "startOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "endOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 0, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(nextPosition);
+  methods[2].selector = @selector(startOffset);
+  methods[3].selector = @selector(endOffset);
+  methods[4].selector = @selector(getPayload);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "FLAG_NONE", "FLAG_NONE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexDocsEnum_FLAG_NONE },
-    { "FLAG_FREQS", "FLAG_FREQS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexDocsEnum_FLAG_FREQS },
+    { "FLAG_NONE", "I", .constantValue.asInt = OrgApacheLuceneIndexDocsEnum_FLAG_NONE, 0x19, -1, -1, -1, -1 },
+    { "FLAG_FREQS", "I", .constantValue.asInt = OrgApacheLuceneIndexDocsEnum_FLAG_FREQS, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocsEnum = { 2, "DocsEnum", "org.apache.lucene.index", NULL, 0x401, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoIOException;", (void *)&OrgApacheLuceneIndexDocsEnum__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocsEnum = { "DocsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 5, 2, -1, -1, -1, -1, 1 };
   return &_OrgApacheLuceneIndexDocsEnum;
 }
 
@@ -70,6 +81,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneIndexDocsEnum_init(OrgApacheLuceneIndexDocsEnum *self) {
   OrgApacheLuceneIndexPostingsEnum_init(self);
+}
+
+IOSObjectArray *OrgApacheLuceneIndexDocsEnum__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocsEnum)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanCollector || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanCollector))
 #define OrgApacheLuceneSearchSpansSpanCollector_
 
@@ -21,16 +27,16 @@
 
 /*!
  @brief An interface defining the collection of postings information from the leaves
- of a <code>org.apache.lucene.search.spans.Spans</code>
+  of a <code>org.apache.lucene.search.spans.Spans</code>
  */
-@protocol OrgApacheLuceneSearchSpansSpanCollector < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchSpansSpanCollector < JavaObject >
 
 /*!
  @brief Collect information from postings
  @param postings a <code>PostingsEnum</code>
  @param position the position of the PostingsEnum
- @param term     the <code>Term</code> for this postings list
- @throws IOException on error
+ @param term the <code>Term</code>  for this postings list
+ @throw IOExceptionon error
  */
 - (void)collectLeafWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
                                                 withInt:(jint)position
@@ -49,4 +55,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanCollector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanCollector")

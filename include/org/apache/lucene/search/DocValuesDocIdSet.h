@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocValuesDocIdSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocValuesDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesDocIdSet || defined(INCLUDE_OrgApacheLuceneSearchDocValuesDocIdSet))
 #define OrgApacheLuceneSearchDocValuesDocIdSet_
 
@@ -24,11 +30,11 @@
 @protocol OrgApacheLuceneUtilBits;
 
 /*!
- @brief Base class for DocIdSet to be used with DocValues.
- The implementation
- of its iterator is very stupid and slow if the implementation of the
+ @brief Base class for DocIdSet to be used with DocValues.The implementation
+  of its iterator is very stupid and slow if the implementation of the 
  <code>matchDoc</code> method is not optimized, as iterators simply increment
- the document id until <code>matchDoc(int)</code> returns true. Because of this
+  the document id until <code>matchDoc(int)</code> returns true.
+ Because of this 
  <code>matchDoc(int)</code> must be as fast as possible.
  */
 @interface OrgApacheLuceneSearchDocValuesDocIdSet : OrgApacheLuceneSearchDocIdSet {
@@ -39,8 +45,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxDoc
-withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
+- (instancetype __nonnull)initWithInt:(jint)maxDoc
+          withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
 - (id<OrgApacheLuceneUtilBits>)bits;
 
@@ -55,6 +61,10 @@ withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
  */
 - (jboolean)matchDocWithInt:(jint)doc;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocValuesDocIdSet)
@@ -67,4 +77,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesDocIdSet)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesDocIdSet")

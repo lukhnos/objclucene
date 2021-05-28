@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisDeGermanNormalizationFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisDeGermanNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanNormalizationFilter))
 #define OrgApacheLuceneAnalysisDeGermanNormalizationFilter_
 
@@ -24,23 +30,23 @@
 
 /*!
  @brief Normalizes German characters according to the heuristics
- of the <a href="http://snowball.tartarus.org/algorithms/german2/stemmer.html">
- German2 snowball algorithm</a>.
- It allows for the fact that ä, ö and ü are sometimes written as ae, oe and ue.
+  of the <a href="http://snowball.tartarus.org/algorithms/german2/stemmer.html">
+  German2 snowball algorithm</a>.
+ It allows for the fact that ä, ö and ü are sometimes written as ae, oe and ue. 
  <ul>
- <li> 'ß' is replaced by 'ss'
- <li> 'ä', 'ö', 'ü' are replaced by 'a', 'o', 'u', respectively.
- <li> 'ae' and 'oe' are replaced by 'a', and 'o', respectively.
- <li> 'ue' is replaced by 'u', when not following a vowel or q.
+    <li> 'ß' is replaced by 'ss'
+    <li> 'ä', 'ö', 'ü' are replaced by 'a', 'o', 'u', respectively.
+    <li> 'ae' and 'oe' are replaced by 'a', and 'o', respectively.
+    <li> 'ue' is replaced by 'u', when not following a vowel or q. 
  </ul>
- This is useful if you want this normalization without using
- the German2 stemmer, or perhaps no stemming at all.
+  This is useful if you want this normalization without using
+  the German2 stemmer, or perhaps no stemming at all.
  */
 @interface OrgApacheLuceneAnalysisDeGermanNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -58,4 +64,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanNormalizationFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanNormalizationFilter")

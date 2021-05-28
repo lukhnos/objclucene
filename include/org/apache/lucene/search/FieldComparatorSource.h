@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFieldComparatorSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFieldComparatorSource_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparatorSource || defined(INCLUDE_OrgApacheLuceneSearchFieldComparatorSource))
 #define OrgApacheLuceneSearchFieldComparatorSource_
 
@@ -25,14 +31,13 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a comparator for the field in the given index.
- @param fieldname
- Name of the field to create comparator for.
+ @param fieldname Name of the field to create comparator for.
  @return FieldComparator.
- @throws IOException
+ @throw IOException
  If an error occurs reading the index.
  */
 - (OrgApacheLuceneSearchFieldComparator *)newComparatorWithNSString:(NSString *)fieldname
@@ -50,4 +55,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparatorSource)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldComparatorSource")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocIdSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocIdSet || defined(INCLUDE_OrgApacheLuceneSearchDocIdSet))
 #define OrgApacheLuceneSearchDocIdSet_
 
@@ -25,31 +31,29 @@
 @protocol OrgApacheLuceneUtilBits;
 
 /*!
- @brief A DocIdSet contains a set of doc ids.
- Implementing classes must
- only implement <code>iterator</code> to provide access to the set. 
+ @brief A DocIdSet contains a set of doc ids.Implementing classes must
+  only implement <code>iterator</code> to provide access to the set.
  */
 @interface OrgApacheLuceneSearchDocIdSet : NSObject < OrgApacheLuceneUtilAccountable >
-
-+ (OrgApacheLuceneSearchDocIdSet *)EMPTY;
+@property (readonly, class, strong) OrgApacheLuceneSearchDocIdSet *EMPTY NS_SWIFT_NAME(EMPTY);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Optionally provides a <code>Bits</code> interface for random access
- to matching documents.
+  to matching documents.
  @return <code>null</code>, if this <code>DocIdSet</code> does not support random access.
- In contrast to <code>iterator()</code>, a return value of <code>null</code>
- <b>does not</b> imply that no documents match the filter!
- The default implementation does not provide random access, so you
- only need to implement this method if your DocIdSet can
- guarantee random access to every docid in O(1) time without
- external disk access (as <code>Bits</code> interface cannot throw
+  In contrast to <code>iterator()</code>, a return value of <code>null</code>
+  <b>does not</b> imply that no documents match the filter!
+  The default implementation does not provide random access, so you
+  only need to implement this method if your DocIdSet can
+  guarantee random access to every docid in O(1) time without
+  external disk access (as <code>Bits</code> interface cannot throw 
  <code>IOException</code>). This is generally true for bit sets
- like <code>org.apache.lucene.util.FixedBitSet</code>, which return
- itself if they are used as <code>DocIdSet</code>.
+  like <code>org.apache.lucene.util.FixedBitSet</code>, which return
+  itself if they are used as <code>DocIdSet</code>.
  */
 - (id<OrgApacheLuceneUtilBits>)bits;
 
@@ -57,18 +61,18 @@
 
 /*!
  @brief This method is a hint for <code>CachingWrapperFilter</code>, if this <code>DocIdSet</code>
- should be cached without copying it.
- The default is to return
- <code>false</code>. If you have an own <code>DocIdSet</code> implementation
- that does its iteration very effective and fast without doing disk I/O,
- override this method and return <code>true</code>.
+  should be cached without copying it.The default is to return 
+ <code>false</code>.
+ If you have an own <code>DocIdSet</code> implementation
+  that does its iteration very effective and fast without doing disk I/O,
+  override this method and return <code>true</code>.
  */
 - (jboolean)isCacheable;
 
 /*!
  @brief Provides a <code>DocIdSetIterator</code> to access the set.
  This implementation can return <code>null</code> if there
- are no docs that match. 
+  are no docs that match.
  */
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
 
@@ -79,7 +83,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchDocIdSet)
 /*!
  @brief An empty <code>DocIdSet</code> instance
  */
-inline OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_get_EMPTY();
+inline OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_get_EMPTY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_EMPTY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchDocIdSet, EMPTY, OrgApacheLuceneSearchDocIdSet *)
@@ -90,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocIdSet)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocIdSet")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreBufferedChecksum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreBufferedChecksum_) && (INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksum || defined(INCLUDE_OrgApacheLuceneStoreBufferedChecksum))
 #define OrgApacheLuceneStoreBufferedChecksum_
 
@@ -24,24 +30,23 @@
 
 /*!
  @brief Wraps another <code>Checksum</code> with an internal buffer
- to speed up checksum calculations.
+  to speed up checksum calculations.
  */
 @interface OrgApacheLuceneStoreBufferedChecksum : NSObject < JavaUtilZipChecksum >
-
-+ (jint)DEFAULT_BUFFERSIZE;
+@property (readonly, class) jint DEFAULT_BUFFERSIZE NS_SWIFT_NAME(DEFAULT_BUFFERSIZE);
 
 #pragma mark Public
 
 /*!
  @brief Create a new BufferedChecksum with <code>DEFAULT_BUFFERSIZE</code>
  */
-- (instancetype)initWithJavaUtilZipChecksum:(id<JavaUtilZipChecksum>)inArg;
+- (instancetype __nonnull)initWithJavaUtilZipChecksum:(id<JavaUtilZipChecksum>)inArg;
 
 /*!
  @brief Create a new BufferedChecksum with the specified bufferSize
  */
-- (instancetype)initWithJavaUtilZipChecksum:(id<JavaUtilZipChecksum>)inArg
-                                    withInt:(jint)bufferSize;
+- (instancetype __nonnull)initWithJavaUtilZipChecksum:(id<JavaUtilZipChecksum>)inArg
+                                              withInt:(jint)bufferSize;
 
 - (jlong)getValue;
 
@@ -53,6 +58,10 @@
 
 - (void)updateWithInt:(jint)b;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreBufferedChecksum)
@@ -60,7 +69,7 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreBufferedChecksum)
 /*!
  @brief Default buffer size: 256
  */
-inline jint OrgApacheLuceneStoreBufferedChecksum_get_DEFAULT_BUFFERSIZE();
+inline jint OrgApacheLuceneStoreBufferedChecksum_get_DEFAULT_BUFFERSIZE(void);
 #define OrgApacheLuceneStoreBufferedChecksum_DEFAULT_BUFFERSIZE 256
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreBufferedChecksum, DEFAULT_BUFFERSIZE, jint)
 
@@ -80,4 +89,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreBufferedChecksum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksum")

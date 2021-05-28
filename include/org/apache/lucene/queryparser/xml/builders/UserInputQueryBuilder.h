@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder))
 #define OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_
 
@@ -27,8 +33,8 @@
 
 /*!
  @brief UserInputQueryBuilder uses 1 of 2 strategies for thread-safe parsing:
- 1) Synchronizing access to "parse" calls on a previously supplied QueryParser
- or..
+  1) Synchronizing access to "parse" calls on a previously supplied QueryParser
+  or..
  2) creating a new QueryParser object for each parse request
  */
 @interface OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
@@ -39,10 +45,10 @@
  @brief This constructor has the disadvantage of not being able to change choice of default field name
  @param parser thread un-safe query parser
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser;
 
-- (instancetype)initWithNSString:(NSString *)defaultField
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithNSString:(NSString *)defaultField
+       withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
@@ -54,6 +60,10 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
  */
 - (OrgApacheLuceneQueryparserClassicQueryParser *)createQueryParserWithNSString:(NSString *)fieldName
                                             withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -75,4 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder")

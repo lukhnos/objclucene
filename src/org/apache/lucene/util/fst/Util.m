@@ -3,22 +3,27 @@
 //  source: ./core/src/java/org/apache/lucene/util/fst/Util.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Writer.h"
 #include "java/lang/Byte.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Character.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Iterable.h"
 #include "java/lang/Long.h"
 #include "java/util/ArrayList.h"
 #include "java/util/BitSet.h"
 #include "java/util/Comparator.h"
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
+#include "java/util/Spliterator.h"
 #include "java/util/TreeSet.h"
+#include "java/util/function/Consumer.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
 #include "org/apache/lucene/util/IntsRef.h"
@@ -26,6 +31,12 @@
 #include "org/apache/lucene/util/fst/FST.h"
 #include "org/apache/lucene/util/fst/Outputs.h"
 #include "org/apache/lucene/util/fst/Util.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/fst/Util must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneUtilFstUtil ()
 
@@ -49,9 +60,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneUtilFstUtil_init(OrgApacheLuceneUtilFstUtil *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstUtil *new_OrgApacheLuceneUtilFstUtil_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilFstUtil *new_OrgApacheLuceneUtilFstUtil_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstUtil *create_OrgApacheLuceneUtilFstUtil_init();
+__attribute__((unused)) static OrgApacheLuceneUtilFstUtil *create_OrgApacheLuceneUtilFstUtil_init(void);
 
 __attribute__((unused)) static void OrgApacheLuceneUtilFstUtil_emitDotStateWithJavaIoWriter_withNSString_withNSString_withNSString_withNSString_(JavaIoWriter *outArg, NSString *name, NSString *shape, NSString *color, NSString *label);
 
@@ -59,7 +70,7 @@ __attribute__((unused)) static NSString *OrgApacheLuceneUtilFstUtil_printableLab
 
 /*!
  @brief Compares first by the provided comparator, and then
- tie breaks by path.input.
+   tie breaks by path.input.
  */
 @interface OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator : NSObject < JavaUtilComparator > {
  @public
@@ -201,25 +212,44 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Util", NULL, 0x2, NULL, NULL },
-    { "getWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilIntsRef:", "get", "TT;", 0x9, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/IntsRef;)TT;" },
-    { "getWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilBytesRef:", "get", "TT;", 0x9, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/BytesRef;)TT;" },
-    { "getByOutputWithOrgApacheLuceneUtilFstFST:withLong:", "getByOutput", "Lorg.apache.lucene.util.IntsRef;", 0x9, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;J)Lorg/apache/lucene/util/IntsRef;" },
-    { "getByOutputWithOrgApacheLuceneUtilFstFST:withLong:withOrgApacheLuceneUtilFstFST_BytesReader:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilIntsRefBuilder:", "getByOutput", "Lorg.apache.lucene.util.IntsRef;", 0x9, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;JLorg/apache/lucene/util/fst/FST$BytesReader;Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Long;>;Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Long;>;Lorg/apache/lucene/util/IntsRefBuilder;)Lorg/apache/lucene/util/IntsRef;" },
-    { "shortestPathsWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilFstFST_Arc:withId:withJavaUtilComparator:withInt:withBoolean:", "shortestPaths", "Lorg.apache.lucene.util.fst.Util$TopResults;", 0x9, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;TT;Ljava/util/Comparator<TT;>;IZ)Lorg/apache/lucene/util/fst/Util$TopResults<TT;>;" },
-    { "toDotWithOrgApacheLuceneUtilFstFST:withJavaIoWriter:withBoolean:withBoolean:", "toDot", "V", 0x9, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Ljava/io/Writer;ZZ)V" },
-    { "emitDotStateWithJavaIoWriter:withNSString:withNSString:withNSString:withNSString:", "emitDotState", "V", 0xa, "Ljava.io.IOException;", NULL },
-    { "printableLabelWithInt:", "printableLabel", "Ljava.lang.String;", 0xa, NULL, NULL },
-    { "toUTF16WithJavaLangCharSequence:withOrgApacheLuceneUtilIntsRefBuilder:", "toUTF16", "Lorg.apache.lucene.util.IntsRef;", 0x9, NULL, NULL },
-    { "toUTF32WithJavaLangCharSequence:withOrgApacheLuceneUtilIntsRefBuilder:", "toUTF32", "Lorg.apache.lucene.util.IntsRef;", 0x9, NULL, NULL },
-    { "toUTF32WithCharArray:withInt:withInt:withOrgApacheLuceneUtilIntsRefBuilder:", "toUTF32", "Lorg.apache.lucene.util.IntsRef;", 0x9, NULL, NULL },
-    { "toIntsRefWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilIntsRefBuilder:", "toIntsRef", "Lorg.apache.lucene.util.IntsRef;", 0x9, NULL, NULL },
-    { "toBytesRefWithOrgApacheLuceneUtilIntsRef:withOrgApacheLuceneUtilBytesRefBuilder:", "toBytesRef", "Lorg.apache.lucene.util.BytesRef;", 0x9, NULL, NULL },
-    { "readCeilArcWithInt:withOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readCeilArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x9, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(ILorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 0, 1, 2, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 0, 4, 2, 5, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x9, 6, 7, 2, 8, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x9, 6, 9, 2, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstUtil_TopResults;", 0x9, 11, 12, 2, 13, -1, -1 },
+    { NULL, "V", 0x9, 14, 15, 2, 16, -1, -1 },
+    { NULL, "V", 0xa, 17, 18, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0xa, 19, 20, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x9, 21, 22, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x9, 23, 22, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x9, 23, 24, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x9, 25, 26, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x9, 27, 28, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstFST_Arc;", 0x9, 29, 30, 2, 31, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.fst.Util$FSTPath;", "Lorg.apache.lucene.util.fst.Util$TieBreakByInputComparator;", "Lorg.apache.lucene.util.fst.Util$TopNSearcher;", "Lorg.apache.lucene.util.fst.Util$Result;", "Lorg.apache.lucene.util.fst.Util$TopResults;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil = { 2, "Util", "org.apache.lucene.util.fst", NULL, 0x11, 15, methods, 0, NULL, 0, NULL, 5, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilIntsRef:);
+  methods[2].selector = @selector(getWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(getByOutputWithOrgApacheLuceneUtilFstFST:withLong:);
+  methods[4].selector = @selector(getByOutputWithOrgApacheLuceneUtilFstFST:withLong:withOrgApacheLuceneUtilFstFST_BytesReader:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilIntsRefBuilder:);
+  methods[5].selector = @selector(shortestPathsWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilFstFST_Arc:withId:withJavaUtilComparator:withInt:withBoolean:);
+  methods[6].selector = @selector(toDotWithOrgApacheLuceneUtilFstFST:withJavaIoWriter:withBoolean:withBoolean:);
+  methods[7].selector = @selector(emitDotStateWithJavaIoWriter:withNSString:withNSString:withNSString:withNSString:);
+  methods[8].selector = @selector(printableLabelWithInt:);
+  methods[9].selector = @selector(toUTF16WithJavaLangCharSequence:withOrgApacheLuceneUtilIntsRefBuilder:);
+  methods[10].selector = @selector(toUTF32WithJavaLangCharSequence:withOrgApacheLuceneUtilIntsRefBuilder:);
+  methods[11].selector = @selector(toUTF32WithCharArray:withInt:withInt:withOrgApacheLuceneUtilIntsRefBuilder:);
+  methods[12].selector = @selector(toIntsRefWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilIntsRefBuilder:);
+  methods[13].selector = @selector(toBytesRefWithOrgApacheLuceneUtilIntsRef:withOrgApacheLuceneUtilBytesRefBuilder:);
+  methods[14].selector = @selector(readCeilArcWithInt:withOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "get", "LOrgApacheLuceneUtilFstFST;LOrgApacheLuceneUtilIntsRef;", "LJavaIoIOException;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/IntsRef;)TT;", "LOrgApacheLuceneUtilFstFST;LOrgApacheLuceneUtilBytesRef;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/BytesRef;)TT;", "getByOutput", "LOrgApacheLuceneUtilFstFST;J", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;J)Lorg/apache/lucene/util/IntsRef;", "LOrgApacheLuceneUtilFstFST;JLOrgApacheLuceneUtilFstFST_BytesReader;LOrgApacheLuceneUtilFstFST_Arc;LOrgApacheLuceneUtilFstFST_Arc;LOrgApacheLuceneUtilIntsRefBuilder;", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;JLorg/apache/lucene/util/fst/FST$BytesReader;Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Long;>;Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Long;>;Lorg/apache/lucene/util/IntsRefBuilder;)Lorg/apache/lucene/util/IntsRef;", "shortestPaths", "LOrgApacheLuceneUtilFstFST;LOrgApacheLuceneUtilFstFST_Arc;LNSObject;LJavaUtilComparator;IZ", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;TT;Ljava/util/Comparator<TT;>;IZ)Lorg/apache/lucene/util/fst/Util$TopResults<TT;>;", "toDot", "LOrgApacheLuceneUtilFstFST;LJavaIoWriter;ZZ", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Ljava/io/Writer;ZZ)V", "emitDotState", "LJavaIoWriter;LNSString;LNSString;LNSString;LNSString;", "printableLabel", "I", "toUTF16", "LJavaLangCharSequence;LOrgApacheLuceneUtilIntsRefBuilder;", "toUTF32", "[CIILOrgApacheLuceneUtilIntsRefBuilder;", "toIntsRef", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilIntsRefBuilder;", "toBytesRef", "LOrgApacheLuceneUtilIntsRef;LOrgApacheLuceneUtilBytesRefBuilder;", "readCeilArc", "ILOrgApacheLuceneUtilFstFST;LOrgApacheLuceneUtilFstFST_Arc;LOrgApacheLuceneUtilFstFST_Arc;LOrgApacheLuceneUtilFstFST_BytesReader;", "<T:Ljava/lang/Object;>(ILorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;", "LOrgApacheLuceneUtilFstUtil_FSTPath;LOrgApacheLuceneUtilFstUtil_TieBreakByInputComparator;LOrgApacheLuceneUtilFstUtil_TopNSearcher;LOrgApacheLuceneUtilFstUtil_Result;LOrgApacheLuceneUtilFstUtil_TopResults;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil = { "Util", "org.apache.lucene.util.fst", ptrTable, methods, NULL, 7, 0x11, 15, 0, -1, 32, -1, -1, -1 };
   return &_OrgApacheLuceneUtilFstUtil;
 }
 
@@ -241,15 +271,15 @@ id OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuce
   OrgApacheLuceneUtilFstUtil_initialize();
   OrgApacheLuceneUtilFstFST_Arc *arc = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()];
   OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [fst getBytesReader];
-  id output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst->outputs_)) getNoOutput];
+  id output = JreRetainedLocalValue([((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst->outputs_)) getNoOutput]);
   for (jint i = 0; i < ((OrgApacheLuceneUtilIntsRef *) nil_chk(input))->length_; i++) {
     if ([fst findTargetArcWithInt:IOSIntArray_Get(nil_chk(input->ints_), input->offset_ + i) withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader] == nil) {
       return nil;
     }
-    output = [fst->outputs_ addWithId:output withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_)];
+    output = [fst->outputs_ addWithId:output withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_];
   }
   if ([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]) {
-    return [fst->outputs_ addWithId:output withId:((id) arc->nextFinalOutput_)];
+    return [fst->outputs_ addWithId:output withId:arc->nextFinalOutput_];
   }
   else {
     return nil;
@@ -258,18 +288,18 @@ id OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuce
 
 id OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilBytesRef *input) {
   OrgApacheLuceneUtilFstUtil_initialize();
-  JreAssert((((OrgApacheLuceneUtilFstFST *) nil_chk(fst))->inputType_ == JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1)), (@"org/apache/lucene/util/fst/Util.java:73 condition failed: assert fst.inputType == FST.INPUT_TYPE.BYTE1;"));
+  JreAssert(((OrgApacheLuceneUtilFstFST *) nil_chk(fst))->inputType_ == JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1), @"org/apache/lucene/util/fst/Util.java:73 condition failed: assert fst.inputType == FST.INPUT_TYPE.BYTE1;");
   OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [fst getBytesReader];
   OrgApacheLuceneUtilFstFST_Arc *arc = [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()];
-  id output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst->outputs_)) getNoOutput];
+  id output = JreRetainedLocalValue([((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst->outputs_)) getNoOutput]);
   for (jint i = 0; i < ((OrgApacheLuceneUtilBytesRef *) nil_chk(input))->length_; i++) {
     if ([fst findTargetArcWithInt:IOSByteArray_Get(nil_chk(input->bytes_), i + input->offset_) & (jint) 0xFF withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader] == nil) {
       return nil;
     }
-    output = [fst->outputs_ addWithId:output withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_)];
+    output = [fst->outputs_ addWithId:output withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_];
   }
   if ([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]) {
-    return [fst->outputs_ addWithId:output withId:((id) arc->nextFinalOutput_)];
+    return [fst->outputs_ addWithId:output withId:arc->nextFinalOutput_];
   }
   else {
     return nil;
@@ -279,7 +309,7 @@ id OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuce
 OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheLuceneUtilFstFST_withLong_(OrgApacheLuceneUtilFstFST *fst, jlong targetOutput) {
   OrgApacheLuceneUtilFstUtil_initialize();
   OrgApacheLuceneUtilFstFST_BytesReader *in = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getBytesReader];
-  OrgApacheLuceneUtilFstFST_Arc *arc = [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()];
+  OrgApacheLuceneUtilFstFST_Arc *arc = JreRetainedLocalValue([fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()]);
   OrgApacheLuceneUtilFstFST_Arc *scratchArc = create_OrgApacheLuceneUtilFstFST_Arc_init();
   OrgApacheLuceneUtilIntsRefBuilder *result = create_OrgApacheLuceneUtilIntsRefBuilder_init();
   return OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheLuceneUtilFstFST_withLong_withOrgApacheLuceneUtilFstFST_BytesReader_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_(fst, targetOutput, in, arc, scratchArc, result);
@@ -424,7 +454,7 @@ void OrgApacheLuceneUtilFstUtil_toDotWithOrgApacheLuceneUtilFstFST_withJavaIoWri
     id finalOutput;
     if ([startArc isFinal]) {
       isFinal = true;
-      finalOutput = startArc->nextFinalOutput_ == NO_OUTPUT ? nil : ((id) startArc->nextFinalOutput_);
+      finalOutput = JreObjectEqualsEquals(startArc->nextFinalOutput_, NO_OUTPUT) ? nil : startArc->nextFinalOutput_;
     }
     else {
       isFinal = false;
@@ -454,8 +484,8 @@ void OrgApacheLuceneUtilFstUtil_toDotWithOrgApacheLuceneUtilFstFST_withJavaIoWri
               stateColor = nil;
             }
             NSString *finalOutput;
-            if (arc->nextFinalOutput_ != nil && arc->nextFinalOutput_ != NO_OUTPUT) {
-              finalOutput = [fst->outputs_ outputToStringWithId:((id) arc->nextFinalOutput_)];
+            if (arc->nextFinalOutput_ != nil && !JreObjectEqualsEquals(arc->nextFinalOutput_, NO_OUTPUT)) {
+              finalOutput = [fst->outputs_ outputToStringWithId:arc->nextFinalOutput_];
             }
             else {
               finalOutput = @"";
@@ -466,14 +496,14 @@ void OrgApacheLuceneUtilFstUtil_toDotWithOrgApacheLuceneUtilFstFST_withJavaIoWri
             [sameLevelStates addWithId:JavaLangInteger_valueOfWithInt_((jint) arc->target_)];
           }
           NSString *outs;
-          if (arc->output_ != NO_OUTPUT) {
-            outs = JreStrcat("C$", '/', [fst->outputs_ outputToStringWithId:((id) arc->output_)]);
+          if (!JreObjectEqualsEquals(arc->output_, NO_OUTPUT)) {
+            outs = JreStrcat("C$", '/', [fst->outputs_ outputToStringWithId:arc->output_]);
           }
           else {
             outs = @"";
           }
-          if (!OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(arc) && [arc isFinal] && arc->nextFinalOutput_ != NO_OUTPUT) {
-            outs = JreStrcat("$$$C", outs, @"/[", [fst->outputs_ outputToStringWithId:((id) arc->nextFinalOutput_)], ']');
+          if (!OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(arc) && [arc isFinal] && !JreObjectEqualsEquals(arc->nextFinalOutput_, NO_OUTPUT)) {
+            outs = JreStrcat("$$$C", outs, @"/[", [fst->outputs_ outputToStringWithId:arc->nextFinalOutput_], ']');
           }
           NSString *arcColor;
           if ([arc flagWithInt:OrgApacheLuceneUtilFstFST_BIT_TARGET_NEXT]) {
@@ -482,7 +512,7 @@ void OrgApacheLuceneUtilFstUtil_toDotWithOrgApacheLuceneUtilFstFST_withJavaIoWri
           else {
             arcColor = @"black";
           }
-          JreAssert((arc->label_ != OrgApacheLuceneUtilFstFST_END_LABEL), (@"org/apache/lucene/util/fst/Util.java:782 condition failed: assert arc.label != FST.END_LABEL;"));
+          JreAssert(arc->label_ != OrgApacheLuceneUtilFstFST_END_LABEL, @"org/apache/lucene/util/fst/Util.java:782 condition failed: assert arc.label != FST.END_LABEL;");
           [outArg writeWithNSString:JreStrcat("$J$J$$$C$$$$", @"  ", node, @" -> ", arc->target_, @" [label=\"", OrgApacheLuceneUtilFstUtil_printableLabelWithInt_(arc->label_), outs, '"', ([arc isFinal] ? @" style=\"bold\"" : @""), @" color=\"", arcColor, @"\"]\n")];
           if ([arc isLast]) {
             break;
@@ -522,7 +552,7 @@ NSString *OrgApacheLuceneUtilFstUtil_printableLabelWithInt_(jint label) {
 
 OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_toUTF16WithJavaLangCharSequence_withOrgApacheLuceneUtilIntsRefBuilder_(id<JavaLangCharSequence> s, OrgApacheLuceneUtilIntsRefBuilder *scratch) {
   OrgApacheLuceneUtilFstUtil_initialize();
-  jint charLimit = [((id<JavaLangCharSequence>) nil_chk(s)) length];
+  jint charLimit = [((id<JavaLangCharSequence>) nil_chk(s)) java_length];
   [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(scratch)) setLengthWithInt:charLimit];
   [scratch growWithInt:charLimit];
   for (jint idx = 0; idx < charLimit; idx++) {
@@ -535,7 +565,7 @@ OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_toUTF32WithJavaLangCharSe
   OrgApacheLuceneUtilFstUtil_initialize();
   jint charIdx = 0;
   jint intIdx = 0;
-  jint charLimit = [((id<JavaLangCharSequence>) nil_chk(s)) length];
+  jint charLimit = [((id<JavaLangCharSequence>) nil_chk(s)) java_length];
   while (charIdx < charLimit) {
     [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(scratch)) growWithInt:intIdx + 1];
     jint utf32 = JavaLangCharacter_codePointAtWithJavaLangCharSequence_withInt_(s, charIdx);
@@ -577,7 +607,7 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilFstUtil_toBytesRefWithOrgApacheL
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(scratch)) growWithInt:((OrgApacheLuceneUtilIntsRef *) nil_chk(input))->length_];
   for (jint i = 0; i < input->length_; i++) {
     jint value = IOSIntArray_Get(nil_chk(input->ints_), i + input->offset_);
-    JreAssert((value >= JavaLangByte_MIN_VALUE && value <= 255), (JreStrcat("$I$", @"value ", value, @" doesn't fit into byte")));
+    JreAssert(value >= JavaLangByte_MIN_VALUE && value <= 255, JreStrcat("$I$", @"value ", value, @" doesn't fit into byte"));
     [scratch setByteAtWithInt:i withByte:(jbyte) value];
   }
   [scratch setLengthWithInt:input->length_];
@@ -687,20 +717,29 @@ withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithId:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilIntsRefBuilder:", "FSTPath", NULL, 0x1, NULL, "(TT;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/IntsRefBuilder;)V" },
-    { "initWithId:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilIntsRefBuilder:withFloat:withJavaLangCharSequence:", "FSTPath", NULL, 0x1, NULL, "(TT;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/IntsRefBuilder;FLjava/lang/CharSequence;)V" },
-    { "newPathWithId:withOrgApacheLuceneUtilIntsRefBuilder:", "newPath", "Lorg.apache.lucene.util.fst.Util$FSTPath;", 0x1, NULL, "(TT;Lorg/apache/lucene/util/IntsRefBuilder;)Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstUtil_FSTPath;", 0x1, 4, 5, -1, 6, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithId:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilIntsRefBuilder:);
+  methods[1].selector = @selector(initWithId:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilIntsRefBuilder:withFloat:withJavaLangCharSequence:);
+  methods[2].selector = @selector(newPathWithId:withOrgApacheLuceneUtilIntsRefBuilder:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "arc_", NULL, 0x1, "Lorg.apache.lucene.util.fst.FST$Arc;", NULL, "Lorg/apache/lucene/util/fst/FST$Arc<TT;>;", .constantValue.asLong = 0 },
-    { "cost_", NULL, 0x1, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
-    { "input_", NULL, 0x11, "Lorg.apache.lucene.util.IntsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "boost_", NULL, 0x11, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "context_", NULL, 0x11, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
+    { "arc_", "LOrgApacheLuceneUtilFstFST_Arc;", .constantValue.asLong = 0, 0x1, -1, -1, 8, -1 },
+    { "cost_", "LNSObject;", .constantValue.asLong = 0, 0x1, -1, -1, 9, -1 },
+    { "input_", "LOrgApacheLuceneUtilIntsRefBuilder;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "boost_", "F", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "context_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil_FSTPath = { 2, "FSTPath", "org.apache.lucene.util.fst", "Util", 0x9, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "LNSObject;LOrgApacheLuceneUtilFstFST_Arc;LOrgApacheLuceneUtilIntsRefBuilder;", "(TT;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/IntsRefBuilder;)V", "LNSObject;LOrgApacheLuceneUtilFstFST_Arc;LOrgApacheLuceneUtilIntsRefBuilder;FLJavaLangCharSequence;", "(TT;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/IntsRefBuilder;FLjava/lang/CharSequence;)V", "newPath", "LNSObject;LOrgApacheLuceneUtilIntsRefBuilder;", "(TT;Lorg/apache/lucene/util/IntsRefBuilder;)Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;", "toString", "Lorg/apache/lucene/util/fst/FST$Arc<TT;>;", "TT;", "LOrgApacheLuceneUtilFstUtil;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil_FSTPath = { "FSTPath", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x9, 4, 5, 10, -1, -1, 11, -1 };
   return &_OrgApacheLuceneUtilFstUtil_FSTPath;
 }
 
@@ -746,7 +785,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_FSTPath)
 
 - (jint)compareWithId:(OrgApacheLuceneUtilFstUtil_FSTPath *)a
                withId:(OrgApacheLuceneUtilFstUtil_FSTPath *)b {
-  jint cmp = [((id<JavaUtilComparator>) nil_chk(comparator_)) compareWithId:((id) ((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(a))->cost_) withId:((id) ((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(b))->cost_)];
+  jint cmp = [((id<JavaUtilComparator>) nil_chk(comparator_)) compareWithId:((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(a))->cost_ withId:((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(b))->cost_];
   if (cmp == 0) {
     return [((OrgApacheLuceneUtilIntsRef *) nil_chk([((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(a->input_)) get])) compareToWithId:[b->input_ get]];
   }
@@ -755,20 +794,56 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_FSTPath)
   }
 }
 
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
+
 - (void)dealloc {
   RELEASE_(comparator_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilComparator:", "TieBreakByInputComparator", NULL, 0x1, NULL, "(Ljava/util/Comparator<TT;>;)V" },
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, "(Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;)I" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, -1, 4, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilComparator:);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<TT;>;", .constantValue.asLong = 0 },
+    { "comparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator = { 2, "TieBreakByInputComparator", "org.apache.lucene.util.fst", "Util", 0xa, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;>;" };
+  static const void *ptrTable[] = { "LJavaUtilComparator;", "(Ljava/util/Comparator<TT;>;)V", "compare", "LOrgApacheLuceneUtilFstUtil_FSTPath;LOrgApacheLuceneUtilFstUtil_FSTPath;", "(Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;)I", "Ljava/util/Comparator<TT;>;", "LOrgApacheLuceneUtilFstUtil;", "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator = { "TieBreakByInputComparator", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0xa, 2, 1, 6, -1, -1, 7, -1 };
   return &_OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator;
 }
 
@@ -809,10 +884,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
 }
 
 - (void)addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path {
-  JreAssert((queue_ != nil), (@"org/apache/lucene/util/fst/Util.java:340 condition failed: assert queue != null;"));
-  id cost = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) addWithId:((id) ((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->cost_) withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->output_)];
+  JreAssert(queue_ != nil, @"org/apache/lucene/util/fst/Util.java:340 condition failed: assert queue != null;");
+  id cost = JreRetainedLocalValue([((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) addWithId:((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->cost_ withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->output_]);
   if ([((JavaUtilTreeSet *) nil_chk(queue_)) size] == maxQueueDepth_) {
-    OrgApacheLuceneUtilFstUtil_FSTPath *bottom = [((JavaUtilTreeSet *) nil_chk(queue_)) last];
+    OrgApacheLuceneUtilFstUtil_FSTPath *bottom = JreRetainedLocalValue([((JavaUtilTreeSet *) nil_chk(queue_)) last]);
     jint comp = [((id<JavaUtilComparator>) nil_chk(pathComparator_)) compareWithId:path withId:bottom];
     if (comp > 0) {
       return;
@@ -821,7 +896,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
       [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) appendWithInt:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->label_];
       jint cmp = [((OrgApacheLuceneUtilIntsRef *) nil_chk([((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(bottom))->input_ get])) compareToWithId:[path->input_ get]];
       [path->input_ setLengthWithInt:[path->input_ length] - 1];
-      JreAssert((cmp != 0), (@"org/apache/lucene/util/fst/Util.java:358 condition failed: assert cmp != 0;"));
+      JreAssert(cmp != 0, @"org/apache/lucene/util/fst/Util.java:358 condition failed: assert cmp != 0;");
       if (cmp < 0) {
         return;
       }
@@ -851,7 +926,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
                  withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input
                                              withFloat:(jfloat)boost
                               withJavaLangCharSequence:(id<JavaLangCharSequence>)context {
-  if ([((id) nil_chk(startOutput)) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) getNoOutput]]) {
+  if ([nil_chk(startOutput) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) getNoOutput]]) {
     startOutput = [fst_->outputs_ getNoOutput];
   }
   OrgApacheLuceneUtilFstUtil_FSTPath *path = create_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(startOutput, node, input, boost, context);
@@ -883,7 +958,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
     }
     if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
       [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) setLengthWithInt:[path->input_ length] - 1];
-      [results addWithId:create_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_([path->input_ get], ((id) path->cost_))];
+      [results addWithId:create_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_([path->input_ get], path->cost_)];
       continue;
     }
     if ([results size] == topN_ - 1 && maxQueueDepth_ == topN_) {
@@ -893,7 +968,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
       [fst_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:path->arc_ withOrgApacheLuceneUtilFstFST_Arc:path->arc_ withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
       jboolean foundZero = false;
       while (true) {
-        if ([((id<JavaUtilComparator>) nil_chk(comparator_)) compareWithId:NO_OUTPUT withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->output_)] == 0) {
+        if ([((id<JavaUtilComparator>) nil_chk(comparator_)) compareWithId:NO_OUTPUT withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->output_] == 0) {
           if (queue_ == nil) {
             foundZero = true;
             break;
@@ -914,14 +989,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
         }
         [fst_ readNextArcWithOrgApacheLuceneUtilFstFST_Arc:path->arc_ withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
       }
-      JreAssert((foundZero), (@"org/apache/lucene/util/fst/Util.java:505 condition failed: assert foundZero;"));
+      JreAssert(foundZero, @"org/apache/lucene/util/fst/Util.java:505 condition failed: assert foundZero;");
       if (queue_ != nil) {
         [((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_)) copyFromWithOrgApacheLuceneUtilFstFST_Arc:scratchArc_];
       }
       if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
-        JreStrongAssign(&path->cost_, [fst_->outputs_ addWithId:((id) path->cost_) withId:((id) path->arc_->output_)]);
+        JreStrongAssign(&path->cost_, [fst_->outputs_ addWithId:path->cost_ withId:path->arc_->output_]);
         if ([self acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:path]) {
-          [results addWithId:create_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_([((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) get], ((id) path->cost_))];
+          [results addWithId:create_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_([((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) get], path->cost_)];
         }
         else {
           rejectCount++;
@@ -930,7 +1005,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
       }
       else {
         [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) appendWithInt:path->arc_->label_];
-        JreStrongAssign(&path->cost_, [fst_->outputs_ addWithId:((id) path->cost_) withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->output_)]);
+        JreStrongAssign(&path->cost_, [fst_->outputs_ addWithId:path->cost_ withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->output_]);
       }
     }
   }
@@ -938,7 +1013,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
 }
 
 - (jboolean)acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path {
-  return [self acceptResultWithOrgApacheLuceneUtilIntsRef:[((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->input_)) get] withId:((id) path->cost_)];
+  return [self acceptResultWithOrgApacheLuceneUtilIntsRef:[((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->input_)) get] withId:path->cost_];
 }
 
 - (jboolean)acceptResultWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
@@ -957,27 +1032,40 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:", "TopNSearcher", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<TT;>;IILjava/util/Comparator<TT;>;)V" },
-    { "initWithOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:withJavaUtilComparator:", "TopNSearcher", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<TT;>;IILjava/util/Comparator<TT;>;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;>;)V" },
-    { "addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:", "addIfCompetitive", "V", 0x4, NULL, "(Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;)V" },
-    { "addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:withId:withBoolean:withOrgApacheLuceneUtilIntsRefBuilder:", "addStartPaths", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;TT;ZLorg/apache/lucene/util/IntsRefBuilder;)V" },
-    { "addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:withId:withBoolean:withOrgApacheLuceneUtilIntsRefBuilder:withFloat:withJavaLangCharSequence:", "addStartPaths", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;TT;ZLorg/apache/lucene/util/IntsRefBuilder;FLjava/lang/CharSequence;)V" },
-    { "search", NULL, "Lorg.apache.lucene.util.fst.Util$TopResults;", 0x1, "Ljava.io.IOException;", "()Lorg/apache/lucene/util/fst/Util$TopResults<TT;>;" },
-    { "acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:", "acceptResult", "Z", 0x4, NULL, "(Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;)Z" },
-    { "acceptResultWithOrgApacheLuceneUtilIntsRef:withId:", "acceptResult", "Z", 0x4, NULL, "(Lorg/apache/lucene/util/IntsRef;TT;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, 3, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, -1, 6, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, 9, 10, -1, -1 },
+    { NULL, "V", 0x1, 7, 11, 9, 12, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstUtil_TopResults;", 0x1, -1, -1, 9, 13, -1, -1 },
+    { NULL, "Z", 0x4, 14, 5, -1, 15, -1, -1 },
+    { NULL, "Z", 0x4, 14, 16, -1, 17, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:withJavaUtilComparator:);
+  methods[2].selector = @selector(addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:);
+  methods[3].selector = @selector(addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:withId:withBoolean:withOrgApacheLuceneUtilIntsRefBuilder:);
+  methods[4].selector = @selector(addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:withId:withBoolean:withOrgApacheLuceneUtilIntsRefBuilder:withFloat:withJavaLangCharSequence:);
+  methods[5].selector = @selector(search);
+  methods[6].selector = @selector(acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:);
+  methods[7].selector = @selector(acceptResultWithOrgApacheLuceneUtilIntsRef:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fst_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<TT;>;", .constantValue.asLong = 0 },
-    { "bytesReader_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST$BytesReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "topN_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxQueueDepth_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchArc_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST$Arc;", NULL, "Lorg/apache/lucene/util/fst/FST$Arc<TT;>;", .constantValue.asLong = 0 },
-    { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<TT;>;", .constantValue.asLong = 0 },
-    { "pathComparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;>;", .constantValue.asLong = 0 },
-    { "queue_", NULL, 0x0, "Ljava.util.TreeSet;", NULL, "Ljava/util/TreeSet<Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;>;", .constantValue.asLong = 0 },
+    { "fst_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x12, -1, -1, 18, -1 },
+    { "bytesReader_", "LOrgApacheLuceneUtilFstFST_BytesReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "topN_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxQueueDepth_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratchArc_", "LOrgApacheLuceneUtilFstFST_Arc;", .constantValue.asLong = 0, 0x12, -1, -1, 19, -1 },
+    { "comparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 20, -1 },
+    { "pathComparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 21, -1 },
+    { "queue_", "LJavaUtilTreeSet;", .constantValue.asLong = 0, 0x0, -1, -1, 22, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil_TopNSearcher = { 2, "TopNSearcher", "org.apache.lucene.util.fst", "Util", 0x9, 8, methods, 8, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilFstFST;IILJavaUtilComparator;", "(Lorg/apache/lucene/util/fst/FST<TT;>;IILjava/util/Comparator<TT;>;)V", "LOrgApacheLuceneUtilFstFST;IILJavaUtilComparator;LJavaUtilComparator;", "(Lorg/apache/lucene/util/fst/FST<TT;>;IILjava/util/Comparator<TT;>;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;>;)V", "addIfCompetitive", "LOrgApacheLuceneUtilFstUtil_FSTPath;", "(Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;)V", "addStartPaths", "LOrgApacheLuceneUtilFstFST_Arc;LNSObject;ZLOrgApacheLuceneUtilIntsRefBuilder;", "LJavaIoIOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;TT;ZLorg/apache/lucene/util/IntsRefBuilder;)V", "LOrgApacheLuceneUtilFstFST_Arc;LNSObject;ZLOrgApacheLuceneUtilIntsRefBuilder;FLJavaLangCharSequence;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;TT;ZLorg/apache/lucene/util/IntsRefBuilder;FLjava/lang/CharSequence;)V", "()Lorg/apache/lucene/util/fst/Util$TopResults<TT;>;", "acceptResult", "(Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;)Z", "LOrgApacheLuceneUtilIntsRef;LNSObject;", "(Lorg/apache/lucene/util/IntsRef;TT;)Z", "Lorg/apache/lucene/util/fst/FST<TT;>;", "Lorg/apache/lucene/util/fst/FST$Arc<TT;>;", "Ljava/util/Comparator<TT;>;", "Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;>;", "Ljava/util/TreeSet<Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;>;", "LOrgApacheLuceneUtilFstUtil;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil_TopNSearcher = { "TopNSearcher", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x9, 8, 8, 23, -1, -1, 24, -1 };
   return &_OrgApacheLuceneUtilFstUtil_TopNSearcher;
 }
 
@@ -1033,14 +1121,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TopNSearcher)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilIntsRef:withId:", "Result", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/IntsRef;TT;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilIntsRef:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "input_", NULL, 0x11, "Lorg.apache.lucene.util.IntsRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "output_", NULL, 0x11, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
+    { "input_", "LOrgApacheLuceneUtilIntsRef;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "output_", "LNSObject;", .constantValue.asLong = 0, 0x11, -1, -1, 2, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil_Result = { 2, "Result", "org.apache.lucene.util.fst", "Util", 0x19, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilIntsRef;LNSObject;", "(Lorg/apache/lucene/util/IntsRef;TT;)V", "TT;", "LOrgApacheLuceneUtilFstUtil;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil_Result = { "Result", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x19, 1, 2, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneUtilFstUtil_Result;
 }
 
@@ -1074,8 +1168,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_Result)
   return [((id<JavaUtilList>) nil_chk(topN_)) iterator];
 }
 
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
+}
+
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -1084,15 +1186,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_Result)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:withJavaUtilList:", "TopResults", NULL, 0x0, NULL, "(ZLjava/util/List<Lorg/apache/lucene/util/fst/Util$Result<TT;>;>;)V" },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/util/fst/Util$Result<TT;>;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 2, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithBoolean:withJavaUtilList:);
+  methods[1].selector = @selector(iterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "isComplete_", NULL, 0x11, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "topN_", NULL, 0x11, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/util/fst/Util$Result<TT;>;>;", .constantValue.asLong = 0 },
+    { "isComplete_", "Z", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "topN_", "LJavaUtilList;", .constantValue.asLong = 0, 0x11, -1, -1, 3, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil_TopResults = { 2, "TopResults", "org.apache.lucene.util.fst", "Util", 0x19, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/lang/Iterable<Lorg/apache/lucene/util/fst/Util$Result<TT;>;>;" };
+  static const void *ptrTable[] = { "ZLJavaUtilList;", "(ZLjava/util/List<Lorg/apache/lucene/util/fst/Util$Result<TT;>;>;)V", "()Ljava/util/Iterator<Lorg/apache/lucene/util/fst/Util$Result<TT;>;>;", "Ljava/util/List<Lorg/apache/lucene/util/fst/Util$Result<TT;>;>;", "LOrgApacheLuceneUtilFstUtil;", "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/lang/Iterable<Lorg/apache/lucene/util/fst/Util$Result<TT;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstUtil_TopResults = { "TopResults", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x19, 2, 2, 4, -1, -1, 5, -1 };
   return &_OrgApacheLuceneUtilFstUtil_TopResults;
 }
 

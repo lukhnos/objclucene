@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPhraseQueue
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPhraseQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchPhraseQueue || defined(INCLUDE_OrgApacheLuceneSearchPhraseQueue))
 #define OrgApacheLuceneSearchPhraseQueue_
 
@@ -24,27 +30,54 @@
 
 @interface OrgApacheLuceneSearchPhraseQueue : OrgApacheLuceneUtilPriorityQueue
 
+#pragma mark Public
+
+- (OrgApacheLuceneSearchPhrasePositions *)addWithId:(OrgApacheLuceneSearchPhrasePositions *)arg0;
+
+- (OrgApacheLuceneSearchPhrasePositions *)insertWithOverflowWithId:(OrgApacheLuceneSearchPhrasePositions *)arg0;
+
+- (OrgApacheLuceneSearchPhrasePositions *)pop;
+
+- (OrgApacheLuceneSearchPhrasePositions *)top;
+
+- (OrgApacheLuceneSearchPhrasePositions *)updateTop;
+
+- (OrgApacheLuceneSearchPhrasePositions *)updateTopWithId:(OrgApacheLuceneSearchPhrasePositions *)arg0;
+
 #pragma mark Protected
+
+- (OrgApacheLuceneSearchPhrasePositions *)getSentinelObject;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchPhrasePositions *)pp1
                     withId:(OrgApacheLuceneSearchPhrasePositions *)pp2;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)size;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPhraseQueue)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQueue_initWithInt_(OrgApacheLuceneSearchPhraseQueue *self, jint size);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQueue_initPackagePrivateWithInt_(OrgApacheLuceneSearchPhraseQueue *self, jint size);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQueue *new_OrgApacheLuceneSearchPhraseQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQueue *new_OrgApacheLuceneSearchPhraseQueue_initPackagePrivateWithInt_(jint size) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQueue *create_OrgApacheLuceneSearchPhraseQueue_initWithInt_(jint size);
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQueue *create_OrgApacheLuceneSearchPhraseQueue_initPackagePrivateWithInt_(jint size);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPhraseQueue)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPhraseQueue")

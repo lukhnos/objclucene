@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPtPortugueseStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisPtPortugueseStemmer))
 #define OrgApacheLuceneAnalysisPtPortugueseStemmer_
 
@@ -24,18 +30,17 @@
 
 /*!
  @brief Portuguese stemmer implementing the RSLP (Removedor de Sufixos da Lingua Portuguesa)
- algorithm.
- This is sometimes also referred to as the Orengo stemmer.
+  algorithm.This is sometimes also referred to as the Orengo stemmer.
  - seealso: RSLPStemmerBase
  */
 @interface OrgApacheLuceneAnalysisPtPortugueseStemmer : OrgApacheLuceneAnalysisPtRSLPStemmerBase
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @param s buffer, oversized to at least <code>len+1</code>
+ @param s buffer, oversized to at least  <code> len+1 </code>
  @param len initial valid length of buffer
  @return new valid length, stemmed
  */
@@ -48,12 +53,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisPtPortugueseStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtPortugueseStemmer_init(OrgApacheLuceneAnalysisPtPortugueseStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseStemmer *new_OrgApacheLuceneAnalysisPtPortugueseStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseStemmer *new_OrgApacheLuceneAnalysisPtPortugueseStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseStemmer *create_OrgApacheLuceneAnalysisPtPortugueseStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseStemmer *create_OrgApacheLuceneAnalysisPtPortugueseStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtPortugueseStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseStemmer")

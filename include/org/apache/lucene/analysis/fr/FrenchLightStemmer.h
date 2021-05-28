@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisFrFrenchLightStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisFrFrenchLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisFrFrenchLightStemmer))
 #define OrgApacheLuceneAnalysisFrFrenchLightStemmer_
 
@@ -21,15 +27,15 @@
 /*!
  @brief Light Stemmer for French.
  <p>
- This stemmer implements the "UniNE" algorithm in:
+  This stemmer implements the "UniNE" algorithm in: 
  <i>Light Stemming Approaches for the French, Portuguese, German and Hungarian Languages</i>
- Jacques Savoy
+  Jacques Savoy
  */
 @interface OrgApacheLuceneAnalysisFrFrenchLightStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -40,12 +46,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisFrFrenchLightStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFrFrenchLightStemmer_init(OrgApacheLuceneAnalysisFrFrenchLightStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchLightStemmer *new_OrgApacheLuceneAnalysisFrFrenchLightStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchLightStemmer *new_OrgApacheLuceneAnalysisFrFrenchLightStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchLightStemmer *create_OrgApacheLuceneAnalysisFrFrenchLightStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchLightStemmer *create_OrgApacheLuceneAnalysisFrFrenchLightStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFrFrenchLightStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchLightStemmer")

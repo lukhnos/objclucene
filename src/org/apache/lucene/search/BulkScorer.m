@@ -3,20 +3,29 @@
 //  source: ./core/src/java/org/apache/lucene/search/BulkScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/BulkScorer.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/LeafCollector.h"
 #include "org/apache/lucene/util/Bits.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/BulkScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchBulkScorer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchBulkScorer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)scoreWithOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)collector
                         withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
   jint next = [self scoreWithOrgApacheLuceneSearchLeafCollector:collector withOrgApacheLuceneUtilBits:acceptDocs withInt:0 withInt:OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS];
-  JreAssert((next == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS), (@"org/apache/lucene/search/BulkScorer.java:40 condition failed: assert next == DocIdSetIterator.NO_MORE_DOCS;"));
+  JreAssert(next == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS, @"org/apache/lucene/search/BulkScorer.java:40 condition failed: assert next == DocIdSetIterator.NO_MORE_DOCS;");
 }
 
 - (jint)scoreWithOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)collector
@@ -34,21 +43,23 @@
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchBulkScorer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "scoreWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneUtilBits:", "score", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "scoreWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneUtilBits:withInt:withInt:", "score", "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x401, NULL, NULL },
-    { "init", "BulkScorer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "I", 0x401, 0, 3, 2, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBulkScorer = { 2, "BulkScorer", "org.apache.lucene.search", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(scoreWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneUtilBits:);
+  methods[2].selector = @selector(scoreWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneUtilBits:withInt:withInt:);
+  methods[3].selector = @selector(cost);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "score", "LOrgApacheLuceneSearchLeafCollector;LOrgApacheLuceneUtilBits;", "LJavaIoIOException;", "LOrgApacheLuceneSearchLeafCollector;LOrgApacheLuceneUtilBits;II" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBulkScorer = { "BulkScorer", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x401, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchBulkScorer;
 }
 

@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery))
 #define OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_
 
@@ -56,11 +62,15 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field
-                     withBoolean:(jboolean)multipleValuesPerDocument
-withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms
-                  withFloatArray:(IOSFloatArray *)scores
-  withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)originalQuery;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field
+                                             withBoolean:(jboolean)multipleValuesPerDocument
+                     withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms
+                                          withFloatArray:(IOSFloatArray *)scores
+                          withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)originalQuery;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -73,11 +83,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery, ords_, IO
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery, originalQuery_, OrgApacheLuceneSearchQuery *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery, unwrittenOriginalQuery_, OrgApacheLuceneSearchQuery *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *self, NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, OrgApacheLuceneSearchQuery *originalQuery);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initPackagePrivateWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *self, NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, OrgApacheLuceneSearchQuery *originalQuery);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, OrgApacheLuceneSearchQuery *originalQuery) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initPackagePrivateWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, OrgApacheLuceneSearchQuery *originalQuery) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, OrgApacheLuceneSearchQuery *originalQuery);
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initPackagePrivateWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, OrgApacheLuceneSearchQuery *originalQuery);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery)
 
@@ -126,11 +136,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery:(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *)outer$
-                                          withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                        withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
-                                                                  withInt:(jint)maxDoc
-                                                                 withLong:(jlong)cost;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery:(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *)outer$
+                                                    withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                  withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
+                                                                            withInt:(jint)maxDoc
+                                                                           withLong:(jlong)cost;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -166,11 +180,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVI
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery:(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *)outer$
-                                          withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                        withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
-                                                                  withInt:(jint)maxDoc
-                                                                 withLong:(jlong)cost;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery:(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *)outer$
+                                                    withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                  withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
+                                                                            withInt:(jint)maxDoc
+                                                                           withLong:(jlong)cost;
 
 @end
 
@@ -186,4 +200,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVI
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery")

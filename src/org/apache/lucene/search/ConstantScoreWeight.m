@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/ConstantScoreWeight.h"
@@ -16,6 +15,10 @@
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/Weight.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ConstantScoreWeight must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchConstantScoreWeight () {
  @public
@@ -74,19 +77,30 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQuery:", "ConstantScoreWeight", NULL, 0x4, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "getValueForNormalization", NULL, "F", 0x11, "Ljava.io.IOException;", NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x11, NULL, NULL },
-    { "score", NULL, "F", 0x14, NULL, NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x11, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, 3, -1, -1 },
+    { NULL, "F", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x11, 5, 6, -1, -1, -1, -1 },
+    { NULL, "F", 0x14, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x11, 7, 8, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(getValueForNormalization);
+  methods[3].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[4].selector = @selector(score);
+  methods[5].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queryNorm_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryWeight_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "queryNorm_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "queryWeight_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreWeight = { 2, "ConstantScoreWeight", "org.apache.lucene.search", NULL, 0x401, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchQuery;", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "LJavaIoIOException;", "normalize", "FF", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreWeight = { "ConstantScoreWeight", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 6, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchConstantScoreWeight;
 }
 

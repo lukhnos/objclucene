@@ -3,15 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/AbstractBlockPackedWriter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/packed/AbstractBlockPackedWriter.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/AbstractBlockPackedWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilPackedAbstractBlockPackedWriter ()
 
@@ -44,14 +46,14 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
   OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_writeVLongWithOrgApacheLuceneStoreDataOutput_withLong_(outArg, i);
 }
 
-- (instancetype)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
-                                               withInt:(jint)blockSize {
-  OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(self, outArg, blockSize);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
+                                                             withInt:(jint)blockSize {
+  OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_initPackagePrivateWithOrgApacheLuceneStoreDataOutput_withInt_(self, outArg, blockSize);
   return self;
 }
 
 - (void)resetWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
-  JreAssert((outArg != nil), (@"org/apache/lucene/util/packed/AbstractBlockPackedWriter.java:63 condition failed: assert out != null;"));
+  JreAssert(outArg != nil, @"org/apache/lucene/util/packed/AbstractBlockPackedWriter.java:63 condition failed: assert out != null;");
   JreStrongAssign(&self->out_, outArg);
   off_ = 0;
   ord_ = 0LL;
@@ -103,7 +105,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
 
 - (void)writeValuesWithInt:(jint)bitsRequired {
   id<OrgApacheLuceneUtilPackedPackedInts_Encoder> encoder = OrgApacheLuceneUtilPackedPackedInts_getEncoderWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT, bitsRequired);
-  jint iterations = ((IOSLongArray *) nil_chk(values_))->size_ / [((id<OrgApacheLuceneUtilPackedPackedInts_Encoder>) nil_chk(encoder)) byteValueCount];
+  jint iterations = JreIntDiv(((IOSLongArray *) nil_chk(values_))->size_, [((id<OrgApacheLuceneUtilPackedPackedInts_Encoder>) nil_chk(encoder)) byteValueCount]);
   jint blockSize = [encoder byteBlockCount] * iterations;
   if (blocks_ == nil || blocks_->size_ < blockSize) {
     JreStrongAssignAndConsume(&blocks_, [IOSByteArray newArrayWithLength:blockSize]);
@@ -124,31 +126,46 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "writeVLongWithOrgApacheLuceneStoreDataOutput:withLong:", "writeVLong", "V", 0x8, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneStoreDataOutput:withInt:", "AbstractBlockPackedWriter", NULL, 0x1, NULL, NULL },
-    { "resetWithOrgApacheLuceneStoreDataOutput:", "reset", "V", 0x1, NULL, NULL },
-    { "checkNotFinished", NULL, "V", 0x2, NULL, NULL },
-    { "addWithLong:", "add", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "addBlockOfZeros", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "finish", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "ord", NULL, "J", 0x1, NULL, NULL },
-    { "flush", NULL, "V", 0x404, "Ljava.io.IOException;", NULL },
-    { "writeValuesWithInt:", "writeValues", "V", 0x14, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x8, 0, 1, 2, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, 2, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x404, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x14, 8, 9, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(writeVLongWithOrgApacheLuceneStoreDataOutput:withLong:);
+  methods[1].selector = @selector(initPackagePrivateWithOrgApacheLuceneStoreDataOutput:withInt:);
+  methods[2].selector = @selector(resetWithOrgApacheLuceneStoreDataOutput:);
+  methods[3].selector = @selector(checkNotFinished);
+  methods[4].selector = @selector(addWithLong:);
+  methods[5].selector = @selector(addBlockOfZeros);
+  methods[6].selector = @selector(finish);
+  methods[7].selector = @selector(ord);
+  methods[8].selector = @selector(flush);
+  methods[9].selector = @selector(writeValuesWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MIN_BLOCK_SIZE", "MIN_BLOCK_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_BLOCK_SIZE },
-    { "MAX_BLOCK_SIZE", "MAX_BLOCK_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MAX_BLOCK_SIZE },
-    { "MIN_VALUE_EQUALS_0", "MIN_VALUE_EQUALS_0", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_VALUE_EQUALS_0 },
-    { "BPV_SHIFT", "BPV_SHIFT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_BPV_SHIFT },
-    { "out_", NULL, 0x4, "Lorg.apache.lucene.store.DataOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "values_", NULL, 0x14, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "blocks_", NULL, 0x4, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "off_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ord_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "finished_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "MIN_BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_BLOCK_SIZE, 0x18, -1, -1, -1, -1 },
+    { "MAX_BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MAX_BLOCK_SIZE, 0x18, -1, -1, -1, -1 },
+    { "MIN_VALUE_EQUALS_0", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_VALUE_EQUALS_0, 0x18, -1, -1, -1, -1 },
+    { "BPV_SHIFT", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_BPV_SHIFT, 0x18, -1, -1, -1, -1 },
+    { "out_", "LOrgApacheLuceneStoreDataOutput;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "values_", "[J", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "blocks_", "[B", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "off_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "ord_", "J", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "finished_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedAbstractBlockPackedWriter = { 2, "AbstractBlockPackedWriter", "org.apache.lucene.util.packed", NULL, 0x400, 10, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "writeVLong", "LOrgApacheLuceneStoreDataOutput;J", "LJavaIoIOException;", "LOrgApacheLuceneStoreDataOutput;I", "reset", "LOrgApacheLuceneStoreDataOutput;", "add", "J", "writeValues", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedAbstractBlockPackedWriter = { "AbstractBlockPackedWriter", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x400, 10, 10, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter;
 }
 
@@ -164,7 +181,7 @@ void OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_writeVLongWithOrgApacheL
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeByteWithByte:(jbyte) i];
 }
 
-void OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter *self, OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) {
+void OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_initPackagePrivateWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter *self, OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) {
   NSObject_init(self);
   OrgApacheLuceneUtilPackedPackedInts_checkBlockSizeWithInt_withInt_withInt_(blockSize, OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_BLOCK_SIZE, OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MAX_BLOCK_SIZE);
   [self resetWithOrgApacheLuceneStoreDataOutput:outArg];

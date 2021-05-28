@@ -3,9 +3,7 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/NumericRangeFilterBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
@@ -22,6 +20,10 @@
 #include "org/apache/lucene/util/NumericUtils.h"
 #include "org/w3c/dom/Element.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/NumericRangeFilterBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder () {
  @public
   jboolean strictMode_;
@@ -29,13 +31,20 @@
 
 @end
 
-inline OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_get_NO_MATCH_FILTER();
+inline OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_get_NO_MATCH_FILTER(void);
 static OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NO_MATCH_FILTER;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder, NO_MATCH_FILTER, OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder)
 
 @implementation OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setStrictModeWithBoolean:(jboolean)strictMode {
   self->strictMode_ = strictMode;
@@ -51,16 +60,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterB
   NSString *type = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withNSString_(e, @"type", @"int");
   @try {
     OrgApacheLuceneSearchFilter *filter;
-    if ([((NSString *) nil_chk(type)) equalsIgnoreCase:@"int"]) {
+    if ([((NSString *) nil_chk(type)) java_equalsIgnoreCase:@"int"]) {
       filter = OrgApacheLuceneSearchNumericRangeFilter_newIntRangeWithNSString_withInt_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(field, precisionStep, JavaLangInteger_valueOfWithNSString_(lowerTerm), JavaLangInteger_valueOfWithNSString_(upperTerm), lowerInclusive, upperInclusive);
     }
-    else if ([type equalsIgnoreCase:@"long"]) {
+    else if ([type java_equalsIgnoreCase:@"long"]) {
       filter = OrgApacheLuceneSearchNumericRangeFilter_newLongRangeWithNSString_withInt_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(field, precisionStep, JavaLangLong_valueOfWithNSString_(lowerTerm), JavaLangLong_valueOfWithNSString_(upperTerm), lowerInclusive, upperInclusive);
     }
-    else if ([type equalsIgnoreCase:@"double"]) {
+    else if ([type java_equalsIgnoreCase:@"double"]) {
       filter = OrgApacheLuceneSearchNumericRangeFilter_newDoubleRangeWithNSString_withInt_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(field, precisionStep, JavaLangDouble_valueOfWithNSString_(lowerTerm), JavaLangDouble_valueOfWithNSString_(upperTerm), lowerInclusive, upperInclusive);
     }
-    else if ([type equalsIgnoreCase:@"float"]) {
+    else if ([type java_equalsIgnoreCase:@"float"]) {
       filter = OrgApacheLuceneSearchNumericRangeFilter_newFloatRangeWithNSString_withInt_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(field, precisionStep, JavaLangFloat_valueOfWithNSString_(lowerTerm), JavaLangFloat_valueOfWithNSString_(upperTerm), lowerInclusive, upperInclusive);
     }
     else {
@@ -70,39 +79,39 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterB
   }
   @catch (JavaLangNumberFormatException *nfe) {
     if (strictMode_) {
-      @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(@"Could not parse lowerTerm or upperTerm into a number", nfe);
+      @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(@"Could not parse lowerTerm or upperTerm into a number", nfe);
     }
     return OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NO_MATCH_FILTER;
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFilter;", 0x1, 2, 3, 4, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setStrictModeWithBoolean:);
+  methods[2].selector = @selector(getFilterWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "NO_MATCH_FILTER", "LOrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "strictMode_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "setStrictMode", "Z", "getFilter", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;", &OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NO_MATCH_FILTER, "LOrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder = { "NumericRangeFilterBuilder", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x1, 3, 2, -1, 6, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NO_MATCH_FILTER, new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setStrictModeWithBoolean:", "setStrictMode", "V", 0x1, NULL, NULL },
-    { "getFilterWithOrgW3cDomElement:", "getFilter", "Lorg.apache.lucene.search.Filter;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", "NumericRangeFilterBuilder", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "NO_MATCH_FILTER", "NO_MATCH_FILTER", 0x1a, "Lorg.apache.lucene.queryparser.xml.builders.NumericRangeFilterBuilder$NoMatchFilter;", &OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NO_MATCH_FILTER, NULL, .constantValue.asLong = 0 },
-    { "strictMode_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.xml.builders.NumericRangeFilterBuilder$NoMatchFilter;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder = { 2, "NumericRangeFilterBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 3, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder;
 }
 
 @end
@@ -124,6 +133,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersNumericRan
 
 @implementation OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
   return nil;
@@ -133,20 +149,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersNumericRan
   return @"NoMatchFilter()";
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:", "getDocIdSet", "Lorg.apache.lucene.search.DocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "NoMatchFilter", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, 4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter = { 2, "NoMatchFilter", "org.apache.lucene.queryparser.xml.builders", "NumericRangeFilterBuilder", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:);
+  methods[2].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getDocIdSet", "LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneUtilBits;", "LJavaIoIOException;", "toString", "LNSString;", "LOrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter = { "NoMatchFilter", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, NULL, 7, 0x8, 3, 0, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter;
 }
 

@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFuzzyTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneSearchFuzzyTermsEnum || defined(INCLUDE_OrgApacheLuceneSearchFuzzyTermsEnum))
 #define OrgApacheLuceneSearchFuzzyTermsEnum_
 
@@ -34,10 +40,10 @@
 
 /*!
  @brief Subclass of TermsEnum for enumerating all terms that are similar
- to the specified filter term.
- <p>Term enumerations are always ordered by
+  to the specified filter term.
+ <p>Term enumerations are always ordered by 
  <code>BytesRef.compareTo</code>.  Each term in the enumeration is
- greater than all that precede it.</p>
+  greater than all that precede it.</p>
  */
 @interface OrgApacheLuceneSearchFuzzyTermsEnum : OrgApacheLuceneIndexTermsEnum {
  @public
@@ -55,37 +61,33 @@
 
 /*!
  @brief Constructor for enumeration of all terms from specified <code>reader</code> which share a prefix of
- length <code>prefixLength</code> with <code>term</code> and which have a fuzzy similarity &gt;
- <code>minSimilarity</code>.
+  length <code>prefixLength</code> with <code>term</code> and which have a fuzzy similarity &gt;
+  <code>minSimilarity</code>.
  <p>
- After calling the constructor the enumeration is already pointing to the first 
- valid term if such a term exists. 
+  After calling the constructor the enumeration is already pointing to the first 
+  valid term if such a term exists.
  @param terms Delivers terms.
- @param atts <code>AttributeSource</code> created by the rewrite method of <code>MultiTermQuery</code>
- thats contains information about competitive boosts during rewrite. It is also used
- to cache DFAs between segment transitions.
+ @param atts<code>AttributeSource</code>  created by the rewrite method of <code>MultiTermQuery</code>  thats contains information about competitive boosts during rewrite. It is also used
+   to cache DFAs between segment transitions.
  @param term Pattern term.
- @param minSimilarity Minimum required similarity for terms from the reader. Pass an integer value
- representing edit distance. Passing a fraction is deprecated.
+ @param minSimilarity Minimum required similarity for terms from the reader. Pass an integer value         representing edit distance. Passing a fraction is deprecated.
  @param prefixLength Length of required common prefix. Default value is 0.
- @throws IOException if there is a low-level IO error
+ @throw IOExceptionif there is a low-level IO error
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-           withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts
-                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                        withFloat:(jfloat)minSimilarity
-                                          withInt:(jint)prefixLength
-                                      withBoolean:(jboolean)transpositions;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
+                     withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts
+                               withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                  withFloat:(jfloat)minSimilarity
+                                                    withInt:(jint)prefixLength
+                                                withBoolean:(jboolean)transpositions;
 
 - (jint)docFreq;
 
 /*!
-  
  */
 - (jfloat)getMinSimilarity;
 
 /*!
-  
  */
 - (jfloat)getScaleFactor;
 
@@ -115,7 +117,7 @@
 
 /*!
  @brief return an automata-based enum for matching up to editDistance from
- lastTerm, if possible
+  lastTerm, if possible
  */
 - (OrgApacheLuceneIndexTermsEnum *)getAutomatonEnumWithInt:(jint)editDistance
                            withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lastTerm;
@@ -128,6 +130,10 @@
  @brief swap in a new actual enum to proxy to
  */
 - (void)setEnumWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)actualEnum;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -157,10 +163,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFuzzyTermsEnum)
 
 /*!
  @brief reuses compiled automata across different segments,
- because they are independent of the index
-  
+  because they are independent of the index
  */
-@protocol OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 - (id<JavaUtilList>)automata;
 
@@ -184,13 +189,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutoma
 
 /*!
  @brief Stores compiled automata as a list (indexed by edit distance)
-  
  */
 @interface OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl : OrgApacheLuceneUtilAttributeImpl < OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<JavaUtilList>)automata;
 
@@ -202,6 +206,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutoma
 
 - (NSUInteger)hash;
 
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone;
+
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector;
 
 @end
@@ -210,12 +216,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomata
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *new_OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *new_OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *create_OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *create_OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFuzzyTermsEnum")

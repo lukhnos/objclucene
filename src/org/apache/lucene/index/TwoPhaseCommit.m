@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/index/TwoPhaseCommit.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/TwoPhaseCommit must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexTwoPhaseCommit : NSObject
 
 @end
@@ -13,12 +17,20 @@
 @implementation OrgApacheLuceneIndexTwoPhaseCommit
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "prepareCommit", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "commit", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "rollback", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTwoPhaseCommit = { 2, "TwoPhaseCommit", "org.apache.lucene.index", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(prepareCommit);
+  methods[1].selector = @selector(commit);
+  methods[2].selector = @selector(rollback);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTwoPhaseCommit = { "TwoPhaseCommit", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x609, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexTwoPhaseCommit;
 }
 

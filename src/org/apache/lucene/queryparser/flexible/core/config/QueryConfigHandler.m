@@ -11,6 +11,10 @@
 #include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
 #include "org/apache/lucene/queryparser/flexible/core/util/StringUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler () {
  @public
   JavaUtilLinkedList *listeners_;
@@ -21,6 +25,13 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler, listeners_, JavaUtilLinkedList *)
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)getFieldConfigWithNSString:(NSString *)fieldName {
   OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *fieldConfig = create_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(fieldName));
@@ -34,28 +45,29 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandl
   [((JavaUtilLinkedList *) nil_chk(self->listeners_)) addWithId:listener];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(listeners_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getFieldConfigWithNSString:", "getFieldConfig", "Lorg.apache.lucene.queryparser.flexible.core.config.FieldConfig;", 0x1, NULL, NULL },
-    { "addFieldConfigListenerWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener:", "addFieldConfigListener", "V", 0x1, NULL, NULL },
-    { "init", "QueryConfigHandler", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig;", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getFieldConfigWithNSString:);
+  methods[2].selector = @selector(addFieldConfigListenerWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "listeners_", NULL, 0x12, "Ljava.util.LinkedList;", NULL, "Ljava/util/LinkedList<Lorg/apache/lucene/queryparser/flexible/core/config/FieldConfigListener;>;", .constantValue.asLong = 0 },
+    { "listeners_", "LJavaUtilLinkedList;", .constantValue.asLong = 0, 0x12, -1, -1, 4, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler = { 2, "QueryConfigHandler", "org.apache.lucene.queryparser.flexible.core.config", NULL, 0x401, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "getFieldConfig", "LNSString;", "addFieldConfigListener", "LOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener;", "Ljava/util/LinkedList<Lorg/apache/lucene/queryparser/flexible/core/config/FieldConfigListener;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler = { "QueryConfigHandler", "org.apache.lucene.queryparser.flexible.core.config", ptrTable, methods, fields, 7, 0x401, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 }
 

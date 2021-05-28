@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreFSLockFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreFSLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreFSLockFactory || defined(INCLUDE_OrgApacheLuceneStoreFSLockFactory))
 #define OrgApacheLuceneStoreFSLockFactory_
 
@@ -27,13 +33,13 @@
 /*!
  @brief Base class for file system based locking implementation.
  This class is explicitly checking that the passed <code>Directory</code>
- is an <code>FSDirectory</code>.
+  is an <code>FSDirectory</code>.
  */
 @interface OrgApacheLuceneStoreFSLockFactory : OrgApacheLuceneStoreLockFactory
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns the default locking implementation for this platform.
@@ -48,7 +54,7 @@
 
 /*!
  @brief Implement this method to obtain a lock for a FSDirectory instance.
- @throws IOException if the lock could not be obtained.
+ @throw IOExceptionif the lock could not be obtained.
  */
 - (OrgApacheLuceneStoreLock *)obtainFSLockWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *)dir
                                                                  withNSString:(NSString *)lockName;
@@ -57,12 +63,16 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreFSLockFactory)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreFSLockFactory *OrgApacheLuceneStoreFSLockFactory_getDefault();
-
 FOUNDATION_EXPORT void OrgApacheLuceneStoreFSLockFactory_init(OrgApacheLuceneStoreFSLockFactory *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreFSLockFactory *OrgApacheLuceneStoreFSLockFactory_getDefault(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFSLockFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreFSLockFactory")

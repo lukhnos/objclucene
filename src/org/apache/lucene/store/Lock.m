@@ -3,12 +3,21 @@
 //  source: ./core/src/java/org/apache/lucene/store/Lock.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/store/Lock.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/Lock must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneStoreLock
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneStoreLock_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)close {
   // can't call an abstract method
@@ -20,20 +29,21 @@
   [self doesNotRecognizeSelector:_cmd];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneStoreLock_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "ensureValid", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", "Lock", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreLock = { 2, "Lock", "org.apache.lucene.store", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(close);
+  methods[2].selector = @selector(ensureValid);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreLock = { "Lock", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreLock;
 }
 

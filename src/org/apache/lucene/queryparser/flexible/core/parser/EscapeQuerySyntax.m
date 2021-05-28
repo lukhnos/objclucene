@@ -3,11 +3,15 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax : NSObject
 
@@ -18,11 +22,16 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreParser
 @implementation OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "escapeWithJavaLangCharSequence:withJavaUtilLocale:withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:", "escape", "Ljava.lang.CharSequence;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LJavaLangCharSequence;", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.flexible.core.parser.EscapeQuerySyntax$Type;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax = { 2, "EscapeQuerySyntax", "org.apache.lucene.queryparser.flexible.core.parser", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(escapeWithJavaLangCharSequence:withJavaUtilLocale:withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "escape", "LJavaLangCharSequence;LJavaUtilLocale;LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type;", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax = { "EscapeQuerySyntax", "org.apache.lucene.queryparser.flexible.core.parser", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, 2, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 }
 
@@ -56,8 +65,24 @@ OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuc
   return (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "STRING", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "NORMAL", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING), &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, NORMAL), "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;", "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax$Type;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type = { "Type", "org.apache.lucene.queryparser.flexible.core.parser", ptrTable, methods, fields, 7, 0x4019, 2, 2, 4, -1, -1, 5, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type;
 }
 
 + (void)initialize {
@@ -66,22 +91,12 @@ OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuc
     size_t allocSize = 2 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(e, @"STRING", 0);
-    (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, NORMAL) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(e, @"NORMAL", 1);
+    for (jint i = 0; i < 2; i++) {
+      ((void)(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "STRING", "STRING", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.parser.EscapeQuerySyntax$Type;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING), NULL, .constantValue.asLong = 0 },
-    { "NORMAL", "NORMAL", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.parser.EscapeQuerySyntax$Type;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, NORMAL), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.flexible.core.parser.EscapeQuerySyntax$Type;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type = { 2, "Type", "org.apache.lucene.queryparser.flexible.core.parser", "EscapeQuerySyntax", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax$Type;>;" };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type;
 }
 
 @end
@@ -103,7 +118,7 @@ OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuc
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

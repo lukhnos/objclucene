@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModel
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesBasicModel_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModel || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModel))
 #define OrgApacheLuceneSearchSimilaritiesBasicModel_
 
@@ -21,10 +27,9 @@
 
 /*!
  @brief This class acts as the base class for the specific <em>basic model</em>
- implementations in the DFR framework.
- Basic models compute the
+  implementations in the DFR framework.Basic models compute the 
  <em>informative content Inf<sub>1</sub> = -log<sub>2</sub>Prob<sub>1</sub>
- </em>.
+  </em>.
  - seealso: DFRSimilarity
  */
 @interface OrgApacheLuceneSearchSimilaritiesBasicModel : NSObject
@@ -34,16 +39,16 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.)
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns an explanation for the score.
  <p>Most basic models use the number of documents and the total term
- frequency to compute Inf<sub>1</sub>. This method provides a generic
- explanation for such models. Subclasses that use other statistics must
- override this method.</p>
+  frequency to compute Inf<sub>1</sub>. This method provides a generic
+  explanation for such models. Subclasses that use other statistics must
+  override this method.</p>
  */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                                                    withFloat:(jfloat)tfn;
@@ -56,8 +61,7 @@
 
 /*!
  @brief Subclasses must override this method to return the code of the
- basic model formula.
- Refer to the original paper for the list. 
+  basic model formula.Refer to the original paper for the list.
  */
 - (NSString *)description;
 
@@ -71,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicModel)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModel")

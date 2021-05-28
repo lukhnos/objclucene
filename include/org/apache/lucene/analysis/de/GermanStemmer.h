@@ -13,28 +13,34 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisDeGermanStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisDeGermanStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanStemmer))
 #define OrgApacheLuceneAnalysisDeGermanStemmer_
 
 /*!
  @brief A stemmer for German words.
  <p>
- The algorithm is based on the report
- "A Fast and Simple Stemming Algorithm for German Words" by J&ouml;rg
- Caumanns (joerg.caumanns at isst.fhg.de).
+  The algorithm is based on the report
+  "A Fast and Simple Stemming Algorithm for German Words" by J&ouml;rg
+  Caumanns (joerg.caumanns at isst.fhg.de). 
  </p>
  */
 @interface OrgApacheLuceneAnalysisDeGermanStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Protected
 
 /*!
  @brief Stemms the given term to an unique <tt>discriminator</tt>.
- @param term  The term that should be stemmed.
+ @param term The term that should be stemmed.
  @return Discriminator for <tt>term</tt>
  */
 - (NSString *)stemWithNSString:(NSString *)term;
@@ -45,12 +51,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisDeGermanStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanStemmer_init(OrgApacheLuceneAnalysisDeGermanStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanStemmer *new_OrgApacheLuceneAnalysisDeGermanStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanStemmer *new_OrgApacheLuceneAnalysisDeGermanStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanStemmer *create_OrgApacheLuceneAnalysisDeGermanStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanStemmer *create_OrgApacheLuceneAnalysisDeGermanStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemmer")

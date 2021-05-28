@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSlowCodecReaderWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSlowCodecReaderWrapper_) && (INCLUDE_ALL_OrgApacheLuceneIndexSlowCodecReaderWrapper || defined(INCLUDE_OrgApacheLuceneIndexSlowCodecReaderWrapper))
 #define OrgApacheLuceneIndexSlowCodecReaderWrapper_
 
@@ -20,10 +26,10 @@
 @class OrgApacheLuceneIndexLeafReader;
 
 /*!
- @brief Wraps arbitrary readers for merging.
- Note that this can cause slow
- and memory-intensive merges. Consider using <code>FilterCodecReader</code>
- instead.
+ @brief Wraps arbitrary readers for merging.Note that this can cause slow
+  and memory-intensive merges.
+ Consider using <code>FilterCodecReader</code>
+  instead.
  */
 @interface OrgApacheLuceneIndexSlowCodecReaderWrapper : NSObject
 
@@ -32,8 +38,8 @@
 /*!
  @brief Returns a <code>CodecReader</code> view of reader.
  <p>
- If <code>reader</code> is already a <code>CodecReader</code>, it is returned
- directly. Otherwise, a (slow) view is returned.
+  If <code>reader</code> is already a <code>CodecReader</code>, it is returned
+  directly. Otherwise, a (slow) view is returned.
  */
 + (OrgApacheLuceneIndexCodecReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
@@ -47,4 +53,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCodecReaderWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSlowCodecReaderWrapper")

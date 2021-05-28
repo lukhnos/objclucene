@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/util/BytesRefArray.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/IndexOutOfBoundsException.h"
@@ -18,6 +17,10 @@
 #include "org/apache/lucene/util/Counter.h"
 #include "org/apache/lucene/util/IntroSorter.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/BytesRefArray must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilBytesRefArray () {
  @public
@@ -38,14 +41,20 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray, bytesUsed_, OrgApacheLucen
 
 __attribute__((unused)) static IOSIntArray *OrgApacheLuceneUtilBytesRefArray_sortWithJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray *self, id<JavaUtilComparator> comp);
 
-@interface OrgApacheLuceneUtilBytesRefArray_$1 : OrgApacheLuceneUtilIntroSorter {
+@interface OrgApacheLuceneUtilBytesRefArray_1 : OrgApacheLuceneUtilIntroSorter {
  @public
   OrgApacheLuceneUtilBytesRefArray *this$0_;
-  OrgApacheLuceneUtilBytesRef *pivot_;
-  OrgApacheLuceneUtilBytesRefBuilder *pivotBuilder_, *scratch1_, *scratch2_;
   IOSIntArray *val$orderedEntries_;
   id<JavaUtilComparator> val$comp_;
+  OrgApacheLuceneUtilBytesRef *pivot_;
+  OrgApacheLuceneUtilBytesRefBuilder *pivotBuilder_;
+  OrgApacheLuceneUtilBytesRefBuilder *scratch1_;
+  OrgApacheLuceneUtilBytesRefBuilder *scratch2_;
 }
+
+- (instancetype)initWithOrgApacheLuceneUtilBytesRefArray:(OrgApacheLuceneUtilBytesRefArray *)outer$
+                                            withIntArray:(IOSIntArray *)capture$0
+                                  withJavaUtilComparator:(id<JavaUtilComparator>)capture$1;
 
 - (void)swapWithInt:(jint)i
             withInt:(jint)j;
@@ -57,61 +66,46 @@ __attribute__((unused)) static IOSIntArray *OrgApacheLuceneUtilBytesRefArray_sor
 
 - (jint)comparePivotWithInt:(jint)j;
 
-- (instancetype)initWithOrgApacheLuceneUtilBytesRefArray:(OrgApacheLuceneUtilBytesRefArray *)outer$
-                                            withIntArray:(IOSIntArray *)capture$0
-                                  withJavaUtilComparator:(id<JavaUtilComparator>)capture$1;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBytesRefArray_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBytesRefArray_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_$1, this$0_, OrgApacheLuceneUtilBytesRefArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_$1, pivot_, OrgApacheLuceneUtilBytesRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_$1, pivotBuilder_, OrgApacheLuceneUtilBytesRefBuilder *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_$1, scratch1_, OrgApacheLuceneUtilBytesRefBuilder *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_$1, scratch2_, OrgApacheLuceneUtilBytesRefBuilder *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_$1, val$orderedEntries_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_$1, val$comp_, id<JavaUtilComparator>)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_1, pivot_, OrgApacheLuceneUtilBytesRef *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_1, pivotBuilder_, OrgApacheLuceneUtilBytesRefBuilder *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_1, scratch1_, OrgApacheLuceneUtilBytesRefBuilder *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_1, scratch2_, OrgApacheLuceneUtilBytesRefBuilder *)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilBytesRefArray_$1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray_$1 *self, OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1);
+__attribute__((unused)) static void OrgApacheLuceneUtilBytesRefArray_1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray_1 *self, OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1);
 
-__attribute__((unused)) static OrgApacheLuceneUtilBytesRefArray_$1 *new_OrgApacheLuceneUtilBytesRefArray_$1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilBytesRefArray_1 *new_OrgApacheLuceneUtilBytesRefArray_1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilBytesRefArray_$1 *create_OrgApacheLuceneUtilBytesRefArray_$1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1);
+__attribute__((unused)) static OrgApacheLuceneUtilBytesRefArray_1 *create_OrgApacheLuceneUtilBytesRefArray_1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefArray_$1)
-
-@interface OrgApacheLuceneUtilBytesRefArray_$2 : NSObject < OrgApacheLuceneUtilBytesRefIterator > {
+@interface OrgApacheLuceneUtilBytesRefArray_2 : NSObject < OrgApacheLuceneUtilBytesRefIterator > {
  @public
   OrgApacheLuceneUtilBytesRefArray *this$0_;
-  jint pos_;
   jint val$size_;
   OrgApacheLuceneUtilBytesRefBuilder *val$spare_;
   IOSIntArray *val$indices_;
+  jint pos_;
 }
-
-- (OrgApacheLuceneUtilBytesRef *)next;
 
 - (instancetype)initWithOrgApacheLuceneUtilBytesRefArray:(OrgApacheLuceneUtilBytesRefArray *)outer$
                                                  withInt:(jint)capture$0
                   withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)capture$1
                                             withIntArray:(IOSIntArray *)capture$2;
 
+- (OrgApacheLuceneUtilBytesRef *)next;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBytesRefArray_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBytesRefArray_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_$2, this$0_, OrgApacheLuceneUtilBytesRefArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_$2, val$spare_, OrgApacheLuceneUtilBytesRefBuilder *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefArray_$2, val$indices_, IOSIntArray *)
+__attribute__((unused)) static void OrgApacheLuceneUtilBytesRefArray_2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray_2 *self, OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2);
 
-__attribute__((unused)) static void OrgApacheLuceneUtilBytesRefArray_$2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray_$2 *self, OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2);
+__attribute__((unused)) static OrgApacheLuceneUtilBytesRefArray_2 *new_OrgApacheLuceneUtilBytesRefArray_2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilBytesRefArray_$2 *new_OrgApacheLuceneUtilBytesRefArray_$2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneUtilBytesRefArray_$2 *create_OrgApacheLuceneUtilBytesRefArray_$2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefArray_$2)
+__attribute__((unused)) static OrgApacheLuceneUtilBytesRefArray_2 *create_OrgApacheLuceneUtilBytesRefArray_2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2);
 
 @implementation OrgApacheLuceneUtilBytesRefArray
 
@@ -168,7 +162,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefArray_$2)
   OrgApacheLuceneUtilBytesRefBuilder *spare = create_OrgApacheLuceneUtilBytesRefBuilder_init();
   jint size = [self size];
   IOSIntArray *indices = comp == nil ? nil : OrgApacheLuceneUtilBytesRefArray_sortWithJavaUtilComparator_(self, comp);
-  return create_OrgApacheLuceneUtilBytesRefArray_$2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(self, size, spare, indices);
+  return create_OrgApacheLuceneUtilBytesRefArray_2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(self, size, spare, indices);
 }
 
 - (void)dealloc {
@@ -179,24 +173,37 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefArray_$2)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilCounter:", "BytesRefArray", NULL, 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "appendWithOrgApacheLuceneUtilBytesRef:", "append", "I", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "getWithOrgApacheLuceneUtilBytesRefBuilder:withInt:", "get", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "sortWithJavaUtilComparator:", "sort", "[I", 0x2, NULL, "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)[I" },
-    { "iterator", NULL, "Lorg.apache.lucene.util.BytesRefIterator;", 0x1, NULL, NULL },
-    { "iteratorWithJavaUtilComparator:", "iterator", "Lorg.apache.lucene.util.BytesRefIterator;", 0x1, NULL, "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)Lorg/apache/lucene/util/BytesRefIterator;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "[I", 0x2, 5, 6, -1, 7, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRefIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRefIterator;", 0x1, 8, 6, -1, 9, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilCounter:);
+  methods[1].selector = @selector(clear);
+  methods[2].selector = @selector(appendWithOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(size);
+  methods[4].selector = @selector(getWithOrgApacheLuceneUtilBytesRefBuilder:withInt:);
+  methods[5].selector = @selector(sortWithJavaUtilComparator:);
+  methods[6].selector = @selector(iterator);
+  methods[7].selector = @selector(iteratorWithJavaUtilComparator:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "pool_", NULL, 0x12, "Lorg.apache.lucene.util.ByteBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsets_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastElement_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesUsed_", NULL, 0x12, "Lorg.apache.lucene.util.Counter;", NULL, NULL, .constantValue.asLong = 0 },
+    { "pool_", "LOrgApacheLuceneUtilByteBlockPool;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsets_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastElement_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bytesUsed_", "LOrgApacheLuceneUtilCounter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefArray = { 2, "BytesRefArray", "org.apache.lucene.util", NULL, 0x11, 8, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilCounter;", "append", "LOrgApacheLuceneUtilBytesRef;", "get", "LOrgApacheLuceneUtilBytesRefBuilder;I", "sort", "LJavaUtilComparator;", "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)[I", "iterator", "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)Lorg/apache/lucene/util/BytesRefIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefArray = { "BytesRefArray", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 8, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilBytesRefArray;
 }
 
@@ -226,13 +233,20 @@ IOSIntArray *OrgApacheLuceneUtilBytesRefArray_sortWithJavaUtilComparator_(OrgApa
   for (jint i = 0; i < orderedEntries->size_; i++) {
     *IOSIntArray_GetRef(orderedEntries, i) = i;
   }
-  [create_OrgApacheLuceneUtilBytesRefArray_$1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(self, orderedEntries, comp) sortWithInt:0 withInt:[self size]];
+  [create_OrgApacheLuceneUtilBytesRefArray_1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(self, orderedEntries, comp) sortWithInt:0 withInt:[self size]];
   return orderedEntries;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefArray)
 
-@implementation OrgApacheLuceneUtilBytesRefArray_$1
+@implementation OrgApacheLuceneUtilBytesRefArray_1
+
+- (instancetype)initWithOrgApacheLuceneUtilBytesRefArray:(OrgApacheLuceneUtilBytesRefArray *)outer$
+                                            withIntArray:(IOSIntArray *)capture$0
+                                  withJavaUtilComparator:(id<JavaUtilComparator>)capture$1 {
+  OrgApacheLuceneUtilBytesRefArray_1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(self, outer$, capture$0, capture$1);
+  return self;
+}
 
 - (void)swapWithInt:(jint)i
             withInt:(jint)j {
@@ -243,7 +257,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefArray)
 
 - (jint)compareWithInt:(jint)i
                withInt:(jint)j {
-  jint idx1 = IOSIntArray_Get(nil_chk(val$orderedEntries_), i), idx2 = IOSIntArray_Get(val$orderedEntries_, j);
+  jint idx1 = IOSIntArray_Get(nil_chk(val$orderedEntries_), i);
+  jint idx2 = IOSIntArray_Get(val$orderedEntries_, j);
   return [((id<JavaUtilComparator>) nil_chk(val$comp_)) compareWithId:[this$0_ getWithOrgApacheLuceneUtilBytesRefBuilder:scratch1_ withInt:idx1] withId:[this$0_ getWithOrgApacheLuceneUtilBytesRefBuilder:scratch2_ withInt:idx2]];
 }
 
@@ -257,49 +272,51 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefArray)
   return [((id<JavaUtilComparator>) nil_chk(val$comp_)) compareWithId:pivot_ withId:[this$0_ getWithOrgApacheLuceneUtilBytesRefBuilder:scratch2_ withInt:index]];
 }
 
-- (instancetype)initWithOrgApacheLuceneUtilBytesRefArray:(OrgApacheLuceneUtilBytesRefArray *)outer$
-                                            withIntArray:(IOSIntArray *)capture$0
-                                  withJavaUtilComparator:(id<JavaUtilComparator>)capture$1 {
-  OrgApacheLuceneUtilBytesRefArray_$1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(self, outer$, capture$0, capture$1);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
+  RELEASE_(val$orderedEntries_);
+  RELEASE_(val$comp_);
   RELEASE_(pivot_);
   RELEASE_(pivotBuilder_);
   RELEASE_(scratch1_);
   RELEASE_(scratch2_);
-  RELEASE_(val$orderedEntries_);
-  RELEASE_(val$comp_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
-    { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "setPivotWithInt:", "setPivot", "V", 0x4, NULL, NULL },
-    { "comparePivotWithInt:", "comparePivot", "I", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilBytesRefArray:withIntArray:withJavaUtilComparator:", "", NULL, 0x0, NULL, "(Lorg/apache/lucene/util/BytesRefArray;[ILjava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 3, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 6, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBytesRefArray:withIntArray:withJavaUtilComparator:);
+  methods[1].selector = @selector(swapWithInt:withInt:);
+  methods[2].selector = @selector(compareWithInt:withInt:);
+  methods[3].selector = @selector(setPivotWithInt:);
+  methods[4].selector = @selector(comparePivotWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.BytesRefArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "pivot_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "pivotBuilder_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratch1_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratch2_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$orderedEntries_", NULL, 0x1012, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$comp_", NULL, 0x1012, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneUtilBytesRefArray;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$orderedEntries_", "[I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$comp_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x1012, -1, -1, 7, -1 },
+    { "pivot_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pivotBuilder_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratch1_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratch2_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilBytesRefArray", "sortWithJavaUtilComparator:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefArray_$1 = { 2, "", "org.apache.lucene.util", "BytesRefArray", 0x8008, 5, methods, 7, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilBytesRefArray_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBytesRefArray;[ILJavaUtilComparator;", "swap", "II", "compare", "setPivot", "I", "comparePivot", "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneUtilBytesRefArray;", "sortWithJavaUtilComparator:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefArray_1 = { "", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x8010, 5, 7, 8, -1, 9, -1, -1 };
+  return &_OrgApacheLuceneUtilBytesRefArray_1;
 }
 
 @end
 
-void OrgApacheLuceneUtilBytesRefArray_$1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray_$1 *self, OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) {
+void OrgApacheLuceneUtilBytesRefArray_1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray_1 *self, OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$orderedEntries_, capture$0);
   JreStrongAssign(&self->val$comp_, capture$1);
@@ -309,31 +326,29 @@ void OrgApacheLuceneUtilBytesRefArray_$1_initWithOrgApacheLuceneUtilBytesRefArra
   JreStrongAssignAndConsume(&self->scratch2_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
 }
 
-OrgApacheLuceneUtilBytesRefArray_$1 *new_OrgApacheLuceneUtilBytesRefArray_$1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefArray_$1, initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_, outer$, capture$0, capture$1)
+OrgApacheLuceneUtilBytesRefArray_1 *new_OrgApacheLuceneUtilBytesRefArray_1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefArray_1, initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_, outer$, capture$0, capture$1)
 }
 
-OrgApacheLuceneUtilBytesRefArray_$1 *create_OrgApacheLuceneUtilBytesRefArray_$1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefArray_$1, initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_, outer$, capture$0, capture$1)
+OrgApacheLuceneUtilBytesRefArray_1 *create_OrgApacheLuceneUtilBytesRefArray_1_initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefArray *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefArray_1, initWithOrgApacheLuceneUtilBytesRefArray_withIntArray_withJavaUtilComparator_, outer$, capture$0, capture$1)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefArray_$1)
-
-@implementation OrgApacheLuceneUtilBytesRefArray_$2
-
-- (OrgApacheLuceneUtilBytesRef *)next {
-  if (pos_ < val$size_) {
-    return [this$0_ getWithOrgApacheLuceneUtilBytesRefBuilder:val$spare_ withInt:val$indices_ == nil ? pos_++ : IOSIntArray_Get(val$indices_, pos_++)];
-  }
-  return nil;
-}
+@implementation OrgApacheLuceneUtilBytesRefArray_2
 
 - (instancetype)initWithOrgApacheLuceneUtilBytesRefArray:(OrgApacheLuceneUtilBytesRefArray *)outer$
                                                  withInt:(jint)capture$0
                   withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)capture$1
                                             withIntArray:(IOSIntArray *)capture$2 {
-  OrgApacheLuceneUtilBytesRefArray_$2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(self, outer$, capture$0, capture$1, capture$2);
+  OrgApacheLuceneUtilBytesRefArray_2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(self, outer$, capture$0, capture$1, capture$2);
   return self;
+}
+
+- (OrgApacheLuceneUtilBytesRef *)next {
+  if (pos_ < val$size_) {
+    return JreRetainedLocalValue([this$0_ getWithOrgApacheLuceneUtilBytesRefBuilder:val$spare_ withInt:val$indices_ == nil ? pos_++ : IOSIntArray_Get(val$indices_, pos_++)]);
+  }
+  return JreRetainedLocalValue(nil);
 }
 
 - (void)dealloc {
@@ -344,25 +359,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefArray_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilBytesRefArray:withInt:withOrgApacheLuceneUtilBytesRefBuilder:withIntArray:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBytesRefArray:withInt:withOrgApacheLuceneUtilBytesRefBuilder:withIntArray:);
+  methods[1].selector = @selector(next);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.BytesRefArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "pos_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$size_", NULL, 0x1012, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$spare_", NULL, 0x1012, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$indices_", NULL, 0x1012, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneUtilBytesRefArray;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$size_", "I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$spare_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$indices_", "[I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "pos_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilBytesRefArray", "iteratorWithJavaUtilComparator:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefArray_$2 = { 2, "", "org.apache.lucene.util", "BytesRefArray", 0x8008, 2, methods, 5, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilBytesRefArray_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBytesRefArray;ILOrgApacheLuceneUtilBytesRefBuilder;[I", "LOrgApacheLuceneUtilBytesRefArray;", "iteratorWithJavaUtilComparator:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefArray_2 = { "", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x8010, 2, 5, 1, -1, 2, -1, -1 };
+  return &_OrgApacheLuceneUtilBytesRefArray_2;
 }
 
 @end
 
-void OrgApacheLuceneUtilBytesRefArray_$2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray_$2 *self, OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2) {
+void OrgApacheLuceneUtilBytesRefArray_2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray_2 *self, OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2) {
   JreStrongAssign(&self->this$0_, outer$);
   self->val$size_ = capture$0;
   JreStrongAssign(&self->val$spare_, capture$1);
@@ -371,12 +392,10 @@ void OrgApacheLuceneUtilBytesRefArray_$2_initWithOrgApacheLuceneUtilBytesRefArra
   self->pos_ = 0;
 }
 
-OrgApacheLuceneUtilBytesRefArray_$2 *new_OrgApacheLuceneUtilBytesRefArray_$2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefArray_$2, initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_, outer$, capture$0, capture$1, capture$2)
+OrgApacheLuceneUtilBytesRefArray_2 *new_OrgApacheLuceneUtilBytesRefArray_2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefArray_2, initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_, outer$, capture$0, capture$1, capture$2)
 }
 
-OrgApacheLuceneUtilBytesRefArray_$2 *create_OrgApacheLuceneUtilBytesRefArray_$2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefArray_$2, initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_, outer$, capture$0, capture$1, capture$2)
+OrgApacheLuceneUtilBytesRefArray_2 *create_OrgApacheLuceneUtilBytesRefArray_2_initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_(OrgApacheLuceneUtilBytesRefArray *outer$, jint capture$0, OrgApacheLuceneUtilBytesRefBuilder *capture$1, IOSIntArray *capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefArray_2, initWithOrgApacheLuceneUtilBytesRefArray_withInt_withOrgApacheLuceneUtilBytesRefBuilder_withIntArray_, outer$, capture$0, capture$1, capture$2)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefArray_$2)

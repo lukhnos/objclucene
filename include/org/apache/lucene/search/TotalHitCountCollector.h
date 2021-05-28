@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTotalHitCountCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTotalHitCountCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchTotalHitCountCollector || defined(INCLUDE_OrgApacheLuceneSearchTotalHitCountCollector))
 #define OrgApacheLuceneSearchTotalHitCountCollector_
 
@@ -27,7 +33,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)collectWithInt:(jint)doc;
 
@@ -44,12 +50,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTotalHitCountCollector)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchTotalHitCountCollector_init(OrgApacheLuceneSearchTotalHitCountCollector *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTotalHitCountCollector *new_OrgApacheLuceneSearchTotalHitCountCollector_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchTotalHitCountCollector *new_OrgApacheLuceneSearchTotalHitCountCollector_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTotalHitCountCollector *create_OrgApacheLuceneSearchTotalHitCountCollector_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchTotalHitCountCollector *create_OrgApacheLuceneSearchTotalHitCountCollector_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTotalHitCountCollector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTotalHitCountCollector")

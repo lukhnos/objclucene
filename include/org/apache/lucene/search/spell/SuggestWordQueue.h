@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpellSuggestWordQueue
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpellSuggestWordQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordQueue || defined(INCLUDE_OrgApacheLuceneSearchSpellSuggestWordQueue))
 #define OrgApacheLuceneSearchSpellSuggestWordQueue_
 
@@ -29,8 +35,7 @@
  - seealso: org.apache.lucene.search.spell.SuggestWordFrequencyComparator
  */
 @interface OrgApacheLuceneSearchSpellSuggestWordQueue : OrgApacheLuceneUtilPriorityQueue
-
-+ (id<JavaUtilComparator>)DEFAULT_COMPARATOR;
+@property (readonly, class, strong) id<JavaUtilComparator> DEFAULT_COMPARATOR NS_SWIFT_NAME(DEFAULT_COMPARATOR);
 
 #pragma mark Public
 
@@ -38,20 +43,39 @@
  @brief Use the <code>DEFAULT_COMPARATOR</code>
  @param size The size of the queue
  */
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
 
 /*!
  @brief Specify the size of the queue and the comparator to use for sorting.
  @param size The size
  @param comparator The comparator.
  */
-- (instancetype)initWithInt:(jint)size
-     withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
+- (instancetype __nonnull)initWithInt:(jint)size
+               withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
+
+- (OrgApacheLuceneSearchSpellSuggestWord *)addWithId:(OrgApacheLuceneSearchSpellSuggestWord *)arg0;
+
+- (OrgApacheLuceneSearchSpellSuggestWord *)insertWithOverflowWithId:(OrgApacheLuceneSearchSpellSuggestWord *)arg0;
+
+- (OrgApacheLuceneSearchSpellSuggestWord *)pop;
+
+- (OrgApacheLuceneSearchSpellSuggestWord *)top;
+
+- (OrgApacheLuceneSearchSpellSuggestWord *)updateTop;
+
+- (OrgApacheLuceneSearchSpellSuggestWord *)updateTopWithId:(OrgApacheLuceneSearchSpellSuggestWord *)arg0;
 
 #pragma mark Protected
 
+- (OrgApacheLuceneSearchSpellSuggestWord *)getSentinelObject;
+
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchSpellSuggestWord *)wa
                     withId:(OrgApacheLuceneSearchSpellSuggestWord *)wb;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -61,7 +85,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpellSuggestWordQueue)
  @brief Default comparator: score then frequency.
  - seealso: SuggestWordScoreComparator
  */
-inline id<JavaUtilComparator> OrgApacheLuceneSearchSpellSuggestWordQueue_get_DEFAULT_COMPARATOR();
+inline id<JavaUtilComparator> OrgApacheLuceneSearchSpellSuggestWordQueue_get_DEFAULT_COMPARATOR(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSpellSuggestWordQueue, DEFAULT_COMPARATOR, id<JavaUtilComparator>)
@@ -82,4 +106,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellSuggestWordQueue)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordQueue")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase || defined(INCLUDE_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase))
 #define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_
 
@@ -22,6 +28,7 @@
 
 @class IOSClass;
 @class JavaIoReader;
+@class OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 @class OrgLukhnosPortmobileFilePath;
 
@@ -40,9 +47,9 @@
 
 /*!
  @brief Returns the analyzer's stopword set or an empty set if the analyzer has no
- stopwords
+  stopwords
  @return the analyzer's stopword set or an empty set if the analyzer has no
- stopwords
+          stopwords
  */
 - (OrgApacheLuceneAnalysisUtilCharArraySet *)getStopwordSet;
 
@@ -51,31 +58,27 @@
 /*!
  @brief Creates a new Analyzer with an empty stopword set
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new instance initialized with the given stopword set
- @param stopwords
- the analyzer's stopword set
+ @param stopwords the analyzer's stopword set
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
 /*!
  @brief Creates a CharArraySet from a file resource associated with a class.
  (See
- <code>Class.getResourceAsStream(String)</code>).
- @param ignoreCase
- <code>true</code> if the set should ignore the case of the
- stopwords, otherwise <code>false</code>
- @param aClass
- a class that is associated with the given stopwordResource
- @param resource
- name of the resource file associated with the given class
- @param comment
- comment string to ignore in the stopword file
+  <code>Class.getResourceAsStream(String)</code>).
+ @param ignoreCase <code>
+  true </code>  if the set should ignore the case of the           stopwords, otherwise 
+  <code> false </code>
+ @param aClass a class that is associated with the given stopwordResource
+ @param resource name of the resource file associated with the given class
+ @param comment comment string to ignore in the stopword file
  @return a CharArraySet containing the distinct stopwords from the given
- file
- @throws IOException
+          file
+ @throw IOException
  if loading the stopwords throws an <code>IOException</code>
  */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)loadStopwordSetWithBoolean:(jboolean)ignoreCase
@@ -85,25 +88,27 @@
 
 /*!
  @brief Creates a CharArraySet from a path.
- @param stopwords
- the stopwords file to load
+ @param stopwords the stopwords file to load
  @return a CharArraySet containing the distinct stopwords from the given
- file
- @throws IOException
+          file
+ @throw IOException
  if loading the stopwords throws an <code>IOException</code>
  */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)loadStopwordSetWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)stopwords;
 
 /*!
  @brief Creates a CharArraySet from a file.
- @param stopwords
- the stopwords reader to load
+ @param stopwords the stopwords reader to load
  @return a CharArraySet containing the distinct stopwords from the given
- reader
- @throws IOException
+          reader
+ @throw IOException
  if loading the stopwords throws an <code>IOException</code>
  */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)loadStopwordSetWithJavaIoReader:(JavaIoReader *)stopwords;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -125,4 +130,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase")

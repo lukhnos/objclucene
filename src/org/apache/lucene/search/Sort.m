@@ -6,12 +6,15 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Sort.h"
 #include "org/apache/lucene/search/SortField.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/Sort must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSort)
 
@@ -62,7 +65,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   IOSObjectArray *rewrittenSortFields = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(fields_))->size_ type:OrgApacheLuceneSearchSortField_class_()];
   for (jint i = 0; i < fields_->size_; i++) {
     IOSObjectArray_Set(rewrittenSortFields, i, [((OrgApacheLuceneSearchSortField *) nil_chk(IOSObjectArray_Get(fields_, i))) rewriteWithOrgApacheLuceneSearchIndexSearcher:searcher]);
-    if (IOSObjectArray_Get(nil_chk(fields_), i) != IOSObjectArray_Get(rewrittenSortFields, i)) {
+    if (!JreObjectEqualsEquals(IOSObjectArray_Get(nil_chk(fields_), i), IOSObjectArray_Get(rewrittenSortFields, i))) {
       changed = true;
     }
   }
@@ -79,7 +82,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return true;
+  if (JreObjectEqualsEquals(self, o)) return true;
   if (!([o isKindOfClass:[OrgApacheLuceneSearchSort class]])) return false;
   OrgApacheLuceneSearchSort *other = (OrgApacheLuceneSearchSort *) cast_chk(o, [OrgApacheLuceneSearchSort class]);
   return JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(self->fields_, ((OrgApacheLuceneSearchSort *) nil_chk(other))->fields_);
@@ -109,35 +112,51 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x81, 2, 1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchSortField;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSort;", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneSearchSortField:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneSearchSortFieldArray:);
+  methods[3].selector = @selector(setSortWithOrgApacheLuceneSearchSortField:);
+  methods[4].selector = @selector(setSortWithOrgApacheLuceneSearchSortFieldArray:);
+  methods[5].selector = @selector(getSort);
+  methods[6].selector = @selector(rewriteWithOrgApacheLuceneSearchIndexSearcher:);
+  methods[7].selector = @selector(description);
+  methods[8].selector = @selector(isEqual:);
+  methods[9].selector = @selector(hash);
+  methods[10].selector = @selector(needsScores);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "RELEVANCE", "LOrgApacheLuceneSearchSort;", .constantValue.asLong = 0, 0x19, -1, 10, -1, -1 },
+    { "INDEXORDER", "LOrgApacheLuceneSearchSort;", .constantValue.asLong = 0, 0x19, -1, 11, -1, -1 },
+    { "fields_", "[LOrgApacheLuceneSearchSortField;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSortField;", "[LOrgApacheLuceneSearchSortField;", "setSort", "rewrite", "LOrgApacheLuceneSearchIndexSearcher;", "LJavaIoIOException;", "toString", "equals", "LNSObject;", "hashCode", &OrgApacheLuceneSearchSort_RELEVANCE, &OrgApacheLuceneSearchSort_INDEXORDER };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSort = { "Sort", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 11, 3, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSort;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSort class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSort_RELEVANCE, new_OrgApacheLuceneSearchSort_init());
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSort_INDEXORDER, new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(JreLoadStatic(OrgApacheLuceneSearchSortField, FIELD_DOC)));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSort)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Sort", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSortField:", "Sort", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSortFieldArray:", "Sort", NULL, 0x81, NULL, NULL },
-    { "setSortWithOrgApacheLuceneSearchSortField:", "setSort", "V", 0x1, NULL, NULL },
-    { "setSortWithOrgApacheLuceneSearchSortFieldArray:", "setSort", "V", 0x81, NULL, NULL },
-    { "getSort", NULL, "[Lorg.apache.lucene.search.SortField;", 0x1, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneSearchIndexSearcher:", "rewrite", "Lorg.apache.lucene.search.Sort;", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "needsScores", NULL, "Z", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "RELEVANCE", "RELEVANCE", 0x19, "Lorg.apache.lucene.search.Sort;", &OrgApacheLuceneSearchSort_RELEVANCE, NULL, .constantValue.asLong = 0 },
-    { "INDEXORDER", "INDEXORDER", 0x19, "Lorg.apache.lucene.search.Sort;", &OrgApacheLuceneSearchSort_INDEXORDER, NULL, .constantValue.asLong = 0 },
-    { "fields_", NULL, 0x0, "[Lorg.apache.lucene.search.SortField;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSort = { 2, "Sort", "org.apache.lucene.search", NULL, 0x1, 11, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchSort;
 }
 
 @end

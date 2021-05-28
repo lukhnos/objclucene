@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages))
 #define OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_
 
@@ -24,186 +30,132 @@
  @brief Flexible Query Parser message bundle class
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages : OrgApacheLuceneQueryparserFlexibleMessagesNLS
-
-+ (NSString *)INVALID_SYNTAX;
-
-+ (void)setINVALID_SYNTAX:(NSString *)value;
-
-+ (NSString *)INVALID_SYNTAX_CANNOT_PARSE;
-
-+ (void)setINVALID_SYNTAX_CANNOT_PARSE:(NSString *)value;
-
-+ (NSString *)INVALID_SYNTAX_FUZZY_LIMITS;
-
-+ (void)setINVALID_SYNTAX_FUZZY_LIMITS:(NSString *)value;
-
-+ (NSString *)INVALID_SYNTAX_FUZZY_EDITS;
-
-+ (void)setINVALID_SYNTAX_FUZZY_EDITS:(NSString *)value;
-
-+ (NSString *)INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION;
-
-+ (void)setINVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION:(NSString *)value;
-
-+ (NSString *)INVALID_SYNTAX_ESCAPE_CHARACTER;
-
-+ (void)setINVALID_SYNTAX_ESCAPE_CHARACTER:(NSString *)value;
-
-+ (NSString *)INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE;
-
-+ (void)setINVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE:(NSString *)value;
-
-+ (NSString *)NODE_ACTION_NOT_SUPPORTED;
-
-+ (void)setNODE_ACTION_NOT_SUPPORTED:(NSString *)value;
-
-+ (NSString *)PARAMETER_VALUE_NOT_SUPPORTED;
-
-+ (void)setPARAMETER_VALUE_NOT_SUPPORTED:(NSString *)value;
-
-+ (NSString *)LUCENE_QUERY_CONVERSION_ERROR;
-
-+ (void)setLUCENE_QUERY_CONVERSION_ERROR:(NSString *)value;
-
-+ (NSString *)EMPTY_MESSAGE;
-
-+ (void)setEMPTY_MESSAGE:(NSString *)value;
-
-+ (NSString *)WILDCARD_NOT_SUPPORTED;
-
-+ (void)setWILDCARD_NOT_SUPPORTED:(NSString *)value;
-
-+ (NSString *)TOO_MANY_BOOLEAN_CLAUSES;
-
-+ (void)setTOO_MANY_BOOLEAN_CLAUSES:(NSString *)value;
-
-+ (NSString *)LEADING_WILDCARD_NOT_ALLOWED;
-
-+ (void)setLEADING_WILDCARD_NOT_ALLOWED:(NSString *)value;
-
-+ (NSString *)COULD_NOT_PARSE_NUMBER;
-
-+ (void)setCOULD_NOT_PARSE_NUMBER:(NSString *)value;
-
-+ (NSString *)NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY;
-
-+ (void)setNUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY:(NSString *)value;
-
-+ (NSString *)UNSUPPORTED_NUMERIC_DATA_TYPE;
-
-+ (void)setUNSUPPORTED_NUMERIC_DATA_TYPE:(NSString *)value;
-
-+ (NSString *)NUMERIC_CANNOT_BE_EMPTY;
-
-+ (void)setNUMERIC_CANNOT_BE_EMPTY:(NSString *)value;
+@property (copy, class) NSString *INVALID_SYNTAX NS_SWIFT_NAME(INVALID_SYNTAX);
+@property (copy, class) NSString *INVALID_SYNTAX_CANNOT_PARSE NS_SWIFT_NAME(INVALID_SYNTAX_CANNOT_PARSE);
+@property (copy, class) NSString *INVALID_SYNTAX_FUZZY_LIMITS NS_SWIFT_NAME(INVALID_SYNTAX_FUZZY_LIMITS);
+@property (copy, class) NSString *INVALID_SYNTAX_FUZZY_EDITS NS_SWIFT_NAME(INVALID_SYNTAX_FUZZY_EDITS);
+@property (copy, class) NSString *INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION NS_SWIFT_NAME(INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION);
+@property (copy, class) NSString *INVALID_SYNTAX_ESCAPE_CHARACTER NS_SWIFT_NAME(INVALID_SYNTAX_ESCAPE_CHARACTER);
+@property (copy, class) NSString *INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE NS_SWIFT_NAME(INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE);
+@property (copy, class) NSString *NODE_ACTION_NOT_SUPPORTED NS_SWIFT_NAME(NODE_ACTION_NOT_SUPPORTED);
+@property (copy, class) NSString *PARAMETER_VALUE_NOT_SUPPORTED NS_SWIFT_NAME(PARAMETER_VALUE_NOT_SUPPORTED);
+@property (copy, class) NSString *LUCENE_QUERY_CONVERSION_ERROR NS_SWIFT_NAME(LUCENE_QUERY_CONVERSION_ERROR);
+@property (copy, class) NSString *EMPTY_MESSAGE NS_SWIFT_NAME(EMPTY_MESSAGE);
+@property (copy, class) NSString *WILDCARD_NOT_SUPPORTED NS_SWIFT_NAME(WILDCARD_NOT_SUPPORTED);
+@property (copy, class) NSString *TOO_MANY_BOOLEAN_CLAUSES NS_SWIFT_NAME(TOO_MANY_BOOLEAN_CLAUSES);
+@property (copy, class) NSString *LEADING_WILDCARD_NOT_ALLOWED NS_SWIFT_NAME(LEADING_WILDCARD_NOT_ALLOWED);
+@property (copy, class) NSString *COULD_NOT_PARSE_NUMBER NS_SWIFT_NAME(COULD_NOT_PARSE_NUMBER);
+@property (copy, class) NSString *NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY NS_SWIFT_NAME(NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY);
+@property (copy, class) NSString *UNSUPPORTED_NUMERIC_DATA_TYPE NS_SWIFT_NAME(UNSUPPORTED_NUMERIC_DATA_TYPE);
+@property (copy, class) NSString *NUMERIC_CANNOT_BE_EMPTY NS_SWIFT_NAME(NUMERIC_CANNOT_BE_EMPTY);
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_INVALID_SYNTAX(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_CANNOT_PARSE();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_CANNOT_PARSE(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_INVALID_SYNTAX_CANNOT_PARSE(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_CANNOT_PARSE;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_CANNOT_PARSE, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_FUZZY_LIMITS();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_FUZZY_LIMITS(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_INVALID_SYNTAX_FUZZY_LIMITS(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_FUZZY_LIMITS;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_FUZZY_LIMITS, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_FUZZY_EDITS();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_FUZZY_EDITS(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_INVALID_SYNTAX_FUZZY_EDITS(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_FUZZY_EDITS;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_FUZZY_EDITS, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_ESCAPE_CHARACTER();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_ESCAPE_CHARACTER(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_INVALID_SYNTAX_ESCAPE_CHARACTER(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_ESCAPE_CHARACTER;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_ESCAPE_CHARACTER, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_NODE_ACTION_NOT_SUPPORTED();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_NODE_ACTION_NOT_SUPPORTED(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_NODE_ACTION_NOT_SUPPORTED(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_NODE_ACTION_NOT_SUPPORTED;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NODE_ACTION_NOT_SUPPORTED, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_PARAMETER_VALUE_NOT_SUPPORTED();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_PARAMETER_VALUE_NOT_SUPPORTED(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_PARAMETER_VALUE_NOT_SUPPORTED(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_PARAMETER_VALUE_NOT_SUPPORTED;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, PARAMETER_VALUE_NOT_SUPPORTED, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_LUCENE_QUERY_CONVERSION_ERROR();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_LUCENE_QUERY_CONVERSION_ERROR(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_LUCENE_QUERY_CONVERSION_ERROR(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_LUCENE_QUERY_CONVERSION_ERROR;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LUCENE_QUERY_CONVERSION_ERROR, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_EMPTY_MESSAGE();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_EMPTY_MESSAGE(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_EMPTY_MESSAGE(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_EMPTY_MESSAGE;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, EMPTY_MESSAGE, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_WILDCARD_NOT_SUPPORTED();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_WILDCARD_NOT_SUPPORTED(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_WILDCARD_NOT_SUPPORTED(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_WILDCARD_NOT_SUPPORTED;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, WILDCARD_NOT_SUPPORTED, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_TOO_MANY_BOOLEAN_CLAUSES();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_TOO_MANY_BOOLEAN_CLAUSES(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_TOO_MANY_BOOLEAN_CLAUSES(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_TOO_MANY_BOOLEAN_CLAUSES;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, TOO_MANY_BOOLEAN_CLAUSES, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_LEADING_WILDCARD_NOT_ALLOWED();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_LEADING_WILDCARD_NOT_ALLOWED(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_LEADING_WILDCARD_NOT_ALLOWED(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_LEADING_WILDCARD_NOT_ALLOWED;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LEADING_WILDCARD_NOT_ALLOWED, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_COULD_NOT_PARSE_NUMBER();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_COULD_NOT_PARSE_NUMBER(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_COULD_NOT_PARSE_NUMBER(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_COULD_NOT_PARSE_NUMBER;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, COULD_NOT_PARSE_NUMBER, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_UNSUPPORTED_NUMERIC_DATA_TYPE();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_UNSUPPORTED_NUMERIC_DATA_TYPE(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_UNSUPPORTED_NUMERIC_DATA_TYPE(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_UNSUPPORTED_NUMERIC_DATA_TYPE;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, UNSUPPORTED_NUMERIC_DATA_TYPE, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_NUMERIC_CANNOT_BE_EMPTY();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_NUMERIC_CANNOT_BE_EMPTY(void);
 inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_set_NUMERIC_CANNOT_BE_EMPTY(NSString *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_NUMERIC_CANNOT_BE_EMPTY;
@@ -213,4 +165,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryPa
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages")

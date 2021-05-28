@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder))
 #define OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder_
 
@@ -26,17 +32,17 @@
 /*!
  @brief Builds a <code>BooleanQuery</code> object from a <code>BooleanQueryNode</code> object.
  Every children in the <code>BooleanQueryNode</code> object must be already tagged
- using <code>QueryTreeBuilder.QUERY_TREE_BUILDER_TAGID</code> with a <code>Query</code>
- object. <br>
- <br>
- It takes in consideration if the children is a <code>ModifierQueryNode</code> to
- define the <code>BooleanClause</code>.
+  using <code>QueryTreeBuilder.QUERY_TREE_BUILDER_TAGID</code> with a <code>Query</code>
+  object. <br>
+  <br>
+  It takes in consideration if the children is a <code>ModifierQueryNode</code> to
+  define the <code>BooleanClause</code>.
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder : NSObject < OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchBooleanQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
@@ -46,12 +52,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardBuildersBoole
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder_init(OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersBooleanQueryNodeBuilder")

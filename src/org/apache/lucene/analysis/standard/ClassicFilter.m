@@ -7,14 +7,16 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/standard/ClassicFilter.h"
 #include "org/apache/lucene/analysis/standard/ClassicTokenizer.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/standard/ClassicFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisStandardClassicFilter () {
  @public
@@ -27,11 +29,11 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisStandardClassicFilter, typeAtt_, id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisStandardClassicFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-inline NSString *OrgApacheLuceneAnalysisStandardClassicFilter_get_APOSTROPHE_TYPE();
+inline NSString *OrgApacheLuceneAnalysisStandardClassicFilter_get_APOSTROPHE_TYPE(void);
 static NSString *OrgApacheLuceneAnalysisStandardClassicFilter_APOSTROPHE_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisStandardClassicFilter, APOSTROPHE_TYPE, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisStandardClassicFilter_get_ACRONYM_TYPE();
+inline NSString *OrgApacheLuceneAnalysisStandardClassicFilter_get_ACRONYM_TYPE(void);
 static NSString *OrgApacheLuceneAnalysisStandardClassicFilter_ACRONYM_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisStandardClassicFilter, ACRONYM_TYPE, NSString *)
 
@@ -49,12 +51,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardClassicFilter)
     return false;
   }
   IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-  jint bufferLength = [termAtt_ length];
+  jint bufferLength = [termAtt_ java_length];
   NSString *type = [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) type];
-  if (type == OrgApacheLuceneAnalysisStandardClassicFilter_APOSTROPHE_TYPE && bufferLength >= 2 && IOSCharArray_Get(nil_chk(buffer), bufferLength - 2) == '\'' && (IOSCharArray_Get(buffer, bufferLength - 1) == 's' || IOSCharArray_Get(buffer, bufferLength - 1) == 'S')) {
+  if (JreStringEqualsEquals(type, OrgApacheLuceneAnalysisStandardClassicFilter_APOSTROPHE_TYPE) && bufferLength >= 2 && IOSCharArray_Get(nil_chk(buffer), bufferLength - 2) == '\'' && (IOSCharArray_Get(buffer, bufferLength - 1) == 's' || IOSCharArray_Get(buffer, bufferLength - 1) == 'S')) {
     [termAtt_ setLengthWithInt:bufferLength - 2];
   }
-  else if (type == OrgApacheLuceneAnalysisStandardClassicFilter_ACRONYM_TYPE) {
+  else if (JreStringEqualsEquals(type, OrgApacheLuceneAnalysisStandardClassicFilter_ACRONYM_TYPE)) {
     jint upto = 0;
     for (jint i = 0; i < bufferLength; i++) {
       jchar c = IOSCharArray_Get(nil_chk(buffer), i);
@@ -71,27 +73,34 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardClassicFilter)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "APOSTROPHE_TYPE", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 2, -1, -1 },
+    { "ACRONYM_TYPE", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 3, -1, -1 },
+    { "typeAtt_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", &OrgApacheLuceneAnalysisStandardClassicFilter_APOSTROPHE_TYPE, &OrgApacheLuceneAnalysisStandardClassicFilter_ACRONYM_TYPE };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardClassicFilter = { "ClassicFilter", "org.apache.lucene.analysis.standard", ptrTable, methods, fields, 7, 0x1, 2, 4, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisStandardClassicFilter;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisStandardClassicFilter class]) {
     JreStrongAssign(&OrgApacheLuceneAnalysisStandardClassicFilter_APOSTROPHE_TYPE, IOSObjectArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisStandardClassicTokenizer, TOKEN_TYPES)), OrgApacheLuceneAnalysisStandardClassicTokenizer_APOSTROPHE));
     JreStrongAssign(&OrgApacheLuceneAnalysisStandardClassicFilter_ACRONYM_TYPE, IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardClassicTokenizer, TOKEN_TYPES), OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisStandardClassicFilter)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "ClassicFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "APOSTROPHE_TYPE", "APOSTROPHE_TYPE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisStandardClassicFilter_APOSTROPHE_TYPE, NULL, .constantValue.asLong = 0 },
-    { "ACRONYM_TYPE", "ACRONYM_TYPE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisStandardClassicFilter_ACRONYM_TYPE, NULL, .constantValue.asLong = 0 },
-    { "typeAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardClassicFilter = { 2, "ClassicFilter", "org.apache.lucene.analysis.standard", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisStandardClassicFilter;
 }
 
 @end

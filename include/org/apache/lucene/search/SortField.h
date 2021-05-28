@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSortField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSortField_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortField || defined(INCLUDE_OrgApacheLuceneSearchSortField))
 #define OrgApacheLuceneSearchSortField_
 
@@ -24,8 +30,7 @@
 
 /*!
  @brief Stores information about how to sort documents by terms in an individual
- field.
- Fields must be indexed in order to sort by them.
+  field.Fields must be indexed in order to sort by them.
  <p>Created: Feb 11, 2004 1:25:29 PM
  @since lucene 1.4
  - seealso: Sort
@@ -35,62 +40,59 @@
   jboolean reverse_;
   id missingValue_;
 }
-
-+ (OrgApacheLuceneSearchSortField *)FIELD_SCORE;
-
-+ (OrgApacheLuceneSearchSortField *)FIELD_DOC;
-
-+ (id)STRING_FIRST;
-
-+ (id)STRING_LAST;
+@property (readonly, class, strong) OrgApacheLuceneSearchSortField *FIELD_SCORE NS_SWIFT_NAME(FIELD_SCORE);
+@property (readonly, class, strong) OrgApacheLuceneSearchSortField *FIELD_DOC NS_SWIFT_NAME(FIELD_DOC);
+@property (readonly, class, strong) id STRING_FIRST NS_SWIFT_NAME(STRING_FIRST);
+@property (readonly, class, strong) id STRING_LAST NS_SWIFT_NAME(STRING_LAST);
 
 #pragma mark Public
 
 /*!
  @brief Creates a sort with a custom comparison function.
- @param field Name of field to sort by; cannot be <code>null</code>.
+ @param field Name of field to sort by; cannot be  <code> null </code>
+  .
  @param comparator Returns a comparator for sorting hits.
  */
-- (instancetype)initWithNSString:(NSString *)field
+- (instancetype __nonnull)initWithNSString:(NSString *)field
 withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)comparator;
 
 /*!
  @brief Creates a sort, possibly in reverse, with a custom comparison function.
- @param field Name of field to sort by; cannot be <code>null</code>.
+ @param field Name of field to sort by; cannot be  <code> null </code>
+  .
  @param comparator Returns a comparator for sorting hits.
  @param reverse True if natural order should be reversed.
  */
-- (instancetype)initWithNSString:(NSString *)field
+- (instancetype __nonnull)initWithNSString:(NSString *)field
 withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)comparator
-                     withBoolean:(jboolean)reverse;
+                               withBoolean:(jboolean)reverse;
 
 /*!
  @brief Creates a sort by terms in the given field with the type of term
- values explicitly given.
- @param field  Name of field to sort by.  Can be <code>null</code> if
- <code>type</code> is SCORE or DOC.
- @param type   Type of values in the terms.
+  values explicitly given.
+ @param field Name of field to sort by.  Can be  <code> null </code>  if
+                  <code> type </code>  is SCORE or DOC.
+ @param type Type of values in the terms.
  */
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type;
 
 /*!
  @brief Creates a sort, possibly in reverse, by terms in the given field with the
- type of term values explicitly given.
- @param field  Name of field to sort by.  Can be <code>null</code> if
- <code>type</code> is SCORE or DOC.
- @param type   Type of values in the terms.
+  type of term values explicitly given.
+ @param field Name of field to sort by.  Can be  <code> null </code>  if
+                  <code> type </code>  is SCORE or DOC.
+ @param type Type of values in the terms.
  @param reverse True if natural order should be reversed.
  */
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
-                     withBoolean:(jboolean)reverse;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
+                               withBoolean:(jboolean)reverse;
 
 /*!
- @brief Returns true if <code>o</code> is equal to this.
- If a
- <code>FieldComparatorSource</code> was provided, it must properly
- implement equals (unless a singleton is always used). 
+ @brief Returns true if <code>o</code> is equal to this.If a
+   <code>FieldComparatorSource</code> was provided, it must properly
+   implement equals (unless a singleton is always used).
  */
 - (jboolean)isEqual:(id)o;
 
@@ -98,12 +100,11 @@ withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)t
 
 /*!
  @brief Returns the <code>FieldComparator</code> to use for
- sorting.
+  sorting.
  @param numHits number of top hits the queue will store
  @param sortPos position of this SortField within <code>Sort</code>
- .  The comparator is primary if sortPos==0,
- secondary if sortPos==1, etc.  Some comparators can
- optimize themselves when they are the primary sort.
+  .  The comparator is primary if sortPos==0,
+     secondary if sortPos==1, etc.  Some comparators can    optimize themselves when they are the primary sort.
  @return <code>FieldComparator</code> to use when sorting
  */
 - (OrgApacheLuceneSearchFieldComparator *)getComparatorWithInt:(jint)numHits
@@ -111,14 +112,13 @@ withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)t
 
 /*!
  @brief Returns the <code>FieldComparatorSource</code> used for
- custom sorting
+  custom sorting
  */
 - (OrgApacheLuceneSearchFieldComparatorSource *)getComparatorSource;
 
 /*!
- @brief Returns the name of the field.
- Could return <code>null</code>
- if the sort is by SCORE or DOC.
+ @brief Returns the name of the field.Could return <code>null</code>
+  if the sort is by SCORE or DOC.
  @return Name of field, possibly <code>null</code>.
  */
 - (NSString *)getField;
@@ -136,11 +136,10 @@ withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)t
 - (OrgApacheLuceneSearchSortField_Type *)getType;
 
 /*!
- @brief Returns true if <code>o</code> is equal to this.
- If a
- <code>FieldComparatorSource</code> was provided, it must properly
- implement hashCode (unless a singleton is always
- used). 
+ @brief Returns true if <code>o</code> is equal to this.If a
+   <code>FieldComparatorSource</code> was provided, it must properly
+   implement hashCode (unless a singleton is always
+   used).
  */
 - (NSUInteger)hash;
 
@@ -152,10 +151,10 @@ withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)t
 /*!
  @brief Rewrites this SortField, returning a new SortField if a change is made.
  Subclasses should override this define their rewriting behavior when this
- SortField is of type <code>SortField.Type.REWRITEABLE</code>
+  SortField is of type <code>SortField.Type.REWRITEABLE</code>
  @param searcher IndexSearcher to use during rewriting
  @return New rewritten SortField, or <code>this</code> if nothing has changed.
- @throws IOException Can be thrown by the rewriting
+ @throw IOExceptionCan be thrown by the rewriting
  */
 - (OrgApacheLuceneSearchSortField *)rewriteWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
 
@@ -164,6 +163,10 @@ withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)t
 - (void)setMissingValueWithId:(id)missingValue;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -174,7 +177,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortField, missingValue_, id)
 /*!
  @brief Represents sorting by document score (relevance).
  */
-inline OrgApacheLuceneSearchSortField *OrgApacheLuceneSearchSortField_get_FIELD_SCORE();
+inline OrgApacheLuceneSearchSortField *OrgApacheLuceneSearchSortField_get_FIELD_SCORE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortField *OrgApacheLuceneSearchSortField_FIELD_SCORE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSortField, FIELD_SCORE, OrgApacheLuceneSearchSortField *)
@@ -182,25 +185,25 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSortField, FIELD_SCORE, OrgAp
 /*!
  @brief Represents sorting by document number (index order).
  */
-inline OrgApacheLuceneSearchSortField *OrgApacheLuceneSearchSortField_get_FIELD_DOC();
+inline OrgApacheLuceneSearchSortField *OrgApacheLuceneSearchSortField_get_FIELD_DOC(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortField *OrgApacheLuceneSearchSortField_FIELD_DOC;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSortField, FIELD_DOC, OrgApacheLuceneSearchSortField *)
 
 /*!
  @brief Pass this to <code>setMissingValue</code> to have missing
- string values sort first.
+   string values sort first.
  */
-inline id OrgApacheLuceneSearchSortField_get_STRING_FIRST();
+inline id OrgApacheLuceneSearchSortField_get_STRING_FIRST(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id OrgApacheLuceneSearchSortField_STRING_FIRST;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSortField, STRING_FIRST, id)
 
 /*!
  @brief Pass this to <code>setMissingValue</code> to have missing
- string values sort last.
+   string values sort last.
  */
-inline id OrgApacheLuceneSearchSortField_get_STRING_LAST();
+inline id OrgApacheLuceneSearchSortField_get_STRING_LAST(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id OrgApacheLuceneSearchSortField_STRING_LAST;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSortField, STRING_LAST, id)
@@ -240,6 +243,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortField)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSortField_Type_Enum) {
   OrgApacheLuceneSearchSortField_Type_Enum_SCORE = 0,
   OrgApacheLuceneSearchSortField_Type_Enum_DOC = 1,
@@ -257,37 +262,27 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSortField_Type_Enum) {
 /*!
  @brief Specifies the type of the terms to be sorted, or special types such as CUSTOM
  */
-@interface OrgApacheLuceneSearchSortField_Type : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneSearchSortField_Type : JavaLangEnum
 
-+ (OrgApacheLuceneSearchSortField_Type *)SCORE;
-
-+ (OrgApacheLuceneSearchSortField_Type *)DOC;
-
-+ (OrgApacheLuceneSearchSortField_Type *)STRING;
-
-+ (OrgApacheLuceneSearchSortField_Type *)INT;
-
-+ (OrgApacheLuceneSearchSortField_Type *)FLOAT;
-
-+ (OrgApacheLuceneSearchSortField_Type *)LONG;
-
-+ (OrgApacheLuceneSearchSortField_Type *)DOUBLE;
-
-+ (OrgApacheLuceneSearchSortField_Type *)CUSTOM;
-
-+ (OrgApacheLuceneSearchSortField_Type *)STRING_VAL;
-
-+ (OrgApacheLuceneSearchSortField_Type *)BYTES;
-
-+ (OrgApacheLuceneSearchSortField_Type *)REWRITEABLE;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *SCORE NS_SWIFT_NAME(SCORE);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *DOC NS_SWIFT_NAME(DOC);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *STRING NS_SWIFT_NAME(STRING);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *INT NS_SWIFT_NAME(INT);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *FLOAT NS_SWIFT_NAME(FLOAT);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *LONG NS_SWIFT_NAME(LONG);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *DOUBLE NS_SWIFT_NAME(DOUBLE);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *CUSTOM NS_SWIFT_NAME(CUSTOM);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *STRING_VAL NS_SWIFT_NAME(STRING_VAL);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *BYTES NS_SWIFT_NAME(BYTES);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortField_Type *REWRITEABLE NS_SWIFT_NAME(REWRITEABLE);
+#pragma mark Public
 
 + (OrgApacheLuceneSearchSortField_Type *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneSearchSortField_Type_Enum)toNSEnum;
 
 @end
@@ -298,92 +293,84 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSortField_Type)
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_values_[];
 
 /*!
- @brief Sort by document score (relevance).
- Sort values are Float and higher
- values are at the front. 
+ @brief Sort by document score (relevance).Sort values are Float and higher
+  values are at the front.
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_SCORE();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_SCORE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, SCORE)
 
 /*!
- @brief Sort by document number (index order).
- Sort values are Integer and lower
- values are at the front. 
+ @brief Sort by document number (index order).Sort values are Integer and lower
+  values are at the front.
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_DOC();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_DOC(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, DOC)
 
 /*!
- @brief Sort using term values as Strings.
- Sort values are String and lower
- values are at the front. 
+ @brief Sort using term values as Strings.Sort values are String and lower
+  values are at the front.
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_STRING();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_STRING(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, STRING)
 
 /*!
- @brief Sort using term values as encoded Integers.
- Sort values are Integer and
- lower values are at the front. 
+ @brief Sort using term values as encoded Integers.Sort values are Integer and
+  lower values are at the front.
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_INT();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_INT(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, INT)
 
 /*!
- @brief Sort using term values as encoded Floats.
- Sort values are Float and
- lower values are at the front. 
+ @brief Sort using term values as encoded Floats.Sort values are Float and
+  lower values are at the front.
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_FLOAT();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_FLOAT(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, FLOAT)
 
 /*!
- @brief Sort using term values as encoded Longs.
- Sort values are Long and
- lower values are at the front. 
+ @brief Sort using term values as encoded Longs.Sort values are Long and
+  lower values are at the front.
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_LONG();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_LONG(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, LONG)
 
 /*!
- @brief Sort using term values as encoded Doubles.
- Sort values are Double and
- lower values are at the front. 
+ @brief Sort using term values as encoded Doubles.Sort values are Double and
+  lower values are at the front.
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_DOUBLE();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_DOUBLE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, DOUBLE)
 
 /*!
- @brief Sort using a custom Comparator.
- Sort values are any Comparable and
- sorting is done according to natural order. 
+ @brief Sort using a custom Comparator.Sort values are any Comparable and
+  sorting is done according to natural order.
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_CUSTOM();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_CUSTOM(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, CUSTOM)
 
 /*!
  @brief Sort using term values as Strings, but comparing by
- value (using String.compareTo) for all comparisons.
+  value (using String.compareTo) for all comparisons.
  This is typically slower than <code>STRING</code>, which
- uses ordinals to do the sorting. 
+  uses ordinals to do the sorting.
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_STRING_VAL();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_STRING_VAL(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, STRING_VAL)
 
 /*!
  @brief Sort use byte[] index values.
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_BYTES();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_BYTES(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, BYTES)
 
 /*!
  @brief Force rewriting of SortField using <code>SortField.rewrite(IndexSearcher)</code>
- before it can be used for sorting
+  before it can be used for sorting
  */
-inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_REWRITEABLE();
+inline OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_get_REWRITEABLE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortField_Type, REWRITEABLE)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSortField_Type_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSortField_Type_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_valueOfWithNSString_(NSString *name);
 
@@ -393,4 +380,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortField_Type)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortField")

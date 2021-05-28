@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/TermVectorsFormat.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/TermVectorsFormat.h"
 #include "org/apache/lucene/codecs/TermVectorsReader.h"
 #include "org/apache/lucene/codecs/TermVectorsWriter.h"
@@ -13,6 +11,10 @@
 #include "org/apache/lucene/index/SegmentInfo.h"
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/IOContext.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/TermVectorsFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneCodecsTermVectorsFormat
 
@@ -41,12 +43,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TermVectorsFormat", NULL, 0x4, NULL, NULL },
-    { "vectorsReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:", "vectorsReader", "Lorg.apache.lucene.codecs.TermVectorsReader;", 0x401, "Ljava.io.IOException;", NULL },
-    { "vectorsWriterWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "vectorsWriter", "Lorg.apache.lucene.codecs.TermVectorsWriter;", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsReader;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsWriter;", 0x401, 3, 4, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsTermVectorsFormat = { 2, "TermVectorsFormat", "org.apache.lucene.codecs", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(vectorsReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:);
+  methods[2].selector = @selector(vectorsWriterWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "vectorsReader", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneIndexFieldInfos;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "vectorsWriter", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneStoreIOContext;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsTermVectorsFormat = { "TermVectorsFormat", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsTermVectorsFormat;
 }
 

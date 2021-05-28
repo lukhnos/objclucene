@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/core/StopFilter.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -13,7 +14,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/StopFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCoreStopFilter () {
  @public
@@ -53,7 +57,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreStopFilter, termAtt_, id<OrgApach
 }
 
 - (jboolean)accept {
-  return ![((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(stopWords_)) containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length]];
+  return ![((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(stopWords_)) containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ java_length]];
 }
 
 - (void)dealloc {
@@ -63,19 +67,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreStopFilter, termAtt_, id<OrgApach
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:", "StopFilter", NULL, 0x1, NULL, NULL },
-    { "makeStopSetWithNSStringArray:", "makeStopSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x89, NULL, NULL },
-    { "makeStopSetWithJavaUtilList:", "makeStopSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, "(Ljava/util/List<*>;)Lorg/apache/lucene/analysis/util/CharArraySet;" },
-    { "makeStopSetWithNSStringArray:withBoolean:", "makeStopSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
-    { "makeStopSetWithJavaUtilList:withBoolean:", "makeStopSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, "(Ljava/util/List<*>;Z)Lorg/apache/lucene/analysis/util/CharArraySet;" },
-    { "accept", NULL, "Z", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x89, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x9, 1, 3, -1, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x9, 1, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x9, 1, 6, -1, 7, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[1].selector = @selector(makeStopSetWithNSStringArray:);
+  methods[2].selector = @selector(makeStopSetWithJavaUtilList:);
+  methods[3].selector = @selector(makeStopSetWithNSStringArray:withBoolean:);
+  methods[4].selector = @selector(makeStopSetWithJavaUtilList:withBoolean:);
+  methods[5].selector = @selector(accept);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stopWords_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "stopWords_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreStopFilter = { 2, "StopFilter", "org.apache.lucene.analysis.core", NULL, 0x11, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;", "makeStopSet", "[LNSString;", "LJavaUtilList;", "(Ljava/util/List<*>;)Lorg/apache/lucene/analysis/util/CharArraySet;", "[LNSString;Z", "LJavaUtilList;Z", "(Ljava/util/List<*>;Z)Lorg/apache/lucene/analysis/util/CharArraySet;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreStopFilter = { "StopFilter", "org.apache.lucene.analysis.core", ptrTable, methods, fields, 7, 0x11, 6, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCoreStopFilter;
 }
 

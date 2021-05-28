@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
@@ -32,7 +31,14 @@
 #include "org/apache/lucene/util/fst/ByteSequenceOutputs.h"
 #include "org/apache/lucene/util/fst/FST.h"
 
-inline jlong OrgApacheLuceneCodecsBlocktreeFieldReader_get_BASE_RAM_BYTES_USED();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/blocktree/FieldReader must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/codecs/blocktree/FieldReader must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
+inline jlong OrgApacheLuceneCodecsBlocktreeFieldReader_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneCodecsBlocktreeFieldReader_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsBlocktreeFieldReader, BASE_RAM_BYTES_USED, jlong)
 
@@ -75,7 +81,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsBlocktreeFieldReader)
 }
 
 - (OrgApacheLuceneCodecsBlocktreeStats *)getStats {
-  return [create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(self) computeBlockStats];
+  return [create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_(self) computeBlockStats];
 }
 
 - (jboolean)hasFreqs {
@@ -95,7 +101,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsBlocktreeFieldReader)
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator {
-  return create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(self);
+  return create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_(self);
 }
 
 - (jlong)size {
@@ -116,7 +122,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsBlocktreeFieldReader)
 
 - (OrgApacheLuceneIndexTermsEnum *)intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled
                                                               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm {
-  return create_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonRunAutomaton_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(self, ((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled))->automaton_, compiled->runAutomaton_, compiled->commonSuffixRef_, startTerm, compiled->sinkState_);
+  return create_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonRunAutomaton_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(self, ((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled))->automaton_, compiled->runAutomaton_, compiled->commonSuffixRef_, startTerm, compiled->sinkState_);
 }
 
 - (jlong)ramBytesUsed {
@@ -150,6 +156,68 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsBlocktreeFieldReader)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsBlocktreeStats;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader:withOrgApacheLuceneIndexFieldInfo:withLong:withOrgApacheLuceneUtilBytesRef:withLong:withLong:withInt:withLong:withInt:withOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(getMin);
+  methods[2].selector = @selector(getMax);
+  methods[3].selector = @selector(getStats);
+  methods[4].selector = @selector(hasFreqs);
+  methods[5].selector = @selector(hasOffsets);
+  methods[6].selector = @selector(hasPositions);
+  methods[7].selector = @selector(hasPayloads);
+  methods[8].selector = @selector(iterator);
+  methods[9].selector = @selector(size);
+  methods[10].selector = @selector(getSumTotalTermFreq);
+  methods[11].selector = @selector(getSumDocFreq);
+  methods[12].selector = @selector(getDocCount);
+  methods[13].selector = @selector(intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:withOrgApacheLuceneUtilBytesRef:);
+  methods[14].selector = @selector(ramBytesUsed);
+  methods[15].selector = @selector(getChildResources);
+  methods[16].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 6, -1, -1 },
+    { "numTerms_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fieldInfo_", "LOrgApacheLuceneIndexFieldInfo;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "sumTotalTermFreq_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "sumDocFreq_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docCount_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "indexStartFP_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "rootBlockFP_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "rootCode_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "minTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "longsSize_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "parent_", "LOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "index_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x10, -1, -1, 7, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader;LOrgApacheLuceneIndexFieldInfo;JLOrgApacheLuceneUtilBytesRef;JJIJILOrgApacheLuceneStoreIndexInput;LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "intersect", "LOrgApacheLuceneUtilAutomatonCompiledAutomaton;LOrgApacheLuceneUtilBytesRef;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString", &OrgApacheLuceneCodecsBlocktreeFieldReader_BASE_RAM_BYTES_USED, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeFieldReader = { "FieldReader", "org.apache.lucene.codecs.blocktree", ptrTable, methods, fields, 7, 0x11, 17, 14, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsBlocktreeFieldReader;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsBlocktreeFieldReader class]) {
     OrgApacheLuceneCodecsBlocktreeFieldReader_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneCodecsBlocktreeFieldReader_class_()) + 3 * OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilBytesRef_class_());
@@ -157,51 +225,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsBlocktreeFieldReader)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader:withOrgApacheLuceneIndexFieldInfo:withLong:withOrgApacheLuceneUtilBytesRef:withLong:withLong:withInt:withLong:withInt:withOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "FieldReader", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "getMin", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMax", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getStats", NULL, "Lorg.apache.lucene.codecs.blocktree.Stats;", 0x1, "Ljava.io.IOException;", NULL },
-    { "hasFreqs", NULL, "Z", 0x1, NULL, NULL },
-    { "hasOffsets", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPositions", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "size", NULL, "J", 0x1, NULL, NULL },
-    { "getSumTotalTermFreq", NULL, "J", 0x1, NULL, NULL },
-    { "getSumDocFreq", NULL, "J", 0x1, NULL, NULL },
-    { "getDocCount", NULL, "I", 0x1, NULL, NULL },
-    { "intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:withOrgApacheLuceneUtilBytesRef:", "intersect", "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneCodecsBlocktreeFieldReader_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "numTerms_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfo_", NULL, 0x10, "Lorg.apache.lucene.index.FieldInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sumTotalTermFreq_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "sumDocFreq_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "docCount_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexStartFP_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "rootBlockFP_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "rootCode_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minTerm_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTerm_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "longsSize_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "parent_", NULL, 0x10, "Lorg.apache.lucene.codecs.blocktree.BlockTreeTermsReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "index_", NULL, 0x10, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeFieldReader = { 2, "FieldReader", "org.apache.lucene.codecs.blocktree", NULL, 0x11, 17, methods, 14, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneCodecsBlocktreeFieldReader;
-}
-
 @end
 
 void OrgApacheLuceneCodecsBlocktreeFieldReader_initWithOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilBytesRef_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsBlocktreeFieldReader *self, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilBytesRef *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm) {
   OrgApacheLuceneIndexTerms_init(self);
-  JreAssert((numTerms > 0), (@"org/apache/lucene/codecs/blocktree/FieldReader.java:72 condition failed: assert numTerms > 0;"));
+  JreAssert(numTerms > 0, @"org/apache/lucene/codecs/blocktree/FieldReader.java:72 condition failed: assert numTerms > 0;");
   JreStrongAssign(&self->fieldInfo_, fieldInfo);
   self->parent_ = parent;
   self->numTerms_ = numTerms;
@@ -215,7 +243,7 @@ void OrgApacheLuceneCodecsBlocktreeFieldReader_initWithOrgApacheLuceneCodecsBloc
   JreStrongAssign(&self->maxTerm_, maxTerm);
   self->rootBlockFP_ = JreURShift64([(create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(rootCode))->bytes_, rootCode->offset_, rootCode->length_)) readVLong], OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_NUM_BITS);
   if (indexIn != nil) {
-    OrgApacheLuceneStoreIndexInput *clone = [indexIn clone];
+    OrgApacheLuceneStoreIndexInput *clone = [indexIn java_clone];
     [((OrgApacheLuceneStoreIndexInput *) nil_chk(clone)) seekWithLong:indexStartFP];
     JreStrongAssignAndConsume(&self->index_, new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(clone, OrgApacheLuceneUtilFstByteSequenceOutputs_getSingleton()));
   }

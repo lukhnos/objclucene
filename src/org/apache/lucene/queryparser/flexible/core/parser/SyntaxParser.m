@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/SyntaxParser.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/parser/SyntaxParser must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser : NSObject
 
 @end
@@ -13,10 +17,16 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "parseWithJavaLangCharSequence:withJavaLangCharSequence:", "parse", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x401, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeParseException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser = { 2, "SyntaxParser", "org.apache.lucene.queryparser.flexible.core.parser", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(parseWithJavaLangCharSequence:withJavaLangCharSequence:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "parse", "LJavaLangCharSequence;LJavaLangCharSequence;", "LOrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser = { "SyntaxParser", "org.apache.lucene.queryparser.flexible.core.parser", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser;
 }
 

@@ -5,17 +5,27 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 #include "org/apache/lucene/queries/function/ValueSource.h"
-#include "org/apache/lucene/queries/function/valuesource/DocFreqValueSource.h"  // fixed by translate.py
+#include "org/apache/lucene/queries/function/valuesource/DocFreqValueSource.h"
 #include "org/apache/lucene/queries/function/valuesource/MaxDocValueSource.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/MaxDocValueSource must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)name {
   return @"maxdoc";
@@ -33,35 +43,40 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
   OrgApacheLuceneSearchIndexSearcher *searcher = (OrgApacheLuceneSearchIndexSearcher *) cast_chk([((id<JavaUtilMap>) nil_chk(context)) getWithId:@"searcher"], [OrgApacheLuceneSearchIndexSearcher class]);
-  return create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_([((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) maxDoc], self);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_([((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) maxDoc], self);
 }
 
 - (jboolean)isEqual:(id)o {
-  return [self getClass] == (id) [nil_chk(o) getClass];
+  return JreObjectEqualsEquals([self java_getClass], [nil_chk(o) java_getClass]);
 }
 
 - (NSUInteger)hash {
-  return ((jint) [[self getClass] hash]);
+  return ((jint) [[self java_getClass] hash]);
 }
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", "MaxDocValueSource", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 8, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource = { 2, "MaxDocValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(description__);
+  methods[3].selector = @selector(createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:);
+  methods[4].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[5].selector = @selector(isEqual:);
+  methods[6].selector = @selector(hash);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "description", "createWeight", "LJavaUtilMap;LOrgApacheLuceneSearchIndexSearcher;", "LJavaIoIOException;", "getValues", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "equals", "LNSObject;", "hashCode" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource = { "MaxDocValueSource", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, NULL, 7, 0x1, 7, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource;
 }
 

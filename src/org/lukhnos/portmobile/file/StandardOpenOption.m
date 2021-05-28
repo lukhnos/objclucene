@@ -3,11 +3,15 @@
 //  source: ./core/src/java/org/lukhnos/portmobile/file/StandardOpenOption.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/lukhnos/portmobile/file/StandardOpenOption.h"
+
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/StandardOpenOption must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static void OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(OrgLukhnosPortmobileFileStandardOpenOption *self, NSString *__name, jint __ordinal);
 
@@ -41,8 +45,25 @@ OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpen
   return (OrgLukhnosPortmobileFileStandardOpenOption_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgLukhnosPortmobileFileStandardOpenOption;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileStandardOpenOption;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "READ", "LOrgLukhnosPortmobileFileStandardOpenOption;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "WRITE", "LOrgLukhnosPortmobileFileStandardOpenOption;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "CREATE", "LOrgLukhnosPortmobileFileStandardOpenOption;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ), &JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, WRITE), &JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, CREATE), "Ljava/lang/Enum<Lorg/lukhnos/portmobile/file/StandardOpenOption;>;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileStandardOpenOption = { "StandardOpenOption", "org.lukhnos.portmobile.file", ptrTable, methods, fields, 7, 0x4011, 2, 3, -1, -1, -1, 5, -1 };
+  return &_OrgLukhnosPortmobileFileStandardOpenOption;
 }
 
 + (void)initialize {
@@ -51,25 +72,12 @@ OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpen
     size_t allocSize = 3 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(e, @"READ", 0);
-    (JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, WRITE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(e, @"WRITE", 1);
-    (JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, CREATE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(e, @"CREATE", 2);
+    for (jint i = 0; i < 3; i++) {
+      ((void)(OrgLukhnosPortmobileFileStandardOpenOption_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(e, JreEnumConstantName(OrgLukhnosPortmobileFileStandardOpenOption_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileFileStandardOpenOption)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "READ", "READ", 0x4019, "Lorg.lukhnos.portmobile.file.StandardOpenOption;", &JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ), NULL, .constantValue.asLong = 0 },
-    { "WRITE", "WRITE", 0x4019, "Lorg.lukhnos.portmobile.file.StandardOpenOption;", &JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, WRITE), NULL, .constantValue.asLong = 0 },
-    { "CREATE", "CREATE", 0x4019, "Lorg.lukhnos.portmobile.file.StandardOpenOption;", &JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, CREATE), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.lukhnos.portmobile.file.StandardOpenOption;"};
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileStandardOpenOption = { 2, "StandardOpenOption", "org.lukhnos.portmobile.file", NULL, 0x4011, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/lukhnos/portmobile/file/StandardOpenOption;>;" };
-  return &_OrgLukhnosPortmobileFileStandardOpenOption;
 }
 
 @end
@@ -91,7 +99,7 @@ OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpen
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

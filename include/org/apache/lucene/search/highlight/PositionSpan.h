@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightPositionSpan
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightPositionSpan_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightPositionSpan || defined(INCLUDE_OrgApacheLuceneSearchHighlightPositionSpan))
 #define OrgApacheLuceneSearchHighlightPositionSpan_
 
@@ -27,8 +33,12 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end;
+- (instancetype __nonnull)initWithInt:(jint)start
+                              withInt:(jint)end;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -44,4 +54,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightPositionSpan)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightPositionSpan")

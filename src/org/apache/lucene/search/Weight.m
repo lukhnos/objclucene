@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/Weight.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/NullPointerException.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
@@ -18,6 +16,10 @@
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/Weight.h"
 #include "org/apache/lucene/util/Bits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/Weight must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchWeight_DefaultBulkScorer () {
  @public
@@ -70,7 +72,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchWeight_DefaultBulkScorer, scorer_, OrgA
 }
 
 - (OrgApacheLuceneSearchBulkScorer *)bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneSearchScorer *scorer = [self scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+  OrgApacheLuceneSearchScorer *scorer = JreRetainedLocalValue([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
   if (scorer == nil) {
     return nil;
   }
@@ -83,21 +85,33 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchWeight_DefaultBulkScorer, scorer_, OrgA
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQuery:", "Weight", NULL, 0x4, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x401, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x11, NULL, NULL },
-    { "getValueForNormalization", NULL, "F", 0x401, "Ljava.io.IOException;", NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x401, NULL, NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x401, "Ljava.io.IOException;", NULL },
-    { "bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:", "bulkScorer", "Lorg.apache.lucene.search.BulkScorer;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 1, 2, -1, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x401, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, -1, -1, 6, -1, -1, -1 },
+    { NULL, "V", 0x401, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x401, 9, 10, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBulkScorer;", 0x1, 11, 10, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  methods[3].selector = @selector(getQuery);
+  methods[4].selector = @selector(getValueForNormalization);
+  methods[5].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[6].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[7].selector = @selector(bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "parentQuery_", NULL, 0x14, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
+    { "parentQuery_", "LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.Weight$DefaultBulkScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchWeight = { 2, "Weight", "org.apache.lucene.search", NULL, 0x401, 8, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchQuery;", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "LJavaIoIOException;", "normalize", "FF", "scorer", "LOrgApacheLuceneIndexLeafReaderContext;", "bulkScorer", "LOrgApacheLuceneSearchWeight_DefaultBulkScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchWeight = { "Weight", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 8, 1, -1, 12, -1, -1, -1 };
   return &_OrgApacheLuceneSearchWeight;
 }
 
@@ -167,17 +181,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchWeight)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchScorer:", "DefaultBulkScorer", NULL, 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneUtilBits:withInt:withInt:", "score", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "scoreRangeWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchTwoPhaseIterator:withOrgApacheLuceneUtilBits:withInt:withInt:", "scoreRange", "I", 0x8, "Ljava.io.IOException;", NULL },
-    { "scoreAllWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchTwoPhaseIterator:withOrgApacheLuceneUtilBits:", "scoreAll", "V", 0x8, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "I", 0x8, 4, 5, 3, -1, -1, -1 },
+    { NULL, "V", 0x8, 6, 7, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(cost);
+  methods[2].selector = @selector(scoreWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneUtilBits:withInt:withInt:);
+  methods[3].selector = @selector(scoreRangeWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchTwoPhaseIterator:withOrgApacheLuceneUtilBits:withInt:withInt:);
+  methods[4].selector = @selector(scoreAllWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchTwoPhaseIterator:withOrgApacheLuceneUtilBits:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "scorer_", NULL, 0x12, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "scorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchWeight_DefaultBulkScorer = { 2, "DefaultBulkScorer", "org.apache.lucene.search", "Weight", 0xc, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchScorer;", "score", "LOrgApacheLuceneSearchLeafCollector;LOrgApacheLuceneUtilBits;II", "LJavaIoIOException;", "scoreRange", "LOrgApacheLuceneSearchLeafCollector;LOrgApacheLuceneSearchScorer;LOrgApacheLuceneSearchTwoPhaseIterator;LOrgApacheLuceneUtilBits;II", "scoreAll", "LOrgApacheLuceneSearchLeafCollector;LOrgApacheLuceneSearchScorer;LOrgApacheLuceneSearchTwoPhaseIterator;LOrgApacheLuceneUtilBits;", "LOrgApacheLuceneSearchWeight;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchWeight_DefaultBulkScorer = { "DefaultBulkScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xc, 5, 1, 8, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchWeight_DefaultBulkScorer;
 }
 

@@ -13,6 +13,10 @@
 #include "org/apache/lucene/queryparser/surround/query/SrndQuery.h"
 #include "org/apache/lucene/search/Query.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/SrndQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserSurroundQuerySrndQuery () {
  @public
   jfloat weight_;
@@ -60,7 +64,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldWithNSString:(NSString *)fieldName
     withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
-  OrgApacheLuceneSearchQuery *q = [self makeLuceneQueryFieldNoBoostWithNSString:fieldName withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf];
+  OrgApacheLuceneSearchQuery *q = JreRetainedLocalValue([self makeLuceneQueryFieldNoBoostWithNSString:fieldName withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf]);
   if ([self isWeighted]) {
     [((OrgApacheLuceneSearchQuery *) nil_chk(q)) setBoostWithFloat:[self getWeight] * [q getBoost]];
   }
@@ -84,52 +88,71 @@ J2OBJC_IGNORE_DESIGNATED_END
   return true;
 }
 
-- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)clone {
+- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)java_clone {
   @try {
-    return (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) cast_chk([super clone], [OrgApacheLuceneQueryparserSurroundQuerySrndQuery class]);
+    return (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) cast_chk([super java_clone], [OrgApacheLuceneQueryparserSurroundQuerySrndQuery class]);
   }
   @catch (JavaLangCloneNotSupportedException *cns) {
-    @throw create_JavaLangError_initWithNSException_(cns);
+    @throw create_JavaLangError_initWithJavaLangThrowable_(cns);
   }
 }
 
 - (NSUInteger)hash {
-  return ((jint) [[self getClass] hash]) ^ ((jint) [((NSString *) nil_chk([self description])) hash]);
+  return ((jint) [[self java_getClass] hash]) ^ ((jint) [((NSString *) nil_chk([self description])) hash]);
 }
 
 - (jboolean)isEqual:(id)obj {
   if (obj == nil) return false;
-  if (![[self getClass] isEqual:[obj getClass]]) return false;
+  if (![[self java_getClass] isEqual:[obj java_getClass]]) return false;
   return [((NSString *) nil_chk([self description])) isEqual:[obj description]];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x401, 6, 5, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 7, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x1, 8, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 10, 11, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setWeightWithFloat:);
+  methods[2].selector = @selector(isWeighted);
+  methods[3].selector = @selector(getWeight);
+  methods[4].selector = @selector(getWeightString);
+  methods[5].selector = @selector(getWeightOperator);
+  methods[6].selector = @selector(weightToStringWithJavaLangStringBuilder:);
+  methods[7].selector = @selector(makeLuceneQueryFieldWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  methods[8].selector = @selector(makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  methods[9].selector = @selector(description);
+  methods[10].selector = @selector(isFieldsSubQueryAcceptable);
+  methods[11].selector = @selector(java_clone);
+  methods[12].selector = @selector(hash);
+  methods[13].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "weight_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "weighted_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "setWeight", "F", "weightToString", "LJavaLangStringBuilder;", "makeLuceneQueryField", "LNSString;LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;", "makeLuceneQueryFieldNoBoost", "toString", "clone", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySrndQuery = { "SrndQuery", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, fields, 7, 0x401, 14, 2, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserSurroundQuerySrndQuery;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SrndQuery", NULL, 0x1, NULL, NULL },
-    { "setWeightWithFloat:", "setWeight", "V", 0x1, NULL, NULL },
-    { "isWeighted", NULL, "Z", 0x1, NULL, NULL },
-    { "getWeight", NULL, "F", 0x1, NULL, NULL },
-    { "getWeightString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getWeightOperator", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "weightToStringWithJavaLangStringBuilder:", "weightToString", "V", 0x4, NULL, NULL },
-    { "makeLuceneQueryFieldWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryField", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryFieldNoBoost", "Lorg.apache.lucene.search.Query;", 0x401, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "isFieldsSubQueryAcceptable", NULL, "Z", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "weight_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "weighted_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySrndQuery = { 2, "SrndQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x401, 14, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserSurroundQuerySrndQuery;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end

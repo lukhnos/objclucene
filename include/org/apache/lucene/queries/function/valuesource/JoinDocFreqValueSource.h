@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_
 
@@ -32,13 +38,12 @@
  @public
   NSString *qfield_;
 }
-
-+ (NSString *)NAME;
+@property (readonly, copy, class) NSString *NAME NS_SWIFT_NAME(NAME);
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)qfield;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                              withNSString:(NSString *)qfield;
 
 - (NSString *)description__;
 
@@ -49,13 +54,17 @@
 
 - (NSUInteger)hash;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource, qfield_, NSString *)
 
-inline NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_get_NAME();
+inline NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_get_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource, NAME, NSString *)
@@ -70,4 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqV
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource")

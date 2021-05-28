@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMultiTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMultiTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexMultiTermsEnum))
 #define OrgApacheLuceneIndexMultiTermsEnum_
 
@@ -35,10 +41,9 @@
 
 /*!
  @brief Sole constructor.
- @param slices Which sub-reader slices we should
- merge.
+ @param slices Which sub-reader slices we should   merge.
  */
-- (instancetype)initWithOrgApacheLuceneIndexReaderSliceArray:(IOSObjectArray *)slices;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexReaderSliceArray:(IOSObjectArray *)slices;
 
 - (jint)docFreq;
 
@@ -49,8 +54,8 @@
 
 /*!
  @brief Returns how many sub-reader slices contain the current
- term.
- @@see #getMatchArray 
+   term.
+ @@see #getMatchArray
  */
 - (jint)getMatchCount;
 
@@ -63,7 +68,7 @@
 
 /*!
  @brief The terms array must be newly created TermsEnum, ie
- <code>TermsEnum.next</code> has not yet been called.
+   <code>TermsEnum.next</code> has not yet been called.
  */
 - (OrgApacheLuceneIndexTermsEnum *)resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:(IOSObjectArray *)termsEnumsIndex;
 
@@ -78,6 +83,10 @@
 - (NSString *)description;
 
 - (jlong)totalTermFreq;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -104,13 +113,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTermsEnum)
   jint subIndex_;
   OrgApacheLuceneIndexTermsEnum *termsEnum_;
 }
-
-+ (IOSObjectArray *)EMPTY_ARRAY;
+@property (readonly, class, strong) IOSObjectArray *EMPTY_ARRAY NS_SWIFT_NAME(EMPTY_ARRAY);
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
-                                              withInt:(jint)subIndex;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
+                                                        withInt:(jint)subIndex;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -118,7 +130,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex, termsEnum_, OrgApacheLuceneIndexTermsEnum *)
 
-inline IOSObjectArray *OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_get_EMPTY_ARRAY();
+inline IOSObjectArray *OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_get_EMPTY_ARRAY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_EMPTY_ARRAY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex, EMPTY_ARRAY, IOSObjectArray *)
@@ -149,13 +161,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)index
-withOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)subSlice;
+- (instancetype __nonnull)initWithInt:(jint)index
+  withOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)subSlice;
 
 - (void)resetWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)terms
                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -174,4 +190,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiTermsEnum")

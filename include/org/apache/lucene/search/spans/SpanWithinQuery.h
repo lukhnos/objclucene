@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanWithinQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanWithinQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanWithinQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanWithinQuery))
 #define OrgApacheLuceneSearchSpansSpanWithinQuery_
 
@@ -33,19 +39,25 @@
 
 /*!
  @brief Construct a SpanWithinQuery matching spans from <code>little</code>
- that are inside of <code>big</code>.
+  that are inside of <code>big</code>.
  This query has the boost of <code>little</code>.
- <code>big</code> and <code>little</code> must be in the same field.
+  <code>big</code> and <code>little</code> must be in the same field.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)big
-                    withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)little;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)big
+                              withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)little;
 
-- (OrgApacheLuceneSearchSpansSpanWithinQuery *)clone;
+- (OrgApacheLuceneSearchSpansSpanWithinQuery *)java_clone;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)arg0
+                                            withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)arg1
+                                                                          withFloat:(jfloat)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -80,11 +92,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWithinQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanWithinQuery:(OrgApacheLuceneSearchSpansSpanWithinQuery *)outer$
-                           withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                  withJavaUtilMap:(id<JavaUtilMap>)terms
-                         withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)bigWeight
-                         withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)littleWeight;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanWithinQuery:(OrgApacheLuceneSearchSpansSpanWithinQuery *)outer$
+                                     withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                            withJavaUtilMap:(id<JavaUtilMap>)terms
+                                   withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)bigWeight
+                                   withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)littleWeight;
 
 /*!
  @brief Return spans from <code>little</code> that are contained in a spans from <code>big</code>.
@@ -92,6 +104,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWithinQuery)
  */
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                      withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanContainQuery:(OrgApacheLuceneSearchSpansSpanContainQuery *)outer$
+                                      withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)arg0
+                                                             withJavaUtilMap:(id<JavaUtilMap>)arg1
+                                    withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)arg2
+                                    withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -107,4 +127,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinW
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanWithinQuery")

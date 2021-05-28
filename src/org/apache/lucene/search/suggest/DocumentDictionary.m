@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collections.h"
 #include "java/util/HashSet.h"
 #include "java/util/List.h"
@@ -21,6 +20,10 @@
 #include "org/apache/lucene/search/suggest/InputIterator.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/DocumentDictionary must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentDictionary () {
  @public
@@ -52,7 +55,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentDictionary, weightField_
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator, this$0_, OrgApacheLuceneSearchSuggestDocumentDictionary *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator, relevantFields_, id<JavaUtilSet>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator, liveDocs_, id<OrgApacheLuceneUtilBits>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator, currentPayload_, OrgApacheLuceneUtilBytesRef *)
@@ -101,21 +103,29 @@ __attribute__((unused)) static id<JavaUtilSet> OrgApacheLuceneSearchSuggestDocum
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:", "DocumentDictionary", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withNSString:", "DocumentDictionary", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withNSString:withNSString:", "DocumentDictionary", NULL, 0x1, NULL, NULL },
-    { "getEntryIterator", NULL, "Lorg.apache.lucene.search.suggest.InputIterator;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestInputIterator;", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withNSString:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withNSString:withNSString:);
+  methods[3].selector = @selector(getEntryIterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reader_", NULL, 0x14, "Lorg.apache.lucene.index.IndexReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadField_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "contextsField_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "weightField_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "reader_", "LOrgApacheLuceneIndexIndexReader;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "payloadField_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "contextsField_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "weightField_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.DocumentDictionary$DocumentInputIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentDictionary = { 2, "DocumentDictionary", "org.apache.lucene.search.suggest", NULL, 0x1, 4, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReader;LNSString;LNSString;", "LOrgApacheLuceneIndexIndexReader;LNSString;LNSString;LNSString;", "LOrgApacheLuceneIndexIndexReader;LNSString;LNSString;LNSString;LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentDictionary = { "DocumentDictionary", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x1, 4, 5, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentDictionary;
 }
 
@@ -198,10 +208,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentDictionary)
     if (liveDocs_ != nil && ![liveDocs_ getWithInt:currentDocId_]) {
       continue;
     }
-    OrgApacheLuceneDocumentDocument *doc = [((OrgApacheLuceneIndexIndexReader *) nil_chk(this$0_->reader_)) documentWithInt:currentDocId_ withJavaUtilSet:relevantFields_];
+    OrgApacheLuceneDocumentDocument *doc = JreRetainedLocalValue([((OrgApacheLuceneIndexIndexReader *) nil_chk(this$0_->reader_)) documentWithInt:currentDocId_ withJavaUtilSet:relevantFields_]);
     OrgApacheLuceneUtilBytesRef *tempPayload = nil;
     if (hasPayloads_) {
-      id<OrgApacheLuceneIndexIndexableField> payload = [((OrgApacheLuceneDocumentDocument *) nil_chk(doc)) getFieldWithNSString:this$0_->payloadField_];
+      id<OrgApacheLuceneIndexIndexableField> payload = JreRetainedLocalValue([((OrgApacheLuceneDocumentDocument *) nil_chk(doc)) getFieldWithNSString:this$0_->payloadField_]);
       if (payload != nil) {
         if ([payload binaryValue] != nil) {
           tempPayload = [payload binaryValue];
@@ -273,7 +283,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentDictionary)
 
 - (jlong)getWeightWithOrgApacheLuceneDocumentDocument:(OrgApacheLuceneDocumentDocument *)doc
                                               withInt:(jint)docId {
-  id<OrgApacheLuceneIndexIndexableField> weight = [((OrgApacheLuceneDocumentDocument *) nil_chk(doc)) getFieldWithNSString:this$0_->weightField_];
+  id<OrgApacheLuceneIndexIndexableField> weight = JreRetainedLocalValue([((OrgApacheLuceneDocumentDocument *) nil_chk(doc)) getFieldWithNSString:this$0_->weightField_]);
   if (weight != nil) {
     return ([weight numericValue] != nil) ? [((NSNumber *) nil_chk([weight numericValue])) longLongValue] : 0;
   }
@@ -312,33 +322,47 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentDictionary)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestDocumentDictionary:withBoolean:withBoolean:", "DocumentInputIterator", NULL, 0x1, NULL, NULL },
-    { "weight", NULL, "J", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "getWeightWithOrgApacheLuceneDocumentDocument:withInt:", "getWeight", "J", 0x4, NULL, NULL },
-    { "getRelevantFieldsWithNSStringArray:", "getRelevantFields", "Ljava.util.Set;", 0x82, NULL, "([Ljava/lang/String;)Ljava/util/Set<Ljava/lang/String;>;" },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
-    { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x82, 4, 5, -1, 6, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 7, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestDocumentDictionary:withBoolean:withBoolean:);
+  methods[1].selector = @selector(weight);
+  methods[2].selector = @selector(next);
+  methods[3].selector = @selector(payload);
+  methods[4].selector = @selector(hasPayloads);
+  methods[5].selector = @selector(getWeightWithOrgApacheLuceneDocumentDocument:withInt:);
+  methods[6].selector = @selector(getRelevantFieldsWithNSStringArray:);
+  methods[7].selector = @selector(contexts);
+  methods[8].selector = @selector(hasContexts);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.suggest.DocumentDictionary;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "relevantFields_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "hasPayloads_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasContexts_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "liveDocs_", NULL, 0x12, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentDocId_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentWeight_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentPayload_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentContexts_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "weightValues_", NULL, 0x12, "Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentDocFields_", NULL, 0x0, "[Lorg.apache.lucene.index.IndexableField;", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextFieldsPosition_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchSuggestDocumentDictionary;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "docCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "relevantFields_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 8, -1 },
+    { "hasPayloads_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "hasContexts_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "liveDocs_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentDocId_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentWeight_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentPayload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentContexts_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 9, -1 },
+    { "weightValues_", "LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentDocFields_", "[LOrgApacheLuceneIndexIndexableField;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "nextFieldsPosition_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator = { 2, "DocumentInputIterator", "org.apache.lucene.search.suggest", "DocumentDictionary", 0x4, 9, methods, 13, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestDocumentDictionary;ZZ", "LJavaIoIOException;", "getWeight", "LOrgApacheLuceneDocumentDocument;I", "getRelevantFields", "[LNSString;", "([Ljava/lang/String;)Ljava/util/Set<Ljava/lang/String;>;", "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", "Ljava/util/Set<Ljava/lang/String;>;", "Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneSearchSuggestDocumentDictionary;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator = { "DocumentInputIterator", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x4, 9, 13, 10, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator;
 }
 

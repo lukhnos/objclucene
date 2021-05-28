@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_
 
@@ -22,7 +28,7 @@
 
 /*!
  @brief A base class for ValueSource implementations that retrieve values for
- a single field from DocValues.
+  a single field from DocValues.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource : OrgApacheLuceneQueriesFunctionValueSource {
  @public
@@ -31,7 +37,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
 
 - (NSString *)description__;
 
@@ -40,6 +46,10 @@
 - (NSString *)getField;
 
 - (NSUInteger)hash;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -53,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSo
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource")

@@ -8,6 +8,10 @@
 #include "org/apache/lucene/search/spell/CombineSuggestion.h"
 #include "org/apache/lucene/search/spell/SuggestWord.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/CombineSuggestion must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSpellCombineSuggestion
 
 - (instancetype)initWithOrgApacheLuceneSearchSpellSuggestWord:(OrgApacheLuceneSearchSpellSuggestWord *)suggestion
@@ -23,14 +27,20 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpellSuggestWord:withIntArray:", "CombineSuggestion", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpellSuggestWord:withIntArray:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "originalTermIndexes_", NULL, 0x11, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "suggestion_", NULL, 0x11, "Lorg.apache.lucene.search.spell.SuggestWord;", NULL, NULL, .constantValue.asLong = 0 },
+    { "originalTermIndexes_", "[I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "suggestion_", "LOrgApacheLuceneSearchSpellSuggestWord;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellCombineSuggestion = { 2, "CombineSuggestion", "org.apache.lucene.search.spell", NULL, 0x1, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpellSuggestWord;[I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellCombineSuggestion = { "CombineSuggestion", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x1, 1, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellCombineSuggestion;
 }
 

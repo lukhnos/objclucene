@@ -13,14 +13,19 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey))
 #define OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_
 
 /*!
  @brief An instance of this class represents a key that is used to retrieve a value
- from <code>AbstractQueryConfig</code>.
- It also holds the value's type, which is
- defined in the generic argument.
+  from <code>AbstractQueryConfig</code>.It also holds the value's type, which is
+  defined in the generic argument.
  - seealso: AbstractQueryConfig
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey : NSObject
@@ -37,10 +42,14 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey)
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_newInstance();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_newInstance(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey")

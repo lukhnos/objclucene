@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneBkdtreeLatLonReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneBkdtreeLatLonReader_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeLatLonReader || defined(INCLUDE_OrgApacheLuceneBkdtreeLatLonReader))
 #define OrgApacheLuceneBkdtreeLatLonReader_
 
@@ -23,7 +29,7 @@
 /*!
  @brief Abstracts away whether OfflineSorter or simple arrays in heap are used.
  */
-@protocol OrgApacheLuceneBkdtreeLatLonReader < JavaIoCloseable, NSObject, JavaObject >
+@protocol OrgApacheLuceneBkdtreeLatLonReader < JavaIoCloseable, JavaObject >
 
 - (jboolean)next;
 
@@ -43,4 +49,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeLatLonReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeLatLonReader")

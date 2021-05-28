@@ -7,6 +7,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/store/MergeInfo.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/MergeInfo must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneStoreMergeInfo
 
 - (instancetype)initWithInt:(jint)totalMaxDoc
@@ -28,9 +32,9 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneStoreMergeInfo *other = (OrgApacheLuceneStoreMergeInfo *) cast_chk(obj, [OrgApacheLuceneStoreMergeInfo class]);
   if (estimatedMergeBytes_ != other->estimatedMergeBytes_) return false;
   if (isExternal_ != other->isExternal_) return false;
@@ -44,19 +48,28 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withLong:withBoolean:withInt:", "MergeInfo", NULL, 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withLong:withBoolean:withInt:);
+  methods[1].selector = @selector(hash);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "totalMaxDoc_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "estimatedMergeBytes_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "isExternal_", NULL, 0x11, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "mergeMaxNumSegments_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "totalMaxDoc_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "estimatedMergeBytes_", "J", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "isExternal_", "Z", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "mergeMaxNumSegments_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreMergeInfo = { 2, "MergeInfo", "org.apache.lucene.store", NULL, 0x1, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IJZI", "hashCode", "equals", "LNSObject;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreMergeInfo = { "MergeInfo", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 4, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreMergeInfo;
 }
 

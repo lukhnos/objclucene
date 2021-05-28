@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/DocumentsWriterFlushQueue.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Thread.h"
 #include "java/util/LinkedList.h"
 #include "java/util/Queue.h"
@@ -18,6 +16,10 @@
 #include "org/apache/lucene/index/IndexWriter.h"
 #include "org/apache/lucene/index/SegmentCommitInfo.h"
 #include "org/apache/lucene/util/InfoStream.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/DocumentsWriterFlushQueue must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexDocumentsWriterFlushQueue () {
  @public
@@ -60,6 +62,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
 
 @implementation OrgApacheLuceneIndexDocumentsWriterFlushQueue
 
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneIndexDocumentsWriterFlushQueue_initPackagePrivate(self);
+  return self;
+}
+
 - (void)addDeletesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *)deleteQueue {
   @synchronized(self) {
     OrgApacheLuceneIndexDocumentsWriterFlushQueue_incTickets(self);
@@ -92,7 +99,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
       OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *ticket = create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_([((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(dwpt)) prepareFlush]);
       [((id<JavaUtilQueue>) nil_chk(queue_)) addWithId:ticket];
       success = true;
-      return ticket;
+      return JreRetainedLocalValue(ticket);
     }
     @finally {
       if (!success) {
@@ -116,7 +123,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
 }
 
 - (jboolean)hasTickets {
-  JreAssert(([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(ticketCount_)) get] >= 0), (JreStrcat("$I", @"ticketCount should be >= 0 but was: ", [ticketCount_ get])));
+  JreAssert([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(ticketCount_)) get] >= 0, JreStrcat("$I", @"ticketCount should be >= 0 but was: ", [ticketCount_ get]));
   return [ticketCount_ get] != 0;
 }
 
@@ -125,8 +132,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
 }
 
 - (jint)forcePurgeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
-  JreAssert((!JavaLangThread_holdsLockWithId_(self)), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:134 condition failed: assert !Thread.holdsLock(this);"));
-  JreAssert((!JavaLangThread_holdsLockWithId_(writer)), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:135 condition failed: assert !Thread.holdsLock(writer);"));
+  JreAssert(!JavaLangThread_holdsLockWithId_(self), @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:134 condition failed: assert !Thread.holdsLock(this);");
+  JreAssert(!JavaLangThread_holdsLockWithId_(writer), @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:135 condition failed: assert !Thread.holdsLock(writer);");
   [((JavaUtilConcurrentLocksReentrantLock *) nil_chk(purgeLock_)) lock];
   @try {
     return OrgApacheLuceneIndexDocumentsWriterFlushQueue_innerPurgeWithOrgApacheLuceneIndexIndexWriter_(self, writer);
@@ -137,8 +144,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
 }
 
 - (jint)tryPurgeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
-  JreAssert((!JavaLangThread_holdsLockWithId_(self)), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:145 condition failed: assert !Thread.holdsLock(this);"));
-  JreAssert((!JavaLangThread_holdsLockWithId_(writer)), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:146 condition failed: assert !Thread.holdsLock(writer);"));
+  JreAssert(!JavaLangThread_holdsLockWithId_(self), @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:145 condition failed: assert !Thread.holdsLock(this);");
+  JreAssert(!JavaLangThread_holdsLockWithId_(writer), @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:146 condition failed: assert !Thread.holdsLock(writer);");
   if ([((JavaUtilConcurrentLocksReentrantLock *) nil_chk(purgeLock_)) tryLock]) {
     @try {
       return OrgApacheLuceneIndexDocumentsWriterFlushQueue_innerPurgeWithOrgApacheLuceneIndexIndexWriter_(self, writer);
@@ -161,13 +168,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexDocumentsWriterFlushQueue_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(queue_);
   RELEASE_(ticketCount_);
@@ -176,51 +176,83 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addDeletesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:", "addDeletes", "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "incTickets", NULL, "V", 0x2, NULL, NULL },
-    { "decTickets", NULL, "V", 0x2, NULL, NULL },
-    { "addFlushTicketWithOrgApacheLuceneIndexDocumentsWriterPerThread:", "addFlushTicket", "Lorg.apache.lucene.index.DocumentsWriterFlushQueue$SegmentFlushTicket;", 0x20, NULL, NULL },
-    { "addSegmentWithOrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket:withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:", "addSegment", "V", 0x20, NULL, NULL },
-    { "markTicketFailedWithOrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket:", "markTicketFailed", "V", 0x20, NULL, NULL },
-    { "hasTickets", NULL, "Z", 0x0, NULL, NULL },
-    { "innerPurgeWithOrgApacheLuceneIndexIndexWriter:", "innerPurge", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "forcePurgeWithOrgApacheLuceneIndexIndexWriter:", "forcePurge", "I", 0x0, "Ljava.io.IOException;", NULL },
-    { "tryPurgeWithOrgApacheLuceneIndexIndexWriter:", "tryPurge", "I", 0x0, "Ljava.io.IOException;", NULL },
-    { "getTicketCount", NULL, "I", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x20, NULL, NULL },
-    { "init", "DocumentsWriterFlushQueue", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket;", 0x20, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, 7, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 9, 10, 2, -1, -1, -1 },
+    { NULL, "I", 0x0, 11, 10, 2, -1, -1, -1 },
+    { NULL, "I", 0x0, 12, 10, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(addDeletesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:);
+  methods[2].selector = @selector(incTickets);
+  methods[3].selector = @selector(decTickets);
+  methods[4].selector = @selector(addFlushTicketWithOrgApacheLuceneIndexDocumentsWriterPerThread:);
+  methods[5].selector = @selector(addSegmentWithOrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket:withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:);
+  methods[6].selector = @selector(markTicketFailedWithOrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket:);
+  methods[7].selector = @selector(hasTickets);
+  methods[8].selector = @selector(innerPurgeWithOrgApacheLuceneIndexIndexWriter:);
+  methods[9].selector = @selector(forcePurgeWithOrgApacheLuceneIndexIndexWriter:);
+  methods[10].selector = @selector(tryPurgeWithOrgApacheLuceneIndexIndexWriter:);
+  methods[11].selector = @selector(getTicketCount);
+  methods[12].selector = @selector(clear);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queue_", NULL, 0x12, "Ljava.util.Queue;", NULL, "Ljava/util/Queue<Lorg/apache/lucene/index/DocumentsWriterFlushQueue$FlushTicket;>;", .constantValue.asLong = 0 },
-    { "ticketCount_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "purgeLock_", NULL, 0x12, "Ljava.util.concurrent.locks.ReentrantLock;", NULL, NULL, .constantValue.asLong = 0 },
+    { "queue_", "LJavaUtilQueue;", .constantValue.asLong = 0, 0x12, -1, -1, 13, -1 },
+    { "ticketCount_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "purgeLock_", "LJavaUtilConcurrentLocksReentrantLock;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.DocumentsWriterFlushQueue$FlushTicket;", "Lorg.apache.lucene.index.DocumentsWriterFlushQueue$GlobalDeletesTicket;", "Lorg.apache.lucene.index.DocumentsWriterFlushQueue$SegmentFlushTicket;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushQueue = { 2, "DocumentsWriterFlushQueue", "org.apache.lucene.index", NULL, 0x0, 13, methods, 3, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "addDeletes", "LOrgApacheLuceneIndexDocumentsWriterDeleteQueue;", "LJavaIoIOException;", "addFlushTicket", "LOrgApacheLuceneIndexDocumentsWriterPerThread;", "addSegment", "LOrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket;LOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment;", "markTicketFailed", "LOrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket;", "innerPurge", "LOrgApacheLuceneIndexIndexWriter;", "forcePurge", "tryPurge", "Ljava/util/Queue<Lorg/apache/lucene/index/DocumentsWriterFlushQueue$FlushTicket;>;", "LOrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket;LOrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket;LOrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushQueue = { "DocumentsWriterFlushQueue", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 13, 3, -1, 14, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocumentsWriterFlushQueue;
 }
 
 @end
 
+void OrgApacheLuceneIndexDocumentsWriterFlushQueue_initPackagePrivate(OrgApacheLuceneIndexDocumentsWriterFlushQueue *self) {
+  NSObject_init(self);
+  JreStrongAssignAndConsume(&self->queue_, new_JavaUtilLinkedList_init());
+  JreStrongAssignAndConsume(&self->ticketCount_, new_JavaUtilConcurrentAtomicAtomicInteger_init());
+  JreStrongAssignAndConsume(&self->purgeLock_, new_JavaUtilConcurrentLocksReentrantLock_init());
+}
+
+OrgApacheLuceneIndexDocumentsWriterFlushQueue *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushQueue, initPackagePrivate)
+}
+
+OrgApacheLuceneIndexDocumentsWriterFlushQueue *create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushQueue, initPackagePrivate)
+}
+
 void OrgApacheLuceneIndexDocumentsWriterFlushQueue_incTickets(OrgApacheLuceneIndexDocumentsWriterFlushQueue *self) {
   jint numTickets = [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(self->ticketCount_)) incrementAndGet];
-  JreAssert((numTickets > 0), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:55 condition failed: assert numTickets > 0;"));
+  JreAssert(numTickets > 0, @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:55 condition failed: assert numTickets > 0;");
 }
 
 void OrgApacheLuceneIndexDocumentsWriterFlushQueue_decTickets(OrgApacheLuceneIndexDocumentsWriterFlushQueue *self) {
   jint numTickets = [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(self->ticketCount_)) decrementAndGet];
-  JreAssert((numTickets >= 0), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:60 condition failed: assert numTickets >= 0;"));
+  JreAssert(numTickets >= 0, @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:60 condition failed: assert numTickets >= 0;");
 }
 
 jint OrgApacheLuceneIndexDocumentsWriterFlushQueue_innerPurgeWithOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexDocumentsWriterFlushQueue *self, OrgApacheLuceneIndexIndexWriter *writer) {
-  JreAssert(([((JavaUtilConcurrentLocksReentrantLock *) nil_chk(self->purgeLock_)) isHeldByCurrentThread]), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:98 condition failed: assert purgeLock.isHeldByCurrentThread();"));
+  JreAssert([((JavaUtilConcurrentLocksReentrantLock *) nil_chk(self->purgeLock_)) isHeldByCurrentThread], @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:98 condition failed: assert purgeLock.isHeldByCurrentThread();");
   jint numPurged = 0;
   while (true) {
     OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket *head;
     jboolean canPublish;
     @synchronized(self) {
-      head = [((id<JavaUtilQueue>) nil_chk(self->queue_)) peek];
+      head = JreRetainedLocalValue([((id<JavaUtilQueue>) nil_chk(self->queue_)) peek]);
       canPublish = (head != nil && [head canPublish]);
     }
     if (canPublish) {
@@ -232,7 +264,7 @@ jint OrgApacheLuceneIndexDocumentsWriterFlushQueue_innerPurgeWithOrgApacheLucene
         @synchronized(self) {
           OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket *poll = [self->queue_ poll];
           [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(self->ticketCount_)) decrementAndGet];
-          JreAssert((poll == head), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:123 condition failed: assert poll == head;"));
+          JreAssert(JreObjectEqualsEquals(poll, head), @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:123 condition failed: assert poll == head;");
         }
       }
     }
@@ -241,21 +273,6 @@ jint OrgApacheLuceneIndexDocumentsWriterFlushQueue_innerPurgeWithOrgApacheLucene
     }
   }
   return numPurged;
-}
-
-void OrgApacheLuceneIndexDocumentsWriterFlushQueue_init(OrgApacheLuceneIndexDocumentsWriterFlushQueue *self) {
-  NSObject_init(self);
-  JreStrongAssignAndConsume(&self->queue_, new_JavaUtilLinkedList_init());
-  JreStrongAssignAndConsume(&self->ticketCount_, new_JavaUtilConcurrentAtomicAtomicInteger_init());
-  JreStrongAssignAndConsume(&self->purgeLock_, new_JavaUtilConcurrentLocksReentrantLock_init());
-}
-
-OrgApacheLuceneIndexDocumentsWriterFlushQueue *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushQueue, init)
-}
-
-OrgApacheLuceneIndexDocumentsWriterFlushQueue *create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushQueue, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue)
@@ -296,18 +313,28 @@ withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLucene
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFrozenBufferedUpdates:", "FlushTicket", NULL, 0x4, NULL, NULL },
-    { "publishWithOrgApacheLuceneIndexIndexWriter:", "publish", "V", 0x404, "Ljava.io.IOException;", NULL },
-    { "canPublish", NULL, "Z", 0x404, NULL, NULL },
-    { "publishFlushedSegmentWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:withOrgApacheLuceneIndexFrozenBufferedUpdates:", "publishFlushedSegment", "V", 0x14, "Ljava.io.IOException;", NULL },
-    { "finishFlushWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:withOrgApacheLuceneIndexFrozenBufferedUpdates:", "finishFlush", "V", 0x14, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x404, 1, 2, 3, -1, -1, -1 },
+    { NULL, "Z", 0x404, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x14, 4, 5, 3, -1, -1, -1 },
+    { NULL, "V", 0x14, 6, 5, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFrozenBufferedUpdates:);
+  methods[1].selector = @selector(publishWithOrgApacheLuceneIndexIndexWriter:);
+  methods[2].selector = @selector(canPublish);
+  methods[3].selector = @selector(publishFlushedSegmentWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:withOrgApacheLuceneIndexFrozenBufferedUpdates:);
+  methods[4].selector = @selector(finishFlushWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:withOrgApacheLuceneIndexFrozenBufferedUpdates:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "frozenUpdates_", NULL, 0x4, "Lorg.apache.lucene.index.FrozenBufferedUpdates;", NULL, NULL, .constantValue.asLong = 0 },
-    { "published_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "frozenUpdates_", "LOrgApacheLuceneIndexFrozenBufferedUpdates;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "published_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket = { 2, "FlushTicket", "org.apache.lucene.index", "DocumentsWriterFlushQueue", 0x408, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFrozenBufferedUpdates;", "publish", "LOrgApacheLuceneIndexIndexWriter;", "LJavaIoIOException;", "publishFlushedSegment", "LOrgApacheLuceneIndexIndexWriter;LOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment;LOrgApacheLuceneIndexFrozenBufferedUpdates;", "finishFlush", "LOrgApacheLuceneIndexDocumentsWriterFlushQueue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket = { "FlushTicket", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x408, 5, 2, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket;
 }
 
@@ -316,13 +343,13 @@ withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLucene
 void OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket *self, OrgApacheLuceneIndexFrozenBufferedUpdates *frozenUpdates) {
   NSObject_init(self);
   self->published_ = false;
-  JreAssert((frozenUpdates != nil), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:171 condition failed: assert frozenUpdates != null;"));
+  JreAssert(frozenUpdates != nil, @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:171 condition failed: assert frozenUpdates != null;");
   JreStrongAssign(&self->frozenUpdates_, frozenUpdates);
 }
 
 void OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_publishFlushedSegmentWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_withOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket *self, OrgApacheLuceneIndexIndexWriter *indexWriter, OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *newSegment, OrgApacheLuceneIndexFrozenBufferedUpdates *globalPacket) {
-  JreAssert((newSegment != nil), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:186 condition failed: assert newSegment != null;"));
-  JreAssert((((OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *) nil_chk(newSegment))->segmentInfo_ != nil), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:187 condition failed: assert newSegment.segmentInfo != null;"));
+  JreAssert(newSegment != nil, @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:186 condition failed: assert newSegment != null;");
+  JreAssert(((OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *) nil_chk(newSegment))->segmentInfo_ != nil, @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:187 condition failed: assert newSegment.segmentInfo != null;");
   OrgApacheLuceneIndexFrozenBufferedUpdates *segmentUpdates = newSegment->segmentUpdates_;
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(((OrgApacheLuceneIndexIndexWriter *) nil_chk(indexWriter))->infoStream_)) isEnabledWithNSString:@"DW"]) {
     [indexWriter->infoStream_ messageWithNSString:@"DW" withNSString:JreStrcat("$@", @"publishFlushedSegment seg-private updates=", segmentUpdates)];
@@ -335,7 +362,7 @@ void OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_publishFlushedSeg
 
 void OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_finishFlushWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_withOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket *self, OrgApacheLuceneIndexIndexWriter *indexWriter, OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *newSegment, OrgApacheLuceneIndexFrozenBufferedUpdates *bufferedUpdates) {
   if (newSegment == nil) {
-    JreAssert((bufferedUpdates != nil), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:205 condition failed: assert bufferedUpdates != null;"));
+    JreAssert(bufferedUpdates != nil, @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:205 condition failed: assert bufferedUpdates != null;");
     if (bufferedUpdates != nil && [bufferedUpdates any]) {
       [((OrgApacheLuceneIndexIndexWriter *) nil_chk(indexWriter)) publishFrozenUpdatesWithOrgApacheLuceneIndexFrozenBufferedUpdates:bufferedUpdates];
       if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(indexWriter->infoStream_)) isEnabledWithNSString:@"DW"]) {
@@ -358,7 +385,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue_F
 }
 
 - (void)publishWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
-  JreAssert((!published_), (@"ticket was already publised - can not publish twice"));
+  JreAssert(!published_, @"ticket was already publised - can not publish twice");
   published_ = true;
   OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_finishFlushWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_withOrgApacheLuceneIndexFrozenBufferedUpdates_(self, writer, nil, frozenUpdates_);
 }
@@ -368,12 +395,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue_F
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFrozenBufferedUpdates:", "GlobalDeletesTicket", NULL, 0x4, NULL, NULL },
-    { "publishWithOrgApacheLuceneIndexIndexWriter:", "publish", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "canPublish", NULL, "Z", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, 3, -1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket = { 2, "GlobalDeletesTicket", "org.apache.lucene.index", "DocumentsWriterFlushQueue", 0x18, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFrozenBufferedUpdates:);
+  methods[1].selector = @selector(publishWithOrgApacheLuceneIndexIndexWriter:);
+  methods[2].selector = @selector(canPublish);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFrozenBufferedUpdates;", "publish", "LOrgApacheLuceneIndexIndexWriter;", "LJavaIoIOException;", "LOrgApacheLuceneIndexDocumentsWriterFlushQueue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket = { "GlobalDeletesTicket", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x18, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket;
 }
 
@@ -401,18 +436,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue_G
 }
 
 - (void)publishWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
-  JreAssert((!published_), (@"ticket was already publised - can not publish twice"));
+  JreAssert(!published_, @"ticket was already publised - can not publish twice");
   published_ = true;
   OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_finishFlushWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_withOrgApacheLuceneIndexFrozenBufferedUpdates_(self, writer, segment_, frozenUpdates_);
 }
 
 - (void)setSegmentWithOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *)segment {
-  JreAssert((!failed_), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:253 condition failed: assert !failed;"));
+  JreAssert(!failed_, @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:253 condition failed: assert !failed;");
   JreStrongAssign(&self->segment_, segment);
 }
 
 - (void)setFailed {
-  JreAssert((segment_ == nil), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:258 condition failed: assert segment == null;"));
+  JreAssert(segment_ == nil, @"org/apache/lucene/index/DocumentsWriterFlushQueue.java:258 condition failed: assert segment == null;");
   failed_ = true;
 }
 
@@ -426,18 +461,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue_G
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFrozenBufferedUpdates:", "SegmentFlushTicket", NULL, 0x4, NULL, NULL },
-    { "publishWithOrgApacheLuceneIndexIndexWriter:", "publish", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "setSegmentWithOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:", "setSegment", "V", 0x4, NULL, NULL },
-    { "setFailed", NULL, "V", 0x4, NULL, NULL },
-    { "canPublish", NULL, "Z", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFrozenBufferedUpdates:);
+  methods[1].selector = @selector(publishWithOrgApacheLuceneIndexIndexWriter:);
+  methods[2].selector = @selector(setSegmentWithOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:);
+  methods[3].selector = @selector(setFailed);
+  methods[4].selector = @selector(canPublish);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "segment_", NULL, 0x2, "Lorg.apache.lucene.index.DocumentsWriterPerThread$FlushedSegment;", NULL, NULL, .constantValue.asLong = 0 },
-    { "failed_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "segment_", "LOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "failed_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket = { 2, "SegmentFlushTicket", "org.apache.lucene.index", "DocumentsWriterFlushQueue", 0x18, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFrozenBufferedUpdates;", "publish", "LOrgApacheLuceneIndexIndexWriter;", "LJavaIoIOException;", "setSegment", "LOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment;", "LOrgApacheLuceneIndexDocumentsWriterFlushQueue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket = { "SegmentFlushTicket", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x18, 5, 2, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket;
 }
 

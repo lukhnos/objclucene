@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
@@ -25,7 +24,16 @@
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/store/IndexInput.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/idversion/IDVersionPostingsReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneCodecsIdversionIDVersionPostingsReader
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_initPackagePrivate(self);
+  return self;
+}
 
 - (void)init__WithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)termsIn
         withOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
@@ -33,7 +41,7 @@
 }
 
 - (OrgApacheLuceneCodecsBlockTermState *)newTermState {
-  return create_OrgApacheLuceneCodecsIdversionIDVersionTermState_init();
+  return create_OrgApacheLuceneCodecsIdversionIDVersionTermState_initPackagePrivate();
 }
 
 - (void)close {
@@ -62,20 +70,20 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
   if (OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_POSITIONS)) {
     OrgApacheLuceneCodecsIdversionSinglePostingsEnum *posEnum;
     if ([reuse isKindOfClass:[OrgApacheLuceneCodecsIdversionSinglePostingsEnum class]]) {
-      posEnum = (OrgApacheLuceneCodecsIdversionSinglePostingsEnum *) cast_chk(reuse, [OrgApacheLuceneCodecsIdversionSinglePostingsEnum class]);
+      posEnum = (OrgApacheLuceneCodecsIdversionSinglePostingsEnum *) reuse;
     }
     else {
-      posEnum = create_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init();
+      posEnum = create_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_initPackagePrivate();
     }
     OrgApacheLuceneCodecsIdversionIDVersionTermState *_termState = (OrgApacheLuceneCodecsIdversionIDVersionTermState *) cast_chk(termState, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]);
     [((OrgApacheLuceneCodecsIdversionSinglePostingsEnum *) nil_chk(posEnum)) resetWithInt:((OrgApacheLuceneCodecsIdversionIDVersionTermState *) nil_chk(_termState))->docID_ withLong:_termState->idVersion_];
     return posEnum;
   }
   if ([reuse isKindOfClass:[OrgApacheLuceneCodecsIdversionSingleDocsEnum class]]) {
-    docsEnum = (OrgApacheLuceneCodecsIdversionSingleDocsEnum *) cast_chk(reuse, [OrgApacheLuceneCodecsIdversionSingleDocsEnum class]);
+    docsEnum = (OrgApacheLuceneCodecsIdversionSingleDocsEnum *) reuse;
   }
   else {
-    docsEnum = create_OrgApacheLuceneCodecsIdversionSingleDocsEnum_init();
+    docsEnum = create_OrgApacheLuceneCodecsIdversionSingleDocsEnum_initPackagePrivate();
   }
   [((OrgApacheLuceneCodecsIdversionSingleDocsEnum *) nil_chk(docsEnum)) resetWithInt:((OrgApacheLuceneCodecsIdversionIDVersionTermState *) nil_chk(((OrgApacheLuceneCodecsIdversionIDVersionTermState *) cast_chk(termState, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]))))->docID_];
   return docsEnum;
@@ -93,45 +101,53 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 }
 
 - (NSString *)description {
-  return [[self getClass] getSimpleName];
+  return [[self java_getClass] getSimpleName];
 }
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init__WithOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneIndexSegmentReadState:", "init", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "newTermState", NULL, "Lorg.apache.lucene.codecs.BlockTermState;", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "decodeTermWithLongArray:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withBoolean:", "decodeTerm", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "postingsWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "IDVersionPostingsReader", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsBlockTermState;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 5, 6, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 7, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionIDVersionPostingsReader = { 2, "IDVersionPostingsReader", "org.apache.lucene.codecs.idversion", NULL, 0x10, 10, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(init__WithOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneIndexSegmentReadState:);
+  methods[2].selector = @selector(newTermState);
+  methods[3].selector = @selector(close);
+  methods[4].selector = @selector(decodeTermWithLongArray:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withBoolean:);
+  methods[5].selector = @selector(postingsWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withOrgApacheLuceneIndexPostingsEnum:withInt:);
+  methods[6].selector = @selector(ramBytesUsed);
+  methods[7].selector = @selector(getChildResources);
+  methods[8].selector = @selector(checkIntegrity);
+  methods[9].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "init", "LOrgApacheLuceneStoreIndexInput;LOrgApacheLuceneIndexSegmentReadState;", "LJavaIoIOException;", "decodeTerm", "[JLOrgApacheLuceneStoreDataInput;LOrgApacheLuceneIndexFieldInfo;LOrgApacheLuceneCodecsBlockTermState;Z", "postings", "LOrgApacheLuceneIndexFieldInfo;LOrgApacheLuceneCodecsBlockTermState;LOrgApacheLuceneIndexPostingsEnum;I", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionIDVersionPostingsReader = { "IDVersionPostingsReader", "org.apache.lucene.codecs.idversion", ptrTable, methods, NULL, 7, 0x10, 10, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader;
 }
 
 @end
 
-void OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *self) {
+void OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_initPackagePrivate(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *self) {
   OrgApacheLuceneCodecsPostingsReaderBase_init(self);
 }
 
-OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *new_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader, init)
+OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *new_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader, initPackagePrivate)
 }
 
-OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *create_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader, init)
+OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *create_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader)

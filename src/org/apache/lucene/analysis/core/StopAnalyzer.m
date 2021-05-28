@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/util/Arrays.h"
 #include "java/util/List.h"
@@ -18,6 +17,10 @@
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 #include "org/lukhnos/portmobile/file/Path.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/StopAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCoreStopAnalyzer)
 
@@ -56,6 +59,31 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(source, stopwords_));
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, 2, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 4, 5, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[2].selector = @selector(initWithOrgLukhnosPortmobileFilePath:);
+  methods[3].selector = @selector(initWithJavaIoReader:);
+  methods[4].selector = @selector(createComponentsWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "ENGLISH_STOP_WORDS_SET", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x19, -1, 6, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisUtilCharArraySet;", "LOrgLukhnosPortmobileFilePath;", "LJavaIoIOException;", "LJavaIoReader;", "createComponents", "LNSString;", &OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreStopAnalyzer = { "StopAnalyzer", "org.apache.lucene.analysis.core", ptrTable, methods, fields, 7, 0x11, 5, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisCoreStopAnalyzer;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCoreStopAnalyzer class]) {
     {
@@ -65,21 +93,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCoreStopAnalyzer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "StopAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "StopAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:", "StopAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithJavaIoReader:", "StopAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "ENGLISH_STOP_WORDS_SET", "ENGLISH_STOP_WORDS_SET", 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreStopAnalyzer = { 2, "StopAnalyzer", "org.apache.lucene.analysis.core", NULL, 0x11, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisCoreStopAnalyzer;
 }
 
 @end

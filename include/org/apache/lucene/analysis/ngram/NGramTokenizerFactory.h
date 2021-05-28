@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory))
 #define OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_
 
@@ -27,11 +33,11 @@
 /*!
  @brief Factory for <code>NGramTokenizer</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_ngrm" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.NGramTokenizerFactory" minGramSize="1" maxGramSize="2"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_ngrm" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.NGramTokenizerFactory" minGramSize="1" maxGramSize="2"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisNgramNGramTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
@@ -41,7 +47,7 @@
 /*!
  @brief Creates a new NGramTokenizerFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 /*!
  @brief Creates the <code>TokenStream</code> of n-grams from the given <code>Reader</code> and <code>AttributeFactory</code>.
@@ -62,4 +68,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramNGramTokenizerFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFieldInfo
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFieldInfo_) && (INCLUDE_ALL_OrgApacheLuceneIndexFieldInfo || defined(INCLUDE_OrgApacheLuceneIndexFieldInfo))
 #define OrgApacheLuceneIndexFieldInfo_
 
@@ -22,11 +28,11 @@
 
 /*!
  @brief Access to the Field Info file that describes document fields and whether or
- not they are indexed.
- Each segment has a separate Field Info file. Objects
- of this class are thread-safe for multiple readers, but only one thread can
- be adding documents at a time, with no other reader or writer threads
- accessing this object.
+   not they are indexed.Each segment has a separate Field Info file.
+ Objects
+   of this class are thread-safe for multiple readers, but only one thread can
+   be adding documents at a time, with no other reader or writer threads
+   accessing this object.
  */
 @interface OrgApacheLuceneIndexFieldInfo : NSObject {
  @public
@@ -45,15 +51,15 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)number
-                     withBoolean:(jboolean)storeTermVector
-                     withBoolean:(jboolean)omitNorms
-                     withBoolean:(jboolean)storePayloads
-withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOptions
-withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)docValues
-                        withLong:(jlong)dvGen
-                 withJavaUtilMap:(id<JavaUtilMap>)attributes;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                   withInt:(jint)number
+                               withBoolean:(jboolean)storeTermVector
+                               withBoolean:(jboolean)omitNorms
+                               withBoolean:(jboolean)storePayloads
+      withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOptions
+     withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)docValues
+                                  withLong:(jlong)dvGen
+                           withJavaUtilMap:(id<JavaUtilMap>)attributes;
 
 /*!
  @brief Returns internal codec attributes map.
@@ -62,7 +68,7 @@ withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)docVa
 
 /*!
  @brief Performs internal consistency checks.
- Always returns true (or throws IllegalStateException) 
+ Always returns true (or throws IllegalStateException)
  */
 - (jboolean)checkConsistency;
 
@@ -73,12 +79,12 @@ withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)docVa
 
 /*!
  @brief Returns the docValues generation of this field, or -1 if no docValues
- updates exist for it.
+  updates exist for it.
  */
 - (jlong)getDocValuesGen;
 
 /*!
- @brief Returns <code>DocValuesType</code> of the docValues; this is
+ @brief Returns <code>DocValuesType</code> of the docValues; this is 
  <code>DocValuesType.NONE</code> if the field has no docvalues.
  */
 - (OrgApacheLuceneIndexDocValuesType *)getDocValuesType;
@@ -111,12 +117,12 @@ withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)docVa
 /*!
  @brief Puts a codec attribute value.
  <p>
- This is a key-value mapping for the field that the codec can use
- to store additional metadata, and will be available to the codec
- when reading the segment via <code>getAttribute(String)</code>
- <p>
- If a value already exists for the field, it will be replaced with 
- the new value.
+  This is a key-value mapping for the field that the codec can use
+  to store additional metadata, and will be available to the codec
+  when reading the segment via <code>getAttribute(String)</code>
+  <p>
+  If a value already exists for the field, it will be replaced with 
+  the new value.
  */
 - (NSString *)putAttributeWithNSString:(NSString *)key
                           withNSString:(NSString *)value;
@@ -149,6 +155,10 @@ withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)docVa
               withBoolean:(jboolean)storePayloads
 withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOptions;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFieldInfo)
@@ -165,4 +175,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfo)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFieldInfo")

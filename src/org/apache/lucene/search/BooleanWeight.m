@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Math.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
@@ -35,13 +34,16 @@
 #include "org/apache/lucene/search/Weight.h"
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/BooleanWeight must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchBooleanWeight ()
 
 /*!
- @brief Create a new scorer for the given required clauses.
- Note that
- <code>requiredScoring</code> is a subset of <code>required</code> containing
- required clauses that should participate in scoring. 
+ @brief Create a new scorer for the given required clauses.Note that
+   <code>requiredScoring</code> is a subset of <code>required</code> containing
+   required clauses that should participate in scoring.
  */
 - (OrgApacheLuceneSearchScorer *)reqWithJavaUtilList:(id<JavaUtilList>)required
                                     withJavaUtilList:(id<JavaUtilList>)requiredScoring
@@ -62,33 +64,31 @@ __attribute__((unused)) static OrgApacheLuceneSearchScorer *OrgApacheLuceneSearc
 
 __attribute__((unused)) static OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_optWithJavaUtilList_withInt_withBoolean_(OrgApacheLuceneSearchBooleanWeight *self, id<JavaUtilList> optional, jint minShouldMatch, jboolean disableCoord);
 
-@interface OrgApacheLuceneSearchBooleanWeight_$1 : OrgApacheLuceneSearchFilterScorer
+@interface OrgApacheLuceneSearchBooleanWeight_1 : OrgApacheLuceneSearchFilterScorer
+
+- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg;
 
 - (jfloat)score;
 
 - (jint)freq;
 
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanWeight_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanWeight_1)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchBooleanWeight_$1 *self, OrgApacheLuceneSearchScorer *arg$0);
+__attribute__((unused)) static void OrgApacheLuceneSearchBooleanWeight_1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchBooleanWeight_1 *self, OrgApacheLuceneSearchScorer *inArg);
 
-__attribute__((unused)) static OrgApacheLuceneSearchBooleanWeight_$1 *new_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchBooleanWeight_1 *new_OrgApacheLuceneSearchBooleanWeight_1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *inArg) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchBooleanWeight_$1 *create_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchBooleanWeight_1 *create_OrgApacheLuceneSearchBooleanWeight_1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *inArg);
 
 @implementation OrgApacheLuceneSearchBooleanWeight
 
-- (instancetype)initWithOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)query
-                   withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                              withBoolean:(jboolean)needsScores
-                                              withBoolean:(jboolean)disableCoord {
-  OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(self, query, searcher, needsScores, disableCoord);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)query
+                                 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                            withBoolean:(jboolean)needsScores
+                                                            withBoolean:(jboolean)disableCoord {
+  OrgApacheLuceneSearchBooleanWeight_initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(self, query, searcher, needsScores, disableCoord);
   return self;
 }
 
@@ -146,11 +146,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
   jboolean fail = false;
   jint matchCount = 0;
   jint shouldMatchCount = 0;
-  id<JavaUtilIterator> cIter = [query_ iterator];
-  for (id<JavaUtilIterator> wIter = [((JavaUtilArrayList *) nil_chk(weights_)) iterator]; [((id<JavaUtilIterator>) nil_chk(wIter)) hasNext]; ) {
-    OrgApacheLuceneSearchWeight *w = [wIter next];
-    OrgApacheLuceneSearchBooleanClause *c = [((id<JavaUtilIterator>) nil_chk(cIter)) next];
-    OrgApacheLuceneSearchExplanation *e = [((OrgApacheLuceneSearchWeight *) nil_chk(w)) explainWithOrgApacheLuceneIndexLeafReaderContext:context withInt:doc];
+  id<JavaUtilIterator> cIter = JreRetainedLocalValue([query_ iterator]);
+  for (id<JavaUtilIterator> wIter = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(weights_)) iterator]); [((id<JavaUtilIterator>) nil_chk(wIter)) hasNext]; ) {
+    OrgApacheLuceneSearchWeight *w = JreRetainedLocalValue([wIter next]);
+    OrgApacheLuceneSearchBooleanClause *c = JreRetainedLocalValue([((id<JavaUtilIterator>) nil_chk(cIter)) next]);
+    OrgApacheLuceneSearchExplanation *e = JreRetainedLocalValue([((OrgApacheLuceneSearchWeight *) nil_chk(w)) explainWithOrgApacheLuceneIndexLeafReaderContext:context withInt:doc]);
     if ([((OrgApacheLuceneSearchExplanation *) nil_chk(e)) isMatch]) {
       if ([((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) isScoring]) {
         [subs addWithId:e];
@@ -197,10 +197,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
 
 - (OrgApacheLuceneSearchBooleanScorer *)booleanScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   id<JavaUtilList> optional = create_JavaUtilArrayList_init();
-  id<JavaUtilIterator> cIter = [((OrgApacheLuceneSearchBooleanQuery *) nil_chk(query_)) iterator];
+  id<JavaUtilIterator> cIter = JreRetainedLocalValue([((OrgApacheLuceneSearchBooleanQuery *) nil_chk(query_)) iterator]);
   for (OrgApacheLuceneSearchWeight * __strong w in nil_chk(weights_)) {
-    OrgApacheLuceneSearchBooleanClause *c = [((id<JavaUtilIterator>) nil_chk(cIter)) next];
-    OrgApacheLuceneSearchBulkScorer *subScorer = [((OrgApacheLuceneSearchWeight *) nil_chk(w)) bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+    OrgApacheLuceneSearchBooleanClause *c = JreRetainedLocalValue([((id<JavaUtilIterator>) nil_chk(cIter)) next]);
+    OrgApacheLuceneSearchBulkScorer *subScorer = JreRetainedLocalValue([((OrgApacheLuceneSearchWeight *) nil_chk(w)) bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
     if (subScorer == nil) {
       if ([((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) isRequired]) {
         return nil;
@@ -222,7 +222,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
   if ([query_ getMinimumNumberShouldMatch] > [optional size]) {
     return nil;
   }
-  return create_OrgApacheLuceneSearchBooleanScorer_initWithOrgApacheLuceneSearchBooleanWeight_withBoolean_withInt_withJavaUtilCollection_withInt_withBoolean_(self, disableCoord_, maxCoord_, optional, JavaLangMath_maxWithInt_withInt_(1, [query_ getMinimumNumberShouldMatch]), needsScores_);
+  return create_OrgApacheLuceneSearchBooleanScorer_initPackagePrivateWithOrgApacheLuceneSearchBooleanWeight_withBoolean_withInt_withJavaUtilCollection_withInt_withBoolean_(self, disableCoord_, maxCoord_, optional, JavaLangMath_maxWithInt_withInt_(1, [query_ getMinimumNumberShouldMatch]), needsScores_);
 }
 
 - (OrgApacheLuceneSearchBulkScorer *)bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
@@ -233,7 +233,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
       costThreshold = -1;
     }
     else {
-      costThreshold = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) maxDoc] / 3;
+      costThreshold = JreIntDiv([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) maxDoc], 3);
     }
     if ([bulkScorer cost] > costThreshold) {
       return bulkScorer;
@@ -248,10 +248,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
   id<JavaUtilList> requiredScoring = create_JavaUtilArrayList_init();
   id<JavaUtilList> prohibited = create_JavaUtilArrayList_init();
   id<JavaUtilList> optional = create_JavaUtilArrayList_init();
-  id<JavaUtilIterator> cIter = [query_ iterator];
+  id<JavaUtilIterator> cIter = JreRetainedLocalValue([query_ iterator]);
   for (OrgApacheLuceneSearchWeight * __strong w in nil_chk(weights_)) {
-    OrgApacheLuceneSearchBooleanClause *c = [((id<JavaUtilIterator>) nil_chk(cIter)) next];
-    OrgApacheLuceneSearchScorer *subScorer = [((OrgApacheLuceneSearchWeight *) nil_chk(w)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+    OrgApacheLuceneSearchBooleanClause *c = JreRetainedLocalValue([((id<JavaUtilIterator>) nil_chk(cIter)) next]);
+    OrgApacheLuceneSearchScorer *subScorer = JreRetainedLocalValue([((OrgApacheLuceneSearchWeight *) nil_chk(w)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
     if (subScorer == nil) {
       if ([((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) isRequired]) {
         return nil;
@@ -295,15 +295,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
   OrgApacheLuceneSearchScorer *opt = OrgApacheLuceneSearchBooleanWeight_optWithJavaUtilList_withInt_withBoolean_(self, optional, minShouldMatch, true);
   if (disableCoord_) {
     if (minShouldMatch > 0) {
-      return create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), 1.0f);
+      return create_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), 1.0f);
     }
     else {
-      return create_OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(req, opt);
+      return create_OrgApacheLuceneSearchReqOptSumScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(req, opt);
     }
   }
   else if ([optional size] == 1) {
     if (minShouldMatch > 0) {
-      return create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), [self coordWithInt:[requiredScoring size] + 1 withInt:maxCoord_]);
+      return create_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), [self coordWithInt:[requiredScoring size] + 1 withInt:maxCoord_]);
     }
     else {
       jfloat coordReq = [self coordWithInt:[requiredScoring size] withInt:maxCoord_];
@@ -347,36 +347,53 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchBooleanQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:withBoolean:", "BooleanWeight", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "coordWithInt:withInt:", "coord", "F", 0x1, NULL, NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
-    { "booleanScorerWithOrgApacheLuceneIndexLeafReaderContext:", "booleanScorer", "Lorg.apache.lucene.search.BooleanScorer;", 0x0, "Ljava.io.IOException;", NULL },
-    { "bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:", "bulkScorer", "Lorg.apache.lucene.search.BulkScorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "reqWithJavaUtilList:withJavaUtilList:withBoolean:", "req", "Lorg.apache.lucene.search.Scorer;", 0x2, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;Z)Lorg/apache/lucene/search/Scorer;" },
-    { "exclWithOrgApacheLuceneSearchScorer:withJavaUtilList:", "excl", "Lorg.apache.lucene.search.Scorer;", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/Scorer;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;)Lorg/apache/lucene/search/Scorer;" },
-    { "optWithJavaUtilList:withInt:withBoolean:", "opt", "Lorg.apache.lucene.search.Scorer;", 0x2, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;IZ)Lorg/apache/lucene/search/Scorer;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, 4, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "F", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 9, 10, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBooleanScorer;", 0x0, 11, 12, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBulkScorer;", 0x1, 13, 12, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 14, 12, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x2, 15, 16, -1, 17, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x2, 18, 19, 1, 20, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x2, 21, 22, 1, 23, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:withBoolean:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(getValueForNormalization);
+  methods[3].selector = @selector(coordWithInt:withInt:);
+  methods[4].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[5].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  methods[6].selector = @selector(booleanScorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[7].selector = @selector(bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[8].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[9].selector = @selector(reqWithJavaUtilList:withJavaUtilList:withBoolean:);
+  methods[10].selector = @selector(exclWithOrgApacheLuceneSearchScorer:withJavaUtilList:);
+  methods[11].selector = @selector(optWithJavaUtilList:withInt:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "similarity_", NULL, 0x10, "Lorg.apache.lucene.search.similarities.Similarity;", NULL, NULL, .constantValue.asLong = 0 },
-    { "query_", NULL, 0x10, "Lorg.apache.lucene.search.BooleanQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "weights_", NULL, 0x10, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/search/Weight;>;", .constantValue.asLong = 0 },
-    { "maxCoord_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "disableCoord_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "needsScores_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "coords_", NULL, 0x10, "[F", NULL, NULL, .constantValue.asLong = 0 },
+    { "similarity_", "LOrgApacheLuceneSearchSimilaritiesSimilarity;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "query_", "LOrgApacheLuceneSearchBooleanQuery;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "weights_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x10, -1, -1, 24, -1 },
+    { "maxCoord_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "disableCoord_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "needsScores_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "coords_", "[F", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanWeight = { 2, "BooleanWeight", "org.apache.lucene.search", NULL, 0x10, 12, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchBooleanQuery;LOrgApacheLuceneSearchIndexSearcher;ZZ", "LJavaIoIOException;", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "coord", "II", "normalize", "FF", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "booleanScorer", "LOrgApacheLuceneIndexLeafReaderContext;", "bulkScorer", "scorer", "req", "LJavaUtilList;LJavaUtilList;Z", "(Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;Z)Lorg/apache/lucene/search/Scorer;", "excl", "LOrgApacheLuceneSearchScorer;LJavaUtilList;", "(Lorg/apache/lucene/search/Scorer;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;)Lorg/apache/lucene/search/Scorer;", "opt", "LJavaUtilList;IZ", "(Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;IZ)Lorg/apache/lucene/search/Scorer;", "Ljava/util/ArrayList<Lorg/apache/lucene/search/Weight;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanWeight = { "BooleanWeight", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x10, 12, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchBooleanWeight;
 }
 
 @end
 
-void OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanWeight *self, OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) {
+void OrgApacheLuceneSearchBooleanWeight_initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanWeight *self, OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) {
   OrgApacheLuceneSearchWeight_initWithOrgApacheLuceneSearchQuery_(self, query);
   JreStrongAssign(&self->query_, query);
   self->needsScores_ = needsScores;
@@ -385,7 +402,7 @@ void OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuer
   jint i = 0;
   jint maxCoord = 0;
   for (OrgApacheLuceneSearchBooleanClause * __strong c in nil_chk(query)) {
-    OrgApacheLuceneSearchWeight *w = [searcher createWeightWithOrgApacheLuceneSearchQuery:[((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) getQuery] withBoolean:needsScores && [c isScoring]];
+    OrgApacheLuceneSearchWeight *w = JreRetainedLocalValue([searcher createWeightWithOrgApacheLuceneSearchQuery:[((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) getQuery] withBoolean:needsScores && [c isScoring]]);
     [self->weights_ addWithId:w];
     if ([c isScoring]) {
       maxCoord++;
@@ -409,22 +426,22 @@ void OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuer
   }
 }
 
-OrgApacheLuceneSearchBooleanWeight *new_OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanWeight, initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_, query, searcher, needsScores, disableCoord)
+OrgApacheLuceneSearchBooleanWeight *new_OrgApacheLuceneSearchBooleanWeight_initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanWeight, initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_, query, searcher, needsScores, disableCoord)
 }
 
-OrgApacheLuceneSearchBooleanWeight *create_OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanWeight, initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_, query, searcher, needsScores, disableCoord)
+OrgApacheLuceneSearchBooleanWeight *create_OrgApacheLuceneSearchBooleanWeight_initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanWeight, initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_, query, searcher, needsScores, disableCoord)
 }
 
 OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_reqWithJavaUtilList_withJavaUtilList_withBoolean_(OrgApacheLuceneSearchBooleanWeight *self, id<JavaUtilList> required, id<JavaUtilList> requiredScoring, jboolean disableCoord) {
   if ([((id<JavaUtilList>) nil_chk(required)) size] == 1) {
-    OrgApacheLuceneSearchScorer *req = [required getWithInt:0];
+    OrgApacheLuceneSearchScorer *req = JreRetainedLocalValue([required getWithInt:0]);
     if (self->needsScores_ == false) {
       return req;
     }
     if ([((id<JavaUtilList>) nil_chk(requiredScoring)) isEmpty]) {
-      return create_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(req);
+      return create_OrgApacheLuceneSearchBooleanWeight_1_initWithOrgApacheLuceneSearchScorer_(req);
     }
     jfloat boost = 1.0f;
     if (disableCoord == false) {
@@ -436,7 +453,7 @@ OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_reqWithJavaUtilL
     return create_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_initWithOrgApacheLuceneSearchScorer_withFloat_(req, boost);
   }
   else {
-    return create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, required, requiredScoring, disableCoord ? 1.0f : [self coordWithInt:[((id<JavaUtilList>) nil_chk(requiredScoring)) size] withInt:self->maxCoord_]);
+    return create_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, required, requiredScoring, disableCoord ? 1.0f : [self coordWithInt:[((id<JavaUtilList>) nil_chk(requiredScoring)) size] withInt:self->maxCoord_]);
   }
 }
 
@@ -445,18 +462,18 @@ OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_exclWithOrgApach
     return main;
   }
   else if ([prohibited size] == 1) {
-    return create_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(main, [prohibited getWithInt:0]);
+    return create_OrgApacheLuceneSearchReqExclScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(main, [prohibited getWithInt:0]);
   }
   else {
     IOSFloatArray *coords = [IOSFloatArray arrayWithLength:[prohibited size] + 1];
     JavaUtilArrays_fillWithFloatArray_withFloat_(coords, 1.0f);
-    return create_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(main, create_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(self, prohibited, coords, false));
+    return create_OrgApacheLuceneSearchReqExclScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(main, create_OrgApacheLuceneSearchDisjunctionSumScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(self, prohibited, coords, false));
   }
 }
 
 OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_optWithJavaUtilList_withInt_withBoolean_(OrgApacheLuceneSearchBooleanWeight *self, id<JavaUtilList> optional, jint minShouldMatch, jboolean disableCoord) {
   if ([((id<JavaUtilList>) nil_chk(optional)) size] == 1) {
-    OrgApacheLuceneSearchScorer *opt = [optional getWithInt:0];
+    OrgApacheLuceneSearchScorer *opt = JreRetainedLocalValue([optional getWithInt:0]);
     if (!disableCoord && self->maxCoord_ > 1) {
       return create_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_initWithOrgApacheLuceneSearchScorer_withFloat_(opt, [self coordWithInt:1 withInt:self->maxCoord_]);
     }
@@ -474,17 +491,22 @@ OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_optWithJavaUtilL
       coords = self->coords_;
     }
     if (minShouldMatch > 1) {
-      return create_OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(self, optional, minShouldMatch, coords);
+      return create_OrgApacheLuceneSearchMinShouldMatchSumScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(self, optional, minShouldMatch, coords);
     }
     else {
-      return create_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(self, optional, coords, self->needsScores_);
+      return create_OrgApacheLuceneSearchDisjunctionSumScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(self, optional, coords, self->needsScores_);
     }
   }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanWeight)
 
-@implementation OrgApacheLuceneSearchBooleanWeight_$1
+@implementation OrgApacheLuceneSearchBooleanWeight_1
+
+- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg {
+  OrgApacheLuceneSearchBooleanWeight_1_initWithOrgApacheLuceneSearchScorer_(self, inArg);
+  return self;
+}
 
 - (jfloat)score {
   return 0.0f;
@@ -494,34 +516,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanWeight)
   return 0;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg$0 {
-  OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(self, arg$0);
-  return self;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchScorer:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchBooleanWeight", "reqWithJavaUtilList:withJavaUtilList:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanWeight_$1 = { 2, "", "org.apache.lucene.search", "BooleanWeight", 0x8008, 3, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchBooleanWeight_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(score);
+  methods[2].selector = @selector(freq);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "LOrgApacheLuceneSearchBooleanWeight;", "reqWithJavaUtilList:withJavaUtilList:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanWeight_1 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x8010, 3, 0, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneSearchBooleanWeight_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchBooleanWeight_$1 *self, OrgApacheLuceneSearchScorer *arg$0) {
-  OrgApacheLuceneSearchFilterScorer_initWithOrgApacheLuceneSearchScorer_(self, arg$0);
+void OrgApacheLuceneSearchBooleanWeight_1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchBooleanWeight_1 *self, OrgApacheLuceneSearchScorer *inArg) {
+  OrgApacheLuceneSearchFilterScorer_initWithOrgApacheLuceneSearchScorer_(self, inArg);
 }
 
-OrgApacheLuceneSearchBooleanWeight_$1 *new_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanWeight_$1, initWithOrgApacheLuceneSearchScorer_, arg$0)
+OrgApacheLuceneSearchBooleanWeight_1 *new_OrgApacheLuceneSearchBooleanWeight_1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanWeight_1, initWithOrgApacheLuceneSearchScorer_, inArg)
 }
 
-OrgApacheLuceneSearchBooleanWeight_$1 *create_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanWeight_$1, initWithOrgApacheLuceneSearchScorer_, arg$0)
+OrgApacheLuceneSearchBooleanWeight_1 *create_OrgApacheLuceneSearchBooleanWeight_1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanWeight_1, initWithOrgApacheLuceneSearchScorer_, inArg)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanWeight_$1)

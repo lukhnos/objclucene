@@ -10,6 +10,10 @@
 #include "org/apache/lucene/util/packed/DirectPacked64SingleBlockReader.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/DirectPacked64SingleBlockReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader () {
  @public
   OrgApacheLuceneStoreIndexInput *in_;
@@ -25,24 +29,24 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader, in
 
 @implementation OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader
 
-- (instancetype)initWithInt:(jint)bitsPerValue
-                    withInt:(jint)valueCount
-withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
-  OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(self, bitsPerValue, valueCount, inArg);
+- (instancetype)initPackagePrivateWithInt:(jint)bitsPerValue
+                                  withInt:(jint)valueCount
+       withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
+  OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(self, bitsPerValue, valueCount, inArg);
   return self;
 }
 
 - (jlong)getWithInt:(jint)index {
-  jint blockOffset = index / valuesPerBlock_;
+  jint blockOffset = JreIntDiv(index, valuesPerBlock_);
   jlong skip = JreLShift64(((jlong) blockOffset), 3);
   @try {
     [((OrgApacheLuceneStoreIndexInput *) nil_chk(in_)) seekWithLong:startPointer_ + skip];
     jlong block = [in_ readLong];
-    jint offsetInBlock = index % valuesPerBlock_;
+    jint offsetInBlock = JreIntMod(index, valuesPerBlock_);
     return (JreURShift64(block, (offsetInBlock * bitsPerValue_))) & mask_;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"failed", e);
+    @throw create_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"failed", e);
   }
 }
 
@@ -56,39 +60,47 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withOrgApacheLuceneStoreIndexInput:", "DirectPacked64SingleBlockReader", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:withInt:withOrgApacheLuceneStoreIndexInput:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(ramBytesUsed);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x12, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bitsPerValue_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startPointer_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "valuesPerBlock_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "mask_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "bitsPerValue_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "startPointer_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "valuesPerBlock_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "mask_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader = { 2, "DirectPacked64SingleBlockReader", "org.apache.lucene.util.packed", NULL, 0x10, 3, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IILOrgApacheLuceneStoreIndexInput;", "get", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader = { "DirectPacked64SingleBlockReader", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x10, 3, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader *self, jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
+void OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader *self, jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
   OrgApacheLuceneUtilPackedPackedInts_ReaderImpl_initWithInt_(self, valueCount);
   JreStrongAssign(&self->in_, inArg);
   self->bitsPerValue_ = bitsPerValue;
   self->startPointer_ = [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) getFilePointer];
-  self->valuesPerBlock_ = 64 / bitsPerValue;
+  self->valuesPerBlock_ = JreIntDiv(64, bitsPerValue);
   self->mask_ = ~(JreLShift64(~0LL, bitsPerValue));
 }
 
-OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader *new_OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader, initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
+OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader *new_OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader, initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
 }
 
-OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader *create_OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader, initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
+OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader *create_OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader, initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader)

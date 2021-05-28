@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/lukhnos/portmobile/file/StandardCopyOption.h"
 
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/StandardCopyOption must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgLukhnosPortmobileFileStandardCopyOption)
 
 OrgLukhnosPortmobileFileStandardCopyOption *OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE;
@@ -23,22 +27,28 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "ATOMIC_MOVE", "LOrgLukhnosPortmobileFileStandardCopyOption;", .constantValue.asLong = 0, 0x19, -1, 0, -1, -1 },
+  };
+  static const void *ptrTable[] = { &OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileStandardCopyOption = { "StandardCopyOption", "org.lukhnos.portmobile.file", ptrTable, methods, fields, 7, 0x1, 1, 1, -1, -1, -1, -1, -1 };
+  return &_OrgLukhnosPortmobileFileStandardCopyOption;
+}
+
 + (void)initialize {
   if (self == [OrgLukhnosPortmobileFileStandardCopyOption class]) {
     JreStrongAssignAndConsume(&OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE, new_OrgLukhnosPortmobileFileStandardCopyOption_init());
     J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileFileStandardCopyOption)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "StandardCopyOption", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "ATOMIC_MOVE", "ATOMIC_MOVE", 0x19, "Lorg.lukhnos.portmobile.file.StandardCopyOption;", &OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileStandardCopyOption = { 2, "StandardCopyOption", "org.lukhnos.portmobile.file", NULL, 0x1, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgLukhnosPortmobileFileStandardCopyOption;
 }
 
 @end

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder))
 #define OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_
 
@@ -31,13 +37,17 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserXmlQueryBuilder:(id<OrgApacheLuceneQueryparserXmlQueryBuilder>)factory;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserXmlQueryBuilder:(id<OrgApacheLuceneQueryparserXmlQueryBuilder>)factory;
 
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
 #pragma mark Package-Private
 
 + (OrgApacheLuceneSearchBooleanClause_Occur *)getOccursValueWithOrgW3cDomElement:(id<OrgW3cDomElement>)clauseElem;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -55,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder")

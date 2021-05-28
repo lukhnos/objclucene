@@ -47,10 +47,15 @@
 
 @class OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParser must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser () {
  @public
   jint jj_ntk_;
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken *jj_scanpos_, *jj_lastpos_;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *jj_scanpos_;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *jj_lastpos_;
   jint jj_la_;
   jint jj_gen_;
   IOSIntArray *jj_la1_;
@@ -120,12 +125,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSynt
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser, jj_expentry_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser, jj_lasttokens_, IOSIntArray *)
 
-inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_get_jj_la1_0();
+inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_get_jj_la1_0(void);
 inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_set_jj_la1_0(IOSIntArray *value);
 static IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_la1_0;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser, jj_la1_0, IOSIntArray *)
 
-inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_get_jj_la1_1();
+inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_get_jj_la1_1(void);
 inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_set_jj_la1_1(IOSIntArray *value);
 static IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_la1_1;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser, jj_la1_1, IOSIntArray *)
@@ -172,9 +177,9 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserFlexibleStanda
 
 __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_3R_11(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self);
 
-__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_la1_init_0();
+__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_la1_init_0(void);
 
-__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_la1_init_1();
+__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_la1_init_1(void);
 
 __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleStandardParserToken *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_consume_tokenWithInt_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self, jint kind);
 
@@ -198,9 +203,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardParserStandar
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess_init(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess *self);
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess_init();
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess)
 
@@ -223,12 +228,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     return querynode;
   }
   @catch (OrgApacheLuceneQueryparserFlexibleStandardParserParseException *tme) {
-    [((OrgApacheLuceneQueryparserFlexibleStandardParserParseException *) nil_chk(tme)) setQueryWithJavaLangCharSequence:query];
+    [tme setQueryWithJavaLangCharSequence:query];
     @throw tme;
   }
   @catch (JavaLangError *tme) {
-    id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message = create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_CANNOT_PARSE), [IOSObjectArray arrayWithObjects:(id[]){ query, [((JavaLangError *) nil_chk(tme)) getMessage] } count:2 type:NSObject_class_()]);
-    OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException *e = create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithNSException_(tme);
+    id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message = create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_CANNOT_PARSE), [IOSObjectArray arrayWithObjects:(id[]){ query, [tme getMessage] } count:2 type:NSObject_class_()]);
+    OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException *e = create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithJavaLangThrowable_(tme);
     [e setQueryWithJavaLangCharSequence:query];
     [e setNonLocalizedMessageWithOrgApacheLuceneQueryparserFlexibleMessagesMessage:message];
     @throw e;
@@ -372,7 +377,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneQueryparserFlexibleStandardParserToken *)getTokenWithInt:(jint)index {
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken *t = token_;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *t = JreRetainedLocalValue(token_);
   for (jint i = 0; i < index; i++) {
     if (((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(t))->next_ != nil) t = t->next_;
     else t = JreStrongAssign(&t->next_, [((OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *) nil_chk(token_source_)) getNextToken]);
@@ -455,6 +460,120 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;", 0x11, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x11, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x11, 6, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x11, 7, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x11, 8, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x11, 9, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x11, 10, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x11, 11, 5, 3, -1, -1, -1 },
+    { NULL, "Z", 0x2, 12, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 14, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 15, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleStandardParserToken;", 0x2, 18, 13, 3, -1, -1, -1 },
+    { NULL, "Z", 0x2, 19, 13, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleStandardParserToken;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleStandardParserToken;", 0x11, 20, 13, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 21, 22, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleStandardParserParseException;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 23, 22, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(parseWithJavaLangCharSequence:withJavaLangCharSequence:);
+  methods[2].selector = @selector(Modifiers);
+  methods[3].selector = @selector(TopLevelQueryWithJavaLangCharSequence:);
+  methods[4].selector = @selector(QueryWithJavaLangCharSequence:);
+  methods[5].selector = @selector(DisjQueryWithJavaLangCharSequence:);
+  methods[6].selector = @selector(ConjQueryWithJavaLangCharSequence:);
+  methods[7].selector = @selector(ModClauseWithJavaLangCharSequence:);
+  methods[8].selector = @selector(ClauseWithJavaLangCharSequence:);
+  methods[9].selector = @selector(TermWithJavaLangCharSequence:);
+  methods[10].selector = @selector(jj_2_1WithInt:);
+  methods[11].selector = @selector(jj_2_2WithInt:);
+  methods[12].selector = @selector(jj_3_1);
+  methods[13].selector = @selector(jj_3R_8);
+  methods[14].selector = @selector(jj_3R_10);
+  methods[15].selector = @selector(jj_3R_7);
+  methods[16].selector = @selector(jj_3R_9);
+  methods[17].selector = @selector(jj_3R_5);
+  methods[18].selector = @selector(jj_3R_4);
+  methods[19].selector = @selector(jj_3R_6);
+  methods[20].selector = @selector(jj_3_2);
+  methods[21].selector = @selector(jj_3R_12);
+  methods[22].selector = @selector(jj_3R_11);
+  methods[23].selector = @selector(jj_la1_init_0);
+  methods[24].selector = @selector(jj_la1_init_1);
+  methods[25].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:);
+  methods[26].selector = @selector(ReInitWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:);
+  methods[27].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager:);
+  methods[28].selector = @selector(ReInitWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager:);
+  methods[29].selector = @selector(jj_consume_tokenWithInt:);
+  methods[30].selector = @selector(jj_scan_tokenWithInt:);
+  methods[31].selector = @selector(getNextToken);
+  methods[32].selector = @selector(getTokenWithInt:);
+  methods[33].selector = @selector(jj_ntk);
+  methods[34].selector = @selector(jj_add_error_tokenWithInt:withInt:);
+  methods[35].selector = @selector(generateParseException);
+  methods[36].selector = @selector(enable_tracing);
+  methods[37].selector = @selector(disable_tracing);
+  methods[38].selector = @selector(jj_rescan_token);
+  methods[39].selector = @selector(jj_saveWithInt:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "token_source_", "LOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "token_", "LOrgApacheLuceneQueryparserFlexibleStandardParserToken;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "jj_nt_", "LOrgApacheLuceneQueryparserFlexibleStandardParserToken;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "jj_ntk_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_scanpos_", "LOrgApacheLuceneQueryparserFlexibleStandardParserToken;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_lastpos_", "LOrgApacheLuceneQueryparserFlexibleStandardParserToken;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_la_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_gen_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_la1_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "jj_la1_0", "[I", .constantValue.asLong = 0, 0xa, -1, 24, -1, -1 },
+    { "jj_la1_1", "[I", .constantValue.asLong = 0, 0xa, -1, 25, -1, -1 },
+    { "jj_2_rtns_", "[LOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "jj_rescan_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_gc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_ls_", "LOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "jj_expentries_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 26, -1 },
+    { "jj_expentry_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_kind_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_lasttokens_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_endpos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "parse", "LJavaLangCharSequence;LJavaLangCharSequence;", "LOrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException;", "LOrgApacheLuceneQueryparserFlexibleStandardParserParseException;", "TopLevelQuery", "LJavaLangCharSequence;", "Query", "DisjQuery", "ConjQuery", "ModClause", "Clause", "Term", "jj_2_1", "I", "jj_2_2", "LOrgApacheLuceneQueryparserFlexibleStandardParserCharStream;", "ReInit", "LOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager;", "jj_consume_token", "jj_scan_token", "getToken", "jj_add_error_token", "II", "jj_save", &OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_la1_0, &OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_la1_1, "Ljava/util/List<[I>;", "LOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess;LOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser = { "StandardSyntaxParser", "org.apache.lucene.queryparser.flexible.standard.parser", ptrTable, methods, fields, 7, 0x1, 40, 20, -1, 27, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser class]) {
     {
@@ -463,76 +582,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "StandardSyntaxParser", NULL, 0x1, NULL, NULL },
-    { "parseWithJavaLangCharSequence:withJavaLangCharSequence:", "parse", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeParseException;", NULL },
-    { "Modifiers", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ModifierQueryNode$Modifier;", 0x11, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
-    { "TopLevelQueryWithJavaLangCharSequence:", "TopLevelQuery", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x11, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
-    { "QueryWithJavaLangCharSequence:", "Query", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x11, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
-    { "DisjQueryWithJavaLangCharSequence:", "DisjQuery", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x11, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
-    { "ConjQueryWithJavaLangCharSequence:", "ConjQuery", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x11, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
-    { "ModClauseWithJavaLangCharSequence:", "ModClause", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x11, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
-    { "ClauseWithJavaLangCharSequence:", "Clause", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x11, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
-    { "TermWithJavaLangCharSequence:", "Term", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x11, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
-    { "jj_2_1WithInt:", "jj_2_1", "Z", 0x2, NULL, NULL },
-    { "jj_2_2WithInt:", "jj_2_2", "Z", 0x2, NULL, NULL },
-    { "jj_3_1", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_3R_8", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_3R_10", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_3R_7", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_3R_9", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_3R_5", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_3R_4", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_3R_6", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_3_2", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_3R_12", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_3R_11", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_la1_init_0", NULL, "V", 0xa, NULL, NULL },
-    { "jj_la1_init_1", NULL, "V", 0xa, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:", "StandardSyntaxParser", NULL, 0x1, NULL, NULL },
-    { "ReInitWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:", "ReInit", "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager:", "StandardSyntaxParser", NULL, 0x1, NULL, NULL },
-    { "ReInitWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager:", "ReInit", "V", 0x1, NULL, NULL },
-    { "jj_consume_tokenWithInt:", "jj_consume_token", "Lorg.apache.lucene.queryparser.flexible.standard.parser.Token;", 0x2, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
-    { "jj_scan_tokenWithInt:", "jj_scan_token", "Z", 0x2, NULL, NULL },
-    { "getNextToken", NULL, "Lorg.apache.lucene.queryparser.flexible.standard.parser.Token;", 0x11, NULL, NULL },
-    { "getTokenWithInt:", "getToken", "Lorg.apache.lucene.queryparser.flexible.standard.parser.Token;", 0x11, NULL, NULL },
-    { "jj_ntk", NULL, "I", 0x2, NULL, NULL },
-    { "jj_add_error_tokenWithInt:withInt:", "jj_add_error_token", "V", 0x2, NULL, NULL },
-    { "generateParseException", NULL, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", 0x1, NULL, NULL },
-    { "enable_tracing", NULL, "V", 0x11, NULL, NULL },
-    { "disable_tracing", NULL, "V", 0x11, NULL, NULL },
-    { "jj_rescan_token", NULL, "V", 0x2, NULL, NULL },
-    { "jj_saveWithInt:withInt:", "jj_save", "V", 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "token_source_", NULL, 0x1, "Lorg.apache.lucene.queryparser.flexible.standard.parser.StandardSyntaxParserTokenManager;", NULL, NULL, .constantValue.asLong = 0 },
-    { "token_", NULL, 0x1, "Lorg.apache.lucene.queryparser.flexible.standard.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_nt_", NULL, 0x1, "Lorg.apache.lucene.queryparser.flexible.standard.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_ntk_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_scanpos_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.standard.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_lastpos_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.standard.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_la_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_gen_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_la1_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_la1_0", "jj_la1_0", 0xa, "[I", &OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_la1_0, NULL, .constantValue.asLong = 0 },
-    { "jj_la1_1", "jj_la1_1", 0xa, "[I", &OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_la1_1, NULL, .constantValue.asLong = 0 },
-    { "jj_2_rtns_", NULL, 0x12, "[Lorg.apache.lucene.queryparser.flexible.standard.parser.StandardSyntaxParser$JJCalls;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_rescan_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_gc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_ls_", NULL, 0x12, "Lorg.apache.lucene.queryparser.flexible.standard.parser.StandardSyntaxParser$LookaheadSuccess;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_expentries_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<[LI;>;", .constantValue.asLong = 0 },
-    { "jj_expentry_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_kind_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_lasttokens_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_endpos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.flexible.standard.parser.StandardSyntaxParser$LookaheadSuccess;", "Lorg.apache.lucene.queryparser.flexible.standard.parser.StandardSyntaxParser$JJCalls;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser = { 2, "StandardSyntaxParser", "org.apache.lucene.queryparser.flexible.standard.parser", NULL, 0x1, 40, methods, 20, fields, 0, NULL, 2, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser;
 }
 
 @end
@@ -594,7 +643,8 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
 
 id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_QueryWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self, id<JavaLangCharSequence> field) {
   JavaUtilVector *clauses = nil;
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> c, first = nil;
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> c;
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> first = nil;
   first = OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_DisjQueryWithJavaLangCharSequence_(self, field);
   while (true) {
     switch ((self->jj_ntk_ == -1) ? OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_ntk(self) : self->jj_ntk_) {
@@ -629,7 +679,7 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
   }
   else {
     if ([first isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode class]]) {
-      OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *m = (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *) cast_chk(first, [OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode class]);
+      OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *m = (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *) first;
       if ([((OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *) nil_chk(m)) getModifier] == JreLoadEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NOT)) {
         {
           return create_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_initWithJavaUtilList_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ m } count:1 type:OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_class_()]));
@@ -644,7 +694,8 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
 }
 
 id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_DisjQueryWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self, id<JavaLangCharSequence> field) {
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> first, c;
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> first;
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> c;
   JavaUtilVector *clauses = nil;
   first = OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_ConjQueryWithJavaLangCharSequence_(self, field);
   while (true) {
@@ -679,7 +730,8 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
 }
 
 id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_ConjQueryWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self, id<JavaLangCharSequence> field) {
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> first, c;
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> first;
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> c;
   JavaUtilVector *clauses = nil;
   first = OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_ModClauseWithJavaLangCharSequence_(self, field);
   while (true) {
@@ -728,9 +780,14 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
 
 id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_ClauseWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self, id<JavaLangCharSequence> field) {
   id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> q;
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken *fieldToken = nil, *boost = nil, *operator_ = nil, *term = nil;
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *qLower, *qUpper;
-  jboolean lowerInclusive, upperInclusive;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *fieldToken = nil;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *boost = nil;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *operator_ = nil;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *term = nil;
+  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *qLower;
+  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *qUpper;
+  jboolean lowerInclusive;
+  jboolean upperInclusive;
   jboolean group = false;
   if (OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_2_2WithInt_(self, 3)) {
     fieldToken = OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_TERM);
@@ -791,7 +848,7 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
         @throw create_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_init();
       }
       if (((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(term))->kind_ == OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_QUOTED) {
-        JreStrongAssign(&term->image_, [((NSString *) nil_chk(term->image_)) substring:1 endIndex:((jint) [term->image_ length]) - 1]);
+        JreStrongAssign(&term->image_, [((NSString *) nil_chk(term->image_)) java_substring:1 endIndex:[term->image_ java_length] - 1]);
       }
       switch (((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(operator_))->kind_) {
         case OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_OP_LESSTHAN:
@@ -857,6 +914,7 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
         field = OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_discardEscapeCharWithJavaLangCharSequence_(((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(fieldToken))->image_);
       }
       else {
+        
         ;
       }
       switch ((self->jj_ntk_ == -1) ? OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_ntk(self) : self->jj_ntk_) {
@@ -915,13 +973,18 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
 }
 
 id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_TermWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self, id<JavaLangCharSequence> field) {
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken *term, *boost = nil, *fuzzySlop = nil, *goop1, *goop2;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *term;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *boost = nil;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *fuzzySlop = nil;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *goop1;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *goop2;
   jboolean fuzzy = false;
   jboolean regexp = false;
   jboolean startInc = false;
   jboolean endInc = false;
   id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> q = nil;
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *qLower, *qUpper;
+  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *qLower;
+  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *qUpper;
   jfloat defaultMinSimilarity = OrgApacheLuceneSearchFuzzyQuery_defaultMinSimilarity;
   {
     jint phraseSlop;
@@ -976,7 +1039,7 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
       if (fuzzy) {
         jfloat fms = defaultMinSimilarity;
         @try {
-          fms = [((JavaLangFloat *) nil_chk(JavaLangFloat_valueOfWithNSString_([((NSString *) nil_chk(((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(fuzzySlop))->image_)) substring:1]))) floatValue];
+          fms = [((JavaLangFloat *) nil_chk(JavaLangFloat_valueOfWithNSString_([((NSString *) nil_chk(((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(fuzzySlop))->image_)) java_substring:1]))) floatValue];
         }
         @catch (JavaLangException *ignored) {
         }
@@ -993,8 +1056,8 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
         q = create_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withFloat_withInt_withInt_(field, OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_discardEscapeCharWithJavaLangCharSequence_(((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(term))->image_), fms, term->beginColumn_, term->endColumn_);
       }
       else if (regexp) {
-        NSString *re = [((NSString *) nil_chk(((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(term))->image_)) substring:1 endIndex:((jint) [term->image_ length]) - 1];
-        q = create_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(field, re, 0, ((jint) [((NSString *) nil_chk(re)) length]));
+        NSString *re = [((NSString *) nil_chk(((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(term))->image_)) java_substring:1 endIndex:[term->image_ java_length] - 1];
+        q = create_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(field, re, 0, [((NSString *) nil_chk(re)) java_length]);
       }
       break;
       case OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RANGEIN_START:
@@ -1067,10 +1130,10 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
         ;
       }
       if (((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(goop1))->kind_ == OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RANGE_QUOTED) {
-        JreStrongAssign(&goop1->image_, [((NSString *) nil_chk(goop1->image_)) substring:1 endIndex:((jint) [goop1->image_ length]) - 1]);
+        JreStrongAssign(&goop1->image_, [((NSString *) nil_chk(goop1->image_)) java_substring:1 endIndex:[goop1->image_ java_length] - 1]);
       }
       if (((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(goop2))->kind_ == OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RANGE_QUOTED) {
-        JreStrongAssign(&goop2->image_, [((NSString *) nil_chk(goop2->image_)) substring:1 endIndex:((jint) [goop2->image_ length]) - 1]);
+        JreStrongAssign(&goop2->image_, [((NSString *) nil_chk(goop2->image_)) java_substring:1 endIndex:[goop2->image_ java_length] - 1]);
       }
       qLower = create_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(field, OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_discardEscapeCharWithJavaLangCharSequence_(goop1->image_), goop1->beginColumn_, goop1->endColumn_);
       qUpper = create_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(field, OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_discardEscapeCharWithJavaLangCharSequence_(goop2->image_), goop2->beginColumn_, goop2->endColumn_);
@@ -1078,7 +1141,7 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
       break;
       case OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_QUOTED:
       term = OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_QUOTED);
-      q = create_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(field, OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_discardEscapeCharWithJavaLangCharSequence_([((NSString *) nil_chk(((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(term))->image_)) substring:1 endIndex:((jint) [term->image_ length]) - 1]), term->beginColumn_ + 1, term->endColumn_ - 1);
+      q = create_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(field, OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_discardEscapeCharWithJavaLangCharSequence_([((NSString *) nil_chk(((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(term))->image_)) java_substring:1 endIndex:[term->image_ java_length] - 1]), term->beginColumn_ + 1, term->endColumn_ - 1);
       switch ((self->jj_ntk_ == -1) ? OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_ntk(self) : self->jj_ntk_) {
         case OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_FUZZY_SLOP:
         fuzzySlop = OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_FUZZY_SLOP);
@@ -1099,7 +1162,7 @@ id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQuerypar
       phraseSlop = 0;
       if (fuzzySlop != nil) {
         @try {
-          phraseSlop = [((JavaLangFloat *) nil_chk(JavaLangFloat_valueOfWithNSString_([((NSString *) nil_chk(fuzzySlop->image_)) substring:1]))) intValue];
+          phraseSlop = [((JavaLangFloat *) nil_chk(JavaLangFloat_valueOfWithNSString_([((NSString *) nil_chk(fuzzySlop->image_)) java_substring:1]))) intValue];
           q = create_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(q, phraseSlop);
         }
         @catch (JavaLangException *ignored) {
@@ -1352,11 +1415,11 @@ OrgApacheLuceneQueryparserFlexibleStandardParserToken *OrgApacheLuceneQueryparse
   }
   JreStrongAssign(&self->token_, oldToken);
   self->jj_kind_ = kind;
-  @throw [self generateParseException];
+  @throw nil_chk([self generateParseException]);
 }
 
 jboolean OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_scan_tokenWithInt_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self, jint kind) {
-  if (self->jj_scanpos_ == self->jj_lastpos_) {
+  if (JreObjectEqualsEquals(self->jj_scanpos_, self->jj_lastpos_)) {
     self->jj_la_--;
     if (((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(self->jj_scanpos_))->next_ == nil) {
       JreStrongAssign(&self->jj_lastpos_, JreStrongAssign(&self->jj_scanpos_, JreStrongAssign(&self->jj_scanpos_->next_, [((OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *) nil_chk(self->token_source_)) getNextToken])));
@@ -1370,15 +1433,15 @@ jboolean OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj
   }
   if (self->jj_rescan_) {
     jint i = 0;
-    OrgApacheLuceneQueryparserFlexibleStandardParserToken *tok = self->token_;
-    while (tok != nil && tok != self->jj_scanpos_) {
+    OrgApacheLuceneQueryparserFlexibleStandardParserToken *tok = JreRetainedLocalValue(self->token_);
+    while (tok != nil && !JreObjectEqualsEquals(tok, self->jj_scanpos_)) {
       i++;
       tok = tok->next_;
     }
     if (tok != nil) OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_add_error_tokenWithInt_withInt_(self, kind, i);
   }
   if (((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(self->jj_scanpos_))->kind_ != kind) return true;
-  if (self->jj_la_ == 0 && self->jj_scanpos_ == self->jj_lastpos_) @throw self->jj_ls_;
+  if (self->jj_la_ == 0 && JreObjectEqualsEquals(self->jj_scanpos_, self->jj_lastpos_)) @throw nil_chk(self->jj_ls_);
   return false;
 }
 
@@ -1397,7 +1460,7 @@ void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_jj_add
     for (jint i = 0; i < self->jj_endpos_; i++) {
       *IOSIntArray_GetRef(self->jj_expentry_, i) = IOSIntArray_Get(nil_chk(self->jj_lasttokens_), i);
     }
-    for (id<JavaUtilIterator> it = [((id<JavaUtilList>) nil_chk(self->jj_expentries_)) iterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
+    for (id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(self->jj_expentries_)) iterator]); [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
       {
         IOSIntArray *oldentry = (IOSIntArray *) cast_chk(([it next]), [IOSIntArray class]);
         if (((IOSIntArray *) nil_chk(oldentry))->size_ == ((IOSIntArray *) nil_chk(self->jj_expentry_))->size_) {
@@ -1471,10 +1534,16 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LookaheadSuccess", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess = { 2, "LookaheadSuccess", "org.apache.lucene.queryparser.flexible.standard.parser", "StandardSyntaxParser", 0x1a, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess = { "LookaheadSuccess", "org.apache.lucene.queryparser.flexible.standard.parser", ptrTable, methods, NULL, 7, 0x1a, 1, 0, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_LookaheadSuccess;
 }
 
@@ -1510,16 +1579,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "JJCalls", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "gen_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "first_", NULL, 0x0, "Lorg.apache.lucene.queryparser.flexible.standard.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "arg_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x0, "Lorg.apache.lucene.queryparser.flexible.standard.parser.StandardSyntaxParser$JJCalls;", NULL, NULL, .constantValue.asLong = 0 },
+    { "gen_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "first_", "LOrgApacheLuceneQueryparserFlexibleStandardParserToken;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "arg_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "next_", "LOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls = { 2, "JJCalls", "org.apache.lucene.queryparser.flexible.standard.parser", "StandardSyntaxParser", 0x18, 1, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls = { "JJCalls", "org.apache.lucene.queryparser.flexible.standard.parser", ptrTable, methods, fields, 7, 0x18, 1, 4, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls;
 }
 

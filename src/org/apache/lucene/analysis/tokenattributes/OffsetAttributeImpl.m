@@ -12,6 +12,12 @@
 #include "org/apache/lucene/util/AttributeImpl.h"
 #include "org/apache/lucene/util/AttributeReflector.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/OffsetAttributeImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl () {
  @public
   jint startOffset_;
@@ -52,11 +58,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)other {
-  if (other == self) {
+  if (JreObjectEqualsEquals(other, self)) {
     return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl class]]) {
-    OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *) cast_chk(other, [OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl class]);
+    OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *) other;
     return ((OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *) nil_chk(o))->startOffset_ == startOffset_ && o->endOffset_ == endOffset_;
   }
   return false;
@@ -79,22 +85,36 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "OffsetAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "startOffset", NULL, "I", 0x1, NULL, NULL },
-    { "setOffsetWithInt:withInt:", "setOffset", "V", 0x1, NULL, NULL },
-    { "endOffset", NULL, "I", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(startOffset);
+  methods[2].selector = @selector(setOffsetWithInt:withInt:);
+  methods[3].selector = @selector(endOffset);
+  methods[4].selector = @selector(clear);
+  methods[5].selector = @selector(isEqual:);
+  methods[6].selector = @selector(hash);
+  methods[7].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[8].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "startOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "startOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "endOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl = { 2, "OffsetAttributeImpl", "org.apache.lucene.analysis.tokenattributes", NULL, 0x1, 9, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setOffset", "II", "equals", "LNSObject;", "hashCode", "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl = { "OffsetAttributeImpl", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, fields, 7, 0x1, 9, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl;
 }
 

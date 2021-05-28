@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector))
 #define OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_
 
@@ -45,9 +51,13 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
-                        withLong:(jlong)valueCount;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field
+       withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
+                                                withLong:(jlong)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -57,11 +67,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector, field_, NS
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector, collectedOrds_, OrgApacheLuceneUtilLongBitSet *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector, ordinalMap_, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *self, NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *self, NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *new_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *new_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *create_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount);
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *create_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector)
 
@@ -89,9 +99,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *)outer$
-                                 withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)docTermOrds
-                                       withOrgApacheLuceneUtilLongValues:(OrgApacheLuceneUtilLongValues *)segmentOrdToGlobalOrdLookup;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *)outer$
+                                           withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)docTermOrds
+                                                 withOrgApacheLuceneUtilLongValues:(OrgApacheLuceneUtilLongValues *)segmentOrdToGlobalOrdLookup;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -128,8 +142,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_Ordi
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *)outer$
-                                 withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)docTermOrds;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *)outer$
+                                           withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)docTermOrds;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -145,4 +163,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_Segm
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector")

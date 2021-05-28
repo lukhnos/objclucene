@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter))
 #define OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_
 
@@ -33,19 +39,18 @@
   JavaTextDateFormat *dateFormat_;
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
 }
-
-+ (NSString *)DATE_TYPE;
+@property (readonly, copy, class) NSString *DATE_TYPE NS_SWIFT_NAME(DATE_TYPE);
 
 #pragma mark Public
 
 /*!
- @brief Uses <code>DateFormat#getDateInstance(DateFormat.DEFAULT, Locale.ROOT)</code>
+ @brief Uses <code>DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.ROOT)</code>
   as 
- the <code>java.text.DateFormat</code> object.
+  the <code>java.text.DateFormat</code> object.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithJavaTextDateFormat:(JavaTextDateFormat *)dateFormat;
+- (instancetype __nonnull)initWithJavaTextDateFormat:(JavaTextDateFormat *)dateFormat;
 
 - (jboolean)acceptWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)source;
 
@@ -56,16 +61,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter, dateFormat_, JavaTextDateFormat *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-inline NSString *OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_get_DATE_TYPE();
+inline NSString *OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_get_DATE_TYPE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter, DATE_TYPE, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *new_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *new_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *create_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *create_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFormat_(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *self, JavaTextDateFormat *dateFormat);
 
@@ -77,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter")

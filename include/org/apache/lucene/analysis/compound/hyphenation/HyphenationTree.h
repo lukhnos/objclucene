@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree))
 #define OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_
 
@@ -35,9 +41,8 @@
 
 /*!
  @brief This tree structure stores the hyphenation patterns in an efficient way for
- fast lookup.
- It provides the provides the method to hyphenate a word.
- This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified. 
+  fast lookup.It provides the provides the method to hyphenate a word.
+ This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified.
  */
 @interface OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree : OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree < OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer > {
  @public
@@ -57,42 +62,38 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Add a character class to the tree.
- It is used by
+ @brief Add a character class to the tree.It is used by 
  <code>PatternParser</code> as callback to add character classes.
  Character classes define the valid word characters for hyphenation. If a
- word contains a character not defined in any of the classes, it is not
- hyphenated. It also defines a way to normalize the characters in order to
- compare them with the stored patterns. Usually pattern files use only lower
- case characters, in this case a class for letter 'a', for example, should
- be defined as "aA", the first character being the normalization char.
+  word contains a character not defined in any of the classes, it is not
+  hyphenated. It also defines a way to normalize the characters in order to
+  compare them with the stored patterns. Usually pattern files use only lower
+  case characters, in this case a class for letter 'a', for example, should
+  be defined as "aA", the first character being the normalization char.
  */
 - (void)addClassWithNSString:(NSString *)chargroup;
 
 /*!
- @brief Add an exception to the tree.
- It is used by
+ @brief Add an exception to the tree.It is used by 
  <code>PatternParser</code> class as callback to store the
- hyphenation exceptions.
+  hyphenation exceptions.
  @param word normalized word
- @param hyphenatedword a vector of alternating strings and
- <code>hyphen</code> objects.
+ @param hyphenatedword a vector of alternating strings and         
+ <code>hyphen</code>  objects.
  */
 - (void)addExceptionWithNSString:(NSString *)word
            withJavaUtilArrayList:(JavaUtilArrayList *)hyphenatedword;
 
 /*!
- @brief Add a pattern to the tree.
- Mainly, to be used by
+ @brief Add a pattern to the tree.Mainly, to be used by 
  <code>PatternParser</code> class as callback to add a pattern to
- the tree.
+  the tree.
  @param pattern the hyphenation pattern
- @param ivalue interletter weight values indicating the desirability and
- priority of hyphenating at a given point within the pattern. It
- should contain only digit characters. (i.e. '0' to '9').
+ @param ivalue interletter weight values indicating the desirability and         priority of hyphenating at a given point within the pattern. It
+          should contain only digit characters. (i.e. '0' to '9').
  */
 - (void)addPatternWithNSString:(NSString *)pattern
                   withNSString:(NSString *)ivalue;
@@ -104,12 +105,10 @@
  @param w char array that contains the word
  @param offset Offset to first character in word
  @param len Length of word
- @param remainCharCount Minimum number of characters allowed before the
- hyphenation point.
- @param pushCharCount Minimum number of characters allowed after the
- hyphenation point.
+ @param remainCharCount Minimum number of characters allowed before the         hyphenation point.
+ @param pushCharCount Minimum number of characters allowed after the         hyphenation point.
  @return a <code>Hyphenation</code> object representing the
- hyphenated word or null if word is not hyphenated.
+          hyphenated word or null if word is not hyphenated.
  */
 - (OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *)hyphenateWithCharArray:(IOSCharArray *)w
                                                                           withInt:(jint)offset
@@ -120,21 +119,21 @@
 /*!
  @brief Hyphenate word and return a Hyphenation object.
  @param word the word to be hyphenated
- @param remainCharCount Minimum number of characters allowed before the
- hyphenation point.
- @param pushCharCount Minimum number of characters allowed after the
- hyphenation point.
+ @param remainCharCount Minimum number of characters allowed before the         hyphenation point.
+ @param pushCharCount Minimum number of characters allowed after the         hyphenation point.
  @return a <code>Hyphenation</code> object representing the
- hyphenated word or null if word is not hyphenated.
+          hyphenated word or null if word is not hyphenated.
  */
 - (OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *)hyphenateWithNSString:(NSString *)word
                                                                          withInt:(jint)remainCharCount
                                                                          withInt:(jint)pushCharCount;
 
+- (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *)java_clone;
+
 /*!
  @brief Read hyphenation patterns from an XML file.
  @param source the InputSource for the file
- @throws IOException In case the parsing fails
+ @throw IOExceptionIn case the parsing fails
  */
 - (void)loadPatternsWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)source;
 
@@ -154,36 +153,34 @@
 
 /*!
  @brief Packs the values by storing them in 4 bits, two values into a byte Values
- range is from 0 to 9.
- We use zero as terminator, so we'll add 1 to the
- value.
- @param values a string of digits from '0' to '9' representing the
- interletter values.
+  range is from 0 to 9.We use zero as terminator, so we'll add 1 to the
+  value.
+ @param values a string of digits from '0' to '9' representing the         interletter values.
  @return the index into the vspace array where the packed values are stored.
  */
 - (jint)packValuesWithNSString:(NSString *)values;
 
 /*!
  @brief <p>
- Search for all possible partial matches of word starting at index an update
- interletter values.
- In other words, it does something like:
+  Search for all possible partial matches of word starting at index an update
+  interletter values.
+ In other words, it does something like: 
  </p>
- <code>
- for(i=0; i&lt;patterns.length; i++) {
- if ( word.substring(index).startsWidth(patterns[i]) )
- update_interletter_values(patterns[i]);
- }
+  <code>
+  for(i=0; i&lt;patterns.length; i++) {
+  if ( word.substring(index).startsWidth(patterns[i]) )
+  update_interletter_values(patterns[i]);
+  } 
  </code>
- <p>
- But it is done in an efficient way since the patterns are stored in a
- ternary tree. In fact, this is the whole purpose of having the tree: doing
- this search without having to test every single pattern. The number of
- patterns for languages such as English range from 4000 to 10000. Thus,
- doing thousands of string comparisons for each word to hyphenate would be
- really slow without the tree. The tradeoff is memory, but using a ternary
- tree instead of a trie, almost halves the the memory used by Lout or TeX.
- It's also faster than using a hash table
+  <p>
+  But it is done in an efficient way since the patterns are stored in a
+  ternary tree. In fact, this is the whole purpose of having the tree: doing
+  this search without having to test every single pattern. The number of
+  patterns for languages such as English range from 4000 to 10000. Thus,
+  doing thousands of string comparisons for each word to hyphenate would be
+  really slow without the tree. The tradeoff is memory, but using a ternary
+  tree instead of a trie, almost halves the the memory used by Lout or TeX.
+  It's also faster than using a hash table 
  </p>
  @param word null terminated word to match
  @param index start index from word
@@ -205,12 +202,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree, c
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *create_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *create_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree")

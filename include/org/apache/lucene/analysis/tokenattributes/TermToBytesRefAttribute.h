@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute))
 #define OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_
 
@@ -24,32 +30,27 @@
 
 /*!
  @brief This attribute is requested by TermsHashPerField to index the contents.
- This attribute can be used to customize the final byte[] encoding of terms.
+ This attribute can be used to customize the final byte[] encoding of terms. 
  <p>
- Consumers of this attribute call <code>getBytesRef()</code> for each term. Example:
+  Consumers of this attribute call <code>getBytesRef()</code> for each term. Example: 
  <pre class="prettyprint">
- final TermToBytesRefAttribute termAtt = tokenStream.getAttribute(TermToBytesRefAttribute.class);
- while (tokenStream.incrementToken() {
- final BytesRef bytes = termAtt.getBytesRef();
- if (isInteresting(bytes)) {
- // because the bytes are reused by the attribute (like CharTermAttribute's char[] buffer),
- // you should make a copy if you need persistent access to the bytes, otherwise they will
- // be rewritten across calls to incrementToken()
- doSomethingWith(BytesRef.deepCopyOf(bytes));
- }
- }
- ...
+    final TermToBytesRefAttribute termAtt = tokenStream.getAttribute(TermToBytesRefAttribute.class);
+    while (tokenStream.incrementToken() {
+      final BytesRef bytes = termAtt.getBytesRef();
+      if (isInteresting(bytes)) {     
+        // because the bytes are reused by the attribute (like CharTermAttribute's char[] buffer),
+        // you should make a copy if you need persistent access to the bytes, otherwise they will
+        // be rewritten across calls to incrementToken()
+        doSomethingWith(BytesRef.deepCopyOf(bytes));
+      }   }
+    ... 
  
 @endcode
-  This is a very expert and internal API, please use
- <code>CharTermAttribute</code> and its implementation for UTF-8 terms; to
- index binary terms, use <code>BytesTermAttribute</code> and its implementation.
  */
-@protocol OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
- @brief Retrieve this attribute's BytesRef.
- The bytes are updated from the current term.
+ @brief Retrieve this attribute's BytesRef.The bytes are updated from the current term.
  The implementation may return a new instance or keep the previous one.
  @return a BytesRef to be indexed (only stays valid until token stream gets incremented)
  */
@@ -63,4 +64,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesTermToBytesRefA
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute")

@@ -3,14 +3,17 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/nodes/FuzzyQueryNode.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FuzzyQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/FuzzyQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode () {
  @public
@@ -67,21 +70,34 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangCharSequence:withJavaLangCharSequence:withFloat:withInt:withInt:", "FuzzyQueryNode", NULL, 0x1, NULL, NULL },
-    { "setPrefixLengthWithInt:", "setPrefixLength", "V", 0x1, NULL, NULL },
-    { "getPrefixLength", NULL, "I", 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "setSimilarityWithFloat:", "setSimilarity", "V", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.FuzzyQueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "getSimilarity", NULL, "F", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode;", 0x1, -1, -1, 8, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaLangCharSequence:withJavaLangCharSequence:withFloat:withInt:withInt:);
+  methods[1].selector = @selector(setPrefixLengthWithInt:);
+  methods[2].selector = @selector(getPrefixLength);
+  methods[3].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[4].selector = @selector(description);
+  methods[5].selector = @selector(setSimilarityWithFloat:);
+  methods[6].selector = @selector(cloneTree);
+  methods[7].selector = @selector(getSimilarity);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "similarity_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "similarity_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "prefixLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode = { 2, "FuzzyQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 8, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaLangCharSequence;LJavaLangCharSequence;FII", "setPrefixLength", "I", "toQueryString", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;", "toString", "setSimilarity", "F", "LJavaLangCloneNotSupportedException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode = { "FuzzyQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x1, 8, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode;
 }
 

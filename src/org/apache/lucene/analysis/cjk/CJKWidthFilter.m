@@ -6,13 +6,15 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/cjk/CJKWidthFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/cjk/CJKWidthFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCjkCJKWidthFilter () {
  @public
@@ -30,15 +32,15 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCjkCJKWidthFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-inline IOSCharArray *OrgApacheLuceneAnalysisCjkCJKWidthFilter_get_KANA_NORM();
+inline IOSCharArray *OrgApacheLuceneAnalysisCjkCJKWidthFilter_get_KANA_NORM(void);
 static IOSCharArray *OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_NORM;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKWidthFilter, KANA_NORM, IOSCharArray *)
 
-inline IOSByteArray *OrgApacheLuceneAnalysisCjkCJKWidthFilter_get_KANA_COMBINE_VOICED();
+inline IOSByteArray *OrgApacheLuceneAnalysisCjkCJKWidthFilter_get_KANA_COMBINE_VOICED(void);
 static IOSByteArray *OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_COMBINE_VOICED;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKWidthFilter, KANA_COMBINE_VOICED, IOSByteArray *)
 
-inline IOSByteArray *OrgApacheLuceneAnalysisCjkCJKWidthFilter_get_KANA_COMBINE_HALF_VOICED();
+inline IOSByteArray *OrgApacheLuceneAnalysisCjkCJKWidthFilter_get_KANA_COMBINE_HALF_VOICED(void);
 static IOSByteArray *OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_COMBINE_HALF_VOICED;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKWidthFilter, KANA_COMBINE_HALF_VOICED, IOSByteArray *)
 
@@ -56,7 +58,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCjkCJKWidthFilter)
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     IOSCharArray *text = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-    jint length = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
+    jint length = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) java_length];
     for (jint i = 0; i < length; i++) {
       jchar ch = IOSCharArray_Get(nil_chk(text), i);
       if (ch >= (jint) 0xFF01 && ch <= (jint) 0xFF5E) {
@@ -90,6 +92,30 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCjkCJKWidthFilter)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 2, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  methods[2].selector = @selector(combineWithCharArray:withInt:withChar:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "KANA_NORM", "[C", .constantValue.asLong = 0, 0x1a, -1, 4, -1, -1 },
+    { "KANA_COMBINE_VOICED", "[B", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "KANA_COMBINE_HALF_VOICED", "[B", .constantValue.asLong = 0, 0x1a, -1, 6, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", "combine", "[CIC", &OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_NORM, &OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_COMBINE_VOICED, &OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_COMBINE_HALF_VOICED };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCjkCJKWidthFilter = { "CJKWidthFilter", "org.apache.lucene.analysis.cjk", ptrTable, methods, fields, 7, 0x11, 3, 4, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisCjkCJKWidthFilter;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCjkCJKWidthFilter class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_NORM, [IOSCharArray newArrayWithChars:(jchar[]){ (jint) 0x30fb, (jint) 0x30f2, (jint) 0x30a1, (jint) 0x30a3, (jint) 0x30a5, (jint) 0x30a7, (jint) 0x30a9, (jint) 0x30e3, (jint) 0x30e5, (jint) 0x30e7, (jint) 0x30c3, (jint) 0x30fc, (jint) 0x30a2, (jint) 0x30a4, (jint) 0x30a6, (jint) 0x30a8, (jint) 0x30aa, (jint) 0x30ab, (jint) 0x30ad, (jint) 0x30af, (jint) 0x30b1, (jint) 0x30b3, (jint) 0x30b5, (jint) 0x30b7, (jint) 0x30b9, (jint) 0x30bb, (jint) 0x30bd, (jint) 0x30bf, (jint) 0x30c1, (jint) 0x30c4, (jint) 0x30c6, (jint) 0x30c8, (jint) 0x30ca, (jint) 0x30cb, (jint) 0x30cc, (jint) 0x30cd, (jint) 0x30ce, (jint) 0x30cf, (jint) 0x30d2, (jint) 0x30d5, (jint) 0x30d8, (jint) 0x30db, (jint) 0x30de, (jint) 0x30df, (jint) 0x30e0, (jint) 0x30e1, (jint) 0x30e2, (jint) 0x30e4, (jint) 0x30e6, (jint) 0x30e8, (jint) 0x30e9, (jint) 0x30ea, (jint) 0x30eb, (jint) 0x30ec, (jint) 0x30ed, (jint) 0x30ef, (jint) 0x30f3, (jint) 0x3099, (jint) 0x309A } count:59]);
@@ -97,22 +123,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCjkCJKWidthFilter)
     JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_COMBINE_HALF_VOICED, [IOSByteArray newArrayWithBytes:(jbyte[]){ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } count:88]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCjkCJKWidthFilter)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "CJKWidthFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "combineWithCharArray:withInt:withChar:", "combine", "Z", 0xa, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "termAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "KANA_NORM", "KANA_NORM", 0x1a, "[C", &OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_NORM, NULL, .constantValue.asLong = 0 },
-    { "KANA_COMBINE_VOICED", "KANA_COMBINE_VOICED", 0x1a, "[B", &OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_COMBINE_VOICED, NULL, .constantValue.asLong = 0 },
-    { "KANA_COMBINE_HALF_VOICED", "KANA_COMBINE_HALF_VOICED", 0x1a, "[B", &OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_COMBINE_HALF_VOICED, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCjkCJKWidthFilter = { 2, "CJKWidthFilter", "org.apache.lucene.analysis.cjk", NULL, 0x11, 3, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisCjkCJKWidthFilter;
 }
 
 @end

@@ -16,22 +16,28 @@
 #define INCLUDE_OrgApacheLuceneStoreRateLimiter 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreRateLimiter_) && (INCLUDE_ALL_OrgApacheLuceneStoreRateLimiter || defined(INCLUDE_OrgApacheLuceneStoreRateLimiter))
 #define OrgApacheLuceneStoreRateLimiter_
 
 /*!
- @brief Abstract base class to rate limit IO.
- Typically implementations are
- shared across multiple IndexInputs or IndexOutputs (for example
- those involved all merging).  Those IndexInputs and
- IndexOutputs would call <code>pause</code> whenever the have read
- or written more than <code>getMinPauseCheckBytes</code> bytes. 
+ @brief Abstract base class to rate limit IO.Typically implementations are
+   shared across multiple IndexInputs or IndexOutputs (for example
+   those involved all merging).
+ Those IndexInputs and
+   IndexOutputs would call <code>pause</code> whenever the have read
+   or written more than <code>getMinPauseCheckBytes</code> bytes.
  */
 @interface OrgApacheLuceneStoreRateLimiter : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief The current MB per second rate limit.
@@ -45,9 +51,9 @@
 
 /*!
  @brief Pauses, if necessary, to keep the instantaneous IO
- rate at or below the target.
+   rate at or below the target.
  <p>
- Note: the implementation is thread-safe
+   Note: the implementation is thread-safe  
  </p>
  @return the pause time in nano seconds
  */
@@ -81,7 +87,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRateLimiter)
 /*!
  @brief mbPerSec is the MB/sec max IO rate
  */
-- (instancetype)initWithDouble:(jdouble)mbPerSec;
+- (instancetype __nonnull)initWithDouble:(jdouble)mbPerSec;
 
 /*!
  @brief The current mb per second rate limit.
@@ -92,10 +98,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRateLimiter)
 
 /*!
  @brief Pauses, if necessary, to keep the instantaneous IO
- rate at or below the target.
- Be sure to only call
- this method when bytes &gt; <code>getMinPauseCheckBytes</code>,
- otherwise it will pause way too long!
+   rate at or below the target.Be sure to only call
+   this method when bytes &gt; <code>getMinPauseCheckBytes</code>,
+   otherwise it will pause way too long!
  @return the pause time in nano seconds
  */
 - (jlong)pauseWithLong:(jlong)bytes;
@@ -104,6 +109,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRateLimiter)
  @brief Sets an updated mb per second rate limit.
  */
 - (void)setMBPerSecWithDouble:(jdouble)mbPerSec;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -119,4 +128,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRateLimiter")

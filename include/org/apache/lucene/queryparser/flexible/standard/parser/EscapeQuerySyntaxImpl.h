@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl))
 #define OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_
 
@@ -27,18 +33,18 @@
 
 /*!
  @brief Implementation of <code>EscapeQuerySyntax</code> for the standard lucene
- syntax.
+  syntax.
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl : NSObject < OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns a String where the escape char has been removed, or kept only once
- if there was a double escape.
- Supports escaped unicode characters, e. g. translates <code>A</code> to
+  if there was a double escape.
+ Supports escaped unicode characters, e. g. translates <code>A</code> to 
  <code>A</code>.
  */
 + (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *)discardEscapeCharWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
@@ -51,16 +57,20 @@ withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:(OrgApach
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl)
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_discardEscapeCharWithJavaLangCharSequence_(id<JavaLangCharSequence> input);
-
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *new_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *new_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *create_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *create_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init(void);
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_discardEscapeCharWithJavaLangCharSequence_(id<JavaLangCharSequence> input);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl")

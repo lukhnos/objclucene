@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSnapshotDeletionPolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSnapshotDeletionPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexSnapshotDeletionPolicy || defined(INCLUDE_OrgApacheLuceneIndexSnapshotDeletionPolicy))
 #define OrgApacheLuceneIndexSnapshotDeletionPolicy_
 
@@ -25,25 +31,25 @@
 @protocol JavaUtilMap;
 
 /*!
- @brief An <code>IndexDeletionPolicy</code> that wraps any other
+ @brief An <code>IndexDeletionPolicy</code> that wraps any other 
  <code>IndexDeletionPolicy</code> and adds the ability to hold and later release
- snapshots of an index.
- While a snapshot is held, the <code>IndexWriter</code> will
- not remove any files associated with it even if the index is otherwise being
- actively, arbitrarily changed. Because we wrap another arbitrary
+  snapshots of an index.While a snapshot is held, the <code>IndexWriter</code> will
+  not remove any files associated with it even if the index is otherwise being
+  actively, arbitrarily changed.
+ Because we wrap another arbitrary 
  <code>IndexDeletionPolicy</code>, this gives you the freedom to continue using
- whatever <code>IndexDeletionPolicy</code> you would normally want to use with your
- index.
+  whatever <code>IndexDeletionPolicy</code> you would normally want to use with your
+  index.  
  <p>
- This class maintains all snapshots in-memory, and so the information is not
- persisted and not protected against system failures. If persistence is
- important, you can use <code>PersistentSnapshotDeletionPolicy</code>.
+  This class maintains all snapshots in-memory, and so the information is not
+  persisted and not protected against system failures. If persistence is
+  important, you can use <code>PersistentSnapshotDeletionPolicy</code>.
  */
 @interface OrgApacheLuceneIndexSnapshotDeletionPolicy : OrgApacheLuceneIndexIndexDeletionPolicy {
  @public
   /*!
    @brief Records how many snapshots are held against each
- commit generation
+   commit generation
    */
   id<JavaUtilMap> refCounts_;
   /*!
@@ -62,12 +68,12 @@
  @brief Sole constructor, taking the incoming <code>IndexDeletionPolicy</code>
   to wrap.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary;
 
 /*!
  @brief Retrieve an <code>IndexCommit</code> from its generation;
- returns null if this IndexCommit is not currently
- snapshotted
+   returns null if this IndexCommit is not currently
+   snapshotted
  */
 - (OrgApacheLuceneIndexIndexCommit *)getIndexCommitWithLong:(jlong)gen;
 
@@ -87,24 +93,25 @@
 
 /*!
  @brief Release a snapshotted commit.
- @param commit
- the commit previously returned by <code>snapshot</code>
+ @param commit the commit previously returned by 
+ <code>snapshot</code>
  */
 - (void)release__WithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
 
 /*!
- @brief Snapshots the last commit and returns it.
- Once a commit is 'snapshotted,' it is protected
- from deletion (as long as this <code>IndexDeletionPolicy</code> is used). The
- snapshot can be removed by calling <code>release(IndexCommit)</code> followed
- by a call to <code>IndexWriter.deleteUnusedFiles()</code>.
+ @brief Snapshots the last commit and returns it.Once a commit is 'snapshotted,' it is protected
+  from deletion (as long as this <code>IndexDeletionPolicy</code> is used).
+ The
+  snapshot can be removed by calling <code>release(IndexCommit)</code> followed
+  by a call to <code>IndexWriter.deleteUnusedFiles()</code>.
+  
  <p>
- <b>NOTE:</b> while the snapshot is held, the files it references will not
- be deleted, which will consume additional disk space in your index. If you
- take a snapshot at a particularly bad time (say just before you call
- forceMerge) then in the worst case this could consume an extra 1X of your
- total index size, until you release the snapshot.
- @throws IllegalStateException
+  <b>NOTE:</b> while the snapshot is held, the files it references will not
+  be deleted, which will consume additional disk space in your index. If you
+  take a snapshot at a particularly bad time (say just before you call
+  forceMerge) then in the worst case this could consume an extra 1X of your
+  total index size, until you release the snapshot.
+ @throw IllegalStateException
  if this index does not have any commits yet
  @return the <code>IndexCommit</code> that was snapshotted.
  */
@@ -121,6 +128,10 @@
  @brief Release a snapshot by generation.
  */
 - (void)releaseGenWithLong:(jlong)gen;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -140,4 +151,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSnapshotDeletionPolicy")

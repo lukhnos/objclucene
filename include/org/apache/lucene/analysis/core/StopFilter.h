@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreStopFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreStopFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCoreStopFilter))
 #define OrgApacheLuceneAnalysisCoreStopFilter_
 
@@ -34,24 +40,23 @@
 
 /*!
  @brief Constructs a filter which removes words from the input TokenStream that are
- named in the Set.
- @param inArg
- Input stream
- @param stopWords
- A <code>CharArraySet</code> representing the stopwords.
+  named in the Set.
+ @param inArg Input stream
+ @param stopWords A 
+ <code>CharArraySet</code>  representing the stopwords.
  - seealso: #makeStopSet(java.lang.String...)
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
 
 /*!
  @brief Builds a Set from an array of stop words,
- appropriate for passing into the StopFilter constructor.
+  appropriate for passing into the StopFilter constructor.
  This permits this stopWords construction to be cached once when
- an Analyzer is constructed.
+  an Analyzer is constructed.
  @param stopWords A List of Strings or char[] or any other toString()-able list representing the stopwords
  @return A Set (<code>CharArraySet</code>) containing the words
- - seealso: #makeStopSet(java.lang.String[],boolean) passing false to ignoreCase
+ - seealso: #makeStopSet(java.lang.String[], boolean)passing false to ignoreCase
  */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)makeStopSetWithJavaUtilList:(id<JavaUtilList>)stopWords;
 
@@ -66,11 +71,11 @@
 
 /*!
  @brief Builds a Set from an array of stop words,
- appropriate for passing into the StopFilter constructor.
+  appropriate for passing into the StopFilter constructor.
  This permits this stopWords construction to be cached once when
- an Analyzer is constructed.
+  an Analyzer is constructed.
  @param stopWords An array of stopwords
- - seealso: #makeStopSet(java.lang.String[],boolean) passing false to ignoreCase
+ - seealso: #makeStopSet(java.lang.String[], boolean)passing false to ignoreCase
  */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)makeStopSetWithNSStringArray:(IOSObjectArray *)stopWords;
 
@@ -89,6 +94,10 @@
  @brief Returns the next input Token whose term() is not a stop word.
  */
 - (jboolean)accept;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -112,4 +121,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreStopFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilter")

@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/analysis/Tokenizer.h"
@@ -14,7 +13,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/KeywordTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCoreKeywordTokenizer () {
  @public
@@ -90,22 +92,33 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "KeywordTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "KeywordTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withInt:", "KeywordTokenizer", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withInt:);
+  methods[3].selector = @selector(incrementToken);
+  methods[4].selector = @selector(end);
+  methods[5].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_BUFFER_SIZE", "DEFAULT_BUFFER_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCoreKeywordTokenizer_DEFAULT_BUFFER_SIZE },
-    { "done_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "finalOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_BUFFER_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCoreKeywordTokenizer_DEFAULT_BUFFER_SIZE, 0x19, -1, -1, -1, -1 },
+    { "done_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "finalOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreKeywordTokenizer = { 2, "KeywordTokenizer", "org.apache.lucene.analysis.core", NULL, 0x11, 6, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "LOrgApacheLuceneUtilAttributeFactory;I", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreKeywordTokenizer = { "KeywordTokenizer", "org.apache.lucene.analysis.core", ptrTable, methods, fields, 7, 0x11, 6, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCoreKeywordTokenizer;
 }
 

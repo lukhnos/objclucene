@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisStandardStandardFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisStandardStandardFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisStandardStandardFilterFactory))
 #define OrgApacheLuceneAnalysisStandardStandardFilterFactory_
 
@@ -27,12 +33,12 @@
 /*!
  @brief Factory for <code>StandardFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_stndrd" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.StandardFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_stndrd" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.StandardFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisStandardStandardFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
@@ -42,7 +48,7 @@
 /*!
  @brief Creates a new StandardFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisStandardStandardFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStandardFilterFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardFilterFactory")

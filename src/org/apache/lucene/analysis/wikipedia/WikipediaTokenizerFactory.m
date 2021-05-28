@@ -13,6 +13,10 @@
 #include "org/apache/lucene/analysis/wikipedia/WikipediaTokenizerFactory.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/wikipedia/WikipediaTokenizerFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
@@ -25,11 +29,18 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "WikipediaTokenizerFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.wikipedia.WikipediaTokenizer;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisWikipediaWikipediaTokenizer;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory = { 2, "WikipediaTokenizerFactory", "org.apache.lucene.analysis.wikipedia", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneUtilAttributeFactory:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LOrgApacheLuceneUtilAttributeFactory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory = { "WikipediaTokenizerFactory", "org.apache.lucene.analysis.wikipedia", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum))
 #define OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_
 
@@ -27,17 +33,16 @@
 
 /*!
  @brief Silly stub class, used only when writing an auto-prefix
- term in order to expose DocsEnum over a FixedBitSet.
- We
- pass this to <code>PostingsWriterBase.writeTerm</code> so 
- that it can pull .docs() multiple times for the
- current term. 
+   term in order to expose DocsEnum over a FixedBitSet.We
+   pass this to <code>PostingsWriterBase.writeTerm</code> so 
+   that it can pull .docs() multiple times for the
+   current term.
  */
 @interface OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum : OrgApacheLuceneIndexTermsEnum
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)docs;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)docs;
 
 - (jint)docFreq;
 
@@ -56,18 +61,26 @@
 
 - (jlong)totalTermFreq;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *self, OrgApacheLuceneUtilBitSet *docs);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *self, OrgApacheLuceneUtilBitSet *docs);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum")

@@ -22,6 +22,10 @@
 #include "org/w3c/dom/Text.h"
 #include "org/xml/sax/InputSource.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/DOMUtils must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserXmlDOMUtils ()
 
 + (void)getTextBufferWithOrgW3cDomNode:(id<OrgW3cDomNode>)e
@@ -32,6 +36,13 @@
 __attribute__((unused)) static void OrgApacheLuceneQueryparserXmlDOMUtils_getTextBufferWithOrgW3cDomNode_withJavaLangStringBuilder_(id<OrgW3cDomNode> e, JavaLangStringBuilder *sb);
 
 @implementation OrgApacheLuceneQueryparserXmlDOMUtils
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueryparserXmlDOMUtils_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (id<OrgW3cDomElement>)getChildByTagOrFailWithOrgW3cDomElement:(id<OrgW3cDomElement>)e
                                                    withNSString:(NSString *)name {
@@ -118,39 +129,67 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserXmlDOMUtils_getTex
   return OrgApacheLuceneQueryparserXmlDOMUtils_loadXMLWithJavaIoReader_(is);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueryparserXmlDOMUtils_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getChildByTagOrFailWithOrgW3cDomElement:withNSString:", "getChildByTagOrFail", "Lorg.w3c.dom.Element;", 0x9, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "getFirstChildOrFailWithOrgW3cDomElement:", "getFirstChildOrFail", "Lorg.w3c.dom.Element;", 0x9, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "getAttributeOrFailWithOrgW3cDomElement:withNSString:", "getAttributeOrFail", "Ljava.lang.String;", 0x9, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "getAttributeWithInheritanceOrFailWithOrgW3cDomElement:withNSString:", "getAttributeWithInheritanceOrFail", "Ljava.lang.String;", 0x9, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "getNonBlankTextOrFailWithOrgW3cDomElement:", "getNonBlankTextOrFail", "Ljava.lang.String;", 0x9, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "getChildByTagNameWithOrgW3cDomElement:withNSString:", "getChildByTagName", "Lorg.w3c.dom.Element;", 0x9, NULL, NULL },
-    { "getAttributeWithInheritanceWithOrgW3cDomElement:withNSString:", "getAttributeWithInheritance", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "getChildTextByTagNameWithOrgW3cDomElement:withNSString:", "getChildTextByTagName", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "insertChildWithOrgW3cDomElement:withNSString:withNSString:", "insertChild", "Lorg.w3c.dom.Element;", 0x9, NULL, NULL },
-    { "getAttributeWithOrgW3cDomElement:withNSString:withNSString:", "getAttribute", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "getAttributeWithOrgW3cDomElement:withNSString:withFloat:", "getAttribute", "F", 0x9, NULL, NULL },
-    { "getAttributeWithOrgW3cDomElement:withNSString:withInt:", "getAttribute", "I", 0x9, NULL, NULL },
-    { "getAttributeWithOrgW3cDomElement:withNSString:withBoolean:", "getAttribute", "Z", 0x9, NULL, NULL },
-    { "getTextWithOrgW3cDomNode:", "getText", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "getFirstChildElementWithOrgW3cDomElement:", "getFirstChildElement", "Lorg.w3c.dom.Element;", 0x9, NULL, NULL },
-    { "getTextBufferWithOrgW3cDomNode:withJavaLangStringBuilder:", "getTextBuffer", "V", 0xa, NULL, NULL },
-    { "loadXMLWithJavaIoReader:", "loadXML", "Lorg.w3c.dom.Document;", 0x9, NULL, NULL },
-    { "init", "DOMUtils", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgW3cDomElement;", 0x9, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgW3cDomElement;", 0x9, 3, 4, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 5, 1, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 6, 1, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 7, 4, 2, -1, -1, -1 },
+    { NULL, "LOrgW3cDomElement;", 0x9, 8, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 9, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 10, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgW3cDomElement;", 0x9, 11, 12, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 13, 12, -1, -1, -1, -1 },
+    { NULL, "F", 0x9, 13, 14, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 13, 15, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 13, 16, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 17, 18, -1, -1, -1, -1 },
+    { NULL, "LOrgW3cDomElement;", 0x9, 19, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 20, 21, -1, -1, -1, -1 },
+    { NULL, "LOrgW3cDomDocument;", 0x9, 22, 23, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlDOMUtils = { 2, "DOMUtils", "org.apache.lucene.queryparser.xml", NULL, 0x1, 18, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getChildByTagOrFailWithOrgW3cDomElement:withNSString:);
+  methods[2].selector = @selector(getFirstChildOrFailWithOrgW3cDomElement:);
+  methods[3].selector = @selector(getAttributeOrFailWithOrgW3cDomElement:withNSString:);
+  methods[4].selector = @selector(getAttributeWithInheritanceOrFailWithOrgW3cDomElement:withNSString:);
+  methods[5].selector = @selector(getNonBlankTextOrFailWithOrgW3cDomElement:);
+  methods[6].selector = @selector(getChildByTagNameWithOrgW3cDomElement:withNSString:);
+  methods[7].selector = @selector(getAttributeWithInheritanceWithOrgW3cDomElement:withNSString:);
+  methods[8].selector = @selector(getChildTextByTagNameWithOrgW3cDomElement:withNSString:);
+  methods[9].selector = @selector(insertChildWithOrgW3cDomElement:withNSString:withNSString:);
+  methods[10].selector = @selector(getAttributeWithOrgW3cDomElement:withNSString:withNSString:);
+  methods[11].selector = @selector(getAttributeWithOrgW3cDomElement:withNSString:withFloat:);
+  methods[12].selector = @selector(getAttributeWithOrgW3cDomElement:withNSString:withInt:);
+  methods[13].selector = @selector(getAttributeWithOrgW3cDomElement:withNSString:withBoolean:);
+  methods[14].selector = @selector(getTextWithOrgW3cDomNode:);
+  methods[15].selector = @selector(getFirstChildElementWithOrgW3cDomElement:);
+  methods[16].selector = @selector(getTextBufferWithOrgW3cDomNode:withJavaLangStringBuilder:);
+  methods[17].selector = @selector(loadXMLWithJavaIoReader:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getChildByTagOrFail", "LOrgW3cDomElement;LNSString;", "LOrgApacheLuceneQueryparserXmlParserException;", "getFirstChildOrFail", "LOrgW3cDomElement;", "getAttributeOrFail", "getAttributeWithInheritanceOrFail", "getNonBlankTextOrFail", "getChildByTagName", "getAttributeWithInheritance", "getChildTextByTagName", "insertChild", "LOrgW3cDomElement;LNSString;LNSString;", "getAttribute", "LOrgW3cDomElement;LNSString;F", "LOrgW3cDomElement;LNSString;I", "LOrgW3cDomElement;LNSString;Z", "getText", "LOrgW3cDomNode;", "getFirstChildElement", "getTextBuffer", "LOrgW3cDomNode;LJavaLangStringBuilder;", "loadXML", "LJavaIoReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlDOMUtils = { "DOMUtils", "org.apache.lucene.queryparser.xml", ptrTable, methods, NULL, 7, 0x1, 18, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlDOMUtils;
 }
 
 @end
+
+void OrgApacheLuceneQueryparserXmlDOMUtils_init(OrgApacheLuceneQueryparserXmlDOMUtils *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneQueryparserXmlDOMUtils *new_OrgApacheLuceneQueryparserXmlDOMUtils_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlDOMUtils, init)
+}
+
+OrgApacheLuceneQueryparserXmlDOMUtils *create_OrgApacheLuceneQueryparserXmlDOMUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlDOMUtils, init)
+}
 
 id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_getChildByTagOrFailWithOrgW3cDomElement_withNSString_(id<OrgW3cDomElement> e, NSString *name) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
@@ -172,7 +211,7 @@ id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_getFirstChildOrFailWi
 
 NSString *OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeOrFailWithOrgW3cDomElement_withNSString_(id<OrgW3cDomElement> e, NSString *name) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
-  NSString *v = [((id<OrgW3cDomElement>) nil_chk(e)) getAttributeWithNSString:name];
+  NSString *v = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(e)) getAttributeWithNSString:name]);
   if (nil == v) {
     @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$$$", [e getTagName], @" missing \"", name, @"\" attribute"));
   }
@@ -191,8 +230,8 @@ NSString *OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceOrFai
 NSString *OrgApacheLuceneQueryparserXmlDOMUtils_getNonBlankTextOrFailWithOrgW3cDomElement_(id<OrgW3cDomElement> e) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
   NSString *v = OrgApacheLuceneQueryparserXmlDOMUtils_getTextWithOrgW3cDomNode_(e);
-  if (nil != v) v = [v trim];
-  if (nil == v || 0 == ((jint) [v length])) {
+  if (nil != v) v = [v java_trim];
+  if (nil == v || 0 == [v java_length]) {
     @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", [((id<OrgW3cDomElement>) nil_chk(e)) getTagName], @" has no text"));
   }
   return v;
@@ -200,7 +239,7 @@ NSString *OrgApacheLuceneQueryparserXmlDOMUtils_getNonBlankTextOrFailWithOrgW3cD
 
 id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_getChildByTagNameWithOrgW3cDomElement_withNSString_(id<OrgW3cDomElement> e, NSString *name) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
-  for (id<OrgW3cDomNode> kid = [((id<OrgW3cDomElement>) nil_chk(e)) getFirstChild]; kid != nil; kid = [kid getNextSibling]) {
+  for (id<OrgW3cDomNode> kid = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(e)) getFirstChild]); kid != nil; kid = [kid getNextSibling]) {
     if (([kid getNodeType] == OrgW3cDomNode_ELEMENT_NODE) && ([((NSString *) nil_chk(name)) isEqual:[kid getNodeName]])) {
       return (id<OrgW3cDomElement>) cast_check(kid, OrgW3cDomElement_class_());
     }
@@ -210,10 +249,10 @@ id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_getChildByTagNameWith
 
 NSString *OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceWithOrgW3cDomElement_withNSString_(id<OrgW3cDomElement> element, NSString *attributeName) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
-  NSString *result = [((id<OrgW3cDomElement>) nil_chk(element)) getAttributeWithNSString:attributeName];
+  NSString *result = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(element)) getAttributeWithNSString:attributeName]);
   if ((result == nil) || ([@"" isEqual:result])) {
-    id<OrgW3cDomNode> n = [element getParentNode];
-    if ((n == element) || (n == nil)) {
+    id<OrgW3cDomNode> n = JreRetainedLocalValue([element getParentNode]);
+    if ((JreObjectEqualsEquals(n, element)) || (n == nil)) {
       return nil;
     }
     if ([OrgW3cDomElement_class_() isInstance:n]) {
@@ -233,7 +272,7 @@ NSString *OrgApacheLuceneQueryparserXmlDOMUtils_getChildTextByTagNameWithOrgW3cD
 
 id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_insertChildWithOrgW3cDomElement_withNSString_withNSString_(id<OrgW3cDomElement> parent, NSString *tagName, NSString *text) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
-  id<OrgW3cDomElement> child = [((id<OrgW3cDomDocument>) nil_chk([((id<OrgW3cDomElement>) nil_chk(parent)) getOwnerDocument])) createElementWithNSString:tagName];
+  id<OrgW3cDomElement> child = JreRetainedLocalValue([((id<OrgW3cDomDocument>) nil_chk([((id<OrgW3cDomElement>) nil_chk(parent)) getOwnerDocument])) createElementWithNSString:tagName]);
   [parent appendChildWithOrgW3cDomNode:child];
   if (text != nil) {
     [((id<OrgW3cDomElement>) nil_chk(child)) appendChildWithOrgW3cDomNode:[((id<OrgW3cDomDocument>) nil_chk([child getOwnerDocument])) createTextNodeWithNSString:text]];
@@ -243,25 +282,25 @@ id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_insertChildWithOrgW3c
 
 NSString *OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withNSString_(id<OrgW3cDomElement> element, NSString *attributeName, NSString *deflt) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
-  NSString *result = [((id<OrgW3cDomElement>) nil_chk(element)) getAttributeWithNSString:attributeName];
+  NSString *result = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(element)) getAttributeWithNSString:attributeName]);
   return (result == nil) || ([@"" isEqual:result]) ? deflt : result;
 }
 
 jfloat OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(id<OrgW3cDomElement> element, NSString *attributeName, jfloat deflt) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
-  NSString *result = [((id<OrgW3cDomElement>) nil_chk(element)) getAttributeWithNSString:attributeName];
+  NSString *result = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(element)) getAttributeWithNSString:attributeName]);
   return (result == nil) || ([@"" isEqual:result]) ? deflt : JavaLangFloat_parseFloatWithNSString_(result);
 }
 
 jint OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withInt_(id<OrgW3cDomElement> element, NSString *attributeName, jint deflt) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
-  NSString *result = [((id<OrgW3cDomElement>) nil_chk(element)) getAttributeWithNSString:attributeName];
+  NSString *result = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(element)) getAttributeWithNSString:attributeName]);
   return (result == nil) || ([@"" isEqual:result]) ? deflt : JavaLangInteger_parseIntWithNSString_(result);
 }
 
 jboolean OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(id<OrgW3cDomElement> element, NSString *attributeName, jboolean deflt) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
-  NSString *result = [((id<OrgW3cDomElement>) nil_chk(element)) getAttributeWithNSString:attributeName];
+  NSString *result = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(element)) getAttributeWithNSString:attributeName]);
   return (result == nil) || ([@"" isEqual:result]) ? deflt : [((JavaLangBoolean *) nil_chk(JavaLangBoolean_valueOfWithNSString_(result))) booleanValue];
 }
 
@@ -274,7 +313,7 @@ NSString *OrgApacheLuceneQueryparserXmlDOMUtils_getTextWithOrgW3cDomNode_(id<Org
 
 id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_getFirstChildElementWithOrgW3cDomElement_(id<OrgW3cDomElement> element) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
-  for (id<OrgW3cDomNode> kid = [((id<OrgW3cDomElement>) nil_chk(element)) getFirstChild]; kid != nil; kid = [kid getNextSibling]) {
+  for (id<OrgW3cDomNode> kid = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(element)) getFirstChild]); kid != nil; kid = [kid getNextSibling]) {
     if ([kid getNodeType] == OrgW3cDomNode_ELEMENT_NODE) {
       return (id<OrgW3cDomElement>) cast_check(kid, OrgW3cDomElement_class_());
     }
@@ -284,7 +323,7 @@ id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_getFirstChildElementW
 
 void OrgApacheLuceneQueryparserXmlDOMUtils_getTextBufferWithOrgW3cDomNode_withJavaLangStringBuilder_(id<OrgW3cDomNode> e, JavaLangStringBuilder *sb) {
   OrgApacheLuceneQueryparserXmlDOMUtils_initialize();
-  for (id<OrgW3cDomNode> kid = [((id<OrgW3cDomNode>) nil_chk(e)) getFirstChild]; kid != nil; kid = [kid getNextSibling]) {
+  for (id<OrgW3cDomNode> kid = JreRetainedLocalValue([((id<OrgW3cDomNode>) nil_chk(e)) getFirstChild]); kid != nil; kid = [kid getNextSibling]) {
     switch ([kid getNodeType]) {
       case OrgW3cDomNode_TEXT_NODE:
       {
@@ -313,28 +352,16 @@ id<OrgW3cDomDocument> OrgApacheLuceneQueryparserXmlDOMUtils_loadXMLWithJavaIoRea
     db = [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(dbf)) newDocumentBuilder];
   }
   @catch (JavaLangException *se) {
-    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(@"Parser configuration error", se);
+    @throw create_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(@"Parser configuration error", se);
   }
   id<OrgW3cDomDocument> doc = nil;
   @try {
     doc = [((JavaxXmlParsersDocumentBuilder *) nil_chk(db)) parseWithOrgXmlSaxInputSource:create_OrgXmlSaxInputSource_initWithJavaIoReader_(is)];
   }
   @catch (JavaLangException *se) {
-    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(JreStrcat("$@", @"Error parsing file:", se), se);
+    @throw create_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Error parsing file:", se), se);
   }
   return doc;
-}
-
-void OrgApacheLuceneQueryparserXmlDOMUtils_init(OrgApacheLuceneQueryparserXmlDOMUtils *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneQueryparserXmlDOMUtils *new_OrgApacheLuceneQueryparserXmlDOMUtils_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlDOMUtils, init)
-}
-
-OrgApacheLuceneQueryparserXmlDOMUtils *create_OrgApacheLuceneQueryparserXmlDOMUtils_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlDOMUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlDOMUtils)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTwoPhaseIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTwoPhaseIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchTwoPhaseIterator || defined(INCLUDE_OrgApacheLuceneSearchTwoPhaseIterator))
 #define OrgApacheLuceneSearchTwoPhaseIterator_
 
@@ -20,12 +26,12 @@
 
 /*!
  @brief Returned by <code>Scorer.asTwoPhaseIterator()</code>
- and  <code>Spans.asTwoPhaseIterator()</code>
- to expose an approximation of a <code>DocIdSetIterator</code>.
+  and  <code>Spans.asTwoPhaseIterator()</code>
+  to expose an approximation of a <code>DocIdSetIterator</code>.
  When the <code>approximation()</code>'s
- <code>DocIdSetIterator.nextDoc()</code> or <code>DocIdSetIterator.advance(int)</code>
- return, <code>matches()</code> needs to be checked in order to know whether the
- returned doc ID actually matches.
+  <code>DocIdSetIterator.nextDoc()</code> or <code>DocIdSetIterator.advance(int)</code>
+  return, <code>matches()</code> needs to be checked in order to know whether the
+  returned doc ID actually matches.
  */
 @interface OrgApacheLuceneSearchTwoPhaseIterator : NSObject {
  @public
@@ -35,41 +41,42 @@
 #pragma mark Public
 
 /*!
- @brief Return an approximation.
- The returned <code>DocIdSetIterator</code> is a
- superset of the matching documents, and each match needs to be confirmed
- with <code>matches()</code> in order to know whether it matches or not. 
+ @brief Return an approximation.The returned <code>DocIdSetIterator</code> is a
+   superset of the matching documents, and each match needs to be confirmed
+   with <code>matches()</code> in order to know whether it matches or not.
  */
 - (OrgApacheLuceneSearchDocIdSetIterator *)approximation;
 
 /*!
  @brief Return a <code>DocIdSetIterator</code> view of the provided
- <code>TwoPhaseIterator</code>.
+   <code>TwoPhaseIterator</code>.
  */
 + (OrgApacheLuceneSearchDocIdSetIterator *)asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator *)twoPhaseIterator;
 
 /*!
  @brief Returns a <code>TwoPhaseIterator</code> for this <code>DocIdSetIterator</code>
- when available * otherwise returns null.
+  when available * otherwise returns null.
  */
 + (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
 /*!
- @brief Return whether the current doc ID that the iterator is on matches.
- This
- method should only be called when the iterator is positioned -- ie. not
- when <code>DocIdSetIterator.docID()</code> is <code>-1</code> or
- <code>DocIdSetIterator.NO_MORE_DOCS</code> -- and at most once. 
+ @brief Return whether the current doc ID that the iterator is on matches.This
+   method should only be called when the iterator is positioned -- ie. not
+   when <code>DocIdSetIterator.docID()</code> is <code>-1</code> or
+   <code>DocIdSetIterator.NO_MORE_DOCS</code> -- and at most once.
  */
 - (jboolean)matches;
 
 #pragma mark Protected
 
 /*!
- @brief Takes the approximation to be returned by <code>approximation</code>.
- Not null. 
+ @brief Takes the approximation to be returned by <code>approximation</code>.Not null.
  */
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -87,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTwoPhaseIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTwoPhaseIterator")

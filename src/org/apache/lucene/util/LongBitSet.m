@@ -14,6 +14,10 @@
 #include "org/apache/lucene/util/BitUtil.h"
 #include "org/apache/lucene/util/LongBitSet.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/LongBitSet must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilLongBitSet () {
  @public
   IOSLongArray *bits_;
@@ -23,7 +27,7 @@
 
 /*!
  @brief Checks if the bits past numBits are clear.
- Some methods rely on this implicit assumption: search for "Depends on the ghost bits being clear!" 
+ Some methods rely on this implicit assumption: search for "Depends on the ghost bits being clear!"
  @return true if the bits past numBits are clear.
  */
 - (jboolean)verifyGhostBitsClear;
@@ -73,21 +77,21 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 }
 
 - (jboolean)getWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$J$J", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$J$J", @"index=", index, @", numBits=", numBits_));
   jint i = (jint) (JreRShift64(index, 6));
   jlong bitmask = JreLShift64(1LL, index);
   return (IOSLongArray_Get(nil_chk(bits_), i) & bitmask) != 0;
 }
 
 - (void)setWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$J$J", @"index=", index, @" numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$J$J", @"index=", index, @" numBits=", numBits_));
   jint wordNum = (jint) (JreRShift64(index, 6));
   jlong bitmask = JreLShift64(1LL, index);
   *IOSLongArray_GetRef(nil_chk(bits_), wordNum) |= bitmask;
 }
 
 - (jboolean)getAndSetWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$J$J", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$J$J", @"index=", index, @", numBits=", numBits_));
   jint wordNum = (jint) (JreRShift64(index, 6));
   jlong bitmask = JreLShift64(1LL, index);
   jboolean val = (IOSLongArray_Get(nil_chk(bits_), wordNum) & bitmask) != 0;
@@ -96,14 +100,14 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 }
 
 - (void)clearWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$J$J", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$J$J", @"index=", index, @", numBits=", numBits_));
   jint wordNum = (jint) (JreRShift64(index, 6));
   jlong bitmask = JreLShift64(1LL, index);
   *IOSLongArray_GetRef(nil_chk(bits_), wordNum) &= ~bitmask;
 }
 
 - (jboolean)getAndClearWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$J$J", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$J$J", @"index=", index, @", numBits=", numBits_));
   jint wordNum = (jint) (JreRShift64(index, 6));
   jlong bitmask = JreLShift64(1LL, index);
   jboolean val = (IOSLongArray_Get(nil_chk(bits_), wordNum) & bitmask) != 0;
@@ -112,7 +116,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 }
 
 - (jlong)nextSetBitWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$J$J", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$J$J", @"index=", index, @", numBits=", numBits_));
   jint i = (jint) (JreRShift64(index, 6));
   jlong word = JreRShift64(IOSLongArray_Get(nil_chk(bits_), i), index);
   if (word != 0) {
@@ -128,7 +132,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 }
 
 - (jlong)prevSetBitWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$J$J", @"index=", index, @" numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$J$J", @"index=", index, @" numBits=", numBits_));
   jint i = (jint) (JreRShift64(index, 6));
   jint subIndex = (jint) (index & (jint) 0x3f);
   jlong word = (JreLShift64(IOSLongArray_Get(nil_chk(bits_), i), (63 - subIndex)));
@@ -145,7 +149,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 }
 
 - (void)or__WithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)other {
-  JreAssert((((OrgApacheLuceneUtilLongBitSet *) nil_chk(other))->numWords_ <= numWords_), (JreStrcat("$I$I", @"numWords=", numWords_, @", other.numWords=", other->numWords_)));
+  JreAssert(((OrgApacheLuceneUtilLongBitSet *) nil_chk(other))->numWords_ <= numWords_, JreStrcat("$I$I", @"numWords=", numWords_, @", other.numWords=", other->numWords_));
   jint pos = JavaLangMath_minWithInt_withInt_(numWords_, other->numWords_);
   while (--pos >= 0) {
     *IOSLongArray_GetRef(nil_chk(bits_), pos) |= IOSLongArray_Get(other->bits_, pos);
@@ -153,7 +157,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 }
 
 - (void)xor__WithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)other {
-  JreAssert((((OrgApacheLuceneUtilLongBitSet *) nil_chk(other))->numWords_ <= numWords_), (JreStrcat("$I$I", @"numWords=", numWords_, @", other.numWords=", other->numWords_)));
+  JreAssert(((OrgApacheLuceneUtilLongBitSet *) nil_chk(other))->numWords_ <= numWords_, JreStrcat("$I$I", @"numWords=", numWords_, @", other.numWords=", other->numWords_));
   jint pos = JavaLangMath_minWithInt_withInt_(numWords_, other->numWords_);
   while (--pos >= 0) {
     *IOSLongArray_GetRef(nil_chk(bits_), pos) ^= IOSLongArray_Get(other->bits_, pos);
@@ -195,8 +199,8 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 
 - (void)flipWithLong:(jlong)startIndex
             withLong:(jlong)endIndex {
-  JreAssert((startIndex >= 0 && startIndex < numBits_), (@"org/apache/lucene/util/LongBitSet.java:288 condition failed: assert startIndex >= 0 && startIndex < numBits;"));
-  JreAssert((endIndex >= 0 && endIndex <= numBits_), (@"org/apache/lucene/util/LongBitSet.java:289 condition failed: assert endIndex >= 0 && endIndex <= numBits;"));
+  JreAssert(startIndex >= 0 && startIndex < numBits_, @"org/apache/lucene/util/LongBitSet.java:288 condition failed: assert startIndex >= 0 && startIndex < numBits;");
+  JreAssert(endIndex >= 0 && endIndex <= numBits_, @"org/apache/lucene/util/LongBitSet.java:289 condition failed: assert endIndex >= 0 && endIndex <= numBits;");
   if (endIndex <= startIndex) {
     return;
   }
@@ -216,7 +220,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 }
 
 - (void)flipWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$J$J", @"index=", index, @" numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$J$J", @"index=", index, @" numBits=", numBits_));
   jint wordNum = (jint) (JreRShift64(index, 6));
   jlong bitmask = JreLShift64(1LL, index);
   *IOSLongArray_GetRef(nil_chk(bits_), wordNum) ^= bitmask;
@@ -224,8 +228,8 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 
 - (void)setWithLong:(jlong)startIndex
            withLong:(jlong)endIndex {
-  JreAssert((startIndex >= 0 && startIndex < numBits_), (JreStrcat("$J$J", @"startIndex=", startIndex, @", numBits=", numBits_)));
-  JreAssert((endIndex >= 0 && endIndex <= numBits_), (JreStrcat("$J$J", @"endIndex=", endIndex, @", numBits=", numBits_)));
+  JreAssert(startIndex >= 0 && startIndex < numBits_, JreStrcat("$J$J", @"startIndex=", startIndex, @", numBits=", numBits_));
+  JreAssert(endIndex >= 0 && endIndex <= numBits_, JreStrcat("$J$J", @"endIndex=", endIndex, @", numBits=", numBits_));
   if (endIndex <= startIndex) {
     return;
   }
@@ -244,8 +248,8 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 
 - (void)clearWithLong:(jlong)startIndex
              withLong:(jlong)endIndex {
-  JreAssert((startIndex >= 0 && startIndex < numBits_), (JreStrcat("$J$J", @"startIndex=", startIndex, @", numBits=", numBits_)));
-  JreAssert((endIndex >= 0 && endIndex <= numBits_), (JreStrcat("$J$J", @"endIndex=", endIndex, @", numBits=", numBits_)));
+  JreAssert(startIndex >= 0 && startIndex < numBits_, JreStrcat("$J$J", @"startIndex=", startIndex, @", numBits=", numBits_));
+  JreAssert(endIndex >= 0 && endIndex <= numBits_, JreStrcat("$J$J", @"endIndex=", endIndex, @", numBits=", numBits_));
   if (endIndex <= startIndex) {
     return;
   }
@@ -264,14 +268,14 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
   *IOSLongArray_GetRef(bits_, endWord) &= endmask;
 }
 
-- (OrgApacheLuceneUtilLongBitSet *)clone {
+- (OrgApacheLuceneUtilLongBitSet *)java_clone {
   IOSLongArray *bits = [IOSLongArray arrayWithLength:((IOSLongArray *) nil_chk(self->bits_))->size_];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->bits_, 0, bits, 0, numWords_);
   return create_OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(bits, numBits_);
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) {
+  if (JreObjectEqualsEquals(self, o)) {
     return true;
   }
   if (!([o isKindOfClass:[OrgApacheLuceneUtilLongBitSet class]])) {
@@ -299,42 +303,75 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "ensureCapacityWithOrgApacheLuceneUtilLongBitSet:withLong:", "ensureCapacity", "Lorg.apache.lucene.util.LongBitSet;", 0x9, NULL, NULL },
-    { "bits2wordsWithLong:", "bits2words", "I", 0x9, NULL, NULL },
-    { "initWithLong:", "LongBitSet", NULL, 0x1, NULL, NULL },
-    { "initWithLongArray:withLong:", "LongBitSet", NULL, 0x1, NULL, NULL },
-    { "verifyGhostBitsClear", NULL, "Z", 0x2, NULL, NULL },
-    { "length", NULL, "J", 0x1, NULL, NULL },
-    { "getBits", NULL, "[J", 0x1, NULL, NULL },
-    { "cardinality", NULL, "J", 0x1, NULL, NULL },
-    { "getWithLong:", "get", "Z", 0x1, NULL, NULL },
-    { "setWithLong:", "set", "V", 0x1, NULL, NULL },
-    { "getAndSetWithLong:", "getAndSet", "Z", 0x1, NULL, NULL },
-    { "clearWithLong:", "clear", "V", 0x1, NULL, NULL },
-    { "getAndClearWithLong:", "getAndClear", "Z", 0x1, NULL, NULL },
-    { "nextSetBitWithLong:", "nextSetBit", "J", 0x1, NULL, NULL },
-    { "prevSetBitWithLong:", "prevSetBit", "J", 0x1, NULL, NULL },
-    { "or__WithOrgApacheLuceneUtilLongBitSet:", "or", "V", 0x1, NULL, NULL },
-    { "xor__WithOrgApacheLuceneUtilLongBitSet:", "xor", "V", 0x1, NULL, NULL },
-    { "intersectsWithOrgApacheLuceneUtilLongBitSet:", "intersects", "Z", 0x1, NULL, NULL },
-    { "and__WithOrgApacheLuceneUtilLongBitSet:", "and", "V", 0x1, NULL, NULL },
-    { "andNotWithOrgApacheLuceneUtilLongBitSet:", "andNot", "V", 0x1, NULL, NULL },
-    { "scanIsEmpty", NULL, "Z", 0x1, NULL, NULL },
-    { "flipWithLong:withLong:", "flip", "V", 0x1, NULL, NULL },
-    { "flipWithLong:", "flip", "V", 0x1, NULL, NULL },
-    { "setWithLong:withLong:", "set", "V", 0x1, NULL, NULL },
-    { "clearWithLong:withLong:", "clear", "V", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.util.LongBitSet;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneUtilLongBitSet;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 10, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 11, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 15, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 19, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilLongBitSet;", 0x1, 20, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 21, 22, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 23, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(ensureCapacityWithOrgApacheLuceneUtilLongBitSet:withLong:);
+  methods[1].selector = @selector(bits2wordsWithLong:);
+  methods[2].selector = @selector(initWithLong:);
+  methods[3].selector = @selector(initWithLongArray:withLong:);
+  methods[4].selector = @selector(verifyGhostBitsClear);
+  methods[5].selector = @selector(length);
+  methods[6].selector = @selector(getBits);
+  methods[7].selector = @selector(cardinality);
+  methods[8].selector = @selector(getWithLong:);
+  methods[9].selector = @selector(setWithLong:);
+  methods[10].selector = @selector(getAndSetWithLong:);
+  methods[11].selector = @selector(clearWithLong:);
+  methods[12].selector = @selector(getAndClearWithLong:);
+  methods[13].selector = @selector(nextSetBitWithLong:);
+  methods[14].selector = @selector(prevSetBitWithLong:);
+  methods[15].selector = @selector(or__WithOrgApacheLuceneUtilLongBitSet:);
+  methods[16].selector = @selector(xor__WithOrgApacheLuceneUtilLongBitSet:);
+  methods[17].selector = @selector(intersectsWithOrgApacheLuceneUtilLongBitSet:);
+  methods[18].selector = @selector(and__WithOrgApacheLuceneUtilLongBitSet:);
+  methods[19].selector = @selector(andNotWithOrgApacheLuceneUtilLongBitSet:);
+  methods[20].selector = @selector(scanIsEmpty);
+  methods[21].selector = @selector(flipWithLong:withLong:);
+  methods[22].selector = @selector(flipWithLong:);
+  methods[23].selector = @selector(setWithLong:withLong:);
+  methods[24].selector = @selector(clearWithLong:withLong:);
+  methods[25].selector = @selector(java_clone);
+  methods[26].selector = @selector(isEqual:);
+  methods[27].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bits_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "numBits_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "numWords_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "bits_", "[J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numBits_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numWords_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilLongBitSet = { 2, "LongBitSet", "org.apache.lucene.util", NULL, 0x11, 28, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ensureCapacity", "LOrgApacheLuceneUtilLongBitSet;J", "bits2words", "J", "[JJ", "get", "set", "getAndSet", "clear", "getAndClear", "nextSetBit", "prevSetBit", "or", "LOrgApacheLuceneUtilLongBitSet;", "xor", "intersects", "and", "andNot", "flip", "JJ", "clone", "equals", "LNSObject;", "hashCode" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilLongBitSet = { "LongBitSet", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 28, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilLongBitSet;
 }
 
@@ -383,7 +420,7 @@ void OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(OrgApacheLuceneUt
   }
   self->numBits_ = numBits;
   JreStrongAssign(&self->bits_, storedBits);
-  JreAssert((OrgApacheLuceneUtilLongBitSet_verifyGhostBitsClear(self)), (@"org/apache/lucene/util/LongBitSet.java:90 condition failed: assert verifyGhostBitsClear();"));
+  JreAssert(OrgApacheLuceneUtilLongBitSet_verifyGhostBitsClear(self), @"org/apache/lucene/util/LongBitSet.java:90 condition failed: assert verifyGhostBitsClear();");
 }
 
 OrgApacheLuceneUtilLongBitSet *new_OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(IOSLongArray *storedBits, jlong numBits) {

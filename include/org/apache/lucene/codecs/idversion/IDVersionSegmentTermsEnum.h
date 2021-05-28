@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum || defined(INCLUDE_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum))
 #define OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_
 
@@ -33,9 +39,9 @@
 
 /*!
  @brief Iterates through terms in this field; this class is public so users
- can cast it to call <code>seekExact(BytesRef,long)</code> for
- optimistic-concurreny, and also <code>getVersion</code> to get the
- version of the currently seek'd term.
+   can cast it to call <code>seekExact(BytesRef, long)</code> for
+   optimistic-concurreny, and also <code>getVersion</code> to get the
+   version of the currently seek'd term.
  */
 @interface OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum : OrgApacheLuceneIndexTermsEnum {
  @public
@@ -52,7 +58,7 @@
 
 /*!
  @brief Get the version of the currently seek'd term; only valid if we are
- positioned.
+   positioned.
  */
 - (jlong)getVersion;
 
@@ -69,11 +75,10 @@
 
 /*!
  @brief Optimized version of <code>seekExact(BytesRef)</code> that can
- sometimes fail-fast if the version indexed with the requested ID
- is less than the specified minIDVersion.
- Applications that index
- a monotonically increasing global version with each document can
- use this for fast optimistic concurrency. 
+   sometimes fail-fast if the version indexed with the requested ID
+   is less than the specified minIDVersion.Applications that index
+   a monotonically increasing global version with each document can
+   use this for fast optimistic concurrency.
  */
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
                                             withLong:(jlong)minIDVersion;
@@ -93,7 +98,7 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneCodecsIdversionVersionFieldReader:(OrgApacheLuceneCodecsIdversionVersionFieldReader *)fr;
+- (instancetype __nonnull)initWithOrgApacheLuceneCodecsIdversionVersionFieldReader:(OrgApacheLuceneCodecsIdversionVersionFieldReader *)fr;
 
 + (NSString *)brToStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b;
 
@@ -106,6 +111,10 @@
 - (OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *)pushFrameWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
                                                                   withOrgApacheLuceneUtilFstPairOutputs_Pair:(OrgApacheLuceneUtilFstPairOutputs_Pair *)frameData
                                                                                                      withInt:(jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -128,4 +137,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEn
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum")

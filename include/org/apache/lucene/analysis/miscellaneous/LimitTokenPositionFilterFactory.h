@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_
 
@@ -26,33 +32,31 @@
 /*!
  @brief Factory for <code>LimitTokenPositionFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_limit_pos" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.LimitTokenPositionFilterFactory" maxTokenPosition="3" consumeAllTokens="false" /&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_limit_pos" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.LimitTokenPositionFilterFactory" maxTokenPosition="3" consumeAllTokens="false" /&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
- <p>
- The <code>consumeAllTokens</code> property is optional and defaults to <code>false</code>.  
- See <code>LimitTokenPositionFilter</code> for an explanation of its use.
+  <p>
+  The <code>consumeAllTokens</code> property is optional and defaults to <code>false</code>.  
+  See <code>LimitTokenPositionFilter</code> for an explanation of its use.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
  @public
   jint maxTokenPosition_;
   jboolean consumeAllTokens_;
 }
-
-+ (NSString *)MAX_TOKEN_POSITION_KEY;
-
-+ (NSString *)CONSUME_ALL_TOKENS_KEY;
+@property (readonly, copy, class) NSString *MAX_TOKEN_POSITION_KEY NS_SWIFT_NAME(MAX_TOKEN_POSITION_KEY);
+@property (readonly, copy, class) NSString *CONSUME_ALL_TOKENS_KEY NS_SWIFT_NAME(CONSUME_ALL_TOKENS_KEY);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new LimitTokenPositionFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -60,12 +64,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_get_MAX_TOKEN_POSITION_KEY();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_get_MAX_TOKEN_POSITION_KEY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_MAX_TOKEN_POSITION_KEY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory, MAX_TOKEN_POSITION_KEY, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_get_CONSUME_ALL_TOKENS_KEY();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_get_CONSUME_ALL_TOKENS_KEY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory, CONSUME_ALL_TOKENS_KEY, NSString *)
@@ -80,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositio
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory")

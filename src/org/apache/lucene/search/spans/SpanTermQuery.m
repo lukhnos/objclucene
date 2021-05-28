@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/spans/SpanTermQuery.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Collections.h"
@@ -22,7 +20,6 @@
 #include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
-#include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 #include "org/apache/lucene/search/spans/SpanTermQuery.h"
 #include "org/apache/lucene/search/spans/SpanWeight.h"
@@ -32,14 +29,16 @@
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spans/SpanTermQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight () {
  @public
   OrgApacheLuceneSearchSpansSpanTermQuery *this$0_;
 }
 
 @end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight, this$0_, OrgApacheLuceneSearchSpansSpanTermQuery *)
 
 @implementation OrgApacheLuceneSearchSpansSpanTermQuery
 
@@ -66,7 +65,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight, this
                                                                                  withBoolean:(jboolean)needsScores {
   OrgApacheLuceneIndexTermContext *context;
   OrgApacheLuceneIndexIndexReaderContext *topContext = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getTopReaderContext];
-  if (termContext_ == nil || termContext_->topReaderContext_ != topContext) {
+  if (termContext_ == nil || !JreObjectEqualsEquals(termContext_->topReaderContext_, topContext)) {
     context = OrgApacheLuceneIndexTermContext_buildWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTerm_(topContext, term_);
   }
   else {
@@ -105,22 +104,34 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight, this
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:", "SpanTermQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneIndexTermContext:", "SpanTermQuery", NULL, 0x1, NULL, NULL },
-    { "getTerm", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.spans.SpanWeight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpansSpanWeight;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 8, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneIndexTermContext:);
+  methods[2].selector = @selector(getTerm);
+  methods[3].selector = @selector(getField);
+  methods[4].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[5].selector = @selector(toStringWithNSString:);
+  methods[6].selector = @selector(hash);
+  methods[7].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "term_", NULL, 0x14, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termContext_", NULL, 0x14, "Lorg.apache.lucene.index.TermContext;", NULL, NULL, .constantValue.asLong = 0 },
+    { "term_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "termContext_", "LOrgApacheLuceneIndexTermContext;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.spans.SpanTermQuery$SpanTermWeight;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanTermQuery = { 2, "SpanTermQuery", "org.apache.lucene.search.spans", NULL, 0x1, 8, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;", "LOrgApacheLuceneIndexTerm;LOrgApacheLuceneIndexTermContext;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "toString", "LNSString;", "hashCode", "equals", "LNSObject;", "LOrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanTermQuery = { "SpanTermQuery", "org.apache.lucene.search.spans", ptrTable, methods, fields, 7, 0x1, 8, 2, -1, 10, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansSpanTermQuery;
 }
 
@@ -176,10 +187,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanTermQuery)
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                      withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings {
-  JreAssert((((OrgApacheLuceneIndexTermContext *) nil_chk(termContext_))->topReaderContext_ == OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context)), (JreStrcat("$@$@", @"The top-reader used to create Weight (", termContext_->topReaderContext_, @") is not the same as the current reader's top-reader (", OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context))));
+  JreAssert(JreObjectEqualsEquals(((OrgApacheLuceneIndexTermContext *) nil_chk(termContext_))->topReaderContext_, OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context)), JreStrcat("$@$@", @"The top-reader used to create Weight (", termContext_->topReaderContext_, @") is not the same as the current reader's top-reader (", OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context)));
   OrgApacheLuceneIndexTermState *state = [termContext_ getWithInt:((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->ord_];
   if (state == nil) {
-    JreAssert(([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) docFreqWithOrgApacheLuceneIndexTerm:this$0_->term_] == 0), (JreStrcat("$@", @"no termstate found but term exists in reader term=", this$0_->term_)));
+    JreAssert([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) docFreqWithOrgApacheLuceneIndexTerm:this$0_->term_] == 0, JreStrcat("$@", @"no termstate found but term exists in reader term=", this$0_->term_));
     return nil;
   }
   OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) termsWithNSString:[((OrgApacheLuceneIndexTerm *) nil_chk(this$0_->term_)) field]];
@@ -198,17 +209,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanTermQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanTermQuery:withOrgApacheLuceneIndexTermContext:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:", "SpanTermWeight", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/spans/SpanTermQuery;Lorg/apache/lucene/index/TermContext;Lorg/apache/lucene/search/IndexSearcher;Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)V" },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "extractTermContextsWithJavaUtilMap:", "extractTermContexts", "V", 0x1, NULL, "(Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)V" },
-    { "getSpansWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchSpansSpanWeight_Postings:", "getSpans", "Lorg.apache.lucene.search.spans.Spans;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, 2, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, 5, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, 8, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpansSpans;", 0x1, 9, 10, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpansSpanTermQuery:withOrgApacheLuceneIndexTermContext:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(extractTermContextsWithJavaUtilMap:);
+  methods[3].selector = @selector(getSpansWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchSpansSpanWeight_Postings:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.spans.SpanTermQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termContext_", NULL, 0x10, "Lorg.apache.lucene.index.TermContext;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchSpansSpanTermQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "termContext_", "LOrgApacheLuceneIndexTermContext;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight = { 2, "SpanTermWeight", "org.apache.lucene.search.spans", "SpanTermQuery", 0x1, 4, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpansSpanTermQuery;LOrgApacheLuceneIndexTermContext;LOrgApacheLuceneSearchIndexSearcher;LJavaUtilMap;", "LJavaIoIOException;", "(Lorg/apache/lucene/index/TermContext;Lorg/apache/lucene/search/IndexSearcher;Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)V", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "extractTermContexts", "LJavaUtilMap;", "(Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)V", "getSpans", "LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneSearchSpansSpanWeight_Postings;", "LOrgApacheLuceneSearchSpansSpanTermQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight = { "SpanTermWeight", "org.apache.lucene.search.spans", ptrTable, methods, fields, 7, 0x1, 4, 2, 11, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight;
 }
 
@@ -218,7 +238,7 @@ void OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight_initWithOrgApacheLuc
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneSearchSpansSpanWeight_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, outer$, searcher, terms);
   JreStrongAssign(&self->termContext_, termContext);
-  JreAssert((termContext != nil), (@"TermContext must not be null"));
+  JreAssert(termContext != nil, @"TermContext must not be null");
 }
 
 OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight *new_OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight_initWithOrgApacheLuceneSearchSpansSpanTermQuery_withOrgApacheLuceneIndexTermContext_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchSpansSpanTermQuery *outer$, OrgApacheLuceneIndexTermContext *termContext, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms) {

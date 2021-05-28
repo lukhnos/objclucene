@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSegmentCoreReaders
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSegmentCoreReaders_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentCoreReaders || defined(INCLUDE_OrgApacheLuceneIndexSegmentCoreReaders))
 #define OrgApacheLuceneIndexSegmentCoreReaders_
 
@@ -30,7 +36,7 @@
 
 /*!
  @brief Holds core readers that are shared (unchanged) when
- SegmentReader is cloned or reopened
+  SegmentReader is cloned or reopened
  */
 @interface OrgApacheLuceneIndexSegmentCoreReaders : NSObject {
  @public
@@ -42,7 +48,7 @@
   /*!
    @brief fieldinfos for this core: means gen=-1.
    this is the exact fieldinfos these codec components saw at write.
- in the case of DV updates, SR may hold a newer version. 
+  in the case of DV updates, SR may hold a newer version.
    */
   OrgApacheLuceneIndexFieldInfos *coreFieldInfos_;
   OrgApacheLuceneUtilCloseableThreadLocal *fieldsReaderLocal_;
@@ -51,10 +57,10 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)owner
-                        withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
-                        withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)owner
+                                                withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                                        withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
+                                                withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
@@ -65,6 +71,10 @@
 - (void)incRef;
 
 - (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -79,11 +89,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCoreReaders, coreFieldInfos_, Org
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCoreReaders, fieldsReaderLocal_, OrgApacheLuceneUtilCloseableThreadLocal *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCoreReaders, termVectorsLocal_, OrgApacheLuceneUtilCloseableThreadLocal *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentCoreReaders *self, OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentCoreReaders_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentCoreReaders *self, OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentCoreReaders *new_OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentCoreReaders *new_OrgApacheLuceneIndexSegmentCoreReaders_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentCoreReaders *create_OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context);
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentCoreReaders *create_OrgApacheLuceneIndexSegmentCoreReaders_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentCoreReaders)
 
@@ -101,13 +111,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentCoreReaders)
 
 @interface OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal : OrgApacheLuceneUtilCloseableThreadLocal
 
+#pragma mark Public
+
+- (OrgApacheLuceneCodecsStoredFieldsReader *)get;
+
 #pragma mark Protected
 
 - (OrgApacheLuceneCodecsStoredFieldsReader *)initialValue OBJC_METHOD_FAMILY_NONE;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentCoreReaders:(OrgApacheLuceneIndexSegmentCoreReaders *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentCoreReaders:(OrgApacheLuceneIndexSegmentCoreReaders *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -135,13 +153,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLo
 
 @interface OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal : OrgApacheLuceneUtilCloseableThreadLocal
 
+#pragma mark Public
+
+- (OrgApacheLuceneCodecsTermVectorsReader *)get;
+
 #pragma mark Protected
 
 - (OrgApacheLuceneCodecsTermVectorsReader *)initialValue OBJC_METHOD_FAMILY_NONE;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentCoreReaders:(OrgApacheLuceneIndexSegmentCoreReaders *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentCoreReaders:(OrgApacheLuceneIndexSegmentCoreReaders *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -157,4 +183,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLoc
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentCoreReaders")

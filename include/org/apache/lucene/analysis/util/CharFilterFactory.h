@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilCharFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilCharFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisUtilCharFilterFactory))
 #define OrgApacheLuceneAnalysisUtilCharFilterFactory_
 
@@ -28,7 +34,7 @@
 
 /*!
  @brief Abstract parent class for analysis factories that create <code>CharFilter</code>
- instances.
+  instances.
  */
 @interface OrgApacheLuceneAnalysisUtilCharFilterFactory : OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory
 
@@ -58,11 +64,11 @@
 /*!
  @brief Reloads the factory list from the given <code>ClassLoader</code>.
  Changes to the factories are visible after the method ends, all
- iterators (<code>availableCharFilters()</code>,...) stay consistent. 
+  iterators (<code>availableCharFilters()</code>,...) stay consistent.   
  <p><b>NOTE:</b> Only new factories are added, existing ones are
- never removed or replaced.
+  never removed or replaced.  
  <p><em>This method is expensive and should only be called for discovery
- of new factories on the given classpath/classloader!</em>
+  of new factories on the given classpath/classloader!</em>
  */
 + (void)reloadCharFiltersWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
@@ -71,7 +77,7 @@
 /*!
  @brief Initialize this factory via a set of key-value pairs.
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 @end
 
@@ -81,7 +87,7 @@ FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharFilterFactory *OrgApacheLuceneA
 
 FOUNDATION_EXPORT IOSClass *OrgApacheLuceneAnalysisUtilCharFilterFactory_lookupClassWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneAnalysisUtilCharFilterFactory_availableCharFilters();
+FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneAnalysisUtilCharFilterFactory_availableCharFilters(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilCharFilterFactory_reloadCharFiltersWithJavaLangClassLoader_(JavaLangClassLoader *classloader);
 
@@ -91,4 +97,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharFilterFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharFilterFactory")

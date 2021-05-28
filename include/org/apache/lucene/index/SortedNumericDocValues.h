@@ -13,12 +13,18 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSortedNumericDocValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSortedNumericDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortedNumericDocValues || defined(INCLUDE_OrgApacheLuceneIndexSortedNumericDocValues))
 #define OrgApacheLuceneIndexSortedNumericDocValues_
 
 /*!
  @brief A list of per-document numeric values, sorted 
- according to <code>Long.compare(long,long)</code>.
+  according to <code>Long.compare(long, long)</code>.
  */
 @interface OrgApacheLuceneIndexSortedNumericDocValues : NSObject
 
@@ -37,7 +43,7 @@
 
 /*!
  @brief Retrieve the value for the current document at the specified index.
- An index ranges from <code>0</code> to <code>count()-1</code>. 
+ An index ranges from <code>0</code> to <code>count()-1</code>.
  */
 - (jlong)valueAtWithInt:(jint)index;
 
@@ -46,9 +52,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedNumericDocValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedNumericDocValues")

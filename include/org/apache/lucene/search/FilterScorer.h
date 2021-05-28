@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFilterScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFilterScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilterScorer || defined(INCLUDE_OrgApacheLuceneSearchFilterScorer))
 #define OrgApacheLuceneSearchFilterScorer_
 
@@ -25,14 +31,14 @@
 
 /*!
  @brief A <code>FilterScorer</code> contains another <code>Scorer</code>, which it
- uses as its basic source of data, possibly transforming the data along the
- way or providing additional functionality.
- The class
+  uses as its basic source of data, possibly transforming the data along the
+  way or providing additional functionality.The class 
  <code>FilterScorer</code> itself simply implements all abstract methods
- of <code>Scorer</code> with versions that pass all requests to the
- contained scorer. Subclasses of <code>FilterScorer</code> may
- further override some of these methods and may also provide additional
- methods and fields.
+  of <code>Scorer</code> with versions that pass all requests to the
+  contained scorer.
+ Subclasses of <code>FilterScorer</code> may
+  further override some of these methods and may also provide additional
+  methods and fields.
  */
 @interface OrgApacheLuceneSearchFilterScorer : OrgApacheLuceneSearchScorer {
  @public
@@ -43,17 +49,17 @@
 
 /*!
  @brief Create a new FilterScorer
- @param inArg the <code>Scorer</code> to wrap
+ @param inArg the <code>Scorer</code>  to wrap
  */
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg;
 
 /*!
  @brief Create a new FilterScorer with a specific weight
- @param inArg the <code>Scorer</code> to wrap
+ @param inArg the <code>Scorer</code>  to wrap
  @param weight a <code>Weight</code>
  */
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg
-                    withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg
+                              withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -69,6 +75,10 @@
 
 - (jfloat)score;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFilterScorer)
@@ -83,4 +93,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilterScorer")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreRateLimitedIndexOutput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreRateLimitedIndexOutput_) && (INCLUDE_ALL_OrgApacheLuceneStoreRateLimitedIndexOutput || defined(INCLUDE_OrgApacheLuceneStoreRateLimitedIndexOutput))
 #define OrgApacheLuceneStoreRateLimitedIndexOutput_
 
@@ -30,8 +36,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreRateLimiter:(OrgApacheLuceneStoreRateLimiter *)rateLimiter
-                    withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)delegate;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRateLimiter:(OrgApacheLuceneStoreRateLimiter *)rateLimiter
+                              withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)delegate;
 
 - (void)close;
 
@@ -44,6 +50,10 @@
 - (void)writeBytesWithByteArray:(IOSByteArray *)b
                         withInt:(jint)offset
                         withInt:(jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -59,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRateLimitedIndexOutput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRateLimitedIndexOutput")

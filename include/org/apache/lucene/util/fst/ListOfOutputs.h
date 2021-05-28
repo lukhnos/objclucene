@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstListOfOutputs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstListOfOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstListOfOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstListOfOutputs))
 #define OrgApacheLuceneUtilFstListOfOutputs_
 
@@ -26,32 +32,32 @@
 
 /*!
  @brief Wraps another Outputs implementation and encodes one or
- more of its output values.
- You can use this when a single
- input may need to map to more than one output,
- maintaining order: pass the same input with a different
- output by calling <code>Builder.add(IntsRef,Object)</code> multiple
- times.  The builder will then combine the outputs using
- the <code>Outputs.merge(Object,Object)</code> method.
+  more of its output values.You can use this when a single
+  input may need to map to more than one output,
+  maintaining order: pass the same input with a different
+  output by calling <code>Builder.add(IntsRef,Object)</code> multiple
+  times.
+ The builder will then combine the outputs using the 
+ <code>Outputs.merge(Object,Object)</code> method. 
  <p>The resulting FST may not be minimal when an input has
- more than one output, as this requires pushing all
- multi-output values to a final state.
+  more than one output, as this requires pushing all
+  multi-output values to a final state. 
  <p>NOTE: the only way to create multiple outputs is to
- add the same input to the FST multiple times in a row.  This is
- how the FST maps a single input to multiple outputs (e.g. you
- cannot pass a List&lt;Object&gt; to <code>Builder.add</code>).  If
- your outputs are longs, and you need at most 2, then use
+  add the same input to the FST multiple times in a row.  This is
+  how the FST maps a single input to multiple outputs (e.g. you
+  cannot pass a List&lt;Object&gt; to <code>Builder.add</code>).  If
+  your outputs are longs, and you need at most 2, then use 
  <code>UpToTwoPositiveIntOutputs</code> instead since it stores
- the outputs more compactly (by stealing a bit from each
- long value).
+  the outputs more compactly (by stealing a bit from each
+  long value). 
  <p>NOTE: this cannot wrap itself (ie you cannot make an
- FST with List&lt;List&lt;Object&gt;&gt; outputs using this).
+  FST with List&lt;List&lt;Object&gt;&gt; outputs using this).
  */
 @interface OrgApacheLuceneUtilFstListOfOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs;
 
 - (id)addWithId:(id)prefix
          withId:(id)output;
@@ -89,6 +95,10 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 - (void)writeFinalOutputWithId:(id)output
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstListOfOutputs)
@@ -103,4 +113,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstListOfOutputs)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstListOfOutputs")

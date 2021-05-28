@@ -8,6 +8,10 @@
 #include "org/apache/lucene/analysis/ar/ArabicNormalizer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ar/ArabicNormalizer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisArArabicNormalizer
 
 + (jchar)ALEF {
@@ -78,6 +82,13 @@
   return OrgApacheLuceneAnalysisArArabicNormalizer_SUKUN;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisArArabicNormalizer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (jint)normalizeWithCharArray:(IOSCharArray *)s
                        withInt:(jint)len {
   for (jint i = 0; i < len; i++) {
@@ -112,38 +123,38 @@
   return len;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisArArabicNormalizer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
-    { "init", "ArabicNormalizer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(normalizeWithCharArray:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ALEF", "ALEF", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_ALEF },
-    { "ALEF_MADDA", "ALEF_MADDA", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_MADDA },
-    { "ALEF_HAMZA_ABOVE", "ALEF_HAMZA_ABOVE", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_HAMZA_ABOVE },
-    { "ALEF_HAMZA_BELOW", "ALEF_HAMZA_BELOW", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_HAMZA_BELOW },
-    { "YEH", "YEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_YEH },
-    { "DOTLESS_YEH", "DOTLESS_YEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_DOTLESS_YEH },
-    { "TEH_MARBUTA", "TEH_MARBUTA", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_TEH_MARBUTA },
-    { "HEH", "HEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_HEH },
-    { "TATWEEL", "TATWEEL", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_TATWEEL },
-    { "FATHATAN", "FATHATAN", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_FATHATAN },
-    { "DAMMATAN", "DAMMATAN", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_DAMMATAN },
-    { "KASRATAN", "KASRATAN", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_KASRATAN },
-    { "FATHA", "FATHA", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_FATHA },
-    { "DAMMA", "DAMMA", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_DAMMA },
-    { "KASRA", "KASRA", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_KASRA },
-    { "SHADDA", "SHADDA", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_SHADDA },
-    { "SUKUN", "SUKUN", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_SUKUN },
+    { "ALEF", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_ALEF, 0x19, -1, -1, -1, -1 },
+    { "ALEF_MADDA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_MADDA, 0x19, -1, -1, -1, -1 },
+    { "ALEF_HAMZA_ABOVE", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_HAMZA_ABOVE, 0x19, -1, -1, -1, -1 },
+    { "ALEF_HAMZA_BELOW", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_HAMZA_BELOW, 0x19, -1, -1, -1, -1 },
+    { "YEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_YEH, 0x19, -1, -1, -1, -1 },
+    { "DOTLESS_YEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_DOTLESS_YEH, 0x19, -1, -1, -1, -1 },
+    { "TEH_MARBUTA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_TEH_MARBUTA, 0x19, -1, -1, -1, -1 },
+    { "HEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_HEH, 0x19, -1, -1, -1, -1 },
+    { "TATWEEL", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_TATWEEL, 0x19, -1, -1, -1, -1 },
+    { "FATHATAN", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_FATHATAN, 0x19, -1, -1, -1, -1 },
+    { "DAMMATAN", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_DAMMATAN, 0x19, -1, -1, -1, -1 },
+    { "KASRATAN", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_KASRATAN, 0x19, -1, -1, -1, -1 },
+    { "FATHA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_FATHA, 0x19, -1, -1, -1, -1 },
+    { "DAMMA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_DAMMA, 0x19, -1, -1, -1, -1 },
+    { "KASRA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_KASRA, 0x19, -1, -1, -1, -1 },
+    { "SHADDA", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_SHADDA, 0x19, -1, -1, -1, -1 },
+    { "SUKUN", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_SUKUN, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisArArabicNormalizer = { 2, "ArabicNormalizer", "org.apache.lucene.analysis.ar", NULL, 0x1, 2, methods, 17, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "normalize", "[CI" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisArArabicNormalizer = { "ArabicNormalizer", "org.apache.lucene.analysis.ar", ptrTable, methods, fields, 7, 0x1, 2, 17, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisArArabicNormalizer;
 }
 

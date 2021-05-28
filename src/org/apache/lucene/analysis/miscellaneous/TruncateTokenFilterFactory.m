@@ -10,8 +10,11 @@
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/TruncateTokenFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/TruncateTokenFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/TruncateTokenFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory () {
  @public
@@ -38,15 +41,22 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "TruncateTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "PREFIX_LENGTH_KEY", "PREFIX_LENGTH_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY, NULL, .constantValue.asLong = 0 },
-    { "prefixLength_", NULL, 0x12, "B", NULL, NULL, .constantValue.asLong = 0 },
+    { "PREFIX_LENGTH_KEY", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "prefixLength_", "B", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory = { 2, "TruncateTokenFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LOrgApacheLuceneAnalysisTokenStream;", &OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory = { "TruncateTokenFilterFactory", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x1, 2, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory;
 }
 

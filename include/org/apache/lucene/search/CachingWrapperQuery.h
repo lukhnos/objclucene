@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchCachingWrapperQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchCachingWrapperQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperQuery || defined(INCLUDE_OrgApacheLuceneSearchCachingWrapperQuery))
 #define OrgApacheLuceneSearchCachingWrapperQuery_
 
@@ -35,33 +41,33 @@
 
 /*!
  @brief Wraps another <code>Query</code>'s result and caches it when scores are not
- needed.
- The purpose is to allow queries to simply care about matching and
- scoring, and then wrap with this class to add caching.
+  needed.The purpose is to allow queries to simply care about matching and
+  scoring, and then wrap with this class to add caching.
  */
 @interface OrgApacheLuceneSearchCachingWrapperQuery : OrgApacheLuceneSearchQuery < OrgApacheLuceneUtilAccountable > {
  @public
-  jint hitCount_, missCount_;
+  jint hitCount_;
+  jint missCount_;
 }
 
 #pragma mark Public
 
 /*!
- @brief Same as <code>CachingWrapperQuery.CachingWrapperQuery(Query,QueryCachingPolicy)</code>
- but enforces the use of the
+ @brief Same as <code>CachingWrapperQuery.CachingWrapperQuery(Query, QueryCachingPolicy)</code>
+   but enforces the use of the  
  <code>QueryCachingPolicy.CacheOnLargeSegments.DEFAULT</code> policy.
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 /*!
  @brief Wraps another query's result and caches it according to the provided policy.
  @param query Query to cache results of
  @param policy policy defining which filters should be cached on which segments
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-       withOrgApacheLuceneSearchQueryCachingPolicy:(id<OrgApacheLuceneSearchQueryCachingPolicy>)policy;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                 withOrgApacheLuceneSearchQueryCachingPolicy:(id<OrgApacheLuceneSearchQueryCachingPolicy>)policy;
 
-- (OrgApacheLuceneSearchCachingWrapperQuery *)clone;
+- (OrgApacheLuceneSearchCachingWrapperQuery *)java_clone;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -96,6 +102,10 @@
 - (OrgApacheLuceneSearchDocIdSet *)cacheImplWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator
                                                    withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCachingWrapperQuery)
@@ -116,4 +126,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperQuery")

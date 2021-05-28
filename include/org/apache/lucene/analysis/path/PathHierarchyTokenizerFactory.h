@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory))
 #define OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_
 
@@ -27,46 +33,47 @@
 /*!
  @brief Factory for <code>PathHierarchyTokenizer</code>.
  <p>
- This factory is typically configured for use only in the <code>index</code> 
- Analyzer (or only in the <code>query</code> Analyzer, but never both).
+  This factory is typically configured for use only in the <code>index</code> 
+  Analyzer (or only in the <code>query</code> Analyzer, but never both). 
  </p>
- <p>
- For example, in the configuration below a query for 
- <code>Books/NonFic</code> will match documents indexed with values like 
- <code>Books/NonFic</code>, <code>Books/NonFic/Law</code>, 
+  <p>
+  For example, in the configuration below a query for  
+ <code>Books/NonFic</code> will match documents indexed with values like  
+ <code>Books/NonFic</code>, <code>Books/NonFic/Law</code>,  
  <code>Books/NonFic/Science/Physics</code>, etc. But it will not match 
- documents indexed with values like <code>Books</code>, or 
+  documents indexed with values like <code>Books</code>, or  
  <code>Books/Fic</code>...
- </p>
+  </p>
+  
  <pre class="prettyprint">
- &lt;fieldType name="descendent_path" class="solr.TextField"&gt;
- &lt;analyzer type="index"&gt;
- &lt;tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" /&gt;
- &lt;/analyzer&gt;
- &lt;analyzer type="query"&gt;
- &lt;tokenizer class="solr.KeywordTokenizerFactory" /&gt;
- &lt;/analyzer&gt;
- &lt;/fieldType&gt;
- 
+  &lt;fieldType name="descendent_path" class="solr.TextField"&gt;
+    &lt;analyzer type="index"&gt;
+      &lt;tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" /&gt;
+    &lt;/analyzer&gt;
+    &lt;analyzer type="query"&gt;
+      &lt;tokenizer class="solr.KeywordTokenizerFactory" /&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
+  
 @endcode
- <p>
- In this example however we see the oposite configuration, so that a query 
- for <code>Books/NonFic/Science/Physics</code> would match documents 
- containing <code>Books/NonFic</code>, <code>Books/NonFic/Science</code>, 
- or <code>Books/NonFic/Science/Physics</code>, but not 
- <code>Books/NonFic/Science/Physics/Theory</code> or 
+  <p>
+  In this example however we see the oposite configuration, so that a query 
+  for <code>Books/NonFic/Science/Physics</code> would match documents 
+  containing <code>Books/NonFic</code>, <code>Books/NonFic/Science</code>, 
+  or <code>Books/NonFic/Science/Physics</code>, but not  
+ <code>Books/NonFic/Science/Physics/Theory</code> or  
  <code>Books/NonFic/Law</code>.
- </p>
- <pre class="prettyprint">
- &lt;fieldType name="descendent_path" class="solr.TextField"&gt;
- &lt;analyzer type="index"&gt;
- &lt;tokenizer class="solr.KeywordTokenizerFactory" /&gt;
- &lt;/analyzer&gt;
- &lt;analyzer type="query"&gt;
- &lt;tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" /&gt;
- &lt;/analyzer&gt;
- &lt;/fieldType&gt;
- 
+  </p>
+  <pre class="prettyprint">
+  &lt;fieldType name="descendent_path" class="solr.TextField"&gt;
+    &lt;analyzer type="index"&gt;
+      &lt;tokenizer class="solr.KeywordTokenizerFactory" /&gt;
+    &lt;/analyzer&gt;
+    &lt;analyzer type="query"&gt;
+      &lt;tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" /&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
+  
 @endcode
  */
 @interface OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
@@ -76,7 +83,7 @@
 /*!
  @brief Creates a new PathHierarchyTokenizerFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
@@ -94,4 +101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFact
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory")

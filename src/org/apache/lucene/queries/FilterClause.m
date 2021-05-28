@@ -8,6 +8,10 @@
 #include "org/apache/lucene/search/BooleanClause.h"
 #include "org/apache/lucene/search/Filter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/FilterClause must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueriesFilterClause () {
  @public
   OrgApacheLuceneSearchBooleanClause_Occur *occur_;
@@ -36,7 +40,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFilterClause, filter_, OrgApacheLucene
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == self) return true;
+  if (JreObjectEqualsEquals(o, self)) return true;
   if (o == nil || !([o isKindOfClass:[OrgApacheLuceneQueriesFilterClause class]])) return false;
   OrgApacheLuceneQueriesFilterClause *other = (OrgApacheLuceneQueriesFilterClause *) cast_chk(o, [OrgApacheLuceneQueriesFilterClause class]);
   return [((OrgApacheLuceneSearchFilter *) nil_chk(self->filter_)) isEqual:other->filter_] && self->occur_ == other->occur_;
@@ -61,20 +65,32 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFilterClause, filter_, OrgApacheLucene
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchBooleanClause_Occur:", "FilterClause", NULL, 0x1, NULL, NULL },
-    { "getFilter", NULL, "Lorg.apache.lucene.search.Filter;", 0x1, NULL, NULL },
-    { "getOccur", NULL, "Lorg.apache.lucene.search.BooleanClause$Occur;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFilter;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBooleanClause_Occur;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchBooleanClause_Occur:);
+  methods[1].selector = @selector(getFilter);
+  methods[2].selector = @selector(getOccur);
+  methods[3].selector = @selector(isEqual:);
+  methods[4].selector = @selector(hash);
+  methods[5].selector = @selector(toStringWithNSString:);
+  methods[6].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "occur_", NULL, 0x12, "Lorg.apache.lucene.search.BooleanClause$Occur;", NULL, NULL, .constantValue.asLong = 0 },
-    { "filter_", NULL, 0x12, "Lorg.apache.lucene.search.Filter;", NULL, NULL, .constantValue.asLong = 0 },
+    { "occur_", "LOrgApacheLuceneSearchBooleanClause_Occur;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "filter_", "LOrgApacheLuceneSearchFilter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFilterClause = { 2, "FilterClause", "org.apache.lucene.queries", NULL, 0x11, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchFilter;LOrgApacheLuceneSearchBooleanClause_Occur;", "equals", "LNSObject;", "hashCode", "toString", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFilterClause = { "FilterClause", "org.apache.lucene.queries", ptrTable, methods, fields, 7, 0x11, 7, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFilterClause;
 }
 

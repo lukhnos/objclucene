@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentTextField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentTextField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentTextField || defined(INCLUDE_OrgApacheLuceneDocumentTextField))
 #define OrgApacheLuceneDocumentTextField_
 
@@ -20,22 +26,23 @@
 #define INCLUDE_OrgApacheLuceneDocumentField 1
 #include "org/apache/lucene/document/Field.h"
 
+@class IOSByteArray;
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneDocumentFieldType;
+@class OrgApacheLuceneDocumentField_Index;
 @class OrgApacheLuceneDocumentField_Store;
+@class OrgApacheLuceneDocumentField_TermVector;
+@class OrgApacheLuceneUtilBytesRef;
 
 /*!
  @brief A field that is indexed and tokenized, without term
- vectors.
- For example this would be used on a 'body'
- field, that contains the bulk of a document's text. 
+   vectors.For example this would be used on a 'body'
+   field, that contains the bulk of a document's text.
  */
 @interface OrgApacheLuceneDocumentTextField : OrgApacheLuceneDocumentField
-
-+ (OrgApacheLuceneDocumentFieldType *)TYPE_NOT_STORED;
-
-+ (OrgApacheLuceneDocumentFieldType *)TYPE_STORED;
+@property (readonly, class, strong) OrgApacheLuceneDocumentFieldType *TYPE_NOT_STORED NS_SWIFT_NAME(TYPE_NOT_STORED);
+@property (readonly, class, strong) OrgApacheLuceneDocumentFieldType *TYPE_STORED NS_SWIFT_NAME(TYPE_STORED);
 
 #pragma mark Public
 
@@ -43,32 +50,90 @@
  @brief Creates a new un-stored TextField with Reader value.
  @param name field name
  @param reader reader value
- @throws IllegalArgumentException if the field name is null
- @throws NullPointerException if the reader is null
+ @throw IllegalArgumentExceptionif the field name is null
+ @throw NullPointerExceptionif the reader is null
  */
-- (instancetype)initWithNSString:(NSString *)name
-                withJavaIoReader:(JavaIoReader *)reader;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                          withJavaIoReader:(JavaIoReader *)reader;
 
 /*!
  @brief Creates a new TextField with String value.
  @param name field name
  @param value string value
  @param store Store.YES if the content should also be stored
- @throws IllegalArgumentException if the field name or value is null.
+ @throw IllegalArgumentExceptionif the field name or value is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value
-withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                              withNSString:(NSString *)value
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store;
 
 /*!
  @brief Creates a new un-stored TextField with TokenStream value.
  @param name field name
  @param stream TokenStream value
- @throws IllegalArgumentException if the field name is null.
- @throws NullPointerException if the tokenStream is null
+ @throw IllegalArgumentExceptionif the field name is null.
+ @throw NullPointerExceptionif the tokenStream is null
  */
-- (instancetype)initWithNSString:(NSString *)name
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -77,7 +142,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentTextField)
 /*!
  @brief Indexed, tokenized, not stored.
  */
-inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_get_TYPE_NOT_STORED();
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_get_TYPE_NOT_STORED(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED, OrgApacheLuceneDocumentFieldType *)
@@ -85,7 +150,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED,
 /*!
  @brief Indexed, tokenized, stored.
  */
-inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_get_TYPE_STORED();
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_get_TYPE_STORED(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_STORED;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentTextField, TYPE_STORED, OrgApacheLuceneDocumentFieldType *)
@@ -112,4 +177,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentTextField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentTextField")

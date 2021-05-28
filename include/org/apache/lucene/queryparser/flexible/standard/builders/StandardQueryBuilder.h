@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder))
 #define OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder_
 
@@ -24,12 +30,12 @@
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief This interface should be implemented by every class that wants to build
+ @brief This interface should be implemented by every class that wants to build 
  <code>Query</code> objects from <code>QueryNode</code> objects.
  - seealso: QueryBuilder
  - seealso: QueryTreeBuilder
  */
-@protocol OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder < OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder, NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder < OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder, JavaObject >
 
 - (OrgApacheLuceneSearchQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
@@ -41,4 +47,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardBuildersSta
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder")

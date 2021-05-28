@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilElisionFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilElisionFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilter || defined(INCLUDE_OrgApacheLuceneAnalysisUtilElisionFilter))
 #define OrgApacheLuceneAnalysisUtilElisionFilter_
 
@@ -24,9 +30,8 @@
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
 /*!
- @brief Removes elisions from a <code>TokenStream</code>.
- For example, "l'avion" (the plane) will be
- tokenized as "avion" (plane).
+ @brief Removes elisions from a <code>TokenStream</code>.For example, "l'avion" (the plane) will be
+  tokenized as "avion" (plane).
  - seealso: <a href="http://fr.wikipedia.org/wiki/%C3%89lision">Elision in Wikipedia</a>
  */
 @interface OrgApacheLuceneAnalysisUtilElisionFilter : OrgApacheLuceneAnalysisTokenFilter
@@ -38,13 +43,17 @@
  @param input the source <code>TokenStream</code>
  @param articles a set of stopword articles
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)articles;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)articles;
 
 /*!
  @brief Increments the <code>TokenStream</code> with a <code>CharTermAttribute</code> without elisioned start
  */
 - (jboolean)incrementToken;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -60,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilElisionFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilter")

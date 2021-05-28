@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery))
 #define OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_
 
@@ -28,58 +34,54 @@
 
 /*!
  @brief A <code>CompletionQuery</code> that match documents containing terms
- within an edit distance of the specified prefix.
+  within an edit distance of the specified prefix.
  <p>
- This query boost documents relative to how similar the indexed terms are to the
- provided prefix.
+  This query boost documents relative to how similar the indexed terms are to the
+  provided prefix. 
  <p>
- Example usage of querying an analyzed prefix within an edit distance of 1 of 'subg'
- against a field 'suggest_field' is as follows:
+  Example usage of querying an analyzed prefix within an edit distance of 1 of 'subg'
+  against a field 'suggest_field' is as follows: 
  <pre class="prettyprint">
- CompletionQuery query = new FuzzyCompletionQuery(analyzer, new Term("suggest_field", "subg"));
+   CompletionQuery query = new FuzzyCompletionQuery(analyzer, new Term("suggest_field", "subg")); 
  
 @endcode
  */
 @interface OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery : OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery
-
-+ (jboolean)DEFAULT_UNICODE_AWARE;
-
-+ (jint)DEFAULT_MIN_FUZZY_LENGTH;
-
-+ (jint)DEFAULT_NON_FUZZY_PREFIX;
-
-+ (jint)DEFAULT_MAX_EDITS;
-
-+ (jboolean)DEFAULT_TRANSPOSITIONS;
+@property (readonly, class) jboolean DEFAULT_UNICODE_AWARE NS_SWIFT_NAME(DEFAULT_UNICODE_AWARE);
+@property (readonly, class) jint DEFAULT_MIN_FUZZY_LENGTH NS_SWIFT_NAME(DEFAULT_MIN_FUZZY_LENGTH);
+@property (readonly, class) jint DEFAULT_NON_FUZZY_PREFIX NS_SWIFT_NAME(DEFAULT_NON_FUZZY_PREFIX);
+@property (readonly, class) jint DEFAULT_MAX_EDITS NS_SWIFT_NAME(DEFAULT_MAX_EDITS);
+@property (readonly, class) jboolean DEFAULT_TRANSPOSITIONS NS_SWIFT_NAME(DEFAULT_TRANSPOSITIONS);
 
 #pragma mark Public
 
 /*!
- @brief Calls <code>FuzzyCompletionQuery.FuzzyCompletionQuery(Analyzer,Term,BitsProducer)</code>
- with no filter
+ @brief Calls <code>FuzzyCompletionQuery.FuzzyCompletionQuery(Analyzer, Term, BitsProducer)</code>
+  with no filter
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 /*!
- @brief Calls <code>FuzzyCompletionQuery.FuzzyCompletionQuery(Analyzer,Term,BitsProducer,int,boolean,int,int,boolean,int)</code>
- with defaults for <code>maxEdits</code>, <code>transpositions</code>,
- <code>nonFuzzyPrefix</code>, <code>minFuzzyLength</code>,
- <code>unicodeAware</code> and <code>maxDeterminizedStates</code>
- See <code>DEFAULT_MAX_EDITS</code>, <code>DEFAULT_TRANSPOSITIONS</code>,
- <code>DEFAULT_NON_FUZZY_PREFIX</code>, <code>DEFAULT_MIN_FUZZY_LENGTH</code>,
- <code>DEFAULT_UNICODE_AWARE</code> and <code>Operations.DEFAULT_MAX_DETERMINIZED_STATES</code>
- for defaults
+ @brief Calls <code>FuzzyCompletionQuery.FuzzyCompletionQuery(Analyzer, Term, BitsProducer,
+ int, boolean, int, int, boolean, int)</code>
+  with defaults for <code>maxEdits</code>, <code>transpositions</code>,
+  <code>nonFuzzyPrefix</code>, <code>minFuzzyLength</code>,
+  <code>unicodeAware</code> and <code>maxDeterminizedStates</code>
+  See <code>DEFAULT_MAX_EDITS</code>, <code>DEFAULT_TRANSPOSITIONS</code>,
+  <code>DEFAULT_NON_FUZZY_PREFIX</code>, <code>DEFAULT_MIN_FUZZY_LENGTH</code>,
+  <code>DEFAULT_UNICODE_AWARE</code> and <code>Operations.DEFAULT_MAX_DETERMINIZED_STATES</code>
+  for defaults
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-           withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                     withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
 
 /*!
  @brief Constructs an analyzed fuzzy prefix completion query
  @param analyzer used to analyze the provided <code>Term.text()</code>
- @param term query is run against <code>Term.field()</code> and <code>Term.text()</code>
- is analyzed with <code>analyzer</code>
+ @param term query is run against <code>Term.field()</code>  and <code>Term.text()</code>
+               is analyzed with  <code> analyzer </code>
  @param filter used to query on a sub set of documents
  @param maxEdits maximum number of acceptable edits
  @param transpositions value passed to <code>LevenshteinAutomata</code>
@@ -88,15 +90,15 @@
  @param unicodeAware treat prefix as unicode rather than bytes
  @param maxDeterminizedStates maximum automaton states allowed for <code>LevenshteinAutomata</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-           withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter
-                                                withInt:(jint)maxEdits
-                                            withBoolean:(jboolean)transpositions
-                                                withInt:(jint)nonFuzzyPrefix
-                                                withInt:(jint)minFuzzyLength
-                                            withBoolean:(jboolean)unicodeAware
-                                                withInt:(jint)maxDeterminizedStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                     withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter
+                                                          withInt:(jint)maxEdits
+                                                      withBoolean:(jboolean)transpositions
+                                                          withInt:(jint)nonFuzzyPrefix
+                                                          withInt:(jint)minFuzzyLength
+                                                      withBoolean:(jboolean)unicodeAware
+                                                          withInt:(jint)maxDeterminizedStates;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -109,39 +111,39 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuer
 
 /*!
  @brief Measure maxEdits, minFuzzyLength, transpositions and nonFuzzyPrefix
- parameters in Unicode code points (actual letters)
- instead of bytes.
+  parameters in Unicode code points (actual letters)
+  instead of bytes.
  */
-inline jboolean OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_get_DEFAULT_UNICODE_AWARE();
+inline jboolean OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_get_DEFAULT_UNICODE_AWARE(void);
 #define OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_UNICODE_AWARE false
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, DEFAULT_UNICODE_AWARE, jboolean)
 
 /*!
  @brief The default minimum length of the key before any edits are allowed.
  */
-inline jint OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_get_DEFAULT_MIN_FUZZY_LENGTH();
+inline jint OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_get_DEFAULT_MIN_FUZZY_LENGTH(void);
 #define OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_MIN_FUZZY_LENGTH 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, DEFAULT_MIN_FUZZY_LENGTH, jint)
 
 /*!
  @brief The default prefix length where edits are not allowed.
  */
-inline jint OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_get_DEFAULT_NON_FUZZY_PREFIX();
+inline jint OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_get_DEFAULT_NON_FUZZY_PREFIX(void);
 #define OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_NON_FUZZY_PREFIX 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, DEFAULT_NON_FUZZY_PREFIX, jint)
 
 /*!
  @brief The default maximum number of edits for fuzzy
- suggestions.
+  suggestions.
  */
-inline jint OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_get_DEFAULT_MAX_EDITS();
+inline jint OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_get_DEFAULT_MAX_EDITS(void);
 #define OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_MAX_EDITS 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, DEFAULT_MAX_EDITS, jint)
 
 /*!
  @brief The default transposition value passed to <code>LevenshteinAutomata</code>
  */
-inline jboolean OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_get_DEFAULT_TRANSPOSITIONS();
+inline jboolean OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_get_DEFAULT_TRANSPOSITIONS(void);
 #define OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_TRANSPOSITIONS true
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, DEFAULT_TRANSPOSITIONS, jboolean)
 
@@ -167,4 +169,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery")

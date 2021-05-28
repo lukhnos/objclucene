@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexParallelCompositeReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexParallelCompositeReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexParallelCompositeReader || defined(INCLUDE_OrgApacheLuceneIndexParallelCompositeReader))
 #define OrgApacheLuceneIndexParallelCompositeReader_
 
@@ -23,28 +29,28 @@
 @class IOSObjectArray;
 
 /*!
- @brief An <code>CompositeReader</code> which reads multiple, parallel indexes.
- Each
- index added must have the same number of documents, and exactly the same
- number of leaves (with equal <code>maxDoc</code>), but typically each contains
- different fields. Deletions are taken from the first reader. Each document
- contains the union of the fields of all documents with the same document
- number.  When searching, matches for a query term are from the first index
- added that has the field.
+ @brief An <code>CompositeReader</code> which reads multiple, parallel indexes.Each
+  index added must have the same number of documents, and exactly the same
+  number of leaves (with equal <code>maxDoc</code>), but typically each contains
+  different fields.
+ Deletions are taken from the first reader. Each document
+  contains the union of the fields of all documents with the same document
+  number.  When searching, matches for a query term are from the first index
+  added that has the field. 
  <p>This is useful, e.g., with collections that have large fields which
- change rarely and small fields that change more frequently.  The smaller
- fields may be re-indexed in a new index and both indexes may be searched
- together.
+  change rarely and small fields that change more frequently.  The smaller
+  fields may be re-indexed in a new index and both indexes may be searched
+  together.  
  <p><strong>Warning:</strong> It is up to you to make sure all indexes
- are created and modified the same way. For example, if you add
- documents to one index, you need to add the same documents in the
- same order to the other indexes. <em>Failure to do so will result in
- undefined behavior</em>.
- A good strategy to create suitable indexes with <code>IndexWriter</code> is to use
+  are created and modified the same way. For example, if you add
+  documents to one index, you need to add the same documents in the
+  same order to the other indexes. <em>Failure to do so will result in
+  undefined behavior</em>.
+  A good strategy to create suitable indexes with <code>IndexWriter</code> is to use 
  <code>LogDocMergePolicy</code>, as this one does not reorder documents
- during merging (like <code>TieredMergePolicy</code>) and triggers merges
- by number of documents per segment. If you use different <code>MergePolicy</code>s
- it might happen that the segment structure of your index is no longer predictable.
+  during merging (like <code>TieredMergePolicy</code>) and triggers merges
+  by number of documents per segment. If you use different <code>MergePolicy</code>s
+  it might happen that the segment structure of your index is no longer predictable.
  */
 @interface OrgApacheLuceneIndexParallelCompositeReader : OrgApacheLuceneIndexBaseCompositeReader
 
@@ -52,29 +58,33 @@
 
 /*!
  @brief Create a ParallelCompositeReader based on the provided
- readers.
+   readers.
  */
-- (instancetype)initWithBoolean:(jboolean)closeSubReaders
+- (instancetype __nonnull)initWithBoolean:(jboolean)closeSubReaders
 withOrgApacheLuceneIndexCompositeReaderArray:(IOSObjectArray *)readers;
 
 /*!
  @brief Expert: create a ParallelCompositeReader based on the provided
- readers and storedFieldReaders; when a document is
- loaded, only storedFieldsReaders will be used.
+   readers and storedFieldReaders; when a document is
+   loaded, only storedFieldsReaders will be used.
  */
-- (instancetype)initWithBoolean:(jboolean)closeSubReaders
+- (instancetype __nonnull)initWithBoolean:(jboolean)closeSubReaders
 withOrgApacheLuceneIndexCompositeReaderArray:(IOSObjectArray *)readers
 withOrgApacheLuceneIndexCompositeReaderArray:(IOSObjectArray *)storedFieldReaders;
 
 /*!
  @brief Create a ParallelCompositeReader based on the provided
- readers; auto-closes the given readers on <code>close()</code>.
+   readers; auto-closes the given readers on <code>close()</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexCompositeReaderArray:(IOSObjectArray *)readers;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexCompositeReaderArray:(IOSObjectArray *)readers;
 
 #pragma mark Protected
 
 - (void)doClose;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReaderArray:(IOSObjectArray *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -102,4 +112,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexParallelCompositeReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexParallelCompositeReader")

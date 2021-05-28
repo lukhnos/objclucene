@@ -19,11 +19,14 @@
 #include "org/apache/lucene/util/AttributeFactory.h"
 #include "org/apache/lucene/util/AttributeImpl.h"
 #include "org/apache/lucene/util/AttributeReflector.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
 #include "org/apache/lucene/util/NumericUtils.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/NumericTokenStream must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisNumericTokenStream () {
  @public
@@ -70,7 +73,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNumericTokenStream_NumericAttr
 @interface OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl () {
  @public
   jlong value_;
-  jint valueSize_, shift_, precisionStep_;
+  jint valueSize_;
+  jint shift_;
+  jint precisionStep_;
   OrgApacheLuceneUtilBytesRefBuilder *bytes_;
 }
 
@@ -148,7 +153,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  return JreStrcat("$$I$I$IC", [[self getClass] getSimpleName], @"(precisionStep=", precisionStep_, @" valueSize=", [((id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute>) nil_chk(numericAtt_)) getValueSize], @" shift=", [numericAtt_ getShift], ')');
+  return JreStrcat("$$I$I$IC", [[self java_getClass] getSimpleName], @"(precisionStep=", precisionStep_, @" valueSize=", [((id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute>) nil_chk(numericAtt_)) getValueSize], @" shift=", [numericAtt_ getShift], ')');
 }
 
 - (void)dealloc {
@@ -159,30 +164,45 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NumericTokenStream", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "NumericTokenStream", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withInt:", "NumericTokenStream", NULL, 0x1, NULL, NULL },
-    { "setLongValueWithLong:", "setLongValue", "Lorg.apache.lucene.analysis.NumericTokenStream;", 0x1, NULL, NULL },
-    { "setIntValueWithInt:", "setIntValue", "Lorg.apache.lucene.analysis.NumericTokenStream;", 0x1, NULL, NULL },
-    { "setDoubleValueWithDouble:", "setDoubleValue", "Lorg.apache.lucene.analysis.NumericTokenStream;", 0x1, NULL, NULL },
-    { "setFloatValueWithFloat:", "setFloatValue", "Lorg.apache.lucene.analysis.NumericTokenStream;", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, NULL, NULL },
-    { "getPrecisionStep", NULL, "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisNumericTokenStream;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisNumericTokenStream;", 0x1, 4, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisNumericTokenStream;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisNumericTokenStream;", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withInt:);
+  methods[3].selector = @selector(setLongValueWithLong:);
+  methods[4].selector = @selector(setIntValueWithInt:);
+  methods[5].selector = @selector(setDoubleValueWithDouble:);
+  methods[6].selector = @selector(setFloatValueWithFloat:);
+  methods[7].selector = @selector(reset);
+  methods[8].selector = @selector(incrementToken);
+  methods[9].selector = @selector(getPrecisionStep);
+  methods[10].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "TOKEN_TYPE_FULL_PREC", "TOKEN_TYPE_FULL_PREC", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_FULL_PREC, NULL, .constantValue.asLong = 0 },
-    { "TOKEN_TYPE_LOWER_PREC", "TOKEN_TYPE_LOWER_PREC", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC, NULL, .constantValue.asLong = 0 },
-    { "numericAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.NumericTokenStream$NumericTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncrAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "valSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "precisionStep_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "TOKEN_TYPE_FULL_PREC", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 10, -1, -1 },
+    { "TOKEN_TYPE_LOWER_PREC", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 11, -1, -1 },
+    { "numericAtt_", "LOrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "typeAtt_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncrAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "valSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "precisionStep_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.NumericTokenStream$NumericTermAttribute;", "Lorg.apache.lucene.analysis.NumericTokenStream$NumericAttributeFactory;", "Lorg.apache.lucene.analysis.NumericTokenStream$NumericTermAttributeImpl;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNumericTokenStream = { 2, "NumericTokenStream", "org.apache.lucene.analysis", NULL, 0x11, 11, methods, 7, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "I", "LOrgApacheLuceneUtilAttributeFactory;I", "setLongValue", "J", "setIntValue", "setDoubleValue", "D", "setFloatValue", "F", "toString", &OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_FULL_PREC, &OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC, "LOrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute;LOrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory;LOrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNumericTokenStream = { "NumericTokenStream", "org.apache.lucene.analysis", ptrTable, methods, fields, 7, 0x11, 11, 7, -1, 12, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisNumericTokenStream;
 }
 
@@ -236,15 +256,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNumericTokenStream)
 @implementation OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getShift", NULL, "I", 0x401, NULL, NULL },
-    { "getRawValue", NULL, "J", 0x401, NULL, NULL },
-    { "getValueSize", NULL, "I", 0x401, NULL, NULL },
-    { "init__WithLong:withInt:withInt:withInt:", "init", "V", 0x401, NULL, NULL },
-    { "setShiftWithInt:", "setShift", "V", 0x401, NULL, NULL },
-    { "incShift", NULL, "I", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute = { 2, "NumericTermAttribute", "org.apache.lucene.analysis", "NumericTokenStream", 0x609, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getShift);
+  methods[1].selector = @selector(getRawValue);
+  methods[2].selector = @selector(getValueSize);
+  methods[3].selector = @selector(init__WithLong:withInt:withInt:withInt:);
+  methods[4].selector = @selector(setShiftWithInt:);
+  methods[5].selector = @selector(incShift);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "init", "JIII", "setShift", "I", "LOrgApacheLuceneAnalysisNumericTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute = { "NumericTermAttribute", "org.apache.lucene.analysis", ptrTable, methods, NULL, 7, 0x609, 6, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute;
 }
 
@@ -270,14 +301,21 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNumericTokenStream_N
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "NumericAttributeFactory", NULL, 0x0, NULL, NULL },
-    { "createAttributeInstanceWithIOSClass:", "createAttributeInstance", "Lorg.apache.lucene.util.AttributeImpl;", 0x1, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;)Lorg/apache/lucene/util/AttributeImpl;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeImpl;", 0x1, 1, 2, -1, 3, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:);
+  methods[1].selector = @selector(createAttributeInstanceWithIOSClass:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "delegate_", NULL, 0x12, "Lorg.apache.lucene.util.AttributeFactory;", NULL, NULL, .constantValue.asLong = 0 },
+    { "delegate_", "LOrgApacheLuceneUtilAttributeFactory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory = { 2, "NumericAttributeFactory", "org.apache.lucene.analysis", "NumericTokenStream", 0x1a, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAttributeFactory;", "createAttributeInstance", "LIOSClass;", "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;)Lorg/apache/lucene/util/AttributeImpl;", "LOrgApacheLuceneAnalysisNumericTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory = { "NumericAttributeFactory", "org.apache.lucene.analysis", ptrTable, methods, fields, 7, 0x1a, 2, 1, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory;
 }
 
@@ -308,7 +346,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilBytesRef *)getBytesRef {
-  JreAssert((valueSize_ == 64 || valueSize_ == 32), (@"org/apache/lucene/analysis/NumericTokenStream.java:161 condition failed: assert valueSize == 64 || valueSize == 32;"));
+  JreAssert(valueSize_ == 64 || valueSize_ == 32, @"org/apache/lucene/analysis/NumericTokenStream.java:161 condition failed: assert valueSize == 64 || valueSize == 32;");
   if (valueSize_ == 64) {
     OrgApacheLuceneUtilNumericUtils_longToPrefixCodedWithLong_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(value_, shift_, bytes_);
   }
@@ -363,8 +401,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute>) nil_chk(a)) init__WithLong:value_ withInt:valueSize_ withInt:precisionStep_ withInt:shift_];
 }
 
-- (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *)clone {
-  OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *t = (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *) cast_chk([super clone], [OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl class]);
+- (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *)java_clone {
+  OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *t = (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *) cast_chk([super java_clone], [OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl class]);
   JreStrongAssignAndConsume(&((OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *) nil_chk(t))->bytes_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   [t->bytes_ copyBytesWithOrgApacheLuceneUtilBytesRef:[self getBytesRef]];
   return t;
@@ -375,9 +413,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *other = (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *) cast_chk(obj, [OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl class]);
   if (precisionStep_ != other->precisionStep_) return false;
   if (shift_ != other->shift_) return false;
@@ -392,30 +430,49 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NumericTermAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "getBytesRef", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getShift", NULL, "I", 0x1, NULL, NULL },
-    { "setShiftWithInt:", "setShift", "V", 0x1, NULL, NULL },
-    { "incShift", NULL, "I", 0x1, NULL, NULL },
-    { "getRawValue", NULL, "J", 0x1, NULL, NULL },
-    { "getValueSize", NULL, "I", 0x1, NULL, NULL },
-    { "init__WithLong:withInt:withInt:withInt:", "init", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.analysis.NumericTokenStream$NumericTermAttributeImpl;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl;", 0x1, 8, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 10, 11, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getBytesRef);
+  methods[2].selector = @selector(getShift);
+  methods[3].selector = @selector(setShiftWithInt:);
+  methods[4].selector = @selector(incShift);
+  methods[5].selector = @selector(getRawValue);
+  methods[6].selector = @selector(getValueSize);
+  methods[7].selector = @selector(init__WithLong:withInt:withInt:withInt:);
+  methods[8].selector = @selector(clear);
+  methods[9].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  methods[10].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[11].selector = @selector(java_clone);
+  methods[12].selector = @selector(hash);
+  methods[13].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "value_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "valueSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "shift_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "precisionStep_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytes_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "value_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "valueSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "shift_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "precisionStep_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bytes_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl = { 2, "NumericTermAttributeImpl", "org.apache.lucene.analysis", "NumericTokenStream", 0x19, 14, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setShift", "I", "init", "JIII", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;", "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", "clone", "hashCode", "equals", "LNSObject;", "LOrgApacheLuceneAnalysisNumericTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl = { "NumericTermAttributeImpl", "org.apache.lucene.analysis", ptrTable, methods, fields, 7, 0x19, 14, 5, 12, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl;
 }
 

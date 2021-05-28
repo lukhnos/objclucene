@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisHunspellDictionary
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisHunspellDictionary_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellDictionary || defined(INCLUDE_OrgApacheLuceneAnalysisHunspellDictionary))
 #define OrgApacheLuceneAnalysisHunspellDictionary_
 
@@ -35,7 +41,7 @@
 
 /*!
  @brief In-memory structure for the dictionary (.dic) and affix (.aff)
- data of a hunspell dictionary.
+  data of a hunspell dictionary.
  */
 @interface OrgApacheLuceneAnalysisHunspellDictionary : NSObject {
  @public
@@ -63,43 +69,36 @@
   NSString *language_;
   jboolean alternateCasing_;
 }
-
-+ (IOSCharArray *)NOFLAGS;
-
-+ (JavaUtilRegexPattern *)ENCODING_PATTERN;
-
-+ (id<JavaUtilMap>)CHARSET_ALIASES;
-
-+ (jchar)FLAG_SEPARATOR;
-
-+ (jchar)MORPH_SEPARATOR;
+@property (readonly, class, strong) IOSCharArray *NOFLAGS NS_SWIFT_NAME(NOFLAGS);
+@property (readonly, class, strong) JavaUtilRegexPattern *ENCODING_PATTERN NS_SWIFT_NAME(ENCODING_PATTERN);
+@property (readonly, class, strong) id<JavaUtilMap> CHARSET_ALIASES NS_SWIFT_NAME(CHARSET_ALIASES);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new Dictionary containing the information read from the provided InputStreams to hunspell affix
- and dictionary files.
+  and dictionary files.
  You have to close the provided InputStreams yourself.
  @param affix InputStream for reading the hunspell affix file (won't be closed).
  @param dictionary InputStream for reading the hunspell dictionary file (won't be closed).
- @throws IOException Can be thrown while reading from the InputStreams
- @throws ParseException Can be thrown if the content of the files does not meet expected formats
+ @throw IOExceptionCan be thrown while reading from the InputStreams
+ @throw ParseExceptionCan be thrown if the content of the files does not meet expected formats
  */
-- (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)affix
-                    withJavaIoInputStream:(JavaIoInputStream *)dictionary;
+- (instancetype __nonnull)initWithJavaIoInputStream:(JavaIoInputStream *)affix
+                              withJavaIoInputStream:(JavaIoInputStream *)dictionary;
 
 /*!
  @brief Creates a new Dictionary containing the information read from the provided InputStreams to hunspell affix
- and dictionary files.
+  and dictionary files.
  You have to close the provided InputStreams yourself.
  @param affix InputStream for reading the hunspell affix file (won't be closed).
  @param dictionaries InputStream for reading the hunspell dictionary files (won't be closed).
- @throws IOException Can be thrown while reading from the InputStreams
- @throws ParseException Can be thrown if the content of the files does not meet expected formats
+ @throw IOExceptionCan be thrown while reading from the InputStreams
+ @throw ParseExceptionCan be thrown if the content of the files does not meet expected formats
  */
-- (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)affix
-                         withJavaUtilList:(id<JavaUtilList>)dictionaries
-                              withBoolean:(jboolean)ignoreCase;
+- (instancetype __nonnull)initWithJavaIoInputStream:(JavaIoInputStream *)affix
+                                   withJavaUtilList:(id<JavaUtilList>)dictionaries
+                                        withBoolean:(jboolean)ignoreCase;
 
 #pragma mark Package-Private
 
@@ -125,8 +124,8 @@
  @brief Parses the encoding specified in the affix file readable through the provided InputStream
  @param affix InputStream for reading the affix file
  @return Encoding specified in the affix file
- @throws IOException Can be thrown while reading from the InputStream
- @throws ParseException Thrown if the first non-empty non-comment line read from the file does not adhere to the format <code>SET <encoding></code>
+ @throw IOExceptionCan be thrown while reading from the InputStream
+ @throw ParseExceptionThrown if the first non-empty non-comment line read from the file does not adhere to the format <code>SET <encoding></code>
  */
 + (NSString *)getDictionaryEncodingWithJavaIoInputStream:(JavaIoInputStream *)affix;
 
@@ -169,6 +168,10 @@
 
 - (NSString *)unescapeEntryWithNSString:(NSString *)entry_;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisHunspellDictionary)
@@ -185,7 +188,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellDictionary, iconv_, OrgApache
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellDictionary, oconv_, OrgApacheLuceneUtilFstFST *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellDictionary, language_, NSString *)
 
-inline IOSCharArray *OrgApacheLuceneAnalysisHunspellDictionary_get_NOFLAGS();
+inline IOSCharArray *OrgApacheLuceneAnalysisHunspellDictionary_get_NOFLAGS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSCharArray *OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, NOFLAGS, IOSCharArray *)
@@ -193,21 +196,21 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, NOFLAGS
 /*!
  @brief pattern accepts optional BOM + SET + any whitespace
  */
-inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisHunspellDictionary_get_ENCODING_PATTERN();
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisHunspellDictionary_get_ENCODING_PATTERN(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaUtilRegexPattern *OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, ENCODING_PATTERN, JavaUtilRegexPattern *)
 
-inline id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_get_CHARSET_ALIASES();
+inline id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_get_CHARSET_ALIASES(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, CHARSET_ALIASES, id<JavaUtilMap>)
 
-inline jchar OrgApacheLuceneAnalysisHunspellDictionary_get_FLAG_SEPARATOR();
+inline jchar OrgApacheLuceneAnalysisHunspellDictionary_get_FLAG_SEPARATOR(void);
 #define OrgApacheLuceneAnalysisHunspellDictionary_FLAG_SEPARATOR 0x001f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisHunspellDictionary, FLAG_SEPARATOR, jchar)
 
-inline jchar OrgApacheLuceneAnalysisHunspellDictionary_get_MORPH_SEPARATOR();
+inline jchar OrgApacheLuceneAnalysisHunspellDictionary_get_MORPH_SEPARATOR(void);
 #define OrgApacheLuceneAnalysisHunspellDictionary_MORPH_SEPARATOR 0x001e
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisHunspellDictionary, MORPH_SEPARATOR, jchar)
 
@@ -257,7 +260,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellDictionary)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Parses the given String into a single flag
@@ -283,4 +286,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellDictionary_FlagParsing
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellDictionary")

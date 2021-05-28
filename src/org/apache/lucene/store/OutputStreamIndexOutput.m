@@ -3,16 +3,19 @@
 //  source: ./core/src/java/org/apache/lucene/store/OutputStreamIndexOutput.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/BufferedOutputStream.h"
-#include "java/io/IOException.h"
 #include "java/io/OutputStream.h"
+#include "java/lang/Throwable.h"
 #include "java/util/zip/CRC32.h"
 #include "java/util/zip/CheckedOutputStream.h"
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/store/OutputStreamIndexOutput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/OutputStreamIndexOutput must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreOutputStreamIndexOutput () {
  @public
@@ -49,30 +52,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreOutputStreamIndexOutput, os_, JavaIoBuff
 }
 
 - (void)close {
-  {
-    JavaIoOutputStream *o = os_;
-    NSException *__primaryException1 = nil;
-    @try {
-      if (!flushedOnClose_) {
-        flushedOnClose_ = true;
-        [((JavaIoOutputStream *) nil_chk(o)) flush];
-      }
+  JavaIoOutputStream *o = os_;
+  JavaLangThrowable *__primaryException1 = nil;
+  @try {
+    if (!flushedOnClose_) {
+      flushedOnClose_ = true;
+      [((JavaIoOutputStream *) nil_chk(o)) flush];
     }
-    @catch (NSException *e) {
-      __primaryException1 = e;
-      @throw e;
-    }
-    @finally {
-      if (o != nil) {
-        if (__primaryException1 != nil) {
-          @try {
-            [o close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
-          }
-        } else {
+  }
+  @catch (JavaLangThrowable *e) {
+    __primaryException1 = e;
+    @throw e;
+  }
+  @finally {
+    if (o != nil) {
+      if (__primaryException1 != nil) {
+        @try {
           [o close];
         }
+        @catch (JavaLangThrowable *e) {
+          [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+        }
+      }
+      else {
+        [o close];
       }
     }
   }
@@ -94,21 +97,32 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreOutputStreamIndexOutput, os_, JavaIoBuff
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaIoOutputStream:withInt:", "OutputStreamIndexOutput", NULL, 0x1, NULL, NULL },
-    { "writeByteWithByte:", "writeByte", "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "writeBytesWithByteArray:withInt:withInt:", "writeBytes", "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x11, NULL, NULL },
-    { "getChecksum", NULL, "J", 0x11, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x11, 4, 5, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withJavaIoOutputStream:withInt:);
+  methods[1].selector = @selector(writeByteWithByte:);
+  methods[2].selector = @selector(writeBytesWithByteArray:withInt:withInt:);
+  methods[3].selector = @selector(close);
+  methods[4].selector = @selector(getFilePointer);
+  methods[5].selector = @selector(getChecksum);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "crc_", NULL, 0x12, "Ljava.util.zip.CRC32;", NULL, NULL, .constantValue.asLong = 0 },
-    { "os_", NULL, 0x12, "Ljava.io.BufferedOutputStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesWritten_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "flushedOnClose_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "crc_", "LJavaUtilZipCRC32;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "os_", "LJavaIoBufferedOutputStream;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "bytesWritten_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "flushedOnClose_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreOutputStreamIndexOutput = { 2, "OutputStreamIndexOutput", "org.apache.lucene.store", NULL, 0x1, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LJavaIoOutputStream;I", "writeByte", "B", "LJavaIoIOException;", "writeBytes", "[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreOutputStreamIndexOutput = { "OutputStreamIndexOutput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 6, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreOutputStreamIndexOutput;
 }
 

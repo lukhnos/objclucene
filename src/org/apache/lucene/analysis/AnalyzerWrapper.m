@@ -8,6 +8,10 @@
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/AnalyzerWrapper.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/AnalyzerWrapper must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisAnalyzerWrapper
 
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)reuseStrategy {
@@ -49,17 +53,30 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:", "AnalyzerWrapper", NULL, 0x4, NULL, NULL },
-    { "getWrappedAnalyzerWithNSString:", "getWrappedAnalyzer", "Lorg.apache.lucene.analysis.Analyzer;", 0x404, NULL, NULL },
-    { "wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:", "wrapComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-    { "wrapReaderWithNSString:withJavaIoReader:", "wrapReader", "Ljava.io.Reader;", 0x4, NULL, NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x14, NULL, NULL },
-    { "getPositionIncrementGapWithNSString:", "getPositionIncrementGap", "I", 0x1, NULL, NULL },
-    { "getOffsetGapWithNSString:", "getOffsetGap", "I", 0x1, NULL, NULL },
-    { "initReaderWithNSString:withJavaIoReader:", "initReader", "Ljava.io.Reader;", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x404, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LJavaIoReader;", 0x4, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x14, 7, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 8, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, 2, -1, -1, -1, -1 },
+    { NULL, "LJavaIoReader;", 0x11, 10, 6, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisAnalyzerWrapper = { 2, "AnalyzerWrapper", "org.apache.lucene.analysis", NULL, 0x401, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:);
+  methods[1].selector = @selector(getWrappedAnalyzerWithNSString:);
+  methods[2].selector = @selector(wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:);
+  methods[3].selector = @selector(wrapReaderWithNSString:withJavaIoReader:);
+  methods[4].selector = @selector(createComponentsWithNSString:);
+  methods[5].selector = @selector(getPositionIncrementGapWithNSString:);
+  methods[6].selector = @selector(getOffsetGapWithNSString:);
+  methods[7].selector = @selector(initReaderWithNSString:withJavaIoReader:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;", "getWrappedAnalyzer", "LNSString;", "wrapComponents", "LNSString;LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", "wrapReader", "LNSString;LJavaIoReader;", "createComponents", "getPositionIncrementGap", "getOffsetGap", "initReader" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisAnalyzerWrapper = { "AnalyzerWrapper", "org.apache.lucene.analysis", ptrTable, methods, NULL, 7, 0x401, 8, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisAnalyzerWrapper;
 }
 

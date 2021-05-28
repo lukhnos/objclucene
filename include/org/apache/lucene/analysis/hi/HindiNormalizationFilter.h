@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisHiHindiNormalizationFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisHiHindiNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisHiHindiNormalizationFilter))
 #define OrgApacheLuceneAnalysisHiHindiNormalizationFilter_
 
@@ -24,20 +30,20 @@
 
 /*!
  @brief A <code>TokenFilter</code> that applies <code>HindiNormalizer</code> to normalize the
- orthography.
+  orthography.
  <p>
- In some cases the normalization may cause unrelated terms to conflate, so
- to prevent terms from being normalized use an instance of
+  In some cases the normalization may cause unrelated terms to conflate, so
+  to prevent terms from being normalized use an instance of 
  <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
- the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
- </p>
+  the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+  </p>
  - seealso: HindiNormalizer
  */
 @interface OrgApacheLuceneAnalysisHiHindiNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -55,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHiHindiNormalizationFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiNormalizationFilter")

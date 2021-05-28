@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor))
 #define OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor_
 
@@ -20,14 +26,14 @@
 #define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
+@class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief This processor iterates the query node tree looking for every
+ @brief This processor iterates the query node tree looking for every 
  <code>FieldableNode</code> that has <code>ConfigurationKeys.BOOST</code> in its
- config.
- If there is, the boost is applied to that <code>FieldableNode</code>.
+  config.If there is, the boost is applied to that <code>FieldableNode</code>.
  - seealso: ConfigurationKeys#BOOST
  - seealso: QueryConfigHandler
  - seealso: FieldableNode
@@ -36,7 +42,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Protected
 
@@ -46,18 +52,26 @@
 
 - (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoostQueryNodeProcessor")

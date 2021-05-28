@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneBkdtreeBKDTreeReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneBkdtreeBKDTreeReader_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDTreeReader || defined(INCLUDE_OrgApacheLuceneBkdtreeBKDTreeReader))
 #define OrgApacheLuceneBkdtreeBKDTreeReader_
 
@@ -28,7 +34,6 @@
 
 /*!
  @brief Handles intersection of a shape with a BKD tree previously written with <code>BKDTreeWriter</code>.
-  
  */
 @interface OrgApacheLuceneBkdtreeBKDTreeReader : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -38,8 +43,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
-                                               withInt:(jint)maxDoc;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
+                                                                       withInt:(jint)maxDoc;
 
 - (id<JavaUtilCollection>)getChildResources;
 
@@ -58,17 +63,21 @@
 
 - (jlong)ramBytesUsed;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDTreeReader)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDTreeReader, in_, OrgApacheLuceneStoreIndexInput *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader *self, OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc);
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader *self, OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc);
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeReader *new_OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeReader *new_OrgApacheLuceneBkdtreeBKDTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeReader *create_OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc);
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeReader *create_OrgApacheLuceneBkdtreeBKDTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader)
 
@@ -81,27 +90,27 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneBkdtreeBKDTreeReader_Relation_Enum) {
   OrgApacheLuceneBkdtreeBKDTreeReader_Relation_Enum_INSIDE = 0,
   OrgApacheLuceneBkdtreeBKDTreeReader_Relation_Enum_CROSSES = 1,
   OrgApacheLuceneBkdtreeBKDTreeReader_Relation_Enum_OUTSIDE = 2,
 };
 
-@interface OrgApacheLuceneBkdtreeBKDTreeReader_Relation : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneBkdtreeBKDTreeReader_Relation : JavaLangEnum
 
-+ (OrgApacheLuceneBkdtreeBKDTreeReader_Relation *)INSIDE;
-
-+ (OrgApacheLuceneBkdtreeBKDTreeReader_Relation *)CROSSES;
-
-+ (OrgApacheLuceneBkdtreeBKDTreeReader_Relation *)OUTSIDE;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneBkdtreeBKDTreeReader_Relation *INSIDE NS_SWIFT_NAME(INSIDE);
+@property (readonly, class, nonnull) OrgApacheLuceneBkdtreeBKDTreeReader_Relation *CROSSES NS_SWIFT_NAME(CROSSES);
+@property (readonly, class, nonnull) OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OUTSIDE NS_SWIFT_NAME(OUTSIDE);
+#pragma mark Public
 
 + (OrgApacheLuceneBkdtreeBKDTreeReader_Relation *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneBkdtreeBKDTreeReader_Relation_Enum)toNSEnum;
 
 @end
@@ -111,16 +120,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneBkdtreeBKDTreeReader_Relation)
 /*! INTERNAL ONLY - Use enum accessors declared below. */
 FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_values_[];
 
-inline OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_get_INSIDE();
+inline OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_get_INSIDE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, INSIDE)
 
-inline OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_get_CROSSES();
+inline OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_get_CROSSES(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, CROSSES)
 
-inline OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_get_OUTSIDE();
+inline OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_get_OUTSIDE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_valueOfWithNSString_(NSString *name);
 
@@ -135,7 +144,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader_Relation)
 
 @class OrgApacheLuceneBkdtreeBKDTreeReader_Relation;
 
-@protocol OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter < NSObject, JavaObject >
+@protocol OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter < JavaObject >
 
 - (jboolean)acceptWithDouble:(jdouble)lat
                   withDouble:(jdouble)lon;
@@ -153,4 +162,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDTreeReader")

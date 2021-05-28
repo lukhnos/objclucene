@@ -27,6 +27,10 @@
 #include "org/apache/lucene/util/Version.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/cz/CzechAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisCzCzechAnalyzer () {
  @public
   OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionTable_;
@@ -44,15 +48,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCzCzechAnalyzer, stemExclusionTable_,
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder_get_DEFAULT_SET();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder_get_DEFAULT_SET(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder_DEFAULT_SET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder, DEFAULT_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder_init(OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder_init();
+__attribute__((unused)) static OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder)
 
@@ -108,19 +112,28 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDefaultStopSet", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x19, NULL, NULL },
-    { "init", "CzechAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "CzechAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:", "CzechAnalyzer", NULL, 0x1, NULL, NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x19, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getDefaultStopSet);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[4].selector = @selector(createComponentsWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOPWORD_FILE", "DEFAULT_STOPWORD_FILE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCzCzechAnalyzer_DEFAULT_STOPWORD_FILE, NULL, .constantValue.asLong = 0 },
-    { "stemExclusionTable_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_STOPWORD_FILE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "stemExclusionTable_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.cz.CzechAnalyzer$DefaultSetHolder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCzCzechAnalyzer = { 2, "CzechAnalyzer", "org.apache.lucene.analysis.cz", NULL, 0x11, 5, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisUtilCharArraySet;", "LOrgApacheLuceneAnalysisUtilCharArraySet;LOrgApacheLuceneAnalysisUtilCharArraySet;", "createComponents", "LNSString;", &OrgApacheLuceneAnalysisCzCzechAnalyzer_DEFAULT_STOPWORD_FILE, "LOrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCzCzechAnalyzer = { "CzechAnalyzer", "org.apache.lucene.analysis.cz", ptrTable, methods, fields, 7, 0x11, 5, 2, -1, 5, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCzCzechAnalyzer;
 }
 
@@ -181,6 +194,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_SET", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 0, -1, -1 },
+  };
+  static const void *ptrTable[] = { &OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder_DEFAULT_SET, "LOrgApacheLuceneAnalysisCzCzechAnalyzer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder = { "DefaultSetHolder", "org.apache.lucene.analysis.cz", ptrTable, methods, fields, 7, 0xa, 1, 1, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder class]) {
     {
@@ -193,17 +223,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DefaultSetHolder", NULL, 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_SET", "DEFAULT_SET", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder_DEFAULT_SET, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder = { 2, "DefaultSetHolder", "org.apache.lucene.analysis.cz", "CzechAnalyzer", 0xa, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisCzCzechAnalyzer_DefaultSetHolder;
 }
 
 @end

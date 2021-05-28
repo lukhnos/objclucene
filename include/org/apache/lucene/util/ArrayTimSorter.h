@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilArrayTimSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilArrayTimSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilArrayTimSorter || defined(INCLUDE_OrgApacheLuceneUtilArrayTimSorter))
 #define OrgApacheLuceneUtilArrayTimSorter_
 
@@ -33,9 +39,9 @@
 /*!
  @brief Create a new <code>ArrayTimSorter</code>.
  */
-- (instancetype)initWithNSObjectArray:(IOSObjectArray *)arr
-               withJavaUtilComparator:(id<JavaUtilComparator>)comparator
-                              withInt:(jint)maxTempSlots;
+- (instancetype __nonnull)initPackagePrivateWithNSObjectArray:(IOSObjectArray *)arr
+                                       withJavaUtilComparator:(id<JavaUtilComparator>)comparator
+                                                      withInt:(jint)maxTempSlots;
 
 #pragma mark Protected
 
@@ -57,18 +63,26 @@
 - (void)swapWithInt:(jint)i
             withInt:(jint)j;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilArrayTimSorter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(OrgApacheLuceneUtilArrayTimSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayTimSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_withInt_(OrgApacheLuceneUtilArrayTimSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilArrayTimSorter *new_OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilArrayTimSorter *new_OrgApacheLuceneUtilArrayTimSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_withInt_(IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilArrayTimSorter *create_OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots);
+FOUNDATION_EXPORT OrgApacheLuceneUtilArrayTimSorter *create_OrgApacheLuceneUtilArrayTimSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_withInt_(IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilArrayTimSorter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayTimSorter")

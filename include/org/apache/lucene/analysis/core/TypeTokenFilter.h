@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreTypeTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreTypeTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreTypeTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCoreTypeTokenFilter))
 #define OrgApacheLuceneAnalysisCoreTypeTokenFilter_
 
@@ -32,21 +38,20 @@
 
 /*!
  @brief Create a new <code>TypeTokenFilter</code> that filters tokens out
- (useWhiteList=false).
+  (useWhiteList=false).
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                           withJavaUtilSet:(id<JavaUtilSet>)stopTypes;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                     withJavaUtilSet:(id<JavaUtilSet>)stopTypes;
 
 /*!
  @brief Create a new <code>TypeTokenFilter</code>.
- @param input        the <code>TokenStream</code> to consume
- @param stopTypes    the types to filter
- @param useWhiteList if true, then tokens whose type is in stopTypes will
- be kept, otherwise they will be filtered out
+ @param input the <code>TokenStream</code>  to consume
+ @param stopTypes the types to filter
+ @param useWhiteList if true, then tokens whose type is in stopTypes will                      be kept, otherwise they will be filtered out
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                           withJavaUtilSet:(id<JavaUtilSet>)stopTypes
-                                               withBoolean:(jboolean)useWhiteList;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                     withJavaUtilSet:(id<JavaUtilSet>)stopTypes
+                                                         withBoolean:(jboolean)useWhiteList;
 
 #pragma mark Protected
 
@@ -55,6 +60,10 @@
  When the useWhiteList parameter is set to true then accept the token if its type is contained in the stopTypes
  */
 - (jboolean)accept;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -76,4 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreTypeTokenFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreTypeTokenFilter")

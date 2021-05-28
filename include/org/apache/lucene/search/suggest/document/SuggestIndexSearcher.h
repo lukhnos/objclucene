@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher))
 #define OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher_
 
@@ -21,17 +27,19 @@
 #include "org/apache/lucene/search/IndexSearcher.h"
 
 @class OrgApacheLuceneIndexIndexReader;
+@class OrgApacheLuceneIndexIndexReaderContext;
 @class OrgApacheLuceneSearchSuggestDocumentCompletionQuery;
 @class OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;
 @class OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector;
+@protocol JavaUtilConcurrentExecutorService;
 
 /*!
  @brief Adds document suggest capabilities to IndexSearcher.
  Any <code>CompletionQuery</code> can be used to suggest documents.
- Use <code>PrefixCompletionQuery</code> for analyzed prefix queries,
- <code>RegexCompletionQuery</code> for regular expression prefix queries,
+  Use <code>PrefixCompletionQuery</code> for analyzed prefix queries, 
+ <code>RegexCompletionQuery</code> for regular expression prefix queries, 
  <code>FuzzyCompletionQuery</code> for analyzed prefix with typo tolerance
- and <code>ContextQuery</code> to boost and/or filter suggestions by contexts
+  and <code>ContextQuery</code> to boost and/or filter suggestions by contexts
  */
 @interface OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher : OrgApacheLuceneSearchIndexSearcher
 
@@ -39,12 +47,12 @@
 
 /*!
  @brief Creates a searcher with document suggest capabilities
- for <code>reader</code>.
+  for <code>reader</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 /*!
- @brief Returns top <code>n</code> completion hits for
+ @brief Returns top <code>n</code> completion hits for 
  <code>query</code>
  */
 - (OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *)suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
@@ -53,11 +61,22 @@
 /*!
  @brief Lower-level suggest API.
  Collects completion hits through <code>collector</code> for <code>query</code>.
- <p><code>TopSuggestDocsCollector.collect(int,CharSequence,CharSequence,float)</code>
- is called for every matching completion hit.
+  
+ <p><code>TopSuggestDocsCollector.collect(int, CharSequence, CharSequence, float)</code>
+  is called for every matching completion hit.
  */
 - (void)suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
        withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *)collector;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)arg0
+                            withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)arg0
+                                   withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -73,4 +92,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearc
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher")

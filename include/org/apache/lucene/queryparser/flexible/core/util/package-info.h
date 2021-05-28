@@ -6,8 +6,8 @@
 /*!
  @brief Utility classes to used with the Query Parser.
  <h2>Utility classes to used with the Query Parser</h2>
- <p>
- This package contains utility classes used with the query parsers.
+  <p>
+  This package contains utility classes used with the query parsers.
  */
 #include "J2ObjC_header.h"
 
@@ -19,4 +19,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info")

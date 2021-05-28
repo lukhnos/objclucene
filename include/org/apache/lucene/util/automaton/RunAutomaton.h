@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonRunAutomaton
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonRunAutomaton_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonRunAutomaton || defined(INCLUDE_OrgApacheLuceneUtilAutomatonRunAutomaton))
 #define OrgApacheLuceneUtilAutomatonRunAutomaton_
 
@@ -38,32 +44,30 @@
 #pragma mark Public
 
 /*!
- @brief Constructs a new <code>RunAutomaton</code> from a deterministic
+ @brief Constructs a new <code>RunAutomaton</code> from a deterministic 
  <code>Automaton</code>.
  @param a an automaton
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                      withInt:(jint)maxInterval
-                                                  withBoolean:(jboolean)tableize;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
+                                                                withInt:(jint)maxInterval
+                                                            withBoolean:(jboolean)tableize;
 
 /*!
- @brief Constructs a new <code>RunAutomaton</code> from a deterministic
+ @brief Constructs a new <code>RunAutomaton</code> from a deterministic 
  <code>Automaton</code>.
  @param a an automaton
- @param maxDeterminizedStates maximum number of states that can be created
- while determinizing a
+ @param maxDeterminizedStates maximum number of states that can be created    while determinizing a
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                      withInt:(jint)maxInterval
-                                                  withBoolean:(jboolean)tableize
-                                                      withInt:(jint)maxDeterminizedStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
+                                                                withInt:(jint)maxInterval
+                                                            withBoolean:(jboolean)tableize
+                                                                withInt:(jint)maxDeterminizedStates;
 
 - (jboolean)isEqual:(id)obj;
 
 /*!
- @brief Returns array of codepoint class interval start points.
- The array should
- not be modified by the caller.
+ @brief Returns array of codepoint class interval start points.The array should
+  not be modified by the caller.
  */
 - (IOSIntArray *)getCharIntervals;
 
@@ -86,10 +90,10 @@
 
 /*!
  @brief Returns the state obtained by reading the given char from the given state.
- Returns -1 if not obtaining any such state. (If the original
+ Returns -1 if not obtaining any such state. (If the original 
  <code>Automaton</code> had no dead states, -1 is returned here if and only
- if a dead state is entered in an equivalent automaton with a total
- transition function.)
+  if a dead state is entered in an equivalent automaton with a total
+  transition function.)
  */
 - (jint)stepWithInt:(jint)state
             withInt:(jint)c;
@@ -105,6 +109,10 @@
  @brief Gets character class of given codepoint
  */
 - (jint)getCharClassWithInt:(jint)c;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -124,4 +132,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonRunAutomaton)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonRunAutomaton")

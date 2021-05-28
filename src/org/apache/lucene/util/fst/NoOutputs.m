@@ -9,41 +9,43 @@
 #include "org/apache/lucene/util/fst/NoOutputs.h"
 #include "org/apache/lucene/util/fst/Outputs.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/fst/NoOutputs must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilFstNoOutputs ()
 
 - (instancetype)init;
 
 @end
 
-inline OrgApacheLuceneUtilFstNoOutputs *OrgApacheLuceneUtilFstNoOutputs_get_singleton();
+inline OrgApacheLuceneUtilFstNoOutputs *OrgApacheLuceneUtilFstNoOutputs_get_singleton(void);
 static OrgApacheLuceneUtilFstNoOutputs *OrgApacheLuceneUtilFstNoOutputs_singleton;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstNoOutputs, singleton, OrgApacheLuceneUtilFstNoOutputs *)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilFstNoOutputs_init(OrgApacheLuceneUtilFstNoOutputs *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstNoOutputs *new_OrgApacheLuceneUtilFstNoOutputs_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilFstNoOutputs *new_OrgApacheLuceneUtilFstNoOutputs_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstNoOutputs *create_OrgApacheLuceneUtilFstNoOutputs_init();
+__attribute__((unused)) static OrgApacheLuceneUtilFstNoOutputs *create_OrgApacheLuceneUtilFstNoOutputs_init(void);
 
-@interface OrgApacheLuceneUtilFstNoOutputs_$1 : NSObject
+@interface OrgApacheLuceneUtilFstNoOutputs_1 : NSObject
+
+- (instancetype)init;
 
 - (NSUInteger)hash;
 
 - (jboolean)isEqual:(id)other;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstNoOutputs_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstNoOutputs_1)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilFstNoOutputs_$1_init(OrgApacheLuceneUtilFstNoOutputs_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneUtilFstNoOutputs_1_init(OrgApacheLuceneUtilFstNoOutputs_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstNoOutputs_$1 *new_OrgApacheLuceneUtilFstNoOutputs_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilFstNoOutputs_1 *new_OrgApacheLuceneUtilFstNoOutputs_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstNoOutputs_$1 *create_OrgApacheLuceneUtilFstNoOutputs_$1_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstNoOutputs_$1)
+__attribute__((unused)) static OrgApacheLuceneUtilFstNoOutputs_1 *create_OrgApacheLuceneUtilFstNoOutputs_1_init(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstNoOutputs)
 
@@ -68,29 +70,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)commonWithId:(id)output1
             withId:(id)output2 {
-  JreAssert((output1 == OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), (@"org/apache/lucene/util/fst/NoOutputs.java:57 condition failed: assert output1 == NO_OUTPUT;"));
-  JreAssert((output2 == OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), (@"org/apache/lucene/util/fst/NoOutputs.java:58 condition failed: assert output2 == NO_OUTPUT;"));
+  JreAssert(JreObjectEqualsEquals(output1, OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), @"org/apache/lucene/util/fst/NoOutputs.java:57 condition failed: assert output1 == NO_OUTPUT;");
+  JreAssert(JreObjectEqualsEquals(output2, OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), @"org/apache/lucene/util/fst/NoOutputs.java:58 condition failed: assert output2 == NO_OUTPUT;");
   return OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT;
 }
 
 - (id)subtractWithId:(id)output
               withId:(id)inc {
-  JreAssert((output == OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), (@"org/apache/lucene/util/fst/NoOutputs.java:64 condition failed: assert output == NO_OUTPUT;"));
-  JreAssert((inc == OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), (@"org/apache/lucene/util/fst/NoOutputs.java:65 condition failed: assert inc == NO_OUTPUT;"));
+  JreAssert(JreObjectEqualsEquals(output, OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), @"org/apache/lucene/util/fst/NoOutputs.java:64 condition failed: assert output == NO_OUTPUT;");
+  JreAssert(JreObjectEqualsEquals(inc, OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), @"org/apache/lucene/util/fst/NoOutputs.java:65 condition failed: assert inc == NO_OUTPUT;");
   return OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT;
 }
 
 - (id)addWithId:(id)prefix
          withId:(id)output {
-  JreAssert((prefix == OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), (JreStrcat("$@", @"got ", prefix)));
-  JreAssert((output == OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), (@"org/apache/lucene/util/fst/NoOutputs.java:72 condition failed: assert output == NO_OUTPUT;"));
+  JreAssert(JreObjectEqualsEquals(prefix, OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), JreStrcat("$@", @"got ", prefix));
+  JreAssert(JreObjectEqualsEquals(output, OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), @"org/apache/lucene/util/fst/NoOutputs.java:72 condition failed: assert output == NO_OUTPUT;");
   return OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT;
 }
 
 - (id)mergeWithId:(id)first
            withId:(id)second {
-  JreAssert((first == OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), (@"org/apache/lucene/util/fst/NoOutputs.java:78 condition failed: assert first == NO_OUTPUT;"));
-  JreAssert((second == OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), (@"org/apache/lucene/util/fst/NoOutputs.java:79 condition failed: assert second == NO_OUTPUT;"));
+  JreAssert(JreObjectEqualsEquals(first, OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), @"org/apache/lucene/util/fst/NoOutputs.java:78 condition failed: assert first == NO_OUTPUT;");
+  JreAssert(JreObjectEqualsEquals(second, OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT), @"org/apache/lucene/util/fst/NoOutputs.java:79 condition failed: assert second == NO_OUTPUT;");
   return OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT;
 }
 
@@ -118,36 +120,52 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   return @"NoOutputs";
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstNoOutputs;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 3, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 4, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 11, 10, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 12, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getSingleton);
+  methods[2].selector = @selector(commonWithId:withId:);
+  methods[3].selector = @selector(subtractWithId:withId:);
+  methods[4].selector = @selector(addWithId:withId:);
+  methods[5].selector = @selector(mergeWithId:withId:);
+  methods[6].selector = @selector(writeWithId:withOrgApacheLuceneStoreDataOutput:);
+  methods[7].selector = @selector(readWithOrgApacheLuceneStoreDataInput:);
+  methods[8].selector = @selector(getNoOutput);
+  methods[9].selector = @selector(outputToStringWithId:);
+  methods[10].selector = @selector(ramBytesUsedWithId:);
+  methods[11].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "NO_OUTPUT", "LNSObject;", .constantValue.asLong = 0, 0x18, -1, 13, -1, -1 },
+    { "singleton", "LOrgApacheLuceneUtilFstNoOutputs;", .constantValue.asLong = 0, 0x1a, -1, 14, -1, -1 },
+  };
+  static const void *ptrTable[] = { "common", "LNSObject;LNSObject;", "subtract", "add", "merge", "write", "LNSObject;LOrgApacheLuceneStoreDataOutput;", "read", "LOrgApacheLuceneStoreDataInput;", "outputToString", "LNSObject;", "ramBytesUsed", "toString", &OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT, &OrgApacheLuceneUtilFstNoOutputs_singleton, "Lorg/apache/lucene/util/fst/Outputs<Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstNoOutputs = { "NoOutputs", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x11, 12, 2, -1, -1, -1, 15, -1 };
+  return &_OrgApacheLuceneUtilFstNoOutputs;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFstNoOutputs class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT, new_OrgApacheLuceneUtilFstNoOutputs_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT, new_OrgApacheLuceneUtilFstNoOutputs_1_init());
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstNoOutputs_singleton, new_OrgApacheLuceneUtilFstNoOutputs_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFstNoOutputs)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NoOutputs", NULL, 0x2, NULL, NULL },
-    { "getSingleton", NULL, "Lorg.apache.lucene.util.fst.NoOutputs;", 0x9, NULL, NULL },
-    { "commonWithId:withId:", "common", "Ljava.lang.Object;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" },
-    { "subtractWithId:withId:", "subtract", "Ljava.lang.Object;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" },
-    { "addWithId:withId:", "add", "Ljava.lang.Object;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" },
-    { "mergeWithId:withId:", "merge", "Ljava.lang.Object;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" },
-    { "writeWithId:withOrgApacheLuceneStoreDataOutput:", "write", "V", 0x1, NULL, "(Ljava/lang/Object;Lorg/apache/lucene/store/DataOutput;)V" },
-    { "readWithOrgApacheLuceneStoreDataInput:", "read", "Ljava.lang.Object;", 0x1, NULL, "(Lorg/apache/lucene/store/DataInput;)Ljava/lang/Object;" },
-    { "getNoOutput", NULL, "Ljava.lang.Object;", 0x1, NULL, "()Ljava/lang/Object;" },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, "(Ljava/lang/Object;)Ljava/lang/String;" },
-    { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, "(Ljava/lang/Object;)J" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "NO_OUTPUT", "NO_OUTPUT", 0x18, "Ljava.lang.Object;", &OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT, NULL, .constantValue.asLong = 0 },
-    { "singleton", "singleton", 0x1a, "Lorg.apache.lucene.util.fst.NoOutputs;", &OrgApacheLuceneUtilFstNoOutputs_singleton, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Ljava.lang.Object;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstNoOutputs = { 2, "NoOutputs", "org.apache.lucene.util.fst", NULL, 0x11, 12, methods, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/fst/Outputs<Ljava/lang/Object;>;" };
-  return &_OrgApacheLuceneUtilFstNoOutputs;
 }
 
 @end
@@ -171,45 +189,51 @@ OrgApacheLuceneUtilFstNoOutputs *OrgApacheLuceneUtilFstNoOutputs_getSingleton() 
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstNoOutputs)
 
-@implementation OrgApacheLuceneUtilFstNoOutputs_$1
+@implementation OrgApacheLuceneUtilFstNoOutputs_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilFstNoOutputs_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSUInteger)hash {
   return 42;
 }
 
 - (jboolean)isEqual:(id)other {
-  return other == self;
+  return JreObjectEqualsEquals(other, self);
 }
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilFstNoOutputs_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstNoOutputs_$1 = { 2, "", "org.apache.lucene.util.fst", "NoOutputs", 0x8008, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilFstNoOutputs_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(hash);
+  methods[2].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "hashCode", "equals", "LNSObject;", "LOrgApacheLuceneUtilFstNoOutputs;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstNoOutputs_1 = { "", "org.apache.lucene.util.fst", ptrTable, methods, NULL, 7, 0x8018, 3, 0, 3, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilFstNoOutputs_1;
 }
 
 @end
 
-void OrgApacheLuceneUtilFstNoOutputs_$1_init(OrgApacheLuceneUtilFstNoOutputs_$1 *self) {
+void OrgApacheLuceneUtilFstNoOutputs_1_init(OrgApacheLuceneUtilFstNoOutputs_1 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneUtilFstNoOutputs_$1 *new_OrgApacheLuceneUtilFstNoOutputs_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstNoOutputs_$1, init)
+OrgApacheLuceneUtilFstNoOutputs_1 *new_OrgApacheLuceneUtilFstNoOutputs_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstNoOutputs_1, init)
 }
 
-OrgApacheLuceneUtilFstNoOutputs_$1 *create_OrgApacheLuceneUtilFstNoOutputs_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstNoOutputs_$1, init)
+OrgApacheLuceneUtilFstNoOutputs_1 *create_OrgApacheLuceneUtilFstNoOutputs_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstNoOutputs_1, init)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstNoOutputs_$1)

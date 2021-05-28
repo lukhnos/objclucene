@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileFilePath
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFilePath_) && (INCLUDE_ALL_OrgLukhnosPortmobileFilePath || defined(INCLUDE_OrgLukhnosPortmobileFilePath))
 #define OrgLukhnosPortmobileFilePath_
 
@@ -43,9 +49,13 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithJavaIoFile:(JavaIoFile *)file;
+- (instancetype __nonnull)initWithJavaIoFile:(JavaIoFile *)file;
 
-- (instancetype)initWithNSString:(NSString *)path;
+- (instancetype __nonnull)initWithNSString:(NSString *)path;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -69,4 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFilePath)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFilePath")

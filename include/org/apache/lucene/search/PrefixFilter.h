@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPrefixFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPrefixFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchPrefixFilter || defined(INCLUDE_OrgApacheLuceneSearchPrefixFilter))
 #define OrgApacheLuceneSearchPrefixFilter_
 
@@ -20,18 +26,18 @@
 #define INCLUDE_OrgApacheLuceneSearchMultiTermQueryWrapperFilter 1
 #include "org/apache/lucene/search/MultiTermQueryWrapperFilter.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexTerm;
+@class OrgApacheLuceneSearchMultiTermQuery;
 
 /*!
  @brief A Filter that restricts search results to values that have a matching prefix in a given
- field.
+  field.
  */
 @interface OrgApacheLuceneSearchPrefixFilter : OrgApacheLuceneSearchMultiTermQueryWrapperFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)prefix;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)prefix;
 
 - (OrgApacheLuceneIndexTerm *)getPrefix;
 
@@ -39,6 +45,10 @@
  @brief Prints a user-readable version of this filter.
  */
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -54,4 +64,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPrefixFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPrefixFilter")

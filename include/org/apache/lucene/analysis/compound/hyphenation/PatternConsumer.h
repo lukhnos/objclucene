@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer))
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_
 
@@ -20,26 +26,26 @@
 
 /*!
  @brief This interface is used to connect the XML pattern file parser to the
- hyphenation tree.
+  hyphenation tree.
  This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified.
  */
-@protocol OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer < NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer < JavaObject >
 
 /*!
- @brief Add a character class.
- A character class defines characters that are
- considered equivalent for the purpose of hyphenation (e.g. "aA"). It
- usually means to ignore case.
+ @brief Add a character class.A character class defines characters that are
+  considered equivalent for the purpose of hyphenation (e.g.
+ "aA"). It
+  usually means to ignore case.
  @param chargroup character group
  */
 - (void)addClassWithNSString:(NSString *)chargroup;
 
 /*!
- @brief Add a hyphenation exception.
- An exception replaces the result obtained by
- the algorithm for cases for which this fails or the user wants to provide
- his own hyphenation. A hyphenatedword is a vector of alternating String's
- and <code>Hyphen</code> instances
+ @brief Add a hyphenation exception.An exception replaces the result obtained by
+  the algorithm for cases for which this fails or the user wants to provide
+  his own hyphenation.
+ A hyphenatedword is a vector of alternating String's
+  and <code>Hyphen</code> instances
  */
 - (void)addExceptionWithNSString:(NSString *)word
            withJavaUtilArrayList:(JavaUtilArrayList *)hyphenatedword;
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationPatternCons
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer")

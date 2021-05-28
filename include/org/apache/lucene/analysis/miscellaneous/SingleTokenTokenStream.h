@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream))
 #define OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_
 
@@ -20,8 +26,9 @@
 #define INCLUDE_OrgApacheLuceneAnalysisTokenStream 1
 #include "org/apache/lucene/analysis/TokenStream.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisToken;
+@class OrgApacheLuceneUtilAttributeFactory;
+@class OrgApacheLuceneUtilAttributeSource;
 
 /*!
  @brief A <code>TokenStream</code> containing a single token.
@@ -30,7 +37,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)token;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)token;
 
 - (OrgApacheLuceneAnalysisToken *)getToken;
 
@@ -39,6 +46,14 @@
 - (void)reset;
 
 - (void)setTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)token;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -54,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenS
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream")

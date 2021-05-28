@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonOperations
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonOperations_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonOperations || defined(INCLUDE_OrgApacheLuceneUtilAutomatonOperations))
 #define OrgApacheLuceneUtilAutomatonOperations_
 
@@ -28,68 +34,63 @@
  @brief Automata operations.
  */
 @interface OrgApacheLuceneUtilAutomatonOperations : NSObject
-
-+ (jint)DEFAULT_MAX_DETERMINIZED_STATES;
+@property (readonly, class) jint DEFAULT_MAX_DETERMINIZED_STATES NS_SWIFT_NAME(DEFAULT_MAX_DETERMINIZED_STATES);
 
 #pragma mark Public
 
 /*!
  @brief Returns a (deterministic) automaton that accepts the complement of the
- language of the given automaton.
+  language of the given automaton.
  <p>
- Complexity: linear in number of states if already deterministic and
- exponential otherwise.
- @param maxDeterminizedStates maximum number of states determinizing the
- automaton can result in.  Set higher to allow more complex queries and
- lower to prevent memory exhaustion.
+  Complexity: linear in number of states if already deterministic and
+   exponential otherwise.
+ @param maxDeterminizedStates maximum number of states determinizing the   automaton can result in.  Set higher to allow more complex queries and
+    lower to prevent memory exhaustion.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)complementWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                                                        withInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief Returns an automaton that accepts the concatenation of the languages of the
- given automata.
+  given automata.
  <p>
- Complexity: linear in total number of states.
+  Complexity: linear in total number of states.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)concatenateWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a1
                                                       withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a2;
 
 /*!
  @brief Returns an automaton that accepts the concatenation of the languages of the
- given automata.
+  given automata.
  <p>
- Complexity: linear in total number of states.
+  Complexity: linear in total number of states.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)concatenateWithJavaUtilList:(id<JavaUtilList>)l;
 
 /*!
  @brief Determinizes the given automaton.
  <p>
- Worst case complexity: exponential in number of states.
- @param maxDeterminizedStates Maximum number of states created when
- determinizing.  Higher numbers allow this operation to consume more
- memory but allow more complex automatons.  Use
- DEFAULT_MAX_DETERMINIZED_STATES as a decent default if you don't know
- how many to allow.
- @throws TooComplexToDeterminizeException if determinizing a creates an
- automaton with more than maxDeterminizedStates
+  Worst case complexity: exponential in number of states.
+ @param maxDeterminizedStates Maximum number of states created when    determinizing.  Higher numbers allow this operation to consume more
+     memory but allow more complex automatons.  Use
+     DEFAULT_MAX_DETERMINIZED_STATES as a decent default if you don't know
+     how many to allow.
+ @throw TooComplexToDeterminizeExceptionif determinizing a creates an
+    automaton with more than maxDeterminizedStates
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)determinizeWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                                                         withInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief Returns the longest string that is a prefix of all accepted strings and
- visits each state at most once.
- The automaton must be deterministic.
+  visits each state at most once.The automaton must be deterministic.
  @return common prefix, which can be an empty (length 0) String (never null)
  */
 + (NSString *)getCommonPrefixWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
  @brief Returns the longest BytesRef that is a prefix of all accepted strings and
- visits each state at most once.
- The automaton must be deterministic.
+  visits each state at most once.The automaton must be deterministic.
  @return common prefix, which can be an empty (length 0) BytesRef (never null)
  */
 + (OrgApacheLuceneUtilBytesRef *)getCommonPrefixBytesRefWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
@@ -97,26 +98,24 @@
 /*!
  @brief Returns the longest BytesRef that is a suffix of all accepted strings.
  Worst case complexity: exponential in number of states (this calls
- determinize).
- @param maxDeterminizedStates maximum number of states determinizing the
- automaton can result in.  Set higher to allow more complex queries and
- lower to prevent memory exhaustion.
+  determinize).
+ @param maxDeterminizedStates maximum number of states determinizing the   automaton can result in.  Set higher to allow more complex queries and
+    lower to prevent memory exhaustion.
  @return common suffix, which can be an empty (length 0) BytesRef (never null)
  */
 + (OrgApacheLuceneUtilBytesRef *)getCommonSuffixBytesRefWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                                                           withInt:(jint)maxDeterminizedStates;
 
 /*!
- @brief If this automaton accepts a single input, return it.
- Else, return null.
- The automaton must be deterministic. 
+ @brief If this automaton accepts a single input, return it.Else, return null.
+ The automaton must be deterministic.
  */
 + (OrgApacheLuceneUtilIntsRef *)getSingletonWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
  @brief Returns true if this automaton has any states that cannot
- be reached from the initial state or cannot reach an accept state.
- Cost is O(numTransitions+numStates). 
+   be reached from the initial state or cannot reach an accept state.
+ Cost is O(numTransitions+numStates).
  */
 + (jboolean)hasDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
@@ -132,10 +131,9 @@
 
 /*!
  @brief Returns an automaton that accepts the intersection of the languages of the
- given automata.
- Never modifies the input automata languages.
+  given automata.Never modifies the input automata languages.
  <p>
- Complexity: quadratic in number of states.
+  Complexity: quadratic in number of states.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)intersectionWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a1
                                                        withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a2;
@@ -146,22 +144,19 @@
 + (jboolean)isEmptyWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
- @brief Returns true if the language of this automaton is finite.
- The
- automaton must not have any dead states.
+ @brief Returns true if the language of this automaton is finite.The
+  automaton must not have any dead states.
  */
 + (jboolean)isFiniteWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
- @brief Returns true if the given automaton accepts all strings.
- The automaton must be minimized.
+ @brief Returns true if the given automaton accepts all strings.The automaton must be minimized.
  */
 + (jboolean)isTotalWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
  @brief Returns true if the given automaton accepts all strings for the specified min/max
- range of the alphabet.
- The automaton must be minimized.
+  range of the alphabet.The automaton must be minimized.
  */
 + (jboolean)isTotalWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                      withInt:(jint)minAlphabet
@@ -169,13 +164,12 @@
 
 /*!
  @brief Returns a (deterministic) automaton that accepts the intersection of the
- language of <code>a1</code> and the complement of the language of
- <code>a2</code>.
- As a side-effect, the automata may be determinized, if not
- already deterministic.
+  language of <code>a1</code> and the complement of the language of 
+ <code>a2</code>.As a side-effect, the automata may be determinized, if not
+  already deterministic.
  <p>
- Complexity: quadratic in number of states if a2 already deterministic and
- exponential in number of a2's states otherwise.
+  Complexity: quadratic in number of states if a2 already deterministic and
+   exponential in number of a2's states otherwise.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)minusWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a1
                                                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a2
@@ -183,44 +177,42 @@
 
 /*!
  @brief Returns an automaton that accepts the union of the empty string and the
- language of the given automaton.
- This may create a dead state.
+  language of the given automaton.This may create a dead state.
  <p>
- Complexity: linear in number of states.
+  Complexity: linear in number of states.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)optionalWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
  @brief Removes transitions to dead states (a state is "dead" if it is not
- reachable from the initial state or no accept state is reachable from it.)
+  reachable from the initial state or no accept state is reachable from it.)
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)removeDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
  @brief Returns an automaton that accepts the Kleene star (zero or more
- concatenated repetitions) of the language of the given automaton.
- Never
- modifies the input automaton language.
+  concatenated repetitions) of the language of the given automaton.Never
+  modifies the input automaton language.
  <p>
- Complexity: linear in number of states.
+  Complexity: linear in number of states.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)repeatWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
  @brief Returns an automaton that accepts <code>min</code> or more concatenated
- repetitions of the language of the given automaton.
+  repetitions of the language of the given automaton.
  <p>
- Complexity: linear in number of states and in <code>min</code>.
+  Complexity: linear in number of states and in <code>min</code>.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)repeatWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                                                    withInt:(jint)count;
 
 /*!
- @brief Returns an automaton that accepts between <code>min</code> and
+ @brief Returns an automaton that accepts between <code>min</code> and 
  <code>max</code> (including both) concatenated repetitions of the language
- of the given automaton.
+  of the given automaton.
  <p>
- Complexity: linear in number of states and in <code>min</code> and
+  Complexity: linear in number of states and in <code>min</code> and 
  <code>max</code>.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)repeatWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
@@ -233,73 +225,70 @@
 + (OrgApacheLuceneUtilAutomatonAutomaton *)reverseWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
- @brief Returns true if the given string (expressed as unicode codepoints) is accepted by the automaton.
- The input must be deterministic.
+ @brief Returns true if the given string (expressed as unicode codepoints) is accepted by the automaton.The input must be deterministic.
  <p>
- Complexity: linear in the length of the string.
+  Complexity: linear in the length of the string. 
  <p>
- <b>Note:</b> for full performance, use the <code>RunAutomaton</code> class.
+  <b>Note:</b> for full performance, use the <code>RunAutomaton</code> class.
  */
 + (jboolean)runWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                           withOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)s;
 
 /*!
- @brief Returns true if the given string is accepted by the automaton.
- The input must be deterministic.
+ @brief Returns true if the given string is accepted by the automaton.The input must be deterministic.
  <p>
- Complexity: linear in the length of the string.
+  Complexity: linear in the length of the string. 
  <p>
- <b>Note:</b> for full performance, use the <code>RunAutomaton</code> class.
+  <b>Note:</b> for full performance, use the <code>RunAutomaton</code> class.
  */
 + (jboolean)runWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                             withNSString:(NSString *)s;
 
 /*!
  @brief Returns true if these two automata accept exactly the
- same language.
- This is a costly computation!  Note
- also that a1 and a2 will be determinized as a side
- effect.  Both automata must be determinized and have
- no dead states! 
+   same language.This is a costly computation!
+ Note
+   also that a1 and a2 will be determinized as a side
+   effect.  Both automata must be determinized and have
+   no dead states!
  */
 + (jboolean)sameLanguageWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a1
                         withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a2;
 
 /*!
- @brief Returns true if the language of <code>a1</code> is a subset of the language
- of <code>a2</code>.
- Both automata must be determinized and must have no dead
- states.
+ @brief Returns true if the language of <code>a1</code> is a subset of the language of 
+ <code>a2</code>.Both automata must be determinized and must have no dead
+  states.
  <p>
- Complexity: quadratic in number of states.
+  Complexity: quadratic in number of states.
  */
 + (jboolean)subsetOfWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a1
                     withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a2;
 
 /*!
  @brief Returns the topological sort of all states reachable from
- the initial state.
- Behavior is undefined if this
- automaton has cycles.  CPU cost is O(numTransitions),
- and the implementation is recursive so an automaton
- matching long strings may exhaust the java stack. 
+   the initial state.Behavior is undefined if this
+   automaton has cycles.
+ CPU cost is O(numTransitions),
+   and the implementation is recursive so an automaton
+   matching long strings may exhaust the java stack.
  */
 + (IOSIntArray *)topoSortStatesWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
  @brief Returns an automaton that accepts the union of the languages of the given
- automata.
+  automata.
  <p>
- Complexity: linear in number of states.
+  Complexity: linear in number of states.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)union__WithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a1
                                                   withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a2;
 
 /*!
  @brief Returns an automaton that accepts the union of the languages of the given
- automata.
+  automata.
  <p>
- Complexity: linear in number of states.
+  Complexity: linear in number of states.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)union__WithJavaUtilCollection:(id<JavaUtilCollection>)l;
 
@@ -307,7 +296,7 @@
 
 /*!
  @brief Finds the largest entry whose value is less than or equal to c, or 0 if
- there is no such entry.
+  there is no such entry.
  */
 + (jint)findIndexWithInt:(jint)c
             withIntArray:(IOSIntArray *)points;
@@ -320,8 +309,8 @@
 
 /*!
  @brief Returns a new automaton accepting the same language with added
- transitions to a dead state so that from every state and every label
- there is a transition.
+   transitions to a dead state so that from every state and every label
+   there is a transition.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)totalizeWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
@@ -332,7 +321,7 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonOperations)
 /*!
  @brief Default maximum number of states that <code>Operations.determinize</code> should create.
  */
-inline jint OrgApacheLuceneUtilAutomatonOperations_get_DEFAULT_MAX_DETERMINIZED_STATES();
+inline jint OrgApacheLuceneUtilAutomatonOperations_get_DEFAULT_MAX_DETERMINIZED_STATES(void);
 #define OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES 10000
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonOperations, DEFAULT_MAX_DETERMINIZED_STATES, jint)
 
@@ -406,4 +395,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonOperations)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonOperations")

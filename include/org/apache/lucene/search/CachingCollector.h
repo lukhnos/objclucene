@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchCachingCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchCachingCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchCachingCollector || defined(INCLUDE_OrgApacheLuceneSearchCachingCollector))
 #define OrgApacheLuceneSearchCachingCollector_
 
@@ -24,20 +30,19 @@
 
 /*!
  @brief Caches all docs, and optionally also scores, coming from
- a search, and is then able to replay them to another
- collector.
- You specify the max RAM this class may use.
+  a search, and is then able to replay them to another
+  collector.You specify the max RAM this class may use.
  Once the collection is done, call <code>isCached</code>. If
- this returns true, you can use <code>replay(Collector)</code>
- against a new collector.  If it returns false, this means
- too much RAM was required and you must instead re-run the
- original search.
+  this returns true, you can use <code>replay(Collector)</code>
+  against a new collector.  If it returns false, this means
+  too much RAM was required and you must instead re-run the
+  original search. 
  <p><b>NOTE</b>: this class consumes 4 (or 8 bytes, if
- scoring is cached) per collected document.  If the result
- set is large this can easily be a very substantial amount
- of RAM!
+  scoring is cached) per collected document.  If the result
+  set is large this can easily be a very substantial amount
+  of RAM! 
  <p>See the Lucene <tt>modules/grouping</tt> module for more
- details including a full code example.</p>
+  details including a full code example.</p>
  */
 @interface OrgApacheLuceneSearchCachingCollector : OrgApacheLuceneSearchFilterCollector
 
@@ -53,16 +58,13 @@
 
 /*!
  @brief Create a new <code>CachingCollector</code> that wraps the given collector and
- caches documents and scores up to the specified RAM threshold.
- @param other
- the Collector to wrap and delegate calls to.
- @param cacheScores
- whether to cache scores in addition to document IDs. Note that
- this increases the RAM consumed per doc
- @param maxRAMMB
- the maximum RAM in MB to consume for caching the documents and
- scores. If the collector exceeds the threshold, no documents and
- scores are cached.
+  caches documents and scores up to the specified RAM threshold.
+ @param other the Collector to wrap and delegate calls to.
+ @param cacheScores whether to cache scores in addition to document IDs. Note that
+            this increases the RAM consumed per doc
+ @param maxRAMMB the maximum RAM in MB to consume for caching the documents and
+            scores. If the collector exceeds the threshold, no documents and
+            scores are cached.
  */
 + (OrgApacheLuceneSearchCachingCollector *)createWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)other
                                                                         withBoolean:(jboolean)cacheScores
@@ -70,16 +72,13 @@
 
 /*!
  @brief Create a new <code>CachingCollector</code> that wraps the given collector and
- caches documents and scores up to the specified max docs threshold.
- @param other
- the Collector to wrap and delegate calls to.
- @param cacheScores
- whether to cache scores in addition to document IDs. Note that
- this increases the RAM consumed per doc
- @param maxDocsToCache
- the maximum number of documents for caching the documents and
- possible the scores. If the collector exceeds the threshold,
- no documents and scores are cached.
+  caches documents and scores up to the specified max docs threshold.
+ @param other the Collector to wrap and delegate calls to.
+ @param cacheScores whether to cache scores in addition to document IDs. Note that
+            this increases the RAM consumed per doc
+ @param maxDocsToCache the maximum number of documents for caching the documents and
+            possible the scores. If the collector exceeds the threshold,
+            no documents and scores are cached.
  */
 + (OrgApacheLuceneSearchCachingCollector *)createWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)other
                                                                         withBoolean:(jboolean)cacheScores
@@ -91,16 +90,15 @@
 - (jboolean)isCached;
 
 /*!
- @brief Replays the cached doc IDs (and scores) to the given Collector.
- If this
- instance does not cache scores, then Scorer is not set on
+ @brief Replays the cached doc IDs (and scores) to the given Collector.If this
+  instance does not cache scores, then Scorer is not set on 
  <code>other.setScorer</code> as well as scores are not replayed.
- @throws IllegalStateException
+ @throw IllegalStateException
  if this collector is not cached (i.e., if the RAM limits were too
- low for the number of documents + scores to cache).
- @throws IllegalArgumentException
+            low for the number of documents + scores to cache).
+ @throw IllegalArgumentException
  if the given Collect's does not support out-of-order collection,
- while the collector passed to the ctor does.
+            while the collector passed to the ctor does.
  */
 - (void)replayWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)other;
 
@@ -118,4 +116,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCachingCollector")

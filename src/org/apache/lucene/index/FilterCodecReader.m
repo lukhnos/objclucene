@@ -16,6 +16,10 @@
 #include "org/apache/lucene/util/Bits.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/FilterCodecReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexFilterCodecReader
 
 - (instancetype)initWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)inArg {
@@ -73,24 +77,41 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexCodecReader:", "FilterCodecReader", NULL, 0x1, NULL, NULL },
-    { "getFieldsReader", NULL, "Lorg.apache.lucene.codecs.StoredFieldsReader;", 0x1, NULL, NULL },
-    { "getTermVectorsReader", NULL, "Lorg.apache.lucene.codecs.TermVectorsReader;", 0x1, NULL, NULL },
-    { "getNormsReader", NULL, "Lorg.apache.lucene.codecs.NormsProducer;", 0x1, NULL, NULL },
-    { "getDocValuesReader", NULL, "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x1, NULL, NULL },
-    { "getPostingsReader", NULL, "Lorg.apache.lucene.codecs.FieldsProducer;", 0x1, NULL, NULL },
-    { "getLiveDocs", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, NULL, NULL },
-    { "getFieldInfos", NULL, "Lorg.apache.lucene.index.FieldInfos;", 0x1, NULL, NULL },
-    { "numDocs", NULL, "I", 0x1, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x1, NULL, NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsNormsProducer;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesProducer;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldsProducer;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFieldInfos;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexCodecReader:);
+  methods[1].selector = @selector(getFieldsReader);
+  methods[2].selector = @selector(getTermVectorsReader);
+  methods[3].selector = @selector(getNormsReader);
+  methods[4].selector = @selector(getDocValuesReader);
+  methods[5].selector = @selector(getPostingsReader);
+  methods[6].selector = @selector(getLiveDocs);
+  methods[7].selector = @selector(getFieldInfos);
+  methods[8].selector = @selector(numDocs);
+  methods[9].selector = @selector(maxDoc);
+  methods[10].selector = @selector(addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[11].selector = @selector(removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x14, "Lorg.apache.lucene.index.CodecReader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneIndexCodecReader;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilterCodecReader = { 2, "FilterCodecReader", "org.apache.lucene.index", NULL, 0x1, 12, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexCodecReader;", "addCoreClosedListener", "LOrgApacheLuceneIndexLeafReader_CoreClosedListener;", "removeCoreClosedListener" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilterCodecReader = { "FilterCodecReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 12, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFilterCodecReader;
 }
 

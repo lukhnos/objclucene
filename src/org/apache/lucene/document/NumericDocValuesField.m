@@ -10,6 +10,10 @@
 #include "org/apache/lucene/document/NumericDocValuesField.h"
 #include "org/apache/lucene/index/DocValuesType.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/NumericDocValuesField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentNumericDocValuesField)
 
 OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentNumericDocValuesField_TYPE;
@@ -26,6 +30,23 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentNumericDocValuesField_T
   return self;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withLong:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "TYPE", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;J", &OrgApacheLuceneDocumentNumericDocValuesField_TYPE };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentNumericDocValuesField = { "NumericDocValuesField", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x1, 1, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneDocumentNumericDocValuesField;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentNumericDocValuesField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentNumericDocValuesField_TYPE, new_OrgApacheLuceneDocumentFieldType_init());
@@ -35,17 +56,6 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentNumericDocValuesField_T
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentNumericDocValuesField)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withLong:", "NumericDocValuesField", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "TYPE", "TYPE", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentNumericDocValuesField_TYPE, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentNumericDocValuesField = { 2, "NumericDocValuesField", "org.apache.lucene.document", NULL, 0x1, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentNumericDocValuesField;
 }
 
 @end

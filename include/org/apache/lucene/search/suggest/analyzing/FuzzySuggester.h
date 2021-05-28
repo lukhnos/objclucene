@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester))
 #define OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_
 
@@ -27,49 +33,43 @@
 @protocol JavaUtilList;
 
 /*!
- @brief Implements a fuzzy <code>AnalyzingSuggester</code>.
- The similarity measurement is
- based on the Damerau-Levenshtein (optimal string alignment) algorithm, though
- you can explicitly choose classic Levenshtein by passing <code>false</code>
- for the <code>transpositions</code> parameter.
+ @brief Implements a fuzzy <code>AnalyzingSuggester</code>.The similarity measurement is
+  based on the Damerau-Levenshtein (optimal string alignment) algorithm, though
+  you can explicitly choose classic Levenshtein by passing <code>false</code>
+  for the <code>transpositions</code> parameter.
  <p>
- At most, this query will match terms up to
+  At most, this query will match terms up to 
  org.apache.lucene.util.automaton.LevenshteinAutomata#MAXIMUM_SUPPORTED_DISTANCE
- edits. Higher distances are not supported.  Note that the
- fuzzy distance is measured in "byte space" on the bytes
- returned by the <code>TokenStream</code>'s <code>TermToBytesRefAttribute</code>
+  edits. Higher distances are not supported.  Note that the
+  fuzzy distance is measured in "byte space" on the bytes
+  returned by the <code>TokenStream</code>'s <code>TermToBytesRefAttribute</code>
  , usually UTF8.  By default
- the analyzed bytes must be at least 3 <code>DEFAULT_MIN_FUZZY_LENGTH</code>
+  the analyzed bytes must be at least 3 <code>DEFAULT_MIN_FUZZY_LENGTH</code>
   bytes before any edits are
- considered.  Furthermore, the first 1 <code>DEFAULT_NON_FUZZY_PREFIX</code>
+  considered.  Furthermore, the first 1 <code>DEFAULT_NON_FUZZY_PREFIX</code>
   byte is not allowed to be
- edited.  We allow up to 1 (@@link
- #DEFAULT_MAX_EDITS} edit.
- If <code>unicodeAware</code> parameter in the constructor is set to true, maxEdits,
- minFuzzyLength, transpositions and nonFuzzyPrefix are measured in Unicode code 
- points (actual letters) instead of bytes. 
+  edited.  We allow up to 1 (@@link
+  #DEFAULT_MAX_EDITS} edit.
+  If <code>unicodeAware</code> parameter in the constructor is set to true, maxEdits,
+  minFuzzyLength, transpositions and nonFuzzyPrefix are measured in Unicode code 
+  points (actual letters) instead of bytes.  
  <p>
- NOTE: This suggester does not boost suggestions that
- required no edits over suggestions that did require
- edits.  This is a known limitation.
+  NOTE: This suggester does not boost suggestions that
+  required no edits over suggestions that did require
+  edits.  This is a known limitation. 
  <p>
- Note: complex query analyzers can have a significant impact on the lookup
- performance. It's recommended to not use analyzers that drop or inject terms
- like synonyms to keep the complexity of the prefix intersection low for good
- lookup performance. At index time, complex analyzers can safely be used.
+  Note: complex query analyzers can have a significant impact on the lookup
+  performance. It's recommended to not use analyzers that drop or inject terms
+  like synonyms to keep the complexity of the prefix intersection low for good
+  lookup performance. At index time, complex analyzers can safely be used. 
  </p>
  */
 @interface OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester : OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester
-
-+ (jboolean)DEFAULT_UNICODE_AWARE;
-
-+ (jint)DEFAULT_MIN_FUZZY_LENGTH;
-
-+ (jint)DEFAULT_NON_FUZZY_PREFIX;
-
-+ (jint)DEFAULT_MAX_EDITS;
-
-+ (jboolean)DEFAULT_TRANSPOSITIONS;
+@property (readonly, class) jboolean DEFAULT_UNICODE_AWARE NS_SWIFT_NAME(DEFAULT_UNICODE_AWARE);
+@property (readonly, class) jint DEFAULT_MIN_FUZZY_LENGTH NS_SWIFT_NAME(DEFAULT_MIN_FUZZY_LENGTH);
+@property (readonly, class) jint DEFAULT_NON_FUZZY_PREFIX NS_SWIFT_NAME(DEFAULT_NON_FUZZY_PREFIX);
+@property (readonly, class) jint DEFAULT_MAX_EDITS NS_SWIFT_NAME(DEFAULT_MAX_EDITS);
+@property (readonly, class) jboolean DEFAULT_TRANSPOSITIONS NS_SWIFT_NAME(DEFAULT_TRANSPOSITIONS);
 
 #pragma mark Public
 
@@ -77,52 +77,45 @@
  @brief Creates a <code>FuzzySuggester</code> instance initialized with default values.
  @param analyzer the analyzer used for this suggester
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  @brief Creates a <code>FuzzySuggester</code> instance with an index and query analyzer initialized with default values.
- @param indexAnalyzer
- Analyzer that will be used for analyzing suggestions while building the index.
- @param queryAnalyzer
- Analyzer that will be used for analyzing query text during lookup
+ @param indexAnalyzer Analyzer that will be used for analyzing suggestions while building the index.
+ @param queryAnalyzer Analyzer that will be used for analyzing query text during lookup
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                              withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer;
 
 /*!
  @brief Creates a <code>FuzzySuggester</code> instance.
- @param indexAnalyzer Analyzer that will be used for
- analyzing suggestions while building the index.
- @param queryAnalyzer Analyzer that will be used for
- analyzing query text during lookup
- @param options see <code>EXACT_FIRST</code>, <code>PRESERVE_SEP</code>
- @param maxSurfaceFormsPerAnalyzedForm Maximum number of
- surface forms to keep for a single analyzed form.
- When there are too many surface forms we discard the
- lowest weighted ones.
- @param maxGraphExpansions Maximum number of graph paths
- to expand from the analyzed form.  Set this to -1 for
- no limit.
+ @param indexAnalyzer Analyzer that will be used for         analyzing suggestions while building the index.
+ @param queryAnalyzer Analyzer that will be used for         analyzing query text during lookup
+ @param options see <code>EXACT_FIRST</code> , <code>PRESERVE_SEP</code>
+ @param maxSurfaceFormsPerAnalyzedForm Maximum number of         surface forms to keep for a single analyzed form.
+          When there are too many surface forms we discard the
+          lowest weighted ones.
+ @param maxGraphExpansions Maximum number of graph paths         to expand from the analyzed form.  Set this to -1 for
+          no limit.
  @param preservePositionIncrements Whether position holes should appear in the automaton
- @param maxEdits must be &gt;= 0 and &lt;= <code>LevenshteinAutomata.MAXIMUM_SUPPORTED_DISTANCE</code> .
- @param transpositions <code>true</code> if transpositions should be treated as a primitive 
- edit operation. If this is false, comparisons will implement the classic
- Levenshtein algorithm.
+ @param maxEdits must be  &gt; = 0 and  &lt; = <code>LevenshteinAutomata.MAXIMUM_SUPPORTED_DISTANCE</code>  .
+ @param transpositions <code> true </code>  if transpositions should be treated as a primitive 
+          edit operation. If this is false, comparisons will implement the classic         Levenshtein algorithm.
  @param nonFuzzyPrefix length of common (non-fuzzy) prefix (see default <code>DEFAULT_NON_FUZZY_PREFIX</code>
- @param minFuzzyLength minimum length of lookup key before any edits are allowed (see default <code>DEFAULT_MIN_FUZZY_LENGTH</code>)
+ @param minFuzzyLength minimum length of lookup key before any edits are allowed (see default <code>DEFAULT_MIN_FUZZY_LENGTH</code> )
  @param unicodeAware operate Unicode code points instead of bytes.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                                withInt:(jint)options
-                                                withInt:(jint)maxSurfaceFormsPerAnalyzedForm
-                                                withInt:(jint)maxGraphExpansions
-                                            withBoolean:(jboolean)preservePositionIncrements
-                                                withInt:(jint)maxEdits
-                                            withBoolean:(jboolean)transpositions
-                                                withInt:(jint)nonFuzzyPrefix
-                                                withInt:(jint)minFuzzyLength
-                                            withBoolean:(jboolean)unicodeAware;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                              withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                          withInt:(jint)options
+                                                          withInt:(jint)maxSurfaceFormsPerAnalyzedForm
+                                                          withInt:(jint)maxGraphExpansions
+                                                      withBoolean:(jboolean)preservePositionIncrements
+                                                          withInt:(jint)maxEdits
+                                                      withBoolean:(jboolean)transpositions
+                                                          withInt:(jint)nonFuzzyPrefix
+                                                          withInt:(jint)minFuzzyLength
+                                                      withBoolean:(jboolean)unicodeAware;
 
 #pragma mark Protected
 
@@ -138,16 +131,25 @@
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg0
+                              withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg1
+                                                          withInt:(jint)arg2
+                                                          withInt:(jint)arg3
+                                                          withInt:(jint)arg4
+                                                      withBoolean:(jboolean)arg5 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester)
 
 /*!
  @brief Measure maxEdits, minFuzzyLength, transpositions and nonFuzzyPrefix 
- parameters in Unicode code points (actual letters)
- instead of bytes.
+   parameters in Unicode code points (actual letters)
+   instead of bytes.
  */
-inline jboolean OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_get_DEFAULT_UNICODE_AWARE();
+inline jboolean OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_get_DEFAULT_UNICODE_AWARE(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_UNICODE_AWARE false
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, DEFAULT_UNICODE_AWARE, jboolean)
 
@@ -155,29 +157,29 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester
  @brief The default minimum length of the key passed to <code>lookup</code>
   before any edits are allowed.
  */
-inline jint OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_get_DEFAULT_MIN_FUZZY_LENGTH();
+inline jint OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_get_DEFAULT_MIN_FUZZY_LENGTH(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_MIN_FUZZY_LENGTH 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, DEFAULT_MIN_FUZZY_LENGTH, jint)
 
 /*!
  @brief The default prefix length where edits are not allowed.
  */
-inline jint OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_get_DEFAULT_NON_FUZZY_PREFIX();
+inline jint OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_get_DEFAULT_NON_FUZZY_PREFIX(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_NON_FUZZY_PREFIX 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, DEFAULT_NON_FUZZY_PREFIX, jint)
 
 /*!
  @brief The default maximum number of edits for fuzzy
- suggestions.
+  suggestions.
  */
-inline jint OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_get_DEFAULT_MAX_EDITS();
+inline jint OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_get_DEFAULT_MAX_EDITS(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_MAX_EDITS 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, DEFAULT_MAX_EDITS, jint)
 
 /*!
  @brief The default transposition value passed to <code>LevenshteinAutomata</code>
  */
-inline jboolean OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_get_DEFAULT_TRANSPOSITIONS();
+inline jboolean OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_get_DEFAULT_TRANSPOSITIONS(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_TRANSPOSITIONS true
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, DEFAULT_TRANSPOSITIONS, jboolean)
 
@@ -203,4 +205,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester")

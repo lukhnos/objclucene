@@ -11,6 +11,10 @@
 #include "org/apache/lucene/util/automaton/FiniteStringsIterator.h"
 #include "org/apache/lucene/util/automaton/LimitedFiniteStringsIterator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/LimitedFiniteStringsIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator () {
  @public
   /*!
@@ -49,16 +53,24 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "LimitedFiniteStringsIterator", NULL, 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.IntsRef;", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[1].selector = @selector(next);
+  methods[2].selector = @selector(size);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "limit_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "limit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "count_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator = { 2, "LimitedFiniteStringsIterator", "org.apache.lucene.util.automaton", NULL, 0x1, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAutomatonAutomaton;I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator = { "LimitedFiniteStringsIterator", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x1, 3, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator;
 }
 

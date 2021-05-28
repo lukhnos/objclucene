@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightTokenGroup
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightTokenGroup_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightTokenGroup || defined(INCLUDE_OrgApacheLuceneSearchHighlightTokenGroup))
 #define OrgApacheLuceneSearchHighlightTokenGroup_
 
@@ -21,17 +27,17 @@
 
 /*!
  @brief One, or several overlapping tokens, along with the score(s) and the scope of
- the original text.
+  the original text.
  */
 @interface OrgApacheLuceneSearchHighlightTokenGroup : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
 
 /*!
  @return the latest end offset in the original text of a matching token in this group (score &gt; 0), or
- if there are none then <code>getEndOffset()</code>.
+  if there are none then <code>getEndOffset()</code>.
  */
 - (jint)getEndOffset;
 
@@ -48,7 +54,7 @@
 
 /*!
  @return the earliest start offset in the original text of a matching token in this group (score &gt; 0), or
- if there are none then the earliest offset of any token in the group.
+  if there are none then the earliest offset of any token in the group.
  */
 - (jint)getStartOffset;
 
@@ -71,6 +77,10 @@
 
 - (jboolean)isDistinct;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightTokenGroup)
@@ -85,4 +95,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTokenGroup)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightTokenGroup")

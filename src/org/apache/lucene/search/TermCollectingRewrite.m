@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/TermCollectingRewrite.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/IndexReaderContext.h"
@@ -21,7 +19,16 @@
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TermCollectingRewrite must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchTermCollectingRewrite
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneSearchTermCollectingRewrite_initPackagePrivate(self);
+  return self;
+}
 
 - (id)getTopLevelBuilder {
   // can't call an abstract method
@@ -54,15 +61,15 @@ withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states {
 - (void)collectTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                 withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query
 withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:(OrgApacheLuceneSearchTermCollectingRewrite_TermCollector *)collector {
-  OrgApacheLuceneIndexIndexReaderContext *topReaderContext = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getContext];
+  OrgApacheLuceneIndexIndexReaderContext *topReaderContext = JreRetainedLocalValue([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getContext]);
   for (OrgApacheLuceneIndexLeafReaderContext * __strong context in nil_chk([((OrgApacheLuceneIndexIndexReaderContext *) nil_chk(topReaderContext)) leaves])) {
     OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) termsWithNSString:((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query))->field_];
     if (terms == nil) {
       continue;
     }
     OrgApacheLuceneIndexTermsEnum *termsEnum = [self getTermsEnumWithOrgApacheLuceneSearchMultiTermQuery:query withOrgApacheLuceneIndexTerms:terms withOrgApacheLuceneUtilAttributeSource:((OrgApacheLuceneSearchTermCollectingRewrite_TermCollector *) nil_chk(collector))->attributes_];
-    JreAssert((termsEnum != nil), (@"org/apache/lucene/search/TermCollectingRewrite.java:59 condition failed: assert termsEnum != null;"));
-    if (termsEnum == JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY)) continue;
+    JreAssert(termsEnum != nil, @"org/apache/lucene/search/TermCollectingRewrite.java:59 condition failed: assert termsEnum != null;");
+    if (JreObjectEqualsEquals(termsEnum, JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY))) continue;
     [collector setReaderContextWithOrgApacheLuceneIndexIndexReaderContext:topReaderContext withOrgApacheLuceneIndexLeafReaderContext:context];
     [collector setNextEnumWithOrgApacheLuceneIndexTermsEnum:termsEnum];
     OrgApacheLuceneUtilBytesRef *bytes;
@@ -72,36 +79,46 @@ withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:(OrgApacheLuceneSea
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchTermCollectingRewrite_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getTopLevelBuilder", NULL, "TB;", 0x404, "Ljava.io.IOException;", "()TB;" },
-    { "buildWithId:", "build", "Lorg.apache.lucene.search.Query;", 0x404, NULL, "(TB;)Lorg/apache/lucene/search/Query;" },
-    { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:", "addClause", "V", 0x14, "Ljava.io.IOException;", "(TB;Lorg/apache/lucene/index/Term;IF)V" },
-    { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:", "addClause", "V", 0x404, "Ljava.io.IOException;", "(TB;Lorg/apache/lucene/index/Term;IFLorg/apache/lucene/index/TermContext;)V" },
-    { "collectTermsWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:", "collectTerms", "V", 0x10, "Ljava.io.IOException;", NULL },
-    { "init", "TermCollectingRewrite", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x404, -1, -1, 0, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x404, 2, 3, -1, 4, -1, -1 },
+    { NULL, "V", 0x14, 5, 6, 0, 7, -1, -1 },
+    { NULL, "V", 0x404, 5, 8, 0, 9, -1, -1 },
+    { NULL, "V", 0x10, 10, 11, 0, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.TermCollectingRewrite$TermCollector;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermCollectingRewrite = { 2, "TermCollectingRewrite", "org.apache.lucene.search", NULL, 0x400, 6, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, "<B:Ljava/lang/Object;>Lorg/apache/lucene/search/MultiTermQuery$RewriteMethod;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(getTopLevelBuilder);
+  methods[2].selector = @selector(buildWithId:);
+  methods[3].selector = @selector(addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:);
+  methods[4].selector = @selector(addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:);
+  methods[5].selector = @selector(collectTermsWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;", "()TB;", "build", "LNSObject;", "(TB;)Lorg/apache/lucene/search/Query;", "addClause", "LNSObject;LOrgApacheLuceneIndexTerm;IF", "(TB;Lorg/apache/lucene/index/Term;IF)V", "LNSObject;LOrgApacheLuceneIndexTerm;IFLOrgApacheLuceneIndexTermContext;", "(TB;Lorg/apache/lucene/index/Term;IFLorg/apache/lucene/index/TermContext;)V", "collectTerms", "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneSearchMultiTermQuery;LOrgApacheLuceneSearchTermCollectingRewrite_TermCollector;", "LOrgApacheLuceneSearchTermCollectingRewrite_TermCollector;", "<B:Ljava/lang/Object;>Lorg/apache/lucene/search/MultiTermQuery$RewriteMethod;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermCollectingRewrite = { "TermCollectingRewrite", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x400, 6, 0, -1, 12, -1, 13, -1 };
   return &_OrgApacheLuceneSearchTermCollectingRewrite;
 }
 
 @end
 
-void OrgApacheLuceneSearchTermCollectingRewrite_init(OrgApacheLuceneSearchTermCollectingRewrite *self) {
+void OrgApacheLuceneSearchTermCollectingRewrite_initPackagePrivate(OrgApacheLuceneSearchTermCollectingRewrite *self) {
   OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_init(self);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermCollectingRewrite)
 
 @implementation OrgApacheLuceneSearchTermCollectingRewrite_TermCollector
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchTermCollectingRewrite_TermCollector_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setReaderContextWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)topReaderContext
                          withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
@@ -120,13 +137,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermCollectingRewrite)
   [self doesNotRecognizeSelector:_cmd];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchTermCollectingRewrite_TermCollector_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(readerContext_);
   RELEASE_(topReaderContext_);
@@ -135,18 +145,27 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setReaderContextWithOrgApacheLuceneIndexIndexReaderContext:withOrgApacheLuceneIndexLeafReaderContext:", "setReaderContext", "V", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneUtilBytesRef:", "collect", "Z", 0x401, "Ljava.io.IOException;", NULL },
-    { "setNextEnumWithOrgApacheLuceneIndexTermsEnum:", "setNextEnum", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", "TermCollector", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x401, 5, 6, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setReaderContextWithOrgApacheLuceneIndexIndexReaderContext:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[2].selector = @selector(collectWithOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(setNextEnumWithOrgApacheLuceneIndexTermsEnum:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "readerContext_", NULL, 0x4, "Lorg.apache.lucene.index.LeafReaderContext;", NULL, NULL, .constantValue.asLong = 0 },
-    { "topReaderContext_", NULL, 0x4, "Lorg.apache.lucene.index.IndexReaderContext;", NULL, NULL, .constantValue.asLong = 0 },
-    { "attributes_", NULL, 0x11, "Lorg.apache.lucene.util.AttributeSource;", NULL, NULL, .constantValue.asLong = 0 },
+    { "readerContext_", "LOrgApacheLuceneIndexLeafReaderContext;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "topReaderContext_", "LOrgApacheLuceneIndexIndexReaderContext;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "attributes_", "LOrgApacheLuceneUtilAttributeSource;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermCollectingRewrite_TermCollector = { 2, "TermCollector", "org.apache.lucene.search", "TermCollectingRewrite", 0x408, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setReaderContext", "LOrgApacheLuceneIndexIndexReaderContext;LOrgApacheLuceneIndexLeafReaderContext;", "collect", "LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "setNextEnum", "LOrgApacheLuceneIndexTermsEnum;", "LOrgApacheLuceneSearchTermCollectingRewrite;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermCollectingRewrite_TermCollector = { "TermCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x408, 4, 3, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTermCollectingRewrite_TermCollector;
 }
 

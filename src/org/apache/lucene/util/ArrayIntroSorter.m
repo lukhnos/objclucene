@@ -3,13 +3,16 @@
 //  source: ./core/src/java/org/apache/lucene/util/ArrayIntroSorter.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/util/Comparator.h"
 #include "org/apache/lucene/util/ArrayIntroSorter.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/IntroSorter.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/ArrayIntroSorter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilArrayIntroSorter () {
  @public
@@ -26,9 +29,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilArrayIntroSorter, pivot_, id)
 
 @implementation OrgApacheLuceneUtilArrayIntroSorter
 
-- (instancetype)initWithNSObjectArray:(IOSObjectArray *)arr
-               withJavaUtilComparator:(id<JavaUtilComparator>)comparator {
-  OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(self, arr, comparator);
+- (instancetype)initPackagePrivateWithNSObjectArray:(IOSObjectArray *)arr
+                             withJavaUtilComparator:(id<JavaUtilComparator>)comparator {
+  OrgApacheLuceneUtilArrayIntroSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(self, arr, comparator);
   return self;
 }
 
@@ -58,37 +61,47 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilArrayIntroSorter, pivot_, id)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSObjectArray:withJavaUtilComparator:", "ArrayIntroSorter", NULL, 0x1, NULL, "([TT;Ljava/util/Comparator<-TT;>;)V" },
-    { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
-    { "setPivotWithInt:", "setPivot", "V", 0x4, NULL, NULL },
-    { "comparePivotWithInt:", "comparePivot", "I", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "I", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 7, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithNSObjectArray:withJavaUtilComparator:);
+  methods[1].selector = @selector(compareWithInt:withInt:);
+  methods[2].selector = @selector(swapWithInt:withInt:);
+  methods[3].selector = @selector(setPivotWithInt:);
+  methods[4].selector = @selector(comparePivotWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "arr_", NULL, 0x12, "[Ljava.lang.Object;", NULL, "[TT;", .constantValue.asLong = 0 },
-    { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<-TT;>;", .constantValue.asLong = 0 },
-    { "pivot_", NULL, 0x2, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
+    { "arr_", "[LNSObject;", .constantValue.asLong = 0, 0x12, -1, -1, 8, -1 },
+    { "comparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 9, -1 },
+    { "pivot_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, 10, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilArrayIntroSorter = { 2, "ArrayIntroSorter", "org.apache.lucene.util", NULL, 0x10, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/IntroSorter;" };
+  static const void *ptrTable[] = { "[LNSObject;LJavaUtilComparator;", "([TT;Ljava/util/Comparator<-TT;>;)V", "compare", "II", "swap", "setPivot", "I", "comparePivot", "[TT;", "Ljava/util/Comparator<-TT;>;", "TT;", "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/IntroSorter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilArrayIntroSorter = { "ArrayIntroSorter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x10, 5, 3, -1, -1, -1, 11, -1 };
   return &_OrgApacheLuceneUtilArrayIntroSorter;
 }
 
 @end
 
-void OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(OrgApacheLuceneUtilArrayIntroSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
+void OrgApacheLuceneUtilArrayIntroSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(OrgApacheLuceneUtilArrayIntroSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
   OrgApacheLuceneUtilIntroSorter_init(self);
   JreStrongAssign(&self->arr_, arr);
   JreStrongAssign(&self->comparator_, comparator);
   JreStrongAssign(&self->pivot_, nil);
 }
 
-OrgApacheLuceneUtilArrayIntroSorter *new_OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilArrayIntroSorter, initWithNSObjectArray_withJavaUtilComparator_, arr, comparator)
+OrgApacheLuceneUtilArrayIntroSorter *new_OrgApacheLuceneUtilArrayIntroSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilArrayIntroSorter, initPackagePrivateWithNSObjectArray_withJavaUtilComparator_, arr, comparator)
 }
 
-OrgApacheLuceneUtilArrayIntroSorter *create_OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilArrayIntroSorter, initWithNSObjectArray_withJavaUtilComparator_, arr, comparator)
+OrgApacheLuceneUtilArrayIntroSorter *create_OrgApacheLuceneUtilArrayIntroSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilArrayIntroSorter, initPackagePrivateWithNSObjectArray_withJavaUtilComparator_, arr, comparator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilArrayIntroSorter)

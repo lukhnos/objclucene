@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesNLS
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleMessagesNLS_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLS || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleMessagesNLS))
 #define OrgApacheLuceneQueryparserFlexibleMessagesNLS_
 
@@ -22,14 +28,14 @@
 
 /*!
  @brief MessageBundles classes extend this class, to implement a bundle.
- For Native Language Support (NLS), system of software internationalization.
- This interface is similar to the NLS class in eclipse.osgi.util.NLS class -
- initializeMessages() method resets the values of all static strings, should
- only be called by classes that extend from NLS (see TestMessages.java for
- reference) - performs validation of all message in a bundle, at class load
- time - performs per message validation at runtime - see NLSTest.java for
- usage reference
- MessageBundle classes may subclass this type.
+ For Native Language Support (NLS), system of software internationalization. 
+  This interface is similar to the NLS class in eclipse.osgi.util.NLS class -
+  initializeMessages() method resets the values of all static strings, should
+  only be called by classes that extend from NLS (see TestMessages.java for
+  reference) - performs validation of all message in a bundle, at class load
+  time - performs per message validation at runtime - see NLSTest.java for
+  usage reference 
+  MessageBundle classes may subclass this type.
  */
 @interface OrgApacheLuceneQueryparserFlexibleMessagesNLS : NSObject
 
@@ -49,15 +55,13 @@
 
 #pragma mark Protected
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Initialize a given class with the message bundle Keys Should be called from
- a class that extends NLS in a static block at class load time.
- @param bundleName
- Property file with that contains the message bundle
- @param clazz
- where constants will reside
+  a class that extends NLS in a static block at class load time.
+ @param bundleName Property file with that contains the message bundle
+ @param clazz where constants will reside
  */
 + (void)initializeMessagesWithNSString:(NSString *)bundleName
                           withIOSClass:(IOSClass *)clazz OBJC_METHOD_FAMILY_NONE;
@@ -68,9 +72,9 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleMessagesNLS_init(OrgApacheLuceneQueryparserFlexibleMessagesNLS *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesNLS *new_OrgApacheLuceneQueryparserFlexibleMessagesNLS_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesNLS *new_OrgApacheLuceneQueryparserFlexibleMessagesNLS_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesNLS *create_OrgApacheLuceneQueryparserFlexibleMessagesNLS_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesNLS *create_OrgApacheLuceneQueryparserFlexibleMessagesNLS_init(void);
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleMessagesNLS_getLocalizedMessageWithNSString_(NSString *key);
 
@@ -86,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLS")

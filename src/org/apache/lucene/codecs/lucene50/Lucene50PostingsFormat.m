@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/BlockTermState.h"
 #include "org/apache/lucene/codecs/FieldsConsumer.h"
 #include "org/apache/lucene/codecs/FieldsProducer.h"
@@ -23,6 +22,10 @@
 #include "org/apache/lucene/index/SegmentWriteState.h"
 #include "org/apache/lucene/index/TermState.h"
 #include "org/apache/lucene/util/IOUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50PostingsFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat () {
  @public
@@ -134,30 +137,39 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lucene50PostingsFormat", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withInt:", "Lucene50PostingsFormat", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:", "fieldsConsumer", "Lorg.apache.lucene.codecs.FieldsConsumer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:", "fieldsProducer", "Lorg.apache.lucene.codecs.FieldsProducer;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldsConsumer;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldsProducer;", 0x1, 5, 6, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:withInt:);
+  methods[2].selector = @selector(description);
+  methods[3].selector = @selector(fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[4].selector = @selector(fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DOC_EXTENSION", "DOC_EXTENSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "POS_EXTENSION", "POS_EXTENSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "PAY_EXTENSION", "PAY_EXTENSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "MAX_SKIP_LEVELS", "MAX_SKIP_LEVELS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_MAX_SKIP_LEVELS },
-    { "TERMS_CODEC", "TERMS_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC, NULL, .constantValue.asLong = 0 },
-    { "DOC_CODEC", "DOC_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC, NULL, .constantValue.asLong = 0 },
-    { "POS_CODEC", "POS_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC, NULL, .constantValue.asLong = 0 },
-    { "PAY_CODEC", "PAY_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC, NULL, .constantValue.asLong = 0 },
-    { "VERSION_START", "VERSION_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_START },
-    { "VERSION_CURRENT", "VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT },
-    { "minTermBlockSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTermBlockSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "BLOCK_SIZE", "BLOCK_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE },
+    { "DOC_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 7, -1, -1 },
+    { "POS_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 8, -1, -1 },
+    { "PAY_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 9, -1, -1 },
+    { "MAX_SKIP_LEVELS", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_MAX_SKIP_LEVELS, 0x18, -1, -1, -1, -1 },
+    { "TERMS_CODEC", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 10, -1, -1 },
+    { "DOC_CODEC", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 11, -1, -1 },
+    { "POS_CODEC", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 12, -1, -1 },
+    { "PAY_CODEC", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 13, -1, -1 },
+    { "VERSION_START", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_START, 0x18, -1, -1, -1, -1 },
+    { "VERSION_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, 0x18, -1, -1, -1, -1 },
+    { "minTermBlockSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxTermBlockSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE, 0x19, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.lucene50.Lucene50PostingsFormat$IntBlockTermState;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat = { 2, "Lucene50PostingsFormat", "org.apache.lucene.codecs.lucene50", NULL, 0x11, 5, methods, 13, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "II", "toString", "fieldsConsumer", "LOrgApacheLuceneIndexSegmentWriteState;", "LJavaIoIOException;", "fieldsProducer", "LOrgApacheLuceneIndexSegmentReadState;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION, &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION, &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION, &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC, &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC, &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC, &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC, "LOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat = { "Lucene50PostingsFormat", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x11, 5, 13, -1, 14, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat;
 }
 
@@ -194,7 +206,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsFo
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState
 
-- (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)clone {
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)java_clone {
   OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *other = create_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init();
   [other copyFromWithOrgApacheLuceneIndexTermState:self];
   return other;
@@ -215,29 +234,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsFo
   return JreStrcat("$$J$J$J$J$I", [super description], @" docStartFP=", docStartFP_, @" posStartFP=", posStartFP_, @" payStartFP=", payStartFP_, @" lastPosBlockOffset=", lastPosBlockOffset_, @" singletonDocID=", singletonDocID_);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "clone", NULL, "Lorg.apache.lucene.codecs.lucene50.Lucene50PostingsFormat$IntBlockTermState;", 0x1, NULL, NULL },
-    { "copyFromWithOrgApacheLuceneIndexTermState:", "copyFrom", "V", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "IntBlockTermState", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState;", 0x1, 0, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(java_clone);
+  methods[2].selector = @selector(copyFromWithOrgApacheLuceneIndexTermState:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "docStartFP_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "posStartFP_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "payStartFP_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "skipOffset_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPosBlockOffset_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "singletonDocID_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "docStartFP_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "posStartFP_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "payStartFP_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "skipOffset_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastPosBlockOffset_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "singletonDocID_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState = { 2, "IntBlockTermState", "org.apache.lucene.codecs.lucene50", "Lucene50PostingsFormat", 0x18, 4, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "clone", "copyFrom", "LOrgApacheLuceneIndexTermState;", "toString", "LOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState = { "IntBlockTermState", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x18, 4, 6, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState;
 }
 

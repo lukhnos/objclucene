@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_
 
@@ -27,12 +33,12 @@
 /*!
  @brief Factory for <code>TrimFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_trm" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.NGramTokenizerFactory"/&gt;
- &lt;filter class="solr.TrimFilterFactory" /&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_trm" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.NGramTokenizerFactory"/&gt;
+      &lt;filter class="solr.TrimFilterFactory" /&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  - seealso: TrimFilter
  */
@@ -43,7 +49,7 @@
 /*!
  @brief Creates a new TrimFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -61,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory")

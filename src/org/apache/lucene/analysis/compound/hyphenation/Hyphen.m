@@ -3,10 +3,13 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/compound/hyphenation/Hyphen.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/Hyphen.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/hyphenation/Hyphen must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationHyphen
 
@@ -44,17 +47,25 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:withNSString:", "Hyphen", NULL, 0x0, NULL, NULL },
-    { "initWithNSString:", "Hyphen", NULL, 0x0, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:withNSString:);
+  methods[1].selector = @selector(initWithNSString:);
+  methods[2].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "preBreak_", NULL, 0x1, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "noBreak_", NULL, 0x1, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "postBreak_", NULL, 0x1, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "preBreak_", "LNSString;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "noBreak_", "LNSString;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "postBreak_", "LNSString;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationHyphen = { 2, "Hyphen", "org.apache.lucene.analysis.compound.hyphenation", NULL, 0x1, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LNSString;LNSString;", "LNSString;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationHyphen = { "Hyphen", "org.apache.lucene.analysis.compound.hyphenation", ptrTable, methods, fields, 7, 0x1, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCompoundHyphenationHyphen;
 }
 

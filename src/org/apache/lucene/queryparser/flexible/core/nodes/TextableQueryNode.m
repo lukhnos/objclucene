@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/TextableQueryNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/TextableQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode : NSObject
 
 @end
@@ -13,11 +17,18 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getText", NULL, "Ljava.lang.CharSequence;", 0x401, NULL, NULL },
-    { "setTextWithJavaLangCharSequence:", "setText", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LJavaLangCharSequence;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode = { 2, "TextableQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getText);
+  methods[1].selector = @selector(setTextWithJavaLangCharSequence:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setText", "LJavaLangCharSequence;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode = { "TextableQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode;
 }
 

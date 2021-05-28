@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/StringBuilder.h"
@@ -17,7 +16,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/path/PathHierarchyTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisPathPathHierarchyTokenizer () {
  @public
@@ -41,7 +43,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizer, offsetAtt
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizer, posAtt_, id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizer, resultToken_, JavaLangStringBuilder *)
 
-inline jint OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_get_DEFAULT_BUFFER_SIZE();
+inline jint OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_get_DEFAULT_BUFFER_SIZE(void);
 #define OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_DEFAULT_BUFFER_SIZE 1024
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisPathPathHierarchyTokenizer, DEFAULT_BUFFER_SIZE, jint)
 
@@ -114,7 +116,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jboolean)incrementToken {
   [self clearAttributes];
   [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) appendWithJavaLangStringBuilder:resultToken_];
-  if ([((JavaLangStringBuilder *) nil_chk(resultToken_)) length] == 0) {
+  if ([((JavaLangStringBuilder *) nil_chk(resultToken_)) java_length] == 0) {
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posAtt_)) setPositionIncrementWithInt:1];
   }
   else {
@@ -135,7 +137,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     else {
       if (skipped_ > skip_) {
-        length += [((JavaLangStringBuilder *) nil_chk(resultToken_)) length];
+        length += [((JavaLangStringBuilder *) nil_chk(resultToken_)) java_length];
         [termAtt_ setLengthWithInt:length];
         [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:startPosition_] withInt:[self correctOffsetWithInt:startPosition_ + length]];
         if (added) {
@@ -185,7 +187,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
   }
-  length += [((JavaLangStringBuilder *) nil_chk(resultToken_)) length];
+  length += [((JavaLangStringBuilder *) nil_chk(resultToken_)) java_length];
   [termAtt_ setLengthWithInt:length];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:startPosition_] withInt:[self correctOffsetWithInt:startPosition_ + length]];
   [((JavaLangStringBuilder *) nil_chk(resultToken_)) setLengthWithInt:0];
@@ -217,36 +219,52 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "PathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withChar:", "PathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithChar:withChar:", "PathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithChar:withChar:withInt:", "PathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withChar:withChar:withInt:", "PathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withChar:withChar:withInt:", "PathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withInt:withChar:withChar:withInt:", "PathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 7, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 7, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 7, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(initWithInt:withChar:);
+  methods[3].selector = @selector(initWithChar:withChar:);
+  methods[4].selector = @selector(initWithChar:withChar:withInt:);
+  methods[5].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withChar:withChar:withInt:);
+  methods[6].selector = @selector(initWithInt:withChar:withChar:withInt:);
+  methods[7].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withInt:withChar:withChar:withInt:);
+  methods[8].selector = @selector(incrementToken);
+  methods[9].selector = @selector(end);
+  methods[10].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_BUFFER_SIZE", "DEFAULT_BUFFER_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_DEFAULT_BUFFER_SIZE },
-    { "DEFAULT_DELIMITER", "DEFAULT_DELIMITER", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_DEFAULT_DELIMITER },
-    { "DEFAULT_SKIP", "DEFAULT_SKIP", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_DEFAULT_SKIP },
-    { "delimiter_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "replacement_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "skip_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "startPosition_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "skipped_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endDelimiter_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "resultToken_", NULL, 0x2, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "charsRead_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_BUFFER_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_DEFAULT_BUFFER_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "DEFAULT_DELIMITER", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_DEFAULT_DELIMITER, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_SKIP", "I", .constantValue.asInt = OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_DEFAULT_SKIP, 0x19, -1, -1, -1, -1 },
+    { "delimiter_", "C", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "replacement_", "C", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "skip_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "startPosition_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "skipped_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "endDelimiter_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "resultToken_", "LJavaLangStringBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "charsRead_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPathPathHierarchyTokenizer = { 2, "PathHierarchyTokenizer", "org.apache.lucene.analysis.path", NULL, 0x1, 11, methods, 14, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "IC", "CC", "CCI", "LOrgApacheLuceneUtilAttributeFactory;CCI", "ICCI", "LOrgApacheLuceneUtilAttributeFactory;ICCI", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPathPathHierarchyTokenizer = { "PathHierarchyTokenizer", "org.apache.lucene.analysis.path", ptrTable, methods, fields, 7, 0x1, 11, 14, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPathPathHierarchyTokenizer;
 }
 

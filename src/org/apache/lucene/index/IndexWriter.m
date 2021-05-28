@@ -26,6 +26,7 @@
 #include "java/lang/StringBuilder.h"
 #include "java/lang/System.h"
 #include "java/lang/Thread.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/annotation/Annotation.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
@@ -58,7 +59,6 @@
 #include "org/apache/lucene/index/DocValuesType.h"
 #include "org/apache/lucene/index/DocValuesUpdate.h"
 #include "org/apache/lucene/index/DocumentsWriter.h"
-#include "org/apache/lucene/index/DocumentsWriterPerThread.h"
 #include "org/apache/lucene/index/FieldInfo.h"
 #include "org/apache/lucene/index/FieldInfos.h"
 #include "org/apache/lucene/index/FlushPolicy.h"
@@ -117,6 +117,13 @@
 
 @class OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexWriter must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/index/IndexWriter must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
 @interface OrgApacheLuceneIndexIndexWriter () {
  @public
   OrgApacheLuceneStoreDirectory *directoryOrig_;
@@ -146,7 +153,7 @@
   OrgApacheLuceneIndexLiveIndexWriterConfig *config_;
   /*!
    @brief System.nanoTime() when commit started; used to write
- an infoStream message about how long commit took.
+   an infoStream message about how long commit took.
    */
   jlong startCommitTime_;
   id commitLock_;
@@ -164,9 +171,8 @@
 
 /*!
  @brief Gracefully closes (commits, waits for merges), but calls rollback
- if there's an exc so the IndexWriter is always closed.
- This is called
- from <code>close</code> when <code>IndexWriterConfig.commitOnClose</code> is
+  if there's an exc so the IndexWriter is always closed.This is called
+  from <code>close</code> when <code>IndexWriterConfig.commitOnClose</code> is 
  <code>true</code>.
  */
 - (void)shutdown;
@@ -175,7 +181,7 @@
 
 /*!
  @brief Returns true if any merges in pendingMerges or
- runningMerges are maxNumSegments merges.
+   runningMerges are maxNumSegments merges.
  */
 - (jboolean)maxNumSegmentsMergesPending;
 
@@ -190,10 +196,9 @@
 - (void)rollbackInternal;
 
 /*!
- @brief Aborts running merges.
- Be careful when using this
- method: when you abort a long-running merge, you lose
- a lot of work that must later be redone. 
+ @brief Aborts running merges.Be careful when using this
+   method: when you abort a long-running merge, you lose
+   a lot of work that must later be redone.
  */
 - (void)abortMerges;
 
@@ -203,8 +208,8 @@
 
 /*!
  @brief Acquires write locks on all the directories; be sure
- to match with a call to <code>IOUtils.close</code> in a
- finally clause.
+   to match with a call to <code>IOUtils.close</code> in a
+   finally clause.
  */
 - (id<JavaUtilList>)acquireWriteLocksWithOrgApacheLuceneStoreDirectoryArray:(IOSObjectArray *)dirs;
 
@@ -241,15 +246,15 @@
                                                                       withInt:(jint)curDoc;
 
 /*!
- @brief Carefully merges deletes and updates for the segments we just merged.
- This
- is tricky because, although merging will clear all deletes (compacts the
- documents) and compact all the updates, new deletes and updates may have
- been flushed to the segments since the merge was started. This method
- "carries over" such new deletes and updates onto the newly merged segment,
- and saves the resulting deletes and updates files (incrementing the delete
- and DV generations for merge.info). If no deletes were flushed, no new
- deletes file is saved.
+ @brief Carefully merges deletes and updates for the segments we just merged.This
+  is tricky because, although merging will clear all deletes (compacts the
+  documents) and compact all the updates, new deletes and updates may have
+  been flushed to the segments since the merge was started.
+ This method
+  "carries over" such new deletes and updates onto the newly merged segment,
+  and saves the resulting deletes and updates files (incrementing the delete
+  and DV generations for merge.info). If no deletes were flushed, no new
+  deletes file is saved.
  */
 - (OrgApacheLuceneIndexReadersAndUpdates *)commitMergedDeletesAndUpdatesWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge
                                                                                   withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
@@ -257,8 +262,8 @@
 - (jboolean)commitMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge
                                  withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
-- (void)handleMergeExceptionWithNSException:(NSException *)t
-withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
+- (void)handleMergeExceptionWithJavaLangThrowable:(JavaLangThrowable *)t
+     withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
 - (void)_mergeInitWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
@@ -271,8 +276,8 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
 
 /*!
  @brief Does the actual (time-consuming) work of the merge,
- but without holding synchronized lock on IndexWriter
- instance
+   but without holding synchronized lock on IndexWriter
+   instance
  */
 - (jint)mergeMiddleWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge
                             withOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)mergePolicy;
@@ -283,11 +288,10 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
 
 /*!
  @brief Walk through all files referenced by the current
- segmentInfos and ask the Directory to sync each file,
- if it wasn't already.
- If that succeeds, then we
- prepare a new segments_N file but do not fully commit
- it. 
+   segmentInfos and ask the Directory to sync each file,
+   if it wasn't already.If that succeeds, then we
+   prepare a new segments_N file but do not fully commit
+   it.
  */
 - (void)startCommitWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)toSync;
 
@@ -304,15 +308,14 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
 
 /*!
  @brief Anything that will add N docs to the index should reserve first to
- make sure it's allowed.
- This will throw <code>IllegalArgumentException</code>
-  if it's not allowed. 
+   make sure it's allowed.This will throw <code>IllegalArgumentException</code>
+  if it's not allowed.
  */
 - (void)reserveDocsWithLong:(jlong)addedNumDocs;
 
 /*!
  @brief Does a best-effort check, that the current index would accept this many additional docs, but does not actually reserve them.
- @throws IllegalArgumentException if there would be too many docs
+ @throw IllegalArgumentExceptionif there would be too many docs
  */
 - (void)testReserveDocsWithLong:(jlong)addedNumDocs;
 
@@ -320,7 +323,7 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
 
 /*!
  @brief Wraps the incoming <code>Directory</code> so that we assign a per-thread
- <code>MergeRateLimiter</code> to all created <code>IndexOutput</code>s.
+   <code>MergeRateLimiter</code> to all created <code>IndexOutput</code>s.
  */
 - (OrgApacheLuceneStoreDirectory *)addMergeRateLimitersWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg;
 
@@ -346,13 +349,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter, config_, OrgApacheLuceneInd
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter, commitLock_, id)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter, fullFlushLock_, id)
 
-inline jint OrgApacheLuceneIndexIndexWriter_get_actualMaxDocs();
+inline jint OrgApacheLuceneIndexIndexWriter_get_actualMaxDocs(void);
 inline jint OrgApacheLuceneIndexIndexWriter_set_actualMaxDocs(jint value);
-inline jint *OrgApacheLuceneIndexIndexWriter_getRef_actualMaxDocs();
+inline jint *OrgApacheLuceneIndexIndexWriter_getRef_actualMaxDocs(void);
 static jint OrgApacheLuceneIndexIndexWriter_actualMaxDocs = 2147483519;
 J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneIndexIndexWriter, actualMaxDocs, jint)
 
-inline jint OrgApacheLuceneIndexIndexWriter_get_UNBOUNDED_MAX_MERGE_SEGMENTS();
+inline jint OrgApacheLuceneIndexIndexWriter_get_UNBOUNDED_MAX_MERGE_SEGMENTS(void);
 #define OrgApacheLuceneIndexIndexWriter_UNBOUNDED_MAX_MERGE_SEGMENTS -1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriter, UNBOUNDED_MAX_MERGE_SEGMENTS, jint)
 
@@ -414,7 +417,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexReadersAndUpdates *OrgApacheL
 
 __attribute__((unused)) static jboolean OrgApacheLuceneIndexIndexWriter_commitMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneIndexMergePolicy_OneMerge *merge, OrgApacheLuceneIndexMergeState *mergeState);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_handleMergeExceptionWithNSException_withOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexIndexWriter *self, NSException *t, OrgApacheLuceneIndexMergePolicy_OneMerge *merge);
+__attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_handleMergeExceptionWithJavaLangThrowable_withOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexIndexWriter *self, JavaLangThrowable *t, OrgApacheLuceneIndexMergePolicy_OneMerge *merge);
 
 __attribute__((unused)) static jboolean OrgApacheLuceneIndexIndexWriter_registerMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneIndexMergePolicy_OneMerge *merge);
 
@@ -438,6 +441,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_startCommitW
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_testPointWithNSString_(OrgApacheLuceneIndexIndexWriter *self, NSString *message);
 
+__attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_deletePendingFiles(OrgApacheLuceneIndexIndexWriter *self);
+
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_createCompoundFileWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreTrackingDirectoryWrapper_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreTrackingDirectoryWrapper *directory, OrgApacheLuceneIndexSegmentInfo *info, OrgApacheLuceneStoreIOContext *context);
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_deleteNewFilesWithJavaUtilCollection_(OrgApacheLuceneIndexIndexWriter *self, id<JavaUtilCollection> files);
@@ -456,9 +461,11 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_tooManyDocsW
 
 __attribute__((unused)) static OrgApacheLuceneStoreDirectory *OrgApacheLuceneIndexIndexWriter_addMergeRateLimitersWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneStoreDirectory *inArg);
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexIndexWriter__Annotations$0(void);
+
 @interface OrgApacheLuceneIndexIndexWriter_ReaderPool () {
  @public
-  OrgApacheLuceneIndexIndexWriter *this$0_;
+  WEAK_ OrgApacheLuceneIndexIndexWriter *this$0_;
   id<JavaUtilMap> readerMap_;
 }
 
@@ -466,7 +473,6 @@ __attribute__((unused)) static OrgApacheLuceneStoreDirectory *OrgApacheLuceneInd
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter_ReaderPool, this$0_, OrgApacheLuceneIndexIndexWriter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter_ReaderPool, readerMap_, id<JavaUtilMap>)
 
 __attribute__((unused)) static jboolean OrgApacheLuceneIndexIndexWriter_ReaderPool_noDups(OrgApacheLuceneIndexIndexWriter_ReaderPool *self);
@@ -494,9 +500,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates, doc
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates_init(OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates *new_OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates *new_OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates *create_OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates_init();
+__attribute__((unused)) static OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates *create_OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates_init(void);
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates_init__WithOrgApacheLuceneIndexIndexWriter_ReaderPool_withOrgApacheLuceneIndexMergePolicy_OneMerge_withOrgApacheLuceneIndexMergeState_withBoolean_(OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates *self, OrgApacheLuceneIndexIndexWriter_ReaderPool *readerPool, OrgApacheLuceneIndexMergePolicy_OneMerge *merge, OrgApacheLuceneIndexMergeState *mergeState, jboolean initWritableLiveDocs);
 
@@ -506,30 +512,28 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdat
 
 @end
 
-@interface OrgApacheLuceneIndexIndexWriter_$1 : OrgApacheLuceneStoreFilterDirectory {
+@interface OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory : OrgApacheLuceneStoreFilterDirectory {
  @public
-  OrgApacheLuceneIndexIndexWriter *this$0_;
+  WEAK_ OrgApacheLuceneIndexIndexWriter *this$0_;
 }
+
+- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)outer$
+                      withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg;
 
 - (OrgApacheLuceneStoreIndexOutput *)createOutputWithNSString:(NSString *)name
                             withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)outer$
-                      withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexIndexWriter_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriter_$1, this$0_, OrgApacheLuceneIndexIndexWriter *)
+__attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory *self, OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *inArg);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexIndexWriter_$1_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter_$1 *self, OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *arg$0);
+__attribute__((unused)) static OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory *new_OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *inArg) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexIndexWriter_$1 *new_OrgApacheLuceneIndexIndexWriter_$1_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory *create_OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *inArg);
 
-__attribute__((unused)) static OrgApacheLuceneIndexIndexWriter_$1 *create_OrgApacheLuceneIndexIndexWriter_$1_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter_$1)
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory)
 
 NSString *OrgApacheLuceneIndexIndexWriter_WRITE_LOCK_NAME = @"write.lock";
 NSString *OrgApacheLuceneIndexIndexWriter_SOURCE = @"source";
@@ -633,15 +637,11 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     success2 = true;
   }
   @catch (OrgApacheLuceneIndexAbortingException *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"getReader"];
+    [self tragicEventWithJavaLangThrowable:tragedy withNSString:@"getReader"];
     return nil;
   }
   @catch (JavaLangOutOfMemoryError *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"getReader"];
-    return nil;
-  }
-  @catch (NSException *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"getReader"];
+    [self tragicEventWithJavaLangThrowable:tragedy withNSString:@"getReader"];
     return nil;
   }
   @finally {
@@ -795,13 +795,10 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     }
   }
   @catch (OrgApacheLuceneIndexAbortingException *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"updateDocuments"];
+    [self tragicEventWithJavaLangThrowable:tragedy withNSString:@"updateDocuments"];
   }
   @catch (JavaLangOutOfMemoryError *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"updateDocuments"];
-  }
-  @catch (NSException *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"updateDocuments"];
+    [self tragicEventWithJavaLangThrowable:tragedy withNSString:@"updateDocuments"];
   }
 }
 
@@ -810,22 +807,22 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
   @synchronized(self) {
     OrgApacheLuceneIndexLeafReader *reader;
     if ([readerIn isKindOfClass:[OrgApacheLuceneIndexLeafReader class]]) {
-      reader = (OrgApacheLuceneIndexLeafReader *) cast_chk(readerIn, [OrgApacheLuceneIndexLeafReader class]);
+      reader = (OrgApacheLuceneIndexLeafReader *) readerIn;
     }
     else {
-      id<JavaUtilList> leaves = [((OrgApacheLuceneIndexIndexReader *) nil_chk(readerIn)) leaves];
+      id<JavaUtilList> leaves = JreRetainedLocalValue([((OrgApacheLuceneIndexIndexReader *) nil_chk(readerIn)) leaves]);
       jint subIndex = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withJavaUtilList_(docID, leaves);
       reader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([((id<JavaUtilList>) nil_chk(leaves)) getWithInt:subIndex])) reader];
       docID -= ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:subIndex]))->docBase_;
-      JreAssert((docID >= 0), (@"org/apache/lucene/index/IndexWriter.java:1357 condition failed: assert docID >= 0;"));
-      JreAssert((docID < [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]), (@"org/apache/lucene/index/IndexWriter.java:1358 condition failed: assert docID < reader.maxDoc();"));
+      JreAssert(docID >= 0, @"org/apache/lucene/index/IndexWriter.java:1361 condition failed: assert docID >= 0;");
+      JreAssert(docID < [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc], @"org/apache/lucene/index/IndexWriter.java:1362 condition failed: assert docID < reader.maxDoc();");
     }
     if (!([reader isKindOfClass:[OrgApacheLuceneIndexSegmentReader class]])) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"the reader must be a SegmentReader or composite reader containing only SegmentReaders");
     }
     OrgApacheLuceneIndexSegmentCommitInfo *info = [((OrgApacheLuceneIndexSegmentReader *) nil_chk(((OrgApacheLuceneIndexSegmentReader *) cast_chk(reader, [OrgApacheLuceneIndexSegmentReader class])))) getSegmentInfo];
     if ([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos_)) indexOfWithOrgApacheLuceneIndexSegmentCommitInfo:info] != -1) {
-      OrgApacheLuceneIndexReadersAndUpdates *rld = [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(readerPool_)) getWithOrgApacheLuceneIndexSegmentCommitInfo:info withBoolean:false];
+      OrgApacheLuceneIndexReadersAndUpdates *rld = JreRetainedLocalValue([((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(readerPool_)) getWithOrgApacheLuceneIndexSegmentCommitInfo:info withBoolean:false]);
       if (rld != nil) {
         @synchronized(bufferedUpdatesStream_) {
           [rld initWritableLiveDocs];
@@ -860,7 +857,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     }
   }
   @catch (JavaLangOutOfMemoryError *oom) {
-    [self tragicEventWithNSException:oom withNSString:@"deleteDocuments(Term..)"];
+    [self tragicEventWithJavaLangThrowable:oom withNSString:@"deleteDocuments(Term..)"];
   }
 }
 
@@ -872,7 +869,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     OrgApacheLuceneSearchQuery * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneSearchQuery *query = *b__++;
-      if ([((OrgApacheLuceneSearchQuery *) nil_chk(query)) getClass] == (id) OrgApacheLuceneSearchMatchAllDocsQuery_class_()) {
+      if (JreObjectEqualsEquals([((OrgApacheLuceneSearchQuery *) nil_chk(query)) java_getClass], OrgApacheLuceneSearchMatchAllDocsQuery_class_())) {
         [self deleteAll];
         return;
       }
@@ -884,7 +881,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     }
   }
   @catch (JavaLangOutOfMemoryError *oom) {
-    [self tragicEventWithNSException:oom withNSString:@"deleteDocuments(Query..)"];
+    [self tragicEventWithJavaLangThrowable:oom withNSString:@"deleteDocuments(Query..)"];
   }
 }
 
@@ -908,13 +905,10 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     }
   }
   @catch (OrgApacheLuceneIndexAbortingException *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"updateDocument"];
+    [self tragicEventWithJavaLangThrowable:tragedy withNSString:@"updateDocument"];
   }
   @catch (JavaLangOutOfMemoryError *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"updateDocument"];
-  }
-  @catch (NSException *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"updateDocument"];
+    [self tragicEventWithJavaLangThrowable:tragedy withNSString:@"updateDocument"];
   }
 }
 
@@ -931,7 +925,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     }
   }
   @catch (JavaLangOutOfMemoryError *oom) {
-    [self tragicEventWithNSException:oom withNSString:@"updateNumericDocValue"];
+    [self tragicEventWithJavaLangThrowable:oom withNSString:@"updateNumericDocValue"];
   }
 }
 
@@ -951,7 +945,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     }
   }
   @catch (JavaLangOutOfMemoryError *oom) {
-    [self tragicEventWithNSException:oom withNSString:@"updateBinaryDocValue"];
+    [self tragicEventWithJavaLangThrowable:oom withNSString:@"updateBinaryDocValue"];
   }
 }
 
@@ -988,7 +982,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     }
   }
   @catch (JavaLangOutOfMemoryError *oom) {
-    [self tragicEventWithNSException:oom withNSString:@"updateDocValues"];
+    [self tragicEventWithJavaLangThrowable:oom withNSString:@"updateDocValues"];
   }
 }
 
@@ -1006,7 +1000,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
 
 - (id<JavaUtilCollection>)getIndexFileNames {
   @synchronized(self) {
-    return [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos_)) filesWithBoolean:true];
+    return JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos_)) filesWithBoolean:true]);
   }
 }
 
@@ -1067,14 +1061,14 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     @synchronized(self) {
       while (true) {
         if (JreLoadVolatileId(&tragedy_) != nil) {
-          @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"this writer hit an unrecoverable error; cannot complete forceMerge", JreLoadVolatileId(&tragedy_));
+          @throw create_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"this writer hit an unrecoverable error; cannot complete forceMerge", JreLoadVolatileId(&tragedy_));
         }
         if ([((id<JavaUtilList>) nil_chk(mergeExceptions_)) size] > 0) {
           jint size = [((id<JavaUtilList>) nil_chk(mergeExceptions_)) size];
           for (jint i = 0; i < size; i++) {
             OrgApacheLuceneIndexMergePolicy_OneMerge *merge = [((id<JavaUtilList>) nil_chk(mergeExceptions_)) getWithInt:i];
             if (((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->maxNumSegments_ != -1) {
-              @throw create_JavaIoIOException_initWithNSString_withNSException_(JreStrcat("$$", @"background merge hit exception: ", [merge segString]), [merge getException]);
+              @throw create_JavaIoIOException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"background merge hit exception: ", [merge segString]), [merge getException]);
             }
           }
         }
@@ -1100,7 +1094,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
   OrgApacheLuceneIndexMergePolicy_MergeSpecification *spec;
   jboolean newMergesFound = false;
   @synchronized(self) {
-    spec = [((OrgApacheLuceneIndexMergePolicy *) nil_chk(mergePolicy)) findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:segmentInfos_ withOrgApacheLuceneIndexIndexWriter:self];
+    spec = JreRetainedLocalValue([((OrgApacheLuceneIndexMergePolicy *) nil_chk(mergePolicy)) findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:segmentInfos_ withOrgApacheLuceneIndexIndexWriter:self]);
     newMergesFound = (spec != nil);
     if (newMergesFound) {
       jint numMerges = [((id<JavaUtilList>) nil_chk(((OrgApacheLuceneIndexMergePolicy_MergeSpecification *) nil_chk(spec))->merges_)) size];
@@ -1114,7 +1108,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
       jboolean running = true;
       while (running) {
         if (JreLoadVolatileId(&tragedy_) != nil) {
-          @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"this writer hit an unrecoverable error; cannot complete forceMergeDeletes", JreLoadVolatileId(&tragedy_));
+          @throw create_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"this writer hit an unrecoverable error; cannot complete forceMergeDeletes", JreLoadVolatileId(&tragedy_));
         }
         running = false;
         for (jint i = 0; i < numMerges; i++) {
@@ -1122,9 +1116,9 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
           if ([((JavaUtilLinkedList *) nil_chk(pendingMerges_)) containsWithId:merge] || [((id<JavaUtilSet>) nil_chk(runningMerges_)) containsWithId:merge]) {
             running = true;
           }
-          NSException *t = [((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge)) getException];
+          JavaLangThrowable *t = JreRetainedLocalValue([((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge)) getException]);
           if (t != nil) {
-            @throw create_JavaIoIOException_initWithNSString_withNSException_(JreStrcat("$$", @"background merge hit exception: ", [merge segString]), t);
+            @throw create_JavaIoIOException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"background merge hit exception: ", [merge segString]), t);
           }
         }
         if (running) OrgApacheLuceneIndexIndexWriter_doWait(self);
@@ -1155,19 +1149,19 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
 
 - (id<JavaUtilCollection>)getMergingSegments {
   @synchronized(self) {
-    return mergingSegments_;
+    return JreRetainedLocalValue(mergingSegments_);
   }
 }
 
 - (OrgApacheLuceneIndexMergePolicy_OneMerge *)getNextMerge {
   @synchronized(self) {
     if ([((JavaUtilLinkedList *) nil_chk(pendingMerges_)) size] == 0) {
-      return nil;
+      return JreRetainedLocalValue(nil);
     }
     else {
-      OrgApacheLuceneIndexMergePolicy_OneMerge *merge = [((JavaUtilLinkedList *) nil_chk(pendingMerges_)) removeFirst];
+      OrgApacheLuceneIndexMergePolicy_OneMerge *merge = JreRetainedLocalValue([((JavaUtilLinkedList *) nil_chk(pendingMerges_)) removeFirst]);
       [((id<JavaUtilSet>) nil_chk(runningMerges_)) addWithId:merge];
-      return merge;
+      return JreRetainedLocalValue(merge);
     }
   }
 }
@@ -1223,7 +1217,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     }
   }
   @catch (JavaLangOutOfMemoryError *oom) {
-    [self tragicEventWithNSException:oom withNSString:@"deleteAll"];
+    [self tragicEventWithJavaLangThrowable:oom withNSString:@"deleteAll"];
   }
 }
 
@@ -1241,7 +1235,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     while ([((JavaUtilLinkedList *) nil_chk(pendingMerges_)) size] > 0 || [((id<JavaUtilSet>) nil_chk(runningMerges_)) size] > 0) {
       OrgApacheLuceneIndexIndexWriter_doWait(self);
     }
-    JreAssert((0 == [((JavaUtilHashSet *) nil_chk(mergingSegments_)) size]), (@"org/apache/lucene/index/IndexWriter.java:2301 condition failed: assert 0 == mergingSegments.size();"));
+    JreAssert(0 == [((JavaUtilHashSet *) nil_chk(mergingSegments_)) size], @"org/apache/lucene/index/IndexWriter.java:2305 condition failed: assert 0 == mergingSegments.size();");
     if ([infoStream_ isEnabledWithNSString:@"IW"]) {
       [infoStream_ messageWithNSString:@"IW" withNSString:@"waitForMerges done"];
     }
@@ -1271,7 +1265,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
 
 - (void)publishFrozenUpdatesWithOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)packet {
   @synchronized(self) {
-    JreAssert((packet != nil && [packet any]), (@"org/apache/lucene/index/IndexWriter.java:2335 condition failed: assert packet != null && packet.any();"));
+    JreAssert(packet != nil && [packet any], @"org/apache/lucene/index/IndexWriter.java:2339 condition failed: assert packet != null && packet.any();");
     @synchronized(bufferedUpdatesStream_) {
       [((OrgApacheLuceneIndexBufferedUpdatesStream *) nil_chk(bufferedUpdatesStream_)) pushWithOrgApacheLuceneIndexFrozenBufferedUpdates:packet];
     }
@@ -1357,7 +1351,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     @try {
       for (OrgApacheLuceneIndexSegmentInfos * __strong sis in commits) {
         for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in nil_chk(sis)) {
-          JreAssert((![infos containsWithId:info]), (JreStrcat("$@$$", @"dup info dir=", ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->dir_, @" name=", info->info_->name_)));
+          JreAssert(![infos containsWithId:info], JreStrcat("$@$$", @"dup info dir=", ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->dir_, @" name=", info->info_->name_));
           NSString *newSegName = OrgApacheLuceneIndexIndexWriter_newSegmentName(self);
           if ([infoStream_ isEnabledWithNSString:@"IW"]) {
             [infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$$$$@", @"addIndexes: process segment origName=", info->info_->name_, @" newName=", newSegName, @" info=", info)];
@@ -1399,7 +1393,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     successTop = true;
   }
   @catch (JavaLangOutOfMemoryError *oom) {
-    [self tragicEventWithNSException:oom withNSString:@"addIndexes(Directory...)"];
+    [self tragicEventWithJavaLangThrowable:oom withNSString:@"addIndexes(Directory...)"];
   }
   @finally {
     if (successTop) {
@@ -1434,7 +1428,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     OrgApacheLuceneStoreIOContext *context = create_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreMergeInfo_(create_OrgApacheLuceneStoreMergeInfo_initWithInt_withLong_withBoolean_withInt_((jint) numDocs, -1, false, -1));
     OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = create_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(directory_);
     OrgApacheLuceneIndexSegmentInfo *info = create_OrgApacheLuceneIndexSegmentInfo_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilVersion_withNSString_withInt_withBoolean_withOrgApacheLuceneCodecsCodec_withJavaUtilMap_withByteArray_withJavaUtilMap_(directoryOrig_, JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST), mergedName, -1, false, codec_, JavaUtilCollections_emptyMap(), OrgApacheLuceneUtilStringHelper_randomId(), create_JavaUtilHashMap_init());
-    OrgApacheLuceneIndexSegmentMerger *merger = create_OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(JavaUtilArrays_asListWithNSObjectArray_(readers), info, infoStream_, trackingDir, globalFieldNumberMap_, context);
+    OrgApacheLuceneIndexSegmentMerger *merger = create_OrgApacheLuceneIndexSegmentMerger_initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(JavaUtilArrays_asListWithNSObjectArray_(readers), info, infoStream_, trackingDir, globalFieldNumberMap_, context);
     [((OrgApacheLuceneUtilCloseableThreadLocal *) nil_chk(rateLimiters_)) setWithId:create_OrgApacheLuceneIndexMergeRateLimiter_initWithOrgApacheLuceneIndexMergePolicy_OneMerge_(nil)];
     if (![merger shouldMerge]) {
       return;
@@ -1466,7 +1460,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
       useCompoundFile = [((OrgApacheLuceneIndexMergePolicy *) nil_chk(mergePolicy)) useCompoundFileWithOrgApacheLuceneIndexSegmentInfos:segmentInfos_ withOrgApacheLuceneIndexSegmentCommitInfo:infoPerCommit withOrgApacheLuceneIndexIndexWriter:self];
     }
     if (useCompoundFile) {
-      id<JavaUtilCollection> filesToDelete = [infoPerCommit files];
+      id<JavaUtilCollection> filesToDelete = JreRetainedLocalValue([infoPerCommit files]);
       OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingCFSDir = create_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(mergeDirectory_);
       @try {
         OrgApacheLuceneIndexIndexWriter_createCompoundFileWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreTrackingDirectoryWrapper_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(self, infoStream_, trackingCFSDir, info, context);
@@ -1501,7 +1495,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
     }
   }
   @catch (JavaLangOutOfMemoryError *oom) {
-    [self tragicEventWithNSException:oom withNSString:@"addIndexes(CodecReader...)"];
+    [self tragicEventWithJavaLangThrowable:oom withNSString:@"addIndexes(CodecReader...)"];
   }
   OrgApacheLuceneIndexIndexWriter_maybeMerge(self);
 }
@@ -1536,7 +1530,7 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
 
 - (id<JavaUtilMap>)getCommitData {
   @synchronized(self) {
-    return [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos_)) getUserData];
+    return JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos_)) getUserData]);
   }
 }
 
@@ -1619,9 +1613,9 @@ NSString *OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS = @"addIndex
   return OrgApacheLuceneIndexIndexWriter_commitMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge_withOrgApacheLuceneIndexMergeState_(self, merge, mergeState);
 }
 
-- (void)handleMergeExceptionWithNSException:(NSException *)t
-withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge {
-  OrgApacheLuceneIndexIndexWriter_handleMergeExceptionWithNSException_withOrgApacheLuceneIndexMergePolicy_OneMerge_(self, t, merge);
+- (void)handleMergeExceptionWithJavaLangThrowable:(JavaLangThrowable *)t
+     withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge {
+  OrgApacheLuceneIndexIndexWriter_handleMergeExceptionWithJavaLangThrowable_withOrgApacheLuceneIndexMergePolicy_OneMerge_(self, t, merge);
 }
 
 - (void)mergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge {
@@ -1640,8 +1634,8 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
         [self mergeSuccessWithOrgApacheLuceneIndexMergePolicy_OneMerge:merge];
         success = true;
       }
-      @catch (NSException *t) {
-        OrgApacheLuceneIndexIndexWriter_handleMergeExceptionWithNSException_withOrgApacheLuceneIndexMergePolicy_OneMerge_(self, t, merge);
+      @catch (JavaLangThrowable *t) {
+        OrgApacheLuceneIndexIndexWriter_handleMergeExceptionWithJavaLangThrowable_withOrgApacheLuceneIndexMergePolicy_OneMerge_(self, t, merge);
       }
     }
     @finally {
@@ -1661,8 +1655,8 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
       }
     }
   }
-  @catch (NSException *t) {
-    [self tragicEventWithNSException:t withNSString:@"merge"];
+  @catch (JavaLangThrowable *t) {
+    [self tragicEventWithJavaLangThrowable:t withNSString:@"merge"];
   }
   if (merge->info_ != nil && [((OrgApacheLuceneIndexMergeRateLimiter *) nil_chk(merge->rateLimiter_)) getAbort] == false) {
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"IW"]) {
@@ -1713,7 +1707,7 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
 
 - (void)addMergeExceptionWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge {
   @synchronized(self) {
-    JreAssert(([((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge)) getException] != nil), (@"org/apache/lucene/index/IndexWriter.java:4264 condition failed: assert merge.getException() != null;"));
+    JreAssert([((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge)) getException] != nil, @"org/apache/lucene/index/IndexWriter.java:4268 condition failed: assert merge.getException() != null;");
     if (![((id<JavaUtilList>) nil_chk(mergeExceptions_)) containsWithId:merge] && mergeGen_ == merge->mergeGen_) {
       [((id<JavaUtilList>) nil_chk(mergeExceptions_)) addWithId:merge];
     }
@@ -1730,13 +1724,13 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
 
 - (OrgApacheLuceneIndexSegmentCommitInfo *)newestSegment {
   @synchronized(self) {
-    return [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos_)) size] > 0 ? [segmentInfos_ infoWithInt:[segmentInfos_ size] - 1] : nil;
+    return JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos_)) size] > 0 ? [segmentInfos_ infoWithInt:[segmentInfos_ size] - 1] : nil);
   }
 }
 
 - (NSString *)segString {
   @synchronized(self) {
-    return [self segStringWithJavaLangIterable:segmentInfos_];
+    return JreRetainedLocalValue([self segStringWithJavaLangIterable:segmentInfos_]);
   }
 }
 
@@ -1744,18 +1738,18 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
   @synchronized(self) {
     JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
     for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in nil_chk(infos)) {
-      if ([buffer length] > 0) {
+      if ([buffer java_length] > 0) {
         [buffer appendWithChar:' '];
       }
       [buffer appendWithNSString:[self segStringWithOrgApacheLuceneIndexSegmentCommitInfo:info]];
     }
-    return [buffer description];
+    return JreRetainedLocalValue([buffer description]);
   }
 }
 
 - (NSString *)segStringWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info {
   @synchronized(self) {
-    return [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info)) toStringWithInt:[self numDeletedDocsWithOrgApacheLuceneIndexSegmentCommitInfo:info] - [info getDelCount]];
+    return JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info)) toStringWithInt:[self numDeletedDocsWithOrgApacheLuceneIndexSegmentCommitInfo:info] - [info getDelCount]]);
   }
 }
 
@@ -1783,13 +1777,13 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
       [liveSIS putWithId:info withId:info];
     }
     for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in nil_chk(sis)) {
-      OrgApacheLuceneIndexSegmentCommitInfo *liveInfo = [liveSIS getWithId:info];
+      OrgApacheLuceneIndexSegmentCommitInfo *liveInfo = JreRetainedLocalValue([liveSIS getWithId:info]);
       if (liveInfo != nil) {
         info = liveInfo;
       }
       [newSIS addWithOrgApacheLuceneIndexSegmentCommitInfo:info];
     }
-    return newSIS;
+    return JreRetainedLocalValue(newSIS);
   }
 }
 
@@ -1801,30 +1795,30 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
   return OrgApacheLuceneIndexIndexWriter_isLockedWithOrgApacheLuceneStoreDirectory_(directory);
 }
 
-- (void)tragicEventWithNSException:(NSException *)tragedy
-                      withNSString:(NSString *)location {
+- (void)tragicEventWithJavaLangThrowable:(JavaLangThrowable *)tragedy
+                            withNSString:(NSString *)location {
   if ([tragedy isKindOfClass:[OrgApacheLuceneIndexAbortingException class]]) {
-    tragedy = [((NSException *) nil_chk(tragedy)) getCause];
+    tragedy = [((JavaLangThrowable *) nil_chk(tragedy)) getCause];
   }
-  JreAssert(([tragedy isKindOfClass:[OrgApacheLuceneIndexMergePolicy_MergeAbortedException class]] == false), (@"org/apache/lucene/index/IndexWriter.java:4550 condition failed: assert tragedy instanceof MergePolicy.MergeAbortedException == false;"));
-  JreAssert((JavaLangThread_holdsLockWithId_(self) == false), (@"org/apache/lucene/index/IndexWriter.java:4553 condition failed: assert Thread.holdsLock(this) == false;"));
-  JreAssert((tragedy != nil), (@"org/apache/lucene/index/IndexWriter.java:4556 condition failed: assert tragedy != null;"));
+  JreAssert([tragedy isKindOfClass:[OrgApacheLuceneIndexMergePolicy_MergeAbortedException class]] == false, @"org/apache/lucene/index/IndexWriter.java:4554 condition failed: assert tragedy instanceof MergePolicy.MergeAbortedException == false;");
+  JreAssert(JavaLangThread_holdsLockWithId_(self) == false, @"org/apache/lucene/index/IndexWriter.java:4557 condition failed: assert Thread.holdsLock(this) == false;");
+  JreAssert(tragedy != nil, @"org/apache/lucene/index/IndexWriter.java:4560 condition failed: assert tragedy != null;");
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"IW"]) {
-    [infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$$$", @"hit tragic ", [[((NSException *) nil_chk(tragedy)) getClass] getSimpleName], @" inside ", location)];
+    [infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$$$", @"hit tragic ", [[((JavaLangThrowable *) nil_chk(tragedy)) java_getClass] getSimpleName], @" inside ", location)];
   }
   @synchronized(self) {
     if (JreLoadVolatileId(&self->tragedy_) != nil) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(tragedy);
+      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(tragedy);
     }
     JreVolatileStrongAssign(&self->tragedy_, tragedy);
   }
   if (OrgApacheLuceneIndexIndexWriter_shouldCloseWithBoolean_(self, false)) {
     OrgApacheLuceneIndexIndexWriter_rollbackInternal(self);
   }
-  OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(tragedy);
+  OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(tragedy);
 }
 
-- (NSException *)getTragicException {
+- (JavaLangThrowable *)getTragicException {
   return JreLoadVolatileId(&tragedy_);
 }
 
@@ -1864,9 +1858,7 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
 }
 
 - (void)deletePendingFiles {
-  @synchronized(self) {
-    [((OrgApacheLuceneIndexIndexFileDeleter *) nil_chk(deleter_)) deletePendingFiles];
-  }
+  OrgApacheLuceneIndexIndexWriter_deletePendingFiles(self);
 }
 
 - (void)createCompoundFileWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
@@ -1966,10 +1958,6 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
   JreCloneVolatileStrong(&pendingCommit_, &original->pendingCommit_);
 }
 
-+ (IOSObjectArray *)__annotations_isLockedWithOrgApacheLuceneStoreDirectory_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   JreReleaseVolatile(&tragedy_);
   RELEASE_(directoryOrig_);
@@ -2007,202 +1995,342 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setMaxDocsWithInt:", "setMaxDocs", "V", 0x8, NULL, NULL },
-    { "getActualMaxDocs", NULL, "I", 0x8, NULL, NULL },
-    { "getReader", NULL, "Lorg.apache.lucene.index.DirectoryReader;", 0x0, "Ljava.io.IOException;", NULL },
-    { "getReaderWithBoolean:", "getReader", "Lorg.apache.lucene.index.DirectoryReader;", 0x0, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x11, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "numDeletedDocsWithOrgApacheLuceneIndexSegmentCommitInfo:", "numDeletedDocs", "I", 0x1, NULL, NULL },
-    { "ensureOpenWithBoolean:", "ensureOpen", "V", 0x14, "Lorg.apache.lucene.store.AlreadyClosedException;", NULL },
-    { "ensureOpen", NULL, "V", 0x14, "Lorg.apache.lucene.store.AlreadyClosedException;", NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexIndexWriterConfig:", "IndexWriter", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "readFieldInfosWithOrgApacheLuceneIndexSegmentCommitInfo:", "readFieldInfos", "Lorg.apache.lucene.index.FieldInfos;", 0x8, "Ljava.io.IOException;", NULL },
-    { "getFieldNumberMap", NULL, "Lorg.apache.lucene.index.FieldInfos$FieldNumbers;", 0x2, "Ljava.io.IOException;", NULL },
-    { "getConfig", NULL, "Lorg.apache.lucene.index.LiveIndexWriterConfig;", 0x1, NULL, NULL },
-    { "messageState", NULL, "V", 0x2, NULL, NULL },
-    { "shutdown", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "shouldCloseWithBoolean:", "shouldClose", "Z", 0x22, NULL, NULL },
-    { "getDirectory", NULL, "Lorg.apache.lucene.store.Directory;", 0x1, NULL, NULL },
-    { "getAnalyzer", NULL, "Lorg.apache.lucene.analysis.Analyzer;", 0x1, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x21, NULL, NULL },
-    { "numDocs", NULL, "I", 0x21, NULL, NULL },
-    { "hasDeletions", NULL, "Z", 0x21, NULL, NULL },
-    { "addDocumentWithJavaLangIterable:", "addDocument", "V", 0x1, "Ljava.io.IOException;", "(Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;)V" },
-    { "addDocumentsWithJavaLangIterable:", "addDocuments", "V", 0x1, "Ljava.io.IOException;", "(Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;)V" },
-    { "updateDocumentsWithOrgApacheLuceneIndexTerm:withJavaLangIterable:", "updateDocuments", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/Term;Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;)V" },
-    { "tryDeleteDocumentWithOrgApacheLuceneIndexIndexReader:withInt:", "tryDeleteDocument", "Z", 0x21, "Ljava.io.IOException;", NULL },
-    { "deleteDocumentsWithOrgApacheLuceneIndexTermArray:", "deleteDocuments", "V", 0x81, "Ljava.io.IOException;", NULL },
-    { "deleteDocumentsWithOrgApacheLuceneSearchQueryArray:", "deleteDocuments", "V", 0x81, "Ljava.io.IOException;", NULL },
-    { "updateDocumentWithOrgApacheLuceneIndexTerm:withJavaLangIterable:", "updateDocument", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/Term;Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;)V" },
-    { "updateNumericDocValueWithOrgApacheLuceneIndexTerm:withNSString:withLong:", "updateNumericDocValue", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "updateBinaryDocValueWithOrgApacheLuceneIndexTerm:withNSString:withOrgApacheLuceneUtilBytesRef:", "updateBinaryDocValue", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "updateDocValuesWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneDocumentFieldArray:", "updateDocValues", "V", 0x81, "Ljava.io.IOException;", NULL },
-    { "getSegmentCount", NULL, "I", 0x30, NULL, NULL },
-    { "getNumBufferedDocuments", NULL, "I", 0x30, NULL, NULL },
-    { "getIndexFileNames", NULL, "Ljava.util.Collection;", 0x30, "Ljava.io.IOException;", "()Ljava/util/Collection<Ljava/lang/String;>;" },
-    { "maxDocWithInt:", "maxDoc", "I", 0x30, NULL, NULL },
-    { "getFlushCount", NULL, "I", 0x10, NULL, NULL },
-    { "getFlushDeletesCount", NULL, "I", 0x10, NULL, NULL },
-    { "newSegmentName", NULL, "Ljava.lang.String;", 0x10, NULL, NULL },
-    { "forceMergeWithInt:", "forceMerge", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "forceMergeWithInt:withBoolean:", "forceMerge", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "maxNumSegmentsMergesPending", NULL, "Z", 0x22, NULL, NULL },
-    { "forceMergeDeletesWithBoolean:", "forceMergeDeletes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "forceMergeDeletes", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "maybeMerge", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "maybeMergeWithOrgApacheLuceneIndexMergePolicy:withOrgApacheLuceneIndexMergeTrigger:withInt:", "maybeMerge", "V", 0x12, "Ljava.io.IOException;", NULL },
-    { "updatePendingMergesWithOrgApacheLuceneIndexMergePolicy:withOrgApacheLuceneIndexMergeTrigger:withInt:", "updatePendingMerges", "Z", 0x22, "Ljava.io.IOException;", NULL },
-    { "getMergingSegments", NULL, "Ljava.util.Collection;", 0x21, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/index/SegmentCommitInfo;>;" },
-    { "getNextMerge", NULL, "Lorg.apache.lucene.index.MergePolicy$OneMerge;", 0x21, NULL, NULL },
-    { "hasPendingMerges", NULL, "Z", 0x21, NULL, NULL },
-    { "rollback", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "rollbackInternal", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "deleteAll", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "abortMerges", NULL, "V", 0x22, NULL, NULL },
-    { "waitForMerges", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "checkpoint", NULL, "V", 0x20, "Ljava.io.IOException;", NULL },
-    { "checkpointNoSIS", NULL, "V", 0x20, "Ljava.io.IOException;", NULL },
-    { "changed", NULL, "V", 0x20, NULL, NULL },
-    { "publishFrozenUpdatesWithOrgApacheLuceneIndexFrozenBufferedUpdates:", "publishFrozenUpdates", "V", 0x20, NULL, NULL },
-    { "publishFlushedSegmentWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexFrozenBufferedUpdates:withOrgApacheLuceneIndexFrozenBufferedUpdates:", "publishFlushedSegment", "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "resetMergeExceptions", NULL, "V", 0x22, NULL, NULL },
-    { "noDupDirsWithOrgApacheLuceneStoreDirectoryArray:", "noDupDirs", "V", 0x82, NULL, NULL },
-    { "acquireWriteLocksWithOrgApacheLuceneStoreDirectoryArray:", "acquireWriteLocks", "Ljava.util.List;", 0x82, "Ljava.io.IOException;", "([Lorg/apache/lucene/store/Directory;)Ljava/util/List<Lorg/apache/lucene/store/Lock;>;" },
-    { "addIndexesWithOrgApacheLuceneStoreDirectoryArray:", "addIndexes", "V", 0x81, "Ljava.io.IOException;", NULL },
-    { "addIndexesWithOrgApacheLuceneIndexCodecReaderArray:", "addIndexes", "V", 0x81, "Ljava.io.IOException;", NULL },
-    { "copySegmentAsIsWithOrgApacheLuceneIndexSegmentCommitInfo:withNSString:withOrgApacheLuceneStoreIOContext:", "copySegmentAsIs", "Lorg.apache.lucene.index.SegmentCommitInfo;", 0x2, "Ljava.io.IOException;", NULL },
-    { "doAfterFlush", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "doBeforeFlush", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "prepareCommit", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "prepareCommitInternalWithOrgApacheLuceneIndexMergePolicy:", "prepareCommitInternal", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "setCommitDataWithJavaUtilMap:", "setCommitData", "V", 0x31, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "getCommitData", NULL, "Ljava.util.Map;", 0x31, NULL, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "commit", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "hasUncommittedChanges", NULL, "Z", 0x11, NULL, NULL },
-    { "commitInternalWithOrgApacheLuceneIndexMergePolicy:", "commitInternal", "V", 0x12, "Ljava.io.IOException;", NULL },
-    { "finishCommit", NULL, "V", 0x12, "Ljava.io.IOException;", NULL },
-    { "holdsFullFlushLock", NULL, "Z", 0x0, NULL, NULL },
-    { "flushWithBoolean:withBoolean:", "flush", "V", 0x14, "Ljava.io.IOException;", NULL },
-    { "doFlushWithBoolean:", "doFlush", "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "maybeApplyDeletesWithBoolean:", "maybeApplyDeletes", "Z", 0x30, "Ljava.io.IOException;", NULL },
-    { "applyAllDeletesAndUpdates", NULL, "Z", 0x30, "Ljava.io.IOException;", NULL },
-    { "getDocsWriter", NULL, "Lorg.apache.lucene.index.DocumentsWriter;", 0x0, NULL, NULL },
-    { "numRamDocs", NULL, "I", 0x31, NULL, NULL },
-    { "ensureValidMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:", "ensureValidMerge", "V", 0x22, NULL, NULL },
-    { "skipDeletedDocWithOrgApacheLuceneIndexDocValuesFieldUpdates_IteratorArray:withInt:", "skipDeletedDoc", "V", 0x2, NULL, NULL },
-    { "maybeApplyMergedDVUpdatesWithOrgApacheLuceneIndexMergePolicy_OneMerge:withOrgApacheLuceneIndexMergeState:withInt:withOrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates:withNSStringArray:withOrgApacheLuceneIndexDocValuesFieldUpdatesArray:withOrgApacheLuceneIndexDocValuesFieldUpdates_IteratorArray:withInt:", "maybeApplyMergedDVUpdates", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "commitMergedDeletesAndUpdatesWithOrgApacheLuceneIndexMergePolicy_OneMerge:withOrgApacheLuceneIndexMergeState:", "commitMergedDeletesAndUpdates", "Lorg.apache.lucene.index.ReadersAndUpdates;", 0x22, "Ljava.io.IOException;", NULL },
-    { "commitMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:withOrgApacheLuceneIndexMergeState:", "commitMerge", "Z", 0x22, "Ljava.io.IOException;", NULL },
-    { "handleMergeExceptionWithNSException:withOrgApacheLuceneIndexMergePolicy_OneMerge:", "handleMergeException", "V", 0x12, "Ljava.io.IOException;", NULL },
-    { "mergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:", "merge", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "mergeSuccessWithOrgApacheLuceneIndexMergePolicy_OneMerge:", "mergeSuccess", "V", 0x0, NULL, NULL },
-    { "registerMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:", "registerMerge", "Z", 0x30, "Ljava.io.IOException;", NULL },
-    { "mergeInitWithOrgApacheLuceneIndexMergePolicy_OneMerge:", "mergeInit", "V", 0x30, "Ljava.io.IOException;", NULL },
-    { "_mergeInitWithOrgApacheLuceneIndexMergePolicy_OneMerge:", "_mergeInit", "V", 0x22, "Ljava.io.IOException;", NULL },
-    { "setDiagnosticsWithOrgApacheLuceneIndexSegmentInfo:withNSString:", "setDiagnostics", "V", 0x8, NULL, NULL },
-    { "setDiagnosticsWithOrgApacheLuceneIndexSegmentInfo:withNSString:withJavaUtilMap:", "setDiagnostics", "V", 0xa, NULL, "(Lorg/apache/lucene/index/SegmentInfo;Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "mergeFinishWithOrgApacheLuceneIndexMergePolicy_OneMerge:", "mergeFinish", "V", 0x30, NULL, NULL },
-    { "closeMergeReadersWithOrgApacheLuceneIndexMergePolicy_OneMerge:withBoolean:", "closeMergeReaders", "V", 0x32, "Ljava.io.IOException;", NULL },
-    { "mergeMiddleWithOrgApacheLuceneIndexMergePolicy_OneMerge:withOrgApacheLuceneIndexMergePolicy:", "mergeMiddle", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "addMergeExceptionWithOrgApacheLuceneIndexMergePolicy_OneMerge:", "addMergeException", "V", 0x20, NULL, NULL },
-    { "getBufferedDeleteTermsSize", NULL, "I", 0x10, NULL, NULL },
-    { "getNumBufferedDeleteTerms", NULL, "I", 0x10, NULL, NULL },
-    { "newestSegment", NULL, "Lorg.apache.lucene.index.SegmentCommitInfo;", 0x20, NULL, NULL },
-    { "segString", NULL, "Ljava.lang.String;", 0x20, NULL, NULL },
-    { "segStringWithJavaLangIterable:", "segString", "Ljava.lang.String;", 0x20, NULL, "(Ljava/lang/Iterable<Lorg/apache/lucene/index/SegmentCommitInfo;>;)Ljava/lang/String;" },
-    { "segStringWithOrgApacheLuceneIndexSegmentCommitInfo:", "segString", "Ljava.lang.String;", 0x20, NULL, NULL },
-    { "doWait", NULL, "V", 0x22, NULL, NULL },
-    { "setKeepFullyDeletedSegmentsWithBoolean:", "setKeepFullyDeletedSegments", "V", 0x0, NULL, NULL },
-    { "getKeepFullyDeletedSegments", NULL, "Z", 0x0, NULL, NULL },
-    { "filesExistWithOrgApacheLuceneIndexSegmentInfos:", "filesExist", "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "toLiveInfosWithOrgApacheLuceneIndexSegmentInfos:", "toLiveInfos", "Lorg.apache.lucene.index.SegmentInfos;", 0x20, NULL, NULL },
-    { "startCommitWithOrgApacheLuceneIndexSegmentInfos:", "startCommit", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "isLockedWithOrgApacheLuceneStoreDirectory:", "isLocked", "Z", 0x9, "Ljava.io.IOException;", NULL },
-    { "tragicEventWithNSException:withNSString:", "tragicEvent", "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "getTragicException", NULL, "Ljava.lang.Throwable;", 0x1, NULL, NULL },
-    { "isOpen", NULL, "Z", 0x1, NULL, NULL },
-    { "testPointWithNSString:", "testPoint", "V", 0x12, NULL, NULL },
-    { "nrtIsCurrentWithOrgApacheLuceneIndexSegmentInfos:", "nrtIsCurrent", "Z", 0x20, NULL, NULL },
-    { "isClosed", NULL, "Z", 0x20, NULL, NULL },
-    { "deleteUnusedFiles", NULL, "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "deletePendingFiles", NULL, "V", 0x22, "Ljava.io.IOException;", NULL },
-    { "createCompoundFileWithOrgApacheLuceneUtilInfoStream:withOrgApacheLuceneStoreTrackingDirectoryWrapper:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "createCompoundFile", "V", 0x10, "Ljava.io.IOException;", NULL },
-    { "deleteNewFilesWithJavaUtilCollection:", "deleteNewFiles", "V", 0x30, "Ljava.io.IOException;", "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
-    { "flushFailedWithOrgApacheLuceneIndexSegmentInfo:", "flushFailed", "V", 0x30, "Ljava.io.IOException;", NULL },
-    { "purgeWithBoolean:", "purge", "I", 0x10, "Ljava.io.IOException;", NULL },
-    { "applyDeletesAndPurgeWithBoolean:", "applyDeletesAndPurge", "V", 0x10, "Ljava.io.IOException;", NULL },
-    { "doAfterSegmentFlushedWithBoolean:withBoolean:", "doAfterSegmentFlushed", "V", 0x10, "Ljava.io.IOException;", NULL },
-    { "incRefDeleterWithOrgApacheLuceneIndexSegmentInfos:", "incRefDeleter", "V", 0x20, "Ljava.io.IOException;", NULL },
-    { "decRefDeleterWithOrgApacheLuceneIndexSegmentInfos:", "decRefDeleter", "V", 0x20, "Ljava.io.IOException;", NULL },
-    { "processEventsWithBoolean:withBoolean:", "processEvents", "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "processEventsWithJavaUtilQueue:withBoolean:withBoolean:", "processEvents", "Z", 0x2, "Ljava.io.IOException;", "(Ljava/util/Queue<Lorg/apache/lucene/index/IndexWriter$Event;>;ZZ)Z" },
-    { "slowFileExistsWithOrgApacheLuceneStoreDirectory:withNSString:", "slowFileExists", "Z", 0x8, "Ljava.io.IOException;", NULL },
-    { "reserveDocsWithLong:", "reserveDocs", "V", 0x2, NULL, NULL },
-    { "testReserveDocsWithLong:", "testReserveDocs", "V", 0x2, NULL, NULL },
-    { "tooManyDocsWithLong:", "tooManyDocs", "V", 0x2, NULL, NULL },
-    { "addMergeRateLimitersWithOrgApacheLuceneStoreDirectory:", "addMergeRateLimiters", "Lorg.apache.lucene.store.Directory;", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x8, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x0, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x0, 3, 4, 2, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 5, -1, -1 },
+    { NULL, "I", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x14, 8, 4, 9, -1, -1, -1 },
+    { NULL, "V", 0x14, -1, -1, 9, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 10, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFieldInfos;", 0x8, 11, 7, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFieldInfos_FieldNumbers;", 0x2, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexLiveIndexWriterConfig;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "Z", 0x22, 12, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreDirectory;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 14, 2, 15, -1, -1 },
+    { NULL, "V", 0x1, 16, 14, 2, 17, -1, -1 },
+    { NULL, "V", 0x1, 18, 19, 2, 20, -1, -1 },
+    { NULL, "Z", 0x21, 21, 22, 2, -1, -1, -1 },
+    { NULL, "V", 0x81, 23, 24, 2, -1, -1, -1 },
+    { NULL, "V", 0x81, 23, 25, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 19, 2, 27, -1, -1 },
+    { NULL, "V", 0x1, 28, 29, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 30, 31, 2, -1, -1, -1 },
+    { NULL, "V", 0x81, 32, 33, 2, -1, -1, -1 },
+    { NULL, "I", 0x30, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x30, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x30, -1, -1, 2, 34, -1, -1 },
+    { NULL, "I", 0x30, 35, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x10, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x10, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x10, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 36, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 36, 37, 2, -1, -1, -1 },
+    { NULL, "Z", 0x22, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 38, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x12, 39, 40, 2, -1, -1, -1 },
+    { NULL, "Z", 0x22, 41, 40, 2, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x21, -1, -1, -1, 42, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergePolicy_OneMerge;", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x22, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x20, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x20, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, 43, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 45, 46, 2, -1, -1, -1 },
+    { NULL, "V", 0x22, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x82, 47, 48, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x82, 49, 48, 2, 50, -1, -1 },
+    { NULL, "V", 0x81, 51, 48, 2, -1, -1, -1 },
+    { NULL, "V", 0x81, 51, 52, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSegmentCommitInfo;", 0x2, 53, 54, 2, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x2, 55, 56, 2, -1, -1, -1 },
+    { NULL, "V", 0x31, 57, 58, -1, 59, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x31, -1, -1, -1, 60, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x12, 61, 56, 2, -1, -1, -1 },
+    { NULL, "V", 0x12, -1, -1, 2, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x14, 62, 63, 2, -1, -1, -1 },
+    { NULL, "Z", 0x2, 64, 4, 2, -1, -1, -1 },
+    { NULL, "Z", 0x30, 65, 4, 2, -1, -1, -1 },
+    { NULL, "Z", 0x30, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriter;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x31, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x22, 66, 67, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 68, 69, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 70, 71, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexReadersAndUpdates;", 0x22, 72, 73, 2, -1, -1, -1 },
+    { NULL, "Z", 0x22, 74, 73, 2, -1, -1, -1 },
+    { NULL, "V", 0x12, 75, 76, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 77, 67, 2, -1, -1, -1 },
+    { NULL, "V", 0x0, 78, 67, -1, -1, -1, -1 },
+    { NULL, "Z", 0x30, 79, 67, 2, -1, -1, -1 },
+    { NULL, "V", 0x30, 80, 67, 2, -1, -1, -1 },
+    { NULL, "V", 0x22, 81, 67, 2, -1, -1, -1 },
+    { NULL, "V", 0x8, 82, 83, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 82, 84, -1, 85, -1, -1 },
+    { NULL, "V", 0x30, 86, 67, -1, -1, -1, -1 },
+    { NULL, "V", 0x32, 87, 88, 2, -1, -1, -1 },
+    { NULL, "I", 0x2, 89, 90, 2, -1, -1, -1 },
+    { NULL, "V", 0x20, 91, 67, -1, -1, -1, -1 },
+    { NULL, "I", 0x10, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x10, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSegmentCommitInfo;", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x20, 92, 14, -1, 93, -1, -1 },
+    { NULL, "LNSString;", 0x20, 92, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x22, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 94, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 95, 96, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSegmentInfos;", 0x20, 97, 96, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 98, 96, 2, -1, -1, -1 },
+    { NULL, "Z", 0x9, 99, 100, 2, -1, 101, -1 },
+    { NULL, "V", 0x0, 102, 103, 2, -1, -1, -1 },
+    { NULL, "LJavaLangThrowable;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x12, 104, 105, -1, -1, -1, -1 },
+    { NULL, "Z", 0x20, 106, 96, -1, -1, -1, -1 },
+    { NULL, "Z", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x21, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x22, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x10, 107, 108, 2, -1, -1, -1 },
+    { NULL, "V", 0x30, 109, 110, 2, 111, -1, -1 },
+    { NULL, "V", 0x30, 112, 113, 2, -1, -1, -1 },
+    { NULL, "I", 0x10, 114, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x10, 115, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x10, 116, 63, 2, -1, -1, -1 },
+    { NULL, "V", 0x20, 117, 96, 2, -1, -1, -1 },
+    { NULL, "V", 0x20, 118, 96, 2, -1, -1, -1 },
+    { NULL, "Z", 0x2, 119, 63, 2, -1, -1, -1 },
+    { NULL, "Z", 0x2, 119, 120, 2, 121, -1, -1 },
+    { NULL, "Z", 0x8, 122, 123, 2, -1, -1, -1 },
+    { NULL, "V", 0x2, 124, 125, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 126, 125, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 127, 125, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreDirectory;", 0x2, 128, 100, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setMaxDocsWithInt:);
+  methods[1].selector = @selector(getActualMaxDocs);
+  methods[2].selector = @selector(getReader);
+  methods[3].selector = @selector(getReaderWithBoolean:);
+  methods[4].selector = @selector(ramBytesUsed);
+  methods[5].selector = @selector(getChildResources);
+  methods[6].selector = @selector(numDeletedDocsWithOrgApacheLuceneIndexSegmentCommitInfo:);
+  methods[7].selector = @selector(ensureOpenWithBoolean:);
+  methods[8].selector = @selector(ensureOpen);
+  methods[9].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexIndexWriterConfig:);
+  methods[10].selector = @selector(readFieldInfosWithOrgApacheLuceneIndexSegmentCommitInfo:);
+  methods[11].selector = @selector(getFieldNumberMap);
+  methods[12].selector = @selector(getConfig);
+  methods[13].selector = @selector(messageState);
+  methods[14].selector = @selector(shutdown);
+  methods[15].selector = @selector(close);
+  methods[16].selector = @selector(shouldCloseWithBoolean:);
+  methods[17].selector = @selector(getDirectory);
+  methods[18].selector = @selector(getAnalyzer);
+  methods[19].selector = @selector(maxDoc);
+  methods[20].selector = @selector(numDocs);
+  methods[21].selector = @selector(hasDeletions);
+  methods[22].selector = @selector(addDocumentWithJavaLangIterable:);
+  methods[23].selector = @selector(addDocumentsWithJavaLangIterable:);
+  methods[24].selector = @selector(updateDocumentsWithOrgApacheLuceneIndexTerm:withJavaLangIterable:);
+  methods[25].selector = @selector(tryDeleteDocumentWithOrgApacheLuceneIndexIndexReader:withInt:);
+  methods[26].selector = @selector(deleteDocumentsWithOrgApacheLuceneIndexTermArray:);
+  methods[27].selector = @selector(deleteDocumentsWithOrgApacheLuceneSearchQueryArray:);
+  methods[28].selector = @selector(updateDocumentWithOrgApacheLuceneIndexTerm:withJavaLangIterable:);
+  methods[29].selector = @selector(updateNumericDocValueWithOrgApacheLuceneIndexTerm:withNSString:withLong:);
+  methods[30].selector = @selector(updateBinaryDocValueWithOrgApacheLuceneIndexTerm:withNSString:withOrgApacheLuceneUtilBytesRef:);
+  methods[31].selector = @selector(updateDocValuesWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneDocumentFieldArray:);
+  methods[32].selector = @selector(getSegmentCount);
+  methods[33].selector = @selector(getNumBufferedDocuments);
+  methods[34].selector = @selector(getIndexFileNames);
+  methods[35].selector = @selector(maxDocWithInt:);
+  methods[36].selector = @selector(getFlushCount);
+  methods[37].selector = @selector(getFlushDeletesCount);
+  methods[38].selector = @selector(newSegmentName);
+  methods[39].selector = @selector(forceMergeWithInt:);
+  methods[40].selector = @selector(forceMergeWithInt:withBoolean:);
+  methods[41].selector = @selector(maxNumSegmentsMergesPending);
+  methods[42].selector = @selector(forceMergeDeletesWithBoolean:);
+  methods[43].selector = @selector(forceMergeDeletes);
+  methods[44].selector = @selector(maybeMerge);
+  methods[45].selector = @selector(maybeMergeWithOrgApacheLuceneIndexMergePolicy:withOrgApacheLuceneIndexMergeTrigger:withInt:);
+  methods[46].selector = @selector(updatePendingMergesWithOrgApacheLuceneIndexMergePolicy:withOrgApacheLuceneIndexMergeTrigger:withInt:);
+  methods[47].selector = @selector(getMergingSegments);
+  methods[48].selector = @selector(getNextMerge);
+  methods[49].selector = @selector(hasPendingMerges);
+  methods[50].selector = @selector(rollback);
+  methods[51].selector = @selector(rollbackInternal);
+  methods[52].selector = @selector(deleteAll);
+  methods[53].selector = @selector(abortMerges);
+  methods[54].selector = @selector(waitForMerges);
+  methods[55].selector = @selector(checkpoint);
+  methods[56].selector = @selector(checkpointNoSIS);
+  methods[57].selector = @selector(changed);
+  methods[58].selector = @selector(publishFrozenUpdatesWithOrgApacheLuceneIndexFrozenBufferedUpdates:);
+  methods[59].selector = @selector(publishFlushedSegmentWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexFrozenBufferedUpdates:withOrgApacheLuceneIndexFrozenBufferedUpdates:);
+  methods[60].selector = @selector(resetMergeExceptions);
+  methods[61].selector = @selector(noDupDirsWithOrgApacheLuceneStoreDirectoryArray:);
+  methods[62].selector = @selector(acquireWriteLocksWithOrgApacheLuceneStoreDirectoryArray:);
+  methods[63].selector = @selector(addIndexesWithOrgApacheLuceneStoreDirectoryArray:);
+  methods[64].selector = @selector(addIndexesWithOrgApacheLuceneIndexCodecReaderArray:);
+  methods[65].selector = @selector(copySegmentAsIsWithOrgApacheLuceneIndexSegmentCommitInfo:withNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[66].selector = @selector(doAfterFlush);
+  methods[67].selector = @selector(doBeforeFlush);
+  methods[68].selector = @selector(prepareCommit);
+  methods[69].selector = @selector(prepareCommitInternalWithOrgApacheLuceneIndexMergePolicy:);
+  methods[70].selector = @selector(setCommitDataWithJavaUtilMap:);
+  methods[71].selector = @selector(getCommitData);
+  methods[72].selector = @selector(commit);
+  methods[73].selector = @selector(hasUncommittedChanges);
+  methods[74].selector = @selector(commitInternalWithOrgApacheLuceneIndexMergePolicy:);
+  methods[75].selector = @selector(finishCommit);
+  methods[76].selector = @selector(holdsFullFlushLock);
+  methods[77].selector = @selector(flushWithBoolean:withBoolean:);
+  methods[78].selector = @selector(doFlushWithBoolean:);
+  methods[79].selector = @selector(maybeApplyDeletesWithBoolean:);
+  methods[80].selector = @selector(applyAllDeletesAndUpdates);
+  methods[81].selector = @selector(getDocsWriter);
+  methods[82].selector = @selector(numRamDocs);
+  methods[83].selector = @selector(ensureValidMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:);
+  methods[84].selector = @selector(skipDeletedDocWithOrgApacheLuceneIndexDocValuesFieldUpdates_IteratorArray:withInt:);
+  methods[85].selector = @selector(maybeApplyMergedDVUpdatesWithOrgApacheLuceneIndexMergePolicy_OneMerge:withOrgApacheLuceneIndexMergeState:withInt:withOrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates:withNSStringArray:withOrgApacheLuceneIndexDocValuesFieldUpdatesArray:withOrgApacheLuceneIndexDocValuesFieldUpdates_IteratorArray:withInt:);
+  methods[86].selector = @selector(commitMergedDeletesAndUpdatesWithOrgApacheLuceneIndexMergePolicy_OneMerge:withOrgApacheLuceneIndexMergeState:);
+  methods[87].selector = @selector(commitMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:withOrgApacheLuceneIndexMergeState:);
+  methods[88].selector = @selector(handleMergeExceptionWithJavaLangThrowable:withOrgApacheLuceneIndexMergePolicy_OneMerge:);
+  methods[89].selector = @selector(mergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:);
+  methods[90].selector = @selector(mergeSuccessWithOrgApacheLuceneIndexMergePolicy_OneMerge:);
+  methods[91].selector = @selector(registerMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:);
+  methods[92].selector = @selector(mergeInitWithOrgApacheLuceneIndexMergePolicy_OneMerge:);
+  methods[93].selector = @selector(_mergeInitWithOrgApacheLuceneIndexMergePolicy_OneMerge:);
+  methods[94].selector = @selector(setDiagnosticsWithOrgApacheLuceneIndexSegmentInfo:withNSString:);
+  methods[95].selector = @selector(setDiagnosticsWithOrgApacheLuceneIndexSegmentInfo:withNSString:withJavaUtilMap:);
+  methods[96].selector = @selector(mergeFinishWithOrgApacheLuceneIndexMergePolicy_OneMerge:);
+  methods[97].selector = @selector(closeMergeReadersWithOrgApacheLuceneIndexMergePolicy_OneMerge:withBoolean:);
+  methods[98].selector = @selector(mergeMiddleWithOrgApacheLuceneIndexMergePolicy_OneMerge:withOrgApacheLuceneIndexMergePolicy:);
+  methods[99].selector = @selector(addMergeExceptionWithOrgApacheLuceneIndexMergePolicy_OneMerge:);
+  methods[100].selector = @selector(getBufferedDeleteTermsSize);
+  methods[101].selector = @selector(getNumBufferedDeleteTerms);
+  methods[102].selector = @selector(newestSegment);
+  methods[103].selector = @selector(segString);
+  methods[104].selector = @selector(segStringWithJavaLangIterable:);
+  methods[105].selector = @selector(segStringWithOrgApacheLuceneIndexSegmentCommitInfo:);
+  methods[106].selector = @selector(doWait);
+  methods[107].selector = @selector(setKeepFullyDeletedSegmentsWithBoolean:);
+  methods[108].selector = @selector(getKeepFullyDeletedSegments);
+  methods[109].selector = @selector(filesExistWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[110].selector = @selector(toLiveInfosWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[111].selector = @selector(startCommitWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[112].selector = @selector(isLockedWithOrgApacheLuceneStoreDirectory:);
+  methods[113].selector = @selector(tragicEventWithJavaLangThrowable:withNSString:);
+  methods[114].selector = @selector(getTragicException);
+  methods[115].selector = @selector(isOpen);
+  methods[116].selector = @selector(testPointWithNSString:);
+  methods[117].selector = @selector(nrtIsCurrentWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[118].selector = @selector(isClosed);
+  methods[119].selector = @selector(deleteUnusedFiles);
+  methods[120].selector = @selector(deletePendingFiles);
+  methods[121].selector = @selector(createCompoundFileWithOrgApacheLuceneUtilInfoStream:withOrgApacheLuceneStoreTrackingDirectoryWrapper:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:);
+  methods[122].selector = @selector(deleteNewFilesWithJavaUtilCollection:);
+  methods[123].selector = @selector(flushFailedWithOrgApacheLuceneIndexSegmentInfo:);
+  methods[124].selector = @selector(purgeWithBoolean:);
+  methods[125].selector = @selector(applyDeletesAndPurgeWithBoolean:);
+  methods[126].selector = @selector(doAfterSegmentFlushedWithBoolean:withBoolean:);
+  methods[127].selector = @selector(incRefDeleterWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[128].selector = @selector(decRefDeleterWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[129].selector = @selector(processEventsWithBoolean:withBoolean:);
+  methods[130].selector = @selector(processEventsWithJavaUtilQueue:withBoolean:withBoolean:);
+  methods[131].selector = @selector(slowFileExistsWithOrgApacheLuceneStoreDirectory:withNSString:);
+  methods[132].selector = @selector(reserveDocsWithLong:);
+  methods[133].selector = @selector(testReserveDocsWithLong:);
+  methods[134].selector = @selector(tooManyDocsWithLong:);
+  methods[135].selector = @selector(addMergeRateLimitersWithOrgApacheLuceneStoreDirectory:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MAX_DOCS", "MAX_DOCS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexIndexWriter_MAX_DOCS },
-    { "MAX_POSITION", "MAX_POSITION", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexIndexWriter_MAX_POSITION },
-    { "actualMaxDocs", "actualMaxDocs", 0xa, "I", &OrgApacheLuceneIndexIndexWriter_actualMaxDocs, NULL, .constantValue.asLong = 0 },
-    { "enableTestPoints_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "UNBOUNDED_MAX_MERGE_SEGMENTS", "UNBOUNDED_MAX_MERGE_SEGMENTS", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexIndexWriter_UNBOUNDED_MAX_MERGE_SEGMENTS },
-    { "WRITE_LOCK_NAME", "WRITE_LOCK_NAME", 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexWriter_WRITE_LOCK_NAME, NULL, .constantValue.asLong = 0 },
-    { "SOURCE", "SOURCE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexWriter_SOURCE, NULL, .constantValue.asLong = 0 },
-    { "SOURCE_MERGE", "SOURCE_MERGE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexWriter_SOURCE_MERGE, NULL, .constantValue.asLong = 0 },
-    { "SOURCE_FLUSH", "SOURCE_FLUSH", 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexWriter_SOURCE_FLUSH, NULL, .constantValue.asLong = 0 },
-    { "SOURCE_ADDINDEXES_READERS", "SOURCE_ADDINDEXES_READERS", 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS, NULL, .constantValue.asLong = 0 },
-    { "MAX_TERM_LENGTH", "MAX_TERM_LENGTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexIndexWriter_MAX_TERM_LENGTH },
-    { "tragedy_", NULL, 0x40, "Ljava.lang.Throwable;", NULL, NULL, .constantValue.asLong = 0 },
-    { "directoryOrig_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "directory_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mergeDirectory_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "analyzer_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "changeCount_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicLong;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastCommitChangeCount_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "rollbackSegments_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;", .constantValue.asLong = 0 },
-    { "pendingCommit_", NULL, 0x40, "Lorg.apache.lucene.index.SegmentInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "pendingCommitChangeCount_", NULL, 0x40, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "filesToCommit_", NULL, 0x2, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "segmentInfos_", NULL, 0x10, "Lorg.apache.lucene.index.SegmentInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "globalFieldNumberMap_", NULL, 0x10, "Lorg.apache.lucene.index.FieldInfos$FieldNumbers;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docWriter_", NULL, 0x12, "Lorg.apache.lucene.index.DocumentsWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "eventQueue_", NULL, 0x12, "Ljava.util.Queue;", NULL, "Ljava/util/Queue<Lorg/apache/lucene/index/IndexWriter$Event;>;", .constantValue.asLong = 0 },
-    { "deleter_", NULL, 0x10, "Lorg.apache.lucene.index.IndexFileDeleter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentsToMerge_", NULL, 0x2, "Ljava.util.Map;", NULL, "Ljava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;", .constantValue.asLong = 0 },
-    { "mergeMaxNumSegments_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "writeLock_", NULL, 0x2, "Lorg.apache.lucene.store.Lock;", NULL, NULL, .constantValue.asLong = 0 },
-    { "closed_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "closing_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "mergingSegments_", NULL, 0x2, "Ljava.util.HashSet;", NULL, "Ljava/util/HashSet<Lorg/apache/lucene/index/SegmentCommitInfo;>;", .constantValue.asLong = 0 },
-    { "mergeScheduler_", NULL, 0x12, "Lorg.apache.lucene.index.MergeScheduler;", NULL, NULL, .constantValue.asLong = 0 },
-    { "pendingMerges_", NULL, 0x2, "Ljava.util.LinkedList;", NULL, "Ljava/util/LinkedList<Lorg/apache/lucene/index/MergePolicy$OneMerge;>;", .constantValue.asLong = 0 },
-    { "runningMerges_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/index/MergePolicy$OneMerge;>;", .constantValue.asLong = 0 },
-    { "mergeExceptions_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/MergePolicy$OneMerge;>;", .constantValue.asLong = 0 },
-    { "mergeGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "stopMerges_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "didMessageState_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "flushCount_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "flushDeletesCount_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "readerPool_", NULL, 0x10, "Lorg.apache.lucene.index.IndexWriter$ReaderPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferedUpdatesStream_", NULL, 0x10, "Lorg.apache.lucene.index.BufferedUpdatesStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "poolReaders_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "config_", NULL, 0x12, "Lorg.apache.lucene.index.LiveIndexWriterConfig;", NULL, NULL, .constantValue.asLong = 0 },
-    { "startCommitTime_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "pendingNumDocs_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicLong;", NULL, NULL, .constantValue.asLong = 0 },
-    { "rateLimiters_", NULL, 0x10, "Lorg.apache.lucene.util.CloseableThreadLocal;", NULL, "Lorg/apache/lucene/util/CloseableThreadLocal<Lorg/apache/lucene/index/MergeRateLimiter;>;", .constantValue.asLong = 0 },
-    { "codec_", NULL, 0x10, "Lorg.apache.lucene.codecs.Codec;", NULL, NULL, .constantValue.asLong = 0 },
-    { "infoStream_", NULL, 0x10, "Lorg.apache.lucene.util.InfoStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "commitLock_", NULL, 0x12, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fullFlushLock_", NULL, 0x12, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
-    { "keepFullyDeletedSegments_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "MAX_DOCS", "I", .constantValue.asInt = OrgApacheLuceneIndexIndexWriter_MAX_DOCS, 0x19, -1, -1, -1, -1 },
+    { "MAX_POSITION", "I", .constantValue.asInt = OrgApacheLuceneIndexIndexWriter_MAX_POSITION, 0x19, -1, -1, -1, -1 },
+    { "actualMaxDocs", "I", .constantValue.asLong = 0, 0xa, -1, 129, -1, -1 },
+    { "enableTestPoints_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "UNBOUNDED_MAX_MERGE_SEGMENTS", "I", .constantValue.asInt = OrgApacheLuceneIndexIndexWriter_UNBOUNDED_MAX_MERGE_SEGMENTS, 0x1a, -1, -1, -1, -1 },
+    { "WRITE_LOCK_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 130, -1, -1 },
+    { "SOURCE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 131, -1, -1 },
+    { "SOURCE_MERGE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 132, -1, -1 },
+    { "SOURCE_FLUSH", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 133, -1, -1 },
+    { "SOURCE_ADDINDEXES_READERS", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 134, -1, -1 },
+    { "MAX_TERM_LENGTH", "I", .constantValue.asInt = OrgApacheLuceneIndexIndexWriter_MAX_TERM_LENGTH, 0x19, -1, -1, -1, -1 },
+    { "tragedy_", "LJavaLangThrowable;", .constantValue.asLong = 0, 0x40, -1, -1, -1, -1 },
+    { "directoryOrig_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "directory_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "mergeDirectory_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "analyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "changeCount_", "LJavaUtilConcurrentAtomicAtomicLong;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lastCommitChangeCount_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "rollbackSegments_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 135, -1 },
+    { "pendingCommit_", "LOrgApacheLuceneIndexSegmentInfos;", .constantValue.asLong = 0, 0x40, -1, -1, -1, -1 },
+    { "pendingCommitChangeCount_", "J", .constantValue.asLong = 0, 0x40, -1, -1, -1, -1 },
+    { "filesToCommit_", "LJavaUtilCollection;", .constantValue.asLong = 0, 0x2, -1, -1, 136, -1 },
+    { "segmentInfos_", "LOrgApacheLuceneIndexSegmentInfos;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "globalFieldNumberMap_", "LOrgApacheLuceneIndexFieldInfos_FieldNumbers;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docWriter_", "LOrgApacheLuceneIndexDocumentsWriter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "eventQueue_", "LJavaUtilQueue;", .constantValue.asLong = 0, 0x12, -1, -1, 137, -1 },
+    { "deleter_", "LOrgApacheLuceneIndexIndexFileDeleter;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "segmentsToMerge_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 138, -1 },
+    { "mergeMaxNumSegments_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "writeLock_", "LOrgApacheLuceneStoreLock;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "closed_", "Z", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "closing_", "Z", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "mergingSegments_", "LJavaUtilHashSet;", .constantValue.asLong = 0, 0x2, -1, -1, 139, -1 },
+    { "mergeScheduler_", "LOrgApacheLuceneIndexMergeScheduler;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "pendingMerges_", "LJavaUtilLinkedList;", .constantValue.asLong = 0, 0x2, -1, -1, 140, -1 },
+    { "runningMerges_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 141, -1 },
+    { "mergeExceptions_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 142, -1 },
+    { "mergeGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "stopMerges_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "didMessageState_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "flushCount_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "flushDeletesCount_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "readerPool_", "LOrgApacheLuceneIndexIndexWriter_ReaderPool;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "bufferedUpdatesStream_", "LOrgApacheLuceneIndexBufferedUpdatesStream;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "poolReaders_", "Z", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "config_", "LOrgApacheLuceneIndexLiveIndexWriterConfig;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "startCommitTime_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pendingNumDocs_", "LJavaUtilConcurrentAtomicAtomicLong;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "rateLimiters_", "LOrgApacheLuceneUtilCloseableThreadLocal;", .constantValue.asLong = 0, 0x10, -1, -1, 143, -1 },
+    { "codec_", "LOrgApacheLuceneCodecsCodec;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "infoStream_", "LOrgApacheLuceneUtilInfoStream;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "commitLock_", "LNSObject;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fullFlushLock_", "LNSObject;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "keepFullyDeletedSegments_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.IndexWriter$ReaderPool;", "Lorg.apache.lucene.index.IndexWriter$MergedDeletesAndUpdates;", "Lorg.apache.lucene.index.IndexWriter$IndexReaderWarmer;", "Lorg.apache.lucene.index.IndexWriter$Event;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter = { 2, "IndexWriter", "org.apache.lucene.index", NULL, 0x1, 136, methods, 54, fields, 0, NULL, 4, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "setMaxDocs", "I", "LJavaIoIOException;", "getReader", "Z", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "numDeletedDocs", "LOrgApacheLuceneIndexSegmentCommitInfo;", "ensureOpen", "LOrgApacheLuceneStoreAlreadyClosedException;", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexIndexWriterConfig;", "readFieldInfos", "shouldClose", "addDocument", "LJavaLangIterable;", "(Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;)V", "addDocuments", "(Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;)V", "updateDocuments", "LOrgApacheLuceneIndexTerm;LJavaLangIterable;", "(Lorg/apache/lucene/index/Term;Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;)V", "tryDeleteDocument", "LOrgApacheLuceneIndexIndexReader;I", "deleteDocuments", "[LOrgApacheLuceneIndexTerm;", "[LOrgApacheLuceneSearchQuery;", "updateDocument", "(Lorg/apache/lucene/index/Term;Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;)V", "updateNumericDocValue", "LOrgApacheLuceneIndexTerm;LNSString;J", "updateBinaryDocValue", "LOrgApacheLuceneIndexTerm;LNSString;LOrgApacheLuceneUtilBytesRef;", "updateDocValues", "LOrgApacheLuceneIndexTerm;[LOrgApacheLuceneDocumentField;", "()Ljava/util/Collection<Ljava/lang/String;>;", "maxDoc", "forceMerge", "IZ", "forceMergeDeletes", "maybeMerge", "LOrgApacheLuceneIndexMergePolicy;LOrgApacheLuceneIndexMergeTrigger;I", "updatePendingMerges", "()Ljava/util/Collection<Lorg/apache/lucene/index/SegmentCommitInfo;>;", "publishFrozenUpdates", "LOrgApacheLuceneIndexFrozenBufferedUpdates;", "publishFlushedSegment", "LOrgApacheLuceneIndexSegmentCommitInfo;LOrgApacheLuceneIndexFrozenBufferedUpdates;LOrgApacheLuceneIndexFrozenBufferedUpdates;", "noDupDirs", "[LOrgApacheLuceneStoreDirectory;", "acquireWriteLocks", "([Lorg/apache/lucene/store/Directory;)Ljava/util/List<Lorg/apache/lucene/store/Lock;>;", "addIndexes", "[LOrgApacheLuceneIndexCodecReader;", "copySegmentAsIs", "LOrgApacheLuceneIndexSegmentCommitInfo;LNSString;LOrgApacheLuceneStoreIOContext;", "prepareCommitInternal", "LOrgApacheLuceneIndexMergePolicy;", "setCommitData", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "commitInternal", "flush", "ZZ", "doFlush", "maybeApplyDeletes", "ensureValidMerge", "LOrgApacheLuceneIndexMergePolicy_OneMerge;", "skipDeletedDoc", "[LOrgApacheLuceneIndexDocValuesFieldUpdates_Iterator;I", "maybeApplyMergedDVUpdates", "LOrgApacheLuceneIndexMergePolicy_OneMerge;LOrgApacheLuceneIndexMergeState;ILOrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates;[LNSString;[LOrgApacheLuceneIndexDocValuesFieldUpdates;[LOrgApacheLuceneIndexDocValuesFieldUpdates_Iterator;I", "commitMergedDeletesAndUpdates", "LOrgApacheLuceneIndexMergePolicy_OneMerge;LOrgApacheLuceneIndexMergeState;", "commitMerge", "handleMergeException", "LJavaLangThrowable;LOrgApacheLuceneIndexMergePolicy_OneMerge;", "merge", "mergeSuccess", "registerMerge", "mergeInit", "_mergeInit", "setDiagnostics", "LOrgApacheLuceneIndexSegmentInfo;LNSString;", "LOrgApacheLuceneIndexSegmentInfo;LNSString;LJavaUtilMap;", "(Lorg/apache/lucene/index/SegmentInfo;Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "mergeFinish", "closeMergeReaders", "LOrgApacheLuceneIndexMergePolicy_OneMerge;Z", "mergeMiddle", "LOrgApacheLuceneIndexMergePolicy_OneMerge;LOrgApacheLuceneIndexMergePolicy;", "addMergeException", "segString", "(Ljava/lang/Iterable<Lorg/apache/lucene/index/SegmentCommitInfo;>;)Ljava/lang/String;", "setKeepFullyDeletedSegments", "filesExist", "LOrgApacheLuceneIndexSegmentInfos;", "toLiveInfos", "startCommit", "isLocked", "LOrgApacheLuceneStoreDirectory;", (void *)&OrgApacheLuceneIndexIndexWriter__Annotations$0, "tragicEvent", "LJavaLangThrowable;LNSString;", "testPoint", "LNSString;", "nrtIsCurrent", "createCompoundFile", "LOrgApacheLuceneUtilInfoStream;LOrgApacheLuceneStoreTrackingDirectoryWrapper;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneStoreIOContext;", "deleteNewFiles", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/String;>;)V", "flushFailed", "LOrgApacheLuceneIndexSegmentInfo;", "purge", "applyDeletesAndPurge", "doAfterSegmentFlushed", "incRefDeleter", "decRefDeleter", "processEvents", "LJavaUtilQueue;ZZ", "(Ljava/util/Queue<Lorg/apache/lucene/index/IndexWriter$Event;>;ZZ)Z", "slowFileExists", "LOrgApacheLuceneStoreDirectory;LNSString;", "reserveDocs", "J", "testReserveDocs", "tooManyDocs", "addMergeRateLimiters", &OrgApacheLuceneIndexIndexWriter_actualMaxDocs, &OrgApacheLuceneIndexIndexWriter_WRITE_LOCK_NAME, &OrgApacheLuceneIndexIndexWriter_SOURCE, &OrgApacheLuceneIndexIndexWriter_SOURCE_MERGE, &OrgApacheLuceneIndexIndexWriter_SOURCE_FLUSH, &OrgApacheLuceneIndexIndexWriter_SOURCE_ADDINDEXES_READERS, "Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;", "Ljava/util/Collection<Ljava/lang/String;>;", "Ljava/util/Queue<Lorg/apache/lucene/index/IndexWriter$Event;>;", "Ljava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;", "Ljava/util/HashSet<Lorg/apache/lucene/index/SegmentCommitInfo;>;", "Ljava/util/LinkedList<Lorg/apache/lucene/index/MergePolicy$OneMerge;>;", "Ljava/util/Set<Lorg/apache/lucene/index/MergePolicy$OneMerge;>;", "Ljava/util/List<Lorg/apache/lucene/index/MergePolicy$OneMerge;>;", "Lorg/apache/lucene/util/CloseableThreadLocal<Lorg/apache/lucene/index/MergeRateLimiter;>;", "LOrgApacheLuceneIndexIndexWriter_ReaderPool;LOrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates;LOrgApacheLuceneIndexIndexWriter_IndexReaderWarmer;LOrgApacheLuceneIndexIndexWriter_Event;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter = { "IndexWriter", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 136, 54, -1, 144, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexWriter;
 }
 
@@ -2223,7 +2351,7 @@ jint OrgApacheLuceneIndexIndexWriter_getActualMaxDocs() {
 
 void OrgApacheLuceneIndexIndexWriter_ensureOpenWithBoolean_(OrgApacheLuceneIndexIndexWriter *self, jboolean failIfClosing) {
   if (JreLoadVolatileBoolean(&self->closed_) || (failIfClosing && JreLoadVolatileBoolean(&self->closing_))) {
-    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(@"this IndexWriter is closed", JreLoadVolatileId(&self->tragedy_));
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(@"this IndexWriter is closed", JreLoadVolatileId(&self->tragedy_));
   }
 }
 
@@ -2268,9 +2396,9 @@ void OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withO
     JreStrongAssign(&self->mergeScheduler_, [self->config_ getMergeScheduler]);
     [((OrgApacheLuceneIndexMergeScheduler *) nil_chk(self->mergeScheduler_)) setInfoStreamWithOrgApacheLuceneUtilInfoStream:self->infoStream_];
     JreStrongAssign(&self->codec_, [self->config_ getCodec]);
-    JreStrongAssignAndConsume(&self->bufferedUpdatesStream_, new_OrgApacheLuceneIndexBufferedUpdatesStream_initWithOrgApacheLuceneUtilInfoStream_(self->infoStream_));
+    JreStrongAssignAndConsume(&self->bufferedUpdatesStream_, new_OrgApacheLuceneIndexBufferedUpdatesStream_initPackagePrivateWithOrgApacheLuceneUtilInfoStream_(self->infoStream_));
     JreAssignVolatileBoolean(&self->poolReaders_, [self->config_ getReaderPooling]);
-    OrgApacheLuceneIndexIndexWriterConfig_OpenMode *mode = [self->config_ getOpenMode];
+    OrgApacheLuceneIndexIndexWriterConfig_OpenMode *mode = JreRetainedLocalValue([self->config_ getOpenMode]);
     jboolean create;
     if (mode == JreLoadEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE)) {
       create = true;
@@ -2283,7 +2411,7 @@ void OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withO
     }
     jboolean initialIndexExists = true;
     IOSObjectArray *files = [self->directory_ listAll];
-    OrgApacheLuceneIndexIndexCommit *commit = [self->config_ getIndexCommit];
+    OrgApacheLuceneIndexIndexCommit *commit = JreRetainedLocalValue([self->config_ getIndexCommit]);
     OrgApacheLuceneIndexStandardDirectoryReader *reader;
     if (commit == nil) {
       reader = nil;
@@ -2314,16 +2442,16 @@ void OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withO
       [self changed];
     }
     else if (reader != nil) {
-      if ([reader directory] != [((OrgApacheLuceneIndexIndexCommit *) nil_chk(commit)) getDirectory]) {
+      if (!JreObjectEqualsEquals([reader directory], [((OrgApacheLuceneIndexIndexCommit *) nil_chk(commit)) getDirectory])) {
         @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"IndexCommit's reader must have the same directory as the IndexCommit");
       }
-      if ([reader directory] != self->directoryOrig_) {
+      if (!JreObjectEqualsEquals([reader directory], self->directoryOrig_)) {
         @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"IndexCommit's reader must have the same directory passed to IndexWriter");
       }
       if ([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(reader->segmentInfos_)) getLastGeneration] == 0) {
         @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"index must already have an initial commit to open from reader");
       }
-      JreStrongAssign(&self->segmentInfos_, [reader->segmentInfos_ clone]);
+      JreStrongAssign(&self->segmentInfos_, [reader->segmentInfos_ java_clone]);
       OrgApacheLuceneIndexSegmentInfos *lastCommit;
       @try {
         lastCommit = OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(self->directoryOrig_, [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->segmentInfos_)) getSegmentsFileName]);
@@ -2332,7 +2460,7 @@ void OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withO
         @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"the provided reader is stale: its prior commit file \"", [self->segmentInfos_ getSegmentsFileName], @"\" is missing from index"));
       }
       if (reader->writer_ != nil) {
-        JreAssert((JreLoadVolatileBoolean(&reader->writer_->closed_)), (@"org/apache/lucene/index/IndexWriter.java:885 condition failed: assert reader.writer.closed;"));
+        JreAssert(JreLoadVolatileBoolean(&reader->writer_->closed_), @"org/apache/lucene/index/IndexWriter.java:889 condition failed: assert reader.writer.closed;");
         [self->segmentInfos_ updateGenerationVersionAndCounterWithOrgApacheLuceneIndexSegmentInfos:reader->writer_->segmentInfos_];
         [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(lastCommit)) updateGenerationVersionAndCounterWithOrgApacheLuceneIndexSegmentInfos:reader->writer_->segmentInfos_];
       }
@@ -2349,7 +2477,7 @@ void OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withO
       }
       JreStrongAssign(&self->segmentInfos_, OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(self->directoryOrig_, lastSegmentsFile));
       if (commit != nil) {
-        if ([commit getDirectory] != self->directoryOrig_) {
+        if (!JreObjectEqualsEquals([commit getDirectory], self->directoryOrig_)) {
           @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@", @"IndexCommit's directory doesn't match my directory, expected=", self->directoryOrig_, @", got=", [commit getDirectory]));
         }
         OrgApacheLuceneIndexSegmentInfos *oldInfos = OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(self->directoryOrig_, [commit getSegmentsFileName]);
@@ -2364,23 +2492,23 @@ void OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withO
     [self->pendingNumDocs_ setWithLong:[self->segmentInfos_ totalMaxDoc]];
     JreStrongAssign(&self->globalFieldNumberMap_, OrgApacheLuceneIndexIndexWriter_getFieldNumberMap(self));
     [((OrgApacheLuceneIndexFlushPolicy *) nil_chk([self->config_ getFlushPolicy])) init__WithOrgApacheLuceneIndexLiveIndexWriterConfig:self->config_];
-    JreStrongAssignAndConsume(&self->docWriter_, new_OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(self, self->config_, self->directoryOrig_, self->directory_));
+    JreStrongAssignAndConsume(&self->docWriter_, new_OrgApacheLuceneIndexDocumentsWriter_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(self, self->config_, self->directoryOrig_, self->directory_));
     JreStrongAssign(&self->eventQueue_, [self->docWriter_ eventQueue]);
     @synchronized(self) {
-      JreStrongAssignAndConsume(&self->deleter_, new_OrgApacheLuceneIndexIndexFileDeleter_initWithNSStringArray_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexIndexWriter_withBoolean_withBoolean_(files, self->directoryOrig_, self->directory_, [self->config_ getIndexDeletionPolicy], self->segmentInfos_, self->infoStream_, self, initialIndexExists, reader != nil));
-      JreAssert((create || OrgApacheLuceneIndexIndexWriter_filesExistWithOrgApacheLuceneIndexSegmentInfos_(self, self->segmentInfos_)), (@"org/apache/lucene/index/IndexWriter.java:954 condition failed: assert create || filesExist(segmentInfos);"));
+      JreStrongAssignAndConsume(&self->deleter_, new_OrgApacheLuceneIndexIndexFileDeleter_initPackagePrivateWithNSStringArray_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexIndexWriter_withBoolean_withBoolean_(files, self->directoryOrig_, self->directory_, [self->config_ getIndexDeletionPolicy], self->segmentInfos_, self->infoStream_, self, initialIndexExists, reader != nil));
+      JreAssert(create || OrgApacheLuceneIndexIndexWriter_filesExistWithOrgApacheLuceneIndexSegmentInfos_(self, self->segmentInfos_), @"org/apache/lucene/index/IndexWriter.java:958 condition failed: assert create || filesExist(segmentInfos);");
     }
     if (self->deleter_->startingCommitDeleted_) {
       [self changed];
     }
     if (reader != nil) {
-      id<JavaUtilList> leaves = [reader leaves];
-      JreAssert(([self->segmentInfos_ size] == [((id<JavaUtilList>) nil_chk(leaves)) size]), (@"org/apache/lucene/index/IndexWriter.java:970 condition failed: assert segmentInfos.size() == leaves.size();"));
+      id<JavaUtilList> leaves = JreRetainedLocalValue([reader leaves]);
+      JreAssert([self->segmentInfos_ size] == [((id<JavaUtilList>) nil_chk(leaves)) size], @"org/apache/lucene/index/IndexWriter.java:974 condition failed: assert segmentInfos.size() == leaves.size();");
       for (jint i = 0; i < [leaves size]; i++) {
-        OrgApacheLuceneIndexLeafReaderContext *leaf = [leaves getWithInt:i];
+        OrgApacheLuceneIndexLeafReaderContext *leaf = JreRetainedLocalValue([leaves getWithInt:i]);
         OrgApacheLuceneIndexSegmentReader *segReader = (OrgApacheLuceneIndexSegmentReader *) cast_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(leaf)) reader], [OrgApacheLuceneIndexSegmentReader class]);
         OrgApacheLuceneIndexSegmentReader *newReader = create_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_([self->segmentInfos_ infoWithInt:i], segReader, [((OrgApacheLuceneIndexSegmentReader *) nil_chk(segReader)) getLiveDocs], [segReader numDocs]);
-        [((id<JavaUtilMap>) nil_chk(self->readerPool_->readerMap_)) putWithId:[newReader getSegmentInfo] withId:create_OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_(self, newReader)];
+        [((id<JavaUtilMap>) nil_chk(self->readerPool_->readerMap_)) putWithId:[newReader getSegmentInfo] withId:create_OrgApacheLuceneIndexReadersAndUpdates_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_(self, newReader)];
       }
       [self->segmentInfos_ changed];
       [self changed];
@@ -2412,34 +2540,34 @@ OrgApacheLuceneIndexIndexWriter *create_OrgApacheLuceneIndexIndexWriter_initWith
 
 OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIndexIndexWriter_readFieldInfosWithOrgApacheLuceneIndexSegmentCommitInfo_(OrgApacheLuceneIndexSegmentCommitInfo *si) {
   OrgApacheLuceneIndexIndexWriter_initialize();
-  OrgApacheLuceneCodecsCodec *codec = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_)) getCodec];
-  OrgApacheLuceneCodecsFieldInfosFormat *reader = [((OrgApacheLuceneCodecsCodec *) nil_chk(codec)) fieldInfosFormat];
+  OrgApacheLuceneCodecsCodec *codec = JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_)) getCodec]);
+  OrgApacheLuceneCodecsFieldInfosFormat *reader = JreRetainedLocalValue([((OrgApacheLuceneCodecsCodec *) nil_chk(codec)) fieldInfosFormat]);
   if ([si hasFieldUpdates]) {
     NSString *segmentSuffix = JavaLangLong_toStringWithLong_withInt_([si getFieldInfosGen], JavaLangCharacter_MAX_RADIX);
     return [((OrgApacheLuceneCodecsFieldInfosFormat *) nil_chk(reader)) readWithOrgApacheLuceneStoreDirectory:si->info_->dir_ withOrgApacheLuceneIndexSegmentInfo:si->info_ withNSString:segmentSuffix withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE)];
   }
   else if ([si->info_ getUseCompoundFile]) {
-    {
-      OrgApacheLuceneStoreDirectory *cfs = [((OrgApacheLuceneCodecsCompoundFormat *) nil_chk([codec compoundFormat])) getCompoundReaderWithOrgApacheLuceneStoreDirectory:si->info_->dir_ withOrgApacheLuceneIndexSegmentInfo:si->info_ withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT)];
-      NSException *__primaryException1 = nil;
-      @try {
-        return [((OrgApacheLuceneCodecsFieldInfosFormat *) nil_chk(reader)) readWithOrgApacheLuceneStoreDirectory:cfs withOrgApacheLuceneIndexSegmentInfo:si->info_ withNSString:@"" withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE)];
-      }
-      @catch (NSException *e) {
-        __primaryException1 = e;
-        @throw e;
-      }
-      @finally {
-        if (cfs != nil) {
-          if (__primaryException1 != nil) {
-            @try {
-              [cfs close];
-            } @catch (NSException *e) {
-              [__primaryException1 addSuppressedWithNSException:e];
-            }
-          } else {
+    OrgApacheLuceneStoreDirectory *cfs = [((OrgApacheLuceneCodecsCompoundFormat *) nil_chk([codec compoundFormat])) getCompoundReaderWithOrgApacheLuceneStoreDirectory:si->info_->dir_ withOrgApacheLuceneIndexSegmentInfo:si->info_ withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT)];
+    JavaLangThrowable *__primaryException1 = nil;
+    @try {
+      return [((OrgApacheLuceneCodecsFieldInfosFormat *) nil_chk(reader)) readWithOrgApacheLuceneStoreDirectory:cfs withOrgApacheLuceneIndexSegmentInfo:si->info_ withNSString:@"" withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE)];
+    }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
+    @finally {
+      if (cfs != nil) {
+        if (__primaryException1 != nil) {
+          @try {
             [cfs close];
           }
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
+          [cfs close];
         }
       }
     }
@@ -2488,7 +2616,7 @@ void OrgApacheLuceneIndexIndexWriter_shutdown(OrgApacheLuceneIndexIndexWriter *s
         @try {
           OrgApacheLuceneIndexIndexWriter_rollbackInternal(self);
         }
-        @catch (NSException *t) {
+        @catch (JavaLangThrowable *t) {
         }
       }
     }
@@ -2550,8 +2678,8 @@ void OrgApacheLuceneIndexIndexWriter_maybeMergeWithOrgApacheLuceneIndexMergePoli
 jboolean OrgApacheLuceneIndexIndexWriter_updatePendingMergesWithOrgApacheLuceneIndexMergePolicy_withOrgApacheLuceneIndexMergeTrigger_withInt_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneIndexMergePolicy *mergePolicy, OrgApacheLuceneIndexMergeTrigger *trigger, jint maxNumSegments) {
   @synchronized(self) {
     OrgApacheLuceneIndexIndexWriter_messageState(self);
-    JreAssert((maxNumSegments == -1 || maxNumSegments > 0), (@"org/apache/lucene/index/IndexWriter.java:1939 condition failed: assert maxNumSegments == -1 || maxNumSegments > 0;"));
-    JreAssert((trigger != nil), (@"org/apache/lucene/index/IndexWriter.java:1940 condition failed: assert trigger != null;"));
+    JreAssert(maxNumSegments == -1 || maxNumSegments > 0, @"org/apache/lucene/index/IndexWriter.java:1943 condition failed: assert maxNumSegments == -1 || maxNumSegments > 0;");
+    JreAssert(trigger != nil, @"org/apache/lucene/index/IndexWriter.java:1944 condition failed: assert trigger != null;");
     if (self->stopMerges_) {
       return false;
     }
@@ -2561,7 +2689,7 @@ jboolean OrgApacheLuceneIndexIndexWriter_updatePendingMergesWithOrgApacheLuceneI
     jboolean newMergesFound = false;
     OrgApacheLuceneIndexMergePolicy_MergeSpecification *spec;
     if (maxNumSegments != OrgApacheLuceneIndexIndexWriter_UNBOUNDED_MAX_MERGE_SEGMENTS) {
-      JreAssert((trigger == JreLoadEnum(OrgApacheLuceneIndexMergeTrigger, EXPLICIT) || trigger == JreLoadEnum(OrgApacheLuceneIndexMergeTrigger, MERGE_FINISHED)), (JreStrcat("$$", @"Expected EXPLICT or MERGE_FINISHED as trigger even with maxNumSegments set but was: ", [((OrgApacheLuceneIndexMergeTrigger *) nil_chk(trigger)) name])));
+      JreAssert(trigger == JreLoadEnum(OrgApacheLuceneIndexMergeTrigger, EXPLICIT) || trigger == JreLoadEnum(OrgApacheLuceneIndexMergeTrigger, MERGE_FINISHED), JreStrcat("$$", @"Expected EXPLICT or MERGE_FINISHED as trigger even with maxNumSegments set but was: ", [((OrgApacheLuceneIndexMergeTrigger *) nil_chk(trigger)) name]));
       spec = [((OrgApacheLuceneIndexMergePolicy *) nil_chk(mergePolicy)) findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:self->segmentInfos_ withInt:maxNumSegments withJavaUtilMap:JavaUtilCollections_unmodifiableMapWithJavaUtilMap_(self->segmentsToMerge_) withOrgApacheLuceneIndexIndexWriter:self];
       newMergesFound = (spec != nil);
       if (newMergesFound) {
@@ -2609,7 +2737,7 @@ void OrgApacheLuceneIndexIndexWriter_rollbackInternal(OrgApacheLuceneIndexIndexW
         }
         @finally {
           JreVolatileStrongAssign(&self->pendingCommit_, nil);
-          [self notifyAll];
+          [self java_notifyAll];
         }
       }
       [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(self->readerPool_)) dropAllWithBoolean:false];
@@ -2631,7 +2759,7 @@ void OrgApacheLuceneIndexIndexWriter_rollbackInternal(OrgApacheLuceneIndexIndexW
     success = true;
   }
   @catch (JavaLangOutOfMemoryError *oom) {
-    [self tragicEventWithNSException:oom withNSString:@"rollbackInternal"];
+    [self tragicEventWithJavaLangThrowable:oom withNSString:@"rollbackInternal"];
   }
   @finally {
     if (success == false) {
@@ -2644,7 +2772,7 @@ void OrgApacheLuceneIndexIndexWriter_rollbackInternal(OrgApacheLuceneIndexIndexW
             [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(JreLoadVolatileId(&self->pendingCommit_))) rollbackCommitWithOrgApacheLuceneStoreDirectory:self->directory_];
             [((OrgApacheLuceneIndexIndexFileDeleter *) nil_chk(self->deleter_)) decRefWithOrgApacheLuceneIndexSegmentInfos:JreLoadVolatileId(&self->pendingCommit_)];
           }
-          @catch (NSException *t) {
+          @catch (JavaLangThrowable *t) {
           }
           JreVolatileStrongAssign(&self->pendingCommit_, nil);
         }
@@ -2653,7 +2781,7 @@ void OrgApacheLuceneIndexIndexWriter_rollbackInternal(OrgApacheLuceneIndexIndexW
       }
       JreAssignVolatileBoolean(&self->closed_, true);
       JreAssignVolatileBoolean(&self->closing_, false);
-      [self notifyAll];
+      [self java_notifyAll];
     }
   }
 }
@@ -2681,8 +2809,8 @@ void OrgApacheLuceneIndexIndexWriter_abortMerges(OrgApacheLuceneIndexIndexWriter
       }
       OrgApacheLuceneIndexIndexWriter_doWait(self);
     }
-    [self notifyAll];
-    JreAssert((0 == [((JavaUtilHashSet *) nil_chk(self->mergingSegments_)) size]), (@"org/apache/lucene/index/IndexWriter.java:2270 condition failed: assert 0 == mergingSegments.size();"));
+    [self java_notifyAll];
+    JreAssert(0 == [((JavaUtilHashSet *) nil_chk(self->mergingSegments_)) size], @"org/apache/lucene/index/IndexWriter.java:2274 condition failed: assert 0 == mergingSegments.size();");
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"IW"]) {
       [self->infoStream_ messageWithNSString:@"IW" withNSString:@"all running merges have aborted"];
     }
@@ -2700,7 +2828,7 @@ void OrgApacheLuceneIndexIndexWriter_noDupDirsWithOrgApacheLuceneStoreDirectoryA
   JavaUtilHashSet *dups = create_JavaUtilHashSet_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(dirs))->size_; i++) {
     if ([dups containsWithId:IOSObjectArray_Get(dirs, i)]) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$", @"Directory ", IOSObjectArray_Get(dirs, i), @" appears more than once"));
-    if (IOSObjectArray_Get(dirs, i) == self->directoryOrig_) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot add directory to itself");
+    if (JreObjectEqualsEquals(IOSObjectArray_Get(dirs, i), self->directoryOrig_)) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot add directory to itself");
     [dups addWithId:IOSObjectArray_Get(dirs, i)];
   }
 }
@@ -2710,7 +2838,7 @@ id<JavaUtilList> OrgApacheLuceneIndexIndexWriter_acquireWriteLocksWithOrgApacheL
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(dirs))->size_; i++) {
     jboolean success = false;
     @try {
-      OrgApacheLuceneStoreLock *lock = [((OrgApacheLuceneStoreDirectory *) nil_chk(IOSObjectArray_Get(dirs, i))) obtainLockWithNSString:OrgApacheLuceneIndexIndexWriter_WRITE_LOCK_NAME];
+      OrgApacheLuceneStoreLock *lock = JreRetainedLocalValue([((OrgApacheLuceneStoreDirectory *) nil_chk(IOSObjectArray_Get(dirs, i))) obtainLockWithNSString:OrgApacheLuceneIndexIndexWriter_WRITE_LOCK_NAME]);
       [locks addWithId:lock];
       success = true;
     }
@@ -2732,7 +2860,7 @@ OrgApacheLuceneIndexSegmentCommitInfo *OrgApacheLuceneIndexIndexWriter_copySegme
   @try {
     for (NSString * __strong file in nil_chk([info files])) {
       NSString *newFileName = [newInfo namedForThisSegmentWithNSString:file];
-      JreAssert((!OrgApacheLuceneIndexIndexWriter_slowFileExistsWithOrgApacheLuceneStoreDirectory_withNSString_(self->directory_, newFileName)), (JreStrcat("$$$@", @"file \"", newFileName, @"\" already exists; newInfo.files=", [newInfo files])));
+      JreAssert(!OrgApacheLuceneIndexIndexWriter_slowFileExistsWithOrgApacheLuceneStoreDirectory_withNSString_(self->directory_, newFileName), JreStrcat("$$$@", @"file \"", newFileName, @"\" already exists; newInfo.files=", [newInfo files]));
       [((OrgApacheLuceneStoreDirectory *) nil_chk(self->directory_)) copyFromWithOrgApacheLuceneStoreDirectory:info->info_->dir_ withNSString:file withNSString:newFileName withOrgApacheLuceneStoreIOContext:context];
       [copiedFiles addWithId:newFileName];
     }
@@ -2743,7 +2871,7 @@ OrgApacheLuceneIndexSegmentCommitInfo *OrgApacheLuceneIndexIndexWriter_copySegme
       OrgApacheLuceneIndexIndexWriter_deleteNewFilesWithJavaUtilCollection_(self, copiedFiles);
     }
   }
-  JreAssert(([copiedFiles isEqual:[newInfoPerCommit files]]), (@"org/apache/lucene/index/IndexWriter.java:2743 condition failed: assert copiedFiles.equals(newInfoPerCommit.files());"));
+  JreAssert([copiedFiles isEqual:[newInfoPerCommit files]], @"org/apache/lucene/index/IndexWriter.java:2747 condition failed: assert copiedFiles.equals(newInfoPerCommit.files());");
   return newInfoPerCommit;
 }
 
@@ -2756,7 +2884,7 @@ void OrgApacheLuceneIndexIndexWriter_prepareCommitInternalWithOrgApacheLuceneInd
       [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$", @"  index before flush ", [self segString])];
     }
     if (JreLoadVolatileId(&self->tragedy_) != nil) {
-      @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"this writer hit an unrecoverable error; cannot commit", JreLoadVolatileId(&self->tragedy_));
+      @throw create_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"this writer hit an unrecoverable error; cannot commit", JreLoadVolatileId(&self->tragedy_));
     }
     if (JreLoadVolatileId(&self->pendingCommit_) != nil) {
       @throw create_JavaLangIllegalStateException_initWithNSString_(@"prepareCommit was already called with no corresponding call to commit");
@@ -2783,7 +2911,7 @@ void OrgApacheLuceneIndexIndexWriter_prepareCommitInternalWithOrgApacheLuceneInd
               [self->changeCount_ incrementAndGet];
               [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->segmentInfos_)) changed];
             }
-            toCommit = [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->segmentInfos_)) clone];
+            toCommit = JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->segmentInfos_)) java_clone]);
             JreAssignVolatileLong(&self->pendingCommitChangeCount_, [self->changeCount_ get]);
             JreStrongAssign(&self->filesToCommit_, [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(toCommit)) filesWithBoolean:false]);
             [((OrgApacheLuceneIndexIndexFileDeleter *) nil_chk(self->deleter_)) incRefWithJavaUtilCollection:self->filesToCommit_];
@@ -2802,13 +2930,10 @@ void OrgApacheLuceneIndexIndexWriter_prepareCommitInternalWithOrgApacheLuceneInd
       }
     }
     @catch (OrgApacheLuceneIndexAbortingException *tragedy) {
-      [self tragicEventWithNSException:tragedy withNSString:@"prepareCommit"];
+      [self tragicEventWithJavaLangThrowable:tragedy withNSString:@"prepareCommit"];
     }
     @catch (JavaLangOutOfMemoryError *tragedy) {
-      [self tragicEventWithNSException:tragedy withNSString:@"prepareCommit"];
-    }
-    @catch (NSException *tragedy) {
-      [self tragicEventWithNSException:tragedy withNSString:@"prepareCommit"];
+      [self tragicEventWithJavaLangThrowable:tragedy withNSString:@"prepareCommit"];
     }
     jboolean success = false;
     @try {
@@ -2863,14 +2988,14 @@ void OrgApacheLuceneIndexIndexWriter_finishCommit(OrgApacheLuceneIndexIndexWrite
     @synchronized(self) {
       OrgApacheLuceneIndexIndexWriter_ensureOpenWithBoolean_(self, false);
       if (JreLoadVolatileId(&self->tragedy_) != nil) {
-        @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"this writer hit an unrecoverable error; cannot complete commit", JreLoadVolatileId(&self->tragedy_));
+        @throw create_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"this writer hit an unrecoverable error; cannot complete commit", JreLoadVolatileId(&self->tragedy_));
       }
       if (JreLoadVolatileId(&self->pendingCommit_) != nil) {
         @try {
           if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"IW"]) {
             [self->infoStream_ messageWithNSString:@"IW" withNSString:@"commit: pendingCommit != null"];
           }
-          committedSegmentsFileName = [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(JreLoadVolatileId(&self->pendingCommit_))) finishCommitWithOrgApacheLuceneStoreDirectory:self->directory_];
+          committedSegmentsFileName = JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(JreLoadVolatileId(&self->pendingCommit_))) finishCommitWithOrgApacheLuceneStoreDirectory:self->directory_]);
           commitCompleted = true;
           if ([self->infoStream_ isEnabledWithNSString:@"IW"]) {
             [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$C", @"commit: done writing segments file \"", committedSegmentsFileName, '"')];
@@ -2882,7 +3007,7 @@ void OrgApacheLuceneIndexIndexWriter_finishCommit(OrgApacheLuceneIndexIndexWrite
           finished = true;
         }
         @finally {
-          [self notifyAll];
+          [self java_notifyAll];
           @try {
             if (finished) {
               [((OrgApacheLuceneIndexIndexFileDeleter *) nil_chk(self->deleter_)) decRefWithJavaUtilCollection:self->filesToCommit_];
@@ -2898,26 +3023,26 @@ void OrgApacheLuceneIndexIndexWriter_finishCommit(OrgApacheLuceneIndexIndexWrite
         }
       }
       else {
-        JreAssert((self->filesToCommit_ == nil), (@"org/apache/lucene/index/IndexWriter.java:3045 condition failed: assert filesToCommit == null;"));
+        JreAssert(self->filesToCommit_ == nil, @"org/apache/lucene/index/IndexWriter.java:3049 condition failed: assert filesToCommit == null;");
         if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"IW"]) {
           [self->infoStream_ messageWithNSString:@"IW" withNSString:@"commit: pendingCommit == null; skip"];
         }
       }
     }
   }
-  @catch (NSException *t) {
+  @catch (JavaLangThrowable *t) {
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"IW"]) {
-      [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$", @"hit exception during finishCommit: ", [((NSException *) nil_chk(t)) getMessage])];
+      [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$", @"hit exception during finishCommit: ", [t getMessage])];
     }
     if (commitCompleted) {
-      [self tragicEventWithNSException:t withNSString:@"finishCommit"];
+      [self tragicEventWithJavaLangThrowable:t withNSString:@"finishCommit"];
     }
     else {
-      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(t);
+      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(t);
     }
   }
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"IW"]) {
-    [self->infoStream_ messageWithNSString:@"IW" withNSString:NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"commit: took %.1f msec", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_((JavaLangSystem_nanoTime() - self->startCommitTime_) / 1000000.0) } count:1 type:NSObject_class_()])];
+    [self->infoStream_ messageWithNSString:@"IW" withNSString:NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"commit: took %.1f msec", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_((JavaLangSystem_nanoTime() - self->startCommitTime_) / 1000000.0) } count:1 type:NSObject_class_()])];
     [self->infoStream_ messageWithNSString:@"IW" withNSString:@"commit: done"];
   }
 }
@@ -2931,7 +3056,7 @@ void OrgApacheLuceneIndexIndexWriter_flushWithBoolean_withBoolean_(OrgApacheLuce
 
 jboolean OrgApacheLuceneIndexIndexWriter_doFlushWithBoolean_(OrgApacheLuceneIndexIndexWriter *self, jboolean applyAllDeletes) {
   if (JreLoadVolatileId(&self->tragedy_) != nil) {
-    @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"this writer hit an unrecoverable error; cannot flush", JreLoadVolatileId(&self->tragedy_));
+    @throw create_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"this writer hit an unrecoverable error; cannot flush", JreLoadVolatileId(&self->tragedy_));
   }
   [self doBeforeFlush];
   OrgApacheLuceneIndexIndexWriter_testPointWithNSString_(self, @"startDoFlush");
@@ -2964,15 +3089,11 @@ jboolean OrgApacheLuceneIndexIndexWriter_doFlushWithBoolean_(OrgApacheLuceneInde
     }
   }
   @catch (OrgApacheLuceneIndexAbortingException *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"doFlush"];
+    [self tragicEventWithJavaLangThrowable:tragedy withNSString:@"doFlush"];
     return false;
   }
   @catch (JavaLangOutOfMemoryError *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"doFlush"];
-    return false;
-  }
-  @catch (NSException *tragedy) {
-    [self tragicEventWithNSException:tragedy withNSString:@"doFlush"];
+    [self tragicEventWithJavaLangThrowable:tragedy withNSString:@"doFlush"];
     return false;
   }
   @finally {
@@ -3048,7 +3169,7 @@ void OrgApacheLuceneIndexIndexWriter_skipDeletedDocWithOrgApacheLuceneIndexDocVa
       if ([((OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator *) nil_chk(iter)) doc] == deletedDoc) {
         [iter nextDoc];
       }
-      JreAssert(([iter doc] > deletedDoc), (JreStrcat("$I$I", @"updateDoc=", [iter doc], @" deletedDoc=", deletedDoc)));
+      JreAssert([iter doc] > deletedDoc, JreStrcat("$I$I", @"updateDoc=", [iter doc], @" deletedDoc=", deletedDoc));
     }
   }
 }
@@ -3069,7 +3190,7 @@ void OrgApacheLuceneIndexIndexWriter_maybeApplyMergedDVUpdatesWithOrgApacheLucen
       [updatesIter nextDoc];
     }
     else {
-      JreAssert(([updatesIter doc] > curDoc), (JreStrcat("$$$I$I", @"field=", IOSObjectArray_Get(mergingFields, idx), @" updateDoc=", [updatesIter doc], @" curDoc=", curDoc)));
+      JreAssert([updatesIter doc] > curDoc, JreStrcat("$$$I$I", @"field=", IOSObjectArray_Get(mergingFields, idx), @" updateDoc=", [updatesIter doc], @" curDoc=", curDoc));
     }
   }
 }
@@ -3086,12 +3207,12 @@ OrgApacheLuceneIndexReadersAndUpdates *OrgApacheLuceneIndexIndexWriter_commitMer
     OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates *holder = create_OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates_init();
     OrgApacheLuceneIndexDocValuesFieldUpdates_Container *mergedDVUpdates = create_OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init();
     for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(sourceSegments)) size]; i++) {
-      OrgApacheLuceneIndexSegmentCommitInfo *info = [sourceSegments getWithInt:i];
+      OrgApacheLuceneIndexSegmentCommitInfo *info = JreRetainedLocalValue([sourceSegments getWithInt:i]);
       minGen = JavaLangMath_minWithLong_withLong_([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info)) getBufferedDeletesGen], minGen);
       jint maxDoc = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info->info_)) maxDoc];
       id<OrgApacheLuceneUtilBits> prevLiveDocs = [((OrgApacheLuceneIndexSegmentReader *) nil_chk([((id<JavaUtilList>) nil_chk(merge->readers_)) getWithInt:i])) getLiveDocs];
       OrgApacheLuceneIndexReadersAndUpdates *rld = [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(self->readerPool_)) getWithOrgApacheLuceneIndexSegmentCommitInfo:info withBoolean:false];
-      JreAssert((rld != nil), (JreStrcat("$$", @"seg=", info->info_->name_)));
+      JreAssert(rld != nil, JreStrcat("$$", @"seg=", info->info_->name_));
       id<OrgApacheLuceneUtilBits> currentLiveDocs = [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld)) getLiveDocs];
       id<JavaUtilMap> mergingFieldUpdates = [rld getMergingFieldUpdates];
       IOSObjectArray *mergingFields;
@@ -3108,8 +3229,8 @@ OrgApacheLuceneIndexReadersAndUpdates *OrgApacheLuceneIndexIndexWriter_commitMer
         updatesIters = [IOSObjectArray arrayWithLength:[mergingFieldUpdates size] type:OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator_class_()];
         jint idx = 0;
         for (id<JavaUtilMap_Entry> __strong e in nil_chk([mergingFieldUpdates entrySet])) {
-          NSString *field = [((id<JavaUtilMap_Entry>) nil_chk(e)) getKey];
-          OrgApacheLuceneIndexDocValuesFieldUpdates *updates = [e getValue];
+          NSString *field = JreRetainedLocalValue([((id<JavaUtilMap_Entry>) nil_chk(e)) getKey]);
+          OrgApacheLuceneIndexDocValuesFieldUpdates *updates = JreRetainedLocalValue([e getValue]);
           IOSObjectArray_Set(mergingFields, idx, field);
           IOSObjectArray_Set(dvFieldUpdates, idx, [mergedDVUpdates getUpdatesWithNSString:field withOrgApacheLuceneIndexDocValuesType:((OrgApacheLuceneIndexDocValuesFieldUpdates *) nil_chk(updates))->type_]);
           if (IOSObjectArray_Get(dvFieldUpdates, idx) == nil) {
@@ -3121,13 +3242,13 @@ OrgApacheLuceneIndexReadersAndUpdates *OrgApacheLuceneIndexIndexWriter_commitMer
         }
       }
       if (prevLiveDocs != nil) {
-        JreAssert((currentLiveDocs != nil), (@"org/apache/lucene/index/IndexWriter.java:3340 condition failed: assert currentLiveDocs != null;"));
-        JreAssert(([prevLiveDocs length] == maxDoc), (@"org/apache/lucene/index/IndexWriter.java:3341 condition failed: assert prevLiveDocs.length() == maxDoc;"));
-        JreAssert(([((id<OrgApacheLuceneUtilBits>) nil_chk(currentLiveDocs)) length] == maxDoc), (@"org/apache/lucene/index/IndexWriter.java:3342 condition failed: assert currentLiveDocs.length() == maxDoc;"));
-        if (currentLiveDocs != prevLiveDocs) {
+        JreAssert(currentLiveDocs != nil, @"org/apache/lucene/index/IndexWriter.java:3344 condition failed: assert currentLiveDocs != null;");
+        JreAssert([prevLiveDocs length] == maxDoc, @"org/apache/lucene/index/IndexWriter.java:3345 condition failed: assert prevLiveDocs.length() == maxDoc;");
+        JreAssert([((id<OrgApacheLuceneUtilBits>) nil_chk(currentLiveDocs)) length] == maxDoc, @"org/apache/lucene/index/IndexWriter.java:3346 condition failed: assert currentLiveDocs.length() == maxDoc;");
+        if (!JreObjectEqualsEquals(currentLiveDocs, prevLiveDocs)) {
           for (jint j = 0; j < maxDoc; j++) {
             if (![prevLiveDocs getWithInt:j]) {
-              JreAssert((![currentLiveDocs getWithInt:j]), (@"org/apache/lucene/index/IndexWriter.java:3362 condition failed: assert !currentLiveDocs.get(j);"));
+              JreAssert(![currentLiveDocs getWithInt:j], @"org/apache/lucene/index/IndexWriter.java:3366 condition failed: assert !currentLiveDocs.get(j);");
             }
             else {
               if (![currentLiveDocs getWithInt:j]) {
@@ -3162,7 +3283,7 @@ OrgApacheLuceneIndexReadersAndUpdates *OrgApacheLuceneIndexIndexWriter_commitMer
         }
       }
       else if (currentLiveDocs != nil) {
-        JreAssert(([currentLiveDocs length] == maxDoc), (@"org/apache/lucene/index/IndexWriter.java:3395 condition failed: assert currentLiveDocs.length() == maxDoc;"));
+        JreAssert([currentLiveDocs length] == maxDoc, @"org/apache/lucene/index/IndexWriter.java:3399 condition failed: assert currentLiveDocs.length() == maxDoc;");
         for (jint j = 0; j < maxDoc; j++) {
           if (![currentLiveDocs getWithInt:j]) {
             if (holder->mergedDeletesAndUpdates_ == nil || !holder->initializedWritableLiveDocs_) {
@@ -3189,7 +3310,7 @@ OrgApacheLuceneIndexReadersAndUpdates *OrgApacheLuceneIndexIndexWriter_commitMer
         docUpto += [info->info_ maxDoc];
       }
     }
-    JreAssert((docUpto == [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_)) maxDoc]), (@"org/apache/lucene/index/IndexWriter.java:3425 condition failed: assert docUpto == merge.info.info.maxDoc();"));
+    JreAssert(docUpto == [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_)) maxDoc], @"org/apache/lucene/index/IndexWriter.java:3429 condition failed: assert docUpto == merge.info.info.maxDoc();");
     if ([mergedDVUpdates any]) {
       jboolean success = false;
       @try {
@@ -3217,7 +3338,7 @@ OrgApacheLuceneIndexReadersAndUpdates *OrgApacheLuceneIndexIndexWriter_commitMer
       }
     }
     [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_)) setBufferedDeletesGenWithLong:minGen];
-    return holder->mergedDeletesAndUpdates_;
+    return JreRetainedLocalValue(holder->mergedDeletesAndUpdates_);
   }
 }
 
@@ -3225,12 +3346,12 @@ jboolean OrgApacheLuceneIndexIndexWriter_commitMergeWithOrgApacheLuceneIndexMerg
   @synchronized(self) {
     OrgApacheLuceneIndexIndexWriter_testPointWithNSString_(self, @"startCommitMerge");
     if (JreLoadVolatileId(&self->tragedy_) != nil) {
-      @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"this writer hit an unrecoverable error; cannot complete merge", JreLoadVolatileId(&self->tragedy_));
+      @throw create_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"this writer hit an unrecoverable error; cannot complete merge", JreLoadVolatileId(&self->tragedy_));
     }
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"IW"]) {
       [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$$$", @"commitMerge: ", [self segStringWithJavaLangIterable:((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->segments_], @" index=", [self segString])];
     }
-    JreAssert((((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->registerDone_), (@"org/apache/lucene/index/IndexWriter.java:3477 condition failed: assert merge.registerDone;"));
+    JreAssert(((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->registerDone_, @"org/apache/lucene/index/IndexWriter.java:3481 condition failed: assert merge.registerDone;");
     if ([((OrgApacheLuceneIndexMergeRateLimiter *) nil_chk(merge->rateLimiter_)) getAbort]) {
       if ([self->infoStream_ isEnabledWithNSString:@"IW"]) {
         [self->infoStream_ messageWithNSString:@"IW" withNSString:@"commitMerge: skip: it was aborted"];
@@ -3240,7 +3361,7 @@ jboolean OrgApacheLuceneIndexIndexWriter_commitMergeWithOrgApacheLuceneIndexMerg
       return false;
     }
     OrgApacheLuceneIndexReadersAndUpdates *mergedUpdates = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_)) maxDoc] == 0 ? nil : OrgApacheLuceneIndexIndexWriter_commitMergedDeletesAndUpdatesWithOrgApacheLuceneIndexMergePolicy_OneMerge_withOrgApacheLuceneIndexMergeState_(self, merge, mergeState);
-    JreAssert((![((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->segmentInfos_)) containsWithOrgApacheLuceneIndexSegmentCommitInfo:merge->info_]), (@"org/apache/lucene/index/IndexWriter.java:3513 condition failed: assert !segmentInfos.contains(merge.info);"));
+    JreAssert(![((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->segmentInfos_)) containsWithOrgApacheLuceneIndexSegmentCommitInfo:merge->info_], @"org/apache/lucene/index/IndexWriter.java:3517 condition failed: assert !segmentInfos.contains(merge.info);");
     jboolean allDeleted = [((id<JavaUtilList>) nil_chk(merge->segments_)) size] == 0 || [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc] == 0 || (mergedUpdates != nil && [mergedUpdates getPendingDeleteCount] == [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc]);
     if ([self->infoStream_ isEnabledWithNSString:@"IW"]) {
       if (allDeleted) {
@@ -3248,8 +3369,8 @@ jboolean OrgApacheLuceneIndexIndexWriter_commitMergeWithOrgApacheLuceneIndexMerg
       }
     }
     jboolean dropSegment = allDeleted && !self->keepFullyDeletedSegments_;
-    JreAssert(([merge->segments_ size] > 0 || dropSegment), (@"org/apache/lucene/index/IndexWriter.java:3530 condition failed: assert merge.segments.size() > 0 || dropSegment;"));
-    JreAssert(([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc] != 0 || self->keepFullyDeletedSegments_ || dropSegment), (@"org/apache/lucene/index/IndexWriter.java:3532 condition failed: assert merge.info.info.maxDoc() != 0 || keepFullyDeletedSegments || dropSegment;"));
+    JreAssert([merge->segments_ size] > 0 || dropSegment, @"org/apache/lucene/index/IndexWriter.java:3534 condition failed: assert merge.segments.size() > 0 || dropSegment;");
+    JreAssert([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc] != 0 || self->keepFullyDeletedSegments_ || dropSegment, @"org/apache/lucene/index/IndexWriter.java:3536 condition failed: assert merge.info.info.maxDoc() != 0 || keepFullyDeletedSegments || dropSegment;");
     if (mergedUpdates != nil) {
       jboolean success = false;
       @try {
@@ -3268,10 +3389,10 @@ jboolean OrgApacheLuceneIndexIndexWriter_commitMergeWithOrgApacheLuceneIndexMerg
     }
     [self->segmentInfos_ applyMergeChangesWithOrgApacheLuceneIndexMergePolicy_OneMerge:merge withBoolean:dropSegment];
     jint delDocCount = merge->totalMaxDoc_ - [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc];
-    JreAssert((delDocCount >= 0), (@"org/apache/lucene/index/IndexWriter.java:3562 condition failed: assert delDocCount >= 0;"));
+    JreAssert(delDocCount >= 0, @"org/apache/lucene/index/IndexWriter.java:3566 condition failed: assert delDocCount >= 0;");
     [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(self->pendingNumDocs_)) addAndGetWithLong:-delDocCount];
     if (dropSegment) {
-      JreAssert((![self->segmentInfos_ containsWithOrgApacheLuceneIndexSegmentCommitInfo:merge->info_]), (@"org/apache/lucene/index/IndexWriter.java:3566 condition failed: assert !segmentInfos.contains(merge.info);"));
+      JreAssert(![self->segmentInfos_ containsWithOrgApacheLuceneIndexSegmentCommitInfo:merge->info_], @"org/apache/lucene/index/IndexWriter.java:3570 condition failed: assert !segmentInfos.contains(merge.info);");
       [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(self->readerPool_)) dropWithOrgApacheLuceneIndexSegmentCommitInfo:merge->info_];
       OrgApacheLuceneIndexIndexWriter_deleteNewFilesWithJavaUtilCollection_(self, [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_)) files]);
     }
@@ -3288,7 +3409,7 @@ jboolean OrgApacheLuceneIndexIndexWriter_commitMergeWithOrgApacheLuceneIndexMerg
         @try {
           [self checkpoint];
         }
-        @catch (NSException *t) {
+        @catch (JavaLangThrowable *t) {
         }
       }
     }
@@ -3305,19 +3426,19 @@ jboolean OrgApacheLuceneIndexIndexWriter_commitMergeWithOrgApacheLuceneIndexMerg
   }
 }
 
-void OrgApacheLuceneIndexIndexWriter_handleMergeExceptionWithNSException_withOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexIndexWriter *self, NSException *t, OrgApacheLuceneIndexMergePolicy_OneMerge *merge) {
+void OrgApacheLuceneIndexIndexWriter_handleMergeExceptionWithJavaLangThrowable_withOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexIndexWriter *self, JavaLangThrowable *t, OrgApacheLuceneIndexMergePolicy_OneMerge *merge) {
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"IW"]) {
     [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$$@", @"handleMergeException: merge=", [self segStringWithJavaLangIterable:((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->segments_], @" exc=", t)];
   }
-  [((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge)) setExceptionWithNSException:t];
+  [((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge)) setExceptionWithJavaLangThrowable:t];
   [self addMergeExceptionWithOrgApacheLuceneIndexMergePolicy_OneMerge:merge];
   if ([t isKindOfClass:[OrgApacheLuceneIndexMergePolicy_MergeAbortedException class]]) {
     if (merge->isExternal_) {
-      @throw (OrgApacheLuceneIndexMergePolicy_MergeAbortedException *) cast_chk(t, [OrgApacheLuceneIndexMergePolicy_MergeAbortedException class]);
+      @throw nil_chk((OrgApacheLuceneIndexMergePolicy_MergeAbortedException *) t);
     }
   }
   else {
-    OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(t);
+    OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(t);
   }
 }
 
@@ -3326,7 +3447,7 @@ jboolean OrgApacheLuceneIndexIndexWriter_registerMergeWithOrgApacheLuceneIndexMe
     if (((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->registerDone_) {
       return true;
     }
-    JreAssert(([((id<JavaUtilList>) nil_chk(merge->segments_)) size] > 0), (@"org/apache/lucene/index/IndexWriter.java:3718 condition failed: assert merge.segments.size() > 0;"));
+    JreAssert([((id<JavaUtilList>) nil_chk(merge->segments_)) size] > 0, @"org/apache/lucene/index/IndexWriter.java:3722 condition failed: assert merge.segments.size() > 0;");
     if (self->stopMerges_) {
       [((OrgApacheLuceneIndexMergeRateLimiter *) nil_chk(merge->rateLimiter_)) setAbort];
       @throw create_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_initWithNSString_(JreStrcat("$$", @"merge is aborted: ", [self segStringWithJavaLangIterable:merge->segments_]));
@@ -3345,7 +3466,7 @@ jboolean OrgApacheLuceneIndexIndexWriter_registerMergeWithOrgApacheLuceneIndexMe
         }
         return false;
       }
-      if (((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->dir_ != self->directoryOrig_) {
+      if (!JreObjectEqualsEquals(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->dir_, self->directoryOrig_)) {
         isExternal = true;
       }
       if ([((id<JavaUtilMap>) nil_chk(self->segmentsToMerge_)) containsKeyWithId:info]) {
@@ -3375,12 +3496,12 @@ jboolean OrgApacheLuceneIndexIndexWriter_registerMergeWithOrgApacheLuceneIndexMe
       }
       [((JavaUtilHashSet *) nil_chk(self->mergingSegments_)) addWithId:info];
     }
-    JreAssert((JreLoadVolatileLong(&merge->estimatedMergeBytes_) == 0), (@"org/apache/lucene/index/IndexWriter.java:3781 condition failed: assert merge.estimatedMergeBytes == 0;"));
-    JreAssert((JreLoadVolatileLong(&merge->totalMergeBytes_) == 0), (@"org/apache/lucene/index/IndexWriter.java:3782 condition failed: assert merge.totalMergeBytes == 0;"));
+    JreAssert(JreLoadVolatileLong(&merge->estimatedMergeBytes_) == 0, @"org/apache/lucene/index/IndexWriter.java:3785 condition failed: assert merge.estimatedMergeBytes == 0;");
+    JreAssert(JreLoadVolatileLong(&merge->totalMergeBytes_) == 0, @"org/apache/lucene/index/IndexWriter.java:3786 condition failed: assert merge.totalMergeBytes == 0;");
     for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in merge->segments_) {
       if ([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_)) maxDoc] > 0) {
         jint delCount = [self numDeletedDocsWithOrgApacheLuceneIndexSegmentCommitInfo:info];
-        JreAssert((delCount <= [info->info_ maxDoc]), (@"org/apache/lucene/index/IndexWriter.java:3786 condition failed: assert delCount <= info.info.maxDoc();"));
+        JreAssert(delCount <= [info->info_ maxDoc], @"org/apache/lucene/index/IndexWriter.java:3790 condition failed: assert delCount <= info.info.maxDoc();");
         jdouble delRatio = ((jdouble) delCount) / [info->info_ maxDoc];
         JrePlusAssignVolatileLongD(&merge->estimatedMergeBytes_, [info sizeInBytes] * (1.0 - delRatio));
         JrePlusAssignVolatileLongJ(&merge->totalMergeBytes_, [info sizeInBytes]);
@@ -3412,10 +3533,10 @@ void OrgApacheLuceneIndexIndexWriter_mergeInitWithOrgApacheLuceneIndexMergePolic
 void OrgApacheLuceneIndexIndexWriter__mergeInitWithOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneIndexMergePolicy_OneMerge *merge) {
   @synchronized(self) {
     OrgApacheLuceneIndexIndexWriter_testPointWithNSString_(self, @"startMergeInit");
-    JreAssert((((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->registerDone_), (@"org/apache/lucene/index/IndexWriter.java:3820 condition failed: assert merge.registerDone;"));
-    JreAssert((merge->maxNumSegments_ == -1 || merge->maxNumSegments_ > 0), (@"org/apache/lucene/index/IndexWriter.java:3821 condition failed: assert merge.maxNumSegments == -1 || merge.maxNumSegments > 0;"));
+    JreAssert(((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->registerDone_, @"org/apache/lucene/index/IndexWriter.java:3824 condition failed: assert merge.registerDone;");
+    JreAssert(merge->maxNumSegments_ == -1 || merge->maxNumSegments_ > 0, @"org/apache/lucene/index/IndexWriter.java:3825 condition failed: assert merge.maxNumSegments == -1 || merge.maxNumSegments > 0;");
     if (JreLoadVolatileId(&self->tragedy_) != nil) {
-      @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"this writer hit an unrecoverable error; cannot merge", JreLoadVolatileId(&self->tragedy_));
+      @throw create_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"this writer hit an unrecoverable error; cannot merge", JreLoadVolatileId(&self->tragedy_));
     }
     if (merge->info_ != nil) {
       return;
@@ -3485,7 +3606,7 @@ void OrgApacheLuceneIndexIndexWriter_setDiagnosticsWithOrgApacheLuceneIndexSegme
 
 void OrgApacheLuceneIndexIndexWriter_mergeFinishWithOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneIndexMergePolicy_OneMerge *merge) {
   @synchronized(self) {
-    [self notifyAll];
+    [self java_notifyAll];
     if (((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->registerDone_) {
       id<JavaUtilList> sourceSegments = merge->segments_;
       for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in nil_chk(sourceSegments)) {
@@ -3500,14 +3621,14 @@ void OrgApacheLuceneIndexIndexWriter_mergeFinishWithOrgApacheLuceneIndexMergePol
 void OrgApacheLuceneIndexIndexWriter_closeMergeReadersWithOrgApacheLuceneIndexMergePolicy_OneMerge_withBoolean_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneIndexMergePolicy_OneMerge *merge, jboolean suppressExceptions) {
   @synchronized(self) {
     jint numSegments = [((id<JavaUtilList>) nil_chk(((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->readers_)) size];
-    NSException *th = nil;
+    JavaLangThrowable *th = nil;
     jboolean drop = !suppressExceptions;
     for (jint i = 0; i < numSegments; i++) {
       OrgApacheLuceneIndexSegmentReader *sr = [((id<JavaUtilList>) nil_chk(merge->readers_)) getWithInt:i];
       if (sr != nil) {
         @try {
           OrgApacheLuceneIndexReadersAndUpdates *rld = [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(self->readerPool_)) getWithOrgApacheLuceneIndexSegmentCommitInfo:[sr getSegmentInfo] withBoolean:false];
-          JreAssert((rld != nil), (@"org/apache/lucene/index/IndexWriter.java:3946 condition failed: assert rld != null;"));
+          JreAssert(rld != nil, @"org/apache/lucene/index/IndexWriter.java:3950 condition failed: assert rld != null;");
           if (drop) {
             [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld)) dropChanges];
           }
@@ -3520,7 +3641,7 @@ void OrgApacheLuceneIndexIndexWriter_closeMergeReadersWithOrgApacheLuceneIndexMe
             [self->readerPool_ dropWithOrgApacheLuceneIndexSegmentCommitInfo:rld->info_];
           }
         }
-        @catch (NSException *t) {
+        @catch (JavaLangThrowable *t) {
           if (th == nil) {
             th = t;
           }
@@ -3531,20 +3652,20 @@ void OrgApacheLuceneIndexIndexWriter_closeMergeReadersWithOrgApacheLuceneIndexMe
     @try {
       [merge mergeFinished];
     }
-    @catch (NSException *t) {
+    @catch (JavaLangThrowable *t) {
       if (th == nil) {
         th = t;
       }
     }
     if (!suppressExceptions) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(th);
+      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(th);
     }
   }
 }
 
 jint OrgApacheLuceneIndexIndexWriter_mergeMiddleWithOrgApacheLuceneIndexMergePolicy_OneMerge_withOrgApacheLuceneIndexMergePolicy_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneIndexMergePolicy_OneMerge *merge, OrgApacheLuceneIndexMergePolicy *mergePolicy) {
   [((OrgApacheLuceneIndexMergeRateLimiter *) nil_chk(((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->rateLimiter_)) checkAbort];
-  id<JavaUtilList> sourceSegments = merge->segments_;
+  id<JavaUtilList> sourceSegments = JreRetainedLocalValue(merge->segments_);
   OrgApacheLuceneStoreIOContext *context = create_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreMergeInfo_([merge getStoreMergeInfo]);
   OrgApacheLuceneStoreTrackingDirectoryWrapper *dirWrapper = create_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(self->mergeDirectory_);
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"IW"]) {
@@ -3561,11 +3682,11 @@ jint OrgApacheLuceneIndexIndexWriter_mergeMiddleWithOrgApacheLuceneIndexMergePol
       id<OrgApacheLuceneUtilBits> liveDocs;
       jint delCount;
       @synchronized(self) {
-        reader = [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld)) getReaderForMergeWithOrgApacheLuceneStoreIOContext:context];
-        liveDocs = [rld getReadOnlyLiveDocs];
+        reader = JreRetainedLocalValue([((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld)) getReaderForMergeWithOrgApacheLuceneStoreIOContext:context]);
+        liveDocs = JreRetainedLocalValue([rld getReadOnlyLiveDocs]);
         delCount = [rld getPendingDeleteCount] + [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info)) getDelCount];
-        JreAssert((reader != nil), (@"org/apache/lucene/index/IndexWriter.java:4024 condition failed: assert reader != null;"));
-        JreAssert(([rld verifyDocCounts]), (@"org/apache/lucene/index/IndexWriter.java:4025 condition failed: assert rld.verifyDocCounts();"));
+        JreAssert(reader != nil, @"org/apache/lucene/index/IndexWriter.java:4028 condition failed: assert reader != null;");
+        JreAssert([rld verifyDocCounts], @"org/apache/lucene/index/IndexWriter.java:4029 condition failed: assert rld.verifyDocCounts();");
         if ([self->infoStream_ isEnabledWithNSString:@"IW"]) {
           if ([rld getPendingDeleteCount] != 0) {
             [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$$I$I", @"seg=", [self segStringWithOrgApacheLuceneIndexSegmentCommitInfo:info], @" delCount=", [info getDelCount], @" pendingDelCount=", [rld getPendingDeleteCount])];
@@ -3579,7 +3700,7 @@ jint OrgApacheLuceneIndexIndexWriter_mergeMiddleWithOrgApacheLuceneIndexMergePol
         }
       }
       if ([((OrgApacheLuceneIndexSegmentReader *) nil_chk(reader)) numDeletedDocs] != delCount) {
-        JreAssert((delCount > [reader numDeletedDocs]), (@"org/apache/lucene/index/IndexWriter.java:4044 condition failed: assert delCount > reader.numDeletedDocs();"));
+        JreAssert(delCount > [reader numDeletedDocs], @"org/apache/lucene/index/IndexWriter.java:4048 condition failed: assert delCount > reader.numDeletedDocs();");
         OrgApacheLuceneIndexSegmentReader *newReader;
         @synchronized(self) {
           newReader = create_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_(info, reader, liveDocs, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info->info_)) maxDoc] - delCount);
@@ -3597,10 +3718,10 @@ jint OrgApacheLuceneIndexIndexWriter_mergeMiddleWithOrgApacheLuceneIndexMergePol
         reader = newReader;
       }
       [((id<JavaUtilList>) nil_chk(merge->readers_)) addWithId:reader];
-      JreAssert((delCount <= [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info->info_)) maxDoc]), (JreStrcat("$I$I$I$I", @"delCount=", delCount, @" info.maxDoc=", [info->info_ maxDoc], @" rld.pendingDeleteCount=", [rld getPendingDeleteCount], @" info.getDelCount()=", [info getDelCount])));
+      JreAssert(delCount <= [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info->info_)) maxDoc], JreStrcat("$I$I$I$I", @"delCount=", delCount, @" info.maxDoc=", [info->info_ maxDoc], @" rld.pendingDeleteCount=", [rld getPendingDeleteCount], @" info.getDelCount()=", [info getDelCount]));
       segUpto++;
     }
-    OrgApacheLuceneIndexSegmentMerger *merger = create_OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_([merge getMergeReaders], ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_, self->infoStream_, dirWrapper, self->globalFieldNumberMap_, context);
+    OrgApacheLuceneIndexSegmentMerger *merger = create_OrgApacheLuceneIndexSegmentMerger_initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_([merge getMergeReaders], ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_, self->infoStream_, dirWrapper, self->globalFieldNumberMap_, context);
     [merge->rateLimiter_ checkAbort];
     JreAssignVolatileLong(&merge->mergeStartNS_, JavaLangSystem_nanoTime());
     jboolean success3 = false;
@@ -3617,8 +3738,8 @@ jint OrgApacheLuceneIndexIndexWriter_mergeMiddleWithOrgApacheLuceneIndexMergePol
         }
       }
     }
-    OrgApacheLuceneIndexMergeState *mergeState = merger->mergeState_;
-    JreAssert((((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState))->segmentInfo_ == ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_), (@"org/apache/lucene/index/IndexWriter.java:4100 condition failed: assert mergeState.segmentInfo == merge.info.info;"));
+    OrgApacheLuceneIndexMergeState *mergeState = JreRetainedLocalValue(merger->mergeState_);
+    JreAssert(JreObjectEqualsEquals(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState))->segmentInfo_, ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_), @"org/apache/lucene/index/IndexWriter.java:4104 condition failed: assert mergeState.segmentInfo == merge.info.info;");
     [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(merge->info_->info_)) setFilesWithJavaUtilCollection:create_JavaUtilHashSet_initWithJavaUtilCollection_([dirWrapper getCreatedFiles])];
     if ([self->infoStream_ isEnabledWithNSString:@"IW"]) {
       if ([merger shouldMerge]) {
@@ -3627,31 +3748,31 @@ jint OrgApacheLuceneIndexIndexWriter_mergeMiddleWithOrgApacheLuceneIndexMergePol
         jdouble segmentMB = ([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_)) sizeInBytes] / 1024. / 1024.);
         jdouble stoppedSec = [merge->rateLimiter_ getTotalStoppedNS] / 1000000000.;
         jdouble throttleSec = [merge->rateLimiter_ getTotalPausedNS] / 1000000000.;
-        [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$@$I$$$$$$$$$$$$", @"merge codec=", self->codec_, @" maxDoc=", [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc], @"; merged segment has ", ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) hasVectors] ? @"vectors" : @"no vectors"), @"; ", ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) hasNorms] ? @"norms" : @"no norms"), @"; ", ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) hasDocValues] ? @"docValues" : @"no docValues"), @"; ", ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) hasProx] ? @"prox" : @"no prox"), @"; ", ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) hasProx] ? @"freqs" : @"no freqs"), @"; ", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.1f sec (%.1f sec stopped, %.1f sec paused) to merge segment [%.2f MB, %.2f MB/sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(sec), JavaLangDouble_valueOfWithDouble_(stoppedSec), JavaLangDouble_valueOfWithDouble_(throttleSec), JavaLangDouble_valueOfWithDouble_(segmentMB), JavaLangDouble_valueOfWithDouble_(segmentMB / sec) } count:5 type:NSObject_class_()]))];
+        [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$@$I$$$$$$$$$$$$", @"merge codec=", self->codec_, @" maxDoc=", [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc], @"; merged segment has ", ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) hasVectors] ? @"vectors" : @"no vectors"), @"; ", ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) hasNorms] ? @"norms" : @"no norms"), @"; ", ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) hasDocValues] ? @"docValues" : @"no docValues"), @"; ", ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) hasProx] ? @"prox" : @"no prox"), @"; ", ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) hasProx] ? @"freqs" : @"no freqs"), @"; ", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.1f sec (%.1f sec stopped, %.1f sec paused) to merge segment [%.2f MB, %.2f MB/sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(sec), JavaLangDouble_valueOfWithDouble_(stoppedSec), JavaLangDouble_valueOfWithDouble_(throttleSec), JavaLangDouble_valueOfWithDouble_(segmentMB), JavaLangDouble_valueOfWithDouble_(segmentMB / sec) } count:5 type:NSObject_class_()]))];
       }
       else {
         [self->infoStream_ messageWithNSString:@"IW" withNSString:@"skip merging fully deleted segments"];
       }
     }
     if ([merger shouldMerge] == false) {
-      JreAssert(([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc] == 0), (@"org/apache/lucene/index/IndexWriter.java:4130 condition failed: assert merge.info.info.maxDoc() == 0;"));
+      JreAssert([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc] == 0, @"org/apache/lucene/index/IndexWriter.java:4134 condition failed: assert merge.info.info.maxDoc() == 0;");
       OrgApacheLuceneIndexIndexWriter_commitMergeWithOrgApacheLuceneIndexMergePolicy_OneMerge_withOrgApacheLuceneIndexMergeState_(self, merge, mergeState);
       return 0;
     }
-    JreAssert(([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc] > 0), (@"org/apache/lucene/index/IndexWriter.java:4135 condition failed: assert merge.info.info.maxDoc() > 0;"));
+    JreAssert([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_ maxDoc] > 0, @"org/apache/lucene/index/IndexWriter.java:4139 condition failed: assert merge.info.info.maxDoc() > 0;");
     jboolean useCompoundFile;
     @synchronized(self) {
       useCompoundFile = [((OrgApacheLuceneIndexMergePolicy *) nil_chk(mergePolicy)) useCompoundFileWithOrgApacheLuceneIndexSegmentInfos:self->segmentInfos_ withOrgApacheLuceneIndexSegmentCommitInfo:merge->info_ withOrgApacheLuceneIndexIndexWriter:self];
     }
     if (useCompoundFile) {
       success = false;
-      id<JavaUtilCollection> filesToRemove = [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_)) files];
+      id<JavaUtilCollection> filesToRemove = JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_)) files]);
       OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingCFSDir = create_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(self->mergeDirectory_);
       @try {
         OrgApacheLuceneIndexIndexWriter_createCompoundFileWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreTrackingDirectoryWrapper_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(self, self->infoStream_, trackingCFSDir, ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_, context);
         success = true;
       }
-      @catch (NSException *t) {
+      @catch (JavaLangThrowable *t) {
         @synchronized(self) {
           if ([merge->rateLimiter_ getAbort]) {
             if ([self->infoStream_ isEnabledWithNSString:@"IW"]) {
@@ -3660,7 +3781,7 @@ jint OrgApacheLuceneIndexIndexWriter_mergeMiddleWithOrgApacheLuceneIndexMergePol
             return 0;
           }
           else {
-            OrgApacheLuceneIndexIndexWriter_handleMergeExceptionWithNSException_withOrgApacheLuceneIndexMergePolicy_OneMerge_(self, t, merge);
+            OrgApacheLuceneIndexIndexWriter_handleMergeExceptionWithJavaLangThrowable_withOrgApacheLuceneIndexMergePolicy_OneMerge_(self, t, merge);
           }
         }
       }
@@ -3699,7 +3820,7 @@ jint OrgApacheLuceneIndexIndexWriter_mergeMiddleWithOrgApacheLuceneIndexMergePol
       }
     }
     if ([self->infoStream_ isEnabledWithNSString:@"IW"]) {
-      [self->infoStream_ messageWithNSString:@"IW" withNSString:NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"merged segment size=%.3f MB vs estimate=%.3f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_)) sizeInBytes] / 1024. / 1024.), JavaLangDouble_valueOfWithDouble_(JreLoadVolatileLong(&merge->estimatedMergeBytes_) / 1024 / 1024.) } count:2 type:NSObject_class_()])];
+      [self->infoStream_ messageWithNSString:@"IW" withNSString:NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"merged segment size=%.3f MB vs estimate=%.3f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_)) sizeInBytes] / 1024. / 1024.), JavaLangDouble_valueOfWithDouble_(JreLoadVolatileLong(&merge->estimatedMergeBytes_) / 1024 / 1024.) } count:2 type:NSObject_class_()])];
     }
     OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer *mergedSegmentWarmer = [((OrgApacheLuceneIndexLiveIndexWriterConfig *) nil_chk(self->config_)) getMergedSegmentWarmer];
     if (JreLoadVolatileBoolean(&self->poolReaders_) && mergedSegmentWarmer != nil) {
@@ -3731,7 +3852,7 @@ jint OrgApacheLuceneIndexIndexWriter_mergeMiddleWithOrgApacheLuceneIndexMergePol
 void OrgApacheLuceneIndexIndexWriter_doWait(OrgApacheLuceneIndexIndexWriter *self) {
   @synchronized(self) {
     @try {
-      [self waitWithLong:1000];
+      [self java_waitWithLong:1000];
     }
     @catch (JavaLangInterruptedException *ie) {
       @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie);
@@ -3740,19 +3861,19 @@ void OrgApacheLuceneIndexIndexWriter_doWait(OrgApacheLuceneIndexIndexWriter *sel
 }
 
 jboolean OrgApacheLuceneIndexIndexWriter_filesExistWithOrgApacheLuceneIndexSegmentInfos_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneIndexSegmentInfos *toSync) {
-  id<JavaUtilCollection> files = [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(toSync)) filesWithBoolean:false];
+  id<JavaUtilCollection> files = JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(toSync)) filesWithBoolean:false]);
   for (NSString * __strong fileName in nil_chk(files)) {
-    JreAssert((OrgApacheLuceneIndexIndexWriter_slowFileExistsWithOrgApacheLuceneStoreDirectory_withNSString_(self->directory_, fileName)), (JreStrcat("$$$$", @"file ", fileName, @" does not exist; files=", JavaUtilArrays_toStringWithNSObjectArray_([((OrgApacheLuceneStoreDirectory *) nil_chk(self->directory_)) listAll]))));
-    JreAssert(([((OrgApacheLuceneIndexIndexFileDeleter *) nil_chk(self->deleter_)) existsWithNSString:fileName]), (JreStrcat("$$", @"IndexFileDeleter doesn't know about file ", fileName)));
+    JreAssert(OrgApacheLuceneIndexIndexWriter_slowFileExistsWithOrgApacheLuceneStoreDirectory_withNSString_(self->directory_, fileName), JreStrcat("$$$$", @"file ", fileName, @" does not exist; files=", JavaUtilArrays_toStringWithNSObjectArray_([((OrgApacheLuceneStoreDirectory *) nil_chk(self->directory_)) listAll])));
+    JreAssert([((OrgApacheLuceneIndexIndexFileDeleter *) nil_chk(self->deleter_)) existsWithNSString:fileName], JreStrcat("$$", @"IndexFileDeleter doesn't know about file ", fileName));
   }
   return true;
 }
 
 void OrgApacheLuceneIndexIndexWriter_startCommitWithOrgApacheLuceneIndexSegmentInfos_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneIndexSegmentInfos *toSync) {
   OrgApacheLuceneIndexIndexWriter_testPointWithNSString_(self, @"startStartCommit");
-  JreAssert((JreLoadVolatileId(&self->pendingCommit_) == nil), (@"org/apache/lucene/index/IndexWriter.java:4385 condition failed: assert pendingCommit == null;"));
+  JreAssert(JreLoadVolatileId(&self->pendingCommit_) == nil, @"org/apache/lucene/index/IndexWriter.java:4389 condition failed: assert pendingCommit == null;");
   if (JreLoadVolatileId(&self->tragedy_) != nil) {
-    @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"this writer hit an unrecoverable error; cannot commit", JreLoadVolatileId(&self->tragedy_));
+    @throw create_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"this writer hit an unrecoverable error; cannot commit", JreLoadVolatileId(&self->tragedy_));
   }
   @try {
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"IW"]) {
@@ -3777,15 +3898,15 @@ void OrgApacheLuceneIndexIndexWriter_startCommitWithOrgApacheLuceneIndexSegmentI
       if ([self->infoStream_ isEnabledWithNSString:@"IW"]) {
         [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$$@", @"startCommit index=", [self segStringWithJavaLangIterable:[self toLiveInfosWithOrgApacheLuceneIndexSegmentInfos:toSync]], @" changeCount=", self->changeCount_)];
       }
-      JreAssert((OrgApacheLuceneIndexIndexWriter_filesExistWithOrgApacheLuceneIndexSegmentInfos_(self, toSync)), (@"org/apache/lucene/index/IndexWriter.java:4419 condition failed: assert filesExist(toSync);"));
+      JreAssert(OrgApacheLuceneIndexIndexWriter_filesExistWithOrgApacheLuceneIndexSegmentInfos_(self, toSync), @"org/apache/lucene/index/IndexWriter.java:4423 condition failed: assert filesExist(toSync);");
     }
     OrgApacheLuceneIndexIndexWriter_testPointWithNSString_(self, @"midStartCommit");
     jboolean pendingCommitSet = false;
     @try {
       OrgApacheLuceneIndexIndexWriter_testPointWithNSString_(self, @"midStartCommit2");
       @synchronized(self) {
-        JreAssert((JreLoadVolatileId(&self->pendingCommit_) == nil), (@"org/apache/lucene/index/IndexWriter.java:4432 condition failed: assert pendingCommit == null;"));
-        JreAssert(([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->segmentInfos_)) getGeneration] == [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(toSync)) getGeneration]), (@"org/apache/lucene/index/IndexWriter.java:4434 condition failed: assert segmentInfos.getGeneration() == toSync.getGeneration();"));
+        JreAssert(JreLoadVolatileId(&self->pendingCommit_) == nil, @"org/apache/lucene/index/IndexWriter.java:4436 condition failed: assert pendingCommit == null;");
+        JreAssert([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->segmentInfos_)) getGeneration] == [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(toSync)) getGeneration], @"org/apache/lucene/index/IndexWriter.java:4438 condition failed: assert segmentInfos.getGeneration() == toSync.getGeneration();");
         [toSync prepareCommitWithOrgApacheLuceneStoreDirectory:self->directory_];
         if ([self->infoStream_ isEnabledWithNSString:@"IW"]) {
           [self->infoStream_ messageWithNSString:@"IW" withNSString:JreStrcat("$$C", @"startCommit: wrote pending segments file \"", OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_PENDING_SEGMENTS, @"", [toSync getGeneration]), '"')];
@@ -3826,7 +3947,7 @@ void OrgApacheLuceneIndexIndexWriter_startCommitWithOrgApacheLuceneIndexSegmentI
     }
   }
   @catch (JavaLangOutOfMemoryError *oom) {
-    [self tragicEventWithNSException:oom withNSString:@"startCommit"];
+    [self tragicEventWithJavaLangThrowable:oom withNSString:@"startCommit"];
   }
   OrgApacheLuceneIndexIndexWriter_testPointWithNSString_(self, @"finishStartCommit");
 }
@@ -3844,8 +3965,14 @@ jboolean OrgApacheLuceneIndexIndexWriter_isLockedWithOrgApacheLuceneStoreDirecto
 
 void OrgApacheLuceneIndexIndexWriter_testPointWithNSString_(OrgApacheLuceneIndexIndexWriter *self, NSString *message) {
   if (self->enableTestPoints_) {
-    JreAssert(([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"TP"]), (@"org/apache/lucene/index/IndexWriter.java:4605 condition failed: assert infoStream.isEnabled(\"TP\");"));
+    JreAssert([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"TP"], @"org/apache/lucene/index/IndexWriter.java:4609 condition failed: assert infoStream.isEnabled(\"TP\");");
     [self->infoStream_ messageWithNSString:@"TP" withNSString:message];
+  }
+}
+
+void OrgApacheLuceneIndexIndexWriter_deletePendingFiles(OrgApacheLuceneIndexIndexWriter *self) {
+  @synchronized(self) {
+    [((OrgApacheLuceneIndexIndexFileDeleter *) nil_chk(self->deleter_)) deletePendingFiles];
   }
 }
 
@@ -3907,13 +4034,10 @@ jboolean OrgApacheLuceneIndexIndexWriter_slowFileExistsWithOrgApacheLuceneStoreD
   @catch (JavaIoFileNotFoundException *e) {
     return false;
   }
-  @catch (JavaIoIOException *e) {
-    return false;
-  }
 }
 
 void OrgApacheLuceneIndexIndexWriter_reserveDocsWithLong_(OrgApacheLuceneIndexIndexWriter *self, jlong addedNumDocs) {
-  JreAssert((addedNumDocs >= 0), (@"org/apache/lucene/index/IndexWriter.java:4804 condition failed: assert addedNumDocs >= 0;"));
+  JreAssert(addedNumDocs >= 0, @"org/apache/lucene/index/IndexWriter.java:4808 condition failed: assert addedNumDocs >= 0;");
   if ([((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(self->pendingNumDocs_)) addAndGetWithLong:addedNumDocs] > OrgApacheLuceneIndexIndexWriter_actualMaxDocs) {
     [self->pendingNumDocs_ addAndGetWithLong:-addedNumDocs];
     OrgApacheLuceneIndexIndexWriter_tooManyDocsWithLong_(self, addedNumDocs);
@@ -3921,30 +4045,39 @@ void OrgApacheLuceneIndexIndexWriter_reserveDocsWithLong_(OrgApacheLuceneIndexIn
 }
 
 void OrgApacheLuceneIndexIndexWriter_testReserveDocsWithLong_(OrgApacheLuceneIndexIndexWriter *self, jlong addedNumDocs) {
-  JreAssert((addedNumDocs >= 0), (@"org/apache/lucene/index/IndexWriter.java:4816 condition failed: assert addedNumDocs >= 0;"));
+  JreAssert(addedNumDocs >= 0, @"org/apache/lucene/index/IndexWriter.java:4820 condition failed: assert addedNumDocs >= 0;");
   if ([((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(self->pendingNumDocs_)) get] + addedNumDocs > OrgApacheLuceneIndexIndexWriter_actualMaxDocs) {
     OrgApacheLuceneIndexIndexWriter_tooManyDocsWithLong_(self, addedNumDocs);
   }
 }
 
 void OrgApacheLuceneIndexIndexWriter_tooManyDocsWithLong_(OrgApacheLuceneIndexIndexWriter *self, jlong addedNumDocs) {
-  JreAssert((addedNumDocs >= 0), (@"org/apache/lucene/index/IndexWriter.java:4823 condition failed: assert addedNumDocs >= 0;"));
+  JreAssert(addedNumDocs >= 0, @"org/apache/lucene/index/IndexWriter.java:4827 condition failed: assert addedNumDocs >= 0;");
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$J$JC", @"number of documents in the index cannot exceed ", OrgApacheLuceneIndexIndexWriter_actualMaxDocs, @" (current document count is ", [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(self->pendingNumDocs_)) get], @"; added numDocs is ", addedNumDocs, ')'));
 }
 
 OrgApacheLuceneStoreDirectory *OrgApacheLuceneIndexIndexWriter_addMergeRateLimitersWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneStoreDirectory *inArg) {
-  return create_OrgApacheLuceneIndexIndexWriter_$1_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(self, inArg);
+  return create_OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(self, inArg);
+}
+
+IOSObjectArray *OrgApacheLuceneIndexIndexWriter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter)
 
 @implementation OrgApacheLuceneIndexIndexWriter_ReaderPool
 
+- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)outer$ {
+  OrgApacheLuceneIndexIndexWriter_ReaderPool_initWithOrgApacheLuceneIndexIndexWriter_(self, outer$);
+  return self;
+}
+
 - (jboolean)infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info {
   @synchronized(self) {
     jint idx = [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(this$0_->segmentInfos_)) indexOfWithOrgApacheLuceneIndexSegmentCommitInfo:info];
-    JreAssert((idx != -1), (JreStrcat("$@$", @"info=", info, @" isn't live")));
-    JreAssert(([this$0_->segmentInfos_ infoWithInt:idx] == info), (JreStrcat("$@$", @"info=", info, @" doesn't match live info in segmentInfos")));
+    JreAssert(idx != -1, JreStrcat("$@$", @"info=", info, @" isn't live"));
+    JreAssert(JreObjectEqualsEquals([this$0_->segmentInfos_ infoWithInt:idx], info), JreStrcat("$@$", @"info=", info, @" doesn't match live info in segmentInfos"));
     return true;
   }
 }
@@ -3953,7 +4086,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter)
   @synchronized(self) {
     OrgApacheLuceneIndexReadersAndUpdates *rld = [((id<JavaUtilMap>) nil_chk(readerMap_)) getWithId:info];
     if (rld != nil) {
-      JreAssert((info == rld->info_), (@"org/apache/lucene/index/IndexWriter.java:505 condition failed: assert info == rld.info;"));
+      JreAssert(JreObjectEqualsEquals(info, rld->info_), @"org/apache/lucene/index/IndexWriter.java:509 condition failed: assert info == rld.info;");
       [readerMap_ removeWithId:info];
       [rld dropReaders];
     }
@@ -3981,10 +4114,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter)
                                                withBoolean:(jboolean)assertInfoLive {
   @synchronized(self) {
     [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld)) decRef];
-    JreAssert(([rld refCount] >= 1), (@"org/apache/lucene/index/IndexWriter.java:532 condition failed: assert rld.refCount() >= 1;"));
+    JreAssert([rld refCount] >= 1, @"org/apache/lucene/index/IndexWriter.java:536 condition failed: assert rld.refCount() >= 1;");
     if (!JreLoadVolatileBoolean(&this$0_->poolReaders_) && [rld refCount] == 1) {
       if ([rld writeLiveDocsWithOrgApacheLuceneStoreDirectory:this$0_->directory_]) {
-        JreAssert((assertInfoLive == false || [self infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:rld->info_]), (@"org/apache/lucene/index/IndexWriter.java:540 condition failed: assert assertInfoLive == false || infoIsLive(rld.info);"));
+        JreAssert(assertInfoLive == false || [self infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:rld->info_], @"org/apache/lucene/index/IndexWriter.java:544 condition failed: assert assertInfoLive == false || infoIsLive(rld.info);");
         [this$0_ checkpointNoSIS];
       }
       [rld dropReaders];
@@ -3999,19 +4132,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter)
 
 - (void)dropAllWithBoolean:(jboolean)doSave {
   @synchronized(self) {
-    NSException *priorE = nil;
+    JavaLangThrowable *priorE = nil;
     id<JavaUtilIterator> it = [((id<JavaUtilSet>) nil_chk([((id<JavaUtilMap>) nil_chk(readerMap_)) entrySet])) iterator];
     while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
       OrgApacheLuceneIndexReadersAndUpdates *rld = [((id<JavaUtilMap_Entry>) nil_chk([it next])) getValue];
       @try {
         if (doSave && [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld)) writeLiveDocsWithOrgApacheLuceneStoreDirectory:this$0_->directory_]) {
-          JreAssert(([self infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld))->info_]), (@"org/apache/lucene/index/IndexWriter.java:574 condition failed: assert infoIsLive(rld.info);"));
+          JreAssert([self infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld))->info_], @"org/apache/lucene/index/IndexWriter.java:578 condition failed: assert infoIsLive(rld.info);");
           [this$0_ checkpointNoSIS];
         }
       }
-      @catch (NSException *t) {
+      @catch (JavaLangThrowable *t) {
         if (doSave) {
-          OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(t);
+          OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(t);
         }
         else if (priorE == nil) {
           priorE = t;
@@ -4021,17 +4154,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter)
       @try {
         [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld)) dropReaders];
       }
-      @catch (NSException *t) {
+      @catch (JavaLangThrowable *t) {
         if (doSave) {
-          OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(t);
+          OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(t);
         }
         else if (priorE == nil) {
           priorE = t;
         }
       }
     }
-    JreAssert(([readerMap_ size] == 0), (@"org/apache/lucene/index/IndexWriter.java:612 condition failed: assert readerMap.size() == 0;"));
-    OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(priorE);
+    JreAssert([readerMap_ size] == 0, @"org/apache/lucene/index/IndexWriter.java:616 condition failed: assert readerMap.size() == 0;");
+    OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(priorE);
   }
 }
 
@@ -4040,9 +4173,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter)
     for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in nil_chk(infos)) {
       OrgApacheLuceneIndexReadersAndUpdates *rld = [((id<JavaUtilMap>) nil_chk(readerMap_)) getWithId:info];
       if (rld != nil) {
-        JreAssert((rld->info_ == info), (@"org/apache/lucene/index/IndexWriter.java:626 condition failed: assert rld.info == info;"));
+        JreAssert(JreObjectEqualsEquals(rld->info_, info), @"org/apache/lucene/index/IndexWriter.java:630 condition failed: assert rld.info == info;");
         if ([rld writeLiveDocsWithOrgApacheLuceneStoreDirectory:this$0_->directory_]) {
-          JreAssert(([self infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:info]), (@"org/apache/lucene/index/IndexWriter.java:629 condition failed: assert infoIsLive(info);"));
+          JreAssert([self infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:info], @"org/apache/lucene/index/IndexWriter.java:633 condition failed: assert infoIsLive(info);");
           [this$0_ checkpointNoSIS];
         }
       }
@@ -4054,23 +4187,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter)
                                                                             withBoolean:(jboolean)create {
   @synchronized(self) {
     OrgApacheLuceneIndexIndexWriter_ensureOpenWithBoolean_(this$0_, false);
-    JreAssert((((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->dir_ == this$0_->directoryOrig_), (JreStrcat("$@$@", @"info.dir=", info->info_->dir_, @" vs ", this$0_->directoryOrig_)));
-    OrgApacheLuceneIndexReadersAndUpdates *rld = [((id<JavaUtilMap>) nil_chk(readerMap_)) getWithId:info];
+    JreAssert(JreObjectEqualsEquals(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->dir_, this$0_->directoryOrig_), JreStrcat("$@$@", @"info.dir=", info->info_->dir_, @" vs ", this$0_->directoryOrig_));
+    OrgApacheLuceneIndexReadersAndUpdates *rld = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(readerMap_)) getWithId:info]);
     if (rld == nil) {
       if (!create) {
-        return nil;
+        return JreRetainedLocalValue(nil);
       }
-      rld = create_OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentCommitInfo_(this$0_, info);
+      rld = create_OrgApacheLuceneIndexReadersAndUpdates_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentCommitInfo_(this$0_, info);
       [readerMap_ putWithId:info withId:rld];
     }
     else {
-      JreAssert((rld->info_ == info), (JreStrcat("$@$@$Z$Z", @"rld.info=", rld->info_, @" info=", info, @" isLive?=", [self infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:rld->info_], @" vs ", [self infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:info])));
+      JreAssert(JreObjectEqualsEquals(rld->info_, info), JreStrcat("$@$@$Z$Z", @"rld.info=", rld->info_, @" info=", info, @" isLive?=", [self infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:rld->info_], @" vs ", [self infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:info]));
     }
     if (create) {
       [rld incRef];
     }
-    JreAssert((OrgApacheLuceneIndexIndexWriter_ReaderPool_noDups(self)), (@"org/apache/lucene/index/IndexWriter.java:673 condition failed: assert noDups();"));
-    return rld;
+    JreAssert(OrgApacheLuceneIndexIndexWriter_ReaderPool_noDups(self), @"org/apache/lucene/index/IndexWriter.java:677 condition failed: assert noDups();");
+    return JreRetainedLocalValue(rld);
   }
 }
 
@@ -4078,52 +4211,58 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter)
   return OrgApacheLuceneIndexIndexWriter_ReaderPool_noDups(self);
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)outer$ {
-  OrgApacheLuceneIndexIndexWriter_ReaderPool_initWithOrgApacheLuceneIndexIndexWriter_(self, outer$);
-  return self;
+- (void)__javaClone:(OrgApacheLuceneIndexIndexWriter_ReaderPool *)original {
+  [super __javaClone:original];
+  [this$0_ release];
 }
 
 - (void)dealloc {
-  RELEASE_(this$0_);
   RELEASE_(readerMap_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:", "infoIsLive", "Z", 0x21, NULL, NULL },
-    { "dropWithOrgApacheLuceneIndexSegmentCommitInfo:", "drop", "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "anyPendingDeletes", NULL, "Z", 0x21, NULL, NULL },
-    { "release__WithOrgApacheLuceneIndexReadersAndUpdates:", "release", "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "release__WithOrgApacheLuceneIndexReadersAndUpdates:withBoolean:", "release", "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "dropAllWithBoolean:", "dropAll", "V", 0x20, "Ljava.io.IOException;", NULL },
-    { "commitWithOrgApacheLuceneIndexSegmentInfos:", "commit", "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "getWithOrgApacheLuceneIndexSegmentCommitInfo:withBoolean:", "get", "Lorg.apache.lucene.index.ReadersAndUpdates;", 0x21, NULL, NULL },
-    { "noDups", NULL, "Z", 0x2, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexIndexWriter:", "ReaderPool", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x21, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x21, 3, 2, 4, -1, -1, -1 },
+    { NULL, "Z", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x21, 5, 6, 4, -1, -1, -1 },
+    { NULL, "V", 0x21, 5, 7, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x20, 8, 9, 4, -1, -1, -1 },
+    { NULL, "V", 0x21, 10, 11, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexReadersAndUpdates;", 0x21, 12, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexWriter:);
+  methods[1].selector = @selector(infoIsLiveWithOrgApacheLuceneIndexSegmentCommitInfo:);
+  methods[2].selector = @selector(dropWithOrgApacheLuceneIndexSegmentCommitInfo:);
+  methods[3].selector = @selector(anyPendingDeletes);
+  methods[4].selector = @selector(release__WithOrgApacheLuceneIndexReadersAndUpdates:);
+  methods[5].selector = @selector(release__WithOrgApacheLuceneIndexReadersAndUpdates:withBoolean:);
+  methods[6].selector = @selector(close);
+  methods[7].selector = @selector(dropAllWithBoolean:);
+  methods[8].selector = @selector(commitWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[9].selector = @selector(getWithOrgApacheLuceneIndexSegmentCommitInfo:withBoolean:);
+  methods[10].selector = @selector(noDups);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.IndexWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "readerMap_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Lorg/apache/lucene/index/ReadersAndUpdates;>;", .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexIndexWriter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "readerMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 14, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter_ReaderPool = { 2, "ReaderPool", "org.apache.lucene.index", "IndexWriter", 0x0, 11, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexWriter;", "infoIsLive", "LOrgApacheLuceneIndexSegmentCommitInfo;", "drop", "LJavaIoIOException;", "release", "LOrgApacheLuceneIndexReadersAndUpdates;", "LOrgApacheLuceneIndexReadersAndUpdates;Z", "dropAll", "Z", "commit", "LOrgApacheLuceneIndexSegmentInfos;", "get", "LOrgApacheLuceneIndexSegmentCommitInfo;Z", "Ljava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Lorg/apache/lucene/index/ReadersAndUpdates;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter_ReaderPool = { "ReaderPool", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 11, 2, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexWriter_ReaderPool;
 }
 
 @end
 
-jboolean OrgApacheLuceneIndexIndexWriter_ReaderPool_noDups(OrgApacheLuceneIndexIndexWriter_ReaderPool *self) {
-  id<JavaUtilSet> seen = create_JavaUtilHashSet_init();
-  for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in nil_chk([((id<JavaUtilMap>) nil_chk(self->readerMap_)) keySet])) {
-    JreAssert((![seen containsWithId:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->name_]), (@"org/apache/lucene/index/IndexWriter.java:683 condition failed: assert !seen.contains(info.info.name);"));
-    [seen addWithId:info->info_->name_];
-  }
-  return true;
-}
-
 void OrgApacheLuceneIndexIndexWriter_ReaderPool_initWithOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexIndexWriter_ReaderPool *self, OrgApacheLuceneIndexIndexWriter *outer$) {
-  JreStrongAssign(&self->this$0_, outer$);
+  self->this$0_ = outer$;
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->readerMap_, new_JavaUtilHashMap_init());
 }
@@ -4134,6 +4273,15 @@ OrgApacheLuceneIndexIndexWriter_ReaderPool *new_OrgApacheLuceneIndexIndexWriter_
 
 OrgApacheLuceneIndexIndexWriter_ReaderPool *create_OrgApacheLuceneIndexIndexWriter_ReaderPool_initWithOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexIndexWriter *outer$) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexWriter_ReaderPool, initWithOrgApacheLuceneIndexIndexWriter_, outer$)
+}
+
+jboolean OrgApacheLuceneIndexIndexWriter_ReaderPool_noDups(OrgApacheLuceneIndexIndexWriter_ReaderPool *self) {
+  id<JavaUtilSet> seen = create_JavaUtilHashSet_init();
+  for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in nil_chk([((id<JavaUtilMap>) nil_chk(self->readerMap_)) keySet])) {
+    JreAssert(![seen containsWithId:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->name_], @"org/apache/lucene/index/IndexWriter.java:687 condition failed: assert !seen.contains(info.info.name);");
+    [seen addWithId:info->info_->name_];
+  }
+  return true;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter_ReaderPool)
@@ -4161,16 +4309,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "MergedDeletesAndUpdates", NULL, 0x0, NULL, NULL },
-    { "init__WithOrgApacheLuceneIndexIndexWriter_ReaderPool:withOrgApacheLuceneIndexMergePolicy_OneMerge:withOrgApacheLuceneIndexMergeState:withBoolean:", "init", "V", 0x10, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x10, 0, 1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(init__WithOrgApacheLuceneIndexIndexWriter_ReaderPool:withOrgApacheLuceneIndexMergePolicy_OneMerge:withOrgApacheLuceneIndexMergeState:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "mergedDeletesAndUpdates_", NULL, 0x0, "Lorg.apache.lucene.index.ReadersAndUpdates;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docMap_", NULL, 0x0, "Lorg.apache.lucene.index.MergePolicy$DocMap;", NULL, NULL, .constantValue.asLong = 0 },
-    { "initializedWritableLiveDocs_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "mergedDeletesAndUpdates_", "LOrgApacheLuceneIndexReadersAndUpdates;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "docMap_", "LOrgApacheLuceneIndexMergePolicy_DocMap;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "initializedWritableLiveDocs_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates = { 2, "MergedDeletesAndUpdates", "org.apache.lucene.index", "IndexWriter", 0xa, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "init", "LOrgApacheLuceneIndexIndexWriter_ReaderPool;LOrgApacheLuceneIndexMergePolicy_OneMerge;LOrgApacheLuceneIndexMergeState;Z", "LJavaIoIOException;", "LOrgApacheLuceneIndexIndexWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates = { "MergedDeletesAndUpdates", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 2, 3, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates;
 }
 
@@ -4195,7 +4350,7 @@ void OrgApacheLuceneIndexIndexWriter_MergedDeletesAndUpdates_init__WithOrgApache
   if (self->mergedDeletesAndUpdates_ == nil) {
     JreStrongAssign(&self->mergedDeletesAndUpdates_, [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(readerPool)) getWithOrgApacheLuceneIndexSegmentCommitInfo:((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->info_ withBoolean:true]);
     JreStrongAssign(&self->docMap_, [merge getDocMapWithOrgApacheLuceneIndexMergeState:mergeState]);
-    JreAssert(([((OrgApacheLuceneIndexMergePolicy_DocMap *) nil_chk(self->docMap_)) isConsistentWithInt:[((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_)) maxDoc]]), (@"org/apache/lucene/index/IndexWriter.java:3238 condition failed: assert docMap.isConsistent(merge.info.info.maxDoc());"));
+    JreAssert([((OrgApacheLuceneIndexMergePolicy_DocMap *) nil_chk(self->docMap_)) isConsistentWithInt:[((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(merge->info_))->info_)) maxDoc]], @"org/apache/lucene/index/IndexWriter.java:3242 condition failed: assert docMap.isConsistent(merge.info.info.maxDoc());");
   }
   if (initWritableLiveDocs && !self->initializedWritableLiveDocs_) {
     [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(self->mergedDeletesAndUpdates_)) initWritableLiveDocs];
@@ -4220,11 +4375,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "IndexReaderWarmer", NULL, 0x4, NULL, NULL },
-    { "warmWithOrgApacheLuceneIndexLeafReader:", "warm", "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer = { 2, "IndexReaderWarmer", "org.apache.lucene.index", "IndexWriter", 0x409, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(warmWithOrgApacheLuceneIndexLeafReader:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "warm", "LOrgApacheLuceneIndexLeafReader;", "LJavaIoIOException;", "LOrgApacheLuceneIndexIndexWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer = { "IndexReaderWarmer", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x409, 2, 0, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer;
 }
 
@@ -4239,10 +4401,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter_IndexReaderWarm
 @implementation OrgApacheLuceneIndexIndexWriter_Event
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:", "process", "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter_Event = { 2, "Event", "org.apache.lucene.index", "IndexWriter", 0x608, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "process", "LOrgApacheLuceneIndexIndexWriter;ZZ", "LJavaIoIOException;", "LOrgApacheLuceneIndexIndexWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter_Event = { "Event", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x608, 1, 0, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexWriter_Event;
 }
 
@@ -4250,55 +4418,61 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter_IndexReaderWarm
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter_Event)
 
-@implementation OrgApacheLuceneIndexIndexWriter_$1
+@implementation OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory
+
+- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)outer$
+                      withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg {
+  OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(self, outer$, inArg);
+  return self;
+}
 
 - (OrgApacheLuceneStoreIndexOutput *)createOutputWithNSString:(NSString *)name
                             withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   [self ensureOpen];
   OrgApacheLuceneIndexIndexWriter_ensureOpenWithBoolean_(this$0_, false);
-  JreAssert((((OrgApacheLuceneStoreIOContext *) nil_chk(context))->context_ == JreLoadEnum(OrgApacheLuceneStoreIOContext_Context, MERGE)), (JreStrcat("$@", @"got context=", context->context_)));
-  OrgApacheLuceneIndexMergeRateLimiter *rateLimiter = [((OrgApacheLuceneUtilCloseableThreadLocal *) nil_chk(this$0_->rateLimiters_)) get];
-  JreAssert((rateLimiter != nil), (@"org/apache/lucene/index/IndexWriter.java:4844 condition failed: assert rateLimiter != null;"));
+  JreAssert(((OrgApacheLuceneStoreIOContext *) nil_chk(context))->context_ == JreLoadEnum(OrgApacheLuceneStoreIOContext_Context, MERGE), JreStrcat("$@", @"got context=", context->context_));
+  OrgApacheLuceneIndexMergeRateLimiter *rateLimiter = JreRetainedLocalValue([((OrgApacheLuceneUtilCloseableThreadLocal *) nil_chk(this$0_->rateLimiters_)) get]);
+  JreAssert(rateLimiter != nil, @"org/apache/lucene/index/IndexWriter.java:4853 condition failed: assert rateLimiter != null;");
   return create_OrgApacheLuceneStoreRateLimitedIndexOutput_initWithOrgApacheLuceneStoreRateLimiter_withOrgApacheLuceneStoreIndexOutput_(rateLimiter, [((OrgApacheLuceneStoreDirectory *) nil_chk(in_)) createOutputWithNSString:name withOrgApacheLuceneStoreIOContext:context]);
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)outer$
-                      withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg$0 {
-  OrgApacheLuceneIndexIndexWriter_$1_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(self, outer$, arg$0);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(this$0_);
-  [super dealloc];
+- (void)__javaClone:(OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory *)original {
+  [super __javaClone:original];
+  [this$0_ release];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneStoreDirectory:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexOutput;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneStoreDirectory:);
+  methods[1].selector = @selector(createOutputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.IndexWriter;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexIndexWriter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexIndexWriter", "addMergeRateLimitersWithOrgApacheLuceneStoreDirectory:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter_$1 = { 2, "", "org.apache.lucene.index", "IndexWriter", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexIndexWriter_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexWriter;LOrgApacheLuceneStoreDirectory;", "createOutput", "LNSString;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "LOrgApacheLuceneIndexIndexWriter;", "addMergeRateLimitersWithOrgApacheLuceneStoreDirectory:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory = { "InnerFilterDirectory", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 2, 1, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory;
 }
 
 @end
 
-void OrgApacheLuceneIndexIndexWriter_$1_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter_$1 *self, OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *arg$0) {
-  JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneStoreFilterDirectory_initWithOrgApacheLuceneStoreDirectory_(self, arg$0);
+void OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory *self, OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *inArg) {
+  self->this$0_ = outer$;
+  OrgApacheLuceneStoreFilterDirectory_initWithOrgApacheLuceneStoreDirectory_(self, inArg);
 }
 
-OrgApacheLuceneIndexIndexWriter_$1 *new_OrgApacheLuceneIndexIndexWriter_$1_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexWriter_$1, initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_, outer$, arg$0)
+OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory *new_OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory, initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_, outer$, inArg)
 }
 
-OrgApacheLuceneIndexIndexWriter_$1 *create_OrgApacheLuceneIndexIndexWriter_$1_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexWriter_$1, initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_, outer$, arg$0)
+OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory *create_OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *outer$, OrgApacheLuceneStoreDirectory *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory, initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneStoreDirectory_, outer$, inArg)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter_$1)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriter_1InnerFilterDirectory)

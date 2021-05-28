@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter))
 #define OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_
 
@@ -24,12 +30,12 @@
 
 /*!
  @brief A <code>TokenFilter</code> that applies <code>NorwegianMinimalStemmer</code> to stem Norwegian
- words.
+  words.
  <p>
- To prevent terms from being stemmed use an instance of
+  To prevent terms from being stemmed use an instance of 
  <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
- the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
- </p>
+  the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+  </p>
  */
 @interface OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -38,15 +44,15 @@
 /*!
  @brief Calls <code>NorwegianMinimalStemFilter(input, BOKMAAL)</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 /*!
  @brief Creates a new NorwegianLightStemFilter
- @param flags set to <code>NorwegianLightStemmer.BOKMAAL</code>, 
- <code>NorwegianLightStemmer.NYNORSK</code>, or both.
+ @param flags set to <code>NorwegianLightStemmer.BOKMAAL</code> , 
+                       <code>NorwegianLightStemmer.NYNORSK</code> , or both.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)flags;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                             withInt:(jint)flags;
 
 - (jboolean)incrementToken;
 
@@ -70,4 +76,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter")

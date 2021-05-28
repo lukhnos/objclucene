@@ -3,16 +3,13 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/function/valuesource/IDFValueSource.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/queries/function/FunctionValues.h"
-#include "org/apache/lucene/queries/function/valuesource/DocFreqValueSource.h"  // fixed by translate.py
 #include "org/apache/lucene/queries/function/valuesource/DocFreqValueSource.h"
 #include "org/apache/lucene/queries/function/valuesource/IDFValueSource.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
@@ -20,6 +17,10 @@
 #include "org/apache/lucene/search/similarities/Similarity.h"
 #include "org/apache/lucene/search/similarities/TFIDFSimilarity.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/IDFValueSource must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource
 
@@ -44,7 +45,7 @@
   }
   jint docfreq = [((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher getIndexReader])) docFreqWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(indexedField_, indexedBytes_)];
   jfloat idf = [sim idfWithLong:docfreq withLong:[((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher getIndexReader])) maxDoc]];
-  return create_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(idf, self);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(idf, self);
 }
 
 + (OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)asTFIDFWithOrgApacheLuceneSearchSimilaritiesSimilarity:(OrgApacheLuceneSearchSimilaritiesSimilarity *)sim
@@ -53,13 +54,22 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:withNSString:withOrgApacheLuceneUtilBytesRef:", "IDFValueSource", NULL, 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "asTFIDFWithOrgApacheLuceneSearchSimilaritiesSimilarity:withNSString:", "asTFIDF", "Lorg.apache.lucene.search.similarities.TFIDFSimilarity;", 0x8, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;", 0x8, 4, 5, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource = { 2, "IDFValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:withNSString:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(asTFIDFWithOrgApacheLuceneSearchSimilaritiesSimilarity:withNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;LNSString;LNSString;LOrgApacheLuceneUtilBytesRef;", "getValues", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "asTFIDF", "LOrgApacheLuceneSearchSimilaritiesSimilarity;LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource = { "IDFValueSource", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource;
 }
 
@@ -83,7 +93,7 @@ OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneQueriesFunction
     sim = [((OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper *) nil_chk(((OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper *) cast_chk(sim, [OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper class])))) getWithNSString:field];
   }
   if ([sim isKindOfClass:[OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity class]]) {
-    return (OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *) cast_chk(sim, [OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity class]);
+    return (OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *) sim;
   }
   else {
     return nil;

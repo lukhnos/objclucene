@@ -3,14 +3,16 @@
 //  source: ./core/src/java/org/apache/lucene/index/SerialMergeScheduler.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/IndexWriter.h"
 #include "org/apache/lucene/index/MergePolicy.h"
 #include "org/apache/lucene/index/MergeScheduler.h"
 #include "org/apache/lucene/index/MergeTrigger.h"
 #include "org/apache/lucene/index/SerialMergeScheduler.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SerialMergeScheduler must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneIndexSerialMergeScheduler
 
@@ -26,7 +28,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                      withBoolean:(jboolean)newMergesFound {
   @synchronized(self) {
     while (true) {
-      OrgApacheLuceneIndexMergePolicy_OneMerge *merge = [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) getNextMerge];
+      OrgApacheLuceneIndexMergePolicy_OneMerge *merge = JreRetainedLocalValue([((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) getNextMerge]);
       if (merge == nil) break;
       [writer mergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:merge];
     }
@@ -37,12 +39,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SerialMergeScheduler", NULL, 0x1, NULL, NULL },
-    { "mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTrigger:withBoolean:", "merge", "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x21, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSerialMergeScheduler = { 2, "SerialMergeScheduler", "org.apache.lucene.index", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTrigger:withBoolean:);
+  methods[2].selector = @selector(close);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "merge", "LOrgApacheLuceneIndexIndexWriter;LOrgApacheLuceneIndexMergeTrigger;Z", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSerialMergeScheduler = { "SerialMergeScheduler", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSerialMergeScheduler;
 }
 

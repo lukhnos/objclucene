@@ -7,12 +7,12 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/RuntimeException.h"
+#include "java/lang/Throwable.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/tokenattributes/TermToBytesRefAttribute.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/queryparser/xml/DOMUtils.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/builders/TermsQueryBuilder.h"
 #include "org/apache/lucene/search/BooleanClause.h"
 #include "org/apache/lucene/search/BooleanQuery.h"
@@ -20,6 +20,10 @@
 #include "org/apache/lucene/search/TermQuery.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/w3c/dom/Element.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/TermsQueryBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder () {
  @public
@@ -45,9 +49,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder, anal
   [bq setMinimumNumberShouldMatchWithInt:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withInt_(e, @"minimumNumberShouldMatch", 0)];
   @try {
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:fieldName withNSString:text];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
+      id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = JreRetainedLocalValue([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()]);
       OrgApacheLuceneIndexTerm *term = nil;
       [ts reset];
       while ([ts incrementToken]) {
@@ -56,7 +60,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder, anal
       }
       [ts end];
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -65,10 +69,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder, anal
         if (__primaryException1 != nil) {
           @try {
             [ts close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [ts close];
         }
       }
@@ -77,7 +83,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder, anal
   @catch (JavaIoIOException *ioe) {
     @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@", @"Error constructing terms from index:", ioe));
   }
-  OrgApacheLuceneSearchQuery *q = [bq build];
+  OrgApacheLuceneSearchQuery *q = JreRetainedLocalValue([bq build]);
   [((OrgApacheLuceneSearchQuery *) nil_chk(q)) setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
   return q;
 }
@@ -88,14 +94,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder, anal
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:", "TermsQueryBuilder", NULL, 0x1, NULL, NULL },
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:);
+  methods[1].selector = @selector(getQueryWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "analyzer_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "analyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder = { 2, "TermsQueryBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;", "getQuery", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder = { "TermsQueryBuilder", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x1, 2, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy || defined(INCLUDE_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy))
 #define OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_
 
@@ -27,91 +33,87 @@
 
 /*!
  @brief A <code>SnapshotDeletionPolicy</code> which adds a persistence layer so that
- snapshots can be maintained across the life of an application.
- The snapshots
- are persisted in a <code>Directory</code> and are committed as soon as
+  snapshots can be maintained across the life of an application.The snapshots
+  are persisted in a <code>Directory</code> and are committed as soon as 
  <code>snapshot()</code> or <code>release(IndexCommit)</code> is called.
  <p>
- <b>NOTE:</b> Sharing <code>PersistentSnapshotDeletionPolicy</code>s that write to
- the same directory across <code>IndexWriter</code>s will corrupt snapshots. You
- should make sure every <code>IndexWriter</code> has its own
+  <b>NOTE:</b> Sharing <code>PersistentSnapshotDeletionPolicy</code>s that write to
+  the same directory across <code>IndexWriter</code>s will corrupt snapshots. You
+  should make sure every <code>IndexWriter</code> has its own 
  <code>PersistentSnapshotDeletionPolicy</code> and that they all write to a
- different <code>Directory</code>.  It is OK to use the same
- Directory that holds the index.
+  different <code>Directory</code>.  It is OK to use the same
+  Directory that holds the index. 
  <p> This class adds a <code>release(long)</code> method to
- release commits from a previous snapshot's <code>IndexCommit.getGeneration</code>.
+  release commits from a previous snapshot's <code>IndexCommit.getGeneration</code>.
  */
 @interface OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy : OrgApacheLuceneIndexSnapshotDeletionPolicy
-
-+ (NSString *)SNAPSHOTS_PREFIX;
+@property (readonly, copy, class) NSString *SNAPSHOTS_PREFIX NS_SWIFT_NAME(SNAPSHOTS_PREFIX);
 
 #pragma mark Public
 
 /*!
- @brief <code>PersistentSnapshotDeletionPolicy</code> wraps another
+ @brief <code>PersistentSnapshotDeletionPolicy</code> wraps another 
  <code>IndexDeletionPolicy</code> to enable flexible
- snapshotting, passing <code>OpenMode.CREATE_OR_APPEND</code>
- by default.
- @param primary
- the <code>IndexDeletionPolicy</code> that is used on non-snapshotted
- commits. Snapshotted commits, by definition, are not deleted until
- explicitly released via <code>release</code>.
- @param dir
- the <code>Directory</code> which will be used to persist the snapshots
- information.
+  snapshotting, passing <code>OpenMode.CREATE_OR_APPEND</code>
+  by default.
+ @param primary the 
+ <code>IndexDeletionPolicy</code>  that is used on non-snapshotted           commits. Snapshotted commits, by definition, are not deleted until
+            explicitly released via 
+ <code>release</code> .
+ @param dir the 
+ <code>Directory</code>  which will be used to persist the snapshots           information.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary
-                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary
+                                        withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
- @brief <code>PersistentSnapshotDeletionPolicy</code> wraps another
+ @brief <code>PersistentSnapshotDeletionPolicy</code> wraps another 
  <code>IndexDeletionPolicy</code> to enable flexible snapshotting.
- @param primary
- the <code>IndexDeletionPolicy</code> that is used on non-snapshotted
- commits. Snapshotted commits, by definition, are not deleted until
- explicitly released via <code>release</code>.
- @param dir
- the <code>Directory</code> which will be used to persist the snapshots
- information.
- @param mode
- specifies whether a new index should be created, deleting all
- existing snapshots information (immediately), or open an existing
- index, initializing the class with the snapshots information.
+ @param primary the 
+ <code>IndexDeletionPolicy</code>  that is used on non-snapshotted           commits. Snapshotted commits, by definition, are not deleted until
+            explicitly released via 
+ <code>release</code> .
+ @param dir the 
+ <code>Directory</code>  which will be used to persist the snapshots           information.
+ @param mode specifies whether a new index should be created, deleting all
+            existing snapshots information (immediately), or open an existing
+            index, initializing the class with the snapshots information.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary
-                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-             withOrgApacheLuceneIndexIndexWriterConfig_OpenMode:(OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)mode;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary
+                                        withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                       withOrgApacheLuceneIndexIndexWriterConfig_OpenMode:(OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)mode;
 
 /*!
  @brief Returns the file name the snapshots are currently
- saved to, or null if no snapshots have been saved.
+   saved to, or null if no snapshots have been saved.
  */
 - (NSString *)getLastSaveFile;
 
 /*!
- @brief Deletes a snapshotted commit.
- Once this method returns, the snapshot
- information is persisted in the directory.
+ @brief Deletes a snapshotted commit.Once this method returns, the snapshot
+  information is persisted in the directory.
  - seealso: SnapshotDeletionPolicy#release
  */
 - (void)release__WithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
 
 /*!
- @brief Deletes a snapshotted commit by generation.
- Once this method returns, the snapshot
- information is persisted in the directory.
+ @brief Deletes a snapshotted commit by generation.Once this method returns, the snapshot
+  information is persisted in the directory.
  - seealso: IndexCommit#getGeneration
  - seealso: SnapshotDeletionPolicy#release
  */
 - (void)release__WithLong:(jlong)gen;
 
 /*!
- @brief Snapshots the last commit.
- Once this method returns, the
- snapshot information is persisted in the directory.
+ @brief Snapshots the last commit.Once this method returns, the
+  snapshot information is persisted in the directory.
  - seealso: SnapshotDeletionPolicy#snapshot
  */
 - (OrgApacheLuceneIndexIndexCommit *)snapshot;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -120,7 +122,7 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy)
 /*!
  @brief Prefix used for the save file.
  */
-inline NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_get_SNAPSHOTS_PREFIX();
+inline NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_get_SNAPSHOTS_PREFIX(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, SNAPSHOTS_PREFIX, NSString *)
@@ -141,4 +143,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy")

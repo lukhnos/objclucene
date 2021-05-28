@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisEnPorterStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisEnPorterStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnPorterStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisEnPorterStemmer))
 #define OrgApacheLuceneAnalysisEnPorterStemmer_
 
@@ -20,29 +26,26 @@
 
 /*!
  @brief Stemmer, implementing the Porter Stemming Algorithm
- The Stemmer class transforms a word into its root form.
- The input
- word can be provided a character at time (by calling add()), or at once
- by calling one of the various stem(something) methods.
+  The Stemmer class transforms a word into its root form.The input
+  word can be provided a character at time (by calling add()), or at once
+  by calling one of the various stem(something) methods.
  */
 @interface OrgApacheLuceneAnalysisEnPorterStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 /*!
- @brief Add a character to the word being stemmed.
- When you are finished
- adding characters, you can call stem(void) to process the word.
+ @brief Add a character to the word being stemmed.When you are finished
+  adding characters, you can call stem(void) to process the word.
  */
 - (void)addWithChar:(jchar)ch;
 
 /*!
  @brief Returns a reference to a character buffer containing the results of
- the stemming process.
- You also need to consult getResultLength()
- to determine the length of the result.
+  the stemming process.You also need to consult getResultLength()
+  to determine the length of the result.
  */
 - (IOSCharArray *)getResultBuffer;
 
@@ -52,44 +55,43 @@
 - (jint)getResultLength;
 
 /*!
- @brief reset() resets the stemmer so it can stem another word.
- If you invoke
- the stemmer by calling add(char) and then stem(), you must call reset()
- before starting another word.
+ @brief reset() resets the stemmer so it can stem another word.If you invoke
+  the stemmer by calling add(char) and then stem(), you must call reset()
+  before starting another word.
  */
 - (void)reset;
 
 /*!
  @brief Stem the word placed into the Stemmer buffer through calls to add().
  Returns true if the stemming process resulted in a word different
- from the input.  You can retrieve the result with
- getResultLength()/getResultBuffer() or toString().
+  from the input.  You can retrieve the result with
+  getResultLength()/getResultBuffer() or toString().
  */
 - (jboolean)stem;
 
 /*!
- @brief Stem a word contained in a char[].
- Returns true if the stemming process
- resulted in a word different from the input.  You can retrieve the
- result with getResultLength()/getResultBuffer() or toString().
+ @brief Stem a word contained in a char[].Returns true if the stemming process
+  resulted in a word different from the input.
+ You can retrieve the
+  result with getResultLength()/getResultBuffer() or toString().
  */
 - (jboolean)stemWithCharArray:(IOSCharArray *)word;
 
 /*!
  @brief Stem a word contained in a leading portion of a char[] array.
  Returns true if the stemming process resulted in a word different
- from the input.  You can retrieve the result with
- getResultLength()/getResultBuffer() or toString().
+  from the input.  You can retrieve the result with
+  getResultLength()/getResultBuffer() or toString().
  */
 - (jboolean)stemWithCharArray:(IOSCharArray *)word
                       withInt:(jint)wordLen;
 
 /*!
- @brief Stem a word contained in a portion of a char[] array.
- Returns
- true if the stemming process resulted in a word different from
- the input.  You can retrieve the result with
- getResultLength()/getResultBuffer() or toString().
+ @brief Stem a word contained in a portion of a char[] array.Returns
+  true if the stemming process resulted in a word different from
+  the input.
+ You can retrieve the result with
+  getResultLength()/getResultBuffer() or toString().
  */
 - (jboolean)stemWithCharArray:(IOSCharArray *)wordBuffer
                       withInt:(jint)offset
@@ -98,15 +100,14 @@
 - (jboolean)stemWithInt:(jint)i0;
 
 /*!
- @brief Stem a word provided as a String.
- Returns the result as a String.
+ @brief Stem a word provided as a String.Returns the result as a String.
  */
 - (NSString *)stemWithNSString:(NSString *)s;
 
 /*!
  @brief After a word has been stemmed, it can be retrieved by toString(),
- or a reference to the internal buffer can be retrieved by getResultBuffer
- and getResultLength (which is generally more efficient.)
+  or a reference to the internal buffer can be retrieved by getResultBuffer
+  and getResultLength (which is generally more efficient.)
  */
 - (NSString *)description;
 
@@ -116,18 +117,26 @@
 
 - (void)settoWithNSString:(NSString *)s;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisEnPorterStemmer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnPorterStemmer_init(OrgApacheLuceneAnalysisEnPorterStemmer *self);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnPorterStemmer_initPackagePrivate(OrgApacheLuceneAnalysisEnPorterStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnPorterStemmer *new_OrgApacheLuceneAnalysisEnPorterStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnPorterStemmer *new_OrgApacheLuceneAnalysisEnPorterStemmer_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnPorterStemmer *create_OrgApacheLuceneAnalysisEnPorterStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnPorterStemmer *create_OrgApacheLuceneAnalysisEnPorterStemmer_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnPorterStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnPorterStemmer")

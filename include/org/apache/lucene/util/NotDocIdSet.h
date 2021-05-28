@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilNotDocIdSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilNotDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilNotDocIdSet || defined(INCLUDE_OrgApacheLuceneUtilNotDocIdSet))
 #define OrgApacheLuceneUtilNotDocIdSet_
 
@@ -26,7 +32,7 @@
 /*!
  @brief This <code>DocIdSet</code> encodes the negation of another <code>DocIdSet</code>.
  It is cacheable and supports random-access if the underlying set is
- cacheable and supports random-access.
+  cacheable and supports random-access.
  */
 @interface OrgApacheLuceneUtilNotDocIdSet : OrgApacheLuceneSearchDocIdSet
 
@@ -35,8 +41,8 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithInt:(jint)maxDoc
-withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)inArg;
+- (instancetype __nonnull)initWithInt:(jint)maxDoc
+    withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)inArg;
 
 - (id<OrgApacheLuceneUtilBits>)bits;
 
@@ -45,6 +51,10 @@ withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)inArg;
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
 
 - (jlong)ramBytesUsed;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -60,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNotDocIdSet)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilNotDocIdSet")

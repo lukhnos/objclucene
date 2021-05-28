@@ -13,6 +13,7 @@
 #include "java/lang/StringBuilder.h"
 #include "java/lang/System.h"
 #include "java/nio/CharBuffer.h"
+#include "java/util/stream/IntStream.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttributeImpl.h"
 #include "org/apache/lucene/analysis/tokenattributes/TermToBytesRefAttribute.h"
@@ -22,6 +23,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/CharTermAttributeImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl () {
  @public
@@ -37,9 +42,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl, termBuffer_, IOSCharArray *)
 
-inline jint OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_get_MIN_BUFFER_SIZE();
+inline jint OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_get_MIN_BUFFER_SIZE(void);
 inline jint OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_set_MIN_BUFFER_SIZE(jint value);
-inline jint *OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_getRef_MIN_BUFFER_SIZE();
+inline jint *OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_getRef_MIN_BUFFER_SIZE(void);
 static jint OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_MIN_BUFFER_SIZE = 10;
 J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl, MIN_BUFFER_SIZE, jint)
 
@@ -96,7 +101,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(builder_)) get];
 }
 
-- (jint)length {
+- (jint)java_length {
   return termLength_;
 }
 
@@ -108,12 +113,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
                                          to:(jint)end {
   if (start > termLength_ || end > termLength_) @throw create_JavaLangIndexOutOfBoundsException_init();
-  return [NSString stringWithCharacters:termBuffer_ offset:start length:end - start];
+  return [NSString java_stringWithCharacters:termBuffer_ offset:start length:end - start];
 }
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq {
   if (csq == nil) return OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_appendNull(self);
-  return OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_appendWithJavaLangCharSequence_withInt_withInt_(self, csq, 0, [csq length]);
+  return OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_appendWithJavaLangCharSequence_withInt_withInt_(self, csq, 0, [csq java_length]);
 }
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
@@ -123,22 +128,21 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithChar:(jchar)c {
-  jint unseq$1 = termLength_;
-  *IOSCharArray_GetRef(nil_chk(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_resizeBufferWithInt_(self, unseq$1 + 1)), termLength_++) = c;
+  *IOSCharArray_GetRef(nil_chk(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_resizeBufferWithInt_(self, termLength_ + 1)), termLength_++) = c;
   return self;
 }
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithNSString:(NSString *)s {
   if (s == nil) return OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_appendNull(self);
-  jint len = ((jint) [s length]);
-  [s getChars:0 sourceEnd:len destination:OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_resizeBufferWithInt_(self, termLength_ + len) destinationBegin:termLength_];
+  jint len = [s java_length];
+  [s java_getChars:0 sourceEnd:len destination:OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_resizeBufferWithInt_(self, termLength_ + len) destinationBegin:termLength_];
   termLength_ += len;
   return self;
 }
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithJavaLangStringBuilder:(JavaLangStringBuilder *)s {
   if (s == nil) return OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_appendNull(self);
-  jint len = [s length];
+  jint len = [s java_length];
   [s getCharsWithInt:0 withInt:len withCharArray:OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_resizeBufferWithInt_(self, termLength_ + len) withInt:termLength_];
   termLength_ += len;
   return self;
@@ -146,7 +150,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:(id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)ta {
   if (ta == nil) return OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_appendNull(self);
-  jint len = [ta length];
+  jint len = [ta java_length];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_([ta buffer], 0, OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_resizeBufferWithInt_(self, termLength_ + len), termLength_, len);
   termLength_ += len;
   return self;
@@ -166,8 +170,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   termLength_ = 0;
 }
 
-- (OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *)clone {
-  OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *t = (OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *) cast_chk([super clone], [OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl class]);
+- (OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *)java_clone {
+  OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *t = (OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *) cast_chk([super java_clone], [OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl class]);
   JreStrongAssignAndConsume(&((OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *) nil_chk(t))->termBuffer_, [IOSCharArray newArrayWithLength:self->termLength_]);
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->termBuffer_, 0, t->termBuffer_, 0, self->termLength_);
   JreStrongAssignAndConsume(&t->builder_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
@@ -176,11 +180,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)other {
-  if (other == self) {
+  if (JreObjectEqualsEquals(other, self)) {
     return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl class]]) {
-    OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *o = ((OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *) cast_chk(other, [OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl class]));
+    OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *o = ((OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *) other);
     if (termLength_ != ((OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *) nil_chk(o))->termLength_) return false;
     for (jint i = 0; i < termLength_; i++) {
       if (IOSCharArray_Get(nil_chk(termBuffer_), i) != IOSCharArray_Get(o->termBuffer_, i)) {
@@ -193,7 +197,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  return [NSString stringWithCharacters:termBuffer_ offset:0 length:termLength_];
+  return [NSString java_stringWithCharacters:termBuffer_ offset:0 length:termLength_];
 }
 
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector {
@@ -206,6 +210,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(t)) copyBufferWithCharArray:termBuffer_ withInt:0 withInt:termLength_];
 }
 
+- (id<JavaUtilStreamIntStream>)chars {
+  return JavaLangCharSequence_chars(self);
+}
+
+- (id<JavaUtilStreamIntStream>)codePoints {
+  return JavaLangCharSequence_codePoints(self);
+}
+
 - (void)dealloc {
   RELEASE_(termBuffer_);
   RELEASE_(builder_);
@@ -213,40 +225,70 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CharTermAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "copyBufferWithCharArray:withInt:withInt:", "copyBuffer", "V", 0x11, NULL, NULL },
-    { "buffer", NULL, "[C", 0x11, NULL, NULL },
-    { "resizeBufferWithInt:", "resizeBuffer", "[C", 0x11, NULL, NULL },
-    { "growTermBufferWithInt:", "growTermBuffer", "V", 0x2, NULL, NULL },
-    { "setLengthWithInt:", "setLength", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x11, NULL, NULL },
-    { "setEmpty", NULL, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x11, NULL, NULL },
-    { "getBytesRef", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x11, NULL, NULL },
-    { "charAtWithInt:", "charAt", "C", 0x11, NULL, NULL },
-    { "subSequenceFrom:to:", "subSequence", "Ljava.lang.CharSequence;", 0x11, NULL, NULL },
-    { "appendWithJavaLangCharSequence:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x11, NULL, NULL },
-    { "appendWithJavaLangCharSequence:withInt:withInt:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x11, NULL, NULL },
-    { "appendWithChar:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x11, NULL, NULL },
-    { "appendWithNSString:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x11, NULL, NULL },
-    { "appendWithJavaLangStringBuilder:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x11, NULL, NULL },
-    { "appendWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x11, NULL, NULL },
-    { "appendNull", NULL, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x2, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttributeImpl;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 0, 1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x11, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 4, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x11, 5, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 6, -1, -1, -1, -1, -1 },
+    { NULL, "C", 0x11, 7, 3, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x11, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x11, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x11, 10, 12, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x11, 10, 13, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x11, 10, 14, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x11, 10, 15, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x11, 10, 16, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 17, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl;", 0x1, 18, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 19, 20, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 21, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(copyBufferWithCharArray:withInt:withInt:);
+  methods[2].selector = @selector(buffer);
+  methods[3].selector = @selector(resizeBufferWithInt:);
+  methods[4].selector = @selector(growTermBufferWithInt:);
+  methods[5].selector = @selector(setLengthWithInt:);
+  methods[6].selector = @selector(setEmpty);
+  methods[7].selector = @selector(getBytesRef);
+  methods[8].selector = @selector(java_length);
+  methods[9].selector = @selector(charAtWithInt:);
+  methods[10].selector = @selector(subSequenceFrom:to:);
+  methods[11].selector = @selector(appendWithJavaLangCharSequence:);
+  methods[12].selector = @selector(appendWithJavaLangCharSequence:withInt:withInt:);
+  methods[13].selector = @selector(appendWithChar:);
+  methods[14].selector = @selector(appendWithNSString:);
+  methods[15].selector = @selector(appendWithJavaLangStringBuilder:);
+  methods[16].selector = @selector(appendWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:);
+  methods[17].selector = @selector(appendNull);
+  methods[18].selector = @selector(hash);
+  methods[19].selector = @selector(clear);
+  methods[20].selector = @selector(java_clone);
+  methods[21].selector = @selector(isEqual:);
+  methods[22].selector = @selector(description);
+  methods[23].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  methods[24].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MIN_BUFFER_SIZE", "MIN_BUFFER_SIZE", 0xa, "I", &OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_MIN_BUFFER_SIZE, NULL, .constantValue.asLong = 0 },
-    { "termBuffer_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "termLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "builder_", NULL, 0x4, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "MIN_BUFFER_SIZE", "I", .constantValue.asLong = 0, 0xa, -1, 26, -1, -1 },
+    { "termBuffer_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "builder_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl = { 2, "CharTermAttributeImpl", "org.apache.lucene.analysis.tokenattributes", NULL, 0x1, 25, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "copyBuffer", "[CII", "resizeBuffer", "I", "growTermBuffer", "setLength", "length", "charAt", "subSequence", "II", "append", "LJavaLangCharSequence;", "LJavaLangCharSequence;II", "C", "LNSString;", "LJavaLangStringBuilder;", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", "hashCode", "clone", "equals", "LNSObject;", "toString", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;", "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", &OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_MIN_BUFFER_SIZE };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl = { "CharTermAttributeImpl", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, fields, 7, 0x1, 25, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl;
 }
 
@@ -284,16 +326,17 @@ void OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_growTermBufferW
 
 id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_appendWithJavaLangCharSequence_withInt_withInt_(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *self, id<JavaLangCharSequence> csq, jint start, jint end) {
   if (csq == nil) csq = @"null";
-  jint len = end - start, csqlen = [csq length];
+  jint len = end - start;
+  jint csqlen = [csq java_length];
   if (len < 0 || start > csqlen || end > csqlen) @throw create_JavaLangIndexOutOfBoundsException_init();
   if (len == 0) return self;
   OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_resizeBufferWithInt_(self, self->termLength_ + len);
   if (len > 4) {
     if ([csq isKindOfClass:[NSString class]]) {
-      [((NSString *) cast_chk(csq, [NSString class])) getChars:start sourceEnd:end destination:self->termBuffer_ destinationBegin:self->termLength_];
+      [((NSString *) csq) java_getChars:start sourceEnd:end destination:self->termBuffer_ destinationBegin:self->termLength_];
     }
     else if ([csq isKindOfClass:[JavaLangStringBuilder class]]) {
-      [((JavaLangStringBuilder *) cast_chk(csq, [JavaLangStringBuilder class])) getCharsWithInt:start withInt:end withCharArray:self->termBuffer_ withInt:self->termLength_];
+      [((JavaLangStringBuilder *) csq) getCharsWithInt:start withInt:end withCharArray:self->termBuffer_ withInt:self->termLength_];
     }
     else if ([OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_() isInstance:csq]) {
       JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) cast_check(csq, OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_())) buffer], start, self->termBuffer_, self->termLength_, len);
@@ -303,7 +346,7 @@ id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> OrgApacheLuceneAnaly
       JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_([cb array], [cb arrayOffset] + [cb position] + start, self->termBuffer_, self->termLength_, len);
     }
     else if ([csq isKindOfClass:[JavaLangStringBuffer class]]) {
-      [((JavaLangStringBuffer *) cast_chk(csq, [JavaLangStringBuffer class])) getCharsWithInt:start withInt:end withCharArray:self->termBuffer_ withInt:self->termLength_];
+      [((JavaLangStringBuffer *) csq) getCharsWithInt:start withInt:end withCharArray:self->termBuffer_ withInt:self->termLength_];
     }
     else {
       while (start < end) *IOSCharArray_GetRef(nil_chk(self->termBuffer_), self->termLength_++) = [csq charAtWithInt:start++];

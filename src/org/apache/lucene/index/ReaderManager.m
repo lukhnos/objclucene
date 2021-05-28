@@ -3,14 +3,18 @@
 //  source: ./core/src/java/org/apache/lucene/index/ReaderManager.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/DirectoryReader.h"
 #include "org/apache/lucene/index/IndexWriter.h"
 #include "org/apache/lucene/index/ReaderManager.h"
 #include "org/apache/lucene/search/ReferenceManager.h"
 #include "org/apache/lucene/store/Directory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/ReaderManager must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @implementation OrgApacheLuceneIndexReaderManager
 
@@ -47,17 +51,28 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexWriter:withBoolean:", "ReaderManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:", "ReaderManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexDirectoryReader:", "ReaderManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "decRefWithId:", "decRef", "V", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/DirectoryReader;)V" },
-    { "refreshIfNeededWithId:", "refreshIfNeeded", "Lorg.apache.lucene.index.DirectoryReader;", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/DirectoryReader;)Lorg/apache/lucene/index/DirectoryReader;" },
-    { "tryIncRefWithId:", "tryIncRef", "Z", 0x4, NULL, "(Lorg/apache/lucene/index/DirectoryReader;)Z" },
-    { "getRefCountWithId:", "getRefCount", "I", 0x4, NULL, "(Lorg/apache/lucene/index/DirectoryReader;)I" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x4, 5, 3, 1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 6, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 7, 3, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.DirectoryReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexReaderManager = { 2, "ReaderManager", "org.apache.lucene.index", NULL, 0x11, 7, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/ReferenceManager<Lorg/apache/lucene/index/DirectoryReader;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexWriter:withBoolean:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreDirectory:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexDirectoryReader:);
+  methods[3].selector = @selector(decRefWithId:);
+  methods[4].selector = @selector(refreshIfNeededWithId:);
+  methods[5].selector = @selector(tryIncRefWithId:);
+  methods[6].selector = @selector(getRefCountWithId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexWriter;Z", "LJavaIoIOException;", "LOrgApacheLuceneStoreDirectory;", "LOrgApacheLuceneIndexDirectoryReader;", "decRef", "refreshIfNeeded", "tryIncRef", "getRefCount", "Lorg/apache/lucene/search/ReferenceManager<Lorg/apache/lucene/index/DirectoryReader;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexReaderManager = { "ReaderManager", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x11, 7, 0, -1, -1, -1, 8, -1 };
   return &_OrgApacheLuceneIndexReaderManager;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansNearSpans
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansNearSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansNearSpans))
 #define OrgApacheLuceneSearchSpansNearSpans_
 
@@ -34,8 +40,12 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)query
-                                               withJavaUtilList:(id<JavaUtilList>)subSpans;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)query
+                                                                       withJavaUtilList:(id<JavaUtilList>)subSpans;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithJavaUtilList:(id<JavaUtilList>)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -43,10 +53,14 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansNearSpans)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansNearSpans, query_, OrgApacheLuceneSearchSpansSpanNearQuery *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansNearSpans_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansNearSpans *self, OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansNearSpans_initPackagePrivateWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansNearSpans *self, OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpans)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpans")

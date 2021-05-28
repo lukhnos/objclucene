@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedDeltaPackedLongValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedDeltaPackedLongValues_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDeltaPackedLongValues || defined(INCLUDE_OrgApacheLuceneUtilPackedDeltaPackedLongValues))
 #define OrgApacheLuceneUtilPackedDeltaPackedLongValues_
 
@@ -30,12 +36,12 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)pageShift
-                    withInt:(jint)pageMask
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)pageShift
+                                            withInt:(jint)pageMask
 withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
-              withLongArray:(IOSLongArray *)mins
-                   withLong:(jlong)size
-                   withLong:(jlong)ramBytesUsed;
+                                      withLongArray:(IOSLongArray *)mins
+                                           withLong:(jlong)size
+                                           withLong:(jlong)ramBytesUsed;
 
 - (jint)decodeBlockWithInt:(jint)block
              withLongArray:(IOSLongArray *)dest;
@@ -43,17 +49,25 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
 - (jlong)getWithInt:(jint)block
             withInt:(jint)element;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                              withInt:(jint)arg1
+withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)arg2
+                             withLong:(jlong)arg3
+                             withLong:(jlong)arg4 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilPackedDeltaPackedLongValues)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedDeltaPackedLongValues, mins_, IOSLongArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDeltaPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(OrgApacheLuceneUtilPackedDeltaPackedLongValues *self, jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDeltaPackedLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(OrgApacheLuceneUtilPackedDeltaPackedLongValues *self, jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDeltaPackedLongValues *new_OrgApacheLuceneUtilPackedDeltaPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDeltaPackedLongValues *new_OrgApacheLuceneUtilPackedDeltaPackedLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDeltaPackedLongValues *create_OrgApacheLuceneUtilPackedDeltaPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDeltaPackedLongValues *create_OrgApacheLuceneUtilPackedDeltaPackedLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDeltaPackedLongValues)
 
@@ -80,8 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDeltaPackedLongValues)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)pageSize
-                  withFloat:(jfloat)acceptableOverheadRatio;
+- (instancetype __nonnull)initWithInt:(jint)pageSize
+                            withFloat:(jfloat)acceptableOverheadRatio;
 
 - (jlong)baseRamBytesUsed;
 
@@ -108,4 +122,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builde
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDeltaPackedLongValues")

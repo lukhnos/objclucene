@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/automaton/UTF32ToUTF8.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -16,6 +17,10 @@
 #include "org/apache/lucene/util/automaton/UTF32ToUTF8.h"
 
 @class OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/UTF32ToUTF8 must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilAutomatonUTF32ToUTF8 () {
  @public
@@ -56,11 +61,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonUTF32ToUTF8, endUTF8_, OrgApache
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonUTF32ToUTF8, tmpUTF8a_, OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonUTF32ToUTF8, tmpUTF8b_, OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence *)
 
-inline IOSIntArray *OrgApacheLuceneUtilAutomatonUTF32ToUTF8_get_startCodes();
+inline IOSIntArray *OrgApacheLuceneUtilAutomatonUTF32ToUTF8_get_startCodes(void);
 static IOSIntArray *OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startCodes;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonUTF32ToUTF8, startCodes, IOSIntArray *)
 
-inline IOSIntArray *OrgApacheLuceneUtilAutomatonUTF32ToUTF8_get_endCodes();
+inline IOSIntArray *OrgApacheLuceneUtilAutomatonUTF32ToUTF8_get_endCodes(void);
 static IOSIntArray *OrgApacheLuceneUtilAutomatonUTF32ToUTF8_endCodes;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonUTF32ToUTF8, endCodes, IOSIntArray *)
 
@@ -86,9 +91,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte_init(OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte *new_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte *new_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte *create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte_init();
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte *create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte)
 
@@ -119,9 +124,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence, bytes_
 
 __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_init(OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence *new_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence *new_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence *create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_init();
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence *create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_init(void);
 
 __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_setWithInt_(OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence *self, jint code);
 
@@ -208,7 +213,7 @@ withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:(OrgApacheLuceneUtilAut
   while ([pending size] != 0) {
     utf32State = [((JavaLangInteger *) nil_chk([pending removeWithInt:[pending size] - 1])) intValue];
     utf8State = IOSIntArray_Get(map, utf32State);
-    JreAssert((utf8State != -1), (@"org/apache/lucene/util/automaton/UTF32ToUTF8.java:291 condition failed: assert utf8State != -1;"));
+    JreAssert(utf8State != -1, @"org/apache/lucene/util/automaton/UTF32ToUTF8.java:291 condition failed: assert utf8State != -1;");
     jint numTransitions = [utf32 getNumTransitionsWithInt:utf32State];
     [utf32 initTransitionWithInt:utf32State withOrgApacheLuceneUtilAutomatonTransition:scratch];
     for (jint i = 0; i < numTransitions; i++) {
@@ -236,6 +241,42 @@ withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:(OrgApacheLuceneUtilAut
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 6, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x1, 9, 10, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(convertOneEdgeWithInt:withInt:withInt:withInt:);
+  methods[2].selector = @selector(buildWithInt:withInt:withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:withInt:);
+  methods[3].selector = @selector(startWithInt:withInt:withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:withInt:withBoolean:);
+  methods[4].selector = @selector(endWithInt:withInt:withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:withInt:withBoolean:);
+  methods[5].selector = @selector(allWithInt:withInt:withInt:withInt:withInt:);
+  methods[6].selector = @selector(convertWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "startCodes", "[I", .constantValue.asLong = 0, 0x1a, -1, 11, -1, -1 },
+    { "endCodes", "[I", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
+    { "MASKS", "[I", .constantValue.asLong = 0, 0x8, -1, 13, -1, -1 },
+    { "startUTF8_", "LOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "endUTF8_", "LOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "tmpUTF8a_", "LOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "tmpUTF8b_", "LOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "utf8_", "LOrgApacheLuceneUtilAutomatonAutomaton_Builder;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "convertOneEdge", "IIII", "build", "IILOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence;LOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence;I", "start", "IILOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence;IZ", "end", "all", "IIIII", "convert", "LOrgApacheLuceneUtilAutomatonAutomaton;", &OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startCodes, &OrgApacheLuceneUtilAutomatonUTF32ToUTF8_endCodes, &OrgApacheLuceneUtilAutomatonUTF32ToUTF8_MASKS, "LOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte;LOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonUTF32ToUTF8 = { "UTF32ToUTF8", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x11, 7, 8, -1, 14, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilAutomatonUTF32ToUTF8;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilAutomatonUTF32ToUTF8 class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startCodes, [IOSIntArray newArrayWithInts:(jint[]){ 0, 128, 2048, 65536 } count:4]);
@@ -250,31 +291,6 @@ withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:(OrgApacheLuceneUtilAut
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonUTF32ToUTF8)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "UTF32ToUTF8", NULL, 0x1, NULL, NULL },
-    { "convertOneEdgeWithInt:withInt:withInt:withInt:", "convertOneEdge", "V", 0x0, NULL, NULL },
-    { "buildWithInt:withInt:withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:withInt:", "build", "V", 0x2, NULL, NULL },
-    { "startWithInt:withInt:withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:withInt:withBoolean:", "start", "V", 0x2, NULL, NULL },
-    { "endWithInt:withInt:withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence:withInt:withBoolean:", "end", "V", 0x2, NULL, NULL },
-    { "allWithInt:withInt:withInt:withInt:withInt:", "all", "V", 0x2, NULL, NULL },
-    { "convertWithOrgApacheLuceneUtilAutomatonAutomaton:", "convert", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "startCodes", "startCodes", 0x1a, "[I", &OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startCodes, NULL, .constantValue.asLong = 0 },
-    { "endCodes", "endCodes", 0x1a, "[I", &OrgApacheLuceneUtilAutomatonUTF32ToUTF8_endCodes, NULL, .constantValue.asLong = 0 },
-    { "MASKS", "MASKS", 0x8, "[I", &OrgApacheLuceneUtilAutomatonUTF32ToUTF8_MASKS, NULL, .constantValue.asLong = 0 },
-    { "startUTF8_", NULL, 0x12, "Lorg.apache.lucene.util.automaton.UTF32ToUTF8$UTF8Sequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "endUTF8_", NULL, 0x12, "Lorg.apache.lucene.util.automaton.UTF32ToUTF8$UTF8Sequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tmpUTF8a_", NULL, 0x12, "Lorg.apache.lucene.util.automaton.UTF32ToUTF8$UTF8Sequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tmpUTF8b_", NULL, 0x12, "Lorg.apache.lucene.util.automaton.UTF32ToUTF8$UTF8Sequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "utf8_", NULL, 0x0, "Lorg.apache.lucene.util.automaton.Automaton$Builder;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.UTF32ToUTF8$UTF8Byte;", "Lorg.apache.lucene.util.automaton.UTF32ToUTF8$UTF8Sequence;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonUTF32ToUTF8 = { 2, "UTF32ToUTF8", "org.apache.lucene.util.automaton", NULL, 0x11, 7, methods, 8, fields, 0, NULL, 2, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilAutomatonUTF32ToUTF8;
 }
 
 @end
@@ -302,8 +318,8 @@ void OrgApacheLuceneUtilAutomatonUTF32ToUTF8_buildWithInt_withInt_withOrgApacheL
       return;
     }
     else {
-      JreAssert((startUTF8->len_ > upto + 1), (@"org/apache/lucene/util/automaton/UTF32ToUTF8.java:150 condition failed: assert startUTF8.len > upto+1;"));
-      JreAssert((endUTF8->len_ > upto + 1), (@"org/apache/lucene/util/automaton/UTF32ToUTF8.java:151 condition failed: assert endUTF8.len > upto+1;"));
+      JreAssert(startUTF8->len_ > upto + 1, @"org/apache/lucene/util/automaton/UTF32ToUTF8.java:150 condition failed: assert startUTF8.len > upto+1;");
+      JreAssert(endUTF8->len_ > upto + 1, @"org/apache/lucene/util/automaton/UTF32ToUTF8.java:151 condition failed: assert endUTF8.len > upto+1;");
       jint n = [((OrgApacheLuceneUtilAutomatonAutomaton_Builder *) nil_chk(self->utf8_)) createState];
       [((OrgApacheLuceneUtilAutomatonAutomaton_Builder *) nil_chk(self->utf8_)) addTransitionWithInt:start withInt:n withInt:[startUTF8 byteAtWithInt:upto]];
       OrgApacheLuceneUtilAutomatonUTF32ToUTF8_buildWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_(self, n, end, startUTF8, endUTF8, 1 + upto);
@@ -400,14 +416,20 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "UTF8Byte", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "value_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bits_", NULL, 0x0, "B", NULL, NULL, .constantValue.asLong = 0 },
+    { "value_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bits_", "B", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte = { 2, "UTF8Byte", "org.apache.lucene.util.automaton", "UTF32ToUTF8", 0xa, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAutomatonUTF32ToUTF8;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte = { "UTF8Byte", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0xa, 1, 2, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte;
 }
 
@@ -470,19 +492,30 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "UTF8Sequence", NULL, 0x1, NULL, NULL },
-    { "byteAtWithInt:", "byteAt", "I", 0x1, NULL, NULL },
-    { "numBitsWithInt:", "numBits", "I", 0x1, NULL, NULL },
-    { "setWithInt:", "set", "V", 0x2, NULL, NULL },
-    { "setRestWithInt:withInt:", "setRest", "V", 0x2, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 3, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(byteAtWithInt:);
+  methods[2].selector = @selector(numBitsWithInt:);
+  methods[3].selector = @selector(setWithInt:);
+  methods[4].selector = @selector(setRestWithInt:withInt:);
+  methods[5].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bytes_", NULL, 0x12, "[Lorg.apache.lucene.util.automaton.UTF32ToUTF8$UTF8Byte;", NULL, NULL, .constantValue.asLong = 0 },
-    { "len_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "bytes_", "[LOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "len_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence = { 2, "UTF8Sequence", "org.apache.lucene.util.automaton", "UTF32ToUTF8", 0xa, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "byteAt", "I", "numBits", "set", "setRest", "II", "toString", "LOrgApacheLuceneUtilAutomatonUTF32ToUTF8;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence = { "UTF8Sequence", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0xa, 6, 2, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence;
 }
 

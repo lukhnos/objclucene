@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsStoredFieldsFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsStoredFieldsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsFormat || defined(INCLUDE_OrgApacheLuceneCodecsStoredFieldsFormat))
 #define OrgApacheLuceneCodecsStoredFieldsFormat_
 
@@ -32,7 +38,7 @@
 
 /*!
  @brief Returns a <code>StoredFieldsReader</code> to load stored
- fields.
+   fields.
  */
 - (OrgApacheLuceneCodecsStoredFieldsReader *)fieldsReaderWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
@@ -41,7 +47,7 @@
 
 /*!
  @brief Returns a <code>StoredFieldsWriter</code> to write stored
- fields.
+   fields.
  */
 - (OrgApacheLuceneCodecsStoredFieldsWriter *)fieldsWriterWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
@@ -52,9 +58,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -66,4 +72,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsFormat")

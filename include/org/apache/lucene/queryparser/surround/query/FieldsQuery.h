@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery))
 #define OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_
 
@@ -32,13 +38,13 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)q
-                                                        withJavaUtilList:(id<JavaUtilList>)fieldNames
-                                                                withChar:(jchar)fieldOp;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)q
+                                                                  withJavaUtilList:(id<JavaUtilList>)fieldNames
+                                                                          withChar:(jchar)fieldOp;
 
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)q
-                                                            withNSString:(NSString *)fieldName
-                                                                withChar:(jchar)fieldOp;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)q
+                                                                      withNSString:(NSString *)fieldName
+                                                                          withChar:(jchar)fieldOp;
 
 - (id<JavaUtilList>)getFieldNames;
 
@@ -56,6 +62,10 @@
 #pragma mark Protected
 
 - (void)fieldNamesToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -77,4 +87,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery")

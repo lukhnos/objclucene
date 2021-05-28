@@ -7,6 +7,10 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/util/Sorter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/Sorter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 __attribute__((unused)) static void OrgApacheLuceneUtilSorter_reverseWithInt_withInt_(OrgApacheLuceneUtilSorter *self, jint from, jint to);
 
 __attribute__((unused)) static void OrgApacheLuceneUtilSorter_rotateWithInt_withInt_withInt_(OrgApacheLuceneUtilSorter *self, jint lo, jint mid, jint hi);
@@ -66,8 +70,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   while ([self compareWithInt:mid - 1 withInt:to - 1] <= 0) {
     --to;
   }
-  jint first_cut, second_cut;
-  jint len11, len22;
+  jint first_cut;
+  jint second_cut;
+  jint len11;
+  jint len22;
   if (mid - from > to - mid) {
     len11 = JreURShift32((mid - from), 1);
     first_cut = from + len11;
@@ -125,7 +131,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jint)lower2WithInt:(jint)from
               withInt:(jint)to
               withInt:(jint)val {
-  jint f = to - 1, t = to;
+  jint f = to - 1;
+  jint t = to;
   while (f > from) {
     if ([self compareWithInt:f withInt:val] < 0) {
       return [self lowerWithInt:f withInt:t withInt:val];
@@ -140,7 +147,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jint)upper2WithInt:(jint)from
               withInt:(jint)to
               withInt:(jint)val {
-  jint f = from, t = f + 1;
+  jint f = from;
+  jint t = f + 1;
   while (t < to) {
     if ([self compareWithInt:t withInt:val] > 0) {
       return [self upperWithInt:f withInt:t withInt:val];
@@ -287,33 +295,59 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Sorter", NULL, 0x4, NULL, NULL },
-    { "compareWithInt:withInt:", "compare", "I", 0x404, NULL, NULL },
-    { "swapWithInt:withInt:", "swap", "V", 0x404, NULL, NULL },
-    { "sortWithInt:withInt:", "sort", "V", 0x401, NULL, NULL },
-    { "checkRangeWithInt:withInt:", "checkRange", "V", 0x0, NULL, NULL },
-    { "mergeInPlaceWithInt:withInt:withInt:", "mergeInPlace", "V", 0x0, NULL, NULL },
-    { "lowerWithInt:withInt:withInt:", "lower", "I", 0x0, NULL, NULL },
-    { "upperWithInt:withInt:withInt:", "upper", "I", 0x0, NULL, NULL },
-    { "lower2WithInt:withInt:withInt:", "lower2", "I", 0x0, NULL, NULL },
-    { "upper2WithInt:withInt:withInt:", "upper2", "I", 0x0, NULL, NULL },
-    { "reverseWithInt:withInt:", "reverse", "V", 0x10, NULL, NULL },
-    { "rotateWithInt:withInt:withInt:", "rotate", "V", 0x10, NULL, NULL },
-    { "doRotateWithInt:withInt:withInt:", "doRotate", "V", 0x0, NULL, NULL },
-    { "insertionSortWithInt:withInt:", "insertionSort", "V", 0x0, NULL, NULL },
-    { "binarySortWithInt:withInt:", "binarySort", "V", 0x0, NULL, NULL },
-    { "binarySortWithInt:withInt:withInt:", "binarySort", "V", 0x0, NULL, NULL },
-    { "heapSortWithInt:withInt:", "heapSort", "V", 0x0, NULL, NULL },
-    { "heapifyWithInt:withInt:", "heapify", "V", 0x0, NULL, NULL },
-    { "siftDownWithInt:withInt:withInt:", "siftDown", "V", 0x0, NULL, NULL },
-    { "heapParentWithInt:withInt:", "heapParent", "I", 0x8, NULL, NULL },
-    { "heapChildWithInt:withInt:", "heapChild", "I", 0x8, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x404, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x404, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 4, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 7, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 8, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 9, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 10, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x10, 11, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x10, 12, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 13, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 14, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 15, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 15, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 16, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 17, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 18, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, 19, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, 20, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithInt:withInt:);
+  methods[2].selector = @selector(swapWithInt:withInt:);
+  methods[3].selector = @selector(sortWithInt:withInt:);
+  methods[4].selector = @selector(checkRangeWithInt:withInt:);
+  methods[5].selector = @selector(mergeInPlaceWithInt:withInt:withInt:);
+  methods[6].selector = @selector(lowerWithInt:withInt:withInt:);
+  methods[7].selector = @selector(upperWithInt:withInt:withInt:);
+  methods[8].selector = @selector(lower2WithInt:withInt:withInt:);
+  methods[9].selector = @selector(upper2WithInt:withInt:withInt:);
+  methods[10].selector = @selector(reverseWithInt:withInt:);
+  methods[11].selector = @selector(rotateWithInt:withInt:withInt:);
+  methods[12].selector = @selector(doRotateWithInt:withInt:withInt:);
+  methods[13].selector = @selector(insertionSortWithInt:withInt:);
+  methods[14].selector = @selector(binarySortWithInt:withInt:);
+  methods[15].selector = @selector(binarySortWithInt:withInt:withInt:);
+  methods[16].selector = @selector(heapSortWithInt:withInt:);
+  methods[17].selector = @selector(heapifyWithInt:withInt:);
+  methods[18].selector = @selector(siftDownWithInt:withInt:withInt:);
+  methods[19].selector = @selector(heapParentWithInt:withInt:);
+  methods[20].selector = @selector(heapChildWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "THRESHOLD", "THRESHOLD", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilSorter_THRESHOLD },
+    { "THRESHOLD", "I", .constantValue.asInt = OrgApacheLuceneUtilSorter_THRESHOLD, 0x18, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilSorter = { 2, "Sorter", "org.apache.lucene.util", NULL, 0x401, 21, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "compare", "II", "swap", "sort", "checkRange", "mergeInPlace", "III", "lower", "upper", "lower2", "upper2", "reverse", "rotate", "doRotate", "insertionSort", "binarySort", "heapSort", "heapify", "siftDown", "heapParent", "heapChild" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilSorter = { "Sorter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x401, 21, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilSorter;
 }
 
@@ -330,7 +364,7 @@ void OrgApacheLuceneUtilSorter_reverseWithInt_withInt_(OrgApacheLuceneUtilSorter
 }
 
 void OrgApacheLuceneUtilSorter_rotateWithInt_withInt_withInt_(OrgApacheLuceneUtilSorter *self, jint lo, jint mid, jint hi) {
-  JreAssert((lo <= mid && mid <= hi), (@"org/apache/lucene/util/Sorter.java:146 condition failed: assert lo <= mid && mid <= hi;"));
+  JreAssert(lo <= mid && mid <= hi, @"org/apache/lucene/util/Sorter.java:146 condition failed: assert lo <= mid && mid <= hi;");
   if (lo == mid || mid == hi) {
     return;
   }

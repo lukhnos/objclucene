@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpellDirectSpellChecker
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpellDirectSpellChecker_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellDirectSpellChecker || defined(INCLUDE_OrgApacheLuceneSearchSpellDirectSpellChecker))
 #define OrgApacheLuceneSearchSpellDirectSpellChecker_
 
@@ -28,26 +34,25 @@
 /*!
  @brief Simple automaton-based spellchecker.
  <p>
- Candidates are presented directly from the term dictionary, based on
- Levenshtein distance. This is an alternative to <code>SpellChecker</code>
- if you are using an edit-distance-like metric such as Levenshtein
- or <code>JaroWinklerDistance</code>.
- <p>
- A practical benefit of this spellchecker is that it requires no additional
- datastructures (neither in RAM nor on disk) to do its work.
+  Candidates are presented directly from the term dictionary, based on
+  Levenshtein distance. This is an alternative to <code>SpellChecker</code>
+  if you are using an edit-distance-like metric such as Levenshtein
+  or <code>JaroWinklerDistance</code>.
+  <p>
+  A practical benefit of this spellchecker is that it requires no additional
+  datastructures (neither in RAM nor on disk) to do its work.
  - seealso: LevenshteinAutomata
  - seealso: FuzzyTermsEnum
  */
 @interface OrgApacheLuceneSearchSpellDirectSpellChecker : NSObject
-
-+ (id<OrgApacheLuceneSearchSpellStringDistance>)INTERNAL_LEVENSHTEIN;
+@property (readonly, class, strong) id<OrgApacheLuceneSearchSpellStringDistance> INTERNAL_LEVENSHTEIN NS_SWIFT_NAME(INTERNAL_LEVENSHTEIN);
 
 #pragma mark Public
 
 /*!
  @brief Creates a DirectSpellChecker with default configuration values
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Get the minimal accuracy from the StringDistance for a match
@@ -71,7 +76,7 @@
 
 /*!
  @brief Get the maximum number of Levenshtein edit-distances to draw
- candidate terms from.
+   candidate terms from.
  */
 - (jint)getMaxEdits;
 
@@ -82,7 +87,7 @@
 
 /*!
  @brief Get the maximum threshold of documents a query term can appear in order
- to provide suggestions.
+  to provide suggestions.
  */
 - (jfloat)getMaxQueryFrequency;
 
@@ -103,7 +108,7 @@
 
 /*!
  @brief Set the minimal accuracy required (default: 0.5f) from a StringDistance 
- for a suggestion match.
+  for a suggestion match.
  */
 - (void)setAccuracyWithFloat:(jfloat)accuracy;
 
@@ -116,88 +121,88 @@
 /*!
  @brief Set the string distance metric.
  The default is <code>INTERNAL_LEVENSHTEIN</code>
- <p>
- Note: because this spellchecker draws its candidates from the term
- dictionary using Damerau-Levenshtein, it works best with an edit-distance-like
- string metric. If you use a different metric than the default,
- you might want to consider increasing <code>setMaxInspections(int)</code>
- to draw more candidates for your metric to rank.
+  <p>
+  Note: because this spellchecker draws its candidates from the term
+  dictionary using Damerau-Levenshtein, it works best with an edit-distance-like
+  string metric. If you use a different metric than the default,
+  you might want to consider increasing <code>setMaxInspections(int)</code>
+  to draw more candidates for your metric to rank.
  */
 - (void)setDistanceWithOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)distance;
 
 /*!
  @brief True if the spellchecker should lowercase terms (default: true)
  <p>
- This is a convenience method, if your index field has more complicated
- analysis (such as StandardTokenizer removing punctuation), it's probably
- better to turn this off, and instead run your query terms through your
- Analyzer first.
+  This is a convenience method, if your index field has more complicated
+  analysis (such as StandardTokenizer removing punctuation), it's probably
+  better to turn this off, and instead run your query terms through your
+  Analyzer first.
  <p>
- If this option is not on, case differences count as an edit! 
+  If this option is not on, case differences count as an edit!
  */
 - (void)setLowerCaseTermsWithBoolean:(jboolean)lowerCaseTerms;
 
 /*!
  @brief Sets the maximum number of Levenshtein edit-distances to draw
- candidate terms from.
- This value can be 1 or 2. The default is 2.
- <p>
- Note: a large number of spelling errors occur with an edit distance
- of 1, by setting this value to 1 you can increase both performance
- and precision at the cost of recall.
+   candidate terms from.This value can be 1 or 2.
+ The default is 2.
+   <p>
+   Note: a large number of spelling errors occur with an edit distance
+   of 1, by setting this value to 1 you can increase both performance
+   and precision at the cost of recall.
  */
 - (void)setMaxEditsWithInt:(jint)maxEdits;
 
 /*!
  @brief Set the maximum number of top-N inspections (default: 5) per suggestion.
  <p>
- Increasing this number can improve the accuracy of results, at the cost 
- of performance.
+  Increasing this number can improve the accuracy of results, at the cost 
+  of performance.
  */
 - (void)setMaxInspectionsWithInt:(jint)maxInspections;
 
 /*!
  @brief Set the maximum threshold (default: 0.01f) of documents a query term can 
- appear in order to provide suggestions.
+  appear in order to provide suggestions.
  <p>
- Very high-frequency terms are typically spelled correctly. Additionally,
- this can increase performance as it will do no work for the common case
- of correctly-spelled input terms.
+  Very high-frequency terms are typically spelled correctly. Additionally,
+  this can increase performance as it will do no work for the common case
+  of correctly-spelled input terms. 
  <p>
- This can be specified as a relative percentage of documents such as 0.5f,
- or it can be specified as an absolute whole document frequency, such as 4f.
- Absolute document frequencies may not be fractional.
+  This can be specified as a relative percentage of documents such as 0.5f,
+  or it can be specified as an absolute whole document frequency, such as 4f.
+  Absolute document frequencies may not be fractional.
  */
 - (void)setMaxQueryFrequencyWithFloat:(jfloat)maxQueryFrequency;
 
 /*!
  @brief Sets the minimal number of initial characters (default: 1) 
- that must match exactly.
+  that must match exactly.
  <p>
- This can improve both performance and accuracy of results,
- as misspellings are commonly not the first character.
+  This can improve both performance and accuracy of results,
+  as misspellings are commonly not the first character.
  */
 - (void)setMinPrefixWithInt:(jint)minPrefix;
 
 /*!
  @brief Set the minimum length of a query term (default: 4) needed to return suggestions.
  <p>
- Very short query terms will often cause only bad suggestions with any distance
- metric.
+  Very short query terms will often cause only bad suggestions with any distance
+  metric.
  */
 - (void)setMinQueryLengthWithInt:(jint)minQueryLength;
 
 /*!
  @brief Set the minimal threshold of documents a term must appear for a match.
  <p>
- This can improve quality by only suggesting high-frequency terms. Note that
- very high values might decrease performance slightly, by forcing the spellchecker
- to draw more candidates from the term dictionary, but a practical value such
- as <code>1</code> can be very useful towards improving quality.
+  This can improve quality by only suggesting high-frequency terms. Note that
+  very high values might decrease performance slightly, by forcing the spellchecker
+  to draw more candidates from the term dictionary, but a practical value such
+  as <code>1</code> can be very useful towards improving quality. 
  <p>
- This can be specified as a relative percentage of documents such as 0.5f,
- or it can be specified as an absolute whole document frequency, such as 4f.
- Absolute document frequencies may not be fractional.
+  This can be specified as a relative percentage of documents such as 0.5f,
+  or it can be specified as an absolute whole document frequency, such as 4f.
+  Absolute document frequencies may not be fractional.
  */
 - (void)setThresholdFrequencyWithFloat:(jfloat)thresholdFrequency;
 
@@ -219,15 +224,15 @@
 /*!
  @brief Suggest similar words.
  <p>Unlike <code>SpellChecker</code>, the similarity used to fetch the most
- relevant terms is an edit distance, therefore typically a low value
- for numSug will work very well.
+  relevant terms is an edit distance, therefore typically a low value
+  for numSug will work very well.
  @param term Term you want to spell check on
  @param numSug the maximum number of suggested words
  @param ir IndexReader to find terms from
  @param suggestMode specifies when to return suggested words
  @param accuracy return only suggested words that match with this similarity
  @return sorted list of the suggested words according to the comparator
- @throws IOException If there is a low-level I/O error.
+ @throw IOExceptionIf there is a low-level I/O error.
  */
 - (IOSObjectArray *)suggestSimilarWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                                        withInt:(jint)numSug
@@ -247,7 +252,7 @@
  @param accuracy The minimum accuracy a suggested spelling correction needs to have in order to be included
  @param spare a chars scratch
  @return a collection of spelling corrections sorted by <code>ScoreTerm</code>'s natural order.
- @throws IOException If I/O related errors occur
+ @throw IOExceptionIf I/O related errors occur
  */
 - (id<JavaUtilCollection>)suggestSimilarWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                                              withInt:(jint)numSug
@@ -263,21 +268,21 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpellDirectSpellChecker)
 
 /*!
  @brief The default StringDistance, Damerau-Levenshtein distance implemented internally
- via <code>LevenshteinAutomata</code>.
+   via <code>LevenshteinAutomata</code>.
  <p>
- Note: this is the fastest distance metric, because Damerau-Levenshtein is used
- to draw candidates from the term dictionary: this just re-uses the scoring.
+   Note: this is the fastest distance metric, because Damerau-Levenshtein is used
+   to draw candidates from the term dictionary: this just re-uses the scoring.
  */
-inline id<OrgApacheLuceneSearchSpellStringDistance> OrgApacheLuceneSearchSpellDirectSpellChecker_get_INTERNAL_LEVENSHTEIN();
+inline id<OrgApacheLuceneSearchSpellStringDistance> OrgApacheLuceneSearchSpellDirectSpellChecker_get_INTERNAL_LEVENSHTEIN(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<OrgApacheLuceneSearchSpellStringDistance> OrgApacheLuceneSearchSpellDirectSpellChecker_INTERNAL_LEVENSHTEIN;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSpellDirectSpellChecker, INTERNAL_LEVENSHTEIN, id<OrgApacheLuceneSearchSpellStringDistance>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellDirectSpellChecker_init(OrgApacheLuceneSearchSpellDirectSpellChecker *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellDirectSpellChecker *new_OrgApacheLuceneSearchSpellDirectSpellChecker_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellDirectSpellChecker *new_OrgApacheLuceneSearchSpellDirectSpellChecker_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellDirectSpellChecker *create_OrgApacheLuceneSearchSpellDirectSpellChecker_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellDirectSpellChecker *create_OrgApacheLuceneSearchSpellDirectSpellChecker_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellDirectSpellChecker)
 
@@ -324,7 +329,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellDirectSpellChecker)
 /*!
  @brief Constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)compareToWithId:(OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *)other;
 
@@ -341,12 +346,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm, term
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm_init(OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *new_OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *new_OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *create_OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *create_OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellDirectSpellChecker")

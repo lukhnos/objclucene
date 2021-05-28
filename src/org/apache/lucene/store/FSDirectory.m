@@ -9,9 +9,9 @@
 #include "J2ObjC_source.h"
 #include "java/io/FileOutputStream.h"
 #include "java/io/FilterOutputStream.h"
-#include "java/io/IOException.h"
 #include "java/io/OutputStream.h"
 #include "java/lang/Math.h"
+#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/List.h"
@@ -32,25 +32,27 @@
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/StandardCopyOption.h"
 
-@interface OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1 : JavaIoFilterOutputStream
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/FSDirectory must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1 : JavaIoFilterOutputStream
+
+- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)x0;
 
 - (void)writeWithByteArray:(IOSByteArray *)b
                    withInt:(jint)offset
                    withInt:(jint)length;
 
-- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1)
 
-__attribute__((unused)) static void OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1_initWithJavaIoOutputStream_(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1 *self, JavaIoOutputStream *arg$0);
+__attribute__((unused)) static void OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1_initWithJavaIoOutputStream_(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1 *self, JavaIoOutputStream *x0);
 
-__attribute__((unused)) static OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1 *new_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1_initWithJavaIoOutputStream_(JavaIoOutputStream *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1 *new_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1_initWithJavaIoOutputStream_(JavaIoOutputStream *x0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1 *create_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1_initWithJavaIoOutputStream_(JavaIoOutputStream *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1)
+__attribute__((unused)) static OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1 *create_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1_initWithJavaIoOutputStream_(JavaIoOutputStream *x0);
 
 @implementation OrgApacheLuceneStoreFSDirectory
 
@@ -125,7 +127,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1)
 }
 
 - (NSString *)description {
-  return JreStrcat("$C@$@", [[self getClass] getSimpleName], '@', directory_, @" lockFactory=", lockFactory_);
+  return JreStrcat("$C@$@", [[self java_getClass] getSimpleName], '@', directory_, @" lockFactory=", lockFactory_);
 }
 
 - (void)fsyncWithNSString:(NSString *)name {
@@ -138,28 +140,47 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:", "FSDirectory", NULL, 0x4, "Ljava.io.IOException;", NULL },
-    { "openWithOrgLukhnosPortmobileFilePath:", "open", "Lorg.apache.lucene.store.FSDirectory;", 0x9, "Ljava.io.IOException;", NULL },
-    { "openWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:", "open", "Lorg.apache.lucene.store.FSDirectory;", 0x9, "Ljava.io.IOException;", NULL },
-    { "listAllWithOrgLukhnosPortmobileFilePath:", "listAll", "[Ljava.lang.String;", 0x9, "Ljava.io.IOException;", NULL },
-    { "listAll", NULL, "[Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
-    { "fileLengthWithNSString:", "fileLength", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "deleteFileWithNSString:", "deleteFile", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "ensureCanWriteWithNSString:", "ensureCanWrite", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
-    { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x21, NULL, NULL },
-    { "getDirectory", NULL, "Lorg.lukhnos.portmobile.file.Path;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "fsyncWithNSString:", "fsync", "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreFSDirectory;", 0x9, 2, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreFSDirectory;", 0x9, 2, 0, 1, -1, -1, -1 },
+    { NULL, "[LNSString;", 0x9, 4, 3, 1, -1, -1, -1 },
+    { NULL, "[LNSString;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, 5, 6, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 6, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexOutput;", 0x1, 8, 9, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, 10, 6, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, 1, 13, -1, -1 },
+    { NULL, "V", 0x1, 14, 15, 1, -1, -1, -1 },
+    { NULL, "V", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 16, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 17, 6, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:);
+  methods[1].selector = @selector(openWithOrgLukhnosPortmobileFilePath:);
+  methods[2].selector = @selector(openWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:);
+  methods[3].selector = @selector(listAllWithOrgLukhnosPortmobileFilePath:);
+  methods[4].selector = @selector(listAll);
+  methods[5].selector = @selector(fileLengthWithNSString:);
+  methods[6].selector = @selector(deleteFileWithNSString:);
+  methods[7].selector = @selector(createOutputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[8].selector = @selector(ensureCanWriteWithNSString:);
+  methods[9].selector = @selector(syncWithJavaUtilCollection:);
+  methods[10].selector = @selector(renameFileWithNSString:withNSString:);
+  methods[11].selector = @selector(close);
+  methods[12].selector = @selector(getDirectory);
+  methods[13].selector = @selector(description);
+  methods[14].selector = @selector(fsyncWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "directory_", NULL, 0x14, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
+    { "directory_", "LOrgLukhnosPortmobileFilePath;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.store.FSDirectory$FSIndexOutput;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreFSDirectory = { 2, "FSDirectory", "org.apache.lucene.store", NULL, 0x401, 15, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgLukhnosPortmobileFilePath;LOrgApacheLuceneStoreLockFactory;", "LJavaIoIOException;", "open", "LOrgLukhnosPortmobileFilePath;", "listAll", "fileLength", "LNSString;", "deleteFile", "createOutput", "LNSString;LOrgApacheLuceneStoreIOContext;", "ensureCanWrite", "sync", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/String;>;)V", "renameFile", "LNSString;LNSString;", "toString", "fsync", "LOrgApacheLuceneStoreFSDirectory_FSIndexOutput;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreFSDirectory = { "FSDirectory", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x401, 15, 1, -1, 18, -1, -1, -1 };
   return &_OrgApacheLuceneStoreFSDirectory;
 }
 
@@ -196,13 +217,13 @@ IOSObjectArray *OrgApacheLuceneStoreFSDirectory_listAllWithOrgLukhnosPortmobileF
   id<JavaUtilList> entries = create_JavaUtilArrayList_init();
   {
     id<OrgLukhnosPortmobileFileDirectoryStream> stream = OrgLukhnosPortmobileFileFiles_newDirectoryStreamWithOrgLukhnosPortmobileFilePath_(dir);
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       for (OrgLukhnosPortmobileFilePath * __strong path in nil_chk(stream)) {
         [entries addWithId:[((OrgLukhnosPortmobileFilePath *) nil_chk([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) getFileName])) description]];
       }
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -211,10 +232,12 @@ IOSObjectArray *OrgApacheLuceneStoreFSDirectory_listAllWithOrgLukhnosPortmobileF
         if (__primaryException1 != nil) {
           @try {
             [stream close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [stream close];
         }
       }
@@ -238,20 +261,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreFSDirectory)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreFSDirectory:withNSString:", "FSIndexOutput", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreFSDirectory:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "CHUNK_SIZE", "CHUNK_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneStoreFSDirectory_FSIndexOutput_CHUNK_SIZE },
+    { "CHUNK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneStoreFSDirectory_FSIndexOutput_CHUNK_SIZE, 0x18, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreFSDirectory_FSIndexOutput = { 2, "FSIndexOutput", "org.apache.lucene.store", "FSDirectory", 0x10, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreFSDirectory;LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneStoreFSDirectory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreFSDirectory_FSIndexOutput = { "FSIndexOutput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x10, 1, 1, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreFSDirectory_FSIndexOutput;
 }
 
 @end
 
 void OrgApacheLuceneStoreFSDirectory_FSIndexOutput_initWithOrgApacheLuceneStoreFSDirectory_withNSString_(OrgApacheLuceneStoreFSDirectory_FSIndexOutput *self, OrgApacheLuceneStoreFSDirectory *outer$, NSString *name) {
-  OrgApacheLuceneStoreOutputStreamIndexOutput_initWithNSString_withJavaIoOutputStream_withInt_(self, JreStrcat("$@$", @"FSIndexOutput(path=\"", [((OrgLukhnosPortmobileFilePath *) nil_chk(outer$->directory_)) resolveWithNSString:name], @"\")"), create_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_([outer$->directory_ resolveWithNSString:name])), OrgApacheLuceneStoreFSDirectory_FSIndexOutput_CHUNK_SIZE);
+  OrgApacheLuceneStoreOutputStreamIndexOutput_initWithNSString_withJavaIoOutputStream_withInt_(self, JreStrcat("$@$", @"FSIndexOutput(path=\"", [((OrgLukhnosPortmobileFilePath *) nil_chk(outer$->directory_)) resolveWithNSString:name], @"\")"), create_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_([outer$->directory_ resolveWithNSString:name])), OrgApacheLuceneStoreFSDirectory_FSIndexOutput_CHUNK_SIZE);
 }
 
 OrgApacheLuceneStoreFSDirectory_FSIndexOutput *new_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_initWithOrgApacheLuceneStoreFSDirectory_withNSString_(OrgApacheLuceneStoreFSDirectory *outer$, NSString *name) {
@@ -264,7 +293,12 @@ OrgApacheLuceneStoreFSDirectory_FSIndexOutput *create_OrgApacheLuceneStoreFSDire
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreFSDirectory_FSIndexOutput)
 
-@implementation OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1
+@implementation OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1
+
+- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)x0 {
+  OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1_initWithJavaIoOutputStream_(self, x0);
+  return self;
+}
 
 - (void)writeWithByteArray:(IOSByteArray *)b
                    withInt:(jint)offset
@@ -277,33 +311,32 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreFSDirectory_FSIndexOutput)
   }
 }
 
-- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)arg$0 {
-  OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1_initWithJavaIoOutputStream_(self, arg$0);
-  return self;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "writeWithByteArray:withInt:withInt:", "write", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithJavaIoOutputStream:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneStoreFSDirectory_FSIndexOutput", "initWithNSString:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1 = { 2, "", "org.apache.lucene.store", "FSDirectory$FSIndexOutput", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaIoOutputStream:);
+  methods[1].selector = @selector(writeWithByteArray:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoOutputStream;", "write", "[BII", "LJavaIoIOException;", "LOrgApacheLuceneStoreFSDirectory_FSIndexOutput;", "initWithOrgApacheLuceneStoreFSDirectory:withNSString:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1 = { "", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x8010, 2, 0, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1;
 }
 
 @end
 
-void OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1_initWithJavaIoOutputStream_(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1 *self, JavaIoOutputStream *arg$0) {
-  JavaIoFilterOutputStream_initWithJavaIoOutputStream_(self, arg$0);
+void OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1_initWithJavaIoOutputStream_(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1 *self, JavaIoOutputStream *x0) {
+  JavaIoFilterOutputStream_initWithJavaIoOutputStream_(self, x0);
 }
 
-OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1 *new_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1_initWithJavaIoOutputStream_(JavaIoOutputStream *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1, initWithJavaIoOutputStream_, arg$0)
+OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1 *new_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1_initWithJavaIoOutputStream_(JavaIoOutputStream *x0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1, initWithJavaIoOutputStream_, x0)
 }
 
-OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1 *create_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1_initWithJavaIoOutputStream_(JavaIoOutputStream *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1, initWithJavaIoOutputStream_, arg$0)
+OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1 *create_OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1_initWithJavaIoOutputStream_(JavaIoOutputStream *x0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_1, initWithJavaIoOutputStream_, x0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1)

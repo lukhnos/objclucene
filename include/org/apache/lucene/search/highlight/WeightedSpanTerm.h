@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightWeightedSpanTerm
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightWeightedSpanTerm_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedSpanTerm || defined(INCLUDE_OrgApacheLuceneSearchHighlightWeightedSpanTerm))
 #define OrgApacheLuceneSearchHighlightWeightedSpanTerm_
 
@@ -24,7 +30,7 @@
 
 /*!
  @brief Lightweight class to hold term, weight, and positions used for scoring this
- term.
+  term.
  */
 @interface OrgApacheLuceneSearchHighlightWeightedSpanTerm : OrgApacheLuceneSearchHighlightWeightedTerm {
  @public
@@ -33,19 +39,18 @@
 
 #pragma mark Public
 
-- (instancetype)initWithFloat:(jfloat)weight
-                 withNSString:(NSString *)term;
+- (instancetype __nonnull)initWithFloat:(jfloat)weight
+                           withNSString:(NSString *)term;
 
-- (instancetype)initWithFloat:(jfloat)weight
-                 withNSString:(NSString *)term
-                  withBoolean:(jboolean)positionSensitive;
+- (instancetype __nonnull)initWithFloat:(jfloat)weight
+                           withNSString:(NSString *)term
+                            withBoolean:(jboolean)positionSensitive;
 
 - (void)addPositionSpansWithJavaUtilList:(id<JavaUtilList>)positionSpans;
 
 /*!
  @brief Checks to see if this term is valid at <code>position</code>.
- @param position
- to check against valid term positions
+ @param position to check against valid term positions
  @return true iff this term is a hit at this position
  */
 - (jboolean)checkPositionWithInt:(jint)position;
@@ -76,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTerm)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedSpanTerm")

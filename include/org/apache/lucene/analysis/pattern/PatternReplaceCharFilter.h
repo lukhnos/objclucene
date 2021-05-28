@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter))
 #define OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_
 
@@ -27,29 +33,30 @@
 
 /*!
  @brief CharFilter that uses a regular expression for the target of replace string.
- The pattern match will be done in each "block" in char stream.
+ The pattern match will be done in each "block" in char stream.  
  <p>
- ex1) source="aa&nbsp;&nbsp;bb&nbsp;aa&nbsp;bb", pattern="(aa)\\s+(bb)" replacement="$1#$2"<br>
- output="aa#bb&nbsp;aa#bb"
- </p>
- NOTE: If you produce a phrase that has different length to source string
- and the field is used for highlighting for a term of the phrase, you will
- face a trouble.
+  ex1) source="aa&nbsp;&nbsp;bb&nbsp;aa&nbsp;bb", pattern="(aa)\\s+(bb)" replacement="$1#$2"<br>
+  output="aa#bb&nbsp;aa#bb"
+  </p>
+  
+  NOTE: If you produce a phrase that has different length to source string
+  and the field is used for highlighting for a term of the phrase, you will
+  face a trouble.  
  <p>
- ex2) source="aa123bb", pattern="(aa)\\d+(bb)" replacement="$1&nbsp;$2"<br>
- output="aa&nbsp;bb"<br>
- and you want to search bb and highlight it, you will get<br>
- highlight snippet="aa1&lt;em&gt;23bb&lt;/em&gt;"
- </p>
+  ex2) source="aa123bb", pattern="(aa)\\d+(bb)" replacement="$1&nbsp;$2"<br>
+  output="aa&nbsp;bb"<br>
+  and you want to search bb and highlight it, you will get<br>
+  highlight snippet="aa1&lt;em&gt;23bb&lt;/em&gt;"
+  </p>
  @since Solr 1.5
  */
 @interface OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter : OrgApacheLuceneAnalysisCharfilterBaseCharFilter
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                                withNSString:(NSString *)replacement
-                            withJavaIoReader:(JavaIoReader *)inArg;
+- (instancetype __nonnull)initWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                                          withNSString:(NSString *)replacement
+                                      withJavaIoReader:(JavaIoReader *)inArg;
 
 - (jint)read;
 
@@ -68,6 +75,10 @@
  */
 - (id<JavaLangCharSequence>)processPatternWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter)
@@ -82,4 +93,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilte
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter")

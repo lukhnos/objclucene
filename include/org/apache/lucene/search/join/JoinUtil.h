@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinJoinUtil
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinJoinUtil_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinJoinUtil || defined(INCLUDE_OrgApacheLuceneSearchJoinJoinUtil))
 #define OrgApacheLuceneSearchJoinJoinUtil_
 
@@ -31,28 +37,28 @@
 /*!
  @brief Method for query time joining.
  <p>
- Execute the returned query with a <code>IndexSearcher</code> to retrieve all documents that have the same terms in the
- to field that match with documents matching the specified fromQuery and have the same terms in the from field.
+  Execute the returned query with a <code>IndexSearcher</code> to retrieve all documents that have the same terms in the
+  to field that match with documents matching the specified fromQuery and have the same terms in the from field. 
  <p>
- In the case a single document relates to more than one document the <code>multipleValuesPerDocument</code> option
- should be set to true. When the <code>multipleValuesPerDocument</code> is set to <code>true</code> only the
- the score from the first encountered join value originating from the 'from' side is mapped into the 'to' side.
- Even in the case when a second join value related to a specific document yields a higher score. Obviously this
- doesn't apply in the case that <code>ScoreMode.None</code> is used, since no scores are computed at all.
+  In the case a single document relates to more than one document the <code>multipleValuesPerDocument</code> option
+  should be set to true. When the <code>multipleValuesPerDocument</code> is set to <code>true</code> only the
+  the score from the first encountered join value originating from the 'from' side is mapped into the 'to' side.
+  Even in the case when a second join value related to a specific document yields a higher score. Obviously this
+  doesn't apply in the case that <code>ScoreMode.None</code> is used, since no scores are computed at all. 
  <p>
- Memory considerations: During joining all unique join values are kept in memory. On top of that when the scoreMode
- isn't set to <code>ScoreMode.None</code> a float value per unique join value is kept in memory for computing scores.
- When scoreMode is set to <code>ScoreMode.Avg</code> also an additional integer value is kept in memory per unique
- join value.
- @param fromField                 The from field to join from
+  Memory considerations: During joining all unique join values are kept in memory. On top of that when the scoreMode
+  isn't set to <code>ScoreMode.None</code> a float value per unique join value is kept in memory for computing scores.
+  When scoreMode is set to <code>ScoreMode.Avg</code> also an additional integer value is kept in memory per unique
+  join value.
+ @param fromField The from field to join from
  @param multipleValuesPerDocument Whether the from field has multiple terms per document
- @param toField                   The to field to join to
- @param fromQuery                 The query to match documents on the from side
- @param fromSearcher              The searcher that executed the specified fromQuery
- @param scoreMode                 Instructs how scores from the fromQuery are mapped to the returned query
+ @param toField The to field to join to
+ @param fromQuery The query to match documents on the from side
+ @param fromSearcher The searcher that executed the specified fromQuery
+ @param scoreMode Instructs how scores from the fromQuery are mapped to the returned query
  @return a <code>Query</code> instance that can be used to join documents based on the
- terms in the from and to field
- @throws IOException If I/O related errors occur
+          terms in the from and to field
+ @throw IOExceptionIf I/O related errors occur
  */
 + (OrgApacheLuceneSearchQuery *)createJoinQueryWithNSString:(NSString *)fromField
                                                 withBoolean:(jboolean)multipleValuesPerDocument
@@ -62,17 +68,16 @@
                      withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
 
 /*!
- @brief Delegates to <code>createJoinQuery(String,Query,Query,IndexSearcher,ScoreMode,MultiDocValues.OrdinalMap,int,int)</code>,
- but disables the min and max filtering.
- @param joinField   The <code>SortedDocValues</code> field containing the join values
- @param fromQuery   The query containing the actual user query. Also the fromQuery can only match "from" documents.
- @param toQuery     The query identifying all documents on the "to" side.
- @param searcher    The index searcher used to execute the from query
- @param scoreMode   Instructs how scores from the fromQuery are mapped to the returned query
- @param ordinalMap  The ordinal map constructed over the joinField. In case of a single segment index, no ordinal map
- needs to be provided.
+ @brief Delegates to <code>createJoinQuery(String, Query, Query, IndexSearcher, ScoreMode, MultiDocValues.OrdinalMap, int, int)</code>,
+  but disables the min and max filtering.
+ @param joinField The <code>SortedDocValues</code>  field containing the join values
+ @param fromQuery The query containing the actual user query. Also the fromQuery can only match "from" documents.
+ @param toQuery The query identifying all documents on the "to" side.
+ @param searcher The index searcher used to execute the from query
+ @param scoreMode Instructs how scores from the fromQuery are mapped to the returned query
+ @param ordinalMap The ordinal map constructed over the joinField. In case of a single segment index, no ordinal map                     needs to be provided.
  @return a <code>Query</code> instance that can be used to join documents based on the join field
- @throws IOException If I/O related errors occur
+ @throw IOExceptionIf I/O related errors occur
  */
 + (OrgApacheLuceneSearchQuery *)createJoinQueryWithNSString:(NSString *)joinField
                              withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
@@ -84,29 +89,26 @@
 /*!
  @brief A query time join using global ordinals over a dedicated join field.
  This join has certain restrictions and requirements:
- 1) A document can only refer to one other document. (but can be referred by one or more documents)
- 2) Documents on each side of the join must be distinguishable. Typically this can be done by adding an extra field
- that identifies the "from" and "to" side and then the fromQuery and toQuery must take the this into account.
- 3) There must be a single sorted doc values join field used by both the "from" and "to" documents. This join field
- should store the join values as UTF-8 strings.
- 4) An ordinal map must be provided that is created on top of the join field.
- Note: min and max filtering and the avg score mode will require this join to keep track of the number of times
- a document matches per join value. This will increase the per join cost in terms of execution time and memory.
- @param joinField   The <code>SortedDocValues</code> field containing the join values
- @param fromQuery   The query containing the actual user query. Also the fromQuery can only match "from" documents.
- @param toQuery     The query identifying all documents on the "to" side.
- @param searcher    The index searcher used to execute the from query
- @param scoreMode   Instructs how scores from the fromQuery are mapped to the returned query
- @param ordinalMap  The ordinal map constructed over the joinField. In case of a single segment index, no ordinal map
- needs to be provided.
- @param min         Optionally the minimum number of "from" documents that are required to match for a "to" document
- to be a match. The min is inclusive. Setting min to 0 and max to <code>Interger.MAX_VALUE</code>
- disables the min and max "from" documents filtering
- @param max         Optionally the maximum number of "from" documents that are allowed to match for a "to" document
- to be a match. The max is inclusive. Setting min to 0 and max to <code>Interger.MAX_VALUE</code>
- disables the min and max "from" documents filtering
+  1) A document can only refer to one other document. (but can be referred by one or more documents)
+  2) Documents on each side of the join must be distinguishable. Typically this can be done by adding an extra field
+     that identifies the "from" and "to" side and then the fromQuery and toQuery must take the this into account.
+  3) There must be a single sorted doc values join field used by both the "from" and "to" documents. This join field
+     should store the join values as UTF-8 strings.
+  4) An ordinal map must be provided that is created on top of the join field.
+  Note: min and max filtering and the avg score mode will require this join to keep track of the number of times
+  a document matches per join value. This will increase the per join cost in terms of execution time and memory.
+ @param joinField The <code>SortedDocValues</code>  field containing the join values
+ @param fromQuery The query containing the actual user query. Also the fromQuery can only match "from" documents.
+ @param toQuery The query identifying all documents on the "to" side.
+ @param searcher The index searcher used to execute the from query
+ @param scoreMode Instructs how scores from the fromQuery are mapped to the returned query
+ @param ordinalMap The ordinal map constructed over the joinField. In case of a single segment index, no ordinal map                     needs to be provided.
+ @param min Optionally the minimum number of "from" documents that are required to match for a "to" document                     to be a match. The min is inclusive. Setting min to 0 and max to 
+  <code> Interger.MAX_VALUE </code>                     disables the min and max "from" documents filtering
+ @param max Optionally the maximum number of "from" documents that are allowed to match for a "to" document                     to be a match. The max is inclusive. Setting min to 0 and max to 
+  <code> Interger.MAX_VALUE </code>                     disables the min and max "from" documents filtering
  @return a <code>Query</code> instance that can be used to join documents based on the join field
- @throws IOException If I/O related errors occur
+ @throw IOExceptionIf I/O related errors occur
  */
 + (OrgApacheLuceneSearchQuery *)createJoinQueryWithNSString:(NSString *)joinField
                              withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
@@ -131,4 +133,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinJoinUtil)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinJoinUtil")

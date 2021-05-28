@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/TypeAttribute must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 NSString *OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE = @"word";
 
 @implementation OrgApacheLuceneAnalysisTokenattributesTypeAttribute
@@ -15,14 +19,21 @@ NSString *OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE = @"w
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "type", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "setTypeWithNSString:", "setType", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(type);
+  methods[1].selector = @selector(setTypeWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_TYPE", "DEFAULT_TYPE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_TYPE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 2, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesTypeAttribute = { 2, "TypeAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setType", "LNSString;", &OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesTypeAttribute = { "TypeAttribute", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, fields, 7, 0x609, 2, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesTypeAttribute;
 }
 

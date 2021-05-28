@@ -15,8 +15,8 @@
 #include "java/text/ParseException.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/document/FieldType.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
 #include "org/apache/lucene/queryparser/flexible/core/QueryNodeParseException.h"
+#include "org/apache/lucene/queryparser/flexible/core/config/ConfigurationKey.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/FieldConfig.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
 #include "org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages.h"
@@ -31,6 +31,10 @@
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/NumericRangeQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/processors/NumericQueryNodeProcessor.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/processors/NumericQueryNodeProcessor must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -42,22 +46,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]] && !([OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_class_() isInstance:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) getParent]])) {
-    OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config = [self getQueryConfigHandler];
+    OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config = JreRetainedLocalValue([self getQueryConfigHandler]);
     if (config != nil) {
       OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fieldNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) cast_chk(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
-      OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *fieldConfig = [config getFieldConfigWithNSString:[((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(fieldNode)) getFieldAsString]];
+      OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *fieldConfig = JreRetainedLocalValue([config getFieldConfigWithNSString:[((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(fieldNode)) getFieldAsString]]);
       if (fieldConfig != nil) {
-        OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig = [fieldConfig getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, NUMERIC_CONFIG)];
+        OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig = JreRetainedLocalValue([fieldConfig getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, NUMERIC_CONFIG)]);
         if (numericConfig != nil) {
-          JavaTextNumberFormat *numberFormat = [numericConfig getNumberFormat];
-          NSString *text = [fieldNode getTextAsString];
+          JavaTextNumberFormat *numberFormat = JreRetainedLocalValue([numericConfig getNumberFormat]);
+          NSString *text = JreRetainedLocalValue([fieldNode getTextAsString]);
           NSNumber *number = nil;
-          if (((jint) [((NSString *) nil_chk(text)) length]) > 0) {
+          if ([((NSString *) nil_chk(text)) java_length] > 0) {
             @try {
               number = [((JavaTextNumberFormat *) nil_chk(numberFormat)) parseWithNSString:text];
             }
             @catch (JavaTextParseException *e) {
-              @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withNSException_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, COULD_NOT_PARSE_NUMBER), [IOSObjectArray arrayWithObjects:(id[]){ [fieldNode getTextAsString], [[numberFormat getClass] getCanonicalName] } count:2 type:NSObject_class_()]), e);
+              @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, COULD_NOT_PARSE_NUMBER), [IOSObjectArray arrayWithObjects:(id[]){ [fieldNode getTextAsString], [[numberFormat java_getClass] getCanonicalName] } count:2 type:NSObject_class_()]), e);
             }
             switch ([[numericConfig getType] ordinal]) {
               case OrgApacheLuceneDocumentFieldType_NumericType_Enum_LONG:
@@ -95,13 +99,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NumericQueryNodeProcessor", NULL, 0x1, NULL, NULL },
-    { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x4, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x4, 3, 1, 2, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x4, 4, 5, 2, 6, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor = { 2, "NumericQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[2].selector = @selector(preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[3].selector = @selector(setChildrenOrderWithJavaUtilList:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "postProcessNode", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", "LOrgApacheLuceneQueryparserFlexibleCoreQueryNodeException;", "preProcessNode", "setChildrenOrder", "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor = { "NumericQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor;
 }
 

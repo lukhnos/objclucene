@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/AndQueryNode.h"
@@ -16,6 +15,10 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/AnyQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode () {
  @public
@@ -98,21 +101,34 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode, fie
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withJavaLangCharSequence:withInt:", "AnyQueryNode", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Ljava/lang/CharSequence;I)V" },
-    { "getMinimumMatchingElements", NULL, "I", 0x1, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "getFieldAsString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "setFieldWithJavaLangCharSequence:", "setField", "V", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 6, 7, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withJavaLangCharSequence:withInt:);
+  methods[1].selector = @selector(getMinimumMatchingElements);
+  methods[2].selector = @selector(getField);
+  methods[3].selector = @selector(getFieldAsString);
+  methods[4].selector = @selector(setFieldWithJavaLangCharSequence:);
+  methods[5].selector = @selector(cloneTree);
+  methods[6].selector = @selector(description);
+  methods[7].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x2, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minimumMatchingmElements_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "minimumMatchingmElements_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode = { 2, "AnyQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 8, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;LJavaLangCharSequence;I", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Ljava/lang/CharSequence;I)V", "setField", "LJavaLangCharSequence;", "LJavaLangCloneNotSupportedException;", "toString", "toQueryString", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode = { "AnyQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x1, 8, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode;
 }
 
@@ -128,7 +144,7 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilLis
     for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong clause in clauses) {
       if ([clause isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]]) {
         if ([clause isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl class]]) {
-          ((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) cast_chk(clause, [OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl class]))))->toQueryStringIgnoreFields_ = true;
+          ((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) clause)))->toQueryStringIgnoreFields_ = true;
         }
         if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:clause]) {
           [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(clause, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:field];

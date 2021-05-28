@@ -6,17 +6,17 @@
 /*!
  @brief Finite-state automaton for regular expressions.
  <p>
- This package contains a full DFA/NFA implementation with Unicode
- alphabet and support for all standard (and a number of non-standard)
- regular expression operations.
+  This package contains a full DFA/NFA implementation with Unicode
+  alphabet and support for all standard (and a number of non-standard)
+  regular expression operations. 
  <p>
- The most commonly used functionality is located in the classes
- <tt><code>org.apache.lucene.util.automaton.Automaton</code></tt> and
+  The most commonly used functionality is located in the classes 
+ <tt><code>org.apache.lucene.util.automaton.Automaton</code></tt> and 
  <tt><code>org.apache.lucene.util.automaton.RegExp</code></tt>.
- <p>
- For more information, go to the package home page at 
- <tt><a href="http://www.brics.dk/automaton/" 
- target="_top">http://www.brics.dk/automaton/</a></tt>.
+  <p>
+  For more information, go to the package home page at  
+ <tt><a href="http://www.brics.dk/automaton/" target="_top">
+ http://www.brics.dk/automaton/</a></tt>.
  */
 #include "J2ObjC_header.h"
 
@@ -28,4 +28,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonPackage_info")

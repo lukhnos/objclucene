@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTermAutomatonScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTermAutomatonScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonScorer || defined(INCLUDE_OrgApacheLuceneSearchTermAutomatonScorer))
 #define OrgApacheLuceneSearchTermAutomatonScorer_
 
@@ -23,6 +29,7 @@
 @class IOSObjectArray;
 @class OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
 @class OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight;
+@class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilMap;
 
 @interface OrgApacheLuceneSearchTermAutomatonScorer : OrgApacheLuceneSearchScorer {
@@ -32,11 +39,11 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight:(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *)weight
-                     withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray:(IOSObjectArray *)subs
-                                                                            withInt:(jint)anyTermID
-                                                                    withJavaUtilMap:(id<JavaUtilMap>)idToTerm
-                          withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight:(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *)weight
+                                             withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray:(IOSObjectArray *)subs
+                                                                                                    withInt:(jint)anyTermID
+                                                                                            withJavaUtilMap:(id<JavaUtilMap>)idToTerm
+                                                  withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -52,15 +59,19 @@
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermAutomatonScorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermAutomatonScorer *self, OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *weight, IOSObjectArray *subs, jint anyTermID, id<JavaUtilMap> idToTerm, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonScorer_initPackagePrivateWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermAutomatonScorer *self, OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *weight, IOSObjectArray *subs, jint anyTermID, id<JavaUtilMap> idToTerm, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonScorer *new_OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *weight, IOSObjectArray *subs, jint anyTermID, id<JavaUtilMap> idToTerm, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonScorer *new_OrgApacheLuceneSearchTermAutomatonScorer_initPackagePrivateWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *weight, IOSObjectArray *subs, jint anyTermID, id<JavaUtilMap> idToTerm, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonScorer *create_OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *weight, IOSObjectArray *subs, jint anyTermID, id<JavaUtilMap> idToTerm, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonScorer *create_OrgApacheLuceneSearchTermAutomatonScorer_initPackagePrivateWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *weight, IOSObjectArray *subs, jint anyTermID, id<JavaUtilMap> idToTerm, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonScorer)
 
@@ -79,8 +90,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonScorer)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                      withInt:(jint)termCount;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
+                                                                withInt:(jint)termCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg0
+                                                                withInt:(jint)arg1
+                                                            withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg0
+                                                                withInt:(jint)arg1
+                                                            withBoolean:(jboolean)arg2
+                                                                withInt:(jint)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -96,4 +118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutom
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonScorer")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSortedNumericSelector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSortedNumericSelector_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedNumericSelector || defined(INCLUDE_OrgApacheLuceneSearchSortedNumericSelector))
 #define OrgApacheLuceneSearchSortedNumericSelector_
 
@@ -22,20 +28,20 @@
 @class OrgApacheLuceneSearchSortedNumericSelector_Type;
 
 /*!
- @brief Selects a value from the document's list to use as the representative value 
+ @brief Selects a value from the document's list to use as the representative value
  <p>
- This provides a NumericDocValues view over the SortedNumeric, for use with sorting,
- expressions, function queries, etc.
+  This provides a NumericDocValues view over the SortedNumeric, for use with sorting,
+  expressions, function queries, etc.
  */
 @interface OrgApacheLuceneSearchSortedNumericSelector : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Wraps a multi-valued SortedNumericDocValues as a single-valued view, using the specified selector 
- and numericType.
+  and numericType.
  */
 + (OrgApacheLuceneIndexNumericDocValues *)wrapWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)sortedNumeric
                                          withOrgApacheLuceneSearchSortedNumericSelector_Type:(OrgApacheLuceneSearchSortedNumericSelector_Type *)selector
@@ -45,13 +51,13 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedNumericSelector)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(OrgApacheLuceneIndexSortedNumericDocValues *sortedNumeric, OrgApacheLuceneSearchSortedNumericSelector_Type *selector, OrgApacheLuceneSearchSortField_Type *numericType);
-
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedNumericSelector_init(OrgApacheLuceneSearchSortedNumericSelector *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSelector *new_OrgApacheLuceneSearchSortedNumericSelector_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSelector *new_OrgApacheLuceneSearchSortedNumericSelector_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSelector *create_OrgApacheLuceneSearchSortedNumericSelector_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSelector *create_OrgApacheLuceneSearchSortedNumericSelector_init(void);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(OrgApacheLuceneIndexSortedNumericDocValues *sortedNumeric, OrgApacheLuceneSearchSortedNumericSelector_Type *selector, OrgApacheLuceneSearchSortField_Type *numericType);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSelector)
 
@@ -64,6 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSelector)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSortedNumericSelector_Type_Enum) {
   OrgApacheLuceneSearchSortedNumericSelector_Type_Enum_MIN = 0,
   OrgApacheLuceneSearchSortedNumericSelector_Type_Enum_MAX = 1,
@@ -72,19 +80,18 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSortedNumericSelector_Type_Enum
 /*!
  @brief Type of selection to perform.
  */
-@interface OrgApacheLuceneSearchSortedNumericSelector_Type : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneSearchSortedNumericSelector_Type : JavaLangEnum
 
-+ (OrgApacheLuceneSearchSortedNumericSelector_Type *)MIN;
-
-+ (OrgApacheLuceneSearchSortedNumericSelector_Type *)MAX;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortedNumericSelector_Type *MIN NS_SWIFT_NAME(MIN);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortedNumericSelector_Type *MAX NS_SWIFT_NAME(MAX);
+#pragma mark Public
 
 + (OrgApacheLuceneSearchSortedNumericSelector_Type *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneSearchSortedNumericSelector_Type_Enum)toNSEnum;
 
 @end
@@ -97,16 +104,16 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSelector_Type *OrgApacheLuce
 /*!
  @brief Selects the minimum value in the set
  */
-inline OrgApacheLuceneSearchSortedNumericSelector_Type *OrgApacheLuceneSearchSortedNumericSelector_Type_get_MIN();
+inline OrgApacheLuceneSearchSortedNumericSelector_Type *OrgApacheLuceneSearchSortedNumericSelector_Type_get_MIN(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortedNumericSelector_Type, MIN)
 
 /*!
  @brief Selects the maximum value in the set
  */
-inline OrgApacheLuceneSearchSortedNumericSelector_Type *OrgApacheLuceneSearchSortedNumericSelector_Type_get_MAX();
+inline OrgApacheLuceneSearchSortedNumericSelector_Type *OrgApacheLuceneSearchSortedNumericSelector_Type_get_MAX(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortedNumericSelector_Type, MAX)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSortedNumericSelector_Type_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSortedNumericSelector_Type_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSelector_Type *OrgApacheLuceneSearchSortedNumericSelector_Type_valueOfWithNSString_(NSString *name);
 
@@ -139,7 +146,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSelector_Type)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -180,7 +191,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSelector_MinValue)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -198,4 +213,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSelector_MaxValue)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortedNumericSelector")

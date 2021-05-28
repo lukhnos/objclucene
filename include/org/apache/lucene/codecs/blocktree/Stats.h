@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsBlocktreeStats
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsBlocktreeStats_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeStats || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeStats))
 #define OrgApacheLuceneCodecsBlocktreeStats_
 
@@ -22,7 +28,7 @@
 
 /*!
  @brief BlockTree statistics for a single field 
- returned by <code>FieldReader.getStats()</code>.
+  returned by <code>FieldReader.getStats()</code>.
  */
 @interface OrgApacheLuceneCodecsBlocktreeStats : NSObject {
  @public
@@ -44,7 +50,7 @@
   jint nonFloorBlockCount_;
   /*!
    @brief The number of floor blocks (meta-blocks larger than the
- allowed <code>maxItemsPerBlock</code>) in the terms file.
+   allowed <code>maxItemsPerBlock</code>) in the terms file.
    */
   jint floorBlockCount_;
   /*!
@@ -53,17 +59,17 @@
   jint floorSubBlockCount_;
   /*!
    @brief The number of "internal" blocks (that have both
- terms and sub-blocks).
+   terms and sub-blocks).
    */
   jint mixedBlockCount_;
   /*!
    @brief The number of "leaf" blocks (blocks that have only
- terms).
+   terms).
    */
   jint termsOnlyBlockCount_;
   /*!
    @brief The number of "internal" blocks that do not contain
- terms (have only sub-blocks).
+   terms (have only sub-blocks).
    */
   jint subBlocksOnlyBlockCount_;
   /*!
@@ -80,13 +86,13 @@
   jlong totalBlockSuffixBytes_;
   /*!
    @brief Total number of bytes used to store term stats (not
- including what the <code>PostingsReaderBase</code>
- stores.
+   including what the <code>PostingsReaderBase</code>
+   stores.
    */
   jlong totalBlockStatsBytes_;
   /*!
    @brief Total bytes stored by the <code>PostingsReaderBase</code>,
- plus the other few vInts stored in the frame.
+   plus the other few vInts stored in the frame.
    */
   jlong totalBlockOtherBytes_;
   /*!
@@ -105,8 +111,8 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)segment
-                    withNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)segment
+                              withNSString:(NSString *)field;
 
 - (void)endBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *)frame;
 
@@ -116,6 +122,10 @@
                                                               withBoolean:(jboolean)isFloor;
 
 - (void)termWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -135,4 +145,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeStats)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeStats")

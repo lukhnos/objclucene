@@ -3,9 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/miscellaneous/KeywordMarkerFilterFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/Map.h"
 #include "java/util/regex/Pattern.h"
@@ -13,10 +11,13 @@
 #include "org/apache/lucene/analysis/miscellaneous/KeywordMarkerFilterFactory.h"
 #include "org/apache/lucene/analysis/miscellaneous/PatternKeywordMarkerFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/SetKeywordMarkerFilter.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/KeywordMarkerFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory () {
  @public
@@ -84,22 +85,31 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "KeywordMarkerFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "isIgnoreCase", NULL, "Z", 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(informWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[2].selector = @selector(isIgnoreCase);
+  methods[3].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "PROTECTED_TOKENS", "PROTECTED_TOKENS", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS, NULL, .constantValue.asLong = 0 },
-    { "PATTERN", "PATTERN", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN, NULL, .constantValue.asLong = 0 },
-    { "wordFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stringPattern_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "pattern_", NULL, 0x2, "Ljava.util.regex.Pattern;", NULL, NULL, .constantValue.asLong = 0 },
-    { "protectedWords_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
+    { "PROTECTED_TOKENS", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 7, -1, -1 },
+    { "PATTERN", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 8, -1, -1 },
+    { "wordFiles_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "stringPattern_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "ignoreCase_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "pattern_", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "protectedWords_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory = { 2, "KeywordMarkerFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 4, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "inform", "LOrgApacheLuceneAnalysisUtilResourceLoader;", "LJavaIoIOException;", "create", "LOrgApacheLuceneAnalysisTokenStream;", &OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS, &OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory = { "KeywordMarkerFilterFactory", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x1, 4, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory;
 }
 

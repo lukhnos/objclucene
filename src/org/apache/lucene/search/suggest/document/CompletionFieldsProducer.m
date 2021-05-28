@@ -8,7 +8,7 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
+#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
@@ -38,6 +38,10 @@
 #include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/CompletionFieldsProducer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer () {
  @public
   OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer_;
@@ -45,8 +49,8 @@
   OrgApacheLuceneStoreIndexInput *dictIn_;
 }
 
-- (instancetype)initWithOrgApacheLuceneCodecsFieldsProducer:(OrgApacheLuceneCodecsFieldsProducer *)delegateFieldsProducer
-                                            withJavaUtilMap:(id<JavaUtilMap>)readers;
+- (instancetype)initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer:(OrgApacheLuceneCodecsFieldsProducer *)delegateFieldsProducer
+                                                          withJavaUtilMap:(id<JavaUtilMap>)readers;
 
 @end
 
@@ -54,22 +58,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer, readers_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer, dictIn_, OrgApacheLuceneStoreIndexInput *)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *self, OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers);
+__attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *self, OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers);
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers);
 
 @implementation OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer
 
-- (instancetype)initWithOrgApacheLuceneCodecsFieldsProducer:(OrgApacheLuceneCodecsFieldsProducer *)delegateFieldsProducer
-                                            withJavaUtilMap:(id<JavaUtilMap>)readers {
-  OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(self, delegateFieldsProducer, readers);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer:(OrgApacheLuceneCodecsFieldsProducer *)delegateFieldsProducer
+                                                          withJavaUtilMap:(id<JavaUtilMap>)readers {
+  OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(self, delegateFieldsProducer, readers);
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(self, state);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
+  OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_(self, state);
   return self;
 }
 
@@ -92,7 +96,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFie
 }
 
 - (OrgApacheLuceneCodecsFieldsProducer *)getMergeInstance {
-  return create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(delegateFieldsProducer_, readers_);
+  return create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(delegateFieldsProducer_, readers_);
 }
 
 - (jlong)ramBytesUsed {
@@ -116,7 +120,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFie
 }
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field {
-  OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk(delegateFieldsProducer_)) termsWithNSString:field];
+  OrgApacheLuceneIndexTerms *terms = JreRetainedLocalValue([((OrgApacheLuceneCodecsFieldsProducer *) nil_chk(delegateFieldsProducer_)) termsWithNSString:field]);
   if (terms == nil) {
     return nil;
   }
@@ -128,7 +132,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFie
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -139,51 +143,66 @@ __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFie
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsFieldsProducer:withJavaUtilMap:", "CompletionFieldsProducer", NULL, 0x2, NULL, "(Lorg/apache/lucene/codecs/FieldsProducer;Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/search/suggest/document/CompletionsTermsReader;>;)V" },
-    { "initWithOrgApacheLuceneIndexSegmentReadState:", "CompletionFieldsProducer", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.FieldsProducer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldsProducer;", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 5, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x1, 6, 7, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer:withJavaUtilMap:);
+  methods[1].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState:);
+  methods[2].selector = @selector(close);
+  methods[3].selector = @selector(checkIntegrity);
+  methods[4].selector = @selector(getMergeInstance);
+  methods[5].selector = @selector(ramBytesUsed);
+  methods[6].selector = @selector(getChildResources);
+  methods[7].selector = @selector(iterator);
+  methods[8].selector = @selector(termsWithNSString:);
+  methods[9].selector = @selector(size);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "delegateFieldsProducer_", NULL, 0x2, "Lorg.apache.lucene.codecs.FieldsProducer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "readers_", NULL, 0x2, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/search/suggest/document/CompletionsTermsReader;>;", .constantValue.asLong = 0 },
-    { "dictIn_", NULL, 0x2, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "delegateFieldsProducer_", "LOrgApacheLuceneCodecsFieldsProducer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "readers_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 8, -1 },
+    { "dictIn_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer = { 2, "CompletionFieldsProducer", "org.apache.lucene.search.suggest.document", NULL, 0x10, 10, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsFieldsProducer;LJavaUtilMap;", "(Lorg/apache/lucene/codecs/FieldsProducer;Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/search/suggest/document/CompletionsTermsReader;>;)V", "LOrgApacheLuceneIndexSegmentReadState;", "LJavaIoIOException;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "()Ljava/util/Iterator<Ljava/lang/String;>;", "terms", "LNSString;", "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/search/suggest/document/CompletionsTermsReader;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer = { "CompletionFieldsProducer", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x10, 10, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *self, OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers) {
+void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *self, OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers) {
   OrgApacheLuceneCodecsFieldsProducer_init(self);
   JreStrongAssign(&self->delegateFieldsProducer_, delegateFieldsProducer);
   JreStrongAssign(&self->readers_, readers);
 }
 
-OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer, initWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_, delegateFieldsProducer, readers)
+OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer, initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_, delegateFieldsProducer, readers)
 }
 
-OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer, initWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_, delegateFieldsProducer, readers)
+OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_(OrgApacheLuceneCodecsFieldsProducer *delegateFieldsProducer, id<JavaUtilMap> readers) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer, initPackagePrivateWithOrgApacheLuceneCodecsFieldsProducer_withJavaUtilMap_, delegateFieldsProducer, readers)
 }
 
-void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *self, OrgApacheLuceneIndexSegmentReadState *state) {
+void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *self, OrgApacheLuceneIndexSegmentReadState *state) {
   OrgApacheLuceneCodecsFieldsProducer_init(self);
   NSString *indexFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_INDEX_EXTENSION);
   JreStrongAssign(&self->delegateFieldsProducer_, nil);
   jboolean success = false;
   @try {
     OrgApacheLuceneStoreChecksumIndexInput *index = [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openChecksumInputWithNSString:indexFile withOrgApacheLuceneStoreIOContext:state->context_];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       NSString *dictFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_DICT_EXTENSION);
       JreStrongAssign(&self->dictIn_, [state->directory_ openInputWithNSString:dictFile withOrgApacheLuceneStoreIOContext:state->context_]);
@@ -200,13 +219,13 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApa
         jlong minWeight = [index readVLong];
         jlong maxWeight = [index readVLong];
         jbyte type = [index readByte];
-        OrgApacheLuceneIndexFieldInfo *fieldInfo = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(state->fieldInfos_)) fieldInfoWithInt:fieldNumber];
+        OrgApacheLuceneIndexFieldInfo *fieldInfo = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk(state->fieldInfos_)) fieldInfoWithInt:fieldNumber]);
         [((id<JavaUtilMap>) nil_chk(self->readers_)) putWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_ withId:create_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_(self->dictIn_, offset, minWeight, maxWeight, type)];
       }
       OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_(index);
       success = true;
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -215,10 +234,12 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApa
         if (__primaryException1 != nil) {
           @try {
             [index close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [index close];
         }
       }
@@ -231,12 +252,12 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApa
   }
 }
 
-OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer, initWithOrgApacheLuceneIndexSegmentReadState_, state)
+OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer, initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_, state)
 }
 
-OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer, initWithOrgApacheLuceneIndexSegmentReadState_, state)
+OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer, initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_, state)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer)

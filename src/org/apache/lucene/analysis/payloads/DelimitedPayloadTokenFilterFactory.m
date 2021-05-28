@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/payloads/DelimitedPayloadTokenFilterFactory.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/Map.h"
@@ -13,9 +14,12 @@
 #include "org/apache/lucene/analysis/payloads/IdentityEncoder.h"
 #include "org/apache/lucene/analysis/payloads/IntegerEncoder.h"
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/payloads/DelimitedPayloadTokenFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory () {
  @public
@@ -73,19 +77,27 @@ NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELI
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "DelimitedPayloadTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.payloads.DelimitedPayloadTokenFilter;", 0x1, NULL, NULL },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[2].selector = @selector(informWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ENCODER_ATTR", "ENCODER_ATTR", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR, NULL, .constantValue.asLong = 0 },
-    { "DELIMITER_ATTR", "DELIMITER_ATTR", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR, NULL, .constantValue.asLong = 0 },
-    { "encoderClass_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "delimiter_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "encoder_", NULL, 0x2, "Lorg.apache.lucene.analysis.payloads.PayloadEncoder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "ENCODER_ATTR", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 6, -1, -1 },
+    { "DELIMITER_ATTR", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 7, -1, -1 },
+    { "encoderClass_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "delimiter_", "C", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "encoder_", "LOrgApacheLuceneAnalysisPayloadsPayloadEncoder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory = { 2, "DelimitedPayloadTokenFilterFactory", "org.apache.lucene.analysis.payloads", NULL, 0x1, 3, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LOrgApacheLuceneAnalysisTokenStream;", "inform", "LOrgApacheLuceneAnalysisUtilResourceLoader;", &OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR, &OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory = { "DelimitedPayloadTokenFilterFactory", "org.apache.lucene.analysis.payloads", ptrTable, methods, fields, 7, 0x1, 3, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory;
 }
 

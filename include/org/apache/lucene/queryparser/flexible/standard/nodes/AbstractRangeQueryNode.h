@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_
 
@@ -26,6 +32,7 @@
 
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
 /*!
@@ -46,13 +53,13 @@
  @brief Returns the lower bound node.
  @return the lower bound node.
  */
-- (id)getLowerBound;
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>)getLowerBound;
 
 /*!
  @brief Returns the upper bound node.
  @return the upper bound node.
  */
-- (id)getUpperBound;
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>)getUpperBound;
 
 /*!
  @brief Returns whether the lower bound is inclusive or exclusive.
@@ -66,12 +73,14 @@
  */
 - (jboolean)isUpperInclusive;
 
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
+
 /*!
  @brief Sets the lower and upper bounds.
- @param lower the lower bound, <code>null</code> if lower bound is open
- @param upper the upper bound, <code>null</code> if upper bound is open
- @param lowerInclusive <code>true</code> if the lower bound is inclusive, otherwise, <code>false</code>
- @param upperInclusive <code>true</code> if the upper bound is inclusive, otherwise, <code>false</code>
+ @param lower the lower bound,  <code> null </code>  if lower bound is open
+ @param upper the upper bound,  <code> null </code>  if upper bound is open
+ @param lowerInclusive <code> true </code>  if the lower bound is inclusive, otherwise,  <code> false </code>
+ @param upperInclusive <code> true </code>  if the upper bound is inclusive, otherwise,  <code> false </code>
  - seealso: #getLowerBound()
  - seealso: #getUpperBound()
  - seealso: #isLowerInclusive()
@@ -96,9 +105,9 @@
 
 /*!
  @brief Constructs an <code>AbstractRangeQueryNode</code>, it should be invoked only by
- its extenders.
+  its extenders.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -106,12 +115,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardNodesAbstract
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode")

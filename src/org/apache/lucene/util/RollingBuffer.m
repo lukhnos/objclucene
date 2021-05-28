@@ -3,12 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/util/RollingBuffer.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/System.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/RollingBuffer.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/RollingBuffer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilRollingBuffer () {
  @public
@@ -43,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (id)newInstance {
+- (id<OrgApacheLuceneUtilRollingBuffer_Resettable>)newInstance {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -71,7 +76,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneUtilRollingBuffer_getIndexWithInt_(self, pos);
 }
 
-- (id)getWithInt:(jint)pos {
+- (id<OrgApacheLuceneUtilRollingBuffer_Resettable>)getWithInt:(jint)pos {
   while (pos >= nextPos_) {
     if (count_ == ((IOSObjectArray *) nil_chk(buffer_))->size_) {
       IOSObjectArray *newBuffer = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + count_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) type:OrgApacheLuceneUtilRollingBuffer_Resettable_class_()];
@@ -90,7 +95,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     nextPos_++;
     count_++;
   }
-  JreAssert((OrgApacheLuceneUtilRollingBuffer_inBoundsWithInt_(self, pos)), (@"org/apache/lucene/util/RollingBuffer.java:105 condition failed: assert inBounds(pos);"));
+  JreAssert(OrgApacheLuceneUtilRollingBuffer_inBoundsWithInt_(self, pos), @"org/apache/lucene/util/RollingBuffer.java:105 condition failed: assert inBounds(pos);");
   jint index = OrgApacheLuceneUtilRollingBuffer_getIndexWithInt_(self, pos);
   return IOSObjectArray_Get(nil_chk(buffer_), index);
 }
@@ -101,8 +106,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)freeBeforeWithInt:(jint)pos {
   jint toFree = count_ - (nextPos_ - pos);
-  JreAssert((toFree >= 0), (@"org/apache/lucene/util/RollingBuffer.java:120 condition failed: assert toFree >= 0;"));
-  JreAssert((toFree <= count_), (JreStrcat("$I$I", @"toFree=", toFree, @" count=", count_)));
+  JreAssert(toFree >= 0, @"org/apache/lucene/util/RollingBuffer.java:120 condition failed: assert toFree >= 0;");
+  JreAssert(toFree <= count_, JreStrcat("$I$I", @"toFree=", toFree, @" count=", count_));
   jint index = nextWrite_ - count_;
   if (index < 0) {
     index += ((IOSObjectArray *) nil_chk(buffer_))->size_;
@@ -123,24 +128,36 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "RollingBuffer", NULL, 0x1, NULL, NULL },
-    { "newInstance", NULL, "TT;", 0x404, NULL, "()TT;" },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "inBoundsWithInt:", "inBounds", "Z", 0x2, NULL, NULL },
-    { "getIndexWithInt:", "getIndex", "I", 0x2, NULL, NULL },
-    { "getWithInt:", "get", "TT;", 0x1, NULL, "(I)TT;" },
-    { "getMaxPos", NULL, "I", 0x1, NULL, NULL },
-    { "freeBeforeWithInt:", "freeBefore", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilRollingBuffer_Resettable;", 0x404, -1, -1, -1, 0, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilRollingBuffer_Resettable;", 0x1, 4, 2, -1, 5, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(newInstance);
+  methods[2].selector = @selector(reset);
+  methods[3].selector = @selector(inBoundsWithInt:);
+  methods[4].selector = @selector(getIndexWithInt:);
+  methods[5].selector = @selector(getWithInt:);
+  methods[6].selector = @selector(getMaxPos);
+  methods[7].selector = @selector(freeBeforeWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "buffer_", NULL, 0x2, "[Lorg.apache.lucene.util.RollingBuffer$Resettable;", NULL, "[TT;", .constantValue.asLong = 0 },
-    { "nextWrite_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextPos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "buffer_", "[LOrgApacheLuceneUtilRollingBuffer_Resettable;", .constantValue.asLong = 0, 0x2, -1, -1, 7, -1 },
+    { "nextWrite_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextPos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "count_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.RollingBuffer$Resettable;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRollingBuffer = { 2, "RollingBuffer", "org.apache.lucene.util", NULL, 0x401, 8, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, "<T::Lorg/apache/lucene/util/RollingBuffer$Resettable;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "()TT;", "inBounds", "I", "getIndex", "get", "(I)TT;", "freeBefore", "[TT;", "LOrgApacheLuceneUtilRollingBuffer_Resettable;", "<T::Lorg/apache/lucene/util/RollingBuffer$Resettable;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRollingBuffer = { "RollingBuffer", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x401, 8, 4, -1, 8, -1, 9, -1 };
   return &_OrgApacheLuceneUtilRollingBuffer;
 }
 
@@ -171,10 +188,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRollingBuffer)
 @implementation OrgApacheLuceneUtilRollingBuffer_Resettable
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "reset", NULL, "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRollingBuffer_Resettable = { 2, "Resettable", "org.apache.lucene.util", "RollingBuffer", 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(reset);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilRollingBuffer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRollingBuffer_Resettable = { "Resettable", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x609, 1, 0, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilRollingBuffer_Resettable;
 }
 

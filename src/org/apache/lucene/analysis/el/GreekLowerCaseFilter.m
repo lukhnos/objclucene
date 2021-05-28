@@ -6,14 +6,16 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Character.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/el/GreekLowerCaseFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/CharacterUtils.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/el/GreekLowerCaseFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisElGreekLowerCaseFilter () {
  @public
@@ -40,7 +42,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisElGreekLowerCaseFilte
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     IOSCharArray *chArray = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-    jint chLen = [termAtt_ length];
+    jint chLen = [termAtt_ java_length];
     for (jint i = 0; i < chLen; ) {
       i += JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(OrgApacheLuceneAnalysisElGreekLowerCaseFilter_lowerCaseWithInt_(self, [((OrgApacheLuceneAnalysisUtilCharacterUtils *) nil_chk(charUtils_)) codePointAtWithCharArray:chArray withInt:i withInt:chLen]), chArray, i);
     }
@@ -62,16 +64,24 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisElGreekLowerCaseFilte
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "GreekLowerCaseFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "lowerCaseWithInt:", "lowerCase", "I", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  methods[2].selector = @selector(lowerCaseWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "charUtils_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharacterUtils;", NULL, NULL, .constantValue.asLong = 0 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "charUtils_", "LOrgApacheLuceneAnalysisUtilCharacterUtils;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisElGreekLowerCaseFilter = { 2, "GreekLowerCaseFilter", "org.apache.lucene.analysis.el", NULL, 0x11, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", "lowerCase", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisElGreekLowerCaseFilter = { "GreekLowerCaseFilter", "org.apache.lucene.analysis.el", ptrTable, methods, fields, 7, 0x11, 3, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisElGreekLowerCaseFilter;
 }
 

@@ -7,6 +7,10 @@
 #include "org/apache/lucene/search/suggest/tst/TernaryTreeNode.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/tst/TernaryTreeNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSuggestTstTernaryTreeNode
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -28,7 +32,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     mem += [hiKid_ sizeInBytes];
   }
   if (token_ != nil) {
-    mem += OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(token_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR * ((jint) [((NSString *) nil_chk(token_)) length]);
+    mem += OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(token_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR * [((NSString *) nil_chk(token_)) java_length];
   }
   mem += OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(val_);
   return mem;
@@ -44,19 +48,25 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TernaryTreeNode", NULL, 0x1, NULL, NULL },
-    { "sizeInBytes", NULL, "J", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(sizeInBytes);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "splitchar_", NULL, 0x0, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "loKid_", NULL, 0x0, "Lorg.apache.lucene.search.suggest.tst.TernaryTreeNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "eqKid_", NULL, 0x0, "Lorg.apache.lucene.search.suggest.tst.TernaryTreeNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hiKid_", NULL, 0x0, "Lorg.apache.lucene.search.suggest.tst.TernaryTreeNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "token_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val_", NULL, 0x0, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
+    { "splitchar_", "C", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "loKid_", "LOrgApacheLuceneSearchSuggestTstTernaryTreeNode;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "eqKid_", "LOrgApacheLuceneSearchSuggestTstTernaryTreeNode;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "hiKid_", "LOrgApacheLuceneSearchSuggestTstTernaryTreeNode;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "token_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "val_", "LNSObject;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestTstTernaryTreeNode = { 2, "TernaryTreeNode", "org.apache.lucene.search.suggest.tst", NULL, 0x1, 2, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestTstTernaryTreeNode = { "TernaryTreeNode", "org.apache.lucene.search.suggest.tst", NULL, methods, fields, 7, 0x1, 2, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestTstTernaryTreeNode;
 }
 

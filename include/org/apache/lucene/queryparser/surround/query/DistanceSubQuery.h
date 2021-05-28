@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery))
 #define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_
 
@@ -20,15 +26,15 @@
 
 /*!
  @brief Interface for queries that can be nested as subqueries
- into a span near.
+  into a span near.
  */
-@protocol OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery < JavaObject >
 
 /*!
  @brief When distanceSubQueryNotAllowed() returns non null, the reason why the subquery
- is not allowed as a distance subquery is returned.
+  is not allowed as a distance subquery is returned.
  <br>When distanceSubQueryNotAllowed() returns null addSpanNearQueries() can be used
- in the creation of the span near clause for the subquery.
+  in the creation of the span near clause for the subquery.
  */
 - (NSString *)distanceSubQueryNotAllowed;
 
@@ -42,4 +48,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryDistanceSubQue
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery")

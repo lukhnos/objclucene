@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_
 
@@ -37,8 +43,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)q
-                                         withFloat:(jfloat)defVal;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)q
+                                                   withFloat:(jfloat)defVal;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -55,6 +61,10 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
 
 - (NSUInteger)hash;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -81,6 +91,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSo
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
+@class OrgApacheLuceneQueriesFunctionValueSource;
 @class OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource;
 @class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchScorer;
@@ -102,9 +113,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSo
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource:(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *)vs
-                                        withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext
-                                                                  withJavaUtilMap:(id<JavaUtilMap>)fcontext;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource:(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *)vs
+                                                                withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext
+                                                                                          withJavaUtilMap:(id<JavaUtilMap>)fcontext;
 
 - (jboolean)existsWithInt:(jint)doc;
 
@@ -116,6 +127,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSo
 
 - (NSString *)toStringWithInt:(jint)doc;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues)
@@ -126,14 +141,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues, fco
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues, q_, OrgApacheLuceneSearchQuery *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues, scorer_, OrgApacheLuceneSearchScorer *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *self, OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initPackagePrivateWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *self, OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initPackagePrivateWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext);
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initPackagePrivateWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource")

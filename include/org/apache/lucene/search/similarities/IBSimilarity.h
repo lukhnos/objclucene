@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesIBSimilarity
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesIBSimilarity_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesIBSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesIBSimilarity))
 #define OrgApacheLuceneSearchSimilaritiesIBSimilarity_
 
@@ -28,50 +34,49 @@
 
 /*!
  @brief Provides a framework for the family of information-based models, as described
- in St&eacute;phane Clinchant and Eric Gaussier. 2010.
+  in St&eacute;phane Clinchant and Eric Gaussier.2010.
  Information-based
- models for ad hoc IR. In Proceeding of the 33rd international ACM SIGIR
- conference on Research and development in information retrieval (SIGIR '10).
- ACM, New York, NY, USA, 234-241.
+  models for ad hoc IR. In Proceeding of the 33rd international ACM SIGIR
+  conference on Research and development in information retrieval (SIGIR '10).
+  ACM, New York, NY, USA, 234-241. 
  <p>The retrieval function is of the form <em>RSV(q, d) = &sum;
- -x<sup>q</sup><sub>w</sub> log Prob(X<sub>w</sub> &ge;
- t<sup>d</sup><sub>w</sub> | &lambda;<sub>w</sub>)</em>, where
+  -x<sup>q</sup><sub>w</sub> log Prob(X<sub>w</sub> &ge;
+  t<sup>d</sup><sub>w</sub> | &lambda;<sub>w</sub>)</em>, where 
  <ul>
- <li><em>x<sup>q</sup><sub>w</sub></em> is the query boost;</li>
- <li><em>X<sub>w</sub></em> is a random variable that counts the occurrences
- of word <em>w</em>;</li>
- <li><em>t<sup>d</sup><sub>w</sub></em> is the normalized term frequency;</li>
- <li><em>&lambda;<sub>w</sub></em> is a parameter.</li>
- </ul>
- <p>The framework described in the paper has many similarities to the DFR
- framework (see <code>DFRSimilarity</code>). It is possible that the two
- Similarities will be merged at one point.</p>
- <p>To construct an IBSimilarity, you must specify the implementations for 
- all three components of the Information-Based model.
+    <li><em>x<sup>q</sup><sub>w</sub></em> is the query boost;</li>
+    <li><em>X<sub>w</sub></em> is a random variable that counts the occurrences
+    of word <em>w</em>;</li>
+    <li><em>t<sup>d</sup><sub>w</sub></em> is the normalized term frequency;</li>
+    <li><em>&lambda;<sub>w</sub></em> is a parameter.</li>
+  </ul>
+  <p>The framework described in the paper has many similarities to the DFR
+  framework (see <code>DFRSimilarity</code>). It is possible that the two
+  Similarities will be merged at one point.</p>
+  <p>To construct an IBSimilarity, you must specify the implementations for 
+  all three components of the Information-Based model. 
  <ol>
- <li><code>Distribution</code>: Probabilistic distribution used to
- model term occurrence
+      <li><code>Distribution</code>: Probabilistic distribution used to
+          model term occurrence         
  <ul>
- <li><code>DistributionLL</code>: Log-logistic</li>
- <li><code>DistributionLL</code>: Smoothed power-law</li>
- </ul>
- </li>
- <li><code>Lambda</code>: &lambda;<sub>w</sub> parameter of the
- probability distribution
+              <li><code>DistributionLL</code>: Log-logistic</li>
+              <li><code>DistributionLL</code>: Smoothed power-law</li>
+          </ul>
+      </li>
+      <li><code>Lambda</code>: &lambda;<sub>w</sub> parameter of the
+          probability distribution         
  <ul>
- <li><code>LambdaDF</code>: <code>N<sub>w</sub>/N</code> or average
- number of documents where w occurs</li>
- <li><code>LambdaTTF</code>: <code>F<sub>w</sub>/N</code> or
- average number of occurrences of w in the collection</li>
- </ul>
- </li>
- <li><code>Normalization</code>: Term frequency normalization 
- <blockquote>Any supported DFR normalization (listed in
- <code>DFRSimilarity</code>)</blockquote>
- </li>
- </ol>
+              <li><code>LambdaDF</code>: <code>N<sub>w</sub>/N</code> or average
+                  number of documents where w occurs</li>
+              <li><code>LambdaTTF</code>: <code>F<sub>w</sub>/N</code> or
+                  average number of occurrences of w in the collection</li>
+          </ul>
+      </li>
+      <li><code>Normalization</code>: Term frequency normalization 
+          <blockquote>Any supported DFR normalization (listed in
+                       <code>DFRSimilarity</code>)</blockquote>
+      </li>
+  </ol>
  - seealso: DFRSimilarity
-  
  */
 @interface OrgApacheLuceneSearchSimilaritiesIBSimilarity : OrgApacheLuceneSearchSimilaritiesSimilarityBase {
  @public
@@ -94,16 +99,16 @@
 /*!
  @brief Creates IBSimilarity from the three components.
  <p>
- Note that <code>null</code> values are not allowed:
- if you want no normalization, instead pass 
+  Note that <code>null</code> values are not allowed:
+  if you want no normalization, instead pass  
  <code>NoNormalization</code>.
  @param distribution probabilistic distribution modeling term occurrence
- @param lambda distribution's &lambda;<sub>w</sub> parameter
+ @param lambda distribution's  &lambda; <sub> w </sub>  parameter
  @param normalization term frequency normalization
  */
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesDistribution:(OrgApacheLuceneSearchSimilaritiesDistribution *)distribution
-                          withOrgApacheLuceneSearchSimilaritiesLambda:(OrgApacheLuceneSearchSimilaritiesLambda *)lambda
-                   withOrgApacheLuceneSearchSimilaritiesNormalization:(OrgApacheLuceneSearchSimilaritiesNormalization *)normalization;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSimilaritiesDistribution:(OrgApacheLuceneSearchSimilaritiesDistribution *)distribution
+                                    withOrgApacheLuceneSearchSimilaritiesLambda:(OrgApacheLuceneSearchSimilaritiesLambda *)lambda
+                             withOrgApacheLuceneSearchSimilaritiesNormalization:(OrgApacheLuceneSearchSimilaritiesNormalization *)normalization;
 
 /*!
  @brief Returns the distribution
@@ -121,11 +126,10 @@
 - (OrgApacheLuceneSearchSimilaritiesNormalization *)getNormalization;
 
 /*!
- @brief The name of IB methods follow the pattern
- <code>IB <distribution> <lambda><normalization></code>.
- The name of the
- distribution is the same as in the original paper; for the names of lambda
- parameters, refer to the javadoc of the <code>Lambda</code> classes.
+ @brief The name of IB methods follow the pattern 
+ <code>IB <distribution> <lambda><normalization></code>.The name of the
+  distribution is the same as in the original paper; for the names of lambda
+  parameters, refer to the javadoc of the <code>Lambda</code> classes.
  */
 - (NSString *)description;
 
@@ -140,6 +144,10 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)freq
                                                      withFloat:(jfloat)docLen;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -159,4 +167,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesIBSimilarity)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesIBSimilarity")

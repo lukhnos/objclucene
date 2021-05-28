@@ -7,7 +7,18 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/es/SpanishLightStemmer.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/es/SpanishLightStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisEsSpanishLightStemmer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisEsSpanishLightStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -60,19 +71,19 @@
   return len;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisEsSpanishLightStemmer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "init", "SpanishLightStemmer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEsSpanishLightStemmer = { 2, "SpanishLightStemmer", "org.apache.lucene.analysis.es", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "stem", "[CI" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEsSpanishLightStemmer = { "SpanishLightStemmer", "org.apache.lucene.analysis.es", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisEsSpanishLightStemmer;
 }
 

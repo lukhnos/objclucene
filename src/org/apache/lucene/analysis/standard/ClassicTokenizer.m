@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/analysis/Tokenizer.h"
@@ -18,7 +17,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/standard/ClassicTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisStandardClassicTokenizer () {
  @public
@@ -131,10 +133,10 @@ J2OBJC_IGNORE_DESIGNATED_END
       [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:skippedPositions_ + 1];
       [((OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *) nil_chk(scanner_)) getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:termAtt_];
       jint start = [((OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *) nil_chk(scanner_)) yychar];
-      [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:start + [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length]]];
+      [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:start + [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) java_length]]];
       if (tokenType == OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM_DEP) {
         [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES), OrgApacheLuceneAnalysisStandardClassicTokenizer_HOST)];
-        [termAtt_ setLengthWithInt:[termAtt_ length] - 1];
+        [termAtt_ setLengthWithInt:[termAtt_ java_length] - 1];
       }
       else {
         [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES), tokenType)];
@@ -172,46 +174,60 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 3, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setMaxTokenLengthWithInt:);
+  methods[1].selector = @selector(getMaxTokenLength);
+  methods[2].selector = @selector(init);
+  methods[3].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:);
+  methods[4].selector = @selector(init__);
+  methods[5].selector = @selector(incrementToken);
+  methods[6].selector = @selector(end);
+  methods[7].selector = @selector(close);
+  methods[8].selector = @selector(reset);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "scanner_", "LOrgApacheLuceneAnalysisStandardClassicTokenizerImpl;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "ALPHANUM", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_ALPHANUM, 0x19, -1, -1, -1, -1 },
+    { "APOSTROPHE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_APOSTROPHE, 0x19, -1, -1, -1, -1 },
+    { "ACRONYM", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM, 0x19, -1, -1, -1, -1 },
+    { "COMPANY", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_COMPANY, 0x19, -1, -1, -1, -1 },
+    { "EMAIL", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_EMAIL, 0x19, -1, -1, -1, -1 },
+    { "HOST", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_HOST, 0x19, -1, -1, -1, -1 },
+    { "NUM", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_NUM, 0x19, -1, -1, -1, -1 },
+    { "CJ", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_CJ, 0x19, -1, -1, -1, -1 },
+    { "ACRONYM_DEP", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM_DEP, 0x19, -1, -1, -1, -1 },
+    { "TOKEN_TYPES", "[LNSString;", .constantValue.asLong = 0, 0x19, -1, 5, -1, -1 },
+    { "skippedPositions_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxTokenLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncrAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "typeAtt_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "setMaxTokenLength", "I", "LOrgApacheLuceneUtilAttributeFactory;", "init", "LJavaIoIOException;", &OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardClassicTokenizer = { "ClassicTokenizer", "org.apache.lucene.analysis.standard", ptrTable, methods, fields, 7, 0x11, 9, 17, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisStandardClassicTokenizer;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisStandardClassicTokenizer class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES, [IOSObjectArray newArrayWithObjects:(id[]){ @"<ALPHANUM>", @"<APOSTROPHE>", @"<ACRONYM>", @"<COMPANY>", @"<EMAIL>", @"<HOST>", @"<NUM>", @"<CJ>", @"<ACRONYM_DEP>" } count:9 type:NSString_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisStandardClassicTokenizer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setMaxTokenLengthWithInt:", "setMaxTokenLength", "V", 0x1, NULL, NULL },
-    { "getMaxTokenLength", NULL, "I", 0x1, NULL, NULL },
-    { "init", "ClassicTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "ClassicTokenizer", NULL, 0x1, NULL, NULL },
-    { "init__", "init", "V", 0x2, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "scanner_", NULL, 0x2, "Lorg.apache.lucene.analysis.standard.ClassicTokenizerImpl;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ALPHANUM", "ALPHANUM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_ALPHANUM },
-    { "APOSTROPHE", "APOSTROPHE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_APOSTROPHE },
-    { "ACRONYM", "ACRONYM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM },
-    { "COMPANY", "COMPANY", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_COMPANY },
-    { "EMAIL", "EMAIL", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_EMAIL },
-    { "HOST", "HOST", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_HOST },
-    { "NUM", "NUM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_NUM },
-    { "CJ", "CJ", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_CJ },
-    { "ACRONYM_DEP", "ACRONYM_DEP", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM_DEP },
-    { "TOKEN_TYPES", "TOKEN_TYPES", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES, NULL, .constantValue.asLong = 0 },
-    { "skippedPositions_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTokenLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncrAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardClassicTokenizer = { 2, "ClassicTokenizer", "org.apache.lucene.analysis.standard", NULL, 0x11, 9, methods, 17, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisStandardClassicTokenizer;
 }
 
 @end
@@ -253,7 +269,7 @@ OrgApacheLuceneAnalysisStandardClassicTokenizer *create_OrgApacheLuceneAnalysisS
 }
 
 void OrgApacheLuceneAnalysisStandardClassicTokenizer_init__(OrgApacheLuceneAnalysisStandardClassicTokenizer *self) {
-  JreStrongAssignAndConsume(&self->scanner_, new_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_initWithJavaIoReader_(self->input_));
+  JreStrongAssignAndConsume(&self->scanner_, new_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_initPackagePrivateWithJavaIoReader_(self->input_));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisStandardClassicTokenizer)

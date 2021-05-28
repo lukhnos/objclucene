@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisBgBulgarianStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisBgBulgarianStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisBgBulgarianStemmer))
 #define OrgApacheLuceneAnalysisBgBulgarianStemmer_
 
@@ -21,17 +27,17 @@
 /*!
  @brief Light Stemmer for Bulgarian.
  <p>
- Implements the algorithm described in:  
+  Implements the algorithm described in:   
  <i>
- Searching Strategies for the Bulgarian Language
+  Searching Strategies for the Bulgarian Language 
  </i>
- http://members.unine.ch/jacques.savoy/Papers/BUIR.pdf
+  http://members.unine.ch/jacques.savoy/Papers/BUIR.pdf
  */
 @interface OrgApacheLuceneAnalysisBgBulgarianStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Stem an input buffer of Bulgarian text.
@@ -48,12 +54,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisBgBulgarianStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBgBulgarianStemmer_init(OrgApacheLuceneAnalysisBgBulgarianStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianStemmer *new_OrgApacheLuceneAnalysisBgBulgarianStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianStemmer *new_OrgApacheLuceneAnalysisBgBulgarianStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianStemmer *create_OrgApacheLuceneAnalysisBgBulgarianStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianStemmer *create_OrgApacheLuceneAnalysisBgBulgarianStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisBgBulgarianStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemmer")

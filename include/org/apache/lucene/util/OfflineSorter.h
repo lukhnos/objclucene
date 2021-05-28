@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilOfflineSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilOfflineSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter || defined(INCLUDE_OrgApacheLuceneUtilOfflineSorter))
 #define OrgApacheLuceneUtilOfflineSorter_
 
@@ -24,28 +30,21 @@
 @protocol JavaUtilList;
 
 /*!
- @brief On-disk sorting of byte arrays.
- Each byte array (entry) is a composed of the following
- fields:
+ @brief On-disk sorting of byte arrays.Each byte array (entry) is a composed of the following
+  fields: 
  <ul>
- <li>(two bytes) length of the following byte array,
- <li>exactly the above count of bytes for the sequence to be sorted.
+    <li>(two bytes) length of the following byte array,
+    <li>exactly the above count of bytes for the sequence to be sorted.
  </ul>
- - seealso: #sort(Path,Path)
+ - seealso: #sort(Path, Path)
  */
 @interface OrgApacheLuceneUtilOfflineSorter : NSObject
-
-+ (jlong)MB;
-
-+ (jlong)GB;
-
-+ (jlong)MIN_BUFFER_SIZE_MB;
-
-+ (jlong)ABSOLUTE_MIN_SORT_BUFFER_SIZE;
-
-+ (jint)MAX_TEMPFILES;
-
-+ (id<JavaUtilComparator>)DEFAULT_COMPARATOR;
+@property (readonly, class) jlong MB NS_SWIFT_NAME(MB);
+@property (readonly, class) jlong GB NS_SWIFT_NAME(GB);
+@property (readonly, class) jlong MIN_BUFFER_SIZE_MB NS_SWIFT_NAME(MIN_BUFFER_SIZE_MB);
+@property (readonly, class) jlong ABSOLUTE_MIN_SORT_BUFFER_SIZE NS_SWIFT_NAME(ABSOLUTE_MIN_SORT_BUFFER_SIZE);
+@property (readonly, class) jint MAX_TEMPFILES NS_SWIFT_NAME(MAX_TEMPFILES);
+@property (readonly, class, strong) id<JavaUtilComparator> DEFAULT_COMPARATOR NS_SWIFT_NAME(DEFAULT_COMPARATOR);
 
 #pragma mark Public
 
@@ -54,27 +53,27 @@
  - seealso: #defaultTempDir()
  - seealso: BufferSize#automatic()
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Defaults constructor with a custom comparator.
  - seealso: #defaultTempDir()
  - seealso: BufferSize#automatic()
  */
-- (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
+- (instancetype __nonnull)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
 /*!
  @brief All-details constructor.
  */
-- (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator
-withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorter_BufferSize *)ramBufferSize
-          withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDirectory
-                                   withInt:(jint)maxTempfiles;
+- (instancetype __nonnull)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator
+     withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorter_BufferSize *)ramBufferSize
+                    withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDirectory
+                                             withInt:(jint)maxTempfiles;
 
 /*!
- @brief Returns the default temporary directory.
- By default, java.io.tmpdir. If not accessible
- or not available, an IOException is thrown
+ @brief Returns the default temporary directory.By default, java.io.tmpdir.
+ If not accessible
+  or not available, an IOException is thrown
  */
 + (OrgLukhnosPortmobileFilePath *)defaultTempDir;
 
@@ -84,9 +83,8 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
 - (id<JavaUtilComparator>)getComparator;
 
 /*!
- @brief Sort input to output, explicit hint for the buffer size.
- The amount of allocated
- memory may deviate from the hint (may be smaller or larger).  
+ @brief Sort input to output, explicit hint for the buffer size.The amount of allocated
+  memory may deviate from the hint (may be smaller or larger).
  */
 - (OrgApacheLuceneUtilOfflineSorter_SortInfo *)sortWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)input
                                                    withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)output;
@@ -118,51 +116,51 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilOfflineSorter)
 /*!
  @brief Convenience constant for megabytes
  */
-inline jlong OrgApacheLuceneUtilOfflineSorter_get_MB();
+inline jlong OrgApacheLuceneUtilOfflineSorter_get_MB(void);
 #define OrgApacheLuceneUtilOfflineSorter_MB 1048576LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilOfflineSorter, MB, jlong)
 
 /*!
  @brief Convenience constant for gigabytes
  */
-inline jlong OrgApacheLuceneUtilOfflineSorter_get_GB();
+inline jlong OrgApacheLuceneUtilOfflineSorter_get_GB(void);
 #define OrgApacheLuceneUtilOfflineSorter_GB 1073741824LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilOfflineSorter, GB, jlong)
 
 /*!
  @brief Minimum recommended buffer size for sorting.
  */
-inline jlong OrgApacheLuceneUtilOfflineSorter_get_MIN_BUFFER_SIZE_MB();
+inline jlong OrgApacheLuceneUtilOfflineSorter_get_MIN_BUFFER_SIZE_MB(void);
 #define OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MB 32LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilOfflineSorter, MIN_BUFFER_SIZE_MB, jlong)
 
 /*!
  @brief Absolute minimum required buffer size for sorting.
  */
-inline jlong OrgApacheLuceneUtilOfflineSorter_get_ABSOLUTE_MIN_SORT_BUFFER_SIZE();
+inline jlong OrgApacheLuceneUtilOfflineSorter_get_ABSOLUTE_MIN_SORT_BUFFER_SIZE(void);
 #define OrgApacheLuceneUtilOfflineSorter_ABSOLUTE_MIN_SORT_BUFFER_SIZE 524288LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilOfflineSorter, ABSOLUTE_MIN_SORT_BUFFER_SIZE, jlong)
 
 /*!
  @brief Maximum number of temporary files before doing an intermediate merge.
  */
-inline jint OrgApacheLuceneUtilOfflineSorter_get_MAX_TEMPFILES();
+inline jint OrgApacheLuceneUtilOfflineSorter_get_MAX_TEMPFILES(void);
 #define OrgApacheLuceneUtilOfflineSorter_MAX_TEMPFILES 128
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilOfflineSorter, MAX_TEMPFILES, jint)
 
 /*!
  @brief Default comparator: sorts in binary (codepoint) order
  */
-inline id<JavaUtilComparator> OrgApacheLuceneUtilOfflineSorter_get_DEFAULT_COMPARATOR();
+inline id<JavaUtilComparator> OrgApacheLuceneUtilOfflineSorter_get_DEFAULT_COMPARATOR(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilOfflineSorter, DEFAULT_COMPARATOR, id<JavaUtilComparator>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_init(OrgApacheLuceneUtilOfflineSorter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *new_OrgApacheLuceneUtilOfflineSorter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *new_OrgApacheLuceneUtilOfflineSorter_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *create_OrgApacheLuceneUtilOfflineSorter_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *create_OrgApacheLuceneUtilOfflineSorter_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(OrgApacheLuceneUtilOfflineSorter *self, id<JavaUtilComparator> comparator);
 
@@ -176,7 +174,7 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *new_OrgApacheLuceneUtilOffli
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *create_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(id<JavaUtilComparator> comparator, OrgApacheLuceneUtilOfflineSorter_BufferSize *ramBufferSize, OrgLukhnosPortmobileFilePath *tempDirectory, jint maxTempfiles);
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgApacheLuceneUtilOfflineSorter_defaultTempDir();
+FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgApacheLuceneUtilOfflineSorter_defaultTempDir(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter)
 
@@ -199,19 +197,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter)
 
 /*!
  @brief Approximately half of the currently available free heap, but no less
- than <code>ABSOLUTE_MIN_SORT_BUFFER_SIZE</code>.
- However if current heap allocation 
- is insufficient or if there is a large portion of unallocated heap-space available 
- for sorting consult with max allowed heap size. 
+  than <code>ABSOLUTE_MIN_SORT_BUFFER_SIZE</code>.However if current heap allocation 
+  is insufficient or if there is a large portion of unallocated heap-space available 
+  for sorting consult with max allowed heap size.
  */
 + (OrgApacheLuceneUtilOfflineSorter_BufferSize *)automatic;
 
 /*!
- @brief Creates a <code>BufferSize</code> in MB.
- The given 
- values must be &gt; 0 and &lt; 2048.
+ @brief Creates a <code>BufferSize</code> in MB.The given 
+  values must be &gt; 0 and &lt; 2048.
  */
 + (OrgApacheLuceneUtilOfflineSorter_BufferSize *)megabytesWithLong:(jlong)mb;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -219,7 +219,7 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilOfflineSorter_BufferSize)
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_BufferSize *OrgApacheLuceneUtilOfflineSorter_BufferSize_megabytesWithLong_(jlong mb);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_BufferSize *OrgApacheLuceneUtilOfflineSorter_BufferSize_automatic();
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_BufferSize *OrgApacheLuceneUtilOfflineSorter_BufferSize_automatic(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_BufferSize)
 
@@ -274,9 +274,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_BufferSize)
 /*!
  @brief create a new SortInfo (with empty statistics) for debugging
  */
-- (instancetype)initWithOrgApacheLuceneUtilOfflineSorter:(OrgApacheLuceneUtilOfflineSorter *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilOfflineSorter:(OrgApacheLuceneUtilOfflineSorter *)outer$;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -306,8 +310,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_SortInfo)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)fd
-              withByteArray:(IOSByteArray *)firstLine;
+- (instancetype __nonnull)initWithInt:(jint)fd
+                        withByteArray:(IOSByteArray *)firstLine;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -348,12 +356,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_FileAndTop)
 /*!
  @brief Constructs a ByteSequencesWriter to the provided DataOutput
  */
-- (instancetype)initWithJavaIoDataOutput:(id<JavaIoDataOutput>)os;
+- (instancetype __nonnull)initWithJavaIoDataOutput:(id<JavaIoDataOutput>)os;
 
 /*!
  @brief Constructs a ByteSequencesWriter to the provided Path
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
 /*!
  @brief Closes the provided <code>DataOutput</code> if it is <code>Closeable</code>.
@@ -362,15 +370,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_FileAndTop)
 
 /*!
  @brief Writes a byte array.
- - seealso: #write(byte[],int,int)
+ - seealso: #write(byte[], int, int)
  */
 - (void)writeWithByteArray:(IOSByteArray *)bytes;
 
 /*!
  @brief Writes a byte array.
  <p>
- The length is written as a <code>short</code>, followed
- by the bytes.
+  The length is written as a <code>short</code>, followed
+  by the bytes.
  */
 - (void)writeWithByteArray:(IOSByteArray *)bytes
                    withInt:(jint)off
@@ -378,9 +386,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_FileAndTop)
 
 /*!
  @brief Writes a BytesRef.
- - seealso: #write(byte[],int,int)
+ - seealso: #write(byte[], int, int)
  */
 - (void)writeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)ref;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -425,12 +437,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter)
 /*!
  @brief Constructs a ByteSequencesReader from the provided DataInput
  */
-- (instancetype)initWithJavaIoDataInput:(id<JavaIoDataInput>)is;
+- (instancetype __nonnull)initWithJavaIoDataInput:(id<JavaIoDataInput>)is;
 
 /*!
  @brief Constructs a ByteSequencesReader from the provided Path
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
 /*!
  @brief Closes the provided <code>DataInput</code> if it is <code>Closeable</code>.
@@ -441,20 +453,23 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter)
  @brief Reads the next entry and returns it if successful.
  - seealso: #read(BytesRefBuilder)
  @return Returns <code>null</code> if EOF occurred before the next entry
- could be read.
- @throws EOFException if the file ends before the full sequence is read.
+  could be read.
+ @throw EOFExceptionif the file ends before the full sequence is read.
  */
 - (IOSByteArray *)read;
 
 /*!
- @brief Reads the next entry into the provided <code>BytesRef</code>.
- The internal
- storage is resized if needed.
+ @brief Reads the next entry into the provided <code>BytesRef</code>.The internal
+  storage is resized if needed.
  @return Returns <code>false</code> if EOF occurred when trying to read
- the header of the next sequence. Returns <code>true</code> otherwise.
- @throws EOFException if the file ends before the full sequence is read.
+  the header of the next sequence. Returns <code>true</code> otherwise.
+ @throw EOFExceptionif the file ends before the full sequence is read.
  */
 - (jboolean)readWithOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)ref;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -476,4 +491,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter")

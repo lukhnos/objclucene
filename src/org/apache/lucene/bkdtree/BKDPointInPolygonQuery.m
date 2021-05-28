@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Double.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
@@ -32,12 +31,19 @@
 #include "org/apache/lucene/util/GeoUtils.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 
-@interface OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 : OrgApacheLuceneSearchWeight {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/bkdtree/BKDPointInPolygonQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 : OrgApacheLuceneSearchWeight {
  @public
   OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *this$0_;
   jfloat queryNorm_;
   jfloat queryWeight_;
 }
+
+- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *)outer$
+                                      withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 
@@ -51,27 +57,22 @@
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
-- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *)outer$
-                                      withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1, this$0_, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *)
+__attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
+__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1)
-
-@interface OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1 : NSObject < OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter > {
+@interface OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1 : NSObject < OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter > {
  @public
-  OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *this$0_;
+  OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *this$0_;
 }
+
+- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *)outer$;
 
 - (jboolean)acceptWithDouble:(jdouble)lat
                   withDouble:(jdouble)lon;
@@ -81,27 +82,25 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1)
                                                          withDouble:(jdouble)cellLonMin
                                                          withDouble:(jdouble)cellLonMax;
 
-- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1, this$0_, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *)
+__attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$);
 
-__attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$);
+__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1)
-
-@interface OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2 : OrgApacheLuceneSearchScorer {
+@interface OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2 : OrgApacheLuceneSearchScorer {
  @public
-  OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *this$0_;
+  OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *this$0_;
   OrgApacheLuceneSearchDocIdSetIterator *val$disi_;
 }
+
+- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *)outer$
+                             withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0
+                                       withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight;
 
 - (jfloat)score;
 
@@ -115,24 +114,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1)
 
 - (jlong)cost;
 
-- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *)outer$
-                              withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0
-                                        withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2, this$0_, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2, val$disi_, OrgApacheLuceneSearchDocIdSetIterator *)
+__attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *weight);
 
-__attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *arg$0);
+__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *weight) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2)
+__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *weight);
 
 @implementation OrgApacheLuceneBkdtreeBKDPointInPolygonQuery
 
@@ -145,12 +135,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2)
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(self, self);
+  return create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return true;
-  if (o == nil || [self getClass] != (id) [o getClass]) return false;
+  if (JreObjectEqualsEquals(self, o)) return true;
+  if (o == nil || !JreObjectEqualsEquals([self java_getClass], [o java_getClass])) return false;
   if (![super isEqual:o]) return false;
   OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *that = (OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *) cast_chk(o, [OrgApacheLuceneBkdtreeBKDPointInPolygonQuery class]);
   if (JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(polyLons_, that->polyLons_) == false) {
@@ -171,7 +161,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2)
 
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
-  [sb appendWithNSString:[[self getClass] getSimpleName]];
+  [sb appendWithNSString:[[self java_getClass] getSimpleName]];
   [sb appendWithChar:':'];
   if ([((NSString *) nil_chk(self->field_)) isEqual:field] == false) {
     [sb appendWithNSString:@" field="];
@@ -194,23 +184,33 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDoubleArray:withDoubleArray:", "BKDPointInPolygonQuery", NULL, 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x11, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withDoubleArray:withDoubleArray:);
+  methods[1].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minLat_", NULL, 0x10, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxLat_", NULL, 0x10, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "minLon_", NULL, 0x10, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxLon_", NULL, 0x10, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "polyLats_", NULL, 0x10, "[D", NULL, NULL, .constantValue.asLong = 0 },
-    { "polyLons_", NULL, 0x10, "[D", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "minLat_", "D", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxLat_", "D", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "minLon_", "D", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxLon_", "D", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "polyLats_", "[D", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "polyLons_", "[D", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDPointInPolygonQuery = { 2, "BKDPointInPolygonQuery", "org.apache.lucene.bkdtree", NULL, 0x1, 5, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;[D[D", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "equals", "LNSObject;", "hashCode", "toString", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDPointInPolygonQuery = { "BKDPointInPolygonQuery", "org.apache.lucene.bkdtree", ptrTable, methods, fields, 7, 0x1, 5, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery;
 }
 
@@ -267,7 +267,13 @@ OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *create_OrgApacheLuceneBkdtreeBKDPo
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery)
 
-@implementation OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1
+@implementation OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1
+
+- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *)outer$
+                                      withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
+  OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(self, outer$, query);
+  return self;
+}
 
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms {
 }
@@ -296,25 +302,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery)
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneIndexLeafReader *reader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader];
-  OrgApacheLuceneIndexSortedNumericDocValues *sdv = [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) getSortedNumericDocValuesWithNSString:this$0_->field_];
+  OrgApacheLuceneIndexLeafReader *reader = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader]);
+  OrgApacheLuceneIndexSortedNumericDocValues *sdv = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) getSortedNumericDocValuesWithNSString:this$0_->field_]);
   if (sdv == nil) {
-    return nil;
+    return JreRetainedLocalValue(nil);
   }
   if ([sdv isKindOfClass:[OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]] == false) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@", @"field \"", this$0_->field_, @"\" was not indexed with BKDTreeDocValuesFormat: got: ", sdv));
   }
   OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *treeDV = (OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *) cast_chk(sdv, [OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]);
-  OrgApacheLuceneBkdtreeBKDTreeReader *tree = [treeDV getBKDTreeReader];
-  OrgApacheLuceneSearchDocIdSet *result = [((OrgApacheLuceneBkdtreeBKDTreeReader *) nil_chk(tree)) intersectWithDouble:this$0_->minLat_ withDouble:this$0_->maxLat_ withDouble:this$0_->minLon_ withDouble:this$0_->maxLon_ withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter:create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_(self) withOrgApacheLuceneIndexSortedNumericDocValues:treeDV->delegate_];
+  OrgApacheLuceneBkdtreeBKDTreeReader *tree = JreRetainedLocalValue([treeDV getBKDTreeReader]);
+  OrgApacheLuceneSearchDocIdSet *result = JreRetainedLocalValue([((OrgApacheLuceneBkdtreeBKDTreeReader *) nil_chk(tree)) intersectWithDouble:this$0_->minLat_ withDouble:this$0_->maxLat_ withDouble:this$0_->minLon_ withDouble:this$0_->maxLon_ withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter:create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_(self) withOrgApacheLuceneIndexSortedNumericDocValues:treeDV->delegate_]);
   OrgApacheLuceneSearchDocIdSetIterator *disi = [((OrgApacheLuceneSearchDocIdSet *) nil_chk(result)) iterator];
-  return create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(self, disi, self);
-}
-
-- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *)outer$
-                                      withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0 {
-  OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
-  return self;
+  return create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(self, disi, self);
 }
 
 - (void)dealloc {
@@ -323,42 +323,55 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery:withOrgApacheLuceneSearchQuery:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, 3, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 7, 8, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 9, 10, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery:withOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(getValueForNormalization);
+  methods[3].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[4].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  methods[5].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.bkdtree.BKDPointInPolygonQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryNorm_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryWeight_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneBkdtreeBKDPointInPolygonQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "queryNorm_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "queryWeight_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneBkdtreeBKDPointInPolygonQuery", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 = { 2, "", "org.apache.lucene.bkdtree", "BKDPointInPolygonQuery", 0x8008, 6, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneBkdtreeBKDPointInPolygonQuery;LOrgApacheLuceneSearchQuery;", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "LJavaIoIOException;", "normalize", "FF", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "scorer", "LOrgApacheLuceneIndexLeafReaderContext;", "LOrgApacheLuceneBkdtreeBKDPointInPolygonQuery;", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 = { "", "org.apache.lucene.bkdtree", ptrTable, methods, fields, 7, 0x8010, 6, 3, 11, -1, 12, -1, -1 };
+  return &_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1;
 }
 
 @end
 
-void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
+void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *query) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchWeight_initWithOrgApacheLuceneSearchQuery_(self, arg$0);
+  OrgApacheLuceneSearchWeight_initWithOrgApacheLuceneSearchQuery_(self, query);
 }
 
-OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_, outer$, query)
 }
 
-OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *outer$, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_withOrgApacheLuceneSearchQuery_, outer$, query)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1)
+@implementation OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1
 
-@implementation OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1
+- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *)outer$ {
+  OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_(self, outer$);
+  return self;
+}
 
 - (jboolean)acceptWithDouble:(jdouble)lat
                   withDouble:(jdouble)lon {
@@ -370,19 +383,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1
                                                          withDouble:(jdouble)cellLonMin
                                                          withDouble:(jdouble)cellLonMax {
   if (OrgApacheLuceneUtilGeoUtils_rectWithinPolyWithDouble_withDouble_withDouble_withDouble_withDoubleArray_withDoubleArray_withDouble_withDouble_withDouble_withDouble_(cellLonMin, cellLatMin, cellLonMax, cellLatMax, this$0_->this$0_->polyLons_, this$0_->this$0_->polyLats_, this$0_->this$0_->minLon_, this$0_->this$0_->minLat_, this$0_->this$0_->maxLon_, this$0_->this$0_->maxLat_)) {
-    return JreLoadEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, INSIDE);
+    return JreRetainedLocalValue(JreLoadEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, INSIDE));
   }
   else if (OrgApacheLuceneUtilGeoUtils_rectCrossesPolyWithDouble_withDouble_withDouble_withDouble_withDoubleArray_withDoubleArray_withDouble_withDouble_withDouble_withDouble_(cellLonMin, cellLatMin, cellLonMax, cellLatMax, this$0_->this$0_->polyLons_, this$0_->this$0_->polyLats_, this$0_->this$0_->minLon_, this$0_->this$0_->minLat_, this$0_->this$0_->maxLon_, this$0_->this$0_->maxLat_)) {
-    return JreLoadEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, CROSSES);
+    return JreRetainedLocalValue(JreLoadEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, CROSSES));
   }
   else {
-    return JreLoadEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE);
+    return JreRetainedLocalValue(JreLoadEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE));
   }
-}
-
-- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *)outer$ {
-  OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_(self, outer$);
-  return self;
 }
 
 - (void)dealloc {
@@ -391,37 +399,49 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "acceptWithDouble:withDouble:", "accept", "Z", 0x1, NULL, NULL },
-    { "compareWithDouble:withDouble:withDouble:withDouble:", "compare", "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneBkdtreeBKDTreeReader_Relation;", 0x1, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1:);
+  methods[1].selector = @selector(acceptWithDouble:withDouble:);
+  methods[2].selector = @selector(compareWithDouble:withDouble:withDouble:withDouble:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.bkdtree.BKDPointInPolygonQuery$1;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1", "scorerWithOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1 = { 2, "", "org.apache.lucene.bkdtree", "BKDPointInPolygonQuery$", 0x8008, 3, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1;", "accept", "DD", "compare", "DDDD", "scorerWithOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1 = { "", "org.apache.lucene.bkdtree", ptrTable, methods, fields, 7, 0x8010, 3, 1, 0, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1;
 }
 
 @end
 
-void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$) {
+void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   NSObject_init(self);
 }
 
-OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_, outer$)
+OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_, outer$)
 }
 
-OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_, outer$)
+OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_1, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_, outer$)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$1)
+@implementation OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2
 
-@implementation OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2
+- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *)outer$
+                             withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0
+                                       withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight {
+  OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(self, outer$, capture$0, weight);
+  return self;
+}
 
 - (jfloat)score {
   return this$0_->queryWeight_;
@@ -447,13 +467,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1
   return [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(val$disi_)) cost];
 }
 
-- (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1:(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *)outer$
-                              withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0
-                                        withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg$0 {
-  OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(self, outer$, capture$0, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(val$disi_);
@@ -461,38 +474,47 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1:withOrgApacheLuceneSearchDocIdSetIterator:withOrgApacheLuceneSearchWeight:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1:withOrgApacheLuceneSearchDocIdSetIterator:withOrgApacheLuceneSearchWeight:);
+  methods[1].selector = @selector(score);
+  methods[2].selector = @selector(freq);
+  methods[3].selector = @selector(docID);
+  methods[4].selector = @selector(nextDoc);
+  methods[5].selector = @selector(advanceWithInt:);
+  methods[6].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.bkdtree.BKDPointInPolygonQuery$1;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$disi_", NULL, 0x1012, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$disi_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1", "scorerWithOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2 = { 2, "", "org.apache.lucene.bkdtree", "BKDPointInPolygonQuery$", 0x8008, 7, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1;LOrgApacheLuceneSearchDocIdSetIterator;LOrgApacheLuceneSearchWeight;", "LJavaIoIOException;", "advance", "I", "LOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1;", "scorerWithOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2 = { "", "org.apache.lucene.bkdtree", ptrTable, methods, fields, 7, 0x8010, 7, 2, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2;
 }
 
 @end
 
-void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *arg$0) {
+void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2 *self, OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *weight) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$disi_, capture$0);
-  OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, arg$0);
+  OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, weight);
 }
 
-OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_, outer$, capture$0, arg$0)
+OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2 *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *weight) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_, outer$, capture$0, weight)
 }
 
-OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_, outer$, capture$0, arg$0)
+OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2 *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2_initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *weight) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_2, initWithOrgApacheLuceneBkdtreeBKDPointInPolygonQuery_1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_, outer$, capture$0, weight)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2)

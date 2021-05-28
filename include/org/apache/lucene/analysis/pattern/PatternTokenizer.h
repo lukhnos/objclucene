@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPatternPatternTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternTokenizer))
 #define OrgApacheLuceneAnalysisPatternPatternTokenizer_
 
@@ -26,28 +32,27 @@
 
 /*!
  @brief This tokenizer uses regex pattern matching to construct distinct tokens
- for the input stream.
- It takes two arguments:  "pattern" and "group".
+  for the input stream.It takes two arguments:  "pattern" and "group".
  <ul>
- <li>"pattern" is the regular expression.</li>
- <li>"group" says which group to extract into tokens.</li>
- </ul>
- <p>
- group=-1 (the default) is equivalent to "split".  In this case, the tokens will
- be equivalent to the output from (without empty tokens):
+  <li>"pattern" is the regular expression.</li>
+  <li>"group" says which group to extract into tokens.</li>
+   </ul>
+  <p>
+  group=-1 (the default) is equivalent to "split".  In this case, the tokens will
+  be equivalent to the output from (without empty tokens): 
  <code>String.split(java.lang.String)</code>
- </p>
- <p>
- Using group &gt;= 0 selects the matching group as the token.  For example, if you have:<br>
- @code
+  </p>
+  <p>
+  Using group &gt;= 0 selects the matching group as the token.  For example, if you have:<br>
+  @code
 
-  pattern = \'([^\']+)\'
-  group = 0
-  input = aaa 'bbb' 'ccc'
+   pattern = \'([^\']+)\'
+   group = 0
+   input = aaa 'bbb' 'ccc'
  
 @endcode
- the output will be two tokens: 'bbb' and 'ccc' (including the ' marks).  With the same input
- but using group=1, the output would be: bbb and ccc (no ' marks)
+  the output will be two tokens: 'bbb' and 'ccc' (including the ' marks).  With the same input
+  but using group=1, the output would be: bbb and ccc (no ' marks) 
  <p>NOTE: This Tokenizer does not output tokens that are of zero length.</p>
  - seealso: Pattern
  */
@@ -61,21 +66,27 @@
 /*!
  @brief creates a new PatternTokenizer returning tokens from group (-1 for split functionality)
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                                                    withInt:(jint)group;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
+                                             withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                                                              withInt:(jint)group;
 
 /*!
  @brief creates a new PatternTokenizer returning tokens from group (-1 for split functionality)
  */
-- (instancetype)initWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                                     withInt:(jint)group;
+- (instancetype __nonnull)initWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                                               withInt:(jint)group;
 
 - (void)end;
 
 - (jboolean)incrementToken;
 
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -99,4 +110,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternTokenizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternTokenizer")

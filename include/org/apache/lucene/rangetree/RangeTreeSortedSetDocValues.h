@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues || defined(INCLUDE_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues))
 #define OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_
 
@@ -32,8 +38,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneRangetreeRangeTreeReader:(OrgApacheLuceneRangetreeRangeTreeReader *)rangeTreeReader
-                     withOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)delegate;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader:(OrgApacheLuceneRangetreeRangeTreeReader *)rangeTreeReader
+                                             withOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)delegate;
 
 - (OrgApacheLuceneRangetreeRangeTreeReader *)getRangeTreeReader;
 
@@ -49,6 +55,10 @@
 
 - (OrgApacheLuceneIndexTermsEnum *)termsEnum;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues)
@@ -56,14 +66,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues, rangeTreeReader_, OrgApacheLuceneRangetreeRangeTreeReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues, delegate_, OrgApacheLuceneIndexSortedSetDocValues *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *self, OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedSetDocValues *delegate);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *self, OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedSetDocValues *delegate);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *new_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedSetDocValues *delegate) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *new_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedSetDocValues *delegate) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *create_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedSetDocValues *delegate);
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *create_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedSetDocValues *delegate);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues")

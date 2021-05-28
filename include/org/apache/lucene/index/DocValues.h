@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexDocValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValues || defined(INCLUDE_OrgApacheLuceneIndexDocValues))
 #define OrgApacheLuceneIndexDocValues_
 
@@ -78,10 +84,10 @@
 /*!
  @brief Returns BinaryDocValues for the field, or <code>emptyBinary</code> if it has none.
  @return docvalues instance, or an empty instance if <code>field</code> does not exist in this reader.
- @throws IllegalStateException if <code>field</code> exists, but was not indexed with docvalues.
- @throws IllegalStateException if <code>field</code> has docvalues, but the type is not <code>DocValuesType.BINARY</code>
- or <code>DocValuesType.SORTED</code>.
- @throws IOException if an I/O error occurs.
+ @throw IllegalStateExceptionif <code>field</code> exists, but was not indexed with docvalues.
+ @throw IllegalStateExceptionif <code>field</code> has docvalues, but the type is not <code>DocValuesType.BINARY</code>
+                                or <code>DocValuesType.SORTED</code>.
+ @throw IOExceptionif an I/O error occurs.
  */
 + (OrgApacheLuceneIndexBinaryDocValues *)getBinaryWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                                                         withNSString:(NSString *)field;
@@ -89,8 +95,8 @@
 /*!
  @brief Returns Bits for the field, or <code>Bits</code> matching nothing if it has none.
  @return bits instance, or an empty instance if <code>field</code> does not exist in this reader.
- @throws IllegalStateException if <code>field</code> exists, but was not indexed with docvalues.
- @throws IOException if an I/O error occurs.
+ @throw IllegalStateExceptionif <code>field</code> exists, but was not indexed with docvalues.
+ @throw IOExceptionif an I/O error occurs.
  */
 + (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                                                      withNSString:(NSString *)field;
@@ -98,9 +104,9 @@
 /*!
  @brief Returns NumericDocValues for the field, or <code>emptyNumeric()</code> if it has none.
  @return docvalues instance, or an empty instance if <code>field</code> does not exist in this reader.
- @throws IllegalStateException if <code>field</code> exists, but was not indexed with docvalues.
- @throws IllegalStateException if <code>field</code> has docvalues, but the type is not <code>DocValuesType.NUMERIC</code>.
- @throws IOException if an I/O error occurs.
+ @throw IllegalStateExceptionif <code>field</code> exists, but was not indexed with docvalues.
+ @throw IllegalStateExceptionif <code>field</code> has docvalues, but the type is not <code>DocValuesType.NUMERIC</code>.
+ @throw IOExceptionif an I/O error occurs.
  */
 + (OrgApacheLuceneIndexNumericDocValues *)getNumericWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                                                           withNSString:(NSString *)field;
@@ -108,9 +114,9 @@
 /*!
  @brief Returns SortedDocValues for the field, or <code>emptySorted</code> if it has none.
  @return docvalues instance, or an empty instance if <code>field</code> does not exist in this reader.
- @throws IllegalStateException if <code>field</code> exists, but was not indexed with docvalues.
- @throws IllegalStateException if <code>field</code> has docvalues, but the type is not <code>DocValuesType.SORTED</code>.
- @throws IOException if an I/O error occurs.
+ @throw IllegalStateExceptionif <code>field</code> exists, but was not indexed with docvalues.
+ @throw IllegalStateExceptionif <code>field</code> has docvalues, but the type is not <code>DocValuesType.SORTED</code>.
+ @throw IOExceptionif an I/O error occurs.
  */
 + (OrgApacheLuceneIndexSortedDocValues *)getSortedWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                                                         withNSString:(NSString *)field;
@@ -118,10 +124,10 @@
 /*!
  @brief Returns SortedNumericDocValues for the field, or <code>emptySortedNumeric</code> if it has none.
  @return docvalues instance, or an empty instance if <code>field</code> does not exist in this reader.
- @throws IllegalStateException if <code>field</code> exists, but was not indexed with docvalues.
- @throws IllegalStateException if <code>field</code> has docvalues, but the type is not <code>DocValuesType.SORTED_NUMERIC</code>
- or <code>DocValuesType.NUMERIC</code>.
- @throws IOException if an I/O error occurs.
+ @throw IllegalStateExceptionif <code>field</code> exists, but was not indexed with docvalues.
+ @throw IllegalStateExceptionif <code>field</code> has docvalues, but the type is not <code>DocValuesType.SORTED_NUMERIC</code>
+                                or <code>DocValuesType.NUMERIC</code>.
+ @throw IOExceptionif an I/O error occurs.
  */
 + (OrgApacheLuceneIndexSortedNumericDocValues *)getSortedNumericWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                                                                       withNSString:(NSString *)field;
@@ -129,10 +135,10 @@
 /*!
  @brief Returns SortedSetDocValues for the field, or <code>emptySortedSet</code> if it has none.
  @return docvalues instance, or an empty instance if <code>field</code> does not exist in this reader.
- @throws IllegalStateException if <code>field</code> exists, but was not indexed with docvalues.
- @throws IllegalStateException if <code>field</code> has docvalues, but the type is not <code>DocValuesType.SORTED_SET</code>
- or <code>DocValuesType.SORTED</code>.
- @throws IOException if an I/O error occurs.
+ @throw IllegalStateExceptionif <code>field</code> exists, but was not indexed with docvalues.
+ @throw IllegalStateExceptionif <code>field</code> has docvalues, but the type is not <code>DocValuesType.SORTED_SET</code>
+                                or <code>DocValuesType.SORTED</code>.
+ @throw IOExceptionif an I/O error occurs.
  */
 + (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                                                               withNSString:(NSString *)field;
@@ -150,20 +156,20 @@
 
 /*!
  @brief Returns a single-valued view of the SortedNumericDocValues, if it was previously
- wrapped with <code>singleton(NumericDocValues,Bits)</code>, or null.
+  wrapped with <code>singleton(NumericDocValues, Bits)</code>, or null.
  - seealso: #unwrapSingletonBits(SortedNumericDocValues)
  */
 + (OrgApacheLuceneIndexNumericDocValues *)unwrapSingletonWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)dv;
 
 /*!
  @brief Returns a single-valued view of the SortedSetDocValues, if it was previously
- wrapped with <code>singleton(SortedDocValues)</code>, or null.
+  wrapped with <code>singleton(SortedDocValues)</code>, or null.
  */
 + (OrgApacheLuceneIndexSortedDocValues *)unwrapSingletonWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)dv;
 
 /*!
  @brief Returns the documents with a value for the SortedNumericDocValues, if it was previously
- wrapped with <code>singleton(NumericDocValues,Bits)</code>, or null.
+  wrapped with <code>singleton(NumericDocValues, Bits)</code>, or null.
  */
 + (id<OrgApacheLuceneUtilBits>)unwrapSingletonBitsWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)dv;
 
@@ -171,15 +177,15 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocValues)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValues *OrgApacheLuceneIndexDocValues_emptyBinary();
+FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValues *OrgApacheLuceneIndexDocValues_emptyBinary(void);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexDocValues_emptyNumeric();
+FOUNDATION_EXPORT OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexDocValues_emptyNumeric(void);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexDocValues_emptySorted();
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexDocValues_emptySorted(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexDocValues_emptySortedNumericWithInt_(jint maxDoc);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexRandomAccessOrds *OrgApacheLuceneIndexDocValues_emptySortedSet();
+FOUNDATION_EXPORT OrgApacheLuceneIndexRandomAccessOrds *OrgApacheLuceneIndexDocValues_emptySortedSet(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexRandomAccessOrds *OrgApacheLuceneIndexDocValues_singletonWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *dv);
 
@@ -213,4 +219,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValues")

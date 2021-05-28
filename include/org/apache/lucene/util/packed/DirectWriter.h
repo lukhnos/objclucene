@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedDirectWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedDirectWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectWriter))
 #define OrgApacheLuceneUtilPackedDirectWriter_
 
@@ -25,18 +31,18 @@
 /*!
  @brief Class for writing packed integers to be directly read from Directory.
  Integers can be read on-the-fly via <code>DirectReader</code>.
- <p>
- Unlike PackedInts, it optimizes for read i/o operations and supports &gt; 2B values.
- Example usage:
+  <p>
+  Unlike PackedInts, it optimizes for read i/o operations and supports &gt; 2B values.
+  Example usage: 
  <pre class="prettyprint">
- int bitsPerValue = DirectWriter.bitsRequired(100); // values up to and including 100
- IndexOutput output = dir.createOutput("packed", IOContext.DEFAULT);
- DirectWriter writer = DirectWriter.getInstance(output, numberOfValues, bitsPerValue);
- for (int i = 0; i &lt; numberOfValues; i++) {
- writer.add(value);
- }
- writer.finish();
- output.close();
+    int bitsPerValue = DirectWriter.bitsRequired(100); // values up to and including 100
+    IndexOutput output = dir.createOutput("packed", IOContext.DEFAULT);
+    DirectWriter writer = DirectWriter.getInstance(output, numberOfValues, bitsPerValue);
+    for (int i = 0; i &lt; numberOfValues; i++) {
+      writer.add(value);
+    }
+    writer.finish();
+    output.close(); 
  
 @endcode
  - seealso: DirectReader
@@ -54,8 +60,7 @@
   OrgApacheLuceneUtilPackedBulkOperation *encoder_;
   jint iterations_;
 }
-
-+ (IOSIntArray *)SUPPORTED_BITS_PER_VALUE;
+@property (readonly, class, strong) IOSIntArray *SUPPORTED_BITS_PER_VALUE NS_SWIFT_NAME(SUPPORTED_BITS_PER_VALUE);
 
 #pragma mark Public
 
@@ -66,7 +71,7 @@
 
 /*!
  @brief Returns how many bits are required to hold values up
- to and including maxValue
+  to and including maxValue
  @param maxValue the maximum value that should be representable.
  @return the amount of bits needed to represent values from 0 to maxValue.
  - seealso: PackedInts#bitsRequired(long)
@@ -87,7 +92,7 @@
 
 /*!
  @brief Returns how many bits are required to hold values up
- to and including maxValue, interpreted as an unsigned value.
+  to and including maxValue, interpreted as an unsigned value.
  @param maxValue the maximum value that should be representable.
  @return the amount of bits needed to represent values from 0 to maxValue.
  - seealso: PackedInts#unsignedBitsRequired(long)
@@ -96,9 +101,13 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)output
-                                               withLong:(jlong)numValues
-                                                withInt:(jint)bitsPerValue;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)output
+                                                         withLong:(jlong)numValues
+                                                          withInt:(jint)bitsPerValue;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -109,7 +118,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedDirectWriter, nextBlocks_, IOSByteA
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedDirectWriter, nextValues_, IOSLongArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedDirectWriter, encoder_, OrgApacheLuceneUtilPackedBulkOperation *)
 
-inline IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_get_SUPPORTED_BITS_PER_VALUE();
+inline IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_get_SUPPORTED_BITS_PER_VALUE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilPackedDirectWriter, SUPPORTED_BITS_PER_VALUE, IOSIntArray *)
@@ -130,4 +139,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectWriter")

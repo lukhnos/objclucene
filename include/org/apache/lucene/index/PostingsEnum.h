@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexPostingsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexPostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexPostingsEnum || defined(INCLUDE_OrgApacheLuceneIndexPostingsEnum))
 #define OrgApacheLuceneIndexPostingsEnum_
 
@@ -26,21 +32,15 @@
 /*!
  @brief Iterates through the postings.
  NOTE: you must first call <code>nextDoc</code> before using
- any of the per-doc methods. 
+   any of the per-doc methods.
  */
 @interface OrgApacheLuceneIndexPostingsEnum : OrgApacheLuceneSearchDocIdSetIterator
-
-+ (jshort)NONE;
-
-+ (jshort)FREQS;
-
-+ (jshort)POSITIONS;
-
-+ (jshort)OFFSETS;
-
-+ (jshort)PAYLOADS;
-
-+ (jshort)ALL;
+@property (readonly, class) jshort NONE NS_SWIFT_NAME(NONE);
+@property (readonly, class) jshort FREQS NS_SWIFT_NAME(FREQS);
+@property (readonly, class) jshort POSITIONS NS_SWIFT_NAME(POSITIONS);
+@property (readonly, class) jshort OFFSETS NS_SWIFT_NAME(OFFSETS);
+@property (readonly, class) jshort PAYLOADS NS_SWIFT_NAME(PAYLOADS);
+@property (readonly, class) jshort ALL NS_SWIFT_NAME(ALL);
 
 #pragma mark Public
 
@@ -51,7 +51,7 @@
 
 /*!
  @brief Returns end offset for the current position, or -1 if
- offsets were not indexed.
+   offsets were not indexed.
  */
 - (jint)endOffset;
 
@@ -63,22 +63,20 @@
 
 /*!
  @brief Returns term frequency in the current document, or 1 if the field was
- indexed with <code>IndexOptions.DOCS</code>.
- Do not call this before
- <code>nextDoc</code> is first called, nor after <code>nextDoc</code> returns
+  indexed with <code>IndexOptions.DOCS</code>.Do not call this before 
+ <code>nextDoc</code> is first called, nor after <code>nextDoc</code> returns 
  <code>DocIdSetIterator.NO_MORE_DOCS</code>.
  <p>
- <b>NOTE:</b> if the <code>PostingsEnum</code> was obtain with <code>NONE</code>,
- the result of this method is undefined.
+  <b>NOTE:</b> if the <code>PostingsEnum</code> was obtain with <code>NONE</code>,
+  the result of this method is undefined.
  */
 - (jint)freq;
 
 /*!
  @brief Returns the payload at this position, or null if no
- payload was indexed.
- You should not modify anything 
- (neither members of the returned BytesRef nor bytes 
- in the byte[]). 
+   payload was indexed.You should not modify anything 
+   (neither members of the returned BytesRef nor bytes 
+   in the byte[]).
  */
 - (OrgApacheLuceneUtilBytesRef *)getPayload;
 
@@ -90,7 +88,7 @@
 
 /*!
  @brief Returns start offset for the current position, or -1
- if offsets were not indexed.
+   if offsets were not indexed.
  */
 - (jint)startOffset;
 
@@ -99,59 +97,59 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexPostingsEnum)
 
 /*!
- @brief Flag to pass to <code>TermsEnum.postings(PostingsEnum,int)</code> if you don't
- require per-document postings in the returned enum.
+ @brief Flag to pass to <code>TermsEnum.postings(PostingsEnum, int)</code> if you don't
+  require per-document postings in the returned enum.
  */
-inline jshort OrgApacheLuceneIndexPostingsEnum_get_NONE();
+inline jshort OrgApacheLuceneIndexPostingsEnum_get_NONE(void);
 #define OrgApacheLuceneIndexPostingsEnum_NONE 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexPostingsEnum, NONE, jshort)
 
 /*!
- @brief Flag to pass to <code>TermsEnum.postings(PostingsEnum,int)</code>
- if you require term frequencies in the returned enum.
+ @brief Flag to pass to <code>TermsEnum.postings(PostingsEnum, int)</code>
+   if you require term frequencies in the returned enum.
  */
-inline jshort OrgApacheLuceneIndexPostingsEnum_get_FREQS();
+inline jshort OrgApacheLuceneIndexPostingsEnum_get_FREQS(void);
 #define OrgApacheLuceneIndexPostingsEnum_FREQS 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexPostingsEnum, FREQS, jshort)
 
 /*!
- @brief Flag to pass to <code>TermsEnum.postings(PostingsEnum,int)</code>
- if you require term positions in the returned enum.
+ @brief Flag to pass to <code>TermsEnum.postings(PostingsEnum, int)</code>
+  if you require term positions in the returned enum.
  */
-inline jshort OrgApacheLuceneIndexPostingsEnum_get_POSITIONS();
+inline jshort OrgApacheLuceneIndexPostingsEnum_get_POSITIONS(void);
 #define OrgApacheLuceneIndexPostingsEnum_POSITIONS 24
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexPostingsEnum, POSITIONS, jshort)
 
 /*!
- @brief Flag to pass to <code>TermsEnum.postings(PostingsEnum,int)</code>
- if you require offsets in the returned enum.
+ @brief Flag to pass to <code>TermsEnum.postings(PostingsEnum, int)</code>
+   if you require offsets in the returned enum.
  */
-inline jshort OrgApacheLuceneIndexPostingsEnum_get_OFFSETS();
+inline jshort OrgApacheLuceneIndexPostingsEnum_get_OFFSETS(void);
 #define OrgApacheLuceneIndexPostingsEnum_OFFSETS 56
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexPostingsEnum, OFFSETS, jshort)
 
 /*!
- @brief Flag to pass to  <code>TermsEnum.postings(PostingsEnum,int)</code>
- if you require payloads in the returned enum.
+ @brief Flag to pass to  <code>TermsEnum.postings(PostingsEnum, int)</code>
+   if you require payloads in the returned enum.
  */
-inline jshort OrgApacheLuceneIndexPostingsEnum_get_PAYLOADS();
+inline jshort OrgApacheLuceneIndexPostingsEnum_get_PAYLOADS(void);
 #define OrgApacheLuceneIndexPostingsEnum_PAYLOADS 88
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexPostingsEnum, PAYLOADS, jshort)
 
 /*!
- @brief Flag to pass to <code>TermsEnum.postings(PostingsEnum,int)</code>
- to get positions, payloads and offsets in the returned enum
+ @brief Flag to pass to <code>TermsEnum.postings(PostingsEnum, int)</code>
+  to get positions, payloads and offsets in the returned enum
  */
-inline jshort OrgApacheLuceneIndexPostingsEnum_get_ALL();
+inline jshort OrgApacheLuceneIndexPostingsEnum_get_ALL(void);
 #define OrgApacheLuceneIndexPostingsEnum_ALL 120
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexPostingsEnum, ALL, jshort)
 
@@ -163,4 +161,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPostingsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexPostingsEnum")

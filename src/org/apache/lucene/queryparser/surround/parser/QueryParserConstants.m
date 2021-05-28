@@ -3,9 +3,14 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/surround/parser/QueryParserConstants.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/surround/parser/QueryParserConstants.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/parser/QueryParserConstants must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserSurroundParserQueryParserConstants)
 
@@ -117,44 +122,45 @@ IOSObjectArray *OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tok
   return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "EOF", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_EOF, 0x19, -1, -1, -1, -1 },
+    { "_NUM_CHAR", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__NUM_CHAR, 0x19, -1, -1, -1, -1 },
+    { "_TERM_CHAR", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__TERM_CHAR, 0x19, -1, -1, -1, -1 },
+    { "_WHITESPACE", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__WHITESPACE, 0x19, -1, -1, -1, -1 },
+    { "_STAR", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__STAR, 0x19, -1, -1, -1, -1 },
+    { "_ONE_CHAR", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__ONE_CHAR, 0x19, -1, -1, -1, -1 },
+    { "_DISTOP_NUM", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__DISTOP_NUM, 0x19, -1, -1, -1, -1 },
+    { "OR", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_OR, 0x19, -1, -1, -1, -1 },
+    { "AND", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_AND, 0x19, -1, -1, -1, -1 },
+    { "NOT", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_NOT, 0x19, -1, -1, -1, -1 },
+    { "W", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_W, 0x19, -1, -1, -1, -1 },
+    { "N", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_N, 0x19, -1, -1, -1, -1 },
+    { "LPAREN", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_LPAREN, 0x19, -1, -1, -1, -1 },
+    { "RPAREN", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_RPAREN, 0x19, -1, -1, -1, -1 },
+    { "COMMA", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_COMMA, 0x19, -1, -1, -1, -1 },
+    { "COLON", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_COLON, 0x19, -1, -1, -1, -1 },
+    { "CARAT", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_CARAT, 0x19, -1, -1, -1, -1 },
+    { "TRUNCQUOTED", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCQUOTED, 0x19, -1, -1, -1, -1 },
+    { "QUOTED", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_QUOTED, 0x19, -1, -1, -1, -1 },
+    { "SUFFIXTERM", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_SUFFIXTERM, 0x19, -1, -1, -1, -1 },
+    { "TRUNCTERM", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCTERM, 0x19, -1, -1, -1, -1 },
+    { "TERM", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TERM, 0x19, -1, -1, -1, -1 },
+    { "NUMBER", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_NUMBER, 0x19, -1, -1, -1, -1 },
+    { "Boost", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_Boost, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_DEFAULT, 0x19, -1, -1, -1, -1 },
+    { "tokenImage", "[LNSString;", .constantValue.asLong = 0, 0x19, -1, 0, -1, -1 },
+  };
+  static const void *ptrTable[] = { &OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserQueryParserConstants = { "QueryParserConstants", "org.apache.lucene.queryparser.surround.parser", ptrTable, NULL, fields, 7, 0x609, 0, 26, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserSurroundParserQueryParserConstants;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserSurroundParserQueryParserConstants class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage, [IOSObjectArray newArrayWithObjects:(id[]){ @"<EOF>", @"<_NUM_CHAR>", @"<_TERM_CHAR>", @"<_WHITESPACE>", @"\"*\"", @"\"?\"", @"<_DISTOP_NUM>", @"<token of kind 7>", @"<OR>", @"<AND>", @"<NOT>", @"<W>", @"<N>", @"\"(\"", @"\")\"", @"\",\"", @"\":\"", @"\"^\"", @"<TRUNCQUOTED>", @"<QUOTED>", @"<SUFFIXTERM>", @"<TRUNCTERM>", @"<TERM>", @"<NUMBER>" } count:24 type:NSString_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserSurroundParserQueryParserConstants)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "EOF", "EOF", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_EOF },
-    { "_NUM_CHAR", "_NUM_CHAR", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__NUM_CHAR },
-    { "_TERM_CHAR", "_TERM_CHAR", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__TERM_CHAR },
-    { "_WHITESPACE", "_WHITESPACE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__WHITESPACE },
-    { "_STAR", "_STAR", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__STAR },
-    { "_ONE_CHAR", "_ONE_CHAR", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__ONE_CHAR },
-    { "_DISTOP_NUM", "_DISTOP_NUM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__DISTOP_NUM },
-    { "OR", "OR", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_OR },
-    { "AND", "AND", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_AND },
-    { "NOT", "NOT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_NOT },
-    { "W", "W", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_W },
-    { "N", "N", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_N },
-    { "LPAREN", "LPAREN", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_LPAREN },
-    { "RPAREN", "RPAREN", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_RPAREN },
-    { "COMMA", "COMMA", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_COMMA },
-    { "COLON", "COLON", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_COLON },
-    { "CARAT", "CARAT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_CARAT },
-    { "TRUNCQUOTED", "TRUNCQUOTED", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCQUOTED },
-    { "QUOTED", "QUOTED", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_QUOTED },
-    { "SUFFIXTERM", "SUFFIXTERM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_SUFFIXTERM },
-    { "TRUNCTERM", "TRUNCTERM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCTERM },
-    { "TERM", "TERM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TERM },
-    { "NUMBER", "NUMBER", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_NUMBER },
-    { "Boost", "Boost", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_Boost },
-    { "DEFAULT", "DEFAULT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_DEFAULT },
-    { "tokenImage", "tokenImage", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserQueryParserConstants = { 2, "QueryParserConstants", "org.apache.lucene.queryparser.surround.parser", NULL, 0x609, 0, NULL, 26, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserSurroundParserQueryParserConstants;
 }
 
 @end

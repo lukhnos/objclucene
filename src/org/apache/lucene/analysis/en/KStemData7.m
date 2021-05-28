@@ -3,21 +3,26 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/en/KStemData7.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/en/KStemData7.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/en/KStemData7 must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisEnKStemData7 ()
 
-- (instancetype)init;
+- (instancetype)initPackagePrivate;
 
 @end
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisEnKStemData7_init(OrgApacheLuceneAnalysisEnKStemData7 *self);
+__attribute__((unused)) static void OrgApacheLuceneAnalysisEnKStemData7_initPackagePrivate(OrgApacheLuceneAnalysisEnKStemData7 *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisEnKStemData7 *new_OrgApacheLuceneAnalysisEnKStemData7_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisEnKStemData7 *new_OrgApacheLuceneAnalysisEnKStemData7_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisEnKStemData7 *create_OrgApacheLuceneAnalysisEnKStemData7_init();
+__attribute__((unused)) static OrgApacheLuceneAnalysisEnKStemData7 *create_OrgApacheLuceneAnalysisEnKStemData7_initPackagePrivate(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemData7)
 
@@ -33,12 +38,27 @@ IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData7_data;
   JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemData7_data, value);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisEnKStemData7_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneAnalysisEnKStemData7_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "data", "[LNSString;", .constantValue.asLong = 0, 0x8, -1, 0, -1, -1 },
+  };
+  static const void *ptrTable[] = { &OrgApacheLuceneAnalysisEnKStemData7_data };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnKStemData7 = { "KStemData7", "org.apache.lucene.analysis.en", ptrTable, methods, fields, 7, 0x0, 1, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisEnKStemData7;
+}
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisEnKStemData7 class]) {
@@ -47,29 +67,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "KStemData7", NULL, 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "data", "data", 0x8, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemData7_data, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnKStemData7 = { 2, "KStemData7", "org.apache.lucene.analysis.en", NULL, 0x0, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisEnKStemData7;
-}
-
 @end
 
-void OrgApacheLuceneAnalysisEnKStemData7_init(OrgApacheLuceneAnalysisEnKStemData7 *self) {
+void OrgApacheLuceneAnalysisEnKStemData7_initPackagePrivate(OrgApacheLuceneAnalysisEnKStemData7 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisEnKStemData7 *new_OrgApacheLuceneAnalysisEnKStemData7_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisEnKStemData7, init)
+OrgApacheLuceneAnalysisEnKStemData7 *new_OrgApacheLuceneAnalysisEnKStemData7_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisEnKStemData7, initPackagePrivate)
 }
 
-OrgApacheLuceneAnalysisEnKStemData7 *create_OrgApacheLuceneAnalysisEnKStemData7_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisEnKStemData7, init)
+OrgApacheLuceneAnalysisEnKStemData7 *create_OrgApacheLuceneAnalysisEnKStemData7_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisEnKStemData7, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisEnKStemData7)

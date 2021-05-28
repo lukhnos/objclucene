@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/queryparser/surround/query/BasicQueryFactory.h"
@@ -17,6 +16,12 @@
 #include "org/apache/lucene/queryparser/surround/query/SrndQuery.h"
 #include "org/apache/lucene/search/BooleanClause.h"
 #include "org/apache/lucene/search/Query.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/OrQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @implementation OrgApacheLuceneQueryparserSurroundQueryOrQuery
 
@@ -33,11 +38,11 @@
 }
 
 - (NSString *)distanceSubQueryNotAllowed {
-  id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
+  id<JavaUtilIterator> sqi = JreRetainedLocalValue([self getSubQueriesIterator]);
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
     OrgApacheLuceneQueryparserSurroundQuerySrndQuery *leq = (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) cast_chk([sqi next], [OrgApacheLuceneQueryparserSurroundQuerySrndQuery class]);
     if ([OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_() isInstance:leq]) {
-      NSString *m = [((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) nil_chk(((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) cast_check(leq, OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_())))) distanceSubQueryNotAllowed];
+      NSString *m = JreRetainedLocalValue([((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) nil_chk(((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) cast_check(leq, OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_())))) distanceSubQueryNotAllowed]);
       if (m != nil) {
         return m;
       }
@@ -50,20 +55,29 @@
 }
 
 - (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf {
-  id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
+  id<JavaUtilIterator> sqi = JreRetainedLocalValue([self getSubQueriesIterator]);
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
     [((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) nil_chk(((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) cast_check([sqi next], OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_())))) addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:sncf];
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withBoolean:withNSString:", "OrQuery", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLjava/lang/String;)V" },
-    { "makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryFieldNoBoost", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "distanceSubQueryNotAllowed", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:", "addSpanQueries", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 6, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryOrQuery = { 2, "OrQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withBoolean:withNSString:);
+  methods[1].selector = @selector(makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  methods[2].selector = @selector(distanceSubQueryNotAllowed);
+  methods[3].selector = @selector(addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaUtilList;ZLNSString;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLjava/lang/String;)V", "makeLuceneQueryFieldNoBoost", "LNSString;LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;", "addSpanQueries", "LOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryOrQuery = { "OrQuery", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQueryOrQuery;
 }
 

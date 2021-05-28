@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestInMemorySorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestInMemorySorter_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestInMemorySorter || defined(INCLUDE_OrgApacheLuceneSearchSuggestInMemorySorter))
 #define OrgApacheLuceneSearchSuggestInMemorySorter_
 
@@ -33,15 +39,19 @@
 
 /*!
  @brief Creates an InMemorySorter, sorting entries by the
- provided comparator.
+  provided comparator.
  */
-- (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
+- (instancetype __nonnull)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
 - (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
 
 - (id<JavaUtilComparator>)getComparator;
 
 - (id<OrgApacheLuceneUtilBytesRefIterator>)iterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -57,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestInMemorySorter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestInMemorySorter")

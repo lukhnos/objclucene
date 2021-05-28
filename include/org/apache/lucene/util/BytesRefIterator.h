@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilBytesRefIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilBytesRefIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilBytesRefIterator || defined(INCLUDE_OrgApacheLuceneUtilBytesRefIterator))
 #define OrgApacheLuceneUtilBytesRefIterator_
 
@@ -21,25 +27,24 @@
 /*!
  @brief A simple iterator interface for <code>BytesRef</code> iteration.
  */
-@protocol OrgApacheLuceneUtilBytesRefIterator < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilBytesRefIterator < JavaObject >
 
 /*!
  @brief Increments the iteration to the next <code>BytesRef</code> in the iterator.
  Returns the resulting <code>BytesRef</code> or <code>null</code> if the end of
- the iterator is reached. The returned BytesRef may be re-used across calls
- to next. After this method returns null, do not call it again: the results
- are undefined.
+  the iterator is reached. The returned BytesRef may be re-used across calls
+  to next. After this method returns null, do not call it again: the results
+  are undefined.
  @return the next <code>BytesRef</code> in the iterator or <code>null</code> if
- the end of the iterator is reached.
- @throws IOException If there is a low-level I/O error.
+          the end of the iterator is reached.
+ @throw IOExceptionIf there is a low-level I/O error.
  */
 - (OrgApacheLuceneUtilBytesRef *)next;
 
 @end
 
 @interface OrgApacheLuceneUtilBytesRefIterator : NSObject
-
-+ (id<OrgApacheLuceneUtilBytesRefIterator>)EMPTY;
+@property (readonly, class, strong) id<OrgApacheLuceneUtilBytesRefIterator> EMPTY NS_SWIFT_NAME(EMPTY);
 
 @end
 
@@ -48,7 +53,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilBytesRefIterator)
 /*!
  @brief Singleton BytesRefIterator that iterates over 0 BytesRefs.
  */
-inline id<OrgApacheLuceneUtilBytesRefIterator> OrgApacheLuceneUtilBytesRefIterator_get_EMPTY();
+inline id<OrgApacheLuceneUtilBytesRefIterator> OrgApacheLuceneUtilBytesRefIterator_get_EMPTY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<OrgApacheLuceneUtilBytesRefIterator> OrgApacheLuceneUtilBytesRefIterator_EMPTY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBytesRefIterator, EMPTY, id<OrgApacheLuceneUtilBytesRefIterator>)
@@ -57,4 +62,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBytesRefIterator")

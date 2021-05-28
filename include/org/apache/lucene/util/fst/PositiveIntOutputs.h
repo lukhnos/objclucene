@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstPositiveIntOutputs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstPositiveIntOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstPositiveIntOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstPositiveIntOutputs))
 #define OrgApacheLuceneUtilFstPositiveIntOutputs_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief An FST <code>Outputs</code> implementation where each output
- is a non-negative long value.
+  is a non-negative long value.
  */
 @interface OrgApacheLuceneUtilFstPositiveIntOutputs : OrgApacheLuceneUtilFstOutputs
 
@@ -42,11 +48,16 @@
 
 + (OrgApacheLuceneUtilFstPositiveIntOutputs *)getSingleton;
 
+- (JavaLangLong *)mergeWithId:(JavaLangLong *)arg0
+                       withId:(JavaLangLong *)arg1;
+
 - (NSString *)outputToStringWithId:(JavaLangLong *)output;
 
 - (jlong)ramBytesUsedWithId:(JavaLangLong *)output;
 
 - (JavaLangLong *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
+
+- (JavaLangLong *)readFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)arg0;
 
 - (JavaLangLong *)subtractWithId:(JavaLangLong *)output
                           withId:(JavaLangLong *)inc;
@@ -60,10 +71,14 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstPositiveIntOutputs)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstPositiveIntOutputs *OrgApacheLuceneUtilFstPositiveIntOutputs_getSingleton();
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstPositiveIntOutputs *OrgApacheLuceneUtilFstPositiveIntOutputs_getSingleton(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstPositiveIntOutputs)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstPositiveIntOutputs")

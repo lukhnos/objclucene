@@ -6,9 +6,7 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/ArrayIndexOutOfBoundsException.h"
-#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/store/DataInput.h"
@@ -16,21 +14,25 @@
 #include "org/apache/lucene/util/packed/Packed16ThreeBlocks.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/Packed16ThreeBlocks must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilPackedPacked16ThreeBlocks
 
 + (jint)MAX_SIZE {
   return OrgApacheLuceneUtilPackedPacked16ThreeBlocks_MAX_SIZE;
 }
 
-- (instancetype)initWithInt:(jint)valueCount {
-  OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_(self, valueCount);
+- (instancetype)initPackagePrivateWithInt:(jint)valueCount {
+  OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initPackagePrivateWithInt_(self, valueCount);
   return self;
 }
 
-- (instancetype)initWithInt:(jint)packedIntsVersion
-withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                    withInt:(jint)valueCount {
-  OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(self, packedIntsVersion, inArg, valueCount);
+- (instancetype)initPackagePrivateWithInt:(jint)packedIntsVersion
+        withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                  withInt:(jint)valueCount {
+  OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(self, packedIntsVersion, inArg, valueCount);
   return self;
 }
 
@@ -43,9 +45,9 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
      withLongArray:(IOSLongArray *)arr
            withInt:(jint)off
            withInt:(jint)len {
-  JreAssert((len > 0), (JreStrcat("$IC", @"len must be > 0 (got ", len, ')')));
-  JreAssert((index >= 0 && index < valueCount_), (@"org/apache/lucene/util/packed/Packed16ThreeBlocks.java:66 condition failed: assert index >= 0 && index < valueCount;"));
-  JreAssert((off + len <= ((IOSLongArray *) nil_chk(arr))->size_), (@"org/apache/lucene/util/packed/Packed16ThreeBlocks.java:67 condition failed: assert off + len <= arr.length;"));
+  JreAssert(len > 0, JreStrcat("$IC", @"len must be > 0 (got ", len, ')'));
+  JreAssert(index >= 0 && index < valueCount_, @"org/apache/lucene/util/packed/Packed16ThreeBlocks.java:66 condition failed: assert index >= 0 && index < valueCount;");
+  JreAssert(off + len <= ((IOSLongArray *) nil_chk(arr))->size_, @"org/apache/lucene/util/packed/Packed16ThreeBlocks.java:67 condition failed: assert off + len <= arr.length;");
   jint gets = JavaLangMath_minWithInt_withInt_(valueCount_ - index, len);
   for (jint i = index * 3, end = (index + gets) * 3; i < end; i += 3) {
     *IOSLongArray_GetRef(arr, off++) = (JreLShift64((IOSShortArray_Get(nil_chk(blocks_), i) & (jlong) 0xFFFFLL), 32)) | (JreLShift64((IOSShortArray_Get(blocks_, i + 1) & (jlong) 0xFFFFLL), 16)) | (IOSShortArray_Get(blocks_, i + 2) & (jlong) 0xFFFFLL);
@@ -65,9 +67,9 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
      withLongArray:(IOSLongArray *)arr
            withInt:(jint)off
            withInt:(jint)len {
-  JreAssert((len > 0), (JreStrcat("$IC", @"len must be > 0 (got ", len, ')')));
-  JreAssert((index >= 0 && index < valueCount_), (@"org/apache/lucene/util/packed/Packed16ThreeBlocks.java:87 condition failed: assert index >= 0 && index < valueCount;"));
-  JreAssert((off + len <= ((IOSLongArray *) nil_chk(arr))->size_), (@"org/apache/lucene/util/packed/Packed16ThreeBlocks.java:88 condition failed: assert off + len <= arr.length;"));
+  JreAssert(len > 0, JreStrcat("$IC", @"len must be > 0 (got ", len, ')'));
+  JreAssert(index >= 0 && index < valueCount_, @"org/apache/lucene/util/packed/Packed16ThreeBlocks.java:87 condition failed: assert index >= 0 && index < valueCount;");
+  JreAssert(off + len <= ((IOSLongArray *) nil_chk(arr))->size_, @"org/apache/lucene/util/packed/Packed16ThreeBlocks.java:88 condition failed: assert off + len <= arr.length;");
   jint sets = JavaLangMath_minWithInt_withInt_(valueCount_ - index, len);
   for (jint i = off, o = index * 3, end = off + sets; i < end; ++i) {
     jlong value = IOSLongArray_Get(arr, i);
@@ -100,7 +102,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 }
 
 - (NSString *)description {
-  return JreStrcat("$$I$I$IC", [[self getClass] getSimpleName], @"(bitsPerValue=", bitsPerValue_, @",size=", [self size], @",blocks=", ((IOSShortArray *) nil_chk(blocks_))->size_, ')');
+  return JreStrcat("$$I$I$IC", [[self java_getClass] getSimpleName], @"(bitsPerValue=", bitsPerValue_, @",size=", [self size], @",blocks=", ((IOSShortArray *) nil_chk(blocks_))->size_, ')');
 }
 
 - (void)dealloc {
@@ -109,29 +111,44 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed16ThreeBlocks", NULL, 0x0, NULL, NULL },
-    { "initWithInt:withOrgApacheLuceneStoreDataInput:withInt:", "Packed16ThreeBlocks", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "getWithInt:withLongArray:withInt:withInt:", "get", "I", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
-    { "setWithInt:withLongArray:withInt:withInt:", "set", "I", 0x1, NULL, NULL },
-    { "fillWithInt:withInt:withLong:", "fill", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, 3, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 5, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:);
+  methods[1].selector = @selector(initPackagePrivateWithInt:withOrgApacheLuceneStoreDataInput:withInt:);
+  methods[2].selector = @selector(getWithInt:);
+  methods[3].selector = @selector(getWithInt:withLongArray:withInt:withInt:);
+  methods[4].selector = @selector(setWithInt:withLong:);
+  methods[5].selector = @selector(setWithInt:withLongArray:withInt:withInt:);
+  methods[6].selector = @selector(fillWithInt:withInt:withLong:);
+  methods[7].selector = @selector(clear);
+  methods[8].selector = @selector(ramBytesUsed);
+  methods[9].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "blocks_", NULL, 0x10, "[S", NULL, NULL, .constantValue.asLong = 0 },
-    { "MAX_SIZE", "MAX_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedPacked16ThreeBlocks_MAX_SIZE },
+    { "blocks_", "[S", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "MAX_SIZE", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedPacked16ThreeBlocks_MAX_SIZE, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked16ThreeBlocks = { 2, "Packed16ThreeBlocks", "org.apache.lucene.util.packed", NULL, 0x10, 10, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "ILOrgApacheLuceneStoreDataInput;I", "LJavaIoIOException;", "get", "I[JII", "set", "IJ", "fill", "IIJ", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked16ThreeBlocks = { "Packed16ThreeBlocks", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x10, 10, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked16ThreeBlocks;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_(OrgApacheLuceneUtilPackedPacked16ThreeBlocks *self, jint valueCount) {
+void OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initPackagePrivateWithInt_(OrgApacheLuceneUtilPackedPacked16ThreeBlocks *self, jint valueCount) {
   OrgApacheLuceneUtilPackedPackedInts_MutableImpl_initWithInt_withInt_(self, valueCount, 48);
   if (valueCount > OrgApacheLuceneUtilPackedPacked16ThreeBlocks_MAX_SIZE) {
     @throw create_JavaLangArrayIndexOutOfBoundsException_initWithNSString_(@"MAX_SIZE exceeded");
@@ -139,16 +156,16 @@ void OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_(OrgApacheLuceneUt
   JreStrongAssignAndConsume(&self->blocks_, [IOSShortArray newArrayWithLength:valueCount * 3]);
 }
 
-OrgApacheLuceneUtilPackedPacked16ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_(jint valueCount) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, initWithInt_, valueCount)
+OrgApacheLuceneUtilPackedPacked16ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initPackagePrivateWithInt_(jint valueCount) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, initPackagePrivateWithInt_, valueCount)
 }
 
-OrgApacheLuceneUtilPackedPacked16ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_(jint valueCount) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, initWithInt_, valueCount)
+OrgApacheLuceneUtilPackedPacked16ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initPackagePrivateWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, initPackagePrivateWithInt_, valueCount)
 }
 
-void OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPacked16ThreeBlocks *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_(self, valueCount);
+void OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPacked16ThreeBlocks *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
+  OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initPackagePrivateWithInt_(self, valueCount);
   for (jint i = 0; i < 3 * valueCount; ++i) {
     *IOSShortArray_GetRef(nil_chk(self->blocks_), i) = [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readShort];
   }
@@ -158,12 +175,12 @@ void OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_withOrgApacheLucen
   }
 }
 
-OrgApacheLuceneUtilPackedPacked16ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, initWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
+OrgApacheLuceneUtilPackedPacked16ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
 }
 
-OrgApacheLuceneUtilPackedPacked16ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, initWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
+OrgApacheLuceneUtilPackedPacked16ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked16ThreeBlocks)

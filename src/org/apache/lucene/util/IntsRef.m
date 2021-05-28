@@ -12,6 +12,10 @@
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/util/IntsRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/IntsRef must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntsRef)
 
 IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS;
@@ -41,7 +45,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (OrgApacheLuceneUtilIntsRef *)clone {
+- (OrgApacheLuceneUtilIntsRef *)java_clone {
   return create_OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(ints_, offset_, length_);
 }
 
@@ -60,7 +64,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return false;
   }
   if ([other isKindOfClass:[OrgApacheLuceneUtilIntsRef class]]) {
-    return [self intsEqualsWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *) cast_chk(other, [OrgApacheLuceneUtilIntsRef class])];
+    return [self intsEqualsWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *) other];
   }
   return false;
 }
@@ -84,7 +88,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilIntsRef *)other {
   cast_chk(other, [OrgApacheLuceneUtilIntsRef class]);
-  if (self == other) return 0;
+  if (JreObjectEqualsEquals(self, other)) return 0;
   IOSIntArray *aInts = self->ints_;
   jint aUpto = self->offset_;
   IOSIntArray *bInts = ((OrgApacheLuceneUtilIntsRef *) nil_chk(other))->ints_;
@@ -151,8 +155,48 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 8, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x9, 10, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(initWithIntArray:withInt:withInt:);
+  methods[3].selector = @selector(java_clone);
+  methods[4].selector = @selector(hash);
+  methods[5].selector = @selector(isEqual:);
+  methods[6].selector = @selector(intsEqualsWithOrgApacheLuceneUtilIntsRef:);
+  methods[7].selector = @selector(compareToWithId:);
+  methods[8].selector = @selector(description);
+  methods[9].selector = @selector(deepCopyOfWithOrgApacheLuceneUtilIntsRef:);
+  methods[10].selector = @selector(isValid);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_INTS", "[I", .constantValue.asLong = 0, 0x19, -1, 11, -1, -1 },
+    { "ints_", "[I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "offset_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "I", "[III", "clone", "hashCode", "equals", "LNSObject;", "intsEquals", "LOrgApacheLuceneUtilIntsRef;", "compareTo", "toString", "deepCopyOf", &OrgApacheLuceneUtilIntsRef_EMPTY_INTS, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/IntsRef;>;Ljava/lang/Cloneable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntsRef = { "IntsRef", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 11, 4, -1, -1, -1, 12, -1 };
+  return &_OrgApacheLuceneUtilIntsRef;
+}
+
 - (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
+  return [[self java_clone] retain];
 }
 
 + (void)initialize {
@@ -160,30 +204,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilIntsRef_EMPTY_INTS, [IOSIntArray newArrayWithLength:0]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilIntsRef)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "IntsRef", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "IntsRef", NULL, 0x1, NULL, NULL },
-    { "initWithIntArray:withInt:withInt:", "IntsRef", NULL, 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.util.IntsRef;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "intsEqualsWithOrgApacheLuceneUtilIntsRef:", "intsEquals", "Z", 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "deepCopyOfWithOrgApacheLuceneUtilIntsRef:", "deepCopyOf", "Lorg.apache.lucene.util.IntsRef;", 0x9, NULL, NULL },
-    { "isValid", NULL, "Z", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_INTS", "EMPTY_INTS", 0x19, "[I", &OrgApacheLuceneUtilIntsRef_EMPTY_INTS, NULL, .constantValue.asLong = 0 },
-    { "ints_", NULL, 0x1, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "offset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntsRef = { 2, "IntsRef", "org.apache.lucene.util", NULL, 0x11, 11, methods, 4, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/IntsRef;>;Ljava/lang/Cloneable;" };
-  return &_OrgApacheLuceneUtilIntsRef;
 }
 
 @end
@@ -219,7 +239,7 @@ void OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(OrgApacheLucen
   JreStrongAssign(&self->ints_, ints);
   self->offset_ = offset;
   self->length_ = length;
-  JreAssert(([self isValid]), (@"org/apache/lucene/util/IntsRef.java:58 condition failed: assert isValid();"));
+  JreAssert([self isValid], @"org/apache/lucene/util/IntsRef.java:58 condition failed: assert isValid();");
 }
 
 OrgApacheLuceneUtilIntsRef *new_OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(IOSIntArray *ints, jint offset, jint length) {

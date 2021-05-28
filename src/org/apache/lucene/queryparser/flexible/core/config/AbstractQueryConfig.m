@@ -9,6 +9,10 @@
 #include "org/apache/lucene/queryparser/flexible/core/config/AbstractQueryConfig.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/ConfigurationKey.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/config/AbstractQueryConfig must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig () {
  @public
   JavaUtilHashMap *configMap_;
@@ -67,17 +71,27 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "AbstractQueryConfig", NULL, 0x0, NULL, NULL },
-    { "getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:", "get", "TT;", 0x1, NULL, "<T:Ljava/lang/Object;>(Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<TT;>;)TT;" },
-    { "hasWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:", "has", "Z", 0x1, NULL, "<T:Ljava/lang/Object;>(Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<TT;>;)Z" },
-    { "setWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:withId:", "set", "V", 0x1, NULL, "<T:Ljava/lang/Object;>(Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<TT;>;TT;)V" },
-    { "unsetWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:", "unset", "Z", 0x1, NULL, "<T:Ljava/lang/Object;>(Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<TT;>;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 0, 1, -1, 2, -1, -1 },
+    { NULL, "Z", 0x1, 3, 1, -1, 4, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, 7, -1, -1 },
+    { NULL, "Z", 0x1, 8, 1, -1, 4, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:);
+  methods[2].selector = @selector(hasWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:);
+  methods[3].selector = @selector(setWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:withId:);
+  methods[4].selector = @selector(unsetWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "configMap_", NULL, 0x12, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<*>;Ljava/lang/Object;>;", .constantValue.asLong = 0 },
+    { "configMap_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 9, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig = { 2, "AbstractQueryConfig", "org.apache.lucene.queryparser.flexible.core.config", NULL, 0x401, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "get", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<TT;>;)TT;", "has", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<TT;>;)Z", "set", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;LNSObject;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<TT;>;TT;)V", "unset", "Ljava/util/HashMap<Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<*>;Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig = { "AbstractQueryConfig", "org.apache.lucene.queryparser.flexible.core.config", ptrTable, methods, fields, 7, 0x401, 5, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesCharTermAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesCharTermAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesCharTermAttribute))
 #define OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_
 
@@ -34,11 +40,11 @@
 /*!
  @brief The term text of a Token.
  */
-@protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute < OrgApacheLuceneUtilAttribute, JavaLangCharSequence, JavaLangAppendable, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute < OrgApacheLuceneUtilAttribute, JavaLangCharSequence, JavaLangAppendable, JavaObject >
 
 /*!
  @brief Copies the contents of buffer, starting at offset for
- length characters, into the termBuffer array.
+   length characters, into the termBuffer array.
  @param buffer the buffer to copy
  @param offset the index in the buffer of the first character to copy
  @param length the number of characters to copy
@@ -49,22 +55,22 @@
 
 /*!
  @brief Returns the internal termBuffer character array which
- you can then directly alter.
- If the array is too
- small for your token, use <code>resizeBuffer(int)</code>
-  to increase it.  After
- altering the buffer be sure to call <code>setLength</code>
+   you can then directly alter.If the array is too
+   small for your token, use <code>resizeBuffer(int)</code>
+  to increase it.
+ After
+   altering the buffer be sure to call <code>setLength</code>
   to record the number of valid
- characters that were placed into the termBuffer. 
+   characters that were placed into the termBuffer.   
  <p>
- <b>NOTE</b>: The returned buffer may be larger than
- the valid <code>length()</code>.
+   <b>NOTE</b>: The returned buffer may be larger than
+   the valid <code>length()</code>.
  */
 - (IOSCharArray *)buffer;
 
 /*!
  @brief Grows the termBuffer to at least size newSize, preserving the
- existing content.
+   existing content.
  @param newSize minimum size of the new termBuffer
  @return newly created termBuffer with <code>length >= newSize</code>
  */
@@ -72,11 +78,10 @@
 
 /*!
  @brief Set number of valid characters (length of the term) in
- the termBuffer array.
- Use this to truncate the termBuffer
- or to synchronize with external manipulation of the termBuffer.
+   the termBuffer array.Use this to truncate the termBuffer
+   or to synchronize with external manipulation of the termBuffer.
  Note: to grow the size of the array,
- use <code>resizeBuffer(int)</code> first.
+   use <code>resizeBuffer(int)</code> first.
  @param length the truncated length
  */
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)setLengthWithInt:(jint)length;
@@ -84,7 +89,7 @@
 /*!
  @brief Sets the length of the termBuffer to zero.
  Use this method before appending contents
- using the <code>Appendable</code> interface.
+  using the <code>Appendable</code> interface.
  */
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)setEmpty;
 
@@ -99,24 +104,24 @@
 /*!
  @brief Appends the specified <code>String</code> to this character sequence.
  <p>The characters of the <code>String</code> argument are appended, in order, increasing the length of
- this sequence by the length of the argument. If argument is <code>null</code>, then the four
- characters <code>"null"</code> are appended. 
+  this sequence by the length of the argument. If argument is <code>null</code>, then the four
+  characters <code>"null"</code> are appended.
  */
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithNSString:(NSString *)s;
 
 /*!
  @brief Appends the specified <code>StringBuilder</code> to this character sequence.
  <p>The characters of the <code>StringBuilder</code> argument are appended, in order, increasing the length of
- this sequence by the length of the argument. If argument is <code>null</code>, then the four
- characters <code>"null"</code> are appended. 
+  this sequence by the length of the argument. If argument is <code>null</code>, then the four
+  characters <code>"null"</code> are appended.
  */
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithJavaLangStringBuilder:(JavaLangStringBuilder *)sb;
 
 /*!
  @brief Appends the contents of the other <code>CharTermAttribute</code> to this character sequence.
  <p>The characters of the <code>CharTermAttribute</code> argument are appended, in order, increasing the length of
- this sequence by the length of the argument. If argument is <code>null</code>, then the four
- characters <code>"null"</code> are appended. 
+  this sequence by the length of the argument. If argument is <code>null</code>, then the four
+  characters <code>"null"</code> are appended.
  */
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:(id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)termAtt;
 
@@ -128,4 +133,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesCharTermAttribu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesCharTermAttribute")

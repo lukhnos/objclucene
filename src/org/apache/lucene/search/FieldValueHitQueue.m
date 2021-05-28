@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/FieldComparator.h"
@@ -17,6 +16,12 @@
 #include "org/apache/lucene/search/ScoreDoc.h"
 #include "org/apache/lucene/search/SortField.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/FieldValueHitQueue must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneSearchFieldValueHitQueue ()
 
@@ -29,7 +34,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchFieldValueHitQueue_init
 
 /*!
  @brief An implementation of <code>FieldValueHitQueue</code> which is optimized in case
- there is just one comparator.
+  there is just one comparator.
  */
 @interface OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue : OrgApacheLuceneSearchFieldValueHitQueue {
  @public
@@ -49,6 +54,20 @@ __attribute__((unused)) static void OrgApacheLuceneSearchFieldValueHitQueue_init
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)hitA
                     withId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)hitB;
 
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)pop;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)top;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)insertWithOverflowWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)arg0;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)addWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)arg0;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)getSentinelObject;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)updateTopWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)arg0;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)updateTop;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue)
@@ -65,7 +84,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_OneComparator
 
 /*!
  @brief An implementation of <code>FieldValueHitQueue</code> which is optimized in case
- there is more than one comparator.
+  there is more than one comparator.
  */
 @interface OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue : OrgApacheLuceneSearchFieldValueHitQueue
 
@@ -74,6 +93,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_OneComparator
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)hitA
                     withId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)hitB;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)pop;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)top;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)insertWithOverflowWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)arg0;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)addWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)arg0;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)getSentinelObject;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)updateTopWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)arg0;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)updateTop;
 
 @end
 
@@ -144,24 +177,35 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparat
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSortFieldArray:withInt:", "FieldValueHitQueue", NULL, 0x2, "Ljava.io.IOException;", NULL },
-    { "createWithOrgApacheLuceneSearchSortFieldArray:withInt:", "create", "Lorg.apache.lucene.search.FieldValueHitQueue;", 0x9, "Ljava.io.IOException;", "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>([Lorg/apache/lucene/search/SortField;I)Lorg/apache/lucene/search/FieldValueHitQueue<TT;>;" },
-    { "getComparators", NULL, "[Lorg.apache.lucene.search.FieldComparator;", 0x1, NULL, NULL },
-    { "getReverseMul", NULL, "[I", 0x1, NULL, NULL },
-    { "getComparatorsWithOrgApacheLuceneIndexLeafReaderContext:", "getComparators", "[Lorg.apache.lucene.search.LeafFieldComparator;", 0x1, "Ljava.io.IOException;", NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x404, NULL, "(Lorg/apache/lucene/search/FieldValueHitQueue$Entry;Lorg/apache/lucene/search/FieldValueHitQueue$Entry;)Z" },
-    { "fillFieldsWithOrgApacheLuceneSearchFieldValueHitQueue_Entry:", "fillFields", "Lorg.apache.lucene.search.FieldDoc;", 0x0, NULL, NULL },
-    { "getFields", NULL, "[Lorg.apache.lucene.search.SortField;", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldValueHitQueue;", 0x9, 2, 0, 1, 3, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchFieldComparator;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "[I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchLeafFieldComparator;", 0x1, 5, 6, 1, -1, -1, -1 },
+    { NULL, "Z", 0x404, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldDoc;", 0x0, 9, 10, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchSortField;", 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSortFieldArray:withInt:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneSearchSortFieldArray:withInt:);
+  methods[2].selector = @selector(getComparators);
+  methods[3].selector = @selector(getReverseMul);
+  methods[4].selector = @selector(getComparatorsWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[5].selector = @selector(lessThanWithId:withId:);
+  methods[6].selector = @selector(fillFieldsWithOrgApacheLuceneSearchFieldValueHitQueue_Entry:);
+  methods[7].selector = @selector(getFields);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fields_", NULL, 0x14, "[Lorg.apache.lucene.search.SortField;", NULL, NULL, .constantValue.asLong = 0 },
-    { "comparators_", NULL, 0x14, "[Lorg.apache.lucene.search.FieldComparator;", NULL, "[Lorg/apache/lucene/search/FieldComparator<*>;", .constantValue.asLong = 0 },
-    { "reverseMul_", NULL, 0x14, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "fields_", "[LOrgApacheLuceneSearchSortField;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "comparators_", "[LOrgApacheLuceneSearchFieldComparator;", .constantValue.asLong = 0, 0x14, -1, -1, 11, -1 },
+    { "reverseMul_", "[I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"TT;"};
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.FieldValueHitQueue$Entry;", "Lorg.apache.lucene.search.FieldValueHitQueue$OneComparatorFieldValueHitQueue;", "Lorg.apache.lucene.search.FieldValueHitQueue$MultiComparatorsFieldValueHitQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue = { 2, "FieldValueHitQueue", "org.apache.lucene.search", NULL, 0x401, 8, methods, 3, fields, 1, superclass_type_args, 3, inner_classes, NULL, "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>Lorg/apache/lucene/util/PriorityQueue<TT;>;" };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneSearchSortField;I", "LJavaIoIOException;", "create", "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>([Lorg/apache/lucene/search/SortField;I)Lorg/apache/lucene/search/FieldValueHitQueue<TT;>;", "()[Lorg/apache/lucene/search/FieldComparator<*>;", "getComparators", "LOrgApacheLuceneIndexLeafReaderContext;", "lessThan", "LOrgApacheLuceneSearchFieldValueHitQueue_Entry;LOrgApacheLuceneSearchFieldValueHitQueue_Entry;", "fillFields", "LOrgApacheLuceneSearchFieldValueHitQueue_Entry;", "[Lorg/apache/lucene/search/FieldComparator<*>;", "LOrgApacheLuceneSearchFieldValueHitQueue_Entry;LOrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue;LOrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue;", "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>Lorg/apache/lucene/util/PriorityQueue<TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue = { "FieldValueHitQueue", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 8, 3, -1, 12, -1, 13, -1 };
   return &_OrgApacheLuceneSearchFieldValueHitQueue;
 }
 
@@ -209,14 +253,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withFloat:", "Entry", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:withFloat:);
+  methods[1].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "slot_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "slot_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue_Entry = { 2, "Entry", "org.apache.lucene.search", "FieldValueHitQueue", 0x9, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IIF", "toString", "LOrgApacheLuceneSearchFieldValueHitQueue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue_Entry = { "Entry", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x9, 2, 1, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFieldValueHitQueue_Entry;
 }
 
@@ -247,8 +298,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue_Entry)
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)hitA
                     withId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)hitB {
-  JreAssert((hitA != hitB), (@"org/apache/lucene/search/FieldValueHitQueue.java:79 condition failed: assert hitA != hitB;"));
-  JreAssert((((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(hitA))->slot_ != ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(hitB))->slot_), (@"org/apache/lucene/search/FieldValueHitQueue.java:80 condition failed: assert hitA.slot != hitB.slot;"));
+  JreAssert(!JreObjectEqualsEquals(hitA, hitB), @"org/apache/lucene/search/FieldValueHitQueue.java:79 condition failed: assert hitA != hitB;");
+  JreAssert(((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(hitA))->slot_ != ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(hitB))->slot_, @"org/apache/lucene/search/FieldValueHitQueue.java:80 condition failed: assert hitA.slot != hitB.slot;");
   jint c = oneReverseMul_ * [((OrgApacheLuceneSearchFieldComparator *) nil_chk(oneComparator_)) compareWithInt:hitA->slot_ withInt:hitB->slot_];
   if (c != 0) {
     return c > 0;
@@ -262,16 +313,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue_Entry)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSortFieldArray:withInt:", "OneComparatorFieldValueHitQueue", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/FieldValueHitQueue$Entry;Lorg/apache/lucene/search/FieldValueHitQueue$Entry;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSortFieldArray:withInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "oneReverseMul_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "oneComparator_", NULL, 0x12, "Lorg.apache.lucene.search.FieldComparator;", NULL, "Lorg/apache/lucene/search/FieldComparator<*>;", .constantValue.asLong = 0 },
+    { "oneReverseMul_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "oneComparator_", "LOrgApacheLuceneSearchFieldComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 4, -1 },
   };
-  static const char *superclass_type_args[] = {"TT;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue = { 2, "OneComparatorFieldValueHitQueue", "org.apache.lucene.search", "FieldValueHitQueue", 0x1a, 2, methods, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>Lorg/apache/lucene/search/FieldValueHitQueue<TT;>;" };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneSearchSortField;I", "LJavaIoIOException;", "lessThan", "LOrgApacheLuceneSearchFieldValueHitQueue_Entry;LOrgApacheLuceneSearchFieldValueHitQueue_Entry;", "Lorg/apache/lucene/search/FieldComparator<*>;", "LOrgApacheLuceneSearchFieldValueHitQueue;", "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>Lorg/apache/lucene/search/FieldValueHitQueue<TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue = { "OneComparatorFieldValueHitQueue", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1a, 2, 2, 5, -1, -1, 6, -1 };
   return &_OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue;
 }
 
@@ -279,7 +336,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue_Entry)
 
 void OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue *self, IOSObjectArray *fields, jint size) {
   OrgApacheLuceneSearchFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(self, fields, size);
-  JreAssert((((IOSObjectArray *) nil_chk(fields))->size_ == 1), (@"org/apache/lucene/search/FieldValueHitQueue.java:65 condition failed: assert fields.length == 1;"));
+  JreAssert(((IOSObjectArray *) nil_chk(fields))->size_ == 1, @"org/apache/lucene/search/FieldValueHitQueue.java:65 condition failed: assert fields.length == 1;");
   JreStrongAssign(&self->oneComparator_, IOSObjectArray_Get(nil_chk(self->comparators_), 0));
   self->oneReverseMul_ = IOSIntArray_Get(nil_chk(self->reverseMul_), 0);
 }
@@ -304,8 +361,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue_OneComp
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)hitA
                     withId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)hitB {
-  JreAssert((hitA != hitB), (@"org/apache/lucene/search/FieldValueHitQueue.java:107 condition failed: assert hitA != hitB;"));
-  JreAssert((((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(hitA))->slot_ != ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(hitB))->slot_), (@"org/apache/lucene/search/FieldValueHitQueue.java:108 condition failed: assert hitA.slot != hitB.slot;"));
+  JreAssert(!JreObjectEqualsEquals(hitA, hitB), @"org/apache/lucene/search/FieldValueHitQueue.java:107 condition failed: assert hitA != hitB;");
+  JreAssert(((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(hitA))->slot_ != ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(hitB))->slot_, @"org/apache/lucene/search/FieldValueHitQueue.java:108 condition failed: assert hitA.slot != hitB.slot;");
   jint numComparators = ((IOSObjectArray *) nil_chk(comparators_))->size_;
   for (jint i = 0; i < numComparators; ++i) {
     jint c = IOSIntArray_Get(nil_chk(reverseMul_), i) * [((OrgApacheLuceneSearchFieldComparator *) nil_chk(IOSObjectArray_Get(comparators_, i))) compareWithInt:hitA->slot_ withInt:hitB->slot_];
@@ -317,12 +374,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue_OneComp
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSortFieldArray:withInt:", "MultiComparatorsFieldValueHitQueue", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/FieldValueHitQueue$Entry;Lorg/apache/lucene/search/FieldValueHitQueue$Entry;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 2, 3, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"TT;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue = { 2, "MultiComparatorsFieldValueHitQueue", "org.apache.lucene.search", "FieldValueHitQueue", 0x1a, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>Lorg/apache/lucene/search/FieldValueHitQueue<TT;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSortFieldArray:withInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "[LOrgApacheLuceneSearchSortField;I", "LJavaIoIOException;", "lessThan", "LOrgApacheLuceneSearchFieldValueHitQueue_Entry;LOrgApacheLuceneSearchFieldValueHitQueue_Entry;", "LOrgApacheLuceneSearchFieldValueHitQueue;", "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>Lorg/apache/lucene/search/FieldValueHitQueue<TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue = { "MultiComparatorsFieldValueHitQueue", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x1a, 2, 0, 4, -1, -1, 5, -1 };
   return &_OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue;
 }
 

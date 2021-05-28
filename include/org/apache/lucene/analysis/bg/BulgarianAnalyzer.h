@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisBgBulgarianAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisBgBulgarianAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisBgBulgarianAnalyzer))
 #define OrgApacheLuceneAnalysisBgBulgarianAnalyzer_
 
@@ -26,45 +32,44 @@
 /*!
  @brief <code>Analyzer</code> for Bulgarian.
  <p>
- This analyzer implements light-stemming as specified by: <i> Searching
- Strategies for the Bulgarian Language </i>
- http://members.unine.ch/jacques.savoy/Papers/BUIR.pdf
+  This analyzer implements light-stemming as specified by: <i> Searching
+  Strategies for the Bulgarian Language </i>
+  http://members.unine.ch/jacques.savoy/Papers/BUIR.pdf
  */
 @interface OrgApacheLuceneAnalysisBgBulgarianAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
-
-+ (NSString *)DEFAULT_STOPWORD_FILE;
+@property (readonly, copy, class) NSString *DEFAULT_STOPWORD_FILE NS_SWIFT_NAME(DEFAULT_STOPWORD_FILE);
 
 #pragma mark Public
 
 /*!
- @brief Builds an analyzer with the default stop words:
+ @brief Builds an analyzer with the default stop words: 
  <code>DEFAULT_STOPWORD_FILE</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Builds an analyzer with the given stop words.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
 /*!
  @brief Builds an analyzer with the given stop words and a stem exclusion set.
  If a stem exclusion set is provided this analyzer will add a <code>SetKeywordMarkerFilter</code> 
- before <code>BulgarianStemFilter</code>.
+  before <code>BulgarianStemFilter</code>.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
-                    withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
+                              withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
 
 /*!
- @brief Creates a
+ @brief Creates a 
  <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- which tokenizes all the text in the provided <code>Reader</code>.
+  which tokenizes all the text in the provided <code>Reader</code>.
  @return A
- <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- built from an <code>StandardTokenizer</code> filtered with
- <code>StandardFilter</code>, <code>LowerCaseFilter</code>, <code>StopFilter</code>
- , <code>SetKeywordMarkerFilter</code> if a stem exclusion set is
- provided and <code>BulgarianStemFilter</code>.
+          <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+          built from an <code>StandardTokenizer</code> filtered with
+          <code>StandardFilter</code>, <code>LowerCaseFilter</code>, <code>StopFilter</code>
+          , <code>SetKeywordMarkerFilter</code> if a stem exclusion set is
+          provided and <code>BulgarianStemFilter</code>.
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
@@ -81,21 +86,21 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisBgBulgarianAnalyzer)
 /*!
  @brief File containing default Bulgarian stopwords.
  Default stopword list is from
- http://members.unine.ch/jacques.savoy/clef/index.html The stopword list is
- BSD-Licensed.
+  http://members.unine.ch/jacques.savoy/clef/index.html The stopword list is
+  BSD-Licensed.
  */
-inline NSString *OrgApacheLuceneAnalysisBgBulgarianAnalyzer_get_DEFAULT_STOPWORD_FILE();
+inline NSString *OrgApacheLuceneAnalysisBgBulgarianAnalyzer_get_DEFAULT_STOPWORD_FILE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisBgBulgarianAnalyzer_DEFAULT_STOPWORD_FILE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisBgBulgarianAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisBgBulgarianAnalyzer_getDefaultStopSet();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisBgBulgarianAnalyzer_getDefaultStopSet(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBgBulgarianAnalyzer_init(OrgApacheLuceneAnalysisBgBulgarianAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianAnalyzer *new_OrgApacheLuceneAnalysisBgBulgarianAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianAnalyzer *new_OrgApacheLuceneAnalysisBgBulgarianAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianAnalyzer *create_OrgApacheLuceneAnalysisBgBulgarianAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianAnalyzer *create_OrgApacheLuceneAnalysisBgBulgarianAnalyzer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBgBulgarianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisBgBulgarianAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
@@ -113,4 +118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisBgBulgarianAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianAnalyzer")

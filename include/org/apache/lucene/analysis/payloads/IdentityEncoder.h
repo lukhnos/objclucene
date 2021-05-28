@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPayloadsIdentityEncoder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPayloadsIdentityEncoder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIdentityEncoder || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsIdentityEncoder))
 #define OrgApacheLuceneAnalysisPayloadsIdentityEncoder_
 
@@ -38,9 +44,9 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
+- (instancetype __nonnull)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
 
 - (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer
                                              withInt:(jint)offset
@@ -54,9 +60,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsIdentityEncoder, charset_, Ja
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init(OrgApacheLuceneAnalysisPayloadsIdentityEncoder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIdentityEncoder *new_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIdentityEncoder *new_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIdentityEncoder *create_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIdentityEncoder *create_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsIdentityEncoder_initWithJavaNioCharsetCharset_(OrgApacheLuceneAnalysisPayloadsIdentityEncoder *self, JavaNioCharsetCharset *charset);
 
@@ -68,4 +74,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsIdentityEncoder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIdentityEncoder")

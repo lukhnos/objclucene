@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -16,6 +15,10 @@
 #include "java/util/Comparator.h"
 #include "java/util/PriorityQueue.h"
 #include "java/util/Queue.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/spell/CombineSuggestion.h"
@@ -25,6 +28,12 @@
 
 @class OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper;
 @class OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/WordBreakSpellChecker must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneSearchSpellWordBreakSpellChecker () {
  @public
@@ -70,10 +79,10 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSpellWordBreakSpellChec
 
 @interface OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenMaxFreqComparator : NSObject < JavaUtilComparator >
 
+- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$;
+
 - (jint)compareWithId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *)o1
                withId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *)o2;
-
-- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$;
 
 @end
 
@@ -89,10 +98,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellWordBreakSpellChecker_Lengt
 
 @interface OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenSumFreqComparator : NSObject < JavaUtilComparator >
 
+- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$;
+
 - (jint)compareWithId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *)o1
                withId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *)o2;
-
-- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$;
 
 @end
 
@@ -108,10 +117,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellWordBreakSpellChecker_Lengt
 
 @interface OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombinationsThenFreqComparator : NSObject < JavaUtilComparator >
 
+- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$;
+
 - (jint)compareWithId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper *)o1
                withId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper *)o2;
-
-- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$;
 
 @end
 
@@ -205,7 +214,7 @@ withOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod:(O
     sortMethod = JreLoadEnum(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_MAX_FREQUENCY);
   }
   jint queueInitialCapacity = maxSuggestions > 10 ? 10 : maxSuggestions;
-  id<JavaUtilComparator> queueComparator = sortMethod == JreLoadEnum(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_MAX_FREQUENCY) ? create_OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenMaxFreqComparator_initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker_(self) : create_OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenSumFreqComparator_initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker_(self);
+  id<JavaUtilComparator> queueComparator = sortMethod == JreLoadEnum(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_MAX_FREQUENCY) ? create_OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenMaxFreqComparator_initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker_(self) : (id) create_OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenSumFreqComparator_initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker_(self);
   id<JavaUtilQueue> suggestions = create_JavaUtilPriorityQueue_initWithInt_withJavaUtilComparator_(queueInitialCapacity, queueComparator);
   jint origFreq = [((OrgApacheLuceneIndexIndexReader *) nil_chk(ir)) docFreqWithOrgApacheLuceneIndexTerm:term];
   if (origFreq > 0 && suggestMode == JreLoadEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_WHEN_NOT_IN_INDEX)) {
@@ -245,8 +254,8 @@ withOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod:(O
     if ([((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, i))) isEqual:OrgApacheLuceneSearchSpellWordBreakSpellChecker_SEPARATOR_TERM]) {
       continue;
     }
-    NSString *leftTermText = [((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, i))) text];
-    jint leftTermLength = [((NSString *) nil_chk(leftTermText)) codePointCount:0 endIndex:((jint) [leftTermText length])];
+    NSString *leftTermText = JreRetainedLocalValue([((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, i))) text]);
+    jint leftTermLength = [((NSString *) nil_chk(leftTermText)) java_codePointCount:0 endIndex:[leftTermText java_length]];
     if (leftTermLength > maxCombineWordLength_) {
       continue;
     }
@@ -256,14 +265,14 @@ withOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod:(O
       maxFreq = IOSIntArray_Get(origFreqs, i);
       minFreq = IOSIntArray_Get(origFreqs, i);
     }
-    NSString *combinedTermText = leftTermText;
+    NSString *combinedTermText = JreRetainedLocalValue(leftTermText);
     jint combinedLength = leftTermLength;
     for (jint j = i + 1; j < terms->size_ && j - i <= maxChanges_; j++) {
       if ([((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, j))) isEqual:OrgApacheLuceneSearchSpellWordBreakSpellChecker_SEPARATOR_TERM]) {
         break;
       }
-      NSString *rightTermText = [((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, j))) text];
-      jint rightTermLength = [((NSString *) nil_chk(rightTermText)) codePointCount:0 endIndex:((jint) [rightTermText length])];
+      NSString *rightTermText = JreRetainedLocalValue([((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, j))) text]);
+      jint rightTermLength = [((NSString *) nil_chk(rightTermText)) java_codePointCount:0 endIndex:[rightTermText java_length]];
       JreStrAppend(&combinedTermText, "$", rightTermText);
       combinedLength += rightTermLength;
       if (combinedLength > maxCombineWordLength_) {
@@ -377,44 +386,65 @@ withOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod:(O
   self->maxEvaluations_ = maxEvaluations;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[[LOrgApacheLuceneSearchSpellSuggestWord;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchSpellCombineSuggestion;", 0x1, 3, 4, 2, -1, -1, -1 },
+    { NULL, "I", 0x2, 5, 6, 2, 7, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchSpellSuggestWord;", 0x2, 8, 9, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchSpellSuggestWord;", 0x2, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpellSuggestWord;", 0x2, 12, 13, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 15, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(suggestWordBreaksWithOrgApacheLuceneIndexTerm:withInt:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchSpellSuggestMode:withOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod:);
+  methods[2].selector = @selector(suggestWordCombinationsWithOrgApacheLuceneIndexTermArray:withInt:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchSpellSuggestMode:);
+  methods[3].selector = @selector(generateBreakUpSuggestionsWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneIndexIndexReader:withInt:withInt:withInt:withOrgApacheLuceneSearchSpellSuggestWordArray:withJavaUtilQueue:withInt:withOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod:);
+  methods[4].selector = @selector(newPrefixWithOrgApacheLuceneSearchSpellSuggestWordArray:withOrgApacheLuceneSearchSpellSuggestWord:);
+  methods[5].selector = @selector(newSuggestionWithOrgApacheLuceneSearchSpellSuggestWordArray:withOrgApacheLuceneSearchSpellSuggestWord:withOrgApacheLuceneSearchSpellSuggestWord:);
+  methods[6].selector = @selector(generateSuggestWordWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:);
+  methods[7].selector = @selector(getMinSuggestionFrequency);
+  methods[8].selector = @selector(getMaxCombineWordLength);
+  methods[9].selector = @selector(getMinBreakWordLength);
+  methods[10].selector = @selector(getMaxChanges);
+  methods[11].selector = @selector(getMaxEvaluations);
+  methods[12].selector = @selector(setMinSuggestionFrequencyWithInt:);
+  methods[13].selector = @selector(setMaxCombineWordLengthWithInt:);
+  methods[14].selector = @selector(setMinBreakWordLengthWithInt:);
+  methods[15].selector = @selector(setMaxChangesWithInt:);
+  methods[16].selector = @selector(setMaxEvaluationsWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "minSuggestionFrequency_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "minBreakWordLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxCombineWordLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxChanges_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxEvaluations_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "SEPARATOR_TERM", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x19, -1, 20, -1, -1 },
+  };
+  static const void *ptrTable[] = { "suggestWordBreaks", "LOrgApacheLuceneIndexTerm;ILOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneSearchSpellSuggestMode;LOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod;", "LJavaIoIOException;", "suggestWordCombinations", "[LOrgApacheLuceneIndexTerm;ILOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneSearchSpellSuggestMode;", "generateBreakUpSuggestions", "LOrgApacheLuceneIndexTerm;LOrgApacheLuceneIndexIndexReader;III[LOrgApacheLuceneSearchSpellSuggestWord;LJavaUtilQueue;ILOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod;", "(Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/IndexReader;III[Lorg/apache/lucene/search/spell/SuggestWord;Ljava/util/Queue<Lorg/apache/lucene/search/spell/WordBreakSpellChecker$SuggestWordArrayWrapper;>;ILorg/apache/lucene/search/spell/WordBreakSpellChecker$BreakSuggestionSortMethod;)I", "newPrefix", "[LOrgApacheLuceneSearchSpellSuggestWord;LOrgApacheLuceneSearchSpellSuggestWord;", "newSuggestion", "[LOrgApacheLuceneSearchSpellSuggestWord;LOrgApacheLuceneSearchSpellSuggestWord;LOrgApacheLuceneSearchSpellSuggestWord;", "generateSuggestWord", "LOrgApacheLuceneIndexIndexReader;LNSString;LNSString;", "setMinSuggestionFrequency", "I", "setMaxCombineWordLength", "setMinBreakWordLength", "setMaxChanges", "setMaxEvaluations", &OrgApacheLuceneSearchSpellWordBreakSpellChecker_SEPARATOR_TERM, "LOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod;LOrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenMaxFreqComparator;LOrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenSumFreqComparator;LOrgApacheLuceneSearchSpellWordBreakSpellChecker_CombinationsThenFreqComparator;LOrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper;LOrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker = { "WordBreakSpellChecker", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x1, 17, 6, -1, 21, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSpellWordBreakSpellChecker;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSpellWordBreakSpellChecker class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSpellWordBreakSpellChecker_SEPARATOR_TERM, new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(@"", @""));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpellWordBreakSpellChecker)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "WordBreakSpellChecker", NULL, 0x1, NULL, NULL },
-    { "suggestWordBreaksWithOrgApacheLuceneIndexTerm:withInt:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchSpellSuggestMode:withOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod:", "suggestWordBreaks", "[[Lorg.apache.lucene.search.spell.SuggestWord;", 0x1, "Ljava.io.IOException;", NULL },
-    { "suggestWordCombinationsWithOrgApacheLuceneIndexTermArray:withInt:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchSpellSuggestMode:", "suggestWordCombinations", "[Lorg.apache.lucene.search.spell.CombineSuggestion;", 0x1, "Ljava.io.IOException;", NULL },
-    { "generateBreakUpSuggestionsWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneIndexIndexReader:withInt:withInt:withInt:withOrgApacheLuceneSearchSpellSuggestWordArray:withJavaUtilQueue:withInt:withOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod:", "generateBreakUpSuggestions", "I", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/IndexReader;III[Lorg/apache/lucene/search/spell/SuggestWord;Ljava/util/Queue<Lorg/apache/lucene/search/spell/WordBreakSpellChecker$SuggestWordArrayWrapper;>;ILorg/apache/lucene/search/spell/WordBreakSpellChecker$BreakSuggestionSortMethod;)I" },
-    { "newPrefixWithOrgApacheLuceneSearchSpellSuggestWordArray:withOrgApacheLuceneSearchSpellSuggestWord:", "newPrefix", "[Lorg.apache.lucene.search.spell.SuggestWord;", 0x2, NULL, NULL },
-    { "newSuggestionWithOrgApacheLuceneSearchSpellSuggestWordArray:withOrgApacheLuceneSearchSpellSuggestWord:withOrgApacheLuceneSearchSpellSuggestWord:", "newSuggestion", "[Lorg.apache.lucene.search.spell.SuggestWord;", 0x2, NULL, NULL },
-    { "generateSuggestWordWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:", "generateSuggestWord", "Lorg.apache.lucene.search.spell.SuggestWord;", 0x2, "Ljava.io.IOException;", NULL },
-    { "getMinSuggestionFrequency", NULL, "I", 0x1, NULL, NULL },
-    { "getMaxCombineWordLength", NULL, "I", 0x1, NULL, NULL },
-    { "getMinBreakWordLength", NULL, "I", 0x1, NULL, NULL },
-    { "getMaxChanges", NULL, "I", 0x1, NULL, NULL },
-    { "getMaxEvaluations", NULL, "I", 0x1, NULL, NULL },
-    { "setMinSuggestionFrequencyWithInt:", "setMinSuggestionFrequency", "V", 0x1, NULL, NULL },
-    { "setMaxCombineWordLengthWithInt:", "setMaxCombineWordLength", "V", 0x1, NULL, NULL },
-    { "setMinBreakWordLengthWithInt:", "setMinBreakWordLength", "V", 0x1, NULL, NULL },
-    { "setMaxChangesWithInt:", "setMaxChanges", "V", 0x1, NULL, NULL },
-    { "setMaxEvaluationsWithInt:", "setMaxEvaluations", "V", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "minSuggestionFrequency_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minBreakWordLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxCombineWordLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxChanges_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxEvaluations_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "SEPARATOR_TERM", "SEPARATOR_TERM", 0x19, "Lorg.apache.lucene.index.Term;", &OrgApacheLuceneSearchSpellWordBreakSpellChecker_SEPARATOR_TERM, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.spell.WordBreakSpellChecker$BreakSuggestionSortMethod;", "Lorg.apache.lucene.search.spell.WordBreakSpellChecker$LengthThenMaxFreqComparator;", "Lorg.apache.lucene.search.spell.WordBreakSpellChecker$LengthThenSumFreqComparator;", "Lorg.apache.lucene.search.spell.WordBreakSpellChecker$CombinationsThenFreqComparator;", "Lorg.apache.lucene.search.spell.WordBreakSpellChecker$SuggestWordArrayWrapper;", "Lorg.apache.lucene.search.spell.WordBreakSpellChecker$CombineSuggestionWrapper;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker = { 2, "WordBreakSpellChecker", "org.apache.lucene.search.spell", NULL, 0x1, 17, methods, 6, fields, 0, NULL, 6, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSearchSpellWordBreakSpellChecker;
 }
 
 @end
@@ -437,8 +467,8 @@ OrgApacheLuceneSearchSpellWordBreakSpellChecker *create_OrgApacheLuceneSearchSpe
 }
 
 jint OrgApacheLuceneSearchSpellWordBreakSpellChecker_generateBreakUpSuggestionsWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexIndexReader_withInt_withInt_withInt_withOrgApacheLuceneSearchSpellSuggestWordArray_withJavaUtilQueue_withInt_withOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_(OrgApacheLuceneSearchSpellWordBreakSpellChecker *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneIndexIndexReader *ir, jint numberBreaks, jint maxSuggestions, jint useMinSuggestionFrequency, IOSObjectArray *prefix, id<JavaUtilQueue> suggestions, jint totalEvaluations, OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *sortMethod) {
-  NSString *termText = [((OrgApacheLuceneIndexTerm *) nil_chk(term)) text];
-  jint termLength = [((NSString *) nil_chk(termText)) codePointCount:0 endIndex:((jint) [termText length])];
+  NSString *termText = JreRetainedLocalValue([((OrgApacheLuceneIndexTerm *) nil_chk(term)) text]);
+  jint termLength = [((NSString *) nil_chk(termText)) java_codePointCount:0 endIndex:[termText java_length]];
   jint useMinBreakWordLength = self->minBreakWordLength_;
   if (useMinBreakWordLength < 1) {
     useMinBreakWordLength = 1;
@@ -448,9 +478,9 @@ jint OrgApacheLuceneSearchSpellWordBreakSpellChecker_generateBreakUpSuggestionsW
   }
   jint thisTimeEvaluations = 0;
   for (jint i = useMinBreakWordLength; i <= (termLength - useMinBreakWordLength); i++) {
-    jint end = [termText offsetByCodePoints:0 codePointOffset:i];
-    NSString *leftText = [termText substring:0 endIndex:end];
-    NSString *rightText = [termText substring:end];
+    jint end = [termText java_offsetByCodePoints:0 codePointOffset:i];
+    NSString *leftText = [termText java_substring:0 endIndex:end];
+    NSString *rightText = [termText java_substring:end];
     OrgApacheLuceneSearchSpellSuggestWord *leftWord = OrgApacheLuceneSearchSpellWordBreakSpellChecker_generateSuggestWordWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(self, ir, [term field], leftText);
     if (((OrgApacheLuceneSearchSpellSuggestWord *) nil_chk(leftWord))->freq_ >= useMinSuggestionFrequency) {
       OrgApacheLuceneSearchSpellSuggestWord *rightWord = OrgApacheLuceneSearchSpellWordBreakSpellChecker_generateSuggestWordWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(self, ir, [term field], rightText);
@@ -538,8 +568,24 @@ OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *OrgAp
   return (OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "NUM_CHANGES_THEN_SUMMED_FREQUENCY", "LOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "NUM_CHANGES_THEN_MAX_FREQUENCY", "LOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_SUMMED_FREQUENCY), &JreEnum(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_MAX_FREQUENCY), "LOrgApacheLuceneSearchSpellWordBreakSpellChecker;", "Ljava/lang/Enum<Lorg/apache/lucene/search/spell/WordBreakSpellChecker$BreakSuggestionSortMethod;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod = { "BreakSuggestionSortMethod", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x4019, 2, 2, 4, -1, -1, 5, -1 };
+  return &_OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod;
 }
 
 + (void)initialize {
@@ -548,22 +594,12 @@ OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *OrgAp
     size_t allocSize = 2 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_SUMMED_FREQUENCY) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_initWithNSString_withInt_(e, @"NUM_CHANGES_THEN_SUMMED_FREQUENCY", 0);
-    (JreEnum(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_MAX_FREQUENCY) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_initWithNSString_withInt_(e, @"NUM_CHANGES_THEN_MAX_FREQUENCY", 1);
+    for (jint i = 0; i < 2; i++) {
+      ((void)(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "NUM_CHANGES_THEN_SUMMED_FREQUENCY", "NUM_CHANGES_THEN_SUMMED_FREQUENCY", 0x4019, "Lorg.apache.lucene.search.spell.WordBreakSpellChecker$BreakSuggestionSortMethod;", &JreEnum(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_SUMMED_FREQUENCY), NULL, .constantValue.asLong = 0 },
-    { "NUM_CHANGES_THEN_MAX_FREQUENCY", "NUM_CHANGES_THEN_MAX_FREQUENCY", 0x4019, "Lorg.apache.lucene.search.spell.WordBreakSpellChecker$BreakSuggestionSortMethod;", &JreEnum(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_MAX_FREQUENCY), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spell.WordBreakSpellChecker$BreakSuggestionSortMethod;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod = { 2, "BreakSuggestionSortMethod", "org.apache.lucene.search.spell", "WordBreakSpellChecker", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/spell/WordBreakSpellChecker$BreakSuggestionSortMethod;>;" };
-  return &_OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod;
 }
 
 @end
@@ -585,7 +621,7 @@ OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *OrgAp
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 
@@ -601,6 +637,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellWordBreakSpellChecker
 
 @implementation OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenMaxFreqComparator
 
+- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$ {
+  OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenMaxFreqComparator_initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker_(self, outer$);
+  return self;
+}
+
 - (jint)compareWithId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *)o1
                withId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *)o2 {
   if (((IOSObjectArray *) nil_chk(((OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *) nil_chk(o1))->suggestWords_))->size_ != ((OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *) nil_chk(o2))->suggestWords_->size_) {
@@ -612,17 +653,48 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellWordBreakSpellChecker
   return 0;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$ {
-  OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenMaxFreqComparator_initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker_(self, outer$);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:", "LengthThenMaxFreqComparator", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenMaxFreqComparator = { 2, "LengthThenMaxFreqComparator", "org.apache.lucene.search.spell", "WordBreakSpellChecker", 0x2, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/spell/WordBreakSpellChecker$SuggestWordArrayWrapper;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpellWordBreakSpellChecker;", "compare", "LOrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper;LOrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper;", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/spell/WordBreakSpellChecker$SuggestWordArrayWrapper;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenMaxFreqComparator = { "LengthThenMaxFreqComparator", "org.apache.lucene.search.spell", ptrTable, methods, NULL, 7, 0x2, 2, 0, 0, -1, -1, 3, -1 };
   return &_OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenMaxFreqComparator;
 }
 
@@ -644,6 +716,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellWordBreakSpellChecker
 
 @implementation OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenSumFreqComparator
 
+- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$ {
+  OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenSumFreqComparator_initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker_(self, outer$);
+  return self;
+}
+
 - (jint)compareWithId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *)o1
                withId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *)o2 {
   if (((IOSObjectArray *) nil_chk(((OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *) nil_chk(o1))->suggestWords_))->size_ != ((OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper *) nil_chk(o2))->suggestWords_->size_) {
@@ -655,17 +732,48 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellWordBreakSpellChecker
   return 0;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$ {
-  OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenSumFreqComparator_initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker_(self, outer$);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:", "LengthThenSumFreqComparator", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenSumFreqComparator = { 2, "LengthThenSumFreqComparator", "org.apache.lucene.search.spell", "WordBreakSpellChecker", 0x2, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/spell/WordBreakSpellChecker$SuggestWordArrayWrapper;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpellWordBreakSpellChecker;", "compare", "LOrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper;LOrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper;", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/spell/WordBreakSpellChecker$SuggestWordArrayWrapper;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenSumFreqComparator = { "LengthThenSumFreqComparator", "org.apache.lucene.search.spell", ptrTable, methods, NULL, 7, 0x2, 2, 0, 0, -1, -1, 3, -1 };
   return &_OrgApacheLuceneSearchSpellWordBreakSpellChecker_LengthThenSumFreqComparator;
 }
 
@@ -687,6 +795,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellWordBreakSpellChecker
 
 @implementation OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombinationsThenFreqComparator
 
+- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$ {
+  OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombinationsThenFreqComparator_initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker_(self, outer$);
+  return self;
+}
+
 - (jint)compareWithId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper *)o1
                withId:(OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper *)o2 {
   if (((OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper *) nil_chk(o1))->numCombinations_ != ((OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper *) nil_chk(o2))->numCombinations_) {
@@ -698,17 +811,48 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellWordBreakSpellChecker
   return 0;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:(OrgApacheLuceneSearchSpellWordBreakSpellChecker *)outer$ {
-  OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombinationsThenFreqComparator_initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker_(self, outer$);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:", "CombinationsThenFreqComparator", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombinationsThenFreqComparator = { 2, "CombinationsThenFreqComparator", "org.apache.lucene.search.spell", "WordBreakSpellChecker", 0x2, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/spell/WordBreakSpellChecker$CombineSuggestionWrapper;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpellWordBreakSpellChecker;", "compare", "LOrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper;LOrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper;", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/spell/WordBreakSpellChecker$CombineSuggestionWrapper;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombinationsThenFreqComparator = { "CombinationsThenFreqComparator", "org.apache.lucene.search.spell", ptrTable, methods, NULL, 7, 0x2, 2, 0, 0, -1, -1, 3, -1 };
   return &_OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombinationsThenFreqComparator;
 }
 
@@ -742,15 +886,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellWordBreakSpellChecker
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:withOrgApacheLuceneSearchSpellSuggestWordArray:", "SuggestWordArrayWrapper", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:withOrgApacheLuceneSearchSpellSuggestWordArray:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "suggestWords_", NULL, 0x10, "[Lorg.apache.lucene.search.spell.SuggestWord;", NULL, NULL, .constantValue.asLong = 0 },
-    { "freqMax_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freqSum_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "suggestWords_", "[LOrgApacheLuceneSearchSpellSuggestWord;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "freqMax_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "freqSum_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper = { 2, "SuggestWordArrayWrapper", "org.apache.lucene.search.spell", "WordBreakSpellChecker", 0x2, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpellWordBreakSpellChecker;[LOrgApacheLuceneSearchSpellSuggestWord;", "LOrgApacheLuceneSearchSpellWordBreakSpellChecker;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper = { "SuggestWordArrayWrapper", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x2, 1, 3, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellWordBreakSpellChecker_SuggestWordArrayWrapper;
 }
 
@@ -800,14 +950,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellWordBreakSpellChecker
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:withOrgApacheLuceneSearchSpellCombineSuggestion:withInt:", "CombineSuggestionWrapper", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpellWordBreakSpellChecker:withOrgApacheLuceneSearchSpellCombineSuggestion:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "combineSuggestion_", NULL, 0x10, "Lorg.apache.lucene.search.spell.CombineSuggestion;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numCombinations_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "combineSuggestion_", "LOrgApacheLuceneSearchSpellCombineSuggestion;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numCombinations_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper = { 2, "CombineSuggestionWrapper", "org.apache.lucene.search.spell", "WordBreakSpellChecker", 0x2, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpellWordBreakSpellChecker;LOrgApacheLuceneSearchSpellCombineSuggestion;I", "LOrgApacheLuceneSearchSpellWordBreakSpellChecker;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper = { "CombineSuggestionWrapper", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x2, 1, 2, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellWordBreakSpellChecker_CombineSuggestionWrapper;
 }
 

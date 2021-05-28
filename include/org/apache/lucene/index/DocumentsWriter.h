@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexDocumentsWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocumentsWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriter))
 #define OrgApacheLuceneIndexDocumentsWriter_
 
@@ -40,51 +46,51 @@
 
 /*!
  @brief This class accepts multiple added documents and directly
- writes segment files.
+  writes segment files.
  Each added document is passed to the indexing chain,
- which in turn processes the document into the different
- codec formats.  Some formats write bytes to files
- immediately, e.g. stored fields and term vectors, while
- others are buffered by the indexing chain and written
- only on flush.
- Once we have used our allowed RAM buffer, or the number
- of added docs is large enough (in the case we are
- flushing by doc count instead of RAM usage), we create a
- real segment and flush it to the Directory.
- Threads:
- Multiple threads are allowed into addDocument at once.
- There is an initial synchronized call to getThreadState
- which allocates a ThreadState for this thread.  The same
- thread will get the same ThreadState over time (thread
- affinity) so that if there are consistent patterns (for
- example each thread is indexing a different content
- source) then we make better use of RAM.  Then
- processDocument is called on that ThreadState without
- synchronization (most of the "heavy lifting" is in this
- call).  Finally the synchronized "finishDocument" is
- called to flush changes to the directory.
- When flush is called by IndexWriter we forcefully idle
- all threads and flush only once they are all idle.  This
- means you can call flush with a given thread even while
- other threads are actively adding/deleting documents.
- Exceptions:
- Because this class directly updates in-memory posting
- lists, and flushes stored fields and term vectors
- directly to files in the directory, there are certain
- limited times when an exception can corrupt this state.
- For example, a disk full while flushing stored fields
- leaves this file in a corrupt state.  Or, an OOM
- exception while appending to the in-memory posting lists
- can corrupt that posting list.  We call such exceptions
- "aborting exceptions".  In these cases we must call
- abort() to discard all docs added since the last flush.
- All other exceptions ("non-aborting exceptions") can
- still partially update the index structures.  These
- updates are consistent, but, they represent only a part
- of the document seen up until the exception was hit.
- When this happens, we immediately mark the document as
- deleted so that the document is always atomically ("all
- or none") added to the index.
+  which in turn processes the document into the different
+  codec formats.  Some formats write bytes to files
+  immediately, e.g. stored fields and term vectors, while
+  others are buffered by the indexing chain and written
+  only on flush.
+  Once we have used our allowed RAM buffer, or the number
+  of added docs is large enough (in the case we are
+  flushing by doc count instead of RAM usage), we create a
+  real segment and flush it to the Directory.
+  Threads:
+  Multiple threads are allowed into addDocument at once.
+  There is an initial synchronized call to getThreadState
+  which allocates a ThreadState for this thread.  The same
+  thread will get the same ThreadState over time (thread
+  affinity) so that if there are consistent patterns (for
+  example each thread is indexing a different content
+  source) then we make better use of RAM.  Then
+  processDocument is called on that ThreadState without
+  synchronization (most of the "heavy lifting" is in this
+  call).  Finally the synchronized "finishDocument" is
+  called to flush changes to the directory.
+  When flush is called by IndexWriter we forcefully idle
+  all threads and flush only once they are all idle.  This
+  means you can call flush with a given thread even while
+  other threads are actively adding/deleting documents.
+  Exceptions:
+  Because this class directly updates in-memory posting
+  lists, and flushes stored fields and term vectors
+  directly to files in the directory, there are certain
+  limited times when an exception can corrupt this state.
+  For example, a disk full while flushing stored fields
+  leaves this file in a corrupt state.  Or, an OOM
+  exception while appending to the in-memory posting lists
+  can corrupt that posting list.  We call such exceptions
+  "aborting exceptions".  In these cases we must call
+  abort() to discard all docs added since the last flush.
+  All other exceptions ("non-aborting exceptions") can
+  still partially update the index structures.  These
+  updates are consistent, but, they represent only a part
+  of the document seen up until the exception was hit.
+  When this happens, we immediately mark the document as
+  deleted so that the document is always atomically ("all
+  or none") added to the index.
  */
 @interface OrgApacheLuceneIndexDocumentsWriter : NSObject < JavaIoCloseable, OrgApacheLuceneUtilAccountable > {
  @public
@@ -114,17 +120,16 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-          withOrgApacheLuceneIndexLiveIndexWriterConfig:(OrgApacheLuceneIndexLiveIndexWriterConfig *)config
-                      withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directoryOrig
-                      withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
+                                  withOrgApacheLuceneIndexLiveIndexWriterConfig:(OrgApacheLuceneIndexLiveIndexWriterConfig *)config
+                                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directoryOrig
+                                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
 /*!
  @brief Called if we hit an exception at a bad time (when
- updating the index files) and must discard all
- currently buffered docs.
- This resets our state,
- discarding any docs added since last flush. 
+   updating the index files) and must discard all
+   currently buffered docs.This resets our state,
+   discarding any docs added since last flush.
  */
 - (void)abortWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
@@ -168,6 +173,10 @@
 
 - (jboolean)updateDocValuesWithOrgApacheLuceneIndexDocValuesUpdateArray:(IOSObjectArray *)updates;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriter)
@@ -177,11 +186,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter, perThreadPool_, OrgApac
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter, flushPolicy_, OrgApacheLuceneIndexFlushPolicy *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter, flushControl_, OrgApacheLuceneIndexDocumentsWriterFlushControl *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexDocumentsWriter *self, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriter_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexDocumentsWriter *self, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriter *new_OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriter *new_OrgApacheLuceneIndexDocumentsWriter_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriter *create_OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory);
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriter *create_OrgApacheLuceneIndexDocumentsWriter_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter)
 
@@ -197,8 +206,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter)
 @class OrgApacheLuceneIndexIndexWriter;
 
 @interface OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent : NSObject < OrgApacheLuceneIndexIndexWriter_Event >
-
-+ (id<OrgApacheLuceneIndexIndexWriter_Event>)INSTANCE;
+@property (readonly, class, strong) id<OrgApacheLuceneIndexIndexWriter_Event> INSTANCE NS_SWIFT_NAME(INSTANCE);
 
 #pragma mark Public
 
@@ -210,7 +218,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter)
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent)
 
-inline id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_get_INSTANCE();
+inline id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_get_INSTANCE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_INSTANCE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent, INSTANCE, id<OrgApacheLuceneIndexIndexWriter_Event>)
@@ -229,8 +237,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent
 @class OrgApacheLuceneIndexIndexWriter;
 
 @interface OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent : NSObject < OrgApacheLuceneIndexIndexWriter_Event >
-
-+ (id<OrgApacheLuceneIndexIndexWriter_Event>)INSTANCE;
+@property (readonly, class, strong) id<OrgApacheLuceneIndexIndexWriter_Event> INSTANCE NS_SWIFT_NAME(INSTANCE);
 
 #pragma mark Public
 
@@ -242,7 +249,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent)
 
-inline id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_get_INSTANCE();
+inline id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_get_INSTANCE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_INSTANCE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent, INSTANCE, id<OrgApacheLuceneIndexIndexWriter_Event>)
@@ -261,8 +268,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent
 @class OrgApacheLuceneIndexIndexWriter;
 
 @interface OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent : NSObject < OrgApacheLuceneIndexIndexWriter_Event >
-
-+ (id<OrgApacheLuceneIndexIndexWriter_Event>)INSTANCE;
+@property (readonly, class, strong) id<OrgApacheLuceneIndexIndexWriter_Event> INSTANCE NS_SWIFT_NAME(INSTANCE);
 
 #pragma mark Public
 
@@ -274,7 +280,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent)
 
-inline id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_get_INSTANCE();
+inline id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_get_INSTANCE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_INSTANCE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent, INSTANCE, id<OrgApacheLuceneIndexIndexWriter_Event>)
@@ -297,11 +303,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info;
 
 - (void)processWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
                                        withBoolean:(jboolean)triggerMerge
                                        withBoolean:(jboolean)forcePurge;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -331,11 +341,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent)
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)files;
+- (instancetype __nonnull)initWithJavaUtilCollection:(id<JavaUtilCollection>)files;
 
 - (void)processWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
                                        withBoolean:(jboolean)triggerMerge
                                        withBoolean:(jboolean)forcePurge;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -351,4 +365,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEve
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter")

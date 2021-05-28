@@ -9,21 +9,25 @@
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/ToStringUtils must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilToStringUtils ()
 
 - (instancetype)init;
 
 @end
 
-inline IOSCharArray *OrgApacheLuceneUtilToStringUtils_get_HEX();
+inline IOSCharArray *OrgApacheLuceneUtilToStringUtils_get_HEX(void);
 static IOSCharArray *OrgApacheLuceneUtilToStringUtils_HEX;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilToStringUtils, HEX, IOSCharArray *)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilToStringUtils_init(OrgApacheLuceneUtilToStringUtils *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilToStringUtils *new_OrgApacheLuceneUtilToStringUtils_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilToStringUtils *new_OrgApacheLuceneUtilToStringUtils_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilToStringUtils *create_OrgApacheLuceneUtilToStringUtils_init();
+__attribute__((unused)) static OrgApacheLuceneUtilToStringUtils *create_OrgApacheLuceneUtilToStringUtils_init(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilToStringUtils)
 
@@ -49,25 +53,34 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneUtilToStringUtils_longHexWithLong_(x);
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneUtilToStringUtils class]) {
-    JreStrongAssign(&OrgApacheLuceneUtilToStringUtils_HEX, [@"0123456789abcdef" toCharArray]);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilToStringUtils)
-  }
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 4, 5, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(boostWithFloat:);
+  methods[2].selector = @selector(byteArrayWithJavaLangStringBuilder:withByteArray:);
+  methods[3].selector = @selector(longHexWithLong:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "HEX", "[C", .constantValue.asLong = 0, 0x1a, -1, 6, -1, -1 },
+  };
+  static const void *ptrTable[] = { "boost", "F", "byteArray", "LJavaLangStringBuilder;[B", "longHex", "J", &OrgApacheLuceneUtilToStringUtils_HEX };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilToStringUtils = { "ToStringUtils", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 4, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilToStringUtils;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ToStringUtils", NULL, 0x2, NULL, NULL },
-    { "boostWithFloat:", "boost", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "byteArrayWithJavaLangStringBuilder:withByteArray:", "byteArray", "V", 0x9, NULL, NULL },
-    { "longHexWithLong:", "longHex", "Ljava.lang.String;", 0x9, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "HEX", "HEX", 0x1a, "[C", &OrgApacheLuceneUtilToStringUtils_HEX, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilToStringUtils = { 2, "ToStringUtils", "org.apache.lucene.util", NULL, 0x11, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilToStringUtils;
++ (void)initialize {
+  if (self == [OrgApacheLuceneUtilToStringUtils class]) {
+    JreStrongAssign(&OrgApacheLuceneUtilToStringUtils_HEX, [@"0123456789abcdef" java_toCharArray]);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilToStringUtils)
+  }
 }
 
 @end
@@ -108,7 +121,7 @@ NSString *OrgApacheLuceneUtilToStringUtils_longHexWithLong_(jlong x) {
   for (jint i = 16; --i >= 0; JreURShiftAssignLong(&x, 4)) {
     *IOSCharArray_GetRef(asHex, i) = IOSCharArray_Get(nil_chk(OrgApacheLuceneUtilToStringUtils_HEX), (jint) x & (jint) 0x0F);
   }
-  return JreStrcat("$$", @"0x", [NSString stringWithCharacters:asHex]);
+  return JreStrcat("$$", @"0x", [NSString java_stringWithCharacters:asHex]);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilToStringUtils)

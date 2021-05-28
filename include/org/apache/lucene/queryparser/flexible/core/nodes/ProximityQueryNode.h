@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_
 
@@ -28,49 +34,40 @@
 
 /*!
  @brief A <code>ProximityQueryNode</code> represents a query where the terms should meet
- specific distance conditions.
+  specific distance conditions.
  (a b c) WITHIN [SENTENCE|PARAGRAPH|NUMBER]
- [INORDER] ("a" "b" "c") WITHIN [SENTENCE|PARAGRAPH|NUMBER] [INORDER]
- TODO: Add this to the future standard Lucene parser/processor/builder
+  [INORDER] ("a" "b" "c") WITHIN [SENTENCE|PARAGRAPH|NUMBER] [INORDER] 
+  TODO: Add this to the future standard Lucene parser/processor/builder
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode
 
 #pragma mark Public
 
 /*!
- @param clauses
- - QueryNode children
- @param field
- - field name
- @param type
- - type of proximity query
- @param inorder
- - true, if the tokens should be matched in the order of the
- clauses
+ @param clauses - QueryNode children
+ @param field - field name
+ @param type - type of proximity query
+ @param inorder - true, if the tokens should be matched in the order of the
+            clauses
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses
-            withJavaLangCharSequence:(id<JavaLangCharSequence>)field
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)clauses
+                      withJavaLangCharSequence:(id<JavaLangCharSequence>)field
 withOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)type
-                         withBoolean:(jboolean)inorder;
+                                   withBoolean:(jboolean)inorder;
 
 /*!
- @param clauses
- - QueryNode children
- @param field
- - field name
- @param type
- - type of proximity query
- @param distance
- - positive integer that specifies the distance
- @param inorder
- - true, if the tokens should be matched in the order of the
- clauses
+ @param clauses - QueryNode children
+ @param field - field name
+ @param type - type of proximity query
+ @param distance - positive integer that specifies the distance
+ @param inorder - true, if the tokens should be matched in the order of the
+            clauses
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses
-            withJavaLangCharSequence:(id<JavaLangCharSequence>)field
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)clauses
+                      withJavaLangCharSequence:(id<JavaLangCharSequence>)field
 withOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)type
-                             withInt:(jint)distance
-                         withBoolean:(jboolean)inorder;
+                                       withInt:(jint)distance
+                                   withBoolean:(jboolean)inorder;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -99,14 +96,17 @@ withOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:(OrgApach
 - (jboolean)isInOrder;
 
 /*!
- @param field
- the field to set
+ @param field the field to set
  */
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -135,6 +135,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQ
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
 @protocol JavaLangCharSequence;
 
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_Enum) {
@@ -146,23 +147,21 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneQueryparserFlexibleCoreNodesProximity
 /*!
  @brief Distance condition: PARAGRAPH, SENTENCE, or NUMBER
  */
-@interface OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type : JavaLangEnum
 
-+ (OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)PARAGRAPH;
+@property (readonly, class, nonnull) OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *PARAGRAPH NS_SWIFT_NAME(PARAGRAPH);
+@property (readonly, class, nonnull) OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *SENTENCE NS_SWIFT_NAME(SENTENCE);
+@property (readonly, class, nonnull) OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *NUMBER NS_SWIFT_NAME(NUMBER);
+#pragma mark Public
 
-+ (OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)SENTENCE;
++ (OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)valueOfWithNSString:(NSString *)name;
 
-+ (OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)NUMBER;
++ (IOSObjectArray *)values;
 
 #pragma mark Package-Private
 
 - (id<JavaLangCharSequence>)toQueryString;
 
-+ (IOSObjectArray *)values;
-
-+ (OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)valueOfWithNSString:(NSString *)name;
-
-- (id)copyWithZone:(NSZone *)zone;
 - (OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_Enum)toNSEnum;
 
 @end
@@ -172,16 +171,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode
 /*! INTERNAL ONLY - Use enum accessors declared below. */
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_values_[];
 
-inline OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_get_PARAGRAPH();
+inline OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_get_PARAGRAPH(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, PARAGRAPH)
 
-inline OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_get_SENTENCE();
+inline OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_get_SENTENCE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, SENTENCE)
 
-inline OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_get_NUMBER();
+inline OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_get_NUMBER(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, NUMBER)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_valueOfWithNSString_(NSString *name);
 
@@ -207,10 +206,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQ
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)type;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)type;
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)type
-                                                                                   withInt:(jint)distance;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *)type
+                                                                                             withInt:(jint)distance;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -234,4 +237,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQ
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode")

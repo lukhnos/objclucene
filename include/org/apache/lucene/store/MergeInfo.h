@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreMergeInfo
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreMergeInfo_) && (INCLUDE_ALL_OrgApacheLuceneStoreMergeInfo || defined(INCLUDE_OrgApacheLuceneStoreMergeInfo))
 #define OrgApacheLuceneStoreMergeInfo_
 
@@ -32,19 +38,23 @@
 
 /*!
  @brief <p>Creates a new <code>MergeInfo</code> instance from
- the values required for a MERGE <code>IOContext</code> context.
+  the values required for a MERGE <code>IOContext</code> context.
  These values are only estimates and are not the actual values.
  */
-- (instancetype)initWithInt:(jint)totalMaxDoc
-                   withLong:(jlong)estimatedMergeBytes
-                withBoolean:(jboolean)isExternal
-                    withInt:(jint)mergeMaxNumSegments;
+- (instancetype __nonnull)initWithInt:(jint)totalMaxDoc
+                             withLong:(jlong)estimatedMergeBytes
+                          withBoolean:(jboolean)isExternal
+                              withInt:(jint)mergeMaxNumSegments;
 
 - (jboolean)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -60,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreMergeInfo)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreMergeInfo")

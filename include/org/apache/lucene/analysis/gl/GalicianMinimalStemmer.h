@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer))
 #define OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_
 
@@ -25,16 +31,16 @@
 /*!
  @brief Minimal Stemmer for Galician
  <p>
- This follows the "RSLP-S" algorithm, but modified for Galician.
+  This follows the "RSLP-S" algorithm, but modified for Galician.
  Hence this stemmer only applies the plural reduction step of:
- "Regras do lematizador para o galego"
+  "Regras do lematizador para o galego"
  - seealso: RSLPStemmerBase
  */
 @interface OrgApacheLuceneAnalysisGlGalicianMinimalStemmer : OrgApacheLuceneAnalysisPtRSLPStemmerBase
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -45,12 +51,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_init(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianMinimalStemmer *new_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianMinimalStemmer *new_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianMinimalStemmer *create_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianMinimalStemmer *create_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer")

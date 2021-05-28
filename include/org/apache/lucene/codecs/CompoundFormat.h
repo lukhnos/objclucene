@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompoundFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompoundFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompoundFormat || defined(INCLUDE_OrgApacheLuceneCodecsCompoundFormat))
 #define OrgApacheLuceneCodecsCompoundFormat_
 
@@ -30,9 +36,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns a Directory view (read-only) for the compound files in this segment
@@ -58,4 +64,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompoundFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompoundFormat")

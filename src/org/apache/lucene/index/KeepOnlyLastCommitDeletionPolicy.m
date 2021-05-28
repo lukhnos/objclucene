@@ -9,6 +9,10 @@
 #include "org/apache/lucene/index/IndexDeletionPolicy.h"
 #include "org/apache/lucene/index/KeepOnlyLastCommitDeletionPolicy.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/KeepOnlyLastCommitDeletionPolicy must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -30,12 +34,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "KeepOnlyLastCommitDeletionPolicy", NULL, 0x1, NULL, NULL },
-    { "onInitWithJavaUtilList:", "onInit", "V", 0x1, NULL, "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
-    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x1, NULL, "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, 2, -1, -1 },
+    { NULL, "V", 0x1, 3, 1, -1, 2, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy = { 2, "KeepOnlyLastCommitDeletionPolicy", "org.apache.lucene.index", NULL, 0x11, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(onInitWithJavaUtilList:);
+  methods[2].selector = @selector(onCommitWithJavaUtilList:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "onInit", "LJavaUtilList;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V", "onCommit" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy = { "KeepOnlyLastCommitDeletionPolicy", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x11, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy;
 }
 

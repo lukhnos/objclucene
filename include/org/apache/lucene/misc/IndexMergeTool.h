@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneMiscIndexMergeTool
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneMiscIndexMergeTool_) && (INCLUDE_ALL_OrgApacheLuceneMiscIndexMergeTool || defined(INCLUDE_OrgApacheLuceneMiscIndexMergeTool))
 #define OrgApacheLuceneMiscIndexMergeTool_
 
@@ -20,13 +26,13 @@
 
 /*!
  @brief Merges indices specified on the command line into the index
- specified as the first command line argument.
+  specified as the first command line argument.
  */
 @interface OrgApacheLuceneMiscIndexMergeTool : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (void)mainWithNSStringArray:(IOSObjectArray *)args;
 
@@ -34,16 +40,20 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneMiscIndexMergeTool)
 
-FOUNDATION_EXPORT void OrgApacheLuceneMiscIndexMergeTool_mainWithNSStringArray_(IOSObjectArray *args);
-
 FOUNDATION_EXPORT void OrgApacheLuceneMiscIndexMergeTool_init(OrgApacheLuceneMiscIndexMergeTool *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneMiscIndexMergeTool *new_OrgApacheLuceneMiscIndexMergeTool_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneMiscIndexMergeTool *new_OrgApacheLuceneMiscIndexMergeTool_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneMiscIndexMergeTool *create_OrgApacheLuceneMiscIndexMergeTool_init();
+FOUNDATION_EXPORT OrgApacheLuceneMiscIndexMergeTool *create_OrgApacheLuceneMiscIndexMergeTool_init(void);
+
+FOUNDATION_EXPORT void OrgApacheLuceneMiscIndexMergeTool_mainWithNSStringArray_(IOSObjectArray *args);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscIndexMergeTool)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneMiscIndexMergeTool")

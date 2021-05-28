@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCharfilterBaseCharFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCharfilterBaseCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterBaseCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterBaseCharFilter))
 #define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_
 
@@ -24,29 +30,28 @@
 
 /*!
  @brief Base utility class for implementing a <code>CharFilter</code>.
- You subclass this, and then record mappings by calling
+ You subclass this, and then record mappings by calling 
  <code>addOffCorrectMap</code>, and then invoke the correct
- method to correct an offset.
+  method to correct an offset.
  */
 @interface OrgApacheLuceneAnalysisCharfilterBaseCharFilter : OrgApacheLuceneAnalysisCharFilter
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)inArg;
 
 #pragma mark Protected
 
 /*!
  @brief <p>
- Adds an offset correction mapping at the given output stream offset.
+    Adds an offset correction mapping at the given output stream offset.
  </p>
- <p>
- Assumption: the offset given with each successive call to this method
- will not be smaller than the offset given at the previous invocation.
+  <p>
+    Assumption: the offset given with each successive call to this method
+    will not be smaller than the offset given at the previous invocation. 
  </p>
  @param off The output stream offset at which to apply the correction
- @param cumulativeDiff The input offset is given by adding this
- to the output offset
+ @param cumulativeDiff The input offset is given by adding this                        to the output offset
  */
 - (void)addOffCorrectMapWithInt:(jint)off
                         withInt:(jint)cumulativeDiff;
@@ -68,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterBaseCharFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterBaseCharFilter")

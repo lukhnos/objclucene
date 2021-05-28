@@ -7,6 +7,10 @@
 #include "org/apache/lucene/queries/function/ValueSource.h"
 #include "org/apache/lucene/queries/function/valuesource/BoolFunction.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/BoolFunction must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueriesFunctionValuesourceBoolFunction
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -17,10 +21,15 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BoolFunction", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceBoolFunction = { 2, "BoolFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x401, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceBoolFunction = { "BoolFunction", "org.apache.lucene.queries.function.valuesource", NULL, methods, NULL, 7, 0x401, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction;
 }
 

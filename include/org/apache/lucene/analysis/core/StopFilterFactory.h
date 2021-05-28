@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreStopFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreStopFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCoreStopFilterFactory))
 #define OrgApacheLuceneAnalysisCoreStopFilterFactory_
 
@@ -32,56 +38,55 @@
 /*!
  @brief Factory for <code>StopFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_stop" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.StopFilterFactory" ignoreCase="true"
- words="stopwords.txt" format="wordset"
+  &lt;fieldType name="text_stop" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.StopFilterFactory" ignoreCase="true"
+              words="stopwords.txt" format="wordset"   
  &lt;/analyzer&gt;
- 
+  &lt;/fieldType&gt;
 @endcode
+  
  <p>
- All attributes are optional:
+  All attributes are optional: 
  </p>
- <ul>
- <li><code>ignoreCase</code> defaults to <code>false</code></li>
- <li><code>words</code> should be the name of a stopwords file to parse, if not 
- specified the factory will use <code>StopAnalyzer.ENGLISH_STOP_WORDS_SET</code>
- </li>
- <li><code>format</code> defines how the <code>words</code> file will be parsed, 
- and defaults to <code>wordset</code>.  If <code>words</code> is not specified, 
- then <code>format</code> must not be specified.
- </li>
- </ul>
- <p>
- The valid values for the <code>format</code> option are:
+  <ul>
+   <li><code>ignoreCase</code> defaults to <code>false</code></li>
+   <li><code>words</code> should be the name of a stopwords file to parse, if not 
+       specified the factory will use <code>StopAnalyzer.ENGLISH_STOP_WORDS_SET</code>
+   </li>
+   <li><code>format</code> defines how the <code>words</code> file will be parsed, 
+       and defaults to <code>wordset</code>.  If <code>words</code> is not specified, 
+       then <code>format</code> must not be specified.
+   </li>
+  </ul>
+  <p>
+  The valid values for the <code>format</code> option are: 
  </p>
- <ul>
- <li><code>wordset</code> - This is the default format, which supports one word per 
- line (including any intra-word whitespace) and allows whole line comments 
- begining with the "#" character.  Blank lines are ignored.  See 
+  <ul>
+   <li><code>wordset</code> - This is the default format, which supports one word per 
+       line (including any intra-word whitespace) and allows whole line comments 
+       begining with the "#" character.  Blank lines are ignored.  See       
  <code>WordlistLoader.getLines</code> for details.
- </li>
- <li><code>snowball</code> - This format allows for multiple words specified on each 
- line, and trailing comments may be specified using the vertical line ("&#124;"). 
- Blank lines are ignored.  See 
+   </li>
+   <li><code>snowball</code> - This format allows for multiple words specified on each 
+       line, and trailing comments may be specified using the vertical line ("&#124;"). 
+       Blank lines are ignored.  See       
  <code>WordlistLoader.getSnowballWordSet</code> 
- for details.
+       for details.  
  </li>
- </ul>
+  </ul>
  */
 @interface OrgApacheLuceneAnalysisCoreStopFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
-
-+ (NSString *)FORMAT_WORDSET;
-
-+ (NSString *)FORMAT_SNOWBALL;
+@property (readonly, copy, class) NSString *FORMAT_WORDSET NS_SWIFT_NAME(FORMAT_WORDSET);
+@property (readonly, copy, class) NSString *FORMAT_SNOWBALL NS_SWIFT_NAME(FORMAT_SNOWBALL);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new StopFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -95,12 +100,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreStopFilterFactory)
 
-inline NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_get_FORMAT_WORDSET();
+inline NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_get_FORMAT_WORDSET(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCoreStopFilterFactory, FORMAT_WORDSET, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_get_FORMAT_SNOWBALL();
+inline NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_get_FORMAT_SNOWBALL(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCoreStopFilterFactory, FORMAT_SNOWBALL, NSString *)
@@ -115,4 +120,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreStopFilterFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilterFactory")

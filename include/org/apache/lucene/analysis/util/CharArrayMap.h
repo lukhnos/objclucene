@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneAnalysisUtilCharArrayMap 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilCharArrayMap_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArrayMap || defined(INCLUDE_OrgApacheLuceneAnalysisUtilCharArrayMap))
 #define OrgApacheLuceneAnalysisUtilCharArrayMap_
 
@@ -33,53 +39,50 @@
 
 /*!
  @brief A simple class that stores key Strings as char[]'s in a
- hash table.
- Note that this is not a general purpose
- class.  For example, it cannot remove items from the
- map, nor does it resize its hash table to be smaller,
- etc.  It is designed to be quick to retrieve items
- by char[] keys without the necessity of converting
- to a String first.
+  hash table.Note that this is not a general purpose
+  class.
+ For example, it cannot remove items from the
+  map, nor does it resize its hash table to be smaller,
+  etc.  It is designed to be quick to retrieve items
+  by char[] keys without the necessity of converting
+  to a String first.
  */
 @interface OrgApacheLuceneAnalysisUtilCharArrayMap : JavaUtilAbstractMap {
  @public
   IOSObjectArray *keys_;
-  IOSObjectArray *values_;
+  IOSObjectArray *values_CharArrayMap_;
 }
 
 #pragma mark Public
 
 /*!
  @brief Create map with enough capacity to hold startSize terms
- @param startSize
- the initial capacity
- @param ignoreCase
- <code>false</code> if and only if the set should be case sensitive
- otherwise <code>true</code>.
+ @param startSize the initial capacity
+ @param ignoreCase <code>
+  false </code>  if and only if the set should be case sensitive           otherwise 
+  <code> true </code> .
  */
-- (instancetype)initWithInt:(jint)startSize
-                withBoolean:(jboolean)ignoreCase;
+- (instancetype __nonnull)initWithInt:(jint)startSize
+                          withBoolean:(jboolean)ignoreCase;
 
 /*!
  @brief Creates a map from the mappings in another map.
- @param c
- a map whose mappings to be copied
- @param ignoreCase
- <code>false</code> if and only if the set should be case sensitive
- otherwise <code>true</code>.
+ @param c a map whose mappings to be copied
+ @param ignoreCase <code>
+  false </code>  if and only if the set should be case sensitive           otherwise 
+  <code> true </code> .
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)c
-                        withBoolean:(jboolean)ignoreCase;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)c
+                                  withBoolean:(jboolean)ignoreCase;
 
 /*!
- @brief Clears all entries in this map.
- This method is supported for reusing, but not <code>Map.remove</code>. 
+ @brief Clears all entries in this map.This method is supported for reusing, but not <code>Map.remove</code>.
  */
 - (void)clear;
 
 /*!
  @brief true if the <code>len</code> chars of <code>text</code> starting at <code>off</code>
- are in the <code>keySet()</code>
+  are in the <code>keySet()</code>
  */
 - (jboolean)containsKeyWithCharArray:(IOSCharArray *)text
                              withInt:(jint)off
@@ -93,14 +96,12 @@
 - (jboolean)containsKeyWithId:(id)o;
 
 /*!
- @brief Returns a copy of the given map as a <code>CharArrayMap</code>.
- If the given map
- is a <code>CharArrayMap</code> the ignoreCase property will be preserved.
- @param map
- a map to copy
+ @brief Returns a copy of the given map as a <code>CharArrayMap</code>.If the given map
+  is a <code>CharArrayMap</code> the ignoreCase property will be preserved.
+ @param map a map to copy
  @return a copy of the given map as a <code>CharArrayMap</code>. If the given map
- is a <code>CharArrayMap</code> the ignoreCase property as well as the
- matchVersion will be of the given map will be preserved.
+          is a <code>CharArrayMap</code> the ignoreCase property as well as the
+          matchVersion will be of the given map will be preserved.
  */
 + (OrgApacheLuceneAnalysisUtilCharArrayMap *)copy__WithJavaUtilMap:(id<JavaUtilMap>)map OBJC_METHOD_FAMILY_NONE;
 
@@ -113,7 +114,7 @@
 
 /*!
  @brief returns the value of the mapping of <code>len</code> chars of <code>text</code>
- starting at <code>off</code>
+  starting at <code>off</code>
  */
 - (id)getWithCharArray:(IOSCharArray *)text
                withInt:(jint)off
@@ -128,14 +129,14 @@
 
 /*!
  @brief Returns an <code>CharArraySet</code> view on the map's keys.
- The set will use the same <code>matchVersion</code> as this map. 
+ The set will use the same <code>matchVersion</code> as this map.
  */
 - (OrgApacheLuceneAnalysisUtilCharArraySet *)keySet;
 
 /*!
  @brief Add the given mapping.
  If ignoreCase is true for this Set, the text array will be directly modified.
- The user should never modify this text array after calling this method.
+  The user should never modify this text array after calling this method.
  */
 - (id)putWithCharArray:(IOSCharArray *)text
                 withId:(id)value;
@@ -162,13 +163,11 @@
 - (NSString *)description;
 
 /*!
- @brief Returns an unmodifiable <code>CharArrayMap</code>.
- This allows to provide
- unmodifiable views of internal map for "read-only" use.
- @param map
- a map for which the unmodifiable map is returned.
+ @brief Returns an unmodifiable <code>CharArrayMap</code>.This allows to provide
+  unmodifiable views of internal map for "read-only" use.
+ @param map a map for which the unmodifiable map is returned.
  @return an new unmodifiable <code>CharArrayMap</code>.
- @throws NullPointerException
+ @throw NullPointerException
  if the given map is <code>null</code>.
  */
 + (OrgApacheLuceneAnalysisUtilCharArrayMap *)unmodifiableMapWithOrgApacheLuceneAnalysisUtilCharArrayMap:(OrgApacheLuceneAnalysisUtilCharArrayMap *)map;
@@ -179,12 +178,16 @@
 
 - (id<JavaUtilSet>)originalKeySet;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisUtilCharArrayMap)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilCharArrayMap, keys_, IOSObjectArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilCharArrayMap, values_, IOSObjectArray *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilCharArrayMap, values_CharArrayMap_, IOSObjectArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilCharArrayMap *self, jint startSize, jboolean ignoreCase);
 
@@ -202,7 +205,7 @@ FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalys
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisUtilCharArrayMap_copy__WithJavaUtilMap_(id<JavaUtilMap> map);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisUtilCharArrayMap_emptyMap();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisUtilCharArrayMap_emptyMap(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap)
 
@@ -216,6 +219,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap)
 #include "java/util/Iterator.h"
 
 @class IOSCharArray;
+@protocol JavaUtilFunctionConsumer;
 @protocol JavaUtilMap_Entry;
 
 /*!
@@ -238,7 +242,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap)
 - (id<JavaUtilMap_Entry>)next;
 
 /*!
- @brief gets the next key... do not modify the returned char[]
+ @brief gets the next key...do not modify the returned char[]
  */
 - (IOSCharArray *)nextKey;
 
@@ -253,6 +257,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap)
  @brief sets the value associated with the last key returned
  */
 - (id)setValueWithId:(id)value;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -290,6 +298,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator
 
 #pragma mark Package-Private
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet)
@@ -305,6 +317,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet)
 @class OrgApacheLuceneAnalysisUtilCharArrayMap;
 @class OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet;
 @protocol JavaLangCharSequence;
+@protocol JavaUtilMap;
 
 @interface OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap : OrgApacheLuceneAnalysisUtilCharArrayMap
 
@@ -328,9 +341,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArrayMap:(OrgApacheLuceneAnalysisUtilCharArrayMap *)map;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArrayMap:(OrgApacheLuceneAnalysisUtilCharArrayMap *)map;
 
 - (OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet *)createEntrySet;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)arg0
+                                  withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -346,4 +367,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableC
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArrayMap")

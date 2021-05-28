@@ -3,16 +3,18 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/util/RollingCharBuffer.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
 #include "org/apache/lucene/analysis/util/RollingCharBuffer.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/RollingCharBuffer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisUtilRollingCharBuffer () {
  @public
@@ -38,6 +40,13 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisUtilRollingCharBu
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisUtilRollingCharBuffer_getIndexWithInt_(OrgApacheLuceneAnalysisUtilRollingCharBuffer *self, jint pos);
 
 @implementation OrgApacheLuceneAnalysisUtilRollingCharBuffer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisUtilRollingCharBuffer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)resetWithJavaIoReader:(JavaIoReader *)reader {
   JreStrongAssign(&self->reader_, reader);
@@ -75,8 +84,8 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisUtilRollingCharBuffer
     return ch;
   }
   else {
-    JreAssert((pos < nextPos_), (@"org/apache/lucene/analysis/util/RollingCharBuffer.java:98 condition failed: assert pos < nextPos;"));
-    JreAssert((nextPos_ - pos <= count_), (JreStrcat("$I$I$I", @"nextPos=", nextPos_, @" pos=", pos, @" count=", count_)));
+    JreAssert(pos < nextPos_, @"org/apache/lucene/analysis/util/RollingCharBuffer.java:98 condition failed: assert pos < nextPos;");
+    JreAssert(nextPos_ - pos <= count_, JreStrcat("$I$I$I", @"nextPos=", nextPos_, @" pos=", pos, @" count=", count_));
     return IOSCharArray_Get(nil_chk(buffer_), OrgApacheLuceneAnalysisUtilRollingCharBuffer_getIndexWithInt_(self, pos));
   }
 }
@@ -91,8 +100,8 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisUtilRollingCharBuffer
 
 - (IOSCharArray *)getWithInt:(jint)posStart
                      withInt:(jint)length {
-  JreAssert((length > 0), (@"org/apache/lucene/analysis/util/RollingCharBuffer.java:123 condition failed: assert length > 0;"));
-  JreAssert((OrgApacheLuceneAnalysisUtilRollingCharBuffer_inBoundsWithInt_(self, posStart)), (JreStrcat("$I$I", @"posStart=", posStart, @" length=", length)));
+  JreAssert(length > 0, @"org/apache/lucene/analysis/util/RollingCharBuffer.java:123 condition failed: assert length > 0;");
+  JreAssert(OrgApacheLuceneAnalysisUtilRollingCharBuffer_inBoundsWithInt_(self, posStart), JreStrcat("$I$I", @"posStart=", posStart, @" length=", length));
   jint startIndex = OrgApacheLuceneAnalysisUtilRollingCharBuffer_getIndexWithInt_(self, posStart);
   jint endIndex = OrgApacheLuceneAnalysisUtilRollingCharBuffer_getIndexWithInt_(self, posStart + length);
   IOSCharArray *result = [IOSCharArray arrayWithLength:length];
@@ -108,20 +117,13 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisUtilRollingCharBuffer
 }
 
 - (void)freeBeforeWithInt:(jint)pos {
-  JreAssert((pos >= 0), (@"org/apache/lucene/analysis/util/RollingCharBuffer.java:146 condition failed: assert pos >= 0;"));
-  JreAssert((pos <= nextPos_), (@"org/apache/lucene/analysis/util/RollingCharBuffer.java:147 condition failed: assert pos <= nextPos;"));
+  JreAssert(pos >= 0, @"org/apache/lucene/analysis/util/RollingCharBuffer.java:146 condition failed: assert pos >= 0;");
+  JreAssert(pos <= nextPos_, @"org/apache/lucene/analysis/util/RollingCharBuffer.java:147 condition failed: assert pos <= nextPos;");
   jint newCount = nextPos_ - pos;
-  JreAssert((newCount <= count_), (JreStrcat("$I$I", @"newCount=", newCount, @" count=", count_)));
-  JreAssert((newCount <= ((IOSCharArray *) nil_chk(buffer_))->size_), (JreStrcat("$I$I", @"newCount=", newCount, @" buf.length=", buffer_->size_)));
+  JreAssert(newCount <= count_, JreStrcat("$I$I", @"newCount=", newCount, @" count=", count_));
+  JreAssert(newCount <= ((IOSCharArray *) nil_chk(buffer_))->size_, JreStrcat("$I$I", @"newCount=", newCount, @" buf.length=", buffer_->size_));
   count_ = newCount;
 }
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisUtilRollingCharBuffer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(reader_);
@@ -130,41 +132,40 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "resetWithJavaIoReader:", "reset", "V", 0x1, NULL, NULL },
-    { "getWithInt:", "get", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "inBoundsWithInt:", "inBounds", "Z", 0x2, NULL, NULL },
-    { "getIndexWithInt:", "getIndex", "I", 0x2, NULL, NULL },
-    { "getWithInt:withInt:", "get", "[C", 0x1, NULL, NULL },
-    { "freeBeforeWithInt:", "freeBefore", "V", 0x1, NULL, NULL },
-    { "init", "RollingCharBuffer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "Z", 0x2, 5, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 6, 3, -1, -1, -1, -1 },
+    { NULL, "[C", 0x1, 2, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(resetWithJavaIoReader:);
+  methods[2].selector = @selector(getWithInt:);
+  methods[3].selector = @selector(inBoundsWithInt:);
+  methods[4].selector = @selector(getIndexWithInt:);
+  methods[5].selector = @selector(getWithInt:withInt:);
+  methods[6].selector = @selector(freeBeforeWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reader_", NULL, 0x2, "Ljava.io.Reader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextWrite_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextPos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "reader_", "LJavaIoReader;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "buffer_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextWrite_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextPos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "count_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "end_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilRollingCharBuffer = { 2, "RollingCharBuffer", "org.apache.lucene.analysis.util", NULL, 0x11, 7, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "reset", "LJavaIoReader;", "get", "I", "LJavaIoIOException;", "inBounds", "getIndex", "II", "freeBefore" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilRollingCharBuffer = { "RollingCharBuffer", "org.apache.lucene.analysis.util", ptrTable, methods, fields, 7, 0x11, 7, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisUtilRollingCharBuffer;
 }
 
 @end
-
-jboolean OrgApacheLuceneAnalysisUtilRollingCharBuffer_inBoundsWithInt_(OrgApacheLuceneAnalysisUtilRollingCharBuffer *self, jint pos) {
-  return pos >= 0 && pos < self->nextPos_ && pos >= self->nextPos_ - self->count_;
-}
-
-jint OrgApacheLuceneAnalysisUtilRollingCharBuffer_getIndexWithInt_(OrgApacheLuceneAnalysisUtilRollingCharBuffer *self, jint pos) {
-  jint index = self->nextWrite_ - (self->nextPos_ - pos);
-  if (index < 0) {
-    index += ((IOSCharArray *) nil_chk(self->buffer_))->size_;
-    JreAssert((index >= 0), (@"org/apache/lucene/analysis/util/RollingCharBuffer.java:117 condition failed: assert index >= 0;"));
-  }
-  return index;
-}
 
 void OrgApacheLuceneAnalysisUtilRollingCharBuffer_init(OrgApacheLuceneAnalysisUtilRollingCharBuffer *self) {
   NSObject_init(self);
@@ -177,6 +178,19 @@ OrgApacheLuceneAnalysisUtilRollingCharBuffer *new_OrgApacheLuceneAnalysisUtilRol
 
 OrgApacheLuceneAnalysisUtilRollingCharBuffer *create_OrgApacheLuceneAnalysisUtilRollingCharBuffer_init() {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilRollingCharBuffer, init)
+}
+
+jboolean OrgApacheLuceneAnalysisUtilRollingCharBuffer_inBoundsWithInt_(OrgApacheLuceneAnalysisUtilRollingCharBuffer *self, jint pos) {
+  return pos >= 0 && pos < self->nextPos_ && pos >= self->nextPos_ - self->count_;
+}
+
+jint OrgApacheLuceneAnalysisUtilRollingCharBuffer_getIndexWithInt_(OrgApacheLuceneAnalysisUtilRollingCharBuffer *self, jint pos) {
+  jint index = self->nextWrite_ - (self->nextPos_ - pos);
+  if (index < 0) {
+    index += ((IOSCharArray *) nil_chk(self->buffer_))->size_;
+    JreAssert(index >= 0, @"org/apache/lucene/analysis/util/RollingCharBuffer.java:117 condition failed: assert index >= 0;");
+  }
+  return index;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilRollingCharBuffer)

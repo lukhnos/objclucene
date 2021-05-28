@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/spans/SpanScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/similarities/Similarity.h"
@@ -13,6 +11,10 @@
 #include "org/apache/lucene/search/spans/SpanWeight.h"
 #include "org/apache/lucene/search/spans/Spans.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spans/SpanScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSpansSpanScorer () {
  @public
@@ -99,30 +101,49 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpanWeight:withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:", "SpanScorer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "nextDoc", NULL, "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "ensureFreq", NULL, "V", 0x12, "Ljava.io.IOException;", NULL },
-    { "setFreqCurrentDoc", NULL, "V", 0x14, "Ljava.io.IOException;", NULL },
-    { "doStartCurrentDoc", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "doCurrentSpans", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "scoreCurrentDoc", NULL, "F", 0x4, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x11, NULL, NULL },
-    { "score", NULL, "F", 0x11, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "sloppyFreq", NULL, "F", 0x11, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x11, NULL, NULL },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x11, 2, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x12, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x14, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 1, -1, -1, -1 },
+    { NULL, "F", 0x4, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "F", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x11, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpanWeight:withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:);
+  methods[1].selector = @selector(nextDoc);
+  methods[2].selector = @selector(advanceWithInt:);
+  methods[3].selector = @selector(ensureFreq);
+  methods[4].selector = @selector(setFreqCurrentDoc);
+  methods[5].selector = @selector(doStartCurrentDoc);
+  methods[6].selector = @selector(doCurrentSpans);
+  methods[7].selector = @selector(scoreCurrentDoc);
+  methods[8].selector = @selector(docID);
+  methods[9].selector = @selector(score);
+  methods[10].selector = @selector(freq);
+  methods[11].selector = @selector(sloppyFreq);
+  methods[12].selector = @selector(cost);
+  methods[13].selector = @selector(asTwoPhaseIterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "spans_", NULL, 0x14, "Lorg.apache.lucene.search.spans.Spans;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docScorer_", NULL, 0x14, "Lorg.apache.lucene.search.similarities.Similarity$SimScorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x4, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "numMatches_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastScoredDoc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "spans_", "LOrgApacheLuceneSearchSpansSpans;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "docScorer_", "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "freq_", "F", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "numMatches_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "lastScoredDoc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanScorer = { 2, "SpanScorer", "org.apache.lucene.search.spans", NULL, 0x1, 14, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpansSpans;LOrgApacheLuceneSearchSpansSpanWeight;LOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;", "LJavaIoIOException;", "advance", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanScorer = { "SpanScorer", "org.apache.lucene.search.spans", ptrTable, methods, fields, 7, 0x1, 14, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansSpanScorer;
 }
 
@@ -155,17 +176,17 @@ void OrgApacheLuceneSearchSpansSpanScorer_setFreqCurrentDoc(OrgApacheLuceneSearc
   self->freq_ = 0.0f;
   self->numMatches_ = 0;
   [self doStartCurrentDoc];
-  JreAssert(([((OrgApacheLuceneSearchSpansSpans *) nil_chk(self->spans_)) startPosition] == -1), (JreStrcat("$@", @"incorrect initial start position, spans=", self->spans_)));
-  JreAssert(([self->spans_ endPosition] == -1), (JreStrcat("$@", @"incorrect initial end position, spans=", self->spans_)));
+  JreAssert([((OrgApacheLuceneSearchSpansSpans *) nil_chk(self->spans_)) startPosition] == -1, JreStrcat("$@", @"incorrect initial start position, spans=", self->spans_));
+  JreAssert([self->spans_ endPosition] == -1, JreStrcat("$@", @"incorrect initial end position, spans=", self->spans_));
   jint prevStartPos = -1;
   jint prevEndPos = -1;
   jint startPos = [self->spans_ nextStartPosition];
-  JreAssert((startPos != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (JreStrcat("$@", @"initial startPos NO_MORE_POSITIONS, spans=", self->spans_)));
+  JreAssert(startPos != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, JreStrcat("$@", @"initial startPos NO_MORE_POSITIONS, spans=", self->spans_));
   do {
-    JreAssert((startPos >= prevStartPos), (@"org/apache/lucene/search/spans/SpanScorer.java:93 condition failed: assert startPos >= prevStartPos;"));
+    JreAssert(startPos >= prevStartPos, @"org/apache/lucene/search/spans/SpanScorer.java:93 condition failed: assert startPos >= prevStartPos;");
     jint endPos = [self->spans_ endPosition];
-    JreAssert((endPos != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/SpanScorer.java:95 condition failed: assert endPos != Spans.NO_MORE_POSITIONS;"));
-    JreAssert(((startPos != prevStartPos) || (endPos >= prevEndPos)), (JreStrcat("$I", @"decreased endPos=", endPos)));
+    JreAssert(endPos != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, @"org/apache/lucene/search/spans/SpanScorer.java:95 condition failed: assert endPos != Spans.NO_MORE_POSITIONS;");
+    JreAssert((startPos != prevStartPos) || (endPos >= prevEndPos), JreStrcat("$I", @"decreased endPos=", endPos));
     self->numMatches_++;
     if (self->docScorer_ == nil) {
       self->freq_ = 1;
@@ -178,8 +199,8 @@ void OrgApacheLuceneSearchSpansSpanScorer_setFreqCurrentDoc(OrgApacheLuceneSearc
     startPos = [self->spans_ nextStartPosition];
   }
   while (startPos != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS);
-  JreAssert(([self->spans_ startPosition] == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (JreStrcat("$@", @"incorrect final start position, spans=", self->spans_)));
-  JreAssert(([self->spans_ endPosition] == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (JreStrcat("$@", @"incorrect final end position, spans=", self->spans_)));
+  JreAssert([self->spans_ startPosition] == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, JreStrcat("$@", @"incorrect final start position, spans=", self->spans_));
+  JreAssert([self->spans_ endPosition] == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, JreStrcat("$@", @"incorrect final end position, spans=", self->spans_));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanScorer)

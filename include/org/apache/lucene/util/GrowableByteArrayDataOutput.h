@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilGrowableByteArrayDataOutput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilGrowableByteArrayDataOutput_) && (INCLUDE_ALL_OrgApacheLuceneUtilGrowableByteArrayDataOutput || defined(INCLUDE_OrgApacheLuceneUtilGrowableByteArrayDataOutput))
 #define OrgApacheLuceneUtilGrowableByteArrayDataOutput_
 
@@ -42,13 +48,17 @@
 /*!
  @brief Create a <code>GrowableByteArrayDataOutput</code> with the given initial capacity.
  */
-- (instancetype)initWithInt:(jint)cp;
+- (instancetype __nonnull)initWithInt:(jint)cp;
 
 - (void)writeByteWithByte:(jbyte)b;
 
 - (void)writeBytesWithByteArray:(IOSByteArray *)b
                         withInt:(jint)off
                         withInt:(jint)len;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -66,4 +76,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilGrowableByteArrayDataOutput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilGrowableByteArrayDataOutput")

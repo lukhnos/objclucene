@@ -3,9 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/SortField.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Double.h"
 #include "java/lang/Enum.h"
@@ -22,6 +21,10 @@
 #include "org/apache/lucene/search/SortField.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/StringHelper.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/SortField must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSortField () {
  @public
@@ -45,41 +48,37 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSortField_initFieldType
 
 __attribute__((unused)) static void OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(OrgApacheLuceneSearchSortField_Type *self, NSString *__name, jint __ordinal);
 
-@interface OrgApacheLuceneSearchSortField_$1 : NSObject
-
-- (NSString *)description;
+@interface OrgApacheLuceneSearchSortField_1 : NSObject
 
 - (instancetype)init;
 
+- (NSString *)description;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortField_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortField_1)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSortField_$1_init(OrgApacheLuceneSearchSortField_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneSearchSortField_1_init(OrgApacheLuceneSearchSortField_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSortField_$1 *new_OrgApacheLuceneSearchSortField_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSortField_1 *new_OrgApacheLuceneSearchSortField_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSortField_$1 *create_OrgApacheLuceneSearchSortField_$1_init();
+__attribute__((unused)) static OrgApacheLuceneSearchSortField_1 *create_OrgApacheLuceneSearchSortField_1_init(void);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortField_$1)
-
-@interface OrgApacheLuceneSearchSortField_$2 : NSObject
-
-- (NSString *)description;
+@interface OrgApacheLuceneSearchSortField_2 : NSObject
 
 - (instancetype)init;
 
+- (NSString *)description;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortField_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortField_2)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSortField_$2_init(OrgApacheLuceneSearchSortField_$2 *self);
+__attribute__((unused)) static void OrgApacheLuceneSearchSortField_2_init(OrgApacheLuceneSearchSortField_2 *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSortField_$2 *new_OrgApacheLuceneSearchSortField_$2_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSortField_2 *new_OrgApacheLuceneSearchSortField_2_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSortField_$2 *create_OrgApacheLuceneSearchSortField_$2_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortField_$2)
+__attribute__((unused)) static OrgApacheLuceneSearchSortField_2 *create_OrgApacheLuceneSearchSortField_2_init(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSortField)
 
@@ -121,7 +120,7 @@ withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)t
 
 - (void)setMissingValueWithId:(id)missingValue {
   if (type_ == JreLoadEnum(OrgApacheLuceneSearchSortField_Type, STRING) || type_ == JreLoadEnum(OrgApacheLuceneSearchSortField_Type, STRING_VAL)) {
-    if (missingValue != OrgApacheLuceneSearchSortField_STRING_FIRST && missingValue != OrgApacheLuceneSearchSortField_STRING_LAST) {
+    if (!JreObjectEqualsEquals(missingValue, OrgApacheLuceneSearchSortField_STRING_FIRST) && !JreObjectEqualsEquals(missingValue, OrgApacheLuceneSearchSortField_STRING_LAST)) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"For STRING type, missing value must be either STRING_FIRST or STRING_LAST");
     }
   }
@@ -211,7 +210,7 @@ withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)t
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return true;
+  if (JreObjectEqualsEquals(self, o)) return true;
   if (!([o isKindOfClass:[OrgApacheLuceneSearchSortField class]])) return false;
   OrgApacheLuceneSearchSortField *other = (OrgApacheLuceneSearchSortField *) cast_chk(o, [OrgApacheLuceneSearchSortField class]);
   return (OrgApacheLuceneUtilStringHelper_equalsWithNSString_withNSString_(((OrgApacheLuceneSearchSortField *) nil_chk(other))->field_, self->field_) && other->type_ == self->type_ && other->reverse_ == self->reverse_ && (other->comparatorSource_ == nil ? self->comparatorSource_ == nil : [other->comparatorSource_ isEqual:self->comparatorSource_]));
@@ -248,12 +247,12 @@ withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)t
     case OrgApacheLuceneSearchSortField_Type_Enum_DOUBLE:
     return create_OrgApacheLuceneSearchFieldComparator_DoubleComparator_initWithInt_withNSString_withJavaLangDouble_(numHits, field_, (JavaLangDouble *) cast_chk(missingValue_, [JavaLangDouble class]));
     case OrgApacheLuceneSearchSortField_Type_Enum_CUSTOM:
-    JreAssert((comparatorSource_ != nil), (@"org/apache/lucene/search/SortField.java:347 condition failed: assert comparatorSource != null;"));
+    JreAssert(comparatorSource_ != nil, @"org/apache/lucene/search/SortField.java:347 condition failed: assert comparatorSource != null;");
     return [((OrgApacheLuceneSearchFieldComparatorSource *) nil_chk(comparatorSource_)) newComparatorWithNSString:field_ withInt:numHits withInt:sortPos withBoolean:reverse_];
     case OrgApacheLuceneSearchSortField_Type_Enum_STRING:
-    return create_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(numHits, field_, missingValue_ == OrgApacheLuceneSearchSortField_STRING_LAST);
+    return create_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(numHits, field_, JreObjectEqualsEquals(missingValue_, OrgApacheLuceneSearchSortField_STRING_LAST));
     case OrgApacheLuceneSearchSortField_Type_Enum_STRING_VAL:
-    return create_OrgApacheLuceneSearchFieldComparator_TermValComparator_initWithInt_withNSString_withBoolean_(numHits, field_, missingValue_ == OrgApacheLuceneSearchSortField_STRING_LAST);
+    return create_OrgApacheLuceneSearchFieldComparator_TermValComparator_initWithInt_withNSString_withBoolean_(numHits, field_, JreObjectEqualsEquals(missingValue_, OrgApacheLuceneSearchSortField_STRING_LAST));
     case OrgApacheLuceneSearchSortField_Type_Enum_REWRITEABLE:
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"SortField needs to be rewritten through Sort.rewrite(..) and SortField.rewrite(..)");
     default:
@@ -278,52 +277,74 @@ withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)t
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 6, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSortField_Type;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldComparatorSource;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 8, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, 12, -1, -1 },
+    { NULL, "LJavaUtilComparator;", 0x1, -1, -1, -1, 13, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFieldComparator;", 0x1, 14, 15, 16, 17, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSortField;", 0x1, 18, 19, 16, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneSearchSortField_Type:);
+  methods[1].selector = @selector(initWithNSString:withOrgApacheLuceneSearchSortField_Type:withBoolean:);
+  methods[2].selector = @selector(setMissingValueWithId:);
+  methods[3].selector = @selector(initWithNSString:withOrgApacheLuceneSearchFieldComparatorSource:);
+  methods[4].selector = @selector(initWithNSString:withOrgApacheLuceneSearchFieldComparatorSource:withBoolean:);
+  methods[5].selector = @selector(initFieldTypeWithNSString:withOrgApacheLuceneSearchSortField_Type:);
+  methods[6].selector = @selector(getField);
+  methods[7].selector = @selector(getType);
+  methods[8].selector = @selector(getReverse);
+  methods[9].selector = @selector(getComparatorSource);
+  methods[10].selector = @selector(description);
+  methods[11].selector = @selector(isEqual:);
+  methods[12].selector = @selector(hash);
+  methods[13].selector = @selector(setBytesComparatorWithJavaUtilComparator:);
+  methods[14].selector = @selector(getBytesComparator);
+  methods[15].selector = @selector(getComparatorWithInt:withInt:);
+  methods[16].selector = @selector(rewriteWithOrgApacheLuceneSearchIndexSearcher:);
+  methods[17].selector = @selector(needsScores);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "FIELD_SCORE", "LOrgApacheLuceneSearchSortField;", .constantValue.asLong = 0, 0x19, -1, 20, -1, -1 },
+    { "FIELD_DOC", "LOrgApacheLuceneSearchSortField;", .constantValue.asLong = 0, 0x19, -1, 21, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "type_", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "reverse_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "comparatorSource_", "LOrgApacheLuceneSearchFieldComparatorSource;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "missingValue_", "LNSObject;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "STRING_FIRST", "LNSObject;", .constantValue.asLong = 0, 0x19, -1, 22, -1, -1 },
+    { "STRING_LAST", "LNSObject;", .constantValue.asLong = 0, 0x19, -1, 23, -1, -1 },
+    { "bytesComparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x2, -1, -1, 24, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneSearchSortField_Type;", "LNSString;LOrgApacheLuceneSearchSortField_Type;Z", "setMissingValue", "LNSObject;", "LNSString;LOrgApacheLuceneSearchFieldComparatorSource;", "LNSString;LOrgApacheLuceneSearchFieldComparatorSource;Z", "initFieldType", "toString", "equals", "hashCode", "setBytesComparator", "LJavaUtilComparator;", "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V", "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", "getComparator", "II", "LJavaIoIOException;", "(II)Lorg/apache/lucene/search/FieldComparator<*>;", "rewrite", "LOrgApacheLuceneSearchIndexSearcher;", &OrgApacheLuceneSearchSortField_FIELD_SCORE, &OrgApacheLuceneSearchSortField_FIELD_DOC, &OrgApacheLuceneSearchSortField_STRING_FIRST, &OrgApacheLuceneSearchSortField_STRING_LAST, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneSearchSortField_Type;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortField = { "SortField", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 18, 10, -1, 25, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSortField;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSortField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSortField_FIELD_SCORE, new_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_(nil, JreLoadEnum(OrgApacheLuceneSearchSortField_Type, SCORE)));
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSortField_FIELD_DOC, new_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_(nil, JreLoadEnum(OrgApacheLuceneSearchSortField_Type, DOC)));
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSortField_STRING_FIRST, new_OrgApacheLuceneSearchSortField_$1_init());
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSortField_STRING_LAST, new_OrgApacheLuceneSearchSortField_$2_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSortField_STRING_FIRST, new_OrgApacheLuceneSearchSortField_1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSortField_STRING_LAST, new_OrgApacheLuceneSearchSortField_2_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSortField)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchSortField_Type:", "SortField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneSearchSortField_Type:withBoolean:", "SortField", NULL, 0x1, NULL, NULL },
-    { "setMissingValueWithId:", "setMissingValue", "V", 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneSearchFieldComparatorSource:", "SortField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneSearchFieldComparatorSource:withBoolean:", "SortField", NULL, 0x1, NULL, NULL },
-    { "initFieldTypeWithNSString:withOrgApacheLuceneSearchSortField_Type:", "initFieldType", "V", 0x2, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getType", NULL, "Lorg.apache.lucene.search.SortField$Type;", 0x1, NULL, NULL },
-    { "getReverse", NULL, "Z", 0x1, NULL, NULL },
-    { "getComparatorSource", NULL, "Lorg.apache.lucene.search.FieldComparatorSource;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "setBytesComparatorWithJavaUtilComparator:", "setBytesComparator", "V", 0x1, NULL, "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V" },
-    { "getBytesComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" },
-    { "getComparatorWithInt:withInt:", "getComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", "(II)Lorg/apache/lucene/search/FieldComparator<*>;" },
-    { "rewriteWithOrgApacheLuceneSearchIndexSearcher:", "rewrite", "Lorg.apache.lucene.search.SortField;", 0x1, "Ljava.io.IOException;", NULL },
-    { "needsScores", NULL, "Z", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "FIELD_SCORE", "FIELD_SCORE", 0x19, "Lorg.apache.lucene.search.SortField;", &OrgApacheLuceneSearchSortField_FIELD_SCORE, NULL, .constantValue.asLong = 0 },
-    { "FIELD_DOC", "FIELD_DOC", 0x19, "Lorg.apache.lucene.search.SortField;", &OrgApacheLuceneSearchSortField_FIELD_DOC, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "type_", NULL, 0x2, "Lorg.apache.lucene.search.SortField$Type;", NULL, NULL, .constantValue.asLong = 0 },
-    { "reverse_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "comparatorSource_", NULL, 0x2, "Lorg.apache.lucene.search.FieldComparatorSource;", NULL, NULL, .constantValue.asLong = 0 },
-    { "missingValue_", NULL, 0x1, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
-    { "STRING_FIRST", "STRING_FIRST", 0x19, "Ljava.lang.Object;", &OrgApacheLuceneSearchSortField_STRING_FIRST, NULL, .constantValue.asLong = 0 },
-    { "STRING_LAST", "STRING_LAST", 0x19, "Ljava.lang.Object;", &OrgApacheLuceneSearchSortField_STRING_LAST, NULL, .constantValue.asLong = 0 },
-    { "bytesComparator_", NULL, 0x2, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.SortField$Type;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortField = { 2, "SortField", "org.apache.lucene.search", NULL, 0x1, 18, methods, 10, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSearchSortField;
 }
 
 @end
@@ -472,8 +493,33 @@ OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_values_
   return (OrgApacheLuceneSearchSortField_Type_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneSearchSortField_Type;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSortField_Type;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "SCORE", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "DOC", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "STRING", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "INT", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+    { "FLOAT", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 6, -1, -1 },
+    { "LONG", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 7, -1, -1 },
+    { "DOUBLE", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 8, -1, -1 },
+    { "CUSTOM", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 9, -1, -1 },
+    { "STRING_VAL", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 10, -1, -1 },
+    { "BYTES", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 11, -1, -1 },
+    { "REWRITEABLE", "LOrgApacheLuceneSearchSortField_Type;", .constantValue.asLong = 0, 0x4019, -1, 12, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneSearchSortField_Type, SCORE), &JreEnum(OrgApacheLuceneSearchSortField_Type, DOC), &JreEnum(OrgApacheLuceneSearchSortField_Type, STRING), &JreEnum(OrgApacheLuceneSearchSortField_Type, INT), &JreEnum(OrgApacheLuceneSearchSortField_Type, FLOAT), &JreEnum(OrgApacheLuceneSearchSortField_Type, LONG), &JreEnum(OrgApacheLuceneSearchSortField_Type, DOUBLE), &JreEnum(OrgApacheLuceneSearchSortField_Type, CUSTOM), &JreEnum(OrgApacheLuceneSearchSortField_Type, STRING_VAL), &JreEnum(OrgApacheLuceneSearchSortField_Type, BYTES), &JreEnum(OrgApacheLuceneSearchSortField_Type, REWRITEABLE), "LOrgApacheLuceneSearchSortField;", "Ljava/lang/Enum<Lorg/apache/lucene/search/SortField$Type;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortField_Type = { "Type", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x4019, 2, 11, 13, -1, -1, 14, -1 };
+  return &_OrgApacheLuceneSearchSortField_Type;
 }
 
 + (void)initialize {
@@ -482,49 +528,12 @@ OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_values_
     size_t allocSize = 11 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, SCORE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"SCORE", 0);
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, DOC) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"DOC", 1);
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, STRING) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"STRING", 2);
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, INT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"INT", 3);
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, FLOAT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"FLOAT", 4);
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, LONG) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"LONG", 5);
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, DOUBLE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"DOUBLE", 6);
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, CUSTOM) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"CUSTOM", 7);
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, STRING_VAL) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"STRING_VAL", 8);
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, BYTES) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"BYTES", 9);
-    (JreEnum(OrgApacheLuceneSearchSortField_Type, REWRITEABLE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, @"REWRITEABLE", 10);
+    for (jint i = 0; i < 11; i++) {
+      ((void)(OrgApacheLuceneSearchSortField_Type_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneSearchSortField_Type_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneSearchSortField_Type_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSortField_Type)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "SCORE", "SCORE", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, SCORE), NULL, .constantValue.asLong = 0 },
-    { "DOC", "DOC", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, DOC), NULL, .constantValue.asLong = 0 },
-    { "STRING", "STRING", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, STRING), NULL, .constantValue.asLong = 0 },
-    { "INT", "INT", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, INT), NULL, .constantValue.asLong = 0 },
-    { "FLOAT", "FLOAT", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, FLOAT), NULL, .constantValue.asLong = 0 },
-    { "LONG", "LONG", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, LONG), NULL, .constantValue.asLong = 0 },
-    { "DOUBLE", "DOUBLE", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, DOUBLE), NULL, .constantValue.asLong = 0 },
-    { "CUSTOM", "CUSTOM", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, CUSTOM), NULL, .constantValue.asLong = 0 },
-    { "STRING_VAL", "STRING_VAL", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, STRING_VAL), NULL, .constantValue.asLong = 0 },
-    { "BYTES", "BYTES", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, BYTES), NULL, .constantValue.asLong = 0 },
-    { "REWRITEABLE", "REWRITEABLE", 0x4019, "Lorg.apache.lucene.search.SortField$Type;", &JreEnum(OrgApacheLuceneSearchSortField_Type, REWRITEABLE), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.SortField$Type;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortField_Type = { 2, "Type", "org.apache.lucene.search", "SortField", 0x4019, 0, NULL, 11, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/SortField$Type;>;" };
-  return &_OrgApacheLuceneSearchSortField_Type;
 }
 
 @end
@@ -546,7 +555,7 @@ OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_valueOf
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 
@@ -560,78 +569,88 @@ OrgApacheLuceneSearchSortField_Type *OrgApacheLuceneSearchSortField_Type_fromOrd
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortField_Type)
 
-@implementation OrgApacheLuceneSearchSortField_$1
+@implementation OrgApacheLuceneSearchSortField_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSortField_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   return @"SortField.STRING_FIRST";
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSortField_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortField_$1 = { 2, "", "org.apache.lucene.search", "SortField", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchSortField_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "toString", "LOrgApacheLuceneSearchSortField;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortField_1 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSortField_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchSortField_$1_init(OrgApacheLuceneSearchSortField_$1 *self) {
+void OrgApacheLuceneSearchSortField_1_init(OrgApacheLuceneSearchSortField_1 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSortField_$1 *new_OrgApacheLuceneSearchSortField_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortField_$1, init)
+OrgApacheLuceneSearchSortField_1 *new_OrgApacheLuceneSearchSortField_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortField_1, init)
 }
 
-OrgApacheLuceneSearchSortField_$1 *create_OrgApacheLuceneSearchSortField_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortField_$1, init)
+OrgApacheLuceneSearchSortField_1 *create_OrgApacheLuceneSearchSortField_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortField_1, init)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortField_$1)
+@implementation OrgApacheLuceneSearchSortField_2
 
-@implementation OrgApacheLuceneSearchSortField_$2
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSortField_2_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   return @"SortField.STRING_LAST";
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSortField_$2_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortField_$2 = { 2, "", "org.apache.lucene.search", "SortField", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchSortField_$2;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "toString", "LOrgApacheLuceneSearchSortField;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortField_2 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSortField_2;
 }
 
 @end
 
-void OrgApacheLuceneSearchSortField_$2_init(OrgApacheLuceneSearchSortField_$2 *self) {
+void OrgApacheLuceneSearchSortField_2_init(OrgApacheLuceneSearchSortField_2 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSortField_$2 *new_OrgApacheLuceneSearchSortField_$2_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortField_$2, init)
+OrgApacheLuceneSearchSortField_2 *new_OrgApacheLuceneSearchSortField_2_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortField_2, init)
 }
 
-OrgApacheLuceneSearchSortField_$2 *create_OrgApacheLuceneSearchSortField_$2_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortField_$2, init)
+OrgApacheLuceneSearchSortField_2 *create_OrgApacheLuceneSearchSortField_2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortField_2, init)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortField_$2)

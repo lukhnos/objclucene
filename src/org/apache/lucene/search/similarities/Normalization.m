@@ -10,6 +10,10 @@
 #include "org/apache/lucene/search/similarities/BasicStats.h"
 #include "org/apache/lucene/search/similarities/Normalization.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/Normalization must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSimilaritiesNormalization
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -30,7 +34,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                                                    withFloat:(jfloat)tf
                                                                                    withFloat:(jfloat)len {
-  return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([self tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:stats withFloat:tf withFloat:len], JreStrcat("$$", [[self getClass] getSimpleName], @", computed from: "), [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(tf, @"tf", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]), OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getAvgFieldLength], @"avgFieldLength", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]), OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(len, @"len", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]) } count:3 type:OrgApacheLuceneSearchExplanation_class_()]);
+  return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([self tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:stats withFloat:tf withFloat:len], JreStrcat("$$", [[self java_getClass] getSimpleName], @", computed from: "), [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(tf, @"tf", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]), OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getAvgFieldLength], @"avgFieldLength", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]), OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(len, @"len", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]) } count:3 type:OrgApacheLuceneSearchExplanation_class_()]);
 }
 
 - (NSString *)description {
@@ -40,14 +44,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Normalization", NULL, 0x1, NULL, NULL },
-    { "tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "tfn", "F", 0x401, NULL, NULL },
-    { "explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 3, -1, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.similarities.Normalization$NoNormalization;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesNormalization = { 2, "Normalization", "org.apache.lucene.search.similarities", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:);
+  methods[2].selector = @selector(explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "tfn", "LOrgApacheLuceneSearchSimilaritiesBasicStats;FF", "explain", "toString", "LOrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesNormalization = { "Normalization", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x401, 4, 0, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesNormalization;
 }
 
@@ -85,13 +97,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NoNormalization", NULL, 0x1, NULL, NULL },
-    { "tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "tfn", "F", 0x11, NULL, NULL },
-    { "explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x11, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x11, 2, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization = { 2, "NoNormalization", "org.apache.lucene.search.similarities", "Normalization", 0x19, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:);
+  methods[2].selector = @selector(explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "tfn", "LOrgApacheLuceneSearchSimilaritiesBasicStats;FF", "explain", "toString", "LOrgApacheLuceneSearchSimilaritiesNormalization;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization = { "NoNormalization", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x19, 4, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization;
 }
 

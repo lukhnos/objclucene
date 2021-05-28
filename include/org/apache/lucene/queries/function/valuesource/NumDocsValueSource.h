@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_
 
@@ -26,15 +32,14 @@
 
 /*!
  @brief Returns the value of <code>IndexReader.numDocs()</code>
- for every document.
- This is the number of documents
- excluding deletions.
+  for every document.This is the number of documents
+  excluding deletions.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (NSString *)description__;
 
@@ -53,12 +58,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSo
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource")

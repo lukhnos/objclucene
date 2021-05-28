@@ -3,13 +3,16 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/miscellaneous/PerFieldAnalyzerWrapper.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/util/Collections.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/DelegatingAnalyzerWrapper.h"
 #include "org/apache/lucene/analysis/miscellaneous/PerFieldAnalyzerWrapper.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/PerFieldAnalyzerWrapper must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper () {
  @public
@@ -36,7 +39,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper,
 }
 
 - (OrgApacheLuceneAnalysisAnalyzer *)getWrappedAnalyzerWithNSString:(NSString *)fieldName {
-  OrgApacheLuceneAnalysisAnalyzer *analyzer = [((id<JavaUtilMap>) nil_chk(fieldAnalyzers_)) getWithId:fieldName];
+  OrgApacheLuceneAnalysisAnalyzer *analyzer = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fieldAnalyzers_)) getWithId:fieldName]);
   return (analyzer != nil) ? analyzer : defaultAnalyzer_;
 }
 
@@ -51,17 +54,26 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper,
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:", "PerFieldAnalyzerWrapper", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withJavaUtilMap:", "PerFieldAnalyzerWrapper", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/Analyzer;Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/analysis/Analyzer;>;)V" },
-    { "getWrappedAnalyzerWithNSString:", "getWrappedAnalyzer", "Lorg.apache.lucene.analysis.Analyzer;", 0x4, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withJavaUtilMap:);
+  methods[2].selector = @selector(getWrappedAnalyzerWithNSString:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "defaultAnalyzer_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldAnalyzers_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/analysis/Analyzer;>;", .constantValue.asLong = 0 },
+    { "defaultAnalyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fieldAnalyzers_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper = { 2, "PerFieldAnalyzerWrapper", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 4, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;", "LOrgApacheLuceneAnalysisAnalyzer;LJavaUtilMap;", "(Lorg/apache/lucene/analysis/Analyzer;Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/analysis/Analyzer;>;)V", "getWrappedAnalyzer", "LNSString;", "toString", "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/analysis/Analyzer;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper = { "PerFieldAnalyzerWrapper", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 4, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_
 
@@ -28,8 +34,8 @@
 
 /*!
  @brief Converts individual ValueSource instances to leverage the FunctionValues *Val functions that work with multiple values,
- i.e.
- <code>org.apache.lucene.queries.function.FunctionValues.doubleVal(int,double[])</code>
+  i.e.
+ <code>org.apache.lucene.queries.function.FunctionValues.doubleVal(int, double[])</code>
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource : OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource {
  @public
@@ -38,7 +44,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)sources;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)sources;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -58,6 +64,10 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 
 - (NSString *)name;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource)
@@ -74,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceVectorValueS
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreLowerCaseFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreLowerCaseFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCoreLowerCaseFilter))
 #define OrgApacheLuceneAnalysisCoreLowerCaseFilter_
 
@@ -33,7 +39,7 @@
  @brief Create a new LowerCaseFilter, that normalizes token text to lower case.
  @param inArg TokenStream to filter
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
 
@@ -51,4 +57,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLowerCaseFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilter")

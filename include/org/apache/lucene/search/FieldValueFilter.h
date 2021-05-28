@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFieldValueFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFieldValueFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldValueFilter || defined(INCLUDE_OrgApacheLuceneSearchFieldValueFilter))
 #define OrgApacheLuceneSearchFieldValueFilter_
 
@@ -20,15 +26,13 @@
 #define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
 @protocol OrgApacheLuceneUtilBits;
 
 /*!
  @brief A <code>Filter</code> that accepts all documents that have one or more values in a
- given field.
- This <code>Filter</code> request <code>Bits</code> from
+  given field.This <code>Filter</code> request <code>Bits</code> from 
  <code>org.apache.lucene.index.LeafReader.getDocsWithField</code>
  */
 @interface OrgApacheLuceneSearchFieldValueFilter : OrgApacheLuceneSearchFilter
@@ -37,21 +41,18 @@
 
 /*!
  @brief Creates a new <code>FieldValueFilter</code>
- @param field
- the field to filter
+ @param field the field to filter
  */
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
 
 /*!
  @brief Creates a new <code>FieldValueFilter</code>
- @param field
- the field to filter
- @param negate
- iff <code>true</code> all documents with no value in the given
- field are accepted.
+ @param field the field to filter
+ @param negate iff 
+  <code> true </code>  all documents with no value in the given           field are accepted.
  */
-- (instancetype)initWithNSString:(NSString *)field
-                     withBoolean:(jboolean)negate;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                               withBoolean:(jboolean)negate;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -74,6 +75,10 @@
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFieldValueFilter)
@@ -94,4 +99,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldValueFilter")

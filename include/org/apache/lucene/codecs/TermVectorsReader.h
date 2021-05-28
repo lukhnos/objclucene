@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsTermVectorsReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsTermVectorsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsReader || defined(INCLUDE_OrgApacheLuceneCodecsTermVectorsReader))
 #define OrgApacheLuceneCodecsTermVectorsReader_
 
@@ -36,30 +42,29 @@
 /*!
  @brief Checks consistency of this reader.
  <p>
- Note that this may be costly in terms of I/O, e.g. 
- may involve computing a checksum value against large data files.
+  Note that this may be costly in terms of I/O, e.g. 
+  may involve computing a checksum value against large data files.
  */
 - (void)checkIntegrity;
 
 /*!
  @brief Create a clone that one caller at a time may use to
- read term vectors.
+   read term vectors.
  */
-- (OrgApacheLuceneCodecsTermVectorsReader *)clone;
+- (OrgApacheLuceneCodecsTermVectorsReader *)java_clone;
 
 /*!
  @brief Returns term vectors for this document, or null if
- term vectors were not indexed.
- If offsets are
- available they are in an <code>OffsetAttribute</code>
- available from the <code>org.apache.lucene.index.PostingsEnum</code>. 
+   term vectors were not indexed.If offsets are
+   available they are in an <code>OffsetAttribute</code>
+   available from the <code>org.apache.lucene.index.PostingsEnum</code>.
  */
 - (OrgApacheLuceneIndexFields *)getWithInt:(jint)doc;
 
 /*!
  @brief Returns an instance optimized for merging.
  <p>
- The default implementation returns <code>this</code> 
+  The default implementation returns <code>this</code>
  */
 - (OrgApacheLuceneCodecsTermVectorsReader *)getMergeInstance;
 
@@ -68,9 +73,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -82,4 +87,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsTermVectorsReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsReader")

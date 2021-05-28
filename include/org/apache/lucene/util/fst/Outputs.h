@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstOutputs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstOutputs))
 #define OrgApacheLuceneUtilFstOutputs_
 
@@ -21,16 +27,16 @@
 
 /*!
  @brief Represents the outputs for an FST, providing the basic
- algebra required for building and traversing the FST.
+  algebra required for building and traversing the FST.
  <p>Note that any operation that returns NO_OUTPUT must
- return the same singleton object from <code>getNoOutput</code>
+  return the same singleton object from <code>getNoOutput</code>
  .</p>
  */
 @interface OrgApacheLuceneUtilFstOutputs : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Eg add("foo", "bar") -&gt; "foobar"
@@ -46,8 +52,8 @@
 
 /*!
  @brief NOTE: this output is compared with == so you must
- ensure that all methods return the single object if
- it's really no output
+   ensure that all methods return the single object if
+   it's really no output
  */
 - (id)getNoOutput;
 
@@ -63,29 +69,28 @@
 - (jlong)ramBytesUsedWithId:(id)output;
 
 /*!
- @brief Decode an output value previously written with <code>write(Object,DataOutput)</code>
+ @brief Decode an output value previously written with <code>write(Object, DataOutput)</code>
  .
  */
 - (id)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
 /*!
- @brief Decode an output value previously written with <code>writeFinalOutput(Object,DataOutput)</code>
- .
- By default this
- just calls <code>read(DataInput)</code>. 
+ @brief Decode an output value previously written with <code>writeFinalOutput(Object, DataOutput)</code>
+ .By default this
+   just calls <code>read(DataInput)</code>.
  */
 - (id)readFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
 /*!
  @brief Skip the output previously written with <code>writeFinalOutput</code>;
- defaults to just calling <code>readFinalOutput</code> and discarding
- the result.
+   defaults to just calling <code>readFinalOutput</code> and discarding
+   the result.
  */
 - (void)skipFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
 /*!
  @brief Skip the output; defaults to just calling <code>read</code>
- and discarding the result.
+   and discarding the result.
  */
 - (void)skipOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
@@ -103,9 +108,9 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 /*!
  @brief Encode an final node output value into a <code>DataOutput</code>
+ .By default this just calls <code>write(Object,
+  DataOutput)</code>
  .
- By default this just calls <code>write(Object,DataOutput)</code>
- . 
  */
 - (void)writeFinalOutputWithId:(id)output
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
@@ -120,4 +125,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstOutputs)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstOutputs")

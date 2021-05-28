@@ -7,6 +7,10 @@
 #include "org/apache/lucene/misc/TermStats.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/misc/TermStats must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneMiscTermStats
 
 - (instancetype)initWithNSString:(NSString *)field
@@ -32,18 +36,26 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:withInt:withLong:", "TermStats", NULL, 0x0, NULL, NULL },
-    { "getTermText", NULL, "Ljava.lang.String;", 0x0, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:withInt:withLong:);
+  methods[1].selector = @selector(getTermText);
+  methods[2].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termtext_", NULL, 0x1, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x1, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docFreq_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalTermFreq_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "termtext_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "docFreq_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "totalTermFreq_", "J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneMiscTermStats = { 2, "TermStats", "org.apache.lucene.misc", NULL, 0x11, 3, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneUtilBytesRef;IJ", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneMiscTermStats = { "TermStats", "org.apache.lucene.misc", ptrTable, methods, fields, 7, 0x11, 3, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneMiscTermStats;
 }
 

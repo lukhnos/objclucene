@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/index/DocumentsWriterPerThreadPool.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/InterruptedException.h"
 #include "java/lang/Thread.h"
@@ -15,6 +14,10 @@
 #include "org/apache/lucene/index/DocumentsWriterPerThreadPool.h"
 #include "org/apache/lucene/util/ThreadInterruptedException.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/DocumentsWriterPerThreadPool must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexDocumentsWriterPerThreadPool () {
  @public
   id<JavaUtilList> threadStates_;
@@ -23,13 +26,13 @@
 }
 
 /*!
- @brief Returns a new <code>ThreadState</code> iff any new state is available otherwise
+ @brief Returns a new <code>ThreadState</code> iff any new state is available otherwise 
  <code>null</code>.
  <p>
- NOTE: the returned <code>ThreadState</code> is already locked iff non-
+  NOTE: the returned <code>ThreadState</code> is already locked iff non- 
  <code>null</code>.
  @return a new <code>ThreadState</code> iff any new state is available otherwise
- <code>null</code>
+          <code>null</code>
  */
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)newThreadState OBJC_METHOD_FAMILY_NONE;
 
@@ -50,6 +53,11 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterPerThread
 
 @implementation OrgApacheLuceneIndexDocumentsWriterPerThreadPool
 
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneIndexDocumentsWriterPerThreadPool_initPackagePrivate(self);
+  return self;
+}
+
 - (jint)getActiveThreadStateCount {
   @synchronized(self) {
     return [((id<JavaUtilList>) nil_chk(threadStates_)) size];
@@ -65,7 +73,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterPerThread
 - (void)clearAbort {
   @synchronized(self) {
     aborted_ = false;
-    [self notifyAll];
+    [self java_notifyAll];
   }
 }
 
@@ -74,7 +82,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterPerThread
 }
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThread *)resetWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)threadState {
-  JreAssert(([((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(threadState)) isHeldByCurrentThread]), (@"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:155 condition failed: assert threadState.isHeldByCurrentThread();"));
+  JreAssert([((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(threadState)) isHeldByCurrentThread], @"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:155 condition failed: assert threadState.isHeldByCurrentThread();");
   OrgApacheLuceneIndexDocumentsWriterPerThread *dwpt = threadState->dwpt_;
   OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_reset(threadState);
   return dwpt;
@@ -91,13 +99,13 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterPerThread
       return OrgApacheLuceneIndexDocumentsWriterPerThreadPool_newThreadState(self);
     }
     else {
-      threadState = [freeList_ removeWithInt:[freeList_ size] - 1];
+      threadState = JreRetainedLocalValue([freeList_ removeWithInt:[freeList_ size] - 1]);
       if (((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(threadState))->dwpt_ == nil) {
         for (jint i = 0; i < [freeList_ size]; i++) {
-          OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *ts = [freeList_ getWithInt:i];
+          OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *ts = JreRetainedLocalValue([freeList_ getWithInt:i]);
           if (((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(ts))->dwpt_ != nil) {
             [freeList_ setWithInt:i withId:threadState];
-            threadState = ts;
+            threadState = JreRetainedLocalValue(ts);
             break;
           }
         }
@@ -112,13 +120,13 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterPerThread
   [((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(state)) unlock];
   @synchronized(self) {
     [((id<JavaUtilList>) nil_chk(freeList_)) addWithId:state];
-    [self notifyAll];
+    [self java_notifyAll];
   }
 }
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)getThreadStateWithInt:(jint)ord {
   @synchronized(self) {
-    return [((id<JavaUtilList>) nil_chk(threadStates_)) getWithInt:ord];
+    return JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(threadStates_)) getWithInt:ord]);
   }
 }
 
@@ -138,13 +146,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterPerThread
   return minThreadState;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(threadStates_);
   RELEASE_(freeList_);
@@ -152,37 +153,67 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getActiveThreadStateCount", NULL, "I", 0x20, NULL, NULL },
-    { "setAbort", NULL, "V", 0x20, NULL, NULL },
-    { "clearAbort", NULL, "V", 0x20, NULL, NULL },
-    { "newThreadState", NULL, "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool$ThreadState;", 0x22, NULL, NULL },
-    { "resetWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "reset", "Lorg.apache.lucene.index.DocumentsWriterPerThread;", 0x0, NULL, NULL },
-    { "recycleWithOrgApacheLuceneIndexDocumentsWriterPerThread:", "recycle", "V", 0x0, NULL, NULL },
-    { "getAndLockWithJavaLangThread:withOrgApacheLuceneIndexDocumentsWriter:", "getAndLock", "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool$ThreadState;", 0x0, NULL, NULL },
-    { "release__WithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "release", "V", 0x0, NULL, NULL },
-    { "getThreadStateWithInt:", "getThreadState", "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool$ThreadState;", 0x20, NULL, NULL },
-    { "getMaxThreadStates", NULL, "I", 0x20, NULL, NULL },
-    { "minContendedThreadState", NULL, "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool$ThreadState;", 0x0, NULL, NULL },
-    { "init", "DocumentsWriterPerThreadPool", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;", 0x22, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterPerThread;", 0x0, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;", 0x0, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 6, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;", 0x20, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;", 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(getActiveThreadStateCount);
+  methods[2].selector = @selector(setAbort);
+  methods[3].selector = @selector(clearAbort);
+  methods[4].selector = @selector(newThreadState);
+  methods[5].selector = @selector(resetWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:);
+  methods[6].selector = @selector(recycleWithOrgApacheLuceneIndexDocumentsWriterPerThread:);
+  methods[7].selector = @selector(getAndLockWithJavaLangThread:withOrgApacheLuceneIndexDocumentsWriter:);
+  methods[8].selector = @selector(release__WithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:);
+  methods[9].selector = @selector(getThreadStateWithInt:);
+  methods[10].selector = @selector(getMaxThreadStates);
+  methods[11].selector = @selector(minContendedThreadState);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "threadStates_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/DocumentsWriterPerThreadPool$ThreadState;>;", .constantValue.asLong = 0 },
-    { "freeList_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/DocumentsWriterPerThreadPool$ThreadState;>;", .constantValue.asLong = 0 },
-    { "aborted_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "threadStates_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 9, -1 },
+    { "freeList_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 9, -1 },
+    { "aborted_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.DocumentsWriterPerThreadPool$ThreadState;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterPerThreadPool = { 2, "DocumentsWriterPerThreadPool", "org.apache.lucene.index", NULL, 0x10, 12, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "reset", "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;", "recycle", "LOrgApacheLuceneIndexDocumentsWriterPerThread;", "getAndLock", "LJavaLangThread;LOrgApacheLuceneIndexDocumentsWriter;", "release", "getThreadState", "I", "Ljava/util/List<Lorg/apache/lucene/index/DocumentsWriterPerThreadPool$ThreadState;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterPerThreadPool = { "DocumentsWriterPerThreadPool", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 12, 3, -1, 1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocumentsWriterPerThreadPool;
 }
 
 @end
 
+void OrgApacheLuceneIndexDocumentsWriterPerThreadPool_initPackagePrivate(OrgApacheLuceneIndexDocumentsWriterPerThreadPool *self) {
+  NSObject_init(self);
+  JreStrongAssignAndConsume(&self->threadStates_, new_JavaUtilArrayList_init());
+  JreStrongAssignAndConsume(&self->freeList_, new_JavaUtilArrayList_init());
+}
+
+OrgApacheLuceneIndexDocumentsWriterPerThreadPool *new_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterPerThreadPool, initPackagePrivate)
+}
+
+OrgApacheLuceneIndexDocumentsWriterPerThreadPool *create_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterPerThreadPool, initPackagePrivate)
+}
+
 OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *OrgApacheLuceneIndexDocumentsWriterPerThreadPool_newThreadState(OrgApacheLuceneIndexDocumentsWriterPerThreadPool *self) {
   @synchronized(self) {
     while (self->aborted_) {
       @try {
-        [self wait];
+        [self java_wait];
       }
       @catch (JavaLangInterruptedException *ie) {
         @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie);
@@ -191,22 +222,8 @@ OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *OrgApacheLuceneInd
     OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *threadState = create_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(nil);
     [threadState lock];
     [((id<JavaUtilList>) nil_chk(self->threadStates_)) addWithId:threadState];
-    return threadState;
+    return JreRetainedLocalValue(threadState);
   }
-}
-
-void OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init(OrgApacheLuceneIndexDocumentsWriterPerThreadPool *self) {
-  NSObject_init(self);
-  JreStrongAssignAndConsume(&self->threadStates_, new_JavaUtilArrayList_init());
-  JreStrongAssignAndConsume(&self->freeList_, new_JavaUtilArrayList_init());
-}
-
-OrgApacheLuceneIndexDocumentsWriterPerThreadPool *new_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterPerThreadPool, init)
-}
-
-OrgApacheLuceneIndexDocumentsWriterPerThreadPool *create_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterPerThreadPool, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterPerThreadPool)
@@ -223,17 +240,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterPerThreadPoo
 }
 
 - (jboolean)isInitialized {
-  JreAssert(([self isHeldByCurrentThread]), (@"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:76 condition failed: assert this.isHeldByCurrentThread();"));
+  JreAssert([self isHeldByCurrentThread], @"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:76 condition failed: assert this.isHeldByCurrentThread();");
   return dwpt_ != nil;
 }
 
 - (jlong)getBytesUsedPerThread {
-  JreAssert(([self isHeldByCurrentThread]), (@"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:85 condition failed: assert this.isHeldByCurrentThread();"));
+  JreAssert([self isHeldByCurrentThread], @"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:85 condition failed: assert this.isHeldByCurrentThread();");
   return bytesUsed_;
 }
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThread *)getDocumentsWriterPerThread {
-  JreAssert(([self isHeldByCurrentThread]), (@"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:94 condition failed: assert this.isHeldByCurrentThread();"));
+  JreAssert([self isHeldByCurrentThread], @"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:94 condition failed: assert this.isHeldByCurrentThread();");
   return dwpt_;
 }
 
@@ -247,20 +264,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterPerThreadPoo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexDocumentsWriterPerThread:", "ThreadState", NULL, 0x0, NULL, NULL },
-    { "reset", NULL, "V", 0x2, NULL, NULL },
-    { "isInitialized", NULL, "Z", 0x0, NULL, NULL },
-    { "getBytesUsedPerThread", NULL, "J", 0x1, NULL, NULL },
-    { "getDocumentsWriterPerThread", NULL, "Lorg.apache.lucene.index.DocumentsWriterPerThread;", 0x1, NULL, NULL },
-    { "isFlushPending", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterPerThread;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexDocumentsWriterPerThread:);
+  methods[1].selector = @selector(reset);
+  methods[2].selector = @selector(isInitialized);
+  methods[3].selector = @selector(getBytesUsedPerThread);
+  methods[4].selector = @selector(getDocumentsWriterPerThread);
+  methods[5].selector = @selector(isFlushPending);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "dwpt_", NULL, 0x0, "Lorg.apache.lucene.index.DocumentsWriterPerThread;", NULL, NULL, .constantValue.asLong = 0 },
-    { "flushPending_", NULL, 0x40, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesUsed_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "dwpt_", "LOrgApacheLuceneIndexDocumentsWriterPerThread;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "flushPending_", "Z", .constantValue.asLong = 0, 0x40, -1, -1, -1, -1 },
+    { "bytesUsed_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState = { 2, "ThreadState", "org.apache.lucene.index", "DocumentsWriterPerThreadPool", 0x18, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexDocumentsWriterPerThread;", "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState = { "ThreadState", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x18, 6, 3, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;
 }
 
@@ -282,7 +310,7 @@ OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *create_OrgApacheLu
 }
 
 void OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_reset(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *self) {
-  JreAssert(([self isHeldByCurrentThread]), (@"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:69 condition failed: assert this.isHeldByCurrentThread();"));
+  JreAssert([self isHeldByCurrentThread], @"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:69 condition failed: assert this.isHeldByCurrentThread();");
   JreStrongAssign(&self->dwpt_, nil);
   self->bytesUsed_ = 0;
   JreAssignVolatileBoolean(&self->flushPending_, false);

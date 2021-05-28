@@ -5,13 +5,15 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/LimitTokenOffsetFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/LimitTokenOffsetFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter () {
  @public
@@ -59,17 +61,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withInt:", "LimitTokenOffsetFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withInt:withBoolean:", "LimitTokenOffsetFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withInt:withBoolean:);
+  methods[2].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "offsetAttrib_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxStartOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "consumeAllTokens_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "offsetAttrib_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxStartOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "consumeAllTokens_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter = { 2, "LimitTokenOffsetFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;I", "LOrgApacheLuceneAnalysisTokenStream;IZ", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter = { "LimitTokenOffsetFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter;
 }
 

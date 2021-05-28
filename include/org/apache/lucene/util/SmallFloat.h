@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilSmallFloat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilSmallFloat_) && (INCLUDE_ALL_OrgApacheLuceneUtilSmallFloat || defined(INCLUDE_OrgApacheLuceneUtilSmallFloat))
 #define OrgApacheLuceneUtilSmallFloat_
 
@@ -42,10 +48,10 @@
 
 /*!
  @brief Converts a 32 bit float to an 8 bit float.
- <br>Values less than zero are all mapped to zero.
- <br>Values are truncated (rounded down) to the nearest 8 bit value.
+ <br>Values less than zero are all mapped to zero. 
+ <br>Values are truncated (rounded down) to the nearest 8 bit value. 
  <br>Values between zero and the smallest representable value
- are rounded up.
+   are rounded up.
  @param f the 32 bit float to be converted to an 8 bit float (byte)
  @param numMantissaBits the number of mantissa bits to use in the byte, with the remainder to be used in the exponent
  @param zeroExp the zero-point in the range of exponent values
@@ -56,17 +62,17 @@
                       withInt:(jint)zeroExp;
 
 /*!
- @brief floatToByte(b, mantissaBits=3, zeroExponent=15)
- <br>smallest non-zero value = 5.820766E-10
- <br>largest value = 7.5161928E9
+ @brief floatToByte(b, mantissaBits=3, zeroExponent=15) 
+ <br>smallest non-zero value = 5.820766E-10 
+ <br>largest value = 7.5161928E9 
  <br>epsilon = 0.125
  */
 + (jbyte)floatToByte315WithFloat:(jfloat)f;
 
 /*!
- @brief floatToByte(b, mantissaBits=5, zeroExponent=2)
- <br>smallest nonzero value = 0.033203125
- <br>largest value = 1984.0
+ @brief floatToByte(b, mantissaBits=5, zeroExponent=2) 
+ <br>smallest nonzero value = 0.033203125 
+ <br>largest value = 1984.0 
  <br>epsilon = 0.03125
  */
 + (jbyte)floatToByte52WithFloat:(jfloat)f;
@@ -91,4 +97,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSmallFloat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSmallFloat")

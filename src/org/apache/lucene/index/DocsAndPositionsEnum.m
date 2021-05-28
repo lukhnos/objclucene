@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
@@ -18,6 +17,14 @@
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/DocsAndPositionsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexDocsAndPositionsEnum__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexDocsAndPositionsEnum__Annotations$1(void);
 
 @interface OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper ()
 
@@ -85,32 +92,36 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneIndexDocsAndPositionsEnum_unwrapliveDocsWithOrgApacheLuceneIndexDocsEnum_(docs);
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_OLD_NULL_SEMANTICS_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DocsAndPositionsEnum", NULL, 0x4, NULL, NULL },
-    { "nextPosition", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "startOffset", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "endOffset", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x401, "Ljava.io.IOException;", NULL },
-    { "wrapWithOrgApacheLuceneIndexPostingsEnum:withOrgApacheLuceneUtilBits:", "wrap", "Lorg.apache.lucene.index.DocsAndPositionsEnum;", 0x8, NULL, NULL },
-    { "unwrapWithOrgApacheLuceneIndexDocsEnum:", "unwrap", "Lorg.apache.lucene.index.PostingsEnum;", 0x8, NULL, NULL },
-    { "unwrapliveDocsWithOrgApacheLuceneIndexDocsEnum:", "unwrapliveDocs", "Lorg.apache.lucene.util.Bits;", 0x8, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocsAndPositionsEnum;", 0x8, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x8, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x8, 5, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(nextPosition);
+  methods[2].selector = @selector(startOffset);
+  methods[3].selector = @selector(endOffset);
+  methods[4].selector = @selector(getPayload);
+  methods[5].selector = @selector(wrapWithOrgApacheLuceneIndexPostingsEnum:withOrgApacheLuceneUtilBits:);
+  methods[6].selector = @selector(unwrapWithOrgApacheLuceneIndexDocsEnum:);
+  methods[7].selector = @selector(unwrapliveDocsWithOrgApacheLuceneIndexDocsEnum:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "FLAG_OFFSETS", "FLAG_OFFSETS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_OFFSETS },
-    { "FLAG_PAYLOADS", "FLAG_PAYLOADS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_PAYLOADS },
-    { "OLD_NULL_SEMANTICS", "OLD_NULL_SEMANTICS", 0x19, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneIndexDocsAndPositionsEnum_OLD_NULL_SEMANTICS },
+    { "FLAG_OFFSETS", "I", .constantValue.asInt = OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_OFFSETS, 0x19, -1, -1, -1, -1 },
+    { "FLAG_PAYLOADS", "I", .constantValue.asInt = OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_PAYLOADS, 0x19, -1, -1, -1, -1 },
+    { "OLD_NULL_SEMANTICS", "S", .constantValue.asShort = OrgApacheLuceneIndexDocsAndPositionsEnum_OLD_NULL_SEMANTICS, 0x19, -1, -1, -1, 6 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.DocsAndPositionsEnum$DocsAndPositionsEnumWrapper;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocsAndPositionsEnum = { 2, "DocsAndPositionsEnum", "org.apache.lucene.index", NULL, 0x401, 8, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoIOException;", "wrap", "LOrgApacheLuceneIndexPostingsEnum;LOrgApacheLuceneUtilBits;", "unwrap", "LOrgApacheLuceneIndexDocsEnum;", "unwrapliveDocs", (void *)&OrgApacheLuceneIndexDocsAndPositionsEnum__Annotations$0, "LOrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper;", (void *)&OrgApacheLuceneIndexDocsAndPositionsEnum__Annotations$1 };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocsAndPositionsEnum = { "DocsAndPositionsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 8, 3, -1, 7, -1, -1, 8 };
   return &_OrgApacheLuceneIndexDocsAndPositionsEnum;
 }
 
@@ -128,7 +139,7 @@ OrgApacheLuceneIndexDocsAndPositionsEnum *OrgApacheLuceneIndexDocsAndPositionsEn
 OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexDocsAndPositionsEnum_unwrapWithOrgApacheLuceneIndexDocsEnum_(OrgApacheLuceneIndexDocsEnum *docs) {
   OrgApacheLuceneIndexDocsAndPositionsEnum_initialize();
   if ([docs isKindOfClass:[OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper class]]) {
-    return ((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) nil_chk(((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) cast_chk(docs, [OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper class]))))->in_;
+    return ((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) nil_chk(((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) docs)))->in_;
   }
   else if (docs == nil) {
     return nil;
@@ -141,7 +152,7 @@ OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexDocsAndPositionsEnum_unwra
 id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocsAndPositionsEnum_unwrapliveDocsWithOrgApacheLuceneIndexDocsEnum_(OrgApacheLuceneIndexDocsEnum *docs) {
   OrgApacheLuceneIndexDocsAndPositionsEnum_initialize();
   if ([docs isKindOfClass:[OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper class]]) {
-    return ((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) nil_chk(((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) cast_chk(docs, [OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper class]))))->liveDocs_;
+    return ((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) nil_chk(((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) docs)))->liveDocs_;
   }
   else if (docs == nil) {
     return nil;
@@ -149,6 +160,14 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocsAndPositionsEnum_unwrapliveD
   else {
     @throw create_JavaLangAssertionError_init();
   }
+}
+
+IOSObjectArray *OrgApacheLuceneIndexDocsAndPositionsEnum__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneIndexDocsAndPositionsEnum__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocsAndPositionsEnum)
@@ -212,25 +231,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocsAndPositionsEnum)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexPostingsEnum:withOrgApacheLuceneUtilBits:", "DocsAndPositionsEnumWrapper", NULL, 0x0, NULL, NULL },
-    { "doNextWithInt:", "doNext", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "nextPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "startOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "endOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "attributes", NULL, "Lorg.apache.lucene.util.AttributeSource;", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 1, 2, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeSource;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 2, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexPostingsEnum:withOrgApacheLuceneUtilBits:);
+  methods[1].selector = @selector(doNextWithInt:);
+  methods[2].selector = @selector(nextPosition);
+  methods[3].selector = @selector(startOffset);
+  methods[4].selector = @selector(endOffset);
+  methods[5].selector = @selector(getPayload);
+  methods[6].selector = @selector(freq);
+  methods[7].selector = @selector(attributes);
+  methods[8].selector = @selector(docID);
+  methods[9].selector = @selector(nextDoc);
+  methods[10].selector = @selector(advanceWithInt:);
+  methods[11].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "liveDocs_", NULL, 0x10, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneIndexPostingsEnum;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "liveDocs_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper = { 2, "DocsAndPositionsEnumWrapper", "org.apache.lucene.index", "DocsAndPositionsEnum", 0x8, 12, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexPostingsEnum;LOrgApacheLuceneUtilBits;", "doNext", "I", "LJavaIoIOException;", "advance", "LOrgApacheLuceneIndexDocsAndPositionsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper = { "DocsAndPositionsEnumWrapper", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8, 12, 2, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper;
 }
 

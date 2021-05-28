@@ -13,10 +13,15 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFilterCache
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFilterCache_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilterCache || defined(INCLUDE_OrgApacheLuceneSearchFilterCache))
 #define OrgApacheLuceneSearchFilterCache_
 
-@class IOSObjectArray;
 @class OrgApacheLuceneSearchFilter;
 @protocol OrgApacheLuceneSearchFilterCachingPolicy;
 
@@ -24,10 +29,10 @@
  @brief A cache for filters.
  - seealso: LRUFilterCache
  */
-@protocol OrgApacheLuceneSearchFilterCache < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchFilterCache < JavaObject >
 
 /*!
- @brief Return a wrapper around the provided <code>filter</code> that will cache
+ @brief Return a wrapper around the provided <code>filter</code> that will cache 
  <code>DocIdSet</code>s per-segment accordingly to the given <code>policy</code>.
  */
 - (OrgApacheLuceneSearchFilter *)doCacheWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
@@ -41,4 +46,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterCache)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilterCache")

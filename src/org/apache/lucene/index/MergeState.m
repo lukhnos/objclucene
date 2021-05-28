@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/codecs/DocValuesProducer.h"
 #include "org/apache/lucene/codecs/FieldsProducer.h"
@@ -23,6 +22,10 @@
 #include "org/apache/lucene/util/packed/PackedInts.h"
 #include "org/apache/lucene/util/packed/PackedLongValues.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MergeState must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexMergeState ()
 
 - (void)setDocMapsWithJavaUtilList:(id<JavaUtilList>)readers;
@@ -33,7 +36,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeState_setDocMapsWit
 
 __attribute__((unused)) static jint OrgApacheLuceneIndexMergeState_DocMap_numDocs(OrgApacheLuceneIndexMergeState_DocMap *self);
 
-@interface OrgApacheLuceneIndexMergeState_DocMap_$1 : OrgApacheLuceneIndexMergeState_DocMap {
+@interface OrgApacheLuceneIndexMergeState_DocMap_1 : OrgApacheLuceneIndexMergeState_DocMap {
  @public
   id<OrgApacheLuceneUtilBits> val$liveDocs_;
   OrgApacheLuceneUtilPackedPackedLongValues *val$docMap_;
@@ -41,31 +44,26 @@ __attribute__((unused)) static jint OrgApacheLuceneIndexMergeState_DocMap_numDoc
   jint val$numDeletedDocs_;
 }
 
+- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0
+  withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)capture$1
+                                        withInt:(jint)capture$2
+                                        withInt:(jint)capture$3;
+
 - (jint)getWithInt:(jint)docID;
 
 - (jint)maxDoc;
 
 - (jint)numDeletedDocs;
 
-- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0
-  withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)capture$1
-                                        withInt:(jint)capture$2
-                                        withInt:(jint)capture$3;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMergeState_DocMap_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMergeState_DocMap_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergeState_DocMap_$1, val$liveDocs_, id<OrgApacheLuceneUtilBits>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergeState_DocMap_$1, val$docMap_, OrgApacheLuceneUtilPackedPackedLongValues *)
+__attribute__((unused)) static void OrgApacheLuceneIndexMergeState_DocMap_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(OrgApacheLuceneIndexMergeState_DocMap_1 *self, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(OrgApacheLuceneIndexMergeState_DocMap_$1 *self, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3);
+__attribute__((unused)) static OrgApacheLuceneIndexMergeState_DocMap_1 *new_OrgApacheLuceneIndexMergeState_DocMap_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexMergeState_DocMap_$1 *new_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexMergeState_DocMap_$1 *create_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState_DocMap_$1)
+__attribute__((unused)) static OrgApacheLuceneIndexMergeState_DocMap_1 *create_OrgApacheLuceneIndexMergeState_DocMap_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3);
 
 @interface OrgApacheLuceneIndexMergeState_NoDelDocMap : OrgApacheLuceneIndexMergeState_DocMap {
  @public
@@ -123,27 +121,33 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState_NoDelDocMap)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneUtilInfoStream:", "MergeState", NULL, 0x0, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;Lorg/apache/lucene/index/SegmentInfo;Lorg/apache/lucene/util/InfoStream;)V" },
-    { "setDocMapsWithJavaUtilList:", "setDocMaps", "V", 0x2, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, 2, -1, -1 },
+    { NULL, "V", 0x2, 3, 4, 1, 5, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneUtilInfoStream:);
+  methods[1].selector = @selector(setDocMapsWithJavaUtilList:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "segmentInfo_", NULL, 0x11, "Lorg.apache.lucene.index.SegmentInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mergeFieldInfos_", NULL, 0x1, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "storedFieldsReaders_", NULL, 0x11, "[Lorg.apache.lucene.codecs.StoredFieldsReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termVectorsReaders_", NULL, 0x11, "[Lorg.apache.lucene.codecs.TermVectorsReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "normsProducers_", NULL, 0x11, "[Lorg.apache.lucene.codecs.NormsProducer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docValuesProducers_", NULL, 0x11, "[Lorg.apache.lucene.codecs.DocValuesProducer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfos_", NULL, 0x11, "[Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "liveDocs_", NULL, 0x11, "[Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docMaps_", NULL, 0x11, "[Lorg.apache.lucene.index.MergeState$DocMap;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldsProducers_", NULL, 0x11, "[Lorg.apache.lucene.codecs.FieldsProducer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docBase_", NULL, 0x11, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDocs_", NULL, 0x11, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "infoStream_", NULL, 0x11, "Lorg.apache.lucene.util.InfoStream;", NULL, NULL, .constantValue.asLong = 0 },
+    { "segmentInfo_", "LOrgApacheLuceneIndexSegmentInfo;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "mergeFieldInfos_", "LOrgApacheLuceneIndexFieldInfos;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "storedFieldsReaders_", "[LOrgApacheLuceneCodecsStoredFieldsReader;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "termVectorsReaders_", "[LOrgApacheLuceneCodecsTermVectorsReader;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "normsProducers_", "[LOrgApacheLuceneCodecsNormsProducer;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "docValuesProducers_", "[LOrgApacheLuceneCodecsDocValuesProducer;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "fieldInfos_", "[LOrgApacheLuceneIndexFieldInfos;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "liveDocs_", "[LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "docMaps_", "[LOrgApacheLuceneIndexMergeState_DocMap;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "fieldsProducers_", "[LOrgApacheLuceneCodecsFieldsProducer;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "docBase_", "[I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "maxDocs_", "[I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "infoStream_", "LOrgApacheLuceneUtilInfoStream;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.MergeState$DocMap;", "Lorg.apache.lucene.index.MergeState$NoDelDocMap;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeState = { 2, "MergeState", "org.apache.lucene.index", NULL, 0x1, 2, methods, 13, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneUtilInfoStream;", "LJavaIoIOException;", "(Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;Lorg/apache/lucene/index/SegmentInfo;Lorg/apache/lucene/util/InfoStream;)V", "setDocMaps", "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;)V", "LOrgApacheLuceneIndexMergeState_DocMap;LOrgApacheLuceneIndexMergeState_NoDelDocMap;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeState = { "MergeState", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 2, 13, -1, 6, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMergeState;
 }
 
@@ -258,17 +262,30 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DocMap", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "I", 0x401, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x401, NULL, NULL },
-    { "numDocs", NULL, "I", 0x11, NULL, NULL },
-    { "numDeletedDocs", NULL, "I", 0x401, NULL, NULL },
-    { "hasDeletions", NULL, "Z", 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneIndexCodecReader:", "build", "Lorg.apache.lucene.index.MergeState$DocMap;", 0x9, NULL, NULL },
-    { "buildWithInt:withOrgApacheLuceneUtilBits:", "build", "Lorg.apache.lucene.index.MergeState$DocMap;", 0x8, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergeState_DocMap;", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergeState_DocMap;", 0x8, 2, 4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeState_DocMap = { 2, "DocMap", "org.apache.lucene.index", "MergeState", 0x409, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(maxDoc);
+  methods[3].selector = @selector(numDocs);
+  methods[4].selector = @selector(numDeletedDocs);
+  methods[5].selector = @selector(hasDeletions);
+  methods[6].selector = @selector(buildWithOrgApacheLuceneIndexCodecReader:);
+  methods[7].selector = @selector(buildWithInt:withOrgApacheLuceneUtilBits:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "get", "I", "build", "LOrgApacheLuceneIndexCodecReader;", "ILOrgApacheLuceneUtilBits;", "LOrgApacheLuceneIndexMergeState;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeState_DocMap = { "DocMap", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x409, 8, 0, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMergeState_DocMap;
 }
 
@@ -294,7 +311,7 @@ OrgApacheLuceneIndexMergeState_DocMap *OrgApacheLuceneIndexMergeState_DocMap_bui
 
 OrgApacheLuceneIndexMergeState_DocMap *OrgApacheLuceneIndexMergeState_DocMap_buildWithInt_withOrgApacheLuceneUtilBits_(jint maxDoc, id<OrgApacheLuceneUtilBits> liveDocs) {
   OrgApacheLuceneIndexMergeState_DocMap_initialize();
-  JreAssert((liveDocs != nil), (@"org/apache/lucene/index/MergeState.java:184 condition failed: assert liveDocs != null;"));
+  JreAssert(liveDocs != nil, @"org/apache/lucene/index/MergeState.java:184 condition failed: assert liveDocs != null;");
   OrgApacheLuceneUtilPackedPackedLongValues_Builder *docMapBuilder = OrgApacheLuceneUtilPackedPackedLongValues_monotonicBuilderWithFloat_(OrgApacheLuceneUtilPackedPackedInts_COMPACT);
   jint del = 0;
   for (jint i = 0; i < maxDoc; ++i) {
@@ -305,13 +322,21 @@ OrgApacheLuceneIndexMergeState_DocMap *OrgApacheLuceneIndexMergeState_DocMap_bui
   }
   OrgApacheLuceneUtilPackedPackedLongValues *docMap = [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(docMapBuilder)) build];
   jint numDeletedDocs = del;
-  JreAssert(([((OrgApacheLuceneUtilPackedPackedLongValues *) nil_chk(docMap)) size] == maxDoc), (@"org/apache/lucene/index/MergeState.java:195 condition failed: assert docMap.size() == maxDoc;"));
-  return create_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(liveDocs, docMap, maxDoc, numDeletedDocs);
+  JreAssert([((OrgApacheLuceneUtilPackedPackedLongValues *) nil_chk(docMap)) size] == maxDoc, @"org/apache/lucene/index/MergeState.java:195 condition failed: assert docMap.size() == maxDoc;");
+  return create_OrgApacheLuceneIndexMergeState_DocMap_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(liveDocs, docMap, maxDoc, numDeletedDocs);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeState_DocMap)
 
-@implementation OrgApacheLuceneIndexMergeState_DocMap_$1
+@implementation OrgApacheLuceneIndexMergeState_DocMap_1
+
+- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0
+  withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)capture$1
+                                        withInt:(jint)capture$2
+                                        withInt:(jint)capture$3 {
+  OrgApacheLuceneIndexMergeState_DocMap_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(self, capture$0, capture$1, capture$2, capture$3);
+  return self;
+}
 
 - (jint)getWithInt:(jint)docID {
   if (![((id<OrgApacheLuceneUtilBits>) nil_chk(val$liveDocs_)) getWithInt:docID]) {
@@ -328,14 +353,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeState_DocMap)
   return val$numDeletedDocs_;
 }
 
-- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0
-  withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)capture$1
-                                        withInt:(jint)capture$2
-                                        withInt:(jint)capture$3 {
-  OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(self, capture$0, capture$1, capture$2, capture$3);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(val$liveDocs_);
   RELEASE_(val$docMap_);
@@ -343,26 +360,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeState_DocMap)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "I", 0x1, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x1, NULL, NULL },
-    { "numDeletedDocs", NULL, "I", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilBits:withOrgApacheLuceneUtilPackedPackedLongValues:withInt:withInt:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBits:withOrgApacheLuceneUtilPackedPackedLongValues:withInt:withInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(maxDoc);
+  methods[3].selector = @selector(numDeletedDocs);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$liveDocs_", NULL, 0x1012, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$docMap_", NULL, 0x1012, "Lorg.apache.lucene.util.packed.PackedLongValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$maxDoc_", NULL, 0x1012, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$numDeletedDocs_", NULL, 0x1012, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$liveDocs_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$docMap_", "LOrgApacheLuceneUtilPackedPackedLongValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$maxDoc_", "I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$numDeletedDocs_", "I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMergeState_DocMap", "buildWithInt:withOrgApacheLuceneUtilBits:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeState_DocMap_$1 = { 2, "", "org.apache.lucene.index", "MergeState$DocMap", 0x8008, 4, methods, 4, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMergeState_DocMap_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBits;LOrgApacheLuceneUtilPackedPackedLongValues;II", "get", "I", "LOrgApacheLuceneIndexMergeState_DocMap;", "buildWithInt:withOrgApacheLuceneUtilBits:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeState_DocMap_1 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8018, 4, 4, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneIndexMergeState_DocMap_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(OrgApacheLuceneIndexMergeState_DocMap_$1 *self, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) {
+void OrgApacheLuceneIndexMergeState_DocMap_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(OrgApacheLuceneIndexMergeState_DocMap_1 *self, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) {
   JreStrongAssign(&self->val$liveDocs_, capture$0);
   JreStrongAssign(&self->val$docMap_, capture$1);
   self->val$maxDoc_ = capture$2;
@@ -370,15 +395,13 @@ void OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_wi
   OrgApacheLuceneIndexMergeState_DocMap_init(self);
 }
 
-OrgApacheLuceneIndexMergeState_DocMap_$1 *new_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergeState_DocMap_$1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_, capture$0, capture$1, capture$2, capture$3)
+OrgApacheLuceneIndexMergeState_DocMap_1 *new_OrgApacheLuceneIndexMergeState_DocMap_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergeState_DocMap_1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_, capture$0, capture$1, capture$2, capture$3)
 }
 
-OrgApacheLuceneIndexMergeState_DocMap_$1 *create_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergeState_DocMap_$1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_, capture$0, capture$1, capture$2, capture$3)
+OrgApacheLuceneIndexMergeState_DocMap_1 *create_OrgApacheLuceneIndexMergeState_DocMap_1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergeState_DocMap_1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_, capture$0, capture$1, capture$2, capture$3)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeState_DocMap_$1)
 
 @implementation OrgApacheLuceneIndexMergeState_NoDelDocMap
 
@@ -400,16 +423,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeState_DocMap_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "NoDelDocMap", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "I", 0x1, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x1, NULL, NULL },
-    { "numDeletedDocs", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(maxDoc);
+  methods[3].selector = @selector(numDeletedDocs);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "maxDoc_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeState_NoDelDocMap = { 2, "NoDelDocMap", "org.apache.lucene.index", "MergeState", 0x1a, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "get", "LOrgApacheLuceneIndexMergeState;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeState_NoDelDocMap = { "NoDelDocMap", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1a, 4, 1, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMergeState_NoDelDocMap;
 }
 

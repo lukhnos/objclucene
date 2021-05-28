@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator || defined(INCLUDE_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator))
 #define OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_
 
@@ -26,11 +32,11 @@
 /*!
  @brief <code>FiniteStringsIterator</code> which limits the number of iterated accepted strings.
  If more than <code>limit</code> strings are accepted,
- the first <code>limit</code> strings found are returned.
+  the first <code>limit</code> strings found are returned. 
  <p>If the <code>Automaton</code> has cycles then this iterator may throw an <code>IllegalArgumentException</code>
- , but this is not guaranteed!
+ , but this is not guaranteed! 
  <p>Be aware that the iteration order is implementation dependent
- and may change across releases.
+  and may change across releases.
  */
 @interface OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator : OrgApacheLuceneUtilAutomatonFiniteStringsIterator
 
@@ -41,8 +47,8 @@
  @param a Automaton to create finite string from.
  @param limit Maximum number of finite strings to create, or -1 for infinite.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                      withInt:(jint)limit;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
+                                                                withInt:(jint)limit;
 
 - (OrgApacheLuceneUtilIntsRef *)next;
 
@@ -50,6 +56,10 @@
  @brief Number of iterated finite strings.
  */
 - (jint)size;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -65,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonLimitedFiniteStringsItera
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator")

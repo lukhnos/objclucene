@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneMiscTermStats
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneMiscTermStats_) && (INCLUDE_ALL_OrgApacheLuceneMiscTermStats || defined(INCLUDE_OrgApacheLuceneMiscTermStats))
 #define OrgApacheLuceneMiscTermStats_
 
@@ -20,7 +26,7 @@
 
 /*!
  @brief Holder for a term along with its statistics
- (<code>docFreq</code> and <code>totalTermFreq</code>).
+  (<code>docFreq</code> and <code>totalTermFreq</code>).
  */
 @interface OrgApacheLuceneMiscTermStats : NSObject {
  @public
@@ -36,12 +42,16 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)termtext
-                         withInt:(jint)df
-                        withLong:(jlong)tf;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)termtext
+                                   withInt:(jint)df
+                                  withLong:(jlong)tf;
 
 - (NSString *)getTermText;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -60,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscTermStats)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneMiscTermStats")

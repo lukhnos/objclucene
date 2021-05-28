@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSegmentWriteState
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSegmentWriteState_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentWriteState || defined(INCLUDE_OrgApacheLuceneIndexSegmentWriteState))
 #define OrgApacheLuceneIndexSegmentWriteState_
 
@@ -35,7 +41,7 @@
   OrgApacheLuceneUtilInfoStream *infoStream_;
   /*!
    @brief <code>Directory</code> where this segment will be written
- to.
+   to.
    */
   OrgApacheLuceneStoreDirectory *directory_;
   /*!
@@ -44,41 +50,41 @@
   OrgApacheLuceneIndexSegmentInfo *segmentInfo_;
   /*!
    @brief <code>FieldInfos</code> describing all fields in this
- segment.
+   segment.
    */
   OrgApacheLuceneIndexFieldInfos *fieldInfos_;
   /*!
    @brief Number of deleted documents set while flushing the
- segment.
+   segment.
    */
   jint delCountOnFlush_;
   /*!
-   @brief Deletes and updates to apply while we are flushing the segment.
-   A Term is
- enrolled in here if it was deleted/updated at one point, and it's mapped to
- the docIDUpto, meaning any docID &lt; docIDUpto containing this term should
- be deleted/updated.
+   @brief Deletes and updates to apply while we are flushing the segment.A Term is
+  enrolled in here if it was deleted/updated at one point, and it's mapped to
+  the docIDUpto, meaning any docID &lt; docIDUpto containing this term should
+  be deleted/updated.
    */
   OrgApacheLuceneIndexBufferedUpdates *segUpdates_;
   /*!
    @brief <code>MutableBits</code> recording live documents; this is
- only set if there is one or more deleted documents.
+   only set if there is one or more deleted documents.
    */
   id<OrgApacheLuceneUtilMutableBits> liveDocs_;
   /*!
    @brief Unique suffix for any postings files written for this
- segment.
+   segment.
    <code>PerFieldPostingsFormat</code> sets this for
- each of the postings formats it wraps.  If you create
- a new <code>PostingsFormat</code> then any files you
- write/read must be derived using this suffix (use
+   each of the postings formats it wraps.  If you create
+   a new <code>PostingsFormat</code> then any files you
+   write/read must be derived using this suffix (use  
  <code>IndexFileNames.segmentFileName(String,String,String)</code>).
- Note: the suffix must be either empty, or be a textual suffix contain exactly two parts (separated by underscore), or be a base36 generation. 
+   
+   Note: the suffix must be either empty, or be a textual suffix contain exactly two parts (separated by underscore), or be a base36 generation.
    */
   NSString *segmentSuffix_;
   /*!
    @brief <code>IOContext</code> for all writes; you should pass this
- to <code>Directory.createOutput(String,IOContext)</code>.
+   to <code>Directory.createOutput(String,IOContext)</code>.
    */
   OrgApacheLuceneStoreIOContext *context_;
 }
@@ -88,30 +94,35 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
-                  withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
-                   withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
-              withOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)segUpdates
-                    withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
+                            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
+                             withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
+                        withOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)segUpdates
+                              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 /*!
  @brief Constructor which takes segment suffix.
- - seealso: #SegmentWriteState(InfoStream,Directory,SegmentInfo,FieldInfos,BufferedUpdates,IOContext)
+ - seealso: #SegmentWriteState(InfoStream, Directory, SegmentInfo, FieldInfos,
+      BufferedUpdates, IOContext)
  */
-- (instancetype)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
-                  withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
-                   withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
-              withOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)segUpdates
-                    withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
-                                         withNSString:(NSString *)segmentSuffix;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
+                            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
+                             withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
+                        withOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)segUpdates
+                              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
+                                                   withNSString:(NSString *)segmentSuffix;
 
 /*!
  @brief Create a shallow copy of <code>SegmentWriteState</code> with a new segment suffix.
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
-                                                 withNSString:(NSString *)segmentSuffix;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
+                                                           withNSString:(NSString *)segmentSuffix;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -148,4 +159,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentWriteState)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentWriteState")

@@ -3,9 +3,7 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/spell/HighFrequencyDictionary.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/MultiFields.h"
@@ -15,6 +13,10 @@
 #include "org/apache/lucene/search/suggest/InputIterator.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/HighFrequencyDictionary must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSpellHighFrequencyDictionary () {
  @public
@@ -65,17 +67,23 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchSpellHighFrequencyD
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReader:withNSString:withFloat:", "HighFrequencyDictionary", NULL, 0x1, NULL, NULL },
-    { "getEntryIterator", NULL, "Lorg.apache.lucene.search.suggest.InputIterator;", 0x11, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestInputIterator;", 0x11, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withNSString:withFloat:);
+  methods[1].selector = @selector(getEntryIterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reader_", NULL, 0x2, "Lorg.apache.lucene.index.IndexReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "thresh_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "reader_", "LOrgApacheLuceneIndexIndexReader;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "thresh_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.spell.HighFrequencyDictionary$HighFrequencyIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellHighFrequencyDictionary = { 2, "HighFrequencyDictionary", "org.apache.lucene.search.spell", NULL, 0x1, 2, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReader;LNSString;F", "LJavaIoIOException;", "LOrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellHighFrequencyDictionary = { "HighFrequencyDictionary", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x1, 2, 3, -1, 2, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellHighFrequencyDictionary;
 }
 
@@ -150,23 +158,36 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellHighFrequencyDictiona
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary:", "HighFrequencyIterator", NULL, 0x0, NULL, NULL },
-    { "isFrequentWithInt:", "isFrequent", "Z", 0x2, NULL, NULL },
-    { "weight", NULL, "J", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
-    { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 2, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary:);
+  methods[1].selector = @selector(isFrequentWithInt:);
+  methods[2].selector = @selector(weight);
+  methods[3].selector = @selector(next);
+  methods[4].selector = @selector(payload);
+  methods[5].selector = @selector(hasPayloads);
+  methods[6].selector = @selector(contexts);
+  methods[7].selector = @selector(hasContexts);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "spare_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termsEnum_", NULL, 0x12, "Lorg.apache.lucene.index.TermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minNumDocs_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "spare_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termsEnum_", "LOrgApacheLuceneIndexTermsEnum;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minNumDocs_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "freq_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator = { 2, "HighFrequencyIterator", "org.apache.lucene.search.spell", "HighFrequencyDictionary", 0x10, 8, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpellHighFrequencyDictionary;", "LJavaIoIOException;", "isFrequent", "I", "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator = { "HighFrequencyIterator", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x10, 8, 4, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator;
 }
 

@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/SegmentInfo.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -27,6 +28,10 @@
 #include "org/apache/lucene/util/StringHelper.h"
 #include "org/apache/lucene/util/Version.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SegmentInfo must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexSegmentInfo () {
  @public
@@ -55,6 +60,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentInfo, version__, OrgApacheLuceneU
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentInfo, setFiles_, id<JavaUtilSet>)
 
 __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNamesWithJavaUtilCollection_(OrgApacheLuceneIndexSegmentInfo *self, id<JavaUtilCollection> files);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexSegmentInfo__Annotations$0(void);
 
 @implementation OrgApacheLuceneIndexSegmentInfo
 
@@ -96,7 +103,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
 }
 
 - (void)setCodecWithOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)codec {
-  JreAssert((self->codec_ == nil), (@"org/apache/lucene/index/SegmentInfo.java:131 condition failed: assert this.codec == null;"));
+  JreAssert(self->codec_ == nil, @"org/apache/lucene/index/SegmentInfo.java:131 condition failed: assert this.codec == null;");
   if (codec == nil) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"codec must be non-null");
   }
@@ -139,7 +146,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
 
 - (NSString *)toStringWithInt:(jint)delCount {
   JavaLangStringBuilder *s = create_JavaLangStringBuilder_init();
-  [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([s appendWithNSString:name_])) appendWithChar:'('])) appendWithId:version__ == nil ? @"?" : version__])) appendWithChar:')'])) appendWithChar:':'];
+  [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([s appendWithNSString:name_])) appendWithChar:'('])) appendWithId:version__ == nil ? @"?" : (id) version__])) appendWithChar:')'])) appendWithChar:':'];
   jchar cfs = [self getUseCompoundFile] ? 'c' : 'C';
   [s appendWithChar:cfs];
   [s appendWithInt:maxDoc_];
@@ -159,10 +166,10 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if ([obj isKindOfClass:[OrgApacheLuceneIndexSegmentInfo class]]) {
-    OrgApacheLuceneIndexSegmentInfo *other = (OrgApacheLuceneIndexSegmentInfo *) cast_chk(obj, [OrgApacheLuceneIndexSegmentInfo class]);
-    return ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(other))->dir_ == dir_ && [((NSString *) nil_chk(other->name_)) isEqual:name_];
+    OrgApacheLuceneIndexSegmentInfo *other = (OrgApacheLuceneIndexSegmentInfo *) obj;
+    return JreObjectEqualsEquals(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(other))->dir_, dir_) && [((NSString *) nil_chk(other->name_)) isEqual:name_];
   }
   else {
     return false;
@@ -178,7 +185,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
 }
 
 - (IOSByteArray *)getId {
-  return id__ == nil ? nil : [id__ clone];
+  return id__ == nil ? nil : [id__ java_clone];
 }
 
 - (void)setFilesWithJavaUtilCollection:(id<JavaUtilCollection>)files {
@@ -219,10 +226,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
   return attributes_;
 }
 
-+ (IOSObjectArray *)__annotations_toStringWithOrgApacheLuceneStoreDirectory_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(name_);
   RELEASE_(dir_);
@@ -236,48 +239,78 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setDiagnosticsWithJavaUtilMap:", "setDiagnostics", "V", 0x0, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "getDiagnostics", NULL, "Ljava.util.Map;", 0x1, NULL, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneUtilVersion:withNSString:withInt:withBoolean:withOrgApacheLuceneCodecsCodec:withJavaUtilMap:withByteArray:withJavaUtilMap:", "SegmentInfo", NULL, 0x1, NULL, "(Lorg/apache/lucene/store/Directory;Lorg/apache/lucene/util/Version;Ljava/lang/String;IZLorg/apache/lucene/codecs/Codec;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;[BLjava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "setUseCompoundFileWithBoolean:", "setUseCompoundFile", "V", 0x0, NULL, NULL },
-    { "getUseCompoundFile", NULL, "Z", 0x1, NULL, NULL },
-    { "setCodecWithOrgApacheLuceneCodecsCodec:", "setCodec", "V", 0x1, NULL, NULL },
-    { "getCodec", NULL, "Lorg.apache.lucene.codecs.Codec;", 0x1, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x1, NULL, NULL },
-    { "setMaxDocWithInt:", "setMaxDoc", "V", 0x0, NULL, NULL },
-    { "files", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toStringWithOrgApacheLuceneStoreDirectory:withInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "getVersion", NULL, "Lorg.apache.lucene.util.Version;", 0x1, NULL, NULL },
-    { "getId", NULL, "[B", 0x1, NULL, NULL },
-    { "setFilesWithJavaUtilCollection:", "setFiles", "V", 0x1, NULL, "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
-    { "addFilesWithJavaUtilCollection:", "addFiles", "V", 0x1, NULL, "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
-    { "addFileWithNSString:", "addFile", "V", 0x1, NULL, NULL },
-    { "checkFileNamesWithJavaUtilCollection:", "checkFileNames", "V", 0x2, NULL, "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
-    { "namedForThisSegmentWithNSString:", "namedForThisSegment", "Ljava.lang.String;", 0x0, NULL, NULL },
-    { "getAttributeWithNSString:", "getAttribute", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "putAttributeWithNSString:withNSString:", "putAttribute", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getAttributes", NULL, "Ljava.util.Map;", 0x1, NULL, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x0, 0, 1, -1, 2, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, 5, -1, -1 },
+    { NULL, "V", 0x0, 6, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCodec;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 12, -1, -1 },
+    { NULL, "LNSString;", 0x1, 13, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 13, 14, -1, -1, 15, -1 },
+    { NULL, "LNSString;", 0x1, 13, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 18, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilVersion;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 20, -1, 21, -1, -1 },
+    { NULL, "V", 0x1, 22, 20, -1, 21, -1, -1 },
+    { NULL, "V", 0x1, 23, 24, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 25, 20, -1, 21, -1, -1 },
+    { NULL, "LNSString;", 0x0, 26, 24, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 27, 24, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 28, 29, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 3, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setDiagnosticsWithJavaUtilMap:);
+  methods[1].selector = @selector(getDiagnostics);
+  methods[2].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneUtilVersion:withNSString:withInt:withBoolean:withOrgApacheLuceneCodecsCodec:withJavaUtilMap:withByteArray:withJavaUtilMap:);
+  methods[3].selector = @selector(setUseCompoundFileWithBoolean:);
+  methods[4].selector = @selector(getUseCompoundFile);
+  methods[5].selector = @selector(setCodecWithOrgApacheLuceneCodecsCodec:);
+  methods[6].selector = @selector(getCodec);
+  methods[7].selector = @selector(maxDoc);
+  methods[8].selector = @selector(setMaxDocWithInt:);
+  methods[9].selector = @selector(files);
+  methods[10].selector = @selector(description);
+  methods[11].selector = @selector(toStringWithOrgApacheLuceneStoreDirectory:withInt:);
+  methods[12].selector = @selector(toStringWithInt:);
+  methods[13].selector = @selector(isEqual:);
+  methods[14].selector = @selector(hash);
+  methods[15].selector = @selector(getVersion);
+  methods[16].selector = @selector(getId);
+  methods[17].selector = @selector(setFilesWithJavaUtilCollection:);
+  methods[18].selector = @selector(addFilesWithJavaUtilCollection:);
+  methods[19].selector = @selector(addFileWithNSString:);
+  methods[20].selector = @selector(checkFileNamesWithJavaUtilCollection:);
+  methods[21].selector = @selector(namedForThisSegmentWithNSString:);
+  methods[22].selector = @selector(getAttributeWithNSString:);
+  methods[23].selector = @selector(putAttributeWithNSString:withNSString:);
+  methods[24].selector = @selector(getAttributes);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "NO", "NO", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfo_NO },
-    { "YES", "YES", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfo_YES },
-    { "name_", NULL, 0x11, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "dir_", NULL, 0x11, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "isCompoundFile_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "id__", "id", 0x12, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "codec_", NULL, 0x2, "Lorg.apache.lucene.codecs.Codec;", NULL, NULL, .constantValue.asLong = 0 },
-    { "diagnostics_", NULL, 0x2, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "attributes_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "version__", "version", 0x2, "Lorg.apache.lucene.util.Version;", NULL, NULL, .constantValue.asLong = 0 },
-    { "setFiles_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
+    { "NO", "I", .constantValue.asInt = OrgApacheLuceneIndexSegmentInfo_NO, 0x19, -1, -1, -1, -1 },
+    { "YES", "I", .constantValue.asInt = OrgApacheLuceneIndexSegmentInfo_YES, 0x19, -1, -1, -1, -1 },
+    { "name_", "LNSString;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "dir_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "isCompoundFile_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "id__", "[B", .constantValue.asLong = 0, 0x12, 30, -1, -1, -1 },
+    { "codec_", "LOrgApacheLuceneCodecsCodec;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "diagnostics_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 31, -1 },
+    { "attributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 31, -1 },
+    { "version__", "LOrgApacheLuceneUtilVersion;", .constantValue.asLong = 0, 0x2, 32, -1, -1, -1 },
+    { "setFiles_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfo = { 2, "SegmentInfo", "org.apache.lucene.index", NULL, 0x11, 25, methods, 12, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setDiagnostics", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneUtilVersion;LNSString;IZLOrgApacheLuceneCodecsCodec;LJavaUtilMap;[BLJavaUtilMap;", "(Lorg/apache/lucene/store/Directory;Lorg/apache/lucene/util/Version;Ljava/lang/String;IZLorg/apache/lucene/codecs/Codec;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;[BLjava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "setUseCompoundFile", "Z", "setCodec", "LOrgApacheLuceneCodecsCodec;", "setMaxDoc", "I", "()Ljava/util/Set<Ljava/lang/String;>;", "toString", "LOrgApacheLuceneStoreDirectory;I", (void *)&OrgApacheLuceneIndexSegmentInfo__Annotations$0, "equals", "LNSObject;", "hashCode", "setFiles", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/String;>;)V", "addFiles", "addFile", "LNSString;", "checkFileNames", "namedForThisSegment", "getAttribute", "putAttribute", "LNSString;LNSString;", "id", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "version", "Ljava/util/Set<Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfo = { "SegmentInfo", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 25, 12, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSegmentInfo;
 }
 
@@ -285,7 +318,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
 
 void OrgApacheLuceneIndexSegmentInfo_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilVersion_withNSString_withInt_withBoolean_withOrgApacheLuceneCodecsCodec_withJavaUtilMap_withByteArray_withJavaUtilMap_(OrgApacheLuceneIndexSegmentInfo *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneUtilVersion *version_, NSString *name, jint maxDoc, jboolean isCompoundFile, OrgApacheLuceneCodecsCodec *codec, id<JavaUtilMap> diagnostics, IOSByteArray *id_, id<JavaUtilMap> attributes) {
   NSObject_init(self);
-  JreAssert((!([dir isKindOfClass:[OrgApacheLuceneStoreTrackingDirectoryWrapper class]])), (@"org/apache/lucene/index/SegmentInfo.java:96 condition failed: assert !(dir instanceof TrackingDirectoryWrapper);"));
+  JreAssert(!([dir isKindOfClass:[OrgApacheLuceneStoreTrackingDirectoryWrapper class]]), @"org/apache/lucene/index/SegmentInfo.java:96 condition failed: assert !(dir instanceof TrackingDirectoryWrapper);");
   JreStrongAssign(&self->dir_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(dir));
   JreStrongAssign(&self->version__, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(version_));
   JreStrongAssign(&self->name_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(name));
@@ -309,13 +342,17 @@ OrgApacheLuceneIndexSegmentInfo *create_OrgApacheLuceneIndexSegmentInfo_initWith
 }
 
 void OrgApacheLuceneIndexSegmentInfo_checkFileNamesWithJavaUtilCollection_(OrgApacheLuceneIndexSegmentInfo *self, id<JavaUtilCollection> files) {
-  JavaUtilRegexMatcher *m = [((JavaUtilRegexPattern *) nil_chk(JreLoadStatic(OrgApacheLuceneIndexIndexFileNames, CODEC_FILE_PATTERN))) matcherWithJavaLangCharSequence:@""];
+  JavaUtilRegexMatcher *m = JreRetainedLocalValue([((JavaUtilRegexPattern *) nil_chk(JreLoadStatic(OrgApacheLuceneIndexIndexFileNames, CODEC_FILE_PATTERN))) matcherWithJavaLangCharSequence:@""]);
   for (NSString * __strong file in nil_chk(files)) {
     [((JavaUtilRegexMatcher *) nil_chk(m)) resetWithJavaLangCharSequence:file];
     if (![m matches]) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$", @"invalid codec filename '", file, @"', must match: ", [JreLoadStatic(OrgApacheLuceneIndexIndexFileNames, CODEC_FILE_PATTERN) pattern]));
     }
   }
+}
+
+IOSObjectArray *OrgApacheLuceneIndexSegmentInfo__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentInfo)

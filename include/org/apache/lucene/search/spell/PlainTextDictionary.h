@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpellPlainTextDictionary
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpellPlainTextDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellPlainTextDictionary || defined(INCLUDE_OrgApacheLuceneSearchSpellPlainTextDictionary))
 #define OrgApacheLuceneSearchSpellPlainTextDictionary_
 
@@ -28,9 +34,9 @@
 /*!
  @brief Dictionary represented by a text file.
  <p>Format allowed: 1 word per line:<br>
- word1<br>
- word2<br>
- word3<br>
+  word1<br>
+  word2<br>
+  word3<br>
  */
 @interface OrgApacheLuceneSearchSpellPlainTextDictionary : NSObject < OrgApacheLuceneSearchSpellDictionary >
 
@@ -39,23 +45,27 @@
 /*!
  @brief Creates a dictionary based on an inputstream.
  <p>
- NOTE: content is treated as UTF-8
+  NOTE: content is treated as UTF-8
  */
-- (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)dictFile;
+- (instancetype __nonnull)initWithJavaIoInputStream:(JavaIoInputStream *)dictFile;
 
 /*!
  @brief Creates a dictionary based on a Path.
  <p>
- NOTE: content is treated as UTF-8
+  NOTE: content is treated as UTF-8
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
 /*!
  @brief Creates a dictionary based on a reader.
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)reader;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)reader;
 
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -101,7 +111,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellPlainTextDictionary)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchSpellPlainTextDictionary:(OrgApacheLuceneSearchSpellPlainTextDictionary *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpellPlainTextDictionary:(OrgApacheLuceneSearchSpellPlainTextDictionary *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -117,4 +131,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellPlainTextDictionary_FileIte
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellPlainTextDictionary")

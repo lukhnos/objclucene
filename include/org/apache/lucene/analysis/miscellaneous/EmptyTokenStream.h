@@ -13,12 +13,21 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream))
 #define OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_
 
 #define RESTRICT_OrgApacheLuceneAnalysisTokenStream 1
 #define INCLUDE_OrgApacheLuceneAnalysisTokenStream 1
 #include "org/apache/lucene/analysis/TokenStream.h"
+
+@class OrgApacheLuceneUtilAttributeFactory;
+@class OrgApacheLuceneUtilAttributeSource;
 
 /*!
  @brief An always exhausted token stream.
@@ -27,9 +36,15 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jboolean)incrementToken;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -37,12 +52,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init(OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *new_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *new_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *create_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *create_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream")

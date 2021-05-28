@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinBitSetProducer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinBitSetProducer_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinBitSetProducer || defined(INCLUDE_OrgApacheLuceneSearchJoinBitSetProducer))
 #define OrgApacheLuceneSearchJoinBitSetProducer_
 
@@ -22,12 +28,11 @@
 /*!
  @brief A producer of <code>BitSet</code>s per segment.
  */
-@protocol OrgApacheLuceneSearchJoinBitSetProducer < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchJoinBitSetProducer < JavaObject >
 
 /*!
  @brief Produce a <code>BitSet</code> matching the expected documents on the given
- segment.
- This may return <code>null</code> if no documents match.
+  segment.This may return <code>null</code> if no documents match.
  */
 - (OrgApacheLuceneUtilBitSet *)getBitSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -39,4 +44,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBitSetProducer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinBitSetProducer")

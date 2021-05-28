@@ -12,6 +12,10 @@
 #include "org/apache/lucene/document/FieldType.h"
 #include "org/apache/lucene/index/DocValuesType.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/bkdtree/BKDPointField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneBkdtreeBKDPointField)
 
 OrgApacheLuceneDocumentFieldType *OrgApacheLuceneBkdtreeBKDPointField_TYPE;
@@ -29,6 +33,23 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneBkdtreeBKDPointField_TYPE;
   return self;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withDouble:withDouble:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "TYPE", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;DD", &OrgApacheLuceneBkdtreeBKDPointField_TYPE };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDPointField = { "BKDPointField", "org.apache.lucene.bkdtree", ptrTable, methods, fields, 7, 0x11, 1, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneBkdtreeBKDPointField;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneBkdtreeBKDPointField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneBkdtreeBKDPointField_TYPE, new_OrgApacheLuceneDocumentFieldType_init());
@@ -38,17 +59,6 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneBkdtreeBKDPointField_TYPE;
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneBkdtreeBKDPointField)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDouble:withDouble:", "BKDPointField", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "TYPE", "TYPE", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneBkdtreeBKDPointField_TYPE, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDPointField = { 2, "BKDPointField", "org.apache.lucene.bkdtree", NULL, 0x11, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneBkdtreeBKDPointField;
 }
 
 @end

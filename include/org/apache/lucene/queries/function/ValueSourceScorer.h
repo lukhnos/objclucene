@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValueSourceScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValueSourceScorer_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSourceScorer || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValueSourceScorer))
 #define OrgApacheLuceneQueriesFunctionValueSourceScorer_
 
@@ -22,10 +28,11 @@
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneQueriesFunctionFunctionValues;
+@class OrgApacheLuceneSearchWeight;
 
 /*!
  @brief <code>Scorer</code> which returns the result of <code>FunctionValues.floatVal(int)</code> as
- the score for a document.
+  the score for a document.
  */
 @interface OrgApacheLuceneQueriesFunctionValueSourceScorer : OrgApacheLuceneSearchScorer {
  @public
@@ -59,8 +66,12 @@
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-       withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                 withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -79,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSourceScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSourceScorer")

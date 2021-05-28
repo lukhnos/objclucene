@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMultiBits
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMultiBits_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiBits || defined(INCLUDE_OrgApacheLuceneIndexMultiBits))
 #define OrgApacheLuceneIndexMultiBits_
 
@@ -28,25 +34,25 @@
 /*!
  @brief Concatenates multiple Bits together, on every lookup.
  <p><b>NOTE</b>: This is very costly, as every lookup must
- do a binary search to locate the right sub-reader.
+  do a binary search to locate the right sub-reader.
  */
 @interface OrgApacheLuceneIndexMultiBits : NSObject < OrgApacheLuceneUtilBits >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilBitsArray:(IOSObjectArray *)subs
-                                        withIntArray:(IOSIntArray *)starts
-                                         withBoolean:(jboolean)defaultValue;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilBitsArray:(IOSObjectArray *)subs
+                                                                withIntArray:(IOSIntArray *)starts
+                                                                 withBoolean:(jboolean)defaultValue;
 
 - (jboolean)getWithInt:(jint)doc;
 
 /*!
  @brief Returns a sub-Bits matching the provided <code>slice</code>
  <p>
- Because <code>null</code> usually has a special meaning for
- Bits (e.g. no deleted documents), you must check
+  Because <code>null</code> usually has a special meaning for
+  Bits (e.g. no deleted documents), you must check 
  <code>SubResult.matches</code> instead to ensure the sub was 
- actually found.
+  actually found.
  */
 - (OrgApacheLuceneIndexMultiBits_SubResult *)getMatchingSubWithOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)slice;
 
@@ -54,15 +60,19 @@
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiBits)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(OrgApacheLuceneIndexMultiBits *self, IOSObjectArray *subs, IOSIntArray *starts, jboolean defaultValue);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiBits_initPackagePrivateWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(OrgApacheLuceneIndexMultiBits *self, IOSObjectArray *subs, IOSIntArray *starts, jboolean defaultValue);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits *new_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(IOSObjectArray *subs, IOSIntArray *starts, jboolean defaultValue) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits *new_OrgApacheLuceneIndexMultiBits_initPackagePrivateWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(IOSObjectArray *subs, IOSIntArray *starts, jboolean defaultValue) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits *create_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(IOSObjectArray *subs, IOSIntArray *starts, jboolean defaultValue);
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits *create_OrgApacheLuceneIndexMultiBits_initPackagePrivateWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(IOSObjectArray *subs, IOSIntArray *starts, jboolean defaultValue);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiBits)
 
@@ -74,7 +84,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiBits)
 @protocol OrgApacheLuceneUtilBits;
 
 /*!
- @brief Represents a sub-Bits from 
+ @brief Represents a sub-Bits from  
  <code>getMatchingSub()</code>.
  */
 @interface OrgApacheLuceneIndexMultiBits_SubResult : NSObject {
@@ -85,7 +95,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiBits)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -95,12 +105,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiBits_SubResult, result_, id<OrgApac
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiBits_SubResult_init(OrgApacheLuceneIndexMultiBits_SubResult *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits_SubResult *new_OrgApacheLuceneIndexMultiBits_SubResult_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits_SubResult *new_OrgApacheLuceneIndexMultiBits_SubResult_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits_SubResult *create_OrgApacheLuceneIndexMultiBits_SubResult_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits_SubResult *create_OrgApacheLuceneIndexMultiBits_SubResult_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiBits_SubResult)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiBits")

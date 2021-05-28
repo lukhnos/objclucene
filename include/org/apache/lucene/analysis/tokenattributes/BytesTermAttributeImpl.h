@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl))
 #define OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_
 
@@ -41,11 +47,11 @@
 /*!
  @brief Initialize this attribute with no bytes.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)clear;
 
-- (OrgApacheLuceneUtilAttributeImpl *)clone;
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone;
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target OBJC_METHOD_FAMILY_NONE;
 
@@ -61,12 +67,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenattributesBytesTermAttribut
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init(OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl")

@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/PrintStream.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Math.h"
@@ -34,6 +33,10 @@
 #include "org/apache/lucene/util/fst/FST.h"
 #include "org/apache/lucene/util/fst/Outputs.h"
 #include "org/apache/lucene/util/fst/Util.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/blocktree/SegmentTermsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum () {
  @public
@@ -73,16 +76,18 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
 
 __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_setEOF(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *self);
 
+__attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_printSeekStateWithJavaIoPrintStream_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *self, JavaIoPrintStream *outArg);
+
 @implementation OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum
 
-- (instancetype)initWithOrgApacheLuceneCodecsBlocktreeFieldReader:(OrgApacheLuceneCodecsBlocktreeFieldReader *)fr {
-  OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(self, fr);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader:(OrgApacheLuceneCodecsBlocktreeFieldReader *)fr {
+  OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_(self, fr);
   return self;
 }
 
 - (void)initIndexInput {
   if (self->in_ == nil) {
-    JreStrongAssign(&self->in_, [((OrgApacheLuceneStoreIndexInput *) nil_chk(((OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *) nil_chk(((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(fr_))->parent_))->termsIn_)) clone]);
+    JreStrongAssign(&self->in_, [((OrgApacheLuceneStoreIndexInput *) nil_chk(((OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *) nil_chk(((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(fr_))->parent_))->termsIn_)) java_clone]);
   }
 }
 
@@ -95,7 +100,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
   OrgApacheLuceneUtilFstFST_Arc *arc;
   if (fr_->index_ != nil) {
     arc = [fr_->index_ getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:IOSObjectArray_Get(nil_chk(arcs_), 0)];
-    JreAssert(([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:135 condition failed: assert arc.isFinal();"));
+    JreAssert([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:135 condition failed: assert arc.isFinal();");
   }
   else {
     arc = nil;
@@ -119,7 +124,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
         }
         jlong lastFP = currentFrame_->fpOrig_;
         JreStrongAssign(&currentFrame_, IOSObjectArray_Get(nil_chk(stack_), currentFrame_->ord_ - 1));
-        JreAssert((lastFP == ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->lastSubFP_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:166 condition failed: assert lastFP == currentFrame.lastSubFP;"));
+        JreAssert(lastFP == ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->lastSubFP_, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:166 condition failed: assert lastFP == currentFrame.lastSubFP;");
       }
     }
     while (true) {
@@ -140,7 +145,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
   JreStrongAssign(&currentFrame_, staticFrame_);
   if (fr_->index_ != nil) {
     arc = [fr_->index_ getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:IOSObjectArray_Get(nil_chk(arcs_), 0)];
-    JreAssert(([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:197 condition failed: assert arc.isFinal();"));
+    JreAssert([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:197 condition failed: assert arc.isFinal();");
   }
   else {
     arc = nil;
@@ -189,7 +194,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
     }
     else {
     }
-    JreAssert((length == f->prefix_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:268 condition failed: assert length == f.prefix;"));
+    JreAssert(length == f->prefix_, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:268 condition failed: assert length == f.prefix;");
   }
   else {
     f->nextEnt_ = -1;
@@ -214,18 +219,18 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"terms index was not loaded");
   }
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term_)) growWithInt:1 + ((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->length_];
-  JreAssert((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_clearEOF(self)), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:328 condition failed: assert clearEOF();"));
+  JreAssert(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_clearEOF(self), @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:328 condition failed: assert clearEOF();");
   OrgApacheLuceneUtilFstFST_Arc *arc;
   jint targetUpto;
   OrgApacheLuceneUtilBytesRef *output;
   targetBeforeCurrentLength_ = ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->ord_;
-  if (currentFrame_ != staticFrame_) {
+  if (!JreObjectEqualsEquals(currentFrame_, staticFrame_)) {
     arc = IOSObjectArray_Get(nil_chk(arcs_), 0);
-    JreAssert(([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:355 condition failed: assert arc.isFinal();"));
-    output = ((OrgApacheLuceneUtilBytesRef *) arc->output_);
+    JreAssert([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:355 condition failed: assert arc.isFinal();");
+    output = arc->output_;
     targetUpto = 0;
     OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *lastFrame = IOSObjectArray_Get(nil_chk(stack_), 0);
-    JreAssert((validIndexPrefix_ <= [term_ length]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:360 condition failed: assert validIndexPrefix <= term.length();"));
+    JreAssert(validIndexPrefix_ <= [term_ length], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:360 condition failed: assert validIndexPrefix <= term.length();");
     jint targetLimit = JavaLangMath_minWithInt_withInt_(target->length_, validIndexPrefix_);
     jint cmp = 0;
     while (targetUpto < targetLimit) {
@@ -234,9 +239,9 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
         break;
       }
       arc = IOSObjectArray_Get(nil_chk(arcs_), 1 + targetUpto);
-      JreAssert((((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_ == (IOSByteArray_Get(target->bytes_, target->offset_ + targetUpto) & (jint) 0xFF)), (JreStrcat("$C$C", @"arc.label=", (jchar) arc->label_, @" targetLabel=", (jchar) (IOSByteArray_Get(target->bytes_, target->offset_ + targetUpto) & (jint) 0xFF))));
-      if (arc->output_ != JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, NO_OUTPUT)) {
-        output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:((OrgApacheLuceneUtilBytesRef *) arc->output_)];
+      JreAssert(((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_ == (IOSByteArray_Get(target->bytes_, target->offset_ + targetUpto) & (jint) 0xFF), JreStrcat("$C$C", @"arc.label=", (jchar) arc->label_, @" targetLabel=", (jchar) (IOSByteArray_Get(target->bytes_, target->offset_ + targetUpto) & (jint) 0xFF)));
+      if (!JreObjectEqualsEquals(arc->output_, JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, NO_OUTPUT))) {
+        output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:arc->output_];
       }
       if ([arc isFinal]) {
         lastFrame = IOSObjectArray_Get(nil_chk(stack_), 1 + ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(lastFrame))->ord_);
@@ -267,7 +272,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
       [currentFrame_ rewind];
     }
     else {
-      JreAssert(([term_ length] == target->length_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:436 condition failed: assert term.length() == target.length;"));
+      JreAssert([term_ length] == target->length_, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:436 condition failed: assert term.length() == target.length;");
       if (termExists_) {
         return true;
       }
@@ -278,12 +283,12 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
   else {
     targetBeforeCurrentLength_ = -1;
     arc = [fr_->index_ getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:IOSObjectArray_Get(nil_chk(arcs_), 0)];
-    JreAssert(([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:458 condition failed: assert arc.isFinal();"));
-    JreAssert((arc->output_ != nil), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:459 condition failed: assert arc.output != null;"));
-    output = ((OrgApacheLuceneUtilBytesRef *) arc->output_);
+    JreAssert([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:458 condition failed: assert arc.isFinal();");
+    JreAssert(arc->output_ != nil, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:459 condition failed: assert arc.output != null;");
+    output = arc->output_;
     JreStrongAssign(&currentFrame_, staticFrame_);
     targetUpto = 0;
-    JreStrongAssign(&currentFrame_, [self pushFrameWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:((OrgApacheLuceneUtilBytesRef *) arc->nextFinalOutput_)] withInt:0]);
+    JreStrongAssign(&currentFrame_, [self pushFrameWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:arc->nextFinalOutput_] withInt:0]);
   }
   while (targetUpto < target->length_) {
     jint targetLabel = IOSByteArray_Get(nil_chk(target->bytes_), target->offset_ + targetUpto) & (jint) 0xFF;
@@ -309,13 +314,13 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
     else {
       arc = nextArc;
       [term_ setByteAtWithInt:targetUpto withByte:(jbyte) targetLabel];
-      JreAssert((arc->output_ != nil), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:526 condition failed: assert arc.output != null;"));
-      if (arc->output_ != JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, NO_OUTPUT)) {
-        output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:((OrgApacheLuceneUtilBytesRef *) arc->output_)];
+      JreAssert(arc->output_ != nil, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:526 condition failed: assert arc.output != null;");
+      if (!JreObjectEqualsEquals(arc->output_, JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, NO_OUTPUT))) {
+        output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:arc->output_];
       }
       targetUpto++;
       if ([arc isFinal]) {
-        JreStrongAssign(&currentFrame_, [self pushFrameWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:((OrgApacheLuceneUtilBytesRef *) arc->nextFinalOutput_)] withInt:targetUpto]);
+        JreStrongAssign(&currentFrame_, [self pushFrameWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:arc->nextFinalOutput_] withInt:targetUpto]);
       }
     }
   }
@@ -341,18 +346,18 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"terms index was not loaded");
   }
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term_)) growWithInt:1 + ((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->length_];
-  JreAssert((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_clearEOF(self)), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:585 condition failed: assert clearEOF();"));
+  JreAssert(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_clearEOF(self), @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:585 condition failed: assert clearEOF();");
   OrgApacheLuceneUtilFstFST_Arc *arc;
   jint targetUpto;
   OrgApacheLuceneUtilBytesRef *output;
   targetBeforeCurrentLength_ = ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->ord_;
-  if (currentFrame_ != staticFrame_) {
+  if (!JreObjectEqualsEquals(currentFrame_, staticFrame_)) {
     arc = IOSObjectArray_Get(nil_chk(arcs_), 0);
-    JreAssert(([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:612 condition failed: assert arc.isFinal();"));
-    output = ((OrgApacheLuceneUtilBytesRef *) arc->output_);
+    JreAssert([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:612 condition failed: assert arc.isFinal();");
+    output = arc->output_;
     targetUpto = 0;
     OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *lastFrame = IOSObjectArray_Get(nil_chk(stack_), 0);
-    JreAssert((validIndexPrefix_ <= [term_ length]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:617 condition failed: assert validIndexPrefix <= term.length();"));
+    JreAssert(validIndexPrefix_ <= [term_ length], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:617 condition failed: assert validIndexPrefix <= term.length();");
     jint targetLimit = JavaLangMath_minWithInt_withInt_(target->length_, validIndexPrefix_);
     jint cmp = 0;
     while (targetUpto < targetLimit) {
@@ -361,9 +366,9 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
         break;
       }
       arc = IOSObjectArray_Get(nil_chk(arcs_), 1 + targetUpto);
-      JreAssert((((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_ == (IOSByteArray_Get(target->bytes_, target->offset_ + targetUpto) & (jint) 0xFF)), (JreStrcat("$C$C", @"arc.label=", (jchar) arc->label_, @" targetLabel=", (jchar) (IOSByteArray_Get(target->bytes_, target->offset_ + targetUpto) & (jint) 0xFF))));
-      if (arc->output_ != JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, NO_OUTPUT)) {
-        output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:((OrgApacheLuceneUtilBytesRef *) arc->output_)];
+      JreAssert(((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_ == (IOSByteArray_Get(target->bytes_, target->offset_ + targetUpto) & (jint) 0xFF), JreStrcat("$C$C", @"arc.label=", (jchar) arc->label_, @" targetLabel=", (jchar) (IOSByteArray_Get(target->bytes_, target->offset_ + targetUpto) & (jint) 0xFF)));
+      if (!JreObjectEqualsEquals(arc->output_, JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, NO_OUTPUT))) {
+        output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:arc->output_];
       }
       if ([arc isFinal]) {
         lastFrame = IOSObjectArray_Get(nil_chk(stack_), 1 + ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(lastFrame))->ord_);
@@ -394,7 +399,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
       [((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_)) rewind];
     }
     else {
-      JreAssert(([term_ length] == target->length_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:696 condition failed: assert term.length() == target.length;"));
+      JreAssert([term_ length] == target->length_, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:696 condition failed: assert term.length() == target.length;");
       if (termExists_) {
         return JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND);
       }
@@ -405,12 +410,12 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
   else {
     targetBeforeCurrentLength_ = -1;
     arc = [fr_->index_ getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:IOSObjectArray_Get(nil_chk(arcs_), 0)];
-    JreAssert(([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:715 condition failed: assert arc.isFinal();"));
-    JreAssert((arc->output_ != nil), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:716 condition failed: assert arc.output != null;"));
-    output = ((OrgApacheLuceneUtilBytesRef *) arc->output_);
+    JreAssert([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:715 condition failed: assert arc.isFinal();");
+    JreAssert(arc->output_ != nil, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:716 condition failed: assert arc.output != null;");
+    output = arc->output_;
     JreStrongAssign(&currentFrame_, staticFrame_);
     targetUpto = 0;
-    JreStrongAssign(&currentFrame_, [self pushFrameWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:((OrgApacheLuceneUtilBytesRef *) arc->nextFinalOutput_)] withInt:0]);
+    JreStrongAssign(&currentFrame_, [self pushFrameWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:arc->nextFinalOutput_] withInt:0]);
   }
   while (targetUpto < target->length_) {
     jint targetLabel = IOSByteArray_Get(nil_chk(target->bytes_), target->offset_ + targetUpto) & (jint) 0xFF;
@@ -437,13 +442,13 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
     else {
       [term_ setByteAtWithInt:targetUpto withByte:(jbyte) targetLabel];
       arc = nextArc;
-      JreAssert((arc->output_ != nil), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:784 condition failed: assert arc.output != null;"));
-      if (arc->output_ != JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, NO_OUTPUT)) {
-        output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:((OrgApacheLuceneUtilBytesRef *) arc->output_)];
+      JreAssert(arc->output_ != nil, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:784 condition failed: assert arc.output != null;");
+      if (!JreObjectEqualsEquals(arc->output_, JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, NO_OUTPUT))) {
+        output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:arc->output_];
       }
       targetUpto++;
       if ([arc isFinal]) {
-        JreStrongAssign(&currentFrame_, [self pushFrameWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:((OrgApacheLuceneUtilBytesRef *) arc->nextFinalOutput_)] withInt:targetUpto]);
+        JreStrongAssign(&currentFrame_, [self pushFrameWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader, FST_OUTPUTS))) addWithId:output withId:arc->nextFinalOutput_] withInt:targetUpto]);
       }
     }
   }
@@ -467,53 +472,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
 }
 
 - (void)printSeekStateWithJavaIoPrintStream:(JavaIoPrintStream *)outArg {
-  if (currentFrame_ == staticFrame_) {
-    [((JavaIoPrintStream *) nil_chk(outArg)) printlnWithNSString:@"  no prior seek"];
-  }
-  else {
-    [((JavaIoPrintStream *) nil_chk(outArg)) printlnWithNSString:@"  prior seek state:"];
-    __unused jint ord = 0;
-    __unused jboolean isSeekFrame = true;
-    while (true) {
-      __unused OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *f = OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_getFrameWithInt_(self, ord);
-      JreAssert((f != nil), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:840 condition failed: assert f != null;"));
-      __unused OrgApacheLuceneUtilBytesRef *prefix = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term_)) get]))->bytes_, 0, ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(f))->prefix_);
-      if (f->nextEnt_ == -1) {
-        [outArg printlnWithNSString:JreStrcat("$$$I$J$$I$@$$Z$Z$J$Z$I$I", @"    frame ", (isSeekFrame ? @"(seek)" : @"(next)"), @" ord=", ord, @" fp=", f->fp_, (f->isFloor_ ? (JreStrcat("$JC", @" (fpOrig=", f->fpOrig_, ')')) : @""), @" prefixLen=", f->prefix_, @" prefix=", prefix, (f->nextEnt_ == -1 ? @"" : (JreStrcat("$IC", @" (of ", f->entCount_, ')'))), @" hasTerms=", f->hasTerms_, @" isFloor=", f->isFloor_, @" code=", ((JreLShift64(f->fp_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_NUM_BITS)) + (f->hasTerms_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_HAS_TERMS : 0) + (f->isFloor_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_IS_FLOOR : 0)), @" isLastInFloor=", f->isLastInFloor_, @" mdUpto=", f->metaDataUpto_, @" tbOrd=", [f getTermBlockOrd])];
-      }
-      else {
-        [outArg printlnWithNSString:JreStrcat("$$$I$J$$I$@$I$$Z$Z$J$J$Z$I$I", @"    frame ", (isSeekFrame ? @"(seek, loaded)" : @"(next, loaded)"), @" ord=", ord, @" fp=", f->fp_, (f->isFloor_ ? (JreStrcat("$JC", @" (fpOrig=", f->fpOrig_, ')')) : @""), @" prefixLen=", f->prefix_, @" prefix=", prefix, @" nextEnt=", f->nextEnt_, (f->nextEnt_ == -1 ? @"" : (JreStrcat("$IC", @" (of ", f->entCount_, ')'))), @" hasTerms=", f->hasTerms_, @" isFloor=", f->isFloor_, @" code=", ((JreLShift64(f->fp_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_NUM_BITS)) + (f->hasTerms_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_HAS_TERMS : 0) + (f->isFloor_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_IS_FLOOR : 0)), @" lastSubFP=", f->lastSubFP_, @" isLastInFloor=", f->isLastInFloor_, @" mdUpto=", f->metaDataUpto_, @" tbOrd=", [f getTermBlockOrd])];
-      }
-      if (((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(fr_))->index_ != nil) {
-        JreAssert((!isSeekFrame || f->arc_ != nil), (JreStrcat("$Z$@", @"isSeekFrame=", isSeekFrame, @" f.arc=", f->arc_)));
-        if (f->prefix_ > 0 && isSeekFrame && ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(f->arc_))->label_ != ([term_ byteAtWithInt:f->prefix_ - 1] & (jint) 0xFF)) {
-          [outArg printlnWithNSString:JreStrcat("$C$C", @"      broken seek state: arc.label=", (jchar) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(f->arc_))->label_, @" vs term byte=", (jchar) ([term_ byteAtWithInt:f->prefix_ - 1] & (jint) 0xFF))];
-          @throw create_JavaLangRuntimeException_initWithNSString_(@"seek state is broken");
-        }
-        __unused OrgApacheLuceneUtilBytesRef *output = OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRef_(fr_->index_, prefix);
-        if (output == nil) {
-          [outArg printlnWithNSString:@"      broken seek state: prefix is not final in index"];
-          @throw create_JavaLangRuntimeException_initWithNSString_(@"seek state is broken");
-        }
-        else if (isSeekFrame && !f->isFloor_) {
-          __unused OrgApacheLuceneStoreByteArrayDataInput *reader = create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(output->bytes_, output->offset_, output->length_);
-          __unused jlong codeOrig = [reader readVLong];
-          __unused jlong code = (JreLShift64(f->fp_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_NUM_BITS)) | (f->hasTerms_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_HAS_TERMS : 0) | (f->isFloor_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_IS_FLOOR : 0);
-          if (codeOrig != code) {
-            [outArg printlnWithNSString:JreStrcat("$J$J", @"      broken seek state: output code=", codeOrig, @" doesn't match frame code=", code)];
-            @throw create_JavaLangRuntimeException_initWithNSString_(@"seek state is broken");
-          }
-        }
-      }
-      if (f == currentFrame_) {
-        break;
-      }
-      if (f->prefix_ == validIndexPrefix_) {
-        isSeekFrame = false;
-      }
-      ord++;
-    }
-  }
+  OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_printSeekStateWithJavaIoPrintStream_(self, outArg);
 }
 
 - (OrgApacheLuceneUtilBytesRef *)next {
@@ -521,7 +480,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
     OrgApacheLuceneUtilFstFST_Arc *arc;
     if (((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(fr_))->index_ != nil) {
       arc = [fr_->index_ getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:IOSObjectArray_Get(nil_chk(arcs_), 0)];
-      JreAssert(([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:889 condition failed: assert arc.isFinal();"));
+      JreAssert([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:889 condition failed: assert arc.isFinal();");
     }
     else {
       arc = nil;
@@ -530,10 +489,10 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
     [((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_)) loadBlock];
   }
   targetBeforeCurrentLength_ = ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->ord_;
-  JreAssert((!eof_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:899 condition failed: assert !eof;"));
-  if (currentFrame_ == staticFrame_) {
+  JreAssert(!eof_, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:899 condition failed: assert !eof;");
+  if (JreObjectEqualsEquals(currentFrame_, staticFrame_)) {
     jboolean result = [self seekExactWithOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term_)) get]];
-    JreAssert((result), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:914 condition failed: assert result;"));
+    JreAssert(result, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:914 condition failed: assert result;");
   }
   while (((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->nextEnt_ == currentFrame_->entCount_) {
     if (!currentFrame_->isLastInFloor_) {
@@ -542,7 +501,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
     }
     else {
       if (currentFrame_->ord_ == 0) {
-        JreAssert((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_setEOF(self)), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:927 condition failed: assert setEOF();"));
+        JreAssert(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_setEOF(self), @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:927 condition failed: assert setEOF();");
         [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term_)) clear];
         validIndexPrefix_ = 0;
         [((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_)) rewind];
@@ -571,39 +530,39 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
 }
 
 - (OrgApacheLuceneUtilBytesRef *)term {
-  JreAssert((!eof_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:972 condition failed: assert !eof;"));
+  JreAssert(!eof_, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:972 condition failed: assert !eof;");
   return [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term_)) get];
 }
 
 - (jint)docFreq {
-  JreAssert((!eof_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:978 condition failed: assert !eof;"));
+  JreAssert(!eof_, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:978 condition failed: assert !eof;");
   [((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_)) decodeMetaData];
   return ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->state_))->docFreq_;
 }
 
 - (jlong)totalTermFreq {
-  JreAssert((!eof_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:987 condition failed: assert !eof;"));
+  JreAssert(!eof_, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:987 condition failed: assert !eof;");
   [((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_)) decodeMetaData];
   return ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->state_))->totalTermFreq_;
 }
 
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags {
-  JreAssert((!eof_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:994 condition failed: assert !eof;"));
+  JreAssert(!eof_, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:994 condition failed: assert !eof;");
   [((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_)) decodeMetaData];
   return [((OrgApacheLuceneCodecsPostingsReaderBase *) nil_chk(((OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *) nil_chk(((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(fr_))->parent_))->postingsReader_)) postingsWithOrgApacheLuceneIndexFieldInfo:fr_->fieldInfo_ withOrgApacheLuceneCodecsBlockTermState:((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->state_ withOrgApacheLuceneIndexPostingsEnum:reuse withInt:flags];
 }
 
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)otherState {
-  JreAssert((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_clearEOF(self)), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:1010 condition failed: assert clearEOF();"));
+  JreAssert(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_clearEOF(self), @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:1010 condition failed: assert clearEOF();");
   if ([((OrgApacheLuceneUtilBytesRef *) nil_chk(target)) compareToWithId:[((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term_)) get]] != 0 || !termExists_) {
-    JreAssert((otherState != nil && [otherState isKindOfClass:[OrgApacheLuceneCodecsBlockTermState class]]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:1012 condition failed: assert otherState != null && otherState instanceof BlockTermState;"));
+    JreAssert(otherState != nil && [otherState isKindOfClass:[OrgApacheLuceneCodecsBlockTermState class]], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:1012 condition failed: assert otherState != null && otherState instanceof BlockTermState;");
     JreStrongAssign(&currentFrame_, staticFrame_);
     [((OrgApacheLuceneCodecsBlockTermState *) nil_chk(((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->state_)) copyFromWithOrgApacheLuceneIndexTermState:otherState];
     [term_ copyBytesWithOrgApacheLuceneUtilBytesRef:target];
     ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->metaDataUpto_ = [currentFrame_ getTermBlockOrd];
-    JreAssert((((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->metaDataUpto_ > 0), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:1017 condition failed: assert currentFrame.metaDataUpto > 0;"));
+    JreAssert(((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->metaDataUpto_ > 0, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:1017 condition failed: assert currentFrame.metaDataUpto > 0;");
     validIndexPrefix_ = 0;
   }
   else {
@@ -611,9 +570,9 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
 }
 
 - (OrgApacheLuceneIndexTermState *)termState {
-  JreAssert((!eof_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:1028 condition failed: assert !eof;"));
+  JreAssert(!eof_, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:1028 condition failed: assert !eof;");
   [((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_)) decodeMetaData];
-  OrgApacheLuceneIndexTermState *ts = [((OrgApacheLuceneCodecsBlockTermState *) nil_chk(((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->state_)) clone];
+  OrgApacheLuceneIndexTermState *ts = JreRetainedLocalValue([((OrgApacheLuceneCodecsBlockTermState *) nil_chk(((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(currentFrame_))->state_)) java_clone]);
   return ts;
 }
 
@@ -639,58 +598,84 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsBlocktreeSegmentTer
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsBlocktreeFieldReader:", "SegmentTermsEnum", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initIndexInput", NULL, "V", 0x0, NULL, NULL },
-    { "computeBlockStats", NULL, "Lorg.apache.lucene.codecs.blocktree.Stats;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getFrameWithInt:", "getFrame", "Lorg.apache.lucene.codecs.blocktree.SegmentTermsEnumFrame;", 0x2, "Ljava.io.IOException;", NULL },
-    { "getArcWithInt:", "getArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x2, NULL, "(I)Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;" },
-    { "pushFrameWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilBytesRef:withInt:", "pushFrame", "Lorg.apache.lucene.codecs.blocktree.SegmentTermsEnumFrame;", 0x0, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/BytesRef;I)Lorg/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame;" },
-    { "pushFrameWithOrgApacheLuceneUtilFstFST_Arc:withLong:withInt:", "pushFrame", "Lorg.apache.lucene.codecs.blocktree.SegmentTermsEnumFrame;", 0x0, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;JI)Lorg/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame;" },
-    { "clearEOF", NULL, "Z", 0x2, NULL, NULL },
-    { "setEOF", NULL, "Z", 0x2, NULL, NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
-    { "printSeekStateWithJavaIoPrintStream:", "printSeekState", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "docFreq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "totalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:", "seekExact", "V", 0x1, NULL, NULL },
-    { "termState", NULL, "Lorg.apache.lucene.index.TermState;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, NULL, NULL },
-    { "ord", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsBlocktreeStats;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;", 0x2, 2, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstFST_Arc;", 0x2, 4, 3, -1, 5, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;", 0x0, 6, 7, 1, 8, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;", 0x0, 6, 9, 1, 10, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 11, 12, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum_SeekStatus;", 0x1, 13, 12, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 14, 15, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 16, 17, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 18, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermState;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 19, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader:);
+  methods[1].selector = @selector(initIndexInput);
+  methods[2].selector = @selector(computeBlockStats);
+  methods[3].selector = @selector(getFrameWithInt:);
+  methods[4].selector = @selector(getArcWithInt:);
+  methods[5].selector = @selector(pushFrameWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilBytesRef:withInt:);
+  methods[6].selector = @selector(pushFrameWithOrgApacheLuceneUtilFstFST_Arc:withLong:withInt:);
+  methods[7].selector = @selector(clearEOF);
+  methods[8].selector = @selector(setEOF);
+  methods[9].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:);
+  methods[10].selector = @selector(seekCeilWithOrgApacheLuceneUtilBytesRef:);
+  methods[11].selector = @selector(printSeekStateWithJavaIoPrintStream:);
+  methods[12].selector = @selector(next);
+  methods[13].selector = @selector(term);
+  methods[14].selector = @selector(docFreq);
+  methods[15].selector = @selector(totalTermFreq);
+  methods[16].selector = @selector(postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:);
+  methods[17].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:);
+  methods[18].selector = @selector(termState);
+  methods[19].selector = @selector(seekExactWithLong:);
+  methods[20].selector = @selector(ord);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x0, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stack_", NULL, 0x2, "[Lorg.apache.lucene.codecs.blocktree.SegmentTermsEnumFrame;", NULL, NULL, .constantValue.asLong = 0 },
-    { "staticFrame_", NULL, 0x12, "Lorg.apache.lucene.codecs.blocktree.SegmentTermsEnumFrame;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentFrame_", NULL, 0x0, "Lorg.apache.lucene.codecs.blocktree.SegmentTermsEnumFrame;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termExists_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "fr_", NULL, 0x10, "Lorg.apache.lucene.codecs.blocktree.FieldReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "targetBeforeCurrentLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchReader_", NULL, 0x12, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "validIndexPrefix_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "eof_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "term_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fstReader_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST$BytesReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "arcs_", NULL, 0x2, "[Lorg.apache.lucene.util.fst.FST$Arc;", NULL, "[Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "stack_", "[LOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "staticFrame_", "LOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentFrame_", "LOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "termExists_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fr_", "LOrgApacheLuceneCodecsBlocktreeFieldReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "targetBeforeCurrentLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "scratchReader_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "validIndexPrefix_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "eof_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "term_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fstReader_", "LOrgApacheLuceneUtilFstFST_BytesReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "arcs_", "[LOrgApacheLuceneUtilFstFST_Arc;", .constantValue.asLong = 0, 0x2, -1, -1, 20, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum = { 2, "SegmentTermsEnum", "org.apache.lucene.codecs.blocktree", NULL, 0x10, 21, methods, 13, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsBlocktreeFieldReader;", "LJavaIoIOException;", "getFrame", "I", "getArc", "(I)Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;", "pushFrame", "LOrgApacheLuceneUtilFstFST_Arc;LOrgApacheLuceneUtilBytesRef;I", "(Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/BytesRef;I)Lorg/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame;", "LOrgApacheLuceneUtilFstFST_Arc;JI", "(Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;JI)Lorg/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame;", "seekExact", "LOrgApacheLuceneUtilBytesRef;", "seekCeil", "printSeekState", "LJavaIoPrintStream;", "postings", "LOrgApacheLuceneIndexPostingsEnum;I", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneIndexTermState;", "J", "[Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum = { "SegmentTermsEnum", "org.apache.lucene.codecs.blocktree", ptrTable, methods, fields, 7, 0x10, 21, 13, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum;
 }
 
 @end
 
-void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *self, OrgApacheLuceneCodecsBlocktreeFieldReader *fr) {
+void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *self, OrgApacheLuceneCodecsBlocktreeFieldReader *fr) {
   OrgApacheLuceneIndexTermsEnum_init(self);
   JreStrongAssignAndConsume(&self->scratchReader_, new_OrgApacheLuceneStoreByteArrayDataInput_init());
   JreStrongAssignAndConsume(&self->term_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   JreStrongAssignAndConsume(&self->arcs_, [IOSObjectArray newArrayWithLength:1 type:OrgApacheLuceneUtilFstFST_Arc_class_()]);
   JreStrongAssign(&self->fr_, fr);
   JreStrongAssignAndConsume(&self->stack_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_class_()]);
-  JreStrongAssignAndConsume(&self->staticFrame_, new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(self, -1));
+  JreStrongAssignAndConsume(&self->staticFrame_, new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(self, -1));
   if (((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(fr))->index_ == nil) {
     JreStrongAssign(&self->fstReader_, nil);
   }
@@ -704,7 +689,7 @@ void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodec
   OrgApacheLuceneUtilFstFST_Arc *arc;
   if (fr->index_ != nil) {
     arc = [fr->index_ getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:IOSObjectArray_Get(self->arcs_, 0)];
-    JreAssert(([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:96 condition failed: assert arc.isFinal();"));
+    JreAssert([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal], @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:96 condition failed: assert arc.isFinal();");
   }
   else {
     arc = nil;
@@ -712,12 +697,12 @@ void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodec
   self->validIndexPrefix_ = 0;
 }
 
-OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum, initWithOrgApacheLuceneCodecsBlocktreeFieldReader_, fr)
+OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum, initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_, fr)
 }
 
-OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum, initWithOrgApacheLuceneCodecsBlocktreeFieldReader_, fr)
+OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum, initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_, fr)
 }
 
 OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_getFrameWithInt_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *self, jint ord) {
@@ -725,11 +710,11 @@ OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *OrgApacheLuceneCodecsBlockt
     IOSObjectArray *next = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + ord, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) type:OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_class_()];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->stack_, 0, next, 0, ((IOSObjectArray *) nil_chk(self->stack_))->size_);
     for (jint stackOrd = ((IOSObjectArray *) nil_chk(self->stack_))->size_; stackOrd < next->size_; stackOrd++) {
-      IOSObjectArray_SetAndConsume(next, stackOrd, new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(self, stackOrd));
+      IOSObjectArray_SetAndConsume(next, stackOrd, new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(self, stackOrd));
     }
     JreStrongAssign(&self->stack_, next);
   }
-  JreAssert((((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(IOSObjectArray_Get(self->stack_, ord)))->ord_ == ord), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:219 condition failed: assert stack[ord].ord == ord;"));
+  JreAssert(((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(IOSObjectArray_Get(self->stack_, ord)))->ord_ == ord, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:219 condition failed: assert stack[ord].ord == ord;");
   return IOSObjectArray_Get(self->stack_, ord);
 }
 
@@ -753,6 +738,56 @@ jboolean OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_clearEOF(OrgApacheLucene
 jboolean OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_setEOF(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *self) {
   self->eof_ = true;
   return true;
+}
+
+void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_printSeekStateWithJavaIoPrintStream_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *self, JavaIoPrintStream *outArg) {
+  if (JreObjectEqualsEquals(self->currentFrame_, self->staticFrame_)) {
+    [((JavaIoPrintStream *) nil_chk(outArg)) printlnWithNSString:@"  no prior seek"];
+  }
+  else {
+    [((JavaIoPrintStream *) nil_chk(outArg)) printlnWithNSString:@"  prior seek state:"];
+    __unused jint ord = 0;
+    __unused jboolean isSeekFrame = true;
+    while (true) {
+      __unused OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *f = OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_getFrameWithInt_(self, ord);
+      JreAssert(f != nil, @"org/apache/lucene/codecs/blocktree/SegmentTermsEnum.java:840 condition failed: assert f != null;");
+      __unused OrgApacheLuceneUtilBytesRef *prefix = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->term_)) get]))->bytes_, 0, ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(f))->prefix_);
+      if (f->nextEnt_ == -1) {
+        [outArg printlnWithNSString:JreStrcat("$$$I$J$$I$@$$Z$Z$J$Z$I$I", @"    frame ", (isSeekFrame ? @"(seek)" : @"(next)"), @" ord=", ord, @" fp=", f->fp_, (f->isFloor_ ? (JreStrcat("$JC", @" (fpOrig=", f->fpOrig_, ')')) : @""), @" prefixLen=", f->prefix_, @" prefix=", prefix, (f->nextEnt_ == -1 ? @"" : (JreStrcat("$IC", @" (of ", f->entCount_, ')'))), @" hasTerms=", f->hasTerms_, @" isFloor=", f->isFloor_, @" code=", ((JreLShift64(f->fp_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_NUM_BITS)) + (f->hasTerms_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_HAS_TERMS : 0) + (f->isFloor_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_IS_FLOOR : 0)), @" isLastInFloor=", f->isLastInFloor_, @" mdUpto=", f->metaDataUpto_, @" tbOrd=", [f getTermBlockOrd])];
+      }
+      else {
+        [outArg printlnWithNSString:JreStrcat("$$$I$J$$I$@$I$$Z$Z$J$J$Z$I$I", @"    frame ", (isSeekFrame ? @"(seek, loaded)" : @"(next, loaded)"), @" ord=", ord, @" fp=", f->fp_, (f->isFloor_ ? (JreStrcat("$JC", @" (fpOrig=", f->fpOrig_, ')')) : @""), @" prefixLen=", f->prefix_, @" prefix=", prefix, @" nextEnt=", f->nextEnt_, (f->nextEnt_ == -1 ? @"" : (JreStrcat("$IC", @" (of ", f->entCount_, ')'))), @" hasTerms=", f->hasTerms_, @" isFloor=", f->isFloor_, @" code=", ((JreLShift64(f->fp_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_NUM_BITS)) + (f->hasTerms_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_HAS_TERMS : 0) + (f->isFloor_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_IS_FLOOR : 0)), @" lastSubFP=", f->lastSubFP_, @" isLastInFloor=", f->isLastInFloor_, @" mdUpto=", f->metaDataUpto_, @" tbOrd=", [f getTermBlockOrd])];
+      }
+      if (((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(self->fr_))->index_ != nil) {
+        JreAssert(!isSeekFrame || f->arc_ != nil, JreStrcat("$Z$@", @"isSeekFrame=", isSeekFrame, @" f.arc=", f->arc_));
+        if (f->prefix_ > 0 && isSeekFrame && ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(f->arc_))->label_ != ([self->term_ byteAtWithInt:f->prefix_ - 1] & (jint) 0xFF)) {
+          [outArg printlnWithNSString:JreStrcat("$C$C", @"      broken seek state: arc.label=", (jchar) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(f->arc_))->label_, @" vs term byte=", (jchar) ([self->term_ byteAtWithInt:f->prefix_ - 1] & (jint) 0xFF))];
+          @throw create_JavaLangRuntimeException_initWithNSString_(@"seek state is broken");
+        }
+        __unused OrgApacheLuceneUtilBytesRef *output = OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRef_(self->fr_->index_, prefix);
+        if (output == nil) {
+          [outArg printlnWithNSString:@"      broken seek state: prefix is not final in index"];
+          @throw create_JavaLangRuntimeException_initWithNSString_(@"seek state is broken");
+        }
+        else if (isSeekFrame && !f->isFloor_) {
+          __unused OrgApacheLuceneStoreByteArrayDataInput *reader = create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(output->bytes_, output->offset_, output->length_);
+          __unused jlong codeOrig = [reader readVLong];
+          __unused jlong code = (JreLShift64(f->fp_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_NUM_BITS)) | (f->hasTerms_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_HAS_TERMS : 0) | (f->isFloor_ ? OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_IS_FLOOR : 0);
+          if (codeOrig != code) {
+            [outArg printlnWithNSString:JreStrcat("$J$J", @"      broken seek state: output code=", codeOrig, @" doesn't match frame code=", code)];
+            @throw create_JavaLangRuntimeException_initWithNSString_(@"seek state is broken");
+          }
+        }
+      }
+      if (JreObjectEqualsEquals(f, self->currentFrame_)) {
+        break;
+      }
+      if (f->prefix_ == self->validIndexPrefix_) {
+        isSeekFrame = false;
+      }
+      ord++;
+    }
+  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum)

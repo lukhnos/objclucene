@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery))
 #define OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_
 
@@ -27,51 +33,55 @@
 
 /*!
  @brief <p>Wrapper to allow <code>SpanQuery</code> objects participate in composite 
- single-field SpanQueries by 'lying' about their search field.
+  single-field SpanQueries by 'lying' about their search field.
  That is, 
- the masked SpanQuery will function as normal, 
- but <code>SpanQuery.getField()</code> simply hands back the value supplied 
- in this class's constructor.</p>
- <p>This can be used to support Queries like <code>SpanNearQuery</code> or 
+  the masked SpanQuery will function as normal, 
+  but <code>SpanQuery.getField()</code> simply hands back the value supplied 
+  in this class's constructor.</p>
+   
+ <p>This can be used to support Queries like <code>SpanNearQuery</code> or  
  <code>SpanOrQuery</code> across different fields, which is not ordinarily 
- permitted.</p>
+  permitted.</p>
+   
  <p>This can be useful for denormalized relational data: for example, when 
- indexing a document with conceptually many 'children': </p>
+  indexing a document with conceptually many 'children': </p>
+   
  @code
 
-  teacherid: 1
-  studentfirstname: james
-  studentsurname: jones
-  teacherid: 2
-  studenfirstname: james
-  studentsurname: smith
-  studentfirstname: sally
-  studentsurname: jones
+   teacherid: 1
+   studentfirstname: james
+   studentsurname: jones  
+   teacherid: 2
+   studenfirstname: james
+   studentsurname: smith
+   studentfirstname: sally
+   studentsurname: jones 
   
 @endcode
- <p>a SpanNearQuery with a slop of 0 can be applied across two 
- <code>SpanTermQuery</code> objects as follows:
+   
+ <p>a SpanNearQuery with a slop of 0 can be applied across two  
+ <code>SpanTermQuery</code> objects as follows: 
  <pre class="prettyprint">
- SpanQuery q1  = new SpanTermQuery(new Term("studentfirstname", "james"));
- SpanQuery q2  = new SpanTermQuery(new Term("studentsurname", "jones"));
- SpanQuery q2m = new FieldMaskingSpanQuery(q2, "studentfirstname");
- Query q = new SpanNearQuery(new SpanQuery[]{q1, q2m}, -1, false);
+     SpanQuery q1  = new SpanTermQuery(new Term("studentfirstname", "james"));
+     SpanQuery q2  = new SpanTermQuery(new Term("studentsurname", "jones"));
+     SpanQuery q2m = new FieldMaskingSpanQuery(q2, "studentfirstname");
+     Query q = new SpanNearQuery(new SpanQuery[]{q1, q2m}, -1, false); 
  
 @endcode
- to search for 'studentfirstname:james studentsurname:jones' and find 
- teacherid 1 without matching teacherid 2 (which has a 'james' in position 0 
- and 'jones' in position 1).
+  to search for 'studentfirstname:james studentsurname:jones' and find 
+  teacherid 1 without matching teacherid 2 (which has a 'james' in position 0 
+  and 'jones' in position 1).  
  <p>Note: as <code>getField()</code> returns the masked field, scoring will be 
- done using the Similarity and collection statistics of the field name supplied,
- but with the term statistics of the real field. This may lead to exceptions,
- poor performance, and unexpected scoring behaviour.
+  done using the Similarity and collection statistics of the field name supplied,
+  but with the term statistics of the real field. This may lead to exceptions,
+  poor performance, and unexpected scoring behaviour.
  */
 @interface OrgApacheLuceneSearchSpansFieldMaskingSpanQuery : OrgApacheLuceneSearchSpansSpanQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)maskedQuery
-                                               withNSString:(NSString *)maskedField;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)maskedQuery
+                                                         withNSString:(NSString *)maskedField;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -88,6 +98,10 @@
 
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery)
@@ -102,4 +116,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery")

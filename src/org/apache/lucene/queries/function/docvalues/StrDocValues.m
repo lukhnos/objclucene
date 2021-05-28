@@ -11,32 +11,33 @@
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 #include "org/apache/lucene/util/mutable/MutableValueStr.h"
 
-@interface OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1 : OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/docvalues/StrDocValues must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1 : OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller {
  @public
   OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *this$0_;
   OrgApacheLuceneUtilMutableMutableValueStr *mval_;
 }
 
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues:(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *)outer$;
+
 - (OrgApacheLuceneUtilMutableMutableValue *)getValue;
 
 - (void)fillValueWithInt:(jint)doc;
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues:(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1, this$0_, OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1, mval_, OrgApacheLuceneUtilMutableMutableValueStr *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1, mval_, OrgApacheLuceneUtilMutableMutableValueStr *)
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1 *self, OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$);
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1 *self, OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1 *new_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1 *new_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1 *create_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1)
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1 *create_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$);
 
 @implementation OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues
 
@@ -64,7 +65,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$
 }
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller {
-  return create_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(self);
+  return create_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(self);
 }
 
 - (void)dealloc {
@@ -73,18 +74,29 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSource:", "StrDocValues", NULL, 0x1, NULL, NULL },
-    { "strValWithInt:", "strVal", "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "objectValWithInt:", "objectVal", "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "boolValWithInt:", "boolVal", "Z", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValueFiller", NULL, "Lorg.apache.lucene.queries.function.FunctionValues$ValueFiller;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(strValWithInt:);
+  methods[2].selector = @selector(objectValWithInt:);
+  methods[3].selector = @selector(boolValWithInt:);
+  methods[4].selector = @selector(toStringWithInt:);
+  methods[5].selector = @selector(getValueFiller);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "vs_", NULL, 0x14, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
+    { "vs_", "LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues = { 2, "StrDocValues", "org.apache.lucene.queries.function.docvalues", NULL, 0x401, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValueSource;", "strVal", "I", "objectVal", "boolVal", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues = { "StrDocValues", "org.apache.lucene.queries.function.docvalues", ptrTable, methods, fields, 7, 0x401, 6, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues;
 }
 
@@ -97,19 +109,19 @@ void OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_initWithOrgApacheLucene
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues)
 
-@implementation OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1
+@implementation OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1
+
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues:(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *)outer$ {
+  OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(self, outer$);
+  return self;
+}
 
 - (OrgApacheLuceneUtilMutableMutableValue *)getValue {
-  return mval_;
+  return JreRetainedLocalValue(mval_);
 }
 
 - (void)fillValueWithInt:(jint)doc {
   ((OrgApacheLuceneUtilMutableMutableValueStr *) nil_chk(mval_))->exists_ = [this$0_ bytesValWithInt:doc withOrgApacheLuceneUtilBytesRefBuilder:mval_->value_];
-}
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues:(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *)outer$ {
-  OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(self, outer$);
-  return self;
 }
 
 - (void)dealloc {
@@ -119,34 +131,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionDocvaluesStrDocVa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getValue", NULL, "Lorg.apache.lucene.util.mutable.MutableValue;", 0x1, NULL, NULL },
-    { "fillValueWithInt:", "fillValue", "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilMutableMutableValue;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues:);
+  methods[1].selector = @selector(getValue);
+  methods[2].selector = @selector(fillValueWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.docvalues.StrDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mval_", NULL, 0x12, "Lorg.apache.lucene.util.mutable.MutableValueStr;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "mval_", "LOrgApacheLuceneUtilMutableMutableValueStr;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues", "getValueFiller" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1 = { 2, "", "org.apache.lucene.queries.function.docvalues", "StrDocValues", 0x8008, 3, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues;", "fillValue", "I", "getValueFiller" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1 = { "", "org.apache.lucene.queries.function.docvalues", ptrTable, methods, fields, 7, 0x8010, 3, 2, 0, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1 *self, OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$) {
+void OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1 *self, OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_init(self);
   JreStrongAssignAndConsume(&self->mval_, new_OrgApacheLuceneUtilMutableMutableValueStr_init());
 }
 
-OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1 *new_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1, initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_, outer$)
+OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1 *new_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1, initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_, outer$)
 }
 
-OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1 *create_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1, initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_, outer$)
+OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1 *create_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1_initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_1, initWithOrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_, outer$)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_$1)

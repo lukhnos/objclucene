@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFilteredDocIdSetIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFilteredDocIdSetIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilteredDocIdSetIterator || defined(INCLUDE_OrgApacheLuceneSearchFilteredDocIdSetIterator))
 #define OrgApacheLuceneSearchFilteredDocIdSetIterator_
 
@@ -22,9 +28,8 @@
 
 /*!
  @brief Abstract decorator class of a DocIdSetIterator
- implementation that provides on-demand filter/validation
- mechanism on an underlying DocIdSetIterator.
- See <code>FilteredDocIdSet</code>
+  implementation that provides on-demand filter/validation
+  mechanism on an underlying DocIdSetIterator.See <code>FilteredDocIdSet</code>
  .
  */
 @interface OrgApacheLuceneSearchFilteredDocIdSetIterator : OrgApacheLuceneSearchDocIdSetIterator {
@@ -38,7 +43,7 @@
  @brief Constructor.
  @param innerIter Underlying DocIdSetIterator.
  */
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)innerIter;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)innerIter;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -63,6 +68,10 @@
  */
 - (jboolean)matchWithInt:(jint)doc;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFilteredDocIdSetIterator)
@@ -75,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSetIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilteredDocIdSetIterator")

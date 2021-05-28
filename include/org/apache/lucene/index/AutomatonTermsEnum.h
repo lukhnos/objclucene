@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexAutomatonTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexAutomatonTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexAutomatonTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexAutomatonTermsEnum))
 #define OrgApacheLuceneIndexAutomatonTermsEnum_
 
@@ -27,18 +33,18 @@
 
 /*!
  @brief A FilteredTermsEnum that enumerates terms based upon what is accepted by a
- DFA.
+  DFA.
  <p>
- The algorithm is such:
+  The algorithm is such: 
  <ol>
- <li>As long as matches are successful, keep reading sequentially.
- <li>When a match fails, skip to the next string in lexicographic order that
- does not enter a reject state.
+    <li>As long as matches are successful, keep reading sequentially.
+    <li>When a match fails, skip to the next string in lexicographic order that
+  does not enter a reject state. 
  </ol>
- <p>
- The algorithm does not attempt to actually skip to the next string that is
- completely accepted. This is not possible when the language accepted by the
- FSM is not finite (i.e. * operator).
+  <p>
+  The algorithm does not attempt to actually skip to the next string that is
+  completely accepted. This is not possible when the language accepted by the
+  FSM is not finite (i.e. * operator). 
  </p>
  */
 @interface OrgApacheLuceneIndexAutomatonTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum
@@ -47,23 +53,28 @@
 
 /*!
  @brief Construct an enumerator based upon an automaton, enumerating the specified
- field, working on a supplied TermsEnum
-  
+  field, working on a supplied TermsEnum
  @param compiled CompiledAutomaton
  */
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
-    withOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
+              withOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled;
 
 #pragma mark Protected
 
 /*!
- @brief Returns true if the term matches the automaton.
- Also stashes away the term
- to assist with smart enumeration.
+ @brief Returns true if the term matches the automaton.Also stashes away the term
+  to assist with smart enumeration.
  */
 - (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 - (OrgApacheLuceneUtilBytesRef *)nextSeekTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0
+                                                    withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -79,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexAutomatonTermsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexAutomatonTermsEnum")

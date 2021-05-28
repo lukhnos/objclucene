@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexLogMergePolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexLogMergePolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexLogMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexLogMergePolicy))
 #define OrgApacheLuceneIndexLogMergePolicy_
 
@@ -29,21 +35,22 @@
 
 /*!
  @brief <p>This class implements a <code>MergePolicy</code> that tries
- to merge segments into levels of exponentially
- increasing size, where each level has fewer segments than
- the value of the merge factor.
+  to merge segments into levels of exponentially
+  increasing size, where each level has fewer segments than
+  the value of the merge factor.
  Whenever extra segments
- (beyond the merge factor upper bound) are encountered,
- all segments within the level are merged. You can get or
- set the merge factor using <code>getMergeFactor()</code> and
+  (beyond the merge factor upper bound) are encountered,
+  all segments within the level are merged. You can get or
+  set the merge factor using <code>getMergeFactor()</code> and 
  <code>setMergeFactor(int)</code> respectively.</p>
+  
  <p>This class is abstract and requires a subclass to
- define the <code>size</code> method which specifies how a
- segment's size is determined.  <code>LogDocMergePolicy</code>
- is one subclass that measures size by document count in
- the segment.  <code>LogByteSizeMergePolicy</code> is another
- subclass that measures size as the total byte size of the
- file(s) for the segment.</p>
+  define the <code>size</code> method which specifies how a
+  segment's size is determined.  <code>LogDocMergePolicy</code>
+  is one subclass that measures size by document count in
+  the segment.  <code>LogByteSizeMergePolicy</code> is another
+  subclass that measures size as the total byte size of the
+  file(s) for the segment.</p>
  */
 @interface OrgApacheLuceneIndexLogMergePolicy : OrgApacheLuceneIndexMergePolicy {
  @public
@@ -53,70 +60,64 @@
   jint mergeFactor_;
   /*!
    @brief Any segments whose size is smaller than this value
- will be rounded up to this value.
-   This ensures that
- tiny segments are aggressively merged. 
+   will be rounded up to this value.This ensures that
+   tiny segments are aggressively merged.
    */
   jlong minMergeSize_;
   /*!
    @brief If the size of a segment exceeds this value then it
- will never be merged.
+   will never be merged.
    */
   jlong maxMergeSize_;
   /*!
    @brief If the size of a segment exceeds this value then it
- will never be merged during <code>IndexWriter.forceMerge</code>.
+  will never be merged during <code>IndexWriter.forceMerge</code>.
    */
   jlong maxMergeSizeForForcedMerge_;
   /*!
    @brief If a segment has more than this many documents then it
- will never be merged.
+   will never be merged.
    */
   jint maxMergeDocs_;
   /*!
    @brief If true, we pro-rate a segment's size by the
- percentage of non-deleted documents.
+   percentage of non-deleted documents.
    */
   jboolean calibrateSizeByDeletes_;
 }
-
-+ (jdouble)LEVEL_LOG_SPAN;
-
-+ (jint)DEFAULT_MERGE_FACTOR;
-
-+ (jint)DEFAULT_MAX_MERGE_DOCS;
-
-+ (jdouble)DEFAULT_NO_CFS_RATIO;
+@property (readonly, class) jdouble LEVEL_LOG_SPAN NS_SWIFT_NAME(LEVEL_LOG_SPAN);
+@property (readonly, class) jint DEFAULT_MERGE_FACTOR NS_SWIFT_NAME(DEFAULT_MERGE_FACTOR);
+@property (readonly, class) jint DEFAULT_MAX_MERGE_DOCS NS_SWIFT_NAME(DEFAULT_MAX_MERGE_DOCS);
+@property (readonly, class) jdouble DEFAULT_NO_CFS_RATIO NS_SWIFT_NAME(DEFAULT_NO_CFS_RATIO);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Finds merges necessary to force-merge all deletes from the
- index.
- We simply merge adjacent segments that have
- deletes, up to mergeFactor at a time.
+  index.We simply merge adjacent segments that have
+  deletes, up to mergeFactor at a time.
  */
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
                                                                                 withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
 /*!
  @brief Returns the merges necessary to merge the index down
- to a specified number of segments.
+   to a specified number of segments.
  This respects the <code>maxMergeSizeForForcedMerge</code> setting.
- By default, and assuming <code>maxNumSegments=1</code>, only
- one segment will be left in the index, where that segment
- has no deletions pending nor separate norms, and it is in
- compound file format if the current useCompoundFile
- setting is true.  This method returns multiple merges
- (mergeFactor at a time) so the <code>MergeScheduler</code>
- in use may make use of concurrency. 
+   By default, and assuming <code>maxNumSegments=1</code>, only
+   one segment will be left in the index, where that segment
+   has no deletions pending nor separate norms, and it is in
+   compound file format if the current useCompoundFile
+   setting is true.  This method returns multiple merges
+   (mergeFactor at a time) so the <code>MergeScheduler</code>
+   in use may make use of concurrency.
  */
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                                                                                                      withInt:(jint)maxNumSegments
@@ -125,13 +126,13 @@
 
 /*!
  @brief Checks if any merges are now necessary and returns a
- <code>MergePolicy.MergeSpecification</code> if so.
- A merge
- is necessary when there are more than <code>setMergeFactor</code>
-  segments at a given level.  When
- multiple levels have too many segments, this method
- will return multiple merges, allowing the <code>MergeScheduler</code>
-  to use concurrency. 
+   <code>MergePolicy.MergeSpecification</code> if so.A merge
+   is necessary when there are more than <code>setMergeFactor</code>
+  segments at a given level.
+ When
+   multiple levels have too many segments, this method
+   will return multiple merges, allowing the <code>MergeScheduler</code>
+  to use concurrency.
  */
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)mergeTrigger
                                                                   withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
@@ -139,58 +140,60 @@
 
 /*!
  @brief Returns true if the segment size should be calibrated 
- by the number of deletes when choosing segments for merge.
+   by the number of deletes when choosing segments for merge.
  */
 - (jboolean)getCalibrateSizeByDeletes;
 
 /*!
  @brief Returns the largest segment (measured by document
- count) that may be merged with other segments.
+   count) that may be merged with other segments.
  - seealso: #setMaxMergeDocs
  */
 - (jint)getMaxMergeDocs;
 
 /*!
  @brief <p>Returns the number of segments that are merged at
- once and also controls the total number of segments
- allowed to accumulate in the index.
- </p> 
+  once and also controls the total number of segments
+  allowed to accumulate in the index.
+ </p>
  */
 - (jint)getMergeFactor;
 
 /*!
  @brief Sets whether the segment size should be calibrated by
- the number of deletes when choosing segments for merge.
+   the number of deletes when choosing segments for merge.
  */
 - (void)setCalibrateSizeByDeletesWithBoolean:(jboolean)calibrateSizeByDeletes;
 
 /*!
  @brief <p>Determines the largest segment (measured by
- document count) that may be merged with other segments.
+  document count) that may be merged with other segments.
  Small values (e.g., less than 10,000) are best for
- interactive indexing, as this limits the length of
- pauses while indexing to a few seconds.  Larger values
- are best for batched indexing and speedier
- searches.</p>
+  interactive indexing, as this limits the length of
+  pauses while indexing to a few seconds.  Larger values
+  are best for batched indexing and speedier
+  searches.</p>
+  
  <p>The default value is <code>Integer.MAX_VALUE</code>.</p>
+  
  <p>The default merge policy (<code>LogByteSizeMergePolicy</code>
  ) also allows you to set this
- limit by net size (in MB) of the segment, using <code>LogByteSizeMergePolicy.setMaxMergeMB</code>
+  limit by net size (in MB) of the segment, using <code>LogByteSizeMergePolicy.setMaxMergeMB</code>
  .</p>
  */
 - (void)setMaxMergeDocsWithInt:(jint)maxMergeDocs;
 
 /*!
  @brief Determines how often segment indices are merged by
- addDocument().
- With smaller values, less RAM is used
- while indexing, and searches are
- faster, but indexing speed is slower.  With larger
- values, more RAM is used during indexing, and while
- searches is slower, indexing is
- faster.  Thus larger values (<code>> 10</code>) are best for batch
- index creation, and smaller values (<code>< 10</code>) for indices
- that are interactively maintained. 
+  addDocument().With smaller values, less RAM is used
+  while indexing, and searches are
+  faster, but indexing speed is slower.
+ With larger
+  values, more RAM is used during indexing, and while
+  searches is slower, indexing is
+  faster.  Thus larger values (<code>> 10</code>) are best for batch
+  index creation, and smaller values (<code>< 10</code>) for indices
+  that are interactively maintained.
  */
 - (void)setMergeFactorWithInt:(jint)mergeFactor;
 
@@ -200,7 +203,7 @@
 
 /*!
  @brief Returns true if the number of segments eligible for
- merging is less than or equal to the specified <code>maxNumSegments</code>
+   merging is less than or equal to the specified <code>maxNumSegments</code>
  .
  */
 - (jboolean)isMergedWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
@@ -218,7 +221,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 /*!
  @brief Return the byte size of the provided <code>SegmentCommitInfo</code>
  , pro-rated by percentage of
- non-deleted documents if <code>setCalibrateSizeByDeletes</code>
+   non-deleted documents if <code>setCalibrateSizeByDeletes</code>
   is set.
  */
 - (jlong)sizeBytesWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
@@ -227,7 +230,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 /*!
  @brief Return the number of documents in the provided <code>SegmentCommitInfo</code>
  , pro-rated by percentage of
- non-deleted documents if <code>setCalibrateSizeByDeletes</code>
+   non-deleted documents if <code>setCalibrateSizeByDeletes</code>
   is set.
  */
 - (jlong)sizeDocsWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
@@ -239,45 +242,48 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
  */
 - (jboolean)verboseWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithDouble:(jdouble)arg0
+                                withLong:(jlong)arg1 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexLogMergePolicy)
 
 /*!
  @brief Defines the allowed range of log(size) for each
- level.
- A level is computed by taking the max segment
- log size, minus LEVEL_LOG_SPAN, and finding all
- segments falling within that range. 
+   level.A level is computed by taking the max segment
+   log size, minus LEVEL_LOG_SPAN, and finding all
+   segments falling within that range.
  */
-inline jdouble OrgApacheLuceneIndexLogMergePolicy_get_LEVEL_LOG_SPAN();
+inline jdouble OrgApacheLuceneIndexLogMergePolicy_get_LEVEL_LOG_SPAN(void);
 #define OrgApacheLuceneIndexLogMergePolicy_LEVEL_LOG_SPAN 0.75
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexLogMergePolicy, LEVEL_LOG_SPAN, jdouble)
 
 /*!
  @brief Default merge factor, which is how many segments are
- merged at a time
+   merged at a time
  */
-inline jint OrgApacheLuceneIndexLogMergePolicy_get_DEFAULT_MERGE_FACTOR();
+inline jint OrgApacheLuceneIndexLogMergePolicy_get_DEFAULT_MERGE_FACTOR(void);
 #define OrgApacheLuceneIndexLogMergePolicy_DEFAULT_MERGE_FACTOR 10
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexLogMergePolicy, DEFAULT_MERGE_FACTOR, jint)
 
 /*!
- @brief Default maximum segment size.
- A segment of this size
- or larger will never be merged.  @@see setMaxMergeDocs 
+ @brief Default maximum segment size.A segment of this size
+   or larger will never be merged.
+ @@see setMaxMergeDocs
  */
-inline jint OrgApacheLuceneIndexLogMergePolicy_get_DEFAULT_MAX_MERGE_DOCS();
+inline jint OrgApacheLuceneIndexLogMergePolicy_get_DEFAULT_MAX_MERGE_DOCS(void);
 #define OrgApacheLuceneIndexLogMergePolicy_DEFAULT_MAX_MERGE_DOCS 2147483647
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexLogMergePolicy, DEFAULT_MAX_MERGE_DOCS, jint)
 
 /*!
- @brief Default noCFSRatio.
- If a merge's size is <code>>= 10%</code> of
- the index, then we disable compound file for it.
+ @brief Default noCFSRatio.If a merge's size is <code>>= 10%</code> of
+   the index, then we disable compound file for it.
  - seealso: MergePolicy#setNoCFSRatio
  */
-inline jdouble OrgApacheLuceneIndexLogMergePolicy_get_DEFAULT_NO_CFS_RATIO();
+inline jdouble OrgApacheLuceneIndexLogMergePolicy_get_DEFAULT_NO_CFS_RATIO(void);
 #define OrgApacheLuceneIndexLogMergePolicy_DEFAULT_NO_CFS_RATIO 0.1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexLogMergePolicy, DEFAULT_NO_CFS_RATIO, jdouble)
 
@@ -287,4 +293,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexLogMergePolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexLogMergePolicy")

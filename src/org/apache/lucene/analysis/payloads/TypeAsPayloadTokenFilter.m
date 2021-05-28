@@ -5,14 +5,16 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/payloads/TypeAsPayloadTokenFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/PayloadAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/payloads/TypeAsPayloadTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter () {
  @public
@@ -34,8 +36,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter, typ
 
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    NSString *type = [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) type];
-    if (type != nil && ![type isEmpty]) {
+    NSString *type = JreRetainedLocalValue([((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) type]);
+    if (type != nil && ![type java_isEmpty]) {
       [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payloadAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(type)];
     }
     return true;
@@ -52,15 +54,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter, typ
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "TypeAsPayloadTokenFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "payloadAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "payloadAtt_", "LOrgApacheLuceneAnalysisTokenattributesPayloadAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "typeAtt_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter = { 2, "TypeAsPayloadTokenFilter", "org.apache.lucene.analysis.payloads", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter = { "TypeAsPayloadTokenFilter", "org.apache.lucene.analysis.payloads", ptrTable, methods, fields, 7, 0x1, 2, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter;
 }
 

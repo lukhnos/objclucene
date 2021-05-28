@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileFilePaths
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFilePaths_) && (INCLUDE_ALL_OrgLukhnosPortmobileFilePaths || defined(INCLUDE_OrgLukhnosPortmobileFilePaths))
 #define OrgLukhnosPortmobileFilePaths_
 
@@ -22,7 +28,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (OrgLukhnosPortmobileFilePath *)getWithNSString:(NSString *)path;
 
@@ -30,16 +36,20 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileFilePaths)
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFilePaths_getWithNSString_(NSString *path);
-
 FOUNDATION_EXPORT void OrgLukhnosPortmobileFilePaths_init(OrgLukhnosPortmobileFilePaths *self);
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFilePaths *new_OrgLukhnosPortmobileFilePaths_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgLukhnosPortmobileFilePaths *new_OrgLukhnosPortmobileFilePaths_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFilePaths *create_OrgLukhnosPortmobileFilePaths_init();
+FOUNDATION_EXPORT OrgLukhnosPortmobileFilePaths *create_OrgLukhnosPortmobileFilePaths_init(void);
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFilePaths_getWithNSString_(NSString *path);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFilePaths)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFilePaths")

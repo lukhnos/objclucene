@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisReusableStringReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisReusableStringReader_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisReusableStringReader || defined(INCLUDE_OrgApacheLuceneAnalysisReusableStringReader))
 #define OrgApacheLuceneAnalysisReusableStringReader_
 
@@ -39,22 +45,32 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 - (void)setValueWithNSString:(NSString *)s;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithId:(id)arg0 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisReusableStringReader)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReusableStringReader_init(OrgApacheLuceneAnalysisReusableStringReader *self);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReusableStringReader_initPackagePrivate(OrgApacheLuceneAnalysisReusableStringReader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisReusableStringReader *new_OrgApacheLuceneAnalysisReusableStringReader_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisReusableStringReader *new_OrgApacheLuceneAnalysisReusableStringReader_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisReusableStringReader *create_OrgApacheLuceneAnalysisReusableStringReader_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisReusableStringReader *create_OrgApacheLuceneAnalysisReusableStringReader_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisReusableStringReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisReusableStringReader")

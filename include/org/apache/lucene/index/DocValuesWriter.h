@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexDocValuesWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocValuesWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesWriter || defined(INCLUDE_OrgApacheLuceneIndexDocValuesWriter))
 #define OrgApacheLuceneIndexDocValuesWriter_
 
@@ -23,21 +29,29 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 - (void)finishWithInt:(jint)numDoc;
 
 - (void)flushWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
             withOrgApacheLuceneCodecsDocValuesConsumer:(OrgApacheLuceneCodecsDocValuesConsumer *)consumer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocValuesWriter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesWriter_init(OrgApacheLuceneIndexDocValuesWriter *self);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesWriter_initPackagePrivate(OrgApacheLuceneIndexDocValuesWriter *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesWriter")

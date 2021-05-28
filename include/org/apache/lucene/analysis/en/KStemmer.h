@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisEnKStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisEnKStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisEnKStemmer))
 #define OrgApacheLuceneAnalysisEnKStemmer_
 
@@ -31,7 +37,7 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<JavaLangCharSequence>)asCharSequence;
 
@@ -47,8 +53,7 @@
 - (NSString *)getString;
 
 /*!
- @brief Stems the text in the token.
- Returns true if changed.
+ @brief Stems the text in the token.Returns true if changed.
  */
 - (jboolean)stemWithCharArray:(IOSCharArray *)term
                       withInt:(jint)len;
@@ -64,9 +69,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemmer, result_, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnKStemmer_init(OrgApacheLuceneAnalysisEnKStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemmer *new_OrgApacheLuceneAnalysisEnKStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemmer *new_OrgApacheLuceneAnalysisEnKStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemmer *create_OrgApacheLuceneAnalysisEnKStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemmer *create_OrgApacheLuceneAnalysisEnKStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemmer)
 
@@ -83,8 +88,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemmer)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)root
-                     withBoolean:(jboolean)isException;
+- (instancetype __nonnull)initWithNSString:(NSString *)root
+                               withBoolean:(jboolean)isException;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -102,4 +111,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemmer_DictEntry)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemmer")

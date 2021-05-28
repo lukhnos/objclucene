@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher || defined(INCLUDE_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher))
 #define OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_
 
@@ -21,13 +27,14 @@
 #include "org/apache/lucene/search/IndexSearcher.h"
 
 @class OrgApacheLuceneIndexIndexReader;
+@class OrgApacheLuceneIndexIndexReaderContext;
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilConcurrentExecutorService;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneSearchCollector;
 
 /*!
- @brief An <code>IndexSearcher</code> to use in conjunction with
+ @brief An <code>IndexSearcher</code> to use in conjunction with 
  <code>ToParentBlockJoinCollector</code>.
  */
 @interface OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher : OrgApacheLuceneSearchIndexSearcher
@@ -38,22 +45,28 @@
  @brief Creates a searcher searching the provided index.
  - seealso: IndexSearcher#IndexSearcher(IndexReader)
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r;
 
 /*!
- @brief Creates a searcher searching the provided index.
- Search on individual
- segments will be run in the provided <code>ExecutorService</code>.
- - seealso: IndexSearcher#IndexSearcher(IndexReader,ExecutorService)
+ @brief Creates a searcher searching the provided index.Search on individual
+   segments will be run in the provided <code>ExecutorService</code>.
+ - seealso: IndexSearcher#IndexSearcher(IndexReader, ExecutorService)
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                  withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
+                            withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
 
 #pragma mark Protected
 
 - (void)searchWithJavaUtilList:(id<JavaUtilList>)leaves
 withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
 withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)arg0
+                                   withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -75,4 +88,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearch
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher")

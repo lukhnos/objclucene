@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_
 
@@ -30,17 +36,19 @@
 
 /*!
  @brief A <code>TokenizedPhraseQueryNode</code> represents a node created by a code that
- tokenizes/lemmatizes/analyzes.
+  tokenizes/lemmatizes/analyzes.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
 - (id<JavaLangCharSequence>)getField;
+
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
 
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
 
@@ -54,12 +62,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhr
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode")

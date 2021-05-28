@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPayloadsPayloadEncoder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPayloadsPayloadEncoder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadEncoder || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsPayloadEncoder))
 #define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_
 
@@ -20,12 +26,12 @@
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
- @brief Mainly for use with the DelimitedPayloadTokenFilter, converts char buffers to
+ @brief Mainly for use with the DelimitedPayloadTokenFilter, converts char buffers to 
  <code>BytesRef</code>.
  <p>
- NOTE: This interface is subject to change 
+  NOTE: This interface is subject to change
  */
-@protocol OrgApacheLuceneAnalysisPayloadsPayloadEncoder < NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisPayloadsPayloadEncoder < JavaObject >
 
 - (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer;
 
@@ -45,4 +51,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsPayloadEncoder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadEncoder")

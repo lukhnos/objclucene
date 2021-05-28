@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/ReqOptSumScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
@@ -14,11 +12,15 @@
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/Weight.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ReqOptSumScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchReqOptSumScorer
 
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)optScorer {
-  OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, reqScorer, optScorer);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
+                                  withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)optScorer {
+  OrgApacheLuceneSearchReqOptSumScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, reqScorer, optScorer);
   return self;
 }
 
@@ -75,41 +77,55 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorer:", "ReqOptSumScorer", NULL, 0x1, NULL, NULL },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(asTwoPhaseIterator);
+  methods[2].selector = @selector(nextDoc);
+  methods[3].selector = @selector(advanceWithInt:);
+  methods[4].selector = @selector(docID);
+  methods[5].selector = @selector(score);
+  methods[6].selector = @selector(freq);
+  methods[7].selector = @selector(getChildren);
+  methods[8].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reqScorer_", NULL, 0x14, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "optScorer_", NULL, 0x4, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "reqScorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "optScorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchReqOptSumScorer = { 2, "ReqOptSumScorer", "org.apache.lucene.search", NULL, 0x0, 9, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchScorer;LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "advance", "I", "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchReqOptSumScorer = { "ReqOptSumScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x0, 9, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchReqOptSumScorer;
 }
 
 @end
 
-void OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchReqOptSumScorer *self, OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer) {
+void OrgApacheLuceneSearchReqOptSumScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchReqOptSumScorer *self, OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer) {
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, ((OrgApacheLuceneSearchScorer *) nil_chk(reqScorer))->weight_);
-  JreAssert((reqScorer != nil), (@"org/apache/lucene/search/ReqOptSumScorer.java:44 condition failed: assert reqScorer != null;"));
-  JreAssert((optScorer != nil), (@"org/apache/lucene/search/ReqOptSumScorer.java:45 condition failed: assert optScorer != null;"));
+  JreAssert(reqScorer != nil, @"org/apache/lucene/search/ReqOptSumScorer.java:44 condition failed: assert reqScorer != null;");
+  JreAssert(optScorer != nil, @"org/apache/lucene/search/ReqOptSumScorer.java:45 condition failed: assert optScorer != null;");
   JreStrongAssign(&self->reqScorer_, reqScorer);
   JreStrongAssign(&self->optScorer_, optScorer);
 }
 
-OrgApacheLuceneSearchReqOptSumScorer *new_OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchReqOptSumScorer, initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, reqScorer, optScorer)
+OrgApacheLuceneSearchReqOptSumScorer *new_OrgApacheLuceneSearchReqOptSumScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchReqOptSumScorer, initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, reqScorer, optScorer)
 }
 
-OrgApacheLuceneSearchReqOptSumScorer *create_OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchReqOptSumScorer, initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, reqScorer, optScorer)
+OrgApacheLuceneSearchReqOptSumScorer *create_OrgApacheLuceneSearchReqOptSumScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchReqOptSumScorer, initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, reqScorer, optScorer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchReqOptSumScorer)

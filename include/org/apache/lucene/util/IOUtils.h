@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilIOUtils
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilIOUtils_) && (INCLUDE_ALL_OrgApacheLuceneUtilIOUtils || defined(INCLUDE_OrgApacheLuceneUtilIOUtils))
 #define OrgApacheLuceneUtilIOUtils_
 
@@ -20,6 +26,7 @@
 @class IOSObjectArray;
 @class JavaIoInputStream;
 @class JavaIoReader;
+@class JavaLangThrowable;
 @class JavaNioCharsetCharset;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgLukhnosPortmobileFilePath;
@@ -29,25 +36,22 @@
 /*!
  @brief This class emulates the new Java 7 "Try-With-Resources" statement.
  Remove once Lucene is on Java 7.
-  
  */
 @interface OrgApacheLuceneUtilIOUtils : NSObject
-
-+ (JavaNioCharsetCharset *)CHARSET_UTF_8;
-
-+ (NSString *)UTF_8;
+@property (readonly, class, strong) JavaNioCharsetCharset *CHARSET_UTF_8 NS_SWIFT_NAME(CHARSET_UTF_8);
+@property (readonly, copy, class) NSString *UTF_8 NS_SWIFT_NAME(UTF_8);
 
 #pragma mark Public
 
 /*!
- @brief Closes all given <tt>Closeable</tt>s.
- Some of the
+ @brief Closes all given <tt>Closeable</tt>s.Some of the 
  <tt>Closeable</tt>s may be null; they are
- ignored.  After everything is closed, the method either
- throws the first exception it hit while closing, or
- completes normally if there were no exceptions.
- @param objects
- objects to call <tt>close()</tt> on
+  ignored.
+ After everything is closed, the method either
+  throws the first exception it hit while closing, or
+  completes normally if there were no exceptions.
+ @param objects objects to call 
+  <tt> close() </tt>  on
  */
 + (void)closeWithJavaIoCloseableArray:(IOSObjectArray *)objects;
 
@@ -60,8 +64,8 @@
 /*!
  @brief Closes all given <tt>Closeable</tt>s, suppressing all thrown exceptions.
  Some of the <tt>Closeable</tt>s may be null, they are ignored.
- @param objects
- objects to call <tt>close()</tt> on
+ @param objects objects to call 
+  <tt> close() </tt>  on
  */
 + (void)closeWhileHandlingExceptionWithJavaIoCloseableArray:(IOSObjectArray *)objects;
 
@@ -72,23 +76,23 @@
 + (void)closeWhileHandlingExceptionWithJavaLangIterable:(id<JavaLangIterable>)objects;
 
 /*!
- @brief Deletes all given <tt>Path</tt>s, if they exist.
- Some of the
+ @brief Deletes all given <tt>Path</tt>s, if they exist.Some of the 
  <tt>File</tt>s may be null; they are
- ignored.  After everything is deleted, the method either
- throws the first exception it hit while deleting, or
- completes normally if there were no exceptions.
+  ignored.
+ After everything is deleted, the method either
+  throws the first exception it hit while deleting, or
+  completes normally if there were no exceptions.
  @param files files to delete
  */
 + (void)deleteFilesIfExistWithJavaUtilCollection:(id<JavaUtilCollection>)files;
 
 /*!
- @brief Deletes all given <tt>Path</tt>s, if they exist.
- Some of the
+ @brief Deletes all given <tt>Path</tt>s, if they exist.Some of the 
  <tt>File</tt>s may be null; they are
- ignored.  After everything is deleted, the method either
- throws the first exception it hit while deleting, or
- completes normally if there were no exceptions.
+  ignored.
+ After everything is deleted, the method either
+  throws the first exception it hit while deleting, or
+  completes normally if there were no exceptions.
  @param files files to delete
  */
 + (void)deleteFilesIfExistWithOrgLukhnosPortmobileFilePathArray:(IOSObjectArray *)files;
@@ -96,14 +100,14 @@
 /*!
  @brief Deletes all given files, suppressing all thrown IOExceptions.
  <p>
- Some of the files may be null, if so they are ignored.
+  Some of the files may be null, if so they are ignored.
  */
 + (void)deleteFilesIgnoringExceptionsWithJavaUtilCollection:(id<JavaUtilCollection>)files;
 
 /*!
  @brief Deletes all given files, suppressing all thrown IOExceptions.
  <p>
- Note that the files should not be null.
+  Note that the files should not be null.
  */
 + (void)deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                      withNSStringArray:(IOSObjectArray *)files;
@@ -111,15 +115,14 @@
 /*!
  @brief Deletes all given files, suppressing all thrown IOExceptions.
  <p>
- Some of the files may be null, if so they are ignored.
+  Some of the files may be null, if so they are ignored.
  */
 + (void)deleteFilesIgnoringExceptionsWithOrgLukhnosPortmobileFilePathArray:(IOSObjectArray *)files;
 
 /*!
  @brief Ensure that any writes to the given file is written to the storage device that contains it.
  @param fileToSync the file to fsync
- @param isDir if true, the given file is a directory (we open for read and ignore IOExceptions,
- because not all file systems and operating systems allow to fsync on a directory)
+ @param isDir if true, the given file is a directory (we open for read and ignore IOExceptions,   because not all file systems and operating systems allow to fsync on a directory)
  */
 + (void)fsyncWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)fileToSync
                                   withBoolean:(jboolean)isDir;
@@ -127,11 +130,11 @@
 /*!
  @brief Opens a Reader for the given resource using a <code>CharsetDecoder</code>.
  Unlike Java's defaults this reader will throw an exception if your it detects 
- the read charset doesn't match the expected <code>Charset</code>. 
+  the read charset doesn't match the expected <code>Charset</code>.  
  <p>
- Decoding readers are useful to load configuration files, stopword lists or synonym files
- to detect character set problems. However, it's not recommended to use as a common purpose 
- reader.
+  Decoding readers are useful to load configuration files, stopword lists or synonym files
+  to detect character set problems. However, it's not recommended to use as a common purpose 
+  reader.
  @param clazz the class used to locate the resource
  @param resource the resource name to load
  @param charSet the expected charset
@@ -144,11 +147,11 @@
 /*!
  @brief Wrapping the given <code>InputStream</code> in a reader using a <code>CharsetDecoder</code>.
  Unlike Java's defaults this reader will throw an exception if your it detects 
- the read charset doesn't match the expected <code>Charset</code>. 
+  the read charset doesn't match the expected <code>Charset</code>.  
  <p>
- Decoding readers are useful to load configuration files, stopword lists or synonym files
- to detect character set problems. However, it's not recommended to use as a common purpose 
- reader.
+  Decoding readers are useful to load configuration files, stopword lists or synonym files
+  to detect character set problems. However, it's not recommended to use as a common purpose 
+  reader.
  @param stream the stream to wrap in a reader
  @param charSet the expected charset
  @return a wrapping reader
@@ -157,47 +160,43 @@
                                withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charSet;
 
 /*!
- @brief Simple utility method that takes a previously caught
+ @brief Simple utility method that takes a previously caught 
  <code>Throwable</code> and rethrows either <code>IOException</code>
-  or an unchecked exception.
- If the
- argument is null then this method does nothing.
+  or an unchecked exception.If the
+  argument is null then this method does nothing.
  */
-+ (void)reThrowWithNSException:(NSException *)th;
++ (void)reThrowWithJavaLangThrowable:(JavaLangThrowable *)th;
 
 /*!
- @brief Simple utility method that takes a previously caught
+ @brief Simple utility method that takes a previously caught 
  <code>Throwable</code> and rethrows it as an unchecked exception.
  If the argument is null then this method does nothing.
  */
-+ (void)reThrowUncheckedWithNSException:(NSException *)th;
++ (void)reThrowUncheckedWithJavaLangThrowable:(JavaLangThrowable *)th;
 
 /*!
  @brief Deletes one or more files or directories (and everything underneath it).
- @throws IOException if any of the given files (or their subhierarchy files in case
- of directories) cannot be removed.
+ @throw IOExceptionif any of the given files (or their subhierarchy files in case
+  of directories) cannot be removed.
  */
 + (void)rmWithOrgLukhnosPortmobileFilePathArray:(IOSObjectArray *)locations;
 
 /*!
  @brief If the dir is an <code>FSDirectory</code> or wraps one via possibly
- nested <code>FilterDirectory</code> or <code>FileSwitchDirectory</code>,
- this returns <code>spins(Path)</code> for the wrapped directory,
- else, true.
- @throws IOException if <code>path</code> does not exist.
-  
+   nested <code>FilterDirectory</code> or <code>FileSwitchDirectory</code>,
+   this returns <code>spins(Path)</code> for the wrapped directory,
+   else, true.
+ @throw IOExceptionif <code>path</code> does not exist.
  */
 + (jboolean)spinsWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
  @brief Rough Linux-only heuristics to determine whether the provided
- <code>Path</code> is backed by spinning storage.
- For example, this
- returns false if the disk is a solid-state disk.
+   <code>Path</code> is backed by spinning storage.For example, this
+   returns false if the disk is a solid-state disk.
  @param path a location to check which must exist. the mount point will be determined from this location.
  @return false if the storage is non-rotational (e.g. an SSD), or true if it is spinning or could not be determined
- @throws IOException if <code>path</code> does not exist.
-  
+ @throw IOExceptionif <code>path</code> does not exist.
  */
 + (jboolean)spinsWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
@@ -210,10 +209,10 @@
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilIOUtils)
 
 /*!
- @brief UTF-8 <code>Charset</code> instance to prevent repeated
+ @brief UTF-8 <code>Charset</code> instance to prevent repeated 
  <code>Charset.forName(String)</code> lookups
  */
-inline JavaNioCharsetCharset *OrgApacheLuceneUtilIOUtils_get_CHARSET_UTF_8();
+inline JavaNioCharsetCharset *OrgApacheLuceneUtilIOUtils_get_CHARSET_UTF_8(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaNioCharsetCharset *OrgApacheLuceneUtilIOUtils_CHARSET_UTF_8;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilIOUtils, CHARSET_UTF_8, JavaNioCharsetCharset *)
@@ -221,10 +220,10 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilIOUtils, CHARSET_UTF_8, JavaNio
 /*!
  @brief UTF-8 charset string.
  <p>Where possible, use <code>StandardCharsets.UTF_8</code> instead,
- as using the String constant may slow things down.
+  as using the String constant may slow things down.
  - seealso: StandardCharsets#UTF_8
  */
-inline NSString *OrgApacheLuceneUtilIOUtils_get_UTF_8();
+inline NSString *OrgApacheLuceneUtilIOUtils_get_UTF_8(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilIOUtils_UTF_8;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilIOUtils, UTF_8, NSString *)
@@ -253,9 +252,9 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_deleteFilesIfExistWithJavaUtil
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_rmWithOrgLukhnosPortmobileFilePathArray_(IOSObjectArray *locations);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(NSException *th);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(JavaLangThrowable *th);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithNSException_(NSException *th);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithJavaLangThrowable_(JavaLangThrowable *th);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolean_(OrgLukhnosPortmobileFilePath *fileToSync, jboolean isDir);
 
@@ -269,4 +268,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIOUtils)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilIOUtils")

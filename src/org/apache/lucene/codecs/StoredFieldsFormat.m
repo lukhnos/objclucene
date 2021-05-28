@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/StoredFieldsFormat.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/StoredFieldsFormat.h"
 #include "org/apache/lucene/codecs/StoredFieldsReader.h"
 #include "org/apache/lucene/codecs/StoredFieldsWriter.h"
@@ -13,6 +11,10 @@
 #include "org/apache/lucene/index/SegmentInfo.h"
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/IOContext.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/StoredFieldsFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneCodecsStoredFieldsFormat
 
@@ -41,12 +43,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "StoredFieldsFormat", NULL, 0x4, NULL, NULL },
-    { "fieldsReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:", "fieldsReader", "Lorg.apache.lucene.codecs.StoredFieldsReader;", 0x401, "Ljava.io.IOException;", NULL },
-    { "fieldsWriterWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "fieldsWriter", "Lorg.apache.lucene.codecs.StoredFieldsWriter;", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsReader;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsWriter;", 0x401, 3, 4, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsStoredFieldsFormat = { 2, "StoredFieldsFormat", "org.apache.lucene.codecs", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(fieldsReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:);
+  methods[2].selector = @selector(fieldsWriterWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "fieldsReader", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneIndexFieldInfos;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "fieldsWriter", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneStoreIOContext;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsStoredFieldsFormat = { "StoredFieldsFormat", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsStoredFieldsFormat;
 }
 

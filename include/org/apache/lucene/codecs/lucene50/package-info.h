@@ -5,8 +5,8 @@
 
 /*!
  @brief Components from the Lucene 5.0 index format
- See <code>org.apache.lucene.codecs.lucene53</code> for an overview
- of the index format.
+  See <code>org.apache.lucene.codecs.lucene53</code> for an overview
+  of the index format.
  */
 #include "J2ObjC_header.h"
 
@@ -18,4 +18,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsLucene50Package_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Package_info")

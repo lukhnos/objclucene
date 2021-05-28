@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/util/NumericUtils.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -21,6 +19,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
 #include "org/apache/lucene/util/NumericUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/NumericUtils must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilNumericUtils ()
 
@@ -52,9 +54,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_init(OrgApacheLuceneUtilNumericUtils *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils *new_OrgApacheLuceneUtilNumericUtils_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils *new_OrgApacheLuceneUtilNumericUtils_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils *create_OrgApacheLuceneUtilNumericUtils_init();
+__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils *create_OrgApacheLuceneUtilNumericUtils_init(void);
 
 __attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_splitRangeWithId_withInt_withInt_withLong_withLong_(id builder, jint valSize, jint precisionStep, jlong minBound, jlong maxBound);
 
@@ -66,7 +68,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexTerms *OrgApacheLuceneUtilNum
 
 /*!
  @brief Just like FilteredTermsEnum, except it adds a limited
- seekCeil implementation that only works with <code>filterPrefixCodedInts</code>
+   seekCeil implementation that only works with <code>filterPrefixCodedInts</code>
   and <code>filterPrefixCodedLongs</code>
  .
  */
@@ -84,77 +86,69 @@ __attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_SeekingNumer
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum)
 
-@interface OrgApacheLuceneUtilNumericUtils_$1 : OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum
+@interface OrgApacheLuceneUtilNumericUtils_1 : OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum
+
+- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum;
 
 - (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_1)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_$1 *self, OrgApacheLuceneIndexTermsEnum *arg$0);
+__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_1 *self, OrgApacheLuceneIndexTermsEnum *tenum);
 
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$1 *new_OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_1 *new_OrgApacheLuceneUtilNumericUtils_1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *tenum) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$1 *create_OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0);
+__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_1 *create_OrgApacheLuceneUtilNumericUtils_1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *tenum);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_$1)
+@interface OrgApacheLuceneUtilNumericUtils_2 : OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum
 
-@interface OrgApacheLuceneUtilNumericUtils_$2 : OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum
+- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum;
 
 - (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_2)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_$2 *self, OrgApacheLuceneIndexTermsEnum *arg$0);
+__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_2 *self, OrgApacheLuceneIndexTermsEnum *tenum);
 
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$2 *new_OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_2 *new_OrgApacheLuceneUtilNumericUtils_2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *tenum) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$2 *create_OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0);
+__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_2 *create_OrgApacheLuceneUtilNumericUtils_2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *tenum);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_$2)
+@interface OrgApacheLuceneUtilNumericUtils_3 : OrgApacheLuceneIndexFilterLeafReader_FilterTerms
 
-@interface OrgApacheLuceneUtilNumericUtils_$3 : OrgApacheLuceneIndexFilterLeafReader_FilterTerms
+- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg;
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator;
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_$3)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_3)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_$3 *self, OrgApacheLuceneIndexTerms *arg$0);
+__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_3 *self, OrgApacheLuceneIndexTerms *inArg);
 
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$3 *new_OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_3 *new_OrgApacheLuceneUtilNumericUtils_3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *inArg) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$3 *create_OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0);
+__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_3 *create_OrgApacheLuceneUtilNumericUtils_3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *inArg);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_$3)
+@interface OrgApacheLuceneUtilNumericUtils_4 : OrgApacheLuceneIndexFilterLeafReader_FilterTerms
 
-@interface OrgApacheLuceneUtilNumericUtils_$4 : OrgApacheLuceneIndexFilterLeafReader_FilterTerms
+- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg;
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator;
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_$4)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_4)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_$4 *self, OrgApacheLuceneIndexTerms *arg$0);
+__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_4 *self, OrgApacheLuceneIndexTerms *inArg);
 
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$4 *new_OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_4 *new_OrgApacheLuceneUtilNumericUtils_4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *inArg) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$4 *create_OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_$4)
+__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_4 *create_OrgApacheLuceneUtilNumericUtils_4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *inArg);
 
 @implementation OrgApacheLuceneUtilNumericUtils
 
@@ -316,45 +310,76 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)byt
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NumericUtils", NULL, 0x2, NULL, NULL },
-    { "longToPrefixCodedWithLong:withInt:withOrgApacheLuceneUtilBytesRefBuilder:", "longToPrefixCoded", "V", 0x9, NULL, NULL },
-    { "intToPrefixCodedWithInt:withInt:withOrgApacheLuceneUtilBytesRefBuilder:", "intToPrefixCoded", "V", 0x9, NULL, NULL },
-    { "longToPrefixCodedBytesWithLong:withInt:withOrgApacheLuceneUtilBytesRefBuilder:", "longToPrefixCodedBytes", "V", 0x9, NULL, NULL },
-    { "intToPrefixCodedBytesWithInt:withInt:withOrgApacheLuceneUtilBytesRefBuilder:", "intToPrefixCodedBytes", "V", 0x9, NULL, NULL },
-    { "getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef:", "getPrefixCodedLongShift", "I", 0x9, NULL, NULL },
-    { "getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef:", "getPrefixCodedIntShift", "I", 0x9, NULL, NULL },
-    { "prefixCodedToLongWithOrgApacheLuceneUtilBytesRef:", "prefixCodedToLong", "J", 0x9, NULL, NULL },
-    { "prefixCodedToIntWithOrgApacheLuceneUtilBytesRef:", "prefixCodedToInt", "I", 0x9, NULL, NULL },
-    { "doubleToSortableLongWithDouble:", "doubleToSortableLong", "J", 0x9, NULL, NULL },
-    { "sortableLongToDoubleWithLong:", "sortableLongToDouble", "D", 0x9, NULL, NULL },
-    { "floatToSortableIntWithFloat:", "floatToSortableInt", "I", 0x9, NULL, NULL },
-    { "sortableIntToFloatWithInt:", "sortableIntToFloat", "F", 0x9, NULL, NULL },
-    { "sortableDoubleBitsWithLong:", "sortableDoubleBits", "J", 0x9, NULL, NULL },
-    { "sortableFloatBitsWithInt:", "sortableFloatBits", "I", 0x9, NULL, NULL },
-    { "splitLongRangeWithOrgApacheLuceneUtilNumericUtils_LongRangeBuilder:withInt:withLong:withLong:", "splitLongRange", "V", 0x9, NULL, NULL },
-    { "splitIntRangeWithOrgApacheLuceneUtilNumericUtils_IntRangeBuilder:withInt:withInt:withInt:", "splitIntRange", "V", 0x9, NULL, NULL },
-    { "splitRangeWithId:withInt:withInt:withLong:withLong:", "splitRange", "V", 0xa, NULL, NULL },
-    { "addRangeWithId:withInt:withLong:withLong:withInt:", "addRange", "V", 0xa, NULL, NULL },
-    { "filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum:", "filterPrefixCodedLongs", "Lorg.apache.lucene.index.TermsEnum;", 0x9, NULL, NULL },
-    { "filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum:", "filterPrefixCodedInts", "Lorg.apache.lucene.index.TermsEnum;", 0x9, NULL, NULL },
-    { "intTermsWithOrgApacheLuceneIndexTerms:", "intTerms", "Lorg.apache.lucene.index.Terms;", 0xa, NULL, NULL },
-    { "longTermsWithOrgApacheLuceneIndexTerms:", "longTerms", "Lorg.apache.lucene.index.Terms;", 0xa, NULL, NULL },
-    { "getMinIntWithOrgApacheLuceneIndexTerms:", "getMinInt", "Ljava.lang.Integer;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getMaxIntWithOrgApacheLuceneIndexTerms:", "getMaxInt", "Ljava.lang.Integer;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getMinLongWithOrgApacheLuceneIndexTerms:", "getMinLong", "Ljava.lang.Long;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getMaxLongWithOrgApacheLuceneIndexTerms:", "getMaxLong", "Ljava.lang.Long;", 0x9, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 4, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 5, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 8, 7, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 9, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 10, 7, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 11, 12, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 13, 14, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 15, 16, -1, -1, -1, -1 },
+    { NULL, "F", 0x9, 17, 18, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 19, 14, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 20, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 21, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 23, 24, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 25, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 27, 28, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x9, 29, 30, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x9, 31, 30, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0xa, 32, 33, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0xa, 34, 33, -1, -1, -1, -1 },
+    { NULL, "LJavaLangInteger;", 0x9, 35, 33, 36, -1, -1, -1 },
+    { NULL, "LJavaLangInteger;", 0x9, 37, 33, 36, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x9, 38, 33, 36, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x9, 39, 33, 36, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(longToPrefixCodedWithLong:withInt:withOrgApacheLuceneUtilBytesRefBuilder:);
+  methods[2].selector = @selector(intToPrefixCodedWithInt:withInt:withOrgApacheLuceneUtilBytesRefBuilder:);
+  methods[3].selector = @selector(longToPrefixCodedBytesWithLong:withInt:withOrgApacheLuceneUtilBytesRefBuilder:);
+  methods[4].selector = @selector(intToPrefixCodedBytesWithInt:withInt:withOrgApacheLuceneUtilBytesRefBuilder:);
+  methods[5].selector = @selector(getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef:);
+  methods[6].selector = @selector(getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef:);
+  methods[7].selector = @selector(prefixCodedToLongWithOrgApacheLuceneUtilBytesRef:);
+  methods[8].selector = @selector(prefixCodedToIntWithOrgApacheLuceneUtilBytesRef:);
+  methods[9].selector = @selector(doubleToSortableLongWithDouble:);
+  methods[10].selector = @selector(sortableLongToDoubleWithLong:);
+  methods[11].selector = @selector(floatToSortableIntWithFloat:);
+  methods[12].selector = @selector(sortableIntToFloatWithInt:);
+  methods[13].selector = @selector(sortableDoubleBitsWithLong:);
+  methods[14].selector = @selector(sortableFloatBitsWithInt:);
+  methods[15].selector = @selector(splitLongRangeWithOrgApacheLuceneUtilNumericUtils_LongRangeBuilder:withInt:withLong:withLong:);
+  methods[16].selector = @selector(splitIntRangeWithOrgApacheLuceneUtilNumericUtils_IntRangeBuilder:withInt:withInt:withInt:);
+  methods[17].selector = @selector(splitRangeWithId:withInt:withInt:withLong:withLong:);
+  methods[18].selector = @selector(addRangeWithId:withInt:withLong:withLong:withInt:);
+  methods[19].selector = @selector(filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum:);
+  methods[20].selector = @selector(filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum:);
+  methods[21].selector = @selector(intTermsWithOrgApacheLuceneIndexTerms:);
+  methods[22].selector = @selector(longTermsWithOrgApacheLuceneIndexTerms:);
+  methods[23].selector = @selector(getMinIntWithOrgApacheLuceneIndexTerms:);
+  methods[24].selector = @selector(getMaxIntWithOrgApacheLuceneIndexTerms:);
+  methods[25].selector = @selector(getMinLongWithOrgApacheLuceneIndexTerms:);
+  methods[26].selector = @selector(getMaxLongWithOrgApacheLuceneIndexTerms:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "PRECISION_STEP_DEFAULT", "PRECISION_STEP_DEFAULT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT },
-    { "PRECISION_STEP_DEFAULT_32", "PRECISION_STEP_DEFAULT_32", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT_32 },
-    { "SHIFT_START_LONG", "SHIFT_START_LONG", 0x19, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneUtilNumericUtils_SHIFT_START_LONG },
-    { "BUF_SIZE_LONG", "BUF_SIZE_LONG", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilNumericUtils_BUF_SIZE_LONG },
-    { "SHIFT_START_INT", "SHIFT_START_INT", 0x19, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneUtilNumericUtils_SHIFT_START_INT },
-    { "BUF_SIZE_INT", "BUF_SIZE_INT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilNumericUtils_BUF_SIZE_INT },
+    { "PRECISION_STEP_DEFAULT", "I", .constantValue.asInt = OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT, 0x19, -1, -1, -1, -1 },
+    { "PRECISION_STEP_DEFAULT_32", "I", .constantValue.asInt = OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT_32, 0x19, -1, -1, -1, -1 },
+    { "SHIFT_START_LONG", "B", .constantValue.asChar = OrgApacheLuceneUtilNumericUtils_SHIFT_START_LONG, 0x19, -1, -1, -1, -1 },
+    { "BUF_SIZE_LONG", "I", .constantValue.asInt = OrgApacheLuceneUtilNumericUtils_BUF_SIZE_LONG, 0x19, -1, -1, -1, -1 },
+    { "SHIFT_START_INT", "B", .constantValue.asChar = OrgApacheLuceneUtilNumericUtils_SHIFT_START_INT, 0x19, -1, -1, -1, -1 },
+    { "BUF_SIZE_INT", "I", .constantValue.asInt = OrgApacheLuceneUtilNumericUtils_BUF_SIZE_INT, 0x19, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.NumericUtils$LongRangeBuilder;", "Lorg.apache.lucene.util.NumericUtils$IntRangeBuilder;", "Lorg.apache.lucene.util.NumericUtils$SeekingNumericFilteredTermsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils = { 2, "NumericUtils", "org.apache.lucene.util", NULL, 0x11, 27, methods, 6, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "longToPrefixCoded", "JILOrgApacheLuceneUtilBytesRefBuilder;", "intToPrefixCoded", "IILOrgApacheLuceneUtilBytesRefBuilder;", "longToPrefixCodedBytes", "intToPrefixCodedBytes", "getPrefixCodedLongShift", "LOrgApacheLuceneUtilBytesRef;", "getPrefixCodedIntShift", "prefixCodedToLong", "prefixCodedToInt", "doubleToSortableLong", "D", "sortableLongToDouble", "J", "floatToSortableInt", "F", "sortableIntToFloat", "I", "sortableDoubleBits", "sortableFloatBits", "splitLongRange", "LOrgApacheLuceneUtilNumericUtils_LongRangeBuilder;IJJ", "splitIntRange", "LOrgApacheLuceneUtilNumericUtils_IntRangeBuilder;III", "splitRange", "LNSObject;IIJJ", "addRange", "LNSObject;IJJI", "filterPrefixCodedLongs", "LOrgApacheLuceneIndexTermsEnum;", "filterPrefixCodedInts", "intTerms", "LOrgApacheLuceneIndexTerms;", "longTerms", "getMinInt", "LJavaIoIOException;", "getMaxInt", "getMinLong", "getMaxLong", "LOrgApacheLuceneUtilNumericUtils_LongRangeBuilder;LOrgApacheLuceneUtilNumericUtils_IntRangeBuilder;LOrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils = { "NumericUtils", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 27, 6, -1, 40, -1, -1, -1 };
   return &_OrgApacheLuceneUtilNumericUtils;
 }
 
@@ -503,10 +528,14 @@ void OrgApacheLuceneUtilNumericUtils_splitRangeWithId_withInt_withInt_withLong_w
   if (precisionStep < 1) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"precisionStep must be >=1");
   if (minBound > maxBound) return;
   for (jint shift = 0; ; shift += precisionStep) {
-    jlong diff = JreLShift64(1LL, (shift + precisionStep)), mask = JreLShift64(((JreLShift64(1LL, precisionStep)) - 1LL), shift);
-    jboolean hasLower = (minBound & mask) != 0LL, hasUpper = (maxBound & mask) != mask;
-    jlong nextMinBound = (hasLower ? (minBound + diff) : minBound) & ~mask, nextMaxBound = (hasUpper ? (maxBound - diff) : maxBound) & ~mask;
-    jboolean lowerWrapped = nextMinBound < minBound, upperWrapped = nextMaxBound > maxBound;
+    jlong diff = JreLShift64(1LL, (shift + precisionStep));
+    jlong mask = JreLShift64(((JreLShift64(1LL, precisionStep)) - 1LL), shift);
+    jboolean hasLower = (minBound & mask) != 0LL;
+    jboolean hasUpper = (maxBound & mask) != mask;
+    jlong nextMinBound = (hasLower ? (minBound + diff) : minBound) & ~mask;
+    jlong nextMaxBound = (hasUpper ? (maxBound - diff) : maxBound) & ~mask;
+    jboolean lowerWrapped = nextMinBound < minBound;
+    jboolean upperWrapped = nextMaxBound > maxBound;
     if (shift + precisionStep >= valSize || nextMinBound > nextMaxBound || lowerWrapped || upperWrapped) {
       OrgApacheLuceneUtilNumericUtils_addRangeWithId_withInt_withLong_withLong_withInt_(builder, valSize, minBound, maxBound, shift);
       break;
@@ -535,51 +564,58 @@ void OrgApacheLuceneUtilNumericUtils_addRangeWithId_withInt_withLong_withLong_wi
 
 OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneUtilNumericUtils_filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *termsEnum) {
   OrgApacheLuceneUtilNumericUtils_initialize();
-  return create_OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(termsEnum);
+  return create_OrgApacheLuceneUtilNumericUtils_1_initWithOrgApacheLuceneIndexTermsEnum_(termsEnum);
 }
 
 OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneUtilNumericUtils_filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *termsEnum) {
   OrgApacheLuceneUtilNumericUtils_initialize();
-  return create_OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(termsEnum);
+  return create_OrgApacheLuceneUtilNumericUtils_2_initWithOrgApacheLuceneIndexTermsEnum_(termsEnum);
 }
 
 OrgApacheLuceneIndexTerms *OrgApacheLuceneUtilNumericUtils_intTermsWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
   OrgApacheLuceneUtilNumericUtils_initialize();
-  return create_OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(terms);
+  return create_OrgApacheLuceneUtilNumericUtils_3_initWithOrgApacheLuceneIndexTerms_(terms);
 }
 
 OrgApacheLuceneIndexTerms *OrgApacheLuceneUtilNumericUtils_longTermsWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
   OrgApacheLuceneUtilNumericUtils_initialize();
-  return create_OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(terms);
+  return create_OrgApacheLuceneUtilNumericUtils_4_initWithOrgApacheLuceneIndexTerms_(terms);
 }
 
 JavaLangInteger *OrgApacheLuceneUtilNumericUtils_getMinIntWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
   OrgApacheLuceneUtilNumericUtils_initialize();
-  OrgApacheLuceneUtilBytesRef *min = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMin];
+  OrgApacheLuceneUtilBytesRef *min = JreRetainedLocalValue([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMin]);
   return (min != nil) ? JavaLangInteger_valueOfWithInt_(OrgApacheLuceneUtilNumericUtils_prefixCodedToIntWithOrgApacheLuceneUtilBytesRef_(min)) : nil;
 }
 
 JavaLangInteger *OrgApacheLuceneUtilNumericUtils_getMaxIntWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
   OrgApacheLuceneUtilNumericUtils_initialize();
-  OrgApacheLuceneUtilBytesRef *max = [((OrgApacheLuceneIndexTerms *) nil_chk(OrgApacheLuceneUtilNumericUtils_intTermsWithOrgApacheLuceneIndexTerms_(terms))) getMax];
+  OrgApacheLuceneUtilBytesRef *max = JreRetainedLocalValue([((OrgApacheLuceneIndexTerms *) nil_chk(OrgApacheLuceneUtilNumericUtils_intTermsWithOrgApacheLuceneIndexTerms_(terms))) getMax]);
   return (max != nil) ? JavaLangInteger_valueOfWithInt_(OrgApacheLuceneUtilNumericUtils_prefixCodedToIntWithOrgApacheLuceneUtilBytesRef_(max)) : nil;
 }
 
 JavaLangLong *OrgApacheLuceneUtilNumericUtils_getMinLongWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
   OrgApacheLuceneUtilNumericUtils_initialize();
-  OrgApacheLuceneUtilBytesRef *min = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMin];
+  OrgApacheLuceneUtilBytesRef *min = JreRetainedLocalValue([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMin]);
   return (min != nil) ? JavaLangLong_valueOfWithLong_(OrgApacheLuceneUtilNumericUtils_prefixCodedToLongWithOrgApacheLuceneUtilBytesRef_(min)) : nil;
 }
 
 JavaLangLong *OrgApacheLuceneUtilNumericUtils_getMaxLongWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
   OrgApacheLuceneUtilNumericUtils_initialize();
-  OrgApacheLuceneUtilBytesRef *max = [((OrgApacheLuceneIndexTerms *) nil_chk(OrgApacheLuceneUtilNumericUtils_longTermsWithOrgApacheLuceneIndexTerms_(terms))) getMax];
+  OrgApacheLuceneUtilBytesRef *max = JreRetainedLocalValue([((OrgApacheLuceneIndexTerms *) nil_chk(OrgApacheLuceneUtilNumericUtils_longTermsWithOrgApacheLuceneIndexTerms_(terms))) getMax]);
   return (max != nil) ? JavaLangLong_valueOfWithLong_(OrgApacheLuceneUtilNumericUtils_prefixCodedToLongWithOrgApacheLuceneUtilBytesRef_(max)) : nil;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils)
 
 @implementation OrgApacheLuceneUtilNumericUtils_LongRangeBuilder
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilNumericUtils_LongRangeBuilder_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addRangeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minPrefixCoded
                 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxPrefixCoded {
@@ -589,26 +625,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils)
 - (void)addRangeWithLong:(jlong)min
                 withLong:(jlong)max
                  withInt:(jint)shift {
-  OrgApacheLuceneUtilBytesRefBuilder *minBytes = create_OrgApacheLuceneUtilBytesRefBuilder_init(), *maxBytes = create_OrgApacheLuceneUtilBytesRefBuilder_init();
+  OrgApacheLuceneUtilBytesRefBuilder *minBytes = create_OrgApacheLuceneUtilBytesRefBuilder_init();
+  OrgApacheLuceneUtilBytesRefBuilder *maxBytes = create_OrgApacheLuceneUtilBytesRefBuilder_init();
   OrgApacheLuceneUtilNumericUtils_longToPrefixCodedBytesWithLong_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(min, shift, minBytes);
   OrgApacheLuceneUtilNumericUtils_longToPrefixCodedBytesWithLong_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(max, shift, maxBytes);
   [self addRangeWithOrgApacheLuceneUtilBytesRef:[minBytes get] withOrgApacheLuceneUtilBytesRef:[maxBytes get]];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilNumericUtils_LongRangeBuilder_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addRangeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "addRange", "V", 0x1, NULL, NULL },
-    { "addRangeWithLong:withLong:withInt:", "addRange", "V", 0x1, NULL, NULL },
-    { "init", "LongRangeBuilder", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_LongRangeBuilder = { 2, "LongRangeBuilder", "org.apache.lucene.util", "NumericUtils", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(addRangeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(addRangeWithLong:withLong:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "addRange", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "JJI", "LOrgApacheLuceneUtilNumericUtils;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_LongRangeBuilder = { "LongRangeBuilder", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x409, 3, 0, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilNumericUtils_LongRangeBuilder;
 }
 
@@ -622,6 +660,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_LongRangeBuilde
 
 @implementation OrgApacheLuceneUtilNumericUtils_IntRangeBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilNumericUtils_IntRangeBuilder_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)addRangeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minPrefixCoded
                 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxPrefixCoded {
   @throw create_JavaLangUnsupportedOperationException_init();
@@ -630,26 +675,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_LongRangeBuilde
 - (void)addRangeWithInt:(jint)min
                 withInt:(jint)max
                 withInt:(jint)shift {
-  OrgApacheLuceneUtilBytesRefBuilder *minBytes = create_OrgApacheLuceneUtilBytesRefBuilder_init(), *maxBytes = create_OrgApacheLuceneUtilBytesRefBuilder_init();
+  OrgApacheLuceneUtilBytesRefBuilder *minBytes = create_OrgApacheLuceneUtilBytesRefBuilder_init();
+  OrgApacheLuceneUtilBytesRefBuilder *maxBytes = create_OrgApacheLuceneUtilBytesRefBuilder_init();
   OrgApacheLuceneUtilNumericUtils_intToPrefixCodedBytesWithInt_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(min, shift, minBytes);
   OrgApacheLuceneUtilNumericUtils_intToPrefixCodedBytesWithInt_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(max, shift, maxBytes);
   [self addRangeWithOrgApacheLuceneUtilBytesRef:[minBytes get] withOrgApacheLuceneUtilBytesRef:[maxBytes get]];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilNumericUtils_IntRangeBuilder_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addRangeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "addRange", "V", 0x1, NULL, NULL },
-    { "addRangeWithInt:withInt:withInt:", "addRange", "V", 0x1, NULL, NULL },
-    { "init", "IntRangeBuilder", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_IntRangeBuilder = { 2, "IntRangeBuilder", "org.apache.lucene.util", "NumericUtils", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(addRangeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(addRangeWithInt:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "addRange", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "III", "LOrgApacheLuceneUtilNumericUtils;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_IntRangeBuilder = { "IntRangeBuilder", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x409, 3, 0, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilNumericUtils_IntRangeBuilder;
 }
 
@@ -669,7 +716,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_IntRangeBuilder
 }
 
 - (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  OrgApacheLuceneIndexTermsEnum_SeekStatus *status = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(tenum_)) seekCeilWithOrgApacheLuceneUtilBytesRef:term];
+  OrgApacheLuceneIndexTermsEnum_SeekStatus *status = JreRetainedLocalValue([((OrgApacheLuceneIndexTermsEnum *) nil_chk(tenum_)) seekCeilWithOrgApacheLuceneUtilBytesRef:term]);
   if (status == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, END)) {
     return JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, END);
   }
@@ -683,11 +730,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_IntRangeBuilder
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsEnum:", "SeekingNumericFilteredTermsEnum", NULL, 0x1, NULL, NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum_SeekStatus;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum = { 2, "SeekingNumericFilteredTermsEnum", "org.apache.lucene.util", "NumericUtils", 0x40a, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTermsEnum:);
+  methods[1].selector = @selector(seekCeilWithOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTermsEnum;", "seekCeil", "LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "LOrgApacheLuceneUtilNumericUtils;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum = { "SeekingNumericFilteredTermsEnum", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x40a, 2, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum;
 }
 
@@ -699,150 +753,166 @@ void OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrg
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum)
 
-@implementation OrgApacheLuceneUtilNumericUtils_$1
+@implementation OrgApacheLuceneUtilNumericUtils_1
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  return OrgApacheLuceneUtilNumericUtils_getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef_(term) == 0 ? JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES) : JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END);
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg$0 {
-  OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(self, arg$0);
+- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum {
+  OrgApacheLuceneUtilNumericUtils_1_initWithOrgApacheLuceneIndexTermsEnum_(self, tenum);
   return self;
 }
 
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
+  return JreRetainedLocalValue(OrgApacheLuceneUtilNumericUtils_getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef_(term) == 0 ? JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES) : JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END));
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTermsEnum:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x4, 1, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilNumericUtils", "filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_$1 = { 2, "", "org.apache.lucene.util", "NumericUtils", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilNumericUtils_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTermsEnum:);
+  methods[1].selector = @selector(acceptWithOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTermsEnum;", "accept", "LOrgApacheLuceneUtilBytesRef;", "LOrgApacheLuceneUtilNumericUtils;", "filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_1 = { "", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneUtilNumericUtils_1;
 }
 
 @end
 
-void OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_$1 *self, OrgApacheLuceneIndexTermsEnum *arg$0) {
-  OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, arg$0);
+void OrgApacheLuceneUtilNumericUtils_1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_1 *self, OrgApacheLuceneIndexTermsEnum *tenum) {
+  OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, tenum);
 }
 
-OrgApacheLuceneUtilNumericUtils_$1 *new_OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNumericUtils_$1, initWithOrgApacheLuceneIndexTermsEnum_, arg$0)
+OrgApacheLuceneUtilNumericUtils_1 *new_OrgApacheLuceneUtilNumericUtils_1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *tenum) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNumericUtils_1, initWithOrgApacheLuceneIndexTermsEnum_, tenum)
 }
 
-OrgApacheLuceneUtilNumericUtils_$1 *create_OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNumericUtils_$1, initWithOrgApacheLuceneIndexTermsEnum_, arg$0)
+OrgApacheLuceneUtilNumericUtils_1 *create_OrgApacheLuceneUtilNumericUtils_1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *tenum) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNumericUtils_1, initWithOrgApacheLuceneIndexTermsEnum_, tenum)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_$1)
+@implementation OrgApacheLuceneUtilNumericUtils_2
 
-@implementation OrgApacheLuceneUtilNumericUtils_$2
-
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  return OrgApacheLuceneUtilNumericUtils_getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef_(term) == 0 ? JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES) : JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END);
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg$0 {
-  OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(self, arg$0);
+- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum {
+  OrgApacheLuceneUtilNumericUtils_2_initWithOrgApacheLuceneIndexTermsEnum_(self, tenum);
   return self;
 }
 
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
+  return JreRetainedLocalValue(OrgApacheLuceneUtilNumericUtils_getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef_(term) == 0 ? JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES) : JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END));
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTermsEnum:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x4, 1, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilNumericUtils", "filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_$2 = { 2, "", "org.apache.lucene.util", "NumericUtils", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilNumericUtils_$2;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTermsEnum:);
+  methods[1].selector = @selector(acceptWithOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTermsEnum;", "accept", "LOrgApacheLuceneUtilBytesRef;", "LOrgApacheLuceneUtilNumericUtils;", "filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_2 = { "", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneUtilNumericUtils_2;
 }
 
 @end
 
-void OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_$2 *self, OrgApacheLuceneIndexTermsEnum *arg$0) {
-  OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, arg$0);
+void OrgApacheLuceneUtilNumericUtils_2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_2 *self, OrgApacheLuceneIndexTermsEnum *tenum) {
+  OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, tenum);
 }
 
-OrgApacheLuceneUtilNumericUtils_$2 *new_OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNumericUtils_$2, initWithOrgApacheLuceneIndexTermsEnum_, arg$0)
+OrgApacheLuceneUtilNumericUtils_2 *new_OrgApacheLuceneUtilNumericUtils_2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *tenum) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNumericUtils_2, initWithOrgApacheLuceneIndexTermsEnum_, tenum)
 }
 
-OrgApacheLuceneUtilNumericUtils_$2 *create_OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNumericUtils_$2, initWithOrgApacheLuceneIndexTermsEnum_, arg$0)
+OrgApacheLuceneUtilNumericUtils_2 *create_OrgApacheLuceneUtilNumericUtils_2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *tenum) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNumericUtils_2, initWithOrgApacheLuceneIndexTermsEnum_, tenum)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_$2)
+@implementation OrgApacheLuceneUtilNumericUtils_3
 
-@implementation OrgApacheLuceneUtilNumericUtils_$3
+- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg {
+  OrgApacheLuceneUtilNumericUtils_3_initWithOrgApacheLuceneIndexTerms_(self, inArg);
+  return self;
+}
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator {
   return OrgApacheLuceneUtilNumericUtils_filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum_([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) iterator]);
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg$0 {
-  OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(self, arg$0);
-  return self;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexTerms:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, 1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilNumericUtils", "intTermsWithOrgApacheLuceneIndexTerms:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_$3 = { 2, "", "org.apache.lucene.util", "NumericUtils", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilNumericUtils_$3;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerms:);
+  methods[1].selector = @selector(iterator);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerms;", "LJavaIoIOException;", "LOrgApacheLuceneUtilNumericUtils;", "intTermsWithOrgApacheLuceneIndexTerms:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_3 = { "", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneUtilNumericUtils_3;
 }
 
 @end
 
-void OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_$3 *self, OrgApacheLuceneIndexTerms *arg$0) {
-  OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(self, arg$0);
+void OrgApacheLuceneUtilNumericUtils_3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_3 *self, OrgApacheLuceneIndexTerms *inArg) {
+  OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(self, inArg);
 }
 
-OrgApacheLuceneUtilNumericUtils_$3 *new_OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNumericUtils_$3, initWithOrgApacheLuceneIndexTerms_, arg$0)
+OrgApacheLuceneUtilNumericUtils_3 *new_OrgApacheLuceneUtilNumericUtils_3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNumericUtils_3, initWithOrgApacheLuceneIndexTerms_, inArg)
 }
 
-OrgApacheLuceneUtilNumericUtils_$3 *create_OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNumericUtils_$3, initWithOrgApacheLuceneIndexTerms_, arg$0)
+OrgApacheLuceneUtilNumericUtils_3 *create_OrgApacheLuceneUtilNumericUtils_3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNumericUtils_3, initWithOrgApacheLuceneIndexTerms_, inArg)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_$3)
+@implementation OrgApacheLuceneUtilNumericUtils_4
 
-@implementation OrgApacheLuceneUtilNumericUtils_$4
+- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg {
+  OrgApacheLuceneUtilNumericUtils_4_initWithOrgApacheLuceneIndexTerms_(self, inArg);
+  return self;
+}
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator {
   return OrgApacheLuceneUtilNumericUtils_filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum_([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) iterator]);
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg$0 {
-  OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(self, arg$0);
-  return self;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexTerms:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, 1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilNumericUtils", "longTermsWithOrgApacheLuceneIndexTerms:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_$4 = { 2, "", "org.apache.lucene.util", "NumericUtils", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilNumericUtils_$4;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerms:);
+  methods[1].selector = @selector(iterator);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerms;", "LJavaIoIOException;", "LOrgApacheLuceneUtilNumericUtils;", "longTermsWithOrgApacheLuceneIndexTerms:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_4 = { "", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneUtilNumericUtils_4;
 }
 
 @end
 
-void OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_$4 *self, OrgApacheLuceneIndexTerms *arg$0) {
-  OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(self, arg$0);
+void OrgApacheLuceneUtilNumericUtils_4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_4 *self, OrgApacheLuceneIndexTerms *inArg) {
+  OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(self, inArg);
 }
 
-OrgApacheLuceneUtilNumericUtils_$4 *new_OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNumericUtils_$4, initWithOrgApacheLuceneIndexTerms_, arg$0)
+OrgApacheLuceneUtilNumericUtils_4 *new_OrgApacheLuceneUtilNumericUtils_4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNumericUtils_4, initWithOrgApacheLuceneIndexTerms_, inArg)
 }
 
-OrgApacheLuceneUtilNumericUtils_$4 *create_OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNumericUtils_$4, initWithOrgApacheLuceneIndexTerms_, arg$0)
+OrgApacheLuceneUtilNumericUtils_4 *create_OrgApacheLuceneUtilNumericUtils_4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNumericUtils_4, initWithOrgApacheLuceneIndexTerms_, inArg)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_$4)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_
 
@@ -24,21 +30,21 @@
 
 /*!
  @brief This filter normalize use of the interchangeable Scandinavian characters æÆäÄöÖøØ
- and folded variants (aa, ao, ae, oe and oo) by transforming them to åÅæÆøØ.
+  and folded variants (aa, ao, ae, oe and oo) by transforming them to åÅæÆøØ.
  <p>
- It's a semantically less destructive solution than <code>ScandinavianFoldingFilter</code>,
- most useful when a person with a Norwegian or Danish keyboard queries a Swedish index
- and vice versa. This filter does <b>not</b>  the common Swedish folds of å and ä to a nor ö to o.
+  It's a semantically less destructive solution than <code>ScandinavianFoldingFilter</code>,
+  most useful when a person with a Norwegian or Danish keyboard queries a Swedish index
+  and vice versa. This filter does <b>not</b>  the common Swedish folds of å and ä to a nor ö to o. 
  <p>
- blåbærsyltetøj == blåbärsyltetöj == blaabaarsyltetoej but not blabarsyltetoj
- räksmörgås == ræksmørgås == ræksmörgaos == raeksmoergaas but not raksmorgas
+  blåbærsyltetøj == blåbärsyltetöj == blaabaarsyltetoej but not blabarsyltetoj
+  räksmörgås == ræksmørgås == ræksmörgaos == raeksmoergaas but not raksmorgas
  - seealso: ScandinavianFoldingFilter
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -56,4 +62,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousScandinavianNorma
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter")

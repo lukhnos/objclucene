@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestFstExternalRefSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestFstExternalRefSorter_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstExternalRefSorter || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstExternalRefSorter))
 #define OrgApacheLuceneSearchSuggestFstExternalRefSorter_
 
@@ -39,7 +45,7 @@
 /*!
  @brief Will buffer all sequences to a temporary file and then sort (all on-disk).
  */
-- (instancetype)initWithOrgApacheLuceneUtilOfflineSorter:(OrgApacheLuceneUtilOfflineSorter *)sort;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilOfflineSorter:(OrgApacheLuceneUtilOfflineSorter *)sort;
 
 - (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
 
@@ -51,6 +57,10 @@
 - (id<JavaUtilComparator>)getComparator;
 
 - (id<OrgApacheLuceneUtilBytesRefIterator>)iterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -84,10 +94,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstExternalRefSorter)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter:(OrgApacheLuceneSearchSuggestFstExternalRefSorter *)outer$
-                withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader:(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *)reader;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter:(OrgApacheLuceneSearchSuggestFstExternalRefSorter *)outer$
+                          withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader:(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *)reader;
 
 - (OrgApacheLuceneUtilBytesRef *)next;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -103,4 +117,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstExternalRefSorter_Byte
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstExternalRefSorter")

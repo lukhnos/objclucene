@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Hashtable.h"
@@ -20,6 +19,10 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 #include "org/apache/lucene/queryparser/flexible/core/util/StringUtils.h"
 #include "org/apache/lucene/queryparser/flexible/messages/NLS.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
@@ -54,6 +57,13 @@ NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIE
 + (NSString *)PLAINTEXT_FIELD_NAME {
   return OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIELD_NAME;
 }
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)allocate {
   if (self->clauses_ == nil) {
@@ -94,7 +104,7 @@ NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIE
 }
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) cast_chk([super clone], [OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) cast_chk([super java_clone], [OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl class]);
   ((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) nil_chk(clone))->isLeaf_ = self->isLeaf_;
   JreStrongAssignAndConsume(&clone->tags_, new_JavaUtilHashtable_init());
   if (self->clauses_ != nil) {
@@ -107,7 +117,7 @@ NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIE
   return clone;
 }
 
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)clone {
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone {
   return [self cloneTree];
 }
 
@@ -121,19 +131,19 @@ NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIE
 
 - (void)setTagWithNSString:(NSString *)tagName
                     withId:(id)value {
-  [((JavaUtilHashtable *) nil_chk(self->tags_)) putWithId:[((NSString *) nil_chk(tagName)) lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)] withId:value];
+  [((JavaUtilHashtable *) nil_chk(self->tags_)) putWithId:[((NSString *) nil_chk(tagName)) java_lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)] withId:value];
 }
 
 - (void)unsetTagWithNSString:(NSString *)tagName {
-  [((JavaUtilHashtable *) nil_chk(self->tags_)) removeWithId:[((NSString *) nil_chk(tagName)) lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)]];
+  [((JavaUtilHashtable *) nil_chk(self->tags_)) removeWithId:[((NSString *) nil_chk(tagName)) java_lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)]];
 }
 
 - (jboolean)containsTagWithNSString:(NSString *)tagName {
-  return [((JavaUtilHashtable *) nil_chk(self->tags_)) containsKeyWithId:[((NSString *) nil_chk(tagName)) lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)]];
+  return [((JavaUtilHashtable *) nil_chk(self->tags_)) containsKeyWithId:[((NSString *) nil_chk(tagName)) java_lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)]];
 }
 
 - (id)getTagWithNSString:(NSString *)tagName {
-  return [((JavaUtilHashtable *) nil_chk(self->tags_)) getWithId:[((NSString *) nil_chk(tagName)) lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)]];
+  return [((JavaUtilHashtable *) nil_chk(self->tags_)) getWithId:[((NSString *) nil_chk(tagName)) java_lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)]];
 }
 
 - (void)setParentWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)parent {
@@ -160,13 +170,13 @@ NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIE
 }
 
 - (id<JavaUtilMap>)getTagMap {
-  return (id<JavaUtilMap>) cast_check([((JavaUtilHashtable *) nil_chk(self->tags_)) clone], JavaUtilMap_class_());
+  return (id<JavaUtilMap>) cast_check([((JavaUtilHashtable *) nil_chk(self->tags_)) java_clone], JavaUtilMap_class_());
 }
 
 - (void)removeChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)childNode {
-  id<JavaUtilIterator> it = [((id<JavaUtilList>) nil_chk(self->clauses_)) iterator];
+  id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(self->clauses_)) iterator]);
   while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
-    if ([it next] == childNode) {
+    if (JreObjectEqualsEquals([it next], childNode)) {
       [it remove];
     }
   }
@@ -175,18 +185,11 @@ NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIE
 
 - (void)removeFromParent {
   if (self->parent_ != nil) {
-    id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> parent = self->parent_;
+    id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> parent = JreRetainedLocalValue(self->parent_);
     JreStrongAssign(&self->parent_, nil);
     [parent removeChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:self];
   }
 }
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(tags_);
@@ -195,48 +198,84 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "allocate", NULL, "V", 0x4, NULL, NULL },
-    { "addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "add", "V", 0x11, NULL, NULL },
-    { "addWithJavaUtilList:", "add", "V", 0x11, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)V" },
-    { "isLeaf", NULL, "Z", 0x1, NULL, NULL },
-    { "setWithJavaUtilList:", "set", "V", 0x11, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)V" },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "setLeafWithBoolean:", "setLeaf", "V", 0x4, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.List;", 0x11, NULL, "()Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
-    { "setTagWithNSString:withId:", "setTag", "V", 0x1, NULL, NULL },
-    { "unsetTagWithNSString:", "unsetTag", "V", 0x1, NULL, NULL },
-    { "containsTagWithNSString:", "containsTag", "Z", 0x1, NULL, NULL },
-    { "getTagWithNSString:", "getTag", "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "setParentWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "setParent", "V", 0x2, NULL, NULL },
-    { "getParent", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, NULL, NULL },
-    { "isRoot", NULL, "Z", 0x4, NULL, NULL },
-    { "isDefaultFieldWithJavaLangCharSequence:", "isDefaultField", "Z", 0x4, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getTagMap", NULL, "Ljava.util.Map;", 0x1, NULL, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;" },
-    { "removeChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "removeChildren", "V", 0x1, NULL, NULL },
-    { "removeFromParent", NULL, "V", 0x1, NULL, NULL },
-    { "init", "QueryNodeImpl", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 0, 2, -1, 3, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 4, 2, -1, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, -1, -1, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, 6, -1, 5, -1, -1, -1 },
+    { NULL, "V", 0x4, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x11, -1, -1, -1, 9, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 14, 13, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 15, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 16, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 17, 18, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 19, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 20, -1, -1 },
+    { NULL, "V", 0x1, 21, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(allocate);
+  methods[2].selector = @selector(addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[3].selector = @selector(addWithJavaUtilList:);
+  methods[4].selector = @selector(isLeaf);
+  methods[5].selector = @selector(setWithJavaUtilList:);
+  methods[6].selector = @selector(cloneTree);
+  methods[7].selector = @selector(java_clone);
+  methods[8].selector = @selector(setLeafWithBoolean:);
+  methods[9].selector = @selector(getChildren);
+  methods[10].selector = @selector(setTagWithNSString:withId:);
+  methods[11].selector = @selector(unsetTagWithNSString:);
+  methods[12].selector = @selector(containsTagWithNSString:);
+  methods[13].selector = @selector(getTagWithNSString:);
+  methods[14].selector = @selector(setParentWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[15].selector = @selector(getParent);
+  methods[16].selector = @selector(isRoot);
+  methods[17].selector = @selector(isDefaultFieldWithJavaLangCharSequence:);
+  methods[18].selector = @selector(description);
+  methods[19].selector = @selector(getTagMap);
+  methods[20].selector = @selector(removeChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[21].selector = @selector(removeFromParent);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "PLAINTEXT_FIELD_NAME", "PLAINTEXT_FIELD_NAME", 0x19, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIELD_NAME, NULL, .constantValue.asLong = 0 },
-    { "isLeaf_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "tags_", NULL, 0x2, "Ljava.util.Hashtable;", NULL, "Ljava/util/Hashtable<Ljava/lang/String;Ljava/lang/Object;>;", .constantValue.asLong = 0 },
-    { "clauses_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;", .constantValue.asLong = 0 },
-    { "parent_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "toQueryStringIgnoreFields_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "PLAINTEXT_FIELD_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 22, -1, -1 },
+    { "isLeaf_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tags_", "LJavaUtilHashtable;", .constantValue.asLong = 0, 0x2, -1, -1, 23, -1 },
+    { "clauses_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 24, -1 },
+    { "parent_", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "toQueryStringIgnoreFields_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl = { 2, "QueryNodeImpl", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x401, 22, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "add", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)V", "set", "LJavaLangCloneNotSupportedException;", "clone", "setLeaf", "Z", "()Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;", "setTag", "LNSString;LNSObject;", "unsetTag", "LNSString;", "containsTag", "getTag", "setParent", "isDefaultField", "LJavaLangCharSequence;", "toString", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "removeChildren", &OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIELD_NAME, "Ljava/util/Hashtable<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl = { "QueryNodeImpl", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x401, 22, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
+}
+
 @end
+
+void OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *self) {
+  NSObject_init(self);
+  self->isLeaf_ = true;
+  JreStrongAssignAndConsume(&self->tags_, new_JavaUtilHashtable_init());
+  JreStrongAssign(&self->clauses_, nil);
+  JreStrongAssign(&self->parent_, nil);
+  self->toQueryStringIgnoreFields_ = false;
+}
 
 void OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> child) {
   if ([self isLeaf] || self->clauses_ == nil || child == nil) {
@@ -263,19 +302,10 @@ id<JavaUtilList> OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_getChi
 }
 
 void OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_setParentWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> parent) {
-  if (self->parent_ != parent) {
+  if (!JreObjectEqualsEquals(self->parent_, parent)) {
     [self removeFromParent];
     JreStrongAssign(&self->parent_, parent);
   }
-}
-
-void OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *self) {
-  NSObject_init(self);
-  self->isLeaf_ = true;
-  JreStrongAssignAndConsume(&self->tags_, new_JavaUtilHashtable_init());
-  JreStrongAssign(&self->clauses_, nil);
-  JreStrongAssign(&self->parent_, nil);
-  self->toQueryStringIgnoreFields_ = false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl)

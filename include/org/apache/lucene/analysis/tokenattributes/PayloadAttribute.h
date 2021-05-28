@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute))
 #define OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_
 
@@ -25,17 +31,17 @@
 /*!
  @brief The payload of a Token.
  <p>
- The payload is stored in the index at each position, and can
- be used to influence scoring when using Payload-based queries 
- in the <code>org.apache.lucene.search.payloads</code> and
- <code>org.apache.lucene.search.spans</code> packages.
+  The payload is stored in the index at each position, and can
+  be used to influence scoring when using Payload-based queries 
+  in the <code>org.apache.lucene.search.payloads</code> and 
+ <code>org.apache.lucene.search.spans</code> packages. 
  <p>
- NOTE: because the payload will be stored at each position, it's usually
- best to use the minimum number of bytes necessary. Some codec implementations
- may optimize payload storage when all payloads have the same length.
+  NOTE: because the payload will be stored at each position, it's usually
+  best to use the minimum number of bytes necessary. Some codec implementations
+  may optimize payload storage when all payloads have the same length.
  - seealso: org.apache.lucene.index.PostingsEnum
  */
-@protocol OrgApacheLuceneAnalysisTokenattributesPayloadAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisTokenattributesPayloadAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
  @brief Returns this Token's payload.
@@ -57,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPayloadAttribut
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute")

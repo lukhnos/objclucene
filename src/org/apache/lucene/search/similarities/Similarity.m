@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/similarities/Similarity.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collections.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/index/FieldInvertState.h"
@@ -15,6 +13,10 @@
 #include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/similarities/Similarity.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/Similarity must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchSimilaritiesSimilarity
 
@@ -56,16 +58,26 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Similarity", NULL, 0x1, NULL, NULL },
-    { "coordWithInt:withInt:", "coord", "F", 0x1, NULL, NULL },
-    { "queryNormWithFloat:", "queryNorm", "F", 0x1, NULL, NULL },
-    { "computeNormWithOrgApacheLuceneIndexFieldInvertState:", "computeNorm", "J", 0x401, NULL, NULL },
-    { "computeWeightWithFloat:withOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatisticsArray:", "computeWeight", "Lorg.apache.lucene.search.similarities.Similarity$SimWeight;", 0x481, NULL, NULL },
-    { "simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:withOrgApacheLuceneIndexLeafReaderContext:", "simScorer", "Lorg.apache.lucene.search.similarities.Similarity$SimScorer;", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;", 0x481, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;", 0x401, 8, 9, 10, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.similarities.Similarity$SimScorer;", "Lorg.apache.lucene.search.similarities.Similarity$SimWeight;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesSimilarity = { 2, "Similarity", "org.apache.lucene.search.similarities", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 2, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(coordWithInt:withInt:);
+  methods[2].selector = @selector(queryNormWithFloat:);
+  methods[3].selector = @selector(computeNormWithOrgApacheLuceneIndexFieldInvertState:);
+  methods[4].selector = @selector(computeWeightWithFloat:withOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatisticsArray:);
+  methods[5].selector = @selector(simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:withOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "coord", "II", "queryNorm", "F", "computeNorm", "LOrgApacheLuceneIndexFieldInvertState;", "computeWeight", "FLOrgApacheLuceneSearchCollectionStatistics;[LOrgApacheLuceneSearchTermStatistics;", "simScorer", "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;LOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesSimilarity = { "Similarity", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x401, 6, 0, -1, 11, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesSimilarity;
 }
 
@@ -114,14 +126,24 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SimScorer", NULL, 0x1, NULL, NULL },
-    { "scoreWithInt:withFloat:", "score", "F", 0x401, NULL, NULL },
-    { "computeSlopFactorWithInt:", "computeSlopFactor", "F", 0x401, NULL, NULL },
-    { "computePayloadFactorWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:", "computePayloadFactor", "F", 0x401, NULL, NULL },
-    { "explainWithInt:withOrgApacheLuceneSearchExplanation:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 2, 3, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 6, 7, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer = { 2, "SimScorer", "org.apache.lucene.search.similarities", "Similarity", 0x409, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(scoreWithInt:withFloat:);
+  methods[2].selector = @selector(computeSlopFactorWithInt:);
+  methods[3].selector = @selector(computePayloadFactorWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(explainWithInt:withOrgApacheLuceneSearchExplanation:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "score", "IF", "computeSlopFactor", "I", "computePayloadFactor", "IIILOrgApacheLuceneUtilBytesRef;", "explain", "ILOrgApacheLuceneSearchExplanation;", "LOrgApacheLuceneSearchSimilaritiesSimilarity;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer = { "SimScorer", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x409, 5, 0, 8, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
 }
 
@@ -155,12 +177,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SimWeight", NULL, 0x1, NULL, NULL },
-    { "getValueForNormalization", NULL, "F", 0x401, NULL, NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight = { 2, "SimWeight", "org.apache.lucene.search.similarities", "Similarity", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getValueForNormalization);
+  methods[2].selector = @selector(normalizeWithFloat:withFloat:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "normalize", "FF", "LOrgApacheLuceneSearchSimilaritiesSimilarity;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight = { "SimWeight", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x409, 3, 0, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;
 }
 

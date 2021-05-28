@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCachingTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCachingTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCachingTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCachingTokenFilter))
 #define OrgApacheLuceneAnalysisCachingTokenFilter_
 
@@ -24,26 +30,25 @@
 
 /*!
  @brief This class can be used if the token attributes of a TokenStream
- are intended to be consumed more than once.
- It caches
- all token attribute states locally in a List when the first call to
- <code>incrementToken()</code> is called. Subsequent calls will used the cache.
+  are intended to be consumed more than once.It caches
+  all token attribute states locally in a List when the first call to 
+ <code>incrementToken()</code> is called.
+ Subsequent calls will used the cache. 
  <p>
- <em>Important:</em> Like any proper TokenFilter, <code>reset()</code> propagates
- to the input, although only before <code>incrementToken()</code> is called the
- first time. Prior to  Lucene 5, it was never propagated.
+  <em>Important:</em> Like any proper TokenFilter, <code>reset()</code> propagates
+  to the input, although only before <code>incrementToken()</code> is called the
+  first time. Prior to  Lucene 5, it was never propagated.
  */
 @interface OrgApacheLuceneAnalysisCachingTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
 /*!
- @brief Create a new CachingTokenFilter around <code>input</code>.
- As with
- any normal TokenFilter, do <em>not</em> call reset on the input; this filter
- will do it normally.
+ @brief Create a new CachingTokenFilter around <code>input</code>.As with
+  any normal TokenFilter, do <em>not</em> call reset on the input; this filter
+  will do it normally.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (void)end;
 
@@ -58,9 +63,8 @@
 - (jboolean)isCached;
 
 /*!
- @brief Propagates reset if incrementToken has not yet been called.
- Otherwise
- it rewinds the iterator to the beginning of the cached list.
+ @brief Propagates reset if incrementToken has not yet been called.Otherwise
+  it rewinds the iterator to the beginning of the cached list.
  */
 - (void)reset;
 
@@ -78,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCachingTokenFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCachingTokenFilter")

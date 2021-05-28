@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/lukhnos/portmobile/file/FileVisitor.h"
 
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/FileVisitor must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgLukhnosPortmobileFileFileVisitor : NSObject
 
 @end
@@ -13,13 +17,22 @@
 @implementation OrgLukhnosPortmobileFileFileVisitor
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "preVisitDirectoryWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:", "preVisitDirectory", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x401, "Ljava.io.IOException;", "(TT;Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
-    { "visitFileWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:", "visitFile", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x401, "Ljava.io.IOException;", "(TT;Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
-    { "visitFileFailedWithId:withJavaIoIOException:", "visitFileFailed", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x401, "Ljava.io.IOException;", "(TT;Ljava/io/IOException;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
-    { "postVisitDirectoryWithId:withJavaIoIOException:", "postVisitDirectory", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x401, "Ljava.io.IOException;", "(TT;Ljava/io/IOException;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgLukhnosPortmobileFileFileVisitResult;", 0x401, 0, 1, 2, 3, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileFileVisitResult;", 0x401, 4, 1, 2, 3, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileFileVisitResult;", 0x401, 5, 6, 2, 7, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileFileVisitResult;", 0x401, 8, 6, 2, 7, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFileVisitor = { 2, "FileVisitor", "org.lukhnos.portmobile.file", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(preVisitDirectoryWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:);
+  methods[1].selector = @selector(visitFileWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:);
+  methods[2].selector = @selector(visitFileFailedWithId:withJavaIoIOException:);
+  methods[3].selector = @selector(postVisitDirectoryWithId:withJavaIoIOException:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "preVisitDirectory", "LNSObject;LOrgLukhnosPortmobileFileAttributeBasicFileAttributes;", "LJavaIoIOException;", "(TT;Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;)Lorg/lukhnos/portmobile/file/FileVisitResult;", "visitFile", "visitFileFailed", "LNSObject;LJavaIoIOException;", "(TT;Ljava/io/IOException;)Lorg/lukhnos/portmobile/file/FileVisitResult;", "postVisitDirectory", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFileVisitor = { "FileVisitor", "org.lukhnos.portmobile.file", ptrTable, methods, NULL, 7, 0x609, 4, 0, -1, -1, -1, 9, -1 };
   return &_OrgLukhnosPortmobileFileFileVisitor;
 }
 

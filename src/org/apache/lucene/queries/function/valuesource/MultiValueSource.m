@@ -7,13 +7,11 @@
 #include "org/apache/lucene/queries/function/ValueSource.h"
 #include "org/apache/lucene/queries/function/valuesource/MultiValueSource.h"
 
-@implementation OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/MultiValueSource must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-- (jint)dimension {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
+@implementation OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -22,12 +20,24 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (jint)dimension {
+  // can't call an abstract method
+  [self doesNotRecognizeSelector:_cmd];
+  return 0;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "dimension", NULL, "I", 0x401, NULL, NULL },
-    { "init", "MultiValueSource", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource = { 2, "MultiValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(dimension);
+  #pragma clang diagnostic pop
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource = { "MultiValueSource", "org.apache.lucene.queries.function.valuesource", NULL, methods, NULL, 7, 0x401, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource;
 }
 

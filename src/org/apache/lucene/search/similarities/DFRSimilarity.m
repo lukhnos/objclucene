@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/similarities/DFRSimilarity.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/NullPointerException.h"
@@ -14,6 +15,10 @@
 #include "org/apache/lucene/search/similarities/DFRSimilarity.h"
 #include "org/apache/lucene/search/similarities/Normalization.h"
 #include "org/apache/lucene/search/similarities/SimilarityBase.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/DFRSimilarity must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchSimilaritiesDFRSimilarity
 
@@ -39,7 +44,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
   if ([((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalBoost] != 1.0f) {
     [((id<JavaUtilList>) nil_chk(subs)) addWithId:OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([stats getTotalBoost], @"boost", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()])];
   }
-  OrgApacheLuceneSearchExplanation *normExpl = [((OrgApacheLuceneSearchSimilaritiesNormalization *) nil_chk(normalization_)) explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:stats withFloat:freq withFloat:docLen];
+  OrgApacheLuceneSearchExplanation *normExpl = JreRetainedLocalValue([((OrgApacheLuceneSearchSimilaritiesNormalization *) nil_chk(normalization_)) explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:stats withFloat:freq withFloat:docLen]);
   jfloat tfn = [((OrgApacheLuceneSearchExplanation *) nil_chk(normExpl)) getValue];
   [((id<JavaUtilList>) nil_chk(subs)) addWithId:normExpl];
   [subs addWithId:[((OrgApacheLuceneSearchSimilaritiesBasicModel *) nil_chk(basicModel_)) explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:stats withFloat:tfn]];
@@ -70,21 +75,33 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSimilaritiesBasicModel:withOrgApacheLuceneSearchSimilaritiesAfterEffect:withOrgApacheLuceneSearchSimilaritiesNormalization:", "DFRSimilarity", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x4, NULL, NULL },
-    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getBasicModel", NULL, "Lorg.apache.lucene.search.similarities.BasicModel;", 0x1, NULL, NULL },
-    { "getAfterEffect", NULL, "Lorg.apache.lucene.search.similarities.AfterEffect;", 0x1, NULL, NULL },
-    { "getNormalization", NULL, "Lorg.apache.lucene.search.similarities.Normalization;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 4, -1, 5, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSimilaritiesBasicModel;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSimilaritiesAfterEffect;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSimilaritiesNormalization;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSimilaritiesBasicModel:withOrgApacheLuceneSearchSimilaritiesAfterEffect:withOrgApacheLuceneSearchSimilaritiesNormalization:);
+  methods[1].selector = @selector(scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:);
+  methods[2].selector = @selector(explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:);
+  methods[3].selector = @selector(description);
+  methods[4].selector = @selector(getBasicModel);
+  methods[5].selector = @selector(getAfterEffect);
+  methods[6].selector = @selector(getNormalization);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "basicModel_", NULL, 0x14, "Lorg.apache.lucene.search.similarities.BasicModel;", NULL, NULL, .constantValue.asLong = 0 },
-    { "afterEffect_", NULL, 0x14, "Lorg.apache.lucene.search.similarities.AfterEffect;", NULL, NULL, .constantValue.asLong = 0 },
-    { "normalization_", NULL, 0x14, "Lorg.apache.lucene.search.similarities.Normalization;", NULL, NULL, .constantValue.asLong = 0 },
+    { "basicModel_", "LOrgApacheLuceneSearchSimilaritiesBasicModel;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "afterEffect_", "LOrgApacheLuceneSearchSimilaritiesAfterEffect;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "normalization_", "LOrgApacheLuceneSearchSimilaritiesNormalization;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDFRSimilarity = { 2, "DFRSimilarity", "org.apache.lucene.search.similarities", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSimilaritiesBasicModel;LOrgApacheLuceneSearchSimilaritiesAfterEffect;LOrgApacheLuceneSearchSimilaritiesNormalization;", "score", "LOrgApacheLuceneSearchSimilaritiesBasicStats;FF", "explain", "LJavaUtilList;LOrgApacheLuceneSearchSimilaritiesBasicStats;IFF", "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDFRSimilarity = { "DFRSimilarity", "org.apache.lucene.search.similarities", ptrTable, methods, fields, 7, 0x1, 7, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesDFRSimilarity;
 }
 

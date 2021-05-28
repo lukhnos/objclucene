@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisHiHindiAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisHiHindiAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisHiHindiAnalyzer))
 #define OrgApacheLuceneAnalysisHiHindiAnalyzer_
 
@@ -27,30 +33,29 @@
  @brief Analyzer for Hindi.
  */
 @interface OrgApacheLuceneAnalysisHiHindiAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
-
-+ (NSString *)DEFAULT_STOPWORD_FILE;
+@property (readonly, copy, class) NSString *DEFAULT_STOPWORD_FILE NS_SWIFT_NAME(DEFAULT_STOPWORD_FILE);
 
 #pragma mark Public
 
 /*!
- @brief Builds an analyzer with the default stop words:
+ @brief Builds an analyzer with the default stop words: 
  <code>DEFAULT_STOPWORD_FILE</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Builds an analyzer with the given stop words
  @param stopwords a stopword set
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
 /*!
  @brief Builds an analyzer with the given stop words
  @param stopwords a stopword set
  @param stemExclusionSet a stemming exclusion set
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
-                    withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
+                              withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
 
 /*!
  @brief Returns an unmodifiable instance of the default stop-words set.
@@ -62,14 +67,14 @@
 
 /*!
  @brief Creates
- <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- used to tokenize all the text in the provided <code>Reader</code>.
+  <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+  used to tokenize all the text in the provided <code>Reader</code>.
  @return <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- built from a <code>StandardTokenizer</code> filtered with
- <code>LowerCaseFilter</code>, <code>IndicNormalizationFilter</code>,
- <code>HindiNormalizationFilter</code>, <code>SetKeywordMarkerFilter</code>
- if a stem exclusion set is provided, <code>HindiStemFilter</code>, and
- Hindi Stop words
+          built from a <code>StandardTokenizer</code> filtered with
+          <code>LowerCaseFilter</code>, <code>IndicNormalizationFilter</code>,
+          <code>HindiNormalizationFilter</code>, <code>SetKeywordMarkerFilter</code>
+          if a stem exclusion set is provided, <code>HindiStemFilter</code>, and
+          Hindi Stop words
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
@@ -80,14 +85,14 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHiHindiAnalyzer)
 /*!
  @brief File containing default Hindi stopwords.
  Default stopword list is from http://members.unine.ch/jacques.savoy/clef/index.html
- The stopword list is BSD-Licensed.
+  The stopword list is BSD-Licensed.
  */
-inline NSString *OrgApacheLuceneAnalysisHiHindiAnalyzer_get_DEFAULT_STOPWORD_FILE();
+inline NSString *OrgApacheLuceneAnalysisHiHindiAnalyzer_get_DEFAULT_STOPWORD_FILE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisHiHindiAnalyzer_DEFAULT_STOPWORD_FILE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHiHindiAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisHiHindiAnalyzer_getDefaultStopSet();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisHiHindiAnalyzer_getDefaultStopSet(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisHiHindiAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet);
 
@@ -103,12 +108,16 @@ FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiAnalyzer *create_OrgApacheLucene
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiAnalyzer_init(OrgApacheLuceneAnalysisHiHindiAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiAnalyzer *new_OrgApacheLuceneAnalysisHiHindiAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiAnalyzer *new_OrgApacheLuceneAnalysisHiHindiAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiAnalyzer *create_OrgApacheLuceneAnalysisHiHindiAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiAnalyzer *create_OrgApacheLuceneAnalysisHiHindiAnalyzer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHiHindiAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiAnalyzer")

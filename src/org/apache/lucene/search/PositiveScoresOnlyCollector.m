@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/PositiveScoresOnlyCollector.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/Collector.h"
 #include "org/apache/lucene/search/FilterCollector.h"
@@ -15,30 +13,32 @@
 #include "org/apache/lucene/search/ScoreCachingWrappingScorer.h"
 #include "org/apache/lucene/search/Scorer.h"
 
-@interface OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 : OrgApacheLuceneSearchFilterLeafCollector {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/PositiveScoresOnlyCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneSearchPositiveScoresOnlyCollector_1 : OrgApacheLuceneSearchFilterLeafCollector {
  @public
   OrgApacheLuceneSearchScorer *scorer_;
 }
+
+- (instancetype)initWithOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)inArg;
 
 - (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
 
 - (void)collectWithInt:(jint)doc;
 
-- (instancetype)initWithOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPositiveScoresOnlyCollector_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1, scorer_, OrgApacheLuceneSearchScorer *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPositiveScoresOnlyCollector_1, scorer_, OrgApacheLuceneSearchScorer *)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *self, id<OrgApacheLuceneSearchLeafCollector> arg$0);
+__attribute__((unused)) static void OrgApacheLuceneSearchPositiveScoresOnlyCollector_1_initWithOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchPositiveScoresOnlyCollector_1 *self, id<OrgApacheLuceneSearchLeafCollector> inArg);
 
-__attribute__((unused)) static OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchPositiveScoresOnlyCollector_1 *new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> inArg) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchPositiveScoresOnlyCollector_1 *create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> inArg);
 
 @implementation OrgApacheLuceneSearchPositiveScoresOnlyCollector
 
@@ -48,15 +48,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1)
 }
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  return create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_([super getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context]);
+  return create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_1_initWithOrgApacheLuceneSearchLeafCollector_([super getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchCollector:", "PositiveScoresOnlyCollector", NULL, 0x1, NULL, NULL },
-    { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchLeafCollector;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPositiveScoresOnlyCollector = { 2, "PositiveScoresOnlyCollector", "org.apache.lucene.search", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchCollector:);
+  methods[1].selector = @selector(getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchCollector;", "getLeafCollector", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPositiveScoresOnlyCollector = { "PositiveScoresOnlyCollector", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPositiveScoresOnlyCollector;
 }
 
@@ -76,7 +83,12 @@ OrgApacheLuceneSearchPositiveScoresOnlyCollector *create_OrgApacheLuceneSearchPo
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPositiveScoresOnlyCollector)
 
-@implementation OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1
+@implementation OrgApacheLuceneSearchPositiveScoresOnlyCollector_1
+
+- (instancetype)initWithOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)inArg {
+  OrgApacheLuceneSearchPositiveScoresOnlyCollector_1_initWithOrgApacheLuceneSearchLeafCollector_(self, inArg);
+  return self;
+}
 
 - (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
   JreStrongAssignAndConsume(&self->scorer_, new_OrgApacheLuceneSearchScoreCachingWrappingScorer_initWithOrgApacheLuceneSearchScorer_(scorer));
@@ -89,42 +101,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPositiveScoresOnlyCollecto
   }
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)arg$0 {
-  OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(self, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(scorer_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchLeafCollector:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchLeafCollector:);
+  methods[1].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  methods[2].selector = @selector(collectWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "scorer_", NULL, 0x2, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "scorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchPositiveScoresOnlyCollector", "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 = { 2, "", "org.apache.lucene.search", "PositiveScoresOnlyCollector", 0x8008, 3, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchLeafCollector;", "setScorer", "LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "collect", "I", "LOrgApacheLuceneSearchPositiveScoresOnlyCollector;", "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPositiveScoresOnlyCollector_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 3, 1, 6, -1, 7, -1, -1 };
+  return &_OrgApacheLuceneSearchPositiveScoresOnlyCollector_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *self, id<OrgApacheLuceneSearchLeafCollector> arg$0) {
-  OrgApacheLuceneSearchFilterLeafCollector_initWithOrgApacheLuceneSearchLeafCollector_(self, arg$0);
+void OrgApacheLuceneSearchPositiveScoresOnlyCollector_1_initWithOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchPositiveScoresOnlyCollector_1 *self, id<OrgApacheLuceneSearchLeafCollector> inArg) {
+  OrgApacheLuceneSearchFilterLeafCollector_initWithOrgApacheLuceneSearchLeafCollector_(self, inArg);
 }
 
-OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1, initWithOrgApacheLuceneSearchLeafCollector_, arg$0)
+OrgApacheLuceneSearchPositiveScoresOnlyCollector_1 *new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPositiveScoresOnlyCollector_1, initWithOrgApacheLuceneSearchLeafCollector_, inArg)
 }
 
-OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1, initWithOrgApacheLuceneSearchLeafCollector_, arg$0)
+OrgApacheLuceneSearchPositiveScoresOnlyCollector_1 *create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPositiveScoresOnlyCollector_1, initWithOrgApacheLuceneSearchLeafCollector_, inArg)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1)

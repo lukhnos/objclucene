@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester))
 #define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_
 
@@ -33,97 +39,88 @@
 /*!
  @brief Builds an ngram model from the text sent to <code>build</code>
   and predicts based on the last grams-1 tokens in
- the request sent to <code>lookup</code>.
- This tries to
- handle the "long tail" of suggestions for when the
- incoming query is a never before seen query string.
+  the request sent to <code>lookup</code>.This tries to
+  handle the "long tail" of suggestions for when the
+  incoming query is a never before seen query string.
  <p>Likely this suggester would only be used as a
- fallback, when the primary suggester fails to find
- any suggestions.
+  fallback, when the primary suggester fails to find
+  any suggestions. 
  <p>Note that the weight for each suggestion is unused,
- and the suggestions are the analyzed forms (so your
- analysis process should normally be very "light").
+  and the suggestions are the analyzed forms (so your
+  analysis process should normally be very "light"). 
  <p>This uses the stupid backoff language model to smooth
- scores across ngram models; see
- "Large language models in machine translation",
- http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.76.1126
- for details.
+  scores across ngram models; see
+  "Large language models in machine translation",
+  http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.76.1126
+  for details. 
  <p> From <code>lookup</code>, the key of each result is the
- ngram token; the value is Long.MAX_VALUE * score (fixed
- point, cast to long).  Divide by Long.MAX_VALUE to get
- the score back, which ranges from 0.0 to 1.0.
- onlyMorePopular is unused.
+  ngram token; the value is Long.MAX_VALUE * score (fixed
+  point, cast to long).  Divide by Long.MAX_VALUE to get
+  the score back, which ranges from 0.0 to 1.0. 
+  onlyMorePopular is unused.
  */
 @interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester : OrgApacheLuceneSearchSuggestLookup
-
-+ (NSString *)CODEC_NAME;
-
-+ (jint)VERSION_START;
-
-+ (jint)VERSION_CURRENT;
-
-+ (jint)DEFAULT_GRAMS;
-
-+ (jdouble)ALPHA;
-
-+ (jbyte)DEFAULT_SEPARATOR;
-
-+ (id<JavaUtilComparator>)weightComparator;
+@property (readonly, copy, class) NSString *CODEC_NAME NS_SWIFT_NAME(CODEC_NAME);
+@property (readonly, class) jint VERSION_START NS_SWIFT_NAME(VERSION_START);
+@property (readonly, class) jint VERSION_CURRENT NS_SWIFT_NAME(VERSION_CURRENT);
+@property (readonly, class) jint DEFAULT_GRAMS NS_SWIFT_NAME(DEFAULT_GRAMS);
+@property (readonly, class) jdouble ALPHA NS_SWIFT_NAME(ALPHA);
+@property (readonly, class) jbyte DEFAULT_SEPARATOR NS_SWIFT_NAME(DEFAULT_SEPARATOR);
+@property (readonly, class, strong) id<JavaUtilComparator> weightComparator NS_SWIFT_NAME(weightComparator);
 
 #pragma mark Public
 
 /*!
  @brief Instantiate, using the provided analyzer for both
- indexing and lookup, using bigram model by default.
+   indexing and lookup, using bigram model by default.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  @brief Instantiate, using the provided indexing and lookup
- analyzers, using bigram model by default.
+   analyzers, using bigram model by default.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                              withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer;
 
 /*!
  @brief Instantiate, using the provided indexing and lookup
- analyzers, with the specified model (2
- = bigram, 3 = trigram, etc.).
+   analyzers, with the specified model (2
+   = bigram, 3 = trigram, etc.).
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                                withInt:(jint)grams;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                              withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                          withInt:(jint)grams;
 
 /*!
  @brief Instantiate, using the provided indexing and lookup
- analyzers, and specified model (2 = bigram, 3 =
- trigram ,etc.).
- The separator is passed to <code>ShingleFilter.setTokenSeparator</code>
+   analyzers, and specified model (2 = bigram, 3 =
+   trigram ,etc.).The separator is passed to <code>ShingleFilter.setTokenSeparator</code>
   to join multiple
- tokens into a single ngram token; it must be an ascii
- (7-bit-clean) byte.  No input tokens should have this
- byte, otherwise <code>IllegalArgumentException</code> is
- thrown. 
+   tokens into a single ngram token; it must be an ascii
+   (7-bit-clean) byte.
+ No input tokens should have this
+   byte, otherwise <code>IllegalArgumentException</code> is
+   thrown.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                                withInt:(jint)grams
-                                               withByte:(jbyte)separator;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                              withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                          withInt:(jint)grams
+                                                         withByte:(jbyte)separator;
 
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
 
 /*!
  @brief Build the suggest index, using up to the specified
- amount of temporary RAM while building.
- Note that
- the weights for the suggestions are ignored. 
+   amount of temporary RAM while building.Note that
+   the weights for the suggestions are ignored.
  */
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator
                                                 withDouble:(jdouble)ramBufferSizeMB;
 
 /*!
  @brief Returns the weight associated with an input string,
- or null if it does not exist.
+  or null if it does not exist.
  */
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
@@ -162,6 +159,10 @@
 
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
@@ -169,7 +170,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
 /*!
  @brief Codec name used in the header for the saved model.
  */
-inline NSString *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_CODEC_NAME();
+inline NSString *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_CODEC_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_CODEC_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, CODEC_NAME, NSString *)
@@ -177,46 +178,45 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSugge
 /*!
  @brief Initial version of the the saved model file format.
  */
-inline jint OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_VERSION_START();
+inline jint OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_VERSION_START(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_START 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, VERSION_START, jint)
 
 /*!
  @brief Current version of the the saved model file format.
  */
-inline jint OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_VERSION_CURRENT();
+inline jint OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_VERSION_CURRENT(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_CURRENT 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, VERSION_CURRENT, jint)
 
 /*!
  @brief By default we use a bigram model.
  */
-inline jint OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_DEFAULT_GRAMS();
+inline jint OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_DEFAULT_GRAMS(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_GRAMS 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, DEFAULT_GRAMS, jint)
 
 /*!
  @brief The constant used for backoff smoothing; during
- lookup, this means that if a given trigram did not
- occur, and we backoff to the bigram, the overall score
- will be 0.4 times what the bigram model would have
- assigned.
+   lookup, this means that if a given trigram did not
+   occur, and we backoff to the bigram, the overall score
+   will be 0.4 times what the bigram model would have
+   assigned.
  */
-inline jdouble OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_ALPHA();
+inline jdouble OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_ALPHA(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_ALPHA 0.4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, ALPHA, jdouble)
 
 /*!
  @brief The default character used to join multiple tokens
- into a single ngram token.
- The input tokens produced
- by the analyzer must not contain this character. 
+   into a single ngram token.The input tokens produced
+   by the analyzer must not contain this character.
  */
-inline jbyte OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_DEFAULT_SEPARATOR();
+inline jbyte OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_DEFAULT_SEPARATOR(void);
 #define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_SEPARATOR 30
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, DEFAULT_SEPARATOR, jbyte)
 
-inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_weightComparator();
+inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_weightComparator(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, weightComparator, id<JavaUtilComparator>)
@@ -249,4 +249,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggeste
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester")

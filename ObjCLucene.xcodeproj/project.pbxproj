@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6AC1968526609C3D0029A94B /* WeakSetOnce.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC1968426609C3D0029A94B /* WeakSetOnce.m */; };
 		6AD2F5561B877C9D003F2171 /* libObjCLucene.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD2F54A1B877C9D003F2171 /* libObjCLucene.a */; };
 		758886EC1CEDC61300871ECC /* Analyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75887F901CEDC61200871ECC /* Analyzer.m */; };
 		758886ED1CEDC61300871ECC /* AnalyzerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75887F911CEDC61200871ECC /* AnalyzerWrapper.m */; };
@@ -1777,6 +1778,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6AC1968426609C3D0029A94B /* WeakSetOnce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakSetOnce.m; sourceTree = "<group>"; };
+		6AC1968726609C4F0029A94B /* WeakSetOnce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeakSetOnce.h; sourceTree = "<group>"; };
 		6AD2F54A1B877C9D003F2171 /* libObjCLucene.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjCLucene.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD2F5551B877C9D003F2171 /* ObjCLuceneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjCLuceneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD2F55B1B877C9D003F2171 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -5290,6 +5293,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AC1968326609C3D0029A94B /* lucene */ = {
+			isa = PBXGroup;
+			children = (
+				6AC1968426609C3D0029A94B /* WeakSetOnce.m */,
+			);
+			path = lucene;
+			sourceTree = "<group>";
+		};
+		6AC1968626609C4F0029A94B /* lucene */ = {
+			isa = PBXGroup;
+			children = (
+				6AC1968726609C4F0029A94B /* WeakSetOnce.h */,
+			);
+			path = lucene;
+			sourceTree = "<group>";
+		};
 		6AD2F5411B877C9C003F2171 = {
 			isa = PBXGroup;
 			children = (
@@ -8092,6 +8111,7 @@
 				75887F521CEDC61200871ECC /* file */,
 				75887F641CEDC61200871ECC /* invoke */,
 				75887F681CEDC61200871ECC /* lang */,
+				6AC1968626609C4F0029A94B /* lucene */,
 				75887F6A1CEDC61200871ECC /* util */,
 			);
 			path = portmobile;
@@ -10995,6 +11015,7 @@
 				758886B31CEDC61300871ECC /* file */,
 				758886C51CEDC61300871ECC /* invoke */,
 				758886C91CEDC61300871ECC /* lang */,
+				6AC1968326609C3D0029A94B /* lucene */,
 				758886CB1CEDC61300871ECC /* util */,
 			);
 			path = portmobile;
@@ -11176,7 +11197,7 @@
 		6AD2F5421B877C9C003F2171 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Lukhnos Liu";
 				TargetAttributes = {
 					6AD2F5491B877C9D003F2171 = {
@@ -11189,10 +11210,11 @@
 			};
 			buildConfigurationList = 6AD2F5451B877C9D003F2171 /* Build configuration list for PBXProject "ObjCLucene" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 6AD2F5411B877C9C003F2171;
 			productRefGroup = 6AD2F54B1B877C9D003F2171 /* Products */;
@@ -11761,6 +11783,7 @@
 				75888A2E1CEDC61400871ECC /* TermFilter.m in Sources */,
 				758888511CEDC61400871ECC /* TokenRangeSinkFilter.m in Sources */,
 				75888AD51CEDC61400871ECC /* CharStream.m in Sources */,
+				6AC1968526609C3D0029A94B /* WeakSetOnce.m in Sources */,
 				758887D91CEDC61300871ECC /* LengthFilter.m in Sources */,
 				758887981CEDC61300871ECC /* package-info.m in Sources */,
 				75888D6C1CEDC61400871ECC /* PagedGrowableWriter.m in Sources */,
@@ -12993,13 +13016,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -13021,7 +13055,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -13036,13 +13070,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -13057,7 +13102,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -13068,13 +13113,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/vendor/j2objc/include",
 					"$(SRCROOT)/include",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -13089,13 +13135,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/vendor/j2objc/include",
 					"$(SRCROOT)/include",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -13109,6 +13156,7 @@
 		6AD2F5621B877C9D003F2171 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -13128,6 +13176,7 @@
 		6AD2F5631B877C9D003F2171 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

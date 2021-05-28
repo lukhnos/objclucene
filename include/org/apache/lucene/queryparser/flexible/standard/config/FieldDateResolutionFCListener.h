@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener))
 #define OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_
 
@@ -24,9 +30,9 @@
 @class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 
 /*!
- @brief This listener listens for every field configuration request and assign a
+ @brief This listener listens for every field configuration request and assign a 
  <code>ConfigurationKeys.DATE_RESOLUTION</code> to the equivalent <code>FieldConfig</code> based
- on a defined map: fieldName -&gt; <code>Resolution</code> stored in
+  on a defined map: fieldName -&gt; <code>Resolution</code> stored in 
  <code>ConfigurationKeys.FIELD_DATE_RESOLUTION_MAP</code>.
  - seealso: ConfigurationKeys#DATE_RESOLUTION
  - seealso: ConfigurationKeys#FIELD_DATE_RESOLUTION_MAP
@@ -37,9 +43,13 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)config;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)config;
 
 - (void)buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)fieldConfig;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -55,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardConfigField
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener")

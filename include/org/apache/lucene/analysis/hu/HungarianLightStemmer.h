@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisHuHungarianLightStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisHuHungarianLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisHuHungarianLightStemmer))
 #define OrgApacheLuceneAnalysisHuHungarianLightStemmer_
 
@@ -21,15 +27,15 @@
 /*!
  @brief Light Stemmer for Hungarian.
  <p>
- This stemmer implements the "UniNE" algorithm in:
+  This stemmer implements the "UniNE" algorithm in: 
  <i>Light Stemming Approaches for the French, Portuguese, German and Hungarian Languages</i>
- Jacques Savoy
+  Jacques Savoy
  */
 @interface OrgApacheLuceneAnalysisHuHungarianLightStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -40,12 +46,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHuHungarianLightStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(OrgApacheLuceneAnalysisHuHungarianLightStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHuHungarianLightStemmer *new_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHuHungarianLightStemmer *new_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHuHungarianLightStemmer *create_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHuHungarianLightStemmer *create_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHuHungarianLightStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemmer")

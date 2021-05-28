@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper || defined(INCLUDE_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper))
 #define OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_
 
@@ -26,8 +32,7 @@
 
 /*!
  @brief Custom ConstantScoreWrapper for <code>GeoPointTermQuery</code> that cuts over to DocValues
- for post filtering boundary ranges.
- Multi-valued GeoPoint documents are supported.
+  for post filtering boundary ranges.Multi-valued GeoPoint documents are supported.
  */
 @interface OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper : OrgApacheLuceneSearchQuery {
  @public
@@ -47,22 +52,30 @@
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneSearchGeoPointTermQuery:(OrgApacheLuceneSearchGeoPointTermQuery *)query;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery:(OrgApacheLuceneSearchGeoPointTermQuery *)query;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper, query_, id)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper, query_, OrgApacheLuceneSearchGeoPointTermQuery *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *self, OrgApacheLuceneSearchGeoPointTermQuery *query);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *self, OrgApacheLuceneSearchGeoPointTermQuery *query);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQuery *query) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQuery *query) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQuery *query);
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQuery *query);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper")

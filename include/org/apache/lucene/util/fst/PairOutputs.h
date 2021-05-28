@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstPairOutputs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstPairOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstPairOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstPairOutputs))
 #define OrgApacheLuceneUtilFstPairOutputs_
 
@@ -31,8 +37,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs1
-                    withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs2;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs1
+                              withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs2;
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)addWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)prefix
                                                withId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output;
@@ -41,6 +47,9 @@
                                                   withId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)pair2;
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)getNoOutput;
+
+- (OrgApacheLuceneUtilFstPairOutputs_Pair *)mergeWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)arg0
+                                                 withId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)arg1;
 
 /*!
  @brief Create a new Pair
@@ -54,6 +63,8 @@
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
+- (OrgApacheLuceneUtilFstPairOutputs_Pair *)readFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)arg0;
+
 - (void)skipOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)subtractWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output
@@ -63,6 +74,10 @@
 
 - (void)writeWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)writer;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -98,6 +113,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstPairOutputs)
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstPairOutputs_Pair)
@@ -109,4 +128,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstPairOutputs_Pair)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstPairOutputs")

@@ -8,6 +8,10 @@
 #include "org/apache/lucene/analysis/ru/RussianLightStemmer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ru/RussianLightStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisRuRussianLightStemmer ()
 
 - (jint)normalizeWithCharArray:(IOSCharArray *)s
@@ -23,6 +27,13 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisRuRussianLightStemmer
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisRuRussianLightStemmer_removeCaseWithCharArray_withInt_(OrgApacheLuceneAnalysisRuRussianLightStemmer *self, IOSCharArray *s, jint len);
 
 @implementation OrgApacheLuceneAnalysisRuRussianLightStemmer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisRuRussianLightStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -40,25 +51,39 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisRuRussianLightStemmer
   return OrgApacheLuceneAnalysisRuRussianLightStemmer_removeCaseWithCharArray_withInt_(self, s, len);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisRuRussianLightStemmer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "normalizeWithCharArray:withInt:", "normalize", "I", 0x2, NULL, NULL },
-    { "removeCaseWithCharArray:withInt:", "removeCase", "I", 0x2, NULL, NULL },
-    { "init", "RussianLightStemmer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisRuRussianLightStemmer = { 2, "RussianLightStemmer", "org.apache.lucene.analysis.ru", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  methods[2].selector = @selector(normalizeWithCharArray:withInt:);
+  methods[3].selector = @selector(removeCaseWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "stem", "[CI", "normalize", "removeCase" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisRuRussianLightStemmer = { "RussianLightStemmer", "org.apache.lucene.analysis.ru", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisRuRussianLightStemmer;
 }
 
 @end
+
+void OrgApacheLuceneAnalysisRuRussianLightStemmer_init(OrgApacheLuceneAnalysisRuRussianLightStemmer *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneAnalysisRuRussianLightStemmer *new_OrgApacheLuceneAnalysisRuRussianLightStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisRuRussianLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisRuRussianLightStemmer *create_OrgApacheLuceneAnalysisRuRussianLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisRuRussianLightStemmer, init)
+}
 
 jint OrgApacheLuceneAnalysisRuRussianLightStemmer_normalizeWithCharArray_withInt_(OrgApacheLuceneAnalysisRuRussianLightStemmer *self, IOSCharArray *s, jint len) {
   if (len > 3) switch (IOSCharArray_Get(nil_chk(s), len - 1)) {
@@ -88,18 +113,6 @@ jint OrgApacheLuceneAnalysisRuRussianLightStemmer_removeCaseWithCharArray_withIn
     return len - 1;
   }
   return len;
-}
-
-void OrgApacheLuceneAnalysisRuRussianLightStemmer_init(OrgApacheLuceneAnalysisRuRussianLightStemmer *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneAnalysisRuRussianLightStemmer *new_OrgApacheLuceneAnalysisRuRussianLightStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisRuRussianLightStemmer, init)
-}
-
-OrgApacheLuceneAnalysisRuRussianLightStemmer *create_OrgApacheLuceneAnalysisRuRussianLightStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisRuRussianLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisRuRussianLightStemmer)

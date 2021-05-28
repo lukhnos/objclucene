@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDisjunctionMaxQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDisjunctionMaxQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionMaxQuery || defined(INCLUDE_OrgApacheLuceneSearchDisjunctionMaxQuery))
 #define OrgApacheLuceneSearchDisjunctionMaxQuery_
 
@@ -29,21 +35,23 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilCollection;
+@protocol JavaUtilFunctionConsumer;
 @protocol JavaUtilIterator;
+@protocol JavaUtilSpliterator;
 
 /*!
  @brief A query that generates the union of documents produced by its subqueries, and that scores each document with the maximum
- score for that document as produced by any subquery, plus a tie breaking increment for any additional matching subqueries.
+  score for that document as produced by any subquery, plus a tie breaking increment for any additional matching subqueries.
  This is useful when searching for a word in multiple fields with different boost factors (so that the fields cannot be
- combined equivalently into a single search field).  We want the primary score to be the one associated with the highest boost,
- not the sum of the field scores (as BooleanQuery would give).
- If the query is "albino elephant" this ensures that "albino" matching one field and "elephant" matching
- another gets a higher score than "albino" matching both fields.
- To get this result, use both BooleanQuery and DisjunctionMaxQuery:  for each term a DisjunctionMaxQuery searches for it in
- each field, while the set of these DisjunctionMaxQuery's is combined into a BooleanQuery.
- The tie breaker capability allows results that include the same term in multiple fields to be judged better than results that
- include this term in only the best of those multiple fields, without confusing this with the better case of two different terms
- in the multiple fields.
+  combined equivalently into a single search field).  We want the primary score to be the one associated with the highest boost,
+  not the sum of the field scores (as BooleanQuery would give).
+  If the query is "albino elephant" this ensures that "albino" matching one field and "elephant" matching
+  another gets a higher score than "albino" matching both fields.
+  To get this result, use both BooleanQuery and DisjunctionMaxQuery:  for each term a DisjunctionMaxQuery searches for it in
+  each field, while the set of these DisjunctionMaxQuery's is combined into a BooleanQuery.
+  The tie breaker capability allows results that include the same term in multiple fields to be judged better than results that
+  include this term in only the best of those multiple fields, without confusing this with the better case of two different terms
+  in the multiple fields.
  */
 @interface OrgApacheLuceneSearchDisjunctionMaxQuery : OrgApacheLuceneSearchQuery < JavaLangIterable >
 
@@ -51,25 +59,23 @@
 
 /*!
  @brief Creates a new DisjunctionMaxQuery
- @param disjuncts a <code>Collection<Query></code> of all the disjuncts to add
- @param tieBreakerMultiplier   the weight to give to each matching non-maximum disjunct
+ @param disjuncts a <code>Collection<Query></code>  of all the disjuncts to add
+ @param tieBreakerMultiplier the weight to give to each matching non-maximum disjunct
  */
-- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)disjuncts
-                                 withFloat:(jfloat)tieBreakerMultiplier;
+- (instancetype __nonnull)initWithJavaUtilCollection:(id<JavaUtilCollection>)disjuncts
+                                           withFloat:(jfloat)tieBreakerMultiplier;
 
 /*!
- @brief Creates a new empty DisjunctionMaxQuery.
- Use add() to add the subqueries.
- @param tieBreakerMultiplier the score of each non-maximum disjunct for a document is multiplied by this weight
- and added into the final score.  If non-zero, the value should be small, on the order of 0.1, which says that
- 10 occurrences of word in a lower-scored field that is also in a higher scored field is just as good as a unique
- word in the lower scored field (i.e., one that is not in any higher scored field.
+ @brief Creates a new empty DisjunctionMaxQuery.Use add() to add the subqueries.
+ @param tieBreakerMultiplier the score of each non-maximum disjunct for a document is multiplied by this weight         and added into the final score.  If non-zero, the value should be small, on the order of 0.1, which says that
+          10 occurrences of word in a lower-scored field that is also in a higher scored field is just as good as a unique
+          word in the lower scored field (i.e., one that is not in any higher scored field.
  */
-- (instancetype)initWithFloat:(jfloat)tieBreakerMultiplier;
+- (instancetype __nonnull)initWithFloat:(jfloat)tieBreakerMultiplier;
 
 /*!
  @brief Add a collection of disjuncts to this disjunction
- via <code>Iterable<Query></code>
+  via <code>Iterable<Query></code>
  @param disjuncts a collection of queries to add as disjuncts.
  */
 - (void)addWithJavaUtilCollection:(id<JavaUtilCollection>)disjuncts;
@@ -84,7 +90,7 @@
  @brief Create a shallow copy of us -- used in rewriting if necessary
  @return a copy of us (but reuse, don't copy, our subqueries)
  */
-- (OrgApacheLuceneSearchDisjunctionMaxQuery *)clone;
+- (OrgApacheLuceneSearchDisjunctionMaxQuery *)java_clone;
 
 /*!
  @brief Create the Weight used to score us
@@ -136,6 +142,10 @@
 
 #pragma mark Package-Private
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDisjunctionMaxQuery)
@@ -168,14 +178,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionMaxQuery)
 @class OrgApacheLuceneSearchDisjunctionMaxQuery;
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
+@class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchScorer;
 @protocol JavaUtilSet;
 
 /*!
  @brief Expert: the Weight for DisjunctionMaxQuery, used to
- normalize, score and explain these queries.
+  normalize, score and explain these queries.
  <p>NOTE: this API and implementation is subject to
- change suddenly in the next release.</p>
+  change suddenly in the next release.</p>
  */
 @interface OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeight : OrgApacheLuceneSearchWeight {
  @public
@@ -188,12 +199,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionMaxQuery)
 #pragma mark Public
 
 /*!
- @brief Construct the Weight for this Query searched by searcher.
- Recursively construct subquery weights. 
+ @brief Construct the Weight for this Query searched by searcher.Recursively construct subquery weights.
  */
-- (instancetype)initWithOrgApacheLuceneSearchDisjunctionMaxQuery:(OrgApacheLuceneSearchDisjunctionMaxQuery *)outer$
-                          withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                     withBoolean:(jboolean)needsScores;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchDisjunctionMaxQuery:(OrgApacheLuceneSearchDisjunctionMaxQuery *)outer$
+                                    withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                               withBoolean:(jboolean)needsScores;
 
 /*!
  @brief Explain the score we computed for doc
@@ -204,8 +214,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionMaxQuery)
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 
 /*!
- @brief Compute the sub of squared weights of us applied to our subqueries.
- Used for normalization. 
+ @brief Compute the sub of squared weights of us applied to our subqueries.Used for normalization.
  */
 - (jfloat)getValueForNormalization;
 
@@ -219,6 +228,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionMaxQuery)
  @brief Create the scorer used to score our associated DisjunctionMaxQuery
  */
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -236,4 +249,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionM
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionMaxQuery")

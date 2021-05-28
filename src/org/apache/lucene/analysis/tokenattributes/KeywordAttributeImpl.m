@@ -11,6 +11,12 @@
 #include "org/apache/lucene/util/AttributeImpl.h"
 #include "org/apache/lucene/util/AttributeReflector.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/KeywordAttributeImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl () {
  @public
   jboolean keyword_;
@@ -41,8 +47,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
-  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  if (JreObjectEqualsEquals(self, obj)) return true;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(obj) java_getClass])) return false;
   OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *) cast_chk(obj, [OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl class]);
   return keyword_ == other->keyword_;
 }
@@ -60,20 +66,33 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "KeywordAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "isKeyword", NULL, "Z", 0x1, NULL, NULL },
-    { "setKeywordWithBoolean:", "setKeyword", "V", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(clear);
+  methods[2].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(isEqual:);
+  methods[5].selector = @selector(isKeyword);
+  methods[6].selector = @selector(setKeywordWithBoolean:);
+  methods[7].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "keyword_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "keyword_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl = { 2, "KeywordAttributeImpl", "org.apache.lucene.analysis.tokenattributes", NULL, 0x11, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", "hashCode", "equals", "LNSObject;", "setKeyword", "Z", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl = { "KeywordAttributeImpl", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, fields, 7, 0x11, 8, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl;
 }
 

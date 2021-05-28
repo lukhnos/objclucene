@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory))
 #define OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_
 
@@ -27,13 +33,13 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithInt:(jint)maxBasicQueries;
+- (instancetype __nonnull)initWithInt:(jint)maxBasicQueries;
 
 /*!
  @brief Two BasicQueryFactory's are equal when they generate
- the same types of basic queries, or both cannot generate queries anymore.
+   the same types of basic queries, or both cannot generate queries anymore.
  */
 - (jboolean)isEqual:(id)obj;
 
@@ -65,12 +71,16 @@ FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *crea
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *new_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *new_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *create_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *create_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory")

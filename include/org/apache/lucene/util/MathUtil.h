@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMathUtil
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMathUtil_) && (INCLUDE_ALL_OrgApacheLuceneUtilMathUtil || defined(INCLUDE_OrgApacheLuceneUtilMathUtil))
 #define OrgApacheLuceneUtilMathUtil_
 
@@ -26,12 +32,12 @@
 /*!
  @brief Calculates inverse hyperbolic cosine of a <code>double</code> value.
  <p>
- Special cases:
+  Special cases: 
  <ul>
- <li>If the argument is NaN, then the result is NaN.
- <li>If the argument is +1, then the result is a zero.
- <li>If the argument is positive infinity, then the result is positive infinity.
- <li>If the argument is less than 1, then the result is NaN.
+     <li>If the argument is NaN, then the result is NaN.
+     <li>If the argument is +1, then the result is a zero.
+     <li>If the argument is positive infinity, then the result is positive infinity.
+     <li>If the argument is less than 1, then the result is NaN. 
  </ul>
  */
 + (jdouble)acoshWithDouble:(jdouble)a;
@@ -39,11 +45,11 @@
 /*!
  @brief Calculates inverse hyperbolic sine of a <code>double</code> value.
  <p>
- Special cases:
+  Special cases: 
  <ul>
- <li>If the argument is NaN, then the result is NaN.
- <li>If the argument is zero, then the result is a zero with the same sign as the argument.
- <li>If the argument is infinite, then the result is infinity with the same sign as the argument.
+     <li>If the argument is NaN, then the result is NaN.
+     <li>If the argument is zero, then the result is a zero with the same sign as the argument.
+     <li>If the argument is infinite, then the result is infinity with the same sign as the argument. 
  </ul>
  */
 + (jdouble)asinhWithDouble:(jdouble)a;
@@ -51,25 +57,25 @@
 /*!
  @brief Calculates inverse hyperbolic tangent of a <code>double</code> value.
  <p>
- Special cases:
+  Special cases: 
  <ul>
- <li>If the argument is NaN, then the result is NaN.
- <li>If the argument is zero, then the result is a zero with the same sign as the argument.
- <li>If the argument is +1, then the result is positive infinity.
- <li>If the argument is -1, then the result is negative infinity.
- <li>If the argument's absolute value is greater than 1, then the result is NaN.
+     <li>If the argument is NaN, then the result is NaN.
+     <li>If the argument is zero, then the result is a zero with the same sign as the argument.
+     <li>If the argument is +1, then the result is positive infinity.
+     <li>If the argument is -1, then the result is negative infinity.
+     <li>If the argument's absolute value is greater than 1, then the result is NaN. 
  </ul>
  */
 + (jdouble)atanhWithDouble:(jdouble)a;
 
 /*!
  @brief Return the greatest common divisor of <code>a</code> and <code>b</code>,
- consistently with <code>BigInteger.gcd(BigInteger)</code>.
+   consistently with <code>BigInteger.gcd(BigInteger)</code>.
  <p><b>NOTE</b>: A greatest common divisor must be positive, but
- <code>2^64</code> cannot be expressed as a long although it
- is the GCD of <code>Long.MIN_VALUE</code> and <code>0</code> and the GCD of
- <code>Long.MIN_VALUE</code> and <code>Long.MIN_VALUE</code>. So in these 2 cases,
- and only them, this method will return <code>Long.MIN_VALUE</code>. 
+   <code>2^64</code> cannot be expressed as a long although it
+   is the GCD of <code>Long.MIN_VALUE</code> and <code>0</code> and the GCD of
+   <code>Long.MIN_VALUE</code> and <code>Long.MIN_VALUE</code>. So in these 2 cases,
+   and only them, this method will return <code>Long.MIN_VALUE</code>.
  */
 + (jlong)gcdWithLong:(jlong)a
             withLong:(jlong)b;
@@ -108,4 +114,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMathUtil)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMathUtil")

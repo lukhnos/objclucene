@@ -3,9 +3,14 @@
 //  source: ./core/src/java/org/apache/lucene/util/Bits.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/util/Bits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/Bits must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBits)
 
@@ -17,24 +22,30 @@ IOSObjectArray *OrgApacheLuceneUtilBits_EMPTY_ARRAY;
   return OrgApacheLuceneUtilBits_EMPTY_ARRAY;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getWithInt:);
+  methods[1].selector = @selector(length);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_ARRAY", "[LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x19, -1, 2, -1, -1 },
+  };
+  static const void *ptrTable[] = { "get", "I", &OrgApacheLuceneUtilBits_EMPTY_ARRAY, "LOrgApacheLuceneUtilBits_MatchAllBits;LOrgApacheLuceneUtilBits_MatchNoBits;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBits = { "Bits", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x609, 2, 1, -1, 3, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilBits;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilBits class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilBits_EMPTY_ARRAY, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneUtilBits_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilBits)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "Z", 0x401, NULL, NULL },
-    { "length", NULL, "I", 0x401, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_ARRAY", "EMPTY_ARRAY", 0x19, "[Lorg.apache.lucene.util.Bits;", &OrgApacheLuceneUtilBits_EMPTY_ARRAY, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.Bits$MatchAllBits;", "Lorg.apache.lucene.util.Bits$MatchNoBits;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBits = { 2, "Bits", "org.apache.lucene.util", NULL, 0x609, 2, methods, 1, fields, 0, NULL, 2, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilBits;
 }
 
 @end
@@ -57,15 +68,23 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBits)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "MatchAllBits", NULL, 0x1, NULL, NULL },
-    { "getWithInt:", "get", "Z", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(length);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "len_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "len_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBits_MatchAllBits = { 2, "MatchAllBits", "org.apache.lucene.util", "Bits", 0x9, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "get", "LOrgApacheLuceneUtilBits;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBits_MatchAllBits = { "MatchAllBits", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x9, 3, 1, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilBits_MatchAllBits;
 }
 
@@ -102,15 +121,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBits_MatchAllBits)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "MatchNoBits", NULL, 0x1, NULL, NULL },
-    { "getWithInt:", "get", "Z", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(length);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "len_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "len_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBits_MatchNoBits = { 2, "MatchNoBits", "org.apache.lucene.util", "Bits", 0x9, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "get", "LOrgApacheLuceneUtilBits;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBits_MatchNoBits = { "MatchNoBits", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x9, 3, 1, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilBits_MatchNoBits;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchRegexpQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchRegexpQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchRegexpQuery || defined(INCLUDE_OrgApacheLuceneSearchRegexpQuery))
 #define OrgApacheLuceneSearchRegexpQuery_
 
@@ -21,26 +27,27 @@
 #include "org/apache/lucene/search/AutomatonQuery.h"
 
 @class OrgApacheLuceneIndexTerm;
+@class OrgApacheLuceneUtilAutomatonAutomaton;
 @protocol OrgApacheLuceneUtilAutomatonAutomatonProvider;
 
 /*!
- @brief A fast regular expression query based on the
+ @brief A fast regular expression query based on the 
  <code>org.apache.lucene.util.automaton</code> package.
  <ul>
- <li>Comparisons are <a
- href="http://tusker.org/regex/regex_benchmark.html">fast</a>
- <li>The term dictionary is enumerated in an intelligent way, to avoid
- comparisons. See <code>AutomatonQuery</code> for more details.
+  <li>Comparisons are <a href="http://tusker.org/regex/regex_benchmark.html">
+ fast</a>
+  <li>The term dictionary is enumerated in an intelligent way, to avoid
+  comparisons. See <code>AutomatonQuery</code> for more details. 
  </ul>
- <p>
- The supported syntax is documented in the <code>RegExp</code> class.
- Note this might be different than other regular expression implementations.
- For some alternatives with different syntax, look under the sandbox.
+  <p>
+  The supported syntax is documented in the <code>RegExp</code> class.
+  Note this might be different than other regular expression implementations.
+  For some alternatives with different syntax, look under the sandbox. 
  </p>
- <p>
- Note this query can be slow, as it needs to iterate over many terms. In order
- to prevent extremely slow RegexpQueries, a Regexp term should not start with
- the expression <code>.*</code>
+  <p>
+  Note this query can be slow, as it needs to iterate over many terms. In order
+  to prevent extremely slow RegexpQueries, a Regexp term should not start with
+  the expression <code>.*</code>
  - seealso: RegExp
  */
 @interface OrgApacheLuceneSearchRegexpQuery : OrgApacheLuceneSearchAutomatonQuery
@@ -50,50 +57,62 @@
 /*!
  @brief Constructs a query for terms matching <code>term</code>.
  <p>
- By default, all regular expression features are enabled.
+  By default, all regular expression features are enabled. 
  </p>
  @param term regular expression.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 /*!
  @brief Constructs a query for terms matching <code>term</code>.
  @param term regular expression.
  @param flags optional RegExp features from <code>RegExp</code>
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)flags;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                   withInt:(jint)flags;
 
 /*!
  @brief Constructs a query for terms matching <code>term</code>.
  @param term regular expression.
  @param flags optional RegExp features from <code>RegExp</code>
  @param provider custom AutomatonProvider for named automata
- @param maxDeterminizedStates maximum number of states that compiling the
- automaton for the regexp can result in.  Set higher to allow more complex
- queries and lower to prevent memory exhaustion.
+ @param maxDeterminizedStates maximum number of states that compiling the   automaton for the regexp can result in.  Set higher to allow more complex
+    queries and lower to prevent memory exhaustion.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)flags
-withOrgApacheLuceneUtilAutomatonAutomatonProvider:(id<OrgApacheLuceneUtilAutomatonAutomatonProvider>)provider
-                                         withInt:(jint)maxDeterminizedStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                   withInt:(jint)flags
+         withOrgApacheLuceneUtilAutomatonAutomatonProvider:(id<OrgApacheLuceneUtilAutomatonAutomatonProvider>)provider
+                                                   withInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief Constructs a query for terms matching <code>term</code>.
  @param term regular expression.
  @param flags optional RegExp features from <code>RegExp</code>
- @param maxDeterminizedStates maximum number of states that compiling the
- automaton for the regexp can result in.  Set higher to allow more complex
- queries and lower to prevent memory exhaustion.
+ @param maxDeterminizedStates maximum number of states that compiling the   automaton for the regexp can result in.  Set higher to allow more complex
+    queries and lower to prevent memory exhaustion.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)flags
-                                         withInt:(jint)maxDeterminizedStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                   withInt:(jint)flags
+                                                   withInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief Prints a user-readable version of this query.
  */
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1
+                                                   withInt:(jint)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1
+                                                   withInt:(jint)arg2
+                                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -127,4 +146,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchRegexpQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchRegexpQuery")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilArrayInPlaceMergeSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilArrayInPlaceMergeSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilArrayInPlaceMergeSorter || defined(INCLUDE_OrgApacheLuceneUtilArrayInPlaceMergeSorter))
 #define OrgApacheLuceneUtilArrayInPlaceMergeSorter_
 
@@ -33,8 +39,8 @@
 /*!
  @brief Create a new <code>ArrayInPlaceMergeSorter</code>.
  */
-- (instancetype)initWithNSObjectArray:(IOSObjectArray *)arr
-               withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
+- (instancetype __nonnull)initPackagePrivateWithNSObjectArray:(IOSObjectArray *)arr
+                                       withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
 #pragma mark Protected
 
@@ -44,18 +50,26 @@
 - (void)swapWithInt:(jint)i
             withInt:(jint)j;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilArrayInPlaceMergeSorter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(OrgApacheLuceneUtilArrayInPlaceMergeSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayInPlaceMergeSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(OrgApacheLuceneUtilArrayInPlaceMergeSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilArrayInPlaceMergeSorter *new_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilArrayInPlaceMergeSorter *new_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilArrayInPlaceMergeSorter *create_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator);
+FOUNDATION_EXPORT OrgApacheLuceneUtilArrayInPlaceMergeSorter *create_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilArrayInPlaceMergeSorter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayInPlaceMergeSorter")

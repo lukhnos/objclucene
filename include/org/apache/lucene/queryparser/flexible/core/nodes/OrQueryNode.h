@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_
 
@@ -26,17 +32,16 @@
 
 /*!
  @brief A <code>OrQueryNode</code> represents an OR boolean operation performed on a list
- of nodes.
+  of nodes.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode
 
 #pragma mark Public
 
 /*!
- @param clauses
- - the query nodes to be or'ed
+ @param clauses - the query nodes to be or'ed
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)clauses;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
@@ -56,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNod
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode")

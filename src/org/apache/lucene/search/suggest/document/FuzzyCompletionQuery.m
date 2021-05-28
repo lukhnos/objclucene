@@ -3,10 +3,8 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/FuzzyCompletionQuery.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Character.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -36,6 +34,10 @@
 #include "org/apache/lucene/util/automaton/LevenshteinAutomata.h"
 #include "org/apache/lucene/util/automaton/Operations.h"
 #include "org/apache/lucene/util/automaton/UTF32ToUTF8.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/FuzzyCompletionQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery () {
  @public
@@ -136,7 +138,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQu
   id<JavaUtilSet> refs = create_JavaUtilHashSet_init();
   OrgApacheLuceneUtilAutomatonAutomaton *automaton = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_(self, [((OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) nil_chk(stream)) toAutomatonWithBoolean:unicodeAware_], refs);
   if (unicodeAware_) {
-    OrgApacheLuceneUtilAutomatonAutomaton *utf8automaton = [create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init() convertWithOrgApacheLuceneUtilAutomatonAutomaton:automaton];
+    OrgApacheLuceneUtilAutomatonAutomaton *utf8automaton = JreRetainedLocalValue([create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init() convertWithOrgApacheLuceneUtilAutomatonAutomaton:automaton]);
     utf8automaton = OrgApacheLuceneUtilAutomatonOperations_determinizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(utf8automaton, maxDeterminizedStates_);
     automaton = utf8automaton;
   }
@@ -167,29 +169,39 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:", "FuzzyCompletionQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:", "FuzzyCompletionQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:withInt:withBoolean:withInt:withInt:withBoolean:withInt:", "FuzzyCompletionQuery", NULL, 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilSet:", "toLevenshteinAutomata", "Lorg.apache.lucene.util.automaton.Automaton;", 0x2, NULL, "(Lorg/apache/lucene/util/automaton/Automaton;Ljava/util/Set<Lorg/apache/lucene/util/IntsRef;>;)Lorg/apache/lucene/util/automaton/Automaton;" },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x2, 6, 7, -1, 8, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, 10, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:withInt:withBoolean:withInt:withInt:withBoolean:withInt:);
+  methods[3].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[4].selector = @selector(toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilSet:);
+  methods[5].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_UNICODE_AWARE", "DEFAULT_UNICODE_AWARE", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_UNICODE_AWARE },
-    { "DEFAULT_MIN_FUZZY_LENGTH", "DEFAULT_MIN_FUZZY_LENGTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_MIN_FUZZY_LENGTH },
-    { "DEFAULT_NON_FUZZY_PREFIX", "DEFAULT_NON_FUZZY_PREFIX", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_NON_FUZZY_PREFIX },
-    { "DEFAULT_MAX_EDITS", "DEFAULT_MAX_EDITS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_MAX_EDITS },
-    { "DEFAULT_TRANSPOSITIONS", "DEFAULT_TRANSPOSITIONS", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_TRANSPOSITIONS },
-    { "maxEdits_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "transpositions_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "nonFuzzyPrefix_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minFuzzyLength_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "unicodeAware_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDeterminizedStates_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_UNICODE_AWARE", "Z", .constantValue.asBOOL = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_UNICODE_AWARE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MIN_FUZZY_LENGTH", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_MIN_FUZZY_LENGTH, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_NON_FUZZY_PREFIX", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_NON_FUZZY_PREFIX, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_EDITS", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_MAX_EDITS, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_TRANSPOSITIONS", "Z", .constantValue.asBOOL = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_TRANSPOSITIONS, 0x19, -1, -1, -1, -1 },
+    { "maxEdits_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "transpositions_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "nonFuzzyPrefix_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minFuzzyLength_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "unicodeAware_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxDeterminizedStates_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.document.FuzzyCompletionQuery$FuzzyCompletionWeight;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery = { 2, "FuzzyCompletionQuery", "org.apache.lucene.search.suggest.document", NULL, 0x1, 6, methods, 11, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexTerm;", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexTerm;LOrgApacheLuceneSearchSuggestBitsProducer;", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexTerm;LOrgApacheLuceneSearchSuggestBitsProducer;IZIIZI", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "toLevenshteinAutomata", "LOrgApacheLuceneUtilAutomatonAutomaton;LJavaUtilSet;", "(Lorg/apache/lucene/util/automaton/Automaton;Ljava/util/Set<Lorg/apache/lucene/util/IntsRef;>;)Lorg/apache/lucene/util/automaton/Automaton;", "toString", "LNSString;", "LOrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery = { "FuzzyCompletionQuery", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x1, 6, 11, -1, 11, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery;
 }
 
@@ -303,16 +315,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentFuzzyComple
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilSet:", "FuzzyCompletionWeight", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/suggest/document/CompletionQuery;Lorg/apache/lucene/util/automaton/Automaton;Ljava/util/Set<Lorg/apache/lucene/util/IntsRef;>;)V" },
-    { "setNextMatchWithOrgApacheLuceneUtilIntsRef:", "setNextMatch", "V", 0x4, NULL, NULL },
-    { "boost", NULL, "F", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, 2, -1, -1 },
+    { NULL, "V", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "F", 0x4, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilSet:);
+  methods[1].selector = @selector(setNextMatchWithOrgApacheLuceneUtilIntsRef:);
+  methods[2].selector = @selector(boost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "refs_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/util/IntsRef;>;", .constantValue.asLong = 0 },
-    { "currentBoost_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "refs_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
+    { "currentBoost_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight = { 2, "FuzzyCompletionWeight", "org.apache.lucene.search.suggest.document", "FuzzyCompletionQuery", 0xa, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestDocumentCompletionQuery;LOrgApacheLuceneUtilAutomatonAutomaton;LJavaUtilSet;", "LJavaIoIOException;", "(Lorg/apache/lucene/search/suggest/document/CompletionQuery;Lorg/apache/lucene/util/automaton/Automaton;Ljava/util/Set<Lorg/apache/lucene/util/IntsRef;>;)V", "setNextMatch", "LOrgApacheLuceneUtilIntsRef;", "Ljava/util/Set<Lorg/apache/lucene/util/IntsRef;>;", "LOrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight = { "FuzzyCompletionWeight", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0xa, 3, 2, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight;
 }
 

@@ -3,16 +3,18 @@
 //  source: ./core/src/java/org/apache/lucene/util/fst/IntsRefFSTEnum.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/IntsRef.h"
 #include "org/apache/lucene/util/fst/FST.h"
 #include "org/apache/lucene/util/fst/FSTEnum.h"
 #include "org/apache/lucene/util/fst/IntsRefFSTEnum.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/fst/IntsRefFSTEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilFstIntsRefFSTEnum () {
  @public
@@ -65,7 +67,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput 
   JreStrongAssign(&self->target_, target);
   targetLength_ = ((OrgApacheLuceneUtilIntsRef *) nil_chk(target))->length_;
   if ([super doSeekExact]) {
-    JreAssert((upto_ == 1 + target->length_), (@"org/apache/lucene/util/fst/IntsRefFSTEnum.java:85 condition failed: assert upto == 1+target.length;"));
+    JreAssert(upto_ == 1 + target->length_, @"org/apache/lucene/util/fst/IntsRefFSTEnum.java:85 condition failed: assert upto == 1+target.length;");
     return OrgApacheLuceneUtilFstIntsRefFSTEnum_setResult(self);
   }
   else {
@@ -106,38 +108,52 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:", "IntsRefFSTEnum", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<TT;>;)V" },
-    { "current", NULL, "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, NULL, "()Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
-    { "next", NULL, "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", "()Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
-    { "seekCeilWithOrgApacheLuceneUtilIntsRef:", "seekCeil", "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/IntsRef;)Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
-    { "seekFloorWithOrgApacheLuceneUtilIntsRef:", "seekFloor", "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/IntsRef;)Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
-    { "seekExactWithOrgApacheLuceneUtilIntsRef:", "seekExact", "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/IntsRef;)Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
-    { "getTargetLabel", NULL, "I", 0x4, NULL, NULL },
-    { "getCurrentLabel", NULL, "I", 0x4, NULL, NULL },
-    { "setCurrentLabelWithInt:", "setCurrentLabel", "V", 0x4, NULL, NULL },
-    { "grow", NULL, "V", 0x4, NULL, NULL },
-    { "setResult", NULL, "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x2, NULL, "()Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput;", 0x1, -1, -1, 3, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput;", 0x1, 4, 5, 3, 6, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput;", 0x1, 7, 5, 3, 6, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput;", 0x1, 8, 5, 3, 6, -1, -1 },
+    { NULL, "I", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput;", 0x2, -1, -1, -1, 2, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilFstFST:);
+  methods[1].selector = @selector(current);
+  methods[2].selector = @selector(next);
+  methods[3].selector = @selector(seekCeilWithOrgApacheLuceneUtilIntsRef:);
+  methods[4].selector = @selector(seekFloorWithOrgApacheLuceneUtilIntsRef:);
+  methods[5].selector = @selector(seekExactWithOrgApacheLuceneUtilIntsRef:);
+  methods[6].selector = @selector(getTargetLabel);
+  methods[7].selector = @selector(getCurrentLabel);
+  methods[8].selector = @selector(setCurrentLabelWithInt:);
+  methods[9].selector = @selector(grow);
+  methods[10].selector = @selector(setResult);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "current_", NULL, 0x12, "Lorg.apache.lucene.util.IntsRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "result_", NULL, 0x12, "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", NULL, "Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;", .constantValue.asLong = 0 },
-    { "target_", NULL, 0x2, "Lorg.apache.lucene.util.IntsRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "current_", "LOrgApacheLuceneUtilIntsRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "result_", "LOrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput;", .constantValue.asLong = 0, 0x12, -1, -1, 11, -1 },
+    { "target_", "LOrgApacheLuceneUtilIntsRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"TT;"};
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstIntsRefFSTEnum = { 2, "IntsRefFSTEnum", "org.apache.lucene.util.fst", NULL, 0x11, 11, methods, 3, fields, 1, superclass_type_args, 1, inner_classes, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/fst/FSTEnum<TT;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilFstFST;", "(Lorg/apache/lucene/util/fst/FST<TT;>;)V", "()Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;", "LJavaIoIOException;", "seekCeil", "LOrgApacheLuceneUtilIntsRef;", "(Lorg/apache/lucene/util/IntsRef;)Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;", "seekFloor", "seekExact", "setCurrentLabel", "I", "Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;", "LOrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput;", "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/fst/FSTEnum<TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstIntsRefFSTEnum = { "IntsRefFSTEnum", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x11, 11, 3, -1, 12, -1, 13, -1 };
   return &_OrgApacheLuceneUtilFstIntsRefFSTEnum;
 }
 
 @end
 
 void OrgApacheLuceneUtilFstIntsRefFSTEnum_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstIntsRefFSTEnum *self, OrgApacheLuceneUtilFstFST *fst) {
-  OrgApacheLuceneUtilFstFSTEnum_initWithOrgApacheLuceneUtilFstFST_(self, fst);
+  OrgApacheLuceneUtilFstFSTEnum_initPackagePrivateWithOrgApacheLuceneUtilFstFST_(self, fst);
   JreStrongAssignAndConsume(&self->current_, new_OrgApacheLuceneUtilIntsRef_initWithInt_(10));
   JreStrongAssignAndConsume(&self->result_, new_OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput_init());
-  JreStrongAssign(&((OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput *) nil_chk(self->result_))->input_, self->current_);
-  ((OrgApacheLuceneUtilIntsRef *) nil_chk(self->current_))->offset_ = 1;
+  JreStrongAssign(&self->result_->input_, self->current_);
+  self->current_->offset_ = 1;
 }
 
 OrgApacheLuceneUtilFstIntsRefFSTEnum *new_OrgApacheLuceneUtilFstIntsRefFSTEnum_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *fst) {
@@ -177,14 +193,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "InputOutput", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "input_", NULL, 0x1, "Lorg.apache.lucene.util.IntsRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "output_", NULL, 0x1, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
+    { "input_", "LOrgApacheLuceneUtilIntsRef;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "output_", "LNSObject;", .constantValue.asLong = 0, 0x1, -1, -1, 0, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput = { 2, "InputOutput", "org.apache.lucene.util.fst", "IntsRefFSTEnum", 0x9, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "TT;", "LOrgApacheLuceneUtilFstIntsRefFSTEnum;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput = { "InputOutput", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x9, 1, 2, 1, -1, -1, 2, -1 };
   return &_OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer))
 #define OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_
 
@@ -33,20 +39,20 @@
 /*!
  @brief Construct a new WhitespaceTokenizer.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Construct a new WhitespaceTokenizer using a given
+ @brief Construct a new WhitespaceTokenizer using a given 
  <code>org.apache.lucene.util.AttributeFactory</code>.
- @param factory
- the attribute factory to use for this <code>Tokenizer</code>
+ @param factory the attribute factory to use for this 
+ <code>Tokenizer</code>
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 #pragma mark Protected
 
 /*!
- @brief Collects only characters which do not satisfy
+ @brief Collects only characters which do not satisfy 
  <code>Character.isWhitespace(int)</code>.
  */
 - (jboolean)isTokenCharWithInt:(jint)c;
@@ -57,9 +63,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *create_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *create_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
 
@@ -71,4 +77,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer")

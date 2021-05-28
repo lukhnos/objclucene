@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchScorer || defined(INCLUDE_OrgApacheLuceneSearchScorer))
 #define OrgApacheLuceneSearchScorer_
 
@@ -27,23 +33,24 @@
 /*!
  @brief Expert: Common scoring functionality for different types of queries.
  <p>
- A <code>Scorer</code> iterates over documents matching a
- query in increasing order of doc Id.
+  A <code>Scorer</code> iterates over documents matching a
+  query in increasing order of doc Id. 
  </p>
- <p>
- Document scores are computed using a given <code>Similarity</code>
- implementation.
+  <p>
+  Document scores are computed using a given <code>Similarity</code>
+  implementation. 
  </p>
+  
  <p><b>NOTE</b>: The values Float.Nan,
- Float.NEGATIVE_INFINITY and Float.POSITIVE_INFINITY are
- not valid scores.  Certain collectors (eg <code>TopScoreDocCollector</code>
+  Float.NEGATIVE_INFINITY and Float.POSITIVE_INFINITY are
+  not valid scores.  Certain collectors (eg <code>TopScoreDocCollector</code>
  ) will not properly collect hits
- with these scores.
+  with these scores.
  */
 @interface OrgApacheLuceneSearchScorer : OrgApacheLuceneSearchDocIdSetIterator {
  @public
   /*!
-   @brief the Scorer's parent Weight. in some cases this may be null
+   @brief the Scorer's parent Weight.in some cases this may be null
    */
   OrgApacheLuceneSearchWeight *weight_;
 }
@@ -51,17 +58,16 @@
 #pragma mark Public
 
 /*!
- @brief Optional method: Return a <code>TwoPhaseIterator</code> view of this
- <code>Scorer</code>.
- A return value of <code>null</code> indicates that
- two-phase iteration is not supported.
+ @brief Optional method: Return a <code>TwoPhaseIterator</code> view of this 
+ <code>Scorer</code>.A return value of <code>null</code> indicates that
+  two-phase iteration is not supported.
  Note that the returned <code>TwoPhaseIterator</code>'s
- <code>approximation</code> must
- advance synchronously with this iterator: advancing the approximation must
- advance this iterator and vice-versa.
- Implementing this method is typically useful on <code>Scorer</code>s
- that have a high per-document overhead in order to confirm matches.
- The default implementation returns <code>null</code>.
+  <code>approximation</code> must
+  advance synchronously with this iterator: advancing the approximation must
+  advance this iterator and vice-versa.
+  Implementing this method is typically useful on <code>Scorer</code>s
+  that have a high per-document overhead in order to confirm matches.
+  The default implementation returns <code>null</code>.
  */
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator;
 
@@ -72,7 +78,6 @@
 
 /*!
  @brief Returns child sub-scorers
-  
  */
 - (id<JavaUtilCollection>)getChildren;
 
@@ -84,7 +89,7 @@
 /*!
  @brief Returns the score of the current document matching the query.
  Initially invalid, until <code>nextDoc()</code> or <code>advance(int)</code>
- is called the first time, or when called from within
+  is called the first time, or when called from within 
  <code>LeafCollector.collect</code>.
  */
 - (jfloat)score;
@@ -93,9 +98,14 @@
 
 /*!
  @brief Constructs a Scorer
- @param weight The scorers <code>Weight</code>.
+ @param weight The scorers  <code> Weight </code>
+  .
  */
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -116,15 +126,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScorer)
 
 /*!
  @brief A child Scorer and its relationship to its parent.
- the meaning of the relationship depends upon the parent query. 
-  
+ the meaning of the relationship depends upon the parent query.
  */
 @interface OrgApacheLuceneSearchScorer_ChildScorer : NSObject {
  @public
   /*!
    @brief Child Scorer.
    (note this is typically a direct child, and may
- itself also have children).
+  itself also have children).
    */
   OrgApacheLuceneSearchScorer *child_;
   /*!
@@ -138,11 +147,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScorer)
 /*!
  @brief Creates a new ChildScorer node with the specified relationship.
  <p>
- The relationship can be any be any string that makes sense to 
- the parent Scorer. 
+  The relationship can be any be any string that makes sense to 
+  the parent Scorer.
  */
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)child
-                                       withNSString:(NSString *)relationship;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)child
+                                                 withNSString:(NSString *)relationship;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -161,4 +174,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScorer_ChildScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchScorer")

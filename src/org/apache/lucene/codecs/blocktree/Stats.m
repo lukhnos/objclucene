@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/blocktree/Stats.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -21,6 +22,10 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/IOUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/blocktree/Stats must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsBlocktreeStats () {
  @public
@@ -77,7 +82,7 @@
   }
   endBlockCount_++;
   jlong otherBytes = frame->fpEnd_ - frame->fp_ - [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(frame->suffixesReader_)) length] - [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(frame->statsReader_)) length];
-  JreAssert((otherBytes > 0), (JreStrcat("$J$J$J", @"otherBytes=", otherBytes, @" frame.fp=", frame->fp_, @" frame.fpEnd=", frame->fpEnd_)));
+  JreAssert(otherBytes > 0, JreStrcat("$J$J$J", @"otherBytes=", otherBytes, @" frame.fp=", frame->fp_, @" frame.fpEnd=", frame->fpEnd_));
   totalBlockOtherBytes_ += otherBytes;
 }
 
@@ -86,9 +91,9 @@
 }
 
 - (void)finish {
-  JreAssert((startBlockCount_ == endBlockCount_), (JreStrcat("$I$I", @"startBlockCount=", startBlockCount_, @" endBlockCount=", endBlockCount_)));
-  JreAssert((totalBlockCount_ == floorSubBlockCount_ + nonFloorBlockCount_), (JreStrcat("$I$I$I", @"floorSubBlockCount=", floorSubBlockCount_, @" nonFloorBlockCount=", nonFloorBlockCount_, @" totalBlockCount=", totalBlockCount_)));
-  JreAssert((totalBlockCount_ == mixedBlockCount_ + termsOnlyBlockCount_ + subBlocksOnlyBlockCount_), (JreStrcat("$I$I$I$I", @"totalBlockCount=", totalBlockCount_, @" mixedBlockCount=", mixedBlockCount_, @" subBlocksOnlyBlockCount=", subBlocksOnlyBlockCount_, @" termsOnlyBlockCount=", termsOnlyBlockCount_)));
+  JreAssert(startBlockCount_ == endBlockCount_, JreStrcat("$I$I", @"startBlockCount=", startBlockCount_, @" endBlockCount=", endBlockCount_));
+  JreAssert(totalBlockCount_ == floorSubBlockCount_ + nonFloorBlockCount_, JreStrcat("$I$I$I", @"floorSubBlockCount=", floorSubBlockCount_, @" nonFloorBlockCount=", nonFloorBlockCount_, @" totalBlockCount=", totalBlockCount_));
+  JreAssert(totalBlockCount_ == mixedBlockCount_ + termsOnlyBlockCount_ + subBlocksOnlyBlockCount_, JreStrcat("$I$I$I$I", @"totalBlockCount=", totalBlockCount_, @" mixedBlockCount=", mixedBlockCount_, @" subBlocksOnlyBlockCount=", subBlocksOnlyBlockCount_, @" termsOnlyBlockCount=", termsOnlyBlockCount_));
 }
 
 - (NSString *)description {
@@ -98,13 +103,13 @@
     out = create_JavaIoPrintStream_initWithJavaIoOutputStream_withBoolean_withNSString_(bos, false, JreLoadStatic(OrgApacheLuceneUtilIOUtils, UTF_8));
   }
   @catch (JavaIoUnsupportedEncodingException *bogus) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(bogus);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(bogus);
   }
   [((JavaIoPrintStream *) nil_chk(out)) printlnWithNSString:@"  index FST:"];
   [out printlnWithNSString:JreStrcat("$J$", @"    ", indexNumBytes_, @" bytes")];
   [out printlnWithNSString:@"  terms:"];
   [out printlnWithNSString:JreStrcat("$J$", @"    ", totalTermCount_, @" terms")];
-  [out printlnWithNSString:JreStrcat("$J$$", @"    ", totalTermBytes_, @" bytes", (totalTermCount_ != 0 ? JreStrcat("$$$", @" (", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.1f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(((jdouble) totalTermBytes_) / totalTermCount_) } count:1 type:NSObject_class_()]), @" bytes/term)") : @""))];
+  [out printlnWithNSString:JreStrcat("$J$$", @"    ", totalTermBytes_, @" bytes", (totalTermCount_ != 0 ? JreStrcat("$$$", @" (", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.1f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(((jdouble) totalTermBytes_) / totalTermCount_) } count:1 type:NSObject_class_()]), @" bytes/term)") : @""))];
   [out printlnWithNSString:@"  blocks:"];
   [out printlnWithNSString:JreStrcat("$I$", @"    ", totalBlockCount_, @" blocks")];
   [out printlnWithNSString:JreStrcat("$I$", @"    ", termsOnlyBlockCount_, @" terms-only blocks")];
@@ -113,9 +118,9 @@
   [out printlnWithNSString:JreStrcat("$I$", @"    ", floorBlockCount_, @" floor blocks")];
   [out printlnWithNSString:JreStrcat("$I$", @"    ", (totalBlockCount_ - floorSubBlockCount_), @" non-floor blocks")];
   [out printlnWithNSString:JreStrcat("$I$", @"    ", floorSubBlockCount_, @" floor sub-blocks")];
-  [out printlnWithNSString:JreStrcat("$J$$", @"    ", totalBlockSuffixBytes_, @" term suffix bytes", (totalBlockCount_ != 0 ? JreStrcat("$$$", @" (", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.1f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(((jdouble) totalBlockSuffixBytes_) / totalBlockCount_) } count:1 type:NSObject_class_()]), @" suffix-bytes/block)") : @""))];
-  [out printlnWithNSString:JreStrcat("$J$$", @"    ", totalBlockStatsBytes_, @" term stats bytes", (totalBlockCount_ != 0 ? JreStrcat("$$$", @" (", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.1f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(((jdouble) totalBlockStatsBytes_) / totalBlockCount_) } count:1 type:NSObject_class_()]), @" stats-bytes/block)") : @""))];
-  [out printlnWithNSString:JreStrcat("$J$$", @"    ", totalBlockOtherBytes_, @" other bytes", (totalBlockCount_ != 0 ? JreStrcat("$$$", @" (", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.1f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(((jdouble) totalBlockOtherBytes_) / totalBlockCount_) } count:1 type:NSObject_class_()]), @" other-bytes/block)") : @""))];
+  [out printlnWithNSString:JreStrcat("$J$$", @"    ", totalBlockSuffixBytes_, @" term suffix bytes", (totalBlockCount_ != 0 ? JreStrcat("$$$", @" (", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.1f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(((jdouble) totalBlockSuffixBytes_) / totalBlockCount_) } count:1 type:NSObject_class_()]), @" suffix-bytes/block)") : @""))];
+  [out printlnWithNSString:JreStrcat("$J$$", @"    ", totalBlockStatsBytes_, @" term stats bytes", (totalBlockCount_ != 0 ? JreStrcat("$$$", @" (", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.1f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(((jdouble) totalBlockStatsBytes_) / totalBlockCount_) } count:1 type:NSObject_class_()]), @" stats-bytes/block)") : @""))];
+  [out printlnWithNSString:JreStrcat("$J$$", @"    ", totalBlockOtherBytes_, @" other bytes", (totalBlockCount_ != 0 ? JreStrcat("$$$", @" (", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.1f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(((jdouble) totalBlockOtherBytes_) / totalBlockCount_) } count:1 type:NSObject_class_()]), @" other-bytes/block)") : @""))];
   if (totalBlockCount_ != 0) {
     [out printlnWithNSString:@"    by prefix length:"];
     jint total = 0;
@@ -123,16 +128,16 @@
       jint blockCount = IOSIntArray_Get(blockCountByPrefixLen_, prefix);
       total += blockCount;
       if (blockCount != 0) {
-        [out printlnWithNSString:JreStrcat("$$$I", @"      ", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%2d", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(prefix) } count:1 type:NSObject_class_()]), @": ", blockCount)];
+        [out printlnWithNSString:JreStrcat("$$$I", @"      ", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%2d", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(prefix) } count:1 type:NSObject_class_()]), @": ", blockCount)];
       }
     }
-    JreAssert((totalBlockCount_ == total), (@"org/apache/lucene/codecs/blocktree/Stats.java:185 condition failed: assert totalBlockCount == total;"));
+    JreAssert(totalBlockCount_ == total, @"org/apache/lucene/codecs/blocktree/Stats.java:185 condition failed: assert totalBlockCount == total;");
   }
   @try {
     return [bos toStringWithNSString:JreLoadStatic(OrgApacheLuceneUtilIOUtils, UTF_8)];
   }
   @catch (JavaIoUnsupportedEncodingException *bogus) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(bogus);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(bogus);
   }
 }
 
@@ -144,35 +149,46 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:", "Stats", NULL, 0x0, NULL, NULL },
-    { "startBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:withBoolean:", "startBlock", "V", 0x0, NULL, NULL },
-    { "endBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:", "endBlock", "V", 0x0, NULL, NULL },
-    { "termWithOrgApacheLuceneUtilBytesRef:", "term", "V", 0x0, NULL, NULL },
-    { "finish", NULL, "V", 0x0, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:);
+  methods[1].selector = @selector(startBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:withBoolean:);
+  methods[2].selector = @selector(endBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:);
+  methods[3].selector = @selector(termWithOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(finish);
+  methods[5].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "indexNumBytes_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalTermCount_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalTermBytes_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "nonFloorBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "floorBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "floorSubBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "mixedBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termsOnlyBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "subBlocksOnlyBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockCountByPrefixLen_", NULL, 0x1, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startBlockCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endBlockCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalBlockSuffixBytes_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalBlockStatsBytes_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalBlockOtherBytes_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "segment_", NULL, 0x11, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x11, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "indexNumBytes_", "J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "totalTermCount_", "J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "totalTermBytes_", "J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "nonFloorBlockCount_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "floorBlockCount_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "floorSubBlockCount_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "mixedBlockCount_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "termsOnlyBlockCount_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "subBlocksOnlyBlockCount_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "totalBlockCount_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "blockCountByPrefixLen_", "[I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "startBlockCount_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "endBlockCount_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "totalBlockSuffixBytes_", "J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "totalBlockStatsBytes_", "J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "totalBlockOtherBytes_", "J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "segment_", "LNSString;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeStats = { 2, "Stats", "org.apache.lucene.codecs.blocktree", NULL, 0x1, 6, methods, 18, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LNSString;", "startBlock", "LOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;Z", "endBlock", "LOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;", "term", "LOrgApacheLuceneUtilBytesRef;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeStats = { "Stats", "org.apache.lucene.codecs.blocktree", ptrTable, methods, fields, 7, 0x1, 6, 18, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsBlocktreeStats;
 }
 

@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -23,6 +22,10 @@
 #include "org/apache/lucene/index/SegmentCommitInfo.h"
 #include "org/apache/lucene/index/SegmentInfo.h"
 #include "org/apache/lucene/store/Directory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SegmentCommitInfo must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexSegmentCommitInfo () {
  @public
@@ -45,6 +48,12 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, dvUpdatesFiles_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, fieldInfosFiles_, id<JavaUtilSet>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, genUpdatesFiles_, id<JavaUtilMap>)
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexSegmentCommitInfo__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexSegmentCommitInfo__Annotations$1(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexSegmentCommitInfo__Annotations$2(void);
 
 @implementation OrgApacheLuceneIndexSegmentCommitInfo
 
@@ -230,7 +239,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, genUpdatesFiles_, id<
 }
 
 - (NSString *)toStringWithInt:(jint)pendingDelCount {
-  NSString *s = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info_)) toStringWithInt:delCount_ + pendingDelCount];
+  NSString *s = JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info_)) toStringWithInt:delCount_ + pendingDelCount]);
   if (delGen_ != -1) {
     JreStrAppend(&s, "$J", @":delGen=", delGen_);
   }
@@ -247,7 +256,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, genUpdatesFiles_, id<
   return [self toStringWithInt:0];
 }
 
-- (OrgApacheLuceneIndexSegmentCommitInfo *)clone {
+- (OrgApacheLuceneIndexSegmentCommitInfo *)java_clone {
   OrgApacheLuceneIndexSegmentCommitInfo *other = create_OrgApacheLuceneIndexSegmentCommitInfo_initWithOrgApacheLuceneIndexSegmentInfo_withInt_withLong_withLong_withLong_(info_, delCount_, delGen_, fieldInfosGen_, docValuesGen_);
   other->nextWriteDelGen_ = nextWriteDelGen_;
   other->nextWriteFieldInfosGen_ = nextWriteFieldInfosGen_;
@@ -262,18 +271,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, genUpdatesFiles_, id<
   return other;
 }
 
-+ (IOSObjectArray *)__annotations_genUpdatesFiles_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_setGenUpdatesFilesWithJavaUtilMap_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_toStringWithOrgApacheLuceneStoreDirectory_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(info_);
   RELEASE_(dvUpdatesFiles_);
@@ -283,60 +280,101 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, genUpdatesFiles_, id<
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSegmentInfo:withInt:withLong:withLong:withLong:", "SegmentCommitInfo", NULL, 0x1, NULL, NULL },
-    { "setGenUpdatesFilesWithJavaUtilMap:", "setGenUpdatesFiles", "V", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/Long;Ljava/util/Set<Ljava/lang/String;>;>;)V" },
-    { "getDocValuesUpdatesFiles", NULL, "Ljava.util.Map;", 0x1, NULL, "()Ljava/util/Map<Ljava/lang/Integer;Ljava/util/Set<Ljava/lang/String;>;>;" },
-    { "setDocValuesUpdatesFilesWithJavaUtilMap:", "setDocValuesUpdatesFiles", "V", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/Integer;Ljava/util/Set<Ljava/lang/String;>;>;)V" },
-    { "getFieldInfosFiles", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
-    { "setFieldInfosFilesWithJavaUtilSet:", "setFieldInfosFiles", "V", 0x1, NULL, "(Ljava/util/Set<Ljava/lang/String;>;)V" },
-    { "advanceDelGen", NULL, "V", 0x0, NULL, NULL },
-    { "advanceNextWriteDelGen", NULL, "V", 0x0, NULL, NULL },
-    { "getNextWriteDelGen", NULL, "J", 0x0, NULL, NULL },
-    { "setNextWriteDelGenWithLong:", "setNextWriteDelGen", "V", 0x0, NULL, NULL },
-    { "advanceFieldInfosGen", NULL, "V", 0x0, NULL, NULL },
-    { "advanceNextWriteFieldInfosGen", NULL, "V", 0x0, NULL, NULL },
-    { "getNextWriteFieldInfosGen", NULL, "J", 0x0, NULL, NULL },
-    { "setNextWriteFieldInfosGenWithLong:", "setNextWriteFieldInfosGen", "V", 0x0, NULL, NULL },
-    { "advanceDocValuesGen", NULL, "V", 0x0, NULL, NULL },
-    { "advanceNextWriteDocValuesGen", NULL, "V", 0x0, NULL, NULL },
-    { "getNextWriteDocValuesGen", NULL, "J", 0x0, NULL, NULL },
-    { "setNextWriteDocValuesGenWithLong:", "setNextWriteDocValuesGen", "V", 0x0, NULL, NULL },
-    { "sizeInBytes", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "files", NULL, "Ljava.util.Collection;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Collection<Ljava/lang/String;>;" },
-    { "getBufferedDeletesGen", NULL, "J", 0x0, NULL, NULL },
-    { "setBufferedDeletesGenWithLong:", "setBufferedDeletesGen", "V", 0x0, NULL, NULL },
-    { "hasDeletions", NULL, "Z", 0x1, NULL, NULL },
-    { "hasFieldUpdates", NULL, "Z", 0x1, NULL, NULL },
-    { "getNextFieldInfosGen", NULL, "J", 0x1, NULL, NULL },
-    { "getFieldInfosGen", NULL, "J", 0x1, NULL, NULL },
-    { "getNextDocValuesGen", NULL, "J", 0x1, NULL, NULL },
-    { "getDocValuesGen", NULL, "J", 0x1, NULL, NULL },
-    { "getNextDelGen", NULL, "J", 0x1, NULL, NULL },
-    { "getDelGen", NULL, "J", 0x1, NULL, NULL },
-    { "getDelCount", NULL, "I", 0x1, NULL, NULL },
-    { "setDelCountWithInt:", "setDelCount", "V", 0x0, NULL, NULL },
-    { "toStringWithOrgApacheLuceneStoreDirectory:withInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.index.SegmentCommitInfo;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, 3, 4, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 5, -1, -1 },
+    { NULL, "V", 0x1, 6, 2, -1, 7, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 8, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, 11, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 12, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 14, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 15, 13, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 16, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, 16, 17, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 18, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 19, 20, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 21, 22, -1, -1, 23, -1 },
+    { NULL, "LNSString;", 0x1, 21, 20, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 21, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSegmentCommitInfo;", 0x1, 24, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSegmentInfo:withInt:withLong:withLong:withLong:);
+  methods[1].selector = @selector(setGenUpdatesFilesWithJavaUtilMap:);
+  methods[2].selector = @selector(getDocValuesUpdatesFiles);
+  methods[3].selector = @selector(setDocValuesUpdatesFilesWithJavaUtilMap:);
+  methods[4].selector = @selector(getFieldInfosFiles);
+  methods[5].selector = @selector(setFieldInfosFilesWithJavaUtilSet:);
+  methods[6].selector = @selector(advanceDelGen);
+  methods[7].selector = @selector(advanceNextWriteDelGen);
+  methods[8].selector = @selector(getNextWriteDelGen);
+  methods[9].selector = @selector(setNextWriteDelGenWithLong:);
+  methods[10].selector = @selector(advanceFieldInfosGen);
+  methods[11].selector = @selector(advanceNextWriteFieldInfosGen);
+  methods[12].selector = @selector(getNextWriteFieldInfosGen);
+  methods[13].selector = @selector(setNextWriteFieldInfosGenWithLong:);
+  methods[14].selector = @selector(advanceDocValuesGen);
+  methods[15].selector = @selector(advanceNextWriteDocValuesGen);
+  methods[16].selector = @selector(getNextWriteDocValuesGen);
+  methods[17].selector = @selector(setNextWriteDocValuesGenWithLong:);
+  methods[18].selector = @selector(sizeInBytes);
+  methods[19].selector = @selector(files);
+  methods[20].selector = @selector(getBufferedDeletesGen);
+  methods[21].selector = @selector(setBufferedDeletesGenWithLong:);
+  methods[22].selector = @selector(hasDeletions);
+  methods[23].selector = @selector(hasFieldUpdates);
+  methods[24].selector = @selector(getNextFieldInfosGen);
+  methods[25].selector = @selector(getFieldInfosGen);
+  methods[26].selector = @selector(getNextDocValuesGen);
+  methods[27].selector = @selector(getDocValuesGen);
+  methods[28].selector = @selector(getNextDelGen);
+  methods[29].selector = @selector(getDelGen);
+  methods[30].selector = @selector(getDelCount);
+  methods[31].selector = @selector(setDelCountWithInt:);
+  methods[32].selector = @selector(toStringWithOrgApacheLuceneStoreDirectory:withInt:);
+  methods[33].selector = @selector(toStringWithInt:);
+  methods[34].selector = @selector(description);
+  methods[35].selector = @selector(java_clone);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "info_", NULL, 0x11, "Lorg.apache.lucene.index.SegmentInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "delCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "delGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextWriteDelGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfosGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextWriteFieldInfosGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "docValuesGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextWriteDocValuesGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "dvUpdatesFiles_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Integer;Ljava/util/Set<Ljava/lang/String;>;>;", .constantValue.asLong = 0 },
-    { "fieldInfosFiles_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "genUpdatesFiles_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Long;Ljava/util/Set<Ljava/lang/String;>;>;", .constantValue.asLong = 0 },
-    { "sizeInBytes_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferedDeletesGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "info_", "LOrgApacheLuceneIndexSegmentInfo;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "delCount_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "delGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextWriteDelGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldInfosGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextWriteFieldInfosGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "docValuesGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextWriteDocValuesGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "dvUpdatesFiles_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 25, -1 },
+    { "fieldInfosFiles_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 26, -1 },
+    { "genUpdatesFiles_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 27, 28 },
+    { "sizeInBytes_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "bufferedDeletesGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCommitInfo = { 2, "SegmentCommitInfo", "org.apache.lucene.index", NULL, 0x1, 36, methods, 13, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentInfo;IJJJ", "setGenUpdatesFiles", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/Long;Ljava/util/Set<Ljava/lang/String;>;>;)V", (void *)&OrgApacheLuceneIndexSegmentCommitInfo__Annotations$0, "()Ljava/util/Map<Ljava/lang/Integer;Ljava/util/Set<Ljava/lang/String;>;>;", "setDocValuesUpdatesFiles", "(Ljava/util/Map<Ljava/lang/Integer;Ljava/util/Set<Ljava/lang/String;>;>;)V", "()Ljava/util/Set<Ljava/lang/String;>;", "setFieldInfosFiles", "LJavaUtilSet;", "(Ljava/util/Set<Ljava/lang/String;>;)V", "setNextWriteDelGen", "J", "setNextWriteFieldInfosGen", "setNextWriteDocValuesGen", "LJavaIoIOException;", "()Ljava/util/Collection<Ljava/lang/String;>;", "setBufferedDeletesGen", "setDelCount", "I", "toString", "LOrgApacheLuceneStoreDirectory;I", (void *)&OrgApacheLuceneIndexSegmentCommitInfo__Annotations$1, "clone", "Ljava/util/Map<Ljava/lang/Integer;Ljava/util/Set<Ljava/lang/String;>;>;", "Ljava/util/Set<Ljava/lang/String;>;", "Ljava/util/Map<Ljava/lang/Long;Ljava/util/Set<Ljava/lang/String;>;>;", (void *)&OrgApacheLuceneIndexSegmentCommitInfo__Annotations$2 };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCommitInfo = { "SegmentCommitInfo", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 36, 13, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSegmentCommitInfo;
 }
 
@@ -364,6 +402,18 @@ OrgApacheLuceneIndexSegmentCommitInfo *new_OrgApacheLuceneIndexSegmentCommitInfo
 
 OrgApacheLuceneIndexSegmentCommitInfo *create_OrgApacheLuceneIndexSegmentCommitInfo_initWithOrgApacheLuceneIndexSegmentInfo_withInt_withLong_withLong_withLong_(OrgApacheLuceneIndexSegmentInfo *info, jint delCount, jlong delGen, jlong fieldInfosGen, jlong docValuesGen) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentCommitInfo, initWithOrgApacheLuceneIndexSegmentInfo_withInt_withLong_withLong_withLong_, info, delCount, delGen, fieldInfosGen, docValuesGen)
+}
+
+IOSObjectArray *OrgApacheLuceneIndexSegmentCommitInfo__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneIndexSegmentCommitInfo__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneIndexSegmentCommitInfo__Annotations$2() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentCommitInfo)

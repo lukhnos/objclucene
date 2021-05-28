@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneBkdtreeBKDPointField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneBkdtreeBKDPointField_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointField || defined(INCLUDE_OrgApacheLuceneBkdtreeBKDPointField))
 #define OrgApacheLuceneBkdtreeBKDPointField_
 
@@ -20,14 +26,20 @@
 #define INCLUDE_OrgApacheLuceneDocumentField 1
 #include "org/apache/lucene/document/Field.h"
 
+@class IOSByteArray;
+@class JavaIoReader;
+@class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneDocumentFieldType;
+@class OrgApacheLuceneDocumentField_Index;
+@class OrgApacheLuceneDocumentField_Store;
+@class OrgApacheLuceneDocumentField_TermVector;
+@class OrgApacheLuceneUtilBytesRef;
 
 /*!
  @brief Add this to a document to index lat/lon point, but be sure to use <code>BKDTreeDocValuesFormat</code> for the field.
  */
 @interface OrgApacheLuceneBkdtreeBKDPointField : OrgApacheLuceneDocumentField
-
-+ (OrgApacheLuceneDocumentFieldType *)TYPE;
+@property (readonly, class, strong) OrgApacheLuceneDocumentFieldType *TYPE NS_SWIFT_NAME(TYPE);
 
 #pragma mark Public
 
@@ -36,17 +48,81 @@
  @param name field name
  @param lat double latitude
  @param lon double longitude
- @throws IllegalArgumentException if the field name is null or lat or lon are out of bounds
+ @throw IllegalArgumentExceptionif the field name is null or lat or lon are out of bounds
  */
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)lat
-                      withDouble:(jdouble)lon;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                withDouble:(jdouble)lat
+                                withDouble:(jdouble)lon;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointField)
 
-inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneBkdtreeBKDPointField_get_TYPE();
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneBkdtreeBKDPointField_get_TYPE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneBkdtreeBKDPointField_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneBkdtreeBKDPointField, TYPE, OrgApacheLuceneDocumentFieldType *)
@@ -61,4 +137,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointField")

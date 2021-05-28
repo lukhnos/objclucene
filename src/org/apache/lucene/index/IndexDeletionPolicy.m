@@ -3,11 +3,13 @@
 //  source: ./core/src/java/org/apache/lucene/index/IndexDeletionPolicy.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/IndexDeletionPolicy.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexDeletionPolicy must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneIndexIndexDeletionPolicy
 
@@ -29,12 +31,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "IndexDeletionPolicy", NULL, 0x4, NULL, NULL },
-    { "onInitWithJavaUtilList:", "onInit", "V", 0x401, "Ljava.io.IOException;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
-    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x401, "Ljava.io.IOException;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, 3, -1, -1 },
+    { NULL, "V", 0x401, 4, 1, 2, 3, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexDeletionPolicy = { 2, "IndexDeletionPolicy", "org.apache.lucene.index", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(onInitWithJavaUtilList:);
+  methods[2].selector = @selector(onCommitWithJavaUtilList:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "onInit", "LJavaUtilList;", "LJavaIoIOException;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V", "onCommit" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexDeletionPolicy = { "IndexDeletionPolicy", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexDeletionPolicy;
 }
 

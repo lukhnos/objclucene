@@ -3,45 +3,71 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/classic/CharStream.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/queryparser/classic/CharStream.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/classic/CharStream must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserClassicCharStream : NSObject
 
 @end
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneQueryparserClassicCharStream__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneQueryparserClassicCharStream__Annotations$1(void);
+
 @implementation OrgApacheLuceneQueryparserClassicCharStream
 
-+ (IOSObjectArray *)__annotations_getColumn {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_getLine {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "readChar", NULL, "C", 0x401, "Ljava.io.IOException;", NULL },
-    { "getColumn", NULL, "I", 0x401, NULL, NULL },
-    { "getLine", NULL, "I", 0x401, NULL, NULL },
-    { "getEndColumn", NULL, "I", 0x401, NULL, NULL },
-    { "getEndLine", NULL, "I", 0x401, NULL, NULL },
-    { "getBeginColumn", NULL, "I", 0x401, NULL, NULL },
-    { "getBeginLine", NULL, "I", 0x401, NULL, NULL },
-    { "backupWithInt:", "backup", "V", 0x401, NULL, NULL },
-    { "BeginToken", NULL, "C", 0x401, "Ljava.io.IOException;", NULL },
-    { "GetImage", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "GetSuffixWithInt:", "GetSuffix", "[C", 0x401, NULL, NULL },
-    { "Done", NULL, "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "C", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, 1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, 2, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 4, -1, -1, -1, -1 },
+    { NULL, "C", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x401, 5, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicCharStream = { 2, "CharStream", "org.apache.lucene.queryparser.classic", NULL, 0x609, 12, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(readChar);
+  methods[1].selector = @selector(getColumn);
+  methods[2].selector = @selector(getLine);
+  methods[3].selector = @selector(getEndColumn);
+  methods[4].selector = @selector(getEndLine);
+  methods[5].selector = @selector(getBeginColumn);
+  methods[6].selector = @selector(getBeginLine);
+  methods[7].selector = @selector(backupWithInt:);
+  methods[8].selector = @selector(BeginToken);
+  methods[9].selector = @selector(GetImage);
+  methods[10].selector = @selector(GetSuffixWithInt:);
+  methods[11].selector = @selector(Done);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;", (void *)&OrgApacheLuceneQueryparserClassicCharStream__Annotations$0, (void *)&OrgApacheLuceneQueryparserClassicCharStream__Annotations$1, "backup", "I", "GetSuffix" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicCharStream = { "CharStream", "org.apache.lucene.queryparser.classic", ptrTable, methods, NULL, 7, 0x609, 12, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserClassicCharStream;
 }
 
 @end
+
+IOSObjectArray *OrgApacheLuceneQueryparserClassicCharStream__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneQueryparserClassicCharStream__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserClassicCharStream)

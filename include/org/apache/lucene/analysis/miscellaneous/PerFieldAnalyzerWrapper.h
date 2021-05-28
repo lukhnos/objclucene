@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper))
 #define OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_
 
@@ -21,27 +27,28 @@
 #include "org/apache/lucene/analysis/DelegatingAnalyzerWrapper.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
+@class OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;
 @protocol JavaUtilMap;
 
 /*!
  @brief This analyzer is used to facilitate scenarios where different
- fields require different analysis techniques.
- Use the Map
- argument in <code>PerFieldAnalyzerWrapper(Analyzer,java.util.Map)</code>
- to add non-default analyzers for fields.
- <p>Example usage:
+  fields require different analysis techniques.Use the Map
+  argument in <code>PerFieldAnalyzerWrapper(Analyzer, java.util.Map)</code>
+  to add non-default analyzers for fields.
+ <p>Example usage:  
  <pre class="prettyprint">
- <code>Map<String,Analyzer> analyzerPerField = new HashMap<>();
- analyzerPerField.put("firstname", new KeywordAnalyzer());
- analyzerPerField.put("lastname", new KeywordAnalyzer());
- PerFieldAnalyzerWrapper aWrapper =
- new PerFieldAnalyzerWrapper(new StandardAnalyzer(version), analyzerPerField);</code>
- 
+  <code>Map<String,Analyzer> analyzerPerField = new HashMap<>();
+  analyzerPerField.put("firstname", new KeywordAnalyzer());
+  analyzerPerField.put("lastname", new KeywordAnalyzer());
+  PerFieldAnalyzerWrapper aWrapper =
+    new PerFieldAnalyzerWrapper(new StandardAnalyzer(version), analyzerPerField);</code>
+  
 @endcode
+   
  <p>In this example, StandardAnalyzer will be used for all fields except "firstname"
- and "lastname", for which KeywordAnalyzer will be used.
+  and "lastname", for which KeywordAnalyzer will be used.  
  <p>A PerFieldAnalyzerWrapper can be used like any other analyzer, for both indexing
- and query parsing.
+  and query parsing.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper : OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper
 
@@ -49,27 +56,28 @@
 
 /*!
  @brief Constructs with default analyzer.
- @param defaultAnalyzer Any fields not specifically
- defined to use a different analyzer will use the one provided here.
+ @param defaultAnalyzer Any fields not specifically  defined to use a different analyzer will use the one provided here.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer;
 
 /*!
  @brief Constructs with default analyzer and a map of analyzers to use for 
- specific fields.
- @param defaultAnalyzer Any fields not specifically
- defined to use a different analyzer will use the one provided here.
- @param fieldAnalyzers a Map (String field name to the Analyzer) to be 
- used for those fields
+  specific fields.
+ @param defaultAnalyzer Any fields not specifically  defined to use a different analyzer will use the one provided here.
+ @param fieldAnalyzers a Map (String field name to the Analyzer) to be   used for those fields
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer
-                                        withJavaUtilMap:(id<JavaUtilMap>)fieldAnalyzers;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer
+                                                  withJavaUtilMap:(id<JavaUtilMap>)fieldAnalyzers;
 
 - (NSString *)description;
 
 #pragma mark Protected
 
 - (OrgApacheLuceneAnalysisAnalyzer *)getWrappedAnalyzerWithNSString:(NSString *)fieldName;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -91,4 +99,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerW
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper")

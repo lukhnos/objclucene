@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAttributeSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAttributeSource_) && (INCLUDE_ALL_OrgApacheLuceneUtilAttributeSource || defined(INCLUDE_OrgApacheLuceneUtilAttributeSource))
 #define OrgApacheLuceneUtilAttributeSource_
 
@@ -27,13 +33,13 @@
 
 /*!
  @brief An AttributeSource contains a list of different <code>AttributeImpl</code>s,
- and methods to add and get them.
- There can only be a single instance
- of an attribute in the same AttributeSource instance. This is ensured
- by passing in the actual type of the Attribute (Class&lt;Attribute&gt;) to 
- the <code>addAttribute(Class)</code>, which then checks if an instance of
- that type is already present. If yes, it returns the instance, otherwise
- it creates a new instance and returns it.
+  and methods to add and get them.There can only be a single instance
+  of an attribute in the same AttributeSource instance.
+ This is ensured
+  by passing in the actual type of the Attribute (Class&lt;Attribute&gt;) to 
+  the <code>addAttribute(Class)</code>, which then checks if an instance of
+  that type is already present. If yes, it returns the instance, otherwise
+  it creates a new instance and returns it.
  */
 @interface OrgApacheLuceneUtilAttributeSource : NSObject
 
@@ -42,67 +48,65 @@
 /*!
  @brief An AttributeSource using the default attribute factory <code>AttributeFactory.DEFAULT_ATTRIBUTE_FACTORY</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief An AttributeSource using the supplied <code>AttributeFactory</code> for creating new <code>Attribute</code> instances.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 /*!
  @brief An AttributeSource that uses the same attributes as the supplied one.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)input;
 
 /*!
  @brief The caller must pass in a Class&lt;?
  extends Attribute&gt; value.
  This method first checks if an instance of that class is 
- already in this AttributeSource and returns it. Otherwise a
- new instance is created, added to this AttributeSource and returned. 
+  already in this AttributeSource and returns it. Otherwise a
+  new instance is created, added to this AttributeSource and returned.
  */
-- (id)addAttributeWithIOSClass:(IOSClass *)attClass;
+- (id<OrgApacheLuceneUtilAttribute>)addAttributeWithIOSClass:(IOSClass *)attClass;
 
 /*!
  @brief <b>Expert:</b> Adds a custom AttributeImpl instance with one or more Attribute interfaces.
  <p><b>NOTE:</b> It is not guaranteed, that <code>att</code> is added to
- the <code>AttributeSource</code>, because the provided attributes may already exist.
- You should always retrieve the wanted attributes using <code>getAttribute</code> after adding
- with this method and cast to your class.
- The recommended way to use custom implementations is using an <code>AttributeFactory</code>.
- </p>
+  the <code>AttributeSource</code>, because the provided attributes may already exist.
+  You should always retrieve the wanted attributes using <code>getAttribute</code> after adding
+  with this method and cast to your class.
+  The recommended way to use custom implementations is using an <code>AttributeFactory</code>.
+  </p>
  */
 - (void)addAttributeImplWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)att;
 
 /*!
- @brief Captures the state of all Attributes.
- The return value can be passed to
+ @brief Captures the state of all Attributes.The return value can be passed to 
  <code>restoreState</code> to restore the state of this or another AttributeSource.
  */
 - (OrgApacheLuceneUtilAttributeSource_State *)captureState;
 
 /*!
- @brief Resets all Attributes in this AttributeSource by calling
+ @brief Resets all Attributes in this AttributeSource by calling 
  <code>AttributeImpl.clear()</code> on each Attribute implementation.
  */
 - (void)clearAttributes;
 
 /*!
- @brief Performs a clone of all <code>AttributeImpl</code> instances returned in a new
- <code>AttributeSource</code> instance.
- This method can be used to e.g. create another TokenStream
- with exactly the same attributes (using <code>AttributeSource(AttributeSource)</code>).
+ @brief Performs a clone of all <code>AttributeImpl</code> instances returned in a new 
+ <code>AttributeSource</code> instance.This method can be used to e.g. create another TokenStream
+  with exactly the same attributes (using <code>AttributeSource(AttributeSource)</code>).
  You can also use it as a (non-performant) replacement for <code>captureState</code>, if you need to look
- into / modify the captured state.
+  into / modify the captured state.
  */
 - (OrgApacheLuceneUtilAttributeSource *)cloneAttributes;
 
 /*!
  @brief Copies the contents of this <code>AttributeSource</code> to the given target <code>AttributeSource</code>.
  The given instance has to provide all <code>Attribute</code>s this instance contains. 
- The actual attribute implementations must be identical in both <code>AttributeSource</code> instances;
- ideally both AttributeSource instances should use the same <code>AttributeFactory</code>.
- You can use this method as a replacement for <code>restoreState</code>, if you use
+  The actual attribute implementations must be identical in both <code>AttributeSource</code> instances;
+  ideally both AttributeSource instances should use the same <code>AttributeFactory</code>.
+  You can use this method as a replacement for <code>restoreState</code>, if you use 
  <code>cloneAttributes</code> instead of <code>captureState</code>.
  */
 - (void)copyToWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)target OBJC_METHOD_FAMILY_NONE;
@@ -112,21 +116,21 @@
 /*!
  @brief Returns the instance of the passed in Attribute contained in this AttributeSource
  <p>
- The caller must pass in a Class&lt;?
- extends Attribute&gt; value. 
+  The caller must pass in a Class&lt;?
+ extends Attribute&gt; value.
  @return instance of the passed in Attribute, or <code>null</code> if this AttributeSource 
- does not contain the Attribute. It is recommended to always use 
+          does not contain the Attribute. It is recommended to always use          
  <code>addAttribute</code> even in consumers  of TokenStreams, because you cannot 
- know if a specific TokenStream really uses a specific Attribute. 
+          know if a specific TokenStream really uses a specific Attribute.          
  <code>addAttribute</code> will automatically make the attribute available. 
- If you want to only use the attribute, if it is available (to optimize
- consuming), use <code>hasAttribute</code>.
+          If you want to only use the attribute, if it is available (to optimize
+          consuming), use <code>hasAttribute</code>.
  */
-- (id)getAttributeWithIOSClass:(IOSClass *)attClass;
+- (id<OrgApacheLuceneUtilAttribute>)getAttributeWithIOSClass:(IOSClass *)attClass;
 
 /*!
  @brief Returns a new iterator that iterates the attribute classes
- in the same order they were added in.
+  in the same order they were added in.
  */
 - (id<JavaUtilIterator>)getAttributeClassesIterator;
 
@@ -138,13 +142,13 @@
 /*!
  @brief Returns a new iterator that iterates all unique Attribute implementations.
  This iterator may contain less entries that <code>getAttributeClassesIterator</code>,
- if one instance implements more than one Attribute interface.
+  if one instance implements more than one Attribute interface.
  */
 - (id<JavaUtilIterator>)getAttributeImplsIterator;
 
 /*!
  @brief The caller must pass in a Class&lt;?
- extends Attribute&gt; value. 
+ extends Attribute&gt; value.
  Returns true, iff this AttributeSource contains the passed-in Attribute.
  */
 - (jboolean)hasAttributeWithIOSClass:(IOSClass *)attClass;
@@ -158,44 +162,44 @@
 
 /*!
  @brief This method returns the current attribute values as a string in the following format
- by calling the <code>reflectWith(AttributeReflector)</code> method:
+  by calling the <code>reflectWith(AttributeReflector)</code> method:  
  <ul>
- <li><em>iff <code>prependAttClass=true</code>:</em> <code>"AttributeClass#key=value,AttributeClass#key=value"</code>
- <li><em>iff <code>prependAttClass=false</code>:</em> <code>"key=value,key=value"</code>
- </ul>
+  <li><em>iff <code>prependAttClass=true</code>:</em> <code>"AttributeClass#key=value,AttributeClass#key=value"</code>
+  <li><em>iff <code>prependAttClass=false</code>:</em> <code>"key=value,key=value"</code>
+  </ul>
  - seealso: #reflectWith(AttributeReflector)
  */
 - (NSString *)reflectAsStringWithBoolean:(jboolean)prependAttClass;
 
 /*!
  @brief This method is for introspection of attributes, it should simply
- add the key/values this AttributeSource holds to the given <code>AttributeReflector</code>.
+  add the key/values this AttributeSource holds to the given <code>AttributeReflector</code>.
  <p>This method iterates over all Attribute implementations and calls the
- corresponding <code>AttributeImpl.reflectWith</code> method.</p>
+  corresponding <code>AttributeImpl.reflectWith</code> method.</p>
  - seealso: AttributeImpl#reflectWith
  */
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector;
 
 /*!
  @brief Restores this state by copying the values of all attribute implementations
- that this state contains into the attributes implementations of the targetStream.
+  that this state contains into the attributes implementations of the targetStream.
  The targetStream must contain a corresponding instance for each argument
- contained in this state (e.g. it is not possible to restore the state of
- an AttributeSource containing a TermAttribute into a AttributeSource using
- a Token instance as implementation).
+  contained in this state (e.g. it is not possible to restore the state of
+  an AttributeSource containing a TermAttribute into a AttributeSource using
+  a Token instance as implementation). 
  <p>
- Note that this method does not affect attributes of the targetStream
- that are not contained in this state. In other words, if for example
- the targetStream contains an OffsetAttribute, but this state doesn't, then
- the value of the OffsetAttribute remains unchanged. It might be desirable to
- reset its value to the default, in which case the caller should first
- call <code>TokenStream.clearAttributes()</code> on the targetStream.   
+  Note that this method does not affect attributes of the targetStream
+  that are not contained in this state. In other words, if for example
+  the targetStream contains an OffsetAttribute, but this state doesn't, then
+  the value of the OffsetAttribute remains unchanged. It might be desirable to
+  reset its value to the default, in which case the caller should first
+  call <code>TokenStream.clearAttributes()</code> on the targetStream.
  */
 - (void)restoreStateWithOrgApacheLuceneUtilAttributeSource_State:(OrgApacheLuceneUtilAttributeSource_State *)state;
 
 /*!
  @brief Returns a string consisting of the class's simple name, the hex representation of the identity hash code,
- and the current reflection of all attributes.
+  and the current reflection of all attributes.
  - seealso: #reflectAsString(boolean)
  */
 - (NSString *)description;
@@ -210,9 +214,9 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilAttributeSource)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAttributeSource_init(OrgApacheLuceneUtilAttributeSource *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeSource *new_OrgApacheLuceneUtilAttributeSource_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeSource *new_OrgApacheLuceneUtilAttributeSource_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeSource *create_OrgApacheLuceneUtilAttributeSource_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeSource *create_OrgApacheLuceneUtilAttributeSource_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAttributeSource_initWithOrgApacheLuceneUtilAttributeSource_(OrgApacheLuceneUtilAttributeSource *self, OrgApacheLuceneUtilAttributeSource *input);
 
@@ -250,9 +254,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeSource)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (OrgApacheLuceneUtilAttributeSource_State *)clone;
+- (OrgApacheLuceneUtilAttributeSource_State *)java_clone;
 
 @end
 
@@ -263,12 +267,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAttributeSource_State, next_, OrgApacheLu
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAttributeSource_State_init(OrgApacheLuceneUtilAttributeSource_State *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeSource_State *new_OrgApacheLuceneUtilAttributeSource_State_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeSource_State *new_OrgApacheLuceneUtilAttributeSource_State_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeSource_State *create_OrgApacheLuceneUtilAttributeSource_State_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeSource_State *create_OrgApacheLuceneUtilAttributeSource_State_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeSource_State)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAttributeSource")

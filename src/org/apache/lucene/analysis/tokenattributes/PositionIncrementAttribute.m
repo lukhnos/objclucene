@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute : NSObject
 
 @end
@@ -13,11 +17,18 @@
 @implementation OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setPositionIncrementWithInt:", "setPositionIncrement", "V", 0x401, NULL, NULL },
-    { "getPositionIncrement", NULL, "I", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute = { 2, "PositionIncrementAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setPositionIncrementWithInt:);
+  methods[1].selector = @selector(getPositionIncrement);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setPositionIncrement", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute = { "PositionIncrementAttribute", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;
 }
 

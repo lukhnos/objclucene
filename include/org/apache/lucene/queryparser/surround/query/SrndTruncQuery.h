@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery))
 #define OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_
 
@@ -22,6 +28,7 @@
 
 @class JavaLangStringBuilder;
 @class OrgApacheLuceneIndexIndexReader;
+@class OrgApacheLuceneQueryparserSurroundQuerySrndQuery;
 @protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
 
 /*!
@@ -31,11 +38,13 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)truncated
-                        withChar:(jchar)unlimited
-                        withChar:(jchar)mask;
+- (instancetype __nonnull)initWithNSString:(NSString *)truncated
+                                  withChar:(jchar)unlimited
+                                  withChar:(jchar)mask;
 
 - (NSString *)getTruncated;
+
+- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)java_clone;
 
 - (NSString *)toStringUnquoted;
 
@@ -52,6 +61,10 @@ withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<Or
 
 - (void)truncatedToPrefixAndPattern;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithBoolean:(jboolean)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery)
@@ -66,4 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery")

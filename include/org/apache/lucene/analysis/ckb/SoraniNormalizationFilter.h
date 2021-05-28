@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter))
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter_
 
@@ -24,13 +30,13 @@
 
 /*!
  @brief A <code>TokenFilter</code> that applies <code>SoraniNormalizer</code> to normalize the
- orthography.
+  orthography.
  */
 @interface OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -48,4 +54,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter")

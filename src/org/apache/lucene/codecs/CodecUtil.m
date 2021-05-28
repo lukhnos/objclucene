@@ -7,12 +7,13 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Long.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/annotation/Annotation.h"
+#include "java/nio/charset/Charset.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/index/CorruptIndexException.h"
@@ -29,6 +30,10 @@
 #include "org/apache/lucene/util/StringHelper.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/CodecUtil must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCodecsCodecUtil ()
 
 - (instancetype)init;
@@ -39,11 +44,13 @@
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsCodecUtil_init(OrgApacheLuceneCodecsCodecUtil *self);
 
-__attribute__((unused)) static OrgApacheLuceneCodecsCodecUtil *new_OrgApacheLuceneCodecsCodecUtil_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneCodecsCodecUtil *new_OrgApacheLuceneCodecsCodecUtil_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneCodecsCodecUtil *create_OrgApacheLuceneCodecsCodecUtil_init();
+__attribute__((unused)) static OrgApacheLuceneCodecsCodecUtil *create_OrgApacheLuceneCodecsCodecUtil_init(void);
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsCodecUtil_validateFooterWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneCodecsCodecUtil__Annotations$0(void);
 
 @implementation OrgApacheLuceneCodecsCodecUtil
 
@@ -131,8 +138,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)checkFooterWithOrgApacheLuceneStoreChecksumIndexInput:(OrgApacheLuceneStoreChecksumIndexInput *)inArg
-                                              withNSException:(NSException *)priorException {
-  OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withNSException_(inArg, priorException);
+                                        withJavaLangThrowable:(JavaLangThrowable *)priorException {
+  OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(inArg, priorException);
 }
 
 + (jlong)retrieveChecksumWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
@@ -159,38 +166,59 @@ J2OBJC_IGNORE_DESIGNATED_END
   OrgApacheLuceneCodecsCodecUtil_writeCRCWithOrgApacheLuceneStoreIndexOutput_(output);
 }
 
-+ (IOSObjectArray *)__annotations_checkEOFWithOrgApacheLuceneStoreIndexInput_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CodecUtil", NULL, 0x2, NULL, NULL },
-    { "writeHeaderWithOrgApacheLuceneStoreDataOutput:withNSString:withInt:", "writeHeader", "V", 0x9, "Ljava.io.IOException;", NULL },
-    { "writeIndexHeaderWithOrgApacheLuceneStoreDataOutput:withNSString:withInt:withByteArray:withNSString:", "writeIndexHeader", "V", 0x9, "Ljava.io.IOException;", NULL },
-    { "headerLengthWithNSString:", "headerLength", "I", 0x9, NULL, NULL },
-    { "indexHeaderLengthWithNSString:withNSString:", "indexHeaderLength", "I", 0x9, NULL, NULL },
-    { "checkHeaderWithOrgApacheLuceneStoreDataInput:withNSString:withInt:withInt:", "checkHeader", "I", 0x9, "Ljava.io.IOException;", NULL },
-    { "checkHeaderNoMagicWithOrgApacheLuceneStoreDataInput:withNSString:withInt:withInt:", "checkHeaderNoMagic", "I", 0x9, "Ljava.io.IOException;", NULL },
-    { "checkIndexHeaderWithOrgApacheLuceneStoreDataInput:withNSString:withInt:withInt:withByteArray:withNSString:", "checkIndexHeader", "I", 0x9, "Ljava.io.IOException;", NULL },
-    { "checkIndexHeaderIDWithOrgApacheLuceneStoreDataInput:withByteArray:", "checkIndexHeaderID", "[B", 0x9, "Ljava.io.IOException;", NULL },
-    { "checkIndexHeaderSuffixWithOrgApacheLuceneStoreDataInput:withNSString:", "checkIndexHeaderSuffix", "Ljava.lang.String;", 0x9, "Ljava.io.IOException;", NULL },
-    { "writeFooterWithOrgApacheLuceneStoreIndexOutput:", "writeFooter", "V", 0x9, "Ljava.io.IOException;", NULL },
-    { "footerLength", NULL, "I", 0x9, NULL, NULL },
-    { "checkFooterWithOrgApacheLuceneStoreChecksumIndexInput:", "checkFooter", "J", 0x9, "Ljava.io.IOException;", NULL },
-    { "checkFooterWithOrgApacheLuceneStoreChecksumIndexInput:withNSException:", "checkFooter", "V", 0x9, "Ljava.io.IOException;", NULL },
-    { "retrieveChecksumWithOrgApacheLuceneStoreIndexInput:", "retrieveChecksum", "J", 0x9, "Ljava.io.IOException;", NULL },
-    { "validateFooterWithOrgApacheLuceneStoreIndexInput:", "validateFooter", "V", 0xa, "Ljava.io.IOException;", NULL },
-    { "checkEOFWithOrgApacheLuceneStoreIndexInput:", "checkEOF", "V", 0x9, "Ljava.io.IOException;", NULL },
-    { "checksumEntireFileWithOrgApacheLuceneStoreIndexInput:", "checksumEntireFile", "J", 0x9, "Ljava.io.IOException;", NULL },
-    { "readCRCWithOrgApacheLuceneStoreIndexInput:", "readCRC", "J", 0x9, "Ljava.io.IOException;", NULL },
-    { "writeCRCWithOrgApacheLuceneStoreIndexOutput:", "writeCRC", "V", 0x9, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x9, 3, 4, 2, -1, -1, -1 },
+    { NULL, "I", 0x9, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 9, 10, 2, -1, -1, -1 },
+    { NULL, "I", 0x9, 11, 10, 2, -1, -1, -1 },
+    { NULL, "I", 0x9, 12, 13, 2, -1, -1, -1 },
+    { NULL, "[B", 0x9, 14, 15, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 16, 17, 2, -1, -1, -1 },
+    { NULL, "V", 0x9, 18, 19, 2, -1, -1, -1 },
+    { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 20, 21, 2, -1, -1, -1 },
+    { NULL, "V", 0x9, 20, 22, 2, -1, -1, -1 },
+    { NULL, "J", 0x9, 23, 24, 2, -1, -1, -1 },
+    { NULL, "V", 0xa, 25, 24, 2, -1, -1, -1 },
+    { NULL, "V", 0x9, 26, 24, 2, -1, 27, -1 },
+    { NULL, "J", 0x9, 28, 24, 2, -1, -1, -1 },
+    { NULL, "J", 0x9, 29, 24, 2, -1, -1, -1 },
+    { NULL, "V", 0x9, 30, 19, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(writeHeaderWithOrgApacheLuceneStoreDataOutput:withNSString:withInt:);
+  methods[2].selector = @selector(writeIndexHeaderWithOrgApacheLuceneStoreDataOutput:withNSString:withInt:withByteArray:withNSString:);
+  methods[3].selector = @selector(headerLengthWithNSString:);
+  methods[4].selector = @selector(indexHeaderLengthWithNSString:withNSString:);
+  methods[5].selector = @selector(checkHeaderWithOrgApacheLuceneStoreDataInput:withNSString:withInt:withInt:);
+  methods[6].selector = @selector(checkHeaderNoMagicWithOrgApacheLuceneStoreDataInput:withNSString:withInt:withInt:);
+  methods[7].selector = @selector(checkIndexHeaderWithOrgApacheLuceneStoreDataInput:withNSString:withInt:withInt:withByteArray:withNSString:);
+  methods[8].selector = @selector(checkIndexHeaderIDWithOrgApacheLuceneStoreDataInput:withByteArray:);
+  methods[9].selector = @selector(checkIndexHeaderSuffixWithOrgApacheLuceneStoreDataInput:withNSString:);
+  methods[10].selector = @selector(writeFooterWithOrgApacheLuceneStoreIndexOutput:);
+  methods[11].selector = @selector(footerLength);
+  methods[12].selector = @selector(checkFooterWithOrgApacheLuceneStoreChecksumIndexInput:);
+  methods[13].selector = @selector(checkFooterWithOrgApacheLuceneStoreChecksumIndexInput:withJavaLangThrowable:);
+  methods[14].selector = @selector(retrieveChecksumWithOrgApacheLuceneStoreIndexInput:);
+  methods[15].selector = @selector(validateFooterWithOrgApacheLuceneStoreIndexInput:);
+  methods[16].selector = @selector(checkEOFWithOrgApacheLuceneStoreIndexInput:);
+  methods[17].selector = @selector(checksumEntireFileWithOrgApacheLuceneStoreIndexInput:);
+  methods[18].selector = @selector(readCRCWithOrgApacheLuceneStoreIndexInput:);
+  methods[19].selector = @selector(writeCRCWithOrgApacheLuceneStoreIndexOutput:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "CODEC_MAGIC", "CODEC_MAGIC", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsCodecUtil_CODEC_MAGIC },
-    { "FOOTER_MAGIC", "FOOTER_MAGIC", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsCodecUtil_FOOTER_MAGIC },
+    { "CODEC_MAGIC", "I", .constantValue.asInt = OrgApacheLuceneCodecsCodecUtil_CODEC_MAGIC, 0x19, -1, -1, -1, -1 },
+    { "FOOTER_MAGIC", "I", .constantValue.asInt = OrgApacheLuceneCodecsCodecUtil_FOOTER_MAGIC, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCodecUtil = { 2, "CodecUtil", "org.apache.lucene.codecs", NULL, 0x11, 20, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "writeHeader", "LOrgApacheLuceneStoreDataOutput;LNSString;I", "LJavaIoIOException;", "writeIndexHeader", "LOrgApacheLuceneStoreDataOutput;LNSString;I[BLNSString;", "headerLength", "LNSString;", "indexHeaderLength", "LNSString;LNSString;", "checkHeader", "LOrgApacheLuceneStoreDataInput;LNSString;II", "checkHeaderNoMagic", "checkIndexHeader", "LOrgApacheLuceneStoreDataInput;LNSString;II[BLNSString;", "checkIndexHeaderID", "LOrgApacheLuceneStoreDataInput;[B", "checkIndexHeaderSuffix", "LOrgApacheLuceneStoreDataInput;LNSString;", "writeFooter", "LOrgApacheLuceneStoreIndexOutput;", "checkFooter", "LOrgApacheLuceneStoreChecksumIndexInput;", "LOrgApacheLuceneStoreChecksumIndexInput;LJavaLangThrowable;", "retrieveChecksum", "LOrgApacheLuceneStoreIndexInput;", "validateFooter", "checkEOF", (void *)&OrgApacheLuceneCodecsCodecUtil__Annotations$0, "checksumEntireFile", "readCRC", "writeCRC" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCodecUtil = { "CodecUtil", "org.apache.lucene.codecs", ptrTable, methods, fields, 7, 0x11, 20, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCodecUtil;
 }
 
@@ -211,7 +239,7 @@ OrgApacheLuceneCodecsCodecUtil *create_OrgApacheLuceneCodecsCodecUtil_init() {
 void OrgApacheLuceneCodecsCodecUtil_writeHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_(OrgApacheLuceneStoreDataOutput *outArg, NSString *codec, jint version_) {
   OrgApacheLuceneCodecsCodecUtil_initialize();
   OrgApacheLuceneUtilBytesRef *bytes = create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(codec);
-  if (bytes->length_ != ((jint) [((NSString *) nil_chk(codec)) length]) || bytes->length_ >= 128) {
+  if (bytes->length_ != [((NSString *) nil_chk(codec)) java_length] || bytes->length_ >= 128) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"codec must be simple ASCII, less than 128 characters in length [got ", codec, ']'));
   }
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeIntWithInt:OrgApacheLuceneCodecsCodecUtil_CODEC_MAGIC];
@@ -227,7 +255,7 @@ void OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreData
   OrgApacheLuceneCodecsCodecUtil_writeHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_(outArg, codec, version_);
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeBytesWithByteArray:id_ withInt:0 withInt:id_->size_];
   OrgApacheLuceneUtilBytesRef *suffixBytes = create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(suffix);
-  if (suffixBytes->length_ != ((jint) [((NSString *) nil_chk(suffix)) length]) || suffixBytes->length_ >= 256) {
+  if (suffixBytes->length_ != [((NSString *) nil_chk(suffix)) java_length] || suffixBytes->length_ >= 256) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"codec must be simple ASCII, less than 256 characters in length [got ", suffix, ']'));
   }
   [outArg writeByteWithByte:(jbyte) suffixBytes->length_];
@@ -236,12 +264,12 @@ void OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreData
 
 jint OrgApacheLuceneCodecsCodecUtil_headerLengthWithNSString_(NSString *codec) {
   OrgApacheLuceneCodecsCodecUtil_initialize();
-  return 9 + ((jint) [((NSString *) nil_chk(codec)) length]);
+  return 9 + [((NSString *) nil_chk(codec)) java_length];
 }
 
 jint OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(NSString *codec, NSString *suffix) {
   OrgApacheLuceneCodecsCodecUtil_initialize();
-  return OrgApacheLuceneCodecsCodecUtil_headerLengthWithNSString_(codec) + OrgApacheLuceneUtilStringHelper_ID_LENGTH + 1 + ((jint) [((NSString *) nil_chk(suffix)) length]);
+  return OrgApacheLuceneCodecsCodecUtil_headerLengthWithNSString_(codec) + OrgApacheLuceneUtilStringHelper_ID_LENGTH + 1 + [((NSString *) nil_chk(suffix)) java_length];
 }
 
 jint OrgApacheLuceneCodecsCodecUtil_checkHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, NSString *codec, jint minVersion, jint maxVersion) {
@@ -292,7 +320,7 @@ NSString *OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderSuffixWithOrgApacheLuce
   jint suffixLength = [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readByte] & (jint) 0xFF;
   IOSByteArray *suffixBytes = [IOSByteArray arrayWithLength:suffixLength];
   [inArg readBytesWithByteArray:suffixBytes withInt:0 withInt:suffixBytes->size_];
-  NSString *suffix = [NSString stringWithBytes:suffixBytes offset:0 length:suffixBytes->size_ charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)];
+  NSString *suffix = [NSString java_stringWithBytes:suffixBytes offset:0 length:suffixBytes->size_ charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)];
   if (![suffix isEqual:expectedSuffix]) {
     @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$$$$", @"file mismatch, expected suffix=", expectedSuffix, @", got=", suffix), inArg);
   }
@@ -322,7 +350,7 @@ jlong OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksum
   return actualChecksum;
 }
 
-void OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withNSException_(OrgApacheLuceneStoreChecksumIndexInput *inArg, NSException *priorException) {
+void OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(OrgApacheLuceneStoreChecksumIndexInput *inArg, JavaLangThrowable *priorException) {
   OrgApacheLuceneCodecsCodecUtil_initialize();
   if (priorException == nil) {
     OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_(inArg);
@@ -331,23 +359,23 @@ void OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumI
     @try {
       jlong remaining = [((OrgApacheLuceneStoreChecksumIndexInput *) nil_chk(inArg)) length] - [inArg getFilePointer];
       if (remaining < OrgApacheLuceneCodecsCodecUtil_footerLength()) {
-        [priorException addSuppressedWithNSException:create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$J$", @"checksum status indeterminate: remaining=", remaining, @", please run checkindex for more details"), inArg)];
+        [priorException addSuppressedWithJavaLangThrowable:create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$J$", @"checksum status indeterminate: remaining=", remaining, @", please run checkindex for more details"), inArg)];
       }
       else {
         [inArg skipBytesWithLong:remaining - OrgApacheLuceneCodecsCodecUtil_footerLength()];
         @try {
           jlong checksum = OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_(inArg);
-          [priorException addSuppressedWithNSException:create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$$$", @"checksum passed (", JavaLangLong_toHexStringWithLong_(checksum), @"). possibly transient resource issue, or a Lucene or JVM bug"), inArg)];
+          [priorException addSuppressedWithJavaLangThrowable:create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$$$", @"checksum passed (", JavaLangLong_toHexStringWithLong_(checksum), @"). possibly transient resource issue, or a Lucene or JVM bug"), inArg)];
         }
         @catch (OrgApacheLuceneIndexCorruptIndexException *t) {
-          [priorException addSuppressedWithNSException:t];
+          [priorException addSuppressedWithJavaLangThrowable:t];
         }
       }
     }
-    @catch (NSException *t) {
-      [priorException addSuppressedWithNSException:create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_withNSException_(@"checksum status indeterminate: unexpected exception", inArg, t)];
+    @catch (JavaLangThrowable *t) {
+      [priorException addSuppressedWithJavaLangThrowable:create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_withJavaLangThrowable_(@"checksum status indeterminate: unexpected exception", inArg, t)];
     }
-    OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(priorException);
+    OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(priorException);
   }
 }
 
@@ -387,10 +415,10 @@ void OrgApacheLuceneCodecsCodecUtil_checkEOFWithOrgApacheLuceneStoreIndexInput_(
 
 jlong OrgApacheLuceneCodecsCodecUtil_checksumEntireFileWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *input) {
   OrgApacheLuceneCodecsCodecUtil_initialize();
-  OrgApacheLuceneStoreIndexInput *clone = [((OrgApacheLuceneStoreIndexInput *) nil_chk(input)) clone];
+  OrgApacheLuceneStoreIndexInput *clone = JreRetainedLocalValue([((OrgApacheLuceneStoreIndexInput *) nil_chk(input)) java_clone]);
   [((OrgApacheLuceneStoreIndexInput *) nil_chk(clone)) seekWithLong:0];
   OrgApacheLuceneStoreChecksumIndexInput *in = create_OrgApacheLuceneStoreBufferedChecksumIndexInput_initWithOrgApacheLuceneStoreIndexInput_(clone);
-  JreAssert(([in getFilePointer] == 0), (@"org/apache/lucene/codecs/CodecUtil.java:447 condition failed: assert in.getFilePointer() == 0;"));
+  JreAssert([in getFilePointer] == 0, @"org/apache/lucene/codecs/CodecUtil.java:447 condition failed: assert in.getFilePointer() == 0;");
   [in seekWithLong:[in length] - OrgApacheLuceneCodecsCodecUtil_footerLength()];
   return OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_(in);
 }
@@ -411,6 +439,10 @@ void OrgApacheLuceneCodecsCodecUtil_writeCRCWithOrgApacheLuceneStoreIndexOutput_
     @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$J$@C", @"Illegal CRC-32 checksum: ", value, @" (resource=", output, ')'));
   }
   [output writeLongWithLong:value];
+}
+
+IOSObjectArray *OrgApacheLuceneCodecsCodecUtil__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCodecUtil)

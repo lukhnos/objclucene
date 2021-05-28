@@ -3,7 +3,6 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/classic/MultiFieldQueryParser.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -15,14 +14,16 @@
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/queryparser/classic/MultiFieldQueryParser.h"
-#include "org/apache/lucene/queryparser/classic/ParseException.h"
 #include "org/apache/lucene/queryparser/classic/QueryParser.h"
-#include "org/apache/lucene/queryparser/classic/QueryParserBase.h"
 #include "org/apache/lucene/search/BooleanClause.h"
 #include "org/apache/lucene/search/BooleanQuery.h"
 #include "org/apache/lucene/search/MultiPhraseQuery.h"
 #include "org/apache/lucene/search/PhraseQuery.h"
 #include "org/apache/lucene/search/Query.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/classic/MultiFieldQueryParser must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserClassicMultiFieldQueryParser ()
 
@@ -57,7 +58,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryp
       OrgApacheLuceneSearchQuery *q = [super getFieldQueryWithNSString:IOSObjectArray_Get(fields_, i) withNSString:queryText withBoolean:true];
       if (q != nil) {
         if (boosts_ != nil) {
-          JavaLangFloat *boost = [boosts_ getWithId:IOSObjectArray_Get(nil_chk(fields_), i)];
+          JavaLangFloat *boost = JreRetainedLocalValue([boosts_ getWithId:IOSObjectArray_Get(nil_chk(fields_), i)]);
           if (boost != nil) {
             [q setBoostWithFloat:[boost floatValue]];
           }
@@ -88,7 +89,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryp
       OrgApacheLuceneSearchQuery *q = [super getFieldQueryWithNSString:IOSObjectArray_Get(fields_, i) withNSString:queryText withBoolean:quoted];
       if (q != nil) {
         if (boosts_ != nil) {
-          JavaLangFloat *boost = [boosts_ getWithId:IOSObjectArray_Get(nil_chk(fields_), i)];
+          JavaLangFloat *boost = JreRetainedLocalValue([boosts_ getWithId:IOSObjectArray_Get(nil_chk(fields_), i)]);
           if (boost != nil) {
             [q setBoostWithFloat:[boost floatValue]];
           }
@@ -194,26 +195,44 @@ withOrgApacheLuceneSearchBooleanClause_OccurArray:(IOSObjectArray *)flags
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSStringArray:withOrgApacheLuceneAnalysisAnalyzer:withJavaUtilMap:", "MultiFieldQueryParser", NULL, 0x1, NULL, "([Ljava/lang/String;Lorg/apache/lucene/analysis/Analyzer;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Float;>;)V" },
-    { "initWithNSStringArray:withOrgApacheLuceneAnalysisAnalyzer:", "MultiFieldQueryParser", NULL, 0x1, NULL, NULL },
-    { "getFieldQueryWithNSString:withNSString:withInt:", "getFieldQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "applySlopWithOrgApacheLuceneSearchQuery:withInt:", "applySlop", "Lorg.apache.lucene.search.Query;", 0x2, NULL, NULL },
-    { "getFieldQueryWithNSString:withNSString:withBoolean:", "getFieldQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "getFuzzyQueryWithNSString:withNSString:withFloat:", "getFuzzyQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "getPrefixQueryWithNSString:withNSString:", "getPrefixQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "getWildcardQueryWithNSString:withNSString:", "getWildcardQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "getRangeQueryWithNSString:withNSString:withNSString:withBoolean:withBoolean:", "getRangeQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "getRegexpQueryWithNSString:withNSString:", "getRegexpQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "parseWithNSStringArray:withNSStringArray:withOrgApacheLuceneAnalysisAnalyzer:", "parse", "Lorg.apache.lucene.search.Query;", 0x9, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "parseWithNSString:withNSStringArray:withOrgApacheLuceneSearchBooleanClause_OccurArray:withOrgApacheLuceneAnalysisAnalyzer:", "parse", "Lorg.apache.lucene.search.Query;", 0x9, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "parseWithNSStringArray:withNSStringArray:withOrgApacheLuceneSearchBooleanClause_OccurArray:withOrgApacheLuceneAnalysisAnalyzer:", "parse", "Lorg.apache.lucene.search.Query;", 0x9, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 3, 4, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x2, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 3, 8, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 9, 10, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 11, 12, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 13, 12, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 14, 15, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 16, 12, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x9, 17, 18, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x9, 17, 19, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x9, 17, 20, 5, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSStringArray:withOrgApacheLuceneAnalysisAnalyzer:withJavaUtilMap:);
+  methods[1].selector = @selector(initWithNSStringArray:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[2].selector = @selector(getFieldQueryWithNSString:withNSString:withInt:);
+  methods[3].selector = @selector(applySlopWithOrgApacheLuceneSearchQuery:withInt:);
+  methods[4].selector = @selector(getFieldQueryWithNSString:withNSString:withBoolean:);
+  methods[5].selector = @selector(getFuzzyQueryWithNSString:withNSString:withFloat:);
+  methods[6].selector = @selector(getPrefixQueryWithNSString:withNSString:);
+  methods[7].selector = @selector(getWildcardQueryWithNSString:withNSString:);
+  methods[8].selector = @selector(getRangeQueryWithNSString:withNSString:withNSString:withBoolean:withBoolean:);
+  methods[9].selector = @selector(getRegexpQueryWithNSString:withNSString:);
+  methods[10].selector = @selector(parseWithNSStringArray:withNSStringArray:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[11].selector = @selector(parseWithNSString:withNSStringArray:withOrgApacheLuceneSearchBooleanClause_OccurArray:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[12].selector = @selector(parseWithNSStringArray:withNSStringArray:withOrgApacheLuceneSearchBooleanClause_OccurArray:withOrgApacheLuceneAnalysisAnalyzer:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fields_", NULL, 0x4, "[Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "boosts_", NULL, 0x4, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Float;>;", .constantValue.asLong = 0 },
+    { "fields_", "[LNSString;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "boosts_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 21, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicMultiFieldQueryParser = { 2, "MultiFieldQueryParser", "org.apache.lucene.queryparser.classic", NULL, 0x1, 13, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[LNSString;LOrgApacheLuceneAnalysisAnalyzer;LJavaUtilMap;", "([Ljava/lang/String;Lorg/apache/lucene/analysis/Analyzer;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Float;>;)V", "[LNSString;LOrgApacheLuceneAnalysisAnalyzer;", "getFieldQuery", "LNSString;LNSString;I", "LOrgApacheLuceneQueryparserClassicParseException;", "applySlop", "LOrgApacheLuceneSearchQuery;I", "LNSString;LNSString;Z", "getFuzzyQuery", "LNSString;LNSString;F", "getPrefixQuery", "LNSString;LNSString;", "getWildcardQuery", "getRangeQuery", "LNSString;LNSString;LNSString;ZZ", "getRegexpQuery", "parse", "[LNSString;[LNSString;LOrgApacheLuceneAnalysisAnalyzer;", "LNSString;[LNSString;[LOrgApacheLuceneSearchBooleanClause_Occur;LOrgApacheLuceneAnalysisAnalyzer;", "[LNSString;[LNSString;[LOrgApacheLuceneSearchBooleanClause_Occur;LOrgApacheLuceneAnalysisAnalyzer;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Float;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicMultiFieldQueryParser = { "MultiFieldQueryParser", "org.apache.lucene.queryparser.classic", ptrTable, methods, fields, 7, 0x1, 13, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserClassicMultiFieldQueryParser;
 }
 
@@ -249,7 +268,7 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserClassicMultiFieldQueryPars
   if ([q isKindOfClass:[OrgApacheLuceneSearchPhraseQuery class]]) {
     OrgApacheLuceneSearchPhraseQuery_Builder *builder = create_OrgApacheLuceneSearchPhraseQuery_Builder_init();
     [builder setSlopWithInt:slop];
-    OrgApacheLuceneSearchPhraseQuery *pq = (OrgApacheLuceneSearchPhraseQuery *) cast_chk(q, [OrgApacheLuceneSearchPhraseQuery class]);
+    OrgApacheLuceneSearchPhraseQuery *pq = (OrgApacheLuceneSearchPhraseQuery *) q;
     IOSObjectArray *terms = [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(pq)) getTerms];
     IOSIntArray *positions = [pq getPositions];
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms))->size_; ++i) {
@@ -259,7 +278,7 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserClassicMultiFieldQueryPars
     [((OrgApacheLuceneSearchQuery *) nil_chk(q)) setBoostWithFloat:[pq getBoost]];
   }
   else if ([q isKindOfClass:[OrgApacheLuceneSearchMultiPhraseQuery class]]) {
-    [((OrgApacheLuceneSearchMultiPhraseQuery *) nil_chk(((OrgApacheLuceneSearchMultiPhraseQuery *) cast_chk(q, [OrgApacheLuceneSearchMultiPhraseQuery class])))) setSlopWithInt:slop];
+    [((OrgApacheLuceneSearchMultiPhraseQuery *) nil_chk(((OrgApacheLuceneSearchMultiPhraseQuery *) q))) setSlopWithInt:slop];
   }
   return q;
 }
@@ -270,7 +289,7 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserClassicMultiFieldQueryPars
   OrgApacheLuceneSearchBooleanQuery_Builder *bQuery = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   for (jint i = 0; i < fields->size_; i++) {
     OrgApacheLuceneQueryparserClassicQueryParser *qp = create_OrgApacheLuceneQueryparserClassicQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(IOSObjectArray_Get(fields, i), analyzer);
-    OrgApacheLuceneSearchQuery *q = [qp parseWithNSString:IOSObjectArray_Get(queries, i)];
+    OrgApacheLuceneSearchQuery *q = JreRetainedLocalValue([qp parseWithNSString:IOSObjectArray_Get(queries, i)]);
     if (q != nil && (!([q isKindOfClass:[OrgApacheLuceneSearchBooleanQuery class]]) || [((id<JavaUtilList>) nil_chk([((OrgApacheLuceneSearchBooleanQuery *) cast_chk(q, [OrgApacheLuceneSearchBooleanQuery class])) clauses])) size] > 0)) {
       [bQuery addWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
     }
@@ -284,7 +303,7 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserClassicMultiFieldQueryPars
   OrgApacheLuceneSearchBooleanQuery_Builder *bQuery = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   for (jint i = 0; i < fields->size_; i++) {
     OrgApacheLuceneQueryparserClassicQueryParser *qp = create_OrgApacheLuceneQueryparserClassicQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(IOSObjectArray_Get(fields, i), analyzer);
-    OrgApacheLuceneSearchQuery *q = [qp parseWithNSString:query];
+    OrgApacheLuceneSearchQuery *q = JreRetainedLocalValue([qp parseWithNSString:query]);
     if (q != nil && (!([q isKindOfClass:[OrgApacheLuceneSearchBooleanQuery class]]) || [((id<JavaUtilList>) nil_chk([((OrgApacheLuceneSearchBooleanQuery *) cast_chk(q, [OrgApacheLuceneSearchBooleanQuery class])) clauses])) size] > 0)) {
       [bQuery addWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_Occur:IOSObjectArray_Get(flags, i)];
     }
@@ -298,7 +317,7 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserClassicMultiFieldQueryPars
   OrgApacheLuceneSearchBooleanQuery_Builder *bQuery = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   for (jint i = 0; i < fields->size_; i++) {
     OrgApacheLuceneQueryparserClassicQueryParser *qp = create_OrgApacheLuceneQueryparserClassicQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(IOSObjectArray_Get(fields, i), analyzer);
-    OrgApacheLuceneSearchQuery *q = [qp parseWithNSString:IOSObjectArray_Get(queries, i)];
+    OrgApacheLuceneSearchQuery *q = JreRetainedLocalValue([qp parseWithNSString:IOSObjectArray_Get(queries, i)]);
     if (q != nil && (!([q isKindOfClass:[OrgApacheLuceneSearchBooleanQuery class]]) || [((id<JavaUtilList>) nil_chk([((OrgApacheLuceneSearchBooleanQuery *) cast_chk(q, [OrgApacheLuceneSearchBooleanQuery class])) clauses])) size] > 0)) {
       [bQuery addWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_Occur:IOSObjectArray_Get(nil_chk(flags), i)];
     }

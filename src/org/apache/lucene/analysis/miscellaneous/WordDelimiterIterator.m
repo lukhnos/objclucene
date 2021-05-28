@@ -9,6 +9,10 @@
 #include "org/apache/lucene/analysis/miscellaneous/WordDelimiterFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/WordDelimiterIterator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/WordDelimiterIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator () {
  @public
   jboolean hasFinalPossessive_;
@@ -29,9 +33,8 @@
                    withInt:(jint)type;
 
 /*!
- @brief Set the internal word bounds (remove leading and trailing delimiters).
- Note, if a possessive is found, don't remove
- it yet, simply note it.
+ @brief Set the internal word bounds (remove leading and trailing delimiters).Note, if a possessive is found, don't remove
+  it yet, simply note it.
  */
 - (void)setBounds;
 
@@ -171,6 +174,54 @@ IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 7, 6, -1, -1, -1, -1 },
+    { NULL, "B", 0x9, 8, 6, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithByteArray:withBoolean:withBoolean:withBoolean:);
+  methods[1].selector = @selector(next);
+  methods[2].selector = @selector(type);
+  methods[3].selector = @selector(setTextWithCharArray:withInt:);
+  methods[4].selector = @selector(isBreakWithInt:withInt:);
+  methods[5].selector = @selector(isSingleWord);
+  methods[6].selector = @selector(setBounds);
+  methods[7].selector = @selector(endsWithPossessiveWithInt:);
+  methods[8].selector = @selector(charTypeWithInt:);
+  methods[9].selector = @selector(getTypeWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DONE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DONE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_WORD_DELIM_TABLE", "[B", .constantValue.asLong = 0, 0x19, -1, 9, -1, -1 },
+    { "text_", "[C", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "startBounds_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "endBounds_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "current_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "end_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "hasFinalPossessive_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "splitOnCaseChange_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "splitOnNumerics_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "stemEnglishPossessive_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "charTypeTable_", "[B", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "skipPossessive_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "[BZZZ", "setText", "[CI", "isBreak", "II", "endsWithPossessive", "I", "charType", "getType", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator = { "WordDelimiterIterator", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 10, 14, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator class]) {
     {
@@ -195,39 +246,6 @@ IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithByteArray:withBoolean:withBoolean:withBoolean:", "WordDelimiterIterator", NULL, 0x0, NULL, NULL },
-    { "next", NULL, "I", 0x0, NULL, NULL },
-    { "type", NULL, "I", 0x0, NULL, NULL },
-    { "setTextWithCharArray:withInt:", "setText", "V", 0x0, NULL, NULL },
-    { "isBreakWithInt:withInt:", "isBreak", "Z", 0x2, NULL, NULL },
-    { "isSingleWord", NULL, "Z", 0x0, NULL, NULL },
-    { "setBounds", NULL, "V", 0x2, NULL, NULL },
-    { "endsWithPossessiveWithInt:", "endsWithPossessive", "Z", 0x2, NULL, NULL },
-    { "charTypeWithInt:", "charType", "I", 0x2, NULL, NULL },
-    { "getTypeWithInt:", "getType", "B", 0x9, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DONE", "DONE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DONE },
-    { "DEFAULT_WORD_DELIM_TABLE", "DEFAULT_WORD_DELIM_TABLE", 0x19, "[B", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE, NULL, .constantValue.asLong = 0 },
-    { "text_", NULL, 0x0, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startBounds_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endBounds_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasFinalPossessive_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "splitOnCaseChange_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "splitOnNumerics_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "stemEnglishPossessive_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "charTypeTable_", NULL, 0x12, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "skipPossessive_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator = { 2, "WordDelimiterIterator", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 10, methods, 14, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator;
 }
 
 @end

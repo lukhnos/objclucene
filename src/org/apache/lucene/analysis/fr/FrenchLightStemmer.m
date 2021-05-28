@@ -9,6 +9,10 @@
 #include "org/apache/lucene/analysis/fr/FrenchLightStemmer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/fr/FrenchLightStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisFrFrenchLightStemmer ()
 
 - (jint)normWithCharArray:(IOSCharArray *)s
@@ -19,6 +23,13 @@
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisFrFrenchLightStemmer_normWithCharArray_withInt_(OrgApacheLuceneAnalysisFrFrenchLightStemmer *self, IOSCharArray *s, jint len);
 
 @implementation OrgApacheLuceneAnalysisFrFrenchLightStemmer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisFrFrenchLightStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -143,24 +154,37 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisFrFrenchLightStemmer_
   return OrgApacheLuceneAnalysisFrFrenchLightStemmer_normWithCharArray_withInt_(self, s, len);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisFrFrenchLightStemmer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "normWithCharArray:withInt:", "norm", "I", 0x2, NULL, NULL },
-    { "init", "FrenchLightStemmer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchLightStemmer = { 2, "FrenchLightStemmer", "org.apache.lucene.analysis.fr", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  methods[2].selector = @selector(normWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "stem", "[CI", "norm" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchLightStemmer = { "FrenchLightStemmer", "org.apache.lucene.analysis.fr", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisFrFrenchLightStemmer;
 }
 
 @end
+
+void OrgApacheLuceneAnalysisFrFrenchLightStemmer_init(OrgApacheLuceneAnalysisFrFrenchLightStemmer *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneAnalysisFrFrenchLightStemmer *new_OrgApacheLuceneAnalysisFrFrenchLightStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFrFrenchLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisFrFrenchLightStemmer *create_OrgApacheLuceneAnalysisFrFrenchLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFrFrenchLightStemmer, init)
+}
 
 jint OrgApacheLuceneAnalysisFrFrenchLightStemmer_normWithCharArray_withInt_(OrgApacheLuceneAnalysisFrFrenchLightStemmer *self, IOSCharArray *s, jint len) {
   if (len > 4) {
@@ -203,18 +227,6 @@ jint OrgApacheLuceneAnalysisFrFrenchLightStemmer_normWithCharArray_withInt_(OrgA
     if (IOSCharArray_Get(s, len - 1) == IOSCharArray_Get(s, len - 2) && JavaLangCharacter_isLetterWithChar_(IOSCharArray_Get(s, len - 1))) len--;
   }
   return len;
-}
-
-void OrgApacheLuceneAnalysisFrFrenchLightStemmer_init(OrgApacheLuceneAnalysisFrFrenchLightStemmer *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneAnalysisFrFrenchLightStemmer *new_OrgApacheLuceneAnalysisFrFrenchLightStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFrFrenchLightStemmer, init)
-}
-
-OrgApacheLuceneAnalysisFrFrenchLightStemmer *create_OrgApacheLuceneAnalysisFrFrenchLightStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFrFrenchLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFrFrenchLightStemmer)

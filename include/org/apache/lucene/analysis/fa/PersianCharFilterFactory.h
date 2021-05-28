@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisFaPersianCharFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisFaPersianCharFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianCharFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisFaPersianCharFilterFactory))
 #define OrgApacheLuceneAnalysisFaPersianCharFilterFactory_
 
@@ -32,12 +38,12 @@
 /*!
  @brief Factory for <code>PersianCharFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_fa" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;charFilter class="solr.PersianCharFilterFactory"/&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_fa" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;charFilter class="solr.PersianCharFilterFactory"/&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisFaPersianCharFilterFactory : OrgApacheLuceneAnalysisUtilCharFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
@@ -47,7 +53,7 @@
 /*!
  @brief Creates a new PersianCharFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCharFilter *)createWithJavaIoReader:(JavaIoReader *)input;
 
@@ -67,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianCharFilterFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianCharFilterFactory")

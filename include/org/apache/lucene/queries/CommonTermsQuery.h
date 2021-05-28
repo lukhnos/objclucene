@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesCommonTermsQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesCommonTermsQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueriesCommonTermsQuery || defined(INCLUDE_OrgApacheLuceneQueriesCommonTermsQuery))
 #define OrgApacheLuceneQueriesCommonTermsQuery_
 
@@ -29,28 +35,28 @@
 
 /*!
  @brief A query that executes high-frequency terms in a optional sub-query to prevent
- slow queries due to "common" terms like stopwords.
- This query
- builds 2 queries off the <code>added</code> terms: low-frequency
- terms are added to a required boolean clause and high-frequency terms are
- added to an optional boolean clause. The optional clause is only executed if
- the required "low-frequency" clause matches. Scores produced by this query
- will be slightly different than plain <code>BooleanQuery</code> scorer mainly due to
- differences in the <code>number of leaf queries</code>
- in the required boolean clause. In most cases, high-frequency terms are
- unlikely to significantly contribute to the document score unless at least
- one of the low-frequency terms are matched.  This query can improve
- query execution times significantly if applicable.
+  slow queries due to "common" terms like stopwords.This query
+  builds 2 queries off the <code>added</code> terms: low-frequency
+  terms are added to a required boolean clause and high-frequency terms are
+  added to an optional boolean clause.
+ The optional clause is only executed if
+  the required "low-frequency" clause matches. Scores produced by this query
+  will be slightly different than plain <code>BooleanQuery</code> scorer mainly due to
+  differences in the <code>number of leaf queries</code>
+  in the required boolean clause. In most cases, high-frequency terms are
+  unlikely to significantly contribute to the document score unless at least
+  one of the low-frequency terms are matched.  This query can improve
+  query execution times significantly if applicable. 
  <p>
- <code>CommonTermsQuery</code> has several advantages over stopword filtering at
- index or query time since a term can be "classified" based on the actual
- document frequency in the index and can prevent slow queries even across
- domains without specialized stopword files.
+  <code>CommonTermsQuery</code> has several advantages over stopword filtering at
+  index or query time since a term can be "classified" based on the actual
+  document frequency in the index and can prevent slow queries even across
+  domains without specialized stopword files. 
  </p>
- <p>
- <b>Note:</b> if the query only contains high-frequency terms the query is
- rewritten into a plain conjunction query ie. all high-frequency terms need to
- match in order to match a document.
+  <p>
+  <b>Note:</b> if the query only contains high-frequency terms the query is
+  rewritten into a plain conjunction query ie. all high-frequency terms need to
+  match in order to match a document. 
  </p>
  */
 @interface OrgApacheLuceneQueriesCommonTermsQuery : OrgApacheLuceneSearchQuery {
@@ -70,48 +76,42 @@
 
 /*!
  @brief Creates a new <code>CommonTermsQuery</code>
- @param highFreqOccur
- <code>Occur</code> used for high frequency terms
- @param lowFreqOccur
- <code>Occur</code> used for low frequency terms
- @param maxTermFrequency
- a value in [0..1) (or absolute number &gt;=1) representing the
- maximum threshold of a terms document frequency to be considered a
- low frequency term.
- @throws IllegalArgumentException
+ @param highFreqOccur<code>Occur</code>
+   used for high frequency terms
+ @param lowFreqOccur<code>Occur</code>
+   used for low frequency terms
+ @param maxTermFrequency a value in [0..1) (or absolute number 
+  &gt; =1) representing the           maximum threshold of a terms document frequency to be considered a           low frequency term.
+ @throw IllegalArgumentException
  if <code>Occur.MUST_NOT</code> is pass as lowFreqOccur or
- highFreqOccur
+            highFreqOccur
  */
-- (instancetype)initWithOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)highFreqOccur
-                    withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)lowFreqOccur
-                                                       withFloat:(jfloat)maxTermFrequency;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)highFreqOccur
+                              withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)lowFreqOccur
+                                                                 withFloat:(jfloat)maxTermFrequency;
 
 /*!
  @brief Creates a new <code>CommonTermsQuery</code>
- @param highFreqOccur
- <code>Occur</code> used for high frequency terms
- @param lowFreqOccur
- <code>Occur</code> used for low frequency terms
- @param maxTermFrequency
- a value in [0..1) (or absolute number &gt;=1) representing the
- maximum threshold of a terms document frequency to be considered a
- low frequency term.
- @param disableCoord
- disables <code>Similarity.coord(int,int)</code> in scoring for the low
- / high frequency sub-queries
- @throws IllegalArgumentException
+ @param highFreqOccur<code>Occur</code>
+   used for high frequency terms
+ @param lowFreqOccur<code>Occur</code>
+   used for low frequency terms
+ @param maxTermFrequency a value in [0..1) (or absolute number 
+  &gt; =1) representing the           maximum threshold of a terms document frequency to be considered a           low frequency term.
+ @param disableCoord disables 
+ <code>Similarity.coord(int,int)</code>  in scoring for the low           / high frequency sub-queries
+ @throw IllegalArgumentException
  if <code>Occur.MUST_NOT</code> is pass as lowFreqOccur or
- highFreqOccur
+            highFreqOccur
  */
-- (instancetype)initWithOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)highFreqOccur
-                    withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)lowFreqOccur
-                                                       withFloat:(jfloat)maxTermFrequency
-                                                     withBoolean:(jboolean)disableCoord;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)highFreqOccur
+                              withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)lowFreqOccur
+                                                                 withFloat:(jfloat)maxTermFrequency
+                                                               withBoolean:(jboolean)disableCoord;
 
 /*!
  @brief Adds a term to the <code>CommonTermsQuery</code>
- @param term
- the term to add
+ @param term the term to add
  */
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
@@ -124,13 +124,13 @@
 
 /*!
  @brief Gets the minimum number of the optional high frequent BooleanClauses which must be
- satisfied.
+  satisfied.
  */
 - (jfloat)getHighFreqMinimumNumberShouldMatch;
 
 /*!
  @brief Gets the minimum number of the optional low frequent BooleanClauses which must be
- satisfied.
+  satisfied.
  */
 - (jfloat)getLowFreqMinimumNumberShouldMatch;
 
@@ -138,9 +138,8 @@
 
 /*!
  @brief Returns true iff <code>Similarity.coord(int,int)</code> is disabled in scoring
- for the high and low frequency query instance.
- The top level query will
- always disable coords.
+  for the high and low frequency query instance.The top level query will
+  always disable coords.
  */
 - (jboolean)isCoordDisabled;
 
@@ -148,35 +147,31 @@
 
 /*!
  @brief Specifies a minimum number of the high frequent optional BooleanClauses which must be
- satisfied in order to produce a match on the low frequency terms query
- part.
- This method accepts a float value in the range [0..1) as a fraction
- of the actual query terms in the low frequent clause or a number
+  satisfied in order to produce a match on the low frequency terms query
+  part.This method accepts a float value in the range [0..1) as a fraction
+  of the actual query terms in the low frequent clause or a number 
  <tt>&gt;=1</tt> as an absolut number of clauses that need to match.
  <p>
- By default no optional clauses are necessary for a match (unless there are
- no required clauses). If this method is used, then the specified number of
- clauses is required.
+  By default no optional clauses are necessary for a match (unless there are
+  no required clauses). If this method is used, then the specified number of
+  clauses is required. 
  </p>
- @param min
- the number of optional clauses that must match
+ @param min the number of optional clauses that must match
  */
 - (void)setHighFreqMinimumNumberShouldMatchWithFloat:(jfloat)min;
 
 /*!
  @brief Specifies a minimum number of the low frequent optional BooleanClauses which must be
- satisfied in order to produce a match on the low frequency terms query
- part.
- This method accepts a float value in the range [0..1) as a fraction
- of the actual query terms in the low frequent clause or a number
+  satisfied in order to produce a match on the low frequency terms query
+  part.This method accepts a float value in the range [0..1) as a fraction
+  of the actual query terms in the low frequent clause or a number 
  <tt>&gt;=1</tt> as an absolut number of clauses that need to match.
  <p>
- By default no optional clauses are necessary for a match (unless there are
- no required clauses). If this method is used, then the specified number of
- clauses is required.
+  By default no optional clauses are necessary for a match (unless there are
+  no required clauses). If this method is used, then the specified number of
+  clauses is required. 
  </p>
- @param min
- the number of optional clauses that must match
+ @param min the number of optional clauses that must match
  */
 - (void)setLowFreqMinimumNumberShouldMatchWithFloat:(jfloat)min;
 
@@ -196,11 +191,16 @@
  @brief Builds a new TermQuery instance.
  <p>This is intended for subclasses that wish to customize the generated queries.</p>
  @param term term
- @param context the TermContext to be used to create the low level term query. Can be <code>null</code>.
+ @param context the TermContext to be used to create the low level term query. Can be  <code> null </code>
+  .
  @return new TermQuery instance
  */
 - (OrgApacheLuceneSearchQuery *)newTermQueryWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                      withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -226,4 +226,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesCommonTermsQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesCommonTermsQuery")

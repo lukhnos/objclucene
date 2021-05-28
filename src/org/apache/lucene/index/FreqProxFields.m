@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/index/FreqProxFields.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -31,6 +29,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
 #include "org/apache/lucene/util/BytesRefHash.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/FreqProxFields must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexFreqProxFields_FreqProxTerms : OrgApacheLuceneIndexTerms {
  @public
@@ -104,13 +106,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxFields_FreqProxTerms)
 
 /*!
  @brief Expert: Returns the TermsEnums internal state to position the TermsEnum
- without re-seeking the term dictionary.
+  without re-seeking the term dictionary.
  <p>
- NOTE: A seek by <code>TermState</code> might not capture the
- <code>AttributeSource</code>'s state. Callers must maintain the
+  NOTE: A seek by <code>TermState</code> might not capture the 
+ <code>AttributeSource</code>'s state. Callers must maintain the 
  <code>AttributeSource</code> states separately
  - seealso: TermState
- - seealso: #seekExact(BytesRef,TermState)
+ - seealso: #seekExact(BytesRef, TermState)
  */
 - (OrgApacheLuceneIndexTermState *)termState;
 
@@ -131,23 +133,21 @@ __attribute__((unused)) static OrgApacheLuceneIndexFreqProxFields_FreqProxTermsE
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum)
 
-@interface OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 : OrgApacheLuceneIndexTermState
-
-- (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other OBJC_METHOD_FAMILY_NONE;
+@interface OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1 : OrgApacheLuceneIndexTermState
 
 - (instancetype)init;
 
+- (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other OBJC_METHOD_FAMILY_NONE;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1_init(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1_init(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 *new_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1 *new_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 *create_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1)
+__attribute__((unused)) static OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1 *create_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1_init(void);
 
 @interface OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum : OrgApacheLuceneIndexPostingsEnum {
  @public
@@ -262,8 +262,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEn
 
 @implementation OrgApacheLuceneIndexFreqProxFields
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)fieldList {
-  OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(self, fieldList);
+- (instancetype)initPackagePrivateWithJavaUtilList:(id<JavaUtilList>)fieldList {
+  OrgApacheLuceneIndexFreqProxFields_initPackagePrivateWithJavaUtilList_(self, fieldList);
   return self;
 }
 
@@ -272,7 +272,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEn
 }
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field {
-  OrgApacheLuceneIndexFreqProxTermsWriterPerField *perField = [((id<JavaUtilMap>) nil_chk(fields_)) getWithId:field];
+  OrgApacheLuceneIndexFreqProxTermsWriterPerField *perField = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fields_)) getWithId:field]);
   return perField == nil ? nil : create_OrgApacheLuceneIndexFreqProxFields_FreqProxTerms_initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField_(perField);
 }
 
@@ -281,7 +281,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEn
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -290,23 +290,31 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEn
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "FreqProxFields", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/index/FreqProxTermsWriterPerField;>;)V" },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithJavaUtilList:);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(termsWithNSString:);
+  methods[3].selector = @selector(size);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fields_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/FreqProxTermsWriterPerField;>;", .constantValue.asLong = 0 },
+    { "fields_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x10, -1, -1, 6, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.FreqProxFields$FreqProxTerms;", "Lorg.apache.lucene.index.FreqProxFields$FreqProxTermsEnum;", "Lorg.apache.lucene.index.FreqProxFields$FreqProxDocsEnum;", "Lorg.apache.lucene.index.FreqProxFields$FreqProxPostingsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields = { 2, "FreqProxFields", "org.apache.lucene.index", NULL, 0x0, 4, methods, 1, fields, 0, NULL, 4, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/index/FreqProxTermsWriterPerField;>;)V", "()Ljava/util/Iterator<Ljava/lang/String;>;", "terms", "LNSString;", "LJavaIoIOException;", "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/FreqProxTermsWriterPerField;>;", "LOrgApacheLuceneIndexFreqProxFields_FreqProxTerms;LOrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum;LOrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum;LOrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields = { "FreqProxFields", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 4, 1, -1, 7, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFreqProxFields;
 }
 
 @end
 
-void OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(OrgApacheLuceneIndexFreqProxFields *self, id<JavaUtilList> fieldList) {
+void OrgApacheLuceneIndexFreqProxFields_initPackagePrivateWithJavaUtilList_(OrgApacheLuceneIndexFreqProxFields *self, id<JavaUtilList> fieldList) {
   OrgApacheLuceneIndexFields_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_JavaUtilLinkedHashMap_init());
   for (OrgApacheLuceneIndexFreqProxTermsWriterPerField * __strong field in nil_chk(fieldList)) {
@@ -314,12 +322,12 @@ void OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(OrgApacheLuceneInd
   }
 }
 
-OrgApacheLuceneIndexFreqProxFields *new_OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(id<JavaUtilList> fieldList) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFreqProxFields, initWithJavaUtilList_, fieldList)
+OrgApacheLuceneIndexFreqProxFields *new_OrgApacheLuceneIndexFreqProxFields_initPackagePrivateWithJavaUtilList_(id<JavaUtilList> fieldList) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFreqProxFields, initPackagePrivateWithJavaUtilList_, fieldList)
 }
 
-OrgApacheLuceneIndexFreqProxFields *create_OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(id<JavaUtilList> fieldList) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFreqProxFields, initWithJavaUtilList_, fieldList)
+OrgApacheLuceneIndexFreqProxFields *create_OrgApacheLuceneIndexFreqProxFields_initPackagePrivateWithJavaUtilList_(id<JavaUtilList> fieldList) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFreqProxFields, initPackagePrivateWithJavaUtilList_, fieldList)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields)
@@ -375,22 +383,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField:", "FreqProxTerms", NULL, 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, NULL, NULL },
-    { "size", NULL, "J", 0x1, NULL, NULL },
-    { "getSumTotalTermFreq", NULL, "J", 0x1, NULL, NULL },
-    { "getSumDocFreq", NULL, "J", 0x1, NULL, NULL },
-    { "getDocCount", NULL, "I", 0x1, NULL, NULL },
-    { "hasFreqs", NULL, "Z", 0x1, NULL, NULL },
-    { "hasOffsets", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPositions", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField:);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(size);
+  methods[3].selector = @selector(getSumTotalTermFreq);
+  methods[4].selector = @selector(getSumDocFreq);
+  methods[5].selector = @selector(getDocCount);
+  methods[6].selector = @selector(hasFreqs);
+  methods[7].selector = @selector(hasOffsets);
+  methods[8].selector = @selector(hasPositions);
+  methods[9].selector = @selector(hasPayloads);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "terms_", NULL, 0x10, "Lorg.apache.lucene.index.FreqProxTermsWriterPerField;", NULL, NULL, .constantValue.asLong = 0 },
+    { "terms_", "LOrgApacheLuceneIndexFreqProxTermsWriterPerField;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxTerms = { 2, "FreqProxTerms", "org.apache.lucene.index", "FreqProxFields", 0xa, 10, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFreqProxTermsWriterPerField;", "LOrgApacheLuceneIndexFreqProxFields;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxTerms = { "FreqProxTerms", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 10, 1, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFreqProxFields_FreqProxTerms;
 }
 
@@ -438,7 +461,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
     }
     else {
       ord_ = mid;
-      JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk([self term])) compareToWithId:text] == 0), (@"org/apache/lucene/index/FreqProxFields.java:166 condition failed: assert term().compareTo(text) == 0;"));
+      JreAssert([((OrgApacheLuceneUtilBytesRef *) nil_chk([self term])) compareToWithId:text] == 0, @"org/apache/lucene/index/FreqProxFields.java:166 condition failed: assert term().compareTo(text) == 0;");
       return JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND);
     }
   }
@@ -449,7 +472,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
   else {
     jint textStart = IOSIntArray_Get(nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *) nil_chk(postingsArray_))->textStarts_), IOSIntArray_Get(nil_chk(sortedTermIDs_), ord_));
     [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField *) nil_chk(terms_))->bytePool_)) setBytesRefWithOrgApacheLuceneUtilBytesRef:scratch_ withInt:textStart];
-    JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk([self term])) compareToWithId:text] > 0), (@"org/apache/lucene/index/FreqProxFields.java:178 condition failed: assert term().compareTo(text) > 0;"));
+    JreAssert([((OrgApacheLuceneUtilBytesRef *) nil_chk([self term])) compareToWithId:text] > 0, @"org/apache/lucene/index/FreqProxFields.java:178 condition failed: assert term().compareTo(text) > 0;");
     return JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, NOT_FOUND);
   }
 }
@@ -499,8 +522,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"did not index offsets");
     }
     if ([reuse isKindOfClass:[OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum class]]) {
-      posEnum = (OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum *) cast_chk(reuse, [OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum class]);
-      if (((OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum *) nil_chk(posEnum))->postingsArray_ != postingsArray_) {
+      posEnum = (OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum *) reuse;
+      if (!JreObjectEqualsEquals(((OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum *) nil_chk(posEnum))->postingsArray_, postingsArray_)) {
         posEnum = create_OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum_initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField_withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_(terms_, postingsArray_);
       }
     }
@@ -515,8 +538,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"did not index freq");
   }
   if ([reuse isKindOfClass:[OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum class]]) {
-    docsEnum = (OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum *) cast_chk(reuse, [OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum class]);
-    if (((OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum *) nil_chk(docsEnum))->postingsArray_ != postingsArray_) {
+    docsEnum = (OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum *) reuse;
+    if (!JreObjectEqualsEquals(((OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum *) nil_chk(docsEnum))->postingsArray_, postingsArray_)) {
       docsEnum = create_OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum_initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField_withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_(terms_, postingsArray_);
     }
   }
@@ -528,7 +551,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
 }
 
 - (OrgApacheLuceneIndexTermState *)termState {
-  return create_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1_init();
+  return create_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1_init();
 }
 
 - (void)dealloc {
@@ -540,28 +563,44 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField:", "FreqProxTermsEnum", NULL, 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, NULL, NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "ord", NULL, "J", 0x1, NULL, NULL },
-    { "docFreq", NULL, "I", 0x1, NULL, NULL },
-    { "totalTermFreq", NULL, "J", 0x1, NULL, NULL },
-    { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, NULL, NULL },
-    { "termState", NULL, "Lorg.apache.lucene.index.TermState;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum_SeekStatus;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermState;", 0x1, -1, -1, 7, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField:);
+  methods[1].selector = @selector(reset);
+  methods[2].selector = @selector(seekCeilWithOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(seekExactWithLong:);
+  methods[4].selector = @selector(next);
+  methods[5].selector = @selector(term);
+  methods[6].selector = @selector(ord);
+  methods[7].selector = @selector(docFreq);
+  methods[8].selector = @selector(totalTermFreq);
+  methods[9].selector = @selector(postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:);
+  methods[10].selector = @selector(termState);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "terms_", NULL, 0x10, "Lorg.apache.lucene.index.FreqProxTermsWriterPerField;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sortedTermIDs_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "postingsArray_", NULL, 0x10, "Lorg.apache.lucene.index.FreqProxTermsWriterPerField$FreqProxPostingsArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratch_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numTerms_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ord_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "terms_", "LOrgApacheLuceneIndexFreqProxTermsWriterPerField;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "sortedTermIDs_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "postingsArray_", "LOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "scratch_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numTerms_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "ord_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum = { 2, "FreqProxTermsEnum", "org.apache.lucene.index", "FreqProxFields", 0xa, 11, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFreqProxTermsWriterPerField;", "seekCeil", "LOrgApacheLuceneUtilBytesRef;", "seekExact", "J", "postings", "LOrgApacheLuceneIndexPostingsEnum;I", "LJavaIoIOException;", "LOrgApacheLuceneIndexFreqProxFields;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum = { "FreqProxTermsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 11, 6, 8, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum;
 }
 
@@ -573,7 +612,7 @@ void OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_initWithOrgApacheLucen
   JreStrongAssign(&self->terms_, terms);
   self->numTerms_ = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField *) nil_chk(terms))->bytesHash_)) size];
   JreStrongAssign(&self->sortedTermIDs_, terms->sortedTermIDs_);
-  JreAssert((self->sortedTermIDs_ != nil), (@"org/apache/lucene/index/FreqProxFields.java:139 condition failed: assert sortedTermIDs != null;"));
+  JreAssert(self->sortedTermIDs_ != nil, @"org/apache/lucene/index/FreqProxFields.java:139 condition failed: assert sortedTermIDs != null;");
   JreStrongAssign(&self->postingsArray_, (OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *) cast_chk(terms->postingsArray_, [OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray class]));
 }
 
@@ -587,44 +626,48 @@ OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum *create_OrgApacheLuceneInde
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum)
 
-@implementation OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1
+@implementation OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "copyFromWithOrgApacheLuceneIndexTermState:", "copyFrom", "V", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum", "termState" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 = { 2, "", "org.apache.lucene.index", "FreqProxFields$FreqProxTermsEnum", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(copyFromWithOrgApacheLuceneIndexTermState:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "copyFrom", "LOrgApacheLuceneIndexTermState;", "LOrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum;", "termState" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1 = { "", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x8010, 2, 0, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1_init(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 *self) {
+void OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1_init(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1 *self) {
   OrgApacheLuceneIndexTermState_init(self);
 }
 
-OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 *new_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1, init)
+OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1 *new_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1, init)
 }
 
-OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 *create_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1, init)
+OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1 *create_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_1, init)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1)
 
 @implementation OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum
 
@@ -700,7 +743,7 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
         freq_ = [reader_ readVInt];
       }
     }
-    JreAssert((docID_ != IOSIntArray_Get(nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *) nil_chk(postingsArray_))->lastDocIDs_), termID_)), (@"org/apache/lucene/index/FreqProxFields.java:385 condition failed: assert docID != postingsArray.lastDocIDs[termID];"));
+    JreAssert(docID_ != IOSIntArray_Get(nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *) nil_chk(postingsArray_))->lastDocIDs_), termID_), @"org/apache/lucene/index/FreqProxFields.java:385 condition failed: assert docID != postingsArray.lastDocIDs[termID];");
   }
   return docID_;
 }
@@ -721,30 +764,46 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField:withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:", "FreqProxDocsEnum", NULL, 0x1, NULL, NULL },
-    { "resetWithInt:", "reset", "V", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, NULL, NULL },
-    { "nextPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "startOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "endOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField:withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:);
+  methods[1].selector = @selector(resetWithInt:);
+  methods[2].selector = @selector(docID);
+  methods[3].selector = @selector(freq);
+  methods[4].selector = @selector(nextPosition);
+  methods[5].selector = @selector(startOffset);
+  methods[6].selector = @selector(endOffset);
+  methods[7].selector = @selector(getPayload);
+  methods[8].selector = @selector(nextDoc);
+  methods[9].selector = @selector(advanceWithInt:);
+  methods[10].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "terms_", NULL, 0x10, "Lorg.apache.lucene.index.FreqProxTermsWriterPerField;", NULL, NULL, .constantValue.asLong = 0 },
-    { "postingsArray_", NULL, 0x10, "Lorg.apache.lucene.index.FreqProxTermsWriterPerField$FreqProxPostingsArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "reader_", NULL, 0x10, "Lorg.apache.lucene.index.ByteSliceReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "readTermFreq_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "docID_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ended_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "termID_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "terms_", "LOrgApacheLuceneIndexFreqProxTermsWriterPerField;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "postingsArray_", "LOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "reader_", "LOrgApacheLuceneIndexByteSliceReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "readTermFreq_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docID_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "freq_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ended_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "termID_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum = { 2, "FreqProxDocsEnum", "org.apache.lucene.index", "FreqProxFields", 0xa, 11, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFreqProxTermsWriterPerField;LOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray;", "reset", "I", "LJavaIoIOException;", "advance", "LOrgApacheLuceneIndexFreqProxFields;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum = { "FreqProxDocsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 11, 8, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum;
 }
 
@@ -752,7 +811,7 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
 
 void OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum_initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField_withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_(OrgApacheLuceneIndexFreqProxFields_FreqProxDocsEnum *self, OrgApacheLuceneIndexFreqProxTermsWriterPerField *terms, OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *postingsArray) {
   OrgApacheLuceneIndexPostingsEnum_init(self);
-  JreStrongAssignAndConsume(&self->reader_, new_OrgApacheLuceneIndexByteSliceReader_init());
+  JreStrongAssignAndConsume(&self->reader_, new_OrgApacheLuceneIndexByteSliceReader_initPackagePrivate());
   self->docID_ = -1;
   JreStrongAssign(&self->terms_, terms);
   JreStrongAssign(&self->postingsArray_, postingsArray);
@@ -820,7 +879,7 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
     else {
       freq_ = [reader_ readVInt];
     }
-    JreAssert((docID_ != IOSIntArray_Get(nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *) nil_chk(postingsArray_))->lastDocIDs_), termID_)), (@"org/apache/lucene/index/FreqProxFields.java:473 condition failed: assert docID != postingsArray.lastDocIDs[termID];"));
+    JreAssert(docID_ != IOSIntArray_Get(nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *) nil_chk(postingsArray_))->lastDocIDs_), termID_), @"org/apache/lucene/index/FreqProxFields.java:473 condition failed: assert docID != postingsArray.lastDocIDs[termID];");
   }
   posLeft_ = freq_;
   pos_ = 0;
@@ -837,7 +896,7 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
 }
 
 - (jint)nextPosition {
-  JreAssert((posLeft_ > 0), (@"org/apache/lucene/index/FreqProxFields.java:494 condition failed: assert posLeft > 0;"));
+  JreAssert(posLeft_ > 0, @"org/apache/lucene/index/FreqProxFields.java:494 condition failed: assert posLeft > 0;");
   posLeft_--;
   jint code = [((OrgApacheLuceneIndexByteSliceReader *) nil_chk(posReader_)) readVInt];
   pos_ += JreURShift32(code, 1);
@@ -890,37 +949,53 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField:withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:", "FreqProxPostingsEnum", NULL, 0x1, NULL, NULL },
-    { "resetWithInt:", "reset", "V", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "nextPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "startOffset", NULL, "I", 0x1, NULL, NULL },
-    { "endOffset", NULL, "I", 0x1, NULL, NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField:withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:);
+  methods[1].selector = @selector(resetWithInt:);
+  methods[2].selector = @selector(docID);
+  methods[3].selector = @selector(freq);
+  methods[4].selector = @selector(nextDoc);
+  methods[5].selector = @selector(advanceWithInt:);
+  methods[6].selector = @selector(cost);
+  methods[7].selector = @selector(nextPosition);
+  methods[8].selector = @selector(startOffset);
+  methods[9].selector = @selector(endOffset);
+  methods[10].selector = @selector(getPayload);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "terms_", NULL, 0x10, "Lorg.apache.lucene.index.FreqProxTermsWriterPerField;", NULL, NULL, .constantValue.asLong = 0 },
-    { "postingsArray_", NULL, 0x10, "Lorg.apache.lucene.index.FreqProxTermsWriterPerField$FreqProxPostingsArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "reader_", NULL, 0x10, "Lorg.apache.lucene.index.ByteSliceReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posReader_", NULL, 0x10, "Lorg.apache.lucene.index.ByteSliceReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "readOffsets_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "docID_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pos_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startOffset_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endOffset_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "posLeft_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termID_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ended_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasPayload_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "payload_", NULL, 0x0, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "terms_", "LOrgApacheLuceneIndexFreqProxTermsWriterPerField;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "postingsArray_", "LOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "reader_", "LOrgApacheLuceneIndexByteSliceReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "posReader_", "LOrgApacheLuceneIndexByteSliceReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "readOffsets_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docID_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "freq_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "pos_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "startOffset_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "endOffset_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "posLeft_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "termID_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ended_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "hasPayload_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum = { 2, "FreqProxPostingsEnum", "org.apache.lucene.index", "FreqProxFields", 0xa, 11, methods, 15, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFreqProxTermsWriterPerField;LOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray;", "reset", "I", "LJavaIoIOException;", "advance", "LOrgApacheLuceneIndexFreqProxFields;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum = { "FreqProxPostingsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 11, 15, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum;
 }
 
@@ -928,15 +1003,15 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
 
 void OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum_initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField_withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_(OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum *self, OrgApacheLuceneIndexFreqProxTermsWriterPerField *terms, OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *postingsArray) {
   OrgApacheLuceneIndexPostingsEnum_init(self);
-  JreStrongAssignAndConsume(&self->reader_, new_OrgApacheLuceneIndexByteSliceReader_init());
-  JreStrongAssignAndConsume(&self->posReader_, new_OrgApacheLuceneIndexByteSliceReader_init());
+  JreStrongAssignAndConsume(&self->reader_, new_OrgApacheLuceneIndexByteSliceReader_initPackagePrivate());
+  JreStrongAssignAndConsume(&self->posReader_, new_OrgApacheLuceneIndexByteSliceReader_initPackagePrivate());
   self->docID_ = -1;
   JreStrongAssignAndConsume(&self->payload_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   JreStrongAssign(&self->terms_, terms);
   JreStrongAssign(&self->postingsArray_, postingsArray);
   self->readOffsets_ = ((OrgApacheLuceneIndexFreqProxTermsWriterPerField *) nil_chk(terms))->hasOffsets_;
-  JreAssert((terms->hasProx_), (@"org/apache/lucene/index/FreqProxFields.java:424 condition failed: assert terms.hasProx;"));
-  JreAssert((terms->hasFreq_), (@"org/apache/lucene/index/FreqProxFields.java:425 condition failed: assert terms.hasFreq;"));
+  JreAssert(terms->hasProx_, @"org/apache/lucene/index/FreqProxFields.java:424 condition failed: assert terms.hasProx;");
+  JreAssert(terms->hasFreq_, @"org/apache/lucene/index/FreqProxFields.java:425 condition failed: assert terms.hasFreq;");
 }
 
 OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum *new_OrgApacheLuceneIndexFreqProxFields_FreqProxPostingsEnum_initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField_withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_(OrgApacheLuceneIndexFreqProxTermsWriterPerField *terms, OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *postingsArray) {

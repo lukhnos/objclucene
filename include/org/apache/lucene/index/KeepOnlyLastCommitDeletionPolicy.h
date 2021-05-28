@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy || defined(INCLUDE_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy))
 #define OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_
 
@@ -24,10 +30,9 @@
 
 /*!
  @brief This <code>IndexDeletionPolicy</code> implementation that
- keeps only the most recent commit and immediately removes
- all prior commits after a new commit is done.
- This is
- the default deletion policy.
+  keeps only the most recent commit and immediately removes
+  all prior commits after a new commit is done.This is
+  the default deletion policy.
  */
 @interface OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy : OrgApacheLuceneIndexIndexDeletionPolicy
 
@@ -36,7 +41,7 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Deletes all commits except the most recent one.
@@ -54,12 +59,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init(OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy *new_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy *new_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy *create_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy *create_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy")

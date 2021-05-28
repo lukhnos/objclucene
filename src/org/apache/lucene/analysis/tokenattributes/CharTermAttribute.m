@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/CharTermAttribute must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisTokenattributesCharTermAttribute : NSObject
 
 @end
@@ -13,20 +17,36 @@
 @implementation OrgApacheLuceneAnalysisTokenattributesCharTermAttribute
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "copyBufferWithCharArray:withInt:withInt:", "copyBuffer", "V", 0x401, NULL, NULL },
-    { "buffer", NULL, "[C", 0x401, NULL, NULL },
-    { "resizeBufferWithInt:", "resizeBuffer", "[C", 0x401, NULL, NULL },
-    { "setLengthWithInt:", "setLength", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
-    { "setEmpty", NULL, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
-    { "appendWithJavaLangCharSequence:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
-    { "appendWithJavaLangCharSequence:withInt:withInt:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
-    { "appendWithChar:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
-    { "appendWithNSString:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
-    { "appendWithJavaLangStringBuilder:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
-    { "appendWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x401, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x401, 4, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x401, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x401, 5, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x401, 5, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x401, 5, 9, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x401, 5, 10, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", 0x401, 5, 11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesCharTermAttribute = { 2, "CharTermAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 11, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(copyBufferWithCharArray:withInt:withInt:);
+  methods[1].selector = @selector(buffer);
+  methods[2].selector = @selector(resizeBufferWithInt:);
+  methods[3].selector = @selector(setLengthWithInt:);
+  methods[4].selector = @selector(setEmpty);
+  methods[5].selector = @selector(appendWithJavaLangCharSequence:);
+  methods[6].selector = @selector(appendWithJavaLangCharSequence:withInt:withInt:);
+  methods[7].selector = @selector(appendWithChar:);
+  methods[8].selector = @selector(appendWithNSString:);
+  methods[9].selector = @selector(appendWithJavaLangStringBuilder:);
+  methods[10].selector = @selector(appendWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "copyBuffer", "[CII", "resizeBuffer", "I", "setLength", "append", "LJavaLangCharSequence;", "LJavaLangCharSequence;II", "C", "LNSString;", "LJavaLangStringBuilder;", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesCharTermAttribute = { "CharTermAttribute", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, NULL, 7, 0x609, 11, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
 }
 

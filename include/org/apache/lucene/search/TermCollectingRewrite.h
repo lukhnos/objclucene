@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTermCollectingRewrite
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTermCollectingRewrite_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermCollectingRewrite || defined(INCLUDE_OrgApacheLuceneSearchTermCollectingRewrite))
 #define OrgApacheLuceneSearchTermCollectingRewrite_
 
@@ -57,17 +63,21 @@ withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states;
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 - (void)collectTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                 withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query
 withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:(OrgApacheLuceneSearchTermCollectingRewrite_TermCollector *)collector;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermCollectingRewrite)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTermCollectingRewrite_init(OrgApacheLuceneSearchTermCollectingRewrite *self);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTermCollectingRewrite_initPackagePrivate(OrgApacheLuceneSearchTermCollectingRewrite *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermCollectingRewrite)
 
@@ -109,7 +119,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermCollectingRewrite)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -125,4 +135,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermCollectingRewrite_TermCollec
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermCollectingRewrite")

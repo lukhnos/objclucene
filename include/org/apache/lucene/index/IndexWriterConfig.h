@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexWriterConfig
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexWriterConfig_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexWriterConfig || defined(INCLUDE_OrgApacheLuceneIndexIndexWriterConfig))
 #define OrgApacheLuceneIndexIndexWriterConfig_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneIndexLiveIndexWriterConfig 1
 #include "org/apache/lucene/index/LiveIndexWriterConfig.h"
 
-@class IOSObjectArray;
 @class JavaIoPrintStream;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneCodecsCodec;
@@ -40,53 +45,45 @@
 /*!
  @brief Holds all the configuration that is used to create an <code>IndexWriter</code>.
  Once <code>IndexWriter</code> has been created with this object, changes to this
- object will not affect the <code>IndexWriter</code> instance. For that, use
+  object will not affect the <code>IndexWriter</code> instance. For that, use 
  <code>LiveIndexWriterConfig</code> that is returned from <code>IndexWriter.getConfig()</code>.
+   
  <p>
- All setter methods return <code>IndexWriterConfig</code> to allow chaining
- settings conveniently, for example:
+  All setter methods return <code>IndexWriterConfig</code> to allow chaining
+  settings conveniently, for example:  
  <pre class="prettyprint">
- IndexWriterConfig conf = new IndexWriterConfig(analyzer);
- conf.setter1().setter2();
+  IndexWriterConfig conf = new IndexWriterConfig(analyzer);
+  conf.setter1().setter2(); 
  
 @endcode
  - seealso: IndexWriter#getConfig()
  @since 3.1
  */
 @interface OrgApacheLuceneIndexIndexWriterConfig : OrgApacheLuceneIndexLiveIndexWriterConfig
-
-+ (jint)DISABLE_AUTO_FLUSH;
-
-+ (jint)DEFAULT_MAX_BUFFERED_DELETE_TERMS;
-
-+ (jint)DEFAULT_MAX_BUFFERED_DOCS;
-
-+ (jdouble)DEFAULT_RAM_BUFFER_SIZE_MB;
-
-+ (jlong)WRITE_LOCK_TIMEOUT;
-
-+ (jboolean)DEFAULT_READER_POOLING;
-
-+ (jint)DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB;
-
-+ (jboolean)DEFAULT_USE_COMPOUND_FILE_SYSTEM;
-
-+ (jboolean)DEFAULT_COMMIT_ON_CLOSE;
+@property (readonly, class) jint DISABLE_AUTO_FLUSH NS_SWIFT_NAME(DISABLE_AUTO_FLUSH);
+@property (readonly, class) jint DEFAULT_MAX_BUFFERED_DELETE_TERMS NS_SWIFT_NAME(DEFAULT_MAX_BUFFERED_DELETE_TERMS);
+@property (readonly, class) jint DEFAULT_MAX_BUFFERED_DOCS NS_SWIFT_NAME(DEFAULT_MAX_BUFFERED_DOCS);
+@property (readonly, class) jdouble DEFAULT_RAM_BUFFER_SIZE_MB NS_SWIFT_NAME(DEFAULT_RAM_BUFFER_SIZE_MB);
+@property (readonly, class) jlong WRITE_LOCK_TIMEOUT NS_SWIFT_NAME(WRITE_LOCK_TIMEOUT);
+@property (readonly, class) jboolean DEFAULT_READER_POOLING NS_SWIFT_NAME(DEFAULT_READER_POOLING);
+@property (readonly, class) jint DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB NS_SWIFT_NAME(DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB);
+@property (readonly, class) jboolean DEFAULT_USE_COMPOUND_FILE_SYSTEM NS_SWIFT_NAME(DEFAULT_USE_COMPOUND_FILE_SYSTEM);
+@property (readonly, class) jboolean DEFAULT_COMMIT_ON_CLOSE NS_SWIFT_NAME(DEFAULT_COMMIT_ON_CLOSE);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new config that with the default <code>Analyzer</code>
- .
- By default, <code>TieredMergePolicy</code> is used
- for merging;
- Note that <code>TieredMergePolicy</code> is free to select
- non-contiguous merges, which means docIDs may not
- remain monotonic over time.  If this is a problem you
- should switch to <code>LogByteSizeMergePolicy</code> or
+ .By default, <code>TieredMergePolicy</code> is used
+  for merging;
+  Note that <code>TieredMergePolicy</code> is free to select
+  non-contiguous merges, which means docIDs may not
+  remain monotonic over time.
+ If this is a problem you
+  should switch to <code>LogByteSizeMergePolicy</code> or 
  <code>LogDocMergePolicy</code>.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 - (OrgApacheLuceneAnalysisAnalyzer *)getAnalyzer;
 
@@ -123,57 +120,55 @@
 /*!
  @brief Set the <code>Codec</code>.
  <p>
- Only takes effect when IndexWriter is first created.
+  Only takes effect when IndexWriter is first created.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setCodecWithOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)codec;
 
 /*!
  @brief Sets if calls <code>IndexWriter.close()</code> should first commit
- before closing.
- Use <code>true</code> to match behavior of Lucene 4.x.
+  before closing.Use <code>true</code> to match behavior of Lucene 4.x.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setCommitOnCloseWithBoolean:(jboolean)commitOnClose;
 
 /*!
- @brief Expert: allows to open a certain commit point.
- The default is null which
- opens the latest commit point.  This can also be used to open <code>IndexWriter</code>
- from a near-real-time reader, if you pass the reader's
+ @brief Expert: allows to open a certain commit point.The default is null which
+  opens the latest commit point.
+ This can also be used to open <code>IndexWriter</code>
+  from a near-real-time reader, if you pass the reader's 
  <code>DirectoryReader.getIndexCommit</code>.
- <p>Only takes effect when IndexWriter is first created. 
+  
+ <p>Only takes effect when IndexWriter is first created.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setIndexCommitWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
 
 /*!
  @brief Expert: allows an optional <code>IndexDeletionPolicy</code> implementation to be
- specified.
- You can use this to control when prior commits are deleted from
- the index. The default policy is <code>KeepOnlyLastCommitDeletionPolicy</code>
- which removes all prior commits as soon as a new commit is done (this
- matches behavior before 2.2). Creating your own policy can allow you to
- explicitly keep previous "point in time" commits alive in the index for
- some time, to allow readers to refresh to the new commit without having the
- old commit deleted out from under them. This is necessary on filesystems
- like NFS that do not support "delete on last close" semantics, which
- Lucene's "point in time" search normally relies on.
+  specified.You can use this to control when prior commits are deleted from
+  the index.
+ The default policy is <code>KeepOnlyLastCommitDeletionPolicy</code>
+  which removes all prior commits as soon as a new commit is done (this
+  matches behavior before 2.2). Creating your own policy can allow you to
+  explicitly keep previous "point in time" commits alive in the index for
+  some time, to allow readers to refresh to the new commit without having the
+  old commit deleted out from under them. This is necessary on filesystems
+  like NFS that do not support "delete on last close" semantics, which
+  Lucene's "point in time" search normally relies on. 
  <p>
- <b>NOTE:</b> the deletion policy cannot be null.
- <p>Only takes effect when IndexWriter is first created. 
+  <b>NOTE:</b> the deletion policy cannot be null. 
+ <p>Only takes effect when IndexWriter is first created.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setIndexDeletionPolicyWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)delPolicy;
 
 /*!
  @brief Information about merges, deletes and a
- message when maxFieldLength is reached will be printed
- to this.
- Must not be null, but <code>InfoStream.NO_OUTPUT</code> 
- may be used to supress output.
+  message when maxFieldLength is reached will be printed
+  to this.Must not be null, but <code>InfoStream.NO_OUTPUT</code> 
+  may be used to supress output.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setInfoStreamWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
 
 /*!
- @brief Convenience method that uses <code>PrintStreamInfoStream</code>.
- Must not be null.
+ @brief Convenience method that uses <code>PrintStreamInfoStream</code>.Must not be null.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setInfoStreamWithJavaIoPrintStream:(JavaIoPrintStream *)printStream;
 
@@ -186,18 +181,17 @@
 - (OrgApacheLuceneIndexIndexWriterConfig *)setMergePolicyWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)mergePolicy;
 
 /*!
- @brief Expert: sets the merge scheduler used by this writer.
- The default is
+ @brief Expert: sets the merge scheduler used by this writer.The default is 
  <code>ConcurrentMergeScheduler</code>.
  <p>
- <b>NOTE:</b> the merge scheduler cannot be null.
- <p>Only takes effect when IndexWriter is first created. 
+  <b>NOTE:</b> the merge scheduler cannot be null. 
+ <p>Only takes effect when IndexWriter is first created.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setMergeSchedulerWithOrgApacheLuceneIndexMergeScheduler:(OrgApacheLuceneIndexMergeScheduler *)mergeScheduler;
 
 /*!
  @brief Specifies <code>OpenMode</code> of the index.
- <p>Only takes effect when IndexWriter is first created. 
+ <p>Only takes effect when IndexWriter is first created.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setOpenModeWithOrgApacheLuceneIndexIndexWriterConfig_OpenMode:(OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)openMode;
 
@@ -205,35 +199,35 @@
 
 /*!
  @brief Expert: Sets the maximum memory consumption per thread triggering a forced
- flush if exceeded.
- A <code>DocumentsWriterPerThread</code> is forcefully flushed
- once it exceeds this limit even if the <code>getRAMBufferSizeMB()</code> has
- not been exceeded. This is a safety limit to prevent a
+  flush if exceeded.A <code>DocumentsWriterPerThread</code> is forcefully flushed
+  once it exceeds this limit even if the <code>getRAMBufferSizeMB()</code> has
+  not been exceeded.
+ This is a safety limit to prevent a 
  <code>DocumentsWriterPerThread</code> from address space exhaustion due to its
- internal 32 bit signed integer based memory addressing.
- The given value must be less that 2GB (2048MB)
+  internal 32 bit signed integer based memory addressing.
+  The given value must be less that 2GB (2048MB)
  - seealso: #DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setRAMPerThreadHardLimitMBWithInt:(jint)perThreadHardLimitMB;
 
 /*!
  @brief By default, IndexWriter does not pool the
- SegmentReaders it must open for deletions and
- merging, unless a near-real-time reader has been
- obtained by calling <code>DirectoryReader.open(IndexWriter,boolean)</code>.
+   SegmentReaders it must open for deletions and
+   merging, unless a near-real-time reader has been
+   obtained by calling <code>DirectoryReader.open(IndexWriter, boolean)</code>.
  This method lets you enable pooling without getting a
- near-real-time reader.  NOTE: if you set this to
- false, IndexWriter will still pool readers once
- <code>DirectoryReader.open(IndexWriter,boolean)</code> is called.
- <p>Only takes effect when IndexWriter is first created. 
+   near-real-time reader.  NOTE: if you set this to
+   false, IndexWriter will still pool readers once  
+ <code>DirectoryReader.open(IndexWriter, boolean)</code> is called. 
+ <p>Only takes effect when IndexWriter is first created.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setReaderPoolingWithBoolean:(jboolean)readerPooling;
 
 /*!
  @brief Expert: set the <code>Similarity</code> implementation used by this IndexWriter.
  <p>
- <b>NOTE:</b> the similarity cannot be null.
- <p>Only takes effect when IndexWriter is first created. 
+  <b>NOTE:</b> the similarity cannot be null. 
+ <p>Only takes effect when IndexWriter is first created.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:(OrgApacheLuceneSearchSimilaritiesSimilarity *)similarity;
 
@@ -241,8 +235,7 @@
 
 /*!
  @brief Sets the maximum time to wait for a write lock (in milliseconds) for this
- instance.
- Note that the value can be zero, for no sleep/retry behavior.
+  instance.Note that the value can be zero, for no sleep/retry behavior.
  <p>Only takes effect when IndexWriter is first created.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setWriteLockTimeoutWithLong:(jlong)writeLockTimeout;
@@ -260,7 +253,7 @@
 /*!
  @brief Expert: Controls when segments are flushed to disk during indexing.
  The <code>FlushPolicy</code> initialized during <code>IndexWriter</code> instantiation and once initialized
- the given instance is bound to this <code>IndexWriter</code> and should not be used with another writer.
+  the given instance is bound to this <code>IndexWriter</code> and should not be used with another writer.
  - seealso: #setMaxBufferedDeleteTerms(int)
  - seealso: #setMaxBufferedDocs(int)
  - seealso: #setRAMBufferSizeMB(double)
@@ -269,27 +262,27 @@
 
 /*!
  @brief Expert: Sets the <code>DocumentsWriterPerThreadPool</code> instance used by the
- IndexWriter to assign thread-states to incoming indexing threads.
+  IndexWriter to assign thread-states to incoming indexing threads.
  </p>
- <p>
- NOTE: The given <code>DocumentsWriterPerThreadPool</code> instance must not be used with
- other <code>IndexWriter</code> instances once it has been initialized / associated with an
+  <p>
+  NOTE: The given <code>DocumentsWriterPerThreadPool</code> instance must not be used with
+  other <code>IndexWriter</code> instances once it has been initialized / associated with an 
  <code>IndexWriter</code>.
- </p>
- <p>
- NOTE: This only takes effect when IndexWriter is first created.</p>
+  </p>
+  <p>
+  NOTE: This only takes effect when IndexWriter is first created.</p>
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setIndexerThreadPoolWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool *)threadPool;
 
 /*!
  @brief Expert: sets the <code>DocConsumer</code> chain to be used to process documents.
- <p>Only takes effect when IndexWriter is first created. 
+ <p>Only takes effect when IndexWriter is first created.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setIndexingChainWithOrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain:(OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *)indexingChain;
 
 /*!
  @brief Sets the <code>IndexWriter</code> this config is attached to.
- @throws AlreadySetException
+ @throw AlreadySetException
  if this config is already attached to a writer.
  */
 - (OrgApacheLuceneIndexIndexWriterConfig *)setIndexWriterWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
@@ -301,68 +294,66 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexIndexWriterConfig)
 /*!
  @brief Denotes a flush trigger is disabled.
  */
-inline jint OrgApacheLuceneIndexIndexWriterConfig_get_DISABLE_AUTO_FLUSH();
+inline jint OrgApacheLuceneIndexIndexWriterConfig_get_DISABLE_AUTO_FLUSH(void);
 #define OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH -1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig, DISABLE_AUTO_FLUSH, jint)
 
 /*!
  @brief Disabled by default (because IndexWriter flushes by RAM usage by default).
  */
-inline jint OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_MAX_BUFFERED_DELETE_TERMS();
+inline jint OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_MAX_BUFFERED_DELETE_TERMS(void);
 #define OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_MAX_BUFFERED_DELETE_TERMS -1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig, DEFAULT_MAX_BUFFERED_DELETE_TERMS, jint)
 
 /*!
  @brief Disabled by default (because IndexWriter flushes by RAM usage by default).
  */
-inline jint OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_MAX_BUFFERED_DOCS();
+inline jint OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_MAX_BUFFERED_DOCS(void);
 #define OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_MAX_BUFFERED_DOCS -1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig, DEFAULT_MAX_BUFFERED_DOCS, jint)
 
 /*!
  @brief Default value is 16 MB (which means flush when buffered docs consume
- approximately 16 MB RAM).
+  approximately 16 MB RAM).
  */
-inline jdouble OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_RAM_BUFFER_SIZE_MB();
+inline jdouble OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_RAM_BUFFER_SIZE_MB(void);
 #define OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_RAM_BUFFER_SIZE_MB 16.0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig, DEFAULT_RAM_BUFFER_SIZE_MB, jdouble)
 
 /*!
  @brief Default value for the write lock timeout (0 ms: no sleeping).
  */
-inline jlong OrgApacheLuceneIndexIndexWriterConfig_get_WRITE_LOCK_TIMEOUT();
+inline jlong OrgApacheLuceneIndexIndexWriterConfig_get_WRITE_LOCK_TIMEOUT(void);
 #define OrgApacheLuceneIndexIndexWriterConfig_WRITE_LOCK_TIMEOUT 0LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig, WRITE_LOCK_TIMEOUT, jlong)
 
 /*!
  @brief Default setting for <code>setReaderPooling</code>.
  */
-inline jboolean OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_READER_POOLING();
+inline jboolean OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_READER_POOLING(void);
 #define OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_READER_POOLING false
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig, DEFAULT_READER_POOLING, jboolean)
 
 /*!
- @brief Default value is 1945.
- Change using <code>setRAMPerThreadHardLimitMB(int)</code> 
+ @brief Default value is 1945.Change using <code>setRAMPerThreadHardLimitMB(int)</code>
  */
-inline jint OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB();
+inline jint OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB(void);
 #define OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB 1945
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig, DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB, jint)
 
 /*!
  @brief Default value for compound file system for newly written segments
- (set to <code>true</code>).
- For batch indexing with very large 
- ram buffers use <code>false</code> 
+   (set to <code>true</code>).For batch indexing with very large 
+   ram buffers use <code>false</code>
  */
-inline jboolean OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_USE_COMPOUND_FILE_SYSTEM();
+inline jboolean OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_USE_COMPOUND_FILE_SYSTEM(void);
 #define OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_USE_COMPOUND_FILE_SYSTEM true
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig, DEFAULT_USE_COMPOUND_FILE_SYSTEM, jboolean)
 
 /*!
  @brief Default value for whether calls to <code>IndexWriter.close()</code> include a commit.
  */
-inline jboolean OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_COMMIT_ON_CLOSE();
+inline jboolean OrgApacheLuceneIndexIndexWriterConfig_get_DEFAULT_COMMIT_ON_CLOSE(void);
 #define OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_COMMIT_ON_CLOSE true
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig, DEFAULT_COMMIT_ON_CLOSE, jboolean)
 
@@ -383,6 +374,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriterConfig)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexIndexWriterConfig_OpenMode_Enum) {
   OrgApacheLuceneIndexIndexWriterConfig_OpenMode_Enum_CREATE = 0,
   OrgApacheLuceneIndexIndexWriterConfig_OpenMode_Enum_APPEND = 1,
@@ -392,21 +385,19 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexIndexWriterConfig_OpenMode_Enum)
 /*!
  @brief Specifies the open mode for <code>IndexWriter</code>.
  */
-@interface OrgApacheLuceneIndexIndexWriterConfig_OpenMode : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneIndexIndexWriterConfig_OpenMode : JavaLangEnum
 
-+ (OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)CREATE;
-
-+ (OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)APPEND;
-
-+ (OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)CREATE_OR_APPEND;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneIndexIndexWriterConfig_OpenMode *CREATE NS_SWIFT_NAME(CREATE);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexIndexWriterConfig_OpenMode *APPEND NS_SWIFT_NAME(APPEND);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexIndexWriterConfig_OpenMode *CREATE_OR_APPEND NS_SWIFT_NAME(CREATE_OR_APPEND);
+#pragma mark Public
 
 + (OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneIndexIndexWriterConfig_OpenMode_Enum)toNSEnum;
 
 @end
@@ -419,23 +410,23 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLucen
 /*!
  @brief Creates a new index or overwrites an existing one.
  */
-inline OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLuceneIndexIndexWriterConfig_OpenMode_get_CREATE();
+inline OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLuceneIndexIndexWriterConfig_OpenMode_get_CREATE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE)
 
 /*!
  @brief Opens an existing index.
  */
-inline OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLuceneIndexIndexWriterConfig_OpenMode_get_APPEND();
+inline OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLuceneIndexIndexWriterConfig_OpenMode_get_APPEND(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, APPEND)
 
 /*!
  @brief Creates a new index if one does not exist,
- otherwise it opens the index and documents will be appended.
+  otherwise it opens the index and documents will be appended.
  */
-inline OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLuceneIndexIndexWriterConfig_OpenMode_get_CREATE_OR_APPEND();
+inline OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLuceneIndexIndexWriterConfig_OpenMode_get_CREATE_OR_APPEND(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE_OR_APPEND)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexIndexWriterConfig_OpenMode_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexIndexWriterConfig_OpenMode_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLuceneIndexIndexWriterConfig_OpenMode_valueOfWithNSString_(NSString *name);
 
@@ -445,4 +436,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriterConfig_OpenMode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexWriterConfig")

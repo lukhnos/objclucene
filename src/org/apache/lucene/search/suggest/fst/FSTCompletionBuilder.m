@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/util/Comparator.h"
@@ -26,29 +25,31 @@
 #include "org/apache/lucene/util/fst/Util.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/fst/FSTCompletionBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder () {
  @public
   /*!
-   @brief The number of separate buckets for weights (discretization).
-   The more
- buckets, the more fine-grained term weights (priorities) can be assigned.
- The speed of lookup will not decrease for prefixes which have
- highly-weighted completions (because these are filled-in first), but will
- decrease significantly for low-weighted terms (but these should be
- infrequent, so it is all right).
+   @brief The number of separate buckets for weights (discretization).The more
+  buckets, the more fine-grained term weights (priorities) can be assigned.
+   The speed of lookup will not decrease for prefixes which have
+  highly-weighted completions (because these are filled-in first), but will
+  decrease significantly for low-weighted terms (but these should be
+  infrequent, so it is all right).  
  <p>
- The number of buckets must be within [1, 255] range.
+  The number of buckets must be within [1, 255] range.
    */
   jint buckets_;
   /*!
-   @brief FST construction require re-sorting the input.
-   This is the class that
- collects all the input entries, their weights and then provides sorted
- order.
+   @brief FST construction require re-sorting the input.This is the class that
+  collects all the input entries, their weights and then provides sorted
+  order.
    */
   id<OrgApacheLuceneSearchSuggestFstBytesRefSorter> sorter_;
   /*!
-   @brief Scratch buffer for <code>add(BytesRef,int)</code>.
+   @brief Scratch buffer for <code>add(BytesRef, int)</code>.
    */
   OrgApacheLuceneUtilBytesRefBuilder *scratch_;
   /*!
@@ -121,22 +122,32 @@ withOrgApacheLuceneSearchSuggestFstBytesRefSorter:(id<OrgApacheLuceneSearchSugge
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "FSTCompletionBuilder", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withOrgApacheLuceneSearchSuggestFstBytesRefSorter:withInt:", "FSTCompletionBuilder", NULL, 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneUtilBytesRef:withInt:", "add", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "build", NULL, "Lorg.apache.lucene.search.suggest.fst.FSTCompletion;", 0x1, "Ljava.io.IOException;", NULL },
-    { "buildAutomatonWithOrgApacheLuceneSearchSuggestFstBytesRefSorter:", "buildAutomaton", "Lorg.apache.lucene.util.fst.FST;", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/suggest/fst/BytesRefSorter;)Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestFstFSTCompletion;", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstFST;", 0x2, 4, 5, 3, 6, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:withOrgApacheLuceneSearchSuggestFstBytesRefSorter:withInt:);
+  methods[2].selector = @selector(addWithOrgApacheLuceneUtilBytesRef:withInt:);
+  methods[3].selector = @selector(build);
+  methods[4].selector = @selector(buildAutomatonWithOrgApacheLuceneSearchSuggestFstBytesRefSorter:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_BUCKETS", "DEFAULT_BUCKETS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_DEFAULT_BUCKETS },
-    { "buckets_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "automaton_", NULL, 0x0, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;", .constantValue.asLong = 0 },
-    { "sorter_", NULL, 0x12, "Lorg.apache.lucene.search.suggest.fst.BytesRefSorter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratch_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "shareMaxTailLength_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_BUCKETS", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_DEFAULT_BUCKETS, 0x19, -1, -1, -1, -1 },
+    { "buckets_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "automaton_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x0, -1, -1, 7, -1 },
+    { "sorter_", "LOrgApacheLuceneSearchSuggestFstBytesRefSorter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratch_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "shareMaxTailLength_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder = { 2, "FSTCompletionBuilder", "org.apache.lucene.search.suggest.fst", NULL, 0x1, 5, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ILOrgApacheLuceneSearchSuggestFstBytesRefSorter;I", "add", "LOrgApacheLuceneUtilBytesRef;I", "LJavaIoIOException;", "buildAutomaton", "LOrgApacheLuceneSearchSuggestFstBytesRefSorter;", "(Lorg/apache/lucene/search/suggest/fst/BytesRefSorter;)Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;", "Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder = { "FSTCompletionBuilder", "org.apache.lucene.search.suggest.fst", ptrTable, methods, fields, 7, 0x1, 5, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder;
 }
 
@@ -182,7 +193,7 @@ OrgApacheLuceneUtilFstFST *OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_b
   OrgApacheLuceneUtilBytesRef *entry_;
   OrgApacheLuceneUtilIntsRefBuilder *scratchIntsRef = create_OrgApacheLuceneUtilIntsRefBuilder_init();
   jint count = 0;
-  id<OrgApacheLuceneUtilBytesRefIterator> iter = [((id<OrgApacheLuceneSearchSuggestFstBytesRefSorter>) nil_chk(sorter)) iterator];
+  id<OrgApacheLuceneUtilBytesRefIterator> iter = JreRetainedLocalValue([((id<OrgApacheLuceneSearchSuggestFstBytesRefSorter>) nil_chk(sorter)) iterator]);
   while ((entry_ = [((id<OrgApacheLuceneUtilBytesRefIterator>) nil_chk(iter)) next]) != nil) {
     count++;
     if ([((OrgApacheLuceneUtilBytesRef *) nil_chk([scratch get])) compareToWithId:entry_] != 0) {

@@ -9,7 +9,6 @@
 #include "org/apache/lucene/queries/FilterClause.h"
 #include "org/apache/lucene/queryparser/xml/DOMUtils.h"
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/builders/BooleanFilterBuilder.h"
 #include "org/apache/lucene/queryparser/xml/builders/BooleanQueryBuilder.h"
 #include "org/apache/lucene/search/BooleanClause.h"
@@ -17,6 +16,10 @@
 #include "org/w3c/dom/Element.h"
 #include "org/w3c/dom/Node.h"
 #include "org/w3c/dom/NodeList.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/BooleanFilterBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder () {
  @public
@@ -36,14 +39,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder, f
 
 - (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   OrgApacheLuceneQueriesBooleanFilter *bf = create_OrgApacheLuceneQueriesBooleanFilter_init();
-  id<OrgW3cDomNodeList> nl = [((id<OrgW3cDomElement>) nil_chk(e)) getChildNodes];
+  id<OrgW3cDomNodeList> nl = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(e)) getChildNodes]);
   for (jint i = 0; i < [((id<OrgW3cDomNodeList>) nil_chk(nl)) getLength]; i++) {
-    id<OrgW3cDomNode> node = [nl itemWithInt:i];
+    id<OrgW3cDomNode> node = JreRetainedLocalValue([nl itemWithInt:i]);
     if ([((NSString *) nil_chk([((id<OrgW3cDomNode>) nil_chk(node)) getNodeName])) isEqual:@"Clause"]) {
       id<OrgW3cDomElement> clauseElem = (id<OrgW3cDomElement>) cast_check(node, OrgW3cDomElement_class_());
       OrgApacheLuceneSearchBooleanClause_Occur *occurs = OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_getOccursValueWithOrgW3cDomElement_(clauseElem);
       id<OrgW3cDomElement> clauseFilter = OrgApacheLuceneQueryparserXmlDOMUtils_getFirstChildOrFailWithOrgW3cDomElement_(clauseElem);
-      OrgApacheLuceneSearchFilter *f = [((id<OrgApacheLuceneQueryparserXmlFilterBuilder>) nil_chk(factory_)) getFilterWithOrgW3cDomElement:clauseFilter];
+      OrgApacheLuceneSearchFilter *f = JreRetainedLocalValue([((id<OrgApacheLuceneQueryparserXmlFilterBuilder>) nil_chk(factory_)) getFilterWithOrgW3cDomElement:clauseFilter]);
       [bf addWithOrgApacheLuceneQueriesFilterClause:create_OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_Occur_(f, occurs)];
     }
   }
@@ -56,14 +59,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder, f
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserXmlFilterBuilder:", "BooleanFilterBuilder", NULL, 0x1, NULL, NULL },
-    { "getFilterWithOrgW3cDomElement:", "getFilter", "Lorg.apache.lucene.search.Filter;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFilter;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserXmlFilterBuilder:);
+  methods[1].selector = @selector(getFilterWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "factory_", NULL, 0x12, "Lorg.apache.lucene.queryparser.xml.FilterBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "factory_", "LOrgApacheLuceneQueryparserXmlFilterBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder = { 2, "BooleanFilterBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserXmlFilterBuilder;", "getFilter", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder = { "BooleanFilterBuilder", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x1, 2, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder;
 }
 

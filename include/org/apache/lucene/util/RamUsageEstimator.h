@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilRamUsageEstimator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilRamUsageEstimator_) && (INCLUDE_ALL_OrgApacheLuceneUtilRamUsageEstimator || defined(INCLUDE_OrgApacheLuceneUtilRamUsageEstimator))
 #define OrgApacheLuceneUtilRamUsageEstimator_
 
@@ -33,57 +39,35 @@
 /*!
  @brief Estimates the size (memory representation) of Java objects.
  <p>
- This class uses assumptions that were discovered for the Hotspot
- virtual machine. If you use a non-OpenJDK/Oracle-based JVM,
- the measurements may be slightly wrong.
+  This class uses assumptions that were discovered for the Hotspot
+  virtual machine. If you use a non-OpenJDK/Oracle-based JVM,
+  the measurements may be slightly wrong.
  - seealso: #shallowSizeOf(Object)
  - seealso: #shallowSizeOfInstance(Class)
  */
 @interface OrgApacheLuceneUtilRamUsageEstimator : NSObject
-
-+ (jlong)ONE_KB;
-
-+ (jlong)ONE_MB;
-
-+ (jlong)ONE_GB;
-
-+ (jint)NUM_BYTES_BOOLEAN;
-
-+ (jint)NUM_BYTES_BYTE;
-
-+ (jint)NUM_BYTES_CHAR;
-
-+ (jint)NUM_BYTES_SHORT;
-
-+ (jint)NUM_BYTES_INT;
-
-+ (jint)NUM_BYTES_FLOAT;
-
-+ (jint)NUM_BYTES_LONG;
-
-+ (jint)NUM_BYTES_DOUBLE;
-
-+ (jboolean)COMPRESSED_REFS_ENABLED;
-
-+ (jint)NUM_BYTES_OBJECT_REF;
-
-+ (jint)NUM_BYTES_OBJECT_HEADER;
-
-+ (jint)NUM_BYTES_ARRAY_HEADER;
-
-+ (jint)NUM_BYTES_OBJECT_ALIGNMENT;
-
-+ (jlong)LONG_CACHE_MIN_VALUE;
-
-+ (jlong)LONG_CACHE_MAX_VALUE;
-
-+ (jint)LONG_SIZE;
-
-+ (jboolean)JVM_IS_HOTSPOT_64BIT;
-
-+ (NSString *)MANAGEMENT_FACTORY_CLASS;
-
-+ (NSString *)HOTSPOT_BEAN_CLASS;
+@property (readonly, class) jlong ONE_KB NS_SWIFT_NAME(ONE_KB);
+@property (readonly, class) jlong ONE_MB NS_SWIFT_NAME(ONE_MB);
+@property (readonly, class) jlong ONE_GB NS_SWIFT_NAME(ONE_GB);
+@property (readonly, class) jint NUM_BYTES_BOOLEAN NS_SWIFT_NAME(NUM_BYTES_BOOLEAN);
+@property (readonly, class) jint NUM_BYTES_BYTE NS_SWIFT_NAME(NUM_BYTES_BYTE);
+@property (readonly, class) jint NUM_BYTES_CHAR NS_SWIFT_NAME(NUM_BYTES_CHAR);
+@property (readonly, class) jint NUM_BYTES_SHORT NS_SWIFT_NAME(NUM_BYTES_SHORT);
+@property (readonly, class) jint NUM_BYTES_INT NS_SWIFT_NAME(NUM_BYTES_INT);
+@property (readonly, class) jint NUM_BYTES_FLOAT NS_SWIFT_NAME(NUM_BYTES_FLOAT);
+@property (readonly, class) jint NUM_BYTES_LONG NS_SWIFT_NAME(NUM_BYTES_LONG);
+@property (readonly, class) jint NUM_BYTES_DOUBLE NS_SWIFT_NAME(NUM_BYTES_DOUBLE);
+@property (readonly, class) jboolean COMPRESSED_REFS_ENABLED NS_SWIFT_NAME(COMPRESSED_REFS_ENABLED);
+@property (readonly, class) jint NUM_BYTES_OBJECT_REF NS_SWIFT_NAME(NUM_BYTES_OBJECT_REF);
+@property (readonly, class) jint NUM_BYTES_OBJECT_HEADER NS_SWIFT_NAME(NUM_BYTES_OBJECT_HEADER);
+@property (readonly, class) jint NUM_BYTES_ARRAY_HEADER NS_SWIFT_NAME(NUM_BYTES_ARRAY_HEADER);
+@property (readonly, class) jint NUM_BYTES_OBJECT_ALIGNMENT NS_SWIFT_NAME(NUM_BYTES_OBJECT_ALIGNMENT);
+@property (readonly, class) jlong LONG_CACHE_MIN_VALUE NS_SWIFT_NAME(LONG_CACHE_MIN_VALUE);
+@property (readonly, class) jlong LONG_CACHE_MAX_VALUE NS_SWIFT_NAME(LONG_CACHE_MAX_VALUE);
+@property (readonly, class) jint LONG_SIZE NS_SWIFT_NAME(LONG_SIZE);
+@property (readonly, class) jboolean JVM_IS_HOTSPOT_64BIT NS_SWIFT_NAME(JVM_IS_HOTSPOT_64BIT);
+@property (readonly, copy, class) NSString *MANAGEMENT_FACTORY_CLASS NS_SWIFT_NAME(MANAGEMENT_FACTORY_CLASS);
+@property (readonly, copy, class) NSString *HOTSPOT_BEAN_CLASS NS_SWIFT_NAME(HOTSPOT_BEAN_CLASS);
 
 #pragma mark Public
 
@@ -104,11 +88,11 @@
                withJavaTextDecimalFormat:(JavaTextDecimalFormat *)df;
 
 /*!
- @brief Estimates a "shallow" memory usage of the given object.
- For arrays, this will be the
- memory taken by array storage (no subreferences will be followed). For objects, this
- will be the memory taken by the fields.
- JVM object alignments are also applied.
+ @brief Estimates a "shallow" memory usage of the given object.For arrays, this will be the
+  memory taken by array storage (no subreferences will be followed).
+ For objects, this
+  will be the memory taken by the fields. 
+  JVM object alignments are also applied.
  */
 + (jlong)shallowSizeOfWithId:(id)obj;
 
@@ -120,16 +104,16 @@
 /*!
  @brief Returns the shallow instance size in bytes an instance of the given class would occupy.
  This works with all conventional classes and primitive types, but not with arrays
- (the size then depends on the number of elements and varies from object to object).
+  (the size then depends on the number of elements and varies from object to object).
  - seealso: #shallowSizeOf(Object)
- @throws IllegalArgumentException if <code>clazz</code> is an array class.
+ @throw IllegalArgumentExceptionif <code>clazz</code> is an array class.
  */
 + (jlong)shallowSizeOfInstanceWithIOSClass:(IOSClass *)clazz;
 
 /*!
  @brief Return the size of the provided array of <code>Accountable</code>s by summing
- up the shallow size of the array and the
- <code>memory usage</code> reported by each
+  up the shallow size of the array and the 
+ <code>memory usage</code> reported by each 
  <code>Accountable</code>.
  */
 + (jlong)sizeOfWithOrgApacheLuceneUtilAccountableArray:(IOSObjectArray *)accountables;
@@ -166,7 +150,7 @@
 
 /*!
  @brief Return the size of the provided <code>Long</code> object, returning 0 if it is
- cached by the JVM and its shallow size otherwise.
+  cached by the JVM and its shallow size otherwise.
  */
 + (jlong)sizeOfWithJavaLangLong:(JavaLangLong *)value;
 
@@ -185,8 +169,8 @@
 /*!
  @brief This method returns the maximum representation size of an object.
  <code>sizeSoFar</code>
- is the object's size measured so far. <code>f</code> is the field being probed.
- <p>The returned offset will be the maximum of whatever was measured so far and 
+  is the object's size measured so far. <code>f</code> is the field being probed.  
+ <p>The returned offset will be the maximum of whatever was measured so far and  
  <code>f</code> field's offset and representation size (unaligned).
  */
 + (jlong)adjustForFieldWithLong:(jlong)sizeSoFar
@@ -199,60 +183,60 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilRamUsageEstimator)
 /*!
  @brief One kilobyte bytes.
  */
-inline jlong OrgApacheLuceneUtilRamUsageEstimator_get_ONE_KB();
+inline jlong OrgApacheLuceneUtilRamUsageEstimator_get_ONE_KB(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_ONE_KB 1024LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, ONE_KB, jlong)
 
 /*!
  @brief One megabyte bytes.
  */
-inline jlong OrgApacheLuceneUtilRamUsageEstimator_get_ONE_MB();
+inline jlong OrgApacheLuceneUtilRamUsageEstimator_get_ONE_MB(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_ONE_MB 1048576LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, ONE_MB, jlong)
 
 /*!
  @brief One gigabyte bytes.
  */
-inline jlong OrgApacheLuceneUtilRamUsageEstimator_get_ONE_GB();
+inline jlong OrgApacheLuceneUtilRamUsageEstimator_get_ONE_GB(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_ONE_GB 1073741824LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, ONE_GB, jlong)
 
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_BOOLEAN();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_BOOLEAN(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_BOOLEAN 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_BOOLEAN, jint)
 
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_BYTE();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_BYTE(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_BYTE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_BYTE, jint)
 
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_CHAR();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_CHAR(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_CHAR, jint)
 
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_SHORT();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_SHORT(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_SHORT 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_SHORT, jint)
 
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_INT();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_INT(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_INT, jint)
 
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_FLOAT();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_FLOAT(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_FLOAT 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_FLOAT, jint)
 
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_LONG();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_LONG(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_LONG, jint)
 
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_DOUBLE();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_DOUBLE(void);
 #define OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_DOUBLE 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_DOUBLE, jint)
 
 /*!
  @brief True, iff compressed references (oops) are enabled by this JVM
  */
-inline jboolean OrgApacheLuceneUtilRamUsageEstimator_get_COMPRESSED_REFS_ENABLED();
+inline jboolean OrgApacheLuceneUtilRamUsageEstimator_get_COMPRESSED_REFS_ENABLED(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilRamUsageEstimator_COMPRESSED_REFS_ENABLED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, COMPRESSED_REFS_ENABLED, jboolean)
@@ -260,7 +244,7 @@ J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, COMPRE
 /*!
  @brief Number of bytes this JVM uses to represent an object reference.
  */
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_OBJECT_REF();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_OBJECT_REF(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_OBJECT_REF;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF, jint)
@@ -268,7 +252,7 @@ J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, NUM_BY
 /*!
  @brief Number of bytes to represent an object header (no fields, no alignments).
  */
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_OBJECT_HEADER();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_OBJECT_HEADER(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_OBJECT_HEADER;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER, jint)
@@ -276,40 +260,37 @@ J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, NUM_BY
 /*!
  @brief Number of bytes to represent an array header (no content, but with alignments).
  */
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_ARRAY_HEADER();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_ARRAY_HEADER(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_ARRAY_HEADER;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER, jint)
 
 /*!
- @brief A constant specifying the object alignment boundary inside the JVM.
- Objects will
- always take a full multiple of this constant, possibly wasting some space. 
+ @brief A constant specifying the object alignment boundary inside the JVM.Objects will
+  always take a full multiple of this constant, possibly wasting some space.
  */
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_OBJECT_ALIGNMENT();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_NUM_BYTES_OBJECT_ALIGNMENT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_OBJECT_ALIGNMENT;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_ALIGNMENT, jint)
 
 /*!
- @brief JVMs typically cache small longs.
- This tries to find out what the range is.
+ @brief JVMs typically cache small longs.This tries to find out what the range is.
  */
-inline jlong OrgApacheLuceneUtilRamUsageEstimator_get_LONG_CACHE_MIN_VALUE();
+inline jlong OrgApacheLuceneUtilRamUsageEstimator_get_LONG_CACHE_MIN_VALUE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_LONG_CACHE_MIN_VALUE;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, LONG_CACHE_MIN_VALUE, jlong)
 
 /*!
- @brief JVMs typically cache small longs.
- This tries to find out what the range is.
+ @brief JVMs typically cache small longs.This tries to find out what the range is.
  */
-inline jlong OrgApacheLuceneUtilRamUsageEstimator_get_LONG_CACHE_MAX_VALUE();
+inline jlong OrgApacheLuceneUtilRamUsageEstimator_get_LONG_CACHE_MAX_VALUE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_LONG_CACHE_MAX_VALUE;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, LONG_CACHE_MAX_VALUE, jlong)
 
-inline jint OrgApacheLuceneUtilRamUsageEstimator_get_LONG_SIZE();
+inline jint OrgApacheLuceneUtilRamUsageEstimator_get_LONG_SIZE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilRamUsageEstimator_LONG_SIZE;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, LONG_SIZE, jint)
@@ -317,17 +298,17 @@ J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, LONG_S
 /*!
  @brief For testing only
  */
-inline jboolean OrgApacheLuceneUtilRamUsageEstimator_get_JVM_IS_HOTSPOT_64BIT();
+inline jboolean OrgApacheLuceneUtilRamUsageEstimator_get_JVM_IS_HOTSPOT_64BIT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilRamUsageEstimator_JVM_IS_HOTSPOT_64BIT;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRamUsageEstimator, JVM_IS_HOTSPOT_64BIT, jboolean)
 
-inline NSString *OrgApacheLuceneUtilRamUsageEstimator_get_MANAGEMENT_FACTORY_CLASS();
+inline NSString *OrgApacheLuceneUtilRamUsageEstimator_get_MANAGEMENT_FACTORY_CLASS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilRamUsageEstimator_MANAGEMENT_FACTORY_CLASS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilRamUsageEstimator, MANAGEMENT_FACTORY_CLASS, NSString *)
 
-inline NSString *OrgApacheLuceneUtilRamUsageEstimator_get_HOTSPOT_BEAN_CLASS();
+inline NSString *OrgApacheLuceneUtilRamUsageEstimator_get_HOTSPOT_BEAN_CLASS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilRamUsageEstimator, HOTSPOT_BEAN_CLASS, NSString *)
@@ -370,4 +351,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRamUsageEstimator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilRamUsageEstimator")

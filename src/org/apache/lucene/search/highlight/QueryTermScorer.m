@@ -18,6 +18,10 @@
 #include "org/apache/lucene/search/highlight/TextFragment.h"
 #include "org/apache/lucene/search/highlight/WeightedTerm.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/QueryTermScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchHighlightQueryTermScorer () {
  @public
   JavaUtilHashMap *termsToFind_;
@@ -67,7 +71,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightQueryTermScorer, termAtt_, id<
 
 - (jfloat)getTokenScore {
   NSString *termText = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) description];
-  OrgApacheLuceneSearchHighlightWeightedTerm *queryTerm = [((JavaUtilHashMap *) nil_chk(termsToFind_)) getWithId:termText];
+  OrgApacheLuceneSearchHighlightWeightedTerm *queryTerm = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(termsToFind_)) getWithId:termText]);
   if (queryTerm == nil) {
     return 0;
   }
@@ -98,27 +102,42 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightQueryTermScorer, termAtt_, id<
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQuery:", "QueryTermScorer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchQuery:withNSString:", "QueryTermScorer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexIndexReader:withNSString:", "QueryTermScorer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchHighlightWeightedTermArray:", "QueryTermScorer", NULL, 0x1, NULL, NULL },
-    { "init__WithOrgApacheLuceneAnalysisTokenStream:", "init", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
-    { "startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:", "startFragment", "V", 0x1, NULL, NULL },
-    { "getTokenScore", NULL, "F", 0x1, NULL, NULL },
-    { "getFragmentScore", NULL, "F", 0x1, NULL, NULL },
-    { "allFragmentsProcessed", NULL, "V", 0x1, NULL, NULL },
-    { "getMaxTermWeight", NULL, "F", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneSearchQuery:withNSString:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexIndexReader:withNSString:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneSearchHighlightWeightedTermArray:);
+  methods[4].selector = @selector(init__WithOrgApacheLuceneAnalysisTokenStream:);
+  methods[5].selector = @selector(startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:);
+  methods[6].selector = @selector(getTokenScore);
+  methods[7].selector = @selector(getFragmentScore);
+  methods[8].selector = @selector(allFragmentsProcessed);
+  methods[9].selector = @selector(getMaxTermWeight);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "currentTextFragment_", NULL, 0x0, "Lorg.apache.lucene.search.highlight.TextFragment;", NULL, NULL, .constantValue.asLong = 0 },
-    { "uniqueTermsInFragment_", NULL, 0x0, "Ljava.util.HashSet;", NULL, "Ljava/util/HashSet<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "totalScore_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTermWeight_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "termsToFind_", NULL, 0x2, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/String;Lorg/apache/lucene/search/highlight/WeightedTerm;>;", .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "currentTextFragment_", "LOrgApacheLuceneSearchHighlightTextFragment;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "uniqueTermsInFragment_", "LJavaUtilHashSet;", .constantValue.asLong = 0, 0x0, -1, -1, 8, -1 },
+    { "totalScore_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "maxTermWeight_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "termsToFind_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 9, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightQueryTermScorer = { 2, "QueryTermScorer", "org.apache.lucene.search.highlight", NULL, 0x1, 10, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchQuery;", "LOrgApacheLuceneSearchQuery;LNSString;", "LOrgApacheLuceneSearchQuery;LOrgApacheLuceneIndexIndexReader;LNSString;", "[LOrgApacheLuceneSearchHighlightWeightedTerm;", "init", "LOrgApacheLuceneAnalysisTokenStream;", "startFragment", "LOrgApacheLuceneSearchHighlightTextFragment;", "Ljava/util/HashSet<Ljava/lang/String;>;", "Ljava/util/HashMap<Ljava/lang/String;Lorg/apache/lucene/search/highlight/WeightedTerm;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightQueryTermScorer = { "QueryTermScorer", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x1, 10, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightQueryTermScorer;
 }
 
@@ -167,7 +186,7 @@ void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearch
   self->maxTermWeight_ = 0;
   JreStrongAssignAndConsume(&self->termsToFind_, new_JavaUtilHashMap_init());
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(weightedTerms))->size_; i++) {
-    OrgApacheLuceneSearchHighlightWeightedTerm *existingTerm = [((JavaUtilHashMap *) nil_chk(self->termsToFind_)) getWithId:((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->term_];
+    OrgApacheLuceneSearchHighlightWeightedTerm *existingTerm = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(self->termsToFind_)) getWithId:((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->term_]);
     if ((existingTerm == nil) || (((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(existingTerm))->weight_ < ((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->weight_)) {
       [((JavaUtilHashMap *) nil_chk(self->termsToFind_)) putWithId:((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->term_ withId:IOSObjectArray_Get(weightedTerms, i)];
       self->maxTermWeight_ = JavaLangMath_maxWithFloat_withFloat_(self->maxTermWeight_, [((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i))) getWeight]);

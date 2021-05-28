@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesTermFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesTermFilter_) && (INCLUDE_ALL_OrgApacheLuceneQueriesTermFilter || defined(INCLUDE_OrgApacheLuceneQueriesTermFilter))
 #define OrgApacheLuceneQueriesTermFilter_
 
@@ -20,8 +26,8 @@
 #define INCLUDE_OrgApacheLuceneSearchQueryWrapperFilter 1
 #include "org/apache/lucene/search/QueryWrapperFilter.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexTerm;
+@class OrgApacheLuceneSearchQuery;
 
 /*!
  @brief A filter that includes documents that match with a specific term.
@@ -34,9 +40,13 @@
  @brief Create a new TermFilter
  @param term The term documents need to have in order to be a match for this filter.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -52,4 +62,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesTermFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesTermFilter")

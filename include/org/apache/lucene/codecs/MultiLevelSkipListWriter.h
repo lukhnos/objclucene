@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsMultiLevelSkipListWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsMultiLevelSkipListWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsMultiLevelSkipListWriter || defined(INCLUDE_OrgApacheLuceneCodecsMultiLevelSkipListWriter))
 #define OrgApacheLuceneCodecsMultiLevelSkipListWriter_
 
@@ -23,20 +29,20 @@
  @code
 
   Example for skipInterval = 3:
-                                                     c            (skip level 2)
-                 c                 c                 c            (skip level 1) 
-     x     x     x     x     x     x     x     x     x     x      (skip level 0)
+                                                      c            (skip level 2)
+                  c                 c                 c            (skip level 1) 
+      x     x     x     x     x     x     x     x     x     x      (skip level 0)
   d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d  (posting list)
-     3     6     9     12    15    18    21    24    27    30     (df)
+      3     6     9     12    15    18    21    24    27    30     (df) 
   d - document
   x - skip data
-  c - skip data with child pointer
+  c - skip data with child pointer 
   Skip level i contains every skipInterval-th entry from skip level i-1.
-  Therefore the number of entries on level i is: floor(df / ((skipInterval ^ (i + 1))).
-  Each skip entry on a level  i>0 contains a pointer to the corresponding skip entry in list i-1.
-  This guarantees a logarithmic amount of skips to find the target document.
+  Therefore the number of entries on level i is: floor(df / ((skipInterval ^ (i + 1))). 
+  Each skip entry on a level i>0 contains a pointer to the corresponding skip entry in list i-1.
+  This guarantees a logarithmic amount of skips to find the target document. 
   While this class takes care of writing the different skip levels,
-  subclasses must define the actual format of the skip data.
+  subclasses must define the actual format of the skip data. 
   
 @endcode
  */
@@ -51,11 +57,10 @@
 #pragma mark Public
 
 /*!
- @brief Writes the current skip data to the buffers.
- The current document frequency determines
- the max level is skip data is to be written to. 
+ @brief Writes the current skip data to the buffers.The current document frequency determines
+  the max level is skip data is to be written to.
  @param df the current document frequency
- @throws IOException If an I/O error occurs
+ @throw IOExceptionIf an I/O error occurs
  */
 - (void)bufferSkipWithInt:(jint)df;
 
@@ -70,20 +75,20 @@
 
 /*!
  @brief Creates a <code>MultiLevelSkipListWriter</code>, where
- <code>skipInterval</code> and <code>skipMultiplier</code> are
- the same.
+   <code>skipInterval</code> and <code>skipMultiplier</code> are
+   the same.
  */
-- (instancetype)initWithInt:(jint)skipInterval
-                    withInt:(jint)maxSkipLevels
-                    withInt:(jint)df;
+- (instancetype __nonnull)initWithInt:(jint)skipInterval
+                              withInt:(jint)maxSkipLevels
+                              withInt:(jint)df;
 
 /*!
  @brief Creates a <code>MultiLevelSkipListWriter</code>.
  */
-- (instancetype)initWithInt:(jint)skipInterval
-                    withInt:(jint)skipMultiplier
-                    withInt:(jint)maxSkipLevels
-                    withInt:(jint)df;
+- (instancetype __nonnull)initWithInt:(jint)skipInterval
+                              withInt:(jint)skipMultiplier
+                              withInt:(jint)maxSkipLevels
+                              withInt:(jint)df;
 
 /*!
  @brief Allocates internal skip buffers.
@@ -103,6 +108,10 @@
 - (void)writeSkipDataWithInt:(jint)level
 withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)skipBuffer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsMultiLevelSkipListWriter)
@@ -115,4 +124,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsMultiLevelSkipListWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsMultiLevelSkipListWriter")

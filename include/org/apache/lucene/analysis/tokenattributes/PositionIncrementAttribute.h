@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute))
 #define OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_
 
@@ -22,33 +28,33 @@
 
 /*!
  @brief Determines the position of this token
- relative to the previous Token in a TokenStream, used in phrase
- searching.
- <p>The default value is one.
+  relative to the previous Token in a TokenStream, used in phrase
+  searching.
+ <p>The default value is one. 
  <p>Some common uses for this are:<ul>
+  
  <li>Set it to zero to put multiple terms in the same position.  This is
- useful if, e.g., a word has multiple stems.  Searches for phrases
- including either stem will match.  In this case, all but the first stem's
- increment should be set to zero: the increment of the first instance
- should be one.  Repeating a token with an increment of zero can also be
- used to boost the scores of matches on that token.
+  useful if, e.g., a word has multiple stems.  Searches for phrases
+  including either stem will match.  In this case, all but the first stem's
+  increment should be set to zero: the increment of the first instance
+  should be one.  Repeating a token with an increment of zero can also be
+  used to boost the scores of matches on that token. 
  <li>Set it to values greater than one to inhibit exact phrase matches.
- If, for example, one does not want phrases to match across removed stop
- words, then one could build a stop word filter that removes stop words and
- also sets the increment to the number of stop words removed before each
- non-stop word.  Then exact phrase queries will only match when the terms
- occur with no intervening stop words.
+  If, for example, one does not want phrases to match across removed stop
+  words, then one could build a stop word filter that removes stop words and
+  also sets the increment to the number of stop words removed before each
+  non-stop word.  Then exact phrase queries will only match when the terms
+  occur with no intervening stop words. 
  </ul>
  - seealso: org.apache.lucene.index.PostingsEnum
  */
-@protocol OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
- @brief Set the position increment.
- The default value is one.
+ @brief Set the position increment.The default value is one.
  @param positionIncrement the distance from the prior term
- @throws IllegalArgumentException if <code>positionIncrement</code> 
- is negative.
+ @throw IllegalArgumentExceptionif <code>positionIncrement</code> 
+          is negative.
  - seealso: #getPositionIncrement()
  */
 - (void)setPositionIncrementWithInt:(jint)positionIncrement;
@@ -67,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPositionIncreme
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute")

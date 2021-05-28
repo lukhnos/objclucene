@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsPostingsFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsPostingsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsPostingsFormat || defined(INCLUDE_OrgApacheLuceneCodecsPostingsFormat))
 #define OrgApacheLuceneCodecsPostingsFormat_
 
@@ -31,20 +37,18 @@
 /*!
  @brief Encodes/decodes terms, postings, and proximity data.
  <p>
- Note, when extending this class, the name (<code>getName</code>) may
- written into the index in certain configurations. In order for the segment 
- to be read, the name must resolve to your implementation via <code>forName(String)</code>.
- This method uses Java's 
- <code>Service Provider Interface</code> (SPI) to resolve format names.
+  Note, when extending this class, the name (<code>getName</code>) may
+  written into the index in certain configurations. In order for the segment 
+  to be read, the name must resolve to your implementation via <code>forName(String)</code>.
+  This method uses Java's  
+ <code>Service Provider Interface</code> (SPI) to resolve format names. 
  <p>
- If you implement your own format, make sure that it has a no-arg constructor
- so SPI can load it.
+  If you implement your own format, make sure that it has a no-arg constructor
+  so SPI can load it.
  - seealso: ServiceLoader
-  
  */
 @interface OrgApacheLuceneCodecsPostingsFormat : NSObject < OrgApacheLuceneUtilNamedSPILoader_NamedSPI >
-
-+ (IOSObjectArray *)EMPTY;
+@property (readonly, class, strong) IOSObjectArray *EMPTY NS_SWIFT_NAME(EMPTY);
 
 #pragma mark Public
 
@@ -59,15 +63,14 @@
 - (OrgApacheLuceneCodecsFieldsConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
 /*!
- @brief Reads a segment.
- NOTE: by the time this call
- returns, it must hold open any files it will need to
- use; else, those files may be deleted. 
+ @brief Reads a segment.NOTE: by the time this call
+   returns, it must hold open any files it will need to
+   use; else, those files may be deleted.
  Additionally, required files may be deleted during the execution of 
- this call before there is a chance to open them. Under these 
- circumstances an IOException should be thrown by the implementation. 
- IOExceptions are expected and will automatically cause a retry of the 
- segment opening logic with the newly revised segments.
+   this call before there is a chance to open them. Under these 
+   circumstances an IOException should be thrown by the implementation. 
+   IOExceptions are expected and will automatically cause a retry of the 
+   segment opening logic with the newly revised segments.
  */
 - (OrgApacheLuceneCodecsFieldsProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
@@ -84,11 +87,11 @@
 /*!
  @brief Reloads the postings format list from the given <code>ClassLoader</code>.
  Changes to the postings formats are visible after the method ends, all
- iterators (<code>availablePostingsFormats()</code>,...) stay consistent. 
+  iterators (<code>availablePostingsFormats()</code>,...) stay consistent.   
  <p><b>NOTE:</b> Only new postings formats are added, existing ones are
- never removed or replaced.
+  never removed or replaced.  
  <p><em>This method is expensive and should only be called for discovery
- of new postings formats on the given classpath/classloader!</em>
+  of new postings formats on the given classpath/classloader!</em>
  */
 + (void)reloadPostingsFormatsWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
@@ -99,13 +102,17 @@
 /*!
  @brief Creates a new postings format.
  <p>
- The provided name will be written into the index segment in some configurations
- (such as when using <code>PerFieldPostingsFormat</code>): in such configurations,
- for the segment to be read this class should be registered with Java's
- SPI mechanism (registered in META-INF/ of your jar file, etc).
+  The provided name will be written into the index segment in some configurations
+  (such as when using <code>PerFieldPostingsFormat</code>): in such configurations,
+  for the segment to be read this class should be registered with Java's
+  SPI mechanism (registered in META-INF/ of your jar file, etc).
  @param name must be all ascii alphanumeric, and less than 128 characters in length.
  */
-- (instancetype)initWithNSString:(NSString *)name;
+- (instancetype __nonnull)initWithNSString:(NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -114,7 +121,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsPostingsFormat)
 /*!
  @brief Zero-length <code>PostingsFormat</code> array.
  */
-inline IOSObjectArray *OrgApacheLuceneCodecsPostingsFormat_get_EMPTY();
+inline IOSObjectArray *OrgApacheLuceneCodecsPostingsFormat_get_EMPTY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneCodecsPostingsFormat_EMPTY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsPostingsFormat, EMPTY, IOSObjectArray *)
@@ -123,7 +130,7 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsPostingsFormat_initWithNSString_(Org
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsPostingsFormat *OrgApacheLuceneCodecsPostingsFormat_forNameWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneCodecsPostingsFormat_availablePostingsFormats();
+FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneCodecsPostingsFormat_availablePostingsFormats(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsPostingsFormat_reloadPostingsFormatsWithJavaLangClassLoader_(JavaLangClassLoader *classloader);
 
@@ -131,4 +138,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPostingsFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPostingsFormat")

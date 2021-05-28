@@ -18,6 +18,10 @@
 #include "org/lukhnos/portmobile/file/NoSuchFileException.h"
 #include "org/lukhnos/portmobile/file/Path.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/FilesystemResourceLoader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisUtilFilesystemResourceLoader () {
  @public
   OrgLukhnosPortmobileFilePath *baseDirectory_;
@@ -52,9 +56,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader, delegat
   @catch (OrgLukhnosPortmobileFileNoSuchFileException *fnfe) {
     return [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(delegate_)) openResourceWithNSString:resource];
   }
-  @catch (JavaIoIOException *fnfe) {
-    return [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(delegate_)) openResourceWithNSString:resource];
-  }
 }
 
 - (id)newInstanceWithNSString:(NSString *)cname
@@ -74,18 +75,28 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader, delegat
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgLukhnosPortmobileFilePath:", "FilesystemResourceLoader", NULL, 0x1, NULL, NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneAnalysisUtilResourceLoader:", "FilesystemResourceLoader", NULL, 0x1, NULL, NULL },
-    { "openResourceWithNSString:", "openResource", "Ljava.io.InputStream;", 0x1, "Ljava.io.IOException;", NULL },
-    { "newInstanceWithNSString:withIOSClass:", "newInstance", "TT;", 0x1, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;" },
-    { "findClassWithNSString:withIOSClass:", "findClass", "Ljava.lang.Class;", 0x1, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)Ljava/lang/Class<+TT;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaIoInputStream;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 5, 6, -1, 7, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, 8, 6, -1, 9, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgLukhnosPortmobileFilePath:);
+  methods[1].selector = @selector(initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[2].selector = @selector(openResourceWithNSString:);
+  methods[3].selector = @selector(newInstanceWithNSString:withIOSClass:);
+  methods[4].selector = @selector(findClassWithNSString:withIOSClass:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "baseDirectory_", NULL, 0x12, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
-    { "delegate_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.ResourceLoader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "baseDirectory_", "LOrgLukhnosPortmobileFilePath;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "delegate_", "LOrgApacheLuceneAnalysisUtilResourceLoader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilFilesystemResourceLoader = { 2, "FilesystemResourceLoader", "org.apache.lucene.analysis.util", NULL, 0x11, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgLukhnosPortmobileFilePath;", "LOrgLukhnosPortmobileFilePath;LOrgApacheLuceneAnalysisUtilResourceLoader;", "openResource", "LNSString;", "LJavaIoIOException;", "newInstance", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "findClass", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)Ljava/lang/Class<+TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilFilesystemResourceLoader = { "FilesystemResourceLoader", "org.apache.lucene.analysis.util", ptrTable, methods, fields, 7, 0x11, 5, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader;
 }
 

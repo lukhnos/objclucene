@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeOfflineSliceReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeOfflineSliceReader_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceReader || defined(INCLUDE_OrgApacheLuceneRangetreeOfflineSliceReader))
 #define OrgApacheLuceneRangetreeOfflineSliceReader_
 
@@ -43,9 +49,13 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempFile
-                                            withLong:(jlong)start
-                                            withLong:(jlong)count;
+- (instancetype __nonnull)initPackagePrivateWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempFile
+                                                                    withLong:(jlong)start
+                                                                    withLong:(jlong)count;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -53,14 +63,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeOfflineSliceReader)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeOfflineSliceReader, in_, OrgApacheLuceneStoreInputStreamDataInput *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgApacheLuceneRangetreeOfflineSliceReader *self, OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeOfflineSliceReader_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgApacheLuceneRangetreeOfflineSliceReader *self, OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceReader *new_OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceReader *new_OrgApacheLuceneRangetreeOfflineSliceReader_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceReader *create_OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count);
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceReader *create_OrgApacheLuceneRangetreeOfflineSliceReader_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeOfflineSliceReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceReader")

@@ -18,63 +18,73 @@
 #include "java/util/TimeZone.h"
 #include "org/apache/lucene/document/DateTools.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/DateTools must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneDocumentDateTools ()
 
 - (instancetype)init;
 
 @end
 
-inline JavaLangThreadLocal *OrgApacheLuceneDocumentDateTools_get_TL_CAL();
+inline JavaLangThreadLocal *OrgApacheLuceneDocumentDateTools_get_TL_CAL(void);
 static JavaLangThreadLocal *OrgApacheLuceneDocumentDateTools_TL_CAL;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentDateTools, TL_CAL, JavaLangThreadLocal *)
 
-inline JavaLangThreadLocal *OrgApacheLuceneDocumentDateTools_get_TL_FORMATS();
+inline JavaLangThreadLocal *OrgApacheLuceneDocumentDateTools_get_TL_FORMATS(void);
 static JavaLangThreadLocal *OrgApacheLuceneDocumentDateTools_TL_FORMATS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentDateTools, TL_FORMATS, JavaLangThreadLocal *)
 
 __attribute__((unused)) static void OrgApacheLuceneDocumentDateTools_init(OrgApacheLuceneDocumentDateTools *self);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentDateTools *new_OrgApacheLuceneDocumentDateTools_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneDocumentDateTools *new_OrgApacheLuceneDocumentDateTools_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneDocumentDateTools *create_OrgApacheLuceneDocumentDateTools_init();
+__attribute__((unused)) static OrgApacheLuceneDocumentDateTools *create_OrgApacheLuceneDocumentDateTools_init(void);
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentDateTools_Resolution_initWithInt_withNSString_withInt_(OrgApacheLuceneDocumentDateTools_Resolution *self, jint formatLen, NSString *__name, jint __ordinal);
+@interface OrgApacheLuceneDocumentDateTools_1 : JavaLangThreadLocal
 
-@interface OrgApacheLuceneDocumentDateTools_$1 : JavaLangThreadLocal
+- (instancetype)init;
 
 - (JavaUtilCalendar *)initialValue OBJC_METHOD_FAMILY_NONE;
 
-- (instancetype)init;
+- (JavaUtilCalendar *)get;
+
+- (JavaUtilCalendar *)childValueWithId:(JavaUtilCalendar *)arg0;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentDateTools_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentDateTools_1)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentDateTools_$1_init(OrgApacheLuceneDocumentDateTools_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneDocumentDateTools_1_init(OrgApacheLuceneDocumentDateTools_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentDateTools_$1 *new_OrgApacheLuceneDocumentDateTools_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneDocumentDateTools_1 *new_OrgApacheLuceneDocumentDateTools_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneDocumentDateTools_$1 *create_OrgApacheLuceneDocumentDateTools_$1_init();
+__attribute__((unused)) static OrgApacheLuceneDocumentDateTools_1 *create_OrgApacheLuceneDocumentDateTools_1_init(void);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentDateTools_$1)
+@interface OrgApacheLuceneDocumentDateTools_2 : JavaLangThreadLocal
 
-@interface OrgApacheLuceneDocumentDateTools_$2 : JavaLangThreadLocal
+- (instancetype)init;
 
 - (IOSObjectArray *)initialValue OBJC_METHOD_FAMILY_NONE;
 
-- (instancetype)init;
+- (IOSObjectArray *)get;
+
+- (IOSObjectArray *)childValueWithId:(IOSObjectArray *)arg0;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentDateTools_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentDateTools_2)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentDateTools_$2_init(OrgApacheLuceneDocumentDateTools_$2 *self);
+__attribute__((unused)) static void OrgApacheLuceneDocumentDateTools_2_init(OrgApacheLuceneDocumentDateTools_2 *self);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentDateTools_$2 *new_OrgApacheLuceneDocumentDateTools_$2_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneDocumentDateTools_2 *new_OrgApacheLuceneDocumentDateTools_2_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneDocumentDateTools_$2 *create_OrgApacheLuceneDocumentDateTools_$2_init();
+__attribute__((unused)) static OrgApacheLuceneDocumentDateTools_2 *create_OrgApacheLuceneDocumentDateTools_2_init(void);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentDateTools_$2)
+__attribute__((unused)) static void OrgApacheLuceneDocumentDateTools_Resolution_initWithInt_withNSString_withInt_(OrgApacheLuceneDocumentDateTools_Resolution *self, jint formatLen, NSString *__name, jint __ordinal);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentDateTools)
 
@@ -121,33 +131,44 @@ withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTool
   return OrgApacheLuceneDocumentDateTools_roundWithLong_withOrgApacheLuceneDocumentDateTools_Resolution_(time, resolution);
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LJavaUtilDate;", 0x9, 7, 5, 6, -1, -1, -1 },
+    { NULL, "LJavaUtilDate;", 0x9, 8, 1, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 8, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(dateToStringWithJavaUtilDate:withOrgApacheLuceneDocumentDateTools_Resolution:);
+  methods[2].selector = @selector(timeToStringWithLong:withOrgApacheLuceneDocumentDateTools_Resolution:);
+  methods[3].selector = @selector(stringToTimeWithNSString:);
+  methods[4].selector = @selector(stringToDateWithNSString:);
+  methods[5].selector = @selector(roundWithJavaUtilDate:withOrgApacheLuceneDocumentDateTools_Resolution:);
+  methods[6].selector = @selector(roundWithLong:withOrgApacheLuceneDocumentDateTools_Resolution:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "GMT", "LJavaUtilTimeZone;", .constantValue.asLong = 0, 0x18, -1, 9, -1, -1 },
+    { "TL_CAL", "LJavaLangThreadLocal;", .constantValue.asLong = 0, 0x1a, -1, 10, 11, -1 },
+    { "TL_FORMATS", "LJavaLangThreadLocal;", .constantValue.asLong = 0, 0x1a, -1, 12, 13, -1 },
+  };
+  static const void *ptrTable[] = { "dateToString", "LJavaUtilDate;LOrgApacheLuceneDocumentDateTools_Resolution;", "timeToString", "JLOrgApacheLuceneDocumentDateTools_Resolution;", "stringToTime", "LNSString;", "LJavaTextParseException;", "stringToDate", "round", &OrgApacheLuceneDocumentDateTools_GMT, &OrgApacheLuceneDocumentDateTools_TL_CAL, "Ljava/lang/ThreadLocal<Ljava/util/Calendar;>;", &OrgApacheLuceneDocumentDateTools_TL_FORMATS, "Ljava/lang/ThreadLocal<[Ljava/text/SimpleDateFormat;>;", "LOrgApacheLuceneDocumentDateTools_Resolution;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDateTools = { "DateTools", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x1, 7, 3, -1, 14, -1, -1, -1 };
+  return &_OrgApacheLuceneDocumentDateTools;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentDateTools class]) {
     JreStrongAssign(&OrgApacheLuceneDocumentDateTools_GMT, JavaUtilTimeZone_getTimeZoneWithNSString_(@"GMT"));
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDateTools_TL_CAL, new_OrgApacheLuceneDocumentDateTools_$1_init());
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDateTools_TL_FORMATS, new_OrgApacheLuceneDocumentDateTools_$2_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDateTools_TL_CAL, new_OrgApacheLuceneDocumentDateTools_1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDateTools_TL_FORMATS, new_OrgApacheLuceneDocumentDateTools_2_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentDateTools)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DateTools", NULL, 0x2, NULL, NULL },
-    { "dateToStringWithJavaUtilDate:withOrgApacheLuceneDocumentDateTools_Resolution:", "dateToString", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "timeToStringWithLong:withOrgApacheLuceneDocumentDateTools_Resolution:", "timeToString", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "stringToTimeWithNSString:", "stringToTime", "J", 0x9, "Ljava.text.ParseException;", NULL },
-    { "stringToDateWithNSString:", "stringToDate", "Ljava.util.Date;", 0x9, "Ljava.text.ParseException;", NULL },
-    { "roundWithJavaUtilDate:withOrgApacheLuceneDocumentDateTools_Resolution:", "round", "Ljava.util.Date;", 0x9, NULL, NULL },
-    { "roundWithLong:withOrgApacheLuceneDocumentDateTools_Resolution:", "round", "J", 0x9, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "GMT", "GMT", 0x18, "Ljava.util.TimeZone;", &OrgApacheLuceneDocumentDateTools_GMT, NULL, .constantValue.asLong = 0 },
-    { "TL_CAL", "TL_CAL", 0x1a, "Ljava.lang.ThreadLocal;", &OrgApacheLuceneDocumentDateTools_TL_CAL, "Ljava/lang/ThreadLocal<Ljava/util/Calendar;>;", .constantValue.asLong = 0 },
-    { "TL_FORMATS", "TL_FORMATS", 0x1a, "Ljava.lang.ThreadLocal;", &OrgApacheLuceneDocumentDateTools_TL_FORMATS, "Ljava/lang/ThreadLocal<[Ljava/text/SimpleDateFormat;>;", .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.document.DateTools$Resolution;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDateTools = { 2, "DateTools", "org.apache.lucene.document", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneDocumentDateTools;
 }
 
 @end
@@ -183,7 +204,7 @@ jlong OrgApacheLuceneDocumentDateTools_stringToTimeWithNSString_(NSString *dateS
 JavaUtilDate *OrgApacheLuceneDocumentDateTools_stringToDateWithNSString_(NSString *dateString) {
   OrgApacheLuceneDocumentDateTools_initialize();
   @try {
-    return [((JavaTextSimpleDateFormat *) nil_chk(IOSObjectArray_Get(nil_chk([((JavaLangThreadLocal *) nil_chk(OrgApacheLuceneDocumentDateTools_TL_FORMATS)) get]), ((jint) [((NSString *) nil_chk(dateString)) length])))) parseWithNSString:dateString];
+    return [((JavaTextSimpleDateFormat *) nil_chk(IOSObjectArray_Get(nil_chk([((JavaLangThreadLocal *) nil_chk(OrgApacheLuceneDocumentDateTools_TL_FORMATS)) get]), [((NSString *) nil_chk(dateString)) java_length]))) parseWithNSString:dateString];
   }
   @catch (JavaLangException *e) {
     @throw create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$", @"Input is not a valid date string: ", dateString), 0);
@@ -222,6 +243,102 @@ jlong OrgApacheLuceneDocumentDateTools_roundWithLong_withOrgApacheLuceneDocument
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentDateTools)
 
+@implementation OrgApacheLuceneDocumentDateTools_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneDocumentDateTools_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (JavaUtilCalendar *)initialValue {
+  return JavaUtilCalendar_getInstanceWithJavaUtilTimeZone_withJavaUtilLocale_(JreLoadStatic(OrgApacheLuceneDocumentDateTools, GMT), JreLoadStatic(JavaUtilLocale, ROOT));
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCalendar;", 0x4, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initialValue);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneDocumentDateTools;", "Ljava/lang/ThreadLocal<Ljava/util/Calendar;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDateTools_1 = { "", "org.apache.lucene.document", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 0, -1, -1, 1, -1 };
+  return &_OrgApacheLuceneDocumentDateTools_1;
+}
+
+@end
+
+void OrgApacheLuceneDocumentDateTools_1_init(OrgApacheLuceneDocumentDateTools_1 *self) {
+  JavaLangThreadLocal_init(self);
+}
+
+OrgApacheLuceneDocumentDateTools_1 *new_OrgApacheLuceneDocumentDateTools_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentDateTools_1, init)
+}
+
+OrgApacheLuceneDocumentDateTools_1 *create_OrgApacheLuceneDocumentDateTools_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentDateTools_1, init)
+}
+
+@implementation OrgApacheLuceneDocumentDateTools_2
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneDocumentDateTools_2_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (IOSObjectArray *)initialValue {
+  IOSObjectArray *arr = [IOSObjectArray arrayWithLength:((OrgApacheLuceneDocumentDateTools_Resolution *) nil_chk(JreLoadEnum(OrgApacheLuceneDocumentDateTools_Resolution, MILLISECOND)))->formatLen_ + 1 type:JavaTextSimpleDateFormat_class_()];
+  {
+    IOSObjectArray *a__ = OrgApacheLuceneDocumentDateTools_Resolution_values();
+    OrgApacheLuceneDocumentDateTools_Resolution * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
+    OrgApacheLuceneDocumentDateTools_Resolution * const *e__ = b__ + a__->size_;
+    while (b__ < e__) {
+      OrgApacheLuceneDocumentDateTools_Resolution *resolution = *b__++;
+      IOSObjectArray_Set(arr, ((OrgApacheLuceneDocumentDateTools_Resolution *) nil_chk(resolution))->formatLen_, (JavaTextSimpleDateFormat *) cast_chk([((JavaTextSimpleDateFormat *) nil_chk(resolution->format_)) java_clone], [JavaTextSimpleDateFormat class]));
+    }
+  }
+  return JreRetainedLocalValue(arr);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LJavaTextSimpleDateFormat;", 0x4, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initialValue);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneDocumentDateTools;", "Ljava/lang/ThreadLocal<[Ljava/text/SimpleDateFormat;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDateTools_2 = { "", "org.apache.lucene.document", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 0, -1, -1, 1, -1 };
+  return &_OrgApacheLuceneDocumentDateTools_2;
+}
+
+@end
+
+void OrgApacheLuceneDocumentDateTools_2_init(OrgApacheLuceneDocumentDateTools_2 *self) {
+  JavaLangThreadLocal_init(self);
+}
+
+OrgApacheLuceneDocumentDateTools_2 *new_OrgApacheLuceneDocumentDateTools_2_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentDateTools_2, init)
+}
+
+OrgApacheLuceneDocumentDateTools_2 *create_OrgApacheLuceneDocumentDateTools_2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentDateTools_2, init)
+}
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentDateTools_Resolution)
 
 OrgApacheLuceneDocumentDateTools_Resolution *OrgApacheLuceneDocumentDateTools_Resolution_values_[7];
@@ -257,7 +374,7 @@ OrgApacheLuceneDocumentDateTools_Resolution *OrgApacheLuceneDocumentDateTools_Re
 }
 
 - (NSString *)description {
-  return [((NSString *) nil_chk([super description])) lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)];
+  return [((NSString *) nil_chk([super description])) java_lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)];
 }
 
 + (IOSObjectArray *)values {
@@ -272,8 +389,33 @@ OrgApacheLuceneDocumentDateTools_Resolution *OrgApacheLuceneDocumentDateTools_Re
   return (OrgApacheLuceneDocumentDateTools_Resolution_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneDocumentDateTools_Resolution;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneDocumentDateTools_Resolution;", 0x9, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(description);
+  methods[1].selector = @selector(values);
+  methods[2].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "YEAR", "LOrgApacheLuceneDocumentDateTools_Resolution;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "MONTH", "LOrgApacheLuceneDocumentDateTools_Resolution;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "DAY", "LOrgApacheLuceneDocumentDateTools_Resolution;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+    { "HOUR", "LOrgApacheLuceneDocumentDateTools_Resolution;", .constantValue.asLong = 0, 0x4019, -1, 6, -1, -1 },
+    { "MINUTE", "LOrgApacheLuceneDocumentDateTools_Resolution;", .constantValue.asLong = 0, 0x4019, -1, 7, -1, -1 },
+    { "SECOND", "LOrgApacheLuceneDocumentDateTools_Resolution;", .constantValue.asLong = 0, 0x4019, -1, 8, -1, -1 },
+    { "MILLISECOND", "LOrgApacheLuceneDocumentDateTools_Resolution;", .constantValue.asLong = 0, 0x4019, -1, 9, -1, -1 },
+    { "formatLen_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "format_", "LJavaTextSimpleDateFormat;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "toString", "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, YEAR), &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MONTH), &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, DAY), &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, HOUR), &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MINUTE), &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, SECOND), &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MILLISECOND), "LOrgApacheLuceneDocumentDateTools;", "Ljava/lang/Enum<Lorg/apache/lucene/document/DateTools$Resolution;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDateTools_Resolution = { "Resolution", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x4019, 3, 9, 10, -1, -1, 11, -1 };
+  return &_OrgApacheLuceneDocumentDateTools_Resolution;
 }
 
 + (void)initialize {
@@ -282,42 +424,22 @@ OrgApacheLuceneDocumentDateTools_Resolution *OrgApacheLuceneDocumentDateTools_Re
     size_t allocSize = 7 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, YEAR) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    ((void) (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, YEAR) = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
     OrgApacheLuceneDocumentDateTools_Resolution_initWithInt_withNSString_withInt_(e, 4, @"YEAR", 0);
-    (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MONTH) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    ((void) (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MONTH) = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
     OrgApacheLuceneDocumentDateTools_Resolution_initWithInt_withNSString_withInt_(e, 6, @"MONTH", 1);
-    (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, DAY) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    ((void) (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, DAY) = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
     OrgApacheLuceneDocumentDateTools_Resolution_initWithInt_withNSString_withInt_(e, 8, @"DAY", 2);
-    (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, HOUR) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    ((void) (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, HOUR) = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
     OrgApacheLuceneDocumentDateTools_Resolution_initWithInt_withNSString_withInt_(e, 10, @"HOUR", 3);
-    (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MINUTE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    ((void) (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MINUTE) = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
     OrgApacheLuceneDocumentDateTools_Resolution_initWithInt_withNSString_withInt_(e, 12, @"MINUTE", 4);
-    (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, SECOND) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    ((void) (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, SECOND) = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
     OrgApacheLuceneDocumentDateTools_Resolution_initWithInt_withNSString_withInt_(e, 14, @"SECOND", 5);
-    (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MILLISECOND) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    ((void) (JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MILLISECOND) = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
     OrgApacheLuceneDocumentDateTools_Resolution_initWithInt_withNSString_withInt_(e, 17, @"MILLISECOND", 6);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentDateTools_Resolution)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "YEAR", "YEAR", 0x4019, "Lorg.apache.lucene.document.DateTools$Resolution;", &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, YEAR), NULL, .constantValue.asLong = 0 },
-    { "MONTH", "MONTH", 0x4019, "Lorg.apache.lucene.document.DateTools$Resolution;", &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MONTH), NULL, .constantValue.asLong = 0 },
-    { "DAY", "DAY", 0x4019, "Lorg.apache.lucene.document.DateTools$Resolution;", &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, DAY), NULL, .constantValue.asLong = 0 },
-    { "HOUR", "HOUR", 0x4019, "Lorg.apache.lucene.document.DateTools$Resolution;", &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, HOUR), NULL, .constantValue.asLong = 0 },
-    { "MINUTE", "MINUTE", 0x4019, "Lorg.apache.lucene.document.DateTools$Resolution;", &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MINUTE), NULL, .constantValue.asLong = 0 },
-    { "SECOND", "SECOND", 0x4019, "Lorg.apache.lucene.document.DateTools$Resolution;", &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, SECOND), NULL, .constantValue.asLong = 0 },
-    { "MILLISECOND", "MILLISECOND", 0x4019, "Lorg.apache.lucene.document.DateTools$Resolution;", &JreEnum(OrgApacheLuceneDocumentDateTools_Resolution, MILLISECOND), NULL, .constantValue.asLong = 0 },
-    { "formatLen_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "format_", NULL, 0x10, "Ljava.text.SimpleDateFormat;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.document.DateTools$Resolution;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDateTools_Resolution = { 2, "Resolution", "org.apache.lucene.document", "DateTools", 0x4019, 1, methods, 9, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/document/DateTools$Resolution;>;" };
-  return &_OrgApacheLuceneDocumentDateTools_Resolution;
 }
 
 @end
@@ -325,7 +447,7 @@ OrgApacheLuceneDocumentDateTools_Resolution *OrgApacheLuceneDocumentDateTools_Re
 void OrgApacheLuceneDocumentDateTools_Resolution_initWithInt_withNSString_withInt_(OrgApacheLuceneDocumentDateTools_Resolution *self, jint formatLen, NSString *__name, jint __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
   self->formatLen_ = formatLen;
-  JreStrongAssignAndConsume(&self->format_, new_JavaTextSimpleDateFormat_initWithNSString_withJavaUtilLocale_([@"yyyyMMddHHmmssSSS" substring:0 endIndex:formatLen], JreLoadStatic(JavaUtilLocale, ROOT)));
+  JreStrongAssignAndConsume(&self->format_, new_JavaTextSimpleDateFormat_initWithNSString_withJavaUtilLocale_([@"yyyyMMddHHmmssSSS" java_substring:0 endIndex:formatLen], JreLoadStatic(JavaUtilLocale, ROOT)));
   [self->format_ setTimeZoneWithJavaUtilTimeZone:JreLoadStatic(OrgApacheLuceneDocumentDateTools, GMT)];
 }
 
@@ -342,7 +464,7 @@ OrgApacheLuceneDocumentDateTools_Resolution *OrgApacheLuceneDocumentDateTools_Re
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 
@@ -355,91 +477,3 @@ OrgApacheLuceneDocumentDateTools_Resolution *OrgApacheLuceneDocumentDateTools_Re
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentDateTools_Resolution)
-
-@implementation OrgApacheLuceneDocumentDateTools_$1
-
-- (JavaUtilCalendar *)initialValue {
-  return JavaUtilCalendar_getInstanceWithJavaUtilTimeZone_withJavaUtilLocale_(JreLoadStatic(OrgApacheLuceneDocumentDateTools, GMT), JreLoadStatic(JavaUtilLocale, ROOT));
-}
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneDocumentDateTools_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initialValue", NULL, "Ljava.util.Calendar;", 0x4, NULL, "()Ljava/util/Calendar;" },
-    { "init", "", NULL, 0x0, NULL, NULL },
-  };
-  static const char *superclass_type_args[] = {"Ljava.util.Calendar;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDateTools_$1 = { 2, "", "org.apache.lucene.document", "DateTools", 0x8008, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/ThreadLocal<Ljava/util/Calendar;>;" };
-  return &_OrgApacheLuceneDocumentDateTools_$1;
-}
-
-@end
-
-void OrgApacheLuceneDocumentDateTools_$1_init(OrgApacheLuceneDocumentDateTools_$1 *self) {
-  JavaLangThreadLocal_init(self);
-}
-
-OrgApacheLuceneDocumentDateTools_$1 *new_OrgApacheLuceneDocumentDateTools_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentDateTools_$1, init)
-}
-
-OrgApacheLuceneDocumentDateTools_$1 *create_OrgApacheLuceneDocumentDateTools_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentDateTools_$1, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentDateTools_$1)
-
-@implementation OrgApacheLuceneDocumentDateTools_$2
-
-- (IOSObjectArray *)initialValue {
-  IOSObjectArray *arr = [IOSObjectArray arrayWithLength:((OrgApacheLuceneDocumentDateTools_Resolution *) nil_chk(JreLoadEnum(OrgApacheLuceneDocumentDateTools_Resolution, MILLISECOND)))->formatLen_ + 1 type:JavaTextSimpleDateFormat_class_()];
-  {
-    IOSObjectArray *a__ = OrgApacheLuceneDocumentDateTools_Resolution_values();
-    OrgApacheLuceneDocumentDateTools_Resolution * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneDocumentDateTools_Resolution * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneDocumentDateTools_Resolution *resolution = *b__++;
-      IOSObjectArray_Set(arr, ((OrgApacheLuceneDocumentDateTools_Resolution *) nil_chk(resolution))->formatLen_, (JavaTextSimpleDateFormat *) cast_chk([((JavaTextSimpleDateFormat *) nil_chk(resolution->format_)) clone], [JavaTextSimpleDateFormat class]));
-    }
-  }
-  return arr;
-}
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneDocumentDateTools_$2_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initialValue", NULL, "[Ljava.text.SimpleDateFormat;", 0x4, NULL, "()[Ljava/text/SimpleDateFormat;" },
-    { "init", "", NULL, 0x0, NULL, NULL },
-  };
-  static const char *superclass_type_args[] = {"[Ljava.text.SimpleDateFormat;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDateTools_$2 = { 2, "", "org.apache.lucene.document", "DateTools", 0x8008, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/ThreadLocal<[Ljava/text/SimpleDateFormat;>;" };
-  return &_OrgApacheLuceneDocumentDateTools_$2;
-}
-
-@end
-
-void OrgApacheLuceneDocumentDateTools_$2_init(OrgApacheLuceneDocumentDateTools_$2 *self) {
-  JavaLangThreadLocal_init(self);
-}
-
-OrgApacheLuceneDocumentDateTools_$2 *new_OrgApacheLuceneDocumentDateTools_$2_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentDateTools_$2, init)
-}
-
-OrgApacheLuceneDocumentDateTools_$2 *create_OrgApacheLuceneDocumentDateTools_$2_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentDateTools_$2, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentDateTools_$2)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchGeoPointDistanceQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchGeoPointDistanceQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQuery || defined(INCLUDE_OrgApacheLuceneSearchGeoPointDistanceQuery))
 #define OrgApacheLuceneSearchGeoPointDistanceQuery_
 
@@ -25,20 +31,20 @@
 @class OrgApacheLuceneSearchQuery;
 
 /*!
- @brief Implements a simple point distance query on a GeoPoint field.
- This is based on
- <code>org.apache.lucene.search.GeoPointInBBoxQuery</code> and is implemented using a two phase approach. First,
- like <code>GeoPointInBBoxQueryImpl</code> candidate terms are queried using the numeric ranges based on
- the morton codes of the min and max lat/lon pairs that intersect the boundary of the point-radius
- circle (see <code>org.apache.lucene.util.GeoUtils.lineCrossesSphere</code>. Terms
- passing this initial filter are then passed to a secondary <code>postFilter</code> method that verifies whether the
- decoded lat/lon point fall within the specified query distance (see <code>org.apache.lucene.util.SloppyMath.haversin</code>.
- All morton value comparisons are subject to the same precision tolerance defined in
+ @brief Implements a simple point distance query on a GeoPoint field.This is based on 
+ <code>org.apache.lucene.search.GeoPointInBBoxQuery</code> and is implemented using a two phase approach.
+ First,
+  like <code>GeoPointInBBoxQueryImpl</code> candidate terms are queried using the numeric ranges based on
+  the morton codes of the min and max lat/lon pairs that intersect the boundary of the point-radius
+  circle (see <code>org.apache.lucene.util.GeoUtils.lineCrossesSphere</code>. Terms
+  passing this initial filter are then passed to a secondary <code>postFilter</code> method that verifies whether the
+  decoded lat/lon point fall within the specified query distance (see <code>org.apache.lucene.util.SloppyMath.haversin</code>.
+  All morton value comparisons are subject to the same precision tolerance defined in 
  org.apache.lucene.util.GeoUtils#TOLERANCE and distance comparisons are subject to the accuracy of the
- haversine formula (from R.W. Sinnott, "Virtues of the Haversine", Sky and Telescope, vol. 68, no. 2, 1984, p. 159)
- Note: This query currently uses haversine which is a sloppy distance calculation (see above reference). For large
- queries one can expect upwards of 400m error. Vincenty shrinks this to ~40m error but pays a penalty for computing
- using the spheroid
+  haversine formula (from R.W. Sinnott, "Virtues of the Haversine", Sky and Telescope, vol. 68, no. 2, 1984, p. 159)
+  Note: This query currently uses haversine which is a sloppy distance calculation (see above reference). For large
+  queries one can expect upwards of 400m error. Vincenty shrinks this to ~40m error but pays a penalty for computing
+  using the spheroid
  */
 @interface OrgApacheLuceneSearchGeoPointDistanceQuery : OrgApacheLuceneSearchGeoPointInBBoxQuery {
  @public
@@ -52,10 +58,10 @@
 /*!
  @brief NOTE: radius is in meters.
  */
-- (instancetype)initWithNSString:(NSString *)field
-                      withDouble:(jdouble)centerLon
-                      withDouble:(jdouble)centerLat
-                      withDouble:(jdouble)radius;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                                withDouble:(jdouble)centerLon
+                                withDouble:(jdouble)centerLat
+                                withDouble:(jdouble)radius;
 
 - (jboolean)isEqual:(id)o;
 
@@ -77,6 +83,14 @@
                                                     withDouble:(jdouble)centerLat
                                                     withDouble:(jdouble)radius;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                                withDouble:(jdouble)arg1
+                                withDouble:(jdouble)arg2
+                                withDouble:(jdouble)arg3
+                                withDouble:(jdouble)arg4 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointDistanceQuery)
@@ -93,4 +107,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointDistanceQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQuery")

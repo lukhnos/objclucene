@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesCustomScoreProvider
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesCustomScoreProvider_) && (INCLUDE_ALL_OrgApacheLuceneQueriesCustomScoreProvider || defined(INCLUDE_OrgApacheLuceneQueriesCustomScoreProvider))
 #define OrgApacheLuceneQueriesCustomScoreProvider_
 
@@ -22,13 +28,13 @@
 @class OrgApacheLuceneSearchExplanation;
 
 /*!
- @brief An instance of this subclass should be returned by
+ @brief An instance of this subclass should be returned by 
  <code>CustomScoreQuery.getCustomScoreProvider</code>, if you want
- to modify the custom score calculation of a <code>CustomScoreQuery</code>.
+  to modify the custom score calculation of a <code>CustomScoreQuery</code>.
  <p>Since Lucene 2.9, queries operate on each segment of an index separately,
- so the protected <code>context</code> field can be used to resolve doc IDs,
- as the supplied <code>doc</code> ID is per-segment and without knowledge
- of the IndexReader you cannot access the document or DocValues.
+  so the protected <code>context</code> field can be used to resolve doc IDs,
+  as the supplied <code>doc</code> ID is per-segment and without knowledge
+  of the IndexReader you cannot access the document or DocValues.
  @since 2.9.2
  */
 @interface OrgApacheLuceneQueriesCustomScoreProvider : NSObject {
@@ -41,13 +47,13 @@
 /*!
  @brief Creates a new instance of the provider class for the given <code>IndexReader</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 /*!
  @brief Explain the custom score.
- Whenever overriding <code>customScore(int,float,float)</code>, 
- this method should also be overridden to provide the correct explanation
- for the part of the custom scoring.
+ Whenever overriding <code>customScore(int, float, float)</code>, 
+  this method should also be overridden to provide the correct explanation
+  for the part of the custom scoring.
  @param doc doc being explained.
  @param subQueryExpl explanation for the sub-query part.
  @param valSrcExpl explanation for the value source part.
@@ -59,9 +65,9 @@
 
 /*!
  @brief Explain the custom score.
- Whenever overriding <code>customScore(int,float,float[])</code>, 
- this method should also be overridden to provide the correct explanation
- for the part of the custom scoring.
+ Whenever overriding <code>customScore(int, float, float[])</code>, 
+  this method should also be overridden to provide the correct explanation
+  for the part of the custom scoring.
  @param doc doc being explained.
  @param subQueryExpl explanation for the sub-query part.
  @param valSrcExpls explanation for the value source part.
@@ -74,22 +80,22 @@
 /*!
  @brief Compute a custom score by the subQuery score and the <code>FunctionQuery</code> score.
  <p> 
- Subclasses can override this method to modify the custom score.
+  Subclasses can override this method to modify the custom score. 
  <p>
- If your custom scoring is different than the default herein you 
- should override at least one of the two customScore() methods.
- If the number of <code>function queries</code> is always &lt; 2 it is 
- sufficient to override this customScore() method, which is simpler. 
+  If your custom scoring is different than the default herein you 
+  should override at least one of the two customScore() methods.
+  If the number of <code>function queries</code> is always &lt; 2 it is 
+  sufficient to override this customScore() method, which is simpler.  
  <p>
- The default computation herein is a multiplication of the two scores:
+  The default computation herein is a multiplication of the two scores: 
  @code
 
-     ModifiedScore = subQueryScore * valSrcScore
+      ModifiedScore = subQueryScore * valSrcScore 
   
 @endcode
  @param doc id of scored doc.
  @param subQueryScore score of that doc by the subQuery.
- @param valSrcScore score of that doc by the <code>FunctionQuery</code>.
+ @param valSrcScore score of that doc by the <code>FunctionQuery</code> .
  @return custom score.
  */
 - (jfloat)customScoreWithInt:(jint)doc
@@ -97,32 +103,36 @@
                    withFloat:(jfloat)valSrcScore;
 
 /*!
- @brief Compute a custom score by the subQuery score and a number of 
+ @brief Compute a custom score by the subQuery score and a number of  
  <code>org.apache.lucene.queries.function.FunctionQuery</code> scores.
  <p> 
- Subclasses can override this method to modify the custom score.  
+  Subclasses can override this method to modify the custom score.   
  <p>
- If your custom scoring is different than the default herein you 
- should override at least one of the two customScore() methods.
- If the number of <code>function queries</code> is always &lt; 2 it is 
- sufficient to override the other 
+  If your custom scoring is different than the default herein you 
+  should override at least one of the two customScore() methods.
+  If the number of <code>function queries</code> is always &lt; 2 it is 
+  sufficient to override the other  
  <code>customScore()</code> 
- method, which is simpler. 
+  method, which is simpler.  
  <p>
- The default computation herein is a multiplication of given scores:
+  The default computation herein is a multiplication of given scores: 
  @code
 
-     ModifiedScore = valSrcScore * valSrcScores[0] * valSrcScores[1] * ...
+      ModifiedScore = valSrcScore * valSrcScores[0] * valSrcScores[1] * ... 
   
 @endcode
  @param doc id of scored doc.
  @param subQueryScore score of that doc by the subQuery.
- @param valSrcScores scores of that doc by the <code>FunctionQuery</code>.
+ @param valSrcScores scores of that doc by the <code>FunctionQuery</code> .
  @return custom score.
  */
 - (jfloat)customScoreWithInt:(jint)doc
                    withFloat:(jfloat)subQueryScore
               withFloatArray:(IOSFloatArray *)valSrcScores;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -140,4 +150,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesCustomScoreProvider)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesCustomScoreProvider")

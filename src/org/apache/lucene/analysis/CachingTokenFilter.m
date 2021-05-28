@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/analysis/CachingTokenFilter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
@@ -13,6 +11,10 @@
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/CachingTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCachingTokenFilter () {
  @public
@@ -82,20 +84,31 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisCachingTokenFilter_fi
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "CachingTokenFilter", NULL, 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x11, NULL, NULL },
-    { "fillCache", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "isCached", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(reset);
+  methods[2].selector = @selector(incrementToken);
+  methods[3].selector = @selector(end);
+  methods[4].selector = @selector(fillCache);
+  methods[5].selector = @selector(isCached);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "cache_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/util/AttributeSource$State;>;", .constantValue.asLong = 0 },
-    { "iterator_", NULL, 0x2, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<Lorg/apache/lucene/util/AttributeSource$State;>;", .constantValue.asLong = 0 },
-    { "finalState_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
+    { "cache_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 2, -1 },
+    { "iterator_", "LJavaUtilIterator;", .constantValue.asLong = 0, 0x2, -1, -1, 3, -1 },
+    { "finalState_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCachingTokenFilter = { 2, "CachingTokenFilter", "org.apache.lucene.analysis", NULL, 0x11, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", "Ljava/util/List<Lorg/apache/lucene/util/AttributeSource$State;>;", "Ljava/util/Iterator<Lorg/apache/lucene/util/AttributeSource$State;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCachingTokenFilter = { "CachingTokenFilter", "org.apache.lucene.analysis", ptrTable, methods, fields, 7, 0x11, 6, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCachingTokenFilter;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanWeight
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanWeight || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanWeight))
 #define OrgApacheLuceneSearchSpansSpanWeight_
 
@@ -23,6 +29,7 @@
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
+@class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneSearchSimilaritiesSimilarity;
 @class OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
@@ -33,8 +40,7 @@
 @protocol JavaUtilMap;
 
 /*!
- @brief Expert-only.
- Public for use by other weight implementations
+ @brief Expert-only.Public for use by other weight implementations
  */
 @interface OrgApacheLuceneSearchSpansSpanWeight : OrgApacheLuceneSearchWeight {
  @public
@@ -49,13 +55,12 @@
  @brief Create a new SpanWeight
  @param query the parent query
  @param searcher the IndexSearcher to query against
- @param termContexts a map of terms to termcontexts for use in building the similarity.  May
- be null if scores are not required
- @throws IOException on error
+ @param termContexts a map of terms to termcontexts for use in building the similarity.  May                      be null if scores are not required
+ @throw IOExceptionon error
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)query
-                     withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                            withJavaUtilMap:(id<JavaUtilMap>)termContexts;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)query
+                               withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                      withJavaUtilMap:(id<JavaUtilMap>)termContexts;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc;
@@ -73,7 +78,7 @@
  @param ctx a LeafReaderContext for this Spans
  @param requiredPostings the postings information required
  @return a Spans
- @throws IOException on error
+ @throw IOExceptionon error
  */
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)ctx
                                      withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
@@ -84,6 +89,10 @@
                  withFloat:(jfloat)topLevelBoost;
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -106,6 +115,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpansSpanWeight_Postings_Enum) {
   OrgApacheLuceneSearchSpansSpanWeight_Postings_Enum_POSITIONS = 0,
   OrgApacheLuceneSearchSpansSpanWeight_Postings_Enum_PAYLOADS = 1,
@@ -114,29 +125,25 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpansSpanWeight_Postings_Enum) 
 
 /*!
  @brief Enumeration defining what postings information should be retrieved from the
- index for a given Spans
+  index for a given Spans
  */
-@interface OrgApacheLuceneSearchSpansSpanWeight_Postings : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneSearchSpansSpanWeight_Postings : JavaLangEnum
 
-+ (OrgApacheLuceneSearchSpansSpanWeight_Postings *)POSITIONS;
-
-+ (OrgApacheLuceneSearchSpansSpanWeight_Postings *)PAYLOADS;
-
-+ (OrgApacheLuceneSearchSpansSpanWeight_Postings *)OFFSETS;
-
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSpansSpanWeight_Postings *POSITIONS NS_SWIFT_NAME(POSITIONS);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSpansSpanWeight_Postings *PAYLOADS NS_SWIFT_NAME(PAYLOADS);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSpansSpanWeight_Postings *OFFSETS NS_SWIFT_NAME(OFFSETS);
 #pragma mark Public
 
 - (OrgApacheLuceneSearchSpansSpanWeight_Postings *)atLeastWithOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)postings;
 
 - (jint)getRequiredPostings;
 
-#pragma mark Package-Private
++ (OrgApacheLuceneSearchSpansSpanWeight_Postings *)valueOfWithNSString:(NSString *)name;
 
 + (IOSObjectArray *)values;
 
-+ (OrgApacheLuceneSearchSpansSpanWeight_Postings *)valueOfWithNSString:(NSString *)name;
+#pragma mark Package-Private
 
-- (id)copyWithZone:(NSZone *)zone;
 - (OrgApacheLuceneSearchSpansSpanWeight_Postings_Enum)toNSEnum;
 
 @end
@@ -146,16 +153,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpansSpanWeight_Postings)
 /*! INTERNAL ONLY - Use enum accessors declared below. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_values_[];
 
-inline OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_get_POSITIONS();
+inline OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_get_POSITIONS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpansSpanWeight_Postings, POSITIONS)
 
-inline OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_get_PAYLOADS();
+inline OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_get_PAYLOADS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpansSpanWeight_Postings, PAYLOADS)
 
-inline OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_get_OFFSETS();
+inline OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_get_OFFSETS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpansSpanWeight_Postings, OFFSETS)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSpansSpanWeight_Postings_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSpansSpanWeight_Postings_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_valueOfWithNSString_(NSString *name);
 
@@ -165,4 +172,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanWeight")

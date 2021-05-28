@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory))
 #define OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_
 
@@ -27,12 +33,12 @@
 /*!
  @brief Factory for <code>ReverseStringFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_rvsstr" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.ReverseStringFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_rvsstr" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.ReverseStringFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  @since solr 1.4
  */
@@ -43,7 +49,7 @@
 /*!
  @brief Creates a new ReverseStringFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisReverseReverseStringFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
@@ -61,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisReverseReverseStringFilterFact
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory")

@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Comparator.h"
 #include "org/apache/lucene/index/FilteredTermsEnum.h"
 #include "org/apache/lucene/index/Terms.h"
@@ -17,6 +16,10 @@
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefHash.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/TermsQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchJoinTermsQuery () {
  @public
@@ -54,10 +57,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum,
 
 @implementation OrgApacheLuceneSearchJoinTermsQuery
 
-- (instancetype)initWithNSString:(NSString *)field
-  withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
-withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms {
-  OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(self, field, fromQuery, terms);
+- (instancetype)initPackagePrivateWithNSString:(NSString *)field
+                withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
+           withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms {
+  OrgApacheLuceneSearchJoinTermsQuery_initPackagePrivateWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(self, field, fromQuery, terms);
   return self;
 }
 
@@ -74,13 +77,13 @@ withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms {
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) {
+  if (JreObjectEqualsEquals(self, obj)) {
     return true;
   }
   if (![super isEqual:obj]) {
     return false;
   }
-  if ([self getClass] != (id) [nil_chk(obj) getClass]) {
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(obj) java_getClass])) {
     return false;
   }
   OrgApacheLuceneSearchJoinTermsQuery *other = (OrgApacheLuceneSearchJoinTermsQuery *) cast_chk(obj, [OrgApacheLuceneSearchJoinTermsQuery class]);
@@ -105,38 +108,47 @@ withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneUtilBytesRefHash:", "TermsQuery", NULL, 0x0, NULL, NULL },
-    { "getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x4, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x4, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 8, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithNSString:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneUtilBytesRefHash:);
+  methods[1].selector = @selector(getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:);
+  methods[2].selector = @selector(toStringWithNSString:);
+  methods[3].selector = @selector(isEqual:);
+  methods[4].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "terms_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefHash;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ords_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fromQuery_", NULL, 0x12, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
+    { "terms_", "LOrgApacheLuceneUtilBytesRefHash;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "ords_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fromQuery_", "LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.join.TermsQuery$SeekingTermSetTermsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsQuery = { 2, "TermsQuery", "org.apache.lucene.search.join", NULL, 0x0, 5, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneSearchQuery;LOrgApacheLuceneUtilBytesRefHash;", "getTermsEnum", "LOrgApacheLuceneIndexTerms;LOrgApacheLuceneUtilAttributeSource;", "LJavaIoIOException;", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "LOrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsQuery = { "TermsQuery", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x0, 5, 3, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinTermsQuery;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(OrgApacheLuceneSearchJoinTermsQuery *self, NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms) {
+void OrgApacheLuceneSearchJoinTermsQuery_initPackagePrivateWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(OrgApacheLuceneSearchJoinTermsQuery *self, NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms) {
   OrgApacheLuceneSearchMultiTermQuery_initWithNSString_(self, field);
   JreStrongAssign(&self->fromQuery_, fromQuery);
   JreStrongAssign(&self->terms_, terms);
   JreStrongAssign(&self->ords_, [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(terms)) sortWithJavaUtilComparator:OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator()]);
 }
 
-OrgApacheLuceneSearchJoinTermsQuery *new_OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsQuery, initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_, field, fromQuery, terms)
+OrgApacheLuceneSearchJoinTermsQuery *new_OrgApacheLuceneSearchJoinTermsQuery_initPackagePrivateWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsQuery, initPackagePrivateWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_, field, fromQuery, terms)
 }
 
-OrgApacheLuceneSearchJoinTermsQuery *create_OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsQuery, initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_, field, fromQuery, terms)
+OrgApacheLuceneSearchJoinTermsQuery *create_OrgApacheLuceneSearchJoinTermsQuery_initPackagePrivateWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsQuery, initPackagePrivateWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_, field, fromQuery, terms)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsQuery)
@@ -151,7 +163,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsQuery)
 }
 
 - (OrgApacheLuceneUtilBytesRef *)nextSeekTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)currentTerm {
-  OrgApacheLuceneUtilBytesRef *temp = seekTerm_;
+  OrgApacheLuceneUtilBytesRef *temp = JreRetainedLocalValue(seekTerm_);
   JreStrongAssign(&seekTerm_, nil);
   return temp;
 }
@@ -160,7 +172,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsQuery)
   if ([((id<JavaUtilComparator>) nil_chk(comparator_)) compareWithId:term withId:lastTerm_] > 0) {
     return JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END);
   }
-  OrgApacheLuceneUtilBytesRef *currentTerm = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(terms_)) getWithInt:IOSIntArray_Get(nil_chk(ords_), upto_) withOrgApacheLuceneUtilBytesRef:spare_];
+  OrgApacheLuceneUtilBytesRef *currentTerm = JreRetainedLocalValue([((OrgApacheLuceneUtilBytesRefHash *) nil_chk(terms_)) getWithInt:IOSIntArray_Get(nil_chk(ords_), upto_) withOrgApacheLuceneUtilBytesRef:spare_]);
   if ([comparator_ compareWithId:term withId:currentTerm] == 0) {
     if (upto_ == lastElement_) {
       return JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES);
@@ -208,22 +220,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilBytesRefHash:withIntArray:", "SeekingTermSetTermsEnum", NULL, 0x0, NULL, NULL },
-    { "nextSeekTermWithOrgApacheLuceneUtilBytesRef:", "nextSeekTerm", "Lorg.apache.lucene.util.BytesRef;", 0x4, "Ljava.io.IOException;", NULL },
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x4, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x4, 4, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilBytesRefHash:withIntArray:);
+  methods[1].selector = @selector(nextSeekTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(acceptWithOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "terms_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefHash;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ords_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastElement_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastTerm_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "spare_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "seekTerm_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "upto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "terms_", "LOrgApacheLuceneUtilBytesRefHash;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "ords_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lastElement_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lastTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "spare_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "comparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
+    { "seekTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "upto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum = { 2, "SeekingTermSetTermsEnum", "org.apache.lucene.search.join", "TermsQuery", 0x8, 3, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTermsEnum;LOrgApacheLuceneUtilBytesRefHash;[I", "nextSeekTerm", "LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "accept", "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneSearchJoinTermsQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum = { "SeekingTermSetTermsEnum", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8, 3, 8, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum;
 }
 

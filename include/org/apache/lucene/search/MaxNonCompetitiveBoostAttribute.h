@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute_) && (INCLUDE_ALL_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute || defined(INCLUDE_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute))
 #define OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute_
 
@@ -23,18 +29,18 @@
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
- @brief Add this <code>Attribute</code> to a fresh <code>AttributeSource</code> before calling
+ @brief Add this <code>Attribute</code> to a fresh <code>AttributeSource</code> before calling 
  <code>MultiTermQuery.getTermsEnum(Terms,AttributeSource)</code>.
  <code>FuzzyQuery</code> is using this to control its internal behaviour
- to only return competitive terms.
+  to only return competitive terms. 
  <p><b>Please note:</b> This attribute is intended to be added by the <code>MultiTermQuery.RewriteMethod</code>
- to an empty <code>AttributeSource</code> that is shared for all segments
- during query rewrite. This attribute source is passed to all segment enums
- on <code>MultiTermQuery.getTermsEnum(Terms,AttributeSource)</code>.
- <code>TopTermsRewrite</code> uses this attribute to
- inform all enums about the current boost, that is not competitive.
+  to an empty <code>AttributeSource</code> that is shared for all segments
+  during query rewrite. This attribute source is passed to all segment enums
+  on <code>MultiTermQuery.getTermsEnum(Terms,AttributeSource)</code>.
+  <code>TopTermsRewrite</code> uses this attribute to
+  inform all enums about the current boost, that is not competitive.
  */
-@protocol OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
  @brief This is the maximum boost that would not be competitive.
@@ -42,8 +48,7 @@
 - (void)setMaxNonCompetitiveBoostWithFloat:(jfloat)maxNonCompetitiveBoost;
 
 /*!
- @brief This is the maximum boost that would not be competitive.
- Default is negative infinity, which means every term is competitive. 
+ @brief This is the maximum boost that would not be competitive.Default is negative infinity, which means every term is competitive.
  */
 - (jfloat)getMaxNonCompetitiveBoost;
 
@@ -53,8 +58,7 @@
 - (void)setCompetitiveTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)competitiveTerm;
 
 /*!
- @brief This is the term or <code>null</code> of the term that triggered the boost change.
- Default is <code>null</code>, which means every term is competitoive. 
+ @brief This is the term or <code>null</code> of the term that triggered the boost change.Default is <code>null</code>, which means every term is competitoive.
  */
 - (OrgApacheLuceneUtilBytesRef *)getCompetitiveTerm;
 
@@ -66,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute")

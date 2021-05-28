@@ -13,6 +13,10 @@
 #include "org/apache/lucene/index/IndexOptions.h"
 #include "org/apache/lucene/util/GeoUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/GeoPointField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentGeoPointField)
 
 OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED;
@@ -48,6 +52,27 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
   return self;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withDouble:withDouble:withOrgApacheLuceneDocumentField_Store:);
+  methods[1].selector = @selector(initWithNSString:withDouble:withDouble:withOrgApacheLuceneDocumentFieldType:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "PRECISION_STEP", "I", .constantValue.asInt = OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP, 0x19, -1, -1, -1, -1 },
+    { "TYPE_NOT_STORED", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 2, -1, -1 },
+    { "TYPE_STORED", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;DDLOrgApacheLuceneDocumentField_Store;", "LNSString;DDLOrgApacheLuceneDocumentFieldType;", &OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED, &OrgApacheLuceneDocumentGeoPointField_TYPE_STORED };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentGeoPointField = { "GeoPointField", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x11, 2, 3, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneDocumentGeoPointField;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentGeoPointField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED, new_OrgApacheLuceneDocumentFieldType_init());
@@ -73,20 +98,6 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentGeoPointField)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDouble:withDouble:withOrgApacheLuceneDocumentField_Store:", "GeoPointField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withDouble:withDouble:withOrgApacheLuceneDocumentFieldType:", "GeoPointField", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "PRECISION_STEP", "PRECISION_STEP", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP },
-    { "TYPE_NOT_STORED", "TYPE_NOT_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED, NULL, .constantValue.asLong = 0 },
-    { "TYPE_STORED", "TYPE_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentGeoPointField_TYPE_STORED, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentGeoPointField = { 2, "GeoPointField", "org.apache.lucene.document", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentGeoPointField;
 }
 
 @end

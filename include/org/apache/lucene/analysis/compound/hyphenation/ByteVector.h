@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationByteVector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundHyphenationByteVector_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationByteVector || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationByteVector))
 #define OrgApacheLuceneAnalysisCompoundHyphenationByteVector_
 
@@ -20,25 +26,24 @@
 
 /*!
  @brief This class implements a simple byte vector with access to the underlying
- array.
- This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified. 
+  array.
+ This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified.
  */
 @interface OrgApacheLuceneAnalysisCompoundHyphenationByteVector : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithByteArray:(IOSByteArray *)a;
+- (instancetype __nonnull)initWithByteArray:(IOSByteArray *)a;
 
-- (instancetype)initWithByteArray:(IOSByteArray *)a
-                          withInt:(jint)capacity;
+- (instancetype __nonnull)initWithByteArray:(IOSByteArray *)a
+                                    withInt:(jint)capacity;
 
-- (instancetype)initWithInt:(jint)capacity;
+- (instancetype __nonnull)initWithInt:(jint)capacity;
 
 /*!
- @brief This is to implement memory allocation in the array.
- Like malloc().
+ @brief This is to implement memory allocation in the array.Like malloc().
  */
 - (jint)alloc__WithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
 
@@ -67,9 +72,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCompoundHyphenationByteVector)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, jint capacity);
 
@@ -93,4 +98,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationByteVector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationByteVector")

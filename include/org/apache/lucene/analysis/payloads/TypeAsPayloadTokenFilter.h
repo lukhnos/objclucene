@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter))
 #define OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_
 
@@ -30,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -48,4 +54,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter")

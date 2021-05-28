@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter))
 #define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_
 
@@ -26,31 +32,34 @@
 /*!
  @brief Characters before the delimiter are the "token", those after are the payload.
  <p>
- For example, if the delimiter is '|', then for the string "foo|bar", foo is the token
- and "bar" is a payload.
+  For example, if the delimiter is '|', then for the string "foo|bar", foo is the token
+  and "bar" is a payload. 
  <p>
- Note, you can also include a <code>org.apache.lucene.analysis.payloads.PayloadEncoder</code> to convert the payload in an appropriate way (from characters to bytes).
+  Note, you can also include a <code>org.apache.lucene.analysis.payloads.PayloadEncoder</code> to convert the payload in an appropriate way (from characters to bytes). 
  <p>
- Note make sure your Tokenizer doesn't split on the delimiter, or this won't work
+  Note make sure your Tokenizer doesn't split on the delimiter, or this won't work
  - seealso: PayloadEncoder
  */
 @interface OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter : OrgApacheLuceneAnalysisTokenFilter
-
-+ (jchar)DEFAULT_DELIMITER;
+@property (readonly, class) jchar DEFAULT_DELIMITER NS_SWIFT_NAME(DEFAULT_DELIMITER);
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                  withChar:(jchar)delimiter
-         withOrgApacheLuceneAnalysisPayloadsPayloadEncoder:(id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder>)encoder;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                            withChar:(jchar)delimiter
+                   withOrgApacheLuceneAnalysisPayloadsPayloadEncoder:(id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder>)encoder;
 
 - (jboolean)incrementToken;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter)
 
-inline jchar OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_get_DEFAULT_DELIMITER();
+inline jchar OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_get_DEFAULT_DELIMITER(void);
 #define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_DEFAULT_DELIMITER '|'
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter, DEFAULT_DELIMITER, jchar)
 
@@ -64,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenF
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter")

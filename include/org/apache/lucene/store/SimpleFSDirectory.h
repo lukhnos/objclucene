@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreSimpleFSDirectory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreSimpleFSDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSDirectory || defined(INCLUDE_OrgApacheLuceneStoreSimpleFSDirectory))
 #define OrgApacheLuceneStoreSimpleFSDirectory_
 
@@ -27,23 +33,22 @@
 
 /*!
  @brief A straightforward implementation of <code>FSDirectory</code>
- using <code>Files.newByteChannel(Path,org.lukhnos.portmobile.file.StandardOpenOption)</code>  
- However, this class has
- poor concurrent performance (multiple threads will
- bottleneck) as it synchronizes when multiple threads
- read from the same file.
- It's usually better to use
- <code>NIOFSDirectory</code> or <code>MMapDirectory</code> instead.
+   using <code>Files.newByteChannel(Path, org.lukhnos.portmobile.file.StandardOpenOption)</code>  
+   However, this class has
+   poor concurrent performance (multiple threads will
+   bottleneck) as it synchronizes when multiple threads
+   read from the same file.It's usually better to use
+   <code>NIOFSDirectory</code> or <code>MMapDirectory</code> instead.
  <p>
- <b>NOTE:</b> Accessing this class either directly or
- indirectly from a thread while it's interrupted can close the
- underlying file descriptor immediately if at the same time the thread is
- blocked on IO. The file descriptor will remain closed and subsequent access
- to <code>SimpleFSDirectory</code> will throw a <code>ClosedChannelException</code>. If
- your application uses either <code>Thread.interrupt()</code> or
+  <b>NOTE:</b> Accessing this class either directly or
+  indirectly from a thread while it's interrupted can close the
+  underlying file descriptor immediately if at the same time the thread is
+  blocked on IO. The file descriptor will remain closed and subsequent access
+  to <code>SimpleFSDirectory</code> will throw a <code>ClosedChannelException</code>. If
+  your application uses either <code>Thread.interrupt()</code> or 
  <code>Future.cancel(boolean)</code> you should use the legacy <code>RAFDirectory</code>
- from the Lucene <code>misc</code> module in favor of <code>SimpleFSDirectory</code>.
- </p>
+  from the Lucene <code>misc</code> module in favor of <code>SimpleFSDirectory</code>.
+  </p>
  */
 @interface OrgApacheLuceneStoreSimpleFSDirectory : OrgApacheLuceneStoreFSDirectory
 
@@ -53,19 +58,19 @@
  @brief Create a new SimpleFSDirectory for the named location and <code>FSLockFactory.getDefault()</code>.
  The directory is created at the named location if it does not yet exist.
  @param path the path of the directory
- @throws IOException if there is a low-level I/O error
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
 /*!
  @brief Create a new SimpleFSDirectory for the named location.
  The directory is created at the named location if it does not yet exist.
  @param path the path of the directory
  @param lockFactory the lock factory to use
- @throws IOException if there is a low-level I/O error
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                 withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
+                           withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
 
 /*!
  @brief Creates an IndexInput for the file with the given name.
@@ -130,17 +135,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSDirectory)
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)resourceDesc
-withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)channel
-withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDesc
+    withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)channel
+         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
-- (instancetype)initWithNSString:(NSString *)resourceDesc
-withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)channel
-                        withLong:(jlong)off
-                        withLong:(jlong)length
-                         withInt:(jint)bufferSize;
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDesc
+    withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)channel
+                                  withLong:(jlong)off
+                                  withLong:(jlong)length
+                                   withInt:(jint)bufferSize;
 
-- (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *)clone;
+- (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *)java_clone;
 
 - (void)close;
 
@@ -159,6 +164,16 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
                           withInt:(jint)len;
 
 - (void)seekInternalWithLong:(jlong)pos;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                                   withInt:(jint)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -182,4 +197,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexIn
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSDirectory")

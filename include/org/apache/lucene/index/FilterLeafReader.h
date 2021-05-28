@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFilterLeafReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFilterLeafReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader || defined(INCLUDE_OrgApacheLuceneIndexFilterLeafReader))
 #define OrgApacheLuceneIndexFilterLeafReader_
 
@@ -33,23 +39,23 @@
 
 /*!
  @brief A <code>FilterLeafReader</code> contains another LeafReader, which it
- uses as its basic source of data, possibly transforming the data along the
- way or providing additional functionality.
- The class
+  uses as its basic source of data, possibly transforming the data along the
+  way or providing additional functionality.The class 
  <code>FilterLeafReader</code> itself simply implements all abstract methods
- of <code>IndexReader</code> with versions that pass all requests to the
- contained index reader. Subclasses of <code>FilterLeafReader</code> may
- further override some of these methods and may also provide additional
- methods and fields.
+  of <code>IndexReader</code> with versions that pass all requests to the
+  contained index reader.
+ Subclasses of <code>FilterLeafReader</code> may
+  further override some of these methods and may also provide additional
+  methods and fields. 
  <p><b>NOTE</b>: If you override <code>getLiveDocs()</code>, you will likely need
- to override <code>numDocs()</code> as well and vice-versa.
+  to override <code>numDocs()</code> as well and vice-versa. 
  <p><b>NOTE</b>: If this <code>FilterLeafReader</code> does not change the
- content the contained reader, you could consider overriding
- <code>getCoreCacheKey()</code> so that
+  content the contained reader, you could consider overriding 
+ <code>getCoreCacheKey()</code> so that 
  <code>CachingWrapperQuery</code> shares the same entries for this atomic reader
- and the wrapped one. <code>getCombinedCoreAndDeletesKey()</code> could be
- overridden as well if the <code>live docs</code> are not changed
- either.
+  and the wrapped one. <code>getCombinedCoreAndDeletesKey()</code> could be
+  overridden as well if the <code>live docs</code> are not changed
+  either.
  */
 @interface OrgApacheLuceneIndexFilterLeafReader : OrgApacheLuceneIndexLeafReader {
  @public
@@ -66,7 +72,7 @@
  <p>Note that base reader is closed if this FilterLeafReader is closed.</p>
  @param inArg specified base reader.
  */
-- (instancetype)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg;
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
@@ -112,13 +118,17 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Get the wrapped instance by <code>reader</code> as long as this reader is
- an instance of <code>FilterLeafReader</code>.
+   an instance of <code>FilterLeafReader</code>.
  */
 + (OrgApacheLuceneIndexLeafReader *)unwrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
 #pragma mark Protected
 
 - (void)doClose;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -150,7 +160,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader)
 
 /*!
  @brief Base class for filtering <code>Fields</code>
- implementations.
+   implementations.
  */
 @interface OrgApacheLuceneIndexFilterLeafReader_FilterFields : OrgApacheLuceneIndexFields {
  @public
@@ -166,7 +176,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader)
  @brief Creates a new FilterFields.
  @param inArg the underlying Fields instance.
  */
-- (instancetype)initWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)inArg;
 
 - (id<JavaUtilIterator>)iterator;
 
@@ -175,6 +185,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader)
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -204,8 +218,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterFields)
 /*!
  @brief Base class for filtering <code>Terms</code> implementations.
  <p><b>NOTE</b>: If the order of terms and documents is not changed, and if
- these terms are going to be intersected with automata, you could consider
- overriding <code>intersect</code> for better performance.
+  these terms are going to be intersected with automata, you could consider
+  overriding <code>intersect</code> for better performance.
  */
 @interface OrgApacheLuceneIndexFilterLeafReader_FilterTerms : OrgApacheLuceneIndexTerms {
  @public
@@ -221,7 +235,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterFields)
  @brief Creates a new FilterTerms
  @param inArg the underlying Terms instance.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg;
 
 - (jint)getDocCount;
 
@@ -242,6 +256,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterFields)
 - (OrgApacheLuceneIndexTermsEnum *)iterator;
 
 - (jlong)size;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -288,7 +306,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterTerms)
  @brief Creates a new FilterTermsEnum
  @param inArg the underlying TermsEnum instance.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)inArg;
 
 - (OrgApacheLuceneUtilAttributeSource *)attributes;
 
@@ -308,6 +326,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterTerms)
 - (OrgApacheLuceneUtilBytesRef *)term;
 
 - (jlong)totalTermFreq;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -352,7 +374,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum)
  @brief Create a new FilterPostingsEnum
  @param inArg the underlying PostingsEnum instance.
  */
-- (instancetype)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -374,6 +396,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum)
 
 - (jint)startOffset;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum)
@@ -390,4 +416,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEn
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader")

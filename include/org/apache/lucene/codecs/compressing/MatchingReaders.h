@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingMatchingReaders
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingMatchingReaders_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingMatchingReaders || defined(INCLUDE_OrgApacheLuceneCodecsCompressingMatchingReaders))
 #define OrgApacheLuceneCodecsCompressingMatchingReaders_
 
@@ -21,14 +27,14 @@
 
 /*!
  @brief Computes which segments have identical field name to number mappings,
- which allows stored fields and term vectors in this codec to be bulk-merged.
+  which allows stored fields and term vectors in this codec to be bulk-merged.
  */
 @interface OrgApacheLuceneCodecsCompressingMatchingReaders : NSObject {
  @public
   /*!
    @brief <code>SegmentReader</code>s that have identical field
- name/number mapping, so their stored fields and term
- vectors may be bulk merged.
+  name/number mapping, so their stored fields and term
+  vectors may be bulk merged.
    */
   IOSBooleanArray *matchingReaders_;
   /*!
@@ -39,7 +45,11 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -47,14 +57,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingMatchingReaders)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingMatchingReaders, matchingReaders_, IOSBooleanArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneCodecsCompressingMatchingReaders *self, OrgApacheLuceneIndexMergeState *mergeState);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsCompressingMatchingReaders_initPackagePrivateWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneCodecsCompressingMatchingReaders *self, OrgApacheLuceneIndexMergeState *mergeState);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingMatchingReaders *new_OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMergeState *mergeState) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingMatchingReaders *new_OrgApacheLuceneCodecsCompressingMatchingReaders_initPackagePrivateWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMergeState *mergeState) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingMatchingReaders *create_OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMergeState *mergeState);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingMatchingReaders *create_OrgApacheLuceneCodecsCompressingMatchingReaders_initPackagePrivateWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMergeState *mergeState);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingMatchingReaders)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingMatchingReaders")

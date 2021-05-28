@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTermVectorsConsumer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTermVectorsConsumer_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumer || defined(INCLUDE_OrgApacheLuceneIndexTermVectorsConsumer))
 #define OrgApacheLuceneIndexTermVectorsConsumer_
 
@@ -38,10 +44,10 @@
    @brief Scratch term used by TermVectorsConsumerPerField.finishDocument.
    */
   OrgApacheLuceneUtilBytesRef *flushTerm_;
-  OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter_;
+  WEAK_ OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter_;
   /*!
    @brief Used by TermVectorsConsumerPerField when serializing
- the term vectors.
+   the term vectors.
    */
   OrgApacheLuceneIndexByteSliceReader *vectorSliceReaderPos_;
   OrgApacheLuceneIndexByteSliceReader *vectorSliceReaderOff_;
@@ -52,7 +58,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter;
 
 - (void)abort;
 
@@ -65,7 +71,7 @@
 
 /*!
  @brief Fills in no-term-vectors for all docs we haven't seen
- since the last doc that had term vectors.
+   since the last doc that had term vectors.
  */
 - (void)fillWithInt:(jint)docID;
 
@@ -78,24 +84,33 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 
 - (void)startDocument;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)arg0
+                                                                                 withBoolean:(jboolean)arg1
+                                                           withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)arg2 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTermVectorsConsumer)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumer, writer_, OrgApacheLuceneCodecsTermVectorsWriter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumer, flushTerm_, OrgApacheLuceneUtilBytesRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumer, docWriter_, OrgApacheLuceneIndexDocumentsWriterPerThread *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumer, vectorSliceReaderPos_, OrgApacheLuceneIndexByteSliceReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumer, vectorSliceReaderOff_, OrgApacheLuceneIndexByteSliceReader *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexTermVectorsConsumer *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexTermVectorsConsumer_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexTermVectorsConsumer *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumer *new_OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumer *new_OrgApacheLuceneIndexTermVectorsConsumer_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumer *create_OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter);
+FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumer *create_OrgApacheLuceneIndexTermVectorsConsumer_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermVectorsConsumer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumer")

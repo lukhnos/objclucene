@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_
 
@@ -29,8 +35,8 @@
 /*!
  @brief Retrieves <code>FunctionValues</code> instances for multi-valued string based fields.
  <p>
- A SortedSetDocValues contains multiple values for a field, so this 
- technique "selects" a value as the representative value for the document.
+  A SortedSetDocValues contains multiple values for a field, so this 
+  technique "selects" a value as the representative value for the document.
  - seealso: SortedSetSelector
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource {
@@ -40,9 +46,9 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
 
-- (instancetype)initWithNSString:(NSString *)field
+- (instancetype __nonnull)initWithNSString:(NSString *)field
 withOrgApacheLuceneSearchSortedSetSelector_Type:(OrgApacheLuceneSearchSortedSetSelector_Type *)selector;
 
 - (NSString *)description__;
@@ -78,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFie
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource")

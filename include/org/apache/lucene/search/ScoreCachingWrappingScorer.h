@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchScoreCachingWrappingScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchScoreCachingWrappingScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchScoreCachingWrappingScorer || defined(INCLUDE_OrgApacheLuceneSearchScoreCachingWrappingScorer))
 #define OrgApacheLuceneSearchScoreCachingWrappingScorer_
 
@@ -21,19 +27,20 @@
 #include "org/apache/lucene/search/FilterScorer.h"
 
 @class OrgApacheLuceneSearchScorer;
+@class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilCollection;
 
 /*!
  @brief A <code>Scorer</code> which wraps another scorer and caches the score of the
- current document.
- Successive calls to <code>score()</code> will return the same
- result and will not invoke the wrapped Scorer's score() method, unless the
- current document has changed.<br>
- This class might be useful due to the changes done to the <code>Collector</code>
- interface, in which the score is not computed for a document by default, only
- if the collector requests it. Some collectors may need to use the score in
- several places, however all they have in hand is a <code>Scorer</code> object, and
- might end up computing the score of a document more than once.
+  current document.Successive calls to <code>score()</code> will return the same
+  result and will not invoke the wrapped Scorer's score() method, unless the
+  current document has changed.
+ <br>
+  This class might be useful due to the changes done to the <code>Collector</code>
+  interface, in which the score is not computed for a document by default, only
+  if the collector requests it. Some collectors may need to use the score in
+  several places, however all they have in hand is a <code>Scorer</code> object, and
+  might end up computing the score of a document more than once.
  */
 @interface OrgApacheLuceneSearchScoreCachingWrappingScorer : OrgApacheLuceneSearchFilterScorer
 
@@ -42,11 +49,16 @@
 /*!
  @brief Creates a new instance by wrapping the given scorer.
  */
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
 
 - (id<JavaUtilCollection>)getChildren;
 
 - (jfloat)score;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg0
+                              withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -62,4 +74,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoreCachingWrappingScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchScoreCachingWrappingScorer")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_
 
@@ -27,9 +33,9 @@
 
 /*!
  @brief <code>LinearFloatFunction</code> implements a linear function over
- another <code>ValueSource</code>.
+  another <code>ValueSource</code>.
  <br>
- Normally Used as an argument to a <code>org.apache.lucene.queries.function.FunctionQuery</code>
+  Normally Used as an argument to a <code>org.apache.lucene.queries.function.FunctionQuery</code>
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
@@ -40,9 +46,9 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
-                                                        withFloat:(jfloat)slope
-                                                        withFloat:(jfloat)intercept;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
+                                                                  withFloat:(jfloat)slope
+                                                                  withFloat:(jfloat)intercept;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -55,6 +61,10 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
 
 - (NSUInteger)hash;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -72,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceLinearFloatF
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction")

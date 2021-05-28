@@ -27,6 +27,10 @@
 #include "org/apache/lucene/util/Version.h"
 #include "org/tartarus/snowball/ext/CatalanStemmer.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ca/CatalanAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisCaCatalanAnalyzer () {
  @public
   OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet_;
@@ -36,13 +40,13 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCaCatalanAnalyzer, stemExclusionSet_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_get_DEFAULT_ARTICLES();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_get_DEFAULT_ARTICLES(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCaCatalanAnalyzer, DEFAULT_ARTICLES, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 /*!
  @brief Atomically loads the DEFAULT_STOP_SET in a lazy fashion once the outer class 
- accesses the static final set the first time
+  accesses the static final set the first time
  .;
  */
 @interface OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder : NSObject
@@ -53,15 +57,15 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCaCatalanAnalyzer, DEFAULT_
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init();
+__attribute__((unused)) static OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder)
 
@@ -119,29 +123,38 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 2, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getDefaultStopSet);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[4].selector = @selector(createComponentsWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "stemExclusionSet_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "DEFAULT_STOPWORD_FILE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "DEFAULT_ARTICLES", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisUtilCharArraySet;", "LOrgApacheLuceneAnalysisUtilCharArraySet;LOrgApacheLuceneAnalysisUtilCharArraySet;", "createComponents", "LNSString;", &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE, &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES, "LOrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCaCatalanAnalyzer = { "CatalanAnalyzer", "org.apache.lucene.analysis.ca", ptrTable, methods, fields, 7, 0x11, 5, 3, -1, 6, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisCaCatalanAnalyzer;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCaCatalanAnalyzer class]) {
     JreStrongAssign(&OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"d", @"l", @"m", @"n", @"s", @"t" } count:6 type:NSString_class_()]), true)));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCaCatalanAnalyzer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDefaultStopSet", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
-    { "init", "CatalanAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "CatalanAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:", "CatalanAnalyzer", NULL, 0x1, NULL, NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "stemExclusionSet_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_STOPWORD_FILE", "DEFAULT_STOPWORD_FILE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_ARTICLES", "DEFAULT_ARTICLES", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.ca.CatalanAnalyzer$DefaultSetHolder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCaCatalanAnalyzer = { 2, "CatalanAnalyzer", "org.apache.lucene.analysis.ca", NULL, 0x11, 5, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisCaCatalanAnalyzer;
 }
 
 @end
@@ -201,6 +214,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_STOP_SET", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x18, -1, 0, -1, -1 },
+  };
+  static const void *ptrTable[] = { &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, "LOrgApacheLuceneAnalysisCaCatalanAnalyzer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder = { "DefaultSetHolder", "org.apache.lucene.analysis.ca", ptrTable, methods, fields, 7, 0xa, 1, 1, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder class]) {
     {
@@ -213,17 +243,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DefaultSetHolder", NULL, 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOP_SET", "DEFAULT_STOP_SET", 0x18, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder = { 2, "DefaultSetHolder", "org.apache.lucene.analysis.ca", "CatalanAnalyzer", 0xa, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder;
 }
 
 @end

@@ -8,11 +8,11 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
+#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/codecs/BlockTermState.h"
@@ -52,6 +52,10 @@
 #include "org/apache/lucene/util/fst/PositiveIntOutputs.h"
 #include "org/apache/lucene/util/fst/Util.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter () {
  @public
@@ -244,11 +248,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWr
 
 /*!
  @brief Writes the specified slice (start is inclusive, end is exclusive)
- from pending stack as a new block.
- If isFloor is true, there
- were too many (more than maxItemsInBlock) entries sharing the
- same prefix, and so we broke it into multiple floor blocks where
- we record the starting label of the suffix of each floor block. 
+   from pending stack as a new block.If isFloor is true, there
+   were too many (more than maxItemsInBlock) entries sharing the
+   same prefix, and so we broke it into multiple floor blocks where
+   we record the starting label of the suffix of each floor block.
  */
 - (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *)writeBlockWithInt:(jint)prefixLength
                                                                                   withBoolean:(jboolean)isFloor
@@ -265,7 +268,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWr
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter, this$0_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter, fieldInfo_, OrgApacheLuceneIndexFieldInfo *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter, lastTerm_, OrgApacheLuceneUtilBytesRefBuilder *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter, prefixStarts_, IOSIntArray *)
@@ -370,16 +372,16 @@ NSString *OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_
 - (void)writeWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)fields {
   NSString *lastField = nil;
   for (NSString * __strong field in nil_chk(fields)) {
-    JreAssert((lastField == nil || [lastField compareToWithId:field] < 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:229 condition failed: assert lastField == null || lastField.compareTo(field) < 0;"));
+    JreAssert(lastField == nil || [lastField compareToWithId:field] < 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:229 condition failed: assert lastField == null || lastField.compareTo(field) < 0;");
     lastField = field;
-    OrgApacheLuceneIndexTerms *terms = [fields termsWithNSString:field];
+    OrgApacheLuceneIndexTerms *terms = JreRetainedLocalValue([fields termsWithNSString:field]);
     if (terms == nil) {
       continue;
     }
-    OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
+    OrgApacheLuceneIndexTermsEnum *termsEnum = JreRetainedLocalValue([terms iterator]);
     OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter *termsWriter = create_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter_initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_withOrgApacheLuceneIndexFieldInfo_(self, [((OrgApacheLuceneIndexFieldInfos *) nil_chk(fieldInfos_)) fieldInfoWithNSString:field]);
     while (true) {
-      OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next];
+      OrgApacheLuceneUtilBytesRef *term = JreRetainedLocalValue([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next]);
       if (term == nil) {
         break;
       }
@@ -415,7 +417,7 @@ NSString *OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_
     [out_ writeVIntWithInt:[((id<JavaUtilList>) nil_chk(fields_)) size]];
     for (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FieldMetaData * __strong field in fields_) {
       [out_ writeVIntWithInt:((OrgApacheLuceneIndexFieldInfo *) nil_chk(((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FieldMetaData *) nil_chk(field))->fieldInfo_))->number_];
-      JreAssert((field->numTerms_ > 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:861 condition failed: assert field.numTerms > 0;"));
+      JreAssert(field->numTerms_ > 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:861 condition failed: assert field.numTerms > 0;");
       [out_ writeVLongWithLong:field->numTerms_];
       [out_ writeVIntWithInt:((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(field->rootCode_))->output1_))->length_];
       [out_ writeBytesWithByteArray:((OrgApacheLuceneUtilBytesRef *) field->rootCode_->output1_)->bytes_ withInt:((OrgApacheLuceneUtilBytesRef *) field->rootCode_->output1_)->offset_ withInt:((OrgApacheLuceneUtilBytesRef *) field->rootCode_->output1_)->length_];
@@ -457,56 +459,69 @@ NSString *OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 2, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 4, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, 1, -1, -1, -1 },
+    { NULL, "J", 0x8, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x8, 9, 10, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x8, 9, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0xa, 12, 13, 1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSegmentWriteState:withOrgApacheLuceneCodecsPostingsWriterBase:withInt:withInt:);
+  methods[1].selector = @selector(writeTrailerWithOrgApacheLuceneStoreIndexOutput:withLong:);
+  methods[2].selector = @selector(writeIndexTrailerWithOrgApacheLuceneStoreIndexOutput:withLong:);
+  methods[3].selector = @selector(writeWithOrgApacheLuceneIndexFields:);
+  methods[4].selector = @selector(encodeOutputWithLong:withBoolean:withBoolean:);
+  methods[5].selector = @selector(brToStringWithOrgApacheLuceneUtilBytesRef:);
+  methods[6].selector = @selector(brToStringWithByteArray:);
+  methods[7].selector = @selector(close);
+  methods[8].selector = @selector(writeBytesRefWithOrgApacheLuceneStoreIndexOutput:withOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "FST_OUTPUTS", "LOrgApacheLuceneUtilFstPairOutputs;", .constantValue.asLong = 0, 0x18, -1, 14, 15, -1 },
+    { "NO_OUTPUT", "LOrgApacheLuceneUtilFstPairOutputs_Pair;", .constantValue.asLong = 0, 0x18, -1, 16, 17, -1 },
+    { "DEFAULT_MIN_BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_DEFAULT_MIN_BLOCK_SIZE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_DEFAULT_MAX_BLOCK_SIZE, 0x19, -1, -1, -1, -1 },
+    { "OUTPUT_FLAGS_NUM_BITS", "I", .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAGS_NUM_BITS, 0x18, -1, -1, -1, -1 },
+    { "OUTPUT_FLAGS_MASK", "I", .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAGS_MASK, 0x18, -1, -1, -1, -1 },
+    { "OUTPUT_FLAG_IS_FLOOR", "I", .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAG_IS_FLOOR, 0x18, -1, -1, -1, -1 },
+    { "OUTPUT_FLAG_HAS_TERMS", "I", .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAG_HAS_TERMS, 0x18, -1, -1, -1, -1 },
+    { "TERMS_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 18, -1, -1 },
+    { "TERMS_CODEC_NAME", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 19, -1, -1 },
+    { "VERSION_START", "I", .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_START, 0x19, -1, -1, -1, -1 },
+    { "VERSION_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_CURRENT, 0x19, -1, -1, -1, -1 },
+    { "TERMS_INDEX_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 20, -1, -1 },
+    { "TERMS_INDEX_CODEC_NAME", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 21, -1, -1 },
+    { "out_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "indexOut_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "minItemsInBlock_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxItemsInBlock_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "postingsWriter_", "LOrgApacheLuceneCodecsPostingsWriterBase;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fieldInfos_", "LOrgApacheLuceneIndexFieldInfos;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fields_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 22, -1 },
+    { "scratchBytes_", "LOrgApacheLuceneStoreRAMOutputStream;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratchIntsRef_", "LOrgApacheLuceneUtilIntsRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "closed_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentWriteState;LOrgApacheLuceneCodecsPostingsWriterBase;II", "LJavaIoIOException;", "writeTrailer", "LOrgApacheLuceneStoreIndexOutput;J", "writeIndexTrailer", "write", "LOrgApacheLuceneIndexFields;", "encodeOutput", "JZZ", "brToString", "LOrgApacheLuceneUtilBytesRef;", "[B", "writeBytesRef", "LOrgApacheLuceneStoreIndexOutput;LOrgApacheLuceneUtilBytesRef;", &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FST_OUTPUTS, "Lorg/apache/lucene/util/fst/PairOutputs<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;", &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_NO_OUTPUT, "Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;", &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_EXTENSION, &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_CODEC_NAME, &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_EXTENSION, &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_CODEC_NAME, "Ljava/util/List<Lorg/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter$FieldMetaData;>;", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FieldMetaData;LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry;LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm;LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock;LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter = { "VersionBlockTreeTermsWriter", "org.apache.lucene.codecs.idversion", ptrTable, methods, fields, 7, 0x11, 9, 25, -1, 23, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FST_OUTPUTS, new_OrgApacheLuceneUtilFstPairOutputs_initWithOrgApacheLuceneUtilFstOutputs_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstByteSequenceOutputs_getSingleton(), OrgApacheLuceneUtilFstPositiveIntOutputs_getSingleton()));
     JreStrongAssign(&OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_NO_OUTPUT, [OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FST_OUTPUTS getNoOutput]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSegmentWriteState:withOrgApacheLuceneCodecsPostingsWriterBase:withInt:withInt:", "VersionBlockTreeTermsWriter", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "writeTrailerWithOrgApacheLuceneStoreIndexOutput:withLong:", "writeTrailer", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "writeIndexTrailerWithOrgApacheLuceneStoreIndexOutput:withLong:", "writeIndexTrailer", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "writeWithOrgApacheLuceneIndexFields:", "write", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "encodeOutputWithLong:withBoolean:withBoolean:", "encodeOutput", "J", 0x8, NULL, NULL },
-    { "brToStringWithOrgApacheLuceneUtilBytesRef:", "brToString", "Ljava.lang.String;", 0x8, NULL, NULL },
-    { "brToStringWithByteArray:", "brToString", "Ljava.lang.String;", 0x8, NULL, NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeBytesRefWithOrgApacheLuceneStoreIndexOutput:withOrgApacheLuceneUtilBytesRef:", "writeBytesRef", "V", 0xa, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "FST_OUTPUTS", "FST_OUTPUTS", 0x18, "Lorg.apache.lucene.util.fst.PairOutputs;", &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FST_OUTPUTS, "Lorg/apache/lucene/util/fst/PairOutputs<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;", .constantValue.asLong = 0 },
-    { "NO_OUTPUT", "NO_OUTPUT", 0x18, "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_NO_OUTPUT, "Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;", .constantValue.asLong = 0 },
-    { "DEFAULT_MIN_BLOCK_SIZE", "DEFAULT_MIN_BLOCK_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_DEFAULT_MIN_BLOCK_SIZE },
-    { "DEFAULT_MAX_BLOCK_SIZE", "DEFAULT_MAX_BLOCK_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_DEFAULT_MAX_BLOCK_SIZE },
-    { "OUTPUT_FLAGS_NUM_BITS", "OUTPUT_FLAGS_NUM_BITS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAGS_NUM_BITS },
-    { "OUTPUT_FLAGS_MASK", "OUTPUT_FLAGS_MASK", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAGS_MASK },
-    { "OUTPUT_FLAG_IS_FLOOR", "OUTPUT_FLAG_IS_FLOOR", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAG_IS_FLOOR },
-    { "OUTPUT_FLAG_HAS_TERMS", "OUTPUT_FLAG_HAS_TERMS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAG_HAS_TERMS },
-    { "TERMS_EXTENSION", "TERMS_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "TERMS_CODEC_NAME", "TERMS_CODEC_NAME", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_CODEC_NAME, NULL, .constantValue.asLong = 0 },
-    { "VERSION_START", "VERSION_START", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_START },
-    { "VERSION_CURRENT", "VERSION_CURRENT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_CURRENT },
-    { "TERMS_INDEX_EXTENSION", "TERMS_INDEX_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "TERMS_INDEX_CODEC_NAME", "TERMS_INDEX_CODEC_NAME", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_CODEC_NAME, NULL, .constantValue.asLong = 0 },
-    { "out_", NULL, 0x12, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexOut_", NULL, 0x12, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minItemsInBlock_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxItemsInBlock_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "postingsWriter_", NULL, 0x10, "Lorg.apache.lucene.codecs.PostingsWriterBase;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfos_", NULL, 0x10, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fields_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter$FieldMetaData;>;", .constantValue.asLong = 0 },
-    { "scratchBytes_", NULL, 0x12, "Lorg.apache.lucene.store.RAMOutputStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchIntsRef_", NULL, 0x12, "Lorg.apache.lucene.util.IntsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "closed_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.idversion.VersionBlockTreeTermsWriter$FieldMetaData;", "Lorg.apache.lucene.codecs.idversion.VersionBlockTreeTermsWriter$PendingEntry;", "Lorg.apache.lucene.codecs.idversion.VersionBlockTreeTermsWriter$PendingTerm;", "Lorg.apache.lucene.codecs.idversion.VersionBlockTreeTermsWriter$PendingBlock;", "Lorg.apache.lucene.codecs.idversion.VersionBlockTreeTermsWriter$TermsWriter;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter = { 2, "VersionBlockTreeTermsWriter", "org.apache.lucene.codecs.idversion", NULL, 0x11, 9, methods, 25, fields, 0, NULL, 5, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter;
 }
 
 @end
@@ -560,7 +575,7 @@ void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_writeIndexTrailer
 
 jlong OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_encodeOutputWithLong_withBoolean_withBoolean_(jlong fp, jboolean hasTerms, jboolean isFloor) {
   OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_initialize();
-  JreAssert((fp < (JreLShift64(1LL, 62))), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:253 condition failed: assert fp < (1L << 62);"));
+  JreAssert(fp < (JreLShift64(1LL, 62)), @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:253 condition failed: assert fp < (1L << 62);");
   return (JreLShift64(fp, 2)) | (hasTerms ? OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAG_HAS_TERMS : 0) | (isFloor ? OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAG_IS_FLOOR : 0);
 }
 
@@ -569,7 +584,7 @@ NSString *OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_brToStringWi
   @try {
     return JreStrcat("$C@", [((OrgApacheLuceneUtilBytesRef *) nil_chk(b)) utf8ToString], ' ', b);
   }
-  @catch (NSException *t) {
+  @catch (JavaLangThrowable *t) {
     return [b description];
   }
 }
@@ -609,19 +624,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneUtilFstPairOutputs_Pair:withLong:withLong:withInt:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "FieldMetaData", NULL, 0x1, NULL, "(Lorg/apache/lucene/index/FieldInfo;Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;JJILorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneUtilFstPairOutputs_Pair:withLong:withLong:withInt:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fieldInfo_", NULL, 0x11, "Lorg.apache.lucene.index.FieldInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "rootCode_", NULL, 0x11, "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", NULL, "Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;", .constantValue.asLong = 0 },
-    { "numTerms_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexStartFP_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "longsSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minTerm_", NULL, 0x11, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTerm_", NULL, 0x11, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "fieldInfo_", "LOrgApacheLuceneIndexFieldInfo;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "rootCode_", "LOrgApacheLuceneUtilFstPairOutputs_Pair;", .constantValue.asLong = 0, 0x11, -1, -1, 2, -1 },
+    { "numTerms_", "J", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "indexStartFP_", "J", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "longsSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "maxTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FieldMetaData = { 2, "FieldMetaData", "org.apache.lucene.codecs.idversion", "VersionBlockTreeTermsWriter", 0xa, 1, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFieldInfo;LOrgApacheLuceneUtilFstPairOutputs_Pair;JJILOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "(Lorg/apache/lucene/index/FieldInfo;Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;JJILorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;)V", "Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FieldMetaData = { "FieldMetaData", "org.apache.lucene.codecs.idversion", ptrTable, methods, fields, 7, 0xa, 1, 7, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FieldMetaData;
 }
 
@@ -629,9 +650,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
 
 void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FieldMetaData_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FieldMetaData *self, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode, jlong numTerms, jlong indexStartFP, jint longsSize, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm) {
   NSObject_init(self);
-  JreAssert((numTerms > 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:153 condition failed: assert numTerms > 0;"));
+  JreAssert(numTerms > 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:153 condition failed: assert numTerms > 0;");
   JreStrongAssign(&self->fieldInfo_, fieldInfo);
-  JreAssert((rootCode != nil), (JreStrcat("$$$J", @"field=", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, @" numTerms=", numTerms)));
+  JreAssert(rootCode != nil, JreStrcat("$$$J", @"field=", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, @" numTerms=", numTerms));
   JreStrongAssign(&self->rootCode_, rootCode);
   self->indexStartFP_ = indexStartFP;
   self->numTerms_ = numTerms;
@@ -658,13 +679,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:", "PendingEntry", NULL, 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "isTerm_", NULL, 0x11, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "isTerm_", "Z", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry = { 2, "PendingEntry", "org.apache.lucene.codecs.idversion", "VersionBlockTreeTermsWriter", 0xa, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "Z", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry = { "PendingEntry", "org.apache.lucene.codecs.idversion", ptrTable, methods, fields, 7, 0xa, 1, 1, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry;
 }
 
@@ -704,15 +731,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneCodecsBlockTermState:", "PendingTerm", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneCodecsBlockTermState:);
+  methods[1].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termBytes_", NULL, 0x11, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "state_", NULL, 0x11, "Lorg.apache.lucene.codecs.BlockTermState;", NULL, NULL, .constantValue.asLong = 0 },
+    { "termBytes_", "[B", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "state_", "LOrgApacheLuceneCodecsBlockTermState;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm = { 2, "PendingTerm", "org.apache.lucene.codecs.idversion", "VersionBlockTreeTermsWriter", 0x1a, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneCodecsBlockTermState;", "toString", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm = { "PendingTerm", "org.apache.lucene.codecs.idversion", ptrTable, methods, fields, 7, 0x1a, 2, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm;
 }
 
@@ -755,24 +789,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
 - (void)compileIndexWithJavaUtilList:(id<JavaUtilList>)blocks
 withOrgApacheLuceneStoreRAMOutputStream:(OrgApacheLuceneStoreRAMOutputStream *)scratchBytes
 withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scratchIntsRef {
-  JreAssert(((isFloor_ && [((id<JavaUtilList>) nil_chk(blocks)) size] > 1) || (isFloor_ == false && [((id<JavaUtilList>) nil_chk(blocks)) size] == 1)), (JreStrcat("$Z$@", @"isFloor=", isFloor_, @" blocks=", blocks)));
-  JreAssert((self == [((id<JavaUtilList>) nil_chk(blocks)) getWithInt:0]), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:332 condition failed: assert this == blocks.get(0);"));
-  JreAssert(([((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(scratchBytes)) getFilePointer] == 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:334 condition failed: assert scratchBytes.getFilePointer() == 0;"));
+  JreAssert((isFloor_ && [((id<JavaUtilList>) nil_chk(blocks)) size] > 1) || (isFloor_ == false && [((id<JavaUtilList>) nil_chk(blocks)) size] == 1), JreStrcat("$Z$@", @"isFloor=", isFloor_, @" blocks=", blocks));
+  JreAssert(JreObjectEqualsEquals(self, [((id<JavaUtilList>) nil_chk(blocks)) getWithInt:0]), @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:332 condition failed: assert this == blocks.get(0);");
+  JreAssert([((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(scratchBytes)) getFilePointer] == 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:334 condition failed: assert scratchBytes.getFilePointer() == 0;");
   jlong maxVersionIndex = maxVersion_;
   [scratchBytes writeVLongWithLong:OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_encodeOutputWithLong_withBoolean_withBoolean_(fp_, hasTerms_, isFloor_)];
   if (isFloor_) {
     [scratchBytes writeVIntWithInt:[blocks size] - 1];
     for (jint i = 1; i < [blocks size]; i++) {
-      OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *sub = [blocks getWithInt:i];
+      OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *sub = JreRetainedLocalValue([blocks getWithInt:i]);
       maxVersionIndex = JavaLangMath_maxWithLong_withLong_(maxVersionIndex, ((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *) nil_chk(sub))->maxVersion_);
       [scratchBytes writeByteWithByte:(jbyte) sub->floorLeadByte_];
-      JreAssert((sub->fp_ > fp_), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:351 condition failed: assert sub.fp > fp;"));
+      JreAssert(sub->fp_ > fp_, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:351 condition failed: assert sub.fp > fp;");
       [scratchBytes writeVLongWithLong:(JreLShift64((sub->fp_ - fp_), 1)) | (sub->hasTerms_ ? 1 : 0)];
     }
   }
   OrgApacheLuceneUtilFstBuilder *indexBuilder = create_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withInt_withInt_withBoolean_withBoolean_withInt_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withBoolean_withInt_(JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1), 0, 0, true, false, JavaLangInteger_MAX_VALUE, JreLoadStatic(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter, FST_OUTPUTS), false, OrgApacheLuceneUtilPackedPackedInts_COMPACT, true, 15);
   IOSByteArray *bytes = [IOSByteArray arrayWithLength:(jint) [scratchBytes getFilePointer]];
-  JreAssert((bytes->size_ > 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:365 condition failed: assert bytes.length > 0;"));
+  JreAssert(bytes->size_ > 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:365 condition failed: assert bytes.length > 0;");
   [scratchBytes writeToWithByteArray:bytes withInt:0];
   [indexBuilder addWithOrgApacheLuceneUtilIntsRef:OrgApacheLuceneUtilFstUtil_toIntsRefWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilIntsRefBuilder_(prefix_, scratchIntsRef) withId:[((OrgApacheLuceneUtilFstPairOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter, FST_OUTPUTS))) newPairWithId:create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(bytes, 0, bytes->size_) withId:JavaLangLong_valueOfWithLong_(JavaLangLong_MAX_VALUE - maxVersionIndex)]];
   [scratchBytes reset];
@@ -785,7 +819,7 @@ withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scrat
     }
   }
   JreStrongAssign(&index_, [indexBuilder finish]);
-  JreAssert((subIndices_ == nil), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:382 condition failed: assert subIndices == null;"));
+  JreAssert(subIndices_ == nil, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:382 condition failed: assert subIndices == null;");
 }
 
 - (void)appendWithOrgApacheLuceneUtilFstBuilder:(OrgApacheLuceneUtilFstBuilder *)builder
@@ -802,23 +836,32 @@ withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scrat
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBytesRef:withLong:withLong:withBoolean:withBoolean:withInt:withJavaUtilList:", "PendingBlock", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/BytesRef;JJZZILjava/util/List<Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;>;)V" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "compileIndexWithJavaUtilList:withOrgApacheLuceneStoreRAMOutputStream:withOrgApacheLuceneUtilIntsRefBuilder:", "compileIndex", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter$PendingBlock;>;Lorg/apache/lucene/store/RAMOutputStream;Lorg/apache/lucene/util/IntsRefBuilder;)V" },
-    { "appendWithOrgApacheLuceneUtilFstBuilder:withOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilIntsRefBuilder:", "append", "V", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/Builder<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;Lorg/apache/lucene/util/IntsRefBuilder;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 5, 6, -1, -1 },
+    { NULL, "V", 0x2, 7, 8, 5, 9, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBytesRef:withLong:withLong:withBoolean:withBoolean:withInt:withJavaUtilList:);
+  methods[1].selector = @selector(description);
+  methods[2].selector = @selector(compileIndexWithJavaUtilList:withOrgApacheLuceneStoreRAMOutputStream:withOrgApacheLuceneUtilIntsRefBuilder:);
+  methods[3].selector = @selector(appendWithOrgApacheLuceneUtilFstBuilder:withOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilIntsRefBuilder:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "prefix_", NULL, 0x11, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fp_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "index_", NULL, 0x1, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;", .constantValue.asLong = 0 },
-    { "subIndices_", NULL, 0x1, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;>;", .constantValue.asLong = 0 },
-    { "hasTerms_", NULL, 0x11, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "isFloor_", NULL, 0x11, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "floorLeadByte_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxVersion_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "prefix_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "fp_", "J", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "index_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x1, -1, -1, 10, -1 },
+    { "subIndices_", "LJavaUtilList;", .constantValue.asLong = 0, 0x1, -1, -1, 11, -1 },
+    { "hasTerms_", "Z", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "isFloor_", "Z", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "floorLeadByte_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "maxVersion_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock = { 2, "PendingBlock", "org.apache.lucene.codecs.idversion", "VersionBlockTreeTermsWriter", 0x1a, 4, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBytesRef;JJZZILJavaUtilList;", "(Lorg/apache/lucene/util/BytesRef;JJZZILjava/util/List<Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;>;)V", "toString", "compileIndex", "LJavaUtilList;LOrgApacheLuceneStoreRAMOutputStream;LOrgApacheLuceneUtilIntsRefBuilder;", "LJavaIoIOException;", "(Ljava/util/List<Lorg/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter$PendingBlock;>;Lorg/apache/lucene/store/RAMOutputStream;Lorg/apache/lucene/util/IntsRefBuilder;)V", "append", "LOrgApacheLuceneUtilFstBuilder;LOrgApacheLuceneUtilFstFST;LOrgApacheLuceneUtilIntsRefBuilder;", "(Lorg/apache/lucene/util/fst/Builder<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;Lorg/apache/lucene/util/IntsRefBuilder;)V", "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;", "Ljava/util/List<Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;>;", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock = { "PendingBlock", "org.apache.lucene.codecs.idversion", ptrTable, methods, fields, 7, 0x1a, 4, 8, 12, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock;
 }
 
@@ -847,7 +890,7 @@ void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock_appe
   OrgApacheLuceneUtilFstBytesRefFSTEnum *subIndexEnum = create_OrgApacheLuceneUtilFstBytesRefFSTEnum_initWithOrgApacheLuceneUtilFstFST_(subIndex);
   OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *indexEnt;
   while ((indexEnt = [subIndexEnum next]) != nil) {
-    [((OrgApacheLuceneUtilFstBuilder *) nil_chk(builder)) addWithOrgApacheLuceneUtilIntsRef:OrgApacheLuceneUtilFstUtil_toIntsRefWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilIntsRefBuilder_(((OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *) nil_chk(indexEnt))->input_, scratchIntsRef) withId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) indexEnt->output_)];
+    [((OrgApacheLuceneUtilFstBuilder *) nil_chk(builder)) addWithOrgApacheLuceneUtilIntsRef:OrgApacheLuceneUtilFstUtil_toIntsRefWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilIntsRefBuilder_(((OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *) nil_chk(indexEnt))->input_, scratchIntsRef) withId:indexEnt->output_];
   }
 }
 
@@ -857,8 +900,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
 
 - (void)writeBlocksWithInt:(jint)prefixLength
                    withInt:(jint)count {
-  JreAssert((count > 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:442 condition failed: assert count > 0;"));
-  JreAssert((prefixLength > 0 || count == [((id<JavaUtilList>) nil_chk(pending_)) size]), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:454 condition failed: assert prefixLength > 0 || count == pending.size();"));
+  JreAssert(count > 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:442 condition failed: assert count > 0;");
+  JreAssert(prefixLength > 0 || count == [((id<JavaUtilList>) nil_chk(pending_)) size], @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:454 condition failed: assert prefixLength > 0 || count == pending.size();");
   jint lastSuffixLeadLabel = -1;
   jboolean hasTerms = false;
   jboolean hasSubBlocks = false;
@@ -867,12 +910,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
   jint nextBlockStart = start;
   jint nextFloorLeadLabel = -1;
   for (jint i = start; i < end; i++) {
-    OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *ent = [pending_ getWithInt:i];
+    OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *ent = JreRetainedLocalValue([pending_ getWithInt:i]);
     jint suffixLeadLabel;
     if (((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *) nil_chk(ent))->isTerm_) {
       OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm *term = (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm *) cast_chk(ent, [OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm class]);
       if (((IOSByteArray *) nil_chk(term->termBytes_))->size_ == prefixLength) {
-        JreAssert((lastSuffixLeadLabel == -1), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:481 condition failed: assert lastSuffixLeadLabel == -1;"));
+        JreAssert(lastSuffixLeadLabel == -1, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:481 condition failed: assert lastSuffixLeadLabel == -1;");
         suffixLeadLabel = -1;
       }
       else {
@@ -881,7 +924,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
     }
     else {
       OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *block = (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *) cast_chk(ent, [OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock class]);
-      JreAssert((((OrgApacheLuceneUtilBytesRef *) nil_chk(block->prefix_))->length_ > prefixLength), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:488 condition failed: assert block.prefix.length > prefixLength;"));
+      JreAssert(((OrgApacheLuceneUtilBytesRef *) nil_chk(block->prefix_))->length_ > prefixLength, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:488 condition failed: assert block.prefix.length > prefixLength;");
       suffixLeadLabel = IOSByteArray_Get(nil_chk(block->prefix_->bytes_), block->prefix_->offset_ + prefixLength) & (jint) 0xff;
     }
     if (suffixLeadLabel != lastSuffixLeadLabel) {
@@ -908,9 +951,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
     jboolean isFloor = itemsInBlock < count;
     [((id<JavaUtilList>) nil_chk(newBlocks_)) addWithId:OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter_writeBlockWithInt_withBoolean_withInt_withInt_withInt_withBoolean_withBoolean_(self, prefixLength, isFloor, nextFloorLeadLabel, nextBlockStart, end, hasTerms, hasSubBlocks)];
   }
-  JreAssert(([((id<JavaUtilList>) nil_chk(newBlocks_)) isEmpty] == false), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:527 condition failed: assert newBlocks.isEmpty() == false;"));
-  OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *firstBlock = [newBlocks_ getWithInt:0];
-  JreAssert((((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *) nil_chk(firstBlock))->isFloor_ || [newBlocks_ size] == 1), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:531 condition failed: assert firstBlock.isFloor || newBlocks.size() == 1;"));
+  JreAssert([((id<JavaUtilList>) nil_chk(newBlocks_)) isEmpty] == false, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:527 condition failed: assert newBlocks.isEmpty() == false;");
+  OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *firstBlock = JreRetainedLocalValue([newBlocks_ getWithInt:0]);
+  JreAssert(((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *) nil_chk(firstBlock))->isFloor_ || [newBlocks_ size] == 1, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:531 condition failed: assert firstBlock.isFloor || newBlocks.size() == 1;");
   [firstBlock compileIndexWithJavaUtilList:newBlocks_ withOrgApacheLuceneStoreRAMOutputStream:this$0_->scratchBytes_ withOrgApacheLuceneUtilIntsRefBuilder:this$0_->scratchIntsRef_];
   [((id<JavaUtilList>) nil_chk([pending_ subListWithInt:[pending_ size] - count withInt:[pending_ size]])) clear];
   [pending_ addWithId:firstBlock];
@@ -935,10 +978,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
 
 - (void)writeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text
            withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum {
-  OrgApacheLuceneCodecsBlockTermState *state = [((OrgApacheLuceneCodecsPostingsWriterBase *) nil_chk(this$0_->postingsWriter_)) writeTermWithOrgApacheLuceneUtilBytesRef:text withOrgApacheLuceneIndexTermsEnum:termsEnum withOrgApacheLuceneUtilFixedBitSet:docsSeen_];
+  OrgApacheLuceneCodecsBlockTermState *state = JreRetainedLocalValue([((OrgApacheLuceneCodecsPostingsWriterBase *) nil_chk(this$0_->postingsWriter_)) writeTermWithOrgApacheLuceneUtilBytesRef:text withOrgApacheLuceneIndexTermsEnum:termsEnum withOrgApacheLuceneUtilFixedBitSet:docsSeen_]);
   if (state != nil && ((OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *) cast_chk(this$0_->postingsWriter_, [OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter class]))->lastDocID_ != -1) {
-    JreAssert((state->docFreq_ != 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:739 condition failed: assert state.docFreq != 0;"));
-    JreAssert(([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo_)) getIndexOptions] == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS) || state->totalTermFreq_ >= state->docFreq_), (JreStrcat("$@", @"postingsWriter=", this$0_->postingsWriter_)));
+    JreAssert(state->docFreq_ != 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:739 condition failed: assert state.docFreq != 0;");
+    JreAssert([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo_)) getIndexOptions] == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS) || state->totalTermFreq_ >= state->docFreq_, JreStrcat("$@", @"postingsWriter=", this$0_->postingsWriter_));
     OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter_pushTermWithOrgApacheLuceneUtilBytesRef_(self, text);
     OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm *term = create_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneCodecsBlockTermState_(OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(text), state);
     [((id<JavaUtilList>) nil_chk(pending_)) addWithId:term];
@@ -957,15 +1000,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
 - (void)finish {
   if (numTerms_ > 0) {
     [self writeBlocksWithInt:0 withInt:[((id<JavaUtilList>) nil_chk(pending_)) size]];
-    JreAssert(([pending_ size] == 1 && !((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *) nil_chk([pending_ getWithInt:0]))->isTerm_), (JreStrcat("$I$@", @"pending.size()=", [pending_ size], @" pending=", pending_)));
+    JreAssert([pending_ size] == 1 && !((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *) nil_chk([pending_ getWithInt:0]))->isTerm_, JreStrcat("$I$@", @"pending.size()=", [pending_ size], @" pending=", pending_));
     OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *root = (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *) cast_chk([pending_ getWithInt:0], [OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock class]);
-    JreAssert((((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *) nil_chk(root))->prefix_))->length_ == 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:802 condition failed: assert root.prefix.length == 0;"));
-    JreAssert(([((OrgApacheLuceneUtilFstFST *) nil_chk(root->index_)) getEmptyOutput] != nil), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:803 condition failed: assert root.index.getEmptyOutput() != null;"));
+    JreAssert(((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *) nil_chk(root))->prefix_))->length_ == 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:802 condition failed: assert root.prefix.length == 0;");
+    JreAssert([((OrgApacheLuceneUtilFstFST *) nil_chk(root->index_)) getEmptyOutput] != nil, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:803 condition failed: assert root.index.getEmptyOutput() != null;");
     indexStartFP_ = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(this$0_->indexOut_)) getFilePointer];
     [((OrgApacheLuceneUtilFstFST *) nil_chk(root->index_)) saveWithOrgApacheLuceneStoreDataOutput:this$0_->indexOut_];
-    JreAssert((firstPendingTerm_ != nil), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:818 condition failed: assert firstPendingTerm != null;"));
+    JreAssert(firstPendingTerm_ != nil, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:818 condition failed: assert firstPendingTerm != null;");
     OrgApacheLuceneUtilBytesRef *minTerm = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm *) nil_chk(firstPendingTerm_))->termBytes_);
-    JreAssert((lastPendingTerm_ != nil), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:821 condition failed: assert lastPendingTerm != null;"));
+    JreAssert(lastPendingTerm_ != nil, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:821 condition failed: assert lastPendingTerm != null;");
     OrgApacheLuceneUtilBytesRef *maxTerm = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm *) nil_chk(lastPendingTerm_))->termBytes_);
     [((id<JavaUtilList>) nil_chk(this$0_->fields_)) addWithId:create_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_FieldMetaData_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(fieldInfo_, [((OrgApacheLuceneUtilFstFST *) nil_chk(((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *) nil_chk(((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *) cast_chk([pending_ getWithInt:0], [OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock class]))))->index_)) getEmptyOutput], numTerms_, indexStartFP_, longsSize_, minTerm, maxTerm)];
   }
@@ -991,40 +1034,51 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionBlockTreeT
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "writeBlocksWithInt:withInt:", "writeBlocks", "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "writeBlockWithInt:withBoolean:withInt:withInt:withInt:withBoolean:withBoolean:", "writeBlock", "Lorg.apache.lucene.codecs.idversion.VersionBlockTreeTermsWriter$PendingBlock;", 0x2, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter:withOrgApacheLuceneIndexFieldInfo:", "TermsWriter", NULL, 0x0, NULL, NULL },
-    { "writeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermsEnum:", "write", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "pushTermWithOrgApacheLuceneUtilBytesRef:", "pushTerm", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "finish", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x0, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock;", 0x2, 3, 4, 2, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, 2, -1, -1, -1 },
+    { NULL, "V", 0x2, 8, 9, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(writeBlocksWithInt:withInt:);
+  methods[1].selector = @selector(writeBlockWithInt:withBoolean:withInt:withInt:withInt:withBoolean:withBoolean:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter:withOrgApacheLuceneIndexFieldInfo:);
+  methods[3].selector = @selector(writeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermsEnum:);
+  methods[4].selector = @selector(pushTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[5].selector = @selector(finish);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.idversion.VersionBlockTreeTermsWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfo_", NULL, 0x12, "Lorg.apache.lucene.index.FieldInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "longsSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numTerms_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "docsSeen_", NULL, 0x10, "Lorg.apache.lucene.util.FixedBitSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexStartFP_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastTerm_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixStarts_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "longs_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "pending_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter$PendingEntry;>;", .constantValue.asLong = 0 },
-    { "newBlocks_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter$PendingBlock;>;", .constantValue.asLong = 0 },
-    { "firstPendingTerm_", NULL, 0x2, "Lorg.apache.lucene.codecs.idversion.VersionBlockTreeTermsWriter$PendingTerm;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPendingTerm_", NULL, 0x2, "Lorg.apache.lucene.codecs.idversion.VersionBlockTreeTermsWriter$PendingTerm;", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffixWriter_", NULL, 0x12, "Lorg.apache.lucene.store.RAMOutputStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "metaWriter_", NULL, 0x12, "Lorg.apache.lucene.store.RAMOutputStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesWriter_", NULL, 0x12, "Lorg.apache.lucene.store.RAMOutputStream;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "fieldInfo_", "LOrgApacheLuceneIndexFieldInfo;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "longsSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numTerms_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "docsSeen_", "LOrgApacheLuceneUtilFixedBitSet;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "indexStartFP_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastTerm_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "prefixStarts_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "longs_", "[J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "pending_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 10, -1 },
+    { "newBlocks_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 11, -1 },
+    { "firstPendingTerm_", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastPendingTerm_", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "suffixWriter_", "LOrgApacheLuceneStoreRAMOutputStream;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "metaWriter_", "LOrgApacheLuceneStoreRAMOutputStream;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "bytesWriter_", "LOrgApacheLuceneStoreRAMOutputStream;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter = { 2, "TermsWriter", "org.apache.lucene.codecs.idversion", "VersionBlockTreeTermsWriter", 0x0, 6, methods, 16, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "writeBlocks", "II", "LJavaIoIOException;", "writeBlock", "IZIIIZZ", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter;LOrgApacheLuceneIndexFieldInfo;", "write", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneIndexTermsEnum;", "pushTerm", "LOrgApacheLuceneUtilBytesRef;", "Ljava/util/List<Lorg/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter$PendingEntry;>;", "Ljava/util/List<Lorg/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter$PendingBlock;>;", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter = { "TermsWriter", "org.apache.lucene.codecs.idversion", ptrTable, methods, fields, 7, 0x0, 6, 16, 12, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter;
 }
 
 @end
 
 OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter_writeBlockWithInt_withBoolean_withInt_withInt_withInt_withBoolean_withBoolean_(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TermsWriter *self, jint prefixLength, jboolean isFloor, jint floorLeadLabel, jint start, jint end, jboolean hasTerms, jboolean hasSubBlocks) {
-  JreAssert((end > start), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:551 condition failed: assert end > start;"));
+  JreAssert(end > start, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:551 condition failed: assert end > start;");
   jlong startFP = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->this$0_->out_)) getFilePointer];
   jboolean hasFloorLeadLabel = isFloor && floorLeadLabel != -1;
   OrgApacheLuceneUtilBytesRef *prefix = create_OrgApacheLuceneUtilBytesRef_initWithInt_(prefixLength + (hasFloorLeadLabel ? 1 : 0));
@@ -1043,19 +1097,19 @@ OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *OrgApach
   if (isLeafBlock) {
     subIndices = nil;
     for (jint i = start; i < end; i++) {
-      OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *ent = [self->pending_ getWithInt:i];
-      JreAssert((((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *) nil_chk(ent))->isTerm_), (JreStrcat("$I", @"i=", i)));
+      OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *ent = JreRetainedLocalValue([self->pending_ getWithInt:i]);
+      JreAssert(((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *) nil_chk(ent))->isTerm_, JreStrcat("$I", @"i=", i));
       OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm *term = (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm *) cast_chk(ent, [OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm class]);
-      JreAssert((OrgApacheLuceneUtilStringHelper_startsWithWithByteArray_withOrgApacheLuceneUtilBytesRef_(term->termBytes_, prefix)), (JreStrcat("$@$@", @"term.term=", term->termBytes_, @" prefix=", prefix)));
-      OrgApacheLuceneCodecsBlockTermState *state = term->state_;
+      JreAssert(OrgApacheLuceneUtilStringHelper_startsWithWithByteArray_withOrgApacheLuceneUtilBytesRef_(term->termBytes_, prefix), JreStrcat("$@$@", @"term.term=", term->termBytes_, @" prefix=", prefix));
+      OrgApacheLuceneCodecsBlockTermState *state = JreRetainedLocalValue(term->state_);
       maxVersionInBlock = JavaLangMath_maxWithLong_withLong_(maxVersionInBlock, ((OrgApacheLuceneCodecsIdversionIDVersionTermState *) nil_chk(((OrgApacheLuceneCodecsIdversionIDVersionTermState *) cast_chk(state, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]))))->idVersion_);
       jint suffix = ((IOSByteArray *) nil_chk(term->termBytes_))->size_ - prefixLength;
       [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(self->suffixWriter_)) writeVIntWithInt:suffix];
       [self->suffixWriter_ writeBytesWithByteArray:term->termBytes_ withInt:prefixLength withInt:suffix];
-      JreAssert((floorLeadLabel == -1 || (IOSByteArray_Get(term->termBytes_, prefixLength) & (jint) 0xff) >= floorLeadLabel), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:611 condition failed: assert floorLeadLabel == -1 || (term.termBytes[prefixLength] & 0xff) >= floorLeadLabel;"));
+      JreAssert(floorLeadLabel == -1 || (IOSByteArray_Get(term->termBytes_, prefixLength) & (jint) 0xff) >= floorLeadLabel, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:611 condition failed: assert floorLeadLabel == -1 || (term.termBytes[prefixLength] & 0xff) >= floorLeadLabel;");
       [((OrgApacheLuceneCodecsPostingsWriterBase *) nil_chk(self->this$0_->postingsWriter_)) encodeTermWithLongArray:self->longs_ withOrgApacheLuceneStoreDataOutput:self->bytesWriter_ withOrgApacheLuceneIndexFieldInfo:self->fieldInfo_ withOrgApacheLuceneCodecsBlockTermState:state withBoolean:absolute];
       for (jint pos = 0; pos < self->longsSize_; pos++) {
-        JreAssert((IOSLongArray_Get(nil_chk(self->longs_), pos) >= 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:616 condition failed: assert longs[pos] >= 0;"));
+        JreAssert(IOSLongArray_Get(nil_chk(self->longs_), pos) >= 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:616 condition failed: assert longs[pos] >= 0;");
         [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(self->metaWriter_)) writeVLongWithLong:IOSLongArray_Get(self->longs_, pos)];
       }
       [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(self->bytesWriter_)) writeToWithOrgApacheLuceneStoreDataOutput:self->metaWriter_];
@@ -1066,19 +1120,19 @@ OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *OrgApach
   else {
     subIndices = create_JavaUtilArrayList_init();
     for (jint i = start; i < end; i++) {
-      OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *ent = [self->pending_ getWithInt:i];
+      OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *ent = JreRetainedLocalValue([self->pending_ getWithInt:i]);
       if (((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingEntry *) nil_chk(ent))->isTerm_) {
         OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm *term = (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm *) cast_chk(ent, [OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingTerm class]);
-        JreAssert((OrgApacheLuceneUtilStringHelper_startsWithWithByteArray_withOrgApacheLuceneUtilBytesRef_(term->termBytes_, prefix)), (JreStrcat("$@$@", @"term.term=", term->termBytes_, @" prefix=", prefix)));
-        OrgApacheLuceneCodecsBlockTermState *state = term->state_;
+        JreAssert(OrgApacheLuceneUtilStringHelper_startsWithWithByteArray_withOrgApacheLuceneUtilBytesRef_(term->termBytes_, prefix), JreStrcat("$@$@", @"term.term=", term->termBytes_, @" prefix=", prefix));
+        OrgApacheLuceneCodecsBlockTermState *state = JreRetainedLocalValue(term->state_);
         maxVersionInBlock = JavaLangMath_maxWithLong_withLong_(maxVersionInBlock, ((OrgApacheLuceneCodecsIdversionIDVersionTermState *) nil_chk(((OrgApacheLuceneCodecsIdversionIDVersionTermState *) cast_chk(state, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]))))->idVersion_);
         jint suffix = ((IOSByteArray *) nil_chk(term->termBytes_))->size_ - prefixLength;
         [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(self->suffixWriter_)) writeVIntWithInt:JreLShift32(suffix, 1)];
         [self->suffixWriter_ writeBytesWithByteArray:term->termBytes_ withInt:prefixLength withInt:suffix];
-        JreAssert((floorLeadLabel == -1 || (IOSByteArray_Get(term->termBytes_, prefixLength) & (jint) 0xff) >= floorLeadLabel), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:646 condition failed: assert floorLeadLabel == -1 || (term.termBytes[prefixLength] & 0xff) >= floorLeadLabel;"));
+        JreAssert(floorLeadLabel == -1 || (IOSByteArray_Get(term->termBytes_, prefixLength) & (jint) 0xff) >= floorLeadLabel, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:646 condition failed: assert floorLeadLabel == -1 || (term.termBytes[prefixLength] & 0xff) >= floorLeadLabel;");
         [((OrgApacheLuceneCodecsPostingsWriterBase *) nil_chk(self->this$0_->postingsWriter_)) encodeTermWithLongArray:self->longs_ withOrgApacheLuceneStoreDataOutput:self->bytesWriter_ withOrgApacheLuceneIndexFieldInfo:self->fieldInfo_ withOrgApacheLuceneCodecsBlockTermState:state withBoolean:absolute];
         for (jint pos = 0; pos < self->longsSize_; pos++) {
-          JreAssert((IOSLongArray_Get(nil_chk(self->longs_), pos) >= 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:659 condition failed: assert longs[pos] >= 0;"));
+          JreAssert(IOSLongArray_Get(nil_chk(self->longs_), pos) >= 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:659 condition failed: assert longs[pos] >= 0;");
           [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(self->metaWriter_)) writeVLongWithLong:IOSLongArray_Get(self->longs_, pos)];
         }
         [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(self->bytesWriter_)) writeToWithOrgApacheLuceneStoreDataOutput:self->metaWriter_];
@@ -1088,18 +1142,18 @@ OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *OrgApach
       else {
         OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *block = (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock *) cast_chk(ent, [OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_PendingBlock class]);
         maxVersionInBlock = JavaLangMath_maxWithLong_withLong_(maxVersionInBlock, block->maxVersion_);
-        JreAssert((OrgApacheLuceneUtilStringHelper_startsWithWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(block->prefix_, prefix)), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:668 condition failed: assert StringHelper.startsWith(block.prefix, prefix);"));
+        JreAssert(OrgApacheLuceneUtilStringHelper_startsWithWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(block->prefix_, prefix), @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:668 condition failed: assert StringHelper.startsWith(block.prefix, prefix);");
         jint suffix = ((OrgApacheLuceneUtilBytesRef *) nil_chk(block->prefix_))->length_ - prefixLength;
-        JreAssert((suffix > 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:671 condition failed: assert suffix > 0;"));
+        JreAssert(suffix > 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:671 condition failed: assert suffix > 0;");
         [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(self->suffixWriter_)) writeVIntWithInt:(JreLShift32(suffix, 1)) | 1];
         [self->suffixWriter_ writeBytesWithByteArray:block->prefix_->bytes_ withInt:prefixLength withInt:suffix];
-        JreAssert((floorLeadLabel == -1 || (IOSByteArray_Get(nil_chk(block->prefix_->bytes_), prefixLength) & (jint) 0xff) >= floorLeadLabel), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:678 condition failed: assert floorLeadLabel == -1 || (block.prefix.bytes[prefixLength] & 0xff) >= floorLeadLabel;"));
-        JreAssert((block->fp_ < startFP), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:680 condition failed: assert block.fp < startFP;"));
+        JreAssert(floorLeadLabel == -1 || (IOSByteArray_Get(nil_chk(block->prefix_->bytes_), prefixLength) & (jint) 0xff) >= floorLeadLabel, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:678 condition failed: assert floorLeadLabel == -1 || (block.prefix.bytes[prefixLength] & 0xff) >= floorLeadLabel;");
+        JreAssert(block->fp_ < startFP, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:680 condition failed: assert block.fp < startFP;");
         [self->suffixWriter_ writeVLongWithLong:startFP - block->fp_];
         [subIndices addWithId:block->index_];
       }
     }
-    JreAssert(([subIndices size] != 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:696 condition failed: assert subIndices.size() != 0;"));
+    JreAssert([subIndices size] != 0, @"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsWriter.java:696 condition failed: assert subIndices.size() != 0;");
   }
   [self->this$0_->out_ writeVIntWithInt:(jint) (JreLShift64([((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(self->suffixWriter_)) getFilePointer], 1)) | (isLeafBlock ? 1 : 0)];
   [self->suffixWriter_ writeToWithOrgApacheLuceneStoreDataOutput:self->this$0_->out_];

@@ -3,10 +3,8 @@
 //  source: ./misc/src/java/org/apache/lucene/search/DiversifiedTopDocsCollector.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
 #include "java/lang/Long.h"
 #include "java/util/HashMap.h"
@@ -21,6 +19,12 @@
 #include "org/apache/lucene/search/TopDocs.h"
 #include "org/apache/lucene/search/TopDocsCollector.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/DiversifiedTopDocsCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneSearchDiversifiedTopDocsCollector () {
  @public
@@ -40,39 +44,35 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDiversifiedTopDocsCollector, sparePerKe
 
 __attribute__((unused)) static void OrgApacheLuceneSearchDiversifiedTopDocsCollector_perKeyGroupRemoveWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *self, OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *globalOverflow);
 
-__attribute__((unused)) static jboolean OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_lessThanWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_withOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *self, OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *hitA, OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *hitB);
-
-@interface OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 : NSObject < OrgApacheLuceneSearchLeafCollector > {
+@interface OrgApacheLuceneSearchDiversifiedTopDocsCollector_1 : NSObject < OrgApacheLuceneSearchLeafCollector > {
  @public
   OrgApacheLuceneSearchDiversifiedTopDocsCollector *this$0_;
-  OrgApacheLuceneSearchScorer *scorer_;
   jint val$base_;
   OrgApacheLuceneIndexNumericDocValues *val$keySource_;
+  OrgApacheLuceneSearchScorer *scorer_;
 }
-
-- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
-
-- (void)collectWithInt:(jint)doc;
 
 - (instancetype)initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector:(OrgApacheLuceneSearchDiversifiedTopDocsCollector *)outer$
                                                                  withInt:(jint)capture$0
                                 withOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$1;
 
+- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
+
+- (void)collectWithInt:(jint)doc;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDiversifiedTopDocsCollector_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1, this$0_, OrgApacheLuceneSearchDiversifiedTopDocsCollector *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1, scorer_, OrgApacheLuceneSearchScorer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1, val$keySource_, OrgApacheLuceneIndexNumericDocValues *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_1, scorer_, OrgApacheLuceneSearchScorer *)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *self, OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1);
+__attribute__((unused)) static void OrgApacheLuceneSearchDiversifiedTopDocsCollector_1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector_1 *self, OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1);
 
-__attribute__((unused)) static OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchDiversifiedTopDocsCollector_1 *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1);
+__attribute__((unused)) static OrgApacheLuceneSearchDiversifiedTopDocsCollector_1 *create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
+__attribute__((unused)) static jboolean OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_lessThanWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_withOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *self, OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *hitA, OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *hitB);
 
 @implementation OrgApacheLuceneSearchDiversifiedTopDocsCollector
 
@@ -117,7 +117,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
     return addition;
   }
   JreStrongAssign(&((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *) nil_chk(addition))->key_, JavaLangLong_valueOfWithLong_([((OrgApacheLuceneIndexNumericDocValues *) nil_chk(keys)) getWithInt:addition->doc_ - docBase]));
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *thisKeyQ = [((id<JavaUtilMap>) nil_chk(perKeyQueues_)) getWithId:addition->key_];
+  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *thisKeyQ = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(perKeyQueues_)) getWithId:addition->key_]);
   if (thisKeyQ == nil) {
     if ([((JavaUtilStack *) nil_chk(sparePerKeyQueues_)) size] == 0) {
       thisKeyQ = create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(maxNumPerKey_);
@@ -127,12 +127,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
     }
     [((id<JavaUtilMap>) nil_chk(perKeyQueues_)) putWithId:addition->key_ withId:thisKeyQ];
   }
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *perKeyOverflow = [((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(thisKeyQ)) insertWithOverflowWithId:addition];
-  if (perKeyOverflow == addition) {
+  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *perKeyOverflow = JreRetainedLocalValue([((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(thisKeyQ)) insertWithOverflowWithId:addition]);
+  if (JreObjectEqualsEquals(perKeyOverflow, addition)) {
     return addition;
   }
   if (perKeyOverflow == nil) {
-    OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *globalOverflow = [((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(globalQueue_)) insertWithOverflowWithId:addition];
+    OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *globalOverflow = JreRetainedLocalValue([((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(globalQueue_)) insertWithOverflowWithId:addition]);
     OrgApacheLuceneSearchDiversifiedTopDocsCollector_perKeyGroupRemoveWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_(self, globalOverflow);
     return globalOverflow;
   }
@@ -148,7 +148,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   jint base = ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->docBase_;
   OrgApacheLuceneIndexNumericDocValues *keySource = [self getKeysWithOrgApacheLuceneIndexLeafReaderContext:context];
-  return create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(self, base, keySource);
+  return create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(self, base, keySource);
 }
 
 - (void)dealloc {
@@ -160,26 +160,36 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:", "DiversifiedTopDocsCollector", NULL, 0x1, NULL, NULL },
-    { "getKeysWithOrgApacheLuceneIndexLeafReaderContext:", "getKeys", "Lorg.apache.lucene.index.NumericDocValues;", 0x404, NULL, NULL },
-    { "needsScores", NULL, "Z", 0x1, NULL, NULL },
-    { "newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:", "newTopDocs", "Lorg.apache.lucene.search.TopDocs;", 0x4, NULL, NULL },
-    { "insertWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey:withInt:withOrgApacheLuceneIndexNumericDocValues:", "insert", "Lorg.apache.lucene.search.DiversifiedTopDocsCollector$ScoreDocKey;", 0x4, NULL, NULL },
-    { "perKeyGroupRemoveWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey:", "perKeyGroupRemove", "V", 0x2, NULL, NULL },
-    { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x404, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;", 0x4, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchLeafCollector;", 0x1, 9, 2, 10, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:);
+  methods[1].selector = @selector(getKeysWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[2].selector = @selector(needsScores);
+  methods[3].selector = @selector(newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:);
+  methods[4].selector = @selector(insertWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey:withInt:withOrgApacheLuceneIndexNumericDocValues:);
+  methods[5].selector = @selector(perKeyGroupRemoveWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey:);
+  methods[6].selector = @selector(getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "spare_", NULL, 0x0, "Lorg.apache.lucene.search.DiversifiedTopDocsCollector$ScoreDocKey;", NULL, NULL, .constantValue.asLong = 0 },
-    { "globalQueue_", NULL, 0x2, "Lorg.apache.lucene.search.DiversifiedTopDocsCollector$ScoreDocKeyQueue;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numHits_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "perKeyQueues_", NULL, 0x2, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Long;Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKeyQueue;>;", .constantValue.asLong = 0 },
-    { "maxNumPerKey_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "sparePerKeyQueues_", NULL, 0x2, "Ljava.util.Stack;", NULL, "Ljava/util/Stack<Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKeyQueue;>;", .constantValue.asLong = 0 },
+    { "spare_", "LOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "globalQueue_", "LOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numHits_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "perKeyQueues_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 11, -1 },
+    { "maxNumPerKey_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "sparePerKeyQueues_", "LJavaUtilStack;", .constantValue.asLong = 0, 0x2, -1, -1, 12, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.DiversifiedTopDocsCollector$ScoreDocKey;"};
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.DiversifiedTopDocsCollector$ScoreDocKeyQueue;", "Lorg.apache.lucene.search.DiversifiedTopDocsCollector$ScoreDocKey;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDiversifiedTopDocsCollector = { 2, "DiversifiedTopDocsCollector", "org.apache.lucene.search", NULL, 0x401, 7, methods, 6, fields, 1, superclass_type_args, 2, inner_classes, NULL, "Lorg/apache/lucene/search/TopDocsCollector<Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKey;>;" };
+  static const void *ptrTable[] = { "II", "getKeys", "LOrgApacheLuceneIndexLeafReaderContext;", "newTopDocs", "[LOrgApacheLuceneSearchScoreDoc;I", "insert", "LOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;ILOrgApacheLuceneIndexNumericDocValues;", "perKeyGroupRemove", "LOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;", "getLeafCollector", "LJavaIoIOException;", "Ljava/util/Map<Ljava/lang/Long;Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKeyQueue;>;", "Ljava/util/Stack<Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKeyQueue;>;", "LOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue;LOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;", "Lorg/apache/lucene/search/TopDocsCollector<Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKey;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDiversifiedTopDocsCollector = { "DiversifiedTopDocsCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 7, 6, -1, 13, -1, 14, -1 };
   return &_OrgApacheLuceneSearchDiversifiedTopDocsCollector;
 }
 
@@ -198,9 +208,9 @@ void OrgApacheLuceneSearchDiversifiedTopDocsCollector_perKeyGroupRemoveWithOrgAp
   if (globalOverflow == nil) {
     return;
   }
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *q = [((id<JavaUtilMap>) nil_chk(self->perKeyQueues_)) getWithId:globalOverflow->key_];
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *perKeyLowest = [((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(q)) pop];
-  JreAssert((globalOverflow == perKeyLowest), (@"org/apache/lucene/search/DiversifiedTopDocsCollector.java:171 condition failed: assert (globalOverflow == perKeyLowest);"));
+  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *q = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(self->perKeyQueues_)) getWithId:globalOverflow->key_]);
+  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *perKeyLowest = JreRetainedLocalValue([((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(q)) pop]);
+  JreAssert((JreObjectEqualsEquals(globalOverflow, perKeyLowest)), @"org/apache/lucene/search/DiversifiedTopDocsCollector.java:171 condition failed: assert (globalOverflow == perKeyLowest);");
   if ([q size] == 0) {
     [((id<JavaUtilMap>) nil_chk(self->perKeyQueues_)) removeWithId:globalOverflow->key_];
     [((JavaUtilStack *) nil_chk(self->sparePerKeyQueues_)) pushWithId:q];
@@ -208,6 +218,82 @@ void OrgApacheLuceneSearchDiversifiedTopDocsCollector_perKeyGroupRemoveWithOrgAp
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDiversifiedTopDocsCollector)
+
+@implementation OrgApacheLuceneSearchDiversifiedTopDocsCollector_1
+
+- (instancetype)initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector:(OrgApacheLuceneSearchDiversifiedTopDocsCollector *)outer$
+                                                                 withInt:(jint)capture$0
+                                withOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$1 {
+  OrgApacheLuceneSearchDiversifiedTopDocsCollector_1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(self, outer$, capture$0, capture$1);
+  return self;
+}
+
+- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
+  JreStrongAssign(&self->scorer_, scorer);
+}
+
+- (void)collectWithInt:(jint)doc {
+  jfloat score = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
+  JreAssert(!JavaLangFloat_isNaNWithFloat_(score), @"org/apache/lucene/search/DiversifiedTopDocsCollector.java:197 condition failed: assert !Float.isNaN(score);");
+  this$0_->totalHits_++;
+  doc += val$base_;
+  if (this$0_->spare_ == nil) {
+    JreStrongAssignAndConsume(&this$0_->spare_, new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_initWithInt_withFloat_(doc, score));
+  }
+  else {
+    this$0_->spare_->doc_ = doc;
+    this$0_->spare_->score_ = score;
+  }
+  JreStrongAssign(&this$0_->spare_, [this$0_ insertWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey:this$0_->spare_ withInt:val$base_ withOrgApacheLuceneIndexNumericDocValues:val$keySource_]);
+}
+
+- (void)dealloc {
+  RELEASE_(this$0_);
+  RELEASE_(val$keySource_);
+  RELEASE_(scorer_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 3, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector:withInt:withOrgApacheLuceneIndexNumericDocValues:);
+  methods[1].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  methods[2].selector = @selector(collectWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "this$0_", "LOrgApacheLuceneSearchDiversifiedTopDocsCollector;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$base_", "I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$keySource_", "LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "scorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchDiversifiedTopDocsCollector;ILOrgApacheLuceneIndexNumericDocValues;", "setScorer", "LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "collect", "I", "LOrgApacheLuceneSearchDiversifiedTopDocsCollector;", "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDiversifiedTopDocsCollector_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 3, 4, 6, -1, 7, -1, -1 };
+  return &_OrgApacheLuceneSearchDiversifiedTopDocsCollector_1;
+}
+
+@end
+
+void OrgApacheLuceneSearchDiversifiedTopDocsCollector_1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector_1 *self, OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) {
+  JreStrongAssign(&self->this$0_, outer$);
+  self->val$base_ = capture$0;
+  JreStrongAssign(&self->val$keySource_, capture$1);
+  NSObject_init(self);
+}
+
+OrgApacheLuceneSearchDiversifiedTopDocsCollector_1 *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDiversifiedTopDocsCollector_1, initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_, outer$, capture$0, capture$1)
+}
+
+OrgApacheLuceneSearchDiversifiedTopDocsCollector_1 *create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDiversifiedTopDocsCollector_1, initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_, outer$, capture$0, capture$1)
+}
 
 @implementation OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue
 
@@ -222,12 +308,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDiversifiedTopDocsCollecto
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "ScoreDocKeyQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, "(Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKey;Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKey;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x14, 1, 2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.DiversifiedTopDocsCollector$ScoreDocKey;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue = { 2, "ScoreDocKeyQueue", "org.apache.lucene.search", "DiversifiedTopDocsCollector", 0x8, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKey;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;LOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;", "LOrgApacheLuceneSearchDiversifiedTopDocsCollector;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKey;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue = { "ScoreDocKeyQueue", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x8, 2, 0, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue;
 }
 
@@ -274,15 +366,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDiversifiedTopDocsCollecto
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withFloat:", "ScoreDocKey", NULL, 0x4, NULL, NULL },
-    { "getKey", NULL, "Ljava.lang.Long;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withFloat:);
+  methods[1].selector = @selector(getKey);
+  methods[2].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "key_", NULL, 0x0, "Ljava.lang.Long;", NULL, NULL, .constantValue.asLong = 0 },
+    { "key_", "LJavaLangLong;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey = { 2, "ScoreDocKey", "org.apache.lucene.search", "DiversifiedTopDocsCollector", 0x9, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IF", "toString", "LOrgApacheLuceneSearchDiversifiedTopDocsCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey = { "ScoreDocKey", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x9, 3, 1, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;
 }
 
@@ -301,74 +401,3 @@ OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *create_OrgApacheLu
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey)
-
-@implementation OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1
-
-- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
-  JreStrongAssign(&self->scorer_, scorer);
-}
-
-- (void)collectWithInt:(jint)doc {
-  jfloat score = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
-  JreAssert((!JavaLangFloat_isNaNWithFloat_(score)), (@"org/apache/lucene/search/DiversifiedTopDocsCollector.java:197 condition failed: assert !Float.isNaN(score);"));
-  this$0_->totalHits_++;
-  doc += val$base_;
-  if (this$0_->spare_ == nil) {
-    JreStrongAssignAndConsume(&this$0_->spare_, new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_initWithInt_withFloat_(doc, score));
-  }
-  else {
-    this$0_->spare_->doc_ = doc;
-    this$0_->spare_->score_ = score;
-  }
-  JreStrongAssign(&this$0_->spare_, [this$0_ insertWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey:this$0_->spare_ withInt:val$base_ withOrgApacheLuceneIndexNumericDocValues:val$keySource_]);
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector:(OrgApacheLuceneSearchDiversifiedTopDocsCollector *)outer$
-                                                                 withInt:(jint)capture$0
-                                withOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$1 {
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(self, outer$, capture$0, capture$1);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(this$0_);
-  RELEASE_(scorer_);
-  RELEASE_(val$keySource_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector:withInt:withOrgApacheLuceneIndexNumericDocValues:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.DiversifiedTopDocsCollector;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scorer_", NULL, 0x0, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$base_", NULL, 0x1012, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$keySource_", NULL, 0x1012, "Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchDiversifiedTopDocsCollector", "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 = { 2, "", "org.apache.lucene.search", "DiversifiedTopDocsCollector", 0x8008, 3, methods, 4, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1;
-}
-
-@end
-
-void OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *self, OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) {
-  JreStrongAssign(&self->this$0_, outer$);
-  self->val$base_ = capture$0;
-  JreStrongAssign(&self->val$keySource_, capture$1);
-  NSObject_init(self);
-}
-
-OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1, initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_, outer$, capture$0, capture$1)
-}
-
-OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1, initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_, outer$, capture$0, capture$1)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)

@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -20,7 +19,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/path/ReversePathHierarchyTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer () {
  @public
@@ -48,7 +50,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, re
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, delimiterPositions_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, resultTokenBuffer_, IOSCharArray *)
 
-inline jint OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_get_DEFAULT_BUFFER_SIZE();
+inline jint OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_get_DEFAULT_BUFFER_SIZE(void);
 #define OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_BUFFER_SIZE 1024
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, DEFAULT_BUFFER_SIZE, jint)
 
@@ -155,10 +157,10 @@ J2OBJC_IGNORE_DESIGNATED_END
       [((id<JavaUtilList>) nil_chk(delimiterPositions_)) addWithId:JavaLangInteger_valueOfWithInt_(length)];
       delimitersCount_++;
     }
-    if (((IOSCharArray *) nil_chk(resultTokenBuffer_))->size_ < [((JavaLangStringBuilder *) nil_chk(resultToken_)) length]) {
-      JreStrongAssignAndConsume(&resultTokenBuffer_, [IOSCharArray newArrayWithLength:[((JavaLangStringBuilder *) nil_chk(resultToken_)) length]]);
+    if (((IOSCharArray *) nil_chk(resultTokenBuffer_))->size_ < [((JavaLangStringBuilder *) nil_chk(resultToken_)) java_length]) {
+      JreStrongAssignAndConsume(&resultTokenBuffer_, [IOSCharArray newArrayWithLength:[((JavaLangStringBuilder *) nil_chk(resultToken_)) java_length]]);
     }
-    [((JavaLangStringBuilder *) nil_chk(resultToken_)) getCharsWithInt:0 withInt:[resultToken_ length] withCharArray:resultTokenBuffer_ withInt:0];
+    [((JavaLangStringBuilder *) nil_chk(resultToken_)) getCharsWithInt:0 withInt:[resultToken_ java_length] withCharArray:resultTokenBuffer_ withInt:0];
     [((JavaLangStringBuilder *) nil_chk(resultToken_)) setLengthWithInt:0];
     jint idx = delimitersCount_ - 1 - skip_;
     if (idx >= 0) {
@@ -206,40 +208,58 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ReversePathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "ReversePathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withChar:", "ReversePathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithChar:withChar:", "ReversePathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withChar:withChar:", "ReversePathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithChar:withInt:", "ReversePathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithChar:withChar:withInt:", "ReversePathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withChar:withChar:withInt:", "ReversePathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withChar:withChar:withInt:", "ReversePathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withInt:withChar:withChar:withInt:", "ReversePathHierarchyTokenizer", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 6, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 7, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 9, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 9, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 9, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(initWithInt:withChar:);
+  methods[3].selector = @selector(initWithChar:withChar:);
+  methods[4].selector = @selector(initWithInt:withChar:withChar:);
+  methods[5].selector = @selector(initWithChar:withInt:);
+  methods[6].selector = @selector(initWithChar:withChar:withInt:);
+  methods[7].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withChar:withChar:withInt:);
+  methods[8].selector = @selector(initWithInt:withChar:withChar:withInt:);
+  methods[9].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withInt:withChar:withChar:withInt:);
+  methods[10].selector = @selector(incrementToken);
+  methods[11].selector = @selector(end);
+  methods[12].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_BUFFER_SIZE", "DEFAULT_BUFFER_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_BUFFER_SIZE },
-    { "DEFAULT_DELIMITER", "DEFAULT_DELIMITER", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_DELIMITER },
-    { "DEFAULT_SKIP", "DEFAULT_SKIP", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_SKIP },
-    { "delimiter_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "replacement_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "skip_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "endPosition_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "finalOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "skipped_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "resultToken_", NULL, 0x2, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "delimiterPositions_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
-    { "delimitersCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "resultTokenBuffer_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_BUFFER_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_BUFFER_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "DEFAULT_DELIMITER", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_DELIMITER, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_SKIP", "I", .constantValue.asInt = OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_SKIP, 0x19, -1, -1, -1, -1 },
+    { "delimiter_", "C", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "replacement_", "C", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "skip_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "endPosition_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "finalOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "skipped_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "resultToken_", "LJavaLangStringBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "delimiterPositions_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 10, -1 },
+    { "delimitersCount_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "resultTokenBuffer_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer = { 2, "ReversePathHierarchyTokenizer", "org.apache.lucene.analysis.path", NULL, 0x1, 13, methods, 16, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "IC", "CC", "ICC", "CI", "CCI", "LOrgApacheLuceneUtilAttributeFactory;CCI", "ICCI", "LOrgApacheLuceneUtilAttributeFactory;ICCI", "LJavaIoIOException;", "Ljava/util/List<Ljava/lang/Integer;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer = { "ReversePathHierarchyTokenizer", "org.apache.lucene.analysis.path", ptrTable, methods, fields, 7, 0x1, 13, 16, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer;
 }
 
@@ -374,7 +394,7 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheL
   self->skip_ = skip;
   JreStrongAssignAndConsume(&self->resultToken_, new_JavaLangStringBuilder_initWithInt_(bufferSize));
   JreStrongAssignAndConsume(&self->resultTokenBuffer_, [IOSCharArray newArrayWithLength:bufferSize]);
-  JreStrongAssignAndConsume(&self->delimiterPositions_, new_JavaUtilArrayList_initWithInt_(bufferSize / 10));
+  JreStrongAssignAndConsume(&self->delimiterPositions_, new_JavaUtilArrayList_initWithInt_(JreIntDiv(bufferSize, 10)));
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize, jchar delimiter, jchar replacement, jint skip) {

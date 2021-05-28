@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsPostingsReaderBase
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsPostingsReaderBase_) && (INCLUDE_ALL_OrgApacheLuceneCodecsPostingsReaderBase || defined(INCLUDE_OrgApacheLuceneCodecsPostingsReaderBase))
 #define OrgApacheLuceneCodecsPostingsReaderBase_
 
@@ -34,15 +40,13 @@
 
 /*!
  @brief The core terms dictionaries (BlockTermsReader,
- BlockTreeTermsReader) interact with a single instance
- of this class to manage creation of <code>org.apache.lucene.index.PostingsEnum</code> and
- <code>org.apache.lucene.index.PostingsEnum</code> instances.
- It provides an
- IndexInput (termsIn) where this class may read any
- previously stored data that it had written in its
- corresponding <code>PostingsWriterBase</code> at indexing
- time. 
-  
+   BlockTreeTermsReader) interact with a single instance
+   of this class to manage creation of <code>org.apache.lucene.index.PostingsEnum</code> and
+   <code>org.apache.lucene.index.PostingsEnum</code> instances.It provides an
+   IndexInput (termsIn) where this class may read any
+   previously stored data that it had written in its
+   corresponding <code>PostingsWriterBase</code> at indexing
+   time.
  */
 @interface OrgApacheLuceneCodecsPostingsReaderBase : NSObject < JavaIoCloseable, OrgApacheLuceneUtilAccountable >
 
@@ -51,8 +55,8 @@
 /*!
  @brief Checks consistency of this reader.
  <p>
- Note that this may be costly in terms of I/O, e.g. 
- may involve computing a checksum value against large data files.
+  Note that this may be costly in terms of I/O, e.g. 
+  may involve computing a checksum value against large data files.
  */
 - (void)checkIntegrity;
 
@@ -70,8 +74,8 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)s
 
 /*!
  @brief Performs any initialization, such as reading and
- verifying the header from the provided terms
- dictionary <code>IndexInput</code>.
+   verifying the header from the provided terms
+   dictionary <code>IndexInput</code>.
  */
 - (void)init__WithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)termsIn
         withOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state OBJC_METHOD_FAMILY_NONE;
@@ -83,7 +87,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)s
 
 /*!
  @brief Must fully consume state, since after this call that
- TermState may be reused.
+   TermState may be reused.
  */
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                         withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)state
@@ -95,9 +99,9 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)s
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -109,4 +113,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPostingsReaderBase)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPostingsReaderBase")

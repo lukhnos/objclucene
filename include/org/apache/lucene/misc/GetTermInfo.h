@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneMiscGetTermInfo
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneMiscGetTermInfo_) && (INCLUDE_ALL_OrgApacheLuceneMiscGetTermInfo || defined(INCLUDE_OrgApacheLuceneMiscGetTermInfo))
 #define OrgApacheLuceneMiscGetTermInfo_
 
@@ -27,7 +33,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (void)getTermInfoWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                         withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
@@ -38,18 +44,22 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneMiscGetTermInfo)
 
+FOUNDATION_EXPORT void OrgApacheLuceneMiscGetTermInfo_init(OrgApacheLuceneMiscGetTermInfo *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneMiscGetTermInfo *new_OrgApacheLuceneMiscGetTermInfo_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneMiscGetTermInfo *create_OrgApacheLuceneMiscGetTermInfo_init(void);
+
 FOUNDATION_EXPORT void OrgApacheLuceneMiscGetTermInfo_mainWithNSStringArray_(IOSObjectArray *args);
 
 FOUNDATION_EXPORT void OrgApacheLuceneMiscGetTermInfo_getTermInfoWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexTerm *term);
-
-FOUNDATION_EXPORT void OrgApacheLuceneMiscGetTermInfo_init(OrgApacheLuceneMiscGetTermInfo *self);
-
-FOUNDATION_EXPORT OrgApacheLuceneMiscGetTermInfo *new_OrgApacheLuceneMiscGetTermInfo_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneMiscGetTermInfo *create_OrgApacheLuceneMiscGetTermInfo_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscGetTermInfo)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneMiscGetTermInfo")

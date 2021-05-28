@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter_
 
@@ -24,9 +30,8 @@
 @class OrgApacheLuceneAnalysisTokenStream;
 
 /*!
- @brief Marks terms as keywords via the <code>KeywordAttribute</code>.
- Each token
- that matches the provided pattern is marked as a keyword by setting
+ @brief Marks terms as keywords via the <code>KeywordAttribute</code>.Each token
+  that matches the provided pattern is marked as a keyword by setting 
  <code>KeywordAttribute.setKeyword(boolean)</code> to <code>true</code>.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter : OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter
@@ -35,19 +40,21 @@
 
 /*!
  @brief Create a new <code>PatternKeywordMarkerFilter</code>, that marks the current
- token as a keyword if the tokens term buffer matches the provided
+  token as a keyword if the tokens term buffer matches the provided 
  <code>Pattern</code> via the <code>KeywordAttribute</code>.
- @param inArg
- TokenStream to filter
- @param pattern
- the pattern to apply to the incoming term buffer
+ @param inArg TokenStream to filter
+ @param pattern the pattern to apply to the incoming term buffer
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                  withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                            withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern;
 
 #pragma mark Protected
 
 - (jboolean)isKeyword;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -63,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMar
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter")

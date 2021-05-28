@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilNamedSPILoader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilNamedSPILoader_) && (INCLUDE_ALL_OrgApacheLuceneUtilNamedSPILoader || defined(INCLUDE_OrgApacheLuceneUtilNamedSPILoader))
 #define OrgApacheLuceneUtilNamedSPILoader_
 
@@ -22,22 +28,23 @@
 
 @class IOSClass;
 @class JavaLangClassLoader;
+@protocol JavaUtilFunctionConsumer;
 @protocol JavaUtilIterator;
 @protocol JavaUtilSet;
+@protocol JavaUtilSpliterator;
 @protocol OrgApacheLuceneUtilNamedSPILoader_NamedSPI;
 
 /*!
- @brief Helper class for loading named SPIs from classpath (e.g.
- Codec, PostingsFormat).
+ @brief Helper class for loading named SPIs from classpath (e.g.Codec, PostingsFormat).
  */
 @interface OrgApacheLuceneUtilNamedSPILoader : NSObject < JavaLangIterable >
 
 #pragma mark Public
 
-- (instancetype)initWithIOSClass:(IOSClass *)clazz;
+- (instancetype __nonnull)initWithIOSClass:(IOSClass *)clazz;
 
-- (instancetype)initWithIOSClass:(IOSClass *)clazz
-         withJavaLangClassLoader:(JavaLangClassLoader *)classloader;
+- (instancetype __nonnull)initWithIOSClass:(IOSClass *)clazz
+                   withJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
 - (id<JavaUtilSet>)availableServices;
 
@@ -48,20 +55,24 @@
 
 - (id<JavaUtilIterator>)iterator;
 
-- (id)lookupWithNSString:(NSString *)name;
+- (id<OrgApacheLuceneUtilNamedSPILoader_NamedSPI>)lookupWithNSString:(NSString *)name;
 
 /*!
  @brief Reloads the internal SPI list from the given <code>ClassLoader</code>.
  Changes to the service list are visible after the method ends, all
- iterators (<code>iterator()</code>,...) stay consistent. 
+  iterators (<code>iterator()</code>,...) stay consistent.   
  <p><b>NOTE:</b> Only new service providers are added, existing ones are
- never removed or replaced.
+  never removed or replaced.  
  <p><em>This method is expensive and should only be called for discovery
- of new service providers on the given classpath/classloader!</em>
+  of new service providers on the given classpath/classloader!</em>
  */
 - (void)reloadWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
 #pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -91,9 +102,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNamedSPILoader)
 /*!
  @brief Interface to support <code>NamedSPILoader.lookup(String)</code> by name.
  <p>
- Names must be all ascii alphanumeric, and less than 128 characters in length.
+  Names must be all ascii alphanumeric, and less than 128 characters in length.
  */
-@protocol OrgApacheLuceneUtilNamedSPILoader_NamedSPI < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilNamedSPILoader_NamedSPI < JavaObject >
 
 - (NSString *)getName;
 
@@ -105,4 +116,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNamedSPILoader_NamedSPI)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilNamedSPILoader")

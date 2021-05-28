@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSerialMergeScheduler
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSerialMergeScheduler_) && (INCLUDE_ALL_OrgApacheLuceneIndexSerialMergeScheduler || defined(INCLUDE_OrgApacheLuceneIndexSerialMergeScheduler))
 #define OrgApacheLuceneIndexSerialMergeScheduler_
 
@@ -25,7 +31,7 @@
 
 /*!
  @brief A <code>MergeScheduler</code> that simply does each merge
- sequentially, using the current thread.
+   sequentially, using the current thread.
  */
 @interface OrgApacheLuceneIndexSerialMergeScheduler : OrgApacheLuceneIndexMergeScheduler
 
@@ -34,15 +40,14 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)close;
 
 /*!
- @brief Just do the merges in sequence.
- We do this
- "synchronized" so that even if the application is using
- multiple threads, only one merge may run at a time. 
+ @brief Just do the merges in sequence.We do this
+  "synchronized" so that even if the application is using
+  multiple threads, only one merge may run at a time.
  */
 - (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
             withOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)trigger
@@ -54,12 +59,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSerialMergeScheduler)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSerialMergeScheduler_init(OrgApacheLuceneIndexSerialMergeScheduler *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSerialMergeScheduler *new_OrgApacheLuceneIndexSerialMergeScheduler_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexSerialMergeScheduler *new_OrgApacheLuceneIndexSerialMergeScheduler_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSerialMergeScheduler *create_OrgApacheLuceneIndexSerialMergeScheduler_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexSerialMergeScheduler *create_OrgApacheLuceneIndexSerialMergeScheduler_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSerialMergeScheduler)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSerialMergeScheduler")

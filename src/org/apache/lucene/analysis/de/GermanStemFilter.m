@@ -5,14 +5,16 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/de/GermanStemFilter.h"
 #include "org/apache/lucene/analysis/de/GermanStemmer.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/KeywordAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/de/GermanStemFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisDeGermanStemFilter () {
  @public
@@ -41,7 +43,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisDeGermanStemFilter, keywordAttr_, id<
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     NSString *term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) description];
     if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword]) {
-      NSString *s = [((OrgApacheLuceneAnalysisDeGermanStemmer *) nil_chk(stemmer_)) stemWithNSString:term];
+      NSString *s = JreRetainedLocalValue([((OrgApacheLuceneAnalysisDeGermanStemmer *) nil_chk(stemmer_)) stemWithNSString:term]);
       if ((s != nil) && ![((NSString *) nil_chk(s)) isEqual:term]) [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAtt_ setEmpty])) appendWithNSString:s];
     }
     return true;
@@ -65,17 +67,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisDeGermanStemFilter, keywordAttr_, id<
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "GermanStemFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "setStemmerWithOrgApacheLuceneAnalysisDeGermanStemmer:", "setStemmer", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  methods[2].selector = @selector(setStemmerWithOrgApacheLuceneAnalysisDeGermanStemmer:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stemmer_", NULL, 0x2, "Lorg.apache.lucene.analysis.de.GermanStemmer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "keywordAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.KeywordAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "stemmer_", "LOrgApacheLuceneAnalysisDeGermanStemmer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "keywordAttr_", "LOrgApacheLuceneAnalysisTokenattributesKeywordAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDeGermanStemFilter = { 2, "GermanStemFilter", "org.apache.lucene.analysis.de", NULL, 0x11, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", "setStemmer", "LOrgApacheLuceneAnalysisDeGermanStemmer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDeGermanStemFilter = { "GermanStemFilter", "org.apache.lucene.analysis.de", ptrTable, methods, fields, 7, 0x11, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisDeGermanStemFilter;
 }
 

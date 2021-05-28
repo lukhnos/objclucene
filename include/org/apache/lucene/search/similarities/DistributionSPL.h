@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesDistributionSPL
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesDistributionSPL_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistributionSPL || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesDistributionSPL))
 #define OrgApacheLuceneSearchSimilaritiesDistributionSPL_
 
@@ -24,10 +30,10 @@
 
 /*!
  @brief The smoothed power-law (SPL) distribution for the information-based framework
- that is described in the original paper.
+  that is described in the original paper.
  <p>Unlike for DFR, the natural logarithm is used, as
- it is faster to compute and the original paper does not express any
- preference to a specific base.</p>
+  it is faster to compute and the original paper does not express any
+  preference to a specific base.</p>
  */
 @interface OrgApacheLuceneSearchSimilaritiesDistributionSPL : OrgApacheLuceneSearchSimilaritiesDistribution
 
@@ -36,7 +42,7 @@
 /*!
  @brief Sole constructor: parameter-free
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn
@@ -50,12 +56,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesDistributionSPL)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesDistributionSPL_init(OrgApacheLuceneSearchSimilaritiesDistributionSPL *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesDistributionSPL *new_OrgApacheLuceneSearchSimilaritiesDistributionSPL_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesDistributionSPL *new_OrgApacheLuceneSearchSimilaritiesDistributionSPL_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesDistributionSPL *create_OrgApacheLuceneSearchSimilaritiesDistributionSPL_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesDistributionSPL *create_OrgApacheLuceneSearchSimilaritiesDistributionSPL_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesDistributionSPL)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistributionSPL")

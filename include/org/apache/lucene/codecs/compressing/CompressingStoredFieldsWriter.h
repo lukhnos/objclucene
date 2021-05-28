@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter))
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_
 
@@ -39,71 +45,46 @@
  @public
   IOSByteArray *scratchBytes_;
 }
-
-+ (NSString *)FIELDS_EXTENSION;
-
-+ (NSString *)FIELDS_INDEX_EXTENSION;
-
-+ (jint)STRING;
-
-+ (jint)BYTE_ARR;
-
-+ (jint)NUMERIC_INT;
-
-+ (jint)NUMERIC_FLOAT;
-
-+ (jint)NUMERIC_LONG;
-
-+ (jint)NUMERIC_DOUBLE;
-
-+ (jint)TYPE_BITS;
-
-+ (jint)TYPE_MASK;
-
-+ (NSString *)CODEC_SFX_IDX;
-
-+ (NSString *)CODEC_SFX_DAT;
-
-+ (jint)VERSION_START;
-
-+ (jint)VERSION_CHUNK_STATS;
-
-+ (jint)VERSION_CURRENT;
-
-+ (jint)NEGATIVE_ZERO_FLOAT;
-
-+ (jlong)NEGATIVE_ZERO_DOUBLE;
-
-+ (jlong)SECOND;
-
-+ (jlong)HOUR;
-
-+ (jlong)DAY;
-
-+ (jint)SECOND_ENCODING;
-
-+ (jint)HOUR_ENCODING;
-
-+ (jint)DAY_ENCODING;
-
-+ (NSString *)BULK_MERGE_ENABLED_SYSPROP;
-
-+ (jboolean)BULK_MERGE_ENABLED;
+@property (readonly, copy, class) NSString *FIELDS_EXTENSION NS_SWIFT_NAME(FIELDS_EXTENSION);
+@property (readonly, copy, class) NSString *FIELDS_INDEX_EXTENSION NS_SWIFT_NAME(FIELDS_INDEX_EXTENSION);
+@property (readonly, class) jint STRING NS_SWIFT_NAME(STRING);
+@property (readonly, class) jint BYTE_ARR NS_SWIFT_NAME(BYTE_ARR);
+@property (readonly, class) jint NUMERIC_INT NS_SWIFT_NAME(NUMERIC_INT);
+@property (readonly, class) jint NUMERIC_FLOAT NS_SWIFT_NAME(NUMERIC_FLOAT);
+@property (readonly, class) jint NUMERIC_LONG NS_SWIFT_NAME(NUMERIC_LONG);
+@property (readonly, class) jint NUMERIC_DOUBLE NS_SWIFT_NAME(NUMERIC_DOUBLE);
+@property (readonly, class) jint TYPE_BITS NS_SWIFT_NAME(TYPE_BITS);
+@property (readonly, class) jint TYPE_MASK NS_SWIFT_NAME(TYPE_MASK);
+@property (readonly, copy, class) NSString *CODEC_SFX_IDX NS_SWIFT_NAME(CODEC_SFX_IDX);
+@property (readonly, copy, class) NSString *CODEC_SFX_DAT NS_SWIFT_NAME(CODEC_SFX_DAT);
+@property (readonly, class) jint VERSION_START NS_SWIFT_NAME(VERSION_START);
+@property (readonly, class) jint VERSION_CHUNK_STATS NS_SWIFT_NAME(VERSION_CHUNK_STATS);
+@property (readonly, class) jint VERSION_CURRENT NS_SWIFT_NAME(VERSION_CURRENT);
+@property (readonly, class) jint NEGATIVE_ZERO_FLOAT NS_SWIFT_NAME(NEGATIVE_ZERO_FLOAT);
+@property (readonly, class) jlong NEGATIVE_ZERO_DOUBLE NS_SWIFT_NAME(NEGATIVE_ZERO_DOUBLE);
+@property (readonly, class) jlong SECOND NS_SWIFT_NAME(SECOND);
+@property (readonly, class) jlong HOUR NS_SWIFT_NAME(HOUR);
+@property (readonly, class) jlong DAY NS_SWIFT_NAME(DAY);
+@property (readonly, class) jint SECOND_ENCODING NS_SWIFT_NAME(SECOND_ENCODING);
+@property (readonly, class) jint HOUR_ENCODING NS_SWIFT_NAME(HOUR_ENCODING);
+@property (readonly, class) jint DAY_ENCODING NS_SWIFT_NAME(DAY_ENCODING);
+@property (readonly, copy, class) NSString *BULK_MERGE_ENABLED_SYSPROP NS_SWIFT_NAME(BULK_MERGE_ENABLED_SYSPROP);
+@property (readonly, class) jboolean BULK_MERGE_ENABLED NS_SWIFT_NAME(BULK_MERGE_ENABLED);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
-                  withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
-                                         withNSString:(NSString *)segmentSuffix
-                    withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
-                                         withNSString:(NSString *)formatName
-  withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode
-                                              withInt:(jint)chunkSize
-                                              withInt:(jint)maxDocsPerChunk
-                                              withInt:(jint)blockSize;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
+                            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
+                                                   withNSString:(NSString *)segmentSuffix
+                              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
+                                                   withNSString:(NSString *)formatName
+            withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode
+                                                        withInt:(jint)chunkSize
+                                                        withInt:(jint)maxDocsPerChunk
+                                                        withInt:(jint)blockSize;
 
 - (void)close;
 
@@ -122,89 +103,93 @@
 #pragma mark Package-Private
 
 /*!
- @brief Returns true if we should recompress this reader, even though we could bulk merge compressed data 
+ @brief Returns true if we should recompress this reader, even though we could bulk merge compressed data
  <p>
- The last chunk written for a segment is typically incomplete, so without recompressing,
- in some worst-case situations (e.g. frequent reopen with tiny flushes), over time the 
- compression ratio can degrade.
+  The last chunk written for a segment is typically incomplete, so without recompressing,
+  in some worst-case situations (e.g. frequent reopen with tiny flushes), over time the 
+  compression ratio can degrade.
  This is a safety switch.
  */
 - (jboolean)tooDirtyWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader:(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *)candidate;
 
 /*!
- @brief Writes a long in a variable-length format.
- Writes between one and 
- ten bytes. Small values or values representing timestamps with day,
- hour or second precision typically require fewer bytes.
+ @brief Writes a long in a variable-length format.Writes between one and 
+  ten bytes.
+ Small values or values representing timestamps with day,
+  hour or second precision typically require fewer bytes. 
  <p>
- ZLong --&gt; Header, Bytes*?
+  ZLong --&gt; Header, Bytes*? 
  <ul>
- <li>Header --&gt; The first two bits indicate the compression scheme:
- <ul>
- <li>00 - uncompressed
- <li>01 - multiple of 1000 (second)
- <li>10 - multiple of 3600000 (hour)
- <li>11 - multiple of 86400000 (day)
- </ul>
- Then the next bit is a continuation bit, indicating whether more
- bytes need to be read, and the last 5 bits are the lower bits of
- the encoded value. In order to reconstruct the value, you need to
- combine the 5 lower bits of the header with a vLong in the next
- bytes (if the continuation bit is set to 1). Then
+     <li>Header --&gt; The first two bits indicate the compression scheme:
+        <ul>
+           <li>00 - uncompressed
+           <li>01 - multiple of 1000 (second)
+           <li>10 - multiple of 3600000 (hour)
+           <li>11 - multiple of 86400000 (day)
+        </ul>
+        Then the next bit is a continuation bit, indicating whether more
+        bytes need to be read, and the last 5 bits are the lower bits of
+        the encoded value. In order to reconstruct the value, you need to
+        combine the 5 lower bits of the header with a vLong in the next
+        bytes (if the continuation bit is set to 1). Then       
  <code>zigzag-decode</code> it and finally
- multiply by the multiple corresponding to the compression scheme.
+        multiply by the multiple corresponding to the compression scheme.    
  <li>Bytes --&gt; Potential additional bytes to read depending on the
- header.
+        header. 
  </ul>
- <p>
+  <p>
  */
 + (void)writeTLongWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                             withLong:(jlong)l;
 
 /*!
- @brief Writes a float in a variable-length format.
- Writes between one and 
- five bytes. Small integral values typically take fewer bytes.
+ @brief Writes a float in a variable-length format.Writes between one and 
+  five bytes.
+ Small integral values typically take fewer bytes. 
  <p>
- ZFloat --&gt; Header, Bytes*?
+  ZFloat --&gt; Header, Bytes*? 
  <ul>
- <li>Header --&gt; <code>Uint8</code>. When it is
- equal to 0xFF then the value is negative and stored in the next
- 8 bytes. When it is equal to 0xFE then the value is stored as a
- float in the next 4 bytes. Otherwise if the first bit is set
- then the other bits in the header encode the value plus one and
- no other bytes are read. Otherwise, the value is a positive float
- value whose first byte is the header, and 7 bytes need to be read
- to complete it.
+     <li>Header --&gt; <code>Uint8</code>. When it is
+        equal to 0xFF then the value is negative and stored in the next
+        8 bytes. When it is equal to 0xFE then the value is stored as a
+        float in the next 4 bytes. Otherwise if the first bit is set
+        then the other bits in the header encode the value plus one and
+        no other bytes are read. Otherwise, the value is a positive float
+        value whose first byte is the header, and 7 bytes need to be read
+        to complete it.    
  <li>Bytes --&gt; Potential additional bytes to read depending on the
- header.
+        header. 
  </ul>
- <p>
+  <p>
  */
 + (void)writeZDoubleWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                             withDouble:(jdouble)d;
 
 /*!
- @brief Writes a float in a variable-length format.
- Writes between one and 
- five bytes. Small integral values typically take fewer bytes.
+ @brief Writes a float in a variable-length format.Writes between one and 
+  five bytes.
+ Small integral values typically take fewer bytes. 
  <p>
- ZFloat --&gt; Header, Bytes*?
+  ZFloat --&gt; Header, Bytes*? 
  <ul>
- <li>Header --&gt; <code>Uint8</code>. When it is
- equal to 0xFF then the value is negative and stored in the next
- 4 bytes. Otherwise if the first bit is set then the other bits
- in the header encode the value plus one and no other
- bytes are read. Otherwise, the value is a positive float value
- whose first byte is the header, and 3 bytes need to be read to
- complete it.
+     <li>Header --&gt; <code>Uint8</code>. When it is
+        equal to 0xFF then the value is negative and stored in the next
+        4 bytes. Otherwise if the first bit is set then the other bits
+        in the header encode the value plus one and no other
+        bytes are read. Otherwise, the value is a positive float value
+        whose first byte is the header, and 3 bytes need to be read to
+        complete it.    
  <li>Bytes --&gt; Potential additional bytes to read depending on the
- header.
+        header. 
  </ul>
- <p>
+  <p>
  */
 + (void)writeZFloatWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                             withFloat:(jfloat)f;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -215,7 +200,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWrite
 /*!
  @brief Extension of stored fields file
  */
-inline NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_FIELDS_EXTENSION();
+inline NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_FIELDS_EXTENSION(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_FIELDS_EXTENSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, FIELDS_EXTENSION, NSString *)
@@ -223,107 +208,107 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredF
 /*!
  @brief Extension of stored fields index file
  */
-inline NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_FIELDS_INDEX_EXTENSION();
+inline NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_FIELDS_INDEX_EXTENSION(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_FIELDS_INDEX_EXTENSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, FIELDS_INDEX_EXTENSION, NSString *)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_STRING();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_STRING(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_STRING 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, STRING, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_BYTE_ARR();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_BYTE_ARR(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_BYTE_ARR 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, BYTE_ARR, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NUMERIC_INT();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NUMERIC_INT(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_NUMERIC_INT 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, NUMERIC_INT, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NUMERIC_FLOAT();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NUMERIC_FLOAT(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_NUMERIC_FLOAT 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, NUMERIC_FLOAT, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NUMERIC_LONG();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NUMERIC_LONG(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_NUMERIC_LONG 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, NUMERIC_LONG, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NUMERIC_DOUBLE();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NUMERIC_DOUBLE(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_NUMERIC_DOUBLE 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, NUMERIC_DOUBLE, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_TYPE_BITS();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_TYPE_BITS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_TYPE_BITS;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, TYPE_BITS, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_TYPE_MASK();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_TYPE_MASK(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_TYPE_MASK;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, TYPE_MASK, jint)
 
-inline NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_CODEC_SFX_IDX();
+inline NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_CODEC_SFX_IDX(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_CODEC_SFX_IDX;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, CODEC_SFX_IDX, NSString *)
 
-inline NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_CODEC_SFX_DAT();
+inline NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_CODEC_SFX_DAT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_CODEC_SFX_DAT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, CODEC_SFX_DAT, NSString *)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_VERSION_START();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_VERSION_START(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_VERSION_START 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, VERSION_START, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_VERSION_CHUNK_STATS();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_VERSION_CHUNK_STATS(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_VERSION_CHUNK_STATS 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, VERSION_CHUNK_STATS, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_VERSION_CURRENT();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_VERSION_CURRENT(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_VERSION_CURRENT 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, VERSION_CURRENT, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NEGATIVE_ZERO_FLOAT();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NEGATIVE_ZERO_FLOAT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_NEGATIVE_ZERO_FLOAT;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, NEGATIVE_ZERO_FLOAT, jint)
 
-inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NEGATIVE_ZERO_DOUBLE();
+inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_NEGATIVE_ZERO_DOUBLE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_NEGATIVE_ZERO_DOUBLE;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, NEGATIVE_ZERO_DOUBLE, jlong)
 
-inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_SECOND();
+inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_SECOND(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_SECOND 1000LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, SECOND, jlong)
 
-inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_HOUR();
+inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_HOUR(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_HOUR 3600000LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, HOUR, jlong)
 
-inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_DAY();
+inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_DAY(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_DAY 86400000LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, DAY, jlong)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_SECOND_ENCODING();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_SECOND_ENCODING(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_SECOND_ENCODING 64
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, SECOND_ENCODING, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_HOUR_ENCODING();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_HOUR_ENCODING(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_HOUR_ENCODING 128
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, HOUR_ENCODING, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_DAY_ENCODING();
+inline jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_DAY_ENCODING(void);
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_DAY_ENCODING 192
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, DAY_ENCODING, jint)
 
-inline NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_BULK_MERGE_ENABLED_SYSPROP();
+inline NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_BULK_MERGE_ENABLED_SYSPROP(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_BULK_MERGE_ENABLED_SYSPROP;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, BULK_MERGE_ENABLED_SYSPROP, NSString *)
 
-inline jboolean OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_BULK_MERGE_ENABLED();
+inline jboolean OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_get_BULK_MERGE_ENABLED(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jboolean OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_BULK_MERGE_ENABLED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, BULK_MERGE_ENABLED, jboolean)
@@ -344,4 +329,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFiel
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter")

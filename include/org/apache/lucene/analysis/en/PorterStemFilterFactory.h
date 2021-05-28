@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisEnPorterStemFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisEnPorterStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnPorterStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisEnPorterStemFilterFactory))
 #define OrgApacheLuceneAnalysisEnPorterStemFilterFactory_
 
@@ -27,13 +33,13 @@
 /*!
  @brief Factory for <code>PorterStemFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_porterstem" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
- &lt;filter class="solr.PorterStemFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_porterstem" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+      &lt;filter class="solr.PorterStemFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisEnPorterStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
@@ -43,7 +49,7 @@
 /*!
  @brief Creates a new PorterStemFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisEnPorterStemFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -61,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnPorterStemFilterFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnPorterStemFilterFactory")

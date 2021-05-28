@@ -7,7 +7,18 @@
 #include "org/apache/lucene/queries/function/ValueSource.h"
 #include "org/apache/lucene/queries/function/valuesource/ConstNumberSource.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/ConstNumberSource must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)getInt {
   // can't call an abstract method
@@ -45,24 +56,28 @@
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getInt", NULL, "I", 0x401, NULL, NULL },
-    { "getLong", NULL, "J", 0x401, NULL, NULL },
-    { "getFloat", NULL, "F", 0x401, NULL, NULL },
-    { "getDouble", NULL, "D", 0x401, NULL, NULL },
-    { "getNumber", NULL, "Ljava.lang.Number;", 0x401, NULL, NULL },
-    { "getBool", NULL, "Z", 0x401, NULL, NULL },
-    { "init", "ConstNumberSource", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "D", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSNumber;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource = { 2, "ConstNumberSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x401, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getInt);
+  methods[2].selector = @selector(getLong);
+  methods[3].selector = @selector(getFloat);
+  methods[4].selector = @selector(getDouble);
+  methods[5].selector = @selector(getNumber);
+  methods[6].selector = @selector(getBool);
+  #pragma clang diagnostic pop
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource = { "ConstNumberSource", "org.apache.lucene.queries.function.valuesource", NULL, methods, NULL, 7, 0x401, 7, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource;
 }
 

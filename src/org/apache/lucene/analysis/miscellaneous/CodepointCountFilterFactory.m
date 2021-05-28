@@ -9,8 +9,11 @@
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/CodepointCountFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/CodepointCountFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/CodepointCountFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MIN_KEY = @"min";
 NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MAX_KEY = @"max";
@@ -35,17 +38,24 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MAX_KE
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "CodepointCountFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.miscellaneous.CodepointCountFilter;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "min_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "max_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "MIN_KEY", "MIN_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MIN_KEY, NULL, .constantValue.asLong = 0 },
-    { "MAX_KEY", "MAX_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MAX_KEY, NULL, .constantValue.asLong = 0 },
+    { "min_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "max_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "MIN_KEY", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "MAX_KEY", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 5, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory = { 2, "CodepointCountFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LOrgApacheLuceneAnalysisTokenStream;", &OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MIN_KEY, &OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MAX_KEY };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory = { "CodepointCountFilterFactory", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x1, 2, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory;
 }
 

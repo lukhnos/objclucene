@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexBufferedUpdatesStream
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexBufferedUpdatesStream_) && (INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream || defined(INCLUDE_OrgApacheLuceneIndexBufferedUpdatesStream))
 #define OrgApacheLuceneIndexBufferedUpdatesStream_
 
@@ -32,14 +38,14 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
 
 - (jboolean)any;
 
 /*!
  @brief Resolves the buffered deleted Term/Query/docIDs, into
- actual deleted docIDs in the liveDocs MutableBits for
- each SegmentReader.
+   actual deleted docIDs in the liveDocs MutableBits for
+   each SegmentReader.
  */
 - (OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult *)applyDeletesAndUpdatesWithOrgApacheLuceneIndexIndexWriter_ReaderPool:(OrgApacheLuceneIndexIndexWriter_ReaderPool *)pool
                                                                                                                       withJavaUtilList:(id<JavaUtilList>)infos;
@@ -60,15 +66,19 @@
 
 - (jlong)getNextGen;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexBufferedUpdatesStream)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexBufferedUpdatesStream_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexBufferedUpdatesStream *self, OrgApacheLuceneUtilInfoStream *infoStream);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexBufferedUpdatesStream_initPackagePrivateWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexBufferedUpdatesStream *self, OrgApacheLuceneUtilInfoStream *infoStream);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream *new_OrgApacheLuceneIndexBufferedUpdatesStream_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream *new_OrgApacheLuceneIndexBufferedUpdatesStream_initPackagePrivateWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream *create_OrgApacheLuceneIndexBufferedUpdatesStream_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream);
+FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream *create_OrgApacheLuceneIndexBufferedUpdatesStream_initPackagePrivateWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream)
 
@@ -88,9 +98,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithBoolean:(jboolean)anyDeletes
-                       withLong:(jlong)gen
-               withJavaUtilList:(id<JavaUtilList>)allDeleted;
+- (instancetype __nonnull)initWithBoolean:(jboolean)anyDeletes
+                                 withLong:(jlong)gen
+                         withJavaUtilList:(id<JavaUtilList>)allDeleted;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -133,10 +147,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDelete
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter_ReaderPool:(OrgApacheLuceneIndexIndexWriter_ReaderPool *)pool
-                         withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexWriter_ReaderPool:(OrgApacheLuceneIndexIndexWriter_ReaderPool *)pool
+                                   withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info;
 
 - (void)finishWithOrgApacheLuceneIndexIndexWriter_ReaderPool:(OrgApacheLuceneIndexIndexWriter_ReaderPool *)pool;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -174,12 +192,31 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream_SegmentStat
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
+
+- (OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)addWithId:(OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)arg0;
+
+- (OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)insertWithOverflowWithId:(OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)arg0;
+
+- (OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)pop;
+
+- (OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)top;
+
+- (OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)updateTop;
+
+- (OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)updateTopWithId:(OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)arg0;
 
 #pragma mark Protected
 
+- (OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)getSentinelObject;
+
 - (jboolean)lessThanWithId:(OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)a
                     withId:(OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *)b;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -208,8 +245,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueu
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                           withInt:(jint)limit;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                                                     withInt:(jint)limit;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -227,4 +268,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLim
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream")

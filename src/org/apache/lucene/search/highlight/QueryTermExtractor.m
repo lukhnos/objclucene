@@ -24,6 +24,10 @@
 #include "org/apache/lucene/search/highlight/QueryTermExtractor.h"
 #include "org/apache/lucene/search/highlight/WeightedTerm.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/QueryTermExtractor must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchHighlightQueryTermExtractor ()
 
 + (void)getTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -33,14 +37,14 @@
 
 /*!
  @brief extractTerms is currently the only query-independent means of introspecting queries but it only reveals
- a list of terms for that query - not the boosts each individual term in that query may or may not have.
+  a list of terms for that query - not the boosts each individual term in that query may or may not have.
  "Container" queries such as BooleanQuery should be unwrapped to get at the boost info held
- in each child element.
- Some discussion around this topic here:
- http://www.gossamer-threads.com/lists/lucene/java-dev/34208?search_string=introspection;#34208
- Unfortunately there seemed to be limited interest in requiring all Query objects to implement
- something common which would allow access to child queries so what follows here are query-specific
- implementations for accessing embedded query elements.
+  in each child element.
+  Some discussion around this topic here:
+  http://www.gossamer-threads.com/lists/lucene/java-dev/34208?search_string=introspection;#34208
+  Unfortunately there seemed to be limited interest in requiring all Query objects to implement
+  something common which would allow access to child queries so what follows here are query-specific
+  implementations for accessing embedded query elements.
  */
 + (void)getTermsFromBooleanQueryWithOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)query
                                                   withJavaUtilHashSet:(JavaUtilHashSet *)terms
@@ -57,7 +61,7 @@
 /*!
  @brief for term extraction
  */
-inline OrgApacheLuceneSearchIndexSearcher *OrgApacheLuceneSearchHighlightQueryTermExtractor_get_EMPTY_INDEXSEARCHER();
+inline OrgApacheLuceneSearchIndexSearcher *OrgApacheLuceneSearchHighlightQueryTermExtractor_get_EMPTY_INDEXSEARCHER(void);
 static OrgApacheLuceneSearchIndexSearcher *OrgApacheLuceneSearchHighlightQueryTermExtractor_EMPTY_INDEXSEARCHER;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchHighlightQueryTermExtractor, EMPTY_INDEXSEARCHER, OrgApacheLuceneSearchIndexSearcher *)
 
@@ -70,6 +74,13 @@ __attribute__((unused)) static void OrgApacheLuceneSearchHighlightQueryTermExtra
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchHighlightQueryTermExtractor)
 
 @implementation OrgApacheLuceneSearchHighlightQueryTermExtractor
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchHighlightQueryTermExtractor_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (IOSObjectArray *)getTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
   return OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_(query);
@@ -113,12 +124,36 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchHighlightQueryTermExtractor)
   OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsFromFilteredQueryWithOrgApacheLuceneSearchFilteredQuery_withJavaUtilHashSet_withBoolean_withNSString_(query, terms, prohibited, fieldName);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchHighlightQueryTermExtractor_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchHighlightWeightedTerm;", 0x19, 0, 1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchHighlightWeightedTerm;", 0x19, 2, 3, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchHighlightWeightedTerm;", 0x19, 0, 4, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchHighlightWeightedTerm;", 0x19, 0, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1a, 0, 6, -1, 7, -1, -1 },
+    { NULL, "V", 0x1a, 8, 9, -1, 10, -1, -1 },
+    { NULL, "V", 0xa, 11, 12, -1, 13, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getTermsWithOrgApacheLuceneSearchQuery:);
+  methods[2].selector = @selector(getIdfWeightedTermsWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexIndexReader:withNSString:);
+  methods[3].selector = @selector(getTermsWithOrgApacheLuceneSearchQuery:withBoolean:withNSString:);
+  methods[4].selector = @selector(getTermsWithOrgApacheLuceneSearchQuery:withBoolean:);
+  methods[5].selector = @selector(getTermsWithOrgApacheLuceneSearchQuery:withJavaUtilHashSet:withBoolean:withNSString:);
+  methods[6].selector = @selector(getTermsFromBooleanQueryWithOrgApacheLuceneSearchBooleanQuery:withJavaUtilHashSet:withBoolean:withNSString:);
+  methods[7].selector = @selector(getTermsFromFilteredQueryWithOrgApacheLuceneSearchFilteredQuery:withJavaUtilHashSet:withBoolean:withNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_INDEXSEARCHER", "LOrgApacheLuceneSearchIndexSearcher;", .constantValue.asLong = 0, 0x1a, -1, 14, -1, -1 },
+  };
+  static const void *ptrTable[] = { "getTerms", "LOrgApacheLuceneSearchQuery;", "getIdfWeightedTerms", "LOrgApacheLuceneSearchQuery;LOrgApacheLuceneIndexIndexReader;LNSString;", "LOrgApacheLuceneSearchQuery;ZLNSString;", "LOrgApacheLuceneSearchQuery;Z", "LOrgApacheLuceneSearchQuery;LJavaUtilHashSet;ZLNSString;", "(Lorg/apache/lucene/search/Query;Ljava/util/HashSet<Lorg/apache/lucene/search/highlight/WeightedTerm;>;ZLjava/lang/String;)V", "getTermsFromBooleanQuery", "LOrgApacheLuceneSearchBooleanQuery;LJavaUtilHashSet;ZLNSString;", "(Lorg/apache/lucene/search/BooleanQuery;Ljava/util/HashSet<Lorg/apache/lucene/search/highlight/WeightedTerm;>;ZLjava/lang/String;)V", "getTermsFromFilteredQuery", "LOrgApacheLuceneSearchFilteredQuery;LJavaUtilHashSet;ZLNSString;", "(Lorg/apache/lucene/search/FilteredQuery;Ljava/util/HashSet<Lorg/apache/lucene/search/highlight/WeightedTerm;>;ZLjava/lang/String;)V", &OrgApacheLuceneSearchHighlightQueryTermExtractor_EMPTY_INDEXSEARCHER };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightQueryTermExtractor = { "QueryTermExtractor", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x11, 8, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchHighlightQueryTermExtractor;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchHighlightQueryTermExtractor class]) {
@@ -129,32 +164,26 @@ J2OBJC_IGNORE_DESIGNATED_END
         [OrgApacheLuceneSearchHighlightQueryTermExtractor_EMPTY_INDEXSEARCHER setQueryCacheWithOrgApacheLuceneSearchQueryCache:nil];
       }
       @catch (JavaIoIOException *bogus) {
-        @throw create_JavaLangRuntimeException_initWithNSException_(bogus);
+        @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(bogus);
       }
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchHighlightQueryTermExtractor)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getTermsWithOrgApacheLuceneSearchQuery:", "getTerms", "[Lorg.apache.lucene.search.highlight.WeightedTerm;", 0x19, NULL, NULL },
-    { "getIdfWeightedTermsWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexIndexReader:withNSString:", "getIdfWeightedTerms", "[Lorg.apache.lucene.search.highlight.WeightedTerm;", 0x19, NULL, NULL },
-    { "getTermsWithOrgApacheLuceneSearchQuery:withBoolean:withNSString:", "getTerms", "[Lorg.apache.lucene.search.highlight.WeightedTerm;", 0x19, NULL, NULL },
-    { "getTermsWithOrgApacheLuceneSearchQuery:withBoolean:", "getTerms", "[Lorg.apache.lucene.search.highlight.WeightedTerm;", 0x19, NULL, NULL },
-    { "getTermsWithOrgApacheLuceneSearchQuery:withJavaUtilHashSet:withBoolean:withNSString:", "getTerms", "V", 0x1a, NULL, "(Lorg/apache/lucene/search/Query;Ljava/util/HashSet<Lorg/apache/lucene/search/highlight/WeightedTerm;>;ZLjava/lang/String;)V" },
-    { "getTermsFromBooleanQueryWithOrgApacheLuceneSearchBooleanQuery:withJavaUtilHashSet:withBoolean:withNSString:", "getTermsFromBooleanQuery", "V", 0x1a, NULL, "(Lorg/apache/lucene/search/BooleanQuery;Ljava/util/HashSet<Lorg/apache/lucene/search/highlight/WeightedTerm;>;ZLjava/lang/String;)V" },
-    { "getTermsFromFilteredQueryWithOrgApacheLuceneSearchFilteredQuery:withJavaUtilHashSet:withBoolean:withNSString:", "getTermsFromFilteredQuery", "V", 0xa, NULL, "(Lorg/apache/lucene/search/FilteredQuery;Ljava/util/HashSet<Lorg/apache/lucene/search/highlight/WeightedTerm;>;ZLjava/lang/String;)V" },
-    { "init", "QueryTermExtractor", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_INDEXSEARCHER", "EMPTY_INDEXSEARCHER", 0x1a, "Lorg.apache.lucene.search.IndexSearcher;", &OrgApacheLuceneSearchHighlightQueryTermExtractor_EMPTY_INDEXSEARCHER, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightQueryTermExtractor = { 2, "QueryTermExtractor", "org.apache.lucene.search.highlight", NULL, 0x11, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchHighlightQueryTermExtractor;
+@end
+
+void OrgApacheLuceneSearchHighlightQueryTermExtractor_init(OrgApacheLuceneSearchHighlightQueryTermExtractor *self) {
+  NSObject_init(self);
 }
 
-@end
+OrgApacheLuceneSearchHighlightQueryTermExtractor *new_OrgApacheLuceneSearchHighlightQueryTermExtractor_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightQueryTermExtractor, init)
+}
+
+OrgApacheLuceneSearchHighlightQueryTermExtractor *create_OrgApacheLuceneSearchHighlightQueryTermExtractor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightQueryTermExtractor, init)
+}
 
 IOSObjectArray *OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
   OrgApacheLuceneSearchHighlightQueryTermExtractor_initialize();
@@ -192,18 +221,18 @@ IOSObjectArray *OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrg
 void OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_withJavaUtilHashSet_withBoolean_withNSString_(OrgApacheLuceneSearchQuery *query, JavaUtilHashSet *terms, jboolean prohibited, NSString *fieldName) {
   OrgApacheLuceneSearchHighlightQueryTermExtractor_initialize();
   @try {
-    if ([query isKindOfClass:[OrgApacheLuceneSearchBooleanQuery class]]) OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsFromBooleanQueryWithOrgApacheLuceneSearchBooleanQuery_withJavaUtilHashSet_withBoolean_withNSString_((OrgApacheLuceneSearchBooleanQuery *) cast_chk(query, [OrgApacheLuceneSearchBooleanQuery class]), terms, prohibited, fieldName);
-    else if ([query isKindOfClass:[OrgApacheLuceneSearchFilteredQuery class]]) OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsFromFilteredQueryWithOrgApacheLuceneSearchFilteredQuery_withJavaUtilHashSet_withBoolean_withNSString_((OrgApacheLuceneSearchFilteredQuery *) cast_chk(query, [OrgApacheLuceneSearchFilteredQuery class]), terms, prohibited, fieldName);
+    if ([query isKindOfClass:[OrgApacheLuceneSearchBooleanQuery class]]) OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsFromBooleanQueryWithOrgApacheLuceneSearchBooleanQuery_withJavaUtilHashSet_withBoolean_withNSString_((OrgApacheLuceneSearchBooleanQuery *) query, terms, prohibited, fieldName);
+    else if ([query isKindOfClass:[OrgApacheLuceneSearchFilteredQuery class]]) OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsFromFilteredQueryWithOrgApacheLuceneSearchFilteredQuery_withJavaUtilHashSet_withBoolean_withNSString_((OrgApacheLuceneSearchFilteredQuery *) query, terms, prohibited, fieldName);
     else {
       JavaUtilHashSet *nonWeightedTerms = create_JavaUtilHashSet_init();
       @try {
         [((OrgApacheLuceneSearchWeight *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(OrgApacheLuceneSearchHighlightQueryTermExtractor_EMPTY_INDEXSEARCHER)) createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:false])) extractTermsWithJavaUtilSet:nonWeightedTerms];
       }
       @catch (JavaIoIOException *bogus) {
-        @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(@"Should not happen on an empty index", bogus);
+        @throw create_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(@"Should not happen on an empty index", bogus);
       }
-      for (id<JavaUtilIterator> iter = [nonWeightedTerms iterator]; [((id<JavaUtilIterator>) nil_chk(iter)) hasNext]; ) {
-        OrgApacheLuceneIndexTerm *term = [iter next];
+      for (id<JavaUtilIterator> iter = JreRetainedLocalValue([nonWeightedTerms iterator]); [((id<JavaUtilIterator>) nil_chk(iter)) hasNext]; ) {
+        OrgApacheLuceneIndexTerm *term = JreRetainedLocalValue([iter next]);
         if ((fieldName == nil) || ([((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(term)) field])) isEqual:fieldName])) {
           [((JavaUtilHashSet *) nil_chk(terms)) addWithId:create_OrgApacheLuceneSearchHighlightWeightedTerm_initWithFloat_withNSString_([((OrgApacheLuceneSearchQuery *) nil_chk(query)) getBoost], [((OrgApacheLuceneIndexTerm *) nil_chk(term)) text])];
         }
@@ -224,18 +253,6 @@ void OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsFromBooleanQueryWi
 void OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsFromFilteredQueryWithOrgApacheLuceneSearchFilteredQuery_withJavaUtilHashSet_withBoolean_withNSString_(OrgApacheLuceneSearchFilteredQuery *query, JavaUtilHashSet *terms, jboolean prohibited, NSString *fieldName) {
   OrgApacheLuceneSearchHighlightQueryTermExtractor_initialize();
   OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_withJavaUtilHashSet_withBoolean_withNSString_([((OrgApacheLuceneSearchFilteredQuery *) nil_chk(query)) getQuery], terms, prohibited, fieldName);
-}
-
-void OrgApacheLuceneSearchHighlightQueryTermExtractor_init(OrgApacheLuceneSearchHighlightQueryTermExtractor *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneSearchHighlightQueryTermExtractor *new_OrgApacheLuceneSearchHighlightQueryTermExtractor_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightQueryTermExtractor, init)
-}
-
-OrgApacheLuceneSearchHighlightQueryTermExtractor *create_OrgApacheLuceneSearchHighlightQueryTermExtractor_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightQueryTermExtractor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightQueryTermExtractor)

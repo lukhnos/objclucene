@@ -3,6 +3,7 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/parser/ParseException.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -16,15 +17,18 @@
 #include "org/apache/lucene/queryparser/flexible/standard/parser/ParseException.h"
 #include "org/apache/lucene/queryparser/flexible/standard/parser/Token.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/parser/ParseException must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserParseException ()
 
 /*!
  @brief It uses "currentToken" and "expectedTokenSequences" to generate a parse
- error message and returns it.
- If this object has been created
- due to a parse error, and you do not catch it (it gets thrown
- from the parser) the correct error message
- gets displayed.
+  error message and returns it.If this object has been created
+  due to a parse error, and you do not catch it (it gets thrown
+  from the parser) the correct error message
+  gets displayed.
  */
 + (NSString *)initialiseWithOrgApacheLuceneQueryparserFlexibleStandardParserToken:(OrgApacheLuceneQueryparserFlexibleStandardParserToken *)currentToken
                                                                     withIntArray2:(IOSObjectArray *)expectedTokenSequences
@@ -35,9 +39,9 @@
 /*!
  @brief The version identifier for this Serializable class.
  Increment only if the <i>serialized</i> form of the
- class changes.
+  class changes.
  */
-inline jlong OrgApacheLuceneQueryparserFlexibleStandardParserParseException_get_serialVersionUID();
+inline jlong OrgApacheLuceneQueryparserFlexibleStandardParserParseException_get_serialVersionUID(void);
 #define OrgApacheLuceneQueryparserFlexibleStandardParserParseException_serialVersionUID 1LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardParserParseException, serialVersionUID, jlong)
 
@@ -83,21 +87,31 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleStandardParserToken:withIntArray2:withNSStringArray:", "ParseException", NULL, 0x1, NULL, NULL },
-    { "init", "ParseException", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage:", "ParseException", NULL, 0x1, NULL, NULL },
-    { "initialiseWithOrgApacheLuceneQueryparserFlexibleStandardParserToken:withIntArray2:withNSStringArray:", "initialise", "Ljava.lang.String;", 0xa, NULL, NULL },
-    { "add_escapesWithNSString:", "add_escapes", "Ljava.lang.String;", 0x8, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0xa, 2, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x8, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleStandardParserToken:withIntArray2:withNSStringArray:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage:);
+  methods[3].selector = @selector(initialiseWithOrgApacheLuceneQueryparserFlexibleStandardParserToken:withIntArray2:withNSStringArray:);
+  methods[4].selector = @selector(add_escapesWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "serialVersionUID", "serialVersionUID", 0x1a, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneQueryparserFlexibleStandardParserParseException_serialVersionUID },
-    { "currentToken_", NULL, 0x1, "Lorg.apache.lucene.queryparser.flexible.standard.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "expectedTokenSequences_", NULL, 0x1, "[[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenImage_", NULL, 0x1, "[Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "eol_", NULL, 0x4, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "serialVersionUID", "J", .constantValue.asLong = OrgApacheLuceneQueryparserFlexibleStandardParserParseException_serialVersionUID, 0x1a, -1, -1, -1, -1 },
+    { "currentToken_", "LOrgApacheLuceneQueryparserFlexibleStandardParserToken;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "expectedTokenSequences_", "[[I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "tokenImage_", "[LNSString;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "eol_", "LNSString;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserParseException = { 2, "ParseException", "org.apache.lucene.queryparser.flexible.standard.parser", NULL, 0x1, 5, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleStandardParserToken;[[I[LNSString;", "LOrgApacheLuceneQueryparserFlexibleMessagesMessage;", "initialise", "add_escapes", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserParseException = { "ParseException", "org.apache.lucene.queryparser.flexible.standard.parser", ptrTable, methods, fields, 7, 0x1, 5, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardParserParseException;
 }
 
@@ -163,7 +177,7 @@ NSString *OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initial
     [((JavaLangStringBuilder *) nil_chk([expected appendWithNSString:eol])) appendWithNSString:@"    "];
   }
   NSString *retval = @"Encountered \"";
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken *tok = ((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(currentToken))->next_;
+  OrgApacheLuceneQueryparserFlexibleStandardParserToken *tok = JreRetainedLocalValue(((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(currentToken))->next_);
   for (jint i = 0; i < maxSize; i++) {
     if (i != 0) JreStrAppend(&retval, "$", @" ");
     if (((OrgApacheLuceneQueryparserFlexibleStandardParserToken *) nil_chk(tok))->kind_ == 0) {
@@ -192,7 +206,7 @@ NSString *OrgApacheLuceneQueryparserFlexibleStandardParserParseException_add_esc
   OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initialize();
   JavaLangStringBuilder *retval = create_JavaLangStringBuilder_init();
   jchar ch;
-  for (jint i = 0; i < ((jint) [((NSString *) nil_chk(str)) length]); i++) {
+  for (jint i = 0; i < [((NSString *) nil_chk(str)) java_length]; i++) {
     switch ([str charAtWithInt:i]) {
       case 0:
       continue;
@@ -223,7 +237,7 @@ NSString *OrgApacheLuceneQueryparserFlexibleStandardParserParseException_add_esc
       default:
       if ((ch = [str charAtWithInt:i]) < (jint) 0x20 || ch > (jint) 0x7e) {
         NSString *s = JreStrcat("$$", @"0000", JavaLangInteger_toStringWithInt_withInt_(ch, 16));
-        [retval appendWithNSString:JreStrcat("$$", @"\\u", [s substring:((jint) [s length]) - 4 endIndex:((jint) [s length])])];
+        [retval appendWithNSString:JreStrcat("$$", @"\\u", [s java_substring:[s java_length] - 4 endIndex:[s java_length]])];
       }
       else {
         [retval appendWithChar:ch];

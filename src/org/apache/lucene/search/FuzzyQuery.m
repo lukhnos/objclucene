@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -20,11 +19,14 @@
 #include "org/apache/lucene/search/FuzzyQuery.h"
 #include "org/apache/lucene/search/FuzzyTermsEnum.h"
 #include "org/apache/lucene/search/MultiTermQuery.h"
-#include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/apache/lucene/util/automaton/LevenshteinAutomata.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/FuzzyQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchFuzzyQuery () {
  @public
@@ -38,6 +40,10 @@
 @end
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndexTerm *)
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchFuzzyQuery__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchFuzzyQuery__Annotations$1(void);
 
 @implementation OrgApacheLuceneSearchFuzzyQuery
 
@@ -102,7 +108,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndex
 
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
                                       withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts {
-  if (maxEdits_ == 0 || prefixLength_ >= ((jint) [((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(term_)) text])) length])) {
+  if (maxEdits_ == 0 || prefixLength_ >= [((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(term_)) text])) java_length]) {
     return create_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) bytes]);
   }
   return create_OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_(terms, atts, [self getTerm], maxEdits_, prefixLength_, transpositions_);
@@ -137,9 +143,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndex
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(obj) java_getClass])) return false;
   OrgApacheLuceneSearchFuzzyQuery *other = (OrgApacheLuceneSearchFuzzyQuery *) cast_chk(obj, [OrgApacheLuceneSearchFuzzyQuery class]);
   if (maxEdits_ != other->maxEdits_) return false;
   if (prefixLength_ != other->prefixLength_) return false;
@@ -157,48 +163,58 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndex
   return OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_(minimumSimilarity, termLen);
 }
 
-+ (IOSObjectArray *)__annotations_defaultMinSimilarity_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_floatToEditsWithFloat_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(term_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:withInt:withInt:withInt:withBoolean:", "FuzzyQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withInt:withInt:", "FuzzyQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withInt:", "FuzzyQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:", "FuzzyQuery", NULL, 0x1, NULL, NULL },
-    { "getMaxEdits", NULL, "I", 0x1, NULL, NULL },
-    { "getPrefixLength", NULL, "I", 0x1, NULL, NULL },
-    { "getTranspositions", NULL, "Z", 0x1, NULL, NULL },
-    { "getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x4, "Ljava.io.IOException;", NULL },
-    { "getTerm", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "floatToEditsWithFloat:withInt:", "floatToEdits", "I", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x4, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 12, 13, -1, -1, 14, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:withInt:withInt:withInt:withBoolean:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexTerm:withInt:withInt:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexTerm:withInt:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneIndexTerm:);
+  methods[4].selector = @selector(getMaxEdits);
+  methods[5].selector = @selector(getPrefixLength);
+  methods[6].selector = @selector(getTranspositions);
+  methods[7].selector = @selector(getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:);
+  methods[8].selector = @selector(getTerm);
+  methods[9].selector = @selector(toStringWithNSString:);
+  methods[10].selector = @selector(hash);
+  methods[11].selector = @selector(isEqual:);
+  methods[12].selector = @selector(floatToEditsWithFloat:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "defaultMaxEdits", "defaultMaxEdits", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchFuzzyQuery_defaultMaxEdits },
-    { "defaultPrefixLength", "defaultPrefixLength", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchFuzzyQuery_defaultPrefixLength },
-    { "defaultMaxExpansions", "defaultMaxExpansions", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchFuzzyQuery_defaultMaxExpansions },
-    { "defaultTranspositions", "defaultTranspositions", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneSearchFuzzyQuery_defaultTranspositions },
-    { "maxEdits_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxExpansions_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "transpositions_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixLength_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "term_", NULL, 0x12, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "defaultMinSimilarity", "defaultMinSimilarity", 0x19, "F", NULL, NULL, .constantValue.asFloat = OrgApacheLuceneSearchFuzzyQuery_defaultMinSimilarity },
+    { "defaultMaxEdits", "I", .constantValue.asInt = OrgApacheLuceneSearchFuzzyQuery_defaultMaxEdits, 0x19, -1, -1, -1, -1 },
+    { "defaultPrefixLength", "I", .constantValue.asInt = OrgApacheLuceneSearchFuzzyQuery_defaultPrefixLength, 0x19, -1, -1, -1, -1 },
+    { "defaultMaxExpansions", "I", .constantValue.asInt = OrgApacheLuceneSearchFuzzyQuery_defaultMaxExpansions, 0x19, -1, -1, -1, -1 },
+    { "defaultTranspositions", "Z", .constantValue.asBOOL = OrgApacheLuceneSearchFuzzyQuery_defaultTranspositions, 0x19, -1, -1, -1, -1 },
+    { "maxEdits_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxExpansions_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "transpositions_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "prefixLength_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "term_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "defaultMinSimilarity", "F", .constantValue.asFloat = OrgApacheLuceneSearchFuzzyQuery_defaultMinSimilarity, 0x19, -1, -1, -1, 15 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyQuery = { 2, "FuzzyQuery", "org.apache.lucene.search", NULL, 0x1, 13, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;IIIZ", "LOrgApacheLuceneIndexTerm;II", "LOrgApacheLuceneIndexTerm;I", "LOrgApacheLuceneIndexTerm;", "getTermsEnum", "LOrgApacheLuceneIndexTerms;LOrgApacheLuceneUtilAttributeSource;", "LJavaIoIOException;", "toString", "LNSString;", "hashCode", "equals", "LNSObject;", "floatToEdits", "FI", (void *)&OrgApacheLuceneSearchFuzzyQuery__Annotations$0, (void *)&OrgApacheLuceneSearchFuzzyQuery__Annotations$1 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyQuery = { "FuzzyQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 13, 10, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFuzzyQuery;
 }
 
@@ -278,6 +294,14 @@ jint OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_(jfloat minim
   else {
     return JavaLangMath_minWithInt_withInt_(JreFpToInt(((1.0 - minimumSimilarity) * termLen)), OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE);
   }
+}
+
+IOSObjectArray *OrgApacheLuceneSearchFuzzyQuery__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchFuzzyQuery__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyQuery)

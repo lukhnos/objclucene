@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
@@ -47,6 +46,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/PhraseQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchPhraseQuery () {
  @public
@@ -90,6 +93,14 @@ __attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchPhraseQuery_
 __attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchPhraseQuery_toTermsWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *termBytes);
 
 __attribute__((unused)) static void OrgApacheLuceneSearchPhraseQuery_ensureMutableWithNSString_(OrgApacheLuceneSearchPhraseQuery *self, NSString *method);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchPhraseQuery__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchPhraseQuery__Annotations$1(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchPhraseQuery__Annotations$2(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchPhraseQuery__Annotations$3(void);
 
 @interface OrgApacheLuceneSearchPhraseQuery_Builder () {
  @public
@@ -139,7 +150,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhraseQuery_Builder, positions_, id<Jav
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPhraseQuery_PhraseWeight)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhraseQuery_PhraseWeight, this$0_, OrgApacheLuceneSearchPhraseQuery *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhraseQuery_PhraseWeight, similarity_, OrgApacheLuceneSearchSimilaritiesSimilarity *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhraseQuery_PhraseWeight, stats_, OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhraseQuery_PhraseWeight, states_, IOSObjectArray *)
@@ -365,22 +375,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   [positions_ addWithId:JavaLangInteger_valueOfWithInt_(position)];
 }
 
-+ (IOSObjectArray *)__annotations_init {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_setSlopWithInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_addWithOrgApacheLuceneIndexTerm_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_addWithOrgApacheLuceneIndexTerm_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(field_);
   RELEASE_(terms_);
@@ -389,38 +383,63 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneIndexTermArray:withIntArray:", "PhraseQuery", NULL, 0x2, NULL, NULL },
-    { "incrementalPositionsWithInt:", "incrementalPositions", "[I", 0xa, NULL, NULL },
-    { "toTermsWithNSString:withNSStringArray:", "toTerms", "[Lorg.apache.lucene.index.Term;", 0x8a, NULL, NULL },
-    { "toTermsWithNSString:withOrgApacheLuceneUtilBytesRefArray:", "toTerms", "[Lorg.apache.lucene.index.Term;", 0x8a, NULL, NULL },
-    { "initWithInt:withNSString:withNSStringArray:", "PhraseQuery", NULL, 0x81, NULL, NULL },
-    { "initWithNSString:withNSStringArray:", "PhraseQuery", NULL, 0x81, NULL, NULL },
-    { "initWithInt:withNSString:withOrgApacheLuceneUtilBytesRefArray:", "PhraseQuery", NULL, 0x81, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRefArray:", "PhraseQuery", NULL, 0x81, NULL, NULL },
-    { "getSlop", NULL, "I", 0x1, NULL, NULL },
-    { "getTerms", NULL, "[Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "getPositions", NULL, "[I", 0x1, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", "PhraseQuery", NULL, 0x1, NULL, NULL },
-    { "ensureMutableWithNSString:", "ensureMutable", "V", 0x2, NULL, NULL },
-    { "setSlopWithInt:", "setSlop", "V", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneIndexTerm:", "add", "V", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneIndexTerm:withInt:", "add", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "[I", 0xa, 1, 2, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexTerm;", 0x8a, 3, 4, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexTerm;", 0x8a, 3, 5, -1, -1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 6, -1, -1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 7, -1, -1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 8, 9, 10, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 11, 12, 10, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 17, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, 18, -1 },
+    { NULL, "V", 0x2, 19, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 2, -1, -1, 21, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, -1, 24, -1 },
+    { NULL, "V", 0x1, 22, 25, -1, -1, 26, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withOrgApacheLuceneIndexTermArray:withIntArray:);
+  methods[1].selector = @selector(incrementalPositionsWithInt:);
+  methods[2].selector = @selector(toTermsWithNSString:withNSStringArray:);
+  methods[3].selector = @selector(toTermsWithNSString:withOrgApacheLuceneUtilBytesRefArray:);
+  methods[4].selector = @selector(initWithInt:withNSString:withNSStringArray:);
+  methods[5].selector = @selector(initWithNSString:withNSStringArray:);
+  methods[6].selector = @selector(initWithInt:withNSString:withOrgApacheLuceneUtilBytesRefArray:);
+  methods[7].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRefArray:);
+  methods[8].selector = @selector(getSlop);
+  methods[9].selector = @selector(getTerms);
+  methods[10].selector = @selector(getPositions);
+  methods[11].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[12].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[13].selector = @selector(toStringWithNSString:);
+  methods[14].selector = @selector(isEqual:);
+  methods[15].selector = @selector(hash);
+  methods[16].selector = @selector(init);
+  methods[17].selector = @selector(ensureMutableWithNSString:);
+  methods[18].selector = @selector(setSlopWithInt:);
+  methods[19].selector = @selector(addWithOrgApacheLuceneIndexTerm:);
+  methods[20].selector = @selector(addWithOrgApacheLuceneIndexTerm:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "mutable__", "mutable", 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "slop_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "terms_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/Term;>;", .constantValue.asLong = 0 },
-    { "positions_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
+    { "mutable__", "Z", .constantValue.asLong = 0, 0x12, 27, -1, -1, -1 },
+    { "slop_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "terms_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 28, -1 },
+    { "positions_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 29, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.PhraseQuery$Builder;", "Lorg.apache.lucene.search.PhraseQuery$PostingsAndFreq;", "Lorg.apache.lucene.search.PhraseQuery$PhraseWeight;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQuery = { 2, "PhraseQuery", "org.apache.lucene.search", NULL, 0x1, 21, methods, 5, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "I[LOrgApacheLuceneIndexTerm;[I", "incrementalPositions", "I", "toTerms", "LNSString;[LNSString;", "LNSString;[LOrgApacheLuceneUtilBytesRef;", "ILNSString;[LNSString;", "ILNSString;[LOrgApacheLuceneUtilBytesRef;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", (void *)&OrgApacheLuceneSearchPhraseQuery__Annotations$0, "ensureMutable", "setSlop", (void *)&OrgApacheLuceneSearchPhraseQuery__Annotations$1, "add", "LOrgApacheLuceneIndexTerm;", (void *)&OrgApacheLuceneSearchPhraseQuery__Annotations$2, "LOrgApacheLuceneIndexTerm;I", (void *)&OrgApacheLuceneSearchPhraseQuery__Annotations$3, "mutable", "Ljava/util/List<Lorg/apache/lucene/index/Term;>;", "Ljava/util/List<Ljava/lang/Integer;>;", "LOrgApacheLuceneSearchPhraseQuery_Builder;LOrgApacheLuceneSearchPhraseQuery_PostingsAndFreq;LOrgApacheLuceneSearchPhraseQuery_PhraseWeight;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQuery = { "PhraseQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 21, 5, -1, 30, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPhraseQuery;
 }
 
@@ -575,6 +594,22 @@ void OrgApacheLuceneSearchPhraseQuery_ensureMutableWithNSString_(OrgApacheLucene
   }
 }
 
+IOSObjectArray *OrgApacheLuceneSearchPhraseQuery__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchPhraseQuery__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchPhraseQuery__Annotations$2() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchPhraseQuery__Annotations$3() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery)
 
 @implementation OrgApacheLuceneSearchPhraseQuery_Builder
@@ -631,19 +666,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Builder", NULL, 0x1, NULL, NULL },
-    { "setSlopWithInt:", "setSlop", "Lorg.apache.lucene.search.PhraseQuery$Builder;", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneIndexTerm:", "add", "Lorg.apache.lucene.search.PhraseQuery$Builder;", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneIndexTerm:withInt:", "add", "Lorg.apache.lucene.search.PhraseQuery$Builder;", 0x1, NULL, NULL },
-    { "build", NULL, "Lorg.apache.lucene.search.PhraseQuery;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchPhraseQuery_Builder;", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchPhraseQuery_Builder;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchPhraseQuery_Builder;", 0x1, 2, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchPhraseQuery;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setSlopWithInt:);
+  methods[2].selector = @selector(addWithOrgApacheLuceneIndexTerm:);
+  methods[3].selector = @selector(addWithOrgApacheLuceneIndexTerm:withInt:);
+  methods[4].selector = @selector(build);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "slop_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "terms_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/Term;>;", .constantValue.asLong = 0 },
-    { "positions_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
+    { "slop_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "terms_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
+    { "positions_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQuery_Builder = { 2, "Builder", "org.apache.lucene.search", "PhraseQuery", 0x9, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setSlop", "I", "add", "LOrgApacheLuceneIndexTerm;", "LOrgApacheLuceneIndexTerm;I", "Ljava/util/List<Lorg/apache/lucene/index/Term;>;", "Ljava/util/List<Ljava/lang/Integer;>;", "LOrgApacheLuceneSearchPhraseQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQuery_Builder = { "Builder", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x9, 5, 3, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPhraseQuery_Builder;
 }
 
@@ -704,9 +749,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery_Builder)
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq *other = (OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq *) cast_chk(obj, [OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq class]);
   if (position_ != other->position_) return false;
   if (terms_ == nil) return other->terms_ == nil;
@@ -720,19 +765,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery_Builder)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexPostingsEnum:withInt:withOrgApacheLuceneIndexTermArray:", "PostingsAndFreq", NULL, 0x81, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x81, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexPostingsEnum:withInt:withOrgApacheLuceneIndexTermArray:);
+  methods[1].selector = @selector(compareToWithId:);
+  methods[2].selector = @selector(hash);
+  methods[3].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "postings_", NULL, 0x10, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "position_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "terms_", NULL, 0x10, "[Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "nTerms_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "postings_", "LOrgApacheLuceneIndexPostingsEnum;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "position_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "terms_", "[LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "nTerms_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq = { 2, "PostingsAndFreq", "org.apache.lucene.search", "PhraseQuery", 0x8, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/PhraseQuery$PostingsAndFreq;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexPostingsEnum;I[LOrgApacheLuceneIndexTerm;", "compareTo", "LOrgApacheLuceneSearchPhraseQuery_PostingsAndFreq;", "hashCode", "equals", "LNSObject;", "LOrgApacheLuceneSearchPhraseQuery;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/PhraseQuery$PostingsAndFreq;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq = { "PostingsAndFreq", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8, 4, 4, 6, -1, -1, 7, -1 };
   return &_OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq;
 }
 
@@ -796,7 +850,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery_PostingsAndFre
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  JreAssert((((IOSObjectArray *) nil_chk(terms_))->size_ > 0), (@"org/apache/lucene/search/PhraseQuery.java:413 condition failed: assert terms.length > 0;"));
+  JreAssert(((IOSObjectArray *) nil_chk(terms_))->size_ > 0, @"org/apache/lucene/search/PhraseQuery.java:413 condition failed: assert terms.length > 0;");
   OrgApacheLuceneIndexLeafReader *reader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader];
   IOSObjectArray *postingsFreqs = [IOSObjectArray arrayWithLength:terms_->size_ type:OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq_class_()];
   OrgApacheLuceneIndexTerms *fieldTerms = [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) termsWithNSString:this$0_->field_];
@@ -811,21 +865,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery_PostingsAndFre
     OrgApacheLuceneIndexTerm *t = IOSObjectArray_Get(terms_, i);
     OrgApacheLuceneIndexTermState *state = [((OrgApacheLuceneIndexTermContext *) nil_chk(IOSObjectArray_Get(nil_chk(states_), i))) getWithInt:context->ord_];
     if (state == nil) {
-      JreAssert((OrgApacheLuceneSearchPhraseQuery_PhraseWeight_termNotInReaderWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexTerm_(self, reader, t)), (@"no termstate found but term exists in reader"));
+      JreAssert(OrgApacheLuceneSearchPhraseQuery_PhraseWeight_termNotInReaderWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexTerm_(self, reader, t), @"no termstate found but term exists in reader");
       return nil;
     }
     [((OrgApacheLuceneIndexTermsEnum *) nil_chk(te)) seekExactWithOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneIndexTerm *) nil_chk(t)) bytes] withOrgApacheLuceneIndexTermState:state];
-    OrgApacheLuceneIndexPostingsEnum *postingsEnum = [te postingsWithOrgApacheLuceneIndexPostingsEnum:nil withInt:OrgApacheLuceneIndexPostingsEnum_POSITIONS];
+    OrgApacheLuceneIndexPostingsEnum *postingsEnum = JreRetainedLocalValue([te postingsWithOrgApacheLuceneIndexPostingsEnum:nil withInt:OrgApacheLuceneIndexPostingsEnum_POSITIONS]);
     IOSObjectArray_SetAndConsume(postingsFreqs, i, new_OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withOrgApacheLuceneIndexTermArray_(postingsEnum, IOSIntArray_Get(nil_chk(positions_), i), [IOSObjectArray arrayWithObjects:(id[]){ t } count:1 type:OrgApacheLuceneIndexTerm_class_()]));
   }
   if (this$0_->slop_ == 0) {
     OrgApacheLuceneUtilArrayUtil_timSortWithJavaLangComparableArray_(postingsFreqs);
   }
   if (this$0_->slop_ == 0) {
-    return create_OrgApacheLuceneSearchExactPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(self, postingsFreqs, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context], needsScores_);
+    return create_OrgApacheLuceneSearchExactPhraseScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(self, postingsFreqs, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context], needsScores_);
   }
   else {
-    return create_OrgApacheLuceneSearchSloppyPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withInt_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(self, postingsFreqs, this$0_->slop_, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context], needsScores_);
+    return create_OrgApacheLuceneSearchSloppyPhraseScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withInt_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(self, postingsFreqs, this$0_->slop_, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context], needsScores_);
   }
 }
 
@@ -836,15 +890,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery_PostingsAndFre
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc {
-  OrgApacheLuceneSearchScorer *scorer = [self scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+  OrgApacheLuceneSearchScorer *scorer = JreRetainedLocalValue([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
   if (scorer != nil) {
     jint newDoc = [scorer advanceWithInt:doc];
     if (newDoc == doc) {
       jfloat freq = this$0_->slop_ == 0 ? [scorer freq] : [((OrgApacheLuceneSearchSloppyPhraseScorer *) cast_chk(scorer, [OrgApacheLuceneSearchSloppyPhraseScorer class])) sloppyFreq];
-      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer = [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context];
+      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer = JreRetainedLocalValue([((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context]);
       OrgApacheLuceneSearchExplanation *freqExplanation = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(freq, JreStrcat("$F", @"phraseFreq=", freq), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-      OrgApacheLuceneSearchExplanation *scoreExplanation = [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freqExplanation];
-      return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(scoreExplanation)) getValue], JreStrcat("$@$I$$$", @"weight(", [self getQuery], @" in ", doc, @") [", [[similarity_ getClass] getSimpleName], @"], result of:"), [IOSObjectArray arrayWithObjects:(id[]){ scoreExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
+      OrgApacheLuceneSearchExplanation *scoreExplanation = JreRetainedLocalValue([((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freqExplanation]);
+      return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(scoreExplanation)) getValue], JreStrcat("$@$I$$$", @"weight(", [self getQuery], @" in ", doc, @") [", [[similarity_ java_getClass] getSimpleName], @"], result of:"), [IOSObjectArray arrayWithObjects:(id[]){ scoreExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
     }
   }
   return OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(@"no matching term", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
@@ -861,26 +915,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery_PostingsAndFre
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchPhraseQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:", "PhraseWeight", NULL, 0x1, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValueForNormalization", NULL, "F", 0x1, NULL, NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "termNotInReaderWithOrgApacheLuceneIndexLeafReader:withOrgApacheLuceneIndexTerm:", "termNotInReader", "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, 4, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 8, 9, 1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 10, 11, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 12, 13, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchPhraseQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(description);
+  methods[3].selector = @selector(getValueForNormalization);
+  methods[4].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[5].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[6].selector = @selector(termNotInReaderWithOrgApacheLuceneIndexLeafReader:withOrgApacheLuceneIndexTerm:);
+  methods[7].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.PhraseQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "similarity_", NULL, 0x12, "Lorg.apache.lucene.search.similarities.Similarity;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stats_", NULL, 0x12, "Lorg.apache.lucene.search.similarities.Similarity$SimWeight;", NULL, NULL, .constantValue.asLong = 0 },
-    { "needsScores_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "states_", NULL, 0x82, "[Lorg.apache.lucene.index.TermContext;", NULL, NULL, .constantValue.asLong = 0 },
-    { "terms_", NULL, 0x12, "[Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "positions_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchPhraseQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "similarity_", "LOrgApacheLuceneSearchSimilaritiesSimilarity;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "stats_", "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "needsScores_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "states_", "[LOrgApacheLuceneIndexTermContext;", .constantValue.asLong = 0, 0x82, -1, -1, -1, -1 },
+    { "terms_", "[LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "positions_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQuery_PhraseWeight = { 2, "PhraseWeight", "org.apache.lucene.search", "PhraseQuery", 0x2, 8, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchPhraseQuery;LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "toString", "normalize", "FF", "scorer", "LOrgApacheLuceneIndexLeafReaderContext;", "termNotInReader", "LOrgApacheLuceneIndexLeafReader;LOrgApacheLuceneIndexTerm;", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "LOrgApacheLuceneSearchPhraseQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQuery_PhraseWeight = { "PhraseWeight", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x2, 8, 7, 14, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPhraseQuery_PhraseWeight;
 }
 

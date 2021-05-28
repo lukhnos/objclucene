@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsFieldsProducer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsFieldsProducer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsFieldsProducer || defined(INCLUDE_OrgApacheLuceneCodecsFieldsProducer))
 #define OrgApacheLuceneCodecsFieldsProducer_
 
@@ -30,7 +36,7 @@
 
 /*!
  @brief Abstract API that produces terms, doc, freq, prox, offset and
- payloads postings.
+   payloads postings.
  */
 @interface OrgApacheLuceneCodecsFieldsProducer : OrgApacheLuceneIndexFields < JavaIoCloseable, OrgApacheLuceneUtilAccountable >
 
@@ -39,8 +45,8 @@
 /*!
  @brief Checks consistency of this reader.
  <p>
- Note that this may be costly in terms of I/O, e.g. 
- may involve computing a checksum value against large data files.
+  Note that this may be costly in terms of I/O, e.g. 
+  may involve computing a checksum value against large data files.
  */
 - (void)checkIntegrity;
 
@@ -49,7 +55,7 @@
 /*!
  @brief Returns an instance optimized for merging.
  <p>
- The default implementation returns <code>this</code> 
+  The default implementation returns <code>this</code>
  */
 - (OrgApacheLuceneCodecsFieldsProducer *)getMergeInstance;
 
@@ -58,9 +64,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Package-Private
 
@@ -74,4 +80,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsFieldsProducer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsFieldsProducer")

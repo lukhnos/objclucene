@@ -3,7 +3,6 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/ext/Extensions.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/HashMap.h"
@@ -11,6 +10,10 @@
 #include "org/apache/lucene/queryparser/classic/QueryParserBase.h"
 #include "org/apache/lucene/queryparser/ext/Extensions.h"
 #include "org/apache/lucene/queryparser/ext/ParserExtension.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/ext/Extensions must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserExtExtensions () {
  @public
@@ -55,10 +58,10 @@ withOrgApacheLuceneQueryparserExtParserExtension:(OrgApacheLuceneQueryparserExtP
 
 - (OrgApacheLuceneQueryparserExtExtensions_Pair *)splitExtensionFieldWithNSString:(NSString *)defaultField
                                                                      withNSString:(NSString *)field {
-  jint indexOf = [((NSString *) nil_chk(field)) indexOf:self->extensionFieldDelimiter_];
+  jint indexOf = [((NSString *) nil_chk(field)) java_indexOf:self->extensionFieldDelimiter_];
   if (indexOf < 0) return create_OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(field, nil);
-  NSString *indexField = indexOf == 0 ? defaultField : [field substring:0 endIndex:indexOf];
-  NSString *extensionKey = [field substring:indexOf + 1];
+  NSString *indexField = indexOf == 0 ? defaultField : [field java_substring:0 endIndex:indexOf];
+  NSString *extensionKey = [field java_substring:indexOf + 1];
   return create_OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(indexField, extensionKey);
 }
 
@@ -84,24 +87,37 @@ withOrgApacheLuceneQueryparserExtParserExtension:(OrgApacheLuceneQueryparserExtP
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Extensions", NULL, 0x1, NULL, NULL },
-    { "initWithChar:", "Extensions", NULL, 0x1, NULL, NULL },
-    { "addWithNSString:withOrgApacheLuceneQueryparserExtParserExtension:", "add", "V", 0x1, NULL, NULL },
-    { "getExtensionWithNSString:", "getExtension", "Lorg.apache.lucene.queryparser.ext.ParserExtension;", 0x11, NULL, NULL },
-    { "getExtensionFieldDelimiter", NULL, "C", 0x1, NULL, NULL },
-    { "splitExtensionFieldWithNSString:withNSString:", "splitExtensionField", "Lorg.apache.lucene.queryparser.ext.Extensions$Pair;", 0x1, NULL, "(Ljava/lang/String;Ljava/lang/String;)Lorg/apache/lucene/queryparser/ext/Extensions$Pair<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "escapeExtensionFieldWithNSString:", "escapeExtensionField", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "buildExtensionFieldWithNSString:", "buildExtensionField", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "buildExtensionFieldWithNSString:withNSString:", "buildExtensionField", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserExtParserExtension;", 0x11, 3, 4, -1, -1, -1, -1 },
+    { NULL, "C", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserExtExtensions_Pair;", 0x1, 5, 6, -1, 7, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithChar:);
+  methods[2].selector = @selector(addWithNSString:withOrgApacheLuceneQueryparserExtParserExtension:);
+  methods[3].selector = @selector(getExtensionWithNSString:);
+  methods[4].selector = @selector(getExtensionFieldDelimiter);
+  methods[5].selector = @selector(splitExtensionFieldWithNSString:withNSString:);
+  methods[6].selector = @selector(escapeExtensionFieldWithNSString:);
+  methods[7].selector = @selector(buildExtensionFieldWithNSString:);
+  methods[8].selector = @selector(buildExtensionFieldWithNSString:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "extensions_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/queryparser/ext/ParserExtension;>;", .constantValue.asLong = 0 },
-    { "extensionFieldDelimiter_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_EXTENSION_FIELD_DELIMITER", "DEFAULT_EXTENSION_FIELD_DELIMITER", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneQueryparserExtExtensions_DEFAULT_EXTENSION_FIELD_DELIMITER },
+    { "extensions_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 10, -1 },
+    { "extensionFieldDelimiter_", "C", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "DEFAULT_EXTENSION_FIELD_DELIMITER", "C", .constantValue.asUnichar = OrgApacheLuceneQueryparserExtExtensions_DEFAULT_EXTENSION_FIELD_DELIMITER, 0x19, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.ext.Extensions$Pair;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserExtExtensions = { 2, "Extensions", "org.apache.lucene.queryparser.ext", NULL, 0x1, 9, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "C", "add", "LNSString;LOrgApacheLuceneQueryparserExtParserExtension;", "getExtension", "LNSString;", "splitExtensionField", "LNSString;LNSString;", "(Ljava/lang/String;Ljava/lang/String;)Lorg/apache/lucene/queryparser/ext/Extensions$Pair<Ljava/lang/String;Ljava/lang/String;>;", "escapeExtensionField", "buildExtensionField", "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/queryparser/ext/ParserExtension;>;", "LOrgApacheLuceneQueryparserExtExtensions_Pair;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserExtExtensions = { "Extensions", "org.apache.lucene.queryparser.ext", ptrTable, methods, fields, 7, 0x1, 9, 3, -1, 11, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserExtExtensions;
 }
 
@@ -150,14 +166,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserExtExtensions)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithId:withId:", "Pair", NULL, 0x1, NULL, "(TCur;TCud;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithId:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "cur_", NULL, 0x11, "TCur;", NULL, "TCur;", .constantValue.asLong = 0 },
-    { "cud_", NULL, 0x11, "TCud;", NULL, "TCud;", .constantValue.asLong = 0 },
+    { "cur_", "LNSObject;", .constantValue.asLong = 0, 0x11, -1, -1, 2, -1 },
+    { "cud_", "LNSObject;", .constantValue.asLong = 0, 0x11, -1, -1, 3, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserExtExtensions_Pair = { 2, "Pair", "org.apache.lucene.queryparser.ext", "Extensions", 0x9, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<Cur:Ljava/lang/Object;Cud:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "LNSObject;LNSObject;", "(TCur;TCud;)V", "TCur;", "TCud;", "LOrgApacheLuceneQueryparserExtExtensions;", "<Cur:Ljava/lang/Object;Cud:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserExtExtensions_Pair = { "Pair", "org.apache.lucene.queryparser.ext", ptrTable, methods, fields, 7, 0x9, 1, 2, 4, -1, -1, 5, -1 };
   return &_OrgApacheLuceneQueryparserExtExtensions_Pair;
 }
 

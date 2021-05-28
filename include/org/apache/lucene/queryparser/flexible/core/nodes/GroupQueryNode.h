@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_
 
@@ -26,10 +32,9 @@
 
 /*!
  @brief A <code>GroupQueryNode</code> represents a location where the original user typed
- real parenthesis on the query string.
- This class is useful for queries like:
- a) a AND b OR c b) ( a AND b) OR c
- Parenthesis might be used to define the boolean operation precedence.
+  real parenthesis on the query string.This class is useful for queries like:
+  a) a AND b OR c b) ( a AND b) OR c 
+  Parenthesis might be used to define the boolean operation precedence.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
@@ -38,7 +43,7 @@
 /*!
  @brief This QueryNode is used to identify parenthesis on the original query string
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -49,6 +54,10 @@
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -64,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQuery
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode")

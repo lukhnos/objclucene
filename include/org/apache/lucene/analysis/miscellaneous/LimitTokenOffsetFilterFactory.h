@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_
 
@@ -26,25 +32,23 @@
 /*!
  @brief Factory for <code>LimitTokenOffsetFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_limit_pos" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.LimitTokenOffsetFilter" maxStartOffset="100000" consumeAllTokens="false" /&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_limit_pos" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.LimitTokenOffsetFilter" maxStartOffset="100000" consumeAllTokens="false" /&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
- <p>
- The <code>consumeAllTokens</code> property is optional and defaults to <code>false</code>.
+  <p>
+  The <code>consumeAllTokens</code> property is optional and defaults to <code>false</code>.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
-
-+ (NSString *)MAX_START_OFFSET;
-
-+ (NSString *)CONSUME_ALL_TOKENS_KEY;
+@property (readonly, copy, class) NSString *MAX_START_OFFSET NS_SWIFT_NAME(MAX_START_OFFSET);
+@property (readonly, copy, class) NSString *CONSUME_ALL_TOKENS_KEY NS_SWIFT_NAME(CONSUME_ALL_TOKENS_KEY);
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -52,12 +56,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_get_MAX_START_OFFSET();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_get_MAX_START_OFFSET(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_MAX_START_OFFSET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory, MAX_START_OFFSET, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_get_CONSUME_ALL_TOKENS_KEY();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_get_CONSUME_ALL_TOKENS_KEY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_CONSUME_ALL_TOKENS_KEY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory, CONSUME_ALL_TOKENS_KEY, NSString *)
@@ -72,4 +76,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetF
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory")

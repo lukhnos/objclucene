@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestFstBytesRefSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestFstBytesRefSorter_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstBytesRefSorter || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstBytesRefSorter))
 #define OrgApacheLuceneSearchSuggestFstBytesRefSorter_
 
@@ -21,25 +27,23 @@
 @protocol OrgApacheLuceneUtilBytesRefIterator;
 
 /*!
- @brief Collects <code>BytesRef</code> and then allows one to iterate over their sorted order.
- Implementations
- of this interface will be called in a single-threaded scenario.
-   
+ @brief Collects <code>BytesRef</code> and then allows one to iterate over their sorted order.Implementations
+  of this interface will be called in a single-threaded scenario.
  */
-@protocol OrgApacheLuceneSearchSuggestFstBytesRefSorter < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchSuggestFstBytesRefSorter < JavaObject >
 
 /*!
  @brief Adds a single suggestion entry (possibly compound with its bucket).
- @throws IOException If an I/O exception occurs.
- @throws IllegalStateException If an addition attempt is performed after
- a call to <code>iterator()</code> has been made.
+ @throw IOExceptionIf an I/O exception occurs.
+ @throw IllegalStateExceptionIf an addition attempt is performed after
+  a call to <code>iterator()</code> has been made.
  */
 - (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
 
 /*!
  @brief Sorts the entries added in <code>add(BytesRef)</code> and returns 
- an iterator over all sorted entries.
- @throws IOException If an I/O exception occurs.
+  an iterator over all sorted entries.
+ @throw IOExceptionIf an I/O exception occurs.
  */
 - (id<OrgApacheLuceneUtilBytesRefIterator>)iterator;
 
@@ -56,4 +60,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstBytesRefSorter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstBytesRefSorter")

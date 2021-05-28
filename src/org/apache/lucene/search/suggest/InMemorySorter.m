@@ -12,6 +12,10 @@
 #include "org/apache/lucene/util/BytesRefIterator.h"
 #include "org/apache/lucene/util/Counter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/InMemorySorter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestInMemorySorter () {
  @public
   OrgApacheLuceneUtilBytesRefArray *buffer_;
@@ -52,18 +56,27 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestInMemorySorter, comparator_, id<
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilComparator:", "InMemorySorter", NULL, 0x1, NULL, "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V" },
-    { "addWithOrgApacheLuceneUtilBytesRef:", "add", "V", 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.util.BytesRefIterator;", 0x1, NULL, NULL },
-    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRefIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilComparator;", 0x1, -1, -1, -1, 4, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilComparator:);
+  methods[1].selector = @selector(addWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(iterator);
+  methods[3].selector = @selector(getComparator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "buffer_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "closed_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
+    { "buffer_", "LOrgApacheLuceneUtilBytesRefArray;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "closed_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "comparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestInMemorySorter = { 2, "InMemorySorter", "org.apache.lucene.search.suggest", NULL, 0x11, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilComparator;", "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V", "add", "LOrgApacheLuceneUtilBytesRef;", "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestInMemorySorter = { "InMemorySorter", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x11, 4, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestInMemorySorter;
 }
 

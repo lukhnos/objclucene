@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
@@ -25,6 +24,10 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader ()
 
 - (jint)blockWithInt:(jint)docID;
@@ -40,7 +43,7 @@
 
 @end
 
-inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader, BASE_RAM_BYTES_USED, jlong)
 
@@ -90,7 +93,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
   return IOSLongArray_Get(nil_chk(startPointers_), block) + OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_relativeStartPointerWithInt_withInt_(self, block, relativeChunk);
 }
 
-- (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *)clone {
+- (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *)java_clone {
   return self;
 }
 
@@ -151,7 +154,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
 }
 
 - (NSString *)description {
-  return JreStrcat("$$IC", [[self getClass] getSimpleName], @"(blocks=", ((IOSIntArray *) nil_chk(docBases_))->size_, ')');
+  return JreStrcat("$$IC", [[self java_getClass] getSimpleName], @"(blocks=", ((IOSIntArray *) nil_chk(docBases_))->size_, ')');
 }
 
 - (void)dealloc {
@@ -164,8 +167,50 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x2, 6, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 7, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, 8, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader;", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 10, -1, -1 },
+    { NULL, "LNSString;", 0x1, 11, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneIndexSegmentInfo:);
+  methods[1].selector = @selector(blockWithInt:);
+  methods[2].selector = @selector(relativeDocBaseWithInt:withInt:);
+  methods[3].selector = @selector(relativeStartPointerWithInt:withInt:);
+  methods[4].selector = @selector(relativeChunkWithInt:withInt:);
+  methods[5].selector = @selector(getStartPointerWithInt:);
+  methods[6].selector = @selector(java_clone);
+  methods[7].selector = @selector(ramBytesUsed);
+  methods[8].selector = @selector(getChildResources);
+  methods[9].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docBases_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "startPointers_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "avgChunkDocs_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "avgChunkSizes_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docBasesDeltas_", "[LOrgApacheLuceneUtilPackedPackedInts_Reader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "startPointersDeltas_", "[LOrgApacheLuceneUtilPackedPackedInts_Reader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;LOrgApacheLuceneIndexSegmentInfo;", "LJavaIoIOException;", "block", "I", "relativeDocBase", "II", "relativeStartPointer", "relativeChunk", "getStartPointer", "clone", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString", &OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader = { "CompressingStoredFieldsIndexReader", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x11, 10, 8, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader;
+}
+
 - (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
+  return [[self java_clone] retain];
 }
 
 + (void)initialize {
@@ -173,33 +218,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
     OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneIndexSegmentInfo:", "CompressingStoredFieldsIndexReader", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "blockWithInt:", "block", "I", 0x2, NULL, NULL },
-    { "relativeDocBaseWithInt:withInt:", "relativeDocBase", "I", 0x2, NULL, NULL },
-    { "relativeStartPointerWithInt:withInt:", "relativeStartPointer", "J", 0x2, NULL, NULL },
-    { "relativeChunkWithInt:withInt:", "relativeChunk", "I", 0x2, NULL, NULL },
-    { "getStartPointerWithInt:", "getStartPointer", "J", 0x0, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.codecs.compressing.CompressingStoredFieldsIndexReader;", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docBases_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startPointers_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "avgChunkDocs_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "avgChunkSizes_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "docBasesDeltas_", NULL, 0x10, "[Lorg.apache.lucene.util.packed.PackedInts$Reader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "startPointersDeltas_", NULL, 0x10, "[Lorg.apache.lucene.util.packed.PackedInts$Reader;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader = { 2, "CompressingStoredFieldsIndexReader", "org.apache.lucene.codecs.compressing", NULL, 0x11, 10, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader;
 }
 
 @end
@@ -262,7 +280,8 @@ OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *create_OrgAp
 }
 
 jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_blockWithInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *self, jint docID) {
-  jint lo = 0, hi = ((IOSIntArray *) nil_chk(self->docBases_))->size_ - 1;
+  jint lo = 0;
+  jint hi = ((IOSIntArray *) nil_chk(self->docBases_))->size_ - 1;
   while (lo <= hi) {
     jint mid = JreURShift32((lo + hi), 1);
     jint midValue = IOSIntArray_Get(self->docBases_, mid);
@@ -292,7 +311,8 @@ jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_relativ
 }
 
 jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_relativeChunkWithInt_withInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *self, jint block, jint relativeDoc) {
-  jint lo = 0, hi = [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(IOSObjectArray_Get(nil_chk(self->docBasesDeltas_), block))) size] - 1;
+  jint lo = 0;
+  jint hi = [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(IOSObjectArray_Get(nil_chk(self->docBasesDeltas_), block))) size] - 1;
   while (lo <= hi) {
     jint mid = JreURShift32((lo + hi), 1);
     jint midValue = OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_relativeDocBaseWithInt_withInt_(self, block, mid);

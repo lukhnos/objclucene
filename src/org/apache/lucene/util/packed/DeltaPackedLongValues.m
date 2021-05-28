@@ -14,11 +14,15 @@
 #include "org/apache/lucene/util/packed/PackedInts.h"
 #include "org/apache/lucene/util/packed/PackedLongValues.h"
 
-inline jlong OrgApacheLuceneUtilPackedDeltaPackedLongValues_get_BASE_RAM_BYTES_USED();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/DeltaPackedLongValues must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline jlong OrgApacheLuceneUtilPackedDeltaPackedLongValues_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilPackedDeltaPackedLongValues_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilPackedDeltaPackedLongValues, BASE_RAM_BYTES_USED, jlong)
 
-inline jlong OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder, BASE_RAM_BYTES_USED, jlong)
 
@@ -26,13 +30,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedDeltaPackedLongValues)
 
 @implementation OrgApacheLuceneUtilPackedDeltaPackedLongValues
 
-- (instancetype)initWithInt:(jint)pageShift
-                    withInt:(jint)pageMask
+- (instancetype)initPackagePrivateWithInt:(jint)pageShift
+                                  withInt:(jint)pageMask
 withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
-              withLongArray:(IOSLongArray *)mins
-                   withLong:(jlong)size
-                   withLong:(jlong)ramBytesUsed {
-  OrgApacheLuceneUtilPackedDeltaPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(self, pageShift, pageMask, values, mins, size, ramBytesUsed);
+                            withLongArray:(IOSLongArray *)mins
+                                 withLong:(jlong)size
+                                 withLong:(jlong)ramBytesUsed {
+  OrgApacheLuceneUtilPackedDeltaPackedLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(self, pageShift, pageMask, values, mins, size, ramBytesUsed);
   return self;
 }
 
@@ -56,6 +60,28 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 3, 4, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:withLongArray:withLong:withLong:);
+  methods[1].selector = @selector(getWithInt:withInt:);
+  methods[2].selector = @selector(decodeBlockWithInt:withLongArray:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "mins_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "II[LOrgApacheLuceneUtilPackedPackedInts_Reader;[JJJ", "get", "II", "decodeBlock", "I[J", &OrgApacheLuceneUtilPackedDeltaPackedLongValues_BASE_RAM_BYTES_USED, "LOrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDeltaPackedLongValues = { "DeltaPackedLongValues", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x0, 3, 2, -1, 6, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilPackedDeltaPackedLongValues;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedDeltaPackedLongValues class]) {
     OrgApacheLuceneUtilPackedDeltaPackedLongValues_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPackedDeltaPackedLongValues_class_());
@@ -63,35 +89,20 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:withLongArray:withLong:withLong:", "DeltaPackedLongValues", NULL, 0x0, NULL, NULL },
-    { "getWithInt:withInt:", "get", "J", 0x0, NULL, NULL },
-    { "decodeBlockWithInt:withLongArray:", "decodeBlock", "I", 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilPackedDeltaPackedLongValues_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "mins_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.packed.DeltaPackedLongValues$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDeltaPackedLongValues = { 2, "DeltaPackedLongValues", "org.apache.lucene.util.packed", NULL, 0x0, 3, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilPackedDeltaPackedLongValues;
-}
-
 @end
 
-void OrgApacheLuceneUtilPackedDeltaPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(OrgApacheLuceneUtilPackedDeltaPackedLongValues *self, jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed) {
+void OrgApacheLuceneUtilPackedDeltaPackedLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(OrgApacheLuceneUtilPackedDeltaPackedLongValues *self, jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed) {
   OrgApacheLuceneUtilPackedPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLong_withLong_(self, pageShift, pageMask, values, size, ramBytesUsed);
-  JreAssert((((IOSObjectArray *) nil_chk(values))->size_ == ((IOSLongArray *) nil_chk(mins))->size_), (@"org/apache/lucene/util/packed/DeltaPackedLongValues.java:33 condition failed: assert values.length == mins.length;"));
+  JreAssert(((IOSObjectArray *) nil_chk(values))->size_ == ((IOSLongArray *) nil_chk(mins))->size_, @"org/apache/lucene/util/packed/DeltaPackedLongValues.java:33 condition failed: assert values.length == mins.length;");
   JreStrongAssign(&self->mins_, mins);
 }
 
-OrgApacheLuceneUtilPackedDeltaPackedLongValues *new_OrgApacheLuceneUtilPackedDeltaPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDeltaPackedLongValues, initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_, pageShift, pageMask, values, mins, size, ramBytesUsed)
+OrgApacheLuceneUtilPackedDeltaPackedLongValues *new_OrgApacheLuceneUtilPackedDeltaPackedLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDeltaPackedLongValues, initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_, pageShift, pageMask, values, mins, size, ramBytesUsed)
 }
 
-OrgApacheLuceneUtilPackedDeltaPackedLongValues *create_OrgApacheLuceneUtilPackedDeltaPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDeltaPackedLongValues, initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_, pageShift, pageMask, values, mins, size, ramBytesUsed)
+OrgApacheLuceneUtilPackedDeltaPackedLongValues *create_OrgApacheLuceneUtilPackedDeltaPackedLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, jlong size, jlong ramBytesUsed) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDeltaPackedLongValues, initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_, pageShift, pageMask, values, mins, size, ramBytesUsed)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDeltaPackedLongValues)
@@ -116,7 +127,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder)
   IOSObjectArray *values = JavaUtilArrays_copyOfWithNSObjectArray_withInt_(self->values_, valuesOff_);
   IOSLongArray *mins = JavaUtilArrays_copyOfWithLongArray_withInt_(self->mins_, valuesOff_);
   jlong ramBytesUsed = JreLoadStatic(OrgApacheLuceneUtilPackedDeltaPackedLongValues, BASE_RAM_BYTES_USED) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithOrgApacheLuceneUtilAccountableArray_(values) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(mins);
-  return create_OrgApacheLuceneUtilPackedDeltaPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(pageShift_, pageMask_, values, mins, size_, ramBytesUsed);
+  return create_OrgApacheLuceneUtilPackedDeltaPackedLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withLong_withLong_(pageShift_, pageMask_, values, mins, size_, ramBytesUsed);
 }
 
 - (void)packWithLongArray:(IOSLongArray *)values
@@ -146,27 +157,37 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedDeltaPackedLongValues;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 3, 4, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withFloat:);
+  methods[1].selector = @selector(baseRamBytesUsed);
+  methods[2].selector = @selector(build);
+  methods[3].selector = @selector(packWithLongArray:withInt:withInt:withFloat:);
+  methods[4].selector = @selector(growWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "mins_", "[J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "IF", "pack", "[JIIF", "grow", "I", &OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder_BASE_RAM_BYTES_USED, "LOrgApacheLuceneUtilPackedDeltaPackedLongValues;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder = { "Builder", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x8, 5, 2, 6, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder class]) {
     OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withFloat:", "Builder", NULL, 0x0, NULL, NULL },
-    { "baseRamBytesUsed", NULL, "J", 0x0, NULL, NULL },
-    { "build", NULL, "Lorg.apache.lucene.util.packed.DeltaPackedLongValues;", 0x1, NULL, NULL },
-    { "packWithLongArray:withInt:withInt:withFloat:", "pack", "V", 0x0, NULL, NULL },
-    { "growWithInt:", "grow", "V", 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "mins_", NULL, 0x0, "[J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder = { 2, "Builder", "org.apache.lucene.util.packed", "DeltaPackedLongValues", 0x8, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder;
 }
 
 @end

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPayloadsIntegerEncoder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPayloadsIntegerEncoder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIntegerEncoder || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsIntegerEncoder))
 #define OrgApacheLuceneAnalysisPayloadsIntegerEncoder_
 
@@ -30,13 +36,13 @@
 /*!
  @brief Encode a character array Integer as a <code>BytesRef</code>.
  <p>
- See <code>org.apache.lucene.analysis.payloads.PayloadHelper.encodeInt(int,byte[],int)</code>.
+  See <code>org.apache.lucene.analysis.payloads.PayloadHelper.encodeInt(int, byte[], int)</code>.
  */
 @interface OrgApacheLuceneAnalysisPayloadsIntegerEncoder : OrgApacheLuceneAnalysisPayloadsAbstractEncoder < OrgApacheLuceneAnalysisPayloadsPayloadEncoder >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer
                                              withInt:(jint)offset
@@ -48,12 +54,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsIntegerEncoder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init(OrgApacheLuceneAnalysisPayloadsIntegerEncoder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIntegerEncoder *new_OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIntegerEncoder *new_OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIntegerEncoder *create_OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIntegerEncoder *create_OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsIntegerEncoder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIntegerEncoder")

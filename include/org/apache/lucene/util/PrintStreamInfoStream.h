@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPrintStreamInfoStream
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPrintStreamInfoStream_) && (INCLUDE_ALL_OrgApacheLuceneUtilPrintStreamInfoStream || defined(INCLUDE_OrgApacheLuceneUtilPrintStreamInfoStream))
 #define OrgApacheLuceneUtilPrintStreamInfoStream_
 
@@ -24,7 +30,7 @@
 
 /*!
  @brief InfoStream implementation over a <code>PrintStream</code>
- such as <code>System.out</code>.
+  such as <code>System.out</code>.
  */
 @interface OrgApacheLuceneUtilPrintStreamInfoStream : OrgApacheLuceneUtilInfoStream {
  @public
@@ -34,10 +40,10 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoPrintStream:(JavaIoPrintStream *)stream;
+- (instancetype __nonnull)initWithJavaIoPrintStream:(JavaIoPrintStream *)stream;
 
-- (instancetype)initWithJavaIoPrintStream:(JavaIoPrintStream *)stream
-                                  withInt:(jint)messageID;
+- (instancetype __nonnull)initWithJavaIoPrintStream:(JavaIoPrintStream *)stream
+                                            withInt:(jint)messageID;
 
 - (void)close;
 
@@ -54,6 +60,10 @@
  @brief Returns the current time as string for insertion into log messages.
  */
 - (NSString *)getTimestamp;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -77,4 +87,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPrintStreamInfoStream)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPrintStreamInfoStream")

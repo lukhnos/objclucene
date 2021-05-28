@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilClasspathResourceLoader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilClasspathResourceLoader_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilClasspathResourceLoader || defined(INCLUDE_OrgApacheLuceneAnalysisUtilClasspathResourceLoader))
 #define OrgApacheLuceneAnalysisUtilClasspathResourceLoader_
 
@@ -26,8 +32,8 @@
 
 /*!
  @brief Simple <code>ResourceLoader</code> that uses <code>ClassLoader.getResourceAsStream(String)</code>
- and <code>Class.forName(String,boolean,ClassLoader)</code> to open resources and
- classes, respectively.
+  and <code>Class.forName(String,boolean,ClassLoader)</code> to open resources and
+  classes, respectively.
  */
 @interface OrgApacheLuceneAnalysisUtilClasspathResourceLoader : NSObject < OrgApacheLuceneAnalysisUtilResourceLoader >
 
@@ -37,19 +43,19 @@
  @brief Creates an instance using the context classloader to load Resources and classes.
  Resource paths must be absolute.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates an instance using the context classloader to load Resources and classes
- Resources are resolved relative to the given class, if path is not absolute.
+  Resources are resolved relative to the given class, if path is not absolute.
  */
-- (instancetype)initWithIOSClass:(IOSClass *)clazz;
+- (instancetype __nonnull)initWithIOSClass:(IOSClass *)clazz;
 
 /*!
  @brief Creates an instance using the given classloader to load Resources and classes.
  Resource paths must be absolute.
  */
-- (instancetype)initWithJavaLangClassLoader:(JavaLangClassLoader *)loader;
+- (instancetype __nonnull)initWithJavaLangClassLoader:(JavaLangClassLoader *)loader;
 
 - (IOSClass *)findClassWithNSString:(NSString *)cname
                        withIOSClass:(IOSClass *)expectedType;
@@ -65,9 +71,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilClasspathResourceLoader)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init(OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilClasspathResourceLoader *new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilClasspathResourceLoader *new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilClasspathResourceLoader *create_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilClasspathResourceLoader *create_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithJavaLangClassLoader_(OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self, JavaLangClassLoader *loader);
 
@@ -85,4 +91,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilClasspathResourceLoader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilClasspathResourceLoader")

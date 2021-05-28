@@ -19,6 +19,12 @@
 #define INCLUDE_OrgApacheLuceneUtilBits 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilBits_) && (INCLUDE_ALL_OrgApacheLuceneUtilBits || defined(INCLUDE_OrgApacheLuceneUtilBits))
 #define OrgApacheLuceneUtilBits_
 
@@ -27,13 +33,11 @@
 /*!
  @brief Interface for Bitset-like structures.
  */
-@protocol OrgApacheLuceneUtilBits < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilBits < JavaObject >
 
 /*!
  @brief Returns the value of the bit with the specified <code>index</code>.
- @param index index, should be non-negative and &lt; <code>length()</code>.
- The result of passing negative or out of bounds values is undefined
- by this interface, <b>just don't do it!</b>
+ @param index index, should be non-negative and  &lt;  <code>length()</code> .         The result of passing negative or out of bounds values is undefined         by this interface,  <b> just don't do it! </b>
  @return <code>true</code> if the bit is set, <code>false</code> otherwise.
  */
 - (jboolean)getWithInt:(jint)index;
@@ -46,14 +50,13 @@
 @end
 
 @interface OrgApacheLuceneUtilBits : NSObject
-
-+ (IOSObjectArray *)EMPTY_ARRAY;
+@property (readonly, class, strong) IOSObjectArray *EMPTY_ARRAY NS_SWIFT_NAME(EMPTY_ARRAY);
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilBits)
 
-inline IOSObjectArray *OrgApacheLuceneUtilBits_get_EMPTY_ARRAY();
+inline IOSObjectArray *OrgApacheLuceneUtilBits_get_EMPTY_ARRAY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilBits_EMPTY_ARRAY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBits, EMPTY_ARRAY, IOSObjectArray *)
@@ -75,11 +78,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBits)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)len;
+- (instancetype __nonnull)initWithInt:(jint)len;
 
 - (jboolean)getWithInt:(jint)index;
 
 - (jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -108,11 +115,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBits_MatchAllBits)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)len;
+- (instancetype __nonnull)initWithInt:(jint)len;
 
 - (jboolean)getWithInt:(jint)index;
 
 - (jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -128,4 +139,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBits_MatchNoBits)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBits")

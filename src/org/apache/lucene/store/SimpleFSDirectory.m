@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/store/SimpleFSDirectory.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/EOFException.h"
@@ -13,7 +12,6 @@
 #include "java/nio/Buffer.h"
 #include "java/nio/ByteBuffer.h"
 #include "java/nio/channels/SeekableByteChannel.h"
-#include "org/apache/lucene/store/BaseDirectory.h"
 #include "org/apache/lucene/store/BufferedIndexInput.h"
 #include "org/apache/lucene/store/FSDirectory.h"
 #include "org/apache/lucene/store/FSLockFactory.h"
@@ -24,6 +22,10 @@
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/StandardOpenOption.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/SimpleFSDirectory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput () {
  @public
@@ -37,7 +39,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput, by
 /*!
  @brief The maximum chunk size for reads of 16384 bytes.
  */
-inline jint OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_get_CHUNK_SIZE();
+inline jint OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_get_CHUNK_SIZE(void);
 #define OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_CHUNK_SIZE 16384
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput, CHUNK_SIZE, jint)
 
@@ -59,19 +61,26 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreSimpleFSDirectory_Simpl
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   [self ensureOpen];
-  OrgLukhnosPortmobileFilePath *path = [((OrgLukhnosPortmobileFilePath *) nil_chk(directory_)) resolveWithNSString:name];
+  OrgLukhnosPortmobileFilePath *path = JreRetainedLocalValue([((OrgLukhnosPortmobileFilePath *) nil_chk(directory_)) resolveWithNSString:name]);
   id<JavaNioChannelsSeekableByteChannel> channel = OrgLukhnosPortmobileFileFiles_newByteChannelWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOption_(path, JreLoadEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ));
   return create_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_(JreStrcat("$@$", @"SimpleFSIndexInput(path=\"", path, @"\")"), channel, context);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:", "SimpleFSDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:", "SimpleFSDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 3, 4, 1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.store.SimpleFSDirectory$SimpleFSIndexInput;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreSimpleFSDirectory = { 2, "SimpleFSDirectory", "org.apache.lucene.store", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:);
+  methods[1].selector = @selector(initWithOrgLukhnosPortmobileFilePath:);
+  methods[2].selector = @selector(openInputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgLukhnosPortmobileFilePath;LOrgApacheLuceneStoreLockFactory;", "LJavaIoIOException;", "LOrgLukhnosPortmobileFilePath;", "openInput", "LNSString;LOrgApacheLuceneStoreIOContext;", "LOrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreSimpleFSDirectory = { "SimpleFSDirectory", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, 5, -1, -1, -1 };
   return &_OrgApacheLuceneStoreSimpleFSDirectory;
 }
 
@@ -127,8 +136,8 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
   }
 }
 
-- (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *)clone {
-  OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *clone = (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *) cast_chk([super clone], [OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput class]);
+- (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *)java_clone {
+  OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *clone = (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *) cast_chk([super java_clone], [OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput class]);
   ((OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *) nil_chk(clone))->isClone_ = true;
   return clone;
 }
@@ -155,8 +164,8 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
                           withInt:(jint)offset
                           withInt:(jint)len {
   JavaNioByteBuffer *bb;
-  if (b == buffer_) {
-    JreAssert((byteBuf_ != nil), (@"org/apache/lucene/store/SimpleFSDirectory.java:155 condition failed: assert byteBuf != null;"));
+  if (JreObjectEqualsEquals(b, buffer_)) {
+    JreAssert(byteBuf_ != nil, @"org/apache/lucene/store/SimpleFSDirectory.java:155 condition failed: assert byteBuf != null;");
     bb = byteBuf_;
     [((JavaNioBuffer *) nil_chk([((JavaNioByteBuffer *) nil_chk(byteBuf_)) clear])) positionWithInt:offset];
   }
@@ -174,19 +183,19 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
       while (readLength > 0) {
         jint toRead = JavaLangMath_minWithInt_withInt_(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_CHUNK_SIZE, readLength);
         [((JavaNioByteBuffer *) nil_chk(bb)) limitWithInt:[bb position] + toRead];
-        JreAssert(([bb remaining] == toRead), (@"org/apache/lucene/store/SimpleFSDirectory.java:176 condition failed: assert bb.remaining() == toRead;"));
+        JreAssert([bb remaining] == toRead, @"org/apache/lucene/store/SimpleFSDirectory.java:176 condition failed: assert bb.remaining() == toRead;");
         jint i = [channel_ readWithJavaNioByteBuffer:bb];
         if (i < 0) {
           @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@$I$I$J$I$J", @"read past EOF: ", self, @" off: ", offset, @" len: ", len, @" pos: ", pos, @" chunkLen: ", toRead, @" end: ", end_));
         }
-        JreAssert((i > 0), (@"SeekableByteChannel.read with non zero-length bb.remaining() must always read at least one byte (Channel is in blocking mode, see spec of ReadableByteChannel)"));
+        JreAssert(i > 0, @"SeekableByteChannel.read with non zero-length bb.remaining() must always read at least one byte (Channel is in blocking mode, see spec of ReadableByteChannel)");
         pos += i;
         readLength -= i;
       }
-      JreAssert((readLength == 0), (@"org/apache/lucene/store/SimpleFSDirectory.java:185 condition failed: assert readLength == 0;"));
+      JreAssert(readLength == 0, @"org/apache/lucene/store/SimpleFSDirectory.java:185 condition failed: assert readLength == 0;");
     }
     @catch (JavaIoIOException *ioe) {
-      @throw create_JavaIoIOException_initWithNSString_withNSException_(JreStrcat("$$@", [((JavaIoIOException *) nil_chk(ioe)) getMessage], @": ", self), ioe);
+      @throw create_JavaIoIOException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$@", [ioe getMessage], @": ", self), ioe);
     }
   }
 }
@@ -201,26 +210,40 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaNioChannelsSeekableByteChannel:withOrgApacheLuceneStoreIOContext:", "SimpleFSIndexInput", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithNSString:withJavaNioChannelsSeekableByteChannel:withLong:withLong:withInt:", "SimpleFSIndexInput", NULL, 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.store.SimpleFSDirectory$SimpleFSIndexInput;", 0x1, NULL, NULL },
-    { "sliceWithNSString:withLong:withLong:", "slice", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "length", NULL, "J", 0x11, NULL, NULL },
-    { "newBufferWithByteArray:", "newBuffer", "V", 0x4, NULL, NULL },
-    { "readInternalWithByteArray:withInt:withInt:", "readInternal", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "seekInternalWithLong:", "seekInternal", "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput;", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 4, 5, 1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 8, 9, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, 10, 11, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withJavaNioChannelsSeekableByteChannel:withOrgApacheLuceneStoreIOContext:);
+  methods[1].selector = @selector(initWithNSString:withJavaNioChannelsSeekableByteChannel:withLong:withLong:withInt:);
+  methods[2].selector = @selector(close);
+  methods[3].selector = @selector(java_clone);
+  methods[4].selector = @selector(sliceWithNSString:withLong:withLong:);
+  methods[5].selector = @selector(length);
+  methods[6].selector = @selector(newBufferWithByteArray:);
+  methods[7].selector = @selector(readInternalWithByteArray:withInt:withInt:);
+  methods[8].selector = @selector(seekInternalWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "CHUNK_SIZE", "CHUNK_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_CHUNK_SIZE },
-    { "channel_", NULL, 0x14, "Ljava.nio.channels.SeekableByteChannel;", NULL, NULL, .constantValue.asLong = 0 },
-    { "isClone_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "off_", NULL, 0x14, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x14, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "byteBuf_", NULL, 0x2, "Ljava.nio.ByteBuffer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "CHUNK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_CHUNK_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "channel_", "LJavaNioChannelsSeekableByteChannel;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "isClone_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "off_", "J", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "end_", "J", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "byteBuf_", "LJavaNioByteBuffer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput = { 2, "SimpleFSIndexInput", "org.apache.lucene.store", "SimpleFSDirectory", 0x18, 9, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LJavaNioChannelsSeekableByteChannel;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "LNSString;LJavaNioChannelsSeekableByteChannel;JJI", "clone", "slice", "LNSString;JJ", "newBuffer", "[B", "readInternal", "[BII", "seekInternal", "J", "LOrgApacheLuceneStoreSimpleFSDirectory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput = { "SimpleFSIndexInput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x18, 9, 6, 12, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput;
 }
 

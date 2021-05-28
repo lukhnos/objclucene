@@ -9,6 +9,12 @@
 #include "org/apache/lucene/util/packed/PackedInts.h"
 #include "org/apache/lucene/util/packed/PagedMutable.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/PagedMutable must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @implementation OrgApacheLuceneUtilPackedPagedMutable
 
 - (instancetype)initWithLong:(jlong)size
@@ -36,7 +42,7 @@ withOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedI
 
 - (OrgApacheLuceneUtilPackedPackedInts_Mutable *)newMutableWithInt:(jint)valueCount
                                                            withInt:(jint)bitsPerValue {
-  JreAssert((self->bitsPerValue_ >= bitsPerValue), (@"org/apache/lucene/util/packed/PagedMutable.java:57 condition failed: assert this.bitsPerValue >= bitsPerValue;"));
+  JreAssert(self->bitsPerValue_ >= bitsPerValue, @"org/apache/lucene/util/packed/PagedMutable.java:57 condition failed: assert this.bitsPerValue >= bitsPerValue;");
   return OrgApacheLuceneUtilPackedPackedInts_getMutableWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(valueCount, self->bitsPerValue_, format_);
 }
 
@@ -54,19 +60,29 @@ withOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedI
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithLong:withInt:withInt:withFloat:", "PagedMutable", NULL, 0x1, NULL, NULL },
-    { "initWithLong:withInt:withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits:", "PagedMutable", NULL, 0x0, NULL, NULL },
-    { "initWithLong:withInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_Format:", "PagedMutable", NULL, 0x0, NULL, NULL },
-    { "newMutableWithInt:withInt:", "newMutable", "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", 0x4, NULL, NULL },
-    { "newUnfilledCopyWithLong:", "newUnfilledCopy", "Lorg.apache.lucene.util.packed.PagedMutable;", 0x4, NULL, "(J)Lorg/apache/lucene/util/packed/PagedMutable;" },
-    { "baseRamBytesUsed", NULL, "J", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedInts_Mutable;", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPagedMutable;", 0x4, 5, 6, -1, -1, -1, -1 },
+    { NULL, "J", 0x4, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithLong:withInt:withInt:withFloat:);
+  methods[1].selector = @selector(initWithLong:withInt:withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits:);
+  methods[2].selector = @selector(initWithLong:withInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_Format:);
+  methods[3].selector = @selector(newMutableWithInt:withInt:);
+  methods[4].selector = @selector(newUnfilledCopyWithLong:);
+  methods[5].selector = @selector(baseRamBytesUsed);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "format_", NULL, 0x10, "Lorg.apache.lucene.util.packed.PackedInts$Format;", NULL, NULL, .constantValue.asLong = 0 },
+    { "format_", "LOrgApacheLuceneUtilPackedPackedInts_Format;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.packed.PagedMutable;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPagedMutable = { 2, "PagedMutable", "org.apache.lucene.util.packed", NULL, 0x11, 6, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/packed/AbstractPagedMutable<Lorg/apache/lucene/util/packed/PagedMutable;>;" };
+  static const void *ptrTable[] = { "JIIF", "JILOrgApacheLuceneUtilPackedPackedInts_FormatAndBits;", "JIILOrgApacheLuceneUtilPackedPackedInts_Format;", "newMutable", "II", "newUnfilledCopy", "J", "Lorg/apache/lucene/util/packed/AbstractPagedMutable<Lorg/apache/lucene/util/packed/PagedMutable;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPagedMutable = { "PagedMutable", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x11, 6, 1, -1, -1, -1, 7, -1 };
   return &_OrgApacheLuceneUtilPackedPagedMutable;
 }
 
@@ -98,7 +114,7 @@ OrgApacheLuceneUtilPackedPagedMutable *create_OrgApacheLuceneUtilPackedPagedMuta
 }
 
 void OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(OrgApacheLuceneUtilPackedPagedMutable *self, jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_Format *format) {
-  OrgApacheLuceneUtilPackedAbstractPagedMutable_initWithInt_withLong_withInt_(self, bitsPerValue, size, pageSize);
+  OrgApacheLuceneUtilPackedAbstractPagedMutable_initPackagePrivateWithInt_withLong_withInt_(self, bitsPerValue, size, pageSize);
   JreStrongAssign(&self->format_, format);
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter))
 #define OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter_
 
@@ -28,8 +34,8 @@
 /*!
  @brief A <code>org.apache.lucene.analysis.TokenFilter</code> that decomposes compound words found in many Germanic languages.
  "Donaudampfschiff" becomes Donau, dampf, schiff so that you can find
- "Donaudampfschiff" even when you only enter "schiff". It uses a hyphenation
- grammar and a word dictionary to achieve this.
+  "Donaudampfschiff" even when you only enter "schiff". It uses a hyphenation
+  grammar and a word dictionary to achieve this.
  */
 @interface OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter : OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase
 
@@ -38,67 +44,59 @@
 /*!
  @brief Create a HyphenationCompoundWordTokenFilter with no dictionary.
  <p>
- Calls <code>HyphenationCompoundWordTokenFilter(matchVersion, input, hyphenator,
- DEFAULT_MIN_WORD_SIZE, DEFAULT_MIN_SUBWORD_SIZE, DEFAULT_MAX_SUBWORD_SIZE</code>
+  Calls <code>HyphenationCompoundWordTokenFilter(matchVersion, input, hyphenator,
+  DEFAULT_MIN_WORD_SIZE, DEFAULT_MIN_SUBWORD_SIZE, DEFAULT_MAX_SUBWORD_SIZE</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+       withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator;
 
 /*!
  @brief Creates a new <code>HyphenationCompoundWordTokenFilter</code> instance.
- @param input
- the <code>org.apache.lucene.analysis.TokenStream</code> to process
- @param hyphenator
- the hyphenation pattern tree to use for hyphenation
- @param dictionary
- the word dictionary to match against.
+ @param input the 
+ <code>org.apache.lucene.analysis.TokenStream</code>  to process
+ @param hyphenator the hyphenation pattern tree to use for hyphenation
+ @param dictionary the word dictionary to match against.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+       withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary;
 
 /*!
  @brief Creates a new <code>HyphenationCompoundWordTokenFilter</code> instance.
- @param input
- the <code>org.apache.lucene.analysis.TokenStream</code> to process
- @param hyphenator
- the hyphenation pattern tree to use for hyphenation
- @param dictionary
- the word dictionary to match against.
- @param minWordSize
- only words longer than this get processed
- @param minSubwordSize
- only subwords longer than this get to the output stream
- @param maxSubwordSize
- only subwords shorter than this get to the output stream
- @param onlyLongestMatch
- Add only the longest matching subword to the stream
+ @param input the 
+ <code>org.apache.lucene.analysis.TokenStream</code>  to process
+ @param hyphenator the hyphenation pattern tree to use for hyphenation
+ @param dictionary the word dictionary to match against.
+ @param minWordSize only words longer than this get processed
+ @param minSubwordSize only subwords longer than this get to the output stream
+ @param maxSubwordSize only subwords shorter than this get to the output stream
+ @param onlyLongestMatch Add only the longest matching subword to the stream
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
-                                                   withInt:(jint)minWordSize
-                                                   withInt:(jint)minSubwordSize
-                                                   withInt:(jint)maxSubwordSize
-                                               withBoolean:(jboolean)onlyLongestMatch;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+       withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
+                                                             withInt:(jint)minWordSize
+                                                             withInt:(jint)minSubwordSize
+                                                             withInt:(jint)maxSubwordSize
+                                                         withBoolean:(jboolean)onlyLongestMatch;
 
 /*!
  @brief Create a HyphenationCompoundWordTokenFilter with no dictionary.
  <p>
- Calls <code>HyphenationCompoundWordTokenFilter(matchVersion, input, hyphenator,
- null, minWordSize, minSubwordSize, maxSubwordSize</code>
+  Calls <code>HyphenationCompoundWordTokenFilter(matchVersion, input, hyphenator,
+  null, minWordSize, minSubwordSize, maxSubwordSize</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator
-                                                   withInt:(jint)minWordSize
-                                                   withInt:(jint)minSubwordSize
-                                                   withInt:(jint)maxSubwordSize;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+       withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator
+                                                             withInt:(jint)minWordSize
+                                                             withInt:(jint)minSubwordSize
+                                                             withInt:(jint)maxSubwordSize;
 
 /*!
  @brief Create a hyphenator tree
  @param hyphenationSource the InputSource pointing to the XML grammar
  @return An object representing the hyphenation patterns
- @throws java.io.IOException If there is a low-level I/O error.
+ @throw java.io.IOExceptionIf there is a low-level I/O error.
  */
 + (OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)getHyphenationTreeWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)hyphenationSource;
 
@@ -106,13 +104,29 @@ withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAn
  @brief Create a hyphenator tree
  @param hyphenationFilename the filename of the XML grammar to load
  @return An object representing the hyphenation patterns
- @throws java.io.IOException If there is a low-level I/O error.
+ @throw java.io.IOExceptionIf there is a low-level I/O error.
  */
 + (OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)getHyphenationTreeWithNSString:(NSString *)hyphenationFilename;
 
 #pragma mark Protected
 
 - (void)decompose;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)arg1
+                                                         withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)arg1
+                                                             withInt:(jint)arg2
+                                                             withInt:(jint)arg3
+                                                             withInt:(jint)arg4
+                                                         withBoolean:(jboolean)arg5 NS_UNAVAILABLE;
 
 @end
 
@@ -150,4 +164,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationCompoundWor
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter")

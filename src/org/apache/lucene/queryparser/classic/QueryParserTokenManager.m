@@ -3,6 +3,7 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/classic/QueryParserTokenManager.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -11,6 +12,10 @@
 #include "org/apache/lucene/queryparser/classic/QueryParserTokenManager.h"
 #include "org/apache/lucene/queryparser/classic/Token.h"
 #include "org/apache/lucene/queryparser/classic/TokenMgrError.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/classic/QueryParserTokenManager must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserClassicQueryParserTokenManager () {
  @public
@@ -95,6 +100,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicQueryParserTokenManager, jj
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicQueryParserTokenManager, jjstateSet_, IOSIntArray *)
 
 __attribute__((unused)) static jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopStringLiteralDfa_2WithInt_withLong_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, jint pos, jlong active0);
+
+__attribute__((unused)) static jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStartNfa_2WithInt_withLong_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, jint pos, jlong active0);
 
 __attribute__((unused)) static jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopAtPosWithInt_withInt_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, jint pos, jint kind);
 
@@ -198,7 +205,7 @@ IOSLongArray *OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip;
 
 - (jint)jjStartNfa_2WithInt:(jint)pos
                    withLong:(jlong)active0 {
-  return OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjMoveNfa_2WithInt_withInt_(self, OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopStringLiteralDfa_2WithInt_withLong_(self, pos, active0), pos + 1);
+  return OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStartNfa_2WithInt_withLong_(self, pos, active0);
 }
 
 - (jint)jjStopAtPosWithInt:(jint)pos
@@ -432,6 +439,98 @@ IOSLongArray *OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip;
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "I", 0x12, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x12, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 7, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 8, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x12, 9, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x12, 10, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 11, 12, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 13, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 14, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1a, 15, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1a, 17, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1a, 18, 16, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 19, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserClassicToken;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserClassicToken;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 24, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 25, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 26, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 27, 4, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(jjStopStringLiteralDfa_2WithInt:withLong:);
+  methods[1].selector = @selector(jjStartNfa_2WithInt:withLong:);
+  methods[2].selector = @selector(jjStopAtPosWithInt:withInt:);
+  methods[3].selector = @selector(jjMoveStringLiteralDfa0_2);
+  methods[4].selector = @selector(jjStartNfaWithStates_2WithInt:withInt:withInt:);
+  methods[5].selector = @selector(jjMoveNfa_2WithInt:withInt:);
+  methods[6].selector = @selector(jjMoveStringLiteralDfa0_0);
+  methods[7].selector = @selector(jjMoveNfa_0WithInt:withInt:);
+  methods[8].selector = @selector(jjStopStringLiteralDfa_1WithInt:withLong:);
+  methods[9].selector = @selector(jjStartNfa_1WithInt:withLong:);
+  methods[10].selector = @selector(jjMoveStringLiteralDfa0_1);
+  methods[11].selector = @selector(jjMoveStringLiteralDfa1_1WithLong:);
+  methods[12].selector = @selector(jjStartNfaWithStates_1WithInt:withInt:withInt:);
+  methods[13].selector = @selector(jjMoveNfa_1WithInt:withInt:);
+  methods[14].selector = @selector(jjCanMove_0WithInt:withInt:withInt:withLong:withLong:);
+  methods[15].selector = @selector(jjCanMove_1WithInt:withInt:withInt:withLong:withLong:);
+  methods[16].selector = @selector(jjCanMove_2WithInt:withInt:withInt:withLong:withLong:);
+  methods[17].selector = @selector(initWithOrgApacheLuceneQueryparserClassicCharStream:);
+  methods[18].selector = @selector(initWithOrgApacheLuceneQueryparserClassicCharStream:withInt:);
+  methods[19].selector = @selector(ReInitWithOrgApacheLuceneQueryparserClassicCharStream:);
+  methods[20].selector = @selector(ReInitRounds);
+  methods[21].selector = @selector(ReInitWithOrgApacheLuceneQueryparserClassicCharStream:withInt:);
+  methods[22].selector = @selector(SwitchToWithInt:);
+  methods[23].selector = @selector(jjFillToken);
+  methods[24].selector = @selector(getNextToken);
+  methods[25].selector = @selector(jjCheckNAddWithInt:);
+  methods[26].selector = @selector(jjAddStatesWithInt:withInt:);
+  methods[27].selector = @selector(jjCheckNAddTwoStatesWithInt:withInt:);
+  methods[28].selector = @selector(jjCheckNAddStatesWithInt:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "jjbitVec0", "[J", .constantValue.asLong = 0, 0x18, -1, 28, -1, -1 },
+    { "jjbitVec1", "[J", .constantValue.asLong = 0, 0x18, -1, 29, -1, -1 },
+    { "jjbitVec3", "[J", .constantValue.asLong = 0, 0x18, -1, 30, -1, -1 },
+    { "jjbitVec4", "[J", .constantValue.asLong = 0, 0x18, -1, 31, -1, -1 },
+    { "jjnextStates", "[I", .constantValue.asLong = 0, 0x18, -1, 32, -1, -1 },
+    { "jjstrLiteralImages", "[LNSString;", .constantValue.asLong = 0, 0x19, -1, 33, -1, -1 },
+    { "lexStateNames", "[LNSString;", .constantValue.asLong = 0, 0x19, -1, 34, -1, -1 },
+    { "jjnewLexState", "[I", .constantValue.asLong = 0, 0x19, -1, 35, -1, -1 },
+    { "jjtoToken", "[J", .constantValue.asLong = 0, 0x18, -1, 36, -1, -1 },
+    { "jjtoSkip", "[J", .constantValue.asLong = 0, 0x18, -1, 37, -1, -1 },
+    { "input_stream_", "LOrgApacheLuceneQueryparserClassicCharStream;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "jjrounds_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "jjstateSet_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "curChar_", "C", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "curLexState_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "defaultLexState_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "jjnewStateCnt_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "jjround_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "jjmatchedPos_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "jjmatchedKind_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "jjStopStringLiteralDfa_2", "IJ", "jjStartNfa_2", "jjStopAtPos", "II", "jjStartNfaWithStates_2", "III", "jjMoveNfa_2", "jjMoveNfa_0", "jjStopStringLiteralDfa_1", "jjStartNfa_1", "jjMoveStringLiteralDfa1_1", "J", "jjStartNfaWithStates_1", "jjMoveNfa_1", "jjCanMove_0", "IIIJJ", "jjCanMove_1", "jjCanMove_2", "LOrgApacheLuceneQueryparserClassicCharStream;", "LOrgApacheLuceneQueryparserClassicCharStream;I", "ReInit", "SwitchTo", "I", "jjCheckNAdd", "jjAddStates", "jjCheckNAddTwoStates", "jjCheckNAddStates", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjbitVec0, &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjbitVec1, &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjbitVec3, &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjbitVec4, &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjnextStates, &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjstrLiteralImages, &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_lexStateNames, &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjnewLexState, &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoToken, &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicQueryParserTokenManager = { "QueryParserTokenManager", "org.apache.lucene.queryparser.classic", ptrTable, methods, fields, 7, 0x1, 29, 20, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserClassicQueryParserTokenManager;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserClassicQueryParserTokenManager class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjbitVec0, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x1LL, (jlong) 0x0LL, (jlong) 0x0LL, (jlong) 0x0LL } count:4]);
@@ -448,64 +547,6 @@ IOSLongArray *OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip;
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "jjStopStringLiteralDfa_2WithInt:withLong:", "jjStopStringLiteralDfa_2", "I", 0x12, NULL, NULL },
-    { "jjStartNfa_2WithInt:withLong:", "jjStartNfa_2", "I", 0x12, NULL, NULL },
-    { "jjStopAtPosWithInt:withInt:", "jjStopAtPos", "I", 0x2, NULL, NULL },
-    { "jjMoveStringLiteralDfa0_2", NULL, "I", 0x2, NULL, NULL },
-    { "jjStartNfaWithStates_2WithInt:withInt:withInt:", "jjStartNfaWithStates_2", "I", 0x2, NULL, NULL },
-    { "jjMoveNfa_2WithInt:withInt:", "jjMoveNfa_2", "I", 0x2, NULL, NULL },
-    { "jjMoveStringLiteralDfa0_0", NULL, "I", 0x2, NULL, NULL },
-    { "jjMoveNfa_0WithInt:withInt:", "jjMoveNfa_0", "I", 0x2, NULL, NULL },
-    { "jjStopStringLiteralDfa_1WithInt:withLong:", "jjStopStringLiteralDfa_1", "I", 0x12, NULL, NULL },
-    { "jjStartNfa_1WithInt:withLong:", "jjStartNfa_1", "I", 0x12, NULL, NULL },
-    { "jjMoveStringLiteralDfa0_1", NULL, "I", 0x2, NULL, NULL },
-    { "jjMoveStringLiteralDfa1_1WithLong:", "jjMoveStringLiteralDfa1_1", "I", 0x2, NULL, NULL },
-    { "jjStartNfaWithStates_1WithInt:withInt:withInt:", "jjStartNfaWithStates_1", "I", 0x2, NULL, NULL },
-    { "jjMoveNfa_1WithInt:withInt:", "jjMoveNfa_1", "I", 0x2, NULL, NULL },
-    { "jjCanMove_0WithInt:withInt:withInt:withLong:withLong:", "jjCanMove_0", "Z", 0x1a, NULL, NULL },
-    { "jjCanMove_1WithInt:withInt:withInt:withLong:withLong:", "jjCanMove_1", "Z", 0x1a, NULL, NULL },
-    { "jjCanMove_2WithInt:withInt:withInt:withLong:withLong:", "jjCanMove_2", "Z", 0x1a, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserClassicCharStream:", "QueryParserTokenManager", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserClassicCharStream:withInt:", "QueryParserTokenManager", NULL, 0x1, NULL, NULL },
-    { "ReInitWithOrgApacheLuceneQueryparserClassicCharStream:", "ReInit", "V", 0x1, NULL, NULL },
-    { "ReInitRounds", NULL, "V", 0x2, NULL, NULL },
-    { "ReInitWithOrgApacheLuceneQueryparserClassicCharStream:withInt:", "ReInit", "V", 0x1, NULL, NULL },
-    { "SwitchToWithInt:", "SwitchTo", "V", 0x1, NULL, NULL },
-    { "jjFillToken", NULL, "Lorg.apache.lucene.queryparser.classic.Token;", 0x4, NULL, NULL },
-    { "getNextToken", NULL, "Lorg.apache.lucene.queryparser.classic.Token;", 0x1, NULL, NULL },
-    { "jjCheckNAddWithInt:", "jjCheckNAdd", "V", 0x2, NULL, NULL },
-    { "jjAddStatesWithInt:withInt:", "jjAddStates", "V", 0x2, NULL, NULL },
-    { "jjCheckNAddTwoStatesWithInt:withInt:", "jjCheckNAddTwoStates", "V", 0x2, NULL, NULL },
-    { "jjCheckNAddStatesWithInt:withInt:", "jjCheckNAddStates", "V", 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "jjbitVec0", "jjbitVec0", 0x18, "[J", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjbitVec0, NULL, .constantValue.asLong = 0 },
-    { "jjbitVec1", "jjbitVec1", 0x18, "[J", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjbitVec1, NULL, .constantValue.asLong = 0 },
-    { "jjbitVec3", "jjbitVec3", 0x18, "[J", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjbitVec3, NULL, .constantValue.asLong = 0 },
-    { "jjbitVec4", "jjbitVec4", 0x18, "[J", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjbitVec4, NULL, .constantValue.asLong = 0 },
-    { "jjnextStates", "jjnextStates", 0x18, "[I", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjnextStates, NULL, .constantValue.asLong = 0 },
-    { "jjstrLiteralImages", "jjstrLiteralImages", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjstrLiteralImages, NULL, .constantValue.asLong = 0 },
-    { "lexStateNames", "lexStateNames", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_lexStateNames, NULL, .constantValue.asLong = 0 },
-    { "jjnewLexState", "jjnewLexState", 0x19, "[I", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjnewLexState, NULL, .constantValue.asLong = 0 },
-    { "jjtoToken", "jjtoToken", 0x18, "[J", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoToken, NULL, .constantValue.asLong = 0 },
-    { "jjtoSkip", "jjtoSkip", 0x18, "[J", &OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip, NULL, .constantValue.asLong = 0 },
-    { "input_stream_", NULL, 0x4, "Lorg.apache.lucene.queryparser.classic.CharStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jjrounds_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jjstateSet_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curChar_", NULL, 0x4, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "curLexState_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "defaultLexState_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jjnewStateCnt_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jjround_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jjmatchedPos_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jjmatchedKind_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicQueryParserTokenManager = { 2, "QueryParserTokenManager", "org.apache.lucene.queryparser.classic", NULL, 0x1, 29, methods, 20, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserClassicQueryParserTokenManager;
-}
-
 @end
 
 jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopStringLiteralDfa_2WithInt_withLong_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, jint pos, jlong active0) {
@@ -513,6 +554,10 @@ jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopStringLitera
     default:
     return -1;
   }
+}
+
+jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStartNfa_2WithInt_withLong_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, jint pos, jlong active0) {
+  return OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjMoveNfa_2WithInt_withInt_(self, OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopStringLiteralDfa_2WithInt_withLong_(self, pos, active0), pos + 1);
 }
 
 jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopAtPosWithInt_withInt_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, jint pos, jint kind) {
@@ -961,8 +1006,7 @@ jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjMoveNfa_2WithInt
       kind = (jint) 0x7fffffff;
     }
     ++curPos;
-    jint unseq$1 = self->jjnewStateCnt_;
-    if ((i = unseq$1) == (startsAt = 49 - (self->jjnewStateCnt_ = startsAt))) return curPos;
+    if ((i = self->jjnewStateCnt_) == (startsAt = 49 - (self->jjnewStateCnt_ = startsAt))) return curPos;
     @try {
       self->curChar_ = [((id<OrgApacheLuceneQueryparserClassicCharStream>) nil_chk(self->input_stream_)) readChar];
     }
@@ -1037,8 +1081,7 @@ jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjMoveNfa_0WithInt
       kind = (jint) 0x7fffffff;
     }
     ++curPos;
-    jint unseq$1 = self->jjnewStateCnt_;
-    if ((i = unseq$1) == (startsAt = 3 - (self->jjnewStateCnt_ = startsAt))) return curPos;
+    if ((i = self->jjnewStateCnt_) == (startsAt = 3 - (self->jjnewStateCnt_ = startsAt))) return curPos;
     @try {
       self->curChar_ = [((id<OrgApacheLuceneQueryparserClassicCharStream>) nil_chk(self->input_stream_)) readChar];
     }
@@ -1212,8 +1255,7 @@ jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjMoveNfa_1WithInt
       kind = (jint) 0x7fffffff;
     }
     ++curPos;
-    jint unseq$1 = self->jjnewStateCnt_;
-    if ((i = unseq$1) == (startsAt = 7 - (self->jjnewStateCnt_ = startsAt))) return curPos;
+    if ((i = self->jjnewStateCnt_) == (startsAt = 7 - (self->jjnewStateCnt_ = startsAt))) return curPos;
     @try {
       self->curChar_ = [((id<OrgApacheLuceneQueryparserClassicCharStream>) nil_chk(self->input_stream_)) readChar];
     }

@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalization 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesNormalization_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalization || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalization))
 #define OrgApacheLuceneSearchSimilaritiesNormalization_
 
@@ -24,7 +30,7 @@
 
 /*!
  @brief This class acts as the base class for the implementations of the term
- frequency normalization methods in the DFR framework.
+  frequency normalization methods in the DFR framework.
  - seealso: DFRSimilarity
  */
 @interface OrgApacheLuceneSearchSimilaritiesNormalization : NSObject
@@ -34,16 +40,16 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.)
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns an explanation for the normalized term frequency.
  <p>The default normalization methods use the field length of the document
- and the average field length to compute the normalized term frequency.
- This method provides a generic explanation for such methods.
- Subclasses that use other statistics must override this method.</p>
+  and the average field length to compute the normalized term frequency.
+  This method provides a generic explanation for such methods.
+  Subclasses that use other statistics must override this method.</p>
  */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                                                    withFloat:(jfloat)tf
@@ -59,8 +65,7 @@
 
 /*!
  @brief Subclasses must override this method to return the code of the
- normalization formula.
- Refer to the original paper for the list. 
+  normalization formula.Refer to the original paper for the list.
  */
 - (NSString *)description;
 
@@ -90,7 +95,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalization)
 /*!
  @brief Sole constructor: parameter-free
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                                                    withFloat:(jfloat)tf
@@ -108,12 +113,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesNormalization_NoNormal
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_init(OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization *new_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization *new_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization *create_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization *create_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalization")

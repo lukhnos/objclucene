@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/search/FakeScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Collection.h"
@@ -11,14 +10,16 @@
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/Weight.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/FakeScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchFakeScorer
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchFakeScorer_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneSearchFakeScorer_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)advanceWithInt:(jint)target {
   @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"FakeScorer doesn't support advance(int)");
@@ -53,40 +54,54 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "FakeScorer", NULL, 0x1, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, NULL, NULL },
-    { "score", NULL, "F", 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "getWeight", NULL, "Lorg.apache.lucene.search.Weight;", 0x1, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 2, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(advanceWithInt:);
+  methods[2].selector = @selector(docID);
+  methods[3].selector = @selector(freq);
+  methods[4].selector = @selector(nextDoc);
+  methods[5].selector = @selector(score);
+  methods[6].selector = @selector(cost);
+  methods[7].selector = @selector(getWeight);
+  methods[8].selector = @selector(getChildren);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "score_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "score_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "freq_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFakeScorer = { 2, "FakeScorer", "org.apache.lucene.search", NULL, 0x10, 9, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "advance", "I", "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFakeScorer = { "FakeScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x10, 9, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFakeScorer;
 }
 
 @end
 
-void OrgApacheLuceneSearchFakeScorer_init(OrgApacheLuceneSearchFakeScorer *self) {
+void OrgApacheLuceneSearchFakeScorer_initPackagePrivate(OrgApacheLuceneSearchFakeScorer *self) {
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, nil);
   self->doc_ = -1;
   self->freq_ = 1;
 }
 
-OrgApacheLuceneSearchFakeScorer *new_OrgApacheLuceneSearchFakeScorer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFakeScorer, init)
+OrgApacheLuceneSearchFakeScorer *new_OrgApacheLuceneSearchFakeScorer_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFakeScorer, initPackagePrivate)
 }
 
-OrgApacheLuceneSearchFakeScorer *create_OrgApacheLuceneSearchFakeScorer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFakeScorer, init)
+OrgApacheLuceneSearchFakeScorer *create_OrgApacheLuceneSearchFakeScorer_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFakeScorer, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFakeScorer)

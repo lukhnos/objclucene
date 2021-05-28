@@ -11,6 +11,10 @@
 #include "org/apache/lucene/document/TextField.h"
 #include "org/apache/lucene/index/IndexOptions.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/TextField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentTextField)
 
 OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED;
@@ -45,6 +49,28 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
   return self;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withJavaIoReader:);
+  methods[1].selector = @selector(initWithNSString:withNSString:withOrgApacheLuceneDocumentField_Store:);
+  methods[2].selector = @selector(initWithNSString:withOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "TYPE_NOT_STORED", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 3, -1, -1 },
+    { "TYPE_STORED", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;LJavaIoReader;", "LNSString;LNSString;LOrgApacheLuceneDocumentField_Store;", "LNSString;LOrgApacheLuceneAnalysisTokenStream;", &OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED, &OrgApacheLuceneDocumentTextField_TYPE_STORED };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentTextField = { "TextField", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x11, 3, 2, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneDocumentTextField;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentTextField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED, new_OrgApacheLuceneDocumentFieldType_init());
@@ -60,20 +86,6 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentTextField)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaIoReader:", "TextField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withNSString:withOrgApacheLuceneDocumentField_Store:", "TextField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "TextField", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "TYPE_NOT_STORED", "TYPE_NOT_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED, NULL, .constantValue.asLong = 0 },
-    { "TYPE_STORED", "TYPE_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentTextField_TYPE_STORED, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentTextField = { 2, "TextField", "org.apache.lucene.document", NULL, 0x11, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentTextField;
 }
 
 @end

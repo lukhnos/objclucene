@@ -3,10 +3,8 @@
 //  source: ./sandbox/src/java/org/apache/lucene/rangetree/RangeTreeReader.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Math.h"
 #include "java/util/Arrays.h"
 #include "java/util/Collection.h"
@@ -21,6 +19,10 @@
 
 @class OrgApacheLuceneRangetreeRangeTreeReader_QueryState;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/rangetree/RangeTreeReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneRangetreeRangeTreeReader () {
  @public
   IOSLongArray *blockFPs_;
@@ -33,9 +35,8 @@
 - (jint)addAllWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState:(OrgApacheLuceneRangetreeRangeTreeReader_QueryState *)state;
 
 /*!
- @brief Adds docs from the current block, filtering each hit against the query min/max.
- This
- is only needed on the boundary blocks. 
+ @brief Adds docs from the current block, filtering each hit against the query min/max.This
+   is only needed on the boundary blocks.
  */
 - (jint)addSomeWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState:(OrgApacheLuceneRangetreeRangeTreeReader_QueryState *)state;
 
@@ -81,8 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeReader_QueryState)
 
 @implementation OrgApacheLuceneRangetreeRangeTreeReader
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
-  OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(self, inArg);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
+  OrgApacheLuceneRangetreeRangeTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_(self, inArg);
   return self;
 }
 
@@ -104,7 +105,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeReader_QueryState)
   if (minIncl > globalMaxValue_ || maxIncl < IOSLongArray_Get(nil_chk(blockMinValues_), 0)) {
     return JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY);
   }
-  OrgApacheLuceneRangetreeRangeTreeReader_QueryState *state = create_OrgApacheLuceneRangetreeRangeTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_([((OrgApacheLuceneStoreIndexInput *) nil_chk(in_)) clone], maxDoc, minIncl, maxIncl, sndv);
+  OrgApacheLuceneRangetreeRangeTreeReader_QueryState *state = create_OrgApacheLuceneRangetreeRangeTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_([((OrgApacheLuceneStoreIndexInput *) nil_chk(in_)) java_clone], maxDoc, minIncl, maxIncl, sndv);
   jint startBlockIncl = JavaUtilArrays_binarySearchWithLongArray_withLong_(blockMinValues_, minIncl);
   if (startBlockIncl >= 0) {
     while (startBlockIncl > 0 && IOSLongArray_Get(nil_chk(blockMinValues_), startBlockIncl) == minIncl) {
@@ -123,7 +124,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeReader_QueryState)
   else {
     endBlockIncl = JavaLangMath_maxWithInt_withInt_(-endBlockIncl - 2, 0);
   }
-  JreAssert((startBlockIncl <= endBlockIncl), (@"org/apache/lucene/rangetree/RangeTreeReader.java:124 condition failed: assert startBlockIncl <= endBlockIncl;"));
+  JreAssert(startBlockIncl <= endBlockIncl, @"org/apache/lucene/rangetree/RangeTreeReader.java:124 condition failed: assert startBlockIncl <= endBlockIncl;");
   [((OrgApacheLuceneStoreIndexInput *) nil_chk(state->in_)) seekWithLong:IOSLongArray_Get(nil_chk(blockFPs_), startBlockIncl)];
   [((OrgApacheLuceneUtilDocIdSetBuilder *) nil_chk(state->docs_)) growWithInt:approxDocsPerBlock_ * (endBlockIncl - startBlockIncl + 1)];
   jint hitCount = 0;
@@ -165,31 +166,43 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeReader_QueryState)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:", "RangeTreeReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getMinValue", NULL, "J", 0x1, NULL, NULL },
-    { "getMaxValue", NULL, "J", 0x1, NULL, NULL },
-    { "intersectWithLong:withLong:withOrgApacheLuceneIndexSortedNumericDocValues:withInt:", "intersect", "Lorg.apache.lucene.search.DocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
-    { "addAllWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState:", "addAll", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "addSomeWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState:", "addSome", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 5, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, 6, 5, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 7, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneStoreIndexInput:);
+  methods[1].selector = @selector(getMinValue);
+  methods[2].selector = @selector(getMaxValue);
+  methods[3].selector = @selector(intersectWithLong:withLong:withOrgApacheLuceneIndexSortedNumericDocValues:withInt:);
+  methods[4].selector = @selector(addAllWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState:);
+  methods[5].selector = @selector(addSomeWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState:);
+  methods[6].selector = @selector(ramBytesUsed);
+  methods[7].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "blockFPs_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockMinValues_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "globalMaxValue_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "approxDocsPerBlock_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "blockFPs_", "[J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "blockMinValues_", "[J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "in_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "globalMaxValue_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "approxDocsPerBlock_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.rangetree.RangeTreeReader$QueryState;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeReader = { 2, "RangeTreeReader", "org.apache.lucene.rangetree", NULL, 0x10, 8, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;", "LJavaIoIOException;", "intersect", "JJLOrgApacheLuceneIndexSortedNumericDocValues;I", "addAll", "LOrgApacheLuceneRangetreeRangeTreeReader_QueryState;", "addSome", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeReader = { "RangeTreeReader", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x10, 8, 5, -1, 5, -1, -1, -1 };
   return &_OrgApacheLuceneRangetreeRangeTreeReader;
 }
 
 @end
 
-void OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneRangetreeRangeTreeReader *self, OrgApacheLuceneStoreIndexInput *inArg) {
+void OrgApacheLuceneRangetreeRangeTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneRangetreeRangeTreeReader *self, OrgApacheLuceneStoreIndexInput *inArg) {
   NSObject_init(self);
   jint numLeaves = [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readVInt];
   self->approxDocsPerBlock_ = [inArg readVInt];
@@ -205,12 +218,12 @@ void OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexIn
   JreStrongAssign(&self->in_, inArg);
 }
 
-OrgApacheLuceneRangetreeRangeTreeReader *new_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeReader, initWithOrgApacheLuceneStoreIndexInput_, inArg)
+OrgApacheLuceneRangetreeRangeTreeReader *new_OrgApacheLuceneRangetreeRangeTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeReader, initPackagePrivateWithOrgApacheLuceneStoreIndexInput_, inArg)
 }
 
-OrgApacheLuceneRangetreeRangeTreeReader *create_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeReader, initWithOrgApacheLuceneStoreIndexInput_, inArg)
+OrgApacheLuceneRangetreeRangeTreeReader *create_OrgApacheLuceneRangetreeRangeTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeReader, initPackagePrivateWithOrgApacheLuceneStoreIndexInput_, inArg)
 }
 
 jint OrgApacheLuceneRangetreeRangeTreeReader_addAllWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState_(OrgApacheLuceneRangetreeRangeTreeReader *self, OrgApacheLuceneRangetreeRangeTreeReader_QueryState *state) {
@@ -264,17 +277,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeReader)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:withInt:withLong:withLong:withOrgApacheLuceneIndexSortedNumericDocValues:", "QueryState", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexInput:withInt:withLong:withLong:withOrgApacheLuceneIndexSortedNumericDocValues:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docs_", NULL, 0x10, "Lorg.apache.lucene.util.DocIdSetBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minValueIncl_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxValueIncl_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "sndv_", NULL, 0x10, "Lorg.apache.lucene.index.SortedNumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docs_", "LOrgApacheLuceneUtilDocIdSetBuilder;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "minValueIncl_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxValueIncl_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "sndv_", "LOrgApacheLuceneIndexSortedNumericDocValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeReader_QueryState = { 2, "QueryState", "org.apache.lucene.rangetree", "RangeTreeReader", 0x1a, 1, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;IJJLOrgApacheLuceneIndexSortedNumericDocValues;", "LOrgApacheLuceneRangetreeRangeTreeReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeReader_QueryState = { "QueryState", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x1a, 1, 5, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneRangetreeRangeTreeReader_QueryState;
 }
 

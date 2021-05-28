@@ -13,16 +13,21 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilSetOnce
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilSetOnce_) && (INCLUDE_ALL_OrgApacheLuceneUtilSetOnce || defined(INCLUDE_OrgApacheLuceneUtilSetOnce))
 #define OrgApacheLuceneUtilSetOnce_
 
 /*!
  @brief A convenient class which offers a semi-immutable object wrapper
- implementation which allows one to set the value of an object exactly once,
- and retrieve it many times.
- If <code>set(Object)</code> is called more than once,
+  implementation which allows one to set the value of an object exactly once,
+  and retrieve it many times.If <code>set(Object)</code> is called more than once, 
  <code>AlreadySetException</code> is thrown and the operation
- will fail.
+  will fail.
  */
 @interface OrgApacheLuceneUtilSetOnce : NSObject < NSCopying >
 
@@ -30,18 +35,18 @@
 
 /*!
  @brief A default constructor which does not set the internal object, and allows
- setting it by calling <code>set(Object)</code>.
+  setting it by calling <code>set(Object)</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new instance with the internal object set to the given object.
- Note that any calls to <code>set(Object)</code> afterwards will result in
+ Note that any calls to <code>set(Object)</code> afterwards will result in 
  <code>AlreadySetException</code>
- @throws AlreadySetException if called more than once
+ @throw AlreadySetExceptionif called more than once
  - seealso: #set(Object)
  */
-- (instancetype)initWithId:(id)obj;
+- (instancetype __nonnull)initWithId:(id)obj;
 
 /*!
  @brief Returns the object set by <code>set(Object)</code>.
@@ -49,8 +54,7 @@
 - (id)get;
 
 /*!
- @brief Sets the given object.
- If the object has already been set, an exception is thrown. 
+ @brief Sets the given object.If the object has already been set, an exception is thrown.
  */
 - (void)setWithId:(id)obj;
 
@@ -60,9 +64,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilSetOnce)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilSetOnce_init(OrgApacheLuceneUtilSetOnce *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilSetOnce *create_OrgApacheLuceneUtilSetOnce_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilSetOnce *create_OrgApacheLuceneUtilSetOnce_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilSetOnce_initWithId_(OrgApacheLuceneUtilSetOnce *self, id obj);
 
@@ -81,6 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSetOnce)
 #define INCLUDE_JavaLangIllegalStateException 1
 #include "java/lang/IllegalStateException.h"
 
+@class JavaLangThrowable;
+
 /*!
  @brief Thrown when <code>SetOnce.set(Object)</code> is called more than once.
  */
@@ -88,7 +94,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSetOnce)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -96,12 +111,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilSetOnce_AlreadySetException)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilSetOnce_AlreadySetException_init(OrgApacheLuceneUtilSetOnce_AlreadySetException *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilSetOnce_AlreadySetException *new_OrgApacheLuceneUtilSetOnce_AlreadySetException_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilSetOnce_AlreadySetException *new_OrgApacheLuceneUtilSetOnce_AlreadySetException_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilSetOnce_AlreadySetException *create_OrgApacheLuceneUtilSetOnce_AlreadySetException_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilSetOnce_AlreadySetException *create_OrgApacheLuceneUtilSetOnce_AlreadySetException_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSetOnce_AlreadySetException)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSetOnce")

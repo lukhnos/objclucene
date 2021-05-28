@@ -12,6 +12,7 @@
 #include "java/lang/IndexOutOfBoundsException.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/Comparator.h"
@@ -53,7 +54,6 @@
 #include "org/apache/lucene/search/SimpleCollector.h"
 #include "org/apache/lucene/search/similarities/Similarity.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/ByteBlockPool.h"
 #include "org/apache/lucene/util/BytesRef.h"
@@ -67,6 +67,10 @@
 #include "org/apache/lucene/util/RecyclingIntBlockAllocator.h"
 
 @class OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/memory/MemoryIndex must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexMemoryMemoryIndex () {
  @public
@@ -95,13 +99,65 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex, payloadsBytesRefs_, O
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex, bytesUsed_, OrgApacheLuceneUtilCounter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex, normSimilarity_, OrgApacheLuceneSearchSimilaritiesSimilarity *)
 
-inline jboolean OrgApacheLuceneIndexMemoryMemoryIndex_get_DEBUG();
+inline jboolean OrgApacheLuceneIndexMemoryMemoryIndex_get_DEBUG(void);
 #define OrgApacheLuceneIndexMemoryMemoryIndex_DEBUG false
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexMemoryMemoryIndex, DEBUG, jboolean)
 
+@interface OrgApacheLuceneIndexMemoryMemoryIndex_1 : OrgApacheLuceneAnalysisTokenStream {
+ @public
+  id<JavaUtilIterator> iter_;
+  jint start_;
+  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
+  id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt_;
+}
+
+- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)capture$0;
+
+- (jboolean)incrementToken;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_1)
+
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_1, iter_, id<JavaUtilIterator>)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_1, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_1, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
+
+__attribute__((unused)) static void OrgApacheLuceneIndexMemoryMemoryIndex_1_initWithJavaUtilCollection_(OrgApacheLuceneIndexMemoryMemoryIndex_1 *self, id<JavaUtilCollection> capture$0);
+
+__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_1_initWithJavaUtilCollection_(id<JavaUtilCollection> capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_1_initWithJavaUtilCollection_(id<JavaUtilCollection> capture$0);
+
+@interface OrgApacheLuceneIndexMemoryMemoryIndex_2 : OrgApacheLuceneSearchSimpleCollector {
+ @public
+  IOSFloatArray *val$scores_;
+  OrgApacheLuceneSearchScorer *scorer_;
+}
+
+- (instancetype)initWithFloatArray:(IOSFloatArray *)capture$0;
+
+- (void)collectWithInt:(jint)doc;
+
+- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
+
+- (jboolean)needsScores;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_2)
+
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_2, scorer_, OrgApacheLuceneSearchScorer *)
+
+__attribute__((unused)) static void OrgApacheLuceneIndexMemoryMemoryIndex_2_initWithFloatArray_(OrgApacheLuceneIndexMemoryMemoryIndex_2 *self, IOSFloatArray *capture$0);
+
+__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_2 *new_OrgApacheLuceneIndexMemoryMemoryIndex_2_initWithFloatArray_(IOSFloatArray *capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_2 *create_OrgApacheLuceneIndexMemoryMemoryIndex_2_initWithFloatArray_(IOSFloatArray *capture$0);
+
 /*!
  @brief Index data structure for a field; contains the tokenized term texts and
- their positions.
+  their positions.
  */
 @interface OrgApacheLuceneIndexMemoryMemoryIndex_Info : NSObject {
  @public
@@ -113,7 +169,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexMemoryMemoryIndex, DEBUG, jbool
   OrgApacheLuceneIndexNumericDocValues *norms_;
   /*!
    @brief Term strings and their positions for this field: Map &lt;String
- termText, ArrayIntList positions&gt;
+  termText, ArrayIntList positions&gt;
    */
   OrgApacheLuceneUtilBytesRefHash *terms_;
   OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray *sliceArray_;
@@ -157,12 +213,12 @@ withOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray:(OrgApacheLuceneIn
 
 /*!
  @brief Sorts hashed terms into ascending order, reusing memory along the
- way.
- Note that sorting is lazily delayed until required (often it's
- not required at all). If a sorted view is required then hashing +
- sort + binary search is still faster and smaller than TreeMap usage
- (which would be an alternative and somewhat more elegant approach,
- apart from more sophisticated Tries / prefix trees).
+  way.Note that sorting is lazily delayed until required (often it's
+  not required at all).
+ If a sorted view is required then hashing +
+  sort + binary search is still faster and smaller than TreeMap usage
+  (which would be an alternative and somewhat more elegant approach,
+  apart from more sophisticated Tries / prefix trees).
  */
 - (void)sortTerms;
 
@@ -172,7 +228,6 @@ withOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray:(OrgApacheLuceneIn
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_Info)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_Info, this$0_, OrgApacheLuceneIndexMemoryMemoryIndex *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_Info, fieldInfo_, OrgApacheLuceneIndexFieldInfo *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_Info, norms_, OrgApacheLuceneIndexNumericDocValues *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_Info, terms_, OrgApacheLuceneUtilBytesRefHash *)
@@ -187,30 +242,28 @@ __attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_Info *creat
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_Info)
 
-@interface OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1 : OrgApacheLuceneIndexNumericDocValues {
+@interface OrgApacheLuceneIndexMemoryMemoryIndex_Info_1 : OrgApacheLuceneIndexNumericDocValues {
  @public
   jlong val$value_;
 }
 
-- (jlong)getWithInt:(jint)docID;
-
 - (instancetype)initWithLong:(jlong)capture$0;
+
+- (jlong)getWithInt:(jint)docID;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_Info_1)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1_initWithLong_(OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1 *self, jlong capture$0);
+__attribute__((unused)) static void OrgApacheLuceneIndexMemoryMemoryIndex_Info_1_initWithLong_(OrgApacheLuceneIndexMemoryMemoryIndex_Info_1 *self, jlong capture$0);
 
-__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1_initWithLong_(jlong capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_Info_1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_Info_1_initWithLong_(jlong capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1_initWithLong_(jlong capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1)
+__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_Info_1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_Info_1_initWithLong_(jlong capture$0);
 
 /*!
  @brief Search support for Lucene framework integration; implements all methods
- required by the Lucene IndexReader contracts.
+  required by the Lucene IndexReader contracts.
  */
 @interface OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader : OrgApacheLuceneIndexLeafReader {
  @public
@@ -262,13 +315,13 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader, this$0_, OrgApacheLuceneIndexMemoryMemoryIndex *)
-
 __attribute__((unused)) static void OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_initWithOrgApacheLuceneIndexMemoryMemoryIndex_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *self, OrgApacheLuceneIndexMemoryMemoryIndex *outer$);
 
 __attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *new_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_initWithOrgApacheLuceneIndexMemoryMemoryIndex_(OrgApacheLuceneIndexMemoryMemoryIndex *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *create_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_initWithOrgApacheLuceneIndexMemoryMemoryIndex_(OrgApacheLuceneIndexMemoryMemoryIndex *outer$);
+
+__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_Info *OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_getInfoWithNSString_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *self, NSString *fieldName);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader)
 
@@ -277,19 +330,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexRead
   OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *this$0_;
 }
 
+- (instancetype)initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader:(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *)outer$;
+
 - (id<JavaUtilIterator>)iterator;
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
 
 - (jint)size;
 
-- (instancetype)initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader:(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *)outer$;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields, this$0_, OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *)
 
 __attribute__((unused)) static void OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *self, OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *outer$);
 
@@ -299,11 +350,14 @@ __attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndex
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields)
 
-@interface OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1 : OrgApacheLuceneIndexTerms {
+@interface OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1 : OrgApacheLuceneIndexTerms {
  @public
   OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *this$0_;
   OrgApacheLuceneIndexMemoryMemoryIndex_Info *val$info_;
 }
+
+- (instancetype)initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields:(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *)outer$
+                                              withOrgApacheLuceneIndexMemoryMemoryIndex_Info:(OrgApacheLuceneIndexMemoryMemoryIndex_Info *)capture$0;
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator;
 
@@ -323,23 +377,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexRead
 
 - (jboolean)hasPayloads;
 
-- (instancetype)initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields:(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *)outer$
-                                              withOrgApacheLuceneIndexMemoryMemoryIndex_Info:(OrgApacheLuceneIndexMemoryMemoryIndex_Info *)capture$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1, this$0_, OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1, val$info_, OrgApacheLuceneIndexMemoryMemoryIndex_Info *)
+__attribute__((unused)) static void OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1 *self, OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1 *self, OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0);
+__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1)
+__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0);
 
 @interface OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum : OrgApacheLuceneIndexTermsEnum {
  @public
@@ -388,7 +434,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexRead
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum, this$0_, OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum, info_, OrgApacheLuceneIndexMemoryMemoryIndex_Info *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum, br_, OrgApacheLuceneUtilBytesRef *)
 
@@ -445,7 +490,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexRead
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryPostingsEnum)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryPostingsEnum, this$0_, OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryPostingsEnum, sliceReader_, OrgApacheLuceneUtilIntBlockPool_SliceReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryPostingsEnum, payloadBuilder_, OrgApacheLuceneUtilBytesRefBuilder *)
 
@@ -488,65 +532,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteSt
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray)
 
-@interface OrgApacheLuceneIndexMemoryMemoryIndex_$1 : OrgApacheLuceneAnalysisTokenStream {
- @public
-  id<JavaUtilIterator> iter_;
-  jint start_;
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt_;
-  id<JavaUtilCollection> val$keywords_;
-}
-
-- (jboolean)incrementToken;
-
-- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)capture$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_$1)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_$1, iter_, id<JavaUtilIterator>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_$1, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_$1, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_$1, val$keywords_, id<JavaUtilCollection>)
-
-__attribute__((unused)) static void OrgApacheLuceneIndexMemoryMemoryIndex_$1_initWithJavaUtilCollection_(OrgApacheLuceneIndexMemoryMemoryIndex_$1 *self, id<JavaUtilCollection> capture$0);
-
-__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_$1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_$1_initWithJavaUtilCollection_(id<JavaUtilCollection> capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_$1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_$1_initWithJavaUtilCollection_(id<JavaUtilCollection> capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_$1)
-
-@interface OrgApacheLuceneIndexMemoryMemoryIndex_$2 : OrgApacheLuceneSearchSimpleCollector {
- @public
-  OrgApacheLuceneSearchScorer *scorer_;
-  IOSFloatArray *val$scores_;
-}
-
-- (void)collectWithInt:(jint)doc;
-
-- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
-
-- (jboolean)needsScores;
-
-- (instancetype)initWithFloatArray:(IOSFloatArray *)capture$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMemoryMemoryIndex_$2)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_$2, scorer_, OrgApacheLuceneSearchScorer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMemoryMemoryIndex_$2, val$scores_, IOSFloatArray *)
-
-__attribute__((unused)) static void OrgApacheLuceneIndexMemoryMemoryIndex_$2_initWithFloatArray_(OrgApacheLuceneIndexMemoryMemoryIndex_$2 *self, IOSFloatArray *capture$0);
-
-__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_$2 *new_OrgApacheLuceneIndexMemoryMemoryIndex_$2_initWithFloatArray_(IOSFloatArray *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexMemoryMemoryIndex_$2 *create_OrgApacheLuceneIndexMemoryMemoryIndex_$2_initWithFloatArray_(IOSFloatArray *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_$2)
-
 @implementation OrgApacheLuceneIndexMemoryMemoryIndex
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -585,14 +570,14 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
     stream = [analyzer tokenStreamWithNSString:fieldName withNSString:text];
   }
   @catch (JavaIoIOException *ex) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(ex);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(ex);
   }
   [self addFieldWithNSString:fieldName withOrgApacheLuceneAnalysisTokenStream:stream withFloat:1.0f withInt:[analyzer getPositionIncrementGapWithNSString:fieldName] withInt:[analyzer getOffsetGapWithNSString:fieldName]];
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)keywordTokenStreamWithJavaUtilCollection:(id<JavaUtilCollection>)keywords {
   if (keywords == nil) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"keywords must not be null");
-  return create_OrgApacheLuceneIndexMemoryMemoryIndex_$1_initWithJavaUtilCollection_(keywords);
+  return create_OrgApacheLuceneIndexMemoryMemoryIndex_1_initWithJavaUtilCollection_(keywords);
 }
 
 - (void)addFieldWithNSString:(NSString *)fieldName
@@ -620,7 +605,7 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
                      withInt:(jint)offsetGap {
   @try {
     OrgApacheLuceneAnalysisTokenStream *stream = tokenStream;
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       if (frozen_) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot call addField() when MemoryIndex is frozen");
       if (fieldName == nil) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"fieldName must not be null");
@@ -651,10 +636,10 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
         sliceArray = create_OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray_initWithInt_(OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY);
         terms = create_OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_(byteBlockPool_, OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY, sliceArray);
       }
-      id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = [stream getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
-      id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncrAttribute = [stream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()];
-      id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = [stream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
-      id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute> payloadAtt = storePayloads_ ? [stream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()] : nil;
+      id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = JreRetainedLocalValue([stream getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()]);
+      id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncrAttribute = JreRetainedLocalValue([stream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
+      id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = JreRetainedLocalValue([stream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
+      id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute> payloadAtt = storePayloads_ ? ((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) [stream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()]) : nil;
       [stream reset];
       while ([stream incrementToken]) {
         numTokens++;
@@ -694,7 +679,7 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
         [fields_ putWithId:fieldName withId:create_OrgApacheLuceneIndexMemoryMemoryIndex_Info_initWithOrgApacheLuceneIndexMemoryMemoryIndex_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilBytesRefHash_withOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray_withInt_withInt_withFloat_withInt_withInt_withLong_(self, fieldInfo, terms, sliceArray, numTokens, numOverlapTokens, boost, pos, [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt)) endOffset] + offset, sumTotalTermFreq)];
       }
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -703,23 +688,25 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
         if (__primaryException1 != nil) {
           @try {
             [stream close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [stream close];
         }
       }
     }
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
 - (void)setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:(OrgApacheLuceneSearchSimilaritiesSimilarity *)similarity {
   if (frozen_) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot set Similarity when MemoryIndex is frozen");
-  if (self->normSimilarity_ == similarity) return;
+  if (JreObjectEqualsEquals(self->normSimilarity_, similarity)) return;
   JreStrongAssign(&self->normSimilarity_, similarity);
   for (OrgApacheLuceneIndexMemoryMemoryIndex_Info * __strong info in nil_chk([((id<JavaUtilSortedMap>) nil_chk(fields_)) values])) {
     JreStrongAssign(&((OrgApacheLuceneIndexMemoryMemoryIndex_Info *) nil_chk(info))->norms_, nil);
@@ -743,15 +730,15 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
 
 - (jfloat)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
   if (query == nil) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"query must not be null");
-  OrgApacheLuceneSearchIndexSearcher *searcher = [self createSearcher];
+  OrgApacheLuceneSearchIndexSearcher *searcher = JreRetainedLocalValue([self createSearcher]);
   @try {
     IOSFloatArray *scores = [IOSFloatArray arrayWithLength:1];
-    [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) searchWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchCollector:create_OrgApacheLuceneIndexMemoryMemoryIndex_$2_initWithFloatArray_(scores)];
+    [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) searchWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchCollector:create_OrgApacheLuceneIndexMemoryMemoryIndex_2_initWithFloatArray_(scores)];
     jfloat score = IOSFloatArray_Get(scores, 0);
     return score;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
   @finally {
   }
@@ -763,11 +750,11 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
   jint sumTerms = 0;
   OrgApacheLuceneUtilBytesRef *spare = create_OrgApacheLuceneUtilBytesRef_init();
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilSortedMap>) nil_chk(fields_)) entrySet])) {
-    NSString *fieldName = [((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey];
-    OrgApacheLuceneIndexMemoryMemoryIndex_Info *info = [entry_ getValue];
+    NSString *fieldName = JreRetainedLocalValue([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey]);
+    OrgApacheLuceneIndexMemoryMemoryIndex_Info *info = JreRetainedLocalValue([entry_ getValue]);
     [((OrgApacheLuceneIndexMemoryMemoryIndex_Info *) nil_chk(info)) sortTerms];
     [result appendWithNSString:JreStrcat("$$", fieldName, @":\n")];
-    OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray *sliceArray = info->sliceArray_;
+    OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray *sliceArray = JreRetainedLocalValue(info->sliceArray_);
     jint numPositions = 0;
     OrgApacheLuceneUtilIntBlockPool_SliceReader *postingsReader = create_OrgApacheLuceneUtilIntBlockPool_SliceReader_initWithOrgApacheLuceneUtilIntBlockPool_(intBlockPool_);
     for (jint j = 0; j < [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(info->terms_)) size]; j++) {
@@ -830,39 +817,59 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "MemoryIndex", NULL, 0x1, NULL, NULL },
-    { "initWithBoolean:", "MemoryIndex", NULL, 0x1, NULL, NULL },
-    { "initWithBoolean:withBoolean:", "MemoryIndex", NULL, 0x1, NULL, NULL },
-    { "initWithBoolean:withBoolean:withLong:", "MemoryIndex", NULL, 0x0, NULL, NULL },
-    { "addFieldWithNSString:withNSString:withOrgApacheLuceneAnalysisAnalyzer:", "addField", "V", 0x1, NULL, NULL },
-    { "keywordTokenStreamWithJavaUtilCollection:", "keywordTokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, "<T:Ljava/lang/Object;>(Ljava/util/Collection<TT;>;)Lorg/apache/lucene/analysis/TokenStream;" },
-    { "addFieldWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "addField", "V", 0x1, NULL, NULL },
-    { "addFieldWithNSString:withOrgApacheLuceneAnalysisTokenStream:withFloat:", "addField", "V", 0x1, NULL, NULL },
-    { "addFieldWithNSString:withOrgApacheLuceneAnalysisTokenStream:withFloat:withInt:", "addField", "V", 0x1, NULL, NULL },
-    { "addFieldWithNSString:withOrgApacheLuceneAnalysisTokenStream:withFloat:withInt:withInt:", "addField", "V", 0x1, NULL, NULL },
-    { "setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:", "setSimilarity", "V", 0x1, NULL, NULL },
-    { "createSearcher", NULL, "Lorg.apache.lucene.search.IndexSearcher;", 0x1, NULL, NULL },
-    { "freeze", NULL, "V", 0x1, NULL, NULL },
-    { "searchWithOrgApacheLuceneSearchQuery:", "search", "F", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, 5, 6, -1, 7, -1, -1 },
+    { NULL, "V", 0x1, 3, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchIndexSearcher;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 14, 15, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 16, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithBoolean:);
+  methods[2].selector = @selector(initWithBoolean:withBoolean:);
+  methods[3].selector = @selector(initWithBoolean:withBoolean:withLong:);
+  methods[4].selector = @selector(addFieldWithNSString:withNSString:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[5].selector = @selector(keywordTokenStreamWithJavaUtilCollection:);
+  methods[6].selector = @selector(addFieldWithNSString:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[7].selector = @selector(addFieldWithNSString:withOrgApacheLuceneAnalysisTokenStream:withFloat:);
+  methods[8].selector = @selector(addFieldWithNSString:withOrgApacheLuceneAnalysisTokenStream:withFloat:withInt:);
+  methods[9].selector = @selector(addFieldWithNSString:withOrgApacheLuceneAnalysisTokenStream:withFloat:withInt:withInt:);
+  methods[10].selector = @selector(setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:);
+  methods[11].selector = @selector(createSearcher);
+  methods[12].selector = @selector(freeze);
+  methods[13].selector = @selector(searchWithOrgApacheLuceneSearchQuery:);
+  methods[14].selector = @selector(description);
+  methods[15].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEBUG", "DEBUG", 0x1a, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneIndexMemoryMemoryIndex_DEBUG },
-    { "fields_", NULL, 0x12, "Ljava.util.SortedMap;", NULL, "Ljava/util/SortedMap<Ljava/lang/String;Lorg/apache/lucene/index/memory/MemoryIndex$Info;>;", .constantValue.asLong = 0 },
-    { "storeOffsets_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "storePayloads_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "byteBlockPool_", NULL, 0x12, "Lorg.apache.lucene.util.ByteBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "intBlockPool_", NULL, 0x12, "Lorg.apache.lucene.util.IntBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "postingsWriter_", NULL, 0x12, "Lorg.apache.lucene.util.IntBlockPool$SliceWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadsBytesRefs_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesUsed_", NULL, 0x2, "Lorg.apache.lucene.util.Counter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "frozen_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "normSimilarity_", NULL, 0x2, "Lorg.apache.lucene.search.similarities.Similarity;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEBUG", "Z", .constantValue.asBOOL = OrgApacheLuceneIndexMemoryMemoryIndex_DEBUG, 0x1a, -1, -1, -1, -1 },
+    { "fields_", "LJavaUtilSortedMap;", .constantValue.asLong = 0, 0x12, -1, -1, 17, -1 },
+    { "storeOffsets_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "storePayloads_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "byteBlockPool_", "LOrgApacheLuceneUtilByteBlockPool;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "intBlockPool_", "LOrgApacheLuceneUtilIntBlockPool;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "postingsWriter_", "LOrgApacheLuceneUtilIntBlockPool_SliceWriter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payloadsBytesRefs_", "LOrgApacheLuceneUtilBytesRefArray;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "bytesUsed_", "LOrgApacheLuceneUtilCounter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "frozen_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "normSimilarity_", "LOrgApacheLuceneSearchSimilaritiesSimilarity;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.memory.MemoryIndex$Info;", "Lorg.apache.lucene.index.memory.MemoryIndex$MemoryIndexReader;", "Lorg.apache.lucene.index.memory.MemoryIndex$SliceByteStartArray;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex = { 2, "MemoryIndex", "org.apache.lucene.index.memory", NULL, 0x1, 16, methods, 11, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "Z", "ZZ", "ZZJ", "addField", "LNSString;LNSString;LOrgApacheLuceneAnalysisAnalyzer;", "keywordTokenStream", "LJavaUtilCollection;", "<T:Ljava/lang/Object;>(Ljava/util/Collection<TT;>;)Lorg/apache/lucene/analysis/TokenStream;", "LNSString;LOrgApacheLuceneAnalysisTokenStream;", "LNSString;LOrgApacheLuceneAnalysisTokenStream;F", "LNSString;LOrgApacheLuceneAnalysisTokenStream;FI", "LNSString;LOrgApacheLuceneAnalysisTokenStream;FII", "setSimilarity", "LOrgApacheLuceneSearchSimilaritiesSimilarity;", "search", "LOrgApacheLuceneSearchQuery;", "toString", "Ljava/util/SortedMap<Ljava/lang/String;Lorg/apache/lucene/index/memory/MemoryIndex$Info;>;", "LOrgApacheLuceneIndexMemoryMemoryIndex_Info;LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader;LOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex = { "MemoryIndex", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x1, 16, 11, -1, 18, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMemoryMemoryIndex;
 }
 
@@ -912,9 +919,9 @@ void OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_withBoolean_withLong_
   self->storeOffsets_ = storeOffsets;
   self->storePayloads_ = storePayloads;
   JreStrongAssign(&self->bytesUsed_, OrgApacheLuceneUtilCounter_newCounter());
-  jint maxBufferedByteBlocks = (jint) ((maxReusedBytes / 2) / OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE);
-  jint maxBufferedIntBlocks = (jint) ((maxReusedBytes - (maxBufferedByteBlocks * OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE)) / (OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT));
-  JreAssert(((maxBufferedByteBlocks * OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE) + (maxBufferedIntBlocks * OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT) <= maxReusedBytes), (@"org/apache/lucene/index/memory/MemoryIndex.java:257 condition failed: assert (maxBufferedByteBlocks * ByteBlockPool.BYTE_BLOCK_SIZE) + (maxBufferedIntBlocks * IntBlockPool.INT_BLOCK_SIZE * RamUsageEstimator.NUM_BYTES_INT) <= maxReusedBytes;"));
+  jint maxBufferedByteBlocks = (jint) (JreLongDiv((JreLongDiv(maxReusedBytes, 2)), OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE));
+  jint maxBufferedIntBlocks = (jint) (JreLongDiv((maxReusedBytes - (maxBufferedByteBlocks * OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE)), (OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT)));
+  JreAssert((maxBufferedByteBlocks * OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE) + (maxBufferedIntBlocks * OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT) <= maxReusedBytes, @"org/apache/lucene/index/memory/MemoryIndex.java:257 condition failed: assert (maxBufferedByteBlocks * ByteBlockPool.BYTE_BLOCK_SIZE) + (maxBufferedIntBlocks * IntBlockPool.INT_BLOCK_SIZE * RamUsageEstimator.NUM_BYTES_INT) <= maxReusedBytes;");
   JreStrongAssignAndConsume(&self->byteBlockPool_, new_OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_Allocator_(create_OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE, maxBufferedByteBlocks, self->bytesUsed_)));
   JreStrongAssignAndConsume(&self->intBlockPool_, new_OrgApacheLuceneUtilIntBlockPool_initWithOrgApacheLuceneUtilIntBlockPool_Allocator_(create_OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE, maxBufferedIntBlocks, self->bytesUsed_)));
   JreStrongAssignAndConsume(&self->postingsWriter_, new_OrgApacheLuceneUtilIntBlockPool_SliceWriter_initWithOrgApacheLuceneUtilIntBlockPool_(self->intBlockPool_));
@@ -930,6 +937,136 @@ OrgApacheLuceneIndexMemoryMemoryIndex *create_OrgApacheLuceneIndexMemoryMemoryIn
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex)
+
+@implementation OrgApacheLuceneIndexMemoryMemoryIndex_1
+
+- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)capture$0 {
+  OrgApacheLuceneIndexMemoryMemoryIndex_1_initWithJavaUtilCollection_(self, capture$0);
+  return self;
+}
+
+- (jboolean)incrementToken {
+  if (![((id<JavaUtilIterator>) nil_chk(iter_)) hasNext]) return false;
+  id obj = JreRetainedLocalValue([((id<JavaUtilIterator>) nil_chk(iter_)) next]);
+  if (obj == nil) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"keyword must not be null");
+  NSString *term = [obj description];
+  [self clearAttributes];
+  [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithNSString:term];
+  [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:start_ withInt:start_ + [termAtt_ java_length]];
+  start_ += [((NSString *) nil_chk(term)) java_length] + 1;
+  return true;
+}
+
+- (void)dealloc {
+  RELEASE_(iter_);
+  RELEASE_(termAtt_);
+  RELEASE_(offsetAtt_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilCollection:);
+  methods[1].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "iter_", "LJavaUtilIterator;", .constantValue.asLong = 0, 0x2, -1, -1, 1, -1 },
+    { "start_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LJavaUtilCollection;", "Ljava/util/Iterator<TT;>;", "LOrgApacheLuceneIndexMemoryMemoryIndex;", "keywordTokenStreamWithJavaUtilCollection:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_1 = { "", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x8010, 2, 4, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneIndexMemoryMemoryIndex_1;
+}
+
+@end
+
+void OrgApacheLuceneIndexMemoryMemoryIndex_1_initWithJavaUtilCollection_(OrgApacheLuceneIndexMemoryMemoryIndex_1 *self, id<JavaUtilCollection> capture$0) {
+  OrgApacheLuceneAnalysisTokenStream_init(self);
+  JreStrongAssign(&self->iter_, [((id<JavaUtilCollection>) nil_chk(capture$0)) iterator]);
+  self->start_ = 0;
+  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
+  JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
+}
+
+OrgApacheLuceneIndexMemoryMemoryIndex_1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_1_initWithJavaUtilCollection_(id<JavaUtilCollection> capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_1, initWithJavaUtilCollection_, capture$0)
+}
+
+OrgApacheLuceneIndexMemoryMemoryIndex_1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_1_initWithJavaUtilCollection_(id<JavaUtilCollection> capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_1, initWithJavaUtilCollection_, capture$0)
+}
+
+@implementation OrgApacheLuceneIndexMemoryMemoryIndex_2
+
+- (instancetype)initWithFloatArray:(IOSFloatArray *)capture$0 {
+  OrgApacheLuceneIndexMemoryMemoryIndex_2_initWithFloatArray_(self, capture$0);
+  return self;
+}
+
+- (void)collectWithInt:(jint)doc {
+  *IOSFloatArray_GetRef(nil_chk(val$scores_), 0) = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
+}
+
+- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
+  JreStrongAssign(&self->scorer_, scorer);
+}
+
+- (jboolean)needsScores {
+  return true;
+}
+
+- (void)dealloc {
+  RELEASE_(val$scores_);
+  RELEASE_(scorer_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithFloatArray:);
+  methods[1].selector = @selector(collectWithInt:);
+  methods[2].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  methods[3].selector = @selector(needsScores);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "val$scores_", "[F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "scorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "[F", "collect", "I", "LJavaIoIOException;", "setScorer", "LOrgApacheLuceneSearchScorer;", "LOrgApacheLuceneIndexMemoryMemoryIndex;", "searchWithOrgApacheLuceneSearchQuery:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_2 = { "", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x8010, 4, 2, 6, -1, 7, -1, -1 };
+  return &_OrgApacheLuceneIndexMemoryMemoryIndex_2;
+}
+
+@end
+
+void OrgApacheLuceneIndexMemoryMemoryIndex_2_initWithFloatArray_(OrgApacheLuceneIndexMemoryMemoryIndex_2 *self, IOSFloatArray *capture$0) {
+  JreStrongAssign(&self->val$scores_, capture$0);
+  OrgApacheLuceneSearchSimpleCollector_init(self);
+}
+
+OrgApacheLuceneIndexMemoryMemoryIndex_2 *new_OrgApacheLuceneIndexMemoryMemoryIndex_2_initWithFloatArray_(IOSFloatArray *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_2, initWithFloatArray_, capture$0)
+}
+
+OrgApacheLuceneIndexMemoryMemoryIndex_2 *create_OrgApacheLuceneIndexMemoryMemoryIndex_2_initWithFloatArray_(IOSFloatArray *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_2, initWithFloatArray_, capture$0)
+}
 
 @implementation OrgApacheLuceneIndexMemoryMemoryIndex_Info
 
@@ -957,7 +1094,7 @@ withOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray:(OrgApacheLuceneIn
   if (norms_ == nil) {
     OrgApacheLuceneIndexFieldInvertState *invertState = create_OrgApacheLuceneIndexFieldInvertState_initWithNSString_withInt_withInt_withInt_withInt_withFloat_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo_))->name_, fieldInfo_->number_, numTokens_, numOverlapTokens_, 0, boost_);
     jlong value = [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(this$0_->normSimilarity_)) computeNormWithOrgApacheLuceneIndexFieldInvertState:invertState];
-    JreStrongAssignAndConsume(&norms_, new_OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1_initWithLong_(value));
+    JreStrongAssignAndConsume(&norms_, new_OrgApacheLuceneIndexMemoryMemoryIndex_Info_1_initWithLong_(value));
   }
   return norms_;
 }
@@ -973,26 +1110,34 @@ withOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray:(OrgApacheLuceneIn
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexMemoryMemoryIndex:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneUtilBytesRefHash:withOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray:withInt:withInt:withFloat:withInt:withInt:withLong:", "Info", NULL, 0x1, NULL, NULL },
-    { "sortTerms", NULL, "V", 0x1, NULL, NULL },
-    { "getNormDocValues", NULL, "Lorg.apache.lucene.index.NumericDocValues;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexMemoryMemoryIndex:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneUtilBytesRefHash:withOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray:withInt:withInt:withFloat:withInt:withInt:withLong:);
+  methods[1].selector = @selector(sortTerms);
+  methods[2].selector = @selector(getNormDocValues);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.memory.MemoryIndex;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfo_", NULL, 0x12, "Lorg.apache.lucene.index.FieldInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "norms_", NULL, 0x82, "Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "terms_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefHash;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sliceArray_", NULL, 0x12, "Lorg.apache.lucene.index.memory.MemoryIndex$SliceByteStartArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sortedTerms_", NULL, 0x82, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numTokens_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numOverlapTokens_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "boost_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "sumTotalTermFreq_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPosition_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastOffset_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexMemoryMemoryIndex;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "fieldInfo_", "LOrgApacheLuceneIndexFieldInfo;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "norms_", "LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x82, -1, -1, -1, -1 },
+    { "terms_", "LOrgApacheLuceneUtilBytesRefHash;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "sliceArray_", "LOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "sortedTerms_", "[I", .constantValue.asLong = 0, 0x82, -1, -1, -1, -1 },
+    { "numTokens_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numOverlapTokens_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "boost_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "sumTotalTermFreq_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lastPosition_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lastOffset_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_Info = { 2, "Info", "org.apache.lucene.index.memory", "MemoryIndex", 0x12, 3, methods, 12, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexMemoryMemoryIndex;LOrgApacheLuceneIndexFieldInfo;LOrgApacheLuceneUtilBytesRefHash;LOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray;IIFIIJ", "LOrgApacheLuceneIndexMemoryMemoryIndex;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_Info = { "Info", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x12, 3, 12, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMemoryMemoryIndex_Info;
 }
 
@@ -1022,47 +1167,51 @@ OrgApacheLuceneIndexMemoryMemoryIndex_Info *create_OrgApacheLuceneIndexMemoryMem
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_Info)
 
-@implementation OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1
+@implementation OrgApacheLuceneIndexMemoryMemoryIndex_Info_1
+
+- (instancetype)initWithLong:(jlong)capture$0 {
+  OrgApacheLuceneIndexMemoryMemoryIndex_Info_1_initWithLong_(self, capture$0);
+  return self;
+}
 
 - (jlong)getWithInt:(jint)docID {
   if (docID != 0) @throw create_JavaLangIndexOutOfBoundsException_init();
   else return val$value_;
 }
 
-- (instancetype)initWithLong:(jlong)capture$0 {
-  OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1_initWithLong_(self, capture$0);
-  return self;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "initWithLong:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithLong:);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$value_", NULL, 0x1012, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$value_", "J", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMemoryMemoryIndex_Info", "getNormDocValues" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1 = { 2, "", "org.apache.lucene.index.memory", "MemoryIndex$Info", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1;
+  static const void *ptrTable[] = { "J", "get", "I", "LOrgApacheLuceneIndexMemoryMemoryIndex_Info;", "getNormDocValues" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_Info_1 = { "", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x8010, 2, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneIndexMemoryMemoryIndex_Info_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1_initWithLong_(OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1 *self, jlong capture$0) {
+void OrgApacheLuceneIndexMemoryMemoryIndex_Info_1_initWithLong_(OrgApacheLuceneIndexMemoryMemoryIndex_Info_1 *self, jlong capture$0) {
   self->val$value_ = capture$0;
   OrgApacheLuceneIndexNumericDocValues_init(self);
 }
 
-OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1_initWithLong_(jlong capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1, initWithLong_, capture$0)
+OrgApacheLuceneIndexMemoryMemoryIndex_Info_1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_Info_1_initWithLong_(jlong capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_Info_1, initWithLong_, capture$0)
 }
 
-OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1_initWithLong_(jlong capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1, initWithLong_, capture$0)
+OrgApacheLuceneIndexMemoryMemoryIndex_Info_1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_Info_1_initWithLong_(jlong capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_Info_1, initWithLong_, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1)
 
 @implementation OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader
 
@@ -1080,7 +1229,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_Info_$1)
 }
 
 - (OrgApacheLuceneIndexMemoryMemoryIndex_Info *)getInfoWithNSString:(NSString *)fieldName {
-  return [((id<JavaUtilSortedMap>) nil_chk(this$0_->fields_)) getWithId:fieldName];
+  return OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_getInfoWithNSString_(self, fieldName);
 }
 
 - (id<OrgApacheLuceneUtilBits>)getLiveDocs {
@@ -1152,7 +1301,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 }
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNormValuesWithNSString:(NSString *)field {
-  OrgApacheLuceneIndexMemoryMemoryIndex_Info *info = [((id<JavaUtilSortedMap>) nil_chk(this$0_->fields_)) getWithId:field];
+  OrgApacheLuceneIndexMemoryMemoryIndex_Info *info = JreRetainedLocalValue([((id<JavaUtilSortedMap>) nil_chk(this$0_->fields_)) getWithId:field]);
   if (info == nil) {
     return nil;
   }
@@ -1165,33 +1314,57 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexMemoryMemoryIndex:", "MemoryIndexReader", NULL, 0x2, NULL, NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "getInfoWithNSString:", "getInfo", "Lorg.apache.lucene.index.memory.MemoryIndex$Info;", 0x2, NULL, NULL },
-    { "getLiveDocs", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, NULL, NULL },
-    { "getFieldInfos", NULL, "Lorg.apache.lucene.index.FieldInfos;", 0x1, NULL, NULL },
-    { "getNumericDocValuesWithNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, NULL, NULL },
-    { "getBinaryDocValuesWithNSString:", "getBinaryDocValues", "Lorg.apache.lucene.index.BinaryDocValues;", 0x1, NULL, NULL },
-    { "getSortedDocValuesWithNSString:", "getSortedDocValues", "Lorg.apache.lucene.index.SortedDocValues;", 0x1, NULL, NULL },
-    { "getSortedNumericDocValuesWithNSString:", "getSortedNumericDocValues", "Lorg.apache.lucene.index.SortedNumericDocValues;", 0x1, NULL, NULL },
-    { "getSortedSetDocValuesWithNSString:", "getSortedSetDocValues", "Lorg.apache.lucene.index.SortedSetDocValues;", 0x1, NULL, NULL },
-    { "getDocsWithFieldWithNSString:", "getDocsWithField", "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
-    { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "fields", NULL, "Lorg.apache.lucene.index.Fields;", 0x1, NULL, NULL },
-    { "getTermVectorsWithInt:", "getTermVectors", "Lorg.apache.lucene.index.Fields;", 0x1, NULL, NULL },
-    { "numDocs", NULL, "I", 0x1, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x1, NULL, NULL },
-    { "documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:", "document", "V", 0x1, NULL, NULL },
-    { "doClose", NULL, "V", 0x4, NULL, NULL },
-    { "getNormValuesWithNSString:", "getNormValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMemoryMemoryIndex_Info;", 0x2, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFieldInfos;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x1, 6, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexBinaryDocValues;", 0x1, 7, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedDocValues;", 0x1, 8, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedNumericDocValues;", 0x1, 9, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedSetDocValues;", 0x1, 10, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, 11, 5, 12, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 12, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x1, 17, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexMemoryMemoryIndex:);
+  methods[1].selector = @selector(addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[2].selector = @selector(removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[3].selector = @selector(getInfoWithNSString:);
+  methods[4].selector = @selector(getLiveDocs);
+  methods[5].selector = @selector(getFieldInfos);
+  methods[6].selector = @selector(getNumericDocValuesWithNSString:);
+  methods[7].selector = @selector(getBinaryDocValuesWithNSString:);
+  methods[8].selector = @selector(getSortedDocValuesWithNSString:);
+  methods[9].selector = @selector(getSortedNumericDocValuesWithNSString:);
+  methods[10].selector = @selector(getSortedSetDocValuesWithNSString:);
+  methods[11].selector = @selector(getDocsWithFieldWithNSString:);
+  methods[12].selector = @selector(checkIntegrity);
+  methods[13].selector = @selector(fields);
+  methods[14].selector = @selector(getTermVectorsWithInt:);
+  methods[15].selector = @selector(numDocs);
+  methods[16].selector = @selector(maxDoc);
+  methods[17].selector = @selector(documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:);
+  methods[18].selector = @selector(doClose);
+  methods[19].selector = @selector(getNormValuesWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.memory.MemoryIndex;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexMemoryMemoryIndex;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.memory.MemoryIndex$MemoryIndexReader$MemoryFields;", "Lorg.apache.lucene.index.memory.MemoryIndex$MemoryIndexReader$MemoryTermsEnum;", "Lorg.apache.lucene.index.memory.MemoryIndex$MemoryIndexReader$MemoryPostingsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader = { 2, "MemoryIndexReader", "org.apache.lucene.index.memory", "MemoryIndex", 0x12, 20, methods, 1, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexMemoryMemoryIndex;", "addCoreClosedListener", "LOrgApacheLuceneIndexLeafReader_CoreClosedListener;", "removeCoreClosedListener", "getInfo", "LNSString;", "getNumericDocValues", "getBinaryDocValues", "getSortedDocValues", "getSortedNumericDocValues", "getSortedSetDocValues", "getDocsWithField", "LJavaIoIOException;", "getTermVectors", "I", "document", "ILOrgApacheLuceneIndexStoredFieldVisitor;", "getNormValues", "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields;LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum;LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryPostingsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader = { "MemoryIndexReader", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x12, 20, 1, 0, 18, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader;
 }
 
@@ -1210,9 +1383,18 @@ OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *create_OrgApacheLuceneI
   J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader, initWithOrgApacheLuceneIndexMemoryMemoryIndex_, outer$)
 }
 
+OrgApacheLuceneIndexMemoryMemoryIndex_Info *OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_getInfoWithNSString_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *self, NSString *fieldName) {
+  return [((id<JavaUtilSortedMap>) nil_chk(self->this$0_->fields_)) getWithId:fieldName];
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader)
 
 @implementation OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields
+
+- (instancetype)initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader:(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *)outer$ {
+  OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_(self, outer$);
+  return self;
+}
 
 - (id<JavaUtilIterator>)iterator {
   return [((id<JavaUtilSet>) nil_chk([((id<JavaUtilSortedMap>) nil_chk(this$0_->this$0_->fields_)) keySet])) iterator];
@@ -1221,20 +1403,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field {
   OrgApacheLuceneIndexMemoryMemoryIndex_Info *info = [((id<JavaUtilSortedMap>) nil_chk(this$0_->this$0_->fields_)) getWithId:field];
   if (info == nil) return nil;
-  return create_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(self, info);
+  return create_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(self, info);
 }
 
 - (jint)size {
   return [((id<JavaUtilSortedMap>) nil_chk(this$0_->this$0_->fields_)) size];
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader:(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader *)outer$ {
-  OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_(self, outer$);
-  return self;
-}
-
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -1243,16 +1420,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader:", "MemoryFields", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader:);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(termsWithNSString:);
+  methods[3].selector = @selector(size);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.memory.MemoryIndex$MemoryIndexReader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields = { 2, "MemoryFields", "org.apache.lucene.index.memory", "MemoryIndex$MemoryIndexReader", 0x2, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader;", "()Ljava/util/Iterator<Ljava/lang/String;>;", "terms", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields = { "MemoryFields", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x2, 4, 1, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields;
 }
 
@@ -1273,7 +1459,13 @@ OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *create_Org
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields)
 
-@implementation OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1
+@implementation OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1
+
+- (instancetype)initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields:(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *)outer$
+                                              withOrgApacheLuceneIndexMemoryMemoryIndex_Info:(OrgApacheLuceneIndexMemoryMemoryIndex_Info *)capture$0 {
+  OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(self, outer$, capture$0);
+  return self;
+}
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator {
   return create_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(this$0_->this$0_, val$info_);
@@ -1311,12 +1503,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
   return this$0_->this$0_->this$0_->storePayloads_;
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields:(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *)outer$
-                                              withOrgApacheLuceneIndexMemoryMemoryIndex_Info:(OrgApacheLuceneIndexMemoryMemoryIndex_Info *)capture$0 {
-  OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(self, outer$, capture$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(val$info_);
@@ -1324,44 +1510,56 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, NULL, NULL },
-    { "size", NULL, "J", 0x1, NULL, NULL },
-    { "getSumTotalTermFreq", NULL, "J", 0x1, NULL, NULL },
-    { "getSumDocFreq", NULL, "J", 0x1, NULL, NULL },
-    { "getDocCount", NULL, "I", 0x1, NULL, NULL },
-    { "hasFreqs", NULL, "Z", 0x1, NULL, NULL },
-    { "hasOffsets", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPositions", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields:withOrgApacheLuceneIndexMemoryMemoryIndex_Info:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields:withOrgApacheLuceneIndexMemoryMemoryIndex_Info:);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(size);
+  methods[3].selector = @selector(getSumTotalTermFreq);
+  methods[4].selector = @selector(getSumDocFreq);
+  methods[5].selector = @selector(getDocCount);
+  methods[6].selector = @selector(hasFreqs);
+  methods[7].selector = @selector(hasOffsets);
+  methods[8].selector = @selector(hasPositions);
+  methods[9].selector = @selector(hasPayloads);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.memory.MemoryIndex$MemoryIndexReader$MemoryFields;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$info_", NULL, 0x1012, "Lorg.apache.lucene.index.memory.MemoryIndex$Info;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$info_", "LOrgApacheLuceneIndexMemoryMemoryIndex_Info;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields", "termsWithNSString:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1 = { 2, "", "org.apache.lucene.index.memory", "MemoryIndex$MemoryIndexReader$MemoryFields", 0x8008, 10, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields;LOrgApacheLuceneIndexMemoryMemoryIndex_Info;", "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields;", "termsWithNSString:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1 = { "", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x8010, 10, 2, 1, -1, 2, -1, -1 };
+  return &_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1 *self, OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0) {
+void OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1 *self, OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$info_, capture$0);
   OrgApacheLuceneIndexTerms_init(self);
 }
 
-OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1, initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_, outer$, capture$0)
+OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1, initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_, outer$, capture$0)
 }
 
-OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1, initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_, outer$, capture$0)
+OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1_initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields *outer$, OrgApacheLuceneIndexMemoryMemoryIndex_Info *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_1, initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_withOrgApacheLuceneIndexMemoryMemoryIndex_Info_, outer$, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryFields_$1)
 
 @implementation OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum
 
@@ -1404,7 +1602,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 }
 
 - (void)seekExactWithLong:(jlong)ord {
-  JreAssert((ord < [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(((OrgApacheLuceneIndexMemoryMemoryIndex_Info *) nil_chk(info_))->terms_)) size]), (@"org/apache/lucene/index/memory/MemoryIndex.java:953 condition failed: assert ord < info.terms.size();"));
+  JreAssert(ord < [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(((OrgApacheLuceneIndexMemoryMemoryIndex_Info *) nil_chk(info_))->terms_)) size], @"org/apache/lucene/index/memory/MemoryIndex.java:953 condition failed: assert ord < info.terms.size();");
   termUpto_ = (jint) ord;
   [info_->terms_ getWithInt:IOSIntArray_Get(nil_chk(info_->sortedTerms_), termUpto_) withOrgApacheLuceneUtilBytesRef:br_];
 }
@@ -1447,7 +1645,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state {
-  JreAssert((state != nil), (@"org/apache/lucene/index/memory/MemoryIndex.java:1000 condition failed: assert state != null;"));
+  JreAssert(state != nil, @"org/apache/lucene/index/memory/MemoryIndex.java:1000 condition failed: assert state != null;");
   [self seekExactWithLong:((OrgApacheLuceneIndexOrdTermState *) nil_chk(((OrgApacheLuceneIndexOrdTermState *) cast_chk(state, [OrgApacheLuceneIndexOrdTermState class]))))->ord_];
 }
 
@@ -1465,28 +1663,46 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader:withOrgApacheLuceneIndexMemoryMemoryIndex_Info:", "MemoryTermsEnum", NULL, 0x1, NULL, NULL },
-    { "binarySearchWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withInt:withInt:withOrgApacheLuceneUtilBytesRefHash:withIntArray:withJavaUtilComparator:", "binarySearch", "I", 0x12, NULL, "(Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;IILorg/apache/lucene/util/BytesRefHash;[ILjava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)I" },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Z", 0x1, NULL, NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, NULL, NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "ord", NULL, "J", 0x1, NULL, NULL },
-    { "docFreq", NULL, "I", 0x1, NULL, NULL },
-    { "totalTermFreq", NULL, "J", 0x1, NULL, NULL },
-    { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, NULL, NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "termState", NULL, "Lorg.apache.lucene.index.TermState;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x12, 1, 2, -1, 3, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum_SeekStatus;", 0x1, 6, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 10, 11, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermState;", 0x1, -1, -1, 11, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader:withOrgApacheLuceneIndexMemoryMemoryIndex_Info:);
+  methods[1].selector = @selector(binarySearchWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withInt:withInt:withOrgApacheLuceneUtilBytesRefHash:withIntArray:withJavaUtilComparator:);
+  methods[2].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(seekCeilWithOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(seekExactWithLong:);
+  methods[5].selector = @selector(next);
+  methods[6].selector = @selector(term);
+  methods[7].selector = @selector(ord);
+  methods[8].selector = @selector(docFreq);
+  methods[9].selector = @selector(totalTermFreq);
+  methods[10].selector = @selector(postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:);
+  methods[11].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:);
+  methods[12].selector = @selector(termState);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.memory.MemoryIndex$MemoryIndexReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "info_", NULL, 0x12, "Lorg.apache.lucene.index.memory.MemoryIndex$Info;", NULL, NULL, .constantValue.asLong = 0 },
-    { "br_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termUpto_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "info_", "LOrgApacheLuceneIndexMemoryMemoryIndex_Info;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "br_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termUpto_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum = { 2, "MemoryTermsEnum", "org.apache.lucene.index.memory", "MemoryIndex$MemoryIndexReader", 0x2, 13, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader;LOrgApacheLuceneIndexMemoryMemoryIndex_Info;", "binarySearch", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;IILOrgApacheLuceneUtilBytesRefHash;[ILJavaUtilComparator;", "(Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;IILorg/apache/lucene/util/BytesRefHash;[ILjava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)I", "seekExact", "LOrgApacheLuceneUtilBytesRef;", "seekCeil", "J", "postings", "LOrgApacheLuceneIndexPostingsEnum;I", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneIndexTermState;", "LJavaIoIOException;", "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum = { "MemoryTermsEnum", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x2, 13, 4, 12, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum;
 }
 
@@ -1525,7 +1741,7 @@ jint OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryTermsEnum_bin
       return mid;
     }
   }
-  JreAssert(([((id<JavaUtilComparator>) nil_chk(comparator)) compareWithId:bytesRef withId:b] != 0), (@"org/apache/lucene/index/memory/MemoryIndex.java:924 condition failed: assert comparator.compare(bytesRef, b) != 0;"));
+  JreAssert([((id<JavaUtilComparator>) nil_chk(comparator)) compareWithId:bytesRef withId:b] != 0, @"org/apache/lucene/index/memory/MemoryIndex.java:924 condition failed: assert comparator.compare(bytesRef, b) != 0;");
   return -(low + 1);
 }
 
@@ -1574,8 +1790,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 
 - (jint)nextPosition {
   posUpto_++;
-  JreAssert((posUpto_ <= freq_), (@"org/apache/lucene/index/memory/MemoryIndex.java:1069 condition failed: assert posUpto <= freq;"));
-  JreAssert((![((OrgApacheLuceneUtilIntBlockPool_SliceReader *) nil_chk(sliceReader_)) endOfSlice]), (JreStrcat("$I", @" stores offsets : ", startOffset_)));
+  JreAssert(posUpto_ <= freq_, @"org/apache/lucene/index/memory/MemoryIndex.java:1069 condition failed: assert posUpto <= freq;");
+  JreAssert(![((OrgApacheLuceneUtilIntBlockPool_SliceReader *) nil_chk(sliceReader_)) endOfSlice], JreStrcat("$I", @" stores offsets : ", startOffset_));
   jint pos = [sliceReader_ readInt];
   if (this$0_->this$0_->storeOffsets_) {
     startOffset_ = [sliceReader_ readInt];
@@ -1614,33 +1830,49 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader:", "MemoryPostingsEnum", NULL, 0x1, NULL, NULL },
-    { "resetWithInt:withInt:withInt:", "reset", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "nextPosition", NULL, "I", 0x1, NULL, NULL },
-    { "startOffset", NULL, "I", 0x1, NULL, NULL },
-    { "endOffset", NULL, "I", 0x1, NULL, NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 5, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader:);
+  methods[1].selector = @selector(resetWithInt:withInt:withInt:);
+  methods[2].selector = @selector(docID);
+  methods[3].selector = @selector(nextDoc);
+  methods[4].selector = @selector(advanceWithInt:);
+  methods[5].selector = @selector(freq);
+  methods[6].selector = @selector(nextPosition);
+  methods[7].selector = @selector(startOffset);
+  methods[8].selector = @selector(endOffset);
+  methods[9].selector = @selector(getPayload);
+  methods[10].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.memory.MemoryIndex$MemoryIndexReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sliceReader_", NULL, 0x12, "Lorg.apache.lucene.util.IntBlockPool$SliceReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posUpto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasNext_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadIndex_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadBuilder_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "sliceReader_", "LOrgApacheLuceneUtilIntBlockPool_SliceReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posUpto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "hasNext_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "freq_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "startOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "endOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payloadIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payloadBuilder_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryPostingsEnum = { 2, "MemoryPostingsEnum", "org.apache.lucene.index.memory", "MemoryIndex$MemoryIndexReader", 0x2, 11, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader;", "reset", "III", "advance", "I", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryPostingsEnum = { "MemoryPostingsEnum", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x2, 11, 11, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMemoryMemoryIndex_MemoryIndexReader_MemoryPostingsEnum;
 }
 
@@ -1676,9 +1908,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
   JreStrongAssignAndConsume(&start_, [IOSIntArray newArrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(((IOSIntArray *) nil_chk(ord))->size_, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT)]);
   JreStrongAssignAndConsume(&end_, [IOSIntArray newArrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(ord->size_, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT)]);
   JreStrongAssignAndConsume(&freq_, [IOSIntArray newArrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(ord->size_, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT)]);
-  JreAssert((((IOSIntArray *) nil_chk(start_))->size_ >= ord->size_), (@"org/apache/lucene/index/memory/MemoryIndex.java:1179 condition failed: assert start.length >= ord.length;"));
-  JreAssert((((IOSIntArray *) nil_chk(end_))->size_ >= ord->size_), (@"org/apache/lucene/index/memory/MemoryIndex.java:1180 condition failed: assert end.length >= ord.length;"));
-  JreAssert((freq_->size_ >= ord->size_), (@"org/apache/lucene/index/memory/MemoryIndex.java:1181 condition failed: assert freq.length >= ord.length;"));
+  JreAssert(((IOSIntArray *) nil_chk(start_))->size_ >= ord->size_, @"org/apache/lucene/index/memory/MemoryIndex.java:1179 condition failed: assert start.length >= ord.length;");
+  JreAssert(((IOSIntArray *) nil_chk(end_))->size_ >= ord->size_, @"org/apache/lucene/index/memory/MemoryIndex.java:1180 condition failed: assert end.length >= ord.length;");
+  JreAssert(freq_->size_ >= ord->size_, @"org/apache/lucene/index/memory/MemoryIndex.java:1181 condition failed: assert freq.length >= ord.length;");
   return ord;
 }
 
@@ -1689,9 +1921,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
     JreStrongAssign(&end_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(end_, ord->size_));
     JreStrongAssign(&freq_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(freq_, ord->size_));
   }
-  JreAssert((((IOSIntArray *) nil_chk(start_))->size_ >= ord->size_), (@"org/apache/lucene/index/memory/MemoryIndex.java:1193 condition failed: assert start.length >= ord.length;"));
-  JreAssert((((IOSIntArray *) nil_chk(end_))->size_ >= ord->size_), (@"org/apache/lucene/index/memory/MemoryIndex.java:1194 condition failed: assert end.length >= ord.length;"));
-  JreAssert((((IOSIntArray *) nil_chk(freq_))->size_ >= ord->size_), (@"org/apache/lucene/index/memory/MemoryIndex.java:1195 condition failed: assert freq.length >= ord.length;"));
+  JreAssert(((IOSIntArray *) nil_chk(start_))->size_ >= ord->size_, @"org/apache/lucene/index/memory/MemoryIndex.java:1193 condition failed: assert start.length >= ord.length;");
+  JreAssert(((IOSIntArray *) nil_chk(end_))->size_ >= ord->size_, @"org/apache/lucene/index/memory/MemoryIndex.java:1194 condition failed: assert end.length >= ord.length;");
+  JreAssert(((IOSIntArray *) nil_chk(freq_))->size_ >= ord->size_, @"org/apache/lucene/index/memory/MemoryIndex.java:1195 condition failed: assert freq.length >= ord.length;");
   return ord;
 }
 
@@ -1708,18 +1940,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "SliceByteStartArray", NULL, 0x1, NULL, NULL },
-    { "init__", "init", "[I", 0x1, NULL, NULL },
-    { "grow", NULL, "[I", 0x1, NULL, NULL },
-    { "clear", NULL, "[I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "[I", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "[I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(init__);
+  methods[2].selector = @selector(grow);
+  methods[3].selector = @selector(clear);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "start_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "start_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "end_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "freq_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray = { 2, "SliceByteStartArray", "org.apache.lucene.index.memory", "MemoryIndex", 0x1a, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "init", "LOrgApacheLuceneIndexMemoryMemoryIndex;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray = { "SliceByteStartArray", "org.apache.lucene.index.memory", ptrTable, methods, fields, 7, 0x1a, 4, 3, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray;
 }
 
@@ -1738,126 +1979,3 @@ OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray *create_OrgApacheLucen
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray)
-
-@implementation OrgApacheLuceneIndexMemoryMemoryIndex_$1
-
-- (jboolean)incrementToken {
-  if (![((id<JavaUtilIterator>) nil_chk(iter_)) hasNext]) return false;
-  id obj = [((id<JavaUtilIterator>) nil_chk(iter_)) next];
-  if (obj == nil) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"keyword must not be null");
-  NSString *term = [obj description];
-  [self clearAttributes];
-  [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithNSString:term];
-  [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:start_ withInt:start_ + [termAtt_ length]];
-  start_ += ((jint) [((NSString *) nil_chk(term)) length]) + 1;
-  return true;
-}
-
-- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)capture$0 {
-  OrgApacheLuceneIndexMemoryMemoryIndex_$1_initWithJavaUtilCollection_(self, capture$0);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(iter_);
-  RELEASE_(termAtt_);
-  RELEASE_(offsetAtt_);
-  RELEASE_(val$keywords_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "incrementToken", NULL, "Z", 0x1, NULL, NULL },
-    { "initWithJavaUtilCollection:", "", NULL, 0x0, NULL, "(Ljava/util/Collection<TT;>;)V" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "iter_", NULL, 0x2, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<TT;>;", .constantValue.asLong = 0 },
-    { "start_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$keywords_", NULL, 0x1012, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<TT;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMemoryMemoryIndex", "keywordTokenStreamWithJavaUtilCollection:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_$1 = { 2, "", "org.apache.lucene.index.memory", "MemoryIndex", 0x8008, 2, methods, 5, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMemoryMemoryIndex_$1;
-}
-
-@end
-
-void OrgApacheLuceneIndexMemoryMemoryIndex_$1_initWithJavaUtilCollection_(OrgApacheLuceneIndexMemoryMemoryIndex_$1 *self, id<JavaUtilCollection> capture$0) {
-  JreStrongAssign(&self->val$keywords_, capture$0);
-  OrgApacheLuceneAnalysisTokenStream_init(self);
-  JreStrongAssign(&self->iter_, [((id<JavaUtilCollection>) nil_chk(self->val$keywords_)) iterator]);
-  self->start_ = 0;
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
-}
-
-OrgApacheLuceneIndexMemoryMemoryIndex_$1 *new_OrgApacheLuceneIndexMemoryMemoryIndex_$1_initWithJavaUtilCollection_(id<JavaUtilCollection> capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_$1, initWithJavaUtilCollection_, capture$0)
-}
-
-OrgApacheLuceneIndexMemoryMemoryIndex_$1 *create_OrgApacheLuceneIndexMemoryMemoryIndex_$1_initWithJavaUtilCollection_(id<JavaUtilCollection> capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_$1, initWithJavaUtilCollection_, capture$0)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_$1)
-
-@implementation OrgApacheLuceneIndexMemoryMemoryIndex_$2
-
-- (void)collectWithInt:(jint)doc {
-  *IOSFloatArray_GetRef(nil_chk(val$scores_), 0) = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
-}
-
-- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
-  JreStrongAssign(&self->scorer_, scorer);
-}
-
-- (jboolean)needsScores {
-  return true;
-}
-
-- (instancetype)initWithFloatArray:(IOSFloatArray *)capture$0 {
-  OrgApacheLuceneIndexMemoryMemoryIndex_$2_initWithFloatArray_(self, capture$0);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(scorer_);
-  RELEASE_(val$scores_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, NULL, NULL },
-    { "needsScores", NULL, "Z", 0x1, NULL, NULL },
-    { "initWithFloatArray:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "scorer_", NULL, 0x2, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$scores_", NULL, 0x1012, "[F", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMemoryMemoryIndex", "searchWithOrgApacheLuceneSearchQuery:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMemoryMemoryIndex_$2 = { 2, "", "org.apache.lucene.index.memory", "MemoryIndex", 0x8008, 4, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMemoryMemoryIndex_$2;
-}
-
-@end
-
-void OrgApacheLuceneIndexMemoryMemoryIndex_$2_initWithFloatArray_(OrgApacheLuceneIndexMemoryMemoryIndex_$2 *self, IOSFloatArray *capture$0) {
-  JreStrongAssign(&self->val$scores_, capture$0);
-  OrgApacheLuceneSearchSimpleCollector_init(self);
-}
-
-OrgApacheLuceneIndexMemoryMemoryIndex_$2 *new_OrgApacheLuceneIndexMemoryMemoryIndex_$2_initWithFloatArray_(IOSFloatArray *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_$2, initWithFloatArray_, capture$0)
-}
-
-OrgApacheLuceneIndexMemoryMemoryIndex_$2 *create_OrgApacheLuceneIndexMemoryMemoryIndex_$2_initWithFloatArray_(IOSFloatArray *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMemoryMemoryIndex_$2, initWithFloatArray_, capture$0)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_$2)

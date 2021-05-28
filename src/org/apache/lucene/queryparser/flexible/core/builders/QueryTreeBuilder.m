@@ -18,6 +18,10 @@
 #include "org/apache/lucene/queryparser/flexible/messages/MessageImpl.h"
 #include "org/apache/lucene/queryparser/flexible/standard/parser/EscapeQuerySyntaxImpl.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/builders/QueryTreeBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder () {
  @public
   JavaUtilHashMap *queryNodeBuilders_;
@@ -107,31 +111,44 @@ withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuce
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 2, -1, 3, -1, -1 },
+    { NULL, "V", 0x2, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder;", 0x2, 7, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 8, 9, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder;", 0x2, 10, 11, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 13, 5, 6, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setBuilderWithJavaLangCharSequence:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:);
+  methods[2].selector = @selector(setBuilderWithIOSClass:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:);
+  methods[3].selector = @selector(processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[4].selector = @selector(getBuilderWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[5].selector = @selector(processNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:);
+  methods[6].selector = @selector(getQueryBuilderWithIOSClass:);
+  methods[7].selector = @selector(buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "QUERY_TREE_BUILDER_TAGID", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 14, -1, -1 },
+    { "queryNodeBuilders_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 15, -1 },
+    { "fieldNameBuilders_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 16, -1 },
+  };
+  static const void *ptrTable[] = { "setBuilder", "LJavaLangCharSequence;LOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder;", "LIOSClass;LOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder;", "(Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;)V", "process", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", "LOrgApacheLuceneQueryparserFlexibleCoreQueryNodeException;", "getBuilder", "processNode", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;LOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder;", "getQueryBuilder", "LIOSClass;", "(Ljava/lang/Class<*>;)Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;", "build", &OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID, "Ljava/util/HashMap<Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;>;", "Ljava/util/HashMap<Ljava/lang/String;Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder = { "QueryTreeBuilder", "org.apache.lucene.queryparser.flexible.core.builders", ptrTable, methods, fields, 7, 0x1, 8, 3, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder class]) {
     JreStrongAssign(&OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID, [OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_class_() getName]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "QueryTreeBuilder", NULL, 0x1, NULL, NULL },
-    { "setBuilderWithJavaLangCharSequence:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:", "setBuilder", "V", 0x1, NULL, NULL },
-    { "setBuilderWithIOSClass:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:", "setBuilder", "V", 0x1, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;)V" },
-    { "processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "process", "V", 0x2, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "getBuilderWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "getBuilder", "Lorg.apache.lucene.queryparser.flexible.core.builders.QueryBuilder;", 0x2, NULL, NULL },
-    { "processNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:", "processNode", "V", 0x2, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "getQueryBuilderWithIOSClass:", "getQueryBuilder", "Lorg.apache.lucene.queryparser.flexible.core.builders.QueryBuilder;", 0x2, NULL, "(Ljava/lang/Class<*>;)Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;" },
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Ljava.lang.Object;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "QUERY_TREE_BUILDER_TAGID", "QUERY_TREE_BUILDER_TAGID", 0x19, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID, NULL, .constantValue.asLong = 0 },
-    { "queryNodeBuilders_", NULL, 0x2, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;>;", .constantValue.asLong = 0 },
-    { "fieldNameBuilders_", NULL, 0x2, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/String;Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder = { 2, "QueryTreeBuilder", "org.apache.lucene.queryparser.flexible.core.builders", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder;
 }
 
 @end
@@ -152,7 +169,7 @@ void OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_processWithO
   if (node != nil) {
     id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder> builder = OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_getBuilderWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, node);
     if (!([builder isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder class]])) {
-      id<JavaUtilList> children = [node getChildren];
+      id<JavaUtilList> children = JreRetainedLocalValue([node getChildren]);
       if (children != nil) {
         for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in children) {
           OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, child);
@@ -166,14 +183,14 @@ void OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_processWithO
 id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder> OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_getBuilderWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node) {
   id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder> builder = nil;
   if (self->fieldNameBuilders_ != nil && [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:node]) {
-    id<JavaLangCharSequence> field = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(node, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField];
+    id<JavaLangCharSequence> field = JreRetainedLocalValue([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(node, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField]);
     if (field != nil) {
       field = [field description];
     }
     builder = [((JavaUtilHashMap *) nil_chk(self->fieldNameBuilders_)) getWithId:field];
   }
   if (builder == nil && self->queryNodeBuilders_ != nil) {
-    IOSClass *clazz = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) getClass];
+    IOSClass *clazz = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) java_getClass];
     do {
       builder = OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_getQueryBuilderWithIOSClass_(self, clazz);
       if (builder == nil) {
@@ -199,9 +216,9 @@ id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder> OrgApacheLuceneQu
 
 void OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_processNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node, id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder> builder) {
   if (builder == nil) {
-    @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LUCENE_QUERY_CONVERSION_ERROR), [IOSObjectArray arrayWithObjects:(id[]){ [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:create_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init()], [[node getClass] getName] } count:2 type:NSObject_class_()]));
+    @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LUCENE_QUERY_CONVERSION_ERROR), [IOSObjectArray arrayWithObjects:(id[]){ [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:create_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init()], [[node java_getClass] getName] } count:2 type:NSObject_class_()]));
   }
-  id obj = [builder buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:node];
+  id obj = JreRetainedLocalValue([builder buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:node]);
   if (obj != nil) {
     [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) setTagWithNSString:OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID withId:obj];
   }

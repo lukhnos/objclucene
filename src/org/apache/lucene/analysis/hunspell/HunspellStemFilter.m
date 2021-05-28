@@ -6,11 +6,14 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Integer.h"
 #include "java/util/Collections.h"
 #include "java/util/Comparator.h"
 #include "java/util/List.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/hunspell/Dictionary.h"
@@ -21,6 +24,12 @@
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/CharsRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/hunspell/HunspellStemFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneAnalysisHunspellHunspellStemFilter () {
  @public
@@ -43,24 +52,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, stemmer_,
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, buffer_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, savedState_, OrgApacheLuceneUtilAttributeSource_State *)
 
-@interface OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 : NSObject < JavaUtilComparator >
+@interface OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1 : NSObject < JavaUtilComparator >
+
+- (instancetype)init;
 
 - (jint)compareWithId:(OrgApacheLuceneUtilCharsRef *)o1
                withId:(OrgApacheLuceneUtilCharsRef *)o2;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1)
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1_init(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1 *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1)
+__attribute__((unused)) static OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1 *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1_init(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisHunspellHunspellStemFilter)
 
@@ -95,7 +102,7 @@ id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthC
 
 - (jboolean)incrementToken {
   if (buffer_ != nil && ![buffer_ isEmpty]) {
-    OrgApacheLuceneUtilCharsRef *nextStem = [buffer_ removeWithInt:0];
+    OrgApacheLuceneUtilCharsRef *nextStem = JreRetainedLocalValue([buffer_ removeWithInt:0]);
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:savedState_];
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAtt_)) setPositionIncrementWithInt:0];
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:nextStem];
@@ -107,14 +114,14 @@ id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthC
   if ([((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) isKeyword]) {
     return true;
   }
-  JreStrongAssign(&buffer_, dedup_ ? [((OrgApacheLuceneAnalysisHunspellStemmer *) nil_chk(stemmer_)) uniqueStemsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]] : [((OrgApacheLuceneAnalysisHunspellStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]]);
+  JreStrongAssign(&buffer_, dedup_ ? [((OrgApacheLuceneAnalysisHunspellStemmer *) nil_chk(stemmer_)) uniqueStemsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ java_length]] : [((OrgApacheLuceneAnalysisHunspellStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ java_length]]);
   if ([buffer_ isEmpty]) {
     return true;
   }
   if (longestOnly_ && [((id<JavaUtilList>) nil_chk(buffer_)) size] > 1) {
     JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(buffer_, OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator);
   }
-  OrgApacheLuceneUtilCharsRef *stem = [((id<JavaUtilList>) nil_chk(buffer_)) removeWithInt:0];
+  OrgApacheLuceneUtilCharsRef *stem = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(buffer_)) removeWithInt:0]);
   [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAtt_ setEmpty])) appendWithJavaLangCharSequence:stem];
   if (longestOnly_) {
     [((id<JavaUtilList>) nil_chk(buffer_)) clear];
@@ -142,34 +149,44 @@ id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthC
   [super dealloc];
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneAnalysisHunspellHunspellStemFilter class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator, new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init());
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisHunspellHunspellStemFilter)
-  }
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisHunspellDictionary:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisHunspellDictionary:withBoolean:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisHunspellDictionary:withBoolean:withBoolean:);
+  methods[3].selector = @selector(incrementToken);
+  methods[4].selector = @selector(reset);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "keywordAtt_", "LOrgApacheLuceneAnalysisTokenattributesKeywordAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "stemmer_", "LOrgApacheLuceneAnalysisHunspellStemmer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "buffer_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 4, -1 },
+    { "savedState_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "dedup_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "longestOnly_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lengthComparator", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x18, -1, 5, 6, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisHunspellDictionary;", "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisHunspellDictionary;Z", "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisHunspellDictionary;ZZ", "LJavaIoIOException;", "Ljava/util/List<Lorg/apache/lucene/util/CharsRef;>;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator, "Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHunspellHunspellStemFilter = { "HunspellStemFilter", "org.apache.lucene.analysis.hunspell", ptrTable, methods, fields, 7, 0x11, 5, 9, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisHunspellHunspellStemFilter;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisHunspellDictionary:", "HunspellStemFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisHunspellDictionary:withBoolean:", "HunspellStemFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisHunspellDictionary:withBoolean:withBoolean:", "HunspellStemFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "keywordAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.KeywordAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stemmer_", NULL, 0x12, "Lorg.apache.lucene.analysis.hunspell.Stemmer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
-    { "savedState_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
-    { "dedup_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "longestOnly_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "lengthComparator", "lengthComparator", 0x18, "Ljava.util.Comparator;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator, "Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHunspellHunspellStemFilter = { 2, "HunspellStemFilter", "org.apache.lucene.analysis.hunspell", NULL, 0x11, 5, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisHunspellHunspellStemFilter;
++ (void)initialize {
+  if (self == [OrgApacheLuceneAnalysisHunspellHunspellStemFilter class]) {
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator, new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1_init());
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisHunspellHunspellStemFilter)
+  }
 }
 
 @end
@@ -204,7 +221,7 @@ void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAn
   JreStrongAssign(&self->posIncAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
   JreStrongAssign(&self->keywordAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_class_()]);
   self->dedup_ = (dedup && longestOnly == false);
-  JreStrongAssignAndConsume(&self->stemmer_, new_OrgApacheLuceneAnalysisHunspellStemmer_initWithOrgApacheLuceneAnalysisHunspellDictionary_(dictionary));
+  JreStrongAssignAndConsume(&self->stemmer_, new_OrgApacheLuceneAnalysisHunspellStemmer_initPackagePrivateWithOrgApacheLuceneAnalysisHunspellDictionary_(dictionary));
   self->longestOnly_ = longestOnly;
 }
 
@@ -218,7 +235,14 @@ OrgApacheLuceneAnalysisHunspellHunspellStemFilter *create_OrgApacheLuceneAnalysi
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellHunspellStemFilter)
 
-@implementation OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1
+@implementation OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(OrgApacheLuceneUtilCharsRef *)o1
                withId:(OrgApacheLuceneUtilCharsRef *)o2 {
@@ -231,34 +255,61 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellHunspellStemFilt
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init(self);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
 }
-J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 = { 2, "", "org.apache.lucene.analysis.hunspell", "HunspellStemFilter", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;" };
-  return &_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compare", "LOrgApacheLuceneUtilCharsRef;LOrgApacheLuceneUtilCharsRef;", "LOrgApacheLuceneAnalysisHunspellHunspellStemFilter;", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1 = { "", "org.apache.lucene.analysis.hunspell", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, -1, 3, -1 };
+  return &_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *self) {
+void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1_init(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1, init)
+OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1 *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1, init)
 }
 
-OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1, init)
+OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1 *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_1, init)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1)

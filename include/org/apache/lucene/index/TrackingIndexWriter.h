@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTrackingIndexWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTrackingIndexWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexTrackingIndexWriter || defined(INCLUDE_OrgApacheLuceneIndexTrackingIndexWriter))
 #define OrgApacheLuceneIndexTrackingIndexWriter_
 
@@ -25,16 +31,14 @@
 
 /*!
  @brief Class that tracks changes to a delegated
- IndexWriter, used by <code>ControlledRealTimeReopenThread</code>
+   IndexWriter, used by <code>ControlledRealTimeReopenThread</code>
   to ensure specific
- changes are visible.
- Create this class (passing your
- IndexWriter), and then pass this class to <code>ControlledRealTimeReopenThread</code>
+   changes are visible.Create this class (passing your
+   IndexWriter), and then pass this class to <code>ControlledRealTimeReopenThread</code>
  .
  Be sure to make all changes via the
- TrackingIndexWriter, otherwise <code>ControlledRealTimeReopenThread</code>
+   TrackingIndexWriter, otherwise <code>ControlledRealTimeReopenThread</code>
   won't know about the changes.
-  
  */
 @interface OrgApacheLuceneIndexTrackingIndexWriter : NSObject
 
@@ -42,73 +46,72 @@
 
 /*!
  @brief Create a <code>TrackingIndexWriter</code> wrapping the
- provided <code>IndexWriter</code>.
+   provided <code>IndexWriter</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
 /*!
  @brief Calls <code>IndexWriter.addDocument(Iterable)</code>
- and returns the generation that reflects this change.
+   and returns the generation that reflects this change.
  */
 - (jlong)addDocumentWithJavaLangIterable:(id<JavaLangIterable>)d;
 
 /*!
  @brief Calls <code>IndexWriter.addDocuments(Iterable)</code> and
- returns the generation that reflects this change.
+   returns the generation that reflects this change.
  */
 - (jlong)addDocumentsWithJavaLangIterable:(id<JavaLangIterable>)docs;
 
 /*!
  @brief Calls <code>IndexWriter.addIndexes(CodecReader...)
  </code>
- and returns the generation that reflects this change. 
+   and returns the generation that reflects this change.
  */
 - (jlong)addIndexesWithOrgApacheLuceneIndexCodecReaderArray:(IOSObjectArray *)readers;
 
 /*!
  @brief Calls <code>IndexWriter.addIndexes(Directory...)
  </code> and
- returns the generation that reflects this change. 
+   returns the generation that reflects this change.
  */
 - (jlong)addIndexesWithOrgApacheLuceneStoreDirectoryArray:(IOSObjectArray *)dirs;
 
 /*!
  @brief Calls <code>IndexWriter.deleteAll</code> and returns the
- generation that reflects this change.
+   generation that reflects this change.
  */
 - (jlong)deleteAll;
 
 /*!
  @brief Calls <code>IndexWriter.deleteDocuments(Query...)
  </code> and
- returns the generation that reflects this change. 
+   returns the generation that reflects this change.
  */
 - (jlong)deleteDocumentsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)q;
 
 /*!
  @brief Calls <code>IndexWriter.deleteDocuments(Query...)
  </code>
- and returns the generation that reflects this change. 
+   and returns the generation that reflects this change.
  */
 - (jlong)deleteDocumentsWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)queries;
 
 /*!
  @brief Calls <code>IndexWriter.deleteDocuments(Term...)
  </code> and
- returns the generation that reflects this change. 
+   returns the generation that reflects this change.
  */
 - (jlong)deleteDocumentsWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t;
 
 /*!
  @brief Calls <code>IndexWriter.deleteDocuments(Term...)
  </code> and
- returns the generation that reflects this change. 
+   returns the generation that reflects this change.
  */
 - (jlong)deleteDocumentsWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
 
 /*!
  @brief Return and increment current gen.
-  
  */
 - (jlong)getAndIncrementGeneration;
 
@@ -125,7 +128,7 @@
 /*!
  @brief Cals <code>IndexWriter.tryDeleteDocument(IndexReader,int)</code>
   and
- returns the generation that reflects this change.
+   returns the generation that reflects this change.
  */
 - (jlong)tryDeleteDocumentWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                                       withInt:(jint)docID;
@@ -133,7 +136,7 @@
 /*!
  @brief Calls <code>IndexWriter.updateDocument(Term,Iterable)</code>
   and
- returns the generation that reflects this change.
+   returns the generation that reflects this change.
  */
 - (jlong)updateDocumentWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t
                                withJavaLangIterable:(id<JavaLangIterable>)d;
@@ -141,10 +144,14 @@
 /*!
  @brief Calls <code>IndexWriter.updateDocuments(Term,Iterable)</code>
   and returns
- the generation that reflects this change.
+   the generation that reflects this change.
  */
 - (jlong)updateDocumentsWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t
                                 withJavaLangIterable:(id<JavaLangIterable>)docs;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -160,4 +167,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTrackingIndexWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTrackingIndexWriter")

@@ -11,8 +11,11 @@
 #include "java/util/regex/Pattern.h"
 #include "org/apache/lucene/analysis/charfilter/HTMLStripCharFilter.h"
 #include "org/apache/lucene/analysis/charfilter/HTMLStripCharFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/CharFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/charfilter/HTMLStripCharFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory)
 
@@ -45,24 +48,31 @@ JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactor
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter;", 0x1, 2, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithJavaIoReader:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "escapedTags_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x10, -1, -1, 4, -1 },
+    { "TAG_NAME_PATTERN", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x18, -1, 5, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LJavaIoReader;", "Ljava/util/Set<Ljava/lang/String;>;", &OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory = { "HTMLStripCharFilterFactory", "org.apache.lucene.analysis.charfilter", ptrTable, methods, fields, 7, 0x1, 2, 2, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory class]) {
     JreStrongAssign(&OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN, JavaUtilRegexPattern_compileWithNSString_(@"[^\\s,]+"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "HTMLStripCharFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithJavaIoReader:", "create", "Lorg.apache.lucene.analysis.charfilter.HTMLStripCharFilter;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "escapedTags_", NULL, 0x10, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "TAG_NAME_PATTERN", "TAG_NAME_PATTERN", 0x18, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory = { 2, "HTMLStripCharFilterFactory", "org.apache.lucene.analysis.charfilter", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory;
 }
 
 @end

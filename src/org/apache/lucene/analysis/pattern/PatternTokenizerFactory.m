@@ -9,9 +9,12 @@
 #include "java/util/regex/Pattern.h"
 #include "org/apache/lucene/analysis/pattern/PatternTokenizer.h"
 #include "org/apache/lucene/analysis/pattern/PatternTokenizerFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/pattern/PatternTokenizerFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN = @"pattern";
 NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP = @"group";
@@ -41,17 +44,24 @@ NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP = @"group"
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "PatternTokenizerFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.pattern.PatternTokenizer;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisPatternPatternTokenizer;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneUtilAttributeFactory:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "PATTERN", "PATTERN", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN, NULL, .constantValue.asLong = 0 },
-    { "GROUP", "GROUP", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP, NULL, .constantValue.asLong = 0 },
-    { "pattern_", NULL, 0x14, "Ljava.util.regex.Pattern;", NULL, NULL, .constantValue.asLong = 0 },
-    { "group_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "PATTERN", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "GROUP", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 5, -1, -1 },
+    { "pattern_", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "group_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternTokenizerFactory = { 2, "PatternTokenizerFactory", "org.apache.lucene.analysis.pattern", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LOrgApacheLuceneUtilAttributeFactory;", &OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN, &OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternTokenizerFactory = { "PatternTokenizerFactory", "org.apache.lucene.analysis.pattern", ptrTable, methods, fields, 7, 0x1, 2, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPatternPatternTokenizerFactory;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsFieldInfosFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsFieldInfosFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsFieldInfosFormat || defined(INCLUDE_OrgApacheLuceneCodecsFieldInfosFormat))
 #define OrgApacheLuceneCodecsFieldInfosFormat_
 
@@ -38,7 +44,7 @@
 
 /*!
  @brief Writes the provided <code>FieldInfos</code> to the
- directory.
+   directory.
  */
 - (void)writeWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
@@ -51,9 +57,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -65,4 +71,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsFieldInfosFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsFieldInfosFormat")

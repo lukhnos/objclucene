@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisLvLatvianStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisLvLatvianStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisLvLatvianStemmer))
 #define OrgApacheLuceneAnalysisLvLatvianStemmer_
 
@@ -22,26 +28,25 @@
 /*!
  @brief Light stemmer for Latvian.
  <p>
- This is a light version of the algorithm in Karlis Kreslin's PhD thesis
- <i>A stemming algorithm for Latvian</i> with the following modifications:
+  This is a light version of the algorithm in Karlis Kreslin's PhD thesis 
+ <i>A stemming algorithm for Latvian</i> with the following modifications: 
  <ul>
- <li>Only explicitly stems noun and adjective morphology
- <li>Stricter length/vowel checks for the resulting stems (verb etc suffix stripping is removed)
- <li>Removes only the primary inflectional suffixes: case and number for nouns ; 
- case, number, gender, and definitiveness for adjectives.
- <li>Palatalization is only handled when a declension II,V,VI noun suffix is removed.
+    <li>Only explicitly stems noun and adjective morphology
+    <li>Stricter length/vowel checks for the resulting stems (verb etc suffix stripping is removed)
+    <li>Removes only the primary inflectional suffixes: case and number for nouns ; 
+        case, number, gender, and definitiveness for adjectives.   
+ <li>Palatalization is only handled when a declension II,V,VI noun suffix is removed. 
  </ul>
  */
 @interface OrgApacheLuceneAnalysisLvLatvianStemmer : NSObject
-
-+ (IOSObjectArray *)affixes;
+@property (readonly, class, strong) IOSObjectArray *affixes NS_SWIFT_NAME(affixes);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Stem a latvian word. returns the new adjusted length.
+ @brief Stem a latvian word.returns the new adjusted length.
  */
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -50,16 +55,16 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisLvLatvianStemmer)
 
-inline IOSObjectArray *OrgApacheLuceneAnalysisLvLatvianStemmer_get_affixes();
+inline IOSObjectArray *OrgApacheLuceneAnalysisLvLatvianStemmer_get_affixes(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisLvLatvianStemmer_affixes;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisLvLatvianStemmer, affixes, IOSObjectArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisLvLatvianStemmer_init(OrgApacheLuceneAnalysisLvLatvianStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisLvLatvianStemmer *new_OrgApacheLuceneAnalysisLvLatvianStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisLvLatvianStemmer *new_OrgApacheLuceneAnalysisLvLatvianStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisLvLatvianStemmer *create_OrgApacheLuceneAnalysisLvLatvianStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisLvLatvianStemmer *create_OrgApacheLuceneAnalysisLvLatvianStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisLvLatvianStemmer)
 
@@ -79,9 +84,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisLvLatvianStemmer)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)affix
-                         withInt:(jint)vc
-                     withBoolean:(jboolean)palatalizes;
+- (instancetype __nonnull)initWithNSString:(NSString *)affix
+                                   withInt:(jint)vc
+                               withBoolean:(jboolean)palatalizes;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -99,4 +108,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisLvLatvianStemmer_Affix)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemmer")

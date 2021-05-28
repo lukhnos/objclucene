@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLengthFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLengthFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLengthFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLengthFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousLengthFilter_
 
@@ -25,7 +31,7 @@
 /*!
  @brief Removes words that are too long or too short from the stream.
  <p>
- Note: Length is calculated as the number of UTF-16 code units.
+  Note: Length is calculated as the number of UTF-16 code units. 
  </p>
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousLengthFilter : OrgApacheLuceneAnalysisUtilFilteringTokenFilter
@@ -33,19 +39,22 @@
 #pragma mark Public
 
 /*!
- @brief Create a new <code>LengthFilter</code>.
- This will filter out tokens whose
+ @brief Create a new <code>LengthFilter</code>.This will filter out tokens whose 
  <code>CharTermAttribute</code> is either too short (<code>CharTermAttribute.length()</code>
- &lt; min) or too long (<code>CharTermAttribute.length()</code> &gt; max).
- @param inArg      the <code>TokenStream</code> to consume
- @param min     the minimum length
- @param max     the maximum length
+  &lt; min) or too long (<code>CharTermAttribute.length()</code> &gt; max).
+ @param inArg the <code>TokenStream</code>  to consume
+ @param min the minimum length
+ @param max the maximum length
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)min
-                                                   withInt:(jint)max;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                             withInt:(jint)min
+                                                             withInt:(jint)max;
 
 - (jboolean)accept;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -61,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLengthFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLengthFilter")

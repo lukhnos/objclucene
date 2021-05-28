@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisFaPersianCharFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisFaPersianCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisFaPersianCharFilter))
 #define OrgApacheLuceneAnalysisFaPersianCharFilter_
 
@@ -25,13 +31,13 @@
 
 /*!
  @brief CharFilter that replaces instances of Zero-width non-joiner with an
- ordinary space.
+  ordinary space.
  */
 @interface OrgApacheLuceneAnalysisFaPersianCharFilter : OrgApacheLuceneAnalysisCharFilter
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)inArg;
 
 - (jint)read;
 
@@ -57,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianCharFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianCharFilter")

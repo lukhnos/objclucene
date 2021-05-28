@@ -6,61 +6,61 @@
 /*!
  @brief Query nodes commonly used by query parser implementations.
  <h2>Query Nodes</h2>
+  <p>
+  The package <tt>org.apache.lucene.queryParser.nodes</tt> contains all the basic query nodes. The interface 
+  that represents a query node is <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code>.
+  <p>
+  <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code>s are used by the text parser to create a syntax tree.
+  These nodes are designed to be used by UI or other text parsers.
+  The default Lucene text parser is <code>org.apache.lucene.queryparser.flexible.standard.parser.StandardSyntaxParser</code>,
+  it implements Lucene's standard syntax. 
  <p>
- The package <tt>org.apache.lucene.queryParser.nodes</tt> contains all the basic query nodes. The interface 
- that represents a query node is <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code>.
+  <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code> interface should be implemented by all query nodes,
+  the class <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNodeImpl</code> implements <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code> and is extended
+  by all current query node implementations. 
  <p>
- <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code>s are used by the text parser to create a syntax tree.
- These nodes are designed to be used by UI or other text parsers.
- The default Lucene text parser is <code>org.apache.lucene.queryparser.flexible.standard.parser.StandardSyntaxParser</code>,
- it implements Lucene's standard syntax.
- <p>
- <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code> interface should be implemented by all query nodes,
- the class <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNodeImpl</code> implements <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code> and is extended
- by all current query node implementations.
- <p>
- A query node tree can be printed to the a stream, and it generates a pseudo XML representation
- with all the nodes.
+  A query node tree can be printed to the a stream, and it generates a pseudo XML representation
+  with all the nodes. 
  </p>
+  <p>
+  A query node tree can also generate a query string that can be parsed back by the original text parser,
+  at this point only the standard lucene syntax is supported. 
  <p>
- A query node tree can also generate a query string that can be parsed back by the original text parser,
- at this point only the standard lucene syntax is supported.
- <p>
- Grouping nodes:
+  Grouping nodes: 
  <ul>
- <li>AndQueryNode - used for AND operator</li>
- <li>AnyQueryNode - used for ANY operator</li>
- <li>OrQueryNode - used for OR operator</li>
- <li>BooleanQueryNode - used when no operator is specified</li>
- <li>ModifierQueryNode - used for modifier operator</li>
- <li>GroupQueryNode - used for parenthesis</li>
- <li>BoostQueryNode - used for boost operator</li>
- <li>SlopQueryNode - phrase slop</li>
- <li>FuzzyQueryNode - fuzzy node</li>
- <li>TermRangeQueryNode - used for parametric field:[low_value TO high_value]</li>
- <li>ProximityQueryNode - used for proximity search</li>
- <li>NumericRangeQueryNode - used for numeric range search</li>
- <li>TokenizedPhraseQueryNode - used by tokenizers/lemmatizers/analyzers for phrases/autophrases</li>
- </ul>
- <p>
- Leaf Nodes:
+  <li>AndQueryNode - used for AND operator</li>
+  <li>AnyQueryNode - used for ANY operator</li>
+  <li>OrQueryNode - used for OR operator</li>
+  <li>BooleanQueryNode - used when no operator is specified</li>
+  <li>ModifierQueryNode - used for modifier operator</li>
+  <li>GroupQueryNode - used for parenthesis</li>
+  <li>BoostQueryNode - used for boost operator</li>
+  <li>SlopQueryNode - phrase slop</li>
+  <li>FuzzyQueryNode - fuzzy node</li>
+  <li>TermRangeQueryNode - used for parametric field:[low_value TO high_value]</li>
+  <li>ProximityQueryNode - used for proximity search</li>
+  <li>NumericRangeQueryNode - used for numeric range search</li>
+  <li>TokenizedPhraseQueryNode - used by tokenizers/lemmatizers/analyzers for phrases/autophrases</li>
+  </ul>
+  <p>
+  Leaf Nodes: 
  <ul>
- <li>FieldQueryNode - field/value node</li>
- <li>NumericQueryNode - used for numeric search</li>
- <li>PathQueryNode - <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code> object used with path-like queries</li>
- <li>OpaqueQueryNode - Used as for part of the query that can be parsed by other parsers. schema/value</li> 
+  <li>FieldQueryNode - field/value node</li>
+  <li>NumericQueryNode - used for numeric search</li>
+  <li>PathQueryNode - <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code> object used with path-like queries</li>
+  <li>OpaqueQueryNode - Used as for part of the query that can be parsed by other parsers. schema/value</li>  
  <li>PrefixWildcardQueryNode - non-phrase wildcard query</li>
- <li>QuotedFieldQUeryNode - regular phrase node</li>
- <li>WildcardQueryNode - non-phrase wildcard query</li>
- </ul>
- <p>
- Utility Nodes:
+  <li>QuotedFieldQUeryNode - regular phrase node</li>
+  <li>WildcardQueryNode - non-phrase wildcard query</li>
+  </ul>
+  <p>
+  Utility Nodes: 
  <ul>
- <li>DeletedQueryNode - used by processors on optimizations</li>
- <li>MatchAllDocsQueryNode - used by processors on optimizations</li>
- <li>MatchNoDocsQueryNode - used by processors on optimizations</li>
- <li>NoTokenFoundQueryNode - used by tokenizers/lemmatizers/analyzers</li>
- </ul>
+  <li>DeletedQueryNode - used by processors on optimizations</li>
+  <li>MatchAllDocsQueryNode - used by processors on optimizations</li>
+  <li>MatchNoDocsQueryNode - used by processors on optimizations</li>
+  <li>NoTokenFoundQueryNode - used by tokenizers/lemmatizers/analyzers</li>
+  </ul>
  */
 #include "J2ObjC_header.h"
 
@@ -72,4 +72,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesPackage_info")

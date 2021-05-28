@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexParallelLeafReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexParallelLeafReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexParallelLeafReader || defined(INCLUDE_OrgApacheLuceneIndexParallelLeafReader))
 #define OrgApacheLuceneIndexParallelLeafReader_
 
@@ -33,22 +39,22 @@
 @protocol OrgApacheLuceneUtilBits;
 
 /*!
- @brief An <code>LeafReader</code> which reads multiple, parallel indexes.
- Each index
- added must have the same number of documents, but typically each contains
- different fields. Deletions are taken from the first reader.
- Each document contains the union of the fields of all documents
- with the same document number.  When searching, matches for a
- query term are from the first index added that has the field.
+ @brief An <code>LeafReader</code> which reads multiple, parallel indexes.Each index
+  added must have the same number of documents, but typically each contains
+  different fields.
+ Deletions are taken from the first reader.
+  Each document contains the union of the fields of all documents
+  with the same document number.  When searching, matches for a
+  query term are from the first index added that has the field. 
  <p>This is useful, e.g., with collections that have large fields which
- change rarely and small fields that change more frequently.  The smaller
- fields may be re-indexed in a new index and both indexes may be searched
- together.
+  change rarely and small fields that change more frequently.  The smaller
+  fields may be re-indexed in a new index and both indexes may be searched
+  together.  
  <p><strong>Warning:</strong> It is up to you to make sure all indexes
- are created and modified the same way. For example, if you add
- documents to one index, you need to add the same documents in the
- same order to the other indexes. <em>Failure to do so will result in
- undefined behavior</em>.
+  are created and modified the same way. For example, if you add
+  documents to one index, you need to add the same documents in the
+  same order to the other indexes. <em>Failure to do so will result in
+  undefined behavior</em>.
  */
 @interface OrgApacheLuceneIndexParallelLeafReader : OrgApacheLuceneIndexLeafReader
 
@@ -56,25 +62,25 @@
 
 /*!
  @brief Create a ParallelLeafReader based on the provided
- readers.
+   readers.
  */
-- (instancetype)initWithBoolean:(jboolean)closeSubReaders
-withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers;
+- (instancetype __nonnull)initWithBoolean:(jboolean)closeSubReaders
+  withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers;
 
 /*!
  @brief Expert: create a ParallelLeafReader based on the provided
- readers and storedFieldReaders; when a document is
- loaded, only storedFieldsReaders will be used.
+   readers and storedFieldReaders; when a document is
+   loaded, only storedFieldsReaders will be used.
  */
-- (instancetype)initWithBoolean:(jboolean)closeSubReaders
-withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
-withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)storedFieldsReaders;
+- (instancetype __nonnull)initWithBoolean:(jboolean)closeSubReaders
+  withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
+  withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)storedFieldsReaders;
 
 /*!
  @brief Create a ParallelLeafReader based on the provided
- readers; auto-closes the given readers on <code>close()</code>.
+   readers; auto-closes the given readers on <code>close()</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers;
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
@@ -90,12 +96,11 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithNSString:(NSString *)field;
 
 /*!
- @brief 
- <p>
- NOTE: the returned field numbers will likely not
- correspond to the actual field numbers in the underlying
- readers, and codec metadata (<code>FieldInfo.getAttribute(String)</code>
- will be unavailable.
+ @brief <p>
+  NOTE: the returned field numbers will likely not
+  correspond to the actual field numbers in the underlying
+  readers, and codec metadata (<code>FieldInfo.getAttribute(String)</code>
+  will be unavailable.
  */
 - (OrgApacheLuceneIndexFieldInfos *)getFieldInfos;
 
@@ -130,6 +135,10 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (void)doClose;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexParallelLeafReader)
@@ -156,4 +165,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexParallelLeafReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexParallelLeafReader")

@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
@@ -32,6 +31,10 @@
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/RoaringDocIdSet.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/LRUFilterCache must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchLRUFilterCache () {
  @public
@@ -65,6 +68,27 @@ __attribute__((unused)) static jlong OrgApacheLuceneSearchLRUFilterCache_getCach
 
 __attribute__((unused)) static jlong OrgApacheLuceneSearchLRUFilterCache_getCacheCount(OrgApacheLuceneSearchLRUFilterCache *self);
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchLRUFilterCache__Annotations$0(void);
+
+@interface OrgApacheLuceneSearchLRUFilterCache_1 : NSObject < OrgApacheLuceneIndexLeafReader_CoreClosedListener > {
+ @public
+  OrgApacheLuceneSearchLRUFilterCache *this$0_;
+}
+
+- (instancetype)initWithOrgApacheLuceneSearchLRUFilterCache:(OrgApacheLuceneSearchLRUFilterCache *)outer$;
+
+- (void)onCloseWithId:(id)ownerCoreCacheKey;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchLRUFilterCache_1)
+
+__attribute__((unused)) static void OrgApacheLuceneSearchLRUFilterCache_1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache_1 *self, OrgApacheLuceneSearchLRUFilterCache *outer$);
+
+__attribute__((unused)) static OrgApacheLuceneSearchLRUFilterCache_1 *new_OrgApacheLuceneSearchLRUFilterCache_1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchLRUFilterCache_1 *create_OrgApacheLuceneSearchLRUFilterCache_1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache *outer$);
+
 @interface OrgApacheLuceneSearchLRUFilterCache_LeafCache : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
   OrgApacheLuceneSearchLRUFilterCache *this$0_;
@@ -95,7 +119,6 @@ __attribute__((unused)) static jlong OrgApacheLuceneSearchLRUFilterCache_getCach
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchLRUFilterCache_LeafCache)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLRUFilterCache_LeafCache, this$0_, OrgApacheLuceneSearchLRUFilterCache *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLRUFilterCache_LeafCache, key_, id)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLRUFilterCache_LeafCache, cache_, id<JavaUtilMap>)
 
@@ -135,7 +158,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchLRUFilterCache_LeafCache)
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter, this$0_, OrgApacheLuceneSearchLRUFilterCache *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter, in_, OrgApacheLuceneSearchFilter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter, policy_, id<OrgApacheLuceneSearchFilterCachingPolicy>)
 
@@ -146,29 +168,6 @@ __attribute__((unused)) static OrgApacheLuceneSearchLRUFilterCache_CachingWrappe
 __attribute__((unused)) static OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter *create_OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter_initWithOrgApacheLuceneSearchLRUFilterCache_withOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchFilterCachingPolicy_(OrgApacheLuceneSearchLRUFilterCache *outer$, OrgApacheLuceneSearchFilter *inArg, id<OrgApacheLuceneSearchFilterCachingPolicy> policy);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter)
-
-@interface OrgApacheLuceneSearchLRUFilterCache_$1 : NSObject < OrgApacheLuceneIndexLeafReader_CoreClosedListener > {
- @public
-  OrgApacheLuceneSearchLRUFilterCache *this$0_;
-}
-
-- (void)onCloseWithId:(id)ownerCoreCacheKey;
-
-- (instancetype)initWithOrgApacheLuceneSearchLRUFilterCache:(OrgApacheLuceneSearchLRUFilterCache *)outer$;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchLRUFilterCache_$1)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLRUFilterCache_$1, this$0_, OrgApacheLuceneSearchLRUFilterCache *)
-
-__attribute__((unused)) static void OrgApacheLuceneSearchLRUFilterCache_$1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache_$1 *self, OrgApacheLuceneSearchLRUFilterCache *outer$);
-
-__attribute__((unused)) static OrgApacheLuceneSearchLRUFilterCache_$1 *new_OrgApacheLuceneSearchLRUFilterCache_$1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache *outer$) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchLRUFilterCache_$1 *create_OrgApacheLuceneSearchLRUFilterCache_$1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchLRUFilterCache_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchLRUFilterCache)
 
@@ -202,7 +201,7 @@ withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter {
 
 - (void)onMissWithId:(id)readerCoreKey
 withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter {
-  JreAssert((filter != nil), (@"org/apache/lucene/search/LRUFilterCache.java:150 condition failed: assert filter != null;"));
+  JreAssert(filter != nil, @"org/apache/lucene/search/LRUFilterCache.java:150 condition failed: assert filter != null;");
   JrePlusAssignVolatileLongJ(&missCount_, 1);
 }
 
@@ -252,12 +251,12 @@ withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter {
     OrgApacheLuceneSearchLRUFilterCache_LeafCache *leafCache = [((id<JavaUtilMap>) nil_chk(cache_)) getWithId:readerKey];
     if (leafCache == nil) {
       [self onMissWithId:readerKey withOrgApacheLuceneSearchFilter:filter];
-      return nil;
+      return JreRetainedLocalValue(nil);
     }
     OrgApacheLuceneSearchFilter *singleton = [((id<JavaUtilMap>) nil_chk(uniqueFilters_)) getWithId:filter];
     if (singleton == nil) {
       [self onMissWithId:readerKey withOrgApacheLuceneSearchFilter:filter];
-      return nil;
+      return JreRetainedLocalValue(nil);
     }
     OrgApacheLuceneSearchDocIdSet *cached = [leafCache getWithOrgApacheLuceneSearchFilter:singleton];
     if (cached == nil) {
@@ -266,7 +265,7 @@ withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter {
     else {
       [self onHitWithId:readerKey withOrgApacheLuceneSearchFilter:singleton];
     }
-    return cached;
+    return JreRetainedLocalValue(cached);
   }
 }
 
@@ -274,23 +273,23 @@ withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter {
          withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                  withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set {
   @synchronized(self) {
-    JreAssert(([((OrgApacheLuceneSearchDocIdSet *) nil_chk(set)) isCacheable]), (@"org/apache/lucene/search/LRUFilterCache.java:241 condition failed: assert set.isCacheable();"));
-    OrgApacheLuceneSearchFilter *singleton = [((id<JavaUtilMap>) nil_chk(uniqueFilters_)) getWithId:filter];
+    JreAssert([((OrgApacheLuceneSearchDocIdSet *) nil_chk(set)) isCacheable], @"org/apache/lucene/search/LRUFilterCache.java:241 condition failed: assert set.isCacheable();");
+    OrgApacheLuceneSearchFilter *singleton = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(uniqueFilters_)) getWithId:filter]);
     if (singleton == nil) {
       [uniqueFilters_ putWithId:filter withId:filter];
       [self onFilterCacheWithOrgApacheLuceneSearchFilter:singleton withLong:OrgApacheLuceneSearchLRUFilterCache_LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY + [self ramBytesUsedWithOrgApacheLuceneSearchFilter:filter]];
     }
     else {
-      filter = singleton;
+      filter = JreRetainedLocalValue(singleton);
     }
     id key = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getCoreCacheKey];
-    OrgApacheLuceneSearchLRUFilterCache_LeafCache *leafCache = [((id<JavaUtilMap>) nil_chk(cache_)) getWithId:key];
+    OrgApacheLuceneSearchLRUFilterCache_LeafCache *leafCache = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(cache_)) getWithId:key]);
     if (leafCache == nil) {
       leafCache = create_OrgApacheLuceneSearchLRUFilterCache_LeafCache_initWithOrgApacheLuceneSearchLRUFilterCache_withId_(self, key);
       OrgApacheLuceneSearchLRUFilterCache_LeafCache *previous = [cache_ putWithId:[((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) getCoreCacheKey] withId:leafCache];
       JrePlusAssignVolatileLongJ(&ramBytesUsed_, OrgApacheLuceneSearchLRUFilterCache_HASHTABLE_RAM_BYTES_PER_ENTRY);
-      JreAssert((previous == nil), (@"org/apache/lucene/search/LRUFilterCache.java:255 condition failed: assert previous == null;"));
-      [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:create_OrgApacheLuceneSearchLRUFilterCache_$1_initWithOrgApacheLuceneSearchLRUFilterCache_(self)];
+      JreAssert(previous == nil, @"org/apache/lucene/search/LRUFilterCache.java:255 condition failed: assert previous == null;");
+      [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:create_OrgApacheLuceneSearchLRUFilterCache_1_initWithOrgApacheLuceneSearchLRUFilterCache_(self)];
     }
     [leafCache putIfAbsentWithOrgApacheLuceneSearchFilter:filter withOrgApacheLuceneSearchDocIdSet:set];
     [self evictIfNecessary];
@@ -300,7 +299,7 @@ withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter {
 - (void)evictIfNecessary {
   @synchronized(self) {
     if ([self requiresEviction]) {
-      id<JavaUtilIterator> iterator = [((id<JavaUtilSet>) nil_chk(mostRecentlyUsedFilters_)) iterator];
+      id<JavaUtilIterator> iterator = JreRetainedLocalValue([((id<JavaUtilSet>) nil_chk(mostRecentlyUsedFilters_)) iterator]);
       do {
         OrgApacheLuceneSearchFilter *filter = [((id<JavaUtilIterator>) nil_chk(iterator)) next];
         [iterator remove];
@@ -454,15 +453,98 @@ withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter {
   return OrgApacheLuceneSearchLRUFilterCache_getCacheCount(self) - OrgApacheLuceneSearchLRUFilterCache_getCacheSize(self);
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(uniqueFilters_);
   RELEASE_(mostRecentlyUsedFilters_);
   RELEASE_(cache_);
   [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 6, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x20, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, 13, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x21, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x21, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 19, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x20, -1, -1, -1, 20, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFilter;", 0x1, 21, 22, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x4, 23, 24, 25, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 26, -1, -1 },
+    { NULL, "J", 0x4, 27, 18, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x4, 28, 29, 25, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withLong:);
+  methods[1].selector = @selector(onHitWithId:withOrgApacheLuceneSearchFilter:);
+  methods[2].selector = @selector(onMissWithId:withOrgApacheLuceneSearchFilter:);
+  methods[3].selector = @selector(onFilterCacheWithOrgApacheLuceneSearchFilter:withLong:);
+  methods[4].selector = @selector(onFilterEvictionWithOrgApacheLuceneSearchFilter:withLong:);
+  methods[5].selector = @selector(onDocIdSetCacheWithId:withLong:);
+  methods[6].selector = @selector(onDocIdSetEvictionWithId:withInt:withLong:);
+  methods[7].selector = @selector(onClear);
+  methods[8].selector = @selector(requiresEviction);
+  methods[9].selector = @selector(getWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[10].selector = @selector(putIfAbsentWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchDocIdSet:);
+  methods[11].selector = @selector(evictIfNecessary);
+  methods[12].selector = @selector(clearCoreCacheKeyWithId:);
+  methods[13].selector = @selector(clearFilterWithOrgApacheLuceneSearchFilter:);
+  methods[14].selector = @selector(onEvictionWithOrgApacheLuceneSearchFilter:);
+  methods[15].selector = @selector(clear);
+  methods[16].selector = @selector(assertConsistent);
+  methods[17].selector = @selector(cachedFilters);
+  methods[18].selector = @selector(doCacheWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchFilterCachingPolicy:);
+  methods[19].selector = @selector(docIdSetToCacheWithOrgApacheLuceneSearchDocIdSet:withOrgApacheLuceneIndexLeafReader:);
+  methods[20].selector = @selector(ramBytesUsed);
+  methods[21].selector = @selector(getChildResources);
+  methods[22].selector = @selector(ramBytesUsedWithOrgApacheLuceneSearchFilter:);
+  methods[23].selector = @selector(cacheImplWithOrgApacheLuceneSearchDocIdSetIterator:withOrgApacheLuceneIndexLeafReader:);
+  methods[24].selector = @selector(getTotalCount);
+  methods[25].selector = @selector(getHitCount);
+  methods[26].selector = @selector(getMissCount);
+  methods[27].selector = @selector(getCacheSize);
+  methods[28].selector = @selector(getCacheCount);
+  methods[29].selector = @selector(getEvictionCount);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "FILTER_DEFAULT_RAM_BYTES_USED", "J", .constantValue.asLong = OrgApacheLuceneSearchLRUFilterCache_FILTER_DEFAULT_RAM_BYTES_USED, 0x18, -1, -1, -1, -1 },
+    { "HASHTABLE_RAM_BYTES_PER_ENTRY", "J", .constantValue.asLong = 0, 0x18, -1, 30, -1, -1 },
+    { "LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY", "J", .constantValue.asLong = 0, 0x18, -1, 31, -1, -1 },
+    { "maxSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxRamBytesUsed_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "uniqueFilters_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 32, -1 },
+    { "mostRecentlyUsedFilters_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 33, -1 },
+    { "cache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 34, -1 },
+    { "ramBytesUsed_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "hitCount_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "missCount_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "cacheCount_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "cacheSize_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "IJ", "onHit", "LNSObject;LOrgApacheLuceneSearchFilter;", "onMiss", "onFilterCache", "LOrgApacheLuceneSearchFilter;J", "onFilterEviction", "onDocIdSetCache", "LNSObject;J", "onDocIdSetEviction", "LNSObject;IJ", "get", "LOrgApacheLuceneSearchFilter;LOrgApacheLuceneIndexLeafReaderContext;", "putIfAbsent", "LOrgApacheLuceneSearchFilter;LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneSearchDocIdSet;", "clearCoreCacheKey", "LNSObject;", "clearFilter", "LOrgApacheLuceneSearchFilter;", "onEviction", "()Ljava/util/List<Lorg/apache/lucene/search/Filter;>;", "doCache", "LOrgApacheLuceneSearchFilter;LOrgApacheLuceneSearchFilterCachingPolicy;", "docIdSetToCache", "LOrgApacheLuceneSearchDocIdSet;LOrgApacheLuceneIndexLeafReader;", "LJavaIoIOException;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "ramBytesUsed", "cacheImpl", "LOrgApacheLuceneSearchDocIdSetIterator;LOrgApacheLuceneIndexLeafReader;", &OrgApacheLuceneSearchLRUFilterCache_HASHTABLE_RAM_BYTES_PER_ENTRY, &OrgApacheLuceneSearchLRUFilterCache_LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY, "Ljava/util/Map<Lorg/apache/lucene/search/Filter;Lorg/apache/lucene/search/Filter;>;", "Ljava/util/Set<Lorg/apache/lucene/search/Filter;>;", "Ljava/util/Map<Ljava/lang/Object;Lorg/apache/lucene/search/LRUFilterCache$LeafCache;>;", "LOrgApacheLuceneSearchLRUFilterCache_LeafCache;LOrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter;", (void *)&OrgApacheLuceneSearchLRUFilterCache__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchLRUFilterCache = { "LRUFilterCache", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 30, 13, -1, 35, -1, -1, 36 };
+  return &_OrgApacheLuceneSearchLRUFilterCache;
 }
 
 + (void)initialize {
@@ -471,59 +553,6 @@ withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter {
     OrgApacheLuceneSearchLRUFilterCache_LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY = OrgApacheLuceneSearchLRUFilterCache_HASHTABLE_RAM_BYTES_PER_ENTRY + 2 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchLRUFilterCache)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withLong:", "LRUFilterCache", NULL, 0x1, NULL, NULL },
-    { "onHitWithId:withOrgApacheLuceneSearchFilter:", "onHit", "V", 0x4, NULL, NULL },
-    { "onMissWithId:withOrgApacheLuceneSearchFilter:", "onMiss", "V", 0x4, NULL, NULL },
-    { "onFilterCacheWithOrgApacheLuceneSearchFilter:withLong:", "onFilterCache", "V", 0x4, NULL, NULL },
-    { "onFilterEvictionWithOrgApacheLuceneSearchFilter:withLong:", "onFilterEviction", "V", 0x4, NULL, NULL },
-    { "onDocIdSetCacheWithId:withLong:", "onDocIdSetCache", "V", 0x4, NULL, NULL },
-    { "onDocIdSetEvictionWithId:withInt:withLong:", "onDocIdSetEviction", "V", 0x4, NULL, NULL },
-    { "onClear", NULL, "V", 0x4, NULL, NULL },
-    { "requiresEviction", NULL, "Z", 0x0, NULL, NULL },
-    { "getWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:", "get", "Lorg.apache.lucene.search.DocIdSet;", 0x20, NULL, NULL },
-    { "putIfAbsentWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchDocIdSet:", "putIfAbsent", "V", 0x20, NULL, NULL },
-    { "evictIfNecessary", NULL, "V", 0x20, NULL, NULL },
-    { "clearCoreCacheKeyWithId:", "clearCoreCacheKey", "V", 0x21, NULL, NULL },
-    { "clearFilterWithOrgApacheLuceneSearchFilter:", "clearFilter", "V", 0x21, NULL, NULL },
-    { "onEvictionWithOrgApacheLuceneSearchFilter:", "onEviction", "V", 0x2, NULL, NULL },
-    { "clear", NULL, "V", 0x21, NULL, NULL },
-    { "assertConsistent", NULL, "V", 0x20, NULL, NULL },
-    { "cachedFilters", NULL, "Ljava.util.List;", 0x20, NULL, "()Ljava/util/List<Lorg/apache/lucene/search/Filter;>;" },
-    { "doCacheWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchFilterCachingPolicy:", "doCache", "Lorg.apache.lucene.search.Filter;", 0x1, NULL, NULL },
-    { "docIdSetToCacheWithOrgApacheLuceneSearchDocIdSet:withOrgApacheLuceneIndexLeafReader:", "docIdSetToCache", "Lorg.apache.lucene.search.DocIdSet;", 0x4, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "ramBytesUsedWithOrgApacheLuceneSearchFilter:", "ramBytesUsed", "J", 0x4, NULL, NULL },
-    { "cacheImplWithOrgApacheLuceneSearchDocIdSetIterator:withOrgApacheLuceneIndexLeafReader:", "cacheImpl", "Lorg.apache.lucene.search.DocIdSet;", 0x4, "Ljava.io.IOException;", NULL },
-    { "getTotalCount", NULL, "J", 0x11, NULL, NULL },
-    { "getHitCount", NULL, "J", 0x11, NULL, NULL },
-    { "getMissCount", NULL, "J", 0x11, NULL, NULL },
-    { "getCacheSize", NULL, "J", 0x11, NULL, NULL },
-    { "getCacheCount", NULL, "J", 0x11, NULL, NULL },
-    { "getEvictionCount", NULL, "J", 0x11, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "FILTER_DEFAULT_RAM_BYTES_USED", "FILTER_DEFAULT_RAM_BYTES_USED", 0x18, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneSearchLRUFilterCache_FILTER_DEFAULT_RAM_BYTES_USED },
-    { "HASHTABLE_RAM_BYTES_PER_ENTRY", "HASHTABLE_RAM_BYTES_PER_ENTRY", 0x18, "J", &OrgApacheLuceneSearchLRUFilterCache_HASHTABLE_RAM_BYTES_PER_ENTRY, NULL, .constantValue.asLong = 0 },
-    { "LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY", "LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY", 0x18, "J", &OrgApacheLuceneSearchLRUFilterCache_LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY, NULL, .constantValue.asLong = 0 },
-    { "maxSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxRamBytesUsed_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "uniqueFilters_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Lorg/apache/lucene/search/Filter;Lorg/apache/lucene/search/Filter;>;", .constantValue.asLong = 0 },
-    { "mostRecentlyUsedFilters_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/search/Filter;>;", .constantValue.asLong = 0 },
-    { "cache_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Object;Lorg/apache/lucene/search/LRUFilterCache$LeafCache;>;", .constantValue.asLong = 0 },
-    { "ramBytesUsed_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "hitCount_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "missCount_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "cacheCount_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "cacheSize_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.LRUFilterCache$LeafCache;", "Lorg.apache.lucene.search.LRUFilterCache$CachingWrapperFilter;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchLRUFilterCache = { 2, "LRUFilterCache", "org.apache.lucene.search", NULL, 0x1, 30, methods, 13, fields, 0, NULL, 2, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSearchLRUFilterCache;
 }
 
 @end
@@ -569,7 +598,61 @@ jlong OrgApacheLuceneSearchLRUFilterCache_getCacheCount(OrgApacheLuceneSearchLRU
   return JreLoadVolatileLong(&self->cacheCount_);
 }
 
+IOSObjectArray *OrgApacheLuceneSearchLRUFilterCache__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchLRUFilterCache)
+
+@implementation OrgApacheLuceneSearchLRUFilterCache_1
+
+- (instancetype)initWithOrgApacheLuceneSearchLRUFilterCache:(OrgApacheLuceneSearchLRUFilterCache *)outer$ {
+  OrgApacheLuceneSearchLRUFilterCache_1_initWithOrgApacheLuceneSearchLRUFilterCache_(self, outer$);
+  return self;
+}
+
+- (void)onCloseWithId:(id)ownerCoreCacheKey {
+  [this$0_ clearCoreCacheKeyWithId:ownerCoreCacheKey];
+}
+
+- (void)dealloc {
+  RELEASE_(this$0_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchLRUFilterCache:);
+  methods[1].selector = @selector(onCloseWithId:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "this$0_", "LOrgApacheLuceneSearchLRUFilterCache;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchLRUFilterCache;", "onClose", "LNSObject;", "putIfAbsentWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchDocIdSet:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchLRUFilterCache_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneSearchLRUFilterCache_1;
+}
+
+@end
+
+void OrgApacheLuceneSearchLRUFilterCache_1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache_1 *self, OrgApacheLuceneSearchLRUFilterCache *outer$) {
+  JreStrongAssign(&self->this$0_, outer$);
+  NSObject_init(self);
+}
+
+OrgApacheLuceneSearchLRUFilterCache_1 *new_OrgApacheLuceneSearchLRUFilterCache_1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchLRUFilterCache_1, initWithOrgApacheLuceneSearchLRUFilterCache_, outer$)
+}
+
+OrgApacheLuceneSearchLRUFilterCache_1 *create_OrgApacheLuceneSearchLRUFilterCache_1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchLRUFilterCache_1, initWithOrgApacheLuceneSearchLRUFilterCache_, outer$)
+}
 
 @implementation OrgApacheLuceneSearchLRUFilterCache_LeafCache
 
@@ -600,7 +683,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchLRUFilterCache)
 }
 
 - (void)removeWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter {
-  OrgApacheLuceneSearchDocIdSet *removed = [((id<JavaUtilMap>) nil_chk(cache_)) removeWithId:filter];
+  OrgApacheLuceneSearchDocIdSet *removed = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(cache_)) removeWithId:filter]);
   if (removed != nil) {
     OrgApacheLuceneSearchLRUFilterCache_LeafCache_onDocIdSetEvictionWithLong_(self, JreLoadStatic(OrgApacheLuceneSearchLRUFilterCache, HASHTABLE_RAM_BYTES_PER_ENTRY) + [removed ramBytesUsed]);
   }
@@ -622,23 +705,36 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchLRUFilterCache)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchLRUFilterCache:withId:", "LeafCache", NULL, 0x0, NULL, NULL },
-    { "onDocIdSetCacheWithLong:", "onDocIdSetCache", "V", 0x2, NULL, NULL },
-    { "onDocIdSetEvictionWithLong:", "onDocIdSetEviction", "V", 0x2, NULL, NULL },
-    { "getWithOrgApacheLuceneSearchFilter:", "get", "Lorg.apache.lucene.search.DocIdSet;", 0x0, NULL, NULL },
-    { "putIfAbsentWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchDocIdSet:", "putIfAbsent", "V", 0x0, NULL, NULL },
-    { "removeWithOrgApacheLuceneSearchFilter:", "remove", "V", 0x0, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x0, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 8, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 9, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchLRUFilterCache:withId:);
+  methods[1].selector = @selector(onDocIdSetCacheWithLong:);
+  methods[2].selector = @selector(onDocIdSetEvictionWithLong:);
+  methods[3].selector = @selector(getWithOrgApacheLuceneSearchFilter:);
+  methods[4].selector = @selector(putIfAbsentWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchDocIdSet:);
+  methods[5].selector = @selector(removeWithOrgApacheLuceneSearchFilter:);
+  methods[6].selector = @selector(ramBytesUsed);
+  methods[7].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.LRUFilterCache;", NULL, NULL, .constantValue.asLong = 0 },
-    { "key_", NULL, 0x12, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
-    { "cache_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Lorg/apache/lucene/search/Filter;Lorg/apache/lucene/search/DocIdSet;>;", .constantValue.asLong = 0 },
-    { "ramBytesUsed_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchLRUFilterCache;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "key_", "LNSObject;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "cache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 10, -1 },
+    { "ramBytesUsed_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchLRUFilterCache_LeafCache = { 2, "LeafCache", "org.apache.lucene.search", "LRUFilterCache", 0x2, 8, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchLRUFilterCache;LNSObject;", "onDocIdSetCache", "J", "onDocIdSetEviction", "get", "LOrgApacheLuceneSearchFilter;", "putIfAbsent", "LOrgApacheLuceneSearchFilter;LOrgApacheLuceneSearchDocIdSet;", "remove", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "Ljava/util/Map<Lorg/apache/lucene/search/Filter;Lorg/apache/lucene/search/DocIdSet;>;", "LOrgApacheLuceneSearchLRUFilterCache;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchLRUFilterCache_LeafCache = { "LeafCache", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x2, 8, 4, 11, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchLRUFilterCache_LeafCache;
 }
 
@@ -686,7 +782,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchLRUFilterCache_LeafCache)
   if (((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->ord_ == 0) {
     [((id<OrgApacheLuceneSearchFilterCachingPolicy>) nil_chk(policy_)) onUseWithOrgApacheLuceneSearchFilter:in_];
   }
-  OrgApacheLuceneSearchDocIdSet *set = [this$0_ getWithOrgApacheLuceneSearchFilter:in_ withOrgApacheLuceneIndexLeafReaderContext:context];
+  OrgApacheLuceneSearchDocIdSet *set = JreRetainedLocalValue([this$0_ getWithOrgApacheLuceneSearchFilter:in_ withOrgApacheLuceneIndexLeafReaderContext:context]);
   if (set == nil) {
     set = [((OrgApacheLuceneSearchFilter *) nil_chk(in_)) getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneUtilBits:nil];
     if ([((id<OrgApacheLuceneSearchFilterCachingPolicy>) nil_chk(policy_)) shouldCacheWithOrgApacheLuceneSearchFilter:in_ withOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchDocIdSet:set]) {
@@ -697,7 +793,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchLRUFilterCache_LeafCache)
       [this$0_ putIfAbsentWithOrgApacheLuceneSearchFilter:in_ withOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchDocIdSet:set];
     }
   }
-  return set == JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY) ? nil : OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(set, acceptDocs);
+  return JreObjectEqualsEquals(set, JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY)) ? nil : OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(set, acceptDocs);
 }
 
 - (jboolean)isEqual:(id)obj {
@@ -720,19 +816,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchLRUFilterCache_LeafCache)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchLRUFilterCache:withOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchFilterCachingPolicy:", "CachingWrapperFilter", NULL, 0x0, NULL, NULL },
-    { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:", "getDocIdSet", "Lorg.apache.lucene.search.DocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchLRUFilterCache:withOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchFilterCachingPolicy:);
+  methods[1].selector = @selector(getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.LRUFilterCache;", NULL, NULL, .constantValue.asLong = 0 },
-    { "in_", NULL, 0x12, "Lorg.apache.lucene.search.Filter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "policy_", NULL, 0x12, "Lorg.apache.lucene.search.FilterCachingPolicy;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchLRUFilterCache;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "in_", "LOrgApacheLuceneSearchFilter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "policy_", "LOrgApacheLuceneSearchFilterCachingPolicy;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter = { 2, "CachingWrapperFilter", "org.apache.lucene.search", "LRUFilterCache", 0x2, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchLRUFilterCache;LOrgApacheLuceneSearchFilter;LOrgApacheLuceneSearchFilterCachingPolicy;", "getDocIdSet", "LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneUtilBits;", "LJavaIoIOException;", "equals", "LNSObject;", "hashCode", "toString", "LNSString;", "LOrgApacheLuceneSearchLRUFilterCache;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter = { "CachingWrapperFilter", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x2, 5, 3, 9, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter;
 }
 
@@ -754,49 +860,3 @@ OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter *create_OrgApacheLucene
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchLRUFilterCache_CachingWrapperFilter)
-
-@implementation OrgApacheLuceneSearchLRUFilterCache_$1
-
-- (void)onCloseWithId:(id)ownerCoreCacheKey {
-  [this$0_ clearCoreCacheKeyWithId:ownerCoreCacheKey];
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchLRUFilterCache:(OrgApacheLuceneSearchLRUFilterCache *)outer$ {
-  OrgApacheLuceneSearchLRUFilterCache_$1_initWithOrgApacheLuceneSearchLRUFilterCache_(self, outer$);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(this$0_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "onCloseWithId:", "onClose", "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchLRUFilterCache:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.LRUFilterCache;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchLRUFilterCache", "putIfAbsentWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchDocIdSet:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchLRUFilterCache_$1 = { 2, "", "org.apache.lucene.search", "LRUFilterCache", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchLRUFilterCache_$1;
-}
-
-@end
-
-void OrgApacheLuceneSearchLRUFilterCache_$1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache_$1 *self, OrgApacheLuceneSearchLRUFilterCache *outer$) {
-  JreStrongAssign(&self->this$0_, outer$);
-  NSObject_init(self);
-}
-
-OrgApacheLuceneSearchLRUFilterCache_$1 *new_OrgApacheLuceneSearchLRUFilterCache_$1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchLRUFilterCache_$1, initWithOrgApacheLuceneSearchLRUFilterCache_, outer$)
-}
-
-OrgApacheLuceneSearchLRUFilterCache_$1 *create_OrgApacheLuceneSearchLRUFilterCache_$1_initWithOrgApacheLuceneSearchLRUFilterCache_(OrgApacheLuceneSearchLRUFilterCache *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchLRUFilterCache_$1, initWithOrgApacheLuceneSearchLRUFilterCache_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchLRUFilterCache_$1)

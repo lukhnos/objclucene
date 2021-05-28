@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory))
 #define OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_
 
@@ -32,13 +38,13 @@
 /*!
  @brief Factory for <code>PersianNormalizationFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_fanormal" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;charFilter class="solr.PersianCharFilterFactory"/&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.PersianNormalizationFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_fanormal" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;charFilter class="solr.PersianCharFilterFactory"/&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.PersianNormalizationFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
@@ -48,7 +54,7 @@
 /*!
  @brief Creates a new PersianNormalizationFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisFaPersianNormalizationFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -68,4 +74,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianNormalizationFilterFa
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory))
 #define OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_
 
@@ -30,17 +36,17 @@
 
 /*!
  @brief TokenFilterFactory that creates instances of <code>HunspellStemFilter</code>.
- Example config for British English:
+ Example config for British English: 
  <pre class="prettyprint">
- &lt;filter class=&quot;solr.HunspellStemFilterFactory&quot;
- dictionary=&quot;en_GB.dic,my_custom.dic&quot;
- affix=&quot;en_GB.aff&quot; 
- ignoreCase=&quot;false&quot;
- 
+  &lt;filter class=&quot;solr.HunspellStemFilterFactory&quot;
+          dictionary=&quot;en_GB.dic,my_custom.dic&quot;
+          affix=&quot;en_GB.aff&quot; 
+          ignoreCase=&quot;false&quot;
+          longestOnly=&quot;false&quot; /&gt;
 @endcode
- Both parameters dictionary and affix are mandatory.
- Dictionaries for many languages are available through the OpenOffice project.
- See <a href="http://wiki.apache.org/solr/Hunspell">http://wiki.apache.org/solr/Hunspell</a>
+  Both parameters dictionary and affix are mandatory.
+  Dictionaries for many languages are available through the OpenOffice project. 
+  See <a href="http://wiki.apache.org/solr/Hunspell">http://wiki.apache.org/solr/Hunspell</a>
  */
 @interface OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
@@ -49,7 +55,7 @@
 /*!
  @brief Creates a new HunspellStemFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
 
@@ -69,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFact
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory")

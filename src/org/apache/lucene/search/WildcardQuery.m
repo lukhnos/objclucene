@@ -10,13 +10,15 @@
 #include "java/util/List.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/AutomatonQuery.h"
-#include "org/apache/lucene/search/MultiTermQuery.h"
-#include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/WildcardQuery.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/apache/lucene/util/automaton/Automata.h"
 #include "org/apache/lucene/util/automaton/Automaton.h"
 #include "org/apache/lucene/util/automaton/Operations.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/WildcardQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchWildcardQuery
 
@@ -63,19 +65,29 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:", "WildcardQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withInt:", "WildcardQuery", NULL, 0x1, NULL, NULL },
-    { "toAutomatonWithOrgApacheLuceneIndexTerm:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "getTerm", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 2, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexTerm:withInt:);
+  methods[2].selector = @selector(toAutomatonWithOrgApacheLuceneIndexTerm:);
+  methods[3].selector = @selector(getTerm);
+  methods[4].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "WILDCARD_STRING", "WILDCARD_STRING", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneSearchWildcardQuery_WILDCARD_STRING },
-    { "WILDCARD_CHAR", "WILDCARD_CHAR", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneSearchWildcardQuery_WILDCARD_CHAR },
-    { "WILDCARD_ESCAPE", "WILDCARD_ESCAPE", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneSearchWildcardQuery_WILDCARD_ESCAPE },
+    { "WILDCARD_STRING", "C", .constantValue.asUnichar = OrgApacheLuceneSearchWildcardQuery_WILDCARD_STRING, 0x19, -1, -1, -1, -1 },
+    { "WILDCARD_CHAR", "C", .constantValue.asUnichar = OrgApacheLuceneSearchWildcardQuery_WILDCARD_CHAR, 0x19, -1, -1, -1, -1 },
+    { "WILDCARD_ESCAPE", "C", .constantValue.asUnichar = OrgApacheLuceneSearchWildcardQuery_WILDCARD_ESCAPE, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchWildcardQuery = { 2, "WildcardQuery", "org.apache.lucene.search", NULL, 0x1, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;", "LOrgApacheLuceneIndexTerm;I", "toAutomaton", "toString", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchWildcardQuery = { "WildcardQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 5, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchWildcardQuery;
 }
 
@@ -108,9 +120,9 @@ OrgApacheLuceneSearchWildcardQuery *create_OrgApacheLuceneSearchWildcardQuery_in
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchWildcardQuery_toAutomatonWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *wildcardquery) {
   OrgApacheLuceneSearchWildcardQuery_initialize();
   id<JavaUtilList> automata = create_JavaUtilArrayList_init();
-  NSString *wildcardText = [((OrgApacheLuceneIndexTerm *) nil_chk(wildcardquery)) text];
-  for (jint i = 0; i < ((jint) [((NSString *) nil_chk(wildcardText)) length]); ) {
-    jint c = [wildcardText codePointAt:i];
+  NSString *wildcardText = JreRetainedLocalValue([((OrgApacheLuceneIndexTerm *) nil_chk(wildcardquery)) text]);
+  for (jint i = 0; i < [((NSString *) nil_chk(wildcardText)) java_length]; ) {
+    jint c = [wildcardText java_codePointAt:i];
     jint length = JavaLangCharacter_charCountWithInt_(c);
     switch (c) {
       case OrgApacheLuceneSearchWildcardQuery_WILDCARD_STRING:
@@ -120,8 +132,8 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchWildcardQuery_toAuto
       [automata addWithId:OrgApacheLuceneUtilAutomatonAutomata_makeAnyChar()];
       break;
       case OrgApacheLuceneSearchWildcardQuery_WILDCARD_ESCAPE:
-      if (i + length < ((jint) [wildcardText length])) {
-        jint nextChar = [wildcardText codePointAt:i + length];
+      if (i + length < [wildcardText java_length]) {
+        jint nextChar = [wildcardText java_codePointAt:i + length];
         length += JavaLangCharacter_charCountWithInt_(nextChar);
         [automata addWithId:OrgApacheLuceneUtilAutomatonAutomata_makeCharWithInt_(nextChar)];
         break;

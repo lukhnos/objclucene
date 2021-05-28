@@ -8,14 +8,16 @@
 #include "org/apache/lucene/util/packed/BulkOperationPacked.h"
 #include "org/apache/lucene/util/packed/BulkOperationPacked8.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/BulkOperationPacked8 must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilPackedBulkOperationPacked8
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilPackedBulkOperationPacked8_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneUtilPackedBulkOperationPacked8_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)decodeWithLongArray:(IOSLongArray *)blocks
                     withInt:(jint)blocksOffset
@@ -64,29 +66,39 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BulkOperationPacked8", NULL, 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithByteArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithByteArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked8 = { 2, "BulkOperationPacked8", "org.apache.lucene.util.packed", NULL, 0x10, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(decodeWithLongArray:withInt:withIntArray:withInt:withInt:);
+  methods[2].selector = @selector(decodeWithByteArray:withInt:withIntArray:withInt:withInt:);
+  methods[3].selector = @selector(decodeWithLongArray:withInt:withLongArray:withInt:withInt:);
+  methods[4].selector = @selector(decodeWithByteArray:withInt:withLongArray:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "decode", "[JI[III", "[BI[III", "[JI[JII", "[BI[JII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked8 = { "BulkOperationPacked8", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x10, 5, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedBulkOperationPacked8;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedBulkOperationPacked8_init(OrgApacheLuceneUtilPackedBulkOperationPacked8 *self) {
-  OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(self, 8);
+void OrgApacheLuceneUtilPackedBulkOperationPacked8_initPackagePrivate(OrgApacheLuceneUtilPackedBulkOperationPacked8 *self) {
+  OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(self, 8);
 }
 
-OrgApacheLuceneUtilPackedBulkOperationPacked8 *new_OrgApacheLuceneUtilPackedBulkOperationPacked8_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked8, init)
+OrgApacheLuceneUtilPackedBulkOperationPacked8 *new_OrgApacheLuceneUtilPackedBulkOperationPacked8_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked8, initPackagePrivate)
 }
 
-OrgApacheLuceneUtilPackedBulkOperationPacked8 *create_OrgApacheLuceneUtilPackedBulkOperationPacked8_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked8, init)
+OrgApacheLuceneUtilPackedBulkOperationPacked8 *create_OrgApacheLuceneUtilPackedBulkOperationPacked8_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked8, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedBulkOperationPacked8)

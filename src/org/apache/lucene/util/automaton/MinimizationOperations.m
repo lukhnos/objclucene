@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/automaton/MinimizationOperations.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -17,6 +18,10 @@
 #include "org/apache/lucene/util/automaton/Operations.h"
 #include "org/apache/lucene/util/automaton/Transition.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/MinimizationOperations must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilAutomatonMinimizationOperations ()
 
 - (instancetype)init;
@@ -25,9 +30,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonMinimizationOperations_init(OrgApacheLuceneUtilAutomatonMinimizationOperations *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonMinimizationOperations *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonMinimizationOperations *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonMinimizationOperations *create_OrgApacheLuceneUtilAutomatonMinimizationOperations_init();
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonMinimizationOperations *create_OrgApacheLuceneUtilAutomatonMinimizationOperations_init(void);
 
 @implementation OrgApacheLuceneUtilAutomatonMinimizationOperations
 
@@ -44,12 +49,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "MinimizationOperations", NULL, 0x2, NULL, NULL },
-    { "minimizeWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "minimize", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 0, 1, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.MinimizationOperations$IntPair;", "Lorg.apache.lucene.util.automaton.MinimizationOperations$StateList;", "Lorg.apache.lucene.util.automaton.MinimizationOperations$StateListNode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonMinimizationOperations = { 2, "MinimizationOperations", "org.apache.lucene.util.automaton", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 3, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(minimizeWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "minimize", "LOrgApacheLuceneUtilAutomatonAutomaton;I", "LOrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair;LOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList;LOrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonMinimizationOperations = { "MinimizationOperations", "org.apache.lucene.util.automaton", ptrTable, methods, NULL, 7, 0x11, 2, 0, -1, 2, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonMinimizationOperations;
 }
 
@@ -82,7 +93,8 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonMinimizationO
   }
   a = OrgApacheLuceneUtilAutomatonOperations_totalizeWithOrgApacheLuceneUtilAutomatonAutomaton_(a);
   IOSIntArray *sigma = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getStartPoints];
-  jint sigmaLen = ((IOSIntArray *) nil_chk(sigma))->size_, statesLen = [a getNumStates];
+  jint sigmaLen = ((IOSIntArray *) nil_chk(sigma))->size_;
+  jint statesLen = [a getNumStates];
   IOSObjectArray *reverse = [IOSObjectArray arrayWithDimensions:2 lengths:(jint[]){ statesLen, sigmaLen } type:JavaUtilArrayList_class_()];
   IOSObjectArray *partition = [IOSObjectArray arrayWithLength:statesLen type:JavaUtilHashSet_class_()];
   IOSObjectArray *splitblock = [IOSObjectArray arrayWithLength:statesLen type:JavaUtilArrayList_class_()];
@@ -91,7 +103,9 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonMinimizationO
   IOSObjectArray *active2 = [IOSObjectArray arrayWithDimensions:2 lengths:(jint[]){ statesLen, sigmaLen } type:OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_class_()];
   JavaUtilLinkedList *pending = create_JavaUtilLinkedList_init();
   JavaUtilBitSet *pending2 = create_JavaUtilBitSet_initWithInt_(sigmaLen * statesLen);
-  JavaUtilBitSet *split = create_JavaUtilBitSet_initWithInt_(statesLen), *refine = create_JavaUtilBitSet_initWithInt_(statesLen), *refine2 = create_JavaUtilBitSet_initWithInt_(statesLen);
+  JavaUtilBitSet *split = create_JavaUtilBitSet_initWithInt_(statesLen);
+  JavaUtilBitSet *refine = create_JavaUtilBitSet_initWithInt_(statesLen);
+  JavaUtilBitSet *refine2 = create_JavaUtilBitSet_initWithInt_(statesLen);
   for (jint q = 0; q < statesLen; q++) {
     IOSObjectArray_SetAndConsume(splitblock, q, new_JavaUtilArrayList_init());
     IOSObjectArray_SetAndConsume(partition, q, new_JavaUtilHashSet_init());
@@ -132,7 +146,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonMinimizationO
     jint p = ((OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair *) nil_chk(ip))->n1_;
     jint x = ip->n2_;
     [pending2 clearWithInt:x * statesLen + p];
-    for (OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *m = ((OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(active, p)), x)))->first_; m != nil; m = m->next_) {
+    for (OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *m = JreRetainedLocalValue(((OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(active, p)), x)))->first_); m != nil; m = m->next_) {
       JavaUtilArrayList *r = IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(reverse, m->q_)), x);
       if (r != nil) {
         for (JavaLangInteger *boxed__ in r) {
@@ -161,14 +175,16 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonMinimizationO
           *IOSIntArray_GetRef(block, s) = k;
           for (jint c = 0; c < sigmaLen; c++) {
             OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *sn = IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(active2, s)), c);
-            if (sn != nil && sn->sl_ == IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(active, j)), c)) {
+            if (sn != nil && JreObjectEqualsEquals(sn->sl_, IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(active, j)), c))) {
               [sn remove];
               IOSObjectArray_Set(nil_chk(IOSObjectArray_Get(active2, s)), c, [((OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(active, k)), c))) addWithInt:s]);
             }
           }
         }
         for (jint c = 0; c < sigmaLen; c++) {
-          jint aj = ((OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(active, j)), c)))->size_, ak = ((OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(active, k)), c)))->size_, ofs = c * statesLen;
+          jint aj = ((OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(active, j)), c)))->size_;
+          jint ak = ((OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(active, k)), c)))->size_;
+          jint ofs = c * statesLen;
           if (![pending2 getWithInt:ofs + j] && 0 < aj && aj <= ak) {
             [pending2 setWithInt:ofs + j];
             [pending addWithId:create_OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair_initWithInt_withInt_(j, c)];
@@ -239,14 +255,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonMinimizationOperati
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:", "IntPair", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "n1_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "n2_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "n1_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "n2_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair = { 2, "IntPair", "org.apache.lucene.util.automaton", "MinimizationOperations", 0x18, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "II", "LOrgApacheLuceneUtilAutomatonMinimizationOperations;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair = { "IntPair", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x18, 1, 2, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair;
 }
 
@@ -270,16 +292,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonMinimizationOperati
 
 @implementation OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList
 
-- (OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *)addWithInt:(jint)q {
-  return create_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_initWithInt_withOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_(q, self);
-}
-
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_init(self);
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
+
+- (OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *)addWithInt:(jint)q {
+  return create_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_initWithInt_withOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_(q, self);
+}
 
 - (void)dealloc {
   RELEASE_(first_);
@@ -288,16 +310,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addWithInt:", "add", "Lorg.apache.lucene.util.automaton.MinimizationOperations$StateListNode;", 0x0, NULL, NULL },
-    { "init", "StateList", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode;", 0x0, 0, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(addWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "size_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "first_", NULL, 0x0, "Lorg.apache.lucene.util.automaton.MinimizationOperations$StateListNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "last_", NULL, 0x0, "Lorg.apache.lucene.util.automaton.MinimizationOperations$StateListNode;", NULL, NULL, .constantValue.asLong = 0 },
+    { "size_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "first_", "LOrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "last_", "LOrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList = { 2, "StateList", "org.apache.lucene.util.automaton", "MinimizationOperations", 0x18, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "add", "I", "LOrgApacheLuceneUtilAutomatonMinimizationOperations;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList = { "StateList", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x18, 2, 3, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList;
 }
 
@@ -327,9 +356,9 @@ withOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList:(OrgApacheLucen
 
 - (void)remove {
   ((OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *) nil_chk(sl_))->size_--;
-  if (sl_->first_ == self) JreStrongAssign(&sl_->first_, next_);
+  if (JreObjectEqualsEquals(sl_->first_, self)) JreStrongAssign(&sl_->first_, next_);
   else JreStrongAssign(&((OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *) nil_chk(prev_))->next_, next_);
-  if (sl_->last_ == self) JreStrongAssign(&sl_->last_, prev_);
+  if (JreObjectEqualsEquals(sl_->last_, self)) JreStrongAssign(&sl_->last_, prev_);
   else JreStrongAssign(&((OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *) nil_chk(next_))->prev_, prev_);
 }
 
@@ -341,17 +370,24 @@ withOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList:(OrgApacheLucen
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList:", "StateListNode", NULL, 0x0, NULL, NULL },
-    { "remove", NULL, "V", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList:);
+  methods[1].selector = @selector(remove);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "q_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x0, "Lorg.apache.lucene.util.automaton.MinimizationOperations$StateListNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "prev_", NULL, 0x0, "Lorg.apache.lucene.util.automaton.MinimizationOperations$StateListNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sl_", NULL, 0x10, "Lorg.apache.lucene.util.automaton.MinimizationOperations$StateList;", NULL, NULL, .constantValue.asLong = 0 },
+    { "q_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "next_", "LOrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "prev_", "LOrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "sl_", "LOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode = { 2, "StateListNode", "org.apache.lucene.util.automaton", "MinimizationOperations", 0x18, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ILOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList;", "LOrgApacheLuceneUtilAutomatonMinimizationOperations;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode = { "StateListNode", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x18, 2, 4, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode;
 }
 

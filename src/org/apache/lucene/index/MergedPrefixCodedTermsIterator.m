@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/index/MergedPrefixCodedTermsIterator.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/FieldTermIterator.h"
@@ -12,10 +11,16 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MergedPrefixCodedTermsIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @implementation OrgApacheLuceneIndexMergedPrefixCodedTermsIterator
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)termsList {
-  OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(self, termsList);
+- (instancetype)initPackagePrivateWithJavaUtilList:(id<JavaUtilList>)termsList {
+  OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initPackagePrivateWithJavaUtilList_(self, termsList);
   return self;
 }
 
@@ -25,24 +30,24 @@
       JreStrongAssign(&field_, nil);
       return nil;
     }
-    OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *top = [fieldQueue_ pop];
+    OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *top = JreRetainedLocalValue([fieldQueue_ pop]);
     [termQueue_ addWithId:top];
     JreStrongAssign(&field_, ((OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *) nil_chk(top))->field_);
-    JreAssert((field_ != nil), (@"org/apache/lucene/index/MergedPrefixCodedTermsIterator.java:90 condition failed: assert field != null;"));
+    JreAssert(field_ != nil, @"org/apache/lucene/index/MergedPrefixCodedTermsIterator.java:90 condition failed: assert field != null;");
     while ([fieldQueue_ size] != 0 && [((NSString *) nil_chk(((OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *) nil_chk([fieldQueue_ top]))->field_)) isEqual:top->field_]) {
-      OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *iter = [fieldQueue_ pop];
-      JreAssert(([((NSString *) nil_chk(((OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *) nil_chk(iter))->field_)) isEqual:field_]), (@"org/apache/lucene/index/MergedPrefixCodedTermsIterator.java:94 condition failed: assert iter.field.equals(field);"));
+      OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *iter = JreRetainedLocalValue([fieldQueue_ pop]);
+      JreAssert([((NSString *) nil_chk(((OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *) nil_chk(iter))->field_)) isEqual:field_], @"org/apache/lucene/index/MergedPrefixCodedTermsIterator.java:94 condition failed: assert iter.field.equals(field);");
       JreStrongAssign(&iter->field_, field_);
       [termQueue_ addWithId:iter];
     }
     return ((OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *) nil_chk([termQueue_ top]))->bytes_;
   }
   else {
-    OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *top = [termQueue_ top];
+    OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *top = JreRetainedLocalValue([termQueue_ top]);
     if ([((OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *) nil_chk(top)) next] == nil) {
       [termQueue_ pop];
     }
-    else if ([top field] != field_) {
+    else if (!JreStringEqualsEquals([top field], field_)) {
       [termQueue_ pop];
       [((OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue *) nil_chk(fieldQueue_)) addWithId:top];
     }
@@ -74,29 +79,37 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "MergedPrefixCodedTermsIterator", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/index/PrefixCodedTerms;>;)V" },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "field", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "delGen", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithJavaUtilList:);
+  methods[1].selector = @selector(next);
+  methods[2].selector = @selector(field);
+  methods[3].selector = @selector(delGen);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termQueue_", NULL, 0x10, "Lorg.apache.lucene.index.MergedPrefixCodedTermsIterator$TermMergeQueue;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldQueue_", NULL, 0x10, "Lorg.apache.lucene.index.MergedPrefixCodedTermsIterator$FieldMergeQueue;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "termQueue_", "LOrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fieldQueue_", "LOrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.MergedPrefixCodedTermsIterator$TermMergeQueue;", "Lorg.apache.lucene.index.MergedPrefixCodedTermsIterator$FieldMergeQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergedPrefixCodedTermsIterator = { 2, "MergedPrefixCodedTermsIterator", "org.apache.lucene.index", NULL, 0x0, 4, methods, 3, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/index/PrefixCodedTerms;>;)V", "LOrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue;LOrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergedPrefixCodedTermsIterator = { "MergedPrefixCodedTermsIterator", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 4, 3, -1, 2, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator;
 }
 
 @end
 
-void OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *self, id<JavaUtilList> termsList) {
-  OrgApacheLuceneIndexFieldTermIterator_init(self);
+void OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initPackagePrivateWithJavaUtilList_(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *self, id<JavaUtilList> termsList) {
+  OrgApacheLuceneIndexFieldTermIterator_initPackagePrivate(self);
   JreStrongAssignAndConsume(&self->fieldQueue_, new_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue_initWithInt_([((id<JavaUtilList>) nil_chk(termsList)) size]));
   for (OrgApacheLuceneIndexPrefixCodedTerms * __strong terms in termsList) {
-    OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *iter = [((OrgApacheLuceneIndexPrefixCodedTerms *) nil_chk(terms)) iterator];
+    OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *iter = JreRetainedLocalValue([((OrgApacheLuceneIndexPrefixCodedTerms *) nil_chk(terms)) iterator]);
     [((OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *) nil_chk(iter)) next];
     if (iter->field_ != nil) {
       [self->fieldQueue_ addWithId:iter];
@@ -105,12 +118,12 @@ void OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(Or
   JreStrongAssignAndConsume(&self->termQueue_, new_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue_initWithInt_([termsList size]));
 }
 
-OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *new_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(id<JavaUtilList> termsList) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator, initWithJavaUtilList_, termsList)
+OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *new_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initPackagePrivateWithJavaUtilList_(id<JavaUtilList> termsList) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator, initPackagePrivateWithJavaUtilList_, termsList)
 }
 
-OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *create_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(id<JavaUtilList> termsList) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator, initWithJavaUtilList_, termsList)
+OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *create_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initPackagePrivateWithJavaUtilList_(id<JavaUtilList> termsList) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator, initPackagePrivateWithJavaUtilList_, termsList)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator)
@@ -137,12 +150,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergedPrefixCodedTermsItera
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TermMergeQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 1, 2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue = { 2, "TermMergeQueue", "org.apache.lucene.index", "MergedPrefixCodedTermsIterator", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneIndexPrefixCodedTerms_TermIterator;LOrgApacheLuceneIndexPrefixCodedTerms_TermIterator;", "LOrgApacheLuceneIndexMergedPrefixCodedTermsIterator;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue = { "TermMergeQueue", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0xa, 2, 0, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue;
 }
 
@@ -175,12 +194,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergedPrefixCodedTermsItera
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "FieldMergeQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 1, 2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue = { 2, "FieldMergeQueue", "org.apache.lucene.index", "MergedPrefixCodedTermsIterator", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneIndexPrefixCodedTerms_TermIterator;LOrgApacheLuceneIndexPrefixCodedTerms_TermIterator;", "LOrgApacheLuceneIndexMergedPrefixCodedTermsIterator;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue = { "FieldMergeQueue", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0xa, 2, 0, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentFloatDocValuesField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentFloatDocValuesField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentFloatDocValuesField || defined(INCLUDE_OrgApacheLuceneDocumentFloatDocValuesField))
 #define OrgApacheLuceneDocumentFloatDocValuesField_
 
@@ -22,14 +28,14 @@
 
 /*!
  @brief Syntactic sugar for encoding floats as NumericDocValues
- via <code>Float.floatToRawIntBits(float)</code>.
+  via <code>Float.floatToRawIntBits(float)</code>.
  <p>
- Per-document floating point values can be retrieved via
+  Per-document floating point values can be retrieved via 
  <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>.
- <p>
- <b>NOTE</b>: In most all cases this will be rather inefficient,
- requiring four bytes per document. Consider encoding floating
- point values yourself with only as much precision as you require.
+  <p>
+  <b>NOTE</b>: In most all cases this will be rather inefficient,
+  requiring four bytes per document. Consider encoding floating
+  point values yourself with only as much precision as you require.
  */
 @interface OrgApacheLuceneDocumentFloatDocValuesField : OrgApacheLuceneDocumentNumericDocValuesField
 
@@ -39,14 +45,19 @@
  @brief Creates a new DocValues field with the specified 32-bit float value
  @param name field name
  @param value 32-bit float value
- @throws IllegalArgumentException if the field name is null
+ @throw IllegalArgumentExceptionif the field name is null
  */
-- (instancetype)initWithNSString:(NSString *)name
-                       withFloat:(jfloat)value;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                 withFloat:(jfloat)value;
 
 - (void)setFloatValueWithFloat:(jfloat)value;
 
 - (void)setLongValueWithLong:(jlong)value;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                                  withLong:(jlong)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -62,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentFloatDocValuesField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentFloatDocValuesField")

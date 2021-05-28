@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisAnalyzer))
 #define OrgApacheLuceneAnalysisAnalyzer_
 
@@ -28,75 +34,72 @@
 @class OrgApacheLuceneUtilVersion;
 
 /*!
- @brief An Analyzer builds TokenStreams, which analyze text.
- It thus represents a
- policy for extracting index terms from text.
+ @brief An Analyzer builds TokenStreams, which analyze text.It thus represents a
+  policy for extracting index terms from text.
  <p>
- In order to define what analysis is done, subclasses must define their
+  In order to define what analysis is done, subclasses must define their 
  <code>TokenStreamComponents</code> in <code>createComponents(String)</code>.
- The components are then reused in each call to <code>tokenStream(String,Reader)</code>.
- <p>
- Simple example:
+  The components are then reused in each call to <code>tokenStream(String, Reader)</code>.
+  <p>
+  Simple example: 
  <pre class="prettyprint">
- Analyzer analyzer = new Analyzer() {
- &commat;&commat;Override
- protected TokenStreamComponents createComponents(String fieldName) {
- Tokenizer source = new FooTokenizer(reader);
- TokenStream filter = new FooFilter(source);
- filter = new BarFilter(filter);
- return new TokenStreamComponents(source, filter);
- }
- };
+  Analyzer analyzer = new Analyzer() {
+   &commat;&commat;Override
+    protected TokenStreamComponents createComponents(String fieldName) {
+      Tokenizer source = new FooTokenizer(reader);
+      TokenStream filter = new FooFilter(source);
+      filter = new BarFilter(filter);
+      return new TokenStreamComponents(source, filter);
+    }
+  }; 
  
 @endcode
- For more examples, see the <code>Analysis package documentation</code>.
- <p>
- For some concrete implementations bundled with Lucene, look in the analysis modules:
+  For more examples, see the <code>Analysis package documentation</code>.
+  <p>
+  For some concrete implementations bundled with Lucene, look in the analysis modules: 
  <ul>
- <li><a href="/../analyzers-common/overview-summary.html">Common</a>:
- Analyzers for indexing content in different languages and domains.
- <li><a href="/../analyzers-icu/overview-summary.html">ICU</a>:
- Exposes functionality from ICU to Apache Lucene. 
- <li><a href="/../analyzers-kuromoji/overview-summary.html">Kuromoji</a>:
- Morphological analyzer for Japanese text.
- <li><a href="/../analyzers-morfologik/overview-summary.html">Morfologik</a>:
- Dictionary-driven lemmatization for the Polish language.
- <li><a href="/../analyzers-phonetic/overview-summary.html">Phonetic</a>:
- Analysis for indexing phonetic signatures (for sounds-alike search).
- <li><a href="/../analyzers-smartcn/overview-summary.html">Smart Chinese</a>:
- Analyzer for Simplified Chinese, which indexes words.
- <li><a href="/../analyzers-stempel/overview-summary.html">Stempel</a>:
- Algorithmic Stemmer for the Polish Language.
- <li><a href="/../analyzers-uima/overview-summary.html">UIMA</a>: 
- Analysis integration with Apache UIMA. 
+    <li><a href="{@@docRoot}/../analyzers-common/overview-summary.html">Common</a>:
+        Analyzers for indexing content in different languages and domains.   
+ <li><a href="{@@docRoot}/../analyzers-icu/overview-summary.html">ICU</a>:
+        Exposes functionality from ICU to Apache Lucene.    
+ <li><a href="{@@docRoot}/../analyzers-kuromoji/overview-summary.html">Kuromoji</a>:
+        Morphological analyzer for Japanese text.   
+ <li><a href="{@@docRoot}/../analyzers-morfologik/overview-summary.html">Morfologik</a>:
+        Dictionary-driven lemmatization for the Polish language.   
+ <li><a href="{@@docRoot}/../analyzers-phonetic/overview-summary.html">Phonetic</a>:
+        Analysis for indexing phonetic signatures (for sounds-alike search).   
+ <li><a href="{@@docRoot}/../analyzers-smartcn/overview-summary.html">Smart Chinese</a>:
+        Analyzer for Simplified Chinese, which indexes words.   
+ <li><a href="{@@docRoot}/../analyzers-stempel/overview-summary.html">Stempel</a>:
+        Algorithmic Stemmer for the Polish Language.   
+ <li><a href="{@@docRoot}/../analyzers-uima/overview-summary.html">UIMA</a>: 
+        Analysis integration with Apache UIMA.  
  </ul>
  */
 @interface OrgApacheLuceneAnalysisAnalyzer : NSObject < JavaIoCloseable > {
  @public
   OrgApacheLuceneUtilCloseableThreadLocal *storedValue_;
 }
-
-+ (OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)GLOBAL_REUSE_STRATEGY;
-
-+ (OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)PER_FIELD_REUSE_STRATEGY;
+@property (readonly, class, strong) OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *GLOBAL_REUSE_STRATEGY NS_SWIFT_NAME(GLOBAL_REUSE_STRATEGY);
+@property (readonly, class, strong) OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *PER_FIELD_REUSE_STRATEGY NS_SWIFT_NAME(PER_FIELD_REUSE_STRATEGY);
 
 #pragma mark Public
 
 /*!
  @brief Create a new Analyzer, reusing the same set of components per-thread
- across calls to <code>tokenStream(String,Reader)</code>.
+  across calls to <code>tokenStream(String, Reader)</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Expert: create a new Analyzer with a custom <code>ReuseStrategy</code>.
  <p>
- NOTE: if you just want to reuse on a per-field basis, it's easier to
- use a subclass of <code>AnalyzerWrapper</code> such as 
- <a href="/../analyzers-common/org/apache/lucene/analysis/miscellaneous/PerFieldAnalyzerWrapper.html">
- PerFieldAnalyerWrapper</a> instead.
+  NOTE: if you just want to reuse on a per-field basis, it's easier to
+  use a subclass of <code>AnalyzerWrapper</code> such as  
+ <a href="{@@docRoot}/../analyzers-common/org/apache/lucene/analysis/miscellaneous/PerFieldAnalyzerWrapper.html">
+  PerFieldAnalyerWrapper</a> instead.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)reuseStrategy;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)reuseStrategy;
 
 /*!
  @brief Frees persistent resources used by this Analyzer
@@ -105,29 +108,28 @@
 
 /*!
  @brief Just like <code>getPositionIncrementGap</code>, except for
- Token offsets instead.
- By default this returns 1.
+  Token offsets instead.By default this returns 1.
  This method is only called if the field
- produced at least one token for indexing.
+  produced at least one token for indexing.
  @param fieldName the field just indexed
  @return offset gap, added to the next token emitted from <code>tokenStream(String,Reader)</code>.
- This value must be <code>>= 0</code>.
+          This value must be <code>>= 0</code>.
  */
 - (jint)getOffsetGapWithNSString:(NSString *)fieldName;
 
 /*!
  @brief Invoked before indexing a IndexableField instance if
- terms have already been added to that field.
- This allows custom
- analyzers to place an automatic position increment gap between
- IndexbleField instances using the same field name.  The default value
- position increment gap is 0.  With a 0 position increment gap and
- the typical default token position increment of 1, all terms in a field,
- including across IndexableField instances, are in successive positions, allowing
- exact PhraseQuery matches, for instance, across IndexableField instance boundaries.
+  terms have already been added to that field.This allows custom
+  analyzers to place an automatic position increment gap between
+  IndexbleField instances using the same field name.
+ The default value
+  position increment gap is 0.  With a 0 position increment gap and
+  the typical default token position increment of 1, all terms in a field,
+  including across IndexableField instances, are in successive positions, allowing
+  exact PhraseQuery matches, for instance, across IndexableField instance boundaries.
  @param fieldName IndexableField name being indexed.
  @return position increment gap, added to the next token emitted from <code>tokenStream(String,Reader)</code>.
- This value must be <code>>= 0</code>.
+          This value must be <code>>= 0</code>.
  */
 - (jint)getPositionIncrementGapWithNSString:(NSString *)fieldName;
 
@@ -148,51 +150,51 @@
 
 /*!
  @brief Returns a TokenStream suitable for <code>fieldName</code>, tokenizing
- the contents of <code>reader</code>.
+  the contents of <code>reader</code>.
  <p>
- This method uses <code>createComponents(String)</code> to obtain an
- instance of <code>TokenStreamComponents</code>. It returns the sink of the
- components and stores the components internally. Subsequent calls to this
- method will reuse the previously stored components after resetting them
- through <code>TokenStreamComponents.setReader(Reader)</code>.
- <p>
- <b>NOTE:</b> After calling this method, the consumer must follow the 
- workflow described in <code>TokenStream</code> to properly consume its contents.
- See the <code>Analysis package documentation</code> for
- some examples demonstrating this.
- <b>NOTE:</b> If your data is available as a <code>String</code>, use
- <code>tokenStream(String,String)</code> which reuses a <code>StringReader</code>-like
- instance internally.
+  This method uses <code>createComponents(String)</code> to obtain an
+  instance of <code>TokenStreamComponents</code>. It returns the sink of the
+  components and stores the components internally. Subsequent calls to this
+  method will reuse the previously stored components after resetting them
+  through <code>TokenStreamComponents.setReader(Reader)</code>.
+  <p>
+  <b>NOTE:</b> After calling this method, the consumer must follow the 
+  workflow described in <code>TokenStream</code> to properly consume its contents.
+  See the <code>Analysis package documentation</code> for
+  some examples demonstrating this.  
+ <b>NOTE:</b> If your data is available as a <code>String</code>, use 
+ <code>tokenStream(String, String)</code> which reuses a <code>StringReader</code>-like
+  instance internally.
  @param fieldName the name of the field the created TokenStream is used for
  @param reader the reader the streams source reads from
  @return TokenStream for iterating the analyzed content of <code>reader</code>
- @throws AlreadyClosedException if the Analyzer is closed.
- @throws IOException if an i/o error occurs.
- - seealso: #tokenStream(String,String)
+ @throw AlreadyClosedExceptionif the Analyzer is closed.
+ @throw IOExceptionif an i/o error occurs.
+ - seealso: #tokenStream(String, String)
  */
 - (OrgApacheLuceneAnalysisTokenStream *)tokenStreamWithNSString:(NSString *)fieldName
                                                withJavaIoReader:(JavaIoReader *)reader;
 
 /*!
  @brief Returns a TokenStream suitable for <code>fieldName</code>, tokenizing
- the contents of <code>text</code>.
+  the contents of <code>text</code>.
  <p>
- This method uses <code>createComponents(String)</code> to obtain an
- instance of <code>TokenStreamComponents</code>. It returns the sink of the
- components and stores the components internally. Subsequent calls to this
- method will reuse the previously stored components after resetting them
- through <code>TokenStreamComponents.setReader(Reader)</code>.
- <p>
- <b>NOTE:</b> After calling this method, the consumer must follow the 
- workflow described in <code>TokenStream</code> to properly consume its contents.
- See the <code>Analysis package documentation</code> for
- some examples demonstrating this.
+  This method uses <code>createComponents(String)</code> to obtain an
+  instance of <code>TokenStreamComponents</code>. It returns the sink of the
+  components and stores the components internally. Subsequent calls to this
+  method will reuse the previously stored components after resetting them
+  through <code>TokenStreamComponents.setReader(Reader)</code>.
+  <p>
+  <b>NOTE:</b> After calling this method, the consumer must follow the 
+  workflow described in <code>TokenStream</code> to properly consume its contents.
+  See the <code>Analysis package documentation</code> for
+  some examples demonstrating this.
  @param fieldName the name of the field the created TokenStream is used for
  @param text the String the streams source reads from
  @return TokenStream for iterating the analyzed content of <code>reader</code>
- @throws AlreadyClosedException if the Analyzer is closed.
- @throws IOException if an i/o error occurs (may rarely happen for strings).
- - seealso: #tokenStream(String,Reader)
+ @throw AlreadyClosedExceptionif the Analyzer is closed.
+ @throw IOExceptionif an i/o error occurs (may rarely happen for strings).
+ - seealso: #tokenStream(String, Reader)
  */
 - (OrgApacheLuceneAnalysisTokenStream *)tokenStreamWithNSString:(NSString *)fieldName
                                                    withNSString:(NSString *)text;
@@ -201,9 +203,9 @@
 
 /*!
  @brief Creates a new <code>TokenStreamComponents</code> instance for this analyzer.
- @param fieldName
- the name of the fields content passed to the
- <code>TokenStreamComponents</code> sink as a reader
+ @param fieldName the name of the fields content passed to the
+            <code>TokenStreamComponents</code>
+   sink as a reader
  @return the <code>TokenStreamComponents</code> for this analyzer.
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
@@ -211,8 +213,8 @@
 /*!
  @brief Override this if you want to add a CharFilter chain.
  <p>
- The default implementation returns <code>reader</code>
- unchanged.
+  The default implementation returns <code>reader</code>
+  unchanged.
  @param fieldName IndexableField name being indexed
  @param reader original Reader
  @return reader, optionally decorated with CharFilter(s)
@@ -228,18 +230,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisAnalyzer, storedValue_, OrgApacheLuce
 
 /*!
  @brief A predefined <code>ReuseStrategy</code>  that reuses the same components for
- every field.
+  every field.
  */
-inline OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_get_GLOBAL_REUSE_STRATEGY();
+inline OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_get_GLOBAL_REUSE_STRATEGY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_GLOBAL_REUSE_STRATEGY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisAnalyzer, GLOBAL_REUSE_STRATEGY, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)
 
 /*!
  @brief A predefined <code>ReuseStrategy</code> that reuses components per-field by
- maintaining a Map of TokenStreamComponent per field name.
+  maintaining a Map of TokenStreamComponent per field name.
  */
-inline OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_get_PER_FIELD_REUSE_STRATEGY();
+inline OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_get_PER_FIELD_REUSE_STRATEGY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_PER_FIELD_REUSE_STRATEGY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisAnalyzer, PER_FIELD_REUSE_STRATEGY, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)
@@ -261,12 +263,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer)
 @class OrgApacheLuceneAnalysisTokenizer;
 
 /*!
- @brief This class encapsulates the outer components of a token stream.
- It provides
- access to the source (<code>Tokenizer</code>) and the outer end (sink), an
- instance of <code>TokenFilter</code> which also serves as the
- <code>TokenStream</code> returned by
- <code>Analyzer.tokenStream(String,Reader)</code>.
+ @brief This class encapsulates the outer components of a token stream.It provides
+  access to the source (<code>Tokenizer</code>) and the outer end (sink), an
+  instance of <code>TokenFilter</code> which also serves as the 
+ <code>TokenStream</code> returned by 
+ <code>Analyzer.tokenStream(String, Reader)</code>.
  */
 @interface OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents : NSObject {
  @public
@@ -276,12 +277,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer)
   OrgApacheLuceneAnalysisTokenizer *source_;
   /*!
    @brief Sink tokenstream, such as the outer tokenfilter decorating
- the chain.
-   This can be the source if there are no filters.
+  the chain.This can be the source if there are no filters.
    */
   OrgApacheLuceneAnalysisTokenStream *sink_;
   /*!
-   @brief Internal cache only used by <code>Analyzer.tokenStream(String,String)</code>.
+   @brief Internal cache only used by <code>Analyzer.tokenStream(String, String)</code>.
    */
   OrgApacheLuceneAnalysisReusableStringReader *reusableStringReader_;
 }
@@ -290,20 +290,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer)
 
 /*!
  @brief Creates a new <code>TokenStreamComponents</code> instance.
- @param source
- the analyzer's tokenizer
+ @param source the analyzer's tokenizer
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)source;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)source;
 
 /*!
  @brief Creates a new <code>TokenStreamComponents</code> instance.
- @param source
- the analyzer's tokenizer
- @param result
- the analyzer's resulting token stream
+ @param source the analyzer's tokenizer
+ @param result the analyzer's resulting token stream
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)source
-                  withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)result;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)source
+                            withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)result;
 
 /*!
  @brief Returns the component's <code>Tokenizer</code>
@@ -320,15 +317,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer)
 #pragma mark Protected
 
 /*!
- @brief Resets the encapsulated components with the given reader.
- If the components
- cannot be reset, an Exception should be thrown.
- @param reader
- a reader to reset the source component
- @throws IOException
+ @brief Resets the encapsulated components with the given reader.If the components
+  cannot be reset, an Exception should be thrown.
+ @param reader a reader to reset the source component
+ @throw IOException
  if the component's reset method throws an <code>IOException</code>
  */
 - (void)setReaderWithJavaIoReader:(JavaIoReader *)reader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -361,8 +360,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 
 /*!
- @brief Strategy defining how TokenStreamComponents are reused per call to
- <code>Analyzer.tokenStream(String,java.io.Reader)</code>.
+ @brief Strategy defining how TokenStreamComponents are reused per call to 
+ <code>Analyzer.tokenStream(String, java.io.Reader)</code>.
  */
 @interface OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy : NSObject
 
@@ -370,26 +369,24 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents
 
 /*!
  @brief Sole constructor.
- (For invocation by subclass constructors, typically implicit.) 
+ (For invocation by subclass constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Gets the reusable TokenStreamComponents for the field with the given name.
- @param analyzer Analyzer from which to get the reused components. Use
- <code>getStoredValue(Analyzer)</code> and <code>setStoredValue(Analyzer,Object)</code>
- to access the data on the Analyzer.
- @param fieldName Name of the field whose reusable TokenStreamComponents
- are to be retrieved
+ @param analyzer Analyzer from which to get the reused components. Use         
+ <code>getStoredValue(Analyzer)</code>  and <code>setStoredValue(Analyzer, Object)</code>         to access the data on the Analyzer.
+ @param fieldName Name of the field whose reusable TokenStreamComponents         are to be retrieved
  @return Reusable TokenStreamComponents for the field, or <code>null</code>
- if there was no previous components for the field
+          if there was no previous components for the field
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)getReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                                                                        withNSString:(NSString *)fieldName;
 
 /*!
  @brief Stores the given TokenStreamComponents as the reusable components for the
- field with the give name.
+  field with the give name.
  @param fieldName Name of the field whose TokenStreamComponents are being set
  @param components TokenStreamComponents which are to be reused for the field
  */
@@ -402,14 +399,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents
 /*!
  @brief Returns the currently stored value.
  @return Currently stored value or <code>null</code> if no value is stored
- @throws AlreadyClosedException if the Analyzer is closed.
+ @throw AlreadyClosedExceptionif the Analyzer is closed.
  */
 - (id)getStoredValueWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  @brief Sets the stored value.
  @param storedValue Value to store
- @throws AlreadyClosedException if the Analyzer is closed.
+ @throw AlreadyClosedExceptionif the Analyzer is closed.
  */
 - (void)setStoredValueWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                    withId:(id)storedValue;
@@ -424,4 +421,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisAnalyzer")

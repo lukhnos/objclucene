@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/tartarus/snowball/SnowballProgram.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -18,6 +19,10 @@
 #include "org/tartarus/snowball/Among.h"
 #include "org/tartarus/snowball/SnowballProgram.h"
 
+#if __has_feature(objc_arc)
+#error "org/tartarus/snowball/SnowballProgram must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgTartarusSnowballSnowballProgram () {
  @public
   IOSCharArray *current_;
@@ -27,7 +32,7 @@
 
 J2OBJC_FIELD_SETTER(OrgTartarusSnowballSnowballProgram, current_, IOSCharArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballSnowballProgram_get_EMPTY_ARGS();
+inline IOSObjectArray *OrgTartarusSnowballSnowballProgram_get_EMPTY_ARGS(void);
 static IOSObjectArray *OrgTartarusSnowballSnowballProgram_EMPTY_ARGS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballSnowballProgram, EMPTY_ARGS, IOSObjectArray *)
 
@@ -49,16 +54,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setCurrentWithNSString:(NSString *)value {
-  JreStrongAssign(&current_, [((NSString *) nil_chk(value)) toCharArray]);
+  JreStrongAssign(&current_, [((NSString *) nil_chk(value)) java_toCharArray]);
   cursor_ = 0;
-  limit_ = ((jint) [value length]);
+  limit_ = [value java_length];
   limit_backward_ = 0;
   bra_ = cursor_;
   ket_ = limit_;
 }
 
 - (NSString *)getCurrent {
-  return [NSString stringWithCharacters:current_ offset:0 length:limit_];
+  return [NSString java_stringWithCharacters:current_ offset:0 length:limit_];
 }
 
 - (void)setCurrentWithCharArray:(IOSCharArray *)text
@@ -205,11 +210,11 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
 }
 
 - (jboolean)eq_vWithJavaLangCharSequence:(id<JavaLangCharSequence>)s {
-  return [self eq_sWithInt:[((id<JavaLangCharSequence>) nil_chk(s)) length] withJavaLangCharSequence:s];
+  return [self eq_sWithInt:[((id<JavaLangCharSequence>) nil_chk(s)) java_length] withJavaLangCharSequence:s];
 }
 
 - (jboolean)eq_v_bWithJavaLangCharSequence:(id<JavaLangCharSequence>)s {
-  return [self eq_s_bWithInt:[((id<JavaLangCharSequence>) nil_chk(s)) length] withJavaLangCharSequence:s];
+  return [self eq_s_bWithInt:[((id<JavaLangCharSequence>) nil_chk(s)) java_length] withJavaLangCharSequence:s];
 }
 
 - (jint)find_amongWithOrgTartarusSnowballAmongArray:(IOSObjectArray *)v
@@ -258,7 +263,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
       if (w->method_ == nil) return w->result_;
       jboolean res;
       @try {
-        id resobj = [w->method_ invokeWithId:w->methodobject_ withNSObjectArray:OrgTartarusSnowballSnowballProgram_EMPTY_ARGS];
+        id resobj = JreRetainedLocalValue([w->method_ invokeWithId:w->methodobject_ withNSObjectArray:OrgTartarusSnowballSnowballProgram_EMPTY_ARGS]);
         res = [((NSString *) nil_chk([nil_chk(resobj) description])) isEqual:@"true"];
       }
       @catch (JavaLangReflectInvocationTargetException *e) {
@@ -321,7 +326,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
       if (w->method_ == nil) return w->result_;
       jboolean res;
       @try {
-        id resobj = [w->method_ invokeWithId:w->methodobject_ withNSObjectArray:OrgTartarusSnowballSnowballProgram_EMPTY_ARGS];
+        id resobj = JreRetainedLocalValue([w->method_ invokeWithId:w->methodobject_ withNSObjectArray:OrgTartarusSnowballSnowballProgram_EMPTY_ARGS]);
         res = [((NSString *) nil_chk([nil_chk(resobj) description])) isEqual:@"true"];
       }
       @catch (JavaLangReflectInvocationTargetException *e) {
@@ -341,7 +346,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
 - (jint)replace_sWithInt:(jint)c_bra
                  withInt:(jint)c_ket
 withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
-  jint adjustment = [((id<JavaLangCharSequence>) nil_chk(s)) length] - (c_ket - c_bra);
+  jint adjustment = [((id<JavaLangCharSequence>) nil_chk(s)) java_length] - (c_ket - c_bra);
   jint newLength = limit_ + adjustment;
   if (newLength > ((IOSCharArray *) nil_chk(current_))->size_) {
     IOSCharArray *newBuffer = [IOSCharArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(newLength, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR)];
@@ -349,9 +354,9 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
     JreStrongAssign(&current_, newBuffer);
   }
   if (adjustment != 0 && c_ket < limit_) {
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(current_, c_ket, current_, c_bra + [s length], limit_ - c_ket);
+    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(current_, c_ket, current_, c_bra + [s java_length], limit_ - c_ket);
   }
-  for (jint i = 0; i < [s length]; i++) *IOSCharArray_GetRef(nil_chk(current_), c_bra + i) = [s charAtWithInt:i];
+  for (jint i = 0; i < [s java_length]; i++) *IOSCharArray_GetRef(nil_chk(current_), c_bra + i) = [s charAtWithInt:i];
   limit_ += adjustment;
   if (cursor_ >= c_ket) cursor_ += adjustment;
   else if (cursor_ > c_bra) cursor_ = c_bra;
@@ -400,56 +405,90 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 2, -1, -1, -1, -1 },
+    { NULL, "[C", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 7, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 8, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 9, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 10, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 12, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 13, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 14, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 15, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 17, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 18, 19, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 20, 19, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 21, 22, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 23, 22, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 26, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 27, 25, -1, -1, -1, -1 },
+    { NULL, "LJavaLangStringBuilder;", 0x4, 28, 29, -1, -1, -1, -1 },
+    { NULL, "LJavaLangStringBuilder;", 0x4, 30, 29, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stem);
+  methods[2].selector = @selector(setCurrentWithNSString:);
+  methods[3].selector = @selector(getCurrent);
+  methods[4].selector = @selector(setCurrentWithCharArray:withInt:);
+  methods[5].selector = @selector(getCurrentBuffer);
+  methods[6].selector = @selector(getCurrentBufferLength);
+  methods[7].selector = @selector(copy_fromWithOrgTartarusSnowballSnowballProgram:);
+  methods[8].selector = @selector(in_groupingWithCharArray:withInt:withInt:);
+  methods[9].selector = @selector(in_grouping_bWithCharArray:withInt:withInt:);
+  methods[10].selector = @selector(out_groupingWithCharArray:withInt:withInt:);
+  methods[11].selector = @selector(out_grouping_bWithCharArray:withInt:withInt:);
+  methods[12].selector = @selector(in_rangeWithInt:withInt:);
+  methods[13].selector = @selector(in_range_bWithInt:withInt:);
+  methods[14].selector = @selector(out_rangeWithInt:withInt:);
+  methods[15].selector = @selector(out_range_bWithInt:withInt:);
+  methods[16].selector = @selector(eq_sWithInt:withJavaLangCharSequence:);
+  methods[17].selector = @selector(eq_s_bWithInt:withJavaLangCharSequence:);
+  methods[18].selector = @selector(eq_vWithJavaLangCharSequence:);
+  methods[19].selector = @selector(eq_v_bWithJavaLangCharSequence:);
+  methods[20].selector = @selector(find_amongWithOrgTartarusSnowballAmongArray:withInt:);
+  methods[21].selector = @selector(find_among_bWithOrgTartarusSnowballAmongArray:withInt:);
+  methods[22].selector = @selector(replace_sWithInt:withInt:withJavaLangCharSequence:);
+  methods[23].selector = @selector(slice_check);
+  methods[24].selector = @selector(slice_fromWithJavaLangCharSequence:);
+  methods[25].selector = @selector(slice_del);
+  methods[26].selector = @selector(insertWithInt:withInt:withJavaLangCharSequence:);
+  methods[27].selector = @selector(slice_toWithJavaLangStringBuilder:);
+  methods[28].selector = @selector(assign_toWithJavaLangStringBuilder:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_ARGS", "[LNSObject;", .constantValue.asLong = 0, 0x1a, -1, 31, -1, -1 },
+    { "current_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "cursor_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "limit_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "limit_backward_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "bra_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "ket_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "setCurrent", "LNSString;", "[CI", "copy_from", "LOrgTartarusSnowballSnowballProgram;", "in_grouping", "[CII", "in_grouping_b", "out_grouping", "out_grouping_b", "in_range", "II", "in_range_b", "out_range", "out_range_b", "eq_s", "ILJavaLangCharSequence;", "eq_s_b", "eq_v", "LJavaLangCharSequence;", "eq_v_b", "find_among", "[LOrgTartarusSnowballAmong;I", "find_among_b", "replace_s", "IILJavaLangCharSequence;", "slice_from", "insert", "slice_to", "LJavaLangStringBuilder;", "assign_to", &OrgTartarusSnowballSnowballProgram_EMPTY_ARGS };
+  static const J2ObjcClassInfo _OrgTartarusSnowballSnowballProgram = { "SnowballProgram", "org.tartarus.snowball", ptrTable, methods, fields, 7, 0x401, 29, 7, -1, -1, -1, -1, -1 };
+  return &_OrgTartarusSnowballSnowballProgram;
+}
+
 + (void)initialize {
   if (self == [OrgTartarusSnowballSnowballProgram class]) {
     JreStrongAssignAndConsume(&OrgTartarusSnowballSnowballProgram_EMPTY_ARGS, [IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]);
     J2OBJC_SET_INITIALIZED(OrgTartarusSnowballSnowballProgram)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SnowballProgram", NULL, 0x4, NULL, NULL },
-    { "stem", NULL, "Z", 0x401, NULL, NULL },
-    { "setCurrentWithNSString:", "setCurrent", "V", 0x1, NULL, NULL },
-    { "getCurrent", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "setCurrentWithCharArray:withInt:", "setCurrent", "V", 0x1, NULL, NULL },
-    { "getCurrentBuffer", NULL, "[C", 0x1, NULL, NULL },
-    { "getCurrentBufferLength", NULL, "I", 0x1, NULL, NULL },
-    { "copy_fromWithOrgTartarusSnowballSnowballProgram:", "copy_from", "V", 0x4, NULL, NULL },
-    { "in_groupingWithCharArray:withInt:withInt:", "in_grouping", "Z", 0x4, NULL, NULL },
-    { "in_grouping_bWithCharArray:withInt:withInt:", "in_grouping_b", "Z", 0x4, NULL, NULL },
-    { "out_groupingWithCharArray:withInt:withInt:", "out_grouping", "Z", 0x4, NULL, NULL },
-    { "out_grouping_bWithCharArray:withInt:withInt:", "out_grouping_b", "Z", 0x4, NULL, NULL },
-    { "in_rangeWithInt:withInt:", "in_range", "Z", 0x4, NULL, NULL },
-    { "in_range_bWithInt:withInt:", "in_range_b", "Z", 0x4, NULL, NULL },
-    { "out_rangeWithInt:withInt:", "out_range", "Z", 0x4, NULL, NULL },
-    { "out_range_bWithInt:withInt:", "out_range_b", "Z", 0x4, NULL, NULL },
-    { "eq_sWithInt:withJavaLangCharSequence:", "eq_s", "Z", 0x4, NULL, NULL },
-    { "eq_s_bWithInt:withJavaLangCharSequence:", "eq_s_b", "Z", 0x4, NULL, NULL },
-    { "eq_vWithJavaLangCharSequence:", "eq_v", "Z", 0x4, NULL, NULL },
-    { "eq_v_bWithJavaLangCharSequence:", "eq_v_b", "Z", 0x4, NULL, NULL },
-    { "find_amongWithOrgTartarusSnowballAmongArray:withInt:", "find_among", "I", 0x4, NULL, NULL },
-    { "find_among_bWithOrgTartarusSnowballAmongArray:withInt:", "find_among_b", "I", 0x4, NULL, NULL },
-    { "replace_sWithInt:withInt:withJavaLangCharSequence:", "replace_s", "I", 0x4, NULL, NULL },
-    { "slice_check", NULL, "V", 0x4, NULL, NULL },
-    { "slice_fromWithJavaLangCharSequence:", "slice_from", "V", 0x4, NULL, NULL },
-    { "slice_del", NULL, "V", 0x4, NULL, NULL },
-    { "insertWithInt:withInt:withJavaLangCharSequence:", "insert", "V", 0x4, NULL, NULL },
-    { "slice_toWithJavaLangStringBuilder:", "slice_to", "Ljava.lang.StringBuilder;", 0x4, NULL, NULL },
-    { "assign_toWithJavaLangStringBuilder:", "assign_to", "Ljava.lang.StringBuilder;", 0x4, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_ARGS", "EMPTY_ARGS", 0x1a, "[Ljava.lang.Object;", &OrgTartarusSnowballSnowballProgram_EMPTY_ARGS, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "cursor_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "limit_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "limit_backward_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bra_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ket_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgTartarusSnowballSnowballProgram = { 2, "SnowballProgram", "org.tartarus.snowball", NULL, 0x401, 29, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgTartarusSnowballSnowballProgram;
 }
 
 @end

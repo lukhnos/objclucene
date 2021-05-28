@@ -10,6 +10,10 @@
 #include "org/apache/lucene/util/packed/BulkOperationPacked.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/BulkOperationPacked must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilPackedBulkOperationPacked () {
  @public
   jint bitsPerValue_;
@@ -25,8 +29,8 @@
 
 @implementation OrgApacheLuceneUtilPackedBulkOperationPacked
 
-- (instancetype)initWithInt:(jint)bitsPerValue {
-  OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(self, bitsPerValue);
+- (instancetype)initPackagePrivateWithInt:(jint)bitsPerValue {
+  OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(self, bitsPerValue);
   return self;
 }
 
@@ -89,7 +93,7 @@
       nextValue = JreLShift64((bytes & ((JreLShift64(1LL, bits)) - 1)), bitsLeft);
     }
   }
-  JreAssert((bitsLeft == bitsPerValue_), (@"org/apache/lucene/util/packed/BulkOperationPacked.java:121 condition failed: assert bitsLeft == bitsPerValue;"));
+  JreAssert(bitsLeft == bitsPerValue_, @"org/apache/lucene/util/packed/BulkOperationPacked.java:121 condition failed: assert bitsLeft == bitsPerValue;");
 }
 
 - (void)decodeWithLongArray:(IOSLongArray *)blocks
@@ -138,7 +142,7 @@
       nextValue = JreLShift32((bytes & ((JreLShift32(1, bits)) - 1)), bitsLeft);
     }
   }
-  JreAssert((bitsLeft == bitsPerValue_), (@"org/apache/lucene/util/packed/BulkOperationPacked.java:168 condition failed: assert bitsLeft == bitsPerValue;"));
+  JreAssert(bitsLeft == bitsPerValue_, @"org/apache/lucene/util/packed/BulkOperationPacked.java:168 condition failed: assert bitsLeft == bitsPerValue;");
 }
 
 - (void)encodeWithLongArray:(IOSLongArray *)values
@@ -204,7 +208,7 @@
   jint bitsLeft = 8;
   for (jint i = 0; i < byteValueCount_ * iterations; ++i) {
     jlong v = IOSLongArray_Get(nil_chk(values), valuesOffset++);
-    JreAssert((OrgApacheLuceneUtilPackedPackedInts_unsignedBitsRequiredWithLong_(v) <= bitsPerValue_), (@"org/apache/lucene/util/packed/BulkOperationPacked.java:224 condition failed: assert PackedInts.unsignedBitsRequired(v) <= bitsPerValue;"));
+    JreAssert(OrgApacheLuceneUtilPackedPackedInts_unsignedBitsRequiredWithLong_(v) <= bitsPerValue_, @"org/apache/lucene/util/packed/BulkOperationPacked.java:224 condition failed: assert PackedInts.unsignedBitsRequired(v) <= bitsPerValue;");
     if (bitsPerValue_ < bitsLeft) {
       nextBlock |= JreLShift64(v, (bitsLeft - bitsPerValue_));
       bitsLeft -= bitsPerValue_;
@@ -220,7 +224,7 @@
       nextBlock = (jint) (JreLShift64((v & ((JreLShift64(1LL, bits)) - 1)), bitsLeft));
     }
   }
-  JreAssert((bitsLeft == 8), (@"org/apache/lucene/util/packed/BulkOperationPacked.java:242 condition failed: assert bitsLeft == 8;"));
+  JreAssert(bitsLeft == 8, @"org/apache/lucene/util/packed/BulkOperationPacked.java:242 condition failed: assert bitsLeft == 8;");
 }
 
 - (void)encodeWithIntArray:(IOSIntArray *)values
@@ -232,7 +236,7 @@
   jint bitsLeft = 8;
   for (jint i = 0; i < byteValueCount_ * iterations; ++i) {
     jint v = IOSIntArray_Get(nil_chk(values), valuesOffset++);
-    JreAssert((OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(v & (jlong) 0xFFFFFFFFLL) <= bitsPerValue_), (@"org/apache/lucene/util/packed/BulkOperationPacked.java:252 condition failed: assert PackedInts.bitsRequired(v & 0xFFFFFFFFL) <= bitsPerValue;"));
+    JreAssert(OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(v & (jlong) 0xFFFFFFFFLL) <= bitsPerValue_, @"org/apache/lucene/util/packed/BulkOperationPacked.java:252 condition failed: assert PackedInts.bitsRequired(v & 0xFFFFFFFFL) <= bitsPerValue;");
     if (bitsPerValue_ < bitsLeft) {
       nextBlock |= JreLShift32(v, (bitsLeft - bitsPerValue_));
       bitsLeft -= bitsPerValue_;
@@ -248,50 +252,68 @@
       nextBlock = JreLShift32((v & ((JreLShift32(1, bits)) - 1)), bitsLeft);
     }
   }
-  JreAssert((bitsLeft == 8), (@"org/apache/lucene/util/packed/BulkOperationPacked.java:270 condition failed: assert bitsLeft == 8;"));
+  JreAssert(bitsLeft == 8, @"org/apache/lucene/util/packed/BulkOperationPacked.java:270 condition failed: assert bitsLeft == 8;");
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "BulkOperationPacked", NULL, 0x1, NULL, NULL },
-    { "longBlockCount", NULL, "I", 0x1, NULL, NULL },
-    { "longValueCount", NULL, "I", 0x1, NULL, NULL },
-    { "byteBlockCount", NULL, "I", 0x1, NULL, NULL },
-    { "byteValueCount", NULL, "I", 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithByteArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithByteArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "encodeWithLongArray:withInt:withLongArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
-    { "encodeWithIntArray:withInt:withLongArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
-    { "encodeWithLongArray:withInt:withByteArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
-    { "encodeWithIntArray:withInt:withByteArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:);
+  methods[1].selector = @selector(longBlockCount);
+  methods[2].selector = @selector(longValueCount);
+  methods[3].selector = @selector(byteBlockCount);
+  methods[4].selector = @selector(byteValueCount);
+  methods[5].selector = @selector(decodeWithLongArray:withInt:withLongArray:withInt:withInt:);
+  methods[6].selector = @selector(decodeWithByteArray:withInt:withLongArray:withInt:withInt:);
+  methods[7].selector = @selector(decodeWithLongArray:withInt:withIntArray:withInt:withInt:);
+  methods[8].selector = @selector(decodeWithByteArray:withInt:withIntArray:withInt:withInt:);
+  methods[9].selector = @selector(encodeWithLongArray:withInt:withLongArray:withInt:withInt:);
+  methods[10].selector = @selector(encodeWithIntArray:withInt:withLongArray:withInt:withInt:);
+  methods[11].selector = @selector(encodeWithLongArray:withInt:withByteArray:withInt:withInt:);
+  methods[12].selector = @selector(encodeWithIntArray:withInt:withByteArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bitsPerValue_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "longBlockCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "longValueCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "byteBlockCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "byteValueCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "mask_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "intMask_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "bitsPerValue_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "longBlockCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "longValueCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "byteBlockCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "byteValueCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "mask_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "intMask_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked = { 2, "BulkOperationPacked", "org.apache.lucene.util.packed", NULL, 0x0, 13, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "decode", "[JI[JII", "[BI[JII", "[JI[III", "[BI[III", "encode", "[II[JII", "[JI[BII", "[II[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked = { "BulkOperationPacked", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x0, 13, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedBulkOperationPacked;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(OrgApacheLuceneUtilPackedBulkOperationPacked *self, jint bitsPerValue) {
-  OrgApacheLuceneUtilPackedBulkOperation_init(self);
+void OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(OrgApacheLuceneUtilPackedBulkOperationPacked *self, jint bitsPerValue) {
+  OrgApacheLuceneUtilPackedBulkOperation_initPackagePrivate(self);
   self->bitsPerValue_ = bitsPerValue;
-  JreAssert((bitsPerValue > 0 && bitsPerValue <= 64), (@"org/apache/lucene/util/packed/BulkOperationPacked.java:36 condition failed: assert bitsPerValue > 0 && bitsPerValue <= 64;"));
+  JreAssert(bitsPerValue > 0 && bitsPerValue <= 64, @"org/apache/lucene/util/packed/BulkOperationPacked.java:36 condition failed: assert bitsPerValue > 0 && bitsPerValue <= 64;");
   jint blocks = bitsPerValue;
   while ((blocks & 1) == 0) {
     JreURShiftAssignInt(&blocks, 1);
   }
   self->longBlockCount_ = blocks;
-  self->longValueCount_ = 64 * self->longBlockCount_ / bitsPerValue;
+  self->longValueCount_ = JreIntDiv(64 * self->longBlockCount_, bitsPerValue);
   jint byteBlockCount = 8 * self->longBlockCount_;
   jint byteValueCount = self->longValueCount_;
   while ((byteBlockCount & 1) == 0 && (byteValueCount & 1) == 0) {
@@ -307,15 +329,15 @@ void OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(OrgApacheLuceneUt
     self->mask_ = (JreLShift64(1LL, bitsPerValue)) - 1;
   }
   self->intMask_ = (jint) self->mask_;
-  JreAssert((self->longValueCount_ * bitsPerValue == 64 * self->longBlockCount_), (@"org/apache/lucene/util/packed/BulkOperationPacked.java:57 condition failed: assert longValueCount * bitsPerValue == 64 * longBlockCount;"));
+  JreAssert(self->longValueCount_ * bitsPerValue == 64 * self->longBlockCount_, @"org/apache/lucene/util/packed/BulkOperationPacked.java:57 condition failed: assert longValueCount * bitsPerValue == 64 * longBlockCount;");
 }
 
-OrgApacheLuceneUtilPackedBulkOperationPacked *new_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(jint bitsPerValue) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked, initWithInt_, bitsPerValue)
+OrgApacheLuceneUtilPackedBulkOperationPacked *new_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(jint bitsPerValue) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked, initPackagePrivateWithInt_, bitsPerValue)
 }
 
-OrgApacheLuceneUtilPackedBulkOperationPacked *create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(jint bitsPerValue) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked, initWithInt_, bitsPerValue)
+OrgApacheLuceneUtilPackedBulkOperationPacked *create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(jint bitsPerValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked, initPackagePrivateWithInt_, bitsPerValue)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedBulkOperationPacked)

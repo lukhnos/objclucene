@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanContainQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanContainQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanContainQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanContainQuery))
 #define OrgApacheLuceneSearchSpansSpanContainQuery_
 
@@ -31,7 +37,7 @@
 
 #pragma mark Public
 
-- (OrgApacheLuceneSearchSpansSpanContainQuery *)clone;
+- (OrgApacheLuceneSearchSpansSpanContainQuery *)java_clone;
 
 - (jboolean)isEqual:(id)o;
 
@@ -43,12 +49,16 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)big
-                    withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)little
-                                                  withFloat:(jfloat)boost;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)big
+                                            withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)little
+                                                                          withFloat:(jfloat)boost;
 
 - (NSString *)toStringWithNSString:(NSString *)field
                       withNSString:(NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -57,7 +67,7 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanContainQuery)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanContainQuery, big_, OrgApacheLuceneSearchSpansSpanQuery *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanContainQuery, little_, OrgApacheLuceneSearchSpansSpanQuery *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanContainQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_withFloat_(OrgApacheLuceneSearchSpansSpanContainQuery *self, OrgApacheLuceneSearchSpansSpanQuery *big, OrgApacheLuceneSearchSpansSpanQuery *little, jfloat boost);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanContainQuery_initPackagePrivateWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_withFloat_(OrgApacheLuceneSearchSpansSpanContainQuery *self, OrgApacheLuceneSearchSpansSpanQuery *big, OrgApacheLuceneSearchSpansSpanQuery *little, jfloat boost);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanContainQuery)
 
@@ -74,6 +84,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanContainQuery)
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSpansSpanContainQuery;
+@class OrgApacheLuceneSearchSpansSpanQuery;
 @class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
@@ -86,11 +97,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanContainQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanContainQuery:(OrgApacheLuceneSearchSpansSpanContainQuery *)outer$
-                            withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                   withJavaUtilMap:(id<JavaUtilMap>)terms
-                          withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)bigWeight
-                          withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)littleWeight;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanContainQuery:(OrgApacheLuceneSearchSpansSpanContainQuery *)outer$
+                                      withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                             withJavaUtilMap:(id<JavaUtilMap>)terms
+                                    withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)bigWeight
+                                    withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)littleWeight;
 
 - (void)extractTermContextsWithJavaUtilMap:(id<JavaUtilMap>)contexts;
 
@@ -103,6 +114,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanContainQuery)
 
 - (JavaUtilArrayList *)prepareConjunctionWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                  withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)postings;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)arg0
+                               withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)arg1
+                                                      withJavaUtilMap:(id<JavaUtilMap>)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -117,4 +134,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanContainQuery_SpanContai
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanContainQuery")

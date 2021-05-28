@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer))
 #define OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_
 
@@ -20,85 +26,81 @@
 #define INCLUDE_OrgApacheLuceneAnalysisTokenizer 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;
 @class OrgApacheLuceneUtilAttributeFactory;
 
 /*!
  @brief Old version of <code>EdgeNGramTokenizer</code> which doesn't handle correctly
- supplementary characters.
+  supplementary characters.
  */
 @interface OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer : OrgApacheLuceneAnalysisTokenizer
-
-+ (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)DEFAULT_SIDE;
-
-+ (jint)DEFAULT_MAX_GRAM_SIZE;
-
-+ (jint)DEFAULT_MIN_GRAM_SIZE;
+@property (readonly, class, strong) OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *DEFAULT_SIDE NS_SWIFT_NAME(DEFAULT_SIDE);
+@property (readonly, class) jint DEFAULT_MAX_GRAM_SIZE NS_SWIFT_NAME(DEFAULT_MAX_GRAM_SIZE);
+@property (readonly, class) jint DEFAULT_MIN_GRAM_SIZE NS_SWIFT_NAME(DEFAULT_MIN_GRAM_SIZE);
 
 #pragma mark Public
 
 /*!
  @brief Creates EdgeNGramTokenizer that can generate n-grams in the sizes of the given range
- @param factory <code>org.apache.lucene.util.AttributeFactory</code> to use
+ @param factory<code>org.apache.lucene.util.AttributeFactory</code>  to use
  @param minGram the smallest n-gram to generate
  @param maxGram the largest n-gram to generate
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)minGram
-                                                    withInt:(jint)maxGram;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
+                                                              withInt:(jint)minGram
+                                                              withInt:(jint)maxGram;
 
 /*!
  @brief Creates EdgeNGramTokenizer that can generate n-grams in the sizes of the given range
- @param factory <code>org.apache.lucene.util.AttributeFactory</code> to use
- @param side the <code>Side</code> from which to chop off an n-gram
+ @param factory<code>org.apache.lucene.util.AttributeFactory</code>  to use
+ @param side the <code>Side</code>  from which to chop off an n-gram
  @param minGram the smallest n-gram to generate
  @param maxGram the largest n-gram to generate
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)side
-                                                    withInt:(jint)minGram
-                                                    withInt:(jint)maxGram;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
+      withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)side
+                                                              withInt:(jint)minGram
+                                                              withInt:(jint)maxGram;
 
 /*!
  @brief Creates EdgeNGramTokenizer that can generate n-grams in the sizes of the given range
- @param factory <code>org.apache.lucene.util.AttributeFactory</code> to use
- @param sideLabel the <code>Side</code> from which to chop off an n-gram
+ @param factory<code>org.apache.lucene.util.AttributeFactory</code>  to use
+ @param sideLabel the <code>Side</code>  from which to chop off an n-gram
  @param minGram the smallest n-gram to generate
  @param maxGram the largest n-gram to generate
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                               withNSString:(NSString *)sideLabel
-                                                    withInt:(jint)minGram
-                                                    withInt:(jint)maxGram;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
+                                                         withNSString:(NSString *)sideLabel
+                                                              withInt:(jint)minGram
+                                                              withInt:(jint)maxGram;
 
 /*!
  @brief Creates EdgeNGramTokenizer that can generate n-grams in the sizes of the given range
  @param minGram the smallest n-gram to generate
  @param maxGram the largest n-gram to generate
  */
-- (instancetype)initWithInt:(jint)minGram
-                    withInt:(jint)maxGram;
+- (instancetype __nonnull)initWithInt:(jint)minGram
+                              withInt:(jint)maxGram;
 
 /*!
  @brief Creates EdgeNGramTokenizer that can generate n-grams in the sizes of the given range
- @param side the <code>Side</code> from which to chop off an n-gram
+ @param side the <code>Side</code>  from which to chop off an n-gram
  @param minGram the smallest n-gram to generate
  @param maxGram the largest n-gram to generate
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)side
-                                                                            withInt:(jint)minGram
-                                                                            withInt:(jint)maxGram;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)side
+                                                                                      withInt:(jint)minGram
+                                                                                      withInt:(jint)maxGram;
 
 /*!
  @brief Creates EdgeNGramTokenizer that can generate n-grams in the sizes of the given range
- @param sideLabel the name of the <code>Side</code> from which to chop off an n-gram
+ @param sideLabel the name of the <code>Side</code>  from which to chop off an n-gram
  @param minGram the smallest n-gram to generate
  @param maxGram the largest n-gram to generate
  */
-- (instancetype)initWithNSString:(NSString *)sideLabel
-                         withInt:(jint)minGram
-                         withInt:(jint)maxGram;
+- (instancetype __nonnull)initWithNSString:(NSString *)sideLabel
+                                   withInt:(jint)minGram
+                                   withInt:(jint)maxGram;
 
 - (void)end;
 
@@ -109,20 +111,26 @@ withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:(OrgApacheLucene
 
 - (void)reset;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer)
 
-inline OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_get_DEFAULT_SIDE();
+inline OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_get_DEFAULT_SIDE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_DEFAULT_SIDE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer, DEFAULT_SIDE, OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)
 
-inline jint OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_get_DEFAULT_MAX_GRAM_SIZE();
+inline jint OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_get_DEFAULT_MAX_GRAM_SIZE(void);
 #define OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_DEFAULT_MAX_GRAM_SIZE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer, DEFAULT_MAX_GRAM_SIZE, jint)
 
-inline jint OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_get_DEFAULT_MIN_GRAM_SIZE();
+inline jint OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_get_DEFAULT_MIN_GRAM_SIZE(void);
 #define OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_DEFAULT_MIN_GRAM_SIZE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer, DEFAULT_MIN_GRAM_SIZE, jint)
 
@@ -173,6 +181,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenize
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_Enum) {
   OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_Enum_FRONT = 0,
   OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_Enum_BACK = 1,
@@ -181,25 +191,22 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokeniz
 /*!
  @brief Specifies which side of the input the n-gram should be generated from
  */
-@interface OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side : JavaLangEnum
 
-+ (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)FRONT;
-
-+ (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)BACK;
-
+@property (readonly, class, nonnull) OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *FRONT NS_SWIFT_NAME(FRONT);
+@property (readonly, class, nonnull) OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *BACK NS_SWIFT_NAME(BACK);
 #pragma mark Public
 
 - (NSString *)getLabel;
 
 + (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)getSideWithNSString:(NSString *)sideName;
 
-#pragma mark Package-Private
++ (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)valueOfWithNSString:(NSString *)name;
 
 + (IOSObjectArray *)values;
 
-+ (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *)valueOfWithNSString:(NSString *)name;
+#pragma mark Package-Private
 
-- (id)copyWithZone:(NSZone *)zone;
 - (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_Enum)toNSEnum;
 
 @end
@@ -212,18 +219,18 @@ FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *O
 /*!
  @brief Get the n-gram from the front of the input
  */
-inline OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_get_FRONT();
+inline OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_get_FRONT(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, FRONT)
 
 /*!
  @brief Get the n-gram from the end of the input
  */
-inline OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_get_BACK();
+inline OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_get_BACK(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, BACK)
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_getSideWithNSString_(NSString *sideName);
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_valueOfWithNSString_(NSString *name);
 
@@ -233,4 +240,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenize
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer")

@@ -9,6 +9,10 @@
 #include "java/lang/Math.h"
 #include "org/apache/lucene/search/spell/NGramDistance.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/NGramDistance must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSpellNGramDistance () {
  @public
   jint n_;
@@ -32,8 +36,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)getDistanceWithNSString:(NSString *)source
                      withNSString:(NSString *)target {
-  jint sl = ((jint) [((NSString *) nil_chk(source)) length]);
-  jint tl = ((jint) [((NSString *) nil_chk(target)) length]);
+  jint sl = [((NSString *) nil_chk(source)) java_length];
+  jint tl = [((NSString *) nil_chk(target)) java_length];
   if (sl == 0 || tl == 0) {
     if (sl == tl) {
       return 1;
@@ -81,7 +85,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
     else {
-      t_j = [((NSString *) nil_chk([target substring:j - n_ endIndex:j])) toCharArray];
+      t_j = [((NSString *) nil_chk([target java_substring:j - n_ endIndex:j])) java_toCharArray];
     }
     *IOSFloatArray_GetRef(d, 0) = j;
     for (i = 1; i <= sl; i++) {
@@ -106,12 +110,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSUInteger)hash {
-  return 1427 * n_ * ((jint) [[self getClass] hash]);
+  return 1427 * n_ * ((jint) [[self java_getClass] hash]);
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
-  if (nil == obj || [self getClass] != (id) [obj getClass]) return false;
+  if (JreObjectEqualsEquals(self, obj)) return true;
+  if (nil == obj || !JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneSearchSpellNGramDistance *o = (OrgApacheLuceneSearchSpellNGramDistance *) cast_chk(obj, [OrgApacheLuceneSearchSpellNGramDistance class]);
   return o->n_ == self->n_;
 }
@@ -121,18 +125,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "NGramDistance", NULL, 0x1, NULL, NULL },
-    { "init", "NGramDistance", NULL, 0x1, NULL, NULL },
-    { "getDistanceWithNSString:withNSString:", "getDistance", "F", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(getDistanceWithNSString:withNSString:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(isEqual:);
+  methods[5].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "n_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "n_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellNGramDistance = { 2, "NGramDistance", "org.apache.lucene.search.spell", NULL, 0x1, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "getDistance", "LNSString;LNSString;", "hashCode", "equals", "LNSObject;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellNGramDistance = { "NGramDistance", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x1, 6, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellNGramDistance;
 }
 

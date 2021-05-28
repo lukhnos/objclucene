@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
@@ -20,7 +19,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/standard/std40/UAX29URLEmailTokenizer40 must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 () {
  @public
@@ -42,6 +44,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, posIncrAtt_, id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, typeAtt_, id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>)
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40__Annotations$0(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40)
 
@@ -121,7 +125,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:posIncr];
       [scanner_ getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:termAtt_];
       jint start = [scanner_ yychar];
-      [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:start + [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length]]];
+      [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:start + [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) java_length]]];
       [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_TOKEN_TYPES), tokenType)];
       return true;
     }
@@ -145,10 +149,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40 *) nil_chk(scanner_)) yyresetWithJavaIoReader:input_];
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(scanner_);
   RELEASE_(termAtt_);
@@ -158,44 +158,57 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setMaxTokenLengthWithInt:);
+  methods[1].selector = @selector(getMaxTokenLength);
+  methods[2].selector = @selector(init);
+  methods[3].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:);
+  methods[4].selector = @selector(incrementToken);
+  methods[5].selector = @selector(end);
+  methods[6].selector = @selector(close);
+  methods[7].selector = @selector(reset);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "scanner_", "LOrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "ALPHANUM", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_ALPHANUM, 0x19, -1, -1, -1, -1 },
+    { "NUM", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_NUM, 0x19, -1, -1, -1, -1 },
+    { "SOUTHEAST_ASIAN", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_SOUTHEAST_ASIAN, 0x19, -1, -1, -1, -1 },
+    { "IDEOGRAPHIC", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_IDEOGRAPHIC, 0x19, -1, -1, -1, -1 },
+    { "HIRAGANA", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_HIRAGANA, 0x19, -1, -1, -1, -1 },
+    { "KATAKANA", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_KATAKANA, 0x19, -1, -1, -1, -1 },
+    { "HANGUL", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_HANGUL, 0x19, -1, -1, -1, -1 },
+    { "URL", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_URL, 0x19, -1, -1, -1, -1 },
+    { "EMAIL", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_EMAIL, 0x19, -1, -1, -1, -1 },
+    { "TOKEN_TYPES", "[LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "maxTokenLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncrAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "typeAtt_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "setMaxTokenLength", "I", "LOrgApacheLuceneUtilAttributeFactory;", "LJavaIoIOException;", &OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_TOKEN_TYPES, (void *)&OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 = { "UAX29URLEmailTokenizer40", "org.apache.lucene.analysis.standard.std40", ptrTable, methods, fields, 7, 0x11, 8, 16, -1, -1, -1, -1, 5 };
+  return &_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_TOKEN_TYPES, [IOSObjectArray newArrayWithObjects:(id[]){ IOSObjectArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40, TOKEN_TYPES)), OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_ALPHANUM), IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40, TOKEN_TYPES), OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_NUM), IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40, TOKEN_TYPES), OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_SOUTHEAST_ASIAN), IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40, TOKEN_TYPES), OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_IDEOGRAPHIC), IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40, TOKEN_TYPES), OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_HIRAGANA), IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40, TOKEN_TYPES), OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_KATAKANA), IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40, TOKEN_TYPES), OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_HANGUL), @"<URL>", @"<EMAIL>" } count:9 type:NSString_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setMaxTokenLengthWithInt:", "setMaxTokenLength", "V", 0x1, NULL, NULL },
-    { "getMaxTokenLength", NULL, "I", 0x1, NULL, NULL },
-    { "init", "UAX29URLEmailTokenizer40", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "UAX29URLEmailTokenizer40", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "scanner_", NULL, 0x12, "Lorg.apache.lucene.analysis.standard.std40.UAX29URLEmailTokenizerImpl40;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ALPHANUM", "ALPHANUM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_ALPHANUM },
-    { "NUM", "NUM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_NUM },
-    { "SOUTHEAST_ASIAN", "SOUTHEAST_ASIAN", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_SOUTHEAST_ASIAN },
-    { "IDEOGRAPHIC", "IDEOGRAPHIC", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_IDEOGRAPHIC },
-    { "HIRAGANA", "HIRAGANA", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_HIRAGANA },
-    { "KATAKANA", "KATAKANA", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_KATAKANA },
-    { "HANGUL", "HANGUL", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_HANGUL },
-    { "URL", "URL", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_URL },
-    { "EMAIL", "EMAIL", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_EMAIL },
-    { "TOKEN_TYPES", "TOKEN_TYPES", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_TOKEN_TYPES, NULL, .constantValue.asLong = 0 },
-    { "maxTokenLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncrAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 = { 2, "UAX29URLEmailTokenizer40", "org.apache.lucene.analysis.standard.std40", NULL, 0x11, 8, methods, 16, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40;
 }
 
 @end
@@ -234,6 +247,10 @@ OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *new_OrgApacheLucen
 
 OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *create_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
+}
+
+IOSObjectArray *OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40)

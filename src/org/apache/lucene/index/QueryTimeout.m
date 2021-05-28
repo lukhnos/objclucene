@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/index/QueryTimeout.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/QueryTimeout must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexQueryTimeout : NSObject
 
 @end
@@ -13,10 +17,15 @@
 @implementation OrgApacheLuceneIndexQueryTimeout
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "shouldExit", NULL, "Z", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexQueryTimeout = { 2, "QueryTimeout", "org.apache.lucene.index", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(shouldExit);
+  #pragma clang diagnostic pop
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexQueryTimeout = { "QueryTimeout", "org.apache.lucene.index", NULL, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexQueryTimeout;
 }
 

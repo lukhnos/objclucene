@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder))
 #define OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_
 
@@ -24,71 +30,71 @@
 @protocol OrgW3cDomElement;
 
 /*!
- @brief Creates a <code>NumericRangeQuery</code>.
- The table below specifies the required
- attributes and the defaults if optional attributes are omitted. For more
- detail on what each of the attributes actually do, consult the documentation
- for <code>NumericRangeQuery</code>:
- <table summary="supported attributes">
- <tr>
- <th>Attribute name</th>
- <th>Values</th>
- <th>Required</th>
- <th>Default</th>
- </tr>
- <tr>
- <td>fieldName</td>
- <td>String</td>
- <td>Yes</td>
- <td>N/A</td>
- </tr>
- <tr>
- <td>lowerTerm</td>
- <td>Specified by <tt>type</tt></td>
- <td>Yes</td>
- <td>N/A</td>
- </tr>
- <tr>
- <td>upperTerm</td>
- <td>Specified by <tt>type</tt></td>
- <td>Yes</td>
- <td>N/A</td>
- </tr>
- <tr>
- <td>type</td>
- <td>int, long, float, double</td>
- <td>No</td>
- <td>int</td>
- </tr>
- <tr>
- <td>includeLower</td>
- <td>true, false</td>
- <td>No</td>
- <td>true</td>
- </tr>
- <tr>
- <td>includeUpper</td>
- <td>true, false</td>
- <td>No</td>
- <td>true</td>
- </tr>
- <tr>
- <td>precisionStep</td>
- <td>Integer</td>
- <td>No</td>
- <td>4</td>
- </tr>
- </table>
- <p>
- A <code>ParserException</code> will be thrown if an error occurs parsing the
- supplied <tt>lowerTerm</tt> or <tt>upperTerm</tt> into the numeric type
- specified by <tt>type</tt>.
+ @brief Creates a <code>NumericRangeQuery</code>.The table below specifies the required
+  attributes and the defaults if optional attributes are omitted.
+ For more
+  detail on what each of the attributes actually do, consult the documentation
+  for <code>NumericRangeQuery</code>:
+  <table summary="supported attributes">
+  <tr>
+  <th>Attribute name</th>
+  <th>Values</th>
+  <th>Required</th>
+  <th>Default</th>
+  </tr>
+  <tr>
+  <td>fieldName</td>
+  <td>String</td>
+  <td>Yes</td>
+  <td>N/A</td>
+  </tr>
+  <tr>
+  <td>lowerTerm</td>
+  <td>Specified by <tt>type</tt></td>
+  <td>Yes</td>
+  <td>N/A</td>
+  </tr>
+  <tr>
+  <td>upperTerm</td>
+  <td>Specified by <tt>type</tt></td>
+  <td>Yes</td>
+  <td>N/A</td>
+  </tr>
+  <tr>
+  <td>type</td>
+  <td>int, long, float, double</td>
+  <td>No</td>
+  <td>int</td>
+  </tr>
+  <tr>
+  <td>includeLower</td>
+  <td>true, false</td>
+  <td>No</td>
+  <td>true</td>
+  </tr>
+  <tr>
+  <td>includeUpper</td>
+  <td>true, false</td>
+  <td>No</td>
+  <td>true</td>
+  </tr>
+  <tr>
+  <td>precisionStep</td>
+  <td>Integer</td>
+  <td>No</td>
+  <td>4</td>
+  </tr>
+  </table>
+  <p>
+  A <code>ParserException</code> will be thrown if an error occurs parsing the
+  supplied <tt>lowerTerm</tt> or <tt>upperTerm</tt> into the numeric type
+  specified by <tt>type</tt>.
  */
 @interface OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
@@ -98,12 +104,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryB
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init(OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder")

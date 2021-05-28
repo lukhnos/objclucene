@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocValuesRewriteMethod
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocValuesRewriteMethod_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRewriteMethod || defined(INCLUDE_OrgApacheLuceneSearchDocValuesRewriteMethod))
 #define OrgApacheLuceneSearchDocValuesRewriteMethod_
 
@@ -27,13 +33,13 @@
 /*!
  @brief Rewrites MultiTermQueries into a filter, using DocValues for term enumeration.
  <p>
- This can be used to perform these queries against an unindexed docvalues field.
+  This can be used to perform these queries against an unindexed docvalues field.
  */
 @interface OrgApacheLuceneSearchDocValuesRewriteMethod : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -48,9 +54,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocValuesRewriteMethod)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesRewriteMethod_init(OrgApacheLuceneSearchDocValuesRewriteMethod *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRewriteMethod *new_OrgApacheLuceneSearchDocValuesRewriteMethod_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRewriteMethod *new_OrgApacheLuceneSearchDocValuesRewriteMethod_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRewriteMethod *create_OrgApacheLuceneSearchDocValuesRewriteMethod_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRewriteMethod *create_OrgApacheLuceneSearchDocValuesRewriteMethod_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod)
 
@@ -93,7 +99,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod)
 /*!
  @brief Wrap a <code>MultiTermQuery</code> as a Filter.
  */
-- (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -111,4 +121,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTerm
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRewriteMethod")

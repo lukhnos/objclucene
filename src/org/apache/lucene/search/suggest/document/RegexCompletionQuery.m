@@ -3,9 +3,7 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/RegexCompletionQuery.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Weight.h"
@@ -16,6 +14,10 @@
 #include "org/apache/lucene/util/automaton/Automaton.h"
 #include "org/apache/lucene/util/automaton/Operations.h"
 #include "org/apache/lucene/util/automaton/RegExp.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/RegexCompletionQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery () {
  @public
@@ -59,18 +61,28 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:", "RegexCompletionQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:", "RegexCompletionQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withInt:withInt:", "RegexCompletionQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withInt:withInt:withOrgApacheLuceneSearchSuggestBitsProducer:", "RegexCompletionQuery", NULL, 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 4, 5, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexTerm:withInt:withInt:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneIndexTerm:withInt:withInt:withOrgApacheLuceneSearchSuggestBitsProducer:);
+  methods[4].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "flags_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDeterminizedStates_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "flags_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxDeterminizedStates_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery = { 2, "RegexCompletionQuery", "org.apache.lucene.search.suggest.document", NULL, 0x1, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;", "LOrgApacheLuceneIndexTerm;LOrgApacheLuceneSearchSuggestBitsProducer;", "LOrgApacheLuceneIndexTerm;II", "LOrgApacheLuceneIndexTerm;IILOrgApacheLuceneSearchSuggestBitsProducer;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery = { "RegexCompletionQuery", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery;
 }
 

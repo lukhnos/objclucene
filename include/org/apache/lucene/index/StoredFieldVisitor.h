@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexStoredFieldVisitor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexStoredFieldVisitor_) && (INCLUDE_ALL_OrgApacheLuceneIndexStoredFieldVisitor || defined(INCLUDE_OrgApacheLuceneIndexStoredFieldVisitor))
 #define OrgApacheLuceneIndexStoredFieldVisitor_
 
@@ -22,19 +28,18 @@
 
 /*!
  @brief Expert: provides a low-level means of accessing the stored field
- values in an index.
- See <code>IndexReader.document(int,StoredFieldVisitor)</code>
+  values in an index.See <code>IndexReader.document(int,
+ StoredFieldVisitor)</code>
  .
  <p><b>NOTE</b>: a <code>StoredFieldVisitor</code> implementation
- should not try to load or visit other stored documents in
- the same reader because the implementation of stored
- fields for most codecs is not reeentrant and you will see
- strange exceptions as a result.
- <p>See <code>DocumentStoredFieldVisitor</code>, which is a
- <code>StoredFieldVisitor</code> that builds the
+  should not try to load or visit other stored documents in
+  the same reader because the implementation of stored
+  fields for most codecs is not reeentrant and you will see
+  strange exceptions as a result. 
+ <p>See <code>DocumentStoredFieldVisitor</code>, which is a 
+ <code>StoredFieldVisitor</code> that builds the 
  <code>Document</code> containing all stored fields.  This is
- used by <code>IndexReader.document(int)</code>.
-  
+  used by <code>IndexReader.document(int)</code>.
  */
 @interface OrgApacheLuceneIndexStoredFieldVisitor : NSObject
 
@@ -74,9 +79,9 @@
 /*!
  @brief Hook before processing a field.
  Before a field is processed, this method is invoked so that
- subclasses can return a <code>Status</code> representing whether
- they need that particular field or not, or to stop processing
- entirely.
+  subclasses can return a <code>Status</code> representing whether
+  they need that particular field or not, or to stop processing
+  entirely.
  */
 - (OrgApacheLuceneIndexStoredFieldVisitor_Status *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
@@ -91,9 +96,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -112,6 +117,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStoredFieldVisitor)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum) {
   OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum_YES = 0,
   OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum_NO = 1,
@@ -121,21 +128,19 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum) 
 /*!
  @brief Enumeration of possible return values for <code>needsField</code>.
  */
-@interface OrgApacheLuceneIndexStoredFieldVisitor_Status : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneIndexStoredFieldVisitor_Status : JavaLangEnum
 
-+ (OrgApacheLuceneIndexStoredFieldVisitor_Status *)YES_;
-
-+ (OrgApacheLuceneIndexStoredFieldVisitor_Status *)NO_;
-
-+ (OrgApacheLuceneIndexStoredFieldVisitor_Status *)STOP;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneIndexStoredFieldVisitor_Status *YES_ NS_SWIFT_NAME(YES_);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexStoredFieldVisitor_Status *NO_ NS_SWIFT_NAME(NO_);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexStoredFieldVisitor_Status *STOP NS_SWIFT_NAME(STOP);
+#pragma mark Public
 
 + (OrgApacheLuceneIndexStoredFieldVisitor_Status *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum)toNSEnum;
 
 @end
@@ -148,22 +153,22 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLucene
 /*!
  @brief YES: the field should be visited.
  */
-inline OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVisitor_Status_get_YES();
+inline OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVisitor_Status_get_YES(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexStoredFieldVisitor_Status, YES)
 
 /*!
  @brief NO: don't visit this field, but continue processing fields for this document.
  */
-inline OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVisitor_Status_get_NO();
+inline OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVisitor_Status_get_NO(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexStoredFieldVisitor_Status, NO)
 
 /*!
  @brief STOP: don't visit this field and stop processing any other fields for this document.
  */
-inline OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVisitor_Status_get_STOP();
+inline OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVisitor_Status_get_STOP(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexStoredFieldVisitor_Status, STOP)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexStoredFieldVisitor_Status_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexStoredFieldVisitor_Status_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVisitor_Status_valueOfWithNSString_(NSString *name);
 
@@ -173,4 +178,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStoredFieldVisitor_Status)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexStoredFieldVisitor")

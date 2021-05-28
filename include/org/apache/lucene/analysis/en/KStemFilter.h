@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisEnKStemFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisEnKStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisEnKStemFilter))
 #define OrgApacheLuceneAnalysisEnKStemFilter_
 
@@ -25,31 +31,31 @@
 /*!
  @brief A high-performance kstem filter for english.
  <p>
- See <a href="http://ciir.cs.umass.edu/pubfiles/ir-35.pdf">
- "Viewing Morphology as an Inference Process"</a>
- (Krovetz, R., Proceedings of the Sixteenth Annual International ACM SIGIR
- Conference on Research and Development in Information Retrieval, 191-203, 1993).
+  See <a href="http://ciir.cs.umass.edu/pubfiles/ir-35.pdf">
+  "Viewing Morphology as an Inference Process"</a>
+  (Krovetz, R., Proceedings of the Sixteenth Annual International ACM SIGIR
+  Conference on Research and Development in Information Retrieval, 191-203, 1993). 
  <p>
- All terms must already be lowercased for this filter to work correctly.
+  All terms must already be lowercased for this filter to work correctly. 
  <p>
- Note: This filter is aware of the <code>KeywordAttribute</code>. To prevent
- certain terms from being passed to the stemmer
+  Note: This filter is aware of the <code>KeywordAttribute</code>. To prevent
+  certain terms from being passed to the stemmer 
  <code>KeywordAttribute.isKeyword()</code> should be set to <code>true</code>
- in a previous <code>TokenStream</code>.
- Note: For including the original term as well as the stemmed version, see
+  in a previous <code>TokenStream</code>.
+  Note: For including the original term as well as the stemmed version, see 
  <code>org.apache.lucene.analysis.miscellaneous.KeywordRepeatFilterFactory</code>
- </p>
+  </p>
  */
 @interface OrgApacheLuceneAnalysisEnKStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 /*!
  @brief Returns the next, stemmed, input Token.
  @return The stemmed form of a token.
- @throws IOException If there is a low-level I/O error.
+ @throw IOExceptionIf there is a low-level I/O error.
  */
 - (jboolean)incrementToken;
 
@@ -67,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilter")

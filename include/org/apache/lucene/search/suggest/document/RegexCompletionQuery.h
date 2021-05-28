@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery))
 #define OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_
 
@@ -27,56 +33,57 @@
 
 /*!
  @brief A <code>CompletionQuery</code> which takes a regular expression
- as the prefix of the query term.
+  as the prefix of the query term.
  <p>
- Example usage of querying a prefix of 'sug' and 'sub'
- as a regular expression against a suggest field 'suggest_field':
+  Example usage of querying a prefix of 'sug' and 'sub'
+  as a regular expression against a suggest field 'suggest_field': 
  <pre class="prettyprint">
- CompletionQuery query = new RegexCompletionQuery(new Term("suggest_field", "su[g|b]"));
+   CompletionQuery query = new RegexCompletionQuery(new Term("suggest_field", "su[g|b]")); 
  
 @endcode
+  
  <p>
- See <code>RegExp</code> for the supported regular expression
- syntax
+  See <code>RegExp</code> for the supported regular expression
+  syntax
  */
 @interface OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery : OrgApacheLuceneSearchSuggestDocumentCompletionQuery
 
 #pragma mark Public
 
 /*!
- @brief Calls <code>RegexCompletionQuery.RegexCompletionQuery(Term,BitsProducer)</code>
- with no filter
+ @brief Calls <code>RegexCompletionQuery.RegexCompletionQuery(Term, BitsProducer)</code>
+  with no filter
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 /*!
- @brief Calls <code>RegexCompletionQuery.RegexCompletionQuery(Term,int,int,BitsProducer)</code>
- enabling all optional regex syntax and <code>maxDeterminizedStates</code> of
+ @brief Calls <code>RegexCompletionQuery.RegexCompletionQuery(Term, int, int, BitsProducer)</code>
+  enabling all optional regex syntax and <code>maxDeterminizedStates</code> of 
  org.apache.lucene.util.automaton.Operations#DEFAULT_MAX_DETERMINIZED_STATES
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-    withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+              withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
 
 /*!
- @brief Calls <code>RegexCompletionQuery.RegexCompletionQuery(Term,int,int,BitsProducer)</code>
- with no filter
+ @brief Calls <code>RegexCompletionQuery.RegexCompletionQuery(Term, int, int, BitsProducer)</code>
+  with no filter
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)flags
-                                         withInt:(jint)maxDeterminizedStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                   withInt:(jint)flags
+                                                   withInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief Constructs a regular expression completion query
- @param term query is run against <code>Term.field()</code> and <code>Term.text()</code>
- is interpreted as a regular expression
- @param flags used as syntax_flag in <code>RegExp.RegExp(String,int)</code>
+ @param term query is run against <code>Term.field()</code>  and <code>Term.text()</code>
+               is interpreted as a regular expression
+ @param flags used as syntax_flag in <code>RegExp.RegExp(String, int)</code>
  @param maxDeterminizedStates used in <code>RegExp.toAutomaton(int)</code>
  @param filter used to query on a sub set of documents
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)flags
-                                         withInt:(jint)maxDeterminizedStates
-    withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                   withInt:(jint)flags
+                                                   withInt:(jint)maxDeterminizedStates
+              withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -113,4 +120,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery")

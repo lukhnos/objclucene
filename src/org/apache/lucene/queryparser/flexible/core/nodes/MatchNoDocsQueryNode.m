@@ -7,6 +7,10 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/DeletedQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/MatchNoDocsQueryNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/MatchNoDocsQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -21,11 +25,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "MatchNoDocsQueryNode", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode = { 2, "MatchNoDocsQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode = { "MatchNoDocsQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode;
 }
 

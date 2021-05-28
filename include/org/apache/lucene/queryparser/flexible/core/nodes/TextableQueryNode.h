@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_
 
@@ -21,7 +27,7 @@
 /*!
  @brief Interface for a node that has text as a <code>CharSequence</code>
  */
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode < JavaObject >
 
 - (id<JavaLangCharSequence>)getText;
 
@@ -35,4 +41,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode")

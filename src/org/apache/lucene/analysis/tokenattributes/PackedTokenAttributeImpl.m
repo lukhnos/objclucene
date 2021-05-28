@@ -17,9 +17,14 @@
 #include "org/apache/lucene/util/AttributeImpl.h"
 #include "org/apache/lucene/util/AttributeReflector.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/PackedTokenAttributeImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl () {
  @public
-  jint startOffset_, endOffset_;
+  jint startOffset_;
+  jint endOffset_;
   NSString *type_;
   jint positionIncrement_;
   jint positionLength_;
@@ -87,14 +92,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&type_, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE);
 }
 
-- (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *)clone {
-  return (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) cast_chk([super clone], [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
+- (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *)java_clone {
+  return (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) cast_chk([super java_clone], [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (obj == self) return true;
+  if (JreObjectEqualsEquals(obj, self)) return true;
   if ([obj isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]]) {
-    OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) cast_chk(obj, [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
+    OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) obj;
     return (startOffset_ == ((OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) nil_chk(other))->startOffset_ && endOffset_ == other->endOffset_ && positionIncrement_ == other->positionIncrement_ && positionLength_ == other->positionLength_ && (type_ == nil ? other->type_ == nil : [type_ isEqual:other->type_]) && [super isEqual:obj]);
   }
   else return false;
@@ -112,8 +117,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
   if ([target isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]]) {
-    OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *to = (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) cast_chk(target, [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
-    [((OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) nil_chk(to)) copyBufferWithCharArray:[self buffer] withInt:0 withInt:[self length]];
+    OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *to = (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) target;
+    [((OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) nil_chk(to)) copyBufferWithCharArray:[self buffer] withInt:0 withInt:[self java_length]];
     to->positionIncrement_ = positionIncrement_;
     to->positionLength_ = positionLength_;
     to->startOffset_ = startOffset_;
@@ -144,32 +149,53 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PackedTokenAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "setPositionIncrementWithInt:", "setPositionIncrement", "V", 0x1, NULL, NULL },
-    { "getPositionIncrement", NULL, "I", 0x1, NULL, NULL },
-    { "setPositionLengthWithInt:", "setPositionLength", "V", 0x1, NULL, NULL },
-    { "getPositionLength", NULL, "I", 0x1, NULL, NULL },
-    { "startOffset", NULL, "I", 0x11, NULL, NULL },
-    { "endOffset", NULL, "I", 0x11, NULL, NULL },
-    { "setOffsetWithInt:withInt:", "setOffset", "V", 0x1, NULL, NULL },
-    { "type", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "setTypeWithNSString:", "setType", "V", 0x11, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.analysis.tokenattributes.PackedTokenAttributeImpl;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl;", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 14, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setPositionIncrementWithInt:);
+  methods[2].selector = @selector(getPositionIncrement);
+  methods[3].selector = @selector(setPositionLengthWithInt:);
+  methods[4].selector = @selector(getPositionLength);
+  methods[5].selector = @selector(startOffset);
+  methods[6].selector = @selector(endOffset);
+  methods[7].selector = @selector(setOffsetWithInt:withInt:);
+  methods[8].selector = @selector(type);
+  methods[9].selector = @selector(setTypeWithNSString:);
+  methods[10].selector = @selector(clear);
+  methods[11].selector = @selector(java_clone);
+  methods[12].selector = @selector(isEqual:);
+  methods[13].selector = @selector(hash);
+  methods[14].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[15].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "startOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "type_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionIncrement_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "startOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "endOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "type_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "positionIncrement_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "positionLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl = { 2, "PackedTokenAttributeImpl", "org.apache.lucene.analysis.tokenattributes", NULL, 0x1, 16, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setPositionIncrement", "I", "setPositionLength", "setOffset", "II", "setType", "LNSString;", "clone", "equals", "LNSObject;", "hashCode", "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl = { "PackedTokenAttributeImpl", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, fields, 7, 0x1, 16, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl;
 }
 

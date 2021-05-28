@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/CodecReader.h"
 #include "org/apache/lucene/index/DirectoryReader.h"
@@ -31,6 +30,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/FixedBitSet.h"
 #include "org/apache/lucene/util/IOUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/PKIndexSplitter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexPKIndexSplitter () {
  @public
@@ -59,7 +62,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexPKIndexSplitter, dir2_, OrgApacheLuceneS
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexPKIndexSplitter, config1_, OrgApacheLuceneIndexIndexWriterConfig *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexPKIndexSplitter, config2_, OrgApacheLuceneIndexIndexWriterConfig *)
 
-__attribute__((unused)) static OrgApacheLuceneIndexIndexWriterConfig *OrgApacheLuceneIndexPKIndexSplitter_newDefaultConfig();
+__attribute__((unused)) static OrgApacheLuceneIndexIndexWriterConfig *OrgApacheLuceneIndexPKIndexSplitter_newDefaultConfig(void);
 
 __attribute__((unused)) static void OrgApacheLuceneIndexPKIndexSplitter_createIndexWithOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchQuery_withBoolean_(OrgApacheLuceneIndexPKIndexSplitter *self, OrgApacheLuceneIndexIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *target, OrgApacheLuceneIndexDirectoryReader *reader, OrgApacheLuceneSearchQuery *preserveFilter, jboolean negateFilter);
 
@@ -188,27 +191,40 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPKIndexSplitter_DocumentFilteredL
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchQuery:", "PKIndexSplitter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchFilter:", "PKIndexSplitter", NULL, 0x1, NULL, NULL },
-    { "newDefaultConfig", NULL, "Lorg.apache.lucene.index.IndexWriterConfig;", 0xa, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexIndexWriterConfig:withOrgApacheLuceneIndexIndexWriterConfig:", "PKIndexSplitter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexIndexWriterConfig:withOrgApacheLuceneIndexIndexWriterConfig:", "PKIndexSplitter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexTerm:", "PKIndexSplitter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexTerm:withOrgApacheLuceneIndexIndexWriterConfig:withOrgApacheLuceneIndexIndexWriterConfig:", "PKIndexSplitter", NULL, 0x1, NULL, NULL },
-    { "split", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createIndexWithOrgApacheLuceneIndexIndexWriterConfig:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneSearchQuery:withBoolean:", "createIndex", "V", 0x2, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0xa, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 6, -1, -1, -1 },
+    { NULL, "V", 0x2, 7, 8, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchFilter:);
+  methods[2].selector = @selector(newDefaultConfig);
+  methods[3].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexIndexWriterConfig:withOrgApacheLuceneIndexIndexWriterConfig:);
+  methods[4].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexIndexWriterConfig:withOrgApacheLuceneIndexIndexWriterConfig:);
+  methods[5].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexTerm:);
+  methods[6].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexTerm:withOrgApacheLuceneIndexIndexWriterConfig:withOrgApacheLuceneIndexIndexWriterConfig:);
+  methods[7].selector = @selector(split);
+  methods[8].selector = @selector(createIndexWithOrgApacheLuceneIndexIndexWriterConfig:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneSearchQuery:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "docsInFirstIndex_", NULL, 0x12, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "input_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "dir1_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "dir2_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "config1_", NULL, 0x12, "Lorg.apache.lucene.index.IndexWriterConfig;", NULL, NULL, .constantValue.asLong = 0 },
-    { "config2_", NULL, 0x12, "Lorg.apache.lucene.index.IndexWriterConfig;", NULL, NULL, .constantValue.asLong = 0 },
+    { "docsInFirstIndex_", "LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "input_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "dir1_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "dir2_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "config1_", "LOrgApacheLuceneIndexIndexWriterConfig;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "config2_", "LOrgApacheLuceneIndexIndexWriterConfig;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.PKIndexSplitter$DocumentFilteredLeafIndexReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexPKIndexSplitter = { 2, "PKIndexSplitter", "org.apache.lucene.index", NULL, 0x1, 9, methods, 6, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneSearchQuery;", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneSearchFilter;", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneSearchQuery;LOrgApacheLuceneIndexIndexWriterConfig;LOrgApacheLuceneIndexIndexWriterConfig;", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneSearchFilter;LOrgApacheLuceneIndexIndexWriterConfig;LOrgApacheLuceneIndexIndexWriterConfig;", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexTerm;", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexTerm;LOrgApacheLuceneIndexIndexWriterConfig;LOrgApacheLuceneIndexIndexWriterConfig;", "LJavaIoIOException;", "createIndex", "LOrgApacheLuceneIndexIndexWriterConfig;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexDirectoryReader;LOrgApacheLuceneSearchQuery;Z", "LOrgApacheLuceneIndexPKIndexSplitter_DocumentFilteredLeafIndexReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexPKIndexSplitter = { "PKIndexSplitter", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 9, 6, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneIndexPKIndexSplitter;
 }
 
@@ -349,16 +365,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexPKIndexSplitter)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchWeight:withBoolean:", "DocumentFilteredLeafIndexReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "numDocs", NULL, "I", 0x1, NULL, NULL },
-    { "getLiveDocs", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchWeight:withBoolean:);
+  methods[1].selector = @selector(numDocs);
+  methods[2].selector = @selector(getLiveDocs);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "liveDocs_", NULL, 0x10, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numDocs_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "liveDocs_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numDocs_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexPKIndexSplitter_DocumentFilteredLeafIndexReader = { 2, "DocumentFilteredLeafIndexReader", "org.apache.lucene.index", "PKIndexSplitter", 0xa, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneSearchWeight;Z", "LJavaIoIOException;", "LOrgApacheLuceneIndexPKIndexSplitter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexPKIndexSplitter_DocumentFilteredLeafIndexReader = { "DocumentFilteredLeafIndexReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 3, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexPKIndexSplitter_DocumentFilteredLeafIndexReader;
 }
 
@@ -377,7 +401,7 @@ void OrgApacheLuceneIndexPKIndexSplitter_DocumentFilteredLeafIndexReader_initWit
   }
   if ([self->in_ hasDeletions]) {
     id<OrgApacheLuceneUtilBits> oldLiveDocs = [self->in_ getLiveDocs];
-    JreAssert((oldLiveDocs != nil), (@"org/apache/lucene/index/PKIndexSplitter.java:163 condition failed: assert oldLiveDocs != null;"));
+    JreAssert(oldLiveDocs != nil, @"org/apache/lucene/index/PKIndexSplitter.java:163 condition failed: assert oldLiveDocs != null;");
     OrgApacheLuceneSearchDocIdSetIterator *it = create_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(bits, 0LL);
     for (jint i = [it nextDoc]; i != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS; i = [it nextDoc]) {
       if (![((id<OrgApacheLuceneUtilBits>) nil_chk(oldLiveDocs)) getWithInt:i]) {

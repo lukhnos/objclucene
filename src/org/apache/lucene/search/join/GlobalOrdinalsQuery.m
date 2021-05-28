@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/index/DocValues.h"
 #include "org/apache/lucene/index/IndexReader.h"
@@ -26,6 +25,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/LongBitSet.h"
 #include "org/apache/lucene/util/LongValues.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/GlobalOrdinalsQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchJoinGlobalOrdinalsQuery () {
  @public
@@ -56,66 +59,57 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery, indexReader_, 
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_W, this$0_, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_W, approximationWeight_, OrgApacheLuceneSearchWeight *)
 
-@interface OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1 : OrgApacheLuceneSearchTwoPhaseIterator {
+@interface OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1 : OrgApacheLuceneSearchTwoPhaseIterator {
  @public
   OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *this$0_;
 }
 
-- (jboolean)matches;
-
 - (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer:(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *)outer$
-                                            withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)arg$0;
+                                            withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+
+- (jboolean)matches;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1, this$0_, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *)
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1 *self, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1 *self, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1 *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1 *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1 *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1 *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1)
-
-@interface OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1 : OrgApacheLuceneSearchTwoPhaseIterator {
+@interface OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1 : OrgApacheLuceneSearchTwoPhaseIterator {
  @public
   OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *this$0_;
 }
 
-- (jboolean)matches;
-
 - (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer:(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *)outer$
-                                                withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)arg$0;
+                                                withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+
+- (jboolean)matches;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1, this$0_, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *)
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1 *self, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1 *self, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1 *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1 *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1 *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1 *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation);
 
 @implementation OrgApacheLuceneSearchJoinGlobalOrdinalsQuery
 
-- (instancetype)initWithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)foundOrds
-                                         withNSString:(NSString *)joinField
-    withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)globalOrds
-                       withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)toQuery
-                       withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
-                  withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader {
-  OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(self, foundOrds, joinField, globalOrds, toQuery, fromQuery, indexReader);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)foundOrds
+                                                       withNSString:(NSString *)joinField
+                  withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)globalOrds
+                                     withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)toQuery
+                                     withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
+                                withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader {
+  OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initPackagePrivateWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(self, foundOrds, joinField, globalOrds, toQuery, fromQuery, indexReader);
   return self;
 }
 
@@ -125,8 +119,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentO
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return true;
-  if (o == nil || [self getClass] != (id) [o getClass]) return false;
+  if (JreObjectEqualsEquals(self, o)) return true;
+  if (o == nil || !JreObjectEqualsEquals([self java_getClass], [o java_getClass])) return false;
   if (![super isEqual:o]) return false;
   OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *that = (OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *) cast_chk(o, [OrgApacheLuceneSearchJoinGlobalOrdinalsQuery class]);
   if (![((OrgApacheLuceneSearchQuery *) nil_chk(fromQuery_)) isEqual:that->fromQuery_]) return false;
@@ -160,29 +154,38 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentO
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilLongBitSet:withNSString:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexIndexReader:", "GlobalOrdinalsQuery", NULL, 0x0, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneUtilLongBitSet:withNSString:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexIndexReader:);
+  methods[1].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "foundOrds_", NULL, 0x12, "Lorg.apache.lucene.util.LongBitSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "joinField_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "globalOrds_", NULL, 0x12, "Lorg.apache.lucene.index.MultiDocValues$OrdinalMap;", NULL, NULL, .constantValue.asLong = 0 },
-    { "toQuery_", NULL, 0x12, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fromQuery_", NULL, 0x12, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexReader_", NULL, 0x12, "Lorg.apache.lucene.index.IndexReader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "foundOrds_", "LOrgApacheLuceneUtilLongBitSet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "joinField_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "globalOrds_", "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "toQuery_", "LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fromQuery_", "LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "indexReader_", "LOrgApacheLuceneIndexIndexReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.join.GlobalOrdinalsQuery$W;", "Lorg.apache.lucene.search.join.GlobalOrdinalsQuery$OrdinalMapScorer;", "Lorg.apache.lucene.search.join.GlobalOrdinalsQuery$SegmentOrdinalScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery = { 2, "GlobalOrdinalsQuery", "org.apache.lucene.search.join", NULL, 0x10, 5, methods, 6, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilLongBitSet;LNSString;LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;LOrgApacheLuceneSearchQuery;LOrgApacheLuceneSearchQuery;LOrgApacheLuceneIndexIndexReader;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "equals", "LNSObject;", "hashCode", "toString", "LNSString;", "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_W;LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer;LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery = { "GlobalOrdinalsQuery", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x10, 5, 6, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *self, OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader) {
+void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initPackagePrivateWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *self, OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader) {
   OrgApacheLuceneSearchQuery_init(self);
   JreStrongAssign(&self->foundOrds_, foundOrds);
   JreStrongAssign(&self->joinField_, joinField);
@@ -192,12 +195,12 @@ void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initWithOrgApacheLuceneUtilLon
   JreStrongAssign(&self->indexReader_, indexReader);
 }
 
-OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery, initWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_, foundOrds, joinField, globalOrds, toQuery, fromQuery, indexReader)
+OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initPackagePrivateWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery, initPackagePrivateWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_, foundOrds, joinField, globalOrds, toQuery, fromQuery, indexReader)
 }
 
-OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery, initWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_, foundOrds, joinField, globalOrds, toQuery, fromQuery, indexReader)
+OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initPackagePrivateWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery, initPackagePrivateWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_, foundOrds, joinField, globalOrds, toQuery, fromQuery, indexReader)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery)
@@ -220,7 +223,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery)
   if (values != nil) {
     jint segmentOrd = [values getOrdWithInt:doc];
     if (segmentOrd != -1) {
-      OrgApacheLuceneUtilBytesRef *joinValue = [values lookupOrdWithInt:segmentOrd];
+      OrgApacheLuceneUtilBytesRef *joinValue = JreRetainedLocalValue([values lookupOrdWithInt:segmentOrd]);
       return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(queryNorm_, JreStrcat("$$", @"Score based on join value ", [((OrgApacheLuceneUtilBytesRef *) nil_chk(joinValue)) utf8ToString]), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
     }
   }
@@ -243,7 +246,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery)
   if (values == nil) {
     return nil;
   }
-  OrgApacheLuceneSearchScorer *approximationScorer = [((OrgApacheLuceneSearchWeight *) nil_chk(approximationWeight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+  OrgApacheLuceneSearchScorer *approximationScorer = JreRetainedLocalValue([((OrgApacheLuceneSearchWeight *) nil_chk(approximationWeight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
   if (approximationScorer == nil) {
     return nil;
   }
@@ -262,21 +265,32 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchWeight:", "W", NULL, 0x0, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 4, 5, 6, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 6, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 9, 10, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchWeight:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  methods[3].selector = @selector(getValueForNormalization);
+  methods[4].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[5].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.join.GlobalOrdinalsQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "approximationWeight_", NULL, 0x12, "Lorg.apache.lucene.search.Weight;", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryNorm_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryWeight_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "approximationWeight_", "LOrgApacheLuceneSearchWeight;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "queryNorm_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "queryWeight_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_W = { 2, "W", "org.apache.lucene.search.join", "GlobalOrdinalsQuery", 0x10, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery;LOrgApacheLuceneSearchQuery;LOrgApacheLuceneSearchWeight;", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "LJavaIoIOException;", "normalize", "FF", "scorer", "LOrgApacheLuceneIndexLeafReaderContext;", "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_W = { "W", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x10, 6, 4, 11, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_W;
 }
 
@@ -324,7 +338,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_W)
 }
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation {
-  return create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, approximation);
+  return create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, approximation);
 }
 
 - (void)dealloc {
@@ -334,23 +348,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_W)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:withFloat:withOrgApacheLuceneUtilLongBitSet:withOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneUtilLongValues:", "OrdinalMapScorer", NULL, 0x1, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:", "createTwoPhaseIterator", "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x4, 4, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchWeight:withFloat:withOrgApacheLuceneUtilLongBitSet:withOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneUtilLongValues:);
+  methods[1].selector = @selector(advanceWithInt:);
+  methods[2].selector = @selector(createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "foundOrds_", NULL, 0x10, "Lorg.apache.lucene.util.LongBitSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentOrdToGlobalOrdLookup_", NULL, 0x10, "Lorg.apache.lucene.util.LongValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "foundOrds_", "LOrgApacheLuceneUtilLongBitSet;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "segmentOrdToGlobalOrdLookup_", "LOrgApacheLuceneUtilLongValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer = { 2, "OrdinalMapScorer", "org.apache.lucene.search.join", "GlobalOrdinalsQuery", 0x18, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchWeight;FLOrgApacheLuceneUtilLongBitSet;LOrgApacheLuceneIndexSortedDocValues;LOrgApacheLuceneSearchScorer;LOrgApacheLuceneUtilLongValues;", "advance", "I", "LJavaIoIOException;", "createTwoPhaseIterator", "LOrgApacheLuceneSearchDocIdSetIterator;", "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer = { "OrdinalMapScorer", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x18, 3, 2, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer;
 }
 
 @end
 
 void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilLongValues_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *self, OrgApacheLuceneSearchWeight *weight, jfloat score, OrgApacheLuceneUtilLongBitSet *foundOrds, OrgApacheLuceneIndexSortedDocValues *values, OrgApacheLuceneSearchScorer *approximationScorer, OrgApacheLuceneUtilLongValues *segmentOrdToGlobalOrdLookup) {
-  OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_(self, weight, values, approximationScorer);
+  OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_(self, weight, values, approximationScorer);
   self->score_ = score;
   JreStrongAssign(&self->foundOrds_, foundOrds);
   JreStrongAssign(&self->segmentOrdToGlobalOrdLookup_, segmentOrdToGlobalOrdLookup);
@@ -366,7 +388,13 @@ OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *create_OrgApacheL
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer)
 
-@implementation OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1
+@implementation OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1
+
+- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer:(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *)outer$
+                                            withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation {
+  OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, approximation);
+  return self;
+}
 
 - (jboolean)matches {
   jlong segmentOrd = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(this$0_->values_)) getOrdWithInt:[((OrgApacheLuceneSearchScorer *) nil_chk(this$0_->approximationScorer_)) docID]];
@@ -379,46 +407,44 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_Or
   return false;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer:(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *)outer$
-                                            withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)arg$0 {
-  OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "matches", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer:withOrgApacheLuceneSearchDocIdSetIterator:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer:withOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[1].selector = @selector(matches);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.join.GlobalOrdinalsQuery$OrdinalMapScorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer", "createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1 = { 2, "", "org.apache.lucene.search.join", "GlobalOrdinalsQuery$OrdinalMapScorer", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer;LOrgApacheLuceneSearchDocIdSetIterator;", "LJavaIoIOException;", "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer;", "createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1 = { "", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8010, 2, 1, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1 *self, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1 *self, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchTwoPhaseIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(self, arg$0);
+  OrgApacheLuceneSearchTwoPhaseIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(self, approximation);
 }
 
-OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1 *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1, initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1 *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1, initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, approximation)
 }
 
-OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1 *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1, initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1 *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_1, initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, approximation)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalMapScorer_$1)
 
 @implementation OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer
 
@@ -444,7 +470,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_Or
 }
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation {
-  return create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, approximation);
+  return create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, approximation);
 }
 
 - (void)dealloc {
@@ -453,22 +479,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_Or
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:withFloat:withOrgApacheLuceneUtilLongBitSet:withOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneSearchScorer:", "SegmentOrdinalScorer", NULL, 0x1, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:", "createTwoPhaseIterator", "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x4, 4, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchWeight:withFloat:withOrgApacheLuceneUtilLongBitSet:withOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(advanceWithInt:);
+  methods[2].selector = @selector(createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "foundOrds_", NULL, 0x10, "Lorg.apache.lucene.util.LongBitSet;", NULL, NULL, .constantValue.asLong = 0 },
+    { "foundOrds_", "LOrgApacheLuceneUtilLongBitSet;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer = { 2, "SegmentOrdinalScorer", "org.apache.lucene.search.join", "GlobalOrdinalsQuery", 0x18, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchWeight;FLOrgApacheLuceneUtilLongBitSet;LOrgApacheLuceneIndexSortedDocValues;LOrgApacheLuceneSearchScorer;", "advance", "I", "LJavaIoIOException;", "createTwoPhaseIterator", "LOrgApacheLuceneSearchDocIdSetIterator;", "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer = { "SegmentOrdinalScorer", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x18, 3, 1, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer;
 }
 
 @end
 
 void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *self, OrgApacheLuceneSearchWeight *weight, jfloat score, OrgApacheLuceneUtilLongBitSet *foundOrds, OrgApacheLuceneIndexSortedDocValues *values, OrgApacheLuceneSearchScorer *approximationScorer) {
-  OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_(self, weight, values, approximationScorer);
+  OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_(self, weight, values, approximationScorer);
   self->score_ = score;
   JreStrongAssign(&self->foundOrds_, foundOrds);
 }
@@ -483,7 +517,13 @@ OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *create_OrgApa
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer)
 
-@implementation OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1
+@implementation OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1
+
+- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer:(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *)outer$
+                                                withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation {
+  OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, approximation);
+  return self;
+}
 
 - (jboolean)matches {
   jlong segmentOrd = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(this$0_->values_)) getOrdWithInt:[((OrgApacheLuceneSearchScorer *) nil_chk(this$0_->approximationScorer_)) docID]];
@@ -495,43 +535,41 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_Se
   return false;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer:(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *)outer$
-                                                withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)arg$0 {
-  OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "matches", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer:withOrgApacheLuceneSearchDocIdSetIterator:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer:withOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[1].selector = @selector(matches);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.join.GlobalOrdinalsQuery$SegmentOrdinalScorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer", "createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1 = { 2, "", "org.apache.lucene.search.join", "GlobalOrdinalsQuery$SegmentOrdinalScorer", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer;LOrgApacheLuceneSearchDocIdSetIterator;", "LJavaIoIOException;", "LOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer;", "createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1 = { "", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8010, 2, 1, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1 *self, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1 *self, OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchTwoPhaseIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(self, arg$0);
+  OrgApacheLuceneSearchTwoPhaseIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(self, approximation);
 }
 
-OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1 *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1, initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1 *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1, initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, approximation)
 }
 
-OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1 *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1, initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1 *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_1, initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, approximation)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentOrdinalScorer_$1)

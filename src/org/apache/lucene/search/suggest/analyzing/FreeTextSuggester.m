@@ -16,6 +16,7 @@
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/RuntimeException.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
@@ -24,6 +25,10 @@
 #include "java/util/HashSet.h"
 #include "java/util/List.h"
 #include "java/util/Set.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/AnalyzerWrapper.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -70,6 +75,12 @@
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/analyzing/FreeTextSuggester must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester () {
  @public
   /*!
@@ -78,13 +89,13 @@
   OrgApacheLuceneUtilFstFST *fst_;
   /*!
    @brief Analyzer that will be used for analyzing suggestions at
- index time.
+  index time.
    */
   OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer_;
   jlong totTokens_;
   /*!
    @brief Analyzer that will be used for analyzing suggestions at
- query time.
+  query time.
    */
   OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer_;
   jint grams_;
@@ -138,10 +149,10 @@ __attribute__((unused)) static JavaLangLong *OrgApacheLuceneSearchSuggestAnalyzi
   OrgApacheLuceneUtilBytesRef *scratchB_;
 }
 
+- (instancetype)init;
+
 - (jint)compareWithId:(OrgApacheLuceneUtilBytesRef *)a
                withId:(OrgApacheLuceneUtilBytesRef *)b;
-
-- (instancetype)init;
 
 @end
 
@@ -154,117 +165,103 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_Analy
 
 __attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator_init(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator_init();
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator)
 
-@interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2 : OrgApacheLuceneAnalysisAnalyzerWrapper {
+@interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1 : OrgApacheLuceneAnalysisAnalyzerWrapper {
  @public
   OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *this$0_;
   OrgApacheLuceneAnalysisAnalyzer *val$other_;
 }
+
+- (instancetype)initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *)outer$
+                                           withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)capture$0
+                             withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)reuseStrategy;
 
 - (OrgApacheLuceneAnalysisAnalyzer *)getWrappedAnalyzerWithNSString:(NSString *)fieldName;
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components;
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *)outer$
-                                           withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)capture$0
-                             withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2, this$0_, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2, val$other_, OrgApacheLuceneAnalysisAnalyzer *)
+__attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1 *self, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *reuseStrategy);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2 *self, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *reuseStrategy) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *reuseStrategy);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2)
-
-@interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3 : OrgApacheLuceneUtilFstUtil_TopNSearcher {
+@interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2 : OrgApacheLuceneUtilFstUtil_TopNSearcher {
  @public
   OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *this$0_;
-  OrgApacheLuceneUtilBytesRefBuilder *scratchBytes_;
   OrgApacheLuceneUtilBytesRefBuilder *val$finalLastToken_;
   id<JavaUtilSet> val$seen_;
+  OrgApacheLuceneUtilBytesRefBuilder *scratchBytes_;
 }
+
+- (instancetype)initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *)outer$
+                                        withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)capture$0
+                                                               withJavaUtilSet:(id<JavaUtilSet>)capture$1
+                                                 withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
+                                                                       withInt:(jint)topN
+                                                                       withInt:(jint)maxQueueDepth
+                                                        withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
 - (void)addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path;
 
 - (jboolean)acceptResultWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
                                                 withId:(JavaLangLong *)output;
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *)outer$
-                                        withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)capture$0
-                                                               withJavaUtilSet:(id<JavaUtilSet>)capture$1
-                                                 withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)arg$0
-                                                                       withInt:(jint)arg$1
-                                                                       withInt:(jint)arg$2
-                                                        withJavaUtilComparator:(id<JavaUtilComparator>)arg$3;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3, this$0_, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3, scratchBytes_, OrgApacheLuceneUtilBytesRefBuilder *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3, val$finalLastToken_, OrgApacheLuceneUtilBytesRefBuilder *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3, val$seen_, id<JavaUtilSet>)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2, scratchBytes_, OrgApacheLuceneUtilBytesRefBuilder *)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3 *self, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3);
+__attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2 *self, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3);
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3)
+@interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3 : NSObject < JavaUtilComparator >
 
-@interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4 : NSObject < JavaUtilComparator >
+- (instancetype)init;
 
 - (jint)compareWithId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)a
                withId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)b;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4_init(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4 *self);
+__attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3_init(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3 *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4_init();
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3_init(void);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4)
+@interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4 : NSObject < JavaUtilComparator >
 
-@interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1 : NSObject < JavaUtilComparator >
+- (instancetype)init;
 
 - (jint)compareWithId:(JavaLangLong *)left
                withId:(JavaLangLong *)right;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1_init(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4_init(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4 *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4_init(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
 
@@ -359,7 +356,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
   if ([iterator hasContexts]) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"this suggester doesn't support contexts");
   }
-  NSString *prefix = [[self getClass] getSimpleName];
+  NSString *prefix = [[self java_getClass] getSimpleName];
   OrgLukhnosPortmobileFilePath *tempIndexPath = OrgLukhnosPortmobileFileFiles_createTempDirectoryWithNSString_(JreStrcat("$$", prefix, @".index."));
   OrgApacheLuceneStoreDirectory *dir = OrgApacheLuceneStoreFSDirectory_openWithOrgLukhnosPortmobileFilePath_(tempIndexPath);
   OrgApacheLuceneIndexIndexWriterConfig *iwc = create_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(indexAnalyzer_);
@@ -379,7 +376,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
   count_ = 0;
   @try {
     while (true) {
-      OrgApacheLuceneUtilBytesRef *surfaceForm = [iterator next];
+      OrgApacheLuceneUtilBytesRef *surfaceForm = JreRetainedLocalValue([iterator next]);
       if (surfaceForm == nil) {
         break;
       }
@@ -392,12 +389,12 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
     if (terms == nil) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"need at least one suggestion");
     }
-    OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
+    OrgApacheLuceneIndexTermsEnum *termsEnum = JreRetainedLocalValue([terms iterator]);
     OrgApacheLuceneUtilFstOutputs *outputs = OrgApacheLuceneUtilFstPositiveIntOutputs_getSingleton();
     OrgApacheLuceneUtilFstBuilder *builder = create_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_(JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1), outputs);
     OrgApacheLuceneUtilIntsRefBuilder *scratchInts = create_OrgApacheLuceneUtilIntsRefBuilder_init();
     while (true) {
-      OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next];
+      OrgApacheLuceneUtilBytesRef *term = JreRetainedLocalValue([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next]);
       if (term == nil) {
         break;
       }
@@ -477,7 +474,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
     return [self lookupWithJavaLangCharSequence:key withJavaUtilSet:contexts withInt:num];
   }
   @catch (JavaIoIOException *ioe) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe);
   }
 }
 
@@ -500,21 +497,21 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
   }
   {
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(queryAnalyzer_)) tokenStreamWithNSString:@"" withNSString:[((id<JavaLangCharSequence>) nil_chk(key)) description]];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termBytesAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
-      id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
-      id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute> posLenAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_()];
-      id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()];
+      id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termBytesAtt = JreRetainedLocalValue([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()]);
+      id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = JreRetainedLocalValue([ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
+      id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute> posLenAtt = JreRetainedLocalValue([ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_()]);
+      id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt = JreRetainedLocalValue([ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
       [ts reset];
       IOSObjectArray *lastTokens = [IOSObjectArray arrayWithLength:grams_ type:OrgApacheLuceneUtilBytesRefBuilder_class_()];
       jint maxEndOffset = -1;
       jboolean sawRealToken = false;
       while ([ts incrementToken]) {
-        OrgApacheLuceneUtilBytesRef *tokenBytes = [((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(termBytesAtt)) getBytesRef];
+        OrgApacheLuceneUtilBytesRef *tokenBytes = JreRetainedLocalValue([((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(termBytesAtt)) getBytesRef]);
         sawRealToken |= (((OrgApacheLuceneUtilBytesRef *) nil_chk(tokenBytes))->length_ > 0);
         jint gramCount = [((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) nil_chk(posLenAtt)) getPositionLength];
-        JreAssert((gramCount <= grams_), (@"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:498 condition failed: assert gramCount <= grams;"));
+        JreAssert(gramCount <= grams_, @"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:498 condition failed: assert gramCount <= grams;");
         if (OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_countGramsWithOrgApacheLuceneUtilBytesRef_(self, tokenBytes) != gramCount) {
           @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$I$I", @"tokens must not contain separator byte; got token=", tokenBytes, @" but gramCount=", gramCount, @" does not match recalculated count=", OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_countGramsWithOrgApacheLuceneUtilBytesRef_(self, tokenBytes)));
         }
@@ -541,13 +538,13 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
         IOSObjectArray_SetAndConsume(lastTokens, 0, new_OrgApacheLuceneUtilBytesRefBuilder_init());
       }
       OrgApacheLuceneUtilFstFST_Arc *arc = create_OrgApacheLuceneUtilFstFST_Arc_init();
-      OrgApacheLuceneUtilFstFST_BytesReader *bytesReader = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) getBytesReader];
+      OrgApacheLuceneUtilFstFST_BytesReader *bytesReader = JreRetainedLocalValue([((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) getBytesReader]);
       jdouble backoff = 1.0;
       id<JavaUtilList> results = create_JavaUtilArrayList_initWithInt_(num);
       id<JavaUtilSet> seen = create_JavaUtilHashSet_init();
       for (jint gram = grams_ - 1; gram >= 0; gram--) {
         OrgApacheLuceneUtilBytesRefBuilder *token = IOSObjectArray_Get(lastTokens, gram);
-        if (token == nil || ([token length] == 0 && [key length] > 0)) {
+        if (token == nil || ([token length] == 0 && [key java_length] > 0)) {
           continue;
         }
         if (endPosInc > 0 && gram <= endPosInc) {
@@ -558,7 +555,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
           prefixOutput = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_lookupPrefixWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilFstFST_Arc_(self, fst_, bytesReader, [token get], arc);
         }
         @catch (JavaIoIOException *bogus) {
-          @throw create_JavaLangRuntimeException_initWithNSException_(bogus);
+          @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(bogus);
         }
         if (prefixOutput == nil) {
           JreTimesAssignDoubleD(&backoff, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_ALPHA);
@@ -570,7 +567,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
           if ([token byteAtWithInt:i] == separator_) {
             OrgApacheLuceneUtilBytesRef *context = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_([token bytes], 0, i);
             JavaLangLong *output = OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilIntsRef_(fst_, OrgApacheLuceneUtilFstUtil_toIntsRefWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilIntsRefBuilder_(context, create_OrgApacheLuceneUtilIntsRefBuilder_init()));
-            JreAssert((output != nil), (@"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:610 condition failed: assert output != null;"));
+            JreAssert(output != nil, @"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:610 condition failed: assert output != null;");
             contextCount = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_decodeWeightWithJavaLangLong_(self, output);
             lastTokenFragment = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_([token bytes], i + 1, [token length] - i - 1);
             break;
@@ -586,13 +583,13 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
         OrgApacheLuceneUtilCharsRefBuilder *spare = create_OrgApacheLuceneUtilCharsRefBuilder_init();
         OrgApacheLuceneUtilFstUtil_TopResults *completions = nil;
         @try {
-          OrgApacheLuceneUtilFstUtil_TopNSearcher *searcher = create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(self, finalLastToken, seen, fst_, num, num + [seen size], OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator);
+          OrgApacheLuceneUtilFstUtil_TopNSearcher *searcher = create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(self, finalLastToken, seen, fst_, num, num + [seen size], OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator);
           [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:arc withId:prefixOutput withBoolean:true withOrgApacheLuceneUtilIntsRefBuilder:create_OrgApacheLuceneUtilIntsRefBuilder_init()];
           completions = [searcher search];
-          JreAssert((((OrgApacheLuceneUtilFstUtil_TopResults *) nil_chk(completions))->isComplete_), (@"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:674 condition failed: assert completions.isComplete;"));
+          JreAssert(((OrgApacheLuceneUtilFstUtil_TopResults *) nil_chk(completions))->isComplete_, @"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:674 condition failed: assert completions.isComplete;");
         }
         @catch (JavaIoIOException *bogus) {
-          @throw create_JavaLangRuntimeException_initWithNSException_(bogus);
+          @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(bogus);
         }
         jint prefixLength = [token length];
         OrgApacheLuceneUtilBytesRefBuilder *suffix = create_OrgApacheLuceneUtilBytesRefBuilder_init();
@@ -601,10 +598,10 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
             [token setLengthWithInt:prefixLength];
             OrgApacheLuceneUtilFstUtil_toBytesRefWithOrgApacheLuceneUtilIntsRef_withOrgApacheLuceneUtilBytesRefBuilder_(((OrgApacheLuceneUtilFstUtil_Result *) nil_chk(completion))->input_, suffix);
             [token appendWithOrgApacheLuceneUtilBytesRefBuilder:suffix];
-            OrgApacheLuceneUtilBytesRef *lastToken = [token get];
+            OrgApacheLuceneUtilBytesRef *lastToken = JreRetainedLocalValue([token get]);
             for (jint i = [token length] - 1; i >= 0; i--) {
               if ([token byteAtWithInt:i] == separator_) {
-                JreAssert(([token length] - i - 1 > 0), (@"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:698 condition failed: assert token.length()-i-1 > 0;"));
+                JreAssert([token length] - i - 1 > 0, @"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:698 condition failed: assert token.length()-i-1 > 0;");
                 lastToken = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_([token bytes], i + 1, [token length] - i - 1);
                 break;
               }
@@ -614,21 +611,21 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
             }
             [seen addWithId:OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(lastToken)];
             [spare copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:[token get]];
-            OrgApacheLuceneSearchSuggestLookup_LookupResult *result = create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_([spare description], JreFpToLong((JavaLangLong_MAX_VALUE * backoff * ((jdouble) OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_decodeWeightWithJavaLangLong_(self, ((JavaLangLong *) completion->output_))) / contextCount)));
+            OrgApacheLuceneSearchSuggestLookup_LookupResult *result = create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_([spare description], JreFpToLong((JavaLangLong_MAX_VALUE * backoff * ((jdouble) OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_decodeWeightWithJavaLangLong_(self, completion->output_)) / contextCount)));
             [results addWithId:result];
-            JreAssert(([results size] == [seen size]), (@"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:711 condition failed: assert results.size() == seen.size();"));
+            JreAssert([results size] == [seen size], @"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:711 condition failed: assert results.size() == seen.size();");
           }
           continue_nextCompletion: ;
         }
         JreTimesAssignDoubleD(&backoff, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_ALPHA);
       }
-      JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(results, create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4_init());
+      JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(results, create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3_init());
       if ([results size] > num) {
         [((id<JavaUtilList>) nil_chk([results subListWithInt:num withInt:[results size]])) clear];
       }
       return results;
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -637,10 +634,12 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
         if (__primaryException1 != nil) {
           @try {
             [ts close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [ts close];
         }
       }
@@ -674,56 +673,81 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
   [super dealloc];
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator, new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1_init());
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
-  }
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x2, 5, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, 8, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 9, 8, -1, -1, -1 },
+    { NULL, "Z", 0x1, 10, 11, 8, -1, -1, -1 },
+    { NULL, "Z", 0x1, 12, 13, 8, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 14, 15, -1, 16, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 14, 17, -1, 18, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 14, 19, -1, 20, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 21, 22, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 14, 23, 8, 24, -1, -1 },
+    { NULL, "J", 0x2, 25, 26, -1, -1, -1, -1 },
+    { NULL, "J", 0x2, 27, 28, -1, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x2, 29, 30, 8, 31, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 32, 33, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withByte:);
+  methods[4].selector = @selector(ramBytesUsed);
+  methods[5].selector = @selector(getChildResources);
+  methods[6].selector = @selector(addShinglesWithOrgApacheLuceneAnalysisAnalyzer:);
+  methods[7].selector = @selector(buildWithOrgApacheLuceneSearchSuggestInputIterator:);
+  methods[8].selector = @selector(buildWithOrgApacheLuceneSearchSuggestInputIterator:withDouble:);
+  methods[9].selector = @selector(storeWithOrgApacheLuceneStoreDataOutput:);
+  methods[10].selector = @selector(load__WithOrgApacheLuceneStoreDataInput:);
+  methods[11].selector = @selector(lookupWithJavaLangCharSequence:withBoolean:withInt:);
+  methods[12].selector = @selector(lookupWithJavaLangCharSequence:withInt:);
+  methods[13].selector = @selector(lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:);
+  methods[14].selector = @selector(getCount);
+  methods[15].selector = @selector(countGramsWithOrgApacheLuceneUtilBytesRef:);
+  methods[16].selector = @selector(lookupWithJavaLangCharSequence:withJavaUtilSet:withInt:);
+  methods[17].selector = @selector(encodeWeightWithLong:);
+  methods[18].selector = @selector(decodeWeightWithJavaLangLong:);
+  methods[19].selector = @selector(lookupPrefixWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilFstFST_BytesReader:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilFstFST_Arc:);
+  methods[20].selector = @selector(getWithJavaLangCharSequence:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "CODEC_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 34, -1, -1 },
+    { "VERSION_START", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_START, 0x19, -1, -1, -1, -1 },
+    { "VERSION_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_CURRENT, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_GRAMS", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_GRAMS, 0x19, -1, -1, -1, -1 },
+    { "ALPHA", "D", .constantValue.asDouble = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_ALPHA, 0x19, -1, -1, -1, -1 },
+    { "fst_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x2, -1, -1, 35, -1 },
+    { "indexAnalyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "totTokens_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "queryAnalyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "grams_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "separator_", "B", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "count_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "DEFAULT_SEPARATOR", "B", .constantValue.asChar = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_SEPARATOR, 0x19, -1, -1, -1, -1 },
+    { "weightComparator", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x18, -1, 36, 37, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneAnalysisAnalyzer;", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneAnalysisAnalyzer;I", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneAnalysisAnalyzer;IB", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "addShingles", "build", "LOrgApacheLuceneSearchSuggestInputIterator;", "LJavaIoIOException;", "LOrgApacheLuceneSearchSuggestInputIterator;D", "store", "LOrgApacheLuceneStoreDataOutput;", "load", "LOrgApacheLuceneStoreDataInput;", "lookup", "LJavaLangCharSequence;ZI", "(Ljava/lang/CharSequence;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;", "LJavaLangCharSequence;I", "(Ljava/lang/CharSequence;I)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;", "LJavaLangCharSequence;LJavaUtilSet;ZI", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;", "countGrams", "LOrgApacheLuceneUtilBytesRef;", "LJavaLangCharSequence;LJavaUtilSet;I", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;I)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;", "encodeWeight", "J", "decodeWeight", "LJavaLangLong;", "lookupPrefix", "LOrgApacheLuceneUtilFstFST;LOrgApacheLuceneUtilFstFST_BytesReader;LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilFstFST_Arc;", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;Lorg/apache/lucene/util/fst/FST$BytesReader;Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Long;>;)Ljava/lang/Long;", "get", "LJavaLangCharSequence;", &OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_CODEC_NAME, "Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;", &OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator, "Ljava/util/Comparator<Ljava/lang/Long;>;", "LOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester = { "FreeTextSuggester", "org.apache.lucene.search.suggest.analyzing", ptrTable, methods, fields, 7, 0x1, 21, 14, -1, 38, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:", "FreeTextSuggester", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:", "FreeTextSuggester", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:", "FreeTextSuggester", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withByte:", "FreeTextSuggester", NULL, 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "addShinglesWithOrgApacheLuceneAnalysisAnalyzer:", "addShingles", "Lorg.apache.lucene.analysis.Analyzer;", 0x2, NULL, NULL },
-    { "buildWithOrgApacheLuceneSearchSuggestInputIterator:", "build", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "buildWithOrgApacheLuceneSearchSuggestInputIterator:withDouble:", "build", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "storeWithOrgApacheLuceneStoreDataOutput:", "store", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "load__WithOrgApacheLuceneStoreDataInput:", "load", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/CharSequence;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
-    { "lookupWithJavaLangCharSequence:withInt:", "lookup", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/CharSequence;I)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
-    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
-    { "getCount", NULL, "J", 0x1, NULL, NULL },
-    { "countGramsWithOrgApacheLuceneUtilBytesRef:", "countGrams", "I", 0x2, NULL, NULL },
-    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withInt:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;I)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
-    { "encodeWeightWithLong:", "encodeWeight", "J", 0x2, NULL, NULL },
-    { "decodeWeightWithJavaLangLong:", "decodeWeight", "J", 0x2, NULL, NULL },
-    { "lookupPrefixWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilFstFST_BytesReader:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilFstFST_Arc:", "lookupPrefix", "Ljava.lang.Long;", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;Lorg/apache/lucene/util/fst/FST$BytesReader;Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Long;>;)Ljava/lang/Long;" },
-    { "getWithJavaLangCharSequence:", "get", "Ljava.lang.Object;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "CODEC_NAME", "CODEC_NAME", 0x19, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_CODEC_NAME, NULL, .constantValue.asLong = 0 },
-    { "VERSION_START", "VERSION_START", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_START },
-    { "VERSION_CURRENT", "VERSION_CURRENT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_CURRENT },
-    { "DEFAULT_GRAMS", "DEFAULT_GRAMS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_GRAMS },
-    { "ALPHA", "ALPHA", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_ALPHA },
-    { "fst_", NULL, 0x2, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;", .constantValue.asLong = 0 },
-    { "indexAnalyzer_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "totTokens_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryAnalyzer_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "grams_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "separator_", NULL, 0x12, "B", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_SEPARATOR", "DEFAULT_SEPARATOR", 0x19, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_SEPARATOR },
-    { "weightComparator", "weightComparator", 0x18, "Ljava.util.Comparator;", &OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator, "Ljava/util/Comparator<Ljava/lang/Long;>;", .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.analyzing.FreeTextSuggester$AnalyzingComparator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester = { 2, "FreeTextSuggester", "org.apache.lucene.search.suggest.analyzing", NULL, 0x1, 21, methods, 14, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;
++ (void)initialize {
+  if (self == [OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester class]) {
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator, new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4_init());
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
+  }
 }
 
 @end
@@ -792,7 +816,7 @@ OrgApacheLuceneAnalysisAnalyzer *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSu
     return other;
   }
   else {
-    return create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, other, [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(other)) getReuseStrategy]);
+    return create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, other, [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(other)) getReuseStrategy]);
   }
 }
 
@@ -811,12 +835,12 @@ jlong OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_encodeWeightWithLon
 }
 
 jlong OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_decodeWeightWithJavaLangLong_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self, JavaLangLong *output) {
-  JreAssert((output != nil), (@"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:747 condition failed: assert output != null;"));
+  JreAssert(output != nil, @"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:747 condition failed: assert output != null;");
   return (jint) (JavaLangLong_MAX_VALUE - [((JavaLangLong *) nil_chk(output)) longLongValue]);
 }
 
 JavaLangLong *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_lookupPrefixWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilFstFST_Arc_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self, OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilFstFST_BytesReader *bytesReader, OrgApacheLuceneUtilBytesRef *scratch, OrgApacheLuceneUtilFstFST_Arc *arc) {
-  JavaLangLong *output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst))->outputs_)) getNoOutput];
+  JavaLangLong *output = JreRetainedLocalValue([((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst))->outputs_)) getNoOutput]);
   [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:arc];
   IOSByteArray *bytes = ((OrgApacheLuceneUtilBytesRef *) nil_chk(scratch))->bytes_;
   jint pos = scratch->offset_;
@@ -826,7 +850,7 @@ JavaLangLong *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_lookupPrefi
       return nil;
     }
     else {
-      output = [fst->outputs_ addWithId:output withId:((JavaLangLong *) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_)];
+      output = [fst->outputs_ addWithId:output withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_];
     }
   }
   return output;
@@ -835,6 +859,13 @@ JavaLangLong *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_lookupPrefi
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
 
 @implementation OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(OrgApacheLuceneUtilBytesRef *)a
                withId:(OrgApacheLuceneUtilBytesRef *)b {
@@ -863,12 +894,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSu
   return [scratchA_ compareToWithId:scratchB_];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator_init(self);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
 }
-J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
 
 - (void)dealloc {
   RELEASE_(readerA_);
@@ -879,17 +932,24 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", "AnalyzingComparator", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "readerA_", NULL, 0x12, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "readerB_", NULL, 0x12, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchA_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchB_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "readerA_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "readerB_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratchA_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratchB_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator = { 2, "AnalyzingComparator", "org.apache.lucene.search.suggest.analyzing", "FreeTextSuggester", 0xa, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const void *ptrTable[] = { "compare", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "LOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator = { "AnalyzingComparator", "org.apache.lucene.search.suggest.analyzing", ptrTable, methods, fields, 7, 0xa, 2, 4, 2, -1, -1, 3, -1 };
   return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator;
 }
 
@@ -913,10 +973,17 @@ OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator *crea
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator)
 
-@implementation OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2
+@implementation OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1
+
+- (instancetype)initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *)outer$
+                                           withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)capture$0
+                             withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)reuseStrategy {
+  OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, outer$, capture$0, reuseStrategy);
+  return self;
+}
 
 - (OrgApacheLuceneAnalysisAnalyzer *)getWrappedAnalyzerWithNSString:(NSString *)fieldName {
-  return val$other_;
+  return JreRetainedLocalValue(val$other_);
 }
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
@@ -926,13 +993,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSu
   return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_([components getTokenizer], shingles);
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *)outer$
-                                           withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)capture$0
-                             withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg$0 {
-  OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, outer$, capture$0, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(val$other_);
@@ -940,39 +1000,55 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWrappedAnalyzerWithNSString:", "getWrappedAnalyzer", "Lorg.apache.lucene.analysis.Analyzer;", 0x4, NULL, NULL },
-    { "wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:", "wrapComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:);
+  methods[1].selector = @selector(getWrappedAnalyzerWithNSString:);
+  methods[2].selector = @selector(wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.suggest.analyzing.FreeTextSuggester;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$other_", NULL, 0x1012, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$other_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester", "addShinglesWithOrgApacheLuceneAnalysisAnalyzer:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2 = { 2, "", "org.apache.lucene.search.suggest.analyzing", "FreeTextSuggester", 0x8008, 3, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;", "getWrappedAnalyzer", "LNSString;", "wrapComponents", "LNSString;LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", "LOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;", "addShinglesWithOrgApacheLuceneAnalysisAnalyzer:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1 = { "", "org.apache.lucene.search.suggest.analyzing", ptrTable, methods, fields, 7, 0x8010, 3, 2, 5, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2 *self, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *arg$0) {
+void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1 *self, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *reuseStrategy) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$other_, capture$0);
-  OrgApacheLuceneAnalysisAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, arg$0);
+  OrgApacheLuceneAnalysisAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, reuseStrategy);
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2, initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_, outer$, capture$0, arg$0)
+OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *reuseStrategy) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1, initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_, outer$, capture$0, reuseStrategy)
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2, initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_, outer$, capture$0, arg$0)
+OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer *capture$0, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *reuseStrategy) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_1, initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_, outer$, capture$0, reuseStrategy)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$2)
+@implementation OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2
 
-@implementation OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3
+- (instancetype)initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *)outer$
+                                        withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)capture$0
+                                                               withJavaUtilSet:(id<JavaUtilSet>)capture$1
+                                                 withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
+                                                                       withInt:(jint)topN
+                                                                       withInt:(jint)maxQueueDepth
+                                                        withJavaUtilComparator:(id<JavaUtilComparator>)comparator {
+  OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(self, outer$, capture$0, capture$1, fst, topN, maxQueueDepth, comparator);
+  return self;
+}
 
 - (void)addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path {
   if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->arc_))->label_ != this$0_->separator_) {
@@ -993,64 +1069,64 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSu
   return ret;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *)outer$
-                                        withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)capture$0
-                                                               withJavaUtilSet:(id<JavaUtilSet>)capture$1
-                                                 withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)arg$0
-                                                                       withInt:(jint)arg$1
-                                                                       withInt:(jint)arg$2
-                                                        withJavaUtilComparator:(id<JavaUtilComparator>)arg$3 {
-  OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(self, outer$, capture$0, capture$1, arg$0, arg$1, arg$2, arg$3);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
-  RELEASE_(scratchBytes_);
   RELEASE_(val$finalLastToken_);
   RELEASE_(val$seen_);
+  RELEASE_(scratchBytes_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:", "addIfCompetitive", "V", 0x4, NULL, "(Lorg/apache/lucene/util/fst/Util$FSTPath<Ljava/lang/Long;>;)V" },
-    { "acceptResultWithOrgApacheLuceneUtilIntsRef:withId:", "acceptResult", "Z", 0x4, NULL, "(Lorg/apache/lucene/util/IntsRef;Ljava/lang/Long;)Z" },
-    { "initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:withOrgApacheLuceneUtilBytesRefBuilder:withJavaUtilSet:withOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:", "", NULL, 0x0, NULL, "(Lorg/apache/lucene/search/suggest/analyzing/FreeTextSuggester;Lorg/apache/lucene/util/BytesRefBuilder;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;IILjava/util/Comparator<Ljava/lang/Long;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x4, 2, 3, -1, 4, -1, -1 },
+    { NULL, "Z", 0x4, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester:withOrgApacheLuceneUtilBytesRefBuilder:withJavaUtilSet:withOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:);
+  methods[1].selector = @selector(addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:);
+  methods[2].selector = @selector(acceptResultWithOrgApacheLuceneUtilIntsRef:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.suggest.analyzing.FreeTextSuggester;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchBytes_", NULL, 0x0, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$finalLastToken_", NULL, 0x1012, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$seen_", NULL, 0x1012, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$finalLastToken_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$seen_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x1012, -1, -1, 7, -1 },
+    { "scratchBytes_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Ljava.lang.Long;"};
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester", "lookupWithJavaLangCharSequence:withJavaUtilSet:withInt:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3 = { 2, "", "org.apache.lucene.search.suggest.analyzing", "FreeTextSuggester", 0x8008, 3, methods, 4, fields, 1, superclass_type_args, 0, NULL, &enclosing_method, "Lorg/apache/lucene/util/fst/Util$TopNSearcher<Ljava/lang/Long;>;" };
-  return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;LOrgApacheLuceneUtilBytesRefBuilder;LJavaUtilSet;LOrgApacheLuceneUtilFstFST;IILJavaUtilComparator;", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;IILjava/util/Comparator<Ljava/lang/Long;>;)V", "addIfCompetitive", "LOrgApacheLuceneUtilFstUtil_FSTPath;", "(Lorg/apache/lucene/util/fst/Util$FSTPath<Ljava/lang/Long;>;)V", "acceptResult", "LOrgApacheLuceneUtilIntsRef;LJavaLangLong;", "Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;", "lookupWithJavaLangCharSequence:withJavaUtilSet:withInt:", "Lorg/apache/lucene/util/fst/Util$TopNSearcher<Ljava/lang/Long;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2 = { "", "org.apache.lucene.search.suggest.analyzing", ptrTable, methods, fields, 7, 0x8010, 3, 4, 8, -1, 9, 10, -1 };
+  return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3 *self, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3) {
+void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2 *self, OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$finalLastToken_, capture$0);
   JreStrongAssign(&self->val$seen_, capture$1);
-  OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(self, arg$0, arg$1, arg$2, arg$3);
+  OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(self, fst, topN, maxQueueDepth, comparator);
   JreStrongAssignAndConsume(&self->scratchBytes_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3, initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_, outer$, capture$0, capture$1, arg$0, arg$1, arg$2, arg$3)
+OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2, initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_, outer$, capture$0, capture$1, fst, topN, maxQueueDepth, comparator)
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3, initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_, outer$, capture$0, capture$1, arg$0, arg$1, arg$2, arg$3)
+OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *outer$, OrgApacheLuceneUtilBytesRefBuilder *capture$0, id<JavaUtilSet> capture$1, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_2, initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_, outer$, capture$0, capture$1, fst, topN, maxQueueDepth, comparator)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3)
+@implementation OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3
 
-@implementation OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)a
                withId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)b {
@@ -1065,74 +1141,134 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSu
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4_init(self);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
 }
-J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester", "lookupWithJavaLangCharSequence:withJavaUtilSet:withInt:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4 = { 2, "", "org.apache.lucene.search.suggest.analyzing", "FreeTextSuggester", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
-  return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compare", "LOrgApacheLuceneSearchSuggestLookup_LookupResult;LOrgApacheLuceneSearchSuggestLookup_LookupResult;", "LOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;", "lookupWithJavaLangCharSequence:withJavaUtilSet:withInt:", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3 = { "", "org.apache.lucene.search.suggest.analyzing", ptrTable, methods, NULL, 7, 0x8010, 2, 0, 2, -1, 3, 4, -1 };
+  return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4_init(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4 *self) {
+void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3_init(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4, init)
+OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3, init)
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4, init)
+OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_3, init)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4)
+@implementation OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4
 
-@implementation OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(JavaLangLong *)left
                withId:(JavaLangLong *)right {
   return [((JavaLangLong *) nil_chk(left)) compareToWithId:right];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1_init(self);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
 }
-J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1 = { 2, "", "org.apache.lucene.search.suggest.analyzing", "FreeTextSuggester", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Ljava/lang/Long;>;" };
-  return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compare", "LJavaLangLong;LJavaLangLong;", "LOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester;", "Ljava/lang/Object;Ljava/util/Comparator<Ljava/lang/Long;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4 = { "", "org.apache.lucene.search.suggest.analyzing", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, -1, 3, -1 };
+  return &_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1_init(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1 *self) {
+void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4_init(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1, init)
+OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4 *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4, init)
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1, init)
+OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4 *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_4, init)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1)

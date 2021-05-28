@@ -9,6 +9,10 @@
 #include "org/apache/lucene/document/FieldType.h"
 #include "org/apache/lucene/queryparser/flexible/standard/config/NumericConfig.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/config/NumericConfig must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig () {
  @public
   jint precisionStep_;
@@ -61,10 +65,10 @@ withOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldTy
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (obj == self) return true;
+  if (JreObjectEqualsEquals(obj, self)) return true;
   if ([obj isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig class]]) {
-    OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *other = (OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) cast_chk(obj, [OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig class]);
-    if (self->precisionStep_ == ((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(other))->precisionStep_ && self->type_ == other->type_ && (self->format_ == other->format_ || ([((JavaTextNumberFormat *) nil_chk(self->format_)) isEqual:other->format_]))) {
+    OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *other = (OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) obj;
+    if (self->precisionStep_ == ((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(other))->precisionStep_ && self->type_ == other->type_ && (JreObjectEqualsEquals(self->format_, other->format_) || ([((JavaTextNumberFormat *) nil_chk(self->format_)) isEqual:other->format_]))) {
       return true;
     }
   }
@@ -78,22 +82,35 @@ withOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldTy
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withJavaTextNumberFormat:withOrgApacheLuceneDocumentFieldType_NumericType:", "NumericConfig", NULL, 0x1, NULL, NULL },
-    { "getPrecisionStep", NULL, "I", 0x1, NULL, NULL },
-    { "setPrecisionStepWithInt:", "setPrecisionStep", "V", 0x1, NULL, NULL },
-    { "getNumberFormat", NULL, "Ljava.text.NumberFormat;", 0x1, NULL, NULL },
-    { "getType", NULL, "Lorg.apache.lucene.document.FieldType$NumericType;", 0x1, NULL, NULL },
-    { "setTypeWithOrgApacheLuceneDocumentFieldType_NumericType:", "setType", "V", 0x1, NULL, NULL },
-    { "setNumberFormatWithJavaTextNumberFormat:", "setNumberFormat", "V", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LJavaTextNumberFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneDocumentFieldType_NumericType;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withJavaTextNumberFormat:withOrgApacheLuceneDocumentFieldType_NumericType:);
+  methods[1].selector = @selector(getPrecisionStep);
+  methods[2].selector = @selector(setPrecisionStepWithInt:);
+  methods[3].selector = @selector(getNumberFormat);
+  methods[4].selector = @selector(getType);
+  methods[5].selector = @selector(setTypeWithOrgApacheLuceneDocumentFieldType_NumericType:);
+  methods[6].selector = @selector(setNumberFormatWithJavaTextNumberFormat:);
+  methods[7].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "precisionStep_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "format_", NULL, 0x2, "Ljava.text.NumberFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "type_", NULL, 0x2, "Lorg.apache.lucene.document.FieldType$NumericType;", NULL, NULL, .constantValue.asLong = 0 },
+    { "precisionStep_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "format_", "LJavaTextNumberFormat;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "type_", "LOrgApacheLuceneDocumentFieldType_NumericType;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig = { 2, "NumericConfig", "org.apache.lucene.queryparser.flexible.standard.config", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ILJavaTextNumberFormat;LOrgApacheLuceneDocumentFieldType_NumericType;", "setPrecisionStep", "I", "setType", "LOrgApacheLuceneDocumentFieldType_NumericType;", "setNumberFormat", "LJavaTextNumberFormat;", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig = { "NumericConfig", "org.apache.lucene.queryparser.flexible.standard.config", ptrTable, methods, fields, 7, 0x1, 8, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig;
 }
 

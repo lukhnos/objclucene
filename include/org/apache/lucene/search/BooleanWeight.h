@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchBooleanWeight
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchBooleanWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanWeight || defined(INCLUDE_OrgApacheLuceneSearchBooleanWeight))
 #define OrgApacheLuceneSearchBooleanWeight_
 
@@ -28,13 +34,14 @@
 @class OrgApacheLuceneSearchBulkScorer;
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
+@class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneSearchSimilaritiesSimilarity;
 @protocol JavaUtilSet;
 
 /*!
  @brief Expert: the Weight for BooleanQuery, used to
- normalize, score and explain these queries.
+  normalize, score and explain these queries.
  */
 @interface OrgApacheLuceneSearchBooleanWeight : OrgApacheLuceneSearchWeight {
  @public
@@ -71,17 +78,20 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)query
-                   withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                              withBoolean:(jboolean)needsScores
-                                              withBoolean:(jboolean)disableCoord;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)query
+                                           withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                                      withBoolean:(jboolean)needsScores
+                                                                      withBoolean:(jboolean)disableCoord;
 
 /*!
- @brief Try to build a boolean scorer for this weight.
- Returns null if <code>BooleanScorer</code>
- cannot be used. 
+ @brief Try to build a boolean scorer for this weight.Returns null if <code>BooleanScorer</code>
+   cannot be used.
  */
 - (OrgApacheLuceneSearchBooleanScorer *)booleanScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -92,14 +102,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanWeight, query_, OrgApacheLuceneS
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanWeight, weights_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanWeight, coords_, IOSFloatArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanWeight *self, OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanWeight_initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanWeight *self, OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanWeight *new_OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanWeight *new_OrgApacheLuceneSearchBooleanWeight_initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanWeight *create_OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord);
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanWeight *create_OrgApacheLuceneSearchBooleanWeight_initPackagePrivateWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBooleanWeight")

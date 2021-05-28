@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory))
 #define OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory_
 
@@ -27,12 +33,12 @@
 /*!
  @brief Creates new instances of <code>EdgeNGramTokenFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_edgngrm" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.EdgeNGramFilterFactory" minGramSize="1" maxGramSize="1"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_edgngrm" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.EdgeNGramFilterFactory" minGramSize="1" maxGramSize="1"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
@@ -42,7 +48,7 @@
 /*!
  @brief Creates a new EdgeNGramFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory")

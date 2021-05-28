@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_
 
@@ -29,12 +35,12 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSourceArray:(IOSObjectArray *)sources;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSourceArray:(IOSObjectArray *)sources;
 
 #pragma mark Protected
 
 /*!
- @brief True if <em>any</em> of the specified <code>values</code> 
+ @brief True if <em>any</em> of the specified <code>values</code>  
  <code>FunctionValues.exists</code> for the specified doc, else false.
  - seealso: MultiFunction#anyExists
  */
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunc
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction")

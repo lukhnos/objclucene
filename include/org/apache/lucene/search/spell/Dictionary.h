@@ -13,18 +13,23 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpellDictionary
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpellDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellDictionary || defined(INCLUDE_OrgApacheLuceneSearchSpellDictionary))
 #define OrgApacheLuceneSearchSpellDictionary_
 
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
 /*!
- @brief A simple interface representing a Dictionary.
- A Dictionary
- here is a list of entries, where every entry consists of
- term, weight and payload.
+ @brief A simple interface representing a Dictionary.A Dictionary
+  here is a list of entries, where every entry consists of
+  term, weight and payload.
  */
-@protocol OrgApacheLuceneSearchSpellDictionary < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchSpellDictionary < JavaObject >
 
 /*!
  @brief Returns an iterator over all the entries
@@ -40,4 +45,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellDictionary)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellDictionary")

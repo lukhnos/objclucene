@@ -10,11 +10,17 @@
 #include "org/apache/lucene/search/ScoreDoc.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/HitQueue must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @implementation OrgApacheLuceneSearchHitQueue
 
-- (instancetype)initWithInt:(jint)size
-                withBoolean:(jboolean)prePopulate {
-  OrgApacheLuceneSearchHitQueue_initWithInt_withBoolean_(self, size, prePopulate);
+- (instancetype)initPackagePrivateWithInt:(jint)size
+                              withBoolean:(jboolean)prePopulate {
+  OrgApacheLuceneSearchHitQueue_initPackagePrivateWithInt_withBoolean_(self, size, prePopulate);
   return self;
 }
 
@@ -29,28 +35,35 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withBoolean:", "HitQueue", NULL, 0x0, NULL, NULL },
-    { "getSentinelObject", NULL, "Lorg.apache.lucene.search.ScoreDoc;", 0x4, NULL, "()Lorg/apache/lucene/search/ScoreDoc;" },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, "(Lorg/apache/lucene/search/ScoreDoc;Lorg/apache/lucene/search/ScoreDoc;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScoreDoc;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x14, 1, 2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.ScoreDoc;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHitQueue = { 2, "HitQueue", "org.apache.lucene.search", NULL, 0x10, 3, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/ScoreDoc;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:withBoolean:);
+  methods[1].selector = @selector(getSentinelObject);
+  methods[2].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "IZ", "lessThan", "LOrgApacheLuceneSearchScoreDoc;LOrgApacheLuceneSearchScoreDoc;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/ScoreDoc;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHitQueue = { "HitQueue", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x10, 3, 0, -1, -1, -1, 3, -1 };
   return &_OrgApacheLuceneSearchHitQueue;
 }
 
 @end
 
-void OrgApacheLuceneSearchHitQueue_initWithInt_withBoolean_(OrgApacheLuceneSearchHitQueue *self, jint size, jboolean prePopulate) {
+void OrgApacheLuceneSearchHitQueue_initPackagePrivateWithInt_withBoolean_(OrgApacheLuceneSearchHitQueue *self, jint size, jboolean prePopulate) {
   OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(self, size, prePopulate);
 }
 
-OrgApacheLuceneSearchHitQueue *new_OrgApacheLuceneSearchHitQueue_initWithInt_withBoolean_(jint size, jboolean prePopulate) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHitQueue, initWithInt_withBoolean_, size, prePopulate)
+OrgApacheLuceneSearchHitQueue *new_OrgApacheLuceneSearchHitQueue_initPackagePrivateWithInt_withBoolean_(jint size, jboolean prePopulate) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHitQueue, initPackagePrivateWithInt_withBoolean_, size, prePopulate)
 }
 
-OrgApacheLuceneSearchHitQueue *create_OrgApacheLuceneSearchHitQueue_initWithInt_withBoolean_(jint size, jboolean prePopulate) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHitQueue, initWithInt_withBoolean_, size, prePopulate)
+OrgApacheLuceneSearchHitQueue *create_OrgApacheLuceneSearchHitQueue_initPackagePrivateWithInt_withBoolean_(jint size, jboolean prePopulate) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHitQueue, initPackagePrivateWithInt_withBoolean_, size, prePopulate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHitQueue)

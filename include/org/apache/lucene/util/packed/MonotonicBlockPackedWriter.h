@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter))
 #define OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_
 
@@ -25,28 +31,28 @@
 /*!
  @brief A writer for large monotonically increasing sequences of positive longs.
  <p>
- The sequence is divided into fixed-size blocks and for each block, values
- are modeled after a linear function f: x &rarr; A &times; x + B. The block
- encodes deltas from the expected values computed from this function using as
- few bits as possible.
+  The sequence is divided into fixed-size blocks and for each block, values
+  are modeled after a linear function f: x &rarr; A &times; x + B. The block
+  encodes deltas from the expected values computed from this function using as
+  few bits as possible. 
  <p>
- Format:
+  Format: 
  <ul>
- <li>&lt;BLock&gt;<sup>BlockCount</sup>
- <li>BlockCount: &lceil; ValueCount / BlockSize &rceil;
- <li>Block: &lt;Header, (Ints)&gt;
- <li>Header: &lt;B, A, BitsPerValue&gt;
- <li>B: the B from f: x &rarr; A &times; x + B using a
- <code>zig-zag encoded</code>
- <code>vLong</code>
- <li>A: the A from f: x &rarr; A &times; x + B encoded using
- <code>Float.floatToIntBits(float)</code> on
- <code>4 bytes</code>
- <li>BitsPerValue: a <code>variable-length int</code>
- <li>Ints: if BitsPerValue is <tt>0</tt>, then there is nothing to read and
- all values perfectly match the result of the function. Otherwise, these
- are the <code>packed</code> deltas from the expected value
- (computed from the function) using exaclty BitsPerValue bits per value.
+  <li>&lt;BLock&gt;<sup>BlockCount</sup>
+  <li>BlockCount: &lceil; ValueCount / BlockSize &rceil;
+  <li>Block: &lt;Header, (Ints)&gt;
+  <li>Header: &lt;B, A, BitsPerValue&gt;
+  <li>B: the B from f: x &rarr; A &times; x + B using a
+      <code>zig-zag encoded</code>
+      <code>vLong</code>
+  <li>A: the A from f: x &rarr; A &times; x + B encoded using
+      <code>Float.floatToIntBits(float)</code> on
+      <code>4 bytes</code>
+  <li>BitsPerValue: a <code>variable-length int</code>
+  <li>Ints: if BitsPerValue is <tt>0</tt>, then there is nothing to read and
+      all values perfectly match the result of the function. Otherwise, these
+      are the <code>packed</code> deltas from the expected value
+      (computed from the function) using exaclty BitsPerValue bits per value. 
  </ul>
  - seealso: MonotonicBlockPackedReader
  */
@@ -58,14 +64,19 @@
  @brief Sole constructor.
  @param blockSize the number of values of a single block, must be a power of 2
  */
-- (instancetype)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
-                                               withInt:(jint)blockSize;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
+                                                         withInt:(jint)blockSize;
 
 - (void)addWithLong:(jlong)l;
 
 #pragma mark Protected
 
 - (void)flush;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)arg0
+                                                                       withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -81,4 +92,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter")

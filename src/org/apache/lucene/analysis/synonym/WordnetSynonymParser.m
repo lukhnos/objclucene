@@ -6,10 +6,10 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/LineNumberReader.h"
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Throwable.h"
 #include "java/text/ParseException.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
@@ -17,6 +17,10 @@
 #include "org/apache/lucene/analysis/synonym/WordnetSynonymParser.h"
 #include "org/apache/lucene/util/CharsRef.h"
 #include "org/apache/lucene/util/CharsRefBuilder.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/synonym/WordnetSynonymParser must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisSynonymWordnetSynonymParser () {
  @public
@@ -52,7 +56,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
     IOSObjectArray *synset = [IOSObjectArray arrayWithLength:8 type:OrgApacheLuceneUtilCharsRef_class_()];
     jint synsetSize = 0;
     while ((line = [br readLine]) != nil) {
-      NSString *synSetID = [((NSString *) nil_chk(line)) substring:2 endIndex:11];
+      NSString *synSetID = [((NSString *) nil_chk(line)) java_substring:2 endIndex:11];
       if (![((NSString *) nil_chk(synSetID)) isEqual:lastSynSetID]) {
         OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_addInternalWithOrgApacheLuceneUtilCharsRefArray_withInt_(self, synset, synsetSize);
         synsetSize = 0;
@@ -68,7 +72,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
   }
   @catch (JavaLangIllegalArgumentException *e) {
     JavaTextParseException *ex = create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$I", @"Invalid synonym rule at line ", [br getLineNumber]), 0);
-    [ex initCauseWithNSException:e];
+    [ex initCauseWithJavaLangThrowable:e];
     @throw ex;
   }
   @finally {
@@ -87,16 +91,25 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:withBoolean:withOrgApacheLuceneAnalysisAnalyzer:", "WordnetSynonymParser", NULL, 0x1, NULL, NULL },
-    { "parseWithJavaIoReader:", "parse", "V", 0x1, "Ljava.io.IOException;Ljava.text.ParseException;", NULL },
-    { "parseSynonymWithNSString:withOrgApacheLuceneUtilCharsRefBuilder:", "parseSynonym", "Lorg.apache.lucene.util.CharsRef;", 0x2, "Ljava.io.IOException;", NULL },
-    { "addInternalWithOrgApacheLuceneUtilCharsRefArray:withInt:", "addInternal", "V", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCharsRef;", 0x2, 4, 5, 6, -1, -1, -1 },
+    { NULL, "V", 0x2, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithBoolean:withBoolean:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[1].selector = @selector(parseWithJavaIoReader:);
+  methods[2].selector = @selector(parseSynonymWithNSString:withOrgApacheLuceneUtilCharsRefBuilder:);
+  methods[3].selector = @selector(addInternalWithOrgApacheLuceneUtilCharsRefArray:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "expand_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "expand_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymWordnetSynonymParser = { 2, "WordnetSynonymParser", "org.apache.lucene.analysis.synonym", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ZZLOrgApacheLuceneAnalysisAnalyzer;", "parse", "LJavaIoReader;", "LJavaIoIOException;LJavaTextParseException;", "parseSynonym", "LNSString;LOrgApacheLuceneUtilCharsRefBuilder;", "LJavaIoIOException;", "addInternal", "[LOrgApacheLuceneUtilCharsRef;I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymWordnetSynonymParser = { "WordnetSynonymParser", "org.apache.lucene.analysis.synonym", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser;
 }
 
@@ -119,9 +132,9 @@ OrgApacheLuceneUtilCharsRef *OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_
   if (reuse == nil) {
     reuse = create_OrgApacheLuceneUtilCharsRefBuilder_init();
   }
-  jint start = [((NSString *) nil_chk(line)) indexOf:'\''] + 1;
-  jint end = [line lastIndexOf:'\''];
-  NSString *text = [((NSString *) nil_chk([line substring:start endIndex:end])) replace:@"''" withSequence:@"'"];
+  jint start = [((NSString *) nil_chk(line)) java_indexOf:'\''] + 1;
+  jint end = [line java_lastIndexOf:'\''];
+  NSString *text = [((NSString *) nil_chk([line java_substring:start endIndex:end])) java_replace:@"''" withSequence:@"'"];
   return [self analyzeWithNSString:text withOrgApacheLuceneUtilCharsRefBuilder:reuse];
 }
 

@@ -12,6 +12,13 @@
 #include "org/apache/lucene/index/LiveIndexWriterConfig.h"
 #include "org/apache/lucene/util/InfoStream.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/FlushPolicy must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/index/FlushPolicy must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
 @interface OrgApacheLuceneIndexFlushPolicy ()
 
 - (jboolean)assertMessageWithNSString:(NSString *)s;
@@ -21,6 +28,11 @@
 __attribute__((unused)) static jboolean OrgApacheLuceneIndexFlushPolicy_assertMessageWithNSString_(OrgApacheLuceneIndexFlushPolicy *self, NSString *s);
 
 @implementation OrgApacheLuceneIndexFlushPolicy
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneIndexFlushPolicy_initPackagePrivate(self);
+  return self;
+}
 
 - (void)onDeleteWithOrgApacheLuceneIndexDocumentsWriterFlushControl:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)control
    withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)state {
@@ -42,21 +54,21 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexFlushPolicy_assertMe
 
 - (void)init__WithOrgApacheLuceneIndexLiveIndexWriterConfig:(OrgApacheLuceneIndexLiveIndexWriterConfig *)indexWriterConfig {
   @synchronized(self) {
-    JreStrongAssign(&self->indexWriterConfig_, indexWriterConfig);
+    self->indexWriterConfig_ = indexWriterConfig;
     JreStrongAssign(&infoStream_, [((OrgApacheLuceneIndexLiveIndexWriterConfig *) nil_chk(indexWriterConfig)) getInfoStream]);
   }
 }
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)findLargestNonPendingWriterWithOrgApacheLuceneIndexDocumentsWriterFlushControl:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)control
                                                                                 withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)perThreadState {
-  JreAssert(([((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(perThreadState))->dwpt_)) getNumDocsInRAM] > 0), (@"org/apache/lucene/index/FlushPolicy.java:109 condition failed: assert perThreadState.dwpt.getNumDocsInRAM() > 0;"));
+  JreAssert([((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(perThreadState))->dwpt_)) getNumDocsInRAM] > 0, @"org/apache/lucene/index/FlushPolicy.java:113 condition failed: assert perThreadState.dwpt.getNumDocsInRAM() > 0;");
   jlong maxRamSoFar = perThreadState->bytesUsed_;
-  OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *maxRamUsingThreadState = perThreadState;
-  JreAssert((!JreLoadVolatileBoolean(&perThreadState->flushPending_)), (@"DWPT should have flushed"));
-  id<JavaUtilIterator> activePerThreadsIterator = [((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(control)) allActiveThreadStates];
+  OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *maxRamUsingThreadState = JreRetainedLocalValue(perThreadState);
+  JreAssert(!JreLoadVolatileBoolean(&perThreadState->flushPending_), @"DWPT should have flushed");
+  id<JavaUtilIterator> activePerThreadsIterator = JreRetainedLocalValue([((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(control)) allActiveThreadStates]);
   jint count = 0;
   while ([((id<JavaUtilIterator>) nil_chk(activePerThreadsIterator)) hasNext]) {
-    OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *next = [activePerThreadsIterator next];
+    OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *next = JreRetainedLocalValue([activePerThreadsIterator next]);
     if (!JreLoadVolatileBoolean(&((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(next))->flushPending_)) {
       jlong nextRam = next->bytesUsed_;
       if (nextRam > 0 && [((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(next->dwpt_)) getNumDocsInRAM] > 0) {
@@ -74,7 +86,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexFlushPolicy_assertMe
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"FP"]) {
     [((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) messageWithNSString:@"FP" withNSString:JreStrcat("I$", count, @" in-use non-flushing threads states")];
   }
-  JreAssert((OrgApacheLuceneIndexFlushPolicy_assertMessageWithNSString_(self, @"set largest ram consuming thread pending on lower watermark")), (@"org/apache/lucene/index/FlushPolicy.java:135 condition failed: assert assertMessage(\"set largest ram consuming thread pending on lower watermark\");"));
+  JreAssert(OrgApacheLuceneIndexFlushPolicy_assertMessageWithNSString_(self, @"set largest ram consuming thread pending on lower watermark"), @"org/apache/lucene/index/FlushPolicy.java:139 condition failed: assert assertMessage(\"set largest ram consuming thread pending on lower watermark\");");
   return maxRamUsingThreadState;
 }
 
@@ -82,48 +94,57 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexFlushPolicy_assertMe
   return OrgApacheLuceneIndexFlushPolicy_assertMessageWithNSString_(self, s);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexFlushPolicy_init(self);
-  return self;
+- (void)__javaClone:(OrgApacheLuceneIndexFlushPolicy *)original {
+  [super __javaClone:original];
+  [indexWriterConfig_ release];
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
-  RELEASE_(indexWriterConfig_);
   RELEASE_(infoStream_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "onDeleteWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "onDelete", "V", 0x401, NULL, NULL },
-    { "onUpdateWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "onUpdate", "V", 0x1, NULL, NULL },
-    { "onInsertWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "onInsert", "V", 0x401, NULL, NULL },
-    { "init__WithOrgApacheLuceneIndexLiveIndexWriterConfig:", "init", "V", 0x24, NULL, NULL },
-    { "findLargestNonPendingWriterWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "findLargestNonPendingWriter", "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool$ThreadState;", 0x4, NULL, NULL },
-    { "assertMessageWithNSString:", "assertMessage", "Z", 0x2, NULL, NULL },
-    { "init", "FlushPolicy", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x24, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;", 0x4, 6, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(onDeleteWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:);
+  methods[2].selector = @selector(onUpdateWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:);
+  methods[3].selector = @selector(onInsertWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:);
+  methods[4].selector = @selector(init__WithOrgApacheLuceneIndexLiveIndexWriterConfig:);
+  methods[5].selector = @selector(findLargestNonPendingWriterWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:);
+  methods[6].selector = @selector(assertMessageWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "indexWriterConfig_", NULL, 0x4, "Lorg.apache.lucene.index.LiveIndexWriterConfig;", NULL, NULL, .constantValue.asLong = 0 },
-    { "infoStream_", NULL, 0x4, "Lorg.apache.lucene.util.InfoStream;", NULL, NULL, .constantValue.asLong = 0 },
+    { "indexWriterConfig_", "LOrgApacheLuceneIndexLiveIndexWriterConfig;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "infoStream_", "LOrgApacheLuceneUtilInfoStream;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFlushPolicy = { 2, "FlushPolicy", "org.apache.lucene.index", NULL, 0x400, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "onDelete", "LOrgApacheLuceneIndexDocumentsWriterFlushControl;LOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;", "onUpdate", "onInsert", "init", "LOrgApacheLuceneIndexLiveIndexWriterConfig;", "findLargestNonPendingWriter", "assertMessage", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFlushPolicy = { "FlushPolicy", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x400, 7, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFlushPolicy;
 }
 
 @end
+
+void OrgApacheLuceneIndexFlushPolicy_initPackagePrivate(OrgApacheLuceneIndexFlushPolicy *self) {
+  NSObject_init(self);
+}
 
 jboolean OrgApacheLuceneIndexFlushPolicy_assertMessageWithNSString_(OrgApacheLuceneIndexFlushPolicy *self, NSString *s) {
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"FP"]) {
     [((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) messageWithNSString:@"FP" withNSString:s];
   }
   return true;
-}
-
-void OrgApacheLuceneIndexFlushPolicy_init(OrgApacheLuceneIndexFlushPolicy *self) {
-  NSObject_init(self);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFlushPolicy)

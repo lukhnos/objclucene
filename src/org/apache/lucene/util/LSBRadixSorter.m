@@ -10,6 +10,10 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/LSBRadixSorter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/LSBRadixSorter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilLSBRadixSorter () {
  @public
   IOSIntArray *histogram_;
@@ -49,11 +53,11 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilLSBRadixSorter, histogram_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilLSBRadixSorter, buffer_, IOSIntArray *)
 
-inline jint OrgApacheLuceneUtilLSBRadixSorter_get_INSERTION_SORT_THRESHOLD();
+inline jint OrgApacheLuceneUtilLSBRadixSorter_get_INSERTION_SORT_THRESHOLD(void);
 #define OrgApacheLuceneUtilLSBRadixSorter_INSERTION_SORT_THRESHOLD 30
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilLSBRadixSorter, INSERTION_SORT_THRESHOLD, jint)
 
-inline jint OrgApacheLuceneUtilLSBRadixSorter_get_HISTOGRAM_SIZE();
+inline jint OrgApacheLuceneUtilLSBRadixSorter_get_HISTOGRAM_SIZE(void);
 #define OrgApacheLuceneUtilLSBRadixSorter_HISTOGRAM_SIZE 256
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilLSBRadixSorter, HISTOGRAM_SIZE, jint)
 
@@ -68,6 +72,11 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLSBRadixSorter_sortWi
 __attribute__((unused)) static void OrgApacheLuceneUtilLSBRadixSorter_insertionSortWithIntArray_withInt_withInt_(IOSIntArray *array, jint off, jint len);
 
 @implementation OrgApacheLuceneUtilLSBRadixSorter
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneUtilLSBRadixSorter_initPackagePrivate(self);
+  return self;
+}
 
 + (void)buildHistogramWithIntArray:(IOSIntArray *)array
                            withInt:(jint)off
@@ -129,17 +138,10 @@ __attribute__((unused)) static void OrgApacheLuceneUtilLSBRadixSorter_insertionS
       bufOff = tmpOff;
     }
   }
-  if (array == buf) {
+  if (JreObjectEqualsEquals(array, buf)) {
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(arr, arrOff, array, off, len);
   }
 }
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilLSBRadixSorter_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(histogram_);
@@ -148,26 +150,52 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "buildHistogramWithIntArray:withInt:withInt:withIntArray:withInt:", "buildHistogram", "V", 0xa, NULL, NULL },
-    { "sumHistogramWithIntArray:", "sumHistogram", "V", 0xa, NULL, NULL },
-    { "reorderWithIntArray:withInt:withInt:withIntArray:withInt:withIntArray:withInt:", "reorder", "V", 0xa, NULL, NULL },
-    { "sortWithIntArray:withInt:withInt:withIntArray:withInt:withIntArray:withInt:", "sort", "Z", 0xa, NULL, NULL },
-    { "insertionSortWithIntArray:withInt:withInt:", "insertionSort", "V", 0xa, NULL, NULL },
-    { "sortWithIntArray:withInt:withInt:", "sort", "V", 0x1, NULL, NULL },
-    { "init", "LSBRadixSorter", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 4, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 6, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(buildHistogramWithIntArray:withInt:withInt:withIntArray:withInt:);
+  methods[2].selector = @selector(sumHistogramWithIntArray:);
+  methods[3].selector = @selector(reorderWithIntArray:withInt:withInt:withIntArray:withInt:withIntArray:withInt:);
+  methods[4].selector = @selector(sortWithIntArray:withInt:withInt:withIntArray:withInt:withIntArray:withInt:);
+  methods[5].selector = @selector(insertionSortWithIntArray:withInt:withInt:);
+  methods[6].selector = @selector(sortWithIntArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "INSERTION_SORT_THRESHOLD", "INSERTION_SORT_THRESHOLD", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilLSBRadixSorter_INSERTION_SORT_THRESHOLD },
-    { "HISTOGRAM_SIZE", "HISTOGRAM_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilLSBRadixSorter_HISTOGRAM_SIZE },
-    { "histogram_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "INSERTION_SORT_THRESHOLD", "I", .constantValue.asInt = OrgApacheLuceneUtilLSBRadixSorter_INSERTION_SORT_THRESHOLD, 0x1a, -1, -1, -1, -1 },
+    { "HISTOGRAM_SIZE", "I", .constantValue.asInt = OrgApacheLuceneUtilLSBRadixSorter_HISTOGRAM_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "histogram_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "buffer_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilLSBRadixSorter = { 2, "LSBRadixSorter", "org.apache.lucene.util", NULL, 0x10, 7, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "buildHistogram", "[III[II", "sumHistogram", "[I", "reorder", "[III[II[II", "sort", "insertionSort", "[III" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilLSBRadixSorter = { "LSBRadixSorter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x10, 7, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilLSBRadixSorter;
 }
 
 @end
+
+void OrgApacheLuceneUtilLSBRadixSorter_initPackagePrivate(OrgApacheLuceneUtilLSBRadixSorter *self) {
+  NSObject_init(self);
+  JreStrongAssignAndConsume(&self->histogram_, [IOSIntArray newArrayWithLength:OrgApacheLuceneUtilLSBRadixSorter_HISTOGRAM_SIZE]);
+  JreStrongAssignAndConsume(&self->buffer_, [IOSIntArray newArrayWithLength:0]);
+}
+
+OrgApacheLuceneUtilLSBRadixSorter *new_OrgApacheLuceneUtilLSBRadixSorter_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilLSBRadixSorter, initPackagePrivate)
+}
+
+OrgApacheLuceneUtilLSBRadixSorter *create_OrgApacheLuceneUtilLSBRadixSorter_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilLSBRadixSorter, initPackagePrivate)
+}
 
 void OrgApacheLuceneUtilLSBRadixSorter_buildHistogramWithIntArray_withInt_withInt_withIntArray_withInt_(IOSIntArray *array, jint off, jint len, IOSIntArray *histogram, jint shift) {
   OrgApacheLuceneUtilLSBRadixSorter_initialize();
@@ -222,20 +250,6 @@ void OrgApacheLuceneUtilLSBRadixSorter_insertionSortWithIntArray_withInt_withInt
       }
     }
   }
-}
-
-void OrgApacheLuceneUtilLSBRadixSorter_init(OrgApacheLuceneUtilLSBRadixSorter *self) {
-  NSObject_init(self);
-  JreStrongAssignAndConsume(&self->histogram_, [IOSIntArray newArrayWithLength:OrgApacheLuceneUtilLSBRadixSorter_HISTOGRAM_SIZE]);
-  JreStrongAssignAndConsume(&self->buffer_, [IOSIntArray newArrayWithLength:0]);
-}
-
-OrgApacheLuceneUtilLSBRadixSorter *new_OrgApacheLuceneUtilLSBRadixSorter_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilLSBRadixSorter, init)
-}
-
-OrgApacheLuceneUtilLSBRadixSorter *create_OrgApacheLuceneUtilLSBRadixSorter_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilLSBRadixSorter, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilLSBRadixSorter)

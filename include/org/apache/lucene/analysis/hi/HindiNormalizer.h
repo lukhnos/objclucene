@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisHiHindiNormalizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisHiHindiNormalizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiNormalizer || defined(INCLUDE_OrgApacheLuceneAnalysisHiHindiNormalizer))
 #define OrgApacheLuceneAnalysisHiHindiNormalizer_
 
@@ -21,26 +27,26 @@
 /*!
  @brief Normalizer for Hindi.
  <p>
- Normalizes text to remove some differences in spelling variations.
+  Normalizes text to remove some differences in spelling variations. 
  <p>
- Implements the Hindi-language specific algorithm specified in:
+  Implements the Hindi-language specific algorithm specified in: 
  <i>Word normalization in Indian languages</i>
- Prasad Pingali and Vasudeva Varma.
- http://web2py.iiit.ac.in/publications/default/download/inproceedings.pdf.3fe5b38c-02ee-41ce-9a8f-3e745670be32.pdf
+  Prasad Pingali and Vasudeva Varma.
+  http://web2py.iiit.ac.in/publications/default/download/inproceedings.pdf.3fe5b38c-02ee-41ce-9a8f-3e745670be32.pdf 
  <p>
- with the following additions from <i>Hindi CLIR in Thirty Days</i>
- Leah S. Larkey, Margaret E. Connell, and Nasreen AbdulJaleel.
- http://maroo.cs.umass.edu/pub/web/getpdf.php?id=454:
+  with the following additions from <i>Hindi CLIR in Thirty Days</i>
+  Leah S. Larkey, Margaret E. Connell, and Nasreen AbdulJaleel.
+  http://maroo.cs.umass.edu/pub/web/getpdf.php?id=454: 
  <ul>
- <li>Internal Zero-width joiner and Zero-width non-joiners are removed
- <li>In addition to chandrabindu, NA+halant is normalized to anusvara
+   <li>Internal Zero-width joiner and Zero-width non-joiners are removed
+   <li>In addition to chandrabindu, NA+halant is normalized to anusvara 
  </ul>
  */
 @interface OrgApacheLuceneAnalysisHiHindiNormalizer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Normalize an input buffer of Hindi text
@@ -57,12 +63,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHiHindiNormalizer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiNormalizer_init(OrgApacheLuceneAnalysisHiHindiNormalizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiNormalizer *new_OrgApacheLuceneAnalysisHiHindiNormalizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiNormalizer *new_OrgApacheLuceneAnalysisHiHindiNormalizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiNormalizer *create_OrgApacheLuceneAnalysisHiHindiNormalizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiNormalizer *create_OrgApacheLuceneAnalysisHiHindiNormalizer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHiHindiNormalizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiNormalizer")

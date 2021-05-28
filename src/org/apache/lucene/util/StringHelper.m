@@ -18,6 +18,7 @@
 #include "java/lang/StringBuffer.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/System.h"
+#include "java/lang/Throwable.h"
 #include "java/math/BigInteger.h"
 #include "java/util/Arrays.h"
 #include "java/util/Properties.h"
@@ -29,6 +30,10 @@
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/Paths.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/StringHelper must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilStringHelper ()
 
 - (instancetype)init;
@@ -39,16 +44,16 @@
 
 @end
 
-inline JavaMathBigInteger *OrgApacheLuceneUtilStringHelper_get_nextId();
+inline JavaMathBigInteger *OrgApacheLuceneUtilStringHelper_get_nextId(void);
 inline JavaMathBigInteger *OrgApacheLuceneUtilStringHelper_set_nextId(JavaMathBigInteger *value);
 static JavaMathBigInteger *OrgApacheLuceneUtilStringHelper_nextId;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneUtilStringHelper, nextId, JavaMathBigInteger *)
 
-inline JavaMathBigInteger *OrgApacheLuceneUtilStringHelper_get_mask128();
+inline JavaMathBigInteger *OrgApacheLuceneUtilStringHelper_get_mask128(void);
 static JavaMathBigInteger *OrgApacheLuceneUtilStringHelper_mask128;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilStringHelper, mask128, JavaMathBigInteger *)
 
-inline id OrgApacheLuceneUtilStringHelper_get_idLock();
+inline id OrgApacheLuceneUtilStringHelper_get_idLock(void);
 static id OrgApacheLuceneUtilStringHelper_idLock;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilStringHelper, idLock, id)
 
@@ -137,6 +142,51 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneUtilStringHelper_intsRefToBytesRefWithOrgApacheLuceneUtilIntsRef_(ints);
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "I", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 2, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 5, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 7, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 8, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 10, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 10, 12, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 13, 14, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x9, 15, 16, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(bytesDifferenceWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(sortKeyLengthWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(init);
+  methods[3].selector = @selector(equalsWithNSString:withNSString:);
+  methods[4].selector = @selector(startsWithWithByteArray:withOrgApacheLuceneUtilBytesRef:);
+  methods[5].selector = @selector(startsWithWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  methods[6].selector = @selector(endsWithWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  methods[7].selector = @selector(sliceEqualsWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withInt:);
+  methods[8].selector = @selector(murmurhash3_x86_32WithByteArray:withInt:withInt:withInt:);
+  methods[9].selector = @selector(murmurhash3_x86_32WithOrgApacheLuceneUtilBytesRef:withInt:);
+  methods[10].selector = @selector(randomId);
+  methods[11].selector = @selector(idToStringWithByteArray:);
+  methods[12].selector = @selector(intsRefToBytesRefWithOrgApacheLuceneUtilIntsRef:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "GOOD_FAST_HASH_SEED", "I", .constantValue.asLong = 0, 0x19, -1, 17, -1, -1 },
+    { "nextId", "LJavaMathBigInteger;", .constantValue.asLong = 0, 0xa, -1, 18, -1, -1 },
+    { "mask128", "LJavaMathBigInteger;", .constantValue.asLong = 0, 0x1a, -1, 19, -1, -1 },
+    { "idLock", "LNSObject;", .constantValue.asLong = 0, 0x1a, -1, 20, -1, -1 },
+    { "ID_LENGTH", "I", .constantValue.asInt = OrgApacheLuceneUtilStringHelper_ID_LENGTH, 0x19, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "bytesDifference", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "sortKeyLength", "equals", "LNSString;LNSString;", "startsWith", "[BLOrgApacheLuceneUtilBytesRef;", "endsWith", "sliceEquals", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;I", "murmurhash3_x86_32", "[BIII", "LOrgApacheLuceneUtilBytesRef;I", "idToString", "[B", "intsRefToBytesRef", "LOrgApacheLuceneUtilIntsRef;", &OrgApacheLuceneUtilStringHelper_GOOD_FAST_HASH_SEED, &OrgApacheLuceneUtilStringHelper_nextId, &OrgApacheLuceneUtilStringHelper_mask128, &OrgApacheLuceneUtilStringHelper_idLock };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilStringHelper = { "StringHelper", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x401, 13, 5, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilStringHelper;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilStringHelper class]) {
     {
@@ -157,8 +207,8 @@ J2OBJC_IGNORE_DESIGNATED_END
       jlong x0;
       jlong x1;
       if (prop != nil) {
-        if (((jint) [prop length]) > 8) {
-          prop = [prop substring:((jint) [prop length]) - 8];
+        if ([prop java_length] > 8) {
+          prop = [prop java_substring:[prop java_length] - 8];
         }
         x0 = JavaLangLong_parseLongWithNSString_withInt_(prop, 16);
         x1 = x0;
@@ -166,12 +216,12 @@ J2OBJC_IGNORE_DESIGNATED_END
       else {
         @try {
           JavaIoDataInputStream *is = create_JavaIoDataInputStream_initWithJavaIoInputStream_(OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePaths_getWithNSString_(@"/dev/urandom")));
-          NSException *__primaryException1 = nil;
+          JavaLangThrowable *__primaryException1 = nil;
           @try {
             x0 = [is readLong];
             x1 = [is readLong];
           }
-          @catch (NSException *e) {
+          @catch (JavaLangThrowable *e) {
             __primaryException1 = e;
             @throw e;
           }
@@ -180,10 +230,12 @@ J2OBJC_IGNORE_DESIGNATED_END
               if (__primaryException1 != nil) {
                 @try {
                   [is close];
-                } @catch (NSException *e) {
-                  [__primaryException1 addSuppressedWithNSException:e];
                 }
-              } else {
+                @catch (JavaLangThrowable *e) {
+                  [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                }
+              }
+              else {
                 [is close];
               }
             }
@@ -216,39 +268,12 @@ J2OBJC_IGNORE_DESIGNATED_END
       IOSByteArray *maskBytes64 = [IOSByteArray arrayWithLength:8];
       JavaUtilArrays_fillWithByteArray_withByte_(maskBytes64, (jbyte) (jint) 0xff);
       JavaMathBigInteger *mask64 = create_JavaMathBigInteger_initWithInt_withByteArray_(1, maskBytes64);
-      JavaMathBigInteger *unsignedX0 = [((JavaMathBigInteger *) nil_chk(JavaMathBigInteger_valueOfWithLong_(x0))) and__WithJavaMathBigInteger:mask64];
-      JavaMathBigInteger *unsignedX1 = [((JavaMathBigInteger *) nil_chk(JavaMathBigInteger_valueOfWithLong_(x1))) and__WithJavaMathBigInteger:mask64];
+      JavaMathBigInteger *unsignedX0 = JreRetainedLocalValue([((JavaMathBigInteger *) nil_chk(JavaMathBigInteger_valueOfWithLong_(x0))) and__WithJavaMathBigInteger:mask64]);
+      JavaMathBigInteger *unsignedX1 = JreRetainedLocalValue([((JavaMathBigInteger *) nil_chk(JavaMathBigInteger_valueOfWithLong_(x1))) and__WithJavaMathBigInteger:mask64]);
       JreStrongAssign(&OrgApacheLuceneUtilStringHelper_nextId, [((JavaMathBigInteger *) nil_chk([((JavaMathBigInteger *) nil_chk(unsignedX0)) shiftLeftWithInt:64])) or__WithJavaMathBigInteger:unsignedX1]);
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilStringHelper)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "bytesDifferenceWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "bytesDifference", "I", 0x9, NULL, NULL },
-    { "sortKeyLengthWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "sortKeyLength", "I", 0x9, NULL, NULL },
-    { "init", "StringHelper", NULL, 0x2, NULL, NULL },
-    { "equalsWithNSString:withNSString:", "equals", "Z", 0x9, NULL, NULL },
-    { "startsWithWithByteArray:withOrgApacheLuceneUtilBytesRef:", "startsWith", "Z", 0x9, NULL, NULL },
-    { "startsWithWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "startsWith", "Z", 0x9, NULL, NULL },
-    { "endsWithWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "endsWith", "Z", 0x9, NULL, NULL },
-    { "sliceEqualsWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withInt:", "sliceEquals", "Z", 0xa, NULL, NULL },
-    { "murmurhash3_x86_32WithByteArray:withInt:withInt:withInt:", "murmurhash3_x86_32", "I", 0x9, NULL, NULL },
-    { "murmurhash3_x86_32WithOrgApacheLuceneUtilBytesRef:withInt:", "murmurhash3_x86_32", "I", 0x9, NULL, NULL },
-    { "randomId", NULL, "[B", 0x9, NULL, NULL },
-    { "idToStringWithByteArray:", "idToString", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "intsRefToBytesRefWithOrgApacheLuceneUtilIntsRef:", "intsRefToBytesRef", "Lorg.apache.lucene.util.BytesRef;", 0x9, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "GOOD_FAST_HASH_SEED", "GOOD_FAST_HASH_SEED", 0x19, "I", &OrgApacheLuceneUtilStringHelper_GOOD_FAST_HASH_SEED, NULL, .constantValue.asLong = 0 },
-    { "nextId", "nextId", 0xa, "Ljava.math.BigInteger;", &OrgApacheLuceneUtilStringHelper_nextId, NULL, .constantValue.asLong = 0 },
-    { "mask128", "mask128", 0x1a, "Ljava.math.BigInteger;", &OrgApacheLuceneUtilStringHelper_mask128, NULL, .constantValue.asLong = 0 },
-    { "idLock", "idLock", 0x1a, "Ljava.lang.Object;", &OrgApacheLuceneUtilStringHelper_idLock, NULL, .constantValue.asLong = 0 },
-    { "ID_LENGTH", "ID_LENGTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilStringHelper_ID_LENGTH },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilStringHelper = { 2, "StringHelper", "org.apache.lucene.util", NULL, 0x401, 13, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilStringHelper;
 }
 
 @end
@@ -376,12 +401,12 @@ IOSByteArray *OrgApacheLuceneUtilStringHelper_randomId() {
   OrgApacheLuceneUtilStringHelper_initialize();
   IOSByteArray *bits;
   @synchronized(OrgApacheLuceneUtilStringHelper_idLock) {
-    bits = [((JavaMathBigInteger *) nil_chk(OrgApacheLuceneUtilStringHelper_nextId)) toByteArray];
+    bits = JreRetainedLocalValue([((JavaMathBigInteger *) nil_chk(OrgApacheLuceneUtilStringHelper_nextId)) toByteArray]);
     JreStrongAssign(&OrgApacheLuceneUtilStringHelper_nextId, [((JavaMathBigInteger *) nil_chk([((JavaMathBigInteger *) nil_chk(OrgApacheLuceneUtilStringHelper_nextId)) addWithJavaMathBigInteger:JreLoadStatic(JavaMathBigInteger, ONE)])) and__WithJavaMathBigInteger:OrgApacheLuceneUtilStringHelper_mask128]);
   }
   if (((IOSByteArray *) nil_chk(bits))->size_ > OrgApacheLuceneUtilStringHelper_ID_LENGTH) {
-    JreAssert((bits->size_ == OrgApacheLuceneUtilStringHelper_ID_LENGTH + 1), (@"org/apache/lucene/util/StringHelper.java:337 condition failed: assert bits.length == ID_LENGTH + 1;"));
-    JreAssert((IOSByteArray_Get(bits, 0) == 0), (@"org/apache/lucene/util/StringHelper.java:338 condition failed: assert bits[0] == 0;"));
+    JreAssert(bits->size_ == OrgApacheLuceneUtilStringHelper_ID_LENGTH + 1, @"org/apache/lucene/util/StringHelper.java:337 condition failed: assert bits.length == ID_LENGTH + 1;");
+    JreAssert(IOSByteArray_Get(bits, 0) == 0, @"org/apache/lucene/util/StringHelper.java:338 condition failed: assert bits[0] == 0;");
     return JavaUtilArrays_copyOfRangeWithByteArray_withInt_withInt_(bits, 1, bits->size_);
   }
   else {

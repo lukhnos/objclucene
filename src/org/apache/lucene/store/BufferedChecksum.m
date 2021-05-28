@@ -9,6 +9,10 @@
 #include "java/util/zip/Checksum.h"
 #include "org/apache/lucene/store/BufferedChecksum.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/BufferedChecksum must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneStoreBufferedChecksum () {
  @public
   id<JavaUtilZipChecksum> in_;
@@ -86,22 +90,34 @@ __attribute__((unused)) static void OrgApacheLuceneStoreBufferedChecksum_flush(O
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilZipChecksum:", "BufferedChecksum", NULL, 0x1, NULL, NULL },
-    { "initWithJavaUtilZipChecksum:withInt:", "BufferedChecksum", NULL, 0x1, NULL, NULL },
-    { "updateWithInt:", "update", "V", 0x1, NULL, NULL },
-    { "updateWithByteArray:withInt:withInt:", "update", "V", 0x1, NULL, NULL },
-    { "getValue", NULL, "J", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "flush", NULL, "V", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 4, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilZipChecksum:);
+  methods[1].selector = @selector(initWithJavaUtilZipChecksum:withInt:);
+  methods[2].selector = @selector(updateWithInt:);
+  methods[3].selector = @selector(updateWithByteArray:withInt:withInt:);
+  methods[4].selector = @selector(getValue);
+  methods[5].selector = @selector(reset);
+  methods[6].selector = @selector(flush);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x12, "Ljava.util.zip.Checksum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x12, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "upto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_BUFFERSIZE", "DEFAULT_BUFFERSIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneStoreBufferedChecksum_DEFAULT_BUFFERSIZE },
+    { "in_", "LJavaUtilZipChecksum;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "buffer_", "[B", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "upto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "DEFAULT_BUFFERSIZE", "I", .constantValue.asInt = OrgApacheLuceneStoreBufferedChecksum_DEFAULT_BUFFERSIZE, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreBufferedChecksum = { 2, "BufferedChecksum", "org.apache.lucene.store", NULL, 0x1, 7, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilZipChecksum;", "LJavaUtilZipChecksum;I", "update", "I", "[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreBufferedChecksum = { "BufferedChecksum", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 7, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreBufferedChecksum;
 }
 

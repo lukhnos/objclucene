@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeOfflineSliceWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeOfflineSliceWriter_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceWriter || defined(INCLUDE_OrgApacheLuceneRangetreeOfflineSliceWriter))
 #define OrgApacheLuceneRangetreeOfflineSliceWriter_
 
@@ -37,8 +43,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDir
-                                            withLong:(jlong)count;
+- (instancetype __nonnull)initPackagePrivateWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDir
+                                                                    withLong:(jlong)count;
 
 - (void)appendWithLong:(jlong)value
               withLong:(jlong)ord
@@ -52,6 +58,10 @@
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeOfflineSliceWriter)
@@ -61,14 +71,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeOfflineSliceWriter, scratchBytes_, I
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeOfflineSliceWriter, scratchBytesOutput_, OrgApacheLuceneStoreByteArrayDataOutput *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeOfflineSliceWriter, out_, OrgApacheLuceneStoreOutputStreamDataOutput *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgApacheLuceneRangetreeOfflineSliceWriter *self, OrgLukhnosPortmobileFilePath *tempDir, jlong count);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeOfflineSliceWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(OrgApacheLuceneRangetreeOfflineSliceWriter *self, OrgLukhnosPortmobileFilePath *tempDir, jlong count);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceWriter *new_OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceWriter *new_OrgApacheLuceneRangetreeOfflineSliceWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceWriter *create_OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count);
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceWriter *create_OrgApacheLuceneRangetreeOfflineSliceWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeOfflineSliceWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceWriter")

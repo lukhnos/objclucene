@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax))
 #define OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_
 
@@ -22,17 +28,14 @@
 
 /*!
  @brief A parser needs to implement <code>EscapeQuerySyntax</code> to allow the QueryNode
- to escape the queries, when the toQueryString method is called.
+  to escape the queries, when the toQueryString method is called.
  */
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax < JavaObject >
 
 /*!
- @param text
- - text to be escaped
- @param locale
- - locale for the current query
- @param type
- - select the type of escape operation to use
+ @param text - text to be escaped
+ @param locale - locale for the current query
+ @param type - select the type of escape operation to use
  @return escaped text
  */
 - (id<JavaLangCharSequence>)escapeWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
@@ -54,6 +57,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQue
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_Enum) {
   OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_Enum_STRING = 0,
   OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_Enum_NORMAL = 1,
@@ -61,21 +66,20 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQu
 
 /*!
  @brief Type of escaping: String for escaping syntax,
- NORMAL for escaping reserved words (like AND) in terms
+  NORMAL for escaping reserved words (like AND) in terms
  */
-@interface OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type : JavaLangEnum
 
-+ (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *)STRING;
-
-+ (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *)NORMAL;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *STRING NS_SWIFT_NAME(STRING);
+@property (readonly, class, nonnull) OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *NORMAL NS_SWIFT_NAME(NORMAL);
+#pragma mark Public
 
 + (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_Enum)toNSEnum;
 
 @end
@@ -85,13 +89,13 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax
 /*! INTERNAL ONLY - Use enum accessors declared below. */
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values_[];
 
-inline OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_get_STRING();
+inline OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_get_STRING(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING)
 
-inline OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_get_NORMAL();
+inline OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_get_NORMAL(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, NORMAL)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_valueOfWithNSString_(NSString *name);
 
@@ -101,4 +105,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQue
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDefFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceDefFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDefFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceDefFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourceDefFunction_
 
@@ -27,16 +33,15 @@
 
 /*!
  @brief <code>ValueSource</code> implementation which only returns the values from the provided
- ValueSources which are available for a particular docId.
- Consequently, when combined
- with a <code>ConstValueSource</code>, this function serves as a way to return a default
- value when the values for a field are unavailable.
+  ValueSources which are available for a particular docId.Consequently, when combined
+  with a <code>ConstValueSource</code>, this function serves as a way to return a default
+  value when the values for a field are unavailable.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceDefFunction : OrgApacheLuceneQueriesFunctionValuesourceMultiFunction
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)sources;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)sources;
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)fcontext
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
@@ -59,4 +64,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDefFunction)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDefFunction")

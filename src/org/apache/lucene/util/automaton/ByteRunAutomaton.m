@@ -11,6 +11,10 @@
 #include "org/apache/lucene/util/automaton/RunAutomaton.h"
 #include "org/apache/lucene/util/automaton/UTF32ToUTF8.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/ByteRunAutomaton must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilAutomatonByteRunAutomaton
 
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a {
@@ -38,12 +42,20 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:", "ByteRunAutomaton", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withBoolean:withInt:", "ByteRunAutomaton", NULL, 0x1, NULL, NULL },
-    { "runWithByteArray:withInt:withInt:", "run", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonByteRunAutomaton = { 2, "ByteRunAutomaton", "org.apache.lucene.util.automaton", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:withBoolean:withInt:);
+  methods[2].selector = @selector(runWithByteArray:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAutomatonAutomaton;", "LOrgApacheLuceneUtilAutomatonAutomaton;ZI", "run", "[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonByteRunAutomaton = { "ByteRunAutomaton", "org.apache.lucene.util.automaton", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonByteRunAutomaton;
 }
 

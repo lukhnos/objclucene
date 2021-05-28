@@ -13,18 +13,23 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileInvokeMethodHandles
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileInvokeMethodHandles_) && (INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandles || defined(INCLUDE_OrgLukhnosPortmobileInvokeMethodHandles))
 #define OrgLukhnosPortmobileInvokeMethodHandles_
 
 @class OrgLukhnosPortmobileInvokeMethodHandles_Lookup;
 
 @interface OrgLukhnosPortmobileInvokeMethodHandles : NSObject
-
-+ (OrgLukhnosPortmobileInvokeMethodHandles_Lookup *)publicLookupInstance;
+@property (readonly, class, strong) OrgLukhnosPortmobileInvokeMethodHandles_Lookup *publicLookupInstance NS_SWIFT_NAME(publicLookupInstance);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (OrgLukhnosPortmobileInvokeMethodHandles_Lookup *)publicLookup;
 
@@ -32,18 +37,18 @@
 
 J2OBJC_STATIC_INIT(OrgLukhnosPortmobileInvokeMethodHandles)
 
-inline OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_get_publicLookupInstance();
+inline OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_get_publicLookupInstance(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgLukhnosPortmobileInvokeMethodHandles, publicLookupInstance, OrgLukhnosPortmobileInvokeMethodHandles_Lookup *)
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_publicLookup();
-
 FOUNDATION_EXPORT void OrgLukhnosPortmobileInvokeMethodHandles_init(OrgLukhnosPortmobileInvokeMethodHandles *self);
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles *new_OrgLukhnosPortmobileInvokeMethodHandles_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles *new_OrgLukhnosPortmobileInvokeMethodHandles_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles *create_OrgLukhnosPortmobileInvokeMethodHandles_init();
+FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles *create_OrgLukhnosPortmobileInvokeMethodHandles_init(void);
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_publicLookup(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodHandles)
 
@@ -60,7 +65,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodHandles)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgLukhnosPortmobileInvokeMethodHandle *)findConstructorWithIOSClass:(IOSClass *)refc
                                withOrgLukhnosPortmobileInvokeMethodType:(OrgLukhnosPortmobileInvokeMethodType *)type;
@@ -71,12 +76,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileInvokeMethodHandles_Lookup)
 
 FOUNDATION_EXPORT void OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init(OrgLukhnosPortmobileInvokeMethodHandles_Lookup *self);
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *new_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *new_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *create_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init();
+FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *create_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodHandles_Lookup)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandles")

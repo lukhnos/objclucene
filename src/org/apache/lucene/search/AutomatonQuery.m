@@ -5,19 +5,21 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/search/AutomatonQuery.h"
 #include "org/apache/lucene/search/MultiTermQuery.h"
-#include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/apache/lucene/util/automaton/Automaton.h"
 #include "org/apache/lucene/util/automaton/CompiledAutomaton.h"
 #include "org/apache/lucene/util/automaton/Operations.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/AutomatonQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchAutomatonQuery
 
@@ -56,9 +58,9 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(obj) java_getClass])) return false;
   OrgApacheLuceneSearchAutomatonQuery *other = (OrgApacheLuceneSearchAutomatonQuery *) cast_chk(obj, [OrgApacheLuceneSearchAutomatonQuery class]);
   if (![((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled_)) isEqual:other->compiled_]) return false;
   if (term_ == nil) {
@@ -74,7 +76,7 @@
     [buffer appendWithNSString:[term_ field]];
     [buffer appendWithNSString:@":"];
   }
-  [buffer appendWithNSString:[[self getClass] getSimpleName]];
+  [buffer appendWithNSString:[[self java_getClass] getSimpleName]];
   [buffer appendWithNSString:@" {"];
   [buffer appendWithChar:0x000a];
   [buffer appendWithNSString:[((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(automaton_)) description]];
@@ -95,22 +97,35 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneUtilAutomatonAutomaton:", "AutomatonQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "AutomatonQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneUtilAutomatonAutomaton:withInt:withBoolean:", "AutomatonQuery", NULL, 0x1, NULL, NULL },
-    { "getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x4, "Ljava.io.IOException;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getAutomaton", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x4, 3, 4, 5, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneUtilAutomatonAutomaton:withInt:withBoolean:);
+  methods[3].selector = @selector(getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:);
+  methods[4].selector = @selector(hash);
+  methods[5].selector = @selector(isEqual:);
+  methods[6].selector = @selector(toStringWithNSString:);
+  methods[7].selector = @selector(getAutomaton);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "automaton_", NULL, 0x14, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
-    { "compiled_", NULL, 0x14, "Lorg.apache.lucene.util.automaton.CompiledAutomaton;", NULL, NULL, .constantValue.asLong = 0 },
-    { "term_", NULL, 0x14, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
+    { "automaton_", "LOrgApacheLuceneUtilAutomatonAutomaton;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "compiled_", "LOrgApacheLuceneUtilAutomatonCompiledAutomaton;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "term_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchAutomatonQuery = { 2, "AutomatonQuery", "org.apache.lucene.search", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;LOrgApacheLuceneUtilAutomatonAutomaton;", "LOrgApacheLuceneIndexTerm;LOrgApacheLuceneUtilAutomatonAutomaton;I", "LOrgApacheLuceneIndexTerm;LOrgApacheLuceneUtilAutomatonAutomaton;IZ", "getTermsEnum", "LOrgApacheLuceneIndexTerms;LOrgApacheLuceneUtilAttributeSource;", "LJavaIoIOException;", "hashCode", "equals", "LNSObject;", "toString", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchAutomatonQuery = { "AutomatonQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 8, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchAutomatonQuery;
 }
 

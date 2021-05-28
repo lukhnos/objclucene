@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMultiTerms
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMultiTerms_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiTerms || defined(INCLUDE_OrgApacheLuceneIndexMultiTerms))
 #define OrgApacheLuceneIndexMultiTerms_
 
@@ -27,7 +33,7 @@
 
 /*!
  @brief Exposes flex API, merged from flex API of
- sub-segments.
+  sub-segments.
  */
 @interface OrgApacheLuceneIndexMultiTerms : OrgApacheLuceneIndexTerms
 
@@ -35,12 +41,12 @@
 
 /*!
  @brief Sole constructor.
- @param subs The <code>Terms</code> instances of all sub-readers.
+ @param subs The <code>Terms</code>  instances of all sub-readers.
  @param subSlices A parallel array (matching <code>subs</code>
- ) describing the sub-reader slices.
+  ) describing the sub-reader slices.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTermsArray:(IOSObjectArray *)subs
-              withOrgApacheLuceneIndexReaderSliceArray:(IOSObjectArray *)subSlices;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsArray:(IOSObjectArray *)subs
+                        withOrgApacheLuceneIndexReaderSliceArray:(IOSObjectArray *)subSlices;
 
 - (jint)getDocCount;
 
@@ -77,6 +83,10 @@
 
 - (jlong)size;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiTerms)
@@ -91,4 +101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTerms)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiTerms")

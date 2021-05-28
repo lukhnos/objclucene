@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedPackedLongValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedPackedLongValues_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedLongValues || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedLongValues))
 #define OrgApacheLuceneUtilPackedPackedLongValues_
 
@@ -36,25 +42,23 @@
 @interface OrgApacheLuceneUtilPackedPackedLongValues : OrgApacheLuceneUtilLongValues < OrgApacheLuceneUtilAccountable > {
  @public
   IOSObjectArray *values_;
-  jint pageShift_, pageMask_;
+  jint pageShift_;
+  jint pageMask_;
 }
-
-+ (jint)DEFAULT_PAGE_SIZE;
-
-+ (jint)MIN_PAGE_SIZE;
-
-+ (jint)MAX_PAGE_SIZE;
+@property (readonly, class) jint DEFAULT_PAGE_SIZE NS_SWIFT_NAME(DEFAULT_PAGE_SIZE);
+@property (readonly, class) jint MIN_PAGE_SIZE NS_SWIFT_NAME(MIN_PAGE_SIZE);
+@property (readonly, class) jint MAX_PAGE_SIZE NS_SWIFT_NAME(MAX_PAGE_SIZE);
 
 #pragma mark Public
 
 /*!
- - seealso: #deltaPackedBuilder(int,float)
+ - seealso: #deltaPackedBuilder(int, float)
  */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)deltaPackedBuilderWithFloat:(jfloat)acceptableOverheadRatio;
 
 /*!
  @brief Return a new <code>Builder</code> that will compress efficiently integers that
- are close to each other.
+   are close to each other.
  */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)deltaPackedBuilderWithInt:(jint)pageSize
                                                                        withFloat:(jfloat)acceptableOverheadRatio;
@@ -69,19 +73,19 @@
 - (OrgApacheLuceneUtilPackedPackedLongValues_Iterator *)iterator;
 
 /*!
- - seealso: #monotonicBuilder(int,float)
+ - seealso: #monotonicBuilder(int, float)
  */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)monotonicBuilderWithFloat:(jfloat)acceptableOverheadRatio;
 
 /*!
  @brief Return a new <code>Builder</code> that will compress efficiently integers that
- would be a monotonic function of their index.
+   would be a monotonic function of their index.
  */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)monotonicBuilderWithInt:(jint)pageSize
                                                                      withFloat:(jfloat)acceptableOverheadRatio;
 
 /*!
- - seealso: #packedBuilder(int,float)
+ - seealso: #packedBuilder(int, float)
  */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)packedBuilderWithFloat:(jfloat)acceptableOverheadRatio;
 
@@ -100,11 +104,11 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)pageShift
-                    withInt:(jint)pageMask
+- (instancetype __nonnull)initWithInt:(jint)pageShift
+                              withInt:(jint)pageMask
 withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
-                   withLong:(jlong)size
-                   withLong:(jlong)ramBytesUsed;
+                             withLong:(jlong)size
+                             withLong:(jlong)ramBytesUsed;
 
 - (jint)decodeBlockWithInt:(jint)block
              withLongArray:(IOSLongArray *)dest;
@@ -112,21 +116,25 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
 - (jlong)getWithInt:(jint)block
             withInt:(jint)element;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilPackedPackedLongValues)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedLongValues, values_, IOSObjectArray *)
 
-inline jint OrgApacheLuceneUtilPackedPackedLongValues_get_DEFAULT_PAGE_SIZE();
+inline jint OrgApacheLuceneUtilPackedPackedLongValues_get_DEFAULT_PAGE_SIZE(void);
 #define OrgApacheLuceneUtilPackedPackedLongValues_DEFAULT_PAGE_SIZE 1024
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedLongValues, DEFAULT_PAGE_SIZE, jint)
 
-inline jint OrgApacheLuceneUtilPackedPackedLongValues_get_MIN_PAGE_SIZE();
+inline jint OrgApacheLuceneUtilPackedPackedLongValues_get_MIN_PAGE_SIZE(void);
 #define OrgApacheLuceneUtilPackedPackedLongValues_MIN_PAGE_SIZE 64
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedLongValues, MIN_PAGE_SIZE, jint)
 
-inline jint OrgApacheLuceneUtilPackedPackedLongValues_get_MAX_PAGE_SIZE();
+inline jint OrgApacheLuceneUtilPackedPackedLongValues_get_MAX_PAGE_SIZE(void);
 #define OrgApacheLuceneUtilPackedPackedLongValues_MAX_PAGE_SIZE 1048576
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedLongValues, MAX_PAGE_SIZE, jint)
 
@@ -164,7 +172,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues)
 @interface OrgApacheLuceneUtilPackedPackedLongValues_Iterator : NSObject {
  @public
   IOSLongArray *currentValues_;
-  jint vOff_, pOff_;
+  jint vOff_;
+  jint pOff_;
   jint currentCount_;
 }
 
@@ -182,7 +191,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -217,7 +230,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Iterator)
  */
 @interface OrgApacheLuceneUtilPackedPackedLongValues_Builder : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
-  jint pageShift_, pageMask_;
+  jint pageShift_;
+  jint pageMask_;
   jfloat acceptableOverheadRatio_;
   IOSLongArray *pending_;
   jlong size_;
@@ -236,8 +250,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Iterator)
 
 /*!
  @brief Build a <code>PackedLongValues</code> instance that contains values that
- have been added to this builder.
- This operation is destructive. 
+   have been added to this builder.This operation is destructive.
  */
 - (OrgApacheLuceneUtilPackedPackedLongValues *)build;
 
@@ -252,8 +265,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Iterator)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)pageSize
-                  withFloat:(jfloat)acceptableOverheadRatio;
+- (instancetype __nonnull)initWithInt:(jint)pageSize
+                            withFloat:(jfloat)acceptableOverheadRatio;
 
 - (jlong)baseRamBytesUsed;
 
@@ -265,6 +278,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Iterator)
                   withInt:(jint)numValues
                   withInt:(jint)block
                 withFloat:(jfloat)acceptableOverheadRatio;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -283,4 +300,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Builder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedLongValues")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimpleFieldComparator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimpleFieldComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimpleFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchSimpleFieldComparator))
 #define OrgApacheLuceneSearchSimpleFieldComparator_
 
@@ -34,7 +40,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<OrgApacheLuceneSearchLeafFieldComparator>)getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -57,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimpleFieldComparator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimpleFieldComparator")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager))
 #define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_
 
@@ -40,39 +46,29 @@
   jint jjmatchedPos_;
   jint jjmatchedKind_;
 }
-
-+ (IOSLongArray *)jjbitVec0;
-
-+ (IOSLongArray *)jjbitVec1;
-
-+ (IOSLongArray *)jjbitVec3;
-
-+ (IOSLongArray *)jjbitVec4;
-
-+ (IOSIntArray *)jjnextStates;
-
-+ (IOSObjectArray *)jjstrLiteralImages;
-
-+ (IOSObjectArray *)lexStateNames;
-
-+ (IOSIntArray *)jjnewLexState;
-
-+ (IOSLongArray *)jjtoToken;
-
-+ (IOSLongArray *)jjtoSkip;
+@property (readonly, class, strong) IOSLongArray *jjbitVec0 NS_SWIFT_NAME(jjbitVec0);
+@property (readonly, class, strong) IOSLongArray *jjbitVec1 NS_SWIFT_NAME(jjbitVec1);
+@property (readonly, class, strong) IOSLongArray *jjbitVec3 NS_SWIFT_NAME(jjbitVec3);
+@property (readonly, class, strong) IOSLongArray *jjbitVec4 NS_SWIFT_NAME(jjbitVec4);
+@property (readonly, class, strong) IOSIntArray *jjnextStates NS_SWIFT_NAME(jjnextStates);
+@property (readonly, class, strong) IOSObjectArray *jjstrLiteralImages NS_SWIFT_NAME(jjstrLiteralImages);
+@property (readonly, class, strong) IOSObjectArray *lexStateNames NS_SWIFT_NAME(lexStateNames);
+@property (readonly, class, strong) IOSIntArray *jjnewLexState NS_SWIFT_NAME(jjnewLexState);
+@property (readonly, class, strong) IOSLongArray *jjtoToken NS_SWIFT_NAME(jjtoToken);
+@property (readonly, class, strong) IOSLongArray *jjtoSkip NS_SWIFT_NAME(jjtoSkip);
 
 #pragma mark Public
 
 /*!
  @brief Constructor.
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream;
 
 /*!
  @brief Constructor.
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream
-                                                                           withInt:(jint)lexState;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream
+                                                                                     withInt:(jint)lexState;
 
 /*!
  @brief Get the next Token.
@@ -99,33 +95,37 @@
 
 - (OrgApacheLuceneQueryparserFlexibleStandardParserToken *)jjFillToken;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, input_stream_, id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)
 
-inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec0();
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec0(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec0;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec0, IOSLongArray *)
 
-inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec1();
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec1(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec1;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec1, IOSLongArray *)
 
-inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec3();
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec3(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec3;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec3, IOSLongArray *)
 
-inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec4();
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec4(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec4;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec4, IOSLongArray *)
 
-inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjnextStates();
+inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjnextStates(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjnextStates;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjnextStates, IOSIntArray *)
@@ -133,7 +133,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserSt
 /*!
  @brief Token literal values.
  */
-inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjstrLiteralImages();
+inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjstrLiteralImages(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjstrLiteralImages;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjstrLiteralImages, IOSObjectArray *)
@@ -141,7 +141,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserSt
 /*!
  @brief Lexer state names.
  */
-inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_lexStateNames();
+inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_lexStateNames(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_lexStateNames;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, lexStateNames, IOSObjectArray *)
@@ -149,17 +149,17 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserSt
 /*!
  @brief Lex State array.
  */
-inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjnewLexState();
+inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjnewLexState(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjnewLexState;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjnewLexState, IOSIntArray *)
 
-inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjtoToken();
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjtoToken(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjtoToken;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjtoToken, IOSLongArray *)
 
-inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjtoSkip();
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjtoSkip(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjtoSkip;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjtoSkip, IOSLongArray *)
@@ -180,4 +180,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserStand
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager")

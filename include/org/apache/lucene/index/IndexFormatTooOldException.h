@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexFormatTooOldException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexFormatTooOldException_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexFormatTooOldException || defined(INCLUDE_OrgApacheLuceneIndexIndexFormatTooOldException))
 #define OrgApacheLuceneIndexIndexFormatTooOldException_
 
@@ -21,11 +27,12 @@
 #include "java/io/IOException.h"
 
 @class JavaLangInteger;
+@class JavaLangThrowable;
 @class OrgApacheLuceneStoreDataInput;
 
 /*!
  @brief This exception is thrown when Lucene detects
- an index that is too old for this Lucene version
+  an index that is too old for this Lucene version
  */
 @interface OrgApacheLuceneIndexIndexFormatTooOldException : JavaIoIOException
 
@@ -37,21 +44,19 @@
  @param version_ the version of the file that was too old
  @param minVersion the minimum version accepted
  @param maxVersion the maximum version accepted
-  
  */
-- (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                                              withInt:(jint)version_
-                                              withInt:(jint)minVersion
-                                              withInt:(jint)maxVersion;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                                        withInt:(jint)version_
+                                                        withInt:(jint)minVersion
+                                                        withInt:(jint)maxVersion;
 
 /*!
  @brief Creates an <code>IndexFormatTooOldException</code>.
  @param inArg the open file that's too old
  @param reason the reason for this exception if the version is not available
-  
  */
-- (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                                         withNSString:(NSString *)reason;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                                   withNSString:(NSString *)reason;
 
 /*!
  @brief Creates an <code>IndexFormatTooOldException</code>.
@@ -59,39 +64,36 @@
  @param version_ the version of the file that was too old
  @param minVersion the minimum version accepted
  @param maxVersion the maximum version accepted
-  
  */
-- (instancetype)initWithNSString:(NSString *)resourceDescription
-                         withInt:(jint)version_
-                         withInt:(jint)minVersion
-                         withInt:(jint)maxVersion;
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDescription
+                                   withInt:(jint)version_
+                                   withInt:(jint)minVersion
+                                   withInt:(jint)maxVersion;
 
 /*!
  @brief Creates an <code>IndexFormatTooOldException</code>.
  @param resourceDescription describes the file that was too old
  @param reason the reason for this exception if the version is not available
-  
  */
-- (instancetype)initWithNSString:(NSString *)resourceDescription
-                    withNSString:(NSString *)reason;
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDescription
+                              withNSString:(NSString *)reason;
 
 /*!
  @brief Returns the maximum version accepted.
  This method will return <code>null</code> if an alternative <code>getReason()</code>
- is provided.
+  is provided.
  */
 - (JavaLangInteger *)getMaxVersion;
 
 /*!
  @brief Returns the minimum version accepted
- This method will return <code>null</code> if an alternative <code>getReason()</code>
- is provided.
+  This method will return <code>null</code> if an alternative <code>getReason()</code>
+  is provided.
  */
 - (JavaLangInteger *)getMinVersion;
 
 /*!
- @brief Returns an optional reason for this exception if the version information was not available.
- Otherwise <code>null</code>
+ @brief Returns an optional reason for this exception if the version information was not available.Otherwise <code>null</code>
  */
 - (NSString *)getReason;
 
@@ -103,9 +105,20 @@
 /*!
  @brief Returns the version of the file that was too old.
  This method will return <code>null</code> if an alternative <code>getReason()</code>
- is provided.
+  is provided.
  */
 - (JavaLangInteger *)getVersion;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -139,4 +152,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexFormatTooOldException)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexFormatTooOldException")

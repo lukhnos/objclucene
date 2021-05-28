@@ -9,7 +9,18 @@
 #include "java/util/Arrays.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/util/Objects must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgLukhnosPortmobileUtilObjects
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgLukhnosPortmobileUtilObjects_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (id)requireNonNullWithId:(id)obj {
   return OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(obj);
@@ -37,28 +48,45 @@
   return OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(a, b);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgLukhnosPortmobileUtilObjects_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "requireNonNullWithId:", "requireNonNull", "TT;", 0x9, NULL, "<T:Ljava/lang/Object;>(TT;)TT;" },
-    { "requireNonNullWithId:withNSString:", "requireNonNull", "TT;", 0x9, NULL, "<T:Ljava/lang/Object;>(TT;Ljava/lang/String;)TT;" },
-    { "hashCodeWithId:", "hashCode", "I", 0x9, NULL, NULL },
-    { "hash__WithNSObjectArray:", "hash", "I", 0x89, NULL, NULL },
-    { "toStringWithId:", "toString", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "equalsWithId:withId:", "equals", "Z", 0x9, NULL, NULL },
-    { "init", "Objects", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 0, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 0, 3, -1, 4, -1, -1 },
+    { NULL, "I", 0x9, 5, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x89, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 8, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 9, 10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileUtilObjects = { 2, "Objects", "org.lukhnos.portmobile.util", NULL, 0x1, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(requireNonNullWithId:);
+  methods[2].selector = @selector(requireNonNullWithId:withNSString:);
+  methods[3].selector = @selector(hashCodeWithId:);
+  methods[4].selector = @selector(hash__WithNSObjectArray:);
+  methods[5].selector = @selector(toStringWithId:);
+  methods[6].selector = @selector(equalsWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "requireNonNull", "LNSObject;", "<T:Ljava/lang/Object;>(TT;)TT;", "LNSObject;LNSString;", "<T:Ljava/lang/Object;>(TT;Ljava/lang/String;)TT;", "hashCode", "hash", "[LNSObject;", "toString", "equals", "LNSObject;LNSObject;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileUtilObjects = { "Objects", "org.lukhnos.portmobile.util", ptrTable, methods, NULL, 7, 0x1, 7, 0, -1, -1, -1, -1, -1 };
   return &_OrgLukhnosPortmobileUtilObjects;
 }
 
 @end
+
+void OrgLukhnosPortmobileUtilObjects_init(OrgLukhnosPortmobileUtilObjects *self) {
+  NSObject_init(self);
+}
+
+OrgLukhnosPortmobileUtilObjects *new_OrgLukhnosPortmobileUtilObjects_init() {
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileUtilObjects, init)
+}
+
+OrgLukhnosPortmobileUtilObjects *create_OrgLukhnosPortmobileUtilObjects_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileUtilObjects, init)
+}
 
 id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(id obj) {
   OrgLukhnosPortmobileUtilObjects_initialize();
@@ -97,18 +125,6 @@ jboolean OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(id a, id b) {
     return b == nil ? true : false;
   }
   return b == nil ? false : [a isEqual:b];
-}
-
-void OrgLukhnosPortmobileUtilObjects_init(OrgLukhnosPortmobileUtilObjects *self) {
-  NSObject_init(self);
-}
-
-OrgLukhnosPortmobileUtilObjects *new_OrgLukhnosPortmobileUtilObjects_init() {
-  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileUtilObjects, init)
-}
-
-OrgLukhnosPortmobileUtilObjects *create_OrgLukhnosPortmobileUtilObjects_init() {
-  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileUtilObjects, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileUtilObjects)

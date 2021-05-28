@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchLiveFieldValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchLiveFieldValues_) && (INCLUDE_ALL_OrgApacheLuceneSearchLiveFieldValues || defined(INCLUDE_OrgApacheLuceneSearchLiveFieldValues))
 #define OrgApacheLuceneSearchLiveFieldValues_
 
@@ -29,13 +35,13 @@
 /*!
  @brief Tracks live field values across NRT reader reopens.
  This holds a map for all updated ids since
- the last reader reopen.  Once the NRT reader is reopened,
- it prunes the map.  This means you must reopen your NRT
- reader periodically otherwise the RAM consumption of
- this class will grow unbounded!
+   the last reader reopen.  Once the NRT reader is reopened,
+   it prunes the map.  This means you must reopen your NRT
+   reader periodically otherwise the RAM consumption of
+   this class will grow unbounded!  
  <p>NOTE: you must ensure the same id is never updated at
- the same time by two threads, because in this case you
- cannot in general know which thread "won". 
+   the same time by two threads, because in this case you
+   cannot in general know which thread "won".
  */
 @interface OrgApacheLuceneSearchLiveFieldValues : NSObject < OrgApacheLuceneSearchReferenceManager_RefreshListener, JavaIoCloseable >
 
@@ -44,13 +50,13 @@
 /*!
  @brief The missingValue must be non-null.
  */
-- (instancetype)initWithOrgApacheLuceneSearchReferenceManager:(OrgApacheLuceneSearchReferenceManager *)mgr
-                                                       withId:(id)missingValue;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchReferenceManager:(OrgApacheLuceneSearchReferenceManager *)mgr
+                                                                 withId:(id)missingValue;
 
 /*!
  @brief Call this after you've successfully added a document
- to the index, to record what value you just set the
- field to.
+   to the index, to record what value you just set the
+   field to.
  */
 - (void)addWithNSString:(NSString *)id_
                  withId:(id)value;
@@ -63,19 +69,19 @@
 
 /*!
  @brief Call this after you've successfully deleted a document
- from the index.
+   from the index.
  */
 - (void)delete__WithNSString:(NSString *)id_;
 
 /*!
  @brief Returns the current value for this id, or null if the
- id isn't in the index or was deleted.
+   id isn't in the index or was deleted.
  */
 - (id)getWithNSString:(NSString *)id_;
 
 /*!
  @brief Returns the [approximate] number of id/value pairs
- buffered in RAM.
+   buffered in RAM.
  */
 - (jint)size;
 
@@ -83,13 +89,16 @@
 
 /*!
  @brief This is called when the id/value was already flushed and opened
- in an NRT IndexSearcher.
- You must implement this to
- go look up the value (eg, via doc values, field cache,
- stored fields, etc.). 
+   in an NRT IndexSearcher.You must implement this to
+   go look up the value (eg, via doc values, field cache,
+   stored fields, etc.).
  */
 - (id)lookupFromSearcherWithId:(id)s
                   withNSString:(NSString *)id_;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -101,4 +110,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchLiveFieldValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchLiveFieldValues")

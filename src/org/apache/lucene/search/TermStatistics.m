@@ -7,6 +7,10 @@
 #include "org/apache/lucene/search/TermStatistics.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TermStatistics must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchTermStatistics () {
  @public
   OrgApacheLuceneUtilBytesRef *term_;
@@ -45,18 +49,27 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermStatistics, term_, OrgApacheLuceneU
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBytesRef:withLong:withLong:", "TermStatistics", NULL, 0x1, NULL, NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x11, NULL, NULL },
-    { "docFreq", NULL, "J", 0x11, NULL, NULL },
-    { "totalTermFreq", NULL, "J", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBytesRef:withLong:withLong:);
+  methods[1].selector = @selector(term);
+  methods[2].selector = @selector(docFreq);
+  methods[3].selector = @selector(totalTermFreq);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "term_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docFreq_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalTermFreq_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "term_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "docFreq_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "totalTermFreq_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermStatistics = { 2, "TermStatistics", "org.apache.lucene.search", NULL, 0x1, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBytesRef;JJ" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermStatistics = { "TermStatistics", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 4, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTermStatistics;
 }
 
@@ -64,8 +77,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermStatistics, term_, OrgApacheLuceneU
 
 void OrgApacheLuceneSearchTermStatistics_initWithOrgApacheLuceneUtilBytesRef_withLong_withLong_(OrgApacheLuceneSearchTermStatistics *self, OrgApacheLuceneUtilBytesRef *term, jlong docFreq, jlong totalTermFreq) {
   NSObject_init(self);
-  JreAssert((docFreq >= 0), (@"org/apache/lucene/search/TermStatistics.java:32 condition failed: assert docFreq >= 0;"));
-  JreAssert((totalTermFreq == -1 || totalTermFreq >= docFreq), (@"org/apache/lucene/search/TermStatistics.java:33 condition failed: assert totalTermFreq == -1 || totalTermFreq >= docFreq;"));
+  JreAssert(docFreq >= 0, @"org/apache/lucene/search/TermStatistics.java:32 condition failed: assert docFreq >= 0;");
+  JreAssert(totalTermFreq == -1 || totalTermFreq >= docFreq, @"org/apache/lucene/search/TermStatistics.java:33 condition failed: assert totalTermFreq == -1 || totalTermFreq >= docFreq;");
   JreStrongAssign(&self->term_, term);
   self->docFreq_ = docFreq;
   self->totalTermFreq_ = totalTermFreq;

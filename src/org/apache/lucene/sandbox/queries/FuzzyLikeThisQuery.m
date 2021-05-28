@@ -5,8 +5,8 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
+#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/HashMap.h"
@@ -41,6 +41,12 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/sandbox/queries/FuzzyLikeThisQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery () {
  @public
   jint maxNumTerms_;
@@ -57,32 +63,6 @@ withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals:(OrgApacheLuceneSa
 __attribute__((unused)) static void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_addTermsWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals_(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *self, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals *f);
 
 __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_newTermQueryWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *self, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneIndexTerm *term);
-
-@interface OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm : NSObject {
- @public
-  OrgApacheLuceneIndexTerm *term_;
-  jfloat score_;
-  OrgApacheLuceneIndexTerm *fuzziedSourceTerm_;
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                       withFloat:(jfloat)score
-                    withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)fuzziedSourceTerm;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm, term_, OrgApacheLuceneIndexTerm *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm, fuzziedSourceTerm_, OrgApacheLuceneIndexTerm *)
-
-__attribute__((unused)) static void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm_initWithOrgApacheLuceneIndexTerm_withFloat_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *self, OrgApacheLuceneIndexTerm *term, jfloat score, OrgApacheLuceneIndexTerm *fuzziedSourceTerm);
-
-__attribute__((unused)) static OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *new_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm_initWithOrgApacheLuceneIndexTerm_withFloat_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term, jfloat score, OrgApacheLuceneIndexTerm *fuzziedSourceTerm) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *create_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm_initWithOrgApacheLuceneIndexTerm_withFloat_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term, jfloat score, OrgApacheLuceneIndexTerm *fuzziedSourceTerm);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery)
 
@@ -109,9 +89,9 @@ OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneSandboxQueriesF
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   if (![super isEqual:obj]) {
     return false;
   }
@@ -156,8 +136,8 @@ withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals:(OrgApacheLuceneSa
   if (rewrittenQuery_ != nil) {
     return rewrittenQuery_;
   }
-  for (id<JavaUtilIterator> iter = [((JavaUtilArrayList *) nil_chk(fieldVals_)) iterator]; [((id<JavaUtilIterator>) nil_chk(iter)) hasNext]; ) {
-    OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals *f = [iter next];
+  for (id<JavaUtilIterator> iter = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(fieldVals_)) iterator]); [((id<JavaUtilIterator>) nil_chk(iter)) hasNext]; ) {
+    OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals *f = JreRetainedLocalValue([iter next]);
     OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_addTermsWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals_(self, reader, f);
   }
   [((JavaUtilArrayList *) nil_chk(fieldVals_)) clear];
@@ -165,18 +145,18 @@ withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals:(OrgApacheLuceneSa
   JavaUtilHashMap *variantQueries = create_JavaUtilHashMap_init();
   jint size = [((OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue *) nil_chk(q_)) size];
   for (jint i = 0; i < size; i++) {
-    OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *st = [((OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue *) nil_chk(q_)) pop];
-    JavaUtilArrayList *l = [variantQueries getWithId:((OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *) nil_chk(st))->fuzziedSourceTerm_];
+    OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *st = JreRetainedLocalValue([((OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue *) nil_chk(q_)) pop]);
+    JavaUtilArrayList *l = JreRetainedLocalValue([variantQueries getWithId:((OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *) nil_chk(st))->fuzziedSourceTerm_]);
     if (l == nil) {
       l = create_JavaUtilArrayList_init();
       [variantQueries putWithId:st->fuzziedSourceTerm_ withId:l];
     }
     [l addWithId:st];
   }
-  for (id<JavaUtilIterator> iter = [((id<JavaUtilCollection>) nil_chk([variantQueries values])) iterator]; [((id<JavaUtilIterator>) nil_chk(iter)) hasNext]; ) {
-    JavaUtilArrayList *variants = [iter next];
+  for (id<JavaUtilIterator> iter = JreRetainedLocalValue([((id<JavaUtilCollection>) nil_chk([variantQueries values])) iterator]); [((id<JavaUtilIterator>) nil_chk(iter)) hasNext]; ) {
+    JavaUtilArrayList *variants = JreRetainedLocalValue([iter next]);
     if ([((JavaUtilArrayList *) nil_chk(variants)) size] == 1) {
-      OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *st = [variants getWithInt:0];
+      OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *st = JreRetainedLocalValue([variants getWithInt:0]);
       OrgApacheLuceneSearchQuery *tq = OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_newTermQueryWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexTerm_(self, reader, ((OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *) nil_chk(st))->term_);
       [((OrgApacheLuceneSearchQuery *) nil_chk(tq)) setBoostWithFloat:st->score_];
       [bq addWithOrgApacheLuceneSearchQuery:tq withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
@@ -184,8 +164,8 @@ withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals:(OrgApacheLuceneSa
     else {
       OrgApacheLuceneSearchBooleanQuery_Builder *termVariants = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
       [termVariants setDisableCoordWithBoolean:true];
-      for (id<JavaUtilIterator> iterator2 = [variants iterator]; [((id<JavaUtilIterator>) nil_chk(iterator2)) hasNext]; ) {
-        OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *st = [iterator2 next];
+      for (id<JavaUtilIterator> iterator2 = JreRetainedLocalValue([variants iterator]); [((id<JavaUtilIterator>) nil_chk(iterator2)) hasNext]; ) {
+        OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *st = JreRetainedLocalValue([iterator2 next]);
         OrgApacheLuceneSearchQuery *tq = OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_newTermQueryWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexTerm_(self, reader, ((OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *) nil_chk(st))->term_);
         [((OrgApacheLuceneSearchQuery *) nil_chk(tq)) setBoostWithFloat:st->score_];
         [termVariants addWithOrgApacheLuceneSearchQuery:tq withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
@@ -193,7 +173,7 @@ withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals:(OrgApacheLuceneSa
       [bq addWithOrgApacheLuceneSearchQuery:[termVariants build] withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
     }
   }
-  OrgApacheLuceneSearchQuery *q = [bq build];
+  OrgApacheLuceneSearchQuery *q = JreRetainedLocalValue([bq build]);
   [((OrgApacheLuceneSearchQuery *) nil_chk(q)) setBoostWithFloat:[self getBoost]];
   JreStrongAssign(&self->rewrittenQuery_, q);
   return q;
@@ -219,39 +199,53 @@ withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals:(OrgApacheLuceneSa
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "I", 0x1, 0, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 4, 6, 7, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x2, 8, 9, 7, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 10, 11, 7, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(hash);
+  methods[1].selector = @selector(isEqual:);
+  methods[2].selector = @selector(initWithInt:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[3].selector = @selector(addTermsWithNSString:withNSString:withFloat:withInt:);
+  methods[4].selector = @selector(addTermsWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals:);
+  methods[5].selector = @selector(newTermQueryWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexTerm:);
+  methods[6].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[7].selector = @selector(toStringWithNSString:);
+  methods[8].selector = @selector(isIgnoreTF);
+  methods[9].selector = @selector(setIgnoreTFWithBoolean:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "sim", "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;", .constantValue.asLong = 0, 0x8, -1, 16, -1, -1 },
+    { "rewrittenQuery_", "LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fieldVals_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x0, -1, -1, 17, -1 },
+    { "analyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "q_", "LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "MAX_VARIANTS_PER_TERM_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ignoreTF_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "maxNumTerms_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "hashCode", "equals", "LNSObject;", "ILOrgApacheLuceneAnalysisAnalyzer;", "addTerms", "LNSString;LNSString;FI", "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals;", "LJavaIoIOException;", "newTermQuery", "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneIndexTerm;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "toString", "LNSString;", "setIgnoreTF", "Z", &OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_sim, "Ljava/util/ArrayList<Lorg/apache/lucene/sandbox/queries/FuzzyLikeThisQuery$FieldVals;>;", "LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals;LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm;LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery = { "FuzzyLikeThisQuery", "org.apache.lucene.sandbox.queries", ptrTable, methods, fields, 7, 0x1, 10, 8, -1, 18, -1, -1, -1 };
+  return &_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_sim, new_OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "initWithInt:withOrgApacheLuceneAnalysisAnalyzer:", "FuzzyLikeThisQuery", NULL, 0x1, NULL, NULL },
-    { "addTermsWithNSString:withNSString:withFloat:withInt:", "addTerms", "V", 0x1, NULL, NULL },
-    { "addTermsWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals:", "addTerms", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "newTermQueryWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexTerm:", "newTermQuery", "Lorg.apache.lucene.search.Query;", 0x2, "Ljava.io.IOException;", NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isIgnoreTF", NULL, "Z", 0x1, NULL, NULL },
-    { "setIgnoreTFWithBoolean:", "setIgnoreTF", "V", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "sim", "sim", 0x8, "Lorg.apache.lucene.search.similarities.TFIDFSimilarity;", &OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_sim, NULL, .constantValue.asLong = 0 },
-    { "rewrittenQuery_", NULL, 0x0, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldVals_", NULL, 0x0, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/sandbox/queries/FuzzyLikeThisQuery$FieldVals;>;", .constantValue.asLong = 0 },
-    { "analyzer_", NULL, 0x0, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "q_", NULL, 0x0, "Lorg.apache.lucene.sandbox.queries.FuzzyLikeThisQuery$ScoreTermQueue;", NULL, NULL, .constantValue.asLong = 0 },
-    { "MAX_VARIANTS_PER_TERM_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ignoreTF_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxNumTerms_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.sandbox.queries.FuzzyLikeThisQuery$FieldVals;", "Lorg.apache.lucene.sandbox.queries.FuzzyLikeThisQuery$ScoreTerm;", "Lorg.apache.lucene.sandbox.queries.FuzzyLikeThisQuery$ScoreTermQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery = { 2, "FuzzyLikeThisQuery", "org.apache.lucene.sandbox.queries", NULL, 0x1, 10, methods, 8, fields, 0, NULL, 3, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery;
 }
 
 @end
@@ -283,9 +277,9 @@ void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_addTermsWithOrgApacheLucene
   }
   {
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(self->analyzer_)) tokenStreamWithNSString:f->fieldName_ withNSString:f->queryString_];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
+      id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = JreRetainedLocalValue([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
       jint corpusNumDocs = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) numDocs];
       JavaUtilHashSet *processedTerms = create_JavaUtilHashSet_init();
       [ts reset];
@@ -297,13 +291,13 @@ void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_addTermsWithOrgApacheLucene
           jfloat minScore = 0;
           OrgApacheLuceneIndexTerm *startTerm = create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(f->fieldName_, term);
           OrgApacheLuceneUtilAttributeSource *atts = create_OrgApacheLuceneUtilAttributeSource_init();
-          id<OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute> maxBoostAtt = [atts addAttributeWithIOSClass:OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute_class_()];
+          id<OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute> maxBoostAtt = JreRetainedLocalValue([atts addAttributeWithIOSClass:OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute_class_()]);
           OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *fe = create_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_(terms, atts, startTerm, f->minSimilarity_, f->prefixLength_);
           jint df = [reader docFreqWithOrgApacheLuceneIndexTerm:startTerm];
           jint numVariants = 0;
           jint totalVariantDocFreqs = 0;
           OrgApacheLuceneUtilBytesRef *possibleMatch;
-          id<OrgApacheLuceneSearchBoostAttribute> boostAtt = [((OrgApacheLuceneUtilAttributeSource *) nil_chk([fe attributes])) addAttributeWithIOSClass:OrgApacheLuceneSearchBoostAttribute_class_()];
+          id<OrgApacheLuceneSearchBoostAttribute> boostAtt = JreRetainedLocalValue([((OrgApacheLuceneUtilAttributeSource *) nil_chk([fe attributes])) addAttributeWithIOSClass:OrgApacheLuceneSearchBoostAttribute_class_()]);
           while ((possibleMatch = [fe next]) != nil) {
             numVariants++;
             totalVariantDocFreqs += [fe docFreq];
@@ -316,13 +310,13 @@ void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_addTermsWithOrgApacheLucene
             [((id<OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute>) nil_chk(maxBoostAtt)) setMaxNonCompetitiveBoostWithFloat:[variantsQ size] >= self->MAX_VARIANTS_PER_TERM_ ? minScore : JavaLangFloat_NEGATIVE_INFINITY];
           }
           if (numVariants > 0) {
-            jint avgDf = totalVariantDocFreqs / numVariants;
+            jint avgDf = JreIntDiv(totalVariantDocFreqs, numVariants);
             if (df == 0) {
               df = avgDf;
             }
             jint size = [variantsQ size];
             for (jint i = 0; i < size; i++) {
-              OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *st = [variantsQ pop];
+              OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *st = JreRetainedLocalValue([variantsQ pop]);
               ((OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *) nil_chk(st))->score_ = (st->score_ * st->score_) * [((OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *) nil_chk(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_sim)) idfWithLong:df withLong:corpusNumDocs];
               [((OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue *) nil_chk(self->q_)) insertWithOverflowWithId:st];
             }
@@ -331,7 +325,7 @@ void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_addTermsWithOrgApacheLucene
       }
       [ts end];
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -340,10 +334,12 @@ void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_addTermsWithOrgApacheLucene
         if (__primaryException1 != nil) {
           @try {
             [ts close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [ts close];
         }
       }
@@ -358,9 +354,9 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_newT
   else {
     OrgApacheLuceneIndexTermContext *context = create_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getContext]);
     for (OrgApacheLuceneIndexLeafReaderContext * __strong leafContext in nil_chk([reader leaves])) {
-      OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(leafContext)) reader])) termsWithNSString:[((OrgApacheLuceneIndexTerm *) nil_chk(term)) field]];
+      OrgApacheLuceneIndexTerms *terms = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(leafContext)) reader])) termsWithNSString:[((OrgApacheLuceneIndexTerm *) nil_chk(term)) field]]);
       if (terms != nil) {
-        OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
+        OrgApacheLuceneIndexTermsEnum *termsEnum = JreRetainedLocalValue([terms iterator]);
         if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:[term bytes]]) {
           jint freq = 1 - [context docFreq];
           [context register__WithOrgApacheLuceneIndexTermState:[termsEnum termState] withInt:leafContext->ord_ withInt:freq withLong:freq];
@@ -395,9 +391,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals *other = (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals *) cast_chk(obj, [OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals class]);
   if (fieldName_ == nil) {
     if (other->fieldName_ != nil) return false;
@@ -419,18 +415,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery:withNSString:withFloat:withInt:withNSString:", "FieldVals", NULL, 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery:withNSString:withFloat:withInt:withNSString:);
+  methods[1].selector = @selector(hash);
+  methods[2].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queryString_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldName_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minSimilarity_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixLength_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "queryString_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fieldName_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "minSimilarity_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "prefixLength_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals = { 2, "FieldVals", "org.apache.lucene.sandbox.queries", "FuzzyLikeThisQuery", 0x0, 3, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery;LNSString;FILNSString;", "hashCode", "equals", "LNSObject;", "LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals = { "FieldVals", "org.apache.lucene.sandbox.queries", ptrTable, methods, fields, 7, 0x0, 3, 4, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals;
 }
 
@@ -470,15 +474,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:withFloat:withOrgApacheLuceneIndexTerm:", "ScoreTerm", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:withFloat:withOrgApacheLuceneIndexTerm:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "term_", NULL, 0x1, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "score_", NULL, 0x1, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "fuzziedSourceTerm_", NULL, 0x0, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
+    { "term_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "score_", "F", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "fuzziedSourceTerm_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm = { 2, "ScoreTerm", "org.apache.lucene.sandbox.queries", "FuzzyLikeThisQuery", 0xa, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;FLOrgApacheLuceneIndexTerm;", "LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm = { "ScoreTerm", "org.apache.lucene.sandbox.queries", ptrTable, methods, fields, 7, 0xa, 1, 3, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm;
 }
 
@@ -515,12 +525,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "ScoreTermQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/sandbox/queries/FuzzyLikeThisQuery$ScoreTerm;Lorg/apache/lucene/sandbox/queries/FuzzyLikeThisQuery$ScoreTerm;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 1, 2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.sandbox.queries.FuzzyLikeThisQuery$ScoreTerm;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue = { 2, "ScoreTermQueue", "org.apache.lucene.sandbox.queries", "FuzzyLikeThisQuery", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/sandbox/queries/FuzzyLikeThisQuery$ScoreTerm;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm;LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm;", "LOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/sandbox/queries/FuzzyLikeThisQuery$ScoreTerm;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue = { "ScoreTermQueue", "org.apache.lucene.sandbox.queries", ptrTable, methods, NULL, 7, 0xa, 2, 0, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue;
 }
 

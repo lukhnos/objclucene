@@ -6,17 +6,17 @@
 /*!
  @brief Base classes used to configure the query processing.
  <h2>Query Configuration Interfaces</h2>
+  <p>
+  The package <tt>org.apache.lucene.queryparser.flexible.config</tt> contains query configuration handler
+  abstract class that all config handlers should extend. 
  <p>
- The package <tt>org.apache.lucene.queryparser.flexible.config</tt> contains query configuration handler
- abstract class that all config handlers should extend.
+  See <code>org.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler</code> for a reference
+  implementation. 
  <p>
- See <code>org.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler</code> for a reference
- implementation.
- <p>
- The <code>org.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler</code> and <code>org.apache.lucene.queryparser.flexible.core.config.FieldConfig</code> are used in the processors to access config
- information in a flexible and independent way.
- See <code>org.apache.lucene.queryparser.flexible.standard.processors.TermRangeQueryNodeProcessor</code> for a 
- reference implementation.
+  The <code>org.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler</code> and <code>org.apache.lucene.queryparser.flexible.core.config.FieldConfig</code> are used in the processors to access config
+  information in a flexible and independent way.
+  See <code>org.apache.lucene.queryparser.flexible.standard.processors.TermRangeQueryNodeProcessor</code> for a 
+  reference implementation.
  */
 #include "J2ObjC_header.h"
 
@@ -28,4 +28,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info")

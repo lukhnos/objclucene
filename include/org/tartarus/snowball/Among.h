@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgTartarusSnowballAmong
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgTartarusSnowballAmong_) && (INCLUDE_ALL_OrgTartarusSnowballAmong || defined(INCLUDE_OrgTartarusSnowballAmong))
 #define OrgTartarusSnowballAmong_
 
@@ -22,12 +28,12 @@
 
 /*!
  @brief This is the rev 502 of the Snowball SVN trunk,
- but modified:
- made abstract and introduced abstract method stem to avoid expensive reflection in filter class.
+  but modified:
+  made abstract and introduced abstract method stem to avoid expensive reflection in filter class.
  refactored StringBuffers to StringBuilder
- uses char[] as buffer instead of StringBuffer/StringBuilder
- eq_s,eq_s_b,insert,replace_s take CharSequence like eq_v and eq_v_b
- reflection calls (Lovins, etc) use EMPTY_ARGS/EMPTY_PARAMS
+  uses char[] as buffer instead of StringBuffer/StringBuilder
+  eq_s,eq_s_b,insert,replace_s take CharSequence like eq_v and eq_v_b
+  reflection calls (Lovins, etc) use EMPTY_ARGS/EMPTY_PARAMS
  */
 @interface OrgTartarusSnowballAmong : NSObject {
  @public
@@ -41,11 +47,15 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)s
-                         withInt:(jint)substring_i
-                         withInt:(jint)result
-                    withNSString:(NSString *)methodname
-withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)methodobject;
+- (instancetype __nonnull)initWithNSString:(NSString *)s
+                                   withInt:(jint)substring_i
+                                   withInt:(jint)result
+                              withNSString:(NSString *)methodname
+    withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)methodobject;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -65,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgTartarusSnowballAmong)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgTartarusSnowballAmong")

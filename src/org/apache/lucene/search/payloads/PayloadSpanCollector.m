@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/payloads/PayloadSpanCollector.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
@@ -14,6 +12,10 @@
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/payloads/PayloadSpanCollector.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/payloads/PayloadSpanCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchPayloadsPayloadSpanCollector () {
  @public
@@ -26,10 +28,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadSpanCollector, payloads_
 
 @implementation OrgApacheLuceneSearchPayloadsPayloadSpanCollector
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)collectLeafWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
                                                 withInt:(jint)position
                            withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  OrgApacheLuceneUtilBytesRef *payload = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postings)) getPayload];
+  OrgApacheLuceneUtilBytesRef *payload = JreRetainedLocalValue([((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postings)) getPayload]);
   if (payload == nil) return;
   IOSByteArray *bytes = [IOSByteArray arrayWithLength:payload->length_];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(payload->bytes_, payload->offset_, bytes, 0, payload->length_);
@@ -44,29 +53,31 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadSpanCollector, payloads_
   return payloads_;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(payloads_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "collectLeafWithOrgApacheLuceneIndexPostingsEnum:withInt:withOrgApacheLuceneIndexTerm:", "collectLeaf", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "getPayloads", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<[LB;>;" },
-    { "init", "PayloadSpanCollector", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 3, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(collectLeafWithOrgApacheLuceneIndexPostingsEnum:withInt:withOrgApacheLuceneIndexTerm:);
+  methods[2].selector = @selector(reset);
+  methods[3].selector = @selector(getPayloads);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "payloads_", NULL, 0x12, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<[LB;>;", .constantValue.asLong = 0 },
+    { "payloads_", "LJavaUtilCollection;", .constantValue.asLong = 0, 0x12, -1, -1, 4, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadSpanCollector = { 2, "PayloadSpanCollector", "org.apache.lucene.search.payloads", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "collectLeaf", "LOrgApacheLuceneIndexPostingsEnum;ILOrgApacheLuceneIndexTerm;", "LJavaIoIOException;", "()Ljava/util/Collection<[B>;", "Ljava/util/Collection<[B>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadSpanCollector = { "PayloadSpanCollector", "org.apache.lucene.search.payloads", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPayloadsPayloadSpanCollector;
 }
 

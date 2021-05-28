@@ -25,6 +25,12 @@
 #define INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinTermsWithScoreCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector))
 #define OrgApacheLuceneSearchJoinTermsWithScoreCollector_
 
@@ -58,18 +64,22 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field
+                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
 
 /*!
  @brief Chooses the right <code>TermsWithScoreCollector</code> implementation.
- @param field                     The field to collect terms for
+ @param field The field to collect terms for
  @param multipleValuesPerDocument Whether the field to collect terms for has multiple values per document.
  @return a <code>TermsWithScoreCollector</code> instance
  */
 + (OrgApacheLuceneSearchJoinTermsWithScoreCollector *)createWithNSString:(NSString *)field
                                                              withBoolean:(jboolean)multipleValuesPerDocument
                                   withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -81,7 +91,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector, scoreMode_
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector, scorer_, OrgApacheLuceneSearchScorer *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector, scoreSums_, IOSFloatArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsWithScoreCollector_initPackagePrivateWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector *OrgApacheLuceneSearchJoinTermsWithScoreCollector_createWithNSString_withBoolean_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
@@ -111,8 +121,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+    withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0
+                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -135,6 +150,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV)
 
 @class IOSFloatArray;
 @class IOSIntArray;
+@class OrgApacheLuceneSearchJoinScoreMode;
 
 @interface OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg : OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV {
  @public
@@ -149,7 +165,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -189,8 +210,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_A
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+    withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0
+                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -213,6 +239,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV)
 
 @class IOSFloatArray;
 @class IOSIntArray;
+@class OrgApacheLuceneSearchJoinScoreMode;
 
 @interface OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg : OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV {
  @public
@@ -227,7 +254,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -245,4 +277,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_A
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector")

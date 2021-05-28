@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchMultiPhraseQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchMultiPhraseQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiPhraseQuery || defined(INCLUDE_OrgApacheLuceneSearchMultiPhraseQuery))
 #define OrgApacheLuceneSearchMultiPhraseQuery_
 
@@ -30,17 +36,17 @@
 
 /*!
  @brief MultiPhraseQuery is a generalized version of PhraseQuery, with an added
- method <code>add(Term[])</code>.
+  method <code>add(Term[])</code>.
  To use this class, to search for the phrase "Microsoft app*" first use
- add(Term) on the term "Microsoft", then find all terms that have "app" as
- prefix using IndexReader.terms(Term), and use MultiPhraseQuery.add(Term[]
- terms) to add them to the query.
+  add(Term) on the term "Microsoft", then find all terms that have "app" as
+  prefix using IndexReader.terms(Term), and use MultiPhraseQuery.add(Term[]
+  terms) to add them to the query.
  */
 @interface OrgApacheLuceneSearchMultiPhraseQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Add a single term at the next position in the phrase.
@@ -48,9 +54,8 @@
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 /*!
- @brief Add multiple terms at the next position in the phrase.
- Any of the terms
- may match.
+ @brief Add multiple terms at the next position in the phrase.Any of the terms
+  may match.
  */
 - (void)addWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
 
@@ -109,9 +114,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiPhraseQuery)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiPhraseQuery_init(OrgApacheLuceneSearchMultiPhraseQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery *new_OrgApacheLuceneSearchMultiPhraseQuery_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery *new_OrgApacheLuceneSearchMultiPhraseQuery_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery *create_OrgApacheLuceneSearchMultiPhraseQuery_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery *create_OrgApacheLuceneSearchMultiPhraseQuery_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery)
 
@@ -133,7 +138,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery)
 /*!
  @brief Takes the logical union of multiple PostingsEnum iterators.
  <p>
- Note: positions are merged during freq()
+  Note: positions are merged during freq()
  */
 @interface OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum : OrgApacheLuceneIndexPostingsEnum {
  @public
@@ -181,7 +186,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)subs;
+- (instancetype __nonnull)initWithJavaUtilCollection:(id<JavaUtilCollection>)subs;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -217,12 +226,33 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEn
 
 #pragma mark Public
 
+- (OrgApacheLuceneIndexPostingsEnum *)addWithId:(OrgApacheLuceneIndexPostingsEnum *)arg0;
+
+- (OrgApacheLuceneIndexPostingsEnum *)insertWithOverflowWithId:(OrgApacheLuceneIndexPostingsEnum *)arg0;
+
 - (jboolean)lessThanWithId:(OrgApacheLuceneIndexPostingsEnum *)a
                     withId:(OrgApacheLuceneIndexPostingsEnum *)b;
 
+- (OrgApacheLuceneIndexPostingsEnum *)pop;
+
+- (OrgApacheLuceneIndexPostingsEnum *)top;
+
+- (OrgApacheLuceneIndexPostingsEnum *)updateTop;
+
+- (OrgApacheLuceneIndexPostingsEnum *)updateTopWithId:(OrgApacheLuceneIndexPostingsEnum *)arg0;
+
+#pragma mark Protected
+
+- (OrgApacheLuceneIndexPostingsEnum *)getSentinelObject;
+
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -242,14 +272,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEn
 #define OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_
 
 /*!
- @brief queue of terms for a single document. its a sorted array of
- all the positions from all the postings
+ @brief queue of terms for a single document.its a sorted array of
+  all the positions from all the postings
  */
 @interface OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue : NSObject
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)addWithInt:(jint)i;
 
@@ -267,12 +297,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_init(OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue *new_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue *new_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue *create_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue *create_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiPhraseQuery")

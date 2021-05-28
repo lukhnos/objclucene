@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/search/DocIdSet.h"
@@ -18,6 +17,10 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/SparseFixedBitSet.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/BitDocIdSet must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilBitDocIdSet () {
  @public
   OrgApacheLuceneUtilBitSet *set_;
@@ -28,7 +31,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBitDocIdSet, set_, OrgApacheLuceneUtilBitSet *)
 
-inline jlong OrgApacheLuceneUtilBitDocIdSet_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilBitDocIdSet_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilBitDocIdSet, BASE_RAM_BYTES_USED, jlong)
 
@@ -45,6 +48,10 @@ J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilBitDocIdSet, BASE_RAM_BYT
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBitDocIdSet_Builder, sparseSet_, OrgApacheLuceneUtilSparseFixedBitSet *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBitDocIdSet_Builder, denseSet_, OrgApacheLuceneUtilFixedBitSet *)
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneUtilBitDocIdSet_Builder__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneUtilBitDocIdSet_Builder__Annotations$1(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBitDocIdSet)
 
@@ -78,7 +85,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBitDocIdSet)
 }
 
 - (NSString *)description {
-  return JreStrcat("$$@$JC", [[self getClass] getSimpleName], @"(set=", set_, @",cost=", cost_, ')');
+  return JreStrcat("$$@$JC", [[self java_getClass] getSimpleName], @"(set=", set_, @",cost=", cost_, ')');
 }
 
 - (void)dealloc {
@@ -86,31 +93,42 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBitDocIdSet)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSetIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBitSet;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBitSet:withLong:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilBitSet:);
+  methods[2].selector = @selector(iterator);
+  methods[3].selector = @selector(bits);
+  methods[4].selector = @selector(isCacheable);
+  methods[5].selector = @selector(ramBytesUsed);
+  methods[6].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 3, -1, -1 },
+    { "set_", "LOrgApacheLuceneUtilBitSet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "cost_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBitSet;J", "LOrgApacheLuceneUtilBitSet;", "toString", &OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED, "LOrgApacheLuceneUtilBitDocIdSet_Builder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBitDocIdSet = { "BitDocIdSet", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 7, 3, -1, 4, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilBitDocIdSet;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilBitDocIdSet class]) {
     OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilBitDocIdSet_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilBitDocIdSet)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBitSet:withLong:", "BitDocIdSet", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilBitSet:", "BitDocIdSet", NULL, 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x1, NULL, NULL },
-    { "bits", NULL, "Lorg.apache.lucene.util.BitSet;", 0x1, NULL, NULL },
-    { "isCacheable", NULL, "Z", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "set_", NULL, 0x12, "Lorg.apache.lucene.util.BitSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "cost_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.BitDocIdSet$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBitDocIdSet = { 2, "BitDocIdSet", "org.apache.lucene.util", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilBitDocIdSet;
 }
 
 @end
@@ -223,14 +241,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitDocIdSet)
   return result;
 }
 
-+ (IOSObjectArray *)__annotations_and__WithOrgApacheLuceneSearchDocIdSetIterator_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_andNotWithOrgApacheLuceneSearchDocIdSetIterator_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(sparseSet_);
   RELEASE_(denseSet_);
@@ -238,24 +248,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitDocIdSet)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withBoolean:", "Builder", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "Builder", NULL, 0x1, NULL, NULL },
-    { "dense", NULL, "Z", 0x0, NULL, NULL },
-    { "isDefinitelyEmpty", NULL, "Z", 0x1, NULL, NULL },
-    { "or__WithOrgApacheLuceneSearchDocIdSetIterator:", "or", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "and__WithOrgApacheLuceneSearchDocIdSetIterator:", "and", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "andNotWithOrgApacheLuceneSearchDocIdSetIterator:", "andNot", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "build", NULL, "Lorg.apache.lucene.util.BitDocIdSet;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 3, 4, -1, 6, -1 },
+    { NULL, "V", 0x1, 7, 3, 4, -1, 8, -1 },
+    { NULL, "LOrgApacheLuceneUtilBitDocIdSet;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withBoolean:);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(dense);
+  methods[3].selector = @selector(isDefinitelyEmpty);
+  methods[4].selector = @selector(or__WithOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[5].selector = @selector(and__WithOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[6].selector = @selector(andNotWithOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[7].selector = @selector(build);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "maxDoc_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "threshold_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "sparseSet_", NULL, 0x2, "Lorg.apache.lucene.util.SparseFixedBitSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "denseSet_", NULL, 0x2, "Lorg.apache.lucene.util.FixedBitSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "costUpperBound_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "threshold_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "sparseSet_", "LOrgApacheLuceneUtilSparseFixedBitSet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "denseSet_", "LOrgApacheLuceneUtilFixedBitSet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "costUpperBound_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBitDocIdSet_Builder = { 2, "Builder", "org.apache.lucene.util", "BitDocIdSet", 0x19, 8, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IZ", "I", "or", "LOrgApacheLuceneSearchDocIdSetIterator;", "LJavaIoIOException;", "and", (void *)&OrgApacheLuceneUtilBitDocIdSet_Builder__Annotations$0, "andNot", (void *)&OrgApacheLuceneUtilBitDocIdSet_Builder__Annotations$1, "LOrgApacheLuceneUtilBitDocIdSet;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBitDocIdSet_Builder = { "Builder", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x19, 8, 5, 9, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilBitDocIdSet_Builder;
 }
 
@@ -289,6 +312,14 @@ OrgApacheLuceneUtilBitDocIdSet_Builder *new_OrgApacheLuceneUtilBitDocIdSet_Build
 
 OrgApacheLuceneUtilBitDocIdSet_Builder *create_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(jint maxDoc) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBitDocIdSet_Builder, initWithInt_, maxDoc)
+}
+
+IOSObjectArray *OrgApacheLuceneUtilBitDocIdSet_Builder__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneUtilBitDocIdSet_Builder__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitDocIdSet_Builder)

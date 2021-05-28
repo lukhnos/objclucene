@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisSynonymSynonymFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisSynonymSynonymFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSynonymSynonymFilter))
 #define OrgApacheLuceneAnalysisSynonymSynonymFilter_
 
@@ -26,62 +32,64 @@
 /*!
  @brief Matches single or multi word synonyms in a token stream.
  This token stream cannot properly handle position
- increments != 1, ie, you should place this filter before
- filtering out stop words.
+  increments != 1, ie, you should place this filter before
+  filtering out stop words.  
  <p>Note that with the current implementation, parsing is
- greedy, so whenever multiple parses would apply, the rule
- starting the earliest and parsing the most tokens wins.
- For example if you have these rules:
+  greedy, so whenever multiple parses would apply, the rule
+  starting the earliest and parsing the most tokens wins.
+  For example if you have these rules:
+        
  @code
 
-   a -&gt; x
-   a b -&gt; y
-   b c d -&gt; z
+    a -&gt; x
+    a b -&gt; y
+    b c d -&gt; z 
   
 @endcode
- Then input <code>a b c d e</code> parses to <code>y b c
- d</code>, ie the 2nd rule "wins" because it started
- earliest and matched the most input tokens of other rules
- starting at that point.
+  Then input <code>a b c d e</code> parses to <code>y b c
+  d</code>, ie the 2nd rule "wins" because it started
+  earliest and matched the most input tokens of other rules
+  starting at that point. 
  <p>A future improvement to this filter could allow
- non-greedy parsing, such that the 3rd rule would win, and
- also separately allow multiple parses, such that all 3
- rules would match, perhaps even on a rule by rule
- basis.</p>
+  non-greedy parsing, such that the 3rd rule would win, and
+  also separately allow multiple parses, such that all 3
+  rules would match, perhaps even on a rule by rule
+  basis.</p>
+  
  <p><b>NOTE</b>: when a match occurs, the output tokens
- associated with the matching rule are "stacked" on top of
- the input stream (if the rule had
+  associated with the matching rule are "stacked" on top of
+  the input stream (if the rule had 
  <code>keepOrig=true</code>) and also on top of another
- matched rule's output tokens.  This is not a correct
- solution, as really the output should be an arbitrary
- graph/lattice.  For example, with the above match, you
- would expect an exact <code>PhraseQuery</code> <code>"y b
- c"</code> to match the parsed tokens, but it will fail to
- do so.  This limitation is necessary because Lucene's
- TokenStream (and index) cannot yet represent an arbitrary
- graph.</p>
+  matched rule's output tokens.  This is not a correct
+  solution, as really the output should be an arbitrary
+  graph/lattice.  For example, with the above match, you
+  would expect an exact <code>PhraseQuery</code> <code>"y b
+  c"</code> to match the parsed tokens, but it will fail to
+  do so.  This limitation is necessary because Lucene's
+  TokenStream (and index) cannot yet represent an arbitrary
+  graph.</p>
+  
  <p><b>NOTE</b>: If multiple incoming tokens arrive on the
- same position, only the first token at that position is
- used for parsing.  Subsequent tokens simply pass through
- and are not parsed.  A future improvement would be to
- allow these tokens to also be matched.</p>
+  same position, only the first token at that position is
+  used for parsing.  Subsequent tokens simply pass through
+  and are not parsed.  A future improvement would be to
+  allow these tokens to also be matched.</p>
  */
 @interface OrgApacheLuceneAnalysisSynonymSynonymFilter : OrgApacheLuceneAnalysisTokenFilter
-
-+ (NSString *)TYPE_SYNONYM;
+@property (readonly, copy, class) NSString *TYPE_SYNONYM NS_SWIFT_NAME(TYPE_SYNONYM);
 
 #pragma mark Public
 
 /*!
  @param input input tokenstream
  @param synonyms synonym map
- @param ignoreCase case-folds input for matching with <code>Character.toLowerCase(int)</code>.
- Note, if you set this to true, it's your responsibility to lowercase
- the input entries when you create the <code>SynonymMap</code>
+ @param ignoreCase case-folds input for matching with <code>Character.toLowerCase(int)</code> .
+                     Note, if you set this to true, it's your responsibility to lowercase                    the input entries when you create the 
+ <code>SynonymMap</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-              withOrgApacheLuceneAnalysisSynonymSynonymMap:(OrgApacheLuceneAnalysisSynonymSynonymMap *)synonyms
-                                               withBoolean:(jboolean)ignoreCase;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                        withOrgApacheLuceneAnalysisSynonymSynonymMap:(OrgApacheLuceneAnalysisSynonymSynonymMap *)synonyms
+                                                         withBoolean:(jboolean)ignoreCase;
 
 - (jboolean)incrementToken;
 
@@ -91,11 +99,15 @@
 
 - (jint)getCaptureCount;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSynonymSynonymFilter)
 
-inline NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_get_TYPE_SYNONYM();
+inline NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_get_TYPE_SYNONYM(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisSynonymSynonymFilter, TYPE_SYNONYM, NSString *)
@@ -110,4 +122,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymFilter")

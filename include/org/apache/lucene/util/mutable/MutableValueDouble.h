@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueDouble
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMutableMutableValueDouble_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDouble || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueDouble))
 #define OrgApacheLuceneUtilMutableMutableValueDouble_
 
@@ -23,7 +29,7 @@
 /*!
  @brief <code>MutableValue</code> implementation of type <code>double</code>.
  When mutating instances of this object, the caller is responsible for ensuring 
- that any instance where <code>exists</code> is set to <code>false</code> must also 
+  that any instance where <code>exists</code> is set to <code>false</code> must also  
  <code>value</code> set to <code>0.0D</code> for proper operation.
  */
 @interface OrgApacheLuceneUtilMutableMutableValueDouble : OrgApacheLuceneUtilMutableMutableValue {
@@ -33,7 +39,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)compareSameTypeWithId:(id)other;
 
@@ -53,12 +59,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilMutableMutableValueDouble)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueDouble_init(OrgApacheLuceneUtilMutableMutableValueDouble *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDouble *new_OrgApacheLuceneUtilMutableMutableValueDouble_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDouble *new_OrgApacheLuceneUtilMutableMutableValueDouble_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDouble *create_OrgApacheLuceneUtilMutableMutableValueDouble_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDouble *create_OrgApacheLuceneUtilMutableMutableValueDouble_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueDouble)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDouble")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchGeoPointTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchGeoPointTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermsEnum || defined(INCLUDE_OrgApacheLuceneSearchGeoPointTermsEnum))
 #define OrgApacheLuceneSearchGeoPointTermsEnum_
 
@@ -27,7 +33,7 @@
 
 /*!
  @brief computes all ranges along a space-filling curve that represents
- the given bounding box and enumerates all terms contained within those ranges
+  the given bounding box and enumerates all terms contained within those ranges
  */
 @interface OrgApacheLuceneSearchGeoPointTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum {
  @public
@@ -37,8 +43,7 @@
   jdouble maxLat_;
   OrgApacheLuceneSearchGeoPointTermsEnum_Range *currentRange_;
 }
-
-+ (jshort)DETAIL_LEVEL;
+@property (readonly, class) jshort DETAIL_LEVEL NS_SWIFT_NAME(DETAIL_LEVEL);
 
 #pragma mark Public
 
@@ -49,9 +54,9 @@
 /*!
  @brief The two-phase query approach.
  <code>nextSeekTerm</code> is called to obtain the next term that matches a numeric
- range of the bounding box. Those terms that pass the initial range filter are then compared against the
- decoded min/max latitude and longitude values of the bounding box only if the range is not a "boundary" range
- (e.g., a range that straddles the boundary of the bbox).
+  range of the bounding box. Those terms that pass the initial range filter are then compared against the
+  decoded min/max latitude and longitude values of the bounding box only if the range is not a "boundary" range
+  (e.g., a range that straddles the boundary of the bbox).
  @param term term for candidate document
  @return match status
  */
@@ -104,11 +109,18 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
-                                           withDouble:(jdouble)minLon
-                                           withDouble:(jdouble)minLat
-                                           withDouble:(jdouble)maxLon
-                                           withDouble:(jdouble)maxLat;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
+                                                                   withDouble:(jdouble)minLon
+                                                                   withDouble:(jdouble)minLat
+                                                                   withDouble:(jdouble)maxLon
+                                                                   withDouble:(jdouble)maxLat;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0
+                                                    withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -116,11 +128,11 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermsEnum)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointTermsEnum, currentRange_, OrgApacheLuceneSearchGeoPointTermsEnum_Range *)
 
-inline jshort OrgApacheLuceneSearchGeoPointTermsEnum_get_DETAIL_LEVEL();
+inline jshort OrgApacheLuceneSearchGeoPointTermsEnum_get_DETAIL_LEVEL(void);
 #define OrgApacheLuceneSearchGeoPointTermsEnum_DETAIL_LEVEL 14
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchGeoPointTermsEnum, DETAIL_LEVEL, jshort)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermsEnum)
 
@@ -152,11 +164,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermsEnum)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchGeoPointTermsEnum:(OrgApacheLuceneSearchGeoPointTermsEnum *)outer$
-                                                      withLong:(jlong)lower
-                                                     withShort:(jshort)res
-                                                     withShort:(jshort)level
-                                                   withBoolean:(jboolean)boundary;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchGeoPointTermsEnum:(OrgApacheLuceneSearchGeoPointTermsEnum *)outer$
+                                                                withLong:(jlong)lower
+                                                               withShort:(jshort)res
+                                                               withShort:(jshort)level
+                                                             withBoolean:(jboolean)boundary;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -174,4 +190,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermsEnum_Range)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermsEnum")

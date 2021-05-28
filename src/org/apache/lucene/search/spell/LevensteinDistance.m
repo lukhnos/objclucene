@@ -9,6 +9,10 @@
 #include "java/lang/Math.h"
 #include "org/apache/lucene/search/spell/LevensteinDistance.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/LevensteinDistance must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSpellLevensteinDistance
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -25,11 +29,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   IOSIntArray *p;
   IOSIntArray *d;
   IOSIntArray *_d;
-  sa = [((NSString *) nil_chk(target)) toCharArray];
+  sa = [((NSString *) nil_chk(target)) java_toCharArray];
   n = ((IOSCharArray *) nil_chk(sa))->size_;
   p = [IOSIntArray arrayWithLength:n + 1];
   d = [IOSIntArray arrayWithLength:n + 1];
-  jint m = ((jint) [((NSString *) nil_chk(other)) length]);
+  jint m = [((NSString *) nil_chk(other)) java_length];
   if (n == 0 || m == 0) {
     if (n == m) {
       return 1;
@@ -56,17 +60,17 @@ J2OBJC_IGNORE_DESIGNATED_END
     p = d;
     d = _d;
   }
-  return 1.0f - ((jfloat) IOSIntArray_Get(p, n) / JavaLangMath_maxWithInt_withInt_(((jint) [other length]), sa->size_));
+  return 1.0f - ((jfloat) IOSIntArray_Get(p, n) / JavaLangMath_maxWithInt_withInt_([other java_length], sa->size_));
 }
 
 - (NSUInteger)hash {
-  return 163 * ((jint) [[self getClass] hash]);
+  return 163 * ((jint) [[self java_getClass] hash]);
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (nil == obj) return false;
-  return [self getClass] == (id) [obj getClass];
+  return (JreObjectEqualsEquals([self java_getClass], [obj java_getClass]));
 }
 
 - (NSString *)description {
@@ -74,14 +78,24 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LevensteinDistance", NULL, 0x1, NULL, NULL },
-    { "getDistanceWithNSString:withNSString:", "getDistance", "F", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellLevensteinDistance = { 2, "LevensteinDistance", "org.apache.lucene.search.spell", NULL, 0x11, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getDistanceWithNSString:withNSString:);
+  methods[2].selector = @selector(hash);
+  methods[3].selector = @selector(isEqual:);
+  methods[4].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getDistance", "LNSString;LNSString;", "hashCode", "equals", "LNSObject;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellLevensteinDistance = { "LevensteinDistance", "org.apache.lucene.search.spell", ptrTable, methods, NULL, 7, 0x11, 5, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellLevensteinDistance;
 }
 

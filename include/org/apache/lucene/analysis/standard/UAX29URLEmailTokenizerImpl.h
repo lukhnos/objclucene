@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl || defined(INCLUDE_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl))
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_
 
@@ -21,63 +27,51 @@
 
 /*!
  @brief This class implements Word Break rules from the Unicode Text Segmentation 
- algorithm, as specified in 
+  algorithm, as specified in  
  <a href="http://unicode.org/reports/tr29/">Unicode Standard Annex #29</a> 
- URLs and email addresses are also tokenized according to the relevant RFCs.
+  URLs and email addresses are also tokenized according to the relevant RFCs.
  <p>
- Tokens produced are of the following types:
+  Tokens produced are of the following types: 
  <ul>
- <li>&lt;ALPHANUM&gt;: A sequence of alphabetic and numeric characters</li>
- <li>&lt;NUM&gt;: A number</li>
- <li>&lt;URL&gt;: A URL</li>
- <li>&lt;EMAIL&gt;: An email address</li>
- <li>&lt;SOUTHEAST_ASIAN&gt;: A sequence of characters from South and Southeast
- Asian languages, including Thai, Lao, Myanmar, and Khmer</li>
- <li>&lt;IDEOGRAPHIC&gt;: A single CJKV ideographic character</li>
- <li>&lt;HIRAGANA&gt;: A single hiragana character</li>
- <li>&lt;KATAKANA&gt;: A sequence of katakana characters</li>
- <li>&lt;HANGUL&gt;: A sequence of Hangul characters</li>
- </ul>
+    <li>&lt;ALPHANUM&gt;: A sequence of alphabetic and numeric characters</li>
+    <li>&lt;NUM&gt;: A number</li>
+    <li>&lt;URL&gt;: A URL</li>
+    <li>&lt;EMAIL&gt;: An email address</li>
+    <li>&lt;SOUTHEAST_ASIAN&gt;: A sequence of characters from South and Southeast
+        Asian languages, including Thai, Lao, Myanmar, and Khmer</li>
+    <li>&lt;IDEOGRAPHIC&gt;: A single CJKV ideographic character</li>
+    <li>&lt;HIRAGANA&gt;: A single hiragana character</li>
+    <li>&lt;KATAKANA&gt;: A sequence of katakana characters</li>
+    <li>&lt;HANGUL&gt;: A sequence of Hangul characters</li>
+  </ul>
  */
 @interface OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl : NSObject
-
-+ (jint)YYEOF;
-
-+ (jint)YYINITIAL;
-
-+ (jint)AVOID_BAD_URL;
-
-+ (jint)WORD_TYPE;
-
-+ (jint)NUMERIC_TYPE;
-
-+ (jint)SOUTH_EAST_ASIAN_TYPE;
-
-+ (jint)IDEOGRAPHIC_TYPE;
-
-+ (jint)HIRAGANA_TYPE;
-
-+ (jint)KATAKANA_TYPE;
-
-+ (jint)HANGUL_TYPE;
-
-+ (jint)EMAIL_TYPE;
-
-+ (jint)URL_TYPE;
+@property (readonly, class) jint YYEOF NS_SWIFT_NAME(YYEOF);
+@property (readonly, class) jint YYINITIAL NS_SWIFT_NAME(YYINITIAL);
+@property (readonly, class) jint AVOID_BAD_URL NS_SWIFT_NAME(AVOID_BAD_URL);
+@property (readonly, class) jint WORD_TYPE NS_SWIFT_NAME(WORD_TYPE);
+@property (readonly, class) jint NUMERIC_TYPE NS_SWIFT_NAME(NUMERIC_TYPE);
+@property (readonly, class) jint SOUTH_EAST_ASIAN_TYPE NS_SWIFT_NAME(SOUTH_EAST_ASIAN_TYPE);
+@property (readonly, class) jint IDEOGRAPHIC_TYPE NS_SWIFT_NAME(IDEOGRAPHIC_TYPE);
+@property (readonly, class) jint HIRAGANA_TYPE NS_SWIFT_NAME(HIRAGANA_TYPE);
+@property (readonly, class) jint KATAKANA_TYPE NS_SWIFT_NAME(KATAKANA_TYPE);
+@property (readonly, class) jint HANGUL_TYPE NS_SWIFT_NAME(HANGUL_TYPE);
+@property (readonly, class) jint EMAIL_TYPE NS_SWIFT_NAME(EMAIL_TYPE);
+@property (readonly, class) jint URL_TYPE NS_SWIFT_NAME(URL_TYPE);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new scanner
- @param inArg  the java.io.Reader to read input from.
+ @param inArg the java.io.Reader to read input from.
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)inArg;
 
 /*!
  @brief Resumes scanning until the next regular expression is matched,
- the end of input is encountered or an I/O-Error occurs.
+  the end of input is encountered or an I/O-Error occurs.
  @return the next token
- @exception java.io.IOException  if any I/O-Error occurs
+ @throw java.io.IOExceptionif any I/O-Error occurs
  */
 - (jint)getNextToken;
 
@@ -101,10 +95,9 @@
 
 /*!
  @brief Returns the character at position <tt>pos</tt> from the 
- matched text.
+  matched text.
  It is equivalent to yytext().charAt(pos), but faster
- @param pos the position of the character to fetch. 
- A value from 0 to yylength()-1.
+ @param pos the position of the character to fetch.              A value from 0 to yylength()-1.
  @return the character at position pos
  */
 - (jchar)yycharatWithInt:(jint)pos;
@@ -122,19 +115,18 @@
 /*!
  @brief Pushes the specified amount of characters back into the input stream.
  They will be read again by then next call of the scanning method
- @param number  the number of characters to be read again.
- This number must not be greater than yylength()!
+ @param number the number of characters to be read again.                 This number must not be greater than yylength()!
  */
 - (void)yypushbackWithInt:(jint)number;
 
 /*!
  @brief Resets the scanner to read from a new input stream.
  Does not close the old reader.
- All internal variables are reset, the old input stream 
+  All internal variables are reset, the old input stream  
  <b>cannot</b> be reused (internal buffer is discarded and lost).
- Lexical state is set to <tt>ZZ_INITIAL</tt>.
- Internal scan buffer is resized down to its initial length, if it has grown.
- @param reader   the new input stream
+  Lexical state is set to <tt>ZZ_INITIAL</tt>.
+  Internal scan buffer is resized down to its initial length, if it has grown.
+ @param reader the new input stream
  */
 - (void)yyresetWithJavaIoReader:(JavaIoReader *)reader;
 
@@ -148,6 +140,10 @@
  */
 - (NSString *)yytext;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl)
@@ -155,69 +151,68 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl)
 /*!
  @brief This character denotes the end of file
  */
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_YYEOF();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_YYEOF(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYEOF -1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, YYEOF, jint)
 
 /*!
  @brief lexical states
  */
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_YYINITIAL();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_YYINITIAL(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYINITIAL 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, YYINITIAL, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_AVOID_BAD_URL();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_AVOID_BAD_URL(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_AVOID_BAD_URL 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, AVOID_BAD_URL, jint)
 
 /*!
  @brief Alphanumeric sequences
  */
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_WORD_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_WORD_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_WORD_TYPE 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, WORD_TYPE, jint)
 
 /*!
  @brief Numbers
  */
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_NUMERIC_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_NUMERIC_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_NUMERIC_TYPE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, NUMERIC_TYPE, jint)
 
 /*!
  @brief Chars in class \p{Line_Break = Complex_Context} are from South East Asian
- scripts (Thai, Lao, Myanmar, Khmer, etc.).
- Sequences of these are kept 
- together as as a single token rather than broken up, because the logic
- required to break them at word boundaries is too complex for UAX#29.
+  scripts (Thai, Lao, Myanmar, Khmer, etc.).Sequences of these are kept 
+  together as as a single token rather than broken up, because the logic
+  required to break them at word boundaries is too complex for UAX#29.
  <p>
- See Unicode Line Breaking Algorithm: http://www.unicode.org/reports/tr14/#SA
+  See Unicode Line Breaking Algorithm: http://www.unicode.org/reports/tr14/#SA
  */
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_SOUTH_EAST_ASIAN_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_SOUTH_EAST_ASIAN_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_SOUTH_EAST_ASIAN_TYPE 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, SOUTH_EAST_ASIAN_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_IDEOGRAPHIC_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_IDEOGRAPHIC_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_IDEOGRAPHIC_TYPE 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, IDEOGRAPHIC_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_HIRAGANA_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_HIRAGANA_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_HIRAGANA_TYPE 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, HIRAGANA_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_KATAKANA_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_KATAKANA_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_KATAKANA_TYPE 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, KATAKANA_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_HANGUL_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_HANGUL_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_HANGUL_TYPE 6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, HANGUL_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_EMAIL_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_EMAIL_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_EMAIL_TYPE 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, EMAIL_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_URL_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_URL_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_URL_TYPE 7
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, URL_TYPE, jint)
 
@@ -231,4 +226,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl")

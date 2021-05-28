@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisDeGermanStemFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisDeGermanStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanStemFilter))
 #define OrgApacheLuceneAnalysisDeGermanStemFilter_
 
@@ -26,15 +32,15 @@
 /*!
  @brief A <code>TokenFilter</code> that stems German words.
  <p>
- It supports a table of words that should
- not be stemmed at all. The stemmer used can be changed at runtime after the
- filter object is created (as long as it is a <code>GermanStemmer</code>).
- </p>
- <p>
- To prevent terms from being stemmed use an instance of
+  It supports a table of words that should
+  not be stemmed at all. The stemmer used can be changed at runtime after the
+  filter object is created (as long as it is a <code>GermanStemmer</code>).
+  </p>
+  <p>
+  To prevent terms from being stemmed use an instance of 
  <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
- the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
- </p>
+  the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+  </p>
  - seealso: SetKeywordMarkerFilter
  */
 @interface OrgApacheLuceneAnalysisDeGermanStemFilter : OrgApacheLuceneAnalysisTokenFilter
@@ -45,7 +51,7 @@
  @brief Creates a <code>GermanStemFilter</code> instance
  @param inArg the source <code>TokenStream</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 /*!
  @return Returns true for next token in the stream, or false at EOS
@@ -71,4 +77,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanStemFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemFilter")

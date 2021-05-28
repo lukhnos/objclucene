@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansTermSpans
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansTermSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansTermSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansTermSpans))
 #define OrgApacheLuceneSearchSpansTermSpans_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief Expert:
- Public for extension only.
+  Public for extension only.
  This does not work correctly for terms that indexed at position Integer.MAX_VALUE.
  */
 @interface OrgApacheLuceneSearchSpansTermSpans : OrgApacheLuceneSearchSpansSpans {
@@ -42,8 +48,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
-                            withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
+                                      withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -67,6 +73,10 @@
 
 - (jint)width;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansTermSpans)
@@ -84,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansTermSpans)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansTermSpans")

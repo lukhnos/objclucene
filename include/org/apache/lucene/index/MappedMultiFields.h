@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMappedMultiFields
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMappedMultiFields_) && (INCLUDE_ALL_OrgApacheLuceneIndexMappedMultiFields || defined(INCLUDE_OrgApacheLuceneIndexMappedMultiFields))
 #define OrgApacheLuceneIndexMappedMultiFields_
 
@@ -20,14 +26,15 @@
 #define INCLUDE_OrgApacheLuceneIndexFilterLeafReader_FilterFields 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
+@class OrgApacheLuceneIndexFields;
 @class OrgApacheLuceneIndexMergeState;
 @class OrgApacheLuceneIndexMultiFields;
 @class OrgApacheLuceneIndexTerms;
 
 /*!
  @brief A <code>Fields</code> implementation that merges multiple
- Fields into one, and maps around deleted documents.
- This is used for merging. 
+   Fields into one, and maps around deleted documents.
+ This is used for merging.
  */
 @interface OrgApacheLuceneIndexMappedMultiFields : OrgApacheLuceneIndexFilterLeafReader_FilterFields {
  @public
@@ -38,14 +45,18 @@
 
 /*!
  @brief Create a new MappedMultiFields for merging, based on the supplied
- mergestate and merged view of terms.
+  mergestate and merged view of terms.
  */
-- (instancetype)initWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
-                   withOrgApacheLuceneIndexMultiFields:(OrgApacheLuceneIndexMultiFields *)multiFields;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
+                             withOrgApacheLuceneIndexMultiFields:(OrgApacheLuceneIndexMultiFields *)multiFields;
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -63,4 +74,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMappedMultiFields)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMappedMultiFields")

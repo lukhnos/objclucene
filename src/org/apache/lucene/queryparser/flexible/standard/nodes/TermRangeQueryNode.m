@@ -8,6 +8,12 @@
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/TermRangeQueryNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/nodes/TermRangeQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @implementation OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode
 
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)lower
@@ -19,11 +25,16 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:withBoolean:withBoolean:", "TermRangeQueryNode", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.flexible.core.nodes.FieldQueryNode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode = { 2, "TermRangeQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", NULL, 0x1, 1, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode<Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:withBoolean:withBoolean:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode;LOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode;ZZ", "Lorg/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode<Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode = { "TermRangeQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", ptrTable, methods, NULL, 7, 0x1, 1, 0, -1, -1, -1, 1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode;
 }
 

@@ -15,6 +15,10 @@
 #include "org/apache/lucene/util/InfoStream.h"
 #include "org/apache/lucene/util/ThreadInterruptedException.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/DocumentsWriterStallControl must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexDocumentsWriterStallControl () {
  @public
   volatile_jboolean stalled_;
@@ -39,8 +43,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterStallCont
 
 @implementation OrgApacheLuceneIndexDocumentsWriterStallControl
 
-- (instancetype)initWithOrgApacheLuceneIndexLiveIndexWriterConfig:(OrgApacheLuceneIndexLiveIndexWriterConfig *)iwc {
-  OrgApacheLuceneIndexDocumentsWriterStallControl_initWithOrgApacheLuceneIndexLiveIndexWriterConfig_(self, iwc);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexLiveIndexWriterConfig:(OrgApacheLuceneIndexLiveIndexWriterConfig *)iwc {
+  OrgApacheLuceneIndexDocumentsWriterStallControl_initPackagePrivateWithOrgApacheLuceneIndexLiveIndexWriterConfig_(self, iwc);
   return self;
 }
 
@@ -50,7 +54,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterStallCont
     if (stalled) {
       wasStalled_ = true;
     }
-    [self notifyAll];
+    [self java_notifyAll];
   }
 }
 
@@ -60,7 +64,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterStallCont
       if (JreLoadVolatileBoolean(&stalled_)) {
         @try {
           OrgApacheLuceneIndexDocumentsWriterStallControl_incWaiters(self);
-          [self waitWithLong:1000];
+          [self java_waitWithLong:1000];
           OrgApacheLuceneIndexDocumentsWriterStallControl_decrWaiters(self);
         }
         @catch (JavaLangInterruptedException *e) {
@@ -112,44 +116,59 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterStallCont
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexLiveIndexWriterConfig:", "DocumentsWriterStallControl", NULL, 0x0, NULL, NULL },
-    { "updateStalledWithBoolean:", "updateStalled", "V", 0x20, NULL, NULL },
-    { "waitIfStalled", NULL, "V", 0x0, NULL, NULL },
-    { "anyStalledThreads", NULL, "Z", 0x0, NULL, NULL },
-    { "incWaiters", NULL, "V", 0x2, NULL, NULL },
-    { "decrWaiters", NULL, "V", 0x2, NULL, NULL },
-    { "hasBlocked", NULL, "Z", 0x20, NULL, NULL },
-    { "isHealthy", NULL, "Z", 0x0, NULL, NULL },
-    { "isThreadQueuedWithJavaLangThread:", "isThreadQueued", "Z", 0x20, NULL, NULL },
-    { "wasStalled", NULL, "Z", 0x20, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x20, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x20, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexLiveIndexWriterConfig:);
+  methods[1].selector = @selector(updateStalledWithBoolean:);
+  methods[2].selector = @selector(waitIfStalled);
+  methods[3].selector = @selector(anyStalledThreads);
+  methods[4].selector = @selector(incWaiters);
+  methods[5].selector = @selector(decrWaiters);
+  methods[6].selector = @selector(hasBlocked);
+  methods[7].selector = @selector(isHealthy);
+  methods[8].selector = @selector(isThreadQueuedWithJavaLangThread:);
+  methods[9].selector = @selector(wasStalled);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stalled_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "numWaiting_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "wasStalled_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "waiting_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Thread;Ljava/lang/Boolean;>;", .constantValue.asLong = 0 },
-    { "infoStream_", NULL, 0x12, "Lorg.apache.lucene.util.InfoStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stallStartNS_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "stalled_", "Z", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "numWaiting_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "wasStalled_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "waiting_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
+    { "infoStream_", "LOrgApacheLuceneUtilInfoStream;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "stallStartNS_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterStallControl = { 2, "DocumentsWriterStallControl", "org.apache.lucene.index", NULL, 0x10, 10, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexLiveIndexWriterConfig;", "updateStalled", "Z", "isThreadQueued", "LJavaLangThread;", "Ljava/util/Map<Ljava/lang/Thread;Ljava/lang/Boolean;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterStallControl = { "DocumentsWriterStallControl", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 10, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocumentsWriterStallControl;
 }
 
 @end
 
-void OrgApacheLuceneIndexDocumentsWriterStallControl_initWithOrgApacheLuceneIndexLiveIndexWriterConfig_(OrgApacheLuceneIndexDocumentsWriterStallControl *self, OrgApacheLuceneIndexLiveIndexWriterConfig *iwc) {
+void OrgApacheLuceneIndexDocumentsWriterStallControl_initPackagePrivateWithOrgApacheLuceneIndexLiveIndexWriterConfig_(OrgApacheLuceneIndexDocumentsWriterStallControl *self, OrgApacheLuceneIndexLiveIndexWriterConfig *iwc) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->waiting_, new_JavaUtilIdentityHashMap_init());
   JreStrongAssign(&self->infoStream_, [((OrgApacheLuceneIndexLiveIndexWriterConfig *) nil_chk(iwc)) getInfoStream]);
 }
 
-OrgApacheLuceneIndexDocumentsWriterStallControl *new_OrgApacheLuceneIndexDocumentsWriterStallControl_initWithOrgApacheLuceneIndexLiveIndexWriterConfig_(OrgApacheLuceneIndexLiveIndexWriterConfig *iwc) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterStallControl, initWithOrgApacheLuceneIndexLiveIndexWriterConfig_, iwc)
+OrgApacheLuceneIndexDocumentsWriterStallControl *new_OrgApacheLuceneIndexDocumentsWriterStallControl_initPackagePrivateWithOrgApacheLuceneIndexLiveIndexWriterConfig_(OrgApacheLuceneIndexLiveIndexWriterConfig *iwc) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterStallControl, initPackagePrivateWithOrgApacheLuceneIndexLiveIndexWriterConfig_, iwc)
 }
 
-OrgApacheLuceneIndexDocumentsWriterStallControl *create_OrgApacheLuceneIndexDocumentsWriterStallControl_initWithOrgApacheLuceneIndexLiveIndexWriterConfig_(OrgApacheLuceneIndexLiveIndexWriterConfig *iwc) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterStallControl, initWithOrgApacheLuceneIndexLiveIndexWriterConfig_, iwc)
+OrgApacheLuceneIndexDocumentsWriterStallControl *create_OrgApacheLuceneIndexDocumentsWriterStallControl_initPackagePrivateWithOrgApacheLuceneIndexLiveIndexWriterConfig_(OrgApacheLuceneIndexLiveIndexWriterConfig *iwc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterStallControl, initPackagePrivateWithOrgApacheLuceneIndexLiveIndexWriterConfig_, iwc)
 }
 
 void OrgApacheLuceneIndexDocumentsWriterStallControl_incWaiters(OrgApacheLuceneIndexDocumentsWriterStallControl *self) {
@@ -158,14 +177,14 @@ void OrgApacheLuceneIndexDocumentsWriterStallControl_incWaiters(OrgApacheLuceneI
     [self->infoStream_ messageWithNSString:@"DW" withNSString:@"now stalling flushes"];
   }
   self->numWaiting_++;
-  JreAssert(([((id<JavaUtilMap>) nil_chk(self->waiting_)) putWithId:JavaLangThread_currentThread() withId:JreLoadStatic(JavaLangBoolean, TRUE)] == nil), (@"org/apache/lucene/index/DocumentsWriterStallControl.java:104 condition failed: assert waiting.put(Thread.currentThread(), Boolean.TRUE) == null;"));
-  JreAssert((self->numWaiting_ > 0), (@"org/apache/lucene/index/DocumentsWriterStallControl.java:105 condition failed: assert numWaiting > 0;"));
+  JreAssert([((id<JavaUtilMap>) nil_chk(self->waiting_)) putWithId:JavaLangThread_currentThread() withId:JreLoadStatic(JavaLangBoolean, TRUE)] == nil, @"org/apache/lucene/index/DocumentsWriterStallControl.java:104 condition failed: assert waiting.put(Thread.currentThread(), Boolean.TRUE) == null;");
+  JreAssert(self->numWaiting_ > 0, @"org/apache/lucene/index/DocumentsWriterStallControl.java:105 condition failed: assert numWaiting > 0;");
 }
 
 void OrgApacheLuceneIndexDocumentsWriterStallControl_decrWaiters(OrgApacheLuceneIndexDocumentsWriterStallControl *self) {
   self->numWaiting_--;
-  JreAssert(([((id<JavaUtilMap>) nil_chk(self->waiting_)) removeWithId:JavaLangThread_currentThread()] != nil), (@"org/apache/lucene/index/DocumentsWriterStallControl.java:110 condition failed: assert waiting.remove(Thread.currentThread()) != null;"));
-  JreAssert((self->numWaiting_ >= 0), (@"org/apache/lucene/index/DocumentsWriterStallControl.java:111 condition failed: assert numWaiting >= 0;"));
+  JreAssert([((id<JavaUtilMap>) nil_chk(self->waiting_)) removeWithId:JavaLangThread_currentThread()] != nil, @"org/apache/lucene/index/DocumentsWriterStallControl.java:110 condition failed: assert waiting.remove(Thread.currentThread()) != null;");
+  JreAssert(self->numWaiting_ >= 0, @"org/apache/lucene/index/DocumentsWriterStallControl.java:111 condition failed: assert numWaiting >= 0;");
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"DW"] && self->numWaiting_ == 0) {
     jlong stallEndNS = JavaLangSystem_nanoTime();
     [self->infoStream_ messageWithNSString:@"DW" withNSString:JreStrcat("$D$", @"done stalling flushes for ", ((stallEndNS - self->stallStartNS_) / 1000000.0), @" ms")];

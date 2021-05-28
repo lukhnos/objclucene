@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSlowCompositeReaderWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSlowCompositeReaderWrapper_) && (INCLUDE_ALL_OrgApacheLuceneIndexSlowCompositeReaderWrapper || defined(INCLUDE_OrgApacheLuceneIndexSlowCompositeReaderWrapper))
 #define OrgApacheLuceneIndexSlowCompositeReaderWrapper_
 
@@ -35,18 +41,17 @@
 
 /*!
  @brief This class forces a composite reader (eg a <code>MultiReader</code>
-  or <code>DirectoryReader</code>) to emulate a
- <code>LeafReader</code>.
- This requires implementing the postings
- APIs on-the-fly, using the static methods in <code>MultiFields</code>
+  or <code>DirectoryReader</code>) to emulate a 
+ <code>LeafReader</code>.This requires implementing the postings
+  APIs on-the-fly, using the static methods in <code>MultiFields</code>
  , <code>MultiDocValues</code>, by stepping through
- the sub-readers to merge fields/terms, appending docs, etc.
+  the sub-readers to merge fields/terms, appending docs, etc.
  <p><b>NOTE</b>: this class almost always results in a
- performance hit.  If this is important to your use case,
- you'll get better performance by gathering the sub readers using
+  performance hit.  If this is important to your use case,
+  you'll get better performance by gathering the sub readers using 
  <code>IndexReader.getContext()</code> to get the
- leaves and then operate per-LeafReader,
- instead of using this class.
+  leaves and then operate per-LeafReader,
+  instead of using this class.
  */
 @interface OrgApacheLuceneIndexSlowCompositeReaderWrapper : OrgApacheLuceneIndexLeafReader
 
@@ -95,9 +100,8 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief This method is sugar for getting an <code>LeafReader</code> from
- an <code>IndexReader</code> of any kind.
- If the reader is already atomic,
- it is returned unchanged, otherwise wrapped by this class.
+  an <code>IndexReader</code> of any kind.If the reader is already atomic,
+  it is returned unchanged, otherwise wrapped by this class.
  */
 + (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
@@ -107,8 +111,12 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexCompositeReader:(OrgApacheLuceneIndexCompositeReader *)reader
-                                                withBoolean:(jboolean)merging;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexCompositeReader:(OrgApacheLuceneIndexCompositeReader *)reader
+                                                          withBoolean:(jboolean)merging;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -126,4 +134,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCompositeReaderWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSlowCompositeReaderWrapper")

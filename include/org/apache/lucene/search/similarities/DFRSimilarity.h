@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesDFRSimilarity
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesDFRSimilarity_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDFRSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesDFRSimilarity))
 #define OrgApacheLuceneSearchSimilaritiesDFRSimilarity_
 
@@ -28,53 +34,53 @@
 
 /*!
  @brief Implements the <em>divergence from randomness (DFR)</em> framework
- introduced in Gianni Amati and Cornelis Joost Van Rijsbergen. 2002.
+  introduced in Gianni Amati and Cornelis Joost Van Rijsbergen.2002.
  Probabilistic models of information retrieval based on measuring the
- divergence from randomness. ACM Trans. Inf. Syst. 20, 4 (October 2002),
- 357-389.
- <p>The DFR scoring formula is composed of three separate components: the
- <em>basic model</em>, the <em>aftereffect</em> and an additional
- <em>normalization</em> component, represented by the classes
+  divergence from randomness. ACM Trans. Inf. Syst. 20, 4 (October 2002),
+  357-389. 
+ <p>The DFR scoring formula is composed of three separate components: the 
+ <em>basic model</em>, the <em>aftereffect</em> and an additional 
+ <em>normalization</em> component, represented by the classes 
  <code>BasicModel</code>, <code>AfterEffect</code> and <code>Normalization</code>,
- respectively. The names of these classes were chosen to match the names of
- their counterparts in the Terrier IR engine.</p>
- <p>To construct a DFRSimilarity, you must specify the implementations for 
- all three components of DFR:
+  respectively. The names of these classes were chosen to match the names of
+  their counterparts in the Terrier IR engine.</p>
+  <p>To construct a DFRSimilarity, you must specify the implementations for 
+  all three components of DFR: 
  <ol>
- <li><code>BasicModel</code>: Basic model of information content:
- <ul>
- <li><code>BasicModelBE</code>: Limiting form of Bose-Einstein
- <li><code>BasicModelG</code>: Geometric approximation of Bose-Einstein
- <li><code>BasicModelP</code>: Poisson approximation of the Binomial
- <li><code>BasicModelD</code>: Divergence approximation of the Binomial 
- <li><code>BasicModelIn</code>: Inverse document frequency
- <li><code>BasicModelIne</code>: Inverse expected document
- frequency [mixture of Poisson and IDF]
+     <li><code>BasicModel</code>: Basic model of information content:
+         <ul>
+            <li><code>BasicModelBE</code>: Limiting form of Bose-Einstein
+            <li><code>BasicModelG</code>: Geometric approximation of Bose-Einstein
+            <li><code>BasicModelP</code>: Poisson approximation of the Binomial
+            <li><code>BasicModelD</code>: Divergence approximation of the Binomial 
+            <li><code>BasicModelIn</code>: Inverse document frequency
+            <li><code>BasicModelIne</code>: Inverse expected document
+                frequency [mixture of Poisson and IDF]           
  <li><code>BasicModelIF</code>: Inverse term frequency
- [approximation of I(ne)]
+                [approximation of I(ne)]        
  </ul>
- <li><code>AfterEffect</code>: First normalization of information
- gain:
+     <li><code>AfterEffect</code>: First normalization of information
+         gain:        
  <ul>
- <li><code>AfterEffectL</code>: Laplace's law of succession
- <li><code>AfterEffectB</code>: Ratio of two Bernoulli processes
- <li><code>NoAfterEffect</code>: no first normalization
- </ul>
- <li><code>Normalization</code>: Second (length) normalization:
- <ul>
- <li><code>NormalizationH1</code>: Uniform distribution of term
- frequency
+            <li><code>AfterEffectL</code>: Laplace's law of succession
+            <li><code>AfterEffectB</code>: Ratio of two Bernoulli processes
+            <li><code>NoAfterEffect</code>: no first normalization
+         </ul>
+     <li><code>Normalization</code>: Second (length) normalization:
+         <ul>
+            <li><code>NormalizationH1</code>: Uniform distribution of term
+                frequency           
  <li><code>NormalizationH2</code>: term frequency density inversely
- related to length
+                related to length           
  <li><code>NormalizationH3</code>: term frequency normalization
- provided by Dirichlet prior
+                provided by Dirichlet prior           
  <li><code>NormalizationZ</code>: term frequency normalization provided
- by a Zipfian relation
+                 by a Zipfian relation           
  <li><code>NoNormalization</code>: no second normalization
- </ul>
- </ol>
- <p>Note that <em>qtf</em>, the multiplicity of term-occurrence in the query,
- is not handled by this implementation.</p>
+         </ul>
+  </ol>
+  <p>Note that <em>qtf</em>, the multiplicity of term-occurrence in the query,
+  is not handled by this implementation.</p>
  - seealso: BasicModel
  - seealso: AfterEffect
  - seealso: Normalization
@@ -100,16 +106,16 @@
 /*!
  @brief Creates DFRSimilarity from the three components.
  <p>
- Note that <code>null</code> values are not allowed:
- if you want no normalization or after-effect, instead pass 
+  Note that <code>null</code> values are not allowed:
+  if you want no normalization or after-effect, instead pass  
  <code>NoNormalization</code> or <code>NoAfterEffect</code> respectively.
  @param basicModel Basic model of information content
  @param afterEffect First normalization of information gain
  @param normalization Second (length) normalization
  */
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesBasicModel:(OrgApacheLuceneSearchSimilaritiesBasicModel *)basicModel
-                   withOrgApacheLuceneSearchSimilaritiesAfterEffect:(OrgApacheLuceneSearchSimilaritiesAfterEffect *)afterEffect
-                 withOrgApacheLuceneSearchSimilaritiesNormalization:(OrgApacheLuceneSearchSimilaritiesNormalization *)normalization;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSimilaritiesBasicModel:(OrgApacheLuceneSearchSimilaritiesBasicModel *)basicModel
+                             withOrgApacheLuceneSearchSimilaritiesAfterEffect:(OrgApacheLuceneSearchSimilaritiesAfterEffect *)afterEffect
+                           withOrgApacheLuceneSearchSimilaritiesNormalization:(OrgApacheLuceneSearchSimilaritiesNormalization *)normalization;
 
 /*!
  @brief Returns the first normalization
@@ -140,6 +146,10 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
                                                      withFloat:(jfloat)freq
                                                      withFloat:(jfloat)docLen;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesDFRSimilarity)
@@ -158,4 +168,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesDFRSimilarity)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDFRSimilarity")

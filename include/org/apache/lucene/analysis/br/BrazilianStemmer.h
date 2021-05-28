@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisBrBrazilianStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisBrBrazilianStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisBrBrazilianStemmer))
 #define OrgApacheLuceneAnalysisBrBrazilianStemmer_
 
@@ -23,7 +29,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief For log and debug purpose
@@ -35,7 +41,7 @@
 
 /*!
  @brief Stems the given term to an unique <tt>discriminator</tt>.
- @param term  The term that should be stemmed.
+ @param term The term that should be stemmed.
  @return Discriminator for <tt>term</tt>
  */
 - (NSString *)stemWithNSString:(NSString *)term;
@@ -46,12 +52,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisBrBrazilianStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBrBrazilianStemmer_init(OrgApacheLuceneAnalysisBrBrazilianStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianStemmer *new_OrgApacheLuceneAnalysisBrBrazilianStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianStemmer *new_OrgApacheLuceneAnalysisBrBrazilianStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianStemmer *create_OrgApacheLuceneAnalysisBrBrazilianStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianStemmer *create_OrgApacheLuceneAnalysisBrBrazilianStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisBrBrazilianStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemmer")

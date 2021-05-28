@@ -12,6 +12,10 @@
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/util/LongsRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/LongsRef must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilLongsRef)
 
 IOSLongArray *OrgApacheLuceneUtilLongsRef_EMPTY_LONGS;
@@ -41,7 +45,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (OrgApacheLuceneUtilLongsRef *)clone {
+- (OrgApacheLuceneUtilLongsRef *)java_clone {
   return create_OrgApacheLuceneUtilLongsRef_initWithLongArray_withInt_withInt_(longs_, offset_, length_);
 }
 
@@ -60,7 +64,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return false;
   }
   if ([other isKindOfClass:[OrgApacheLuceneUtilLongsRef class]]) {
-    return [self longsEqualsWithOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *) cast_chk(other, [OrgApacheLuceneUtilLongsRef class])];
+    return [self longsEqualsWithOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *) other];
   }
   return false;
 }
@@ -84,7 +88,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilLongsRef *)other {
   cast_chk(other, [OrgApacheLuceneUtilLongsRef class]);
-  if (self == other) return 0;
+  if (JreObjectEqualsEquals(self, other)) return 0;
   IOSLongArray *aInts = self->longs_;
   jint aUpto = self->offset_;
   IOSLongArray *bInts = ((OrgApacheLuceneUtilLongsRef *) nil_chk(other))->longs_;
@@ -151,8 +155,48 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilLongsRef;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 8, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilLongsRef;", 0x9, 10, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(initWithLongArray:withInt:withInt:);
+  methods[3].selector = @selector(java_clone);
+  methods[4].selector = @selector(hash);
+  methods[5].selector = @selector(isEqual:);
+  methods[6].selector = @selector(longsEqualsWithOrgApacheLuceneUtilLongsRef:);
+  methods[7].selector = @selector(compareToWithId:);
+  methods[8].selector = @selector(description);
+  methods[9].selector = @selector(deepCopyOfWithOrgApacheLuceneUtilLongsRef:);
+  methods[10].selector = @selector(isValid);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_LONGS", "[J", .constantValue.asLong = 0, 0x19, -1, 11, -1, -1 },
+    { "longs_", "[J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "offset_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "I", "[JII", "clone", "hashCode", "equals", "LNSObject;", "longsEquals", "LOrgApacheLuceneUtilLongsRef;", "compareTo", "toString", "deepCopyOf", &OrgApacheLuceneUtilLongsRef_EMPTY_LONGS, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/LongsRef;>;Ljava/lang/Cloneable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilLongsRef = { "LongsRef", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 11, 4, -1, -1, -1, 12, -1 };
+  return &_OrgApacheLuceneUtilLongsRef;
+}
+
 - (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
+  return [[self java_clone] retain];
 }
 
 + (void)initialize {
@@ -160,30 +204,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilLongsRef_EMPTY_LONGS, [IOSLongArray newArrayWithLength:0]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilLongsRef)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LongsRef", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "LongsRef", NULL, 0x1, NULL, NULL },
-    { "initWithLongArray:withInt:withInt:", "LongsRef", NULL, 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.util.LongsRef;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "longsEqualsWithOrgApacheLuceneUtilLongsRef:", "longsEquals", "Z", 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "deepCopyOfWithOrgApacheLuceneUtilLongsRef:", "deepCopyOf", "Lorg.apache.lucene.util.LongsRef;", 0x9, NULL, NULL },
-    { "isValid", NULL, "Z", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_LONGS", "EMPTY_LONGS", 0x19, "[J", &OrgApacheLuceneUtilLongsRef_EMPTY_LONGS, NULL, .constantValue.asLong = 0 },
-    { "longs_", NULL, 0x1, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "offset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilLongsRef = { 2, "LongsRef", "org.apache.lucene.util", NULL, 0x11, 11, methods, 4, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/LongsRef;>;Ljava/lang/Cloneable;" };
-  return &_OrgApacheLuceneUtilLongsRef;
 }
 
 @end
@@ -219,7 +239,7 @@ void OrgApacheLuceneUtilLongsRef_initWithLongArray_withInt_withInt_(OrgApacheLuc
   JreStrongAssign(&self->longs_, longs);
   self->offset_ = offset;
   self->length_ = length;
-  JreAssert(([self isValid]), (@"org/apache/lucene/util/LongsRef.java:57 condition failed: assert isValid();"));
+  JreAssert([self isValid], @"org/apache/lucene/util/LongsRef.java:57 condition failed: assert isValid();");
 }
 
 OrgApacheLuceneUtilLongsRef *new_OrgApacheLuceneUtilLongsRef_initWithLongArray_withInt_withInt_(IOSLongArray *longs, jint offset, jint length) {

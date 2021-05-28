@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDisiPriorityQueue
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDisiPriorityQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchDisiPriorityQueue || defined(INCLUDE_OrgApacheLuceneSearchDisiPriorityQueue))
 #define OrgApacheLuceneSearchDisiPriorityQueue_
 
@@ -21,18 +27,20 @@
 #include "java/lang/Iterable.h"
 
 @class OrgApacheLuceneSearchDisiWrapper;
+@protocol JavaUtilFunctionConsumer;
 @protocol JavaUtilIterator;
+@protocol JavaUtilSpliterator;
 
 /*!
  @brief A priority queue of DocIdSetIterators that orders by current doc ID.
  This specialization is needed over <code>PriorityQueue</code> because the
- pluggable comparison function makes the rebalancing quite slow.
+  pluggable comparison function makes the rebalancing quite slow.
  */
 @interface OrgApacheLuceneSearchDisiPriorityQueue : NSObject < JavaLangIterable >
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxSize;
+- (instancetype __nonnull)initWithInt:(jint)maxSize;
 
 - (OrgApacheLuceneSearchDisiWrapper *)addWithOrgApacheLuceneSearchDisiWrapper:(OrgApacheLuceneSearchDisiWrapper *)entry_;
 
@@ -65,6 +73,10 @@
 
 - (void)upHeapWithInt:(jint)i;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDisiPriorityQueue)
@@ -85,4 +97,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisiPriorityQueue)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisiPriorityQueue")

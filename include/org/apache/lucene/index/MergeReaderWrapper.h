@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMergeReaderWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMergeReaderWrapper_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergeReaderWrapper || defined(INCLUDE_OrgApacheLuceneIndexMergeReaderWrapper))
 #define OrgApacheLuceneIndexMergeReaderWrapper_
 
@@ -99,7 +105,11 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)inArg;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -112,14 +122,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergeReaderWrapper, docValues_, OrgApach
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergeReaderWrapper, store_, OrgApacheLuceneCodecsStoredFieldsReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergeReaderWrapper, vectors_, OrgApacheLuceneCodecsTermVectorsReader *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexMergeReaderWrapper *self, OrgApacheLuceneIndexSegmentReader *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexMergeReaderWrapper_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexMergeReaderWrapper *self, OrgApacheLuceneIndexSegmentReader *inArg);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergeReaderWrapper *new_OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergeReaderWrapper *new_OrgApacheLuceneIndexMergeReaderWrapper_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergeReaderWrapper *create_OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg);
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergeReaderWrapper *create_OrgApacheLuceneIndexMergeReaderWrapper_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeReaderWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeReaderWrapper")

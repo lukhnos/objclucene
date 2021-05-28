@@ -15,6 +15,10 @@
 #include "org/apache/lucene/store/RAMDirectory.h"
 #include "org/apache/lucene/store/RAMFile.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/RAMFile must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneStoreRAMFile
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -55,7 +59,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSByteArray *)getBufferWithInt:(jint)index {
   @synchronized(self) {
-    return [((JavaUtilArrayList *) nil_chk(buffers_)) getWithInt:index];
+    return JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(buffers_)) getWithInt:index]);
   }
 }
 
@@ -80,7 +84,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  return JreStrcat("$$JC", [[self getClass] getSimpleName], @"(length=", length_, ')');
+  return JreStrcat("$$JC", [[self java_getClass] getSimpleName], @"(length=", length_, ')');
 }
 
 - (NSUInteger)hash {
@@ -92,9 +96,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneStoreRAMFile *other = (OrgApacheLuceneStoreRAMFile *) cast_chk(obj, [OrgApacheLuceneStoreRAMFile class]);
   if (length_ != other->length_) return false;
   if ([((JavaUtilArrayList *) nil_chk(buffers_)) size] != [other->buffers_ size]) {
@@ -115,28 +119,46 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "RAMFile", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreRAMDirectory:", "RAMFile", NULL, 0x0, NULL, NULL },
-    { "getLength", NULL, "J", 0x21, NULL, NULL },
-    { "setLengthWithLong:", "setLength", "V", 0x24, NULL, NULL },
-    { "addBufferWithInt:", "addBuffer", "[B", 0x14, NULL, NULL },
-    { "getBufferWithInt:", "getBuffer", "[B", 0x34, NULL, NULL },
-    { "numBuffers", NULL, "I", 0x34, NULL, NULL },
-    { "newBufferWithInt:", "newBuffer", "[B", 0x4, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x21, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x24, 1, 2, -1, -1, -1, -1 },
+    { NULL, "[B", 0x14, 3, 4, -1, -1, -1, -1 },
+    { NULL, "[B", 0x34, 5, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x34, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[B", 0x4, 6, 4, -1, -1, -1, -1 },
+    { NULL, "J", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 7, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 10, 11, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreRAMDirectory:);
+  methods[2].selector = @selector(getLength);
+  methods[3].selector = @selector(setLengthWithLong:);
+  methods[4].selector = @selector(addBufferWithInt:);
+  methods[5].selector = @selector(getBufferWithInt:);
+  methods[6].selector = @selector(numBuffers);
+  methods[7].selector = @selector(newBufferWithInt:);
+  methods[8].selector = @selector(ramBytesUsed);
+  methods[9].selector = @selector(getChildResources);
+  methods[10].selector = @selector(description);
+  methods[11].selector = @selector(hash);
+  methods[12].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "buffers_", NULL, 0x14, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<[LB;>;", .constantValue.asLong = 0 },
-    { "length_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "directory_", NULL, 0x0, "Lorg.apache.lucene.store.RAMDirectory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sizeInBytes_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "buffers_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x14, -1, -1, 12, -1 },
+    { "length_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "directory_", "LOrgApacheLuceneStoreRAMDirectory;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "sizeInBytes_", "J", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMFile = { 2, "RAMFile", "org.apache.lucene.store", NULL, 0x1, 13, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRAMDirectory;", "setLength", "J", "addBuffer", "I", "getBuffer", "newBuffer", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString", "hashCode", "equals", "LNSObject;", "Ljava/util/ArrayList<[B>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMFile = { "RAMFile", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 13, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreRAMFile;
 }
 

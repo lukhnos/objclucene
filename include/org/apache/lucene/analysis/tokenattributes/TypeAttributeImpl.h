@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl))
 #define OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_
 
@@ -36,12 +42,12 @@
 /*!
  @brief Initialize this attribute with <code>TypeAttribute.DEFAULT_TYPE</code>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Initialize this attribute with <code>type</code>
  */
-- (instancetype)initWithNSString:(NSString *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)type;
 
 - (void)clear;
 
@@ -50,6 +56,8 @@
 - (jboolean)isEqual:(id)other;
 
 - (NSUInteger)hash;
+
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone;
 
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector;
 
@@ -63,9 +71,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *self, NSString *type);
 
@@ -77,4 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesTypeAttributeIm
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl")

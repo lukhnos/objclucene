@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilNamedThreadFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilNamedThreadFactory_) && (INCLUDE_ALL_OrgApacheLuceneUtilNamedThreadFactory || defined(INCLUDE_OrgApacheLuceneUtilNamedThreadFactory))
 #define OrgApacheLuceneUtilNamedThreadFactory_
 
@@ -25,9 +31,8 @@
 
 /*!
  @brief A default <code>ThreadFactory</code> implementation that accepts the name prefix
- of the created threads as a constructor argument.
- Otherwise, this factory
- yields the same semantics as the thread factory returned by
+  of the created threads as a constructor argument.Otherwise, this factory
+  yields the same semantics as the thread factory returned by 
  <code>Executors.defaultThreadFactory()</code>.
  */
 @interface OrgApacheLuceneUtilNamedThreadFactory : NSObject < JavaUtilConcurrentThreadFactory >
@@ -38,13 +43,17 @@
  @brief Creates a new <code>NamedThreadFactory</code> instance
  @param threadNamePrefix the name prefix assigned to each thread created.
  */
-- (instancetype)initWithNSString:(NSString *)threadNamePrefix;
+- (instancetype __nonnull)initWithNSString:(NSString *)threadNamePrefix;
 
 /*!
  @brief Creates a new <code>Thread</code>
  - seealso: java.util.concurrent.ThreadFactory#newThread(java.lang.Runnable)
  */
 - (JavaLangThread *)newThreadWithJavaLangRunnable:(id<JavaLangRunnable>)r OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -60,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNamedThreadFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilNamedThreadFactory")

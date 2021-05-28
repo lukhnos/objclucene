@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisAnalyzerWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisAnalyzerWrapper_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisAnalyzerWrapper || defined(INCLUDE_OrgApacheLuceneAnalysisAnalyzerWrapper))
 #define OrgApacheLuceneAnalysisAnalyzerWrapper_
 
@@ -26,19 +32,20 @@
 
 /*!
  @brief Extension to <code>Analyzer</code> suitable for Analyzers which wrap
- other Analyzers.
+  other Analyzers.
  <p><code>getWrappedAnalyzer(String)</code> allows the Analyzer
- to wrap multiple Analyzers which are selected on a per field basis.
- <p><code>wrapComponents(String,Analyzer.TokenStreamComponents)</code> allows the
- TokenStreamComponents of the wrapped Analyzer to then be wrapped
- (such as adding a new <code>TokenFilter</code> to form new TokenStreamComponents.
- <p><code>wrapReader(String,Reader)</code> allows the Reader of the wrapped
- Analyzer to then be wrapped (such as adding a new <code>CharFilter</code>.
+  to wrap multiple Analyzers which are selected on a per field basis.  
+ <p><code>wrapComponents(String, Analyzer.TokenStreamComponents)</code> allows the
+  TokenStreamComponents of the wrapped Analyzer to then be wrapped
+  (such as adding a new <code>TokenFilter</code> to form new TokenStreamComponents. 
+ <p><code>wrapReader(String, Reader)</code> allows the Reader of the wrapped
+  Analyzer to then be wrapped (such as adding a new <code>CharFilter</code>.
+  
  <p><b>Important:</b> If you do not want to wrap the TokenStream
- using <code>wrapComponents(String,Analyzer.TokenStreamComponents)</code>
- or the Reader using <code>wrapReader(String,Reader)</code> and just delegate
- to other analyzers (like by field name), use <code>DelegatingAnalyzerWrapper</code>
- as superclass!
+  using <code>wrapComponents(String, Analyzer.TokenStreamComponents)</code>
+  or the Reader using <code>wrapReader(String, Reader)</code> and just delegate
+  to other analyzers (like by field name), use <code>DelegatingAnalyzerWrapper</code>
+  as superclass!
  - seealso: DelegatingAnalyzerWrapper
  */
 @interface OrgApacheLuceneAnalysisAnalyzerWrapper : OrgApacheLuceneAnalysisAnalyzer
@@ -57,19 +64,19 @@
 /*!
  @brief Creates a new AnalyzerWrapper with the given reuse strategy.
  <p>If you want to wrap a single delegate Analyzer you can probably
- reuse its strategy when instantiating this subclass:
+  reuse its strategy when instantiating this subclass: 
  <code>super(delegate.getReuseStrategy());</code>.
- <p>If you choose different analyzers per field, use
+  <p>If you choose different analyzers per field, use 
  <code>PER_FIELD_REUSE_STRATEGY</code>.
  - seealso: #getReuseStrategy()
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)reuseStrategy;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)reuseStrategy;
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
 /*!
  @brief Retrieves the wrapped Analyzer appropriate for analyzing the field with
- the given name
+  the given name
  @param fieldName Name of the field which is to be analyzed
  @return Analyzer for the field with the given name.  Assumed to be non-null
  */
@@ -77,32 +84,32 @@
 
 /*!
  @brief Wraps / alters the given TokenStreamComponents, taken from the wrapped
- Analyzer, to form new components.
- It is through this method that new
- TokenFilters can be added by AnalyzerWrappers. By default, the given
- components are returned.
- @param fieldName
- Name of the field which is to be analyzed
- @param components
- TokenStreamComponents taken from the wrapped Analyzer
+  Analyzer, to form new components.It is through this method that new
+  TokenFilters can be added by AnalyzerWrappers.
+ By default, the given
+  components are returned.
+ @param fieldName Name of the field which is to be analyzed
+ @param components TokenStreamComponents taken from the wrapped Analyzer
  @return Wrapped / altered TokenStreamComponents.
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components;
 
 /*!
- @brief Wraps / alters the given Reader.
- Through this method AnalyzerWrappers can
- implement <code>initReader(String,Reader)</code>. By default, the given reader
- is returned.
- @param fieldName
- name of the field which is to be analyzed
- @param reader
- the reader to wrap
+ @brief Wraps / alters the given Reader.Through this method AnalyzerWrappers can
+  implement <code>initReader(String, Reader)</code>.
+ By default, the given reader
+  is returned.
+ @param fieldName name of the field which is to be analyzed
+ @param reader the reader to wrap
  @return the wrapped reader
  */
 - (JavaIoReader *)wrapReaderWithNSString:(NSString *)fieldName
                         withJavaIoReader:(JavaIoReader *)reader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -114,4 +121,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzerWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisAnalyzerWrapper")

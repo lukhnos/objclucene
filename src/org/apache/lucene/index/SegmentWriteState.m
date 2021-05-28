@@ -16,6 +16,10 @@
 #include "org/apache/lucene/util/InfoStream.h"
 #include "org/apache/lucene/util/MutableBits.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SegmentWriteState must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexSegmentWriteState ()
 
 - (jboolean)assertSegmentSuffixWithNSString:(NSString *)segmentSuffix;
@@ -70,24 +74,33 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexSegmentWriteState_as
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilInfoStream:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneIndexBufferedUpdates:withOrgApacheLuceneStoreIOContext:", "SegmentWriteState", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilInfoStream:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneIndexBufferedUpdates:withOrgApacheLuceneStoreIOContext:withNSString:", "SegmentWriteState", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexSegmentWriteState:withNSString:", "SegmentWriteState", NULL, 0x1, NULL, NULL },
-    { "assertSegmentSuffixWithNSString:", "assertSegmentSuffix", "Z", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilInfoStream:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneIndexBufferedUpdates:withOrgApacheLuceneStoreIOContext:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilInfoStream:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneIndexBufferedUpdates:withOrgApacheLuceneStoreIOContext:withNSString:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexSegmentWriteState:withNSString:);
+  methods[3].selector = @selector(assertSegmentSuffixWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "infoStream_", NULL, 0x11, "Lorg.apache.lucene.util.InfoStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "directory_", NULL, 0x11, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentInfo_", NULL, 0x11, "Lorg.apache.lucene.index.SegmentInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfos_", NULL, 0x11, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "delCountOnFlush_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "segUpdates_", NULL, 0x11, "Lorg.apache.lucene.index.BufferedUpdates;", NULL, NULL, .constantValue.asLong = 0 },
-    { "liveDocs_", NULL, 0x1, "Lorg.apache.lucene.util.MutableBits;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentSuffix_", NULL, 0x11, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "context_", NULL, 0x11, "Lorg.apache.lucene.store.IOContext;", NULL, NULL, .constantValue.asLong = 0 },
+    { "infoStream_", "LOrgApacheLuceneUtilInfoStream;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "directory_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "segmentInfo_", "LOrgApacheLuceneIndexSegmentInfo;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "fieldInfos_", "LOrgApacheLuceneIndexFieldInfos;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "delCountOnFlush_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "segUpdates_", "LOrgApacheLuceneIndexBufferedUpdates;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "liveDocs_", "LOrgApacheLuceneUtilMutableBits;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "segmentSuffix_", "LNSString;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "context_", "LOrgApacheLuceneStoreIOContext;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentWriteState = { 2, "SegmentWriteState", "org.apache.lucene.index", NULL, 0x1, 4, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilInfoStream;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneIndexFieldInfos;LOrgApacheLuceneIndexBufferedUpdates;LOrgApacheLuceneStoreIOContext;", "LOrgApacheLuceneUtilInfoStream;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneIndexFieldInfos;LOrgApacheLuceneIndexBufferedUpdates;LOrgApacheLuceneStoreIOContext;LNSString;", "LOrgApacheLuceneIndexSegmentWriteState;LNSString;", "assertSegmentSuffix", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentWriteState = { "SegmentWriteState", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 4, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSegmentWriteState;
 }
 
@@ -112,7 +125,7 @@ void OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream
   JreStrongAssign(&self->directory_, directory);
   JreStrongAssign(&self->segmentInfo_, segmentInfo);
   JreStrongAssign(&self->fieldInfos_, fieldInfos);
-  JreAssert((OrgApacheLuceneIndexSegmentWriteState_assertSegmentSuffixWithNSString_(self, segmentSuffix)), (@"org/apache/lucene/index/SegmentWriteState.java:96 condition failed: assert assertSegmentSuffix(segmentSuffix);"));
+  JreAssert(OrgApacheLuceneIndexSegmentWriteState_assertSegmentSuffixWithNSString_(self, segmentSuffix), @"org/apache/lucene/index/SegmentWriteState.java:96 condition failed: assert assertSegmentSuffix(segmentSuffix);");
   JreStrongAssign(&self->segmentSuffix_, segmentSuffix);
   JreStrongAssign(&self->context_, context);
 }
@@ -147,9 +160,9 @@ OrgApacheLuceneIndexSegmentWriteState *create_OrgApacheLuceneIndexSegmentWriteSt
 }
 
 jboolean OrgApacheLuceneIndexSegmentWriteState_assertSegmentSuffixWithNSString_(OrgApacheLuceneIndexSegmentWriteState *self, NSString *segmentSuffix) {
-  JreAssert((segmentSuffix != nil), (@"org/apache/lucene/index/SegmentWriteState.java:119 condition failed: assert segmentSuffix != null;"));
-  if (![((NSString *) nil_chk(segmentSuffix)) isEmpty]) {
-    jint numParts = ((IOSObjectArray *) nil_chk([segmentSuffix split:@"_"]))->size_;
+  JreAssert(segmentSuffix != nil, @"org/apache/lucene/index/SegmentWriteState.java:119 condition failed: assert segmentSuffix != null;");
+  if (![((NSString *) nil_chk(segmentSuffix)) java_isEmpty]) {
+    jint numParts = ((IOSObjectArray *) nil_chk([segmentSuffix java_split:@"_"]))->size_;
     if (numParts == 2) {
       return true;
     }

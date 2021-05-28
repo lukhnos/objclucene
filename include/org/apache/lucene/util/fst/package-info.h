@@ -6,75 +6,75 @@
 /*!
  @brief Finite state transducers
  <p>
- This package implements <a href="http://en.wikipedia.org/wiki/Finite_state_transducer">
- Finite State Transducers</a> with the following characteristics:
+  This package implements <a href="http://en.wikipedia.org/wiki/Finite_state_transducer">
+  Finite State Transducers</a> with the following characteristics: 
  <ul>
- <li>Fast and low memory overhead construction of the minimal FST 
- (but inputs must be provided in sorted order)</li>
- <li>Low object overhead and quick deserialization (byte[] representation)</li>
- <li>Optional two-pass compression: <code>FST.pack()</code></li>
- <li><code>Lookup-by-output</code> when the 
- outputs are in sorted order (e.g., ordinals or file pointers)</li>
- <li>Pluggable <code>Outputs</code> representation</li>
- <li><code>N-shortest-paths</code> search by
- weight</li>
- <li>Enumerators (<code>IntsRef</code> and <code>BytesRef</code>) that behave like <code>SortedMap</code> iterators
+     <li>Fast and low memory overhead construction of the minimal FST 
+         (but inputs must be provided in sorted order)</li>
+     <li>Low object overhead and quick deserialization (byte[] representation)</li>
+     <li>Optional two-pass compression: <code>FST.pack()</code></li>
+     <li><code>Lookup-by-output</code> when the 
+         outputs are in sorted order (e.g., ordinals or file pointers)</li>
+     <li>Pluggable <code>Outputs</code> representation</li>
+     <li><code>N-shortest-paths</code> search by
+         weight</li>
+     <li>Enumerators (<code>IntsRef</code> and <code>BytesRef</code>) that behave like <code>SortedMap</code> iterators 
  </ul>
- <p>
- FST Construction example:
+  <p>
+  FST Construction example: 
  <pre class="prettyprint">
- // Input values (keys).
+      // Input values (keys).
  These must be provided to Builder in Unicode sorted order!
- String inputValues[] = {"cat", "dog", "dogs"};
- long outputValues[] = {5, 7, 12};
- PositiveIntOutputs outputs = PositiveIntOutputs.getSingleton();
- Builder&lt;Long&gt; builder = new Builder&lt;Long&gt;(INPUT_TYPE.BYTE1, outputs);
- BytesRef scratchBytes = new BytesRef();
- IntsRefBuilder scratchInts = new IntsRefBuilder();
- for (int i = 0; i &lt; inputValues.length; i++) {
- scratchBytes.copyChars(inputValues[i]);
- builder.add(Util.toIntsRef(scratchBytes, scratchInts), outputValues[i]);
- }
- FST&lt;Long&gt; fst = builder.finish();
+      String inputValues[] = {"cat", "dog", "dogs"};
+      long outputValues[] = {5, 7, 12};     
+      PositiveIntOutputs outputs = PositiveIntOutputs.getSingleton();
+      Builder&lt;Long&gt; builder = new Builder&lt;Long&gt;(INPUT_TYPE.BYTE1, outputs);
+      BytesRef scratchBytes = new BytesRef();
+      IntsRefBuilder scratchInts = new IntsRefBuilder();
+      for (int i = 0; i &lt; inputValues.length; i++) {
+        scratchBytes.copyChars(inputValues[i]);
+        builder.add(Util.toIntsRef(scratchBytes, scratchInts), outputValues[i]);
+      }
+      FST&lt;Long&gt; fst = builder.finish(); 
  
 @endcode
- Retrieval by key:
+  Retrieval by key: 
  <pre class="prettyprint">
- Long value = Util.get(fst, new BytesRef("dog"));
- System.out.println(value); // 7
+      Long value = Util.get(fst, new BytesRef("dog"));
+      System.out.println(value); // 7 
  
 @endcode
- Retrieval by value:
+  Retrieval by value: 
  <pre class="prettyprint">
- // Only works because outputs are also in sorted order
- IntsRef key = Util.getByOutput(fst, 12);
- System.out.println(Util.toBytesRef(key, scratchBytes).utf8ToString()); // dogs
+      // Only works because outputs are also in sorted order
+      IntsRef key = Util.getByOutput(fst, 12);
+      System.out.println(Util.toBytesRef(key, scratchBytes).utf8ToString()); // dogs 
  
 @endcode
- Iterate over key-value pairs in sorted order:
+  Iterate over key-value pairs in sorted order: 
  <pre class="prettyprint">
- // Like TermsEnum, this also supports seeking (advance)
- BytesRefFSTEnum&lt;Long&gt; iterator = new BytesRefFSTEnum&lt;Long&gt;(fst);
- while (iterator.next() != null) {
- InputOutput&lt;Long&gt; mapEntry = iterator.current();
- System.out.println(mapEntry.input.utf8ToString());
- System.out.println(mapEntry.output);
- }
+      // Like TermsEnum, this also supports seeking (advance)
+      BytesRefFSTEnum&lt;Long&gt; iterator = new BytesRefFSTEnum&lt;Long&gt;(fst);
+      while (iterator.next() != null) {
+        InputOutput&lt;Long&gt; mapEntry = iterator.current();
+        System.out.println(mapEntry.input.utf8ToString());
+        System.out.println(mapEntry.output);
+      } 
  
 @endcode
- N-shortest paths by weight:
+  N-shortest paths by weight: 
  <pre class="prettyprint">
- Comparator&lt;Long&gt; comparator = new Comparator&lt;Long&gt;() {
- public int compare(Long left, Long right) {
- return left.compareTo(right);
- }
- };
- Arc&lt;Long&gt; firstArc = fst.getFirstArc(new Arc&lt;Long&gt;());
- MinResult&lt;Long&gt; paths[] = Util.shortestPaths(fst, firstArc, comparator, 2);
- System.out.println(Util.toBytesRef(paths[0].input, scratchBytes).utf8ToString()); // cat
- System.out.println(paths[0].output); // 5
- System.out.println(Util.toBytesRef(paths[1].input, scratchBytes).utf8ToString()); // dog
- System.out.println(paths[1].output); // 7
+      Comparator&lt;Long&gt; comparator = new Comparator&lt;Long&gt;() {
+        public int compare(Long left, Long right) {
+          return left.compareTo(right);
+        }
+      };
+      Arc&lt;Long&gt; firstArc = fst.getFirstArc(new Arc&lt;Long&gt;());
+      MinResult&lt;Long&gt; paths[] = Util.shortestPaths(fst, firstArc, comparator, 2);
+      System.out.println(Util.toBytesRef(paths[0].input, scratchBytes).utf8ToString()); // cat
+      System.out.println(paths[0].output); // 5
+      System.out.println(Util.toBytesRef(paths[1].input, scratchBytes).utf8ToString()); // dog
+      System.out.println(paths[1].output); // 7 
  
 @endcode
  */
@@ -88,4 +88,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstPackage_info")

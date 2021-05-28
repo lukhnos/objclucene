@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/ValueQueryNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/ValueQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode : NSObject
 
 @end
@@ -13,11 +17,18 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setValueWithId:", "setValue", "V", 0x401, NULL, "(TT;)V" },
-    { "getValue", NULL, "TT;", 0x401, NULL, "()TT;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x401, -1, -1, -1, 3, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode = { 2, "ValueQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setValueWithId:);
+  methods[1].selector = @selector(getValue);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setValue", "LNSObject;", "(TT;)V", "()TT;", "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode = { "ValueQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, 4, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode;
 }
 

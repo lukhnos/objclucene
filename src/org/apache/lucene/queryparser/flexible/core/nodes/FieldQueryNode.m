@@ -3,15 +3,19 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
 #include "java/util/Locale.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode
 
@@ -120,36 +124,61 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangCharSequence:withJavaLangCharSequence:withInt:withInt:", "FieldQueryNode", NULL, 0x1, NULL, NULL },
-    { "getTermEscapedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "getTermEscaped", "Ljava.lang.CharSequence;", 0x4, NULL, NULL },
-    { "getTermEscapeQuotedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "getTermEscapeQuoted", "Ljava.lang.CharSequence;", 0x4, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getTextAsString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getFieldAsString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getBegin", NULL, "I", 0x1, NULL, NULL },
-    { "setBeginWithInt:", "setBegin", "V", 0x1, NULL, NULL },
-    { "getEnd", NULL, "I", 0x1, NULL, NULL },
-    { "setEndWithInt:", "setEnd", "V", 0x1, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "setFieldWithJavaLangCharSequence:", "setField", "V", 0x1, NULL, NULL },
-    { "getPositionIncrement", NULL, "I", 0x1, NULL, NULL },
-    { "setPositionIncrementWithInt:", "setPositionIncrement", "V", 0x1, NULL, NULL },
-    { "getText", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "setTextWithJavaLangCharSequence:", "setText", "V", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.FieldQueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "getValue", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "setValueWithId:", "setValue", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x4, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 4, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 7, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 7, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 10, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode;", 0x1, -1, -1, 13, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 10, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaLangCharSequence:withJavaLangCharSequence:withInt:withInt:);
+  methods[1].selector = @selector(getTermEscapedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[2].selector = @selector(getTermEscapeQuotedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[3].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[4].selector = @selector(description);
+  methods[5].selector = @selector(getTextAsString);
+  methods[6].selector = @selector(getFieldAsString);
+  methods[7].selector = @selector(getBegin);
+  methods[8].selector = @selector(setBeginWithInt:);
+  methods[9].selector = @selector(getEnd);
+  methods[10].selector = @selector(setEndWithInt:);
+  methods[11].selector = @selector(getField);
+  methods[12].selector = @selector(setFieldWithJavaLangCharSequence:);
+  methods[13].selector = @selector(getPositionIncrement);
+  methods[14].selector = @selector(setPositionIncrementWithInt:);
+  methods[15].selector = @selector(getText);
+  methods[16].selector = @selector(setTextWithJavaLangCharSequence:);
+  methods[17].selector = @selector(cloneTree);
+  methods[18].selector = @selector(getValue);
+  methods[19].selector = @selector(setValueWithId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x4, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "text_", NULL, 0x4, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "begin_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionIncrement_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "text_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "begin_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "end_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "positionIncrement_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode = { 2, "FieldQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 20, methods, 5, fields, 0, NULL, 0, NULL, NULL, "Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl;Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<Ljava/lang/CharSequence;>;Lorg/apache/lucene/queryparser/flexible/core/nodes/TextableQueryNode;" };
+  static const void *ptrTable[] = { "LJavaLangCharSequence;LJavaLangCharSequence;II", "getTermEscaped", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;", "getTermEscapeQuoted", "toQueryString", "toString", "setBegin", "I", "setEnd", "setField", "LJavaLangCharSequence;", "setPositionIncrement", "setText", "LJavaLangCloneNotSupportedException;", "setValue", "Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl;Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<Ljava/lang/CharSequence;>;Lorg/apache/lucene/queryparser/flexible/core/nodes/TextableQueryNode;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode = { "FieldQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x1, 20, 5, -1, -1, -1, 15, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode;
 }
 

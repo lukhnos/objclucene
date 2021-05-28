@@ -13,6 +13,10 @@
 #include "org/apache/lucene/analysis/shingle/ShingleFilter.h"
 #include "org/apache/lucene/analysis/standard/StandardAnalyzer.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/shingle/ShingleAnalyzerWrapper must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper () {
  @public
   OrgApacheLuceneAnalysisAnalyzer *delegate_;
@@ -122,32 +126,51 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:", "ShingleAnalyzerWrapper", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withInt:", "ShingleAnalyzerWrapper", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withInt:withInt:", "ShingleAnalyzerWrapper", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withInt:withInt:withNSString:withBoolean:withBoolean:withNSString:", "ShingleAnalyzerWrapper", NULL, 0x1, NULL, NULL },
-    { "init", "ShingleAnalyzerWrapper", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withInt:", "ShingleAnalyzerWrapper", NULL, 0x1, NULL, NULL },
-    { "getMaxShingleSize", NULL, "I", 0x1, NULL, NULL },
-    { "getMinShingleSize", NULL, "I", 0x1, NULL, NULL },
-    { "getTokenSeparator", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isOutputUnigrams", NULL, "Z", 0x1, NULL, NULL },
-    { "isOutputUnigramsIfNoShingles", NULL, "Z", 0x1, NULL, NULL },
-    { "getFillerToken", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getWrappedAnalyzerWithNSString:", "getWrappedAnalyzer", "Lorg.apache.lucene.analysis.Analyzer;", 0x11, NULL, NULL },
-    { "wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:", "wrapComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x11, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withInt:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withInt:withInt:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withInt:withInt:withNSString:withBoolean:withBoolean:withNSString:);
+  methods[4].selector = @selector(init);
+  methods[5].selector = @selector(initWithInt:withInt:);
+  methods[6].selector = @selector(getMaxShingleSize);
+  methods[7].selector = @selector(getMinShingleSize);
+  methods[8].selector = @selector(getTokenSeparator);
+  methods[9].selector = @selector(isOutputUnigrams);
+  methods[10].selector = @selector(isOutputUnigramsIfNoShingles);
+  methods[11].selector = @selector(getFillerToken);
+  methods[12].selector = @selector(getWrappedAnalyzerWithNSString:);
+  methods[13].selector = @selector(wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "delegate_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxShingleSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minShingleSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenSeparator_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "outputUnigrams_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "outputUnigramsIfNoShingles_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "fillerToken_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "delegate_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxShingleSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minShingleSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "tokenSeparator_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "outputUnigrams_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "outputUnigramsIfNoShingles_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fillerToken_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper = { 2, "ShingleAnalyzerWrapper", "org.apache.lucene.analysis.shingle", NULL, 0x11, 14, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;", "LOrgApacheLuceneAnalysisAnalyzer;I", "LOrgApacheLuceneAnalysisAnalyzer;II", "LOrgApacheLuceneAnalysisAnalyzer;IILNSString;ZZLNSString;", "II", "getWrappedAnalyzer", "LNSString;", "wrapComponents", "LNSString;LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper = { "ShingleAnalyzerWrapper", "org.apache.lucene.analysis.shingle", ptrTable, methods, fields, 7, 0x11, 14, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper;
 }
 

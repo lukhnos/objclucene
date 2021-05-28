@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTermContext
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTermContext_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermContext || defined(INCLUDE_OrgApacheLuceneIndexTermContext))
 #define OrgApacheLuceneIndexTermContext_
 
@@ -21,20 +27,18 @@
 @class OrgApacheLuceneIndexTermState;
 
 /*!
- @brief Maintains a <code>IndexReader</code> <code>TermState</code> view over
- <code>IndexReader</code> instances containing a single term.
- The
- <code>TermContext</code> doesn't track if the given <code>TermState</code>
- objects are valid, neither if the <code>TermState</code> instances refer to the
- same terms in the associated readers.
+ @brief Maintains a <code>IndexReader</code> <code>TermState</code> view over 
+ <code>IndexReader</code> instances containing a single term.The
+  <code>TermContext</code> doesn't track if the given <code>TermState</code>
+  objects are valid, neither if the <code>TermState</code> instances refer to the
+  same terms in the associated readers.
  */
 @interface OrgApacheLuceneIndexTermContext : NSObject {
  @public
   /*!
    @brief Holds the <code>IndexReaderContext</code> of the top-level
- <code>IndexReader</code>, used internally only for
- asserting.
-    
+   <code>IndexReader</code>, used internally only for
+   asserting.
    */
   OrgApacheLuceneIndexIndexReaderContext *topReaderContext_;
 }
@@ -44,17 +48,17 @@
 /*!
  @brief Creates an empty <code>TermContext</code> from a <code>IndexReaderContext</code>
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context;
 
 /*!
  @brief Creates a <code>TermContext</code> with an initial <code>TermState</code>,
- <code>IndexReader</code> pair.
+  <code>IndexReader</code> pair.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context
-                             withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state
-                                                       withInt:(jint)ord
-                                                       withInt:(jint)docFreq
-                                                      withLong:(jlong)totalTermFreq;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context
+                                       withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state
+                                                                 withInt:(jint)ord
+                                                                 withInt:(jint)docFreq
+                                                                withLong:(jlong)totalTermFreq;
 
 /*!
  @brief Expert: Accumulate term statistics.
@@ -64,60 +68,56 @@
 
 /*!
  @brief Creates a <code>TermContext</code> from a top-level <code>IndexReaderContext</code> and the
- given <code>Term</code>.
- This method will lookup the given term in all context's leaf readers 
- and register each of the readers containing the term in the returned <code>TermContext</code>
- using the leaf reader's ordinal.
+  given <code>Term</code>.This method will lookup the given term in all context's leaf readers 
+  and register each of the readers containing the term in the returned <code>TermContext</code>
+  using the leaf reader's ordinal.
  <p>
- Note: the given context must be a top-level context.
+  Note: the given context must be a top-level context.
  */
 + (OrgApacheLuceneIndexTermContext *)buildWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context
                                                         withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 /*!
  @brief Clears the <code>TermContext</code> internal state and removes all
- registered <code>TermState</code>s
+  registered <code>TermState</code>s
  */
 - (void)clear;
 
 /*!
  @brief Returns the accumulated document frequency of all <code>TermState</code>
- instances passed to <code>register(TermState,int,int,long)</code>.
+          instances passed to <code>register(TermState, int, int, long)</code>.
  @return the accumulated document frequency of all <code>TermState</code>
- instances passed to <code>register(TermState,int,int,long)</code>.
+          instances passed to <code>register(TermState, int, int, long)</code>.
  */
 - (jint)docFreq;
 
 /*!
- @brief Returns the <code>TermState</code> for an leaf ordinal or <code>null</code> if no
+ @brief Returns the <code>TermState</code> for an leaf ordinal or <code>null</code> if no 
  <code>TermState</code> for the ordinal was registered.
- @param ord
- the readers leaf ordinal to get the <code>TermState</code> for.
+ @param ord the readers leaf ordinal to get the 
+ <code>TermState</code>  for.
  @return the <code>TermState</code> for the given readers ord or <code>null</code> if no
- <code>TermState</code> for the reader was registered
+          <code>TermState</code> for the reader was registered
  */
 - (OrgApacheLuceneIndexTermState *)getWithInt:(jint)ord;
 
 /*!
  @brief Returns true if all terms stored here are real (e.g., not auto-prefix terms).
-  
  */
 - (jboolean)hasOnlyRealTerms;
 
 /*!
- @brief Expert: Registers and associates a <code>TermState</code> with an leaf ordinal.
- The
- leaf ordinal should be derived from a <code>IndexReaderContext</code>'s leaf ord.
- On the contrary to <code>register(TermState,int,int,long)</code> this method
- does NOT update term statistics.
+ @brief Expert: Registers and associates a <code>TermState</code> with an leaf ordinal.The
+  leaf ordinal should be derived from a <code>IndexReaderContext</code>'s leaf ord.
+ On the contrary to <code>register(TermState, int, int, long)</code> this method
+  does NOT update term statistics.
  */
 - (void)register__WithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state
                                             withInt:(jint)ord;
 
 /*!
- @brief Registers and associates a <code>TermState</code> with an leaf ordinal.
- The leaf ordinal
- should be derived from a <code>IndexReaderContext</code>'s leaf ord.
+ @brief Registers and associates a <code>TermState</code> with an leaf ordinal.The leaf ordinal
+  should be derived from a <code>IndexReaderContext</code>'s leaf ord.
  */
 - (void)register__WithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state
                                             withInt:(jint)ord
@@ -128,11 +128,15 @@
 
 /*!
  @brief Returns the accumulated term frequency of all <code>TermState</code>
- instances passed to <code>register(TermState,int,int,long)</code>.
+          instances passed to <code>register(TermState, int, int, long)</code>.
  @return the accumulated term frequency of all <code>TermState</code>
- instances passed to <code>register(TermState,int,int,long)</code>.
+          instances passed to <code>register(TermState, int, int, long)</code>.
  */
 - (jlong)totalTermFreq;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -158,4 +162,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermContext)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermContext")

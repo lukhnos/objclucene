@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter))
 #define OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_
 
@@ -22,9 +28,9 @@
 
 /*!
  @brief Used in the first pass when writing a segment to locate
- "appropriate" auto-prefix terms to pre-compile into the index.
+   "appropriate" auto-prefix terms to pre-compile into the index.
  This visits every term in the index to find prefixes that
- match >= min and <= max number of terms. 
+   match >= min and <= max number of terms.
  */
 @interface OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter : NSObject {
  @public
@@ -33,9 +39,9 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-                                          withInt:(jint)minItemsInPrefix
-                                          withInt:(jint)maxItemsInPrefix;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
+                                                                  withInt:(jint)minItemsInPrefix
+                                                                  withInt:(jint)maxItemsInPrefix;
 
 #pragma mark Package-Private
 
@@ -43,6 +49,10 @@
 
 - (void)savePrefixesWithInt:(jint)prefixLength
                     withInt:(jint)count;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -52,11 +62,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter, prefixe
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_brToStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *b);
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initWithOrgApacheLuceneIndexTerms_withInt_withInt_(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter *self, OrgApacheLuceneIndexTerms *terms, jint minItemsInPrefix, jint maxItemsInPrefix);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initPackagePrivateWithOrgApacheLuceneIndexTerms_withInt_withInt_(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter *self, OrgApacheLuceneIndexTerms *terms, jint minItemsInPrefix, jint maxItemsInPrefix);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter *new_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initWithOrgApacheLuceneIndexTerms_withInt_withInt_(OrgApacheLuceneIndexTerms *terms, jint minItemsInPrefix, jint maxItemsInPrefix) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter *new_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initPackagePrivateWithOrgApacheLuceneIndexTerms_withInt_withInt_(OrgApacheLuceneIndexTerms *terms, jint minItemsInPrefix, jint maxItemsInPrefix) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter *create_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initWithOrgApacheLuceneIndexTerms_withInt_withInt_(OrgApacheLuceneIndexTerms *terms, jint minItemsInPrefix, jint maxItemsInPrefix);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter *create_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initPackagePrivateWithOrgApacheLuceneIndexTerms_withInt_withInt_(OrgApacheLuceneIndexTerms *terms, jint minItemsInPrefix, jint maxItemsInPrefix);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter)
 
@@ -75,8 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter)
 
 /*!
  @brief Describes a range of term-space to match, either a simple prefix
- (foo*) or a floor-block range of a prefix (e.g. foo[a-m]*,
- foo[n-z]*) when there are too many terms starting with foo*.
+   (foo*) or a floor-block range of a prefix (e.g.foo[a-m]*,
+   foo[n-z]*) when there are too many terms starting with foo*.
  */
 @interface OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm : NSObject < JavaLangComparable > {
  @public
@@ -85,14 +95,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter)
    */
   IOSByteArray *prefix_;
   /*!
-   @brief If this is -2, this is a normal prefix (foo *), else it's the minimum lead byte of the suffix (e.g.
-   'd' in foo[d-m]*). 
+   @brief If this is -2, this is a normal prefix (foo *), else it's the minimum lead byte of the suffix (e.g.'
+   d' in foo[d-m]*).
    */
   jint floorLeadStart_;
   /*!
-   @brief The lead byte (inclusive) of the suffix for the term range we match (e.g.
-   'm' in foo[d-m*]); this is ignored when
- floorLeadStart is -2. 
+   @brief The lead byte (inclusive) of the suffix for the term range we match (e.g.'
+   m' in foo[d-m*]); this is ignored when
+   floorLeadStart is -2.
    */
   jint floorLeadEnd_;
   OrgApacheLuceneUtilBytesRef *term_;
@@ -103,9 +113,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter)
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithByteArray:(IOSByteArray *)prefix
-                          withInt:(jint)floorLeadStart
-                          withInt:(jint)floorLeadEnd;
+- (instancetype __nonnull)initWithByteArray:(IOSByteArray *)prefix
+                                    withInt:(jint)floorLeadStart
+                                    withInt:(jint)floorLeadEnd;
 
 - (jint)compareToWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
@@ -114,6 +124,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter)
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)inArg;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -132,4 +146,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_P
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter")

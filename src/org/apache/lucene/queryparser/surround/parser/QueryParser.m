@@ -35,10 +35,15 @@
 
 @class OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/parser/QueryParser must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserSurroundParserQueryParser () {
  @public
   jint jj_ntk_;
-  OrgApacheLuceneQueryparserSurroundParserToken *jj_scanpos_, *jj_lastpos_;
+  OrgApacheLuceneQueryparserSurroundParserToken *jj_scanpos_;
+  OrgApacheLuceneQueryparserSurroundParserToken *jj_lastpos_;
   jint jj_la_;
   jint jj_gen_;
   IOSIntArray *jj_la1_;
@@ -84,7 +89,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserQueryParser, jj_expe
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserQueryParser, jj_expentry_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserQueryParser, jj_lasttokens_, IOSIntArray *)
 
-inline IOSIntArray *OrgApacheLuceneQueryparserSurroundParserQueryParser_get_jj_la1_0();
+inline IOSIntArray *OrgApacheLuceneQueryparserSurroundParserQueryParser_get_jj_la1_0(void);
 inline IOSIntArray *OrgApacheLuceneQueryparserSurroundParserQueryParser_set_jj_la1_0(IOSIntArray *value);
 static IOSIntArray *OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserSurroundParserQueryParser, jj_la1_0, IOSIntArray *)
@@ -119,7 +124,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSurroundParser
 
 __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_3_1(OrgApacheLuceneQueryparserSurroundParserQueryParser *self);
 
-__attribute__((unused)) static void OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_init_0();
+__attribute__((unused)) static void OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_init_0(void);
 
 __attribute__((unused)) static OrgApacheLuceneQueryparserSurroundParserToken *OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(OrgApacheLuceneQueryparserSurroundParserQueryParser *self, jint kind);
 
@@ -143,9 +148,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundParserQueryParser_Loo
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init(OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess *self);
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess *new_OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess *new_OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess *create_OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init();
+__attribute__((unused)) static OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess *create_OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess)
 
@@ -202,7 +207,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return OrgApacheLuceneQueryparserSurroundParserQueryParser_TopSrndQuery(self);
   }
   @catch (OrgApacheLuceneQueryparserSurroundParserTokenMgrError *tme) {
-    @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_([((OrgApacheLuceneQueryparserSurroundParserTokenMgrError *) nil_chk(tme)) getMessage]);
+    @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_([tme getMessage]);
   }
 }
 
@@ -252,7 +257,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)allowedSuffixWithNSString:(NSString *)suffixed {
-  return (((jint) [((NSString *) nil_chk(suffixed)) length]) - 1) >= OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumPrefixLength;
+  return ([((NSString *) nil_chk(suffixed)) java_length] - 1) >= OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumPrefixLength;
 }
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)getPrefixQueryWithNSString:(NSString *)prefix
@@ -262,7 +267,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)allowedTruncationWithNSString:(NSString *)truncated {
   jint nrNormalChars = 0;
-  for (jint i = 0; i < ((jint) [((NSString *) nil_chk(truncated)) length]); i++) {
+  for (jint i = 0; i < [((NSString *) nil_chk(truncated)) java_length]; i++) {
     jchar c = [truncated charAtWithInt:i];
     if ((c != OrgApacheLuceneQueryparserSurroundParserQueryParser_truncator) && (c != OrgApacheLuceneQueryparserSurroundParserQueryParser_anyChar)) {
       nrNormalChars++;
@@ -384,7 +389,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneQueryparserSurroundParserToken *)getTokenWithInt:(jint)index {
-  OrgApacheLuceneQueryparserSurroundParserToken *t = token_;
+  OrgApacheLuceneQueryparserSurroundParserToken *t = JreRetainedLocalValue(token_);
   for (jint i = 0; i < index; i++) {
     if (((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(t))->next_ != nil) t = t->next_;
     else t = JreStrongAssign(&t->next_, [((OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *) nil_chk(token_source_)) getNextToken]);
@@ -466,6 +471,141 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x9, 0, 1, 2, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x1, 3, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x4, 4, 5, -1, 6, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x4, 7, 8, -1, 9, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x4, 10, 8, -1, 9, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x4, 11, 12, -1, 13, -1, -1 },
+    { NULL, "I", 0xc, 14, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0xc, 15, 16, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x4, 17, 18, 2, 19, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x4, 20, 21, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 22, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x4, 23, 21, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 24, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x4, 25, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LJavaUtilArrayList;", 0x11, -1, -1, 2, 26, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x11, -1, -1, 2, 27, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x11, 28, 29, 2, -1, -1, -1 },
+    { NULL, "Z", 0x2, 30, 31, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 33, 32, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 33, 34, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundParserToken;", 0x2, 35, 31, 2, -1, -1, -1 },
+    { NULL, "Z", 0x2, 36, 31, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundParserToken;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundParserToken;", 0x11, 37, 31, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 38, 39, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundParserParseException;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 40, 39, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(parseWithNSString:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(parse2WithNSString:);
+  methods[3].selector = @selector(getFieldsQueryWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withJavaUtilArrayList:);
+  methods[4].selector = @selector(getOrQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:);
+  methods[5].selector = @selector(getAndQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:);
+  methods[6].selector = @selector(getNotQueryWithJavaUtilList:withOrgApacheLuceneQueryparserSurroundParserToken:);
+  methods[7].selector = @selector(getOpDistanceWithNSString:);
+  methods[8].selector = @selector(checkDistanceSubQueriesWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery:withNSString:);
+  methods[9].selector = @selector(getDistanceQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:withBoolean:);
+  methods[10].selector = @selector(getTermQueryWithNSString:withBoolean:);
+  methods[11].selector = @selector(allowedSuffixWithNSString:);
+  methods[12].selector = @selector(getPrefixQueryWithNSString:withBoolean:);
+  methods[13].selector = @selector(allowedTruncationWithNSString:);
+  methods[14].selector = @selector(getTruncQueryWithNSString:);
+  methods[15].selector = @selector(TopSrndQuery);
+  methods[16].selector = @selector(FieldsQuery);
+  methods[17].selector = @selector(OptionalFields);
+  methods[18].selector = @selector(OrQuery);
+  methods[19].selector = @selector(AndQuery);
+  methods[20].selector = @selector(NotQuery);
+  methods[21].selector = @selector(NQuery);
+  methods[22].selector = @selector(WQuery);
+  methods[23].selector = @selector(PrimaryQuery);
+  methods[24].selector = @selector(PrefixOperatorQuery);
+  methods[25].selector = @selector(FieldsQueryList);
+  methods[26].selector = @selector(SimpleTerm);
+  methods[27].selector = @selector(OptionalWeightsWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:);
+  methods[28].selector = @selector(jj_2_1WithInt:);
+  methods[29].selector = @selector(jj_3_1);
+  methods[30].selector = @selector(jj_la1_init_0);
+  methods[31].selector = @selector(initWithOrgApacheLuceneQueryparserSurroundParserCharStream:);
+  methods[32].selector = @selector(ReInitWithOrgApacheLuceneQueryparserSurroundParserCharStream:);
+  methods[33].selector = @selector(initWithOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager:);
+  methods[34].selector = @selector(ReInitWithOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager:);
+  methods[35].selector = @selector(jj_consume_tokenWithInt:);
+  methods[36].selector = @selector(jj_scan_tokenWithInt:);
+  methods[37].selector = @selector(getNextToken);
+  methods[38].selector = @selector(getTokenWithInt:);
+  methods[39].selector = @selector(jj_ntk);
+  methods[40].selector = @selector(jj_add_error_tokenWithInt:withInt:);
+  methods[41].selector = @selector(generateParseException);
+  methods[42].selector = @selector(enable_tracing);
+  methods[43].selector = @selector(disable_tracing);
+  methods[44].selector = @selector(jj_rescan_token);
+  methods[45].selector = @selector(jj_saveWithInt:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "minimumPrefixLength", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumPrefixLength, 0x10, 41, -1, -1, -1 },
+    { "minimumCharsInTrunc", "I", .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumCharsInTrunc, 0x10, 42, -1, -1, -1 },
+    { "truncationErrorMessage_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "boostErrorMessage_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "truncator", "C", .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_truncator, 0x10, 43, -1, -1, -1 },
+    { "anyChar", "C", .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_anyChar, 0x10, 44, -1, -1, -1 },
+    { "quote", "C", .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_quote, 0x10, 45, -1, -1, -1 },
+    { "fieldOperator", "C", .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_fieldOperator, 0x10, 46, -1, -1, -1 },
+    { "comma", "C", .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_comma, 0x10, 47, -1, -1, -1 },
+    { "carat", "C", .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_carat, 0x10, 48, -1, -1, -1 },
+    { "token_source_", "LOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "token_", "LOrgApacheLuceneQueryparserSurroundParserToken;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "jj_nt_", "LOrgApacheLuceneQueryparserSurroundParserToken;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "jj_ntk_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_scanpos_", "LOrgApacheLuceneQueryparserSurroundParserToken;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_lastpos_", "LOrgApacheLuceneQueryparserSurroundParserToken;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_la_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_gen_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_la1_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "jj_la1_0", "[I", .constantValue.asLong = 0, 0xa, -1, 49, -1, -1 },
+    { "jj_2_rtns_", "[LOrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "jj_rescan_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_gc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_ls_", "LOrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "jj_expentries_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 50, -1 },
+    { "jj_expentry_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_kind_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_lasttokens_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "jj_endpos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "parse", "LNSString;", "LOrgApacheLuceneQueryparserSurroundParserParseException;", "parse2", "getFieldsQuery", "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;LJavaUtilArrayList;", "(Lorg/apache/lucene/queryparser/surround/query/SrndQuery;Ljava/util/ArrayList<Ljava/lang/String;>;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;", "getOrQuery", "LJavaUtilList;ZLOrgApacheLuceneQueryparserSurroundParserToken;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLorg/apache/lucene/queryparser/surround/parser/Token;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;", "getAndQuery", "getNotQuery", "LJavaUtilList;LOrgApacheLuceneQueryparserSurroundParserToken;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;Lorg/apache/lucene/queryparser/surround/parser/Token;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;", "getOpDistance", "checkDistanceSubQueries", "LOrgApacheLuceneQueryparserSurroundQueryDistanceQuery;LNSString;", "getDistanceQuery", "LJavaUtilList;ZLOrgApacheLuceneQueryparserSurroundParserToken;Z", "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLorg/apache/lucene/queryparser/surround/parser/Token;Z)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;", "getTermQuery", "LNSString;Z", "allowedSuffix", "getPrefixQuery", "allowedTruncation", "getTruncQuery", "()Ljava/util/ArrayList<Ljava/lang/String;>;", "()Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;", "OptionalWeights", "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", "jj_2_1", "I", "LOrgApacheLuceneQueryparserSurroundParserCharStream;", "ReInit", "LOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager;", "jj_consume_token", "jj_scan_token", "getToken", "jj_add_error_token", "II", "jj_save", "minimumPrefixLength", "minimumCharsInTrunc", "truncator", "anyChar", "quote", "fieldOperator", "comma", "carat", &OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0, "Ljava/util/List<[I>;", "LOrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess;LOrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserQueryParser = { "QueryParser", "org.apache.lucene.queryparser.surround.parser", ptrTable, methods, fields, 7, 0x1, 46, 29, -1, 51, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserSurroundParserQueryParser;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserSurroundParserQueryParser class]) {
     {
@@ -473,91 +613,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserSurroundParserQueryParser)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "parseWithNSString:", "parse", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x9, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "init", "QueryParser", NULL, 0x1, NULL, NULL },
-    { "parse2WithNSString:", "parse2", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x1, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "getFieldsQueryWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withJavaUtilArrayList:", "getFieldsQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, "(Lorg/apache/lucene/queryparser/surround/query/SrndQuery;Ljava/util/ArrayList<Ljava/lang/String;>;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;" },
-    { "getOrQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:", "getOrQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLorg/apache/lucene/queryparser/surround/parser/Token;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;" },
-    { "getAndQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:", "getAndQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLorg/apache/lucene/queryparser/surround/parser/Token;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;" },
-    { "getNotQueryWithJavaUtilList:withOrgApacheLuceneQueryparserSurroundParserToken:", "getNotQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;Lorg/apache/lucene/queryparser/surround/parser/Token;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;" },
-    { "getOpDistanceWithNSString:", "getOpDistance", "I", 0xc, NULL, NULL },
-    { "checkDistanceSubQueriesWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery:withNSString:", "checkDistanceSubQueries", "V", 0xc, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "getDistanceQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:withBoolean:", "getDistanceQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLorg/apache/lucene/queryparser/surround/parser/Token;Z)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;" },
-    { "getTermQueryWithNSString:withBoolean:", "getTermQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, NULL },
-    { "allowedSuffixWithNSString:", "allowedSuffix", "Z", 0x4, NULL, NULL },
-    { "getPrefixQueryWithNSString:withBoolean:", "getPrefixQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, NULL },
-    { "allowedTruncationWithNSString:", "allowedTruncation", "Z", 0x4, NULL, NULL },
-    { "getTruncQueryWithNSString:", "getTruncQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, NULL },
-    { "TopSrndQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "FieldsQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "OptionalFields", NULL, "Ljava.util.ArrayList;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", "()Ljava/util/ArrayList<Ljava/lang/String;>;" },
-    { "OrQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "AndQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "NotQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "NQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "WQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "PrimaryQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "PrefixOperatorQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "FieldsQueryList", NULL, "Ljava.util.List;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", "()Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;" },
-    { "SimpleTerm", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "OptionalWeightsWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:", "OptionalWeights", "V", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "jj_2_1WithInt:", "jj_2_1", "Z", 0x2, NULL, NULL },
-    { "jj_3_1", NULL, "Z", 0x2, NULL, NULL },
-    { "jj_la1_init_0", NULL, "V", 0xa, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserSurroundParserCharStream:", "QueryParser", NULL, 0x1, NULL, NULL },
-    { "ReInitWithOrgApacheLuceneQueryparserSurroundParserCharStream:", "ReInit", "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager:", "QueryParser", NULL, 0x1, NULL, NULL },
-    { "ReInitWithOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager:", "ReInit", "V", 0x1, NULL, NULL },
-    { "jj_consume_tokenWithInt:", "jj_consume_token", "Lorg.apache.lucene.queryparser.surround.parser.Token;", 0x2, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "jj_scan_tokenWithInt:", "jj_scan_token", "Z", 0x2, NULL, NULL },
-    { "getNextToken", NULL, "Lorg.apache.lucene.queryparser.surround.parser.Token;", 0x11, NULL, NULL },
-    { "getTokenWithInt:", "getToken", "Lorg.apache.lucene.queryparser.surround.parser.Token;", 0x11, NULL, NULL },
-    { "jj_ntk", NULL, "I", 0x2, NULL, NULL },
-    { "jj_add_error_tokenWithInt:withInt:", "jj_add_error_token", "V", 0x2, NULL, NULL },
-    { "generateParseException", NULL, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", 0x1, NULL, NULL },
-    { "enable_tracing", NULL, "V", 0x11, NULL, NULL },
-    { "disable_tracing", NULL, "V", 0x11, NULL, NULL },
-    { "jj_rescan_token", NULL, "V", 0x2, NULL, NULL },
-    { "jj_saveWithInt:withInt:", "jj_save", "V", 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "minimumPrefixLength", "minimumPrefixLength", 0x10, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumPrefixLength },
-    { "minimumCharsInTrunc", "minimumCharsInTrunc", 0x10, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumCharsInTrunc },
-    { "truncationErrorMessage_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "boostErrorMessage_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "truncator", "truncator", 0x10, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_truncator },
-    { "anyChar", "anyChar", 0x10, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_anyChar },
-    { "quote", "quote", 0x10, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_quote },
-    { "fieldOperator", "fieldOperator", 0x10, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_fieldOperator },
-    { "comma", "comma", 0x10, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_comma },
-    { "carat", "carat", 0x10, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneQueryparserSurroundParserQueryParser_carat },
-    { "token_source_", NULL, 0x1, "Lorg.apache.lucene.queryparser.surround.parser.QueryParserTokenManager;", NULL, NULL, .constantValue.asLong = 0 },
-    { "token_", NULL, 0x1, "Lorg.apache.lucene.queryparser.surround.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_nt_", NULL, 0x1, "Lorg.apache.lucene.queryparser.surround.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_ntk_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_scanpos_", NULL, 0x2, "Lorg.apache.lucene.queryparser.surround.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_lastpos_", NULL, 0x2, "Lorg.apache.lucene.queryparser.surround.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_la_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_gen_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_la1_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_la1_0", "jj_la1_0", 0xa, "[I", &OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0, NULL, .constantValue.asLong = 0 },
-    { "jj_2_rtns_", NULL, 0x12, "[Lorg.apache.lucene.queryparser.surround.parser.QueryParser$JJCalls;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_rescan_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_gc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_ls_", NULL, 0x12, "Lorg.apache.lucene.queryparser.surround.parser.QueryParser$LookaheadSuccess;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_expentries_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<[LI;>;", .constantValue.asLong = 0 },
-    { "jj_expentry_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_kind_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_lasttokens_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_endpos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.surround.parser.QueryParser$LookaheadSuccess;", "Lorg.apache.lucene.queryparser.surround.parser.QueryParser$JJCalls;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserQueryParser = { 2, "QueryParser", "org.apache.lucene.queryparser.surround.parser", NULL, 0x1, 46, methods, 29, fields, 0, NULL, 2, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserSurroundParserQueryParser;
 }
 
 @end
@@ -582,12 +637,12 @@ OrgApacheLuceneQueryparserSurroundParserQueryParser *create_OrgApacheLuceneQuery
 
 jint OrgApacheLuceneQueryparserSurroundParserQueryParser_getOpDistanceWithNSString_(NSString *distanceOp) {
   OrgApacheLuceneQueryparserSurroundParserQueryParser_initialize();
-  return ((jint) [((NSString *) nil_chk(distanceOp)) length]) == 1 ? 1 : JavaLangInteger_parseIntWithNSString_([distanceOp substring:0 endIndex:((jint) [distanceOp length]) - 1]);
+  return [((NSString *) nil_chk(distanceOp)) java_length] == 1 ? 1 : JavaLangInteger_parseIntWithNSString_([distanceOp java_substring:0 endIndex:[distanceOp java_length] - 1]);
 }
 
 void OrgApacheLuceneQueryparserSurroundParserQueryParser_checkDistanceSubQueriesWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *distq, NSString *opName) {
   OrgApacheLuceneQueryparserSurroundParserQueryParser_initialize();
-  NSString *m = [((OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *) nil_chk(distq)) distanceSubQueryNotAllowed];
+  NSString *m = JreRetainedLocalValue([((OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *) nil_chk(distq)) distanceSubQueryNotAllowed]);
   if (m != nil) {
     @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$$$", @"Operator ", opName, @": ", m));
   }
@@ -617,6 +672,7 @@ JavaUtilArrayList *OrgApacheLuceneQueryparserSurroundParserQueryParser_OptionalF
   JavaUtilArrayList *fieldNames = nil;
   while (true) {
     if (OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_2_1WithInt_(self, 2)) {
+      
       ;
     }
     else {
@@ -883,7 +939,7 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
     case OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_QUOTED:
     term = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_QUOTED);
     {
-      return [self getTermQueryWithNSString:[((NSString *) nil_chk(((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(term))->image_)) substring:1 endIndex:((jint) [term->image_ length]) - 1] withBoolean:true];
+      return [self getTermQueryWithNSString:[((NSString *) nil_chk(((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(term))->image_)) java_substring:1 endIndex:[term->image_ java_length] - 1] withBoolean:true];
     }
     break;
     case OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_SUFFIXTERM:
@@ -894,7 +950,7 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
       }
     }
     {
-      return [self getPrefixQueryWithNSString:[((NSString *) nil_chk(term->image_)) substring:0 endIndex:((jint) [term->image_ length]) - 1] withBoolean:false];
+      return [self getPrefixQueryWithNSString:[((NSString *) nil_chk(term->image_)) java_substring:0 endIndex:[term->image_ java_length] - 1] withBoolean:false];
     }
     break;
     case OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCTERM:
@@ -910,13 +966,13 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
     break;
     case OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCQUOTED:
     term = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCQUOTED);
-    if ((((jint) [((NSString *) nil_chk(((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(term))->image_)) length]) - 3) < OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumPrefixLength) {
+    if (([((NSString *) nil_chk(((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(term))->image_)) java_length] - 3) < OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumPrefixLength) {
       {
         @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$", self->truncationErrorMessage_, term->image_));
       }
     }
     {
-      return [self getPrefixQueryWithNSString:[((NSString *) nil_chk(term->image_)) substring:1 endIndex:((jint) [term->image_ length]) - 2] withBoolean:true];
+      return [self getPrefixQueryWithNSString:[((NSString *) nil_chk(term->image_)) java_substring:1 endIndex:[term->image_ java_length] - 2] withBoolean:true];
     }
     break;
     default:
@@ -1061,11 +1117,11 @@ OrgApacheLuceneQueryparserSurroundParserToken *OrgApacheLuceneQueryparserSurroun
   }
   JreStrongAssign(&self->token_, oldToken);
   self->jj_kind_ = kind;
-  @throw [self generateParseException];
+  @throw nil_chk([self generateParseException]);
 }
 
 jboolean OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_scan_tokenWithInt_(OrgApacheLuceneQueryparserSurroundParserQueryParser *self, jint kind) {
-  if (self->jj_scanpos_ == self->jj_lastpos_) {
+  if (JreObjectEqualsEquals(self->jj_scanpos_, self->jj_lastpos_)) {
     self->jj_la_--;
     if (((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(self->jj_scanpos_))->next_ == nil) {
       JreStrongAssign(&self->jj_lastpos_, JreStrongAssign(&self->jj_scanpos_, JreStrongAssign(&self->jj_scanpos_->next_, [((OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *) nil_chk(self->token_source_)) getNextToken])));
@@ -1079,15 +1135,15 @@ jboolean OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_scan_tokenWithIn
   }
   if (self->jj_rescan_) {
     jint i = 0;
-    OrgApacheLuceneQueryparserSurroundParserToken *tok = self->token_;
-    while (tok != nil && tok != self->jj_scanpos_) {
+    OrgApacheLuceneQueryparserSurroundParserToken *tok = JreRetainedLocalValue(self->token_);
+    while (tok != nil && !JreObjectEqualsEquals(tok, self->jj_scanpos_)) {
       i++;
       tok = tok->next_;
     }
     if (tok != nil) OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_add_error_tokenWithInt_withInt_(self, kind, i);
   }
   if (((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(self->jj_scanpos_))->kind_ != kind) return true;
-  if (self->jj_la_ == 0 && self->jj_scanpos_ == self->jj_lastpos_) @throw self->jj_ls_;
+  if (self->jj_la_ == 0 && JreObjectEqualsEquals(self->jj_scanpos_, self->jj_lastpos_)) @throw nil_chk(self->jj_ls_);
   return false;
 }
 
@@ -1106,7 +1162,7 @@ void OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_add_error_tokenWithI
     for (jint i = 0; i < self->jj_endpos_; i++) {
       *IOSIntArray_GetRef(self->jj_expentry_, i) = IOSIntArray_Get(nil_chk(self->jj_lasttokens_), i);
     }
-    for (id<JavaUtilIterator> it = [((id<JavaUtilList>) nil_chk(self->jj_expentries_)) iterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
+    for (id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(self->jj_expentries_)) iterator]); [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
       {
         IOSIntArray *oldentry = (IOSIntArray *) cast_chk(([it next]), [IOSIntArray class]);
         if (((IOSIntArray *) nil_chk(oldentry))->size_ == ((IOSIntArray *) nil_chk(self->jj_expentry_))->size_) {
@@ -1177,10 +1233,16 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LookaheadSuccess", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess = { 2, "LookaheadSuccess", "org.apache.lucene.queryparser.surround.parser", "QueryParser", 0x1a, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserSurroundParserQueryParser;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess = { "LookaheadSuccess", "org.apache.lucene.queryparser.surround.parser", ptrTable, methods, NULL, 7, 0x1a, 1, 0, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess;
 }
 
@@ -1216,16 +1278,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "JJCalls", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "gen_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "first_", NULL, 0x0, "Lorg.apache.lucene.queryparser.surround.parser.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "arg_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x0, "Lorg.apache.lucene.queryparser.surround.parser.QueryParser$JJCalls;", NULL, NULL, .constantValue.asLong = 0 },
+    { "gen_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "first_", "LOrgApacheLuceneQueryparserSurroundParserToken;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "arg_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "next_", "LOrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls = { 2, "JJCalls", "org.apache.lucene.queryparser.surround.parser", "QueryParser", 0x18, 1, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserSurroundParserQueryParser;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls = { "JJCalls", "org.apache.lucene.queryparser.surround.parser", ptrTable, methods, fields, 7, 0x18, 1, 4, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls;
 }
 

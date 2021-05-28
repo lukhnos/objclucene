@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalizationZ
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesNormalizationZ_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationZ || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalizationZ))
 #define OrgApacheLuceneSearchSimilaritiesNormalizationZ_
 
@@ -35,14 +41,14 @@
 /*!
  @brief Calls <code>NormalizationZ(0.3)</code>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates NormalizationZ with the supplied parameter <code>z</code>.
- @param z represents <code>A/(A+1)</code> where <code>A</code> 
- measures the specificity of the language.
+ @param z represents  <code> A/(A+1) </code>  where  <code> A </code>
+              measures the specificity of the language.
  */
-- (instancetype)initWithFloat:(jfloat)z;
+- (instancetype __nonnull)initWithFloat:(jfloat)z;
 
 /*!
  @brief Returns the parameter <code>z</code>
@@ -62,9 +68,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesNormalizationZ)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationZ_init(OrgApacheLuceneSearchSimilaritiesNormalizationZ *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationZ *new_OrgApacheLuceneSearchSimilaritiesNormalizationZ_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationZ *new_OrgApacheLuceneSearchSimilaritiesNormalizationZ_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationZ *create_OrgApacheLuceneSearchSimilaritiesNormalizationZ_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationZ *create_OrgApacheLuceneSearchSimilaritiesNormalizationZ_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(OrgApacheLuceneSearchSimilaritiesNormalizationZ *self, jfloat z);
 
@@ -76,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalizationZ)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationZ")

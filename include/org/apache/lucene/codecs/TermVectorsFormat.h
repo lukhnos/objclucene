@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsTermVectorsFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsTermVectorsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsFormat || defined(INCLUDE_OrgApacheLuceneCodecsTermVectorsFormat))
 #define OrgApacheLuceneCodecsTermVectorsFormat_
 
@@ -32,7 +38,7 @@
 
 /*!
  @brief Returns a <code>TermVectorsReader</code> to read term
- vectors.
+   vectors.
  */
 - (OrgApacheLuceneCodecsTermVectorsReader *)vectorsReaderWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
@@ -41,7 +47,7 @@
 
 /*!
  @brief Returns a <code>TermVectorsWriter</code> to write term
- vectors.
+   vectors.
  */
 - (OrgApacheLuceneCodecsTermVectorsWriter *)vectorsWriterWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
@@ -52,9 +58,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -66,4 +72,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsTermVectorsFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsFormat")

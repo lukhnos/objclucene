@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/io/InputStream.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/Map.h"
@@ -18,13 +17,16 @@
 #include "org/apache/lucene/analysis/compound/HyphenationCompoundWordTokenFilterFactory.h"
 #include "org/apache/lucene/analysis/compound/Lucene43HyphenationCompoundWordTokenFilter.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/HyphenationTree.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/Version.h"
 #include "org/xml/sax/InputSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/HyphenationCompoundWordTokenFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory () {
  @public
@@ -91,23 +93,31 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenF
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "HyphenationCompoundWordTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenFilter;", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(informWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[2].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "dictionary_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hyphenator_", NULL, 0x2, "Lorg.apache.lucene.analysis.compound.hyphenation.HyphenationTree;", NULL, NULL, .constantValue.asLong = 0 },
-    { "dictFile_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hypFile_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "encoding_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minWordSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minSubwordSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxSubwordSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "onlyLongestMatch_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "dictionary_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "hyphenator_", "LOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "dictFile_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "hypFile_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "encoding_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minWordSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minSubwordSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxSubwordSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "onlyLongestMatch_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory = { 2, "HyphenationCompoundWordTokenFilterFactory", "org.apache.lucene.analysis.compound", NULL, 0x1, 3, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "inform", "LOrgApacheLuceneAnalysisUtilResourceLoader;", "LJavaIoIOException;", "create", "LOrgApacheLuceneAnalysisTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory = { "HyphenationCompoundWordTokenFilterFactory", "org.apache.lucene.analysis.compound", ptrTable, methods, fields, 7, 0x1, 3, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory;
 }
 

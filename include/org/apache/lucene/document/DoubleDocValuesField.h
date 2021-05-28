@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentDoubleDocValuesField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentDoubleDocValuesField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentDoubleDocValuesField || defined(INCLUDE_OrgApacheLuceneDocumentDoubleDocValuesField))
 #define OrgApacheLuceneDocumentDoubleDocValuesField_
 
@@ -22,14 +28,14 @@
 
 /*!
  @brief Syntactic sugar for encoding doubles as NumericDocValues
- via <code>Double.doubleToRawLongBits(double)</code>.
+  via <code>Double.doubleToRawLongBits(double)</code>.
  <p>
- Per-document double values can be retrieved via
+  Per-document double values can be retrieved via 
  <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>.
- <p>
- <b>NOTE</b>: In most all cases this will be rather inefficient,
- requiring eight bytes per document. Consider encoding double
- values yourself with only as much precision as you require.
+  <p>
+  <b>NOTE</b>: In most all cases this will be rather inefficient,
+  requiring eight bytes per document. Consider encoding double
+  values yourself with only as much precision as you require.
  */
 @interface OrgApacheLuceneDocumentDoubleDocValuesField : OrgApacheLuceneDocumentNumericDocValuesField
 
@@ -39,14 +45,19 @@
  @brief Creates a new DocValues field with the specified 64-bit double value
  @param name field name
  @param value 64-bit double value
- @throws IllegalArgumentException if the field name is null
+ @throw IllegalArgumentExceptionif the field name is null
  */
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)value;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                withDouble:(jdouble)value;
 
 - (void)setDoubleValueWithDouble:(jdouble)value;
 
 - (void)setLongValueWithLong:(jlong)value;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                                  withLong:(jlong)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -62,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentDoubleDocValuesField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentDoubleDocValuesField")

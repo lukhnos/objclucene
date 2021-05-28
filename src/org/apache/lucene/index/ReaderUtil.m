@@ -11,6 +11,10 @@
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/index/ReaderUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/ReaderUtil must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexReaderUtil ()
 
 - (instancetype)init;
@@ -19,9 +23,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneIndexReaderUtil_init(OrgApacheLuceneIndexReaderUtil *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexReaderUtil *new_OrgApacheLuceneIndexReaderUtil_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexReaderUtil *new_OrgApacheLuceneIndexReaderUtil_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexReaderUtil *create_OrgApacheLuceneIndexReaderUtil_init();
+__attribute__((unused)) static OrgApacheLuceneIndexReaderUtil *create_OrgApacheLuceneIndexReaderUtil_init(void);
 
 @implementation OrgApacheLuceneIndexReaderUtil
 
@@ -47,13 +51,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ReaderUtil", NULL, 0x2, NULL, NULL },
-    { "getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext:", "getTopLevelContext", "Lorg.apache.lucene.index.IndexReaderContext;", 0x9, NULL, NULL },
-    { "subIndexWithInt:withIntArray:", "subIndex", "I", 0x9, NULL, NULL },
-    { "subIndexWithInt:withJavaUtilList:", "subIndex", "I", 0x9, NULL, "(ILjava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;)I" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexReaderContext;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 2, 4, -1, 5, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexReaderUtil = { 2, "ReaderUtil", "org.apache.lucene.index", NULL, 0x11, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext:);
+  methods[2].selector = @selector(subIndexWithInt:withIntArray:);
+  methods[3].selector = @selector(subIndexWithInt:withJavaUtilList:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getTopLevelContext", "LOrgApacheLuceneIndexIndexReaderContext;", "subIndex", "I[I", "ILJavaUtilList;", "(ILjava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;)I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexReaderUtil = { "ReaderUtil", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x11, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexReaderUtil;
 }
 

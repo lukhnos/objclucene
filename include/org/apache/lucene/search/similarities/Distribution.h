@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesDistribution
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesDistribution_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistribution || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesDistribution))
 #define OrgApacheLuceneSearchSimilaritiesDistribution_
 
@@ -21,7 +27,7 @@
 
 /*!
  @brief The probabilistic distribution used to model term occurrence
- in information-based models.
+  in information-based models.
  - seealso: IBSimilarity
  */
 @interface OrgApacheLuceneSearchSimilaritiesDistribution : NSObject
@@ -31,14 +37,13 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.)
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Explains the score.
- Returns the name of the model only, since
- both <code>tfn</code> and <code>lambda</code> are explained elsewhere. 
+ @brief Explains the score.Returns the name of the model only, since
+  both <code>tfn</code> and <code>lambda</code> are explained elsewhere.
  */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                                                    withFloat:(jfloat)tfn
@@ -53,7 +58,7 @@
 
 /*!
  @brief Subclasses must override this method to return the name of the
- distribution.
+  distribution.
  */
 - (NSString *)description;
 
@@ -67,4 +72,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesDistribution)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistribution")

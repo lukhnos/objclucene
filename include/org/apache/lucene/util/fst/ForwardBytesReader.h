@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstForwardBytesReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstForwardBytesReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstForwardBytesReader || defined(INCLUDE_OrgApacheLuceneUtilFstForwardBytesReader))
 #define OrgApacheLuceneUtilFstForwardBytesReader_
 
@@ -29,7 +35,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithByteArray:(IOSByteArray *)bytes;
+- (instancetype __nonnull)initPackagePrivateWithByteArray:(IOSByteArray *)bytes;
 
 - (jlong)getPosition;
 
@@ -45,18 +51,26 @@
 
 - (void)skipBytesWithLong:(jlong)count;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstForwardBytesReader)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(OrgApacheLuceneUtilFstForwardBytesReader *self, IOSByteArray *bytes);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstForwardBytesReader_initPackagePrivateWithByteArray_(OrgApacheLuceneUtilFstForwardBytesReader *self, IOSByteArray *bytes);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstForwardBytesReader *new_OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(IOSByteArray *bytes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstForwardBytesReader *new_OrgApacheLuceneUtilFstForwardBytesReader_initPackagePrivateWithByteArray_(IOSByteArray *bytes) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstForwardBytesReader *create_OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(IOSByteArray *bytes);
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstForwardBytesReader *create_OrgApacheLuceneUtilFstForwardBytesReader_initPackagePrivateWithByteArray_(IOSByteArray *bytes);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstForwardBytesReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstForwardBytesReader")

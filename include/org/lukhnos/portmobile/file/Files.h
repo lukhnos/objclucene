@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileFileFiles
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFileFiles_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileFiles || defined(INCLUDE_OrgLukhnosPortmobileFileFiles))
 #define OrgLukhnosPortmobileFileFiles_
 
@@ -33,7 +39,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (OrgLukhnosPortmobileFilePath *)copy__WithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)source
                                         withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)target
@@ -92,6 +98,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileFileFiles)
 
+FOUNDATION_EXPORT void OrgLukhnosPortmobileFileFiles_init(OrgLukhnosPortmobileFileFiles *self);
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileFiles *new_OrgLukhnosPortmobileFileFiles_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileFiles *create_OrgLukhnosPortmobileFileFiles_init(void);
+
 FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createDirectoriesWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *dir);
 
 FOUNDATION_EXPORT id<JavaNioChannelsSeekableByteChannel> OrgLukhnosPortmobileFileFiles_newByteChannelWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOption_(OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileStandardOpenOption *mustBeReadOnly);
@@ -134,14 +146,12 @@ FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_cr
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *OrgLukhnosPortmobileFileFiles_readAttributesWithOrgLukhnosPortmobileFilePath_withIOSClass_(OrgLukhnosPortmobileFilePath *path, IOSClass *clz);
 
-FOUNDATION_EXPORT void OrgLukhnosPortmobileFileFiles_init(OrgLukhnosPortmobileFileFiles *self);
-
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileFiles *new_OrgLukhnosPortmobileFileFiles_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileFiles *create_OrgLukhnosPortmobileFileFiles_init();
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileFiles)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFiles")

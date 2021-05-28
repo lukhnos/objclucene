@@ -8,6 +8,10 @@
 #include "org/apache/lucene/codecs/compressing/CompressionMode.h"
 #include "org/apache/lucene/codecs/lucene50/Lucene50TermVectorsFormat.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50TermVectorsFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -18,10 +22,15 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lucene50TermVectorsFormat", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat = { 2, "Lucene50TermVectorsFormat", "org.apache.lucene.codecs.lucene50", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat = { "Lucene50TermVectorsFormat", "org.apache.lucene.codecs.lucene50", NULL, methods, NULL, 7, 0x11, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat;
 }
 

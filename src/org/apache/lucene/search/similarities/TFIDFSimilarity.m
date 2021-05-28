@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/FieldInvertState.h"
@@ -21,6 +20,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 
 @class OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/TFIDFSimilarity must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity ()
 
@@ -73,7 +76,6 @@ __attribute__((unused)) static OrgApacheLuceneSearchExplanation *OrgApacheLucene
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_TFIDFSimScorer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_TFIDFSimScorer, this$0_, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_TFIDFSimScorer, stats_, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_TFIDFSimScorer, norms_, OrgApacheLuceneIndexNumericDocValues *)
 
@@ -86,9 +88,8 @@ __attribute__((unused)) static OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_TFIDFSimScorer)
 
 /*!
- @brief Collection statistics for the TF-IDF model.
- The only statistic of interest
- to this model is idf. 
+ @brief Collection statistics for the TF-IDF model.The only statistic of interest
+  to this model is idf.
  */
 @interface OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats : OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight {
  @public
@@ -260,28 +261,50 @@ withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats:(OrgApacheLuceneSe
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TFIDFSimilarity", NULL, 0x1, NULL, NULL },
-    { "coordWithInt:withInt:", "coord", "F", 0x401, NULL, NULL },
-    { "queryNormWithFloat:", "queryNorm", "F", 0x401, NULL, NULL },
-    { "tfWithFloat:", "tf", "F", 0x401, NULL, NULL },
-    { "idfExplainWithOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatistics:", "idfExplain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
-    { "idfExplainWithOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatisticsArray:", "idfExplain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
-    { "idfWithLong:withLong:", "idf", "F", 0x401, NULL, NULL },
-    { "lengthNormWithOrgApacheLuceneIndexFieldInvertState:", "lengthNorm", "F", 0x401, NULL, NULL },
-    { "computeNormWithOrgApacheLuceneIndexFieldInvertState:", "computeNorm", "J", 0x11, NULL, NULL },
-    { "decodeNormValueWithLong:", "decodeNormValue", "F", 0x401, NULL, NULL },
-    { "encodeNormValueWithFloat:", "encodeNormValue", "J", 0x401, NULL, NULL },
-    { "sloppyFreqWithInt:", "sloppyFreq", "F", 0x401, NULL, NULL },
-    { "scorePayloadWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:", "scorePayload", "F", 0x401, NULL, NULL },
-    { "computeWeightWithFloat:withOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatisticsArray:", "computeWeight", "Lorg.apache.lucene.search.similarities.Similarity$SimWeight;", 0x91, NULL, NULL },
-    { "simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:withOrgApacheLuceneIndexLeafReaderContext:", "simScorer", "Lorg.apache.lucene.search.similarities.Similarity$SimScorer;", 0x11, "Ljava.io.IOException;", NULL },
-    { "explainQueryWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats:", "explainQuery", "Lorg.apache.lucene.search.Explanation;", 0x2, NULL, NULL },
-    { "explainFieldWithInt:withOrgApacheLuceneSearchExplanation:withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats:withOrgApacheLuceneIndexNumericDocValues:", "explainField", "Lorg.apache.lucene.search.Explanation;", 0x2, NULL, NULL },
-    { "explainScoreWithInt:withOrgApacheLuceneSearchExplanation:withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats:withOrgApacheLuceneIndexNumericDocValues:", "explainScore", "Lorg.apache.lucene.search.Explanation;", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 2, 3, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 4, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 5, 7, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 8, 9, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 10, 11, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, 12, 11, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 13, 14, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, 15, 3, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 16, 17, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 18, 19, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;", 0x91, 20, 21, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;", 0x11, 22, 23, 24, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x2, 25, 26, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x2, 27, 28, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x2, 29, 28, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.similarities.TFIDFSimilarity$TFIDFSimScorer;", "Lorg.apache.lucene.search.similarities.TFIDFSimilarity$IDFStats;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity = { 2, "TFIDFSimilarity", "org.apache.lucene.search.similarities", NULL, 0x401, 18, methods, 0, NULL, 0, NULL, 2, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(coordWithInt:withInt:);
+  methods[2].selector = @selector(queryNormWithFloat:);
+  methods[3].selector = @selector(tfWithFloat:);
+  methods[4].selector = @selector(idfExplainWithOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatistics:);
+  methods[5].selector = @selector(idfExplainWithOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatisticsArray:);
+  methods[6].selector = @selector(idfWithLong:withLong:);
+  methods[7].selector = @selector(lengthNormWithOrgApacheLuceneIndexFieldInvertState:);
+  methods[8].selector = @selector(computeNormWithOrgApacheLuceneIndexFieldInvertState:);
+  methods[9].selector = @selector(decodeNormValueWithLong:);
+  methods[10].selector = @selector(encodeNormValueWithFloat:);
+  methods[11].selector = @selector(sloppyFreqWithInt:);
+  methods[12].selector = @selector(scorePayloadWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:);
+  methods[13].selector = @selector(computeWeightWithFloat:withOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatisticsArray:);
+  methods[14].selector = @selector(simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[15].selector = @selector(explainQueryWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats:);
+  methods[16].selector = @selector(explainFieldWithInt:withOrgApacheLuceneSearchExplanation:withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats:withOrgApacheLuceneIndexNumericDocValues:);
+  methods[17].selector = @selector(explainScoreWithInt:withOrgApacheLuceneSearchExplanation:withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats:withOrgApacheLuceneIndexNumericDocValues:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "coord", "II", "queryNorm", "F", "tf", "idfExplain", "LOrgApacheLuceneSearchCollectionStatistics;LOrgApacheLuceneSearchTermStatistics;", "LOrgApacheLuceneSearchCollectionStatistics;[LOrgApacheLuceneSearchTermStatistics;", "idf", "JJ", "lengthNorm", "LOrgApacheLuceneIndexFieldInvertState;", "computeNorm", "decodeNormValue", "J", "encodeNormValue", "sloppyFreq", "I", "scorePayload", "IIILOrgApacheLuceneUtilBytesRef;", "computeWeight", "FLOrgApacheLuceneSearchCollectionStatistics;[LOrgApacheLuceneSearchTermStatistics;", "simScorer", "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "explainQuery", "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats;", "explainField", "ILOrgApacheLuceneSearchExplanation;LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats;LOrgApacheLuceneIndexNumericDocValues;", "explainScore", "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_TFIDFSimScorer;LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity = { "TFIDFSimilarity", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x401, 18, 0, -1, 30, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;
 }
 
@@ -357,20 +380,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarit
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity:withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats:withOrgApacheLuceneIndexNumericDocValues:", "TFIDFSimScorer", NULL, 0x0, NULL, NULL },
-    { "scoreWithInt:withFloat:", "score", "F", 0x1, NULL, NULL },
-    { "computeSlopFactorWithInt:", "computeSlopFactor", "F", 0x1, NULL, NULL },
-    { "computePayloadFactorWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:", "computePayloadFactor", "F", 0x1, NULL, NULL },
-    { "explainWithInt:withOrgApacheLuceneSearchExplanation:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "F", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 8, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity:withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats:withOrgApacheLuceneIndexNumericDocValues:);
+  methods[1].selector = @selector(scoreWithInt:withFloat:);
+  methods[2].selector = @selector(computeSlopFactorWithInt:);
+  methods[3].selector = @selector(computePayloadFactorWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(explainWithInt:withOrgApacheLuceneSearchExplanation:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.similarities.TFIDFSimilarity;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stats_", NULL, 0x12, "Lorg.apache.lucene.search.similarities.TFIDFSimilarity$IDFStats;", NULL, NULL, .constantValue.asLong = 0 },
-    { "weightValue_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "norms_", NULL, 0x12, "Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "stats_", "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "weightValue_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "norms_", "LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_TFIDFSimScorer = { 2, "TFIDFSimScorer", "org.apache.lucene.search.similarities", "TFIDFSimilarity", 0x12, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats;LOrgApacheLuceneIndexNumericDocValues;", "LJavaIoIOException;", "score", "IF", "computeSlopFactor", "I", "computePayloadFactor", "IIILOrgApacheLuceneUtilBytesRef;", "explain", "ILOrgApacheLuceneSearchExplanation;", "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_TFIDFSimScorer = { "TFIDFSimScorer", "org.apache.lucene.search.similarities", ptrTable, methods, fields, 7, 0x12, 5, 4, 10, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_TFIDFSimScorer;
 }
 
@@ -421,20 +454,28 @@ withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)idf
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchExplanation:withFloat:", "IDFStats", NULL, 0x1, NULL, NULL },
-    { "getValueForNormalization", NULL, "F", 0x1, NULL, NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneSearchExplanation:withFloat:);
+  methods[1].selector = @selector(getValueForNormalization);
+  methods[2].selector = @selector(normalizeWithFloat:withFloat:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "idf_", NULL, 0x12, "Lorg.apache.lucene.search.Explanation;", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryNorm_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryWeight_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryBoost_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "value_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "idf_", "LOrgApacheLuceneSearchExplanation;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "queryNorm_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "queryWeight_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "queryBoost_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "value_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats = { 2, "IDFStats", "org.apache.lucene.search.similarities", "TFIDFSimilarity", 0xa, 3, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneSearchExplanation;F", "normalize", "FF", "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats = { "IDFStats", "org.apache.lucene.search.similarities", ptrTable, methods, fields, 7, 0xa, 3, 6, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFStats;
 }
 

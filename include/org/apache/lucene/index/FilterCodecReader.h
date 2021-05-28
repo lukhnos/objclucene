@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFilterCodecReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFilterCodecReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilterCodecReader || defined(INCLUDE_OrgApacheLuceneIndexFilterCodecReader))
 #define OrgApacheLuceneIndexFilterCodecReader_
 
@@ -31,8 +37,8 @@
 
 /*!
  @brief A <code>FilterCodecReader</code> contains another CodecReader, which it
- uses as its basic source of data, possibly transforming the data along the
- way or providing additional functionality.
+  uses as its basic source of data, possibly transforming the data along the
+  way or providing additional functionality.
  */
 @interface OrgApacheLuceneIndexFilterCodecReader : OrgApacheLuceneIndexCodecReader {
  @public
@@ -48,7 +54,7 @@
  @brief Creates a new FilterCodecReader.
  @param inArg the underlying CodecReader instance.
  */
-- (instancetype)initWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)inArg;
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
@@ -72,6 +78,10 @@
 
 - (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFilterCodecReader)
@@ -88,4 +98,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterCodecReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFilterCodecReader")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsMinPayloadFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPayloadsMinPayloadFunction_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMinPayloadFunction || defined(INCLUDE_OrgApacheLuceneSearchPayloadsMinPayloadFunction))
 #define OrgApacheLuceneSearchPayloadsMinPayloadFunction_
 
@@ -27,7 +33,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jfloat)currentScoreWithInt:(jint)docId
                  withNSString:(NSString *)field
@@ -52,12 +58,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPayloadsMinPayloadFunction)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsMinPayloadFunction_init(OrgApacheLuceneSearchPayloadsMinPayloadFunction *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMinPayloadFunction *new_OrgApacheLuceneSearchPayloadsMinPayloadFunction_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMinPayloadFunction *new_OrgApacheLuceneSearchPayloadsMinPayloadFunction_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMinPayloadFunction *create_OrgApacheLuceneSearchPayloadsMinPayloadFunction_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMinPayloadFunction *create_OrgApacheLuceneSearchPayloadsMinPayloadFunction_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsMinPayloadFunction)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMinPayloadFunction")

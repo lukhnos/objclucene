@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/blocktree/BitSetPostingsEnum.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "org/apache/lucene/codecs/blocktree/BitSetPostingsEnum.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
@@ -13,6 +11,10 @@
 #include "org/apache/lucene/util/BitSet.h"
 #include "org/apache/lucene/util/BitSetIterator.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/blocktree/BitSetPostingsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum () {
  @public
@@ -27,8 +29,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum, in_, OrgAp
 
 @implementation OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum
 
-- (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)bits {
-  OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(self, bits);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)bits {
+  OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(self, bits);
   return self;
 }
 
@@ -87,41 +89,57 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum, in_, OrgAp
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBitSet:", "BitSetPostingsEnum", NULL, 0x0, NULL, NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x0, NULL, NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "nextPosition", NULL, "I", 0x1, NULL, NULL },
-    { "startOffset", NULL, "I", 0x1, NULL, NULL },
-    { "endOffset", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneUtilBitSet:);
+  methods[1].selector = @selector(freq);
+  methods[2].selector = @selector(docID);
+  methods[3].selector = @selector(nextDoc);
+  methods[4].selector = @selector(advanceWithInt:);
+  methods[5].selector = @selector(cost);
+  methods[6].selector = @selector(reset);
+  methods[7].selector = @selector(getPayload);
+  methods[8].selector = @selector(nextPosition);
+  methods[9].selector = @selector(startOffset);
+  methods[10].selector = @selector(endOffset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bits_", NULL, 0x12, "Lorg.apache.lucene.util.BitSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "in_", NULL, 0x2, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "bits_", "LOrgApacheLuceneUtilBitSet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "in_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum = { 2, "BitSetPostingsEnum", "org.apache.lucene.codecs.blocktree", NULL, 0x0, 11, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBitSet;", "LJavaIoIOException;", "advance", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum = { "BitSetPostingsEnum", "org.apache.lucene.codecs.blocktree", ptrTable, methods, fields, 7, 0x0, 11, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum;
 }
 
 @end
 
-void OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *self, OrgApacheLuceneUtilBitSet *bits) {
+void OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *self, OrgApacheLuceneUtilBitSet *bits) {
   OrgApacheLuceneIndexPostingsEnum_init(self);
   JreStrongAssign(&self->bits_, bits);
   [self reset];
 }
 
-OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum, initWithOrgApacheLuceneUtilBitSet_, bits)
+OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum, initPackagePrivateWithOrgApacheLuceneUtilBitSet_, bits)
 }
 
-OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum, initWithOrgApacheLuceneUtilBitSet_, bits)
+OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum, initPackagePrivateWithOrgApacheLuceneUtilBitSet_, bits)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum)

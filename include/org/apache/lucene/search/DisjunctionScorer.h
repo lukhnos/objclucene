@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDisjunctionScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDisjunctionScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionScorer || defined(INCLUDE_OrgApacheLuceneSearchDisjunctionScorer))
 #define OrgApacheLuceneSearchDisjunctionScorer_
 
@@ -51,23 +57,31 @@
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                   withJavaUtilList:(id<JavaUtilList>)subScorers
-                                        withBoolean:(jboolean)needsScores;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                           withJavaUtilList:(id<JavaUtilList>)subScorers
+                                                                withBoolean:(jboolean)needsScores;
 
 /*!
  @brief Compute the score for the given linked list of scorers.
  */
 - (jfloat)scoreWithOrgApacheLuceneSearchDisiWrapper:(OrgApacheLuceneSearchDisiWrapper *)topList;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDisjunctionScorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDisjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withBoolean_(OrgApacheLuceneSearchDisjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, jboolean needsScores);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDisjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withBoolean_(OrgApacheLuceneSearchDisjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, jboolean needsScores);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionScorer")

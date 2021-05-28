@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "org/apache/lucene/codecs/FieldsConsumer.h"
 #include "org/apache/lucene/codecs/FieldsProducer.h"
@@ -15,6 +14,10 @@
 #include "org/apache/lucene/search/suggest/document/CompletionFieldsConsumer.h"
 #include "org/apache/lucene/search/suggest/document/CompletionFieldsProducer.h"
 #include "org/apache/lucene/search/suggest/document/CompletionPostingsFormat.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/CompletionPostingsFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 NSString *OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_CODEC_NAME = @"completion";
 NSString *OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_INDEX_EXTENSION = @"cmp";
@@ -56,32 +59,41 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneCodecsFieldsConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  OrgApacheLuceneCodecsPostingsFormat *delegatePostingsFormat = [self delegatePostingsFormat];
+  OrgApacheLuceneCodecsPostingsFormat *delegatePostingsFormat = JreRetainedLocalValue([self delegatePostingsFormat]);
   if (delegatePostingsFormat == nil) {
-    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$$", @"Error - ", [[self getClass] getName], @" has been constructed without a choice of PostingsFormat"));
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$$", @"Error - ", [[self java_getClass] getName], @" has been constructed without a choice of PostingsFormat"));
   }
-  return create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(delegatePostingsFormat, state);
+  return create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initPackagePrivateWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(delegatePostingsFormat, state);
 }
 
 - (OrgApacheLuceneCodecsFieldsProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  return create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(state);
+  return create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_(state);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CompletionPostingsFormat", NULL, 0x1, NULL, NULL },
-    { "delegatePostingsFormat", NULL, "Lorg.apache.lucene.codecs.PostingsFormat;", 0x404, NULL, NULL },
-    { "fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:", "fieldsConsumer", "Lorg.apache.lucene.codecs.FieldsConsumer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:", "fieldsProducer", "Lorg.apache.lucene.codecs.FieldsProducer;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsPostingsFormat;", 0x404, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldsConsumer;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldsProducer;", 0x1, 3, 4, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(delegatePostingsFormat);
+  methods[2].selector = @selector(fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[3].selector = @selector(fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "CODEC_NAME", "CODEC_NAME", 0x18, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_CODEC_NAME, NULL, .constantValue.asLong = 0 },
-    { "COMPLETION_CODEC_VERSION", "COMPLETION_CODEC_VERSION", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_CODEC_VERSION },
-    { "COMPLETION_VERSION_CURRENT", "COMPLETION_VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_VERSION_CURRENT },
-    { "INDEX_EXTENSION", "INDEX_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_INDEX_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "DICT_EXTENSION", "DICT_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_DICT_EXTENSION, NULL, .constantValue.asLong = 0 },
+    { "CODEC_NAME", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 5, -1, -1 },
+    { "COMPLETION_CODEC_VERSION", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_CODEC_VERSION, 0x18, -1, -1, -1, -1 },
+    { "COMPLETION_VERSION_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_VERSION_CURRENT, 0x18, -1, -1, -1, -1 },
+    { "INDEX_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 6, -1, -1 },
+    { "DICT_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 7, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat = { 2, "CompletionPostingsFormat", "org.apache.lucene.search.suggest.document", NULL, 0x401, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "fieldsConsumer", "LOrgApacheLuceneIndexSegmentWriteState;", "LJavaIoIOException;", "fieldsProducer", "LOrgApacheLuceneIndexSegmentReadState;", &OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_CODEC_NAME, &OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_INDEX_EXTENSION, &OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_DICT_EXTENSION };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat = { "CompletionPostingsFormat", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x401, 4, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat;
 }
 

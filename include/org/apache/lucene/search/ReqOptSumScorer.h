@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchReqOptSumScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchReqOptSumScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchReqOptSumScorer || defined(INCLUDE_OrgApacheLuceneSearchReqOptSumScorer))
 #define OrgApacheLuceneSearchReqOptSumScorer_
 
@@ -21,13 +27,14 @@
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneSearchTwoPhaseIterator;
+@class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilCollection;
 
 /*!
  @brief A Scorer for queries with a required part and an optional part.
- Delays skipTo() on the optional part until a score() is needed.
+ Delays skipTo() on the optional part until a score() is needed. 
  <br>
- This <code>Scorer</code> implements <code>Scorer.advance(int)</code>.
+  This <code>Scorer</code> implements <code>Scorer.advance(int)</code>.
  */
 @interface OrgApacheLuceneSearchReqOptSumScorer : OrgApacheLuceneSearchScorer {
  @public
@@ -46,8 +53,8 @@
  @param reqScorer The required scorer. This must match.
  @param optScorer The optional scorer. This is used for scoring only.
  */
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)optScorer;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
+                                            withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)optScorer;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -67,9 +74,13 @@
  @brief Returns the score of the current document matching the query.
  Initially invalid, until <code>nextDoc()</code> is called the first time.
  @return The score of the required scorer, eventually increased by the score
- of the optional scorer when it also matches the current document.
+  of the optional scorer when it also matches the current document.
  */
 - (jfloat)score;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -78,14 +89,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchReqOptSumScorer)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchReqOptSumScorer, reqScorer_, OrgApacheLuceneSearchScorer *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchReqOptSumScorer, optScorer_, OrgApacheLuceneSearchScorer *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchReqOptSumScorer *self, OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchReqOptSumScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchReqOptSumScorer *self, OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchReqOptSumScorer *new_OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchReqOptSumScorer *new_OrgApacheLuceneSearchReqOptSumScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchReqOptSumScorer *create_OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer);
+FOUNDATION_EXPORT OrgApacheLuceneSearchReqOptSumScorer *create_OrgApacheLuceneSearchReqOptSumScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchReqOptSumScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchReqOptSumScorer")

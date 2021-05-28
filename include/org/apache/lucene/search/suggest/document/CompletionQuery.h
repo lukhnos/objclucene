@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionQuery || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionQuery))
 #define OrgApacheLuceneSearchSuggestDocumentCompletionQuery_
 
@@ -26,20 +32,19 @@
 
 /*!
  @brief Abstract <code>Query</code> that match documents containing terms with a specified prefix
- filtered by <code>BitsProducer</code>.
- This should be used to query against any <code>SuggestField</code>s
- or <code>ContextSuggestField</code>s of documents.
+  filtered by <code>BitsProducer</code>.This should be used to query against any <code>SuggestField</code>s
+  or <code>ContextSuggestField</code>s of documents.
  <p>
- Use <code>SuggestIndexSearcher.suggest(CompletionQuery,int)</code> to execute any query
- that provides a concrete implementation of this query. Example below shows using this query
- to retrieve the top 5 documents.
+  Use <code>SuggestIndexSearcher.suggest(CompletionQuery, int)</code> to execute any query
+  that provides a concrete implementation of this query. Example below shows using this query
+  to retrieve the top 5 documents. 
  <pre class="prettyprint">
- SuggestIndexSearcher searcher = new SuggestIndexSearcher(reader);
- TopSuggestDocs suggestDocs = searcher.suggest(query, 5);
+   SuggestIndexSearcher searcher = new SuggestIndexSearcher(reader);
+   TopSuggestDocs suggestDocs = searcher.suggest(query, 5); 
  
 @endcode
- This query rewrites to an appropriate <code>CompletionQuery</code> depending on the
- type (<code>SuggestField</code> or <code>ContextSuggestField</code>) of the field the query is run against.
+  This query rewrites to an appropriate <code>CompletionQuery</code> depending on the
+  type (<code>SuggestField</code> or <code>ContextSuggestField</code>) of the field the query is run against.
  */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionQuery : OrgApacheLuceneSearchQuery
 
@@ -47,14 +52,13 @@
 
 /*!
  @brief Returns the field name this query should
- be run against
+  be run against
  */
 - (NSString *)getField;
 
 /*!
- @brief Returns a <code>BitsProducer</code>.
- Only suggestions matching the returned
- bits will be returned.
+ @brief Returns a <code>BitsProducer</code>.Only suggestions matching the returned
+  bits will be returned.
  */
 - (OrgApacheLuceneSearchSuggestBitsProducer *)getFilter;
 
@@ -71,10 +75,14 @@
 
 /*!
  @brief Creates a base Completion query against a <code>term</code>
- with a <code>filter</code> to scope the documents
+  with a <code>filter</code> to scope the documents
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-    withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+              withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -86,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionQuery")

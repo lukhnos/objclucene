@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisHunspellStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisHunspellStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisHunspellStemmer))
 #define OrgApacheLuceneAnalysisHunspellStemmer_
 
@@ -22,9 +28,8 @@
 @protocol JavaUtilList;
 
 /*!
- @brief Stemmer uses the affix rules declared in the Dictionary to generate one or more stems for a word.
- It
- conforms to the algorithm in the original hunspell algorithm, including recursive suffix stripping.
+ @brief Stemmer uses the affix rules declared in the Dictionary to generate one or more stems for a word.It
+  conforms to the algorithm in the original hunspell algorithm, including recursive suffix stripping.
  */
 @interface OrgApacheLuceneAnalysisHunspellStemmer : NSObject {
  @public
@@ -40,7 +45,7 @@
  @brief Constructs a new Stemmer which will use the provided Dictionary to create its stems.
  @param dictionary Dictionary that will be used to create the stems
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisHunspellDictionary:(OrgApacheLuceneAnalysisHunspellDictionary *)dictionary;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneAnalysisHunspellDictionary:(OrgApacheLuceneAnalysisHunspellDictionary *)dictionary;
 
 /*!
  @brief Find the stem(s) of the provided word
@@ -72,8 +77,7 @@
  @param strippedWord Word the affix has been removed and the strip added
  @param length valid length of stripped word
  @param affix HunspellAffix representing the affix rule itself
- @param prefixFlag when we already stripped a prefix, we cant simply recurse and check the suffix, unless both are compatible
- so we must check dictionary form against both to add it as a stem!
+ @param prefixFlag when we already stripped a prefix, we cant simply recurse and check the suffix, unless both are compatible                    so we must check dictionary form against both to add it as a stem!
  @param recursionDepth current recursion depth
  @param prefix true if we are removing a prefix (false if it's a suffix)
  @return List of stems for the word, or an empty list if none are found
@@ -87,6 +91,10 @@
                                 withBoolean:(jboolean)circumfix
                                 withBoolean:(jboolean)caseVariant;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHunspellStemmer)
@@ -96,14 +104,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellStemmer, prefixArcs_, IOSObje
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellStemmer, suffixReaders_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellStemmer, suffixArcs_, IOSObjectArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellStemmer_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellStemmer *self, OrgApacheLuceneAnalysisHunspellDictionary *dictionary);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellStemmer_initPackagePrivateWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellStemmer *self, OrgApacheLuceneAnalysisHunspellDictionary *dictionary);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellStemmer *new_OrgApacheLuceneAnalysisHunspellStemmer_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *dictionary) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellStemmer *new_OrgApacheLuceneAnalysisHunspellStemmer_initPackagePrivateWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *dictionary) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellStemmer *create_OrgApacheLuceneAnalysisHunspellStemmer_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *dictionary);
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellStemmer *create_OrgApacheLuceneAnalysisHunspellStemmer_initPackagePrivateWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *dictionary);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellStemmer")

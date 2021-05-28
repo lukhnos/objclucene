@@ -6,13 +6,15 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/Iterable.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/annotation/Annotation.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
+#include "java/util/Spliterator.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/queries/BooleanFilter.h"
@@ -24,6 +26,12 @@
 #include "org/apache/lucene/search/Filter.h"
 #include "org/apache/lucene/util/BitDocIdSet.h"
 #include "org/apache/lucene/util/Bits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/BooleanFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneQueriesBooleanFilter () {
  @public
@@ -39,7 +47,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesBooleanFilter, clauses_, id<JavaUtilLi
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneQueriesBooleanFilter_getDISIWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneIndexLeafReaderContext *context);
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneQueriesBooleanFilter__Annotations$0(void);
+
 @implementation OrgApacheLuceneQueriesBooleanFilter
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueriesBooleanFilter_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
@@ -61,7 +78,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchDocIdSetIterator *OrgApacheL
   for (OrgApacheLuceneQueriesFilterClause * __strong fc in clauses_) {
     if ([((OrgApacheLuceneQueriesFilterClause *) nil_chk(fc)) getOccur] == JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT)) {
       if (res == nil) {
-        JreAssert((!hasShouldClauses), (@"org/apache/lucene/queries/BooleanFilter.java:79 condition failed: assert !hasShouldClauses;"));
+        JreAssert(!hasShouldClauses, @"org/apache/lucene/queries/BooleanFilter.java:79 condition failed: assert !hasShouldClauses;");
         res = create_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc], true);
       }
       OrgApacheLuceneSearchDocIdSetIterator *disi = OrgApacheLuceneQueriesBooleanFilter_getDISIWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneIndexLeafReaderContext_([fc getFilter], context);
@@ -114,7 +131,7 @@ withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) {
+  if (JreObjectEqualsEquals(self, obj)) {
     return true;
   }
   if ([super isEqual:obj] == false) {
@@ -130,9 +147,9 @@ withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause
 
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_initWithNSString_(@"BooleanFilter(");
-  jint minLen = [buffer length];
+  jint minLen = [buffer java_length];
   for (OrgApacheLuceneQueriesFilterClause * __strong c in nil_chk(clauses_)) {
-    if ([buffer length] > minLen) {
+    if ([buffer java_length] > minLen) {
       [buffer appendWithChar:' '];
     }
     [buffer appendWithId:c];
@@ -140,19 +157,16 @@ withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause
   return [((JavaLangStringBuilder *) nil_chk([buffer appendWithChar:')'])) description];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueriesBooleanFilter_init(self);
-  return self;
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
 }
-J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
+}
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -161,32 +175,41 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:", "getDocIdSet", "Lorg.apache.lucene.search.DocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getDISIWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:", "getDISI", "Lorg.apache.lucene.search.DocIdSetIterator;", 0xa, "Ljava.io.IOException;", NULL },
-    { "addWithOrgApacheLuceneQueriesFilterClause:", "add", "V", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchBooleanClause_Occur:", "add", "V", 0x11, NULL, NULL },
-    { "clauses", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/queries/FilterClause;>;" },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x11, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/queries/FilterClause;>;" },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "BooleanFilter", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSetIterator;", 0xa, 3, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 5, 7, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 8, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x11, -1, -1, -1, 9, -1, -1 },
+    { NULL, "Z", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 12, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 13, 14, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:);
+  methods[2].selector = @selector(getDISIWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(addWithOrgApacheLuceneQueriesFilterClause:);
+  methods[4].selector = @selector(addWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchBooleanClause_Occur:);
+  methods[5].selector = @selector(clauses);
+  methods[6].selector = @selector(iterator);
+  methods[7].selector = @selector(isEqual:);
+  methods[8].selector = @selector(hash);
+  methods[9].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "clauses_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/queries/FilterClause;>;", .constantValue.asLong = 0 },
+    { "clauses_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 15, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesBooleanFilter = { 2, "BooleanFilter", "org.apache.lucene.queries", NULL, 0x1, 10, methods, 1, fields, 0, NULL, 0, NULL, NULL, "Lorg/apache/lucene/search/Filter;Ljava/lang/Iterable<Lorg/apache/lucene/queries/FilterClause;>;" };
+  static const void *ptrTable[] = { "getDocIdSet", "LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneUtilBits;", "LJavaIoIOException;", "getDISI", "LOrgApacheLuceneSearchFilter;LOrgApacheLuceneIndexLeafReaderContext;", "add", "LOrgApacheLuceneQueriesFilterClause;", "LOrgApacheLuceneSearchFilter;LOrgApacheLuceneSearchBooleanClause_Occur;", "()Ljava/util/List<Lorg/apache/lucene/queries/FilterClause;>;", "()Ljava/util/Iterator<Lorg/apache/lucene/queries/FilterClause;>;", "equals", "LNSObject;", "hashCode", "toString", "LNSString;", "Ljava/util/List<Lorg/apache/lucene/queries/FilterClause;>;", "Lorg/apache/lucene/search/Filter;Ljava/lang/Iterable<Lorg/apache/lucene/queries/FilterClause;>;", (void *)&OrgApacheLuceneQueriesBooleanFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesBooleanFilter = { "BooleanFilter", "org.apache.lucene.queries", ptrTable, methods, fields, 7, 0x1, 10, 1, -1, -1, -1, 16, 17 };
   return &_OrgApacheLuceneQueriesBooleanFilter;
 }
 
 @end
-
-OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneQueriesBooleanFilter_getDISIWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneIndexLeafReaderContext *context) {
-  OrgApacheLuceneQueriesBooleanFilter_initialize();
-  OrgApacheLuceneSearchDocIdSet *set = [((OrgApacheLuceneSearchFilter *) nil_chk(filter)) getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneUtilBits:nil];
-  return set == nil ? nil : [set iterator];
-}
 
 void OrgApacheLuceneQueriesBooleanFilter_init(OrgApacheLuceneQueriesBooleanFilter *self) {
   OrgApacheLuceneSearchFilter_init(self);
@@ -199,6 +222,16 @@ OrgApacheLuceneQueriesBooleanFilter *new_OrgApacheLuceneQueriesBooleanFilter_ini
 
 OrgApacheLuceneQueriesBooleanFilter *create_OrgApacheLuceneQueriesBooleanFilter_init() {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesBooleanFilter, init)
+}
+
+OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneQueriesBooleanFilter_getDISIWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneIndexLeafReaderContext *context) {
+  OrgApacheLuceneQueriesBooleanFilter_initialize();
+  OrgApacheLuceneSearchDocIdSet *set = [((OrgApacheLuceneSearchFilter *) nil_chk(filter)) getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneUtilBits:nil];
+  return set == nil ? nil : [set iterator];
+}
+
+IOSObjectArray *OrgApacheLuceneQueriesBooleanFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesBooleanFilter)

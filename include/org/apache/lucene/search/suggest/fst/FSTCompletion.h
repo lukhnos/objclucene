@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestFstFSTCompletion
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestFstFSTCompletion_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstFSTCompletion || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstFSTCompletion))
 #define OrgApacheLuceneSearchSuggestFstFSTCompletion_
 
@@ -25,37 +31,34 @@
  - seealso: FSTCompletionBuilder
  */
 @interface OrgApacheLuceneSearchSuggestFstFSTCompletion : NSObject
-
-+ (jint)DEFAULT_BUCKETS;
+@property (readonly, class) jint DEFAULT_BUCKETS NS_SWIFT_NAME(DEFAULT_BUCKETS);
 
 #pragma mark Public
 
 /*!
  @brief Defaults to higher weights first and exact first.
- - seealso: #FSTCompletion(FST,boolean,boolean)
+ - seealso: #FSTCompletion(FST, boolean, boolean)
  */
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)automaton;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)automaton;
 
 /*!
  @brief Constructs an FSTCompletion, specifying higherWeightsFirst and exactFirst.
- @param automaton
- Automaton with completions. See <code>FSTCompletionBuilder</code>.
- @param higherWeightsFirst
- Return most popular suggestions first. This is the default
- behavior for this implementation. Setting it to <code>false</code>
- has no effect (use constant term weights to sort alphabetically
- only).
- @param exactFirst
- Find and push an exact match to the first position of the result
- list if found.
+ @param automaton Automaton with completions. See 
+ <code>FSTCompletionBuilder</code> .
+ @param higherWeightsFirst Return most popular suggestions first. This is the default
+            behavior for this implementation. Setting it to 
+  <code> false </code>           has no effect (use constant term weights to sort alphabetically
+            only).
+ @param exactFirst Find and push an exact match to the first position of the result
+            list if found.
  */
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)automaton
-                                      withBoolean:(jboolean)higherWeightsFirst
-                                      withBoolean:(jboolean)exactFirst;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)automaton
+                                                withBoolean:(jboolean)higherWeightsFirst
+                                                withBoolean:(jboolean)exactFirst;
 
 /*!
  @brief Returns the bucket assigned to a given key (if found) or <code>-1</code> if
- no exact match exists.
+  no exact match exists.
  */
 - (jint)getBucketWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
@@ -71,15 +74,17 @@
 
 /*!
  @brief Lookup suggestions to <code>key</code>.
- @param key
- The prefix to which suggestions should be sought.
- @param num
- At most this number of suggestions will be returned.
+ @param key The prefix to which suggestions should be sought.
+ @param num At most this number of suggestions will be returned.
  @return Returns the suggestions, sorted by their approximated weight first
- (decreasing) and then alphabetically (UTF-8 codepoint order).
+          (decreasing) and then alphabetically (UTF-8 codepoint order).
  */
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                            withInt:(jint)num;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -88,7 +93,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestFstFSTCompletion)
 /*!
  @brief Default number of buckets.
  */
-inline jint OrgApacheLuceneSearchSuggestFstFSTCompletion_get_DEFAULT_BUCKETS();
+inline jint OrgApacheLuceneSearchSuggestFstFSTCompletion_get_DEFAULT_BUCKETS(void);
 #define OrgApacheLuceneSearchSuggestFstFSTCompletion_DEFAULT_BUCKETS 10
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestFstFSTCompletion, DEFAULT_BUCKETS, jint)
 
@@ -143,8 +148,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstFSTCompletion)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key
-                                            withInt:(jint)bucket;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key
+                                                      withInt:(jint)bucket;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -162,4 +171,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstFSTCompletion_Completi
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstFSTCompletion")

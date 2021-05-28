@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
@@ -45,6 +44,10 @@
 #include "org/apache/lucene/util/packed/PackedInts.h"
 #include "org/apache/lucene/util/packed/PackedLongValues.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MultiDocValues must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexMultiDocValues ()
 
 /*!
@@ -56,17 +59,109 @@
 
 __attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_init(OrgApacheLuceneIndexMultiDocValues *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues *new_OrgApacheLuceneIndexMultiDocValues_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues *new_OrgApacheLuceneIndexMultiDocValues_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues *create_OrgApacheLuceneIndexMultiDocValues_init();
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues *create_OrgApacheLuceneIndexMultiDocValues_init(void);
 
-inline jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_get_BASE_RAM_BYTES_USED();
+@interface OrgApacheLuceneIndexMultiDocValues_1 : OrgApacheLuceneIndexNumericDocValues {
+ @public
+  IOSIntArray *val$starts_;
+  IOSObjectArray *val$values_;
+}
+
+- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
+withOrgApacheLuceneIndexNumericDocValuesArray:(IOSObjectArray *)capture$1;
+
+- (jlong)getWithInt:(jint)docID;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_1)
+
+__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_1 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1);
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_1 *new_OrgApacheLuceneIndexMultiDocValues_1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_1 *create_OrgApacheLuceneIndexMultiDocValues_1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
+
+@interface OrgApacheLuceneIndexMultiDocValues_2 : OrgApacheLuceneIndexNumericDocValues {
+ @public
+  IOSIntArray *val$starts_;
+  IOSObjectArray *val$values_;
+}
+
+- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
+withOrgApacheLuceneIndexNumericDocValuesArray:(IOSObjectArray *)capture$1;
+
+- (jlong)getWithInt:(jint)docID;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_2)
+
+__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_2 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1);
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_2 *new_OrgApacheLuceneIndexMultiDocValues_2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_2 *create_OrgApacheLuceneIndexMultiDocValues_2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
+
+@interface OrgApacheLuceneIndexMultiDocValues_3 : OrgApacheLuceneIndexBinaryDocValues {
+ @public
+  IOSIntArray *val$starts_;
+  IOSObjectArray *val$values_;
+}
+
+- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
+withOrgApacheLuceneIndexBinaryDocValuesArray:(IOSObjectArray *)capture$1;
+
+- (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)docID;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_3)
+
+__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_3 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1);
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_3 *new_OrgApacheLuceneIndexMultiDocValues_3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_3 *create_OrgApacheLuceneIndexMultiDocValues_3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
+
+@interface OrgApacheLuceneIndexMultiDocValues_4 : OrgApacheLuceneIndexSortedNumericDocValues {
+ @public
+  IOSIntArray *val$starts_;
+  IOSObjectArray *val$values_;
+  OrgApacheLuceneIndexSortedNumericDocValues *current_;
+}
+
+- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
+withOrgApacheLuceneIndexSortedNumericDocValuesArray:(IOSObjectArray *)capture$1;
+
+- (void)setDocumentWithInt:(jint)doc;
+
+- (jlong)valueAtWithInt:(jint)index;
+
+- (jint)count;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_4)
+
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_4, current_, OrgApacheLuceneIndexSortedNumericDocValues *)
+
+__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_4 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1);
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_4 *new_OrgApacheLuceneIndexMultiDocValues_4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_4 *create_OrgApacheLuceneIndexMultiDocValues_4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
+
+inline jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap, BASE_RAM_BYTES_USED, jlong)
 
 @interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap () {
  @public
-  IOSIntArray *newToOld_, *oldToNew_;
+  IOSIntArray *newToOld_;
+  IOSIntArray *oldToNew_;
 }
 
 /*!
@@ -84,7 +179,7 @@ J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexMultiDocValues_OrdinalMa
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap, newToOld_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap, oldToNew_, IOSIntArray *)
 
-inline jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap, BASE_RAM_BYTES_USED, jlong)
 
@@ -92,11 +187,14 @@ __attribute__((unused)) static IOSIntArray *OrgApacheLuceneIndexMultiDocValues_O
 
 __attribute__((unused)) static IOSIntArray *OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_inverseWithIntArray_(IOSIntArray *map);
 
-@interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 : OrgApacheLuceneUtilInPlaceMergeSorter {
+@interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1 : OrgApacheLuceneUtilInPlaceMergeSorter {
  @public
   IOSIntArray *val$newToOld_;
   IOSLongArray *val$weights_;
 }
+
+- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
+                   withLongArray:(IOSLongArray *)capture$1;
 
 - (void)swapWithInt:(jint)i
             withInt:(jint)j;
@@ -104,179 +202,53 @@ __attribute__((unused)) static IOSIntArray *OrgApacheLuceneIndexMultiDocValues_O
 - (jint)compareWithInt:(jint)i
                withInt:(jint)j;
 
-- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
-                   withLongArray:(IOSLongArray *)capture$1;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1, val$newToOld_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1, val$weights_, IOSLongArray *)
+__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1_initWithIntArray_withLongArray_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1 *self, IOSIntArray *capture$0, IOSLongArray *capture$1);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *self, IOSIntArray *capture$0, IOSLongArray *capture$1);
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1);
 
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1)
-
-@interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 : OrgApacheLuceneUtilLongValues {
+@interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1 : OrgApacheLuceneUtilLongValues {
  @public
   OrgApacheLuceneUtilPackedPackedInts_Mutable *val$newDeltas_;
 }
 
-- (jlong)getWithLong:(jlong)ord;
-
 - (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_Mutable:(OrgApacheLuceneUtilPackedPackedInts_Mutable *)capture$0;
+
+- (jlong)getWithLong:(jlong)ord;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1, val$newDeltas_, OrgApacheLuceneUtilPackedPackedInts_Mutable *)
+__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1 *self, OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *self, OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0);
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0);
 
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1)
-
-@interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 : OrgApacheLuceneUtilLongValues {
+@interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2 : OrgApacheLuceneUtilLongValues {
  @public
   OrgApacheLuceneUtilPackedPackedLongValues *val$deltas_;
 }
 
-- (jlong)getWithLong:(jlong)ord;
-
 - (instancetype)initWithOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)capture$0;
 
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2, val$deltas_, OrgApacheLuceneUtilPackedPackedLongValues *)
-
-__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *self, OrgApacheLuceneUtilPackedPackedLongValues *capture$0);
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2)
-
-@interface OrgApacheLuceneIndexMultiDocValues_$1 : OrgApacheLuceneIndexNumericDocValues {
- @public
-  IOSIntArray *val$starts_;
-  IOSObjectArray *val$values_;
-}
-
-- (jlong)getWithInt:(jint)docID;
-
-- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
-withOrgApacheLuceneIndexNumericDocValuesArray:(IOSObjectArray *)capture$1;
+- (jlong)getWithLong:(jlong)ord;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$1, val$starts_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$1, val$values_, IOSObjectArray *)
+__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2 *self, OrgApacheLuceneUtilPackedPackedLongValues *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_$1 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1);
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$1 *new_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$1 *create_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_$1)
-
-@interface OrgApacheLuceneIndexMultiDocValues_$2 : OrgApacheLuceneIndexNumericDocValues {
- @public
-  IOSIntArray *val$starts_;
-  IOSObjectArray *val$values_;
-}
-
-- (jlong)getWithInt:(jint)docID;
-
-- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
-withOrgApacheLuceneIndexNumericDocValuesArray:(IOSObjectArray *)capture$1;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_$2)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$2, val$starts_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$2, val$values_, IOSObjectArray *)
-
-__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_$2 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1);
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$2 *new_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$2 *create_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_$2)
-
-@interface OrgApacheLuceneIndexMultiDocValues_$3 : OrgApacheLuceneIndexBinaryDocValues {
- @public
-  IOSIntArray *val$starts_;
-  IOSObjectArray *val$values_;
-}
-
-- (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)docID;
-
-- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
-withOrgApacheLuceneIndexBinaryDocValuesArray:(IOSObjectArray *)capture$1;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_$3)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$3, val$starts_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$3, val$values_, IOSObjectArray *)
-
-__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_$3 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1);
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$3 *new_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$3 *create_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_$3)
-
-@interface OrgApacheLuceneIndexMultiDocValues_$4 : OrgApacheLuceneIndexSortedNumericDocValues {
- @public
-  OrgApacheLuceneIndexSortedNumericDocValues *current_;
-  IOSIntArray *val$starts_;
-  IOSObjectArray *val$values_;
-}
-
-- (void)setDocumentWithInt:(jint)doc;
-
-- (jlong)valueAtWithInt:(jint)index;
-
-- (jint)count;
-
-- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
-withOrgApacheLuceneIndexSortedNumericDocValuesArray:(IOSObjectArray *)capture$1;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiDocValues_$4)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$4, current_, OrgApacheLuceneIndexSortedNumericDocValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$4, val$starts_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$4, val$values_, IOSObjectArray *)
-
-__attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_$4 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1);
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$4 *new_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$4 *create_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_$4)
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0);
 
 @implementation OrgApacheLuceneIndexMultiDocValues
 
@@ -323,18 +295,30 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "MultiDocValues", NULL, 0x2, NULL, NULL },
-    { "getNormValuesWithOrgApacheLuceneIndexIndexReader:withNSString:", "getNormValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getNumericValuesWithOrgApacheLuceneIndexIndexReader:withNSString:", "getNumericValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getDocsWithFieldWithOrgApacheLuceneIndexIndexReader:withNSString:", "getDocsWithField", "Lorg.apache.lucene.util.Bits;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getBinaryValuesWithOrgApacheLuceneIndexIndexReader:withNSString:", "getBinaryValues", "Lorg.apache.lucene.index.BinaryDocValues;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getSortedNumericValuesWithOrgApacheLuceneIndexIndexReader:withNSString:", "getSortedNumericValues", "Lorg.apache.lucene.index.SortedNumericDocValues;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getSortedValuesWithOrgApacheLuceneIndexIndexReader:withNSString:", "getSortedValues", "Lorg.apache.lucene.index.SortedDocValues;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getSortedSetValuesWithOrgApacheLuceneIndexIndexReader:withNSString:", "getSortedSetValues", "Lorg.apache.lucene.index.SortedSetDocValues;", 0x9, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x9, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x9, 3, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x9, 4, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexBinaryDocValues;", 0x9, 5, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedNumericDocValues;", 0x9, 6, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedDocValues;", 0x9, 7, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedSetDocValues;", 0x9, 8, 1, 2, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.MultiDocValues$OrdinalMap;", "Lorg.apache.lucene.index.MultiDocValues$MultiSortedDocValues;", "Lorg.apache.lucene.index.MultiDocValues$MultiSortedSetDocValues;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues = { 2, "MultiDocValues", "org.apache.lucene.index", NULL, 0x1, 8, methods, 0, NULL, 0, NULL, 3, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getNormValuesWithOrgApacheLuceneIndexIndexReader:withNSString:);
+  methods[2].selector = @selector(getNumericValuesWithOrgApacheLuceneIndexIndexReader:withNSString:);
+  methods[3].selector = @selector(getDocsWithFieldWithOrgApacheLuceneIndexIndexReader:withNSString:);
+  methods[4].selector = @selector(getBinaryValuesWithOrgApacheLuceneIndexIndexReader:withNSString:);
+  methods[5].selector = @selector(getSortedNumericValuesWithOrgApacheLuceneIndexIndexReader:withNSString:);
+  methods[6].selector = @selector(getSortedValuesWithOrgApacheLuceneIndexIndexReader:withNSString:);
+  methods[7].selector = @selector(getSortedSetValuesWithOrgApacheLuceneIndexIndexReader:withNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getNormValues", "LOrgApacheLuceneIndexIndexReader;LNSString;", "LJavaIoIOException;", "getNumericValues", "getDocsWithField", "getBinaryValues", "getSortedNumericValues", "getSortedValues", "getSortedSetValues", "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;LOrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues;LOrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues = { "MultiDocValues", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x1, 8, 0, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMultiDocValues;
 }
 
@@ -362,7 +346,7 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNorm
   else if (size == 1) {
     return [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:0])) reader])) getNormValuesWithNSString:field];
   }
-  OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(OrgApacheLuceneIndexMultiFields_getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader_(r))) fieldInfoWithNSString:field];
+  OrgApacheLuceneIndexFieldInfo *fi = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk(OrgApacheLuceneIndexMultiFields_getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader_(r))) fieldInfoWithNSString:field]);
   if (fi == nil || [fi hasNorms] == false) {
     return nil;
   }
@@ -370,8 +354,8 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNorm
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexNumericDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
-    OrgApacheLuceneIndexLeafReaderContext *context = [leaves getWithInt:i];
-    OrgApacheLuceneIndexNumericDocValues *v = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getNormValuesWithNSString:field];
+    OrgApacheLuceneIndexLeafReaderContext *context = JreRetainedLocalValue([leaves getWithInt:i]);
+    OrgApacheLuceneIndexNumericDocValues *v = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getNormValuesWithNSString:field]);
     if (v == nil) {
       v = OrgApacheLuceneIndexDocValues_emptyNumeric();
     }
@@ -382,8 +366,8 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNorm
     *IOSIntArray_GetRef(starts, i) = context->docBase_;
   }
   *IOSIntArray_GetRef(starts, size) = [r maxDoc];
-  JreAssert((anyReal), (@"org/apache/lucene/index/MultiDocValues.java:93 condition failed: assert anyReal;"));
-  return create_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(starts, values);
+  JreAssert(anyReal, @"org/apache/lucene/index/MultiDocValues.java:93 condition failed: assert anyReal;");
+  return create_OrgApacheLuceneIndexMultiDocValues_1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(starts, values);
 }
 
 OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNumericValuesWithOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneIndexIndexReader *r, NSString *field) {
@@ -400,8 +384,8 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNume
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexNumericDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
-    OrgApacheLuceneIndexLeafReaderContext *context = [leaves getWithInt:i];
-    OrgApacheLuceneIndexNumericDocValues *v = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getNumericDocValuesWithNSString:field];
+    OrgApacheLuceneIndexLeafReaderContext *context = JreRetainedLocalValue([leaves getWithInt:i]);
+    OrgApacheLuceneIndexNumericDocValues *v = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getNumericDocValuesWithNSString:field]);
     if (v == nil) {
       v = OrgApacheLuceneIndexDocValues_emptyNumeric();
     }
@@ -416,7 +400,7 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNume
     return nil;
   }
   else {
-    return create_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(starts, values);
+    return create_OrgApacheLuceneIndexMultiDocValues_2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(starts, values);
   }
 }
 
@@ -435,8 +419,8 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexMultiDocValues_getDocsWithFieldW
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneUtilBits_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
-    OrgApacheLuceneIndexLeafReaderContext *context = [leaves getWithInt:i];
-    id<OrgApacheLuceneUtilBits> v = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getDocsWithFieldWithNSString:field];
+    OrgApacheLuceneIndexLeafReaderContext *context = JreRetainedLocalValue([leaves getWithInt:i]);
+    id<OrgApacheLuceneUtilBits> v = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getDocsWithFieldWithNSString:field]);
     if (v == nil) {
       v = create_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]);
       anyMissing = true;
@@ -458,7 +442,7 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexMultiDocValues_getDocsWithFieldW
     return create_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_([r maxDoc]);
   }
   else {
-    return create_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(values, starts, false);
+    return create_OrgApacheLuceneIndexMultiBits_initPackagePrivateWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(values, starts, false);
   }
 }
 
@@ -476,8 +460,8 @@ OrgApacheLuceneIndexBinaryDocValues *OrgApacheLuceneIndexMultiDocValues_getBinar
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexBinaryDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
-    OrgApacheLuceneIndexLeafReaderContext *context = [leaves getWithInt:i];
-    OrgApacheLuceneIndexBinaryDocValues *v = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getBinaryDocValuesWithNSString:field];
+    OrgApacheLuceneIndexLeafReaderContext *context = JreRetainedLocalValue([leaves getWithInt:i]);
+    OrgApacheLuceneIndexBinaryDocValues *v = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getBinaryDocValuesWithNSString:field]);
     if (v == nil) {
       v = OrgApacheLuceneIndexDocValues_emptyBinary();
     }
@@ -492,7 +476,7 @@ OrgApacheLuceneIndexBinaryDocValues *OrgApacheLuceneIndexMultiDocValues_getBinar
     return nil;
   }
   else {
-    return create_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(starts, values);
+    return create_OrgApacheLuceneIndexMultiDocValues_3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(starts, values);
   }
 }
 
@@ -510,8 +494,8 @@ OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexMultiDocValues_g
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexSortedNumericDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
-    OrgApacheLuceneIndexLeafReaderContext *context = [leaves getWithInt:i];
-    OrgApacheLuceneIndexSortedNumericDocValues *v = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getSortedNumericDocValuesWithNSString:field];
+    OrgApacheLuceneIndexLeafReaderContext *context = JreRetainedLocalValue([leaves getWithInt:i]);
+    OrgApacheLuceneIndexSortedNumericDocValues *v = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getSortedNumericDocValuesWithNSString:field]);
     if (v == nil) {
       v = OrgApacheLuceneIndexDocValues_emptySortedNumericWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]);
     }
@@ -526,7 +510,7 @@ OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexMultiDocValues_g
     return nil;
   }
   else {
-    return create_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(starts, values);
+    return create_OrgApacheLuceneIndexMultiDocValues_4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(starts, values);
   }
 }
 
@@ -544,8 +528,8 @@ OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexMultiDocValues_getSorte
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexSortedDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
-    OrgApacheLuceneIndexLeafReaderContext *context = [leaves getWithInt:i];
-    OrgApacheLuceneIndexSortedDocValues *v = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getSortedDocValuesWithNSString:field];
+    OrgApacheLuceneIndexLeafReaderContext *context = JreRetainedLocalValue([leaves getWithInt:i]);
+    OrgApacheLuceneIndexSortedDocValues *v = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getSortedDocValuesWithNSString:field]);
     if (v == nil) {
       v = OrgApacheLuceneIndexDocValues_emptySorted();
     }
@@ -579,8 +563,8 @@ OrgApacheLuceneIndexSortedSetDocValues *OrgApacheLuceneIndexMultiDocValues_getSo
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexSortedSetDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
-    OrgApacheLuceneIndexLeafReaderContext *context = [leaves getWithInt:i];
-    OrgApacheLuceneIndexSortedSetDocValues *v = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getSortedSetDocValuesWithNSString:field];
+    OrgApacheLuceneIndexLeafReaderContext *context = JreRetainedLocalValue([leaves getWithInt:i]);
+    OrgApacheLuceneIndexSortedSetDocValues *v = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getSortedSetDocValuesWithNSString:field]);
     if (v == nil) {
       v = OrgApacheLuceneIndexDocValues_emptySortedSet();
     }
@@ -601,6 +585,241 @@ OrgApacheLuceneIndexSortedSetDocValues *OrgApacheLuceneIndexMultiDocValues_getSo
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues)
+
+@implementation OrgApacheLuceneIndexMultiDocValues_1
+
+- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
+withOrgApacheLuceneIndexNumericDocValuesArray:(IOSObjectArray *)capture$1 {
+  OrgApacheLuceneIndexMultiDocValues_1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(self, capture$0, capture$1);
+  return self;
+}
+
+- (jlong)getWithInt:(jint)docID {
+  jint subIndex = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(docID, val$starts_);
+  return [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(IOSObjectArray_Get(nil_chk(val$values_), subIndex))) getWithInt:docID - IOSIntArray_Get(nil_chk(val$starts_), subIndex)];
+}
+
+- (void)dealloc {
+  RELEASE_(val$starts_);
+  RELEASE_(val$values_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIntArray:withOrgApacheLuceneIndexNumericDocValuesArray:);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "val$starts_", "[I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$values_", "[LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "[I[LOrgApacheLuceneIndexNumericDocValues;", "get", "I", "LOrgApacheLuceneIndexMultiDocValues;", "getNormValuesWithOrgApacheLuceneIndexIndexReader:withNSString:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_1 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8018, 2, 2, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiDocValues_1;
+}
+
+@end
+
+void OrgApacheLuceneIndexMultiDocValues_1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_1 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  JreStrongAssign(&self->val$starts_, capture$0);
+  JreStrongAssign(&self->val$values_, capture$1);
+  OrgApacheLuceneIndexNumericDocValues_init(self);
+}
+
+OrgApacheLuceneIndexMultiDocValues_1 *new_OrgApacheLuceneIndexMultiDocValues_1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_1, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexMultiDocValues_1 *create_OrgApacheLuceneIndexMultiDocValues_1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_1, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
+}
+
+@implementation OrgApacheLuceneIndexMultiDocValues_2
+
+- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
+withOrgApacheLuceneIndexNumericDocValuesArray:(IOSObjectArray *)capture$1 {
+  OrgApacheLuceneIndexMultiDocValues_2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(self, capture$0, capture$1);
+  return self;
+}
+
+- (jlong)getWithInt:(jint)docID {
+  jint subIndex = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(docID, val$starts_);
+  return [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(IOSObjectArray_Get(nil_chk(val$values_), subIndex))) getWithInt:docID - IOSIntArray_Get(nil_chk(val$starts_), subIndex)];
+}
+
+- (void)dealloc {
+  RELEASE_(val$starts_);
+  RELEASE_(val$values_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIntArray:withOrgApacheLuceneIndexNumericDocValuesArray:);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "val$starts_", "[I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$values_", "[LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "[I[LOrgApacheLuceneIndexNumericDocValues;", "get", "I", "LOrgApacheLuceneIndexMultiDocValues;", "getNumericValuesWithOrgApacheLuceneIndexIndexReader:withNSString:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_2 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8018, 2, 2, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiDocValues_2;
+}
+
+@end
+
+void OrgApacheLuceneIndexMultiDocValues_2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_2 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  JreStrongAssign(&self->val$starts_, capture$0);
+  JreStrongAssign(&self->val$values_, capture$1);
+  OrgApacheLuceneIndexNumericDocValues_init(self);
+}
+
+OrgApacheLuceneIndexMultiDocValues_2 *new_OrgApacheLuceneIndexMultiDocValues_2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_2, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexMultiDocValues_2 *create_OrgApacheLuceneIndexMultiDocValues_2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_2, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
+}
+
+@implementation OrgApacheLuceneIndexMultiDocValues_3
+
+- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
+withOrgApacheLuceneIndexBinaryDocValuesArray:(IOSObjectArray *)capture$1 {
+  OrgApacheLuceneIndexMultiDocValues_3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(self, capture$0, capture$1);
+  return self;
+}
+
+- (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)docID {
+  jint subIndex = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(docID, val$starts_);
+  return JreRetainedLocalValue([((OrgApacheLuceneIndexBinaryDocValues *) nil_chk(IOSObjectArray_Get(nil_chk(val$values_), subIndex))) getWithInt:docID - IOSIntArray_Get(nil_chk(val$starts_), subIndex)]);
+}
+
+- (void)dealloc {
+  RELEASE_(val$starts_);
+  RELEASE_(val$values_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIntArray:withOrgApacheLuceneIndexBinaryDocValuesArray:);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "val$starts_", "[I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$values_", "[LOrgApacheLuceneIndexBinaryDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "[I[LOrgApacheLuceneIndexBinaryDocValues;", "get", "I", "LOrgApacheLuceneIndexMultiDocValues;", "getBinaryValuesWithOrgApacheLuceneIndexIndexReader:withNSString:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_3 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8018, 2, 2, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiDocValues_3;
+}
+
+@end
+
+void OrgApacheLuceneIndexMultiDocValues_3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_3 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  JreStrongAssign(&self->val$starts_, capture$0);
+  JreStrongAssign(&self->val$values_, capture$1);
+  OrgApacheLuceneIndexBinaryDocValues_init(self);
+}
+
+OrgApacheLuceneIndexMultiDocValues_3 *new_OrgApacheLuceneIndexMultiDocValues_3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_3, initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexMultiDocValues_3 *create_OrgApacheLuceneIndexMultiDocValues_3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_3, initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_, capture$0, capture$1)
+}
+
+@implementation OrgApacheLuceneIndexMultiDocValues_4
+
+- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
+withOrgApacheLuceneIndexSortedNumericDocValuesArray:(IOSObjectArray *)capture$1 {
+  OrgApacheLuceneIndexMultiDocValues_4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(self, capture$0, capture$1);
+  return self;
+}
+
+- (void)setDocumentWithInt:(jint)doc {
+  jint subIndex = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(doc, val$starts_);
+  JreStrongAssign(&current_, IOSObjectArray_Get(nil_chk(val$values_), subIndex));
+  [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(current_)) setDocumentWithInt:doc - IOSIntArray_Get(nil_chk(val$starts_), subIndex)];
+}
+
+- (jlong)valueAtWithInt:(jint)index {
+  return [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(current_)) valueAtWithInt:index];
+}
+
+- (jint)count {
+  return [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(current_)) count];
+}
+
+- (void)dealloc {
+  RELEASE_(val$starts_);
+  RELEASE_(val$values_);
+  RELEASE_(current_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIntArray:withOrgApacheLuceneIndexSortedNumericDocValuesArray:);
+  methods[1].selector = @selector(setDocumentWithInt:);
+  methods[2].selector = @selector(valueAtWithInt:);
+  methods[3].selector = @selector(count);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "val$starts_", "[I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$values_", "[LOrgApacheLuceneIndexSortedNumericDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "current_", "LOrgApacheLuceneIndexSortedNumericDocValues;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "[I[LOrgApacheLuceneIndexSortedNumericDocValues;", "setDocument", "I", "valueAt", "LOrgApacheLuceneIndexMultiDocValues;", "getSortedNumericValuesWithOrgApacheLuceneIndexIndexReader:withNSString:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_4 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8018, 4, 3, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiDocValues_4;
+}
+
+@end
+
+void OrgApacheLuceneIndexMultiDocValues_4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_4 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  JreStrongAssign(&self->val$starts_, capture$0);
+  JreStrongAssign(&self->val$values_, capture$1);
+  OrgApacheLuceneIndexSortedNumericDocValues_init(self);
+}
+
+OrgApacheLuceneIndexMultiDocValues_4 *new_OrgApacheLuceneIndexMultiDocValues_4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_4, initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexMultiDocValues_4 *create_OrgApacheLuceneIndexMultiDocValues_4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_4, initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_, capture$0, capture$1)
+}
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiDocValues_OrdinalMap)
 
@@ -670,38 +889,52 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:(OrgApacheLuceneInd
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", 0x9, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", 0x9, 0, 3, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", 0x9, 0, 4, 2, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 5, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilLongValues;", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, 9, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 11, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(buildWithId:withOrgApacheLuceneIndexSortedDocValuesArray:withFloat:);
+  methods[1].selector = @selector(buildWithId:withOrgApacheLuceneIndexSortedSetDocValuesArray:withFloat:);
+  methods[2].selector = @selector(buildWithId:withOrgApacheLuceneIndexTermsEnumArray:withLongArray:withFloat:);
+  methods[3].selector = @selector(initWithId:withOrgApacheLuceneIndexTermsEnumArray:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:withFloat:);
+  methods[4].selector = @selector(getGlobalOrdsWithInt:);
+  methods[5].selector = @selector(getFirstSegmentOrdWithLong:);
+  methods[6].selector = @selector(getFirstSegmentNumberWithLong:);
+  methods[7].selector = @selector(getValueCount);
+  methods[8].selector = @selector(ramBytesUsed);
+  methods[9].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
+    { "owner_", "LNSObject;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "globalOrdDeltas_", "LOrgApacheLuceneUtilPackedPackedLongValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "firstSegments_", "LOrgApacheLuceneUtilPackedPackedLongValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "segmentToGlobalOrds_", "[LOrgApacheLuceneUtilLongValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "segmentMap_", "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "ramBytesUsed_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "build", "LNSObject;[LOrgApacheLuceneIndexSortedDocValues;F", "LJavaIoIOException;", "LNSObject;[LOrgApacheLuceneIndexSortedSetDocValues;F", "LNSObject;[LOrgApacheLuceneIndexTermsEnum;[JF", "LNSObject;[LOrgApacheLuceneIndexTermsEnum;LOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap;F", "getGlobalOrds", "I", "getFirstSegmentOrd", "J", "getFirstSegmentNumber", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", &OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED, "LOrgApacheLuceneIndexMultiDocValues;", "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap = { "OrdinalMap", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x9, 10, 7, 13, 14, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexMultiDocValues_OrdinalMap class]) {
     OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMultiDocValues_OrdinalMap)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "buildWithId:withOrgApacheLuceneIndexSortedDocValuesArray:withFloat:", "build", "Lorg.apache.lucene.index.MultiDocValues$OrdinalMap;", 0x9, "Ljava.io.IOException;", NULL },
-    { "buildWithId:withOrgApacheLuceneIndexSortedSetDocValuesArray:withFloat:", "build", "Lorg.apache.lucene.index.MultiDocValues$OrdinalMap;", 0x9, "Ljava.io.IOException;", NULL },
-    { "buildWithId:withOrgApacheLuceneIndexTermsEnumArray:withLongArray:withFloat:", "build", "Lorg.apache.lucene.index.MultiDocValues$OrdinalMap;", 0x9, "Ljava.io.IOException;", NULL },
-    { "initWithId:withOrgApacheLuceneIndexTermsEnumArray:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:withFloat:", "OrdinalMap", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "getGlobalOrdsWithInt:", "getGlobalOrds", "Lorg.apache.lucene.util.LongValues;", 0x1, NULL, NULL },
-    { "getFirstSegmentOrdWithLong:", "getFirstSegmentOrd", "J", 0x1, NULL, NULL },
-    { "getFirstSegmentNumberWithLong:", "getFirstSegmentNumber", "I", 0x1, NULL, NULL },
-    { "getValueCount", NULL, "J", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "owner_", NULL, 0x10, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
-    { "globalOrdDeltas_", NULL, 0x10, "Lorg.apache.lucene.util.packed.PackedLongValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "firstSegments_", NULL, 0x10, "Lorg.apache.lucene.util.packed.PackedLongValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentToGlobalOrds_", NULL, 0x10, "[Lorg.apache.lucene.util.LongValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentMap_", NULL, 0x10, "Lorg.apache.lucene.index.MultiDocValues$OrdinalMap$SegmentMap;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ramBytesUsed_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.MultiDocValues$OrdinalMap$SegmentMap;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap = { 2, "OrdinalMap", "org.apache.lucene.index", "MultiDocValues", 0x9, 10, methods, 7, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
 }
 
 @end
@@ -776,7 +1009,7 @@ void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLucen
         (*IOSLongArray_GetRef(segmentOrds, segmentIndex))++;
       }
     }
-    JreAssert((firstSegmentIndex < segmentOrds->size_), (@"org/apache/lucene/index/MultiDocValues.java:556 condition failed: assert firstSegmentIndex < segmentOrds.length;"));
+    JreAssert(firstSegmentIndex < segmentOrds->size_, @"org/apache/lucene/index/MultiDocValues.java:556 condition failed: assert firstSegmentIndex < segmentOrds.length;");
     [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(firstSegments)) addWithLong:firstSegmentIndex];
     [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(globalOrdDeltas)) addWithLong:globalOrdDelta];
     globalOrd++;
@@ -801,12 +1034,12 @@ void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLucen
         for (jint ord = 0; ord < size; ++ord) {
           [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(newDeltas)) setWithInt:ord withLong:[((OrgApacheLuceneUtilPackedPackedLongValues_Iterator *) nil_chk(it)) next]];
         }
-        JreAssert((![((OrgApacheLuceneUtilPackedPackedLongValues_Iterator *) nil_chk(it)) hasNext]), (@"org/apache/lucene/index/MultiDocValues.java:587 condition failed: assert !it.hasNext();"));
-        IOSObjectArray_SetAndConsume(self->segmentToGlobalOrds_, i, new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(newDeltas));
+        JreAssert(![((OrgApacheLuceneUtilPackedPackedLongValues_Iterator *) nil_chk(it)) hasNext], @"org/apache/lucene/index/MultiDocValues.java:587 condition failed: assert !it.hasNext();");
+        IOSObjectArray_SetAndConsume(self->segmentToGlobalOrds_, i, new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(newDeltas));
         ramBytesUsed += [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(newDeltas)) ramBytesUsed];
       }
       else {
-        IOSObjectArray_SetAndConsume(self->segmentToGlobalOrds_, i, new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(deltas));
+        IOSObjectArray_SetAndConsume(self->segmentToGlobalOrds_, i, new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(deltas));
         ramBytesUsed += [deltas ramBytesUsed];
       }
       ramBytesUsed += OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(IOSObjectArray_Get(self->segmentToGlobalOrds_, i));
@@ -864,30 +1097,42 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[I", 0xa, 0, 1, -1, -1, -1, -1 },
+    { NULL, "[I", 0xa, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 6, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 7, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(mapWithLongArray:);
+  methods[1].selector = @selector(inverseWithIntArray:);
+  methods[2].selector = @selector(initWithLongArray:);
+  methods[3].selector = @selector(newToOldWithInt:);
+  methods[4].selector = @selector(oldToNewWithInt:);
+  methods[5].selector = @selector(ramBytesUsed);
+  methods[6].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 8, -1, -1 },
+    { "newToOld_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "oldToNew_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "map", "[J", "inverse", "[I", "newToOld", "I", "oldToNew", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", &OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED, "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap = { "SegmentMap", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 7, 3, 9, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap class]) {
     OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "mapWithLongArray:", "map", "[I", 0xa, NULL, NULL },
-    { "inverseWithIntArray:", "inverse", "[I", 0xa, NULL, NULL },
-    { "initWithLongArray:", "SegmentMap", NULL, 0x0, NULL, NULL },
-    { "newToOldWithInt:", "newToOld", "I", 0x0, NULL, NULL },
-    { "oldToNewWithInt:", "oldToNew", "I", 0x0, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "newToOld_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "oldToNew_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap = { 2, "SegmentMap", "org.apache.lucene.index", "MultiDocValues$OrdinalMap", 0xa, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap;
 }
 
 @end
@@ -898,7 +1143,7 @@ IOSIntArray *OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_mapWithLon
   for (jint i = 0; i < weights->size_; ++i) {
     *IOSIntArray_GetRef(newToOld, i) = i;
   }
-  [create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(newToOld, weights) sortWithInt:0 withInt:weights->size_];
+  [create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1_initWithIntArray_withLongArray_(newToOld, weights) sortWithInt:0 withInt:weights->size_];
   return newToOld;
 }
 
@@ -915,7 +1160,7 @@ void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_initWithLongArray_
   NSObject_init(self);
   JreStrongAssign(&self->newToOld_, OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_mapWithLongArray_(weights));
   JreStrongAssign(&self->oldToNew_, OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_inverseWithIntArray_(self->newToOld_));
-  JreAssert((JavaUtilArrays_equalsWithIntArray_withIntArray_(self->newToOld_, OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_inverseWithIntArray_(self->oldToNew_))), (@"org/apache/lucene/index/MultiDocValues.java:420 condition failed: assert Arrays.equals(newToOld, inverse(oldToNew));"));
+  JreAssert(JavaUtilArrays_equalsWithIntArray_withIntArray_(self->newToOld_, OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_inverseWithIntArray_(self->oldToNew_)), @"org/apache/lucene/index/MultiDocValues.java:420 condition failed: assert Arrays.equals(newToOld, inverse(oldToNew));");
 }
 
 OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_initWithLongArray_(IOSLongArray *weights) {
@@ -928,7 +1173,13 @@ OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *create_OrgApacheLucene
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap)
 
-@implementation OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1
+@implementation OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1
+
+- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
+                   withLongArray:(IOSLongArray *)capture$1 {
+  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1_initWithIntArray_withLongArray_(self, capture$0, capture$1);
+  return self;
+}
 
 - (void)swapWithInt:(jint)i
             withInt:(jint)j {
@@ -942,12 +1193,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_S
   return JavaLangLong_compareWithLong_withLong_(IOSLongArray_Get(nil_chk(val$weights_), IOSIntArray_Get(nil_chk(val$newToOld_), j)), IOSLongArray_Get(val$weights_, IOSIntArray_Get(val$newToOld_, i)));
 }
 
-- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
-                   withLongArray:(IOSLongArray *)capture$1 {
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(self, capture$0, capture$1);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(val$newToOld_);
   RELEASE_(val$weights_);
@@ -955,47 +1200,52 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_S
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
-    { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "initWithIntArray:withLongArray:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 3, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIntArray:withLongArray:);
+  methods[1].selector = @selector(swapWithInt:withInt:);
+  methods[2].selector = @selector(compareWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$newToOld_", NULL, 0x1012, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$weights_", NULL, 0x1012, "[J", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$newToOld_", "[I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$weights_", "[J", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap", "mapWithLongArray:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 = { 2, "", "org.apache.lucene.index", "MultiDocValues$OrdinalMap$SegmentMap", 0x8008, 3, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1;
+  static const void *ptrTable[] = { "[I[J", "swap", "II", "compare", "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap;", "mapWithLongArray:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8018, 3, 2, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *self, IOSIntArray *capture$0, IOSLongArray *capture$1) {
+void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1_initWithIntArray_withLongArray_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1 *self, IOSIntArray *capture$0, IOSLongArray *capture$1) {
   JreStrongAssign(&self->val$newToOld_, capture$0);
   JreStrongAssign(&self->val$weights_, capture$1);
   OrgApacheLuceneUtilInPlaceMergeSorter_init(self);
 }
 
-OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1, initWithIntArray_withLongArray_, capture$0, capture$1)
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1, initWithIntArray_withLongArray_, capture$0, capture$1)
 }
 
-OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1, initWithIntArray_withLongArray_, capture$0, capture$1)
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_1, initWithIntArray_withLongArray_, capture$0, capture$1)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1)
+@implementation OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1
 
-@implementation OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1
+- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_Mutable:(OrgApacheLuceneUtilPackedPackedInts_Mutable *)capture$0 {
+  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(self, capture$0);
+  return self;
+}
 
 - (jlong)getWithLong:(jlong)ord {
   return ord + [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(val$newDeltas_)) getWithInt:(jint) ord];
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_Mutable:(OrgApacheLuceneUtilPackedPackedInts_Mutable *)capture$0 {
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(self, capture$0);
-  return self;
 }
 
 - (void)dealloc {
@@ -1004,44 +1254,48 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_S
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilPackedPackedInts_Mutable:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilPackedPackedInts_Mutable:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$newDeltas_", NULL, 0x1012, "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$newDeltas_", "LOrgApacheLuceneUtilPackedPackedInts_Mutable;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMultiDocValues_OrdinalMap", "initWithId:withOrgApacheLuceneIndexTermsEnumArray:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:withFloat:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 = { 2, "", "org.apache.lucene.index", "MultiDocValues$OrdinalMap", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilPackedPackedInts_Mutable;", "get", "J", "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", "initWithId:withOrgApacheLuceneIndexTermsEnumArray:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:withFloat:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8010, 2, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *self, OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) {
+void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1 *self, OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) {
   JreStrongAssign(&self->val$newDeltas_, capture$0);
   OrgApacheLuceneUtilLongValues_init(self);
 }
 
-OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1, initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_, capture$0)
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1, initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_, capture$0)
 }
 
-OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1, initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_, capture$0)
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_1, initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_, capture$0)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1)
+@implementation OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2
 
-@implementation OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2
+- (instancetype)initWithOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)capture$0 {
+  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(self, capture$0);
+  return self;
+}
 
 - (jlong)getWithLong:(jlong)ord {
   return ord + [((OrgApacheLuceneUtilPackedPackedLongValues *) nil_chk(val$deltas_)) getWithLong:ord];
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)capture$0 {
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(self, capture$0);
-  return self;
 }
 
 - (void)dealloc {
@@ -1050,34 +1304,38 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilPackedPackedLongValues:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilPackedPackedLongValues:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$deltas_", NULL, 0x1012, "Lorg.apache.lucene.util.packed.PackedLongValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$deltas_", "LOrgApacheLuceneUtilPackedPackedLongValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMultiDocValues_OrdinalMap", "initWithId:withOrgApacheLuceneIndexTermsEnumArray:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:withFloat:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 = { 2, "", "org.apache.lucene.index", "MultiDocValues$OrdinalMap", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilPackedPackedLongValues;", "get", "J", "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", "initWithId:withOrgApacheLuceneIndexTermsEnumArray:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:withFloat:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8010, 2, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2;
 }
 
 @end
 
-void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *self, OrgApacheLuceneUtilPackedPackedLongValues *capture$0) {
+void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2 *self, OrgApacheLuceneUtilPackedPackedLongValues *capture$0) {
   JreStrongAssign(&self->val$deltas_, capture$0);
   OrgApacheLuceneUtilLongValues_init(self);
 }
 
-OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2, initWithOrgApacheLuceneUtilPackedPackedLongValues_, capture$0)
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2, initWithOrgApacheLuceneUtilPackedPackedLongValues_, capture$0)
 }
 
-OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2, initWithOrgApacheLuceneUtilPackedPackedLongValues_, capture$0)
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_2, initWithOrgApacheLuceneUtilPackedPackedLongValues_, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2)
 
 @implementation OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues
 
@@ -1112,18 +1370,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSortedDocValuesArray:withIntArray:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:", "MultiSortedDocValues", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "getOrdWithInt:", "getOrd", "I", 0x1, NULL, NULL },
-    { "lookupOrdWithInt:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getValueCount", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, 4, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSortedDocValuesArray:withIntArray:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:);
+  methods[1].selector = @selector(getOrdWithInt:);
+  methods[2].selector = @selector(lookupOrdWithInt:);
+  methods[3].selector = @selector(getValueCount);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "docStarts_", NULL, 0x11, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "values_", NULL, 0x11, "[Lorg.apache.lucene.index.SortedDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mapping_", NULL, 0x11, "Lorg.apache.lucene.index.MultiDocValues$OrdinalMap;", NULL, NULL, .constantValue.asLong = 0 },
+    { "docStarts_", "[I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "values_", "[LOrgApacheLuceneIndexSortedDocValues;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "mapping_", "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues = { 2, "MultiSortedDocValues", "org.apache.lucene.index", "MultiDocValues", 0x9, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneIndexSortedDocValues;[ILOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", "LJavaIoIOException;", "getOrd", "I", "lookupOrd", "LOrgApacheLuceneIndexMultiDocValues;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues = { "MultiSortedDocValues", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x9, 4, 3, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues;
 }
 
@@ -1131,7 +1398,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$
 
 void OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues *self, IOSObjectArray *values, IOSIntArray *docStarts, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping) {
   OrgApacheLuceneIndexSortedDocValues_init(self);
-  JreAssert((((IOSIntArray *) nil_chk(docStarts))->size_ == ((IOSObjectArray *) nil_chk(values))->size_ + 1), (@"org/apache/lucene/index/MultiDocValues.java:671 condition failed: assert docStarts.length == values.length + 1;"));
+  JreAssert(((IOSIntArray *) nil_chk(docStarts))->size_ == ((IOSObjectArray *) nil_chk(values))->size_ + 1, @"org/apache/lucene/index/MultiDocValues.java:671 condition failed: assert docStarts.length == values.length + 1;");
   JreStrongAssign(&self->values_, values);
   JreStrongAssign(&self->docStarts_, docStarts);
   JreStrongAssign(&self->mapping_, mapping);
@@ -1191,21 +1458,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_MultiSortedD
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSortedSetDocValuesArray:withIntArray:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:", "MultiSortedSetDocValues", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "nextOrd", NULL, "J", 0x1, NULL, NULL },
-    { "setDocumentWithInt:", "setDocument", "V", 0x1, NULL, NULL },
-    { "lookupOrdWithLong:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getValueCount", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSortedSetDocValuesArray:withIntArray:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:);
+  methods[1].selector = @selector(nextOrd);
+  methods[2].selector = @selector(setDocumentWithInt:);
+  methods[3].selector = @selector(lookupOrdWithLong:);
+  methods[4].selector = @selector(getValueCount);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "docStarts_", NULL, 0x11, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "values_", NULL, 0x11, "[Lorg.apache.lucene.index.SortedSetDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mapping_", NULL, 0x11, "Lorg.apache.lucene.index.MultiDocValues$OrdinalMap;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentSubIndex_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentGlobalOrds_", NULL, 0x0, "Lorg.apache.lucene.util.LongValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "docStarts_", "[I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "values_", "[LOrgApacheLuceneIndexSortedSetDocValues;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "mapping_", "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "currentSubIndex_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "currentGlobalOrds_", "LOrgApacheLuceneUtilLongValues;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues = { 2, "MultiSortedSetDocValues", "org.apache.lucene.index", "MultiDocValues", 0x9, 5, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneIndexSortedSetDocValues;[ILOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", "LJavaIoIOException;", "setDocument", "I", "lookupOrd", "J", "LOrgApacheLuceneIndexMultiDocValues;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues = { "MultiSortedSetDocValues", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x9, 5, 5, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues;
 }
 
@@ -1213,7 +1490,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_MultiSortedD
 
 void OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues *self, IOSObjectArray *values, IOSIntArray *docStarts, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping) {
   OrgApacheLuceneIndexSortedSetDocValues_init(self);
-  JreAssert((((IOSIntArray *) nil_chk(docStarts))->size_ == ((IOSObjectArray *) nil_chk(values))->size_ + 1), (@"org/apache/lucene/index/MultiDocValues.java:713 condition failed: assert docStarts.length == values.length + 1;"));
+  JreAssert(((IOSIntArray *) nil_chk(docStarts))->size_ == ((IOSObjectArray *) nil_chk(values))->size_ + 1, @"org/apache/lucene/index/MultiDocValues.java:713 condition failed: assert docStarts.length == values.length + 1;");
   JreStrongAssign(&self->values_, values);
   JreStrongAssign(&self->docStarts_, docStarts);
   JreStrongAssign(&self->mapping_, mapping);
@@ -1228,220 +1505,3 @@ OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues *create_OrgApacheLuce
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues)
-
-@implementation OrgApacheLuceneIndexMultiDocValues_$1
-
-- (jlong)getWithInt:(jint)docID {
-  jint subIndex = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(docID, val$starts_);
-  return [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(IOSObjectArray_Get(nil_chk(val$values_), subIndex))) getWithInt:docID - IOSIntArray_Get(nil_chk(val$starts_), subIndex)];
-}
-
-- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
-withOrgApacheLuceneIndexNumericDocValuesArray:(IOSObjectArray *)capture$1 {
-  OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(self, capture$0, capture$1);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(val$starts_);
-  RELEASE_(val$values_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "initWithIntArray:withOrgApacheLuceneIndexNumericDocValuesArray:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "val$starts_", NULL, 0x1012, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$values_", NULL, 0x1012, "[Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMultiDocValues", "getNormValuesWithOrgApacheLuceneIndexIndexReader:withNSString:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_$1 = { 2, "", "org.apache.lucene.index", "MultiDocValues", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMultiDocValues_$1;
-}
-
-@end
-
-void OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_$1 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  JreStrongAssign(&self->val$starts_, capture$0);
-  JreStrongAssign(&self->val$values_, capture$1);
-  OrgApacheLuceneIndexNumericDocValues_init(self);
-}
-
-OrgApacheLuceneIndexMultiDocValues_$1 *new_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_$1, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
-}
-
-OrgApacheLuceneIndexMultiDocValues_$1 *create_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_$1, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_$1)
-
-@implementation OrgApacheLuceneIndexMultiDocValues_$2
-
-- (jlong)getWithInt:(jint)docID {
-  jint subIndex = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(docID, val$starts_);
-  return [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(IOSObjectArray_Get(nil_chk(val$values_), subIndex))) getWithInt:docID - IOSIntArray_Get(nil_chk(val$starts_), subIndex)];
-}
-
-- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
-withOrgApacheLuceneIndexNumericDocValuesArray:(IOSObjectArray *)capture$1 {
-  OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(self, capture$0, capture$1);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(val$starts_);
-  RELEASE_(val$values_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "initWithIntArray:withOrgApacheLuceneIndexNumericDocValuesArray:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "val$starts_", NULL, 0x1012, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$values_", NULL, 0x1012, "[Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMultiDocValues", "getNumericValuesWithOrgApacheLuceneIndexIndexReader:withNSString:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_$2 = { 2, "", "org.apache.lucene.index", "MultiDocValues", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMultiDocValues_$2;
-}
-
-@end
-
-void OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_$2 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  JreStrongAssign(&self->val$starts_, capture$0);
-  JreStrongAssign(&self->val$values_, capture$1);
-  OrgApacheLuceneIndexNumericDocValues_init(self);
-}
-
-OrgApacheLuceneIndexMultiDocValues_$2 *new_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_$2, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
-}
-
-OrgApacheLuceneIndexMultiDocValues_$2 *create_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_$2, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_$2)
-
-@implementation OrgApacheLuceneIndexMultiDocValues_$3
-
-- (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)docID {
-  jint subIndex = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(docID, val$starts_);
-  return [((OrgApacheLuceneIndexBinaryDocValues *) nil_chk(IOSObjectArray_Get(nil_chk(val$values_), subIndex))) getWithInt:docID - IOSIntArray_Get(nil_chk(val$starts_), subIndex)];
-}
-
-- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
-withOrgApacheLuceneIndexBinaryDocValuesArray:(IOSObjectArray *)capture$1 {
-  OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(self, capture$0, capture$1);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(val$starts_);
-  RELEASE_(val$values_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "initWithIntArray:withOrgApacheLuceneIndexBinaryDocValuesArray:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "val$starts_", NULL, 0x1012, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$values_", NULL, 0x1012, "[Lorg.apache.lucene.index.BinaryDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMultiDocValues", "getBinaryValuesWithOrgApacheLuceneIndexIndexReader:withNSString:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_$3 = { 2, "", "org.apache.lucene.index", "MultiDocValues", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMultiDocValues_$3;
-}
-
-@end
-
-void OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_$3 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  JreStrongAssign(&self->val$starts_, capture$0);
-  JreStrongAssign(&self->val$values_, capture$1);
-  OrgApacheLuceneIndexBinaryDocValues_init(self);
-}
-
-OrgApacheLuceneIndexMultiDocValues_$3 *new_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_$3, initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_, capture$0, capture$1)
-}
-
-OrgApacheLuceneIndexMultiDocValues_$3 *create_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_$3, initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_, capture$0, capture$1)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_$3)
-
-@implementation OrgApacheLuceneIndexMultiDocValues_$4
-
-- (void)setDocumentWithInt:(jint)doc {
-  jint subIndex = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(doc, val$starts_);
-  JreStrongAssign(&current_, IOSObjectArray_Get(nil_chk(val$values_), subIndex));
-  [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(current_)) setDocumentWithInt:doc - IOSIntArray_Get(nil_chk(val$starts_), subIndex)];
-}
-
-- (jlong)valueAtWithInt:(jint)index {
-  return [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(current_)) valueAtWithInt:index];
-}
-
-- (jint)count {
-  return [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(current_)) count];
-}
-
-- (instancetype)initWithIntArray:(IOSIntArray *)capture$0
-withOrgApacheLuceneIndexSortedNumericDocValuesArray:(IOSObjectArray *)capture$1 {
-  OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(self, capture$0, capture$1);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(current_);
-  RELEASE_(val$starts_);
-  RELEASE_(val$values_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setDocumentWithInt:", "setDocument", "V", 0x1, NULL, NULL },
-    { "valueAtWithInt:", "valueAt", "J", 0x1, NULL, NULL },
-    { "count", NULL, "I", 0x1, NULL, NULL },
-    { "initWithIntArray:withOrgApacheLuceneIndexSortedNumericDocValuesArray:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "current_", NULL, 0x0, "Lorg.apache.lucene.index.SortedNumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$starts_", NULL, 0x1012, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$values_", NULL, 0x1012, "[Lorg.apache.lucene.index.SortedNumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexMultiDocValues", "getSortedNumericValuesWithOrgApacheLuceneIndexIndexReader:withNSString:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_$4 = { 2, "", "org.apache.lucene.index", "MultiDocValues", 0x8008, 4, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexMultiDocValues_$4;
-}
-
-@end
-
-void OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_$4 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  JreStrongAssign(&self->val$starts_, capture$0);
-  JreStrongAssign(&self->val$values_, capture$1);
-  OrgApacheLuceneIndexSortedNumericDocValues_init(self);
-}
-
-OrgApacheLuceneIndexMultiDocValues_$4 *new_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_$4, initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_, capture$0, capture$1)
-}
-
-OrgApacheLuceneIndexMultiDocValues_$4 *create_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_$4, initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_, capture$0, capture$1)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_$4)

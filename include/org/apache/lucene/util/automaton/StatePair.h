@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonStatePair
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonStatePair_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonStatePair || defined(INCLUDE_OrgApacheLuceneUtilAutomatonStatePair))
 #define OrgApacheLuceneUtilAutomatonStatePair_
 
@@ -33,14 +39,14 @@
  @param s1 first state
  @param s2 second state
  */
-- (instancetype)initWithInt:(jint)s1
-                    withInt:(jint)s2;
+- (instancetype __nonnull)initWithInt:(jint)s1
+                              withInt:(jint)s2;
 
 /*!
  @brief Checks for equality.
  @param obj object to compare with
  @return true if <tt>obj</tt> represents the same pair of states as this
- pair
+          pair
  */
 - (jboolean)isEqual:(id)obj;
 
@@ -54,9 +60,13 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)s
-                    withInt:(jint)s1
-                    withInt:(jint)s2;
+- (instancetype __nonnull)initWithInt:(jint)s
+                              withInt:(jint)s1
+                              withInt:(jint)s2;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -78,4 +88,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonStatePair)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonStatePair")

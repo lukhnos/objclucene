@@ -10,6 +10,10 @@
 #include "java/lang/Math.h"
 #include "org/apache/lucene/util/MathUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/MathUtil must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilMathUtil ()
 
 - (instancetype)init;
@@ -18,9 +22,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneUtilMathUtil_init(OrgApacheLuceneUtilMathUtil *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilMathUtil *new_OrgApacheLuceneUtilMathUtil_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilMathUtil *new_OrgApacheLuceneUtilMathUtil_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilMathUtil *create_OrgApacheLuceneUtilMathUtil_init();
+__attribute__((unused)) static OrgApacheLuceneUtilMathUtil *create_OrgApacheLuceneUtilMathUtil_init(void);
 
 @implementation OrgApacheLuceneUtilMathUtil
 
@@ -59,16 +63,28 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "MathUtil", NULL, 0x2, NULL, NULL },
-    { "logWithLong:withInt:", "log", "I", 0x9, NULL, NULL },
-    { "logWithDouble:withDouble:", "log", "D", 0x9, NULL, NULL },
-    { "gcdWithLong:withLong:", "gcd", "J", 0x9, NULL, NULL },
-    { "asinhWithDouble:", "asinh", "D", 0x9, NULL, NULL },
-    { "acoshWithDouble:", "acosh", "D", 0x9, NULL, NULL },
-    { "atanhWithDouble:", "atanh", "D", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 0, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 5, 6, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 7, 6, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 8, 6, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMathUtil = { 2, "MathUtil", "org.apache.lucene.util", NULL, 0x11, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(logWithLong:withInt:);
+  methods[2].selector = @selector(logWithDouble:withDouble:);
+  methods[3].selector = @selector(gcdWithLong:withLong:);
+  methods[4].selector = @selector(asinhWithDouble:);
+  methods[5].selector = @selector(acoshWithDouble:);
+  methods[6].selector = @selector(atanhWithDouble:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "log", "JI", "DD", "gcd", "JJ", "asinh", "D", "acosh", "atanh" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMathUtil = { "MathUtil", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x11, 7, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilMathUtil;
 }
 

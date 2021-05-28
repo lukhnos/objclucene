@@ -11,12 +11,16 @@
 #include "org/apache/lucene/util/packed/DirectPackedReader.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/DirectPackedReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilPackedDirectPackedReader
 
-- (instancetype)initWithInt:(jint)bitsPerValue
-                    withInt:(jint)valueCount
-withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
-  OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(self, bitsPerValue, valueCount, inArg);
+- (instancetype)initPackagePrivateWithInt:(jint)bitsPerValue
+                                  withInt:(jint)valueCount
+       withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
+  OrgApacheLuceneUtilPackedDirectPackedReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(self, bitsPerValue, valueCount, inArg);
   return self;
 }
 
@@ -64,7 +68,7 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
     return (JreURShift64(rawValue, shiftRightBits)) & valueMask_;
   }
   @catch (JavaIoIOException *ioe) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe);
   }
 }
 
@@ -78,24 +82,32 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withOrgApacheLuceneStoreIndexInput:", "DirectPackedReader", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:withInt:withOrgApacheLuceneStoreIndexInput:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(ramBytesUsed);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bitsPerValue_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startPointer_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "valueMask_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "bitsPerValue_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "startPointer_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "valueMask_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectPackedReader = { 2, "DirectPackedReader", "org.apache.lucene.util.packed", NULL, 0x0, 3, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IILOrgApacheLuceneStoreIndexInput;", "get", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectPackedReader = { "DirectPackedReader", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x0, 3, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectPackedReader;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneUtilPackedDirectPackedReader *self, jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
+void OrgApacheLuceneUtilPackedDirectPackedReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneUtilPackedDirectPackedReader *self, jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
   OrgApacheLuceneUtilPackedPackedInts_ReaderImpl_initWithInt_(self, valueCount);
   JreStrongAssign(&self->in_, inArg);
   self->bitsPerValue_ = bitsPerValue;
@@ -108,12 +120,12 @@ void OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApac
   }
 }
 
-OrgApacheLuceneUtilPackedDirectPackedReader *new_OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectPackedReader, initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
+OrgApacheLuceneUtilPackedDirectPackedReader *new_OrgApacheLuceneUtilPackedDirectPackedReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectPackedReader, initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
 }
 
-OrgApacheLuceneUtilPackedDirectPackedReader *create_OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectPackedReader, initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
+OrgApacheLuceneUtilPackedDirectPackedReader *create_OrgApacheLuceneUtilPackedDirectPackedReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectPackedReader, initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectPackedReader)

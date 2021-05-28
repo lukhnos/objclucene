@@ -6,7 +6,7 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
+#include "java/io/Reader.h"
 #include "java/lang/Character.h"
 #include "org/apache/lucene/analysis/Tokenizer.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
@@ -14,11 +14,17 @@
 #include "org/apache/lucene/analysis/util/CharTokenizer.h"
 #include "org/apache/lucene/analysis/util/CharacterUtils.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/CharTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisUtilCharTokenizer () {
  @public
-  jint offset_, bufferIndex_, dataLen_, finalOffset_;
+  jint offset_;
+  jint bufferIndex_;
+  jint dataLen_;
+  jint finalOffset_;
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
   id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt_;
   OrgApacheLuceneAnalysisUtilCharacterUtils *charUtils_;
@@ -32,11 +38,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, offsetAtt_, id<Org
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, charUtils_, OrgApacheLuceneAnalysisUtilCharacterUtils *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, ioBuffer_, OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *)
 
-inline jint OrgApacheLuceneAnalysisUtilCharTokenizer_get_MAX_WORD_LEN();
+inline jint OrgApacheLuceneAnalysisUtilCharTokenizer_get_MAX_WORD_LEN(void);
 #define OrgApacheLuceneAnalysisUtilCharTokenizer_MAX_WORD_LEN 255
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisUtilCharTokenizer, MAX_WORD_LEN, jint)
 
-inline jint OrgApacheLuceneAnalysisUtilCharTokenizer_get_IO_BUFFER_SIZE();
+inline jint OrgApacheLuceneAnalysisUtilCharTokenizer_get_IO_BUFFER_SIZE(void);
 #define OrgApacheLuceneAnalysisUtilCharTokenizer_IO_BUFFER_SIZE 4096
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_SIZE, jint)
 
@@ -92,7 +98,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     bufferIndex_ += charCount;
     if ([self isTokenCharWithInt:c]) {
       if (length == 0) {
-        JreAssert((start == -1), (@"org/apache/lucene/analysis/util/CharTokenizer.java:107 condition failed: assert start == -1;"));
+        JreAssert(start == -1, @"org/apache/lucene/analysis/util/CharTokenizer.java:107 condition failed: assert start == -1;");
         start = offset_ + bufferIndex_ - charCount;
         end = start;
       }
@@ -106,7 +112,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     else if (length > 0) break;
   }
   [termAtt_ setLengthWithInt:length];
-  JreAssert((start != -1), (@"org/apache/lucene/analysis/util/CharTokenizer.java:122 condition failed: assert start != -1;"));
+  JreAssert(start != -1, @"org/apache/lucene/analysis/util/CharTokenizer.java:122 condition failed: assert start != -1;");
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:finalOffset_ = [self correctOffsetWithInt:end]];
   return true;
 }
@@ -134,28 +140,40 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CharTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "CharTokenizer", NULL, 0x1, NULL, NULL },
-    { "isTokenCharWithInt:", "isTokenChar", "Z", 0x404, NULL, NULL },
-    { "normalizeWithInt:", "normalize", "I", 0x4, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x404, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 3, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:);
+  methods[2].selector = @selector(isTokenCharWithInt:);
+  methods[3].selector = @selector(normalizeWithInt:);
+  methods[4].selector = @selector(incrementToken);
+  methods[5].selector = @selector(end);
+  methods[6].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "offset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferIndex_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "dataLen_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "finalOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "MAX_WORD_LEN", "MAX_WORD_LEN", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisUtilCharTokenizer_MAX_WORD_LEN },
-    { "IO_BUFFER_SIZE", "IO_BUFFER_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisUtilCharTokenizer_IO_BUFFER_SIZE },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "charUtils_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharacterUtils;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ioBuffer_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharacterUtils$CharacterBuffer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "offset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "dataLen_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "finalOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "MAX_WORD_LEN", "I", .constantValue.asInt = OrgApacheLuceneAnalysisUtilCharTokenizer_MAX_WORD_LEN, 0x1a, -1, -1, -1, -1 },
+    { "IO_BUFFER_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisUtilCharTokenizer_IO_BUFFER_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "charUtils_", "LOrgApacheLuceneAnalysisUtilCharacterUtils;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "ioBuffer_", "LOrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharTokenizer = { 2, "CharTokenizer", "org.apache.lucene.analysis.util", NULL, 0x401, 7, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAttributeFactory;", "isTokenChar", "I", "normalize", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharTokenizer = { "CharTokenizer", "org.apache.lucene.analysis.util", ptrTable, methods, fields, 7, 0x401, 7, 10, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisUtilCharTokenizer;
 }
 

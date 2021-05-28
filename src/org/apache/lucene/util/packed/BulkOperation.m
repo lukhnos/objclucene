@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/BulkOperation.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -37,19 +38,28 @@
 #include "org/apache/lucene/util/packed/BulkOperationPackedSingleBlock.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/BulkOperation must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 #pragma clang diagnostic ignored "-Wprotocol"
 
-inline IOSObjectArray *OrgApacheLuceneUtilPackedBulkOperation_get_packedBulkOps();
+inline IOSObjectArray *OrgApacheLuceneUtilPackedBulkOperation_get_packedBulkOps(void);
 static IOSObjectArray *OrgApacheLuceneUtilPackedBulkOperation_packedBulkOps;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilPackedBulkOperation, packedBulkOps, IOSObjectArray *)
 
-inline IOSObjectArray *OrgApacheLuceneUtilPackedBulkOperation_get_packedSingleBlockBulkOps();
+inline IOSObjectArray *OrgApacheLuceneUtilPackedBulkOperation_get_packedSingleBlockBulkOps(void);
 static IOSObjectArray *OrgApacheLuceneUtilPackedBulkOperation_packedSingleBlockBulkOps;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilPackedBulkOperation, packedSingleBlockBulkOps, IOSObjectArray *)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedBulkOperation)
 
 @implementation OrgApacheLuceneUtilPackedBulkOperation
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneUtilPackedBulkOperation_initPackagePrivate(self);
+  return self;
+}
 
 + (OrgApacheLuceneUtilPackedBulkOperation *)ofWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
                                                                                      withInt:(jint)bitsPerValue {
@@ -67,7 +77,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedBulkOperation)
 
 - (jint)computeIterationsWithInt:(jint)valueCount
                          withInt:(jint)ramBudget {
-  jint iterations = ramBudget / ([self byteBlockCount] + 8 * [self byteValueCount]);
+  jint iterations = JreIntDiv(ramBudget, ([self byteBlockCount] + 8 * [self byteValueCount]));
   if (iterations == 0) {
     return 1;
   }
@@ -79,54 +89,56 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedBulkOperation)
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilPackedBulkOperation_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedBulkOperation;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 4, 5, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(ofWithOrgApacheLuceneUtilPackedPackedInts_Format:withInt:);
+  methods[2].selector = @selector(writeLongWithLong:withByteArray:withInt:);
+  methods[3].selector = @selector(computeIterationsWithInt:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "packedBulkOps", "[LOrgApacheLuceneUtilPackedBulkOperation;", .constantValue.asLong = 0, 0x1a, -1, 6, -1, -1 },
+    { "packedSingleBlockBulkOps", "[LOrgApacheLuceneUtilPackedBulkOperation;", .constantValue.asLong = 0, 0x1a, -1, 7, -1, -1 },
+  };
+  static const void *ptrTable[] = { "of", "LOrgApacheLuceneUtilPackedPackedInts_Format;I", "writeLong", "J[BI", "computeIterations", "II", &OrgApacheLuceneUtilPackedBulkOperation_packedBulkOps, &OrgApacheLuceneUtilPackedBulkOperation_packedSingleBlockBulkOps };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperation = { "BulkOperation", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x400, 4, 2, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilPackedBulkOperation;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedBulkOperation class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPackedBulkOperation_packedBulkOps, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgApacheLuceneUtilPackedBulkOperationPacked1_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked2_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked3_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked4_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked5_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked6_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked7_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked8_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked9_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked10_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked11_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked12_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked13_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked14_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked15_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked16_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked17_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked18_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked19_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked20_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked21_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked22_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked23_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked24_init(), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(25), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(26), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(27), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(28), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(29), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(30), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(31), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(32), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(33), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(34), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(35), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(36), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(37), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(38), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(39), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(40), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(41), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(42), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(43), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(44), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(45), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(46), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(47), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(48), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(49), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(50), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(51), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(52), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(53), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(54), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(55), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(56), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(57), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(58), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(59), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(60), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(61), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(62), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(63), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(64) } count:64 type:OrgApacheLuceneUtilPackedBulkOperation_class_()]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPackedBulkOperation_packedSingleBlockBulkOps, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(1), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(2), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(3), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(4), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(5), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(6), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(7), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(8), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(9), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(10), nil, create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(12), nil, nil, nil, create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(16), nil, nil, nil, nil, create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(21), nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(32) } count:32 type:OrgApacheLuceneUtilPackedBulkOperation_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPackedBulkOperation_packedBulkOps, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgApacheLuceneUtilPackedBulkOperationPacked1_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked2_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked3_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked4_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked5_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked6_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked7_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked8_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked9_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked10_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked11_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked12_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked13_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked14_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked15_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked16_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked17_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked18_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked19_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked20_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked21_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked22_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked23_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked24_initPackagePrivate(), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(25), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(26), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(27), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(28), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(29), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(30), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(31), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(32), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(33), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(34), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(35), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(36), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(37), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(38), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(39), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(40), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(41), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(42), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(43), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(44), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(45), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(46), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(47), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(48), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(49), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(50), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(51), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(52), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(53), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(54), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(55), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(56), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(57), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(58), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(59), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(60), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(61), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(62), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(63), create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(64) } count:64 type:OrgApacheLuceneUtilPackedBulkOperation_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPackedBulkOperation_packedSingleBlockBulkOps, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(1), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(2), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(3), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(4), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(5), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(6), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(7), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(8), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(9), create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(10), nil, create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(12), nil, nil, nil, create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(16), nil, nil, nil, nil, create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(21), nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(32) } count:32 type:OrgApacheLuceneUtilPackedBulkOperation_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPackedBulkOperation)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "ofWithOrgApacheLuceneUtilPackedPackedInts_Format:withInt:", "of", "Lorg.apache.lucene.util.packed.BulkOperation;", 0x9, NULL, NULL },
-    { "writeLongWithLong:withByteArray:withInt:", "writeLong", "I", 0x4, NULL, NULL },
-    { "computeIterationsWithInt:withInt:", "computeIterations", "I", 0x11, NULL, NULL },
-    { "init", "BulkOperation", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "packedBulkOps", "packedBulkOps", 0x1a, "[Lorg.apache.lucene.util.packed.BulkOperation;", &OrgApacheLuceneUtilPackedBulkOperation_packedBulkOps, NULL, .constantValue.asLong = 0 },
-    { "packedSingleBlockBulkOps", "packedSingleBlockBulkOps", 0x1a, "[Lorg.apache.lucene.util.packed.BulkOperation;", &OrgApacheLuceneUtilPackedBulkOperation_packedSingleBlockBulkOps, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperation = { 2, "BulkOperation", "org.apache.lucene.util.packed", NULL, 0x400, 4, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilPackedBulkOperation;
-}
-
 @end
+
+void OrgApacheLuceneUtilPackedBulkOperation_initPackagePrivate(OrgApacheLuceneUtilPackedBulkOperation *self) {
+  NSObject_init(self);
+}
 
 OrgApacheLuceneUtilPackedBulkOperation *OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, jint bitsPerValue) {
   OrgApacheLuceneUtilPackedBulkOperation_initialize();
   switch ([format ordinal]) {
     case OrgApacheLuceneUtilPackedPackedInts_Format_Enum_PACKED:
-    JreAssert((IOSObjectArray_Get(nil_chk(OrgApacheLuceneUtilPackedBulkOperation_packedBulkOps), bitsPerValue - 1) != nil), (@"org/apache/lucene/util/packed/BulkOperation.java:134 condition failed: assert packedBulkOps[bitsPerValue - 1] != null;"));
+    JreAssert(IOSObjectArray_Get(nil_chk(OrgApacheLuceneUtilPackedBulkOperation_packedBulkOps), bitsPerValue - 1) != nil, @"org/apache/lucene/util/packed/BulkOperation.java:134 condition failed: assert packedBulkOps[bitsPerValue - 1] != null;");
     return IOSObjectArray_Get(OrgApacheLuceneUtilPackedBulkOperation_packedBulkOps, bitsPerValue - 1);
     case OrgApacheLuceneUtilPackedPackedInts_Format_Enum_PACKED_SINGLE_BLOCK:
-    JreAssert((IOSObjectArray_Get(nil_chk(OrgApacheLuceneUtilPackedBulkOperation_packedSingleBlockBulkOps), bitsPerValue - 1) != nil), (@"org/apache/lucene/util/packed/BulkOperation.java:137 condition failed: assert packedSingleBlockBulkOps[bitsPerValue - 1] != null;"));
+    JreAssert(IOSObjectArray_Get(nil_chk(OrgApacheLuceneUtilPackedBulkOperation_packedSingleBlockBulkOps), bitsPerValue - 1) != nil, @"org/apache/lucene/util/packed/BulkOperation.java:137 condition failed: assert packedSingleBlockBulkOps[bitsPerValue - 1] != null;");
     return IOSObjectArray_Get(OrgApacheLuceneUtilPackedBulkOperation_packedSingleBlockBulkOps, bitsPerValue - 1);
     default:
     @throw create_JavaLangAssertionError_init();
   }
-}
-
-void OrgApacheLuceneUtilPackedBulkOperation_init(OrgApacheLuceneUtilPackedBulkOperation *self) {
-  NSObject_init(self);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedBulkOperation)

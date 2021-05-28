@@ -3,14 +3,18 @@
 //  source: ./core/src/java/org/apache/lucene/store/InputStreamDataInput.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/EOFException.h"
-#include "java/io/IOException.h"
 #include "java/io/InputStream.h"
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/store/InputStreamDataInput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/InputStreamDataInput must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneStoreInputStreamDataInput () {
  @public
@@ -57,16 +61,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreInputStreamDataInput, is_, JavaIoInputSt
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaIoInputStream:", "InputStreamDataInput", NULL, 0x1, NULL, NULL },
-    { "readByte", NULL, "B", 0x1, "Ljava.io.IOException;", NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaIoInputStream:);
+  methods[1].selector = @selector(readByte);
+  methods[2].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  methods[3].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "is_", NULL, 0x12, "Ljava.io.InputStream;", NULL, NULL, .constantValue.asLong = 0 },
+    { "is_", "LJavaIoInputStream;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreInputStreamDataInput = { 2, "InputStreamDataInput", "org.apache.lucene.store", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoInputStream;", "LJavaIoIOException;", "readBytes", "[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreInputStreamDataInput = { "InputStreamDataInput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreInputStreamDataInput;
 }
 

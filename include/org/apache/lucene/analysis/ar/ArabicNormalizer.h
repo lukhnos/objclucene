@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisArArabicNormalizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisArArabicNormalizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizer || defined(INCLUDE_OrgApacheLuceneAnalysisArArabicNormalizer))
 #define OrgApacheLuceneAnalysisArArabicNormalizer_
 
@@ -21,56 +27,39 @@
 /*!
  @brief Normalizer for Arabic.
  <p>
- Normalization is done in-place for efficiency, operating on a termbuffer.
+   Normalization is done in-place for efficiency, operating on a termbuffer.  
  <p>
- Normalization is defined as:
+   Normalization is defined as:  
  <ul>
- <li> Normalization of hamza with alef seat to a bare alef.
- <li> Normalization of teh marbuta to heh
- <li> Normalization of dotless yeh (alef maksura) to yeh.
- <li> Removal of Arabic diacritics (the harakat)
- <li> Removal of tatweel (stretching character).
+   <li> Normalization of hamza with alef seat to a bare alef.
+   <li> Normalization of teh marbuta to heh
+   <li> Normalization of dotless yeh (alef maksura) to yeh.
+   <li> Removal of Arabic diacritics (the harakat)
+   <li> Removal of tatweel (stretching character). 
  </ul>
  */
 @interface OrgApacheLuceneAnalysisArArabicNormalizer : NSObject
-
-+ (jchar)ALEF;
-
-+ (jchar)ALEF_MADDA;
-
-+ (jchar)ALEF_HAMZA_ABOVE;
-
-+ (jchar)ALEF_HAMZA_BELOW;
-
-+ (jchar)YEH;
-
-+ (jchar)DOTLESS_YEH;
-
-+ (jchar)TEH_MARBUTA;
-
-+ (jchar)HEH;
-
-+ (jchar)TATWEEL;
-
-+ (jchar)FATHATAN;
-
-+ (jchar)DAMMATAN;
-
-+ (jchar)KASRATAN;
-
-+ (jchar)FATHA;
-
-+ (jchar)DAMMA;
-
-+ (jchar)KASRA;
-
-+ (jchar)SHADDA;
-
-+ (jchar)SUKUN;
+@property (readonly, class) jchar ALEF NS_SWIFT_NAME(ALEF);
+@property (readonly, class) jchar ALEF_MADDA NS_SWIFT_NAME(ALEF_MADDA);
+@property (readonly, class) jchar ALEF_HAMZA_ABOVE NS_SWIFT_NAME(ALEF_HAMZA_ABOVE);
+@property (readonly, class) jchar ALEF_HAMZA_BELOW NS_SWIFT_NAME(ALEF_HAMZA_BELOW);
+@property (readonly, class) jchar YEH NS_SWIFT_NAME(YEH);
+@property (readonly, class) jchar DOTLESS_YEH NS_SWIFT_NAME(DOTLESS_YEH);
+@property (readonly, class) jchar TEH_MARBUTA NS_SWIFT_NAME(TEH_MARBUTA);
+@property (readonly, class) jchar HEH NS_SWIFT_NAME(HEH);
+@property (readonly, class) jchar TATWEEL NS_SWIFT_NAME(TATWEEL);
+@property (readonly, class) jchar FATHATAN NS_SWIFT_NAME(FATHATAN);
+@property (readonly, class) jchar DAMMATAN NS_SWIFT_NAME(DAMMATAN);
+@property (readonly, class) jchar KASRATAN NS_SWIFT_NAME(KASRATAN);
+@property (readonly, class) jchar FATHA NS_SWIFT_NAME(FATHA);
+@property (readonly, class) jchar DAMMA NS_SWIFT_NAME(DAMMA);
+@property (readonly, class) jchar KASRA NS_SWIFT_NAME(KASRA);
+@property (readonly, class) jchar SHADDA NS_SWIFT_NAME(SHADDA);
+@property (readonly, class) jchar SUKUN NS_SWIFT_NAME(SUKUN);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Normalize an input buffer of Arabic text
@@ -85,82 +74,86 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisArArabicNormalizer)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_ALEF();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_ALEF(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_ALEF 0x0627
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, ALEF, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_ALEF_MADDA();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_ALEF_MADDA(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_MADDA 0x0622
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, ALEF_MADDA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_ALEF_HAMZA_ABOVE();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_ALEF_HAMZA_ABOVE(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_HAMZA_ABOVE 0x0623
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, ALEF_HAMZA_ABOVE, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_ALEF_HAMZA_BELOW();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_ALEF_HAMZA_BELOW(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_HAMZA_BELOW 0x0625
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, ALEF_HAMZA_BELOW, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_YEH();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_YEH(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_YEH 0x064a
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, YEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_DOTLESS_YEH();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_DOTLESS_YEH(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_DOTLESS_YEH 0x0649
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, DOTLESS_YEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_TEH_MARBUTA();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_TEH_MARBUTA(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_TEH_MARBUTA 0x0629
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, TEH_MARBUTA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_HEH();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_HEH(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_HEH 0x0647
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, HEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_TATWEEL();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_TATWEEL(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_TATWEEL 0x0640
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, TATWEEL, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_FATHATAN();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_FATHATAN(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_FATHATAN 0x064b
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, FATHATAN, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_DAMMATAN();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_DAMMATAN(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_DAMMATAN 0x064c
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, DAMMATAN, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_KASRATAN();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_KASRATAN(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_KASRATAN 0x064d
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, KASRATAN, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_FATHA();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_FATHA(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_FATHA 0x064e
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, FATHA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_DAMMA();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_DAMMA(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_DAMMA 0x064f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, DAMMA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_KASRA();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_KASRA(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_KASRA 0x0650
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, KASRA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_SHADDA();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_SHADDA(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_SHADDA 0x0651
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, SHADDA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_SUKUN();
+inline jchar OrgApacheLuceneAnalysisArArabicNormalizer_get_SUKUN(void);
 #define OrgApacheLuceneAnalysisArArabicNormalizer_SUKUN 0x0652
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicNormalizer, SUKUN, jchar)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisArArabicNormalizer_init(OrgApacheLuceneAnalysisArArabicNormalizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicNormalizer *new_OrgApacheLuceneAnalysisArArabicNormalizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicNormalizer *new_OrgApacheLuceneAnalysisArArabicNormalizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicNormalizer *create_OrgApacheLuceneAnalysisArArabicNormalizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicNormalizer *create_OrgApacheLuceneAnalysisArArabicNormalizer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisArArabicNormalizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizer")

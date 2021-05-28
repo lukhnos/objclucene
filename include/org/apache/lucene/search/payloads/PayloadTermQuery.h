@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadTermQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPayloadsPayloadTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadTermQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadTermQuery))
 #define OrgApacheLuceneSearchPayloadsPayloadTermQuery_
 
@@ -21,22 +27,23 @@
 #include "org/apache/lucene/search/spans/SpanTermQuery.h"
 
 @class OrgApacheLuceneIndexTerm;
+@class OrgApacheLuceneIndexTermContext;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchPayloadsPayloadFunction;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 
 /*!
- @brief This class is very similar to
+ @brief This class is very similar to 
  <code>org.apache.lucene.search.spans.SpanTermQuery</code> except that it factors
- in the value of the payload located at each of the positions where the
+  in the value of the payload located at each of the positions where the 
  <code>org.apache.lucene.index.Term</code> occurs.
  <p>
- NOTE: In order to take advantage of this with the default scoring implementation
- (<code>DefaultSimilarity</code>), you must override <code>DefaultSimilarity.scorePayload(int,int,int,BytesRef)</code>,
- which returns 1 by default.
+  NOTE: In order to take advantage of this with the default scoring implementation
+  (<code>DefaultSimilarity</code>), you must override <code>DefaultSimilarity.scorePayload(int, int, int, BytesRef)</code>,
+  which returns 1 by default. 
  <p>
- Payload scores are aggregated using a pluggable <code>PayloadFunction</code>.
- - seealso: org.apache.lucene.search.similarities.Similarity.SimScorer#computePayloadFactor(int,int,int,BytesRef)
+  Payload scores are aggregated using a pluggable <code>PayloadFunction</code>.
+ - seealso: org.apache.lucene.search.similarities.Similarity.SimScorer#computePayloadFactor(int, int, int, BytesRef)
  */
 @interface OrgApacheLuceneSearchPayloadsPayloadTermQuery : OrgApacheLuceneSearchSpansSpanTermQuery {
  @public
@@ -45,12 +52,12 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+          withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function;
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function
-                                     withBoolean:(jboolean)includeSpanScore;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+          withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function
+                                               withBoolean:(jboolean)includeSpanScore;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -58,6 +65,13 @@ withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsP
 - (jboolean)isEqual:(id)obj;
 
 - (NSUInteger)hash;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                       withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -81,4 +95,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadTermQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadTermQuery")

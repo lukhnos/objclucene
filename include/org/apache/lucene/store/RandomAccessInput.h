@@ -13,15 +13,21 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreRandomAccessInput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreRandomAccessInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreRandomAccessInput || defined(INCLUDE_OrgApacheLuceneStoreRandomAccessInput))
 #define OrgApacheLuceneStoreRandomAccessInput_
 
 /*!
  @brief Random Access Index API.
  Unlike <code>IndexInput</code>, this has no concept of file position, all reads
- are absolute. However, like IndexInput, it is only intended for use by a single thread.
+  are absolute. However, like IndexInput, it is only intended for use by a single thread.
  */
-@protocol OrgApacheLuceneStoreRandomAccessInput < NSObject, JavaObject >
+@protocol OrgApacheLuceneStoreRandomAccessInput < JavaObject >
 
 /*!
  @brief Reads a byte at the given position in the file
@@ -55,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRandomAccessInput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRandomAccessInput")

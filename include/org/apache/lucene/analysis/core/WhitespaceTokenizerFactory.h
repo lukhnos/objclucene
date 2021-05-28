@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory))
 #define OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_
 
@@ -27,11 +33,11 @@
 /*!
  @brief Factory for <code>WhitespaceTokenizer</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_ws" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_ws" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
@@ -41,7 +47,7 @@
 /*!
  @brief Creates a new WhitespaceTokenizerFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
@@ -59,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory")

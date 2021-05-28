@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlCoreParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlCoreParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlCoreParser || defined(INCLUDE_OrgApacheLuceneQueryparserXmlCoreParser))
 #define OrgApacheLuceneQueryparserXmlCoreParser_
 
@@ -39,27 +45,24 @@
   OrgApacheLuceneQueryparserXmlQueryBuilderFactory *queryFactory_;
   OrgApacheLuceneQueryparserXmlFilterBuilderFactory *filterFactory_;
 }
-
-+ (jint)maxNumCachedFilters;
-
-+ (void)setMaxNumCachedFilters:(jint)value;
+@property (class) jint maxNumCachedFilters NS_SWIFT_NAME(maxNumCachedFilters);
 
 #pragma mark Public
 
 /*!
  @brief Construct an XML parser that uses a single instance QueryParser for handling
- UserQuery tags - all parse operations are synchronised on this parser
+  UserQuery tags - all parse operations are synchronised on this parser
  @param parser A QueryParser which will be synchronized on during parse calls.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-       withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                 withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser;
 
 /*!
  @brief Constructs an XML parser that creates a QueryParser for each UserQuery request.
  @param defaultField The default field name used by QueryParsers constructed for UserQuery tags
  */
-- (instancetype)initWithNSString:(NSString *)defaultField
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithNSString:(NSString *)defaultField
+       withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 - (void)addFilterBuilderWithNSString:(NSString *)nodeName
 withOrgApacheLuceneQueryparserXmlFilterBuilder:(id<OrgApacheLuceneQueryparserXmlFilterBuilder>)builder;
@@ -73,9 +76,13 @@ withOrgApacheLuceneQueryparserXmlQueryBuilder:(id<OrgApacheLuceneQueryparserXmlQ
 
 #pragma mark Protected
 
-- (instancetype)initWithNSString:(NSString *)defaultField
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+- (instancetype __nonnull)initWithNSString:(NSString *)defaultField
+       withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
 withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -86,9 +93,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlCoreParser, parser_, OrgApacheL
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlCoreParser, queryFactory_, OrgApacheLuceneQueryparserXmlQueryBuilderFactory *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlCoreParser, filterFactory_, OrgApacheLuceneQueryparserXmlFilterBuilderFactory *)
 
-inline jint OrgApacheLuceneQueryparserXmlCoreParser_get_maxNumCachedFilters();
+inline jint OrgApacheLuceneQueryparserXmlCoreParser_get_maxNumCachedFilters(void);
 inline jint OrgApacheLuceneQueryparserXmlCoreParser_set_maxNumCachedFilters(jint value);
-inline jint *OrgApacheLuceneQueryparserXmlCoreParser_getRef_maxNumCachedFilters();
+inline jint *OrgApacheLuceneQueryparserXmlCoreParser_getRef_maxNumCachedFilters(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters;
 J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneQueryparserXmlCoreParser, maxNumCachedFilters, jint)
@@ -115,4 +122,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlCoreParser)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlCoreParser")

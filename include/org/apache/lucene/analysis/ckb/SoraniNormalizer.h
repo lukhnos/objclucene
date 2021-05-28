@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCkbSoraniNormalizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCkbSoraniNormalizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniNormalizer || defined(INCLUDE_OrgApacheLuceneAnalysisCkbSoraniNormalizer))
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_
 
@@ -21,65 +27,43 @@
 /*!
  @brief Normalizes the Unicode representation of Sorani text.
  <p>
- Normalization consists of:
+  Normalization consists of: 
  <ul>
- <li>Alternate forms of 'y' (0064, 0649) are converted to 06CC (FARSI YEH)
- <li>Alternate form of 'k' (0643) is converted to 06A9 (KEHEH)
- <li>Alternate forms of vowel 'e' (0647+200C, word-final 0647, 0629) are converted to 06D5 (AE)
- <li>Alternate (joining) form of 'h' (06BE) is converted to 0647
- <li>Alternate forms of 'rr' (0692, word-initial 0631) are converted to 0695 (REH WITH SMALL V BELOW)
- <li>Harakat, tatweel, and formatting characters such as directional controls are removed.
+    <li>Alternate forms of 'y' (0064, 0649) are converted to 06CC (FARSI YEH)
+    <li>Alternate form of 'k' (0643) is converted to 06A9 (KEHEH)
+    <li>Alternate forms of vowel 'e' (0647+200C, word-final 0647, 0629) are converted to 06D5 (AE)
+    <li>Alternate (joining) form of 'h' (06BE) is converted to 0647
+    <li>Alternate forms of 'rr' (0692, word-initial 0631) are converted to 0695 (REH WITH SMALL V BELOW)
+    <li>Harakat, tatweel, and formatting characters such as directional controls are removed. 
  </ul>
  */
 @interface OrgApacheLuceneAnalysisCkbSoraniNormalizer : NSObject
-
-+ (jchar)YEH;
-
-+ (jchar)DOTLESS_YEH;
-
-+ (jchar)FARSI_YEH;
-
-+ (jchar)KAF;
-
-+ (jchar)KEHEH;
-
-+ (jchar)HEH;
-
-+ (jchar)AE;
-
-+ (jchar)ZWNJ;
-
-+ (jchar)HEH_DOACHASHMEE;
-
-+ (jchar)TEH_MARBUTA;
-
-+ (jchar)REH;
-
-+ (jchar)RREH;
-
-+ (jchar)RREH_ABOVE;
-
-+ (jchar)TATWEEL;
-
-+ (jchar)FATHATAN;
-
-+ (jchar)DAMMATAN;
-
-+ (jchar)KASRATAN;
-
-+ (jchar)FATHA;
-
-+ (jchar)DAMMA;
-
-+ (jchar)KASRA;
-
-+ (jchar)SHADDA;
-
-+ (jchar)SUKUN;
+@property (readonly, class) jchar YEH NS_SWIFT_NAME(YEH);
+@property (readonly, class) jchar DOTLESS_YEH NS_SWIFT_NAME(DOTLESS_YEH);
+@property (readonly, class) jchar FARSI_YEH NS_SWIFT_NAME(FARSI_YEH);
+@property (readonly, class) jchar KAF NS_SWIFT_NAME(KAF);
+@property (readonly, class) jchar KEHEH NS_SWIFT_NAME(KEHEH);
+@property (readonly, class) jchar HEH NS_SWIFT_NAME(HEH);
+@property (readonly, class) jchar AE NS_SWIFT_NAME(AE);
+@property (readonly, class) jchar ZWNJ NS_SWIFT_NAME(ZWNJ);
+@property (readonly, class) jchar HEH_DOACHASHMEE NS_SWIFT_NAME(HEH_DOACHASHMEE);
+@property (readonly, class) jchar TEH_MARBUTA NS_SWIFT_NAME(TEH_MARBUTA);
+@property (readonly, class) jchar REH NS_SWIFT_NAME(REH);
+@property (readonly, class) jchar RREH NS_SWIFT_NAME(RREH);
+@property (readonly, class) jchar RREH_ABOVE NS_SWIFT_NAME(RREH_ABOVE);
+@property (readonly, class) jchar TATWEEL NS_SWIFT_NAME(TATWEEL);
+@property (readonly, class) jchar FATHATAN NS_SWIFT_NAME(FATHATAN);
+@property (readonly, class) jchar DAMMATAN NS_SWIFT_NAME(DAMMATAN);
+@property (readonly, class) jchar KASRATAN NS_SWIFT_NAME(KASRATAN);
+@property (readonly, class) jchar FATHA NS_SWIFT_NAME(FATHA);
+@property (readonly, class) jchar DAMMA NS_SWIFT_NAME(DAMMA);
+@property (readonly, class) jchar KASRA NS_SWIFT_NAME(KASRA);
+@property (readonly, class) jchar SHADDA NS_SWIFT_NAME(SHADDA);
+@property (readonly, class) jchar SUKUN NS_SWIFT_NAME(SUKUN);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Normalize an input buffer of Sorani text
@@ -94,102 +78,106 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCkbSoraniNormalizer)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_YEH();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_YEH(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_YEH 0x064a
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, YEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_DOTLESS_YEH();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_DOTLESS_YEH(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_DOTLESS_YEH 0x0649
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, DOTLESS_YEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_FARSI_YEH();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_FARSI_YEH(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_FARSI_YEH 0x06cc
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, FARSI_YEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_KAF();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_KAF(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_KAF 0x0643
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, KAF, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_KEHEH();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_KEHEH(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_KEHEH 0x06a9
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, KEHEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_HEH();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_HEH(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH 0x0647
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, HEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_AE();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_AE(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_AE 0x06d5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, AE, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_ZWNJ();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_ZWNJ(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_ZWNJ 0x200c
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, ZWNJ, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_HEH_DOACHASHMEE();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_HEH_DOACHASHMEE(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH_DOACHASHMEE 0x06be
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, HEH_DOACHASHMEE, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_TEH_MARBUTA();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_TEH_MARBUTA(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_TEH_MARBUTA 0x0629
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, TEH_MARBUTA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_REH();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_REH(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_REH 0x0631
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, REH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_RREH();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_RREH(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH 0x0695
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, RREH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_RREH_ABOVE();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_RREH_ABOVE(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH_ABOVE 0x0692
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, RREH_ABOVE, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_TATWEEL();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_TATWEEL(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_TATWEEL 0x0640
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, TATWEEL, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_FATHATAN();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_FATHATAN(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_FATHATAN 0x064b
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, FATHATAN, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_DAMMATAN();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_DAMMATAN(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_DAMMATAN 0x064c
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, DAMMATAN, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_KASRATAN();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_KASRATAN(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_KASRATAN 0x064d
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, KASRATAN, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_FATHA();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_FATHA(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_FATHA 0x064e
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, FATHA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_DAMMA();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_DAMMA(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_DAMMA 0x064f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, DAMMA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_KASRA();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_KASRA(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_KASRA 0x0650
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, KASRA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_SHADDA();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_SHADDA(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_SHADDA 0x0651
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, SHADDA, jchar)
 
-inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_SUKUN();
+inline jchar OrgApacheLuceneAnalysisCkbSoraniNormalizer_get_SUKUN(void);
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_SUKUN 0x0652
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCkbSoraniNormalizer, SUKUN, jchar)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCkbSoraniNormalizer_init(OrgApacheLuceneAnalysisCkbSoraniNormalizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniNormalizer *new_OrgApacheLuceneAnalysisCkbSoraniNormalizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniNormalizer *new_OrgApacheLuceneAnalysisCkbSoraniNormalizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniNormalizer *create_OrgApacheLuceneAnalysisCkbSoraniNormalizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniNormalizer *create_OrgApacheLuceneAnalysisCkbSoraniNormalizer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCkbSoraniNormalizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniNormalizer")

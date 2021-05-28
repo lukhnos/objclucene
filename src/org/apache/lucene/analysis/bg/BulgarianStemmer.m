@@ -8,6 +8,10 @@
 #include "org/apache/lucene/analysis/bg/BulgarianStemmer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/bg/BulgarianStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisBgBulgarianStemmer ()
 
 /*!
@@ -29,6 +33,13 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisBgBulgarianStemmer_re
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisBgBulgarianStemmer_removePluralWithCharArray_withInt_(OrgApacheLuceneAnalysisBgBulgarianStemmer *self, IOSCharArray *s, jint len);
 
 @implementation OrgApacheLuceneAnalysisBgBulgarianStemmer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisBgBulgarianStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -61,25 +72,39 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisBgBulgarianStemmer_re
   return OrgApacheLuceneAnalysisBgBulgarianStemmer_removePluralWithCharArray_withInt_(self, s, len);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisBgBulgarianStemmer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "removeArticleWithCharArray:withInt:", "removeArticle", "I", 0x2, NULL, NULL },
-    { "removePluralWithCharArray:withInt:", "removePlural", "I", 0x2, NULL, NULL },
-    { "init", "BulgarianStemmer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisBgBulgarianStemmer = { 2, "BulgarianStemmer", "org.apache.lucene.analysis.bg", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  methods[2].selector = @selector(removeArticleWithCharArray:withInt:);
+  methods[3].selector = @selector(removePluralWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "stem", "[CI", "removeArticle", "removePlural" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisBgBulgarianStemmer = { "BulgarianStemmer", "org.apache.lucene.analysis.bg", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisBgBulgarianStemmer;
 }
 
 @end
+
+void OrgApacheLuceneAnalysisBgBulgarianStemmer_init(OrgApacheLuceneAnalysisBgBulgarianStemmer *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneAnalysisBgBulgarianStemmer *new_OrgApacheLuceneAnalysisBgBulgarianStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisBgBulgarianStemmer, init)
+}
+
+OrgApacheLuceneAnalysisBgBulgarianStemmer *create_OrgApacheLuceneAnalysisBgBulgarianStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisBgBulgarianStemmer, init)
+}
 
 jint OrgApacheLuceneAnalysisBgBulgarianStemmer_removeArticleWithCharArray_withInt_(OrgApacheLuceneAnalysisBgBulgarianStemmer *self, IOSCharArray *s, jint len) {
   if (len > 6 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u0438\u044f\u0442")) return len - 3;
@@ -123,18 +148,6 @@ jint OrgApacheLuceneAnalysisBgBulgarianStemmer_removePluralWithCharArray_withInt
     if (OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u0438")) return len - 1;
   }
   return len;
-}
-
-void OrgApacheLuceneAnalysisBgBulgarianStemmer_init(OrgApacheLuceneAnalysisBgBulgarianStemmer *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneAnalysisBgBulgarianStemmer *new_OrgApacheLuceneAnalysisBgBulgarianStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisBgBulgarianStemmer, init)
-}
-
-OrgApacheLuceneAnalysisBgBulgarianStemmer *create_OrgApacheLuceneAnalysisBgBulgarianStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisBgBulgarianStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisBgBulgarianStemmer)

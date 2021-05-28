@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory))
 #define OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_
 
@@ -29,27 +35,26 @@
 /*!
  @brief Factory for <code>HTMLStripCharFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_html" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;charFilter class="solr.HTMLStripCharFilterFactory" escapedTags="a, title" /&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_html" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;charFilter class="solr.HTMLStripCharFilterFactory" escapedTags="a, title" /&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory : OrgApacheLuceneAnalysisUtilCharFilterFactory {
  @public
   id<JavaUtilSet> escapedTags_;
 }
-
-+ (JavaUtilRegexPattern *)TAG_NAME_PATTERN;
+@property (readonly, class, strong) JavaUtilRegexPattern *TAG_NAME_PATTERN NS_SWIFT_NAME(TAG_NAME_PATTERN);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new HTMLStripCharFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *)createWithJavaIoReader:(JavaIoReader *)input;
 
@@ -59,7 +64,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory, escapedTags_, id<JavaUtilSet>)
 
-inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_get_TAG_NAME_PATTERN();
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_get_TAG_NAME_PATTERN(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory, TAG_NAME_PATTERN, JavaUtilRegexPattern *)
@@ -74,4 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterF
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory")

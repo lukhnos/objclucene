@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/PrintStreamInfoStream.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/PrintStream.h"
 #include "java/lang/System.h"
 #include "java/lang/Thread.h"
@@ -14,7 +12,11 @@
 #include "org/apache/lucene/util/PrintStreamInfoStream.h"
 #include "org/lukhnos/portmobile/file/attribute/FileTime.h"
 
-inline JavaUtilConcurrentAtomicAtomicInteger *OrgApacheLuceneUtilPrintStreamInfoStream_get_MESSAGE_ID();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/PrintStreamInfoStream must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline JavaUtilConcurrentAtomicAtomicInteger *OrgApacheLuceneUtilPrintStreamInfoStream_get_MESSAGE_ID(void);
 static JavaUtilConcurrentAtomicAtomicInteger *OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilPrintStreamInfoStream, MESSAGE_ID, JavaUtilConcurrentAtomicAtomicInteger *)
 
@@ -49,7 +51,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPrintStreamInfoStream)
 }
 
 - (jboolean)isSystemStream {
-  return stream_ == JreLoadStatic(JavaLangSystem, out) || stream_ == JreLoadStatic(JavaLangSystem, err);
+  return JreObjectEqualsEquals(stream_, JreLoadStatic(JavaLangSystem, out)) || JreObjectEqualsEquals(stream_, JreLoadStatic(JavaLangSystem, err));
 }
 
 - (NSString *)getTimestamp {
@@ -61,30 +63,42 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPrintStreamInfoStream)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 6, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaIoPrintStream:);
+  methods[1].selector = @selector(initWithJavaIoPrintStream:withInt:);
+  methods[2].selector = @selector(messageWithNSString:withNSString:);
+  methods[3].selector = @selector(isEnabledWithNSString:);
+  methods[4].selector = @selector(close);
+  methods[5].selector = @selector(isSystemStream);
+  methods[6].selector = @selector(getTimestamp);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "MESSAGE_ID", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x1a, -1, 7, -1, -1 },
+    { "messageID_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "stream_", "LJavaIoPrintStream;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LJavaIoPrintStream;", "LJavaIoPrintStream;I", "message", "LNSString;LNSString;", "isEnabled", "LNSString;", "LJavaIoIOException;", &OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPrintStreamInfoStream = { "PrintStreamInfoStream", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 7, 3, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilPrintStreamInfoStream;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPrintStreamInfoStream class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID, new_JavaUtilConcurrentAtomicAtomicInteger_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPrintStreamInfoStream)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaIoPrintStream:", "PrintStreamInfoStream", NULL, 0x1, NULL, NULL },
-    { "initWithJavaIoPrintStream:withInt:", "PrintStreamInfoStream", NULL, 0x1, NULL, NULL },
-    { "messageWithNSString:withNSString:", "message", "V", 0x1, NULL, NULL },
-    { "isEnabledWithNSString:", "isEnabled", "Z", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "isSystemStream", NULL, "Z", 0x1, NULL, NULL },
-    { "getTimestamp", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "MESSAGE_ID", "MESSAGE_ID", 0x1a, "Ljava.util.concurrent.atomic.AtomicInteger;", &OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID, NULL, .constantValue.asLong = 0 },
-    { "messageID_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "stream_", NULL, 0x14, "Ljava.io.PrintStream;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPrintStreamInfoStream = { 2, "PrintStreamInfoStream", "org.apache.lucene.util", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilPrintStreamInfoStream;
 }
 
 @end

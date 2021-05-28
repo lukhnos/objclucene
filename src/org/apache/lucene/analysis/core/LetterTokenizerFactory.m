@@ -11,6 +11,10 @@
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/LetterTokenizerFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisCoreLetterTokenizerFactory
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
@@ -23,11 +27,18 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "LetterTokenizerFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.core.LetterTokenizer;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCoreLetterTokenizer;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLetterTokenizerFactory = { 2, "LetterTokenizerFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneUtilAttributeFactory:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LOrgApacheLuceneUtilAttributeFactory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLetterTokenizerFactory = { "LetterTokenizerFactory", "org.apache.lucene.analysis.core", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory;
 }
 

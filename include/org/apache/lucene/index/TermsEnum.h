@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexTermsEnum))
 #define OrgApacheLuceneIndexTermsEnum_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneUtilBytesRefIterator 1
 #include "org/apache/lucene/util/BytesRefIterator.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexDocsAndPositionsEnum;
 @class OrgApacheLuceneIndexDocsEnum;
 @class OrgApacheLuceneIndexPostingsEnum;
@@ -38,17 +43,16 @@
   for the current term (<code>postings</code>
  .
  <p>Term enumerations are always ordered by
- BytesRef.compareTo, which is Unicode sort
- order if the terms are UTF-8 bytes.  Each term in the
- enumeration is greater than the one before it.</p>
- <p>The TermsEnum is unpositioned when you first obtain it
- and you must first successfully call <code>next</code> or one
- of the <code>seek</code> methods.
+  BytesRef.compareTo, which is Unicode sort
+  order if the terms are UTF-8 bytes.  Each term in the
+  enumeration is greater than the one before it.</p>
   
+ <p>The TermsEnum is unpositioned when you first obtain it
+  and you must first successfully call <code>next</code> or one
+  of the <code>seek</code> methods.
  */
 @interface OrgApacheLuceneIndexTermsEnum : NSObject < OrgApacheLuceneUtilBytesRefIterator >
-
-+ (OrgApacheLuceneIndexTermsEnum *)EMPTY;
+@property (readonly, class, strong) OrgApacheLuceneIndexTermsEnum *EMPTY NS_SWIFT_NAME(EMPTY);
 
 #pragma mark Public
 
@@ -59,19 +63,17 @@
 
 /*!
  @brief Returns the number of documents containing the current
- term.
- Do not call this when the enum is unpositioned.
+   term.Do not call this when the enum is unpositioned.
  <code>SeekStatus.END</code>.
  */
 - (jint)docFreq;
 
 /*!
- @brief Get <code>DocsEnum</code> for the current term.
- Do not
- call this when the enum is unpositioned.  This method
- will not return null.
- @param liveDocs unset bits are documents that should not
- be returned
+ @brief Get <code>DocsEnum</code> for the current term.Do not
+   call this when the enum is unpositioned.
+ This method
+   will not return null.
+ @param liveDocs unset bits are documents that should not  be returned
  @param reuse pass a prior DocsEnum for possible reuse
  */
 - (OrgApacheLuceneIndexDocsEnum *)docsWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
@@ -79,16 +81,15 @@
 
 /*!
  @brief Get <code>DocsEnum</code> for the current term, with
- control over whether freqs are required.
- Do not
- call this when the enum is unpositioned.  This method
- will not return null.
- @param liveDocs unset bits are documents that should not
- be returned
+   control over whether freqs are required.Do not
+   call this when the enum is unpositioned.
+ This method
+   will not return null.
+ @param liveDocs unset bits are documents that should not  be returned
  @param reuse pass a prior DocsEnum for possible reuse
- @param flags specifies which optional per-document values
- you require; see <code>DocsEnum.FLAG_FREQS</code>
- - seealso: #docs(Bits,DocsEnum,int)
+ @param flags specifies which optional per-document values         you require; see 
+ <code>DocsEnum.FLAG_FREQS</code>
+ - seealso: #docs(Bits, DocsEnum, int)
  */
 - (OrgApacheLuceneIndexDocsEnum *)docsWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
                                  withOrgApacheLuceneIndexDocsEnum:(OrgApacheLuceneIndexDocsEnum *)reuse
@@ -97,118 +98,115 @@
 /*!
  @brief Get <code>DocsAndPositionsEnum</code> for the current term.
  Do not call this when the enum is unpositioned.  This
- method will return null if positions were not
- indexed.
- @param liveDocs unset bits are documents that should not
- be returned
+   method will return null if positions were not
+   indexed.
+ @param liveDocs unset bits are documents that should not   be returned
  @param reuse pass a prior DocsAndPositionsEnum for possible reuse
- - seealso: #docsAndPositions(Bits,DocsAndPositionsEnum,int)
+ - seealso: #docsAndPositions(Bits, DocsAndPositionsEnum, int)
  */
 - (OrgApacheLuceneIndexDocsAndPositionsEnum *)docsAndPositionsWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
                                              withOrgApacheLuceneIndexDocsAndPositionsEnum:(OrgApacheLuceneIndexDocsAndPositionsEnum *)reuse;
 
 /*!
  @brief Get <code>DocsAndPositionsEnum</code> for the current term,
- with control over whether offsets and payloads are
- required.
- Some codecs may be able to optimize their
- implementation when offsets and/or payloads are not required.
+   with control over whether offsets and payloads are
+   required.Some codecs may be able to optimize their
+   implementation when offsets and/or payloads are not required.
  Do not call this when the enum is unpositioned.  This
- will return null if positions were not indexed.
- @param liveDocs unset bits are documents that should not
- be returned
+   will return null if positions were not indexed.
+ @param liveDocs unset bits are documents that should not   be returned
  @param reuse pass a prior DocsAndPositionsEnum for possible reuse
- @param flags specifies which optional per-position values you
- require; see <code>DocsAndPositionsEnum.FLAG_OFFSETS</code> and 
- <code>DocsAndPositionsEnum.FLAG_PAYLOADS</code>.
+ @param flags specifies which optional per-position values you          require; see 
+ <code>DocsAndPositionsEnum.FLAG_OFFSETS</code>  and           
+ <code>DocsAndPositionsEnum.FLAG_PAYLOADS</code> .
  */
 - (OrgApacheLuceneIndexDocsAndPositionsEnum *)docsAndPositionsWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
                                              withOrgApacheLuceneIndexDocsAndPositionsEnum:(OrgApacheLuceneIndexDocsAndPositionsEnum *)reuse
                                                                                   withInt:(jint)flags;
 
 /*!
- @brief Returns ordinal position for current term.
- This is an
- optional method (the codec may throw <code>UnsupportedOperationException</code>
- ).  Do not call this
- when the enum is unpositioned. 
+ @brief Returns ordinal position for current term.This is an
+   optional method (the codec may throw <code>UnsupportedOperationException</code>
+ ).
+ Do not call this
+   when the enum is unpositioned.
  */
 - (jlong)ord;
 
 /*!
- @brief Get <code>PostingsEnum</code> for the current term.
- Do not
- call this when the enum is unpositioned.  This method
- will not return null.
+ @brief Get <code>PostingsEnum</code> for the current term.Do not
+   call this when the enum is unpositioned.
+ This method
+   will not return null.  
  <p>
- <b>NOTE</b>: the returned iterator may return deleted documents, so
- deleted documents have to be checked on top of the <code>PostingsEnum</code>.
- <p>
- Use this method if you only require documents and frequencies,
- and do not need any proximity data.
- This method is equivalent to 
+   <b>NOTE</b>: the returned iterator may return deleted documents, so
+   deleted documents have to be checked on top of the <code>PostingsEnum</code>.
+   <p>
+   Use this method if you only require documents and frequencies,
+   and do not need any proximity data.
+   This method is equivalent to   
  <code>postings(reuse, PostingsEnum.FREQS)</code>
  @param reuse pass a prior PostingsEnum for possible reuse
- - seealso: #postings(PostingsEnum,int)
+ - seealso: #postings(PostingsEnum, int)
  */
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse;
 
 /*!
  @brief Get <code>PostingsEnum</code> for the current term, with
- control over whether freqs, positions, offsets or payloads
- are required.
- Do not call this when the enum is
- unpositioned.  This method may return null if the postings
- information required is not available from the index
+   control over whether freqs, positions, offsets or payloads
+   are required.Do not call this when the enum is
+   unpositioned.
+ This method may return null if the postings
+   information required is not available from the index  
  <p>
- <b>NOTE</b>: the returned iterator may return deleted documents, so
- deleted documents have to be checked on top of the <code>PostingsEnum</code>.
+   <b>NOTE</b>: the returned iterator may return deleted documents, so
+   deleted documents have to be checked on top of the <code>PostingsEnum</code>.
  @param reuse pass a prior PostingsEnum for possible reuse
- @param flags specifies which optional per-document values
- you require; see <code>PostingsEnum.FREQS</code>
+ @param flags specifies which optional per-document values         you require; see 
+ <code>PostingsEnum.FREQS</code>
  */
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags;
 
 /*!
  @brief Seeks to the specified term, if it exists, or to the
- next (ceiling) term.
- Returns SeekStatus to
- indicate whether exact term was found, a different
- term was found, or EOF was hit.  The target term may
- be before or after the current term.  If this returns
- SeekStatus.END, the enum is unpositioned. 
+   next (ceiling) term.Returns SeekStatus to
+   indicate whether exact term was found, a different
+   term was found, or EOF was hit.
+ The target term may
+   be before or after the current term.  If this returns
+   SeekStatus.END, the enum is unpositioned.
  */
 - (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
 /*!
  @brief Attempts to seek to the exact term, returning
- true if the term is found.
- If this returns false, the
- enum is unpositioned.  For some codecs, seekExact may
- be substantially faster than <code>seekCeil</code>. 
+   true if the term is found.If this returns false, the
+   enum is unpositioned.
+ For some codecs, seekExact may
+   be substantially faster than <code>seekCeil</code>.
  */
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
 /*!
  @brief Expert: Seeks a specific position by <code>TermState</code> previously obtained
- from <code>termState()</code>.
- Callers should maintain the <code>TermState</code> to
- use this method. Low-level implementations may position the TermsEnum
- without re-seeking the term dictionary.
+  from <code>termState()</code>.Callers should maintain the <code>TermState</code> to
+  use this method.
+ Low-level implementations may position the TermsEnum
+  without re-seeking the term dictionary. 
  <p>
- Seeking by <code>TermState</code> should only be used iff the state was obtained 
- from the same <code>TermsEnum</code> instance. 
+  Seeking by <code>TermState</code> should only be used iff the state was obtained 
+  from the same <code>TermsEnum</code> instance.  
  <p>
- NOTE: Using this method with an incompatible <code>TermState</code> might leave
- this <code>TermsEnum</code> in undefined state. On a segment level
+  NOTE: Using this method with an incompatible <code>TermState</code> might leave
+  this <code>TermsEnum</code> in undefined state. On a segment level 
  <code>TermState</code> instances are compatible only iff the source and the
- target <code>TermsEnum</code> operate on the same field. If operating on segment
- level, TermState instances must not be used across segments.
+  target <code>TermsEnum</code> operate on the same field. If operating on segment
+  level, TermState instances must not be used across segments. 
  <p>
- NOTE: A seek by <code>TermState</code> might not restore the
+  NOTE: A seek by <code>TermState</code> might not restore the 
  <code>AttributeSource</code>'s state. <code>AttributeSource</code> states must be
- maintained separately if this method is used.
+  maintained separately if this method is used.
  @param term the term the TermState corresponds to
  @param state the <code>TermState</code>
  */
@@ -217,40 +215,38 @@
 
 /*!
  @brief Seeks to the specified term by ordinal (position) as
- previously returned by <code>ord</code>.
- The target ord
- may be before or after the current ord, and must be
- within bounds. 
+   previously returned by <code>ord</code>.The target ord
+   may be before or after the current ord, and must be
+   within bounds.
  */
 - (void)seekExactWithLong:(jlong)ord;
 
 /*!
- @brief Returns current term.
- Do not call this when the enum
- is unpositioned. 
+ @brief Returns current term.Do not call this when the enum
+   is unpositioned.
  */
 - (OrgApacheLuceneUtilBytesRef *)term;
 
 /*!
  @brief Expert: Returns the TermsEnums internal state to position the TermsEnum
- without re-seeking the term dictionary.
+  without re-seeking the term dictionary.
  <p>
- NOTE: A seek by <code>TermState</code> might not capture the
- <code>AttributeSource</code>'s state. Callers must maintain the
+  NOTE: A seek by <code>TermState</code> might not capture the 
+ <code>AttributeSource</code>'s state. Callers must maintain the 
  <code>AttributeSource</code> states separately
  - seealso: TermState
- - seealso: #seekExact(BytesRef,TermState)
+ - seealso: #seekExact(BytesRef, TermState)
  */
 - (OrgApacheLuceneIndexTermState *)termState;
 
 /*!
  @brief Returns the total number of occurrences of this term
- across all documents (the sum of the freq() for each
- doc that has this term).
- This will be -1 if the
- codec doesn't support this measure.  Note that, like
- other term measures, this measure does not take
- deleted documents into account. 
+   across all documents (the sum of the freq() for each
+   doc that has this term).This will be -1 if the
+   codec doesn't support this measure.
+ Note that, like
+   other term measures, this measure does not take
+   deleted documents into account.
  */
 - (jlong)totalTermFreq;
 
@@ -259,9 +255,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -270,12 +266,12 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexTermsEnum)
 /*!
  @brief An empty TermsEnum for quickly returning an empty instance e.g.
  in <code>org.apache.lucene.search.MultiTermQuery</code>
- <p><em>Please note:</em> This enum should be unmodifiable,
- but it is currently possible to add Attributes to it.
- This should not be a problem, as the enum is always empty and
- the existence of unused Attributes does not matter.
+  <p><em>Please note:</em> This enum should be unmodifiable,
+  but it is currently possible to add Attributes to it.
+  This should not be a problem, as the enum is always empty and
+  the existence of unused Attributes does not matter.
  */
-inline OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneIndexTermsEnum_get_EMPTY();
+inline OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneIndexTermsEnum_get_EMPTY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneIndexTermsEnum_EMPTY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexTermsEnum, EMPTY, OrgApacheLuceneIndexTermsEnum *)
@@ -293,6 +289,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermsEnum)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexTermsEnum_SeekStatus_Enum) {
   OrgApacheLuceneIndexTermsEnum_SeekStatus_Enum_END = 0,
   OrgApacheLuceneIndexTermsEnum_SeekStatus_Enum_FOUND = 1,
@@ -302,21 +300,19 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexTermsEnum_SeekStatus_Enum) {
 /*!
  @brief Represents returned result from <code>seekCeil</code>.
  */
-@interface OrgApacheLuceneIndexTermsEnum_SeekStatus : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneIndexTermsEnum_SeekStatus : JavaLangEnum
 
-+ (OrgApacheLuceneIndexTermsEnum_SeekStatus *)END;
-
-+ (OrgApacheLuceneIndexTermsEnum_SeekStatus *)FOUND;
-
-+ (OrgApacheLuceneIndexTermsEnum_SeekStatus *)NOT_FOUND;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneIndexTermsEnum_SeekStatus *END NS_SWIFT_NAME(END);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexTermsEnum_SeekStatus *FOUND NS_SWIFT_NAME(FOUND);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexTermsEnum_SeekStatus *NOT_FOUND NS_SWIFT_NAME(NOT_FOUND);
+#pragma mark Public
 
 + (OrgApacheLuceneIndexTermsEnum_SeekStatus *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneIndexTermsEnum_SeekStatus_Enum)toNSEnum;
 
 @end
@@ -329,22 +325,22 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexTermsEnum_SeekStatus *OrgApacheLuceneIndex
 /*!
  @brief The term was not found, and the end of iteration was hit.
  */
-inline OrgApacheLuceneIndexTermsEnum_SeekStatus *OrgApacheLuceneIndexTermsEnum_SeekStatus_get_END();
+inline OrgApacheLuceneIndexTermsEnum_SeekStatus *OrgApacheLuceneIndexTermsEnum_SeekStatus_get_END(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexTermsEnum_SeekStatus, END)
 
 /*!
  @brief The precise term was found.
  */
-inline OrgApacheLuceneIndexTermsEnum_SeekStatus *OrgApacheLuceneIndexTermsEnum_SeekStatus_get_FOUND();
+inline OrgApacheLuceneIndexTermsEnum_SeekStatus *OrgApacheLuceneIndexTermsEnum_SeekStatus_get_FOUND(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND)
 
 /*!
  @brief A different term was found after the requested term
  */
-inline OrgApacheLuceneIndexTermsEnum_SeekStatus *OrgApacheLuceneIndexTermsEnum_SeekStatus_get_NOT_FOUND();
+inline OrgApacheLuceneIndexTermsEnum_SeekStatus *OrgApacheLuceneIndexTermsEnum_SeekStatus_get_NOT_FOUND(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexTermsEnum_SeekStatus, NOT_FOUND)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexTermsEnum_SeekStatus_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexTermsEnum_SeekStatus_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexTermsEnum_SeekStatus *OrgApacheLuceneIndexTermsEnum_SeekStatus_valueOfWithNSString_(NSString *name);
 
@@ -354,4 +350,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermsEnum_SeekStatus)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermsEnum")

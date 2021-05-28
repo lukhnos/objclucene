@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser))
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_
 
@@ -30,8 +36,8 @@
 
 /*!
  @brief A SAX document handler to read and parse hyphenation patterns from a XML
- file.
- This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified. 
+  file.
+ This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified.
  */
 @interface OrgApacheLuceneAnalysisCompoundHyphenationPatternParser : OrgXmlSaxHelpersDefaultHandler {
  @public
@@ -43,30 +49,27 @@
   jchar hyphenChar_;
   NSString *errMsg_;
 }
-
-+ (jint)ELEM_CLASSES;
-
-+ (jint)ELEM_EXCEPTIONS;
-
-+ (jint)ELEM_PATTERNS;
-
-+ (jint)ELEM_HYPHEN;
+@property (readonly, class) jint ELEM_CLASSES NS_SWIFT_NAME(ELEM_CLASSES);
+@property (readonly, class) jint ELEM_EXCEPTIONS NS_SWIFT_NAME(ELEM_EXCEPTIONS);
+@property (readonly, class) jint ELEM_PATTERNS NS_SWIFT_NAME(ELEM_PATTERNS);
+@property (readonly, class) jint ELEM_HYPHEN NS_SWIFT_NAME(ELEM_HYPHEN);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer:(id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>)consumer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer:(id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>)consumer;
 
 /*!
- - seealso: org.xml.sax.ContentHandler#characters(char[],int,int)
+ - seealso: org.xml.sax.ContentHandler#characters(char[], int, int)
  */
 - (void)charactersWithCharArray:(IOSCharArray *)ch
                         withInt:(jint)start
                         withInt:(jint)length;
 
 /*!
- - seealso: org.xml.sax.ContentHandler#endElement(java.lang.String,java.lang.String,java.lang.String)
+ - seealso: org.xml.sax.ContentHandler#endElement(java.lang.String,
+      java.lang.String, java.lang.String)
  */
 - (void)endElementWithNSString:(NSString *)uri
                   withNSString:(NSString *)local
@@ -75,14 +78,14 @@
 /*!
  @brief Parses a hyphenation pattern file.
  @param source the InputSource for the file
- @throws IOException In case of an exception while parsing
+ @throw IOExceptionIn case of an exception while parsing
  */
 - (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)source;
 
 /*!
  @brief Parses a hyphenation pattern file.
  @param filename the filename
- @throws IOException In case of an exception while parsing
+ @throw IOExceptionIn case of an exception while parsing
  */
 - (void)parseWithNSString:(NSString *)filename;
 
@@ -92,7 +95,8 @@
 - (void)setConsumerWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer:(id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>)consumer;
 
 /*!
- - seealso: org.xml.sax.ContentHandler#startElement(java.lang.String,java.lang.String,java.lang.String,org.xml.sax.Attributes)
+ - seealso: org.xml.sax.ContentHandler#startElement(java.lang.String,
+      java.lang.String, java.lang.String, org.xml.sax.Attributes)
  */
 - (void)startElementWithNSString:(NSString *)uri
                     withNSString:(NSString *)local
@@ -129,27 +133,27 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, tok
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, exception_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, errMsg_, NSString *)
 
-inline jint OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_get_ELEM_CLASSES();
+inline jint OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_get_ELEM_CLASSES(void);
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_CLASSES 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, ELEM_CLASSES, jint)
 
-inline jint OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_get_ELEM_EXCEPTIONS();
+inline jint OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_get_ELEM_EXCEPTIONS(void);
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_EXCEPTIONS 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, ELEM_EXCEPTIONS, jint)
 
-inline jint OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_get_ELEM_PATTERNS();
+inline jint OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_get_ELEM_PATTERNS(void);
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_PATTERNS 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, ELEM_PATTERNS, jint)
 
-inline jint OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_get_ELEM_HYPHEN();
+inline jint OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_get_ELEM_HYPHEN(void);
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_HYPHEN 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, ELEM_HYPHEN, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_init(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *new_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *new_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *create_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *create_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *self, id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer> consumer);
 
@@ -157,7 +161,7 @@ FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *new_O
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *create_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_(id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer> consumer);
 
-FOUNDATION_EXPORT id<OrgXmlSaxXMLReader> OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_createParser();
+FOUNDATION_EXPORT id<OrgXmlSaxXMLReader> OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_createParser(void);
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getPatternWithNSString_(NSString *word);
 
@@ -167,4 +171,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationPatternPars
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser")

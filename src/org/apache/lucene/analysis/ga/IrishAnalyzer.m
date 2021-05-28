@@ -27,6 +27,10 @@
 #include "org/apache/lucene/util/Version.h"
 #include "org/tartarus/snowball/ext/IrishStemmer.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ga/IrishAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisGaIrishAnalyzer () {
  @public
   OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet_;
@@ -36,22 +40,22 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisGaIrishAnalyzer, stemExclusionSet_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisGaIrishAnalyzer_get_DEFAULT_ARTICLES();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisGaIrishAnalyzer_get_DEFAULT_ARTICLES(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisGaIrishAnalyzer_DEFAULT_ARTICLES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGaIrishAnalyzer, DEFAULT_ARTICLES, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 /*!
  @brief When StandardTokenizer splits t‑athair into {t, athair}, we don't
- want to cause a position increment, otherwise there will be problems
- with phrase queries versus tAthair (which would not have a gap).
+  want to cause a position increment, otherwise there will be problems
+  with phrase queries versus tAthair (which would not have a gap).
  */
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisGaIrishAnalyzer_get_HYPHENATIONS();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisGaIrishAnalyzer_get_HYPHENATIONS(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisGaIrishAnalyzer_HYPHENATIONS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGaIrishAnalyzer, HYPHENATIONS, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 /*!
  @brief Atomically loads the DEFAULT_STOP_SET in a lazy fashion once the outer class 
- accesses the static final set the first time
+  accesses the static final set the first time
  .;
  */
 @interface OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder : NSObject
@@ -62,15 +66,15 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGaIrishAnalyzer, HYPHENATIO
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder_init(OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder_init();
+__attribute__((unused)) static OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder)
 
@@ -129,31 +133,40 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 2, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getDefaultStopSet);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[4].selector = @selector(createComponentsWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "stemExclusionSet_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "DEFAULT_STOPWORD_FILE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "DEFAULT_ARTICLES", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "HYPHENATIONS", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 6, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisUtilCharArraySet;", "LOrgApacheLuceneAnalysisUtilCharArraySet;LOrgApacheLuceneAnalysisUtilCharArraySet;", "createComponents", "LNSString;", &OrgApacheLuceneAnalysisGaIrishAnalyzer_DEFAULT_STOPWORD_FILE, &OrgApacheLuceneAnalysisGaIrishAnalyzer_DEFAULT_ARTICLES, &OrgApacheLuceneAnalysisGaIrishAnalyzer_HYPHENATIONS, "LOrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGaIrishAnalyzer = { "IrishAnalyzer", "org.apache.lucene.analysis.ga", ptrTable, methods, fields, 7, 0x11, 5, 4, -1, 7, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisGaIrishAnalyzer;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisGaIrishAnalyzer class]) {
     JreStrongAssign(&OrgApacheLuceneAnalysisGaIrishAnalyzer_DEFAULT_ARTICLES, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"d", @"m", @"b" } count:3 type:NSString_class_()]), true)));
     JreStrongAssign(&OrgApacheLuceneAnalysisGaIrishAnalyzer_HYPHENATIONS, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"h", @"n", @"t" } count:3 type:NSString_class_()]), true)));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisGaIrishAnalyzer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDefaultStopSet", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
-    { "init", "IrishAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "IrishAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:", "IrishAnalyzer", NULL, 0x1, NULL, NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "stemExclusionSet_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_STOPWORD_FILE", "DEFAULT_STOPWORD_FILE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisGaIrishAnalyzer_DEFAULT_STOPWORD_FILE, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_ARTICLES", "DEFAULT_ARTICLES", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisGaIrishAnalyzer_DEFAULT_ARTICLES, NULL, .constantValue.asLong = 0 },
-    { "HYPHENATIONS", "HYPHENATIONS", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisGaIrishAnalyzer_HYPHENATIONS, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.ga.IrishAnalyzer$DefaultSetHolder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGaIrishAnalyzer = { 2, "IrishAnalyzer", "org.apache.lucene.analysis.ga", NULL, 0x11, 5, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisGaIrishAnalyzer;
 }
 
 @end
@@ -213,6 +226,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_STOP_SET", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x18, -1, 0, -1, -1 },
+  };
+  static const void *ptrTable[] = { &OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, "LOrgApacheLuceneAnalysisGaIrishAnalyzer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder = { "DefaultSetHolder", "org.apache.lucene.analysis.ga", ptrTable, methods, fields, 7, 0xa, 1, 1, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder class]) {
     {
@@ -225,17 +255,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DefaultSetHolder", NULL, 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOP_SET", "DEFAULT_STOP_SET", 0x18, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder = { 2, "DefaultSetHolder", "org.apache.lucene.analysis.ga", "IrishAnalyzer", 0xa, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisGaIrishAnalyzer_DefaultSetHolder;
 }
 
 @end

@@ -6,10 +6,16 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
+#include "java/lang/Iterable.h"
 #include "java/util/Iterator.h"
+#include "java/util/Spliterator.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/index/Fields.h"
 #include "org/apache/lucene/index/Terms.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/Fields must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexFields)
 
@@ -46,8 +52,39 @@ J2OBJC_IGNORE_DESIGNATED_END
   return 0;
 }
 
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
+}
+
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x401, -1, -1, -1, 0, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x401, 1, 2, 3, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(termsWithNSString:);
+  methods[3].selector = @selector(size);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_ARRAY", "[LOrgApacheLuceneIndexFields;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "()Ljava/util/Iterator<Ljava/lang/String;>;", "terms", "LNSString;", "LJavaIoIOException;", &OrgApacheLuceneIndexFields_EMPTY_ARRAY, "Ljava/lang/Object;Ljava/lang/Iterable<Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFields = { "Fields", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 4, 1, -1, -1, -1, 5, -1 };
+  return &_OrgApacheLuceneIndexFields;
 }
 
 + (void)initialize {
@@ -55,20 +92,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssignAndConsume(&OrgApacheLuceneIndexFields_EMPTY_ARRAY, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexFields_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexFields)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Fields", NULL, 0x4, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x401, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x401, "Ljava.io.IOException;", NULL },
-    { "size", NULL, "I", 0x401, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_ARRAY", "EMPTY_ARRAY", 0x19, "[Lorg.apache.lucene.index.Fields;", &OrgApacheLuceneIndexFields_EMPTY_ARRAY, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFields = { 2, "Fields", "org.apache.lucene.index", NULL, 0x401, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Iterable<Ljava/lang/String;>;" };
-  return &_OrgApacheLuceneIndexFields;
 }
 
 @end

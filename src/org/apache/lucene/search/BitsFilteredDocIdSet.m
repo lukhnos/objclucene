@@ -10,6 +10,10 @@
 #include "org/apache/lucene/util/Bits.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/BitsFilteredDocIdSet must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchBitsFilteredDocIdSet () {
  @public
   id<OrgApacheLuceneUtilBits> acceptDocs_;
@@ -42,15 +46,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBitsFilteredDocIdSet, acceptDocs_, id<O
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "wrapWithOrgApacheLuceneSearchDocIdSet:withOrgApacheLuceneUtilBits:", "wrap", "Lorg.apache.lucene.search.DocIdSet;", 0x9, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchDocIdSet:withOrgApacheLuceneUtilBits:", "BitsFilteredDocIdSet", NULL, 0x1, NULL, NULL },
-    { "matchWithInt:", "match", "Z", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(wrapWithOrgApacheLuceneSearchDocIdSet:withOrgApacheLuceneUtilBits:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneSearchDocIdSet:withOrgApacheLuceneUtilBits:);
+  methods[2].selector = @selector(matchWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "acceptDocs_", NULL, 0x12, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
+    { "acceptDocs_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBitsFilteredDocIdSet = { 2, "BitsFilteredDocIdSet", "org.apache.lucene.search", NULL, 0x11, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "wrap", "LOrgApacheLuceneSearchDocIdSet;LOrgApacheLuceneUtilBits;", "match", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBitsFilteredDocIdSet = { "BitsFilteredDocIdSet", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchBitsFilteredDocIdSet;
 }
 

@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collections.h"
 #include "java/util/Map.h"
 #include "java/util/WeakHashMap.h"
@@ -17,6 +16,12 @@
 #include "org/apache/lucene/search/join/BitDocIdSetCachingWrapperFilter.h"
 #include "org/apache/lucene/search/join/BitDocIdSetFilter.h"
 #include "org/apache/lucene/util/BitDocIdSet.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/BitDocIdSetCachingWrapperFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter () {
  @public
@@ -53,7 +58,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilBitDocIdSet *OrgApacheLuceneSe
 - (OrgApacheLuceneUtilBitDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   OrgApacheLuceneIndexLeafReader *reader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader];
   id key = [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) getCoreCacheKey];
-  OrgApacheLuceneSearchDocIdSet *docIdSet = [((id<JavaUtilMap>) nil_chk(cache_)) getWithId:key];
+  OrgApacheLuceneSearchDocIdSet *docIdSet = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(cache_)) getWithId:key]);
   if (docIdSet == nil) {
     docIdSet = [((OrgApacheLuceneSearchFilter *) nil_chk(filter_)) getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneUtilBits:nil];
     docIdSet = OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_docIdSetToCacheWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneIndexLeafReader_(self, docIdSet, reader);
@@ -62,11 +67,11 @@ __attribute__((unused)) static OrgApacheLuceneUtilBitDocIdSet *OrgApacheLuceneSe
     }
     [cache_ putWithId:key withId:docIdSet];
   }
-  return docIdSet == JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY) ? nil : (OrgApacheLuceneUtilBitDocIdSet *) cast_chk(docIdSet, [OrgApacheLuceneUtilBitDocIdSet class]);
+  return JreObjectEqualsEquals(docIdSet, JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY)) ? nil : (OrgApacheLuceneUtilBitDocIdSet *) cast_chk(docIdSet, [OrgApacheLuceneUtilBitDocIdSet class]);
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  return JreStrcat("$C$C", [[self getClass] getSimpleName], '(', [((OrgApacheLuceneSearchFilter *) nil_chk(filter_)) toStringWithNSString:field], ')');
+  return JreStrcat("$C$C", [[self java_getClass] getSimpleName], '(', [((OrgApacheLuceneSearchFilter *) nil_chk(filter_)) toStringWithNSString:field], ')');
 }
 
 - (jboolean)isEqual:(id)o {
@@ -88,20 +93,32 @@ __attribute__((unused)) static OrgApacheLuceneUtilBitDocIdSet *OrgApacheLuceneSe
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchFilter:", "BitDocIdSetCachingWrapperFilter", NULL, 0x1, NULL, NULL },
-    { "getFilter", NULL, "Lorg.apache.lucene.search.Filter;", 0x1, NULL, NULL },
-    { "docIdSetToCacheWithOrgApacheLuceneSearchDocIdSet:withOrgApacheLuceneIndexLeafReader:", "docIdSetToCache", "Lorg.apache.lucene.util.BitDocIdSet;", 0x2, "Ljava.io.IOException;", NULL },
-    { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:", "getDocIdSet", "Lorg.apache.lucene.util.BitDocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFilter;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBitDocIdSet;", 0x2, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBitDocIdSet;", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchFilter:);
+  methods[1].selector = @selector(getFilter);
+  methods[2].selector = @selector(docIdSetToCacheWithOrgApacheLuceneSearchDocIdSet:withOrgApacheLuceneIndexLeafReader:);
+  methods[3].selector = @selector(getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[4].selector = @selector(toStringWithNSString:);
+  methods[5].selector = @selector(isEqual:);
+  methods[6].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "filter_", NULL, 0x12, "Lorg.apache.lucene.search.Filter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "cache_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Object;Lorg/apache/lucene/search/DocIdSet;>;", .constantValue.asLong = 0 },
+    { "filter_", "LOrgApacheLuceneSearchFilter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "cache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 11, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter = { 2, "BitDocIdSetCachingWrapperFilter", "org.apache.lucene.search.join", NULL, 0x1, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchFilter;", "docIdSetToCache", "LOrgApacheLuceneSearchDocIdSet;LOrgApacheLuceneIndexLeafReader;", "LJavaIoIOException;", "getDocIdSet", "LOrgApacheLuceneIndexLeafReaderContext;", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "Ljava/util/Map<Ljava/lang/Object;Lorg/apache/lucene/search/DocIdSet;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter = { "BitDocIdSetCachingWrapperFilter", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x1, 7, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter;
 }
 

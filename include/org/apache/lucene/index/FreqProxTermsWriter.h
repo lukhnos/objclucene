@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFreqProxTermsWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFreqProxTermsWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriter || defined(INCLUDE_OrgApacheLuceneIndexFreqProxTermsWriter))
 #define OrgApacheLuceneIndexFreqProxTermsWriter_
 
@@ -31,8 +37,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter
-                                   withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)termVectors;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter
+                                                           withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)termVectors;
 
 - (OrgApacheLuceneIndexTermsHashPerField *)addFieldWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)invertState
                                                           withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
@@ -40,18 +46,28 @@
 - (void)flushWithJavaUtilMap:(id<JavaUtilMap>)fieldsToFlush
 withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)arg0
+                                                                                 withBoolean:(jboolean)arg1
+                                                           withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)arg2 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFreqProxTermsWriter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexFreqProxTermsWriter *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexFreqProxTermsWriter_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexFreqProxTermsWriter *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriter *new_OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriter *new_OrgApacheLuceneIndexFreqProxTermsWriter_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriter *create_OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors);
+FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriter *create_OrgApacheLuceneIndexFreqProxTermsWriter_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxTermsWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriter")

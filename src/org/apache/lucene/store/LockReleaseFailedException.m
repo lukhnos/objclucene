@@ -5,7 +5,12 @@
 
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
+#include "java/lang/Throwable.h"
 #include "org/apache/lucene/store/LockReleaseFailedException.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/LockReleaseFailedException must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneStoreLockReleaseFailedException
 
@@ -15,17 +20,24 @@
 }
 
 - (instancetype)initWithNSString:(NSString *)message
-                 withNSException:(NSException *)cause {
-  OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withNSException_(self, message, cause);
+           withJavaLangThrowable:(JavaLangThrowable *)cause {
+  OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withJavaLangThrowable_(self, message, cause);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "LockReleaseFailedException", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withNSException:", "LockReleaseFailedException", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockReleaseFailedException = { 2, "LockReleaseFailedException", "org.apache.lucene.store", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(initWithNSString:withJavaLangThrowable:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;", "LNSString;LJavaLangThrowable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockReleaseFailedException = { "LockReleaseFailedException", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreLockReleaseFailedException;
 }
 
@@ -43,16 +55,16 @@ OrgApacheLuceneStoreLockReleaseFailedException *create_OrgApacheLuceneStoreLockR
   J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockReleaseFailedException, initWithNSString_, message)
 }
 
-void OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withNSException_(OrgApacheLuceneStoreLockReleaseFailedException *self, NSString *message, NSException *cause) {
-  JavaIoIOException_initWithNSString_withNSException_(self, message, cause);
+void OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneStoreLockReleaseFailedException *self, NSString *message, JavaLangThrowable *cause) {
+  JavaIoIOException_initWithNSString_withJavaLangThrowable_(self, message, cause);
 }
 
-OrgApacheLuceneStoreLockReleaseFailedException *new_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withNSException_(NSString *message, NSException *cause) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreLockReleaseFailedException, initWithNSString_withNSException_, message, cause)
+OrgApacheLuceneStoreLockReleaseFailedException *new_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreLockReleaseFailedException, initWithNSString_withJavaLangThrowable_, message, cause)
 }
 
-OrgApacheLuceneStoreLockReleaseFailedException *create_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withNSException_(NSString *message, NSException *cause) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockReleaseFailedException, initWithNSString_withNSException_, message, cause)
+OrgApacheLuceneStoreLockReleaseFailedException *create_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockReleaseFailedException, initWithNSString_withJavaLangThrowable_, message, cause)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockReleaseFailedException)

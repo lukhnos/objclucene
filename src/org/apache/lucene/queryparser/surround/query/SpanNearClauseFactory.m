@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/Float.h"
 #include "java/util/HashMap.h"
@@ -21,6 +20,10 @@
 #include "org/apache/lucene/search/spans/SpanOrQuery.h"
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 #include "org/apache/lucene/search/spans/SpanTermQuery.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/SpanNearClauseFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory () {
  @public
@@ -68,7 +71,7 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 
 - (void)addSpanQueryWeightedWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)sq
                                                           withFloat:(jfloat)weight {
-  JavaLangFloat *w = [((JavaUtilHashMap *) nil_chk(weightBySpanQuery_)) getWithId:sq];
+  JavaLangFloat *w = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(weightBySpanQuery_)) getWithId:sq]);
   if (w != nil) w = JavaLangFloat_valueOfWithFloat_([w floatValue] + weight);
   else w = JavaLangFloat_valueOfWithFloat_(weight);
   [((JavaUtilHashMap *) nil_chk(weightBySpanQuery_)) putWithId:sq withId:w];
@@ -76,22 +79,22 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 
 - (void)addTermWeightedWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t
                                           withFloat:(jfloat)weight {
-  OrgApacheLuceneSearchSpansSpanTermQuery *stq = [((OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *) nil_chk(qf_)) newSpanTermQueryWithOrgApacheLuceneIndexTerm:t];
+  OrgApacheLuceneSearchSpansSpanTermQuery *stq = JreRetainedLocalValue([((OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *) nil_chk(qf_)) newSpanTermQueryWithOrgApacheLuceneIndexTerm:t]);
   [self addSpanQueryWeightedWithOrgApacheLuceneSearchSpansSpanQuery:stq withFloat:weight];
 }
 
 - (void)addSpanQueryWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)q {
-  if ([((OrgApacheLuceneSearchQuery *) nil_chk(q)) getClass] == (id) OrgApacheLuceneSearchMatchNoDocsQuery_class_()) return;
+  if (JreObjectEqualsEquals([((OrgApacheLuceneSearchQuery *) nil_chk(q)) java_getClass], OrgApacheLuceneSearchMatchNoDocsQuery_class_())) return;
   if (!([q isKindOfClass:[OrgApacheLuceneSearchSpansSpanQuery class]])) @throw create_JavaLangAssertionError_initWithId_(JreStrcat("$$", @"Expected SpanQuery: ", [q toStringWithNSString:[self getFieldName]]));
   [self addSpanQueryWeightedWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *) cast_chk(q, [OrgApacheLuceneSearchSpansSpanQuery class]) withFloat:[q getBoost]];
 }
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)makeSpanClause {
   IOSObjectArray *spanQueries = [IOSObjectArray arrayWithLength:[self size] type:OrgApacheLuceneSearchSpansSpanQuery_class_()];
-  id<JavaUtilIterator> sqi = [((id<JavaUtilSet>) nil_chk([((JavaUtilHashMap *) nil_chk(weightBySpanQuery_)) keySet])) iterator];
+  id<JavaUtilIterator> sqi = JreRetainedLocalValue([((id<JavaUtilSet>) nil_chk([((JavaUtilHashMap *) nil_chk(weightBySpanQuery_)) keySet])) iterator]);
   jint i = 0;
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
-    OrgApacheLuceneSearchSpansSpanQuery *sq = [sqi next];
+    OrgApacheLuceneSearchSpansSpanQuery *sq = JreRetainedLocalValue([sqi next]);
     [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(sq)) setBoostWithFloat:[((JavaLangFloat *) nil_chk([((JavaUtilHashMap *) nil_chk(weightBySpanQuery_)) getWithId:sq])) floatValue]];
     IOSObjectArray_Set(spanQueries, i++, sq);
   }
@@ -108,25 +111,40 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "SpanNearClauseFactory", NULL, 0x1, NULL, NULL },
-    { "getIndexReader", NULL, "Lorg.apache.lucene.index.IndexReader;", 0x1, NULL, NULL },
-    { "getFieldName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getBasicQueryFactory", NULL, "Lorg.apache.lucene.queryparser.surround.query.BasicQueryFactory;", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "addSpanQueryWeightedWithOrgApacheLuceneSearchSpansSpanQuery:withFloat:", "addSpanQueryWeighted", "V", 0x4, NULL, NULL },
-    { "addTermWeightedWithOrgApacheLuceneIndexTerm:withFloat:", "addTermWeighted", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "addSpanQueryWithOrgApacheLuceneSearchQuery:", "addSpanQuery", "V", 0x1, NULL, NULL },
-    { "makeSpanClause", NULL, "Lorg.apache.lucene.search.spans.SpanQuery;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpansSpanQuery;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  methods[1].selector = @selector(getIndexReader);
+  methods[2].selector = @selector(getFieldName);
+  methods[3].selector = @selector(getBasicQueryFactory);
+  methods[4].selector = @selector(size);
+  methods[5].selector = @selector(clear);
+  methods[6].selector = @selector(addSpanQueryWeightedWithOrgApacheLuceneSearchSpansSpanQuery:withFloat:);
+  methods[7].selector = @selector(addTermWeightedWithOrgApacheLuceneIndexTerm:withFloat:);
+  methods[8].selector = @selector(addSpanQueryWithOrgApacheLuceneSearchQuery:);
+  methods[9].selector = @selector(makeSpanClause);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reader_", NULL, 0x2, "Lorg.apache.lucene.index.IndexReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldName_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "weightBySpanQuery_", NULL, 0x2, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Lorg/apache/lucene/search/spans/SpanQuery;Ljava/lang/Float;>;", .constantValue.asLong = 0 },
-    { "qf_", NULL, 0x2, "Lorg.apache.lucene.queryparser.surround.query.BasicQueryFactory;", NULL, NULL, .constantValue.asLong = 0 },
+    { "reader_", "LOrgApacheLuceneIndexIndexReader;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldName_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "weightBySpanQuery_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 8, -1 },
+    { "qf_", "LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory = { 2, "SpanNearClauseFactory", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 10, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReader;LNSString;LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;", "addSpanQueryWeighted", "LOrgApacheLuceneSearchSpansSpanQuery;F", "addTermWeighted", "LOrgApacheLuceneIndexTerm;F", "LJavaIoIOException;", "addSpanQuery", "LOrgApacheLuceneSearchQuery;", "Ljava/util/HashMap<Lorg/apache/lucene/search/spans/SpanQuery;Ljava/lang/Float;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory = { "SpanNearClauseFactory", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, fields, 7, 0x1, 10, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory;
 }
 

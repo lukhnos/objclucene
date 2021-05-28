@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneMiscSweetSpotSimilarity
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneMiscSweetSpotSimilarity_) && (INCLUDE_ALL_OrgApacheLuceneMiscSweetSpotSimilarity || defined(INCLUDE_OrgApacheLuceneMiscSweetSpotSimilarity))
 #define OrgApacheLuceneMiscSweetSpotSimilarity_
 
@@ -24,18 +30,18 @@
 
 /*!
  @brief <p>
- A similarity with a lengthNorm that provides for a "plateau" of
- equally good lengths, and tf helper functions.
+  A similarity with a lengthNorm that provides for a "plateau" of
+  equally good lengths, and tf helper functions.
  </p>
- <p>
- For lengthNorm, A min/max can be specified to define the
- plateau of lengths that should all have a norm of 1.0.
- Below the min, and above the max the lengthNorm drops off in a
- sqrt function.
+  <p>
+  For lengthNorm, A min/max can be specified to define the
+  plateau of lengths that should all have a norm of 1.0.
+  Below the min, and above the max the lengthNorm drops off in a
+  sqrt function. 
  </p>
- <p>
- For tf, baselineTf and hyperbolicTf functions are provided, which
- subclasses can choose between.
+  <p>
+  For tf, baselineTf and hyperbolicTf functions are provided, which
+  subclasses can choose between. 
  </p>
  - seealso: <a href="doc-files/ss.gnuplot">A Gnuplot file used to generate some of the visualizations refrenced from each function.</a>
  */
@@ -43,16 +49,16 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Implemented as:
+ @brief Implemented as: 
  <code>
- (x &lt;= min) &#63; base : sqrt(x+(base**2)-min)
+   (x &lt;= min) &#63; base : sqrt(x+(base**2)-min) 
  </code>
- ...but with a special case check for 0.
+  ...but with a special case check for 0.
  <p>
- This degrates to <code>sqrt(x)</code> when min and base are both 0
+  This degrates to <code>sqrt(x)</code> when min and base are both 0 
  </p>
  - seealso: #setBaselineTfFactors
  - seealso: <a href="doc-files/ss.baselineTf.svg">An SVG visualization of this function</a>
@@ -60,17 +66,18 @@
 - (jfloat)baselineTfWithFloat:(jfloat)freq;
 
 /*!
- @brief Implemented as:
+ @brief Implemented as: 
  <code>
- 1/sqrt( steepness * (abs(x-min) + abs(x-max) - (max-min)) + 1 )
+  1/sqrt( steepness * (abs(x-min) + abs(x-max) - (max-min)) + 1 ) 
  </code>.
  <p>
- This degrades to <code>1/sqrt(x)</code> when min and max are both 1 and
- steepness is 0.5
+  This degrades to <code>1/sqrt(x)</code> when min and max are both 1 and
+  steepness is 0.5 
  </p>
+  
  <p>
- :TODO: potential optimization is to just flat out return 1.0f if numTerms
- is between min and max.
+  :TODO: potential optimization is to just flat out return 1.0f if numTerms
+  is between min and max. 
  </p>
  - seealso: #setLengthNormFactors
  - seealso: <a href="doc-files/ss.computeLengthNorm.svg">An SVG visualization of this function</a>
@@ -80,11 +87,12 @@
 /*!
  @brief Uses a hyperbolic tangent function that allows for a hard max...
  <code>
- tf(x)=min+(max-min)/2*(((base**(x-xoffset)-base**-(x-xoffset))/(base**(x-xoffset)+base**-(x-xoffset)))+1)
+  tf(x)=min+(max-min)/2*(((base**(x-xoffset)-base**-(x-xoffset))/(base**(x-xoffset)+base**-(x-xoffset)))+1) 
  </code>
+  
  <p>
- This code is provided as a convenience for subclasses that want
- to use a hyperbolic tf function.
+  This code is provided as a convenience for subclasses that want
+  to use a hyperbolic tf function. 
  </p>
  - seealso: #setHyperbolicTfFactors
  - seealso: <a href="doc-files/ss.hyperbolicTf.svg">An SVG visualization of this function</a>
@@ -92,11 +100,11 @@
 - (jfloat)hyperbolicTfWithFloat:(jfloat)freq;
 
 /*!
- @brief Implemented as <code> state.getBoost() 
- computeLengthNorm(numTokens) </code> where
- numTokens does not count overlap tokens if
- discountOverlaps is true by default or true for this
- specific field.
+ @brief Implemented as <code> state.getBoost() *
+  computeLengthNorm(numTokens) </code> where
+  numTokens does not count overlap tokens if
+  discountOverlaps is true by default or true for this
+  specific field.
  */
 - (jfloat)lengthNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
 
@@ -122,7 +130,7 @@
 
 /*!
  @brief Sets the default function variables used by lengthNorm when no field
- specific variables have been set.
+  specific variables have been set.
  - seealso: #computeLengthNorm
  */
 - (void)setLengthNormFactorsWithInt:(jint)min
@@ -142,12 +150,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneMiscSweetSpotSimilarity)
 
 FOUNDATION_EXPORT void OrgApacheLuceneMiscSweetSpotSimilarity_init(OrgApacheLuceneMiscSweetSpotSimilarity *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneMiscSweetSpotSimilarity *new_OrgApacheLuceneMiscSweetSpotSimilarity_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneMiscSweetSpotSimilarity *new_OrgApacheLuceneMiscSweetSpotSimilarity_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneMiscSweetSpotSimilarity *create_OrgApacheLuceneMiscSweetSpotSimilarity_init();
+FOUNDATION_EXPORT OrgApacheLuceneMiscSweetSpotSimilarity *create_OrgApacheLuceneMiscSweetSpotSimilarity_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscSweetSpotSimilarity)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneMiscSweetSpotSimilarity")

@@ -3,21 +3,26 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/lv/LatvianStemmer.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/lv/LatvianStemmer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/lv/LatvianStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisLvLatvianStemmer ()
 
 /*!
- @brief Most cases are handled except for the ambiguous ones:
+ @brief Most cases are handled except for the ambiguous ones: 
  <ul>
- <li> s -&gt; š
- <li> t -&gt; š
- <li> d -&gt; ž
- <li> z -&gt; ž
+   <li> s -&gt; š
+   <li> t -&gt; š
+   <li> d -&gt; ž
+   <li> z -&gt; ž 
  </ul>
  */
 - (jint)unpalatalizeWithCharArray:(IOSCharArray *)s
@@ -25,7 +30,7 @@
 
 /*!
  @brief Count the vowels in the string, we always require at least
- one in the remaining stem to accept it.
+  one in the remaining stem to accept it.
  */
 - (jint)numVowelsWithCharArray:(IOSCharArray *)s
                        withInt:(jint)len;
@@ -45,6 +50,13 @@ IOSObjectArray *OrgApacheLuceneAnalysisLvLatvianStemmer_affixes;
 + (IOSObjectArray *)affixes {
   return OrgApacheLuceneAnalysisLvLatvianStemmer_affixes;
 }
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisLvLatvianStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -69,12 +81,28 @@ IOSObjectArray *OrgApacheLuceneAnalysisLvLatvianStemmer_affixes;
   return OrgApacheLuceneAnalysisLvLatvianStemmer_numVowelsWithCharArray_withInt_(self, s, len);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisLvLatvianStemmer_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  methods[2].selector = @selector(unpalatalizeWithCharArray:withInt:);
+  methods[3].selector = @selector(numVowelsWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "affixes", "[LOrgApacheLuceneAnalysisLvLatvianStemmer_Affix;", .constantValue.asLong = 0, 0x18, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "stem", "[CI", "unpalatalize", "numVowels", &OrgApacheLuceneAnalysisLvLatvianStemmer_affixes, "LOrgApacheLuceneAnalysisLvLatvianStemmer_Affix;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisLvLatvianStemmer = { "LatvianStemmer", "org.apache.lucene.analysis.lv", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, 5, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisLvLatvianStemmer;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisLvLatvianStemmer class]) {
@@ -83,22 +111,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "unpalatalizeWithCharArray:withInt:", "unpalatalize", "I", 0x2, NULL, NULL },
-    { "numVowelsWithCharArray:withInt:", "numVowels", "I", 0x2, NULL, NULL },
-    { "init", "LatvianStemmer", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "affixes", "affixes", 0x18, "[Lorg.apache.lucene.analysis.lv.LatvianStemmer$Affix;", &OrgApacheLuceneAnalysisLvLatvianStemmer_affixes, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.lv.LatvianStemmer$Affix;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisLvLatvianStemmer = { 2, "LatvianStemmer", "org.apache.lucene.analysis.lv", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisLvLatvianStemmer;
+@end
+
+void OrgApacheLuceneAnalysisLvLatvianStemmer_init(OrgApacheLuceneAnalysisLvLatvianStemmer *self) {
+  NSObject_init(self);
 }
 
-@end
+OrgApacheLuceneAnalysisLvLatvianStemmer *new_OrgApacheLuceneAnalysisLvLatvianStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisLvLatvianStemmer, init)
+}
+
+OrgApacheLuceneAnalysisLvLatvianStemmer *create_OrgApacheLuceneAnalysisLvLatvianStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisLvLatvianStemmer, init)
+}
 
 jint OrgApacheLuceneAnalysisLvLatvianStemmer_unpalatalizeWithCharArray_withInt_(OrgApacheLuceneAnalysisLvLatvianStemmer *self, IOSCharArray *s, jint len) {
   if (IOSCharArray_Get(nil_chk(s), len) == 'u') {
@@ -181,18 +206,6 @@ jint OrgApacheLuceneAnalysisLvLatvianStemmer_numVowelsWithCharArray_withInt_(Org
   return n;
 }
 
-void OrgApacheLuceneAnalysisLvLatvianStemmer_init(OrgApacheLuceneAnalysisLvLatvianStemmer *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneAnalysisLvLatvianStemmer *new_OrgApacheLuceneAnalysisLvLatvianStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisLvLatvianStemmer, init)
-}
-
-OrgApacheLuceneAnalysisLvLatvianStemmer *create_OrgApacheLuceneAnalysisLvLatvianStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisLvLatvianStemmer, init)
-}
-
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisLvLatvianStemmer)
 
 @implementation OrgApacheLuceneAnalysisLvLatvianStemmer_Affix
@@ -210,15 +223,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisLvLatvianStemmer)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withInt:withBoolean:", "Affix", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withInt:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "affix_", NULL, 0x0, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "vc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "palatalizes_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "affix_", "[C", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "vc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "palatalizes_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisLvLatvianStemmer_Affix = { 2, "Affix", "org.apache.lucene.analysis.lv", "LatvianStemmer", 0x8, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;IZ", "LOrgApacheLuceneAnalysisLvLatvianStemmer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisLvLatvianStemmer_Affix = { "Affix", "org.apache.lucene.analysis.lv", ptrTable, methods, fields, 7, 0x8, 1, 3, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix;
 }
 
@@ -226,7 +245,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisLvLatvianStemmer)
 
 void OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *self, NSString *affix, jint vc, jboolean palatalizes) {
   NSObject_init(self);
-  JreStrongAssign(&self->affix_, [((NSString *) nil_chk(affix)) toCharArray]);
+  JreStrongAssign(&self->affix_, [((NSString *) nil_chk(affix)) java_toCharArray]);
   self->vc_ = vc;
   self->palatalizes_ = palatalizes;
 }

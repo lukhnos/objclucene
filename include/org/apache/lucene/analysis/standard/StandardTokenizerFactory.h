@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory))
 #define OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_
 
@@ -27,12 +33,12 @@
 /*!
  @brief Factory for <code>StandardTokenizer</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_stndrd" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory" maxTokenLength="255"/&gt;
- &lt;/analyzer&gt;
- 
-@endcode 
+  &lt;fieldType name="text_stndrd" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory" maxTokenLength="255"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
+@endcode
  */
 @interface OrgApacheLuceneAnalysisStandardStandardTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
@@ -41,7 +47,7 @@
 /*!
  @brief Creates a new StandardTokenizerFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
@@ -59,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStandardTokenizerFacto
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory")

@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Integer.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
@@ -19,6 +18,10 @@
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/CharsRef.h"
 #include "org/apache/lucene/util/CharsRefBuilder.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/pattern/PatternCaptureGroupTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter () {
  @public
@@ -62,7 +65,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisPatternPatternCap
 
 - (jboolean)incrementToken {
   if (currentMatcher_ != -1 && OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_nextCapture(self)) {
-    JreAssert((state_ != nil), (@"org/apache/lucene/analysis/pattern/PatternCaptureGroupTokenFilter.java:146 condition failed: assert state != null;"));
+    JreAssert(state_ != nil, @"org/apache/lucene/analysis/pattern/PatternCaptureGroupTokenFilter.java:146 condition failed: assert state != null;");
     [self clearAttributes];
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:state_];
     jint start = [((JavaUtilRegexMatcher *) nil_chk(IOSObjectArray_Get(nil_chk(matchers_), currentMatcher_))) startWithInt:IOSIntArray_Get(nil_chk(currentGroup_), currentMatcher_)];
@@ -76,7 +79,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisPatternPatternCap
     return false;
   }
   IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(charTermAttr_)) buffer];
-  jint length = [charTermAttr_ length];
+  jint length = [charTermAttr_ java_length];
   [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(spare_)) copyCharsWithCharArray:buffer withInt:0 withInt:length];
   JreStrongAssign(&state_, [self captureState]);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(matchers_))->size_; i++) {
@@ -118,24 +121,33 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisPatternPatternCap
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:withJavaUtilRegexPatternArray:", "PatternCaptureGroupTokenFilter", NULL, 0x81, NULL, NULL },
-    { "nextCapture", NULL, "Z", 0x2, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x81, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:withJavaUtilRegexPatternArray:);
+  methods[1].selector = @selector(nextCapture);
+  methods[2].selector = @selector(incrementToken);
+  methods[3].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "charTermAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "state_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
-    { "matchers_", NULL, 0x12, "[Ljava.util.regex.Matcher;", NULL, NULL, .constantValue.asLong = 0 },
-    { "spare_", NULL, 0x12, "Lorg.apache.lucene.util.CharsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "groupCounts_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "preserveOriginal_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentGroup_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentMatcher_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "charTermAttr_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posAttr_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "state_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "matchers_", "[LJavaUtilRegexMatcher;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "spare_", "LOrgApacheLuceneUtilCharsRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "groupCounts_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "preserveOriginal_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentGroup_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentMatcher_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter = { 2, "PatternCaptureGroupTokenFilter", "org.apache.lucene.analysis.pattern", NULL, 0x11, 4, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;Z[LJavaUtilRegexPattern;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter = { "PatternCaptureGroupTokenFilter", "org.apache.lucene.analysis.pattern", ptrTable, methods, fields, 7, 0x11, 4, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter;
 }
 

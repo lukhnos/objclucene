@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeSliceReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeSliceReader_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeSliceReader || defined(INCLUDE_OrgApacheLuceneRangetreeSliceReader))
 #define OrgApacheLuceneRangetreeSliceReader_
 
@@ -21,11 +27,10 @@
 #include "java/io/Closeable.h"
 
 /*!
- @brief Iterates over one slice of the sorted values.
- This abstracts away whether
- OfflineSorter or simple arrays in heap are used. 
+ @brief Iterates over one slice of the sorted values.This abstracts away whether
+   OfflineSorter or simple arrays in heap are used.
  */
-@protocol OrgApacheLuceneRangetreeSliceReader < JavaIoCloseable, NSObject, JavaObject >
+@protocol OrgApacheLuceneRangetreeSliceReader < JavaIoCloseable, JavaObject >
 
 - (jboolean)next;
 
@@ -43,4 +48,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSliceReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeSliceReader")

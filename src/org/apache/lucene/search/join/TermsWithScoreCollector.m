@@ -3,10 +3,8 @@
 //  source: ./join/src/java/org/apache/lucene/search/join/TermsWithScoreCollector.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
 #include "java/lang/Math.h"
 #include "java/util/Arrays.h"
@@ -23,15 +21,19 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefHash.h"
 
-inline jint OrgApacheLuceneSearchJoinTermsWithScoreCollector_get_INITIAL_ARRAY_SIZE();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/TermsWithScoreCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline jint OrgApacheLuceneSearchJoinTermsWithScoreCollector_get_INITIAL_ARRAY_SIZE(void);
 #define OrgApacheLuceneSearchJoinTermsWithScoreCollector_INITIAL_ARRAY_SIZE 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchJoinTermsWithScoreCollector, INITIAL_ARRAY_SIZE, jint)
 
 @implementation OrgApacheLuceneSearchJoinTermsWithScoreCollector
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
+- (instancetype)initPackagePrivateWithNSString:(NSString *)field
+        withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode {
+  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initPackagePrivateWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
   return self;
 }
 
@@ -67,30 +69,40 @@ withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)sco
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchJoinScoreMode:", "TermsWithScoreCollector", NULL, 0x0, NULL, NULL },
-    { "getCollectedTerms", NULL, "Lorg.apache.lucene.util.BytesRefHash;", 0x1, NULL, NULL },
-    { "getScoresPerTerm", NULL, "[F", 0x1, NULL, NULL },
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWithNSString:withBoolean:withOrgApacheLuceneSearchJoinScoreMode:", "create", "Lorg.apache.lucene.search.join.TermsWithScoreCollector;", 0x8, NULL, NULL },
-    { "needsScores", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRefHash;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchJoinTermsWithScoreCollector;", 0x8, 4, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithNSString:withOrgApacheLuceneSearchJoinScoreMode:);
+  methods[1].selector = @selector(getCollectedTerms);
+  methods[2].selector = @selector(getScoresPerTerm);
+  methods[3].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  methods[4].selector = @selector(createWithNSString:withBoolean:withOrgApacheLuceneSearchJoinScoreMode:);
+  methods[5].selector = @selector(needsScores);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "INITIAL_ARRAY_SIZE", "INITIAL_ARRAY_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchJoinTermsWithScoreCollector_INITIAL_ARRAY_SIZE },
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "collectedTerms_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRefHash;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scoreMode_", NULL, 0x10, "Lorg.apache.lucene.search.join.ScoreMode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scorer_", NULL, 0x0, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scoreSums_", NULL, 0x0, "[F", NULL, NULL, .constantValue.asLong = 0 },
+    { "INITIAL_ARRAY_SIZE", "I", .constantValue.asInt = OrgApacheLuceneSearchJoinTermsWithScoreCollector_INITIAL_ARRAY_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "collectedTerms_", "LOrgApacheLuceneUtilBytesRefHash;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "scoreMode_", "LOrgApacheLuceneSearchJoinScoreMode;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "scorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "scoreSums_", "[F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.join.TermsWithScoreCollector$SV;", "Lorg.apache.lucene.search.join.TermsWithScoreCollector$MV;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsWithScoreCollector = { 2, "TermsWithScoreCollector", "org.apache.lucene.search.join", NULL, 0x400, 6, methods, 6, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneSearchJoinScoreMode;", "setScorer", "LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "create", "LNSString;ZLOrgApacheLuceneSearchJoinScoreMode;", "LOrgApacheLuceneSearchJoinTermsWithScoreCollector_SV;LOrgApacheLuceneSearchJoinTermsWithScoreCollector_MV;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsWithScoreCollector = { "TermsWithScoreCollector", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x400, 6, 6, -1, 6, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinTermsWithScoreCollector;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
+void OrgApacheLuceneSearchJoinTermsWithScoreCollector_initPackagePrivateWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
   OrgApacheLuceneSearchSimpleCollector_init(self);
   JreStrongAssignAndConsume(&self->collectedTerms_, new_OrgApacheLuceneUtilBytesRefHash_init());
   JreStrongAssignAndConsume(&self->scoreSums_, [IOSFloatArray newArrayWithLength:OrgApacheLuceneSearchJoinTermsWithScoreCollector_INITIAL_ARRAY_SIZE]);
@@ -185,23 +197,30 @@ withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)sco
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchJoinScoreMode:", "SV", NULL, 0x0, NULL, NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneSearchJoinScoreMode:);
+  methods[1].selector = @selector(collectWithInt:);
+  methods[2].selector = @selector(doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fromDocTerms_", NULL, 0x0, "Lorg.apache.lucene.index.BinaryDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "fromDocTerms_", "LOrgApacheLuceneIndexBinaryDocValues;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.join.TermsWithScoreCollector$SV$Avg;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV = { 2, "SV", "org.apache.lucene.search.join", "TermsWithScoreCollector", 0x8, 3, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneSearchJoinScoreMode;", "collect", "I", "LJavaIoIOException;", "doSetNextReader", "LOrgApacheLuceneIndexLeafReaderContext;", "LOrgApacheLuceneSearchJoinTermsWithScoreCollector;", "LOrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV = { "SV", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8, 3, 1, 6, 7, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV;
 }
 
 @end
 
 void OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
+  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initPackagePrivateWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
 }
 
 OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
@@ -260,15 +279,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollecto
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "Avg", NULL, 0x0, NULL, NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getScoresPerTerm", NULL, "[F", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "[F", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(collectWithInt:);
+  methods[2].selector = @selector(getScoresPerTerm);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "scoreCounts_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "scoreCounts_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg = { 2, "Avg", "org.apache.lucene.search.join", "TermsWithScoreCollector$SV", 0x8, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "collect", "I", "LJavaIoIOException;", "LOrgApacheLuceneSearchJoinTermsWithScoreCollector_SV;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg = { "Avg", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8, 3, 1, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg;
 }
 
@@ -341,23 +368,30 @@ withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)sco
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchJoinScoreMode:", "MV", NULL, 0x0, NULL, NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneSearchJoinScoreMode:);
+  methods[1].selector = @selector(collectWithInt:);
+  methods[2].selector = @selector(doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fromDocTermOrds_", NULL, 0x0, "Lorg.apache.lucene.index.SortedSetDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "fromDocTermOrds_", "LOrgApacheLuceneIndexSortedSetDocValues;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.join.TermsWithScoreCollector$MV$Avg;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV = { 2, "MV", "org.apache.lucene.search.join", "TermsWithScoreCollector", 0x8, 3, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneSearchJoinScoreMode;", "collect", "I", "LJavaIoIOException;", "doSetNextReader", "LOrgApacheLuceneIndexLeafReaderContext;", "LOrgApacheLuceneSearchJoinTermsWithScoreCollector;", "LOrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV = { "MV", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8, 3, 1, 6, 7, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV;
 }
 
 @end
 
 void OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
+  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initPackagePrivateWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
 }
 
 OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
@@ -412,15 +446,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollecto
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "Avg", NULL, 0x0, NULL, NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getScoresPerTerm", NULL, "[F", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "[F", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(collectWithInt:);
+  methods[2].selector = @selector(getScoresPerTerm);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "scoreCounts_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "scoreCounts_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg = { 2, "Avg", "org.apache.lucene.search.join", "TermsWithScoreCollector$MV", 0x8, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "collect", "I", "LJavaIoIOException;", "LOrgApacheLuceneSearchJoinTermsWithScoreCollector_MV;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg = { "Avg", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x8, 3, 1, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg;
 }
 

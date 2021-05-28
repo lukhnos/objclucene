@@ -6,8 +6,8 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
+#include "java/lang/Iterable.h"
 #include "java/lang/Math.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/ArrayList.h"
@@ -15,6 +15,8 @@
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
 #include "java/util/Set.h"
+#include "java/util/Spliterator.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/BooleanQuery.h"
@@ -26,6 +28,10 @@
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/Weight.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/DisjunctionMaxQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchDisjunctionMaxQuery () {
  @public
@@ -44,8 +50,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisjunctionMaxQuery, disjuncts_, JavaUt
 }
 
 @end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeight, this$0_, OrgApacheLuceneSearchDisjunctionMaxQuery *)
 
 @implementation OrgApacheLuceneSearchDisjunctionMaxQuery
 
@@ -88,20 +92,20 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeigh
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   jint numDisjunctions = [((JavaUtilArrayList *) nil_chk(disjuncts_)) size];
   if (numDisjunctions == 1) {
-    OrgApacheLuceneSearchQuery *singleton = [((JavaUtilArrayList *) nil_chk(disjuncts_)) getWithInt:0];
-    OrgApacheLuceneSearchQuery *result = [((OrgApacheLuceneSearchQuery *) nil_chk(singleton)) rewriteWithOrgApacheLuceneIndexIndexReader:reader];
+    OrgApacheLuceneSearchQuery *singleton = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(disjuncts_)) getWithInt:0]);
+    OrgApacheLuceneSearchQuery *result = JreRetainedLocalValue([((OrgApacheLuceneSearchQuery *) nil_chk(singleton)) rewriteWithOrgApacheLuceneIndexIndexReader:reader]);
     if ([self getBoost] != 1.0f) {
-      if (result == singleton) result = [((OrgApacheLuceneSearchQuery *) nil_chk(result)) clone];
+      if (JreObjectEqualsEquals(result, singleton)) result = [((OrgApacheLuceneSearchQuery *) nil_chk(result)) java_clone];
       [((OrgApacheLuceneSearchQuery *) nil_chk(result)) setBoostWithFloat:[self getBoost] * [result getBoost]];
     }
     return result;
   }
   OrgApacheLuceneSearchDisjunctionMaxQuery *clone = nil;
   for (jint i = 0; i < numDisjunctions; i++) {
-    OrgApacheLuceneSearchQuery *clause = [((JavaUtilArrayList *) nil_chk(disjuncts_)) getWithInt:i];
-    OrgApacheLuceneSearchQuery *rewrite = [((OrgApacheLuceneSearchQuery *) nil_chk(clause)) rewriteWithOrgApacheLuceneIndexIndexReader:reader];
-    if (rewrite != clause) {
-      if (clone == nil) clone = [self clone];
+    OrgApacheLuceneSearchQuery *clause = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(disjuncts_)) getWithInt:i]);
+    OrgApacheLuceneSearchQuery *rewrite = JreRetainedLocalValue([((OrgApacheLuceneSearchQuery *) nil_chk(clause)) rewriteWithOrgApacheLuceneIndexIndexReader:reader]);
+    if (!JreObjectEqualsEquals(rewrite, clause)) {
+      if (clone == nil) clone = [self java_clone];
       [((JavaUtilArrayList *) nil_chk(((OrgApacheLuceneSearchDisjunctionMaxQuery *) nil_chk(clone))->disjuncts_)) setWithInt:i withId:rewrite];
     }
   }
@@ -109,9 +113,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeigh
   else return self;
 }
 
-- (OrgApacheLuceneSearchDisjunctionMaxQuery *)clone {
-  OrgApacheLuceneSearchDisjunctionMaxQuery *clone = (OrgApacheLuceneSearchDisjunctionMaxQuery *) cast_chk([super clone], [OrgApacheLuceneSearchDisjunctionMaxQuery class]);
-  JreStrongAssign(&((OrgApacheLuceneSearchDisjunctionMaxQuery *) nil_chk(clone))->disjuncts_, (JavaUtilArrayList *) cast_chk([((JavaUtilArrayList *) nil_chk(self->disjuncts_)) clone], [JavaUtilArrayList class]));
+- (OrgApacheLuceneSearchDisjunctionMaxQuery *)java_clone {
+  OrgApacheLuceneSearchDisjunctionMaxQuery *clone = (OrgApacheLuceneSearchDisjunctionMaxQuery *) cast_chk([super java_clone], [OrgApacheLuceneSearchDisjunctionMaxQuery class]);
+  JreStrongAssign(&((OrgApacheLuceneSearchDisjunctionMaxQuery *) nil_chk(clone))->disjuncts_, (JavaUtilArrayList *) cast_chk([((JavaUtilArrayList *) nil_chk(self->disjuncts_)) java_clone], [JavaUtilArrayList class]));
   return clone;
 }
 
@@ -120,7 +124,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeigh
   [buffer appendWithNSString:@"("];
   jint numDisjunctions = [((JavaUtilArrayList *) nil_chk(disjuncts_)) size];
   for (jint i = 0; i < numDisjunctions; i++) {
-    OrgApacheLuceneSearchQuery *subquery = [((JavaUtilArrayList *) nil_chk(disjuncts_)) getWithInt:i];
+    OrgApacheLuceneSearchQuery *subquery = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(disjuncts_)) getWithInt:i]);
     if ([subquery isKindOfClass:[OrgApacheLuceneSearchBooleanQuery class]]) {
       [buffer appendWithNSString:@"("];
       [buffer appendWithNSString:[((OrgApacheLuceneSearchQuery *) nil_chk(subquery)) toStringWithNSString:field]];
@@ -151,8 +155,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeigh
   return JavaLangFloat_floatToIntBitsWithFloat_([self getBoost]) + JavaLangFloat_floatToIntBitsWithFloat_(tieBreakerMultiplier_) + ((jint) [((JavaUtilArrayList *) nil_chk(disjuncts_)) hash]);
 }
 
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
+}
+
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -161,27 +173,44 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeigh
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithFloat:", "DisjunctionMaxQuery", NULL, 0x1, NULL, NULL },
-    { "initWithJavaUtilCollection:withFloat:", "DisjunctionMaxQuery", NULL, 0x1, NULL, "(Ljava/util/Collection<Lorg/apache/lucene/search/Query;>;F)V" },
-    { "addWithOrgApacheLuceneSearchQuery:", "add", "V", 0x1, NULL, NULL },
-    { "addWithJavaUtilCollection:", "add", "V", 0x1, NULL, "(Ljava/util/Collection<Lorg/apache/lucene/search/Query;>;)V" },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/search/Query;>;" },
-    { "getDisjuncts", NULL, "Ljava.util.ArrayList;", 0x1, NULL, "()Ljava/util/ArrayList<Lorg/apache/lucene/search/Query;>;" },
-    { "getTieBreakerMultiplier", NULL, "F", 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.search.DisjunctionMaxQuery;", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, 2, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 5, -1, 6, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 7, -1, -1 },
+    { NULL, "LJavaUtilArrayList;", 0x1, -1, -1, -1, 8, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 9, 10, 11, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 12, 13, 11, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDisjunctionMaxQuery;", 0x1, 14, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 19, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithFloat:);
+  methods[1].selector = @selector(initWithJavaUtilCollection:withFloat:);
+  methods[2].selector = @selector(addWithOrgApacheLuceneSearchQuery:);
+  methods[3].selector = @selector(addWithJavaUtilCollection:);
+  methods[4].selector = @selector(iterator);
+  methods[5].selector = @selector(getDisjuncts);
+  methods[6].selector = @selector(getTieBreakerMultiplier);
+  methods[7].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[8].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[9].selector = @selector(java_clone);
+  methods[10].selector = @selector(toStringWithNSString:);
+  methods[11].selector = @selector(isEqual:);
+  methods[12].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "disjuncts_", NULL, 0x2, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/search/Query;>;", .constantValue.asLong = 0 },
-    { "tieBreakerMultiplier_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "disjuncts_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 20, -1 },
+    { "tieBreakerMultiplier_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.DisjunctionMaxQuery$DisjunctionMaxWeight;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisjunctionMaxQuery = { 2, "DisjunctionMaxQuery", "org.apache.lucene.search", NULL, 0x1, 13, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, "Lorg/apache/lucene/search/Query;Ljava/lang/Iterable<Lorg/apache/lucene/search/Query;>;" };
+  static const void *ptrTable[] = { "F", "LJavaUtilCollection;F", "(Ljava/util/Collection<Lorg/apache/lucene/search/Query;>;F)V", "add", "LOrgApacheLuceneSearchQuery;", "LJavaUtilCollection;", "(Ljava/util/Collection<Lorg/apache/lucene/search/Query;>;)V", "()Ljava/util/Iterator<Lorg/apache/lucene/search/Query;>;", "()Ljava/util/ArrayList<Lorg/apache/lucene/search/Query;>;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "clone", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "Ljava/util/ArrayList<Lorg/apache/lucene/search/Query;>;", "LOrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeight;", "Lorg/apache/lucene/search/Query;Ljava/lang/Iterable<Lorg/apache/lucene/search/Query;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisjunctionMaxQuery = { "DisjunctionMaxQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 13, 2, -1, 21, -1, 22, -1 };
   return &_OrgApacheLuceneSearchDisjunctionMaxQuery;
 }
 
@@ -237,7 +266,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionMaxQuery)
 }
 
 - (jfloat)getValueForNormalization {
-  jfloat max = 0.0f, sum = 0.0f;
+  jfloat max = 0.0f;
+  jfloat sum = 0.0f;
   for (OrgApacheLuceneSearchWeight * __strong currentWeight in nil_chk(weights_)) {
     jfloat sub = [((OrgApacheLuceneSearchWeight *) nil_chk(currentWeight)) getValueForNormalization];
     JrePlusAssignFloatF(&sum, sub);
@@ -258,7 +288,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionMaxQuery)
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   id<JavaUtilList> scorers = create_JavaUtilArrayList_init();
   for (OrgApacheLuceneSearchWeight * __strong w in nil_chk(weights_)) {
-    OrgApacheLuceneSearchScorer *subScorer = [((OrgApacheLuceneSearchWeight *) nil_chk(w)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+    OrgApacheLuceneSearchScorer *subScorer = JreRetainedLocalValue([((OrgApacheLuceneSearchWeight *) nil_chk(w)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
     if (subScorer != nil) {
       [scorers addWithId:subScorer];
     }
@@ -270,17 +300,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionMaxQuery)
     return [scorers getWithInt:0];
   }
   else {
-    return create_OrgApacheLuceneSearchDisjunctionMaxScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withJavaUtilList_withBoolean_(self, this$0_->tieBreakerMultiplier_, scorers, needsScores_);
+    return create_OrgApacheLuceneSearchDisjunctionMaxScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withFloat_withJavaUtilList_withBoolean_(self, this$0_->tieBreakerMultiplier_, scorers, needsScores_);
   }
 }
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc {
   jboolean match = false;
-  jfloat max = 0.0f, sum = 0.0f;
+  jfloat max = 0.0f;
+  jfloat sum = 0.0f;
   id<JavaUtilList> subs = create_JavaUtilArrayList_init();
   for (OrgApacheLuceneSearchWeight * __strong wt in nil_chk(weights_)) {
-    OrgApacheLuceneSearchExplanation *e = [((OrgApacheLuceneSearchWeight *) nil_chk(wt)) explainWithOrgApacheLuceneIndexLeafReaderContext:context withInt:doc];
+    OrgApacheLuceneSearchExplanation *e = JreRetainedLocalValue([((OrgApacheLuceneSearchWeight *) nil_chk(wt)) explainWithOrgApacheLuceneIndexLeafReaderContext:context withInt:doc]);
     if ([((OrgApacheLuceneSearchExplanation *) nil_chk(e)) isMatch]) {
       match = true;
       [subs addWithId:e];
@@ -305,20 +336,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionMaxQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchDisjunctionMaxQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:", "DisjunctionMaxWeight", NULL, 0x1, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, 4, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 7, 8, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 9, 10, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchDisjunctionMaxQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(getValueForNormalization);
+  methods[3].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[4].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[5].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.DisjunctionMaxQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "weights_", NULL, 0x14, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/search/Weight;>;", .constantValue.asLong = 0 },
-    { "needsScores_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchDisjunctionMaxQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "weights_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x14, -1, -1, 11, -1 },
+    { "needsScores_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeight = { 2, "DisjunctionMaxWeight", "org.apache.lucene.search", "DisjunctionMaxQuery", 0x4, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchDisjunctionMaxQuery;LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "normalize", "FF", "scorer", "LOrgApacheLuceneIndexLeafReaderContext;", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "Ljava/util/ArrayList<Lorg/apache/lucene/search/Weight;>;", "LOrgApacheLuceneSearchDisjunctionMaxQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeight = { "DisjunctionMaxWeight", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x4, 6, 3, 12, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeight;
 }
 

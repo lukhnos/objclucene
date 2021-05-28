@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_
 
@@ -22,13 +28,13 @@
 
 /*!
  @brief A <code>MatchNoDocsQueryNode</code> indicates that a query node tree or subtree
- will not match any documents if executed in the index.
+  will not match any documents if executed in the index.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (NSString *)description;
 
@@ -38,12 +44,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQ
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode")

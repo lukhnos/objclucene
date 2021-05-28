@@ -24,6 +24,10 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/PrefixCodedTerms must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexPrefixCodedTerms () {
  @public
   jlong size_;
@@ -115,9 +119,9 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIte
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneIndexPrefixCodedTerms *other = (OrgApacheLuceneIndexPrefixCodedTerms *) cast_chk(obj, [OrgApacheLuceneIndexPrefixCodedTerms class]);
   return [((OrgApacheLuceneStoreRAMFile *) nil_chk(buffer_)) isEqual:other->buffer_] && delGen_ == other->delGen_;
 }
@@ -128,23 +132,35 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIte
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRAMFile:withLong:", "PrefixCodedTerms", NULL, 0x2, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "setDelGenWithLong:", "setDelGen", "V", 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;", 0x1, NULL, NULL },
-    { "size", NULL, "J", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPrefixCodedTerms_TermIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRAMFile:withLong:);
+  methods[1].selector = @selector(ramBytesUsed);
+  methods[2].selector = @selector(getChildResources);
+  methods[3].selector = @selector(setDelGenWithLong:);
+  methods[4].selector = @selector(iterator);
+  methods[5].selector = @selector(size);
+  methods[6].selector = @selector(hash);
+  methods[7].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "buffer_", NULL, 0x10, "Lorg.apache.lucene.store.RAMFile;", NULL, NULL, .constantValue.asLong = 0 },
-    { "size_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "delGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "buffer_", "LOrgApacheLuceneStoreRAMFile;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "size_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "delGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.PrefixCodedTerms$Builder;", "Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexPrefixCodedTerms = { 2, "PrefixCodedTerms", "org.apache.lucene.index", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRAMFile;J", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "setDelGen", "J", "hashCode", "equals", "LNSObject;", "LOrgApacheLuceneIndexPrefixCodedTerms_Builder;LOrgApacheLuceneIndexPrefixCodedTerms_TermIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexPrefixCodedTerms = { "PrefixCodedTerms", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 8, 3, -1, 7, -1, -1, -1 };
   return &_OrgApacheLuceneIndexPrefixCodedTerms;
 }
 
@@ -176,7 +192,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  JreAssert(([((OrgApacheLuceneIndexTerm *) nil_chk(lastTerm_)) isEqual:create_OrgApacheLuceneIndexTerm_initWithNSString_(@"")] || [((OrgApacheLuceneIndexTerm *) nil_chk(term)) compareToWithId:lastTerm_] > 0), (@"org/apache/lucene/index/PrefixCodedTerms.java:76 condition failed: assert lastTerm.equals(new Term(\"\")) || term.compareTo(lastTerm) > 0;"));
+  JreAssert([((OrgApacheLuceneIndexTerm *) nil_chk(lastTerm_)) isEqual:create_OrgApacheLuceneIndexTerm_initWithNSString_(@"")] || [((OrgApacheLuceneIndexTerm *) nil_chk(term)) compareToWithId:lastTerm_] > 0, @"org/apache/lucene/index/PrefixCodedTerms.java:76 condition failed: assert lastTerm.equals(new Term(\"\")) || term.compareTo(lastTerm) > 0;");
   @try {
     jint prefix = OrgApacheLuceneIndexPrefixCodedTerms_Builder_sharedPrefixWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(self, ((OrgApacheLuceneIndexTerm *) nil_chk(lastTerm_))->bytes_, ((OrgApacheLuceneIndexTerm *) nil_chk(term))->bytes_);
     jint suffix = ((OrgApacheLuceneUtilBytesRef *) nil_chk(term->bytes_))->length_ - prefix;
@@ -195,7 +211,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     size_ += 1;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -205,7 +221,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return create_OrgApacheLuceneIndexPrefixCodedTerms_initWithOrgApacheLuceneStoreRAMFile_withLong_(buffer_, size_);
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -223,20 +239,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Builder", NULL, 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneIndexTerm:", "add", "V", 0x1, NULL, NULL },
-    { "finish", NULL, "Lorg.apache.lucene.index.PrefixCodedTerms;", 0x1, NULL, NULL },
-    { "sharedPrefixWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "sharedPrefix", "I", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPrefixCodedTerms;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(addWithOrgApacheLuceneIndexTerm:);
+  methods[2].selector = @selector(finish);
+  methods[3].selector = @selector(sharedPrefixWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "buffer_", NULL, 0x2, "Lorg.apache.lucene.store.RAMFile;", NULL, NULL, .constantValue.asLong = 0 },
-    { "output_", NULL, 0x2, "Lorg.apache.lucene.store.RAMOutputStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastTerm_", NULL, 0x2, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastTermBytes_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "size_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "buffer_", "LOrgApacheLuceneStoreRAMFile;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "output_", "LOrgApacheLuceneStoreRAMOutputStream;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastTerm_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastTermBytes_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "size_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexPrefixCodedTerms_Builder = { 2, "Builder", "org.apache.lucene.index", "PrefixCodedTerms", 0x9, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "add", "LOrgApacheLuceneIndexTerm;", "sharedPrefix", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "LOrgApacheLuceneIndexPrefixCodedTerms;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexPrefixCodedTerms_Builder = { "Builder", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x9, 4, 5, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexPrefixCodedTerms_Builder;
 }
 
@@ -296,7 +321,7 @@ withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)buffer {
       return bytes_;
     }
     @catch (JavaIoIOException *e) {
-      @throw create_JavaLangRuntimeException_initWithNSException_(e);
+      @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
     }
   }
   else {
@@ -327,29 +352,39 @@ withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)buffer {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithLong:withOrgApacheLuceneStoreRAMFile:", "TermIterator", NULL, 0x2, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "readTermBytesWithInt:withInt:", "readTermBytes", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "field", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "delGen", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithLong:withOrgApacheLuceneStoreRAMFile:);
+  methods[1].selector = @selector(next);
+  methods[2].selector = @selector(readTermBytesWithInt:withInt:);
+  methods[3].selector = @selector(field);
+  methods[4].selector = @selector(delGen);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "input_", NULL, 0x10, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "builder_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytes_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "delGen_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "input_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "builder_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "bytes_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "end_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "delGen_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexPrefixCodedTerms_TermIterator = { 2, "TermIterator", "org.apache.lucene.index", "PrefixCodedTerms", 0x9, 5, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "JLOrgApacheLuceneStoreRAMFile;", "readTermBytes", "II", "LJavaIoIOException;", "LOrgApacheLuceneIndexPrefixCodedTerms;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexPrefixCodedTerms_TermIterator = { "TermIterator", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x9, 5, 6, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexPrefixCodedTerms_TermIterator;
 }
 
 @end
 
 void OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_initWithLong_withOrgApacheLuceneStoreRAMFile_(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *self, jlong delGen, OrgApacheLuceneStoreRAMFile *buffer) {
-  OrgApacheLuceneIndexFieldTermIterator_init(self);
+  OrgApacheLuceneIndexFieldTermIterator_initPackagePrivate(self);
   JreStrongAssignAndConsume(&self->builder_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   JreStrongAssign(&self->bytes_, [self->builder_ get]);
   JreStrongAssign(&self->field_, @"");
@@ -357,7 +392,7 @@ void OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_initWithLong_withOrgApach
     JreStrongAssignAndConsume(&self->input_, new_OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_(@"MergedPrefixCodedTermsIterator", buffer));
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
   self->end_ = [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->input_)) length];
   self->delGen_ = delGen;

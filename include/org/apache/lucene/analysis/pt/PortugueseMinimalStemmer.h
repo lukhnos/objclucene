@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer))
 #define OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_
 
@@ -25,19 +31,19 @@
 /*!
  @brief Minimal Stemmer for Portuguese
  <p>
- This follows the "RSLP-S" algorithm presented in:
+  This follows the "RSLP-S" algorithm presented in: 
  <i>A study on the Use of Stemming for Monolingual Ad-Hoc Portuguese
- Information Retrieval</i> (Orengo, et al)
- which is just the plural reduction step of the RSLP
- algorithm from <i>A Stemming Algorithm for the Portuguese Language</i>,
- Orengo et al.
+  Information Retrieval</i> (Orengo, et al)
+  which is just the plural reduction step of the RSLP
+  algorithm from <i>A Stemming Algorithm for the Portuguese Language</i>,
+  Orengo et al.
  - seealso: RSLPStemmerBase
  */
 @interface OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer : OrgApacheLuceneAnalysisPtRSLPStemmerBase
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -48,12 +54,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *new_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *new_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *create_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *create_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer")

@@ -11,8 +11,11 @@
 #include "org/apache/lucene/analysis/CharFilter.h"
 #include "org/apache/lucene/analysis/pattern/PatternReplaceCharFilter.h"
 #include "org/apache/lucene/analysis/pattern/PatternReplaceCharFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/CharFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/pattern/PatternReplaceCharFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory () {
  @public
@@ -43,15 +46,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactor
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "PatternReplaceCharFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithJavaIoReader:", "create", "Lorg.apache.lucene.analysis.CharFilter;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCharFilter;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithJavaIoReader:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "pattern_", NULL, 0x12, "Ljava.util.regex.Pattern;", NULL, NULL, .constantValue.asLong = 0 },
-    { "replacement_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "pattern_", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "replacement_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory = { 2, "PatternReplaceCharFilterFactory", "org.apache.lucene.analysis.pattern", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LJavaIoReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory = { "PatternReplaceCharFilterFactory", "org.apache.lucene.analysis.pattern", ptrTable, methods, fields, 7, 0x1, 2, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory;
 }
 

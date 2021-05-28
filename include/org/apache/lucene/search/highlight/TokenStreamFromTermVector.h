@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector || defined(INCLUDE_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector))
 #define OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_
 
@@ -22,37 +28,35 @@
 
 @class OrgApacheLuceneIndexTerms;
 @class OrgApacheLuceneUtilAttributeFactory;
+@class OrgApacheLuceneUtilAttributeSource;
 
 /*!
- @brief TokenStream created from a term vector field.
- The term vector requires positions and/or offsets (either). If you
- want payloads add PayloadAttributeImpl (as you would normally) but don't assume the attribute is already added just
- because you know the term vector has payloads, since the first call to incrementToken() will observe if you asked
- for them and if not then won't get them.  This TokenStream supports an efficient <code>reset()</code>, so there's
- no need to wrap with a caching impl.
+ @brief TokenStream created from a term vector field.The term vector requires positions and/or offsets (either).
+ If you
+  want payloads add PayloadAttributeImpl (as you would normally) but don't assume the attribute is already added just
+  because you know the term vector has payloads, since the first call to incrementToken() will observe if you asked
+  for them and if not then won't get them.  This TokenStream supports an efficient <code>reset()</code>, so there's
+  no need to wrap with a caching impl. 
  <p>
- The implementation will create an array of tokens indexed by token position.  As long as there aren't massive jumps
- in positions, this is fine.  And it assumes there aren't large numbers of tokens at the same position, since it adds
- them to a linked-list per position in O(N^2) complexity.  When there aren't positions in the term vector, it divides
- the startOffset by 8 to use as a temporary substitute. In that case, tokens with the same startOffset will occupy
- the same final position; otherwise tokens become adjacent.
+  The implementation will create an array of tokens indexed by token position.  As long as there aren't massive jumps
+  in positions, this is fine.  And it assumes there aren't large numbers of tokens at the same position, since it adds
+  them to a linked-list per position in O(N^2) complexity.  When there aren't positions in the term vector, it divides
+  the startOffset by 8 to use as a temporary substitute. In that case, tokens with the same startOffset will occupy
+  the same final position; otherwise tokens become adjacent.
  */
 @interface OrgApacheLuceneSearchHighlightTokenStreamFromTermVector : OrgApacheLuceneAnalysisTokenStream
-
-+ (OrgApacheLuceneUtilAttributeFactory *)ATTRIBUTE_FACTORY;
+@property (readonly, class, strong) OrgApacheLuceneUtilAttributeFactory *ATTRIBUTE_FACTORY NS_SWIFT_NAME(ATTRIBUTE_FACTORY);
 
 #pragma mark Public
 
 /*!
- @brief Constructor.
- The uninversion doesn't happen here; it's delayed till the first call to
+ @brief Constructor.The uninversion doesn't happen here; it's delayed till the first call to 
  <code>incrementToken</code>.
- @param vector Terms that contains the data for
- creating the TokenStream. Must have positions and/or offsets.
+ @param vector Terms that contains the data for         creating the TokenStream. Must have positions and/or offsets.
  @param maxStartOffset if a token's start offset exceeds this then the token is not added. -1 disables the limit.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)vector
-                                          withInt:(jint)maxStartOffset;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)vector
+                                                    withInt:(jint)maxStartOffset;
 
 - (OrgApacheLuceneIndexTerms *)getTermVectorTerms;
 
@@ -60,11 +64,19 @@
 
 - (void)reset;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector)
 
-inline OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_get_ATTRIBUTE_FACTORY();
+inline OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_get_ATTRIBUTE_FACTORY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_ATTRIBUTE_FACTORY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector, ATTRIBUTE_FACTORY, OrgApacheLuceneUtilAttributeFactory *)
@@ -79,4 +91,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTokenStreamFromTermVect
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector")

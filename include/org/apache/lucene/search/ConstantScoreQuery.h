@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchConstantScoreQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchConstantScoreQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreQuery || defined(INCLUDE_OrgApacheLuceneSearchConstantScoreQuery))
 #define OrgApacheLuceneSearchConstantScoreQuery_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief A query that wraps another query and simply returns a constant score equal to the
- query boost for every document that matches the query.
+  query boost for every document that matches the query.
  It therefore simply strips of all scores and returns a constant one.
  */
 @interface OrgApacheLuceneSearchConstantScoreQuery : OrgApacheLuceneSearchQuery {
@@ -37,11 +43,10 @@
 #pragma mark Public
 
 /*!
- @brief Strips off scores from the passed in Query.
- The hits will get a constant score
- dependent on the boost factor of this query. 
+ @brief Strips off scores from the passed in Query.The hits will get a constant score
+  dependent on the boost factor of this query.
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -58,6 +63,10 @@
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -89,10 +98,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery)
 
 /*!
  @brief We return this as our <code>BulkScorer</code> so that if the CSQ
- wraps a query with its own optimized top-level
- scorer (e.g.
- BooleanScorer) we can use that
- top-level scorer. 
+   wraps a query with its own optimized top-level
+   scorer (e.g.BooleanScorer) we can use that
+   top-level scorer.
  */
 @interface OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer : OrgApacheLuceneSearchBulkScorer {
  @public
@@ -103,10 +111,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery:(OrgApacheLuceneSearchConstantScoreQuery *)outer$
-                            withOrgApacheLuceneSearchBulkScorer:(OrgApacheLuceneSearchBulkScorer *)bulkScorer
-                                withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                                      withFloat:(jfloat)theScore;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchConstantScoreQuery:(OrgApacheLuceneSearchConstantScoreQuery *)outer$
+                                      withOrgApacheLuceneSearchBulkScorer:(OrgApacheLuceneSearchBulkScorer *)bulkScorer
+                                          withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                                withFloat:(jfloat)theScore;
 
 - (jlong)cost;
 
@@ -114,6 +122,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery)
                         withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs
                                             withInt:(jint)min
                                             withInt:(jint)max;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -132,4 +144,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkS
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreQuery")

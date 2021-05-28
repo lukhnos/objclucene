@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsAveragePayloadFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPayloadsAveragePayloadFunction_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsAveragePayloadFunction || defined(INCLUDE_OrgApacheLuceneSearchPayloadsAveragePayloadFunction))
 #define OrgApacheLuceneSearchPayloadsAveragePayloadFunction_
 
@@ -23,13 +29,13 @@
 /*!
  @brief Calculate the final score as the average score of all payloads seen.
  <p>
- Is thread safe and completely reusable. 
+  Is thread safe and completely reusable.
  */
 @interface OrgApacheLuceneSearchPayloadsAveragePayloadFunction : OrgApacheLuceneSearchPayloadsPayloadFunction
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jfloat)currentScoreWithInt:(jint)docId
                  withNSString:(NSString *)field
@@ -54,12 +60,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPayloadsAveragePayloadFunction)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init(OrgApacheLuceneSearchPayloadsAveragePayloadFunction *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsAveragePayloadFunction *new_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsAveragePayloadFunction *new_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsAveragePayloadFunction *create_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsAveragePayloadFunction *create_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsAveragePayloadFunction)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsAveragePayloadFunction")

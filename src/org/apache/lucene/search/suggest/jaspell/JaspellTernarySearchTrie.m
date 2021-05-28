@@ -8,7 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/BufferedReader.h"
 #include "java/io/FileInputStream.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Character.h"
@@ -33,15 +32,19 @@
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/jaspell/JaspellTernarySearchTrie must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie () {
  @public
   /*!
    @brief The default number of values returned by the <code>matchAlmost</code>
- method.
+  method.
    */
   jint defaultNumReturnValues_;
   /*!
-   @brief the number of differences allowed in a call to the
+   @brief the number of differences allowed in a call to the 
  <code>matchAlmostKey</code> method.
    */
   jint matchAlmostDiff_;
@@ -54,64 +57,55 @@
 
 /*!
  @brief Compares characters by alfabetical order.
- @param cCompare2
- The first char in the comparison.
- @param cRef
- The second char in the comparison.
+ @param cCompare2 The first char in the comparison.
+ @param cRef The second char in the comparison.
  @return A negative number, 0 or a positive number if the second char is
- less, equal or greater.
+          less, equal or greater.
  */
 + (jint)compareCharsAlphabeticallyWithChar:(jchar)cCompare2
                                   withChar:(jchar)cRef;
 
 /*!
- @brief Deletes the node passed in as an argument.
- If this node has non-null data,
- then both the node and the data will be deleted. It also deletes any other
- nodes in the trie that are no longer needed after the deletion of the node.
- @param nodeToDelete
- The node to delete.
+ @brief Deletes the node passed in as an argument.If this node has non-null data,
+  then both the node and the data will be deleted.
+ It also deletes any other
+  nodes in the trie that are no longer needed after the deletion of the node.
+ @param nodeToDelete The node to delete.
  */
 - (void)deleteNodeWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:(OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *)nodeToDelete;
 
 /*!
  @brief Recursively visits each node to be deleted.
  To delete a node, first set its data to null, then pass it into this
- method, then pass the node returned by this method into this method (make
- sure you don't delete the data of any of the nodes returned from this
- method!) and continue in this fashion until the node returned by this
- method is <code>null</code>.
- The TSTNode instance returned by this method will be next node to be
- operated on by <code>deleteNodeRecursion</code> (This emulates recursive
- method call while avoiding the JVM overhead normally associated with a
- recursive method.)
- @param currentNode
- The node to delete.
+  method, then pass the node returned by this method into this method (make
+  sure you don't delete the data of any of the nodes returned from this
+  method!) and continue in this fashion until the node returned by this
+  method is <code>null</code>.
+  
+  The TSTNode instance returned by this method will be next node to be
+  operated on by <code>deleteNodeRecursion</code> (This emulates recursive
+  method call while avoiding the JVM overhead normally associated with a
+  recursive method.)
+ @param currentNode The node to delete.
  @return The next node to be called in deleteNodeRecursion.
  */
 - (OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *)deleteNodeRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:(OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *)currentNode;
 
 /*!
  @brief Recursivelly vists the nodes in order to find the ones that almost match a
- given key.
- @param currentNode
- The current node.
- @param charIndex
- The current char.
- @param d
- The number of differences so far.
- @param matchAlmostNumReturnValues
- The maximum number of values in the result <code>List</code>.
- @param matchAlmostResult2
- The results so far.
- @param upTo
- If true all keys having up to and including matchAlmostDiff
- mismatched letters will be included in the result (including a key
- that is exactly the same as the target string) otherwise keys will
- be included in the result only if they have exactly
- matchAlmostDiff number of mismatched letters.
- @param matchAlmostKey
- The key being searched.
+  given key.
+ @param currentNode The current node.
+ @param charIndex The current char.
+ @param d The number of differences so far.
+ @param matchAlmostNumReturnValues The maximum number of values in the result 
+  <code> List </code> .
+ @param matchAlmostResult2 The results so far.
+ @param upTo If true all keys having up to and including matchAlmostDiff
+            mismatched letters will be included in the result (including a key
+            that is exactly the same as the target string) otherwise keys will
+            be included in the result only if they have exactly
+            matchAlmostDiff number of mismatched letters.
+ @param matchAlmostKey The key being searched.
  @return A <code>List</code> with the results.
  */
 - (id<JavaUtilList>)matchAlmostRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:(OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *)currentNode
@@ -124,12 +118,10 @@
 
 /*!
  @brief Recursivelly visists each node to calculate the number of nodes.
- @param currentNode
- The current node.
- @param checkData
- If true we check the data to be different of <code>null</code>.
- @param numNodes2
- The number of nodes so far.
+ @param currentNode The current node.
+ @param checkData If true we check the data to be different of 
+  <code> null </code> .
+ @param numNodes2 The number of nodes so far.
  @return The number of nodes accounted.
  */
 - (jint)recursiveNodeCalculatorWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:(OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *)currentNode
@@ -137,19 +129,15 @@
                                                                                                withInt:(jint)numNodes2;
 
 /*!
- @brief Returns keys sorted in alphabetical order.
- This includes the current Node
- and all nodes connected to the current Node.
+ @brief Returns keys sorted in alphabetical order.This includes the current Node
+  and all nodes connected to the current Node.
  <p>
- Sorted keys will be appended to the end of the resulting <code>List</code>.
- The result may be empty when this method is invoked, but may not be
+  Sorted keys will be appended to the end of the resulting <code>List</code>.
+  The result may be empty when this method is invoked, but may not be 
  <code>null</code>.
- @param currentNode
- The current node.
- @param sortKeysNumReturnValues
- The maximum number of values in the result.
- @param sortKeysResult2
- The results so far.
+ @param currentNode The current node.
+ @param sortKeysNumReturnValues The maximum number of values in the result.
+ @param sortKeysResult2 The results so far.
  @return A <code>List</code> with the results.
  */
 - (id<JavaUtilList>)sortKeysRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:(OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *)currentNode
@@ -172,6 +160,8 @@ __attribute__((unused)) static id<JavaUtilList> OrgApacheLuceneSearchSuggestJasp
 __attribute__((unused)) static jint OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_recursiveNodeCalculatorWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_withBoolean_withInt_(OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie *self, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *currentNode, jboolean checkData, jint numNodes2);
 
 __attribute__((unused)) static id<JavaUtilList> OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_sortKeysRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_withInt_withJavaUtilList_(OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie *self, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *currentNode, jint sortKeysNumReturnValues, id<JavaUtilList> sortKeysResult2);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie__Annotations$0(void);
 
 @implementation OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie
 
@@ -220,7 +210,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key {
-  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *node = [self getNodeWithJavaLangCharSequence:key];
+  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *node = JreRetainedLocalValue([self getNodeWithJavaLangCharSequence:key]);
   if (node == nil) {
     return nil;
   }
@@ -228,8 +218,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (JavaLangFloat *)getAndIncrementWithNSString:(NSString *)key {
-  NSString *key2 = [((NSString *) nil_chk([((NSString *) nil_chk(key)) trim])) lowercaseStringWithJRELocale:locale_];
-  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *node = [self getNodeWithJavaLangCharSequence:key2];
+  NSString *key2 = [((NSString *) nil_chk([((NSString *) nil_chk(key)) java_trim])) java_lowercaseStringWithJRELocale:locale_];
+  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *node = JreRetainedLocalValue([self getNodeWithJavaLangCharSequence:key2]);
   if (node == nil) {
     return nil;
   }
@@ -253,7 +243,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   currentNode = IOSObjectArray_Get(nil_chk(node->relatives_), OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_PARENT);
   lastNode = node;
   while (currentNode != nil) {
-    if (IOSObjectArray_Get(currentNode->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID) == lastNode) {
+    if (JreObjectEqualsEquals(IOSObjectArray_Get(currentNode->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID), lastNode)) {
       [getKeyBuffer appendWithNSString:JreStrcat("C", currentNode->splitchar_)];
     }
     lastNode = currentNode;
@@ -269,10 +259,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *)getNodeWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                  withOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:(OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *)startNode {
-  if (key == nil || startNode == nil || [key length] == 0) {
+  if (key == nil || startNode == nil || [key java_length] == 0) {
     return nil;
   }
-  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *currentNode = startNode;
+  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *currentNode = JreRetainedLocalValue(startNode);
   jint charIndex = 0;
   while (true) {
     if (currentNode == nil) {
@@ -281,7 +271,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     jint charComp = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_compareCharsAlphabeticallyWithChar_withChar_([key charAtWithInt:charIndex], currentNode->splitchar_);
     if (charComp == 0) {
       charIndex++;
-      if (charIndex == [key length]) {
+      if (charIndex == [key java_length]) {
         return currentNode;
       }
       currentNode = IOSObjectArray_Get(nil_chk(currentNode->relatives_), OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID);
@@ -299,19 +289,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (key == nil) {
     @throw create_JavaLangNullPointerException_initWithNSString_(@"attempt to get or create node with null key");
   }
-  if ([key length] == 0) {
+  if ([key java_length] == 0) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"attempt to get or create node with key of zero length");
   }
   if (rootNode_ == nil) {
     JreStrongAssignAndConsume(&rootNode_, new_OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_initWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_withChar_withOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_(self, [key charAtWithInt:0], nil));
   }
-  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *currentNode = rootNode_;
+  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *currentNode = JreRetainedLocalValue(rootNode_);
   jint charIndex = 0;
   while (true) {
     jint charComp = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_compareCharsAlphabeticallyWithChar_withChar_([key charAtWithInt:charIndex], ((OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *) nil_chk(currentNode))->splitchar_);
     if (charComp == 0) {
       charIndex++;
-      if (charIndex == [key length]) {
+      if (charIndex == [key java_length]) {
         return currentNode;
       }
       if (IOSObjectArray_Get(nil_chk(currentNode->relatives_), OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID) == nil) {
@@ -360,7 +350,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<JavaUtilList>)matchPrefixWithJavaLangCharSequence:(id<JavaLangCharSequence>)prefix
                                                 withInt:(jint)numReturnValues {
   JavaUtilVector *sortKeysResult = create_JavaUtilVector_init();
-  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *startNode = [self getNodeWithJavaLangCharSequence:prefix];
+  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *startNode = JreRetainedLocalValue([self getNodeWithJavaLangCharSequence:prefix]);
   if (startNode == nil) {
     return sortKeysResult;
   }
@@ -398,7 +388,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)removeWithNSString:(NSString *)key {
-  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_deleteNodeWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_(self, [self getNodeWithJavaLangCharSequence:[((NSString *) nil_chk([((NSString *) nil_chk(key)) trim])) lowercaseStringWithJRELocale:locale_]]);
+  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_deleteNodeWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_(self, [self getNodeWithJavaLangCharSequence:[((NSString *) nil_chk([((NSString *) nil_chk(key)) java_trim])) java_lowercaseStringWithJRELocale:locale_]]);
 }
 
 - (void)setMatchAlmostDiffWithInt:(jint)diff {
@@ -441,10 +431,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaUtilCollections_emptyList();
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(rootNode_);
   RELEASE_(locale_);
@@ -452,49 +438,86 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareCharsAlphabeticallyWithChar:withChar:", "compareCharsAlphabetically", "I", 0xa, NULL, NULL },
-    { "init", "JaspellTernarySearchTrie", NULL, 0x1, NULL, NULL },
-    { "initWithJavaUtilLocale:", "JaspellTernarySearchTrie", NULL, 0x1, NULL, NULL },
-    { "setRootWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:", "setRoot", "V", 0x0, NULL, NULL },
-    { "getRoot", NULL, "Lorg.apache.lucene.search.suggest.jaspell.JaspellTernarySearchTrie$TSTNode;", 0x0, NULL, NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:", "JaspellTernarySearchTrie", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:withBoolean:", "JaspellTernarySearchTrie", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "deleteNodeWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:", "deleteNode", "V", 0x2, NULL, NULL },
-    { "deleteNodeRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:", "deleteNodeRecursion", "Lorg.apache.lucene.search.suggest.jaspell.JaspellTernarySearchTrie$TSTNode;", 0x2, NULL, NULL },
-    { "getWithJavaLangCharSequence:", "get", "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getAndIncrementWithNSString:", "getAndIncrement", "Ljava.lang.Float;", 0x1, NULL, NULL },
-    { "getKeyWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:", "getKey", "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "getNodeWithJavaLangCharSequence:", "getNode", "Lorg.apache.lucene.search.suggest.jaspell.JaspellTernarySearchTrie$TSTNode;", 0x1, NULL, NULL },
-    { "getNodeWithJavaLangCharSequence:withOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:", "getNode", "Lorg.apache.lucene.search.suggest.jaspell.JaspellTernarySearchTrie$TSTNode;", 0x4, NULL, NULL },
-    { "getOrCreateNodeWithJavaLangCharSequence:", "getOrCreateNode", "Lorg.apache.lucene.search.suggest.jaspell.JaspellTernarySearchTrie$TSTNode;", 0x4, "Ljava.lang.NullPointerException;Ljava.lang.IllegalArgumentException;", NULL },
-    { "matchAlmostWithNSString:", "matchAlmost", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/String;)Ljava/util/List<Ljava/lang/String;>;" },
-    { "matchAlmostWithJavaLangCharSequence:withInt:", "matchAlmost", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/CharSequence;I)Ljava/util/List<Ljava/lang/String;>;" },
-    { "matchAlmostRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:withInt:withInt:withJavaLangCharSequence:withInt:withJavaUtilList:withBoolean:", "matchAlmostRecursion", "Ljava.util.List;", 0x2, NULL, "(Lorg/apache/lucene/search/suggest/jaspell/JaspellTernarySearchTrie$TSTNode;IILjava/lang/CharSequence;ILjava/util/List<Ljava/lang/String;>;Z)Ljava/util/List<Ljava/lang/String;>;" },
-    { "matchPrefixWithNSString:", "matchPrefix", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/String;)Ljava/util/List<Ljava/lang/String;>;" },
-    { "matchPrefixWithJavaLangCharSequence:withInt:", "matchPrefix", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/CharSequence;I)Ljava/util/List<Ljava/lang/String;>;" },
-    { "numDataNodes", NULL, "I", 0x1, NULL, NULL },
-    { "numDataNodesWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:", "numDataNodes", "I", 0x4, NULL, NULL },
-    { "numNodes", NULL, "I", 0x1, NULL, NULL },
-    { "numNodesWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:", "numNodes", "I", 0x4, NULL, NULL },
-    { "putWithJavaLangCharSequence:withId:", "put", "V", 0x1, NULL, NULL },
-    { "recursiveNodeCalculatorWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:withBoolean:withInt:", "recursiveNodeCalculator", "I", 0x2, NULL, NULL },
-    { "removeWithNSString:", "remove", "V", 0x1, NULL, NULL },
-    { "setMatchAlmostDiffWithInt:", "setMatchAlmostDiff", "V", 0x1, NULL, NULL },
-    { "setNumReturnValuesWithInt:", "setNumReturnValues", "V", 0x1, NULL, NULL },
-    { "sortKeysWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:withInt:", "sortKeys", "Ljava.util.List;", 0x4, NULL, "(Lorg/apache/lucene/search/suggest/jaspell/JaspellTernarySearchTrie$TSTNode;I)Ljava/util/List<Ljava/lang/String;>;" },
-    { "sortKeysRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:withInt:withJavaUtilList:", "sortKeysRecursion", "Ljava.util.List;", 0x2, NULL, "(Lorg/apache/lucene/search/suggest/jaspell/JaspellTernarySearchTrie$TSTNode;ILjava/util/List<Ljava/lang/String;>;)Ljava/util/List<Ljava/lang/String;>;" },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "I", 0xa, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, 6, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 7, 6, -1, -1, -1 },
+    { NULL, "V", 0x2, 8, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;", 0x2, 9, 4, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LJavaLangFloat;", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, 14, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;", 0x1, 15, 11, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;", 0x4, 15, 16, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;", 0x4, 17, 11, 18, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 19, 13, -1, 20, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 19, 21, -1, 22, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x2, 23, 24, -1, 25, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 26, 13, -1, 20, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 26, 21, -1, 22, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 27, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 28, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 29, 30, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 31, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 33, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 34, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 36, 35, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x4, 37, 38, -1, 39, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x2, 40, 41, -1, 42, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 43, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(compareCharsAlphabeticallyWithChar:withChar:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(initWithJavaUtilLocale:);
+  methods[3].selector = @selector(setRootWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:);
+  methods[4].selector = @selector(getRoot);
+  methods[5].selector = @selector(initWithOrgLukhnosPortmobileFilePath:);
+  methods[6].selector = @selector(initWithOrgLukhnosPortmobileFilePath:withBoolean:);
+  methods[7].selector = @selector(deleteNodeWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:);
+  methods[8].selector = @selector(deleteNodeRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:);
+  methods[9].selector = @selector(getWithJavaLangCharSequence:);
+  methods[10].selector = @selector(getAndIncrementWithNSString:);
+  methods[11].selector = @selector(getKeyWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:);
+  methods[12].selector = @selector(getNodeWithJavaLangCharSequence:);
+  methods[13].selector = @selector(getNodeWithJavaLangCharSequence:withOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:);
+  methods[14].selector = @selector(getOrCreateNodeWithJavaLangCharSequence:);
+  methods[15].selector = @selector(matchAlmostWithNSString:);
+  methods[16].selector = @selector(matchAlmostWithJavaLangCharSequence:withInt:);
+  methods[17].selector = @selector(matchAlmostRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:withInt:withInt:withJavaLangCharSequence:withInt:withJavaUtilList:withBoolean:);
+  methods[18].selector = @selector(matchPrefixWithNSString:);
+  methods[19].selector = @selector(matchPrefixWithJavaLangCharSequence:withInt:);
+  methods[20].selector = @selector(numDataNodes);
+  methods[21].selector = @selector(numDataNodesWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:);
+  methods[22].selector = @selector(numNodes);
+  methods[23].selector = @selector(numNodesWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:);
+  methods[24].selector = @selector(putWithJavaLangCharSequence:withId:);
+  methods[25].selector = @selector(recursiveNodeCalculatorWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:withBoolean:withInt:);
+  methods[26].selector = @selector(removeWithNSString:);
+  methods[27].selector = @selector(setMatchAlmostDiffWithInt:);
+  methods[28].selector = @selector(setNumReturnValuesWithInt:);
+  methods[29].selector = @selector(sortKeysWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:withInt:);
+  methods[30].selector = @selector(sortKeysRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:withInt:withJavaUtilList:);
+  methods[31].selector = @selector(ramBytesUsed);
+  methods[32].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "defaultNumReturnValues_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "matchAlmostDiff_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "rootNode_", NULL, 0x2, "Lorg.apache.lucene.search.suggest.jaspell.JaspellTernarySearchTrie$TSTNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "locale_", NULL, 0x12, "Ljava.util.Locale;", NULL, NULL, .constantValue.asLong = 0 },
+    { "defaultNumReturnValues_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "matchAlmostDiff_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "rootNode_", "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "locale_", "LJavaUtilLocale;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.jaspell.JaspellTernarySearchTrie$TSTNode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie = { 2, "JaspellTernarySearchTrie", "org.apache.lucene.search.suggest.jaspell", NULL, 0x1, 33, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "compareCharsAlphabetically", "CC", "LJavaUtilLocale;", "setRoot", "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;", "LOrgLukhnosPortmobileFilePath;", "LJavaIoIOException;", "LOrgLukhnosPortmobileFilePath;Z", "deleteNode", "deleteNodeRecursion", "get", "LJavaLangCharSequence;", "getAndIncrement", "LNSString;", "getKey", "getNode", "LJavaLangCharSequence;LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;", "getOrCreateNode", "LJavaLangNullPointerException;LJavaLangIllegalArgumentException;", "matchAlmost", "(Ljava/lang/String;)Ljava/util/List<Ljava/lang/String;>;", "LJavaLangCharSequence;I", "(Ljava/lang/CharSequence;I)Ljava/util/List<Ljava/lang/String;>;", "matchAlmostRecursion", "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;IILJavaLangCharSequence;ILJavaUtilList;Z", "(Lorg/apache/lucene/search/suggest/jaspell/JaspellTernarySearchTrie$TSTNode;IILjava/lang/CharSequence;ILjava/util/List<Ljava/lang/String;>;Z)Ljava/util/List<Ljava/lang/String;>;", "matchPrefix", "numDataNodes", "numNodes", "put", "LJavaLangCharSequence;LNSObject;", "recursiveNodeCalculator", "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;ZI", "remove", "setMatchAlmostDiff", "I", "setNumReturnValues", "sortKeys", "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;I", "(Lorg/apache/lucene/search/suggest/jaspell/JaspellTernarySearchTrie$TSTNode;I)Ljava/util/List<Ljava/lang/String;>;", "sortKeysRecursion", "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;ILJavaUtilList;", "(Lorg/apache/lucene/search/suggest/jaspell/JaspellTernarySearchTrie$TSTNode;ILjava/util/List<Ljava/lang/String;>;)Ljava/util/List<Ljava/lang/String;>;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", (void *)&OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie = { "JaspellTernarySearchTrie", "org.apache.lucene.search.suggest.jaspell", ptrTable, methods, fields, 7, 0x1, 33, 4, -1, 4, -1, -1, 44 };
   return &_OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie;
 }
 
@@ -550,28 +573,29 @@ void OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_initWithOrgLukh
   else in = OrgLukhnosPortmobileFileFiles_newBufferedReaderWithOrgLukhnosPortmobileFilePath_withJavaNioCharsetCharset_(file, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8));
   NSString *word;
   jint pos;
-  JavaLangFloat *occur, *one = create_JavaLangFloat_initWithFloat_(1);
+  JavaLangFloat *occur;
+  JavaLangFloat *one = create_JavaLangFloat_initWithFloat_(1);
   while ((word = [((JavaIoBufferedReader *) nil_chk(in)) readLine]) != nil) {
-    pos = [((NSString *) nil_chk(word)) indexOfString:@"\t"];
+    pos = [((NSString *) nil_chk(word)) java_indexOfString:@"\t"];
     occur = one;
     if (pos != -1) {
-      occur = JavaLangFloat_valueOfWithFloat_(JavaLangFloat_parseFloatWithNSString_([((NSString *) nil_chk([word substring:pos + 1])) trim]));
-      word = [word substring:0 endIndex:pos];
+      occur = JavaLangFloat_valueOfWithFloat_(JavaLangFloat_parseFloatWithNSString_([((NSString *) nil_chk([word java_substring:pos + 1])) java_trim]));
+      word = [word java_substring:0 endIndex:pos];
     }
-    NSString *key = [((NSString *) nil_chk(word)) lowercaseStringWithJRELocale:self->locale_];
+    NSString *key = [((NSString *) nil_chk(word)) java_lowercaseStringWithJRELocale:self->locale_];
     if (self->rootNode_ == nil) {
       JreStrongAssignAndConsume(&self->rootNode_, new_OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_initWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_withChar_withOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_(self, [((NSString *) nil_chk(key)) charAtWithInt:0], nil));
     }
     OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *node = nil;
-    if (((jint) [((NSString *) nil_chk(key)) length]) > 0 && self->rootNode_ != nil) {
-      OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *currentNode = self->rootNode_;
+    if ([((NSString *) nil_chk(key)) java_length] > 0 && self->rootNode_ != nil) {
+      OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *currentNode = JreRetainedLocalValue(self->rootNode_);
       jint charIndex = 0;
       while (true) {
         if (currentNode == nil) break;
         jint charComp = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_compareCharsAlphabeticallyWithChar_withChar_([key charAtWithInt:charIndex], currentNode->splitchar_);
         if (charComp == 0) {
           charIndex++;
-          if (charIndex == ((jint) [key length])) {
+          if (charIndex == [key java_length]) {
             node = currentNode;
             break;
           }
@@ -589,7 +613,7 @@ void OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_initWithOrgLukh
       if (occur2 != nil) {
         JreBoxedPlusAssignFloat(&occur, [occur2 floatValue]);
       }
-      currentNode = [self getOrCreateNodeWithJavaLangCharSequence:[((NSString *) nil_chk([word trim])) lowercaseStringWithJRELocale:self->locale_]];
+      currentNode = [self getOrCreateNodeWithJavaLangCharSequence:[((NSString *) nil_chk([word java_trim])) java_lowercaseStringWithJRELocale:self->locale_]];
       JreStrongAssign(&((OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *) nil_chk(currentNode))->data_, occur);
     }
   }
@@ -625,13 +649,13 @@ OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *OrgApacheLu
   jboolean lokidNull = IOSObjectArray_Get(currentNode->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_LOKID) == nil;
   jboolean hikidNull = IOSObjectArray_Get(currentNode->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_HIKID) == nil;
   jint childType;
-  if (IOSObjectArray_Get(((OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *) nil_chk(currentParent))->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_LOKID) == currentNode) {
+  if (JreObjectEqualsEquals(IOSObjectArray_Get(((OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *) nil_chk(currentParent))->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_LOKID), currentNode)) {
     childType = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_LOKID;
   }
-  else if (IOSObjectArray_Get(currentParent->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID) == currentNode) {
+  else if (JreObjectEqualsEquals(IOSObjectArray_Get(currentParent->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID), currentNode)) {
     childType = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID;
   }
-  else if (IOSObjectArray_Get(currentParent->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_HIKID) == currentNode) {
+  else if (JreObjectEqualsEquals(IOSObjectArray_Get(currentParent->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_HIKID), currentNode)) {
     childType = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_HIKID;
   }
   else {
@@ -688,17 +712,17 @@ OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *OrgApacheLu
 }
 
 id<JavaUtilList> OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_matchAlmostRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_withInt_withInt_withJavaLangCharSequence_withInt_withJavaUtilList_withBoolean_(OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie *self, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *currentNode, jint charIndex, jint d, id<JavaLangCharSequence> matchAlmostKey, jint matchAlmostNumReturnValues, id<JavaUtilList> matchAlmostResult2, jboolean upTo) {
-  if ((currentNode == nil) || (matchAlmostNumReturnValues != -1 && [((id<JavaUtilList>) nil_chk(matchAlmostResult2)) size] >= matchAlmostNumReturnValues) || (d < 0) || (charIndex >= [((id<JavaLangCharSequence>) nil_chk(matchAlmostKey)) length])) {
+  if ((currentNode == nil) || (matchAlmostNumReturnValues != -1 && [((id<JavaUtilList>) nil_chk(matchAlmostResult2)) size] >= matchAlmostNumReturnValues) || (d < 0) || (charIndex >= [((id<JavaLangCharSequence>) nil_chk(matchAlmostKey)) java_length])) {
     return matchAlmostResult2;
   }
   jint charComp = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_compareCharsAlphabeticallyWithChar_withChar_([((id<JavaLangCharSequence>) nil_chk(matchAlmostKey)) charAtWithInt:charIndex], ((OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode *) nil_chk(currentNode))->splitchar_);
-  id<JavaUtilList> matchAlmostResult = matchAlmostResult2;
+  id<JavaUtilList> matchAlmostResult = JreRetainedLocalValue(matchAlmostResult2);
   if ((d > 0) || (charComp < 0)) {
     matchAlmostResult = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_matchAlmostRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_withInt_withInt_withJavaLangCharSequence_withInt_withJavaUtilList_withBoolean_(self, IOSObjectArray_Get(nil_chk(currentNode->relatives_), OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_LOKID), charIndex, d, matchAlmostKey, matchAlmostNumReturnValues, matchAlmostResult, upTo);
   }
   jint nextD = (charComp == 0) ? d : d - 1;
   jboolean cond = (upTo) ? (nextD >= 0) : (nextD == 0);
-  if (([matchAlmostKey length] == charIndex + 1) && cond && (currentNode->data_ != nil)) {
+  if (([matchAlmostKey java_length] == charIndex + 1) && cond && (currentNode->data_ != nil)) {
     [((id<JavaUtilList>) nil_chk(matchAlmostResult)) addWithId:[self getKeyWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:currentNode]];
   }
   matchAlmostResult = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_matchAlmostRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_withInt_withInt_withJavaLangCharSequence_withInt_withJavaUtilList_withBoolean_(self, IOSObjectArray_Get(nil_chk(currentNode->relatives_), OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID), charIndex + 1, nextD, matchAlmostKey, matchAlmostNumReturnValues, matchAlmostResult, upTo);
@@ -739,6 +763,10 @@ id<JavaUtilList> OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_sor
   }
   sortKeysResult = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_sortKeysRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_withInt_withJavaUtilList_(self, IOSObjectArray_Get(currentNode->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID), sortKeysNumReturnValues, sortKeysResult);
   return OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_sortKeysRecursionWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_withInt_withJavaUtilList_(self, IOSObjectArray_Get(currentNode->relatives_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_HIKID), sortKeysNumReturnValues, sortKeysResult);
+}
+
+IOSObjectArray *OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie)
@@ -790,21 +818,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestJaspellJaspellTerna
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie:withChar:withOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:", "TSTNode", NULL, 0x4, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie:withChar:withOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode:);
+  methods[1].selector = @selector(ramBytesUsed);
+  methods[2].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "PARENT", "PARENT", 0x1c, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_PARENT },
-    { "LOKID", "LOKID", 0x1c, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_LOKID },
-    { "EQKID", "EQKID", 0x1c, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID },
-    { "HIKID", "HIKID", 0x1c, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_HIKID },
-    { "data_", NULL, 0x4, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
-    { "relatives_", NULL, 0x14, "[Lorg.apache.lucene.search.suggest.jaspell.JaspellTernarySearchTrie$TSTNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "splitchar_", NULL, 0x4, "C", NULL, NULL, .constantValue.asLong = 0 },
+    { "PARENT", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_PARENT, 0x1c, -1, -1, -1, -1 },
+    { "LOKID", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_LOKID, 0x1c, -1, -1, -1, -1 },
+    { "EQKID", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_EQKID, 0x1c, -1, -1, -1, -1 },
+    { "HIKID", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode_HIKID, 0x1c, -1, -1, -1, -1 },
+    { "data_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "relatives_", "[LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "splitchar_", "C", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode = { 2, "TSTNode", "org.apache.lucene.search.suggest.jaspell", "JaspellTernarySearchTrie", 0x14, 3, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie;CLOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "LOrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode = { "TSTNode", "org.apache.lucene.search.suggest.jaspell", ptrTable, methods, fields, 7, 0x14, 3, 7, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie_TSTNode;
 }
 

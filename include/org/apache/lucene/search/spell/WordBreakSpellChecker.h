@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpellWordBreakSpellChecker
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpellWordBreakSpellChecker_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellWordBreakSpellChecker || defined(INCLUDE_OrgApacheLuceneSearchSpellWordBreakSpellChecker))
 #define OrgApacheLuceneSearchSpellWordBreakSpellChecker_
 
@@ -24,13 +30,12 @@
 
 /*!
  @brief <p>
- A spell checker whose sole function is to offer suggestions by combining
- multiple terms into one word and/or breaking terms into multiple words.
+  A spell checker whose sole function is to offer suggestions by combining
+  multiple terms into one word and/or breaking terms into multiple words.
  </p>
  */
 @interface OrgApacheLuceneSearchSpellWordBreakSpellChecker : NSObject
-
-+ (OrgApacheLuceneIndexTerm *)SEPARATOR_TERM;
+@property (readonly, class, strong) OrgApacheLuceneIndexTerm *SEPARATOR_TERM NS_SWIFT_NAME(SEPARATOR_TERM);
 
 #pragma mark Public
 
@@ -42,7 +47,7 @@
  - seealso: #setMinBreakWordLength(int)
  - seealso: #setMinSuggestionFrequency(int)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns the maximum number of changes to perform on the input
@@ -70,16 +75,16 @@
 
 /*!
  @brief Returns the minimum frequency a term must have
- to be part of a suggestion.
+  to be part of a suggestion.
  - seealso: #setMinSuggestionFrequency(int)
  */
 - (jint)getMinSuggestionFrequency;
 
 /*!
  @brief <p>
- The maximum numbers of changes (word breaks or combinations) to make on the
- original term(s).
- Default=1
+  The maximum numbers of changes (word breaks or combinations) to make on the
+  original term(s).
+ Default=1 
  </p>
  - seealso: #getMaxChanges()
  */
@@ -87,9 +92,9 @@
 
 /*!
  @brief <p>
- The maximum length of a suggestion made by combining 1 or more original
- terms.
- Default=20
+  The maximum length of a suggestion made by combining 1 or more original
+  terms.
+ Default=20 
  </p>
  - seealso: #getMaxCombineWordLength()
  */
@@ -97,10 +102,10 @@
 
 /*!
  @brief <p>
- The maximum number of word combinations to evaluate.
+  The maximum number of word combinations to evaluate.
  Default=1000. A higher
- value might improve result quality. A lower value might improve
- performance.
+  value might improve result quality. A lower value might improve
+  performance. 
  </p>
  - seealso: #getMaxEvaluations()
  */
@@ -108,8 +113,8 @@
 
 /*!
  @brief <p>
- The minimum length to break words down to.
- Default=1
+  The minimum length to break words down to.
+ Default=1 
  </p>
  - seealso: #getMinBreakWordLength()
  */
@@ -117,28 +122,27 @@
 
 /*!
  @brief <p>
- The minimum frequency a term must have to be included as part of a
- suggestion.
- Default=1 Not applicable when used with
+  The minimum frequency a term must have to be included as part of a
+  suggestion.
+ Default=1 Not applicable when used with 
  <code>SuggestMode.SUGGEST_MORE_POPULAR</code>
- </p>
+  </p>
  - seealso: #getMinSuggestionFrequency()
  */
 - (void)setMinSuggestionFrequencyWithInt:(jint)minSuggestionFrequency;
 
 /*!
  @brief <p>
- Generate suggestions by breaking the passed-in term into multiple words.
+  Generate suggestions by breaking the passed-in term into multiple words.
  The scores returned are equal to the number of word breaks needed so a
- lower score is generally preferred over a higher score.
+  lower score is generally preferred over a higher score. 
  </p>
- @param suggestMode
- - default = <code>SuggestMode.SUGGEST_WHEN_NOT_IN_INDEX</code>
- @param sortMethod
- - default =
- <code>BreakSuggestionSortMethod.NUM_CHANGES_THEN_MAX_FREQUENCY</code>
+ @param suggestMode - default = 
+ <code>SuggestMode.SUGGEST_WHEN_NOT_IN_INDEX</code>
+ @param sortMethod - default =
+            <code>BreakSuggestionSortMethod.NUM_CHANGES_THEN_MAX_FREQUENCY</code>
  @return one or more arrays of words formed by breaking up the original term
- @throws IOException If there is a low-level I/O error.
+ @throw IOExceptionIf there is a low-level I/O error.
  */
 - (IOSObjectArray *)suggestWordBreaksWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                                           withInt:(jint)maxSuggestions
@@ -148,31 +152,31 @@ withOrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod:(O
 
 /*!
  @brief <p>
- Generate suggestions by combining one or more of the passed-in terms into
- single words.
- The returned <code>CombineSuggestion</code> contains both a
+  Generate suggestions by combining one or more of the passed-in terms into
+  single words.
+ The returned <code>CombineSuggestion</code> contains both a 
  <code>SuggestWord</code> and also an array detailing which passed-in terms were
- involved in creating this combination. The scores returned are equal to the
- number of word combinations needed, also one less than the length of the
- array <code>CombineSuggestion.originalTermIndexes</code>. Generally, a
- suggestion with a lower score is preferred over a higher score.
+  involved in creating this combination. The scores returned are equal to the
+  number of word combinations needed, also one less than the length of the
+  array <code>CombineSuggestion.originalTermIndexes</code>. Generally, a
+  suggestion with a lower score is preferred over a higher score. 
  </p>
- <p>
- To prevent two adjacent terms from being combined (for instance, if one is
- mandatory and the other is prohibited), separate the two terms with
+  <p>
+  To prevent two adjacent terms from being combined (for instance, if one is
+  mandatory and the other is prohibited), separate the two terms with 
  <code>WordBreakSpellChecker.SEPARATOR_TERM</code>
+  </p>
+  <p>
+  When suggestMode equals <code>SuggestMode.SUGGEST_WHEN_NOT_IN_INDEX</code>, each
+  suggestion will include at least one term not in the index. 
  </p>
- <p>
- When suggestMode equals <code>SuggestMode.SUGGEST_WHEN_NOT_IN_INDEX</code>, each
- suggestion will include at least one term not in the index.
- </p>
- <p>
- When suggestMode equals <code>SuggestMode.SUGGEST_MORE_POPULAR</code>, each
- suggestion will have the same, or better frequency than the most-popular
- included term.
+  <p>
+  When suggestMode equals <code>SuggestMode.SUGGEST_MORE_POPULAR</code>, each
+  suggestion will have the same, or better frequency than the most-popular
+  included term. 
  </p>
  @return an array of words generated by combining original terms
- @throws IOException If there is a low-level I/O error.
+ @throw IOExceptionIf there is a low-level I/O error.
  */
 - (IOSObjectArray *)suggestWordCombinationsWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms
                                                                      withInt:(jint)maxSuggestions
@@ -186,16 +190,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpellWordBreakSpellChecker)
 /*!
  @brief Term that can be used to prohibit adjacent terms from being combined
  */
-inline OrgApacheLuceneIndexTerm *OrgApacheLuceneSearchSpellWordBreakSpellChecker_get_SEPARATOR_TERM();
+inline OrgApacheLuceneIndexTerm *OrgApacheLuceneSearchSpellWordBreakSpellChecker_get_SEPARATOR_TERM(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneIndexTerm *OrgApacheLuceneSearchSpellWordBreakSpellChecker_SEPARATOR_TERM;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSpellWordBreakSpellChecker, SEPARATOR_TERM, OrgApacheLuceneIndexTerm *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellWordBreakSpellChecker_init(OrgApacheLuceneSearchSpellWordBreakSpellChecker *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellWordBreakSpellChecker *new_OrgApacheLuceneSearchSpellWordBreakSpellChecker_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellWordBreakSpellChecker *new_OrgApacheLuceneSearchSpellWordBreakSpellChecker_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellWordBreakSpellChecker *create_OrgApacheLuceneSearchSpellWordBreakSpellChecker_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellWordBreakSpellChecker *create_OrgApacheLuceneSearchSpellWordBreakSpellChecker_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellWordBreakSpellChecker)
 
@@ -208,6 +212,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellWordBreakSpellChecker)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_Enum) {
   OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_Enum_NUM_CHANGES_THEN_SUMMED_FREQUENCY = 0,
   OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_Enum_NUM_CHANGES_THEN_MAX_FREQUENCY = 1,
@@ -215,22 +221,21 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpellWordBreakSpellChecker_Brea
 
 /*!
  @brief <p>
- Determines the order to list word break suggestions
+  Determines the order to list word break suggestions 
  </p>
  */
-@interface OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod : JavaLangEnum
 
-+ (OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *)NUM_CHANGES_THEN_SUMMED_FREQUENCY;
-
-+ (OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *)NUM_CHANGES_THEN_MAX_FREQUENCY;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *NUM_CHANGES_THEN_SUMMED_FREQUENCY NS_SWIFT_NAME(NUM_CHANGES_THEN_SUMMED_FREQUENCY);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *NUM_CHANGES_THEN_MAX_FREQUENCY NS_SWIFT_NAME(NUM_CHANGES_THEN_MAX_FREQUENCY);
+#pragma mark Public
 
 + (OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_Enum)toNSEnum;
 
 @end
@@ -242,23 +247,23 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestio
 
 /*!
  @brief <p>
- Sort by Number of word breaks, then by the Sum of all the component
- term's frequencies
+  Sort by Number of word breaks, then by the Sum of all the component
+  term's frequencies 
  </p>
  */
-inline OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_get_NUM_CHANGES_THEN_SUMMED_FREQUENCY();
+inline OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_get_NUM_CHANGES_THEN_SUMMED_FREQUENCY(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_SUMMED_FREQUENCY)
 
 /*!
  @brief <p>
- Sort by Number of word breaks, then by the Maximum of all the component
- term's frequencies
+  Sort by Number of word breaks, then by the Maximum of all the component
+  term's frequencies 
  </p>
  */
-inline OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_get_NUM_CHANGES_THEN_MAX_FREQUENCY();
+inline OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_get_NUM_CHANGES_THEN_MAX_FREQUENCY(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod, NUM_CHANGES_THEN_MAX_FREQUENCY)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod *OrgApacheLuceneSearchSpellWordBreakSpellChecker_BreakSuggestionSortMethod_valueOfWithNSString_(NSString *name);
 
@@ -268,4 +273,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellWordBreakSpellChecker_Break
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellWordBreakSpellChecker")

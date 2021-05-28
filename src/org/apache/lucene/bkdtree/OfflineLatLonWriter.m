@@ -9,7 +9,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/BufferedOutputStream.h"
 #include "java/io/FileOutputStream.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "org/apache/lucene/bkdtree/BKDTreeWriter.h"
 #include "org/apache/lucene/bkdtree/LatLonReader.h"
@@ -21,6 +20,10 @@
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/bkdtree/OfflineLatLonWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneBkdtreeOfflineLatLonWriter () {
  @public
   jlong countWritten_;
@@ -30,9 +33,9 @@
 
 @implementation OrgApacheLuceneBkdtreeOfflineLatLonWriter
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDir
-                                            withLong:(jlong)count {
-  OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(self, tempDir, count);
+- (instancetype)initPackagePrivateWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDir
+                                                          withLong:(jlong)count {
+  OrgApacheLuceneBkdtreeOfflineLatLonWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(self, tempDir, count);
   return self;
 }
 
@@ -48,7 +51,7 @@
 }
 
 - (id<OrgApacheLuceneBkdtreeLatLonReader>)getReaderWithLong:(jlong)start {
-  return create_OrgApacheLuceneBkdtreeOfflineLatLonReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(tempFile_, start, count_ - start);
+  return create_OrgApacheLuceneBkdtreeOfflineLatLonReader_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_withLong_(tempFile_, start, count_ - start);
 }
 
 - (void)close {
@@ -75,29 +78,40 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgLukhnosPortmobileFilePath:withLong:", "OfflineLatLonWriter", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "appendWithInt:withInt:withLong:withInt:", "append", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getReaderWithLong:", "getReader", "Lorg.apache.lucene.bkdtree.LatLonReader;", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "destroy", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneBkdtreeLatLonReader;", 0x1, 4, 5, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgLukhnosPortmobileFilePath:withLong:);
+  methods[1].selector = @selector(appendWithInt:withInt:withLong:withInt:);
+  methods[2].selector = @selector(getReaderWithLong:);
+  methods[3].selector = @selector(close);
+  methods[4].selector = @selector(destroy);
+  methods[5].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "tempFile_", NULL, 0x10, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchBytes_", NULL, 0x10, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchBytesOutput_", NULL, 0x10, "Lorg.apache.lucene.store.ByteArrayDataOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "out_", NULL, 0x10, "Lorg.apache.lucene.store.OutputStreamDataOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "countWritten_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "tempFile_", "LOrgLukhnosPortmobileFilePath;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "scratchBytes_", "[B", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "scratchBytesOutput_", "LOrgApacheLuceneStoreByteArrayDataOutput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "out_", "LOrgApacheLuceneStoreOutputStreamDataOutput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "count_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "countWritten_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeOfflineLatLonWriter = { 2, "OfflineLatLonWriter", "org.apache.lucene.bkdtree", NULL, 0x10, 6, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgLukhnosPortmobileFilePath;J", "LJavaIoIOException;", "append", "IIJI", "getReader", "J", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeOfflineLatLonWriter = { "OfflineLatLonWriter", "org.apache.lucene.bkdtree", ptrTable, methods, fields, 7, 0x10, 6, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneBkdtreeOfflineLatLonWriter;
 }
 
 @end
 
-void OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgApacheLuceneBkdtreeOfflineLatLonWriter *self, OrgLukhnosPortmobileFilePath *tempDir, jlong count) {
+void OrgApacheLuceneBkdtreeOfflineLatLonWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(OrgApacheLuceneBkdtreeOfflineLatLonWriter *self, OrgLukhnosPortmobileFilePath *tempDir, jlong count) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->scratchBytes_, [IOSByteArray newArrayWithLength:OrgApacheLuceneBkdtreeBKDTreeWriter_BYTES_PER_DOC]);
   JreStrongAssignAndConsume(&self->scratchBytesOutput_, new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(self->scratchBytes_));
@@ -106,12 +120,12 @@ void OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFileP
   self->count_ = count;
 }
 
-OrgApacheLuceneBkdtreeOfflineLatLonWriter *new_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeOfflineLatLonWriter, initWithOrgLukhnosPortmobileFilePath_withLong_, tempDir, count)
+OrgApacheLuceneBkdtreeOfflineLatLonWriter *new_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeOfflineLatLonWriter, initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_, tempDir, count)
 }
 
-OrgApacheLuceneBkdtreeOfflineLatLonWriter *create_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeOfflineLatLonWriter, initWithOrgLukhnosPortmobileFilePath_withLong_, tempDir, count)
+OrgApacheLuceneBkdtreeOfflineLatLonWriter *create_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeOfflineLatLonWriter, initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_, tempDir, count)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeOfflineLatLonWriter)

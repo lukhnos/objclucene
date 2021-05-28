@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "java/util/Set.h"
@@ -14,7 +13,10 @@
 #include "org/apache/lucene/analysis/core/Lucene43TypeTokenFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/Lucene43TypeTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter () {
  @public
@@ -27,6 +29,8 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter, stopTypes_, id<JavaUtilSet>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter, typeAttribute_, id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>)
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter__Annotations$0(void);
 
 @implementation OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter
 
@@ -42,10 +46,6 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
   return useWhiteList_ == [((id<JavaUtilSet>) nil_chk(stopTypes_)) containsWithId:[((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAttribute_)) type]];
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(stopTypes_);
   RELEASE_(typeAttribute_);
@@ -53,16 +53,23 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:withBoolean:", "Lucene43TypeTokenFilter", NULL, 0x1, NULL, "(ZLorg/apache/lucene/analysis/TokenStream;Ljava/util/Set<Ljava/lang/String;>;Z)V" },
-    { "accept", NULL, "Z", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:withBoolean:);
+  methods[1].selector = @selector(accept);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stopTypes_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "typeAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "useWhiteList_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "stopTypes_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 3, -1 },
+    { "typeAttribute_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "useWhiteList_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter = { 2, "Lucene43TypeTokenFilter", "org.apache.lucene.analysis.core", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ZLOrgApacheLuceneAnalysisTokenStream;LJavaUtilSet;Z", "(ZLorg/apache/lucene/analysis/TokenStream;Ljava/util/Set<Ljava/lang/String;>;Z)V", "LJavaIoIOException;", "Ljava/util/Set<Ljava/lang/String;>;", (void *)&OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter = { "Lucene43TypeTokenFilter", "org.apache.lucene.analysis.core", ptrTable, methods, fields, 7, 0x11, 2, 3, -1, -1, -1, -1, 4 };
   return &_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter;
 }
 
@@ -81,6 +88,10 @@ OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *new_OrgApacheLuceneAnalysisC
 
 OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *create_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_, enablePositionIncrements, input, stopTypes, useWhiteList)
+}
+
+IOSObjectArray *OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter)

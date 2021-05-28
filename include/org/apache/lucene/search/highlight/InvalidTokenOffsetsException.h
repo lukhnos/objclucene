@@ -13,12 +13,20 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException || defined(INCLUDE_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException))
 #define OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_
 
 #define RESTRICT_JavaLangException 1
 #define INCLUDE_JavaLangException 1
 #include "java/lang/Exception.h"
+
+@class JavaLangThrowable;
 
 /*!
  @brief Exception thrown if TokenStream Tokens are incompatible with provided text
@@ -27,7 +35,21 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)message;
+- (instancetype __nonnull)initWithNSString:(NSString *)message;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1
+                               withBoolean:(jboolean)arg2
+                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -43,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightInvalidTokenOffsetsExce
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException")

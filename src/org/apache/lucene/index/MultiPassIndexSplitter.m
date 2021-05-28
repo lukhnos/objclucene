@@ -33,6 +33,10 @@
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/Paths.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MultiPassIndexSplitter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 /*!
  @brief This class emulates deletions on the underlying index.
  */
@@ -93,6 +97,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDelete
 
 @implementation OrgApacheLuceneIndexMultiPassIndexSplitter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneIndexMultiPassIndexSplitter_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)splitWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)inArg
           withOrgApacheLuceneStoreDirectoryArray:(IOSObjectArray *)outputs
                                      withBoolean:(jboolean)seq {
@@ -105,7 +116,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDelete
   jint numParts = outputs->size_;
   OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteIndexReader *input = create_OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteIndexReader_initWithOrgApacheLuceneIndexIndexReader_(inArg);
   jint maxDoc = [input maxDoc];
-  jint partLen = maxDoc / numParts;
+  jint partLen = JreIntDiv(maxDoc, numParts);
   for (jint i = 0; i < numParts; i++) {
     [input undeleteAll];
     if (seq) {
@@ -122,7 +133,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDelete
     }
     else {
       for (jint j = 0; j < maxDoc; j++) {
-        if ((j + numParts - i) % numParts != 0) {
+        if (JreIntMod((j + numParts - i), numParts) != 0) {
           [input deleteDocumentWithInt:j];
         }
       }
@@ -140,34 +151,46 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDelete
   OrgApacheLuceneIndexMultiPassIndexSplitter_mainWithNSStringArray_(args);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexMultiPassIndexSplitter_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "splitWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneStoreDirectoryArray:withBoolean:", "split", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "mainWithNSStringArray:", "main", "V", 0x9, "Ljava.lang.Exception;", NULL },
-    { "init", "MultiPassIndexSplitter", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x9, 3, 4, 5, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.MultiPassIndexSplitter$FakeDeleteIndexReader;", "Lorg.apache.lucene.index.MultiPassIndexSplitter$FakeDeleteLeafIndexReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiPassIndexSplitter = { 2, "MultiPassIndexSplitter", "org.apache.lucene.index", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 2, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(splitWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneStoreDirectoryArray:withBoolean:);
+  methods[2].selector = @selector(mainWithNSStringArray:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "split", "LOrgApacheLuceneIndexIndexReader;[LOrgApacheLuceneStoreDirectory;Z", "LJavaIoIOException;", "main", "[LNSString;", "LJavaLangException;", "LOrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteIndexReader;LOrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteLeafIndexReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiPassIndexSplitter = { "MultiPassIndexSplitter", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, 6, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMultiPassIndexSplitter;
 }
 
 @end
 
+void OrgApacheLuceneIndexMultiPassIndexSplitter_init(OrgApacheLuceneIndexMultiPassIndexSplitter *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneIndexMultiPassIndexSplitter *new_OrgApacheLuceneIndexMultiPassIndexSplitter_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiPassIndexSplitter, init)
+}
+
+OrgApacheLuceneIndexMultiPassIndexSplitter *create_OrgApacheLuceneIndexMultiPassIndexSplitter_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiPassIndexSplitter, init)
+}
+
 void OrgApacheLuceneIndexMultiPassIndexSplitter_mainWithNSStringArray_(IOSObjectArray *args) {
   OrgApacheLuceneIndexMultiPassIndexSplitter_initialize();
   if (((IOSObjectArray *) nil_chk(args))->size_ < 5) {
     [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err))) printlnWithNSString:@"Usage: MultiPassIndexSplitter -out <outputDir> -num <numParts> [-seq] <inputIndex1> [<inputIndex2 ...]"];
-    [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"\tinputIndex\tpath to input index, multiple values are ok"];
-    [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"\t-out ouputDir\tpath to output directory to contain partial indexes"];
-    [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"\t-num numParts\tnumber of parts to produce"];
-    [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"\t-seq\tsequential docid-range split (default is round-robin)"];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err))) printlnWithNSString:@"\tinputIndex\tpath to input index, multiple values are ok"];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err))) printlnWithNSString:@"\t-out ouputDir\tpath to output directory to contain partial indexes"];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err))) printlnWithNSString:@"\t-num numParts\tnumber of parts to produce"];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err))) printlnWithNSString:@"\t-seq\tsequential docid-range split (default is round-robin)"];
     JavaLangSystem_exitWithInt_(-1);
   }
   JavaUtilArrayList *indexes = create_JavaUtilArrayList_init();
@@ -230,18 +253,6 @@ void OrgApacheLuceneIndexMultiPassIndexSplitter_mainWithNSStringArray_(IOSObject
   [splitter splitWithOrgApacheLuceneIndexIndexReader:input withOrgApacheLuceneStoreDirectoryArray:dirs withBoolean:seq];
 }
 
-void OrgApacheLuceneIndexMultiPassIndexSplitter_init(OrgApacheLuceneIndexMultiPassIndexSplitter *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneIndexMultiPassIndexSplitter *new_OrgApacheLuceneIndexMultiPassIndexSplitter_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiPassIndexSplitter, init)
-}
-
-OrgApacheLuceneIndexMultiPassIndexSplitter *create_OrgApacheLuceneIndexMultiPassIndexSplitter_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiPassIndexSplitter, init)
-}
-
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiPassIndexSplitter)
 
 @implementation OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteIndexReader
@@ -270,15 +281,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiPassIndexSplitter)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReader:", "FakeDeleteIndexReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initSubReadersWithOrgApacheLuceneIndexIndexReader:", "initSubReaders", "[Lorg.apache.lucene.index.MultiPassIndexSplitter$FakeDeleteLeafIndexReader;", 0xa, "Ljava.io.IOException;", NULL },
-    { "deleteDocumentWithInt:", "deleteDocument", "V", 0x1, NULL, NULL },
-    { "undeleteAll", NULL, "V", 0x1, NULL, NULL },
-    { "doClose", NULL, "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteLeafIndexReader;", 0xa, 2, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.MultiPassIndexSplitter$FakeDeleteLeafIndexReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteIndexReader = { 2, "FakeDeleteIndexReader", "org.apache.lucene.index", "MultiPassIndexSplitter", 0x1a, 5, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/index/BaseCompositeReader<Lorg/apache/lucene/index/MultiPassIndexSplitter$FakeDeleteLeafIndexReader;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:);
+  methods[1].selector = @selector(initSubReadersWithOrgApacheLuceneIndexIndexReader:);
+  methods[2].selector = @selector(deleteDocumentWithInt:);
+  methods[3].selector = @selector(undeleteAll);
+  methods[4].selector = @selector(doClose);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "initSubReaders", "deleteDocument", "I", "LOrgApacheLuceneIndexMultiPassIndexSplitter;", "Lorg/apache/lucene/index/BaseCompositeReader<Lorg/apache/lucene/index/MultiPassIndexSplitter$FakeDeleteLeafIndexReader;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteIndexReader = { "FakeDeleteIndexReader", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x1a, 5, 0, 5, -1, -1, 6, -1 };
   return &_OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteIndexReader;
 }
 
@@ -325,7 +345,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiPassIndexSplitter_Fake
   JreStrongAssignAndConsume(&liveDocs_, new_OrgApacheLuceneUtilFixedBitSet_initWithInt_([in_ maxDoc]));
   if ([in_ hasDeletions]) {
     id<OrgApacheLuceneUtilBits> oldLiveDocs = [in_ getLiveDocs];
-    JreAssert((oldLiveDocs != nil), (@"org/apache/lucene/index/MultiPassIndexSplitter.java:233 condition failed: assert oldLiveDocs != null;"));
+    JreAssert(oldLiveDocs != nil, @"org/apache/lucene/index/MultiPassIndexSplitter.java:233 condition failed: assert oldLiveDocs != null;");
     for (jint i = 0; i < maxDoc; i++) {
       if ([((id<OrgApacheLuceneUtilBits>) nil_chk(oldLiveDocs)) getWithInt:i]) [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(liveDocs_)) setWithInt:i];
     }
@@ -349,17 +369,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiPassIndexSplitter_Fake
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexCodecReader:", "FakeDeleteLeafIndexReader", NULL, 0x1, NULL, NULL },
-    { "numDocs", NULL, "I", 0x1, NULL, NULL },
-    { "undeleteAll", NULL, "V", 0x1, NULL, NULL },
-    { "deleteDocumentWithInt:", "deleteDocument", "V", 0x1, NULL, NULL },
-    { "getLiveDocs", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexCodecReader:);
+  methods[1].selector = @selector(numDocs);
+  methods[2].selector = @selector(undeleteAll);
+  methods[3].selector = @selector(deleteDocumentWithInt:);
+  methods[4].selector = @selector(getLiveDocs);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "liveDocs_", NULL, 0x0, "Lorg.apache.lucene.util.FixedBitSet;", NULL, NULL, .constantValue.asLong = 0 },
+    { "liveDocs_", "LOrgApacheLuceneUtilFixedBitSet;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteLeafIndexReader = { 2, "FakeDeleteLeafIndexReader", "org.apache.lucene.index", "MultiPassIndexSplitter", 0x1a, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexCodecReader;", "deleteDocument", "I", "LOrgApacheLuceneIndexMultiPassIndexSplitter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteLeafIndexReader = { "FakeDeleteLeafIndexReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1a, 5, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDeleteLeafIndexReader;
 }
 

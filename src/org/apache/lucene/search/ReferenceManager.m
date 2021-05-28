@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/ReferenceManager.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/NullPointerException.h"
 #include "java/util/List.h"
@@ -14,6 +12,10 @@
 #include "java/util/concurrent/locks/ReentrantLock.h"
 #include "org/apache/lucene/search/ReferenceManager.h"
 #include "org/apache/lucene/store/AlreadyClosedException.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ReferenceManager must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchReferenceManager () {
  @public
@@ -36,7 +38,7 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchReferenceManager, refreshLock_, id<JavaUtilConcurrentLocksLock>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchReferenceManager, refreshListeners_, id<JavaUtilList>)
 
-inline NSString *OrgApacheLuceneSearchReferenceManager_get_REFERENCE_MANAGER_IS_CLOSED_MSG();
+inline NSString *OrgApacheLuceneSearchReferenceManager_get_REFERENCE_MANAGER_IS_CLOSED_MSG(void);
 static NSString *OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG = @"this ReferenceManager is closed";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchReferenceManager, REFERENCE_MANAGER_IS_CLOSED_MSG, NSString *)
 
@@ -59,6 +61,13 @@ __attribute__((unused)) static void OrgApacheLuceneSearchReferenceManager_notify
 @end
 
 @implementation OrgApacheLuceneSearchReferenceManager
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchReferenceManager_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)ensureOpen {
   OrgApacheLuceneSearchReferenceManager_ensureOpen(self);
@@ -165,13 +174,6 @@ __attribute__((unused)) static void OrgApacheLuceneSearchReferenceManager_notify
   [((id<JavaUtilList>) nil_chk(refreshListeners_)) removeWithId:listener];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchReferenceManager_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)__javaClone:(OrgApacheLuceneSearchReferenceManager *)original {
   [super __javaClone:original];
   JreCloneVolatileStrong(&current_, &original->current_);
@@ -185,39 +187,68 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "ensureOpen", NULL, "V", 0x2, NULL, NULL },
-    { "swapReferenceWithId:", "swapReference", "V", 0x22, "Ljava.io.IOException;", "(TG;)V" },
-    { "decRefWithId:", "decRef", "V", 0x404, "Ljava.io.IOException;", "(TG;)V" },
-    { "refreshIfNeededWithId:", "refreshIfNeeded", "TG;", 0x404, "Ljava.io.IOException;", "(TG;)TG;" },
-    { "tryIncRefWithId:", "tryIncRef", "Z", 0x404, "Ljava.io.IOException;", "(TG;)Z" },
-    { "acquire", NULL, "TG;", 0x11, "Ljava.io.IOException;", "()TG;" },
-    { "close", NULL, "V", 0x31, "Ljava.io.IOException;", NULL },
-    { "getRefCountWithId:", "getRefCount", "I", 0x404, NULL, "(TG;)I" },
-    { "afterClose", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "doMaybeRefresh", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "maybeRefresh", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "maybeRefreshBlocking", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "afterMaybeRefresh", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "release__WithId:", "release", "V", 0x11, "Ljava.io.IOException;", "(TG;)V" },
-    { "notifyRefreshListenersBefore", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "notifyRefreshListenersRefreshedWithBoolean:", "notifyRefreshListenersRefreshed", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "addListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:", "addListener", "V", 0x1, NULL, NULL },
-    { "removeListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:", "removeListener", "V", 0x1, NULL, NULL },
-    { "init", "ReferenceManager", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x22, 0, 1, 2, 3, -1, -1 },
+    { NULL, "V", 0x404, 4, 1, 2, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x404, 5, 1, 2, 6, -1, -1 },
+    { NULL, "Z", 0x404, 7, 1, 2, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x11, -1, -1, 2, 9, -1, -1 },
+    { NULL, "V", 0x31, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x404, 10, 1, -1, 11, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 2, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x11, 12, 1, 2, 3, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x2, 13, 14, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 16, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(ensureOpen);
+  methods[2].selector = @selector(swapReferenceWithId:);
+  methods[3].selector = @selector(decRefWithId:);
+  methods[4].selector = @selector(refreshIfNeededWithId:);
+  methods[5].selector = @selector(tryIncRefWithId:);
+  methods[6].selector = @selector(acquire);
+  methods[7].selector = @selector(close);
+  methods[8].selector = @selector(getRefCountWithId:);
+  methods[9].selector = @selector(afterClose);
+  methods[10].selector = @selector(doMaybeRefresh);
+  methods[11].selector = @selector(maybeRefresh);
+  methods[12].selector = @selector(maybeRefreshBlocking);
+  methods[13].selector = @selector(afterMaybeRefresh);
+  methods[14].selector = @selector(release__WithId:);
+  methods[15].selector = @selector(notifyRefreshListenersBefore);
+  methods[16].selector = @selector(notifyRefreshListenersRefreshedWithBoolean:);
+  methods[17].selector = @selector(addListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:);
+  methods[18].selector = @selector(removeListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "REFERENCE_MANAGER_IS_CLOSED_MSG", "REFERENCE_MANAGER_IS_CLOSED_MSG", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x44, "TG;", NULL, "TG;", .constantValue.asLong = 0 },
-    { "refreshLock_", NULL, 0x12, "Ljava.util.concurrent.locks.Lock;", NULL, NULL, .constantValue.asLong = 0 },
-    { "refreshListeners_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/search/ReferenceManager$RefreshListener;>;", .constantValue.asLong = 0 },
+    { "REFERENCE_MANAGER_IS_CLOSED_MSG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 18, -1, -1 },
+    { "current_", "LNSObject;", .constantValue.asLong = 0, 0x44, -1, -1, 19, -1 },
+    { "refreshLock_", "LJavaUtilConcurrentLocksLock;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "refreshListeners_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 20, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.ReferenceManager$RefreshListener;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchReferenceManager = { 2, "ReferenceManager", "org.apache.lucene.search", NULL, 0x401, 19, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, "<G:Ljava/lang/Object;>Ljava/lang/Object;Ljava/io/Closeable;" };
+  static const void *ptrTable[] = { "swapReference", "LNSObject;", "LJavaIoIOException;", "(TG;)V", "decRef", "refreshIfNeeded", "(TG;)TG;", "tryIncRef", "(TG;)Z", "()TG;", "getRefCount", "(TG;)I", "release", "notifyRefreshListenersRefreshed", "Z", "addListener", "LOrgApacheLuceneSearchReferenceManager_RefreshListener;", "removeListener", &OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG, "TG;", "Ljava/util/List<Lorg/apache/lucene/search/ReferenceManager$RefreshListener;>;", "<G:Ljava/lang/Object;>Ljava/lang/Object;Ljava/io/Closeable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchReferenceManager = { "ReferenceManager", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 19, 4, -1, 16, -1, 21, -1 };
   return &_OrgApacheLuceneSearchReferenceManager;
 }
 
 @end
+
+void OrgApacheLuceneSearchReferenceManager_init(OrgApacheLuceneSearchReferenceManager *self) {
+  NSObject_init(self);
+  JreStrongAssignAndConsume(&self->refreshLock_, new_JavaUtilConcurrentLocksReentrantLock_init());
+  JreStrongAssignAndConsume(&self->refreshListeners_, new_JavaUtilConcurrentCopyOnWriteArrayList_init());
+}
 
 void OrgApacheLuceneSearchReferenceManager_ensureOpen(OrgApacheLuceneSearchReferenceManager *self) {
   if (JreLoadVolatileId(&self->current_) == nil) {
@@ -243,8 +274,8 @@ id OrgApacheLuceneSearchReferenceManager_acquire(OrgApacheLuceneSearchReferenceM
     if ([self tryIncRefWithId:ref]) {
       return ref;
     }
-    if ([self getRefCountWithId:ref] == 0 && JreLoadVolatileId(&self->current_) == ref) {
-      JreAssert((ref != nil), (@"org/apache/lucene/search/ReferenceManager.java:104 condition failed: assert ref != null;"));
+    if ([self getRefCountWithId:ref] == 0 && JreObjectEqualsEquals(JreLoadVolatileId(&self->current_), ref)) {
+      JreAssert(ref != nil, @"org/apache/lucene/search/ReferenceManager.java:104 condition failed: assert ref != null;");
       @throw create_JavaLangIllegalStateException_initWithNSString_(@"The managed reference has already closed - this is likely a bug when the reference count is modified outside of the ReferenceManager");
     }
   }
@@ -258,9 +289,9 @@ void OrgApacheLuceneSearchReferenceManager_doMaybeRefresh(OrgApacheLuceneSearchR
     id reference = OrgApacheLuceneSearchReferenceManager_acquire(self);
     @try {
       OrgApacheLuceneSearchReferenceManager_notifyRefreshListenersBefore(self);
-      id newReference = [self refreshIfNeededWithId:reference];
+      id newReference = JreRetainedLocalValue([self refreshIfNeededWithId:reference]);
       if (newReference != nil) {
-        JreAssert((newReference != reference), (@"refreshIfNeeded should return null if refresh wasn't needed"));
+        JreAssert(!JreObjectEqualsEquals(newReference, reference), @"refreshIfNeeded should return null if refresh wasn't needed");
         @try {
           OrgApacheLuceneSearchReferenceManager_swapReferenceWithId_(self, newReference);
           refreshed = true;
@@ -284,7 +315,7 @@ void OrgApacheLuceneSearchReferenceManager_doMaybeRefresh(OrgApacheLuceneSearchR
 }
 
 void OrgApacheLuceneSearchReferenceManager_release__WithId_(OrgApacheLuceneSearchReferenceManager *self, id reference) {
-  JreAssert((reference != nil), (@"org/apache/lucene/search/ReferenceManager.java:273 condition failed: assert reference != null;"));
+  JreAssert(reference != nil, @"org/apache/lucene/search/ReferenceManager.java:273 condition failed: assert reference != null;");
   [self decRefWithId:reference];
 }
 
@@ -300,22 +331,23 @@ void OrgApacheLuceneSearchReferenceManager_notifyRefreshListenersRefreshedWithBo
   }
 }
 
-void OrgApacheLuceneSearchReferenceManager_init(OrgApacheLuceneSearchReferenceManager *self) {
-  NSObject_init(self);
-  JreStrongAssignAndConsume(&self->refreshLock_, new_JavaUtilConcurrentLocksReentrantLock_init());
-  JreStrongAssignAndConsume(&self->refreshListeners_, new_JavaUtilConcurrentCopyOnWriteArrayList_init());
-}
-
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchReferenceManager)
 
 @implementation OrgApacheLuceneSearchReferenceManager_RefreshListener
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "beforeRefresh", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "afterRefreshWithBoolean:", "afterRefresh", "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, 1, 2, 0, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchReferenceManager_RefreshListener = { 2, "RefreshListener", "org.apache.lucene.search", "ReferenceManager", 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(beforeRefresh);
+  methods[1].selector = @selector(afterRefreshWithBoolean:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;", "afterRefresh", "Z", "LOrgApacheLuceneSearchReferenceManager;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchReferenceManager_RefreshListener = { "RefreshListener", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x609, 2, 0, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchReferenceManager_RefreshListener;
 }
 

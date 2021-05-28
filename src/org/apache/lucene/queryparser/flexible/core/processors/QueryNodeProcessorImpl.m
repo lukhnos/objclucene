@@ -3,17 +3,21 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/NullPointerException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
 @class OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl () {
  @public
@@ -41,15 +45,22 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreProcessorsQ
 
 - (instancetype)init;
 
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)getWithInt:(jint)arg0;
+
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)removeWithInt:(jint)arg0;
+
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)setWithInt:(jint)arg0
+                                                                withId:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)arg1;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList)
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *self);
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *create_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init();
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *create_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList)
 
@@ -76,7 +87,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)processChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
-  id<JavaUtilList> children = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryTree)) getChildren];
+  id<JavaUtilList> children = JreRetainedLocalValue([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryTree)) getChildren]);
   OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *newChildren;
   if (children != nil && [children size] > 0) {
     newChildren = OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_allocateChildrenList(self);
@@ -88,7 +99,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         }
         [((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(newChildren)) addWithId:child];
       }
-      id<JavaUtilList> orderedChildrenList = [self setChildrenOrderWithJavaUtilList:newChildren];
+      id<JavaUtilList> orderedChildrenList = JreRetainedLocalValue([self setChildrenOrderWithJavaUtilList:newChildren]);
       [queryTree setWithJavaUtilList:orderedChildrenList];
     }
     @finally {
@@ -134,25 +145,40 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "QueryNodeProcessorImpl", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:", "QueryNodeProcessorImpl", NULL, 0x1, NULL, NULL },
-    { "processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "process", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "processIteration", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x2, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "processChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "processChildren", "V", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "allocateChildrenList", NULL, "Lorg.apache.lucene.queryparser.flexible.core.processors.QueryNodeProcessorImpl$ChildrenList;", 0x2, NULL, NULL },
-    { "setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:", "setQueryConfigHandler", "V", 0x1, NULL, NULL },
-    { "getQueryConfigHandler", NULL, "Lorg.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler;", 0x1, NULL, NULL },
-    { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x404, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x404, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x404, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x2, 4, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x4, 5, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x404, 7, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x404, 8, 2, 3, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x404, 9, 10, 3, 11, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:);
+  methods[2].selector = @selector(processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[3].selector = @selector(processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[4].selector = @selector(processChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[5].selector = @selector(allocateChildrenList);
+  methods[6].selector = @selector(setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:);
+  methods[7].selector = @selector(getQueryConfigHandler);
+  methods[8].selector = @selector(preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[9].selector = @selector(postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[10].selector = @selector(setChildrenOrderWithJavaUtilList:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "childrenListPool_", NULL, 0x2, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl$ChildrenList;>;", .constantValue.asLong = 0 },
-    { "queryConfig_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler;", NULL, NULL, .constantValue.asLong = 0 },
+    { "childrenListPool_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 12, -1 },
+    { "queryConfig_", "LOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.flexible.core.processors.QueryNodeProcessorImpl$ChildrenList;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl = { 2, "QueryNodeProcessorImpl", "org.apache.lucene.queryparser.flexible.core.processors", NULL, 0x401, 11, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;", "process", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", "LOrgApacheLuceneQueryparserFlexibleCoreQueryNodeException;", "processIteration", "processChildren", "setQueryConfigHandler", "preProcessNode", "postProcessNode", "setChildrenOrder", "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;", "Ljava/util/ArrayList<Lorg/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl$ChildrenList;>;", "LOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl = { "QueryNodeProcessorImpl", "org.apache.lucene.queryparser.flexible.core.processors", ptrTable, methods, fields, 7, 0x401, 11, 2, -1, 13, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl;
 }
 
@@ -205,18 +231,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ChildrenList", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "beingUsed_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "beingUsed_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList = { 2, "ChildrenList", "org.apache.lucene.queryparser.flexible.core.processors", "QueryNodeProcessorImpl", 0xa, 1, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl;", "Ljava/util/ArrayList<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList = { "ChildrenList", "org.apache.lucene.queryparser.flexible.core.processors", ptrTable, methods, fields, 7, 0xa, 1, 1, 0, -1, -1, 1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList;
 }
 

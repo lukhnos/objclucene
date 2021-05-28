@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/miscellaneous/PatternKeywordMarkerFilter.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
@@ -10,7 +11,10 @@
 #include "org/apache/lucene/analysis/miscellaneous/KeywordMarkerFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/PatternKeywordMarkerFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/PatternKeywordMarkerFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter () {
  @public
@@ -43,15 +47,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilt
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withJavaUtilRegexPattern:", "PatternKeywordMarkerFilter", NULL, 0x1, NULL, NULL },
-    { "isKeyword", NULL, "Z", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withJavaUtilRegexPattern:);
+  methods[1].selector = @selector(isKeyword);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "matcher_", NULL, 0x12, "Ljava.util.regex.Matcher;", NULL, NULL, .constantValue.asLong = 0 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "matcher_", "LJavaUtilRegexMatcher;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter = { 2, "PatternKeywordMarkerFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LJavaUtilRegexPattern;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter = { "PatternKeywordMarkerFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 2, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter;
 }
 

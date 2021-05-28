@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSimpleMergedSegmentWarmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSimpleMergedSegmentWarmer_) && (INCLUDE_ALL_OrgApacheLuceneIndexSimpleMergedSegmentWarmer || defined(INCLUDE_OrgApacheLuceneIndexSimpleMergedSegmentWarmer))
 #define OrgApacheLuceneIndexSimpleMergedSegmentWarmer_
 
@@ -25,7 +31,7 @@
 
 /*!
  @brief A very simple merged segment warmer that just ensures 
- data structures are initialized.
+  data structures are initialized.
  */
 @interface OrgApacheLuceneIndexSimpleMergedSegmentWarmer : OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer
 
@@ -35,9 +41,13 @@
  @brief Creates a new SimpleMergedSegmentWarmer
  @param infoStream InfoStream to log statistics about warming.
  */
-- (instancetype)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
 
 - (void)warmWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -53,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSimpleMergedSegmentWarmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSimpleMergedSegmentWarmer")

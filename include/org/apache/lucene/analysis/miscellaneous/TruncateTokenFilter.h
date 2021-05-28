@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_
 
@@ -25,18 +31,22 @@
 /*!
  @brief A token filter for truncating the terms into a specific length.
  Fixed prefix truncation, as a stemming method, produces good results on Turkish language.
- It is reported that F5, using first 5 characters, produced best results in
+  It is reported that F5, using first 5 characters, produced best results in 
  <a href="http://www.users.muohio.edu/canf/papers/JASIST2008offPrint.pdf">
- Information Retrieval on Turkish Texts</a>
+  Information Retrieval on Turkish Texts</a>
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)length;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                             withInt:(jint)length;
 
 - (jboolean)incrementToken;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -52,4 +62,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter")

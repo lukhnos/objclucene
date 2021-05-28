@@ -5,7 +5,7 @@
 
 /*!
  @brief A primary-key postings format that associates a version (long) with each term and
- can provide fail-fast lookups by ID and version.
+  can provide fail-fast lookups by ID and version.
  */
 #include "J2ObjC_header.h"
 
@@ -17,4 +17,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsIdversionPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionPackage_info")

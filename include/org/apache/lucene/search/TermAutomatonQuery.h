@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTermAutomatonQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTermAutomatonQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonQuery || defined(INCLUDE_OrgApacheLuceneSearchTermAutomatonQuery))
 #define OrgApacheLuceneSearchTermAutomatonQuery_
 
@@ -27,20 +33,19 @@
 
 /*!
  @brief A proximity query that lets you express an automaton, whose
- transitions are terms, to match documents.
- This is a generalization
- of other proximity queries like  <code>PhraseQuery</code>, <code>MultiPhraseQuery</code>
-  and <code>SpanNearQuery</code>.  It is likely
- slow, since it visits any document having any of the terms (i.e. it
- acts like a disjunction, not a conjunction like <code>PhraseQuery</code>
+   transitions are terms, to match documents.This is a generalization
+   of other proximity queries like  <code>PhraseQuery</code>, <code>MultiPhraseQuery</code>
+  and <code>SpanNearQuery</code>.
+ It is likely
+   slow, since it visits any document having any of the terms (i.e. it
+   acts like a disjunction, not a conjunction like <code>PhraseQuery</code>
  ), and then it must merge-sort all positions within each
- document to test whether/how many times the automaton matches.
+   document to test whether/how many times the automaton matches.  
  <p>After creating the query, use <code>createState</code>, <code>setAccept</code>
  , <code>addTransition</code> and <code>addAnyTransition</code> to
- build up the automaton.  Once you are done, call <code>finish</code> and
- then execute the query.
+   build up the automaton.  Once you are done, call <code>finish</code> and
+   then execute the query.  
  <p>This code is very new and likely has exciting bugs!
-  
  */
 @interface OrgApacheLuceneSearchTermAutomatonQuery : OrgApacheLuceneSearchQuery {
  @public
@@ -49,7 +54,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
 
 /*!
  @brief Adds a transition matching any term.
@@ -91,15 +96,13 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 /*!
  @brief Call this once you are done adding states/transitions.
- @param maxDeterminizedStates Maximum number of states created when
- determinizing the automaton.  Higher numbers allow this operation to
- consume more memory but allow more complex automatons.
+ @param maxDeterminizedStates Maximum number of states created when    determinizing the automaton.  Higher numbers allow this operation to
+     consume more memory but allow more complex automatons.
  */
 - (void)finishWithInt:(jint)maxDeterminizedStates;
 
 /*!
- @brief Returns a hash code value for this object.
- This is very costly! 
+ @brief Returns a hash code value for this object.This is very costly!
  */
 - (NSUInteger)hash;
 
@@ -111,11 +114,15 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 /*!
  @brief Returns the dot (graphviz) representation of this automaton.
- This is extremely useful for visualizing the automaton. 
+ This is extremely useful for visualizing the automaton.
  */
 - (NSString *)toDot;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -148,8 +155,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)termID
-withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)posEnum;
+- (instancetype __nonnull)initWithInt:(jint)termID
+ withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)posEnum;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -177,6 +188,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
+@class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneSearchTermAutomatonQuery;
 @class OrgApacheLuceneUtilAutomatonAutomaton;
@@ -190,10 +202,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchTermAutomatonQuery:(OrgApacheLuceneSearchTermAutomatonQuery *)outer$
-                      withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
-                         withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                withJavaUtilMap:(id<JavaUtilMap>)termStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchTermAutomatonQuery:(OrgApacheLuceneSearchTermAutomatonQuery *)outer$
+                                withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
+                                   withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                          withJavaUtilMap:(id<JavaUtilMap>)termStates;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc;
@@ -208,6 +220,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -225,4 +241,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomaton
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonQuery")

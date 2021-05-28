@@ -3,7 +3,6 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/CloneNotSupportedException.h"
@@ -16,6 +15,10 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode () {
  @public
@@ -57,7 +60,7 @@ __attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQuerypars
   id<JavaUtilList> rValues = create_JavaUtilArrayList_init();
   for (jint i = startIndex; i < [((id<JavaUtilList>) nil_chk(self->values_)) size]; i++) {
     @try {
-      [rValues addWithId:[((OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *) nil_chk([((id<JavaUtilList>) nil_chk(self->values_)) getWithInt:i])) clone]];
+      [rValues addWithId:[((OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *) nil_chk([((id<JavaUtilList>) nil_chk(self->values_)) getWithInt:i])) java_clone]];
     }
     @catch (JavaLangCloneNotSupportedException *e) {
     }
@@ -73,14 +76,14 @@ __attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQuerypars
   JavaLangStringBuilder *path = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([path appendWithNSString:@"/"])) appendWithJavaLangCharSequence:[self getFirstPathElement]];
   for (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText * __strong pathelement in nil_chk([self getPathElementsWithInt:1])) {
-    id<JavaLangCharSequence> value = [((id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>) nil_chk(escaper)) escapeWithJavaLangCharSequence:((OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *) nil_chk(pathelement))->value_ withJavaUtilLocale:JavaUtilLocale_getDefault() withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:JreLoadEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING)];
+    id<JavaLangCharSequence> value = JreRetainedLocalValue([((id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>) nil_chk(escaper)) escapeWithJavaLangCharSequence:((OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *) nil_chk(pathelement))->value_ withJavaUtilLocale:JavaUtilLocale_getDefault() withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:JreLoadEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING)]);
     [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([path appendWithNSString:@"/\""])) appendWithJavaLangCharSequence:value])) appendWithNSString:@"\""];
   }
   return [path description];
 }
 
 - (NSString *)description {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *text = [((id<JavaUtilList>) nil_chk(self->values_)) getWithInt:0];
+  OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *text = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(self->values_)) getWithInt:0]);
   return JreStrcat("$I$I$@$", @"<path start='", ((OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *) nil_chk(text))->begin_, @"' end='", text->end_, @"' path='", OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_getPathString(self), @"'/>");
 }
 
@@ -89,7 +92,7 @@ __attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQuerypars
   if (self->values_ != nil) {
     id<JavaUtilList> localValues = create_JavaUtilArrayList_init();
     for (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText * __strong value in nil_chk(self->values_)) {
-      [localValues addWithId:[((OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *) nil_chk(value)) clone]];
+      [localValues addWithId:[((OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *) nil_chk(value)) java_clone]];
     }
     JreStrongAssign(&((OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode *) nil_chk(clone))->values_, localValues);
   }
@@ -102,23 +105,37 @@ __attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQuerypars
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "PathQueryNode", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode$QueryText;>;)V" },
-    { "getPathElements", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode$QueryText;>;" },
-    { "setPathElementsWithJavaUtilList:", "setPathElements", "V", 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode$QueryText;>;)V" },
-    { "getPathElementWithInt:", "getPathElement", "Lorg.apache.lucene.queryparser.flexible.core.nodes.PathQueryNode$QueryText;", 0x1, NULL, NULL },
-    { "getFirstPathElement", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "getPathElementsWithInt:", "getPathElements", "Ljava.util.List;", 0x1, NULL, "(I)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode$QueryText;>;" },
-    { "getPathString", NULL, "Ljava.lang.CharSequence;", 0x2, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "V", 0x1, 3, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 6, 5, -1, 7, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 10, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, -1, -1, 11, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:);
+  methods[1].selector = @selector(getPathElements);
+  methods[2].selector = @selector(setPathElementsWithJavaUtilList:);
+  methods[3].selector = @selector(getPathElementWithInt:);
+  methods[4].selector = @selector(getFirstPathElement);
+  methods[5].selector = @selector(getPathElementsWithInt:);
+  methods[6].selector = @selector(getPathString);
+  methods[7].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[8].selector = @selector(description);
+  methods[9].selector = @selector(cloneTree);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "values_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode$QueryText;>;", .constantValue.asLong = 0 },
+    { "values_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 12, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.flexible.core.nodes.PathQueryNode$QueryText;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode = { 2, "PathQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 10, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode$QueryText;>;)V", "()Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode$QueryText;>;", "setPathElements", "getPathElement", "I", "getPathElements", "(I)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode$QueryText;>;", "toQueryString", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;", "toString", "LJavaLangCloneNotSupportedException;", "Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/PathQueryNode$QueryText;>;", "LOrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode = { "PathQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x1, 10, 1, -1, 13, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode;
 }
 
@@ -160,8 +177,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesPath
   return self;
 }
 
-- (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *)clone {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *) cast_chk([super clone], [OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText class]);
+- (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *)java_clone {
+  OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *) cast_chk([super java_clone], [OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText class]);
   JreStrongAssign(&((OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *) nil_chk(clone))->value_, self->value_);
   clone->begin_ = self->begin_;
   clone->end_ = self->end_;
@@ -189,26 +206,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesPath
   [super dealloc];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText;", 0x1, 1, -1, 2, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaLangCharSequence:withInt:withInt:);
+  methods[1].selector = @selector(java_clone);
+  methods[2].selector = @selector(getValue);
+  methods[3].selector = @selector(getBegin);
+  methods[4].selector = @selector(getEnd);
+  methods[5].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "value_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "begin_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "end_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LJavaLangCharSequence;II", "clone", "LJavaLangCloneNotSupportedException;", "toString", "LOrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText = { "QueryText", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x9, 6, 3, 4, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangCharSequence:withInt:withInt:", "QueryText", NULL, 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.PathQueryNode$QueryText;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "getValue", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "getBegin", NULL, "I", 0x1, NULL, NULL },
-    { "getEnd", NULL, "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "value_", NULL, 0x0, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "begin_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText = { 2, "QueryText", "org.apache.lucene.queryparser.flexible.core.nodes", "PathQueryNode", 0x9, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end

@@ -8,7 +8,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/util/Comparator.h"
 #include "org/apache/lucene/search/suggest/fst/ExternalRefSorter.h"
@@ -18,6 +17,10 @@
 #include "org/apache/lucene/util/OfflineSorter.h"
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/fst/ExternalRefSorter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestFstExternalRefSorter () {
  @public
@@ -116,22 +119,32 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenc
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilOfflineSorter:", "ExternalRefSorter", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "addWithOrgApacheLuceneUtilBytesRef:", "add", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.util.BytesRefIterator;", 0x1, "Ljava.io.IOException;", NULL },
-    { "closeWriter", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRefIterator;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LJavaUtilComparator;", 0x1, -1, -1, -1, 4, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilOfflineSorter:);
+  methods[1].selector = @selector(addWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(iterator);
+  methods[3].selector = @selector(closeWriter);
+  methods[4].selector = @selector(close);
+  methods[5].selector = @selector(getComparator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "sort_", NULL, 0x12, "Lorg.apache.lucene.util.OfflineSorter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "writer_", NULL, 0x2, "Lorg.apache.lucene.util.OfflineSorter$ByteSequencesWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "input_", NULL, 0x2, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sorted_", NULL, 0x2, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
+    { "sort_", "LOrgApacheLuceneUtilOfflineSorter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "writer_", "LOrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "input_", "LOrgLukhnosPortmobileFilePath;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "sorted_", "LOrgLukhnosPortmobileFilePath;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.fst.ExternalRefSorter$ByteSequenceIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstExternalRefSorter = { 2, "ExternalRefSorter", "org.apache.lucene.search.suggest.fst", NULL, 0x1, 6, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilOfflineSorter;", "LJavaIoIOException;", "add", "LOrgApacheLuceneUtilBytesRef;", "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstExternalRefSorter = { "ExternalRefSorter", "org.apache.lucene.search.suggest.fst", ptrTable, methods, fields, 7, 0x1, 6, 4, -1, 5, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestFstExternalRefSorter;
 }
 
@@ -202,15 +215,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFstExternalRefSorte
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter:withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader:", "ByteSequenceIterator", NULL, 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter:withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader:);
+  methods[1].selector = @selector(next);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reader_", NULL, 0x12, "Lorg.apache.lucene.util.OfflineSorter$ByteSequencesReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratch_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "reader_", "LOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratch_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator = { 2, "ByteSequenceIterator", "org.apache.lucene.search.suggest.fst", "ExternalRefSorter", 0x0, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestFstExternalRefSorter;LOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader;", "LJavaIoIOException;", "LOrgApacheLuceneSearchSuggestFstExternalRefSorter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator = { "ByteSequenceIterator", "org.apache.lucene.search.suggest.fst", ptrTable, methods, fields, 7, 0x0, 2, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs))
 #define OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_
 
@@ -24,40 +30,47 @@
 
 /*!
  @brief <code>org.apache.lucene.search.TopDocs</code> wrapper with
- an additional CharSequence key per <code>org.apache.lucene.search.ScoreDoc</code>
+  an additional CharSequence key per <code>org.apache.lucene.search.ScoreDoc</code>
  */
 @interface OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs : OrgApacheLuceneSearchTopDocs
-
-+ (OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *)EMPTY;
+@property (readonly, class, strong) OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *EMPTY NS_SWIFT_NAME(EMPTY);
 
 #pragma mark Public
 
 /*!
- @brief <code>org.apache.lucene.search.TopDocs</code> wrapper with
+ @brief <code>org.apache.lucene.search.TopDocs</code> wrapper with 
  <code>TopSuggestDocs.SuggestScoreDoc</code>
- instead of <code>org.apache.lucene.search.ScoreDoc</code>
+  instead of <code>org.apache.lucene.search.ScoreDoc</code>
  */
-- (instancetype)initWithInt:(jint)totalHits
+- (instancetype __nonnull)initWithInt:(jint)totalHits
 withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray:(IOSObjectArray *)scoreDocs
-                  withFloat:(jfloat)maxScore;
+                            withFloat:(jfloat)maxScore;
 
 /*!
  @brief Returns a new TopSuggestDocs, containing topN results across
- the provided TopSuggestDocs, sorting by score.
- Each <code>TopSuggestDocs</code>
- instance must be sorted.
- Analogous to <code>org.apache.lucene.search.TopDocs.merge(int,org.apache.lucene.search.TopDocs[])</code>
- for <code>TopSuggestDocs</code>
- NOTE: assumes every <code>shardHit</code> is already sorted by score
+  the provided TopSuggestDocs, sorting by score.Each <code>TopSuggestDocs</code>
+  instance must be sorted.
+ Analogous to <code>org.apache.lucene.search.TopDocs.merge(int, org.apache.lucene.search.TopDocs[])</code>
+  for <code>TopSuggestDocs</code>
+  NOTE: assumes every <code>shardHit</code> is already sorted by score
  */
 + (OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *)mergeWithInt:(jint)topN
          withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray:(IOSObjectArray *)shardHits;
 
 /*!
  @brief Returns <code>TopSuggestDocs.SuggestScoreDoc</code>s
- for this instance
+  for this instance
  */
 - (IOSObjectArray *)scoreLookupDocs;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)arg1
+                            withFloat:(jfloat)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -66,7 +79,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
 /*!
  @brief Singleton for empty <code>TopSuggestDocs</code>
  */
-inline OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_get_EMPTY();
+inline OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_get_EMPTY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_EMPTY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs, EMPTY, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *)
@@ -98,7 +111,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
 
 /*!
  @brief <code>org.apache.lucene.search.ScoreDoc</code> with an
- additional CharSequence key
+  additional CharSequence key
  */
 @interface OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc : OrgApacheLuceneSearchScoreDoc < JavaLangComparable > {
  @public
@@ -116,16 +129,25 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
 
 /*!
  @brief Creates a SuggestScoreDoc instance
- @param doc   document id (hit)
- @param key   matched completion
+ @param doc document id (hit)
+ @param key matched completion
  @param score weight of the matched completion
  */
-- (instancetype)initWithInt:(jint)doc
-   withJavaLangCharSequence:(id<JavaLangCharSequence>)key
-   withJavaLangCharSequence:(id<JavaLangCharSequence>)context
-                  withFloat:(jfloat)score;
+- (instancetype __nonnull)initWithInt:(jint)doc
+             withJavaLangCharSequence:(id<JavaLangCharSequence>)key
+             withJavaLangCharSequence:(id<JavaLangCharSequence>)context
+                            withFloat:(jfloat)score;
 
 - (jint)compareToWithId:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *)o;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                            withFloat:(jfloat)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                            withFloat:(jfloat)arg1
+                              withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -144,4 +166,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_Su
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs")

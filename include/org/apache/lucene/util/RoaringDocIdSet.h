@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilRoaringDocIdSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilRoaringDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilRoaringDocIdSet || defined(INCLUDE_OrgApacheLuceneUtilRoaringDocIdSet))
 #define OrgApacheLuceneUtilRoaringDocIdSet_
 
@@ -24,12 +30,12 @@
 
 /*!
  @brief <code>DocIdSet</code> implementation inspired from http://roaringbitmap.org/
- The space is divided into blocks of 2^16 bits and each block is encoded
- independently.
- In each block, if less than 2^12 bits are set, then
- documents are simply stored in a short[]. If more than 2^16-2^12 bits are
- set, then the inverse of the set is encoded in a simple short[]. Otherwise
- a <code>FixedBitSet</code> is used.
+  The space is divided into blocks of 2^16 bits and each block is encoded
+  independently.In each block, if less than 2^12 bits are set, then
+  documents are simply stored in a short[].
+ If more than 2^16-2^12 bits are
+  set, then the inverse of the set is encoded in a simple short[]. Otherwise a 
+ <code>FixedBitSet</code> is used.
  */
 @interface OrgApacheLuceneUtilRoaringDocIdSet : OrgApacheLuceneSearchDocIdSet
 
@@ -47,6 +53,10 @@
 - (jlong)ramBytesUsed;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -72,7 +82,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet)
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithInt:(jint)maxDoc;
+- (instancetype __nonnull)initWithInt:(jint)maxDoc;
 
 /*!
  @brief Add the content of the provided <code>DocIdSetIterator</code>.
@@ -90,6 +100,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet)
  */
 - (OrgApacheLuceneUtilRoaringDocIdSet *)build;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilRoaringDocIdSet_Builder)
@@ -104,4 +118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet_Builder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilRoaringDocIdSet")

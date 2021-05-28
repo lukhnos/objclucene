@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPositiveScoresOnlyCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPositiveScoresOnlyCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchPositiveScoresOnlyCollector || defined(INCLUDE_OrgApacheLuceneSearchPositiveScoresOnlyCollector))
 #define OrgApacheLuceneSearchPositiveScoresOnlyCollector_
 
@@ -25,15 +31,15 @@
 @protocol OrgApacheLuceneSearchLeafCollector;
 
 /*!
- @brief A <code>Collector</code> implementation which wraps another
+ @brief A <code>Collector</code> implementation which wraps another 
  <code>Collector</code> and makes sure only documents with
- scores &gt; 0 are collected.
+  scores &gt; 0 are collected.
  */
 @interface OrgApacheLuceneSearchPositiveScoresOnlyCollector : OrgApacheLuceneSearchFilterCollector
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)inArg;
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -51,4 +57,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPositiveScoresOnlyCollector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPositiveScoresOnlyCollector")

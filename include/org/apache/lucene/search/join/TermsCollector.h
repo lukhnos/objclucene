@@ -19,6 +19,12 @@
 #define INCLUDE_OrgApacheLuceneSearchJoinTermsCollector 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinTermsCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsCollector))
 #define OrgApacheLuceneSearchJoinTermsCollector_
 
@@ -45,16 +51,20 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field;
 
 /*!
  @brief Chooses the right <code>TermsCollector</code> implementation.
- @param field                     The field to collect terms for
+ @param field The field to collect terms for
  @param multipleValuesPerDocument Whether the field to collect terms for has multiple values per document.
  @return a <code>TermsCollector</code> instance
  */
 + (OrgApacheLuceneSearchJoinTermsCollector *)createWithNSString:(NSString *)field
                                                     withBoolean:(jboolean)multipleValuesPerDocument;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -63,7 +73,7 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinTermsCollector)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsCollector, field_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsCollector, collectorTerms_, OrgApacheLuceneUtilBytesRefHash *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsCollector_initWithNSString_(OrgApacheLuceneSearchJoinTermsCollector *self, NSString *field);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsCollector_initPackagePrivateWithNSString_(OrgApacheLuceneSearchJoinTermsCollector *self, NSString *field);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsCollector *OrgApacheLuceneSearchJoinTermsCollector_createWithNSString_withBoolean_(NSString *field, jboolean multipleValuesPerDocument);
 
@@ -92,7 +102,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -131,7 +145,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector_MV)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -149,4 +167,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector_SV)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsCollector")

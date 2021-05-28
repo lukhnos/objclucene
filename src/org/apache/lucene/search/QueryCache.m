@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/QueryCache.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/QueryCache must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchQueryCache : NSObject
 
 @end
@@ -13,10 +17,16 @@
 @implementation OrgApacheLuceneSearchQueryCache
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "doCacheWithOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchQueryCachingPolicy:", "doCache", "Lorg.apache.lucene.search.Weight;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchQueryCache = { 2, "QueryCache", "org.apache.lucene.search", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(doCacheWithOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchQueryCachingPolicy:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "doCache", "LOrgApacheLuceneSearchWeight;LOrgApacheLuceneSearchQueryCachingPolicy;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchQueryCache = { "QueryCache", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchQueryCache;
 }
 

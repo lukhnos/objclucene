@@ -3,14 +3,18 @@
 //  source: ./core/src/java/org/apache/lucene/util/fst/PairOutputs.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/fst/Outputs.h"
 #include "org/apache/lucene/util/fst/PairOutputs.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/fst/PairOutputs must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneUtilFstPairOutputs () {
  @public
@@ -27,7 +31,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstPairOutputs, NO_OUTPUT_, OrgApacheLuce
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstPairOutputs, outputs1_, OrgApacheLuceneUtilFstOutputs *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstPairOutputs, outputs2_, OrgApacheLuceneUtilFstOutputs *)
 
-inline jlong OrgApacheLuceneUtilFstPairOutputs_get_BASE_NUM_BYTES();
+inline jlong OrgApacheLuceneUtilFstPairOutputs_get_BASE_NUM_BYTES(void);
 static jlong OrgApacheLuceneUtilFstPairOutputs_BASE_NUM_BYTES;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFstPairOutputs, BASE_NUM_BYTES, jlong)
 
@@ -58,18 +62,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstPairOutputs)
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)newPairWithId:(id)a
                                                    withId:(id)b {
-  if ([((id) nil_chk(a)) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) getNoOutput]]) {
+  if ([nil_chk(a) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) getNoOutput]]) {
     a = [outputs1_ getNoOutput];
   }
-  if ([((id) nil_chk(b)) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) getNoOutput]]) {
+  if ([nil_chk(b) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) getNoOutput]]) {
     b = [outputs2_ getNoOutput];
   }
-  if (a == [outputs1_ getNoOutput] && b == [outputs2_ getNoOutput]) {
+  if (JreObjectEqualsEquals(a, [outputs1_ getNoOutput]) && JreObjectEqualsEquals(b, [outputs2_ getNoOutput])) {
     return NO_OUTPUT_;
   }
   else {
     OrgApacheLuceneUtilFstPairOutputs_Pair *p = create_OrgApacheLuceneUtilFstPairOutputs_Pair_initWithId_withId_(a, b);
-    JreAssert((OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, p)), (@"org/apache/lucene/util/fst/PairOutputs.java:91 condition failed: assert valid(p);"));
+    JreAssert(OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, p), @"org/apache/lucene/util/fst/PairOutputs.java:91 condition failed: assert valid(p);");
     return p;
   }
 }
@@ -80,35 +84,35 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstPairOutputs)
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)commonWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)pair1
                                                   withId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)pair2 {
-  JreAssert((OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, pair1)), (@"org/apache/lucene/util/fst/PairOutputs.java:122 condition failed: assert valid(pair1);"));
-  JreAssert((OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, pair2)), (@"org/apache/lucene/util/fst/PairOutputs.java:123 condition failed: assert valid(pair2);"));
-  return [self newPairWithId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) commonWithId:((id) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(pair1))->output1_) withId:((id) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(pair2))->output1_)] withId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) commonWithId:((id) pair1->output2_) withId:((id) pair2->output2_)]];
+  JreAssert(OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, pair1), @"org/apache/lucene/util/fst/PairOutputs.java:122 condition failed: assert valid(pair1);");
+  JreAssert(OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, pair2), @"org/apache/lucene/util/fst/PairOutputs.java:123 condition failed: assert valid(pair2);");
+  return [self newPairWithId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) commonWithId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(pair1))->output1_ withId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(pair2))->output1_] withId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) commonWithId:pair1->output2_ withId:pair2->output2_]];
 }
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)subtractWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output
                                                     withId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)inc {
-  JreAssert((OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, output)), (@"org/apache/lucene/util/fst/PairOutputs.java:130 condition failed: assert valid(output);"));
-  JreAssert((OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, inc)), (@"org/apache/lucene/util/fst/PairOutputs.java:131 condition failed: assert valid(inc);"));
-  return [self newPairWithId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) subtractWithId:((id) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output1_) withId:((id) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(inc))->output1_)] withId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) subtractWithId:((id) output->output2_) withId:((id) inc->output2_)]];
+  JreAssert(OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, output), @"org/apache/lucene/util/fst/PairOutputs.java:130 condition failed: assert valid(output);");
+  JreAssert(OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, inc), @"org/apache/lucene/util/fst/PairOutputs.java:131 condition failed: assert valid(inc);");
+  return [self newPairWithId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) subtractWithId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output1_ withId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(inc))->output1_] withId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) subtractWithId:output->output2_ withId:inc->output2_]];
 }
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)addWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)prefix
                                                withId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output {
-  JreAssert((OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, prefix)), (@"org/apache/lucene/util/fst/PairOutputs.java:138 condition failed: assert valid(prefix);"));
-  JreAssert((OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, output)), (@"org/apache/lucene/util/fst/PairOutputs.java:139 condition failed: assert valid(output);"));
-  return [self newPairWithId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) addWithId:((id) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(prefix))->output1_) withId:((id) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output1_)] withId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) addWithId:((id) prefix->output2_) withId:((id) output->output2_)]];
+  JreAssert(OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, prefix), @"org/apache/lucene/util/fst/PairOutputs.java:138 condition failed: assert valid(prefix);");
+  JreAssert(OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, output), @"org/apache/lucene/util/fst/PairOutputs.java:139 condition failed: assert valid(output);");
+  return [self newPairWithId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) addWithId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(prefix))->output1_ withId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output1_] withId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) addWithId:prefix->output2_ withId:output->output2_]];
 }
 
 - (void)writeWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)writer {
-  JreAssert((OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, output)), (@"org/apache/lucene/util/fst/PairOutputs.java:146 condition failed: assert valid(output);"));
-  [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) writeWithId:((id) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output1_) withOrgApacheLuceneStoreDataOutput:writer];
-  [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) writeWithId:((id) output->output2_) withOrgApacheLuceneStoreDataOutput:writer];
+  JreAssert(OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, output), @"org/apache/lucene/util/fst/PairOutputs.java:146 condition failed: assert valid(output);");
+  [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) writeWithId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output1_ withOrgApacheLuceneStoreDataOutput:writer];
+  [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) writeWithId:output->output2_ withOrgApacheLuceneStoreDataOutput:writer];
 }
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg {
-  id output1 = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) readWithOrgApacheLuceneStoreDataInput:inArg];
-  id output2 = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) readWithOrgApacheLuceneStoreDataInput:inArg];
+  id output1 = JreRetainedLocalValue([((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) readWithOrgApacheLuceneStoreDataInput:inArg]);
+  id output2 = JreRetainedLocalValue([((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) readWithOrgApacheLuceneStoreDataInput:inArg]);
   return [self newPairWithId:output1 withId:output2];
 }
 
@@ -122,8 +126,8 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)writer {
 }
 
 - (NSString *)outputToStringWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output {
-  JreAssert((OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, output)), (@"org/apache/lucene/util/fst/PairOutputs.java:171 condition failed: assert valid(output);"));
-  return JreStrcat("$$C$C", @"<pair:", [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) outputToStringWithId:((id) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output1_)], ',', [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) outputToStringWithId:((id) output->output2_)], '>');
+  JreAssert(OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, output), @"org/apache/lucene/util/fst/PairOutputs.java:171 condition failed: assert valid(output);");
+  return JreStrcat("$$C$C", @"<pair:", [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) outputToStringWithId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output1_], ',', [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) outputToStringWithId:output->output2_], '>');
 }
 
 - (NSString *)description {
@@ -133,10 +137,10 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)writer {
 - (jlong)ramBytesUsedWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output {
   jlong ramBytesUsed = OrgApacheLuceneUtilFstPairOutputs_BASE_NUM_BYTES;
   if (((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output1_ != nil) {
-    ramBytesUsed += [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) ramBytesUsedWithId:((id) output->output1_)];
+    ramBytesUsed += [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) ramBytesUsedWithId:output->output1_];
   }
   if (output->output2_ != nil) {
-    ramBytesUsed += [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) ramBytesUsedWithId:((id) output->output2_)];
+    ramBytesUsed += [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) ramBytesUsedWithId:output->output2_];
   }
   return ramBytesUsed;
 }
@@ -148,39 +152,55 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)writer {
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstPairOutputs_Pair;", 0x1, 2, 3, -1, 4, -1, -1 },
+    { NULL, "Z", 0x2, 5, 6, -1, 7, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstPairOutputs_Pair;", 0x1, 8, 9, -1, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstPairOutputs_Pair;", 0x1, 11, 9, -1, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstPairOutputs_Pair;", 0x1, 12, 9, -1, 10, -1, -1 },
+    { NULL, "V", 0x1, 13, 14, 15, 16, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstPairOutputs_Pair;", 0x1, 17, 18, 15, 19, -1, -1 },
+    { NULL, "V", 0x1, 20, 18, 15, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstPairOutputs_Pair;", 0x1, -1, -1, -1, 21, -1, -1 },
+    { NULL, "LNSString;", 0x1, 22, 6, -1, 23, -1, -1 },
+    { NULL, "LNSString;", 0x1, 24, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 25, 6, -1, 26, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilFstOutputs:withOrgApacheLuceneUtilFstOutputs:);
+  methods[1].selector = @selector(newPairWithId:withId:);
+  methods[2].selector = @selector(validWithOrgApacheLuceneUtilFstPairOutputs_Pair:);
+  methods[3].selector = @selector(commonWithId:withId:);
+  methods[4].selector = @selector(subtractWithId:withId:);
+  methods[5].selector = @selector(addWithId:withId:);
+  methods[6].selector = @selector(writeWithId:withOrgApacheLuceneStoreDataOutput:);
+  methods[7].selector = @selector(readWithOrgApacheLuceneStoreDataInput:);
+  methods[8].selector = @selector(skipOutputWithOrgApacheLuceneStoreDataInput:);
+  methods[9].selector = @selector(getNoOutput);
+  methods[10].selector = @selector(outputToStringWithId:);
+  methods[11].selector = @selector(description);
+  methods[12].selector = @selector(ramBytesUsedWithId:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "NO_OUTPUT_", "LOrgApacheLuceneUtilFstPairOutputs_Pair;", .constantValue.asLong = 0, 0x12, -1, -1, 27, -1 },
+    { "outputs1_", "LOrgApacheLuceneUtilFstOutputs;", .constantValue.asLong = 0, 0x12, -1, -1, 28, -1 },
+    { "outputs2_", "LOrgApacheLuceneUtilFstOutputs;", .constantValue.asLong = 0, 0x12, -1, -1, 29, -1 },
+    { "BASE_NUM_BYTES", "J", .constantValue.asLong = 0, 0x1a, -1, 30, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilFstOutputs;LOrgApacheLuceneUtilFstOutputs;", "(Lorg/apache/lucene/util/fst/Outputs<TA;>;Lorg/apache/lucene/util/fst/Outputs<TB;>;)V", "newPair", "LNSObject;LNSObject;", "(TA;TB;)Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;", "valid", "LOrgApacheLuceneUtilFstPairOutputs_Pair;", "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;)Z", "common", "LOrgApacheLuceneUtilFstPairOutputs_Pair;LOrgApacheLuceneUtilFstPairOutputs_Pair;", "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;)Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;", "subtract", "add", "write", "LOrgApacheLuceneUtilFstPairOutputs_Pair;LOrgApacheLuceneStoreDataOutput;", "LJavaIoIOException;", "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;Lorg/apache/lucene/store/DataOutput;)V", "read", "LOrgApacheLuceneStoreDataInput;", "(Lorg/apache/lucene/store/DataInput;)Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;", "skipOutput", "()Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;", "outputToString", "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;)Ljava/lang/String;", "toString", "ramBytesUsed", "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;)J", "Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;", "Lorg/apache/lucene/util/fst/Outputs<TA;>;", "Lorg/apache/lucene/util/fst/Outputs<TB;>;", &OrgApacheLuceneUtilFstPairOutputs_BASE_NUM_BYTES, "<A:Ljava/lang/Object;B:Ljava/lang/Object;>Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstPairOutputs = { "PairOutputs", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x1, 13, 4, -1, 6, -1, 31, -1 };
+  return &_OrgApacheLuceneUtilFstPairOutputs;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFstPairOutputs class]) {
     OrgApacheLuceneUtilFstPairOutputs_BASE_NUM_BYTES = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(create_OrgApacheLuceneUtilFstPairOutputs_Pair_initWithId_withId_(nil, nil));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFstPairOutputs)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstOutputs:withOrgApacheLuceneUtilFstOutputs:", "PairOutputs", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/Outputs<TA;>;Lorg/apache/lucene/util/fst/Outputs<TB;>;)V" },
-    { "newPairWithId:withId:", "newPair", "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", 0x1, NULL, "(TA;TB;)Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;" },
-    { "validWithOrgApacheLuceneUtilFstPairOutputs_Pair:", "valid", "Z", 0x2, NULL, "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;)Z" },
-    { "commonWithId:withId:", "common", "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", 0x1, NULL, "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;)Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;" },
-    { "subtractWithId:withId:", "subtract", "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", 0x1, NULL, "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;)Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;" },
-    { "addWithId:withId:", "add", "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", 0x1, NULL, "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;)Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;" },
-    { "writeWithId:withOrgApacheLuceneStoreDataOutput:", "write", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;Lorg/apache/lucene/store/DataOutput;)V" },
-    { "readWithOrgApacheLuceneStoreDataInput:", "read", "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;)Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;" },
-    { "skipOutputWithOrgApacheLuceneStoreDataInput:", "skipOutput", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getNoOutput", NULL, "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", 0x1, NULL, "()Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;" },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;)Ljava/lang/String;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;)J" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "NO_OUTPUT_", NULL, 0x12, "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", NULL, "Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;", .constantValue.asLong = 0 },
-    { "outputs1_", NULL, 0x12, "Lorg.apache.lucene.util.fst.Outputs;", NULL, "Lorg/apache/lucene/util/fst/Outputs<TA;>;", .constantValue.asLong = 0 },
-    { "outputs2_", NULL, 0x12, "Lorg.apache.lucene.util.fst.Outputs;", NULL, "Lorg/apache/lucene/util/fst/Outputs<TB;>;", .constantValue.asLong = 0 },
-    { "BASE_NUM_BYTES", "BASE_NUM_BYTES", 0x1a, "J", &OrgApacheLuceneUtilFstPairOutputs_BASE_NUM_BYTES, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.fst.PairOutputs$Pair;"};
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.fst.PairOutputs$Pair;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstPairOutputs = { 2, "PairOutputs", "org.apache.lucene.util.fst", NULL, 0x1, 13, methods, 4, fields, 1, superclass_type_args, 1, inner_classes, NULL, "<A:Ljava/lang/Object;B:Ljava/lang/Object;>Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;>;" };
-  return &_OrgApacheLuceneUtilFstPairOutputs;
 }
 
 @end
@@ -201,16 +221,16 @@ OrgApacheLuceneUtilFstPairOutputs *create_OrgApacheLuceneUtilFstPairOutputs_init
 }
 
 jboolean OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(OrgApacheLuceneUtilFstPairOutputs *self, OrgApacheLuceneUtilFstPairOutputs_Pair *pair) {
-  jboolean noOutput1 = [((id) nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(pair))->output1_)) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(self->outputs1_)) getNoOutput]];
-  jboolean noOutput2 = [((id) nil_chk(pair->output2_)) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(self->outputs2_)) getNoOutput]];
-  if (noOutput1 && pair->output1_ != [self->outputs1_ getNoOutput]) {
+  jboolean noOutput1 = [nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(pair))->output1_) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(self->outputs1_)) getNoOutput]];
+  jboolean noOutput2 = [nil_chk(pair->output2_) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(self->outputs2_)) getNoOutput]];
+  if (noOutput1 && !JreObjectEqualsEquals(pair->output1_, [self->outputs1_ getNoOutput])) {
     return false;
   }
-  if (noOutput2 && pair->output2_ != [self->outputs2_ getNoOutput]) {
+  if (noOutput2 && !JreObjectEqualsEquals(pair->output2_, [self->outputs2_ getNoOutput])) {
     return false;
   }
   if (noOutput1 && noOutput2) {
-    if (pair != self->NO_OUTPUT_) {
+    if (!JreObjectEqualsEquals(pair, self->NO_OUTPUT_)) {
       return false;
     }
     else {
@@ -233,12 +253,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstPairOutputs)
 }
 
 - (jboolean)isEqual:(id)other {
-  if (other == self) {
+  if (JreObjectEqualsEquals(other, self)) {
     return true;
   }
   else if ([other isKindOfClass:[OrgApacheLuceneUtilFstPairOutputs_Pair class]]) {
-    OrgApacheLuceneUtilFstPairOutputs_Pair *pair = (OrgApacheLuceneUtilFstPairOutputs_Pair *) cast_chk(other, [OrgApacheLuceneUtilFstPairOutputs_Pair class]);
-    return [((id) nil_chk(output1_)) isEqual:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(pair))->output1_] && [((id) nil_chk(output2_)) isEqual:pair->output2_];
+    OrgApacheLuceneUtilFstPairOutputs_Pair *pair = (OrgApacheLuceneUtilFstPairOutputs_Pair *) other;
+    return [nil_chk(output1_) isEqual:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(pair))->output1_] && [nil_chk(output2_) isEqual:pair->output2_];
   }
   else {
     return false;
@@ -246,7 +266,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstPairOutputs)
 }
 
 - (NSUInteger)hash {
-  return ((jint) [((id) nil_chk(output1_)) hash]) + ((jint) [((id) nil_chk(output2_)) hash]);
+  return ((jint) [nil_chk(output1_) hash]) + ((jint) [nil_chk(output2_) hash]);
 }
 
 - (NSString *)description {
@@ -260,17 +280,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstPairOutputs)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithId:withId:", "Pair", NULL, 0x2, NULL, "(TA;TB;)V" },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, 1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithId:withId:);
+  methods[1].selector = @selector(isEqual:);
+  methods[2].selector = @selector(hash);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "output1_", NULL, 0x11, "TA;", NULL, "TA;", .constantValue.asLong = 0 },
-    { "output2_", NULL, 0x11, "TB;", NULL, "TB;", .constantValue.asLong = 0 },
+    { "output1_", "LNSObject;", .constantValue.asLong = 0, 0x11, -1, -1, 6, -1 },
+    { "output2_", "LNSObject;", .constantValue.asLong = 0, 0x11, -1, -1, 7, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstPairOutputs_Pair = { 2, "Pair", "org.apache.lucene.util.fst", "PairOutputs", 0x9, 4, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<A:Ljava/lang/Object;B:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "LNSObject;LNSObject;", "(TA;TB;)V", "equals", "LNSObject;", "hashCode", "toString", "TA;", "TB;", "LOrgApacheLuceneUtilFstPairOutputs;", "<A:Ljava/lang/Object;B:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstPairOutputs_Pair = { "Pair", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x9, 4, 2, 8, -1, -1, 9, -1 };
   return &_OrgApacheLuceneUtilFstPairOutputs_Pair;
 }
 

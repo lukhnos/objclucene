@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedPagedMutable
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedPagedMutable_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPagedMutable || defined(INCLUDE_OrgApacheLuceneUtilPackedPagedMutable))
 #define OrgApacheLuceneUtilPackedPagedMutable_
 
@@ -25,10 +31,10 @@
 @class OrgApacheLuceneUtilPackedPackedInts_Mutable;
 
 /*!
- @brief A <code>PagedMutable</code>.
- This class slices data into fixed-size blocks
- which have the same number of bits per value. It can be a useful replacement
- for <code>PackedInts.Mutable</code> to store more than 2B values.
+ @brief A <code>PagedMutable</code>.This class slices data into fixed-size blocks
+  which have the same number of bits per value.
+ It can be a useful replacement
+  for <code>PackedInts.Mutable</code> to store more than 2B values.
  */
 @interface OrgApacheLuceneUtilPackedPagedMutable : OrgApacheLuceneUtilPackedAbstractPagedMutable {
  @public
@@ -44,10 +50,16 @@
  @param bitsPerValue the number of bits per value
  @param acceptableOverheadRatio an acceptable overhead ratio
  */
-- (instancetype)initWithLong:(jlong)size
-                     withInt:(jint)pageSize
-                     withInt:(jint)bitsPerValue
-                   withFloat:(jfloat)acceptableOverheadRatio;
+- (instancetype __nonnull)initWithLong:(jlong)size
+                               withInt:(jint)pageSize
+                               withInt:(jint)bitsPerValue
+                             withFloat:(jfloat)acceptableOverheadRatio;
+
+- (OrgApacheLuceneUtilPackedPagedMutable *)grow;
+
+- (OrgApacheLuceneUtilPackedPagedMutable *)growWithLong:(jlong)arg0;
+
+- (OrgApacheLuceneUtilPackedPagedMutable *)resizeWithLong:(jlong)arg0;
 
 #pragma mark Protected
 
@@ -60,14 +72,20 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithLong:(jlong)size
-                     withInt:(jint)pageSize
+- (instancetype __nonnull)initWithLong:(jlong)size
+                               withInt:(jint)pageSize
 withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits:(OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *)formatAndBits;
 
-- (instancetype)initWithLong:(jlong)size
-                     withInt:(jint)pageSize
-                     withInt:(jint)bitsPerValue
+- (instancetype __nonnull)initWithLong:(jlong)size
+                               withInt:(jint)pageSize
+                               withInt:(jint)bitsPerValue
 withOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                           withLong:(jlong)arg1
+                                            withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -97,4 +115,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPagedMutable)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPagedMutable")

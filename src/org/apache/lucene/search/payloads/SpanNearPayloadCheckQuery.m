@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/payloads/SpanNearPayloadCheckQuery.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -16,6 +17,12 @@
 #include "org/apache/lucene/search/spans/SpanNearQuery.h"
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/payloads/SpanNearPayloadCheckQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery__Annotations$0(void);
 
 @implementation OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery
 
@@ -39,8 +46,8 @@
   return [buffer description];
 }
 
-- (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *)clone {
-  OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *result = create_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_((OrgApacheLuceneSearchSpansSpanNearQuery *) cast_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) clone], [OrgApacheLuceneSearchSpansSpanNearQuery class]), payloadToMatch_);
+- (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *)java_clone {
+  OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *result = create_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_((OrgApacheLuceneSearchSpansSpanNearQuery *) cast_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) java_clone], [OrgApacheLuceneSearchSpansSpanNearQuery class]), payloadToMatch_);
   [result setBoostWithFloat:[self getBoost]];
   return result;
 }
@@ -59,19 +66,25 @@
   return h;
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilCollection:", "SpanNearPayloadCheckQuery", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/spans/SpanNearQuery;Ljava/util/Collection<[LB;>;)V" },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.search.payloads.SpanNearPayloadCheckQuery;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery;", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery = { 2, "SpanNearPayloadCheckQuery", "org.apache.lucene.search.payloads", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilCollection:);
+  methods[1].selector = @selector(toStringWithNSString:);
+  methods[2].selector = @selector(java_clone);
+  methods[3].selector = @selector(isEqual:);
+  methods[4].selector = @selector(hash);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpansSpanNearQuery;LJavaUtilCollection;", "(Lorg/apache/lucene/search/spans/SpanNearQuery;Ljava/util/Collection<[B>;)V", "toString", "LNSString;", "clone", "equals", "LNSObject;", "hashCode", (void *)&OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery = { "SpanNearPayloadCheckQuery", "org.apache.lucene.search.payloads", ptrTable, methods, NULL, 7, 0x1, 5, 0, -1, -1, -1, -1, 8 };
   return &_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery;
 }
 
@@ -87,6 +100,10 @@ OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *new_OrgApacheLuceneSearc
 
 OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *create_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_(OrgApacheLuceneSearchSpansSpanNearQuery *match, id<JavaUtilCollection> payloadToMatch) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery, initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_, match, payloadToMatch)
+}
+
+IOSObjectArray *OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery)

@@ -6,13 +6,15 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Character.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/ga/IrishLowerCaseFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ga/IrishLowerCaseFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisGaIrishLowerCaseFilter () {
  @public
@@ -37,7 +39,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisGaIrishLowerCaseF
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     IOSCharArray *chArray = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-    jint chLen = [termAtt_ length];
+    jint chLen = [termAtt_ java_length];
     jint idx = 0;
     if (chLen > 1 && (IOSCharArray_Get(nil_chk(chArray), 0) == 'n' || IOSCharArray_Get(chArray, 0) == 't') && OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_isUpperVowelWithInt_(self, IOSCharArray_Get(chArray, 1))) {
       chArray = [termAtt_ resizeBufferWithInt:chLen + 1];
@@ -69,15 +71,23 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisGaIrishLowerCaseF
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "IrishLowerCaseFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "isUpperVowelWithInt:", "isUpperVowel", "Z", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  methods[2].selector = @selector(isUpperVowelWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGaIrishLowerCaseFilter = { 2, "IrishLowerCaseFilter", "org.apache.lucene.analysis.ga", NULL, 0x11, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", "isUpperVowel", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGaIrishLowerCaseFilter = { "IrishLowerCaseFilter", "org.apache.lucene.analysis.ga", ptrTable, methods, fields, 7, 0x11, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter;
 }
 

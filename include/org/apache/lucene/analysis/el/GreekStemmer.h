@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisElGreekStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisElGreekStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisElGreekStemmer))
 #define OrgApacheLuceneAnalysisElGreekStemmer_
 
@@ -20,18 +26,18 @@
 
 /*!
  @brief A stemmer for Greek words, according to: <i>Development of a Stemmer for the
- Greek Language.
+  Greek Language.
  </i> Georgios Ntais
  <p>
- NOTE: Input is expected to be casefolded for Greek (including folding of final
- sigma to sigma), and with diacritics removed. This can be achieved with 
- either <code>GreekLowerCaseFilter</code> or ICUFoldingFilter.
+  NOTE: Input is expected to be casefolded for Greek (including folding of final
+  sigma to sigma), and with diacritics removed. This can be achieved with 
+  either <code>GreekLowerCaseFilter</code> or ICUFoldingFilter.
  */
 @interface OrgApacheLuceneAnalysisElGreekStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Stems a word contained in a leading portion of a char[] array.
@@ -49,12 +55,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisElGreekStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisElGreekStemmer_init(OrgApacheLuceneAnalysisElGreekStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekStemmer *new_OrgApacheLuceneAnalysisElGreekStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekStemmer *new_OrgApacheLuceneAnalysisElGreekStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekStemmer *create_OrgApacheLuceneAnalysisElGreekStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekStemmer *create_OrgApacheLuceneAnalysisElGreekStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisElGreekStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemmer")

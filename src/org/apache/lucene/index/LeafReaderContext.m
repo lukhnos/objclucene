@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/index/LeafReaderContext.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Collections.h"
@@ -13,16 +12,18 @@
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/LeafReaderContext must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexLeafReaderContext () {
  @public
   OrgApacheLuceneIndexLeafReader *reader_;
-  id<JavaUtilList> leaves_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexLeafReaderContext, reader_, OrgApacheLuceneIndexLeafReader *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexLeafReaderContext, leaves_, id<JavaUtilList>)
 
 @implementation OrgApacheLuceneIndexLeafReaderContext
 
@@ -45,8 +46,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexLeafReaderContext, leaves_, id<JavaUtilL
   if (!isTopLevel_) {
     @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"This is not a top-level context.");
   }
-  JreAssert((leaves_ != nil), (@"org/apache/lucene/index/LeafReaderContext.java:56 condition failed: assert leaves != null;"));
-  return leaves_;
+  return JavaUtilCollections_singletonListWithId_(self);
 }
 
 - (id<JavaUtilList>)children {
@@ -63,26 +63,35 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexLeafReaderContext, leaves_, id<JavaUtilL
 
 - (void)dealloc {
   RELEASE_(reader_);
-  RELEASE_(leaves_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexLeafReader:withInt:withInt:withInt:withInt:", "LeafReaderContext", NULL, 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexLeafReader:", "LeafReaderContext", NULL, 0x0, NULL, NULL },
-    { "leaves", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;" },
-    { "children", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;" },
-    { "reader", NULL, "Lorg.apache.lucene.index.LeafReader;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexLeafReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexLeafReader:withInt:withInt:withInt:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexLeafReader:);
+  methods[2].selector = @selector(leaves);
+  methods[3].selector = @selector(children);
+  methods[4].selector = @selector(reader);
+  methods[5].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ord_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docBase_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "reader_", NULL, 0x12, "Lorg.apache.lucene.index.LeafReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "leaves_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", .constantValue.asLong = 0 },
+    { "ord_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "docBase_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "reader_", "LOrgApacheLuceneIndexLeafReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexLeafReaderContext = { 2, "LeafReaderContext", "org.apache.lucene.index", NULL, 0x11, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexCompositeReaderContext;LOrgApacheLuceneIndexLeafReader;IIII", "LOrgApacheLuceneIndexLeafReader;", "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", "()Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexLeafReaderContext = { "LeafReaderContext", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 6, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexLeafReaderContext;
 }
 
@@ -93,7 +102,6 @@ void OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexComposite
   self->ord_ = leafOrd;
   self->docBase_ = leafDocBase;
   JreStrongAssign(&self->reader_, reader);
-  JreStrongAssign(&self->leaves_, self->isTopLevel_ ? JavaUtilCollections_singletonListWithId_(self) : nil);
 }
 
 OrgApacheLuceneIndexLeafReaderContext *new_OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexLeafReader_withInt_withInt_withInt_withInt_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexLeafReader *reader, jint ord, jint docBase, jint leafOrd, jint leafDocBase) {

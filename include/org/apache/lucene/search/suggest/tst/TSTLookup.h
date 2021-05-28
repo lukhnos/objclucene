@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestTstTSTLookup
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestTstTSTLookup_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstTSTLookup || defined(INCLUDE_OrgApacheLuceneSearchSuggestTstTSTLookup))
 #define OrgApacheLuceneSearchSuggestTstTSTLookup_
 
@@ -30,7 +36,7 @@
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
 /*!
- @brief Suggest implementation based on a 
+ @brief Suggest implementation based on a  
  <a href="http://en.wikipedia.org/wiki/Ternary_search_tree">Ternary Search Tree</a>
  - seealso: TSTAutocomplete
  */
@@ -46,13 +52,13 @@
  @brief Creates a new TSTLookup with an empty Ternary Search Tree.
  - seealso: #build(InputIterator)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Adds a new node if <code>key</code> already exists,
- otherwise replaces its value.
+  otherwise replaces its value.
  <p>
- This method always returns true.
+  This method always returns true.
  */
 - (jboolean)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                  withId:(id)value;
@@ -61,7 +67,7 @@
 
 /*!
  @brief Returns the value for the specified key, or null
- if the key does not exist.
+  if the key does not exist.
  */
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
@@ -90,12 +96,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestTstTSTLookup, autocomplete_, Org
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestTstTSTLookup_init(OrgApacheLuceneSearchSuggestTstTSTLookup *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestTstTSTLookup *new_OrgApacheLuceneSearchSuggestTstTSTLookup_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestTstTSTLookup *new_OrgApacheLuceneSearchSuggestTstTSTLookup_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestTstTSTLookup *create_OrgApacheLuceneSearchSuggestTstTSTLookup_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestTstTSTLookup *create_OrgApacheLuceneSearchSuggestTstTSTLookup_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestTstTSTLookup)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstTSTLookup")

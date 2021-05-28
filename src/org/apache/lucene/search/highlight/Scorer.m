@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/highlight/Scorer.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/Scorer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchHighlightScorer : NSObject
 
 @end
@@ -13,13 +17,22 @@
 @implementation OrgApacheLuceneSearchHighlightScorer
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init__WithOrgApacheLuceneAnalysisTokenStream:", "init", "Lorg.apache.lucene.analysis.TokenStream;", 0x401, "Ljava.io.IOException;", NULL },
-    { "startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:", "startFragment", "V", 0x401, NULL, NULL },
-    { "getTokenScore", NULL, "F", 0x401, NULL, NULL },
-    { "getFragmentScore", NULL, "F", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 4, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightScorer = { 2, "Scorer", "org.apache.lucene.search.highlight", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init__WithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:);
+  methods[2].selector = @selector(getTokenScore);
+  methods[3].selector = @selector(getFragmentScore);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "init", "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", "startFragment", "LOrgApacheLuceneSearchHighlightTextFragment;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightScorer = { "Scorer", "org.apache.lucene.search.highlight", ptrTable, methods, NULL, 7, 0x609, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightScorer;
 }
 

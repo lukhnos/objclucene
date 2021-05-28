@@ -10,7 +10,18 @@
 #include "org/apache/lucene/util/GeoProjectionUtils.h"
 #include "org/apache/lucene/util/SloppyMath.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/GeoDistanceUtils must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilGeoDistanceUtils
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilGeoDistanceUtils_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jdouble)vincentyDistanceWithDouble:(jdouble)lonA
                            withDouble:(jdouble)latA
@@ -29,25 +40,39 @@
   return OrgApacheLuceneUtilGeoDistanceUtils_distanceToDegreesLatWithDouble_withDouble_(lat, distance);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilGeoDistanceUtils_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "vincentyDistanceWithDouble:withDouble:withDouble:withDouble:", "vincentyDistance", "D", 0x19, NULL, NULL },
-    { "distanceToDegreesLonWithDouble:withDouble:", "distanceToDegreesLon", "D", 0x9, NULL, NULL },
-    { "distanceToDegreesLatWithDouble:withDouble:", "distanceToDegreesLat", "D", 0x9, NULL, NULL },
-    { "init", "GeoDistanceUtils", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "D", 0x19, 0, 1, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 4, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilGeoDistanceUtils = { 2, "GeoDistanceUtils", "org.apache.lucene.util", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(vincentyDistanceWithDouble:withDouble:withDouble:withDouble:);
+  methods[2].selector = @selector(distanceToDegreesLonWithDouble:withDouble:);
+  methods[3].selector = @selector(distanceToDegreesLatWithDouble:withDouble:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "vincentyDistance", "DDDD", "distanceToDegreesLon", "DD", "distanceToDegreesLat" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilGeoDistanceUtils = { "GeoDistanceUtils", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilGeoDistanceUtils;
 }
 
 @end
+
+void OrgApacheLuceneUtilGeoDistanceUtils_init(OrgApacheLuceneUtilGeoDistanceUtils *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneUtilGeoDistanceUtils *new_OrgApacheLuceneUtilGeoDistanceUtils_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilGeoDistanceUtils, init)
+}
+
+OrgApacheLuceneUtilGeoDistanceUtils *create_OrgApacheLuceneUtilGeoDistanceUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilGeoDistanceUtils, init)
+}
 
 jdouble OrgApacheLuceneUtilGeoDistanceUtils_vincentyDistanceWithDouble_withDouble_withDouble_withDouble_(jdouble lonA, jdouble latA, jdouble lonB, jdouble latB) {
   OrgApacheLuceneUtilGeoDistanceUtils_initialize();
@@ -59,12 +84,18 @@ jdouble OrgApacheLuceneUtilGeoDistanceUtils_vincentyDistanceWithDouble_withDoubl
   jdouble cU1 = JavaLangStrictMath_cosWithDouble_(U1);
   jdouble sU2 = JavaLangStrictMath_sinWithDouble_(U2);
   jdouble cU2 = JavaLangStrictMath_cosWithDouble_(U2);
-  jdouble sigma, sinSigma, cosSigma;
-  jdouble sinAlpha, cos2Alpha, cos2SigmaM;
+  jdouble sigma;
+  jdouble sinSigma;
+  jdouble cosSigma;
+  jdouble sinAlpha;
+  jdouble cos2Alpha;
+  jdouble cos2SigmaM;
   jdouble lambda = L;
   jdouble lambdaP;
   jdouble iters = 100;
-  jdouble sinLambda, cosLambda, c;
+  jdouble sinLambda;
+  jdouble cosLambda;
+  jdouble c;
   do {
     sinLambda = JavaLangStrictMath_sinWithDouble_(lambda);
     cosLambda = JavaLangMath_cosWithDouble_(lambda);
@@ -112,18 +143,6 @@ jdouble OrgApacheLuceneUtilGeoDistanceUtils_distanceToDegreesLatWithDouble_withD
   jdouble h = JavaLangStrictMath_minWithDouble_withDouble_(1, a);
   JreTimesAssignDoubleD(&h, h);
   return JavaLangStrictMath_toDegreesWithDouble_(JavaLangStrictMath_acosWithDouble_(1 - (2.0 * h)));
-}
-
-void OrgApacheLuceneUtilGeoDistanceUtils_init(OrgApacheLuceneUtilGeoDistanceUtils *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneUtilGeoDistanceUtils *new_OrgApacheLuceneUtilGeoDistanceUtils_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilGeoDistanceUtils, init)
-}
-
-OrgApacheLuceneUtilGeoDistanceUtils *create_OrgApacheLuceneUtilGeoDistanceUtils_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilGeoDistanceUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilGeoDistanceUtils)

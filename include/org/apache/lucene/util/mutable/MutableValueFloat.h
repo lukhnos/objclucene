@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueFloat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMutableMutableValueFloat_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueFloat || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueFloat))
 #define OrgApacheLuceneUtilMutableMutableValueFloat_
 
@@ -23,7 +29,7 @@
 /*!
  @brief <code>MutableValue</code> implementation of type <code>float</code>.
  When mutating instances of this object, the caller is responsible for ensuring 
- that any instance where <code>exists</code> is set to <code>false</code> must also 
+  that any instance where <code>exists</code> is set to <code>false</code> must also  
  <code>value</code> set to <code>0.0F</code> for proper operation.
  */
 @interface OrgApacheLuceneUtilMutableMutableValueFloat : OrgApacheLuceneUtilMutableMutableValue {
@@ -33,7 +39,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)compareSameTypeWithId:(id)other;
 
@@ -53,12 +59,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilMutableMutableValueFloat)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueFloat_init(OrgApacheLuceneUtilMutableMutableValueFloat *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueFloat *new_OrgApacheLuceneUtilMutableMutableValueFloat_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueFloat *new_OrgApacheLuceneUtilMutableMutableValueFloat_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueFloat *create_OrgApacheLuceneUtilMutableMutableValueFloat_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueFloat *create_OrgApacheLuceneUtilMutableMutableValueFloat_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueFloat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueFloat")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFilterDirectoryReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFilterDirectoryReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilterDirectoryReader || defined(INCLUDE_OrgApacheLuceneIndexFilterDirectoryReader))
 #define OrgApacheLuceneIndexFilterDirectoryReader_
 
@@ -20,18 +26,20 @@
 #define INCLUDE_OrgApacheLuceneIndexDirectoryReader 1
 #include "org/apache/lucene/index/DirectoryReader.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper;
 @class OrgApacheLuceneIndexIndexCommit;
 @class OrgApacheLuceneIndexIndexWriter;
+@class OrgApacheLuceneStoreDirectory;
 
 /*!
  @brief A FilterDirectoryReader wraps another DirectoryReader, allowing implementations
- to transform or extend it.
+  to transform or extend it.
  Subclasses should implement doWrapDirectoryReader to return an instance of the
- subclass.
- If the subclass wants to wrap the DirectoryReader's subreaders, it should also
- implement a SubReaderWrapper subclass, and pass an instance to its super
- constructor.
+  subclass.
+  If the subclass wants to wrap the DirectoryReader's subreaders, it should also
+  implement a SubReaderWrapper subclass, and pass an instance to its super
+  constructor.
  */
 @interface OrgApacheLuceneIndexFilterDirectoryReader : OrgApacheLuceneIndexDirectoryReader {
  @public
@@ -45,12 +53,12 @@
 
 /*!
  @brief Create a new FilterDirectoryReader that filters a passed in DirectoryReader,
- using the supplied SubReaderWrapper to wrap its subreader.
+  using the supplied SubReaderWrapper to wrap its subreader.
  @param inArg the DirectoryReader to filter
  @param wrapper the SubReaderWrapper to use to wrap subreaders
  */
-- (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg
-withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper:(OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper *)wrapper;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg
+       withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper:(OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper *)wrapper;
 
 /*!
  @brief Returns the wrapped <code>DirectoryReader</code>.
@@ -65,7 +73,7 @@ withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper:(OrgApacheLuceneI
 
 /*!
  @brief Get the wrapped instance by <code>reader</code> as long as this reader is
- an instance of <code>FilterDirectoryReader</code>.
+   an instance of <code>FilterDirectoryReader</code>.
  */
 + (OrgApacheLuceneIndexDirectoryReader *)unwrapWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)reader;
 
@@ -83,11 +91,16 @@ withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper:(OrgApacheLuceneI
 /*!
  @brief Called by the doOpenIfChanged() methods to return a new wrapped DirectoryReader.
  Implementations should just return an instantiation of themselves, wrapping the
- passed in DirectoryReader.
+  passed in DirectoryReader.
  @param inArg the DirectoryReader to wrap
  @return the wrapped DirectoryReader
  */
 - (OrgApacheLuceneIndexDirectoryReader *)doWrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg0
+                        withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -110,10 +123,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterDirectoryReader)
 
 /*!
  @brief Factory class passed to FilterDirectoryReader constructor that allows
- subclasses to wrap the filtered DirectoryReader's subreaders.
- You
- can use this to, e.g., wrap the subreaders with specialised
- FilterLeafReader implementations.
+  subclasses to wrap the filtered DirectoryReader's subreaders.You
+  can use this to, e.g., wrap the subreaders with specialised
+  FilterLeafReader implementations.
  */
 @interface OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper : NSObject
 
@@ -122,7 +134,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterDirectoryReader)
 /*!
  @brief Constructor
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Wrap one of the parent DirectoryReader's subreaders
@@ -141,4 +153,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWr
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFilterDirectoryReader")

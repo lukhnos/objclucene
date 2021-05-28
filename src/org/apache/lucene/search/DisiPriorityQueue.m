@@ -6,11 +6,18 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Iterable.h"
 #include "java/util/Arrays.h"
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
+#include "java/util/Spliterator.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/search/DisiPriorityQueue.h"
 #include "org/apache/lucene/search/DisiWrapper.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/DisiPriorityQueue must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchDisiPriorityQueue () {
  @public
@@ -158,8 +165,16 @@ __attribute__((unused)) static OrgApacheLuceneSearchDisiWrapper *OrgApacheLucene
   return [((id<JavaUtilList>) nil_chk([((id<JavaUtilList>) nil_chk(JavaUtilArrays_asListWithNSObjectArray_(heap_))) subListWithInt:0 withInt:size_])) iterator];
 }
 
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
+}
+
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -168,29 +183,50 @@ __attribute__((unused)) static OrgApacheLuceneSearchDisiWrapper *OrgApacheLucene
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "leftNodeWithInt:", "leftNode", "I", 0x8, NULL, NULL },
-    { "rightNodeWithInt:", "rightNode", "I", 0x8, NULL, NULL },
-    { "parentNodeWithInt:", "parentNode", "I", 0x8, NULL, NULL },
-    { "initWithInt:", "DisiPriorityQueue", NULL, 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "top", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, "()Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
-    { "topList", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, "()Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
-    { "prependWithOrgApacheLuceneSearchDisiWrapper:withOrgApacheLuceneSearchDisiWrapper:", "prepend", "Lorg.apache.lucene.search.DisiWrapper;", 0x2, NULL, "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;Lorg/apache/lucene/search/DisiWrapper<TIter;>;)Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
-    { "topListWithOrgApacheLuceneSearchDisiWrapper:withOrgApacheLuceneSearchDisiWrapperArray:withInt:withInt:", "topList", "Lorg.apache.lucene.search.DisiWrapper;", 0x2, NULL, "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;[Lorg/apache/lucene/search/DisiWrapper<TIter;>;II)Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
-    { "addWithOrgApacheLuceneSearchDisiWrapper:", "add", "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;)Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
-    { "pop", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, "()Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
-    { "updateTop", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, "()Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
-    { "updateTopWithOrgApacheLuceneSearchDisiWrapper:", "updateTop", "Lorg.apache.lucene.search.DisiWrapper;", 0x0, NULL, "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;)Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
-    { "upHeapWithInt:", "upHeap", "V", 0x0, NULL, NULL },
-    { "downHeapWithInt:", "downHeap", "V", 0x0, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/search/DisiWrapper<TIter;>;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "I", 0x8, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, 3, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDisiWrapper;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDisiWrapper;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDisiWrapper;", 0x2, 5, 6, -1, 7, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDisiWrapper;", 0x2, 8, 9, -1, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDisiWrapper;", 0x1, 11, 12, -1, 13, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDisiWrapper;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDisiWrapper;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDisiWrapper;", 0x0, 14, 12, -1, 13, -1, -1 },
+    { NULL, "V", 0x0, 15, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 16, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 17, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(leftNodeWithInt:);
+  methods[1].selector = @selector(rightNodeWithInt:);
+  methods[2].selector = @selector(parentNodeWithInt:);
+  methods[3].selector = @selector(initWithInt:);
+  methods[4].selector = @selector(size);
+  methods[5].selector = @selector(top);
+  methods[6].selector = @selector(topList);
+  methods[7].selector = @selector(prependWithOrgApacheLuceneSearchDisiWrapper:withOrgApacheLuceneSearchDisiWrapper:);
+  methods[8].selector = @selector(topListWithOrgApacheLuceneSearchDisiWrapper:withOrgApacheLuceneSearchDisiWrapperArray:withInt:withInt:);
+  methods[9].selector = @selector(addWithOrgApacheLuceneSearchDisiWrapper:);
+  methods[10].selector = @selector(pop);
+  methods[11].selector = @selector(updateTop);
+  methods[12].selector = @selector(updateTopWithOrgApacheLuceneSearchDisiWrapper:);
+  methods[13].selector = @selector(upHeapWithInt:);
+  methods[14].selector = @selector(downHeapWithInt:);
+  methods[15].selector = @selector(iterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "heap_", NULL, 0x12, "[Lorg.apache.lucene.search.DisiWrapper;", NULL, "[Lorg/apache/lucene/search/DisiWrapper<TIter;>;", .constantValue.asLong = 0 },
-    { "size_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "heap_", "[LOrgApacheLuceneSearchDisiWrapper;", .constantValue.asLong = 0, 0x12, -1, -1, 18, -1 },
+    { "size_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisiPriorityQueue = { 2, "DisiPriorityQueue", "org.apache.lucene.search", NULL, 0x11, 16, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<Iter:Lorg/apache/lucene/search/DocIdSetIterator;>Ljava/lang/Object;Ljava/lang/Iterable<Lorg/apache/lucene/search/DisiWrapper<TIter;>;>;" };
+  static const void *ptrTable[] = { "leftNode", "I", "rightNode", "parentNode", "()Lorg/apache/lucene/search/DisiWrapper<TIter;>;", "prepend", "LOrgApacheLuceneSearchDisiWrapper;LOrgApacheLuceneSearchDisiWrapper;", "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;Lorg/apache/lucene/search/DisiWrapper<TIter;>;)Lorg/apache/lucene/search/DisiWrapper<TIter;>;", "topList", "LOrgApacheLuceneSearchDisiWrapper;[LOrgApacheLuceneSearchDisiWrapper;II", "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;[Lorg/apache/lucene/search/DisiWrapper<TIter;>;II)Lorg/apache/lucene/search/DisiWrapper<TIter;>;", "add", "LOrgApacheLuceneSearchDisiWrapper;", "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;)Lorg/apache/lucene/search/DisiWrapper<TIter;>;", "updateTop", "upHeap", "downHeap", "()Ljava/util/Iterator<Lorg/apache/lucene/search/DisiWrapper<TIter;>;>;", "[Lorg/apache/lucene/search/DisiWrapper<TIter;>;", "<Iter:Lorg/apache/lucene/search/DocIdSetIterator;>Ljava/lang/Object;Ljava/lang/Iterable<Lorg/apache/lucene/search/DisiWrapper<TIter;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisiPriorityQueue = { "DisiPriorityQueue", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 16, 2, -1, -1, -1, 19, -1 };
   return &_OrgApacheLuceneSearchDisiPriorityQueue;
 }
 

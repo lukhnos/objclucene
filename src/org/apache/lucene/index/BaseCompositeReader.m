@@ -3,11 +3,9 @@
 //  source: ./core/src/java/org/apache/lucene/index/BaseCompositeReader.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/Arrays.h"
 #include "java/util/Collections.h"
@@ -23,6 +21,10 @@
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
 #include "org/apache/lucene/index/Term.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/BaseCompositeReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexBaseCompositeReader () {
  @public
   IOSObjectArray *subReaders_;
@@ -31,7 +33,7 @@
   jint numDocs_;
   /*!
    @brief List view solely for <code>getSequentialSubReaders()</code>,
- for effectiveness the array is used internally.
+  for effectiveness the array is used internally.
    */
   id<JavaUtilList> subReadersList_;
 }
@@ -174,29 +176,47 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReaderArray:", "BaseCompositeReader", NULL, 0x4, "Ljava.io.IOException;", NULL },
-    { "getTermVectorsWithInt:", "getTermVectors", "Lorg.apache.lucene.index.Fields;", 0x11, "Ljava.io.IOException;", NULL },
-    { "numDocs", NULL, "I", 0x11, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x11, NULL, NULL },
-    { "documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:", "document", "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "docFreqWithOrgApacheLuceneIndexTerm:", "docFreq", "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "totalTermFreqWithOrgApacheLuceneIndexTerm:", "totalTermFreq", "J", 0x11, "Ljava.io.IOException;", NULL },
-    { "getSumDocFreqWithNSString:", "getSumDocFreq", "J", 0x11, "Ljava.io.IOException;", NULL },
-    { "getDocCountWithNSString:", "getDocCount", "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "getSumTotalTermFreqWithNSString:", "getSumTotalTermFreq", "J", 0x11, "Ljava.io.IOException;", NULL },
-    { "readerIndexWithInt:", "readerIndex", "I", 0x14, NULL, NULL },
-    { "readerBaseWithInt:", "readerBase", "I", 0x14, NULL, NULL },
-    { "getSequentialSubReaders", NULL, "Ljava.util.List;", 0x14, NULL, "()Ljava/util/List<+TR;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, 1, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x11, 3, 4, 1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 5, 6, 1, -1, -1, -1 },
+    { NULL, "I", 0x11, 7, 8, 1, -1, -1, -1 },
+    { NULL, "J", 0x11, 9, 8, 1, -1, -1, -1 },
+    { NULL, "J", 0x11, 10, 11, 1, -1, -1, -1 },
+    { NULL, "I", 0x11, 12, 11, 1, -1, -1, -1 },
+    { NULL, "J", 0x11, 13, 11, 1, -1, -1, -1 },
+    { NULL, "I", 0x14, 14, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x14, 15, 4, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x14, -1, -1, -1, 16, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReaderArray:);
+  methods[1].selector = @selector(getTermVectorsWithInt:);
+  methods[2].selector = @selector(numDocs);
+  methods[3].selector = @selector(maxDoc);
+  methods[4].selector = @selector(documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:);
+  methods[5].selector = @selector(docFreqWithOrgApacheLuceneIndexTerm:);
+  methods[6].selector = @selector(totalTermFreqWithOrgApacheLuceneIndexTerm:);
+  methods[7].selector = @selector(getSumDocFreqWithNSString:);
+  methods[8].selector = @selector(getDocCountWithNSString:);
+  methods[9].selector = @selector(getSumTotalTermFreqWithNSString:);
+  methods[10].selector = @selector(readerIndexWithInt:);
+  methods[11].selector = @selector(readerBaseWithInt:);
+  methods[12].selector = @selector(getSequentialSubReaders);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "subReaders_", NULL, 0x12, "[Lorg.apache.lucene.index.IndexReader;", NULL, "[TR;", .constantValue.asLong = 0 },
-    { "starts_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numDocs_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "subReadersList_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<TR;>;", .constantValue.asLong = 0 },
+    { "subReaders_", "[LOrgApacheLuceneIndexIndexReader;", .constantValue.asLong = 0, 0x12, -1, -1, 17, -1 },
+    { "starts_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numDocs_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "subReadersList_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 18, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexBaseCompositeReader = { 2, "BaseCompositeReader", "org.apache.lucene.index", NULL, 0x401, 13, methods, 5, fields, 0, NULL, 0, NULL, NULL, "<R:Lorg/apache/lucene/index/IndexReader;>Lorg/apache/lucene/index/CompositeReader;" };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "([TR;)V", "getTermVectors", "I", "document", "ILOrgApacheLuceneIndexStoredFieldVisitor;", "docFreq", "LOrgApacheLuceneIndexTerm;", "totalTermFreq", "getSumDocFreq", "LNSString;", "getDocCount", "getSumTotalTermFreq", "readerIndex", "readerBase", "()Ljava/util/List<+TR;>;", "[TR;", "Ljava/util/List<TR;>;", "<R:Lorg/apache/lucene/index/IndexReader;>Lorg/apache/lucene/index/CompositeReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexBaseCompositeReader = { "BaseCompositeReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 13, 5, -1, -1, -1, 19, -1 };
   return &_OrgApacheLuceneIndexBaseCompositeReader;
 }
 
@@ -207,7 +227,8 @@ void OrgApacheLuceneIndexBaseCompositeReader_initWithOrgApacheLuceneIndexIndexRe
   JreStrongAssign(&self->subReaders_, subReaders);
   JreStrongAssign(&self->subReadersList_, JavaUtilCollections_unmodifiableListWithJavaUtilList_(JavaUtilArrays_asListWithNSObjectArray_(subReaders)));
   JreStrongAssignAndConsume(&self->starts_, [IOSIntArray newArrayWithLength:((IOSObjectArray *) nil_chk(subReaders))->size_ + 1]);
-  jlong maxDoc = 0, numDocs = 0;
+  jlong maxDoc = 0;
+  jlong numDocs = 0;
   for (jint i = 0; i < subReaders->size_; i++) {
     *IOSIntArray_GetRef(self->starts_, i) = (jint) maxDoc;
     OrgApacheLuceneIndexIndexReader *r = IOSObjectArray_Get(subReaders, i);

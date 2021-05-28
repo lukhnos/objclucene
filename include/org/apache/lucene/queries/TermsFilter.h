@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesTermsFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesTermsFilter_) && (INCLUDE_ALL_OrgApacheLuceneQueriesTermsFilter || defined(INCLUDE_OrgApacheLuceneQueriesTermsFilter))
 #define OrgApacheLuceneQueriesTermsFilter_
 
@@ -27,6 +33,7 @@
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
+@class OrgApacheLuceneSearchQuery;
 @protocol JavaUtilCollection;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneUtilBits;
@@ -34,41 +41,39 @@
 /*!
  @brief Constructs a filter for docs matching any of the terms added to this class.
  Unlike a RangeFilter this can be used for filtering on multiple terms that are not necessarily in
- a sequence. An example might be a collection of primary keys from a database query result or perhaps
- a choice of "category" labels picked by the end user. As a filter, this is much faster than the
- equivalent query (a BooleanQuery with many "should" TermQueries)
+  a sequence. An example might be a collection of primary keys from a database query result or perhaps
+  a choice of "category" labels picked by the end user. As a filter, this is much faster than the
+  equivalent query (a BooleanQuery with many "should" TermQueries)
  */
 @interface OrgApacheLuceneQueriesTermsFilter : OrgApacheLuceneSearchFilter < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
 /*!
- @brief Creates a new <code>TermsFilter</code> from the given list.
- The list
- can contain duplicate terms and multiple fields.
+ @brief Creates a new <code>TermsFilter</code> from the given list.The list
+  can contain duplicate terms and multiple fields.
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)terms;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)terms;
 
 /*!
  @brief Creates a new <code>TermsFilter</code> from the given <code>BytesRef</code> array for
- a single field.
+  a single field.
  */
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+      withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 
 /*!
  @brief Creates a new <code>TermsFilter</code> from the given <code>BytesRef</code> list for
- a single field.
+  a single field.
  */
-- (instancetype)initWithNSString:(NSString *)field
-                withJavaUtilList:(id<JavaUtilList>)terms;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                          withJavaUtilList:(id<JavaUtilList>)terms;
 
 /*!
- @brief Creates a new <code>TermsFilter</code> from the given array.
- The array can
- contain duplicate terms and multiple fields.
+ @brief Creates a new <code>TermsFilter</code> from the given array.The array can
+  contain duplicate terms and multiple fields.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -79,9 +84,15 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 
 - (NSUInteger)hash;
 
+- (OrgApacheLuceneSearchQuery *)java_clone;
+
 - (jlong)ramBytesUsed;
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -115,4 +126,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesTermsFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesTermsFilter")

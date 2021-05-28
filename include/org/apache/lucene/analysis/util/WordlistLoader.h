@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilWordlistLoader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilWordlistLoader_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilWordlistLoader || defined(INCLUDE_OrgApacheLuceneAnalysisUtilWordlistLoader))
 #define OrgApacheLuceneAnalysisUtilWordlistLoader_
 
@@ -25,7 +31,7 @@
 
 /*!
  @brief Loader for text files that represent a list of stopwords.
- - seealso: IOUtils to obtain <code>Reader</code> instances
+ - seealso: IOUtilsto obtain <code>Reader</code> instances
  */
 @interface OrgApacheLuceneAnalysisUtilWordlistLoader : NSObject
 
@@ -33,12 +39,12 @@
 
 /*!
  @brief Accesses a resource by name and returns the (non comment) lines containing
- data using the given character encoding.
+  data using the given character encoding.
  <p>
- A comment line is any line that starts with the character "#"
+  A comment line is any line that starts with the character "#" 
  </p>
  @return a list of non-blank non-comment lines with whitespace trimmed
- @throws IOException If there is a low-level I/O error.
+ @throw IOExceptionIf there is a low-level I/O error.
  */
 + (id<JavaUtilList>)getLinesWithJavaIoInputStream:(JavaIoInputStream *)stream
                         withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
@@ -46,11 +52,11 @@
 /*!
  @brief Reads stopwords from a stopword list in Snowball format.
  <p>
- The snowball format is the following:
+  The snowball format is the following: 
  <ul>
- <li>Lines may contain multiple words separated by whitespace.
+  <li>Lines may contain multiple words separated by whitespace. 
  <li>The comment character is the vertical line (&#124;).
- <li>Lines may contain trailing comments.
+  <li>Lines may contain trailing comments. 
  </ul>
  @param reader Reader containing a Snowball stopword list
  @return A <code>CharArraySet</code> with the reader's words
@@ -60,38 +66,37 @@
 /*!
  @brief Reads stopwords from a stopword list in Snowball format.
  <p>
- The snowball format is the following:
+  The snowball format is the following: 
  <ul>
- <li>Lines may contain multiple words separated by whitespace.
+  <li>Lines may contain multiple words separated by whitespace. 
  <li>The comment character is the vertical line (&#124;).
- <li>Lines may contain trailing comments.
+  <li>Lines may contain trailing comments. 
  </ul>
  @param reader Reader containing a Snowball stopword list
- @param result the <code>CharArraySet</code> to fill with the readers words
+ @param result the <code>CharArraySet</code>  to fill with the readers words
  @return the given <code>CharArraySet</code> with the reader's words
  */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getSnowballWordSetWithJavaIoReader:(JavaIoReader *)reader
                                     withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)result;
 
 /*!
- @brief Reads a stem dictionary.
- Each line contains:
+ @brief Reads a stem dictionary.Each line contains: 
  @code
 word<b>\t</b>stem
 @endcode
- (i.e. two tab separated words)
+  (i.e. two tab separated words)
  @return stem dictionary that overrules the stemming algorithm
- @throws IOException If there is a low-level I/O error.
+ @throw IOExceptionIf there is a low-level I/O error.
  */
 + (OrgApacheLuceneAnalysisUtilCharArrayMap *)getStemDictWithJavaIoReader:(JavaIoReader *)reader
                              withOrgApacheLuceneAnalysisUtilCharArrayMap:(OrgApacheLuceneAnalysisUtilCharArrayMap *)result;
 
 /*!
  @brief Reads lines from a Reader and adds every line as an entry to a CharArraySet (omitting
- leading and trailing whitespace).
- Every line of the Reader should contain only
- one word. The words need to be in lowercase if you make use of an
- Analyzer which uses LowerCaseFilter (like StandardAnalyzer).
+  leading and trailing whitespace).Every line of the Reader should contain only
+  one word.
+ The words need to be in lowercase if you make use of an
+  Analyzer which uses LowerCaseFilter (like StandardAnalyzer).
  @param reader Reader containing the wordlist
  @return A <code>CharArraySet</code> with the reader's words
  */
@@ -99,12 +104,12 @@ word<b>\t</b>stem
 
 /*!
  @brief Reads lines from a Reader and adds every line as an entry to a CharArraySet (omitting
- leading and trailing whitespace).
- Every line of the Reader should contain only
- one word. The words need to be in lowercase if you make use of an
- Analyzer which uses LowerCaseFilter (like StandardAnalyzer).
+  leading and trailing whitespace).Every line of the Reader should contain only
+  one word.
+ The words need to be in lowercase if you make use of an
+  Analyzer which uses LowerCaseFilter (like StandardAnalyzer).
  @param reader Reader containing the wordlist
- @param result the <code>CharArraySet</code> to fill with the readers words
+ @param result the <code>CharArraySet</code>  to fill with the readers words
  @return the given <code>CharArraySet</code> with the reader's words
  */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getWordSetWithJavaIoReader:(JavaIoReader *)reader
@@ -112,10 +117,10 @@ word<b>\t</b>stem
 
 /*!
  @brief Reads lines from a Reader and adds every non-comment line as an entry to a CharArraySet (omitting
- leading and trailing whitespace).
- Every line of the Reader should contain only
- one word. The words need to be in lowercase if you make use of an
- Analyzer which uses LowerCaseFilter (like StandardAnalyzer).
+  leading and trailing whitespace).Every line of the Reader should contain only
+  one word.
+ The words need to be in lowercase if you make use of an
+  Analyzer which uses LowerCaseFilter (like StandardAnalyzer).
  @param reader Reader containing the wordlist
  @param comment The string representing a comment.
  @return A CharArraySet with the reader's words
@@ -125,13 +130,13 @@ word<b>\t</b>stem
 
 /*!
  @brief Reads lines from a Reader and adds every non-comment line as an entry to a CharArraySet (omitting
- leading and trailing whitespace).
- Every line of the Reader should contain only
- one word. The words need to be in lowercase if you make use of an
- Analyzer which uses LowerCaseFilter (like StandardAnalyzer).
+  leading and trailing whitespace).Every line of the Reader should contain only
+  one word.
+ The words need to be in lowercase if you make use of an
+  Analyzer which uses LowerCaseFilter (like StandardAnalyzer).
  @param reader Reader containing the wordlist
  @param comment The string representing a comment.
- @param result the <code>CharArraySet</code> to fill with the readers words
+ @param result the <code>CharArraySet</code>  to fill with the readers words
  @return the given <code>CharArraySet</code> with the reader's words
  */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getWordSetWithJavaIoReader:(JavaIoReader *)reader
@@ -162,4 +167,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilWordlistLoader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilWordlistLoader")

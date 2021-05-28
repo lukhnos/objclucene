@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_
 
@@ -34,7 +40,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithFloat:(jfloat)constant;
+- (instancetype __nonnull)initWithFloat:(jfloat)constant;
 
 - (NSString *)description__;
 
@@ -57,6 +63,10 @@
 
 - (NSUInteger)hash;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource)
@@ -71,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstValueSo
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource")

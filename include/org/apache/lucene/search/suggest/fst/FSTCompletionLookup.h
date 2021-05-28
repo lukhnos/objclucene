@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup))
 #define OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_
 
@@ -36,18 +42,19 @@
 /*!
  @brief An adapter from <code>Lookup</code> API to <code>FSTCompletion</code>.
  <p>This adapter differs from <code>FSTCompletion</code> in that it attempts
- to discretize any "weights" as passed from in <code>InputIterator.weight()</code>
- to match the number of buckets. For the rationale for bucketing, see
+  to discretize any "weights" as passed from in <code>InputIterator.weight()</code>
+  to match the number of buckets. For the rationale for bucketing, see 
  <code>FSTCompletion</code>.
- <p><b>Note:</b>Discretization requires an additional sorting pass.
+   
+ <p><b>Note:</b>Discretization requires an additional sorting pass.  
  <p>The range of weights for bucketing/ discretization is determined 
- by sorting the input by weight and then dividing into
- equal ranges. Then, scores within each range are assigned to that bucket. 
+  by sorting the input by weight and then dividing into
+  equal ranges. Then, scores within each range are assigned to that bucket.   
  <p>Note that this means that even large differences in weights may be lost 
- during automaton construction, but the overall distinction between "classes"
- of weights will be preserved regardless of the distribution of weights. 
+  during automaton construction, but the overall distinction between "classes"
+  of weights will be preserved regardless of the distribution of weights.   
  <p>For fine-grained control over which weights are assigned to which buckets,
- use <code>FSTCompletion</code> directly or <code>TSTLookup</code>, for example.
+  use <code>FSTCompletion</code> directly or <code>TSTLookup</code>, for example.
  - seealso: FSTCompletion
  */
 @interface OrgApacheLuceneSearchSuggestFstFSTCompletionLookup : OrgApacheLuceneSearchSuggestLookup < OrgApacheLuceneUtilAccountable >
@@ -55,45 +62,42 @@
 #pragma mark Public
 
 /*!
- @brief This constructor prepares for creating a suggested FST using the
- <code>build(InputIterator)</code> method.
- The number of weight
- discretization buckets is set to <code>FSTCompletion.DEFAULT_BUCKETS</code> and
- exact matches are promoted to the top of the suggestions list.
+ @brief This constructor prepares for creating a suggested FST using the 
+ <code>build(InputIterator)</code> method.The number of weight
+  discretization buckets is set to <code>FSTCompletion.DEFAULT_BUCKETS</code> and
+  exact matches are promoted to the top of the suggestions list.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief This constructor takes a pre-built automaton.
- @param completion 
- An instance of <code>FSTCompletion</code>.
- @param exactMatchFirst
- If <code>true</code> exact matches are promoted to the top of the
- suggestions list. Otherwise they appear in the order of
- discretized weight and alphabetical within the bucket.
+ @param completion An instance of 
+ <code>FSTCompletion</code> .
+ @param exactMatchFirst If 
+  <code> true </code>  exact matches are promoted to the top of the           suggestions list. Otherwise they appear in the order of
+            discretized weight and alphabetical within the bucket.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSuggestFstFSTCompletion:(OrgApacheLuceneSearchSuggestFstFSTCompletion *)completion
-                                                         withBoolean:(jboolean)exactMatchFirst;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSuggestFstFSTCompletion:(OrgApacheLuceneSearchSuggestFstFSTCompletion *)completion
+                                                                   withBoolean:(jboolean)exactMatchFirst;
 
 /*!
- @brief This constructor prepares for creating a suggested FST using the
+ @brief This constructor prepares for creating a suggested FST using the 
  <code>build(InputIterator)</code> method.
- @param buckets
- The number of weight discretization buckets (see
- <code>FSTCompletion</code> for details).
- @param exactMatchFirst
- If <code>true</code> exact matches are promoted to the top of the
- suggestions list. Otherwise they appear in the order of
- discretized weight and alphabetical within the bucket.
+ @param buckets The number of weight discretization buckets (see
+            <code>FSTCompletion</code>
+   for details).
+ @param exactMatchFirst If 
+  <code> true </code>  exact matches are promoted to the top of the           suggestions list. Otherwise they appear in the order of
+            discretized weight and alphabetical within the bucket.
  */
-- (instancetype)initWithInt:(jint)buckets
-                withBoolean:(jboolean)exactMatchFirst;
+- (instancetype __nonnull)initWithInt:(jint)buckets
+                          withBoolean:(jboolean)exactMatchFirst;
 
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
 
 /*!
  @brief Returns the bucket (weight) as a Long for the provided key if it exists,
- otherwise null if it does not.
+  otherwise null if it does not.
  */
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
@@ -118,9 +122,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_init(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *create_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *create_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_initWithInt_withBoolean_(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *self, jint buckets, jboolean exactMatchFirst);
 
@@ -138,4 +142,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup")

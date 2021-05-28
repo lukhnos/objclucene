@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFrequencyTrackingRingBuffer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFrequencyTrackingRingBuffer_) && (INCLUDE_ALL_OrgApacheLuceneUtilFrequencyTrackingRingBuffer || defined(INCLUDE_OrgApacheLuceneUtilFrequencyTrackingRingBuffer))
 #define OrgApacheLuceneUtilFrequencyTrackingRingBuffer_
 
@@ -26,9 +32,9 @@
 /*!
  @brief A ring buffer that tracks the frequency of the integers that it contains.
  This is typically useful to track the hash codes of popular recently-used
- items.
- This data-structure requires 22 bytes per entry on average (between 16 and
- 28).
+  items.
+  This data-structure requires 22 bytes per entry on average (between 16 and
+  28).
  */
 @interface OrgApacheLuceneUtilFrequencyTrackingRingBuffer : NSObject < OrgApacheLuceneUtilAccountable >
 
@@ -37,14 +43,14 @@
 /*!
  @brief Create a new ring buffer that will contain at most <code>maxSize</code> items.
  This buffer will initially contain <code>maxSize</code> times the
- <code>sentinel</code> value. 
+   <code>sentinel</code> value.
  */
-- (instancetype)initWithInt:(jint)maxSize
-                    withInt:(jint)sentinel;
+- (instancetype __nonnull)initWithInt:(jint)maxSize
+                              withInt:(jint)sentinel;
 
 /*!
  @brief Add a new item to this ring buffer, potentially removing the oldest
- entry from this buffer if it is already full.
+  entry from this buffer if it is already full.
  */
 - (void)addWithInt:(jint)i;
 
@@ -61,6 +67,10 @@
 
 - (id<JavaUtilMap>)asFrequencyMap;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
@@ -75,4 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFrequencyTrackingRingBuffer")

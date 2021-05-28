@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDisiWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDisiWrapper_) && (INCLUDE_ALL_OrgApacheLuceneSearchDisiWrapper || defined(INCLUDE_OrgApacheLuceneSearchDisiWrapper))
 #define OrgApacheLuceneSearchDisiWrapper_
 
@@ -36,13 +42,17 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDisiWrapper)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisiWrapper, iterator_, id)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisiWrapper, iterator_, OrgApacheLuceneSearchDocIdSetIterator *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisiWrapper, next_, OrgApacheLuceneSearchDisiWrapper *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisiWrapper, approximation_, OrgApacheLuceneSearchDocIdSetIterator *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisiWrapper, twoPhaseView_, OrgApacheLuceneSearchTwoPhaseIterator *)
@@ -57,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisiWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisiWrapper")

@@ -3,11 +3,9 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/FieldsConsumer.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/codecs/FieldsConsumer.h"
@@ -17,6 +15,10 @@
 #include "org/apache/lucene/index/MergeState.h"
 #include "org/apache/lucene/index/MultiFields.h"
 #include "org/apache/lucene/index/ReaderSlice.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/FieldsConsumer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneCodecsFieldsConsumer
 
@@ -54,13 +56,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "FieldsConsumer", NULL, 0x4, NULL, NULL },
-    { "writeWithOrgApacheLuceneIndexFields:", "write", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "mergeWithOrgApacheLuceneIndexMergeState:", "merge", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsFieldsConsumer = { 2, "FieldsConsumer", "org.apache.lucene.codecs", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(writeWithOrgApacheLuceneIndexFields:);
+  methods[2].selector = @selector(mergeWithOrgApacheLuceneIndexMergeState:);
+  methods[3].selector = @selector(close);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "write", "LOrgApacheLuceneIndexFields;", "LJavaIoIOException;", "merge", "LOrgApacheLuceneIndexMergeState;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsFieldsConsumer = { "FieldsConsumer", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsFieldsConsumer;
 }
 

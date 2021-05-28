@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
@@ -20,6 +19,10 @@
 #include "org/apache/lucene/util/FixedBitSet.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/FixedBitSet must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilFixedBitSet () {
  @public
   IOSLongArray *bits_;
@@ -29,7 +32,7 @@
 
 /*!
  @brief Checks if the bits past numBits are clear.
- Some methods rely on this implicit assumption: search for "Depends on the ghost bits being clear!" 
+ Some methods rely on this implicit assumption: search for "Depends on the ghost bits being clear!"
  @return true if the bits past numBits are clear.
  */
 - (jboolean)verifyGhostBitsClear;
@@ -50,7 +53,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFixedBitSet, bits_, IOSLongArray *)
 
-inline jlong OrgApacheLuceneUtilFixedBitSet_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilFixedBitSet_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFixedBitSet, BASE_RAM_BYTES_USED, jlong)
 
@@ -124,21 +127,21 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 }
 
 - (jboolean)getWithInt:(jint)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_));
   jint i = JreRShift32(index, 6);
   jlong bitmask = JreLShift64(1LL, index);
   return (IOSLongArray_Get(nil_chk(bits_), i) & bitmask) != 0;
 }
 
 - (void)setWithInt:(jint)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_));
   jint wordNum = JreRShift32(index, 6);
   jlong bitmask = JreLShift64(1LL, index);
   *IOSLongArray_GetRef(nil_chk(bits_), wordNum) |= bitmask;
 }
 
 - (jboolean)getAndSetWithInt:(jint)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_));
   jint wordNum = JreRShift32(index, 6);
   jlong bitmask = JreLShift64(1LL, index);
   jboolean val = (IOSLongArray_Get(nil_chk(bits_), wordNum) & bitmask) != 0;
@@ -147,14 +150,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 }
 
 - (void)clearWithInt:(jint)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_));
   jint wordNum = JreRShift32(index, 6);
   jlong bitmask = JreLShift64(1LL, index);
   *IOSLongArray_GetRef(nil_chk(bits_), wordNum) &= ~bitmask;
 }
 
 - (jboolean)getAndClearWithInt:(jint)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_));
   jint wordNum = JreRShift32(index, 6);
   jlong bitmask = JreLShift64(1LL, index);
   jboolean val = (IOSLongArray_Get(nil_chk(bits_), wordNum) & bitmask) != 0;
@@ -163,7 +166,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 }
 
 - (jint)nextSetBitWithInt:(jint)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$I$I", @"index=", index, @", numBits=", numBits_));
   jint i = JreRShift32(index, 6);
   jlong word = JreRShift64(IOSLongArray_Get(nil_chk(bits_), i), index);
   if (word != 0) {
@@ -179,7 +182,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 }
 
 - (jint)prevSetBitWithInt:(jint)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$I$I", @"index=", index, @" numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$I$I", @"index=", index, @" numBits=", numBits_));
   jint i = JreRShift32(index, 6);
   jint subIndex = index & (jint) 0x3f;
   jlong word = (JreLShift64(IOSLongArray_Get(nil_chk(bits_), i), (63 - subIndex)));
@@ -296,8 +299,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 
 - (void)flipWithInt:(jint)startIndex
             withInt:(jint)endIndex {
-  JreAssert((startIndex >= 0 && startIndex < numBits_), (@"org/apache/lucene/util/FixedBitSet.java:403 condition failed: assert startIndex >= 0 && startIndex < numBits;"));
-  JreAssert((endIndex >= 0 && endIndex <= numBits_), (@"org/apache/lucene/util/FixedBitSet.java:404 condition failed: assert endIndex >= 0 && endIndex <= numBits;"));
+  JreAssert(startIndex >= 0 && startIndex < numBits_, @"org/apache/lucene/util/FixedBitSet.java:403 condition failed: assert startIndex >= 0 && startIndex < numBits;");
+  JreAssert(endIndex >= 0 && endIndex <= numBits_, @"org/apache/lucene/util/FixedBitSet.java:404 condition failed: assert endIndex >= 0 && endIndex <= numBits;");
   if (endIndex <= startIndex) {
     return;
   }
@@ -317,7 +320,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 }
 
 - (void)flipWithInt:(jint)index {
-  JreAssert((index >= 0 && index < numBits_), (JreStrcat("$I$I", @"index=", index, @" numBits=", numBits_)));
+  JreAssert(index >= 0 && index < numBits_, JreStrcat("$I$I", @"index=", index, @" numBits=", numBits_));
   jint wordNum = JreRShift32(index, 6);
   jlong bitmask = JreLShift64(1LL, index);
   *IOSLongArray_GetRef(nil_chk(bits_), wordNum) ^= bitmask;
@@ -325,8 +328,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 
 - (void)setWithInt:(jint)startIndex
            withInt:(jint)endIndex {
-  JreAssert((startIndex >= 0 && startIndex < numBits_), (JreStrcat("$I$I", @"startIndex=", startIndex, @", numBits=", numBits_)));
-  JreAssert((endIndex >= 0 && endIndex <= numBits_), (JreStrcat("$I$I", @"endIndex=", endIndex, @", numBits=", numBits_)));
+  JreAssert(startIndex >= 0 && startIndex < numBits_, JreStrcat("$I$I", @"startIndex=", startIndex, @", numBits=", numBits_));
+  JreAssert(endIndex >= 0 && endIndex <= numBits_, JreStrcat("$I$I", @"endIndex=", endIndex, @", numBits=", numBits_));
   if (endIndex <= startIndex) {
     return;
   }
@@ -345,8 +348,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 
 - (void)clearWithInt:(jint)startIndex
              withInt:(jint)endIndex {
-  JreAssert((startIndex >= 0 && startIndex < numBits_), (JreStrcat("$I$I", @"startIndex=", startIndex, @", numBits=", numBits_)));
-  JreAssert((endIndex >= 0 && endIndex <= numBits_), (JreStrcat("$I$I", @"endIndex=", endIndex, @", numBits=", numBits_)));
+  JreAssert(startIndex >= 0 && startIndex < numBits_, JreStrcat("$I$I", @"startIndex=", startIndex, @", numBits=", numBits_));
+  JreAssert(endIndex >= 0 && endIndex <= numBits_, JreStrcat("$I$I", @"endIndex=", endIndex, @", numBits=", numBits_));
   if (endIndex <= startIndex) {
     return;
   }
@@ -365,14 +368,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
   *IOSLongArray_GetRef(bits_, endWord) &= endmask;
 }
 
-- (OrgApacheLuceneUtilFixedBitSet *)clone {
+- (OrgApacheLuceneUtilFixedBitSet *)java_clone {
   IOSLongArray *bits = [IOSLongArray arrayWithLength:((IOSLongArray *) nil_chk(self->bits_))->size_];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->bits_, 0, bits, 0, numWords_);
   return create_OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(bits, numBits_);
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) {
+  if (JreObjectEqualsEquals(self, o)) {
     return true;
   }
   if (!([o isKindOfClass:[OrgApacheLuceneUtilFixedBitSet class]])) {
@@ -399,64 +402,109 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneUtilFixedBitSet;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 4, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 6, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 7, 5, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 11, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 13, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 14, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 15, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 17, 18, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 16, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 17, 18, -1, -1, -1 },
+    { NULL, "V", 0x2, 20, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 17, 18, -1, -1, -1 },
+    { NULL, "Z", 0x1, 22, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 21, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 17, 18, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 23, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 25, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFixedBitSet;", 0x1, 26, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 27, 28, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 29, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(ensureCapacityWithOrgApacheLuceneUtilFixedBitSet:withInt:);
+  methods[1].selector = @selector(bits2wordsWithInt:);
+  methods[2].selector = @selector(intersectionCountWithOrgApacheLuceneUtilFixedBitSet:withOrgApacheLuceneUtilFixedBitSet:);
+  methods[3].selector = @selector(unionCountWithOrgApacheLuceneUtilFixedBitSet:withOrgApacheLuceneUtilFixedBitSet:);
+  methods[4].selector = @selector(andNotCountWithOrgApacheLuceneUtilFixedBitSet:withOrgApacheLuceneUtilFixedBitSet:);
+  methods[5].selector = @selector(initWithInt:);
+  methods[6].selector = @selector(initWithLongArray:withInt:);
+  methods[7].selector = @selector(verifyGhostBitsClear);
+  methods[8].selector = @selector(length);
+  methods[9].selector = @selector(ramBytesUsed);
+  methods[10].selector = @selector(getBits);
+  methods[11].selector = @selector(cardinality);
+  methods[12].selector = @selector(getWithInt:);
+  methods[13].selector = @selector(setWithInt:);
+  methods[14].selector = @selector(getAndSetWithInt:);
+  methods[15].selector = @selector(clearWithInt:);
+  methods[16].selector = @selector(getAndClearWithInt:);
+  methods[17].selector = @selector(nextSetBitWithInt:);
+  methods[18].selector = @selector(prevSetBitWithInt:);
+  methods[19].selector = @selector(or__WithOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[20].selector = @selector(or__WithOrgApacheLuceneUtilFixedBitSet:);
+  methods[21].selector = @selector(or__WithLongArray:withInt:);
+  methods[22].selector = @selector(xor__WithOrgApacheLuceneUtilFixedBitSet:);
+  methods[23].selector = @selector(xor__WithOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[24].selector = @selector(xor__WithLongArray:withInt:);
+  methods[25].selector = @selector(and__WithOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[26].selector = @selector(intersectsWithOrgApacheLuceneUtilFixedBitSet:);
+  methods[27].selector = @selector(and__WithOrgApacheLuceneUtilFixedBitSet:);
+  methods[28].selector = @selector(and__WithLongArray:withInt:);
+  methods[29].selector = @selector(andNotWithOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[30].selector = @selector(andNotWithOrgApacheLuceneUtilFixedBitSet:);
+  methods[31].selector = @selector(andNotWithLongArray:withInt:);
+  methods[32].selector = @selector(scanIsEmpty);
+  methods[33].selector = @selector(flipWithInt:withInt:);
+  methods[34].selector = @selector(flipWithInt:);
+  methods[35].selector = @selector(setWithInt:withInt:);
+  methods[36].selector = @selector(clearWithInt:withInt:);
+  methods[37].selector = @selector(java_clone);
+  methods[38].selector = @selector(isEqual:);
+  methods[39].selector = @selector(hash);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 30, -1, -1 },
+    { "bits_", "[J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numBits_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numWords_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "ensureCapacity", "LOrgApacheLuceneUtilFixedBitSet;I", "bits2words", "I", "intersectionCount", "LOrgApacheLuceneUtilFixedBitSet;LOrgApacheLuceneUtilFixedBitSet;", "unionCount", "andNotCount", "[JI", "get", "set", "getAndSet", "clear", "getAndClear", "nextSetBit", "prevSetBit", "or", "LOrgApacheLuceneSearchDocIdSetIterator;", "LJavaIoIOException;", "LOrgApacheLuceneUtilFixedBitSet;", "xor", "and", "intersects", "andNot", "flip", "II", "clone", "equals", "LNSObject;", "hashCode", &OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFixedBitSet = { "FixedBitSet", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 40, 4, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilFixedBitSet;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFixedBitSet class]) {
     OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFixedBitSet_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFixedBitSet)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "ensureCapacityWithOrgApacheLuceneUtilFixedBitSet:withInt:", "ensureCapacity", "Lorg.apache.lucene.util.FixedBitSet;", 0x9, NULL, NULL },
-    { "bits2wordsWithInt:", "bits2words", "I", 0x9, NULL, NULL },
-    { "intersectionCountWithOrgApacheLuceneUtilFixedBitSet:withOrgApacheLuceneUtilFixedBitSet:", "intersectionCount", "J", 0x9, NULL, NULL },
-    { "unionCountWithOrgApacheLuceneUtilFixedBitSet:withOrgApacheLuceneUtilFixedBitSet:", "unionCount", "J", 0x9, NULL, NULL },
-    { "andNotCountWithOrgApacheLuceneUtilFixedBitSet:withOrgApacheLuceneUtilFixedBitSet:", "andNotCount", "J", 0x9, NULL, NULL },
-    { "initWithInt:", "FixedBitSet", NULL, 0x1, NULL, NULL },
-    { "initWithLongArray:withInt:", "FixedBitSet", NULL, 0x1, NULL, NULL },
-    { "verifyGhostBitsClear", NULL, "Z", 0x2, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getBits", NULL, "[J", 0x1, NULL, NULL },
-    { "cardinality", NULL, "I", 0x1, NULL, NULL },
-    { "getWithInt:", "get", "Z", 0x1, NULL, NULL },
-    { "setWithInt:", "set", "V", 0x1, NULL, NULL },
-    { "getAndSetWithInt:", "getAndSet", "Z", 0x1, NULL, NULL },
-    { "clearWithInt:", "clear", "V", 0x1, NULL, NULL },
-    { "getAndClearWithInt:", "getAndClear", "Z", 0x1, NULL, NULL },
-    { "nextSetBitWithInt:", "nextSetBit", "I", 0x1, NULL, NULL },
-    { "prevSetBitWithInt:", "prevSetBit", "I", 0x1, NULL, NULL },
-    { "or__WithOrgApacheLuceneSearchDocIdSetIterator:", "or", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "or__WithOrgApacheLuceneUtilFixedBitSet:", "or", "V", 0x1, NULL, NULL },
-    { "or__WithLongArray:withInt:", "or", "V", 0x2, NULL, NULL },
-    { "xor__WithOrgApacheLuceneUtilFixedBitSet:", "xor", "V", 0x1, NULL, NULL },
-    { "xor__WithOrgApacheLuceneSearchDocIdSetIterator:", "xor", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "xor__WithLongArray:withInt:", "xor", "V", 0x2, NULL, NULL },
-    { "and__WithOrgApacheLuceneSearchDocIdSetIterator:", "and", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "intersectsWithOrgApacheLuceneUtilFixedBitSet:", "intersects", "Z", 0x1, NULL, NULL },
-    { "and__WithOrgApacheLuceneUtilFixedBitSet:", "and", "V", 0x1, NULL, NULL },
-    { "and__WithLongArray:withInt:", "and", "V", 0x2, NULL, NULL },
-    { "andNotWithOrgApacheLuceneSearchDocIdSetIterator:", "andNot", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "andNotWithOrgApacheLuceneUtilFixedBitSet:", "andNot", "V", 0x1, NULL, NULL },
-    { "andNotWithLongArray:withInt:", "andNot", "V", 0x2, NULL, NULL },
-    { "scanIsEmpty", NULL, "Z", 0x1, NULL, NULL },
-    { "flipWithInt:withInt:", "flip", "V", 0x1, NULL, NULL },
-    { "flipWithInt:", "flip", "V", 0x1, NULL, NULL },
-    { "setWithInt:withInt:", "set", "V", 0x1, NULL, NULL },
-    { "clearWithInt:withInt:", "clear", "V", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.util.FixedBitSet;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "bits_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "numBits_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numWords_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFixedBitSet = { 2, "FixedBitSet", "org.apache.lucene.util", NULL, 0x11, 40, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilFixedBitSet;
 }
 
 @end
@@ -530,7 +578,7 @@ void OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(OrgApacheLuceneUt
   }
   self->numBits_ = numBits;
   JreStrongAssign(&self->bits_, storedBits);
-  JreAssert((OrgApacheLuceneUtilFixedBitSet_verifyGhostBitsClear(self)), (@"org/apache/lucene/util/FixedBitSet.java:134 condition failed: assert verifyGhostBitsClear();"));
+  JreAssert(OrgApacheLuceneUtilFixedBitSet_verifyGhostBitsClear(self), @"org/apache/lucene/util/FixedBitSet.java:134 condition failed: assert verifyGhostBitsClear();");
 }
 
 OrgApacheLuceneUtilFixedBitSet *new_OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(IOSLongArray *storedBits, jint numBits) {
@@ -551,7 +599,7 @@ jboolean OrgApacheLuceneUtilFixedBitSet_verifyGhostBitsClear(OrgApacheLuceneUtil
 }
 
 void OrgApacheLuceneUtilFixedBitSet_or__WithLongArray_withInt_(OrgApacheLuceneUtilFixedBitSet *self, IOSLongArray *otherArr, jint otherNumWords) {
-  JreAssert((otherNumWords <= self->numWords_), (JreStrcat("$I$I", @"numWords=", self->numWords_, @", otherNumWords=", otherNumWords)));
+  JreAssert(otherNumWords <= self->numWords_, JreStrcat("$I$I", @"numWords=", self->numWords_, @", otherNumWords=", otherNumWords));
   IOSLongArray *thisArr = self->bits_;
   jint pos = JavaLangMath_minWithInt_withInt_(self->numWords_, otherNumWords);
   while (--pos >= 0) {
@@ -560,7 +608,7 @@ void OrgApacheLuceneUtilFixedBitSet_or__WithLongArray_withInt_(OrgApacheLuceneUt
 }
 
 void OrgApacheLuceneUtilFixedBitSet_xor__WithLongArray_withInt_(OrgApacheLuceneUtilFixedBitSet *self, IOSLongArray *otherBits, jint otherNumWords) {
-  JreAssert((otherNumWords <= self->numWords_), (JreStrcat("$I$I", @"numWords=", self->numWords_, @", other.numWords=", otherNumWords)));
+  JreAssert(otherNumWords <= self->numWords_, JreStrcat("$I$I", @"numWords=", self->numWords_, @", other.numWords=", otherNumWords));
   IOSLongArray *thisBits = self->bits_;
   jint pos = JavaLangMath_minWithInt_withInt_(self->numWords_, otherNumWords);
   while (--pos >= 0) {

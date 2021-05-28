@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexBinaryDocValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexBinaryDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValues || defined(INCLUDE_OrgApacheLuceneIndexBinaryDocValues))
 #define OrgApacheLuceneIndexBinaryDocValues_
 
@@ -26,11 +32,10 @@
 #pragma mark Public
 
 /*!
- @brief Lookup the value for document.
- The returned <code>BytesRef</code> may be
- re-used across calls to <code>get(int)</code> so make sure to
+ @brief Lookup the value for document.The returned <code>BytesRef</code> may be
+  re-used across calls to <code>get(int)</code> so make sure to 
  <code>copy it</code> if you want to keep it
- around. 
+  around.
  */
 - (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)docID;
 
@@ -39,9 +44,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -53,4 +58,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBinaryDocValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValues")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory))
 #define OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_
 
@@ -32,27 +38,26 @@
 /*!
  @brief Factory for <code>SnowballFilter</code>, with configurable language
  <p>
- Note: Use of the "Lovins" stemmer is not recommended, as it is implemented with reflection.
+  Note: Use of the "Lovins" stemmer is not recommended, as it is implemented with reflection.
  <pre class="prettyprint">
- &lt;fieldType name="text_snowballstem" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
- &lt;filter class="solr.SnowballPorterFilterFactory" protected="protectedkeyword.txt" language="English"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_snowballstem" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+      &lt;filter class="solr.SnowballPorterFilterFactory" protected="protectedkeyword.txt" language="English"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
-
-+ (NSString *)PROTECTED_TOKENS;
+@property (readonly, copy, class) NSString *PROTECTED_TOKENS NS_SWIFT_NAME(PROTECTED_TOKENS);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new SnowballPorterFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -62,7 +67,7 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory)
 
-inline NSString *OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_get_PROTECTED_TOKENS();
+inline NSString *OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_get_PROTECTED_TOKENS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_TOKENS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory, PROTECTED_TOKENS, NSString *)
@@ -77,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFa
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory")

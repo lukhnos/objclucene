@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery))
 #define OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_
 
@@ -20,32 +26,37 @@
 #define INCLUDE_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery 1
 #include "org/apache/lucene/search/payloads/SpanPayloadCheckQuery.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneSearchSpansSpanNearQuery;
+@class OrgApacheLuceneSearchSpansSpanQuery;
 @protocol JavaUtilCollection;
 
 /*!
  @brief Only return those matches that have a specific payload at
- the given position.
+  the given position.
  */
 @interface OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery : OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery
 
 #pragma mark Public
 
 /*!
- @param match          The underlying <code>org.apache.lucene.search.spans.SpanQuery</code> to check
- @param payloadToMatch The <code>java.util.Collection</code> of payloads to match
+ @param match The underlying <code>org.apache.lucene.search.spans.SpanQuery</code>  to check
+ @param payloadToMatch The <code>java.util.Collection</code>  of payloads to match
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)match
-                                         withJavaUtilCollection:(id<JavaUtilCollection>)payloadToMatch;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)match
+                                                   withJavaUtilCollection:(id<JavaUtilCollection>)payloadToMatch;
 
-- (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *)clone;
+- (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *)java_clone;
 
 - (jboolean)isEqual:(id)o;
 
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)arg0
+                                               withJavaUtilCollection:(id<JavaUtilCollection>)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -61,4 +72,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuer
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery")

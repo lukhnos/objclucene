@@ -6,7 +6,8 @@
 /*!
  @brief Messages usually used by query parser implementations.
  <h2>Query Parser Messages</h2>
- Messages for the Flexible Query Parser, they use <tt>org.apache.lucene.messages.NLS</tt> API.
+  
+  Messages for the Flexible Query Parser, they use <tt>org.apache.lucene.messages.NLS</tt> API.
  */
 #include "J2ObjC_header.h"
 
@@ -18,4 +19,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info")

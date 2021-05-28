@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -17,11 +16,15 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ngram/Lucene43NGramTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer () {
  @public
-  jint minGram_, maxGram_;
+  jint minGram_;
+  jint maxGram_;
   jint gramSize_;
   jint pos_;
   jint inLen_;
@@ -42,6 +45,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer, termAtt_
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_init__WithInt_withInt_(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *self, jint minGram, jint maxGram);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer__Annotations$0(void);
 
 @implementation OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer
 
@@ -92,7 +97,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
       charsRead_ += inc;
     }
-    JreStrongAssign(&inStr_, [[NSString stringWithCharacters:chars offset:0 length:charsRead_] trim]);
+    JreStrongAssign(&inStr_, [[NSString java_stringWithCharacters:chars offset:0 length:charsRead_] java_trim]);
     if (charsRead_ == chars->size_) {
       IOSCharArray *throwaway = [IOSCharArray arrayWithLength:1024];
       while (true) {
@@ -103,7 +108,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         charsRead_ += inc;
       }
     }
-    inLen_ = ((jint) [((NSString *) nil_chk(inStr_)) length]);
+    inLen_ = [((NSString *) nil_chk(inStr_)) java_length];
     if (inLen_ == 0) {
       return false;
     }
@@ -133,10 +138,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   pos_ = 0;
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(inStr_);
   RELEASE_(termAtt_);
@@ -145,30 +146,42 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:", "Lucene43NGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withInt:withInt:", "Lucene43NGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "init", "Lucene43NGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "init__WithInt:withInt:", "init", "V", 0x2, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 2, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withInt:withInt:);
+  methods[2].selector = @selector(init);
+  methods[3].selector = @selector(init__WithInt:withInt:);
+  methods[4].selector = @selector(incrementToken);
+  methods[5].selector = @selector(end);
+  methods[6].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_MIN_NGRAM_SIZE", "DEFAULT_MIN_NGRAM_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_DEFAULT_MIN_NGRAM_SIZE },
-    { "DEFAULT_MAX_NGRAM_SIZE", "DEFAULT_MAX_NGRAM_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_DEFAULT_MAX_NGRAM_SIZE },
-    { "minGram_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxGram_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "gramSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "inLen_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "charsRead_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "inStr_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "started_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_MIN_NGRAM_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_DEFAULT_MIN_NGRAM_SIZE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_NGRAM_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_DEFAULT_MAX_NGRAM_SIZE, 0x19, -1, -1, -1, -1 },
+    { "minGram_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxGram_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "gramSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "inLen_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "charsRead_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "inStr_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "started_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer = { 2, "Lucene43NGramTokenizer", "org.apache.lucene.analysis.ngram", NULL, 0x11, 7, methods, 12, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "II", "LOrgApacheLuceneUtilAttributeFactory;II", "init", "LJavaIoIOException;", (void *)&OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer = { "Lucene43NGramTokenizer", "org.apache.lucene.analysis.ngram", ptrTable, methods, fields, 7, 0x11, 7, 12, -1, -1, -1, -1, 4 };
   return &_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer;
 }
 
@@ -225,6 +238,10 @@ void OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_init__WithInt_withInt_(O
   }
   self->minGram_ = minGram;
   self->maxGram_ = maxGram;
+}
+
+IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer)

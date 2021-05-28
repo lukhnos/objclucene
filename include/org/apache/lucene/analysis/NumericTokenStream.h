@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNumericTokenStream_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNumericTokenStream || defined(INCLUDE_OrgApacheLuceneAnalysisNumericTokenStream))
 #define OrgApacheLuceneAnalysisNumericTokenStream_
 
@@ -24,88 +30,90 @@
 #include "org/apache/lucene/analysis/TokenStream.h"
 
 @class OrgApacheLuceneUtilAttributeFactory;
+@class OrgApacheLuceneUtilAttributeSource;
 
 /*!
  @brief <b>Expert:</b> This class provides a <code>TokenStream</code>
- for indexing numeric values that can be used by <code>NumericRangeQuery</code>
+  for indexing numeric values that can be used by <code>NumericRangeQuery</code>
  .
  <p>Note that for simple usage, <code>IntField</code>, <code>LongField</code>
  , <code>FloatField</code> or <code>DoubleField</code> is
- recommended.  These fields disable norms and
- term freqs, as they are not usually needed during
- searching.  If you need to change these settings, you
- should use this class.
- <p>Here's an example usage, for an <code>int</code> field:
+  recommended.  These fields disable norms and
+  term freqs, as they are not usually needed during
+  searching.  If you need to change these settings, you
+  should use this class. 
+ <p>Here's an example usage, for an <code>int</code> field: 
  <pre class="prettyprint">
- FieldType fieldType = new FieldType(TextField.TYPE_NOT_STORED);
- fieldType.setOmitNorms(true);
- fieldType.setIndexOptions(IndexOptions.DOCS_ONLY);
- Field field = new Field(name, new NumericTokenStream(precisionStep).setIntValue(value), fieldType);
- document.add(field);
+   FieldType fieldType = new FieldType(TextField.TYPE_NOT_STORED);
+   fieldType.setOmitNorms(true);
+   fieldType.setIndexOptions(IndexOptions.DOCS_ONLY);
+   Field field = new Field(name, new NumericTokenStream(precisionStep).setIntValue(value), fieldType);
+   document.add(field); 
  
 @endcode
+  
  <p>For optimal performance, re-use the TokenStream and Field instance
- for more than one document:
+  for more than one document: 
  <pre class="prettyprint">
- NumericTokenStream stream = new NumericTokenStream(precisionStep);
- FieldType fieldType = new FieldType(TextField.TYPE_NOT_STORED);
- fieldType.setOmitNorms(true);
- fieldType.setIndexOptions(IndexOptions.DOCS_ONLY);
- Field field = new Field(name, stream, fieldType);
- Document document = new Document();
- document.add(field);
- for(all documents) {
- stream.setIntValue(value)
- writer.addDocument(document);
- }
+   NumericTokenStream stream = new NumericTokenStream(precisionStep);
+   FieldType fieldType = new FieldType(TextField.TYPE_NOT_STORED);
+   fieldType.setOmitNorms(true);
+   fieldType.setIndexOptions(IndexOptions.DOCS_ONLY);
+   Field field = new Field(name, stream, fieldType);
+   Document document = new Document();
+   document.add(field);
+   for(all documents) {
+     stream.setIntValue(value)
+     writer.addDocument(document);
+   } 
  
 @endcode
+  
  <p>This stream is not intended to be used in analyzers;
- it's more for iterating the different precisions during
- indexing a specific numeric value.</p>
- <p><b>NOTE</b>: as token streams are only consumed once
- the document is added to the index, if you index more
- than one numeric field, use a separate <code>NumericTokenStream</code>
- instance for each.</p>
- <p>See <code>NumericRangeQuery</code> for more details on the
- <a
- href="../search/NumericRangeQuery.html#precisionStepDesc"><code>precisionStep</code></a>
- parameter as well as how numeric fields work under the hood.</p>
+  it's more for iterating the different precisions during
+  indexing a specific numeric value.</p>
+  <p><b>NOTE</b>: as token streams are only consumed once
+  the document is added to the index, if you index more
+  than one numeric field, use a separate <code>NumericTokenStream</code>
+  instance for each.</p>
+  
+ <p>See <code>NumericRangeQuery</code> for more details on the 
+ <a href="../search/NumericRangeQuery.html#precisionStepDesc">
+ <code>precisionStep</code></a>
+  parameter as well as how numeric fields work under the hood.</p>
  @since 2.9
  */
 @interface OrgApacheLuceneAnalysisNumericTokenStream : OrgApacheLuceneAnalysisTokenStream
-
-+ (NSString *)TOKEN_TYPE_FULL_PREC;
-
-+ (NSString *)TOKEN_TYPE_LOWER_PREC;
+@property (readonly, copy, class) NSString *TOKEN_TYPE_FULL_PREC NS_SWIFT_NAME(TOKEN_TYPE_FULL_PREC);
+@property (readonly, copy, class) NSString *TOKEN_TYPE_LOWER_PREC NS_SWIFT_NAME(TOKEN_TYPE_LOWER_PREC);
 
 #pragma mark Public
 
 /*!
  @brief Creates a token stream for numeric values using the default <code>precisionStep</code>
- <code>NumericUtils.PRECISION_STEP_DEFAULT</code> (16).
- The stream is not yet initialized,
- before using set a value using the various set<em>???</em>Value() methods.
+  <code>NumericUtils.PRECISION_STEP_DEFAULT</code> (16).The stream is not yet initialized,
+  before using set a value using the various set<em>???
+ </em>Value() methods.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Expert: Creates a token stream for numeric values with the specified
- <code>precisionStep</code> using the given
+ @brief Expert: Creates a token stream for numeric values with the specified 
+ <code>precisionStep</code> using the given 
  <code>org.apache.lucene.util.AttributeFactory</code>.
  The stream is not yet initialized,
- before using set a value using the various set<em>???</em>Value() methods.
+  before using set a value using the various set<em>???</em>Value() methods.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)precisionStep;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
+                                                              withInt:(jint)precisionStep;
 
 /*!
- @brief Creates a token stream for numeric values with the specified
- <code>precisionStep</code>.
- The stream is not yet initialized,
- before using set a value using the various set<em>???</em>Value() methods.
+ @brief Creates a token stream for numeric values with the specified 
+ <code>precisionStep</code>.The stream is not yet initialized,
+  before using set a value using the various set<em>???
+ </em>Value() methods.
  */
-- (instancetype)initWithInt:(jint)precisionStep;
+- (instancetype __nonnull)initWithInt:(jint)precisionStep;
 
 /*!
  @brief Returns the precision step.
@@ -119,7 +127,7 @@
 /*!
  @brief Initializes the token stream with the supplied <code>double</code> value.
  @param value the value, for which this TokenStream should enumerate tokens.
- @return this instance, because of this you can use it the following way:
+ @return this instance, because of this you can use it the following way: 
  <code>new Field(name, new NumericTokenStream(precisionStep).setDoubleValue(value))</code>
  */
 - (OrgApacheLuceneAnalysisNumericTokenStream *)setDoubleValueWithDouble:(jdouble)value;
@@ -127,7 +135,7 @@
 /*!
  @brief Initializes the token stream with the supplied <code>float</code> value.
  @param value the value, for which this TokenStream should enumerate tokens.
- @return this instance, because of this you can use it the following way:
+ @return this instance, because of this you can use it the following way: 
  <code>new Field(name, new NumericTokenStream(precisionStep).setFloatValue(value))</code>
  */
 - (OrgApacheLuceneAnalysisNumericTokenStream *)setFloatValueWithFloat:(jfloat)value;
@@ -135,7 +143,7 @@
 /*!
  @brief Initializes the token stream with the supplied <code>int</code> value.
  @param value the value, for which this TokenStream should enumerate tokens.
- @return this instance, because of this you can use it the following way:
+ @return this instance, because of this you can use it the following way: 
  <code>new Field(name, new NumericTokenStream(precisionStep).setIntValue(value))</code>
  */
 - (OrgApacheLuceneAnalysisNumericTokenStream *)setIntValueWithInt:(jint)value;
@@ -143,12 +151,18 @@
 /*!
  @brief Initializes the token stream with the supplied <code>long</code> value.
  @param value the value, for which this TokenStream should enumerate tokens.
- @return this instance, because of this you can use it the following way:
+ @return this instance, because of this you can use it the following way: 
  <code>new Field(name, new NumericTokenStream(precisionStep).setLongValue(value))</code>
  */
 - (OrgApacheLuceneAnalysisNumericTokenStream *)setLongValueWithLong:(jlong)value;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -157,7 +171,7 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNumericTokenStream)
 /*!
  @brief The full precision token gets this token type assigned.
  */
-inline NSString *OrgApacheLuceneAnalysisNumericTokenStream_get_TOKEN_TYPE_FULL_PREC();
+inline NSString *OrgApacheLuceneAnalysisNumericTokenStream_get_TOKEN_TYPE_FULL_PREC(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_FULL_PREC;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisNumericTokenStream, TOKEN_TYPE_FULL_PREC, NSString *)
@@ -165,16 +179,16 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisNumericTokenStream, TOKEN_T
 /*!
  @brief The lower precision tokens gets this token type assigned.
  */
-inline NSString *OrgApacheLuceneAnalysisNumericTokenStream_get_TOKEN_TYPE_LOWER_PREC();
+inline NSString *OrgApacheLuceneAnalysisNumericTokenStream_get_TOKEN_TYPE_LOWER_PREC(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisNumericTokenStream, TOKEN_TYPE_LOWER_PREC, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNumericTokenStream_init(OrgApacheLuceneAnalysisNumericTokenStream *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNumericTokenStream *new_OrgApacheLuceneAnalysisNumericTokenStream_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNumericTokenStream *new_OrgApacheLuceneAnalysisNumericTokenStream_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNumericTokenStream *create_OrgApacheLuceneAnalysisNumericTokenStream_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNumericTokenStream *create_OrgApacheLuceneAnalysisNumericTokenStream_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNumericTokenStream_initWithInt_(OrgApacheLuceneAnalysisNumericTokenStream *self, jint precisionStep);
 
@@ -203,7 +217,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNumericTokenStream)
  @brief <b>Expert:</b> Use this attribute to get the details of the currently generated token.
  @since 4.0
  */
-@protocol OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
  @brief Returns current shift value, undefined before first token
@@ -223,7 +237,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNumericTokenStream)
 /*!
  @brief <em>Don't call this method!
  </em>
-  
  */
 - (void)init__WithLong:(jlong)value
                withInt:(jint)valSize
@@ -233,14 +246,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNumericTokenStream)
 /*!
  @brief <em>Don't call this method!
  </em>
-  
  */
 - (void)setShiftWithInt:(jint)shift;
 
 /*!
  @brief <em>Don't call this method!
  </em>
-  
  */
 - (jint)incShift;
 
@@ -276,13 +287,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNumericTokenStream_NumericTerm
 
 /*!
  @brief Creates, but does not yet initialize this attribute instance
- - seealso: #init(long,int,int,int)
+ - seealso: #init(long, int, int, int)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)clear;
 
-- (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *)clone;
+- (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *)java_clone;
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target OBJC_METHOD_FAMILY_NONE;
 
@@ -315,12 +326,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAt
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl_init(OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *new_OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *new_OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *create_OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *create_OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNumericTokenStream")

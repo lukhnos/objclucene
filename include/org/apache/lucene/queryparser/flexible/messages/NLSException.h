@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesNLSException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleMessagesNLSException_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLSException || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleMessagesNLSException))
 #define OrgApacheLuceneQueryparserFlexibleMessagesNLSException_
 
@@ -20,11 +26,11 @@
 
 /*!
  @brief Interface that exceptions should implement to support lazy loading of messages.
- For Native Language Support (NLS), system of software internationalization.
- This Interface should be implemented by all exceptions that require
- translation
+ For Native Language Support (NLS), system of software internationalization. 
+  This Interface should be implemented by all exceptions that require
+  translation
  */
-@protocol OrgApacheLuceneQueryparserFlexibleMessagesNLSException < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleMessagesNLSException < JavaObject >
 
 /*!
  @return a instance of a class that implements the Message interface
@@ -39,4 +45,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleMessagesNLSExceptio
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLSException")

@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/automaton/FiniteStringsIterator.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -15,6 +16,10 @@
 #include "org/apache/lucene/util/automaton/Automaton.h"
 #include "org/apache/lucene/util/automaton/FiniteStringsIterator.h"
 #include "org/apache/lucene/util/automaton/Transition.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/FiniteStringsIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilAutomatonFiniteStringsIterator () {
  @public
@@ -55,7 +60,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonFiniteStringsIterator, nodes_, I
 /*!
  @brief Empty string.
  */
-inline OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilAutomatonFiniteStringsIterator_get_EMPTY();
+inline OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilAutomatonFiniteStringsIterator_get_EMPTY(void);
 static OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilAutomatonFiniteStringsIterator_EMPTY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonFiniteStringsIterator, EMPTY, OrgApacheLuceneUtilIntsRef *)
 
@@ -68,7 +73,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonFiniteStringsIte
  @public
   /*!
    @brief Which state the path node ends on, whose
- transitions we are enumerating.
+   transitions we are enumerating.
    */
   jint state_;
   /*!
@@ -81,25 +86,24 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonFiniteStringsIte
   jint transition_;
   /*!
    @brief Which label we are on, in the min-max range of the
- current Transition
+   current Transition
    */
   jint label_;
   OrgApacheLuceneUtilAutomatonTransition *t_;
 }
+
+- (instancetype)init;
 
 - (void)resetStateWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                     withInt:(jint)state;
 
 /*!
  @brief Returns next label of current transition, or
- advances to next transition and returns its first
- label, if current one is exhausted.
- If there are
- no more transitions, returns -1. 
+   advances to next transition and returns its first
+   label, if current one is exhausted.If there are
+   no more transitions, returns -1.
  */
 - (jint)nextLabelWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
-
-- (instancetype)init;
 
 @end
 
@@ -109,9 +113,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode, 
 
 __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode_init(OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode *new_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode *new_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode *create_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode_init();
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode *create_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode)
 
@@ -152,7 +156,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonFiniteStringsIterator)
     }
     else {
       jint state = node->state_;
-      JreAssert(([((JavaUtilBitSet *) nil_chk(pathStates_)) getWithInt:state]), (@"org/apache/lucene/util/automaton/FiniteStringsIterator.java:138 condition failed: assert pathStates.get(state);"));
+      JreAssert([((JavaUtilBitSet *) nil_chk(pathStates_)) getWithInt:state], @"org/apache/lucene/util/automaton/FiniteStringsIterator.java:138 condition failed: assert pathStates.get(state);");
       [pathStates_ clearWithInt:state];
       depth--;
       [string_ setLengthWithInt:depth];
@@ -176,30 +180,37 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonFiniteStringsIterator)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[1].selector = @selector(next);
+  methods[2].selector = @selector(growStackWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY", "LOrgApacheLuceneUtilIntsRef;", .constantValue.asLong = 0, 0x1a, -1, 3, -1, -1 },
+    { "a_", "LOrgApacheLuceneUtilAutomatonAutomaton;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "pathStates_", "LJavaUtilBitSet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "string_", "LOrgApacheLuceneUtilIntsRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "nodes_", "[LOrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "emitEmptyString_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAutomatonAutomaton;", "growStack", "I", &OrgApacheLuceneUtilAutomatonFiniteStringsIterator_EMPTY, "LOrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonFiniteStringsIterator = { "FiniteStringsIterator", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x1, 3, 6, -1, 4, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilAutomatonFiniteStringsIterator;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilAutomatonFiniteStringsIterator class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonFiniteStringsIterator_EMPTY, new_OrgApacheLuceneUtilIntsRef_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonFiniteStringsIterator)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:", "FiniteStringsIterator", NULL, 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.IntsRef;", 0x1, NULL, NULL },
-    { "growStackWithInt:", "growStack", "V", 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY", "EMPTY", 0x1a, "Lorg.apache.lucene.util.IntsRef;", &OrgApacheLuceneUtilAutomatonFiniteStringsIterator_EMPTY, NULL, .constantValue.asLong = 0 },
-    { "a_", NULL, 0x12, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
-    { "pathStates_", NULL, 0x12, "Ljava.util.BitSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "string_", NULL, 0x12, "Lorg.apache.lucene.util.IntsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "nodes_", NULL, 0x2, "[Lorg.apache.lucene.util.automaton.FiniteStringsIterator$PathNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "emitEmptyString_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.FiniteStringsIterator$PathNode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonFiniteStringsIterator = { 2, "FiniteStringsIterator", "org.apache.lucene.util.automaton", NULL, 0x1, 3, methods, 6, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilAutomatonFiniteStringsIterator;
 }
 
 @end
@@ -245,9 +256,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonFiniteStringsIterat
 
 @implementation OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)resetStateWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                     withInt:(jint)state {
-  JreAssert(([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumTransitionsWithInt:state] != 0), (@"org/apache/lucene/util/automaton/FiniteStringsIterator.java:190 condition failed: assert a.getNumTransitions(state) != 0;"));
+  JreAssert([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumTransitionsWithInt:state] != 0, @"org/apache/lucene/util/automaton/FiniteStringsIterator.java:190 condition failed: assert a.getNumTransitions(state) != 0;");
   self->state_ = state;
   transition_ = 0;
   [a getTransitionWithInt:state withInt:0 withOrgApacheLuceneUtilAutomatonTransition:t_];
@@ -269,32 +287,33 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonFiniteStringsIterat
   return label_++;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(t_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "resetStateWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "resetState", "V", 0x1, NULL, NULL },
-    { "nextLabelWithOrgApacheLuceneUtilAutomatonAutomaton:", "nextLabel", "I", 0x1, NULL, NULL },
-    { "init", "PathNode", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(resetStateWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[2].selector = @selector(nextLabelWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "state_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "to_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "transition_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "label_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "t_", NULL, 0x12, "Lorg.apache.lucene.util.automaton.Transition;", NULL, NULL, .constantValue.asLong = 0 },
+    { "state_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "to_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "transition_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "label_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "t_", "LOrgApacheLuceneUtilAutomatonTransition;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode = { 2, "PathNode", "org.apache.lucene.util.automaton", "FiniteStringsIterator", 0xa, 3, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "resetState", "LOrgApacheLuceneUtilAutomatonAutomaton;I", "nextLabel", "LOrgApacheLuceneUtilAutomatonAutomaton;", "LOrgApacheLuceneUtilAutomatonFiniteStringsIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode = { "PathNode", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0xa, 3, 5, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode;
 }
 

@@ -8,7 +8,7 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
+#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
@@ -38,6 +38,10 @@
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/fst/ByteSequenceOutputs.h"
 #include "org/apache/lucene/util/fst/Outputs.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/blocktree/BlockTreeTermsReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader () {
  @public
@@ -164,7 +168,7 @@ NSString *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_N
 }
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field {
-  JreAssert((field != nil), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsReader.java:288 condition failed: assert field != null;"));
+  JreAssert(field != nil, @"org/apache/lucene/codecs/blocktree/BlockTreeTermsReader.java:288 condition failed: assert field != null;");
   return [((JavaUtilTreeMap *) nil_chk(fields_)) getWithId:field];
 }
 
@@ -180,7 +184,7 @@ NSString *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_N
     @try {
       return JreStrcat("$C@", [b utf8ToString], ' ', b);
     }
-    @catch (NSException *t) {
+    @catch (JavaLangThrowable *t) {
       return [b description];
     }
   }
@@ -207,11 +211,11 @@ NSString *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_N
 }
 
 - (NSString *)description {
-  return JreStrcat("$$I$@C", [[self getClass] getSimpleName], @"(fields=", [((JavaUtilTreeMap *) nil_chk(fields_)) size], @",delegate=", postingsReader_, ')');
+  return JreStrcat("$$I$@C", [[self java_getClass] getSimpleName], @"(fields=", [((JavaUtilTreeMap *) nil_chk(fields_)) size], @",delegate=", postingsReader_, ')');
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -222,55 +226,72 @@ NSString *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_N
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0xa, 2, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 4, 5, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 6, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x1, 7, 8, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x0, 9, 10, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 11, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 12, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsPostingsReaderBase:withOrgApacheLuceneIndexSegmentReadState:);
+  methods[1].selector = @selector(readBytesRefWithOrgApacheLuceneStoreIndexInput:);
+  methods[2].selector = @selector(seekDirWithOrgApacheLuceneStoreIndexInput:withLong:);
+  methods[3].selector = @selector(close);
+  methods[4].selector = @selector(iterator);
+  methods[5].selector = @selector(termsWithNSString:);
+  methods[6].selector = @selector(size);
+  methods[7].selector = @selector(brToStringWithOrgApacheLuceneUtilBytesRef:);
+  methods[8].selector = @selector(ramBytesUsed);
+  methods[9].selector = @selector(getChildResources);
+  methods[10].selector = @selector(checkIntegrity);
+  methods[11].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "FST_OUTPUTS", "LOrgApacheLuceneUtilFstOutputs;", .constantValue.asLong = 0, 0x18, -1, 13, 14, -1 },
+    { "NO_OUTPUT", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x18, -1, 15, -1, -1 },
+    { "OUTPUT_FLAGS_NUM_BITS", "I", .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_NUM_BITS, 0x18, -1, -1, -1, -1 },
+    { "OUTPUT_FLAGS_MASK", "I", .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_MASK, 0x18, -1, -1, -1, -1 },
+    { "OUTPUT_FLAG_IS_FLOOR", "I", .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_IS_FLOOR, 0x18, -1, -1, -1, -1 },
+    { "OUTPUT_FLAG_HAS_TERMS", "I", .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_HAS_TERMS, 0x18, -1, -1, -1, -1 },
+    { "TERMS_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 16, -1, -1 },
+    { "TERMS_CODEC_NAME", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 17, -1, -1 },
+    { "VERSION_START", "I", .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_START, 0x19, -1, -1, -1, -1 },
+    { "VERSION_AUTO_PREFIX_TERMS", "I", .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_AUTO_PREFIX_TERMS, 0x19, -1, -1, -1, -1 },
+    { "VERSION_AUTO_PREFIX_TERMS_COND", "I", .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_AUTO_PREFIX_TERMS_COND, 0x19, -1, -1, -1, -1 },
+    { "VERSION_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_CURRENT, 0x19, -1, -1, -1, -1 },
+    { "TERMS_INDEX_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 18, -1, -1 },
+    { "TERMS_INDEX_CODEC_NAME", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 19, -1, -1 },
+    { "termsIn_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "postingsReader_", "LOrgApacheLuceneCodecsPostingsReaderBase;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fields_", "LJavaUtilTreeMap;", .constantValue.asLong = 0, 0x12, -1, -1, 20, -1 },
+    { "dirOffset_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "indexDirOffset_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "segment_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "version__", "I", .constantValue.asLong = 0, 0x10, 21, -1, -1, -1 },
+    { "anyAutoPrefixTerms_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsPostingsReaderBase;LOrgApacheLuceneIndexSegmentReadState;", "LJavaIoIOException;", "readBytesRef", "LOrgApacheLuceneStoreIndexInput;", "seekDir", "LOrgApacheLuceneStoreIndexInput;J", "()Ljava/util/Iterator<Ljava/lang/String;>;", "terms", "LNSString;", "brToString", "LOrgApacheLuceneUtilBytesRef;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString", &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_FST_OUTPUTS, "Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/BytesRef;>;", &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_NO_OUTPUT, &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_EXTENSION, &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_CODEC_NAME, &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_EXTENSION, &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_NAME, "Ljava/util/TreeMap<Ljava/lang/String;Lorg/apache/lucene/codecs/blocktree/FieldReader;>;", "version" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader = { "BlockTreeTermsReader", "org.apache.lucene.codecs.blocktree", ptrTable, methods, fields, 7, 0x11, 12, 22, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader class]) {
     JreStrongAssign(&OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_FST_OUTPUTS, OrgApacheLuceneUtilFstByteSequenceOutputs_getSingleton());
     JreStrongAssign(&OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_NO_OUTPUT, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_FST_OUTPUTS)) getNoOutput]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsPostingsReaderBase:withOrgApacheLuceneIndexSegmentReadState:", "BlockTreeTermsReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "readBytesRefWithOrgApacheLuceneStoreIndexInput:", "readBytesRef", "Lorg.apache.lucene.util.BytesRef;", 0xa, "Ljava.io.IOException;", NULL },
-    { "seekDirWithOrgApacheLuceneStoreIndexInput:withLong:", "seekDir", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "brToStringWithOrgApacheLuceneUtilBytesRef:", "brToString", "Ljava.lang.String;", 0x0, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "FST_OUTPUTS", "FST_OUTPUTS", 0x18, "Lorg.apache.lucene.util.fst.Outputs;", &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_FST_OUTPUTS, "Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "NO_OUTPUT", "NO_OUTPUT", 0x18, "Lorg.apache.lucene.util.BytesRef;", &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_NO_OUTPUT, NULL, .constantValue.asLong = 0 },
-    { "OUTPUT_FLAGS_NUM_BITS", "OUTPUT_FLAGS_NUM_BITS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_NUM_BITS },
-    { "OUTPUT_FLAGS_MASK", "OUTPUT_FLAGS_MASK", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_MASK },
-    { "OUTPUT_FLAG_IS_FLOOR", "OUTPUT_FLAG_IS_FLOOR", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_IS_FLOOR },
-    { "OUTPUT_FLAG_HAS_TERMS", "OUTPUT_FLAG_HAS_TERMS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_HAS_TERMS },
-    { "TERMS_EXTENSION", "TERMS_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "TERMS_CODEC_NAME", "TERMS_CODEC_NAME", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_CODEC_NAME, NULL, .constantValue.asLong = 0 },
-    { "VERSION_START", "VERSION_START", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_START },
-    { "VERSION_AUTO_PREFIX_TERMS", "VERSION_AUTO_PREFIX_TERMS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_AUTO_PREFIX_TERMS },
-    { "VERSION_AUTO_PREFIX_TERMS_COND", "VERSION_AUTO_PREFIX_TERMS_COND", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_AUTO_PREFIX_TERMS_COND },
-    { "VERSION_CURRENT", "VERSION_CURRENT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_CURRENT },
-    { "TERMS_INDEX_EXTENSION", "TERMS_INDEX_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "TERMS_INDEX_CODEC_NAME", "TERMS_INDEX_CODEC_NAME", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_NAME, NULL, .constantValue.asLong = 0 },
-    { "termsIn_", NULL, 0x10, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "postingsReader_", NULL, 0x10, "Lorg.apache.lucene.codecs.PostingsReaderBase;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fields_", NULL, 0x12, "Ljava.util.TreeMap;", NULL, "Ljava/util/TreeMap<Ljava/lang/String;Lorg/apache/lucene/codecs/blocktree/FieldReader;>;", .constantValue.asLong = 0 },
-    { "dirOffset_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexDirOffset_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "segment_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "version__", "version", 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "anyAutoPrefixTerms_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader = { 2, "BlockTreeTermsReader", "org.apache.lucene.codecs.blocktree", NULL, 0x11, 12, methods, 22, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader;
 }
 
 @end
@@ -293,7 +314,7 @@ void OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_initWithOrgApacheLuceneC
       self->anyAutoPrefixTerms_ = true;
     }
     else {
-      JreAssert((self->version__ >= OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_AUTO_PREFIX_TERMS_COND), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsReader.java:161 condition failed: assert version >= VERSION_AUTO_PREFIX_TERMS_COND;"));
+      JreAssert(self->version__ >= OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_AUTO_PREFIX_TERMS_COND, @"org/apache/lucene/codecs/blocktree/BlockTreeTermsReader.java:161 condition failed: assert version >= VERSION_AUTO_PREFIX_TERMS_COND;");
       jbyte b = [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->termsIn_)) readByte];
       if (b == 0) {
         self->anyAutoPrefixTerms_ = false;
@@ -353,7 +374,7 @@ void OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_initWithOrgApacheLuceneC
         @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$J$J", @"invalid sumTotalTermFreq: ", sumTotalTermFreq, @" sumDocFreq: ", sumDocFreq), self->termsIn_);
       }
       jlong indexStartFP = [((OrgApacheLuceneStoreIndexInput *) nil_chk(indexIn)) readVLong];
-      OrgApacheLuceneCodecsBlocktreeFieldReader *previous = [self->fields_ putWithId:fieldInfo->name_ withId:create_OrgApacheLuceneCodecsBlocktreeFieldReader_initWithOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilBytesRef_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(self, fieldInfo, numTerms, rootCode, sumTotalTermFreq, sumDocFreq, docCount, indexStartFP, longsSize, indexIn, minTerm, maxTerm)];
+      OrgApacheLuceneCodecsBlocktreeFieldReader *previous = JreRetainedLocalValue([self->fields_ putWithId:fieldInfo->name_ withId:create_OrgApacheLuceneCodecsBlocktreeFieldReader_initWithOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilBytesRef_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(self, fieldInfo, numTerms, rootCode, sumTotalTermFreq, sumDocFreq, docCount, indexStartFP, longsSize, indexIn, minTerm, maxTerm)]);
       if (previous != nil) {
         @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$$", @"duplicate field: ", fieldInfo->name_), self->termsIn_);
       }

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestLookup
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestLookup_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestLookup || defined(INCLUDE_OrgApacheLuceneSearchSuggestLookup))
 #define OrgApacheLuceneSearchSuggestLookup_
 
@@ -36,23 +42,21 @@
  @brief Simple Lookup interface for <code>CharSequence</code> suggestions.
  */
 @interface OrgApacheLuceneSearchSuggestLookup : NSObject < OrgApacheLuceneUtilAccountable >
-
-+ (id<JavaUtilComparator>)CHARSEQUENCE_COMPARATOR;
+@property (readonly, class, strong) id<JavaUtilComparator> CHARSEQUENCE_COMPARATOR NS_SWIFT_NAME(CHARSEQUENCE_COMPARATOR);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.)
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Build lookup from a dictionary.
- Some implementations may require sorted
- or unsorted keys from the dictionary's iterator - use
- <code>SortedInputIterator</code> or
+ @brief Build lookup from a dictionary.Some implementations may require sorted
+  or unsorted keys from the dictionary's iterator - use 
+ <code>SortedInputIterator</code> or 
  <code>UnsortedInputIterator</code> in such case.
  */
 - (void)buildWithOrgApacheLuceneSearchSpellDictionary:(id<OrgApacheLuceneSearchSpellDictionary>)dict;
@@ -79,22 +83,21 @@
 /*!
  @brief Discard current lookup data and load it from a previously saved copy.
  Optional operation.
- @param input the <code>DataInput</code> to load the lookup data.
+ @param input the <code>DataInput</code>  to load the lookup data.
  @return true if completed successfully, false if unsuccessful or not supported.
- @throws IOException when fatal IO error occurs.
+ @throw IOExceptionwhen fatal IO error occurs.
  */
 - (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input;
 
 /*!
- @brief Calls <code>load(DataInput)</code> after converting
+ @brief Calls <code>load(DataInput)</code> after converting 
  <code>InputStream</code> to <code>DataInput</code>
  */
 - (jboolean)load__WithJavaIoInputStream:(JavaIoInputStream *)input;
 
 /*!
  @brief Look up a key and return possible completion for this key.
- @param key lookup key. Depending on the implementation this may be
- a prefix, misspelling, or even infix.
+ @param key lookup key. Depending on the implementation this may be  a prefix, misspelling, or even infix.
  @param onlyMorePopular return only more popular results
  @param num maximum number of results to return
  @return a list of possible completions, with their relative weight (e.g. popularity)
@@ -105,8 +108,7 @@
 
 /*!
  @brief Look up a key and return possible completion for this key.
- @param key lookup key. Depending on the implementation this may be
- a prefix, misspelling, or even infix.
+ @param key lookup key. Depending on the implementation this may be  a prefix, misspelling, or even infix.
  @param contexts contexts to filter the lookup by, or null if all contexts are allowed; if the suggestion contains any of the contexts, it's a match
  @param onlyMorePopular return only more popular results
  @param num maximum number of results to return
@@ -118,16 +120,15 @@
                                            withInt:(jint)num;
 
 /*!
- @brief Persist the constructed lookup data to a directory.
- Optional operation.
- @param output <code>DataOutput</code> to write the data to.
+ @brief Persist the constructed lookup data to a directory.Optional operation.
+ @param output<code>DataOutput</code>  to write the data to.
  @return true if successful, false if unsuccessful or not supported.
- @throws IOException when fatal IO error occurs.
+ @throw IOExceptionwhen fatal IO error occurs.
  */
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
 
 /*!
- @brief Calls <code>store(DataOutput)</code> after converting
+ @brief Calls <code>store(DataOutput)</code> after converting 
  <code>OutputStream</code> to <code>DataOutput</code>
  */
 - (jboolean)storeWithJavaIoOutputStream:(JavaIoOutputStream *)output;
@@ -139,7 +140,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestLookup)
 /*!
  @brief A simple char-by-char comparator for <code>CharSequence</code>
  */
-inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestLookup_get_CHARSEQUENCE_COMPARATOR();
+inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestLookup_get_CHARSEQUENCE_COMPARATOR(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATOR;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestLookup, CHARSEQUENCE_COMPARATOR, id<JavaUtilComparator>)
@@ -172,7 +173,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestLookup)
   id<JavaLangCharSequence> key_;
   /*!
    @brief Expert: custom Object to hold the result of a
- highlighted suggestion.
+   highlighted suggestion.
    */
   id highlightKey_;
   /*!
@@ -194,47 +195,47 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestLookup)
 /*!
  @brief Create a new result from a key+weight pair.
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                    withLong:(jlong)value;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
+                                              withLong:(jlong)value;
 
 /*!
  @brief Create a new result from a key+weight+payload triple.
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                    withLong:(jlong)value
-             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
+                                              withLong:(jlong)value
+                       withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 
 /*!
  @brief Create a new result from a key+weight+payload+contexts triple.
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                    withLong:(jlong)value
-             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
-                             withJavaUtilSet:(id<JavaUtilSet>)contexts;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
+                                              withLong:(jlong)value
+                       withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
+                                       withJavaUtilSet:(id<JavaUtilSet>)contexts;
 
 /*!
  @brief Create a new result from a key+weight+contexts triple.
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                    withLong:(jlong)value
-                             withJavaUtilSet:(id<JavaUtilSet>)contexts;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
+                                              withLong:(jlong)value
+                                       withJavaUtilSet:(id<JavaUtilSet>)contexts;
 
 /*!
  @brief Create a new result from a key+highlightKey+weight+payload triple.
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                      withId:(id)highlightKey
-                                    withLong:(jlong)value
-             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
+                                                withId:(id)highlightKey
+                                              withLong:(jlong)value
+                       withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 
 /*!
  @brief Create a new result from a key+highlightKey+weight+payload+contexts triple.
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                      withId:(id)highlightKey
-                                    withLong:(jlong)value
-             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
-                             withJavaUtilSet:(id<JavaUtilSet>)contexts;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
+                                                withId:(id)highlightKey
+                                              withLong:(jlong)value
+                       withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
+                                       withJavaUtilSet:(id<JavaUtilSet>)contexts;
 
 /*!
  @brief Compare alphabetically.
@@ -242,6 +243,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestLookup)
 - (jint)compareToWithId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)o;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -312,7 +317,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestLookup_LookupResult)
 /*!
  @brief Creates a new priority queue of the specified size.
  */
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
+
+- (OrgApacheLuceneSearchSuggestLookup_LookupResult *)addWithId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)arg0;
 
 /*!
  @brief Returns the top N results in descending order.
@@ -320,10 +327,27 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestLookup_LookupResult)
  */
 - (IOSObjectArray *)getResults;
 
+- (OrgApacheLuceneSearchSuggestLookup_LookupResult *)insertWithOverflowWithId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)arg0;
+
+- (OrgApacheLuceneSearchSuggestLookup_LookupResult *)pop;
+
+- (OrgApacheLuceneSearchSuggestLookup_LookupResult *)top;
+
+- (OrgApacheLuceneSearchSuggestLookup_LookupResult *)updateTop;
+
+- (OrgApacheLuceneSearchSuggestLookup_LookupResult *)updateTopWithId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)arg0;
+
 #pragma mark Protected
+
+- (OrgApacheLuceneSearchSuggestLookup_LookupResult *)getSentinelObject;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)a
                     withId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)b;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -339,4 +363,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestLookup")

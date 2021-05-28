@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPayloadsFloatEncoder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPayloadsFloatEncoder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsFloatEncoder || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsFloatEncoder))
 #define OrgApacheLuceneAnalysisPayloadsFloatEncoder_
 
@@ -29,13 +35,13 @@
 
 /*!
  @brief Encode a character array Float as a <code>BytesRef</code>.
- - seealso: org.apache.lucene.analysis.payloads.PayloadHelper#encodeFloat(float,byte[],int)
+ - seealso: org.apache.lucene.analysis.payloads.PayloadHelper#encodeFloat(float, byte[], int)
  */
 @interface OrgApacheLuceneAnalysisPayloadsFloatEncoder : OrgApacheLuceneAnalysisPayloadsAbstractEncoder < OrgApacheLuceneAnalysisPayloadsPayloadEncoder >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer
                                              withInt:(jint)offset
@@ -47,12 +53,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsFloatEncoder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsFloatEncoder_init(OrgApacheLuceneAnalysisPayloadsFloatEncoder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsFloatEncoder *new_OrgApacheLuceneAnalysisPayloadsFloatEncoder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsFloatEncoder *new_OrgApacheLuceneAnalysisPayloadsFloatEncoder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsFloatEncoder *create_OrgApacheLuceneAnalysisPayloadsFloatEncoder_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsFloatEncoder *create_OrgApacheLuceneAnalysisPayloadsFloatEncoder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsFloatEncoder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsFloatEncoder")

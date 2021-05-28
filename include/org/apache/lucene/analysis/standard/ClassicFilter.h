@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisStandardClassicFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisStandardClassicFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicFilter || defined(INCLUDE_OrgApacheLuceneAnalysisStandardClassicFilter))
 #define OrgApacheLuceneAnalysisStandardClassicFilter_
 
@@ -32,11 +38,11 @@
 /*!
  @brief Construct filtering <i>in</i>.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 /*!
  @brief Returns the next token in the stream, or null at EOS.
- <p>Removes <tt>'s</tt> from the end of words.
+ <p>Removes <tt>'s</tt> from the end of words. 
  <p>Removes dots from acronyms.
  */
 - (jboolean)incrementToken;
@@ -55,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardClassicFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicFilter")

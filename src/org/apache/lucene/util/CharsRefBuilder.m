@@ -15,6 +15,10 @@
 #include "org/apache/lucene/util/CharsRefBuilder.h"
 #include "org/apache/lucene/util/UnicodeUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/CharsRefBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilCharsRefBuilder () {
  @public
   OrgApacheLuceneUtilCharsRef *ref_;
@@ -24,7 +28,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilCharsRefBuilder, ref_, OrgApacheLuceneUtilCharsRef *)
 
-inline NSString *OrgApacheLuceneUtilCharsRefBuilder_get_NULL_STRING();
+inline NSString *OrgApacheLuceneUtilCharsRefBuilder_get_NULL_STRING(void);
 static NSString *OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING = @"null";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilCharsRefBuilder, NULL_STRING, NSString *)
 
@@ -66,7 +70,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (csq == nil) {
     return [self appendWithJavaLangCharSequence:OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING];
   }
-  return [self appendWithJavaLangCharSequence:csq withInt:0 withInt:[csq length]];
+  return [self appendWithJavaLangCharSequence:csq withInt:0 withInt:[csq java_length]];
 }
 
 - (OrgApacheLuceneUtilCharsRefBuilder *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
@@ -125,7 +129,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneUtilCharsRef *)get {
-  JreAssert((((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->offset_ == 0), (@"Modifying the offset of the returned ref is illegal"));
+  JreAssert(((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->offset_ == 0, @"Modifying the offset of the returned ref is illegal");
   return ref_;
 }
 
@@ -151,34 +155,60 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CharsRefBuilder", NULL, 0x1, NULL, NULL },
-    { "chars", NULL, "[C", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "setLengthWithInt:", "setLength", "V", 0x1, NULL, NULL },
-    { "charAtWithInt:", "charAt", "C", 0x1, NULL, NULL },
-    { "setCharAtWithInt:withChar:", "setCharAt", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "appendWithJavaLangCharSequence:", "append", "Lorg.apache.lucene.util.CharsRefBuilder;", 0x1, NULL, NULL },
-    { "appendWithJavaLangCharSequence:withInt:withInt:", "append", "Lorg.apache.lucene.util.CharsRefBuilder;", 0x1, NULL, NULL },
-    { "appendWithChar:", "append", "Lorg.apache.lucene.util.CharsRefBuilder;", 0x1, NULL, NULL },
-    { "copyCharsWithOrgApacheLuceneUtilCharsRef:", "copyChars", "V", 0x1, NULL, NULL },
-    { "growWithInt:", "grow", "V", 0x1, NULL, NULL },
-    { "copyUTF8BytesWithByteArray:withInt:withInt:", "copyUTF8Bytes", "V", 0x1, NULL, NULL },
-    { "copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:", "copyUTF8Bytes", "V", 0x1, NULL, NULL },
-    { "copyCharsWithCharArray:withInt:withInt:", "copyChars", "V", 0x1, NULL, NULL },
-    { "appendWithCharArray:withInt:withInt:", "append", "V", 0x1, NULL, NULL },
-    { "get", NULL, "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, NULL },
-    { "toCharsRef", NULL, "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "C", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCharsRefBuilder;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCharsRefBuilder;", 0x1, 5, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCharsRefBuilder;", 0x1, 5, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 15, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCharsRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCharsRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 16, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 19, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(chars);
+  methods[2].selector = @selector(length);
+  methods[3].selector = @selector(setLengthWithInt:);
+  methods[4].selector = @selector(charAtWithInt:);
+  methods[5].selector = @selector(setCharAtWithInt:withChar:);
+  methods[6].selector = @selector(clear);
+  methods[7].selector = @selector(appendWithJavaLangCharSequence:);
+  methods[8].selector = @selector(appendWithJavaLangCharSequence:withInt:withInt:);
+  methods[9].selector = @selector(appendWithChar:);
+  methods[10].selector = @selector(copyCharsWithOrgApacheLuceneUtilCharsRef:);
+  methods[11].selector = @selector(growWithInt:);
+  methods[12].selector = @selector(copyUTF8BytesWithByteArray:withInt:withInt:);
+  methods[13].selector = @selector(copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:);
+  methods[14].selector = @selector(copyCharsWithCharArray:withInt:withInt:);
+  methods[15].selector = @selector(appendWithCharArray:withInt:withInt:);
+  methods[16].selector = @selector(get);
+  methods[17].selector = @selector(toCharsRef);
+  methods[18].selector = @selector(description);
+  methods[19].selector = @selector(isEqual:);
+  methods[20].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "NULL_STRING", "NULL_STRING", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING, NULL, .constantValue.asLong = 0 },
-    { "ref_", NULL, 0x12, "Lorg.apache.lucene.util.CharsRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "NULL_STRING", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 20, -1, -1 },
+    { "ref_", "LOrgApacheLuceneUtilCharsRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilCharsRefBuilder = { 2, "CharsRefBuilder", "org.apache.lucene.util", NULL, 0x1, 21, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setLength", "I", "charAt", "setCharAt", "IC", "append", "LJavaLangCharSequence;", "LJavaLangCharSequence;II", "C", "copyChars", "LOrgApacheLuceneUtilCharsRef;", "grow", "copyUTF8Bytes", "[BII", "LOrgApacheLuceneUtilBytesRef;", "[CII", "toString", "equals", "LNSObject;", "hashCode", &OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilCharsRefBuilder = { "CharsRefBuilder", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 21, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilCharsRefBuilder;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig))
 #define OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_
 
@@ -20,7 +26,7 @@
 @class OrgApacheLuceneDocumentFieldType_NumericType;
 
 /*!
- @brief This class holds the configuration used to parse numeric queries and create
+ @brief This class holds the configuration used to parse numeric queries and create 
  <code>NumericRangeQuery</code>s.
  - seealso: NumericRangeQuery
  - seealso: NumberFormat
@@ -31,28 +37,25 @@
 
 /*!
  @brief Constructs a <code>NumericConfig</code> object.
- @param precisionStep
- the precision used to index the numeric values
- @param format
- the <code>NumberFormat</code> used to parse a <code>String</code> to
- <code>Number</code>
- @param type
- the numeric type used to index the numeric values
+ @param precisionStep the precision used to index the numeric values
+ @param format the 
+ <code>NumberFormat</code>  used to parse a <code>String</code>  to           <code>Number</code>
+ @param type the numeric type used to index the numeric values
  - seealso: NumericConfig#setPrecisionStep(int)
  - seealso: NumericConfig#setNumberFormat(NumberFormat)
  - seealso: #setType(org.apache.lucene.document.FieldType.NumericType)
  */
-- (instancetype)initWithInt:(jint)precisionStep
-   withJavaTextNumberFormat:(JavaTextNumberFormat *)format
+- (instancetype __nonnull)initWithInt:(jint)precisionStep
+             withJavaTextNumberFormat:(JavaTextNumberFormat *)format
 withOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldType_NumericType *)type;
 
 - (jboolean)isEqual:(id)obj;
 
 /*!
- @brief Returns the <code>NumberFormat</code> used to parse a <code>String</code> to
+ @brief Returns the <code>NumberFormat</code> used to parse a <code>String</code> to 
  <code>Number</code>
  @return the <code>NumberFormat</code> used to parse a <code>String</code> to
- <code>Number</code>
+          <code>Number</code>
  */
 - (JavaTextNumberFormat *)getNumberFormat;
 
@@ -70,18 +73,17 @@ withOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldTy
 - (OrgApacheLuceneDocumentFieldType_NumericType *)getType;
 
 /*!
- @brief Sets the <code>NumberFormat</code> used to parse a <code>String</code> to
+ @brief Sets the <code>NumberFormat</code> used to parse a <code>String</code> to 
  <code>Number</code>
- @param format
- the <code>NumberFormat</code> used to parse a <code>String</code> to
- <code>Number</code>, cannot be <code>null</code>
+ @param format the 
+ <code>NumberFormat</code>  used to parse a <code>String</code>  to           <code>Number</code>
+  , cannot be  <code> null </code>
  */
 - (void)setNumberFormatWithJavaTextNumberFormat:(JavaTextNumberFormat *)format;
 
 /*!
  @brief Sets the precision used to index the numeric values
- @param precisionStep
- the precision used to index the numeric values
+ @param precisionStep the precision used to index the numeric values
  - seealso: NumericRangeQuery#getPrecisionStep()
  */
 - (void)setPrecisionStepWithInt:(jint)precisionStep;
@@ -91,6 +93,10 @@ withOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldTy
  @param type the numeric type used to index the numeric values
  */
 - (void)setTypeWithOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldType_NumericType *)type;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -106,4 +112,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumer
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig")

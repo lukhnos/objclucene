@@ -3,13 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/search/LiveFieldValues.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Map.h"
 #include "java/util/concurrent/ConcurrentHashMap.h"
 #include "org/apache/lucene/search/LiveFieldValues.h"
 #include "org/apache/lucene/search/ReferenceManager.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/LiveFieldValues must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchLiveFieldValues () {
  @public
@@ -40,11 +42,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLiveFieldValues, missingValue_, id)
 
 - (void)beforeRefresh {
   JreVolatileStrongAssign(&old_, JreLoadVolatileId(&current_));
-  JreVolatileStrongAssignAndConsume(&current_, new_JavaUtilConcurrentConcurrentHashMap_init());
+  JreVolatileStrongAssign(&current_, create_JavaUtilConcurrentConcurrentHashMap_init());
 }
 
 - (void)afterRefreshWithBoolean:(jboolean)didRefresh {
-  JreVolatileStrongAssignAndConsume(&old_, new_JavaUtilConcurrentConcurrentHashMap_init());
+  JreVolatileStrongAssign(&old_, create_JavaUtilConcurrentConcurrentHashMap_init());
 }
 
 - (void)addWithNSString:(NSString *)id_
@@ -61,8 +63,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLiveFieldValues, missingValue_, id)
 }
 
 - (id)getWithNSString:(NSString *)id_ {
-  id value = [((id<JavaUtilMap>) nil_chk(JreLoadVolatileId(&current_))) getWithId:id_];
-  if (value == missingValue_) {
+  id value = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(JreLoadVolatileId(&current_))) getWithId:id_]);
+  if (JreObjectEqualsEquals(value, missingValue_)) {
     return nil;
   }
   else if (value != nil) {
@@ -70,14 +72,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLiveFieldValues, missingValue_, id)
   }
   else {
     value = [((id<JavaUtilMap>) nil_chk(JreLoadVolatileId(&old_))) getWithId:id_];
-    if (value == missingValue_) {
+    if (JreObjectEqualsEquals(value, missingValue_)) {
       return nil;
     }
     else if (value != nil) {
       return value;
     }
     else {
-      id s = [((OrgApacheLuceneSearchReferenceManager *) nil_chk(mgr_)) acquire];
+      id s = JreRetainedLocalValue([((OrgApacheLuceneSearchReferenceManager *) nil_chk(mgr_)) acquire]);
       @try {
         return [self lookupFromSearcherWithId:s withNSString:id_];
       }
@@ -110,24 +112,38 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLiveFieldValues, missingValue_, id)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchReferenceManager:withId:", "LiveFieldValues", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/ReferenceManager<TS;>;TT;)V" },
-    { "close", NULL, "V", 0x1, NULL, NULL },
-    { "beforeRefresh", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "afterRefreshWithBoolean:", "afterRefresh", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "addWithNSString:withId:", "add", "V", 0x1, NULL, "(Ljava/lang/String;TT;)V" },
-    { "delete__WithNSString:", "delete", "V", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "getWithNSString:", "get", "TT;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/String;)TT;" },
-    { "lookupFromSearcherWithId:withNSString:", "lookupFromSearcher", "TT;", 0x404, "Ljava.io.IOException;", "(TS;Ljava/lang/String;)TT;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, 7, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 10, 9, 2, 11, -1, -1 },
+    { NULL, "LNSObject;", 0x404, 12, 13, 2, 14, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchReferenceManager:withId:);
+  methods[1].selector = @selector(close);
+  methods[2].selector = @selector(beforeRefresh);
+  methods[3].selector = @selector(afterRefreshWithBoolean:);
+  methods[4].selector = @selector(addWithNSString:withId:);
+  methods[5].selector = @selector(delete__WithNSString:);
+  methods[6].selector = @selector(size);
+  methods[7].selector = @selector(getWithNSString:);
+  methods[8].selector = @selector(lookupFromSearcherWithId:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "current_", NULL, 0x42, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;TT;>;", .constantValue.asLong = 0 },
-    { "old_", NULL, 0x42, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;TT;>;", .constantValue.asLong = 0 },
-    { "mgr_", NULL, 0x12, "Lorg.apache.lucene.search.ReferenceManager;", NULL, "Lorg/apache/lucene/search/ReferenceManager<TS;>;", .constantValue.asLong = 0 },
-    { "missingValue_", NULL, 0x12, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
+    { "current_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x42, -1, -1, 15, -1 },
+    { "old_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x42, -1, -1, 15, -1 },
+    { "mgr_", "LOrgApacheLuceneSearchReferenceManager;", .constantValue.asLong = 0, 0x12, -1, -1, 16, -1 },
+    { "missingValue_", "LNSObject;", .constantValue.asLong = 0, 0x12, -1, -1, 17, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchLiveFieldValues = { 2, "LiveFieldValues", "org.apache.lucene.search", NULL, 0x401, 9, methods, 4, fields, 0, NULL, 0, NULL, NULL, "<S:Ljava/lang/Object;T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/apache/lucene/search/ReferenceManager$RefreshListener;Ljava/io/Closeable;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchReferenceManager;LNSObject;", "(Lorg/apache/lucene/search/ReferenceManager<TS;>;TT;)V", "LJavaIoIOException;", "afterRefresh", "Z", "add", "LNSString;LNSObject;", "(Ljava/lang/String;TT;)V", "delete", "LNSString;", "get", "(Ljava/lang/String;)TT;", "lookupFromSearcher", "LNSObject;LNSString;", "(TS;Ljava/lang/String;)TT;", "Ljava/util/Map<Ljava/lang/String;TT;>;", "Lorg/apache/lucene/search/ReferenceManager<TS;>;", "TT;", "<S:Ljava/lang/Object;T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/apache/lucene/search/ReferenceManager$RefreshListener;Ljava/io/Closeable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchLiveFieldValues = { "LiveFieldValues", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 9, 4, -1, -1, -1, 18, -1 };
   return &_OrgApacheLuceneSearchLiveFieldValues;
 }
 
@@ -135,8 +151,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLiveFieldValues, missingValue_, id)
 
 void OrgApacheLuceneSearchLiveFieldValues_initWithOrgApacheLuceneSearchReferenceManager_withId_(OrgApacheLuceneSearchLiveFieldValues *self, OrgApacheLuceneSearchReferenceManager *mgr, id missingValue) {
   NSObject_init(self);
-  JreVolatileStrongAssignAndConsume(&self->current_, new_JavaUtilConcurrentConcurrentHashMap_init());
-  JreVolatileStrongAssignAndConsume(&self->old_, new_JavaUtilConcurrentConcurrentHashMap_init());
+  JreVolatileStrongAssign(&self->current_, create_JavaUtilConcurrentConcurrentHashMap_init());
+  JreVolatileStrongAssign(&self->old_, create_JavaUtilConcurrentConcurrentHashMap_init());
   JreStrongAssign(&self->missingValue_, missingValue);
   JreStrongAssign(&self->mgr_, mgr);
   [((OrgApacheLuceneSearchReferenceManager *) nil_chk(mgr)) addListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:self];

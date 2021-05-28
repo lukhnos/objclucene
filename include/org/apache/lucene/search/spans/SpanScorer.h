@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanScorer || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanScorer))
 #define OrgApacheLuceneSearchSpansSpanScorer_
 
@@ -24,6 +30,7 @@
 @class OrgApacheLuceneSearchSpansSpanWeight;
 @class OrgApacheLuceneSearchSpansSpans;
 @class OrgApacheLuceneSearchTwoPhaseIterator;
+@class OrgApacheLuceneSearchWeight;
 
 /*!
  @brief Public for extension only.
@@ -53,9 +60,9 @@
 /*!
  @brief Creates a new SpanScorer
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans
-               withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)weight
-withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans
+                         withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)weight
+        withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -73,7 +80,6 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
 
 /*!
  @brief Returns the intermediate "sloppy freq" adjusted for edit distance
-  
  */
 - (jfloat)sloppyFreq;
 
@@ -90,18 +96,21 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
 - (void)doStartCurrentDoc;
 
 /*!
- @brief Score the current doc.
- The default implementation scores the doc 
- with the similarity using the slop-adjusted <code>freq</code>.
+ @brief Score the current doc.The default implementation scores the doc 
+  with the similarity using the slop-adjusted <code>freq</code>.
  */
 - (jfloat)scoreCurrentDoc;
 
 /*!
  @brief Sets <code>freq</code> and <code>numMatches</code> for the current document.
  <p>
- This will be called at most once per document.
+  This will be called at most once per document.
  */
 - (void)setFreqCurrentDoc;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -120,4 +129,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanScorer")

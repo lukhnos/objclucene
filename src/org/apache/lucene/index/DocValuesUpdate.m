@@ -12,11 +12,15 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
-inline jint OrgApacheLuceneIndexDocValuesUpdate_get_RAW_SIZE_IN_BYTES();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/DocValuesUpdate must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline jint OrgApacheLuceneIndexDocValuesUpdate_get_RAW_SIZE_IN_BYTES(void);
 static jint OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexDocValuesUpdate, RAW_SIZE_IN_BYTES, jint)
 
-inline jlong OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_get_RAW_VALUE_SIZE_IN_BYTES();
+inline jlong OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_get_RAW_VALUE_SIZE_IN_BYTES(void);
 static jlong OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate, RAW_VALUE_SIZE_IN_BYTES, jlong)
 
@@ -24,11 +28,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate)
 
 @implementation OrgApacheLuceneIndexDocValuesUpdate
 
-- (instancetype)initWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type
-                             withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                             withNSString:(NSString *)field
-                                                   withId:(id)value {
-  OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, type, term, field, value);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type
+                                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                           withNSString:(NSString *)field
+                                                                 withId:(id)value {
+  OrgApacheLuceneIndexDocValuesUpdate_initPackagePrivateWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, type, term, field, value);
   return self;
 }
 
@@ -40,9 +44,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate)
 
 - (jint)sizeInBytes {
   jint sizeInBytes = OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES;
-  sizeInBytes += ((jint) [((NSString *) nil_chk(((OrgApacheLuceneIndexTerm *) nil_chk(term_))->field_)) length]) * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR;
+  sizeInBytes += [((NSString *) nil_chk(((OrgApacheLuceneIndexTerm *) nil_chk(term_))->field_)) java_length] * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR;
   sizeInBytes += ((IOSByteArray *) nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(term_->bytes_))->bytes_))->size_;
-  sizeInBytes += ((jint) [((NSString *) nil_chk(field_)) length]) * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR;
+  sizeInBytes += [((NSString *) nil_chk(field_)) java_length] * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR;
   sizeInBytes += [self valueSizeInBytes];
   return sizeInBytes;
 }
@@ -59,6 +63,34 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x400, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x10, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexDocValuesType:withOrgApacheLuceneIndexTerm:withNSString:withId:);
+  methods[1].selector = @selector(valueSizeInBytes);
+  methods[2].selector = @selector(sizeInBytes);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "RAW_SIZE_IN_BYTES", "I", .constantValue.asLong = 0, 0x1a, -1, 2, -1, -1 },
+    { "type_", "LOrgApacheLuceneIndexDocValuesType;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "term_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "value_", "LNSObject;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docIDUpto_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexDocValuesType;LOrgApacheLuceneIndexTerm;LNSString;LNSObject;", "toString", &OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES, "LOrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate;LOrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesUpdate = { "DocValuesUpdate", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x400, 4, 6, -1, 3, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexDocValuesUpdate;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexDocValuesUpdate class]) {
     OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES = 8 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + 8 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + 8 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
@@ -66,29 +98,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexDocValuesType:withOrgApacheLuceneIndexTerm:withNSString:withId:", "DocValuesUpdate", NULL, 0x4, NULL, NULL },
-    { "valueSizeInBytes", NULL, "J", 0x400, NULL, NULL },
-    { "sizeInBytes", NULL, "I", 0x10, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "RAW_SIZE_IN_BYTES", "RAW_SIZE_IN_BYTES", 0x1a, "I", &OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES, NULL, .constantValue.asLong = 0 },
-    { "type_", NULL, 0x10, "Lorg.apache.lucene.index.DocValuesType;", NULL, NULL, .constantValue.asLong = 0 },
-    { "term_", NULL, 0x10, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "value_", NULL, 0x10, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docIDUpto_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.DocValuesUpdate$BinaryDocValuesUpdate;", "Lorg.apache.lucene.index.DocValuesUpdate$NumericDocValuesUpdate;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesUpdate = { 2, "DocValuesUpdate", "org.apache.lucene.index", NULL, 0x400, 4, methods, 6, fields, 0, NULL, 2, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneIndexDocValuesUpdate;
-}
-
 @end
 
-void OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(OrgApacheLuceneIndexDocValuesUpdate *self, OrgApacheLuceneIndexDocValuesType *type, OrgApacheLuceneIndexTerm *term, NSString *field, id value) {
+void OrgApacheLuceneIndexDocValuesUpdate_initPackagePrivateWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(OrgApacheLuceneIndexDocValuesUpdate *self, OrgApacheLuceneIndexDocValuesType *type, OrgApacheLuceneIndexTerm *term, NSString *field, id value) {
   NSObject_init(self);
   self->docIDUpto_ = -1;
   JreStrongAssign(&self->type_, type);
@@ -114,6 +126,25 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdat
   return OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES + ((IOSByteArray *) nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneUtilBytesRef *) cast_chk(value_, [OrgApacheLuceneUtilBytesRef class]))))->bytes_))->size_;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:withNSString:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(valueSizeInBytes);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "RAW_VALUE_SIZE_IN_BYTES", "J", .constantValue.asLong = 0, 0x1a, -1, 1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;LNSString;LOrgApacheLuceneUtilBytesRef;", &OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES, "LOrgApacheLuceneIndexDocValuesUpdate;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate = { "BinaryDocValuesUpdate", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x18, 2, 1, 2, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate class]) {
     OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES = JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF);
@@ -121,22 +152,10 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdat
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:withNSString:withOrgApacheLuceneUtilBytesRef:", "BinaryDocValuesUpdate", NULL, 0x0, NULL, NULL },
-    { "valueSizeInBytes", NULL, "J", 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "RAW_VALUE_SIZE_IN_BYTES", "RAW_VALUE_SIZE_IN_BYTES", 0x1a, "J", &OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate = { 2, "BinaryDocValuesUpdate", "org.apache.lucene.index", "DocValuesUpdate", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate;
-}
-
 @end
 
 void OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *self, OrgApacheLuceneIndexTerm *term, NSString *field, OrgApacheLuceneUtilBytesRef *value) {
-  OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, BINARY), term, field, value);
+  OrgApacheLuceneIndexDocValuesUpdate_initPackagePrivateWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, BINARY), term, field, value);
 }
 
 OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *new_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexTerm *term, NSString *field, OrgApacheLuceneUtilBytesRef *value) {
@@ -163,18 +182,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocVa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:withNSString:withJavaLangLong:", "NumericDocValuesUpdate", NULL, 0x0, NULL, NULL },
-    { "valueSizeInBytes", NULL, "J", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate = { 2, "NumericDocValuesUpdate", "org.apache.lucene.index", "DocValuesUpdate", 0x18, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:withNSString:withJavaLangLong:);
+  methods[1].selector = @selector(valueSizeInBytes);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;LNSString;LJavaLangLong;", "LOrgApacheLuceneIndexDocValuesUpdate;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate = { "NumericDocValuesUpdate", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x18, 2, 0, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate;
 }
 
 @end
 
 void OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *self, OrgApacheLuceneIndexTerm *term, NSString *field, JavaLangLong *value) {
-  OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC), term, field, value);
+  OrgApacheLuceneIndexDocValuesUpdate_initPackagePrivateWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC), term, field, value);
 }
 
 OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *new_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(OrgApacheLuceneIndexTerm *term, NSString *field, JavaLangLong *value) {

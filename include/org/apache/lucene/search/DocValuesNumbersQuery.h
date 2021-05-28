@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocValuesNumbersQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocValuesNumbersQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesNumbersQuery || defined(INCLUDE_OrgApacheLuceneSearchDocValuesNumbersQuery))
 #define OrgApacheLuceneSearchDocValuesNumbersQuery_
 
@@ -27,24 +33,24 @@
 
 /*!
  @brief Like <code>DocValuesTermsQuery</code>, but this query only
- runs on a long <code>NumericDocValuesField</code> or a
+  runs on a long <code>NumericDocValuesField</code> or a 
  <code>SortedNumericDocValuesField</code>, matching
- all documents whose value in the specified field is
- contained in the provided set of long values.
+  all documents whose value in the specified field is
+  contained in the provided set of long values.
  <p>
- <b>NOTE</b>: be very careful using this query: it is
- typically much slower than using <code>TermsQuery</code>,
- but in certain specialized cases may be faster.
+  <b>NOTE</b>: be very careful using this query: it is
+  typically much slower than using <code>TermsQuery</code>,
+  but in certain specialized cases may be faster.
  */
 @interface OrgApacheLuceneSearchDocValuesNumbersQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-           withJavaLangLongArray:(IOSObjectArray *)numbers;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                     withJavaLangLongArray:(IOSObjectArray *)numbers;
 
-- (instancetype)initWithNSString:(NSString *)field
-                 withJavaUtilSet:(id<JavaUtilSet>)numbers;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                           withJavaUtilSet:(id<JavaUtilSet>)numbers;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -54,6 +60,10 @@
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -75,4 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesNumbersQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesNumbersQuery")

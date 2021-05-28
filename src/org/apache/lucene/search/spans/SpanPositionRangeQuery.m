@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/spans/SpanPositionRangeQuery.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/spans/FilterSpans.h"
@@ -14,6 +12,10 @@
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 #include "org/apache/lucene/search/spans/Spans.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spans/SpanPositionRangeQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchSpansSpanPositionRangeQuery
 
@@ -25,7 +27,7 @@
 }
 
 - (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans {
-  JreAssert(([((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans)) startPosition] != [spans endPosition]), (@"org/apache/lucene/search/spans/SpanPositionRangeQuery.java:43 condition failed: assert spans.startPosition() != spans.endPosition();"));
+  JreAssert([((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans)) startPosition] != [spans endPosition], @"org/apache/lucene/search/spans/SpanPositionRangeQuery.java:43 condition failed: assert spans.startPosition() != spans.endPosition();");
   OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *res = ([spans startPosition] >= end_) ? JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO_MORE_IN_CURRENT_DOC) : ([spans startPosition] >= start_ && [spans endPosition] <= end_) ? JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, YES) : JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO);
   return res;
 }
@@ -49,8 +51,8 @@
   return [buffer description];
 }
 
-- (OrgApacheLuceneSearchSpansSpanPositionRangeQuery *)clone {
-  OrgApacheLuceneSearchSpansSpanPositionRangeQuery *result = create_OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_((OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) clone], [OrgApacheLuceneSearchSpansSpanQuery class]), start_, end_);
+- (OrgApacheLuceneSearchSpansSpanPositionRangeQuery *)java_clone {
+  OrgApacheLuceneSearchSpansSpanPositionRangeQuery *result = create_OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_((OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) java_clone], [OrgApacheLuceneSearchSpansSpanQuery class]), start_, end_);
   [result setBoostWithFloat:[self getBoost]];
   return result;
 }
@@ -70,21 +72,34 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanQuery:withInt:withInt:", "SpanPositionRangeQuery", NULL, 0x1, NULL, NULL },
-    { "acceptPositionWithOrgApacheLuceneSearchSpansSpans:", "acceptPosition", "Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;", 0x4, "Ljava.io.IOException;", NULL },
-    { "getStart", NULL, "I", 0x1, NULL, NULL },
-    { "getEnd", NULL, "I", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.search.spans.SpanPositionRangeQuery;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpansFilterSpans_AcceptStatus;", 0x4, 1, 2, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpansSpanPositionRangeQuery;", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpansSpanQuery:withInt:withInt:);
+  methods[1].selector = @selector(acceptPositionWithOrgApacheLuceneSearchSpansSpans:);
+  methods[2].selector = @selector(getStart);
+  methods[3].selector = @selector(getEnd);
+  methods[4].selector = @selector(toStringWithNSString:);
+  methods[5].selector = @selector(java_clone);
+  methods[6].selector = @selector(isEqual:);
+  methods[7].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "start_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "start_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "end_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanPositionRangeQuery = { 2, "SpanPositionRangeQuery", "org.apache.lucene.search.spans", NULL, 0x1, 8, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpansSpanQuery;II", "acceptPosition", "LOrgApacheLuceneSearchSpansSpans;", "LJavaIoIOException;", "toString", "LNSString;", "clone", "equals", "LNSObject;", "hashCode" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanPositionRangeQuery = { "SpanPositionRangeQuery", "org.apache.lucene.search.spans", ptrTable, methods, fields, 7, 0x1, 8, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansSpanPositionRangeQuery;
 }
 

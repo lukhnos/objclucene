@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPhrasePositions
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPhrasePositions_) && (INCLUDE_ALL_OrgApacheLuceneSearchPhrasePositions || defined(INCLUDE_OrgApacheLuceneSearchPhrasePositions))
 #define OrgApacheLuceneSearchPhrasePositions_
 
@@ -44,20 +50,24 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
-                                                 withInt:(jint)o
-                                                 withInt:(jint)ord
-                       withOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
+                                                                         withInt:(jint)o
+                                                                         withInt:(jint)ord
+                                               withOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
 
 - (void)firstPosition;
 
 /*!
- @brief Go to next location of this term current document, and set 
+ @brief Go to next location of this term current document, and set  
  <code>position</code> as <code>location - offset</code>, so that a 
- matching exact phrase is easily identified when all PhrasePositions 
- have exactly the same <code>position</code>.
+  matching exact phrase is easily identified when all PhrasePositions 
+  have exactly the same <code>position</code>.
  */
 - (jboolean)nextPosition;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -67,14 +77,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhrasePositions, postings_, OrgApacheLu
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhrasePositions, next_, OrgApacheLuceneSearchPhrasePositions *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhrasePositions, terms_, IOSObjectArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneSearchPhrasePositions *self, OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchPhrasePositions_initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneSearchPhrasePositions *self, OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPhrasePositions *new_OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhrasePositions *new_OrgApacheLuceneSearchPhrasePositions_initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPhrasePositions *create_OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms);
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhrasePositions *create_OrgApacheLuceneSearchPhrasePositions_initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPhrasePositions)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPhrasePositions")

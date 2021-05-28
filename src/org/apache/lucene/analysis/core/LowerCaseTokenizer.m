@@ -9,6 +9,10 @@
 #include "org/apache/lucene/analysis/core/LowerCaseTokenizer.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/LowerCaseTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisCoreLowerCaseTokenizer
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -28,12 +32,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LowerCaseTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "LowerCaseTokenizer", NULL, 0x1, NULL, NULL },
-    { "normalizeWithInt:", "normalize", "I", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 1, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLowerCaseTokenizer = { 2, "LowerCaseTokenizer", "org.apache.lucene.analysis.core", NULL, 0x11, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:);
+  methods[2].selector = @selector(normalizeWithInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAttributeFactory;", "normalize", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLowerCaseTokenizer = { "LowerCaseTokenizer", "org.apache.lucene.analysis.core", ptrTable, methods, NULL, 7, 0x11, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer;
 }
 

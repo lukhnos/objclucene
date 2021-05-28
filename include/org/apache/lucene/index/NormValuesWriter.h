@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexNormValuesWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexNormValuesWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexNormValuesWriter || defined(INCLUDE_OrgApacheLuceneIndexNormValuesWriter))
 #define OrgApacheLuceneIndexNormValuesWriter_
 
@@ -23,14 +29,14 @@
 
 /*!
  @brief Buffers up pending long per doc, then flushes when
- segment flushes.
+   segment flushes.
  */
 @interface OrgApacheLuceneIndexNormValuesWriter : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
-                       withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)iwBytesUsed;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
+                                               withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)iwBytesUsed;
 
 - (void)addValueWithInt:(jint)docID
                withLong:(jlong)value;
@@ -40,18 +46,26 @@
 - (void)flushWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
                 withOrgApacheLuceneCodecsNormsConsumer:(OrgApacheLuceneCodecsNormsConsumer *)normsConsumer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexNormValuesWriter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexNormValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexNormValuesWriter *self, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexNormValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexNormValuesWriter *self, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexNormValuesWriter *new_OrgApacheLuceneIndexNormValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexNormValuesWriter *new_OrgApacheLuceneIndexNormValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexNormValuesWriter *create_OrgApacheLuceneIndexNormValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
+FOUNDATION_EXPORT OrgApacheLuceneIndexNormValuesWriter *create_OrgApacheLuceneIndexNormValuesWriter_initPackagePrivateWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNormValuesWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexNormValuesWriter")

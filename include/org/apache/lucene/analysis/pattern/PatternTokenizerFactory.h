@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternTokenizerFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternTokenizerFactory))
 #define OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_
 
@@ -28,36 +34,37 @@
 /*!
  @brief Factory for <code>PatternTokenizer</code>.
  This tokenizer uses regex pattern matching to construct distinct tokens
- for the input stream.  It takes two arguments:  "pattern" and "group".
+  for the input stream.  It takes two arguments:  "pattern" and "group". 
  <br>
- <ul>
- <li>"pattern" is the regular expression.</li>
- <li>"group" says which group to extract into tokens.</li>
- </ul>
- <p>
- group=-1 (the default) is equivalent to "split".  In this case, the tokens will
- be equivalent to the output from (without empty tokens):
+  <ul>
+  <li>"pattern" is the regular expression.</li>
+  <li>"group" says which group to extract into tokens.</li>
+   </ul>
+  <p>
+  group=-1 (the default) is equivalent to "split".  In this case, the tokens will
+  be equivalent to the output from (without empty tokens): 
  <code>String.split(java.lang.String)</code>
- </p>
- <p>
- Using group &gt;= 0 selects the matching group as the token.  For example, if you have:<br>
- @code
+  </p>
+  <p>
+  Using group &gt;= 0 selects the matching group as the token.  For example, if you have:<br>
+  @code
 
-  pattern = \'([^\']+)\'
-  group = 0
-  input = aaa 'bbb' 'ccc'
+   pattern = \'([^\']+)\'
+   group = 0
+   input = aaa 'bbb' 'ccc' 
   
 @endcode
- the output will be two tokens: 'bbb' and 'ccc' (including the ' marks).  With the same input
- but using group=1, the output would be: bbb and ccc (no ' marks)
+  the output will be two tokens: 'bbb' and 'ccc' (including the ' marks).  With the same input
+  but using group=1, the output would be: bbb and ccc (no ' marks) 
  <p>NOTE: This Tokenizer does not output tokens that are of zero length.</p>
+  
  <pre class="prettyprint">
- &lt;fieldType name="text_ptn" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.PatternTokenizerFactory" pattern="\'([^\']+)\'" group="1"/&gt;
- &lt;/analyzer&gt;
- 
-@endcode 
+  &lt;fieldType name="text_ptn" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.PatternTokenizerFactory" pattern="\'([^\']+)\'" group="1"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
+@endcode
  - seealso: PatternTokenizer
  @since solr1.2
  */
@@ -66,17 +73,15 @@
   JavaUtilRegexPattern *pattern_;
   jint group_;
 }
-
-+ (NSString *)PATTERN;
-
-+ (NSString *)GROUP;
+@property (readonly, copy, class) NSString *PATTERN NS_SWIFT_NAME(PATTERN);
+@property (readonly, copy, class) NSString *GROUP NS_SWIFT_NAME(GROUP);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new PatternTokenizerFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 /*!
  @brief Split the input using configured pattern
@@ -89,12 +94,12 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory, pattern_, JavaUtilRegexPattern *)
 
-inline NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_get_PATTERN();
+inline NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_get_PATTERN(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory, PATTERN, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_get_GROUP();
+inline NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_get_GROUP(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory, GROUP, NSString *)
@@ -109,4 +114,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternTokenizerFactory")

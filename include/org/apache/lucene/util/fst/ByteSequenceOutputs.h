@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstByteSequenceOutputs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstByteSequenceOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstByteSequenceOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstByteSequenceOutputs))
 #define OrgApacheLuceneUtilFstByteSequenceOutputs_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief An FST <code>Outputs</code> implementation where each output
- is a sequence of bytes.
+  is a sequence of bytes.
  */
 @interface OrgApacheLuceneUtilFstByteSequenceOutputs : OrgApacheLuceneUtilFstOutputs
 
@@ -42,11 +48,16 @@
 
 + (OrgApacheLuceneUtilFstByteSequenceOutputs *)getSingleton;
 
+- (OrgApacheLuceneUtilBytesRef *)mergeWithId:(OrgApacheLuceneUtilBytesRef *)arg0
+                                      withId:(OrgApacheLuceneUtilBytesRef *)arg1;
+
 - (NSString *)outputToStringWithId:(OrgApacheLuceneUtilBytesRef *)output;
 
 - (jlong)ramBytesUsedWithId:(OrgApacheLuceneUtilBytesRef *)output;
 
 - (OrgApacheLuceneUtilBytesRef *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
+
+- (OrgApacheLuceneUtilBytesRef *)readFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)arg0;
 
 - (void)skipOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
@@ -62,10 +73,14 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstByteSequenceOutputs)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstByteSequenceOutputs *OrgApacheLuceneUtilFstByteSequenceOutputs_getSingleton();
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstByteSequenceOutputs *OrgApacheLuceneUtilFstByteSequenceOutputs_getSingleton(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstByteSequenceOutputs)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstByteSequenceOutputs")

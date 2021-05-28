@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/Float.h"
 #include "java/lang/annotation/Annotation.h"
@@ -28,24 +27,32 @@
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
-@interface OrgApacheLuceneSearchMultiTermQuery_$1 : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/MultiTermQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchMultiTermQuery__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchMultiTermQuery__Annotations$1(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchMultiTermQuery__Annotations$2(void);
+
+@interface OrgApacheLuceneSearchMultiTermQuery_1 : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
+
+- (instancetype)init;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                    withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiTermQuery_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiTermQuery_1)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchMultiTermQuery_$1_init(OrgApacheLuceneSearchMultiTermQuery_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneSearchMultiTermQuery_1_init(OrgApacheLuceneSearchMultiTermQuery_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchMultiTermQuery_$1 *new_OrgApacheLuceneSearchMultiTermQuery_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchMultiTermQuery_1 *new_OrgApacheLuceneSearchMultiTermQuery_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchMultiTermQuery_$1 *create_OrgApacheLuceneSearchMultiTermQuery_$1_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchMultiTermQuery_1 *create_OrgApacheLuceneSearchMultiTermQuery_1_init(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchMultiTermQuery)
 
@@ -124,9 +131,9 @@ OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTer
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneSearchMultiTermQuery *other = (OrgApacheLuceneSearchMultiTermQuery *) cast_chk(obj, [OrgApacheLuceneSearchMultiTermQuery class]);
   if (![super isEqual:obj]) return false;
   if (![((OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) nil_chk(rewriteMethod_)) isEqual:other->rewriteMethod_]) {
@@ -135,27 +142,55 @@ OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTer
   return (other->field_ == nil ? field_ == nil : [other->field_ isEqual:field_]);
 }
 
-+ (IOSObjectArray *)__annotations_CONSTANT_SCORE_FILTER_REWRITE_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_SCORING_BOOLEAN_QUERY_REWRITE_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(field_);
   RELEASE_(rewriteMethod_);
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x404, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x14, 1, 4, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x11, 5, 6, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 10, 11, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(getField);
+  methods[2].selector = @selector(getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:);
+  methods[3].selector = @selector(getTermsEnumWithOrgApacheLuceneIndexTerms:);
+  methods[4].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[5].selector = @selector(getRewriteMethod);
+  methods[6].selector = @selector(setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:);
+  methods[7].selector = @selector(hash);
+  methods[8].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "rewriteMethod_", "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "CONSTANT_SCORE_REWRITE", "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", .constantValue.asLong = 0, 0x19, -1, 12, -1, -1 },
+    { "CONSTANT_SCORE_FILTER_REWRITE", "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", .constantValue.asLong = 0, 0x19, -1, 13, -1, 14 },
+    { "SCORING_BOOLEAN_REWRITE", "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", .constantValue.asLong = 0, 0x19, -1, 15, -1, -1 },
+    { "SCORING_BOOLEAN_QUERY_REWRITE", "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", .constantValue.asLong = 0, 0x19, -1, 16, -1, 17 },
+    { "CONSTANT_SCORE_BOOLEAN_REWRITE", "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", .constantValue.asLong = 0, 0x19, -1, 18, -1, -1 },
+    { "CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE", "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", .constantValue.asLong = 0, 0x19, -1, 19, -1, 20 },
+  };
+  static const void *ptrTable[] = { "LNSString;", "getTermsEnum", "LOrgApacheLuceneIndexTerms;LOrgApacheLuceneUtilAttributeSource;", "LJavaIoIOException;", "LOrgApacheLuceneIndexTerms;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "setRewriteMethod", "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;", "hashCode", "equals", "LNSObject;", &OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_REWRITE, &OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_FILTER_REWRITE, (void *)&OrgApacheLuceneSearchMultiTermQuery__Annotations$0, &OrgApacheLuceneSearchMultiTermQuery_SCORING_BOOLEAN_REWRITE, &OrgApacheLuceneSearchMultiTermQuery_SCORING_BOOLEAN_QUERY_REWRITE, (void *)&OrgApacheLuceneSearchMultiTermQuery__Annotations$1, &OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_BOOLEAN_REWRITE, &OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE, (void *)&OrgApacheLuceneSearchMultiTermQuery__Annotations$2, "LOrgApacheLuceneSearchMultiTermQuery_RewriteMethod;LOrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite;LOrgApacheLuceneSearchMultiTermQuery_TopTermsBlendedFreqScoringRewrite;LOrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery = { "MultiTermQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 9, 8, -1, 21, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchMultiTermQuery;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchMultiTermQuery class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_REWRITE, new_OrgApacheLuceneSearchMultiTermQuery_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_REWRITE, new_OrgApacheLuceneSearchMultiTermQuery_1_init());
     JreStrongAssign(&OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_FILTER_REWRITE, OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_REWRITE);
     JreStrongAssign(&OrgApacheLuceneSearchMultiTermQuery_SCORING_BOOLEAN_REWRITE, JreLoadStatic(OrgApacheLuceneSearchScoringRewrite, SCORING_BOOLEAN_REWRITE));
     JreStrongAssign(&OrgApacheLuceneSearchMultiTermQuery_SCORING_BOOLEAN_QUERY_REWRITE, OrgApacheLuceneSearchMultiTermQuery_SCORING_BOOLEAN_REWRITE);
@@ -163,33 +198,6 @@ OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTer
     JreStrongAssign(&OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE, OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_BOOLEAN_REWRITE);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchMultiTermQuery)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "MultiTermQuery", NULL, 0x1, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x404, "Ljava.io.IOException;", NULL },
-    { "getTermsEnumWithOrgApacheLuceneIndexTerms:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x14, "Ljava.io.IOException;", NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x11, "Ljava.io.IOException;", NULL },
-    { "getRewriteMethod", NULL, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", 0x1, NULL, NULL },
-    { "setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:", "setRewriteMethod", "V", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "rewriteMethod_", NULL, 0x4, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", NULL, NULL, .constantValue.asLong = 0 },
-    { "CONSTANT_SCORE_REWRITE", "CONSTANT_SCORE_REWRITE", 0x19, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", &OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_REWRITE, NULL, .constantValue.asLong = 0 },
-    { "CONSTANT_SCORE_FILTER_REWRITE", "CONSTANT_SCORE_FILTER_REWRITE", 0x19, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", &OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_FILTER_REWRITE, NULL, .constantValue.asLong = 0 },
-    { "SCORING_BOOLEAN_REWRITE", "SCORING_BOOLEAN_REWRITE", 0x19, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", &OrgApacheLuceneSearchMultiTermQuery_SCORING_BOOLEAN_REWRITE, NULL, .constantValue.asLong = 0 },
-    { "SCORING_BOOLEAN_QUERY_REWRITE", "SCORING_BOOLEAN_QUERY_REWRITE", 0x19, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", &OrgApacheLuceneSearchMultiTermQuery_SCORING_BOOLEAN_QUERY_REWRITE, NULL, .constantValue.asLong = 0 },
-    { "CONSTANT_SCORE_BOOLEAN_REWRITE", "CONSTANT_SCORE_BOOLEAN_REWRITE", 0x19, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", &OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_BOOLEAN_REWRITE, NULL, .constantValue.asLong = 0 },
-    { "CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE", "CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE", 0x19, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", &OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", "Lorg.apache.lucene.search.MultiTermQuery$TopTermsScoringBooleanQueryRewrite;", "Lorg.apache.lucene.search.MultiTermQuery$TopTermsBlendedFreqScoringRewrite;", "Lorg.apache.lucene.search.MultiTermQuery$TopTermsBoostOnlyBooleanQueryRewrite;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery = { 2, "MultiTermQuery", "org.apache.lucene.search", NULL, 0x401, 9, methods, 8, fields, 0, NULL, 4, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSearchMultiTermQuery;
 }
 
 @end
@@ -200,9 +208,28 @@ void OrgApacheLuceneSearchMultiTermQuery_initWithNSString_(OrgApacheLuceneSearch
   JreStrongAssign(&self->field_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(field, @"field must not be null"));
 }
 
+IOSObjectArray *OrgApacheLuceneSearchMultiTermQuery__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchMultiTermQuery__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchMultiTermQuery__Annotations$2() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQuery)
 
 @implementation OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                    withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
@@ -217,20 +244,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQuery)
   return [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query)) getTermsEnumWithOrgApacheLuceneIndexTerms:terms withOrgApacheLuceneUtilAttributeSource:atts];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getTermsEnumWithOrgApacheLuceneSearchMultiTermQuery:withOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x4, "Ljava.io.IOException;", NULL },
-    { "init", "RewriteMethod", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x4, 3, 4, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_RewriteMethod = { 2, "RewriteMethod", "org.apache.lucene.search", "MultiTermQuery", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:);
+  methods[2].selector = @selector(getTermsEnumWithOrgApacheLuceneSearchMultiTermQuery:withOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "rewrite", "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneSearchMultiTermQuery;", "LJavaIoIOException;", "getTermsEnum", "LOrgApacheLuceneSearchMultiTermQuery;LOrgApacheLuceneIndexTerms;LOrgApacheLuceneUtilAttributeSource;", "LOrgApacheLuceneSearchMultiTermQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_RewriteMethod = { "RewriteMethod", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x409, 3, 0, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchMultiTermQuery_RewriteMethod;
 }
 
@@ -241,6 +269,52 @@ void OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_init(OrgApacheLuceneSearc
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod)
+
+@implementation OrgApacheLuceneSearchMultiTermQuery_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchMultiTermQuery_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                   withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
+  OrgApacheLuceneSearchQuery *result = create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery_(query);
+  [result setBoostWithFloat:[((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query)) getBoost]];
+  return JreRetainedLocalValue(result);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "rewrite", "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneSearchMultiTermQuery;", "LOrgApacheLuceneSearchMultiTermQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_1 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchMultiTermQuery_1;
+}
+
+@end
+
+void OrgApacheLuceneSearchMultiTermQuery_1_init(OrgApacheLuceneSearchMultiTermQuery_1 *self) {
+  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_init(self);
+}
+
+OrgApacheLuceneSearchMultiTermQuery_1 *new_OrgApacheLuceneSearchMultiTermQuery_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMultiTermQuery_1, init)
+}
+
+OrgApacheLuceneSearchMultiTermQuery_1 *create_OrgApacheLuceneSearchMultiTermQuery_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMultiTermQuery_1, init)
+}
 
 @implementation OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite
 
@@ -274,15 +348,24 @@ withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TopTermsScoringBooleanQueryRewrite", NULL, 0x1, NULL, NULL },
-    { "getMaxSize", NULL, "I", 0x4, NULL, NULL },
-    { "getTopLevelBuilder", NULL, "Lorg.apache.lucene.search.BooleanQuery$Builder;", 0x4, NULL, NULL },
-    { "buildWithId:", "build", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
-    { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:", "addClause", "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBooleanQuery_Builder;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 4, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.BooleanQuery$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite = { 2, "TopTermsScoringBooleanQueryRewrite", "org.apache.lucene.search", "MultiTermQuery", 0x19, 5, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/TopTermsRewrite<Lorg/apache/lucene/search/BooleanQuery$Builder;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getMaxSize);
+  methods[2].selector = @selector(getTopLevelBuilder);
+  methods[3].selector = @selector(buildWithId:);
+  methods[4].selector = @selector(addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "build", "LOrgApacheLuceneSearchBooleanQuery_Builder;", "addClause", "LOrgApacheLuceneSearchBooleanQuery_Builder;LOrgApacheLuceneIndexTerm;IFLOrgApacheLuceneIndexTermContext;", "LOrgApacheLuceneSearchMultiTermQuery;", "Lorg/apache/lucene/search/TopTermsRewrite<Lorg/apache/lucene/search/BooleanQuery$Builder;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite = { "TopTermsScoringBooleanQueryRewrite", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x19, 5, 0, 5, -1, -1, 6, -1 };
   return &_OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite;
 }
 
@@ -332,15 +415,24 @@ withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TopTermsBlendedFreqScoringRewrite", NULL, 0x1, NULL, NULL },
-    { "getMaxSize", NULL, "I", 0x4, NULL, NULL },
-    { "getTopLevelBuilder", NULL, "Lorg.apache.lucene.search.BlendedTermQuery$Builder;", 0x4, NULL, NULL },
-    { "buildWithId:", "build", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
-    { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:", "addClause", "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBlendedTermQuery_Builder;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 4, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.BlendedTermQuery$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_TopTermsBlendedFreqScoringRewrite = { 2, "TopTermsBlendedFreqScoringRewrite", "org.apache.lucene.search", "MultiTermQuery", 0x19, 5, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/TopTermsRewrite<Lorg/apache/lucene/search/BlendedTermQuery$Builder;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getMaxSize);
+  methods[2].selector = @selector(getTopLevelBuilder);
+  methods[3].selector = @selector(buildWithId:);
+  methods[4].selector = @selector(addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "build", "LOrgApacheLuceneSearchBlendedTermQuery_Builder;", "addClause", "LOrgApacheLuceneSearchBlendedTermQuery_Builder;LOrgApacheLuceneIndexTerm;IFLOrgApacheLuceneIndexTermContext;", "LOrgApacheLuceneSearchMultiTermQuery;", "Lorg/apache/lucene/search/TopTermsRewrite<Lorg/apache/lucene/search/BlendedTermQuery$Builder;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_TopTermsBlendedFreqScoringRewrite = { "TopTermsBlendedFreqScoringRewrite", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x19, 5, 0, 5, -1, -1, 6, -1 };
   return &_OrgApacheLuceneSearchMultiTermQuery_TopTermsBlendedFreqScoringRewrite;
 }
 
@@ -392,15 +484,24 @@ withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TopTermsBoostOnlyBooleanQueryRewrite", NULL, 0x1, NULL, NULL },
-    { "getMaxSize", NULL, "I", 0x4, NULL, NULL },
-    { "getTopLevelBuilder", NULL, "Lorg.apache.lucene.search.BooleanQuery$Builder;", 0x4, NULL, NULL },
-    { "buildWithId:", "build", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
-    { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:", "addClause", "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBooleanQuery_Builder;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 4, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.BooleanQuery$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite = { 2, "TopTermsBoostOnlyBooleanQueryRewrite", "org.apache.lucene.search", "MultiTermQuery", 0x19, 5, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/TopTermsRewrite<Lorg/apache/lucene/search/BooleanQuery$Builder;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getMaxSize);
+  methods[2].selector = @selector(getTopLevelBuilder);
+  methods[3].selector = @selector(buildWithId:);
+  methods[4].selector = @selector(addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "build", "LOrgApacheLuceneSearchBooleanQuery_Builder;", "addClause", "LOrgApacheLuceneSearchBooleanQuery_Builder;LOrgApacheLuceneIndexTerm;IFLOrgApacheLuceneIndexTermContext;", "LOrgApacheLuceneSearchMultiTermQuery;", "Lorg/apache/lucene/search/TopTermsRewrite<Lorg/apache/lucene/search/BooleanQuery$Builder;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite = { "TopTermsBoostOnlyBooleanQueryRewrite", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x19, 5, 0, 5, -1, -1, 6, -1 };
   return &_OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite;
 }
 
@@ -419,44 +520,3 @@ OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite *create
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite)
-
-@implementation OrgApacheLuceneSearchMultiTermQuery_$1
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                   withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
-  OrgApacheLuceneSearchQuery *result = create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(query);
-  [result setBoostWithFloat:[((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query)) getBoost]];
-  return result;
-}
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchMultiTermQuery_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_$1 = { 2, "", "org.apache.lucene.search", "MultiTermQuery", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchMultiTermQuery_$1;
-}
-
-@end
-
-void OrgApacheLuceneSearchMultiTermQuery_$1_init(OrgApacheLuceneSearchMultiTermQuery_$1 *self) {
-  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_init(self);
-}
-
-OrgApacheLuceneSearchMultiTermQuery_$1 *new_OrgApacheLuceneSearchMultiTermQuery_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMultiTermQuery_$1, init)
-}
-
-OrgApacheLuceneSearchMultiTermQuery_$1 *create_OrgApacheLuceneSearchMultiTermQuery_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMultiTermQuery_$1, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQuery_$1)

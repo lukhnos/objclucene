@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs))
 #define OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_
 
@@ -27,23 +33,23 @@
 
 /*!
  @brief An FST <code>Outputs</code> implementation where each output
- is one or two non-negative long values.
- If it's a
- single output, Long is returned; else, TwoLongs.  Order
- is preserved in the TwoLongs case, ie .first is the first
- input/output added to Builder, and .second is the
- second.  You cannot store 0 output with this (that's
- reserved to mean "no output")!
+  is one or two non-negative long values.If it's a
+  single output, Long is returned; else, TwoLongs.
+ Order
+  is preserved in the TwoLongs case, ie .first is the first
+  input/output added to Builder, and .second is the
+  second.  You cannot store 0 output with this (that's
+  reserved to mean "no output")! 
  <p>NOTE: the only way to create a TwoLongs output is to
- add the same input to the FST twice in a row.  This is
- how the FST maps a single input to two outputs (e.g. you
- cannot pass a TwoLongs to <code>Builder.add</code>.  If you
- need more than two then use <code>ListOfOutputs</code>, but if
- you only have at most 2 then this implementation will
- require fewer bytes as it steals one bit from each long
- value.
+  add the same input to the FST twice in a row.  This is
+  how the FST maps a single input to two outputs (e.g. you
+  cannot pass a TwoLongs to <code>Builder.add</code>.  If you
+  need more than two then use <code>ListOfOutputs</code>, but if
+  you only have at most 2 then this implementation will
+  require fewer bytes as it steals one bit from each long
+  value. 
  <p>NOTE: the resulting FST is not guaranteed to be minimal!
- See <code>Builder</code>.
+  See <code>Builder</code>.
  */
 @interface OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs : OrgApacheLuceneUtilFstOutputs
 
@@ -79,6 +85,10 @@
 - (void)writeWithId:(id)_output
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
@@ -103,14 +113,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 
 #pragma mark Public
 
-- (instancetype)initWithLong:(jlong)first
-                    withLong:(jlong)second;
+- (instancetype __nonnull)initWithLong:(jlong)first
+                              withLong:(jlong)second;
 
 - (jboolean)isEqual:(id)_other;
 
 - (NSUInteger)hash;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -126,4 +140,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLo
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs")

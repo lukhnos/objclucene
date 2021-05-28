@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanNotQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanNotQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNotQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanNotQuery))
 #define OrgApacheLuceneSearchSpansSpanNotQuery_
 
@@ -27,7 +33,7 @@
 
 /*!
  @brief Removes matches which overlap with another SpanQuery or which are
- within x tokens before or y tokens after another SpanQuery.
+  within x tokens before or y tokens after another SpanQuery.
  */
 @interface OrgApacheLuceneSearchSpansSpanNotQuery : OrgApacheLuceneSearchSpansSpanQuery < NSCopying >
 
@@ -35,31 +41,31 @@
 
 /*!
  @brief Construct a SpanNotQuery matching spans from <code>include</code> which
- have no overlap with spans from <code>exclude</code>.
+  have no overlap with spans from <code>exclude</code>.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)include
-                    withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)exclude;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)include
+                              withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)exclude;
 
 /*!
  @brief Construct a SpanNotQuery matching spans from <code>include</code> which
- have no overlap with spans from <code>exclude</code> within
+  have no overlap with spans from <code>exclude</code> within 
  <code>dist</code> tokens of <code>include</code>.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)include
-                    withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)exclude
-                                                    withInt:(jint)dist;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)include
+                              withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)exclude
+                                                              withInt:(jint)dist;
 
 /*!
  @brief Construct a SpanNotQuery matching spans from <code>include</code> which
- have no overlap with spans from <code>exclude</code> within
+  have no overlap with spans from <code>exclude</code> within 
  <code>pre</code> tokens before or <code>post</code> tokens of <code>include</code>.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)include
-                    withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)exclude
-                                                    withInt:(jint)pre
-                                                    withInt:(jint)post;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)include
+                              withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)exclude
+                                                              withInt:(jint)pre
+                                                              withInt:(jint)post;
 
-- (OrgApacheLuceneSearchSpansSpanNotQuery *)clone;
+- (OrgApacheLuceneSearchSpansSpanNotQuery *)java_clone;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -86,6 +92,10 @@
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -123,6 +133,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNotQuery)
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSpansSpanNotQuery;
+@class OrgApacheLuceneSearchSpansSpanQuery;
 @class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @class OrgApacheLuceneSearchSpansSpans;
 @protocol JavaUtilMap;
@@ -136,11 +147,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNotQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanNotQuery:(OrgApacheLuceneSearchSpansSpanNotQuery *)outer$
-                        withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                               withJavaUtilMap:(id<JavaUtilMap>)terms
-                      withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)includeWeight
-                      withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)excludeWeight;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanNotQuery:(OrgApacheLuceneSearchSpansSpanNotQuery *)outer$
+                                  withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                         withJavaUtilMap:(id<JavaUtilMap>)terms
+                                withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)includeWeight
+                                withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)excludeWeight;
 
 - (void)extractTermContextsWithJavaUtilMap:(id<JavaUtilMap>)contexts;
 
@@ -148,6 +159,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNotQuery)
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                      withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)arg0
+                               withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)arg1
+                                                      withJavaUtilMap:(id<JavaUtilMap>)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -166,4 +183,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNotQuery_SpanNotWeight)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNotQuery")

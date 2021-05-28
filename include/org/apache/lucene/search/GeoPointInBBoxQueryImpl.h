@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl || defined(INCLUDE_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl))
 #define OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_
 
@@ -49,28 +55,28 @@
 
 /*!
  @brief Constructs a new GeoBBoxQuery that will match encoded GeoPoint terms that fall within or on the boundary
- of the bounding box defined by the input parameters
+  of the bounding box defined by the input parameters
  @param field the field name
  @param minLon lower longitude (x) value of the bounding box
  @param minLat lower latitude (y) value of the bounding box
  @param maxLon upper longitude (x) value of the bounding box
  @param maxLat upper latitude (y) value of the bounding box
  */
-- (instancetype)initWithNSString:(NSString *)field
-                      withDouble:(jdouble)minLon
-                      withDouble:(jdouble)minLat
-                      withDouble:(jdouble)maxLon
-                      withDouble:(jdouble)maxLat;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field
+                                              withDouble:(jdouble)minLon
+                                              withDouble:(jdouble)minLat
+                                              withDouble:(jdouble)maxLon
+                                              withDouble:(jdouble)maxLat;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initPackagePrivateWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initPackagePrivateWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *create_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *create_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initPackagePrivateWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl)
 
@@ -90,12 +96,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl)
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl:(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *)outer$
-                                   withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
-                                                          withDouble:(jdouble)minLon
-                                                          withDouble:(jdouble)minLat
-                                                          withDouble:(jdouble)maxLon
-                                                          withDouble:(jdouble)maxLat;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl:(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *)outer$
+                                             withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
+                                                                    withDouble:(jdouble)minLon
+                                                                    withDouble:(jdouble)minLat
+                                                                    withDouble:(jdouble)maxLon
+                                                                    withDouble:(jdouble)maxLat;
 
 /*!
  @brief Determine whether the quad-cell crosses the shape
@@ -121,6 +127,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl)
 - (jboolean)postFilterWithDouble:(jdouble)lon
                       withDouble:(jdouble)lat;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0
+                                                                   withDouble:(jdouble)arg1
+                                                                   withDouble:(jdouble)arg2
+                                                                   withDouble:(jdouble)arg3
+                                                                   withDouble:(jdouble)arg4 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum)
@@ -135,4 +149,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPoint
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl")

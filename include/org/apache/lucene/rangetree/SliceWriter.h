@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeSliceWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeSliceWriter_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeSliceWriter || defined(INCLUDE_OrgApacheLuceneRangetreeSliceWriter))
 #define OrgApacheLuceneRangetreeSliceWriter_
 
@@ -25,7 +31,7 @@
 /*!
  @brief Abstracts away whether OfflineSorter or simple arrays in heap are used.
  */
-@protocol OrgApacheLuceneRangetreeSliceWriter < JavaIoCloseable, NSObject, JavaObject >
+@protocol OrgApacheLuceneRangetreeSliceWriter < JavaIoCloseable, JavaObject >
 
 - (void)appendWithLong:(jlong)value
               withLong:(jlong)ord
@@ -43,4 +49,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSliceWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeSliceWriter")

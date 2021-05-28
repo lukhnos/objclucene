@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneBkdtreeOfflineLatLonWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneBkdtreeOfflineLatLonWriter_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonWriter || defined(INCLUDE_OrgApacheLuceneBkdtreeOfflineLatLonWriter))
 #define OrgApacheLuceneBkdtreeOfflineLatLonWriter_
 
@@ -37,8 +43,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDir
-                                            withLong:(jlong)count;
+- (instancetype __nonnull)initPackagePrivateWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDir
+                                                                    withLong:(jlong)count;
 
 - (void)appendWithInt:(jint)latEnc
               withInt:(jint)lonEnc
@@ -53,6 +59,10 @@
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeOfflineLatLonWriter)
@@ -62,14 +72,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeOfflineLatLonWriter, scratchBytes_, IO
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeOfflineLatLonWriter, scratchBytesOutput_, OrgApacheLuceneStoreByteArrayDataOutput *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeOfflineLatLonWriter, out_, OrgApacheLuceneStoreOutputStreamDataOutput *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgApacheLuceneBkdtreeOfflineLatLonWriter *self, OrgLukhnosPortmobileFilePath *tempDir, jlong count);
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeOfflineLatLonWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(OrgApacheLuceneBkdtreeOfflineLatLonWriter *self, OrgLukhnosPortmobileFilePath *tempDir, jlong count);
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeOfflineLatLonWriter *new_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeOfflineLatLonWriter *new_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeOfflineLatLonWriter *create_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count);
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeOfflineLatLonWriter *create_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeOfflineLatLonWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonWriter")

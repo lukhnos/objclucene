@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisItItalianLightStemFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisItItalianLightStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisItItalianLightStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisItItalianLightStemFilterFactory))
 #define OrgApacheLuceneAnalysisItItalianLightStemFilterFactory_
 
@@ -26,14 +32,14 @@
 /*!
  @brief Factory for <code>ItalianLightStemFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_itlgtstem" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
- &lt;filter class="solr.ItalianLightStemFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
-@endcode 
+  &lt;fieldType name="text_itlgtstem" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+      &lt;filter class="solr.ItalianLightStemFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
+@endcode
  */
 @interface OrgApacheLuceneAnalysisItItalianLightStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
@@ -42,7 +48,7 @@
 /*!
  @brief Creates a new ItalianLightStemFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisItItalianLightStemFilterFactor
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisItItalianLightStemFilterFactory")

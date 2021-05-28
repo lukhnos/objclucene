@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Math.h"
@@ -20,6 +19,12 @@
 #include "org/apache/lucene/search/TopFieldDocs.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TopDocs must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneSearchTopDocs () {
  @public
   /*!
@@ -29,9 +34,8 @@
 }
 
 /*!
- @brief Auxiliary method used by the <code>merge</code> impls.
- A sort value of null
- is used to indicate that docs should be sorted by score. 
+ @brief Auxiliary method used by the <code>merge</code> impls.A sort value of null
+   is used to indicate that docs should be sorted by score.
  */
 + (OrgApacheLuceneSearchTopDocs *)mergeAuxWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
                                                                 withInt:(jint)start
@@ -74,6 +78,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopDocs_ShardRef)
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)first
                     withId:(OrgApacheLuceneSearchTopDocs_ShardRef *)second;
 
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)pop;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)top;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)insertWithOverflowWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)arg0;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)addWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)arg0;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)getSentinelObject;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)updateTopWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)arg0;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)updateTop;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue)
@@ -100,6 +118,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue)
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)first
                     withId:(OrgApacheLuceneSearchTopDocs_ShardRef *)second;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)pop;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)top;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)insertWithOverflowWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)arg0;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)addWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)arg0;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)getSentinelObject;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)updateTopWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)arg0;
+
+- (OrgApacheLuceneSearchTopDocs_ShardRef *)updateTop;
 
 @end
 
@@ -177,24 +209,37 @@ withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getMaxScore", NULL, "F", 0x1, NULL, NULL },
-    { "setMaxScoreWithFloat:", "setMaxScore", "V", 0x1, NULL, NULL },
-    { "initWithInt:withOrgApacheLuceneSearchScoreDocArray:", "TopDocs", NULL, 0x0, NULL, NULL },
-    { "initWithInt:withOrgApacheLuceneSearchScoreDocArray:withFloat:", "TopDocs", NULL, 0x1, NULL, NULL },
-    { "mergeWithInt:withOrgApacheLuceneSearchTopDocsArray:", "merge", "Lorg.apache.lucene.search.TopDocs;", 0x9, "Ljava.io.IOException;", NULL },
-    { "mergeWithInt:withInt:withOrgApacheLuceneSearchTopDocsArray:", "merge", "Lorg.apache.lucene.search.TopDocs;", 0x9, "Ljava.io.IOException;", NULL },
-    { "mergeWithOrgApacheLuceneSearchSort:withInt:withOrgApacheLuceneSearchTopFieldDocsArray:", "merge", "Lorg.apache.lucene.search.TopFieldDocs;", 0x9, "Ljava.io.IOException;", NULL },
-    { "mergeWithOrgApacheLuceneSearchSort:withInt:withInt:withOrgApacheLuceneSearchTopFieldDocsArray:", "merge", "Lorg.apache.lucene.search.TopFieldDocs;", 0x9, "Ljava.io.IOException;", NULL },
-    { "mergeAuxWithOrgApacheLuceneSearchSort:withInt:withInt:withOrgApacheLuceneSearchTopDocsArray:", "mergeAux", "Lorg.apache.lucene.search.TopDocs;", 0xa, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0x9, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0x9, 4, 7, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopFieldDocs;", 0x9, 4, 8, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopFieldDocs;", 0x9, 4, 9, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0xa, 10, 11, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getMaxScore);
+  methods[1].selector = @selector(setMaxScoreWithFloat:);
+  methods[2].selector = @selector(initWithInt:withOrgApacheLuceneSearchScoreDocArray:);
+  methods[3].selector = @selector(initWithInt:withOrgApacheLuceneSearchScoreDocArray:withFloat:);
+  methods[4].selector = @selector(mergeWithInt:withOrgApacheLuceneSearchTopDocsArray:);
+  methods[5].selector = @selector(mergeWithInt:withInt:withOrgApacheLuceneSearchTopDocsArray:);
+  methods[6].selector = @selector(mergeWithOrgApacheLuceneSearchSort:withInt:withOrgApacheLuceneSearchTopFieldDocsArray:);
+  methods[7].selector = @selector(mergeWithOrgApacheLuceneSearchSort:withInt:withInt:withOrgApacheLuceneSearchTopFieldDocsArray:);
+  methods[8].selector = @selector(mergeAuxWithOrgApacheLuceneSearchSort:withInt:withInt:withOrgApacheLuceneSearchTopDocsArray:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "totalHits_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "scoreDocs_", NULL, 0x1, "[Lorg.apache.lucene.search.ScoreDoc;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxScore_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "totalHits_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "scoreDocs_", "[LOrgApacheLuceneSearchScoreDoc;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "maxScore_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.TopDocs$ShardRef;", "Lorg.apache.lucene.search.TopDocs$ScoreMergeSortQueue;", "Lorg.apache.lucene.search.TopDocs$MergeSortQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocs = { 2, "TopDocs", "org.apache.lucene.search", NULL, 0x1, 9, methods, 3, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "setMaxScore", "F", "I[LOrgApacheLuceneSearchScoreDoc;", "I[LOrgApacheLuceneSearchScoreDoc;F", "merge", "I[LOrgApacheLuceneSearchTopDocs;", "LJavaIoIOException;", "II[LOrgApacheLuceneSearchTopDocs;", "LOrgApacheLuceneSearchSort;I[LOrgApacheLuceneSearchTopFieldDocs;", "LOrgApacheLuceneSearchSort;II[LOrgApacheLuceneSearchTopFieldDocs;", "mergeAux", "LOrgApacheLuceneSearchSort;II[LOrgApacheLuceneSearchTopDocs;", "LOrgApacheLuceneSearchTopDocs_ShardRef;LOrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue;LOrgApacheLuceneSearchTopDocs_MergeSortQueue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocs = { "TopDocs", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 9, 3, -1, 12, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTopDocs;
 }
 
@@ -284,8 +329,8 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocs_mergeAuxWithOrgApache
     jint numIterOnHits = JavaLangMath_minWithInt_withInt_(availHitCount, requestedResultWindow);
     jint hitUpto = 0;
     while (hitUpto < numIterOnHits) {
-      JreAssert(([queue size] > 0), (@"org/apache/lucene/search/TopDocs.java:274 condition failed: assert queue.size() > 0;"));
-      OrgApacheLuceneSearchTopDocs_ShardRef *ref = [queue pop];
+      JreAssert([queue size] > 0, @"org/apache/lucene/search/TopDocs.java:274 condition failed: assert queue.size() > 0;");
+      OrgApacheLuceneSearchTopDocs_ShardRef *ref = JreRetainedLocalValue([queue pop]);
       OrgApacheLuceneSearchScoreDoc *hit = IOSObjectArray_Get(nil_chk(((OrgApacheLuceneSearchTopDocs *) nil_chk(IOSObjectArray_Get(shardHits, ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(ref))->shardIndex_)))->scoreDocs_), ref->hitIndex_++);
       ((OrgApacheLuceneSearchScoreDoc *) nil_chk(hit))->shardIndex_ = ref->shardIndex_;
       if (hitUpto >= start) {
@@ -319,15 +364,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "ShardRef", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "shardIndex_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "hitIndex_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "shardIndex_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "hitIndex_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocs_ShardRef = { 2, "ShardRef", "org.apache.lucene.search", "TopDocs", 0xa, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "toString", "LOrgApacheLuceneSearchTopDocs;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocs_ShardRef = { "ShardRef", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 2, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTopDocs_ShardRef;
 }
 
@@ -357,7 +409,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ShardRef)
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)first
                     withId:(OrgApacheLuceneSearchTopDocs_ShardRef *)second {
-  JreAssert((first != second), (@"org/apache/lucene/search/TopDocs.java:95 condition failed: assert first != second;"));
+  JreAssert(!JreObjectEqualsEquals(first, second), @"org/apache/lucene/search/TopDocs.java:95 condition failed: assert first != second;");
   jfloat firstScore = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(shardHits_), ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(first))->shardIndex_)), first->hitIndex_)))->score_;
   jfloat secondScore = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(shardHits_, ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(second))->shardIndex_)), second->hitIndex_)))->score_;
   if (firstScore < secondScore) {
@@ -374,7 +426,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ShardRef)
       return false;
     }
     else {
-      JreAssert((first->hitIndex_ != second->hitIndex_), (@"org/apache/lucene/search/TopDocs.java:112 condition failed: assert first.hitIndex != second.hitIndex;"));
+      JreAssert(first->hitIndex_ != second->hitIndex_, @"org/apache/lucene/search/TopDocs.java:112 condition failed: assert first.hitIndex != second.hitIndex;");
       return first->hitIndex_ < second->hitIndex_;
     }
   }
@@ -386,15 +438,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ShardRef)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchTopDocsArray:", "ScoreMergeSortQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x1, NULL, "(Lorg/apache/lucene/search/TopDocs$ShardRef;Lorg/apache/lucene/search/TopDocs$ShardRef;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchTopDocsArray:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "shardHits_", NULL, 0x10, "[[Lorg.apache.lucene.search.ScoreDoc;", NULL, NULL, .constantValue.asLong = 0 },
+    { "shardHits_", "[[LOrgApacheLuceneSearchScoreDoc;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.TopDocs$ShardRef;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue = { 2, "ScoreMergeSortQueue", "org.apache.lucene.search", "TopDocs", 0xa, 2, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/TopDocs$ShardRef;>;" };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneSearchTopDocs;", "lessThan", "LOrgApacheLuceneSearchTopDocs_ShardRef;LOrgApacheLuceneSearchTopDocs_ShardRef;", "LOrgApacheLuceneSearchTopDocs;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/TopDocs$ShardRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue = { "ScoreMergeSortQueue", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 2, 1, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue;
 }
 
@@ -428,7 +486,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueu
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)first
                     withId:(OrgApacheLuceneSearchTopDocs_ShardRef *)second {
-  JreAssert((first != second), (@"org/apache/lucene/search/TopDocs.java:161 condition failed: assert first != second;"));
+  JreAssert(!JreObjectEqualsEquals(first, second), @"org/apache/lucene/search/TopDocs.java:161 condition failed: assert first != second;");
   OrgApacheLuceneSearchFieldDoc *firstFD = (OrgApacheLuceneSearchFieldDoc *) cast_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(shardHits_), ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(first))->shardIndex_)), first->hitIndex_), [OrgApacheLuceneSearchFieldDoc class]);
   OrgApacheLuceneSearchFieldDoc *secondFD = (OrgApacheLuceneSearchFieldDoc *) cast_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(shardHits_, ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(second))->shardIndex_)), second->hitIndex_), [OrgApacheLuceneSearchFieldDoc class]);
   for (jint compIDX = 0; compIDX < ((IOSObjectArray *) nil_chk(comparators_))->size_; compIDX++) {
@@ -445,7 +503,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueu
     return false;
   }
   else {
-    JreAssert((first->hitIndex_ != second->hitIndex_), (@"org/apache/lucene/search/TopDocs.java:189 condition failed: assert first.hitIndex != second.hitIndex;"));
+    JreAssert(first->hitIndex_ != second->hitIndex_, @"org/apache/lucene/search/TopDocs.java:189 condition failed: assert first.hitIndex != second.hitIndex;");
     return first->hitIndex_ < second->hitIndex_;
   }
 }
@@ -458,17 +516,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchTopDocsArray:", "MergeSortQueue", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x1, NULL, "(Lorg/apache/lucene/search/TopDocs$ShardRef;Lorg/apache/lucene/search/TopDocs$ShardRef;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchTopDocsArray:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "shardHits_", NULL, 0x10, "[[Lorg.apache.lucene.search.ScoreDoc;", NULL, NULL, .constantValue.asLong = 0 },
-    { "comparators_", NULL, 0x10, "[Lorg.apache.lucene.search.FieldComparator;", NULL, "[Lorg/apache/lucene/search/FieldComparator<*>;", .constantValue.asLong = 0 },
-    { "reverseMul_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "shardHits_", "[[LOrgApacheLuceneSearchScoreDoc;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "comparators_", "[LOrgApacheLuceneSearchFieldComparator;", .constantValue.asLong = 0, 0x10, -1, -1, 4, -1 },
+    { "reverseMul_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.TopDocs$ShardRef;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocs_MergeSortQueue = { 2, "MergeSortQueue", "org.apache.lucene.search", "TopDocs", 0xa, 2, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/TopDocs$ShardRef;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSort;[LOrgApacheLuceneSearchTopDocs;", "LJavaIoIOException;", "lessThan", "LOrgApacheLuceneSearchTopDocs_ShardRef;LOrgApacheLuceneSearchTopDocs_ShardRef;", "[Lorg/apache/lucene/search/FieldComparator<*>;", "LOrgApacheLuceneSearchTopDocs;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/TopDocs$ShardRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocs_MergeSortQueue = { "MergeSortQueue", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 2, 3, 5, -1, -1, 6, -1 };
   return &_OrgApacheLuceneSearchTopDocs_MergeSortQueue;
 }
 

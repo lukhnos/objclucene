@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_
 
@@ -21,33 +27,31 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 
 @protocol JavaLangCharSequence;
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
 /*!
- @brief A <code>QuotedFieldQueryNode</code> represents phrase query.
- Example:
- "life is great"
+ @brief A <code>QuotedFieldQueryNode</code> represents phrase query.Example:
+  "life is great"
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode
 
 #pragma mark Public
 
 /*!
- @param field
- - field name
- @param text
- - value
- @param begin
- - position in the query string
- @param end
- - position in the query string
+ @param field - field name
+ @param text - value
+ @param begin - position in the query string
+ @param end - position in the query string
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
+                              withJavaLangCharSequence:(id<JavaLangCharSequence>)text
+                                               withInt:(jint)begin
+                                               withInt:(jint)end;
 
 - (OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *)cloneTree;
+
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
 
@@ -67,4 +71,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFiel
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode")

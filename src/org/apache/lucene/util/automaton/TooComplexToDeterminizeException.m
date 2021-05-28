@@ -3,12 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/util/automaton/TooComplexToDeterminizeException.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/RuntimeException.h"
 #include "org/apache/lucene/util/automaton/Automaton.h"
 #include "org/apache/lucene/util/automaton/RegExp.h"
 #include "org/apache/lucene/util/automaton/TooComplexToDeterminizeException.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/TooComplexToDeterminizeException must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException () {
  @public
@@ -55,26 +58,36 @@ withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:(OrgApacheLucen
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilAutomatonRegExp:withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:", "TooComplexToDeterminizeException", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "TooComplexToDeterminizeException", NULL, 0x1, NULL, NULL },
-    { "getAutomaton", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
-    { "getRegExp", NULL, "Lorg.apache.lucene.util.automaton.RegExp;", 0x1, NULL, NULL },
-    { "getMaxDeterminizedStates", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonRegExp;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilAutomatonRegExp:withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[2].selector = @selector(getAutomaton);
+  methods[3].selector = @selector(getRegExp);
+  methods[4].selector = @selector(getMaxDeterminizedStates);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "automaton_", NULL, 0x92, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
-    { "regExp_", NULL, 0x92, "Lorg.apache.lucene.util.automaton.RegExp;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDeterminizedStates_", NULL, 0x92, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "automaton_", "LOrgApacheLuceneUtilAutomatonAutomaton;", .constantValue.asLong = 0, 0x92, -1, -1, -1, -1 },
+    { "regExp_", "LOrgApacheLuceneUtilAutomatonRegExp;", .constantValue.asLong = 0, 0x92, -1, -1, -1, -1 },
+    { "maxDeterminizedStates_", "I", .constantValue.asLong = 0, 0x92, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException = { 2, "TooComplexToDeterminizeException", "org.apache.lucene.util.automaton", NULL, 0x1, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAutomatonRegExp;LOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException;", "LOrgApacheLuceneUtilAutomatonAutomaton;I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException = { "TooComplexToDeterminizeException", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x1, 5, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException;
 }
 
 @end
 
 void OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_initWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_(OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *self, OrgApacheLuceneUtilAutomatonRegExp *regExp, OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *cause) {
-  JavaLangRuntimeException_initWithNSString_withNSException_(self, JreStrcat("$$$I$", @"Determinizing ", [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(regExp)) getOriginalString], @" would result in more than ", ((OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *) nil_chk(cause))->maxDeterminizedStates_, @" states."), cause);
+  JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(self, JreStrcat("$$$I$", @"Determinizing ", [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(regExp)) getOriginalString], @" would result in more than ", ((OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *) nil_chk(cause))->maxDeterminizedStates_, @" states."), cause);
   JreStrongAssign(&self->regExp_, regExp);
   JreStrongAssign(&self->automaton_, cause->automaton_);
   self->maxDeterminizedStates_ = cause->maxDeterminizedStates_;

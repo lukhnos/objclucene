@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreFSDirectory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreFSDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreFSDirectory || defined(INCLUDE_OrgApacheLuceneStoreFSDirectory))
 #define OrgApacheLuceneStoreFSDirectory_
 
@@ -29,73 +35,75 @@
 
 /*!
  @brief Base class for Directory implementations that store index
- files in the file system.
+  files in the file system.
  <a name="subclasses"></a>
- There are currently three core
- subclasses:
+  There are currently three core
+  subclasses: 
  <ul>
- <li><code>SimpleFSDirectory</code> is a straightforward
- implementation using Files.newByteChannel.
- However, it has poor concurrent performance
- (multiple threads will bottleneck) as it
- synchronizes when multiple threads read from the
- same file.
+   <li><code>SimpleFSDirectory</code> is a straightforward
+        implementation using Files.newByteChannel.
+        However, it has poor concurrent performance
+        (multiple threads will bottleneck) as it
+        synchronizes when multiple threads read from the
+        same file.  
  <li><code>NIOFSDirectory</code> uses java.nio's
- FileChannel's positional io when reading to avoid
- synchronization when reading from the same file.
- Unfortunately, due to a Windows-only <a
- href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6265734">Sun
- JRE bug</a> this is a poor choice for Windows, but
- on all other platforms this is the preferred
- choice. Applications using <code>Thread.interrupt()</code> or
- <code>Future.cancel(boolean)</code> should use
- <code>RAFDirectory</code> instead. See <code>NIOFSDirectory</code> java doc
- for details.
+        FileChannel's positional io when reading to avoid
+        synchronization when reading from the same file.
+        Unfortunately, due to a Windows-only <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6265734">
+ Sun
+        JRE bug</a> this is a poor choice for Windows, but
+        on all other platforms this is the preferred
+        choice. Applications using <code>Thread.interrupt()</code> or
+        <code>Future.cancel(boolean)</code> should use
+        <code>RAFDirectory</code> instead. See <code>NIOFSDirectory</code> java doc
+        for details.
+           
  <li><code>MMapDirectory</code> uses memory-mapped IO when
- reading. This is a good choice if you have plenty
- of virtual memory relative to your index size, eg
- if you are running on a 64 bit JRE, or you are
- running on a 32 bit JRE but your index sizes are
- small enough to fit into the virtual memory space.
- Java has currently the limitation of not being able to
- unmap files from user code. The files are unmapped, when GC
- releases the byte buffers. Due to
+        reading. This is a good choice if you have plenty
+        of virtual memory relative to your index size, eg
+        if you are running on a 64 bit JRE, or you are
+        running on a 32 bit JRE but your index sizes are
+        small enough to fit into the virtual memory space.
+        Java has currently the limitation of not being able to
+        unmap files from user code. The files are unmapped, when GC
+        releases the byte buffers. Due to       
  <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4724038">
- this bug</a> in Sun's JRE, MMapDirectory's <code>IndexInput.close</code>
- is unable to close the underlying OS file handle. Only when
- GC finally collects the underlying objects, which could be
- quite some time later, will the file handle be closed.
- This will consume additional transient disk usage: on Windows,
- attempts to delete or overwrite the files will result in an
- exception; on other platforms, which typically have a &quot;delete on
- last close&quot; semantics, while such operations will succeed, the bytes
- are still consuming space on disk.  For many applications this
- limitation is not a problem (e.g. if you have plenty of disk space,
- and you don't rely on overwriting files on Windows) but it's still
- an important limitation to be aware of. This class supplies a
- (possibly dangerous) workaround mentioned in the bug report,
- which may fail on non-Sun JVMs.
+        this bug</a> in Sun's JRE, MMapDirectory's <code>IndexInput.close</code>
+        is unable to close the underlying OS file handle. Only when
+        GC finally collects the underlying objects, which could be
+        quite some time later, will the file handle be closed.
+        This will consume additional transient disk usage: on Windows,
+        attempts to delete or overwrite the files will result in an
+        exception; on other platforms, which typically have a &quot;delete on
+        last close&quot; semantics, while such operations will succeed, the bytes
+        are still consuming space on disk.  For many applications this
+        limitation is not a problem (e.g. if you have plenty of disk space,
+        and you don't rely on overwriting files on Windows) but it's still
+        an important limitation to be aware of. This class supplies a
+        (possibly dangerous) workaround mentioned in the bug report,
+        which may fail on non-Sun JVMs. 
  </ul>
+  
  <p>Unfortunately, because of system peculiarities, there is
- no single overall best implementation.  Therefore, we've
- added the <code>open</code> method, to allow Lucene to choose
- the best FSDirectory implementation given your
- environment, and the known limitations of each
- implementation.  For users who have no reason to prefer a
- specific implementation, it's best to simply use <code>open</code>
+  no single overall best implementation.  Therefore, we've
+  added the <code>open</code> method, to allow Lucene to choose
+  the best FSDirectory implementation given your
+  environment, and the known limitations of each
+  implementation.  For users who have no reason to prefer a
+  specific implementation, it's best to simply use <code>open</code>
  .  For all others, you should instantiate the
- desired implementation directly.
+  desired implementation directly. 
  <p><b>NOTE:</b> Accessing one of the above subclasses either directly or
- indirectly from a thread while it's interrupted can close the
- underlying channel immediately if at the same time the thread is
- blocked on IO. The channel will remain closed and subsequent access
- to the index will throw a <code>ClosedChannelException</code>.
- Applications using <code>Thread.interrupt()</code> or
- <code>Future.cancel(boolean)</code> should use the slower legacy
- <code>RAFDirectory</code> from the <code>misc</code> Lucene module instead.
+  indirectly from a thread while it's interrupted can close the
+  underlying channel immediately if at the same time the thread is
+  blocked on IO. The channel will remain closed and subsequent access
+  to the index will throw a <code>ClosedChannelException</code>.
+  Applications using <code>Thread.interrupt()</code> or 
+ <code>Future.cancel(boolean)</code> should use the slower legacy 
+ <code>RAFDirectory</code> from the <code>misc</code> Lucene module instead. 
  <p>The locking implementation is by default <code>NativeFSLockFactory</code>
  , but can be changed by
- passing in a custom <code>LockFactory</code> instance.
+  passing in a custom <code>LockFactory</code> instance.
  - seealso: Directory
  */
 @interface OrgApacheLuceneStoreFSDirectory : OrgApacheLuceneStoreBaseDirectory {
@@ -135,36 +143,36 @@
 
 /*!
  @brief Lists all files (including subdirectories) in the
- directory.
- @throws IOException if there was an I/O error during listing
+   directory.
+ @throw IOExceptionif there was an I/O error during listing
  */
 + (IOSObjectArray *)listAllWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)dir;
 
 /*!
  @brief Creates an FSDirectory instance, trying to pick the
- best implementation given the current environment.
+   best implementation given the current environment.
  The directory returned uses the <code>NativeFSLockFactory</code>.
- The directory is created at the named location if it does not yet exist.
+   The directory is created at the named location if it does not yet exist.  
  <p>Currently this returns <code>MMapDirectory</code> for Linux, MacOSX, Solaris,
- and Windows 64-bit JREs, <code>NIOFSDirectory</code> for other
- non-Windows JREs, and <code>SimpleFSDirectory</code> for other
- JREs on Windows. It is highly recommended that you consult the
- implementation's documentation for your platform before
- using this method.
+   and Windows 64-bit JREs, <code>NIOFSDirectory</code> for other
+   non-Windows JREs, and <code>SimpleFSDirectory</code> for other
+   JREs on Windows. It is highly recommended that you consult the
+   implementation's documentation for your platform before
+   using this method. 
  <p><b>NOTE</b>: this method may suddenly change which
- implementation is returned from release to release, in
- the event that higher performance defaults become
- possible; if the precise implementation is important to
- your application, please instantiate it directly,
- instead. For optimal performance you should consider using
- <code>MMapDirectory</code> on 64 bit JVMs.
- <p>See <a href="#subclasses">above</a> 
+  implementation is returned from release to release, in
+  the event that higher performance defaults become
+  possible; if the precise implementation is important to
+  your application, please instantiate it directly,
+  instead. For optimal performance you should consider using 
+ <code>MMapDirectory</code> on 64 bit JVMs. 
+ <p>See <a href="#subclasses">above</a>
  */
 + (OrgApacheLuceneStoreFSDirectory *)openWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
 /*!
  @brief Just like <code>open(Path)</code>, but allows you to
- also specify a custom <code>LockFactory</code>.
+   also specify a custom <code>LockFactory</code>.
  */
 + (OrgApacheLuceneStoreFSDirectory *)openWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                                       withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
@@ -185,16 +193,20 @@
  @brief Create a new FSDirectory for the named location (ctor for subclasses).
  The directory is created at the named location if it does not yet exist.
  @param path the path of the directory
- @param lockFactory the lock factory to use, or null for the default
- (<code>NativeFSLockFactory</code>);
- @throws IOException if there is a low-level I/O error
+ @param lockFactory the lock factory to use, or null for the default  (
+ <code>NativeFSLockFactory</code> );
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                 withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
+                           withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
 
 - (void)ensureCanWriteWithNSString:(NSString *)name;
 
 - (void)fsyncWithNSString:(NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -221,16 +233,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFSDirectory)
 #define INCLUDE_OrgApacheLuceneStoreOutputStreamIndexOutput 1
 #include "org/apache/lucene/store/OutputStreamIndexOutput.h"
 
+@class JavaIoOutputStream;
 @class OrgApacheLuceneStoreFSDirectory;
 
 @interface OrgApacheLuceneStoreFSDirectory_FSIndexOutput : OrgApacheLuceneStoreOutputStreamIndexOutput
-
-+ (jint)CHUNK_SIZE;
+@property (readonly, class) jint CHUNK_SIZE NS_SWIFT_NAME(CHUNK_SIZE);
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *)outer$
-                                           withNSString:(NSString *)name;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *)outer$
+                                                     withNSString:(NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                    withJavaIoOutputStream:(JavaIoOutputStream *)arg1
+                                   withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -238,9 +256,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreFSDirectory_FSIndexOutput)
 
 /*!
  @brief The maximum chunk size is 8192 bytes, because <code>FileOutputStream</code> mallocs
- a native buffer outside of stack if the write buffer size is larger.
+  a native buffer outside of stack if the write buffer size is larger.
  */
-inline jint OrgApacheLuceneStoreFSDirectory_FSIndexOutput_get_CHUNK_SIZE();
+inline jint OrgApacheLuceneStoreFSDirectory_FSIndexOutput_get_CHUNK_SIZE(void);
 #define OrgApacheLuceneStoreFSDirectory_FSIndexOutput_CHUNK_SIZE 8192
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreFSDirectory_FSIndexOutput, CHUNK_SIZE, jint)
 
@@ -254,4 +272,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFSDirectory_FSIndexOutput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreFSDirectory")

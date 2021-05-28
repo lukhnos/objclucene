@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer))
 #define OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_
 
@@ -24,14 +30,14 @@
 
 /*!
  @brief LowerCaseTokenizer performs the function of LetterTokenizer
- and LowerCaseFilter together.
- It divides text at non-letters and converts
- them to lower case.  While it is functionally equivalent to the combination
- of LetterTokenizer and LowerCaseFilter, there is a performance advantage
- to doing the two tasks at once, hence this (redundant) implementation.
+  and LowerCaseFilter together.It divides text at non-letters and converts
+  them to lower case.
+ While it is functionally equivalent to the combination
+  of LetterTokenizer and LowerCaseFilter, there is a performance advantage
+  to doing the two tasks at once, hence this (redundant) implementation. 
  <P>
- Note: this does a decent job for most European languages, but does a terrible
- job for some Asian languages, where words are not separated by spaces.
+  Note: this does a decent job for most European languages, but does a terrible
+  job for some Asian languages, where words are not separated by spaces. 
  </p>
  */
 @interface OrgApacheLuceneAnalysisCoreLowerCaseTokenizer : OrgApacheLuceneAnalysisCoreLetterTokenizer
@@ -41,20 +47,20 @@
 /*!
  @brief Construct a new LowerCaseTokenizer.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Construct a new LowerCaseTokenizer using a given
+ @brief Construct a new LowerCaseTokenizer using a given 
  <code>org.apache.lucene.util.AttributeFactory</code>.
- @param factory
- the attribute factory to use for this <code>Tokenizer</code>
+ @param factory the attribute factory to use for this 
+ <code>Tokenizer</code>
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 #pragma mark Protected
 
 /*!
- @brief Converts char to lower case
+ @brief Converts char to lower case 
  <code>Character.toLowerCase(int)</code>.
  */
 - (jint)normalizeWithInt:(jint)c;
@@ -65,9 +71,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *create_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *create_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
 
@@ -79,4 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer")

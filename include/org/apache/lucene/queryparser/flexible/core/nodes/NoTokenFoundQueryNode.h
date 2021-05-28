@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_
 
@@ -26,13 +32,13 @@
 
 /*!
  @brief A <code>NoTokenFoundQueryNode</code> is used if a term is convert into no tokens
- by the tokenizer/lemmatizer/analyzer (null).
+  by the tokenizer/lemmatizer/analyzer (null).
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -46,12 +52,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFound
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode")

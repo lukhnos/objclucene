@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter || defined(INCLUDE_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter))
 #define OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_
 
@@ -25,8 +31,7 @@
 
 /*!
  @brief <code>Fragmenter</code> implementation which breaks text up into same-size
- fragments but does not split up <code>Spans</code>.
- This is a simple sample class.
+  fragments but does not split up <code>Spans</code>.This is a simple sample class.
  */
 @interface OrgApacheLuceneSearchHighlightSimpleSpanFragmenter : NSObject < OrgApacheLuceneSearchHighlightFragmenter >
 
@@ -35,19 +40,23 @@
 /*!
  @param queryScorer QueryScorer that was used to score hits
  */
-- (instancetype)initWithOrgApacheLuceneSearchHighlightQueryScorer:(OrgApacheLuceneSearchHighlightQueryScorer *)queryScorer;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchHighlightQueryScorer:(OrgApacheLuceneSearchHighlightQueryScorer *)queryScorer;
 
 /*!
  @param queryScorer QueryScorer that was used to score hits
  @param fragmentSize size in bytes of each fragment
  */
-- (instancetype)initWithOrgApacheLuceneSearchHighlightQueryScorer:(OrgApacheLuceneSearchHighlightQueryScorer *)queryScorer
-                                                          withInt:(jint)fragmentSize;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchHighlightQueryScorer:(OrgApacheLuceneSearchHighlightQueryScorer *)queryScorer
+                                                                    withInt:(jint)fragmentSize;
 
 - (jboolean)isNewFragment;
 
 - (void)startWithNSString:(NSString *)originalText
 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -69,4 +78,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl))
 #define OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_
 
@@ -33,6 +39,7 @@
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilBytesRefBuilder;
 @protocol JavaLangCharSequence;
+@protocol JavaUtilStreamIntStream;
 @protocol OrgApacheLuceneUtilAttributeReflector;
 
 /*!
@@ -51,7 +58,7 @@
 /*!
  @brief Initialize this attribute with empty term text
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithChar:(jchar)c;
 
@@ -73,7 +80,7 @@
 
 - (void)clear;
 
-- (OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *)clone;
+- (OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *)java_clone;
 
 - (void)copyBufferWithCharArray:(IOSCharArray *)buffer
                         withInt:(jint)offset
@@ -87,7 +94,7 @@
 
 - (NSUInteger)hash;
 
-- (jint)length;
+- (jint)java_length;
 
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector;
 
@@ -101,12 +108,12 @@
                                          to:(jint)end;
 
 /*!
- @brief Returns solely the term text as specified by the
+ @brief Returns solely the term text as specified by the 
  <code>CharSequence</code> interface.
  <p>This method changed the behavior with Lucene 3.1,
- before it returned a String representation of the whole
- term with all attributes.
- This affects especially the
+  before it returned a String representation of the whole
+  term with all attributes.
+  This affects especially the 
  <code>org.apache.lucene.analysis.Token</code> subclass.
  */
 - (NSString *)description;
@@ -119,12 +126,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl,
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl")

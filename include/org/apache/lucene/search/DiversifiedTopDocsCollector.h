@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDiversifiedTopDocsCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDiversifiedTopDocsCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchDiversifiedTopDocsCollector || defined(INCLUDE_OrgApacheLuceneSearchDiversifiedTopDocsCollector))
 #define OrgApacheLuceneSearchDiversifiedTopDocsCollector_
 
@@ -25,33 +31,35 @@
 @class OrgApacheLuceneIndexNumericDocValues;
 @class OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;
 @class OrgApacheLuceneSearchTopDocs;
+@class OrgApacheLuceneUtilPriorityQueue;
 @protocol OrgApacheLuceneSearchLeafCollector;
 
 /*!
  @brief A <code>TopDocsCollector</code> that controls diversity in results by ensuring no
- more than maxHitsPerKey results from a common source are collected in the
- final results.
+  more than maxHitsPerKey results from a common source are collected in the
+  final results.
  An example application might be a product search in a marketplace where no
- more than 3 results per retailer are permitted in search results.
+  more than 3 results per retailer are permitted in search results.  
  <p>
- To compare behaviour with other forms of collector, a useful analogy might be
- the problem of making a compilation album of 1967's top hit records:
+  To compare behaviour with other forms of collector, a useful analogy might be
+  the problem of making a compilation album of 1967's top hit records: 
  <ol>
- <li>A vanilla query's results might look like a "Best of the Beatles" album -
- high quality but not much diversity</li>
- <li>A GroupingSearch would produce the equivalent of "The 10 top-selling
- artists of 1967 - some killer and quite a lot of filler"</li>
- <li>A "diversified" query would be the top 20 hit records of that year - with
- a max of 3 Beatles hits in order to maintain diversity</li>
- </ol>
- This collector improves on the "GroupingSearch" type queries by
+  <li>A vanilla query's results might look like a "Best of the Beatles" album -
+  high quality but not much diversity</li>
+  <li>A GroupingSearch would produce the equivalent of "The 10 top-selling
+  artists of 1967 - some killer and quite a lot of filler"</li>
+  <li>A "diversified" query would be the top 20 hit records of that year - with
+  a max of 3 Beatles hits in order to maintain diversity</li>
+  </ol>
+  This collector improves on the "GroupingSearch" type queries by 
  <ul>
- <li>Working in one pass over the data</li>
- <li>Not requiring the client to guess how many groups are required</li>
- <li>Removing low-scoring "filler" which sits at the end of each group's hits</li>
- </ul>
- This is an abstract class and subclasses have to provide a source of keys for
- documents which is then used to help identify duplicate sources.
+  <li>Working in one pass over the data</li>
+  <li>Not requiring the client to guess how many groups are required</li>
+  <li>Removing low-scoring "filler" which sits at the end of each group's hits</li>
+  </ul>
+  
+  This is an abstract class and subclasses have to provide a source of keys for
+  documents which is then used to help identify duplicate sources.
  */
 @interface OrgApacheLuceneSearchDiversifiedTopDocsCollector : OrgApacheLuceneSearchTopDocsCollector {
  @public
@@ -61,8 +69,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)numHits
-                    withInt:(jint)maxHitsPerKey;
+- (instancetype __nonnull)initWithInt:(jint)numHits
+                              withInt:(jint)maxHitsPerKey;
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -81,6 +89,10 @@
 
 - (OrgApacheLuceneSearchTopDocs *)newTopDocsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results
                                                                            withInt:(jint)start OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilPriorityQueue:(OrgApacheLuceneUtilPriorityQueue *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -105,14 +117,35 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector)
 
 @interface OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue : OrgApacheLuceneUtilPriorityQueue
 
+#pragma mark Public
+
+- (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)addWithId:(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)arg0;
+
+- (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)insertWithOverflowWithId:(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)arg0;
+
+- (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)pop;
+
+- (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)top;
+
+- (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)updateTop;
+
+- (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)updateTopWithId:(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)arg0;
+
 #pragma mark Protected
+
+- (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)getSentinelObject;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)hitA
                     withId:(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)hitB;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -153,8 +186,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_Scor
 
 #pragma mark Protected
 
-- (instancetype)initWithInt:(jint)doc
-                  withFloat:(jfloat)score;
+- (instancetype __nonnull)initWithInt:(jint)doc
+                            withFloat:(jfloat)score;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                            withFloat:(jfloat)arg1
+                              withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -172,4 +211,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_Scor
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDiversifiedTopDocsCollector")

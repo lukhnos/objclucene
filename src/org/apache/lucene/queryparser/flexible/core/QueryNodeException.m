@@ -5,11 +5,16 @@
 
 #include "J2ObjC_source.h"
 #include "java/lang/Exception.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Locale.h"
 #include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
 #include "org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages.h"
 #include "org/apache/lucene/queryparser/flexible/messages/Message.h"
 #include "org/apache/lucene/queryparser/flexible/messages/MessageImpl.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/QueryNodeException must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException
 
@@ -18,14 +23,14 @@
   return self;
 }
 
-- (instancetype)initWithNSException:(NSException *)throwable {
-  OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithNSException_(self, throwable);
+- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)throwable {
+  OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithJavaLangThrowable_(self, throwable);
   return self;
 }
 
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage:(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage>)message
-                                                          withNSException:(NSException *)throwable {
-  OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withNSException_(self, message, throwable);
+                                                    withJavaLangThrowable:(JavaLangThrowable *)throwable {
+  OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_(self, message, throwable);
   return self;
 }
 
@@ -55,20 +60,33 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage:", "QueryNodeException", NULL, 0x1, NULL, NULL },
-    { "initWithNSException:", "QueryNodeException", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage:withNSException:", "QueryNodeException", NULL, 0x1, NULL, NULL },
-    { "getMessageObject", NULL, "Lorg.apache.lucene.queryparser.flexible.messages.Message;", 0x1, NULL, NULL },
-    { "getMessage", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getLocalizedMessage", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getLocalizedMessageWithJavaUtilLocale:", "getLocalizedMessage", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleMessagesMessage;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage:);
+  methods[1].selector = @selector(initWithJavaLangThrowable:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage:withJavaLangThrowable:);
+  methods[3].selector = @selector(getMessageObject);
+  methods[4].selector = @selector(getMessage);
+  methods[5].selector = @selector(getLocalizedMessage);
+  methods[6].selector = @selector(getLocalizedMessageWithJavaUtilLocale:);
+  methods[7].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "message_", NULL, 0x4, "Lorg.apache.lucene.queryparser.flexible.messages.Message;", NULL, NULL, .constantValue.asLong = 0 },
+    { "message_", "LOrgApacheLuceneQueryparserFlexibleMessagesMessage;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException = { 2, "QueryNodeException", "org.apache.lucene.queryparser.flexible.core", NULL, 0x1, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleMessagesMessage;", "LJavaLangThrowable;", "LOrgApacheLuceneQueryparserFlexibleMessagesMessage;LJavaLangThrowable;", "getLocalizedMessage", "LJavaUtilLocale;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException = { "QueryNodeException", "org.apache.lucene.queryparser.flexible.core", ptrTable, methods, fields, 7, 0x1, 8, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException;
 }
 
@@ -88,31 +106,31 @@ OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *create_OrgApacheLucene
   J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException, initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_, message)
 }
 
-void OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithNSException_(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *self, NSException *throwable) {
-  JavaLangException_initWithNSException_(self, throwable);
+void OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithJavaLangThrowable_(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *self, JavaLangThrowable *throwable) {
+  JavaLangException_initWithJavaLangThrowable_(self, throwable);
   JreStrongAssignAndConsume(&self->message_, new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, EMPTY_MESSAGE)));
 }
 
-OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithNSException_(NSException *throwable) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException, initWithNSException_, throwable)
+OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithJavaLangThrowable_(JavaLangThrowable *throwable) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException, initWithJavaLangThrowable_, throwable)
 }
 
-OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithNSException_(NSException *throwable) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException, initWithNSException_, throwable)
+OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithJavaLangThrowable_(JavaLangThrowable *throwable) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException, initWithJavaLangThrowable_, throwable)
 }
 
-void OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withNSException_(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *self, id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message, NSException *throwable) {
-  JavaLangException_initWithNSString_withNSException_(self, [((id<OrgApacheLuceneQueryparserFlexibleMessagesMessage>) nil_chk(message)) getKey], throwable);
+void OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *self, id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message, JavaLangThrowable *throwable) {
+  JavaLangException_initWithNSString_withJavaLangThrowable_(self, [((id<OrgApacheLuceneQueryparserFlexibleMessagesMessage>) nil_chk(message)) getKey], throwable);
   JreStrongAssignAndConsume(&self->message_, new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, EMPTY_MESSAGE)));
   JreStrongAssign(&self->message_, message);
 }
 
-OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withNSException_(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message, NSException *throwable) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException, initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withNSException_, message, throwable)
+OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message, JavaLangThrowable *throwable) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException, initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_, message, throwable)
 }
 
-OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withNSException_(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message, NSException *throwable) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException, initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withNSException_, message, throwable)
+OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException *create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message, JavaLangThrowable *throwable) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException, initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_, message, throwable)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException)

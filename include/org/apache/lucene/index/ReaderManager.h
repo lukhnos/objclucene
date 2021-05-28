@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexReaderManager
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexReaderManager_) && (INCLUDE_ALL_OrgApacheLuceneIndexReaderManager || defined(INCLUDE_OrgApacheLuceneIndexReaderManager))
 #define OrgApacheLuceneIndexReaderManager_
 
@@ -26,9 +32,8 @@
 
 /*!
  @brief Utility class to safely share <code>DirectoryReader</code> instances across
- multiple threads, while periodically reopening.
- This class ensures each
- reader is closed only once all threads have finished using it.
+  multiple threads, while periodically reopening.This class ensures each
+  reader is closed only once all threads have finished using it.
  - seealso: SearcherManager
  */
 @interface OrgApacheLuceneIndexReaderManager : OrgApacheLuceneSearchReferenceManager
@@ -38,37 +43,38 @@
 /*!
  @brief Creates and returns a new ReaderManager from the given <code>Directory</code>.
  @param dir the directory to open the DirectoryReader on.
- @throws IOException If there is a low-level I/O error
+ @throw IOExceptionIf there is a low-level I/O error
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
  @brief Creates and returns a new ReaderManager from the given
- already-opened <code>DirectoryReader</code>, stealing
- the incoming reference.
+  already-opened <code>DirectoryReader</code>, stealing
+  the incoming reference.
  @param reader the directoryReader to use for future reopens
- @throws IOException If there is a low-level I/O error
+ @throw IOExceptionIf there is a low-level I/O error
  */
-- (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)reader;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)reader;
 
 /*!
- @brief Creates and returns a new ReaderManager from the given
+ @brief Creates and returns a new ReaderManager from the given 
  <code>IndexWriter</code>.
- @param writer
- the IndexWriter to open the IndexReader from.
- @param applyAllDeletes
- If <code>true</code>, all buffered deletes will be applied (made
- visible) in the <code>IndexSearcher</code> / <code>DirectoryReader</code>.
- If <code>false</code>, the deletes may or may not be applied, but
- remain buffered (in IndexWriter) so that they will be applied in
- the future. Applying deletes can be costly, so if your app can
- tolerate deleted documents being returned you might gain some
- performance by passing <code>false</code>. See
- <code>DirectoryReader.openIfChanged(DirectoryReader,IndexWriter,boolean)</code>.
- @throws IOException If there is a low-level I/O error
+ @param writer the IndexWriter to open the IndexReader from.
+ @param applyAllDeletes If 
+  <code> true </code> , all buffered deletes will be applied (made           visible) in the 
+ <code>IndexSearcher</code>  / <code>DirectoryReader</code> .           If 
+  <code> false </code> , the deletes may or may not be applied, but           remain buffered (in IndexWriter) so that they will be applied in
+            the future. Applying deletes can be costly, so if your app can
+            tolerate deleted documents being returned you might gain some
+            performance by passing 
+  <code> false </code> . See           <code>DirectoryReader.openIfChanged(DirectoryReader, IndexWriter, boolean)</code>
+  .
+ @throw IOExceptionIf there is a low-level I/O error
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                                            withBoolean:(jboolean)applyAllDeletes;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
+                                                      withBoolean:(jboolean)applyAllDeletes;
+
+- (OrgApacheLuceneIndexDirectoryReader *)acquire;
 
 #pragma mark Protected
 
@@ -79,6 +85,10 @@
 - (OrgApacheLuceneIndexDirectoryReader *)refreshIfNeededWithId:(OrgApacheLuceneIndexDirectoryReader *)referenceToRefresh;
 
 - (jboolean)tryIncRefWithId:(OrgApacheLuceneIndexDirectoryReader *)reference;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -106,4 +116,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReaderManager)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexReaderManager")

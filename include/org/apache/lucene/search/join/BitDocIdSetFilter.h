@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinBitDocIdSetFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinBitDocIdSetFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetFilter || defined(INCLUDE_OrgApacheLuceneSearchJoinBitDocIdSetFilter))
 #define OrgApacheLuceneSearchJoinBitDocIdSetFilter_
 
@@ -26,6 +32,7 @@
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
+@class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneUtilBitDocIdSet;
 @class OrgApacheLuceneUtilBitSet;
 @protocol OrgApacheLuceneUtilBits;
@@ -40,20 +47,22 @@
 - (OrgApacheLuceneUtilBitSet *)getBitSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 /*!
- @brief Same as <code>getDocIdSet(LeafReaderContext,Bits)</code> but does not take
- acceptDocs into account and guarantees to return a <code>BitDocIdSet</code>.
+ @brief Same as <code>getDocIdSet(LeafReaderContext, Bits)</code> but does not take
+  acceptDocs into account and guarantees to return a <code>BitDocIdSet</code>.
  */
 - (OrgApacheLuceneUtilBitDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
+- (OrgApacheLuceneSearchQuery *)java_clone;
+
 #pragma mark Protected
 
 /*!
  @brief Sole constructor, typically called from sub-classes.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -65,4 +74,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBitDocIdSetFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetFilter")

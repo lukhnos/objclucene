@@ -13,9 +13,19 @@
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/util/Accountable.h"
 #include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/Accountables must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneUtilAccountables ()
 
@@ -29,37 +39,39 @@
 
 __attribute__((unused)) static void OrgApacheLuceneUtilAccountables_init(OrgApacheLuceneUtilAccountables *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAccountables *new_OrgApacheLuceneUtilAccountables_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAccountables *new_OrgApacheLuceneUtilAccountables_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAccountables *create_OrgApacheLuceneUtilAccountables_init();
+__attribute__((unused)) static OrgApacheLuceneUtilAccountables *create_OrgApacheLuceneUtilAccountables_init(void);
 
 __attribute__((unused)) static JavaLangStringBuilder *OrgApacheLuceneUtilAccountables_toStringWithJavaLangStringBuilder_withOrgApacheLuceneUtilAccountable_withInt_(JavaLangStringBuilder *dest, id<OrgApacheLuceneUtilAccountable> a, jint depth);
 
-@interface OrgApacheLuceneUtilAccountables_$1 : NSObject < JavaUtilComparator >
+@interface OrgApacheLuceneUtilAccountables_1 : NSObject < JavaUtilComparator >
+
+- (instancetype)init;
 
 - (jint)compareWithId:(id<OrgApacheLuceneUtilAccountable>)o1
                withId:(id<OrgApacheLuceneUtilAccountable>)o2;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAccountables_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAccountables_1)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilAccountables_$1_init(OrgApacheLuceneUtilAccountables_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneUtilAccountables_1_init(OrgApacheLuceneUtilAccountables_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAccountables_$1 *new_OrgApacheLuceneUtilAccountables_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAccountables_1 *new_OrgApacheLuceneUtilAccountables_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAccountables_$1 *create_OrgApacheLuceneUtilAccountables_$1_init();
+__attribute__((unused)) static OrgApacheLuceneUtilAccountables_1 *create_OrgApacheLuceneUtilAccountables_1_init(void);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAccountables_$1)
-
-@interface OrgApacheLuceneUtilAccountables_$2 : NSObject < OrgApacheLuceneUtilAccountable > {
+@interface OrgApacheLuceneUtilAccountables_2 : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
   jlong val$bytes_;
   id<JavaUtilCollection> val$children_;
   NSString *val$description_;
 }
+
+- (instancetype)initWithLong:(jlong)capture$0
+      withJavaUtilCollection:(id<JavaUtilCollection>)capture$1
+                withNSString:(NSString *)capture$2;
 
 - (jlong)ramBytesUsed;
 
@@ -67,24 +79,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAccountables_$1)
 
 - (NSString *)description;
 
-- (instancetype)initWithLong:(jlong)capture$0
-      withJavaUtilCollection:(id<JavaUtilCollection>)capture$1
-                withNSString:(NSString *)capture$2;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAccountables_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAccountables_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAccountables_$2, val$children_, id<JavaUtilCollection>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAccountables_$2, val$description_, NSString *)
+__attribute__((unused)) static void OrgApacheLuceneUtilAccountables_2_initWithLong_withJavaUtilCollection_withNSString_(OrgApacheLuceneUtilAccountables_2 *self, jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2);
 
-__attribute__((unused)) static void OrgApacheLuceneUtilAccountables_$2_initWithLong_withJavaUtilCollection_withNSString_(OrgApacheLuceneUtilAccountables_$2 *self, jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2);
+__attribute__((unused)) static OrgApacheLuceneUtilAccountables_2 *new_OrgApacheLuceneUtilAccountables_2_initWithLong_withJavaUtilCollection_withNSString_(jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAccountables_$2 *new_OrgApacheLuceneUtilAccountables_$2_initWithLong_withJavaUtilCollection_withNSString_(jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneUtilAccountables_$2 *create_OrgApacheLuceneUtilAccountables_$2_initWithLong_withJavaUtilCollection_withNSString_(jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAccountables_$2)
+__attribute__((unused)) static OrgApacheLuceneUtilAccountables_2 *create_OrgApacheLuceneUtilAccountables_2_initWithLong_withJavaUtilCollection_withNSString_(jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2);
 
 @implementation OrgApacheLuceneUtilAccountables
 
@@ -127,16 +130,28 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Accountables", NULL, 0x2, NULL, NULL },
-    { "toStringWithOrgApacheLuceneUtilAccountable:", "toString", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "toStringWithJavaLangStringBuilder:withOrgApacheLuceneUtilAccountable:withInt:", "toString", "Ljava.lang.StringBuilder;", 0xa, NULL, NULL },
-    { "namedAccountableWithNSString:withOrgApacheLuceneUtilAccountable:", "namedAccountable", "Lorg.apache.lucene.util.Accountable;", 0x9, NULL, NULL },
-    { "namedAccountableWithNSString:withLong:", "namedAccountable", "Lorg.apache.lucene.util.Accountable;", 0x9, NULL, NULL },
-    { "namedAccountablesWithNSString:withJavaUtilMap:", "namedAccountables", "Ljava.util.Collection;", 0x9, NULL, "(Ljava/lang/String;Ljava/util/Map<*+Lorg/apache/lucene/util/Accountable;>;)Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "namedAccountableWithNSString:withJavaUtilCollection:withLong:", "namedAccountable", "Lorg.apache.lucene.util.Accountable;", 0x9, NULL, "(Ljava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;J)Lorg/apache/lucene/util/Accountable;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangStringBuilder;", 0xa, 0, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAccountable;", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAccountable;", 0x9, 3, 5, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x9, 6, 7, -1, 8, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAccountable;", 0x9, 3, 9, -1, 10, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAccountables = { 2, "Accountables", "org.apache.lucene.util", NULL, 0x1, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(toStringWithOrgApacheLuceneUtilAccountable:);
+  methods[2].selector = @selector(toStringWithJavaLangStringBuilder:withOrgApacheLuceneUtilAccountable:withInt:);
+  methods[3].selector = @selector(namedAccountableWithNSString:withOrgApacheLuceneUtilAccountable:);
+  methods[4].selector = @selector(namedAccountableWithNSString:withLong:);
+  methods[5].selector = @selector(namedAccountablesWithNSString:withJavaUtilMap:);
+  methods[6].selector = @selector(namedAccountableWithNSString:withJavaUtilCollection:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "toString", "LOrgApacheLuceneUtilAccountable;", "LJavaLangStringBuilder;LOrgApacheLuceneUtilAccountable;I", "namedAccountable", "LNSString;LOrgApacheLuceneUtilAccountable;", "LNSString;J", "namedAccountables", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<*+Lorg/apache/lucene/util/Accountable;>;)Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "LNSString;LJavaUtilCollection;J", "(Ljava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;J)Lorg/apache/lucene/util/Accountable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAccountables = { "Accountables", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x1, 7, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAccountables;
 }
 
@@ -195,76 +210,109 @@ id<JavaUtilCollection> OrgApacheLuceneUtilAccountables_namedAccountablesWithNSSt
   for (id<JavaUtilMap_Entry> __strong kv in nil_chk([((id<JavaUtilMap>) nil_chk(inArg)) entrySet])) {
     [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(JreStrcat("$$@C", prefix, @" '", [((id<JavaUtilMap_Entry>) nil_chk(kv)) getKey], '\''), [kv getValue])];
   }
-  JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(resources, create_OrgApacheLuceneUtilAccountables_$1_init());
+  JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(resources, create_OrgApacheLuceneUtilAccountables_1_init());
   return JavaUtilCollections_unmodifiableListWithJavaUtilList_(resources);
 }
 
 id<OrgApacheLuceneUtilAccountable> OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withJavaUtilCollection_withLong_(NSString *description_, id<JavaUtilCollection> children, jlong bytes) {
   OrgApacheLuceneUtilAccountables_initialize();
-  return create_OrgApacheLuceneUtilAccountables_$2_initWithLong_withJavaUtilCollection_withNSString_(bytes, children, description_);
+  return create_OrgApacheLuceneUtilAccountables_2_initWithLong_withJavaUtilCollection_withNSString_(bytes, children, description_);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAccountables)
 
-@implementation OrgApacheLuceneUtilAccountables_$1
+@implementation OrgApacheLuceneUtilAccountables_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilAccountables_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(id<OrgApacheLuceneUtilAccountable>)o1
                withId:(id<OrgApacheLuceneUtilAccountable>)o2 {
   return [((NSString *) nil_chk([((id<OrgApacheLuceneUtilAccountable>) nil_chk(o1)) description])) compareToWithId:[((id<OrgApacheLuceneUtilAccountable>) nil_chk(o2)) description]];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilAccountables_$1_init(self);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
 }
-J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilAccountables", "namedAccountablesWithNSString:withJavaUtilMap:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAccountables_$1 = { 2, "", "org.apache.lucene.util", "Accountables", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/Accountable;>;" };
-  return &_OrgApacheLuceneUtilAccountables_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compare", "LOrgApacheLuceneUtilAccountable;LOrgApacheLuceneUtilAccountable;", "LOrgApacheLuceneUtilAccountables;", "namedAccountablesWithNSString:withJavaUtilMap:", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/Accountable;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAccountables_1 = { "", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, 3, 4, -1 };
+  return &_OrgApacheLuceneUtilAccountables_1;
 }
 
 @end
 
-void OrgApacheLuceneUtilAccountables_$1_init(OrgApacheLuceneUtilAccountables_$1 *self) {
+void OrgApacheLuceneUtilAccountables_1_init(OrgApacheLuceneUtilAccountables_1 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneUtilAccountables_$1 *new_OrgApacheLuceneUtilAccountables_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAccountables_$1, init)
+OrgApacheLuceneUtilAccountables_1 *new_OrgApacheLuceneUtilAccountables_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAccountables_1, init)
 }
 
-OrgApacheLuceneUtilAccountables_$1 *create_OrgApacheLuceneUtilAccountables_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAccountables_$1, init)
+OrgApacheLuceneUtilAccountables_1 *create_OrgApacheLuceneUtilAccountables_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAccountables_1, init)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAccountables_$1)
+@implementation OrgApacheLuceneUtilAccountables_2
 
-@implementation OrgApacheLuceneUtilAccountables_$2
+- (instancetype)initWithLong:(jlong)capture$0
+      withJavaUtilCollection:(id<JavaUtilCollection>)capture$1
+                withNSString:(NSString *)capture$2 {
+  OrgApacheLuceneUtilAccountables_2_initWithLong_withJavaUtilCollection_withNSString_(self, capture$0, capture$1, capture$2);
+  return self;
+}
 
 - (jlong)ramBytesUsed {
   return val$bytes_;
 }
 
 - (id<JavaUtilCollection>)getChildResources {
-  return val$children_;
+  return JreRetainedLocalValue(val$children_);
 }
 
 - (NSString *)description {
-  return val$description_;
-}
-
-- (instancetype)initWithLong:(jlong)capture$0
-      withJavaUtilCollection:(id<JavaUtilCollection>)capture$1
-                withNSString:(NSString *)capture$2 {
-  OrgApacheLuceneUtilAccountables_$2_initWithLong_withJavaUtilCollection_withNSString_(self, capture$0, capture$1, capture$2);
-  return self;
+  return JreRetainedLocalValue(val$description_);
 }
 
 - (void)dealloc {
@@ -274,37 +322,43 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAccountables_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "initWithLong:withJavaUtilCollection:withNSString:", "", NULL, 0x0, NULL, "(JLjava/util/Collection<Lorg/apache/lucene/util/Accountable;>;Ljava/lang/String;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithLong:withJavaUtilCollection:withNSString:);
+  methods[1].selector = @selector(ramBytesUsed);
+  methods[2].selector = @selector(getChildResources);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$bytes_", NULL, 0x1012, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$children_", NULL, 0x1012, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", .constantValue.asLong = 0 },
-    { "val$description_", NULL, 0x1012, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$bytes_", "J", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$children_", "LJavaUtilCollection;", .constantValue.asLong = 0, 0x1012, -1, -1, 3, -1 },
+    { "val$description_", "LNSString;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilAccountables", "namedAccountableWithNSString:withJavaUtilCollection:withLong:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAccountables_$2 = { 2, "", "org.apache.lucene.util", "Accountables", 0x8008, 4, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilAccountables_$2;
+  static const void *ptrTable[] = { "JLJavaUtilCollection;LNSString;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString", "Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "LOrgApacheLuceneUtilAccountables;", "namedAccountableWithNSString:withJavaUtilCollection:withLong:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAccountables_2 = { "", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x8018, 4, 3, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneUtilAccountables_2;
 }
 
 @end
 
-void OrgApacheLuceneUtilAccountables_$2_initWithLong_withJavaUtilCollection_withNSString_(OrgApacheLuceneUtilAccountables_$2 *self, jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2) {
+void OrgApacheLuceneUtilAccountables_2_initWithLong_withJavaUtilCollection_withNSString_(OrgApacheLuceneUtilAccountables_2 *self, jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2) {
   self->val$bytes_ = capture$0;
   JreStrongAssign(&self->val$children_, capture$1);
   JreStrongAssign(&self->val$description_, capture$2);
   NSObject_init(self);
 }
 
-OrgApacheLuceneUtilAccountables_$2 *new_OrgApacheLuceneUtilAccountables_$2_initWithLong_withJavaUtilCollection_withNSString_(jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAccountables_$2, initWithLong_withJavaUtilCollection_withNSString_, capture$0, capture$1, capture$2)
+OrgApacheLuceneUtilAccountables_2 *new_OrgApacheLuceneUtilAccountables_2_initWithLong_withJavaUtilCollection_withNSString_(jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAccountables_2, initWithLong_withJavaUtilCollection_withNSString_, capture$0, capture$1, capture$2)
 }
 
-OrgApacheLuceneUtilAccountables_$2 *create_OrgApacheLuceneUtilAccountables_$2_initWithLong_withJavaUtilCollection_withNSString_(jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAccountables_$2, initWithLong_withJavaUtilCollection_withNSString_, capture$0, capture$1, capture$2)
+OrgApacheLuceneUtilAccountables_2 *create_OrgApacheLuceneUtilAccountables_2_initWithLong_withJavaUtilCollection_withNSString_(jlong capture$0, id<JavaUtilCollection> capture$1, NSString *capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAccountables_2, initWithLong_withJavaUtilCollection_withNSString_, capture$0, capture$1, capture$2)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAccountables_$2)

@@ -14,6 +14,7 @@
 #include "java/lang/Integer.h"
 #include "java/lang/System.h"
 #include "java/lang/Thread.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/reflect/Field.h"
 #include "java/net/InetSocketAddress.h"
 #include "java/net/Socket.h"
@@ -29,6 +30,10 @@
 #include "org/apache/lucene/store/VerifyingLockFactory.h"
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/Paths.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/LockStressTest must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreLockStressTest ()
 
@@ -46,6 +51,13 @@ NSString *OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME = @"test.lock";
   return OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneStoreLockStressTest_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 + (void)mainWithNSStringArray:(IOSObjectArray *)args {
   OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(args);
 }
@@ -54,27 +66,40 @@ NSString *OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME = @"test.lock";
   return OrgApacheLuceneStoreLockStressTest_getNewLockFactoryWithNSString_(lockFactoryClassName);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneStoreLockStressTest_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "mainWithNSStringArray:", "main", "V", 0x9, "Ljava.lang.Exception;", NULL },
-    { "getNewLockFactoryWithNSString:", "getNewLockFactory", "Lorg.apache.lucene.store.FSLockFactory;", 0xa, "Ljava.io.IOException;", NULL },
-    { "init", "LockStressTest", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreFSLockFactory;", 0xa, 3, 4, 5, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(mainWithNSStringArray:);
+  methods[2].selector = @selector(getNewLockFactoryWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCK_FILE_NAME", "LOCK_FILE_NAME", 0x18, "Ljava.lang.String;", &OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME, NULL, .constantValue.asLong = 0 },
+    { "LOCK_FILE_NAME", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 6, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockStressTest = { 2, "LockStressTest", "org.apache.lucene.store", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "main", "[LNSString;", "LJavaLangException;", "getNewLockFactory", "LNSString;", "LJavaIoIOException;", &OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockStressTest = { "LockStressTest", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreLockStressTest;
 }
 
 @end
+
+void OrgApacheLuceneStoreLockStressTest_init(OrgApacheLuceneStoreLockStressTest *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneStoreLockStressTest *new_OrgApacheLuceneStoreLockStressTest_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreLockStressTest, init)
+}
+
+OrgApacheLuceneStoreLockStressTest *create_OrgApacheLuceneStoreLockStressTest_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockStressTest, init)
+}
 
 void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *args) {
   OrgApacheLuceneStoreLockStressTest_initialize();
@@ -100,7 +125,7 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
   [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("$@$I$", @"Connecting to server ", addr, @" and registering as client ", myID, @"...")];
   {
     JavaNetSocket *socket = create_JavaNetSocket_init();
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [socket setReuseAddressWithBoolean:true];
       [socket connectWithJavaNetSocketAddress:addr withInt:500];
@@ -116,7 +141,7 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
       for (jint i = 0; i < count; i++) {
         @try {
           OrgApacheLuceneStoreLock *l = [verifyLF obtainLockWithOrgApacheLuceneStoreDirectory:lockDir withNSString:OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME];
-          NSException *__primaryException1 = nil;
+          JavaLangThrowable *__primaryException1 = nil;
           @try {
             if ([rnd nextIntWithInt:10] == 0) {
               if ([rnd nextBoolean]) {
@@ -124,11 +149,11 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
               }
               @try {
                 OrgApacheLuceneStoreLock *secondLock = [verifyLF obtainLockWithOrgApacheLuceneStoreDirectory:lockDir withNSString:OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME];
-                NSException *__primaryException1 = nil;
+                JavaLangThrowable *__primaryException1 = nil;
                 @try {
                   @throw create_JavaIoIOException_initWithNSString_(@"Double obtain");
                 }
-                @catch (NSException *e) {
+                @catch (JavaLangThrowable *e) {
                   __primaryException1 = e;
                   @throw e;
                 }
@@ -137,10 +162,12 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
                     if (__primaryException1 != nil) {
                       @try {
                         [secondLock close];
-                      } @catch (NSException *e) {
-                        [__primaryException1 addSuppressedWithNSException:e];
                       }
-                    } else {
+                      @catch (JavaLangThrowable *e) {
+                        [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                      }
+                    }
+                    else {
                       [secondLock close];
                     }
                   }
@@ -151,7 +178,7 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
             }
             JavaLangThread_sleepWithLong_(sleepTimeMS);
           }
-          @catch (NSException *e) {
+          @catch (JavaLangThrowable *e) {
             __primaryException1 = e;
             @throw e;
           }
@@ -160,10 +187,12 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
               if (__primaryException1 != nil) {
                 @try {
                   [l close];
-                } @catch (NSException *e) {
-                  [__primaryException1 addSuppressedWithNSException:e];
                 }
-              } else {
+                @catch (JavaLangThrowable *e) {
+                  [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                }
+              }
+              else {
                 [l close];
               }
             }
@@ -171,13 +200,13 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
         }
         @catch (OrgApacheLuceneStoreLockObtainFailedException *loe) {
         }
-        if (i % 500 == 0) {
-          [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("D$", (i * 100. / count), @"% done.")];
+        if (JreIntMod(i, 500) == 0) {
+          [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("D$", (i * 100. / count), @"% done.")];
         }
         JavaLangThread_sleepWithLong_(sleepTimeMS);
       }
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -186,16 +215,18 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
         if (__primaryException1 != nil) {
           @try {
             [socket close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [socket close];
         }
       }
     }
   }
-  [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("$I$", @"Finished ", count, @" tries.")];
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("$I$", @"Finished ", count, @" tries.")];
 }
 
 OrgApacheLuceneStoreFSLockFactory *OrgApacheLuceneStoreLockStressTest_getNewLockFactoryWithNSString_(NSString *lockFactoryClassName) {
@@ -211,18 +242,6 @@ OrgApacheLuceneStoreFSLockFactory *OrgApacheLuceneStoreLockStressTest_getNewLock
   @catch (JavaLangException *e) {
   }
   @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$$", @"Cannot get lock factory singleton of ", lockFactoryClassName));
-}
-
-void OrgApacheLuceneStoreLockStressTest_init(OrgApacheLuceneStoreLockStressTest *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneStoreLockStressTest *new_OrgApacheLuceneStoreLockStressTest_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreLockStressTest, init)
-}
-
-OrgApacheLuceneStoreLockStressTest *create_OrgApacheLuceneStoreLockStressTest_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockStressTest, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockStressTest)

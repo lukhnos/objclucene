@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexNoDeletionPolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexNoDeletionPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexNoDeletionPolicy || defined(INCLUDE_OrgApacheLuceneIndexNoDeletionPolicy))
 #define OrgApacheLuceneIndexNoDeletionPolicy_
 
@@ -24,17 +30,15 @@
 
 /*!
  @brief An <code>IndexDeletionPolicy</code> which keeps all index commits around, never
- deleting them.
- This class is a singleton and can be accessed by referencing
+  deleting them.This class is a singleton and can be accessed by referencing 
  <code>INSTANCE</code>.
  */
 @interface OrgApacheLuceneIndexNoDeletionPolicy : OrgApacheLuceneIndexIndexDeletionPolicy
-
-+ (OrgApacheLuceneIndexIndexDeletionPolicy *)INSTANCE;
+@property (readonly, class, strong) OrgApacheLuceneIndexIndexDeletionPolicy *INSTANCE NS_SWIFT_NAME(INSTANCE);
 
 #pragma mark Public
 
-- (OrgApacheLuceneIndexIndexDeletionPolicy *)clone;
+- (OrgApacheLuceneIndexIndexDeletionPolicy *)java_clone;
 
 - (void)onCommitWithJavaUtilList:(id<JavaUtilList>)commits;
 
@@ -47,7 +51,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexNoDeletionPolicy)
 /*!
  @brief The single instance of this class.
  */
-inline OrgApacheLuceneIndexIndexDeletionPolicy *OrgApacheLuceneIndexNoDeletionPolicy_get_INSTANCE();
+inline OrgApacheLuceneIndexIndexDeletionPolicy *OrgApacheLuceneIndexNoDeletionPolicy_get_INSTANCE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexDeletionPolicy *OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexNoDeletionPolicy, INSTANCE, OrgApacheLuceneIndexIndexDeletionPolicy *)
@@ -56,4 +60,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNoDeletionPolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexNoDeletionPolicy")

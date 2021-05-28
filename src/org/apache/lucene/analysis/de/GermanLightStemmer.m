@@ -7,6 +7,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/de/GermanLightStemmer.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/de/GermanLightStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisDeGermanLightStemmer ()
 
 - (jboolean)stEndingWithChar:(jchar)ch;
@@ -26,6 +30,13 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisDeGermanLightStemmer_
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisDeGermanLightStemmer_step2WithCharArray_withInt_(OrgApacheLuceneAnalysisDeGermanLightStemmer *self, IOSCharArray *s, jint len);
 
 @implementation OrgApacheLuceneAnalysisDeGermanLightStemmer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisDeGermanLightStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -73,26 +84,41 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisDeGermanLightStemmer_
   return OrgApacheLuceneAnalysisDeGermanLightStemmer_step2WithCharArray_withInt_(self, s, len);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisDeGermanLightStemmer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "stEndingWithChar:", "stEnding", "Z", 0x2, NULL, NULL },
-    { "step1WithCharArray:withInt:", "step1", "I", 0x2, NULL, NULL },
-    { "step2WithCharArray:withInt:", "step2", "I", 0x2, NULL, NULL },
-    { "init", "GermanLightStemmer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 5, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDeGermanLightStemmer = { 2, "GermanLightStemmer", "org.apache.lucene.analysis.de", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  methods[2].selector = @selector(stEndingWithChar:);
+  methods[3].selector = @selector(step1WithCharArray:withInt:);
+  methods[4].selector = @selector(step2WithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "stem", "[CI", "stEnding", "C", "step1", "step2" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDeGermanLightStemmer = { "GermanLightStemmer", "org.apache.lucene.analysis.de", ptrTable, methods, NULL, 7, 0x1, 5, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisDeGermanLightStemmer;
 }
 
 @end
+
+void OrgApacheLuceneAnalysisDeGermanLightStemmer_init(OrgApacheLuceneAnalysisDeGermanLightStemmer *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneAnalysisDeGermanLightStemmer *new_OrgApacheLuceneAnalysisDeGermanLightStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisDeGermanLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisDeGermanLightStemmer *create_OrgApacheLuceneAnalysisDeGermanLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisDeGermanLightStemmer, init)
+}
 
 jboolean OrgApacheLuceneAnalysisDeGermanLightStemmer_stEndingWithChar_(OrgApacheLuceneAnalysisDeGermanLightStemmer *self, jchar ch) {
   switch (ch) {
@@ -131,18 +157,6 @@ jint OrgApacheLuceneAnalysisDeGermanLightStemmer_step2WithCharArray_withInt_(Org
   if (len > 4 && IOSCharArray_Get(nil_chk(s), len - 2) == 'e' && (IOSCharArray_Get(s, len - 1) == 'r' || IOSCharArray_Get(s, len - 1) == 'n')) return len - 2;
   if (len > 4 && IOSCharArray_Get(nil_chk(s), len - 2) == 's' && IOSCharArray_Get(s, len - 1) == 't' && OrgApacheLuceneAnalysisDeGermanLightStemmer_stEndingWithChar_(self, IOSCharArray_Get(s, len - 3))) return len - 2;
   return len;
-}
-
-void OrgApacheLuceneAnalysisDeGermanLightStemmer_init(OrgApacheLuceneAnalysisDeGermanLightStemmer *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneAnalysisDeGermanLightStemmer *new_OrgApacheLuceneAnalysisDeGermanLightStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisDeGermanLightStemmer, init)
-}
-
-OrgApacheLuceneAnalysisDeGermanLightStemmer *create_OrgApacheLuceneAnalysisDeGermanLightStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisDeGermanLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisDeGermanLightStemmer)

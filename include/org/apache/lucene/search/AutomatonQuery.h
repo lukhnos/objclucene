@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchAutomatonQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchAutomatonQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchAutomatonQuery || defined(INCLUDE_OrgApacheLuceneSearchAutomatonQuery))
 #define OrgApacheLuceneSearchAutomatonQuery_
 
@@ -30,18 +36,18 @@
 /*!
  @brief A <code>Query</code> that will match terms against a finite-state machine.
  <p>
- This query will match documents that contain terms accepted by a given
- finite-state machine. The automaton can be constructed with the
+  This query will match documents that contain terms accepted by a given
+  finite-state machine. The automaton can be constructed with the 
  <code>org.apache.lucene.util.automaton</code> API. Alternatively, it can be
- created from a regular expression with <code>RegexpQuery</code> or from
- the standard Lucene wildcard syntax with <code>WildcardQuery</code>.
- </p>
- <p>
- When the query is executed, it will create an equivalent DFA of the
- finite-state machine, and will enumerate the term dictionary in an
- intelligent way to reduce the number of comparisons. For example: the regular
- expression of <code>[dl]og?</code> will make approximately four comparisons:
- do, dog, lo, and log.
+  created from a regular expression with <code>RegexpQuery</code> or from
+  the standard Lucene wildcard syntax with <code>WildcardQuery</code>.
+  </p>
+  <p>
+  When the query is executed, it will create an equivalent DFA of the
+  finite-state machine, and will enumerate the term dictionary in an
+  intelligent way to reduce the number of comparisons. For example: the regular
+  expression of <code>[dl]og?</code> will make approximately four comparisons:
+  do, dog, lo, and log. 
  </p>
  */
 @interface OrgApacheLuceneSearchAutomatonQuery : OrgApacheLuceneSearchMultiTermQuery {
@@ -61,46 +67,37 @@
 
 /*!
  @brief Create a new AutomatonQuery from an <code>Automaton</code>.
- @param term Term containing field and possibly some pattern structure. The
- term text is ignored.
- @param automaton Automaton to run, terms that are accepted are considered a
- match.
+ @param term Term containing field and possibly some pattern structure. The         term text is ignored.
+ @param automaton Automaton to run, terms that are accepted are considered a         match.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-       withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
 
 /*!
  @brief Create a new AutomatonQuery from an <code>Automaton</code>.
- @param term Term containing field and possibly some pattern structure. The
- term text is ignored.
- @param automaton Automaton to run, terms that are accepted are considered a
- match.
- @param maxDeterminizedStates maximum number of states in the resulting
- automata.  If the automata would need more than this many states
- TooComplextToDeterminizeException is thrown.  Higher number require more
- space but can process more complex automata.
+ @param term Term containing field and possibly some pattern structure. The         term text is ignored.
+ @param automaton Automaton to run, terms that are accepted are considered a         match.
+ @param maxDeterminizedStates maximum number of states in the resulting    automata.  If the automata would need more than this many states
+     TooComplextToDeterminizeException is thrown.  Higher number require more
+     space but can process more complex automata.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-       withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
-                                         withInt:(jint)maxDeterminizedStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
+                                                   withInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief Create a new AutomatonQuery from an <code>Automaton</code>.
- @param term Term containing field and possibly some pattern structure. The
- term text is ignored.
- @param automaton Automaton to run, terms that are accepted are considered a
- match.
- @param maxDeterminizedStates maximum number of states in the resulting
- automata.  If the automata would need more than this many states
- TooComplextToDeterminizeException is thrown.  Higher number require more
- space but can process more complex automata.
- @param isBinary if true, this automaton is already binary and
- will not go through the UTF32ToUTF8 conversion
+ @param term Term containing field and possibly some pattern structure. The         term text is ignored.
+ @param automaton Automaton to run, terms that are accepted are considered a         match.
+ @param maxDeterminizedStates maximum number of states in the resulting    automata.  If the automata would need more than this many states
+     TooComplextToDeterminizeException is thrown.  Higher number require more
+     space but can process more complex automata.
+ @param isBinary if true, this automaton is already binary and    will not go through the UTF32ToUTF8 conversion
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-       withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
-                                         withInt:(jint)maxDeterminizedStates
-                                     withBoolean:(jboolean)isBinary;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
+                                                   withInt:(jint)maxDeterminizedStates
+                                               withBoolean:(jboolean)isBinary;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -117,6 +114,10 @@
 
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
                                       withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -148,4 +149,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchAutomatonQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchAutomatonQuery")

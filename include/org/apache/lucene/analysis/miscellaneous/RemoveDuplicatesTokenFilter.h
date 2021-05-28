@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_
 
@@ -33,15 +39,13 @@
  @brief Creates a new RemoveDuplicatesTokenFilter
  @param inArg TokenStream that will be filtered
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 /*!
- 
  */
 - (jboolean)incrementToken;
 
 /*!
- 
  */
 - (void)reset;
 
@@ -59,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesT
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter")

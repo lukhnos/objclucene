@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreFilterDirectory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreFilterDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreFilterDirectory || defined(INCLUDE_OrgApacheLuceneStoreFilterDirectory))
 #define OrgApacheLuceneStoreFilterDirectory_
 
@@ -30,13 +36,12 @@
 /*!
  @brief Directory implementation that delegates calls to another directory.
  This class can be used to add limitations on top of an existing
- <code>Directory</code> implementation such as
- <code>NRTCachingDirectory</code> or to add additional
- sanity checks for tests. However, if you plan to write your own
+   <code>Directory</code> implementation such as
+   <code>NRTCachingDirectory</code> or to add additional
+   sanity checks for tests. However, if you plan to write your own  
  <code>Directory</code> implementation, you should consider extending directly
- <code>Directory</code> or <code>BaseDirectory</code> rather than try to reuse
- functionality of existing <code>Directory</code>s by extending this class.
-  
+   <code>Directory</code> or <code>BaseDirectory</code> rather than try to reuse
+   functionality of existing <code>Directory</code>s by extending this class.
  */
 @interface OrgApacheLuceneStoreFilterDirectory : OrgApacheLuceneStoreDirectory {
  @public
@@ -75,7 +80,7 @@
 
 /*!
  @brief Get the wrapped instance by <code>dir</code> as long as this reader is
- an instance of <code>FilterDirectory</code>.
+   an instance of <code>FilterDirectory</code>.
  */
 + (OrgApacheLuceneStoreDirectory *)unwrapWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
@@ -84,7 +89,11 @@
 /*!
  @brief Sole constructor, typically called from sub-classes.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -104,4 +113,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFilterDirectory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreFilterDirectory")

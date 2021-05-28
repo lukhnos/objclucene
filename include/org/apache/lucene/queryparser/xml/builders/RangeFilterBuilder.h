@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder))
 #define OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_
 
@@ -30,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
@@ -40,12 +46,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init(OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder")

@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/PostingsReaderBase.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/BlockTermState.h"
 #include "org/apache/lucene/codecs/PostingsReaderBase.h"
 #include "org/apache/lucene/index/FieldInfo.h"
@@ -14,6 +12,10 @@
 #include "org/apache/lucene/index/SegmentReadState.h"
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/store/IndexInput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/PostingsReaderBase must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
@@ -67,16 +69,28 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)s
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PostingsReaderBase", NULL, 0x4, NULL, NULL },
-    { "init__WithOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneIndexSegmentReadState:", "init", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "newTermState", NULL, "Lorg.apache.lucene.codecs.BlockTermState;", 0x401, "Ljava.io.IOException;", NULL },
-    { "decodeTermWithLongArray:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withBoolean:", "decodeTerm", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "postingsWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x401, "Ljava.io.IOException;", NULL },
-    { "checkIntegrity", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsBlockTermState;", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 4, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x401, 5, 6, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPostingsReaderBase = { 2, "PostingsReaderBase", "org.apache.lucene.codecs", NULL, 0x401, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(init__WithOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneIndexSegmentReadState:);
+  methods[2].selector = @selector(newTermState);
+  methods[3].selector = @selector(decodeTermWithLongArray:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withBoolean:);
+  methods[4].selector = @selector(postingsWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withOrgApacheLuceneIndexPostingsEnum:withInt:);
+  methods[5].selector = @selector(checkIntegrity);
+  methods[6].selector = @selector(close);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "init", "LOrgApacheLuceneStoreIndexInput;LOrgApacheLuceneIndexSegmentReadState;", "LJavaIoIOException;", "decodeTerm", "[JLOrgApacheLuceneStoreDataInput;LOrgApacheLuceneIndexFieldInfo;LOrgApacheLuceneCodecsBlockTermState;Z", "postings", "LOrgApacheLuceneIndexFieldInfo;LOrgApacheLuceneCodecsBlockTermState;LOrgApacheLuceneIndexPostingsEnum;I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPostingsReaderBase = { "PostingsReaderBase", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 7, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsPostingsReaderBase;
 }
 

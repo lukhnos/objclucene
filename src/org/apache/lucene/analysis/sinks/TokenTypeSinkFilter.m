@@ -3,11 +3,16 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/sinks/TokenTypeSinkFilter.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/sinks/TeeSinkTokenFilter.h"
 #include "org/apache/lucene/analysis/sinks/TokenTypeSinkFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
 #include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/sinks/TokenTypeSinkFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter () {
  @public
@@ -41,15 +46,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter, typeAtt_, i
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "TokenTypeSinkFilter", NULL, 0x1, NULL, NULL },
-    { "acceptWithOrgApacheLuceneUtilAttributeSource:", "accept", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(acceptWithOrgApacheLuceneUtilAttributeSource:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "typeToMatch_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "typeToMatch_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "typeAtt_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter = { 2, "TokenTypeSinkFilter", "org.apache.lucene.analysis.sinks", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "accept", "LOrgApacheLuceneUtilAttributeSource;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter = { "TokenTypeSinkFilter", "org.apache.lucene.analysis.sinks", ptrTable, methods, fields, 7, 0x1, 2, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton || defined(INCLUDE_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton))
 #define OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_
 
@@ -33,17 +39,16 @@
 /*!
  @brief Construct with a default number of maxDeterminizedStates.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
  @brief Construct specifying maxDeterminizedStates.
  @param a Automaton to match
- @param maxDeterminizedStates maximum number of states that the automataon
- can have once determinized.  If more states are required to determinize
- it then a TooComplexToDeterminizeException is thrown.
+ @param maxDeterminizedStates maximum number of states that the automataon    can have once determinized.  If more states are required to determinize
+     it then a TooComplexToDeterminizeException is thrown.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                      withInt:(jint)maxDeterminizedStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
+                                                                withInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief Returns true if the given string is accepted by this automaton
@@ -56,6 +61,17 @@
  @brief Returns true if the given string is accepted by this automaton.
  */
 - (jboolean)runWithNSString:(NSString *)s;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg0
+                                                                withInt:(jint)arg1
+                                                            withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg0
+                                                                withInt:(jint)arg1
+                                                            withBoolean:(jboolean)arg2
+                                                                withInt:(jint)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -77,4 +93,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonCharacterRunAutomaton)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton")

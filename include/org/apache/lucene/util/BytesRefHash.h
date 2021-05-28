@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneUtilBytesRefHash_BytesStartArray 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilBytesRefHash_) && (INCLUDE_ALL_OrgApacheLuceneUtilBytesRefHash || defined(INCLUDE_OrgApacheLuceneUtilBytesRefHash))
 #define OrgApacheLuceneUtilBytesRefHash_
 
@@ -27,16 +33,17 @@
 
 /*!
  @brief <code>BytesRefHash</code> is a special purpose hash-map like data-structure
- optimized for <code>BytesRef</code> instances.
- BytesRefHash maintains mappings of
- byte arrays to ids (Map&lt;BytesRef,int&gt;) storing the hashed bytes
- efficiently in continuous storage. The mapping to the id is
- encapsulated inside <code>BytesRefHash</code> and is guaranteed to be increased
- for each added <code>BytesRef</code>.
+  optimized for <code>BytesRef</code> instances.BytesRefHash maintains mappings of
+  byte arrays to ids (Map&lt;BytesRef,int&gt;) storing the hashed bytes
+  efficiently in continuous storage.
+ The mapping to the id is
+  encapsulated inside <code>BytesRefHash</code> and is guaranteed to be increased
+  for each added <code>BytesRef</code>.
+   
  <p>
- Note: The maximum capacity <code>BytesRef</code> instance passed to
+  Note: The maximum capacity <code>BytesRef</code> instance passed to 
  <code>add(BytesRef)</code> must not be longer than <code>ByteBlockPool.BYTE_BLOCK_SIZE</code>-2. 
- The internal storage is limited to 2GB total byte storage.
+  The internal storage is limited to 2GB total byte storage. 
  </p>
  */
 @interface OrgApacheLuceneUtilBytesRefHash : NSObject {
@@ -44,61 +51,58 @@
   OrgApacheLuceneUtilByteBlockPool *pool_;
   IOSIntArray *bytesStart_;
 }
-
-+ (jint)DEFAULT_CAPACITY;
+@property (readonly, class) jint DEFAULT_CAPACITY NS_SWIFT_NAME(DEFAULT_CAPACITY);
 
 #pragma mark Public
 
 /*!
- @brief Creates a new <code>BytesRefHash</code> with a <code>ByteBlockPool</code> using a
+ @brief Creates a new <code>BytesRefHash</code> with a <code>ByteBlockPool</code> using a 
  <code>DirectAllocator</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new <code>BytesRefHash</code>
  */
-- (instancetype)initWithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool;
 
 /*!
  @brief Creates a new <code>BytesRefHash</code>
  */
-- (instancetype)initWithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool
-                                                 withInt:(jint)capacity
-     withOrgApacheLuceneUtilBytesRefHash_BytesStartArray:(OrgApacheLuceneUtilBytesRefHash_BytesStartArray *)bytesStartArray;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool
+                                                           withInt:(jint)capacity
+               withOrgApacheLuceneUtilBytesRefHash_BytesStartArray:(OrgApacheLuceneUtilBytesRefHash_BytesStartArray *)bytesStartArray;
 
 /*!
  @brief Adds a new <code>BytesRef</code>
- @param bytes
- the bytes to hash
+ @param bytes the bytes to hash
  @return the id the given bytes are hashed if there was no mapping for the
- given bytes, otherwise <code>(-(id)-1)</code>. This guarantees
- that the return value will always be &gt;= 0 if the given bytes
- haven't been hashed before.
- @throws MaxBytesLengthExceededException
+          given bytes, otherwise <code>(-(id)-1)</code>. This guarantees
+          that the return value will always be &gt;= 0 if the given bytes
+          haven't been hashed before.
+ @throw MaxBytesLengthExceededException
  if the given bytes are <code>> 2 +</code>
- <code>ByteBlockPool.BYTE_BLOCK_SIZE</code>
+            <code>ByteBlockPool.BYTE_BLOCK_SIZE</code>
  */
 - (jint)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
 /*!
  @brief Adds a "arbitrary" int offset instead of a BytesRef
- term.
- This is used in the indexer to hold the hash for term
- vectors, because they do not redundantly store the byte[] term
- directly and instead reference the byte[] term
- already stored by the postings BytesRefHash.  See
- add(int textStart) in TermsHashPerField. 
+   term.This is used in the indexer to hold the hash for term
+   vectors, because they do not redundantly store the byte[] term
+   directly and instead reference the byte[] term
+   already stored by the postings BytesRefHash.
+ See
+   add(int textStart) in TermsHashPerField.
  */
 - (jint)addByPoolOffsetWithInt:(jint)offset;
 
 /*!
- @brief Returns the bytesStart offset into the internally used
+ @brief Returns the bytesStart offset into the internally used 
  <code>ByteBlockPool</code> for the given bytesID
- @param bytesID
- the id to look up
+ @param bytesID the id to look up
  @return the bytesStart offset into the internally used
- <code>ByteBlockPool</code> for the given id
+          <code>ByteBlockPool</code> for the given id
  */
 - (jint)byteStartWithInt:(jint)bytesID;
 
@@ -116,34 +120,31 @@
 
 /*!
  @brief Returns the id of the given <code>BytesRef</code>.
- @param bytes
- the bytes to look for
+ @param bytes the bytes to look for
  @return the id of the given bytes, or <code>-1</code> if there is no mapping for the
- given bytes.
+          given bytes.
  */
 - (jint)findWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
 /*!
  @brief Populates and returns a <code>BytesRef</code> with the bytes for the given
- bytesID.
+  bytesID.
  <p>
- Note: the given bytesID must be a positive integer less than the current
- size (<code>size()</code>)
- @param bytesID
- the id
- @param ref
- the <code>BytesRef</code> to populate
+  Note: the given bytesID must be a positive integer less than the current
+  size (<code>size()</code>)
+ @param bytesID the id
+ @param ref the 
+ <code>BytesRef</code>  to populate
  @return the given BytesRef instance populated with the bytes for the given
- bytesID
+          bytesID
  */
 - (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)bytesID
             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)ref;
 
 /*!
  @brief reinitializes the <code>BytesRefHash</code> after a previous <code>clear()</code>
- call.
- If <code>clear()</code> has not been called previously this method has no
- effect.
+  call.If <code>clear()</code> has not been called previously this method has no
+  effect.
  */
 - (void)reinit;
 
@@ -156,23 +157,23 @@
 /*!
  @brief Returns the values array sorted by the referenced byte values.
  <p>
- Note: This is a destructive operation. <code>clear()</code> must be called in
- order to reuse this <code>BytesRefHash</code> instance.
+  Note: This is a destructive operation. <code>clear()</code> must be called in
+  order to reuse this <code>BytesRefHash</code> instance. 
  </p>
- @param comp
- the <code>Comparator</code> used for sorting
+ @param comp the 
+ <code>Comparator</code>  used for sorting
  */
 - (IOSIntArray *)sortWithJavaUtilComparator:(id<JavaUtilComparator>)comp;
 
 #pragma mark Package-Private
 
 /*!
- @brief Returns the ids array in arbitrary order.
- Valid ids start at offset of 0
- and end at a limit of <code>size()</code> - 1
+ @brief Returns the ids array in arbitrary order.Valid ids start at offset of 0
+  and end at a limit of <code>size()</code> - 1 
  <p>
- Note: This is a destructive operation. <code>clear()</code> must be called in
- order to reuse this <code>BytesRefHash</code> instance.
+  Note: This is a destructive operation.
+ <code>clear()</code> must be called in
+  order to reuse this <code>BytesRefHash</code> instance. 
  </p>
  */
 - (IOSIntArray *)compact;
@@ -184,15 +185,15 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBytesRefHash)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefHash, pool_, OrgApacheLuceneUtilByteBlockPool *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefHash, bytesStart_, IOSIntArray *)
 
-inline jint OrgApacheLuceneUtilBytesRefHash_get_DEFAULT_CAPACITY();
+inline jint OrgApacheLuceneUtilBytesRefHash_get_DEFAULT_CAPACITY(void);
 #define OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY 16
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilBytesRefHash, DEFAULT_CAPACITY, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilBytesRefHash_init(OrgApacheLuceneUtilBytesRefHash *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRefHash *new_OrgApacheLuceneUtilBytesRefHash_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRefHash *new_OrgApacheLuceneUtilBytesRefHash_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRefHash *create_OrgApacheLuceneUtilBytesRefHash_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRefHash *create_OrgApacheLuceneUtilBytesRefHash_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilBytesRefHash *self, OrgApacheLuceneUtilByteBlockPool *pool);
 
@@ -217,15 +218,31 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefHash)
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+@class JavaLangThrowable;
+
 /*!
- @brief Thrown if a <code>BytesRef</code> exceeds the <code>BytesRefHash</code> limit of
+ @brief Thrown if a <code>BytesRef</code> exceeds the <code>BytesRefHash</code> limit of 
  <code>ByteBlockPool.BYTE_BLOCK_SIZE</code>-2.
  */
 @interface OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException : JavaLangRuntimeException
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)message;
+- (instancetype __nonnull)initWithNSString:(NSString *)message;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1
+                               withBoolean:(jboolean)arg2
+                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -254,15 +271,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceede
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief A <code>Counter</code> reference holding the number of bytes used by this
- <code>BytesStartArray</code>.
- The <code>BytesRefHash</code> uses this reference to
- track it memory usage
+ @brief A <code>Counter</code> reference holding the number of bytes used by this 
+ <code>BytesStartArray</code>.The <code>BytesRefHash</code> uses this reference to
+  track it memory usage
  @return a <code>AtomicLong</code> reference holding the number of bytes used
- by this <code>BytesStartArray</code>.
+          by this <code>BytesStartArray</code>.
  */
 - (OrgApacheLuceneUtilCounter *)bytesUsed;
 
@@ -279,8 +295,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceede
 - (IOSIntArray *)grow;
 
 /*!
- @brief Initializes the BytesStartArray.
- This call will allocate memory
+ @brief Initializes the BytesStartArray.This call will allocate memory
  @return the initialized bytes start array
  */
 - (IOSIntArray *)init__ OBJC_METHOD_FAMILY_NONE;
@@ -303,8 +318,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefHash_BytesStartArray)
 
 /*!
  @brief A simple <code>BytesStartArray</code> that tracks
- memory allocation using a private <code>Counter</code>
- instance.
+   memory allocation using a private <code>Counter</code>
+   instance.
  */
 @interface OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray : OrgApacheLuceneUtilBytesRefHash_BytesStartArray {
  @public
@@ -313,10 +328,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefHash_BytesStartArray)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)initSize;
+- (instancetype __nonnull)initWithInt:(jint)initSize;
 
-- (instancetype)initWithInt:(jint)initSize
-withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
+- (instancetype __nonnull)initWithInt:(jint)initSize
+       withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
 
 - (OrgApacheLuceneUtilCounter *)bytesUsed;
 
@@ -325,6 +340,10 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
 - (IOSIntArray *)grow;
 
 - (IOSIntArray *)init__ OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -346,4 +365,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBytesRefHash")

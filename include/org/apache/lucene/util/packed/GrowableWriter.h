@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedGrowableWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedGrowableWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedGrowableWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedGrowableWriter))
 #define OrgApacheLuceneUtilPackedGrowableWriter_
 
@@ -25,9 +31,9 @@
 
 /*!
  @brief Implements <code>PackedInts.Mutable</code>, but grows the
- bit count of the underlying packed ints on-demand.
+  bit count of the underlying packed ints on-demand.
  <p>Beware that this class will accept to set negative values but in order
- to do this, it will grow the number of bits per value to 64.
+  to do this, it will grow the number of bits per value to 64. 
  <p>@@lucene.internal</p>
  */
 @interface OrgApacheLuceneUtilPackedGrowableWriter : OrgApacheLuceneUtilPackedPackedInts_Mutable
@@ -35,13 +41,13 @@
 #pragma mark Public
 
 /*!
- @param startBitsPerValue       the initial number of bits per value, may grow depending on the data
- @param valueCount              the number of values
+ @param startBitsPerValue the initial number of bits per value, may grow depending on the data
+ @param valueCount the number of values
  @param acceptableOverheadRatio an acceptable overhead ratio
  */
-- (instancetype)initWithInt:(jint)startBitsPerValue
-                    withInt:(jint)valueCount
-                  withFloat:(jfloat)acceptableOverheadRatio;
+- (instancetype __nonnull)initWithInt:(jint)startBitsPerValue
+                              withInt:(jint)valueCount
+                            withFloat:(jfloat)acceptableOverheadRatio;
 
 - (void)clear;
 
@@ -76,6 +82,10 @@
 
 - (jint)size;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedGrowableWriter)
@@ -90,4 +100,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedGrowableWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedGrowableWriter")

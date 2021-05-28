@@ -3,11 +3,9 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/DirectWriter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/EOFException.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
@@ -18,16 +16,20 @@
 #include "org/apache/lucene/util/packed/DirectWriter.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/DirectWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilPackedDirectWriter ()
 
 - (void)flush;
 
 /*!
  @brief Round a number of bits per value to the next amount of bits per value that
- is supported by this writer.
+  is supported by this writer.
  @param bitsRequired the amount of bits required
  @return the next number of bits per value that is gte the provided value
- and supported by this writer
+          and supported by this writer
  */
 + (jint)roundBitsWithInt:(jint)bitsRequired;
 
@@ -55,8 +57,8 @@ IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE;
 }
 
 - (void)addWithLong:(jlong)l {
-  JreAssert((bitsPerValue_ == 64 || (l >= 0 && l <= OrgApacheLuceneUtilPackedPackedInts_maxValueWithInt_(bitsPerValue_))), (JavaLangInteger_valueOfWithInt_(bitsPerValue_)));
-  JreAssert((!finished_), (@"org/apache/lucene/util/packed/DirectWriter.java:72 condition failed: assert !finished;"));
+  JreAssert(bitsPerValue_ == 64 || (l >= 0 && l <= OrgApacheLuceneUtilPackedPackedInts_maxValueWithInt_(bitsPerValue_)), JavaLangInteger_valueOfWithInt_(bitsPerValue_));
+  JreAssert(!finished_, @"org/apache/lucene/util/packed/DirectWriter.java:72 condition failed: assert !finished;");
   if (count_ >= numValues_) {
     @throw create_JavaIoEOFException_initWithNSString_(@"Writing past end of stream");
   }
@@ -75,7 +77,7 @@ IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE;
   if (count_ != numValues_) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$J$J", @"Wrong number of values added, expected: ", numValues_, @", got: ", count_));
   }
-  JreAssert((!finished_), (@"org/apache/lucene/util/packed/DirectWriter.java:96 condition failed: assert !finished;"));
+  JreAssert(!finished_, @"org/apache/lucene/util/packed/DirectWriter.java:96 condition failed: assert !finished;");
   OrgApacheLuceneUtilPackedDirectWriter_flush(self);
   for (jint i = 0; i < 3; i++) {
     [((OrgApacheLuceneStoreIndexOutput *) nil_chk(output_)) writeByteWithByte:(jbyte) 0];
@@ -109,39 +111,52 @@ IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE;
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedDirectWriter;", 0x9, 4, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 7, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 8, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexOutput:withLong:withInt:);
+  methods[1].selector = @selector(addWithLong:);
+  methods[2].selector = @selector(flush);
+  methods[3].selector = @selector(finish);
+  methods[4].selector = @selector(getInstanceWithOrgApacheLuceneStoreIndexOutput:withLong:withInt:);
+  methods[5].selector = @selector(roundBitsWithInt:);
+  methods[6].selector = @selector(bitsRequiredWithLong:);
+  methods[7].selector = @selector(unsignedBitsRequiredWithLong:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "bitsPerValue_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numValues_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "output_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "count_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "finished_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "off_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "nextBlocks_", "[B", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "nextValues_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "encoder_", "LOrgApacheLuceneUtilPackedBulkOperation;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "iterations_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "SUPPORTED_BITS_PER_VALUE", "[I", .constantValue.asLong = 0, 0x18, -1, 9, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexOutput;JI", "add", "J", "LJavaIoIOException;", "getInstance", "roundBits", "I", "bitsRequired", "unsignedBitsRequired", &OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectWriter = { "DirectWriter", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x11, 8, 11, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilPackedDirectWriter;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedDirectWriter class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE, [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64 } count:14]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPackedDirectWriter)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexOutput:withLong:withInt:", "DirectWriter", NULL, 0x0, NULL, NULL },
-    { "addWithLong:", "add", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "flush", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "finish", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getInstanceWithOrgApacheLuceneStoreIndexOutput:withLong:withInt:", "getInstance", "Lorg.apache.lucene.util.packed.DirectWriter;", 0x9, NULL, NULL },
-    { "roundBitsWithInt:", "roundBits", "I", 0xa, NULL, NULL },
-    { "bitsRequiredWithLong:", "bitsRequired", "I", 0x9, NULL, NULL },
-    { "unsignedBitsRequiredWithLong:", "unsignedBitsRequired", "I", 0x9, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "bitsPerValue_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numValues_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "output_", NULL, 0x10, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "finished_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "off_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextBlocks_", NULL, 0x10, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextValues_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "encoder_", NULL, 0x10, "Lorg.apache.lucene.util.packed.BulkOperation;", NULL, NULL, .constantValue.asLong = 0 },
-    { "iterations_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "SUPPORTED_BITS_PER_VALUE", "SUPPORTED_BITS_PER_VALUE", 0x18, "[I", &OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectWriter = { 2, "DirectWriter", "org.apache.lucene.util.packed", NULL, 0x11, 8, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilPackedDirectWriter;
 }
 
 @end

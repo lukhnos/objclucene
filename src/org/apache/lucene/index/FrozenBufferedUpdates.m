@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/FrozenBufferedUpdates.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -16,7 +17,9 @@
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
+#include "java/util/Spliterator.h"
 #include "java/util/concurrent/atomic/AtomicInteger.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/index/BufferedUpdates.h"
 #include "org/apache/lucene/index/BufferedUpdatesStream.h"
 #include "org/apache/lucene/index/DocValuesUpdate.h"
@@ -27,6 +30,10 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/FrozenBufferedUpdates must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexFrozenBufferedUpdates () {
  @public
   jlong gen_;
@@ -34,34 +41,32 @@
 
 @end
 
-@interface OrgApacheLuceneIndexFrozenBufferedUpdates_$1 : NSObject < JavaLangIterable > {
+@interface OrgApacheLuceneIndexFrozenBufferedUpdates_1 : NSObject < JavaLangIterable > {
  @public
   OrgApacheLuceneIndexFrozenBufferedUpdates *this$0_;
 }
 
-- (id<JavaUtilIterator>)iterator;
-
 - (instancetype)initWithOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)outer$;
+
+- (id<JavaUtilIterator>)iterator;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFrozenBufferedUpdates_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFrozenBufferedUpdates_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFrozenBufferedUpdates_$1, this$0_, OrgApacheLuceneIndexFrozenBufferedUpdates *)
+__attribute__((unused)) static void OrgApacheLuceneIndexFrozenBufferedUpdates_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates_1 *self, OrgApacheLuceneIndexFrozenBufferedUpdates *outer$);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexFrozenBufferedUpdates_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *self, OrgApacheLuceneIndexFrozenBufferedUpdates *outer$);
+__attribute__((unused)) static OrgApacheLuceneIndexFrozenBufferedUpdates_1 *new_OrgApacheLuceneIndexFrozenBufferedUpdates_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *new_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *outer$) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexFrozenBufferedUpdates_1 *create_OrgApacheLuceneIndexFrozenBufferedUpdates_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *create_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFrozenBufferedUpdates_$1)
-
-@interface OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1 : NSObject < JavaUtilIterator > {
+@interface OrgApacheLuceneIndexFrozenBufferedUpdates_1_1 : NSObject < JavaUtilIterator > {
  @public
-  OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *this$0_;
+  OrgApacheLuceneIndexFrozenBufferedUpdates_1 *this$0_;
   jint upto_;
 }
+
+- (instancetype)initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1:(OrgApacheLuceneIndexFrozenBufferedUpdates_1 *)outer$;
 
 - (jboolean)hasNext;
 
@@ -69,21 +74,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFrozenBufferedUpdates_$1)
 
 - (void)remove;
 
-- (instancetype)initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1:(OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFrozenBufferedUpdates_1_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1, this$0_, OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *)
+__attribute__((unused)) static void OrgApacheLuceneIndexFrozenBufferedUpdates_1_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1_(OrgApacheLuceneIndexFrozenBufferedUpdates_1_1 *self, OrgApacheLuceneIndexFrozenBufferedUpdates_1 *outer$);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1_(OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1 *self, OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *outer$);
+__attribute__((unused)) static OrgApacheLuceneIndexFrozenBufferedUpdates_1_1 *new_OrgApacheLuceneIndexFrozenBufferedUpdates_1_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1_(OrgApacheLuceneIndexFrozenBufferedUpdates_1 *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1 *new_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1_(OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *outer$) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1 *create_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1_(OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1)
+__attribute__((unused)) static OrgApacheLuceneIndexFrozenBufferedUpdates_1_1 *create_OrgApacheLuceneIndexFrozenBufferedUpdates_1_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1_(OrgApacheLuceneIndexFrozenBufferedUpdates_1 *outer$);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexFrozenBufferedUpdates)
 
@@ -95,20 +94,20 @@ jint OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY;
   return OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY;
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)deletes
-                                                withBoolean:(jboolean)isSegmentPrivate {
-  OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(self, deletes, isSegmentPrivate);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)deletes
+                                                              withBoolean:(jboolean)isSegmentPrivate {
+  OrgApacheLuceneIndexFrozenBufferedUpdates_initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(self, deletes, isSegmentPrivate);
   return self;
 }
 
 - (void)setDelGenWithLong:(jlong)gen {
-  JreAssert((self->gen_ == -1), (@"org/apache/lucene/index/FrozenBufferedUpdates.java:122 condition failed: assert this.gen == -1;"));
+  JreAssert(self->gen_ == -1, @"org/apache/lucene/index/FrozenBufferedUpdates.java:122 condition failed: assert this.gen == -1;");
   self->gen_ = gen;
   [((OrgApacheLuceneIndexPrefixCodedTerms *) nil_chk(terms_)) setDelGenWithLong:gen];
 }
 
 - (jlong)delGen {
-  JreAssert((gen_ != -1), (@"org/apache/lucene/index/FrozenBufferedUpdates.java:128 condition failed: assert gen != -1;"));
+  JreAssert(gen_ != -1, @"org/apache/lucene/index/FrozenBufferedUpdates.java:128 condition failed: assert gen != -1;");
   return gen_;
 }
 
@@ -117,7 +116,7 @@ jint OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY;
 }
 
 - (id<JavaLangIterable>)queriesIterable {
-  return create_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(self);
+  return create_OrgApacheLuceneIndexFrozenBufferedUpdates_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(self);
 }
 
 - (NSString *)description {
@@ -147,6 +146,44 @@ jint OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY;
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPrefixCodedTerms_TermIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangIterable;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates:withBoolean:);
+  methods[1].selector = @selector(setDelGenWithLong:);
+  methods[2].selector = @selector(delGen);
+  methods[3].selector = @selector(termIterator);
+  methods[4].selector = @selector(queriesIterable);
+  methods[5].selector = @selector(description);
+  methods[6].selector = @selector(any);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BYTES_PER_DEL_QUERY", "I", .constantValue.asLong = 0, 0x18, -1, 5, -1, -1 },
+    { "terms_", "LOrgApacheLuceneIndexPrefixCodedTerms;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "queries_", "[LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "queryLimits_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numericDVUpdates_", "[LOrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "binaryDVUpdates_", "[LOrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "bytesUsed_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numTermDeletes_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "gen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "isSegmentPrivate_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexBufferedUpdates;Z", "setDelGen", "J", "()Ljava/lang/Iterable<Lorg/apache/lucene/index/BufferedUpdatesStream$QueryAndLimit;>;", "toString", &OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFrozenBufferedUpdates = { "FrozenBufferedUpdates", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 7, 10, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexFrozenBufferedUpdates;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexFrozenBufferedUpdates class]) {
     OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY = JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + 24;
@@ -154,39 +191,13 @@ jint OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY;
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexBufferedUpdates:withBoolean:", "FrozenBufferedUpdates", NULL, 0x1, NULL, NULL },
-    { "setDelGenWithLong:", "setDelGen", "V", 0x1, NULL, NULL },
-    { "delGen", NULL, "J", 0x1, NULL, NULL },
-    { "termIterator", NULL, "Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;", 0x1, NULL, NULL },
-    { "queriesIterable", NULL, "Ljava.lang.Iterable;", 0x1, NULL, "()Ljava/lang/Iterable<Lorg/apache/lucene/index/BufferedUpdatesStream$QueryAndLimit;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "any", NULL, "Z", 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BYTES_PER_DEL_QUERY", "BYTES_PER_DEL_QUERY", 0x18, "I", &OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY, NULL, .constantValue.asLong = 0 },
-    { "terms_", NULL, 0x10, "Lorg.apache.lucene.index.PrefixCodedTerms;", NULL, NULL, .constantValue.asLong = 0 },
-    { "queries_", NULL, 0x10, "[Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryLimits_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numericDVUpdates_", NULL, 0x10, "[Lorg.apache.lucene.index.DocValuesUpdate$NumericDocValuesUpdate;", NULL, NULL, .constantValue.asLong = 0 },
-    { "binaryDVUpdates_", NULL, 0x10, "[Lorg.apache.lucene.index.DocValuesUpdate$BinaryDocValuesUpdate;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesUsed_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numTermDeletes_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "gen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "isSegmentPrivate_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFrozenBufferedUpdates = { 2, "FrozenBufferedUpdates", "org.apache.lucene.index", NULL, 0x0, 7, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexFrozenBufferedUpdates;
-}
-
 @end
 
-void OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexFrozenBufferedUpdates *self, OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate) {
+void OrgApacheLuceneIndexFrozenBufferedUpdates_initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexFrozenBufferedUpdates *self, OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate) {
   NSObject_init(self);
   self->gen_ = -1;
   self->isSegmentPrivate_ = isSegmentPrivate;
-  JreAssert((!isSegmentPrivate || [((id<JavaUtilMap>) nil_chk(((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(deletes))->terms_)) size] == 0), (@"segment private package should only have del queries"));
+  JreAssert(!isSegmentPrivate || [((id<JavaUtilMap>) nil_chk(((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(deletes))->terms_)) size] == 0, @"segment private package should only have del queries");
   IOSObjectArray *termsArray = [((id<JavaUtilSet>) nil_chk([((id<JavaUtilMap>) nil_chk(((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(deletes))->terms_)) keySet])) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[deletes->terms_ size] type:OrgApacheLuceneIndexTerm_class_()]];
   OrgApacheLuceneUtilArrayUtil_timSortWithJavaLangComparableArray_(termsArray);
   OrgApacheLuceneIndexPrefixCodedTerms_Builder *builder = create_OrgApacheLuceneIndexPrefixCodedTerms_Builder_init();
@@ -230,29 +241,37 @@ void OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBuffe
   self->numTermDeletes_ = [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(deletes->numTermDeletes_)) get];
 }
 
-OrgApacheLuceneIndexFrozenBufferedUpdates *new_OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates, initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_, deletes, isSegmentPrivate)
+OrgApacheLuceneIndexFrozenBufferedUpdates *new_OrgApacheLuceneIndexFrozenBufferedUpdates_initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates, initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_, deletes, isSegmentPrivate)
 }
 
-OrgApacheLuceneIndexFrozenBufferedUpdates *create_OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates, initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_, deletes, isSegmentPrivate)
+OrgApacheLuceneIndexFrozenBufferedUpdates *create_OrgApacheLuceneIndexFrozenBufferedUpdates_initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates, initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_, deletes, isSegmentPrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFrozenBufferedUpdates)
 
-@implementation OrgApacheLuceneIndexFrozenBufferedUpdates_$1
-
-- (id<JavaUtilIterator>)iterator {
-  return create_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1_(self);
-}
+@implementation OrgApacheLuceneIndexFrozenBufferedUpdates_1
 
 - (instancetype)initWithOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)outer$ {
-  OrgApacheLuceneIndexFrozenBufferedUpdates_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(self, outer$);
+  OrgApacheLuceneIndexFrozenBufferedUpdates_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(self, outer$);
   return self;
 }
 
+- (id<JavaUtilIterator>)iterator {
+  return create_OrgApacheLuceneIndexFrozenBufferedUpdates_1_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1_(self);
+}
+
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
+}
+
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -261,36 +280,45 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFrozenBufferedUpdates)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/index/BufferedUpdatesStream$QueryAndLimit;>;" },
-    { "initWithOrgApacheLuceneIndexFrozenBufferedUpdates:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFrozenBufferedUpdates:);
+  methods[1].selector = @selector(iterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.FrozenBufferedUpdates;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexFrozenBufferedUpdates;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexFrozenBufferedUpdates", "queriesIterable" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFrozenBufferedUpdates_$1 = { 2, "", "org.apache.lucene.index", "FrozenBufferedUpdates", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/lang/Iterable<Lorg/apache/lucene/index/BufferedUpdatesStream$QueryAndLimit;>;" };
-  return &_OrgApacheLuceneIndexFrozenBufferedUpdates_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFrozenBufferedUpdates;", "()Ljava/util/Iterator<Lorg/apache/lucene/index/BufferedUpdatesStream$QueryAndLimit;>;", "queriesIterable", "Ljava/lang/Object;Ljava/lang/Iterable<Lorg/apache/lucene/index/BufferedUpdatesStream$QueryAndLimit;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFrozenBufferedUpdates_1 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 2, 3, -1 };
+  return &_OrgApacheLuceneIndexFrozenBufferedUpdates_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexFrozenBufferedUpdates_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *self, OrgApacheLuceneIndexFrozenBufferedUpdates *outer$) {
+void OrgApacheLuceneIndexFrozenBufferedUpdates_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates_1 *self, OrgApacheLuceneIndexFrozenBufferedUpdates *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   NSObject_init(self);
 }
 
-OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *new_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates_$1, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_, outer$)
+OrgApacheLuceneIndexFrozenBufferedUpdates_1 *new_OrgApacheLuceneIndexFrozenBufferedUpdates_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates_1, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_, outer$)
 }
 
-OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *create_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates_$1, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_, outer$)
+OrgApacheLuceneIndexFrozenBufferedUpdates_1 *create_OrgApacheLuceneIndexFrozenBufferedUpdates_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates_1, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_, outer$)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFrozenBufferedUpdates_$1)
+@implementation OrgApacheLuceneIndexFrozenBufferedUpdates_1_1
 
-@implementation OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1
+- (instancetype)initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1:(OrgApacheLuceneIndexFrozenBufferedUpdates_1 *)outer$ {
+  OrgApacheLuceneIndexFrozenBufferedUpdates_1_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1_(self, outer$);
+  return self;
+}
 
 - (jboolean)hasNext {
   return upto_ < ((IOSObjectArray *) nil_chk(this$0_->this$0_->queries_))->size_;
@@ -299,16 +327,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFrozenBufferedUpdates_$1)
 - (OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit *)next {
   OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit *ret = create_OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_initWithOrgApacheLuceneSearchQuery_withInt_(IOSObjectArray_Get(nil_chk(this$0_->this$0_->queries_), upto_), IOSIntArray_Get(nil_chk(this$0_->this$0_->queryLimits_), upto_));
   upto_++;
-  return ret;
+  return JreRetainedLocalValue(ret);
 }
 
 - (void)remove {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1:(OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *)outer$ {
-  OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1_(self, outer$);
-  return self;
+- (void)forEachRemainingWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaUtilIterator_forEachRemainingWithJavaUtilFunctionConsumer_(self, arg0);
 }
 
 - (void)dealloc {
@@ -317,34 +344,40 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFrozenBufferedUpdates_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "hasNext", NULL, "Z", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.index.BufferedUpdatesStream$QueryAndLimit;", 0x1, NULL, NULL },
-    { "remove", NULL, "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1:);
+  methods[1].selector = @selector(hasNext);
+  methods[2].selector = @selector(next);
+  methods[3].selector = @selector(remove);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.FrozenBufferedUpdates$1;", NULL, NULL, .constantValue.asLong = 0 },
-    { "upto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexFrozenBufferedUpdates_1;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "upto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexFrozenBufferedUpdates_$1", "iterator" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1 = { 2, "", "org.apache.lucene.index", "FrozenBufferedUpdates$", 0x8008, 4, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/util/Iterator<Lorg/apache/lucene/index/BufferedUpdatesStream$QueryAndLimit;>;" };
-  return &_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFrozenBufferedUpdates_1;", "iterator", "Ljava/lang/Object;Ljava/util/Iterator<Lorg/apache/lucene/index/BufferedUpdatesStream$QueryAndLimit;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFrozenBufferedUpdates_1_1 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8010, 4, 2, 0, -1, 1, 2, -1 };
+  return &_OrgApacheLuceneIndexFrozenBufferedUpdates_1_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1_(OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1 *self, OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *outer$) {
+void OrgApacheLuceneIndexFrozenBufferedUpdates_1_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1_(OrgApacheLuceneIndexFrozenBufferedUpdates_1_1 *self, OrgApacheLuceneIndexFrozenBufferedUpdates_1 *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   NSObject_init(self);
 }
 
-OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1 *new_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1_(OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1_, outer$)
+OrgApacheLuceneIndexFrozenBufferedUpdates_1_1 *new_OrgApacheLuceneIndexFrozenBufferedUpdates_1_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1_(OrgApacheLuceneIndexFrozenBufferedUpdates_1 *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates_1_1, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1_, outer$)
 }
 
-OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1 *create_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1_(OrgApacheLuceneIndexFrozenBufferedUpdates_$1 *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_$1_, outer$)
+OrgApacheLuceneIndexFrozenBufferedUpdates_1_1 *create_OrgApacheLuceneIndexFrozenBufferedUpdates_1_1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1_(OrgApacheLuceneIndexFrozenBufferedUpdates_1 *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFrozenBufferedUpdates_1_1, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_1_, outer$)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFrozenBufferedUpdates_$1_$1)

@@ -9,7 +9,18 @@
 #include "org/apache/lucene/util/mutable/MutableValueDate.h"
 #include "org/apache/lucene/util/mutable/MutableValueLong.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/mutable/MutableValueDate must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilMutableMutableValueDate
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilMutableMutableValueDate_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)toObject {
   return exists_ ? create_JavaUtilDate_initWithLong_(value_) : nil;
@@ -22,20 +33,20 @@
   return v;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilMutableMutableValueDate_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "toObject", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "duplicate", NULL, "Lorg.apache.lucene.util.mutable.MutableValue;", 0x1, NULL, NULL },
-    { "init", "MutableValueDate", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilMutableMutableValue;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMutableMutableValueDate = { 2, "MutableValueDate", "org.apache.lucene.util.mutable", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(toObject);
+  methods[2].selector = @selector(duplicate);
+  #pragma clang diagnostic pop
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMutableMutableValueDate = { "MutableValueDate", "org.apache.lucene.util.mutable", NULL, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilMutableMutableValueDate;
 }
 

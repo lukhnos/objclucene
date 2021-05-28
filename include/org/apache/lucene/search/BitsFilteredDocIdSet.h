@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchBitsFilteredDocIdSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchBitsFilteredDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneSearchBitsFilteredDocIdSet || defined(INCLUDE_OrgApacheLuceneSearchBitsFilteredDocIdSet))
 #define OrgApacheLuceneSearchBitsFilteredDocIdSet_
 
@@ -25,10 +31,9 @@
 
 /*!
  @brief This implementation supplies a filtered DocIdSet, that excludes all
- docids which are not in a Bits instance.
- This is especially useful in
+  docids which are not in a Bits instance.This is especially useful in 
  <code>org.apache.lucene.search.Filter</code> to apply the <code>acceptDocs</code>
- passed to <code>getDocIdSet()</code> before returning the final DocIdSet.
+  passed to <code>getDocIdSet()</code> before returning the final DocIdSet.
  - seealso: DocIdSet
  - seealso: org.apache.lucene.search.Filter
  */
@@ -41,14 +46,14 @@
  @param innerSet Underlying DocIdSet
  @param acceptDocs Allowed docs, all docids not in this set will not be returned by this DocIdSet
  */
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)innerSet
-                          withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)innerSet
+                                    withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
 /*!
  @brief Convenience wrapper method: If <code>acceptDocs == null</code> it returns the original set without wrapping.
- @param set Underlying DocIdSet. If <code>null</code>, this method returns <code>null</code>
- @param acceptDocs Allowed docs, all docids not in this set will not be returned by this DocIdSet.
- If <code>null</code>, this method returns the original set without wrapping.
+ @param set Underlying DocIdSet. If <code>null</code> , this method returns <code>null</code>
+ @param acceptDocs Allowed docs, all docids not in this set will not be returned by this DocIdSet.  If 
+ <code>null</code> , this method returns the original set without wrapping.
  */
 + (OrgApacheLuceneSearchDocIdSet *)wrapWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set
                                              withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
@@ -56,6 +61,10 @@
 #pragma mark Protected
 
 - (jboolean)matchWithInt:(jint)docid;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -73,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBitsFilteredDocIdSet)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBitsFilteredDocIdSet")

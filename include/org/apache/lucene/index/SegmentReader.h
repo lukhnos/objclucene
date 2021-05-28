@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSegmentReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSegmentReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentReader || defined(INCLUDE_OrgApacheLuceneIndexSegmentReader))
 #define OrgApacheLuceneIndexSegmentReader_
 
@@ -37,8 +43,8 @@
 /*!
  @brief IndexReader implementation over a single segment.
  <p>
- Instances pointing to the same segment (but with different deletes, etc)
- may share the same core data.
+  Instances pointing to the same segment (but with different deletes, etc)
+  may share the same core data.
  */
 @interface OrgApacheLuceneIndexSegmentReader : OrgApacheLuceneIndexCodecReader {
  @public
@@ -52,11 +58,11 @@
 
 /*!
  @brief Constructs a new SegmentReader with a new core.
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
-                            withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
+                                      withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
@@ -109,24 +115,26 @@
 
 /*!
  @brief Create new SegmentReader sharing core from a previous
- SegmentReader and loading new live docs from a new
- deletes file.
- Used by openIfChanged. 
+   SegmentReader and loading new live docs from a new
+   deletes file.Used by openIfChanged.
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
-                        withOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)sr;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
+                                  withOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)sr;
 
 /*!
  @brief Create new SegmentReader sharing core from a previous
- SegmentReader and using the provided in-memory
- liveDocs.
- Used by IndexWriter to provide a new NRT
- reader 
+   SegmentReader and using the provided in-memory
+   liveDocs.Used by IndexWriter to provide a new NRT
+   reader
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
-                        withOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)sr
-                                  withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
-                                                      withInt:(jint)numDocs;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
+                                  withOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)sr
+                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
+                                                                withInt:(jint)numDocs;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -159,4 +167,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentReader")

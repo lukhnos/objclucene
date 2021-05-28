@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -19,9 +18,12 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/ProximityQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
 #include "org/apache/lucene/queryparser/flexible/messages/MessageImpl.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/ProximityQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode () {
  @public
@@ -43,41 +45,35 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreNodesP
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *self, NSString *__name, jint __ordinal);
 
-@interface OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1 : OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type < NSCopying >
+@interface OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1 : OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type
 
 - (id<JavaLangCharSequence>)toQueryString;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1)
 
-__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1 *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1 *self, NSString *__name, jint __ordinal);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1)
-
-@interface OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2 : OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type < NSCopying >
+@interface OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2 : OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type
 
 - (id<JavaLangCharSequence>)toQueryString;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2)
 
-__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2 *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2 *self, NSString *__name, jint __ordinal);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2)
-
-@interface OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3 : OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type < NSCopying >
+@interface OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3 : OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type
 
 - (id<JavaLangCharSequence>)toQueryString;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3)
 
-__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3 *self, NSString *__name, jint __ordinal);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3)
+__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3 *self, NSString *__name, jint __ordinal);
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode
 
@@ -176,28 +172,44 @@ withOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:(OrgApach
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withJavaLangCharSequence:withOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:withInt:withBoolean:", "ProximityQueryNode", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Ljava/lang/CharSequence;Lorg/apache/lucene/queryparser/flexible/core/nodes/ProximityQueryNode$Type;IZ)V" },
-    { "initWithJavaUtilList:withJavaLangCharSequence:withOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:withBoolean:", "ProximityQueryNode", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Ljava/lang/CharSequence;Lorg/apache/lucene/queryparser/flexible/core/nodes/ProximityQueryNode$Type;Z)V" },
-    { "clearFieldsWithJavaUtilList:withJavaLangCharSequence:", "clearFields", "V", 0xa, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Ljava/lang/CharSequence;)V" },
-    { "getProximityType", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ProximityQueryNode$Type;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "getDistance", NULL, "I", 0x1, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "getFieldAsString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "setFieldWithJavaLangCharSequence:", "setField", "V", 0x1, NULL, NULL },
-    { "isInOrder", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, 3, -1, -1 },
+    { NULL, "V", 0xa, 4, 5, -1, 6, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, -1, -1, 10, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withJavaLangCharSequence:withOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:withInt:withBoolean:);
+  methods[1].selector = @selector(initWithJavaUtilList:withJavaLangCharSequence:withOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:withBoolean:);
+  methods[2].selector = @selector(clearFieldsWithJavaUtilList:withJavaLangCharSequence:);
+  methods[3].selector = @selector(getProximityType);
+  methods[4].selector = @selector(description);
+  methods[5].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[6].selector = @selector(cloneTree);
+  methods[7].selector = @selector(getDistance);
+  methods[8].selector = @selector(getField);
+  methods[9].selector = @selector(getFieldAsString);
+  methods[10].selector = @selector(setFieldWithJavaLangCharSequence:);
+  methods[11].selector = @selector(isInOrder);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "proximityType_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ProximityQueryNode$Type;", NULL, NULL, .constantValue.asLong = 0 },
-    { "distance_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "inorder_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x2, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
+    { "proximityType_", "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "distance_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "inorder_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "field_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.flexible.core.nodes.ProximityQueryNode$Type;", "Lorg.apache.lucene.queryparser.flexible.core.nodes.ProximityQueryNode$ProximityType;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode = { 2, "ProximityQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 12, methods, 4, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;LJavaLangCharSequence;LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;IZ", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Ljava/lang/CharSequence;Lorg/apache/lucene/queryparser/flexible/core/nodes/ProximityQueryNode$Type;IZ)V", "LJavaUtilList;LJavaLangCharSequence;LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;Z", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Ljava/lang/CharSequence;Lorg/apache/lucene/queryparser/flexible/core/nodes/ProximityQueryNode$Type;Z)V", "clearFields", "LJavaUtilList;LJavaLangCharSequence;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Ljava/lang/CharSequence;)V", "toString", "toQueryString", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;", "LJavaLangCloneNotSupportedException;", "setField", "LJavaLangCharSequence;", "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_ProximityType;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode = { "ProximityQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x1, 12, 4, -1, 13, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode;
 }
 
@@ -249,8 +261,8 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_clearFieldsWi
   if (nodes == nil || [nodes size] == 0) return;
   for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong clause in nodes) {
     if ([clause isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]]) {
-      ((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) cast_chk(clause, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]))))->toQueryStringIgnoreFields_ = true;
-      [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) cast_chk(clause, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class])))) setFieldWithJavaLangCharSequence:field];
+      ((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) clause)))->toQueryStringIgnoreFields_ = true;
+      [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) clause))) setFieldWithJavaLangCharSequence:field];
     }
   }
 }
@@ -293,43 +305,48 @@ OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuc
   return (OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LJavaLangCharSequence;", 0x400, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(toQueryString);
+  methods[1].selector = @selector(values);
+  methods[2].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "PARAGRAPH", "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "SENTENCE", "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "NUMBER", "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, PARAGRAPH), &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, SENTENCE), &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, NUMBER), "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode;", "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/core/nodes/ProximityQueryNode$Type;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type = { "Type", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x4409, 3, 3, 5, -1, -1, 6, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type class]) {
     size_t allocSize = 0;
-    size_t objSize_PARAGRAPH = class_getInstanceSize([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1 class]);
+    size_t objSize_PARAGRAPH = class_getInstanceSize([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1 class]);
     allocSize += objSize_PARAGRAPH;
-    size_t objSize_SENTENCE = class_getInstanceSize([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2 class]);
+    size_t objSize_SENTENCE = class_getInstanceSize([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2 class]);
     allocSize += objSize_SENTENCE;
-    size_t objSize_NUMBER = class_getInstanceSize([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3 class]);
+    size_t objSize_NUMBER = class_getInstanceSize([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3 class]);
     allocSize += objSize_NUMBER;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, PARAGRAPH) = e = objc_constructInstance([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1 class], (void *)ptr), ptr += objSize_PARAGRAPH);
-    OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1_initWithNSString_withInt_(e, @"PARAGRAPH", 0);
-    (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, SENTENCE) = e = objc_constructInstance([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2 class], (void *)ptr), ptr += objSize_SENTENCE);
-    OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2_initWithNSString_withInt_(e, @"SENTENCE", 1);
-    (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, NUMBER) = e = objc_constructInstance([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3 class], (void *)ptr), ptr += objSize_NUMBER);
-    OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3_initWithNSString_withInt_(e, @"NUMBER", 2);
+    ((void) (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, PARAGRAPH) = e = objc_constructInstance([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1 class], (void *)ptr)), ptr += objSize_PARAGRAPH);
+    OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1_initWithNSString_withInt_(e, @"PARAGRAPH", 0);
+    ((void) (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, SENTENCE) = e = objc_constructInstance([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2 class], (void *)ptr)), ptr += objSize_SENTENCE);
+    OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2_initWithNSString_withInt_(e, @"SENTENCE", 1);
+    ((void) (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, NUMBER) = e = objc_constructInstance([OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3 class], (void *)ptr)), ptr += objSize_NUMBER);
+    OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3_initWithNSString_withInt_(e, @"NUMBER", 2);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "toQueryString", NULL, "Ljava.lang.CharSequence;", 0x400, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "PARAGRAPH", "PARAGRAPH", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ProximityQueryNode$Type;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, PARAGRAPH), NULL, .constantValue.asLong = 0 },
-    { "SENTENCE", "SENTENCE", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ProximityQueryNode$Type;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, SENTENCE), NULL, .constantValue.asLong = 0 },
-    { "NUMBER", "NUMBER", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ProximityQueryNode$Type;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type, NUMBER), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.flexible.core.nodes.ProximityQueryNode$Type;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type = { 2, "Type", "org.apache.lucene.queryparser.flexible.core.nodes", "ProximityQueryNode", 0x4409, 1, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/core/nodes/ProximityQueryNode$Type;>;" };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;
 }
 
 @end
@@ -351,7 +368,7 @@ OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuc
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 
@@ -365,86 +382,98 @@ OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type *OrgApacheLuc
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type)
 
-@implementation OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1
+@implementation OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1
 
 - (id<JavaLangCharSequence>)toQueryString {
   return @"WITHIN PARAGRAPH";
 }
 
 - (void)dealloc {
-  JreCheckFinalize(self, [OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1 class]);
+  JreCheckFinalize(self, [OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1 class]);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "toQueryString", NULL, "Ljava.lang.CharSequence;", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LJavaLangCharSequence;", 0x0, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1 = { 2, "", "org.apache.lucene.queryparser.flexible.core.nodes", "ProximityQueryNode$Type", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(toQueryString);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1 = { "", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, NULL, 7, 0xc018, 1, 0, 0, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1 *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_1 *self, NSString *__name, jint __ordinal) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$1)
-
-@implementation OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2
+@implementation OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2
 
 - (id<JavaLangCharSequence>)toQueryString {
   return @"WITHIN SENTENCE";
 }
 
 - (void)dealloc {
-  JreCheckFinalize(self, [OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2 class]);
+  JreCheckFinalize(self, [OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2 class]);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "toQueryString", NULL, "Ljava.lang.CharSequence;", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LJavaLangCharSequence;", 0x0, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2 = { 2, "", "org.apache.lucene.queryparser.flexible.core.nodes", "ProximityQueryNode$Type", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(toQueryString);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2 = { "", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, NULL, 7, 0xc018, 1, 0, 0, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2 *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_2 *self, NSString *__name, jint __ordinal) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$2)
-
-@implementation OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3
+@implementation OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3
 
 - (id<JavaLangCharSequence>)toQueryString {
   return @"WITHIN";
 }
 
 - (void)dealloc {
-  JreCheckFinalize(self, [OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3 class]);
+  JreCheckFinalize(self, [OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3 class]);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "toQueryString", NULL, "Ljava.lang.CharSequence;", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LJavaLangCharSequence;", 0x0, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3 = { 2, "", "org.apache.lucene.queryparser.flexible.core.nodes", "ProximityQueryNode$Type", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(toQueryString);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3 = { "", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, NULL, 7, 0xc018, 1, 0, 0, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3 *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_3 *self, NSString *__name, jint __ordinal) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_initWithNSString_withInt_(self, __name, __ordinal);
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type_$3)
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_ProximityType
 
@@ -465,15 +494,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesProx
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:", "ProximityType", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:withInt:", "ProximityType", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "pDistance_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pType_", NULL, 0x0, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ProximityQueryNode$Type;", NULL, NULL, .constantValue.asLong = 0 },
+    { "pDistance_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "pType_", "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_ProximityType = { 2, "ProximityType", "org.apache.lucene.queryparser.flexible.core.nodes", "ProximityQueryNode", 0x9, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;", "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_Type;I", "LOrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_ProximityType = { "ProximityType", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x9, 2, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_ProximityType;
 }
 

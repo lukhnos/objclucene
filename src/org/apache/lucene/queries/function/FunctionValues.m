@@ -3,6 +3,7 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/function/FunctionValues.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -16,150 +17,142 @@
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 #include "org/apache/lucene/util/mutable/MutableValueFloat.h"
 
-@interface OrgApacheLuceneQueriesFunctionFunctionValues_$1 : OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/FunctionValues must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneQueriesFunctionFunctionValues_1 : OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller {
  @public
   OrgApacheLuceneQueriesFunctionFunctionValues *this$0_;
   OrgApacheLuceneUtilMutableMutableValueFloat *mval_;
 }
 
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$;
+
 - (OrgApacheLuceneUtilMutableMutableValue *)getValue;
 
 - (void)fillValueWithInt:(jint)doc;
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionFunctionValues_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionFunctionValues_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionValues_$1, this$0_, OrgApacheLuceneQueriesFunctionFunctionValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionValues_$1, mval_, OrgApacheLuceneUtilMutableMutableValueFloat *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionValues_1, mval_, OrgApacheLuceneUtilMutableMutableValueFloat *)
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionFunctionValues_$1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_$1 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$);
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionFunctionValues_1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_1 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_$1 *new_OrgApacheLuceneQueriesFunctionFunctionValues_$1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_1 *new_OrgApacheLuceneQueriesFunctionFunctionValues_1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_$1 *create_OrgApacheLuceneQueriesFunctionFunctionValues_$1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_1 *create_OrgApacheLuceneQueriesFunctionFunctionValues_1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionValues_$1)
-
-@interface OrgApacheLuceneQueriesFunctionFunctionValues_$2 : OrgApacheLuceneQueriesFunctionValueSourceScorer {
+@interface OrgApacheLuceneQueriesFunctionFunctionValues_2 : OrgApacheLuceneQueriesFunctionValueSourceScorer {
  @public
   OrgApacheLuceneQueriesFunctionFunctionValues *this$0_;
   jfloat val$l_;
   jfloat val$u_;
 }
 
-- (jboolean)matchesValueWithInt:(jint)doc;
-
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
                                                            withFloat:(jfloat)capture$0
                                                            withFloat:(jfloat)capture$1
-                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)arg$0
-                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)arg$1;
+                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values;
+
+- (jboolean)matchesValueWithInt:(jint)doc;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionFunctionValues_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionFunctionValues_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionValues_$2, this$0_, OrgApacheLuceneQueriesFunctionFunctionValues *)
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionFunctionValues_2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_2 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values);
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionFunctionValues_$2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_$2 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_2 *new_OrgApacheLuceneQueriesFunctionFunctionValues_2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_$2 *new_OrgApacheLuceneQueriesFunctionFunctionValues_$2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_2 *create_OrgApacheLuceneQueriesFunctionFunctionValues_2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values);
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_$2 *create_OrgApacheLuceneQueriesFunctionFunctionValues_$2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionValues_$2)
-
-@interface OrgApacheLuceneQueriesFunctionFunctionValues_$3 : OrgApacheLuceneQueriesFunctionValueSourceScorer {
+@interface OrgApacheLuceneQueriesFunctionFunctionValues_3 : OrgApacheLuceneQueriesFunctionValueSourceScorer {
  @public
   OrgApacheLuceneQueriesFunctionFunctionValues *this$0_;
   jfloat val$l_;
   jfloat val$u_;
 }
 
-- (jboolean)matchesValueWithInt:(jint)doc;
-
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
                                                            withFloat:(jfloat)capture$0
                                                            withFloat:(jfloat)capture$1
-                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)arg$0
-                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)arg$1;
+                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values;
+
+- (jboolean)matchesValueWithInt:(jint)doc;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionFunctionValues_$3)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionFunctionValues_3)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionValues_$3, this$0_, OrgApacheLuceneQueriesFunctionFunctionValues *)
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionFunctionValues_3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_3 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values);
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionFunctionValues_$3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_$3 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_3 *new_OrgApacheLuceneQueriesFunctionFunctionValues_3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_$3 *new_OrgApacheLuceneQueriesFunctionFunctionValues_$3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_3 *create_OrgApacheLuceneQueriesFunctionFunctionValues_3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values);
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_$3 *create_OrgApacheLuceneQueriesFunctionFunctionValues_$3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionValues_$3)
-
-@interface OrgApacheLuceneQueriesFunctionFunctionValues_$4 : OrgApacheLuceneQueriesFunctionValueSourceScorer {
+@interface OrgApacheLuceneQueriesFunctionFunctionValues_4 : OrgApacheLuceneQueriesFunctionValueSourceScorer {
  @public
   OrgApacheLuceneQueriesFunctionFunctionValues *this$0_;
   jfloat val$l_;
   jfloat val$u_;
 }
 
-- (jboolean)matchesValueWithInt:(jint)doc;
-
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
                                                            withFloat:(jfloat)capture$0
                                                            withFloat:(jfloat)capture$1
-                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)arg$0
-                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)arg$1;
+                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values;
+
+- (jboolean)matchesValueWithInt:(jint)doc;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionFunctionValues_$4)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionFunctionValues_4)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionValues_$4, this$0_, OrgApacheLuceneQueriesFunctionFunctionValues *)
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionFunctionValues_4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_4 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values);
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionFunctionValues_$4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_$4 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_4 *new_OrgApacheLuceneQueriesFunctionFunctionValues_4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_$4 *new_OrgApacheLuceneQueriesFunctionFunctionValues_$4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_4 *create_OrgApacheLuceneQueriesFunctionFunctionValues_4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values);
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_$4 *create_OrgApacheLuceneQueriesFunctionFunctionValues_$4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionValues_$4)
-
-@interface OrgApacheLuceneQueriesFunctionFunctionValues_$5 : OrgApacheLuceneQueriesFunctionValueSourceScorer {
+@interface OrgApacheLuceneQueriesFunctionFunctionValues_5 : OrgApacheLuceneQueriesFunctionValueSourceScorer {
  @public
   OrgApacheLuceneQueriesFunctionFunctionValues *this$0_;
   jfloat val$l_;
   jfloat val$u_;
 }
 
-- (jboolean)matchesValueWithInt:(jint)doc;
-
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
                                                            withFloat:(jfloat)capture$0
                                                            withFloat:(jfloat)capture$1
-                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)arg$0
-                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)arg$1;
+                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values;
+
+- (jboolean)matchesValueWithInt:(jint)doc;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionFunctionValues_$5)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionFunctionValues_5)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionValues_$5, this$0_, OrgApacheLuceneQueriesFunctionFunctionValues *)
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionFunctionValues_5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_5 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values);
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionFunctionValues_$5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_$5 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_5 *new_OrgApacheLuceneQueriesFunctionFunctionValues_5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_$5 *new_OrgApacheLuceneQueriesFunctionFunctionValues_$5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_$5 *create_OrgApacheLuceneQueriesFunctionFunctionValues_$5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionValues_$5)
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionFunctionValues_5 *create_OrgApacheLuceneQueriesFunctionFunctionValues_5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values);
 
 @implementation OrgApacheLuceneQueriesFunctionFunctionValues
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueriesFunctionFunctionValues_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jbyte)byteValWithInt:(jint)doc {
   @throw create_JavaLangUnsupportedOperationException_init();
@@ -195,7 +188,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionValues_$5)
 
 - (jboolean)bytesValWithInt:(jint)doc
 withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)target {
-  NSString *s = [self strValWithInt:doc];
+  NSString *s = JreRetainedLocalValue([self strValWithInt:doc]);
   if (s == nil) {
     [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(target)) clear];
     return false;
@@ -227,7 +220,7 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
 }
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller {
-  return create_OrgApacheLuceneQueriesFunctionFunctionValues_$1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(self);
+  return create_OrgApacheLuceneQueriesFunctionFunctionValues_1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(self);
 }
 
 - (void)byteValWithInt:(jint)doc
@@ -295,57 +288,80 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
   jfloat l = lower;
   jfloat u = upper;
   if (includeLower && includeUpper) {
-    return create_OrgApacheLuceneQueriesFunctionFunctionValues_$2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, l, u, reader, self);
+    return create_OrgApacheLuceneQueriesFunctionFunctionValues_2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, l, u, reader, self);
   }
   else if (includeLower && !includeUpper) {
-    return create_OrgApacheLuceneQueriesFunctionFunctionValues_$3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, l, u, reader, self);
+    return create_OrgApacheLuceneQueriesFunctionFunctionValues_3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, l, u, reader, self);
   }
   else if (!includeLower && includeUpper) {
-    return create_OrgApacheLuceneQueriesFunctionFunctionValues_$4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, l, u, reader, self);
+    return create_OrgApacheLuceneQueriesFunctionFunctionValues_4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, l, u, reader, self);
   }
   else {
-    return create_OrgApacheLuceneQueriesFunctionFunctionValues_$5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, l, u, reader, self);
+    return create_OrgApacheLuceneQueriesFunctionFunctionValues_5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, l, u, reader, self);
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueriesFunctionFunctionValues_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "byteValWithInt:", "byteVal", "B", 0x1, NULL, NULL },
-    { "shortValWithInt:", "shortVal", "S", 0x1, NULL, NULL },
-    { "floatValWithInt:", "floatVal", "F", 0x1, NULL, NULL },
-    { "intValWithInt:", "intVal", "I", 0x1, NULL, NULL },
-    { "longValWithInt:", "longVal", "J", 0x1, NULL, NULL },
-    { "doubleValWithInt:", "doubleVal", "D", 0x1, NULL, NULL },
-    { "strValWithInt:", "strVal", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "boolValWithInt:", "boolVal", "Z", 0x1, NULL, NULL },
-    { "bytesValWithInt:withOrgApacheLuceneUtilBytesRefBuilder:", "bytesVal", "Z", 0x1, NULL, NULL },
-    { "objectValWithInt:", "objectVal", "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "existsWithInt:", "exists", "Z", 0x1, NULL, NULL },
-    { "ordValWithInt:", "ordVal", "I", 0x1, NULL, NULL },
-    { "numOrd", NULL, "I", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getValueFiller", NULL, "Lorg.apache.lucene.queries.function.FunctionValues$ValueFiller;", 0x1, NULL, NULL },
-    { "byteValWithInt:withByteArray:", "byteVal", "V", 0x1, NULL, NULL },
-    { "shortValWithInt:withShortArray:", "shortVal", "V", 0x1, NULL, NULL },
-    { "floatValWithInt:withFloatArray:", "floatVal", "V", 0x1, NULL, NULL },
-    { "intValWithInt:withIntArray:", "intVal", "V", 0x1, NULL, NULL },
-    { "longValWithInt:withLongArray:", "longVal", "V", 0x1, NULL, NULL },
-    { "doubleValWithInt:withDoubleArray:", "doubleVal", "V", 0x1, NULL, NULL },
-    { "strValWithInt:withNSStringArray:", "strVal", "V", 0x1, NULL, NULL },
-    { "explainWithInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
-    { "getScorerWithOrgApacheLuceneIndexIndexReader:", "getScorer", "Lorg.apache.lucene.queries.function.ValueSourceScorer;", 0x1, NULL, NULL },
-    { "getRangeScorerWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withBoolean:withBoolean:", "getRangeScorer", "Lorg.apache.lucene.queries.function.ValueSourceScorer;", 0x1, NULL, NULL },
-    { "init", "FunctionValues", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "S", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 3, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 5, 1, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, 6, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 8, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 11, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 12, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 13, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 14, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 21, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 22, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionValueSourceScorer;", 0x1, 23, 24, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionValueSourceScorer;", 0x1, 25, 26, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queries.function.FunctionValues$ValueFiller;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues = { 2, "FunctionValues", "org.apache.lucene.queries.function", NULL, 0x401, 26, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(byteValWithInt:);
+  methods[2].selector = @selector(shortValWithInt:);
+  methods[3].selector = @selector(floatValWithInt:);
+  methods[4].selector = @selector(intValWithInt:);
+  methods[5].selector = @selector(longValWithInt:);
+  methods[6].selector = @selector(doubleValWithInt:);
+  methods[7].selector = @selector(strValWithInt:);
+  methods[8].selector = @selector(boolValWithInt:);
+  methods[9].selector = @selector(bytesValWithInt:withOrgApacheLuceneUtilBytesRefBuilder:);
+  methods[10].selector = @selector(objectValWithInt:);
+  methods[11].selector = @selector(existsWithInt:);
+  methods[12].selector = @selector(ordValWithInt:);
+  methods[13].selector = @selector(numOrd);
+  methods[14].selector = @selector(toStringWithInt:);
+  methods[15].selector = @selector(getValueFiller);
+  methods[16].selector = @selector(byteValWithInt:withByteArray:);
+  methods[17].selector = @selector(shortValWithInt:withShortArray:);
+  methods[18].selector = @selector(floatValWithInt:withFloatArray:);
+  methods[19].selector = @selector(intValWithInt:withIntArray:);
+  methods[20].selector = @selector(longValWithInt:withLongArray:);
+  methods[21].selector = @selector(doubleValWithInt:withDoubleArray:);
+  methods[22].selector = @selector(strValWithInt:withNSStringArray:);
+  methods[23].selector = @selector(explainWithInt:);
+  methods[24].selector = @selector(getScorerWithOrgApacheLuceneIndexIndexReader:);
+  methods[25].selector = @selector(getRangeScorerWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withBoolean:withBoolean:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "byteVal", "I", "shortVal", "floatVal", "intVal", "longVal", "doubleVal", "strVal", "boolVal", "bytesVal", "ILOrgApacheLuceneUtilBytesRefBuilder;", "objectVal", "exists", "ordVal", "toString", "I[B", "I[S", "I[F", "I[I", "I[J", "I[D", "I[LNSString;", "explain", "getScorer", "LOrgApacheLuceneIndexIndexReader;", "getRangeScorer", "LOrgApacheLuceneIndexIndexReader;LNSString;LNSString;ZZ", "LOrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues = { "FunctionValues", "org.apache.lucene.queries.function", ptrTable, methods, NULL, 7, 0x401, 26, 0, -1, 27, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionFunctionValues;
 }
 
@@ -359,6 +375,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionValues)
 
 @implementation OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (OrgApacheLuceneUtilMutableMutableValue *)getValue {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
@@ -370,20 +393,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionValues)
   [self doesNotRecognizeSelector:_cmd];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getValue", NULL, "Lorg.apache.lucene.util.mutable.MutableValue;", 0x401, NULL, NULL },
-    { "fillValueWithInt:", "fillValue", "V", 0x401, NULL, NULL },
-    { "init", "ValueFiller", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilMutableMutableValue;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller = { 2, "ValueFiller", "org.apache.lucene.queries.function", "FunctionValues", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getValue);
+  methods[2].selector = @selector(fillValueWithInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "fillValue", "I", "LOrgApacheLuceneQueriesFunctionFunctionValues;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller = { "ValueFiller", "org.apache.lucene.queries.function", ptrTable, methods, NULL, 7, 0x409, 3, 0, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
 }
 
@@ -395,19 +419,19 @@ void OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_init(OrgApacheLuce
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller)
 
-@implementation OrgApacheLuceneQueriesFunctionFunctionValues_$1
+@implementation OrgApacheLuceneQueriesFunctionFunctionValues_1
+
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$ {
+  OrgApacheLuceneQueriesFunctionFunctionValues_1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$);
+  return self;
+}
 
 - (OrgApacheLuceneUtilMutableMutableValue *)getValue {
-  return mval_;
+  return JreRetainedLocalValue(mval_);
 }
 
 - (void)fillValueWithInt:(jint)doc {
   ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(mval_))->value_ = [this$0_ floatValWithInt:doc];
-}
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$ {
-  OrgApacheLuceneQueriesFunctionFunctionValues_$1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$);
-  return self;
 }
 
 - (void)dealloc {
@@ -417,254 +441,275 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionValues_Va
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getValue", NULL, "Lorg.apache.lucene.util.mutable.MutableValue;", 0x1, NULL, NULL },
-    { "fillValueWithInt:", "fillValue", "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionFunctionValues:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilMutableMutableValue;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionFunctionValues:);
+  methods[1].selector = @selector(getValue);
+  methods[2].selector = @selector(fillValueWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mval_", NULL, 0x12, "Lorg.apache.lucene.util.mutable.MutableValueFloat;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "mval_", "LOrgApacheLuceneUtilMutableMutableValueFloat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionFunctionValues", "getValueFiller" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_$1 = { 2, "", "org.apache.lucene.queries.function", "FunctionValues", 0x8008, 3, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionFunctionValues_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionFunctionValues;", "fillValue", "I", "getValueFiller" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_1 = { "", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x8010, 3, 2, 0, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionFunctionValues_1;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionFunctionValues_$1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_$1 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$) {
+void OrgApacheLuceneQueriesFunctionFunctionValues_1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_1 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_init(self);
   JreStrongAssignAndConsume(&self->mval_, new_OrgApacheLuceneUtilMutableMutableValueFloat_init());
 }
 
-OrgApacheLuceneQueriesFunctionFunctionValues_$1 *new_OrgApacheLuceneQueriesFunctionFunctionValues_$1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_$1, initWithOrgApacheLuceneQueriesFunctionFunctionValues_, outer$)
+OrgApacheLuceneQueriesFunctionFunctionValues_1 *new_OrgApacheLuceneQueriesFunctionFunctionValues_1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_1, initWithOrgApacheLuceneQueriesFunctionFunctionValues_, outer$)
 }
 
-OrgApacheLuceneQueriesFunctionFunctionValues_$1 *create_OrgApacheLuceneQueriesFunctionFunctionValues_$1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_$1, initWithOrgApacheLuceneQueriesFunctionFunctionValues_, outer$)
+OrgApacheLuceneQueriesFunctionFunctionValues_1 *create_OrgApacheLuceneQueriesFunctionFunctionValues_1_initWithOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_1, initWithOrgApacheLuceneQueriesFunctionFunctionValues_, outer$)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionValues_$1)
+@implementation OrgApacheLuceneQueriesFunctionFunctionValues_2
 
-@implementation OrgApacheLuceneQueriesFunctionFunctionValues_$2
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
+                                                           withFloat:(jfloat)capture$0
+                                                           withFloat:(jfloat)capture$1
+                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values {
+  OrgApacheLuceneQueriesFunctionFunctionValues_2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1, reader, values);
+  return self;
+}
 
 - (jboolean)matchesValueWithInt:(jint)doc {
   jfloat docVal = [this$0_ floatValWithInt:doc];
   return docVal >= val$l_ && docVal <= val$u_;
 }
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
-                                                           withFloat:(jfloat)capture$0
-                                                           withFloat:(jfloat)capture$1
-                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)arg$0
-                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)arg$1 {
-  OrgApacheLuceneQueriesFunctionFunctionValues_$2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1, arg$0, arg$1);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "matchesValueWithInt:", "matchesValue", "Z", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionFunctionValues:withFloat:withFloat:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneQueriesFunctionFunctionValues:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionFunctionValues:withFloat:withFloat:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneQueriesFunctionFunctionValues:);
+  methods[1].selector = @selector(matchesValueWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$l_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$u_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$l_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$u_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionFunctionValues", "getRangeScorerWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withBoolean:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_$2 = { 2, "", "org.apache.lucene.queries.function", "FunctionValues", 0x8008, 2, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionFunctionValues_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionFunctionValues;FFLOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneQueriesFunctionFunctionValues;", "matchesValue", "I", "LOrgApacheLuceneQueriesFunctionFunctionValues;", "getRangeScorerWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withBoolean:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_2 = { "", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x8010, 2, 3, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionFunctionValues_2;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionFunctionValues_$2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_$2 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
+void OrgApacheLuceneQueriesFunctionFunctionValues_2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_2 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
   JreStrongAssign(&self->this$0_, outer$);
   self->val$l_ = capture$0;
   self->val$u_ = capture$1;
-  OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, arg$0, arg$1);
+  OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, reader, values);
 }
 
-OrgApacheLuceneQueriesFunctionFunctionValues_$2 *new_OrgApacheLuceneQueriesFunctionFunctionValues_$2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_$2, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
+OrgApacheLuceneQueriesFunctionFunctionValues_2 *new_OrgApacheLuceneQueriesFunctionFunctionValues_2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_2, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, reader, values)
 }
 
-OrgApacheLuceneQueriesFunctionFunctionValues_$2 *create_OrgApacheLuceneQueriesFunctionFunctionValues_$2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_$2, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
+OrgApacheLuceneQueriesFunctionFunctionValues_2 *create_OrgApacheLuceneQueriesFunctionFunctionValues_2_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_2, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, reader, values)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionValues_$2)
+@implementation OrgApacheLuceneQueriesFunctionFunctionValues_3
 
-@implementation OrgApacheLuceneQueriesFunctionFunctionValues_$3
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
+                                                           withFloat:(jfloat)capture$0
+                                                           withFloat:(jfloat)capture$1
+                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values {
+  OrgApacheLuceneQueriesFunctionFunctionValues_3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1, reader, values);
+  return self;
+}
 
 - (jboolean)matchesValueWithInt:(jint)doc {
   jfloat docVal = [this$0_ floatValWithInt:doc];
   return docVal >= val$l_ && docVal < val$u_;
 }
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
-                                                           withFloat:(jfloat)capture$0
-                                                           withFloat:(jfloat)capture$1
-                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)arg$0
-                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)arg$1 {
-  OrgApacheLuceneQueriesFunctionFunctionValues_$3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1, arg$0, arg$1);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "matchesValueWithInt:", "matchesValue", "Z", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionFunctionValues:withFloat:withFloat:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneQueriesFunctionFunctionValues:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionFunctionValues:withFloat:withFloat:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneQueriesFunctionFunctionValues:);
+  methods[1].selector = @selector(matchesValueWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$l_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$u_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$l_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$u_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionFunctionValues", "getRangeScorerWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withBoolean:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_$3 = { 2, "", "org.apache.lucene.queries.function", "FunctionValues", 0x8008, 2, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionFunctionValues_$3;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionFunctionValues;FFLOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneQueriesFunctionFunctionValues;", "matchesValue", "I", "LOrgApacheLuceneQueriesFunctionFunctionValues;", "getRangeScorerWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withBoolean:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_3 = { "", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x8010, 2, 3, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionFunctionValues_3;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionFunctionValues_$3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_$3 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
+void OrgApacheLuceneQueriesFunctionFunctionValues_3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_3 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
   JreStrongAssign(&self->this$0_, outer$);
   self->val$l_ = capture$0;
   self->val$u_ = capture$1;
-  OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, arg$0, arg$1);
+  OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, reader, values);
 }
 
-OrgApacheLuceneQueriesFunctionFunctionValues_$3 *new_OrgApacheLuceneQueriesFunctionFunctionValues_$3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_$3, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
+OrgApacheLuceneQueriesFunctionFunctionValues_3 *new_OrgApacheLuceneQueriesFunctionFunctionValues_3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_3, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, reader, values)
 }
 
-OrgApacheLuceneQueriesFunctionFunctionValues_$3 *create_OrgApacheLuceneQueriesFunctionFunctionValues_$3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_$3, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
+OrgApacheLuceneQueriesFunctionFunctionValues_3 *create_OrgApacheLuceneQueriesFunctionFunctionValues_3_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_3, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, reader, values)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionValues_$3)
+@implementation OrgApacheLuceneQueriesFunctionFunctionValues_4
 
-@implementation OrgApacheLuceneQueriesFunctionFunctionValues_$4
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
+                                                           withFloat:(jfloat)capture$0
+                                                           withFloat:(jfloat)capture$1
+                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values {
+  OrgApacheLuceneQueriesFunctionFunctionValues_4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1, reader, values);
+  return self;
+}
 
 - (jboolean)matchesValueWithInt:(jint)doc {
   jfloat docVal = [this$0_ floatValWithInt:doc];
   return docVal > val$l_ && docVal <= val$u_;
 }
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
-                                                           withFloat:(jfloat)capture$0
-                                                           withFloat:(jfloat)capture$1
-                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)arg$0
-                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)arg$1 {
-  OrgApacheLuceneQueriesFunctionFunctionValues_$4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1, arg$0, arg$1);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "matchesValueWithInt:", "matchesValue", "Z", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionFunctionValues:withFloat:withFloat:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneQueriesFunctionFunctionValues:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionFunctionValues:withFloat:withFloat:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneQueriesFunctionFunctionValues:);
+  methods[1].selector = @selector(matchesValueWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$l_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$u_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$l_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$u_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionFunctionValues", "getRangeScorerWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withBoolean:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_$4 = { 2, "", "org.apache.lucene.queries.function", "FunctionValues", 0x8008, 2, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionFunctionValues_$4;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionFunctionValues;FFLOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneQueriesFunctionFunctionValues;", "matchesValue", "I", "LOrgApacheLuceneQueriesFunctionFunctionValues;", "getRangeScorerWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withBoolean:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_4 = { "", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x8010, 2, 3, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionFunctionValues_4;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionFunctionValues_$4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_$4 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
+void OrgApacheLuceneQueriesFunctionFunctionValues_4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_4 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
   JreStrongAssign(&self->this$0_, outer$);
   self->val$l_ = capture$0;
   self->val$u_ = capture$1;
-  OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, arg$0, arg$1);
+  OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, reader, values);
 }
 
-OrgApacheLuceneQueriesFunctionFunctionValues_$4 *new_OrgApacheLuceneQueriesFunctionFunctionValues_$4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_$4, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
+OrgApacheLuceneQueriesFunctionFunctionValues_4 *new_OrgApacheLuceneQueriesFunctionFunctionValues_4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_4, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, reader, values)
 }
 
-OrgApacheLuceneQueriesFunctionFunctionValues_$4 *create_OrgApacheLuceneQueriesFunctionFunctionValues_$4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_$4, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
+OrgApacheLuceneQueriesFunctionFunctionValues_4 *create_OrgApacheLuceneQueriesFunctionFunctionValues_4_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_4, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, reader, values)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionValues_$4)
+@implementation OrgApacheLuceneQueriesFunctionFunctionValues_5
 
-@implementation OrgApacheLuceneQueriesFunctionFunctionValues_$5
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
+                                                           withFloat:(jfloat)capture$0
+                                                           withFloat:(jfloat)capture$1
+                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values {
+  OrgApacheLuceneQueriesFunctionFunctionValues_5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1, reader, values);
+  return self;
+}
 
 - (jboolean)matchesValueWithInt:(jint)doc {
   jfloat docVal = [this$0_ floatValWithInt:doc];
   return docVal > val$l_ && docVal < val$u_;
 }
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)outer$
-                                                           withFloat:(jfloat)capture$0
-                                                           withFloat:(jfloat)capture$1
-                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)arg$0
-                    withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)arg$1 {
-  OrgApacheLuceneQueriesFunctionFunctionValues_$5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1, arg$0, arg$1);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "matchesValueWithInt:", "matchesValue", "Z", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionFunctionValues:withFloat:withFloat:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneQueriesFunctionFunctionValues:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionFunctionValues:withFloat:withFloat:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneQueriesFunctionFunctionValues:);
+  methods[1].selector = @selector(matchesValueWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$l_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$u_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$l_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$u_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionFunctionValues", "getRangeScorerWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withBoolean:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_$5 = { 2, "", "org.apache.lucene.queries.function", "FunctionValues", 0x8008, 2, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionFunctionValues_$5;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionFunctionValues;FFLOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneQueriesFunctionFunctionValues;", "matchesValue", "I", "LOrgApacheLuceneQueriesFunctionFunctionValues;", "getRangeScorerWithOrgApacheLuceneIndexIndexReader:withNSString:withNSString:withBoolean:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionValues_5 = { "", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x8010, 2, 3, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionFunctionValues_5;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionFunctionValues_$5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_$5 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
+void OrgApacheLuceneQueriesFunctionFunctionValues_5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues_5 *self, OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
   JreStrongAssign(&self->this$0_, outer$);
   self->val$l_ = capture$0;
   self->val$u_ = capture$1;
-  OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, arg$0, arg$1);
+  OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, reader, values);
 }
 
-OrgApacheLuceneQueriesFunctionFunctionValues_$5 *new_OrgApacheLuceneQueriesFunctionFunctionValues_$5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_$5, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
+OrgApacheLuceneQueriesFunctionFunctionValues_5 *new_OrgApacheLuceneQueriesFunctionFunctionValues_5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_5, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, reader, values)
 }
 
-OrgApacheLuceneQueriesFunctionFunctionValues_$5 *create_OrgApacheLuceneQueriesFunctionFunctionValues_$5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_$5, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
+OrgApacheLuceneQueriesFunctionFunctionValues_5 *create_OrgApacheLuceneQueriesFunctionFunctionValues_5_initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionFunctionValues *outer$, jfloat capture$0, jfloat capture$1, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionValues_5, initWithOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, reader, values)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionValues_$5)

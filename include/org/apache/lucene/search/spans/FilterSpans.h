@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansFilterSpans
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansFilterSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansFilterSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansFilterSpans))
 #define OrgApacheLuceneSearchSpansFilterSpans_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief A <code>Spans</code> implementation wrapping another spans instance,
- allowing to filter spans matches easily by implementing <code>accept</code>
+  allowing to filter spans matches easily by implementing <code>accept</code>
  */
 @interface OrgApacheLuceneSearchSpansFilterSpans : OrgApacheLuceneSearchSpansSpans {
  @public
@@ -65,14 +71,18 @@
 /*!
  @brief Wrap the given <code>Spans</code>.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)inArg;
 
 /*!
  @brief Returns YES if the candidate should be an accepted match,
- NO if it should not, and NO_MORE_IN_CURRENT_DOC if iteration
- should move on to the next document.
+  NO if it should not, and NO_MORE_IN_CURRENT_DOC if iteration
+  should move on to the next document.
  */
 - (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)candidate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -93,6 +103,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum) {
   OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_YES = 0,
   OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_NO = 1,
@@ -101,24 +113,22 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_E
 
 /*!
  @brief Status returned from <code>FilterSpans.accept(Spans)</code> that indicates
- whether a candidate match should be accepted, rejected, or rejected
- and move on to the next document.
+  whether a candidate match should be accepted, rejected, or rejected
+  and move on to the next document.
  */
-@interface OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus : JavaLangEnum
 
-+ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)YES_;
-
-+ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)NO_;
-
-+ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)NO_MORE_IN_CURRENT_DOC;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *YES_ NS_SWIFT_NAME(YES_);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *NO_ NS_SWIFT_NAME(NO_);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *NO_MORE_IN_CURRENT_DOC NS_SWIFT_NAME(NO_MORE_IN_CURRENT_DOC);
+#pragma mark Public
 
 + (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum)toNSEnum;
 
 @end
@@ -131,23 +141,23 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheL
 /*!
  @brief Indicates the match should be accepted
  */
-inline OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_get_YES();
+inline OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_get_YES(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, YES)
 
 /*!
  @brief Indicates the match should be rejected
  */
-inline OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_get_NO();
+inline OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_get_NO(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO)
 
 /*!
  @brief Indicates the match should be rejected, and the enumeration may continue
- with the next document.
+  with the next document.
  */
-inline OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_get_NO_MORE_IN_CURRENT_DOC();
+inline OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_get_NO_MORE_IN_CURRENT_DOC(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO_MORE_IN_CURRENT_DOC)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_valueOfWithNSString_(NSString *name);
 
@@ -157,4 +167,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansFilterSpans")

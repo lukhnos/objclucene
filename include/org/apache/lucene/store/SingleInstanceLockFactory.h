@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreSingleInstanceLockFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreSingleInstanceLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreSingleInstanceLockFactory || defined(INCLUDE_OrgApacheLuceneStoreSingleInstanceLockFactory))
 #define OrgApacheLuceneStoreSingleInstanceLockFactory_
 
@@ -26,11 +32,11 @@
 
 /*!
  @brief Implements <code>LockFactory</code> for a single in-process instance,
- meaning all locking will take place through this one instance.
+  meaning all locking will take place through this one instance.
  Only use this <code>LockFactory</code> when you are certain all
- IndexWriters for a given index are running
- against a single shared in-process Directory instance.  This is
- currently the default locking for RAMDirectory.
+  IndexWriters for a given index are running
+  against a single shared in-process Directory instance.  This is
+  currently the default locking for RAMDirectory.
  - seealso: LockFactory
  */
 @interface OrgApacheLuceneStoreSingleInstanceLockFactory : OrgApacheLuceneStoreLockFactory {
@@ -40,7 +46,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                              withNSString:(NSString *)lockName;
@@ -53,12 +59,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreSingleInstanceLockFactory, locks_, JavaU
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreSingleInstanceLockFactory_init(OrgApacheLuceneStoreSingleInstanceLockFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreSingleInstanceLockFactory *new_OrgApacheLuceneStoreSingleInstanceLockFactory_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreSingleInstanceLockFactory *new_OrgApacheLuceneStoreSingleInstanceLockFactory_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreSingleInstanceLockFactory *create_OrgApacheLuceneStoreSingleInstanceLockFactory_init();
+FOUNDATION_EXPORT OrgApacheLuceneStoreSingleInstanceLockFactory *create_OrgApacheLuceneStoreSingleInstanceLockFactory_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSingleInstanceLockFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreSingleInstanceLockFactory")

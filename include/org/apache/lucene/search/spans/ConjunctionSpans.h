@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansConjunctionSpans
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansConjunctionSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansConjunctionSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansConjunctionSpans))
 #define OrgApacheLuceneSearchSpansConjunctionSpans_
 
@@ -55,11 +61,15 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)subSpans;
+- (instancetype __nonnull)initPackagePrivateWithJavaUtilList:(id<JavaUtilList>)subSpans;
 
 - (jint)toMatchDoc;
 
 - (jboolean)twoPhaseCurrentDocMatches;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -68,10 +78,14 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansConjunctionSpans)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansConjunctionSpans, subSpans_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansConjunctionSpans, conjunction_, OrgApacheLuceneSearchDocIdSetIterator *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansConjunctionSpans_initWithJavaUtilList_(OrgApacheLuceneSearchSpansConjunctionSpans *self, id<JavaUtilList> subSpans);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansConjunctionSpans_initPackagePrivateWithJavaUtilList_(OrgApacheLuceneSearchSpansConjunctionSpans *self, id<JavaUtilList> subSpans);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansConjunctionSpans)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansConjunctionSpans")

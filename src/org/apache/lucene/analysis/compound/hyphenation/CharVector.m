@@ -8,6 +8,10 @@
 #include "java/lang/System.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/CharVector.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/hyphenation/CharVector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisCompoundHyphenationCharVector () {
  @public
   jint blockSize_;
@@ -28,7 +32,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, array_
 /*!
  @brief Capacity increment size
  */
-inline jint OrgApacheLuceneAnalysisCompoundHyphenationCharVector_get_DEFAULT_BLOCK_SIZE();
+inline jint OrgApacheLuceneAnalysisCompoundHyphenationCharVector_get_DEFAULT_BLOCK_SIZE(void);
 #define OrgApacheLuceneAnalysisCompoundHyphenationCharVector_DEFAULT_BLOCK_SIZE 2048
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, DEFAULT_BLOCK_SIZE, jint)
 
@@ -61,8 +65,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   n_ = 0;
 }
 
-- (OrgApacheLuceneAnalysisCompoundHyphenationCharVector *)clone {
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector *cv = create_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_withInt_([((IOSCharArray *) nil_chk(array_)) clone], blockSize_);
+- (OrgApacheLuceneAnalysisCompoundHyphenationCharVector *)java_clone {
+  OrgApacheLuceneAnalysisCompoundHyphenationCharVector *cv = create_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_withInt_([((IOSCharArray *) nil_chk(array_)) java_clone], blockSize_);
   cv->n_ = self->n_;
   return cv;
 }
@@ -113,34 +117,52 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCompoundHyphenationCharVector;", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "C", 0x1, 6, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(initWithCharArray:);
+  methods[3].selector = @selector(initWithCharArray:withInt:);
+  methods[4].selector = @selector(clear);
+  methods[5].selector = @selector(java_clone);
+  methods[6].selector = @selector(getArray);
+  methods[7].selector = @selector(length);
+  methods[8].selector = @selector(capacity);
+  methods[9].selector = @selector(putWithInt:withChar:);
+  methods[10].selector = @selector(getWithInt:);
+  methods[11].selector = @selector(alloc__WithInt:);
+  methods[12].selector = @selector(trimToSize);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationCharVector_DEFAULT_BLOCK_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "blockSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "array_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "n_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "I", "[C", "[CI", "clone", "put", "IC", "get", "alloc" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationCharVector = { "CharVector", "org.apache.lucene.analysis.compound.hyphenation", ptrTable, methods, fields, 7, 0x1, 13, 4, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisCompoundHyphenationCharVector;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CharVector", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "CharVector", NULL, 0x1, NULL, NULL },
-    { "initWithCharArray:", "CharVector", NULL, 0x1, NULL, NULL },
-    { "initWithCharArray:withInt:", "CharVector", NULL, 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.analysis.compound.hyphenation.CharVector;", 0x1, NULL, NULL },
-    { "getArray", NULL, "[C", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "capacity", NULL, "I", 0x1, NULL, NULL },
-    { "putWithInt:withChar:", "put", "V", 0x1, NULL, NULL },
-    { "getWithInt:", "get", "C", 0x1, NULL, NULL },
-    { "alloc__WithInt:", "alloc", "I", 0x1, NULL, NULL },
-    { "trimToSize", NULL, "V", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_BLOCK_SIZE", "DEFAULT_BLOCK_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationCharVector_DEFAULT_BLOCK_SIZE },
-    { "blockSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "array_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "n_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationCharVector = { 2, "CharVector", "org.apache.lucene.analysis.compound.hyphenation", NULL, 0x1, 13, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisCompoundHyphenationCharVector;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end

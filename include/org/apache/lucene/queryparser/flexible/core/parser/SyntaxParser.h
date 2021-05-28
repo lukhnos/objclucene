@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser))
 #define OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_
 
@@ -22,13 +28,11 @@
 /*!
  @brief A parser needs to implement <code>SyntaxParser</code> interface
  */
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser < JavaObject >
 
 /*!
- @param query
- - query data to be parsed
- @param field
- - default field name
+ @param query - query data to be parsed
+ @param field - default field name
  @return QueryNode tree
  */
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)parseWithJavaLangCharSequence:(id<JavaLangCharSequence>)query
@@ -42,4 +46,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxPar
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser")

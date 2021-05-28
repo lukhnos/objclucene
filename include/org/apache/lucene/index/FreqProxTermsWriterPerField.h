@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFreqProxTermsWriterPerField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFreqProxTermsWriterPerField_) && (INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriterPerField || defined(INCLUDE_OrgApacheLuceneIndexFreqProxTermsWriterPerField))
 #define OrgApacheLuceneIndexFreqProxTermsWriterPerField_
 
@@ -40,17 +46,17 @@
   jint docCount_;
   /*!
    @brief Set to true if any token had a payload in the current
- segment.
+   segment.
    */
   jboolean sawPayloads_;
 }
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)invertState
-                           withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)termsHash
-                           withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
-                   withOrgApacheLuceneIndexTermsHashPerField:(OrgApacheLuceneIndexTermsHashPerField *)nextPerField;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)invertState
+                                                   withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)termsHash
+                                                   withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
+                                           withOrgApacheLuceneIndexTermsHashPerField:(OrgApacheLuceneIndexTermsHashPerField *)nextPerField;
 
 - (void)newPostingsArray OBJC_METHOD_FAMILY_NONE;
 
@@ -73,6 +79,14 @@
 - (void)writeProxWithInt:(jint)termID
                  withInt:(jint)proxCode;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+           withOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)arg1
+                  withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)arg2
+          withOrgApacheLuceneIndexTermsHashPerField:(OrgApacheLuceneIndexTermsHashPerField *)arg3
+                  withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)arg4 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFreqProxTermsWriterPerField)
@@ -80,11 +94,11 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFreqProxTermsWriterPerField)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFreqProxTermsWriterPerField, payloadAttribute_, id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFreqProxTermsWriterPerField, offsetAttribute_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexFreqProxTermsWriterPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneIndexTermsHashPerField_(OrgApacheLuceneIndexFreqProxTermsWriterPerField *self, OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermsHash *termsHash, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneIndexTermsHashPerField *nextPerField);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexFreqProxTermsWriterPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneIndexTermsHashPerField_(OrgApacheLuceneIndexFreqProxTermsWriterPerField *self, OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermsHash *termsHash, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneIndexTermsHashPerField *nextPerField);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriterPerField *new_OrgApacheLuceneIndexFreqProxTermsWriterPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneIndexTermsHashPerField_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermsHash *termsHash, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneIndexTermsHashPerField *nextPerField) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriterPerField *new_OrgApacheLuceneIndexFreqProxTermsWriterPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneIndexTermsHashPerField_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermsHash *termsHash, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneIndexTermsHashPerField *nextPerField) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriterPerField *create_OrgApacheLuceneIndexFreqProxTermsWriterPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneIndexTermsHashPerField_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermsHash *termsHash, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneIndexTermsHashPerField *nextPerField);
+FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriterPerField *create_OrgApacheLuceneIndexFreqProxTermsWriterPerField_initPackagePrivateWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneIndexTermsHashPerField_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermsHash *termsHash, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneIndexTermsHashPerField *nextPerField);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxTermsWriterPerField)
 
@@ -110,10 +124,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxTermsWriterPerField)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)size
-                withBoolean:(jboolean)writeFreqs
-                withBoolean:(jboolean)writeProx
-                withBoolean:(jboolean)writeOffsets;
+- (instancetype __nonnull)initWithInt:(jint)size
+                          withBoolean:(jboolean)writeFreqs
+                          withBoolean:(jboolean)writeProx
+                          withBoolean:(jboolean)writeOffsets;
 
 #pragma mark Package-Private
 
@@ -123,6 +137,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxTermsWriterPerField)
                                                     withInt:(jint)numToCopy OBJC_METHOD_FAMILY_NONE;
 
 - (OrgApacheLuceneIndexParallelPostingsArray *)newInstanceWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -144,4 +162,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqP
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriterPerField")

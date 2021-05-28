@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilBitSetIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilBitSetIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilBitSetIterator || defined(INCLUDE_OrgApacheLuceneUtilBitSetIterator))
 #define OrgApacheLuceneUtilBitSetIterator_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief A <code>DocIdSetIterator</code> which iterates over set bits in a
- bit set.
+  bit set.
  */
 @interface OrgApacheLuceneUtilBitSetIterator : OrgApacheLuceneSearchDocIdSetIterator
 
@@ -35,8 +41,8 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)bits
-                                         withLong:(jlong)cost;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)bits
+                                                   withLong:(jlong)cost;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -56,6 +62,10 @@
 
 - (jint)nextDoc;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBitSetIterator)
@@ -74,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitSetIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBitSetIterator")

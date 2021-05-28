@@ -8,6 +8,10 @@
 #include "java/lang/Math.h"
 #include "org/apache/lucene/search/highlight/TextFragment.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/TextFragment must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchHighlightTextFragment
 
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)markedUpText
@@ -48,23 +52,35 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangCharSequence:withInt:withInt:", "TextFragment", NULL, 0x1, NULL, NULL },
-    { "setScoreWithFloat:", "setScore", "V", 0x0, NULL, NULL },
-    { "getScore", NULL, "F", 0x1, NULL, NULL },
-    { "mergeWithOrgApacheLuceneSearchHighlightTextFragment:", "merge", "V", 0x1, NULL, NULL },
-    { "followsWithOrgApacheLuceneSearchHighlightTextFragment:", "follows", "Z", 0x1, NULL, NULL },
-    { "getFragNum", NULL, "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 1, 2, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaLangCharSequence:withInt:withInt:);
+  methods[1].selector = @selector(setScoreWithFloat:);
+  methods[2].selector = @selector(getScore);
+  methods[3].selector = @selector(mergeWithOrgApacheLuceneSearchHighlightTextFragment:);
+  methods[4].selector = @selector(followsWithOrgApacheLuceneSearchHighlightTextFragment:);
+  methods[5].selector = @selector(getFragNum);
+  methods[6].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "markedUpText_", NULL, 0x0, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fragNum_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "textStartPos_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "textEndPos_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "score_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "markedUpText_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fragNum_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "textStartPos_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "textEndPos_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "score_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTextFragment = { 2, "TextFragment", "org.apache.lucene.search.highlight", NULL, 0x1, 7, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaLangCharSequence;II", "setScore", "F", "merge", "LOrgApacheLuceneSearchHighlightTextFragment;", "follows", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTextFragment = { "TextFragment", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x1, 7, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightTextFragment;
 }
 

@@ -8,6 +8,10 @@
 #include "java/lang/Package.h"
 #include "org/apache/lucene/LucenePackage.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/LucenePackage must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneLucenePackage ()
 
 - (instancetype)init;
@@ -16,9 +20,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneLucenePackage_init(OrgApacheLuceneLucenePackage *self);
 
-__attribute__((unused)) static OrgApacheLuceneLucenePackage *new_OrgApacheLuceneLucenePackage_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneLucenePackage *new_OrgApacheLuceneLucenePackage_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneLucenePackage *create_OrgApacheLuceneLucenePackage_init();
+__attribute__((unused)) static OrgApacheLuceneLucenePackage *create_OrgApacheLuceneLucenePackage_init(void);
 
 @implementation OrgApacheLuceneLucenePackage
 
@@ -34,11 +38,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LucenePackage", NULL, 0x2, NULL, NULL },
-    { "get", NULL, "Ljava.lang.Package;", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangPackage;", 0x9, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneLucenePackage = { 2, "LucenePackage", "org.apache.lucene", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(get);
+  #pragma clang diagnostic pop
+  static const J2ObjcClassInfo _OrgApacheLuceneLucenePackage = { "LucenePackage", "org.apache.lucene", NULL, methods, NULL, 7, 0x11, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneLucenePackage;
 }
 

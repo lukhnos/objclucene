@@ -3,11 +3,9 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/tst/TSTLookup.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Long.h"
@@ -28,6 +26,10 @@
 #include "org/apache/lucene/util/CharsRefBuilder.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/tst/TSTLookup must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestTstTSTLookup () {
  @public
   /*!
@@ -47,23 +49,23 @@
 
 @end
 
-inline jbyte OrgApacheLuceneSearchSuggestTstTSTLookup_get_LO_KID();
+inline jbyte OrgApacheLuceneSearchSuggestTstTSTLookup_get_LO_KID(void);
 #define OrgApacheLuceneSearchSuggestTstTSTLookup_LO_KID 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestTstTSTLookup, LO_KID, jbyte)
 
-inline jbyte OrgApacheLuceneSearchSuggestTstTSTLookup_get_EQ_KID();
+inline jbyte OrgApacheLuceneSearchSuggestTstTSTLookup_get_EQ_KID(void);
 #define OrgApacheLuceneSearchSuggestTstTSTLookup_EQ_KID 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestTstTSTLookup, EQ_KID, jbyte)
 
-inline jbyte OrgApacheLuceneSearchSuggestTstTSTLookup_get_HI_KID();
+inline jbyte OrgApacheLuceneSearchSuggestTstTSTLookup_get_HI_KID(void);
 #define OrgApacheLuceneSearchSuggestTstTSTLookup_HI_KID 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestTstTSTLookup, HI_KID, jbyte)
 
-inline jbyte OrgApacheLuceneSearchSuggestTstTSTLookup_get_HAS_TOKEN();
+inline jbyte OrgApacheLuceneSearchSuggestTstTSTLookup_get_HAS_TOKEN(void);
 #define OrgApacheLuceneSearchSuggestTstTSTLookup_HAS_TOKEN 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestTstTSTLookup, HAS_TOKEN, jbyte)
 
-inline jbyte OrgApacheLuceneSearchSuggestTstTSTLookup_get_HAS_VALUE();
+inline jbyte OrgApacheLuceneSearchSuggestTstTSTLookup_get_HAS_VALUE(void);
 #define OrgApacheLuceneSearchSuggestTstTSTLookup_HAS_VALUE 16
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestTstTSTLookup, HAS_VALUE, jbyte)
 
@@ -112,7 +114,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key {
-  id<JavaUtilList> list = [((OrgApacheLuceneSearchSuggestTstTSTAutocomplete *) nil_chk(autocomplete_)) prefixCompletionWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:root_ withJavaLangCharSequence:key withInt:0];
+  id<JavaUtilList> list = JreRetainedLocalValue([((OrgApacheLuceneSearchSuggestTstTSTAutocomplete *) nil_chk(autocomplete_)) prefixCompletionWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:root_ withJavaLangCharSequence:key withInt:0]);
   if (list == nil || [list isEmpty]) {
     return nil;
   }
@@ -136,7 +138,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (contexts != nil) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"this suggester doesn't support contexts");
   }
-  id<JavaUtilList> list = [((OrgApacheLuceneSearchSuggestTstTSTAutocomplete *) nil_chk(autocomplete_)) prefixCompletionWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:root_ withJavaLangCharSequence:key withInt:0];
+  id<JavaUtilList> list = JreRetainedLocalValue([((OrgApacheLuceneSearchSuggestTstTSTAutocomplete *) nil_chk(autocomplete_)) prefixCompletionWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:root_ withJavaLangCharSequence:key withInt:0]);
   id<JavaUtilList> res = create_JavaUtilArrayList_init();
   if (list == nil || [list size] == 0) {
     return res;
@@ -159,7 +161,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   else {
     for (jint i = 0; i < maxCnt; i++) {
-      OrgApacheLuceneSearchSuggestTstTernaryTreeNode *ttn = [list getWithInt:i];
+      OrgApacheLuceneSearchSuggestTstTernaryTreeNode *ttn = JreRetainedLocalValue([list getWithInt:i]);
       [res addWithId:create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_(((OrgApacheLuceneSearchSuggestTstTernaryTreeNode *) nil_chk(ttn))->token_, [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ttn->val_, [NSNumber class])))) longLongValue])];
     }
   }
@@ -212,31 +214,48 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TSTLookup", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneSearchSuggestInputIterator:", "build", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "addWithJavaLangCharSequence:withId:", "add", "Z", 0x1, NULL, NULL },
-    { "getWithJavaLangCharSequence:", "get", "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "charSeqEqualsWithJavaLangCharSequence:withJavaLangCharSequence:", "charSeqEquals", "Z", 0xa, NULL, NULL },
-    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
-    { "readRecursivelyWithOrgApacheLuceneStoreDataInput:withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:", "readRecursively", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "writeRecursivelyWithOrgApacheLuceneStoreDataOutput:withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:", "writeRecursively", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "storeWithOrgApacheLuceneStoreDataOutput:", "store", "Z", 0x21, "Ljava.io.IOException;", NULL },
-    { "load__WithOrgApacheLuceneStoreDataInput:", "load", "Z", 0x21, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getCount", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "Z", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 9, 10, -1, 11, -1, -1 },
+    { NULL, "V", 0x2, 12, 13, 2, -1, -1, -1 },
+    { NULL, "V", 0x2, 14, 15, 2, -1, -1, -1 },
+    { NULL, "Z", 0x21, 16, 17, 2, -1, -1, -1 },
+    { NULL, "Z", 0x21, 18, 19, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(buildWithOrgApacheLuceneSearchSuggestInputIterator:);
+  methods[2].selector = @selector(addWithJavaLangCharSequence:withId:);
+  methods[3].selector = @selector(getWithJavaLangCharSequence:);
+  methods[4].selector = @selector(charSeqEqualsWithJavaLangCharSequence:withJavaLangCharSequence:);
+  methods[5].selector = @selector(lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:);
+  methods[6].selector = @selector(readRecursivelyWithOrgApacheLuceneStoreDataInput:withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:);
+  methods[7].selector = @selector(writeRecursivelyWithOrgApacheLuceneStoreDataOutput:withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:);
+  methods[8].selector = @selector(storeWithOrgApacheLuceneStoreDataOutput:);
+  methods[9].selector = @selector(load__WithOrgApacheLuceneStoreDataInput:);
+  methods[10].selector = @selector(ramBytesUsed);
+  methods[11].selector = @selector(getCount);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "root_", NULL, 0x0, "Lorg.apache.lucene.search.suggest.tst.TernaryTreeNode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "autocomplete_", NULL, 0x0, "Lorg.apache.lucene.search.suggest.tst.TSTAutocomplete;", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "LO_KID", "LO_KID", 0x1a, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneSearchSuggestTstTSTLookup_LO_KID },
-    { "EQ_KID", "EQ_KID", 0x1a, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneSearchSuggestTstTSTLookup_EQ_KID },
-    { "HI_KID", "HI_KID", 0x1a, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneSearchSuggestTstTSTLookup_HI_KID },
-    { "HAS_TOKEN", "HAS_TOKEN", 0x1a, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneSearchSuggestTstTSTLookup_HAS_TOKEN },
-    { "HAS_VALUE", "HAS_VALUE", 0x1a, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneSearchSuggestTstTSTLookup_HAS_VALUE },
+    { "root_", "LOrgApacheLuceneSearchSuggestTstTernaryTreeNode;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "autocomplete_", "LOrgApacheLuceneSearchSuggestTstTSTAutocomplete;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "count_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "LO_KID", "B", .constantValue.asChar = OrgApacheLuceneSearchSuggestTstTSTLookup_LO_KID, 0x1a, -1, -1, -1, -1 },
+    { "EQ_KID", "B", .constantValue.asChar = OrgApacheLuceneSearchSuggestTstTSTLookup_EQ_KID, 0x1a, -1, -1, -1, -1 },
+    { "HI_KID", "B", .constantValue.asChar = OrgApacheLuceneSearchSuggestTstTSTLookup_HI_KID, 0x1a, -1, -1, -1, -1 },
+    { "HAS_TOKEN", "B", .constantValue.asChar = OrgApacheLuceneSearchSuggestTstTSTLookup_HAS_TOKEN, 0x1a, -1, -1, -1, -1 },
+    { "HAS_VALUE", "B", .constantValue.asChar = OrgApacheLuceneSearchSuggestTstTSTLookup_HAS_VALUE, 0x1a, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestTstTSTLookup = { 2, "TSTLookup", "org.apache.lucene.search.suggest.tst", NULL, 0x1, 12, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "build", "LOrgApacheLuceneSearchSuggestInputIterator;", "LJavaIoIOException;", "add", "LJavaLangCharSequence;LNSObject;", "get", "LJavaLangCharSequence;", "charSeqEquals", "LJavaLangCharSequence;LJavaLangCharSequence;", "lookup", "LJavaLangCharSequence;LJavaUtilSet;ZI", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;", "readRecursively", "LOrgApacheLuceneStoreDataInput;LOrgApacheLuceneSearchSuggestTstTernaryTreeNode;", "writeRecursively", "LOrgApacheLuceneStoreDataOutput;LOrgApacheLuceneSearchSuggestTstTernaryTreeNode;", "store", "LOrgApacheLuceneStoreDataOutput;", "load", "LOrgApacheLuceneStoreDataInput;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestTstTSTLookup = { "TSTLookup", "org.apache.lucene.search.suggest.tst", ptrTable, methods, fields, 7, 0x1, 12, 8, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestTstTSTLookup;
 }
 
@@ -259,8 +278,8 @@ OrgApacheLuceneSearchSuggestTstTSTLookup *create_OrgApacheLuceneSearchSuggestTst
 
 jboolean OrgApacheLuceneSearchSuggestTstTSTLookup_charSeqEqualsWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> left, id<JavaLangCharSequence> right) {
   OrgApacheLuceneSearchSuggestTstTSTLookup_initialize();
-  jint len = [((id<JavaLangCharSequence>) nil_chk(left)) length];
-  if (len != [((id<JavaLangCharSequence>) nil_chk(right)) length]) {
+  jint len = [((id<JavaLangCharSequence>) nil_chk(left)) java_length];
+  if (len != [((id<JavaLangCharSequence>) nil_chk(right)) java_length]) {
     return false;
   }
   for (jint i = 0; i < len; i++) {
@@ -295,7 +314,7 @@ void OrgApacheLuceneSearchSuggestTstTSTLookup_readRecursivelyWithOrgApacheLucene
 }
 
 void OrgApacheLuceneSearchSuggestTstTSTLookup_writeRecursivelyWithOrgApacheLuceneStoreDataOutput_withOrgApacheLuceneSearchSuggestTstTernaryTreeNode_(OrgApacheLuceneSearchSuggestTstTSTLookup *self, OrgApacheLuceneStoreDataOutput *outArg, OrgApacheLuceneSearchSuggestTstTernaryTreeNode *node) {
-  [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeStringWithNSString:[NSString stringWithCharacters:[IOSCharArray arrayWithChars:(jchar[]){ ((OrgApacheLuceneSearchSuggestTstTernaryTreeNode *) nil_chk(node))->splitchar_ } count:1] offset:0 length:1]];
+  [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeStringWithNSString:[NSString java_stringWithCharacters:[IOSCharArray arrayWithChars:(jchar[]){ ((OrgApacheLuceneSearchSuggestTstTernaryTreeNode *) nil_chk(node))->splitchar_ } count:1] offset:0 length:1]];
   jbyte mask = 0;
   if (node->eqKid_ != nil) mask |= OrgApacheLuceneSearchSuggestTstTSTLookup_EQ_KID;
   if (node->loKid_ != nil) mask |= OrgApacheLuceneSearchSuggestTstTSTLookup_LO_KID;

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSortedSetSortField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSortedSetSortField_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSortField || defined(INCLUDE_OrgApacheLuceneSearchSortedSetSortField))
 #define OrgApacheLuceneSearchSortedSetSortField_
 
@@ -21,20 +27,22 @@
 #include "org/apache/lucene/search/SortField.h"
 
 @class OrgApacheLuceneSearchFieldComparator;
+@class OrgApacheLuceneSearchFieldComparatorSource;
+@class OrgApacheLuceneSearchSortField_Type;
 @class OrgApacheLuceneSearchSortedSetSelector_Type;
 
 /*!
  @brief SortField for <code>SortedSetDocValues</code>.
  <p>
- A SortedSetDocValues contains multiple values for a field, so sorting with
- this technique "selects" a value as the representative sort value for the document.
+  A SortedSetDocValues contains multiple values for a field, so sorting with
+  this technique "selects" a value as the representative sort value for the document. 
  <p>
- By default, the minimum value in the set is selected as the sort value, but
- this can be customized. Selectors other than the default do have some limitations
- to ensure that all selections happen in constant-time for performance.
+  By default, the minimum value in the set is selected as the sort value, but
+  this can be customized. Selectors other than the default do have some limitations
+  to ensure that all selections happen in constant-time for performance. 
  <p>
- Like sorting by string, this also supports sorting missing values as first or last,
- via <code>setMissingValue(Object)</code>.
+  Like sorting by string, this also supports sorting missing values as first or last,
+  via <code>setMissingValue(Object)</code>.
  - seealso: SortedSetSelector
  */
 @interface OrgApacheLuceneSearchSortedSetSortField : OrgApacheLuceneSearchSortField
@@ -43,24 +51,24 @@
 
 /*!
  @brief Creates a sort, possibly in reverse, by the minimum value in the set 
- for the document.
+  for the document.
  @param field Name of field to sort by.  Must not be null.
  @param reverse True if natural order should be reversed.
  */
-- (instancetype)initWithNSString:(NSString *)field
-                     withBoolean:(jboolean)reverse;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                               withBoolean:(jboolean)reverse;
 
 /*!
  @brief Creates a sort, possibly in reverse, specifying how the sort value from 
- the document's set is selected.
+  the document's set is selected.
  @param field Name of field to sort by.  Must not be null.
  @param reverse True if natural order should be reversed.
- @param selector custom selector type for choosing the sort value from the set.
- <p>
- NOTE: selectors other than <code>SortedSetSelector.Type.MIN</code> require optional codec support.
+ @param selector custom selector type for choosing the sort value from the set.  
+  <p>  NOTE: selectors other than 
+ <code>SortedSetSelector.Type.MIN</code>  require optional codec support.
  */
-- (instancetype)initWithNSString:(NSString *)field
-                     withBoolean:(jboolean)reverse
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                               withBoolean:(jboolean)reverse
 withOrgApacheLuceneSearchSortedSetSelector_Type:(OrgApacheLuceneSearchSortedSetSelector_Type *)selector;
 
 - (jboolean)isEqual:(id)obj;
@@ -78,11 +86,27 @@ withOrgApacheLuceneSearchSortedSetSelector_Type:(OrgApacheLuceneSearchSortedSetS
 /*!
  @brief Set how missing values (the empty set) are sorted.
  <p>
- Note that this must be <code>STRING_FIRST</code> or <code>STRING_LAST</code>.
+  Note that this must be <code>STRING_FIRST</code> or <code>STRING_LAST</code>.
  */
 - (void)setMissingValueWithId:(id)missingValue;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)arg1
+                               withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)arg1
+                               withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -104,4 +128,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSortField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSortField")

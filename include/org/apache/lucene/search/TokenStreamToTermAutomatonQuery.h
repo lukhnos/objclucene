@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery || defined(INCLUDE_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery))
 #define OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_
 
@@ -21,10 +27,9 @@
 
 /*!
  @brief Consumes a TokenStream and creates an <code>TermAutomatonQuery</code>
- where the transition labels are tokens from the <code>TermToBytesRefAttribute</code>
+   where the transition labels are tokens from the <code>TermToBytesRefAttribute</code>
  .
  <p>This code is very new and likely has exciting bugs!
-  
  */
 @interface OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery : NSObject
 
@@ -33,7 +38,7 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Whether to generate holes in the automaton for missing positions, <code>true</code> by default.
@@ -44,8 +49,8 @@
  @brief Pulls the graph (including <code>PositionLengthAttribute</code>
  ) from the provided <code>TokenStream</code>
  , and creates the corresponding
- automaton where arcs are bytes (or Unicode code points 
- if unicodeArcs = true) from each term.
+   automaton where arcs are bytes (or Unicode code points 
+   if unicodeArcs = true) from each term.
  */
 - (OrgApacheLuceneSearchTermAutomatonQuery *)toQueryWithNSString:(NSString *)field
                           withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
@@ -56,12 +61,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init(OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *new_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *new_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *create_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *create_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery")

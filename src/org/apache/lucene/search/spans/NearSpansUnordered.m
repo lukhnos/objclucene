@@ -5,11 +5,9 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
-#include "org/apache/lucene/search/spans/ConjunctionSpans.h"
 #include "org/apache/lucene/search/spans/NearSpans.h"
 #include "org/apache/lucene/search/spans/NearSpansUnordered.h"
 #include "org/apache/lucene/search/spans/SpanCollector.h"
@@ -19,6 +17,12 @@
 
 @class OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue;
 @class OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spans/NearSpansUnordered must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneSearchSpansNearSpansUnordered () {
  @public
@@ -93,7 +97,6 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchSpansNearSpansUnord
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell, this$0_, OrgApacheLuceneSearchSpansNearSpansUnordered *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell, in_, OrgApacheLuceneSearchSpansSpans *)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell_initWithOrgApacheLuceneSearchSpansNearSpansUnordered_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *self, OrgApacheLuceneSearchSpansNearSpansUnordered *outer$, OrgApacheLuceneSearchSpansSpans *spans);
@@ -114,6 +117,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCel
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)spans1
                     withId:(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)spans2;
+
+- (OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)pop;
+
+- (OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)top;
+
+- (OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)insertWithOverflowWithId:(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)arg0;
+
+- (OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)addWithId:(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)arg0;
+
+- (OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)getSentinelObject;
+
+- (OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)updateTopWithId:(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)arg0;
+
+- (OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *)updateTop;
 
 @end
 
@@ -164,7 +181,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPosi
       oneExhaustedInCurrentDoc_ = false;
       return true;
     }
-    JreAssert(([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:201 condition failed: assert minPositionCell().startPosition() != NO_MORE_POSITIONS;"));
+    JreAssert([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, @"org/apache/lucene/search/spans/NearSpansUnordered.java:201 condition failed: assert minPositionCell().startPosition() != NO_MORE_POSITIONS;");
     if ([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) nextStartPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
       [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue *) nil_chk(spanPositionQueue_)) updateTop];
     }
@@ -183,7 +200,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPosi
     [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) nextStartPosition];
     [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue *) nil_chk(spanPositionQueue_)) updateTop];
   }
-  JreAssert(([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:221 condition failed: assert minPositionCell().startPosition() != NO_MORE_POSITIONS;"));
+  JreAssert([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, @"org/apache/lucene/search/spans/NearSpansUnordered.java:221 condition failed: assert minPositionCell().startPosition() != NO_MORE_POSITIONS;");
   while (true) {
     if ([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) nextStartPosition] == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
       oneExhaustedInCurrentDoc_ = true;
@@ -197,7 +214,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPosi
 }
 
 - (jint)startPosition {
-  JreAssert((OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self) != nil), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:236 condition failed: assert minPositionCell() != null;"));
+  JreAssert(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self) != nil, @"org/apache/lucene/search/spans/NearSpansUnordered.java:236 condition failed: assert minPositionCell() != null;");
   return atFirstInCurrentDoc_ ? -1 : oneExhaustedInCurrentDoc_ ? OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS : [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition];
 }
 
@@ -217,10 +234,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPosi
 
 - (NSString *)description {
   if (OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self) != nil) {
-    return JreStrcat("$C$$$", [[self getClass] getName], '(', [((OrgApacheLuceneSearchSpansSpanNearQuery *) nil_chk(query_)) description], @")@", (JreStrcat("ICICI", [self docID], ':', [self startPosition], '-', [self endPosition])));
+    return JreStrcat("$C$$$", [[self java_getClass] getName], '(', [((OrgApacheLuceneSearchSpansSpanNearQuery *) nil_chk(query_)) description], @")@", (JreStrcat("ICICI", [self docID], ':', [self startPosition], '-', [self endPosition])));
   }
   else {
-    return JreStrcat("$C$$", [[self getClass] getName], '(', [((OrgApacheLuceneSearchSpansSpanNearQuery *) nil_chk(query_)) description], @")@ ?START?");
+    return JreStrcat("$C$$", [[self java_getClass] getName], '(', [((OrgApacheLuceneSearchSpansSpanNearQuery *) nil_chk(query_)) description], @")@ ?START?");
   }
 }
 
@@ -232,36 +249,53 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPosi
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilList:", "NearSpansUnordered", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/spans/SpanNearQuery;Ljava/util/List<Lorg/apache/lucene/search/spans/Spans;>;)V" },
-    { "singleCellToPositionQueue", NULL, "V", 0x2, NULL, NULL },
-    { "subSpanCellsToPositionQueue", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "positionsOrderedWithOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpans:", "positionsOrdered", "Z", 0x18, NULL, NULL },
-    { "minPositionCell", NULL, "Lorg.apache.lucene.search.spans.NearSpansUnordered$SpansCell;", 0x2, NULL, NULL },
-    { "atMatch", NULL, "Z", 0x2, NULL, NULL },
-    { "twoPhaseCurrentDocMatches", NULL, "Z", 0x0, "Ljava.io.IOException;", NULL },
-    { "nextStartPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "startPosition", NULL, "I", 0x1, NULL, NULL },
-    { "endPosition", NULL, "I", 0x1, NULL, NULL },
-    { "width", NULL, "I", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, 2, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x18, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilList:);
+  methods[1].selector = @selector(singleCellToPositionQueue);
+  methods[2].selector = @selector(subSpanCellsToPositionQueue);
+  methods[3].selector = @selector(positionsOrderedWithOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpans:);
+  methods[4].selector = @selector(minPositionCell);
+  methods[5].selector = @selector(atMatch);
+  methods[6].selector = @selector(twoPhaseCurrentDocMatches);
+  methods[7].selector = @selector(nextStartPosition);
+  methods[8].selector = @selector(startPosition);
+  methods[9].selector = @selector(endPosition);
+  methods[10].selector = @selector(width);
+  methods[11].selector = @selector(collectWithOrgApacheLuceneSearchSpansSpanCollector:);
+  methods[12].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "subSpanCells_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/search/spans/NearSpansUnordered$SpansCell;>;", .constantValue.asLong = 0 },
-    { "spanPositionQueue_", NULL, 0x2, "Lorg.apache.lucene.search.spans.NearSpansUnordered$SpanPositionQueue;", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalSpanLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxEndPositionCell_", NULL, 0x2, "Lorg.apache.lucene.search.spans.NearSpansUnordered$SpansCell;", NULL, NULL, .constantValue.asLong = 0 },
+    { "subSpanCells_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 8, -1 },
+    { "spanPositionQueue_", "LOrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "totalSpanLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxEndPositionCell_", "LOrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.spans.NearSpansUnordered$SpansCell;", "Lorg.apache.lucene.search.spans.NearSpansUnordered$SpanPositionQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansUnordered = { 2, "NearSpansUnordered", "org.apache.lucene.search.spans", NULL, 0x1, 13, methods, 4, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpansSpanNearQuery;LJavaUtilList;", "LJavaIoIOException;", "(Lorg/apache/lucene/search/spans/SpanNearQuery;Ljava/util/List<Lorg/apache/lucene/search/spans/Spans;>;)V", "positionsOrdered", "LOrgApacheLuceneSearchSpansSpans;LOrgApacheLuceneSearchSpansSpans;", "collect", "LOrgApacheLuceneSearchSpansSpanCollector;", "toString", "Ljava/util/List<Lorg/apache/lucene/search/spans/NearSpansUnordered$SpansCell;>;", "LOrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell;LOrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansUnordered = { "NearSpansUnordered", "org.apache.lucene.search.spans", ptrTable, methods, fields, 7, 0x1, 13, 4, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansNearSpansUnordered;
 }
 
 @end
 
 void OrgApacheLuceneSearchSpansNearSpansUnordered_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansNearSpansUnordered *self, OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans) {
-  OrgApacheLuceneSearchSpansNearSpans_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(self, query, subSpans);
+  OrgApacheLuceneSearchSpansNearSpans_initPackagePrivateWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(self, query, subSpans);
   JreStrongAssignAndConsume(&self->subSpanCells_, new_JavaUtilArrayList_initWithInt_([((id<JavaUtilList>) nil_chk(subSpans)) size]));
   for (OrgApacheLuceneSearchSpansSpans * __strong subSpan in subSpans) {
     [((id<JavaUtilList>) nil_chk(self->subSpanCells_)) addWithId:create_OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell_initWithOrgApacheLuceneSearchSpansNearSpansUnordered_withOrgApacheLuceneSearchSpansSpans_(self, subSpan)];
@@ -280,24 +314,24 @@ OrgApacheLuceneSearchSpansNearSpansUnordered *create_OrgApacheLuceneSearchSpansN
 
 void OrgApacheLuceneSearchSpansNearSpansUnordered_singleCellToPositionQueue(OrgApacheLuceneSearchSpansNearSpansUnordered *self) {
   JreStrongAssign(&self->maxEndPositionCell_, [((id<JavaUtilList>) nil_chk(self->subSpanCells_)) getWithInt:0]);
-  JreAssert(([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(self->maxEndPositionCell_)) docID] == -1), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:53 condition failed: assert maxEndPositionCell.docID() == -1;"));
-  JreAssert(([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(self->maxEndPositionCell_)) startPosition] == -1), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:54 condition failed: assert maxEndPositionCell.startPosition() == -1;"));
+  JreAssert([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(self->maxEndPositionCell_)) docID] == -1, @"org/apache/lucene/search/spans/NearSpansUnordered.java:53 condition failed: assert maxEndPositionCell.docID() == -1;");
+  JreAssert([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(self->maxEndPositionCell_)) startPosition] == -1, @"org/apache/lucene/search/spans/NearSpansUnordered.java:54 condition failed: assert maxEndPositionCell.startPosition() == -1;");
   [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue *) nil_chk(self->spanPositionQueue_)) addWithId:self->maxEndPositionCell_];
 }
 
 void OrgApacheLuceneSearchSpansNearSpansUnordered_subSpanCellsToPositionQueue(OrgApacheLuceneSearchSpansNearSpansUnordered *self) {
   [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue *) nil_chk(self->spanPositionQueue_)) clear];
   for (OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell * __strong cell in nil_chk(self->subSpanCells_)) {
-    JreAssert(([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(cell)) startPosition] == -1), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:61 condition failed: assert cell.startPosition() == -1;"));
+    JreAssert([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(cell)) startPosition] == -1, @"org/apache/lucene/search/spans/NearSpansUnordered.java:61 condition failed: assert cell.startPosition() == -1;");
     [cell nextStartPosition];
-    JreAssert(([cell startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:63 condition failed: assert cell.startPosition() != NO_MORE_POSITIONS;"));
+    JreAssert([cell startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, @"org/apache/lucene/search/spans/NearSpansUnordered.java:63 condition failed: assert cell.startPosition() != NO_MORE_POSITIONS;");
     [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue *) nil_chk(self->spanPositionQueue_)) addWithId:cell];
   }
 }
 
 jboolean OrgApacheLuceneSearchSpansNearSpansUnordered_positionsOrderedWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchSpansSpans *spans1, OrgApacheLuceneSearchSpansSpans *spans2) {
   OrgApacheLuceneSearchSpansNearSpansUnordered_initialize();
-  JreAssert(([((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans1)) docID] == [((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans2)) docID]), (JreStrcat("$I$I", @"doc1 ", [spans1 docID], @" != doc2 ", [spans2 docID])));
+  JreAssert([((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans1)) docID] == [((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans2)) docID], JreStrcat("$I$I", @"doc1 ", [spans1 docID], @" != doc2 ", [spans2 docID]));
   jint start1 = [spans1 startPosition];
   jint start2 = [spans2 startPosition];
   return (start1 == start2) ? ([spans1 endPosition] < [spans2 endPosition]) : (start1 < start2);
@@ -308,7 +342,7 @@ OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *OrgApacheLuceneSearchSpa
 }
 
 jboolean OrgApacheLuceneSearchSpansNearSpansUnordered_atMatch(OrgApacheLuceneSearchSpansNearSpansUnordered *self) {
-  JreAssert(([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) docID] == [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(self->maxEndPositionCell_)) docID]), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:187 condition failed: assert minPositionCell().docID() == maxEndPositionCell.docID();"));
+  JreAssert([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) docID] == [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(self->maxEndPositionCell_)) docID], @"org/apache/lucene/search/spans/NearSpansUnordered.java:187 condition failed: assert minPositionCell().docID() == maxEndPositionCell.docID();");
   return ([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(self->maxEndPositionCell_)) endPosition] - [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition] - self->totalSpanLength_) <= self->allowedSlop_;
 }
 
@@ -386,28 +420,47 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansNearSpansUnordered)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansNearSpansUnordered:withOrgApacheLuceneSearchSpansSpans:", "SpansCell", NULL, 0x1, NULL, NULL },
-    { "nextStartPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "adjustLength", NULL, "V", 0x2, NULL, NULL },
-    { "adjustMax", NULL, "V", 0x2, NULL, NULL },
-    { "startPosition", NULL, "I", 0x1, NULL, NULL },
-    { "endPosition", NULL, "I", 0x1, NULL, NULL },
-    { "width", NULL, "I", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 5, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpansNearSpansUnordered:withOrgApacheLuceneSearchSpansSpans:);
+  methods[1].selector = @selector(nextStartPosition);
+  methods[2].selector = @selector(adjustLength);
+  methods[3].selector = @selector(adjustMax);
+  methods[4].selector = @selector(startPosition);
+  methods[5].selector = @selector(endPosition);
+  methods[6].selector = @selector(width);
+  methods[7].selector = @selector(collectWithOrgApacheLuceneSearchSpansSpanCollector:);
+  methods[8].selector = @selector(asTwoPhaseIterator);
+  methods[9].selector = @selector(docID);
+  methods[10].selector = @selector(nextDoc);
+  methods[11].selector = @selector(advanceWithInt:);
+  methods[12].selector = @selector(cost);
+  methods[13].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.spans.NearSpansUnordered;", NULL, NULL, .constantValue.asLong = 0 },
-    { "spanLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.search.spans.Spans;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchSpansNearSpansUnordered;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "spanLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "in_", "LOrgApacheLuceneSearchSpansSpans;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell = { 2, "SpansCell", "org.apache.lucene.search.spans", "NearSpansUnordered", 0x2, 14, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpansNearSpansUnordered;LOrgApacheLuceneSearchSpansSpans;", "LJavaIoIOException;", "collect", "LOrgApacheLuceneSearchSpansSpanCollector;", "advance", "I", "toString", "LOrgApacheLuceneSearchSpansNearSpansUnordered;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell = { "SpansCell", "org.apache.lucene.search.spans", ptrTable, methods, fields, 7, 0x2, 14, 3, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell;
 }
 
@@ -432,14 +485,14 @@ void OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell_adjustLength(OrgApac
   if (self->spanLength_ != -1) {
     self->this$0_->totalSpanLength_ -= self->spanLength_;
   }
-  JreAssert(([((OrgApacheLuceneSearchSpansSpans *) nil_chk(self->in_)) startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:94 condition failed: assert in.startPosition() != NO_MORE_POSITIONS;"));
+  JreAssert([((OrgApacheLuceneSearchSpansSpans *) nil_chk(self->in_)) startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, @"org/apache/lucene/search/spans/NearSpansUnordered.java:94 condition failed: assert in.startPosition() != NO_MORE_POSITIONS;");
   self->spanLength_ = [self endPosition] - [self startPosition];
-  JreAssert((self->spanLength_ >= 0), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:96 condition failed: assert spanLength >= 0;"));
+  JreAssert(self->spanLength_ >= 0, @"org/apache/lucene/search/spans/NearSpansUnordered.java:96 condition failed: assert spanLength >= 0;");
   self->this$0_->totalSpanLength_ += self->spanLength_;
 }
 
 void OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell_adjustMax(OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *self) {
-  JreAssert(([self docID] == [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(self->this$0_->maxEndPositionCell_)) docID]), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:101 condition failed: assert docID() == maxEndPositionCell.docID();"));
+  JreAssert([self docID] == [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(self->this$0_->maxEndPositionCell_)) docID], @"org/apache/lucene/search/spans/NearSpansUnordered.java:101 condition failed: assert docID() == maxEndPositionCell.docID();");
   if ([self endPosition] > [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(self->this$0_->maxEndPositionCell_)) endPosition]) {
     JreStrongAssign(&self->this$0_->maxEndPositionCell_, self);
   }
@@ -460,12 +513,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansNearSpansUnordered_Sp
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "SpanPositionQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, "(Lorg/apache/lucene/search/spans/NearSpansUnordered$SpansCell;Lorg/apache/lucene/search/spans/NearSpansUnordered$SpansCell;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x14, 1, 2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spans.NearSpansUnordered$SpansCell;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue = { 2, "SpanPositionQueue", "org.apache.lucene.search.spans", "NearSpansUnordered", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/spans/NearSpansUnordered$SpansCell;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell;LOrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell;", "LOrgApacheLuceneSearchSpansNearSpansUnordered;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/spans/NearSpansUnordered$SpansCell;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue = { "SpanPositionQueue", "org.apache.lucene.search.spans", ptrTable, methods, NULL, 7, 0xa, 2, 0, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue;
 }
 

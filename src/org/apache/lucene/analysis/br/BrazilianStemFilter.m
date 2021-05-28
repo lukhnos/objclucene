@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -13,7 +12,10 @@
 #include "org/apache/lucene/analysis/br/BrazilianStemmer.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/KeywordAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/br/BrazilianStemFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisBrBrazilianStemFilter () {
  @public
@@ -63,17 +65,24 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisBrBrazilianStemFilter, keywordAttr_, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "BrazilianStemFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stemmer_", NULL, 0x2, "Lorg.apache.lucene.analysis.br.BrazilianStemmer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "exclusions_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<*>;", .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "keywordAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.KeywordAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "stemmer_", "LOrgApacheLuceneAnalysisBrBrazilianStemmer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "exclusions_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 2, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "keywordAttr_", "LOrgApacheLuceneAnalysisTokenattributesKeywordAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisBrBrazilianStemFilter = { 2, "BrazilianStemFilter", "org.apache.lucene.analysis.br", NULL, 0x11, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", "Ljava/util/Set<*>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisBrBrazilianStemFilter = { "BrazilianStemFilter", "org.apache.lucene.analysis.br", ptrTable, methods, fields, 7, 0x11, 2, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisBrBrazilianStemFilter;
 }
 

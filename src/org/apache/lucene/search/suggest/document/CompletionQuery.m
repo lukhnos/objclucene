@@ -24,6 +24,10 @@
 #include "org/apache/lucene/search/suggest/document/ContextSuggestField.h"
 #include "org/apache/lucene/search/suggest/document/SuggestField.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/CompletionQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionQuery () {
  @public
   /*!
@@ -70,7 +74,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompleti
   jboolean first = true;
   OrgApacheLuceneIndexTerms *terms;
   for (OrgApacheLuceneIndexLeafReaderContext * __strong context in nil_chk([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) leaves])) {
-    OrgApacheLuceneIndexLeafReader *leafReader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader];
+    OrgApacheLuceneIndexLeafReader *leafReader = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader]);
     @try {
       if ((terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk(leafReader)) termsWithNSString:[self getField]]) == nil) {
         continue;
@@ -80,7 +84,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompleti
       continue;
     }
     if ([terms isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentCompletionTerms class]]) {
-      OrgApacheLuceneSearchSuggestDocumentCompletionTerms *completionTerms = (OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) cast_chk(terms, [OrgApacheLuceneSearchSuggestDocumentCompletionTerms class]);
+      OrgApacheLuceneSearchSuggestDocumentCompletionTerms *completionTerms = (OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) terms;
       jbyte t = [((OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) nil_chk(completionTerms)) getType];
       if (first) {
         type = t;
@@ -94,7 +98,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompleti
   if (first == false) {
     if ([self isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentContextQuery class]]) {
       if (type == OrgApacheLuceneSearchSuggestDocumentSuggestField_TYPE) {
-        @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", [[self getClass] getSimpleName], @" can not be executed against a non context-enabled SuggestField: ", [self getField]));
+        @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", [[self java_getClass] getSimpleName], @" can not be executed against a non context-enabled SuggestField: ", [self getField]));
       }
     }
     else {
@@ -134,20 +138,32 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompleti
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:", "CompletionQuery", NULL, 0x4, NULL, NULL },
-    { "getFilter", NULL, "Lorg.apache.lucene.search.suggest.BitsProducer;", 0x1, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getTerm", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "validateWithNSString:", "validate", "V", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestBitsProducer;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 6, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:);
+  methods[1].selector = @selector(getFilter);
+  methods[2].selector = @selector(getField);
+  methods[3].selector = @selector(getTerm);
+  methods[4].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[5].selector = @selector(toStringWithNSString:);
+  methods[6].selector = @selector(validateWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "term_", NULL, 0x12, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "filter_", NULL, 0x12, "Lorg.apache.lucene.search.suggest.BitsProducer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "term_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "filter_", "LOrgApacheLuceneSearchSuggestBitsProducer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionQuery = { 2, "CompletionQuery", "org.apache.lucene.search.suggest.document", NULL, 0x401, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;LOrgApacheLuceneSearchSuggestBitsProducer;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "toString", "LNSString;", "validate" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionQuery = { "CompletionQuery", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x401, 7, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionQuery;
 }
 
@@ -161,7 +177,7 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionQuery_initWithOrgApacheLucene
 }
 
 void OrgApacheLuceneSearchSuggestDocumentCompletionQuery_validateWithNSString_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *self, NSString *termText) {
-  for (jint i = 0; i < ((jint) [((NSString *) nil_chk(termText)) length]); i++) {
+  for (jint i = 0; i < [((NSString *) nil_chk(termText)) java_length]; i++) {
     switch ([termText charAtWithInt:i]) {
       case OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_HOLE_CHARACTER:
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Term text cannot contain HOLE character U+001E; this character is reserved");

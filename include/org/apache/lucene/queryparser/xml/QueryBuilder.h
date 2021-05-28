@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilder))
 #define OrgApacheLuceneQueryparserXmlQueryBuilder_
 
@@ -20,11 +26,10 @@
 @protocol OrgW3cDomElement;
 
 /*!
- @brief Implemented by objects that produce Lucene Query objects from XML streams.
- Implementations are
- expected to be thread-safe so that they can be used to simultaneously parse multiple XML documents.
+ @brief Implemented by objects that produce Lucene Query objects from XML streams.Implementations are
+  expected to be thread-safe so that they can be used to simultaneously parse multiple XML documents.
  */
-@protocol OrgApacheLuceneQueryparserXmlQueryBuilder < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserXmlQueryBuilder < JavaObject >
 
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
@@ -36,4 +41,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlQueryBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilder")

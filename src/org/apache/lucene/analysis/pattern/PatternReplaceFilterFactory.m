@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/pattern/PatternReplaceFilterFactory.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -13,8 +14,11 @@
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/pattern/PatternReplaceFilter.h"
 #include "org/apache/lucene/analysis/pattern/PatternReplaceFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/pattern/PatternReplaceFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory
 
@@ -34,16 +38,23 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "PatternReplaceFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.pattern.PatternReplaceFilter;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisPatternPatternReplaceFilter;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "pattern_", NULL, 0x10, "Ljava.util.regex.Pattern;", NULL, NULL, .constantValue.asLong = 0 },
-    { "replacement_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "replaceAll_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "pattern_", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "replacement_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "replaceAll_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory = { 2, "PatternReplaceFilterFactory", "org.apache.lucene.analysis.pattern", NULL, 0x1, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LOrgApacheLuceneAnalysisTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory = { "PatternReplaceFilterFactory", "org.apache.lucene.analysis.pattern", ptrTable, methods, fields, 7, 0x1, 2, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory;
 }
 

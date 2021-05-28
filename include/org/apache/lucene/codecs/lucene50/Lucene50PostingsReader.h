@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader))
 #define OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_
 
@@ -33,7 +39,7 @@
 
 /*!
  @brief Concrete class that reads docId(maybe frq,pos,offset,payloads) list
- with postings format.
+  with postings format.
  */
 @interface OrgApacheLuceneCodecsLucene50Lucene50PostingsReader : OrgApacheLuceneCodecsPostingsReaderBase {
  @public
@@ -45,7 +51,7 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
 - (void)checkIntegrity;
 
@@ -83,6 +89,10 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
                                            withIntArray:(IOSIntArray *)freqBuffer
                                                 withInt:(jint)num
                                             withBoolean:(jboolean)indexHasFreq;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -127,8 +137,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader:(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *)outer$
-                                          withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
+- (instancetype __nonnull)initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader:(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *)outer$
+                                                    withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -153,6 +163,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader)
                                                                                                              withInt:(jint)flags;
 
 - (jint)startOffset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -195,8 +209,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_B
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader:(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *)outer$
-                                          withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
+- (instancetype __nonnull)initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader:(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *)outer$
+                                                    withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -220,6 +234,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_B
 - (OrgApacheLuceneIndexPostingsEnum *)resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)termState;
 
 - (jint)startOffset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -265,8 +283,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_B
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader:(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *)outer$
-                                          withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
+- (instancetype __nonnull)initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader:(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *)outer$
+                                                    withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -292,6 +310,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_B
 
 - (jint)startOffset;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum)
@@ -312,4 +334,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_E
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader")

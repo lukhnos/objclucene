@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanTermQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanTermQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanTermQuery))
 #define OrgApacheLuceneSearchSpansSpanTermQuery_
 
@@ -40,14 +46,14 @@
 /*!
  @brief Construct a SpanTermQuery matching the named term's spans.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 /*!
  @brief Expert: Construct a SpanTermQuery matching the named term's spans, using
- the provided TermContext
+  the provided TermContext
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-             withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                       withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -64,6 +70,10 @@
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -98,6 +108,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanTermQuery)
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneIndexTermContext;
 @class OrgApacheLuceneSearchIndexSearcher;
+@class OrgApacheLuceneSearchSpansSpanQuery;
 @class OrgApacheLuceneSearchSpansSpanTermQuery;
 @class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @class OrgApacheLuceneSearchSpansSpans;
@@ -111,10 +122,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanTermQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanTermQuery:(OrgApacheLuceneSearchSpansSpanTermQuery *)outer$
-                            withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)termContext
-                         withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                withJavaUtilMap:(id<JavaUtilMap>)terms;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanTermQuery:(OrgApacheLuceneSearchSpansSpanTermQuery *)outer$
+                                      withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)termContext
+                                   withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                          withJavaUtilMap:(id<JavaUtilMap>)terms;
 
 - (void)extractTermContextsWithJavaUtilMap:(id<JavaUtilMap>)contexts;
 
@@ -122,6 +133,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanTermQuery)
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                      withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)arg0
+                               withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)arg1
+                                                      withJavaUtilMap:(id<JavaUtilMap>)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -139,4 +156,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeigh
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanTermQuery")

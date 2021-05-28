@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder))
 #define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_
 
@@ -27,41 +33,40 @@
 /*!
  @brief This class should be used when there is a builder for each type of node.
  The type of node may be defined in 2 different ways: - by the field name,
- when the node implements the <code>FieldableNode</code> interface - by its class,
- it keeps checking the class and all the interfaces and classes this class
- implements/extends until it finds a builder for that class/interface
- This class always check if there is a builder for the field name before it
- checks for the node class. So, field name builders have precedence over class
- builders.
- When a builder is found for a node, it's called and the node is passed to the
- builder. If the returned built object is not <code>null</code>, it's tagged
- on the node using the tag <code>QueryTreeBuilder.QUERY_TREE_BUILDER_TAGID</code>.
- The children are usually built before the parent node. However, if a builder
- associated to a node is an instance of <code>QueryTreeBuilder</code>, the node is
- delegated to this builder and it's responsible to build the node and its
- children.
+  when the node implements the <code>FieldableNode</code> interface - by its class,
+  it keeps checking the class and all the interfaces and classes this class
+  implements/extends until it finds a builder for that class/interface 
+  This class always check if there is a builder for the field name before it
+  checks for the node class. So, field name builders have precedence over class
+  builders. 
+  When a builder is found for a node, it's called and the node is passed to the
+  builder. If the returned built object is not <code>null</code>, it's tagged
+  on the node using the tag <code>QueryTreeBuilder.QUERY_TREE_BUILDER_TAGID</code>.
+  
+  The children are usually built before the parent node. However, if a builder
+  associated to a node is an instance of <code>QueryTreeBuilder</code>, the node is
+  delegated to this builder and it's responsible to build the node and its
+  children.
  - seealso: QueryBuilder
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder : NSObject < OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder >
-
-+ (NSString *)QUERY_TREE_BUILDER_TAGID;
+@property (readonly, copy, class) NSString *QUERY_TREE_BUILDER_TAGID NS_SWIFT_NAME(QUERY_TREE_BUILDER_TAGID);
 
 #pragma mark Public
 
 /*!
  @brief <code>QueryTreeBuilder</code> constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Builds some kind of object from a query tree.
- Each node in the query tree
- is built using an specific builder associated to it.
+ @brief Builds some kind of object from a query tree.Each node in the query tree
+  is built using an specific builder associated to it.
  @param queryNode the query tree root node
  @return the built object
- @throws QueryNodeException if some node builder throws a
- <code>QueryNodeException</code> or if there is a node which had no
- builder associated to it
+ @throw QueryNodeExceptionif some node builder throws a
+          <code>QueryNodeException</code> or if there is a node which had no
+          builder associated to it
  */
 - (id)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
@@ -87,21 +92,25 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilde
 
 /*!
  @brief This tag is used to tag the nodes in a query tree with the built objects
- produced from their own associated builder.
+  produced from their own associated builder.
  */
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_get_QUERY_TREE_BUILDER_TAGID();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_get_QUERY_TREE_BUILDER_TAGID(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *new_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *new_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *create_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *create_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder")

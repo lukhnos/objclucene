@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum))
 #define OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_
 
@@ -32,9 +38,8 @@
 @class OrgApacheLuceneUtilFstFST_Arc;
 
 /*!
- @brief Iterates through terms in this field.
- This implementation skips
- any auto-prefix terms it encounters. 
+ @brief Iterates through terms in this field.This implementation skips
+   any auto-prefix terms it encounters.
  */
 @interface OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum : OrgApacheLuceneIndexTermsEnum {
  @public
@@ -47,11 +52,11 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneCodecsBlocktreeFieldReader:(OrgApacheLuceneCodecsBlocktreeFieldReader *)fr;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader:(OrgApacheLuceneCodecsBlocktreeFieldReader *)fr;
 
 /*!
  @brief Runs next() through the entire terms dict,
- computing aggregate statistics.
+   computing aggregate statistics.
  */
 - (OrgApacheLuceneCodecsBlocktreeStats *)computeBlockStats;
 
@@ -91,6 +96,10 @@
                                                                                            withLong:(jlong)fp
                                                                                             withInt:(jint)length;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum)
@@ -100,14 +109,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum, currentFrame
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum, fr_, OrgApacheLuceneCodecsBlocktreeFieldReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum, term_, OrgApacheLuceneUtilBytesRefBuilder *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *self, OrgApacheLuceneCodecsBlocktreeFieldReader *fr);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *self, OrgApacheLuceneCodecsBlocktreeFieldReader *fr);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum")

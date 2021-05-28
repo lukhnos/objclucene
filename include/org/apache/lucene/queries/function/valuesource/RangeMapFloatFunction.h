@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction_
 
@@ -28,9 +34,9 @@
 
 /*!
  @brief <code>RangeMapFloatFunction</code> implements a map function over
- another <code>ValueSource</code> whose values fall within min and max inclusive to target.
+  another <code>ValueSource</code> whose values fall within min and max inclusive to target.
  <br>
- Normally Used as an argument to a <code>org.apache.lucene.queries.function.FunctionQuery</code>
+  Normally Used as an argument to a <code>org.apache.lucene.queries.function.FunctionQuery</code>
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
@@ -43,17 +49,17 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
-                                                        withFloat:(jfloat)min
-                                                        withFloat:(jfloat)max
-                                                        withFloat:(jfloat)target
-                                                withJavaLangFloat:(JavaLangFloat *)def;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
+                                                                  withFloat:(jfloat)min
+                                                                  withFloat:(jfloat)max
+                                                                  withFloat:(jfloat)target
+                                                          withJavaLangFloat:(JavaLangFloat *)def;
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
-                                                        withFloat:(jfloat)min
-                                                        withFloat:(jfloat)max
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)target
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)def;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
+                                                                  withFloat:(jfloat)min
+                                                                  withFloat:(jfloat)max
+                              withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)target
+                              withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)def;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -66,6 +72,10 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
 
 - (NSUInteger)hash;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -91,4 +101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloa
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction")

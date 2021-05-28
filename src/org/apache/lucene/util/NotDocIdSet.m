@@ -5,12 +5,15 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/DocIdSet.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/NotDocIdSet.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/NotDocIdSet must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilNotDocIdSet () {
  @public
@@ -22,42 +25,41 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilNotDocIdSet, in_, OrgApacheLuceneSearchDocIdSet *)
 
-inline jlong OrgApacheLuceneUtilNotDocIdSet_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilNotDocIdSet_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilNotDocIdSet_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilNotDocIdSet, BASE_RAM_BYTES_USED, jlong)
 
-@interface OrgApacheLuceneUtilNotDocIdSet_$1 : NSObject < OrgApacheLuceneUtilBits > {
+@interface OrgApacheLuceneUtilNotDocIdSet_1 : NSObject < OrgApacheLuceneUtilBits > {
  @public
   id<OrgApacheLuceneUtilBits> val$inBits_;
 }
+
+- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0;
 
 - (jboolean)getWithInt:(jint)index;
 
 - (jint)length;
 
-- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNotDocIdSet_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNotDocIdSet_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilNotDocIdSet_$1, val$inBits_, id<OrgApacheLuceneUtilBits>)
+__attribute__((unused)) static void OrgApacheLuceneUtilNotDocIdSet_1_initWithOrgApacheLuceneUtilBits_(OrgApacheLuceneUtilNotDocIdSet_1 *self, id<OrgApacheLuceneUtilBits> capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneUtilNotDocIdSet_$1_initWithOrgApacheLuceneUtilBits_(OrgApacheLuceneUtilNotDocIdSet_$1 *self, id<OrgApacheLuceneUtilBits> capture$0);
+__attribute__((unused)) static OrgApacheLuceneUtilNotDocIdSet_1 *new_OrgApacheLuceneUtilNotDocIdSet_1_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilNotDocIdSet_$1 *new_OrgApacheLuceneUtilNotDocIdSet_$1_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilNotDocIdSet_1 *create_OrgApacheLuceneUtilNotDocIdSet_1_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0);
 
-__attribute__((unused)) static OrgApacheLuceneUtilNotDocIdSet_$1 *create_OrgApacheLuceneUtilNotDocIdSet_$1_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNotDocIdSet_$1)
-
-@interface OrgApacheLuceneUtilNotDocIdSet_$2 : OrgApacheLuceneSearchDocIdSetIterator {
+@interface OrgApacheLuceneUtilNotDocIdSet_2 : OrgApacheLuceneSearchDocIdSetIterator {
  @public
   OrgApacheLuceneUtilNotDocIdSet *this$0_;
+  OrgApacheLuceneSearchDocIdSetIterator *val$inIterator_;
   jint doc_;
   jint nextSkippedDoc_;
-  OrgApacheLuceneSearchDocIdSetIterator *val$inIterator_;
 }
+
+- (instancetype)initWithOrgApacheLuceneUtilNotDocIdSet:(OrgApacheLuceneUtilNotDocIdSet *)outer$
+             withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0;
 
 - (jint)nextDoc;
 
@@ -67,23 +69,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNotDocIdSet_$1)
 
 - (jlong)cost;
 
-- (instancetype)initWithOrgApacheLuceneUtilNotDocIdSet:(OrgApacheLuceneUtilNotDocIdSet *)outer$
-             withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNotDocIdSet_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNotDocIdSet_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilNotDocIdSet_$2, this$0_, OrgApacheLuceneUtilNotDocIdSet *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilNotDocIdSet_$2, val$inIterator_, OrgApacheLuceneSearchDocIdSetIterator *)
+__attribute__((unused)) static void OrgApacheLuceneUtilNotDocIdSet_2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet_2 *self, OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneUtilNotDocIdSet_$2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet_$2 *self, OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0);
+__attribute__((unused)) static OrgApacheLuceneUtilNotDocIdSet_2 *new_OrgApacheLuceneUtilNotDocIdSet_2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilNotDocIdSet_$2 *new_OrgApacheLuceneUtilNotDocIdSet_$2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneUtilNotDocIdSet_$2 *create_OrgApacheLuceneUtilNotDocIdSet_$2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNotDocIdSet_$2)
+__attribute__((unused)) static OrgApacheLuceneUtilNotDocIdSet_2 *create_OrgApacheLuceneUtilNotDocIdSet_2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilNotDocIdSet)
 
@@ -104,7 +98,7 @@ withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)inArg {
   if (inBits == nil) {
     return nil;
   }
-  return create_OrgApacheLuceneUtilNotDocIdSet_$1_initWithOrgApacheLuceneUtilBits_(inBits);
+  return create_OrgApacheLuceneUtilNotDocIdSet_1_initWithOrgApacheLuceneUtilBits_(inBits);
 }
 
 - (jlong)ramBytesUsed {
@@ -113,7 +107,7 @@ withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)inArg {
 
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator {
   OrgApacheLuceneSearchDocIdSetIterator *inIterator = [((OrgApacheLuceneSearchDocIdSet *) nil_chk(in_)) iterator];
-  return create_OrgApacheLuceneUtilNotDocIdSet_$2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(self, inIterator);
+  return create_OrgApacheLuceneUtilNotDocIdSet_2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(self, inIterator);
 }
 
 - (void)dealloc {
@@ -121,28 +115,38 @@ withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)inArg {
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSetIterator;", 0x1, -1, -1, 1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withOrgApacheLuceneSearchDocIdSet:);
+  methods[1].selector = @selector(isCacheable);
+  methods[2].selector = @selector(bits);
+  methods[3].selector = @selector(ramBytesUsed);
+  methods[4].selector = @selector(iterator);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 2, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "in_", "LOrgApacheLuceneSearchDocIdSet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "ILOrgApacheLuceneSearchDocIdSet;", "LJavaIoIOException;", &OrgApacheLuceneUtilNotDocIdSet_BASE_RAM_BYTES_USED };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNotDocIdSet = { "NotDocIdSet", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 5, 3, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilNotDocIdSet;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilNotDocIdSet class]) {
     OrgApacheLuceneUtilNotDocIdSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilNotDocIdSet_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilNotDocIdSet)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneSearchDocIdSet:", "NotDocIdSet", NULL, 0x1, NULL, NULL },
-    { "isCacheable", NULL, "Z", 0x1, NULL, NULL },
-    { "bits", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilNotDocIdSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "in_", NULL, 0x12, "Lorg.apache.lucene.search.DocIdSet;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNotDocIdSet = { 2, "NotDocIdSet", "org.apache.lucene.util", NULL, 0x11, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilNotDocIdSet;
 }
 
 @end
@@ -163,7 +167,12 @@ OrgApacheLuceneUtilNotDocIdSet *create_OrgApacheLuceneUtilNotDocIdSet_initWithIn
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNotDocIdSet)
 
-@implementation OrgApacheLuceneUtilNotDocIdSet_$1
+@implementation OrgApacheLuceneUtilNotDocIdSet_1
+
+- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0 {
+  OrgApacheLuceneUtilNotDocIdSet_1_initWithOrgApacheLuceneUtilBits_(self, capture$0);
+  return self;
+}
 
 - (jboolean)getWithInt:(jint)index {
   return ![((id<OrgApacheLuceneUtilBits>) nil_chk(val$inBits_)) getWithInt:index];
@@ -173,48 +182,54 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNotDocIdSet)
   return [((id<OrgApacheLuceneUtilBits>) nil_chk(val$inBits_)) length];
 }
 
-- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$0 {
-  OrgApacheLuceneUtilNotDocIdSet_$1_initWithOrgApacheLuceneUtilBits_(self, capture$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(val$inBits_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "Z", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilBits:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBits:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(length);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$inBits_", NULL, 0x1012, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$inBits_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilNotDocIdSet", "bits" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNotDocIdSet_$1 = { 2, "", "org.apache.lucene.util", "NotDocIdSet", 0x8008, 3, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilNotDocIdSet_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBits;", "get", "I", "LOrgApacheLuceneUtilNotDocIdSet;", "bits" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNotDocIdSet_1 = { "", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x8010, 3, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneUtilNotDocIdSet_1;
 }
 
 @end
 
-void OrgApacheLuceneUtilNotDocIdSet_$1_initWithOrgApacheLuceneUtilBits_(OrgApacheLuceneUtilNotDocIdSet_$1 *self, id<OrgApacheLuceneUtilBits> capture$0) {
+void OrgApacheLuceneUtilNotDocIdSet_1_initWithOrgApacheLuceneUtilBits_(OrgApacheLuceneUtilNotDocIdSet_1 *self, id<OrgApacheLuceneUtilBits> capture$0) {
   JreStrongAssign(&self->val$inBits_, capture$0);
   NSObject_init(self);
 }
 
-OrgApacheLuceneUtilNotDocIdSet_$1 *new_OrgApacheLuceneUtilNotDocIdSet_$1_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNotDocIdSet_$1, initWithOrgApacheLuceneUtilBits_, capture$0)
+OrgApacheLuceneUtilNotDocIdSet_1 *new_OrgApacheLuceneUtilNotDocIdSet_1_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNotDocIdSet_1, initWithOrgApacheLuceneUtilBits_, capture$0)
 }
 
-OrgApacheLuceneUtilNotDocIdSet_$1 *create_OrgApacheLuceneUtilNotDocIdSet_$1_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNotDocIdSet_$1, initWithOrgApacheLuceneUtilBits_, capture$0)
+OrgApacheLuceneUtilNotDocIdSet_1 *create_OrgApacheLuceneUtilNotDocIdSet_1_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNotDocIdSet_1, initWithOrgApacheLuceneUtilBits_, capture$0)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNotDocIdSet_$1)
+@implementation OrgApacheLuceneUtilNotDocIdSet_2
 
-@implementation OrgApacheLuceneUtilNotDocIdSet_$2
+- (instancetype)initWithOrgApacheLuceneUtilNotDocIdSet:(OrgApacheLuceneUtilNotDocIdSet *)outer$
+             withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0 {
+  OrgApacheLuceneUtilNotDocIdSet_2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, capture$0);
+  return self;
+}
 
 - (jint)nextDoc {
   return [self advanceWithInt:doc_ + 1];
@@ -229,7 +244,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNotDocIdSet_$1)
     if (doc_ >= this$0_->maxDoc_) {
       return doc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
     }
-    JreAssert((doc_ <= nextSkippedDoc_), (@"org/apache/lucene/util/NotDocIdSet.java:98 condition failed: assert doc <= nextSkippedDoc;"));
+    JreAssert(doc_ <= nextSkippedDoc_, @"org/apache/lucene/util/NotDocIdSet.java:98 condition failed: assert doc <= nextSkippedDoc;");
     if (doc_ != nextSkippedDoc_) {
       return doc_;
     }
@@ -246,12 +261,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNotDocIdSet_$1)
   return this$0_->maxDoc_;
 }
 
-- (instancetype)initWithOrgApacheLuceneUtilNotDocIdSet:(OrgApacheLuceneUtilNotDocIdSet *)outer$
-             withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)capture$0 {
-  OrgApacheLuceneUtilNotDocIdSet_$2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, capture$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(val$inIterator_);
@@ -259,27 +268,36 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNotDocIdSet_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilNotDocIdSet:withOrgApacheLuceneSearchDocIdSetIterator:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilNotDocIdSet:withOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[1].selector = @selector(nextDoc);
+  methods[2].selector = @selector(advanceWithInt:);
+  methods[3].selector = @selector(docID);
+  methods[4].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.NotDocIdSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextSkippedDoc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$inIterator_", NULL, 0x1012, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneUtilNotDocIdSet;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$inIterator_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "nextSkippedDoc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilNotDocIdSet", "iterator" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNotDocIdSet_$2 = { 2, "", "org.apache.lucene.util", "NotDocIdSet", 0x8008, 5, methods, 4, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilNotDocIdSet_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilNotDocIdSet;LOrgApacheLuceneSearchDocIdSetIterator;", "LJavaIoIOException;", "advance", "I", "LOrgApacheLuceneUtilNotDocIdSet;", "iterator" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNotDocIdSet_2 = { "", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x8010, 5, 4, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneUtilNotDocIdSet_2;
 }
 
 @end
 
-void OrgApacheLuceneUtilNotDocIdSet_$2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet_$2 *self, OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0) {
+void OrgApacheLuceneUtilNotDocIdSet_2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet_2 *self, OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$inIterator_, capture$0);
   OrgApacheLuceneSearchDocIdSetIterator_init(self);
@@ -287,12 +305,10 @@ void OrgApacheLuceneUtilNotDocIdSet_$2_initWithOrgApacheLuceneUtilNotDocIdSet_wi
   self->nextSkippedDoc_ = -1;
 }
 
-OrgApacheLuceneUtilNotDocIdSet_$2 *new_OrgApacheLuceneUtilNotDocIdSet_$2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNotDocIdSet_$2, initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, capture$0)
+OrgApacheLuceneUtilNotDocIdSet_2 *new_OrgApacheLuceneUtilNotDocIdSet_2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNotDocIdSet_2, initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, capture$0)
 }
 
-OrgApacheLuceneUtilNotDocIdSet_$2 *create_OrgApacheLuceneUtilNotDocIdSet_$2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNotDocIdSet_$2, initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, capture$0)
+OrgApacheLuceneUtilNotDocIdSet_2 *create_OrgApacheLuceneUtilNotDocIdSet_2_initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilNotDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNotDocIdSet_2, initWithOrgApacheLuceneUtilNotDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNotDocIdSet_$2)

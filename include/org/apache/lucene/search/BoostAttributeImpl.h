@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchBoostAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchBoostAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneSearchBoostAttributeImpl || defined(INCLUDE_OrgApacheLuceneSearchBoostAttributeImpl))
 #define OrgApacheLuceneSearchBoostAttributeImpl_
 
@@ -33,13 +39,15 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)clear;
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target OBJC_METHOD_FAMILY_NONE;
 
 - (jfloat)getBoost;
+
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone;
 
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector;
 
@@ -51,12 +59,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBoostAttributeImpl)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchBoostAttributeImpl_init(OrgApacheLuceneSearchBoostAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBoostAttributeImpl *new_OrgApacheLuceneSearchBoostAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchBoostAttributeImpl *new_OrgApacheLuceneSearchBoostAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBoostAttributeImpl *create_OrgApacheLuceneSearchBoostAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchBoostAttributeImpl *create_OrgApacheLuceneSearchBoostAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBoostAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBoostAttributeImpl")

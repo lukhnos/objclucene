@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreVerifyingLockFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreVerifyingLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreVerifyingLockFactory || defined(INCLUDE_OrgApacheLuceneStoreVerifyingLockFactory))
 #define OrgApacheLuceneStoreVerifyingLockFactory_
 
@@ -28,13 +34,13 @@
 /*!
  @brief A <code>LockFactory</code> that wraps another <code>LockFactory</code>
   and verifies that each lock obtain/release
- is "correct" (never results in two processes holding the
- lock at the same time).
- It does this by contacting an
- external server (<code>LockVerifyServer</code>) to assert that
- at most one process holds the lock at a time.  To use
- this, you should also run <code>LockVerifyServer</code> on the
- host and port matching what you pass to the constructor.
+  is "correct" (never results in two processes holding the
+  lock at the same time).It does this by contacting an
+  external server (<code>LockVerifyServer</code>) to assert that
+  at most one process holds the lock at a time.
+ To use
+  this, you should also run <code>LockVerifyServer</code> on the
+  host and port matching what you pass to the constructor.
  - seealso: LockVerifyServer
  - seealso: LockStressTest
  */
@@ -52,12 +58,16 @@
  @param inArg the socket's input to <code>LockVerifyServer</code>
  @param outArg the socket's output to <code>LockVerifyServer</code>
  */
-- (instancetype)initWithOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lf
-                                  withJavaIoInputStream:(JavaIoInputStream *)inArg
-                                 withJavaIoOutputStream:(JavaIoOutputStream *)outArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lf
+                                            withJavaIoInputStream:(JavaIoInputStream *)inArg
+                                           withJavaIoOutputStream:(JavaIoOutputStream *)outArg;
 
 - (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                              withNSString:(NSString *)lockName;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -77,4 +87,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreVerifyingLockFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreVerifyingLockFactory")

@@ -7,6 +7,10 @@
 #include "org/apache/lucene/queryparser/flexible/standard/config/FuzzyConfig.h"
 #include "org/apache/lucene/search/FuzzyQuery.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/config/FuzzyConfig must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig () {
  @public
   jint prefixLength_;
@@ -41,18 +45,28 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "FuzzyConfig", NULL, 0x1, NULL, NULL },
-    { "getPrefixLength", NULL, "I", 0x1, NULL, NULL },
-    { "setPrefixLengthWithInt:", "setPrefixLength", "V", 0x1, NULL, NULL },
-    { "getMinSimilarity", NULL, "F", 0x1, NULL, NULL },
-    { "setMinSimilarityWithFloat:", "setMinSimilarity", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getPrefixLength);
+  methods[2].selector = @selector(setPrefixLengthWithInt:);
+  methods[3].selector = @selector(getMinSimilarity);
+  methods[4].selector = @selector(setMinSimilarityWithFloat:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "prefixLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minSimilarity_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "prefixLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "minSimilarity_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig = { 2, "FuzzyConfig", "org.apache.lucene.queryparser.flexible.standard.config", NULL, 0x1, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setPrefixLength", "I", "setMinSimilarity", "F" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig = { "FuzzyConfig", "org.apache.lucene.queryparser.flexible.standard.config", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig;
 }
 

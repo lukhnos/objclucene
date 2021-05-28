@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesMltMoreLikeThisQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesMltMoreLikeThisQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueriesMltMoreLikeThisQuery || defined(INCLUDE_OrgApacheLuceneQueriesMltMoreLikeThisQuery))
 #define OrgApacheLuceneQueriesMltMoreLikeThisQuery_
 
@@ -27,9 +33,8 @@
 
 /*!
  @brief A simple wrapper for MoreLikeThis for use in scenarios where a Query object is required eg
- in custom QueryParser extensions.
- At query.rewrite() time the reader is used to construct the
- actual MoreLikeThis object and obtain the real Query object.
+  in custom QueryParser extensions.At query.rewrite() time the reader is used to construct the
+  actual MoreLikeThis object and obtain the real Query object.
  */
 @interface OrgApacheLuceneQueriesMltMoreLikeThisQuery : OrgApacheLuceneSearchQuery
 
@@ -38,10 +43,10 @@
 /*!
  @param moreLikeFields fields used for similarity measure
  */
-- (instancetype)initWithNSString:(NSString *)likeText
-               withNSStringArray:(IOSObjectArray *)moreLikeFields
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                    withNSString:(NSString *)fieldName;
+- (instancetype __nonnull)initWithNSString:(NSString *)likeText
+                         withNSStringArray:(IOSObjectArray *)moreLikeFields
+       withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                              withNSString:(NSString *)fieldName;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -83,6 +88,10 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
 
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesMltMoreLikeThisQuery)
@@ -97,4 +106,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesMltMoreLikeThisQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesMltMoreLikeThisQuery")

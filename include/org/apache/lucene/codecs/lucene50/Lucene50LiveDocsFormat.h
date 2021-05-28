@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat))
 #define OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_
 
@@ -28,16 +34,16 @@
 @protocol OrgApacheLuceneUtilMutableBits;
 
 /*!
- @brief Lucene 5.0 live docs format 
+ @brief Lucene 5.0 live docs format
  <p>The .liv file is optional, and only exists when a segment contains
- deletions.
+  deletions.
  <p>Although per-segment, this file is maintained exterior to compound segment
- files.
- <p>Deletions (.liv) --&gt; IndexHeader,Generation,Bits
+  files. 
+ <p>Deletions (.liv) --&gt; IndexHeader,Generation,Bits 
  <ul>
- <li>SegmentHeader --&gt; <code>IndexHeader</code></li>
- <li>Bits --&gt; &lt;<code>Int64</code>&gt; <sup>LongCount</sup></li>
- </ul>
+    <li>SegmentHeader --&gt; <code>IndexHeader</code></li>
+    <li>Bits --&gt; &lt;<code>Int64</code>&gt; <sup>LongCount</sup></li>
+  </ul>
  */
 @interface OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat : OrgApacheLuceneCodecsLiveDocsFormat
 
@@ -46,7 +52,7 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)filesWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
                                 withJavaUtilCollection:(id<JavaUtilCollection>)files;
@@ -71,12 +77,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_init(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat *new_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat *new_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat *create_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat *create_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat")

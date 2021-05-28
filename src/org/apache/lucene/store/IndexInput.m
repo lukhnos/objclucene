@@ -5,11 +5,14 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/store/RandomAccessInput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/IndexInput must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreIndexInput () {
  @public
@@ -20,10 +23,12 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreIndexInput, resourceDescription_, NSString *)
 
-@interface OrgApacheLuceneStoreIndexInput_$1 : NSObject < OrgApacheLuceneStoreRandomAccessInput > {
+@interface OrgApacheLuceneStoreIndexInput_1 : NSObject < OrgApacheLuceneStoreRandomAccessInput > {
  @public
   OrgApacheLuceneStoreIndexInput *val$slice_;
 }
+
+- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)capture$0;
 
 - (jbyte)readByteWithLong:(jlong)pos;
 
@@ -33,21 +38,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreIndexInput, resourceDescription_, NSStri
 
 - (jlong)readLongWithLong:(jlong)pos;
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)capture$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreIndexInput_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreIndexInput_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreIndexInput_$1, val$slice_, OrgApacheLuceneStoreIndexInput *)
+__attribute__((unused)) static void OrgApacheLuceneStoreIndexInput_1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput_1 *self, OrgApacheLuceneStoreIndexInput *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput_$1 *self, OrgApacheLuceneStoreIndexInput *capture$0);
+__attribute__((unused)) static OrgApacheLuceneStoreIndexInput_1 *new_OrgApacheLuceneStoreIndexInput_1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneStoreIndexInput_$1 *new_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneStoreIndexInput_$1 *create_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexInput_$1)
+__attribute__((unused)) static OrgApacheLuceneStoreIndexInput_1 *create_OrgApacheLuceneStoreIndexInput_1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0);
 
 @implementation OrgApacheLuceneStoreIndexInput
 
@@ -82,8 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexInput_$1)
   return resourceDescription_;
 }
 
-- (OrgApacheLuceneStoreIndexInput *)clone {
-  return (OrgApacheLuceneStoreIndexInput *) cast_chk([super clone], [OrgApacheLuceneStoreIndexInput class]);
+- (OrgApacheLuceneStoreIndexInput *)java_clone {
+  return (OrgApacheLuceneStoreIndexInput *) cast_chk([super java_clone], [OrgApacheLuceneStoreIndexInput class]);
 }
 
 - (OrgApacheLuceneStoreIndexInput *)sliceWithNSString:(NSString *)sliceDescription
@@ -110,7 +109,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexInput_$1)
     return (id<OrgApacheLuceneStoreRandomAccessInput>) cast_check(slice, OrgApacheLuceneStoreRandomAccessInput_class_());
   }
   else {
-    return create_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(slice);
+    return create_OrgApacheLuceneStoreIndexInput_1_initWithOrgApacheLuceneStoreIndexInput_(slice);
   }
 }
 
@@ -120,22 +119,37 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexInput_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "IndexInput", NULL, 0x4, NULL, NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x401, NULL, NULL },
-    { "seekWithLong:", "seek", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "length", NULL, "J", 0x401, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.store.IndexInput;", 0x1, NULL, NULL },
-    { "sliceWithNSString:withLong:withLong:", "slice", "Lorg.apache.lucene.store.IndexInput;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getFullSliceDescriptionWithNSString:", "getFullSliceDescription", "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "randomAccessSliceWithLong:withLong:", "randomAccessSlice", "Lorg.apache.lucene.store.RandomAccessInput;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 2, 3, 1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x401, 6, 7, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, 8, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreRandomAccessInput;", 0x1, 9, 10, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(close);
+  methods[2].selector = @selector(getFilePointer);
+  methods[3].selector = @selector(seekWithLong:);
+  methods[4].selector = @selector(length);
+  methods[5].selector = @selector(description);
+  methods[6].selector = @selector(java_clone);
+  methods[7].selector = @selector(sliceWithNSString:withLong:withLong:);
+  methods[8].selector = @selector(getFullSliceDescriptionWithNSString:);
+  methods[9].selector = @selector(randomAccessSliceWithLong:withLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "resourceDescription_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "resourceDescription_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreIndexInput = { 2, "IndexInput", "org.apache.lucene.store", NULL, 0x401, 10, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "LJavaIoIOException;", "seek", "J", "toString", "clone", "slice", "LNSString;JJ", "getFullSliceDescription", "randomAccessSlice", "JJ" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreIndexInput = { "IndexInput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x401, 10, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreIndexInput;
 }
 
@@ -151,7 +165,12 @@ void OrgApacheLuceneStoreIndexInput_initWithNSString_(OrgApacheLuceneStoreIndexI
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreIndexInput)
 
-@implementation OrgApacheLuceneStoreIndexInput_$1
+@implementation OrgApacheLuceneStoreIndexInput_1
+
+- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)capture$0 {
+  OrgApacheLuceneStoreIndexInput_1_initWithOrgApacheLuceneStoreIndexInput_(self, capture$0);
+  return self;
+}
 
 - (jbyte)readByteWithLong:(jlong)pos {
   [((OrgApacheLuceneStoreIndexInput *) nil_chk(val$slice_)) seekWithLong:pos];
@@ -173,45 +192,47 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreIndexInput)
   return [val$slice_ readLong];
 }
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)capture$0 {
-  OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(self, capture$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(val$slice_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "readByteWithLong:", "readByte", "B", 0x1, "Ljava.io.IOException;", NULL },
-    { "readShortWithLong:", "readShort", "S", 0x1, "Ljava.io.IOException;", NULL },
-    { "readIntWithLong:", "readInt", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "readLongWithLong:", "readLong", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneStoreIndexInput:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "S", 0x1, 4, 2, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, 5, 2, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, 6, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexInput:);
+  methods[1].selector = @selector(readByteWithLong:);
+  methods[2].selector = @selector(readShortWithLong:);
+  methods[3].selector = @selector(readIntWithLong:);
+  methods[4].selector = @selector(readLongWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$slice_", NULL, 0x1012, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$slice_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneStoreIndexInput", "randomAccessSliceWithLong:withLong:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreIndexInput_$1 = { 2, "", "org.apache.lucene.store", "IndexInput", 0x8008, 5, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneStoreIndexInput_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;", "readByte", "J", "LJavaIoIOException;", "readShort", "readInt", "readLong", "randomAccessSliceWithLong:withLong:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreIndexInput_1 = { "", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x8010, 5, 1, 0, -1, 7, -1, -1 };
+  return &_OrgApacheLuceneStoreIndexInput_1;
 }
 
 @end
 
-void OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput_$1 *self, OrgApacheLuceneStoreIndexInput *capture$0) {
+void OrgApacheLuceneStoreIndexInput_1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput_1 *self, OrgApacheLuceneStoreIndexInput *capture$0) {
   JreStrongAssign(&self->val$slice_, capture$0);
   NSObject_init(self);
 }
 
-OrgApacheLuceneStoreIndexInput_$1 *new_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreIndexInput_$1, initWithOrgApacheLuceneStoreIndexInput_, capture$0)
+OrgApacheLuceneStoreIndexInput_1 *new_OrgApacheLuceneStoreIndexInput_1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreIndexInput_1, initWithOrgApacheLuceneStoreIndexInput_, capture$0)
 }
 
-OrgApacheLuceneStoreIndexInput_$1 *create_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreIndexInput_$1, initWithOrgApacheLuceneStoreIndexInput_, capture$0)
+OrgApacheLuceneStoreIndexInput_1 *create_OrgApacheLuceneStoreIndexInput_1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreIndexInput_1, initWithOrgApacheLuceneStoreIndexInput_, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreIndexInput_$1)

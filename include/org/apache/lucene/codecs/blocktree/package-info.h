@@ -6,15 +6,16 @@
 /*!
  @brief BlockTree terms dictionary.
  <p>
- This terms dictionary organizes all terms into blocks according to
- shared prefix, such that each block has enough terms, and then stores
- the prefix trie in memory as an FST as the index structure.  It allows
- you to plug in your own <code>org.apache.lucene.codecs.PostingsWriterBase</code>
+  This terms dictionary organizes all terms into blocks according to
+  shared prefix, such that each block has enough terms, and then stores
+  the prefix trie in memory as an FST as the index structure.  It allows
+  you to plug in your own <code>org.apache.lucene.codecs.PostingsWriterBase</code>
   to implement the
- postings.
+  postings. 
  </p>
+   
  <p>See <code>org.apache.lucene.codecs.blocktree.BlockTreeTermsWriter</code>
- for the file format.
+    for the file format. 
  </p>
  */
 #include "J2ObjC_header.h"
@@ -27,4 +28,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsBlocktreePackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreePackage_info")

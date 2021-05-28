@@ -3,11 +3,13 @@
 //  source: ./core/src/java/org/lukhnos/portmobile/file/Path.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/File.h"
-#include "java/io/IOException.h"
 #include "org/lukhnos/portmobile/file/Path.h"
+
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/Path must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgLukhnosPortmobileFilePath
 
@@ -38,7 +40,7 @@
 }
 
 - (OrgLukhnosPortmobileFilePath *)resolveWithNSString:(NSString *)other {
-  if ([((NSString *) nil_chk(other)) isEmpty]) {
+  if ([((NSString *) nil_chk(other)) java_isEmpty]) {
     return self;
   }
   JavaIoFile *otherFile = create_JavaIoFile_initWithNSString_(other);
@@ -66,22 +68,37 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "Path", NULL, 0x0, NULL, NULL },
-    { "initWithJavaIoFile:", "Path", NULL, 0x0, NULL, NULL },
-    { "toFile", NULL, "Ljava.io.File;", 0x1, NULL, NULL },
-    { "toRealPath", NULL, "Lorg.lukhnos.portmobile.file.Path;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getFileName", NULL, "Lorg.lukhnos.portmobile.file.Path;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "resolveWithNSString:", "resolve", "Lorg.lukhnos.portmobile.file.Path;", 0x1, NULL, NULL },
-    { "isAbsolute", NULL, "Z", 0x1, NULL, NULL },
-    { "toAbsolutePath", NULL, "Lorg.lukhnos.portmobile.file.Path;", 0x1, NULL, NULL },
-    { "getParent", NULL, "Lorg.lukhnos.portmobile.file.Path;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaIoFile;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x1, 4, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(initWithJavaIoFile:);
+  methods[2].selector = @selector(toFile);
+  methods[3].selector = @selector(toRealPath);
+  methods[4].selector = @selector(getFileName);
+  methods[5].selector = @selector(description);
+  methods[6].selector = @selector(resolveWithNSString:);
+  methods[7].selector = @selector(isAbsolute);
+  methods[8].selector = @selector(toAbsolutePath);
+  methods[9].selector = @selector(getParent);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "file_", NULL, 0x0, "Ljava.io.File;", NULL, NULL, .constantValue.asLong = 0 },
+    { "file_", "LJavaIoFile;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFilePath = { 2, "Path", "org.lukhnos.portmobile.file", NULL, 0x1, 10, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "LJavaIoFile;", "LJavaIoIOException;", "toString", "resolve" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFilePath = { "Path", "org.lukhnos.portmobile.file", ptrTable, methods, fields, 7, 0x1, 10, 1, -1, -1, -1, -1, -1 };
   return &_OrgLukhnosPortmobileFilePath;
 }
 

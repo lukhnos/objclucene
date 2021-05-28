@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.h"
@@ -15,6 +14,10 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter () {
  @public
@@ -52,7 +55,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter, stat
 
 - (jboolean)incrementToken {
   if (state_ != nil) {
-    JreAssert((preserveOriginal_), (@"state should only be captured if preserveOriginal is true"));
+    JreAssert(preserveOriginal_, @"state should only be captured if preserveOriginal is true");
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:state_];
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAttr_)) setPositionIncrementWithInt:0];
     JreStrongAssign(&state_, nil);
@@ -60,7 +63,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter, stat
   }
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-    jint length = [termAtt_ length];
+    jint length = [termAtt_ java_length];
     for (jint i = 0; i < length; ++i) {
       jchar c = IOSCharArray_Get(nil_chk(buffer), i);
       if (c >= 0x0080) {
@@ -110,24 +113,36 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter, stat
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "ASCIIFoldingFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:", "ASCIIFoldingFilter", NULL, 0x1, NULL, NULL },
-    { "isPreserveOriginal", NULL, "Z", 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "foldToASCIIWithCharArray:withInt:", "foldToASCII", "V", 0x1, NULL, NULL },
-    { "foldToASCIIWithCharArray:withInt:withCharArray:withInt:withInt:", "foldToASCII", "I", 0x19, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x19, 3, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:);
+  methods[2].selector = @selector(isPreserveOriginal);
+  methods[3].selector = @selector(incrementToken);
+  methods[4].selector = @selector(reset);
+  methods[5].selector = @selector(foldToASCIIWithCharArray:withInt:);
+  methods[6].selector = @selector(foldToASCIIWithCharArray:withInt:withCharArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "preserveOriginal_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "output_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "outputPos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "state_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncAttr_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "preserveOriginal_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "output_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "outputPos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "state_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter = { 2, "ASCIIFoldingFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 7, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LOrgApacheLuceneAnalysisTokenStream;Z", "LJavaIoIOException;", "foldToASCII", "[CI", "[CI[CII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter = { "ASCIIFoldingFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 7, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter;
 }
 

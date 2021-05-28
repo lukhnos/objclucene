@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory))
 #define OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_
 
@@ -27,12 +33,12 @@
 /*!
  @brief Factory for <code>PatternCaptureGroupTokenFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_ptncapturegroup" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.KeywordTokenizerFactory"/&gt;
- &lt;filter class="solr.PatternCaptureGroupFilterFactory" pattern="([^a-z])" preserve_original="true"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_ptncapturegroup" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.KeywordTokenizerFactory"/&gt;
+      &lt;filter class="solr.PatternCaptureGroupFilterFactory" pattern="([^a-z])" preserve_original="true"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  - seealso: PatternCaptureGroupTokenFilter
  */
@@ -40,7 +46,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -58,4 +64,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory")

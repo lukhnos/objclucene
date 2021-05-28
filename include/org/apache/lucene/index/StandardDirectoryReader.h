@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexStandardDirectoryReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexStandardDirectoryReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexStandardDirectoryReader || defined(INCLUDE_OrgApacheLuceneIndexStandardDirectoryReader))
 #define OrgApacheLuceneIndexStandardDirectoryReader_
 
@@ -58,11 +64,11 @@
 /*!
  @brief called only from static open() methods
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
-              withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
-                  withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                 withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)sis
-                                          withBoolean:(jboolean)applyAllDeletes;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
+                                      withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
+                                          withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
+                                         withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)sis
+                                                                  withBoolean:(jboolean)applyAllDeletes;
 
 - (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChangedWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos;
 
@@ -79,6 +85,11 @@
                                             withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                                                                      withBoolean:(jboolean)applyAllDeletes;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg0
+                        withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)arg1 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexStandardDirectoryReader)
@@ -86,11 +97,11 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexStandardDirectoryReader)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexStandardDirectoryReader, writer_, OrgApacheLuceneIndexIndexWriter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexStandardDirectoryReader, segmentInfos_, OrgApacheLuceneIndexSegmentInfos *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneIndexStandardDirectoryReader *self, OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexStandardDirectoryReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneIndexStandardDirectoryReader *self, OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexStandardDirectoryReader *new_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexStandardDirectoryReader *new_OrgApacheLuceneIndexStandardDirectoryReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexStandardDirectoryReader *create_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes);
+FOUNDATION_EXPORT OrgApacheLuceneIndexStandardDirectoryReader *create_OrgApacheLuceneIndexStandardDirectoryReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader_openWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexIndexCommit *commit);
 
@@ -143,11 +154,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexStandardDirectoryReader:(OrgApacheLuceneIndexStandardDirectoryReader *)reader
-                               withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
-                                  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexStandardDirectoryReader:(OrgApacheLuceneIndexStandardDirectoryReader *)reader
+                                         withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
+                                            withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 - (OrgApacheLuceneIndexStandardDirectoryReader *)getReader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -167,4 +182,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCom
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexStandardDirectoryReader")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightSimpleFragmenter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightSimpleFragmenter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleFragmenter || defined(INCLUDE_OrgApacheLuceneSearchHighlightSimpleFragmenter))
 #define OrgApacheLuceneSearchHighlightSimpleFragmenter_
 
@@ -24,18 +30,18 @@
 
 /*!
  @brief <code>Fragmenter</code> implementation which breaks text up into same-size
- fragments with no concerns over spotting sentence boundaries.
+  fragments with no concerns over spotting sentence boundaries.
  */
 @interface OrgApacheLuceneSearchHighlightSimpleFragmenter : NSObject < OrgApacheLuceneSearchHighlightFragmenter >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @param fragmentSize size in number of characters of each fragment
  */
-- (instancetype)initWithInt:(jint)fragmentSize;
+- (instancetype __nonnull)initWithInt:(jint)fragmentSize;
 
 /*!
  @return size in number of characters of each fragment
@@ -58,9 +64,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightSimpleFragmenter)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleFragmenter_init(OrgApacheLuceneSearchHighlightSimpleFragmenter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleFragmenter *new_OrgApacheLuceneSearchHighlightSimpleFragmenter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleFragmenter *new_OrgApacheLuceneSearchHighlightSimpleFragmenter_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleFragmenter *create_OrgApacheLuceneSearchHighlightSimpleFragmenter_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleFragmenter *create_OrgApacheLuceneSearchHighlightSimpleFragmenter_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleFragmenter_initWithInt_(OrgApacheLuceneSearchHighlightSimpleFragmenter *self, jint fragmentSize);
 
@@ -72,4 +78,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSimpleFragmenter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleFragmenter")

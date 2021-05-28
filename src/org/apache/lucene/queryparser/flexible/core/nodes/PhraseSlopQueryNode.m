@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
 #include "java/lang/Float.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/queryparser/flexible/core/QueryNodeError.h"
@@ -18,6 +17,12 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
 #include "org/apache/lucene/queryparser/flexible/messages/MessageImpl.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/PhraseSlopQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode () {
  @public
@@ -66,7 +71,7 @@ __attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQuerypars
 }
 
 - (id<JavaLangCharSequence>)getField {
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> child = [self getChild];
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> child = JreRetainedLocalValue([self getChild]);
   if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:child]) {
     return [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField];
   }
@@ -74,28 +79,42 @@ __attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQuerypars
 }
 
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName {
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> child = [self getChild];
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> child = JreRetainedLocalValue([self getChild]);
   if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:child]) {
     [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:fieldName];
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withInt:", "PhraseSlopQueryNode", NULL, 0x1, NULL, NULL },
-    { "getChild", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, NULL, NULL },
-    { "getValue", NULL, "I", 0x1, NULL, NULL },
-    { "getValueString", NULL, "Ljava.lang.CharSequence;", 0x2, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "getField", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "setFieldWithJavaLangCharSequence:", "setField", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withInt:);
+  methods[1].selector = @selector(getChild);
+  methods[2].selector = @selector(getValue);
+  methods[3].selector = @selector(getValueString);
+  methods[4].selector = @selector(description);
+  methods[5].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[6].selector = @selector(cloneTree);
+  methods[7].selector = @selector(getField);
+  methods[8].selector = @selector(setFieldWithJavaLangCharSequence:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "value_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "value_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode = { 2, "PhraseSlopQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 9, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;I", "toString", "toQueryString", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;", "LJavaLangCloneNotSupportedException;", "setField", "LJavaLangCharSequence;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode = { "PhraseSlopQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x1, 9, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode;
 }
 

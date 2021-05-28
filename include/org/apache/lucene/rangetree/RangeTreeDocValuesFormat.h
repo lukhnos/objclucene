@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat || defined(INCLUDE_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat))
 #define OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_
 
@@ -27,118 +33,111 @@
 
 /*!
  @brief A <code>DocValuesFormat</code> to efficiently index numeric values from
- from <code>SortedNumericDocValuesField</code> or BytesRef values from <code>SortedSetDocValuesField</code>
- for numeric range queries using (<code>NumericRangeTreeQuery</code>) and arbitrary binary
- range queries using <code>SortedSetRangeTreeQuery</code>.
+  from <code>SortedNumericDocValuesField</code> or BytesRef values from <code>SortedSetDocValuesField</code>
+  for numeric range queries using (<code>NumericRangeTreeQuery</code>) and arbitrary binary
+  range queries using <code>SortedSetRangeTreeQuery</code>.
  <p>This wraps <code>Lucene50DocValuesFormat</code>, but saves its own numeric tree
- structures to disk for fast query-time intersection. See <a
- href="https://www.cs.duke.edu/~pankaj/publications/papers/bkd-sstd.pdf">this paper</a>
- for details.
+  structures to disk for fast query-time intersection. See <a href="https://www.cs.duke.edu/~pankaj/publications/papers/bkd-sstd.pdf">
+ this paper</a>
+  for details. 
  <p>The numeric tree slices up 1D space into smaller and
- smaller ranges, until the smallest ranges have approximately
- between X/2 and X (X default is 1024) values in them, at which point
- such leaf cells are written as a block to disk, while the index tree
- structure records how space was sub-divided is loaded into HEAP
- at search time.  At search time, the tree is recursed based on whether
- each of left or right child overlap with the query range, and once
- a leaf block is reached, all documents in that leaf block are collected
- if the cell is fully enclosed by the query shape, or filtered and then
- collected, if not.
+  smaller ranges, until the smallest ranges have approximately
+  between X/2 and X (X default is 1024) values in them, at which point
+  such leaf cells are written as a block to disk, while the index tree
+  structure records how space was sub-divided is loaded into HEAP
+  at search time.  At search time, the tree is recursed based on whether
+  each of left or right child overlap with the query range, and once
+  a leaf block is reached, all documents in that leaf block are collected
+  if the cell is fully enclosed by the query shape, or filtered and then
+  collected, if not. 
  <p>The index is also quite compact, because docs only appear once in
- the tree (no "prefix terms").
- <p>In addition to the files written by <code>Lucene50DocValuesFormat</code>, this format writes:
+  the tree (no "prefix terms"). 
+ <p>In addition to the files written by <code>Lucene50DocValuesFormat</code>, this format writes: 
  <ol>
- <li><tt>.ndd</tt>: numeric tree leaf data and index</li>
- <li><tt>.ndm</tt>: numeric tree metadata</li>
- </ol>
- <p>The disk format is experimental and free to change suddenly, and this code likely has new and exciting bugs!
+    <li><tt>.ndd</tt>: numeric tree leaf data and index</li>
+    <li><tt>.ndm</tt>: numeric tree metadata</li>
+  </ol>
   
+ <p>The disk format is experimental and free to change suddenly, and this code likely has new and exciting bugs!
  */
 @interface OrgApacheLuceneRangetreeRangeTreeDocValuesFormat : OrgApacheLuceneCodecsDocValuesFormat
-
-+ (NSString *)DATA_CODEC_NAME;
-
-+ (jint)DATA_VERSION_START;
-
-+ (jint)DATA_VERSION_CURRENT;
-
-+ (NSString *)DATA_EXTENSION;
-
-+ (NSString *)META_CODEC_NAME;
-
-+ (jint)META_VERSION_START;
-
-+ (jint)META_VERSION_CURRENT;
-
-+ (NSString *)META_EXTENSION;
+@property (readonly, copy, class) NSString *DATA_CODEC_NAME NS_SWIFT_NAME(DATA_CODEC_NAME);
+@property (readonly, class) jint DATA_VERSION_START NS_SWIFT_NAME(DATA_VERSION_START);
+@property (readonly, class) jint DATA_VERSION_CURRENT NS_SWIFT_NAME(DATA_VERSION_CURRENT);
+@property (readonly, copy, class) NSString *DATA_EXTENSION NS_SWIFT_NAME(DATA_EXTENSION);
+@property (readonly, copy, class) NSString *META_CODEC_NAME NS_SWIFT_NAME(META_CODEC_NAME);
+@property (readonly, class) jint META_VERSION_START NS_SWIFT_NAME(META_VERSION_START);
+@property (readonly, class) jint META_VERSION_CURRENT NS_SWIFT_NAME(META_VERSION_CURRENT);
+@property (readonly, copy, class) NSString *META_EXTENSION NS_SWIFT_NAME(META_EXTENSION);
 
 #pragma mark Public
 
 /*!
  @brief Default constructor
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates this with custom configuration.
- @param maxPointsInLeafNode Maximum number of points in each leaf cell.  Smaller values create a deeper tree with larger in-heap index and possibly
- faster searching.  The default is 1024.
- @param maxPointsSortInHeap Maximum number of points where in-heap sort can be used.  When the number of points exceeds this, a (slower)
- offline sort is used.  The default is 128 * 1024.
-  
+ @param maxPointsInLeafNode Maximum number of points in each leaf cell.  Smaller values create a deeper tree with larger in-heap index and possibly     faster searching.  The default is 1024.
+ @param maxPointsSortInHeap Maximum number of points where in-heap sort can be used.  When the number of points exceeds this, a (slower)     offline sort is used.  The default is 128 * 1024.
  */
-- (instancetype)initWithInt:(jint)maxPointsInLeafNode
-                    withInt:(jint)maxPointsSortInHeap;
+- (instancetype __nonnull)initWithInt:(jint)maxPointsInLeafNode
+                              withInt:(jint)maxPointsSortInHeap;
 
 - (OrgApacheLuceneCodecsDocValuesConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
 - (OrgApacheLuceneCodecsDocValuesProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat)
 
-inline NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_DATA_CODEC_NAME();
+inline NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_DATA_CODEC_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_CODEC_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat, DATA_CODEC_NAME, NSString *)
 
-inline jint OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_DATA_VERSION_START();
+inline jint OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_DATA_VERSION_START(void);
 #define OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_VERSION_START 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat, DATA_VERSION_START, jint)
 
-inline jint OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_DATA_VERSION_CURRENT();
+inline jint OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_DATA_VERSION_CURRENT(void);
 #define OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_VERSION_CURRENT 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat, DATA_VERSION_CURRENT, jint)
 
-inline NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_DATA_EXTENSION();
+inline NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_DATA_EXTENSION(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_EXTENSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat, DATA_EXTENSION, NSString *)
 
-inline NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_META_CODEC_NAME();
+inline NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_META_CODEC_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_CODEC_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat, META_CODEC_NAME, NSString *)
 
-inline jint OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_META_VERSION_START();
+inline jint OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_META_VERSION_START(void);
 #define OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_VERSION_START 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat, META_VERSION_START, jint)
 
-inline jint OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_META_VERSION_CURRENT();
+inline jint OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_META_VERSION_CURRENT(void);
 #define OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_VERSION_CURRENT 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat, META_VERSION_CURRENT, jint)
 
-inline NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_META_EXTENSION();
+inline NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_get_META_EXTENSION(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_EXTENSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat, META_EXTENSION, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_init(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *new_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *new_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *create_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_init();
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *create_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_initWithInt_withInt_(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *self, jint maxPointsInLeafNode, jint maxPointsSortInHeap);
 
@@ -150,4 +149,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat")

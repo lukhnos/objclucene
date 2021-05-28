@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneUtilIntBlockPool_Allocator 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilIntBlockPool_) && (INCLUDE_ALL_OrgApacheLuceneUtilIntBlockPool || defined(INCLUDE_OrgApacheLuceneUtilIntBlockPool))
 #define OrgApacheLuceneUtilIntBlockPool_
 
@@ -29,8 +35,7 @@
 @interface OrgApacheLuceneUtilIntBlockPool : NSObject {
  @public
   /*!
-   @brief array of buffers currently used in the pool.
-   Buffers are allocated if needed don't modify this outside of this class 
+   @brief array of buffers currently used in the pool.Buffers are allocated if needed don't modify this outside of this class
    */
   IOSObjectArray *buffers_;
   /*!
@@ -46,12 +51,9 @@
    */
   jint intOffset_;
 }
-
-+ (jint)INT_BLOCK_SHIFT;
-
-+ (jint)INT_BLOCK_SIZE;
-
-+ (jint)INT_BLOCK_MASK;
+@property (readonly, class) jint INT_BLOCK_SHIFT NS_SWIFT_NAME(INT_BLOCK_SHIFT);
+@property (readonly, class) jint INT_BLOCK_SIZE NS_SWIFT_NAME(INT_BLOCK_SIZE);
+@property (readonly, class) jint INT_BLOCK_MASK NS_SWIFT_NAME(INT_BLOCK_MASK);
 
 #pragma mark Public
 
@@ -59,38 +61,38 @@
  @brief Creates a new <code>IntBlockPool</code> with a default <code>Allocator</code>.
  - seealso: IntBlockPool#nextBuffer()
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new <code>IntBlockPool</code> with the given <code>Allocator</code>.
  - seealso: IntBlockPool#nextBuffer()
  */
-- (instancetype)initWithOrgApacheLuceneUtilIntBlockPool_Allocator:(OrgApacheLuceneUtilIntBlockPool_Allocator *)allocator;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilIntBlockPool_Allocator:(OrgApacheLuceneUtilIntBlockPool_Allocator *)allocator;
 
 /*!
- @brief Advances the pool to its next buffer.
- This method should be called once
- after the constructor to initialize the pool. In contrast to the
- constructor a <code>IntBlockPool.reset()</code> call will advance the pool to
- its first buffer immediately.
+ @brief Advances the pool to its next buffer.This method should be called once
+  after the constructor to initialize the pool.
+ In contrast to the
+  constructor a <code>IntBlockPool.reset()</code> call will advance the pool to
+  its first buffer immediately.
  */
 - (void)nextBuffer;
 
 /*!
- @brief Resets the pool to its initial state reusing the first buffer.
- Calling
- <code>IntBlockPool.nextBuffer()</code> is not needed after reset.
+ @brief Resets the pool to its initial state reusing the first buffer.Calling
+  <code>IntBlockPool.nextBuffer()</code> is not needed after reset.
  */
 - (void)reset;
 
 /*!
  @brief Expert: Resets the pool to its initial state reusing the first buffer.
- @param zeroFillBuffers if <code>true</code> the buffers are filled with <tt>0</tt>. 
- This should be set to <code>true</code> if this pool is used with 
- <code>SliceWriter</code>.
- @param reuseFirst if <code>true</code> the first buffer will be reused and calling
- <code>IntBlockPool.nextBuffer()</code> is not needed after reset iff the 
- block pool was used before ie. <code>IntBlockPool.nextBuffer()</code> was called before.
+ @param zeroFillBuffers if  <code> true </code>  the buffers are filled with  <tt> 0 </tt>
+  .          This should be set to  <code> true </code>  if this pool is used with 
+          <code>SliceWriter</code>
+  .
+ @param reuseFirst if  <code> true </code>  the first buffer will be reused and calling
+          <code>IntBlockPool.nextBuffer()</code>  is not needed after reset iff the 
+          block pool was used before ie. <code>IntBlockPool.nextBuffer()</code>  was called before.
  */
 - (void)resetWithBoolean:(jboolean)zeroFillBuffers
              withBoolean:(jboolean)reuseFirst;
@@ -102,23 +104,23 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilIntBlockPool)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilIntBlockPool, buffers_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilIntBlockPool, buffer_, IOSIntArray *)
 
-inline jint OrgApacheLuceneUtilIntBlockPool_get_INT_BLOCK_SHIFT();
+inline jint OrgApacheLuceneUtilIntBlockPool_get_INT_BLOCK_SHIFT(void);
 #define OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SHIFT 13
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilIntBlockPool, INT_BLOCK_SHIFT, jint)
 
-inline jint OrgApacheLuceneUtilIntBlockPool_get_INT_BLOCK_SIZE();
+inline jint OrgApacheLuceneUtilIntBlockPool_get_INT_BLOCK_SIZE(void);
 #define OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE 8192
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilIntBlockPool, INT_BLOCK_SIZE, jint)
 
-inline jint OrgApacheLuceneUtilIntBlockPool_get_INT_BLOCK_MASK();
+inline jint OrgApacheLuceneUtilIntBlockPool_get_INT_BLOCK_MASK(void);
 #define OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_MASK 8191
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilIntBlockPool, INT_BLOCK_MASK, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilIntBlockPool_init(OrgApacheLuceneUtilIntBlockPool *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntBlockPool *new_OrgApacheLuceneUtilIntBlockPool_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilIntBlockPool *new_OrgApacheLuceneUtilIntBlockPool_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntBlockPool *create_OrgApacheLuceneUtilIntBlockPool_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilIntBlockPool *create_OrgApacheLuceneUtilIntBlockPool_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilIntBlockPool_initWithOrgApacheLuceneUtilIntBlockPool_Allocator_(OrgApacheLuceneUtilIntBlockPool *self, OrgApacheLuceneUtilIntBlockPool_Allocator *allocator);
 
@@ -138,7 +140,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntBlockPool)
 
 /*!
  @brief Abstract class for allocating and freeing int
- blocks.
+   blocks.
  */
 @interface OrgApacheLuceneUtilIntBlockPool_Allocator : NSObject {
  @public
@@ -147,13 +149,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntBlockPool)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)blockSize;
+- (instancetype __nonnull)initWithInt:(jint)blockSize;
 
 - (IOSIntArray *)getIntBlock;
 
 - (void)recycleIntBlocksWithIntArray2:(IOSObjectArray *)blocks
                               withInt:(jint)start
                               withInt:(jint)end;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -180,11 +186,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntBlockPool_Allocator)
 /*!
  @brief Creates a new <code>DirectAllocator</code> with a default block size
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)recycleIntBlocksWithIntArray2:(IOSObjectArray *)blocks
                               withInt:(jint)start
                               withInt:(jint)end;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -192,9 +202,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilIntBlockPool_DirectAllocator)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init(OrgApacheLuceneUtilIntBlockPool_DirectAllocator *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntBlockPool_DirectAllocator *new_OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilIntBlockPool_DirectAllocator *new_OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntBlockPool_DirectAllocator *create_OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilIntBlockPool_DirectAllocator *create_OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntBlockPool_DirectAllocator)
 
@@ -213,14 +223,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntBlockPool_DirectAllocator)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilIntBlockPool:(OrgApacheLuceneUtilIntBlockPool *)pool;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilIntBlockPool:(OrgApacheLuceneUtilIntBlockPool *)pool;
 
 /*!
- @brief Returns the offset of the currently written slice.
- The returned value
- should be used as the end offset to initialize a <code>SliceReader</code> once
- this slice is fully written or to reset the this writer if another slice
- needs to be written.
+ @brief Returns the offset of the currently written slice.The returned value
+  should be used as the end offset to initialize a <code>SliceReader</code> once
+  this slice is fully written or to reset the this writer if another slice
+  needs to be written.
  */
 - (jint)getCurrentOffset;
 
@@ -229,9 +238,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntBlockPool_DirectAllocator)
 - (void)resetWithInt:(jint)sliceOffset;
 
 /*!
- @brief starts a new slice and returns the start offset.
- The returned value
- should be used as the start offset to initialize a <code>SliceReader</code>.
+ @brief starts a new slice and returns the start offset.The returned value
+  should be used as the start offset to initialize a <code>SliceReader</code>.
  */
 - (jint)startNewSlice;
 
@@ -239,6 +247,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntBlockPool_DirectAllocator)
  @brief Writes the given value into the slice and resizes the slice if needed
  */
 - (void)writeIntWithInt:(jint)value;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -269,13 +281,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntBlockPool_SliceWriter)
 /*!
  @brief Creates a new <code>SliceReader</code> on the given pool
  */
-- (instancetype)initWithOrgApacheLuceneUtilIntBlockPool:(OrgApacheLuceneUtilIntBlockPool *)pool;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilIntBlockPool:(OrgApacheLuceneUtilIntBlockPool *)pool;
 
 /*!
- @brief Returns <code>true</code> iff the current slice is fully read.
- If this
- method returns <code>true</code> <code>SliceReader.readInt()</code> should not
- be called again on this slice.
+ @brief Returns <code>true</code> iff the current slice is fully read.If this
+  method returns <code>true</code> <code>SliceReader.readInt()</code> should not
+  be called again on this slice.
  */
 - (jboolean)endOfSlice;
 
@@ -291,6 +302,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntBlockPool_SliceWriter)
 - (void)resetWithInt:(jint)startOffset
              withInt:(jint)endOffset;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilIntBlockPool_SliceReader)
@@ -305,4 +320,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntBlockPool_SliceReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilIntBlockPool")

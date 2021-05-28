@@ -3,11 +3,14 @@
 //  source: ./core/src/java/org/apache/lucene/util/SetOnce.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/util/concurrent/atomic/AtomicBoolean.h"
 #include "org/apache/lucene/util/SetOnce.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/SetOnce must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilSetOnce () {
  @public
@@ -58,24 +61,32 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x11, 2, 0, -1, 1, -1, -1 },
+    { NULL, "LNSObject;", 0x11, -1, -1, -1, 3, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithId:);
+  methods[2].selector = @selector(setWithId:);
+  methods[3].selector = @selector(get);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "obj_", "LNSObject;", .constantValue.asLong = 0, 0x42, -1, -1, 4, -1 },
+    { "set_", "LJavaUtilConcurrentAtomicAtomicBoolean;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSObject;", "(TT;)V", "set", "()TT;", "TT;", "LOrgApacheLuceneUtilSetOnce_AlreadySetException;", "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/lang/Cloneable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilSetOnce = { "SetOnce", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 4, 2, -1, 5, -1, 6, -1 };
+  return &_OrgApacheLuceneUtilSetOnce;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SetOnce", NULL, 0x1, NULL, NULL },
-    { "initWithId:", "SetOnce", NULL, 0x1, NULL, "(TT;)V" },
-    { "setWithId:", "set", "V", 0x11, NULL, "(TT;)V" },
-    { "get", NULL, "TT;", 0x11, NULL, "()TT;" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "obj_", NULL, 0x42, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
-    { "set_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicBoolean;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.SetOnce$AlreadySetException;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilSetOnce = { 2, "SetOnce", "org.apache.lucene.util", NULL, 0x11, 4, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/lang/Cloneable;" };
-  return &_OrgApacheLuceneUtilSetOnce;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end
@@ -121,10 +132,16 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "AlreadySetException", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilSetOnce_AlreadySetException = { 2, "AlreadySetException", "org.apache.lucene.util", "SetOnce", 0x19, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilSetOnce;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilSetOnce_AlreadySetException = { "AlreadySetException", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x19, 1, 0, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilSetOnce_AlreadySetException;
 }
 

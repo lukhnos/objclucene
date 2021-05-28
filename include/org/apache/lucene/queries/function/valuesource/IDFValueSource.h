@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_
 
@@ -28,21 +34,20 @@
 @protocol JavaUtilMap;
 
 /*!
- @brief Function that returns <code>TFIDFSimilarity.idf(long,long)</code>
- for every document.
+ @brief Function that returns <code>idf(long, long)</code>
+  for every document.
  <p>
- Note that the configured Similarity for the field must be
- a subclass of <code>TFIDFSimilarity</code>
-  
+  Note that the configured Similarity for the field must be
+  a subclass of <code>TFIDFSimilarity</code>
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource : OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)val
-                    withNSString:(NSString *)indexedField
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                              withNSString:(NSString *)val
+                              withNSString:(NSString *)indexedField
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
@@ -70,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceIDFValueSour
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource")

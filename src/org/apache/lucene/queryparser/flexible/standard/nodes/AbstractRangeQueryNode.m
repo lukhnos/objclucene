@@ -17,9 +17,16 @@
 #include "org/apache/lucene/queryparser/flexible/core/util/StringUtils.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode () {
  @public
-  jboolean lowerInclusive_, upperInclusive_;
+  jboolean lowerInclusive_;
+  jboolean upperInclusive_;
 }
 
 @end
@@ -35,8 +42,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<JavaLangCharSequence>)getField {
   id<JavaLangCharSequence> field = nil;
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> lower = [self getLowerBound];
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> upper = [self getUpperBound];
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> lower = JreRetainedLocalValue([self getLowerBound]);
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> upper = JreRetainedLocalValue([self getUpperBound]);
   if (lower != nil) {
     field = [lower getField];
   }
@@ -47,8 +54,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName {
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> lower = [self getLowerBound];
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> upper = [self getUpperBound];
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> lower = JreRetainedLocalValue([self getLowerBound]);
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> upper = JreRetainedLocalValue([self getUpperBound]);
   if (lower != nil) {
     [lower setFieldWithJavaLangCharSequence:fieldName];
   }
@@ -57,11 +64,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (id)getLowerBound {
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>)getLowerBound {
   return (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>) cast_check([((id<JavaUtilList>) nil_chk([self getChildren])) getWithInt:0], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode_class_());
 }
 
-- (id)getUpperBound {
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>)getUpperBound {
   return (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>) cast_check([((id<JavaUtilList>) nil_chk([self getChildren])) getWithInt:1], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode_class_());
 }
 
@@ -94,8 +101,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser {
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> lower = [self getLowerBound];
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> upper = [self getUpperBound];
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> lower = JreRetainedLocalValue([self getLowerBound]);
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> upper = JreRetainedLocalValue([self getUpperBound]);
   if (lowerInclusive_) {
     [sb appendWithChar:'['];
   }
@@ -125,34 +132,49 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [create_JavaLangStringBuilder_initWithNSString_(@"<") appendWithNSString:[[self getClass] getCanonicalName]];
+  JavaLangStringBuilder *sb = JreRetainedLocalValue([create_JavaLangStringBuilder_initWithNSString_(@"<") appendWithNSString:[[self java_getClass] getCanonicalName]]);
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk(sb)) appendWithNSString:@" lowerInclusive="])) appendWithBoolean:[self isLowerInclusive]];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@" upperInclusive="])) appendWithBoolean:[self isUpperInclusive]];
   [sb appendWithNSString:@">\n\t"];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithId:[self getUpperBound]])) appendWithNSString:@"\n\t"];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithId:[self getLowerBound]])) appendWithNSString:@"\n"];
-  [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"</"])) appendWithNSString:[[self getClass] getCanonicalName]])) appendWithNSString:@">\n"];
+  [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"</"])) appendWithNSString:[[self java_getClass] getCanonicalName]])) appendWithNSString:@">\n"];
   return [sb description];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "AbstractRangeQueryNode", NULL, 0x4, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "setFieldWithJavaLangCharSequence:", "setField", "V", 0x1, NULL, NULL },
-    { "getLowerBound", NULL, "TT;", 0x1, NULL, "()TT;" },
-    { "getUpperBound", NULL, "TT;", 0x1, NULL, "()TT;" },
-    { "isLowerInclusive", NULL, "Z", 0x1, NULL, NULL },
-    { "isUpperInclusive", NULL, "Z", 0x1, NULL, NULL },
-    { "setBoundsWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode:withBoolean:withBoolean:", "setBounds", "V", 0x1, NULL, "(TT;TT;ZZ)V" },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, 5, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getField);
+  methods[2].selector = @selector(setFieldWithJavaLangCharSequence:);
+  methods[3].selector = @selector(getLowerBound);
+  methods[4].selector = @selector(getUpperBound);
+  methods[5].selector = @selector(isLowerInclusive);
+  methods[6].selector = @selector(isUpperInclusive);
+  methods[7].selector = @selector(setBoundsWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode:withBoolean:withBoolean:);
+  methods[8].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[9].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "lowerInclusive_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "upperInclusive_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "lowerInclusive_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "upperInclusive_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode = { 2, "AbstractRangeQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", NULL, 0x1, 10, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<T::Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<*>;>Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl;Lorg/apache/lucene/queryparser/flexible/core/nodes/RangeQueryNode<Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<*>;>;" };
+  static const void *ptrTable[] = { "setField", "LJavaLangCharSequence;", "()TT;", "setBounds", "LOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;LOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;ZZ", "(TT;TT;ZZ)V", "toQueryString", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;", "toString", "<T::Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<*>;>Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl;Lorg/apache/lucene/queryparser/flexible/core/nodes/RangeQueryNode<Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<*>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode = { "AbstractRangeQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", ptrTable, methods, fields, 7, 0x1, 10, 2, -1, -1, -1, 9, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode;
 }
 

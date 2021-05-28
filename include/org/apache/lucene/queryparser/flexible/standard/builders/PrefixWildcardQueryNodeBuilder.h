@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder))
 #define OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder_
 
@@ -25,13 +31,13 @@
 
 /*!
  @brief Builds a <code>PrefixQuery</code> object from a <code>PrefixWildcardQueryNode</code>
- object.
+  object.
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder : NSObject < OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchPrefixQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
@@ -41,12 +47,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefi
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder_init(OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder")

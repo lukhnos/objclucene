@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexableField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexableField_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexableField || defined(INCLUDE_OrgApacheLuceneIndexIndexableField))
 #define OrgApacheLuceneIndexIndexableField_
 
@@ -23,12 +29,10 @@
 @protocol OrgApacheLuceneIndexIndexableFieldType;
 
 /*!
- @brief Represents a single field for indexing.
- IndexWriter
- consumes Iterable&lt;IndexableField&gt; as a document.
-  
+ @brief Represents a single field for indexing.IndexWriter
+   consumes Iterable&lt;IndexableField&gt; as a document.
  */
-@protocol OrgApacheLuceneIndexIndexableField < NSObject, JavaObject >
+@protocol OrgApacheLuceneIndexIndexableField < JavaObject >
 
 /*!
  @brief Field name
@@ -37,26 +41,26 @@
 
 /*!
  @brief <code>IndexableFieldType</code> describing the properties
- of this field.
+  of this field.
  */
 - (id<OrgApacheLuceneIndexIndexableFieldType>)fieldType;
 
 /*!
  @brief Returns the field's index-time boost.
  <p>
- Only fields can have an index-time boost, if you want to simulate
- a "document boost", then you must pre-multiply it across all the
- relevant fields yourself. 
+  Only fields can have an index-time boost, if you want to simulate
+  a "document boost", then you must pre-multiply it across all the
+  relevant fields yourself.  
  <p>The boost is used to compute the norm factor for the field.  By
- default, in the <code>Similarity.computeNorm(FieldInvertState)</code> method, 
- the boost value is multiplied by the length normalization factor and then
- rounded by <code>DefaultSimilarity.encodeNormValue(float)</code> before it is stored in the
- index.  One should attempt to ensure that this product does not overflow
- the range of that encoding.
+  default, in the <code>Similarity.computeNorm(FieldInvertState)</code> method, 
+  the boost value is multiplied by the length normalization factor and then
+  rounded by <code>DefaultSimilarity.encodeNormValue(float)</code> before it is stored in the
+  index.  One should attempt to ensure that this product does not overflow
+  the range of that encoding. 
  <p>
- It is illegal to return a boost other than 1.0f for a field that is not
- indexed (<code>IndexableFieldType.indexOptions()</code> is IndexOptions.NONE) or
- omits normalization values (<code>IndexableFieldType.omitNorms()</code> returns true).
+  It is illegal to return a boost other than 1.0f for a field that is not
+  indexed (<code>IndexableFieldType.indexOptions()</code> is IndexOptions.NONE) or
+  omits normalization values (<code>IndexableFieldType.omitNorms()</code> returns true).
  - seealso: Similarity#computeNorm(FieldInvertState)
  - seealso: DefaultSimilarity#encodeNormValue(float)
  */
@@ -83,19 +87,17 @@
 - (NSNumber *)numericValue;
 
 /*!
- @brief Creates the TokenStream used for indexing this field.
- If appropriate,
- implementations should use the given Analyzer to create the TokenStreams.
+ @brief Creates the TokenStream used for indexing this field.If appropriate,
+  implementations should use the given Analyzer to create the TokenStreams.
  @param analyzer Analyzer that should be used to create the TokenStreams from
- @param reuse TokenStream for a previous instance of this field <b>name</b>. This allows
- custom field types (like StringField and NumericField) that do not use
- the analyzer to still have good performance. Note: the passed-in type
- may be inappropriate, for example if you mix up different types of Fields
- for the same field name. So its the responsibility of the implementation to
- check.
+ @param reuse TokenStream for a previous instance of this field  <b> name </b> . This allows
+                custom field types (like StringField and NumericField) that do not use               the analyzer to still have good performance. Note: the passed-in type
+                may be inappropriate, for example if you mix up different types of Fields
+                for the same field name. So its the responsibility of the implementation to
+                check.
  @return TokenStream value for indexing the document.  Should always return
- a non-null value if the field is to be indexed
- @throws IOException Can be thrown while creating the TokenStream
+          a non-null value if the field is to be indexed
+ @throw IOExceptionCan be thrown while creating the TokenStream
  */
 - (OrgApacheLuceneAnalysisTokenStream *)tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)reuse;
@@ -108,4 +110,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexableField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexableField")

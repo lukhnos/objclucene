@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreRAMOutputStream
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreRAMOutputStream_) && (INCLUDE_ALL_OrgApacheLuceneStoreRAMOutputStream || defined(INCLUDE_OrgApacheLuceneStoreRAMOutputStream))
 #define OrgApacheLuceneStoreRAMOutputStream_
 
@@ -33,28 +39,27 @@
  @brief A memory-resident <code>IndexOutput</code> implementation.
  */
 @interface OrgApacheLuceneStoreRAMOutputStream : OrgApacheLuceneStoreIndexOutput < OrgApacheLuceneUtilAccountable >
-
-+ (jint)BUFFER_SIZE;
+@property (readonly, class) jint BUFFER_SIZE NS_SWIFT_NAME(BUFFER_SIZE);
 
 #pragma mark Public
 
 /*!
  @brief Construct an empty output buffer.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates this, with no name.
  */
-- (instancetype)initWithOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
-                                        withBoolean:(jboolean)checksum;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
+                                                  withBoolean:(jboolean)checksum;
 
 /*!
  @brief Creates this, with specified name.
  */
-- (instancetype)initWithNSString:(NSString *)name
- withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
-                     withBoolean:(jboolean)checksum;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+           withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
+                               withBoolean:(jboolean)checksum;
 
 - (void)close;
 
@@ -82,7 +87,7 @@
 
 /*!
  @brief Copy the current contents of this buffer to output
- byte array
+   byte array
  */
 - (void)writeToWithByteArray:(IOSByteArray *)bytes
                      withInt:(jint)offset;
@@ -99,19 +104,23 @@
  */
 - (void)flush;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreRAMOutputStream)
 
-inline jint OrgApacheLuceneStoreRAMOutputStream_get_BUFFER_SIZE();
+inline jint OrgApacheLuceneStoreRAMOutputStream_get_BUFFER_SIZE(void);
 #define OrgApacheLuceneStoreRAMOutputStream_BUFFER_SIZE 1024
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreRAMOutputStream, BUFFER_SIZE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMOutputStream_init(OrgApacheLuceneStoreRAMOutputStream *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreRAMOutputStream *new_OrgApacheLuceneStoreRAMOutputStream_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreRAMOutputStream *new_OrgApacheLuceneStoreRAMOutputStream_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreRAMOutputStream *create_OrgApacheLuceneStoreRAMOutputStream_init();
+FOUNDATION_EXPORT OrgApacheLuceneStoreRAMOutputStream *create_OrgApacheLuceneStoreRAMOutputStream_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(OrgApacheLuceneStoreRAMOutputStream *self, OrgApacheLuceneStoreRAMFile *f, jboolean checksum);
 
@@ -129,4 +138,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMOutputStream)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRAMOutputStream")

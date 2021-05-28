@@ -3,14 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/index/StoredFieldVisitor.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/index/FieldInfo.h"
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/StoredFieldVisitor must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static void OrgApacheLuceneIndexStoredFieldVisitor_Status_initWithNSString_withInt_(OrgApacheLuceneIndexStoredFieldVisitor_Status *self, NSString *__name, jint __ordinal);
 
@@ -54,18 +57,30 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "StoredFieldVisitor", NULL, 0x4, NULL, NULL },
-    { "binaryFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:", "binaryField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "stringFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:", "stringField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "intFieldWithOrgApacheLuceneIndexFieldInfo:withInt:", "intField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "longFieldWithOrgApacheLuceneIndexFieldInfo:withLong:", "longField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "floatFieldWithOrgApacheLuceneIndexFieldInfo:withFloat:", "floatField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "doubleFieldWithOrgApacheLuceneIndexFieldInfo:withDouble:", "doubleField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "needsFieldWithOrgApacheLuceneIndexFieldInfo:", "needsField", "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexStoredFieldVisitor_Status;", 0x401, 12, 13, 2, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.StoredFieldVisitor$Status;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexStoredFieldVisitor = { 2, "StoredFieldVisitor", "org.apache.lucene.index", NULL, 0x401, 8, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(binaryFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:);
+  methods[2].selector = @selector(stringFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:);
+  methods[3].selector = @selector(intFieldWithOrgApacheLuceneIndexFieldInfo:withInt:);
+  methods[4].selector = @selector(longFieldWithOrgApacheLuceneIndexFieldInfo:withLong:);
+  methods[5].selector = @selector(floatFieldWithOrgApacheLuceneIndexFieldInfo:withFloat:);
+  methods[6].selector = @selector(doubleFieldWithOrgApacheLuceneIndexFieldInfo:withDouble:);
+  methods[7].selector = @selector(needsFieldWithOrgApacheLuceneIndexFieldInfo:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "binaryField", "LOrgApacheLuceneIndexFieldInfo;[B", "LJavaIoIOException;", "stringField", "intField", "LOrgApacheLuceneIndexFieldInfo;I", "longField", "LOrgApacheLuceneIndexFieldInfo;J", "floatField", "LOrgApacheLuceneIndexFieldInfo;F", "doubleField", "LOrgApacheLuceneIndexFieldInfo;D", "needsField", "LOrgApacheLuceneIndexFieldInfo;", "LOrgApacheLuceneIndexStoredFieldVisitor_Status;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexStoredFieldVisitor = { "StoredFieldVisitor", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x401, 8, 0, -1, 14, -1, -1, -1 };
   return &_OrgApacheLuceneIndexStoredFieldVisitor;
 }
 
@@ -107,8 +122,25 @@ OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVi
   return (OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneIndexStoredFieldVisitor_Status;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexStoredFieldVisitor_Status;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "YES", "LOrgApacheLuceneIndexStoredFieldVisitor_Status;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "NO", "LOrgApacheLuceneIndexStoredFieldVisitor_Status;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "STOP", "LOrgApacheLuceneIndexStoredFieldVisitor_Status;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, YES), &JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, NO), &JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, STOP), "LOrgApacheLuceneIndexStoredFieldVisitor;", "Ljava/lang/Enum<Lorg/apache/lucene/index/StoredFieldVisitor$Status;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexStoredFieldVisitor_Status = { "Status", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x4019, 2, 3, 5, -1, -1, 6, -1 };
+  return &_OrgApacheLuceneIndexStoredFieldVisitor_Status;
 }
 
 + (void)initialize {
@@ -117,25 +149,12 @@ OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVi
     size_t allocSize = 3 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, YES) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexStoredFieldVisitor_Status_initWithNSString_withInt_(e, @"YES", 0);
-    (JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, NO) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexStoredFieldVisitor_Status_initWithNSString_withInt_(e, @"NO", 1);
-    (JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, STOP) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexStoredFieldVisitor_Status_initWithNSString_withInt_(e, @"STOP", 2);
+    for (jint i = 0; i < 3; i++) {
+      ((void)(OrgApacheLuceneIndexStoredFieldVisitor_Status_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneIndexStoredFieldVisitor_Status_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneIndexStoredFieldVisitor_Status_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexStoredFieldVisitor_Status)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "YES", "YES", 0x4019, "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", &JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, YES), NULL, .constantValue.asLong = 0 },
-    { "NO", "NO", 0x4019, "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", &JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, NO), NULL, .constantValue.asLong = 0 },
-    { "STOP", "STOP", 0x4019, "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", &JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, STOP), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.StoredFieldVisitor$Status;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexStoredFieldVisitor_Status = { 2, "Status", "org.apache.lucene.index", "StoredFieldVisitor", 0x4019, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/StoredFieldVisitor$Status;>;" };
-  return &_OrgApacheLuceneIndexStoredFieldVisitor_Status;
 }
 
 @end
@@ -157,7 +176,7 @@ OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVi
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

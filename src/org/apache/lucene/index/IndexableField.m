@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/index/IndexableField.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexableField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexIndexableField : NSObject
 
 @end
@@ -13,17 +17,30 @@
 @implementation OrgApacheLuceneIndexIndexableField
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "name", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "fieldType", NULL, "Lorg.apache.lucene.index.IndexableFieldType;", 0x401, NULL, NULL },
-    { "boost", NULL, "F", 0x401, NULL, NULL },
-    { "binaryValue", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
-    { "stringValue", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "readerValue", NULL, "Ljava.io.Reader;", 0x401, NULL, NULL },
-    { "numericValue", NULL, "Ljava.lang.Number;", 0x401, NULL, NULL },
-    { "tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisTokenStream:", "tokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexableFieldType;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaIoReader;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSNumber;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexableField = { 2, "IndexableField", "org.apache.lucene.index", NULL, 0x609, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(name);
+  methods[1].selector = @selector(fieldType);
+  methods[2].selector = @selector(boost);
+  methods[3].selector = @selector(binaryValue);
+  methods[4].selector = @selector(stringValue);
+  methods[5].selector = @selector(readerValue);
+  methods[6].selector = @selector(numericValue);
+  methods[7].selector = @selector(tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "tokenStream", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexableField = { "IndexableField", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x609, 8, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexableField;
 }
 

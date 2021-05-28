@@ -3,7 +3,6 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/processors/TermRangeQueryNodeProcessor.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Exception.h"
@@ -14,7 +13,7 @@
 #include "java/util/Locale.h"
 #include "java/util/TimeZone.h"
 #include "org/apache/lucene/document/DateTools.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
+#include "org/apache/lucene/queryparser/flexible/core/config/ConfigurationKey.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/FieldConfig.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
@@ -23,6 +22,10 @@
 #include "org/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/TermRangeQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/processors/TermRangeQueryNodeProcessor.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/processors/TermRangeQueryNodeProcessor must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor
 
@@ -35,43 +38,43 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *termRangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) cast_chk(node, [OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]);
-    OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upper = [((OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) nil_chk(termRangeNode)) getUpperBound];
-    OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lower = [termRangeNode getLowerBound];
+    OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *termRangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) node;
+    OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upper = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) nil_chk(termRangeNode)) getUpperBound]);
+    OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lower = JreRetainedLocalValue([termRangeNode getLowerBound]);
     OrgApacheLuceneDocumentDateTools_Resolution *dateRes = nil;
     jboolean inclusive = false;
-    JavaUtilLocale *locale = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, LOCALE)];
+    JavaUtilLocale *locale = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, LOCALE)]);
     if (locale == nil) {
       locale = JavaUtilLocale_getDefault();
     }
-    JavaUtilTimeZone *timeZone = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, TIMEZONE)];
+    JavaUtilTimeZone *timeZone = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, TIMEZONE)]);
     if (timeZone == nil) {
       timeZone = JavaUtilTimeZone_getDefault();
     }
-    id<JavaLangCharSequence> field = [termRangeNode getField];
+    id<JavaLangCharSequence> field = JreRetainedLocalValue([termRangeNode getField]);
     NSString *fieldStr = nil;
     if (field != nil) {
       fieldStr = [field description];
     }
-    OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *fieldConfig = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getFieldConfigWithNSString:fieldStr];
+    OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *fieldConfig = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getFieldConfigWithNSString:fieldStr]);
     if (fieldConfig != nil) {
       dateRes = [fieldConfig getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DATE_RESOLUTION)];
     }
     if ([termRangeNode isUpperInclusive]) {
       inclusive = true;
     }
-    NSString *part1 = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(lower)) getTextAsString];
-    NSString *part2 = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(upper)) getTextAsString];
+    NSString *part1 = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(lower)) getTextAsString]);
+    NSString *part2 = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(upper)) getTextAsString]);
     @try {
       JavaTextDateFormat *df = JavaTextDateFormat_getDateInstanceWithInt_withJavaUtilLocale_(JavaTextDateFormat_SHORT, locale);
       [((JavaTextDateFormat *) nil_chk(df)) setLenientWithBoolean:true];
-      if (((jint) [((NSString *) nil_chk(part1)) length]) > 0) {
-        JavaUtilDate *d1 = [df parseWithNSString:part1];
+      if ([((NSString *) nil_chk(part1)) java_length] > 0) {
+        JavaUtilDate *d1 = JreRetainedLocalValue([df parseWithNSString:part1]);
         part1 = OrgApacheLuceneDocumentDateTools_dateToStringWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_Resolution_(d1, dateRes);
         [lower setTextWithJavaLangCharSequence:part1];
       }
-      if (((jint) [((NSString *) nil_chk(part2)) length]) > 0) {
-        JavaUtilDate *d2 = [df parseWithNSString:part2];
+      if ([((NSString *) nil_chk(part2)) java_length] > 0) {
+        JavaUtilDate *d2 = JreRetainedLocalValue([df parseWithNSString:part2]);
         if (inclusive) {
           JavaUtilCalendar *cal = JavaUtilCalendar_getInstanceWithJavaUtilTimeZone_withJavaUtilLocale_(timeZone, locale);
           [((JavaUtilCalendar *) nil_chk(cal)) setTimeWithJavaUtilDate:d2];
@@ -100,13 +103,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TermRangeQueryNodeProcessor", NULL, 0x1, NULL, NULL },
-    { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x4, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x4, 3, 1, 2, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x4, 4, 5, 2, 6, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor = { 2, "TermRangeQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[2].selector = @selector(preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  methods[3].selector = @selector(setChildrenOrderWithJavaUtilList:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "postProcessNode", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", "LOrgApacheLuceneQueryparserFlexibleCoreQueryNodeException;", "preProcessNode", "setChildrenOrder", "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor = { "TermRangeQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor;
 }
 

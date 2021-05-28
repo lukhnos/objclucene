@@ -11,6 +11,10 @@
 #include "org/apache/lucene/document/FieldType.h"
 #include "org/apache/lucene/index/IndexOptions.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/DoubleField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentDoubleField)
 
 OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED;
@@ -40,6 +44,26 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
   return self;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withDouble:withOrgApacheLuceneDocumentField_Store:);
+  methods[1].selector = @selector(initWithNSString:withDouble:withOrgApacheLuceneDocumentFieldType:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "TYPE_NOT_STORED", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 2, -1, -1 },
+    { "TYPE_STORED", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;DLOrgApacheLuceneDocumentField_Store;", "LNSString;DLOrgApacheLuceneDocumentFieldType;", &OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED, &OrgApacheLuceneDocumentDoubleField_TYPE_STORED };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDoubleField = { "DoubleField", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x11, 2, 2, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneDocumentDoubleField;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentDoubleField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED, new_OrgApacheLuceneDocumentFieldType_init());
@@ -61,19 +85,6 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentDoubleField)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDouble:withOrgApacheLuceneDocumentField_Store:", "DoubleField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withDouble:withOrgApacheLuceneDocumentFieldType:", "DoubleField", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "TYPE_NOT_STORED", "TYPE_NOT_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED, NULL, .constantValue.asLong = 0 },
-    { "TYPE_STORED", "TYPE_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentDoubleField_TYPE_STORED, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDoubleField = { 2, "DoubleField", "org.apache.lucene.document", NULL, 0x11, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentDoubleField;
 }
 
 @end

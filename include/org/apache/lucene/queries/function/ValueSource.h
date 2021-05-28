@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValueSource))
 #define OrgApacheLuceneQueriesFunctionValueSource_
 
@@ -25,19 +31,18 @@
 /*!
  @brief Instantiates <code>FunctionValues</code> for a particular reader.
  <br>
- Often used when creating a <code>FunctionQuery</code>.
+  Often used when creating a <code>FunctionQuery</code>.
  */
 @interface OrgApacheLuceneQueriesFunctionValueSource : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Implementations should propagate createWeight to sub-ValueSources which can optionally store
- weight info in the context.
- The context object will be passed to getValues()
- where this info can be retrieved.
+  weight info in the context.The context object will be passed to getValues()
+  where this info can be retrieved.
  */
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -52,8 +57,8 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 /*!
  @brief EXPERIMENTAL: This method is subject to change.
  <p>
- Get the SortField for this ValueSource.  Uses the <code>getValues(java.util.Map,org.apache.lucene.index.LeafReaderContext)</code>
- to populate the SortField.
+  Get the SortField for this ValueSource.  Uses the <code>getValues(java.util.Map, org.apache.lucene.index.LeafReaderContext)</code>
+  to populate the SortField.
  @param reverse true if this is a reverse sort.
  @return The <code>org.apache.lucene.search.SortField</code> for the ValueSource
  */
@@ -61,7 +66,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 
 /*!
  @brief Gets the values for this reader and the context that was previously
- passed to createWeight()
+  passed to createWeight()
  */
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
@@ -79,9 +84,9 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValueSource)
 
-FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheLuceneQueriesFunctionValueSource_newContextWithOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchIndexSearcher *searcher);
-
 FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValueSource_init(OrgApacheLuceneQueriesFunctionValueSource *self);
+
+FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheLuceneQueriesFunctionValueSource_newContextWithOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchIndexSearcher *searcher);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource)
 
@@ -95,16 +100,34 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource)
 #include "org/apache/lucene/search/SortField.h"
 
 @class OrgApacheLuceneQueriesFunctionValueSource;
+@class OrgApacheLuceneSearchFieldComparatorSource;
 @class OrgApacheLuceneSearchIndexSearcher;
+@class OrgApacheLuceneSearchSortField_Type;
 
 @interface OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField : OrgApacheLuceneSearchSortField
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)outer$
-                                                      withBoolean:(jboolean)reverse;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)outer$
+                                                                withBoolean:(jboolean)reverse;
 
 - (OrgApacheLuceneSearchSortField *)rewriteWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)arg1
+                               withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)arg1
+                               withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -135,13 +158,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource_ValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)outer$
-                                                  withJavaUtilMap:(id<JavaUtilMap>)context;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)outer$
+                                                            withJavaUtilMap:(id<JavaUtilMap>)context;
 
 - (OrgApacheLuceneSearchFieldComparator *)newComparatorWithNSString:(NSString *)fieldname
                                                             withInt:(jint)numHits
                                                             withInt:(jint)sortPos
                                                         withBoolean:(jboolean)reversed OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -171,8 +198,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource_ValueSource
 
 /*!
  @brief Implement a <code>org.apache.lucene.search.FieldComparator</code> that works
- off of the <code>FunctionValues</code> for a ValueSource
- instead of the normal Lucene FieldComparator that works off of a FieldCache.
+  off of the <code>FunctionValues</code> for a ValueSource
+  instead of the normal Lucene FieldComparator that works off of a FieldCache.
  */
 @interface OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator : OrgApacheLuceneSearchSimpleFieldComparator
 
@@ -198,9 +225,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource_ValueSource
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)outer$
-                                                  withJavaUtilMap:(id<JavaUtilMap>)fcontext
-                                                          withInt:(jint)numHits;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)outer$
+                                                            withJavaUtilMap:(id<JavaUtilMap>)fcontext
+                                                                    withInt:(jint)numHits;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -216,4 +247,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource_ValueSource
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSource")

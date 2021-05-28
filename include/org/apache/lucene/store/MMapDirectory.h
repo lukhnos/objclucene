@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreMMapDirectory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreMMapDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreMMapDirectory || defined(INCLUDE_OrgApacheLuceneStoreMMapDirectory))
 #define OrgApacheLuceneStoreMMapDirectory_
 
@@ -29,58 +35,56 @@
 
 /*!
  @brief File-based <code>Directory</code> implementation that uses
- mmap for reading, and <code>FSDirectory.FSIndexOutput</code>
+   mmap for reading, and <code>FSDirectory.FSIndexOutput</code>
   for writing.
  <p><b>NOTE</b>: memory mapping uses up a portion of the
- virtual memory address space in your process equal to the
- size of the file being mapped.  Before using this class,
- be sure your have plenty of virtual address space, e.g. by
- using a 64 bit JRE, or a 32 bit JRE with indexes that are
- guaranteed to fit within the address space.
- On 32 bit platforms also consult <code>MMapDirectory(Path,LockFactory,int)</code>
- if you have problems with mmap failing because of fragmented
- address space. If you get an OutOfMemoryException, it is recommended
- to reduce the chunk size, until it works.
+  virtual memory address space in your process equal to the
+  size of the file being mapped.  Before using this class,
+  be sure your have plenty of virtual address space, e.g. by
+  using a 64 bit JRE, or a 32 bit JRE with indexes that are
+  guaranteed to fit within the address space.
+  On 32 bit platforms also consult <code>MMapDirectory(Path, LockFactory, int)</code>
+  if you have problems with mmap failing because of fragmented
+  address space. If you get an OutOfMemoryException, it is recommended
+  to reduce the chunk size, until it works. 
  <p>Due to <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4724038">
- this bug</a> in Sun's JRE, MMapDirectory's <code>IndexInput.close</code>
- is unable to close the underlying OS file handle.  Only when GC
- finally collects the underlying objects, which could be quite
- some time later, will the file handle be closed.
+  this bug</a> in Sun's JRE, MMapDirectory's <code>IndexInput.close</code>
+  is unable to close the underlying OS file handle.  Only when GC
+  finally collects the underlying objects, which could be quite
+  some time later, will the file handle be closed. 
  <p>This will consume additional transient disk usage: on Windows,
- attempts to delete or overwrite the files will result in an
- exception; on other platforms, which typically have a &quot;delete on
- last close&quot; semantics, while such operations will succeed, the bytes
- are still consuming space on disk.  For many applications this
- limitation is not a problem (e.g. if you have plenty of disk space,
- and you don't rely on overwriting files on Windows) but it's still
- an important limitation to be aware of.
+  attempts to delete or overwrite the files will result in an
+  exception; on other platforms, which typically have a &quot;delete on
+  last close&quot; semantics, while such operations will succeed, the bytes
+  are still consuming space on disk.  For many applications this
+  limitation is not a problem (e.g. if you have plenty of disk space,
+  and you don't rely on overwriting files on Windows) but it's still
+  an important limitation to be aware of. 
  <p>This class supplies the workaround mentioned in the bug report
- (see <code>setUseUnmap</code>), which may fail on
- non-Sun JVMs. It forcefully unmaps the buffer on close by using
- an undocumented internal cleanup functionality. If
+  (see <code>setUseUnmap</code>), which may fail on
+  non-Sun JVMs. It forcefully unmaps the buffer on close by using
+  an undocumented internal cleanup functionality. If 
  <code>UNMAP_SUPPORTED</code> is <code>true</code>, the workaround
- will be automatically enabled (with no guarantees; if you discover
- any problems, you can disable it).
+  will be automatically enabled (with no guarantees; if you discover
+  any problems, you can disable it). 
  <p>
- <b>NOTE:</b> Accessing this class either directly or
- indirectly from a thread while it's interrupted can close the
- underlying channel immediately if at the same time the thread is
- blocked on IO. The channel will remain closed and subsequent access
- to <code>MMapDirectory</code> will throw a <code>ClosedChannelException</code>. If
- your application uses either <code>Thread.interrupt()</code> or
+  <b>NOTE:</b> Accessing this class either directly or
+  indirectly from a thread while it's interrupted can close the
+  underlying channel immediately if at the same time the thread is
+  blocked on IO. The channel will remain closed and subsequent access
+  to <code>MMapDirectory</code> will throw a <code>ClosedChannelException</code>. If
+  your application uses either <code>Thread.interrupt()</code> or 
  <code>Future.cancel(boolean)</code> you should use the legacy <code>RAFDirectory</code>
- from the Lucene <code>misc</code> module in favor of <code>MMapDirectory</code>.
- </p>
+  from the Lucene <code>misc</code> module in favor of <code>MMapDirectory</code>.
+  </p>
  - seealso: <a href="http://blog.thetaphi.de/2012/07/use-lucenes-mmapdirectory-on-64bit.html">Blog post about MMapDirectory</a>
  */
 @interface OrgApacheLuceneStoreMMapDirectory : OrgApacheLuceneStoreFSDirectory {
  @public
   jint chunkSizePower_;
 }
-
-+ (jint)DEFAULT_MAX_CHUNK_SIZE;
-
-+ (jboolean)UNMAP_SUPPORTED;
+@property (readonly, class) jint DEFAULT_MAX_CHUNK_SIZE NS_SWIFT_NAME(DEFAULT_MAX_CHUNK_SIZE);
+@property (readonly, class) jboolean UNMAP_SUPPORTED NS_SWIFT_NAME(UNMAP_SUPPORTED);
 
 #pragma mark Public
 
@@ -88,58 +92,55 @@
  @brief Create a new MMapDirectory for the named location and <code>FSLockFactory.getDefault()</code>.
  The directory is created at the named location if it does not yet exist.
  @param path the path of the directory
- @throws IOException if there is a low-level I/O error
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
 /*!
  @brief Create a new MMapDirectory for the named location and <code>FSLockFactory.getDefault()</code>.
  The directory is created at the named location if it does not yet exist.
  @param path the path of the directory
- @param maxChunkSize maximum chunk size (default is 1 GiBytes for
- 64 bit JVMs and 256 MiBytes for 32 bit JVMs) used for memory mapping.
- @throws IOException if there is a low-level I/O error
+ @param maxChunkSize maximum chunk size (default is 1 GiBytes for  64 bit JVMs and 256 MiBytes for 32 bit JVMs) used for memory mapping.
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                                             withInt:(jint)maxChunkSize;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
+                                                       withInt:(jint)maxChunkSize;
 
 /*!
  @brief Create a new MMapDirectory for the named location.
  The directory is created at the named location if it does not yet exist.
  @param path the path of the directory
  @param lockFactory the lock factory to use
- @throws IOException if there is a low-level I/O error
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                 withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
+                           withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
 
 /*!
  @brief Create a new MMapDirectory for the named location, specifying the 
- maximum chunk size used for memory mapping.
+  maximum chunk size used for memory mapping.
  The directory is created at the named location if it does not yet exist.
  @param path the path of the directory
- @param lockFactory the lock factory to use, or null for the default
- (<code>NativeFSLockFactory</code>);
- @param maxChunkSize maximum chunk size (default is 1 GiBytes for
- 64 bit JVMs and 256 MiBytes for 32 bit JVMs) used for memory mapping.
- <p>
- Especially on 32 bit platform, the address space can be very fragmented,
- so large index files cannot be mapped. Using a lower chunk size makes 
- the directory implementation a little bit slower (as the correct chunk 
- may be resolved on lots of seeks) but the chance is higher that mmap 
- does not fail. On 64 bit Java platforms, this parameter should always 
- be <code>1 << 30</code>, as the address space is big enough.
- <p>
- <b>Please note:</b> The chunk size is always rounded down to a power of 2.
- @throws IOException if there is a low-level I/O error
+ @param lockFactory the lock factory to use, or null for the default  (
+ <code>NativeFSLockFactory</code> );
+ @param maxChunkSize maximum chunk size (default is 1 GiBytes for  64 bit JVMs and 256 MiBytes for 32 bit JVMs) used for memory mapping.
+    <p>
+   Especially on 32 bit platform, the address space can be very fragmented,
+   so large index files cannot be mapped. Using a lower chunk size makes 
+   the directory implementation a little bit slower (as the correct chunk 
+   may be resolved on lots of seeks) but the chance is higher that mmap 
+   does not fail. On 64 bit Java platforms, this parameter should always 
+   be <code>1 << 30</code> , as the address space is big enough.
+    <p>   <b> Please note: </b>  The chunk size is always rounded down to a power of 2.
+ @throw IOExceptionif there is a low-level I/O error
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                 withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory
-                                             withInt:(jint)maxChunkSize;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
+                           withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory
+                                                       withInt:(jint)maxChunkSize;
 
 /*!
  @brief Returns the current mmap chunk size.
- - seealso: #MMapDirectory(Path,LockFactory,int)
+ - seealso: #MMapDirectory(Path, LockFactory, int)
  */
 - (jint)getMaxChunkSize;
 
@@ -163,25 +164,23 @@
 
 /*!
  @brief Set to <code>true</code> to ask mapped pages to be loaded
- into physical memory on init.
- The behavior is best-effort 
- and operating system dependent.
+  into physical memory on init.The behavior is best-effort 
+  and operating system dependent.
  - seealso: MappedByteBuffer#load
  */
 - (void)setPreloadWithBoolean:(jboolean)preload;
 
 /*!
  @brief This method enables the workaround for unmapping the buffers
- from address space after closing <code>IndexInput</code>, that is
- mentioned in the bug report.
- This hack may fail on non-Sun JVMs.
+  from address space after closing <code>IndexInput</code>, that is
+  mentioned in the bug report.This hack may fail on non-Sun JVMs.
  It forcefully unmaps the buffer on close by using
- an undocumented internal cleanup functionality.
+  an undocumented internal cleanup functionality. 
  <p><b>NOTE:</b> Enabling this is completely unsupported
- by Java and may lead to JVM crashes if <code>IndexInput</code>
- is closed while another thread is still accessing it (SIGSEGV).
- @throws IllegalArgumentException if <code>UNMAP_SUPPORTED</code>
- is <code>false</code> and the workaround cannot be enabled.
+  by Java and may lead to JVM crashes if <code>IndexInput</code>
+  is closed while another thread is still accessing it (SIGSEGV).
+ @throw IllegalArgumentExceptionif <code>UNMAP_SUPPORTED</code>
+  is <code>false</code> and the workaround cannot be enabled.
  */
 - (void)setUseUnmapWithBoolean:(jboolean)useUnmapHack;
 
@@ -201,9 +200,9 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneStoreMMapDirectory)
 
 /*!
  @brief Default max chunk size.
- - seealso: #MMapDirectory(Path,LockFactory,int)
+ - seealso: #MMapDirectory(Path, LockFactory, int)
  */
-inline jint OrgApacheLuceneStoreMMapDirectory_get_DEFAULT_MAX_CHUNK_SIZE();
+inline jint OrgApacheLuceneStoreMMapDirectory_get_DEFAULT_MAX_CHUNK_SIZE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneStoreMMapDirectory, DEFAULT_MAX_CHUNK_SIZE, jint)
@@ -211,7 +210,7 @@ J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneStoreMMapDirectory, DEFAULT_M
 /*!
  @brief <code>true</code>, if this platform supports unmapping mmapped files.
  */
-inline jboolean OrgApacheLuceneStoreMMapDirectory_get_UNMAP_SUPPORTED();
+inline jboolean OrgApacheLuceneStoreMMapDirectory_get_UNMAP_SUPPORTED(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneStoreMMapDirectory, UNMAP_SUPPORTED, jboolean)
@@ -244,4 +243,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreMMapDirectory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreMMapDirectory")

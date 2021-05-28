@@ -11,6 +11,10 @@
 #include "org/apache/lucene/search/TermQuery.h"
 #include "org/apache/lucene/search/spans/SpanTermQuery.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/BasicQueryFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory () {
  @public
   jint maxBasicQueries_;
@@ -46,7 +50,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  return JreStrcat("$$I$IC", [[self getClass] getName], @"(maxBasicQueries: ", maxBasicQueries_, @", queriesMade: ", queriesMade_, ')');
+  return JreStrcat("$$I$IC", [[self java_getClass] getName], @"(maxBasicQueries: ", maxBasicQueries_, @", queriesMade: ", queriesMade_, ')');
 }
 
 - (jboolean)atMax {
@@ -71,7 +75,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSUInteger)hash {
-  return ((jint) [[self getClass] hash]) ^ (OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_atMax(self) ? 7 : 31 * 32);
+  return ((jint) [[self java_getClass] hash]) ^ (OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_atMax(self) ? 7 : 31 * 32);
 }
 
 - (jboolean)isEqual:(id)obj {
@@ -81,24 +85,40 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "BasicQueryFactory", NULL, 0x1, NULL, NULL },
-    { "init", "BasicQueryFactory", NULL, 0x1, NULL, NULL },
-    { "getNrQueriesMade", NULL, "I", 0x1, NULL, NULL },
-    { "getMaxBasicQueries", NULL, "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "atMax", NULL, "Z", 0x2, NULL, NULL },
-    { "checkMax", NULL, "V", 0x24, "Lorg.apache.lucene.queryparser.surround.query.TooManyBasicQueries;", NULL },
-    { "newTermQueryWithOrgApacheLuceneIndexTerm:", "newTermQuery", "Lorg.apache.lucene.search.TermQuery;", 0x1, "Lorg.apache.lucene.queryparser.surround.query.TooManyBasicQueries;", NULL },
-    { "newSpanTermQueryWithOrgApacheLuceneIndexTerm:", "newSpanTermQuery", "Lorg.apache.lucene.search.spans.SpanTermQuery;", 0x1, "Lorg.apache.lucene.queryparser.surround.query.TooManyBasicQueries;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x24, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTermQuery;", 0x1, 3, 4, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpansSpanTermQuery;", 0x1, 5, 4, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(getNrQueriesMade);
+  methods[3].selector = @selector(getMaxBasicQueries);
+  methods[4].selector = @selector(description);
+  methods[5].selector = @selector(atMax);
+  methods[6].selector = @selector(checkMax);
+  methods[7].selector = @selector(newTermQueryWithOrgApacheLuceneIndexTerm:);
+  methods[8].selector = @selector(newSpanTermQueryWithOrgApacheLuceneIndexTerm:);
+  methods[9].selector = @selector(hash);
+  methods[10].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "maxBasicQueries_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "queriesMade_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "maxBasicQueries_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "queriesMade_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory = { 2, "BasicQueryFactory", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 11, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "toString", "LOrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries;", "newTermQuery", "LOrgApacheLuceneIndexTerm;", "newSpanTermQuery", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory = { "BasicQueryFactory", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, fields, 7, 0x1, 11, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
 }
 

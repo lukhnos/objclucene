@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalizationH3
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesNormalizationH3_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH3 || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalizationH3))
 #define OrgApacheLuceneSearchSimilaritiesNormalizationH3_
 
@@ -32,13 +38,13 @@
 /*!
  @brief Calls <code>NormalizationH3(800)</code>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates NormalizationH3 with the supplied parameter <code>&mu;</code>.
- @param mu smoothing parameter <code>&mu;</code>
+ @param mu smoothing parameter  <code> &mu; </code>
  */
-- (instancetype)initWithFloat:(jfloat)mu;
+- (instancetype __nonnull)initWithFloat:(jfloat)mu;
 
 /*!
  @brief Returns the parameter <code>&mu;</code>
@@ -58,9 +64,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesNormalizationH3)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationH3_init(OrgApacheLuceneSearchSimilaritiesNormalizationH3 *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH3 *new_OrgApacheLuceneSearchSimilaritiesNormalizationH3_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH3 *new_OrgApacheLuceneSearchSimilaritiesNormalizationH3_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH3 *create_OrgApacheLuceneSearchSimilaritiesNormalizationH3_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH3 *create_OrgApacheLuceneSearchSimilaritiesNormalizationH3_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationH3_initWithFloat_(OrgApacheLuceneSearchSimilaritiesNormalizationH3 *self, jfloat mu);
 
@@ -72,4 +78,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalizationH3)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH3")

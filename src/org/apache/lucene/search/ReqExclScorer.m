@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/ReqExclScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/Set.h"
@@ -14,6 +12,10 @@
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/Weight.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ReqExclScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchReqExclScorer () {
  @public
@@ -26,18 +28,17 @@
 
 /*!
  @brief Confirms whether or not the given <code>TwoPhaseIterator</code>
- matches on the current document.
+   matches on the current document.
  */
 + (jboolean)matchesWithOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator *)it;
 
 /*!
  @brief Confirm whether there is a match given the current positions of the
- req and excl approximations.
- This method has 2 important properties:
- - it only calls matches() on excl if the excl approximation is on
- the same doc ID as the req approximation
- - it does NOT call matches() on req if the excl approximation is exact
- and is on the same doc ID as the req approximation 
+   req and excl approximations.This method has 2 important properties:
+    - it only calls matches() on excl if the excl approximation is on
+      the same doc ID as the req approximation
+    - it does NOT call matches() on req if the excl approximation is exact
+      and is on the same doc ID as the req approximation
  */
 + (jboolean)matchesWithInt:(jint)doc
                    withInt:(jint)exclDoc
@@ -63,35 +64,31 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchReqExclScorer_match
 
 __attribute__((unused)) static jint OrgApacheLuceneSearchReqExclScorer_toNonExcludedWithInt_(OrgApacheLuceneSearchReqExclScorer *self, jint doc);
 
-@interface OrgApacheLuceneSearchReqExclScorer_$1 : OrgApacheLuceneSearchTwoPhaseIterator {
+@interface OrgApacheLuceneSearchReqExclScorer_1 : OrgApacheLuceneSearchTwoPhaseIterator {
  @public
   OrgApacheLuceneSearchReqExclScorer *this$0_;
 }
 
-- (jboolean)matches;
-
 - (instancetype)initWithOrgApacheLuceneSearchReqExclScorer:(OrgApacheLuceneSearchReqExclScorer *)outer$
-                 withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)arg$0;
+                 withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+
+- (jboolean)matches;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchReqExclScorer_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchReqExclScorer_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchReqExclScorer_$1, this$0_, OrgApacheLuceneSearchReqExclScorer *)
+__attribute__((unused)) static void OrgApacheLuceneSearchReqExclScorer_1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer_1 *self, OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchReqExclScorer_$1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer_$1 *self, OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchReqExclScorer_1 *new_OrgApacheLuceneSearchReqExclScorer_1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchReqExclScorer_$1 *new_OrgApacheLuceneSearchReqExclScorer_$1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchReqExclScorer_$1 *create_OrgApacheLuceneSearchReqExclScorer_$1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchReqExclScorer_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchReqExclScorer_1 *create_OrgApacheLuceneSearchReqExclScorer_1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation);
 
 @implementation OrgApacheLuceneSearchReqExclScorer
 
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)exclScorer {
-  OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, reqScorer, exclScorer);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
+                                  withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)exclScorer {
+  OrgApacheLuceneSearchReqExclScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, reqScorer, exclScorer);
   return self;
 }
 
@@ -142,7 +139,7 @@ withOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator
   if (reqTwoPhaseIterator_ == nil) {
     return nil;
   }
-  return create_OrgApacheLuceneSearchReqExclScorer_$1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, reqApproximation_);
+  return create_OrgApacheLuceneSearchReqExclScorer_1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, reqApproximation_);
 }
 
 - (void)dealloc {
@@ -155,34 +152,51 @@ withOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorer:", "ReqExclScorer", NULL, 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "matchesWithOrgApacheLuceneSearchTwoPhaseIterator:", "matches", "Z", 0xa, "Ljava.io.IOException;", NULL },
-    { "matchesWithInt:withInt:withOrgApacheLuceneSearchTwoPhaseIterator:withOrgApacheLuceneSearchTwoPhaseIterator:", "matches", "Z", 0xa, "Ljava.io.IOException;", NULL },
-    { "toNonExcludedWithInt:", "toNonExcluded", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 2, 3, 1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 2, 4, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, 5, 6, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 7, -1, -1 },
+    { NULL, "I", 0x1, 8, 6, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(nextDoc);
+  methods[2].selector = @selector(matchesWithOrgApacheLuceneSearchTwoPhaseIterator:);
+  methods[3].selector = @selector(matchesWithInt:withInt:withOrgApacheLuceneSearchTwoPhaseIterator:withOrgApacheLuceneSearchTwoPhaseIterator:);
+  methods[4].selector = @selector(toNonExcludedWithInt:);
+  methods[5].selector = @selector(docID);
+  methods[6].selector = @selector(freq);
+  methods[7].selector = @selector(cost);
+  methods[8].selector = @selector(score);
+  methods[9].selector = @selector(getChildren);
+  methods[10].selector = @selector(advanceWithInt:);
+  methods[11].selector = @selector(asTwoPhaseIterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reqScorer_", NULL, 0x12, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "reqApproximation_", NULL, 0x12, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "exclApproximation_", NULL, 0x12, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "reqTwoPhaseIterator_", NULL, 0x12, "Lorg.apache.lucene.search.TwoPhaseIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "exclTwoPhaseIterator_", NULL, 0x12, "Lorg.apache.lucene.search.TwoPhaseIterator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "reqScorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "reqApproximation_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "exclApproximation_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "reqTwoPhaseIterator_", "LOrgApacheLuceneSearchTwoPhaseIterator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "exclTwoPhaseIterator_", "LOrgApacheLuceneSearchTwoPhaseIterator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchReqExclScorer = { 2, "ReqExclScorer", "org.apache.lucene.search", NULL, 0x0, 12, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchScorer;LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "matches", "LOrgApacheLuceneSearchTwoPhaseIterator;", "IILOrgApacheLuceneSearchTwoPhaseIterator;LOrgApacheLuceneSearchTwoPhaseIterator;", "toNonExcluded", "I", "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;", "advance" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchReqExclScorer = { "ReqExclScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x0, 12, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchReqExclScorer;
 }
 
 @end
 
-void OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchReqExclScorer *self, OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer) {
+void OrgApacheLuceneSearchReqExclScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchReqExclScorer *self, OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer) {
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, ((OrgApacheLuceneSearchScorer *) nil_chk(reqScorer))->weight_);
   JreStrongAssign(&self->reqScorer_, reqScorer);
   JreStrongAssign(&self->reqTwoPhaseIterator_, [reqScorer asTwoPhaseIterator]);
@@ -201,12 +215,12 @@ void OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_with
   }
 }
 
-OrgApacheLuceneSearchReqExclScorer *new_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchReqExclScorer, initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, reqScorer, exclScorer)
+OrgApacheLuceneSearchReqExclScorer *new_OrgApacheLuceneSearchReqExclScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchReqExclScorer, initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, reqScorer, exclScorer)
 }
 
-OrgApacheLuceneSearchReqExclScorer *create_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchReqExclScorer, initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, reqScorer, exclScorer)
+OrgApacheLuceneSearchReqExclScorer *create_OrgApacheLuceneSearchReqExclScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchReqExclScorer, initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, reqScorer, exclScorer)
 }
 
 jboolean OrgApacheLuceneSearchReqExclScorer_matchesWithOrgApacheLuceneSearchTwoPhaseIterator_(OrgApacheLuceneSearchTwoPhaseIterator *it) {
@@ -216,7 +230,7 @@ jboolean OrgApacheLuceneSearchReqExclScorer_matchesWithOrgApacheLuceneSearchTwoP
 
 jboolean OrgApacheLuceneSearchReqExclScorer_matchesWithInt_withInt_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchTwoPhaseIterator_(jint doc, jint exclDoc, OrgApacheLuceneSearchTwoPhaseIterator *reqTwoPhaseIterator, OrgApacheLuceneSearchTwoPhaseIterator *exclTwoPhaseIterator) {
   OrgApacheLuceneSearchReqExclScorer_initialize();
-  JreAssert((exclDoc >= doc), (@"org/apache/lucene/search/ReqExclScorer.java:81 condition failed: assert exclDoc >= doc;"));
+  JreAssert(exclDoc >= doc, @"org/apache/lucene/search/ReqExclScorer.java:81 condition failed: assert exclDoc >= doc;");
   if (doc == exclDoc && OrgApacheLuceneSearchReqExclScorer_matchesWithOrgApacheLuceneSearchTwoPhaseIterator_(exclTwoPhaseIterator)) {
     return false;
   }
@@ -240,7 +254,13 @@ jint OrgApacheLuceneSearchReqExclScorer_toNonExcludedWithInt_(OrgApacheLuceneSea
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchReqExclScorer)
 
-@implementation OrgApacheLuceneSearchReqExclScorer_$1
+@implementation OrgApacheLuceneSearchReqExclScorer_1
+
+- (instancetype)initWithOrgApacheLuceneSearchReqExclScorer:(OrgApacheLuceneSearchReqExclScorer *)outer$
+                 withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation {
+  OrgApacheLuceneSearchReqExclScorer_1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, approximation);
+  return self;
+}
 
 - (jboolean)matches {
   jint doc = [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(this$0_->reqApproximation_)) docID];
@@ -251,43 +271,41 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchReqExclScorer)
   return OrgApacheLuceneSearchReqExclScorer_matchesWithInt_withInt_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchTwoPhaseIterator_(doc, exclDoc, this$0_->reqTwoPhaseIterator_, this$0_->exclTwoPhaseIterator_);
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchReqExclScorer:(OrgApacheLuceneSearchReqExclScorer *)outer$
-                 withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)arg$0 {
-  OrgApacheLuceneSearchReqExclScorer_$1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "matches", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchReqExclScorer:withOrgApacheLuceneSearchDocIdSetIterator:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchReqExclScorer:withOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[1].selector = @selector(matches);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.ReqExclScorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchReqExclScorer;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchReqExclScorer", "asTwoPhaseIterator" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchReqExclScorer_$1 = { 2, "", "org.apache.lucene.search", "ReqExclScorer", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchReqExclScorer_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchReqExclScorer;LOrgApacheLuceneSearchDocIdSetIterator;", "LJavaIoIOException;", "LOrgApacheLuceneSearchReqExclScorer;", "asTwoPhaseIterator" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchReqExclScorer_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 1, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneSearchReqExclScorer_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchReqExclScorer_$1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer_$1 *self, OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+void OrgApacheLuceneSearchReqExclScorer_1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer_1 *self, OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchTwoPhaseIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(self, arg$0);
+  OrgApacheLuceneSearchTwoPhaseIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(self, approximation);
 }
 
-OrgApacheLuceneSearchReqExclScorer_$1 *new_OrgApacheLuceneSearchReqExclScorer_$1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchReqExclScorer_$1, initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+OrgApacheLuceneSearchReqExclScorer_1 *new_OrgApacheLuceneSearchReqExclScorer_1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchReqExclScorer_1, initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, approximation)
 }
 
-OrgApacheLuceneSearchReqExclScorer_$1 *create_OrgApacheLuceneSearchReqExclScorer_$1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchReqExclScorer_$1, initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+OrgApacheLuceneSearchReqExclScorer_1 *create_OrgApacheLuceneSearchReqExclScorer_1_initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchReqExclScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *approximation) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchReqExclScorer_1, initWithOrgApacheLuceneSearchReqExclScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, approximation)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchReqExclScorer_$1)

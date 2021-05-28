@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory))
 #define OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory_
 
@@ -26,14 +32,14 @@
 /*!
  @brief Factory for <code>FrenchMinimalStemFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_frminstem" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
- &lt;filter class="solr.ElisionFilterFactory"/&gt;
- &lt;filter class="solr.FrenchMinimalStemFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_frminstem" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+      &lt;filter class="solr.ElisionFilterFactory"/&gt;
+      &lt;filter class="solr.FrenchMinimalStemFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
@@ -43,7 +49,7 @@
 /*!
  @brief Creates a new FrenchMinimalStemFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -61,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFacto
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory")

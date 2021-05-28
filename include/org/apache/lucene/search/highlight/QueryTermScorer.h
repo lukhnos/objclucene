@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightQueryTermScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightQueryTermScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightQueryTermScorer || defined(INCLUDE_OrgApacheLuceneSearchHighlightQueryTermScorer))
 #define OrgApacheLuceneSearchHighlightQueryTermScorer_
 
@@ -29,9 +35,8 @@
 
 /*!
  @brief <code>Scorer</code> implementation which scores text fragments by the number of
- unique query terms found.
- This class uses the <code>QueryTermExtractor</code>
- class to process determine the query terms and their boosts to be used.
+  unique query terms found.This class uses the <code>QueryTermExtractor</code>
+  class to process determine the query terms and their boosts to be used.
  */
 @interface OrgApacheLuceneSearchHighlightQueryTermScorer : NSObject < OrgApacheLuceneSearchHighlightScorer > {
  @public
@@ -44,33 +49,28 @@
 #pragma mark Public
 
 /*!
- @param query a Lucene query (ideally rewritten using query.rewrite before
- being passed to this class and the searcher)
+ @param query a Lucene query (ideally rewritten using query.rewrite before         being passed to this class and the searcher)
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 /*!
- @param query a Lucene query (ideally rewritten using query.rewrite before
- being passed to this class and the searcher)
- @param reader used to compute IDF which can be used to a) score selected
- fragments better b) use graded highlights eg set font color
- intensity
- @param fieldName the field on which Inverse Document Frequency (IDF)
- calculations are based
+ @param query a Lucene query (ideally rewritten using query.rewrite before         being passed to this class and the searcher)
+ @param reader used to compute IDF which can be used to a) score selected         fragments better b) use graded highlights eg set font color
+          intensity
+ @param fieldName the field on which Inverse Document Frequency (IDF)         calculations are based
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-               withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                      withNSString:(NSString *)fieldName;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                         withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                                withNSString:(NSString *)fieldName;
 
 /*!
- @param query a Lucene query (ideally rewritten using query.rewrite before
- being passed to this class and the searcher)
+ @param query a Lucene query (ideally rewritten using query.rewrite before         being passed to this class and the searcher)
  @param fieldName the Field name which is used to match Query terms
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                      withNSString:(NSString *)fieldName;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                                                withNSString:(NSString *)fieldName;
 
-- (instancetype)initWithOrgApacheLuceneSearchHighlightWeightedTermArray:(IOSObjectArray *)weightedTerms;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchHighlightWeightedTermArray:(IOSObjectArray *)weightedTerms;
 
 - (void)allFragmentsProcessed;
 
@@ -78,7 +78,7 @@
 
 /*!
  @return The highest weighted term (useful for passing to GradientFormatter
- to set top end of coloring scale.
+          to set top end of coloring scale.
  */
 - (jfloat)getMaxTermWeight;
 
@@ -87,6 +87,10 @@
 - (OrgApacheLuceneAnalysisTokenStream *)init__WithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream OBJC_METHOD_FAMILY_NONE;
 
 - (void)startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:(OrgApacheLuceneSearchHighlightTextFragment *)newFragment;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -123,4 +127,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightQueryTermScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightQueryTermScorer")

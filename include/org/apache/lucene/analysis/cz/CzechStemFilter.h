@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCzCzechStemFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCzCzechStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCzCzechStemFilter))
 #define OrgApacheLuceneAnalysisCzCzechStemFilter_
 
@@ -25,19 +31,19 @@
 /*!
  @brief A <code>TokenFilter</code> that applies <code>CzechStemmer</code> to stem Czech words.
  <p>
- To prevent terms from being stemmed use an instance of
+  To prevent terms from being stemmed use an instance of 
  <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
- the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
- </p>
- <p><b>NOTE</b>: Input is expected to be in lowercase, 
- but with diacritical marks</p>
+  the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+  </p>
+  <p><b>NOTE</b>: Input is expected to be in lowercase, 
+  but with diacritical marks</p>
  - seealso: SetKeywordMarkerFilter
  */
 @interface OrgApacheLuceneAnalysisCzCzechStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -55,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCzCzechStemFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMergeScheduler
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMergeScheduler_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergeScheduler || defined(INCLUDE_OrgApacheLuceneIndexMergeScheduler))
 #define OrgApacheLuceneIndexMergeScheduler_
 
@@ -26,13 +32,13 @@
 
 /*!
  @brief <p>Expert: <code>IndexWriter</code> uses an instance
- implementing this interface to execute the merges
- selected by a <code>MergePolicy</code>.
+   implementing this interface to execute the merges
+   selected by a <code>MergePolicy</code>.
  The default
- MergeScheduler is <code>ConcurrentMergeScheduler</code>.</p>
- <p>Implementers of sub-classes should make sure that <code>clone()</code>
- returns an independent instance able to work with any <code>IndexWriter</code>
- instance.</p>
+   MergeScheduler is <code>ConcurrentMergeScheduler</code>.</p>
+   <p>Implementers of sub-classes should make sure that <code>clone()</code>
+   returns an independent instance able to work with any <code>IndexWriter</code>
+   instance.</p>
  */
 @interface OrgApacheLuceneIndexMergeScheduler : NSObject < JavaIoCloseable > {
  @public
@@ -51,9 +57,9 @@
 
 /*!
  @brief Run the merges provided by <code>IndexWriter.getNextMerge()</code>.
- @param writer the <code>IndexWriter</code> to obtain the merges from.
- @param trigger the <code>MergeTrigger</code> that caused this merge to happen
- @param newMergesFound <code>true</code> iff any new merges were found by the caller otherwise <code>false</code>
+ @param writer the <code>IndexWriter</code>  to obtain the merges from.
+ @param trigger the <code>MergeTrigger</code>  that caused this merge to happen
+ @param newMergesFound <code> true </code>  iff any new merges were found by the caller otherwise  <code> false </code>
  */
 - (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
             withOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)trigger
@@ -64,24 +70,24 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Outputs the given message - this method assumes <code>verbose()</code> was
- called and returned true.
+  called and returned true.
  */
 - (void)messageWithNSString:(NSString *)message;
 
 /*!
- @brief Returns true if infoStream messages are enabled.
- This method is usually used in
- conjunction with <code>message(String)</code>:
+ @brief Returns true if infoStream messages are enabled.This method is usually used in
+  conjunction with <code>message(String)</code>:
+   
  <pre class="prettyprint">
- if (verbose()) {
- message(&quot;your message&quot;);
- }
+  if (verbose()) {
+    message(&quot;your message&quot;);
+  } 
  
 @endcode
  */
@@ -106,4 +112,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeScheduler)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeScheduler")

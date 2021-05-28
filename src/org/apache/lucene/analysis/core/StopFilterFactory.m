@@ -3,9 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/core/StopFilterFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -13,11 +11,14 @@
 #include "org/apache/lucene/analysis/core/StopAnalyzer.h"
 #include "org/apache/lucene/analysis/core/StopFilter.h"
 #include "org/apache/lucene/analysis/core/StopFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 #include "org/apache/lucene/util/Version.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/StopFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCoreStopFilterFactory () {
  @public
@@ -54,10 +55,10 @@ NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL = @"snowb
 
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
   if (stopWordFiles_ != nil) {
-    if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET)) equalsIgnoreCase:format_]) {
+    if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET)) java_equalsIgnoreCase:format_]) {
       JreStrongAssign(&stopWords_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:stopWordFiles_ withBoolean:ignoreCase_]);
     }
-    else if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL)) equalsIgnoreCase:format_]) {
+    else if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL)) java_equalsIgnoreCase:format_]) {
       JreStrongAssign(&stopWords_, [self getSnowballWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:stopWordFiles_ withBoolean:ignoreCase_]);
     }
     else {
@@ -98,23 +99,33 @@ NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL = @"snowb
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "StopFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "isIgnoreCase", NULL, "Z", 0x1, NULL, NULL },
-    { "getStopWords", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(informWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[2].selector = @selector(isIgnoreCase);
+  methods[3].selector = @selector(getStopWords);
+  methods[4].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "FORMAT_WORDSET", "FORMAT_WORDSET", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET, NULL, .constantValue.asLong = 0 },
-    { "FORMAT_SNOWBALL", "FORMAT_SNOWBALL", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL, NULL, .constantValue.asLong = 0 },
-    { "stopWords_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stopWordFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "format_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "enablePositionIncrements_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "FORMAT_WORDSET", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 7, -1, -1 },
+    { "FORMAT_SNOWBALL", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 8, -1, -1 },
+    { "stopWords_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "stopWordFiles_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "format_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "ignoreCase_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "enablePositionIncrements_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreStopFilterFactory = { 2, "StopFilterFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 5, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "inform", "LOrgApacheLuceneAnalysisUtilResourceLoader;", "LJavaIoIOException;", "create", "LOrgApacheLuceneAnalysisTokenStream;", &OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET, &OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreStopFilterFactory = { "StopFilterFactory", "org.apache.lucene.analysis.core", ptrTable, methods, fields, 7, 0x1, 5, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCoreStopFilterFactory;
 }
 

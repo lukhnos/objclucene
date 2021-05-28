@@ -32,6 +32,10 @@
 #include "org/apache/lucene/util/Version.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/fr/FrenchAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisFrFrenchAnalyzer () {
  @public
   /*!
@@ -52,15 +56,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisFrFrenchAnalyzer, excltable_, OrgApac
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init();
+__attribute__((unused)) static OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder)
 
@@ -123,29 +127,38 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 2, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getDefaultStopSet);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[4].selector = @selector(createComponentsWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_STOPWORD_FILE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "DEFAULT_ARTICLES", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x19, -1, 5, -1, -1 },
+    { "excltable_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisUtilCharArraySet;", "LOrgApacheLuceneAnalysisUtilCharArraySet;LOrgApacheLuceneAnalysisUtilCharArraySet;", "createComponents", "LNSString;", &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE, &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES, "LOrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchAnalyzer = { "FrenchAnalyzer", "org.apache.lucene.analysis.fr", ptrTable, methods, fields, 7, 0x11, 5, 3, -1, 6, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisFrFrenchAnalyzer;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisFrFrenchAnalyzer class]) {
     JreStrongAssign(&OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"l", @"m", @"t", @"qu", @"n", @"s", @"j", @"d", @"c", @"jusqu", @"quoiqu", @"lorsqu", @"puisqu" } count:13 type:NSString_class_()]), true)));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisFrFrenchAnalyzer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDefaultStopSet", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
-    { "init", "FrenchAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "FrenchAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:", "FrenchAnalyzer", NULL, 0x1, NULL, NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOPWORD_FILE", "DEFAULT_STOPWORD_FILE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_ARTICLES", "DEFAULT_ARTICLES", 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES, NULL, .constantValue.asLong = 0 },
-    { "excltable_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.fr.FrenchAnalyzer$DefaultSetHolder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchAnalyzer = { 2, "FrenchAnalyzer", "org.apache.lucene.analysis.fr", NULL, 0x11, 5, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisFrFrenchAnalyzer;
 }
 
 @end
@@ -205,6 +218,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_STOP_SET", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x18, -1, 0, -1, -1 },
+  };
+  static const void *ptrTable[] = { &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, "LOrgApacheLuceneAnalysisFrFrenchAnalyzer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder = { "DefaultSetHolder", "org.apache.lucene.analysis.fr", ptrTable, methods, fields, 7, 0xa, 1, 1, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder class]) {
     {
@@ -217,17 +247,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DefaultSetHolder", NULL, 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOP_SET", "DEFAULT_STOP_SET", 0x18, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder = { 2, "DefaultSetHolder", "org.apache.lucene.analysis.fr", "FrenchAnalyzer", 0xa, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder;
 }
 
 @end

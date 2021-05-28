@@ -3,9 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/standard/StandardAnalyzer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -21,6 +19,10 @@
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 #include "org/apache/lucene/util/Version.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/standard/StandardAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisStandardStandardAnalyzer () {
  @public
   jint maxTokenLength_;
@@ -28,33 +30,28 @@
 
 @end
 
-@interface OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1 : OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents {
+@interface OrgApacheLuceneAnalysisStandardStandardAnalyzer_1 : OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents {
  @public
   OrgApacheLuceneAnalysisStandardStandardAnalyzer *this$0_;
   OrgApacheLuceneAnalysisTokenizer *val$src_;
 }
 
-- (void)setReaderWithJavaIoReader:(JavaIoReader *)reader;
-
 - (instancetype)initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer:(OrgApacheLuceneAnalysisStandardStandardAnalyzer *)outer$
                                    withOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)capture$0
-                                   withOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)arg$0
-                                 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg$1;
+                                   withOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)source
+                                 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)result;
+
+- (void)setReaderWithJavaIoReader:(JavaIoReader *)reader;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisStandardStandardAnalyzer_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1, this$0_, OrgApacheLuceneAnalysisStandardStandardAnalyzer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1, val$src_, OrgApacheLuceneAnalysisTokenizer *)
+__attribute__((unused)) static void OrgApacheLuceneAnalysisStandardStandardAnalyzer_1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer_1 *self, OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result);
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1 *self, OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1);
+__attribute__((unused)) static OrgApacheLuceneAnalysisStandardStandardAnalyzer_1 *new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1 *new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1 *create_OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1)
+__attribute__((unused)) static OrgApacheLuceneAnalysisStandardStandardAnalyzer_1 *create_OrgApacheLuceneAnalysisStandardStandardAnalyzer_1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardAnalyzer)
 
@@ -110,7 +107,36 @@ J2OBJC_IGNORE_DESIGNATED_END
   OrgApacheLuceneAnalysisTokenStream *tok = create_OrgApacheLuceneAnalysisStandardStandardFilter_initWithOrgApacheLuceneAnalysisTokenStream_(src);
   tok = create_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(tok);
   tok = create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(tok, stopwords_);
-  return create_OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, src, src, tok);
+  return create_OrgApacheLuceneAnalysisStandardStandardAnalyzer_1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, src, src, tok);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 5, 6, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(initWithJavaIoReader:);
+  methods[3].selector = @selector(setMaxTokenLengthWithInt:);
+  methods[4].selector = @selector(getMaxTokenLength);
+  methods[5].selector = @selector(createComponentsWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_MAX_TOKEN_LENGTH", "I", .constantValue.asInt = OrgApacheLuceneAnalysisStandardStandardAnalyzer_DEFAULT_MAX_TOKEN_LENGTH, 0x19, -1, -1, -1, -1 },
+    { "maxTokenLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "STOP_WORDS_SET", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x19, -1, 7, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisUtilCharArraySet;", "LJavaIoReader;", "LJavaIoIOException;", "setMaxTokenLength", "I", "createComponents", "LNSString;", &OrgApacheLuceneAnalysisStandardStandardAnalyzer_STOP_WORDS_SET };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStandardAnalyzer = { "StandardAnalyzer", "org.apache.lucene.analysis.standard", ptrTable, methods, fields, 7, 0x11, 6, 3, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisStandardStandardAnalyzer;
 }
 
 + (void)initialize {
@@ -118,24 +144,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssign(&OrgApacheLuceneAnalysisStandardStandardAnalyzer_STOP_WORDS_SET, JreLoadStatic(OrgApacheLuceneAnalysisCoreStopAnalyzer, ENGLISH_STOP_WORDS_SET));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisStandardStandardAnalyzer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "StandardAnalyzer", NULL, 0x1, NULL, NULL },
-    { "init", "StandardAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithJavaIoReader:", "StandardAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "setMaxTokenLengthWithInt:", "setMaxTokenLength", "V", 0x1, NULL, NULL },
-    { "getMaxTokenLength", NULL, "I", 0x1, NULL, NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_MAX_TOKEN_LENGTH", "DEFAULT_MAX_TOKEN_LENGTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStandardAnalyzer_DEFAULT_MAX_TOKEN_LENGTH },
-    { "maxTokenLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "STOP_WORDS_SET", "STOP_WORDS_SET", 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisStandardStandardAnalyzer_STOP_WORDS_SET, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStandardAnalyzer = { 2, "StandardAnalyzer", "org.apache.lucene.analysis.standard", NULL, 0x11, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisStandardStandardAnalyzer;
 }
 
 @end
@@ -179,25 +187,25 @@ OrgApacheLuceneAnalysisStandardStandardAnalyzer *create_OrgApacheLuceneAnalysisS
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisStandardStandardAnalyzer)
 
-@implementation OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1
+@implementation OrgApacheLuceneAnalysisStandardStandardAnalyzer_1
+
+- (instancetype)initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer:(OrgApacheLuceneAnalysisStandardStandardAnalyzer *)outer$
+                                   withOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)capture$0
+                                   withOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)source
+                                 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)result {
+  OrgApacheLuceneAnalysisStandardStandardAnalyzer_1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, outer$, capture$0, source, result);
+  return self;
+}
 
 - (void)setReaderWithJavaIoReader:(JavaIoReader *)reader {
   jint m = this$0_->maxTokenLength_;
   if ([val$src_ isKindOfClass:[OrgApacheLuceneAnalysisStandardStandardTokenizer class]]) {
-    [((OrgApacheLuceneAnalysisStandardStandardTokenizer *) nil_chk(((OrgApacheLuceneAnalysisStandardStandardTokenizer *) cast_chk(val$src_, [OrgApacheLuceneAnalysisStandardStandardTokenizer class])))) setMaxTokenLengthWithInt:m];
+    [((OrgApacheLuceneAnalysisStandardStandardTokenizer *) nil_chk(((OrgApacheLuceneAnalysisStandardStandardTokenizer *) val$src_))) setMaxTokenLengthWithInt:m];
   }
   else {
     [((OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40 *) nil_chk(((OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40 *) cast_chk(val$src_, [OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40 class])))) setMaxTokenLengthWithInt:m];
   }
   [super setReaderWithJavaIoReader:reader];
-}
-
-- (instancetype)initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer:(OrgApacheLuceneAnalysisStandardStandardAnalyzer *)outer$
-                                   withOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)capture$0
-                                   withOrgApacheLuceneAnalysisTokenizer:(OrgApacheLuceneAnalysisTokenizer *)arg$0
-                                 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg$1 {
-  OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, outer$, capture$0, arg$0, arg$1);
-  return self;
 }
 
 - (void)dealloc {
@@ -207,33 +215,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisStandardStandardAnalyzer
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setReaderWithJavaIoReader:", "setReader", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer:withOrgApacheLuceneAnalysisTokenizer:withOrgApacheLuceneAnalysisTokenizer:withOrgApacheLuceneAnalysisTokenStream:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer:withOrgApacheLuceneAnalysisTokenizer:withOrgApacheLuceneAnalysisTokenizer:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(setReaderWithJavaIoReader:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.analysis.standard.StandardAnalyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$src_", NULL, 0x1012, "Lorg.apache.lucene.analysis.Tokenizer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneAnalysisStandardStandardAnalyzer;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$src_", "LOrgApacheLuceneAnalysisTokenizer;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneAnalysisStandardStandardAnalyzer", "createComponentsWithNSString:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1 = { 2, "", "org.apache.lucene.analysis.standard", "StandardAnalyzer", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisStandardStandardAnalyzer;LOrgApacheLuceneAnalysisTokenizer;LOrgApacheLuceneAnalysisTokenizer;LOrgApacheLuceneAnalysisTokenStream;", "setReader", "LJavaIoReader;", "LJavaIoIOException;", "LOrgApacheLuceneAnalysisStandardStandardAnalyzer;", "createComponentsWithNSString:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStandardAnalyzer_1 = { "", "org.apache.lucene.analysis.standard", ptrTable, methods, fields, 7, 0x8010, 2, 2, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneAnalysisStandardStandardAnalyzer_1;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1 *self, OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
+void OrgApacheLuceneAnalysisStandardStandardAnalyzer_1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer_1 *self, OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$src_, capture$0);
-  OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, arg$0, arg$1);
+  OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, source, result);
 }
 
-OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1 *new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1, initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_, outer$, capture$0, arg$0, arg$1)
+OrgApacheLuceneAnalysisStandardStandardAnalyzer_1 *new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardStandardAnalyzer_1, initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_, outer$, capture$0, source, result)
 }
 
-OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1 *create_OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1, initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_, outer$, capture$0, arg$0, arg$1)
+OrgApacheLuceneAnalysisStandardStandardAnalyzer_1 *create_OrgApacheLuceneAnalysisStandardStandardAnalyzer_1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardStandardAnalyzer_1, initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_, outer$, capture$0, source, result)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilGeoProjectionUtils
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilGeoProjectionUtils_) && (INCLUDE_ALL_OrgApacheLuceneUtilGeoProjectionUtils || defined(INCLUDE_OrgApacheLuceneUtilGeoProjectionUtils))
 #define OrgApacheLuceneUtilGeoProjectionUtils_
 
@@ -22,24 +28,17 @@
  @brief Reusable geo-spatial projection utility methods.
  */
 @interface OrgApacheLuceneUtilGeoProjectionUtils : NSObject
-
-+ (jdouble)SEMIMAJOR_AXIS;
-
-+ (jdouble)FLATTENING;
-
-+ (jdouble)SEMIMINOR_AXIS;
-
-+ (jdouble)ECCENTRICITY;
-
-+ (jdouble)PI_OVER_2;
-
-+ (jdouble)SEMIMAJOR_AXIS2;
-
-+ (jdouble)SEMIMINOR_AXIS2;
+@property (readonly, class) jdouble SEMIMAJOR_AXIS NS_SWIFT_NAME(SEMIMAJOR_AXIS);
+@property (readonly, class) jdouble FLATTENING NS_SWIFT_NAME(FLATTENING);
+@property (readonly, class) jdouble SEMIMINOR_AXIS NS_SWIFT_NAME(SEMIMINOR_AXIS);
+@property (readonly, class) jdouble ECCENTRICITY NS_SWIFT_NAME(ECCENTRICITY);
+@property (readonly, class) jdouble PI_OVER_2 NS_SWIFT_NAME(PI_OVER_2);
+@property (readonly, class) jdouble SEMIMAJOR_AXIS2 NS_SWIFT_NAME(SEMIMAJOR_AXIS2);
+@property (readonly, class) jdouble SEMIMINOR_AXIS2 NS_SWIFT_NAME(SEMIMINOR_AXIS2);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Convert from Earth-Centered-Fixed to Easting, Northing, Up Right Hand System
@@ -162,34 +161,40 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilGeoProjectionUtils)
 
-inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMAJOR_AXIS();
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMAJOR_AXIS(void);
 #define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS 6378137.0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMAJOR_AXIS, jdouble)
 
-inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_FLATTENING();
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_FLATTENING(void);
 #define OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING 0.0033528106647474805
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, FLATTENING, jdouble)
 
-inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMINOR_AXIS();
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMINOR_AXIS(void);
 #define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS 6356752.314245179
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMINOR_AXIS, jdouble)
 
-inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_ECCENTRICITY();
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_ECCENTRICITY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilGeoProjectionUtils, ECCENTRICITY, jdouble)
 
-inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_PI_OVER_2();
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_PI_OVER_2(void);
 #define OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2 1.5707963267948966
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, PI_OVER_2, jdouble)
 
-inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMAJOR_AXIS2();
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMAJOR_AXIS2(void);
 #define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2 4.0680631590769E13
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMAJOR_AXIS2, jdouble)
 
-inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMINOR_AXIS2();
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMINOR_AXIS2(void);
 #define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2 4.0408299984661445E13
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMINOR_AXIS2, jdouble)
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilGeoProjectionUtils_init(OrgApacheLuceneUtilGeoProjectionUtils *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilGeoProjectionUtils *new_OrgApacheLuceneUtilGeoProjectionUtils_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilGeoProjectionUtils *create_OrgApacheLuceneUtilGeoProjectionUtils_init(void);
 
 FOUNDATION_EXPORT IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_ecfToLLAWithDouble_withDouble_withDouble_withDoubleArray_(jdouble x, jdouble y, jdouble z, IOSDoubleArray *lla);
 
@@ -205,14 +210,12 @@ FOUNDATION_EXPORT IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_enuToECF
 
 FOUNDATION_EXPORT IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(jdouble lon, jdouble lat, jdouble bearing, jdouble dist, IOSDoubleArray *pt);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilGeoProjectionUtils_init(OrgApacheLuceneUtilGeoProjectionUtils *self);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilGeoProjectionUtils *new_OrgApacheLuceneUtilGeoProjectionUtils_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilGeoProjectionUtils *create_OrgApacheLuceneUtilGeoProjectionUtils_init();
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilGeoProjectionUtils)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilGeoProjectionUtils")

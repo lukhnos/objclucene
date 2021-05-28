@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCjkCJKWidthFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCjkCJKWidthFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKWidthFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCjkCJKWidthFilter))
 #define OrgApacheLuceneAnalysisCjkCJKWidthFilter_
 
@@ -23,22 +29,22 @@
 @class OrgApacheLuceneAnalysisTokenStream;
 
 /*!
- @brief A <code>TokenFilter</code> that normalizes CJK width differences:
+ @brief A <code>TokenFilter</code> that normalizes CJK width differences: 
  <ul>
- <li>Folds fullwidth ASCII variants into the equivalent basic latin
- <li>Folds halfwidth Katakana variants into the equivalent kana
+    <li>Folds fullwidth ASCII variants into the equivalent basic latin
+    <li>Folds halfwidth Katakana variants into the equivalent kana 
  </ul>
  <p>
- NOTE: this filter can be viewed as a (practical) subset of NFKC/NFKD
- Unicode normalization.
+  NOTE: this filter can be viewed as a (practical) subset of NFKC/NFKD
+  Unicode normalization.
  See the normalization support in the ICU package
- for full normalization.
+  for full normalization.
  */
 @interface OrgApacheLuceneAnalysisCjkCJKWidthFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -56,4 +62,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCjkCJKWidthFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKWidthFilter")

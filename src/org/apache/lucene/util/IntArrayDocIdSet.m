@@ -6,13 +6,16 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/search/DocIdSet.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/util/IntArrayDocIdSet.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/IntArrayDocIdSet must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilIntArrayDocIdSet () {
  @public
@@ -24,7 +27,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilIntArrayDocIdSet, docs_, IOSIntArray *)
 
-inline jlong OrgApacheLuceneUtilIntArrayDocIdSet_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilIntArrayDocIdSet_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilIntArrayDocIdSet, BASE_RAM_BYTES_USED, jlong)
 
@@ -44,9 +47,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntArrayDocIdSet)
 
 @implementation OrgApacheLuceneUtilIntArrayDocIdSet
 
-- (instancetype)initWithIntArray:(IOSIntArray *)docs
-                         withInt:(jint)length {
-  OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(self, docs, length);
+- (instancetype)initPackagePrivateWithIntArray:(IOSIntArray *)docs
+                                       withInt:(jint)length {
+  OrgApacheLuceneUtilIntArrayDocIdSet_initPackagePrivateWithIntArray_withInt_(self, docs, length);
   return self;
 }
 
@@ -63,6 +66,29 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntArrayDocIdSet)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSetIterator;", 0x1, -1, -1, 1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithIntArray:withInt:);
+  methods[1].selector = @selector(ramBytesUsed);
+  methods[2].selector = @selector(iterator);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 2, -1, -1 },
+    { "docs_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "[II", "LJavaIoIOException;", &OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED, "LOrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntArrayDocIdSet = { "IntArrayDocIdSet", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x10, 3, 3, -1, 3, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilIntArrayDocIdSet;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilIntArrayDocIdSet class]) {
     OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilIntArrayDocIdSet_class_());
@@ -70,25 +96,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntArrayDocIdSet)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithIntArray:withInt:", "IntArrayDocIdSet", NULL, 0x0, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "docs_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.IntArrayDocIdSet$IntArrayDocIdSetIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntArrayDocIdSet = { 2, "IntArrayDocIdSet", "org.apache.lucene.util", NULL, 0x10, 3, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilIntArrayDocIdSet;
-}
-
 @end
 
-void OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(OrgApacheLuceneUtilIntArrayDocIdSet *self, IOSIntArray *docs, jint length) {
+void OrgApacheLuceneUtilIntArrayDocIdSet_initPackagePrivateWithIntArray_withInt_(OrgApacheLuceneUtilIntArrayDocIdSet *self, IOSIntArray *docs, jint length) {
   OrgApacheLuceneSearchDocIdSet_init(self);
   if (IOSIntArray_Get(nil_chk(docs), length) != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
     @throw create_JavaLangIllegalArgumentException_init();
@@ -97,12 +107,12 @@ void OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(OrgApacheLuce
   self->length_ = length;
 }
 
-OrgApacheLuceneUtilIntArrayDocIdSet *new_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(IOSIntArray *docs, jint length) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntArrayDocIdSet, initWithIntArray_withInt_, docs, length)
+OrgApacheLuceneUtilIntArrayDocIdSet *new_OrgApacheLuceneUtilIntArrayDocIdSet_initPackagePrivateWithIntArray_withInt_(IOSIntArray *docs, jint length) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntArrayDocIdSet, initPackagePrivateWithIntArray_withInt_, docs, length)
 }
 
-OrgApacheLuceneUtilIntArrayDocIdSet *create_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(IOSIntArray *docs, jint length) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntArrayDocIdSet, initWithIntArray_withInt_, docs, length)
+OrgApacheLuceneUtilIntArrayDocIdSet *create_OrgApacheLuceneUtilIntArrayDocIdSet_initPackagePrivateWithIntArray_withInt_(IOSIntArray *docs, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntArrayDocIdSet, initPackagePrivateWithIntArray_withInt_, docs, length)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntArrayDocIdSet)
@@ -141,20 +151,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntArrayDocIdSet)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithIntArray:withInt:", "IntArrayDocIdSetIterator", NULL, 0x0, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIntArray:withInt:);
+  methods[1].selector = @selector(docID);
+  methods[2].selector = @selector(nextDoc);
+  methods[3].selector = @selector(advanceWithInt:);
+  methods[4].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "docs_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "i_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "docs_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "i_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator = { 2, "IntArrayDocIdSetIterator", "org.apache.lucene.util", "IntArrayDocIdSet", 0x8, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[II", "LJavaIoIOException;", "advance", "I", "LOrgApacheLuceneUtilIntArrayDocIdSet;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator = { "IntArrayDocIdSetIterator", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x8, 5, 4, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator;
 }
 

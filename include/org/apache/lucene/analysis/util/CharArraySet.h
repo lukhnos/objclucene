@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilCharArraySet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilCharArraySet_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArraySet || defined(INCLUDE_OrgApacheLuceneAnalysisUtilCharArraySet))
 #define OrgApacheLuceneAnalysisUtilCharArraySet_
 
@@ -29,54 +35,51 @@
 
 /*!
  @brief A simple class that stores Strings as char[]'s in a
- hash table.
- Note that this is not a general purpose
- class.  For example, it cannot remove items from the
- set, nor does it resize its hash table to be smaller,
- etc.  It is designed to be quick to test if a char[]
- is in the set without the necessity of converting it
- to a String first.
+  hash table.Note that this is not a general purpose
+  class.
+ For example, it cannot remove items from the
+  set, nor does it resize its hash table to be smaller,
+  etc.  It is designed to be quick to test if a char[]
+  is in the set without the necessity of converting it
+  to a String first. 
  <P>
- <em>Please note:</em> This class implements <code>Set</code> but
- does not behave like it should in all cases. The generic type is
+  <em>Please note:</em> This class implements <code>Set</code> but
+  does not behave like it should in all cases. The generic type is 
  <code>Set<Object></code>, because you can add any object to it,
- that has a string representation. The add methods will use
+  that has a string representation. The add methods will use 
  <code>Object.toString</code> and store the result using a <code>char[]</code>
- buffer. The same behavior have the <code>contains()</code> methods.
- The <code>iterator()</code> returns an <code>Iterator<char[]></code>.
+  buffer. The same behavior have the <code>contains()</code> methods.
+  The <code>iterator()</code> returns an <code>Iterator<char[]></code>.
  */
 @interface OrgApacheLuceneAnalysisUtilCharArraySet : JavaUtilAbstractSet
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)EMPTY_SET;
+@property (readonly, class, strong) OrgApacheLuceneAnalysisUtilCharArraySet *EMPTY_SET NS_SWIFT_NAME(EMPTY_SET);
 
 #pragma mark Public
 
 /*!
  @brief Creates a set from a Collection of objects.
- @param c
- a collection whose elements to be placed into the set
- @param ignoreCase
- <code>false</code> if and only if the set should be case sensitive
- otherwise <code>true</code>.
+ @param c a collection whose elements to be placed into the set
+ @param ignoreCase <code>
+  false </code>  if and only if the set should be case sensitive           otherwise 
+  <code> true </code> .
  */
-- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c
-                               withBoolean:(jboolean)ignoreCase;
+- (instancetype __nonnull)initWithJavaUtilCollection:(id<JavaUtilCollection>)c
+                                         withBoolean:(jboolean)ignoreCase;
 
 /*!
  @brief Create set with enough capacity to hold startSize terms
- @param startSize
- the initial capacity
- @param ignoreCase
- <code>false</code> if and only if the set should be case sensitive
- otherwise <code>true</code>.
+ @param startSize the initial capacity
+ @param ignoreCase <code>
+  false </code>  if and only if the set should be case sensitive           otherwise 
+  <code> true </code> .
  */
-- (instancetype)initWithInt:(jint)startSize
-                withBoolean:(jboolean)ignoreCase;
+- (instancetype __nonnull)initWithInt:(jint)startSize
+                          withBoolean:(jboolean)ignoreCase;
 
 /*!
  @brief Add this char[] directly to the set.
  If ignoreCase is true for this Set, the text array will be directly modified.
- The user should never modify this text array after calling this method.
+  The user should never modify this text array after calling this method.
  */
 - (jboolean)addWithCharArray:(IOSCharArray *)text;
 
@@ -93,14 +96,13 @@
 - (jboolean)addWithNSString:(NSString *)text;
 
 /*!
- @brief Clears all entries in this set.
- This method is supported for reusing, but not <code>Set.remove</code>. 
+ @brief Clears all entries in this set.This method is supported for reusing, but not <code>Set.remove</code>.
  */
 - (void)clear;
 
 /*!
  @brief true if the <code>len</code> chars of <code>text</code> starting at <code>off</code>
- are in the set
+  are in the set
  */
 - (jboolean)containsWithCharArray:(IOSCharArray *)text
                           withInt:(jint)off
@@ -114,14 +116,12 @@
 - (jboolean)containsWithId:(id)o;
 
 /*!
- @brief Returns a copy of the given set as a <code>CharArraySet</code>.
- If the given set
- is a <code>CharArraySet</code> the ignoreCase property will be preserved.
- @param set
- a set to copy
+ @brief Returns a copy of the given set as a <code>CharArraySet</code>.If the given set
+  is a <code>CharArraySet</code> the ignoreCase property will be preserved.
+ @param set a set to copy
  @return a copy of the given set as a <code>CharArraySet</code>. If the given set
- is a <code>CharArraySet</code> the ignoreCase property as well as the
- matchVersion will be of the given set will be preserved.
+          is a <code>CharArraySet</code> the ignoreCase property as well as the
+          matchVersion will be of the given set will be preserved.
  */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)copy__WithJavaUtilSet:(id<JavaUtilSet>)set OBJC_METHOD_FAMILY_NONE;
 
@@ -135,13 +135,11 @@
 - (NSString *)description;
 
 /*!
- @brief Returns an unmodifiable <code>CharArraySet</code>.
- This allows to provide
- unmodifiable views of internal sets for "read-only" use.
- @param set
- a set for which the unmodifiable set is returned.
+ @brief Returns an unmodifiable <code>CharArraySet</code>.This allows to provide
+  unmodifiable views of internal sets for "read-only" use.
+ @param set a set for which the unmodifiable set is returned.
  @return an new unmodifiable <code>CharArraySet</code>.
- @throws NullPointerException
+ @throw NullPointerException
  if the given set is <code>null</code>.
  */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)set;
@@ -151,13 +149,17 @@
 /*!
  @brief Create set from the specified map (internal only), used also by <code>CharArrayMap.keySet()</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArrayMap:(OrgApacheLuceneAnalysisUtilCharArrayMap *)map;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArrayMap:(OrgApacheLuceneAnalysisUtilCharArrayMap *)map;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisUtilCharArraySet)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet_get_EMPTY_SET();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet_get_EMPTY_SET(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisUtilCharArraySet, EMPTY_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
@@ -188,4 +190,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArraySet)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArraySet")

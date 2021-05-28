@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryAndQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQueryAndQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryAndQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryAndQuery))
 #define OrgApacheLuceneQueryparserSurroundQueryAndQuery_
 
@@ -31,9 +37,9 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)queries
-                         withBoolean:(jboolean)inf
-                        withNSString:(NSString *)opName;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)queries
+                                   withBoolean:(jboolean)inf
+                                  withNSString:(NSString *)opName;
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
            withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
@@ -52,4 +58,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryAndQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryAndQuery")

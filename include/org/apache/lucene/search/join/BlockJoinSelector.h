@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinBlockJoinSelector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinBlockJoinSelector_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinBlockJoinSelector || defined(INCLUDE_OrgApacheLuceneSearchJoinBlockJoinSelector))
 #define OrgApacheLuceneSearchJoinBlockJoinSelector_
 
@@ -26,7 +32,6 @@
 
 /*!
  @brief Select a value from a block of documents.
-  
  */
 @interface OrgApacheLuceneSearchJoinBlockJoinSelector : NSObject
 
@@ -34,7 +39,7 @@
 
 /*!
  @brief Return a <code>Bits</code> instance that returns true if, and only if, any of
- the children of the given parent document has a value.
+   the children of the given parent document has a value.
  */
 + (id<OrgApacheLuceneUtilBits>)wrapWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)docsWithValue
                                  withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parents
@@ -42,8 +47,8 @@
 
 /*!
  @brief Wraps the provided <code>NumericDocValues</code> in order to only select
- one value per parent among its <code>children</code> using the configured
- <code>selection</code> type.
+   one value per parent among its <code>children</code> using the configured
+   <code>selection</code> type.
  */
 + (OrgApacheLuceneIndexNumericDocValues *)wrapWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)values
                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)docsWithValue
@@ -53,8 +58,8 @@
 
 /*!
  @brief Wraps the provided <code>SortedDocValues</code> in order to only select
- one value per parent among its <code>children</code> using the configured
- <code>selection</code> type.
+   one value per parent among its <code>children</code> using the configured
+   <code>selection</code> type.
  */
 + (OrgApacheLuceneIndexSortedDocValues *)wrapWithOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values
                                  withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)selection
@@ -63,8 +68,8 @@
 
 /*!
  @brief Wraps the provided <code>SortedNumericDocValues</code> in order to only select
- one value per parent among its <code>children</code> using the configured
- <code>selection</code> type.
+   one value per parent among its <code>children</code> using the configured
+   <code>selection</code> type.
  */
 + (OrgApacheLuceneIndexNumericDocValues *)wrapWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)sortedNumerics
                                          withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)selection
@@ -73,8 +78,8 @@
 
 /*!
  @brief Wraps the provided <code>SortedSetDocValues</code> in order to only select
- one value per parent among its <code>children</code> using the configured
- <code>selection</code> type.
+   one value per parent among its <code>children</code> using the configured
+   <code>selection</code> type.
  */
 + (OrgApacheLuceneIndexSortedDocValues *)wrapWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)sortedSet
                                     withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)selection
@@ -106,29 +111,29 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBlockJoinSelector)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum) {
   OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum_MIN = 0,
   OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum_MAX = 1,
 };
 
 /*!
- @brief Type of selection to perform.
- If none of the documents in the block have
- a value then no value will be selected. 
+ @brief Type of selection to perform.If none of the documents in the block have
+   a value then no value will be selected.
  */
-@interface OrgApacheLuceneSearchJoinBlockJoinSelector_Type : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneSearchJoinBlockJoinSelector_Type : JavaLangEnum
 
-+ (OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)MIN;
-
-+ (OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)MAX;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneSearchJoinBlockJoinSelector_Type *MIN NS_SWIFT_NAME(MIN);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchJoinBlockJoinSelector_Type *MAX NS_SWIFT_NAME(MAX);
+#pragma mark Public
 
 + (OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum)toNSEnum;
 
 @end
@@ -141,16 +146,16 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchJoinBlockJoinSelector_Type *OrgApacheLuce
 /*!
  @brief Only consider the minimum value from the block when sorting.
  */
-inline OrgApacheLuceneSearchJoinBlockJoinSelector_Type *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_get_MIN();
+inline OrgApacheLuceneSearchJoinBlockJoinSelector_Type *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_get_MIN(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchJoinBlockJoinSelector_Type, MIN)
 
 /*!
  @brief Only consider the maximum value from the block when sorting.
  */
-inline OrgApacheLuceneSearchJoinBlockJoinSelector_Type *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_get_MAX();
+inline OrgApacheLuceneSearchJoinBlockJoinSelector_Type *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_get_MAX(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchJoinBlockJoinSelector_Type, MAX)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinBlockJoinSelector_Type *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_valueOfWithNSString_(NSString *name);
 
@@ -160,4 +165,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBlockJoinSelector_Type)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinBlockJoinSelector")

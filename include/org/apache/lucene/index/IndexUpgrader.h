@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexUpgrader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexUpgrader_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexUpgrader || defined(INCLUDE_OrgApacheLuceneIndexIndexUpgrader))
 #define OrgApacheLuceneIndexIndexUpgrader_
 
@@ -23,62 +29,60 @@
 
 /*!
  @brief This is an easy-to-use tool that upgrades all segments of an index from previous Lucene versions
- to the current segment file format.
- It can be used from command line:
+  to the current segment file format.It can be used from command line: 
  @code
 
-  java -cp lucene-core.jar org.apache.lucene.index.IndexUpgrader [-delete-prior-commits] [-verbose] indexDir
+   java -cp lucene-core.jar org.apache.lucene.index.IndexUpgrader [-delete-prior-commits] [-verbose] indexDir 
   
 @endcode
- Alternatively this class can be instantiated and <code>upgrade</code> invoked. It uses <code>UpgradeIndexMergePolicy</code>
- and triggers the upgrade via an forceMerge request to <code>IndexWriter</code>.
- <p>This tool keeps only the last commit in an index; for this
- reason, if the incoming index has more than one commit, the tool
- refuses to run by default. Specify <code>-delete-prior-commits</code>
- to override this, allowing the tool to delete all but the last commit.
- From Java code this can be enabled by passing <code>true</code> to
+  Alternatively this class can be instantiated and <code>upgrade</code> invoked.
+ It uses <code>UpgradeIndexMergePolicy</code>
+  and triggers the upgrade via an forceMerge request to <code>IndexWriter</code>.
+  <p>This tool keeps only the last commit in an index; for this
+  reason, if the incoming index has more than one commit, the tool
+  refuses to run by default. Specify <code>-delete-prior-commits</code>
+  to override this, allowing the tool to delete all but the last commit.
+  From Java code this can be enabled by passing <code>true</code> to 
  <code>IndexUpgrader(Directory,InfoStream,boolean)</code>.
- <p><b>Warning:</b> This tool may reorder documents if the index was partially
- upgraded before execution (e.g., documents were added). If your application relies
- on &quot;monotonicity&quot; of doc IDs (which means that the order in which the documents
- were added to the index is preserved), do a full forceMerge instead.
- The <code>MergePolicy</code> set by <code>IndexWriterConfig</code> may also reorder
- documents.
+  <p><b>Warning:</b> This tool may reorder documents if the index was partially
+  upgraded before execution (e.g., documents were added). If your application relies
+  on &quot;monotonicity&quot; of doc IDs (which means that the order in which the documents
+  were added to the index is preserved), do a full forceMerge instead.
+  The <code>MergePolicy</code> set by <code>IndexWriterConfig</code> may also reorder
+  documents.
  */
 @interface OrgApacheLuceneIndexIndexUpgrader : NSObject
 
 #pragma mark Public
 
 /*!
- @brief Creates index upgrader on the given directory, using an <code>IndexWriter</code> using the given
- <code>matchVersion</code>.
- The tool refuses to upgrade indexes with multiple commit points. 
+ @brief Creates index upgrader on the given directory, using an <code>IndexWriter</code> using the given 
+ <code>matchVersion</code>.The tool refuses to upgrade indexes with multiple commit points.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
  @brief Creates index upgrader on the given directory, using an <code>IndexWriter</code> using the given
- config.
- You have the possibility to upgrade indexes with multiple commit points by removing
- all older ones. 
+  config.You have the possibility to upgrade indexes with multiple commit points by removing
+  all older ones.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)iwc
-                                          withBoolean:(jboolean)deletePriorCommits;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                      withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)iwc
+                                                    withBoolean:(jboolean)deletePriorCommits;
 
 /*!
- @brief Creates index upgrader on the given directory, using an <code>IndexWriter</code> using the given
- <code>matchVersion</code>.
- You have the possibility to upgrade indexes with multiple commit points by removing
- all older ones. If <code>infoStream</code> is not <code>null</code>, all logging output will be sent to this stream. 
+ @brief Creates index upgrader on the given directory, using an <code>IndexWriter</code> using the given 
+ <code>matchVersion</code>.You have the possibility to upgrade indexes with multiple commit points by removing
+  all older ones.
+ If <code>infoStream</code> is not <code>null</code>, all logging output will be sent to this stream.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                    withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
-                                          withBoolean:(jboolean)deletePriorCommits;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                              withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
+                                                    withBoolean:(jboolean)deletePriorCommits;
 
 /*!
  @brief Main method to run {code IndexUpgrader} from the
- command-line.
+   command-line.
  */
 + (void)mainWithNSStringArray:(IOSObjectArray *)args;
 
@@ -90,6 +94,10 @@
 #pragma mark Package-Private
 
 + (OrgApacheLuceneIndexIndexUpgrader *)parseArgsWithNSStringArray:(IOSObjectArray *)args;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -121,4 +129,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexUpgrader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexUpgrader")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchCollector || defined(INCLUDE_OrgApacheLuceneSearchCollector))
 #define OrgApacheLuceneSearchCollector_
 
@@ -21,43 +27,44 @@
 
 /*!
  @brief <p>Expert: Collectors are primarily meant to be used to
- gather raw results from a search, and implement sorting
- or custom result filtering, collation, etc.
+  gather raw results from a search, and implement sorting
+  or custom result filtering, collation, etc.
  </p>
+  
  <p>Lucene's core collectors are derived from <code>Collector</code>
- and <code>SimpleCollector</code>. Likely your application can
- use one of these classes, or subclass <code>TopDocsCollector</code>,
- instead of implementing Collector directly:
+  and <code>SimpleCollector</code>. Likely your application can
+  use one of these classes, or subclass <code>TopDocsCollector</code>,
+  instead of implementing Collector directly: 
  <ul>
- <li><code>TopDocsCollector</code> is an abstract base class
- that assumes you will retrieve the top N docs,
- according to some criteria, after collection is
- done.  </li>
- <li><code>TopScoreDocCollector</code> is a concrete subclass
- <code>TopDocsCollector</code> and sorts according to score +
- docID.  This is used internally by the <code>IndexSearcher</code>
+    <li><code>TopDocsCollector</code> is an abstract base class
+    that assumes you will retrieve the top N docs,
+    according to some criteria, after collection is
+    done.  </li>
+    <li><code>TopScoreDocCollector</code> is a concrete subclass
+    <code>TopDocsCollector</code> and sorts according to score +
+    docID.  This is used internally by the <code>IndexSearcher</code>
   search methods that do not take an
- explicit <code>Sort</code>. It is likely the most frequently
- used collector.</li>
- <li><code>TopFieldCollector</code> subclasses <code>TopDocsCollector</code>
+    explicit <code>Sort</code>. It is likely the most frequently
+    used collector.</li>
+    <li><code>TopFieldCollector</code> subclasses <code>TopDocsCollector</code>
   and sorts according to a specified
- <code>Sort</code> object (sort by field).  This is used
- internally by the <code>IndexSearcher</code> search methods
- that take an explicit <code>Sort</code>.
- <li><code>TimeLimitingCollector</code>, which wraps any other
- Collector and aborts the search if it's taken too much
- time.</li>
- <li><code>PositiveScoresOnlyCollector</code> wraps any other
- Collector and prevents collection of hits whose score
- is &lt;= 0.0</li>
+    <code>Sort</code> object (sort by field).  This is used
+    internally by the <code>IndexSearcher</code> search methods
+    that take an explicit <code>Sort</code>.
+    <li><code>TimeLimitingCollector</code>, which wraps any other
+    Collector and aborts the search if it's taken too much
+    time.</li>
+    <li><code>PositiveScoresOnlyCollector</code> wraps any other
+    Collector and prevents collection of hits whose score
+    is &lt;= 0.0</li>
+  
  </ul>
  */
-@protocol OrgApacheLuceneSearchCollector < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchCollector < JavaObject >
 
 /*!
  @brief Create a new <code>collector</code> to collect the given context.
- @param context
- next atomic reader context
+ @param context next atomic reader context
  */
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -75,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCollector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCollector")

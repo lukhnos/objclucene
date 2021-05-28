@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper || defined(INCLUDE_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper))
 #define OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_
 
@@ -21,12 +27,13 @@
 #include "org/apache/lucene/analysis/AnalyzerWrapper.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
+@class OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 
 /*!
  @brief A ShingleAnalyzerWrapper wraps a <code>ShingleFilter</code> around another <code>Analyzer</code>.
  <p>
- A shingle is another name for a token based n-gram.
+  A shingle is another name for a token based n-gram. 
  </p>
  */
 @interface OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper : OrgApacheLuceneAnalysisAnalyzerWrapper
@@ -36,16 +43,16 @@
 /*!
  @brief Wraps <code>StandardAnalyzer</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer
-                                                withInt:(jint)maxShingleSize;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer
+                                                          withInt:(jint)maxShingleSize;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer
-                                                withInt:(jint)minShingleSize
-                                                withInt:(jint)maxShingleSize;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer
+                                                          withInt:(jint)minShingleSize
+                                                          withInt:(jint)maxShingleSize;
 
 /*!
  @brief Creates a new ShingleAnalyzerWrapper
@@ -53,28 +60,26 @@
  @param minShingleSize Min shingle (token ngram) size
  @param maxShingleSize Max shingle size
  @param tokenSeparator Used to separate input stream tokens in output shingles
- @param outputUnigrams Whether or not the filter shall pass the original
- tokens to the output stream
- @param outputUnigramsIfNoShingles Overrides the behavior of outputUnigrams==false for those
- times when no shingles are available (because there are fewer than
- minShingleSize tokens in the input stream)?
- Note that if outputUnigrams==true, then unigrams are always output,
- regardless of whether any shingles are available.
+ @param outputUnigrams Whether or not the filter shall pass the original         tokens to the output stream
+ @param outputUnigramsIfNoShingles Overrides the behavior of outputUnigrams==false for those         times when no shingles are available (because there are fewer than
+          minShingleSize tokens in the input stream)?
+          Note that if outputUnigrams==true, then unigrams are always output,
+          regardless of whether any shingles are available.
  @param fillerToken filler token to use when positionIncrement is more than 1
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                                                withInt:(jint)minShingleSize
-                                                withInt:(jint)maxShingleSize
-                                           withNSString:(NSString *)tokenSeparator
-                                            withBoolean:(jboolean)outputUnigrams
-                                            withBoolean:(jboolean)outputUnigramsIfNoShingles
-                                           withNSString:(NSString *)fillerToken;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
+                                                          withInt:(jint)minShingleSize
+                                                          withInt:(jint)maxShingleSize
+                                                     withNSString:(NSString *)tokenSeparator
+                                                      withBoolean:(jboolean)outputUnigrams
+                                                      withBoolean:(jboolean)outputUnigramsIfNoShingles
+                                                     withNSString:(NSString *)fillerToken;
 
 /*!
  @brief Wraps <code>StandardAnalyzer</code>.
  */
-- (instancetype)initWithInt:(jint)minShingleSize
-                    withInt:(jint)maxShingleSize;
+- (instancetype __nonnull)initWithInt:(jint)minShingleSize
+                              withInt:(jint)maxShingleSize;
 
 - (NSString *)getFillerToken;
 
@@ -102,6 +107,10 @@
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -133,9 +142,9 @@ FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *create_O
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *new_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *new_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *create_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *create_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithInt_withInt_(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self, jint minShingleSize, jint maxShingleSize);
 
@@ -147,4 +156,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper")

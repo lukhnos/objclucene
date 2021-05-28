@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/ArrayList.h"
@@ -20,6 +19,10 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
 #include "org/apache/lucene/queryparser/flexible/messages/MessageImpl.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/ModifierQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode () {
  @public
@@ -86,20 +89,31 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreNodesM
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier:", "ModifierQueryNode", NULL, 0x1, NULL, NULL },
-    { "getChild", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, NULL, NULL },
-    { "getModifier", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ModifierQueryNode$Modifier;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "setChildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "setChild", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier:);
+  methods[1].selector = @selector(getChild);
+  methods[2].selector = @selector(getModifier);
+  methods[3].selector = @selector(description);
+  methods[4].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[5].selector = @selector(cloneTree);
+  methods[6].selector = @selector(setChildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "modifier_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ModifierQueryNode$Modifier;", NULL, NULL, .constantValue.asLong = 0 },
+    { "modifier_", "LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.flexible.core.nodes.ModifierQueryNode$Modifier;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode = { 2, "ModifierQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 7, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;", "toString", "toQueryString", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;", "LJavaLangCloneNotSupportedException;", "setChild", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", "LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode = { "ModifierQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x1, 7, 1, -1, 7, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode;
 }
 
@@ -193,8 +207,31 @@ OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApache
   return (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;", 0x9, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(description);
+  methods[1].selector = @selector(toDigitString);
+  methods[2].selector = @selector(toLargeString);
+  methods[3].selector = @selector(values);
+  methods[4].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "MOD_NONE", "LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "MOD_NOT", "LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "MOD_REQ", "LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+  };
+  static const void *ptrTable[] = { "toString", "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NONE), &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NOT), &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_REQ), "LOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode;", "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/core/nodes/ModifierQueryNode$Modifier;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier = { "Modifier", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, fields, 7, 0x4019, 5, 3, 6, -1, -1, 7, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;
 }
 
 + (void)initialize {
@@ -203,30 +240,12 @@ OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApache
     size_t allocSize = 3 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NONE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_initWithNSString_withInt_(e, @"MOD_NONE", 0);
-    (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NOT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_initWithNSString_withInt_(e, @"MOD_NOT", 1);
-    (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_REQ) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_initWithNSString_withInt_(e, @"MOD_REQ", 2);
+    for (jint i = 0; i < 3; i++) {
+      ((void)(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toDigitString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toLargeString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "MOD_NONE", "MOD_NONE", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ModifierQueryNode$Modifier;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NONE), NULL, .constantValue.asLong = 0 },
-    { "MOD_NOT", "MOD_NOT", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ModifierQueryNode$Modifier;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NOT), NULL, .constantValue.asLong = 0 },
-    { "MOD_REQ", "MOD_REQ", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.nodes.ModifierQueryNode$Modifier;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_REQ), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.flexible.core.nodes.ModifierQueryNode$Modifier;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier = { 2, "Modifier", "org.apache.lucene.queryparser.flexible.core.nodes", "ModifierQueryNode", 0x4019, 3, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/core/nodes/ModifierQueryNode$Modifier;>;" };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;
 }
 
 @end
@@ -248,7 +267,7 @@ OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApache
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

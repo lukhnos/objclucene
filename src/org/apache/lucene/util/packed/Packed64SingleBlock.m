@@ -6,16 +6,18 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Math.h"
 #include "java/util/Arrays.h"
-#include "org/apache/lucene/index/NumericDocValues.h"
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/packed/BulkOperation.h"
 #include "org/apache/lucene/util/packed/Packed64SingleBlock.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/Packed64SingleBlock must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilPackedPacked64SingleBlock ()
 
@@ -24,7 +26,7 @@
 
 @end
 
-inline IOSIntArray *OrgApacheLuceneUtilPackedPacked64SingleBlock_get_SUPPORTED_BITS_PER_VALUE();
+inline IOSIntArray *OrgApacheLuceneUtilPackedPacked64SingleBlock_get_SUPPORTED_BITS_PER_VALUE(void);
 static IOSIntArray *OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilPackedPacked64SingleBlock, SUPPORTED_BITS_PER_VALUE, IOSIntArray *)
 
@@ -47,9 +49,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
   return OrgApacheLuceneUtilPackedPacked64SingleBlock_requiredCapacityWithInt_withInt_(valueCount, valuesPerBlock);
 }
 
-- (instancetype)initWithInt:(jint)valueCount
-                    withInt:(jint)bitsPerValue {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, bitsPerValue);
+- (instancetype)initPackagePrivateWithInt:(jint)valueCount
+                                  withInt:(jint)bitsPerValue {
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, bitsPerValue);
   return self;
 }
 
@@ -65,13 +67,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
      withLongArray:(IOSLongArray *)arr
            withInt:(jint)off
            withInt:(jint)len {
-  JreAssert((len > 0), (JreStrcat("$IC", @"len must be > 0 (got ", len, ')')));
-  JreAssert((index >= 0 && index < valueCount_), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:73 condition failed: assert index >= 0 && index < valueCount;"));
+  JreAssert(len > 0, JreStrcat("$IC", @"len must be > 0 (got ", len, ')'));
+  JreAssert(index >= 0 && index < valueCount_, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:73 condition failed: assert index >= 0 && index < valueCount;");
   len = JavaLangMath_minWithInt_withInt_(len, valueCount_ - index);
-  JreAssert((off + len <= ((IOSLongArray *) nil_chk(arr))->size_), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:75 condition failed: assert off + len <= arr.length;"));
+  JreAssert(off + len <= ((IOSLongArray *) nil_chk(arr))->size_, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:75 condition failed: assert off + len <= arr.length;");
   jint originalIndex = index;
-  jint valuesPerBlock = 64 / bitsPerValue_;
-  jint offsetInBlock = index % valuesPerBlock;
+  jint valuesPerBlock = JreIntDiv(64, bitsPerValue_);
+  jint offsetInBlock = JreIntMod(index, valuesPerBlock);
   if (offsetInBlock != 0) {
     for (jint i = offsetInBlock; i < valuesPerBlock && len > 0; ++i) {
       *IOSLongArray_GetRef(arr, off++) = [self getWithInt:index++];
@@ -81,12 +83,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
       return index - originalIndex;
     }
   }
-  JreAssert((index % valuesPerBlock == 0), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:93 condition failed: assert index % valuesPerBlock == 0;"));
+  JreAssert(JreIntMod(index, valuesPerBlock) == 0, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:93 condition failed: assert index % valuesPerBlock == 0;");
   id<OrgApacheLuceneUtilPackedPackedInts_Decoder> decoder = OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED_SINGLE_BLOCK), bitsPerValue_);
-  JreAssert(([((id<OrgApacheLuceneUtilPackedPackedInts_Decoder>) nil_chk(decoder)) longBlockCount] == 1), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:95 condition failed: assert decoder.longBlockCount() == 1;"));
-  JreAssert(([decoder longValueCount] == valuesPerBlock), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:96 condition failed: assert decoder.longValueCount() == valuesPerBlock;"));
-  jint blockIndex = index / valuesPerBlock;
-  jint nblocks = (index + len) / valuesPerBlock - blockIndex;
+  JreAssert([((id<OrgApacheLuceneUtilPackedPackedInts_Decoder>) nil_chk(decoder)) longBlockCount] == 1, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:95 condition failed: assert decoder.longBlockCount() == 1;");
+  JreAssert([decoder longValueCount] == valuesPerBlock, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:96 condition failed: assert decoder.longValueCount() == valuesPerBlock;");
+  jint blockIndex = JreIntDiv(index, valuesPerBlock);
+  jint nblocks = JreIntDiv((index + len), valuesPerBlock) - blockIndex;
   [decoder decodeWithLongArray:blocks_ withInt:blockIndex withLongArray:arr withInt:off withInt:nblocks];
   jint diff = nblocks * valuesPerBlock;
   index += diff;
@@ -95,7 +97,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
     return index - originalIndex;
   }
   else {
-    JreAssert((index == originalIndex), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:109 condition failed: assert index == originalIndex;"));
+    JreAssert(index == originalIndex, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:109 condition failed: assert index == originalIndex;");
     return [super getWithInt:index withLongArray:arr withInt:off withInt:len];
   }
 }
@@ -104,13 +106,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
      withLongArray:(IOSLongArray *)arr
            withInt:(jint)off
            withInt:(jint)len {
-  JreAssert((len > 0), (JreStrcat("$IC", @"len must be > 0 (got ", len, ')')));
-  JreAssert((index >= 0 && index < valueCount_), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:117 condition failed: assert index >= 0 && index < valueCount;"));
+  JreAssert(len > 0, JreStrcat("$IC", @"len must be > 0 (got ", len, ')'));
+  JreAssert(index >= 0 && index < valueCount_, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:117 condition failed: assert index >= 0 && index < valueCount;");
   len = JavaLangMath_minWithInt_withInt_(len, valueCount_ - index);
-  JreAssert((off + len <= ((IOSLongArray *) nil_chk(arr))->size_), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:119 condition failed: assert off + len <= arr.length;"));
+  JreAssert(off + len <= ((IOSLongArray *) nil_chk(arr))->size_, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:119 condition failed: assert off + len <= arr.length;");
   jint originalIndex = index;
-  jint valuesPerBlock = 64 / bitsPerValue_;
-  jint offsetInBlock = index % valuesPerBlock;
+  jint valuesPerBlock = JreIntDiv(64, bitsPerValue_);
+  jint offsetInBlock = JreIntMod(index, valuesPerBlock);
   if (offsetInBlock != 0) {
     for (jint i = offsetInBlock; i < valuesPerBlock && len > 0; ++i) {
       [self setWithInt:index++ withLong:IOSLongArray_Get(arr, off++)];
@@ -120,12 +122,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
       return index - originalIndex;
     }
   }
-  JreAssert((index % valuesPerBlock == 0), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:137 condition failed: assert index % valuesPerBlock == 0;"));
+  JreAssert(JreIntMod(index, valuesPerBlock) == 0, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:137 condition failed: assert index % valuesPerBlock == 0;");
   OrgApacheLuceneUtilPackedBulkOperation *op = OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED_SINGLE_BLOCK), bitsPerValue_);
-  JreAssert(([((OrgApacheLuceneUtilPackedBulkOperation *) nil_chk(op)) longBlockCount] == 1), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:139 condition failed: assert op.longBlockCount() == 1;"));
-  JreAssert(([op longValueCount] == valuesPerBlock), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:140 condition failed: assert op.longValueCount() == valuesPerBlock;"));
-  jint blockIndex = index / valuesPerBlock;
-  jint nblocks = (index + len) / valuesPerBlock - blockIndex;
+  JreAssert([((OrgApacheLuceneUtilPackedBulkOperation *) nil_chk(op)) longBlockCount] == 1, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:139 condition failed: assert op.longBlockCount() == 1;");
+  JreAssert([op longValueCount] == valuesPerBlock, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:140 condition failed: assert op.longValueCount() == valuesPerBlock;");
+  jint blockIndex = JreIntDiv(index, valuesPerBlock);
+  jint nblocks = JreIntDiv((index + len), valuesPerBlock) - blockIndex;
   [op encodeWithLongArray:arr withInt:off withLongArray:blocks_ withInt:blockIndex withInt:nblocks];
   jint diff = nblocks * valuesPerBlock;
   index += diff;
@@ -134,7 +136,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
     return index - originalIndex;
   }
   else {
-    JreAssert((index == originalIndex), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:153 condition failed: assert index == originalIndex;"));
+    JreAssert(index == originalIndex, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:153 condition failed: assert index == originalIndex;");
     return [super setWithInt:index withLongArray:arr withInt:off withInt:len];
   }
 }
@@ -142,24 +144,24 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
 - (void)fillWithInt:(jint)fromIndex
             withInt:(jint)toIndex
            withLong:(jlong)val {
-  JreAssert((fromIndex >= 0), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:160 condition failed: assert fromIndex >= 0;"));
-  JreAssert((fromIndex <= toIndex), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:161 condition failed: assert fromIndex <= toIndex;"));
-  JreAssert((OrgApacheLuceneUtilPackedPackedInts_unsignedBitsRequiredWithLong_(val) <= bitsPerValue_), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:162 condition failed: assert PackedInts.unsignedBitsRequired(val) <= bitsPerValue;"));
-  jint valuesPerBlock = 64 / bitsPerValue_;
+  JreAssert(fromIndex >= 0, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:160 condition failed: assert fromIndex >= 0;");
+  JreAssert(fromIndex <= toIndex, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:161 condition failed: assert fromIndex <= toIndex;");
+  JreAssert(OrgApacheLuceneUtilPackedPackedInts_unsignedBitsRequiredWithLong_(val) <= bitsPerValue_, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:162 condition failed: assert PackedInts.unsignedBitsRequired(val) <= bitsPerValue;");
+  jint valuesPerBlock = JreIntDiv(64, bitsPerValue_);
   if (toIndex - fromIndex <= JreLShift32(valuesPerBlock, 1)) {
     [super fillWithInt:fromIndex withInt:toIndex withLong:val];
     return;
   }
-  jint fromOffsetInBlock = fromIndex % valuesPerBlock;
+  jint fromOffsetInBlock = JreIntMod(fromIndex, valuesPerBlock);
   if (fromOffsetInBlock != 0) {
     for (jint i = fromOffsetInBlock; i < valuesPerBlock; ++i) {
       [self setWithInt:fromIndex++ withLong:val];
     }
-    JreAssert((fromIndex % valuesPerBlock == 0), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:178 condition failed: assert fromIndex % valuesPerBlock == 0;"));
+    JreAssert(JreIntMod(fromIndex, valuesPerBlock) == 0, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:178 condition failed: assert fromIndex % valuesPerBlock == 0;");
   }
-  jint fromBlock = fromIndex / valuesPerBlock;
-  jint toBlock = toIndex / valuesPerBlock;
-  JreAssert((fromBlock * valuesPerBlock == fromIndex), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:184 condition failed: assert fromBlock * valuesPerBlock == fromIndex;"));
+  jint fromBlock = JreIntDiv(fromIndex, valuesPerBlock);
+  jint toBlock = JreIntDiv(toIndex, valuesPerBlock);
+  JreAssert(fromBlock * valuesPerBlock == fromIndex, @"org/apache/lucene/util/packed/Packed64SingleBlock.java:184 condition failed: assert fromBlock * valuesPerBlock == fromIndex;");
   jlong blockValue = 0LL;
   for (jint i = 0; i < valuesPerBlock; ++i) {
     blockValue = blockValue | (JreLShift64(val, (i * bitsPerValue_)));
@@ -175,7 +177,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
 }
 
 - (NSString *)description {
-  return JreStrcat("$$I$I$IC", [[self getClass] getSimpleName], @"(bitsPerValue=", bitsPerValue_, @",size=", [self size], @",blocks=", ((IOSLongArray *) nil_chk(blocks_))->size_, ')');
+  return JreStrcat("$$I$I$IC", [[self java_getClass] getSimpleName], @"(bitsPerValue=", bitsPerValue_, @",size=", [self size], @",blocks=", ((IOSLongArray *) nil_chk(blocks_))->size_, ')');
 }
 
 + (OrgApacheLuceneUtilPackedPacked64SingleBlock *)createWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
@@ -194,36 +196,52 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedInts_Format;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPacked64SingleBlock;", 0x9, 10, 11, 12, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPacked64SingleBlock;", 0x9, 10, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(isSupportedWithInt:);
+  methods[1].selector = @selector(requiredCapacityWithInt:withInt:);
+  methods[2].selector = @selector(initPackagePrivateWithInt:withInt:);
+  methods[3].selector = @selector(clear);
+  methods[4].selector = @selector(ramBytesUsed);
+  methods[5].selector = @selector(getWithInt:withLongArray:withInt:withInt:);
+  methods[6].selector = @selector(setWithInt:withLongArray:withInt:withInt:);
+  methods[7].selector = @selector(fillWithInt:withInt:withLong:);
+  methods[8].selector = @selector(getFormat);
+  methods[9].selector = @selector(description);
+  methods[10].selector = @selector(createWithOrgApacheLuceneStoreDataInput:withInt:withInt:);
+  methods[11].selector = @selector(createWithInt:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "MAX_SUPPORTED_BITS_PER_VALUE", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedPacked64SingleBlock_MAX_SUPPORTED_BITS_PER_VALUE, 0x19, -1, -1, -1, -1 },
+    { "SUPPORTED_BITS_PER_VALUE", "[I", .constantValue.asLong = 0, 0x1a, -1, 13, -1, -1 },
+    { "blocks_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "isSupported", "I", "requiredCapacity", "II", "get", "I[JII", "set", "fill", "IIJ", "toString", "create", "LOrgApacheLuceneStoreDataInput;II", "LJavaIoIOException;", &OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE, "LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21;LOrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock = { "Packed64SingleBlock", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x400, 12, 3, -1, 14, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilPackedPacked64SingleBlock;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedPacked64SingleBlock class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE, [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 21, 32 } count:14]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPackedPacked64SingleBlock)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "isSupportedWithInt:", "isSupported", "Z", 0x9, NULL, NULL },
-    { "requiredCapacityWithInt:withInt:", "requiredCapacity", "I", 0xa, NULL, NULL },
-    { "initWithInt:withInt:", "Packed64SingleBlock", NULL, 0x0, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getWithInt:withLongArray:withInt:withInt:", "get", "I", 0x1, NULL, NULL },
-    { "setWithInt:withLongArray:withInt:withInt:", "set", "I", 0x1, NULL, NULL },
-    { "fillWithInt:withInt:withLong:", "fill", "V", 0x1, NULL, NULL },
-    { "getFormat", NULL, "Lorg.apache.lucene.util.packed.PackedInts$Format;", 0x4, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneStoreDataInput:withInt:withInt:", "create", "Lorg.apache.lucene.util.packed.Packed64SingleBlock;", 0x9, "Ljava.io.IOException;", NULL },
-    { "createWithInt:withInt:", "create", "Lorg.apache.lucene.util.packed.Packed64SingleBlock;", 0x9, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "MAX_SUPPORTED_BITS_PER_VALUE", "MAX_SUPPORTED_BITS_PER_VALUE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedPacked64SingleBlock_MAX_SUPPORTED_BITS_PER_VALUE },
-    { "SUPPORTED_BITS_PER_VALUE", "SUPPORTED_BITS_PER_VALUE", 0x1a, "[I", &OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE, NULL, .constantValue.asLong = 0 },
-    { "blocks_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock1;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock2;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock3;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock4;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock5;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock6;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock7;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock8;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock9;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock10;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock12;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock16;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock21;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock32;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock = { 2, "Packed64SingleBlock", "org.apache.lucene.util.packed", NULL, 0x400, 12, methods, 3, fields, 0, NULL, 14, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilPackedPacked64SingleBlock;
 }
 
 @end
@@ -235,13 +253,13 @@ jboolean OrgApacheLuceneUtilPackedPacked64SingleBlock_isSupportedWithInt_(jint b
 
 jint OrgApacheLuceneUtilPackedPacked64SingleBlock_requiredCapacityWithInt_withInt_(jint valueCount, jint valuesPerBlock) {
   OrgApacheLuceneUtilPackedPacked64SingleBlock_initialize();
-  return valueCount / valuesPerBlock + (valueCount % valuesPerBlock == 0 ? 0 : 1);
+  return JreIntDiv(valueCount, valuesPerBlock) + (JreIntMod(valueCount, valuesPerBlock) == 0 ? 0 : 1);
 }
 
-void OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock *self, jint valueCount, jint bitsPerValue) {
+void OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock *self, jint valueCount, jint bitsPerValue) {
   OrgApacheLuceneUtilPackedPackedInts_MutableImpl_initWithInt_withInt_(self, valueCount, bitsPerValue);
-  JreAssert((OrgApacheLuceneUtilPackedPacked64SingleBlock_isSupportedWithInt_(bitsPerValue)), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:51 condition failed: assert isSupported(bitsPerValue);"));
-  jint valuesPerBlock = 64 / bitsPerValue;
+  JreAssert(OrgApacheLuceneUtilPackedPacked64SingleBlock_isSupportedWithInt_(bitsPerValue), @"org/apache/lucene/util/packed/Packed64SingleBlock.java:51 condition failed: assert isSupported(bitsPerValue);");
+  jint valuesPerBlock = JreIntDiv(64, bitsPerValue);
   JreStrongAssignAndConsume(&self->blocks_, [IOSLongArray newArrayWithLength:OrgApacheLuceneUtilPackedPacked64SingleBlock_requiredCapacityWithInt_withInt_(valueCount, valuesPerBlock)]);
 }
 
@@ -315,19 +333,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock1", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1 = { 2, "Packed64SingleBlock1", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1 = { "Packed64SingleBlock1", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 1);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 1);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1_initWithInt_(jint valueCount) {
@@ -363,19 +389,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock2", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2 = { 2, "Packed64SingleBlock2", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2 = { "Packed64SingleBlock2", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 2);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 2);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2_initWithInt_(jint valueCount) {
@@ -396,34 +430,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 - (jlong)getWithInt:(jint)index {
-  jint o = index / 21;
-  jint b = index % 21;
+  jint o = JreIntDiv(index, 21);
+  jint b = JreIntMod(index, 21);
   jint shift = b * 3;
   return (JreURShift64(IOSLongArray_Get(nil_chk(blocks_), o), shift)) & 7LL;
 }
 
 - (void)setWithInt:(jint)index
           withLong:(jlong)value {
-  jint o = index / 21;
-  jint b = index % 21;
+  jint o = JreIntDiv(index, 21);
+  jint b = JreIntMod(index, 21);
   jint shift = b * 3;
   *IOSLongArray_GetRef(nil_chk(blocks_), o) = (IOSLongArray_Get(blocks_, o) & ~(JreLShift64(7LL, shift))) | (JreLShift64(value, shift));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock3", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3 = { 2, "Packed64SingleBlock3", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3 = { "Packed64SingleBlock3", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 3);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 3);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3_initWithInt_(jint valueCount) {
@@ -459,19 +501,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock4", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4 = { 2, "Packed64SingleBlock4", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4 = { "Packed64SingleBlock4", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 4);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 4);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4_initWithInt_(jint valueCount) {
@@ -492,34 +542,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 - (jlong)getWithInt:(jint)index {
-  jint o = index / 12;
-  jint b = index % 12;
+  jint o = JreIntDiv(index, 12);
+  jint b = JreIntMod(index, 12);
   jint shift = b * 5;
   return (JreURShift64(IOSLongArray_Get(nil_chk(blocks_), o), shift)) & 31LL;
 }
 
 - (void)setWithInt:(jint)index
           withLong:(jlong)value {
-  jint o = index / 12;
-  jint b = index % 12;
+  jint o = JreIntDiv(index, 12);
+  jint b = JreIntMod(index, 12);
   jint shift = b * 5;
   *IOSLongArray_GetRef(nil_chk(blocks_), o) = (IOSLongArray_Get(blocks_, o) & ~(JreLShift64(31LL, shift))) | (JreLShift64(value, shift));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock5", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5 = { 2, "Packed64SingleBlock5", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5 = { "Packed64SingleBlock5", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 5);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 5);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5_initWithInt_(jint valueCount) {
@@ -540,34 +598,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 - (jlong)getWithInt:(jint)index {
-  jint o = index / 10;
-  jint b = index % 10;
+  jint o = JreIntDiv(index, 10);
+  jint b = JreIntMod(index, 10);
   jint shift = b * 6;
   return (JreURShift64(IOSLongArray_Get(nil_chk(blocks_), o), shift)) & 63LL;
 }
 
 - (void)setWithInt:(jint)index
           withLong:(jlong)value {
-  jint o = index / 10;
-  jint b = index % 10;
+  jint o = JreIntDiv(index, 10);
+  jint b = JreIntMod(index, 10);
   jint shift = b * 6;
   *IOSLongArray_GetRef(nil_chk(blocks_), o) = (IOSLongArray_Get(blocks_, o) & ~(JreLShift64(63LL, shift))) | (JreLShift64(value, shift));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock6", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6 = { 2, "Packed64SingleBlock6", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6 = { "Packed64SingleBlock6", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 6);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 6);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6_initWithInt_(jint valueCount) {
@@ -588,34 +654,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 - (jlong)getWithInt:(jint)index {
-  jint o = index / 9;
-  jint b = index % 9;
+  jint o = JreIntDiv(index, 9);
+  jint b = JreIntMod(index, 9);
   jint shift = b * 7;
   return (JreURShift64(IOSLongArray_Get(nil_chk(blocks_), o), shift)) & 127LL;
 }
 
 - (void)setWithInt:(jint)index
           withLong:(jlong)value {
-  jint o = index / 9;
-  jint b = index % 9;
+  jint o = JreIntDiv(index, 9);
+  jint b = JreIntMod(index, 9);
   jint shift = b * 7;
   *IOSLongArray_GetRef(nil_chk(blocks_), o) = (IOSLongArray_Get(blocks_, o) & ~(JreLShift64(127LL, shift))) | (JreLShift64(value, shift));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock7", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7 = { 2, "Packed64SingleBlock7", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7 = { "Packed64SingleBlock7", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 7);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 7);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7_initWithInt_(jint valueCount) {
@@ -651,19 +725,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock8", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8 = { 2, "Packed64SingleBlock8", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8 = { "Packed64SingleBlock8", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 8);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 8);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8_initWithInt_(jint valueCount) {
@@ -684,34 +766,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 - (jlong)getWithInt:(jint)index {
-  jint o = index / 7;
-  jint b = index % 7;
+  jint o = JreIntDiv(index, 7);
+  jint b = JreIntMod(index, 7);
   jint shift = b * 9;
   return (JreURShift64(IOSLongArray_Get(nil_chk(blocks_), o), shift)) & 511LL;
 }
 
 - (void)setWithInt:(jint)index
           withLong:(jlong)value {
-  jint o = index / 7;
-  jint b = index % 7;
+  jint o = JreIntDiv(index, 7);
+  jint b = JreIntMod(index, 7);
   jint shift = b * 9;
   *IOSLongArray_GetRef(nil_chk(blocks_), o) = (IOSLongArray_Get(blocks_, o) & ~(JreLShift64(511LL, shift))) | (JreLShift64(value, shift));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock9", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9 = { 2, "Packed64SingleBlock9", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9 = { "Packed64SingleBlock9", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 9);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 9);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9_initWithInt_(jint valueCount) {
@@ -732,34 +822,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 - (jlong)getWithInt:(jint)index {
-  jint o = index / 6;
-  jint b = index % 6;
+  jint o = JreIntDiv(index, 6);
+  jint b = JreIntMod(index, 6);
   jint shift = b * 10;
   return (JreURShift64(IOSLongArray_Get(nil_chk(blocks_), o), shift)) & 1023LL;
 }
 
 - (void)setWithInt:(jint)index
           withLong:(jlong)value {
-  jint o = index / 6;
-  jint b = index % 6;
+  jint o = JreIntDiv(index, 6);
+  jint b = JreIntMod(index, 6);
   jint shift = b * 10;
   *IOSLongArray_GetRef(nil_chk(blocks_), o) = (IOSLongArray_Get(blocks_, o) & ~(JreLShift64(1023LL, shift))) | (JreLShift64(value, shift));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock10", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10 = { 2, "Packed64SingleBlock10", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10 = { "Packed64SingleBlock10", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 10);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 10);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10_initWithInt_(jint valueCount) {
@@ -780,34 +878,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 - (jlong)getWithInt:(jint)index {
-  jint o = index / 5;
-  jint b = index % 5;
+  jint o = JreIntDiv(index, 5);
+  jint b = JreIntMod(index, 5);
   jint shift = b * 12;
   return (JreURShift64(IOSLongArray_Get(nil_chk(blocks_), o), shift)) & 4095LL;
 }
 
 - (void)setWithInt:(jint)index
           withLong:(jlong)value {
-  jint o = index / 5;
-  jint b = index % 5;
+  jint o = JreIntDiv(index, 5);
+  jint b = JreIntMod(index, 5);
   jint shift = b * 12;
   *IOSLongArray_GetRef(nil_chk(blocks_), o) = (IOSLongArray_Get(blocks_, o) & ~(JreLShift64(4095LL, shift))) | (JreLShift64(value, shift));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock12", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12 = { 2, "Packed64SingleBlock12", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12 = { "Packed64SingleBlock12", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 12);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 12);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12_initWithInt_(jint valueCount) {
@@ -843,19 +949,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock16", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16 = { 2, "Packed64SingleBlock16", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16 = { "Packed64SingleBlock16", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 16);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 16);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16_initWithInt_(jint valueCount) {
@@ -876,34 +990,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 - (jlong)getWithInt:(jint)index {
-  jint o = index / 3;
-  jint b = index % 3;
+  jint o = JreIntDiv(index, 3);
+  jint b = JreIntMod(index, 3);
   jint shift = b * 21;
   return (JreURShift64(IOSLongArray_Get(nil_chk(blocks_), o), shift)) & 2097151LL;
 }
 
 - (void)setWithInt:(jint)index
           withLong:(jlong)value {
-  jint o = index / 3;
-  jint b = index % 3;
+  jint o = JreIntDiv(index, 3);
+  jint b = JreIntMod(index, 3);
   jint shift = b * 21;
   *IOSLongArray_GetRef(nil_chk(blocks_), o) = (IOSLongArray_Get(blocks_, o) & ~(JreLShift64(2097151LL, shift))) | (JreLShift64(value, shift));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock21", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21 = { 2, "Packed64SingleBlock21", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21 = { "Packed64SingleBlock21", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 21);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 21);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21_initWithInt_(jint valueCount) {
@@ -939,19 +1061,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Pa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Packed64SingleBlock32", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32 = { 2, "Packed64SingleBlock32", "org.apache.lucene.util.packed", "Packed64SingleBlock", 0x8, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(setWithInt:withLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "get", "set", "IJ", "LOrgApacheLuceneUtilPackedPacked64SingleBlock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32 = { "Packed64SingleBlock32", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x8, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32_initWithInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32 *self, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(self, valueCount, 32);
+  OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(self, valueCount, 32);
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32_initWithInt_(jint valueCount) {

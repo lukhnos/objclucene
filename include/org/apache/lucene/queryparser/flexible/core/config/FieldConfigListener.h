@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener))
 #define OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_
 
@@ -20,18 +26,16 @@
 
 /*!
  @brief This interface should be implemented by classes that wants to listen for
- field configuration requests.
- The implementation receives a
+  field configuration requests.The implementation receives a 
  <code>FieldConfig</code> object and may add/change its configuration.
  - seealso: FieldConfig
  - seealso: QueryConfigHandler
  */
-@protocol OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener < JavaObject >
 
 /*!
  @brief This method is called ever time a field configuration is requested.
- @param fieldConfig
- the field configuration requested, should never be null
+ @param fieldConfig the field configuration requested, should never be null
  */
 - (void)buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)fieldConfig;
 
@@ -43,4 +47,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConf
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener")

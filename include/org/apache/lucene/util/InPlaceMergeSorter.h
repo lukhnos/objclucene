@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilInPlaceMergeSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilInPlaceMergeSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilInPlaceMergeSorter || defined(INCLUDE_OrgApacheLuceneUtilInPlaceMergeSorter))
 #define OrgApacheLuceneUtilInPlaceMergeSorter_
 
@@ -22,10 +28,8 @@
 
 /*!
  @brief <code>Sorter</code> implementation based on the merge-sort algorithm that merges
- in place (no extra memory will be allocated).
- Small arrays are sorted with
- insertion sort.
-  
+   in place (no extra memory will be allocated).Small arrays are sorted with
+   insertion sort.
  */
 @interface OrgApacheLuceneUtilInPlaceMergeSorter : OrgApacheLuceneUtilSorter
 
@@ -34,7 +38,7 @@
 /*!
  @brief Create a new <code>InPlaceMergeSorter</code>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)sortWithInt:(jint)from
             withInt:(jint)to;
@@ -54,4 +58,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilInPlaceMergeSorter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilInPlaceMergeSorter")

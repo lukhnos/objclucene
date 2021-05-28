@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedBlockPackedWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedBlockPackedWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedBlockPackedWriter))
 #define OrgApacheLuceneUtilPackedBlockPackedWriter_
 
@@ -25,32 +31,32 @@
 /*!
  @brief A writer for large sequences of longs.
  <p>
- The sequence is divided into fixed-size blocks and for each block, the
- difference between each value and the minimum value of the block is encoded
- using as few bits as possible. Memory usage of this class is proportional to
- the block size. Each block has an overhead between 1 and 10 bytes to store
- the minimum value and the number of bits per value of the block.
+  The sequence is divided into fixed-size blocks and for each block, the
+  difference between each value and the minimum value of the block is encoded
+  using as few bits as possible. Memory usage of this class is proportional to
+  the block size. Each block has an overhead between 1 and 10 bytes to store
+  the minimum value and the number of bits per value of the block. 
  <p>
- Format:
+  Format: 
  <ul>
- <li>&lt;BLock&gt;<sup>BlockCount</sup>
- <li>BlockCount: &lceil; ValueCount / BlockSize &rceil;
- <li>Block: &lt;Header, (Ints)&gt;
- <li>Header: &lt;Token, (MinValue)&gt;
- <li>Token: a <code>byte</code>, first 7 bits are the
- number of bits per value (<tt>bitsPerValue</tt>). If the 8th bit is 1,
- then MinValue (see next) is <tt>0</tt>, otherwise MinValue and needs to
- be decoded
+  <li>&lt;BLock&gt;<sup>BlockCount</sup>
+  <li>BlockCount: &lceil; ValueCount / BlockSize &rceil;
+  <li>Block: &lt;Header, (Ints)&gt;
+  <li>Header: &lt;Token, (MinValue)&gt;
+  <li>Token: a <code>byte</code>, first 7 bits are the
+      number of bits per value (<tt>bitsPerValue</tt>). If the 8th bit is 1,
+      then MinValue (see next) is <tt>0</tt>, otherwise MinValue and needs to
+      be decoded 
  <li>MinValue: a
- <a href="https://developers.google.com/protocol-buffers/docs/encoding#types">zigzag-encoded</a>
- <code>variable-length long</code> whose value
- should be added to every int from the block to restore the original
- values
+      <a href="https://developers.google.com/protocol-buffers/docs/encoding#types">zigzag-encoded</a>
+      <code>variable-length long</code> whose value
+      should be added to every int from the block to restore the original
+      values 
  <li>Ints: If the number of bits per value is <tt>0</tt>, then there is
- nothing to decode and all ints are equal to MinValue. Otherwise: BlockSize
+      nothing to decode and all ints are equal to MinValue. Otherwise: BlockSize     
  <code>packed ints</code> encoded on exactly <tt>bitsPerValue</tt>
- bits per value. They are the subtraction of the original values and
- MinValue
+      bits per value. They are the subtraction of the original values and
+      MinValue 
  </ul>
  - seealso: BlockPackedReaderIterator
  - seealso: BlockPackedReader
@@ -63,12 +69,17 @@
  @brief Sole constructor.
  @param blockSize the number of values of a single block, must be a power of 2
  */
-- (instancetype)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
-                                               withInt:(jint)blockSize;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
+                                                         withInt:(jint)blockSize;
 
 #pragma mark Protected
 
 - (void)flush;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)arg0
+                                                                       withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -84,4 +95,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedBlockPackedWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedWriter")

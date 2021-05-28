@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter || defined(INCLUDE_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter))
 #define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_
 
@@ -25,11 +31,10 @@
 /*!
  @brief Normalizes Turkish token text to lower case.
  <p>
- Turkish and Azeri have unique casing behavior for some characters. This
- filter applies Turkish lowercase rules. For more information, see <a
- href="http://en.wikipedia.org/wiki/Turkish_dotted_and_dotless_I"
- >http://en.wikipedia.org/wiki/Turkish_dotted_and_dotless_I</a>
- </p>
+  Turkish and Azeri have unique casing behavior for some characters. This
+  filter applies Turkish lowercase rules. For more information, see <a href="http://en.wikipedia.org/wiki/Turkish_dotted_and_dotless_I">
+ http://en.wikipedia.org/wiki/Turkish_dotted_and_dotless_I</a>
+  </p>
  */
 @interface OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -37,10 +42,10 @@
 
 /*!
  @brief Create a new TurkishLowerCaseFilter, that normalizes Turkish token text 
- to lower case.
+  to lower case.
  @param inArg TokenStream to filter
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
 
@@ -58,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter")

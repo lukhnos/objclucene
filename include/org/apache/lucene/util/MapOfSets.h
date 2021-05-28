@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMapOfSets
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMapOfSets_) && (INCLUDE_ALL_OrgApacheLuceneUtilMapOfSets || defined(INCLUDE_OrgApacheLuceneUtilMapOfSets))
 #define OrgApacheLuceneUtilMapOfSets_
 
@@ -30,7 +36,7 @@
 /*!
  @param m the backing store for this object
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)m;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)m;
 
 /*!
  @return direct access to the map backing this object.
@@ -38,9 +44,8 @@
 - (id<JavaUtilMap>)getMap;
 
 /*!
- @brief Adds val to the Set associated with key in the Map.
- If key is not 
- already in the map, a new Set will first be created.
+ @brief Adds val to the Set associated with key in the Map.If key is not 
+  already in the map, a new Set will first be created.
  @return the size of the Set associated with key once val is added to it.
  */
 - (jint)putWithId:(id)key
@@ -49,11 +54,15 @@
 /*!
  @brief Adds multiple vals to the Set associated with key in the Map.
  If key is not 
- already in the map, a new Set will first be created.
+  already in the map, a new Set will first be created.
  @return the size of the Set associated with key once val is added to it.
  */
 - (jint)putAllWithId:(id)key
 withJavaUtilCollection:(id<JavaUtilCollection>)vals;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -69,4 +78,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMapOfSets)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMapOfSets")

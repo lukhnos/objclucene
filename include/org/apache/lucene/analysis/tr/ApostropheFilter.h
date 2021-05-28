@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTrApostropheFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTrApostropheFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilter || defined(INCLUDE_OrgApacheLuceneAnalysisTrApostropheFilter))
 #define OrgApacheLuceneAnalysisTrApostropheFilter_
 
@@ -25,18 +31,18 @@
 /*!
  @brief Strips all characters after an apostrophe (including the apostrophe itself).
  <p>
- In Turkish, apostrophe is used to separate suffixes from proper names
- (continent, sea, river, lake, mountain, upland, proper names related to
- religion and mythology). This filter intended to be used before stem filters.
- For more information, see <a href="http://www.ipcsit.com/vol57/015-ICNI2012-M021.pdf">
- Role of Apostrophes in Turkish Information Retrieval</a>
- </p>
+  In Turkish, apostrophe is used to separate suffixes from proper names
+  (continent, sea, river, lake, mountain, upland, proper names related to
+  religion and mythology). This filter intended to be used before stem filters.
+  For more information, see <a href="http://www.ipcsit.com/vol57/015-ICNI2012-M021.pdf">
+  Role of Apostrophes in Turkish Information Retrieval</a>
+  </p>
  */
 @interface OrgApacheLuceneAnalysisTrApostropheFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
 
@@ -54,4 +60,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTrApostropheFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilter")

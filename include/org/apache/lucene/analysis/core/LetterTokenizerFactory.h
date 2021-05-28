@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory))
 #define OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_
 
@@ -27,11 +33,11 @@
 /*!
  @brief Factory for <code>LetterTokenizer</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_letter" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.LetterTokenizerFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_letter" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.LetterTokenizerFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisCoreLetterTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
@@ -41,7 +47,7 @@
 /*!
  @brief Creates a new LetterTokenizerFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCoreLetterTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
@@ -59,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLetterTokenizerFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory")

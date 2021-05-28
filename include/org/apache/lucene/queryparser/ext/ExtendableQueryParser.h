@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserExtExtendableQueryParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserExtExtendableQueryParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserExtExtendableQueryParser || defined(INCLUDE_OrgApacheLuceneQueryparserExtExtendableQueryParser))
 #define OrgApacheLuceneQueryparserExtExtendableQueryParser_
 
@@ -21,54 +27,57 @@
 #include "org/apache/lucene/queryparser/classic/QueryParser.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
+@class OrgApacheLuceneQueryparserClassicQueryParserTokenManager;
 @class OrgApacheLuceneQueryparserExtExtensions;
 @class OrgApacheLuceneSearchQuery;
+@protocol OrgApacheLuceneQueryparserClassicCharStream;
 
 /*!
  @brief The <code>ExtendableQueryParser</code> enables arbitrary query parser extension
- based on a customizable field naming scheme.
- The lucene query syntax allows
- implicit and explicit field definitions as query prefix followed by a colon
- (':') character. The <code>ExtendableQueryParser</code> allows to encode extension
- keys into the field symbol associated with a registered instance of
+  based on a customizable field naming scheme.The lucene query syntax allows
+  implicit and explicit field definitions as query prefix followed by a colon
+  (':') character.
+ The <code>ExtendableQueryParser</code> allows to encode extension
+  keys into the field symbol associated with a registered instance of 
  <code>ParserExtension</code>. A customizable separation character separates the
- extension key from the actual field symbol. The <code>ExtendableQueryParser</code>
- splits (@@see <code>Extensions.splitExtensionField(String,String)</code>) the
- extension key from the field symbol and tries to resolve the associated
+  extension key from the actual field symbol. The <code>ExtendableQueryParser</code>
+  splits (@@see <code>Extensions.splitExtensionField(String, String)</code>) the
+  extension key from the field symbol and tries to resolve the associated 
  <code>ParserExtension</code>. If the parser can't resolve the key or the field
- token does not contain a separation character, <code>ExtendableQueryParser</code>
- yields the same behavior as its super class <code>QueryParser</code>. Otherwise,
- if the key is associated with a <code>ParserExtension</code> instance, the parser
- builds an instance of <code>ExtensionQuery</code> to be processed by
+  token does not contain a separation character, <code>ExtendableQueryParser</code>
+  yields the same behavior as its super class <code>QueryParser</code>. Otherwise,
+  if the key is associated with a <code>ParserExtension</code> instance, the parser
+  builds an instance of <code>ExtensionQuery</code> to be processed by 
  <code>ParserExtension.parse(ExtensionQuery)</code>.If a extension field does not
- contain a field part the default field for the query will be used.
+  contain a field part the default field for the query will be used. 
  <p>
- To guarantee that an extension field is processed with its associated
- extension, the extension query part must escape any special characters like
- '*' or '['. If the extension query contains any whitespace characters, the
- extension query part must be enclosed in quotes.
- Example ('_' used as separation character):
+  To guarantee that an extension field is processed with its associated
+  extension, the extension query part must escape any special characters like
+  '*' or '['. If the extension query contains any whitespace characters, the
+  extension query part must be enclosed in quotes.
+  Example ('_' used as separation character): 
  @code
 
-   title_customExt:"Apache Lucene\?" OR content_customExt:prefix\
+    title_customExt:"Apache Lucene\?" OR content_customExt:prefix\* 
   
 @endcode
- Search on the default field:
+  
+  Search on the default field: 
  @code
 
-   _customExt:"Apache Lucene\?" OR _customExt:prefix\
+    _customExt:"Apache Lucene\?" OR _customExt:prefix\* 
   
 @endcode
- <p>
- The <code>ExtendableQueryParser</code> itself does not implement the logic how
- field and extension key are separated or ordered. All logic regarding the
- extension key and field symbol parsing is located in <code>Extensions</code>.
- Customized extension schemes should be implemented by sub-classing
+  <p>
+  The <code>ExtendableQueryParser</code> itself does not implement the logic how
+  field and extension key are separated or ordered. All logic regarding the
+  extension key and field symbol parsing is located in <code>Extensions</code>.
+  Customized extension schemes should be implemented by sub-classing 
  <code>Extensions</code>.
- </p>
- <p>
- For details about the default encoding scheme see <code>Extensions</code>.
- </p>
+  </p>
+  <p>
+  For details about the default encoding scheme see <code>Extensions</code>.
+  </p>
  - seealso: Extensions
  - seealso: ParserExtension
  - seealso: ExtensionQuery
@@ -79,25 +88,20 @@
 
 /*!
  @brief Creates a new <code>ExtendableQueryParser</code> instance
- @param f
- the default query field
- @param a
- the analyzer used to find terms in a query string
+ @param f the default query field
+ @param a the analyzer used to find terms in a query string
  */
-- (instancetype)initWithNSString:(NSString *)f
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a;
+- (instancetype __nonnull)initWithNSString:(NSString *)f
+       withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a;
 
 /*!
  @brief Creates a new <code>ExtendableQueryParser</code> instance
- @param f
- the default query field
- @param a
- the analyzer used to find terms in a query string
- @param ext
- the query parser extensions
+ @param f the default query field
+ @param a the analyzer used to find terms in a query string
+ @param ext the query parser extensions
  */
-- (instancetype)initWithNSString:(NSString *)f
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a
+- (instancetype __nonnull)initWithNSString:(NSString *)f
+       withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a
 withOrgApacheLuceneQueryparserExtExtensions:(OrgApacheLuceneQueryparserExtExtensions *)ext;
 
 /*!
@@ -111,6 +115,12 @@ withOrgApacheLuceneQueryparserExtExtensions:(OrgApacheLuceneQueryparserExtExtens
 - (OrgApacheLuceneSearchQuery *)getFieldQueryWithNSString:(NSString *)field
                                              withNSString:(NSString *)queryText
                                               withBoolean:(jboolean)quoted;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserClassicQueryParserTokenManager:(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -132,4 +142,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserExtExtendableQueryParser)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserExtExtendableQueryParser")

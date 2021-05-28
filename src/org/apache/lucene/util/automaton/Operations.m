@@ -37,6 +37,10 @@
 #include "org/apache/lucene/util/automaton/TooComplexToDeterminizeException.h"
 #include "org/apache/lucene/util/automaton/Transition.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/Operations must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilAutomatonOperations ()
 
 - (instancetype)init;
@@ -45,9 +49,8 @@
                                                           withInt:(jint)offset;
 
 /*!
- @brief Returns the set of live states.
- A state is "live" if an accept state is
- reachable from it and if it is reachable from the initial state.
+ @brief Returns the set of live states.A state is "live" if an accept state is
+  reachable from it and if it is reachable from the initial state.
  */
 + (JavaUtilBitSet *)getLiveStatesWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
@@ -64,7 +67,7 @@
 /*!
  @brief Checks whether there is a loop containing state.
  (This is sufficient since
- there are never transitions to dead states.)
+  there are never transitions to dead states.)
  */
 + (jboolean)isFiniteWithOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransition *)scratch
                      withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
@@ -84,9 +87,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonOperations_init(OrgApacheLuceneUtilAutomatonOperations *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations *new_OrgApacheLuceneUtilAutomatonOperations_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations *new_OrgApacheLuceneUtilAutomatonOperations_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations *create_OrgApacheLuceneUtilAutomatonOperations_init();
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations *create_OrgApacheLuceneUtilAutomatonOperations_init(void);
 
 __attribute__((unused)) static id<JavaUtilSet> OrgApacheLuceneUtilAutomatonOperations_toSetWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint offset);
 
@@ -108,9 +111,9 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonOperations_topoS
   jint next_;
 }
 
-- (void)addWithOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransition *)t;
-
 - (instancetype)init;
+
+- (void)addWithOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransition *)t;
 
 @end
 
@@ -120,9 +123,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonOperations_TransitionList, trans
 
 __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonOperations_TransitionList_init(OrgApacheLuceneUtilAutomatonOperations_TransitionList *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_TransitionList *new_OrgApacheLuceneUtilAutomatonOperations_TransitionList_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_TransitionList *new_OrgApacheLuceneUtilAutomatonOperations_TransitionList_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_TransitionList *create_OrgApacheLuceneUtilAutomatonOperations_TransitionList_init();
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_TransitionList *create_OrgApacheLuceneUtilAutomatonOperations_TransitionList_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonOperations_TransitionList)
 
@@ -133,6 +136,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonOperations_TransitionList
   OrgApacheLuceneUtilAutomatonOperations_TransitionList *starts_;
 }
 
+- (instancetype)init;
+
 - (jint)compareToWithId:(OrgApacheLuceneUtilAutomatonOperations_PointTransitions *)other;
 
 - (void)resetWithInt:(jint)point;
@@ -140,8 +145,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonOperations_TransitionList
 - (jboolean)isEqual:(id)other;
 
 - (NSUInteger)hash;
-
-- (instancetype)init;
 
 @end
 
@@ -152,9 +155,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonOperations_PointTransitions, sta
 
 __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonOperations_PointTransitions_init(OrgApacheLuceneUtilAutomatonOperations_PointTransitions *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_PointTransitions *new_OrgApacheLuceneUtilAutomatonOperations_PointTransitions_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_PointTransitions *new_OrgApacheLuceneUtilAutomatonOperations_PointTransitions_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_PointTransitions *create_OrgApacheLuceneUtilAutomatonOperations_PointTransitions_init();
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_PointTransitions *create_OrgApacheLuceneUtilAutomatonOperations_PointTransitions_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonOperations_PointTransitions)
 
@@ -165,6 +168,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonOperations_PointTransitio
   JavaUtilHashMap *map_;
   jboolean useHash_;
 }
+
+- (instancetype)init;
 
 - (OrgApacheLuceneUtilAutomatonOperations_PointTransitions *)nextWithInt:(jint)point;
 
@@ -178,8 +183,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonOperations_PointTransitio
 
 - (NSString *)description;
 
-- (instancetype)init;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet)
@@ -187,19 +190,19 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonOperations_PointTransitionS
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet, points_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet, map_, JavaUtilHashMap *)
 
-inline jint OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_get_HASHMAP_CUTOVER();
+inline jint OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_get_HASHMAP_CUTOVER(void);
 #define OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_HASHMAP_CUTOVER 30
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet, HASHMAP_CUTOVER, jint)
+
+__attribute__((unused)) static void OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *self);
+
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *new_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init(void) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *create_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init(void);
 
 __attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_PointTransitions *OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_nextWithInt_(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *self, jint point);
 
 __attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_PointTransitions *OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_findWithInt_(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *self, jint point);
-
-__attribute__((unused)) static void OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *self);
-
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *new_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init() NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *create_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet)
 
@@ -405,54 +408,99 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Operations", NULL, 0x2, NULL, NULL },
-    { "concatenateWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:", "concatenate", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "concatenateWithJavaUtilList:", "concatenate", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, "(Ljava/util/List<Lorg/apache/lucene/util/automaton/Automaton;>;)Lorg/apache/lucene/util/automaton/Automaton;" },
-    { "optionalWithOrgApacheLuceneUtilAutomatonAutomaton:", "optional", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "repeatWithOrgApacheLuceneUtilAutomatonAutomaton:", "repeat", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "repeatWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "repeat", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "repeatWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withInt:", "repeat", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "toSetWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "toSet", "Ljava.util.Set;", 0xa, NULL, "(Lorg/apache/lucene/util/automaton/Automaton;I)Ljava/util/Set<Ljava/lang/Integer;>;" },
-    { "complementWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "complement", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "minusWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "minus", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "intersectionWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:", "intersection", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "sameLanguageWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:", "sameLanguage", "Z", 0x9, NULL, NULL },
-    { "hasDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton:", "hasDeadStates", "Z", 0x9, NULL, NULL },
-    { "hasDeadStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton:", "hasDeadStatesFromInitial", "Z", 0x9, NULL, NULL },
-    { "hasDeadStatesToAcceptWithOrgApacheLuceneUtilAutomatonAutomaton:", "hasDeadStatesToAccept", "Z", 0x9, NULL, NULL },
-    { "subsetOfWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:", "subsetOf", "Z", 0x9, NULL, NULL },
-    { "union__WithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:", "union", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "union__WithJavaUtilCollection:", "union", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, "(Ljava/util/Collection<Lorg/apache/lucene/util/automaton/Automaton;>;)Lorg/apache/lucene/util/automaton/Automaton;" },
-    { "determinizeWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "determinize", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "isEmptyWithOrgApacheLuceneUtilAutomatonAutomaton:", "isEmpty", "Z", 0x9, NULL, NULL },
-    { "isTotalWithOrgApacheLuceneUtilAutomatonAutomaton:", "isTotal", "Z", 0x9, NULL, NULL },
-    { "isTotalWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withInt:", "isTotal", "Z", 0x9, NULL, NULL },
-    { "runWithOrgApacheLuceneUtilAutomatonAutomaton:withNSString:", "run", "Z", 0x9, NULL, NULL },
-    { "runWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilIntsRef:", "run", "Z", 0x9, NULL, NULL },
-    { "getLiveStatesWithOrgApacheLuceneUtilAutomatonAutomaton:", "getLiveStates", "Ljava.util.BitSet;", 0xa, NULL, NULL },
-    { "getLiveStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton:", "getLiveStatesFromInitial", "Ljava.util.BitSet;", 0xa, NULL, NULL },
-    { "getLiveStatesToAcceptWithOrgApacheLuceneUtilAutomatonAutomaton:", "getLiveStatesToAccept", "Ljava.util.BitSet;", 0xa, NULL, NULL },
-    { "removeDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton:", "removeDeadStates", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "findIndexWithInt:withIntArray:", "findIndex", "I", 0x8, NULL, NULL },
-    { "isFiniteWithOrgApacheLuceneUtilAutomatonAutomaton:", "isFinite", "Z", 0x9, NULL, NULL },
-    { "isFiniteWithOrgApacheLuceneUtilAutomatonTransition:withOrgApacheLuceneUtilAutomatonAutomaton:withInt:withJavaUtilBitSet:withJavaUtilBitSet:", "isFinite", "Z", 0xa, NULL, NULL },
-    { "getCommonPrefixWithOrgApacheLuceneUtilAutomatonAutomaton:", "getCommonPrefix", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "getCommonPrefixBytesRefWithOrgApacheLuceneUtilAutomatonAutomaton:", "getCommonPrefixBytesRef", "Lorg.apache.lucene.util.BytesRef;", 0x9, NULL, NULL },
-    { "getSingletonWithOrgApacheLuceneUtilAutomatonAutomaton:", "getSingleton", "Lorg.apache.lucene.util.IntsRef;", 0x9, NULL, NULL },
-    { "getCommonSuffixBytesRefWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "getCommonSuffixBytesRef", "Lorg.apache.lucene.util.BytesRef;", 0x9, NULL, NULL },
-    { "reverseBytesWithOrgApacheLuceneUtilBytesRef:", "reverseBytes", "V", 0xa, NULL, NULL },
-    { "reverseWithOrgApacheLuceneUtilAutomatonAutomaton:", "reverse", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "reverseWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilSet:", "reverse", "Lorg.apache.lucene.util.automaton.Automaton;", 0x8, NULL, "(Lorg/apache/lucene/util/automaton/Automaton;Ljava/util/Set<Ljava/lang/Integer;>;)Lorg/apache/lucene/util/automaton/Automaton;" },
-    { "totalizeWithOrgApacheLuceneUtilAutomatonAutomaton:", "totalize", "Lorg.apache.lucene.util.automaton.Automaton;", 0x8, NULL, NULL },
-    { "topoSortStatesWithOrgApacheLuceneUtilAutomatonAutomaton:", "topoSortStates", "[I", 0x9, NULL, NULL },
-    { "topoSortStatesRecurseWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilBitSet:withIntArray:withInt:withInt:", "topoSortStatesRecurse", "I", 0xa, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 0, 2, -1, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 6, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 6, 8, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0xa, 9, 7, -1, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 11, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 14, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 15, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 16, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 17, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 18, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 19, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 20, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 20, 21, -1, 22, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 23, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 24, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 25, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 25, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 26, 27, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 26, 28, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilBitSet;", 0xa, 29, 5, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilBitSet;", 0xa, 30, 5, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilBitSet;", 0xa, 31, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 32, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, 33, 34, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 35, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 35, 36, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 37, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x9, 38, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0x9, 39, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x9, 40, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 41, 42, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 43, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x8, 43, 44, -1, 45, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x8, 46, 5, -1, -1, -1, -1 },
+    { NULL, "[I", 0x9, 47, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 48, 49, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(concatenateWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[2].selector = @selector(concatenateWithJavaUtilList:);
+  methods[3].selector = @selector(optionalWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[4].selector = @selector(repeatWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[5].selector = @selector(repeatWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[6].selector = @selector(repeatWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withInt:);
+  methods[7].selector = @selector(toSetWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[8].selector = @selector(complementWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[9].selector = @selector(minusWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[10].selector = @selector(intersectionWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[11].selector = @selector(sameLanguageWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[12].selector = @selector(hasDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[13].selector = @selector(hasDeadStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[14].selector = @selector(hasDeadStatesToAcceptWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[15].selector = @selector(subsetOfWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[16].selector = @selector(union__WithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[17].selector = @selector(union__WithJavaUtilCollection:);
+  methods[18].selector = @selector(determinizeWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[19].selector = @selector(isEmptyWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[20].selector = @selector(isTotalWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[21].selector = @selector(isTotalWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withInt:);
+  methods[22].selector = @selector(runWithOrgApacheLuceneUtilAutomatonAutomaton:withNSString:);
+  methods[23].selector = @selector(runWithOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilIntsRef:);
+  methods[24].selector = @selector(getLiveStatesWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[25].selector = @selector(getLiveStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[26].selector = @selector(getLiveStatesToAcceptWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[27].selector = @selector(removeDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[28].selector = @selector(findIndexWithInt:withIntArray:);
+  methods[29].selector = @selector(isFiniteWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[30].selector = @selector(isFiniteWithOrgApacheLuceneUtilAutomatonTransition:withOrgApacheLuceneUtilAutomatonAutomaton:withInt:withJavaUtilBitSet:withJavaUtilBitSet:);
+  methods[31].selector = @selector(getCommonPrefixWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[32].selector = @selector(getCommonPrefixBytesRefWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[33].selector = @selector(getSingletonWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[34].selector = @selector(getCommonSuffixBytesRefWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[35].selector = @selector(reverseBytesWithOrgApacheLuceneUtilBytesRef:);
+  methods[36].selector = @selector(reverseWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[37].selector = @selector(reverseWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilSet:);
+  methods[38].selector = @selector(totalizeWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[39].selector = @selector(topoSortStatesWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[40].selector = @selector(topoSortStatesRecurseWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilBitSet:withIntArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_MAX_DETERMINIZED_STATES", "DEFAULT_MAX_DETERMINIZED_STATES", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES },
+    { "DEFAULT_MAX_DETERMINIZED_STATES", "I", .constantValue.asInt = OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES, 0x19, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.Operations$TransitionList;", "Lorg.apache.lucene.util.automaton.Operations$PointTransitions;", "Lorg.apache.lucene.util.automaton.Operations$PointTransitionSet;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonOperations = { 2, "Operations", "org.apache.lucene.util.automaton", NULL, 0x11, 41, methods, 1, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "concatenate", "LOrgApacheLuceneUtilAutomatonAutomaton;LOrgApacheLuceneUtilAutomatonAutomaton;", "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/util/automaton/Automaton;>;)Lorg/apache/lucene/util/automaton/Automaton;", "optional", "LOrgApacheLuceneUtilAutomatonAutomaton;", "repeat", "LOrgApacheLuceneUtilAutomatonAutomaton;I", "LOrgApacheLuceneUtilAutomatonAutomaton;II", "toSet", "(Lorg/apache/lucene/util/automaton/Automaton;I)Ljava/util/Set<Ljava/lang/Integer;>;", "complement", "minus", "LOrgApacheLuceneUtilAutomatonAutomaton;LOrgApacheLuceneUtilAutomatonAutomaton;I", "intersection", "sameLanguage", "hasDeadStates", "hasDeadStatesFromInitial", "hasDeadStatesToAccept", "subsetOf", "union", "LJavaUtilCollection;", "(Ljava/util/Collection<Lorg/apache/lucene/util/automaton/Automaton;>;)Lorg/apache/lucene/util/automaton/Automaton;", "determinize", "isEmpty", "isTotal", "run", "LOrgApacheLuceneUtilAutomatonAutomaton;LNSString;", "LOrgApacheLuceneUtilAutomatonAutomaton;LOrgApacheLuceneUtilIntsRef;", "getLiveStates", "getLiveStatesFromInitial", "getLiveStatesToAccept", "removeDeadStates", "findIndex", "I[I", "isFinite", "LOrgApacheLuceneUtilAutomatonTransition;LOrgApacheLuceneUtilAutomatonAutomaton;ILJavaUtilBitSet;LJavaUtilBitSet;", "getCommonPrefix", "getCommonPrefixBytesRef", "getSingleton", "getCommonSuffixBytesRef", "reverseBytes", "LOrgApacheLuceneUtilBytesRef;", "reverse", "LOrgApacheLuceneUtilAutomatonAutomaton;LJavaUtilSet;", "(Lorg/apache/lucene/util/automaton/Automaton;Ljava/util/Set<Ljava/lang/Integer;>;)Lorg/apache/lucene/util/automaton/Automaton;", "totalize", "topoSortStates", "topoSortStatesRecurse", "LOrgApacheLuceneUtilAutomatonAutomaton;LJavaUtilBitSet;[III", "LOrgApacheLuceneUtilAutomatonOperations_TransitionList;LOrgApacheLuceneUtilAutomatonOperations_PointTransitions;LOrgApacheLuceneUtilAutomatonOperations_PointTransitionSet;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonOperations = { "Operations", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x11, 41, 1, -1, 50, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonOperations;
 }
 
@@ -491,7 +539,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_co
   jint stateOffset = 0;
   OrgApacheLuceneUtilAutomatonTransition *t = create_OrgApacheLuceneUtilAutomatonTransition_init();
   for (jint i = 0; i < [l size]; i++) {
-    OrgApacheLuceneUtilAutomatonAutomaton *a = [l getWithInt:i];
+    OrgApacheLuceneUtilAutomatonAutomaton *a = JreRetainedLocalValue([l getWithInt:i]);
     jint numStates = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumStates];
     OrgApacheLuceneUtilAutomatonAutomaton *nextA = (i == [l size] - 1) ? nil : [l getWithInt:i + 1];
     for (jint s = 0; s < numStates; s++) {
@@ -501,7 +549,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_co
         [result addTransitionWithInt:stateOffset + s withInt:stateOffset + t->dest_ withInt:t->min_ withInt:t->max_];
       }
       if ([a isAcceptWithInt:s]) {
-        OrgApacheLuceneUtilAutomatonAutomaton *followA = nextA;
+        OrgApacheLuceneUtilAutomatonAutomaton *followA = JreRetainedLocalValue(nextA);
         jint followOffset = stateOffset;
         jint upto = i + 1;
         while (true) {
@@ -628,7 +676,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_re
 id<JavaUtilSet> OrgApacheLuceneUtilAutomatonOperations_toSetWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint offset) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
   jint numStates = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumStates];
-  JavaUtilBitSet *isAccept = [a getAcceptStates];
+  JavaUtilBitSet *isAccept = JreRetainedLocalValue([a getAcceptStates]);
   id<JavaUtilSet> result = create_JavaUtilHashSet_init();
   jint upto = 0;
   while (upto < numStates && (upto = [((JavaUtilBitSet *) nil_chk(isAccept)) nextSetBitWithInt:upto]) != -1) {
@@ -650,7 +698,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_co
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_minusWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a1, OrgApacheLuceneUtilAutomatonAutomaton *a2, jint maxDeterminizedStates) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
-  if (OrgApacheLuceneUtilAutomatonOperations_isEmptyWithOrgApacheLuceneUtilAutomatonAutomaton_(a1) || a1 == a2) {
+  if (OrgApacheLuceneUtilAutomatonOperations_isEmptyWithOrgApacheLuceneUtilAutomatonAutomaton_(a1) || JreObjectEqualsEquals(a1, a2)) {
     return OrgApacheLuceneUtilAutomatonAutomata_makeEmpty();
   }
   if (OrgApacheLuceneUtilAutomatonOperations_isEmptyWithOrgApacheLuceneUtilAutomatonAutomaton_(a2)) {
@@ -661,7 +709,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_mi
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_intersectionWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a1, OrgApacheLuceneUtilAutomatonAutomaton *a2) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
-  if (a1 == a2) {
+  if (JreObjectEqualsEquals(a1, a2)) {
     return a1;
   }
   if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a1)) getNumStates] == 0) {
@@ -688,7 +736,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_in
       while (b2 < ((IOSObjectArray *) nil_chk(t2))->size_ && ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, b2)))->max_ < ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->min_) b2++;
       for (jint n2 = b2; n2 < t2->size_ && ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->max_ >= ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, n2)))->min_; n2++) if (((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, n2)))->max_ >= ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->min_) {
         OrgApacheLuceneUtilAutomatonStatePair *q = create_OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_(((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->dest_, ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, n2)))->dest_);
-        OrgApacheLuceneUtilAutomatonStatePair *r = [newstates getWithId:q];
+        OrgApacheLuceneUtilAutomatonStatePair *r = JreRetainedLocalValue([newstates getWithId:q]);
         if (r == nil) {
           q->s_ = [c createState];
           [worklist addWithId:q];
@@ -707,7 +755,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_in
 
 jboolean OrgApacheLuceneUtilAutomatonOperations_sameLanguageWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a1, OrgApacheLuceneUtilAutomatonAutomaton *a2) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
-  if (a1 == a2) {
+  if (JreObjectEqualsEquals(a1, a2)) {
     return true;
   }
   return OrgApacheLuceneUtilAutomatonOperations_subsetOfWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(a2, a1) && OrgApacheLuceneUtilAutomatonOperations_subsetOfWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(a1, a2);
@@ -718,7 +766,7 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesWithOrgApacheLucene
   JavaUtilBitSet *liveStates = OrgApacheLuceneUtilAutomatonOperations_getLiveStatesWithOrgApacheLuceneUtilAutomatonAutomaton_(a);
   jint numLive = [((JavaUtilBitSet *) nil_chk(liveStates)) cardinality];
   jint numStates = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumStates];
-  JreAssert((numLive <= numStates), (JreStrcat("$I$IC@", @"numLive=", numLive, @" numStates=", numStates, ' ', liveStates)));
+  JreAssert(numLive <= numStates, JreStrcat("$I$IC@", @"numLive=", numLive, @" numStates=", numStates, ' ', liveStates));
   return numLive < numStates;
 }
 
@@ -746,8 +794,8 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_subsetOfWithOrgApacheLuceneUtilA
   if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a2)) isDeterministic] == false) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"a2 must be deterministic");
   }
-  JreAssert((OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton_(a1) == false), (@"org/apache/lucene/util/automaton/Operations.java:428 condition failed: assert hasDeadStatesFromInitial(a1) == false;"));
-  JreAssert((OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton_(a2) == false), (@"org/apache/lucene/util/automaton/Operations.java:429 condition failed: assert hasDeadStatesFromInitial(a2) == false;"));
+  JreAssert(OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton_(a1) == false, @"org/apache/lucene/util/automaton/Operations.java:428 condition failed: assert hasDeadStatesFromInitial(a1) == false;");
+  JreAssert(OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton_(a2) == false, @"org/apache/lucene/util/automaton/Operations.java:429 condition failed: assert hasDeadStatesFromInitial(a2) == false;");
   if ([a1 getNumStates] == 0) {
     return true;
   }
@@ -772,7 +820,8 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_subsetOfWithOrgApacheLuceneUtilA
       while (b2 < ((IOSObjectArray *) nil_chk(t2))->size_ && ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, b2)))->max_ < ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->min_) {
         b2++;
       }
-      jint min1 = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->min_, max1 = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->max_;
+      jint min1 = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->min_;
+      jint max1 = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->max_;
       for (jint n2 = b2; n2 < t2->size_ && ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->max_ >= ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, n2)))->min_; n2++) {
         if (((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, n2)))->min_ > min1) {
           return false;
@@ -839,10 +888,10 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_de
   [b setAcceptWithInt:0 withBoolean:[a isAcceptWithInt:0]];
   [newstate putWithId:initialset withId:JavaLangInteger_valueOfWithInt_(0)];
   OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *points = create_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init();
-  OrgApacheLuceneUtilAutomatonSortedIntSet *statesSet = create_OrgApacheLuceneUtilAutomatonSortedIntSet_initWithInt_(5);
+  OrgApacheLuceneUtilAutomatonSortedIntSet *statesSet = create_OrgApacheLuceneUtilAutomatonSortedIntSet_initPackagePrivateWithInt_(5);
   OrgApacheLuceneUtilAutomatonTransition *t = create_OrgApacheLuceneUtilAutomatonTransition_init();
   while ([worklist size] > 0) {
-    OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *s = [worklist removeFirst];
+    OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *s = JreRetainedLocalValue([worklist removeFirst]);
     for (jint i = 0; i < ((IOSIntArray *) nil_chk(((OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) nil_chk(s))->values_))->size_; i++) {
       jint s0 = IOSIntArray_Get(s->values_, i);
       jint numTransitions = [a getNumTransitionsWithInt:s0];
@@ -862,9 +911,9 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_de
     for (jint i = 0; i < points->count_; i++) {
       jint point = ((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(IOSObjectArray_Get(nil_chk(points->points_), i)))->point_;
       if (statesSet->upto_ > 0) {
-        JreAssert((lastPoint != -1), (@"org/apache/lucene/util/automaton/Operations.java:735 condition failed: assert lastPoint != -1;"));
+        JreAssert(lastPoint != -1, @"org/apache/lucene/util/automaton/Operations.java:735 condition failed: assert lastPoint != -1;");
         [statesSet computeHash];
-        JavaLangInteger *q = [newstate getWithId:statesSet];
+        JavaLangInteger *q = JreRetainedLocalValue([newstate getWithId:statesSet]);
         if (q == nil) {
           q = JavaLangInteger_valueOfWithInt_([b createState]);
           if ([q intValue] >= maxDeterminizedStates) {
@@ -876,7 +925,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_de
           [newstate putWithId:p withId:q];
         }
         else {
-          JreAssert(((accCount > 0 ? true : false) == [b isAcceptWithInt:[q intValue]]), (JreStrcat("$I$Z$@", @"accCount=", accCount, @" vs existing accept=", [b isAcceptWithInt:[q intValue]], @" states=", statesSet)));
+          JreAssert((accCount > 0 ? true : false) == [b isAcceptWithInt:[q intValue]], JreStrcat("$I$Z$@", @"accCount=", accCount, @" vs existing accept=", [b isAcceptWithInt:[q intValue]], @" states=", statesSet));
         }
         [b addTransitionWithInt:r withInt:[q intValue] withInt:lastPoint withInt:point - 1];
       }
@@ -899,10 +948,10 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_de
       ((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(IOSObjectArray_Get(nil_chk(points->points_), i)))->starts_->next_ = 0;
     }
     [points reset];
-    JreAssert((statesSet->upto_ == 0), (JreStrcat("$I", @"upto=", statesSet->upto_)));
+    JreAssert(statesSet->upto_ == 0, JreStrcat("$I", @"upto=", statesSet->upto_));
   }
-  OrgApacheLuceneUtilAutomatonAutomaton *result = [b finish];
-  JreAssert(([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(result)) isDeterministic]), (@"org/apache/lucene/util/automaton/Operations.java:788 condition failed: assert result.isDeterministic();"));
+  OrgApacheLuceneUtilAutomatonAutomaton *result = JreRetainedLocalValue([b finish]);
+  JreAssert([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(result)) isDeterministic], @"org/apache/lucene/util/automaton/Operations.java:788 condition failed: assert result.isDeterministic();");
   return result;
 }
 
@@ -956,10 +1005,10 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_isTotalWithOrgApacheLuceneUtilAu
 
 jboolean OrgApacheLuceneUtilAutomatonOperations_runWithOrgApacheLuceneUtilAutomatonAutomaton_withNSString_(OrgApacheLuceneUtilAutomatonAutomaton *a, NSString *s) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
-  JreAssert(([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isDeterministic]), (@"org/apache/lucene/util/automaton/Operations.java:863 condition failed: assert a.isDeterministic();"));
+  JreAssert([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isDeterministic], @"org/apache/lucene/util/automaton/Operations.java:863 condition failed: assert a.isDeterministic();");
   jint state = 0;
-  for (jint i = 0, cp = 0; i < ((jint) [((NSString *) nil_chk(s)) length]); i += JavaLangCharacter_charCountWithInt_(cp)) {
-    jint nextState = [a stepWithInt:state withInt:cp = [s codePointAt:i]];
+  for (jint i = 0, cp = 0; i < [((NSString *) nil_chk(s)) java_length]; i += JavaLangCharacter_charCountWithInt_(cp)) {
+    jint nextState = [a stepWithInt:state withInt:cp = [s java_codePointAt:i]];
     if (nextState == -1) {
       return false;
     }
@@ -970,7 +1019,7 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_runWithOrgApacheLuceneUtilAutoma
 
 jboolean OrgApacheLuceneUtilAutomatonOperations_runWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilIntsRef_(OrgApacheLuceneUtilAutomatonAutomaton *a, OrgApacheLuceneUtilIntsRef *s) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
-  JreAssert(([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isDeterministic]), (@"org/apache/lucene/util/automaton/Operations.java:883 condition failed: assert a.isDeterministic();"));
+  JreAssert([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isDeterministic], @"org/apache/lucene/util/automaton/Operations.java:883 condition failed: assert a.isDeterministic();");
   jint state = 0;
   for (jint i = 0; i < ((OrgApacheLuceneUtilIntsRef *) nil_chk(s))->length_; i++) {
     jint nextState = [a stepWithInt:state withInt:IOSIntArray_Get(nil_chk(s->ints_), s->offset_ + i)];
@@ -1029,10 +1078,10 @@ JavaUtilBitSet *OrgApacheLuceneUtilAutomatonOperations_getLiveStatesToAcceptWith
       [builder addTransitionWithInt:t->dest_ withInt:s withInt:t->min_ withInt:t->max_];
     }
   }
-  OrgApacheLuceneUtilAutomatonAutomaton *a2 = [builder finish];
+  OrgApacheLuceneUtilAutomatonAutomaton *a2 = JreRetainedLocalValue([builder finish]);
   JavaUtilLinkedList *workList = create_JavaUtilLinkedList_init();
   JavaUtilBitSet *live = create_JavaUtilBitSet_initWithInt_(numStates);
-  JavaUtilBitSet *acceptBits = [a getAcceptStates];
+  JavaUtilBitSet *acceptBits = JreRetainedLocalValue([a getAcceptStates]);
   jint s = 0;
   while (s < numStates && (s = [((JavaUtilBitSet *) nil_chk(acceptBits)) nextSetBitWithInt:s]) != -1) {
     [live setWithInt:s];
@@ -1078,7 +1127,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_re
     }
   }
   [result finishState];
-  JreAssert((OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton_(result) == false), (@"org/apache/lucene/util/automaton/Operations.java:1011 condition failed: assert hasDeadStates(result) == false;"));
+  JreAssert(OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton_(result) == false, @"org/apache/lucene/util/automaton/Operations.java:1011 condition failed: assert hasDeadStates(result) == false;");
   return result;
 }
 
@@ -1240,9 +1289,9 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_re
       [builder addTransitionWithInt:t->dest_ + 1 withInt:s + 1 withInt:t->min_ withInt:t->max_];
     }
   }
-  OrgApacheLuceneUtilAutomatonAutomaton *result = [builder finish];
+  OrgApacheLuceneUtilAutomatonAutomaton *result = JreRetainedLocalValue([builder finish]);
   jint s = 0;
-  JavaUtilBitSet *acceptStates = [a getAcceptStates];
+  JavaUtilBitSet *acceptStates = JreRetainedLocalValue([a getAcceptStates]);
   while (s < numStates && (s = [((JavaUtilBitSet *) nil_chk(acceptStates)) nextSetBitWithInt:s]) != -1) {
     [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(result)) addEpsilonWithInt:0 withInt:s + 1];
     if (initialStates != nil) {
@@ -1300,7 +1349,7 @@ IOSIntArray *OrgApacheLuceneUtilAutomatonOperations_topoSortStatesWithOrgApacheL
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(states, 0, newStates, 0, upto);
     states = newStates;
   }
-  for (jint i = 0; i < states->size_ / 2; i++) {
+  for (jint i = 0; i < JreIntDiv(states->size_, 2); i++) {
     jint s = IOSIntArray_Get(states, i);
     *IOSIntArray_GetRef(states, i) = IOSIntArray_Get(states, states->size_ - 1 - i);
     *IOSIntArray_GetRef(states, states->size_ - 1 - i) = s;
@@ -1328,6 +1377,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations)
 
 @implementation OrgApacheLuceneUtilAutomatonOperations_TransitionList
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilAutomatonOperations_TransitionList_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)addWithOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransition *)t {
   if (((IOSIntArray *) nil_chk(transitions_))->size_ < next_ + 3) {
     JreStrongAssign(&transitions_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(transitions_, next_ + 3));
@@ -1338,28 +1394,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations)
   next_ += 3;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilAutomatonOperations_TransitionList_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(transitions_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addWithOrgApacheLuceneUtilAutomatonTransition:", "add", "V", 0x1, NULL, NULL },
-    { "init", "TransitionList", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(addWithOrgApacheLuceneUtilAutomatonTransition:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "transitions_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "transitions_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "next_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonOperations_TransitionList = { 2, "TransitionList", "org.apache.lucene.util.automaton", "Operations", 0x1a, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "add", "LOrgApacheLuceneUtilAutomatonTransition;", "LOrgApacheLuceneUtilAutomatonOperations;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonOperations_TransitionList = { "TransitionList", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x1a, 2, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonOperations_TransitionList;
 }
 
@@ -1382,6 +1438,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations_Transiti
 
 @implementation OrgApacheLuceneUtilAutomatonOperations_PointTransitions
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilAutomatonOperations_PointTransitions_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (jint)compareToWithId:(OrgApacheLuceneUtilAutomatonOperations_PointTransitions *)other {
   cast_chk(other, [OrgApacheLuceneUtilAutomatonOperations_PointTransitions class]);
   return point_ - ((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(other))->point_;
@@ -1401,13 +1464,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations_Transiti
   return point_;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilAutomatonOperations_PointTransitions_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(ends_);
   RELEASE_(starts_);
@@ -1415,19 +1471,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
-    { "resetWithInt:", "reset", "V", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", "PointTransitions", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareToWithId:);
+  methods[2].selector = @selector(resetWithInt:);
+  methods[3].selector = @selector(isEqual:);
+  methods[4].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "point_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ends_", NULL, 0x10, "Lorg.apache.lucene.util.automaton.Operations$TransitionList;", NULL, NULL, .constantValue.asLong = 0 },
-    { "starts_", NULL, 0x10, "Lorg.apache.lucene.util.automaton.Operations$TransitionList;", NULL, NULL, .constantValue.asLong = 0 },
+    { "point_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ends_", "LOrgApacheLuceneUtilAutomatonOperations_TransitionList;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "starts_", "LOrgApacheLuceneUtilAutomatonOperations_TransitionList;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonOperations_PointTransitions = { 2, "PointTransitions", "org.apache.lucene.util.automaton", "Operations", 0x1a, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/automaton/Operations$PointTransitions;>;" };
+  static const void *ptrTable[] = { "compareTo", "LOrgApacheLuceneUtilAutomatonOperations_PointTransitions;", "reset", "I", "equals", "LNSObject;", "hashCode", "LOrgApacheLuceneUtilAutomatonOperations;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/automaton/Operations$PointTransitions;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonOperations_PointTransitions = { "PointTransitions", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x1a, 5, 3, 7, -1, -1, 8, -1 };
   return &_OrgApacheLuceneUtilAutomatonOperations_PointTransitions;
 }
 
@@ -1450,6 +1516,13 @@ OrgApacheLuceneUtilAutomatonOperations_PointTransitions *create_OrgApacheLuceneU
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations_PointTransitions)
 
 @implementation OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilAutomatonOperations_PointTransitions *)nextWithInt:(jint)point {
   return OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_nextWithInt_(self, point);
@@ -1482,17 +1555,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations_PointTra
     if (i > 0) {
       [s appendWithChar:' '];
     }
-    [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([s appendWithInt:((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(IOSObjectArray_Get(nil_chk(points_), i)))->point_])) appendWithChar:':'])) appendWithInt:((OrgApacheLuceneUtilAutomatonOperations_TransitionList *) nil_chk(((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(IOSObjectArray_Get(nil_chk(points_), i)))->starts_))->next_ / 3])) appendWithChar:','])) appendWithInt:((OrgApacheLuceneUtilAutomatonOperations_TransitionList *) nil_chk(((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(IOSObjectArray_Get(nil_chk(points_), i)))->ends_))->next_ / 3];
+    [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([s appendWithInt:((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(IOSObjectArray_Get(nil_chk(points_), i)))->point_])) appendWithChar:':'])) appendWithInt:JreIntDiv(((OrgApacheLuceneUtilAutomatonOperations_TransitionList *) nil_chk(((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(IOSObjectArray_Get(nil_chk(points_), i)))->starts_))->next_, 3)])) appendWithChar:','])) appendWithInt:JreIntDiv(((OrgApacheLuceneUtilAutomatonOperations_TransitionList *) nil_chk(((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(IOSObjectArray_Get(nil_chk(points_), i)))->ends_))->next_, 3)];
   }
   return [s description];
 }
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(points_);
@@ -1501,27 +1567,54 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "nextWithInt:", "next", "Lorg.apache.lucene.util.automaton.Operations$PointTransitions;", 0x2, NULL, NULL },
-    { "findWithInt:", "find", "Lorg.apache.lucene.util.automaton.Operations$PointTransitions;", 0x2, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "sort", NULL, "V", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneUtilAutomatonTransition:", "add", "V", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "PointTransitionSet", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonOperations_PointTransitions;", 0x2, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonOperations_PointTransitions;", 0x2, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(nextWithInt:);
+  methods[2].selector = @selector(findWithInt:);
+  methods[3].selector = @selector(reset);
+  methods[4].selector = @selector(sort);
+  methods[5].selector = @selector(addWithOrgApacheLuceneUtilAutomatonTransition:);
+  methods[6].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "count_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "points_", NULL, 0x0, "[Lorg.apache.lucene.util.automaton.Operations$PointTransitions;", NULL, NULL, .constantValue.asLong = 0 },
-    { "HASHMAP_CUTOVER", "HASHMAP_CUTOVER", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_HASHMAP_CUTOVER },
-    { "map_", NULL, 0x12, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/Integer;Lorg/apache/lucene/util/automaton/Operations$PointTransitions;>;", .constantValue.asLong = 0 },
-    { "useHash_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "count_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "points_", "[LOrgApacheLuceneUtilAutomatonOperations_PointTransitions;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "HASHMAP_CUTOVER", "I", .constantValue.asInt = OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_HASHMAP_CUTOVER, 0x1a, -1, -1, -1, -1 },
+    { "map_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
+    { "useHash_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet = { 2, "PointTransitionSet", "org.apache.lucene.util.automaton", "Operations", 0x1a, 7, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "next", "I", "find", "add", "LOrgApacheLuceneUtilAutomatonTransition;", "toString", "Ljava/util/HashMap<Ljava/lang/Integer;Lorg/apache/lucene/util/automaton/Operations$PointTransitions;>;", "LOrgApacheLuceneUtilAutomatonOperations;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet = { "PointTransitionSet", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x1a, 7, 5, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet;
 }
 
 @end
+
+void OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *self) {
+  NSObject_init(self);
+  JreStrongAssignAndConsume(&self->points_, [IOSObjectArray newArrayWithLength:5 type:OrgApacheLuceneUtilAutomatonOperations_PointTransitions_class_()]);
+  JreStrongAssignAndConsume(&self->map_, new_JavaUtilHashMap_init());
+  self->useHash_ = false;
+}
+
+OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *new_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet, init)
+}
+
+OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *create_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet, init)
+}
 
 OrgApacheLuceneUtilAutomatonOperations_PointTransitions *OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_nextWithInt_(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *self, jint point) {
   if (self->count_ == ((IOSObjectArray *) nil_chk(self->points_))->size_) {
@@ -1541,7 +1634,7 @@ OrgApacheLuceneUtilAutomatonOperations_PointTransitions *OrgApacheLuceneUtilAuto
 OrgApacheLuceneUtilAutomatonOperations_PointTransitions *OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_findWithInt_(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *self, jint point) {
   if (self->useHash_) {
     JavaLangInteger *pi = JavaLangInteger_valueOfWithInt_(point);
-    OrgApacheLuceneUtilAutomatonOperations_PointTransitions *p = [((JavaUtilHashMap *) nil_chk(self->map_)) getWithId:pi];
+    OrgApacheLuceneUtilAutomatonOperations_PointTransitions *p = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(self->map_)) getWithId:pi]);
     if (p == nil) {
       p = OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_nextWithInt_(self, point);
       [self->map_ putWithId:pi withId:p];
@@ -1556,7 +1649,7 @@ OrgApacheLuceneUtilAutomatonOperations_PointTransitions *OrgApacheLuceneUtilAuto
     }
     OrgApacheLuceneUtilAutomatonOperations_PointTransitions *p = OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_nextWithInt_(self, point);
     if (self->count_ == OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_HASHMAP_CUTOVER) {
-      JreAssert(([((JavaUtilHashMap *) nil_chk(self->map_)) size] == 0), (@"org/apache/lucene/util/automaton/Operations.java:613 condition failed: assert map.size() == 0;"));
+      JreAssert([((JavaUtilHashMap *) nil_chk(self->map_)) size] == 0, @"org/apache/lucene/util/automaton/Operations.java:613 condition failed: assert map.size() == 0;");
       for (jint i = 0; i < self->count_; i++) {
         [self->map_ putWithId:JavaLangInteger_valueOfWithInt_(((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(IOSObjectArray_Get(nil_chk(self->points_), i)))->point_) withId:IOSObjectArray_Get(self->points_, i)];
       }
@@ -1564,21 +1657,6 @@ OrgApacheLuceneUtilAutomatonOperations_PointTransitions *OrgApacheLuceneUtilAuto
     }
     return p;
   }
-}
-
-void OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *self) {
-  NSObject_init(self);
-  JreStrongAssignAndConsume(&self->points_, [IOSObjectArray newArrayWithLength:5 type:OrgApacheLuceneUtilAutomatonOperations_PointTransitions_class_()]);
-  JreStrongAssignAndConsume(&self->map_, new_JavaUtilHashMap_init());
-  self->useHash_ = false;
-}
-
-OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *new_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet, init)
-}
-
-OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *create_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet)

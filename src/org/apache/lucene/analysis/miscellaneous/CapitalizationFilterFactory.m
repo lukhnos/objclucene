@@ -15,9 +15,12 @@
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/CapitalizationFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/CapitalizationFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/CapitalizationFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP = @"keep";
 NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP_IGNORE_CASE = @"keepIgnoreCase";
@@ -78,28 +81,35 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_FORCE_
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "CapitalizationFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.miscellaneous.CapitalizationFilter;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "KEEP", "KEEP", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP, NULL, .constantValue.asLong = 0 },
-    { "KEEP_IGNORE_CASE", "KEEP_IGNORE_CASE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP_IGNORE_CASE, NULL, .constantValue.asLong = 0 },
-    { "OK_PREFIX", "OK_PREFIX", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_OK_PREFIX, NULL, .constantValue.asLong = 0 },
-    { "MIN_WORD_LENGTH", "MIN_WORD_LENGTH", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MIN_WORD_LENGTH, NULL, .constantValue.asLong = 0 },
-    { "MAX_WORD_COUNT", "MAX_WORD_COUNT", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MAX_WORD_COUNT, NULL, .constantValue.asLong = 0 },
-    { "MAX_TOKEN_LENGTH", "MAX_TOKEN_LENGTH", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MAX_TOKEN_LENGTH, NULL, .constantValue.asLong = 0 },
-    { "ONLY_FIRST_WORD", "ONLY_FIRST_WORD", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_ONLY_FIRST_WORD, NULL, .constantValue.asLong = 0 },
-    { "FORCE_FIRST_LETTER", "FORCE_FIRST_LETTER", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_FORCE_FIRST_LETTER, NULL, .constantValue.asLong = 0 },
-    { "keep_", NULL, 0x0, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "okPrefix_", NULL, 0x0, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<[LC;>;", .constantValue.asLong = 0 },
-    { "minWordLength_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxWordCount_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTokenLength_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "onlyFirstWord_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "forceFirstLetter_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "KEEP", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "KEEP_IGNORE_CASE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 5, -1, -1 },
+    { "OK_PREFIX", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 6, -1, -1 },
+    { "MIN_WORD_LENGTH", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 7, -1, -1 },
+    { "MAX_WORD_COUNT", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 8, -1, -1 },
+    { "MAX_TOKEN_LENGTH", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 9, -1, -1 },
+    { "ONLY_FIRST_WORD", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 10, -1, -1 },
+    { "FORCE_FIRST_LETTER", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 11, -1, -1 },
+    { "keep_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "okPrefix_", "LJavaUtilCollection;", .constantValue.asLong = 0, 0x0, -1, -1, 12, -1 },
+    { "minWordLength_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxWordCount_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxTokenLength_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "onlyFirstWord_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "forceFirstLetter_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory = { 2, "CapitalizationFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 15, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LOrgApacheLuceneAnalysisTokenStream;", &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP, &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP_IGNORE_CASE, &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_OK_PREFIX, &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MIN_WORD_LENGTH, &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MAX_WORD_COUNT, &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MAX_TOKEN_LENGTH, &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_ONLY_FIRST_WORD, &OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_FORCE_FIRST_LETTER, "Ljava/util/Collection<[C>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory = { "CapitalizationFilterFactory", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x1, 2, 15, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory;
 }
 
@@ -109,7 +119,7 @@ void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_initWithJav
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssign(&self->okPrefix_, JavaUtilCollections_emptyList());
   jboolean ignoreCase = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP_IGNORE_CASE withBoolean:false];
-  id<JavaUtilSet> k = [self getSetWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP];
+  id<JavaUtilSet> k = JreRetainedLocalValue([self getSetWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP]);
   if (k != nil) {
     JreStrongAssignAndConsume(&self->keep_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(10, ignoreCase));
     [self->keep_ addAllWithJavaUtilCollection:k];
@@ -118,7 +128,7 @@ void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_initWithJav
   if (k != nil) {
     JreStrongAssignAndConsume(&self->okPrefix_, new_JavaUtilArrayList_init());
     for (NSString * __strong item in k) {
-      [((id<JavaUtilCollection>) nil_chk(self->okPrefix_)) addWithId:[((NSString *) nil_chk(item)) toCharArray]];
+      [((id<JavaUtilCollection>) nil_chk(self->okPrefix_)) addWithId:[((NSString *) nil_chk(item)) java_toCharArray]];
     }
   }
   self->minWordLength_ = [self getIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MIN_WORD_LENGTH withInt:0];

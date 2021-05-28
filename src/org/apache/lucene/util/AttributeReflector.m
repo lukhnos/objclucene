@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/util/AttributeReflector.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/AttributeReflector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilAttributeReflector : NSObject
 
 @end
@@ -13,10 +17,16 @@
 @implementation OrgApacheLuceneUtilAttributeReflector
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "reflectWithIOSClass:withNSString:withId:", "reflect", "V", 0x401, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;Ljava/lang/String;Ljava/lang/Object;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, 2, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeReflector = { 2, "AttributeReflector", "org.apache.lucene.util", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(reflectWithIOSClass:withNSString:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "reflect", "LIOSClass;LNSString;LNSObject;", "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;Ljava/lang/String;Ljava/lang/Object;)V" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeReflector = { "AttributeReflector", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAttributeReflector;
 }
 

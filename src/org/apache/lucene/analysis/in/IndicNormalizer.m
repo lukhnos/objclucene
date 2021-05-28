@@ -16,6 +16,10 @@
 
 @class OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/in/IndicNormalizer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisInIndicNormalizer ()
 
 + (jint)flagWithJavaLangCharacter_UnicodeBlock:(JavaLangCharacter_UnicodeBlock *)ub;
@@ -32,21 +36,21 @@ withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData:(OrgApacheLuceneAnalysis
 
 @end
 
-inline JavaUtilIdentityHashMap *OrgApacheLuceneAnalysisInIndicNormalizer_get_scripts();
+inline JavaUtilIdentityHashMap *OrgApacheLuceneAnalysisInIndicNormalizer_get_scripts(void);
 static JavaUtilIdentityHashMap *OrgApacheLuceneAnalysisInIndicNormalizer_scripts;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisInIndicNormalizer, scripts, JavaUtilIdentityHashMap *)
 
 /*!
  @brief Decompositions according to Unicode 5.2, 
- and http://ldc.upenn.edu/myl/IndianScriptsUnicode.html
- Most of these are not handled by unicode normalization anyway.
+  and http://ldc.upenn.edu/myl/IndianScriptsUnicode.html 
+  Most of these are not handled by unicode normalization anyway.
  The numbers here represent offsets into the respective codepages,
- with -1 representing null and 0xFF representing zero-width joiner.
- the columns are: ch1, ch2, ch3, res, flags
- ch1, ch2, and ch3 are the decomposition
- res is the composition, and flags are the scripts to which it applies.
+  with -1 representing null and 0xFF representing zero-width joiner. 
+  the columns are: ch1, ch2, ch3, res, flags
+  ch1, ch2, and ch3 are the decomposition
+  res is the composition, and flags are the scripts to which it applies.
  */
-inline IOSObjectArray *OrgApacheLuceneAnalysisInIndicNormalizer_get_decompositions();
+inline IOSObjectArray *OrgApacheLuceneAnalysisInIndicNormalizer_get_decompositions(void);
 static IOSObjectArray *OrgApacheLuceneAnalysisInIndicNormalizer_decompositions;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisInIndicNormalizer, decompositions, IOSObjectArray *)
 
@@ -82,6 +86,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisInIndicNormalizer)
 
 @implementation OrgApacheLuceneAnalysisInIndicNormalizer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisInIndicNormalizer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 + (jint)flagWithJavaLangCharacter_UnicodeBlock:(JavaLangCharacter_UnicodeBlock *)ub {
   return OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(ub);
 }
@@ -108,12 +119,29 @@ withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData:(OrgApacheLuceneAnalysis
   return OrgApacheLuceneAnalysisInIndicNormalizer_composeWithInt_withJavaLangCharacter_UnicodeBlock_withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_withCharArray_withInt_withInt_(self, ch0, block0, sd, text, pos, len);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisInIndicNormalizer_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 5, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(flagWithJavaLangCharacter_UnicodeBlock:);
+  methods[2].selector = @selector(normalizeWithCharArray:withInt:);
+  methods[3].selector = @selector(composeWithInt:withJavaLangCharacter_UnicodeBlock:withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData:withCharArray:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "scripts", "LJavaUtilIdentityHashMap;", .constantValue.asLong = 0, 0x1a, -1, 6, 7, -1 },
+    { "decompositions", "[[I", .constantValue.asLong = 0, 0x1a, -1, 8, -1, -1 },
+  };
+  static const void *ptrTable[] = { "flag", "LJavaLangCharacter_UnicodeBlock;", "normalize", "[CI", "compose", "ILJavaLangCharacter_UnicodeBlock;LOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData;[CII", &OrgApacheLuceneAnalysisInIndicNormalizer_scripts, "Ljava/util/IdentityHashMap<Ljava/lang/Character$UnicodeBlock;Lorg/apache/lucene/analysis/in/IndicNormalizer$ScriptData;>;", &OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, "LOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisInIndicNormalizer = { "IndicNormalizer", "org.apache.lucene.analysis.in", ptrTable, methods, fields, 7, 0x1, 4, 2, -1, 9, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisInIndicNormalizer;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisInIndicNormalizer class]) {
@@ -144,51 +172,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "flagWithJavaLangCharacter_UnicodeBlock:", "flag", "I", 0xa, NULL, NULL },
-    { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
-    { "composeWithInt:withJavaLangCharacter_UnicodeBlock:withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData:withCharArray:withInt:withInt:", "compose", "I", 0x2, NULL, NULL },
-    { "init", "IndicNormalizer", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "scripts", "scripts", 0x1a, "Ljava.util.IdentityHashMap;", &OrgApacheLuceneAnalysisInIndicNormalizer_scripts, "Ljava/util/IdentityHashMap<Ljava/lang/Character$UnicodeBlock;Lorg/apache/lucene/analysis/in/IndicNormalizer$ScriptData;>;", .constantValue.asLong = 0 },
-    { "decompositions", "decompositions", 0x1a, "[[I", &OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.in.IndicNormalizer$ScriptData;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisInIndicNormalizer = { 2, "IndicNormalizer", "org.apache.lucene.analysis.in", NULL, 0x1, 4, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisInIndicNormalizer;
-}
-
 @end
-
-jint OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JavaLangCharacter_UnicodeBlock *ub) {
-  OrgApacheLuceneAnalysisInIndicNormalizer_initialize();
-  return ((OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *) nil_chk([((JavaUtilIdentityHashMap *) nil_chk(OrgApacheLuceneAnalysisInIndicNormalizer_scripts)) getWithId:ub]))->flag_;
-}
-
-jint OrgApacheLuceneAnalysisInIndicNormalizer_composeWithInt_withJavaLangCharacter_UnicodeBlock_withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_withCharArray_withInt_withInt_(OrgApacheLuceneAnalysisInIndicNormalizer *self, jint ch0, JavaLangCharacter_UnicodeBlock *block0, OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *sd, IOSCharArray *text, jint pos, jint len) {
-  if (pos + 1 >= len) return len;
-  jint ch1 = IOSCharArray_Get(nil_chk(text), pos + 1) - ((OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *) nil_chk(sd))->base_;
-  JavaLangCharacter_UnicodeBlock *block1 = JavaLangCharacter_UnicodeBlock_ofWithChar_(IOSCharArray_Get(text, pos + 1));
-  if (block1 != block0) return len;
-  jint ch2 = -1;
-  if (pos + 2 < len) {
-    ch2 = IOSCharArray_Get(text, pos + 2) - sd->base_;
-    JavaLangCharacter_UnicodeBlock *block2 = JavaLangCharacter_UnicodeBlock_ofWithChar_(IOSCharArray_Get(text, pos + 2));
-    if (IOSCharArray_Get(text, pos + 2) == 0x200d) ch2 = (jint) 0xFF;
-    else if (block2 != block1) ch2 = -1;
-  }
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions))->size_; i++) if (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 0) == ch0 && (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 4) & sd->flag_) != 0) {
-    if (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 1) == ch1 && (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 2) < 0 || IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 2) == ch2)) {
-      *IOSCharArray_GetRef(text, pos) = (jchar) (sd->base_ + IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 3));
-      len = OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(text, pos + 1, len);
-      if (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 2) >= 0) len = OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(text, pos + 1, len);
-      return len;
-    }
-  }
-  return len;
-}
 
 void OrgApacheLuceneAnalysisInIndicNormalizer_init(OrgApacheLuceneAnalysisInIndicNormalizer *self) {
   NSObject_init(self);
@@ -200,6 +184,34 @@ OrgApacheLuceneAnalysisInIndicNormalizer *new_OrgApacheLuceneAnalysisInIndicNorm
 
 OrgApacheLuceneAnalysisInIndicNormalizer *create_OrgApacheLuceneAnalysisInIndicNormalizer_init() {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisInIndicNormalizer, init)
+}
+
+jint OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JavaLangCharacter_UnicodeBlock *ub) {
+  OrgApacheLuceneAnalysisInIndicNormalizer_initialize();
+  return ((OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *) nil_chk([((JavaUtilIdentityHashMap *) nil_chk(OrgApacheLuceneAnalysisInIndicNormalizer_scripts)) getWithId:ub]))->flag_;
+}
+
+jint OrgApacheLuceneAnalysisInIndicNormalizer_composeWithInt_withJavaLangCharacter_UnicodeBlock_withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_withCharArray_withInt_withInt_(OrgApacheLuceneAnalysisInIndicNormalizer *self, jint ch0, JavaLangCharacter_UnicodeBlock *block0, OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *sd, IOSCharArray *text, jint pos, jint len) {
+  if (pos + 1 >= len) return len;
+  jint ch1 = IOSCharArray_Get(nil_chk(text), pos + 1) - ((OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *) nil_chk(sd))->base_;
+  JavaLangCharacter_UnicodeBlock *block1 = JavaLangCharacter_UnicodeBlock_ofWithChar_(IOSCharArray_Get(text, pos + 1));
+  if (!JreObjectEqualsEquals(block1, block0)) return len;
+  jint ch2 = -1;
+  if (pos + 2 < len) {
+    ch2 = IOSCharArray_Get(text, pos + 2) - sd->base_;
+    JavaLangCharacter_UnicodeBlock *block2 = JavaLangCharacter_UnicodeBlock_ofWithChar_(IOSCharArray_Get(text, pos + 2));
+    if (IOSCharArray_Get(text, pos + 2) == 0x200d) ch2 = (jint) 0xFF;
+    else if (!JreObjectEqualsEquals(block2, block1)) ch2 = -1;
+  }
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions))->size_; i++) if (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 0) == ch0 && (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 4) & sd->flag_) != 0) {
+    if (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 1) == ch1 && (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 2) < 0 || IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 2) == ch2)) {
+      *IOSCharArray_GetRef(text, pos) = (jchar) (sd->base_ + IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 3));
+      len = OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(text, pos + 1, len);
+      if (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions, i)), 2) >= 0) len = OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(text, pos + 1, len);
+      return len;
+    }
+  }
+  return len;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisInIndicNormalizer)
@@ -218,15 +230,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisInIndicNormalizer)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:", "ScriptData", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "flag_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "base_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "decompMask_", NULL, 0x0, "Ljava.util.BitSet;", NULL, NULL, .constantValue.asLong = 0 },
+    { "flag_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "base_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "decompMask_", "LJavaUtilBitSet;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData = { 2, "ScriptData", "org.apache.lucene.analysis.in", "IndicNormalizer", 0xa, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "II", "LOrgApacheLuceneAnalysisInIndicNormalizer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData = { "ScriptData", "org.apache.lucene.analysis.in", ptrTable, methods, fields, 7, 0xa, 1, 3, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData;
 }
 

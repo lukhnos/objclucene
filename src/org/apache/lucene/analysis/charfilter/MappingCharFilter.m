@@ -3,10 +3,8 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/charfilter/MappingCharFilter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/Character.h"
 #include "java/util/Map.h"
@@ -18,6 +16,10 @@
 #include "org/apache/lucene/util/fst/CharSequenceOutputs.h"
 #include "org/apache/lucene/util/fst/FST.h"
 #include "org/apache/lucene/util/fst/Outputs.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/charfilter/MappingCharFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCharfilterMappingCharFilter () {
  @public
@@ -66,21 +68,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter, replacem
     OrgApacheLuceneUtilCharsRef *lastMatch = nil;
     jint firstCH = [((OrgApacheLuceneAnalysisUtilRollingCharBuffer *) nil_chk(buffer_)) getWithInt:inputOff_];
     if (firstCH != -1) {
-      OrgApacheLuceneUtilFstFST_Arc *arc = [((id<JavaUtilMap>) nil_chk(cachedRootArcs_)) getWithId:JavaLangCharacter_valueOfWithChar_((jchar) firstCH)];
+      OrgApacheLuceneUtilFstFST_Arc *arc = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(cachedRootArcs_)) getWithId:JavaLangCharacter_valueOfWithChar_((jchar) firstCH)]);
       if (arc != nil) {
         if (!OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(arc)) {
-          JreAssert(([arc isFinal]), (@"org/apache/lucene/analysis/charfilter/MappingCharFilter.java:108 condition failed: assert arc.isFinal();"));
+          JreAssert([arc isFinal], @"org/apache/lucene/analysis/charfilter/MappingCharFilter.java:108 condition failed: assert arc.isFinal();");
           lastMatchLen = 1;
-          lastMatch = ((OrgApacheLuceneUtilCharsRef *) arc->output_);
+          lastMatch = arc->output_;
         }
         else {
           jint lookahead = 0;
-          OrgApacheLuceneUtilCharsRef *output = ((OrgApacheLuceneUtilCharsRef *) arc->output_);
+          OrgApacheLuceneUtilCharsRef *output = JreRetainedLocalValue(arc->output_);
           while (true) {
             lookahead++;
             if ([arc isFinal]) {
               lastMatchLen = lookahead;
-              lastMatch = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) addWithId:output withId:((OrgApacheLuceneUtilCharsRef *) arc->nextFinalOutput_)];
+              lastMatch = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) addWithId:output withId:arc->nextFinalOutput_];
             }
             if (!OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(arc)) {
               break;
@@ -92,7 +94,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter, replacem
             if ((arc = [((OrgApacheLuceneUtilFstFST *) nil_chk(map_)) findTargetArcWithInt:ch withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:scratchArc_ withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_]) == nil) {
               break;
             }
-            output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) addWithId:output withId:((OrgApacheLuceneUtilCharsRef *) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_)];
+            output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) addWithId:output withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_];
           }
         }
       }
@@ -151,24 +153,33 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter, replacem
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap:withJavaIoReader:", "MappingCharFilter", NULL, 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "read", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "readWithCharArray:withInt:withInt:", "read", "I", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap:withJavaIoReader:);
+  methods[1].selector = @selector(reset);
+  methods[2].selector = @selector(read);
+  methods[3].selector = @selector(readWithCharArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "outputs_", NULL, 0x12, "Lorg.apache.lucene.util.fst.Outputs;", NULL, "Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
-    { "map_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
-    { "fstReader_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST$BytesReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.RollingCharBuffer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchArc_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST$Arc;", NULL, "Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
-    { "cachedRootArcs_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Character;Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/CharsRef;>;>;", .constantValue.asLong = 0 },
-    { "replacement_", NULL, 0x2, "Lorg.apache.lucene.util.CharsRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "replacementPointer_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "inputOff_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "outputs_", "LOrgApacheLuceneUtilFstOutputs;", .constantValue.asLong = 0, 0x12, -1, -1, 4, -1 },
+    { "map_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
+    { "fstReader_", "LOrgApacheLuceneUtilFstFST_BytesReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "buffer_", "LOrgApacheLuceneAnalysisUtilRollingCharBuffer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratchArc_", "LOrgApacheLuceneUtilFstFST_Arc;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
+    { "cachedRootArcs_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 7, -1 },
+    { "replacement_", "LOrgApacheLuceneUtilCharsRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "replacementPointer_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "inputOff_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharfilterMappingCharFilter = { 2, "MappingCharFilter", "org.apache.lucene.analysis.charfilter", NULL, 0x1, 4, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisCharfilterNormalizeCharMap;LJavaIoReader;", "LJavaIoIOException;", "read", "[CII", "Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/CharsRef;>;", "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/CharsRef;>;", "Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/CharsRef;>;", "Ljava/util/Map<Ljava/lang/Character;Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/CharsRef;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharfilterMappingCharFilter = { "MappingCharFilter", "org.apache.lucene.analysis.charfilter", ptrTable, methods, fields, 7, 0x1, 4, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCharfilterMappingCharFilter;
 }
 

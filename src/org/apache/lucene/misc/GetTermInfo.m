@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/PrintStream.h"
-#include "java/lang/Exception.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
 #include "java/lang/System.h"
@@ -21,15 +20,26 @@
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/Paths.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/misc/GetTermInfo must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneMiscGetTermInfo ()
 
 + (void)usage;
 
 @end
 
-__attribute__((unused)) static void OrgApacheLuceneMiscGetTermInfo_usage();
+__attribute__((unused)) static void OrgApacheLuceneMiscGetTermInfo_usage(void);
 
 @implementation OrgApacheLuceneMiscGetTermInfo
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneMiscGetTermInfo_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)mainWithNSStringArray:(IOSObjectArray *)args {
   OrgApacheLuceneMiscGetTermInfo_mainWithNSStringArray_(args);
@@ -44,25 +54,39 @@ __attribute__((unused)) static void OrgApacheLuceneMiscGetTermInfo_usage();
   OrgApacheLuceneMiscGetTermInfo_usage();
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneMiscGetTermInfo_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "mainWithNSStringArray:", "main", "V", 0x9, "Ljava.lang.Exception;", NULL },
-    { "getTermInfoWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexTerm:", "getTermInfo", "V", 0x9, "Ljava.lang.Exception;", NULL },
-    { "usage", NULL, "V", 0xa, NULL, NULL },
-    { "init", "GetTermInfo", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x9, 3, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0xa, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneMiscGetTermInfo = { 2, "GetTermInfo", "org.apache.lucene.misc", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(mainWithNSStringArray:);
+  methods[2].selector = @selector(getTermInfoWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexTerm:);
+  methods[3].selector = @selector(usage);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "main", "[LNSString;", "LJavaLangException;", "getTermInfo", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexTerm;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneMiscGetTermInfo = { "GetTermInfo", "org.apache.lucene.misc", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneMiscGetTermInfo;
 }
 
 @end
+
+void OrgApacheLuceneMiscGetTermInfo_init(OrgApacheLuceneMiscGetTermInfo *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneMiscGetTermInfo *new_OrgApacheLuceneMiscGetTermInfo_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscGetTermInfo, init)
+}
+
+OrgApacheLuceneMiscGetTermInfo *create_OrgApacheLuceneMiscGetTermInfo_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscGetTermInfo, init)
+}
 
 void OrgApacheLuceneMiscGetTermInfo_mainWithNSStringArray_(IOSObjectArray *args) {
   OrgApacheLuceneMiscGetTermInfo_initialize();
@@ -90,18 +114,6 @@ void OrgApacheLuceneMiscGetTermInfo_getTermInfoWithOrgApacheLuceneStoreDirectory
 void OrgApacheLuceneMiscGetTermInfo_usage() {
   OrgApacheLuceneMiscGetTermInfo_initialize();
   [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("$$$", @"\n\nusage:\n\tjava ", [OrgApacheLuceneMiscGetTermInfo_class_() getName], @" <index dir> field term \n\n")];
-}
-
-void OrgApacheLuceneMiscGetTermInfo_init(OrgApacheLuceneMiscGetTermInfo *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneMiscGetTermInfo *new_OrgApacheLuceneMiscGetTermInfo_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscGetTermInfo, init)
-}
-
-OrgApacheLuceneMiscGetTermInfo *create_OrgApacheLuceneMiscGetTermInfo_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscGetTermInfo, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscGetTermInfo)

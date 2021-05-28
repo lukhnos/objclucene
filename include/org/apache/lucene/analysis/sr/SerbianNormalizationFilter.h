@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter))
 #define OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_
 
@@ -25,15 +31,15 @@
 /*!
  @brief Normalizes Serbian Cyrillic and Latin characters to "bald" Latin.
  Cyrillic characters are first converted to Latin; then, Latin characters
- have their diacritics removed, with the exception of đ which is converted to
- dj.
- Note that it expects lowercased input.
+  have their diacritics removed, with the exception of đ which is converted to
+  dj.
+  Note that it expects lowercased input.
  */
 @interface OrgApacheLuceneAnalysisSrSerbianNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -51,4 +57,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter")

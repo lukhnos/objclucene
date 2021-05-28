@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexCompositeReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexCompositeReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexCompositeReader || defined(INCLUDE_OrgApacheLuceneIndexCompositeReader))
 #define OrgApacheLuceneIndexCompositeReader_
 
@@ -25,32 +31,32 @@
 
 /*!
  @brief Instances of this reader type can only
- be used to get stored fields from the underlying LeafReaders,
- but it is not possible to directly retrieve postings.
- To do that, get
- the <code>LeafReaderContext</code> for all sub-readers via <code>leaves()</code>.
+  be used to get stored fields from the underlying LeafReaders,
+  but it is not possible to directly retrieve postings.To do that, get
+  the <code>LeafReaderContext</code> for all sub-readers via <code>leaves()</code>.
  Alternatively, you can mimic an <code>LeafReader</code> (with a serious slowdown),
- by wrapping composite readers with <code>SlowCompositeReaderWrapper</code>.
+  by wrapping composite readers with <code>SlowCompositeReaderWrapper</code>.
+   
  <p>IndexReader instances for indexes on disk are usually constructed
- with a call to one of the static <code>DirectoryReader.open()</code> methods,
- e.g. <code>DirectoryReader.open(Directory)</code>. <code>DirectoryReader</code> implements
- the <code>CompositeReader</code> interface, it is not possible to directly get postings.
+  with a call to one of the static <code>DirectoryReader.open()</code> methods,
+  e.g. <code>DirectoryReader.open(Directory)</code>. <code>DirectoryReader</code> implements
+  the <code>CompositeReader</code> interface, it is not possible to directly get postings. 
  <p> Concrete subclasses of IndexReader are usually constructed with a call to
- one of the static <code>open()</code> methods, e.g. <code>DirectoryReader.open(Directory)</code>
+  one of the static <code>open()</code> methods, e.g. <code>DirectoryReader.open(Directory)</code>
  .
- <p> For efficiency, in this API documents are often referred to via
+  <p> For efficiency, in this API documents are often referred to via 
  <i>document numbers</i>, non-negative integers which each name a unique
- document in the index.  These document numbers are ephemeral -- they may change
- as documents are added to and deleted from an index.  Clients should thus not
- rely on a given document having the same number between sessions.
+  document in the index.  These document numbers are ephemeral -- they may change
+  as documents are added to and deleted from an index.  Clients should thus not
+  rely on a given document having the same number between sessions. 
  <p>
- <a name="thread-safety"></a><p><b>NOTE</b>: <code>IndexReader</code>
+  <a name="thread-safety"></a><p><b>NOTE</b>: <code>IndexReader</code>
   instances are completely thread
- safe, meaning multiple threads can call any of its methods,
- concurrently.  If your application requires external
- synchronization, you should <b>not</b> synchronize on the
+  safe, meaning multiple threads can call any of its methods,
+  concurrently.  If your application requires external
+  synchronization, you should <b>not</b> synchronize on the 
  <code>IndexReader</code> instance; use your own
- (non-Lucene) objects instead.
+  (non-Lucene) objects instead.
  */
 @interface OrgApacheLuceneIndexCompositeReader : OrgApacheLuceneIndexIndexReader
 
@@ -65,18 +71,17 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Expert: returns the sequential sub readers that this
- reader is logically composed of.
- This method may not
- return <code>null</code>.
+   reader is logically composed of.This method may not
+   return <code>null</code>.
  <p><b>NOTE:</b> In contrast to previous Lucene versions this method
- is no longer public, code that wants to get all <code>LeafReader</code>s
- this composite is composed of should use <code>IndexReader.leaves()</code>.
+   is no longer public, code that wants to get all <code>LeafReader</code>s
+   this composite is composed of should use <code>IndexReader.leaves()</code>.
  - seealso: IndexReader#leaves()
  */
 - (id<JavaUtilList>)getSequentialSubReaders;
@@ -91,4 +96,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexCompositeReader")

@@ -13,13 +13,19 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAttribute_) && (INCLUDE_ALL_OrgApacheLuceneUtilAttribute || defined(INCLUDE_OrgApacheLuceneUtilAttribute))
 #define OrgApacheLuceneUtilAttribute_
 
 /*!
  @brief Base interface for attributes.
  */
-@protocol OrgApacheLuceneUtilAttribute < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilAttribute < JavaObject >
 
 @end
 
@@ -29,4 +35,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttribute)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAttribute")

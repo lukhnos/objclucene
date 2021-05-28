@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder))
 #define OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_
 
@@ -24,16 +30,16 @@
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief This builder basically reads the <code>Query</code> object set on the
- <code>SlopQueryNode</code> child using
+ @brief This builder basically reads the <code>Query</code> object set on the 
+ <code>SlopQueryNode</code> child using 
  <code>QueryTreeBuilder.QUERY_TREE_BUILDER_TAGID</code> and applies the slop value
- defined in the <code>SlopQueryNode</code>.
+  defined in the <code>SlopQueryNode</code>.
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder : NSObject < OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
@@ -43,12 +49,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQ
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_init(OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder")

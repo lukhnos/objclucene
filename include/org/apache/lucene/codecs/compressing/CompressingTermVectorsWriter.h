@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter))
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_
 
@@ -35,50 +41,35 @@
  @brief <code>TermVectorsWriter</code> for <code>CompressingTermVectorsFormat</code>.
  */
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter : OrgApacheLuceneCodecsTermVectorsWriter
-
-+ (jint)MAX_DOCUMENTS_PER_CHUNK;
-
-+ (NSString *)VECTORS_EXTENSION;
-
-+ (NSString *)VECTORS_INDEX_EXTENSION;
-
-+ (NSString *)CODEC_SFX_IDX;
-
-+ (NSString *)CODEC_SFX_DAT;
-
-+ (jint)VERSION_START;
-
-+ (jint)VERSION_CHUNK_STATS;
-
-+ (jint)VERSION_CURRENT;
-
-+ (jint)PACKED_BLOCK_SIZE;
-
-+ (jint)POSITIONS;
-
-+ (jint)OFFSETS;
-
-+ (jint)PAYLOADS;
-
-+ (jint)FLAGS_BITS;
-
-+ (NSString *)BULK_MERGE_ENABLED_SYSPROP;
-
-+ (jboolean)BULK_MERGE_ENABLED;
+@property (readonly, class) jint MAX_DOCUMENTS_PER_CHUNK NS_SWIFT_NAME(MAX_DOCUMENTS_PER_CHUNK);
+@property (readonly, copy, class) NSString *VECTORS_EXTENSION NS_SWIFT_NAME(VECTORS_EXTENSION);
+@property (readonly, copy, class) NSString *VECTORS_INDEX_EXTENSION NS_SWIFT_NAME(VECTORS_INDEX_EXTENSION);
+@property (readonly, copy, class) NSString *CODEC_SFX_IDX NS_SWIFT_NAME(CODEC_SFX_IDX);
+@property (readonly, copy, class) NSString *CODEC_SFX_DAT NS_SWIFT_NAME(CODEC_SFX_DAT);
+@property (readonly, class) jint VERSION_START NS_SWIFT_NAME(VERSION_START);
+@property (readonly, class) jint VERSION_CHUNK_STATS NS_SWIFT_NAME(VERSION_CHUNK_STATS);
+@property (readonly, class) jint VERSION_CURRENT NS_SWIFT_NAME(VERSION_CURRENT);
+@property (readonly, class) jint PACKED_BLOCK_SIZE NS_SWIFT_NAME(PACKED_BLOCK_SIZE);
+@property (readonly, class) jint POSITIONS NS_SWIFT_NAME(POSITIONS);
+@property (readonly, class) jint OFFSETS NS_SWIFT_NAME(OFFSETS);
+@property (readonly, class) jint PAYLOADS NS_SWIFT_NAME(PAYLOADS);
+@property (readonly, class) jint FLAGS_BITS NS_SWIFT_NAME(FLAGS_BITS);
+@property (readonly, copy, class) NSString *BULK_MERGE_ENABLED_SYSPROP NS_SWIFT_NAME(BULK_MERGE_ENABLED_SYSPROP);
+@property (readonly, class) jboolean BULK_MERGE_ENABLED NS_SWIFT_NAME(BULK_MERGE_ENABLED);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
-                  withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
-                                         withNSString:(NSString *)segmentSuffix
-                    withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
-                                         withNSString:(NSString *)formatName
-  withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode
-                                              withInt:(jint)chunkSize
-                                              withInt:(jint)blockSize;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
+                            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
+                                                   withNSString:(NSString *)segmentSuffix
+                              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
+                                                   withNSString:(NSString *)formatName
+            withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode
+                                                        withInt:(jint)chunkSize
+                                                        withInt:(jint)blockSize;
 
 - (void)addPositionWithInt:(jint)position
                    withInt:(jint)startOffset
@@ -114,82 +105,86 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets;
 #pragma mark Package-Private
 
 /*!
- @brief Returns true if we should recompress this reader, even though we could bulk merge compressed data 
+ @brief Returns true if we should recompress this reader, even though we could bulk merge compressed data
  <p>
- The last chunk written for a segment is typically incomplete, so without recompressing,
- in some worst-case situations (e.g. frequent reopen with tiny flushes), over time the 
- compression ratio can degrade.
+  The last chunk written for a segment is typically incomplete, so without recompressing,
+  in some worst-case situations (e.g. frequent reopen with tiny flushes), over time the 
+  compression ratio can degrade.
  This is a safety switch.
  */
 - (jboolean)tooDirtyWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *)candidate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_MAX_DOCUMENTS_PER_CHUNK();
+inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_MAX_DOCUMENTS_PER_CHUNK(void);
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_MAX_DOCUMENTS_PER_CHUNK 128
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, MAX_DOCUMENTS_PER_CHUNK, jint)
 
-inline NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_VECTORS_EXTENSION();
+inline NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_VECTORS_EXTENSION(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_EXTENSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, VECTORS_EXTENSION, NSString *)
 
-inline NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_VECTORS_INDEX_EXTENSION();
+inline NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_VECTORS_INDEX_EXTENSION(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_INDEX_EXTENSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, VECTORS_INDEX_EXTENSION, NSString *)
 
-inline NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_CODEC_SFX_IDX();
+inline NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_CODEC_SFX_IDX(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_CODEC_SFX_IDX;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, CODEC_SFX_IDX, NSString *)
 
-inline NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_CODEC_SFX_DAT();
+inline NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_CODEC_SFX_DAT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_CODEC_SFX_DAT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, CODEC_SFX_DAT, NSString *)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_VERSION_START();
+inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_VERSION_START(void);
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_START 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, VERSION_START, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_VERSION_CHUNK_STATS();
+inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_VERSION_CHUNK_STATS(void);
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CHUNK_STATS 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, VERSION_CHUNK_STATS, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_VERSION_CURRENT();
+inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_VERSION_CURRENT(void);
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CURRENT 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, VERSION_CURRENT, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_PACKED_BLOCK_SIZE();
+inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_PACKED_BLOCK_SIZE(void);
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_PACKED_BLOCK_SIZE 64
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, PACKED_BLOCK_SIZE, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_POSITIONS();
+inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_POSITIONS(void);
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_POSITIONS 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, POSITIONS, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_OFFSETS();
+inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_OFFSETS(void);
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_OFFSETS 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, OFFSETS, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_PAYLOADS();
+inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_PAYLOADS(void);
 #define OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_PAYLOADS 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, PAYLOADS, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_FLAGS_BITS();
+inline jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_FLAGS_BITS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FLAGS_BITS;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, FLAGS_BITS, jint)
 
-inline NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_BULK_MERGE_ENABLED_SYSPROP();
+inline NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_BULK_MERGE_ENABLED_SYSPROP(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE_ENABLED_SYSPROP;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, BULK_MERGE_ENABLED_SYSPROP, NSString *)
 
-inline jboolean OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_BULK_MERGE_ENABLED();
+inline jboolean OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_get_BULK_MERGE_ENABLED(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jboolean OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE_ENABLED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, BULK_MERGE_ENABLED, jboolean)
@@ -204,4 +199,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter")

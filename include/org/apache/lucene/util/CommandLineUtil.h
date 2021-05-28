@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilCommandLineUtil
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilCommandLineUtil_) && (INCLUDE_ALL_OrgApacheLuceneUtilCommandLineUtil || defined(INCLUDE_OrgApacheLuceneUtilCommandLineUtil))
 #define OrgApacheLuceneUtilCommandLineUtil_
 
@@ -32,7 +38,7 @@
  @brief Loads a specific Directory implementation
  @param clazzName The name of the Directory class to load
  @return The Directory class loaded
- @throws ClassNotFoundException If the specified class cannot be found.
+ @throw ClassNotFoundExceptionIf the specified class cannot be found.
  */
 + (IOSClass *)loadDirectoryClassWithNSString:(NSString *)clazzName;
 
@@ -40,7 +46,7 @@
  @brief Loads a specific FSDirectory implementation
  @param clazzName The name of the FSDirectory class to load
  @return The FSDirectory class loaded
- @throws ClassNotFoundException If the specified class cannot be found.
+ @throw ClassNotFoundExceptionIf the specified class cannot be found.
  */
 + (IOSClass *)loadFSDirectoryClassWithNSString:(NSString *)clazzName;
 
@@ -49,10 +55,10 @@
  @param clazz The class of the object to be created
  @param path The file to be used as parameter constructor
  @return The new FSDirectory instance
- @throws NoSuchMethodException If the Directory does not have a constructor that takes <code>Path</code>.
- @throws InstantiationException If the class is abstract or an interface.
- @throws IllegalAccessException If the constructor does not have public visibility.
- @throws InvocationTargetException If the constructor throws an exception
+ @throw NoSuchMethodExceptionIf the Directory does not have a constructor that takes <code>Path</code>.
+ @throw InstantiationExceptionIf the class is abstract or an interface.
+ @throw IllegalAccessExceptionIf the constructor does not have public visibility.
+ @throw InvocationTargetExceptionIf the constructor throws an exception
  */
 + (OrgApacheLuceneStoreFSDirectory *)newFSDirectoryWithIOSClass:(IOSClass *)clazz
                                withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path OBJC_METHOD_FAMILY_NONE;
@@ -63,10 +69,10 @@
  @param path The file to be used as parameter constructor
  @param lf The lock factory to be used
  @return The new FSDirectory instance
- @throws NoSuchMethodException If the Directory does not have a constructor that takes <code>Path</code>.
- @throws InstantiationException If the class is abstract or an interface.
- @throws IllegalAccessException If the constructor does not have public visibility.
- @throws InvocationTargetException If the constructor throws an exception
+ @throw NoSuchMethodExceptionIf the Directory does not have a constructor that takes <code>Path</code>.
+ @throw InstantiationExceptionIf the class is abstract or an interface.
+ @throw IllegalAccessExceptionIf the constructor does not have public visibility.
+ @throw InvocationTargetExceptionIf the constructor throws an exception
  */
 + (OrgApacheLuceneStoreFSDirectory *)newFSDirectoryWithIOSClass:(IOSClass *)clazz
                                withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
@@ -112,4 +118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCommandLineUtil)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilCommandLineUtil")

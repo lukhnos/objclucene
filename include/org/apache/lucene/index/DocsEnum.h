@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexDocsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocsEnum || defined(INCLUDE_OrgApacheLuceneIndexDocsEnum))
 #define OrgApacheLuceneIndexDocsEnum_
 
@@ -20,19 +26,16 @@
 #define INCLUDE_OrgApacheLuceneIndexPostingsEnum 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
  @brief Iterates through the documents and term freqs.
  NOTE: you must first call <code>nextDoc</code> before using
- any of the per-doc methods. 
+  any of the per-doc methods.
  */
 @interface OrgApacheLuceneIndexDocsEnum : OrgApacheLuceneIndexPostingsEnum
-
-+ (jint)FLAG_NONE;
-
-+ (jint)FLAG_FREQS;
+@property (readonly, class) jint FLAG_NONE NS_SWIFT_NAME(FLAG_NONE);
+@property (readonly, class) jint FLAG_FREQS NS_SWIFT_NAME(FLAG_FREQS);
 
 #pragma mark Public
 
@@ -49,9 +52,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -59,20 +62,19 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocsEnum)
 
 /*!
  @brief Flag to pass to <code>TermsEnum.docs(Bits,DocsEnum,int)</code> if you don't
- require term frequencies in the returned enum.
- When passed to
+  require term frequencies in the returned enum.When passed to 
  <code>TermsEnum.docsAndPositions(Bits,DocsAndPositionsEnum,int)</code> means
- that no offsets and payloads will be returned.
+  that no offsets and payloads will be returned.
  */
-inline jint OrgApacheLuceneIndexDocsEnum_get_FLAG_NONE();
+inline jint OrgApacheLuceneIndexDocsEnum_get_FLAG_NONE(void);
 #define OrgApacheLuceneIndexDocsEnum_FLAG_NONE 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocsEnum, FLAG_NONE, jint)
 
 /*!
  @brief Flag to pass to <code>TermsEnum.docs(Bits,DocsEnum,int)</code>
- if you require term frequencies in the returned enum.
+   if you require term frequencies in the returned enum.
  */
-inline jint OrgApacheLuceneIndexDocsEnum_get_FLAG_FREQS();
+inline jint OrgApacheLuceneIndexDocsEnum_get_FLAG_FREQS(void);
 #define OrgApacheLuceneIndexDocsEnum_FLAG_FREQS 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocsEnum, FLAG_FREQS, jint)
 
@@ -82,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocsEnum")

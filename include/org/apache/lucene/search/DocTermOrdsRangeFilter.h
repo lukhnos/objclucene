@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocTermOrdsRangeFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocTermOrdsRangeFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocTermOrdsRangeFilter || defined(INCLUDE_OrgApacheLuceneSearchDocTermOrdsRangeFilter))
 #define OrgApacheLuceneSearchDocTermOrdsRangeFilter_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
 @class OrgApacheLuceneUtilBytesRef;
@@ -29,8 +34,8 @@
 /*!
  @brief A range filter built on top of a cached multi-valued term field (from <code>org.apache.lucene.index.LeafReader.getSortedSetDocValues</code>).
  <p>Like <code>DocValuesRangeFilter</code>, this is just a specialized range query versus
- using a TermRangeQuery with <code>DocValuesRewriteMethod</code>: it will only do
- two ordinal to term lookups.</p>
+     using a TermRangeQuery with <code>DocValuesRewriteMethod</code>: it will only do
+     two ordinal to term lookups.</p>
  */
 @interface OrgApacheLuceneSearchDocTermOrdsRangeFilter : OrgApacheLuceneSearchFilter {
  @public
@@ -79,10 +84,10 @@
 - (jboolean)includesUpper;
 
 /*!
- @brief Creates a BytesRef range filter using <code>org.apache.lucene.index.LeafReader.getSortedSetDocValues</code>.
- This works with all
- fields containing zero or one term in the field. The range can be half-open by setting one
- of the values to <code>null</code>.
+ @brief Creates a BytesRef range filter using <code>org.apache.lucene.index.LeafReader.getSortedSetDocValues</code>.This works with all
+  fields containing zero or one term in the field.
+ The range can be half-open by setting one
+  of the values to <code>null</code>.
  */
 + (OrgApacheLuceneSearchDocTermOrdsRangeFilter *)newBytesRefRangeWithNSString:(NSString *)field
                                               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerVal
@@ -91,6 +96,10 @@
                                                                   withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -106,4 +115,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocTermOrdsRangeFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocTermOrdsRangeFilter")

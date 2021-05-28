@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_
 
@@ -27,20 +33,19 @@
 
 /*!
  @brief Function that returns <code>TFIDFSimilarity.tf(float)</code>
- for every document.
+  for every document.
  <p>
- Note that the configured Similarity for the field must be
- a subclass of <code>TFIDFSimilarity</code>
-  
+  Note that the configured Similarity for the field must be
+  a subclass of <code>TFIDFSimilarity</code>
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceTFValueSource : OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)val
-                    withNSString:(NSString *)indexedField
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                              withNSString:(NSString *)val
+                              withNSString:(NSString *)indexedField
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
@@ -61,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceTFValueSourc
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource")

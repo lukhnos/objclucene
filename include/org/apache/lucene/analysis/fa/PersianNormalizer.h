@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisFaPersianNormalizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisFaPersianNormalizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianNormalizer || defined(INCLUDE_OrgApacheLuceneAnalysisFaPersianNormalizer))
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_
 
@@ -21,38 +27,29 @@
 /*!
  @brief Normalizer for Persian.
  <p>
- Normalization is done in-place for efficiency, operating on a termbuffer.
+  Normalization is done in-place for efficiency, operating on a termbuffer. 
  <p>
- Normalization is defined as:
+  Normalization is defined as: 
  <ul>
- <li>Normalization of various heh + hamza forms and heh goal to heh.
- <li>Normalization of farsi yeh and yeh barree to arabic yeh
- <li>Normalization of persian keheh to arabic kaf
+  <li>Normalization of various heh + hamza forms and heh goal to heh. 
+ <li>Normalization of farsi yeh and yeh barree to arabic yeh 
+ <li>Normalization of persian keheh to arabic kaf 
  </ul>
  */
 @interface OrgApacheLuceneAnalysisFaPersianNormalizer : NSObject
-
-+ (jchar)YEH;
-
-+ (jchar)FARSI_YEH;
-
-+ (jchar)YEH_BARREE;
-
-+ (jchar)KEHEH;
-
-+ (jchar)KAF;
-
-+ (jchar)HAMZA_ABOVE;
-
-+ (jchar)HEH_YEH;
-
-+ (jchar)HEH_GOAL;
-
-+ (jchar)HEH;
+@property (readonly, class) jchar YEH NS_SWIFT_NAME(YEH);
+@property (readonly, class) jchar FARSI_YEH NS_SWIFT_NAME(FARSI_YEH);
+@property (readonly, class) jchar YEH_BARREE NS_SWIFT_NAME(YEH_BARREE);
+@property (readonly, class) jchar KEHEH NS_SWIFT_NAME(KEHEH);
+@property (readonly, class) jchar KAF NS_SWIFT_NAME(KAF);
+@property (readonly, class) jchar HAMZA_ABOVE NS_SWIFT_NAME(HAMZA_ABOVE);
+@property (readonly, class) jchar HEH_YEH NS_SWIFT_NAME(HEH_YEH);
+@property (readonly, class) jchar HEH_GOAL NS_SWIFT_NAME(HEH_GOAL);
+@property (readonly, class) jchar HEH NS_SWIFT_NAME(HEH);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Normalize an input buffer of Persian text
@@ -67,50 +64,54 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisFaPersianNormalizer)
 
-inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_YEH();
+inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_YEH(void);
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_YEH 0x064a
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisFaPersianNormalizer, YEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_FARSI_YEH();
+inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_FARSI_YEH(void);
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_FARSI_YEH 0x06cc
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisFaPersianNormalizer, FARSI_YEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_YEH_BARREE();
+inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_YEH_BARREE(void);
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_YEH_BARREE 0x06d2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisFaPersianNormalizer, YEH_BARREE, jchar)
 
-inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_KEHEH();
+inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_KEHEH(void);
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_KEHEH 0x06a9
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisFaPersianNormalizer, KEHEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_KAF();
+inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_KAF(void);
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_KAF 0x0643
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisFaPersianNormalizer, KAF, jchar)
 
-inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_HAMZA_ABOVE();
+inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_HAMZA_ABOVE(void);
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_HAMZA_ABOVE 0x0654
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisFaPersianNormalizer, HAMZA_ABOVE, jchar)
 
-inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_HEH_YEH();
+inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_HEH_YEH(void);
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_HEH_YEH 0x06c0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisFaPersianNormalizer, HEH_YEH, jchar)
 
-inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_HEH_GOAL();
+inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_HEH_GOAL(void);
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_HEH_GOAL 0x06c1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisFaPersianNormalizer, HEH_GOAL, jchar)
 
-inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_HEH();
+inline jchar OrgApacheLuceneAnalysisFaPersianNormalizer_get_HEH(void);
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_HEH 0x0647
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisFaPersianNormalizer, HEH, jchar)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianNormalizer_init(OrgApacheLuceneAnalysisFaPersianNormalizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianNormalizer *new_OrgApacheLuceneAnalysisFaPersianNormalizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianNormalizer *new_OrgApacheLuceneAnalysisFaPersianNormalizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianNormalizer *create_OrgApacheLuceneAnalysisFaPersianNormalizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianNormalizer *create_OrgApacheLuceneAnalysisFaPersianNormalizer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianNormalizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianNormalizer")

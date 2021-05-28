@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsTermStats
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsTermStats_) && (INCLUDE_ALL_OrgApacheLuceneCodecsTermStats || defined(INCLUDE_OrgApacheLuceneCodecsTermStats))
 #define OrgApacheLuceneCodecsTermStats_
 
@@ -25,12 +31,12 @@
  @public
   /*!
    @brief How many documents have at least one occurrence of
- this term.
+   this term.
    */
   jint docFreq_;
   /*!
    @brief Total number of times this term occurs across all
- documents in the field.
+   documents in the field.
    */
   jlong totalTermFreq_;
 }
@@ -40,8 +46,12 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithInt:(jint)docFreq
-                   withLong:(jlong)totalTermFreq;
+- (instancetype __nonnull)initWithInt:(jint)docFreq
+                             withLong:(jlong)totalTermFreq;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -57,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsTermStats)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsTermStats")

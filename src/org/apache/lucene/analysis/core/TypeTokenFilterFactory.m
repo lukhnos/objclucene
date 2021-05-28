@@ -3,9 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/core/TypeTokenFilterFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/util/HashSet.h"
 #include "java/util/List.h"
@@ -15,10 +13,13 @@
 #include "org/apache/lucene/analysis/core/Lucene43TypeTokenFilter.h"
 #include "org/apache/lucene/analysis/core/TypeTokenFilter.h"
 #include "org/apache/lucene/analysis/core/TypeTokenFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 #include "org/apache/lucene/util/Version.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/TypeTokenFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory () {
  @public
@@ -41,11 +42,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory, stopTypes
 }
 
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
-  id<JavaUtilList> files = [self splitFileNamesWithNSString:stopTypesFiles_];
+  id<JavaUtilList> files = JreRetainedLocalValue([self splitFileNamesWithNSString:stopTypesFiles_]);
   if ([((id<JavaUtilList>) nil_chk(files)) size] > 0) {
     JreStrongAssignAndConsume(&stopTypes_, new_JavaUtilHashSet_init());
     for (NSString * __strong file in files) {
-      id<JavaUtilList> typesLines = [self getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:[((NSString *) nil_chk(file)) trim]];
+      id<JavaUtilList> typesLines = JreRetainedLocalValue([self getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:[((NSString *) nil_chk(file)) java_trim]]);
       [((id<JavaUtilSet>) nil_chk(stopTypes_)) addAllWithJavaUtilCollection:typesLines];
     }
   }
@@ -72,19 +73,28 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory, stopTypes
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "TypeTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getStopTypes", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 5, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, 6, 7, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(informWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[2].selector = @selector(getStopTypes);
+  methods[3].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "useWhitelist_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "stopTypesFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stopTypes_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "enablePositionIncrements_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "useWhitelist_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "stopTypesFiles_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "stopTypes_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 8, -1 },
+    { "enablePositionIncrements_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory = { 2, "TypeTokenFilterFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "inform", "LOrgApacheLuceneAnalysisUtilResourceLoader;", "LJavaIoIOException;", "()Ljava/util/Set<Ljava/lang/String;>;", "create", "LOrgApacheLuceneAnalysisTokenStream;", "Ljava/util/Set<Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory = { "TypeTokenFilterFactory", "org.apache.lucene.analysis.core", ptrTable, methods, fields, 7, 0x1, 4, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory;
 }
 

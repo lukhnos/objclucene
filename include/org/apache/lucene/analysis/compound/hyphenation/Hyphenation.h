@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation))
 #define OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_
 
@@ -41,7 +47,11 @@
 /*!
  @brief rawWord as made of alternating strings and <code>Hyphen</code> instances
  */
-- (instancetype)initWithIntArray:(IOSIntArray *)points;
+- (instancetype __nonnull)initWithIntArray:(IOSIntArray *)points;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -57,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation")

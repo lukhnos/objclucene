@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreLockValidatingDirectoryWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreLockValidatingDirectoryWrapper_) && (INCLUDE_ALL_OrgApacheLuceneStoreLockValidatingDirectoryWrapper || defined(INCLUDE_OrgApacheLuceneStoreLockValidatingDirectoryWrapper))
 #define OrgApacheLuceneStoreLockValidatingDirectoryWrapper_
 
@@ -28,14 +34,14 @@
 
 /*!
  @brief This class makes a best-effort check that a provided <code>Lock</code>
- is valid before any destructive filesystem operation.
+  is valid before any destructive filesystem operation.
  */
 @interface OrgApacheLuceneStoreLockValidatingDirectoryWrapper : OrgApacheLuceneStoreFilterDirectory
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg
-                         withOrgApacheLuceneStoreLock:(OrgApacheLuceneStoreLock *)writeLock;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg
+                                   withOrgApacheLuceneStoreLock:(OrgApacheLuceneStoreLock *)writeLock;
 
 - (void)copyFromWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)from
                                      withNSString:(NSString *)src
@@ -52,6 +58,10 @@
 
 - (void)syncWithJavaUtilCollection:(id<JavaUtilCollection>)names;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreLockValidatingDirectoryWrapper)
@@ -66,4 +76,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockValidatingDirectoryWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockValidatingDirectoryWrapper")

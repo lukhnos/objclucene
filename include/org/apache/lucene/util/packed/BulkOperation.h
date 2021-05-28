@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedBulkOperation
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedBulkOperation_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperation || defined(INCLUDE_OrgApacheLuceneUtilPackedBulkOperation))
 #define OrgApacheLuceneUtilPackedBulkOperation_
 
@@ -36,18 +42,18 @@
 
 /*!
  @brief For every number of bits per value, there is a minimum number of
- blocks (b) / values (v) you need to write in order to reach the next block
- boundary:
- - 16 bits per value -&gt; b=2, v=1
- - 24 bits per value -&gt; b=3, v=1
- - 50 bits per value -&gt; b=25, v=4
- - 63 bits per value -&gt; b=63, v=8
- - ...
+  blocks (b) / values (v) you need to write in order to reach the next block
+  boundary:
+   - 16 bits per value -&gt; b=2, v=1
+   - 24 bits per value -&gt; b=3, v=1
+   - 50 bits per value -&gt; b=25, v=4
+   - 63 bits per value -&gt; b=63, v=8
+   - ...
  A bulk read consists in copying <code>iterations*v</code> values that are
- contained in <code>iterations*b</code> blocks into a <code>long[]</code>
- (higher values of <code>iterations</code> are likely to yield a better
- throughput): this requires n * (b + 8v) bytes of memory.
- This method computes <code>iterations</code> as
+  contained in <code>iterations*b</code> blocks into a <code>long[]</code>
+  (higher values of <code>iterations</code> are likely to yield a better
+  throughput): this requires n * (b + 8v) bytes of memory.
+  This method computes <code>iterations</code> as 
  <code>ramBudget / (b + 8v)</code> (since a long is 8 bytes).
  */
 - (jint)computeIterationsWithInt:(jint)valueCount
@@ -64,18 +70,26 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilPackedBulkOperation)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperation *OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, jint bitsPerValue);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedBulkOperation_initPackagePrivate(OrgApacheLuceneUtilPackedBulkOperation *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedBulkOperation_init(OrgApacheLuceneUtilPackedBulkOperation *self);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperation *OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, jint bitsPerValue);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedBulkOperation)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperation")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter || defined(INCLUDE_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter))
 #define OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_
 
@@ -24,18 +30,22 @@
 
 /*!
  @brief This TokenFilter limits the number of tokens while indexing by adding up the
- current offset.
+  current offset.
  */
 @interface OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)offsetLimit;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                             withInt:(jint)offsetLimit;
 
 - (jboolean)incrementToken;
 
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -51,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter")

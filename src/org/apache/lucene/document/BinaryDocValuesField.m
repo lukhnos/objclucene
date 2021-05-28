@@ -10,6 +10,10 @@
 #include "org/apache/lucene/index/DocValuesType.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/BinaryDocValuesField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentBinaryDocValuesField)
 
 OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_TYPE;
@@ -26,6 +30,23 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_TY
   return self;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "TYPE", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneUtilBytesRef;", &OrgApacheLuceneDocumentBinaryDocValuesField_TYPE };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentBinaryDocValuesField = { "BinaryDocValuesField", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x1, 1, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneDocumentBinaryDocValuesField;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentBinaryDocValuesField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentBinaryDocValuesField_TYPE, new_OrgApacheLuceneDocumentFieldType_init());
@@ -35,17 +56,6 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_TY
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentBinaryDocValuesField)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:", "BinaryDocValuesField", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "TYPE", "TYPE", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentBinaryDocValuesField_TYPE, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentBinaryDocValuesField = { 2, "BinaryDocValuesField", "org.apache.lucene.document", NULL, 0x1, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentBinaryDocValuesField;
 }
 
 @end

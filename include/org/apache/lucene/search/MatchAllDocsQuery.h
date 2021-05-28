@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchMatchAllDocsQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchMatchAllDocsQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchMatchAllDocsQuery || defined(INCLUDE_OrgApacheLuceneSearchMatchAllDocsQuery))
 #define OrgApacheLuceneSearchMatchAllDocsQuery_
 
@@ -30,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -43,12 +49,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMatchAllDocsQuery)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchMatchAllDocsQuery_init(OrgApacheLuceneSearchMatchAllDocsQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMatchAllDocsQuery *new_OrgApacheLuceneSearchMatchAllDocsQuery_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchMatchAllDocsQuery *new_OrgApacheLuceneSearchMatchAllDocsQuery_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMatchAllDocsQuery *create_OrgApacheLuceneSearchMatchAllDocsQuery_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchMatchAllDocsQuery *create_OrgApacheLuceneSearchMatchAllDocsQuery_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMatchAllDocsQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMatchAllDocsQuery")

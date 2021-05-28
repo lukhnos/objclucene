@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilIntroSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilIntroSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilIntroSorter || defined(INCLUDE_OrgApacheLuceneUtilIntroSorter))
 #define OrgApacheLuceneUtilIntroSorter_
 
@@ -22,12 +28,12 @@
 
 /*!
  @brief <code>Sorter</code> implementation based on a variant of the quicksort algorithm
- called <a href="http://en.wikipedia.org/wiki/Introsort">introsort</a>: when
- the recursion level exceeds the log of the length of the array to sort, it
- falls back to heapsort.
- This prevents quicksort from running into its
- worst-case quadratic runtime. Small arrays are sorted with
- insertion sort.
+  called <a href="http://en.wikipedia.org/wiki/Introsort">introsort</a>: when
+  the recursion level exceeds the log of the length of the array to sort, it
+  falls back to heapsort.This prevents quicksort from running into its
+  worst-case quadratic runtime.
+ Small arrays are sorted with
+  insertion sort.
  */
 @interface OrgApacheLuceneUtilIntroSorter : OrgApacheLuceneUtilSorter
 
@@ -36,7 +42,7 @@
 /*!
  @brief Create a new <code>IntroSorter</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)sortWithInt:(jint)from
             withInt:(jint)to;
@@ -45,13 +51,13 @@
 
 /*!
  @brief Compare the pivot with the slot at <code>j</code>, similarly to
- <code>compare(i, j)</code>.
+   <code>compare(i, j)</code>.
  */
 - (jint)comparePivotWithInt:(jint)j;
 
 /*!
  @brief Save the value at slot <code>i</code> so that it can later be used as a
- pivot, see <code>comparePivot(int)</code>.
+  pivot, see <code>comparePivot(int)</code>.
  */
 - (void)setPivotWithInt:(jint)i;
 
@@ -75,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntroSorter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilIntroSorter")

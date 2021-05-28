@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_
 
@@ -27,13 +33,13 @@
 
 /*!
  @brief Obtains float field values from <code>org.apache.lucene.index.LeafReader.getNumericDocValues</code> and makes those
- values available as other numeric types, casting as needed.
+  values available as other numeric types, casting as needed.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
 
 - (NSString *)description__;
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSo
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource")

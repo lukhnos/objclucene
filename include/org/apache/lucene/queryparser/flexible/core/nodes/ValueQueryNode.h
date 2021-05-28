@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_
 
@@ -22,9 +28,9 @@
 
 /*!
  @brief This interface should be implemented by <code>QueryNode</code> that holds an
- arbitrary value.
+  arbitrary value.
  */
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, JavaObject >
 
 - (void)setValueWithId:(id)value;
 
@@ -38,4 +44,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesValueQuery
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlFilterBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlFilterBuilder))
 #define OrgApacheLuceneQueryparserXmlFilterBuilder_
 
@@ -22,7 +28,7 @@
 /*!
  @brief Interface for building <code>Filter</code>s
  */
-@protocol OrgApacheLuceneQueryparserXmlFilterBuilder < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserXmlFilterBuilder < JavaObject >
 
 - (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
@@ -34,4 +40,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlFilterBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilder")

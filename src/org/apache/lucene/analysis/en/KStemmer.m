@@ -22,12 +22,16 @@
 #include "org/apache/lucene/analysis/util/CharArrayMap.h"
 #include "org/apache/lucene/analysis/util/OpenStringBuilder.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/en/KStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisEnKStemmer () {
  @public
   /*!
    @brief caching off private int maxCacheSize; private CharArrayMap<String> cache =
- null; private static final String SAME = "SAME"; // use if stemmed form is
- the same
+  null; private static final String SAME = "SAME"; // use if stemmed form is
+  the same
    */
   OrgApacheLuceneAnalysisUtilOpenStringBuilder *word_;
   jint j_;
@@ -115,53 +119,55 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemmer, word_, OrgApacheLuceneAnalysisUtilOpenStringBuilder *)
 
-inline jint OrgApacheLuceneAnalysisEnKStemmer_get_MaxWordLen();
+inline jint OrgApacheLuceneAnalysisEnKStemmer_get_MaxWordLen(void);
 #define OrgApacheLuceneAnalysisEnKStemmer_MaxWordLen 50
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisEnKStemmer, MaxWordLen, jint)
 
-inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_exceptionWords();
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_exceptionWords(void);
 static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_exceptionWords;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, exceptionWords, IOSObjectArray *)
 
-inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_directConflations();
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_directConflations(void);
 static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_directConflations;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, directConflations, IOSObjectArray *)
 
-inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_countryNationality();
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_countryNationality(void);
 static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_countryNationality;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, countryNationality, IOSObjectArray *)
 
-inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_supplementDict();
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_supplementDict(void);
 static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_supplementDict;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, supplementDict, IOSObjectArray *)
 
-inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_properNouns();
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_properNouns(void);
 static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_properNouns;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, properNouns, IOSObjectArray *)
 
-inline OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_get_dict_ht();
+inline OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_get_dict_ht(void);
 static OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_dict_ht;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, dict_ht, OrgApacheLuceneAnalysisUtilCharArrayMap *)
 
-inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ization();
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ization(void);
 inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_set_ization(IOSCharArray *value);
 static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ization;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisEnKStemmer, ization, IOSCharArray *)
 
-inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ition();
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ition(void);
 inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_set_ition(IOSCharArray *value);
 static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ition;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisEnKStemmer, ition, IOSCharArray *)
 
-inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ation();
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ation(void);
 inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_set_ation(IOSCharArray *value);
 static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ation;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisEnKStemmer, ation, IOSCharArray *)
 
-inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ication();
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ication(void);
 inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_set_ication(IOSCharArray *value);
 static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ication;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisEnKStemmer, ication, IOSCharArray *)
+
+__attribute__((unused)) static jchar OrgApacheLuceneAnalysisEnKStemmer_finalChar(OrgApacheLuceneAnalysisEnKStemmer *self);
 
 __attribute__((unused)) static jchar OrgApacheLuceneAnalysisEnKStemmer_penultChar(OrgApacheLuceneAnalysisEnKStemmer *self);
 
@@ -169,7 +175,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisEnKStemmer_isVowe
 
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisEnKStemmer_isConsWithInt_(OrgApacheLuceneAnalysisEnKStemmer *self, jint index);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_initializeDictHash();
+__attribute__((unused)) static OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_initializeDictHash(void);
 
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisEnKStemmer_isAlphaWithChar_(OrgApacheLuceneAnalysisEnKStemmer *self, jchar ch);
 
@@ -236,7 +242,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemmer)
 @implementation OrgApacheLuceneAnalysisEnKStemmer
 
 - (jchar)finalChar {
-  return [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(word_)) charAtWithInt:k_];
+  return OrgApacheLuceneAnalysisEnKStemmer_finalChar(self);
 }
 
 - (jchar)penultChar {
@@ -386,19 +392,19 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)stemWithNSString:(NSString *)term {
-  jboolean changed = [self stemWithCharArray:[((NSString *) nil_chk(term)) toCharArray] withInt:((jint) [term length])];
+  jboolean changed = [self stemWithCharArray:[((NSString *) nil_chk(term)) java_toCharArray] withInt:[term java_length]];
   if (!changed) return term;
   return [self asString];
 }
 
 - (NSString *)asString {
-  NSString *s = [self getString];
+  NSString *s = JreRetainedLocalValue([self getString]);
   if (s != nil) return s;
   return [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(word_)) description];
 }
 
 - (id<JavaLangCharSequence>)asCharSequence {
-  return result_ != nil ? result_ : word_;
+  return result_ != nil ? result_ : (id) word_;
 }
 
 - (NSString *)getString {
@@ -410,7 +416,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getLength {
-  return [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(word_)) length];
+  return [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(word_)) java_length];
 }
 
 - (jboolean)matched {
@@ -424,7 +430,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if ((k_ <= 1) || (k_ >= OrgApacheLuceneAnalysisEnKStemmer_MaxWordLen - 1)) {
     return false;
   }
-  OrgApacheLuceneAnalysisEnKStemmer_DictEntry *entry_ = [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht)) getWithCharArray:term withInt:0 withInt:len];
+  OrgApacheLuceneAnalysisEnKStemmer_DictEntry *entry_ = JreRetainedLocalValue([((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht)) getWithCharArray:term withInt:0 withInt:len]);
   if (entry_ != nil) {
     if (entry_->root_ != nil) {
       JreStrongAssign(&result_, entry_->root_);
@@ -492,6 +498,122 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "C", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "C", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 2, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArrayMap;", 0xa, -1, -1, -1, 3, -1, -1 },
+    { NULL, "Z", 0x2, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 6, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 6, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 6, 9, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 6, 10, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisEnKStemmer_DictEntry;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 13, 14, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 15, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x0, 16, 12, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, 16, 17, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(finalChar);
+  methods[1].selector = @selector(penultChar);
+  methods[2].selector = @selector(isVowelWithInt:);
+  methods[3].selector = @selector(isConsWithInt:);
+  methods[4].selector = @selector(initializeDictHash);
+  methods[5].selector = @selector(isAlphaWithChar:);
+  methods[6].selector = @selector(stemLength);
+  methods[7].selector = @selector(endsInWithCharArray:);
+  methods[8].selector = @selector(endsInWithChar:withChar:);
+  methods[9].selector = @selector(endsInWithChar:withChar:withChar:);
+  methods[10].selector = @selector(endsInWithChar:withChar:withChar:withChar:);
+  methods[11].selector = @selector(wordInDict);
+  methods[12].selector = @selector(plural);
+  methods[13].selector = @selector(setSuffixWithNSString:);
+  methods[14].selector = @selector(setSuffWithNSString:withInt:);
+  methods[15].selector = @selector(lookup);
+  methods[16].selector = @selector(pastTense);
+  methods[17].selector = @selector(doubleCWithInt:);
+  methods[18].selector = @selector(vowelInStem);
+  methods[19].selector = @selector(aspect);
+  methods[20].selector = @selector(ityEndings);
+  methods[21].selector = @selector(nceEndings);
+  methods[22].selector = @selector(nessEndings);
+  methods[23].selector = @selector(ismEndings);
+  methods[24].selector = @selector(mentEndings);
+  methods[25].selector = @selector(izeEndings);
+  methods[26].selector = @selector(ncyEndings);
+  methods[27].selector = @selector(bleEndings);
+  methods[28].selector = @selector(icEndings);
+  methods[29].selector = @selector(ionEndings);
+  methods[30].selector = @selector(erAndOrEndings);
+  methods[31].selector = @selector(lyEndings);
+  methods[32].selector = @selector(alEndings);
+  methods[33].selector = @selector(iveEndings);
+  methods[34].selector = @selector(init);
+  methods[35].selector = @selector(stemWithNSString:);
+  methods[36].selector = @selector(asString);
+  methods[37].selector = @selector(asCharSequence);
+  methods[38].selector = @selector(getString);
+  methods[39].selector = @selector(getChars);
+  methods[40].selector = @selector(getLength);
+  methods[41].selector = @selector(matched);
+  methods[42].selector = @selector(stemWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "MaxWordLen", "I", .constantValue.asInt = OrgApacheLuceneAnalysisEnKStemmer_MaxWordLen, 0x1a, -1, -1, -1, -1 },
+    { "exceptionWords", "[LNSString;", .constantValue.asLong = 0, 0x1a, -1, 18, -1, -1 },
+    { "directConflations", "[[LNSString;", .constantValue.asLong = 0, 0x1a, -1, 19, -1, -1 },
+    { "countryNationality", "[[LNSString;", .constantValue.asLong = 0, 0x1a, -1, 20, -1, -1 },
+    { "supplementDict", "[LNSString;", .constantValue.asLong = 0, 0x1a, -1, 21, -1, -1 },
+    { "properNouns", "[LNSString;", .constantValue.asLong = 0, 0x1a, -1, 22, -1, -1 },
+    { "dict_ht", "LOrgApacheLuceneAnalysisUtilCharArrayMap;", .constantValue.asLong = 0, 0x1a, -1, 23, 24, -1 },
+    { "word_", "LOrgApacheLuceneAnalysisUtilOpenStringBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "j_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "k_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "matchedEntry_", "LOrgApacheLuceneAnalysisEnKStemmer_DictEntry;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ization", "[C", .constantValue.asLong = 0, 0xa, -1, 25, -1, -1 },
+    { "ition", "[C", .constantValue.asLong = 0, 0xa, -1, 26, -1, -1 },
+    { "ation", "[C", .constantValue.asLong = 0, 0xa, -1, 27, -1, -1 },
+    { "ication", "[C", .constantValue.asLong = 0, 0xa, -1, 28, -1, -1 },
+    { "result_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "isVowel", "I", "isCons", "()Lorg/apache/lucene/analysis/util/CharArrayMap<Lorg/apache/lucene/analysis/en/KStemmer$DictEntry;>;", "isAlpha", "C", "endsIn", "[C", "CC", "CCC", "CCCC", "setSuffix", "LNSString;", "setSuff", "LNSString;I", "doubleC", "stem", "[CI", &OrgApacheLuceneAnalysisEnKStemmer_exceptionWords, &OrgApacheLuceneAnalysisEnKStemmer_directConflations, &OrgApacheLuceneAnalysisEnKStemmer_countryNationality, &OrgApacheLuceneAnalysisEnKStemmer_supplementDict, &OrgApacheLuceneAnalysisEnKStemmer_properNouns, &OrgApacheLuceneAnalysisEnKStemmer_dict_ht, "Lorg/apache/lucene/analysis/util/CharArrayMap<Lorg/apache/lucene/analysis/en/KStemmer$DictEntry;>;", &OrgApacheLuceneAnalysisEnKStemmer_ization, &OrgApacheLuceneAnalysisEnKStemmer_ition, &OrgApacheLuceneAnalysisEnKStemmer_ation, &OrgApacheLuceneAnalysisEnKStemmer_ication, "LOrgApacheLuceneAnalysisEnKStemmer_DictEntry;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnKStemmer = { "KStemmer", "org.apache.lucene.analysis.en", ptrTable, methods, fields, 7, 0x1, 43, 16, -1, 29, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisEnKStemmer;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisEnKStemmer class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_exceptionWords, [IOSObjectArray newArrayWithObjects:(id[]){ @"aide", @"bathe", @"caste", @"cute", @"dame", @"dime", @"doge", @"done", @"dune", @"envelope", @"gage", @"grille", @"grippe", @"lobe", @"mane", @"mare", @"nape", @"node", @"pane", @"pate", @"plane", @"pope", @"programme", @"quite", @"ripe", @"rote", @"rune", @"sage", @"severe", @"shoppe", @"sine", @"slime", @"snipe", @"steppe", @"suite", @"swinge", @"tare", @"tine", @"tope", @"tripe", @"twine" } count:41 type:NSString_class_()]);
@@ -500,84 +622,19 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_supplementDict, [IOSObjectArray newArrayWithObjects:(id[]){ @"aids", @"applicator", @"capacitor", @"digitize", @"electromagnet", @"ellipsoid", @"exosphere", @"extensible", @"ferromagnet", @"graphics", @"hydromagnet", @"polygraph", @"toroid", @"superconduct", @"backscatter", @"connectionism" } count:16 type:NSString_class_()]);
     JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_properNouns, [IOSObjectArray newArrayWithObjects:(id[]){ @"abrams", @"achilles", @"acropolis", @"adams", @"agnes", @"aires", @"alexander", @"alexis", @"alfred", @"algiers", @"alps", @"amadeus", @"ames", @"amos", @"andes", @"angeles", @"annapolis", @"antilles", @"aquarius", @"archimedes", @"arkansas", @"asher", @"ashly", @"athens", @"atkins", @"atlantis", @"avis", @"bahamas", @"bangor", @"barbados", @"barger", @"bering", @"brahms", @"brandeis", @"brussels", @"bruxelles", @"cairns", @"camoros", @"camus", @"carlos", @"celts", @"chalker", @"charles", @"cheops", @"ching", @"christmas", @"cocos", @"collins", @"columbus", @"confucius", @"conners", @"connolly", @"copernicus", @"cramer", @"cyclops", @"cygnus", @"cyprus", @"dallas", @"damascus", @"daniels", @"davies", @"davis", @"decker", @"denning", @"dennis", @"descartes", @"dickens", @"doris", @"douglas", @"downs", @"dreyfus", @"dukakis", @"dulles", @"dumfries", @"ecclesiastes", @"edwards", @"emily", @"erasmus", @"euphrates", @"evans", @"everglades", @"fairbanks", @"federales", @"fisher", @"fitzsimmons", @"fleming", @"forbes", @"fowler", @"france", @"francis", @"goering", @"goodling", @"goths", @"grenadines", @"guiness", @"hades", @"harding", @"harris", @"hastings", @"hawkes", @"hawking", @"hayes", @"heights", @"hercules", @"himalayas", @"hippocrates", @"hobbs", @"holmes", @"honduras", @"hopkins", @"hughes", @"humphreys", @"illinois", @"indianapolis", @"inverness", @"iris", @"iroquois", @"irving", @"isaacs", @"italy", @"james", @"jarvis", @"jeffreys", @"jesus", @"jones", @"josephus", @"judas", @"julius", @"kansas", @"keynes", @"kipling", @"kiwanis", @"lansing", @"laos", @"leeds", @"levis", @"leviticus", @"lewis", @"louis", @"maccabees", @"madras", @"maimonides", @"maldive", @"massachusetts", @"matthews", @"mauritius", @"memphis", @"mercedes", @"midas", @"mingus", @"minneapolis", @"mohammed", @"moines", @"morris", @"moses", @"myers", @"myknos", @"nablus", @"nanjing", @"nantes", @"naples", @"neal", @"netherlands", @"nevis", @"nostradamus", @"oedipus", @"olympus", @"orleans", @"orly", @"papas", @"paris", @"parker", @"pauling", @"peking", @"pershing", @"peter", @"peters", @"philippines", @"phineas", @"pisces", @"pryor", @"pythagoras", @"queens", @"rabelais", @"ramses", @"reynolds", @"rhesus", @"rhodes", @"richards", @"robins", @"rodgers", @"rogers", @"rubens", @"sagittarius", @"seychelles", @"socrates", @"texas", @"thames", @"thomas", @"tiberias", @"tunis", @"venus", @"vilnius", @"wales", @"warner", @"wilkins", @"williams", @"wyoming", @"xmas", @"yonkers", @"zeus", @"frances", @"aarhus", @"adonis", @"andrews", @"angus", @"antares", @"aquinas", @"arcturus", @"ares", @"artemis", @"augustus", @"ayers", @"barnabas", @"barnes", @"becker", @"bejing", @"biggs", @"billings", @"boeing", @"boris", @"borroughs", @"briggs", @"buenos", @"calais", @"caracas", @"cassius", @"cerberus", @"ceres", @"cervantes", @"chantilly", @"chartres", @"chester", @"connally", @"conner", @"coors", @"cummings", @"curtis", @"daedalus", @"dionysus", @"dobbs", @"dolores", @"edmonds" } count:253 type:NSString_class_()]);
     JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_dict_ht, OrgApacheLuceneAnalysisEnKStemmer_initializeDictHash());
-    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ization, [@"ization" toCharArray]);
-    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ition, [@"ition" toCharArray]);
-    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ation, [@"ation" toCharArray]);
-    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ication, [@"ication" toCharArray]);
+    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ization, [@"ization" java_toCharArray]);
+    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ition, [@"ition" java_toCharArray]);
+    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ation, [@"ation" java_toCharArray]);
+    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ication, [@"ication" java_toCharArray]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisEnKStemmer)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "finalChar", NULL, "C", 0x2, NULL, NULL },
-    { "penultChar", NULL, "C", 0x2, NULL, NULL },
-    { "isVowelWithInt:", "isVowel", "Z", 0x2, NULL, NULL },
-    { "isConsWithInt:", "isCons", "Z", 0x2, NULL, NULL },
-    { "initializeDictHash", NULL, "Lorg.apache.lucene.analysis.util.CharArrayMap;", 0xa, NULL, "()Lorg/apache/lucene/analysis/util/CharArrayMap<Lorg/apache/lucene/analysis/en/KStemmer$DictEntry;>;" },
-    { "isAlphaWithChar:", "isAlpha", "Z", 0x2, NULL, NULL },
-    { "stemLength", NULL, "I", 0x2, NULL, NULL },
-    { "endsInWithCharArray:", "endsIn", "Z", 0x2, NULL, NULL },
-    { "endsInWithChar:withChar:", "endsIn", "Z", 0x2, NULL, NULL },
-    { "endsInWithChar:withChar:withChar:", "endsIn", "Z", 0x2, NULL, NULL },
-    { "endsInWithChar:withChar:withChar:withChar:", "endsIn", "Z", 0x2, NULL, NULL },
-    { "wordInDict", NULL, "Lorg.apache.lucene.analysis.en.KStemmer$DictEntry;", 0x2, NULL, NULL },
-    { "plural", NULL, "V", 0x2, NULL, NULL },
-    { "setSuffixWithNSString:", "setSuffix", "V", 0x2, NULL, NULL },
-    { "setSuffWithNSString:withInt:", "setSuff", "V", 0x2, NULL, NULL },
-    { "lookup", NULL, "Z", 0x2, NULL, NULL },
-    { "pastTense", NULL, "V", 0x2, NULL, NULL },
-    { "doubleCWithInt:", "doubleC", "Z", 0x2, NULL, NULL },
-    { "vowelInStem", NULL, "Z", 0x2, NULL, NULL },
-    { "aspect", NULL, "V", 0x2, NULL, NULL },
-    { "ityEndings", NULL, "V", 0x2, NULL, NULL },
-    { "nceEndings", NULL, "V", 0x2, NULL, NULL },
-    { "nessEndings", NULL, "V", 0x2, NULL, NULL },
-    { "ismEndings", NULL, "V", 0x2, NULL, NULL },
-    { "mentEndings", NULL, "V", 0x2, NULL, NULL },
-    { "izeEndings", NULL, "V", 0x2, NULL, NULL },
-    { "ncyEndings", NULL, "V", 0x2, NULL, NULL },
-    { "bleEndings", NULL, "V", 0x2, NULL, NULL },
-    { "icEndings", NULL, "V", 0x2, NULL, NULL },
-    { "ionEndings", NULL, "V", 0x2, NULL, NULL },
-    { "erAndOrEndings", NULL, "V", 0x2, NULL, NULL },
-    { "lyEndings", NULL, "V", 0x2, NULL, NULL },
-    { "alEndings", NULL, "V", 0x2, NULL, NULL },
-    { "iveEndings", NULL, "V", 0x2, NULL, NULL },
-    { "init", "KStemmer", NULL, 0x0, NULL, NULL },
-    { "stemWithNSString:", "stem", "Ljava.lang.String;", 0x0, NULL, NULL },
-    { "asString", NULL, "Ljava.lang.String;", 0x0, NULL, NULL },
-    { "asCharSequence", NULL, "Ljava.lang.CharSequence;", 0x0, NULL, NULL },
-    { "getString", NULL, "Ljava.lang.String;", 0x0, NULL, NULL },
-    { "getChars", NULL, "[C", 0x0, NULL, NULL },
-    { "getLength", NULL, "I", 0x0, NULL, NULL },
-    { "matched", NULL, "Z", 0x2, NULL, NULL },
-    { "stemWithCharArray:withInt:", "stem", "Z", 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "MaxWordLen", "MaxWordLen", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisEnKStemmer_MaxWordLen },
-    { "exceptionWords", "exceptionWords", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_exceptionWords, NULL, .constantValue.asLong = 0 },
-    { "directConflations", "directConflations", 0x1a, "[[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_directConflations, NULL, .constantValue.asLong = 0 },
-    { "countryNationality", "countryNationality", 0x1a, "[[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_countryNationality, NULL, .constantValue.asLong = 0 },
-    { "supplementDict", "supplementDict", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_supplementDict, NULL, .constantValue.asLong = 0 },
-    { "properNouns", "properNouns", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_properNouns, NULL, .constantValue.asLong = 0 },
-    { "dict_ht", "dict_ht", 0x1a, "Lorg.apache.lucene.analysis.util.CharArrayMap;", &OrgApacheLuceneAnalysisEnKStemmer_dict_ht, "Lorg/apache/lucene/analysis/util/CharArrayMap<Lorg/apache/lucene/analysis/en/KStemmer$DictEntry;>;", .constantValue.asLong = 0 },
-    { "word_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.OpenStringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "j_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "k_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "matchedEntry_", NULL, 0x0, "Lorg.apache.lucene.analysis.en.KStemmer$DictEntry;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ization", "ization", 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ization, NULL, .constantValue.asLong = 0 },
-    { "ition", "ition", 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ition, NULL, .constantValue.asLong = 0 },
-    { "ation", "ation", 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ation, NULL, .constantValue.asLong = 0 },
-    { "ication", "ication", 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ication, NULL, .constantValue.asLong = 0 },
-    { "result_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.en.KStemmer$DictEntry;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnKStemmer = { 2, "KStemmer", "org.apache.lucene.analysis.en", NULL, 0x1, 43, methods, 16, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisEnKStemmer;
-}
-
 @end
+
+jchar OrgApacheLuceneAnalysisEnKStemmer_finalChar(OrgApacheLuceneAnalysisEnKStemmer *self) {
+  return [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) charAtWithInt:self->k_];
+}
 
 jchar OrgApacheLuceneAnalysisEnKStemmer_penultChar(OrgApacheLuceneAnalysisEnKStemmer *self) {
   return [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) charAtWithInt:self->k_ - 1];
@@ -729,7 +786,7 @@ jint OrgApacheLuceneAnalysisEnKStemmer_stemLength(OrgApacheLuceneAnalysisEnKStem
 
 jboolean OrgApacheLuceneAnalysisEnKStemmer_endsInWithCharArray_(OrgApacheLuceneAnalysisEnKStemmer *self, IOSCharArray *s) {
   if (((IOSCharArray *) nil_chk(s))->size_ > self->k_) return false;
-  jint r = [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) length] - s->size_;
+  jint r = [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) java_length] - s->size_;
   self->j_ = self->k_;
   for (jint r1 = r, i = 0; i < s->size_; i++, r1++) {
     if (IOSCharArray_Get(s, i) != [self->word_ charAtWithInt:r1]) return false;
@@ -767,7 +824,7 @@ jboolean OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_withChar_with
 
 OrgApacheLuceneAnalysisEnKStemmer_DictEntry *OrgApacheLuceneAnalysisEnKStemmer_wordInDict(OrgApacheLuceneAnalysisEnKStemmer *self) {
   if (self->matchedEntry_ != nil) return self->matchedEntry_;
-  OrgApacheLuceneAnalysisEnKStemmer_DictEntry *e = [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht)) getWithCharArray:[((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) getArray] withInt:0 withInt:[self->word_ length]];
+  OrgApacheLuceneAnalysisEnKStemmer_DictEntry *e = JreRetainedLocalValue([((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht)) getWithCharArray:[((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) getArray] withInt:0 withInt:[self->word_ java_length]]);
   if (e != nil && !e->exception_) {
     JreStrongAssign(&self->matchedEntry_, e);
   }
@@ -799,7 +856,7 @@ void OrgApacheLuceneAnalysisEnKStemmer_plural(OrgApacheLuceneAnalysisEnKStemmer 
       return;
     }
     else {
-      if ([self->word_ length] > 3 && OrgApacheLuceneAnalysisEnKStemmer_penultChar(self) != 's' && !OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_withChar_(self, 'o', 'u', 's')) {
+      if ([self->word_ java_length] > 3 && OrgApacheLuceneAnalysisEnKStemmer_penultChar(self) != 's' && !OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_withChar_(self, 'o', 'u', 's')) {
         [self->word_ setLengthWithInt:self->k_];
         self->k_--;
         OrgApacheLuceneAnalysisEnKStemmer_lookup(self);
@@ -809,7 +866,7 @@ void OrgApacheLuceneAnalysisEnKStemmer_plural(OrgApacheLuceneAnalysisEnKStemmer 
 }
 
 void OrgApacheLuceneAnalysisEnKStemmer_setSuffixWithNSString_(OrgApacheLuceneAnalysisEnKStemmer *self, NSString *s) {
-  OrgApacheLuceneAnalysisEnKStemmer_setSuffWithNSString_withInt_(self, s, ((jint) [((NSString *) nil_chk(s)) length]));
+  OrgApacheLuceneAnalysisEnKStemmer_setSuffWithNSString_withInt_(self, s, [((NSString *) nil_chk(s)) java_length]);
 }
 
 void OrgApacheLuceneAnalysisEnKStemmer_setSuffWithNSString_withInt_(OrgApacheLuceneAnalysisEnKStemmer *self, NSString *s, jint len) {
@@ -826,7 +883,7 @@ jboolean OrgApacheLuceneAnalysisEnKStemmer_lookup(OrgApacheLuceneAnalysisEnKStem
 }
 
 void OrgApacheLuceneAnalysisEnKStemmer_pastTense(OrgApacheLuceneAnalysisEnKStemmer *self) {
-  if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) length] <= 4) return;
+  if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) java_length] <= 4) return;
   if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_withChar_(self, 'i', 'e', 'd')) {
     [self->word_ setLengthWithInt:self->j_ + 3];
     self->k_--;
@@ -881,7 +938,7 @@ jboolean OrgApacheLuceneAnalysisEnKStemmer_vowelInStem(OrgApacheLuceneAnalysisEn
 }
 
 void OrgApacheLuceneAnalysisEnKStemmer_aspect(OrgApacheLuceneAnalysisEnKStemmer *self) {
-  if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) length] <= 5) return;
+  if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) java_length] <= 5) return;
   if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_withChar_(self, 'i', 'n', 'g') && OrgApacheLuceneAnalysisEnKStemmer_vowelInStem(self)) {
     [self->word_ setCharAtWithInt:self->j_ + 1 withChar:'e'];
     [self->word_ setLengthWithInt:self->j_ + 2];
@@ -1240,7 +1297,7 @@ void OrgApacheLuceneAnalysisEnKStemmer_lyEndings(OrgApacheLuceneAnalysisEnKStemm
 
 void OrgApacheLuceneAnalysisEnKStemmer_alEndings(OrgApacheLuceneAnalysisEnKStemmer *self) {
   jint old_k = self->k_;
-  if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) length] < 4) return;
+  if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) java_length] < 4) return;
   if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_(self, 'a', 'l')) {
     [self->word_ setLengthWithInt:self->j_ + 1];
     self->k_ = self->j_;
@@ -1353,14 +1410,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisEnKStemmer)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withBoolean:", "DictEntry", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "exception_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "root_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "exception_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "root_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnKStemmer_DictEntry = { 2, "DictEntry", "org.apache.lucene.analysis.en", "KStemmer", 0x8, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;Z", "LOrgApacheLuceneAnalysisEnKStemmer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnKStemmer_DictEntry = { "DictEntry", "org.apache.lucene.analysis.en", ptrTable, methods, fields, 7, 0x8, 1, 2, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisEnKStemmer_DictEntry;
 }
 

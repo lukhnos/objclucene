@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/codecs/TermStats.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/TermStats must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneCodecsTermStats
 
 - (instancetype)initWithInt:(jint)docFreq
@@ -15,14 +19,20 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withLong:", "TermStats", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "docFreq_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalTermFreq_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "docFreq_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "totalTermFreq_", "J", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsTermStats = { 2, "TermStats", "org.apache.lucene.codecs", NULL, 0x1, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IJ" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsTermStats = { "TermStats", "org.apache.lucene.codecs", ptrTable, methods, fields, 7, 0x1, 1, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsTermStats;
 }
 

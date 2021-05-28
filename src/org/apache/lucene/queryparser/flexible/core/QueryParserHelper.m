@@ -3,16 +3,18 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/QueryParserHelper.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
 #include "org/apache/lucene/queryparser/flexible/core/QueryParserHelper.h"
 #include "org/apache/lucene/queryparser/flexible/core/builders/QueryBuilder.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/SyntaxParser.h"
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/QueryParserHelper must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreQueryParserHelper () {
  @public
@@ -76,7 +78,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreQueryParserHelper, con
 
 - (void)setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)config {
   JreStrongAssign(&self->config_, config);
-  id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor> processor = [self getQueryNodeProcessor];
+  id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor> processor = JreRetainedLocalValue([self getQueryNodeProcessor]);
   if (processor != nil) {
     [processor setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:config];
   }
@@ -84,8 +86,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreQueryParserHelper, con
 
 - (id)parseWithNSString:(NSString *)query
            withNSString:(NSString *)defaultField {
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> queryTree = [((id<OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser>) nil_chk([self getSyntaxParser])) parseWithJavaLangCharSequence:query withJavaLangCharSequence:defaultField];
-  id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor> processor = [self getQueryNodeProcessor];
+  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> queryTree = JreRetainedLocalValue([((id<OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser>) nil_chk([self getSyntaxParser])) parseWithJavaLangCharSequence:query withJavaLangCharSequence:defaultField]);
+  id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor> processor = JreRetainedLocalValue([self getQueryNodeProcessor]);
   if (processor != nil) {
     queryTree = [processor processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
   }
@@ -101,25 +103,40 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreQueryParserHelper, con
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:withOrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser:withOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:", "QueryParserHelper", NULL, 0x1, NULL, NULL },
-    { "getQueryNodeProcessor", NULL, "Lorg.apache.lucene.queryparser.flexible.core.processors.QueryNodeProcessor;", 0x1, NULL, NULL },
-    { "setQueryNodeProcessorWithOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor:", "setQueryNodeProcessor", "V", 0x1, NULL, NULL },
-    { "setSyntaxParserWithOrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser:", "setSyntaxParser", "V", 0x1, NULL, NULL },
-    { "setQueryBuilderWithOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:", "setQueryBuilder", "V", 0x1, NULL, NULL },
-    { "getQueryConfigHandler", NULL, "Lorg.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler;", 0x1, NULL, NULL },
-    { "getQueryBuilder", NULL, "Lorg.apache.lucene.queryparser.flexible.core.builders.QueryBuilder;", 0x1, NULL, NULL },
-    { "getSyntaxParser", NULL, "Lorg.apache.lucene.queryparser.flexible.core.parser.SyntaxParser;", 0x1, NULL, NULL },
-    { "setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:", "setQueryConfigHandler", "V", 0x1, NULL, NULL },
-    { "parseWithNSString:withNSString:", "parse", "Ljava.lang.Object;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 9, 10, 11, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:withOrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser:withOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:);
+  methods[1].selector = @selector(getQueryNodeProcessor);
+  methods[2].selector = @selector(setQueryNodeProcessorWithOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor:);
+  methods[3].selector = @selector(setSyntaxParserWithOrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser:);
+  methods[4].selector = @selector(setQueryBuilderWithOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:);
+  methods[5].selector = @selector(getQueryConfigHandler);
+  methods[6].selector = @selector(getQueryBuilder);
+  methods[7].selector = @selector(getSyntaxParser);
+  methods[8].selector = @selector(setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:);
+  methods[9].selector = @selector(parseWithNSString:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "processor_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.processors.QueryNodeProcessor;", NULL, NULL, .constantValue.asLong = 0 },
-    { "syntaxParser_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.parser.SyntaxParser;", NULL, NULL, .constantValue.asLong = 0 },
-    { "builder_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.builders.QueryBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "config_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler;", NULL, NULL, .constantValue.asLong = 0 },
+    { "processor_", "LOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "syntaxParser_", "LOrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "builder_", "LOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "config_", "LOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreQueryParserHelper = { 2, "QueryParserHelper", "org.apache.lucene.queryparser.flexible.core", NULL, 0x1, 10, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;LOrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser;LOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor;LOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder;", "setQueryNodeProcessor", "LOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor;", "setSyntaxParser", "LOrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser;", "setQueryBuilder", "LOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder;", "setQueryConfigHandler", "LOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;", "parse", "LNSString;LNSString;", "LOrgApacheLuceneQueryparserFlexibleCoreQueryNodeException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreQueryParserHelper = { "QueryParserHelper", "org.apache.lucene.queryparser.flexible.core", ptrTable, methods, fields, 7, 0x1, 10, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreQueryParserHelper;
 }
 

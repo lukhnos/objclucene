@@ -11,6 +11,10 @@
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/ByteArrayDataInput must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneStoreByteArrayDataInput () {
  @public
   IOSByteArray *bytes_;
@@ -80,26 +84,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jshort)readShort {
-  jint unseq$1 = pos_++;
-  return (jshort) ((JreLShift32((IOSByteArray_Get(nil_chk(bytes_), unseq$1) & (jint) 0xFF), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF));
+  return (jshort) ((JreLShift32((IOSByteArray_Get(nil_chk(bytes_), pos_++) & (jint) 0xFF), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF));
 }
 
 - (jint)readInt {
-  jint unseq$1 = pos_++;
-  jint unseq$2 = pos_++;
-  jint unseq$3 = pos_++;
-  return (JreLShift32((IOSByteArray_Get(nil_chk(bytes_), unseq$1) & (jint) 0xFF), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$2) & (jint) 0xFF), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$3) & (jint) 0xFF), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF);
+  return (JreLShift32((IOSByteArray_Get(nil_chk(bytes_), pos_++) & (jint) 0xFF), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF);
 }
 
 - (jlong)readLong {
-  jint unseq$1 = pos_++;
-  jint unseq$2 = pos_++;
-  jint unseq$3 = pos_++;
-  jint i1 = (JreLShift32((IOSByteArray_Get(nil_chk(bytes_), unseq$1) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$2) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$3) & (jint) 0xff), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff);
-  jint unseq$4 = pos_++;
-  jint unseq$5 = pos_++;
-  jint unseq$6 = pos_++;
-  jint i2 = (JreLShift32((IOSByteArray_Get(bytes_, unseq$4) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$5) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$6) & (jint) 0xff), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff);
+  jint i1 = (JreLShift32((IOSByteArray_Get(nil_chk(bytes_), pos_++) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff);
+  jint i2 = (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff);
   return (JreLShift64(((jlong) i1), 32)) | (i2 & (jlong) 0xFFFFFFFFLL);
 }
 
@@ -170,32 +164,55 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithByteArray:", "ByteArrayDataInput", NULL, 0x1, NULL, NULL },
-    { "initWithByteArray:withInt:withInt:", "ByteArrayDataInput", NULL, 0x1, NULL, NULL },
-    { "init", "ByteArrayDataInput", NULL, 0x1, NULL, NULL },
-    { "resetWithByteArray:", "reset", "V", 0x1, NULL, NULL },
-    { "rewind", NULL, "V", 0x1, NULL, NULL },
-    { "getPosition", NULL, "I", 0x1, NULL, NULL },
-    { "setPositionWithInt:", "setPosition", "V", 0x1, NULL, NULL },
-    { "resetWithByteArray:withInt:withInt:", "reset", "V", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "eof", NULL, "Z", 0x1, NULL, NULL },
-    { "skipBytesWithLong:", "skipBytes", "V", 0x1, NULL, NULL },
-    { "readShort", NULL, "S", 0x1, NULL, NULL },
-    { "readInt", NULL, "I", 0x1, NULL, NULL },
-    { "readLong", NULL, "J", 0x1, NULL, NULL },
-    { "readVInt", NULL, "I", 0x1, NULL, NULL },
-    { "readVLong", NULL, "J", 0x1, NULL, NULL },
-    { "readByte", NULL, "B", 0x1, NULL, NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "S", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithByteArray:);
+  methods[1].selector = @selector(initWithByteArray:withInt:withInt:);
+  methods[2].selector = @selector(init);
+  methods[3].selector = @selector(resetWithByteArray:);
+  methods[4].selector = @selector(rewind);
+  methods[5].selector = @selector(getPosition);
+  methods[6].selector = @selector(setPositionWithInt:);
+  methods[7].selector = @selector(resetWithByteArray:withInt:withInt:);
+  methods[8].selector = @selector(length);
+  methods[9].selector = @selector(eof);
+  methods[10].selector = @selector(skipBytesWithLong:);
+  methods[11].selector = @selector(readShort);
+  methods[12].selector = @selector(readInt);
+  methods[13].selector = @selector(readLong);
+  methods[14].selector = @selector(readVInt);
+  methods[15].selector = @selector(readVLong);
+  methods[16].selector = @selector(readByte);
+  methods[17].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bytes_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "limit_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "bytes_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "limit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteArrayDataInput = { 2, "ByteArrayDataInput", "org.apache.lucene.store", NULL, 0x11, 18, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[B", "[BII", "reset", "setPosition", "I", "skipBytes", "J", "readBytes" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteArrayDataInput = { "ByteArrayDataInput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x11, 18, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreByteArrayDataInput;
 }
 

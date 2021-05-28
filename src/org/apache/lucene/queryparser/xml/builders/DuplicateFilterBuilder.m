@@ -3,7 +3,6 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/DuplicateFilterBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/xml/DOMUtils.h"
 #include "org/apache/lucene/queryparser/xml/ParserException.h"
@@ -12,33 +11,11 @@
 #include "org/apache/lucene/search/Filter.h"
 #include "org/w3c/dom/Element.h"
 
-@implementation OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/DuplicateFilterBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-- (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
-  NSString *fieldName = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceOrFailWithOrgW3cDomElement_withNSString_(e, @"fieldName");
-  OrgApacheLuceneSandboxQueriesDuplicateFilter *df = create_OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_(fieldName);
-  NSString *keepMode = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withNSString_(e, @"keepMode", @"first");
-  if ([((NSString *) nil_chk(keepMode)) equalsIgnoreCase:@"first"]) {
-    [df setKeepModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode:JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_FIRST_OCCURRENCE)];
-  }
-  else if ([keepMode equalsIgnoreCase:@"last"]) {
-    [df setKeepModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode:JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_LAST_OCCURRENCE)];
-  }
-  else {
-    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"Illegal keepMode attribute in DuplicateFilter:", keepMode));
-  }
-  NSString *processingMode = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withNSString_(e, @"processingMode", @"full");
-  if ([((NSString *) nil_chk(processingMode)) equalsIgnoreCase:@"full"]) {
-    [df setProcessingModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FULL_VALIDATION)];
-  }
-  else if ([processingMode equalsIgnoreCase:@"fast"]) {
-    [df setProcessingModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FAST_INVALIDATION)];
-  }
-  else {
-    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"Illegal processingMode attribute in DuplicateFilter:", processingMode));
-  }
-  return df;
-}
+@implementation OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -47,12 +24,45 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
+  NSString *fieldName = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceOrFailWithOrgW3cDomElement_withNSString_(e, @"fieldName");
+  OrgApacheLuceneSandboxQueriesDuplicateFilter *df = create_OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_(fieldName);
+  NSString *keepMode = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withNSString_(e, @"keepMode", @"first");
+  if ([((NSString *) nil_chk(keepMode)) java_equalsIgnoreCase:@"first"]) {
+    [df setKeepModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode:JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_FIRST_OCCURRENCE)];
+  }
+  else if ([keepMode java_equalsIgnoreCase:@"last"]) {
+    [df setKeepModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode:JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_LAST_OCCURRENCE)];
+  }
+  else {
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"Illegal keepMode attribute in DuplicateFilter:", keepMode));
+  }
+  NSString *processingMode = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withNSString_(e, @"processingMode", @"full");
+  if ([((NSString *) nil_chk(processingMode)) java_equalsIgnoreCase:@"full"]) {
+    [df setProcessingModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FULL_VALIDATION)];
+  }
+  else if ([processingMode java_equalsIgnoreCase:@"fast"]) {
+    [df setProcessingModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FAST_INVALIDATION)];
+  }
+  else {
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"Illegal processingMode attribute in DuplicateFilter:", processingMode));
+  }
+  return df;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getFilterWithOrgW3cDomElement:", "getFilter", "Lorg.apache.lucene.search.Filter;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", "DuplicateFilterBuilder", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFilter;", 0x1, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder = { 2, "DuplicateFilterBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getFilterWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getFilter", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder = { "DuplicateFilterBuilder", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder;
 }
 

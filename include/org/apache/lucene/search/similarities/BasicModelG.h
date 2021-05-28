@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelG
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesBasicModelG_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelG || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModelG))
 #define OrgApacheLuceneSearchSimilaritiesBasicModelG_
 
@@ -23,10 +29,9 @@
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
 /*!
- @brief Geometric as limiting form of the Bose-Einstein model.
- The formula used in Lucene differs
- slightly from the one in the original paper: <code>F</code> is increased by <code>1</code>
- and <code>N</code> is increased by <code>F</code>.
+ @brief Geometric as limiting form of the Bose-Einstein model.The formula used in Lucene differs
+  slightly from the one in the original paper: <code>F</code> is increased by <code>1</code>
+  and <code>N</code> is increased by <code>F</code>.
  */
 @interface OrgApacheLuceneSearchSimilaritiesBasicModelG : OrgApacheLuceneSearchSimilaritiesBasicModel
 
@@ -35,7 +40,7 @@
 /*!
  @brief Sole constructor: parameter-free
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn;
@@ -48,12 +53,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesBasicModelG)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBasicModelG_init(OrgApacheLuceneSearchSimilaritiesBasicModelG *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelG *new_OrgApacheLuceneSearchSimilaritiesBasicModelG_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelG *new_OrgApacheLuceneSearchSimilaritiesBasicModelG_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelG *create_OrgApacheLuceneSearchSimilaritiesBasicModelG_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelG *create_OrgApacheLuceneSearchSimilaritiesBasicModelG_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicModelG)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelG")

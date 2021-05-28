@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/similarities/LMSimilarity.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/util/List.h"
@@ -13,6 +14,10 @@
 #include "org/apache/lucene/search/similarities/BasicStats.h"
 #include "org/apache/lucene/search/similarities/LMSimilarity.h"
 #include "org/apache/lucene/search/similarities/SimilarityBase.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/LMSimilarity must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats () {
  @public
@@ -72,12 +77,12 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 }
 
 - (NSString *)description {
-  NSString *coll = [((id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel>) nil_chk(collectionModel_)) getName];
+  NSString *coll = JreRetainedLocalValue([((id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel>) nil_chk(collectionModel_)) getName]);
   if (coll != nil) {
-    return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"LM %s - %s", [IOSObjectArray arrayWithObjects:(id[]){ [self getName], coll } count:2 type:NSObject_class_()]);
+    return NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"LM %s - %s", [IOSObjectArray arrayWithObjects:(id[]){ [self getName], coll } count:2 type:NSObject_class_()]);
   }
   else {
-    return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"LM %s", [IOSObjectArray arrayWithObjects:(id[]){ [self getName] } count:1 type:NSObject_class_()]);
+    return NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"LM %s", [IOSObjectArray arrayWithObjects:(id[]){ [self getName] } count:1 type:NSObject_class_()]);
   }
 }
 
@@ -87,20 +92,31 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:", "LMSimilarity", NULL, 0x1, NULL, NULL },
-    { "init", "LMSimilarity", NULL, 0x1, NULL, NULL },
-    { "newStatsWithNSString:withFloat:", "newStats", "Lorg.apache.lucene.search.similarities.BasicStats;", 0x4, NULL, NULL },
-    { "fillBasicStatsWithOrgApacheLuceneSearchSimilaritiesBasicStats:withOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatistics:", "fillBasicStats", "V", 0x4, NULL, NULL },
-    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" },
-    { "getName", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSimilaritiesBasicStats;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 5, 6, -1, 7, -1, -1 },
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(newStatsWithNSString:withFloat:);
+  methods[3].selector = @selector(fillBasicStatsWithOrgApacheLuceneSearchSimilaritiesBasicStats:withOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatistics:);
+  methods[4].selector = @selector(explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:);
+  methods[5].selector = @selector(getName);
+  methods[6].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "collectionModel_", NULL, 0x14, "Lorg.apache.lucene.search.similarities.LMSimilarity$CollectionModel;", NULL, NULL, .constantValue.asLong = 0 },
+    { "collectionModel_", "LOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.similarities.LMSimilarity$LMStats;", "Lorg.apache.lucene.search.similarities.LMSimilarity$CollectionModel;", "Lorg.apache.lucene.search.similarities.LMSimilarity$DefaultCollectionModel;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMSimilarity = { 2, "LMSimilarity", "org.apache.lucene.search.similarities", NULL, 0x401, 7, methods, 1, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;", "newStats", "LNSString;F", "fillBasicStats", "LOrgApacheLuceneSearchSimilaritiesBasicStats;LOrgApacheLuceneSearchCollectionStatistics;LOrgApacheLuceneSearchTermStatistics;", "explain", "LJavaUtilList;LOrgApacheLuceneSearchSimilaritiesBasicStats;IFF", "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V", "toString", "LOrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats;LOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;LOrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMSimilarity = { "LMSimilarity", "org.apache.lucene.search.similarities", ptrTable, methods, fields, 7, 0x401, 7, 1, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesLMSimilarity;
 }
 
@@ -134,15 +150,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesLMSimilarity)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withFloat:", "LMStats", NULL, 0x1, NULL, NULL },
-    { "getCollectionProbability", NULL, "F", 0x11, NULL, NULL },
-    { "setCollectionProbabilityWithFloat:", "setCollectionProbability", "V", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withFloat:);
+  methods[1].selector = @selector(getCollectionProbability);
+  methods[2].selector = @selector(setCollectionProbabilityWithFloat:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "collectionProbability_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "collectionProbability_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats = { 2, "LMStats", "org.apache.lucene.search.similarities", "LMSimilarity", 0x9, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;F", "setCollectionProbability", "F", "LOrgApacheLuceneSearchSimilaritiesLMSimilarity;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats = { "LMStats", "org.apache.lucene.search.similarities", ptrTable, methods, fields, 7, 0x9, 3, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats;
 }
 
@@ -169,11 +193,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesLMSimilarity_L
 @implementation OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "computeProbabilityWithOrgApacheLuceneSearchSimilaritiesBasicStats:", "computeProbability", "F", 0x401, NULL, NULL },
-    { "getName", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "F", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel = { 2, "CollectionModel", "org.apache.lucene.search.similarities", "LMSimilarity", 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(computeProbabilityWithOrgApacheLuceneSearchSimilaritiesBasicStats:);
+  methods[1].selector = @selector(getName);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "computeProbability", "LOrgApacheLuceneSearchSimilaritiesBasicStats;", "LOrgApacheLuceneSearchSimilaritiesLMSimilarity;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel = { "CollectionModel", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x609, 2, 0, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;
 }
 
@@ -199,12 +230,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DefaultCollectionModel", NULL, 0x1, NULL, NULL },
-    { "computeProbabilityWithOrgApacheLuceneSearchSimilaritiesBasicStats:", "computeProbability", "F", 0x1, NULL, NULL },
-    { "getName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel = { 2, "DefaultCollectionModel", "org.apache.lucene.search.similarities", "LMSimilarity", 0x9, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(computeProbabilityWithOrgApacheLuceneSearchSimilaritiesBasicStats:);
+  methods[2].selector = @selector(getName);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "computeProbability", "LOrgApacheLuceneSearchSimilaritiesBasicStats;", "LOrgApacheLuceneSearchSimilaritiesLMSimilarity;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel = { "DefaultCollectionModel", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x9, 3, 0, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel;
 }
 

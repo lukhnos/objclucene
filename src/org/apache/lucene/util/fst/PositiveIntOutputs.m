@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/fst/PositiveIntOutputs.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "org/apache/lucene/store/DataInput.h"
@@ -13,6 +11,12 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/fst/Outputs.h"
 #include "org/apache/lucene/util/fst/PositiveIntOutputs.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/fst/PositiveIntOutputs must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneUtilFstPositiveIntOutputs ()
 
@@ -22,19 +26,19 @@
 
 @end
 
-inline JavaLangLong *OrgApacheLuceneUtilFstPositiveIntOutputs_get_NO_OUTPUT();
+inline JavaLangLong *OrgApacheLuceneUtilFstPositiveIntOutputs_get_NO_OUTPUT(void);
 static JavaLangLong *OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstPositiveIntOutputs, NO_OUTPUT, JavaLangLong *)
 
-inline OrgApacheLuceneUtilFstPositiveIntOutputs *OrgApacheLuceneUtilFstPositiveIntOutputs_get_singleton();
+inline OrgApacheLuceneUtilFstPositiveIntOutputs *OrgApacheLuceneUtilFstPositiveIntOutputs_get_singleton(void);
 static OrgApacheLuceneUtilFstPositiveIntOutputs *OrgApacheLuceneUtilFstPositiveIntOutputs_singleton;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstPositiveIntOutputs, singleton, OrgApacheLuceneUtilFstPositiveIntOutputs *)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilFstPositiveIntOutputs_init(OrgApacheLuceneUtilFstPositiveIntOutputs *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstPositiveIntOutputs *new_OrgApacheLuceneUtilFstPositiveIntOutputs_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilFstPositiveIntOutputs *new_OrgApacheLuceneUtilFstPositiveIntOutputs_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstPositiveIntOutputs *create_OrgApacheLuceneUtilFstPositiveIntOutputs_init();
+__attribute__((unused)) static OrgApacheLuceneUtilFstPositiveIntOutputs *create_OrgApacheLuceneUtilFstPositiveIntOutputs_init(void);
 
 __attribute__((unused)) static jboolean OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(OrgApacheLuceneUtilFstPositiveIntOutputs *self, JavaLangLong *o);
 
@@ -55,24 +59,24 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (JavaLangLong *)commonWithId:(JavaLangLong *)output1
                         withId:(JavaLangLong *)output2 {
-  JreAssert((OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, output1)), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:48 condition failed: assert valid(output1);"));
-  JreAssert((OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, output2)), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:49 condition failed: assert valid(output2);"));
-  if (output1 == OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT || output2 == OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT) {
+  JreAssert(OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, output1), @"org/apache/lucene/util/fst/PositiveIntOutputs.java:48 condition failed: assert valid(output1);");
+  JreAssert(OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, output2), @"org/apache/lucene/util/fst/PositiveIntOutputs.java:49 condition failed: assert valid(output2);");
+  if (JreObjectEqualsEquals(output1, OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT) || JreObjectEqualsEquals(output2, OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT)) {
     return OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT;
   }
   else {
-    JreAssert(([((JavaLangLong *) nil_chk(output1)) longLongValue] > 0), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:53 condition failed: assert output1 > 0;"));
-    JreAssert(([((JavaLangLong *) nil_chk(output2)) longLongValue] > 0), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:54 condition failed: assert output2 > 0;"));
+    JreAssert([((JavaLangLong *) nil_chk(output1)) longLongValue] > 0, @"org/apache/lucene/util/fst/PositiveIntOutputs.java:53 condition failed: assert output1 > 0;");
+    JreAssert([((JavaLangLong *) nil_chk(output2)) longLongValue] > 0, @"org/apache/lucene/util/fst/PositiveIntOutputs.java:54 condition failed: assert output2 > 0;");
     return JavaLangLong_valueOfWithLong_(JavaLangMath_minWithLong_withLong_([output1 longLongValue], [output2 longLongValue]));
   }
 }
 
 - (JavaLangLong *)subtractWithId:(JavaLangLong *)output
                           withId:(JavaLangLong *)inc {
-  JreAssert((OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, output)), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:61 condition failed: assert valid(output);"));
-  JreAssert((OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, inc)), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:62 condition failed: assert valid(inc);"));
-  JreAssert(([((JavaLangLong *) nil_chk(output)) longLongValue] >= [((JavaLangLong *) nil_chk(inc)) longLongValue]), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:63 condition failed: assert output >= inc;"));
-  if (inc == OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT) {
+  JreAssert(OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, output), @"org/apache/lucene/util/fst/PositiveIntOutputs.java:61 condition failed: assert valid(output);");
+  JreAssert(OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, inc), @"org/apache/lucene/util/fst/PositiveIntOutputs.java:62 condition failed: assert valid(inc);");
+  JreAssert([((JavaLangLong *) nil_chk(output)) longLongValue] >= [((JavaLangLong *) nil_chk(inc)) longLongValue], @"org/apache/lucene/util/fst/PositiveIntOutputs.java:63 condition failed: assert output >= inc;");
+  if (JreObjectEqualsEquals(inc, OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT)) {
     return output;
   }
   else if ([output isEqual:inc]) {
@@ -85,12 +89,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (JavaLangLong *)addWithId:(JavaLangLong *)prefix
                      withId:(JavaLangLong *)output {
-  JreAssert((OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, prefix)), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:76 condition failed: assert valid(prefix);"));
-  JreAssert((OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, output)), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:77 condition failed: assert valid(output);"));
-  if (prefix == OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT) {
+  JreAssert(OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, prefix), @"org/apache/lucene/util/fst/PositiveIntOutputs.java:76 condition failed: assert valid(prefix);");
+  JreAssert(OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, output), @"org/apache/lucene/util/fst/PositiveIntOutputs.java:77 condition failed: assert valid(output);");
+  if (JreObjectEqualsEquals(prefix, OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT)) {
     return output;
   }
-  else if (output == OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT) {
+  else if (JreObjectEqualsEquals(output, OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT)) {
     return prefix;
   }
   else {
@@ -100,7 +104,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)writeWithId:(JavaLangLong *)output
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
-  JreAssert((OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, output)), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:89 condition failed: assert valid(output);"));
+  JreAssert(OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(self, output), @"org/apache/lucene/util/fst/PositiveIntOutputs.java:89 condition failed: assert valid(output);");
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeVLongWithLong:[((JavaLangLong *) nil_chk(output)) longLongValue]];
 }
 
@@ -134,36 +138,52 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   return OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithJavaLangLong_(output);
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstPositiveIntOutputs;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x1, 3, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x1, 7, 8, 6, -1, -1, -1 },
+    { NULL, "Z", 0x2, 9, 10, -1, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 11, 10, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 12, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 13, 10, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getSingleton);
+  methods[2].selector = @selector(commonWithId:withId:);
+  methods[3].selector = @selector(subtractWithId:withId:);
+  methods[4].selector = @selector(addWithId:withId:);
+  methods[5].selector = @selector(writeWithId:withOrgApacheLuceneStoreDataOutput:);
+  methods[6].selector = @selector(readWithOrgApacheLuceneStoreDataInput:);
+  methods[7].selector = @selector(validWithJavaLangLong:);
+  methods[8].selector = @selector(getNoOutput);
+  methods[9].selector = @selector(outputToStringWithId:);
+  methods[10].selector = @selector(description);
+  methods[11].selector = @selector(ramBytesUsedWithId:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "NO_OUTPUT", "LJavaLangLong;", .constantValue.asLong = 0, 0x1a, -1, 14, -1, -1 },
+    { "singleton", "LOrgApacheLuceneUtilFstPositiveIntOutputs;", .constantValue.asLong = 0, 0x1a, -1, 15, -1, -1 },
+  };
+  static const void *ptrTable[] = { "common", "LJavaLangLong;LJavaLangLong;", "subtract", "add", "write", "LJavaLangLong;LOrgApacheLuceneStoreDataOutput;", "LJavaIoIOException;", "read", "LOrgApacheLuceneStoreDataInput;", "valid", "LJavaLangLong;", "outputToString", "toString", "ramBytesUsed", &OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT, &OrgApacheLuceneUtilFstPositiveIntOutputs_singleton, "Lorg/apache/lucene/util/fst/Outputs<Ljava/lang/Long;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstPositiveIntOutputs = { "PositiveIntOutputs", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x11, 12, 2, -1, -1, -1, 16, -1 };
+  return &_OrgApacheLuceneUtilFstPositiveIntOutputs;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFstPositiveIntOutputs class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT, new_JavaLangLong_initWithLong_(0));
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstPositiveIntOutputs_singleton, new_OrgApacheLuceneUtilFstPositiveIntOutputs_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFstPositiveIntOutputs)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PositiveIntOutputs", NULL, 0x2, NULL, NULL },
-    { "getSingleton", NULL, "Lorg.apache.lucene.util.fst.PositiveIntOutputs;", 0x9, NULL, NULL },
-    { "commonWithId:withId:", "common", "Ljava.lang.Long;", 0x1, NULL, "(Ljava/lang/Long;Ljava/lang/Long;)Ljava/lang/Long;" },
-    { "subtractWithId:withId:", "subtract", "Ljava.lang.Long;", 0x1, NULL, "(Ljava/lang/Long;Ljava/lang/Long;)Ljava/lang/Long;" },
-    { "addWithId:withId:", "add", "Ljava.lang.Long;", 0x1, NULL, "(Ljava/lang/Long;Ljava/lang/Long;)Ljava/lang/Long;" },
-    { "writeWithId:withOrgApacheLuceneStoreDataOutput:", "write", "V", 0x1, "Ljava.io.IOException;", "(Ljava/lang/Long;Lorg/apache/lucene/store/DataOutput;)V" },
-    { "readWithOrgApacheLuceneStoreDataInput:", "read", "Ljava.lang.Long;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;)Ljava/lang/Long;" },
-    { "validWithJavaLangLong:", "valid", "Z", 0x2, NULL, NULL },
-    { "getNoOutput", NULL, "Ljava.lang.Long;", 0x1, NULL, "()Ljava/lang/Long;" },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, "(Ljava/lang/Long;)Ljava/lang/String;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, "(Ljava/lang/Long;)J" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "NO_OUTPUT", "NO_OUTPUT", 0x1a, "Ljava.lang.Long;", &OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT, NULL, .constantValue.asLong = 0 },
-    { "singleton", "singleton", 0x1a, "Lorg.apache.lucene.util.fst.PositiveIntOutputs;", &OrgApacheLuceneUtilFstPositiveIntOutputs_singleton, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Ljava.lang.Long;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstPositiveIntOutputs = { 2, "PositiveIntOutputs", "org.apache.lucene.util.fst", NULL, 0x11, 12, methods, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/fst/Outputs<Ljava/lang/Long;>;" };
-  return &_OrgApacheLuceneUtilFstPositiveIntOutputs;
 }
 
 @end
@@ -186,8 +206,8 @@ OrgApacheLuceneUtilFstPositiveIntOutputs *OrgApacheLuceneUtilFstPositiveIntOutpu
 }
 
 jboolean OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(OrgApacheLuceneUtilFstPositiveIntOutputs *self, JavaLangLong *o) {
-  JreAssert((o != nil), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:104 condition failed: assert o != null;"));
-  JreAssert((o == OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT || [((JavaLangLong *) nil_chk(o)) longLongValue] > 0), (JreStrcat("$@", @"o=", o)));
+  JreAssert(o != nil, @"org/apache/lucene/util/fst/PositiveIntOutputs.java:104 condition failed: assert o != null;");
+  JreAssert(JreObjectEqualsEquals(o, OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT) || [((JavaLangLong *) nil_chk(o)) longLongValue] > 0, JreStrcat("$@", @"o=", o));
   return true;
 }
 

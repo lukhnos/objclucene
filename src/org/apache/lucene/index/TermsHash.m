@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/TermsHash.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
@@ -19,12 +17,16 @@
 #include "org/apache/lucene/util/Counter.h"
 #include "org/apache/lucene/util/IntBlockPool.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/TermsHash must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexTermsHash
 
-- (instancetype)initWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter
-                                                         withBoolean:(jboolean)trackAllocations
-                                   withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)nextTermsHash {
-  OrgApacheLuceneIndexTermsHash_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(self, docWriter, trackAllocations, nextTermsHash);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter
+                                                                       withBoolean:(jboolean)trackAllocations
+                                                 withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)nextTermsHash {
+  OrgApacheLuceneIndexTermsHash_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(self, docWriter, trackAllocations, nextTermsHash);
   return self;
 }
 
@@ -85,31 +87,43 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexDocumentsWriterPerThread:withBoolean:withOrgApacheLuceneIndexTermsHash:", "TermsHash", NULL, 0x0, NULL, NULL },
-    { "abort", NULL, "V", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x0, NULL, NULL },
-    { "flushWithJavaUtilMap:withOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x0, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/TermsHashPerField;>;Lorg/apache/lucene/index/SegmentWriteState;)V" },
-    { "addFieldWithOrgApacheLuceneIndexFieldInvertState:withOrgApacheLuceneIndexFieldInfo:", "addField", "Lorg.apache.lucene.index.TermsHashPerField;", 0x400, NULL, NULL },
-    { "finishDocument", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "startDocument", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 1, 2, 3, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsHashPerField;", 0x400, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:withBoolean:withOrgApacheLuceneIndexTermsHash:);
+  methods[1].selector = @selector(abort);
+  methods[2].selector = @selector(reset);
+  methods[3].selector = @selector(flushWithJavaUtilMap:withOrgApacheLuceneIndexSegmentWriteState:);
+  methods[4].selector = @selector(addFieldWithOrgApacheLuceneIndexFieldInvertState:withOrgApacheLuceneIndexFieldInfo:);
+  methods[5].selector = @selector(finishDocument);
+  methods[6].selector = @selector(startDocument);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "nextTermsHash_", NULL, 0x10, "Lorg.apache.lucene.index.TermsHash;", NULL, NULL, .constantValue.asLong = 0 },
-    { "intPool_", NULL, 0x10, "Lorg.apache.lucene.util.IntBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytePool_", NULL, 0x10, "Lorg.apache.lucene.util.ByteBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termBytePool_", NULL, 0x0, "Lorg.apache.lucene.util.ByteBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesUsed_", NULL, 0x10, "Lorg.apache.lucene.util.Counter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docState_", NULL, 0x10, "Lorg.apache.lucene.index.DocumentsWriterPerThread$DocState;", NULL, NULL, .constantValue.asLong = 0 },
-    { "trackAllocations_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "nextTermsHash_", "LOrgApacheLuceneIndexTermsHash;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "intPool_", "LOrgApacheLuceneUtilIntBlockPool;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "bytePool_", "LOrgApacheLuceneUtilByteBlockPool;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "termBytePool_", "LOrgApacheLuceneUtilByteBlockPool;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bytesUsed_", "LOrgApacheLuceneUtilCounter;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docState_", "LOrgApacheLuceneIndexDocumentsWriterPerThread_DocState;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "trackAllocations_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermsHash = { 2, "TermsHash", "org.apache.lucene.index", NULL, 0x400, 7, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexDocumentsWriterPerThread;ZLOrgApacheLuceneIndexTermsHash;", "flush", "LJavaUtilMap;LOrgApacheLuceneIndexSegmentWriteState;", "LJavaIoIOException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/TermsHashPerField;>;Lorg/apache/lucene/index/SegmentWriteState;)V", "addField", "LOrgApacheLuceneIndexFieldInvertState;LOrgApacheLuceneIndexFieldInfo;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermsHash = { "TermsHash", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x400, 7, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexTermsHash;
 }
 
 @end
 
-void OrgApacheLuceneIndexTermsHash_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexTermsHash *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, jboolean trackAllocations, OrgApacheLuceneIndexTermsHash *nextTermsHash) {
+void OrgApacheLuceneIndexTermsHash_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexTermsHash *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, jboolean trackAllocations, OrgApacheLuceneIndexTermsHash *nextTermsHash) {
   NSObject_init(self);
   JreStrongAssign(&self->docState_, ((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(docWriter))->docState_);
   self->trackAllocations_ = trackAllocations;

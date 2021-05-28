@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexConcurrentMergeScheduler
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexConcurrentMergeScheduler_) && (INCLUDE_ALL_OrgApacheLuceneIndexConcurrentMergeScheduler || defined(INCLUDE_OrgApacheLuceneIndexConcurrentMergeScheduler))
 #define OrgApacheLuceneIndexConcurrentMergeScheduler_
 
@@ -20,6 +26,7 @@
 #define INCLUDE_OrgApacheLuceneIndexMergeScheduler 1
 #include "org/apache/lucene/index/MergeScheduler.h"
 
+@class JavaLangThrowable;
 @class OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread;
 @class OrgApacheLuceneIndexIndexWriter;
 @class OrgApacheLuceneIndexMergePolicy_OneMerge;
@@ -29,27 +36,27 @@
 
 /*!
  @brief A <code>MergeScheduler</code> that runs each merge using a
- separate thread.
+   separate thread.
  <p>Specify the max number of threads that may run at
- once, and the maximum number of simultaneous merges
- with <code>setMaxMergesAndThreads</code>.</p>
- <p>If the number of merges exceeds the max number of threads 
- then the largest merges are paused until one of the smaller
- merges completes.</p>
- <p>If more than <code>getMaxMergeCount</code> merges are
- requested then this class will forcefully throttle the
- incoming threads by pausing until one more more merges
- complete.</p>
- <p>This class attempts to detect whether the index is
- on rotational storage (traditional hard drive) or not
- (e.g. solid-state disk) and changes the default max merge
- and thread count accordingly.  This detection is currently
- Linux-only, and relies on the OS to put the right value
- into /sys/block/&lt;dev&gt;/block/rotational.  For all
- other operating systems it currently assumes a rotational
- disk for backwards compatibility.  To enable default
- settings for spinning or solid state disks for such
- operating systems, use <code>setDefaultMaxMergesAndThreads(boolean)</code>.
+   once, and the maximum number of simultaneous merges
+   with <code>setMaxMergesAndThreads</code>.</p>
+   <p>If the number of merges exceeds the max number of threads 
+   then the largest merges are paused until one of the smaller
+   merges completes.</p>
+   <p>If more than <code>getMaxMergeCount</code> merges are
+   requested then this class will forcefully throttle the
+   incoming threads by pausing until one more more merges
+   complete.</p>
+   <p>This class attempts to detect whether the index is
+   on rotational storage (traditional hard drive) or not
+   (e.g. solid-state disk) and changes the default max merge
+   and thread count accordingly.  This detection is currently
+   Linux-only, and relies on the OS to put the right value
+   into /sys/block/&lt;dev&gt;/block/rotational.  For all
+   other operating systems it currently assumes a rotational
+   disk for backwards compatibility.  To enable default
+   settings for spinning or solid state disks for such
+   operating systems, use <code>setDefaultMaxMergesAndThreads(boolean)</code>.
  */
 @interface OrgApacheLuceneIndexConcurrentMergeScheduler : OrgApacheLuceneIndexMergeScheduler {
  @public
@@ -59,7 +66,7 @@
   id<JavaUtilList> mergeThreads_;
   /*!
    @brief How many <code>MergeThread</code>s have kicked off (this is use
- to name them).
+   to name them).
    */
   jint mergeThreadCount_;
   /*!
@@ -67,20 +74,17 @@
    */
   jdouble targetMBPerSec_;
 }
-
-+ (jint)AUTO_DETECT_MERGES_AND_THREADS;
-
-+ (NSString *)DEFAULT_CPU_CORE_COUNT_PROPERTY;
-
-+ (NSString *)DEFAULT_SPINS_PROPERTY;
+@property (readonly, class) jint AUTO_DETECT_MERGES_AND_THREADS NS_SWIFT_NAME(AUTO_DETECT_MERGES_AND_THREADS);
+@property (readonly, copy, class) NSString *DEFAULT_CPU_CORE_COUNT_PROPERTY NS_SWIFT_NAME(DEFAULT_CPU_CORE_COUNT_PROPERTY);
+@property (readonly, copy, class) NSString *DEFAULT_SPINS_PROPERTY NS_SWIFT_NAME(DEFAULT_SPINS_PROPERTY);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor, with all settings set to default
- values.
+   values.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)close;
 
@@ -92,8 +96,8 @@
 
 /*!
  @brief Turn on dynamic IO throttling, to adaptively rate limit writes
- bytes/sec to the minimal rate necessary so merges do not fall behind.
- By default this is enabled. 
+   bytes/sec to the minimal rate necessary so merges do not fall behind.
+ By default this is enabled.
  */
 - (void)enableAutoIOThrottle;
 
@@ -109,7 +113,7 @@
 
 /*!
  @brief Returns the currently set per-merge IO writes rate limit, if <code>enableAutoIOThrottle</code>
- was called, else <code>Double.POSITIVE_INFINITY</code>.
+   was called, else <code>Double.POSITIVE_INFINITY</code>.
  */
 - (jdouble)getIORateLimitMBPerSec;
 
@@ -120,7 +124,7 @@
 
 /*!
  @brief Returns <code>maxThreadCount</code>.
- - seealso: #setMaxMergesAndThreads(int,int)
+ - seealso: #setMaxMergesAndThreads(int, int)
  */
 - (jint)getMaxThreadCount;
 
@@ -130,16 +134,14 @@
 
 /*!
  @brief Returns the number of merge threads that are alive, ignoring the calling thread
- if it is a merge thread.
- Note that this number is &le; <code>mergeThreads</code> size.
+  if it is a merge thread.Note that this number is &le; <code>mergeThreads</code> size.
  */
 - (jint)mergeThreadCount;
 
 /*!
  @brief Sets max merges and threads to proper defaults for rotational
- or non-rotational storage.
- @param spins true to set defaults best for traditional rotatational storage (spinning disks), 
- else false (e.g. for solid-state disks)
+   or non-rotational storage.
+ @param spins true to set defaults best for traditional rotatational storage (spinning disks),          else false (e.g. for solid-state disks)
  */
 - (void)setDefaultMaxMergesAndThreadsWithBoolean:(jboolean)spins;
 
@@ -150,22 +152,21 @@
 
 /*!
  @brief Expert: directly set the maximum number of merge threads and
- simultaneous merges allowed.
- @param maxMergeCount the max # simultaneous merges that are allowed.
- If a merge is necessary yet we already have this many
- threads running, the incoming thread (that is calling
- add/updateDocument) will block until a merge thread
- has completed.  Note that we will only run the
- smallest <code>maxThreadCount</code> merges at a time.
- @param maxThreadCount the max # simultaneous merge threads that should
- be running at once.  This must be &lt;= <code>maxMergeCount</code>
+  simultaneous merges allowed.
+ @param maxMergeCount the max # simultaneous merges that are allowed.        If a merge is necessary yet we already have this many
+         threads running, the incoming thread (that is calling
+         add/updateDocument) will block until a merge thread
+         has completed.  Note that we will only run the
+         smallest 
+  <code> maxThreadCount </code>  merges at a time.
+ @param maxThreadCount the max # simultaneous merge threads that should        be running at once.  This must be 
+  &lt; =  <code> maxMergeCount </code>
  */
 - (void)setMaxMergesAndThreadsWithInt:(jint)maxMergeCount
                               withInt:(jint)maxThreadCount;
 
 /*!
- @brief Wait for any running merge threads to finish.
- This call is not interruptible as used by <code>close()</code>. 
+ @brief Wait for any running merge threads to finish.This call is not interruptible as used by <code>close()</code>.
  */
 - (void)sync;
 
@@ -192,23 +193,23 @@
 
 /*!
  @brief Called when an exception is hit in a background merge
- thread
+   thread
  */
 - (void)handleMergeExceptionWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                                              withNSException:(NSException *)exc;
+                                        withJavaLangThrowable:(JavaLangThrowable *)exc;
 
 /*!
  @brief This is invoked by <code>merge</code> to possibly stall the incoming
- thread when there are too many merges running or pending.
- The 
- default behavior is to force this thread, which is producing too
- many segments for merging to keep up, to wait until merges catch
- up. Applications that can take other less drastic measures, such
- as limiting how many threads are allowed to index, can do nothing
- here and throttle elsewhere.
- If this method wants to stall but the calling thread is a merge
- thread, it should return false to tell caller not to kick off
- any new merges. 
+   thread when there are too many merges running or pending.The 
+   default behavior is to force this thread, which is producing too
+   many segments for merging to keep up, to wait until merges catch
+   up.
+ Applications that can take other less drastic measures, such
+   as limiting how many threads are allowed to index, can do nothing
+   here and throttle elsewhere.
+   If this method wants to stall but the calling thread is a merge
+   thread, it should return false to tell caller not to kick off
+   any new merges.
  */
 - (jboolean)maybeStallWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
@@ -220,8 +221,8 @@
 /*!
  @brief Called whenever the running merges have changed, to set merge IO limits.
  This method sorts the merge threads by their merge size in
- descending order and then pauses/unpauses threads from first to last --
- that way, smaller merges are guaranteed to run before larger ones.
+  descending order and then pauses/unpauses threads from first to last --
+  that way, smaller merges are guaranteed to run before larger ones.
  */
 - (void)updateMergeThreads;
 
@@ -250,40 +251,38 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexConcurrentMergeScheduler, mergeThreads_,
 
 /*!
  @brief Dynamic default for <code>maxThreadCount</code> and <code>maxMergeCount</code>,
- used to detect whether the index is backed by an SSD or rotational disk and
- set <code>maxThreadCount</code> accordingly.
- If it's an SSD,
- <code>maxThreadCount</code> is set to <code>max(1, min(4, cpuCoreCount/2))</code>,
- otherwise 1.  Note that detection only currently works on
- Linux; other platforms will assume the index is not on an SSD. 
+   used to detect whether the index is backed by an SSD or rotational disk and
+   set <code>maxThreadCount</code> accordingly.If it's an SSD,
+   <code>maxThreadCount</code> is set to <code>max(1, min(4, cpuCoreCount/2))</code>,
+   otherwise 1.
+ Note that detection only currently works on
+   Linux; other platforms will assume the index is not on an SSD.
  */
-inline jint OrgApacheLuceneIndexConcurrentMergeScheduler_get_AUTO_DETECT_MERGES_AND_THREADS();
+inline jint OrgApacheLuceneIndexConcurrentMergeScheduler_get_AUTO_DETECT_MERGES_AND_THREADS(void);
 #define OrgApacheLuceneIndexConcurrentMergeScheduler_AUTO_DETECT_MERGES_AND_THREADS -1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexConcurrentMergeScheduler, AUTO_DETECT_MERGES_AND_THREADS, jint)
 
 /*!
  @brief Used for testing.
-  
  */
-inline NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_get_DEFAULT_CPU_CORE_COUNT_PROPERTY();
+inline NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_get_DEFAULT_CPU_CORE_COUNT_PROPERTY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_CPU_CORE_COUNT_PROPERTY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexConcurrentMergeScheduler, DEFAULT_CPU_CORE_COUNT_PROPERTY, NSString *)
 
 /*!
  @brief Used for testing.
-  
  */
-inline NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_get_DEFAULT_SPINS_PROPERTY();
+inline NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_get_DEFAULT_SPINS_PROPERTY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexConcurrentMergeScheduler, DEFAULT_SPINS_PROPERTY, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexConcurrentMergeScheduler_init(OrgApacheLuceneIndexConcurrentMergeScheduler *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexConcurrentMergeScheduler *new_OrgApacheLuceneIndexConcurrentMergeScheduler_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexConcurrentMergeScheduler *new_OrgApacheLuceneIndexConcurrentMergeScheduler_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexConcurrentMergeScheduler *create_OrgApacheLuceneIndexConcurrentMergeScheduler_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexConcurrentMergeScheduler *create_OrgApacheLuceneIndexConcurrentMergeScheduler_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexConcurrentMergeScheduler)
 
@@ -300,9 +299,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexConcurrentMergeScheduler)
 #define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
+@class JavaLangThreadGroup;
 @class OrgApacheLuceneIndexConcurrentMergeScheduler;
 @class OrgApacheLuceneIndexIndexWriter;
 @class OrgApacheLuceneIndexMergePolicy_OneMerge;
+@protocol JavaLangRunnable;
 
 /*!
  @brief Runs a merge thread to execute a single merge, then exits.
@@ -318,13 +319,39 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexConcurrentMergeScheduler)
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneIndexConcurrentMergeScheduler:(OrgApacheLuceneIndexConcurrentMergeScheduler *)outer$
-                                 withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                        withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexConcurrentMergeScheduler:(OrgApacheLuceneIndexConcurrentMergeScheduler *)outer$
+                                           withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
+                                  withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
 - (jint)compareToWithId:(OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread *)other;
 
 - (void)run;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangRunnable:(id<JavaLangRunnable>)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangRunnable:(id<JavaLangRunnable>)arg0
+                                      withNSString:(NSString *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
+                                 withJavaLangRunnable:(id<JavaLangRunnable>)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
+                                 withJavaLangRunnable:(id<JavaLangRunnable>)arg1
+                                         withNSString:(NSString *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
+                                 withJavaLangRunnable:(id<JavaLangRunnable>)arg1
+                                         withNSString:(NSString *)arg2
+                                             withLong:(jlong)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
+                                         withNSString:(NSString *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -343,4 +370,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThr
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexConcurrentMergeScheduler")

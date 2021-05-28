@@ -9,11 +9,15 @@
 #include "org/apache/lucene/search/highlight/SpanGradientFormatter.h"
 #include "org/apache/lucene/search/highlight/TokenGroup.h"
 
-inline NSString *OrgApacheLuceneSearchHighlightSpanGradientFormatter_get_TEMPLATE();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/SpanGradientFormatter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline NSString *OrgApacheLuceneSearchHighlightSpanGradientFormatter_get_TEMPLATE(void);
 static NSString *OrgApacheLuceneSearchHighlightSpanGradientFormatter_TEMPLATE = @"<span style=\"background: #EEEEEE; color: #000000;\">...</span>";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchHighlightSpanGradientFormatter, TEMPLATE, NSString *)
 
-inline jint OrgApacheLuceneSearchHighlightSpanGradientFormatter_get_EXTRA();
+inline jint OrgApacheLuceneSearchHighlightSpanGradientFormatter_get_EXTRA(void);
 static jint OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneSearchHighlightSpanGradientFormatter, EXTRA, jint)
 
@@ -37,7 +41,7 @@ withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightToke
   if (score == 0) {
     return originalText;
   }
-  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithInt_(((jint) [((NSString *) nil_chk(originalText)) length]) + OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA);
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithInt_([((NSString *) nil_chk(originalText)) java_length] + OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA);
   [sb appendWithNSString:@"<span style=\""];
   if (highlightForeground_) {
     [sb appendWithNSString:@"color: "];
@@ -55,24 +59,31 @@ withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightToke
   return [sb description];
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchHighlightSpanGradientFormatter class]) {
-    OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA = ((jint) [((NSString *) nil_chk(OrgApacheLuceneSearchHighlightSpanGradientFormatter_TEMPLATE)) length]);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchHighlightSpanGradientFormatter)
-  }
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithFloat:withNSString:withNSString:withNSString:withNSString:);
+  methods[1].selector = @selector(highlightTermWithNSString:withOrgApacheLuceneSearchHighlightTokenGroup:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "TEMPLATE", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 3, -1, -1 },
+    { "EXTRA", "I", .constantValue.asLong = 0, 0x1a, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "FLNSString;LNSString;LNSString;LNSString;", "highlightTerm", "LNSString;LOrgApacheLuceneSearchHighlightTokenGroup;", &OrgApacheLuceneSearchHighlightSpanGradientFormatter_TEMPLATE, &OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSpanGradientFormatter = { "SpanGradientFormatter", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x1, 2, 2, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchHighlightSpanGradientFormatter;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithFloat:withNSString:withNSString:withNSString:withNSString:", "SpanGradientFormatter", NULL, 0x1, NULL, NULL },
-    { "highlightTermWithNSString:withOrgApacheLuceneSearchHighlightTokenGroup:", "highlightTerm", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "TEMPLATE", "TEMPLATE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneSearchHighlightSpanGradientFormatter_TEMPLATE, NULL, .constantValue.asLong = 0 },
-    { "EXTRA", "EXTRA", 0x1a, "I", &OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSpanGradientFormatter = { 2, "SpanGradientFormatter", "org.apache.lucene.search.highlight", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchHighlightSpanGradientFormatter;
++ (void)initialize {
+  if (self == [OrgApacheLuceneSearchHighlightSpanGradientFormatter class]) {
+    OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA = [((NSString *) nil_chk(OrgApacheLuceneSearchHighlightSpanGradientFormatter_TEMPLATE)) java_length];
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchHighlightSpanGradientFormatter)
+  }
 }
 
 @end

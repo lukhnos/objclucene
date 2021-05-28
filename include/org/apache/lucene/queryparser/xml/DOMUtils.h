@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlDOMUtils
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlDOMUtils_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlDOMUtils || defined(INCLUDE_OrgApacheLuceneQueryparserXmlDOMUtils))
 #define OrgApacheLuceneQueryparserXmlDOMUtils_
 
@@ -28,7 +34,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (jboolean)getAttributeWithOrgW3cDomElement:(id<OrgW3cDomElement>)element
                                 withNSString:(NSString *)attributeName
@@ -91,6 +97,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlDOMUtils)
 
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlDOMUtils_init(OrgApacheLuceneQueryparserXmlDOMUtils *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlDOMUtils *new_OrgApacheLuceneQueryparserXmlDOMUtils_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlDOMUtils *create_OrgApacheLuceneQueryparserXmlDOMUtils_init(void);
+
 FOUNDATION_EXPORT id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_getChildByTagOrFailWithOrgW3cDomElement_withNSString_(id<OrgW3cDomElement> e, NSString *name);
 
 FOUNDATION_EXPORT id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_getFirstChildOrFailWithOrgW3cDomElement_(id<OrgW3cDomElement> e);
@@ -123,14 +135,12 @@ FOUNDATION_EXPORT id<OrgW3cDomElement> OrgApacheLuceneQueryparserXmlDOMUtils_get
 
 FOUNDATION_EXPORT id<OrgW3cDomDocument> OrgApacheLuceneQueryparserXmlDOMUtils_loadXMLWithJavaIoReader_(JavaIoReader *is);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlDOMUtils_init(OrgApacheLuceneQueryparserXmlDOMUtils *self);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlDOMUtils *new_OrgApacheLuceneQueryparserXmlDOMUtils_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlDOMUtils *create_OrgApacheLuceneQueryparserXmlDOMUtils_init();
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlDOMUtils)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlDOMUtils")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTermRangeFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTermRangeFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermRangeFilter || defined(INCLUDE_OrgApacheLuceneSearchTermRangeFilter))
 #define OrgApacheLuceneSearchTermRangeFilter_
 
@@ -20,16 +26,16 @@
 #define INCLUDE_OrgApacheLuceneSearchMultiTermQueryWrapperFilter 1
 #include "org/apache/lucene/search/MultiTermQueryWrapperFilter.h"
 
-@class IOSObjectArray;
+@class OrgApacheLuceneSearchMultiTermQuery;
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
  @brief A Filter that restricts search results to a range of term
- values in a given field.
+  values in a given field.
  <p>This filter matches the documents looking for terms that fall into the
- supplied range according to <code>Byte.compareTo(Byte)</code>
+  supplied range according to <code>Byte.compareTo(Byte)</code>
  ,  It is not intended
- for numerical ranges; use <code>NumericRangeFilter</code> instead.
+  for numerical ranges; use <code>NumericRangeFilter</code> instead.
  @since 2.9
  */
 @interface OrgApacheLuceneSearchTermRangeFilter : OrgApacheLuceneSearchMultiTermQueryWrapperFilter
@@ -42,15 +48,15 @@
  @param upperTerm The upper bound on this range
  @param includeLower Does this range include the lower bound?
  @param includeUpper Does this range include the upper bound?
- @throws IllegalArgumentException if both terms are null or if
- lowerTerm is null and includeLower is true (similar for upperTerm
- and includeUpper)
+ @throw IllegalArgumentExceptionif both terms are null or if
+   lowerTerm is null and includeLower is true (similar for upperTerm
+   and includeUpper)
  */
-- (instancetype)initWithNSString:(NSString *)fieldName
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerTerm
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperTerm
-                     withBoolean:(jboolean)includeLower
-                     withBoolean:(jboolean)includeUpper;
+- (instancetype __nonnull)initWithNSString:(NSString *)fieldName
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerTerm
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperTerm
+                               withBoolean:(jboolean)includeLower
+                               withBoolean:(jboolean)includeUpper;
 
 /*!
  @brief Returns the lower value of this range filter
@@ -74,14 +80,14 @@
 
 /*!
  @brief Constructs a filter for field <code>fieldName</code> matching
- less than or equal to <code>upperTerm</code>.
+  less than or equal to <code>upperTerm</code>.
  */
 + (OrgApacheLuceneSearchTermRangeFilter *)LessWithNSString:(NSString *)fieldName
                            withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperTerm;
 
 /*!
  @brief Constructs a filter for field <code>fieldName</code> matching
- greater than or equal to <code>lowerTerm</code>.
+  greater than or equal to <code>lowerTerm</code>.
  */
 + (OrgApacheLuceneSearchTermRangeFilter *)MoreWithNSString:(NSString *)fieldName
                            withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerTerm;
@@ -94,6 +100,10 @@
                                                         withNSString:(NSString *)upperTerm
                                                          withBoolean:(jboolean)includeLower
                                                          withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -115,4 +125,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermRangeFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermRangeFilter")

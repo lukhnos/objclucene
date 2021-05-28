@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_
 
@@ -24,29 +30,27 @@
 @protocol JavaUtilMap;
 
 /*!
- @brief Factory for <code>org.apache.lucene.analysis.miscellaneous.TruncateTokenFilter</code>.
- The following type is recommended for "<i>diacritics-insensitive search</i>" for Turkish.
+ @brief Factory for <code>org.apache.lucene.analysis.miscellaneous.TruncateTokenFilter</code>.The following type is recommended for "<i>diacritics-insensitive search</i>" for Turkish.
  <pre class="prettyprint">
- &lt;fieldType name="text_tr_ascii_f5" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.ApostropheFilterFactory"/&gt;
- &lt;filter class="solr.TurkishLowerCaseFilterFactory"/&gt;
- &lt;filter class="solr.ASCIIFoldingFilterFactory" preserveOriginal="true"/&gt;
- &lt;filter class="solr.KeywordRepeatFilterFactory"/&gt;
- &lt;filter class="solr.TruncateTokenFilterFactory" prefixLength="5"/&gt;
- &lt;filter class="solr.RemoveDuplicatesTokenFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_tr_ascii_f5" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.ApostropheFilterFactory"/&gt;
+      &lt;filter class="solr.TurkishLowerCaseFilterFactory"/&gt;
+      &lt;filter class="solr.ASCIIFoldingFilterFactory" preserveOriginal="true"/&gt;
+      &lt;filter class="solr.KeywordRepeatFilterFactory"/&gt;
+      &lt;filter class="solr.TruncateTokenFilterFactory" prefixLength="5"/&gt;
+      &lt;filter class="solr.RemoveDuplicatesTokenFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
-
-+ (NSString *)PREFIX_LENGTH_KEY;
+@property (readonly, copy, class) NSString *PREFIX_LENGTH_KEY NS_SWIFT_NAME(PREFIX_LENGTH_KEY);
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -54,7 +58,7 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_get_PREFIX_LENGTH_KEY();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_get_PREFIX_LENGTH_KEY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory, PREFIX_LENGTH_KEY, NSString *)
@@ -69,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory")

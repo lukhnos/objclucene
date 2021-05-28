@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexReaderUtil
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexReaderUtil_) && (INCLUDE_ALL_OrgApacheLuceneIndexReaderUtil || defined(INCLUDE_OrgApacheLuceneIndexReaderUtil))
 #define OrgApacheLuceneIndexReaderUtil_
 
@@ -29,20 +35,20 @@
 
 /*!
  @brief Walks up the reader tree and return the given context's top level reader
- context, or in other words the reader tree's root context.
+  context, or in other words the reader tree's root context.
  */
 + (OrgApacheLuceneIndexIndexReaderContext *)getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context;
 
 /*!
  @brief Returns index of the searcher/reader for document <code>n</code> in the
- array used to construct this searcher/reader.
+  array used to construct this searcher/reader.
  */
 + (jint)subIndexWithInt:(jint)n
            withIntArray:(IOSIntArray *)docStarts;
 
 /*!
  @brief Returns index of the searcher/reader for document <code>n</code> in the
- array used to construct this searcher/reader.
+  array used to construct this searcher/reader.
  */
 + (jint)subIndexWithInt:(jint)n
        withJavaUtilList:(id<JavaUtilList>)leaves;
@@ -61,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReaderUtil)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexReaderUtil")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchBooleanTopLevelScorers
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchBooleanTopLevelScorers_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers || defined(INCLUDE_OrgApacheLuceneSearchBooleanTopLevelScorers))
 #define OrgApacheLuceneSearchBooleanTopLevelScorers_
 
@@ -23,17 +29,21 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanTopLevelScorers)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanTopLevelScorers_init(OrgApacheLuceneSearchBooleanTopLevelScorers *self);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanTopLevelScorers_initPackagePrivate(OrgApacheLuceneSearchBooleanTopLevelScorers *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers *new_OrgApacheLuceneSearchBooleanTopLevelScorers_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers *new_OrgApacheLuceneSearchBooleanTopLevelScorers_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers *create_OrgApacheLuceneSearchBooleanTopLevelScorers_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers *create_OrgApacheLuceneSearchBooleanTopLevelScorers_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers)
 
@@ -47,13 +57,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers)
 #include "org/apache/lucene/search/FilterScorer.h"
 
 @class OrgApacheLuceneSearchScorer;
+@class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilCollection;
 
 /*!
  @brief Used when there is more than one scorer in a query, but a segment
- only had one non-null scorer.
- This just wraps that scorer directly
- to factor in coord().
+  only had one non-null scorer.This just wraps that scorer directly
+  to factor in coord().
  */
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer : OrgApacheLuceneSearchFilterScorer {
  @public
@@ -68,8 +78,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg
-                                          withFloat:(jfloat)boost;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg
+                                                    withFloat:(jfloat)boost;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg0
+                              withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -95,12 +112,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedSc
 @class IOSFloatArray;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneSearchWeight;
+@protocol JavaUtilList;
 
 /*!
  @brief Used when there are both mandatory and optional clauses, but minShouldMatch
- dictates that some of the optional clauses must match.
- The query is a conjunction,
- but must compute coord based on how many optional subscorers matched (freq).
+  dictates that some of the optional clauses must match.The query is a conjunction,
+  but must compute coord based on how many optional subscorers matched (freq).
  */
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer : OrgApacheLuceneSearchConjunctionScorer
 
@@ -110,11 +127,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedSc
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                     withFloatArray:(IOSFloatArray *)coords
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)req
-                                            withInt:(jint)reqCount
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)opt;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                               withFloatArray:(IOSFloatArray *)coords
+                              withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)req
+                                                      withInt:(jint)reqCount
+                              withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)opt;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0
+                                                           withJavaUtilList:(id<JavaUtilList>)arg1
+                                                           withJavaUtilList:(id<JavaUtilList>)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0
+                                                           withJavaUtilList:(id<JavaUtilList>)arg1
+                                                           withJavaUtilList:(id<JavaUtilList>)arg2
+                                                                  withFloat:(jfloat)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -141,18 +169,23 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers_Coordinat
 
 /*!
  @brief Used when there are mandatory clauses with one optional clause: we compute
- coord based on whether the optional clause matched or not.
+  coord based on whether the optional clause matched or not.
  */
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer : OrgApacheLuceneSearchReqOptSumScorer
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)optScorer
-                                          withFloat:(jfloat)coordReq
-                                          withFloat:(jfloat)coordBoth;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
+                              withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)optScorer
+                                                    withFloat:(jfloat)coordReq
+                                                    withFloat:(jfloat)coordBoth;
 
 - (jfloat)score;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg0
+                                            withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -180,18 +213,23 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingle
 
 /*!
  @brief Used when there are mandatory clauses with optional clauses: we compute
- coord based on how many optional subscorers matched (freq).
+  coord based on how many optional subscorers matched (freq).
  */
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer : OrgApacheLuceneSearchReqOptSumScorer
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)optScorer
-                                            withInt:(jint)requiredCount
-                                     withFloatArray:(IOSFloatArray *)coords;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
+                              withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)optScorer
+                                                      withInt:(jint)requiredCount
+                                               withFloatArray:(IOSFloatArray *)coords;
 
 - (jfloat)score;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg0
+                                            withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -207,4 +245,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiO
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers")

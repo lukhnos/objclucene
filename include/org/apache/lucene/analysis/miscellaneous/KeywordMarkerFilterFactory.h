@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_
 
@@ -31,26 +37,24 @@
 /*!
  @brief Factory for <code>KeywordMarkerFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_keyword" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.KeywordMarkerFilterFactory" protected="protectedkeyword.txt" pattern="^.+er$" ignoreCase="false"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_keyword" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.KeywordMarkerFilterFactory" protected="protectedkeyword.txt" pattern="^.+er$" ignoreCase="false"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
-
-+ (NSString *)PROTECTED_TOKENS;
-
-+ (NSString *)PATTERN;
+@property (readonly, copy, class) NSString *PROTECTED_TOKENS NS_SWIFT_NAME(PROTECTED_TOKENS);
+@property (readonly, copy, class) NSString *PATTERN NS_SWIFT_NAME(PATTERN);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new KeywordMarkerFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -62,12 +66,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_get_PROTECTED_TOKENS();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_get_PROTECTED_TOKENS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory, PROTECTED_TOKENS, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_get_PATTERN();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_get_PATTERN(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory, PATTERN, NSString *)
@@ -82,4 +86,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory")

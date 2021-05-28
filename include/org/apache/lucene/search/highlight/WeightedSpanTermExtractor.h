@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor || defined(INCLUDE_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor))
 #define OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_
 
@@ -25,34 +31,32 @@
 @protocol JavaUtilSet;
 
 /*!
- @brief Class used to extract <code>WeightedSpanTerm</code>s from a <code>Query</code> based on whether 
+ @brief Class used to extract <code>WeightedSpanTerm</code>s from a <code>Query</code> based on whether  
  <code>Term</code>s from the <code>Query</code> are contained in a supplied <code>TokenStream</code>.
  */
 @interface OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithNSString:(NSString *)defaultField;
+- (instancetype __nonnull)initWithNSString:(NSString *)defaultField;
 
 - (jboolean)getExpandMultiTermQuery;
 
 /*!
  @brief Returns the tokenStream which may have been wrapped in a CachingTokenFilter.
- getWeightedSpanTerms* sets the tokenStream, so don't call this before. 
+ getWeightedSpanTerms* sets the tokenStream, so don't call this before.
  */
 - (OrgApacheLuceneAnalysisTokenStream *)getTokenStream;
 
 /*!
  @brief Creates a Map of <code>WeightedSpanTerms</code> from the given <code>Query</code> and <code>TokenStream</code>.
  <p>
- @param query
- that caused hit
- @param tokenStream
- of text to be highlighted
+ @param query that caused hit
+ @param tokenStream of text to be highlighted
  @return Map containing WeightedSpanTerms
- @throws IOException If there is a low-level I/O error
+ @throw IOExceptionIf there is a low-level I/O error
  */
 - (id<JavaUtilMap>)getWeightedSpanTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
@@ -60,34 +64,26 @@
 /*!
  @brief Creates a Map of <code>WeightedSpanTerms</code> from the given <code>Query</code> and <code>TokenStream</code>.
  <p>
- @param query
- that caused hit
- @param tokenStream
- of text to be highlighted
- @param fieldName
- restricts Term's used based on field name
+ @param query that caused hit
+ @param tokenStream of text to be highlighted
+ @param fieldName restricts Term's used based on field name
  @return Map containing WeightedSpanTerms
- @throws IOException If there is a low-level I/O error
+ @throw IOExceptionIf there is a low-level I/O error
  */
 - (id<JavaUtilMap>)getWeightedSpanTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
                                                          withNSString:(NSString *)fieldName;
 
 /*!
- @brief Creates a Map of <code>WeightedSpanTerms</code> from the given <code>Query</code> and <code>TokenStream</code>.
- Uses a supplied
+ @brief Creates a Map of <code>WeightedSpanTerms</code> from the given <code>Query</code> and <code>TokenStream</code>.Uses a supplied 
  <code>IndexReader</code> to properly weight terms (for gradient highlighting).
  <p>
- @param query
- that caused hit
- @param tokenStream
- of text to be highlighted
- @param fieldName
- restricts Term's used based on field name
- @param reader
- to use for scoring
+ @param query that caused hit
+ @param tokenStream of text to be highlighted
+ @param fieldName restricts Term's used based on field name
+ @param reader to use for scoring
  @return Map of WeightedSpanTerms with quasi tf/idf scores
- @throws IOException If there is a low-level I/O error
+ @throw IOExceptionIf there is a low-level I/O error
  */
 - (id<JavaUtilMap>)getWeightedSpanTermsWithScoresWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                          withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
@@ -103,13 +99,12 @@
 - (void)setUsePayloadsWithBoolean:(jboolean)usePayloads;
 
 /*!
- @brief By default, <code>TokenStream</code>s that are not of the type
+ @brief By default, <code>TokenStream</code>s that are not of the type 
  <code>CachingTokenFilter</code> are wrapped in a <code>CachingTokenFilter</code> to
- ensure an efficient reset - if you are already using a different caching
+  ensure an efficient reset - if you are already using a different caching 
  <code>TokenStream</code> impl and you don't want it to be wrapped, set this to
- false.
- This setting is ignored when a term vector based TokenStream is supplied,
- since it can be reset efficiently.
+  false.This setting is ignored when a term vector based TokenStream is supplied,
+  since it can be reset efficiently.
  */
 - (void)setWrapIfNotCachingTokenFilterWithBoolean:(jboolean)wrap;
 
@@ -120,11 +115,9 @@
 
 /*!
  @brief Fills a <code>Map</code> with <code>WeightedSpanTerm</code>s using the terms from the supplied <code>Query</code>.
- @param query
- Query to extract Terms from
- @param terms
- Map to place created WeightedSpanTerms in
- @throws IOException If there is a low-level I/O error
+ @param query Query to extract Terms from
+ @param terms Map to place created WeightedSpanTerms in
+ @throw IOExceptionIf there is a low-level I/O error
  */
 - (void)extractWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                               withJavaUtilMap:(id<JavaUtilMap>)terms;
@@ -134,22 +127,18 @@
 
 /*!
  @brief Fills a <code>Map</code> with <code>WeightedSpanTerm</code>s using the terms from the supplied <code>SpanQuery</code>.
- @param terms
- Map to place created WeightedSpanTerms in
- @param spanQuery
- SpanQuery to extract Terms from
- @throws IOException If there is a low-level I/O error
+ @param terms Map to place created WeightedSpanTerms in
+ @param spanQuery SpanQuery to extract Terms from
+ @throw IOExceptionIf there is a low-level I/O error
  */
 - (void)extractWeightedSpanTermsWithJavaUtilMap:(id<JavaUtilMap>)terms
         withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)spanQuery;
 
 /*!
  @brief Fills a <code>Map</code> with <code>WeightedSpanTerm</code>s using the terms from the supplied <code>Query</code>.
- @param terms
- Map to place created WeightedSpanTerms in
- @param query
- Query to extract Terms from
- @throws IOException If there is a low-level I/O error
+ @param terms Map to place created WeightedSpanTerms in
+ @param query Query to extract Terms from
+ @throw IOExceptionIf there is a low-level I/O error
  */
 - (void)extractWeightedTermsWithJavaUtilMap:(id<JavaUtilMap>)terms
              withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
@@ -164,10 +153,9 @@
 - (jboolean)mustRewriteQueryWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)spanQuery;
 
 /*!
- @brief A threshold of number of characters to analyze.
- When a TokenStream based on
- term vectors with offsets and positions are supplied, this setting
- does not apply. 
+ @brief A threshold of number of characters to analyze.When a TokenStream based on
+  term vectors with offsets and positions are supplied, this setting
+  does not apply.
  */
 - (void)setMaxDocCharsToAnalyzeWithInt:(jint)maxDocCharsToAnalyze;
 
@@ -177,9 +165,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_init(OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor *new_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor *new_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor *create_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor *create_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_initWithNSString_(OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor *self, NSString *defaultField);
 
@@ -226,7 +214,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg;
 
 @end
 
@@ -250,24 +238,69 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
 #include "java/util/HashMap.h"
 
 @class OrgApacheLuceneSearchHighlightWeightedSpanTerm;
+@protocol JavaUtilFunctionBiFunction;
+@protocol JavaUtilFunctionFunction;
 @protocol JavaUtilMap;
 
 /*!
  @brief This class makes sure that if both position sensitive and insensitive
- versions of the same term are added, the position insensitive one wins.
+  versions of the same term are added, the position insensitive one wins.
  */
 @interface OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap : JavaUtilHashMap
 
 #pragma mark Public
+
+- (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)computeIfAbsentWithId:(id)arg0
+                                             withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg1;
+
+- (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)computeIfPresentWithId:(id)arg0
+                                            withJavaUtilFunctionBiFunction:(id<JavaUtilFunctionBiFunction>)arg1;
+
+- (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)computeWithId:(id)arg0
+                                   withJavaUtilFunctionBiFunction:(id<JavaUtilFunctionBiFunction>)arg1;
+
+- (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)getOrDefaultWithId:(id)arg0
+                                                                withId:(OrgApacheLuceneSearchHighlightWeightedSpanTerm *)arg1;
+
+- (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)getWithId:(id)arg0;
+
+- (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)mergeWithId:(id)arg0
+                                                         withId:(OrgApacheLuceneSearchHighlightWeightedSpanTerm *)arg1
+                                 withJavaUtilFunctionBiFunction:(id<JavaUtilFunctionBiFunction>)arg2;
 
 - (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)putWithId:(id)key
                                                        withId:(OrgApacheLuceneSearchHighlightWeightedSpanTerm *)value;
 
 - (void)putAllWithJavaUtilMap:(id<JavaUtilMap>)m;
 
+- (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)putIfAbsentWithId:(id)arg0
+                                                               withId:(OrgApacheLuceneSearchHighlightWeightedSpanTerm *)arg1;
+
+- (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)removeWithId:(id)arg0;
+
+- (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)replaceWithId:(id)arg0
+                                                           withId:(OrgApacheLuceneSearchHighlightWeightedSpanTerm *)arg1;
+
 #pragma mark Protected
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
+
+#pragma mark Package-Private
+
+- (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)putValWithInt:(jint)arg0
+                                                           withId:(id)arg1
+                                                           withId:(OrgApacheLuceneSearchHighlightWeightedSpanTerm *)arg2
+                                                      withBoolean:(jboolean)arg3
+                                                      withBoolean:(jboolean)arg4;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                            withFloat:(jfloat)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -275,12 +308,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap_init(OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap *new_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap *new_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap *create_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap *create_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor")

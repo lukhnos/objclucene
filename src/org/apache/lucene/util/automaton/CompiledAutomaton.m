@@ -4,9 +4,9 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -28,6 +28,10 @@
 #include "org/apache/lucene/util/automaton/Operations.h"
 #include "org/apache/lucene/util/automaton/Transition.h"
 #include "org/apache/lucene/util/automaton/UTF32ToUTF8.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/CompiledAutomaton must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilAutomatonCompiledAutomaton () {
  @public
@@ -135,7 +139,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonCompiledAutomato
       while (true) {
         jint numTransitions = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(automaton_)) getNumTransitionsWithInt:state];
         if (numTransitions == 0) {
-          JreAssert(([runAutomaton_ isAcceptWithInt:state]), (@"org/apache/lucene/util/automaton/CompiledAutomaton.java:394 condition failed: assert runAutomaton.isAccept(state);"));
+          JreAssert([runAutomaton_ isAcceptWithInt:state], @"org/apache/lucene/util/automaton/CompiledAutomaton.java:394 condition failed: assert runAutomaton.isAccept(state);");
           [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(output)) setLengthWithInt:idx];
           return [output get];
         }
@@ -182,9 +186,9 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonCompiledAutomato
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneUtilAutomatonCompiledAutomaton *other = (OrgApacheLuceneUtilAutomatonCompiledAutomaton *) cast_chk(obj, [OrgApacheLuceneUtilAutomatonCompiledAutomaton class]);
   if (type_ != other->type_) return false;
   if (type_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, SINGLE)) {
@@ -208,29 +212,42 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonCompiledAutomato
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:", "CompiledAutomaton", NULL, 0x1, NULL, NULL },
-    { "findSinkStateWithOrgApacheLuceneUtilAutomatonAutomaton:", "findSinkState", "I", 0xa, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaLangBoolean:withBoolean:", "CompiledAutomaton", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaLangBoolean:withBoolean:withInt:withBoolean:", "CompiledAutomaton", NULL, 0x1, NULL, NULL },
-    { "addTailWithInt:withOrgApacheLuceneUtilBytesRefBuilder:withInt:withInt:", "addTail", "Lorg.apache.lucene.util.BytesRef;", 0x2, NULL, NULL },
-    { "getTermsEnumWithOrgApacheLuceneIndexTerms:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "floorWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRefBuilder:", "floor", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x2, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, 6, 7, 8, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 11, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 12, 13, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[1].selector = @selector(findSinkStateWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaLangBoolean:withBoolean:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaLangBoolean:withBoolean:withInt:withBoolean:);
+  methods[4].selector = @selector(addTailWithInt:withOrgApacheLuceneUtilBytesRefBuilder:withInt:withInt:);
+  methods[5].selector = @selector(getTermsEnumWithOrgApacheLuceneIndexTerms:);
+  methods[6].selector = @selector(floorWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRefBuilder:);
+  methods[7].selector = @selector(hash);
+  methods[8].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "type_", NULL, 0x11, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", NULL, NULL, .constantValue.asLong = 0 },
-    { "term_", NULL, 0x11, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "runAutomaton_", NULL, 0x11, "Lorg.apache.lucene.util.automaton.ByteRunAutomaton;", NULL, NULL, .constantValue.asLong = 0 },
-    { "automaton_", NULL, 0x11, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
-    { "commonSuffixRef_", NULL, 0x11, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "finite_", NULL, 0x11, "Ljava.lang.Boolean;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sinkState_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "transition_", NULL, 0x2, "Lorg.apache.lucene.util.automaton.Transition;", NULL, NULL, .constantValue.asLong = 0 },
+    { "type_", "LOrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "term_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "runAutomaton_", "LOrgApacheLuceneUtilAutomatonByteRunAutomaton;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "automaton_", "LOrgApacheLuceneUtilAutomatonAutomaton;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "commonSuffixRef_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "finite_", "LJavaLangBoolean;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "sinkState_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "transition_", "LOrgApacheLuceneUtilAutomatonTransition;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCompiledAutomaton = { 2, "CompiledAutomaton", "org.apache.lucene.util.automaton", NULL, 0x1, 9, methods, 8, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAutomatonAutomaton;", "findSinkState", "LOrgApacheLuceneUtilAutomatonAutomaton;LJavaLangBoolean;Z", "LOrgApacheLuceneUtilAutomatonAutomaton;LJavaLangBoolean;ZIZ", "addTail", "ILOrgApacheLuceneUtilBytesRefBuilder;II", "getTermsEnum", "LOrgApacheLuceneIndexTerms;", "LJavaIoIOException;", "floor", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRefBuilder;", "hashCode", "equals", "LNSObject;", "LOrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCompiledAutomaton = { "CompiledAutomaton", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x1, 9, 8, -1, 14, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonCompiledAutomaton;
 }
 
@@ -390,7 +407,7 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilAutomatonCompiledAutomaton_addTa
       break;
     }
   }
-  JreAssert((maxIndex != -1), (@"org/apache/lucene/util/automaton/CompiledAutomaton.java:279 condition failed: assert maxIndex != -1;"));
+  JreAssert(maxIndex != -1, @"org/apache/lucene/util/automaton/CompiledAutomaton.java:279 condition failed: assert maxIndex != -1;");
   [self->automaton_ getTransitionWithInt:state withInt:maxIndex withOrgApacheLuceneUtilAutomatonTransition:self->transition_];
   jint floorLabel;
   if (((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->max_ > leadLabel - 1) {
@@ -406,7 +423,7 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilAutomatonCompiledAutomaton_addTa
   while (true) {
     numTransitions = [self->automaton_ getNumTransitionsWithInt:state];
     if (numTransitions == 0) {
-      JreAssert(([((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(self->runAutomaton_)) isAcceptWithInt:state]), (@"org/apache/lucene/util/automaton/CompiledAutomaton.java:303 condition failed: assert runAutomaton.isAccept(state);"));
+      JreAssert([((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(self->runAutomaton_)) isAcceptWithInt:state], @"org/apache/lucene/util/automaton/CompiledAutomaton.java:303 condition failed: assert runAutomaton.isAccept(state);");
       [term setLengthWithInt:idx];
       return [term get];
     }
@@ -456,8 +473,26 @@ OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUti
   return (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "NONE", "LOrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "ALL", "LOrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "SINGLE", "LOrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "NORMAL", "LOrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NONE), &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, ALL), &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, SINGLE), &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NORMAL), "LOrgApacheLuceneUtilAutomatonCompiledAutomaton;", "Ljava/lang/Enum<Lorg/apache/lucene/util/automaton/CompiledAutomaton$AUTOMATON_TYPE;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE = { "AUTOMATON_TYPE", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x4019, 2, 4, 6, -1, -1, 7, -1 };
+  return &_OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;
 }
 
 + (void)initialize {
@@ -466,28 +501,12 @@ OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUti
     size_t allocSize = 4 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NONE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(e, @"NONE", 0);
-    (JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, ALL) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(e, @"ALL", 1);
-    (JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, SINGLE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(e, @"SINGLE", 2);
-    (JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NORMAL) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(e, @"NORMAL", 3);
+    for (jint i = 0; i < 4; i++) {
+      ((void)(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "NONE", "NONE", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NONE), NULL, .constantValue.asLong = 0 },
-    { "ALL", "ALL", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, ALL), NULL, .constantValue.asLong = 0 },
-    { "SINGLE", "SINGLE", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, SINGLE), NULL, .constantValue.asLong = 0 },
-    { "NORMAL", "NORMAL", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NORMAL), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE = { 2, "AUTOMATON_TYPE", "org.apache.lucene.util.automaton", "CompiledAutomaton", 0x4019, 0, NULL, 4, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/util/automaton/CompiledAutomaton$AUTOMATON_TYPE;>;" };
-  return &_OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;
 }
 
 @end
@@ -509,7 +528,7 @@ OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUti
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

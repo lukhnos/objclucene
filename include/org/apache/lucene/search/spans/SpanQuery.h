@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpanQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanQuery))
 #define OrgApacheLuceneSearchSpansSpanQuery_
 
@@ -33,14 +39,14 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Create a SpanWeight for this query
  @param searcher the IndexSearcher to be searched across
  @param needsScores if the query needs scores
  @return a SpanWeight
- @throws IOException on error
+ @throw IOExceptionon error
  */
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -66,14 +72,18 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanQuery)
 
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanQuery_init(OrgApacheLuceneSearchSpansSpanQuery *self);
+
 FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray_(IOSObjectArray *weights);
 
 FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithJavaUtilCollection_(id<JavaUtilCollection> weights);
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanQuery_init(OrgApacheLuceneSearchSpansSpanQuery *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanQuery")

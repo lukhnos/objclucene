@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocTermOrdsRewriteMethod
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocTermOrdsRewriteMethod_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocTermOrdsRewriteMethod || defined(INCLUDE_OrgApacheLuceneSearchDocTermOrdsRewriteMethod))
 #define OrgApacheLuceneSearchDocTermOrdsRewriteMethod_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneSearchMultiTermQuery_RewriteMethod 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchMultiTermQuery;
 @class OrgApacheLuceneSearchQuery;
@@ -28,13 +33,13 @@
 /*!
  @brief Rewrites MultiTermQueries into a filter, using DocTermOrds for term enumeration.
  <p>
- This can be used to perform these queries against an unindexed docvalues field.
+  This can be used to perform these queries against an unindexed docvalues field.
  */
 @interface OrgApacheLuceneSearchDocTermOrdsRewriteMethod : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -49,12 +54,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocTermOrdsRewriteMethod)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init(OrgApacheLuceneSearchDocTermOrdsRewriteMethod *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocTermOrdsRewriteMethod *new_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocTermOrdsRewriteMethod *new_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocTermOrdsRewriteMethod *create_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocTermOrdsRewriteMethod *create_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocTermOrdsRewriteMethod)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocTermOrdsRewriteMethod")

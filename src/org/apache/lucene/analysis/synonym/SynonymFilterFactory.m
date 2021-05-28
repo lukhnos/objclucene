@@ -13,6 +13,7 @@
 #include "java/lang/Exception.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/RuntimeException.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/reflect/Constructor.h"
 #include "java/nio/charset/Charset.h"
 #include "java/nio/charset/CharsetDecoder.h"
@@ -33,14 +34,16 @@
 #include "org/apache/lucene/analysis/synonym/SynonymFilterFactory.h"
 #include "org/apache/lucene/analysis/synonym/SynonymMap.h"
 #include "org/apache/lucene/analysis/synonym/WordnetSynonymParser.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 #include "org/apache/lucene/util/Version.h"
-#include "org/apache/lucene/util/fst/FST.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/synonym/SynonymFilterFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisSynonymSynonymFilterFactory () {
  @public
@@ -73,31 +76,26 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisUtilTokenizerFactory *OrgA
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisAnalyzer *OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_loadAnalyzerWithOrgApacheLuceneAnalysisUtilResourceLoader_withNSString_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *self, id<OrgApacheLuceneAnalysisUtilResourceLoader> loader, NSString *cname);
 
-@interface OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1 : OrgApacheLuceneAnalysisAnalyzer {
+@interface OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1 : OrgApacheLuceneAnalysisAnalyzer {
  @public
   OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *this$0_;
   OrgApacheLuceneAnalysisUtilTokenizerFactory *val$factory_;
 }
 
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
-
 - (instancetype)initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory:(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *)outer$
                            withOrgApacheLuceneAnalysisUtilTokenizerFactory:(OrgApacheLuceneAnalysisUtilTokenizerFactory *)capture$0;
 
+- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1, this$0_, OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1, val$factory_, OrgApacheLuceneAnalysisUtilTokenizerFactory *)
+__attribute__((unused)) static void OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1 *self, OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1 *self, OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0);
+__attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1 *new_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1 *new_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1 *create_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1)
+__attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1 *create_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0);
 
 @implementation OrgApacheLuceneAnalysisSynonymSynonymFilterFactory
 
@@ -117,13 +115,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1
     analyzer = OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_loadAnalyzerWithOrgApacheLuceneAnalysisUtilResourceLoader_withNSString_(self, loader, analyzerName_);
   }
   else {
-    analyzer = create_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(self, factory);
+    analyzer = create_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(self, factory);
   }
   @try {
     OrgApacheLuceneAnalysisAnalyzer *a = analyzer;
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      NSString *formatClass = format_;
+      NSString *formatClass = JreRetainedLocalValue(format_);
       if (format_ == nil || [format_ isEqual:@"solr"]) {
         formatClass = [OrgApacheLuceneAnalysisSynonymSolrSynonymParser_class_() getName];
       }
@@ -132,7 +130,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1
       }
       JreStrongAssign(&map_, [self loadSynonymsWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:formatClass withBoolean:true withOrgApacheLuceneAnalysisAnalyzer:a]);
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -141,17 +139,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1
         if (__primaryException1 != nil) {
           @try {
             [a close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [a close];
         }
       }
     }
   }
   @catch (JavaTextParseException *e) {
-    @throw create_JavaIoIOException_initWithNSString_withNSException_(@"Error parsing synonyms file:", e);
+    @throw create_JavaIoIOException_initWithNSString_withJavaLangThrowable_(@"Error parsing synonyms file:", e);
   }
 }
 
@@ -159,16 +159,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1
                                                                                            withNSString:(NSString *)cname
                                                                                             withBoolean:(jboolean)dedup
                                                                     withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer {
-  JavaNioCharsetCharsetDecoder *decoder = [((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8))) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)];
+  JavaNioCharsetCharsetDecoder *decoder = JreRetainedLocalValue([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8))) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)]);
   OrgApacheLuceneAnalysisSynonymSynonymMap_Parser *parser;
-  IOSClass *clazz = [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) findClassWithNSString:cname withIOSClass:OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_class_()];
+  IOSClass *clazz = JreRetainedLocalValue([((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) findClassWithNSString:cname withIOSClass:OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_class_()]);
   @try {
-    parser = [((JavaLangReflectConstructor *) nil_chk([((IOSClass *) nil_chk(clazz)) getConstructor:[IOSObjectArray arrayWithObjects:(id[]){ [IOSClass booleanClass], [IOSClass booleanClass], OrgApacheLuceneAnalysisAnalyzer_class_() } count:3 type:IOSClass_class_()]])) newInstanceWithNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ JavaLangBoolean_valueOfWithBoolean_(dedup), JavaLangBoolean_valueOfWithBoolean_(expand_), analyzer } count:3 type:NSObject_class_()]];
+    parser = [((JavaLangReflectConstructor *) nil_chk(([((IOSClass *) nil_chk(clazz)) getConstructor:[IOSObjectArray arrayWithObjects:(id[]){ [IOSClass booleanClass], [IOSClass booleanClass], OrgApacheLuceneAnalysisAnalyzer_class_() } count:3 type:IOSClass_class_()]]))) newInstanceWithNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ JavaLangBoolean_valueOfWithBoolean_(dedup), JavaLangBoolean_valueOfWithBoolean_(expand_), analyzer } count:3 type:NSObject_class_()]];
   }
   @catch (JavaLangException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
-  id<JavaUtilList> files = [self splitFileNamesWithNSString:synonyms_];
+  id<JavaUtilList> files = JreRetainedLocalValue([self splitFileNamesWithNSString:synonyms_]);
   for (NSString * __strong file in nil_chk(files)) {
     [((JavaNioCharsetCharsetDecoder *) nil_chk(decoder)) reset];
     [((OrgApacheLuceneAnalysisSynonymSynonymMap_Parser *) nil_chk(parser)) parseWithJavaIoReader:create_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_([loader openResourceWithNSString:file], decoder)];
@@ -197,25 +197,36 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "SynonymFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "loadSynonymsWithOrgApacheLuceneAnalysisUtilResourceLoader:withNSString:withBoolean:withOrgApacheLuceneAnalysisAnalyzer:", "loadSynonyms", "Lorg.apache.lucene.analysis.synonym.SynonymMap;", 0x4, "Ljava.io.IOException;Ljava.text.ParseException;", NULL },
-    { "loadTokenizerFactoryWithOrgApacheLuceneAnalysisUtilResourceLoader:withNSString:", "loadTokenizerFactory", "Lorg.apache.lucene.analysis.util.TokenizerFactory;", 0x2, "Ljava.io.IOException;", NULL },
-    { "loadAnalyzerWithOrgApacheLuceneAnalysisUtilResourceLoader:withNSString:", "loadAnalyzer", "Lorg.apache.lucene.analysis.Analyzer;", 0x2, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisSynonymSynonymMap;", 0x4, 7, 8, 9, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilTokenizerFactory;", 0x2, 10, 11, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x2, 12, 11, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilMap:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[2].selector = @selector(informWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[3].selector = @selector(loadSynonymsWithOrgApacheLuceneAnalysisUtilResourceLoader:withNSString:withBoolean:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[4].selector = @selector(loadTokenizerFactoryWithOrgApacheLuceneAnalysisUtilResourceLoader:withNSString:);
+  methods[5].selector = @selector(loadAnalyzerWithOrgApacheLuceneAnalysisUtilResourceLoader:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenizerFactory_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "synonyms_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "format_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "expand_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "analyzerName_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokArgs_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "map_", NULL, 0x2, "Lorg.apache.lucene.analysis.synonym.SynonymMap;", NULL, NULL, .constantValue.asLong = 0 },
+    { "ignoreCase_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "tokenizerFactory_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "synonyms_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "format_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "expand_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "analyzerName_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "tokArgs_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 13, -1 },
+    { "map_", "LOrgApacheLuceneAnalysisSynonymSynonymMap;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymFilterFactory = { 2, "SynonymFilterFactory", "org.apache.lucene.analysis.synonym", NULL, 0x1, 6, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "create", "LOrgApacheLuceneAnalysisTokenStream;", "inform", "LOrgApacheLuceneAnalysisUtilResourceLoader;", "LJavaIoIOException;", "loadSynonyms", "LOrgApacheLuceneAnalysisUtilResourceLoader;LNSString;ZLOrgApacheLuceneAnalysisAnalyzer;", "LJavaIoIOException;LJavaTextParseException;", "loadTokenizerFactory", "LOrgApacheLuceneAnalysisUtilResourceLoader;LNSString;", "loadAnalyzer", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymFilterFactory = { "SynonymFilterFactory", "org.apache.lucene.analysis.synonym", ptrTable, methods, fields, 7, 0x1, 6, 8, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory;
 }
 
@@ -235,9 +246,9 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_initWithJavaUtilMap_(Org
   }
   if (self->tokenizerFactory_ != nil) {
     [self->tokArgs_ putWithId:@"luceneMatchVersion" withId:[((OrgApacheLuceneUtilVersion *) nil_chk([self getLuceneMatchVersion])) description]];
-    for (id<JavaUtilIterator> itr = [((id<JavaUtilSet>) nil_chk([((id<JavaUtilMap>) nil_chk(args)) keySet])) iterator]; [((id<JavaUtilIterator>) nil_chk(itr)) hasNext]; ) {
-      NSString *key = [itr next];
-      [self->tokArgs_ putWithId:[((NSString *) nil_chk(key)) replaceAll:@"^tokenizerFactory\\." withReplacement:@""] withId:[args getWithId:key]];
+    for (id<JavaUtilIterator> itr = JreRetainedLocalValue([((id<JavaUtilSet>) nil_chk([((id<JavaUtilMap>) nil_chk(args)) keySet])) iterator]); [((id<JavaUtilIterator>) nil_chk(itr)) hasNext]; ) {
+      NSString *key = JreRetainedLocalValue([itr next]);
+      [self->tokArgs_ putWithId:[((NSString *) nil_chk(key)) java_replaceAll:@"^tokenizerFactory\\." withReplacement:@""] withId:[args getWithId:key]];
       [itr remove];
     }
   }
@@ -255,47 +266,47 @@ OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *create_OrgApacheLuceneAnalys
 }
 
 OrgApacheLuceneAnalysisUtilTokenizerFactory *OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_loadTokenizerFactoryWithOrgApacheLuceneAnalysisUtilResourceLoader_withNSString_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *self, id<OrgApacheLuceneAnalysisUtilResourceLoader> loader, NSString *cname) {
-  IOSClass *clazz = [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) findClassWithNSString:cname withIOSClass:OrgApacheLuceneAnalysisUtilTokenizerFactory_class_()];
+  IOSClass *clazz = JreRetainedLocalValue([((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) findClassWithNSString:cname withIOSClass:OrgApacheLuceneAnalysisUtilTokenizerFactory_class_()]);
   @try {
-    OrgApacheLuceneAnalysisUtilTokenizerFactory *tokFactory = [((JavaLangReflectConstructor *) nil_chk([((IOSClass *) nil_chk(clazz)) getConstructor:[IOSObjectArray arrayWithObjects:(id[]){ JavaUtilMap_class_() } count:1 type:IOSClass_class_()]])) newInstanceWithNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ self->tokArgs_ } count:1 type:NSObject_class_()]];
+    OrgApacheLuceneAnalysisUtilTokenizerFactory *tokFactory = JreRetainedLocalValue([((JavaLangReflectConstructor *) nil_chk(([((IOSClass *) nil_chk(clazz)) getConstructor:[IOSObjectArray arrayWithObjects:(id[]){ JavaUtilMap_class_() } count:1 type:IOSClass_class_()]]))) newInstanceWithNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ self->tokArgs_ } count:1 type:NSObject_class_()]]);
     if ([OrgApacheLuceneAnalysisUtilResourceLoaderAware_class_() isInstance:tokFactory]) {
       [((id<OrgApacheLuceneAnalysisUtilResourceLoaderAware>) nil_chk(((id<OrgApacheLuceneAnalysisUtilResourceLoaderAware>) cast_check(tokFactory, OrgApacheLuceneAnalysisUtilResourceLoaderAware_class_())))) informWithOrgApacheLuceneAnalysisUtilResourceLoader:loader];
     }
     return tokFactory;
   }
   @catch (JavaLangException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
 OrgApacheLuceneAnalysisAnalyzer *OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_loadAnalyzerWithOrgApacheLuceneAnalysisUtilResourceLoader_withNSString_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *self, id<OrgApacheLuceneAnalysisUtilResourceLoader> loader, NSString *cname) {
-  IOSClass *clazz = [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) findClassWithNSString:cname withIOSClass:OrgApacheLuceneAnalysisAnalyzer_class_()];
+  IOSClass *clazz = JreRetainedLocalValue([((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) findClassWithNSString:cname withIOSClass:OrgApacheLuceneAnalysisAnalyzer_class_()]);
   @try {
-    OrgApacheLuceneAnalysisAnalyzer *analyzer = [((JavaLangReflectConstructor *) nil_chk([((IOSClass *) nil_chk(clazz)) getConstructor:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]])) newInstanceWithNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]];
+    OrgApacheLuceneAnalysisAnalyzer *analyzer = JreRetainedLocalValue([((JavaLangReflectConstructor *) nil_chk([((IOSClass *) nil_chk(clazz)) getConstructor:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]])) newInstanceWithNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]]);
     if ([OrgApacheLuceneAnalysisUtilResourceLoaderAware_class_() isInstance:analyzer]) {
       [((id<OrgApacheLuceneAnalysisUtilResourceLoaderAware>) nil_chk(((id<OrgApacheLuceneAnalysisUtilResourceLoaderAware>) cast_check(analyzer, OrgApacheLuceneAnalysisUtilResourceLoaderAware_class_())))) informWithOrgApacheLuceneAnalysisUtilResourceLoader:loader];
     }
     return analyzer;
   }
   @catch (JavaLangException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory)
 
-@implementation OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
-  OrgApacheLuceneAnalysisTokenizer *tokenizer = val$factory_ == nil ? create_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init() : [val$factory_ create];
-  OrgApacheLuceneAnalysisTokenStream *stream = this$0_->ignoreCase_ ? create_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(tokenizer) : tokenizer;
-  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(tokenizer, stream);
-}
+@implementation OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1
 
 - (instancetype)initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory:(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *)outer$
                            withOrgApacheLuceneAnalysisUtilTokenizerFactory:(OrgApacheLuceneAnalysisUtilTokenizerFactory *)capture$0 {
-  OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(self, outer$, capture$0);
+  OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(self, outer$, capture$0);
   return self;
+}
+
+- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
+  OrgApacheLuceneAnalysisTokenizer *tokenizer = val$factory_ == nil ? create_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init() : [val$factory_ create];
+  OrgApacheLuceneAnalysisTokenStream *stream = this$0_->ignoreCase_ ? create_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(tokenizer) : (id) tokenizer;
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(tokenizer, stream);
 }
 
 - (void)dealloc {
@@ -305,33 +316,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymFilterFact
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory:withOrgApacheLuceneAnalysisUtilTokenizerFactory:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory:withOrgApacheLuceneAnalysisUtilTokenizerFactory:);
+  methods[1].selector = @selector(createComponentsWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.analysis.synonym.SynonymFilterFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$factory_", NULL, 0x1012, "Lorg.apache.lucene.analysis.util.TokenizerFactory;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneAnalysisSynonymSynonymFilterFactory;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$factory_", "LOrgApacheLuceneAnalysisUtilTokenizerFactory;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneAnalysisSynonymSynonymFilterFactory", "informWithOrgApacheLuceneAnalysisUtilResourceLoader:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1 = { 2, "", "org.apache.lucene.analysis.synonym", "SynonymFilterFactory", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisSynonymSynonymFilterFactory;LOrgApacheLuceneAnalysisUtilTokenizerFactory;", "createComponents", "LNSString;", "LOrgApacheLuceneAnalysisSynonymSynonymFilterFactory;", "informWithOrgApacheLuceneAnalysisUtilResourceLoader:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1 = { "", "org.apache.lucene.analysis.synonym", ptrTable, methods, fields, 7, 0x8010, 2, 2, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1 *self, OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0) {
+void OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1 *self, OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$factory_, capture$0);
   OrgApacheLuceneAnalysisAnalyzer_init(self);
 }
 
-OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1 *new_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1, initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_, outer$, capture$0)
+OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1 *new_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1, initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_, outer$, capture$0)
 }
 
-OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1 *create_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1, initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_, outer$, capture$0)
+OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1 *create_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *outer$, OrgApacheLuceneAnalysisUtilTokenizerFactory *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_1, initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_, outer$, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1)

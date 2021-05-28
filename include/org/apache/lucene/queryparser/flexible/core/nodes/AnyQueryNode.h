@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_
 
@@ -27,19 +33,18 @@
 
 /*!
  @brief A <code>AnyQueryNode</code> represents an ANY operator performed on a list of
- nodes.
+  nodes.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode
 
 #pragma mark Public
 
 /*!
- @param clauses
- - the query nodes to be or'ed
+ @param clauses - the query nodes to be or'ed
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses
-            withJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                             withInt:(jint)minimumMatchingElements;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)clauses
+                      withJavaLangCharSequence:(id<JavaLangCharSequence>)field
+                                       withInt:(jint)minimumMatchingElements;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -58,14 +63,17 @@
 - (jint)getMinimumMatchingElements;
 
 /*!
- @param field
- - the field to set
+ @param field - the field to set
  */
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -81,4 +89,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNo
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode")

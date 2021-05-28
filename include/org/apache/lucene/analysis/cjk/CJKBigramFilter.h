@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCjkCJKBigramFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCjkCJKBigramFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKBigramFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCjkCJKBigramFilter))
 #define OrgApacheLuceneAnalysisCjkCJKBigramFilter_
 
@@ -25,19 +31,19 @@
 
 /*!
  @brief Forms bigrams of CJK terms that are generated from StandardTokenizer
- or ICUTokenizer.
+  or ICUTokenizer.
  <p>
- CJK types are set by these tokenizers, but you can also use 
- <code>CJKBigramFilter(TokenStream,int)</code> to explicitly control which
- of the CJK scripts are turned into bigrams.
+  CJK types are set by these tokenizers, but you can also use  
+ <code>CJKBigramFilter(TokenStream, int)</code> to explicitly control which
+  of the CJK scripts are turned into bigrams. 
  <p>
- By default, when a CJK character has no adjacent characters to form
- a bigram, it is output in unigram form. If you want to always output
- both unigrams and bigrams, set the <code>outputUnigrams</code>
- flag in <code>CJKBigramFilter.CJKBigramFilter(TokenStream,int,boolean)</code>.
- This can be used for a combined unigram+bigram approach.
+  By default, when a CJK character has no adjacent characters to form
+  a bigram, it is output in unigram form. If you want to always output
+  both unigrams and bigrams, set the <code>outputUnigrams</code>
+  flag in <code>CJKBigramFilter.CJKBigramFilter(TokenStream, int, boolean)</code>.
+  This can be used for a combined unigram+bigram approach. 
  <p>
- In all cases, all non-CJK input is passed thru unmodified.
+  In all cases, all non-CJK input is passed thru unmodified.
  */
 @interface OrgApacheLuceneAnalysisCjkCJKBigramFilter : OrgApacheLuceneAnalysisTokenFilter {
  @public
@@ -48,44 +54,37 @@
   jint index_;
   jint lastEndOffset_;
 }
-
-+ (jint)HAN;
-
-+ (jint)HIRAGANA;
-
-+ (jint)KATAKANA;
-
-+ (jint)HANGUL;
-
-+ (NSString *)DOUBLE_TYPE;
-
-+ (NSString *)SINGLE_TYPE;
+@property (readonly, class) jint HAN NS_SWIFT_NAME(HAN);
+@property (readonly, class) jint HIRAGANA NS_SWIFT_NAME(HIRAGANA);
+@property (readonly, class) jint KATAKANA NS_SWIFT_NAME(KATAKANA);
+@property (readonly, class) jint HANGUL NS_SWIFT_NAME(HANGUL);
+@property (readonly, copy, class) NSString *DOUBLE_TYPE NS_SWIFT_NAME(DOUBLE_TYPE);
+@property (readonly, copy, class) NSString *SINGLE_TYPE NS_SWIFT_NAME(SINGLE_TYPE);
 
 #pragma mark Public
 
 /*!
  @brief Calls <code>CJKBigramFilter(in, HAN | HIRAGANA | KATAKANA | HANGUL)</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 /*!
  @brief Calls <code>CJKBigramFilter(in, flags, false)</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)flags;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                             withInt:(jint)flags;
 
 /*!
  @brief Create a new CJKBigramFilter, specifying which writing systems should be bigrammed,
- and whether or not unigrams should also be output.
- @param flags OR'ed set from <code>CJKBigramFilter.HAN</code>, <code>CJKBigramFilter.HIRAGANA</code>, 
- <code>CJKBigramFilter.KATAKANA</code>, <code>CJKBigramFilter.HANGUL</code>
- @param outputUnigrams true if unigrams for the selected writing systems should also be output.
- when this is false, this is only done when there are no adjacent characters to form
- a bigram.
+  and whether or not unigrams should also be output.
+ @param flags OR'ed set from <code>CJKBigramFilter.HAN</code> , <code>CJKBigramFilter.HIRAGANA</code> , 
+          <code>CJKBigramFilter.KATAKANA</code> , <code>CJKBigramFilter.HANGUL</code>
+ @param outputUnigrams true if unigrams for the selected writing systems should also be output.         when this is false, this is only done when there are no adjacent characters to form
+          a bigram.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)flags
-                                               withBoolean:(jboolean)outputUnigrams;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                             withInt:(jint)flags
+                                                         withBoolean:(jboolean)outputUnigrams;
 
 - (jboolean)incrementToken;
 
@@ -102,35 +101,35 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCjkCJKBigramFilter, endOffset_, IOSIn
 /*!
  @brief bigram flag for Han Ideographs
  */
-inline jint OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_HAN();
+inline jint OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_HAN(void);
 #define OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCjkCJKBigramFilter, HAN, jint)
 
 /*!
  @brief bigram flag for Hiragana
  */
-inline jint OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_HIRAGANA();
+inline jint OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_HIRAGANA(void);
 #define OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCjkCJKBigramFilter, HIRAGANA, jint)
 
 /*!
  @brief bigram flag for Katakana
  */
-inline jint OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_KATAKANA();
+inline jint OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_KATAKANA(void);
 #define OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCjkCJKBigramFilter, KATAKANA, jint)
 
 /*!
  @brief bigram flag for Hangul
  */
-inline jint OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_HANGUL();
+inline jint OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_HANGUL(void);
 #define OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCjkCJKBigramFilter, HANGUL, jint)
 
 /*!
  @brief when we emit a bigram, it's then marked as this type
  */
-inline NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_DOUBLE_TYPE();
+inline NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_DOUBLE_TYPE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_DOUBLE_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, DOUBLE_TYPE, NSString *)
@@ -138,7 +137,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, DOUBLE_
 /*!
  @brief when we emit a unigram, it's then marked as this type
  */
-inline NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_SINGLE_TYPE();
+inline NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_SINGLE_TYPE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, SINGLE_TYPE, NSString *)
@@ -165,4 +164,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCjkCJKBigramFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKBigramFilter")

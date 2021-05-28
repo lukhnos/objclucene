@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTermStatistics
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTermStatistics_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermStatistics || defined(INCLUDE_OrgApacheLuceneSearchTermStatistics))
 #define OrgApacheLuceneSearchTermStatistics_
 
@@ -25,9 +31,9 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
-                                           withLong:(jlong)docFreq
-                                           withLong:(jlong)totalTermFreq;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
+                                                     withLong:(jlong)docFreq
+                                                     withLong:(jlong)totalTermFreq;
 
 /*!
  @brief returns the number of documents this term occurs in
@@ -46,6 +52,10 @@
  */
 - (jlong)totalTermFreq;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermStatistics)
@@ -60,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermStatistics)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermStatistics")

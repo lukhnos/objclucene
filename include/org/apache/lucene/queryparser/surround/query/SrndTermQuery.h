@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery))
 #define OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_
 
@@ -22,6 +28,7 @@
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneIndexTerm;
+@class OrgApacheLuceneQueryparserSurroundQuerySrndQuery;
 @protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
 
 /*!
@@ -31,18 +38,24 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)termText
-                     withBoolean:(jboolean)quoted;
+- (instancetype __nonnull)initWithNSString:(NSString *)termText
+                               withBoolean:(jboolean)quoted;
 
 - (OrgApacheLuceneIndexTerm *)getLuceneTermWithNSString:(NSString *)fieldName;
 
 - (NSString *)getTermText;
+
+- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)java_clone;
 
 - (NSString *)toStringUnquoted;
 
 - (void)visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                                  withNSString:(NSString *)fieldName
 withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>)mtv;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithBoolean:(jboolean)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -58,4 +71,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery")

@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/store/SleepingLockWrapper.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/InterruptedException.h"
 #include "java/lang/Thread.h"
@@ -15,6 +13,10 @@
 #include "org/apache/lucene/store/LockObtainFailedException.h"
 #include "org/apache/lucene/store/SleepingLockWrapper.h"
 #include "org/apache/lucene/util/ThreadInterruptedException.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/SleepingLockWrapper must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreSleepingLockWrapper () {
  @public
@@ -55,7 +57,7 @@ jlong OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL = 1000;
 
 - (OrgApacheLuceneStoreLock *)obtainLockWithNSString:(NSString *)lockName {
   OrgApacheLuceneStoreLockObtainFailedException *failureReason = nil;
-  jlong maxSleepCount = lockWaitTimeout_ / pollInterval_;
+  jlong maxSleepCount = JreLongDiv(lockWaitTimeout_, pollInterval_);
   jlong sleepCount = 0;
   do {
     @try {
@@ -78,7 +80,7 @@ jlong OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL = 1000;
   if (failureReason != nil) {
     JreStrAppend(&reason, "$@", @": ", failureReason);
   }
-  @throw create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withNSException_(reason, failureReason);
+  @throw create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withJavaLangThrowable_(reason, failureReason);
 }
 
 - (NSString *)description {
@@ -86,19 +88,28 @@ jlong OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL = 1000;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDirectory:withLong:", "SleepingLockWrapper", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withLong:withLong:", "SleepingLockWrapper", NULL, 0x1, NULL, NULL },
-    { "obtainLockWithNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreLock;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withLong:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withLong:withLong:);
+  methods[2].selector = @selector(obtainLockWithNSString:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCK_OBTAIN_WAIT_FOREVER", "LOCK_OBTAIN_WAIT_FOREVER", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneStoreSleepingLockWrapper_LOCK_OBTAIN_WAIT_FOREVER },
-    { "DEFAULT_POLL_INTERVAL", "DEFAULT_POLL_INTERVAL", 0x9, "J", &OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL, NULL, .constantValue.asLong = 0 },
-    { "lockWaitTimeout_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "pollInterval_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "LOCK_OBTAIN_WAIT_FOREVER", "J", .constantValue.asLong = OrgApacheLuceneStoreSleepingLockWrapper_LOCK_OBTAIN_WAIT_FOREVER, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_POLL_INTERVAL", "J", .constantValue.asLong = 0, 0x9, -1, 6, -1, -1 },
+    { "lockWaitTimeout_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "pollInterval_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreSleepingLockWrapper = { 2, "SleepingLockWrapper", "org.apache.lucene.store", NULL, 0x11, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDirectory;J", "LOrgApacheLuceneStoreDirectory;JJ", "obtainLock", "LNSString;", "LJavaIoIOException;", "toString", &OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreSleepingLockWrapper = { "SleepingLockWrapper", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x11, 4, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreSleepingLockWrapper;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap))
 #define OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_
 
@@ -21,15 +27,18 @@
 
 /*!
  @brief Holds a map of String input to String output, to be used
- with <code>MappingCharFilter</code>.
- Use the <code>Builder</code>
- to create this.
+  with <code>MappingCharFilter</code>.Use the <code>Builder</code>
+  to create this.
  */
 @interface OrgApacheLuceneAnalysisCharfilterNormalizeCharMap : NSObject {
  @public
   OrgApacheLuceneUtilFstFST *map_;
   id<JavaUtilMap> cachedRootArcs_;
 }
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -50,32 +59,31 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap)
 /*!
  @brief Builds an NormalizeCharMap.
  <p>
- Call add() until you have added all the mappings, then call build() to get a NormalizeCharMap
+  Call add() until you have added all the mappings, then call build() to get a NormalizeCharMap
  */
 @interface OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Records a replacement to be applied to the input
- stream.
- Whenever <code>singleMatch</code> occurs in
- the input, it will be replaced with
+   stream.Whenever <code>singleMatch</code> occurs in
+   the input, it will be replaced with  
  <code>replacement</code>.
  @param match input String to be replaced
  @param replacement output String
- @throws IllegalArgumentException if
- <code>match</code> is the empty string, or was
- already previously added
+ @throw IllegalArgumentExceptionif
+  <code>match</code> is the empty string, or was
+  already previously added
  */
 - (void)addWithNSString:(NSString *)match
            withNSString:(NSString *)replacement;
 
 /*!
  @brief Builds the NormalizeCharMap; call this once you
- are done calling <code>add</code>.
+   are done calling <code>add</code>.
  */
 - (OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *)build;
 
@@ -85,12 +93,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Build
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *new_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *new_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *create_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *create_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap")

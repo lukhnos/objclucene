@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter))
 #define OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_
 
@@ -33,9 +39,9 @@
 
 /*!
  @brief Concrete class that writes docId(maybe frq,pos,offset,payloads) list
- with postings format.
- Postings list for each term will be stored separately. 
- - seealso: Lucene50SkipWriter for details about skipping setting and postings layout.
+  with postings format.
+ Postings list for each term will be stored separately.
+ - seealso: Lucene50SkipWriterfor details about skipping setting and postings layout.
  */
 @interface OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter : OrgApacheLuceneCodecsPushPostingsWriterBase {
  @public
@@ -51,15 +57,14 @@
   IOSIntArray *offsetLengthBuffer_;
   IOSByteArray *encoded_;
 }
-
-+ (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)emptyState;
+@property (readonly, class, strong) OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *emptyState NS_SWIFT_NAME(emptyState);
 
 #pragma mark Public
 
 /*!
  @brief Creates a postings writer
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
 - (void)addPositionWithInt:(jint)position
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
@@ -93,6 +98,10 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 
 - (void)startTerm;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter)
@@ -109,7 +118,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, offsetS
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, offsetLengthBuffer_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, encoded_, IOSByteArray *)
 
-inline OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_get_emptyState();
+inline OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_get_emptyState(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, emptyState, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)
@@ -124,4 +133,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter")

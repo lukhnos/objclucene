@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileFileFileVisitor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFileFileVisitor_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileFileVisitor || defined(INCLUDE_OrgLukhnosPortmobileFileFileVisitor))
 #define OrgLukhnosPortmobileFileFileVisitor_
 
@@ -20,7 +26,7 @@
 @class OrgLukhnosPortmobileFileAttributeBasicFileAttributes;
 @class OrgLukhnosPortmobileFileFileVisitResult;
 
-@protocol OrgLukhnosPortmobileFileFileVisitor < NSObject, JavaObject >
+@protocol OrgLukhnosPortmobileFileFileVisitor < JavaObject >
 
 - (OrgLukhnosPortmobileFileFileVisitResult *)preVisitDirectoryWithId:(id)dir
             withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs;
@@ -42,4 +48,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileFileVisitor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFileVisitor")

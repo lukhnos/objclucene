@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter || defined(INCLUDE_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter))
 #define OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_
 
@@ -22,6 +28,7 @@
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchFilter;
+@class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneUtilBitDocIdSet;
 
 /*!
@@ -35,7 +42,7 @@
  @brief Wraps another filter's result and caches it into bitsets.
  @param filter Filter to cache results of
  */
-- (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
 
 - (jboolean)isEqual:(id)o;
 
@@ -49,7 +56,13 @@
 
 - (NSUInteger)hash;
 
+- (OrgApacheLuceneSearchQuery *)java_clone;
+
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -65,4 +78,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter")

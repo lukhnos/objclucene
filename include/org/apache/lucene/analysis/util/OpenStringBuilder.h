@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilOpenStringBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilOpenStringBuilder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilOpenStringBuilder || defined(INCLUDE_OrgApacheLuceneAnalysisUtilOpenStringBuilder))
 #define OrgApacheLuceneAnalysisUtilOpenStringBuilder_
 
@@ -25,6 +31,7 @@
 #include "java/lang/CharSequence.h"
 
 @class IOSCharArray;
+@protocol JavaUtilStreamIntStream;
 
 /*!
  @brief A StringBuilder that allows one to access the array.
@@ -37,12 +44,12 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithCharArray:(IOSCharArray *)arr
-                          withInt:(jint)len;
+- (instancetype __nonnull)initWithCharArray:(IOSCharArray *)arr
+                                    withInt:(jint)len;
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
 
 - (id<JavaLangAppendable>)appendWithChar:(jchar)c;
 
@@ -60,7 +67,7 @@
 
 - (IOSCharArray *)getArray;
 
-- (jint)length;
+- (jint)java_length;
 
 - (void)reserveWithInt:(jint)num;
 
@@ -117,9 +124,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilOpenStringBuilder, buf_, IOSCharA
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilOpenStringBuilder_init(OrgApacheLuceneAnalysisUtilOpenStringBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *create_OrgApacheLuceneAnalysisUtilOpenStringBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *create_OrgApacheLuceneAnalysisUtilOpenStringBuilder_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(OrgApacheLuceneAnalysisUtilOpenStringBuilder *self, jint size);
 
@@ -137,4 +144,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilOpenStringBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilOpenStringBuilder")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper || defined(INCLUDE_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper))
 #define OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_
 
@@ -27,17 +33,17 @@
 /*!
  @brief An analyzer wrapper, that doesn't allow to wrap components or readers.
  By disallowing it, it means that the thread local resources can be delegated
- to the delegate analyzer, and not also be allocated on this analyzer.
- This wrapper class is the base class of all analyzers that just delegate to
- another analyzer, e.g. per field name.
+  to the delegate analyzer, and not also be allocated on this analyzer.
+  This wrapper class is the base class of all analyzers that just delegate to
+  another analyzer, e.g. per field name.  
  <p>This solves the problem of per field analyzer wrapper, where it also
- maintains a thread local per field token stream components, while it can
- safely delegate those and not also hold these data structures, which can
- become expensive memory wise.
+  maintains a thread local per field token stream components, while it can
+  safely delegate those and not also hold these data structures, which can
+  become expensive memory wise.  
  <p><b>Please note:</b> This analyzer uses a private <code>Analyzer.ReuseStrategy</code>,
- which is returned by <code>getReuseStrategy()</code>. This strategy is used when
- delegating. If you wrap this analyzer again and reuse this strategy, no
- delegation is done and the given fallback is used.
+  which is returned by <code>getReuseStrategy()</code>. This strategy is used when
+  delegating. If you wrap this analyzer again and reuse this strategy, no
+  delegation is done and the given fallback is used.
  */
 @interface OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper : OrgApacheLuceneAnalysisAnalyzerWrapper
 
@@ -45,11 +51,10 @@
 
 /*!
  @brief Constructor.
- @param fallbackStrategy is the strategy to use if delegation is not possible
- This is to support the common pattern:
- <code>new OtherWrapper(thisWrapper.getReuseStrategy())</code>
+ @param fallbackStrategy is the strategy to use if delegation is not possible   This is to support the common pattern:
+    <code>new OtherWrapper(thisWrapper.getReuseStrategy())</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)fallbackStrategy;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)fallbackStrategy;
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components;
@@ -67,4 +72,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper")

@@ -3,7 +3,6 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/UserInputQueryBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/queryparser/classic/ParseException.h"
@@ -13,6 +12,10 @@
 #include "org/apache/lucene/queryparser/xml/builders/UserInputQueryBuilder.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/w3c/dom/Element.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/UserInputQueryBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder () {
  @public
@@ -46,19 +49,19 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
     OrgApacheLuceneSearchQuery *q = nil;
     if (unSafeParser_ != nil) {
       @synchronized(unSafeParser_) {
-        q = [unSafeParser_ parseWithNSString:text];
+        q = JreRetainedLocalValue([unSafeParser_ parseWithNSString:text]);
       }
     }
     else {
       NSString *fieldName = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withNSString_(e, @"fieldName", defaultField_);
-      OrgApacheLuceneQueryparserClassicQueryParser *parser = [self createQueryParserWithNSString:fieldName withOrgApacheLuceneAnalysisAnalyzer:analyzer_];
+      OrgApacheLuceneQueryparserClassicQueryParser *parser = JreRetainedLocalValue([self createQueryParserWithNSString:fieldName withOrgApacheLuceneAnalysisAnalyzer:analyzer_]);
       q = [((OrgApacheLuceneQueryparserClassicQueryParser *) nil_chk(parser)) parseWithNSString:text];
     }
     [((OrgApacheLuceneSearchQuery *) nil_chk(q)) setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
     return q;
   }
   @catch (OrgApacheLuceneQueryparserClassicParseException *e1) {
-    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_([((OrgApacheLuceneQueryparserClassicParseException *) nil_chk(e1)) getMessage]);
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_([e1 getMessage]);
   }
 }
 
@@ -75,18 +78,27 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserClassicQueryParser:", "UserInputQueryBuilder", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:", "UserInputQueryBuilder", NULL, 0x1, NULL, NULL },
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "createQueryParserWithNSString:withOrgApacheLuceneAnalysisAnalyzer:", "createQueryParser", "Lorg.apache.lucene.queryparser.classic.QueryParser;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserClassicQueryParser;", 0x4, 5, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserClassicQueryParser:);
+  methods[1].selector = @selector(initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[2].selector = @selector(getQueryWithOrgW3cDomElement:);
+  methods[3].selector = @selector(createQueryParserWithNSString:withOrgApacheLuceneAnalysisAnalyzer:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "unSafeParser_", NULL, 0x2, "Lorg.apache.lucene.queryparser.classic.QueryParser;", NULL, NULL, .constantValue.asLong = 0 },
-    { "analyzer_", NULL, 0x2, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "defaultField_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "unSafeParser_", "LOrgApacheLuceneQueryparserClassicQueryParser;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "analyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "defaultField_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder = { 2, "UserInputQueryBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserClassicQueryParser;", "LNSString;LOrgApacheLuceneAnalysisAnalyzer;", "getQuery", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;", "createQueryParser" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder = { "UserInputQueryBuilder", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x1, 4, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder;
 }
 

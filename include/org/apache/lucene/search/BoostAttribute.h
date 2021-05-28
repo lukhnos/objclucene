@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchBoostAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchBoostAttribute_) && (INCLUDE_ALL_OrgApacheLuceneSearchBoostAttribute || defined(INCLUDE_OrgApacheLuceneSearchBoostAttribute))
 #define OrgApacheLuceneSearchBoostAttribute_
 
@@ -22,15 +28,14 @@
 
 /*!
  @brief Add this <code>Attribute</code> to a <code>TermsEnum</code> returned by <code>MultiTermQuery.getTermsEnum(Terms,AttributeSource)</code>
- and update the boost on each returned term.
- This enables to control the boost factor
- for each matching term in <code>MultiTermQuery.SCORING_BOOLEAN_REWRITE</code> or
+  and update the boost on each returned term.This enables to control the boost factor
+  for each matching term in <code>MultiTermQuery.SCORING_BOOLEAN_REWRITE</code> or 
  <code>TopTermsRewrite</code> mode.
- <code>FuzzyQuery</code> is using this to take the edit distance into account.
+ <code>FuzzyQuery</code> is using this to take the edit distance into account. 
  <p><b>Please note:</b> This attribute is intended to be added only by the TermsEnum
- to itself in its constructor and consumed by the <code>MultiTermQuery.RewriteMethod</code>.
+  to itself in its constructor and consumed by the <code>MultiTermQuery.RewriteMethod</code>.
  */
-@protocol OrgApacheLuceneSearchBoostAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchBoostAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
  @brief Sets the boost in this attribute
@@ -50,4 +55,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBoostAttribute)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBoostAttribute")

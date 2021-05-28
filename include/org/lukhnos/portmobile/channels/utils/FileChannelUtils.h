@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_) && (INCLUDE_ALL_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils || defined(INCLUDE_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils))
 #define OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_
 
@@ -24,7 +30,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (JavaNioChannelsFileChannel *)openWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                  withOrgLukhnosPortmobileFileStandardOpenOptionArray:(IOSObjectArray *)options;
@@ -33,16 +39,20 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils)
 
-FOUNDATION_EXPORT JavaNioChannelsFileChannel *OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(OrgLukhnosPortmobileFilePath *path, IOSObjectArray *options);
-
 FOUNDATION_EXPORT void OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *self);
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *new_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *new_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *create_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init();
+FOUNDATION_EXPORT OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *create_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init(void);
+
+FOUNDATION_EXPORT JavaNioChannelsFileChannel *OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(OrgLukhnosPortmobileFilePath *path, IOSObjectArray *options);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils")

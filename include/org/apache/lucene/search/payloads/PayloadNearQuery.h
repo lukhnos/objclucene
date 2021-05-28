@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadNearQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPayloadsPayloadNearQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadNearQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadNearQuery))
 #define OrgApacheLuceneSearchPayloadsPayloadNearQuery_
 
@@ -26,17 +32,17 @@
 @class OrgApacheLuceneSearchSpansSpanWeight;
 
 /*!
- @brief This class is very similar to
+ @brief This class is very similar to 
  <code>org.apache.lucene.search.spans.SpanNearQuery</code> except that it factors
- in the value of the payloads located at each of the positions where the
+  in the value of the payloads located at each of the positions where the 
  <code>org.apache.lucene.search.spans.TermSpans</code> occurs.
  <p>
- NOTE: In order to take advantage of this with the default scoring implementation
- (<code>DefaultSimilarity</code>), you must override <code>DefaultSimilarity.scorePayload(int,int,int,BytesRef)</code>,
- which returns 1 by default.
+  NOTE: In order to take advantage of this with the default scoring implementation
+  (<code>DefaultSimilarity</code>), you must override <code>DefaultSimilarity.scorePayload(int, int, int, BytesRef)</code>,
+  which returns 1 by default. 
  <p>
- Payload scores are aggregated using a pluggable <code>PayloadFunction</code>.
- - seealso: org.apache.lucene.search.similarities.Similarity.SimScorer#computePayloadFactor(int,int,int,BytesRef)
+  Payload scores are aggregated using a pluggable <code>PayloadFunction</code>.
+ - seealso: org.apache.lucene.search.similarities.Similarity.SimScorer#computePayloadFactor(int, int, int, BytesRef)
  */
 @interface OrgApacheLuceneSearchPayloadsPayloadNearQuery : OrgApacheLuceneSearchSpansSpanNearQuery {
  @public
@@ -46,16 +52,16 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clauses
-                                                         withInt:(jint)slop
-                                                     withBoolean:(jboolean)inOrder;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clauses
+                                                                   withInt:(jint)slop
+                                                               withBoolean:(jboolean)inOrder;
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clauses
-                                                         withInt:(jint)slop
-                                                     withBoolean:(jboolean)inOrder
-                withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clauses
+                                                                   withInt:(jint)slop
+                                                               withBoolean:(jboolean)inOrder
+                          withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function;
 
-- (OrgApacheLuceneSearchPayloadsPayloadNearQuery *)clone;
+- (OrgApacheLuceneSearchPayloadsPayloadNearQuery *)java_clone;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -65,6 +71,13 @@
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)arg0
+                                                                   withInt:(jint)arg1
+                                                               withBoolean:(jboolean)arg2
+                                                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -108,15 +121,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadNearQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery:(OrgApacheLuceneSearchPayloadsPayloadNearQuery *)outer$
-                                                     withJavaUtilList:(id<JavaUtilList>)subWeights
-                               withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                      withJavaUtilMap:(id<JavaUtilMap>)terms;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery:(OrgApacheLuceneSearchPayloadsPayloadNearQuery *)outer$
+                                                               withJavaUtilList:(id<JavaUtilList>)subWeights
+                                         withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                                withJavaUtilMap:(id<JavaUtilMap>)terms;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc;
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)outer$
+                                                         withJavaUtilList:(id<JavaUtilList>)arg0
+                                   withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)arg1
+                                                          withJavaUtilMap:(id<JavaUtilMap>)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -159,10 +179,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_Payload
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery:(OrgApacheLuceneSearchPayloadsPayloadNearQuery *)outer$
-                                  withOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans
-                             withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)weight
-            withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery:(OrgApacheLuceneSearchPayloadsPayloadNearQuery *)outer$
+                                            withOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans
+                                       withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)weight
+                      withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
 
 - (void)doCurrentSpans;
 
@@ -170,7 +190,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_Payload
 
 /*!
  @brief By default, uses the <code>PayloadFunction</code> to score the payloads, but
- can be overridden to do other things.
+  can be overridden to do other things.
  @param payLoads The payloads
  @param start The start position of the span being scored
  @param end The end position of the span being scored
@@ -179,6 +199,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_Payload
 - (void)processPayloadsWithJavaUtilCollection:(id<JavaUtilCollection>)payLoads
                                       withInt:(jint)start
                                       withInt:(jint)end;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)arg0
+                         withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)arg1
+        withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -197,4 +223,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_Payload
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadNearQuery")

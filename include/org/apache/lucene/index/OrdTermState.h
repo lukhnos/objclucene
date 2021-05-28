@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexOrdTermState
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexOrdTermState_) && (INCLUDE_ALL_OrgApacheLuceneIndexOrdTermState || defined(INCLUDE_OrgApacheLuceneIndexOrdTermState))
 #define OrgApacheLuceneIndexOrdTermState_
 
@@ -26,8 +32,8 @@
 @interface OrgApacheLuceneIndexOrdTermState : OrgApacheLuceneIndexTermState {
  @public
   /*!
-   @brief Term ordinal, i.e. its position in the full list of
- sorted terms.
+   @brief Term ordinal, i.e.its position in the full list of
+   sorted terms.
    */
   jlong ord_;
 }
@@ -37,7 +43,7 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other OBJC_METHOD_FAMILY_NONE;
 
@@ -49,12 +55,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexOrdTermState)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexOrdTermState_init(OrgApacheLuceneIndexOrdTermState *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexOrdTermState *new_OrgApacheLuceneIndexOrdTermState_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexOrdTermState *new_OrgApacheLuceneIndexOrdTermState_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexOrdTermState *create_OrgApacheLuceneIndexOrdTermState_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexOrdTermState *create_OrgApacheLuceneIndexOrdTermState_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexOrdTermState)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexOrdTermState")

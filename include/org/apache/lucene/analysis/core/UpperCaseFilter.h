@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreUpperCaseFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreUpperCaseFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreUpperCaseFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCoreUpperCaseFilter))
 #define OrgApacheLuceneAnalysisCoreUpperCaseFilter_
 
@@ -25,9 +31,9 @@
 /*!
  @brief Normalizes token text to UPPER CASE.
  <p><b>NOTE:</b> In Unicode, this transformation may lose information when the
- upper case character represents more than one lower case character. Use this filter
- when you require uppercase tokens.  Use the <code>LowerCaseFilter</code> for 
- general search matching
+  upper case character represents more than one lower case character. Use this filter
+  when you require uppercase tokens.  Use the <code>LowerCaseFilter</code> for 
+  general search matching
  */
 @interface OrgApacheLuceneAnalysisCoreUpperCaseFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -37,7 +43,7 @@
  @brief Create a new UpperCaseFilter, that normalizes token text to upper case.
  @param inArg TokenStream to filter
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
 
@@ -55,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreUpperCaseFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreUpperCaseFilter")

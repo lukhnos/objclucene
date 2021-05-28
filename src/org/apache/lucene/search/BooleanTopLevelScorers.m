@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Arrays.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
@@ -20,6 +19,10 @@
 #include "org/apache/lucene/search/ReqOptSumScorer.h"
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/Weight.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/BooleanTopLevelScorers must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer () {
  @public
@@ -55,34 +58,37 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScore
 
 @implementation OrgApacheLuceneSearchBooleanTopLevelScorers
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchBooleanTopLevelScorers_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneSearchBooleanTopLevelScorers_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BooleanTopLevelScorers", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.BooleanTopLevelScorers$BoostedScorer;", "Lorg.apache.lucene.search.BooleanTopLevelScorers$CoordinatingConjunctionScorer;", "Lorg.apache.lucene.search.BooleanTopLevelScorers$ReqSingleOptScorer;", "Lorg.apache.lucene.search.BooleanTopLevelScorers$ReqMultiOptScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers = { 2, "BooleanTopLevelScorers", "org.apache.lucene.search", NULL, 0x0, 1, methods, 0, NULL, 0, NULL, 4, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer;LOrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer;LOrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer;LOrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers = { "BooleanTopLevelScorers", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x0, 1, 0, -1, 0, -1, -1, -1 };
   return &_OrgApacheLuceneSearchBooleanTopLevelScorers;
 }
 
 @end
 
-void OrgApacheLuceneSearchBooleanTopLevelScorers_init(OrgApacheLuceneSearchBooleanTopLevelScorers *self) {
+void OrgApacheLuceneSearchBooleanTopLevelScorers_initPackagePrivate(OrgApacheLuceneSearchBooleanTopLevelScorers *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneSearchBooleanTopLevelScorers *new_OrgApacheLuceneSearchBooleanTopLevelScorers_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanTopLevelScorers, init)
+OrgApacheLuceneSearchBooleanTopLevelScorers *new_OrgApacheLuceneSearchBooleanTopLevelScorers_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanTopLevelScorers, initPackagePrivate)
 }
 
-OrgApacheLuceneSearchBooleanTopLevelScorers *create_OrgApacheLuceneSearchBooleanTopLevelScorers_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanTopLevelScorers, init)
+OrgApacheLuceneSearchBooleanTopLevelScorers *create_OrgApacheLuceneSearchBooleanTopLevelScorers_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanTopLevelScorers, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanTopLevelScorers)
@@ -104,15 +110,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanTopLevelScorers)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchScorer:withFloat:", "BoostedScorer", NULL, 0x0, NULL, NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 2, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchScorer:withFloat:);
+  methods[1].selector = @selector(score);
+  methods[2].selector = @selector(getChildren);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "boost_", NULL, 0x10, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "boost_", "F", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer = { 2, "BoostedScorer", "org.apache.lucene.search", "BooleanTopLevelScorers", 0x8, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchScorer;F", "LJavaIoIOException;", "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;", "LOrgApacheLuceneSearchBooleanTopLevelScorers;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer = { "BoostedScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8, 3, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer;
 }
 
@@ -156,24 +170,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanTopLevelScorers_Boo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:withFloatArray:withOrgApacheLuceneSearchScorer:withInt:withOrgApacheLuceneSearchScorer:", "CoordinatingConjunctionScorer", NULL, 0x0, NULL, NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchWeight:withFloatArray:withOrgApacheLuceneSearchScorer:withInt:withOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(score);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "coords_", NULL, 0x12, "[F", NULL, NULL, .constantValue.asLong = 0 },
-    { "reqCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "req_", NULL, 0x12, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "opt_", NULL, 0x12, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "coords_", "[F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "reqCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "req_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "opt_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer = { 2, "CoordinatingConjunctionScorer", "org.apache.lucene.search", "BooleanTopLevelScorers", 0x8, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchWeight;[FLOrgApacheLuceneSearchScorer;ILOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "LOrgApacheLuceneSearchBooleanTopLevelScorers;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer = { "CoordinatingConjunctionScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8, 2, 4, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer;
 }
 
 @end
 
 void OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withFloatArray_withOrgApacheLuceneSearchScorer_withInt_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, IOSFloatArray *coords, OrgApacheLuceneSearchScorer *req, jint reqCount, OrgApacheLuceneSearchScorer *opt) {
-  OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(self, weight, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]));
+  OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(self, weight, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]));
   JreStrongAssign(&self->coords_, coords);
   JreStrongAssign(&self->req_, req);
   self->reqCount_ = reqCount;
@@ -215,22 +236,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanTopLevelScorers_Coo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorer:withFloat:withFloat:", "ReqSingleOptScorer", NULL, 0x1, NULL, NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorer:withFloat:withFloat:);
+  methods[1].selector = @selector(score);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "coordReq_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "coordBoth_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "coordReq_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "coordBoth_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer = { 2, "ReqSingleOptScorer", "org.apache.lucene.search", "BooleanTopLevelScorers", 0x8, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchScorer;LOrgApacheLuceneSearchScorer;FF", "LJavaIoIOException;", "LOrgApacheLuceneSearchBooleanTopLevelScorers;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer = { "ReqSingleOptScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8, 2, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer;
 }
 
 @end
 
 void OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_withFloat_withFloat_(OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer *self, OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer, jfloat coordReq, jfloat coordBoth) {
-  OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, reqScorer, optScorer);
+  OrgApacheLuceneSearchReqOptSumScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, reqScorer, optScorer);
   self->coordReq_ = coordReq;
   self->coordBoth_ = coordBoth;
 }
@@ -275,22 +303,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanTopLevelScorers_Req
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorer:withInt:withFloatArray:", "ReqMultiOptScorer", NULL, 0x1, NULL, NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorer:withInt:withFloatArray:);
+  methods[1].selector = @selector(score);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "requiredCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "coords_", NULL, 0x12, "[F", NULL, NULL, .constantValue.asLong = 0 },
+    { "requiredCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "coords_", "[F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer = { 2, "ReqMultiOptScorer", "org.apache.lucene.search", "BooleanTopLevelScorers", 0x8, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchScorer;LOrgApacheLuceneSearchScorer;I[F", "LJavaIoIOException;", "LOrgApacheLuceneSearchBooleanTopLevelScorers;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer = { "ReqMultiOptScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8, 2, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer;
 }
 
 @end
 
 void OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_withInt_withFloatArray_(OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer *self, OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer, jint requiredCount, IOSFloatArray *coords) {
-  OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, reqScorer, optScorer);
+  OrgApacheLuceneSearchReqOptSumScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, reqScorer, optScorer);
   self->requiredCount_ = requiredCount;
   JreStrongAssign(&self->coords_, coords);
 }

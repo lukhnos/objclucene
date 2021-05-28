@@ -3,14 +3,11 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/CachedFilterBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/util/HashMap.h"
 #include "java/util/LinkedHashMap.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/queryparser/xml/DOMUtils.h"
 #include "org/apache/lucene/queryparser/xml/FilterBuilderFactory.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 #include "org/apache/lucene/queryparser/xml/QueryBuilderFactory.h"
 #include "org/apache/lucene/queryparser/xml/builders/CachedFilterBuilder.h"
@@ -19,6 +16,10 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/QueryWrapperFilter.h"
 #include "org/w3c/dom/Element.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/CachedFilterBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder () {
  @public
@@ -49,7 +50,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder, fi
     if (filterCache_ == nil) {
       JreStrongAssignAndConsume(&filterCache_, new_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithInt_(cacheSize_));
     }
-    id<OrgApacheLuceneQueryparserXmlQueryBuilder> qb = [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(queryFactory_)) getQueryBuilderWithNSString:[((id<OrgW3cDomElement>) nil_chk(childElement)) getNodeName]];
+    id<OrgApacheLuceneQueryparserXmlQueryBuilder> qb = JreRetainedLocalValue([((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(queryFactory_)) getQueryBuilderWithNSString:[((id<OrgW3cDomElement>) nil_chk(childElement)) getNodeName]]);
     id cacheKey = nil;
     OrgApacheLuceneSearchQuery *q = nil;
     OrgApacheLuceneSearchFilter *f = nil;
@@ -61,7 +62,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder, fi
       f = [((OrgApacheLuceneQueryparserXmlFilterBuilderFactory *) nil_chk(filterFactory_)) getFilterWithOrgW3cDomElement:childElement];
       cacheKey = f;
     }
-    OrgApacheLuceneSearchQuery *cachedFilter = [((OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *) nil_chk(filterCache_)) getWithId:cacheKey];
+    OrgApacheLuceneSearchQuery *cachedFilter = JreRetainedLocalValue([((OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *) nil_chk(filterCache_)) getWithId:cacheKey]);
     if (cachedFilter != nil) {
       return create_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(cachedFilter);
     }
@@ -84,18 +85,24 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder, fi
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory:withOrgApacheLuceneQueryparserXmlFilterBuilderFactory:withInt:", "CachedFilterBuilder", NULL, 0x1, NULL, NULL },
-    { "getFilterWithOrgW3cDomElement:", "getFilter", "Lorg.apache.lucene.search.Filter;", 0x21, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchFilter;", 0x21, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory:withOrgApacheLuceneQueryparserXmlFilterBuilderFactory:withInt:);
+  methods[1].selector = @selector(getFilterWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queryFactory_", NULL, 0x12, "Lorg.apache.lucene.queryparser.xml.QueryBuilderFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "filterFactory_", NULL, 0x12, "Lorg.apache.lucene.queryparser.xml.FilterBuilderFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "filterCache_", NULL, 0x2, "Lorg.apache.lucene.queryparser.xml.builders.CachedFilterBuilder$LRUCache;", NULL, "Lorg/apache/lucene/queryparser/xml/builders/CachedFilterBuilder$LRUCache<Ljava/lang/Object;Lorg/apache/lucene/search/Query;>;", .constantValue.asLong = 0 },
-    { "cacheSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "queryFactory_", "LOrgApacheLuceneQueryparserXmlQueryBuilderFactory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "filterFactory_", "LOrgApacheLuceneQueryparserXmlFilterBuilderFactory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "filterCache_", "LOrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache;", .constantValue.asLong = 0, 0x2, -1, -1, 4, -1 },
+    { "cacheSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.xml.builders.CachedFilterBuilder$LRUCache;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder = { 2, "CachedFilterBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserXmlQueryBuilderFactory;LOrgApacheLuceneQueryparserXmlFilterBuilderFactory;I", "getFilter", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;", "Lorg/apache/lucene/queryparser/xml/builders/CachedFilterBuilder$LRUCache<Ljava/lang/Object;Lorg/apache/lucene/search/Query;>;", "LOrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder = { "CachedFilterBuilder", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x1, 2, 4, -1, 5, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder;
 }
 
@@ -130,22 +137,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersCachedFilt
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "LRUCache", NULL, 0x1, NULL, NULL },
-    { "removeEldestEntryWithJavaUtilMap_Entry:", "removeEldestEntry", "Z", 0x4, NULL, "(Ljava/util/Map$Entry<TK;TV;>;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 1, 2, -1, 3, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(removeEldestEntryWithJavaUtilMap_Entry:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "maxsize_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "maxsize_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"TK;", "TV;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache = { 2, "LRUCache", "org.apache.lucene.queryparser.xml.builders", "CachedFilterBuilder", 0x8, 2, methods, 1, fields, 2, superclass_type_args, 0, NULL, NULL, "<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/util/LinkedHashMap<TK;TV;>;" };
+  static const void *ptrTable[] = { "I", "removeEldestEntry", "LJavaUtilMap_Entry;", "(Ljava/util/Map$Entry<TK;TV;>;)Z", "LOrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder;", "<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/util/LinkedHashMap<TK;TV;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache = { "LRUCache", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x8, 2, 1, 4, -1, -1, 5, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithInt_(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *self, jint maxsize) {
-  JavaUtilLinkedHashMap_initWithInt_withFloat_withBoolean_(self, maxsize * 4 / 3 + 1, 0.75f, true);
+  JavaUtilLinkedHashMap_initWithInt_withFloat_withBoolean_(self, JreIntDiv(maxsize * 4, 3) + 1, 0.75f, true);
   self->maxsize_ = maxsize;
 }
 

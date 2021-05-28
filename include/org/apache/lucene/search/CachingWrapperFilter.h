@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchCachingWrapperFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchCachingWrapperFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperFilter || defined(INCLUDE_OrgApacheLuceneSearchCachingWrapperFilter))
 #define OrgApacheLuceneSearchCachingWrapperFilter_
 
@@ -24,42 +30,42 @@
 #define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReader;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
 @class OrgApacheLuceneSearchDocIdSetIterator;
+@class OrgApacheLuceneSearchQuery;
 @protocol JavaUtilCollection;
 @protocol OrgApacheLuceneSearchFilterCachingPolicy;
 @protocol OrgApacheLuceneUtilBits;
 
 /*!
- @brief Wraps another <code>Filter</code>'s result and caches it.
- The purpose is to allow
- filters to simply filter, and then wrap with this class
- to add caching.
+ @brief Wraps another <code>Filter</code>'s result and caches it.The purpose is to allow
+  filters to simply filter, and then wrap with this class
+  to add caching.
  */
 @interface OrgApacheLuceneSearchCachingWrapperFilter : OrgApacheLuceneSearchFilter < OrgApacheLuceneUtilAccountable > {
  @public
-  jint hitCount_, missCount_;
+  jint hitCount_;
+  jint missCount_;
 }
 
 #pragma mark Public
 
 /*!
- @brief Same as <code>CachingWrapperFilter.CachingWrapperFilter(Filter,FilterCachingPolicy)</code>
- but enforces the use of the
+ @brief Same as <code>CachingWrapperFilter.CachingWrapperFilter(Filter, FilterCachingPolicy)</code>
+   but enforces the use of the  
  <code>FilterCachingPolicy.CacheOnLargeSegments.DEFAULT</code> policy.
  */
-- (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
 
 /*!
  @brief Wraps another filter's result and caches it according to the provided policy.
  @param filter Filter to cache results of
  @param policy policy defining which filters should be cached on which segments
  */
-- (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-       withOrgApacheLuceneSearchFilterCachingPolicy:(id<OrgApacheLuceneSearchFilterCachingPolicy>)policy;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
+                 withOrgApacheLuceneSearchFilterCachingPolicy:(id<OrgApacheLuceneSearchFilterCachingPolicy>)policy;
 
 - (jboolean)isEqual:(id)o;
 
@@ -76,6 +82,8 @@
 
 - (NSUInteger)hash;
 
+- (OrgApacheLuceneSearchQuery *)java_clone;
+
 - (jlong)ramBytesUsed;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
@@ -90,16 +98,20 @@
 
 /*!
  @brief Provide the DocIdSet to be cached, using the DocIdSet provided
- by the wrapped Filter.
+   by the wrapped Filter.
  <p>This implementation returns the given <code>DocIdSet</code>,
- if <code>DocIdSet.isCacheable</code> returns <code>true</code>, else it calls
- <code>cacheImpl(DocIdSetIterator,org.apache.lucene.index.LeafReader)</code>
- <p>Note: This method returns DocIdSet.EMPTY if the given docIdSet
- is <code>null</code> or if <code>DocIdSet.iterator()</code> return <code>null</code>. The empty
- instance is use as a placeholder in the cache instead of the <code>null</code> value.
+   if <code>DocIdSet.isCacheable</code> returns <code>true</code>, else it calls
+   <code>cacheImpl(DocIdSetIterator, org.apache.lucene.index.LeafReader)</code>
+   <p>Note: This method returns DocIdSet.EMPTY if the given docIdSet
+   is <code>null</code> or if <code>DocIdSet.iterator()</code> return <code>null</code>. The empty
+   instance is use as a placeholder in the cache instead of the <code>null</code> value.
  */
 - (OrgApacheLuceneSearchDocIdSet *)docIdSetToCacheWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)docIdSet
                                                  withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -121,4 +133,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperFilter")

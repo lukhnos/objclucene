@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserClassicMultiFieldQueryParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserClassicMultiFieldQueryParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserClassicMultiFieldQueryParser || defined(INCLUDE_OrgApacheLuceneQueryparserClassicMultiFieldQueryParser))
 #define OrgApacheLuceneQueryparserClassicMultiFieldQueryParser_
 
@@ -22,8 +28,10 @@
 
 @class IOSObjectArray;
 @class OrgApacheLuceneAnalysisAnalyzer;
+@class OrgApacheLuceneQueryparserClassicQueryParserTokenManager;
 @class OrgApacheLuceneSearchQuery;
 @protocol JavaUtilMap;
+@protocol OrgApacheLuceneQueryparserClassicCharStream;
 
 /*!
  @brief A QueryParser which constructs queries to search multiple fields.
@@ -39,77 +47,87 @@
 /*!
  @brief Creates a MultiFieldQueryParser.
  <p>It will, when parse(String query)
- is called, construct a query like this (assuming the query consists of
- two terms and you specify the two fields <code>title</code> and <code>body</code>):</p>
+  is called, construct a query like this (assuming the query consists of
+  two terms and you specify the two fields <code>title</code> and <code>body</code>):</p>
+   
  <code>
- (title:term1 body:term1) (title:term2 body:term2)
+  (title:term1 body:term1) (title:term2 body:term2) 
  </code>
+  
  <p>When setDefaultOperator(AND_OPERATOR) is set, the result will be:</p>
+    
  <code>
- +(title:term1 body:term1) +(title:term2 body:term2)
+  +(title:term1 body:term1) +(title:term2 body:term2) 
  </code>
+   
  <p>In other words, all the query's terms must appear, but it doesn't matter in
- what fields they appear.</p>
+  what fields they appear.</p>
  */
-- (instancetype)initWithNSStringArray:(IOSObjectArray *)fields
-  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithNSStringArray:(IOSObjectArray *)fields
+            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  @brief Creates a MultiFieldQueryParser.
- Allows passing of a map with term to Boost, and the boost to apply to each term.
+ Allows passing of a map with term to Boost, and the boost to apply to each term. 
  <p>It will, when parse(String query)
- is called, construct a query like this (assuming the query consists of
- two terms and you specify the two fields <code>title</code> and <code>body</code>):</p>
+  is called, construct a query like this (assuming the query consists of
+  two terms and you specify the two fields <code>title</code> and <code>body</code>):</p>
+   
  <code>
- (title:term1 body:term1) (title:term2 body:term2)
+  (title:term1 body:term1) (title:term2 body:term2) 
  </code>
+  
  <p>When setDefaultOperator(AND_OPERATOR) is set, the result will be:</p>
+    
  <code>
- +(title:term1 body:term1) +(title:term2 body:term2)
+  +(title:term1 body:term1) +(title:term2 body:term2) 
  </code>
+   
  <p>When you pass a boost (title=&gt;5 body=&gt;10) you can get </p>
+   
  <code>
- +(title:term1^5.0 body:term1^10.0) +(title:term2^5.0 body:term2^10.0)
+  +(title:term1^5.0 body:term1^10.0) +(title:term2^5.0 body:term2^10.0) 
  </code>
+  
  <p>In other words, all the query's terms must appear, but it doesn't matter in
- what fields they appear.</p>
+  what fields they appear.</p>
  */
-- (instancetype)initWithNSStringArray:(IOSObjectArray *)fields
-  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                      withJavaUtilMap:(id<JavaUtilMap>)boosts;
+- (instancetype __nonnull)initWithNSStringArray:(IOSObjectArray *)fields
+            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                withJavaUtilMap:(id<JavaUtilMap>)boosts;
 
 /*!
  @brief Parses a query, searching on the fields specified.
  Use this if you need to specify certain fields as required,
- and others as prohibited.
+  and others as prohibited. 
  <p>
- Usage:
+  Usage: 
  <pre class="prettyprint">
- <code>
- String[] fields = {"filename", "contents", "description"};
- BooleanClause.Occur[] flags = {BooleanClause.Occur.SHOULD,
- BooleanClause.Occur.MUST,
- BooleanClause.Occur.MUST_NOT};
- MultiFieldQueryParser.parse("query", fields, flags, analyzer);
+  <code>
+  String[] fields = {"filename", "contents", "description"};
+  BooleanClause.Occur[] flags = {BooleanClause.Occur.SHOULD,
+                 BooleanClause.Occur.MUST,
+                 BooleanClause.Occur.MUST_NOT};
+  MultiFieldQueryParser.parse("query", fields, flags, analyzer); 
  </code>
- 
+  
 @endcode
  <p>
- The code above would construct a query:
+  The code above would construct a query: 
  @code
 
-  <code>
-  (filename:query) +(contents:query) -(description:query)
+   <code>
+  (filename:query) +(contents:query) -(description:query) 
   </code>
-  
+   
 @endcode
  @param query Query string to parse
  @param fields Fields to search on
  @param flags Flags describing the fields
  @param analyzer Analyzer to use
- @throws ParseException if query parsing fails
- @throws IllegalArgumentException if the length of the fields array differs
- from the length of the flags array
+ @throw ParseExceptionif query parsing fails
+ @throw IllegalArgumentExceptionif the length of the fields array differs
+   from the length of the flags array
  */
 + (OrgApacheLuceneSearchQuery *)parseWithNSString:(NSString *)query
                                 withNSStringArray:(IOSObjectArray *)fields
@@ -119,20 +137,20 @@ withOrgApacheLuceneSearchBooleanClause_OccurArray:(IOSObjectArray *)flags
 /*!
  @brief Parses a query which searches on the fields specified.
  <p>
- If x fields are specified, this effectively constructs:
+  If x fields are specified, this effectively constructs: 
  @code
 
-  <code>
-  (field1:query1) (field2:query2) (field3:query3)...(fieldx:queryx)
+   <code>
+  (field1:query1) (field2:query2) (field3:query3)...(fieldx:queryx) 
   </code>
-  
+   
 @endcode
  @param queries Queries strings to parse
  @param fields Fields to search on
  @param analyzer Analyzer to use
- @throws ParseException if query parsing fails
- @throws IllegalArgumentException if the length of the queries array differs
- from the length of the fields array
+ @throw ParseExceptionif query parsing fails
+ @throw IllegalArgumentExceptionif the length of the queries array differs
+   from the length of the fields array
  */
 + (OrgApacheLuceneSearchQuery *)parseWithNSStringArray:(IOSObjectArray *)queries
                                      withNSStringArray:(IOSObjectArray *)fields
@@ -141,36 +159,36 @@ withOrgApacheLuceneSearchBooleanClause_OccurArray:(IOSObjectArray *)flags
 /*!
  @brief Parses a query, searching on the fields specified.
  Use this if you need to specify certain fields as required,
- and others as prohibited.
+  and others as prohibited. 
  <p>
- Usage:
+  Usage: 
  <pre class="prettyprint">
- <code>
- String[] query = {"query1", "query2", "query3"};
- String[] fields = {"filename", "contents", "description"};
- BooleanClause.Occur[] flags = {BooleanClause.Occur.SHOULD,
- BooleanClause.Occur.MUST,
- BooleanClause.Occur.MUST_NOT};
- MultiFieldQueryParser.parse(query, fields, flags, analyzer);
+  <code>
+  String[] query = {"query1", "query2", "query3"};
+  String[] fields = {"filename", "contents", "description"};
+  BooleanClause.Occur[] flags = {BooleanClause.Occur.SHOULD,
+                 BooleanClause.Occur.MUST,
+                 BooleanClause.Occur.MUST_NOT};
+  MultiFieldQueryParser.parse(query, fields, flags, analyzer); 
  </code>
- 
+  
 @endcode
  <p>
- The code above would construct a query:
+  The code above would construct a query: 
  @code
 
-  <code>
-  (filename:query1) +(contents:query2) -(description:query3)
+   <code>
+  (filename:query1) +(contents:query2) -(description:query3) 
   </code>
-  
+   
 @endcode
  @param queries Queries string to parse
  @param fields Fields to search on
  @param flags Flags describing the fields
  @param analyzer Analyzer to use
- @throws ParseException if query parsing fails
- @throws IllegalArgumentException if the length of the queries, fields,
- and flags array differ
+ @throw ParseExceptionif query parsing fails
+ @throw IllegalArgumentExceptionif the length of the queries, fields,
+   and flags array differ
  */
 + (OrgApacheLuceneSearchQuery *)parseWithNSStringArray:(IOSObjectArray *)queries
                                      withNSStringArray:(IOSObjectArray *)fields
@@ -206,6 +224,15 @@ withOrgApacheLuceneSearchBooleanClause_OccurArray:(IOSObjectArray *)flags
 - (OrgApacheLuceneSearchQuery *)getWildcardQueryWithNSString:(NSString *)field
                                                 withNSString:(NSString *)termStr;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+       withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserClassicQueryParserTokenManager:(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserClassicMultiFieldQueryParser)
@@ -235,4 +262,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicMultiFieldQueryParse
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserClassicMultiFieldQueryParser")

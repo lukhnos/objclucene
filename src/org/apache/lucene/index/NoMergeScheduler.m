@@ -9,6 +9,10 @@
 #include "org/apache/lucene/index/MergeTrigger.h"
 #include "org/apache/lucene/index/NoMergeScheduler.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/NoMergeScheduler must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexNoMergeScheduler ()
 
 - (instancetype)init;
@@ -17,9 +21,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneIndexNoMergeScheduler_init(OrgApacheLuceneIndexNoMergeScheduler *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexNoMergeScheduler *new_OrgApacheLuceneIndexNoMergeScheduler_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexNoMergeScheduler *new_OrgApacheLuceneIndexNoMergeScheduler_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexNoMergeScheduler *create_OrgApacheLuceneIndexNoMergeScheduler_init();
+__attribute__((unused)) static OrgApacheLuceneIndexNoMergeScheduler *create_OrgApacheLuceneIndexNoMergeScheduler_init(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexNoMergeScheduler)
 
@@ -46,8 +50,31 @@ J2OBJC_IGNORE_DESIGNATED_END
                                      withBoolean:(jboolean)newMergesFound {
 }
 
-- (OrgApacheLuceneIndexMergeScheduler *)clone {
+- (OrgApacheLuceneIndexMergeScheduler *)java_clone {
   return self;
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergeScheduler;", 0x1, 2, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(close);
+  methods[2].selector = @selector(mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTrigger:withBoolean:);
+  methods[3].selector = @selector(java_clone);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INSTANCE", "LOrgApacheLuceneIndexMergeScheduler;", .constantValue.asLong = 0, 0x19, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "merge", "LOrgApacheLuceneIndexIndexWriter;LOrgApacheLuceneIndexMergeTrigger;Z", "clone", &OrgApacheLuceneIndexNoMergeScheduler_INSTANCE };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexNoMergeScheduler = { "NoMergeScheduler", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 4, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexNoMergeScheduler;
 }
 
 + (void)initialize {
@@ -55,20 +82,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssignAndConsume(&OrgApacheLuceneIndexNoMergeScheduler_INSTANCE, new_OrgApacheLuceneIndexNoMergeScheduler_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexNoMergeScheduler)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NoMergeScheduler", NULL, 0x2, NULL, NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
-    { "mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTrigger:withBoolean:", "merge", "V", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.index.MergeScheduler;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "INSTANCE", "INSTANCE", 0x19, "Lorg.apache.lucene.index.MergeScheduler;", &OrgApacheLuceneIndexNoMergeScheduler_INSTANCE, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexNoMergeScheduler = { 2, "NoMergeScheduler", "org.apache.lucene.index", NULL, 0x11, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexNoMergeScheduler;
 }
 
 @end

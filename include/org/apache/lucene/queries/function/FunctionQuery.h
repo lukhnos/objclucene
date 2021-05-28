@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionFunctionQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionFunctionQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionQuery || defined(INCLUDE_OrgApacheLuceneQueriesFunctionFunctionQuery))
 #define OrgApacheLuceneQueriesFunctionFunctionQuery_
 
@@ -27,7 +33,7 @@
 
 /*!
  @brief Returns a score for each document based on a ValueSource,
- often some function of the value of a field.
+  often some function of the value of a field.
  <b>Note: This API is experimental and may change in non backward-compatible ways in the future</b>
  */
 @interface OrgApacheLuceneQueriesFunctionFunctionQuery : OrgApacheLuceneSearchQuery {
@@ -40,7 +46,7 @@
 /*!
  @param func defines the function to be used for scoring
  */
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)func;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)func;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -63,6 +69,10 @@
  @brief Prints a user-readable version of this query.
  */
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -91,6 +101,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionQuery)
 @class OrgApacheLuceneQueriesFunctionFunctionQuery;
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
+@class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchScorer;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
@@ -105,8 +116,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionQuery:(OrgApacheLuceneQueriesFunctionFunctionQuery *)outer$
-                             withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionFunctionQuery:(OrgApacheLuceneQueriesFunctionFunctionQuery *)outer$
+                                       withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc;
@@ -119,6 +130,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionQuery)
                  withFloat:(jfloat)topLevelBoost;
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -150,6 +165,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionW
 @class OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight;
 @class OrgApacheLuceneQueriesFunctionFunctionValues;
 @class OrgApacheLuceneSearchExplanation;
+@class OrgApacheLuceneSearchWeight;
 
 @interface OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer : OrgApacheLuceneSearchScorer {
  @public
@@ -163,10 +179,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionW
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionFunctionQuery:(OrgApacheLuceneQueriesFunctionFunctionQuery *)outer$
-                          withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-     withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight:(OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *)w
-                                                          withFloat:(jfloat)qWeight;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionFunctionQuery:(OrgApacheLuceneQueriesFunctionFunctionQuery *)outer$
+                                    withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
+               withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight:(OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *)w
+                                                                    withFloat:(jfloat)qWeight;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -181,6 +197,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionW
 - (jint)nextDoc;
 
 - (jfloat)score;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -200,4 +220,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionQuery")

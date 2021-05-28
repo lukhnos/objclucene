@@ -3,16 +3,23 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/SuggestScoreDocPriorityQueue.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/suggest/document/SuggestScoreDocPriorityQueue.h"
 #include "org/apache/lucene/search/suggest/document/TopSuggestDocs.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/SuggestScoreDocPriorityQueue must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @implementation OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue
 
-- (instancetype)initWithInt:(jint)size {
-  OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(self, size);
+- (instancetype)initPackagePrivateWithInt:(jint)size {
+  OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initPackagePrivateWithInt_(self, size);
   return self;
 }
 
@@ -34,28 +41,35 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "SuggestScoreDocPriorityQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/suggest/document/TopSuggestDocs$SuggestScoreDoc;Lorg/apache/lucene/search/suggest/document/TopSuggestDocs$SuggestScoreDoc;)Z" },
-    { "getResults", NULL, "[Lorg.apache.lucene.search.suggest.document.TopSuggestDocs$SuggestScoreDoc;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.suggest.document.TopSuggestDocs$SuggestScoreDoc;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue = { 2, "SuggestScoreDocPriorityQueue", "org.apache.lucene.search.suggest.document", NULL, 0x10, 3, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/suggest/document/TopSuggestDocs$SuggestScoreDoc;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  methods[2].selector = @selector(getResults);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/suggest/document/TopSuggestDocs$SuggestScoreDoc;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue = { "SuggestScoreDocPriorityQueue", "org.apache.lucene.search.suggest.document", ptrTable, methods, NULL, 7, 0x10, 3, 0, -1, -1, -1, 3, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *self, jint size) {
+void OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initPackagePrivateWithInt_(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *self, jint size) {
   OrgApacheLuceneUtilPriorityQueue_initWithInt_(self, size);
 }
 
-OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *new_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(jint size) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue, initWithInt_, size)
+OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *new_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initPackagePrivateWithInt_(jint size) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue, initPackagePrivateWithInt_, size)
 }
 
-OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *create_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(jint size) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue, initWithInt_, size)
+OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *create_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initPackagePrivateWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue, initPackagePrivateWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchBooleanQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchBooleanQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanQuery || defined(INCLUDE_OrgApacheLuceneSearchBooleanQuery))
 #define OrgApacheLuceneSearchBooleanQuery_
 
@@ -30,14 +36,16 @@
 @class OrgApacheLuceneSearchBooleanClause_Occur;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
+@protocol JavaUtilFunctionConsumer;
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
+@protocol JavaUtilSpliterator;
 
 /*!
  @brief A Query that matches documents matching boolean combinations of other
- queries, e.g.
+  queries, e.g.
  <code>TermQuery</code>s, <code>PhraseQuery</code>s or other
- BooleanQuerys.
+  BooleanQuerys.
  */
 @interface OrgApacheLuceneSearchBooleanQuery : OrgApacheLuceneSearchQuery < JavaLangIterable >
 
@@ -46,29 +54,29 @@
 /*!
  @brief Constructs an empty boolean query.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Constructs an empty boolean query.
  <code>Similarity.coord(int,int)</code> may be disabled in scoring, as
- appropriate. For example, this score factor does not make sense for most
- automatically generated queries, like <code>WildcardQuery</code> and <code>FuzzyQuery</code>
+  appropriate. For example, this score factor does not make sense for most
+  automatically generated queries, like <code>WildcardQuery</code> and <code>FuzzyQuery</code>
  .
- @param disableCoord disables <code>Similarity.coord(int,int)</code> in scoring.
+ @param disableCoord disables <code>Similarity.coord(int,int)</code>  in scoring.
  - seealso: Builder#setDisableCoord(boolean)
  */
-- (instancetype)initWithBoolean:(jboolean)disableCoord;
+- (instancetype __nonnull)initWithBoolean:(jboolean)disableCoord;
 
 /*!
  @brief Adds a clause to a boolean query.
- @throws TooManyClauses if the new number of clauses exceeds the maximum clause number
+ @throw TooManyClausesif the new number of clauses exceeds the maximum clause number
  - seealso: #getMaxClauseCount()
  */
 - (void)addWithOrgApacheLuceneSearchBooleanClause:(OrgApacheLuceneSearchBooleanClause *)clause;
 
 /*!
  @brief Adds a clause to a boolean query.
- @throws TooManyClauses if the new number of clauses exceeds the maximum clause number
+ @throw TooManyClausesif the new number of clauses exceeds the maximum clause number
  - seealso: #getMaxClauseCount()
  */
 - (void)addWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -79,7 +87,7 @@ withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause
  */
 - (id<JavaUtilList>)clauses;
 
-- (OrgApacheLuceneSearchBooleanQuery *)clone;
+- (OrgApacheLuceneSearchBooleanQuery *)java_clone;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -101,7 +109,7 @@ withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause
 
 /*!
  @brief Gets the minimum number of the optional BooleanClauses
- which must be satisfied.
+  which must be satisfied.
  */
 - (jint)getMinimumNumberShouldMatch;
 
@@ -113,10 +121,9 @@ withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause
 - (jboolean)isCoordDisabled;
 
 /*!
- @brief Returns an iterator on the clauses in this query.
- It implements the <code>Iterable</code> interface to
- make it possible to do:
- 
+ @brief Returns an iterator on the clauses in this query.It implements the <code>Iterable</code> interface to
+  make it possible to do: 
+ <pre class="prettyprint">for (BooleanClause clause : booleanQuery) {}
 @endcode
  */
 - (id<JavaUtilIterator>)iterator;
@@ -146,15 +153,15 @@ withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanQuery)
 
-FOUNDATION_EXPORT jint OrgApacheLuceneSearchBooleanQuery_getMaxClauseCount();
+FOUNDATION_EXPORT jint OrgApacheLuceneSearchBooleanQuery_getMaxClauseCount(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanQuery_setMaxClauseCountWithInt_(jint maxClauseCount);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanQuery_init(OrgApacheLuceneSearchBooleanQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery *new_OrgApacheLuceneSearchBooleanQuery_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery *new_OrgApacheLuceneSearchBooleanQuery_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery *create_OrgApacheLuceneSearchBooleanQuery_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery *create_OrgApacheLuceneSearchBooleanQuery_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanQuery_initWithBoolean_(OrgApacheLuceneSearchBooleanQuery *self, jboolean disableCoord);
 
@@ -173,18 +180,33 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanQuery)
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+@class JavaLangThrowable;
+
 /*!
  @brief Thrown when an attempt is made to add more than <code>getMaxClauseCount()</code>
-  clauses.
- This typically happens if
- a PrefixQuery, FuzzyQuery, WildcardQuery, or TermRangeQuery 
- is expanded to many terms during search. 
+  clauses.This typically happens if
+  a PrefixQuery, FuzzyQuery, WildcardQuery, or TermRangeQuery 
+  is expanded to many terms during search.
  */
 @interface OrgApacheLuceneSearchBooleanQuery_TooManyClauses : JavaLangRuntimeException
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1
+                               withBoolean:(jboolean)arg2
+                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -192,9 +214,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanQuery_TooManyClauses)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init(OrgApacheLuceneSearchBooleanQuery_TooManyClauses *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery_TooManyClauses *new_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery_TooManyClauses *new_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery_TooManyClauses *create_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery_TooManyClauses *create_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanQuery_TooManyClauses)
 
@@ -218,7 +240,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanQuery_TooManyClauses)
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Add a clause to the <code>BooleanQuery</code>.
@@ -227,38 +249,37 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanQuery_TooManyClauses)
 
 /*!
  @brief Add a clause to the <code>BooleanQuery</code>.
- @throws TooManyClauses if the new number of clauses exceeds the maximum clause number
+ @throw TooManyClausesif the new number of clauses exceeds the maximum clause number
  */
 - (OrgApacheLuceneSearchBooleanQuery_Builder *)addWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                     withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur;
 
 /*!
  @brief Create a new <code>BooleanQuery</code> based on the parameters that have
- been set on this builder.
+   been set on this builder.
  */
 - (OrgApacheLuceneSearchBooleanQuery *)build;
 
 /*!
  @brief <code>Similarity.coord(int,int)</code> may be disabled in scoring, as
- appropriate.
- For example, this score factor does not make sense for most
- automatically generated queries, like <code>WildcardQuery</code> and <code>FuzzyQuery</code>
+  appropriate.For example, this score factor does not make sense for most
+  automatically generated queries, like <code>WildcardQuery</code> and <code>FuzzyQuery</code>
  .
  */
 - (OrgApacheLuceneSearchBooleanQuery_Builder *)setDisableCoordWithBoolean:(jboolean)disableCoord;
 
 /*!
  @brief Specifies a minimum number of the optional BooleanClauses
- which must be satisfied.
+  which must be satisfied.
  <p>
- By default no optional clauses are necessary for a match
- (unless there are no required clauses).  If this method is used,
- then the specified number of clauses is required.
+  By default no optional clauses are necessary for a match
+  (unless there are no required clauses).  If this method is used,
+  then the specified number of clauses is required. 
  </p>
- <p>
- Use of this method is totally independent of specifying that
- any specific clauses are required (or prohibited).  This number will
- only be compared against the number of matching optional clauses.
+  <p>
+  Use of this method is totally independent of specifying that
+  any specific clauses are required (or prohibited).  This number will
+  only be compared against the number of matching optional clauses. 
  </p>
  @param min the number of optional clauses that must match
  */
@@ -270,12 +291,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanQuery_Builder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanQuery_Builder_init(OrgApacheLuceneSearchBooleanQuery_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery_Builder *new_OrgApacheLuceneSearchBooleanQuery_Builder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery_Builder *new_OrgApacheLuceneSearchBooleanQuery_Builder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery_Builder *create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanQuery_Builder *create_OrgApacheLuceneSearchBooleanQuery_Builder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanQuery_Builder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBooleanQuery")

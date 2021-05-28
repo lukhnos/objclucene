@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder))
 #define OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder_
 
@@ -35,7 +41,7 @@
 /*!
  @brief Constructs a <code>NumericRangeQueryNodeBuilder</code> object.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchNumericRangeQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
@@ -45,12 +51,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardBuildersNumer
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder_init(OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder")

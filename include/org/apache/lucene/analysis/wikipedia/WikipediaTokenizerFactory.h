@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory))
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory_
 
@@ -27,11 +33,11 @@
 /*!
  @brief Factory for <code>WikipediaTokenizer</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_wiki" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WikipediaTokenizerFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_wiki" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WikipediaTokenizerFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
@@ -41,7 +47,7 @@
 /*!
  @brief Creates a new WikipediaTokenizerFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
@@ -59,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFac
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory")

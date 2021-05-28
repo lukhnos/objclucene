@@ -13,12 +13,20 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMergeTrigger
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMergeTrigger_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergeTrigger || defined(INCLUDE_OrgApacheLuceneIndexMergeTrigger))
 #define OrgApacheLuceneIndexMergeTrigger_
 
 #define RESTRICT_JavaLangEnum 1
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
+
+@class IOSObjectArray;
 
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexMergeTrigger_Enum) {
   OrgApacheLuceneIndexMergeTrigger_Enum_SEGMENT_FLUSH = 0,
@@ -29,29 +37,25 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexMergeTrigger_Enum) {
 };
 
 /*!
- @brief MergeTrigger is passed to
- <code>org.apache.lucene.index.MergePolicy.findMerges(MergeTrigger,org.apache.lucene.index.SegmentInfos,IndexWriter)</code> to indicate the
- event that triggered the merge.
+ @brief MergeTrigger is passed to 
+ <code>org.apache.lucene.index.MergePolicy.findMerges(MergeTrigger, org.apache.lucene.index.SegmentInfos, IndexWriter)</code> to indicate the
+  event that triggered the merge.
  */
-@interface OrgApacheLuceneIndexMergeTrigger : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneIndexMergeTrigger : JavaLangEnum
 
-+ (OrgApacheLuceneIndexMergeTrigger *)SEGMENT_FLUSH;
-
-+ (OrgApacheLuceneIndexMergeTrigger *)FULL_FLUSH;
-
-+ (OrgApacheLuceneIndexMergeTrigger *)EXPLICIT;
-
-+ (OrgApacheLuceneIndexMergeTrigger *)MERGE_FINISHED;
-
-+ (OrgApacheLuceneIndexMergeTrigger *)CLOSING;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneIndexMergeTrigger *SEGMENT_FLUSH NS_SWIFT_NAME(SEGMENT_FLUSH);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexMergeTrigger *FULL_FLUSH NS_SWIFT_NAME(FULL_FLUSH);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexMergeTrigger *EXPLICIT NS_SWIFT_NAME(EXPLICIT);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexMergeTrigger *MERGE_FINISHED NS_SWIFT_NAME(MERGE_FINISHED);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexMergeTrigger *CLOSING NS_SWIFT_NAME(CLOSING);
+#pragma mark Public
 
 + (OrgApacheLuceneIndexMergeTrigger *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneIndexMergeTrigger_Enum)toNSEnum;
 
 @end
@@ -64,36 +68,35 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTri
 /*!
  @brief Merge was triggered by a segment flush.
  */
-inline OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_get_SEGMENT_FLUSH();
+inline OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_get_SEGMENT_FLUSH(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexMergeTrigger, SEGMENT_FLUSH)
 
 /*!
- @brief Merge was triggered by a full flush.
- Full flushes
- can be caused by a commit, NRT reader reopen or a close call on the index writer.
+ @brief Merge was triggered by a full flush.Full flushes
+  can be caused by a commit, NRT reader reopen or a close call on the index writer.
  */
-inline OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_get_FULL_FLUSH();
+inline OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_get_FULL_FLUSH(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexMergeTrigger, FULL_FLUSH)
 
 /*!
  @brief Merge has been triggered explicitly by the user.
  */
-inline OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_get_EXPLICIT();
+inline OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_get_EXPLICIT(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexMergeTrigger, EXPLICIT)
 
 /*!
  @brief Merge was triggered by a successfully finished merge.
  */
-inline OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_get_MERGE_FINISHED();
+inline OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_get_MERGE_FINISHED(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexMergeTrigger, MERGE_FINISHED)
 
 /*!
  @brief Merge was triggered by a closing IndexWriter.
  */
-inline OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_get_CLOSING();
+inline OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_get_CLOSING(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexMergeTrigger, CLOSING)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexMergeTrigger_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexMergeTrigger_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_valueOfWithNSString_(NSString *name);
 
@@ -103,4 +106,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeTrigger)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeTrigger")

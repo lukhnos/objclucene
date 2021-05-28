@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/util/automaton/Transition.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/Transition must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilAutomatonTransition
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -20,18 +24,25 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Transition", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "source_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "dest_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "min_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "max_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "transitionUpto_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "source_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "dest_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "min_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "max_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "transitionUpto_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonTransition = { 2, "Transition", "org.apache.lucene.util.automaton", NULL, 0x1, 2, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonTransition = { "Transition", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x1, 2, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonTransition;
 }
 

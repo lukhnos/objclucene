@@ -21,6 +21,10 @@
 
 @class OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/FrequencyTrackingRingBuffer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilFrequencyTrackingRingBuffer () {
  @public
   jint maxSize_;
@@ -34,14 +38,14 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer, buffer_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer, frequencies_, OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *)
 
-inline jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFrequencyTrackingRingBuffer, BASE_RAM_BYTES_USED, jlong)
 
 /*!
  @brief A bag of integers.
  Since in the context of the ring buffer the maximum size is known up-front
- there is no need to worry about resizing the underlying storage.
+  there is no need to worry about resizing the underlying storage.
  */
 @interface OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -68,9 +72,8 @@ J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFrequencyTrackingRingBuff
 
 /*!
  @brief Decrement the frequency of the given key by one, or do nothing if the
- key is not present in the bag.
- Returns true iff the key was contained
- in the bag. 
+   key is not present in the bag.Returns true iff the key was contained
+   in the bag.
  */
 - (jboolean)removeWithInt:(jint)key;
 
@@ -78,8 +81,8 @@ J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFrequencyTrackingRingBuff
 
 /*!
  @brief Given a chain of occupied slots between <code>chainStart</code>
- and <code>chainEnd</code>, return whether <code>slot</code> is
- between the start and end of the chain.
+   and <code>chainEnd</code>, return whether <code>slot</code> is
+   between the start and end of the chain.
  */
 + (jboolean)betweenWithInt:(jint)chainStart
                    withInt:(jint)chainEnd
@@ -94,7 +97,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag, keys_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag, freqs_, IOSIntArray *)
 
-inline jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag, BASE_RAM_BYTES_USED, jlong)
 
@@ -131,7 +134,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
 - (void)addWithInt:(jint)i {
   jint removed = IOSIntArray_Get(nil_chk(buffer_), position_);
   jboolean removedFromBag = [((OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *) nil_chk(frequencies_)) removeWithInt:removed];
-  JreAssert((removedFromBag), (@"org/apache/lucene/util/FrequencyTrackingRingBuffer.java:84 condition failed: assert removedFromBag;"));
+  JreAssert(removedFromBag, @"org/apache/lucene/util/FrequencyTrackingRingBuffer.java:84 condition failed: assert removedFromBag;");
   *IOSIntArray_GetRef(buffer_, position_) = i;
   [frequencies_ addWithInt:i];
   position_ += 1;
@@ -154,32 +157,42 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 3, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x0, -1, -1, -1, 5, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:);
+  methods[1].selector = @selector(ramBytesUsed);
+  methods[2].selector = @selector(getChildResources);
+  methods[3].selector = @selector(addWithInt:);
+  methods[4].selector = @selector(frequencyWithInt:);
+  methods[5].selector = @selector(asFrequencyMap);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 6, -1, -1 },
+    { "maxSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "buffer_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "position_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "frequencies_", "LOrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "II", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "add", "I", "frequency", "()Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;", &OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED, "LOrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFrequencyTrackingRingBuffer = { "FrequencyTrackingRingBuffer", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 6, 5, -1, 7, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilFrequencyTrackingRingBuffer;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFrequencyTrackingRingBuffer class]) {
     OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:", "FrequencyTrackingRingBuffer", NULL, 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "addWithInt:", "add", "V", 0x1, NULL, NULL },
-    { "frequencyWithInt:", "frequency", "I", 0x1, NULL, NULL },
-    { "asFrequencyMap", NULL, "Ljava.util.Map;", 0x0, NULL, "()Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "maxSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "position_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "frequencies_", NULL, 0x12, "Lorg.apache.lucene.util.FrequencyTrackingRingBuffer$IntBag;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.FrequencyTrackingRingBuffer$IntBag;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFrequencyTrackingRingBuffer = { 2, "FrequencyTrackingRingBuffer", "org.apache.lucene.util", NULL, 0x11, 6, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilFrequencyTrackingRingBuffer;
 }
 
 @end
@@ -197,7 +210,7 @@ void OrgApacheLuceneUtilFrequencyTrackingRingBuffer_initWithInt_withInt_(OrgApac
   for (jint i = 0; i < maxSize; ++i) {
     [self->frequencies_ addWithInt:sentinel];
   }
-  JreAssert(([self->frequencies_ frequencyWithInt:sentinel] == maxSize), (@"org/apache/lucene/util/FrequencyTrackingRingBuffer.java:61 condition failed: assert frequencies.frequency(sentinel) == maxSize;"));
+  JreAssert([self->frequencies_ frequencyWithInt:sentinel] == maxSize, @"org/apache/lucene/util/FrequencyTrackingRingBuffer.java:61 condition failed: assert frequencies.frequency(sentinel) == maxSize;");
 }
 
 OrgApacheLuceneUtilFrequencyTrackingRingBuffer *new_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_initWithInt_withInt_(jint maxSize, jint sentinel) {
@@ -291,6 +304,42 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 1, -1, -1 },
+    { NULL, "I", 0x0, 2, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 3, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, 4, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 5, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x0, -1, -1, -1, 8, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(ramBytesUsed);
+  methods[2].selector = @selector(getChildResources);
+  methods[3].selector = @selector(frequencyWithInt:);
+  methods[4].selector = @selector(addWithInt:);
+  methods[5].selector = @selector(removeWithInt:);
+  methods[6].selector = @selector(relocateAdjacentKeysWithInt:);
+  methods[7].selector = @selector(betweenWithInt:withInt:withInt:);
+  methods[8].selector = @selector(asMap);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 9, -1, -1 },
+    { "keys_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "freqs_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "mask_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "I", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "frequency", "add", "remove", "relocateAdjacentKeys", "between", "III", "()Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;", &OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED, "LOrgApacheLuceneUtilFrequencyTrackingRingBuffer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag = { "IntBag", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0xa, 9, 4, 10, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag class]) {
     OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_class_());
@@ -298,35 +347,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "IntBag", NULL, 0x0, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "frequencyWithInt:", "frequency", "I", 0x0, NULL, NULL },
-    { "addWithInt:", "add", "I", 0x0, NULL, NULL },
-    { "removeWithInt:", "remove", "Z", 0x0, NULL, NULL },
-    { "relocateAdjacentKeysWithInt:", "relocateAdjacentKeys", "V", 0x2, NULL, NULL },
-    { "betweenWithInt:withInt:withInt:", "between", "Z", 0xa, NULL, NULL },
-    { "asMap", NULL, "Ljava.util.Map;", 0x0, NULL, "()Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "keys_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freqs_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "mask_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag = { 2, "IntBag", "org.apache.lucene.util", "FrequencyTrackingRingBuffer", 0xa, 9, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag;
-}
-
 @end
 
 void OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_initWithInt_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *self, jint maxSize) {
   NSObject_init(self);
-  jint capacity = JavaLangMath_maxWithInt_withInt_(2, maxSize * 3 / 2);
+  jint capacity = JavaLangMath_maxWithInt_withInt_(2, JreIntDiv(maxSize * 3, 2));
   capacity = JreLShift32(JavaLangInteger_highestOneBitWithInt_(capacity - 1), 1);
-  JreAssert((capacity > maxSize), (@"org/apache/lucene/util/FrequencyTrackingRingBuffer.java:125 condition failed: assert capacity > maxSize;"));
+  JreAssert(capacity > maxSize, @"org/apache/lucene/util/FrequencyTrackingRingBuffer.java:125 condition failed: assert capacity > maxSize;");
   JreStrongAssignAndConsume(&self->keys_, [IOSIntArray newArrayWithLength:capacity]);
   JreStrongAssignAndConsume(&self->freqs_, [IOSIntArray newArrayWithLength:capacity]);
   self->mask_ = capacity - 1;

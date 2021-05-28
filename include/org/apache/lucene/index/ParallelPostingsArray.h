@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexParallelPostingsArray
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexParallelPostingsArray_) && (INCLUDE_ALL_OrgApacheLuceneIndexParallelPostingsArray || defined(INCLUDE_OrgApacheLuceneIndexParallelPostingsArray))
 #define OrgApacheLuceneIndexParallelPostingsArray_
 
@@ -25,12 +31,11 @@
   IOSIntArray *intStarts_;
   IOSIntArray *byteStarts_;
 }
-
-+ (jint)BYTES_PER_POSTING;
+@property (readonly, class) jint BYTES_PER_POSTING NS_SWIFT_NAME(BYTES_PER_POSTING);
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)size;
 
 - (jint)bytesPerPosting;
 
@@ -41,6 +46,10 @@
 
 - (OrgApacheLuceneIndexParallelPostingsArray *)newInstanceWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexParallelPostingsArray)
@@ -49,18 +58,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexParallelPostingsArray, textStarts_, IOSI
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexParallelPostingsArray, intStarts_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexParallelPostingsArray, byteStarts_, IOSIntArray *)
 
-inline jint OrgApacheLuceneIndexParallelPostingsArray_get_BYTES_PER_POSTING();
+inline jint OrgApacheLuceneIndexParallelPostingsArray_get_BYTES_PER_POSTING(void);
 #define OrgApacheLuceneIndexParallelPostingsArray_BYTES_PER_POSTING 12
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexParallelPostingsArray, BYTES_PER_POSTING, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(OrgApacheLuceneIndexParallelPostingsArray *self, jint size);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexParallelPostingsArray_initPackagePrivateWithInt_(OrgApacheLuceneIndexParallelPostingsArray *self, jint size);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexParallelPostingsArray *new_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(jint size) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexParallelPostingsArray *new_OrgApacheLuceneIndexParallelPostingsArray_initPackagePrivateWithInt_(jint size) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexParallelPostingsArray *create_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(jint size);
+FOUNDATION_EXPORT OrgApacheLuceneIndexParallelPostingsArray *create_OrgApacheLuceneIndexParallelPostingsArray_initPackagePrivateWithInt_(jint size);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexParallelPostingsArray)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexParallelPostingsArray")

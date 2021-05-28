@@ -3,10 +3,8 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/UnsortedInputIterator.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/List.h"
 #include "java/util/Random.h"
 #include "java/util/Set.h"
@@ -16,6 +14,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefArray.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/UnsortedInputIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestUnsortedInputIterator () {
  @public
@@ -39,7 +41,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestUnsortedInputIterator, payloadSp
 }
 
 - (jlong)weight {
-  JreAssert((currentOrd_ == IOSIntArray_Get(nil_chk(ords_), curPos_)), (@"org/apache/lucene/search/suggest/UnsortedInputIterator.java:59 condition failed: assert currentOrd == ords[curPos];"));
+  JreAssert(currentOrd_ == IOSIntArray_Get(nil_chk(ords_), curPos_), @"org/apache/lucene/search/suggest/UnsortedInputIterator.java:59 condition failed: assert currentOrd == ords[curPos];");
   return IOSLongArray_Get(nil_chk(freqs_), currentOrd_);
 }
 
@@ -53,7 +55,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestUnsortedInputIterator, payloadSp
 
 - (OrgApacheLuceneUtilBytesRef *)payload {
   if ([self hasPayloads] && curPos_ < [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(payloads_)) size]) {
-    JreAssert((currentOrd_ == IOSIntArray_Get(nil_chk(ords_), curPos_)), (@"org/apache/lucene/search/suggest/UnsortedInputIterator.java:75 condition failed: assert currentOrd == ords[curPos];"));
+    JreAssert(currentOrd_ == IOSIntArray_Get(nil_chk(ords_), curPos_), @"org/apache/lucene/search/suggest/UnsortedInputIterator.java:75 condition failed: assert currentOrd == ords[curPos];");
     return [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(payloads_)) getWithOrgApacheLuceneUtilBytesRefBuilder:payloadSpare_UnsortedInputIterator_ withInt:currentOrd_];
   }
   return nil;
@@ -61,7 +63,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestUnsortedInputIterator, payloadSp
 
 - (id<JavaUtilSet>)contexts {
   if ([self hasContexts] && curPos_ < [((id<JavaUtilList>) nil_chk(contextSets_)) size]) {
-    JreAssert((currentOrd_ == IOSIntArray_Get(nil_chk(ords_), curPos_)), (@"org/apache/lucene/search/suggest/UnsortedInputIterator.java:84 condition failed: assert currentOrd == ords[curPos];"));
+    JreAssert(currentOrd_ == IOSIntArray_Get(nil_chk(ords_), curPos_), @"org/apache/lucene/search/suggest/UnsortedInputIterator.java:84 condition failed: assert currentOrd == ords[curPos];");
     return [((id<JavaUtilList>) nil_chk(contextSets_)) getWithInt:currentOrd_];
   }
   return nil;
@@ -75,20 +77,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestUnsortedInputIterator, payloadSp
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestInputIterator:", "UnsortedInputIterator", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "weight", NULL, "J", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 2, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestInputIterator:);
+  methods[1].selector = @selector(weight);
+  methods[2].selector = @selector(next);
+  methods[3].selector = @selector(payload);
+  methods[4].selector = @selector(contexts);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ords_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentOrd_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "spare_UnsortedInputIterator_", "spare", 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadSpare_UnsortedInputIterator_", "payloadSpare", 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "ords_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentOrd_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "spare_UnsortedInputIterator_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, 3, -1, -1, -1 },
+    { "payloadSpare_UnsortedInputIterator_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, 4, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestUnsortedInputIterator = { 2, "UnsortedInputIterator", "org.apache.lucene.search.suggest", NULL, 0x1, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestInputIterator;", "LJavaIoIOException;", "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", "spare", "payloadSpare" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestUnsortedInputIterator = { "UnsortedInputIterator", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x1, 5, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestUnsortedInputIterator;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute))
 #define OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_
 
@@ -22,25 +28,23 @@
 
 /*!
  @brief Determines how many positions this
- token spans.
- Very few analyzer components actually
- produce this attribute, and indexing ignores it, but
- it's useful to express the graph structure naturally
- produced by decompounding, word splitting/joining,
- synonym filtering, etc.
+   token spans.Very few analyzer components actually
+   produce this attribute, and indexing ignores it, but
+   it's useful to express the graph structure naturally
+   produced by decompounding, word splitting/joining,
+   synonym filtering, etc.
  <p>NOTE: this is optional, and most analyzers
- don't change the default value (1). 
+   don't change the default value (1).
  */
-@protocol OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
  @brief Set the position length of this Token.
  <p>
- The default value is one. 
- @param positionLength how many positions this token
- spans.
- @throws IllegalArgumentException if <code>positionLength</code> 
- is zero or negative.
+  The default value is one.
+ @param positionLength how many positions this token   spans.
+ @throw IllegalArgumentExceptionif <code>positionLength</code> 
+          is zero or negative.
  - seealso: #getPositionLength()
  */
 - (void)setPositionLengthWithInt:(jint)positionLength;
@@ -59,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPositionLengthA
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute")

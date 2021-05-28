@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileFileAccessDeniedException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFileAccessDeniedException_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileAccessDeniedException || defined(INCLUDE_OrgLukhnosPortmobileFileAccessDeniedException))
 #define OrgLukhnosPortmobileFileAccessDeniedException_
 
@@ -20,11 +26,22 @@
 #define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
+@class JavaLangThrowable;
+
 @interface OrgLukhnosPortmobileFileAccessDeniedException : JavaIoIOException
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -32,12 +49,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileFileAccessDeniedException)
 
 FOUNDATION_EXPORT void OrgLukhnosPortmobileFileAccessDeniedException_init(OrgLukhnosPortmobileFileAccessDeniedException *self);
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileAccessDeniedException *new_OrgLukhnosPortmobileFileAccessDeniedException_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileAccessDeniedException *new_OrgLukhnosPortmobileFileAccessDeniedException_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileAccessDeniedException *create_OrgLukhnosPortmobileFileAccessDeniedException_init();
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileAccessDeniedException *create_OrgLukhnosPortmobileFileAccessDeniedException_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileAccessDeniedException)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileAccessDeniedException")

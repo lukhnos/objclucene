@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentStoredField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentStoredField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentStoredField || defined(INCLUDE_OrgApacheLuceneDocumentStoredField))
 #define OrgApacheLuceneDocumentStoredField_
 
@@ -21,101 +27,161 @@
 #include "org/apache/lucene/document/Field.h"
 
 @class IOSByteArray;
+@class JavaIoReader;
+@class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneDocumentFieldType;
+@class OrgApacheLuceneDocumentField_Index;
+@class OrgApacheLuceneDocumentField_Store;
+@class OrgApacheLuceneDocumentField_TermVector;
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
  @brief A field whose value is stored so that <code>IndexSearcher.doc</code>
   and <code>IndexReader.document</code> will
- return the field and its value.
+   return the field and its value.
  */
 @interface OrgApacheLuceneDocumentStoredField : OrgApacheLuceneDocumentField
-
-+ (OrgApacheLuceneDocumentFieldType *)TYPE;
+@property (readonly, class, strong) OrgApacheLuceneDocumentFieldType *TYPE NS_SWIFT_NAME(TYPE);
 
 #pragma mark Public
 
 /*!
  @brief Create a stored-only field with the given binary value.
  <p>NOTE: the provided byte[] is not copied so be sure
- not to change it until you're done with this field.
+  not to change it until you're done with this field.
  @param name field name
  @param value byte array pointing to binary content (not copied)
- @throws IllegalArgumentException if the field name is null.
+ @throw IllegalArgumentExceptionif the field name is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                   withByteArray:(IOSByteArray *)value;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                             withByteArray:(IOSByteArray *)value;
 
 /*!
  @brief Create a stored-only field with the given binary value.
  <p>NOTE: the provided byte[] is not copied so be sure
- not to change it until you're done with this field.
+  not to change it until you're done with this field.
  @param name field name
  @param value byte array pointing to binary content (not copied)
  @param offset starting position of the byte array
  @param length valid length of the byte array
- @throws IllegalArgumentException if the field name is null.
+ @throw IllegalArgumentExceptionif the field name is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                   withByteArray:(IOSByteArray *)value
-                         withInt:(jint)offset
-                         withInt:(jint)length;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                             withByteArray:(IOSByteArray *)value
+                                   withInt:(jint)offset
+                                   withInt:(jint)length;
 
 /*!
  @brief Create a stored-only field with the given binary value.
  <p>NOTE: the provided BytesRef is not copied so be sure
- not to change it until you're done with this field.
+  not to change it until you're done with this field.
  @param name field name
  @param value BytesRef pointing to binary content (not copied)
- @throws IllegalArgumentException if the field name is null.
+ @throw IllegalArgumentExceptionif the field name is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
 
 /*!
  @brief Create a stored-only field with the given double value.
  @param name field name
  @param value double value
- @throws IllegalArgumentException if the field name is null.
+ @throw IllegalArgumentExceptionif the field name is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)value;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                withDouble:(jdouble)value;
 
 /*!
  @brief Create a stored-only field with the given float value.
  @param name field name
  @param value float value
- @throws IllegalArgumentException if the field name is null.
+ @throw IllegalArgumentExceptionif the field name is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                       withFloat:(jfloat)value;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                 withFloat:(jfloat)value;
 
 /*!
  @brief Create a stored-only field with the given integer value.
  @param name field name
  @param value integer value
- @throws IllegalArgumentException if the field name is null.
+ @throw IllegalArgumentExceptionif the field name is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)value;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                   withInt:(jint)value;
 
 /*!
  @brief Create a stored-only field with the given long value.
  @param name field name
  @param value long value
- @throws IllegalArgumentException if the field name is null.
+ @throw IllegalArgumentExceptionif the field name is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                        withLong:(jlong)value;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                  withLong:(jlong)value;
 
 /*!
  @brief Create a stored-only field with the given string value.
  @param name field name
  @param value string value
- @throws IllegalArgumentException if the field name or value is null.
+ @throw IllegalArgumentExceptionif the field name or value is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                              withNSString:(NSString *)value;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -124,7 +190,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentStoredField)
 /*!
  @brief Type for a stored-only field.
  */
-inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStoredField_get_TYPE();
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStoredField_get_TYPE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStoredField_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentStoredField, TYPE, OrgApacheLuceneDocumentFieldType *)
@@ -181,4 +247,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentStoredField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentStoredField")

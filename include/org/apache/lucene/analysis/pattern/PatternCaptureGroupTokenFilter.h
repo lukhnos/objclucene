@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter))
 #define OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_
 
@@ -25,62 +31,68 @@
 
 /*!
  @brief CaptureGroup uses Java regexes to emit multiple tokens - one for each capture
- group in one or more patterns.
+  group in one or more patterns.
  <p>
- For example, a pattern like:
+  For example, a pattern like: 
  </p>
+  
  <p>
- <code>"(https?://([a-zA-Z\-_0-9.]+))"</code>
+  <code>"(https?://([a-zA-Z\-_0-9.]+))"</code>
+  </p>
+  
+ <p>
+  when matched against the string "http://www.foo.com/index" would return the
+  tokens "https://www.foo.com" and "www.foo.com". 
  </p>
+  
  <p>
- when matched against the string "http://www.foo.com/index" would return the
- tokens "https://www.foo.com" and "www.foo.com".
+  If none of the patterns match, or if preserveOriginal is true, the original
+  token will be preserved. 
  </p>
- <p>
- If none of the patterns match, or if preserveOriginal is true, the original
- token will be preserved.
- </p>
- <p>
- Each pattern is matched as often as it can be, so the pattern
+  <p>
+  Each pattern is matched as often as it can be, so the pattern 
  <code> "(...)"</code>, when matched against <code>"abcdefghi"</code> would
- produce <code>["abc","def","ghi"]</code>
+  produce <code>["abc","def","ghi"]</code>
+  </p>
+  <p>
+  A camelCaseFilter could be written as: 
  </p>
- <p>
- A camelCaseFilter could be written as:
- </p>
- <p>
- <code>
- "([A-Z]{2,})",                                 
- "(?&lt;![A-Z])([A-Z][a-z]+)",                     
- "(?:^|\\b|(?&lt;=[0-9_])|(?&lt;=[A-Z]{2}))([a-z]+)",
- "([0-9]+)"
+  <p>
+  <code>
+    "([A-Z]{2,})",                                 
+    "(?&lt;![A-Z])([A-Z][a-z]+)",                     
+    "(?:^|\\b|(?&lt;=[0-9_])|(?&lt;=[A-Z]{2}))([a-z]+)",
+    "([0-9]+)" 
  </code>
- </p>
- <p>
- plus if <code>preserveOriginal</code> is true, it would also return
+  </p>
+  <p>
+  plus if <code>preserveOriginal</code> is true, it would also return 
  <code>"camelCaseFilter"</code>
- </p>
+  </p>
  */
 @interface OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
 /*!
- @param input
- the input <code>TokenStream</code>
- @param preserveOriginal
- set to true to return the original token even if one of the
- patterns matches
- @param patterns
- an array of <code>Pattern</code> objects to match against each token
+ @param input the input 
+ <code>TokenStream</code>
+ @param preserveOriginal set to true to return the original token even if one of the
+            patterns matches
+ @param patterns an array of 
+ <code>Pattern</code>  objects to match against each token
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                               withBoolean:(jboolean)preserveOriginal
-                             withJavaUtilRegexPatternArray:(IOSObjectArray *)patterns;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                         withBoolean:(jboolean)preserveOriginal
+                                       withJavaUtilRegexPatternArray:(IOSObjectArray *)patterns;
 
 - (jboolean)incrementToken;
 
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -96,4 +108,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternCaptureGroupToke
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter")

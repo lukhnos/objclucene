@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightNullFragmenter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightNullFragmenter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightNullFragmenter || defined(INCLUDE_OrgApacheLuceneSearchHighlightNullFragmenter))
 #define OrgApacheLuceneSearchHighlightNullFragmenter_
 
@@ -30,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jboolean)isNewFragment;
 
@@ -43,12 +49,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightNullFragmenter)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightNullFragmenter_init(OrgApacheLuceneSearchHighlightNullFragmenter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightNullFragmenter *new_OrgApacheLuceneSearchHighlightNullFragmenter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightNullFragmenter *new_OrgApacheLuceneSearchHighlightNullFragmenter_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightNullFragmenter *create_OrgApacheLuceneSearchHighlightNullFragmenter_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightNullFragmenter *create_OrgApacheLuceneSearchHighlightNullFragmenter_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightNullFragmenter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightNullFragmenter")

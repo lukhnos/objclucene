@@ -11,7 +11,18 @@
 #include "org/lukhnos/portmobile/invoke/MethodHandle.h"
 #include "org/lukhnos/portmobile/invoke/MethodType.h"
 
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/invoke/MethodHandle must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgLukhnosPortmobileInvokeMethodHandle
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgLukhnosPortmobileInvokeMethodHandle_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)invokeExact {
   // can't call an abstract method
@@ -25,21 +36,21 @@
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgLukhnosPortmobileInvokeMethodHandle_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "invokeExact", NULL, "Ljava.lang.Object;", 0x401, NULL, NULL },
-    { "asTypeWithOrgLukhnosPortmobileInvokeMethodType:", "asType", "Lorg.lukhnos.portmobile.invoke.MethodHandle;", 0x401, NULL, NULL },
-    { "init", "MethodHandle", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileInvokeMethodHandle;", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.lukhnos.portmobile.invoke.MethodHandle$NoArgsConstructor;"};
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodHandle = { 2, "MethodHandle", "org.lukhnos.portmobile.invoke", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(invokeExact);
+  methods[2].selector = @selector(asTypeWithOrgLukhnosPortmobileInvokeMethodType:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "asType", "LOrgLukhnosPortmobileInvokeMethodType;", "LOrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodHandle = { "MethodHandle", "org.lukhnos.portmobile.invoke", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, 2, -1, -1, -1 };
   return &_OrgLukhnosPortmobileInvokeMethodHandle;
 }
 
@@ -68,9 +79,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileInvokeMethodHandle)
   @catch (JavaLangIllegalAccessException *e) {
     return nil;
   }
-  @catch (JavaLangReflectiveOperationException *e) {
-    return nil;
-  }
 }
 
 - (OrgLukhnosPortmobileInvokeMethodHandle *)asTypeWithOrgLukhnosPortmobileInvokeMethodType:(OrgLukhnosPortmobileInvokeMethodType *)newType {
@@ -83,15 +91,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileInvokeMethodHandle)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithIOSClass:", "NoArgsConstructor", NULL, 0x0, NULL, "(Ljava/lang/Class<*>;)V" },
-    { "invokeExact", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "asTypeWithOrgLukhnosPortmobileInvokeMethodType:", "asType", "Lorg.lukhnos.portmobile.invoke.MethodHandle;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileInvokeMethodHandle;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIOSClass:);
+  methods[1].selector = @selector(invokeExact);
+  methods[2].selector = @selector(asTypeWithOrgLukhnosPortmobileInvokeMethodType:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "clazz_", NULL, 0x0, "Ljava.lang.Class;", NULL, "Ljava/lang/Class<*>;", .constantValue.asLong = 0 },
+    { "clazz_", "LIOSClass;", .constantValue.asLong = 0, 0x0, -1, -1, 4, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor = { 2, "NoArgsConstructor", "org.lukhnos.portmobile.invoke", "MethodHandle", 0x9, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LIOSClass;", "(Ljava/lang/Class<*>;)V", "asType", "LOrgLukhnosPortmobileInvokeMethodType;", "Ljava/lang/Class<*>;", "LOrgLukhnosPortmobileInvokeMethodHandle;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor = { "NoArgsConstructor", "org.lukhnos.portmobile.invoke", ptrTable, methods, fields, 7, 0x9, 3, 1, 5, -1, -1, -1, -1 };
   return &_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor;
 }
 

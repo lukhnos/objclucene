@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpellLevensteinDistance
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpellLevensteinDistance_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellLevensteinDistance || defined(INCLUDE_OrgApacheLuceneSearchSpellLevensteinDistance))
 #define OrgApacheLuceneSearchSpellLevensteinDistance_
 
@@ -31,7 +37,7 @@
  @brief Optimized to run a bit faster than the static getDistance().
  In one benchmark times were 5.3sec using ctr vs 8.5sec w/ static method, thus 37% faster.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -48,12 +54,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellLevensteinDistance)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellLevensteinDistance_init(OrgApacheLuceneSearchSpellLevensteinDistance *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellLevensteinDistance *new_OrgApacheLuceneSearchSpellLevensteinDistance_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellLevensteinDistance *new_OrgApacheLuceneSearchSpellLevensteinDistance_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellLevensteinDistance *create_OrgApacheLuceneSearchSpellLevensteinDistance_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellLevensteinDistance *create_OrgApacheLuceneSearchSpellLevensteinDistance_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellLevensteinDistance)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellLevensteinDistance")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFieldTermIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFieldTermIterator_) && (INCLUDE_ALL_OrgApacheLuceneIndexFieldTermIterator || defined(INCLUDE_OrgApacheLuceneIndexFieldTermIterator))
 #define OrgApacheLuceneIndexFieldTermIterator_
 
@@ -21,18 +27,17 @@
 #include "org/apache/lucene/util/BytesRefIterator.h"
 
 /*!
- @brief Iterates over terms in across multiple fields.
- The caller must
- check <code>field</code> after each <code>next</code> to see if the field
- changed, but <code>==</code> can be used since the iterator
- implementation ensures it will use the same String instance for
- a given field. 
+ @brief Iterates over terms in across multiple fields.The caller must
+   check <code>field</code> after each <code>next</code> to see if the field
+   changed, but <code>==</code> can be used since the iterator
+   implementation ensures it will use the same String instance for
+   a given field.
  */
 @interface OrgApacheLuceneIndexFieldTermIterator : NSObject < OrgApacheLuceneUtilBytesRefIterator >
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 /*!
  @brief Del gen of the current term.
@@ -40,21 +45,29 @@
 - (jlong)delGen;
 
 /*!
- @brief Returns current field.
- This method should not be called
- after iteration is done.  Note that you may use == to
- detect a change in field. 
+ @brief Returns current field.This method should not be called
+   after iteration is done.
+ Note that you may use == to
+   detect a change in field.
  */
 - (NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFieldTermIterator)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldTermIterator_init(OrgApacheLuceneIndexFieldTermIterator *self);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldTermIterator_initPackagePrivate(OrgApacheLuceneIndexFieldTermIterator *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldTermIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFieldTermIterator")

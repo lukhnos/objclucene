@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilCounter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilCounter_) && (INCLUDE_ALL_OrgApacheLuceneUtilCounter || defined(INCLUDE_OrgApacheLuceneUtilCounter))
 #define OrgApacheLuceneUtilCounter_
 
@@ -23,12 +29,11 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Adds the given delta to the counters current value
- @param delta
- the delta to add
+ @param delta the delta to add
  @return the counters updated value
  */
 - (jlong)addAndGetWithLong:(jlong)delta;
@@ -40,16 +45,14 @@
 - (jlong)get;
 
 /*!
- @brief Returns a new counter.
- The returned counter is not thread-safe.
+ @brief Returns a new counter.The returned counter is not thread-safe.
  */
 + (OrgApacheLuceneUtilCounter *)newCounter OBJC_METHOD_FAMILY_NONE;
 
 /*!
  @brief Returns a new counter.
- @param threadSafe
- <code>true</code> if the returned counter can be used by multiple
- threads concurrently.
+ @param threadSafe <code>
+  true </code>  if the returned counter can be used by multiple           threads concurrently.
  @return a new counter.
  */
 + (OrgApacheLuceneUtilCounter *)newCounterWithBoolean:(jboolean)threadSafe OBJC_METHOD_FAMILY_NONE;
@@ -58,14 +61,18 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilCounter)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounter();
+FOUNDATION_EXPORT void OrgApacheLuceneUtilCounter_init(OrgApacheLuceneUtilCounter *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounter(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounterWithBoolean_(jboolean threadSafe);
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilCounter_init(OrgApacheLuceneUtilCounter *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCounter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilCounter")

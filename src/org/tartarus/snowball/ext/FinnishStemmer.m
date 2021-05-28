@@ -12,6 +12,12 @@
 #include "org/tartarus/snowball/SnowballProgram.h"
 #include "org/tartarus/snowball/ext/FinnishStemmer.h"
 
+static void (*OrgTartarusSnowballExtFinnishStemmer_super$_copy_fromWithOrgTartarusSnowballSnowballProgram_)(id, SEL, id);
+
+#if __has_feature(objc_arc)
+#error "org/tartarus/snowball/ext/FinnishStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgTartarusSnowballExtFinnishStemmer () {
  @public
   jboolean B_ending_removed_;
@@ -48,69 +54,71 @@
 
 J2OBJC_FIELD_SETTER(OrgTartarusSnowballExtFinnishStemmer, S_x_, JavaLangStringBuilder *)
 
-inline jlong OrgTartarusSnowballExtFinnishStemmer_get_serialVersionUID();
+inline jlong OrgTartarusSnowballExtFinnishStemmer_get_serialVersionUID(void);
 #define OrgTartarusSnowballExtFinnishStemmer_serialVersionUID 1LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgTartarusSnowballExtFinnishStemmer, serialVersionUID, jlong)
 
-inline OrgTartarusSnowballExtFinnishStemmer *OrgTartarusSnowballExtFinnishStemmer_get_methodObject();
+inline OrgTartarusSnowballExtFinnishStemmer *OrgTartarusSnowballExtFinnishStemmer_get_methodObject(void);
 static OrgTartarusSnowballExtFinnishStemmer *OrgTartarusSnowballExtFinnishStemmer_methodObject;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, methodObject, OrgTartarusSnowballExtFinnishStemmer *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_0();
+inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_0(void);
 static IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_a_0;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, a_0, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_1();
+inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_1(void);
 static IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_a_1;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, a_1, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_2();
+inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_2(void);
 static IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_a_2;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, a_2, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_3();
+inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_3(void);
 static IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_a_3;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, a_3, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_4();
+inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_4(void);
 static IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_a_4;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, a_4, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_5();
+inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_5(void);
 static IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_a_5;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, a_5, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_6();
+inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_6(void);
 static IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_a_6;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, a_6, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_7();
+inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_7(void);
 static IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_a_7;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, a_7, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_8();
+inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_8(void);
 static IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_a_8;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, a_8, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_9();
+inline IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_get_a_9(void);
 static IOSObjectArray *OrgTartarusSnowballExtFinnishStemmer_a_9;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, a_9, IOSObjectArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_get_g_AEI();
+inline IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_get_g_AEI(void);
 static IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_g_AEI;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, g_AEI, IOSCharArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_get_g_V1();
+inline IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_get_g_V1(void);
 static IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_g_V1;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, g_V1, IOSCharArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_get_g_V2();
+inline IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_get_g_V2(void);
 static IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_g_V2;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, g_V2, IOSCharArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_get_g_particle_end();
+inline IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_get_g_particle_end(void);
 static IOSCharArray *OrgTartarusSnowballExtFinnishStemmer_g_particle_end;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtFinnishStemmer, g_particle_end, IOSCharArray *)
+
+__attribute__((unused)) static void OrgTartarusSnowballExtFinnishStemmer_copy_fromWithOrgTartarusSnowballExtFinnishStemmer_(OrgTartarusSnowballExtFinnishStemmer *self, OrgTartarusSnowballExtFinnishStemmer *other);
 
 __attribute__((unused)) static jboolean OrgTartarusSnowballExtFinnishStemmer_r_mark_regions(OrgTartarusSnowballExtFinnishStemmer *self);
 
@@ -121,6 +129,8 @@ __attribute__((unused)) static jboolean OrgTartarusSnowballExtFinnishStemmer_r_p
 __attribute__((unused)) static jboolean OrgTartarusSnowballExtFinnishStemmer_r_possessive(OrgTartarusSnowballExtFinnishStemmer *self);
 
 __attribute__((unused)) static jboolean OrgTartarusSnowballExtFinnishStemmer_r_LONG(OrgTartarusSnowballExtFinnishStemmer *self);
+
+__attribute__((unused)) static jboolean OrgTartarusSnowballExtFinnishStemmer_r_VI(OrgTartarusSnowballExtFinnishStemmer *self);
 
 __attribute__((unused)) static jboolean OrgTartarusSnowballExtFinnishStemmer_r_case_ending(OrgTartarusSnowballExtFinnishStemmer *self);
 
@@ -136,12 +146,15 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtFinnishStemmer)
 
 @implementation OrgTartarusSnowballExtFinnishStemmer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgTartarusSnowballExtFinnishStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)copy_fromWithOrgTartarusSnowballExtFinnishStemmer:(OrgTartarusSnowballExtFinnishStemmer *)other {
-  B_ending_removed_ = ((OrgTartarusSnowballExtFinnishStemmer *) nil_chk(other))->B_ending_removed_;
-  JreStrongAssign(&S_x_, other->S_x_);
-  I_p2_ = other->I_p2_;
-  I_p1_ = other->I_p1_;
-  [super copy_fromWithOrgTartarusSnowballSnowballProgram:other];
+  OrgTartarusSnowballExtFinnishStemmer_copy_fromWithOrgTartarusSnowballExtFinnishStemmer_(self, other);
 }
 
 - (jboolean)r_mark_regions {
@@ -165,13 +178,7 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtFinnishStemmer)
 }
 
 - (jboolean)r_VI {
-  if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"i"])) {
-    return false;
-  }
-  if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V2 withInt:97 withInt:246])) {
-    return false;
-  }
-  return true;
+  return OrgTartarusSnowballExtFinnishStemmer_r_VI(self);
 }
 
 - (jboolean)r_case_ending {
@@ -305,20 +312,80 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtFinnishStemmer)
   return ((jint) [((NSString *) nil_chk([OrgTartarusSnowballExtFinnishStemmer_class_() getName])) hash]);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgTartarusSnowballExtFinnishStemmer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(S_x_);
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(copy_fromWithOrgTartarusSnowballExtFinnishStemmer:);
+  methods[2].selector = @selector(r_mark_regions);
+  methods[3].selector = @selector(r_R2);
+  methods[4].selector = @selector(r_particle_etc);
+  methods[5].selector = @selector(r_possessive);
+  methods[6].selector = @selector(r_LONG);
+  methods[7].selector = @selector(r_VI);
+  methods[8].selector = @selector(r_case_ending);
+  methods[9].selector = @selector(r_other_endings);
+  methods[10].selector = @selector(r_i_plural);
+  methods[11].selector = @selector(r_t_plural);
+  methods[12].selector = @selector(r_tidy);
+  methods[13].selector = @selector(stem);
+  methods[14].selector = @selector(isEqual:);
+  methods[15].selector = @selector(hash);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "serialVersionUID", "J", .constantValue.asLong = OrgTartarusSnowballExtFinnishStemmer_serialVersionUID, 0x1a, -1, -1, -1, -1 },
+    { "methodObject", "LOrgTartarusSnowballExtFinnishStemmer;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "a_0", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 6, -1, -1 },
+    { "a_1", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 7, -1, -1 },
+    { "a_2", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 8, -1, -1 },
+    { "a_3", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 9, -1, -1 },
+    { "a_4", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 10, -1, -1 },
+    { "a_5", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 11, -1, -1 },
+    { "a_6", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
+    { "a_7", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 13, -1, -1 },
+    { "a_8", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 14, -1, -1 },
+    { "a_9", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 15, -1, -1 },
+    { "g_AEI", "[C", .constantValue.asLong = 0, 0x1a, -1, 16, -1, -1 },
+    { "g_V1", "[C", .constantValue.asLong = 0, 0x1a, -1, 17, -1, -1 },
+    { "g_V2", "[C", .constantValue.asLong = 0, 0x1a, -1, 18, -1, -1 },
+    { "g_particle_end", "[C", .constantValue.asLong = 0, 0x1a, -1, 19, -1, -1 },
+    { "B_ending_removed_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "S_x_", "LJavaLangStringBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "I_p2_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "I_p1_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "copy_from", "LOrgTartarusSnowballExtFinnishStemmer;", "equals", "LNSObject;", "hashCode", &OrgTartarusSnowballExtFinnishStemmer_methodObject, &OrgTartarusSnowballExtFinnishStemmer_a_0, &OrgTartarusSnowballExtFinnishStemmer_a_1, &OrgTartarusSnowballExtFinnishStemmer_a_2, &OrgTartarusSnowballExtFinnishStemmer_a_3, &OrgTartarusSnowballExtFinnishStemmer_a_4, &OrgTartarusSnowballExtFinnishStemmer_a_5, &OrgTartarusSnowballExtFinnishStemmer_a_6, &OrgTartarusSnowballExtFinnishStemmer_a_7, &OrgTartarusSnowballExtFinnishStemmer_a_8, &OrgTartarusSnowballExtFinnishStemmer_a_9, &OrgTartarusSnowballExtFinnishStemmer_g_AEI, &OrgTartarusSnowballExtFinnishStemmer_g_V1, &OrgTartarusSnowballExtFinnishStemmer_g_V2, &OrgTartarusSnowballExtFinnishStemmer_g_particle_end };
+  static const J2ObjcClassInfo _OrgTartarusSnowballExtFinnishStemmer = { "FinnishStemmer", "org.tartarus.snowball.ext", ptrTable, methods, fields, 7, 0x1, 16, 20, -1, -1, -1, -1, -1 };
+  return &_OrgTartarusSnowballExtFinnishStemmer;
+}
+
 + (void)initialize {
   if (self == [OrgTartarusSnowballExtFinnishStemmer class]) {
+    OrgTartarusSnowballExtFinnishStemmer_super$_copy_fromWithOrgTartarusSnowballSnowballProgram_ = (void (*)(id, SEL, id))[OrgTartarusSnowballSnowballProgram instanceMethodForSelector:@selector(copy_fromWithOrgTartarusSnowballSnowballProgram:)];
     JreStrongAssignAndConsume(&OrgTartarusSnowballExtFinnishStemmer_methodObject, new_OrgTartarusSnowballExtFinnishStemmer_init());
     JreStrongAssignAndConsume(&OrgTartarusSnowballExtFinnishStemmer_a_0, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"pa", -1, 1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"sti", -1, 2, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"kaan", -1, 1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"han", -1, 1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"kin", -1, 1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"h\u00e4n", -1, 1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"k\u00e4\u00e4n", -1, 1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ko", -1, 1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"p\u00e4", -1, 1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"k\u00f6", -1, 1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject) } count:10 type:OrgTartarusSnowballAmong_class_()]);
     JreStrongAssignAndConsume(&OrgTartarusSnowballExtFinnishStemmer_a_1, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"lla", -1, -1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"na", -1, -1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ssa", -1, -1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ta", -1, -1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"lta", 3, -1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"sta", 3, -1, @"", OrgTartarusSnowballExtFinnishStemmer_methodObject) } count:6 type:OrgTartarusSnowballAmong_class_()]);
@@ -338,52 +405,28 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "copy_fromWithOrgTartarusSnowballExtFinnishStemmer:", "copy_from", "V", 0x2, NULL, NULL },
-    { "r_mark_regions", NULL, "Z", 0x2, NULL, NULL },
-    { "r_R2", NULL, "Z", 0x2, NULL, NULL },
-    { "r_particle_etc", NULL, "Z", 0x2, NULL, NULL },
-    { "r_possessive", NULL, "Z", 0x2, NULL, NULL },
-    { "r_LONG", NULL, "Z", 0x2, NULL, NULL },
-    { "r_VI", NULL, "Z", 0x2, NULL, NULL },
-    { "r_case_ending", NULL, "Z", 0x2, NULL, NULL },
-    { "r_other_endings", NULL, "Z", 0x2, NULL, NULL },
-    { "r_i_plural", NULL, "Z", 0x2, NULL, NULL },
-    { "r_t_plural", NULL, "Z", 0x2, NULL, NULL },
-    { "r_tidy", NULL, "Z", 0x2, NULL, NULL },
-    { "stem", NULL, "Z", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", "FinnishStemmer", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "serialVersionUID", "serialVersionUID", 0x1a, "J", NULL, NULL, .constantValue.asLong = OrgTartarusSnowballExtFinnishStemmer_serialVersionUID },
-    { "methodObject", "methodObject", 0x1a, "Lorg.tartarus.snowball.ext.FinnishStemmer;", &OrgTartarusSnowballExtFinnishStemmer_methodObject, NULL, .constantValue.asLong = 0 },
-    { "a_0", "a_0", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtFinnishStemmer_a_0, NULL, .constantValue.asLong = 0 },
-    { "a_1", "a_1", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtFinnishStemmer_a_1, NULL, .constantValue.asLong = 0 },
-    { "a_2", "a_2", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtFinnishStemmer_a_2, NULL, .constantValue.asLong = 0 },
-    { "a_3", "a_3", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtFinnishStemmer_a_3, NULL, .constantValue.asLong = 0 },
-    { "a_4", "a_4", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtFinnishStemmer_a_4, NULL, .constantValue.asLong = 0 },
-    { "a_5", "a_5", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtFinnishStemmer_a_5, NULL, .constantValue.asLong = 0 },
-    { "a_6", "a_6", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtFinnishStemmer_a_6, NULL, .constantValue.asLong = 0 },
-    { "a_7", "a_7", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtFinnishStemmer_a_7, NULL, .constantValue.asLong = 0 },
-    { "a_8", "a_8", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtFinnishStemmer_a_8, NULL, .constantValue.asLong = 0 },
-    { "a_9", "a_9", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtFinnishStemmer_a_9, NULL, .constantValue.asLong = 0 },
-    { "g_AEI", "g_AEI", 0x1a, "[C", &OrgTartarusSnowballExtFinnishStemmer_g_AEI, NULL, .constantValue.asLong = 0 },
-    { "g_V1", "g_V1", 0x1a, "[C", &OrgTartarusSnowballExtFinnishStemmer_g_V1, NULL, .constantValue.asLong = 0 },
-    { "g_V2", "g_V2", 0x1a, "[C", &OrgTartarusSnowballExtFinnishStemmer_g_V2, NULL, .constantValue.asLong = 0 },
-    { "g_particle_end", "g_particle_end", 0x1a, "[C", &OrgTartarusSnowballExtFinnishStemmer_g_particle_end, NULL, .constantValue.asLong = 0 },
-    { "B_ending_removed_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "S_x_", NULL, 0x2, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "I_p2_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "I_p1_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgTartarusSnowballExtFinnishStemmer = { 2, "FinnishStemmer", "org.tartarus.snowball.ext", NULL, 0x1, 16, methods, 20, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgTartarusSnowballExtFinnishStemmer;
+@end
+
+void OrgTartarusSnowballExtFinnishStemmer_init(OrgTartarusSnowballExtFinnishStemmer *self) {
+  OrgTartarusSnowballSnowballProgram_init(self);
+  JreStrongAssignAndConsume(&self->S_x_, new_JavaLangStringBuilder_init());
 }
 
-@end
+OrgTartarusSnowballExtFinnishStemmer *new_OrgTartarusSnowballExtFinnishStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgTartarusSnowballExtFinnishStemmer, init)
+}
+
+OrgTartarusSnowballExtFinnishStemmer *create_OrgTartarusSnowballExtFinnishStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgTartarusSnowballExtFinnishStemmer, init)
+}
+
+void OrgTartarusSnowballExtFinnishStemmer_copy_fromWithOrgTartarusSnowballExtFinnishStemmer_(OrgTartarusSnowballExtFinnishStemmer *self, OrgTartarusSnowballExtFinnishStemmer *other) {
+  self->B_ending_removed_ = ((OrgTartarusSnowballExtFinnishStemmer *) nil_chk(other))->B_ending_removed_;
+  JreStrongAssign(&self->S_x_, other->S_x_);
+  self->I_p2_ = other->I_p2_;
+  self->I_p1_ = other->I_p1_;
+  OrgTartarusSnowballExtFinnishStemmer_super$_copy_fromWithOrgTartarusSnowballSnowballProgram_(self, @selector(copy_fromWithOrgTartarusSnowballSnowballProgram:), other);
+}
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_mark_regions(OrgTartarusSnowballExtFinnishStemmer *self) {
   jint v_1;
@@ -581,6 +624,16 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_possessive(OrgTartarusSnowballEx
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_LONG(OrgTartarusSnowballExtFinnishStemmer *self) {
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_5 withInt:7] == 0) {
+    return false;
+  }
+  return true;
+}
+
+jboolean OrgTartarusSnowballExtFinnishStemmer_r_VI(OrgTartarusSnowballExtFinnishStemmer *self) {
+  if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"i"])) {
+    return false;
+  }
+  if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V2 withInt:97 withInt:246])) {
     return false;
   }
   return true;
@@ -955,19 +1008,6 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_tidy(OrgTartarusSnowballExtFinni
   }
   [self slice_del];
   return true;
-}
-
-void OrgTartarusSnowballExtFinnishStemmer_init(OrgTartarusSnowballExtFinnishStemmer *self) {
-  OrgTartarusSnowballSnowballProgram_init(self);
-  JreStrongAssignAndConsume(&self->S_x_, new_JavaLangStringBuilder_init());
-}
-
-OrgTartarusSnowballExtFinnishStemmer *new_OrgTartarusSnowballExtFinnishStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgTartarusSnowballExtFinnishStemmer, init)
-}
-
-OrgTartarusSnowballExtFinnishStemmer *create_OrgTartarusSnowballExtFinnishStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgTartarusSnowballExtFinnishStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgTartarusSnowballExtFinnishStemmer)

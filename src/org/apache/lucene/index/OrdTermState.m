@@ -8,6 +8,10 @@
 #include "org/apache/lucene/index/OrdTermState.h"
 #include "org/apache/lucene/index/TermState.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/OrdTermState must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexOrdTermState
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -18,7 +22,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other {
-  JreAssert(([other isKindOfClass:[OrgApacheLuceneIndexOrdTermState class]]), (JreStrcat("$$", @"can not copy from ", [[((OrgApacheLuceneIndexTermState *) nil_chk(other)) getClass] getName])));
+  JreAssert([other isKindOfClass:[OrgApacheLuceneIndexOrdTermState class]], JreStrcat("$$", @"can not copy from ", [[((OrgApacheLuceneIndexTermState *) nil_chk(other)) java_getClass] getName]));
   self->ord_ = ((OrgApacheLuceneIndexOrdTermState *) cast_chk(other, [OrgApacheLuceneIndexOrdTermState class]))->ord_;
 }
 
@@ -27,15 +31,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "OrdTermState", NULL, 0x1, NULL, NULL },
-    { "copyFromWithOrgApacheLuceneIndexTermState:", "copyFrom", "V", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(copyFromWithOrgApacheLuceneIndexTermState:);
+  methods[2].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ord_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "ord_", "J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexOrdTermState = { 2, "OrdTermState", "org.apache.lucene.index", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "copyFrom", "LOrgApacheLuceneIndexTermState;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexOrdTermState = { "OrdTermState", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexOrdTermState;
 }
 

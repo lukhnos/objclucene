@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
@@ -35,12 +34,17 @@
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/custom/CustomAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisCustomCustomAnalyzer () {
  @public
   IOSObjectArray *charFilters_;
   OrgApacheLuceneAnalysisUtilTokenizerFactory *tokenizer_;
   IOSObjectArray *tokenFilters_;
-  JavaLangInteger *posIncGap_, *offsetGap_;
+  JavaLangInteger *posIncGap_;
+  JavaLangInteger *offsetGap_;
 }
 
 @end
@@ -125,7 +129,7 @@ withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray:(IOSObjectArray *)tokenFi
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
   OrgApacheLuceneAnalysisTokenizer *tk = [((OrgApacheLuceneAnalysisUtilTokenizerFactory *) nil_chk(tokenizer_)) create];
-  OrgApacheLuceneAnalysisTokenStream *ts = tk;
+  OrgApacheLuceneAnalysisTokenStream *ts = JreRetainedLocalValue(tk);
   {
     IOSObjectArray *a__ = tokenFilters_;
     OrgApacheLuceneAnalysisUtilTokenFilterFactory * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -159,7 +163,7 @@ withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray:(IOSObjectArray *)tokenFi
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [create_JavaLangStringBuilder_initWithNSString_([[self getClass] getSimpleName]) appendWithChar:'('];
+  JavaLangStringBuilder *sb = [create_JavaLangStringBuilder_initWithNSString_([[self java_getClass] getSimpleName]) appendWithChar:'('];
   {
     IOSObjectArray *a__ = charFilters_;
     OrgApacheLuceneAnalysisUtilCharFilterFactory * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -192,29 +196,45 @@ withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray:(IOSObjectArray *)tokenFi
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "builder", NULL, "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x9, NULL, NULL },
-    { "builderWithOrgLukhnosPortmobileFilePath:", "builder", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x9, NULL, NULL },
-    { "builderWithOrgApacheLuceneAnalysisUtilResourceLoader:", "builder", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x9, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilVersion:withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray:withOrgApacheLuceneAnalysisUtilTokenizerFactory:withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray:withJavaLangInteger:withJavaLangInteger:", "CustomAnalyzer", NULL, 0x0, NULL, NULL },
-    { "initReaderWithNSString:withJavaIoReader:", "initReader", "Ljava.io.Reader;", 0x4, NULL, NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-    { "getPositionIncrementGapWithNSString:", "getPositionIncrementGap", "I", 0x1, NULL, NULL },
-    { "getOffsetGapWithNSString:", "getOffsetGap", "I", 0x1, NULL, NULL },
-    { "getCharFilterFactories", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/analysis/util/CharFilterFactory;>;" },
-    { "getTokenizerFactory", NULL, "Lorg.apache.lucene.analysis.util.TokenizerFactory;", 0x1, NULL, NULL },
-    { "getTokenFilterFactories", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/analysis/util/TokenFilterFactory;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x9, 0, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 3, -1, -1, -1, -1 },
+    { NULL, "LJavaIoReader;", 0x4, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 8, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, 7, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilTokenizerFactory;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 11, -1, -1 },
+    { NULL, "LNSString;", 0x1, 12, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(builder);
+  methods[1].selector = @selector(builderWithOrgLukhnosPortmobileFilePath:);
+  methods[2].selector = @selector(builderWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneUtilVersion:withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray:withOrgApacheLuceneAnalysisUtilTokenizerFactory:withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray:withJavaLangInteger:withJavaLangInteger:);
+  methods[4].selector = @selector(initReaderWithNSString:withJavaIoReader:);
+  methods[5].selector = @selector(createComponentsWithNSString:);
+  methods[6].selector = @selector(getPositionIncrementGapWithNSString:);
+  methods[7].selector = @selector(getOffsetGapWithNSString:);
+  methods[8].selector = @selector(getCharFilterFactories);
+  methods[9].selector = @selector(getTokenizerFactory);
+  methods[10].selector = @selector(getTokenFilterFactories);
+  methods[11].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "charFilters_", NULL, 0x12, "[Lorg.apache.lucene.analysis.util.CharFilterFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenizer_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.TokenizerFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenFilters_", NULL, 0x12, "[Lorg.apache.lucene.analysis.util.TokenFilterFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncGap_", NULL, 0x12, "Ljava.lang.Integer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetGap_", NULL, 0x12, "Ljava.lang.Integer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "charFilters_", "[LOrgApacheLuceneAnalysisUtilCharFilterFactory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "tokenizer_", "LOrgApacheLuceneAnalysisUtilTokenizerFactory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "tokenFilters_", "[LOrgApacheLuceneAnalysisUtilTokenFilterFactory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncGap_", "LJavaLangInteger;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetGap_", "LJavaLangInteger;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCustomCustomAnalyzer = { 2, "CustomAnalyzer", "org.apache.lucene.analysis.custom", NULL, 0x11, 12, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "builder", "LOrgLukhnosPortmobileFilePath;", "LOrgApacheLuceneAnalysisUtilResourceLoader;", "LOrgApacheLuceneUtilVersion;[LOrgApacheLuceneAnalysisUtilCharFilterFactory;LOrgApacheLuceneAnalysisUtilTokenizerFactory;[LOrgApacheLuceneAnalysisUtilTokenFilterFactory;LJavaLangInteger;LJavaLangInteger;", "initReader", "LNSString;LJavaIoReader;", "createComponents", "LNSString;", "getPositionIncrementGap", "getOffsetGap", "()Ljava/util/List<Lorg/apache/lucene/analysis/util/CharFilterFactory;>;", "()Ljava/util/List<Lorg/apache/lucene/analysis/util/TokenFilterFactory;>;", "toString", "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCustomCustomAnalyzer = { "CustomAnalyzer", "org.apache.lucene.analysis.custom", ptrTable, methods, fields, 7, 0x11, 12, 5, -1, 13, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCustomCustomAnalyzer;
 }
 
@@ -359,33 +379,52 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisUtilResourceLoader:", "Builder", NULL, 0x0, NULL, NULL },
-    { "withDefaultMatchVersionWithOrgApacheLuceneUtilVersion:", "withDefaultMatchVersion", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, NULL, NULL },
-    { "withPositionIncrementGapWithInt:", "withPositionIncrementGap", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, NULL, NULL },
-    { "withOffsetGapWithInt:", "withOffsetGap", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, NULL, NULL },
-    { "withTokenizerWithNSString:withNSStringArray:", "withTokenizer", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x81, "Ljava.io.IOException;", NULL },
-    { "withTokenizerWithNSString:withJavaUtilMap:", "withTokenizer", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Lorg/apache/lucene/analysis/custom/CustomAnalyzer$Builder;" },
-    { "addTokenFilterWithNSString:withNSStringArray:", "addTokenFilter", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x81, "Ljava.io.IOException;", NULL },
-    { "addTokenFilterWithNSString:withJavaUtilMap:", "addTokenFilter", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Lorg/apache/lucene/analysis/custom/CustomAnalyzer$Builder;" },
-    { "addCharFilterWithNSString:withNSStringArray:", "addCharFilter", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x81, "Ljava.io.IOException;", NULL },
-    { "addCharFilterWithNSString:withJavaUtilMap:", "addCharFilter", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Lorg/apache/lucene/analysis/custom/CustomAnalyzer$Builder;" },
-    { "build", NULL, "Lorg.apache.lucene.analysis.custom.CustomAnalyzer;", 0x1, NULL, NULL },
-    { "applyDefaultParamsWithJavaUtilMap:", "applyDefaultParams", "Ljava.util.Map;", 0x2, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "paramsToMapWithNSStringArray:", "paramsToMap", "Ljava.util.Map;", 0x82, NULL, "([Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "applyResourceLoaderWithId:", "applyResourceLoader", "TT;", 0x2, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(TT;)TT;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x1, 5, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x81, 6, 7, 8, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x1, 6, 9, 8, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x81, 11, 7, 8, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x1, 11, 9, 8, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x81, 12, 7, 8, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;", 0x1, 12, 9, 8, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCustomCustomAnalyzer;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x2, 13, 14, -1, 15, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x82, 16, 17, -1, 18, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 19, 20, 8, 21, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisUtilResourceLoader:);
+  methods[1].selector = @selector(withDefaultMatchVersionWithOrgApacheLuceneUtilVersion:);
+  methods[2].selector = @selector(withPositionIncrementGapWithInt:);
+  methods[3].selector = @selector(withOffsetGapWithInt:);
+  methods[4].selector = @selector(withTokenizerWithNSString:withNSStringArray:);
+  methods[5].selector = @selector(withTokenizerWithNSString:withJavaUtilMap:);
+  methods[6].selector = @selector(addTokenFilterWithNSString:withNSStringArray:);
+  methods[7].selector = @selector(addTokenFilterWithNSString:withJavaUtilMap:);
+  methods[8].selector = @selector(addCharFilterWithNSString:withNSStringArray:);
+  methods[9].selector = @selector(addCharFilterWithNSString:withJavaUtilMap:);
+  methods[10].selector = @selector(build);
+  methods[11].selector = @selector(applyDefaultParamsWithJavaUtilMap:);
+  methods[12].selector = @selector(paramsToMapWithNSStringArray:);
+  methods[13].selector = @selector(applyResourceLoaderWithId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "loader_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.ResourceLoader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "defaultMatchVersion_", NULL, 0x12, "Lorg.apache.lucene.util.SetOnce;", NULL, "Lorg/apache/lucene/util/SetOnce<Lorg/apache/lucene/util/Version;>;", .constantValue.asLong = 0 },
-    { "charFilters_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/analysis/util/CharFilterFactory;>;", .constantValue.asLong = 0 },
-    { "tokenizer_", NULL, 0x12, "Lorg.apache.lucene.util.SetOnce;", NULL, "Lorg/apache/lucene/util/SetOnce<Lorg/apache/lucene/analysis/util/TokenizerFactory;>;", .constantValue.asLong = 0 },
-    { "tokenFilters_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/analysis/util/TokenFilterFactory;>;", .constantValue.asLong = 0 },
-    { "posIncGap_", NULL, 0x12, "Lorg.apache.lucene.util.SetOnce;", NULL, "Lorg/apache/lucene/util/SetOnce<Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
-    { "offsetGap_", NULL, 0x12, "Lorg.apache.lucene.util.SetOnce;", NULL, "Lorg/apache/lucene/util/SetOnce<Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
-    { "componentsAdded_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "loader_", "LOrgApacheLuceneAnalysisUtilResourceLoader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "defaultMatchVersion_", "LOrgApacheLuceneUtilSetOnce;", .constantValue.asLong = 0, 0x12, -1, -1, 22, -1 },
+    { "charFilters_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 23, -1 },
+    { "tokenizer_", "LOrgApacheLuceneUtilSetOnce;", .constantValue.asLong = 0, 0x12, -1, -1, 24, -1 },
+    { "tokenFilters_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 25, -1 },
+    { "posIncGap_", "LOrgApacheLuceneUtilSetOnce;", .constantValue.asLong = 0, 0x12, -1, -1, 26, -1 },
+    { "offsetGap_", "LOrgApacheLuceneUtilSetOnce;", .constantValue.asLong = 0, 0x12, -1, -1, 26, -1 },
+    { "componentsAdded_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder = { 2, "Builder", "org.apache.lucene.analysis.custom", "CustomAnalyzer", 0x19, 14, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisUtilResourceLoader;", "withDefaultMatchVersion", "LOrgApacheLuceneUtilVersion;", "withPositionIncrementGap", "I", "withOffsetGap", "withTokenizer", "LNSString;[LNSString;", "LJavaIoIOException;", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Lorg/apache/lucene/analysis/custom/CustomAnalyzer$Builder;", "addTokenFilter", "addCharFilter", "applyDefaultParams", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "paramsToMap", "[LNSString;", "([Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "applyResourceLoader", "LNSObject;", "<T:Ljava/lang/Object;>(TT;)TT;", "Lorg/apache/lucene/util/SetOnce<Lorg/apache/lucene/util/Version;>;", "Ljava/util/List<Lorg/apache/lucene/analysis/util/CharFilterFactory;>;", "Lorg/apache/lucene/util/SetOnce<Lorg/apache/lucene/analysis/util/TokenizerFactory;>;", "Ljava/util/List<Lorg/apache/lucene/analysis/util/TokenFilterFactory;>;", "Lorg/apache/lucene/util/SetOnce<Ljava/lang/Integer;>;", "LOrgApacheLuceneAnalysisCustomCustomAnalyzer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder = { "Builder", "org.apache.lucene.analysis.custom", ptrTable, methods, fields, 7, 0x19, 14, 8, 27, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;
 }
 
@@ -419,7 +458,7 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_applyDefault
 }
 
 id<JavaUtilMap> OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_paramsToMapWithNSStringArray_(OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *self, IOSObjectArray *params) {
-  if (((IOSObjectArray *) nil_chk(params))->size_ % 2 != 0) {
+  if (JreIntMod(((IOSObjectArray *) nil_chk(params))->size_, 2) != 0) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Key-value pairs expected, so the number of params must be even.");
   }
   id<JavaUtilMap> map = create_JavaUtilHashMap_init();

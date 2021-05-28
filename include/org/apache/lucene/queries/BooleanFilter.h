@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesBooleanFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesBooleanFilter_) && (INCLUDE_ALL_OrgApacheLuceneQueriesBooleanFilter || defined(INCLUDE_OrgApacheLuceneQueriesBooleanFilter))
 #define OrgApacheLuceneQueriesBooleanFilter_
 
@@ -24,29 +30,31 @@
 #define INCLUDE_JavaLangIterable 1
 #include "java/lang/Iterable.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneQueriesFilterClause;
 @class OrgApacheLuceneSearchBooleanClause_Occur;
 @class OrgApacheLuceneSearchDocIdSet;
+@class OrgApacheLuceneSearchQuery;
+@protocol JavaUtilFunctionConsumer;
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
+@protocol JavaUtilSpliterator;
 @protocol OrgApacheLuceneUtilBits;
 
 /*!
  @brief A container Filter that allows Boolean composition of Filters.
  Filters are allocated into one of three logical constructs;
- SHOULD, MUST NOT, MUST
- The results Filter BitSet is constructed as follows:
- SHOULD Filters are OR'd together
- The resulting Filter is NOT'd with the NOT Filters
- The resulting Filter is AND'd with the MUST Filters
+  SHOULD, MUST NOT, MUST
+  The results Filter BitSet is constructed as follows:
+  SHOULD Filters are OR'd together
+  The resulting Filter is NOT'd with the NOT Filters
+  The resulting Filter is AND'd with the MUST Filters
  */
 @interface OrgApacheLuceneQueriesBooleanFilter : OrgApacheLuceneSearchFilter < JavaLangIterable >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)addWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
 withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur;
@@ -66,7 +74,7 @@ withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause
 
 /*!
  @brief Returns the a DocIdSetIterator representing the Boolean composition
- of the filters that have been added.
+  of the filters that have been added.
  */
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
@@ -74,13 +82,14 @@ withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause
 - (NSUInteger)hash;
 
 /*!
- @brief Returns an iterator on the clauses in this query.
- It implements the <code>Iterable</code> interface to
- make it possible to do:
- 
+ @brief Returns an iterator on the clauses in this query.It implements the <code>Iterable</code> interface to
+  make it possible to do: 
+ <pre class="prettyprint">for (FilterClause clause : booleanFilter) {}
 @endcode
  */
 - (id<JavaUtilIterator>)iterator;
+
+- (OrgApacheLuceneSearchQuery *)java_clone;
 
 /*!
  @brief Prints a user-readable version of this Filter.
@@ -95,12 +104,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesBooleanFilter)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueriesBooleanFilter_init(OrgApacheLuceneQueriesBooleanFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesBooleanFilter *new_OrgApacheLuceneQueriesBooleanFilter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesBooleanFilter *new_OrgApacheLuceneQueriesBooleanFilter_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesBooleanFilter *create_OrgApacheLuceneQueriesBooleanFilter_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueriesBooleanFilter *create_OrgApacheLuceneQueriesBooleanFilter_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesBooleanFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesBooleanFilter")

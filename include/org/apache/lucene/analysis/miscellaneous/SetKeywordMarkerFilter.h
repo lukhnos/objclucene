@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter_
 
@@ -24,9 +30,8 @@
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
 /*!
- @brief Marks terms as keywords via the <code>KeywordAttribute</code>.
- Each token
- contained in the provided set is marked as a keyword by setting
+ @brief Marks terms as keywords via the <code>KeywordAttribute</code>.Each token
+  contained in the provided set is marked as a keyword by setting 
  <code>KeywordAttribute.setKeyword(boolean)</code> to <code>true</code>.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter : OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter
@@ -35,19 +40,21 @@
 
 /*!
  @brief Create a new KeywordSetMarkerFilter, that marks the current token as a
- keyword if the tokens term buffer is contained in the given set via the
+  keyword if the tokens term buffer is contained in the given set via the 
  <code>KeywordAttribute</code>.
- @param inArg
- TokenStream to filter
- @param keywordSet
- the keywords set to lookup the current termbuffer
+ @param inArg TokenStream to filter
+ @param keywordSet the keywords set to lookup the current termbuffer
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)keywordSet;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)keywordSet;
 
 #pragma mark Protected
 
 - (jboolean)isKeyword;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -63,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerF
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter")

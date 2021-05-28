@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery))
 #define OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_
 
@@ -37,13 +43,13 @@
 #pragma mark Public
 
 /*!
- @param match The underlying <code>org.apache.lucene.search.spans.SpanQuery</code> to check
- @param payloadToMatch The <code>java.util.Collection</code> of payloads to match
+ @param match The underlying <code>org.apache.lucene.search.spans.SpanQuery</code>  to check
+ @param payloadToMatch The <code>java.util.Collection</code>  of payloads to match
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)match
-                                     withJavaUtilCollection:(id<JavaUtilCollection>)payloadToMatch;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)match
+                                               withJavaUtilCollection:(id<JavaUtilCollection>)payloadToMatch;
 
-- (OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *)clone;
+- (OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *)java_clone;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -64,6 +70,10 @@
  @return whether or not the payloads match
  */
 - (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)checkPayloadsWithJavaUtilCollection:(id<JavaUtilCollection>)candidate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -93,6 +103,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery)
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery;
 @class OrgApacheLuceneSearchScorer;
+@class OrgApacheLuceneSearchSpansSpanQuery;
 @class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @class OrgApacheLuceneSearchSpansSpans;
 @protocol JavaUtilMap;
@@ -108,10 +119,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery:(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *)outer$
-                                    withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                           withJavaUtilMap:(id<JavaUtilMap>)termContexts
-                                  withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)matchWeight;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery:(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *)outer$
+                                              withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                                     withJavaUtilMap:(id<JavaUtilMap>)termContexts
+                                            withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)matchWeight;
 
 - (void)extractTermContextsWithJavaUtilMap:(id<JavaUtilMap>)contexts;
 
@@ -121,6 +132,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery)
                                      withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)arg0
+                               withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)arg1
+                                                      withJavaUtilMap:(id<JavaUtilMap>)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -138,4 +155,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_Sp
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery")

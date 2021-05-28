@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_
 
@@ -24,11 +30,11 @@
 
 /*!
  @brief A query node implements <code>FieldableNode</code> interface to indicate that its
- children and itself are associated to a specific field.
+  children and itself are associated to a specific field.
  If it has any children which also implements this interface, it must ensure
- the children are associated to the same field.
+  the children are associated to the same field.
  */
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, JavaObject >
 
 /*!
  @brief Returns the field associated to the node and every node under it.
@@ -38,8 +44,7 @@
 
 /*!
  @brief Associates the node to a field.
- @param fieldName
- the field name
+ @param fieldName the field name
  */
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
 
@@ -51,4 +56,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableN
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode")

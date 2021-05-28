@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCharFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCharFilter))
 #define OrgApacheLuceneAnalysisCharFilter_
 
@@ -22,20 +28,20 @@
 
 /*!
  @brief Subclasses of CharFilter can be chained to filter a Reader
- They can be used as <code>java.io.Reader</code> with additional offset
- correction.
+  They can be used as <code>java.io.Reader</code> with additional offset
+  correction.
  <code>Tokenizer</code>s will automatically use <code>correctOffset</code>
- if a CharFilter subclass is used.
+  if a CharFilter subclass is used. 
  <p>
- This class is abstract: at a minimum you must implement <code>read(char[],int,int)</code>,
- transforming the input in some way from <code>input</code>, and <code>correct(int)</code>
- to adjust the offsets to match the originals.
+  This class is abstract: at a minimum you must implement <code>read(char[], int, int)</code>,
+  transforming the input in some way from <code>input</code>, and <code>correct(int)</code>
+  to adjust the offsets to match the originals. 
  <p>
- You can optionally provide more efficient implementations of additional methods 
- like <code>read()</code>, <code>read(char[])</code>, <code>read(java.nio.CharBuffer)</code>,
- but this is not required.
+  You can optionally provide more efficient implementations of additional methods 
+  like <code>read()</code>, <code>read(char[])</code>, <code>read(java.nio.CharBuffer)</code>,
+  but this is not required. 
  <p>
- For examples and integration with <code>Analyzer</code>, see the 
+  For examples and integration with <code>Analyzer</code>, see the  
  <code>Analysis package documentation</code>.
  */
 @interface OrgApacheLuceneAnalysisCharFilter : JavaIoReader {
@@ -52,20 +58,20 @@
  @brief Create a new CharFilter wrapping the provided reader.
  @param input a Reader, can also be a CharFilter for chaining.
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)input;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)input;
 
 /*!
  @brief Closes the underlying input stream.
  <p>
- <b>NOTE:</b> 
- The default implementation closes the input Reader, so
- be sure to call <code>super.close()</code> when overriding this method.
+  <b>NOTE:</b> 
+  The default implementation closes the input Reader, so
+  be sure to call <code>super.close()</code> when overriding this method.
  */
 - (void)close;
 
 /*!
  @brief Chains the corrected offset through the input
- CharFilter(s).
+  CharFilter(s).
  */
 - (jint)correctOffsetWithInt:(jint)currentOff;
 
@@ -77,6 +83,12 @@
  @return corrected offset
  */
 - (jint)correctWithInt:(jint)currentOff;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithId:(id)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -90,4 +102,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharFilter")

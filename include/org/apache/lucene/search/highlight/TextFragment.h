@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightTextFragment
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightTextFragment_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightTextFragment || defined(INCLUDE_OrgApacheLuceneSearchHighlightTextFragment))
 #define OrgApacheLuceneSearchHighlightTextFragment_
 
@@ -20,7 +26,7 @@
 
 /*!
  @brief Low-level class used to record information about a section of a document 
- with a score.
+  with a score.
  */
 @interface OrgApacheLuceneSearchHighlightTextFragment : NSObject {
  @public
@@ -33,9 +39,9 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)markedUpText
-                                     withInt:(jint)textStartPos
-                                     withInt:(jint)fragNum;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)markedUpText
+                                               withInt:(jint)textStartPos
+                                               withInt:(jint)fragNum;
 
 /*!
  @return true if this fragment follows the one passed
@@ -60,6 +66,10 @@
 
 - (void)setScoreWithFloat:(jfloat)score;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightTextFragment)
@@ -76,4 +86,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTextFragment)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightTextFragment")

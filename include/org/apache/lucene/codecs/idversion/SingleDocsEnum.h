@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsIdversionSingleDocsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsIdversionSingleDocsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionSingleDocsEnum || defined(INCLUDE_OrgApacheLuceneCodecsIdversionSingleDocsEnum))
 #define OrgApacheLuceneCodecsIdversionSingleDocsEnum_
 
@@ -51,20 +57,28 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsIdversionSingleDocsEnum)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionSingleDocsEnum_init(OrgApacheLuceneCodecsIdversionSingleDocsEnum *self);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionSingleDocsEnum_initPackagePrivate(OrgApacheLuceneCodecsIdversionSingleDocsEnum *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionSingleDocsEnum *new_OrgApacheLuceneCodecsIdversionSingleDocsEnum_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionSingleDocsEnum *new_OrgApacheLuceneCodecsIdversionSingleDocsEnum_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionSingleDocsEnum *create_OrgApacheLuceneCodecsIdversionSingleDocsEnum_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionSingleDocsEnum *create_OrgApacheLuceneCodecsIdversionSingleDocsEnum_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionSingleDocsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionSingleDocsEnum")

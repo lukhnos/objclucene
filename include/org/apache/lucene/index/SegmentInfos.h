@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSegmentInfos
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSegmentInfos_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentInfos || defined(INCLUDE_OrgApacheLuceneIndexSegmentInfos))
 #define OrgApacheLuceneIndexSegmentInfos_
 
@@ -28,78 +34,80 @@
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneUtilVersion;
 @protocol JavaUtilCollection;
+@protocol JavaUtilFunctionConsumer;
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
+@protocol JavaUtilSpliterator;
 
 /*!
  @brief A collection of segmentInfo objects with methods for operating on those
- segments in relation to the file system.
+  segments in relation to the file system.
  <p>
- The active segments in the index are stored in the segment info file,
+  The active segments in the index are stored in the segment info file, 
  <tt>segments_N</tt>. There may be one or more <tt>segments_N</tt> files in
- the index; however, the one with the largest generation is the active one
- (when older segments_N files are present it's because they temporarily cannot
- be deleted, or a custom <code>IndexDeletionPolicy</code> is in
- use). This file lists each segment by name and has details about the codec
- and generation of deletes.
+  the index; however, the one with the largest generation is the active one
+  (when older segments_N files are present it's because they temporarily cannot
+  be deleted, or a custom <code>IndexDeletionPolicy</code> is in
+  use). This file lists each segment by name and has details about the codec
+  and generation of deletes. 
  </p>
- <p>
- Files:
+  <p>
+  Files: 
  <ul>
- <li><tt>segments_N</tt>: Header, LuceneVersion, Version, NameCounter, SegCount, MinSegmentLuceneVersion, &lt;SegName,
- HasSegID, SegID, SegCodec, DelGen, DeletionCount, FieldInfosGen, DocValuesGen,
- UpdatesFiles&gt;<sup>SegCount</sup>, CommitUserData, Footer
+  <li><tt>segments_N</tt>: Header, LuceneVersion, Version, NameCounter, SegCount, MinSegmentLuceneVersion, &lt;SegName,
+  HasSegID, SegID, SegCodec, DelGen, DeletionCount, FieldInfosGen, DocValuesGen,
+  UpdatesFiles&gt;<sup>SegCount</sup>, CommitUserData, Footer 
  </ul>
- Data types:
+  Data types: 
  <ul>
- <li>Header --&gt; <code>IndexHeader</code></li>
- <li>LuceneVersion --&gt; Which Lucene code <code>Version</code> was used for this commit, written as three <code>vInt</code>: major, minor, bugfix
+  <li>Header --&gt; <code>IndexHeader</code></li>
+  <li>LuceneVersion --&gt; Which Lucene code <code>Version</code> was used for this commit, written as three <code>vInt</code>: major, minor, bugfix 
  <li>MinSegmentLuceneVersion --&gt; Lucene code <code>Version</code> of the oldest segment, written as three <code>vInt</code>: major, minor, bugfix; this is only
- written only if there's at least one segment
+    written only if there's at least one segment 
  <li>NameCounter, SegCount, DeletionCount --&gt;
- <code>Int32</code></li>
- <li>Generation, Version, DelGen, Checksum, FieldInfosGen, DocValuesGen --&gt;
- <code>Int64</code></li>
- <li>HasSegID --&gt; <code>Int8</code></li>
- <li>SegID --&gt; <code>Int8<sup>ID_LENGTH</sup></code></li>
- <li>SegName, SegCodec --&gt; <code>String</code></li>
- <li>CommitUserData --&gt; <code>Map&lt;String,String&gt;</code>
+  <code>Int32</code></li>
+  <li>Generation, Version, DelGen, Checksum, FieldInfosGen, DocValuesGen --&gt;
+  <code>Int64</code></li>
+  <li>HasSegID --&gt; <code>Int8</code></li>
+  <li>SegID --&gt; <code>Int8<sup>ID_LENGTH</sup></code></li>
+  <li>SegName, SegCodec --&gt; <code>String</code></li>
+  <li>CommitUserData --&gt; <code>Map&lt;String,String&gt;</code>
  </li>
- <li>UpdatesFiles --&gt; Map&lt;<code>Int32</code>,
- <code>Set&lt;String&gt;</code>&gt;</li>
- <li>Footer --&gt; <code>CodecFooter</code></li>
- </ul>
- Field Descriptions:
+  <li>UpdatesFiles --&gt; Map&lt;<code>Int32</code>,
+  <code>Set&lt;String&gt;</code>&gt;</li>
+  <li>Footer --&gt; <code>CodecFooter</code></li>
+  </ul>
+  Field Descriptions: 
  <ul>
- <li>Version counts how often the index has been changed by adding or deleting
- documents.</li>
- <li>NameCounter is used to generate names for new segment files.</li>
- <li>SegName is the name of the segment, and is used as the file name prefix
- for all of the files that compose the segment's index.</li>
- <li>DelGen is the generation count of the deletes file. If this is -1, there
- are no deletes. Anything above zero means there are deletes stored by
+  <li>Version counts how often the index has been changed by adding or deleting
+  documents.</li>
+  <li>NameCounter is used to generate names for new segment files.</li>
+  <li>SegName is the name of the segment, and is used as the file name prefix
+  for all of the files that compose the segment's index.</li>
+  <li>DelGen is the generation count of the deletes file. If this is -1, there
+  are no deletes. Anything above zero means there are deletes stored by 
  <code>LiveDocsFormat</code>.</li>
- <li>DeletionCount records the number of deleted documents in this segment.</li>
- <li>SegCodec is the <code>name</code> of the Codec that encoded
- this segment.</li>
- <li>HasSegID is nonzero if the segment has an identifier. Otherwise, when it is 0
- the identifier is <code>null</code> and no SegID is written. Null only happens for Lucene
- 4.x segments referenced in commits.</li>
- <li>SegID is the identifier of the Codec that encoded this segment. </li>
- <li>CommitUserData stores an optional user-supplied opaque
- Map&lt;String,String&gt; that was passed to
+  <li>DeletionCount records the number of deleted documents in this segment.</li>
+  <li>SegCodec is the <code>name</code> of the Codec that encoded
+  this segment.</li>
+  <li>HasSegID is nonzero if the segment has an identifier. Otherwise, when it is 0
+  the identifier is <code>null</code> and no SegID is written. Null only happens for Lucene
+  4.x segments referenced in commits.</li>
+  <li>SegID is the identifier of the Codec that encoded this segment. </li>
+  <li>CommitUserData stores an optional user-supplied opaque
+  Map&lt;String,String&gt; that was passed to 
  <code>IndexWriter.setCommitData(java.util.Map)</code>.</li>
- <li>FieldInfosGen is the generation count of the fieldInfos file. If this is
- -1, there are no updates to the fieldInfos in that segment. Anything above
- zero means there are updates to fieldInfos stored by <code>FieldInfosFormat</code>
- .</li>
- <li>DocValuesGen is the generation count of the updatable DocValues. If this
- is -1, there are no updates to DocValues in that segment. Anything above zero
- means there are updates to DocValues stored by <code>DocValuesFormat</code>.</li>
- <li>UpdatesFiles stores the set of files that were updated in that segment
- per field.</li>
- </ul>
+  <li>FieldInfosGen is the generation count of the fieldInfos file. If this is
+  -1, there are no updates to the fieldInfos in that segment. Anything above
+  zero means there are updates to fieldInfos stored by <code>FieldInfosFormat</code>
+  .</li>
+  <li>DocValuesGen is the generation count of the updatable DocValues. If this
+  is -1, there are no updates to DocValues in that segment. Anything above zero
+  means there are updates to DocValues stored by <code>DocValuesFormat</code>.</li>
+  <li>UpdatesFiles stores the set of files that were updated in that segment
+  per field.</li>
+  </ul>
  */
 @interface OrgApacheLuceneIndexSegmentInfos : NSObject < NSCopying, JavaLangIterable > {
  @public
@@ -117,35 +125,27 @@
   id<JavaUtilMap> userData_;
   jboolean pendingCommit_;
 }
-
-+ (jint)VERSION_40;
-
-+ (jint)VERSION_46;
-
-+ (jint)VERSION_48;
-
-+ (jint)VERSION_49;
-
-+ (jint)VERSION_50;
-
-+ (jint)VERSION_51;
-
-+ (jint)VERSION_53;
-
-+ (jint)VERSION_CURRENT;
+@property (readonly, class) jint VERSION_40 NS_SWIFT_NAME(VERSION_40);
+@property (readonly, class) jint VERSION_46 NS_SWIFT_NAME(VERSION_46);
+@property (readonly, class) jint VERSION_48 NS_SWIFT_NAME(VERSION_48);
+@property (readonly, class) jint VERSION_49 NS_SWIFT_NAME(VERSION_49);
+@property (readonly, class) jint VERSION_50 NS_SWIFT_NAME(VERSION_50);
+@property (readonly, class) jint VERSION_51 NS_SWIFT_NAME(VERSION_51);
+@property (readonly, class) jint VERSION_53 NS_SWIFT_NAME(VERSION_53);
+@property (readonly, class) jint VERSION_CURRENT NS_SWIFT_NAME(VERSION_CURRENT);
 
 #pragma mark Public
 
 /*!
- @brief Sole constructor.
- Typically you call this and then
- use <code>or
- #readCommit(Directory,String)</code>
+ @brief Sole constructor.Typically you call this and then
+   use <code>or
+   .readCommit(Directory,String)</code>
   to populate each <code>SegmentCommitInfo</code>
- .  Alternatively, you can add/remove your
- own <code>SegmentCommitInfo</code>s. 
+ .
+ Alternatively, you can add/remove your
+   own <code>SegmentCommitInfo</code>s.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Appends the provided <code>SegmentCommitInfo</code>.
@@ -164,7 +164,7 @@
 
 /*!
  @brief Call this before committing if changes have been made to the
- segments.
+   segments.
  */
 - (void)changed;
 
@@ -175,14 +175,14 @@
 
 /*!
  @brief Returns a copy of this instance, also copying each
- SegmentInfo.
+  SegmentInfo.
  */
-- (OrgApacheLuceneIndexSegmentInfos *)clone;
+- (OrgApacheLuceneIndexSegmentInfos *)java_clone;
 
 /*!
  @brief Returns all file names referenced by SegmentInfo.
  The returned collection is recomputed on each
- invocation.  
+   invocation.
  */
 - (id<JavaUtilCollection>)filesWithBoolean:(jboolean)includeSegmentsFile;
 
@@ -194,13 +194,13 @@
 
 /*!
  @brief Parse the generation off the segments file name and
- return it.
+  return it.
  */
 + (jlong)generationFromSegmentsFileNameWithNSString:(NSString *)fileName;
 
 /*!
  @brief Returns which Lucene <code>Version</code> wrote this commit, or null if the
- version this index was written with did not directly record the version.
+   version this index was written with did not directly record the version.
  */
 - (OrgApacheLuceneUtilVersion *)getCommitLuceneVersion;
 
@@ -210,9 +210,8 @@
 - (jlong)getGeneration;
 
 /*!
- @brief Since Lucene 5.0, every commit (segments_N) writes a unique id.
- This will
- return that id, or null if this commit was prior to 5.0. 
+ @brief Since Lucene 5.0, every commit (segments_N) writes a unique id.This will
+   return that id, or null if this commit was prior to 5.0.
  */
 - (IOSByteArray *)getId;
 
@@ -224,28 +223,28 @@
 
 /*!
  @brief Get the generation of the most recent commit to the
- index in this directory (N in the segments_N file).
+  index in this directory (N in the segments_N file).
  @param directory -- directory to search for the latest segments_N file
  */
 + (jlong)getLastCommitGenerationWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
 /*!
  @brief Get the generation of the most recent commit to the
- list of index files (N in the segments_N file).
+  list of index files (N in the segments_N file).
  @param files -- array of file names to check
  */
 + (jlong)getLastCommitGenerationWithNSStringArray:(IOSObjectArray *)files;
 
 /*!
  @brief Get the filename of the segments_N file for the most
- recent commit to the index in this Directory.
+  recent commit to the index in this Directory.
  @param directory -- directory to search for the latest segments_N file
  */
 + (NSString *)getLastCommitSegmentsFileNameWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
 /*!
  @brief Get the filename of the segments_N file for the most
- recent commit in the list of index files.
+  recent commit in the list of index files.
  @param files -- array of file names to check
  */
 + (NSString *)getLastCommitSegmentsFileNameWithNSStringArray:(IOSObjectArray *)files;
@@ -278,7 +277,7 @@
 
 /*!
  @brief Returns <code>SegmentCommitInfo</code> at the provided
- index.
+   index.
  */
 - (OrgApacheLuceneIndexSegmentCommitInfo *)infoWithInt:(jint)i;
 
@@ -288,32 +287,31 @@
 - (id<JavaUtilIterator>)iterator;
 
 /*!
- @brief Read a particular segmentFileName.
- Note that this may
- throw an IOException if a commit is in process.
+ @brief Read a particular segmentFileName.Note that this may
+  throw an IOException if a commit is in process.
  @param directory -- directory containing the segments file
  @param segmentFileName -- segment file to load
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  */
 + (OrgApacheLuceneIndexSegmentInfos *)readCommitWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                                      withNSString:(NSString *)segmentFileName;
 
 /*!
  @brief Find the latest commit (<code>segments_N file</code>) and
- load all <code>SegmentCommitInfo</code>s.
+   load all <code>SegmentCommitInfo</code>s.
  */
 + (OrgApacheLuceneIndexSegmentInfos *)readLatestCommitWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
 /*!
  @brief Remove the provided <code>SegmentCommitInfo</code>.
- <p><b>WARNING</b>: O(N) cost 
+ <p><b>WARNING</b>: O(N) cost
  */
 - (void)removeWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si;
 
 /*!
  @brief If non-null, information about retries when loading
- the segments file will be printed to this.
+  the segments file will be printed to this.
  */
 + (void)setInfoStreamWithJavaIoPrintStream:(JavaIoPrintStream *)infoStream;
 
@@ -333,9 +331,8 @@
 - (NSString *)toStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
- @brief Returns sum of all segment's maxDocs.
- Note that
- this does not include deletions 
+ @brief Returns sum of all segment's maxDocs.Note that
+   this does not include deletions
  */
 - (jint)totalMaxDoc;
 
@@ -349,18 +346,18 @@
 
 /*!
  @brief Writes and syncs to the Directory dir, taking care to
- remove the segments file on exception
+   remove the segments file on exception
  <p>
- Note: <code>changed()</code> should be called prior to this
- method if changes have been made to this <code>SegmentInfos</code> instance
- </p>
+   Note: <code>changed()</code> should be called prior to this
+   method if changes have been made to this <code>SegmentInfos</code> instance
+   </p>
  */
 - (void)commitWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
  @brief Return true if the provided <code>SegmentCommitInfo</code>
   is contained.
- <p><b>WARNING</b>: O(N) cost 
+ <p><b>WARNING</b>: O(N) cost
  */
 - (jboolean)containsWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si;
 
@@ -374,35 +371,35 @@
 /*!
  @brief Returns index of the provided <code>SegmentCommitInfo</code>
  .
- <p><b>WARNING</b>: O(N) cost 
+ <p><b>WARNING</b>: O(N) cost
  */
 - (jint)indexOfWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si;
 
 /*!
- @brief Call this to start a commit.
- This writes the new
- segments file, but writes an invalid checksum at the
- end, so that it is not visible to readers.  Once this
- is called you must call <code>finishCommit</code> to complete
- the commit or <code>rollbackCommit</code> to abort it.
- <p>
- Note: <code>changed()</code> should be called prior to this
- method if changes have been made to this <code>SegmentInfos</code> instance
- </p>  
+ @brief Call this to start a commit.This writes the new
+   segments file, but writes an invalid checksum at the
+   end, so that it is not visible to readers.
+ Once this
+   is called you must call <code>finishCommit</code> to complete
+   the commit or <code>rollbackCommit</code> to abort it.
+   <p>
+   Note: <code>changed()</code> should be called prior to this
+   method if changes have been made to this <code>SegmentInfos</code> instance
+   </p>
  */
 - (void)prepareCommitWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
  @brief Remove the <code>SegmentCommitInfo</code> at the
- provided index.
- <p><b>WARNING</b>: O(N) cost 
+  provided index.
+ <p><b>WARNING</b>: O(N) cost
  */
 - (void)removeWithInt:(jint)index;
 
 /*!
  @brief Replaces all segments in this instance, but keeps
- generation, version, counter so that future commits
- remain write once.
+   generation, version, counter so that future commits
+   remain write once.
  */
 - (void)replaceWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)other;
 
@@ -427,61 +424,61 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentInfos, userData_, id<JavaUtilMap>
 /*!
  @brief The file format version for the segments_N codec header, up to 4.5.
  */
-inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_40();
+inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_40(void);
 #define OrgApacheLuceneIndexSegmentInfos_VERSION_40 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexSegmentInfos, VERSION_40, jint)
 
 /*!
  @brief The file format version for the segments_N codec header, since 4.6+.
  */
-inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_46();
+inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_46(void);
 #define OrgApacheLuceneIndexSegmentInfos_VERSION_46 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexSegmentInfos, VERSION_46, jint)
 
 /*!
  @brief The file format version for the segments_N codec header, since 4.8+
  */
-inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_48();
+inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_48(void);
 #define OrgApacheLuceneIndexSegmentInfos_VERSION_48 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexSegmentInfos, VERSION_48, jint)
 
 /*!
  @brief The file format version for the segments_N codec header, since 4.9+
  */
-inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_49();
+inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_49(void);
 #define OrgApacheLuceneIndexSegmentInfos_VERSION_49 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexSegmentInfos, VERSION_49, jint)
 
 /*!
  @brief The file format version for the segments_N codec header, since 5.0+
  */
-inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_50();
+inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_50(void);
 #define OrgApacheLuceneIndexSegmentInfos_VERSION_50 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexSegmentInfos, VERSION_50, jint)
 
 /*!
  @brief The file format version for the segments_N codec header, since 5.1+
  */
-inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_51();
+inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_51(void);
 #define OrgApacheLuceneIndexSegmentInfos_VERSION_51 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexSegmentInfos, VERSION_51, jint)
 
 /*!
  @brief Adds the <code>Version</code> that committed this segments_N file, as well as the <code>Version</code> of the oldest segment, since 5.3+
  */
-inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_53();
+inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_53(void);
 #define OrgApacheLuceneIndexSegmentInfos_VERSION_53 6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexSegmentInfos, VERSION_53, jint)
 
-inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_CURRENT();
+inline jint OrgApacheLuceneIndexSegmentInfos_get_VERSION_CURRENT(void);
 #define OrgApacheLuceneIndexSegmentInfos_VERSION_CURRENT 6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexSegmentInfos, VERSION_CURRENT, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentInfos_init(OrgApacheLuceneIndexSegmentInfos *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentInfos *new_OrgApacheLuceneIndexSegmentInfos_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentInfos *new_OrgApacheLuceneIndexSegmentInfos_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentInfos *create_OrgApacheLuceneIndexSegmentInfos_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentInfos *create_OrgApacheLuceneIndexSegmentInfos_init(void);
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithNSStringArray_(IOSObjectArray *files);
 
@@ -499,7 +496,7 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentI
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentInfos_setInfoStreamWithJavaIoPrintStream_(JavaIoPrintStream *infoStream);
 
-FOUNDATION_EXPORT JavaIoPrintStream *OrgApacheLuceneIndexSegmentInfos_getInfoStream();
+FOUNDATION_EXPORT JavaIoPrintStream *OrgApacheLuceneIndexSegmentInfos_getInfoStream(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentInfos)
 
@@ -513,13 +510,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentInfos)
 
 /*!
  @brief Utility class for executing code that needs to do
- something with the current segments file.
- This is
- necessary with lock-less commits because from the time
- you locate the current segments file name, until you
- actually open it, read its contents, or check modified
- time, etc., it could have been deleted due to a writer
- commit finishing.
+  something with the current segments file.This is
+  necessary with lock-less commits because from the time
+  you locate the current segments file name, until you
+  actually open it, read its contents, or check modified
+  time, etc., it could have been deleted due to a writer
+  commit finishing.
  */
 @interface OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile : NSObject {
  @public
@@ -531,11 +527,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentInfos)
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
 /*!
  @brief Locate the most recent <code>segments</code> file and
- run <code>doBody</code> on it.
+   run <code>doBody</code> on it.
  */
 - (id)run;
 
@@ -547,13 +543,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentInfos)
 #pragma mark Protected
 
 /*!
- @brief Subclass must implement this.
- The assumption is an
- IOException will be thrown if something goes wrong
- during the processing that could have been caused by
- a writer committing.
+ @brief Subclass must implement this.The assumption is an
+  IOException will be thrown if something goes wrong
+  during the processing that could have been caused by
+  a writer committing.
  */
 - (id)doBodyWithNSString:(NSString *)segmentFileName;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -567,4 +566,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentInfos")

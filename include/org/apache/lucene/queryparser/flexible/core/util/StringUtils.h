@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils))
 #define OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_
 
@@ -23,7 +29,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (NSString *)toStringWithId:(id)obj;
 
@@ -31,16 +37,20 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(id obj);
-
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *new_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *new_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *create_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *create_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init(void);
+
+FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(id obj);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilSloppyMath
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilSloppyMath_) && (INCLUDE_ALL_OrgApacheLuceneUtilSloppyMath || defined(INCLUDE_OrgApacheLuceneUtilSloppyMath))
 #define OrgApacheLuceneUtilSloppyMath_
 
@@ -20,23 +26,22 @@
  @brief Math functions that trade off accuracy for speed.
  */
 @interface OrgApacheLuceneUtilSloppyMath : NSObject
-
-+ (jdouble)SIN_COS_MAX_VALUE_FOR_INT_MODULO;
+@property (readonly, class) jdouble SIN_COS_MAX_VALUE_FOR_INT_MODULO NS_SWIFT_NAME(SIN_COS_MAX_VALUE_FOR_INT_MODULO);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns the arc sine of a value.
  <p>
- The returned angle is in the range <i>-pi</i>/2 through <i>pi</i>/2. 
- Error is around 1E-7.
+  The returned angle is in the range <i>-pi</i>/2 through <i>pi</i>/2. 
+  Error is around 1E-7. 
  <p>
- Special cases:
+  Special cases: 
  <ul>
- <li>If the argument is <code>NaN</code> or its absolute value is greater than 1, then the result is <code>NaN</code>.
- </ul>
+   <li>If the argument is <code>NaN</code> or its absolute value is greater than 1, then the result is <code>NaN</code>.
+  </ul>
  @param a the value whose arc sine is to be returned.
  @return arc sine of the argument
  - seealso: Math#asin(double)
@@ -46,12 +51,12 @@
 /*!
  @brief Returns the trigonometric cosine of an angle.
  <p>
- Error is around 1E-15.
+  Error is around 1E-15. 
  <p>
- Special cases:
+  Special cases: 
  <ul>
- <li>If the argument is <code>NaN</code> or an infinity, then the result is <code>NaN</code>.
- </ul>
+   <li>If the argument is <code>NaN</code> or an infinity, then the result is <code>NaN</code>.
+  </ul>
  @param a an angle, in radians.
  @return the cosine of the argument.
  - seealso: Math#cos(double)
@@ -65,7 +70,7 @@
 
 /*!
  @brief Returns the distance in kilometers between two points
- specified in decimal degrees (latitude/longitude).
+  specified in decimal degrees (latitude/longitude).
  @param lat1 Latitude of the first point.
  @param lon1 Longitude of the first point.
  @param lat2 Latitude of the second point.
@@ -81,10 +86,16 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilSloppyMath)
 
-inline jdouble OrgApacheLuceneUtilSloppyMath_get_SIN_COS_MAX_VALUE_FOR_INT_MODULO();
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_SIN_COS_MAX_VALUE_FOR_INT_MODULO(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, SIN_COS_MAX_VALUE_FOR_INT_MODULO, jdouble)
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilSloppyMath_init(OrgApacheLuceneUtilSloppyMath *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilSloppyMath *new_OrgApacheLuceneUtilSloppyMath_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilSloppyMath *create_OrgApacheLuceneUtilSloppyMath_init(void);
 
 FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilSloppyMath_haversinWithDouble_withDouble_withDouble_withDouble_(jdouble lat1, jdouble lon1, jdouble lat2, jdouble lon2);
 
@@ -94,14 +105,12 @@ FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilSloppyMath_asinWithDouble_(jdouble 
 
 FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilSloppyMath_earthDiameterWithDouble_(jdouble latitude);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilSloppyMath_init(OrgApacheLuceneUtilSloppyMath *self);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilSloppyMath *new_OrgApacheLuceneUtilSloppyMath_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilSloppyMath *create_OrgApacheLuceneUtilSloppyMath_init();
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSloppyMath)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSloppyMath")

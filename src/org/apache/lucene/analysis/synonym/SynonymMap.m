@@ -7,13 +7,12 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
-#include "java/text/ParseException.h"
+#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
 #include "java/util/Comparator.h"
@@ -37,6 +36,10 @@
 #include "org/apache/lucene/util/fst/ByteSequenceOutputs.h"
 #include "org/apache/lucene/util/fst/FST.h"
 #include "org/apache/lucene/util/fst/Util.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/synonym/SynonymMap must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisSynonymSynonymMap_Builder () {
  @public
@@ -88,9 +91,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry, o
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry_init(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry *new_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry *new_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry *create_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry_init();
+__attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry *create_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry)
 
@@ -123,17 +126,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSynonymSynonymMap_Parser, analyzer_, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilBytesRefHash:withInt:", "SynonymMap", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/BytesRefHash;I)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilBytesRefHash:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "WORD_SEPARATOR", "WORD_SEPARATOR", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisSynonymSynonymMap_WORD_SEPARATOR },
-    { "fst_", NULL, 0x11, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "words_", NULL, 0x11, "Lorg.apache.lucene.util.BytesRefHash;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxHorizontalContext_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "WORD_SEPARATOR", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisSynonymSynonymMap_WORD_SEPARATOR, 0x19, -1, -1, -1, -1 },
+    { "fst_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x11, -1, -1, 2, -1 },
+    { "words_", "LOrgApacheLuceneUtilBytesRefHash;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "maxHorizontalContext_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.synonym.SynonymMap$Builder;", "Lorg.apache.lucene.analysis.synonym.SynonymMap$Parser;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymMap = { 2, "SynonymMap", "org.apache.lucene.analysis.synonym", NULL, 0x1, 1, methods, 4, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilFstFST;LOrgApacheLuceneUtilBytesRefHash;I", "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/BytesRefHash;I)V", "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneAnalysisSynonymSynonymMap_Builder;LOrgApacheLuceneAnalysisSynonymSynonymMap_Parser;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymMap = { "SynonymMap", "org.apache.lucene.analysis.synonym", ptrTable, methods, fields, 7, 0x1, 1, 4, -1, 3, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisSynonymSynonymMap;
 }
 
@@ -203,13 +211,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymMap)
     dedupSet = nil;
   }
   IOSByteArray *spare = [IOSByteArray arrayWithLength:5];
-  id<JavaUtilSet> keys = [((JavaUtilHashMap *) nil_chk(workingSet_)) keySet];
+  id<JavaUtilSet> keys = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(workingSet_)) keySet]);
   IOSObjectArray *sortedKeys = [((id<JavaUtilSet>) nil_chk(keys)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[keys size] type:OrgApacheLuceneUtilCharsRef_class_()]];
   JavaUtilArrays_sortWithNSObjectArray_withJavaUtilComparator_(sortedKeys, OrgApacheLuceneUtilCharsRef_getUTF16SortedAsUTF8Comparator());
   OrgApacheLuceneUtilIntsRefBuilder *scratchIntsRef = create_OrgApacheLuceneUtilIntsRefBuilder_init();
   for (jint keyIdx = 0; keyIdx < ((IOSObjectArray *) nil_chk(sortedKeys))->size_; keyIdx++) {
     OrgApacheLuceneUtilCharsRef *input = IOSObjectArray_Get(sortedKeys, keyIdx);
-    OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry *output = [workingSet_ getWithId:input];
+    OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry *output = JreRetainedLocalValue([workingSet_ getWithId:input]);
     jint numEntries = [((JavaUtilArrayList *) nil_chk(((OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry *) nil_chk(output))->ords_)) size];
     jint estimatedSize = 5 + numEntries * 5;
     [scratch growWithInt:estimatedSize];
@@ -239,7 +247,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymMap)
     [scratch setLengthWithInt:[scratchOutput getPosition]];
     [builder addWithOrgApacheLuceneUtilIntsRef:OrgApacheLuceneUtilFstUtil_toUTF32WithJavaLangCharSequence_withOrgApacheLuceneUtilIntsRefBuilder_(input, scratchIntsRef) withId:[scratch toBytesRef]];
   }
-  OrgApacheLuceneUtilFstFST *fst = [builder finish];
+  OrgApacheLuceneUtilFstFST *fst = JreRetainedLocalValue([builder finish]);
   return create_OrgApacheLuceneAnalysisSynonymSynonymMap_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRefHash_withInt_(fst, words_, maxHorizontalContext_);
 }
 
@@ -251,24 +259,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymMap)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:", "Builder", NULL, 0x1, NULL, NULL },
-    { "joinWithNSStringArray:withOrgApacheLuceneUtilCharsRefBuilder:", "join", "Lorg.apache.lucene.util.CharsRef;", 0x9, NULL, NULL },
-    { "hasHolesWithOrgApacheLuceneUtilCharsRef:", "hasHoles", "Z", 0x2, NULL, NULL },
-    { "addWithOrgApacheLuceneUtilCharsRef:withInt:withOrgApacheLuceneUtilCharsRef:withInt:withBoolean:", "add", "V", 0x2, NULL, NULL },
-    { "countWordsWithOrgApacheLuceneUtilCharsRef:", "countWords", "I", 0x2, NULL, NULL },
-    { "addWithOrgApacheLuceneUtilCharsRef:withOrgApacheLuceneUtilCharsRef:withBoolean:", "add", "V", 0x1, NULL, NULL },
-    { "build", NULL, "Lorg.apache.lucene.analysis.synonym.SynonymMap;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCharsRef;", 0x9, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 7, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisSynonymSynonymMap;", 0x1, -1, -1, 9, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithBoolean:);
+  methods[1].selector = @selector(joinWithNSStringArray:withOrgApacheLuceneUtilCharsRefBuilder:);
+  methods[2].selector = @selector(hasHolesWithOrgApacheLuceneUtilCharsRef:);
+  methods[3].selector = @selector(addWithOrgApacheLuceneUtilCharsRef:withInt:withOrgApacheLuceneUtilCharsRef:withInt:withBoolean:);
+  methods[4].selector = @selector(countWordsWithOrgApacheLuceneUtilCharsRef:);
+  methods[5].selector = @selector(addWithOrgApacheLuceneUtilCharsRef:withOrgApacheLuceneUtilCharsRef:withBoolean:);
+  methods[6].selector = @selector(build);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "workingSet_", NULL, 0x12, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Lorg/apache/lucene/util/CharsRef;Lorg/apache/lucene/analysis/synonym/SynonymMap$Builder$MapEntry;>;", .constantValue.asLong = 0 },
-    { "words_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefHash;", NULL, NULL, .constantValue.asLong = 0 },
-    { "utf8Scratch_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxHorizontalContext_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "dedup_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "workingSet_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 10, -1 },
+    { "words_", "LOrgApacheLuceneUtilBytesRefHash;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "utf8Scratch_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxHorizontalContext_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "dedup_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.synonym.SynonymMap$Builder$MapEntry;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymMap_Builder = { 2, "Builder", "org.apache.lucene.analysis.synonym", "SynonymMap", 0x9, 7, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "Z", "join", "[LNSString;LOrgApacheLuceneUtilCharsRefBuilder;", "hasHoles", "LOrgApacheLuceneUtilCharsRef;", "add", "LOrgApacheLuceneUtilCharsRef;ILOrgApacheLuceneUtilCharsRef;IZ", "countWords", "LOrgApacheLuceneUtilCharsRef;LOrgApacheLuceneUtilCharsRef;Z", "LJavaIoIOException;", "Ljava/util/HashMap<Lorg/apache/lucene/util/CharsRef;Lorg/apache/lucene/analysis/synonym/SynonymMap$Builder$MapEntry;>;", "LOrgApacheLuceneAnalysisSynonymSynonymMap;", "LOrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymMap_Builder = { "Builder", "org.apache.lucene.analysis.synonym", ptrTable, methods, fields, 7, 0x9, 7, 5, 11, 12, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder;
 }
 
@@ -300,7 +319,7 @@ OrgApacheLuceneUtilCharsRef *OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_jo
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       NSString *word = *b__++;
-      jint wordLen = ((jint) [((NSString *) nil_chk(word)) length]);
+      jint wordLen = [((NSString *) nil_chk(word)) java_length];
       jint needed = (0 == upto ? wordLen : 1 + upto + wordLen);
       if (needed > ((IOSCharArray *) nil_chk(buffer))->size_) {
         [reuse growWithInt:needed];
@@ -309,7 +328,7 @@ OrgApacheLuceneUtilCharsRef *OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_jo
       if (upto > 0) {
         *IOSCharArray_GetRef(nil_chk(buffer), upto++) = OrgApacheLuceneAnalysisSynonymSynonymMap_WORD_SEPARATOR;
       }
-      [word getChars:0 sourceEnd:wordLen destination:buffer destinationBegin:upto];
+      [word java_getChars:0 sourceEnd:wordLen destination:buffer destinationBegin:upto];
       upto += wordLen;
     }
   }
@@ -346,8 +365,8 @@ void OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_addWithOrgApacheLuceneUtil
   if (((OrgApacheLuceneUtilCharsRef *) nil_chk(output))->length_ <= 0) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"output.length must be > 0 (got ", output->length_, ')'));
   }
-  JreAssert((!OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_hasHolesWithOrgApacheLuceneUtilCharsRef_(self, input)), (JreStrcat("$@", @"input has holes: ", input)));
-  JreAssert((!OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_hasHolesWithOrgApacheLuceneUtilCharsRef_(self, output)), (JreStrcat("$@", @"output has holes: ", output)));
+  JreAssert(!OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_hasHolesWithOrgApacheLuceneUtilCharsRef_(self, input), JreStrcat("$@", @"input has holes: ", input));
+  JreAssert(!OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_hasHolesWithOrgApacheLuceneUtilCharsRef_(self, output), JreStrcat("$@", @"output has holes: ", output));
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->utf8Scratch_)) copyCharsWithCharArray:output->chars_ withInt:output->offset_ withInt:output->length_];
   jint ord = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(self->words_)) addWithOrgApacheLuceneUtilBytesRef:[self->utf8Scratch_ get]];
   if (ord < 0) {
@@ -355,7 +374,7 @@ void OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_addWithOrgApacheLuceneUtil
   }
   else {
   }
-  OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry *e = [((JavaUtilHashMap *) nil_chk(self->workingSet_)) getWithId:input];
+  OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry *e = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(self->workingSet_)) getWithId:input]);
   if (e == nil) {
     e = create_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry_init();
     [self->workingSet_ putWithId:OrgApacheLuceneUtilCharsRef_deepCopyOfWithOrgApacheLuceneUtilCharsRef_(input) withId:e];
@@ -395,14 +414,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "MapEntry", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "includeOrig_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "ords_", NULL, 0x0, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
+    { "includeOrig_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ords_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x0, -1, -1, 0, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry = { 2, "MapEntry", "org.apache.lucene.analysis.synonym", "SynonymMap$Builder", 0xa, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "Ljava/util/ArrayList<Ljava/lang/Integer;>;", "LOrgApacheLuceneAnalysisSynonymSynonymMap_Builder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry = { "MapEntry", "org.apache.lucene.analysis.synonym", ptrTable, methods, fields, 7, 0xa, 1, 2, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry;
 }
 
@@ -440,14 +465,14 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
               withOrgApacheLuceneUtilCharsRefBuilder:(OrgApacheLuceneUtilCharsRefBuilder *)reuse {
   {
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:@"" withNSString:text];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
-      id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()];
+      id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = JreRetainedLocalValue([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
+      id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt = JreRetainedLocalValue([ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
       [ts reset];
       [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(reuse)) clear];
       while ([ts incrementToken]) {
-        jint length = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) length];
+        jint length = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) java_length];
         if (length == 0) {
           @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"term: ", text, @" analyzed to a zero-length token"));
         }
@@ -465,7 +490,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
       }
       [ts end];
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -474,10 +499,12 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
         if (__primaryException1 != nil) {
           @try {
             [ts close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [ts close];
         }
       }
@@ -495,15 +522,23 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:withOrgApacheLuceneAnalysisAnalyzer:", "Parser", NULL, 0x1, NULL, NULL },
-    { "parseWithJavaIoReader:", "parse", "V", 0x401, "Ljava.io.IOException;Ljava.text.ParseException;", NULL },
-    { "analyzeWithNSString:withOrgApacheLuceneUtilCharsRefBuilder:", "analyze", "Lorg.apache.lucene.util.CharsRef;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCharsRef;", 0x1, 4, 5, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithBoolean:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[1].selector = @selector(parseWithJavaIoReader:);
+  methods[2].selector = @selector(analyzeWithNSString:withOrgApacheLuceneUtilCharsRefBuilder:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "analyzer_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "analyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymMap_Parser = { 2, "Parser", "org.apache.lucene.analysis.synonym", "SynonymMap", 0x409, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ZLOrgApacheLuceneAnalysisAnalyzer;", "parse", "LJavaIoReader;", "LJavaIoIOException;LJavaTextParseException;", "analyze", "LNSString;LOrgApacheLuceneUtilCharsRefBuilder;", "LJavaIoIOException;", "LOrgApacheLuceneAnalysisSynonymSynonymMap;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSynonymSynonymMap_Parser = { "Parser", "org.apache.lucene.analysis.synonym", ptrTable, methods, fields, 7, 0x409, 3, 1, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisSynonymSynonymMap_Parser;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader))
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_
 
@@ -42,17 +48,17 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)d
-                  withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
-                                         withNSString:(NSString *)segmentSuffix
-                   withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fn
-                    withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
-                                         withNSString:(NSString *)formatName
-  withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)d
+                            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
+                                                   withNSString:(NSString *)segmentSuffix
+                             withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fn
+                              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
+                                                   withNSString:(NSString *)formatName
+            withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode;
 
 - (void)checkIntegrity;
 
-- (OrgApacheLuceneCodecsStoredFieldsReader *)clone;
+- (OrgApacheLuceneCodecsStoredFieldsReader *)java_clone;
 
 /*!
  @brief Close the underlying <code>IndexInput</code>s.
@@ -93,25 +99,29 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (jint)getVersion;
 
 /*!
- @brief Reads a long in a variable-length format.
- Reads between one and
- nine bytes. Small values typically take fewer bytes.
+ @brief Reads a long in a variable-length format.Reads between one and
+  nine bytes.
+ Small values typically take fewer bytes.
  */
 + (jlong)readTLongWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
 /*!
- @brief Reads a double in a variable-length format.
- Reads between one and
- nine bytes. Small integral values typically take fewer bytes.
+ @brief Reads a double in a variable-length format.Reads between one and
+  nine bytes.
+ Small integral values typically take fewer bytes.
  */
 + (jdouble)readZDoubleWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
 /*!
- @brief Reads a float in a variable-length format.
- Reads between one and
- five bytes. Small integral values typically take fewer bytes.
+ @brief Reads a float in a variable-length format.Reads between one and
+  five bytes.
+ Small integral values typically take fewer bytes.
  */
 + (jfloat)readZFloatWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -139,7 +149,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFiel
 @class OrgApacheLuceneStoreDataInput;
 
 /*!
- @brief A serialized document, you need to decode its input in order to get an actual
+ @brief A serialized document, you need to decode its input in order to get an actual 
  <code>Document</code>.
  */
 @interface OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument : NSObject {
@@ -148,6 +158,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFiel
   jint length_;
   jint numStoredFields_;
 }
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -159,4 +173,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFiel
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader")

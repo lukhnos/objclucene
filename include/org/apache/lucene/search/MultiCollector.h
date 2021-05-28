@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchMultiCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchMultiCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiCollector || defined(INCLUDE_OrgApacheLuceneSearchMultiCollector))
 #define OrgApacheLuceneSearchMultiCollector_
 
@@ -26,11 +32,10 @@
 @protocol OrgApacheLuceneSearchLeafCollector;
 
 /*!
- @brief A <code>Collector</code> which allows running a search with several
- <code>Collector</code>s.
- It offers a static <code>wrap</code> method which accepts a
- list of collectors and wraps them with <code>MultiCollector</code>, while
- filtering out the <code>null</code> null ones.
+ @brief A <code>Collector</code> which allows running a search with several 
+ <code>Collector</code>s.It offers a static <code>wrap</code> method which accepts a
+  list of collectors and wraps them with <code>MultiCollector</code>, while
+  filtering out the <code>null</code> null ones.
  */
 @interface OrgApacheLuceneSearchMultiCollector : NSObject < OrgApacheLuceneSearchCollector >
 
@@ -46,22 +51,25 @@
 + (id<OrgApacheLuceneSearchCollector>)wrapWithOrgApacheLuceneSearchCollectorArray:(IOSObjectArray *)collectors;
 
 /*!
- @brief Wraps a list of <code>Collector</code>s with a <code>MultiCollector</code>.
- This
- method works as follows:
+ @brief Wraps a list of <code>Collector</code>s with a <code>MultiCollector</code>.This
+  method works as follows: 
  <ul>
- <li>Filters out the <code>null</code> collectors, so they are not used
- during search time.
+  <li>Filters out the <code>null</code> collectors, so they are not used
+  during search time.
  <li>If the input contains 1 real collector (i.e. non-<code>null</code> ),
- it is returned.
+  it is returned. 
  <li>Otherwise the method returns a <code>MultiCollector</code> which wraps the
- non-<code>null</code> ones.
+  non-<code>null</code> ones. 
  </ul>
- @throws IllegalArgumentException
+ @throw IllegalArgumentException
  if either 0 collectors were input, or all collectors are
- <code>null</code>.
+            <code>null</code>.
  */
 + (id<OrgApacheLuceneSearchCollector>)wrapWithJavaLangIterable:(id<JavaLangIterable>)collectors;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -75,4 +83,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiCollector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiCollector")

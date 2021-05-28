@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/io/InputStream.h"
 #include "java/io/OutputStream.h"
 #include "java/lang/CharSequence.h"
@@ -17,6 +16,10 @@
 #include "java/util/Comparator.h"
 #include "java/util/List.h"
 #include "java/util/Set.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/search/spell/Dictionary.h"
 #include "org/apache/lucene/search/suggest/InputIterator.h"
 #include "org/apache/lucene/search/suggest/Lookup.h"
@@ -28,14 +31,19 @@
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/Lookup must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 #pragma clang diagnostic ignored "-Wprotocol"
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator : NSObject < JavaUtilComparator >
 
+- (instancetype)init;
+
 - (jint)compareWithId:(id<JavaLangCharSequence>)o1
                withId:(id<JavaLangCharSequence>)o2;
-
-- (instancetype)init;
 
 @end
 
@@ -43,9 +51,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestLookup_CharSequenceComparat
 
 __attribute__((unused)) static void OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator_init(OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator *new_OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator *new_OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator *create_OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator_init();
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator *create_OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator)
 
@@ -132,33 +140,48 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaUtilCollections_emptyList();
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "Z", 0x1, 3, 4, 2, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, 2, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 7, 2, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 8, 9, 2, 10, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x401, 8, 11, 2, 12, -1, -1 },
+    { NULL, "Z", 0x401, 5, 13, 2, -1, -1, -1 },
+    { NULL, "Z", 0x401, 3, 14, 2, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 15, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(buildWithOrgApacheLuceneSearchSpellDictionary:);
+  methods[2].selector = @selector(load__WithJavaIoInputStream:);
+  methods[3].selector = @selector(storeWithJavaIoOutputStream:);
+  methods[4].selector = @selector(getCount);
+  methods[5].selector = @selector(buildWithOrgApacheLuceneSearchSuggestInputIterator:);
+  methods[6].selector = @selector(lookupWithJavaLangCharSequence:withBoolean:withInt:);
+  methods[7].selector = @selector(lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:);
+  methods[8].selector = @selector(storeWithOrgApacheLuceneStoreDataOutput:);
+  methods[9].selector = @selector(load__WithOrgApacheLuceneStoreDataInput:);
+  methods[10].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "CHARSEQUENCE_COMPARATOR", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x19, -1, 16, 17, -1 },
+  };
+  static const void *ptrTable[] = { "build", "LOrgApacheLuceneSearchSpellDictionary;", "LJavaIoIOException;", "load", "LJavaIoInputStream;", "store", "LJavaIoOutputStream;", "LOrgApacheLuceneSearchSuggestInputIterator;", "lookup", "LJavaLangCharSequence;ZI", "(Ljava/lang/CharSequence;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;", "LJavaLangCharSequence;LJavaUtilSet;ZI", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;", "LOrgApacheLuceneStoreDataOutput;", "LOrgApacheLuceneStoreDataInput;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", &OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATOR, "Ljava/util/Comparator<Ljava/lang/CharSequence;>;", "LOrgApacheLuceneSearchSuggestLookup_LookupResult;LOrgApacheLuceneSearchSuggestLookup_CharSequenceComparator;LOrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup = { "Lookup", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x401, 11, 1, -1, 18, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSuggestLookup;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSuggestLookup class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATOR, new_OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestLookup)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lookup", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneSearchSpellDictionary:", "build", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "load__WithJavaIoInputStream:", "load", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "storeWithJavaIoOutputStream:", "store", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "getCount", NULL, "J", 0x401, "Ljava.io.IOException;", NULL },
-    { "buildWithOrgApacheLuceneSearchSuggestInputIterator:", "build", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
-    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x401, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
-    { "storeWithOrgApacheLuceneStoreDataOutput:", "store", "Z", 0x401, "Ljava.io.IOException;", NULL },
-    { "load__WithOrgApacheLuceneStoreDataInput:", "load", "Z", 0x401, "Ljava.io.IOException;", NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "CHARSEQUENCE_COMPARATOR", "CHARSEQUENCE_COMPARATOR", 0x19, "Ljava.util.Comparator;", &OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATOR, "Ljava/util/Comparator<Ljava/lang/CharSequence;>;", .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.Lookup$LookupResult;", "Lorg.apache.lucene.search.suggest.Lookup$CharSequenceComparator;", "Lorg.apache.lucene.search.suggest.Lookup$LookupPriorityQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup = { 2, "Lookup", "org.apache.lucene.search.suggest", NULL, 0x401, 11, methods, 1, fields, 0, NULL, 3, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSearchSuggestLookup;
 }
 
 @end
@@ -234,24 +257,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestLookup)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangCharSequence:withLong:", "LookupResult", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangCharSequence:withLong:withOrgApacheLuceneUtilBytesRef:", "LookupResult", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangCharSequence:withId:withLong:withOrgApacheLuceneUtilBytesRef:", "LookupResult", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangCharSequence:withLong:withOrgApacheLuceneUtilBytesRef:withJavaUtilSet:", "LookupResult", NULL, 0x1, NULL, "(Ljava/lang/CharSequence;JLorg/apache/lucene/util/BytesRef;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;)V" },
-    { "initWithJavaLangCharSequence:withLong:withJavaUtilSet:", "LookupResult", NULL, 0x1, NULL, "(Ljava/lang/CharSequence;JLjava/util/Set<Lorg/apache/lucene/util/BytesRef;>;)V" },
-    { "initWithJavaLangCharSequence:withId:withLong:withOrgApacheLuceneUtilBytesRef:withJavaUtilSet:", "LookupResult", NULL, 0x1, NULL, "(Ljava/lang/CharSequence;Ljava/lang/Object;JLorg/apache/lucene/util/BytesRef;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;)V" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, 4, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, -1, 6, -1, -1 },
+    { NULL, NULL, 0x1, -1, 7, -1, 8, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, 11, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaLangCharSequence:withLong:);
+  methods[1].selector = @selector(initWithJavaLangCharSequence:withLong:withOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(initWithJavaLangCharSequence:withId:withLong:withOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(initWithJavaLangCharSequence:withLong:withOrgApacheLuceneUtilBytesRef:withJavaUtilSet:);
+  methods[4].selector = @selector(initWithJavaLangCharSequence:withLong:withJavaUtilSet:);
+  methods[5].selector = @selector(initWithJavaLangCharSequence:withId:withLong:withOrgApacheLuceneUtilBytesRef:withJavaUtilSet:);
+  methods[6].selector = @selector(description);
+  methods[7].selector = @selector(compareToWithId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "key_", NULL, 0x11, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "highlightKey_", NULL, 0x11, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
-    { "value_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "payload_", NULL, 0x11, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "contexts_", NULL, 0x11, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
+    { "key_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "highlightKey_", "LNSObject;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "value_", "J", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "contexts_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x11, -1, -1, 12, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup_LookupResult = { 2, "LookupResult", "org.apache.lucene.search.suggest", "Lookup", 0x19, 8, methods, 5, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
+  static const void *ptrTable[] = { "LJavaLangCharSequence;J", "LJavaLangCharSequence;JLOrgApacheLuceneUtilBytesRef;", "LJavaLangCharSequence;LNSObject;JLOrgApacheLuceneUtilBytesRef;", "LJavaLangCharSequence;JLOrgApacheLuceneUtilBytesRef;LJavaUtilSet;", "(Ljava/lang/CharSequence;JLorg/apache/lucene/util/BytesRef;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;)V", "LJavaLangCharSequence;JLJavaUtilSet;", "(Ljava/lang/CharSequence;JLjava/util/Set<Lorg/apache/lucene/util/BytesRef;>;)V", "LJavaLangCharSequence;LNSObject;JLOrgApacheLuceneUtilBytesRef;LJavaUtilSet;", "(Ljava/lang/CharSequence;Ljava/lang/Object;JLorg/apache/lucene/util/BytesRef;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;)V", "toString", "compareTo", "LOrgApacheLuceneSearchSuggestLookup_LookupResult;", "Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneSearchSuggestLookup;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup_LookupResult = { "LookupResult", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x19, 8, 5, 13, -1, -1, 14, -1 };
   return &_OrgApacheLuceneSearchSuggestLookup_LookupResult;
 }
 
@@ -338,10 +374,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestLookup_LookupResult
 
 @implementation OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (jint)compareWithId:(id<JavaLangCharSequence>)o1
                withId:(id<JavaLangCharSequence>)o2 {
-  jint l1 = [((id<JavaLangCharSequence>) nil_chk(o1)) length];
-  jint l2 = [((id<JavaLangCharSequence>) nil_chk(o2)) length];
+  jint l1 = [((id<JavaLangCharSequence>) nil_chk(o1)) java_length];
+  jint l2 = [((id<JavaLangCharSequence>) nil_chk(o2)) java_length];
   jint aStop = JavaLangMath_minWithInt_withInt_(l1, l2);
   for (jint i = 0; i < aStop; i++) {
     jint diff = [o1 charAtWithInt:i] - [o2 charAtWithInt:i];
@@ -352,19 +395,48 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestLookup_LookupResult
   return l1 - l2;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator_init(self);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
 }
-J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", "CharSequenceComparator", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator = { 2, "CharSequenceComparator", "org.apache.lucene.search.suggest", "Lookup", 0xa, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Ljava/lang/CharSequence;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compare", "LJavaLangCharSequence;LJavaLangCharSequence;", "LOrgApacheLuceneSearchSuggestLookup;", "Ljava/lang/Object;Ljava/util/Comparator<Ljava/lang/CharSequence;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator = { "CharSequenceComparator", "org.apache.lucene.search.suggest", ptrTable, methods, NULL, 7, 0xa, 2, 0, 2, -1, -1, 3, -1 };
   return &_OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator;
 }
 
@@ -406,13 +478,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestLookup_CharSequence
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "LookupPriorityQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/suggest/Lookup$LookupResult;Lorg/apache/lucene/search/suggest/Lookup$LookupResult;)Z" },
-    { "getResults", NULL, "[Lorg.apache.lucene.search.suggest.Lookup$LookupResult;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchSuggestLookup_LookupResult;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.suggest.Lookup$LookupResult;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue = { 2, "LookupPriorityQueue", "org.apache.lucene.search.suggest", "Lookup", 0x19, 3, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  methods[2].selector = @selector(getResults);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneSearchSuggestLookup_LookupResult;LOrgApacheLuceneSearchSuggestLookup_LookupResult;", "LOrgApacheLuceneSearchSuggestLookup;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue = { "LookupPriorityQueue", "org.apache.lucene.search.suggest", ptrTable, methods, NULL, 7, 0x19, 3, 0, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue;
 }
 

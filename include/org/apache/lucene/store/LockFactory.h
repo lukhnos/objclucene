@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreLockFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreLockFactory || defined(INCLUDE_OrgApacheLuceneStoreLockFactory))
 #define OrgApacheLuceneStoreLockFactory_
 
@@ -22,19 +28,22 @@
 /*!
  @brief <p>Base class for Locking implementation.
  <code>Directory</code> uses
- instances of this class to implement locking.</p>
- <p>Lucene uses <code>NativeFSLockFactory</code> by default for
+  instances of this class to implement locking.</p>
+  
+ <p>Lucene uses <code>NativeFSLockFactory</code> by default for 
  <code>FSDirectory</code>-based index directories.</p>
+  
  <p>Special care needs to be taken if you change the locking
- implementation: First be certain that no writer is in fact
- writing to the index otherwise you can easily corrupt
- your index. Be sure to do the LockFactory change on all Lucene
- instances and clean up all leftover lock files before starting
- the new configuration for the first time. Different implementations
- can not work together!</p>
+  implementation: First be certain that no writer is in fact
+  writing to the index otherwise you can easily corrupt
+  your index. Be sure to do the LockFactory change on all Lucene
+  instances and clean up all leftover lock files before starting
+  the new configuration for the first time. Different implementations
+  can not work together!</p>
+  
  <p>If you suspect that some LockFactory implementation is
- not working properly in your environment, you can easily
- test it by using <code>VerifyingLockFactory</code>, <code>LockVerifyServer</code>
+  not working properly in your environment, you can easily
+  test it by using <code>VerifyingLockFactory</code>, <code>LockVerifyServer</code>
   and <code>LockStressTest</code>.</p>
  - seealso: LockVerifyServer
  - seealso: LockStressTest
@@ -44,14 +53,14 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Return a new obtained Lock instance identified by lockName.
  @param lockName name of the lock to be created.
- @throws LockObtainFailedException (optional specific exception) if the lock could
- not be obtained because it is currently held elsewhere.
- @throws IOException if any i/o error occurs attempting to gain the lock
+ @throw LockObtainFailedException(optional specific exception) if the lock could
+          not be obtained because it is currently held elsewhere.
+ @throw IOExceptionif any i/o error occurs attempting to gain the lock
  */
 - (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                              withNSString:(NSString *)lockName;
@@ -66,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockFactory")

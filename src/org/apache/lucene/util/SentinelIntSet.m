@@ -11,6 +11,10 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/SentinelIntSet.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/SentinelIntSet must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilSentinelIntSet
 
 - (instancetype)initWithInt:(jint)size
@@ -33,7 +37,7 @@
 }
 
 - (jint)getSlotWithInt:(jint)key {
-  JreAssert((key != emptyVal_), (@"org/apache/lucene/util/SentinelIntSet.java:84 condition failed: assert key != emptyVal;"));
+  JreAssert(key != emptyVal_, @"org/apache/lucene/util/SentinelIntSet.java:84 condition failed: assert key != emptyVal;");
   jint h = [self hash__WithInt:key];
   jint s = h & (((IOSIntArray *) nil_chk(keys_))->size_ - 1);
   if (IOSIntArray_Get(keys_, s) == key || IOSIntArray_Get(keys_, s) == emptyVal_) return s;
@@ -46,7 +50,7 @@
 }
 
 - (jint)findWithInt:(jint)key {
-  JreAssert((key != emptyVal_), (@"org/apache/lucene/util/SentinelIntSet.java:98 condition failed: assert key != emptyVal;"));
+  JreAssert(key != emptyVal_, @"org/apache/lucene/util/SentinelIntSet.java:98 condition failed: assert key != emptyVal;");
   jint h = [self hash__WithInt:key];
   jint s = h & (((IOSIntArray *) nil_chk(keys_))->size_ - 1);
   if (IOSIntArray_Get(keys_, s) == key) return s;
@@ -108,25 +112,40 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:", "SentinelIntSet", NULL, 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "hash__WithInt:", "hash", "I", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "getSlotWithInt:", "getSlot", "I", 0x1, NULL, NULL },
-    { "findWithInt:", "find", "I", 0x1, NULL, NULL },
-    { "existsWithInt:", "exists", "Z", 0x1, NULL, NULL },
-    { "putWithInt:", "put", "I", 0x1, NULL, NULL },
-    { "rehash", NULL, "V", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:);
+  methods[1].selector = @selector(clear);
+  methods[2].selector = @selector(hash__WithInt:);
+  methods[3].selector = @selector(size);
+  methods[4].selector = @selector(getSlotWithInt:);
+  methods[5].selector = @selector(findWithInt:);
+  methods[6].selector = @selector(existsWithInt:);
+  methods[7].selector = @selector(putWithInt:);
+  methods[8].selector = @selector(rehash);
+  methods[9].selector = @selector(ramBytesUsed);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "keys_", NULL, 0x1, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "emptyVal_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "rehashCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "keys_", "[I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "count_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "emptyVal_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "rehashCount_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilSentinelIntSet = { 2, "SentinelIntSet", "org.apache.lucene.util", NULL, 0x1, 10, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "II", "hash", "I", "getSlot", "find", "exists", "put" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilSentinelIntSet = { "SentinelIntSet", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 10, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilSentinelIntSet;
 }
 

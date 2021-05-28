@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer))
 #define OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_
 
@@ -25,46 +31,57 @@
 /*!
  @brief Tokenizes the input from an edge into n-grams of given size(s).
  <p>
- This <code>Tokenizer</code> create n-grams from the beginning edge of a input token.
- <p><a name="match_version"></a>As of Lucene 4.4, this class supports
+  This <code>Tokenizer</code> create n-grams from the beginning edge of a input token. 
+ <p><a name="match_version"></a>As of Lucene 4.4, this class supports 
  <code>pre-tokenization</code> and correctly handles
- supplementary characters.
+  supplementary characters.
  */
 @interface OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer : OrgApacheLuceneAnalysisNgramNGramTokenizer
-
-+ (jint)DEFAULT_MAX_GRAM_SIZE;
-
-+ (jint)DEFAULT_MIN_GRAM_SIZE;
+@property (readonly, class) jint DEFAULT_MAX_GRAM_SIZE NS_SWIFT_NAME(DEFAULT_MAX_GRAM_SIZE);
+@property (readonly, class) jint DEFAULT_MIN_GRAM_SIZE NS_SWIFT_NAME(DEFAULT_MIN_GRAM_SIZE);
 
 #pragma mark Public
 
 /*!
  @brief Creates EdgeNGramTokenizer that can generate n-grams in the sizes of the given range
- @param factory <code>org.apache.lucene.util.AttributeFactory</code> to use
+ @param factory<code>org.apache.lucene.util.AttributeFactory</code>  to use
  @param minGram the smallest n-gram to generate
  @param maxGram the largest n-gram to generate
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)minGram
-                                                    withInt:(jint)maxGram;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
+                                                              withInt:(jint)minGram
+                                                              withInt:(jint)maxGram;
 
 /*!
  @brief Creates EdgeNGramTokenizer that can generate n-grams in the sizes of the given range
  @param minGram the smallest n-gram to generate
  @param maxGram the largest n-gram to generate
  */
-- (instancetype)initWithInt:(jint)minGram
-                    withInt:(jint)maxGram;
+- (instancetype __nonnull)initWithInt:(jint)minGram
+                              withInt:(jint)maxGram;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                              withInt:(jint)arg1
+                          withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0
+                                                              withInt:(jint)arg1
+                                                              withInt:(jint)arg2
+                                                          withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer)
 
-inline jint OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_get_DEFAULT_MAX_GRAM_SIZE();
+inline jint OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_get_DEFAULT_MAX_GRAM_SIZE(void);
 #define OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_DEFAULT_MAX_GRAM_SIZE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer, DEFAULT_MAX_GRAM_SIZE, jint)
 
-inline jint OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_get_DEFAULT_MIN_GRAM_SIZE();
+inline jint OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_get_DEFAULT_MIN_GRAM_SIZE(void);
 #define OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_DEFAULT_MIN_GRAM_SIZE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer, DEFAULT_MIN_GRAM_SIZE, jint)
 
@@ -84,4 +101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer")

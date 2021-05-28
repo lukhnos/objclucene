@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/PushPostingsWriterBase.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/BlockTermState.h"
 #include "org/apache/lucene/codecs/PostingsWriterBase.h"
 #include "org/apache/lucene/codecs/PushPostingsWriterBase.h"
@@ -16,6 +14,10 @@
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/FixedBitSet.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/PushPostingsWriterBase must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsPushPostingsWriterBase () {
  @public
@@ -89,7 +91,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                                withOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)docsSeen {
   [self startTerm];
   JreStrongAssign(&postingsEnum_, [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) postingsWithOrgApacheLuceneIndexPostingsEnum:postingsEnum_ withInt:enumFlags_]);
-  JreAssert((postingsEnum_ != nil), (@"org/apache/lucene/codecs/PushPostingsWriterBase.java:123 condition failed: assert postingsEnum != null;"));
+  JreAssert(postingsEnum_ != nil, @"org/apache/lucene/codecs/PushPostingsWriterBase.java:123 condition failed: assert postingsEnum != null;");
   jint docFreq = 0;
   jlong totalTermFreq = 0;
   while (true) {
@@ -131,7 +133,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return nil;
   }
   else {
-    OrgApacheLuceneCodecsBlockTermState *state = [self newTermState];
+    OrgApacheLuceneCodecsBlockTermState *state = JreRetainedLocalValue([self newTermState]);
     ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(state))->docFreq_ = docFreq;
     state->totalTermFreq_ = writeFreqs_ ? totalTermFreq : -1;
     [self finishTermWithOrgApacheLuceneCodecsBlockTermState:state];
@@ -166,28 +168,42 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PushPostingsWriterBase", NULL, 0x4, NULL, NULL },
-    { "newTermState", NULL, "Lorg.apache.lucene.codecs.BlockTermState;", 0x401, "Ljava.io.IOException;", NULL },
-    { "startTerm", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "finishTermWithOrgApacheLuceneCodecsBlockTermState:", "finishTerm", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "setFieldWithOrgApacheLuceneIndexFieldInfo:", "setField", "I", 0x1, NULL, NULL },
-    { "writeTermWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilFixedBitSet:", "writeTerm", "Lorg.apache.lucene.codecs.BlockTermState;", 0x11, "Ljava.io.IOException;", NULL },
-    { "startDocWithInt:withInt:", "startDoc", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "addPositionWithInt:withOrgApacheLuceneUtilBytesRef:withInt:withInt:", "addPosition", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "finishDoc", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsBlockTermState;", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, 1, 2, 0, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsBlockTermState;", 0x11, 5, 6, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, 7, 8, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, 9, 10, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(newTermState);
+  methods[2].selector = @selector(startTerm);
+  methods[3].selector = @selector(finishTermWithOrgApacheLuceneCodecsBlockTermState:);
+  methods[4].selector = @selector(setFieldWithOrgApacheLuceneIndexFieldInfo:);
+  methods[5].selector = @selector(writeTermWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilFixedBitSet:);
+  methods[6].selector = @selector(startDocWithInt:withInt:);
+  methods[7].selector = @selector(addPositionWithInt:withOrgApacheLuceneUtilBytesRef:withInt:withInt:);
+  methods[8].selector = @selector(finishDoc);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "postingsEnum_", NULL, 0x2, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "enumFlags_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfo_", NULL, 0x4, "Lorg.apache.lucene.index.FieldInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexOptions_", NULL, 0x4, "Lorg.apache.lucene.index.IndexOptions;", NULL, NULL, .constantValue.asLong = 0 },
-    { "writeFreqs_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "writePositions_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "writePayloads_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "writeOffsets_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "postingsEnum_", "LOrgApacheLuceneIndexPostingsEnum;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "enumFlags_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldInfo_", "LOrgApacheLuceneIndexFieldInfo;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "indexOptions_", "LOrgApacheLuceneIndexIndexOptions;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "writeFreqs_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "writePositions_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "writePayloads_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "writeOffsets_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPushPostingsWriterBase = { 2, "PushPostingsWriterBase", "org.apache.lucene.codecs", NULL, 0x401, 9, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoIOException;", "finishTerm", "LOrgApacheLuceneCodecsBlockTermState;", "setField", "LOrgApacheLuceneIndexFieldInfo;", "writeTerm", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneIndexTermsEnum;LOrgApacheLuceneUtilFixedBitSet;", "startDoc", "II", "addPosition", "ILOrgApacheLuceneUtilBytesRef;II" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPushPostingsWriterBase = { "PushPostingsWriterBase", "org.apache.lucene.codecs", ptrTable, methods, fields, 7, 0x401, 9, 8, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsPushPostingsWriterBase;
 }
 

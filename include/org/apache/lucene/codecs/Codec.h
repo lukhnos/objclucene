@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCodec
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCodec_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCodec || defined(INCLUDE_OrgApacheLuceneCodecsCodec))
 #define OrgApacheLuceneCodecsCodec_
 
@@ -35,14 +41,14 @@
 /*!
  @brief Encodes/decodes an inverted index segment.
  <p>
- Note, when extending this class, the name (<code>getName</code>) is 
- written into the index. In order for the segment to be read, the
- name must resolve to your implementation via <code>forName(String)</code>.
- This method uses Java's 
- <code>Service Provider Interface</code> (SPI) to resolve codec names.
+  Note, when extending this class, the name (<code>getName</code>) is 
+  written into the index. In order for the segment to be read, the
+  name must resolve to your implementation via <code>forName(String)</code>.
+  This method uses Java's  
+ <code>Service Provider Interface</code> (SPI) to resolve codec names. 
  <p>
- If you implement your own codec, make sure that it has a no-arg constructor
- so SPI can load it.
+  If you implement your own codec, make sure that it has a no-arg constructor
+  so SPI can load it.
  - seealso: ServiceLoader
  */
 @interface OrgApacheLuceneCodecsCodec : NSObject < OrgApacheLuceneUtilNamedSPILoader_NamedSPI >
@@ -76,7 +82,7 @@
 
 /*!
  @brief expert: returns the default codec used for newly created
- <code>IndexWriterConfig</code>s.
+   <code>IndexWriterConfig</code>s.
  */
 + (OrgApacheLuceneCodecsCodec *)getDefault;
 
@@ -103,11 +109,11 @@
 /*!
  @brief Reloads the codec list from the given <code>ClassLoader</code>.
  Changes to the codecs are visible after the method ends, all
- iterators (<code>availableCodecs()</code>,...) stay consistent. 
+  iterators (<code>availableCodecs()</code>,...) stay consistent.   
  <p><b>NOTE:</b> Only new codecs are added, existing ones are
- never removed or replaced.
+  never removed or replaced.  
  <p><em>This method is expensive and should only be called for discovery
- of new codecs on the given classpath/classloader!</em>
+  of new codecs on the given classpath/classloader!</em>
  */
 + (void)reloadCodecsWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
@@ -118,7 +124,7 @@
 
 /*!
  @brief expert: sets the default codec used for newly created
- <code>IndexWriterConfig</code>s.
+   <code>IndexWriterConfig</code>s.
  */
 + (void)setDefaultWithOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)codec;
 
@@ -133,9 +139,8 @@
 - (OrgApacheLuceneCodecsTermVectorsFormat *)termVectorsFormat;
 
 /*!
- @brief returns the codec's name.
- Subclasses can override to provide
- more detail (such as parameters).
+ @brief returns the codec's name.Subclasses can override to provide
+  more detail (such as parameters).
  */
 - (NSString *)description;
 
@@ -144,12 +149,16 @@
 /*!
  @brief Creates a new codec.
  <p>
- The provided name will be written into the index segment: in order to
- for the segment to be read this class should be registered with Java's
- SPI mechanism (registered in META-INF/ of your jar file, etc).
+  The provided name will be written into the index segment: in order to
+  for the segment to be read this class should be registered with Java's
+  SPI mechanism (registered in META-INF/ of your jar file, etc).
  @param name must be all ascii alphanumeric, and less than 128 characters in length.
  */
-- (instancetype)initWithNSString:(NSString *)name;
+- (instancetype __nonnull)initWithNSString:(NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -159,11 +168,11 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsCodec_initWithNSString_(OrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_forNameWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneCodecsCodec_availableCodecs();
+FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneCodecsCodec_availableCodecs(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsCodec_reloadCodecsWithJavaLangClassLoader_(JavaLangClassLoader *classloader);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_getDefault();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_getDefault(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsCodec_setDefaultWithOrgApacheLuceneCodecsCodec_(OrgApacheLuceneCodecsCodec *codec);
 
@@ -171,4 +180,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCodec)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCodec")

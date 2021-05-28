@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 || defined(INCLUDE_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40))
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_
 
@@ -24,44 +30,32 @@
 @class OrgApacheLuceneUtilAttributeFactory;
 
 /*!
- @brief Backcompat uax29 tokenizer for Lucene 4.0-4.6.
- This supports Unicode 6.1.
+ @brief Backcompat uax29 tokenizer for Lucene 4.0-4.6.This supports Unicode 6.1.
  */
 @interface OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 : OrgApacheLuceneAnalysisTokenizer
-
-+ (jint)ALPHANUM;
-
-+ (jint)NUM;
-
-+ (jint)SOUTHEAST_ASIAN;
-
-+ (jint)IDEOGRAPHIC;
-
-+ (jint)HIRAGANA;
-
-+ (jint)KATAKANA;
-
-+ (jint)HANGUL;
-
-+ (jint)URL;
-
-+ (jint)EMAIL;
-
-+ (IOSObjectArray *)TOKEN_TYPES;
+@property (readonly, class) jint ALPHANUM NS_SWIFT_NAME(ALPHANUM);
+@property (readonly, class) jint NUM NS_SWIFT_NAME(NUM);
+@property (readonly, class) jint SOUTHEAST_ASIAN NS_SWIFT_NAME(SOUTHEAST_ASIAN);
+@property (readonly, class) jint IDEOGRAPHIC NS_SWIFT_NAME(IDEOGRAPHIC);
+@property (readonly, class) jint HIRAGANA NS_SWIFT_NAME(HIRAGANA);
+@property (readonly, class) jint KATAKANA NS_SWIFT_NAME(KATAKANA);
+@property (readonly, class) jint HANGUL NS_SWIFT_NAME(HANGUL);
+@property (readonly, class) jint URL NS_SWIFT_NAME(URL);
+@property (readonly, class) jint EMAIL NS_SWIFT_NAME(EMAIL);
+@property (readonly, class, strong) IOSObjectArray *TOKEN_TYPES NS_SWIFT_NAME(TOKEN_TYPES);
 
 #pragma mark Public
 
 /*!
- @brief Creates a new instance of the UAX29URLEmailTokenizer.
- Attaches
- the <code>input</code> to the newly created JFlex scanner.
+ @brief Creates a new instance of the UAX29URLEmailTokenizer.Attaches
+  the <code>input</code> to the newly created JFlex scanner.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new UAX29URLEmailTokenizer with a given <code>AttributeSource</code>.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 - (void)close;
 
@@ -77,9 +71,8 @@
 - (void)reset;
 
 /*!
- @brief Set the max allowed token length.
- Any token longer
- than this is skipped. 
+ @brief Set the max allowed token length.Any token longer
+   than this is skipped.
  */
 - (void)setMaxTokenLengthWithInt:(jint)length;
 
@@ -87,55 +80,55 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_ALPHANUM();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_ALPHANUM(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_ALPHANUM 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, ALPHANUM, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_NUM();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_NUM(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_NUM 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, NUM, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_SOUTHEAST_ASIAN();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_SOUTHEAST_ASIAN(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_SOUTHEAST_ASIAN 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, SOUTHEAST_ASIAN, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_IDEOGRAPHIC();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_IDEOGRAPHIC(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_IDEOGRAPHIC 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, IDEOGRAPHIC, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_HIRAGANA();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_HIRAGANA(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_HIRAGANA 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, HIRAGANA, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_KATAKANA();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_KATAKANA(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_KATAKANA 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, KATAKANA, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_HANGUL();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_HANGUL(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_HANGUL 6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, HANGUL, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_URL();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_URL(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_URL 7
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, URL, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_EMAIL();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_EMAIL(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_EMAIL 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, EMAIL, jint)
 
 /*!
  @brief String token types that correspond to token type int constants
  */
-inline IOSObjectArray *OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_TOKEN_TYPES();
+inline IOSObjectArray *OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_get_TOKEN_TYPES(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_TOKEN_TYPES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40, TOKEN_TYPES, IOSObjectArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_init(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *new_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *new_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *create_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *create_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *self, OrgApacheLuceneUtilAttributeFactory *factory);
 
@@ -147,4 +140,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailToke
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40")

@@ -13,51 +13,57 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocIdSetIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocIdSetIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocIdSetIterator || defined(INCLUDE_OrgApacheLuceneSearchDocIdSetIterator))
 #define OrgApacheLuceneSearchDocIdSetIterator_
 
 /*!
  @brief This abstract class defines methods to iterate over a set of non-decreasing
- doc ids.
- Note that this class assumes it iterates on doc Ids, and therefore
+  doc ids.Note that this class assumes it iterates on doc Ids, and therefore 
  <code>NO_MORE_DOCS</code> is set to #NO_MORE_DOCS in order to be used as
- a sentinel object. Implementations of this class are expected to consider
+  a sentinel object.
+ Implementations of this class are expected to consider 
  <code>Integer.MAX_VALUE</code> as an invalid value.
  */
 @interface OrgApacheLuceneSearchDocIdSetIterator : NSObject
-
-+ (jint)NO_MORE_DOCS;
+@property (readonly, class) jint NO_MORE_DOCS NS_SWIFT_NAME(NO_MORE_DOCS);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Advances to the first beyond the current whose document number is greater 
- than or equal to <i>target</i>, and returns the document number itself.
+  than or equal to <i>target</i>, and returns the document number itself.
  Exhausts the iterator and returns <code>NO_MORE_DOCS</code> if <i>target</i> 
- is greater than the highest document number in the set.
+  is greater than the highest document number in the set. 
  <p>
- The behavior of this method is <b>undefined</b> when called with
+  The behavior of this method is <b>undefined</b> when called with 
  <code> target &le; current</code>, or after the iterator has exhausted.
- Both cases may result in unpredicted behavior.
+  Both cases may result in unpredicted behavior. 
  <p>
- When <code> target &gt; current</code> it behaves as if written:
+  When <code> target &gt; current</code> it behaves as if written:  
  <pre class="prettyprint">
- int advance(int target) {
- int doc;
- while ((doc = nextDoc()) &lt; target) {
- }
- return doc;
- }
+  int advance(int target) {
+    int doc;
+    while ((doc = nextDoc()) &lt; target) {
+    }
+    return doc;
+  } 
  
 @endcode
- Some implementations are considerably more efficient than that.
+  
+  Some implementations are considerably more efficient than that. 
  <p>
- <b>NOTE:</b> this method may be called with <code>NO_MORE_DOCS</code> for
- efficiency by some Scorers. If your implementation cannot efficiently
- determine that it should exhaust, it is recommended that you check for that
- value in each call to this method.
+  <b>NOTE:</b> this method may be called with <code>NO_MORE_DOCS</code> for
+  efficiency by some Scorers. If your implementation cannot efficiently
+  determine that it should exhaust, it is recommended that you check for that
+  value in each call to this method. 
  <p>
  @since 2.9
  */
@@ -65,28 +71,28 @@
 
 /*!
  @brief A <code>DocIdSetIterator</code> that matches all documents up to
- <code>maxDoc - 1</code>.
+   <code>maxDoc - 1</code>.
  */
 + (OrgApacheLuceneSearchDocIdSetIterator *)allWithInt:(jint)maxDoc;
 
 /*!
  @brief Returns the estimated cost of this <code>DocIdSetIterator</code>.
  <p>
- This is generally an upper bound of the number of documents this iterator
- might match, but may be a rough heuristic, hardcoded value, or otherwise
- completely inaccurate.
+  This is generally an upper bound of the number of documents this iterator
+  might match, but may be a rough heuristic, hardcoded value, or otherwise
+  completely inaccurate.
  */
 - (jlong)cost;
 
 /*!
- @brief Returns the following:
+ @brief Returns the following: 
  <ul>
- <li><code>-1</code> if <code>nextDoc()</code> or
+  <li><code>-1</code> if <code>nextDoc()</code> or 
  <code>advance(int)</code> were not called yet.
- <li><code>NO_MORE_DOCS</code> if the iterator has exhausted.
- <li>Otherwise it should return the doc ID it is currently on.
+ <li><code>NO_MORE_DOCS</code> if the iterator has exhausted. 
+ <li>Otherwise it should return the doc ID it is currently on. 
  </ul>
- <p>
+  <p>
  @since 2.9
  */
 - (jint)docID;
@@ -98,11 +104,12 @@
 
 /*!
  @brief Advances to the next document in the set and returns the doc it is
- currently on, or <code>NO_MORE_DOCS</code> if there are no more docs in the
- set.
+  currently on, or <code>NO_MORE_DOCS</code> if there are no more docs in the
+  set.
  <br>
+   
  <b>NOTE:</b> after the iterator has exhausted you should not call this
- method, as it may result in unpredicted behavior.
+  method, as it may result in unpredicted behavior.
  @since 2.9
  */
 - (jint)nextDoc;
@@ -111,7 +118,7 @@
 
 /*!
  @brief Slow (linear) implementation of <code>advance</code> relying on
- <code>nextDoc()</code> to advance beyond the target position.
+   <code>nextDoc()</code> to advance beyond the target position.
  */
 - (jint)slowAdvanceWithInt:(jint)target;
 
@@ -120,21 +127,25 @@
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocIdSetIterator)
 
 /*!
- @brief When returned by <code>nextDoc()</code>, <code>advance(int)</code> and
+ @brief When returned by <code>nextDoc()</code>, <code>advance(int)</code> and 
  <code>docID()</code> it means there are no more docs in the iterator.
  */
-inline jint OrgApacheLuceneSearchDocIdSetIterator_get_NO_MORE_DOCS();
+inline jint OrgApacheLuceneSearchDocIdSetIterator_get_NO_MORE_DOCS(void);
 #define OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS 2147483647
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchDocIdSetIterator, NO_MORE_DOCS, jint)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneSearchDocIdSetIterator_empty();
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDocIdSetIterator_init(OrgApacheLuceneSearchDocIdSetIterator *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneSearchDocIdSetIterator_empty(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneSearchDocIdSetIterator_allWithInt_(jint maxDoc);
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDocIdSetIterator_init(OrgApacheLuceneSearchDocIdSetIterator *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocIdSetIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocIdSetIterator")

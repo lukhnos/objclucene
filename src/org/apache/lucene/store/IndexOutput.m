@@ -3,12 +3,14 @@
 //  source: ./core/src/java/org/apache/lucene/store/IndexOutput.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/store/IndexOutput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/IndexOutput must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreIndexOutput () {
  @public
@@ -53,17 +55,27 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreIndexOutput, resourceDescription_, NSStr
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "IndexOutput", NULL, 0x4, NULL, NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x401, NULL, NULL },
-    { "getChecksum", NULL, "J", 0x401, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(close);
+  methods[2].selector = @selector(getFilePointer);
+  methods[3].selector = @selector(getChecksum);
+  methods[4].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "resourceDescription_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "resourceDescription_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreIndexOutput = { 2, "IndexOutput", "org.apache.lucene.store", NULL, 0x401, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "LJavaIoIOException;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreIndexOutput = { "IndexOutput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x401, 5, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreIndexOutput;
 }
 

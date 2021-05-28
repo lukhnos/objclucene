@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_
 
@@ -21,21 +27,23 @@
 #include "org/apache/lucene/analysis/TokenStream.h"
 
 @class OrgApacheLuceneAnalysisToken;
+@class OrgApacheLuceneUtilAttributeFactory;
+@class OrgApacheLuceneUtilAttributeSource;
 
 /*!
  @brief Joins two token streams and leaves the last token of the first stream available
- to be used when updating the token values in the second stream based on that token.
- The default implementation adds last prefix token end offset to the suffix token start and end offsets.
+  to be used when updating the token values in the second stream based on that token.
+ The default implementation adds last prefix token end offset to the suffix token start and end offsets. 
  <p>
- <b>NOTE:</b> This filter might not behave correctly if used with custom Attributes, i.e. Attributes other than
- the ones located in org.apache.lucene.analysis.tokenattributes. 
+  <b>NOTE:</b> This filter might not behave correctly if used with custom Attributes, i.e. Attributes other than
+  the ones located in org.apache.lucene.analysis.tokenattributes.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter : OrgApacheLuceneAnalysisTokenStream
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)prefix
-                    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)suffix;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)prefix
+                              withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)suffix;
 
 - (void)close;
 
@@ -62,6 +70,14 @@
 - (OrgApacheLuceneAnalysisToken *)updateSuffixTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)suffixToken
                                                    withOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)lastPrefixToken;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter)
@@ -76,4 +92,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenF
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter")

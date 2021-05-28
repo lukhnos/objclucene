@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexReaderSlice
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexReaderSlice_) && (INCLUDE_ALL_OrgApacheLuceneIndexReaderSlice || defined(INCLUDE_OrgApacheLuceneIndexReaderSlice))
 #define OrgApacheLuceneIndexReaderSlice_
 
@@ -36,19 +42,22 @@
    */
   jint readerIndex_;
 }
-
-+ (IOSObjectArray *)EMPTY_ARRAY;
+@property (readonly, class, strong) IOSObjectArray *EMPTY_ARRAY NS_SWIFT_NAME(EMPTY_ARRAY);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)length
-                    withInt:(jint)readerIndex;
+- (instancetype __nonnull)initWithInt:(jint)start
+                              withInt:(jint)length
+                              withInt:(jint)readerIndex;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -57,7 +66,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexReaderSlice)
 /*!
  @brief Zero-length <code>ReaderSlice</code> array.
  */
-inline IOSObjectArray *OrgApacheLuceneIndexReaderSlice_get_EMPTY_ARRAY();
+inline IOSObjectArray *OrgApacheLuceneIndexReaderSlice_get_EMPTY_ARRAY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexReaderSlice, EMPTY_ARRAY, IOSObjectArray *)
@@ -72,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReaderSlice)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexReaderSlice")

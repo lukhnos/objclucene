@@ -3,22 +3,24 @@
 //  source: ./core/src/java/org/apache/lucene/search/PhrasePositions.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
 #include "org/apache/lucene/search/PhrasePositions.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/PhrasePositions must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static jboolean OrgApacheLuceneSearchPhrasePositions_nextPosition(OrgApacheLuceneSearchPhrasePositions *self);
 
 @implementation OrgApacheLuceneSearchPhrasePositions
 
-- (instancetype)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
-                                                 withInt:(jint)o
-                                                 withInt:(jint)ord
-                       withOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms {
-  OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(self, postings, o, ord, terms);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
+                                                               withInt:(jint)o
+                                                               withInt:(jint)ord
+                                     withOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms {
+  OrgApacheLuceneSearchPhrasePositions_initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(self, postings, o, ord, terms);
   return self;
 }
 
@@ -47,30 +49,39 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchPhrasePositions_nex
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexPostingsEnum:withInt:withInt:withOrgApacheLuceneIndexTermArray:", "PhrasePositions", NULL, 0x0, NULL, NULL },
-    { "firstPosition", NULL, "V", 0x10, "Ljava.io.IOException;", NULL },
-    { "nextPosition", NULL, "Z", 0x10, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x10, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x10, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum:withInt:withInt:withOrgApacheLuceneIndexTermArray:);
+  methods[1].selector = @selector(firstPosition);
+  methods[2].selector = @selector(nextPosition);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "position_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "offset_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ord_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "postings_", NULL, 0x10, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x0, "Lorg.apache.lucene.search.PhrasePositions;", NULL, NULL, .constantValue.asLong = 0 },
-    { "rptGroup_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "rptInd_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "terms_", NULL, 0x10, "[Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
+    { "position_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "count_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "offset_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ord_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "postings_", "LOrgApacheLuceneIndexPostingsEnum;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "next_", "LOrgApacheLuceneSearchPhrasePositions;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "rptGroup_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "rptInd_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "terms_", "[LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhrasePositions = { 2, "PhrasePositions", "org.apache.lucene.search", NULL, 0x10, 4, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexPostingsEnum;II[LOrgApacheLuceneIndexTerm;", "LJavaIoIOException;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhrasePositions = { "PhrasePositions", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x10, 4, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPhrasePositions;
 }
 
 @end
 
-void OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneSearchPhrasePositions *self, OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) {
+void OrgApacheLuceneSearchPhrasePositions_initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneSearchPhrasePositions *self, OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) {
   NSObject_init(self);
   self->rptGroup_ = -1;
   JreStrongAssign(&self->postings_, postings);
@@ -79,12 +90,12 @@ void OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEn
   JreStrongAssign(&self->terms_, terms);
 }
 
-OrgApacheLuceneSearchPhrasePositions *new_OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPhrasePositions, initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_, postings, o, ord, terms)
+OrgApacheLuceneSearchPhrasePositions *new_OrgApacheLuceneSearchPhrasePositions_initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPhrasePositions, initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_, postings, o, ord, terms)
 }
 
-OrgApacheLuceneSearchPhrasePositions *create_OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPhrasePositions, initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_, postings, o, ord, terms)
+OrgApacheLuceneSearchPhrasePositions *create_OrgApacheLuceneSearchPhrasePositions_initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPhrasePositions, initPackagePrivateWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_, postings, o, ord, terms)
 }
 
 jboolean OrgApacheLuceneSearchPhrasePositions_nextPosition(OrgApacheLuceneSearchPhrasePositions *self) {

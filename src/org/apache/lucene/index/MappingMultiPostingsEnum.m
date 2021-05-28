@@ -3,11 +3,9 @@
 //  source: ./core/src/java/org/apache/lucene/index/MappingMultiPostingsEnum.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "org/apache/lucene/codecs/FieldsProducer.h"
 #include "org/apache/lucene/index/CorruptIndexException.h"
@@ -19,6 +17,10 @@
 #include "org/apache/lucene/index/ReaderSlice.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MappingMultiPostingsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexMappingMultiPostingsEnum () {
  @public
@@ -33,9 +35,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMappingMultiPostingsEnum, mergeState_, O
 
 @implementation OrgApacheLuceneIndexMappingMultiPostingsEnum
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState {
-  OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(self, field, mergeState);
+- (instancetype)initPackagePrivateWithNSString:(NSString *)field
+            withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState {
+  OrgApacheLuceneIndexMappingMultiPostingsEnum_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_(self, field, mergeState);
   return self;
 }
 
@@ -145,52 +147,70 @@ withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneIndexMergeState:", "MappingMultiPostingsEnum", NULL, 0x1, NULL, NULL },
-    { "resetWithOrgApacheLuceneIndexMultiPostingsEnum:", "reset", "Lorg.apache.lucene.index.MappingMultiPostingsEnum;", 0x0, NULL, NULL },
-    { "getNumSubs", NULL, "I", 0x1, NULL, NULL },
-    { "getSubs", NULL, "[Lorg.apache.lucene.index.MultiPostingsEnum$EnumWithSlice;", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "nextPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "startOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "endOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMappingMultiPostingsEnum;", 0x0, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithNSString:withOrgApacheLuceneIndexMergeState:);
+  methods[1].selector = @selector(resetWithOrgApacheLuceneIndexMultiPostingsEnum:);
+  methods[2].selector = @selector(getNumSubs);
+  methods[3].selector = @selector(getSubs);
+  methods[4].selector = @selector(freq);
+  methods[5].selector = @selector(docID);
+  methods[6].selector = @selector(advanceWithInt:);
+  methods[7].selector = @selector(nextDoc);
+  methods[8].selector = @selector(nextPosition);
+  methods[9].selector = @selector(startOffset);
+  methods[10].selector = @selector(endOffset);
+  methods[11].selector = @selector(getPayload);
+  methods[12].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "subs_", NULL, 0x2, "[Lorg.apache.lucene.index.MultiPostingsEnum$EnumWithSlice;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numSubs_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "upto_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentMap_", NULL, 0x0, "Lorg.apache.lucene.index.MergeState$DocMap;", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x0, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentBase_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "mergeState_", NULL, 0x2, "Lorg.apache.lucene.index.MergeState;", NULL, NULL, .constantValue.asLong = 0 },
-    { "multiDocsAndPositionsEnum_", NULL, 0x0, "Lorg.apache.lucene.index.MultiPostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "subs_", "[LOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numSubs_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "upto_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "currentMap_", "LOrgApacheLuceneIndexMergeState_DocMap;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "current_", "LOrgApacheLuceneIndexPostingsEnum;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "currentBase_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "mergeState_", "LOrgApacheLuceneIndexMergeState;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "multiDocsAndPositionsEnum_", "LOrgApacheLuceneIndexMultiPostingsEnum;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMappingMultiPostingsEnum = { 2, "MappingMultiPostingsEnum", "org.apache.lucene.index", NULL, 0x10, 13, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneIndexMergeState;", "reset", "LOrgApacheLuceneIndexMultiPostingsEnum;", "LJavaIoIOException;", "advance", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMappingMultiPostingsEnum = { "MappingMultiPostingsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 13, 10, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMappingMultiPostingsEnum;
 }
 
 @end
 
-void OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMappingMultiPostingsEnum *self, NSString *field, OrgApacheLuceneIndexMergeState *mergeState) {
+void OrgApacheLuceneIndexMappingMultiPostingsEnum_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMappingMultiPostingsEnum *self, NSString *field, OrgApacheLuceneIndexMergeState *mergeState) {
   OrgApacheLuceneIndexPostingsEnum_init(self);
   self->doc_ = -1;
   JreStrongAssign(&self->field_, field);
   JreStrongAssign(&self->mergeState_, mergeState);
 }
 
-OrgApacheLuceneIndexMappingMultiPostingsEnum *new_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMappingMultiPostingsEnum, initWithNSString_withOrgApacheLuceneIndexMergeState_, field, mergeState)
+OrgApacheLuceneIndexMappingMultiPostingsEnum *new_OrgApacheLuceneIndexMappingMultiPostingsEnum_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMappingMultiPostingsEnum, initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_, field, mergeState)
 }
 
-OrgApacheLuceneIndexMappingMultiPostingsEnum *create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMappingMultiPostingsEnum, initWithNSString_withOrgApacheLuceneIndexMergeState_, field, mergeState)
+OrgApacheLuceneIndexMappingMultiPostingsEnum *create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMappingMultiPostingsEnum, initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_, field, mergeState)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMappingMultiPostingsEnum)

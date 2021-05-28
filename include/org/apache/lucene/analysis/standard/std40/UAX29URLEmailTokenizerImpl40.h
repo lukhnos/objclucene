@@ -13,50 +13,44 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40 || defined(INCLUDE_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40))
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_
 
-@class IOSObjectArray;
 @class JavaIoReader;
 @protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
 
 @interface OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40 : NSObject
-
-+ (jint)YYEOF;
-
-+ (jint)YYINITIAL;
-
-+ (jint)WORD_TYPE;
-
-+ (jint)NUMERIC_TYPE;
-
-+ (jint)SOUTH_EAST_ASIAN_TYPE;
-
-+ (jint)IDEOGRAPHIC_TYPE;
-
-+ (jint)HIRAGANA_TYPE;
-
-+ (jint)KATAKANA_TYPE;
-
-+ (jint)HANGUL_TYPE;
-
-+ (jint)EMAIL_TYPE;
-
-+ (jint)URL_TYPE;
+@property (readonly, class) jint YYEOF NS_SWIFT_NAME(YYEOF);
+@property (readonly, class) jint YYINITIAL NS_SWIFT_NAME(YYINITIAL);
+@property (readonly, class) jint WORD_TYPE NS_SWIFT_NAME(WORD_TYPE);
+@property (readonly, class) jint NUMERIC_TYPE NS_SWIFT_NAME(NUMERIC_TYPE);
+@property (readonly, class) jint SOUTH_EAST_ASIAN_TYPE NS_SWIFT_NAME(SOUTH_EAST_ASIAN_TYPE);
+@property (readonly, class) jint IDEOGRAPHIC_TYPE NS_SWIFT_NAME(IDEOGRAPHIC_TYPE);
+@property (readonly, class) jint HIRAGANA_TYPE NS_SWIFT_NAME(HIRAGANA_TYPE);
+@property (readonly, class) jint KATAKANA_TYPE NS_SWIFT_NAME(KATAKANA_TYPE);
+@property (readonly, class) jint HANGUL_TYPE NS_SWIFT_NAME(HANGUL_TYPE);
+@property (readonly, class) jint EMAIL_TYPE NS_SWIFT_NAME(EMAIL_TYPE);
+@property (readonly, class) jint URL_TYPE NS_SWIFT_NAME(URL_TYPE);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new scanner
- @param inArg  the java.io.Reader to read input from.
+ @param inArg the java.io.Reader to read input from.
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)inArg;
 
 /*!
  @brief Resumes scanning until the next regular expression is matched,
- the end of input is encountered or an I/O-Error occurs.
+  the end of input is encountered or an I/O-Error occurs.
  @return the next token
- @exception java.io.IOException  if any I/O-Error occurs
+ @throw java.io.IOExceptionif any I/O-Error occurs
  */
 - (jint)getNextToken;
 
@@ -77,10 +71,9 @@
 
 /*!
  @brief Returns the character at position <tt>pos</tt> from the 
- matched text.
+  matched text.
  It is equivalent to yytext().charAt(pos), but faster
- @param pos the position of the character to fetch. 
- A value from 0 to yylength()-1.
+ @param pos the position of the character to fetch.              A value from 0 to yylength()-1.
  @return the character at position pos
  */
 - (jchar)yycharatWithInt:(jint)pos;
@@ -98,19 +91,18 @@
 /*!
  @brief Pushes the specified amount of characters back into the input stream.
  They will be read again by then next call of the scanning method
- @param number  the number of characters to be read again.
- This number must not be greater than yylength()!
+ @param number the number of characters to be read again.                 This number must not be greater than yylength()!
  */
 - (void)yypushbackWithInt:(jint)number;
 
 /*!
  @brief Resets the scanner to read from a new input stream.
  Does not close the old reader.
- All internal variables are reset, the old input stream 
+  All internal variables are reset, the old input stream  
  <b>cannot</b> be reused (internal buffer is discarded and lost).
- Lexical state is set to <tt>ZZ_INITIAL</tt>.
- Internal scan buffer is resized down to its initial length, if it has grown.
- @param reader   the new input stream
+  Lexical state is set to <tt>ZZ_INITIAL</tt>.
+  Internal scan buffer is resized down to its initial length, if it has grown.
+ @param reader the new input stream
  */
 - (void)yyresetWithJavaIoReader:(JavaIoReader *)reader;
 
@@ -124,6 +116,10 @@
  */
 - (NSString *)yytext;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40)
@@ -131,65 +127,64 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImp
 /*!
  @brief This character denotes the end of file
  */
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_YYEOF();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_YYEOF(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_YYEOF -1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, YYEOF, jint)
 
 /*!
  @brief lexical states
  */
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_YYINITIAL();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_YYINITIAL(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_YYINITIAL 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, YYINITIAL, jint)
 
 /*!
  @brief Alphanumeric sequences
  */
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_WORD_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_WORD_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_WORD_TYPE 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, WORD_TYPE, jint)
 
 /*!
  @brief Numbers
  */
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_NUMERIC_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_NUMERIC_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_NUMERIC_TYPE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, NUMERIC_TYPE, jint)
 
 /*!
  @brief Chars in class \p{Line_Break = Complex_Context} are from South East Asian
- scripts (Thai, Lao, Myanmar, Khmer, etc.).
- Sequences of these are kept 
- together as as a single token rather than broken up, because the logic
- required to break them at word boundaries is too complex for UAX#29.
+  scripts (Thai, Lao, Myanmar, Khmer, etc.).Sequences of these are kept 
+  together as as a single token rather than broken up, because the logic
+  required to break them at word boundaries is too complex for UAX#29.
  <p>
- See Unicode Line Breaking Algorithm: http://www.unicode.org/reports/tr14/#SA
+  See Unicode Line Breaking Algorithm: http://www.unicode.org/reports/tr14/#SA
  */
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_SOUTH_EAST_ASIAN_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_SOUTH_EAST_ASIAN_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_SOUTH_EAST_ASIAN_TYPE 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, SOUTH_EAST_ASIAN_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_IDEOGRAPHIC_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_IDEOGRAPHIC_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_IDEOGRAPHIC_TYPE 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, IDEOGRAPHIC_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_HIRAGANA_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_HIRAGANA_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_HIRAGANA_TYPE 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, HIRAGANA_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_KATAKANA_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_KATAKANA_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_KATAKANA_TYPE 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, KATAKANA_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_HANGUL_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_HANGUL_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_HANGUL_TYPE 6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, HANGUL_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_EMAIL_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_EMAIL_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_EMAIL_TYPE 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, EMAIL_TYPE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_URL_TYPE();
+inline jint OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_get_URL_TYPE(void);
 #define OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_URL_TYPE 7
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40, URL_TYPE, jint)
 
@@ -203,4 +198,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailToke
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40")

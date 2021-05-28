@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsMaxPayloadFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPayloadsMaxPayloadFunction_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMaxPayloadFunction || defined(INCLUDE_OrgApacheLuceneSearchPayloadsMaxPayloadFunction))
 #define OrgApacheLuceneSearchPayloadsMaxPayloadFunction_
 
@@ -23,13 +29,13 @@
 /*!
  @brief Returns the maximum payload score seen, else 1 if there are no payloads on the doc.
  <p>
- Is thread safe and completely reusable.
+  Is thread safe and completely reusable.
  */
 @interface OrgApacheLuceneSearchPayloadsMaxPayloadFunction : OrgApacheLuceneSearchPayloadsPayloadFunction
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jfloat)currentScoreWithInt:(jint)docId
                  withNSString:(NSString *)field
@@ -54,12 +60,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPayloadsMaxPayloadFunction)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init(OrgApacheLuceneSearchPayloadsMaxPayloadFunction *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMaxPayloadFunction *new_OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMaxPayloadFunction *new_OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMaxPayloadFunction *create_OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMaxPayloadFunction *create_OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsMaxPayloadFunction)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMaxPayloadFunction")

@@ -3,13 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/PackedDataOutput.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Math.h"
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/packed/PackedDataOutput.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/PackedDataOutput must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneUtilPackedPackedDataOutput
 
@@ -20,7 +22,7 @@
 
 - (void)writeLongWithLong:(jlong)value
                   withInt:(jint)bitsPerValue {
-  JreAssert((bitsPerValue == 64 || (value >= 0 && value <= OrgApacheLuceneUtilPackedPackedInts_maxValueWithInt_(bitsPerValue))), (@"org/apache/lucene/util/packed/PackedDataOutput.java:49 condition failed: assert bitsPerValue == 64 || (value >= 0 && value <= PackedInts.maxValue(bitsPerValue));"));
+  JreAssert(bitsPerValue == 64 || (value >= 0 && value <= OrgApacheLuceneUtilPackedPackedInts_maxValueWithInt_(bitsPerValue)), @"org/apache/lucene/util/packed/PackedDataOutput.java:49 condition failed: assert bitsPerValue == 64 || (value >= 0 && value <= PackedInts.maxValue(bitsPerValue));");
   while (bitsPerValue > 0) {
     if (remainingBits_ == 0) {
       [((OrgApacheLuceneStoreDataOutput *) nil_chk(out_)) writeByteWithByte:(jbyte) current_];
@@ -48,17 +50,25 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDataOutput:", "PackedDataOutput", NULL, 0x1, NULL, NULL },
-    { "writeLongWithLong:withInt:", "writeLong", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "flush", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDataOutput:);
+  methods[1].selector = @selector(writeLongWithLong:withInt:);
+  methods[2].selector = @selector(flush);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "out_", NULL, 0x10, "Lorg.apache.lucene.store.DataOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "remainingBits_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "out_", "LOrgApacheLuceneStoreDataOutput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "current_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "remainingBits_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedDataOutput = { 2, "PackedDataOutput", "org.apache.lucene.util.packed", NULL, 0x11, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDataOutput;", "writeLong", "JI", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedDataOutput = { "PackedDataOutput", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x11, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPackedDataOutput;
 }
 

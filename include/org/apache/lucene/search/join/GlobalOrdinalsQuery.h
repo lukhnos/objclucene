@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery || defined(INCLUDE_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery))
 #define OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_
 
@@ -41,22 +47,26 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)foundOrds
-                                         withNSString:(NSString *)joinField
-    withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)globalOrds
-                       withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)toQuery
-                       withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
-                  withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)foundOrds
+                                                                 withNSString:(NSString *)joinField
+                            withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)globalOrds
+                                               withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)toQuery
+                                               withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
+                                          withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *self, OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initPackagePrivateWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *self, OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *new_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initPackagePrivateWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader);
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initPackagePrivateWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneUtilLongBitSet *foundOrds, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneIndexIndexReader *indexReader);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery)
 
@@ -94,9 +104,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery:(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *)outer$
-                                      withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                     withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)approximationWeight;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsQuery:(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery *)outer$
+                                                withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                                               withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)approximationWeight;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -135,18 +149,24 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_W)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                          withFloat:(jfloat)score
-                  withOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)foundOrds
-            withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)approximationScorer
-                  withOrgApacheLuceneUtilLongValues:(OrgApacheLuceneUtilLongValues *)segmentOrdToGlobalOrdLookup;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                    withFloat:(jfloat)score
+                            withOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)foundOrds
+                      withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values
+                              withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)approximationScorer
+                            withOrgApacheLuceneUtilLongValues:(OrgApacheLuceneUtilLongValues *)segmentOrdToGlobalOrdLookup;
 
 - (jint)advanceWithInt:(jint)target;
 
 #pragma mark Protected
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0
+                                    withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)arg1
+                                            withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -186,17 +206,23 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_OrdinalM
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                          withFloat:(jfloat)score
-                  withOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)foundOrds
-            withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)approximationScorer;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                    withFloat:(jfloat)score
+                            withOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)foundOrds
+                      withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values
+                              withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)approximationScorer;
 
 - (jint)advanceWithInt:(jint)target;
 
 #pragma mark Protected
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0
+                                    withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)arg1
+                                            withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -214,4 +240,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_SegmentO
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery")

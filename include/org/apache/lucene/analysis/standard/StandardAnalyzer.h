@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisStandardStandardAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisStandardStandardAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisStandardStandardAnalyzer))
 #define OrgApacheLuceneAnalysisStandardStandardAnalyzer_
 
@@ -27,33 +33,31 @@
 /*!
  @brief Filters <code>StandardTokenizer</code> with <code>StandardFilter</code>, <code>LowerCaseFilter</code>
   and <code>StopFilter</code>, using a list of
- English stop words.
+  English stop words.
  */
 @interface OrgApacheLuceneAnalysisStandardStandardAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
-
-+ (jint)DEFAULT_MAX_TOKEN_LENGTH;
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)STOP_WORDS_SET;
+@property (readonly, class) jint DEFAULT_MAX_TOKEN_LENGTH NS_SWIFT_NAME(DEFAULT_MAX_TOKEN_LENGTH);
+@property (readonly, class, strong) OrgApacheLuceneAnalysisUtilCharArraySet *STOP_WORDS_SET NS_SWIFT_NAME(STOP_WORDS_SET);
 
 #pragma mark Public
 
 /*!
  @brief Builds an analyzer with the default stop words (<code>STOP_WORDS_SET</code>).
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Builds an analyzer with the given stop words.
  @param stopWords stop words
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
 
 /*!
  @brief Builds an analyzer with the stop words from the given reader.
  - seealso: WordlistLoader#getWordSet(Reader)
  @param stopwords Reader to read stop words from
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)stopwords;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)stopwords;
 
 /*!
  - seealso: #setMaxTokenLength
@@ -61,11 +65,11 @@
 - (jint)getMaxTokenLength;
 
 /*!
- @brief Set maximum allowed token length.
- If a token is seen
- that exceeds this length then it is discarded.  This
- setting only takes effect the next time tokenStream or
- tokenStream is called.
+ @brief Set maximum allowed token length.If a token is seen
+  that exceeds this length then it is discarded.
+ This
+  setting only takes effect the next time tokenStream or
+  tokenStream is called.
  */
 - (void)setMaxTokenLengthWithInt:(jint)length;
 
@@ -80,15 +84,15 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardStandardAnalyzer)
 /*!
  @brief Default maximum allowed token length
  */
-inline jint OrgApacheLuceneAnalysisStandardStandardAnalyzer_get_DEFAULT_MAX_TOKEN_LENGTH();
+inline jint OrgApacheLuceneAnalysisStandardStandardAnalyzer_get_DEFAULT_MAX_TOKEN_LENGTH(void);
 #define OrgApacheLuceneAnalysisStandardStandardAnalyzer_DEFAULT_MAX_TOKEN_LENGTH 255
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardAnalyzer, DEFAULT_MAX_TOKEN_LENGTH, jint)
 
 /*!
  @brief An unmodifiable set containing some common English words that are usually not
- useful for searching.
+   useful for searching.
  */
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardStandardAnalyzer_get_STOP_WORDS_SET();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardStandardAnalyzer_get_STOP_WORDS_SET(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardStandardAnalyzer_STOP_WORDS_SET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisStandardStandardAnalyzer, STOP_WORDS_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
@@ -101,9 +105,9 @@ FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardAnalyzer *create_OrgApa
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStandardAnalyzer_init(OrgApacheLuceneAnalysisStandardStandardAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardAnalyzer *new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardAnalyzer *new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardAnalyzer *create_OrgApacheLuceneAnalysisStandardStandardAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardAnalyzer *create_OrgApacheLuceneAnalysisStandardStandardAnalyzer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithJavaIoReader_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *self, JavaIoReader *stopwords);
 
@@ -115,4 +119,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStandardAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardAnalyzer")

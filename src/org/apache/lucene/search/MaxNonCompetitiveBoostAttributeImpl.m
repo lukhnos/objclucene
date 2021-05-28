@@ -12,6 +12,12 @@
 #include "org/apache/lucene/util/AttributeReflector.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/MaxNonCompetitiveBoostAttributeImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl () {
  @public
   jfloat maxNonCompetitiveBoost_;
@@ -23,6 +29,13 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl, competitiveTerm_, OrgApacheLuceneUtilBytesRef *)
 
 @implementation OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setMaxNonCompetitiveBoostWithFloat:(jfloat)maxNonCompetitiveBoost {
   self->maxNonCompetitiveBoost_ = maxNonCompetitiveBoost;
@@ -56,34 +69,40 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl, co
   [reflector reflectWithIOSClass:OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute_class_() withNSString:@"competitiveTerm" withId:competitiveTerm_];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(competitiveTerm_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setMaxNonCompetitiveBoostWithFloat:", "setMaxNonCompetitiveBoost", "V", 0x1, NULL, NULL },
-    { "getMaxNonCompetitiveBoost", NULL, "F", 0x1, NULL, NULL },
-    { "setCompetitiveTermWithOrgApacheLuceneUtilBytesRef:", "setCompetitiveTerm", "V", 0x1, NULL, NULL },
-    { "getCompetitiveTerm", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
-    { "init", "MaxNonCompetitiveBoostAttributeImpl", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setMaxNonCompetitiveBoostWithFloat:);
+  methods[2].selector = @selector(getMaxNonCompetitiveBoost);
+  methods[3].selector = @selector(setCompetitiveTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(getCompetitiveTerm);
+  methods[5].selector = @selector(clear);
+  methods[6].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[7].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "maxNonCompetitiveBoost_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "competitiveTerm_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "maxNonCompetitiveBoost_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "competitiveTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl = { 2, "MaxNonCompetitiveBoostAttributeImpl", "org.apache.lucene.search", NULL, 0x11, 8, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setMaxNonCompetitiveBoost", "F", "setCompetitiveTerm", "LOrgApacheLuceneUtilBytesRef;", "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl = { "MaxNonCompetitiveBoostAttributeImpl", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 8, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl;
 }
 

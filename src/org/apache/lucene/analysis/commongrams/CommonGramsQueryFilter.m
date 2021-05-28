@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/commongrams/CommonGramsFilter.h"
@@ -13,6 +12,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
 #include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/commongrams/CommonGramsQueryFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter () {
  @public
@@ -46,7 +49,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter, pr
 
 - (jboolean)incrementToken {
   while (!exhausted_ && [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    OrgApacheLuceneUtilAttributeSource_State *current = [self captureState];
+    OrgApacheLuceneUtilAttributeSource_State *current = JreRetainedLocalValue([self captureState]);
     if (previous_ != nil && ![self isGramType]) {
       [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:previous_];
       JreStrongAssign(&previous_, current);
@@ -83,20 +86,29 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter, pr
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter:", "CommonGramsQueryFilter", NULL, 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "isGramType", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter:);
+  methods[1].selector = @selector(reset);
+  methods[2].selector = @selector(incrementToken);
+  methods[3].selector = @selector(isGramType);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "typeAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "previous_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
-    { "previousType_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "exhausted_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "typeAttribute_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncAttribute_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "previous_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "previousType_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "exhausted_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter = { 2, "CommonGramsQueryFilter", "org.apache.lucene.analysis.commongrams", NULL, 0x11, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisCommongramsCommonGramsFilter;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter = { "CommonGramsQueryFilter", "org.apache.lucene.analysis.commongrams", ptrTable, methods, fields, 7, 0x11, 4, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter;
 }
 

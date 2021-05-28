@@ -9,6 +9,10 @@
 #include "org/apache/lucene/queries/function/valuesource/DivFloatFunction.h"
 #include "org/apache/lucene/queries/function/valuesource/DualFloatFunction.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/DivFloatFunction must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction
 
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
@@ -28,12 +32,20 @@ withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunction
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSource:withOrgApacheLuceneQueriesFunctionValueSource:", "DivFloatFunction", NULL, 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "funcWithInt:withOrgApacheLuceneQueriesFunctionFunctionValues:withOrgApacheLuceneQueriesFunctionFunctionValues:", "func", "F", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x4, 1, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction = { 2, "DivFloatFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValueSource:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(funcWithInt:withOrgApacheLuceneQueriesFunctionFunctionValues:withOrgApacheLuceneQueriesFunctionFunctionValues:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValueSource;LOrgApacheLuceneQueriesFunctionValueSource;", "func", "ILOrgApacheLuceneQueriesFunctionFunctionValues;LOrgApacheLuceneQueriesFunctionFunctionValues;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction = { "DivFloatFunction", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction;
 }
 

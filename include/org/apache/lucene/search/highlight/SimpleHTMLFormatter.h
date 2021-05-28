@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter || defined(INCLUDE_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter))
 #define OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_
 
@@ -24,7 +30,7 @@
 
 /*!
  @brief Simple <code>Formatter</code> implementation to highlight terms with a pre and
- post tag.
+  post tag.
  */
 @interface OrgApacheLuceneSearchHighlightSimpleHTMLFormatter : NSObject < OrgApacheLuceneSearchHighlightFormatter >
 
@@ -33,10 +39,10 @@
 /*!
  @brief Default constructor uses HTML: &lt;B&gt; tags to markup terms.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithNSString:(NSString *)preTag
-                    withNSString:(NSString *)postTag;
+- (instancetype __nonnull)initWithNSString:(NSString *)preTag
+                              withNSString:(NSString *)postTag;
 
 - (NSString *)highlightTermWithNSString:(NSString *)originalText
 withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightTokenGroup *)tokenGroup;
@@ -53,12 +59,16 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *create_OrgA
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init(OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *new_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *new_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *create_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *create_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSimpleHTMLFormatter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter")

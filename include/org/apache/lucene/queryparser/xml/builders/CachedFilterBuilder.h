@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder))
 #define OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_
 
@@ -26,30 +32,34 @@
 @protocol OrgW3cDomElement;
 
 /*!
- @brief Filters are cached in an LRU Cache keyed on the contained query or filter object.
- Using this will
- speed up overall performance for repeated uses of the same expensive query/filter. The sorts of
- queries/filters likely to benefit from caching need not necessarily be complex - e.g. simple
- TermQuerys with a large DF (document frequency) can be expensive  on large indexes.
- A good example of this might be a term query on a field with only 2 possible  values -
- "true" or "false". In a large index, querying or filtering on this field requires reading
- millions  of document ids from disk which can more usefully be cached as a filter bitset.
+ @brief Filters are cached in an LRU Cache keyed on the contained query or filter object.Using this will
+  speed up overall performance for repeated uses of the same expensive query/filter.
+ The sorts of
+  queries/filters likely to benefit from caching need not necessarily be complex - e.g. simple
+  TermQuerys with a large DF (document frequency) can be expensive  on large indexes.
+  A good example of this might be a term query on a field with only 2 possible  values -
+  "true" or "false". In a large index, querying or filtering on this field requires reading
+  millions  of document ids from disk which can more usefully be cached as a filter bitset. 
  <p>
- For Queries/Filters to be cached and reused the object must implement hashcode and
- equals methods correctly so that duplicate queries/filters can be detected in the cache.
+  For Queries/Filters to be cached and reused the object must implement hashcode and
+  equals methods correctly so that duplicate queries/filters can be detected in the cache. 
  <p>
- The CoreParser.maxNumCachedFilters property can be used to control the size of the LRU
- Cache established during the construction of CoreParser instances.
+  The CoreParser.maxNumCachedFilters property can be used to control the size of the LRU
+  Cache established during the construction of CoreParser instances.
  */
 @interface OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory:(OrgApacheLuceneQueryparserXmlQueryBuilderFactory *)queryFactory
-                   withOrgApacheLuceneQueryparserXmlFilterBuilderFactory:(OrgApacheLuceneQueryparserXmlFilterBuilderFactory *)filterFactory
-                                                                 withInt:(jint)cacheSize;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory:(OrgApacheLuceneQueryparserXmlQueryBuilderFactory *)queryFactory
+                             withOrgApacheLuceneQueryparserXmlFilterBuilderFactory:(OrgApacheLuceneQueryparserXmlFilterBuilderFactory *)filterFactory
+                                                                           withInt:(jint)cacheSize;
 
 - (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -72,6 +82,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuil
 #define INCLUDE_JavaUtilLinkedHashMap 1
 #include "java/util/LinkedHashMap.h"
 
+@protocol JavaUtilMap;
 @protocol JavaUtilMap_Entry;
 
 @interface OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache : JavaUtilLinkedHashMap {
@@ -81,11 +92,24 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuil
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxsize;
+- (instancetype __nonnull)initWithInt:(jint)maxsize;
 
 #pragma mark Protected
 
 - (jboolean)removeEldestEntryWithJavaUtilMap_Entry:(id<JavaUtilMap_Entry>)eldest;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                            withFloat:(jfloat)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                            withFloat:(jfloat)arg1
+                          withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -101,4 +125,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder")

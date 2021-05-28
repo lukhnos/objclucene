@@ -4,8 +4,8 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -15,6 +15,10 @@
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/FilteredTermsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexFilteredTermsEnum () {
  @public
@@ -74,15 +78,15 @@ __attribute__((unused)) static void OrgApacheLuceneIndexFilteredTermsEnum_Accept
 }
 
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [[self getClass] getName], @" does not support seeking"));
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [[self java_getClass] getName], @" does not support seeking"));
 }
 
 - (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [[self getClass] getName], @" does not support seeking"));
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [[self java_getClass] getName], @" does not support seeking"));
 }
 
 - (void)seekExactWithLong:(jlong)ord {
-  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [[self getClass] getName], @" does not support seeking"));
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [[self java_getClass] getName], @" does not support seeking"));
 }
 
 - (jlong)ord {
@@ -96,11 +100,11 @@ __attribute__((unused)) static void OrgApacheLuceneIndexFilteredTermsEnum_Accept
 
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state {
-  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [[self getClass] getName], @" does not support seeking"));
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [[self java_getClass] getName], @" does not support seeking"));
 }
 
 - (OrgApacheLuceneIndexTermState *)termState {
-  JreAssert((tenum_ != nil), (@"org/apache/lucene/index/FilteredTermsEnum.java:199 condition failed: assert tenum != null;"));
+  JreAssert(tenum_ != nil, @"org/apache/lucene/index/FilteredTermsEnum.java:199 condition failed: assert tenum != null;");
   return [((OrgApacheLuceneIndexTermsEnum *) nil_chk(tenum_)) termState];
 }
 
@@ -109,7 +113,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexFilteredTermsEnum_Accept
     if (doSeek_) {
       doSeek_ = false;
       OrgApacheLuceneUtilBytesRef *t = [self nextSeekTermWithOrgApacheLuceneUtilBytesRef:actualTerm_];
-      JreAssert((actualTerm_ == nil || t == nil || [t compareToWithId:actualTerm_] > 0), (JreStrcat("$@$@", @"curTerm=", actualTerm_, @" seekTerm=", t)));
+      JreAssert(actualTerm_ == nil || t == nil || [t compareToWithId:actualTerm_] > 0, JreStrcat("$@$@", @"curTerm=", actualTerm_, @" seekTerm=", t));
       if (t == nil || [((OrgApacheLuceneIndexTermsEnum *) nil_chk(tenum_)) seekCeilWithOrgApacheLuceneUtilBytesRef:t] == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, END)) {
         return nil;
       }
@@ -143,33 +147,54 @@ __attribute__((unused)) static void OrgApacheLuceneIndexFilteredTermsEnum_Accept
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x404, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexTermsEnum:", "FilteredTermsEnum", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTermsEnum:withBoolean:", "FilteredTermsEnum", NULL, 0x1, NULL, NULL },
-    { "setInitialSeekTermWithOrgApacheLuceneUtilBytesRef:", "setInitialSeekTerm", "V", 0x14, NULL, NULL },
-    { "nextSeekTermWithOrgApacheLuceneUtilBytesRef:", "nextSeekTerm", "Lorg.apache.lucene.util.BytesRef;", 0x4, "Ljava.io.IOException;", NULL },
-    { "attributes", NULL, "Lorg.apache.lucene.util.AttributeSource;", 0x1, NULL, NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "docFreq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "totalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "ord", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "termState", NULL, "Lorg.apache.lucene.index.TermState;", 0x1, "Ljava.io.IOException;", NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x404, 0, 1, 2, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x14, 5, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x4, 6, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeSource;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum_SeekStatus;", 0x1, 8, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 9, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 10, 11, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 12, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermState;", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(acceptWithOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexTermsEnum:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexTermsEnum:withBoolean:);
+  methods[3].selector = @selector(setInitialSeekTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(nextSeekTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[5].selector = @selector(attributes);
+  methods[6].selector = @selector(term);
+  methods[7].selector = @selector(docFreq);
+  methods[8].selector = @selector(totalTermFreq);
+  methods[9].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:);
+  methods[10].selector = @selector(seekCeilWithOrgApacheLuceneUtilBytesRef:);
+  methods[11].selector = @selector(seekExactWithLong:);
+  methods[12].selector = @selector(ord);
+  methods[13].selector = @selector(postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:);
+  methods[14].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:);
+  methods[15].selector = @selector(termState);
+  methods[16].selector = @selector(next);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "initialSeekTerm_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "doSeek_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "actualTerm_", NULL, 0x4, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tenum_", NULL, 0x14, "Lorg.apache.lucene.index.TermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
+    { "initialSeekTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "doSeek_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "actualTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "tenum_", "LOrgApacheLuceneIndexTermsEnum;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilteredTermsEnum = { 2, "FilteredTermsEnum", "org.apache.lucene.index", NULL, 0x401, 17, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "accept", "LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "LOrgApacheLuceneIndexTermsEnum;", "LOrgApacheLuceneIndexTermsEnum;Z", "setInitialSeekTerm", "nextSeekTerm", "seekExact", "seekCeil", "J", "postings", "LOrgApacheLuceneIndexPostingsEnum;I", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneIndexTermState;", "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilteredTermsEnum = { "FilteredTermsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 17, 4, -1, 13, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFilteredTermsEnum;
 }
 
@@ -181,7 +206,7 @@ void OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum
 
 void OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withBoolean_(OrgApacheLuceneIndexFilteredTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum, jboolean startWithSeek) {
   OrgApacheLuceneIndexTermsEnum_init(self);
-  JreAssert((tenum != nil), (@"org/apache/lucene/index/FilteredTermsEnum.java:85 condition failed: assert tenum != null;"));
+  JreAssert(tenum != nil, @"org/apache/lucene/index/FilteredTermsEnum.java:85 condition failed: assert tenum != null;");
   JreStrongAssign(&self->tenum_, tenum);
   self->doSeek_ = startWithSeek;
 }
@@ -226,8 +251,27 @@ OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFiltered
   return (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "YES", "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "YES_AND_SEEK", "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "NO", "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "NO_AND_SEEK", "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+    { "END", "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", .constantValue.asLong = 0, 0x4019, -1, 6, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES), &JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES_AND_SEEK), &JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO), &JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO_AND_SEEK), &JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END), "LOrgApacheLuceneIndexFilteredTermsEnum;", "Ljava/lang/Enum<Lorg/apache/lucene/index/FilteredTermsEnum$AcceptStatus;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus = { "AcceptStatus", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401c, 2, 5, 7, -1, -1, 8, -1 };
+  return &_OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;
 }
 
 + (void)initialize {
@@ -236,31 +280,12 @@ OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFiltered
     size_t allocSize = 5 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_initWithNSString_withInt_(e, @"YES", 0);
-    (JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES_AND_SEEK) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_initWithNSString_withInt_(e, @"YES_AND_SEEK", 1);
-    (JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_initWithNSString_withInt_(e, @"NO", 2);
-    (JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO_AND_SEEK) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_initWithNSString_withInt_(e, @"NO_AND_SEEK", 3);
-    (JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_initWithNSString_withInt_(e, @"END", 4);
+    for (jint i = 0; i < 5; i++) {
+      ((void)(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "YES", "YES", 0x4019, "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", &JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES), NULL, .constantValue.asLong = 0 },
-    { "YES_AND_SEEK", "YES_AND_SEEK", 0x4019, "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", &JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES_AND_SEEK), NULL, .constantValue.asLong = 0 },
-    { "NO", "NO", 0x4019, "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", &JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO), NULL, .constantValue.asLong = 0 },
-    { "NO_AND_SEEK", "NO_AND_SEEK", 0x4019, "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", &JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO_AND_SEEK), NULL, .constantValue.asLong = 0 },
-    { "END", "END", 0x4019, "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", &JreEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus = { 2, "AcceptStatus", "org.apache.lucene.index", "FilteredTermsEnum", 0x401c, 0, NULL, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/FilteredTermsEnum$AcceptStatus;>;" };
-  return &_OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;
 }
 
 @end
@@ -282,7 +307,7 @@ OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFiltered
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

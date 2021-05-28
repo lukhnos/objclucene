@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreIndexOutput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreIndexOutput_) && (INCLUDE_ALL_OrgApacheLuceneStoreIndexOutput || defined(INCLUDE_OrgApacheLuceneStoreIndexOutput))
 #define OrgApacheLuceneStoreIndexOutput_
 
@@ -25,11 +31,11 @@
 #include "java/io/Closeable.h"
 
 /*!
- @brief Abstract base class for output to a file in a Directory.
- A random-access
- output stream.  Used for all Lucene index output operations.
+ @brief Abstract base class for output to a file in a Directory.A random-access
+  output stream.
+ Used for all Lucene index output operations.  
  <p><code>IndexOutput</code> may only be used from one thread, because it is not
- thread safe (it keeps internal state like file position).
+  thread safe (it keeps internal state like file position).
  - seealso: Directory
  - seealso: IndexInput
  */
@@ -49,7 +55,7 @@
 
 /*!
  @brief Returns the current position in this file, where the next write will
- occur.
+  occur.
  */
 - (jlong)getFilePointer;
 
@@ -58,11 +64,14 @@
 #pragma mark Protected
 
 /*!
- @brief Sole constructor.
- resourceDescription should be non-null, opaque string
- describing this resource; it's returned from <code>toString</code>. 
+ @brief Sole constructor.resourceDescription should be non-null, opaque string
+   describing this resource; it's returned from <code>toString</code>.
  */
-- (instancetype)initWithNSString:(NSString *)resourceDescription;
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDescription;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -74,4 +83,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexOutput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreIndexOutput")

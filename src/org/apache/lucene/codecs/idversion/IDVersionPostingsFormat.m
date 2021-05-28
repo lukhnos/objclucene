@@ -8,7 +8,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/codecs/FieldsConsumer.h"
 #include "org/apache/lucene/codecs/FieldsProducer.h"
@@ -26,6 +25,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/MutableBits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/idversion/IDVersionPostingsFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat () {
  @public
@@ -59,7 +62,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneCodecsFieldsConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  OrgApacheLuceneCodecsPostingsWriterBase *postingsWriter = create_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->liveDocs_);
+  OrgApacheLuceneCodecsPostingsWriterBase *postingsWriter = create_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initPackagePrivateWithOrgApacheLuceneUtilBits_(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->liveDocs_);
   jboolean success = false;
   @try {
     OrgApacheLuceneCodecsFieldsConsumer *ret = create_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_withOrgApacheLuceneCodecsPostingsWriterBase_withInt_withInt_(state, postingsWriter, minTermsInBlock_, maxTermsInBlock_);
@@ -74,7 +77,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneCodecsFieldsProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  OrgApacheLuceneCodecsPostingsReaderBase *postingsReader = create_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init();
+  OrgApacheLuceneCodecsPostingsReaderBase *postingsReader = create_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_initPackagePrivate();
   jboolean success = false;
   @try {
     OrgApacheLuceneCodecsFieldsProducer *ret = create_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(postingsReader, state);
@@ -98,21 +101,32 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "IDVersionPostingsFormat", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withInt:", "IDVersionPostingsFormat", NULL, 0x1, NULL, NULL },
-    { "fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:", "fieldsConsumer", "Lorg.apache.lucene.codecs.FieldsConsumer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:", "fieldsProducer", "Lorg.apache.lucene.codecs.FieldsProducer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "bytesToLongWithOrgApacheLuceneUtilBytesRef:", "bytesToLong", "J", 0x9, NULL, NULL },
-    { "longToBytesWithLong:withOrgApacheLuceneUtilBytesRef:", "longToBytes", "V", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldsConsumer;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldsProducer;", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "J", 0x9, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 8, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:withInt:);
+  methods[2].selector = @selector(fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[3].selector = @selector(fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:);
+  methods[4].selector = @selector(bytesToLongWithOrgApacheLuceneUtilBytesRef:);
+  methods[5].selector = @selector(longToBytesWithLong:withOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MIN_VERSION", "MIN_VERSION", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MIN_VERSION },
-    { "MAX_VERSION", "MAX_VERSION", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MAX_VERSION },
-    { "minTermsInBlock_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTermsInBlock_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "MIN_VERSION", "J", .constantValue.asLong = OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MIN_VERSION, 0x19, -1, -1, -1, -1 },
+    { "MAX_VERSION", "J", .constantValue.asLong = OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MAX_VERSION, 0x19, -1, -1, -1, -1 },
+    { "minTermsInBlock_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxTermsInBlock_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat = { 2, "IDVersionPostingsFormat", "org.apache.lucene.codecs.idversion", NULL, 0x1, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "II", "fieldsConsumer", "LOrgApacheLuceneIndexSegmentWriteState;", "LJavaIoIOException;", "fieldsProducer", "LOrgApacheLuceneIndexSegmentReadState;", "bytesToLong", "LOrgApacheLuceneUtilBytesRef;", "longToBytes", "JLOrgApacheLuceneUtilBytesRef;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat = { "IDVersionPostingsFormat", "org.apache.lucene.codecs.idversion", ptrTable, methods, fields, 7, 0x1, 6, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat;
 }
 
@@ -165,7 +179,7 @@ void OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_longToBytesWithLong_w
   *IOSByteArray_GetRef(bytes->bytes_, 5) = (jbyte) (JreRShift64(v, 16));
   *IOSByteArray_GetRef(bytes->bytes_, 6) = (jbyte) (JreRShift64(v, 8));
   *IOSByteArray_GetRef(bytes->bytes_, 7) = (jbyte) v;
-  JreAssert((OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_bytesToLongWithOrgApacheLuceneUtilBytesRef_(bytes) == v), (JreStrcat("J$J$@", OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_bytesToLongWithOrgApacheLuceneUtilBytesRef_(bytes), @" vs ", v, @" bytes=", bytes)));
+  JreAssert(OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_bytesToLongWithOrgApacheLuceneUtilBytesRef_(bytes) == v, JreStrcat("J$J$@", OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_bytesToLongWithOrgApacheLuceneUtilBytesRef_(bytes), @" vs ", v, @" bytes=", bytes));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat)

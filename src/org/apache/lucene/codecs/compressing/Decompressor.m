@@ -3,12 +3,14 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/compressing/Decompressor.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/compressing/Decompressor.h"
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/compressing/Decompressor must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneCodecsCompressingDecompressor
 
@@ -28,24 +30,32 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self doesNotRecognizeSelector:_cmd];
 }
 
-- (OrgApacheLuceneCodecsCompressingDecompressor *)clone {
+- (OrgApacheLuceneCodecsCompressingDecompressor *)java_clone {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCompressingDecompressor;", 0x401, 3, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(decompressWithOrgApacheLuceneStoreDataInput:withInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(java_clone);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "decompress", "LOrgApacheLuceneStoreDataInput;IIILOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "clone" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingDecompressor = { "Decompressor", "org.apache.lucene.codecs.compressing", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsCompressingDecompressor;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Decompressor", NULL, 0x4, NULL, NULL },
-    { "decompressWithOrgApacheLuceneStoreDataInput:withInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:", "decompress", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.codecs.compressing.Decompressor;", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingDecompressor = { 2, "Decompressor", "org.apache.lucene.codecs.compressing", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneCodecsCompressingDecompressor;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end

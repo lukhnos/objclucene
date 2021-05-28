@@ -13,31 +13,35 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTermState
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTermState_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermState || defined(INCLUDE_OrgApacheLuceneIndexTermState))
 #define OrgApacheLuceneIndexTermState_
 
 /*!
- @brief Encapsulates all required internal state to position the associated
+ @brief Encapsulates all required internal state to position the associated 
  <code>TermsEnum</code> without re-seeking.
- - seealso: TermsEnum#seekExact(org.apache.lucene.util.BytesRef,TermState)
+ - seealso: TermsEnum#seekExact(org.apache.lucene.util.BytesRef, TermState)
  - seealso: TermsEnum#termState()
  */
 @interface OrgApacheLuceneIndexTermState : NSObject < NSCopying >
 
 #pragma mark Public
 
-- (OrgApacheLuceneIndexTermState *)clone;
+- (OrgApacheLuceneIndexTermState *)java_clone;
 
 /*!
  @brief Copies the content of the given <code>TermState</code> to this instance
- @param other
- the TermState to copy
+ @param other the TermState to copy
  */
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other OBJC_METHOD_FAMILY_NONE;
 
 /*!
  @brief Returns true if this term is real (e.g., not an auto-prefix term).
-  
  */
 - (jboolean)isRealTerm;
 
@@ -48,9 +52,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -62,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermState)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermState")

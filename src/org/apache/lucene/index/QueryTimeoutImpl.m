@@ -3,12 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/index/QueryTimeoutImpl.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Long.h"
 #include "java/lang/System.h"
 #include "java/util/concurrent/TimeUnit.h"
 #include "org/apache/lucene/index/QueryTimeoutImpl.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/QueryTimeoutImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexQueryTimeoutImpl () {
  @public
@@ -51,17 +54,27 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexQueryTimeoutImpl, timeoutAt_, JavaLangLo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithLong:", "QueryTimeoutImpl", NULL, 0x1, NULL, NULL },
-    { "getTimeoutAt", NULL, "Ljava.lang.Long;", 0x1, NULL, NULL },
-    { "shouldExit", NULL, "Z", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithLong:);
+  methods[1].selector = @selector(getTimeoutAt);
+  methods[2].selector = @selector(shouldExit);
+  methods[3].selector = @selector(reset);
+  methods[4].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "timeoutAt_", NULL, 0x2, "Ljava.lang.Long;", NULL, NULL, .constantValue.asLong = 0 },
+    { "timeoutAt_", "LJavaLangLong;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexQueryTimeoutImpl = { 2, "QueryTimeoutImpl", "org.apache.lucene.index", NULL, 0x1, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "J", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexQueryTimeoutImpl = { "QueryTimeoutImpl", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 5, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexQueryTimeoutImpl;
 }
 

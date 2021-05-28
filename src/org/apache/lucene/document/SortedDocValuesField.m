@@ -10,6 +10,10 @@
 #include "org/apache/lucene/index/DocValuesType.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/SortedDocValuesField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentSortedDocValuesField)
 
 OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedDocValuesField_TYPE;
@@ -26,6 +30,23 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedDocValuesField_TY
   return self;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "TYPE", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneUtilBytesRef;", &OrgApacheLuceneDocumentSortedDocValuesField_TYPE };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentSortedDocValuesField = { "SortedDocValuesField", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x1, 1, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneDocumentSortedDocValuesField;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentSortedDocValuesField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentSortedDocValuesField_TYPE, new_OrgApacheLuceneDocumentFieldType_init());
@@ -35,17 +56,6 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedDocValuesField_TY
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentSortedDocValuesField)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:", "SortedDocValuesField", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "TYPE", "TYPE", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentSortedDocValuesField_TYPE, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentSortedDocValuesField = { 2, "SortedDocValuesField", "org.apache.lucene.document", NULL, 0x1, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentSortedDocValuesField;
 }
 
 @end

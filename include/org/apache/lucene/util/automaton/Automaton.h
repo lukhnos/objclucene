@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonAutomaton
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonAutomaton_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomaton || defined(INCLUDE_OrgApacheLuceneUtilAutomatonAutomaton))
 #define OrgApacheLuceneUtilAutomatonAutomaton_
 
@@ -28,19 +34,18 @@
 @protocol JavaUtilCollection;
 
 /*!
- @brief Represents an automaton and all its states and transitions.
- States
- are integers and must be created using <code>createState</code>.  Mark a
- state as an accept state using <code>setAccept</code>.  Add transitions
- using <code>addTransition</code>.  Each state must have all of its
- transitions added at once; if this is too restrictive then use
+ @brief Represents an automaton and all its states and transitions.States
+   are integers and must be created using <code>createState</code>.
+ Mark a
+   state as an accept state using <code>setAccept</code>.  Add transitions
+   using <code>addTransition</code>.  Each state must have all of its
+   transitions added at once; if this is too restrictive then use  
  <code>Automaton.Builder</code> instead.  State 0 is always the
- initial state.  Once a state is finished, either
- because you've starting adding transitions to another state or you
- call <code>finishState</code>, then that states transitions are sorted
- (first by min, then max, then dest) and reduced (transitions with
- adjacent labels going to the same dest are combined).
-  
+   initial state.  Once a state is finished, either
+   because you've starting adding transitions to another state or you
+   call <code>finishState</code>, then that states transitions are sorted
+   (first by min, then max, then dest) and reduced (transitions with
+   adjacent labels going to the same dest are combined).
  */
 @interface OrgApacheLuceneUtilAutomatonAutomaton : NSObject < OrgApacheLuceneUtilAccountable >
 
@@ -49,23 +54,21 @@
 /*!
  @brief Sole constructor; creates an automaton with no states.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Constructor which creates an automaton with enough space for the given
- number of states and transitions.
- @param numStates
- Number of states.
- @param numTransitions
- Number of transitions.
+  number of states and transitions.
+ @param numStates Number of states.
+ @param numTransitions Number of transitions.
  */
-- (instancetype)initWithInt:(jint)numStates
-                    withInt:(jint)numTransitions;
+- (instancetype __nonnull)initWithInt:(jint)numStates
+                              withInt:(jint)numTransitions;
 
 /*!
  @brief Add a [virtual] epsilon transition between source and dest.
  Dest state must already have all transitions added because this
- method simply copies those same transitions over to source. 
+   method simply copies those same transitions over to source.
  */
 - (void)addEpsilonWithInt:(jint)source
                   withInt:(jint)dest;
@@ -86,9 +89,8 @@
                      withInt:(jint)max;
 
 /*!
- @brief Copies over all states/transitions from other.
- The states numbers
- are sequentially assigned (appended). 
+ @brief Copies over all states/transitions from other.The states numbers
+   are sequentially assigned (appended).
  */
 - (void)copy__WithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)other OBJC_METHOD_FAMILY_NONE;
 
@@ -99,10 +101,9 @@
 
 /*!
  @brief Finishes the current state; call this once you are done adding
- transitions for a state.
- This is automatically called if you
- start adding transitions to a new source state, but for the last
- state you add you need to this method yourself. 
+   transitions for a state.This is automatically called if you
+   start adding transitions to a new source state, but for the last
+   state you add you need to this method yourself.
  */
 - (void)finishState;
 
@@ -129,15 +130,14 @@
 - (jint)getNumTransitionsWithInt:(jint)state;
 
 /*!
- @brief Sugar to get all transitions for all states.
- This is
- object-heavy; it's better to iterate state by state instead. 
+ @brief Sugar to get all transitions for all states.This is
+   object-heavy; it's better to iterate state by state instead.
  */
 - (IOSObjectArray *)getSortedTransitions;
 
 /*!
  @brief Fill the provided <code>Transition</code> with the index'th
- transition leaving the specified state.
+   transition leaving the specified state.
  */
 - (void)getTransitionWithInt:(jint)state
                      withInt:(jint)index
@@ -145,10 +145,10 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
 
 /*!
  @brief Initialize the provided Transition to iterate through all transitions
- leaving the specified state.
- You must call <code>getNextTransition</code> to
- get each transition.  Returns the number of transitions
- leaving this state. 
+   leaving the specified state.You must call <code>getNextTransition</code> to
+   get each transition.
+ Returns the number of transitions
+   leaving this state.
  */
 - (jint)initTransitionWithInt:(jint)state
 withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransition *)t OBJC_METHOD_FAMILY_NONE;
@@ -160,7 +160,7 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
 
 /*!
  @brief Returns true if this automaton is deterministic (for ever state
- there is only one transition for each label).
+   there is only one transition for each label).
  */
 - (jboolean)isDeterministic;
 
@@ -183,7 +183,7 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
 
 /*!
  @brief Returns the dot (graphviz) representation of this automaton.
- This is extremely useful for visualizing the automaton. 
+ This is extremely useful for visualizing the automaton.
  */
 - (NSString *)toDot;
 
@@ -193,8 +193,7 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
       withJavaLangStringBuilder:(JavaLangStringBuilder *)b;
 
 /*!
- @brief Returns accept states.
- If the bit is set then that state is an accept state. 
+ @brief Returns accept states.If the bit is set then that state is an accept state.
  */
 - (JavaUtilBitSet *)getAcceptStates;
 
@@ -209,9 +208,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonAutomaton)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonAutomaton_init(OrgApacheLuceneUtilAutomatonAutomaton *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *new_OrgApacheLuceneUtilAutomatonAutomaton_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *new_OrgApacheLuceneUtilAutomatonAutomaton_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *create_OrgApacheLuceneUtilAutomatonAutomaton_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *create_OrgApacheLuceneUtilAutomatonAutomaton_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonAutomaton_initWithInt_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *self, jint numStates, jint numTransitions);
 
@@ -249,7 +248,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -289,7 +292,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorte
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -312,11 +319,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorte
 
 /*!
  @brief Records new states and transitions and then <code>finish</code>
-  creates the <code>Automaton</code>.
- Use this
- when you cannot create the Automaton directly because
- it's too restrictive to have to add all transitions
- leaving each state at once. 
+  creates the <code>Automaton</code>.Use this
+   when you cannot create the Automaton directly because
+   it's too restrictive to have to add all transitions
+   leaving each state at once.
  */
 @interface OrgApacheLuceneUtilAutomatonAutomaton_Builder : NSObject
 
@@ -325,23 +331,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorte
 /*!
  @brief Default constructor, pre-allocating for 16 states and transitions.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Constructor which creates a builder with enough space for the given
- number of states and transitions.
- @param numStates
- Number of states.
- @param numTransitions
- Number of transitions.
+  number of states and transitions.
+ @param numStates Number of states.
+ @param numTransitions Number of transitions.
  */
-- (instancetype)initWithInt:(jint)numStates
-                    withInt:(jint)numTransitions;
+- (instancetype __nonnull)initWithInt:(jint)numStates
+                              withInt:(jint)numTransitions;
 
 /*!
  @brief Add a [virtual] epsilon transition between source and dest.
  Dest state must already have all transitions added because this
- method simply copies those same transitions over to source. 
+   method simply copies those same transitions over to source.
  */
 - (void)addEpsilonWithInt:(jint)source
                   withInt:(jint)dest;
@@ -378,7 +382,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorte
 
 /*!
  @brief Compiles all added states and transitions into a new <code>Automaton</code>
- and returns it.
+   and returns it.
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)finish;
 
@@ -404,9 +408,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonAutomaton_Builder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonAutomaton_Builder_init(OrgApacheLuceneUtilAutomatonAutomaton_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton_Builder *new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton_Builder *new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton_Builder *create_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton_Builder *create_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonAutomaton_Builder_initWithInt_withInt_(OrgApacheLuceneUtilAutomatonAutomaton_Builder *self, jint numStates, jint numTransitions);
 
@@ -429,7 +433,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_Builder)
 
 /*!
  @brief Sorts transitions first then min label ascending, then
- max label ascending, then dest ascending
+   max label ascending, then dest ascending
  */
 @interface OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter : OrgApacheLuceneUtilInPlaceMergeSorter
 
@@ -443,7 +447,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_Builder)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:(OrgApacheLuceneUtilAutomatonAutomaton_Builder *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:(OrgApacheLuceneUtilAutomatonAutomaton_Builder *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -459,4 +467,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSort
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomaton")

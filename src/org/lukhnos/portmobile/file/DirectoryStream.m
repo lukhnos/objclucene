@@ -4,9 +4,16 @@
 //
 
 #include "J2ObjC_source.h"
+#include "java/lang/Iterable.h"
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
+#include "java/util/Spliterator.h"
+#include "java/util/function/Consumer.h"
 #include "org/lukhnos/portmobile/file/DirectoryStream.h"
+
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/DirectoryStream must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgLukhnosPortmobileFileDirectoryStream : NSObject
 
@@ -15,8 +22,8 @@
 @implementation OrgLukhnosPortmobileFileDirectoryStream
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const char *inner_classes[] = {"Lorg.lukhnos.portmobile.file.DirectoryStream$SimpleDirectoryStream;"};
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileDirectoryStream = { 2, "DirectoryStream", "org.lukhnos.portmobile.file", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 1, inner_classes, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/lang/AutoCloseable;Ljava/io/Closeable;Ljava/lang/Iterable<TT;>;" };
+  static const void *ptrTable[] = { "LOrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream;", "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/lang/AutoCloseable;Ljava/io/Closeable;Ljava/lang/Iterable<TT;>;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileDirectoryStream = { "DirectoryStream", "org.lukhnos.portmobile.file", ptrTable, NULL, NULL, 7, 0x609, 0, 0, -1, 0, -1, 1, -1 };
   return &_OrgLukhnosPortmobileFileDirectoryStream;
 }
 
@@ -38,8 +45,16 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileDirectoryStream)
 - (void)close {
 }
 
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
+}
+
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -48,15 +63,23 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileDirectoryStream)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "SimpleDirectoryStream", NULL, 0x1, NULL, "(Ljava/util/List<TT;>;)V" },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<TT;>;" },
-    { "close", NULL, "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "paths_", NULL, 0x0, "Ljava.util.List;", NULL, "Ljava/util/List<TT;>;", .constantValue.asLong = 0 },
+    { "paths_", "LJavaUtilList;", .constantValue.asLong = 0, 0x0, -1, -1, 3, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream = { 2, "SimpleDirectoryStream", "org.lukhnos.portmobile.file", "DirectoryStream", 0x9, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/lukhnos/portmobile/file/DirectoryStream<TT;>;" };
+  static const void *ptrTable[] = { "LJavaUtilList;", "(Ljava/util/List<TT;>;)V", "()Ljava/util/Iterator<TT;>;", "Ljava/util/List<TT;>;", "LOrgLukhnosPortmobileFileDirectoryStream;", "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/lukhnos/portmobile/file/DirectoryStream<TT;>;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream = { "SimpleDirectoryStream", "org.lukhnos.portmobile.file", ptrTable, methods, fields, 7, 0x9, 3, 1, 4, -1, -1, 5, -1 };
   return &_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream;
 }
 

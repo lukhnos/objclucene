@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/spell/StringDistance.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/StringDistance must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSpellStringDistance : NSObject
 
 @end
@@ -13,10 +17,16 @@
 @implementation OrgApacheLuceneSearchSpellStringDistance
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDistanceWithNSString:withNSString:", "getDistance", "F", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "F", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellStringDistance = { 2, "StringDistance", "org.apache.lucene.search.spell", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getDistanceWithNSString:withNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getDistance", "LNSString;LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellStringDistance = { "StringDistance", "org.apache.lucene.search.spell", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellStringDistance;
 }
 

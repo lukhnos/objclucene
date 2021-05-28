@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSortedNumericSortField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSortedNumericSortField_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedNumericSortField || defined(INCLUDE_OrgApacheLuceneSearchSortedNumericSortField))
 #define OrgApacheLuceneSearchSortedNumericSortField_
 
@@ -21,20 +27,21 @@
 #include "org/apache/lucene/search/SortField.h"
 
 @class OrgApacheLuceneSearchFieldComparator;
+@class OrgApacheLuceneSearchFieldComparatorSource;
 @class OrgApacheLuceneSearchSortField_Type;
 @class OrgApacheLuceneSearchSortedNumericSelector_Type;
 
 /*!
  @brief SortField for <code>SortedNumericDocValues</code>.
  <p>
- A SortedNumericDocValues contains multiple values for a field, so sorting with
- this technique "selects" a value as the representative sort value for the document.
+  A SortedNumericDocValues contains multiple values for a field, so sorting with
+  this technique "selects" a value as the representative sort value for the document. 
  <p>
- By default, the minimum value in the list is selected as the sort value, but
- this can be customized.
+  By default, the minimum value in the list is selected as the sort value, but
+  this can be customized. 
  <p>
- Like sorting by string, this also supports sorting missing values as first or last,
- via <code>setMissingValue(Object)</code>.
+  Like sorting by string, this also supports sorting missing values as first or last,
+  via <code>setMissingValue(Object)</code>.
  - seealso: SortedNumericSelector
  */
 @interface OrgApacheLuceneSearchSortedNumericSortField : OrgApacheLuceneSearchSortField
@@ -43,35 +50,35 @@
 
 /*!
  @brief Creates a sort, by the minimum value in the set 
- for the document.
+  for the document.
  @param field Name of field to sort by.  Must not be null.
  @param type Type of values
  */
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type;
 
 /*!
  @brief Creates a sort, possibly in reverse, by the minimum value in the set 
- for the document.
+  for the document.
  @param field Name of field to sort by.  Must not be null.
  @param type Type of values
  @param reverse True if natural order should be reversed.
  */
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
-                     withBoolean:(jboolean)reverse;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
+                               withBoolean:(jboolean)reverse;
 
 /*!
  @brief Creates a sort, possibly in reverse, specifying how the sort value from 
- the document's set is selected.
+  the document's set is selected.
  @param field Name of field to sort by.  Must not be null.
  @param type Type of values
  @param reverse True if natural order should be reversed.
  @param selector custom selector type for choosing the sort value from the set.
  */
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
-                     withBoolean:(jboolean)reverse
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
+                               withBoolean:(jboolean)reverse
 withOrgApacheLuceneSearchSortedNumericSelector_Type:(OrgApacheLuceneSearchSortedNumericSelector_Type *)selector;
 
 - (jboolean)isEqual:(id)obj;
@@ -89,6 +96,15 @@ withOrgApacheLuceneSearchSortedNumericSelector_Type:(OrgApacheLuceneSearchSorted
 - (void)setMissingValueWithId:(id)missingValue;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)arg1
+                               withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -116,4 +132,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSortField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortedNumericSortField")

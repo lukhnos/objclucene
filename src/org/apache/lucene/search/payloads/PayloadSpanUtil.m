@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/Iterator.h"
@@ -34,6 +33,10 @@
 #include "org/apache/lucene/search/spans/SpanTermQuery.h"
 #include "org/apache/lucene/search/spans/SpanWeight.h"
 #include "org/apache/lucene/search/spans/Spans.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/payloads/PayloadSpanUtil must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchPayloadsPayloadSpanUtil () {
  @public
@@ -83,16 +86,25 @@ __attribute__((unused)) static void OrgApacheLuceneSearchPayloadsPayloadSpanUtil
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReaderContext:", "PayloadSpanUtil", NULL, 0x1, NULL, NULL },
-    { "getPayloadsForQueryWithOrgApacheLuceneSearchQuery:", "getPayloadsForQuery", "Ljava.util.Collection;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/Query;)Ljava/util/Collection<[LB;>;" },
-    { "queryToSpanQueryWithOrgApacheLuceneSearchQuery:withJavaUtilCollection:", "queryToSpanQuery", "V", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/Query;Ljava/util/Collection<[LB;>;)V" },
-    { "getPayloadsWithJavaUtilCollection:withOrgApacheLuceneSearchSpansSpanQuery:", "getPayloads", "V", 0x2, "Ljava.io.IOException;", "(Ljava/util/Collection<[LB;>;Lorg/apache/lucene/search/spans/SpanQuery;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, 1, 2, 3, 4, -1, -1 },
+    { NULL, "V", 0x2, 5, 6, 3, 7, -1, -1 },
+    { NULL, "V", 0x2, 8, 9, 3, 10, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReaderContext:);
+  methods[1].selector = @selector(getPayloadsForQueryWithOrgApacheLuceneSearchQuery:);
+  methods[2].selector = @selector(queryToSpanQueryWithOrgApacheLuceneSearchQuery:withJavaUtilCollection:);
+  methods[3].selector = @selector(getPayloadsWithJavaUtilCollection:withOrgApacheLuceneSearchSpansSpanQuery:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "context_", NULL, 0x2, "Lorg.apache.lucene.index.IndexReaderContext;", NULL, NULL, .constantValue.asLong = 0 },
+    { "context_", "LOrgApacheLuceneIndexIndexReaderContext;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadSpanUtil = { 2, "PayloadSpanUtil", "org.apache.lucene.search.payloads", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReaderContext;", "getPayloadsForQuery", "LOrgApacheLuceneSearchQuery;", "LJavaIoIOException;", "(Lorg/apache/lucene/search/Query;)Ljava/util/Collection<[B>;", "queryToSpanQuery", "LOrgApacheLuceneSearchQuery;LJavaUtilCollection;", "(Lorg/apache/lucene/search/Query;Ljava/util/Collection<[B>;)V", "getPayloads", "LJavaUtilCollection;LOrgApacheLuceneSearchSpansSpanQuery;", "(Ljava/util/Collection<[B>;Lorg/apache/lucene/search/spans/SpanQuery;)V" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadSpanUtil = { "PayloadSpanUtil", "org.apache.lucene.search.payloads", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPayloadsPayloadSpanUtil;
 }
 
@@ -113,19 +125,19 @@ OrgApacheLuceneSearchPayloadsPayloadSpanUtil *create_OrgApacheLuceneSearchPayloa
 
 void OrgApacheLuceneSearchPayloadsPayloadSpanUtil_queryToSpanQueryWithOrgApacheLuceneSearchQuery_withJavaUtilCollection_(OrgApacheLuceneSearchPayloadsPayloadSpanUtil *self, OrgApacheLuceneSearchQuery *query, id<JavaUtilCollection> payloads) {
   if ([query isKindOfClass:[OrgApacheLuceneSearchBooleanQuery class]]) {
-    for (OrgApacheLuceneSearchBooleanClause * __strong clause in nil_chk((OrgApacheLuceneSearchBooleanQuery *) cast_chk(query, [OrgApacheLuceneSearchBooleanQuery class]))) {
+    for (OrgApacheLuceneSearchBooleanClause * __strong clause in nil_chk((OrgApacheLuceneSearchBooleanQuery *) query)) {
       if (![((OrgApacheLuceneSearchBooleanClause *) nil_chk(clause)) isProhibited]) {
         OrgApacheLuceneSearchPayloadsPayloadSpanUtil_queryToSpanQueryWithOrgApacheLuceneSearchQuery_withJavaUtilCollection_(self, [clause getQuery], payloads);
       }
     }
   }
   else if ([query isKindOfClass:[OrgApacheLuceneSearchPhraseQuery class]]) {
-    IOSObjectArray *phraseQueryTerms = [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(((OrgApacheLuceneSearchPhraseQuery *) cast_chk(query, [OrgApacheLuceneSearchPhraseQuery class])))) getTerms];
+    IOSObjectArray *phraseQueryTerms = [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(((OrgApacheLuceneSearchPhraseQuery *) query))) getTerms];
     IOSObjectArray *clauses = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(phraseQueryTerms))->size_ type:OrgApacheLuceneSearchSpansSpanQuery_class_()];
     for (jint i = 0; i < phraseQueryTerms->size_; i++) {
       IOSObjectArray_SetAndConsume(clauses, i, new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(IOSObjectArray_Get(phraseQueryTerms, i)));
     }
-    jint slop = [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(((OrgApacheLuceneSearchPhraseQuery *) cast_chk(query, [OrgApacheLuceneSearchPhraseQuery class])))) getSlop];
+    jint slop = [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(((OrgApacheLuceneSearchPhraseQuery *) query))) getSlop];
     jboolean inorder = false;
     if (slop == 0) {
       inorder = true;
@@ -135,23 +147,23 @@ void OrgApacheLuceneSearchPayloadsPayloadSpanUtil_queryToSpanQueryWithOrgApacheL
     OrgApacheLuceneSearchPayloadsPayloadSpanUtil_getPayloadsWithJavaUtilCollection_withOrgApacheLuceneSearchSpansSpanQuery_(self, payloads, sp);
   }
   else if ([query isKindOfClass:[OrgApacheLuceneSearchTermQuery class]]) {
-    OrgApacheLuceneSearchSpansSpanTermQuery *stq = create_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_([((OrgApacheLuceneSearchTermQuery *) nil_chk(((OrgApacheLuceneSearchTermQuery *) cast_chk(query, [OrgApacheLuceneSearchTermQuery class])))) getTerm]);
+    OrgApacheLuceneSearchSpansSpanTermQuery *stq = create_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_([((OrgApacheLuceneSearchTermQuery *) nil_chk(((OrgApacheLuceneSearchTermQuery *) query))) getTerm]);
     [stq setBoostWithFloat:[((OrgApacheLuceneSearchQuery *) nil_chk(query)) getBoost]];
     OrgApacheLuceneSearchPayloadsPayloadSpanUtil_getPayloadsWithJavaUtilCollection_withOrgApacheLuceneSearchSpansSpanQuery_(self, payloads, stq);
   }
   else if ([query isKindOfClass:[OrgApacheLuceneSearchSpansSpanQuery class]]) {
-    OrgApacheLuceneSearchPayloadsPayloadSpanUtil_getPayloadsWithJavaUtilCollection_withOrgApacheLuceneSearchSpansSpanQuery_(self, payloads, (OrgApacheLuceneSearchSpansSpanQuery *) cast_chk(query, [OrgApacheLuceneSearchSpansSpanQuery class]));
+    OrgApacheLuceneSearchPayloadsPayloadSpanUtil_getPayloadsWithJavaUtilCollection_withOrgApacheLuceneSearchSpansSpanQuery_(self, payloads, (OrgApacheLuceneSearchSpansSpanQuery *) query);
   }
   else if ([query isKindOfClass:[OrgApacheLuceneSearchFilteredQuery class]]) {
-    OrgApacheLuceneSearchPayloadsPayloadSpanUtil_queryToSpanQueryWithOrgApacheLuceneSearchQuery_withJavaUtilCollection_(self, [((OrgApacheLuceneSearchFilteredQuery *) nil_chk(((OrgApacheLuceneSearchFilteredQuery *) cast_chk(query, [OrgApacheLuceneSearchFilteredQuery class])))) getQuery], payloads);
+    OrgApacheLuceneSearchPayloadsPayloadSpanUtil_queryToSpanQueryWithOrgApacheLuceneSearchQuery_withJavaUtilCollection_(self, [((OrgApacheLuceneSearchFilteredQuery *) nil_chk(((OrgApacheLuceneSearchFilteredQuery *) query))) getQuery], payloads);
   }
   else if ([query isKindOfClass:[OrgApacheLuceneSearchDisjunctionMaxQuery class]]) {
-    for (id<JavaUtilIterator> iterator = [((OrgApacheLuceneSearchDisjunctionMaxQuery *) nil_chk(((OrgApacheLuceneSearchDisjunctionMaxQuery *) cast_chk(query, [OrgApacheLuceneSearchDisjunctionMaxQuery class])))) iterator]; [((id<JavaUtilIterator>) nil_chk(iterator)) hasNext]; ) {
+    for (id<JavaUtilIterator> iterator = JreRetainedLocalValue([((OrgApacheLuceneSearchDisjunctionMaxQuery *) nil_chk(((OrgApacheLuceneSearchDisjunctionMaxQuery *) query))) iterator]); [((id<JavaUtilIterator>) nil_chk(iterator)) hasNext]; ) {
       OrgApacheLuceneSearchPayloadsPayloadSpanUtil_queryToSpanQueryWithOrgApacheLuceneSearchQuery_withJavaUtilCollection_(self, [iterator next], payloads);
     }
   }
   else if ([query isKindOfClass:[OrgApacheLuceneSearchMultiPhraseQuery class]]) {
-    OrgApacheLuceneSearchMultiPhraseQuery *mpq = (OrgApacheLuceneSearchMultiPhraseQuery *) cast_chk(query, [OrgApacheLuceneSearchMultiPhraseQuery class]);
+    OrgApacheLuceneSearchMultiPhraseQuery *mpq = (OrgApacheLuceneSearchMultiPhraseQuery *) query;
     id<JavaUtilList> termArrays = [((OrgApacheLuceneSearchMultiPhraseQuery *) nil_chk(mpq)) getTermArrays];
     IOSIntArray *positions = [mpq getPositions];
     if (((IOSIntArray *) nil_chk(positions))->size_ > 0) {

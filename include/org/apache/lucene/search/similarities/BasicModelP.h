@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelP
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesBasicModelP_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelP || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModelP))
 #define OrgApacheLuceneSearchSimilaritiesBasicModelP_
 
@@ -24,23 +30,16 @@
 
 /*!
  @brief Implements the Poisson approximation for the binomial model for DFR.
- <p>
- WARNING: for terms that do not meet the expected random distribution
- (e.g. stopwords), this model may give poor performance, such as
- abnormally high scores for low tf values.
  */
 @interface OrgApacheLuceneSearchSimilaritiesBasicModelP : OrgApacheLuceneSearchSimilaritiesBasicModel
-
-+ (jdouble)LOG2_E;
-
-+ (void)setLOG2_E:(jdouble)value;
+@property (class) jdouble LOG2_E NS_SWIFT_NAME(LOG2_E);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor: parameter-free
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn;
@@ -54,21 +53,25 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesBasicModelP)
 /*!
  @brief <code>log2(Math.E)</code>, precomputed.
  */
-inline jdouble OrgApacheLuceneSearchSimilaritiesBasicModelP_get_LOG2_E();
+inline jdouble OrgApacheLuceneSearchSimilaritiesBasicModelP_get_LOG2_E(void);
 inline jdouble OrgApacheLuceneSearchSimilaritiesBasicModelP_set_LOG2_E(jdouble value);
-inline jdouble *OrgApacheLuceneSearchSimilaritiesBasicModelP_getRef_LOG2_E();
+inline jdouble *OrgApacheLuceneSearchSimilaritiesBasicModelP_getRef_LOG2_E(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jdouble OrgApacheLuceneSearchSimilaritiesBasicModelP_LOG2_E;
 J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneSearchSimilaritiesBasicModelP, LOG2_E, jdouble)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBasicModelP_init(OrgApacheLuceneSearchSimilaritiesBasicModelP *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelP *new_OrgApacheLuceneSearchSimilaritiesBasicModelP_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelP *new_OrgApacheLuceneSearchSimilaritiesBasicModelP_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelP *create_OrgApacheLuceneSearchSimilaritiesBasicModelP_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelP *create_OrgApacheLuceneSearchSimilaritiesBasicModelP_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicModelP)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelP")

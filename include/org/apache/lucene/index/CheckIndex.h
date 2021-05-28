@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexCheckIndex
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexCheckIndex_) && (INCLUDE_ALL_OrgApacheLuceneIndexCheckIndex || defined(INCLUDE_OrgApacheLuceneIndexCheckIndex))
 #define OrgApacheLuceneIndexCheckIndex_
 
@@ -37,12 +43,10 @@
 
 /*!
  @brief Basic tool and API to check the health of an index and
- write a new segments file that removes reference to
- problematic segments.
+  write a new segments file that removes reference to
+  problematic segments.
  <p>As this tool checks every byte in the index, on a large
- index it can take quite a long time to run.
-  Please make a complete backup of your
- index before using this to exorcise corrupted documents from your index!
+  index it can take quite a long time to run.
  */
 @interface OrgApacheLuceneIndexCheckIndex : NSObject < JavaIoCloseable >
 
@@ -51,36 +55,36 @@
 /*!
  @brief Create a new CheckIndex on the directory.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
  @brief Expert: create a directory with the specified lock.
  This should really not be used except for unit tests!!!!
- It exists only to support special tests (such as TestIndexWriterExceptions*),
- that would otherwise be more complicated to debug if they had to close the writer
- for each check.
+  It exists only to support special tests (such as TestIndexWriterExceptions*),
+  that would otherwise be more complicated to debug if they had to close the writer
+  for each check.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                         withOrgApacheLuceneStoreLock:(OrgApacheLuceneStoreLock *)writeLock;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                                   withOrgApacheLuceneStoreLock:(OrgApacheLuceneStoreLock *)writeLock;
 
 /*!
  @brief Returns a <code>Status</code> instance detailing
- the state of the index.
+   the state of the index.
  <p>As this method checks every byte in the index, on a large
- index it can take quite a long time to run.
+   index it can take quite a long time to run.  
  <p><b>WARNING</b>: make sure
- you only call this when the index is not opened by any
- writer. 
+   you only call this when the index is not opened by any
+   writer.
  */
 - (OrgApacheLuceneIndexCheckIndex_Status *)checkIndex;
 
 /*!
  @brief Returns a <code>Status</code> instance detailing
- the state of the index.
- @param onlySegments list of specific segment names to check
- <p>As this method checks every byte in the specified
- segments, on a large index it can take quite a long
- time to run.
+   the state of the index.
+ @param onlySegments list of specific segment names to check   
+  <p>
+  As this method checks every byte in the specified   segments, on a large index it can take quite a long
+    time to run.
  */
 - (OrgApacheLuceneIndexCheckIndex_Status *)checkIndexWithJavaUtilList:(id<JavaUtilList>)onlySegments;
 
@@ -88,15 +92,14 @@
 
 /*!
  @brief Repairs the index using previously returned result
- from <code>checkIndex</code>.
- Note that this does not
- remove any of the unreferenced files after it's done;
- you must separately open an <code>IndexWriter</code>, which
- deletes unreferenced files when it's created.
+   from <code>checkIndex</code>.Note that this does not
+   remove any of the unreferenced files after it's done;
+   you must separately open an <code>IndexWriter</code>, which
+   deletes unreferenced files when it's created.
  <p><b>WARNING</b>: this writes a
- new segments file into the index, effectively removing
- all documents in broken segments from the index.
- BE CAREFUL.
+   new segments file into the index, effectively removing
+   all documents in broken segments from the index.
+   BE CAREFUL.
  */
 - (void)exorciseIndexWithOrgApacheLuceneIndexCheckIndex_Status:(OrgApacheLuceneIndexCheckIndex_Status *)result;
 
@@ -118,67 +121,65 @@
 /*!
  @brief Command-line interface to check and exorcise corrupt segments from an index.
  <p>
- Run it like this:
+     Run it like this:    
  @code
 
-     java -ea:org.apache.lucene... org.apache.lucene.index.CheckIndex pathToIndex [-exorcise] [-verbose] [-segment X] [-segment Y]
+     java -ea:org.apache.lucene... org.apache.lucene.index.CheckIndex pathToIndex [-exorcise] [-verbose] [-segment X] [-segment Y]    
      
 @endcode
- <ul>
- <li><code>-exorcise</code>: actually write a new segments_N file, removing any problematic segments. *LOSES DATA
- <li><code>-segment X</code>: only check the specified
- segment(s).  This can be specified multiple times,
- to check more than one segment, eg <code>-segment _2
- -segment _a</code>.  You can't use this with the -exorcise
- option.
+     <ul>
+     <li><code>-exorcise</code>: actually write a new segments_N file, removing any problematic segments. *LOSES DATA*
+     <li><code>-segment X</code>: only check the specified
+     segment(s).  This can be specified multiple times,
+     to check more than one segment, eg <code>-segment _2
+     -segment _a</code>.  You can't use this with the -exorcise
+     option.    
  </ul>
- <p><b>WARNING</b>: <code>-exorcise</code> should only be used on an emergency basis as it will cause
- documents (perhaps many) to be permanently removed from the index.  Always make
- a backup copy of your index before running this!  Do not run this tool on an index
- that is actively being written to.  You have been warned!
+     <p><b>WARNING</b>: <code>-exorcise</code> should only be used on an emergency basis as it will cause
+                        documents (perhaps many) to be permanently removed from the index.  Always make
+                        a backup copy of your index before running this!  Do not run this tool on an index
+                        that is actively being written to.  You have been warned!    
  <p>                Run without -exorcise, this tool will open the index, report version information
- and report any exceptions it hits and what action it would take if -exorcise were
- specified.  With -exorcise, this tool will remove any segments that have issues and
- write a new segments_N file.  This means all documents contained in the affected
- segments will be removed.
+                        and report any exceptions it hits and what action it would take if -exorcise were
+                        specified.  With -exorcise, this tool will remove any segments that have issues and
+                        write a new segments_N file.  This means all documents contained in the affected
+                        segments will be removed.    
  <p>
- This tool exits with exit code 1 if the index cannot be opened or has any
- corruption, else 0.
+                        This tool exits with exit code 1 if the index cannot be opened or has any
+                        corruption, else 0.
  */
 + (void)mainWithNSStringArray:(IOSObjectArray *)args;
 
 /*!
  @brief If true, only validate physical integrity for all files.
- Note that the returned nested status objects (e.g. storedFieldStatus) will be null.  
+ Note that the returned nested status objects (e.g. storedFieldStatus) will be null.
  */
 - (void)setChecksumsOnlyWithBoolean:(jboolean)v;
 
 /*!
  @brief If true, term vectors are compared against postings to
- make sure they are the same.
- This will likely
- drastically increase time it takes to run CheckIndex! 
+   make sure they are the same.This will likely
+   drastically increase time it takes to run CheckIndex!
  */
 - (void)setCrossCheckTermVectorsWithBoolean:(jboolean)v;
 
 /*!
  @brief If true, just throw the original exception immediately when
- corruption is detected, rather than continuing to iterate to other
- segments looking for more corruption.
+   corruption is detected, rather than continuing to iterate to other
+   segments looking for more corruption.
  */
 - (void)setFailFastWithBoolean:(jboolean)v;
 
 /*!
- @brief Set infoStream where messages should go.
- See <code>setInfoStream(PrintStream,boolean)</code>. 
+ @brief Set infoStream where messages should go.See <code>setInfoStream(PrintStream,boolean)</code>.
  */
 - (void)setInfoStreamWithJavaIoPrintStream:(JavaIoPrintStream *)outArg;
 
 /*!
- @brief Set infoStream where messages should go.
- If null, no
- messages are printed.  If verbose is true then more
- details are printed. 
+ @brief Set infoStream where messages should go.If null, no
+   messages are printed.
+ If verbose is true then more
+   details are printed.
  */
 - (void)setInfoStreamWithJavaIoPrintStream:(JavaIoPrintStream *)outArg
                                withBoolean:(jboolean)verbose;
@@ -246,6 +247,10 @@
                                                                                                    withBoolean:(jboolean)verbose
                                                                                                    withBoolean:(jboolean)crossCheckTermVectors
                                                                                                    withBoolean:(jboolean)failFast;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -343,8 +348,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex)
   OrgApacheLuceneStoreDirectory *dir_;
   /*!
    @brief SegmentInfos instance containing only segments that
- had no problems (this is used with the <code>CheckIndex.exorciseIndex</code> 
- method to repair the index.
+  had no problems (this is used with the <code>CheckIndex.exorciseIndex</code> 
+  method to repair the index.
    */
   OrgApacheLuceneIndexSegmentInfos *newSegments_;
   /*!
@@ -358,7 +363,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex)
   /*!
    @brief True if we checked only specific segments (<code>checkIndex(List)</code>
  ) was called with non-null
- argument).
+  argument).
    */
   jboolean partial_;
   /*!
@@ -377,7 +382,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -392,9 +397,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status, userData_, id<JavaUti
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_init(OrgApacheLuceneIndexCheckIndex_Status *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status *new_OrgApacheLuceneIndexCheckIndex_Status_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status *new_OrgApacheLuceneIndexCheckIndex_Status_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status *create_OrgApacheLuceneIndexCheckIndex_Status_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status *create_OrgApacheLuceneIndexCheckIndex_Status_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status)
 
@@ -442,7 +447,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status)
   jint numFiles_;
   /*!
    @brief Net size (MB) of the files referenced by this
- segment.
+   segment.
    */
   jdouble sizeMB_;
   /*!
@@ -455,13 +460,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status)
   jlong deletionsGen_;
   /*!
    @brief True if we were able to open a CodecReader on this
- segment.
+   segment.
    */
   jboolean openReaderPassed_;
   /*!
    @brief Map that includes certain
- debugging details that IndexWriter records into
- each segment it creates
+   debugging details that IndexWriter records into
+   each segment it creates
    */
   id<JavaUtilMap> diagnostics_;
   /*!
@@ -500,7 +505,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -520,9 +525,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, ver
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *new_OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *new_OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *create_OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *create_OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus)
 
@@ -530,6 +535,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStat
 
 #if !defined (OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_) && (INCLUDE_ALL_OrgApacheLuceneIndexCheckIndex || defined(INCLUDE_OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus))
 #define OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_
+
+@class JavaLangThrowable;
 
 /*!
  @brief Status from testing livedocs
@@ -543,14 +550,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStat
   /*!
    @brief Exception thrown during term index test (null on success)
    */
-  NSException *error_;
+  JavaLangThrowable *error_;
 }
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus, error_, NSException *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus, error_, JavaLangThrowable *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus)
 
@@ -558,6 +565,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus)
 
 #if !defined (OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_) && (INCLUDE_ALL_OrgApacheLuceneIndexCheckIndex || defined(INCLUDE_OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus))
 #define OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_
+
+@class JavaLangThrowable;
 
 /*!
  @brief Status from testing field infos.
@@ -571,14 +580,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus)
   /*!
    @brief Exception thrown during term index test (null on success)
    */
-  NSException *error_;
+  JavaLangThrowable *error_;
 }
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus, error_, NSException *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus, error_, JavaLangThrowable *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus)
 
@@ -586,6 +595,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus
 
 #if !defined (OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_) && (INCLUDE_ALL_OrgApacheLuceneIndexCheckIndex || defined(INCLUDE_OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus))
 #define OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_
+
+@class JavaLangThrowable;
 
 /*!
  @brief Status from testing field norms.
@@ -599,14 +610,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus
   /*!
    @brief Exception thrown during term index test (null on success)
    */
-  NSException *error_;
+  JavaLangThrowable *error_;
 }
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus, error_, NSException *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus, error_, JavaLangThrowable *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus)
 
@@ -615,6 +626,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus
 #if !defined (OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_) && (INCLUDE_ALL_OrgApacheLuceneIndexCheckIndex || defined(INCLUDE_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus))
 #define OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_
 
+@class JavaLangThrowable;
 @protocol JavaUtilMap;
 
 /*!
@@ -641,32 +653,32 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus
   /*!
    @brief Exception thrown during term index test (null on success)
    */
-  NSException *error_;
+  JavaLangThrowable *error_;
   /*!
    @brief Holds details of block allocations in the block
- tree terms dictionary (this is only set if the
+   tree terms dictionary (this is only set if the  
  <code>PostingsFormat</code> for this segment uses block
- tree.
+   tree.
    */
   id<JavaUtilMap> blockTreeStats_;
 }
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus, error_, NSException *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus, error_, JavaLangThrowable *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus, blockTreeStats_, id<JavaUtilMap>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *new_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *new_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *create_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *create_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus)
 
@@ -674,6 +686,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus
 
 #if !defined (OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_) && (INCLUDE_ALL_OrgApacheLuceneIndexCheckIndex || defined(INCLUDE_OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus))
 #define OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_
+
+@class JavaLangThrowable;
 
 /*!
  @brief Status from testing stored fields.
@@ -691,24 +705,24 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus
   /*!
    @brief Exception thrown during stored fields test (null on success)
    */
-  NSException *error_;
+  JavaLangThrowable *error_;
 }
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus, error_, NSException *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus, error_, JavaLangThrowable *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *new_OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *new_OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *create_OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *create_OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus)
 
@@ -716,6 +730,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStat
 
 #if !defined (OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_) && (INCLUDE_ALL_OrgApacheLuceneIndexCheckIndex || defined(INCLUDE_OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus))
 #define OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_
+
+@class JavaLangThrowable;
 
 /*!
  @brief Status from testing stored fields.
@@ -733,24 +749,24 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStat
   /*!
    @brief Exception thrown during term vector test (null on success)
    */
-  NSException *error_;
+  JavaLangThrowable *error_;
 }
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus, error_, NSException *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus, error_, JavaLangThrowable *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *new_OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *new_OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *create_OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *create_OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus)
 
@@ -758,6 +774,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatu
 
 #if !defined (OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_) && (INCLUDE_ALL_OrgApacheLuceneIndexCheckIndex || defined(INCLUDE_OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus))
 #define OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_
+
+@class JavaLangThrowable;
 
 /*!
  @brief Status from testing DocValues
@@ -791,27 +809,31 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatu
   /*!
    @brief Exception thrown during doc values test (null on success)
    */
-  NSException *error_;
+  JavaLangThrowable *error_;
 }
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus, error_, NSException *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus, error_, JavaLangThrowable *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *new_OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *new_OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *create_OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *create_OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexCheckIndex")

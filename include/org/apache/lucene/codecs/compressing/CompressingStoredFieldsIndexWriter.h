@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter))
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_
 
@@ -27,43 +33,43 @@
 /*!
  @brief Efficient index format for block-based <code>Codec</code>s.
  <p> This writer generates a file which can be loaded into memory using
- memory-efficient data structures to quickly locate the block that contains
- any document.
+  memory-efficient data structures to quickly locate the block that contains
+  any document. 
  <p>In order to have a compact in-memory representation, for every block of
- 1024 chunks, this index computes the average number of bytes per
- chunk and for every chunk, only stores the difference between<ul>
- <li>${chunk number} * ${average length of a chunk}</li>
- <li>and the actual start offset of the chunk</li></ul>
- <p>Data is written as follows:
+  1024 chunks, this index computes the average number of bytes per
+  chunk and for every chunk, only stores the difference between<ul>
+  <li>${chunk number} * ${average length of a chunk}</li>
+  <li>and the actual start offset of the chunk</li></ul>
+  <p>Data is written as follows: 
  <ul>
- <li>PackedIntsVersion, &lt;Block&gt;<sup>BlockCount</sup>, BlocksEndMarker</li>
- <li>PackedIntsVersion --&gt; <code>PackedInts.VERSION_CURRENT</code> as a <code>VInt</code></li>
- <li>BlocksEndMarker --&gt; <tt>0</tt> as a <code>VInt</code>, this marks the end of blocks since blocks are not allowed to start with <tt>0</tt></li>
- <li>Block --&gt; BlockChunks, &lt;DocBases&gt;, &lt;StartPointers&gt;</li>
- <li>BlockChunks --&gt; a <code>VInt</code> which is the number of chunks encoded in the block</li>
- <li>DocBases --&gt; DocBase, AvgChunkDocs, BitsPerDocBaseDelta, DocBaseDeltas</li>
- <li>DocBase --&gt; first document ID of the block of chunks, as a <code>VInt</code></li>
- <li>AvgChunkDocs --&gt; average number of documents in a single chunk, as a <code>VInt</code></li>
- <li>BitsPerDocBaseDelta --&gt; number of bits required to represent a delta from the average using <a href="https://developers.google.com/protocol-buffers/docs/encoding#types">ZigZag encoding</a></li>
- <li>DocBaseDeltas --&gt; <code>packed</code> array of BlockChunks elements of BitsPerDocBaseDelta bits each, representing the deltas from the average doc base using <a href="https://developers.google.com/protocol-buffers/docs/encoding#types">ZigZag encoding</a>.</li>
- <li>StartPointers --&gt; StartPointerBase, AvgChunkSize, BitsPerStartPointerDelta, StartPointerDeltas</li>
- <li>StartPointerBase --&gt; the first start pointer of the block, as a <code>VLong</code></li>
- <li>AvgChunkSize --&gt; the average size of a chunk of compressed documents, as a <code>VLong</code></li>
- <li>BitsPerStartPointerDelta --&gt; number of bits required to represent a delta from the average using <a href="https://developers.google.com/protocol-buffers/docs/encoding#types">ZigZag encoding</a></li>
- <li>StartPointerDeltas --&gt; <code>packed</code> array of BlockChunks elements of BitsPerStartPointerDelta bits each, representing the deltas from the average start pointer using <a href="https://developers.google.com/protocol-buffers/docs/encoding#types">ZigZag encoding</a></li>
- <li>Footer --&gt; <code>CodecFooter</code></li>
- </ul>
- <p>Notes
- <ul>
- <li>For any block, the doc base of the n-th chunk can be restored with
+  <li>PackedIntsVersion, &lt;Block&gt;<sup>BlockCount</sup>, BlocksEndMarker</li>
+  <li>PackedIntsVersion --&gt; <code>PackedInts.VERSION_CURRENT</code> as a <code>VInt</code></li>
+  <li>BlocksEndMarker --&gt; <tt>0</tt> as a <code>VInt</code>, this marks the end of blocks since blocks are not allowed to start with <tt>0</tt></li>
+  <li>Block --&gt; BlockChunks, &lt;DocBases&gt;, &lt;StartPointers&gt;</li>
+  <li>BlockChunks --&gt; a <code>VInt</code> which is the number of chunks encoded in the block</li>
+  <li>DocBases --&gt; DocBase, AvgChunkDocs, BitsPerDocBaseDelta, DocBaseDeltas</li>
+  <li>DocBase --&gt; first document ID of the block of chunks, as a <code>VInt</code></li>
+  <li>AvgChunkDocs --&gt; average number of documents in a single chunk, as a <code>VInt</code></li>
+  <li>BitsPerDocBaseDelta --&gt; number of bits required to represent a delta from the average using <a href="https://developers.google.com/protocol-buffers/docs/encoding#types">ZigZag encoding</a></li>
+  <li>DocBaseDeltas --&gt; <code>packed</code> array of BlockChunks elements of BitsPerDocBaseDelta bits each, representing the deltas from the average doc base using <a href="https://developers.google.com/protocol-buffers/docs/encoding#types">ZigZag encoding</a>.</li>
+  <li>StartPointers --&gt; StartPointerBase, AvgChunkSize, BitsPerStartPointerDelta, StartPointerDeltas</li>
+  <li>StartPointerBase --&gt; the first start pointer of the block, as a <code>VLong</code></li>
+  <li>AvgChunkSize --&gt; the average size of a chunk of compressed documents, as a <code>VLong</code></li>
+  <li>BitsPerStartPointerDelta --&gt; number of bits required to represent a delta from the average using <a href="https://developers.google.com/protocol-buffers/docs/encoding#types">ZigZag encoding</a></li>
+  <li>StartPointerDeltas --&gt; <code>packed</code> array of BlockChunks elements of BitsPerStartPointerDelta bits each, representing the deltas from the average start pointer using <a href="https://developers.google.com/protocol-buffers/docs/encoding#types">ZigZag encoding</a></li>
+  <li>Footer --&gt; <code>CodecFooter</code></li>
+  </ul>
+  <p>Notes
+  <ul>
+  <li>For any block, the doc base of the n-th chunk can be restored with 
  <code>DocBase + AvgChunkDocs * n + DocBaseDeltas[n]</code>.</li>
- <li>For any block, the start pointer of the n-th chunk can be restored with
+  <li>For any block, the start pointer of the n-th chunk can be restored with 
  <code>StartPointerBase + AvgChunkSize * n + StartPointerDeltas[n]</code>.</li>
- <li>Once data is loaded into memory, you can lookup the start pointer of any
- document by performing two binary searches: a first one based on the values
- of DocBase in order to find the right block, and then inside the block based
- on DocBaseDeltas (by reconstructing the doc bases for every chunk).</li>
- </ul>
+  <li>Once data is loaded into memory, you can lookup the start pointer of any
+  document by performing two binary searches: a first one based on the values
+  of DocBase in order to find the right block, and then inside the block based
+  on DocBaseDeltas (by reconstructing the doc bases for every chunk).</li>
+  </ul>
  */
 @interface OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter : NSObject < JavaIoCloseable > {
  @public
@@ -84,14 +90,18 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)indexOutput
-                                                withInt:(jint)blockSize;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)indexOutput
+                                                          withInt:(jint)blockSize;
 
 - (void)finishWithInt:(jint)numDocs
              withLong:(jlong)maxPointer;
 
 - (void)writeIndexWithInt:(jint)numDocs
                  withLong:(jlong)startPointer;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -111,4 +121,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFiel
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter")

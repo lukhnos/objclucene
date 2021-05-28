@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexUpgradeIndexMergePolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexUpgradeIndexMergePolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexUpgradeIndexMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexUpgradeIndexMergePolicy))
 #define OrgApacheLuceneIndexUpgradeIndexMergePolicy_
 
@@ -29,26 +35,26 @@
 
 /*!
  @brief This <code>MergePolicy</code> is used for upgrading all existing segments of
- an index when calling <code>IndexWriter.forceMerge(int)</code>.
+  an index when calling <code>IndexWriter.forceMerge(int)</code>.
  All other methods delegate to the base <code>MergePolicy</code> given to the constructor.
- This allows for an as-cheap-as possible upgrade of an older index by only upgrading segments that
- are created by previous Lucene versions. forceMerge does no longer really merge;
- it is just used to &quot;forceMerge&quot; older segment versions away.
+  This allows for an as-cheap-as possible upgrade of an older index by only upgrading segments that
+  are created by previous Lucene versions. forceMerge does no longer really merge;
+  it is just used to &quot;forceMerge&quot; older segment versions away. 
  <p>In general one would use <code>IndexUpgrader</code>, but for a fully customizeable upgrade,
- you can use this like any other <code>MergePolicy</code> and call <code>IndexWriter.forceMerge(int)</code>:
- <pre class="prettyprint lang-java">
- IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_XX, new KeywordAnalyzer());
- iwc.setMergePolicy(new UpgradeIndexMergePolicy(iwc.getMergePolicy()));
- IndexWriter w = new IndexWriter(dir, iwc);
- w.forceMerge(1);
- w.close();
+  you can use this like any other <code>MergePolicy</code> and call <code>IndexWriter.forceMerge(int)</code>:
+  <pre class="prettyprint lang-java">
+   IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_XX, new KeywordAnalyzer());
+   iwc.setMergePolicy(new UpgradeIndexMergePolicy(iwc.getMergePolicy()));
+   IndexWriter w = new IndexWriter(dir, iwc);
+   w.forceMerge(1);
+   w.close(); 
  
 @endcode
- <p><b>Warning:</b> This merge policy may reorder documents if the index was partially
- upgraded before calling forceMerge (e.g., documents were added). If your application relies
- on &quot;monotonicity&quot; of doc IDs (which means that the order in which the documents
- were added to the index is preserved), do a forceMerge(1) instead. Please note, the
- delegate <code>MergePolicy</code> may also reorder documents.
+  <p><b>Warning:</b> This merge policy may reorder documents if the index was partially
+  upgraded before calling forceMerge (e.g., documents were added). If your application relies
+  on &quot;monotonicity&quot; of doc IDs (which means that the order in which the documents
+  were added to the index is preserved), do a forceMerge(1) instead. Please note, the
+  delegate <code>MergePolicy</code> may also reorder documents.
  - seealso: IndexUpgrader
  */
 @interface OrgApacheLuceneIndexUpgradeIndexMergePolicy : OrgApacheLuceneIndexMergePolicy {
@@ -63,9 +69,9 @@
 
 /*!
  @brief Wrap the given <code>MergePolicy</code> and intercept forceMerge requests to
- only upgrade segments written with previous Lucene versions.
+  only upgrade segments written with previous Lucene versions.
  */
-- (instancetype)initWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)base;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)base;
 
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
                                                                                 withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
@@ -88,13 +94,20 @@
 #pragma mark Protected
 
 /*!
- @brief Returns if the given segment should be upgraded.
- The default implementation
- will return <code>!Version.LATEST.equals(si.getVersion())</code>,
- so all segments created with a different version number than this Lucene version will
- get upgraded.
+ @brief Returns if the given segment should be upgraded.The default implementation
+  will return <code>!
+ Version.LATEST.equals(si.getVersion())</code>,
+  so all segments created with a different version number than this Lucene version will
+  get upgraded.
  */
 - (jboolean)shouldUpgradeSegmentWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithDouble:(jdouble)arg0
+                                withLong:(jlong)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -112,4 +125,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexUpgradeIndexMergePolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexUpgradeIndexMergePolicy")

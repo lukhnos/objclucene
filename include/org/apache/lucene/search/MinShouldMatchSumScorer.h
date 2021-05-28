@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchMinShouldMatchSumScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchMinShouldMatchSumScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchMinShouldMatchSumScorer || defined(INCLUDE_OrgApacheLuceneSearchMinShouldMatchSumScorer))
 #define OrgApacheLuceneSearchMinShouldMatchSumScorer_
 
@@ -28,18 +34,18 @@
 @protocol JavaUtilCollection;
 
 /*!
- @brief A <code>Scorer</code> for <code>BooleanQuery</code> when
+ @brief A <code>Scorer</code> for <code>BooleanQuery</code> when 
  <code>minShouldMatch</code> is
- between 2 and the total number of clauses.
+  between 2 and the total number of clauses.
  This implementation keeps sub scorers in 3 different places:
- - lead: a linked list of scorer that are positioned on the desired doc ID
- - tail: a heap that contains at most minShouldMatch - 1 scorers that are
- behind the desired doc ID. These scorers are ordered by cost so that we
- can advance the least costly ones first.
- - head: a heap that contains scorers which are beyond the desired doc ID,
- ordered by doc ID in order to move quickly to the next candidate.
- Finding the next match consists of first setting the desired doc ID to the
- least entry in 'head' and then advance 'tail' until there is a match.
+   - lead: a linked list of scorer that are positioned on the desired doc ID
+   - tail: a heap that contains at most minShouldMatch - 1 scorers that are
+     behind the desired doc ID. These scorers are ordered by cost so that we
+     can advance the least costly ones first.
+   - head: a heap that contains scorers which are beyond the desired doc ID,
+     ordered by doc ID in order to move quickly to the next candidate.
+  Finding the next match consists of first setting the desired doc ID to the
+  least entry in 'head' and then advance 'tail' until there is a match.
  */
 @interface OrgApacheLuceneSearchMinShouldMatchSumScorer : OrgApacheLuceneSearchScorer {
  @public
@@ -73,10 +79,14 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                             withJavaUtilCollection:(id<JavaUtilCollection>)scorers
-                                            withInt:(jint)minShouldMatch
-                                     withFloatArray:(IOSFloatArray *)coord;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                     withJavaUtilCollection:(id<JavaUtilCollection>)scorers
+                                                                    withInt:(jint)minShouldMatch
+                                                             withFloatArray:(IOSFloatArray *)coord;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -88,14 +98,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMinShouldMatchSumScorer, head_, OrgApac
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMinShouldMatchSumScorer, tail_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMinShouldMatchSumScorer, childScorers_, id<JavaUtilCollection>)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchMinShouldMatchSumScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchMinShouldMatchSumScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchMinShouldMatchSumScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMinShouldMatchSumScorer *new_OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchMinShouldMatchSumScorer *new_OrgApacheLuceneSearchMinShouldMatchSumScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMinShouldMatchSumScorer *create_OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord);
+FOUNDATION_EXPORT OrgApacheLuceneSearchMinShouldMatchSumScorer *create_OrgApacheLuceneSearchMinShouldMatchSumScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMinShouldMatchSumScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMinShouldMatchSumScorer")

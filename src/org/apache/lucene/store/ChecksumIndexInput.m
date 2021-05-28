@@ -5,11 +5,13 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "org/apache/lucene/store/ChecksumIndexInput.h"
-#include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/store/IndexInput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/ChecksumIndexInput must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneStoreChecksumIndexInput
 
@@ -27,18 +29,26 @@
 - (void)seekWithLong:(jlong)pos {
   jlong skip = pos - [self getFilePointer];
   if (skip < 0) {
-    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("@$", [self getClass], @" cannot seek backwards"));
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("@$", [self java_getClass], @" cannot seek backwards"));
   }
   [self skipBytesWithLong:skip];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "ChecksumIndexInput", NULL, 0x4, NULL, NULL },
-    { "getChecksum", NULL, "J", 0x401, "Ljava.io.IOException;", NULL },
-    { "seekWithLong:", "seek", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreChecksumIndexInput = { 2, "ChecksumIndexInput", "org.apache.lucene.store", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(getChecksum);
+  methods[2].selector = @selector(seekWithLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;", "LJavaIoIOException;", "seek", "J" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreChecksumIndexInput = { "ChecksumIndexInput", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreChecksumIndexInput;
 }
 

@@ -3,12 +3,14 @@
 //  source: ./core/src/java/org/apache/lucene/search/FilteredDocIdSetIterator.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/FilteredDocIdSetIterator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/FilteredDocIdSetIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchFilteredDocIdSetIterator () {
  @public
@@ -75,20 +77,32 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchDocIdSetIterator:", "FilteredDocIdSetIterator", NULL, 0x1, NULL, NULL },
-    { "getDelegate", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x1, NULL, NULL },
-    { "matchWithInt:", "match", "Z", 0x404, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSetIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x404, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 2, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[1].selector = @selector(getDelegate);
+  methods[2].selector = @selector(matchWithInt:);
+  methods[3].selector = @selector(docID);
+  methods[4].selector = @selector(nextDoc);
+  methods[5].selector = @selector(advanceWithInt:);
+  methods[6].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "_innerIter_", NULL, 0x4, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "_innerIter_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilteredDocIdSetIterator = { 2, "FilteredDocIdSetIterator", "org.apache.lucene.search", NULL, 0x401, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchDocIdSetIterator;", "match", "I", "LJavaIoIOException;", "advance" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilteredDocIdSetIterator = { "FilteredDocIdSetIterator", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 7, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFilteredDocIdSetIterator;
 }
 

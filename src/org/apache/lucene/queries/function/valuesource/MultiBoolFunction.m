@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
@@ -18,34 +17,33 @@
 #include "org/apache/lucene/queries/function/valuesource/MultiBoolFunction.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 
-@interface OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1 : OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/MultiBoolFunction must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1 : OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues {
  @public
   OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *this$0_;
   IOSObjectArray *val$vals_;
 }
 
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *)outer$
+                             withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)capture$0
+                                     withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
+
 - (jboolean)boolValWithInt:(jint)doc;
 
 - (NSString *)toStringWithInt:(jint)doc;
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *)outer$
-                             withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)capture$0
-                                     withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1, this$0_, OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1, val$vals_, IOSObjectArray *)
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1 *self, OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1 *new_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1)
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1 *create_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction
 
@@ -74,7 +72,7 @@ withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)vals {
   for (OrgApacheLuceneQueriesFunctionValueSource * __strong source in sources_) {
     IOSObjectArray_Set(vals, i++, [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(source)) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:readerContext]);
   }
-  return create_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(self, vals, self);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(self, vals, self);
 }
 
 - (NSString *)description__ {
@@ -98,7 +96,7 @@ withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)vals {
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(o) java_getClass])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction class]);
   return [((id<JavaUtilList>) nil_chk(self->sources_)) isEqual:other->sources_];
 }
@@ -116,20 +114,33 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "MultiBoolFunction", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;)V" },
-    { "name", NULL, "Ljava.lang.String;", 0x404, NULL, NULL },
-    { "funcWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:", "func", "Z", 0x404, NULL, NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.docvalues.BoolDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSString;", 0x404, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x404, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues;", 0x1, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 8, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(funcWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:);
+  methods[3].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[4].selector = @selector(description__);
+  methods[5].selector = @selector(hash);
+  methods[6].selector = @selector(isEqual:);
+  methods[7].selector = @selector(createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "sources_", NULL, 0x14, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;", .constantValue.asLong = 0 },
+    { "sources_", "LJavaUtilList;", .constantValue.asLong = 0, 0x14, -1, -1, 13, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction = { 2, "MultiBoolFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x401, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;)V", "func", "I[LOrgApacheLuceneQueriesFunctionFunctionValues;", "getValues", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "description", "hashCode", "equals", "LNSObject;", "createWeight", "LJavaUtilMap;LOrgApacheLuceneSearchIndexSearcher;", "Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction = { "MultiBoolFunction", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x401, 8, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction;
 }
 
@@ -142,7 +153,14 @@ void OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_initWithJavaUtil
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction)
 
-@implementation OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1
+@implementation OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1
+
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *)outer$
+                             withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)capture$0
+                                     withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs {
+  OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, vs);
+  return self;
+}
 
 - (jboolean)boolValWithInt:(jint)doc {
   return [this$0_ funcWithInt:doc withOrgApacheLuceneQueriesFunctionFunctionValuesArray:val$vals_];
@@ -167,14 +185,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMultiB
       [sb appendWithNSString:[((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(dv)) toStringWithInt:doc]];
     }
   }
-  return [sb description];
-}
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *)outer$
-                             withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)capture$0
-                                     withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0 {
-  OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, arg$0);
-  return self;
+  return JreRetainedLocalValue([sb description]);
 }
 
 - (void)dealloc {
@@ -184,34 +195,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMultiB
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "boolValWithInt:", "boolVal", "Z", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:withOrgApacheLuceneQueriesFunctionValueSource:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(boolValWithInt:);
+  methods[2].selector = @selector(toStringWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.valuesource.MultiBoolFunction;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$vals_", NULL, 0x1012, "[Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$vals_", "[LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1 = { 2, "", "org.apache.lucene.queries.function.valuesource", "MultiBoolFunction", 0x8008, 3, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction;[LOrgApacheLuceneQueriesFunctionFunctionValues;LOrgApacheLuceneQueriesFunctionValueSource;", "boolVal", "I", "toString", "LOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction;", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1 = { "", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x8010, 3, 2, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+void OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1 *self, OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$vals_, capture$0);
-  OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, arg$0);
+  OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, vs);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1 *new_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1, initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, vs)
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1 *create_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_1, initWithOrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, vs)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_$1)

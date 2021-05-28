@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/CollectorManager.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/CollectorManager must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchCollectorManager : NSObject
 
 @end
@@ -13,11 +17,18 @@
 @implementation OrgApacheLuceneSearchCollectorManager
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "newCollector", NULL, "TC;", 0x401, "Ljava.io.IOException;", "()TC;" },
-    { "reduceWithJavaUtilCollection:", "reduce", "TT;", 0x401, "Ljava.io.IOException;", "(Ljava/util/Collection<TC;>;)TT;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneSearchCollector;", 0x401, -1, -1, 0, 1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 2, 3, 0, 4, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchCollectorManager = { 2, "CollectorManager", "org.apache.lucene.search", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<C::Lorg/apache/lucene/search/Collector;T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(newCollector);
+  methods[1].selector = @selector(reduceWithJavaUtilCollection:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;", "()TC;", "reduce", "LJavaUtilCollection;", "(Ljava/util/Collection<TC;>;)TT;", "<C::Lorg/apache/lucene/search/Collector;T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchCollectorManager = { "CollectorManager", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, 5, -1 };
   return &_OrgApacheLuceneSearchCollectorManager;
 }
 

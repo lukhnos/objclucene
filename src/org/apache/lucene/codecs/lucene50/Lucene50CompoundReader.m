@@ -9,7 +9,7 @@
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
 #include "java/io/FileNotFoundException.h"
-#include "java/io/IOException.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
@@ -29,6 +29,10 @@
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/store/Lock.h"
 #include "org/apache/lucene/util/IOUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50CompoundReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsLucene50Lucene50CompoundReader () {
  @public
@@ -57,10 +61,10 @@ __attribute__((unused)) static id<JavaUtilMap> OrgApacheLuceneCodecsLucene50Luce
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50CompoundReader
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
-                  withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
-                    withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(self, directory, si, context);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
+                                withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
+                                  withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
+  OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(self, directory, si, context);
   return self;
 }
 
@@ -105,7 +109,7 @@ __attribute__((unused)) static id<JavaUtilMap> OrgApacheLuceneCodecsLucene50Luce
 
 - (jlong)fileLengthWithNSString:(NSString *)name {
   [self ensureOpen];
-  OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry *e = [((id<JavaUtilMap>) nil_chk(entries_)) getWithId:OrgApacheLuceneIndexIndexFileNames_stripSegmentNameWithNSString_(name)];
+  OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry *e = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(entries_)) getWithId:OrgApacheLuceneIndexIndexFileNames_stripSegmentNameWithNSString_(name)]);
   if (e == nil) @throw create_JavaIoFileNotFoundException_initWithNSString_(name);
   return e->length_;
 }
@@ -136,35 +140,51 @@ __attribute__((unused)) static id<JavaUtilMap> OrgApacheLuceneCodecsLucene50Luce
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "Lucene50CompoundReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "readEntriesWithByteArray:withOrgApacheLuceneStoreDirectory:withNSString:", "readEntries", "Ljava.util.Map;", 0x12, "Ljava.io.IOException;", "([BLorg/apache/lucene/store/Directory;Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/lucene50/Lucene50CompoundReader$FileEntry;>;" },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "listAll", NULL, "[Ljava.lang.String;", 0x1, NULL, NULL },
-    { "deleteFileWithNSString:", "deleteFile", "V", 0x1, NULL, NULL },
-    { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, NULL, NULL },
-    { "fileLengthWithNSString:", "fileLength", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, NULL, "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
-    { "obtainLockWithNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x12, 2, 3, 1, 4, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 5, 6, 1, -1, -1, -1 },
+    { NULL, "[LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 11, 8, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexOutput;", 0x1, 12, 6, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 14, -1, 15, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreLock;", 0x1, 16, 8, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 17, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:);
+  methods[1].selector = @selector(readEntriesWithByteArray:withOrgApacheLuceneStoreDirectory:withNSString:);
+  methods[2].selector = @selector(close);
+  methods[3].selector = @selector(openInputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[4].selector = @selector(listAll);
+  methods[5].selector = @selector(deleteFileWithNSString:);
+  methods[6].selector = @selector(renameFileWithNSString:withNSString:);
+  methods[7].selector = @selector(fileLengthWithNSString:);
+  methods[8].selector = @selector(createOutputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[9].selector = @selector(syncWithJavaUtilCollection:);
+  methods[10].selector = @selector(obtainLockWithNSString:);
+  methods[11].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "directory_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentName_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "entries_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/lucene50/Lucene50CompoundReader$FileEntry;>;", .constantValue.asLong = 0 },
-    { "handle_", NULL, 0x12, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "version__", "version", 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "directory_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "segmentName_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "entries_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 18, -1 },
+    { "handle_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "version__", "I", .constantValue.asLong = 0, 0x2, 19, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.lucene50.Lucene50CompoundReader$FileEntry;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50CompoundReader = { 2, "Lucene50CompoundReader", "org.apache.lucene.codecs.lucene50", NULL, 0x10, 12, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "readEntries", "[BLOrgApacheLuceneStoreDirectory;LNSString;", "([BLorg/apache/lucene/store/Directory;Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/lucene50/Lucene50CompoundReader$FileEntry;>;", "openInput", "LNSString;LOrgApacheLuceneStoreIOContext;", "deleteFile", "LNSString;", "renameFile", "LNSString;LNSString;", "fileLength", "createOutput", "sync", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/String;>;)V", "obtainLock", "toString", "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/lucene50/Lucene50CompoundReader$FileEntry;>;", "version", "LOrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50CompoundReader = { "Lucene50CompoundReader", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x10, 12, 5, -1, 20, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader;
 }
 
 @end
 
-void OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *self, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *si, OrgApacheLuceneStoreIOContext *context) {
+void OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *self, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *si, OrgApacheLuceneStoreIOContext *context) {
   OrgApacheLuceneStoreDirectory_init(self);
   JreStrongAssign(&self->directory_, directory);
   JreStrongAssign(&self->segmentName_, ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si))->name_);
@@ -185,21 +205,21 @@ void OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initWithOrgApacheLucene
   }
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *new_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *si, OrgApacheLuceneStoreIOContext *context) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50CompoundReader, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_, directory, si, context)
+OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *new_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *si, OrgApacheLuceneStoreIOContext *context) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50CompoundReader, initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_, directory, si, context)
 }
 
-OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *create_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *si, OrgApacheLuceneStoreIOContext *context) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50CompoundReader, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_, directory, si, context)
+OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *create_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *si, OrgApacheLuceneStoreIOContext *context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50CompoundReader, initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_, directory, si, context)
 }
 
 id<JavaUtilMap> OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_readEntriesWithByteArray_withOrgApacheLuceneStoreDirectory_withNSString_(OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *self, IOSByteArray *segmentID, OrgApacheLuceneStoreDirectory *dir, NSString *entriesFileName) {
   id<JavaUtilMap> mapping = nil;
   {
     OrgApacheLuceneStoreChecksumIndexInput *entriesStream = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) openChecksumInputWithNSString:entriesFileName withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE)];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      NSException *priorE = nil;
+      JavaLangThrowable *priorE = nil;
       @try {
         self->version__ = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(entriesStream, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRY_CODEC, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_START, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT, segmentID, @"");
         jint numEntries = [((OrgApacheLuceneStoreChecksumIndexInput *) nil_chk(entriesStream)) readVInt];
@@ -207,7 +227,7 @@ id<JavaUtilMap> OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_readEntriesW
         for (jint i = 0; i < numEntries; i++) {
           OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry *fileEntry = create_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry_init();
           NSString *id_ = [entriesStream readString];
-          OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry *previous = [mapping putWithId:id_ withId:fileEntry];
+          OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry *previous = JreRetainedLocalValue([mapping putWithId:id_ withId:fileEntry]);
           if (previous != nil) {
             @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$$$", @"Duplicate cfs entry id=", id_, @" in CFS "), entriesStream);
           }
@@ -215,14 +235,14 @@ id<JavaUtilMap> OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_readEntriesW
           fileEntry->length_ = [entriesStream readLong];
         }
       }
-      @catch (NSException *exception) {
+      @catch (JavaLangThrowable *exception) {
         priorE = exception;
       }
       @finally {
-        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withNSException_(entriesStream, priorE);
+        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(entriesStream, priorE);
       }
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -231,10 +251,12 @@ id<JavaUtilMap> OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_readEntriesW
         if (__primaryException1 != nil) {
           @try {
             [entriesStream close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [entriesStream close];
         }
       }
@@ -255,14 +277,20 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "FileEntry", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "offset_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "offset_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "length_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry = { 2, "FileEntry", "org.apache.lucene.codecs.lucene50", "Lucene50CompoundReader", 0x19, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsLucene50Lucene50CompoundReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry = { "FileEntry", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x19, 1, 2, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry;
 }
 

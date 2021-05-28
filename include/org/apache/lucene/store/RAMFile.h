@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreRAMFile
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreRAMFile_) && (INCLUDE_ALL_OrgApacheLuceneStoreRAMFile || defined(INCLUDE_OrgApacheLuceneStoreRAMFile))
 #define OrgApacheLuceneStoreRAMFile_
 
@@ -27,7 +33,6 @@
 
 /*!
  @brief Represents a file in RAM as a list of byte[] buffers.
-  
  */
 @interface OrgApacheLuceneStoreRAMFile : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -39,7 +44,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -61,7 +66,7 @@
 
 /*!
  @brief Expert: allocate a new buffer.
- Subclasses can allocate differently. 
+ Subclasses can allocate differently.
  @param size size of allocated buffer.
  @return allocated buffer.
  */
@@ -73,7 +78,7 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRAMDirectory:(OrgApacheLuceneStoreRAMDirectory *)directory;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRAMDirectory:(OrgApacheLuceneStoreRAMDirectory *)directory;
 
 @end
 
@@ -84,9 +89,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreRAMFile, directory_, OrgApacheLuceneStor
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMFile_init(OrgApacheLuceneStoreRAMFile *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreRAMFile *new_OrgApacheLuceneStoreRAMFile_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreRAMFile *new_OrgApacheLuceneStoreRAMFile_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreRAMFile *create_OrgApacheLuceneStoreRAMFile_init();
+FOUNDATION_EXPORT OrgApacheLuceneStoreRAMFile *create_OrgApacheLuceneStoreRAMFile_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(OrgApacheLuceneStoreRAMFile *self, OrgApacheLuceneStoreRAMDirectory *directory);
 
@@ -98,4 +103,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMFile)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRAMFile")

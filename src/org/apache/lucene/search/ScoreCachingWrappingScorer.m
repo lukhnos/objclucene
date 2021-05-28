@@ -3,15 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/search/ScoreCachingWrappingScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/search/FilterScorer.h"
 #include "org/apache/lucene/search/ScoreCachingWrappingScorer.h"
 #include "org/apache/lucene/search/Scorer.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ScoreCachingWrappingScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchScoreCachingWrappingScorer () {
  @public
@@ -42,16 +44,24 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchScorer:", "ScoreCachingWrappingScorer", NULL, 0x1, NULL, NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 2, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(score);
+  methods[2].selector = @selector(getChildren);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "curDoc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curScore_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "curDoc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curScore_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchScoreCachingWrappingScorer = { 2, "ScoreCachingWrappingScorer", "org.apache.lucene.search", NULL, 0x1, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchScoreCachingWrappingScorer = { "ScoreCachingWrappingScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 3, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchScoreCachingWrappingScorer;
 }
 

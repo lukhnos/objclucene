@@ -3,17 +3,26 @@
 //  source: ./core/src/java/org/apache/lucene/search/SimpleCollector.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/LeafCollector.h"
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/SimpleCollector.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/SimpleCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimpleCollector
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSimpleCollector_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   [self doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:context];
@@ -31,22 +40,25 @@
   [self doesNotRecognizeSelector:_cmd];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSimpleCollector_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x11, "Ljava.io.IOException;", NULL },
-    { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "collectWithInt:", "collect", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", "SimpleCollector", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchLeafCollector;", 0x11, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 6, 7, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimpleCollector = { 2, "SimpleCollector", "org.apache.lucene.search", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[2].selector = @selector(doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  methods[4].selector = @selector(collectWithInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getLeafCollector", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "doSetNextReader", "setScorer", "LOrgApacheLuceneSearchScorer;", "collect", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimpleCollector = { "SimpleCollector", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x401, 5, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimpleCollector;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery))
 #define OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_
 
@@ -23,6 +29,7 @@
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
 @class OrgApacheLuceneQueryparserSurroundQuerySimpleTerm;
+@class OrgApacheLuceneQueryparserSurroundQuerySrndQuery;
 @class OrgApacheLuceneSearchQuery;
 
 @interface OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery : OrgApacheLuceneQueryparserSurroundQueryRewriteQuery
@@ -33,22 +40,32 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm:(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *)srndQuery
-                                                             withNSString:(NSString *)fieldName
-             withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm:(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *)srndQuery
+                                                                                     withNSString:(NSString *)fieldName
+                                     withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)arg0
+                                                                                    withNSString:(NSString *)arg1
+                                    withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)arg2 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *self, OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *self, OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf);
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initPackagePrivateWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery")

@@ -10,7 +10,12 @@
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
 #include "java/lang/UnsupportedOperationException.h"
+#include "java/util/stream/IntStream.h"
 #include "org/apache/lucene/analysis/util/OpenStringBuilder.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/OpenStringBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneAnalysisUtilOpenStringBuilder
 
@@ -50,7 +55,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return len_;
 }
 
-- (jint)length {
+- (jint)java_length {
   return len_;
 }
 
@@ -59,7 +64,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<JavaLangAppendable>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq {
-  return [self appendWithJavaLangCharSequence:csq withInt:0 withInt:[((id<JavaLangCharSequence>) nil_chk(csq)) length]];
+  return [self appendWithJavaLangCharSequence:csq withInt:0 withInt:[((id<JavaLangCharSequence>) nil_chk(csq)) java_length]];
 }
 
 - (id<JavaLangAppendable>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
@@ -143,9 +148,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)writeWithNSString:(NSString *)s {
-  [self reserveWithInt:((jint) [((NSString *) nil_chk(s)) length])];
-  [s getChars:0 sourceEnd:((jint) [s length]) destination:buf_ destinationBegin:len_];
-  len_ += ((jint) [s length]);
+  [self reserveWithInt:[((NSString *) nil_chk(s)) java_length]];
+  [s java_getChars:0 sourceEnd:[s java_length] destination:buf_ destinationBegin:len_];
+  len_ += [s java_length];
 }
 
 - (void)flush {
@@ -162,7 +167,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  return [NSString stringWithCharacters:buf_ offset:0 length:[self size]];
+  return [NSString java_stringWithCharacters:buf_ offset:0 length:[self size]];
+}
+
+- (id<JavaUtilStreamIntStream>)chars {
+  return JavaLangCharSequence_chars(self);
+}
+
+- (id<JavaUtilStreamIntStream>)codePoints {
+  return JavaLangCharSequence_codePoints(self);
 }
 
 - (void)dealloc {
@@ -171,43 +184,78 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "OpenStringBuilder", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "OpenStringBuilder", NULL, 0x1, NULL, NULL },
-    { "initWithCharArray:withInt:", "OpenStringBuilder", NULL, 0x1, NULL, NULL },
-    { "setLengthWithInt:", "setLength", "V", 0x1, NULL, NULL },
-    { "setWithCharArray:withInt:", "set", "V", 0x1, NULL, NULL },
-    { "getArray", NULL, "[C", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "capacity", NULL, "I", 0x1, NULL, NULL },
-    { "appendWithJavaLangCharSequence:", "append", "Ljava.lang.Appendable;", 0x1, NULL, NULL },
-    { "appendWithJavaLangCharSequence:withInt:withInt:", "append", "Ljava.lang.Appendable;", 0x1, NULL, NULL },
-    { "appendWithChar:", "append", "Ljava.lang.Appendable;", 0x1, NULL, NULL },
-    { "charAtWithInt:", "charAt", "C", 0x1, NULL, NULL },
-    { "setCharAtWithInt:withChar:", "setCharAt", "V", 0x1, NULL, NULL },
-    { "subSequenceFrom:to:", "subSequence", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "unsafeWriteWithChar:", "unsafeWrite", "V", 0x1, NULL, NULL },
-    { "unsafeWriteWithInt:", "unsafeWrite", "V", 0x1, NULL, NULL },
-    { "unsafeWriteWithCharArray:withInt:withInt:", "unsafeWrite", "V", 0x1, NULL, NULL },
-    { "resizeWithInt:", "resize", "V", 0x4, NULL, NULL },
-    { "reserveWithInt:", "reserve", "V", 0x1, NULL, NULL },
-    { "writeWithChar:", "write", "V", 0x1, NULL, NULL },
-    { "writeWithInt:", "write", "V", 0x1, NULL, NULL },
-    { "writeWithCharArray:", "write", "V", 0x11, NULL, NULL },
-    { "writeWithCharArray:withInt:withInt:", "write", "V", 0x1, NULL, NULL },
-    { "writeWithOrgApacheLuceneAnalysisUtilOpenStringBuilder:", "write", "V", 0x11, NULL, NULL },
-    { "writeWithNSString:", "write", "V", 0x1, NULL, NULL },
-    { "flush", NULL, "V", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x11, NULL, NULL },
-    { "toCharArray", NULL, "[C", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangAppendable;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LJavaLangAppendable;", 0x1, 5, 7, -1, -1, -1, -1 },
+    { NULL, "LJavaLangAppendable;", 0x1, 5, 8, -1, -1, -1, -1 },
+    { NULL, "C", 0x1, 9, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 16, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 18, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 22, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(initWithCharArray:withInt:);
+  methods[3].selector = @selector(setLengthWithInt:);
+  methods[4].selector = @selector(setWithCharArray:withInt:);
+  methods[5].selector = @selector(getArray);
+  methods[6].selector = @selector(size);
+  methods[7].selector = @selector(java_length);
+  methods[8].selector = @selector(capacity);
+  methods[9].selector = @selector(appendWithJavaLangCharSequence:);
+  methods[10].selector = @selector(appendWithJavaLangCharSequence:withInt:withInt:);
+  methods[11].selector = @selector(appendWithChar:);
+  methods[12].selector = @selector(charAtWithInt:);
+  methods[13].selector = @selector(setCharAtWithInt:withChar:);
+  methods[14].selector = @selector(subSequenceFrom:to:);
+  methods[15].selector = @selector(unsafeWriteWithChar:);
+  methods[16].selector = @selector(unsafeWriteWithInt:);
+  methods[17].selector = @selector(unsafeWriteWithCharArray:withInt:withInt:);
+  methods[18].selector = @selector(resizeWithInt:);
+  methods[19].selector = @selector(reserveWithInt:);
+  methods[20].selector = @selector(writeWithChar:);
+  methods[21].selector = @selector(writeWithInt:);
+  methods[22].selector = @selector(writeWithCharArray:);
+  methods[23].selector = @selector(writeWithCharArray:withInt:withInt:);
+  methods[24].selector = @selector(writeWithOrgApacheLuceneAnalysisUtilOpenStringBuilder:);
+  methods[25].selector = @selector(writeWithNSString:);
+  methods[26].selector = @selector(flush);
+  methods[27].selector = @selector(reset);
+  methods[28].selector = @selector(toCharArray);
+  methods[29].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "buf_", NULL, 0x4, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "len_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "buf_", "[C", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "len_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilOpenStringBuilder = { 2, "OpenStringBuilder", "org.apache.lucene.analysis.util", NULL, 0x1, 30, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "[CI", "setLength", "set", "length", "append", "LJavaLangCharSequence;", "LJavaLangCharSequence;II", "C", "charAt", "setCharAt", "IC", "subSequence", "II", "unsafeWrite", "[CII", "resize", "reserve", "write", "[C", "LOrgApacheLuceneAnalysisUtilOpenStringBuilder;", "LNSString;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilOpenStringBuilder = { "OpenStringBuilder", "org.apache.lucene.analysis.util", ptrTable, methods, fields, 7, 0x1, 30, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisUtilOpenStringBuilder;
 }
 

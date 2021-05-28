@@ -21,6 +21,10 @@
 #include "org/apache/lucene/util/packed/PackedInts.h"
 #include "org/apache/lucene/util/packed/PackedLongValues.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/PackedLongValues must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilPackedPackedLongValues () {
  @public
   jlong size_;
@@ -29,7 +33,7 @@
 
 @end
 
-inline jlong OrgApacheLuceneUtilPackedPackedLongValues_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilPackedPackedLongValues_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilPackedPackedLongValues_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilPackedPackedLongValues, BASE_RAM_BYTES_USED, jlong)
 
@@ -44,8 +48,6 @@ __attribute__((unused)) static jlong OrgApacheLuceneUtilPackedPackedLongValues_s
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedLongValues_Iterator, this$0_, OrgApacheLuceneUtilPackedPackedLongValues *)
-
 __attribute__((unused)) static void OrgApacheLuceneUtilPackedPackedLongValues_Iterator_fillBlock(OrgApacheLuceneUtilPackedPackedLongValues_Iterator *self);
 
 __attribute__((unused)) static jboolean OrgApacheLuceneUtilPackedPackedLongValues_Iterator_hasNext(OrgApacheLuceneUtilPackedPackedLongValues_Iterator *self);
@@ -56,11 +58,11 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilPackedPackedLongValue
 
 @end
 
-inline jint OrgApacheLuceneUtilPackedPackedLongValues_Builder_get_INITIAL_PAGE_COUNT();
+inline jint OrgApacheLuceneUtilPackedPackedLongValues_Builder_get_INITIAL_PAGE_COUNT(void);
 #define OrgApacheLuceneUtilPackedPackedLongValues_Builder_INITIAL_PAGE_COUNT 16
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedLongValues_Builder, INITIAL_PAGE_COUNT, jint)
 
-inline jlong OrgApacheLuceneUtilPackedPackedLongValues_Builder_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilPackedPackedLongValues_Builder_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilPackedPackedLongValues_Builder_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilPackedPackedLongValues_Builder, BASE_RAM_BYTES_USED, jlong)
 
@@ -140,7 +142,7 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
 }
 
 - (jlong)getWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < OrgApacheLuceneUtilPackedPackedLongValues_size(self)), (@"org/apache/lucene/util/packed/PackedLongValues.java:109 condition failed: assert index >= 0 && index < size();"));
+  JreAssert(index >= 0 && index < OrgApacheLuceneUtilPackedPackedLongValues_size(self), @"org/apache/lucene/util/packed/PackedLongValues.java:109 condition failed: assert index >= 0 && index < size();");
   jint block = (jint) (JreRShift64(index, pageShift_));
   jint element = (jint) (index & pageMask_);
   return [self getWithInt:block withInt:element];
@@ -163,44 +165,62 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneUtilPackedPackedLongValues_Builder;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedLongValues_Builder;", 0x9, 0, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedLongValues_Builder;", 0x9, 3, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedLongValues_Builder;", 0x9, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedLongValues_Builder;", 0x9, 4, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedLongValues_Builder;", 0x9, 4, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 6, 7, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, 8, 9, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, 8, 10, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 11, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedLongValues_Iterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(packedBuilderWithInt:withFloat:);
+  methods[1].selector = @selector(packedBuilderWithFloat:);
+  methods[2].selector = @selector(deltaPackedBuilderWithInt:withFloat:);
+  methods[3].selector = @selector(deltaPackedBuilderWithFloat:);
+  methods[4].selector = @selector(monotonicBuilderWithInt:withFloat:);
+  methods[5].selector = @selector(monotonicBuilderWithFloat:);
+  methods[6].selector = @selector(initWithInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:withLong:withLong:);
+  methods[7].selector = @selector(size);
+  methods[8].selector = @selector(decodeBlockWithInt:withLongArray:);
+  methods[9].selector = @selector(getWithInt:withInt:);
+  methods[10].selector = @selector(getWithLong:);
+  methods[11].selector = @selector(ramBytesUsed);
+  methods[12].selector = @selector(getChildResources);
+  methods[13].selector = @selector(iterator);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
+    { "DEFAULT_PAGE_SIZE", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedPackedLongValues_DEFAULT_PAGE_SIZE, 0x18, -1, -1, -1, -1 },
+    { "MIN_PAGE_SIZE", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedPackedLongValues_MIN_PAGE_SIZE, 0x18, -1, -1, -1, -1 },
+    { "MAX_PAGE_SIZE", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedPackedLongValues_MAX_PAGE_SIZE, 0x18, -1, -1, -1, -1 },
+    { "values_", "[LOrgApacheLuceneUtilPackedPackedInts_Reader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "pageShift_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "pageMask_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "size_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "ramBytesUsed_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "packedBuilder", "IF", "F", "deltaPackedBuilder", "monotonicBuilder", "II[LOrgApacheLuceneUtilPackedPackedInts_Reader;JJ", "decodeBlock", "I[J", "get", "II", "J", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", &OrgApacheLuceneUtilPackedPackedLongValues_BASE_RAM_BYTES_USED, "LOrgApacheLuceneUtilPackedPackedLongValues_Iterator;LOrgApacheLuceneUtilPackedPackedLongValues_Builder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedLongValues = { "PackedLongValues", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x1, 14, 9, -1, 13, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilPackedPackedLongValues;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedPackedLongValues class]) {
     OrgApacheLuceneUtilPackedPackedLongValues_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPackedPackedLongValues_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPackedPackedLongValues)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "packedBuilderWithInt:withFloat:", "packedBuilder", "Lorg.apache.lucene.util.packed.PackedLongValues$Builder;", 0x9, NULL, NULL },
-    { "packedBuilderWithFloat:", "packedBuilder", "Lorg.apache.lucene.util.packed.PackedLongValues$Builder;", 0x9, NULL, NULL },
-    { "deltaPackedBuilderWithInt:withFloat:", "deltaPackedBuilder", "Lorg.apache.lucene.util.packed.PackedLongValues$Builder;", 0x9, NULL, NULL },
-    { "deltaPackedBuilderWithFloat:", "deltaPackedBuilder", "Lorg.apache.lucene.util.packed.PackedLongValues$Builder;", 0x9, NULL, NULL },
-    { "monotonicBuilderWithInt:withFloat:", "monotonicBuilder", "Lorg.apache.lucene.util.packed.PackedLongValues$Builder;", 0x9, NULL, NULL },
-    { "monotonicBuilderWithFloat:", "monotonicBuilder", "Lorg.apache.lucene.util.packed.PackedLongValues$Builder;", 0x9, NULL, NULL },
-    { "initWithInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:withLong:withLong:", "PackedLongValues", NULL, 0x0, NULL, NULL },
-    { "size", NULL, "J", 0x11, NULL, NULL },
-    { "decodeBlockWithInt:withLongArray:", "decodeBlock", "I", 0x0, NULL, NULL },
-    { "getWithInt:withInt:", "get", "J", 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x11, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "iterator", NULL, "Lorg.apache.lucene.util.packed.PackedLongValues$Iterator;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilPackedPackedLongValues_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_PAGE_SIZE", "DEFAULT_PAGE_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedPackedLongValues_DEFAULT_PAGE_SIZE },
-    { "MIN_PAGE_SIZE", "MIN_PAGE_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedPackedLongValues_MIN_PAGE_SIZE },
-    { "MAX_PAGE_SIZE", "MAX_PAGE_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedPackedLongValues_MAX_PAGE_SIZE },
-    { "values_", NULL, 0x10, "[Lorg.apache.lucene.util.packed.PackedInts$Reader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "pageShift_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pageMask_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "size_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "ramBytesUsed_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.packed.PackedLongValues$Iterator;", "Lorg.apache.lucene.util.packed.PackedLongValues$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedLongValues = { 2, "PackedLongValues", "org.apache.lucene.util.packed", NULL, 0x1, 14, methods, 9, fields, 0, NULL, 2, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilPackedPackedLongValues;
 }
 
 @end
@@ -274,7 +294,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedLongValues)
 }
 
 - (jlong)next {
-  JreAssert((OrgApacheLuceneUtilPackedPackedLongValues_Iterator_hasNext(self)), (@"org/apache/lucene/util/packed/PackedLongValues.java:159 condition failed: assert hasNext();"));
+  JreAssert(OrgApacheLuceneUtilPackedPackedLongValues_Iterator_hasNext(self), @"org/apache/lucene/util/packed/PackedLongValues.java:159 condition failed: assert hasNext();");
   jlong result = IOSLongArray_Get(nil_chk(currentValues_), pOff_++);
   if (pOff_ == currentCount_) {
     vOff_ += 1;
@@ -291,20 +311,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedLongValues)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilPackedPackedLongValues:", "Iterator", NULL, 0x0, NULL, NULL },
-    { "fillBlock", NULL, "V", 0x2, NULL, NULL },
-    { "hasNext", NULL, "Z", 0x11, NULL, NULL },
-    { "next", NULL, "J", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilPackedPackedLongValues:);
+  methods[1].selector = @selector(fillBlock);
+  methods[2].selector = @selector(hasNext);
+  methods[3].selector = @selector(next);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.packed.PackedLongValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentValues_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "vOff_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pOff_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentCount_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneUtilPackedPackedLongValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "currentValues_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "vOff_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "pOff_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "currentCount_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedLongValues_Iterator = { 2, "Iterator", "org.apache.lucene.util.packed", "PackedLongValues", 0x11, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilPackedPackedLongValues;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedLongValues_Iterator = { "Iterator", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x11, 4, 5, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedPackedLongValues_Iterator;
 }
 
@@ -332,7 +361,7 @@ void OrgApacheLuceneUtilPackedPackedLongValues_Iterator_fillBlock(OrgApacheLucen
   }
   else {
     self->currentCount_ = [self->this$0_ decodeBlockWithInt:self->vOff_ withLongArray:self->currentValues_];
-    JreAssert((self->currentCount_ > 0), (@"org/apache/lucene/util/packed/PackedLongValues.java:148 condition failed: assert currentCount > 0;"));
+    JreAssert(self->currentCount_ > 0, @"org/apache/lucene/util/packed/PackedLongValues.java:148 condition failed: assert currentCount > 0;");
   }
 }
 
@@ -404,7 +433,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPackedLongValues_Builder)
                   withInt:(jint)numValues
                   withInt:(jint)block
                 withFloat:(jfloat)acceptableOverheadRatio {
-  JreAssert((numValues > 0), (@"org/apache/lucene/util/packed/PackedLongValues.java:264 condition failed: assert numValues > 0;"));
+  JreAssert(numValues > 0, @"org/apache/lucene/util/packed/PackedLongValues.java:264 condition failed: assert numValues > 0;");
   jlong minValue = IOSLongArray_Get(nil_chk(values), 0);
   jlong maxValue = IOSLongArray_Get(values, 0);
   for (jint i = 1; i < numValues; ++i) {
@@ -436,42 +465,58 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPackedLongValues_Builder)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedLongValues;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedLongValues_Builder;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x10, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 6, 7, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withFloat:);
+  methods[1].selector = @selector(build);
+  methods[2].selector = @selector(baseRamBytesUsed);
+  methods[3].selector = @selector(ramBytesUsed);
+  methods[4].selector = @selector(getChildResources);
+  methods[5].selector = @selector(size);
+  methods[6].selector = @selector(addWithLong:);
+  methods[7].selector = @selector(finish);
+  methods[8].selector = @selector(pack);
+  methods[9].selector = @selector(packWithLongArray:withInt:withInt:withFloat:);
+  methods[10].selector = @selector(growWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INITIAL_PAGE_COUNT", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedPackedLongValues_Builder_INITIAL_PAGE_COUNT, 0x1a, -1, -1, -1, -1 },
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 8, -1, -1 },
+    { "pageShift_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "pageMask_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "acceptableOverheadRatio_", "F", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "pending_", "[J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "size_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "values_", "[LOrgApacheLuceneUtilPackedPackedInts_Reader;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ramBytesUsed_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "valuesOff_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "pendingOff_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "IF", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "add", "J", "pack", "[JIIF", "grow", "I", &OrgApacheLuceneUtilPackedPackedLongValues_Builder_BASE_RAM_BYTES_USED, "LOrgApacheLuceneUtilPackedPackedLongValues;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedLongValues_Builder = { "Builder", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x9, 11, 11, 9, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilPackedPackedLongValues_Builder;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedPackedLongValues_Builder class]) {
     OrgApacheLuceneUtilPackedPackedLongValues_Builder_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPackedPackedLongValues_Builder_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPackedPackedLongValues_Builder)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withFloat:", "Builder", NULL, 0x0, NULL, NULL },
-    { "build", NULL, "Lorg.apache.lucene.util.packed.PackedLongValues;", 0x1, NULL, NULL },
-    { "baseRamBytesUsed", NULL, "J", 0x0, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x11, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "size", NULL, "J", 0x11, NULL, NULL },
-    { "addWithLong:", "add", "Lorg.apache.lucene.util.packed.PackedLongValues$Builder;", 0x1, NULL, NULL },
-    { "finish", NULL, "V", 0x10, NULL, NULL },
-    { "pack", NULL, "V", 0x2, NULL, NULL },
-    { "packWithLongArray:withInt:withInt:withFloat:", "pack", "V", 0x0, NULL, NULL },
-    { "growWithInt:", "grow", "V", 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "INITIAL_PAGE_COUNT", "INITIAL_PAGE_COUNT", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedPackedLongValues_Builder_INITIAL_PAGE_COUNT },
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilPackedPackedLongValues_Builder_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "pageShift_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pageMask_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "acceptableOverheadRatio_", NULL, 0x10, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "pending_", NULL, 0x0, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "size_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "values_", NULL, 0x0, "[Lorg.apache.lucene.util.packed.PackedInts$Reader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ramBytesUsed_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "valuesOff_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pendingOff_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedLongValues_Builder = { 2, "Builder", "org.apache.lucene.util.packed", "PackedLongValues", 0x9, 11, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilPackedPackedLongValues_Builder;
 }
 
 @end

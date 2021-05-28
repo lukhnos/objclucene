@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser || defined(INCLUDE_OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser))
 #define OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser_
 
@@ -24,13 +30,13 @@
 
 /*!
  @brief <p>
- This query parser works exactly as the standard query parser ( <code>StandardQueryParser</code> ), 
- except that it respect the boolean precedence, so &lt;a AND b OR c AND d&gt; is parsed to &lt;(+a +b) (+c +d)&gt;
- instead of &lt;+a +b +c +d&gt;.
+  This query parser works exactly as the standard query parser ( <code>StandardQueryParser</code> ), 
+  except that it respect the boolean precedence, so &lt;a AND b OR c AND d&gt; is parsed to &lt;(+a +b) (+c +d)&gt;
+  instead of &lt;+a +b +c +d&gt;.
  </p>
- <p>
- EXPERT: This class extends <code>StandardQueryParser</code>, but uses <code>PrecedenceQueryNodeProcessorPipeline</code>
- instead of <code>StandardQueryNodeProcessorPipeline</code> to process the query tree.
+  <p>
+  EXPERT: This class extends <code>StandardQueryParser</code>, but uses <code>PrecedenceQueryNodeProcessorPipeline</code>
+  instead of <code>StandardQueryNodeProcessorPipeline</code> to process the query tree. 
  </p>
  - seealso: StandardQueryParser
  */
@@ -41,12 +47,12 @@
 /*!
  - seealso: StandardQueryParser#StandardQueryParser()
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  - seealso: StandardQueryParser#StandardQueryParser(Analyzer)
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyer;
 
 @end
 
@@ -54,9 +60,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQ
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser_init(OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser *new_OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser *new_OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser *create_OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser *create_OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser *self, OrgApacheLuceneAnalysisAnalyzer *analyer);
 
@@ -68,4 +74,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenc
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTermQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermQuery || defined(INCLUDE_OrgApacheLuceneSearchTermQuery))
 #define OrgApacheLuceneSearchTermQuery_
 
@@ -26,9 +32,8 @@
 @class OrgApacheLuceneSearchWeight;
 
 /*!
- @brief A Query that matches documents containing a term.
- This may be combined with
- other terms with a <code>BooleanQuery</code>.
+ @brief A Query that matches documents containing a term.This may be combined with
+  other terms with a <code>BooleanQuery</code>.
  */
 @interface OrgApacheLuceneSearchTermQuery : OrgApacheLuceneSearchQuery
 
@@ -37,14 +42,14 @@
 /*!
  @brief Constructs a query for the term <code>t</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t;
 
 /*!
  @brief Expert: constructs a TermQuery that will use the provided docFreq instead
- of looking up the docFreq against the searcher.
+  of looking up the docFreq against the searcher.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t
-             withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t
+                       withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -65,6 +70,10 @@
  @brief Prints a user-readable version of this query.
  */
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -97,6 +106,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermQuery)
 @class OrgApacheLuceneIndexTermContext;
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
+@class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneSearchTermQuery;
 @protocol JavaUtilSet;
@@ -105,10 +115,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchTermQuery:(OrgApacheLuceneSearchTermQuery *)outer$
-                withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                           withBoolean:(jboolean)needsScores
-                   withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)termStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchTermQuery:(OrgApacheLuceneSearchTermQuery *)outer$
+                          withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
+                                                     withBoolean:(jboolean)needsScores
+                             withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)termStates;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc;
@@ -124,6 +134,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermQuery)
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermQuery_TermWeight)
@@ -138,4 +152,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermQuery_TermWeight)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermQuery")

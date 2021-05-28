@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/bkdtree/LatLonReader.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/bkdtree/LatLonReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneBkdtreeLatLonReader : NSObject
 
 @end
@@ -13,14 +17,24 @@
 @implementation OrgApacheLuceneBkdtreeLatLonReader
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "next", NULL, "Z", 0x401, "Ljava.io.IOException;", NULL },
-    { "latEnc", NULL, "I", 0x401, NULL, NULL },
-    { "lonEnc", NULL, "I", 0x401, NULL, NULL },
-    { "ord", NULL, "J", 0x401, NULL, NULL },
-    { "docID", NULL, "I", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeLatLonReader = { 2, "LatLonReader", "org.apache.lucene.bkdtree", NULL, 0x608, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(next);
+  methods[1].selector = @selector(latEnc);
+  methods[2].selector = @selector(lonEnc);
+  methods[3].selector = @selector(ord);
+  methods[4].selector = @selector(docID);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeLatLonReader = { "LatLonReader", "org.apache.lucene.bkdtree", ptrTable, methods, NULL, 7, 0x608, 5, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneBkdtreeLatLonReader;
 }
 

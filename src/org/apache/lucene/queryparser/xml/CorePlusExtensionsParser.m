@@ -19,6 +19,10 @@
 #include "org/apache/lucene/queryparser/xml/builders/LikeThisQueryBuilder.h"
 #include "org/apache/lucene/queryparser/xml/builders/TermsFilterBuilder.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/CorePlusExtensionsParser must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser ()
 
 - (instancetype)initWithNSString:(NSString *)defaultField
@@ -55,12 +59,20 @@ withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClas
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserClassicQueryParser:", "CorePlusExtensionsParser", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:", "CorePlusExtensionsParser", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserClassicQueryParser:", "CorePlusExtensionsParser", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser = { 2, "CorePlusExtensionsParser", "org.apache.lucene.queryparser.xml", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserClassicQueryParser:);
+  methods[1].selector = @selector(initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[2].selector = @selector(initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserClassicQueryParser:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneQueryparserClassicQueryParser;", "LNSString;LOrgApacheLuceneAnalysisAnalyzer;", "LNSString;LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneQueryparserClassicQueryParser;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser = { "CorePlusExtensionsParser", "org.apache.lucene.queryparser.xml", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser;
 }
 

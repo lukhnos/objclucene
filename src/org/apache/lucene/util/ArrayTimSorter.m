@@ -12,6 +12,10 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/TimSorter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/ArrayTimSorter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilArrayTimSorter () {
  @public
   id<JavaUtilComparator> comparator_;
@@ -27,10 +31,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilArrayTimSorter, tmp_, IOSObjectArray *)
 
 @implementation OrgApacheLuceneUtilArrayTimSorter
 
-- (instancetype)initWithNSObjectArray:(IOSObjectArray *)arr
-               withJavaUtilComparator:(id<JavaUtilComparator>)comparator
-                              withInt:(jint)maxTempSlots {
-  OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(self, arr, comparator, maxTempSlots);
+- (instancetype)initPackagePrivateWithNSObjectArray:(IOSObjectArray *)arr
+                             withJavaUtilComparator:(id<JavaUtilComparator>)comparator
+                                            withInt:(jint)maxTempSlots {
+  OrgApacheLuceneUtilArrayTimSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_withInt_(self, arr, comparator, maxTempSlots);
   return self;
 }
 
@@ -72,27 +76,39 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilArrayTimSorter, tmp_, IOSObjectArray *)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSObjectArray:withJavaUtilComparator:withInt:", "ArrayTimSorter", NULL, 0x1, NULL, "([TT;Ljava/util/Comparator<-TT;>;I)V" },
-    { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
-    { "copy__WithInt:withInt:", "copy", "V", 0x4, NULL, NULL },
-    { "saveWithInt:withInt:", "save", "V", 0x4, NULL, NULL },
-    { "restoreWithInt:withInt:", "restore", "V", 0x4, NULL, NULL },
-    { "compareSavedWithInt:withInt:", "compareSaved", "I", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "I", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 5, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 6, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 7, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 8, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithNSObjectArray:withJavaUtilComparator:withInt:);
+  methods[1].selector = @selector(compareWithInt:withInt:);
+  methods[2].selector = @selector(swapWithInt:withInt:);
+  methods[3].selector = @selector(copy__WithInt:withInt:);
+  methods[4].selector = @selector(saveWithInt:withInt:);
+  methods[5].selector = @selector(restoreWithInt:withInt:);
+  methods[6].selector = @selector(compareSavedWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<-TT;>;", .constantValue.asLong = 0 },
-    { "arr_", NULL, 0x12, "[Ljava.lang.Object;", NULL, "[TT;", .constantValue.asLong = 0 },
-    { "tmp_", NULL, 0x12, "[Ljava.lang.Object;", NULL, "[TT;", .constantValue.asLong = 0 },
+    { "comparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 9, -1 },
+    { "arr_", "[LNSObject;", .constantValue.asLong = 0, 0x12, -1, -1, 10, -1 },
+    { "tmp_", "[LNSObject;", .constantValue.asLong = 0, 0x12, -1, -1, 10, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilArrayTimSorter = { 2, "ArrayTimSorter", "org.apache.lucene.util", NULL, 0x10, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/TimSorter;" };
+  static const void *ptrTable[] = { "[LNSObject;LJavaUtilComparator;I", "([TT;Ljava/util/Comparator<-TT;>;I)V", "compare", "II", "swap", "copy", "save", "restore", "compareSaved", "Ljava/util/Comparator<-TT;>;", "[TT;", "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/TimSorter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilArrayTimSorter = { "ArrayTimSorter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x10, 7, 3, -1, -1, -1, 11, -1 };
   return &_OrgApacheLuceneUtilArrayTimSorter;
 }
 
 @end
 
-void OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(OrgApacheLuceneUtilArrayTimSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots) {
+void OrgApacheLuceneUtilArrayTimSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_withInt_(OrgApacheLuceneUtilArrayTimSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots) {
   OrgApacheLuceneUtilTimSorter_initWithInt_(self, maxTempSlots);
   JreStrongAssign(&self->arr_, arr);
   JreStrongAssign(&self->comparator_, comparator);
@@ -105,12 +121,12 @@ void OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilCompara
   }
 }
 
-OrgApacheLuceneUtilArrayTimSorter *new_OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilArrayTimSorter, initWithNSObjectArray_withJavaUtilComparator_withInt_, arr, comparator, maxTempSlots)
+OrgApacheLuceneUtilArrayTimSorter *new_OrgApacheLuceneUtilArrayTimSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_withInt_(IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilArrayTimSorter, initPackagePrivateWithNSObjectArray_withJavaUtilComparator_withInt_, arr, comparator, maxTempSlots)
 }
 
-OrgApacheLuceneUtilArrayTimSorter *create_OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilArrayTimSorter, initWithNSObjectArray_withJavaUtilComparator_withInt_, arr, comparator, maxTempSlots)
+OrgApacheLuceneUtilArrayTimSorter *create_OrgApacheLuceneUtilArrayTimSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_withInt_(IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilArrayTimSorter, initPackagePrivateWithNSObjectArray_withJavaUtilComparator_withInt_, arr, comparator, maxTempSlots)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilArrayTimSorter)

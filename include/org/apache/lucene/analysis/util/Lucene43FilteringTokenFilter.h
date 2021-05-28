@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter))
 #define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 
 /*!
@@ -30,8 +35,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithBoolean:(jboolean)enablePositionIncrements
+   withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -44,6 +49,10 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
  */
 - (jboolean)accept;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter)
@@ -54,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter")

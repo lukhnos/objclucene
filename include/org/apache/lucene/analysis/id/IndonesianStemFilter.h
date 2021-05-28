@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisIdIndonesianStemFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisIdIndonesianStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisIdIndonesianStemFilter))
 #define OrgApacheLuceneAnalysisIdIndonesianStemFilter_
 
@@ -32,16 +38,16 @@
 /*!
  @brief Calls <code>IndonesianStemFilter(input, true)</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 /*!
  @brief Create a new IndonesianStemFilter.
  <p>
- If <code>stemDerivational</code> is false, 
- only inflectional suffixes (particles and possessive pronouns) are stemmed.
+  If <code>stemDerivational</code> is false, 
+  only inflectional suffixes (particles and possessive pronouns) are stemmed.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                               withBoolean:(jboolean)stemDerivational;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                         withBoolean:(jboolean)stemDerivational;
 
 - (jboolean)incrementToken;
 
@@ -65,4 +71,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisIdIndonesianStemFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemFilter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader))
 #define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_
 
@@ -43,7 +49,7 @@
 
 #pragma mark Public
 
-- (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *)clone;
+- (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *)java_clone;
 
 - (id<JavaUtilCollection>)getChildResources;
 
@@ -53,10 +59,14 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)fieldsIndexIn
-                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)fieldsIndexIn
+                             withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si;
 
 - (jlong)getStartPointerWithInt:(jint)docID;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -79,4 +89,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFiel
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader")

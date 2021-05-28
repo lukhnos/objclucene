@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQuerySrndQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndQuery))
 #define OrgApacheLuceneQueryparserSurroundQuerySrndQuery_
 
@@ -27,14 +33,14 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)clone;
+- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)java_clone;
 
 /*!
  @brief For subclasses of <code>SrndQuery</code> within the package
- <code>org.apache.lucene.queryparser.surround.query</code>
- it is not necessary to override this method,
+   <code>org.apache.lucene.queryparser.surround.query</code>
+   it is not necessary to override this method,
  - seealso: #toString()
  */
 - (jboolean)isEqual:(id)obj;
@@ -47,8 +53,8 @@
 
 /*!
  @brief For subclasses of <code>SrndQuery</code> within the package
- <code>org.apache.lucene.queryparser.surround.query</code>
- it is not necessary to override this method,
+   <code>org.apache.lucene.queryparser.surround.query</code>
+   it is not necessary to override this method,
  - seealso: #toString()
  */
 - (NSUInteger)hash;
@@ -67,7 +73,7 @@
 
 /*!
  @brief This method is used by <code>hashCode()</code> and <code>equals(Object)</code>,
- see LUCENE-2945.
+   see LUCENE-2945.
  */
 - (NSString *)description;
 
@@ -85,4 +91,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndQuery")

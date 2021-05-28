@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPrefixQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPrefixQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPrefixQuery || defined(INCLUDE_OrgApacheLuceneSearchPrefixQuery))
 #define OrgApacheLuceneSearchPrefixQuery_
 
@@ -25,11 +31,10 @@
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
- @brief A Query that matches documents containing terms with a specified prefix.
- A PrefixQuery
- is built by QueryParser for input like <code>app*</code>.
+ @brief A Query that matches documents containing terms with a specified prefix.A PrefixQuery
+  is built by QueryParser for input like <code>app*</code>.
  <p>This query uses the <code>MultiTermQuery.CONSTANT_SCORE_REWRITE</code>
- rewrite method. 
+  rewrite method.
  */
 @interface OrgApacheLuceneSearchPrefixQuery : OrgApacheLuceneSearchAutomatonQuery
 
@@ -38,7 +43,7 @@
 /*!
  @brief Constructs a query for terms starting with <code>prefix</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)prefix;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)prefix;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -59,6 +64,20 @@
  */
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1
+                                                   withInt:(jint)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1
+                                                   withInt:(jint)arg2
+                                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPrefixQuery)
@@ -75,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPrefixQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPrefixQuery")

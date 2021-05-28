@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesBoostingQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesBoostingQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueriesBoostingQuery || defined(INCLUDE_OrgApacheLuceneQueriesBoostingQuery))
 #define OrgApacheLuceneQueriesBoostingQuery_
 
@@ -26,24 +32,24 @@
 /*!
  @brief The BoostingQuery class can be used to effectively demote results that match a given query.
  Unlike the "NOT" clause, this still selects documents that contain undesirable terms, 
- but reduces their overall score:
- Query balancedQuery = new BoostingQuery(positiveQuery, negativeQuery, 0.01f);
- In this scenario the positiveQuery contains the mandatory, desirable criteria which is used to 
- select all matching documents, and the negativeQuery contains the undesirable elements which 
- are simply used to lessen the scores. Documents that match the negativeQuery have their score 
- multiplied by the supplied "boost" parameter, so this should be less than 1 to achieve a 
- demoting effect
- This code was originally made available here: 
- <a href="http://marc.theaimsgroup.com/?l=lucene-user&m=108058407130459&w=2">http://marc.theaimsgroup.com/?l=lucene-user&amp;m=108058407130459&amp;w=2</a>
- and is documented here: http://wiki.apache.org/lucene-java/CommunityContributions
+  but reduces their overall score:
+      Query balancedQuery = new BoostingQuery(positiveQuery, negativeQuery, 0.01f);
+  In this scenario the positiveQuery contains the mandatory, desirable criteria which is used to 
+  select all matching documents, and the negativeQuery contains the undesirable elements which 
+  are simply used to lessen the scores. Documents that match the negativeQuery have their score 
+  multiplied by the supplied "boost" parameter, so this should be less than 1 to achieve a 
+  demoting effect 
+  This code was originally made available here: 
+    <a href="http://marc.theaimsgroup.com/?l=lucene-user&m=108058407130459&w=2">http://marc.theaimsgroup.com/?l=lucene-user&amp;m=108058407130459&amp;w=2</a>
+  and is documented here: http://wiki.apache.org/lucene-java/CommunityContributions
  */
 @interface OrgApacheLuceneQueriesBoostingQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)match
-                    withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)context
-                                         withFloat:(jfloat)boost;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)match
+                              withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)context
+                                                   withFloat:(jfloat)boost;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -53,6 +59,10 @@
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -68,4 +78,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesBoostingQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesBoostingQuery")

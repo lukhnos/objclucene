@@ -12,6 +12,10 @@
 #include "org/apache/lucene/util/BitSet.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/blocktree/BitSetTermsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum () {
  @public
   OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *postingsEnum_;
@@ -23,8 +27,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, postingsEnum_
 
 @implementation OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum
 
-- (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)docs {
-  OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(self, docs);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)docs {
+  OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(self, docs);
   return self;
 }
 
@@ -71,37 +75,51 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, postingsEnum_
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBitSet:", "BitSetTermsEnum", NULL, 0x1, NULL, NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, NULL, NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, NULL, NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "ord", NULL, "J", 0x1, NULL, NULL },
-    { "docFreq", NULL, "I", 0x1, NULL, NULL },
-    { "totalTermFreq", NULL, "J", 0x1, NULL, NULL },
-    { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum_SeekStatus;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneUtilBitSet:);
+  methods[1].selector = @selector(seekCeilWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(seekExactWithLong:);
+  methods[3].selector = @selector(term);
+  methods[4].selector = @selector(next);
+  methods[5].selector = @selector(ord);
+  methods[6].selector = @selector(docFreq);
+  methods[7].selector = @selector(totalTermFreq);
+  methods[8].selector = @selector(postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "postingsEnum_", NULL, 0x12, "Lorg.apache.lucene.codecs.blocktree.BitSetPostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
+    { "postingsEnum_", "LOrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum = { 2, "BitSetTermsEnum", "org.apache.lucene.codecs.blocktree", NULL, 0x0, 9, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBitSet;", "seekCeil", "LOrgApacheLuceneUtilBytesRef;", "seekExact", "J", "postings", "LOrgApacheLuceneIndexPostingsEnum;I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum = { "BitSetTermsEnum", "org.apache.lucene.codecs.blocktree", ptrTable, methods, fields, 7, 0x0, 9, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum;
 }
 
 @end
 
-void OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *self, OrgApacheLuceneUtilBitSet *docs) {
+void OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *self, OrgApacheLuceneUtilBitSet *docs) {
   OrgApacheLuceneIndexTermsEnum_init(self);
-  JreStrongAssignAndConsume(&self->postingsEnum_, new_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(docs));
+  JreStrongAssignAndConsume(&self->postingsEnum_, new_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(docs));
 }
 
-OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, initWithOrgApacheLuceneUtilBitSet_, docs)
+OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, initPackagePrivateWithOrgApacheLuceneUtilBitSet_, docs)
 }
 
-OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, initWithOrgApacheLuceneUtilBitSet_, docs)
+OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initPackagePrivateWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, initPackagePrivateWithOrgApacheLuceneUtilBitSet_, docs)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum)

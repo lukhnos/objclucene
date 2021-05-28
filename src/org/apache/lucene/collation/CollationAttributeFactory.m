@@ -11,6 +11,10 @@
 #include "org/apache/lucene/collation/tokenattributes/CollatedTermAttributeImpl.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/collation/CollationAttributeFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCollationCollationAttributeFactory () {
  @public
   JavaTextCollator *collator_;
@@ -43,16 +47,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCollationCollationAttributeFactory, collator_
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaTextCollator:", "CollationAttributeFactory", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withJavaTextCollator:", "CollationAttributeFactory", NULL, 0x1, NULL, NULL },
-    { "createInstance", NULL, "Lorg.apache.lucene.collation.tokenattributes.CollatedTermAttributeImpl;", 0x1, NULL, "()Lorg/apache/lucene/collation/tokenattributes/CollatedTermAttributeImpl;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaTextCollator:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withJavaTextCollator:);
+  methods[2].selector = @selector(createInstance);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "collator_", NULL, 0x12, "Ljava.text.Collator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "collator_", "LJavaTextCollator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.collation.tokenattributes.CollatedTermAttributeImpl;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCollationCollationAttributeFactory = { 2, "CollationAttributeFactory", "org.apache.lucene.collation", NULL, 0x1, 3, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/AttributeFactory$StaticImplementationAttributeFactory<Lorg/apache/lucene/collation/tokenattributes/CollatedTermAttributeImpl;>;" };
+  static const void *ptrTable[] = { "LJavaTextCollator;", "LOrgApacheLuceneUtilAttributeFactory;LJavaTextCollator;", "Lorg/apache/lucene/util/AttributeFactory$StaticImplementationAttributeFactory<Lorg/apache/lucene/collation/tokenattributes/CollatedTermAttributeImpl;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCollationCollationAttributeFactory = { "CollationAttributeFactory", "org.apache.lucene.collation", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, 2, -1 };
   return &_OrgApacheLuceneCollationCollationAttributeFactory;
 }
 

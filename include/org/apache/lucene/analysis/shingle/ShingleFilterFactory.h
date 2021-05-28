@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisShingleShingleFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisShingleShingleFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisShingleShingleFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisShingleShingleFilterFactory))
 #define OrgApacheLuceneAnalysisShingleShingleFilterFactory_
 
@@ -27,13 +33,13 @@
 /*!
  @brief Factory for <code>ShingleFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_shingle" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.ShingleFilterFactory" minShingleSize="2" maxShingleSize="2"
- outputUnigrams="true" outputUnigramsIfNoShingles="false" tokenSeparator=" " fillerToken="_"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_shingle" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.ShingleFilterFactory" minShingleSize="2" maxShingleSize="2"
+              outputUnigrams="true" outputUnigramsIfNoShingles="false" tokenSeparator=" " fillerToken="_"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisShingleShingleFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
@@ -43,7 +49,7 @@
 /*!
  @brief Creates a new ShingleFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisShingleShingleFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -61,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisShingleShingleFilterFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisShingleShingleFilterFactory")

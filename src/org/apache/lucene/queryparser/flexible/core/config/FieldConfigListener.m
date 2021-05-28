@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/FieldConfigListener.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/config/FieldConfigListener must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener : NSObject
 
 @end
@@ -13,10 +17,16 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:", "buildFieldConfig", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener = { 2, "FieldConfigListener", "org.apache.lucene.queryparser.flexible.core.config", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "buildFieldConfig", "LOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener = { "FieldConfigListener", "org.apache.lucene.queryparser.flexible.core.config", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilBytesRef
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilBytesRef_) && (INCLUDE_ALL_OrgApacheLuceneUtilBytesRef || defined(INCLUDE_OrgApacheLuceneUtilBytesRef))
 #define OrgApacheLuceneUtilBytesRef_
 
@@ -21,27 +27,24 @@
 #include "java/lang/Comparable.h"
 
 @class IOSByteArray;
-@class IOSObjectArray;
 @protocol JavaLangCharSequence;
 @protocol JavaUtilComparator;
 
 /*!
  @brief Represents byte[], as a slice (offset + length) into an
- existing byte[].
- The <code>bytes</code> member should never be null;
- use <code>EMPTY_BYTES</code> if necessary.
+   existing byte[].The <code>bytes</code> member should never be null;
+   use <code>EMPTY_BYTES</code> if necessary.
  <p><b>Important note:</b> Unless otherwise noted, Lucene uses this class to
- represent terms that are encoded as <b>UTF8</b> bytes in the index. To
- convert them to a Java <code>String</code> (which is UTF16), use <code>utf8ToString</code>.
- Using code like <code>new String(bytes, offset, length)</code> to do this
- is <b>wrong</b>, as it does not respect the correct character set
- and may return wrong results (depending on the platform's defaults)!
+  represent terms that are encoded as <b>UTF8</b> bytes in the index. To
+  convert them to a Java <code>String</code> (which is UTF16), use <code>utf8ToString</code>.
+  Using code like <code>new String(bytes, offset, length)</code> to do this
+  is <b>wrong</b>, as it does not respect the correct character set
+  and may return wrong results (depending on the platform's defaults)!
  */
 @interface OrgApacheLuceneUtilBytesRef : NSObject < JavaLangComparable, NSCopying > {
  @public
   /*!
-   @brief The contents of the BytesRef.
-   Should never be <code>null</code>. 
+   @brief The contents of the BytesRef.Should never be <code>null</code>.
    */
   IOSByteArray *bytes_;
   /*!
@@ -53,58 +56,56 @@
    */
   jint length_;
 }
-
-+ (IOSByteArray *)EMPTY_BYTES;
+@property (readonly, class, strong) IOSByteArray *EMPTY_BYTES NS_SWIFT_NAME(EMPTY_BYTES);
 
 #pragma mark Public
 
 /*!
  @brief Create a BytesRef with <code>EMPTY_BYTES</code>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief This instance will directly reference bytes w/o making a copy.
- bytes should not be null 
+ bytes should not be null
  */
-- (instancetype)initWithByteArray:(IOSByteArray *)bytes;
+- (instancetype __nonnull)initWithByteArray:(IOSByteArray *)bytes;
 
 /*!
  @brief This instance will directly reference bytes w/o making a copy.
  bytes should not be null.
  */
-- (instancetype)initWithByteArray:(IOSByteArray *)bytes
-                          withInt:(jint)offset
-                          withInt:(jint)length;
+- (instancetype __nonnull)initWithByteArray:(IOSByteArray *)bytes
+                                    withInt:(jint)offset
+                                    withInt:(jint)length;
 
 /*!
  @brief Initialize the byte[] from the UTF8 bytes
- for the provided String.
- @param text This must be well-formed
- unicode text, with no unpaired surrogates.
+  for the provided String.
+ @param text This must be well-formed  unicode text, with no unpaired surrogates.
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
 /*!
  @brief Create a BytesRef pointing to a new array of size <code>capacity</code>.
  Offset and length will both be zero.
  */
-- (instancetype)initWithInt:(jint)capacity;
+- (instancetype __nonnull)initWithInt:(jint)capacity;
 
 /*!
  @brief Expert: compares the bytes against another BytesRef,
- returning true if the bytes are equal.
+  returning true if the bytes are equal.
  @param other Another BytesRef, should not be null.
  */
 - (jboolean)bytesEqualsWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)other;
 
 /*!
- @brief Returns a shallow clone of this instance (the underlying bytes are
+ @brief Returns a shallow clone of this instance (the underlying bytes are 
  <b>not</b> copied and will be shared by both the returned object and this
- object.
+  object.
  - seealso: #deepCopyOf
  */
-- (OrgApacheLuceneUtilBytesRef *)clone;
+- (OrgApacheLuceneUtilBytesRef *)java_clone;
 
 /*!
  @brief Unsigned byte order comparison
@@ -112,11 +113,11 @@
 - (jint)compareToWithId:(OrgApacheLuceneUtilBytesRef *)other;
 
 /*!
- @brief Creates a new BytesRef that points to a copy of the bytes from 
+ @brief Creates a new BytesRef that points to a copy of the bytes from  
  <code>other</code>
  <p>
- The returned BytesRef will have a length of other.length
- and an offset of zero.
+  The returned BytesRef will have a length of other.length
+  and an offset of zero.
  */
 + (OrgApacheLuceneUtilBytesRef *)deepCopyOfWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)other;
 
@@ -131,15 +132,15 @@
 /*!
  @brief Calculates the hash code as required by TermsHash during indexing.
  <p> This is currently implemented as MurmurHash3 (32
- bit), using the seed from <code>StringHelper.GOOD_FAST_HASH_SEED</code>
+   bit), using the seed from <code>StringHelper.GOOD_FAST_HASH_SEED</code>
  , but is subject to
- change from release to release. 
+   change from release to release.
  */
 - (NSUInteger)hash;
 
 /*!
  @brief Performs internal consistency checks.
- Always returns true (or throws IllegalStateException) 
+ Always returns true (or throws IllegalStateException)
  */
 - (jboolean)isValid;
 
@@ -150,7 +151,7 @@
 
 /*!
  @brief Interprets stored bytes as UTF8 bytes, returning the
- resulting string
+   resulting string
  */
 - (NSString *)utf8ToString;
 
@@ -163,16 +164,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRef, bytes_, IOSByteArray *)
 /*!
  @brief An empty byte array for convenience
  */
-inline IOSByteArray *OrgApacheLuceneUtilBytesRef_get_EMPTY_BYTES();
+inline IOSByteArray *OrgApacheLuceneUtilBytesRef_get_EMPTY_BYTES(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBytesRef, EMPTY_BYTES, IOSByteArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilBytesRef_init(OrgApacheLuceneUtilBytesRef *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *new_OrgApacheLuceneUtilBytesRef_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *new_OrgApacheLuceneUtilBytesRef_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *create_OrgApacheLuceneUtilBytesRef_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *create_OrgApacheLuceneUtilBytesRef_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(OrgApacheLuceneUtilBytesRef *self, IOSByteArray *bytes, jint offset, jint length);
 
@@ -198,9 +199,9 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *new_OrgApacheLuceneUtilBytesRef_i
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(id<JavaLangCharSequence> text);
 
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator();
+FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator(void);
 
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUTF16Comparator();
+FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUTF16Comparator(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *other);
 
@@ -208,4 +209,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRef)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBytesRef")

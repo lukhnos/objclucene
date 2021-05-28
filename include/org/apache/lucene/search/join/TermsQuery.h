@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinTermsQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinTermsQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsQuery || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsQuery))
 #define OrgApacheLuceneSearchJoinTermsQuery_
 
@@ -27,9 +33,8 @@
 @class OrgApacheLuceneUtilBytesRefHash;
 
 /*!
- @brief A query that has an array of terms from a specific field.
- This query will match documents have one or more terms in
- the specified field that match with the terms specified in the array.
+ @brief A query that has an array of terms from a specific field.This query will match documents have one or more terms in
+  the specified field that match with the terms specified in the array.
  */
 @interface OrgApacheLuceneSearchJoinTermsQuery : OrgApacheLuceneSearchMultiTermQuery
 
@@ -52,19 +57,23 @@
  @param field The field that should contain terms that are specified in the previous parameter
  @param terms The terms that matching documents should have. The terms must be sorted by natural order.
  */
-- (instancetype)initWithNSString:(NSString *)field
-  withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
-withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field
+                          withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
+                     withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinTermsQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(OrgApacheLuceneSearchJoinTermsQuery *self, NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsQuery_initPackagePrivateWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(OrgApacheLuceneSearchJoinTermsQuery *self, NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery *new_OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery *new_OrgApacheLuceneSearchJoinTermsQuery_initPackagePrivateWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery *create_OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms);
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery *create_OrgApacheLuceneSearchJoinTermsQuery_initPackagePrivateWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsQuery)
 
@@ -93,9 +102,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsQuery)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
-                  withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms
-                                         withIntArray:(IOSIntArray *)ords;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
+                            withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms
+                                                   withIntArray:(IOSIntArray *)ords;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0
+                                                    withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -111,4 +127,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTer
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsQuery")

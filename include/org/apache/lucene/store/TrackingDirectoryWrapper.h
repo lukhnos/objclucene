@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreTrackingDirectoryWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreTrackingDirectoryWrapper_) && (INCLUDE_ALL_OrgApacheLuceneStoreTrackingDirectoryWrapper || defined(INCLUDE_OrgApacheLuceneStoreTrackingDirectoryWrapper))
 #define OrgApacheLuceneStoreTrackingDirectoryWrapper_
 
@@ -27,13 +33,13 @@
 
 /*!
  @brief A delegating Directory that records which files were
- written to and deleted.
+   written to and deleted.
  */
 @interface OrgApacheLuceneStoreTrackingDirectoryWrapper : OrgApacheLuceneStoreFilterDirectory
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg;
 
 - (void)copyFromWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)from
                                      withNSString:(NSString *)src
@@ -64,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreTrackingDirectoryWrapper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreTrackingDirectoryWrapper")

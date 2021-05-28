@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/highlight/Fragmenter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/Fragmenter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchHighlightFragmenter : NSObject
 
 @end
@@ -13,11 +17,18 @@
 @implementation OrgApacheLuceneSearchHighlightFragmenter
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "startWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "start", "V", 0x401, NULL, NULL },
-    { "isNewFragment", NULL, "Z", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightFragmenter = { 2, "Fragmenter", "org.apache.lucene.search.highlight", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(startWithNSString:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(isNewFragment);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "start", "LNSString;LOrgApacheLuceneAnalysisTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightFragmenter = { "Fragmenter", "org.apache.lucene.search.highlight", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightFragmenter;
 }
 

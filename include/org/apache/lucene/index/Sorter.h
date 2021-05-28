@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSorter_) && (INCLUDE_ALL_OrgApacheLuceneIndexSorter || defined(INCLUDE_OrgApacheLuceneIndexSorter))
 #define OrgApacheLuceneIndexSorter_
 
@@ -23,23 +29,22 @@
 
 /*!
  @brief Sorts documents of a given index by returning a permutation on the document
- IDs.
+  IDs.
  */
 @interface OrgApacheLuceneIndexSorter : NSObject {
  @public
   OrgApacheLuceneSearchSort *sort_;
 }
-
-+ (OrgApacheLuceneSearchScorer *)FAKESCORER;
+@property (readonly, class, strong) OrgApacheLuceneSearchScorer *FAKESCORER NS_SWIFT_NAME(FAKESCORER);
 
 #pragma mark Public
 
 /*!
  @brief Returns the identifier of this <code>Sorter</code>.
  <p>This identifier is similar to <code>Object.hashCode()</code> and should be
- chosen so that two instances of this class that sort documents likewise
- will have the same identifier. On the contrary, this identifier should be
- different on different <code>sorts</code>.
+  chosen so that two instances of this class that sort documents likewise
+  will have the same identifier. On the contrary, this identifier should be
+  different on different <code>sorts</code>.
  */
 - (NSString *)getID;
 
@@ -50,7 +55,7 @@
 /*!
  @brief Creates a new Sorter to sort the index with <code>sort</code>
  */
-- (instancetype)initWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
 
 /*!
  @brief Check consistency of a <code>DocMap</code>, useful for assertions.
@@ -59,18 +64,21 @@
 
 /*!
  @brief Returns a mapping from the old document ID to its new location in the
- sorted index.
- Implementations can use the auxiliary
- <code>sort(int,DocComparator)</code> to compute the old-to-new permutation
- given a list of documents and their corresponding values.
+  sorted index.Implementations can use the auxiliary 
+ <code>sort(int, DocComparator)</code> to compute the old-to-new permutation
+  given a list of documents and their corresponding values.
  <p>
- A return value of <tt>null</tt> is allowed and means that
- <code>reader</code> is already sorted.
+  A return value of <tt>null</tt> is allowed and means that 
+ <code>reader</code> is already sorted. 
  <p>
- <b>NOTE:</b> deleted documents are expected to appear in the mapping as
- well, they will however be marked as deleted in the sorted view.
+  <b>NOTE:</b> deleted documents are expected to appear in the mapping as
+  well, they will however be marked as deleted in the sorted view.
  */
 - (OrgApacheLuceneIndexSorter_DocMap *)sortWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -78,16 +86,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexSorter)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSorter, sort_, OrgApacheLuceneSearchSort *)
 
-inline OrgApacheLuceneSearchScorer *OrgApacheLuceneIndexSorter_get_FAKESCORER();
+inline OrgApacheLuceneSearchScorer *OrgApacheLuceneIndexSorter_get_FAKESCORER(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchScorer *OrgApacheLuceneIndexSorter_FAKESCORER;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexSorter, FAKESCORER, OrgApacheLuceneSearchScorer *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexSorter_initWithOrgApacheLuceneSearchSort_(OrgApacheLuceneIndexSorter *self, OrgApacheLuceneSearchSort *sort);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexSorter_initPackagePrivateWithOrgApacheLuceneSearchSort_(OrgApacheLuceneIndexSorter *self, OrgApacheLuceneSearchSort *sort);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSorter *new_OrgApacheLuceneIndexSorter_initWithOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchSort *sort) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexSorter *new_OrgApacheLuceneIndexSorter_initPackagePrivateWithOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchSort *sort) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSorter *create_OrgApacheLuceneIndexSorter_initWithOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchSort *sort);
+FOUNDATION_EXPORT OrgApacheLuceneIndexSorter *create_OrgApacheLuceneIndexSorter_initPackagePrivateWithOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchSort *sort);
 
 FOUNDATION_EXPORT jboolean OrgApacheLuceneIndexSorter_isConsistentWithOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSorter_DocMap *docMap);
 
@@ -99,16 +107,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSorter)
 #define OrgApacheLuceneIndexSorter_DocMap_
 
 /*!
- @brief A permutation of doc IDs.
- For every document ID between <tt>0</tt> and
+ @brief A permutation of doc IDs.For every document ID between <tt>0</tt> and 
  <code>IndexReader.maxDoc()</code>, <code>oldToNew(newToOld(docID))</code> must
- return <code>docID</code>.
+  return <code>docID</code>.
  */
 @interface OrgApacheLuceneIndexSorter_DocMap : NSObject
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Given the ordinal of a doc ID, return its doc ID in the original index.
@@ -117,15 +124,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSorter)
 
 /*!
  @brief Given a doc ID from the original index, return its ordinal in the
- sorted index.
+   sorted index.
  */
 - (jint)oldToNewWithInt:(jint)docID;
 
 /*!
- @brief Return the number of documents in this map.
- This must be equal to the
- <code>number of documents</code> of the
- <code>org.apache.lucene.index.LeafReader</code> which is sorted. 
+ @brief Return the number of documents in this map.This must be equal to the
+   <code>number of documents</code> of the
+   <code>org.apache.lucene.index.LeafReader</code> which is sorted.
  */
 - (jint)size;
 
@@ -150,16 +156,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSorter_DocMap)
 #pragma mark Public
 
 /*!
- @brief Compare docID1 against docID2.
- The contract for the return value is the
- same as <code>Comparator.compare(Object,Object)</code>. 
+ @brief Compare docID1 against docID2.The contract for the return value is the
+   same as <code>Comparator.compare(Object, Object)</code>.
  */
 - (jint)compareWithInt:(jint)docID1
                withInt:(jint)docID2;
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -171,4 +176,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSorter_DocComparator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSorter")

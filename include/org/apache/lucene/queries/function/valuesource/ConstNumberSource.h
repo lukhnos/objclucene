@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_
 
@@ -27,7 +33,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jboolean)getBool;
 
@@ -51,4 +57,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstNumberS
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource")

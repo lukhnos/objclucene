@@ -8,6 +8,10 @@
 #include "org/apache/lucene/analysis/fi/FinnishLightStemmer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/fi/FinnishLightStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisFiFinnishLightStemmer ()
 
 - (jint)step1WithCharArray:(IOSCharArray *)s
@@ -42,6 +46,13 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisFiFinnishLightStemmer
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisFiFinnishLightStemmer_isVowelWithChar_(OrgApacheLuceneAnalysisFiFinnishLightStemmer *self, jchar ch);
 
 @implementation OrgApacheLuceneAnalysisFiFinnishLightStemmer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -92,29 +103,47 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisFiFinnishLightSte
   return OrgApacheLuceneAnalysisFiFinnishLightStemmer_isVowelWithChar_(self, ch);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "step1WithCharArray:withInt:", "step1", "I", 0x2, NULL, NULL },
-    { "step2WithCharArray:withInt:", "step2", "I", 0x2, NULL, NULL },
-    { "step3WithCharArray:withInt:", "step3", "I", 0x2, NULL, NULL },
-    { "norm1WithCharArray:withInt:", "norm1", "I", 0x2, NULL, NULL },
-    { "norm2WithCharArray:withInt:", "norm2", "I", 0x2, NULL, NULL },
-    { "isVowelWithChar:", "isVowel", "Z", 0x2, NULL, NULL },
-    { "init", "FinnishLightStemmer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 5, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 6, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 7, 8, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFiFinnishLightStemmer = { 2, "FinnishLightStemmer", "org.apache.lucene.analysis.fi", NULL, 0x1, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  methods[2].selector = @selector(step1WithCharArray:withInt:);
+  methods[3].selector = @selector(step2WithCharArray:withInt:);
+  methods[4].selector = @selector(step3WithCharArray:withInt:);
+  methods[5].selector = @selector(norm1WithCharArray:withInt:);
+  methods[6].selector = @selector(norm2WithCharArray:withInt:);
+  methods[7].selector = @selector(isVowelWithChar:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "stem", "[CI", "step1", "step2", "step3", "norm1", "norm2", "isVowel", "C" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFiFinnishLightStemmer = { "FinnishLightStemmer", "org.apache.lucene.analysis.fi", ptrTable, methods, NULL, 7, 0x1, 8, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisFiFinnishLightStemmer;
 }
 
 @end
+
+void OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(OrgApacheLuceneAnalysisFiFinnishLightStemmer *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneAnalysisFiFinnishLightStemmer *new_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFiFinnishLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisFiFinnishLightStemmer *create_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFiFinnishLightStemmer, init)
+}
 
 jint OrgApacheLuceneAnalysisFiFinnishLightStemmer_step1WithCharArray_withInt_(OrgApacheLuceneAnalysisFiFinnishLightStemmer *self, IOSCharArray *s, jint len) {
   if (len > 8) {
@@ -226,18 +255,6 @@ jboolean OrgApacheLuceneAnalysisFiFinnishLightStemmer_isVowelWithChar_(OrgApache
     default:
     return false;
   }
-}
-
-void OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(OrgApacheLuceneAnalysisFiFinnishLightStemmer *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneAnalysisFiFinnishLightStemmer *new_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFiFinnishLightStemmer, init)
-}
-
-OrgApacheLuceneAnalysisFiFinnishLightStemmer *create_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFiFinnishLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFiFinnishLightStemmer)

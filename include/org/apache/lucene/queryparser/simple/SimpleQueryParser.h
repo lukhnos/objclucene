@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSimpleSimpleQueryParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSimpleSimpleQueryParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSimpleSimpleQueryParser || defined(INCLUDE_OrgApacheLuceneQueryparserSimpleSimpleQueryParser))
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_
 
@@ -29,65 +35,65 @@
 /*!
  @brief SimpleQueryParser is used to parse human readable query syntax.
  <p>
- The main idea behind this parser is that a person should be able to type
- whatever they want to represent a query, and this parser will do its best
- to interpret what to search for no matter how poorly composed the request
- may be. Tokens are considered to be any of a term, phrase, or subquery for the
- operations described below.  Whitespace including ' ' '\n' '\r' and '\t'
- and certain operators may be used to delimit tokens ( ) + | " .
+  The main idea behind this parser is that a person should be able to type
+  whatever they want to represent a query, and this parser will do its best
+  to interpret what to search for no matter how poorly composed the request
+  may be. Tokens are considered to be any of a term, phrase, or subquery for the
+  operations described below.  Whitespace including ' ' '\n' '\r' and '\t'
+  and certain operators may be used to delimit tokens ( ) + | " . 
  <p>
- Any errors in query syntax will be ignored and the parser will attempt
- to decipher what it can; however, this may mean odd or unexpected results.
+  Any errors in query syntax will be ignored and the parser will attempt
+  to decipher what it can; however, this may mean odd or unexpected results. 
  <p>
- <b>Query Operators</b>
- <ul>
- <li>'<code>+</code>' specifies <code>AND</code> operation: <tt>token1+token2</tt>
- <li>'<code>|</code>' specifies <code>OR</code> operation: <tt>token1|token2</tt>
- <li>'<code>-</code>' negates a single token: <tt>-token0</tt>
- <li>'<code>"</code>' creates phrases of terms: <tt>"term1 term2 ..."</tt>
- <li>'<code>*</code>' at the end of terms specifies prefix query: <tt>term*</tt>
- <li>'<code>~</code>N' at the end of terms specifies fuzzy query: <tt>term~1</tt>
- <li>'<code>~</code>N' at the end of phrases specifies near query: <tt>"term1 term2"~5</tt>
- <li>'<code>(</code>' and '<code>)</code>' specifies precedence: <tt>token1 + (token2 | token3)</tt>
- </ul>
- <p>
- The <code>default operator</code> is <code>OR</code> if no other operator is specified.
- For example, the following will <code>OR</code> <code>token1</code> and <code>token2</code> together:
+  <b>Query Operators</b>
+  <ul>
+   <li>'<code>+</code>' specifies <code>AND</code> operation: <tt>token1+token2</tt>
+   <li>'<code>|</code>' specifies <code>OR</code> operation: <tt>token1|token2</tt>
+   <li>'<code>-</code>' negates a single token: <tt>-token0</tt>
+   <li>'<code>"</code>' creates phrases of terms: <tt>"term1 term2 ..."</tt>
+   <li>'<code>*</code>' at the end of terms specifies prefix query: <tt>term*</tt>
+   <li>'<code>~</code>N' at the end of terms specifies fuzzy query: <tt>term~1</tt>
+   <li>'<code>~</code>N' at the end of phrases specifies near query: <tt>"term1 term2"~5</tt>
+   <li>'<code>(</code>' and '<code>)</code>' specifies precedence: <tt>token1 + (token2 | token3)</tt>
+  </ul>
+  <p>
+  The <code>default operator</code> is <code>OR</code> if no other operator is specified.
+  For example, the following will <code>OR</code> <code>token1</code> and <code>token2</code> together: 
  <tt>token1 token2</tt>
- <p>
- Normal operator precedence will be simple order from right to left.
- For example, the following will evaluate <code>token1 OR token2</code> first,
- then <code>AND</code> with <code>token3</code>:
- <blockquote>token1 | token2 + token3</blockquote>
- <b>Escaping</b>
- <p>
- An individual term may contain any possible character with certain characters
- requiring escaping using a '<code>\</code>'.  The following characters will need to be escaped in
- terms and phrases:
+  <p>
+  Normal operator precedence will be simple order from right to left.
+  For example, the following will evaluate <code>token1 OR token2</code> first,
+  then <code>AND</code> with <code>token3</code>:
+  <blockquote>token1 | token2 + token3</blockquote>
+  <b>Escaping</b>
+  <p>
+  An individual term may contain any possible character with certain characters
+  requiring escaping using a '<code>\</code>'.  The following characters will need to be escaped in
+  terms and phrases: 
  <code>+ | " ( ) ' \</code>
- <p>
- The '<code>-</code>' operator is a special case.  On individual terms (not phrases) the first
- character of a term that is <code>-</code> must be escaped; however, any '<code>-</code>' characters
- beyond the first character do not need to be escaped.
- For example:
+  <p>
+  The '<code>-</code>' operator is a special case.  On individual terms (not phrases) the first
+  character of a term that is <code>-</code> must be escaped; however, any '<code>-</code>' characters
+  beyond the first character do not need to be escaped.
+  For example: 
  <ul>
- <li><code>-term1</code>   -- Specifies <code>NOT</code> operation against <code>term1</code>
- <li><code>\-term1</code>  -- Searches for the term <code>-term1</code>.
- <li><code>term-1</code>   -- Searches for the term <code>term-1</code>.
- <li><code>term\-1</code>  -- Searches for the term <code>term-1</code>.
- </ul>
- <p>
- The '<code>*</code>' operator is a special case. On individual terms (not phrases) the last
- character of a term that is '<code>*</code>' must be escaped; however, any '<code>*</code>' characters
- before the last character do not need to be escaped:
+    <li><code>-term1</code>   -- Specifies <code>NOT</code> operation against <code>term1</code>
+    <li><code>\-term1</code>  -- Searches for the term <code>-term1</code>.
+    <li><code>term-1</code>   -- Searches for the term <code>term-1</code>.
+    <li><code>term\-1</code>  -- Searches for the term <code>term-1</code>.
+  </ul>
+  <p>
+  The '<code>*</code>' operator is a special case. On individual terms (not phrases) the last
+  character of a term that is '<code>*</code>' must be escaped; however, any '<code>*</code>' characters
+  before the last character do not need to be escaped: 
  <ul>
- <li><code>term1*</code>  --  Searches for the prefix <code>term1</code>
- <li><code>term1\*</code> --  Searches for the term <code>term1*</code>
- <li><code>term*1</code>  --  Searches for the term <code>term*1</code>
- <li><code>term\*1</code> --  Searches for the term <code>term*1</code>
- </ul>
- <p>
- Note that above examples consider the terms before text processing.
+    <li><code>term1*</code>  --  Searches for the prefix <code>term1</code>
+    <li><code>term1\*</code> --  Searches for the term <code>term1*</code>
+    <li><code>term*1</code>  --  Searches for the term <code>term*1</code>
+    <li><code>term\*1</code> --  Searches for the term <code>term*1</code>
+  </ul>
+  <p>
+  Note that above examples consider the terms before text processing.
  */
 @interface OrgApacheLuceneQueryparserSimpleSimpleQueryParser : OrgApacheLuceneUtilQueryBuilder {
  @public
@@ -100,51 +106,41 @@
    */
   jint flags_;
 }
-
-+ (jint)AND_OPERATOR;
-
-+ (jint)NOT_OPERATOR;
-
-+ (jint)OR_OPERATOR;
-
-+ (jint)PREFIX_OPERATOR;
-
-+ (jint)PHRASE_OPERATOR;
-
-+ (jint)PRECEDENCE_OPERATORS;
-
-+ (jint)ESCAPE_OPERATOR;
-
-+ (jint)WHITESPACE_OPERATOR;
-
-+ (jint)FUZZY_OPERATOR;
-
-+ (jint)NEAR_OPERATOR;
+@property (readonly, class) jint AND_OPERATOR NS_SWIFT_NAME(AND_OPERATOR);
+@property (readonly, class) jint NOT_OPERATOR NS_SWIFT_NAME(NOT_OPERATOR);
+@property (readonly, class) jint OR_OPERATOR NS_SWIFT_NAME(OR_OPERATOR);
+@property (readonly, class) jint PREFIX_OPERATOR NS_SWIFT_NAME(PREFIX_OPERATOR);
+@property (readonly, class) jint PHRASE_OPERATOR NS_SWIFT_NAME(PHRASE_OPERATOR);
+@property (readonly, class) jint PRECEDENCE_OPERATORS NS_SWIFT_NAME(PRECEDENCE_OPERATORS);
+@property (readonly, class) jint ESCAPE_OPERATOR NS_SWIFT_NAME(ESCAPE_OPERATOR);
+@property (readonly, class) jint WHITESPACE_OPERATOR NS_SWIFT_NAME(WHITESPACE_OPERATOR);
+@property (readonly, class) jint FUZZY_OPERATOR NS_SWIFT_NAME(FUZZY_OPERATOR);
+@property (readonly, class) jint NEAR_OPERATOR NS_SWIFT_NAME(NEAR_OPERATOR);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new parser searching over multiple fields with different weights.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                        withJavaUtilMap:(id<JavaUtilMap>)weights;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                                  withJavaUtilMap:(id<JavaUtilMap>)weights;
 
 /*!
  @brief Creates a new parser with custom flags used to enable/disable certain features.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                        withJavaUtilMap:(id<JavaUtilMap>)weights
-                                                withInt:(jint)flags;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                                  withJavaUtilMap:(id<JavaUtilMap>)weights
+                                                          withInt:(jint)flags;
 
 /*!
  @brief Creates a new parser searching over a single field.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                           withNSString:(NSString *)field;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                                     withNSString:(NSString *)field;
 
 /*!
  @brief Returns the implicit operator setting, which will be
- either <code>SHOULD</code> or <code>MUST</code>.
+  either <code>SHOULD</code> or <code>MUST</code>.
  */
 - (OrgApacheLuceneSearchBooleanClause_Occur *)getDefaultOperator;
 
@@ -155,7 +151,7 @@
 
 /*!
  @brief Sets the implicit operator setting, which must be
- either <code>SHOULD</code> or <code>MUST</code>.
+  either <code>SHOULD</code> or <code>MUST</code>.
  */
 - (void)setDefaultOperatorWithOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)operator_;
 
@@ -188,6 +184,10 @@
  */
 - (OrgApacheLuceneSearchQuery *)simplifyWithOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)bq;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser)
@@ -197,70 +197,70 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, weights_,
 /*!
  @brief Enables <code>AND</code> operator (+)
  */
-inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_AND_OPERATOR();
+inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_AND_OPERATOR(void);
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_AND_OPERATOR 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, AND_OPERATOR, jint)
 
 /*!
  @brief Enables <code>NOT</code> operator (-)
  */
-inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_NOT_OPERATOR();
+inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_NOT_OPERATOR(void);
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_NOT_OPERATOR 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, NOT_OPERATOR, jint)
 
 /*!
  @brief Enables <code>OR</code> operator (|)
  */
-inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_OR_OPERATOR();
+inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_OR_OPERATOR(void);
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_OR_OPERATOR 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, OR_OPERATOR, jint)
 
 /*!
  @brief Enables <code>PREFIX</code> operator (*)
  */
-inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_PREFIX_OPERATOR();
+inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_PREFIX_OPERATOR(void);
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PREFIX_OPERATOR 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, PREFIX_OPERATOR, jint)
 
 /*!
  @brief Enables <code>PHRASE</code> operator (")
  */
-inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_PHRASE_OPERATOR();
+inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_PHRASE_OPERATOR(void);
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PHRASE_OPERATOR 16
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, PHRASE_OPERATOR, jint)
 
 /*!
  @brief Enables <code>PRECEDENCE</code> operators: <code>(</code> and <code>)</code>
  */
-inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_PRECEDENCE_OPERATORS();
+inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_PRECEDENCE_OPERATORS(void);
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PRECEDENCE_OPERATORS 32
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, PRECEDENCE_OPERATORS, jint)
 
 /*!
  @brief Enables <code>ESCAPE</code> operator (\)
  */
-inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_ESCAPE_OPERATOR();
+inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_ESCAPE_OPERATOR(void);
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_ESCAPE_OPERATOR 64
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, ESCAPE_OPERATOR, jint)
 
 /*!
  @brief Enables <code>WHITESPACE</code> operators: ' ' '\n' '\r' '\t'
  */
-inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_WHITESPACE_OPERATOR();
+inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_WHITESPACE_OPERATOR(void);
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_WHITESPACE_OPERATOR 128
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, WHITESPACE_OPERATOR, jint)
 
 /*!
  @brief Enables <code>FUZZY</code> operators: (~) on single terms
  */
-inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_FUZZY_OPERATOR();
+inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_FUZZY_OPERATOR(void);
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_FUZZY_OPERATOR 256
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, FUZZY_OPERATOR, jint)
 
 /*!
  @brief Enables <code>NEAR</code> operators: (~) on phrases
  */
-inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_NEAR_OPERATOR();
+inline jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_get_NEAR_OPERATOR(void);
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_NEAR_OPERATOR 512
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, NEAR_OPERATOR, jint)
 
@@ -307,10 +307,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithCharArray:(IOSCharArray *)data
-                    withCharArray:(IOSCharArray *)buffer
-                          withInt:(jint)index
-                          withInt:(jint)length;
+- (instancetype __nonnull)initWithCharArray:(IOSCharArray *)data
+                              withCharArray:(IOSCharArray *)buffer
+                                    withInt:(jint)index
+                                    withInt:(jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -332,4 +336,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_Sta
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSimpleSimpleQueryParser")

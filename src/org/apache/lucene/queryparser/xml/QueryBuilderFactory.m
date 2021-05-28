@@ -3,7 +3,6 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/QueryBuilderFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/util/HashMap.h"
 #include "org/apache/lucene/queryparser/xml/ParserException.h"
@@ -12,10 +11,21 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/w3c/dom/Element.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/QueryBuilderFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueryparserXmlQueryBuilderFactory
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)n {
-  id<OrgApacheLuceneQueryparserXmlQueryBuilder> builder = [((JavaUtilHashMap *) nil_chk(builders_)) getWithId:[((id<OrgW3cDomElement>) nil_chk(n)) getNodeName]];
+  id<OrgApacheLuceneQueryparserXmlQueryBuilder> builder = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(builders_)) getWithId:[((id<OrgW3cDomElement>) nil_chk(n)) getNodeName]]);
   if (builder == nil) {
     @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"No QueryObjectBuilder defined for node ", [n getNodeName]));
   }
@@ -31,29 +41,31 @@ withOrgApacheLuceneQueryparserXmlQueryBuilder:(id<OrgApacheLuceneQueryparserXmlQ
   return [((JavaUtilHashMap *) nil_chk(builders_)) getWithId:nodeName];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(builders_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "addBuilderWithNSString:withOrgApacheLuceneQueryparserXmlQueryBuilder:", "addBuilder", "V", 0x1, NULL, NULL },
-    { "getQueryBuilderWithNSString:", "getQueryBuilder", "Lorg.apache.lucene.queryparser.xml.QueryBuilder;", 0x1, NULL, NULL },
-    { "init", "QueryBuilderFactory", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserXmlQueryBuilder;", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getQueryWithOrgW3cDomElement:);
+  methods[2].selector = @selector(addBuilderWithNSString:withOrgApacheLuceneQueryparserXmlQueryBuilder:);
+  methods[3].selector = @selector(getQueryBuilderWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "builders_", NULL, 0x0, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/String;Lorg/apache/lucene/queryparser/xml/QueryBuilder;>;", .constantValue.asLong = 0 },
+    { "builders_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x0, -1, -1, 7, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlQueryBuilderFactory = { 2, "QueryBuilderFactory", "org.apache.lucene.queryparser.xml", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "getQuery", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;", "addBuilder", "LNSString;LOrgApacheLuceneQueryparserXmlQueryBuilder;", "getQueryBuilder", "LNSString;", "Ljava/util/HashMap<Ljava/lang/String;Lorg/apache/lucene/queryparser/xml/QueryBuilder;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlQueryBuilderFactory = { "QueryBuilderFactory", "org.apache.lucene.queryparser.xml", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlQueryBuilderFactory;
 }
 

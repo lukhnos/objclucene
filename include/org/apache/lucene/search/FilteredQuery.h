@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneSearchFilteredQuery_FilterStrategy 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFilteredQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilteredQuery || defined(INCLUDE_OrgApacheLuceneSearchFilteredQuery))
 #define OrgApacheLuceneSearchFilteredQuery_
 
@@ -23,7 +29,6 @@
 #define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchFilter;
 @class OrgApacheLuceneSearchFilteredQuery_FilterStrategy;
@@ -31,43 +36,43 @@
 /*!
  @brief A query that applies a filter to the results of another query.
  <p>Note: the bits are retrieved from the filter each time this
- query is used in a search - use a CachingWrapperFilter to avoid
- regenerating the bits every time.
+  query is used in a search - use a CachingWrapperFilter to avoid
+  regenerating the bits every time.
  @since 1.4
  - seealso: CachingWrapperQuery
  */
 @interface OrgApacheLuceneSearchFilteredQuery : OrgApacheLuceneSearchQuery
-
-+ (OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)RANDOM_ACCESS_FILTER_STRATEGY;
-
-+ (OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)LEAP_FROG_FILTER_FIRST_STRATEGY;
-
-+ (OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)LEAP_FROG_QUERY_FIRST_STRATEGY;
-
-+ (OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)QUERY_FIRST_FILTER_STRATEGY;
+@property (readonly, class, strong) OrgApacheLuceneSearchFilteredQuery_FilterStrategy *RANDOM_ACCESS_FILTER_STRATEGY NS_SWIFT_NAME(RANDOM_ACCESS_FILTER_STRATEGY);
+@property (readonly, class, strong) OrgApacheLuceneSearchFilteredQuery_FilterStrategy *LEAP_FROG_FILTER_FIRST_STRATEGY NS_SWIFT_NAME(LEAP_FROG_FILTER_FIRST_STRATEGY);
+@property (readonly, class, strong) OrgApacheLuceneSearchFilteredQuery_FilterStrategy *LEAP_FROG_QUERY_FIRST_STRATEGY NS_SWIFT_NAME(LEAP_FROG_QUERY_FIRST_STRATEGY);
+@property (readonly, class, strong) OrgApacheLuceneSearchFilteredQuery_FilterStrategy *QUERY_FIRST_FILTER_STRATEGY NS_SWIFT_NAME(QUERY_FIRST_FILTER_STRATEGY);
 
 #pragma mark Public
 
 /*!
  @brief Constructs a new query which applies a filter to the results of the original query.
  <code>Filter.getDocIdSet</code> will be called every time this query is used in a search.
- @param query  Query to be filtered, cannot be <code>null</code>.
- @param filter Filter to apply to query results, cannot be <code>null</code>.
+ @param query Query to be filtered, cannot be  <code> null </code>
+  .
+ @param filter Filter to apply to query results, cannot be  <code> null </code>
+  .
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                   withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                             withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
 
 /*!
  @brief Expert: Constructs a new query which applies a filter to the results of the original query.
  <code>Filter.getDocIdSet</code> will be called every time this query is used in a search.
- @param query  Query to be filtered, cannot be <code>null</code>.
- @param filter Filter to apply to query results, cannot be <code>null</code>.
+ @param query Query to be filtered, cannot be  <code> null </code>
+  .
+ @param filter Filter to apply to query results, cannot be  <code> null </code>
+  .
  @param strategy a filter strategy used to create a filtered scorer.
  - seealso: FilterStrategy
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                   withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-withOrgApacheLuceneSearchFilteredQuery_FilterStrategy:(OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)strategy;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                             withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
+       withOrgApacheLuceneSearchFilteredQuery_FilterStrategy:(OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)strategy;
 
 /*!
  @brief Returns true iff <code>o</code> is equal to this.
@@ -101,23 +106,26 @@ withOrgApacheLuceneSearchFilteredQuery_FilterStrategy:(OrgApacheLuceneSearchFilt
  */
 - (NSString *)toStringWithNSString:(NSString *)s;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchFilteredQuery)
 
 /*!
  @brief A <code>FilterStrategy</code> that conditionally uses a random access filter if
- the given <code>DocIdSet</code> supports random access (returns a non-null value
- from <code>DocIdSet.bits()</code>) and
- <code>RandomAccessFilterStrategy.useRandomAccess(Bits,long)</code> returns
- <code>true</code>.
- Otherwise this strategy falls back to a "zig-zag join" (
+  the given <code>DocIdSet</code> supports random access (returns a non-null value
+  from <code>DocIdSet.bits()</code>) and 
+ <code>RandomAccessFilterStrategy.useRandomAccess(Bits, long)</code> returns 
+ <code>true</code>.Otherwise this strategy falls back to a "zig-zag join" ( 
  <code>FilteredQuery.LEAP_FROG_FILTER_FIRST_STRATEGY</code>) strategy.
  <p>
- Note: this strategy is the default strategy in <code>FilteredQuery</code>
- </p>
+  Note: this strategy is the default strategy in <code>FilteredQuery</code>
+  </p>
  */
-inline OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_get_RANDOM_ACCESS_FILTER_STRATEGY();
+inline OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_get_RANDOM_ACCESS_FILTER_STRATEGY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_RANDOM_ACCESS_FILTER_STRATEGY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchFilteredQuery, RANDOM_ACCESS_FILTER_STRATEGY, OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)
@@ -125,9 +133,9 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchFilteredQuery, RANDOM_ACCESS_
 /*!
  @brief A filter strategy that uses a "leap-frog" approach (also called "zig-zag join").
  In spite of the name of this constant, which one will be iterated first depends
- on the <code>cost</code> of the filter compared to the query.
+  on the <code>cost</code> of the filter compared to the query.
  */
-inline OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_get_LEAP_FROG_FILTER_FIRST_STRATEGY();
+inline OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_get_LEAP_FROG_FILTER_FIRST_STRATEGY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_LEAP_FROG_FILTER_FIRST_STRATEGY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchFilteredQuery, LEAP_FROG_FILTER_FIRST_STRATEGY, OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)
@@ -135,27 +143,27 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchFilteredQuery, LEAP_FROG_FILT
 /*!
  @brief A filter strategy that uses a "leap-frog" approach (also called "zig-zag join").
  In spite of the name of this constant, which one will be iterated first depends
- on the <code>cost</code> of the filter compared to the query.
+  on the <code>cost</code> of the filter compared to the query.
  */
-inline OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_get_LEAP_FROG_QUERY_FIRST_STRATEGY();
+inline OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_get_LEAP_FROG_QUERY_FIRST_STRATEGY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_LEAP_FROG_QUERY_FIRST_STRATEGY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchFilteredQuery, LEAP_FROG_QUERY_FIRST_STRATEGY, OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)
 
 /*!
  @brief A filter strategy that advances the Query or rather its <code>Scorer</code> first and consults the
- filter <code>DocIdSet</code> for each matched document.
+  filter <code>DocIdSet</code> for each matched document.
  <p>
- Note: this strategy requires a <code>DocIdSet.bits()</code> to return a non-null value. Otherwise
- this strategy falls back to <code>FilteredQuery.LEAP_FROG_QUERY_FIRST_STRATEGY</code>
- </p>
- <p>
- Use this strategy if the filter computation is more expensive than document
- scoring or if the filter has a linear running time to compute the next
- matching doc like exact geo distances.
+  Note: this strategy requires a <code>DocIdSet.bits()</code> to return a non-null value. Otherwise
+  this strategy falls back to <code>FilteredQuery.LEAP_FROG_QUERY_FIRST_STRATEGY</code>
+  </p>
+  <p>
+  Use this strategy if the filter computation is more expensive than document
+  scoring or if the filter has a linear running time to compute the next
+  matching doc like exact geo distances. 
  </p>
  */
-inline OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_get_QUERY_FIRST_FILTER_STRATEGY();
+inline OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_get_QUERY_FIRST_FILTER_STRATEGY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchFilteredQuery_FilterStrategy *OrgApacheLuceneSearchFilteredQuery_QUERY_FIRST_FILTER_STRATEGY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchFilteredQuery, QUERY_FIRST_FILTER_STRATEGY, OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)
@@ -189,7 +197,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredQuery)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Rewrite the filter.
@@ -215,18 +223,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredQuery_FilterStrategy)
 
 /*!
  @brief A <code>FilterStrategy</code> that conditionally uses a random access filter if
- the given <code>DocIdSet</code> supports random access (returns a non-null value
- from <code>DocIdSet.bits()</code>) and
- <code>RandomAccessFilterStrategy.useRandomAccess(Bits,long)</code> returns
- <code>true</code>.
- Otherwise this strategy falls back to a "zig-zag join" (
+  the given <code>DocIdSet</code> supports random access (returns a non-null value
+  from <code>DocIdSet.bits()</code>) and 
+ <code>RandomAccessFilterStrategy.useRandomAccess(Bits, long)</code> returns 
+ <code>true</code>.Otherwise this strategy falls back to a "zig-zag join" ( 
  <code>FilteredQuery.LEAP_FROG_FILTER_FIRST_STRATEGY</code>) strategy .
  */
 @interface OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy : OrgApacheLuceneSearchFilteredQuery_FilterStrategy
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
 
@@ -235,11 +242,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredQuery_FilterStrategy)
 /*!
  @brief Expert: decides if a filter should be executed as "random-access" or not.
  random-access means the filter "filters" in a similar way as deleted docs are filtered
- in Lucene. This is faster when the filter accepts many documents.
- However, when the filter is very sparse, it can be faster to execute the query+filter
- as a conjunction in some cases.
- The default implementation returns <code>true</code> if the filter matches more than 1%
- of documents
+  in Lucene. This is faster when the filter accepts many documents.
+  However, when the filter is very sparse, it can be faster to execute the query+filter
+  as a conjunction in some cases. 
+  The default implementation returns <code>true</code> if the filter matches more than 1%
+  of documents
  */
 - (jboolean)useRandomAccessWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)bits
                                               withLong:(jlong)filterCost;
@@ -254,12 +261,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterSt
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy_init(OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy *new_OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy *new_OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy *create_OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy *create_OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilteredQuery")

@@ -9,6 +9,10 @@
 #include "org/apache/lucene/search/similarities/Distribution.h"
 #include "org/apache/lucene/search/similarities/DistributionSPL.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/DistributionSPL must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSimilaritiesDistributionSPL
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -32,12 +36,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DistributionSPL", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x11, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDistributionSPL = { 2, "DistributionSPL", "org.apache.lucene.search.similarities", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:);
+  methods[2].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "score", "LOrgApacheLuceneSearchSimilaritiesBasicStats;FF", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDistributionSPL = { "DistributionSPL", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesDistributionSPL;
 }
 

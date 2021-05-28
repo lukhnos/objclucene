@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration))
 #define OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration_
 
@@ -25,13 +31,12 @@
 /*!
  @brief Configuration options common across queryparser implementations.
  */
-@protocol OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration < JavaObject >
 
 /*!
  @brief Whether terms of multi-term queries (e.g., wildcard,
- prefix, fuzzy and range) should be automatically
- lower-cased or not.
- Default is <code>true</code>.
+  prefix, fuzzy and range) should be automatically
+  lower-cased or not.Default is <code>true</code>.
  */
 - (void)setLowercaseExpandedTermsWithBoolean:(jboolean)lowercaseExpandedTerms;
 
@@ -43,22 +48,22 @@
 /*!
  @brief Set to <code>true</code> to allow leading wildcard characters.
  <p>
- When set, <code>*</code> or <code>?</code> are allowed as the first
- character of a PrefixQuery and WildcardQuery. Note that this can produce
- very slow queries on big indexes.
+  When set, <code>
+ *</code> or <code>?</code> are allowed as the first character of a PrefixQuery and WildcardQuery. Note that this can produce
+  very slow queries on big indexes. 
  <p>
- Default: false.
+  Default: false.
  */
 - (void)setAllowLeadingWildcardWithBoolean:(jboolean)allowLeadingWildcard;
 
 /*!
  @brief Set to <code>true</code> to enable position increments in result query.
  <p>
- When set, result phrase and multi-phrase queries will be aware of position
- increments. Useful when e.g. a StopFilter increases the position increment
- of the token that follows an omitted token.
+  When set, result phrase and multi-phrase queries will be aware of position
+  increments. Useful when e.g. a StopFilter increases the position increment
+  of the token that follows an omitted token. 
  <p>
- Default: false.
+  Default: false.
  */
 - (void)setEnablePositionIncrementsWithBoolean:(jboolean)enabled;
 
@@ -68,15 +73,15 @@
 - (jboolean)getEnablePositionIncrements;
 
 /*!
- @brief By default, it uses
+ @brief By default, it uses 
  <code>MultiTermQuery.CONSTANT_SCORE_REWRITE</code> when creating a
- prefix, wildcard and range queries.
- This implementation is generally
- preferable because it a) Runs faster b) Does not have the scarcity of terms
- unduly influence score c) avoids any <code>TooManyListenersException</code>
- exception. However, if your application really needs to use the
- old-fashioned boolean queries expansion rewriting and the above points are
- not relevant then use this change the rewrite method.
+  prefix, wildcard and range queries.This implementation is generally
+  preferable because it a) Runs faster b) Does not have the scarcity of terms
+  unduly influence score c) avoids any <code>TooManyListenersException</code>
+  exception.
+ However, if your application really needs to use the
+  old-fashioned boolean queries expansion rewriting and the above points are
+  not relevant then use this change the rewrite method.
  */
 - (void)setMultiTermRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method;
 
@@ -86,10 +91,8 @@
 - (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)getMultiTermRewriteMethod;
 
 /*!
- @brief Set the prefix length for fuzzy queries.
- Default is 0.
- @param fuzzyPrefixLength
- The fuzzyPrefixLength to set.
+ @brief Set the prefix length for fuzzy queries.Default is 0.
+ @param fuzzyPrefixLength The fuzzyPrefixLength to set.
  */
 - (void)setFuzzyPrefixLengthWithInt:(jint)fuzzyPrefixLength;
 
@@ -108,9 +111,9 @@
 - (JavaUtilTimeZone *)getTimeZone;
 
 /*!
- @brief Sets the default slop for phrases.
- If zero, then exact phrase matches are
- required. Default value is zero.
+ @brief Sets the default slop for phrases.If zero, then exact phrase matches are
+  required.
+ Default value is zero.
  */
 - (void)setPhraseSlopWithInt:(jint)defaultPhraseSlop;
 
@@ -138,15 +141,14 @@
 - (jint)getPhraseSlop;
 
 /*!
- @brief Set the minimum similarity for fuzzy queries.
- Default is defined on
+ @brief Set the minimum similarity for fuzzy queries.Default is defined on 
  <code>FuzzyQuery.defaultMinSimilarity</code>.
  */
 - (void)setFuzzyMinSimWithFloat:(jfloat)fuzzyMinSim;
 
 /*!
  @brief Sets the default <code>Resolution</code> used for certain field when
- no <code>Resolution</code> is defined for this field.
+  no <code>Resolution</code> is defined for this field.
  @param dateResolution the default <code>Resolution</code>
  */
 - (void)setDateResolutionWithOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTools_Resolution *)dateResolution;
@@ -159,4 +161,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardCommonQuery
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration")

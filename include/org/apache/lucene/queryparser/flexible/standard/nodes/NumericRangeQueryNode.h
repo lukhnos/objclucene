@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_
 
@@ -22,10 +28,11 @@
 
 @class OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig;
 @class OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode;
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
  @brief This query node represents a range query composed by <code>NumericQueryNode</code>
- bounds, which means the bound values are <code>Number</code>s.
+  bounds, which means the bound values are <code>Number</code>s.
  - seealso: NumericQueryNode
  - seealso: AbstractRangeQueryNode
  */
@@ -37,20 +44,22 @@
 #pragma mark Public
 
 /*!
- @brief Constructs a <code>NumericRangeQueryNode</code> object using the given
+ @brief Constructs a <code>NumericRangeQueryNode</code> object using the given 
  <code>NumericQueryNode</code> as its bounds and <code>NumericConfig</code>.
  @param lower the lower bound
  @param upper the upper bound
- @param lowerInclusive <code>true</code> if the lower bound is inclusive, otherwise, <code>false</code>
- @param upperInclusive <code>true</code> if the upper bound is inclusive, otherwise, <code>false</code>
- @param numericConfig the <code>NumericConfig</code> that represents associated with the upper and lower bounds
- - seealso: #setBounds(NumericQueryNode,NumericQueryNode,boolean,boolean,NumericConfig)
+ @param lowerInclusive <code> true </code>  if the lower bound is inclusive, otherwise,  <code> false </code>
+ @param upperInclusive <code> true </code>  if the upper bound is inclusive, otherwise,  <code> false </code>
+ @param numericConfig the <code>NumericConfig</code>  that represents associated with the upper and lower bounds
+ - seealso: #setBounds(NumericQueryNode, NumericQueryNode, boolean, boolean, NumericConfig)
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode:(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)lower
-                    withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode:(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)upper
-                                                                            withBoolean:(jboolean)lowerInclusive
-                                                                            withBoolean:(jboolean)upperInclusive
-                      withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig:(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *)numericConfig;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode:(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)lower
+                              withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode:(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)upper
+                                                                                      withBoolean:(jboolean)lowerInclusive
+                                                                                      withBoolean:(jboolean)upperInclusive
+                                withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig:(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *)numericConfig;
+
+- (OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)getLowerBound;
 
 /*!
  @brief Returns the <code>NumericConfig</code> associated with the lower and upper bounds.
@@ -58,14 +67,18 @@
  */
 - (OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *)getNumericConfig;
 
+- (OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)getUpperBound;
+
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
+
 /*!
- @brief Sets the upper and lower bounds of this range query node and the
+ @brief Sets the upper and lower bounds of this range query node and the 
  <code>NumericConfig</code> associated with these bounds.
  @param lower the lower bound
  @param upper the upper bound
- @param lowerInclusive <code>true</code> if the lower bound is inclusive, otherwise, <code>false</code>
- @param upperInclusive <code>true</code> if the upper bound is inclusive, otherwise, <code>false</code>
- @param numericConfig the <code>NumericConfig</code> that represents associated with the upper and lower bounds
+ @param lowerInclusive <code> true </code>  if the lower bound is inclusive, otherwise,  <code> false </code>
+ @param upperInclusive <code> true </code>  if the upper bound is inclusive, otherwise,  <code> false </code>
+ @param numericConfig the <code>NumericConfig</code>  that represents associated with the upper and lower bounds
  */
 - (void)setBoundsWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode:(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)lower
                  withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode:(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)upper
@@ -74,6 +87,10 @@
                    withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig:(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *)numericConfig;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -91,4 +108,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesNumeri
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode")

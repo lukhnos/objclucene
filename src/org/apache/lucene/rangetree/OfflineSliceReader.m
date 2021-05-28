@@ -3,11 +3,9 @@
 //  source: ./sandbox/src/java/org/apache/lucene/rangetree/OfflineSliceReader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/BufferedInputStream.h"
 #include "java/io/FileInputStream.h"
-#include "java/io/IOException.h"
 #include "java/io/InputStream.h"
 #include "java/lang/RuntimeException.h"
 #include "org/apache/lucene/rangetree/OfflineSliceReader.h"
@@ -15,6 +13,10 @@
 #include "org/apache/lucene/store/InputStreamDataInput.h"
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/rangetree/OfflineSliceReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneRangetreeOfflineSliceReader () {
  @public
@@ -27,10 +29,10 @@
 
 @implementation OrgApacheLuceneRangetreeOfflineSliceReader
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempFile
-                                            withLong:(jlong)start
-                                            withLong:(jlong)count {
-  OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(self, tempFile, start, count);
+- (instancetype)initPackagePrivateWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempFile
+                                                          withLong:(jlong)start
+                                                          withLong:(jlong)count {
+  OrgApacheLuceneRangetreeOfflineSliceReader_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_withLong_(self, tempFile, start, count);
   return self;
 }
 
@@ -67,28 +69,39 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgLukhnosPortmobileFilePath:withLong:withLong:", "OfflineSliceReader", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "next", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "value", NULL, "J", 0x1, NULL, NULL },
-    { "ord", NULL, "J", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgLukhnosPortmobileFilePath:withLong:withLong:);
+  methods[1].selector = @selector(next);
+  methods[2].selector = @selector(value);
+  methods[3].selector = @selector(ord);
+  methods[4].selector = @selector(docID);
+  methods[5].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.InputStreamDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "countLeft_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "value_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "ord_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "docID_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreInputStreamDataInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "countLeft_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "value_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "ord_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "docID_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeOfflineSliceReader = { 2, "OfflineSliceReader", "org.apache.lucene.rangetree", NULL, 0x10, 6, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgLukhnosPortmobileFilePath;JJ", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeOfflineSliceReader = { "OfflineSliceReader", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x10, 6, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneRangetreeOfflineSliceReader;
 }
 
 @end
 
-void OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgApacheLuceneRangetreeOfflineSliceReader *self, OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) {
+void OrgApacheLuceneRangetreeOfflineSliceReader_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgApacheLuceneRangetreeOfflineSliceReader *self, OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) {
   NSObject_init(self);
   JavaIoInputStream *fis = OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(tempFile);
   jlong seekFP = start * OrgApacheLuceneRangetreeRangeTreeWriter_BYTES_PER_DOC;
@@ -104,12 +117,12 @@ void OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFile
   self->countLeft_ = count;
 }
 
-OrgApacheLuceneRangetreeOfflineSliceReader *new_OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeOfflineSliceReader, initWithOrgLukhnosPortmobileFilePath_withLong_withLong_, tempFile, start, count)
+OrgApacheLuceneRangetreeOfflineSliceReader *new_OrgApacheLuceneRangetreeOfflineSliceReader_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeOfflineSliceReader, initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_withLong_, tempFile, start, count)
 }
 
-OrgApacheLuceneRangetreeOfflineSliceReader *create_OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeOfflineSliceReader, initWithOrgLukhnosPortmobileFilePath_withLong_withLong_, tempFile, start, count)
+OrgApacheLuceneRangetreeOfflineSliceReader *create_OrgApacheLuceneRangetreeOfflineSliceReader_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeOfflineSliceReader, initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_withLong_, tempFile, start, count)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeOfflineSliceReader)

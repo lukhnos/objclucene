@@ -4,8 +4,8 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -21,6 +21,10 @@
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50StoredFieldsFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_initWithNSString_withInt_(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *self, NSString *__name, jint __ordinal);
 
@@ -50,7 +54,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                                                         withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fn
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  NSString *value = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si)) getAttributeWithNSString:OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_MODE_KEY];
+  NSString *value = JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si)) getAttributeWithNSString:OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_MODE_KEY]);
   if (value == nil) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$", @"missing value for ", OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_MODE_KEY, @" for segment: ", si->name_));
   }
@@ -61,7 +65,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (OrgApacheLuceneCodecsStoredFieldsWriter *)fieldsWriterWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  NSString *previous = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si)) putAttributeWithNSString:OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_MODE_KEY withNSString:[((OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *) nil_chk(mode_)) name]];
+  NSString *previous = JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si)) putAttributeWithNSString:OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_MODE_KEY withNSString:[((OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *) nil_chk(mode_)) name]]);
   if (previous != nil) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$$$$$", @"found existing value for ", OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_MODE_KEY, @" for segment: ", si->name_, @"old=", previous, @", new=", [mode_ name]));
   }
@@ -84,28 +88,37 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsReader;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsWriter;", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsFormat;", 0x0, 6, 0, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:);
+  methods[2].selector = @selector(fieldsReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:);
+  methods[3].selector = @selector(fieldsWriterWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:);
+  methods[4].selector = @selector(implWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "MODE_KEY", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 7, -1, -1 },
+    { "mode_", "LOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode;", "fieldsReader", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneIndexFieldInfos;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "fieldsWriter", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneStoreIOContext;", "impl", &OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_MODE_KEY };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat = { "Lucene50StoredFieldsFormat", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x11, 5, 2, -1, 0, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat class]) {
     JreStrongAssign(&OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_MODE_KEY, JreStrcat("$$", [OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_class_() getSimpleName], @".mode"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lucene50StoredFieldsFormat", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:", "Lucene50StoredFieldsFormat", NULL, 0x1, NULL, NULL },
-    { "fieldsReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:", "fieldsReader", "Lorg.apache.lucene.codecs.StoredFieldsReader;", 0x1, "Ljava.io.IOException;", NULL },
-    { "fieldsWriterWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "fieldsWriter", "Lorg.apache.lucene.codecs.StoredFieldsWriter;", 0x1, "Ljava.io.IOException;", NULL },
-    { "implWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:", "impl", "Lorg.apache.lucene.codecs.StoredFieldsFormat;", 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "MODE_KEY", "MODE_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_MODE_KEY, NULL, .constantValue.asLong = 0 },
-    { "mode_", NULL, 0x10, "Lorg.apache.lucene.codecs.lucene50.Lucene50StoredFieldsFormat$Mode;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.lucene50.Lucene50StoredFieldsFormat$Mode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat = { 2, "Lucene50StoredFieldsFormat", "org.apache.lucene.codecs.lucene50", NULL, 0x11, 5, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat;
 }
 
 @end
@@ -163,8 +176,24 @@ OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *OrgApacheLuceneCod
   return (OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BEST_SPEED", "LOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "BEST_COMPRESSION", "LOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode, BEST_SPEED), &JreEnum(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode, BEST_COMPRESSION), "LOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat;", "Ljava/lang/Enum<Lorg/apache/lucene/codecs/lucene50/Lucene50StoredFieldsFormat$Mode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode = { "Mode", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x4019, 2, 2, 4, -1, -1, 5, -1 };
+  return &_OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode;
 }
 
 + (void)initialize {
@@ -173,22 +202,12 @@ OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *OrgApacheLuceneCod
     size_t allocSize = 2 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode, BEST_SPEED) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_initWithNSString_withInt_(e, @"BEST_SPEED", 0);
-    (JreEnum(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode, BEST_COMPRESSION) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_initWithNSString_withInt_(e, @"BEST_COMPRESSION", 1);
+    for (jint i = 0; i < 2; i++) {
+      ((void)(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "BEST_SPEED", "BEST_SPEED", 0x4019, "Lorg.apache.lucene.codecs.lucene50.Lucene50StoredFieldsFormat$Mode;", &JreEnum(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode, BEST_SPEED), NULL, .constantValue.asLong = 0 },
-    { "BEST_COMPRESSION", "BEST_COMPRESSION", 0x4019, "Lorg.apache.lucene.codecs.lucene50.Lucene50StoredFieldsFormat$Mode;", &JreEnum(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode, BEST_COMPRESSION), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.codecs.lucene50.Lucene50StoredFieldsFormat$Mode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode = { 2, "Mode", "org.apache.lucene.codecs.lucene50", "Lucene50StoredFieldsFormat", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/codecs/lucene50/Lucene50StoredFieldsFormat$Mode;>;" };
-  return &_OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode;
 }
 
 @end
@@ -210,7 +229,7 @@ OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *OrgApacheLuceneCod
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

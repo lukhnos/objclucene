@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase))
 #define OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_
 
@@ -40,12 +46,9 @@
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
   id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt_;
 }
-
-+ (jint)DEFAULT_MIN_WORD_SIZE;
-
-+ (jint)DEFAULT_MIN_SUBWORD_SIZE;
-
-+ (jint)DEFAULT_MAX_SUBWORD_SIZE;
+@property (readonly, class) jint DEFAULT_MIN_WORD_SIZE NS_SWIFT_NAME(DEFAULT_MIN_WORD_SIZE);
+@property (readonly, class) jint DEFAULT_MIN_SUBWORD_SIZE NS_SWIFT_NAME(DEFAULT_MIN_SUBWORD_SIZE);
+@property (readonly, class) jint DEFAULT_MAX_SUBWORD_SIZE NS_SWIFT_NAME(DEFAULT_MAX_SUBWORD_SIZE);
 
 #pragma mark Public
 
@@ -55,25 +58,29 @@
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
-                                               withBoolean:(jboolean)onlyLongestMatch;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
+                                                         withBoolean:(jboolean)onlyLongestMatch;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
-                                                   withInt:(jint)minWordSize
-                                                   withInt:(jint)minSubwordSize
-                                                   withInt:(jint)maxSubwordSize
-                                               withBoolean:(jboolean)onlyLongestMatch;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
+                                                             withInt:(jint)minWordSize
+                                                             withInt:(jint)minSubwordSize
+                                                             withInt:(jint)maxSubwordSize
+                                                         withBoolean:(jboolean)onlyLongestMatch;
 
 /*!
  @brief Decomposes the current <code>termAtt</code> and places <code>CompoundToken</code> instances in the <code>tokens</code> list.
  The original token may not be placed in the list, as it is automatically passed through this filter.
  */
 - (void)decompose;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -87,21 +94,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, 
 /*!
  @brief The default for minimal word length that gets decomposed
  */
-inline jint OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_get_DEFAULT_MIN_WORD_SIZE();
+inline jint OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_get_DEFAULT_MIN_WORD_SIZE(void);
 #define OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MIN_WORD_SIZE 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, DEFAULT_MIN_WORD_SIZE, jint)
 
 /*!
  @brief The default for minimal length of subwords that get propagated to the output of this filter
  */
-inline jint OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_get_DEFAULT_MIN_SUBWORD_SIZE();
+inline jint OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_get_DEFAULT_MIN_SUBWORD_SIZE(void);
 #define OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MIN_SUBWORD_SIZE 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, DEFAULT_MIN_SUBWORD_SIZE, jint)
 
 /*!
  @brief The default for maximal length of subwords that get propagated to the output of this filter
  */
-inline jint OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_get_DEFAULT_MAX_SUBWORD_SIZE();
+inline jint OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_get_DEFAULT_MAX_SUBWORD_SIZE(void);
 #define OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MAX_SUBWORD_SIZE 15
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, DEFAULT_MAX_SUBWORD_SIZE, jint)
 
@@ -127,7 +134,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilte
 @interface OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken : NSObject {
  @public
   id<JavaLangCharSequence> txt_;
-  jint startOffset_, endOffset_;
+  jint startOffset_;
+  jint endOffset_;
 }
 
 #pragma mark Public
@@ -135,9 +143,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilte
 /*!
  @brief Construct the compound token based on a slice of the current <code>CompoundWordTokenFilterBase.termAtt</code>.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase:(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *)outer$
-                                                                           withInt:(jint)offset
-                                                                           withInt:(jint)length;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase:(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *)outer$
+                                                                                     withInt:(jint)offset
+                                                                                     withInt:(jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -155,4 +167,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilte
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase")

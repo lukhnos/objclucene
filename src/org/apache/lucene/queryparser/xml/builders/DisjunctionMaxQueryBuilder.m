@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/xml/DOMUtils.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 #include "org/apache/lucene/queryparser/xml/builders/DisjunctionMaxQueryBuilder.h"
 #include "org/apache/lucene/search/DisjunctionMaxQuery.h"
@@ -14,6 +13,10 @@
 #include "org/w3c/dom/Element.h"
 #include "org/w3c/dom/Node.h"
 #include "org/w3c/dom/NodeList.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/DisjunctionMaxQueryBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder () {
  @public
@@ -35,12 +38,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuil
   jfloat tieBreaker = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"tieBreaker", 0.0f);
   OrgApacheLuceneSearchDisjunctionMaxQuery *dq = create_OrgApacheLuceneSearchDisjunctionMaxQuery_initWithFloat_(tieBreaker);
   [dq setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
-  id<OrgW3cDomNodeList> nl = [((id<OrgW3cDomElement>) nil_chk(e)) getChildNodes];
+  id<OrgW3cDomNodeList> nl = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(e)) getChildNodes]);
   for (jint i = 0; i < [((id<OrgW3cDomNodeList>) nil_chk(nl)) getLength]; i++) {
-    id<OrgW3cDomNode> node = [nl itemWithInt:i];
+    id<OrgW3cDomNode> node = JreRetainedLocalValue([nl itemWithInt:i]);
     if ([OrgW3cDomElement_class_() isInstance:node]) {
       id<OrgW3cDomElement> queryElem = (id<OrgW3cDomElement>) cast_check(node, OrgW3cDomElement_class_());
-      OrgApacheLuceneSearchQuery *q = [((id<OrgApacheLuceneQueryparserXmlQueryBuilder>) nil_chk(factory_)) getQueryWithOrgW3cDomElement:queryElem];
+      OrgApacheLuceneSearchQuery *q = JreRetainedLocalValue([((id<OrgApacheLuceneQueryparserXmlQueryBuilder>) nil_chk(factory_)) getQueryWithOrgW3cDomElement:queryElem]);
       [dq addWithOrgApacheLuceneSearchQuery:q];
     }
   }
@@ -53,14 +56,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuil
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserXmlQueryBuilder:", "DisjunctionMaxQueryBuilder", NULL, 0x1, NULL, NULL },
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserXmlQueryBuilder:);
+  methods[1].selector = @selector(getQueryWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "factory_", NULL, 0x12, "Lorg.apache.lucene.queryparser.xml.QueryBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "factory_", "LOrgApacheLuceneQueryparserXmlQueryBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder = { 2, "DisjunctionMaxQueryBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserXmlQueryBuilder;", "getQuery", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder = { "DisjunctionMaxQueryBuilder", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x1, 2, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder;
 }
 

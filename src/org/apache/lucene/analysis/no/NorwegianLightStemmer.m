@@ -9,6 +9,10 @@
 #include "org/apache/lucene/analysis/no/NorwegianLightStemmer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/no/NorwegianLightStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisNoNorwegianLightStemmer
 
 + (jint)BOKMAAL {
@@ -45,17 +49,24 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "NorwegianLightStemmer", NULL, 0x1, NULL, NULL },
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "BOKMAAL", "BOKMAAL", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL },
-    { "NYNORSK", "NYNORSK", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK },
-    { "useBokmaal_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "useNynorsk_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "BOKMAAL", "I", .constantValue.asInt = OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL, 0x19, -1, -1, -1, -1 },
+    { "NYNORSK", "I", .constantValue.asInt = OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK, 0x19, -1, -1, -1, -1 },
+    { "useBokmaal_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "useNynorsk_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNoNorwegianLightStemmer = { 2, "NorwegianLightStemmer", "org.apache.lucene.analysis.no", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "stem", "[CI" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNoNorwegianLightStemmer = { "NorwegianLightStemmer", "org.apache.lucene.analysis.no", ptrTable, methods, fields, 7, 0x1, 2, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisNoNorwegianLightStemmer;
 }
 

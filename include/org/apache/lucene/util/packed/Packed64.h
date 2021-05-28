@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedPacked64
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedPacked64_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked64 || defined(INCLUDE_OrgApacheLuceneUtilPackedPacked64))
 #define OrgApacheLuceneUtilPackedPacked64_
 
@@ -25,54 +31,50 @@
 
 /*!
  @brief Space optimized random access capable array of values with a fixed number of
- bits/value.
- Values are packed contiguously.
+  bits/value.Values are packed contiguously.
  </p><p>
- The implementation strives to perform af fast as possible under the
- constraint of contiguous bits, by avoiding expensive operations. This comes
- at the cost of code clarity.
+  The implementation strives to perform af fast as possible under the
+  constraint of contiguous bits, by avoiding expensive operations. This comes
+  at the cost of code clarity. 
  </p><p>
- Technical details: This implementation is a refinement of a non-branching
- version. The non-branching get and set methods meant that 2 or 4 atomics in
- the underlying array were always accessed, even for the cases where only
- 1 or 2 were needed. Even with caching, this had a detrimental effect on
- performance.
- Related to this issue, the old implementation used lookup tables for shifts
- and masks, which also proved to be a bit slower than calculating the shifts
- and masks on the fly.
- See https://issues.apache.org/jira/browse/LUCENE-4062 for details.
+  Technical details: This implementation is a refinement of a non-branching
+  version. The non-branching get and set methods meant that 2 or 4 atomics in
+  the underlying array were always accessed, even for the cases where only
+  1 or 2 were needed. Even with caching, this had a detrimental effect on
+  performance.
+  Related to this issue, the old implementation used lookup tables for shifts
+  and masks, which also proved to be a bit slower than calculating the shifts
+  and masks on the fly.
+  See https://issues.apache.org/jira/browse/LUCENE-4062 for details.
  */
 @interface OrgApacheLuceneUtilPackedPacked64 : OrgApacheLuceneUtilPackedPackedInts_MutableImpl
-
-+ (jint)BLOCK_SIZE;
-
-+ (jint)BLOCK_BITS;
-
-+ (jint)MOD_MASK;
+@property (readonly, class) jint BLOCK_SIZE NS_SWIFT_NAME(BLOCK_SIZE);
+@property (readonly, class) jint BLOCK_BITS NS_SWIFT_NAME(BLOCK_BITS);
+@property (readonly, class) jint MOD_MASK NS_SWIFT_NAME(MOD_MASK);
 
 #pragma mark Public
 
 /*!
  @brief Creates an array with content retrieved from the given DataInput.
- @param inArg       a DataInput, positioned at the start of Packed64-content.
- @param valueCount  the number of elements.
+ @param inArg a DataInput, positioned at the start of Packed64-content.
+ @param valueCount the number of elements.
  @param bitsPerValue the number of bits available for any given value.
- @throws java.io.IOException if the values for the backing array could not
- be retrieved.
+ @throw java.io.IOExceptionif the values for the backing array could not
+                              be retrieved.
  */
-- (instancetype)initWithInt:(jint)packedIntsVersion
-withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                    withInt:(jint)valueCount
-                    withInt:(jint)bitsPerValue;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)packedIntsVersion
+                  withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                            withInt:(jint)valueCount
+                                            withInt:(jint)bitsPerValue;
 
 /*!
  @brief Creates an array with the internal structures adjusted for the given
- limits and initialized to 0.
- @param valueCount   the number of elements.
+  limits and initialized to 0.
+ @param valueCount the number of elements.
  @param bitsPerValue the number of bits available for any given value.
  */
-- (instancetype)initWithInt:(jint)valueCount
-                    withInt:(jint)bitsPerValue;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)valueCount
+                                            withInt:(jint)bitsPerValue;
 
 - (void)clear;
 
@@ -103,36 +105,45 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                              withInt:(jint)arg1 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedPacked64)
 
-inline jint OrgApacheLuceneUtilPackedPacked64_get_BLOCK_SIZE();
+inline jint OrgApacheLuceneUtilPackedPacked64_get_BLOCK_SIZE(void);
 #define OrgApacheLuceneUtilPackedPacked64_BLOCK_SIZE 64
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPacked64, BLOCK_SIZE, jint)
 
-inline jint OrgApacheLuceneUtilPackedPacked64_get_BLOCK_BITS();
+inline jint OrgApacheLuceneUtilPackedPacked64_get_BLOCK_BITS(void);
 #define OrgApacheLuceneUtilPackedPacked64_BLOCK_BITS 6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPacked64, BLOCK_BITS, jint)
 
-inline jint OrgApacheLuceneUtilPackedPacked64_get_MOD_MASK();
+inline jint OrgApacheLuceneUtilPackedPacked64_get_MOD_MASK(void);
 #define OrgApacheLuceneUtilPackedPacked64_MOD_MASK 63
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPacked64, MOD_MASK, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked64_initWithInt_withInt_(OrgApacheLuceneUtilPackedPacked64 *self, jint valueCount, jint bitsPerValue);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked64_initPackagePrivateWithInt_withInt_(OrgApacheLuceneUtilPackedPacked64 *self, jint valueCount, jint bitsPerValue);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked64 *new_OrgApacheLuceneUtilPackedPacked64_initWithInt_withInt_(jint valueCount, jint bitsPerValue) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked64 *new_OrgApacheLuceneUtilPackedPacked64_initPackagePrivateWithInt_withInt_(jint valueCount, jint bitsPerValue) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked64 *create_OrgApacheLuceneUtilPackedPacked64_initWithInt_withInt_(jint valueCount, jint bitsPerValue);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked64 *create_OrgApacheLuceneUtilPackedPacked64_initPackagePrivateWithInt_withInt_(jint valueCount, jint bitsPerValue);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked64_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_(OrgApacheLuceneUtilPackedPacked64 *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount, jint bitsPerValue);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked64_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_(OrgApacheLuceneUtilPackedPacked64 *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount, jint bitsPerValue);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked64 *new_OrgApacheLuceneUtilPackedPacked64_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount, jint bitsPerValue) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked64 *new_OrgApacheLuceneUtilPackedPacked64_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount, jint bitsPerValue) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked64 *create_OrgApacheLuceneUtilPackedPacked64_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount, jint bitsPerValue);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked64 *create_OrgApacheLuceneUtilPackedPacked64_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount, jint bitsPerValue);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked64")

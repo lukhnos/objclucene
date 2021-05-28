@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilInfoStream
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilInfoStream_) && (INCLUDE_ALL_OrgApacheLuceneUtilInfoStream || defined(INCLUDE_OrgApacheLuceneUtilInfoStream))
 #define OrgApacheLuceneUtilInfoStream_
 
@@ -22,19 +28,17 @@
 
 /*!
  @brief Debugging API for Lucene classes such as <code>IndexWriter</code> 
- and <code>SegmentInfos</code>.
+  and <code>SegmentInfos</code>.
  <p>
- NOTE: Enabling infostreams may cause performance degradation
- in some components.
-  
+  NOTE: Enabling infostreams may cause performance degradation
+  in some components.
  */
 @interface OrgApacheLuceneUtilInfoStream : NSObject < JavaIoCloseable >
-
-+ (OrgApacheLuceneUtilInfoStream *)NO_OUTPUT;
+@property (readonly, class, strong) OrgApacheLuceneUtilInfoStream *NO_OUTPUT NS_SWIFT_NAME(NO_OUTPUT);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief The default <code>InfoStream</code> used by a newly instantiated classes.
@@ -55,9 +59,8 @@
 
 /*!
  @brief Sets the default <code>InfoStream</code> used
- by a newly instantiated classes.
- It cannot be <code>null</code>,
- to disable logging use <code>NO_OUTPUT</code>.
+  by a newly instantiated classes.It cannot be <code>null</code>,
+  to disable logging use <code>NO_OUTPUT</code>.
  - seealso: #getDefault
  */
 + (void)setDefaultWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
@@ -69,19 +72,23 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilInfoStream)
 /*!
  @brief Instance of InfoStream that does no logging at all.
  */
-inline OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_get_NO_OUTPUT();
+inline OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_get_NO_OUTPUT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilInfoStream, NO_OUTPUT, OrgApacheLuceneUtilInfoStream *)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_getDefault();
+FOUNDATION_EXPORT void OrgApacheLuceneUtilInfoStream_init(OrgApacheLuceneUtilInfoStream *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_getDefault(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilInfoStream_setDefaultWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream);
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilInfoStream_init(OrgApacheLuceneUtilInfoStream *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilInfoStream)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilInfoStream")

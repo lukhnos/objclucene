@@ -8,7 +8,10 @@
 #include "java/lang/System.h"
 #include "org/apache/lucene/index/ParallelPostingsArray.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
-#include "org/apache/lucene/util/RamUsageEstimator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/ParallelPostingsArray must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneIndexParallelPostingsArray
 
@@ -16,8 +19,8 @@
   return OrgApacheLuceneIndexParallelPostingsArray_BYTES_PER_POSTING;
 }
 
-- (instancetype)initWithInt:(jint)size {
-  OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(self, size);
+- (instancetype)initPackagePrivateWithInt:(jint)size {
+  OrgApacheLuceneIndexParallelPostingsArray_initPackagePrivateWithInt_(self, size);
   return self;
 }
 
@@ -26,12 +29,12 @@
 }
 
 - (OrgApacheLuceneIndexParallelPostingsArray *)newInstanceWithInt:(jint)size {
-  return create_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(size);
+  return create_OrgApacheLuceneIndexParallelPostingsArray_initPackagePrivateWithInt_(size);
 }
 
 - (OrgApacheLuceneIndexParallelPostingsArray *)grow {
   jint newSize = OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(size_ + 1, [self bytesPerPosting]);
-  OrgApacheLuceneIndexParallelPostingsArray *newArray = [self newInstanceWithInt:newSize];
+  OrgApacheLuceneIndexParallelPostingsArray *newArray = JreRetainedLocalValue([self newInstanceWithInt:newSize]);
   [self copyToWithOrgApacheLuceneIndexParallelPostingsArray:newArray withInt:size_];
   return newArray;
 }
@@ -51,27 +54,37 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "ParallelPostingsArray", NULL, 0x0, NULL, NULL },
-    { "bytesPerPosting", NULL, "I", 0x0, NULL, NULL },
-    { "newInstanceWithInt:", "newInstance", "Lorg.apache.lucene.index.ParallelPostingsArray;", 0x0, NULL, NULL },
-    { "grow", NULL, "Lorg.apache.lucene.index.ParallelPostingsArray;", 0x10, NULL, NULL },
-    { "copyToWithOrgApacheLuceneIndexParallelPostingsArray:withInt:", "copyTo", "V", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexParallelPostingsArray;", 0x0, 1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexParallelPostingsArray;", 0x10, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:);
+  methods[1].selector = @selector(bytesPerPosting);
+  methods[2].selector = @selector(newInstanceWithInt:);
+  methods[3].selector = @selector(grow);
+  methods[4].selector = @selector(copyToWithOrgApacheLuceneIndexParallelPostingsArray:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "BYTES_PER_POSTING", "BYTES_PER_POSTING", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexParallelPostingsArray_BYTES_PER_POSTING },
-    { "size_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "textStarts_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "intStarts_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "byteStarts_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "BYTES_PER_POSTING", "I", .constantValue.asInt = OrgApacheLuceneIndexParallelPostingsArray_BYTES_PER_POSTING, 0x18, -1, -1, -1, -1 },
+    { "size_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "textStarts_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "intStarts_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "byteStarts_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexParallelPostingsArray = { 2, "ParallelPostingsArray", "org.apache.lucene.index", NULL, 0x0, 5, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "newInstance", "copyTo", "LOrgApacheLuceneIndexParallelPostingsArray;I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexParallelPostingsArray = { "ParallelPostingsArray", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 5, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexParallelPostingsArray;
 }
 
 @end
 
-void OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(OrgApacheLuceneIndexParallelPostingsArray *self, jint size) {
+void OrgApacheLuceneIndexParallelPostingsArray_initPackagePrivateWithInt_(OrgApacheLuceneIndexParallelPostingsArray *self, jint size) {
   NSObject_init(self);
   self->size_ = size;
   JreStrongAssignAndConsume(&self->textStarts_, [IOSIntArray newArrayWithLength:size]);
@@ -79,12 +92,12 @@ void OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(OrgApacheLuceneIndex
   JreStrongAssignAndConsume(&self->byteStarts_, [IOSIntArray newArrayWithLength:size]);
 }
 
-OrgApacheLuceneIndexParallelPostingsArray *new_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(jint size) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelPostingsArray, initWithInt_, size)
+OrgApacheLuceneIndexParallelPostingsArray *new_OrgApacheLuceneIndexParallelPostingsArray_initPackagePrivateWithInt_(jint size) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelPostingsArray, initPackagePrivateWithInt_, size)
 }
 
-OrgApacheLuceneIndexParallelPostingsArray *create_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(jint size) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelPostingsArray, initWithInt_, size)
+OrgApacheLuceneIndexParallelPostingsArray *create_OrgApacheLuceneIndexParallelPostingsArray_initPackagePrivateWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelPostingsArray, initPackagePrivateWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexParallelPostingsArray)

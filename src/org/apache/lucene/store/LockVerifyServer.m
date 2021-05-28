@@ -19,6 +19,7 @@
 #include "java/lang/RuntimeException.h"
 #include "java/lang/System.h"
 #include "java/lang/Thread.h"
+#include "java/lang/Throwable.h"
 #include "java/net/InetSocketAddress.h"
 #include "java/net/ServerSocket.h"
 #include "java/net/Socket.h"
@@ -27,7 +28,11 @@
 #include "org/apache/lucene/store/LockVerifyServer.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
-@interface OrgApacheLuceneStoreLockVerifyServer_$1 : JavaLangThread {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/LockVerifyServer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneStoreLockVerifyServer_1 : JavaLangThread {
  @public
   JavaNetSocket *val$cs_;
   JavaUtilConcurrentCountDownLatch *val$startingGun_;
@@ -35,35 +40,24 @@
   IOSIntArray *val$lockedID_;
 }
 
-- (void)run;
-
 - (instancetype)initWithJavaNetSocket:(JavaNetSocket *)capture$0
  withJavaUtilConcurrentCountDownLatch:(JavaUtilConcurrentCountDownLatch *)capture$1
                                withId:(id)capture$2
                          withIntArray:(IOSIntArray *)capture$3;
 
+- (void)run;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreLockVerifyServer_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreLockVerifyServer_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreLockVerifyServer_$1, val$cs_, JavaNetSocket *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreLockVerifyServer_$1, val$startingGun_, JavaUtilConcurrentCountDownLatch *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreLockVerifyServer_$1, val$localLock_, id)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreLockVerifyServer_$1, val$lockedID_, IOSIntArray *)
+__attribute__((unused)) static void OrgApacheLuceneStoreLockVerifyServer_1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(OrgApacheLuceneStoreLockVerifyServer_1 *self, JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3);
 
-__attribute__((unused)) static void OrgApacheLuceneStoreLockVerifyServer_$1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(OrgApacheLuceneStoreLockVerifyServer_$1 *self, JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3);
+__attribute__((unused)) static OrgApacheLuceneStoreLockVerifyServer_1 *new_OrgApacheLuceneStoreLockVerifyServer_1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneStoreLockVerifyServer_$1 *new_OrgApacheLuceneStoreLockVerifyServer_$1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneStoreLockVerifyServer_$1 *create_OrgApacheLuceneStoreLockVerifyServer_$1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockVerifyServer_$1)
+__attribute__((unused)) static OrgApacheLuceneStoreLockVerifyServer_1 *create_OrgApacheLuceneStoreLockVerifyServer_1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3);
 
 @implementation OrgApacheLuceneStoreLockVerifyServer
-
-+ (void)mainWithNSStringArray:(IOSObjectArray *)args {
-  OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(args);
-}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -72,16 +66,39 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (void)mainWithNSStringArray:(IOSObjectArray *)args {
+  OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(args);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "mainWithNSStringArray:", "main", "V", 0x9, "Ljava.lang.Exception;", NULL },
-    { "init", "LockVerifyServer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockVerifyServer = { 2, "LockVerifyServer", "org.apache.lucene.store", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(mainWithNSStringArray:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "main", "[LNSString;", "LJavaLangException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockVerifyServer = { "LockVerifyServer", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreLockVerifyServer;
 }
 
 @end
+
+void OrgApacheLuceneStoreLockVerifyServer_init(OrgApacheLuceneStoreLockVerifyServer *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneStoreLockVerifyServer *new_OrgApacheLuceneStoreLockVerifyServer_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreLockVerifyServer, init)
+}
+
+OrgApacheLuceneStoreLockVerifyServer *create_OrgApacheLuceneStoreLockVerifyServer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockVerifyServer, init)
+}
 
 void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray *args) {
   OrgApacheLuceneStoreLockVerifyServer_initialize();
@@ -94,7 +111,7 @@ void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray 
   jint maxClients = JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(args, arg++));
   {
     JavaNetServerSocket *s = create_JavaNetServerSocket_init();
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [s setReuseAddressWithBoolean:true];
       [s setSoTimeoutWithInt:30000];
@@ -109,10 +126,10 @@ void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray 
       IOSObjectArray *threads = [IOSObjectArray arrayWithLength:maxClients type:JavaLangThread_class_()];
       for (jint count = 0; count < maxClients; count++) {
         JavaNetSocket *cs = [s accept];
-        IOSObjectArray_SetAndConsume(threads, count, new_OrgApacheLuceneStoreLockVerifyServer_$1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(cs, startingGun, localLock, lockedID));
+        IOSObjectArray_SetAndConsume(threads, count, new_OrgApacheLuceneStoreLockVerifyServer_1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(cs, startingGun, localLock, lockedID));
         [((JavaLangThread *) nil_chk(IOSObjectArray_Get(threads, count))) start];
       }
-      [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:@"All clients started, fire gun..."];
+      [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"All clients started, fire gun..."];
       [startingGun countDown];
       {
         IOSObjectArray *a__ = threads;
@@ -124,9 +141,9 @@ void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray 
         }
       }
       JavaLangSystem_clearPropertyWithNSString_(@"lockverifyserver.port");
-      [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:@"Server terminated."];
+      [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"Server terminated."];
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -135,10 +152,12 @@ void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray 
         if (__primaryException1 != nil) {
           @try {
             [s close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [s close];
         }
       }
@@ -146,29 +165,25 @@ void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray 
   }
 }
 
-void OrgApacheLuceneStoreLockVerifyServer_init(OrgApacheLuceneStoreLockVerifyServer *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneStoreLockVerifyServer *new_OrgApacheLuceneStoreLockVerifyServer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreLockVerifyServer, init)
-}
-
-OrgApacheLuceneStoreLockVerifyServer *create_OrgApacheLuceneStoreLockVerifyServer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockVerifyServer, init)
-}
-
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockVerifyServer)
 
-@implementation OrgApacheLuceneStoreLockVerifyServer_$1
+@implementation OrgApacheLuceneStoreLockVerifyServer_1
+
+- (instancetype)initWithJavaNetSocket:(JavaNetSocket *)capture$0
+ withJavaUtilConcurrentCountDownLatch:(JavaUtilConcurrentCountDownLatch *)capture$1
+                               withId:(id)capture$2
+                         withIntArray:(IOSIntArray *)capture$3 {
+  OrgApacheLuceneStoreLockVerifyServer_1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(self, capture$0, capture$1, capture$2, capture$3);
+  return self;
+}
 
 - (void)run {
   @try {
     JavaIoInputStream *in = [((JavaNetSocket *) nil_chk(val$cs_)) getInputStream];
-    NSException *__primaryException2 = nil;
+    JavaLangThrowable *__primaryException2 = nil;
     @try {
       JavaIoOutputStream *os = [val$cs_ getOutputStream];
-      NSException *__primaryException1 = nil;
+      JavaLangThrowable *__primaryException1 = nil;
       @try {
         jint id_ = [((JavaIoInputStream *) nil_chk(in)) read];
         if (id_ < 0) {
@@ -210,7 +225,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockVerifyServer)
           }
         }
       }
-      @catch (NSException *e) {
+      @catch (JavaLangThrowable *e) {
         __primaryException1 = e;
         @throw e;
       }
@@ -219,16 +234,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockVerifyServer)
           if (__primaryException1 != nil) {
             @try {
               [os close];
-            } @catch (NSException *e) {
-              [__primaryException1 addSuppressedWithNSException:e];
             }
-          } else {
+            @catch (JavaLangThrowable *e) {
+              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            }
+          }
+          else {
             [os close];
           }
         }
       }
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException2 = e;
       @throw e;
     }
@@ -237,10 +254,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockVerifyServer)
         if (__primaryException2 != nil) {
           @try {
             [in close];
-          } @catch (NSException *e) {
-            [__primaryException2 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException2 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [in close];
         }
       }
@@ -252,23 +271,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockVerifyServer)
   @catch (JavaLangError *e) {
     @throw e;
   }
-  @catch (NSException *e) {
-    @throw e;
-  }
   @catch (JavaLangException *ioe) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe);
   }
   @finally {
     OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ val$cs_ } count:1 type:JavaIoCloseable_class_()]);
   }
-}
-
-- (instancetype)initWithJavaNetSocket:(JavaNetSocket *)capture$0
- withJavaUtilConcurrentCountDownLatch:(JavaUtilConcurrentCountDownLatch *)capture$1
-                               withId:(id)capture$2
-                         withIntArray:(IOSIntArray *)capture$3 {
-  OrgApacheLuceneStoreLockVerifyServer_$1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(self, capture$0, capture$1, capture$2, capture$3);
-  return self;
 }
 
 - (void)dealloc {
@@ -280,24 +288,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockVerifyServer)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "run", NULL, "V", 0x1, NULL, NULL },
-    { "initWithJavaNetSocket:withJavaUtilConcurrentCountDownLatch:withId:withIntArray:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaNetSocket:withJavaUtilConcurrentCountDownLatch:withId:withIntArray:);
+  methods[1].selector = @selector(run);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$cs_", NULL, 0x1012, "Ljava.net.Socket;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$startingGun_", NULL, 0x1012, "Ljava.util.concurrent.CountDownLatch;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$localLock_", NULL, 0x1012, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$lockedID_", NULL, 0x1012, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$cs_", "LJavaNetSocket;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$startingGun_", "LJavaUtilConcurrentCountDownLatch;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$localLock_", "LNSObject;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$lockedID_", "[I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneStoreLockVerifyServer", "mainWithNSStringArray:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockVerifyServer_$1 = { 2, "", "org.apache.lucene.store", "LockVerifyServer", 0x8008, 2, methods, 4, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneStoreLockVerifyServer_$1;
+  static const void *ptrTable[] = { "LJavaNetSocket;LJavaUtilConcurrentCountDownLatch;LNSObject;[I", "LOrgApacheLuceneStoreLockVerifyServer;", "mainWithNSStringArray:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockVerifyServer_1 = { "", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x8018, 2, 4, 1, -1, 2, -1, -1 };
+  return &_OrgApacheLuceneStoreLockVerifyServer_1;
 }
 
 @end
 
-void OrgApacheLuceneStoreLockVerifyServer_$1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(OrgApacheLuceneStoreLockVerifyServer_$1 *self, JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3) {
+void OrgApacheLuceneStoreLockVerifyServer_1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(OrgApacheLuceneStoreLockVerifyServer_1 *self, JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3) {
   JreStrongAssign(&self->val$cs_, capture$0);
   JreStrongAssign(&self->val$startingGun_, capture$1);
   JreStrongAssign(&self->val$localLock_, capture$2);
@@ -305,12 +319,10 @@ void OrgApacheLuceneStoreLockVerifyServer_$1_initWithJavaNetSocket_withJavaUtilC
   JavaLangThread_init(self);
 }
 
-OrgApacheLuceneStoreLockVerifyServer_$1 *new_OrgApacheLuceneStoreLockVerifyServer_$1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreLockVerifyServer_$1, initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_, capture$0, capture$1, capture$2, capture$3)
+OrgApacheLuceneStoreLockVerifyServer_1 *new_OrgApacheLuceneStoreLockVerifyServer_1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreLockVerifyServer_1, initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_, capture$0, capture$1, capture$2, capture$3)
 }
 
-OrgApacheLuceneStoreLockVerifyServer_$1 *create_OrgApacheLuceneStoreLockVerifyServer_$1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockVerifyServer_$1, initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_, capture$0, capture$1, capture$2, capture$3)
+OrgApacheLuceneStoreLockVerifyServer_1 *create_OrgApacheLuceneStoreLockVerifyServer_1_initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_(JavaNetSocket *capture$0, JavaUtilConcurrentCountDownLatch *capture$1, id capture$2, IOSIntArray *capture$3) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockVerifyServer_1, initWithJavaNetSocket_withJavaUtilConcurrentCountDownLatch_withId_withIntArray_, capture$0, capture$1, capture$2, capture$3)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockVerifyServer_$1)

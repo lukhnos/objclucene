@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansSpans
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansSpans))
 #define OrgApacheLuceneSearchSpansSpans_
 
@@ -26,36 +32,34 @@
 /*!
  @brief Iterates through combinations of start/end positions per-doc.
  Each start/end position represents a range of term positions within the current document.
- These are enumerated in order, by increasing document number, within that by
- increasing start position and finally by increasing end position.
+   These are enumerated in order, by increasing document number, within that by
+   increasing start position and finally by increasing end position.
  */
 @interface OrgApacheLuceneSearchSpansSpans : OrgApacheLuceneSearchDocIdSetIterator
-
-+ (jint)NO_MORE_POSITIONS;
+@property (readonly, class) jint NO_MORE_POSITIONS NS_SWIFT_NAME(NO_MORE_POSITIONS);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Optional method: Return a <code>TwoPhaseIterator</code> view of this
- <code>Spans</code>.
- A return value of <code>null</code> indicates that
- two-phase iteration is not supported.
+ @brief Optional method: Return a <code>TwoPhaseIterator</code> view of this 
+ <code>Spans</code>.A return value of <code>null</code> indicates that
+  two-phase iteration is not supported.
  Note that the returned <code>TwoPhaseIterator</code>'s
- <code>approximation</code> must
- advance documents synchronously with this iterator:
- advancing the approximation must
- advance this iterator and vice-versa.
- Implementing this method is typically useful on a <code>Spans</code>
- that has a high per-document overhead for confirming matches.
- The default implementation returns <code>null</code>.
+  <code>approximation</code> must
+  advance documents synchronously with this iterator:
+  advancing the approximation must
+  advance this iterator and vice-versa.
+  Implementing this method is typically useful on a <code>Spans</code>
+  that has a high per-document overhead for confirming matches.
+  The default implementation returns <code>null</code>.
  */
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator;
 
 /*!
  @brief Collect postings data from the leaves of the current Spans.
- This method should only be called after <code>nextStartPosition()</code>, and before
+ This method should only be called after <code>nextStartPosition()</code>, and before 
  <code>NO_MORE_POSITIONS</code> has been reached.
  @param collector a SpanCollector
  */
@@ -70,7 +74,7 @@
 /*!
  @brief Returns the next start position for the current doc.
  There is always at least one start/end position per doc.
- After the last start/end position at the current doc this returns <code>NO_MORE_POSITIONS</code>.
+  After the last start/end position at the current doc this returns <code>NO_MORE_POSITIONS</code>.
  */
 - (jint)nextStartPosition;
 
@@ -83,12 +87,11 @@
 - (NSString *)description;
 
 /*!
- @brief Return the width of the match, which is typically used to compute
- the <code>slop factor</code>.
- It is only legal
- to call this method when the iterator is on a valid doc ID and positioned.
+ @brief Return the width of the match, which is typically used to compute the 
+ <code>slop factor</code>.It is only legal
+  to call this method when the iterator is on a valid doc ID and positioned.
  The return value must be positive, and lower values means that the match is
- better.
+  better.
  */
 - (jint)width;
 
@@ -96,7 +99,7 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpans)
 
-inline jint OrgApacheLuceneSearchSpansSpans_get_NO_MORE_POSITIONS();
+inline jint OrgApacheLuceneSearchSpansSpans_get_NO_MORE_POSITIONS(void);
 #define OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS 2147483647
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSpansSpans, NO_MORE_POSITIONS, jint)
 
@@ -106,4 +109,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpans)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpans")

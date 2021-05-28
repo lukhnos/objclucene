@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisEnPorterStemFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisEnPorterStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnPorterStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisEnPorterStemFilter))
 #define OrgApacheLuceneAnalysisEnPorterStemFilter_
 
@@ -25,38 +31,37 @@
 /*!
  @brief Transforms the token stream as per the Porter stemming algorithm.
  Note: the input to the stemming filter must already be in lower case,
- so you will need to use LowerCaseFilter or LowerCaseTokenizer farther
- down the Tokenizer chain in order for this to work properly!
+     so you will need to use LowerCaseFilter or LowerCaseTokenizer farther
+     down the Tokenizer chain in order for this to work properly!    
  <P>
- To use this filter with other analyzers, you'll want to write an
- Analyzer class that sets up the TokenStream chain as you want it.
- To use this with LowerCaseTokenizer, for example, you'd write an
- analyzer like this:
+     To use this filter with other analyzers, you'll want to write an
+     Analyzer class that sets up the TokenStream chain as you want it.
+     To use this with LowerCaseTokenizer, for example, you'd write an
+     analyzer like this:    
  <br>
- <PRE class="prettyprint">
- class MyAnalyzer extends Analyzer {
- &commat;&commat;Override
- protected TokenStreamComponents createComponents(String fieldName) {
- Tokenizer source = new LowerCaseTokenizer(version, reader);
- return new TokenStreamComponents(source, new PorterStemFilter(source));
- }
- }
+     <PRE class="prettyprint">
+     class MyAnalyzer extends Analyzer {
+       &commat;&commat;Override
+       protected TokenStreamComponents createComponents(String fieldName) {
+         Tokenizer source = new LowerCaseTokenizer(version, reader);
+         return new TokenStreamComponents(source, new PorterStemFilter(source));
+       }    }    
  
 @endcode
- <p>
- Note: This filter is aware of the <code>KeywordAttribute</code>. To prevent
- certain terms from being passed to the stemmer
+     <p>
+     Note: This filter is aware of the <code>KeywordAttribute</code>. To prevent
+     certain terms from being passed to the stemmer    
  <code>KeywordAttribute.isKeyword()</code> should be set to <code>true</code>
- in a previous <code>TokenStream</code>.
- Note: For including the original term as well as the stemmed version, see
+     in a previous <code>TokenStream</code>.
+     Note: For including the original term as well as the stemmed version, see   
  <code>org.apache.lucene.analysis.miscellaneous.KeywordRepeatFilterFactory</code>
- </p>
+     </p>
  */
 @interface OrgApacheLuceneAnalysisEnPorterStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
 
@@ -74,4 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnPorterStemFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnPorterStemFilter")

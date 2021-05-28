@@ -3,7 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/SortedNumericSelector.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/Enum.h"
@@ -15,61 +15,51 @@
 #include "org/apache/lucene/search/SortedNumericSelector.h"
 #include "org/apache/lucene/util/NumericUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/SortedNumericSelector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 __attribute__((unused)) static void OrgApacheLuceneSearchSortedNumericSelector_Type_initWithNSString_withInt_(OrgApacheLuceneSearchSortedNumericSelector_Type *self, NSString *__name, jint __ordinal);
 
-@interface OrgApacheLuceneSearchSortedNumericSelector_$1 : OrgApacheLuceneIndexNumericDocValues {
+@interface OrgApacheLuceneSearchSortedNumericSelector_1 : OrgApacheLuceneIndexNumericDocValues {
  @public
   OrgApacheLuceneIndexNumericDocValues *val$view_;
 }
 
-- (jlong)getWithInt:(jint)docID;
-
 - (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0;
+
+- (jlong)getWithInt:(jint)docID;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedNumericSelector_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedNumericSelector_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedNumericSelector_$1, val$view_, OrgApacheLuceneIndexNumericDocValues *)
+__attribute__((unused)) static void OrgApacheLuceneSearchSortedNumericSelector_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSortedNumericSelector_1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSortedNumericSelector_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSortedNumericSelector_$1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0);
+__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSelector_1 *new_OrgApacheLuceneSearchSortedNumericSelector_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSelector_$1 *new_OrgApacheLuceneSearchSortedNumericSelector_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSelector_1 *create_OrgApacheLuceneSearchSortedNumericSelector_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSelector_$1 *create_OrgApacheLuceneSearchSortedNumericSelector_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSelector_$1)
-
-@interface OrgApacheLuceneSearchSortedNumericSelector_$2 : OrgApacheLuceneIndexNumericDocValues {
+@interface OrgApacheLuceneSearchSortedNumericSelector_2 : OrgApacheLuceneIndexNumericDocValues {
  @public
   OrgApacheLuceneIndexNumericDocValues *val$view_;
 }
 
-- (jlong)getWithInt:(jint)docID;
-
 - (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0;
+
+- (jlong)getWithInt:(jint)docID;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedNumericSelector_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedNumericSelector_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedNumericSelector_$2, val$view_, OrgApacheLuceneIndexNumericDocValues *)
+__attribute__((unused)) static void OrgApacheLuceneSearchSortedNumericSelector_2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSortedNumericSelector_2 *self, OrgApacheLuceneIndexNumericDocValues *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSortedNumericSelector_$2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSortedNumericSelector_$2 *self, OrgApacheLuceneIndexNumericDocValues *capture$0);
+__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSelector_2 *new_OrgApacheLuceneSearchSortedNumericSelector_2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSelector_$2 *new_OrgApacheLuceneSearchSortedNumericSelector_$2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSelector_$2 *create_OrgApacheLuceneSearchSortedNumericSelector_$2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSelector_$2)
+__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSelector_2 *create_OrgApacheLuceneSearchSortedNumericSelector_2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0);
 
 @implementation OrgApacheLuceneSearchSortedNumericSelector
-
-+ (OrgApacheLuceneIndexNumericDocValues *)wrapWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)sortedNumeric
-                                         withOrgApacheLuceneSearchSortedNumericSelector_Type:(OrgApacheLuceneSearchSortedNumericSelector_Type *)selector
-                                                     withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)numericType {
-  return OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(sortedNumeric, selector, numericType);
-}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -78,17 +68,41 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (OrgApacheLuceneIndexNumericDocValues *)wrapWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)sortedNumeric
+                                         withOrgApacheLuceneSearchSortedNumericSelector_Type:(OrgApacheLuceneSearchSortedNumericSelector_Type *)selector
+                                                     withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)numericType {
+  return OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(sortedNumeric, selector, numericType);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "wrapWithOrgApacheLuceneIndexSortedNumericDocValues:withOrgApacheLuceneSearchSortedNumericSelector_Type:withOrgApacheLuceneSearchSortField_Type:", "wrap", "Lorg.apache.lucene.index.NumericDocValues;", 0x9, NULL, NULL },
-    { "init", "SortedNumericSelector", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x9, 0, 1, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.SortedNumericSelector$Type;", "Lorg.apache.lucene.search.SortedNumericSelector$MinValue;", "Lorg.apache.lucene.search.SortedNumericSelector$MaxValue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector = { 2, "SortedNumericSelector", "org.apache.lucene.search", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 3, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(wrapWithOrgApacheLuceneIndexSortedNumericDocValues:withOrgApacheLuceneSearchSortedNumericSelector_Type:withOrgApacheLuceneSearchSortField_Type:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "wrap", "LOrgApacheLuceneIndexSortedNumericDocValues;LOrgApacheLuceneSearchSortedNumericSelector_Type;LOrgApacheLuceneSearchSortField_Type;", "LOrgApacheLuceneSearchSortedNumericSelector_Type;LOrgApacheLuceneSearchSortedNumericSelector_MinValue;LOrgApacheLuceneSearchSortedNumericSelector_MaxValue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector = { "SortedNumericSelector", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, 2, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSortedNumericSelector;
 }
 
 @end
+
+void OrgApacheLuceneSearchSortedNumericSelector_init(OrgApacheLuceneSearchSortedNumericSelector *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneSearchSortedNumericSelector *new_OrgApacheLuceneSearchSortedNumericSelector_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSelector, init)
+}
+
+OrgApacheLuceneSearchSortedNumericSelector *create_OrgApacheLuceneSearchSortedNumericSelector_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSelector, init)
+}
 
 OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(OrgApacheLuceneIndexSortedNumericDocValues *sortedNumeric, OrgApacheLuceneSearchSortedNumericSelector_Type *selector, OrgApacheLuceneSearchSortField_Type *numericType) {
   OrgApacheLuceneSearchSortedNumericSelector_initialize();
@@ -114,24 +128,12 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneSearchSortedNumericSelector
   }
   switch ([numericType ordinal]) {
     case OrgApacheLuceneSearchSortField_Type_Enum_FLOAT:
-    return create_OrgApacheLuceneSearchSortedNumericSelector_$1_initWithOrgApacheLuceneIndexNumericDocValues_(view);
+    return create_OrgApacheLuceneSearchSortedNumericSelector_1_initWithOrgApacheLuceneIndexNumericDocValues_(view);
     case OrgApacheLuceneSearchSortField_Type_Enum_DOUBLE:
-    return create_OrgApacheLuceneSearchSortedNumericSelector_$2_initWithOrgApacheLuceneIndexNumericDocValues_(view);
+    return create_OrgApacheLuceneSearchSortedNumericSelector_2_initWithOrgApacheLuceneIndexNumericDocValues_(view);
     default:
     return view;
   }
-}
-
-void OrgApacheLuceneSearchSortedNumericSelector_init(OrgApacheLuceneSearchSortedNumericSelector *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneSearchSortedNumericSelector *new_OrgApacheLuceneSearchSortedNumericSelector_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSelector, init)
-}
-
-OrgApacheLuceneSearchSortedNumericSelector *create_OrgApacheLuceneSearchSortedNumericSelector_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSelector, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSelector)
@@ -162,8 +164,24 @@ OrgApacheLuceneSearchSortedNumericSelector_Type *OrgApacheLuceneSearchSortedNume
   return (OrgApacheLuceneSearchSortedNumericSelector_Type_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneSearchSortedNumericSelector_Type;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSortedNumericSelector_Type;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "MIN", "LOrgApacheLuceneSearchSortedNumericSelector_Type;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "MAX", "LOrgApacheLuceneSearchSortedNumericSelector_Type;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneSearchSortedNumericSelector_Type, MIN), &JreEnum(OrgApacheLuceneSearchSortedNumericSelector_Type, MAX), "LOrgApacheLuceneSearchSortedNumericSelector;", "Ljava/lang/Enum<Lorg/apache/lucene/search/SortedNumericSelector$Type;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector_Type = { "Type", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x4019, 2, 2, 4, -1, -1, 5, -1 };
+  return &_OrgApacheLuceneSearchSortedNumericSelector_Type;
 }
 
 + (void)initialize {
@@ -172,22 +190,12 @@ OrgApacheLuceneSearchSortedNumericSelector_Type *OrgApacheLuceneSearchSortedNume
     size_t allocSize = 2 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneSearchSortedNumericSelector_Type, MIN) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortedNumericSelector_Type_initWithNSString_withInt_(e, @"MIN", 0);
-    (JreEnum(OrgApacheLuceneSearchSortedNumericSelector_Type, MAX) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSortedNumericSelector_Type_initWithNSString_withInt_(e, @"MAX", 1);
+    for (jint i = 0; i < 2; i++) {
+      ((void)(OrgApacheLuceneSearchSortedNumericSelector_Type_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneSearchSortedNumericSelector_Type_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneSearchSortedNumericSelector_Type_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSortedNumericSelector_Type)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "MIN", "MIN", 0x4019, "Lorg.apache.lucene.search.SortedNumericSelector$Type;", &JreEnum(OrgApacheLuceneSearchSortedNumericSelector_Type, MIN), NULL, .constantValue.asLong = 0 },
-    { "MAX", "MAX", 0x4019, "Lorg.apache.lucene.search.SortedNumericSelector$Type;", &JreEnum(OrgApacheLuceneSearchSortedNumericSelector_Type, MAX), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.SortedNumericSelector$Type;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector_Type = { 2, "Type", "org.apache.lucene.search", "SortedNumericSelector", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/SortedNumericSelector$Type;>;" };
-  return &_OrgApacheLuceneSearchSortedNumericSelector_Type;
 }
 
 @end
@@ -209,7 +217,7 @@ OrgApacheLuceneSearchSortedNumericSelector_Type *OrgApacheLuceneSearchSortedNume
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 
@@ -222,6 +230,106 @@ OrgApacheLuceneSearchSortedNumericSelector_Type *OrgApacheLuceneSearchSortedNume
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSelector_Type)
+
+@implementation OrgApacheLuceneSearchSortedNumericSelector_1
+
+- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0 {
+  OrgApacheLuceneSearchSortedNumericSelector_1_initWithOrgApacheLuceneIndexNumericDocValues_(self, capture$0);
+  return self;
+}
+
+- (jlong)getWithInt:(jint)docID {
+  return OrgApacheLuceneUtilNumericUtils_sortableFloatBitsWithInt_((jint) [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(val$view_)) getWithInt:docID]);
+}
+
+- (void)dealloc {
+  RELEASE_(val$view_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexNumericDocValues:);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "val$view_", "LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexNumericDocValues;", "get", "I", "LOrgApacheLuceneSearchSortedNumericSelector;", "wrapWithOrgApacheLuceneIndexSortedNumericDocValues:withOrgApacheLuceneSearchSortedNumericSelector_Type:withOrgApacheLuceneSearchSortField_Type:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8018, 2, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneSearchSortedNumericSelector_1;
+}
+
+@end
+
+void OrgApacheLuceneSearchSortedNumericSelector_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSortedNumericSelector_1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0) {
+  JreStrongAssign(&self->val$view_, capture$0);
+  OrgApacheLuceneIndexNumericDocValues_init(self);
+}
+
+OrgApacheLuceneSearchSortedNumericSelector_1 *new_OrgApacheLuceneSearchSortedNumericSelector_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSelector_1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
+}
+
+OrgApacheLuceneSearchSortedNumericSelector_1 *create_OrgApacheLuceneSearchSortedNumericSelector_1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSelector_1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
+}
+
+@implementation OrgApacheLuceneSearchSortedNumericSelector_2
+
+- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0 {
+  OrgApacheLuceneSearchSortedNumericSelector_2_initWithOrgApacheLuceneIndexNumericDocValues_(self, capture$0);
+  return self;
+}
+
+- (jlong)getWithInt:(jint)docID {
+  return OrgApacheLuceneUtilNumericUtils_sortableDoubleBitsWithLong_([((OrgApacheLuceneIndexNumericDocValues *) nil_chk(val$view_)) getWithInt:docID]);
+}
+
+- (void)dealloc {
+  RELEASE_(val$view_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexNumericDocValues:);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "val$view_", "LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexNumericDocValues;", "get", "I", "LOrgApacheLuceneSearchSortedNumericSelector;", "wrapWithOrgApacheLuceneIndexSortedNumericDocValues:withOrgApacheLuceneSearchSortedNumericSelector_Type:withOrgApacheLuceneSearchSortField_Type:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector_2 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8018, 2, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneSearchSortedNumericSelector_2;
+}
+
+@end
+
+void OrgApacheLuceneSearchSortedNumericSelector_2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSortedNumericSelector_2 *self, OrgApacheLuceneIndexNumericDocValues *capture$0) {
+  JreStrongAssign(&self->val$view_, capture$0);
+  OrgApacheLuceneIndexNumericDocValues_init(self);
+}
+
+OrgApacheLuceneSearchSortedNumericSelector_2 *new_OrgApacheLuceneSearchSortedNumericSelector_2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSelector_2, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
+}
+
+OrgApacheLuceneSearchSortedNumericSelector_2 *create_OrgApacheLuceneSearchSortedNumericSelector_2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSelector_2, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
+}
 
 @implementation OrgApacheLuceneSearchSortedNumericSelector_MinValue
 
@@ -246,14 +354,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSelector_Type
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSortedNumericDocValues:", "MinValue", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSortedNumericDocValues:);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.index.SortedNumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneIndexSortedNumericDocValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector_MinValue = { 2, "MinValue", "org.apache.lucene.search", "SortedNumericSelector", 0x8, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSortedNumericDocValues;", "get", "I", "LOrgApacheLuceneSearchSortedNumericSelector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector_MinValue = { "MinValue", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSortedNumericSelector_MinValue;
 }
 
@@ -298,14 +413,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSelector_MinV
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSortedNumericDocValues:", "MaxValue", NULL, 0x0, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSortedNumericDocValues:);
+  methods[1].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.index.SortedNumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneIndexSortedNumericDocValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector_MaxValue = { 2, "MaxValue", "org.apache.lucene.search", "SortedNumericSelector", 0x8, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSortedNumericDocValues;", "get", "I", "LOrgApacheLuceneSearchSortedNumericSelector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector_MaxValue = { "MaxValue", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSortedNumericSelector_MaxValue;
 }
 
@@ -325,95 +447,3 @@ OrgApacheLuceneSearchSortedNumericSelector_MaxValue *create_OrgApacheLuceneSearc
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSelector_MaxValue)
-
-@implementation OrgApacheLuceneSearchSortedNumericSelector_$1
-
-- (jlong)getWithInt:(jint)docID {
-  return OrgApacheLuceneUtilNumericUtils_sortableFloatBitsWithInt_((jint) [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(val$view_)) getWithInt:docID]);
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0 {
-  OrgApacheLuceneSearchSortedNumericSelector_$1_initWithOrgApacheLuceneIndexNumericDocValues_(self, capture$0);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(val$view_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexNumericDocValues:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "val$view_", NULL, 0x1012, "Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchSortedNumericSelector", "wrapWithOrgApacheLuceneIndexSortedNumericDocValues:withOrgApacheLuceneSearchSortedNumericSelector_Type:withOrgApacheLuceneSearchSortField_Type:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector_$1 = { 2, "", "org.apache.lucene.search", "SortedNumericSelector", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchSortedNumericSelector_$1;
-}
-
-@end
-
-void OrgApacheLuceneSearchSortedNumericSelector_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSortedNumericSelector_$1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0) {
-  JreStrongAssign(&self->val$view_, capture$0);
-  OrgApacheLuceneIndexNumericDocValues_init(self);
-}
-
-OrgApacheLuceneSearchSortedNumericSelector_$1 *new_OrgApacheLuceneSearchSortedNumericSelector_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSelector_$1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
-}
-
-OrgApacheLuceneSearchSortedNumericSelector_$1 *create_OrgApacheLuceneSearchSortedNumericSelector_$1_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSelector_$1, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSelector_$1)
-
-@implementation OrgApacheLuceneSearchSortedNumericSelector_$2
-
-- (jlong)getWithInt:(jint)docID {
-  return OrgApacheLuceneUtilNumericUtils_sortableDoubleBitsWithLong_([((OrgApacheLuceneIndexNumericDocValues *) nil_chk(val$view_)) getWithInt:docID]);
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0 {
-  OrgApacheLuceneSearchSortedNumericSelector_$2_initWithOrgApacheLuceneIndexNumericDocValues_(self, capture$0);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(val$view_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexNumericDocValues:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "val$view_", NULL, 0x1012, "Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchSortedNumericSelector", "wrapWithOrgApacheLuceneIndexSortedNumericDocValues:withOrgApacheLuceneSearchSortedNumericSelector_Type:withOrgApacheLuceneSearchSortField_Type:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedNumericSelector_$2 = { 2, "", "org.apache.lucene.search", "SortedNumericSelector", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchSortedNumericSelector_$2;
-}
-
-@end
-
-void OrgApacheLuceneSearchSortedNumericSelector_$2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSortedNumericSelector_$2 *self, OrgApacheLuceneIndexNumericDocValues *capture$0) {
-  JreStrongAssign(&self->val$view_, capture$0);
-  OrgApacheLuceneIndexNumericDocValues_init(self);
-}
-
-OrgApacheLuceneSearchSortedNumericSelector_$2 *new_OrgApacheLuceneSearchSortedNumericSelector_$2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSelector_$2, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
-}
-
-OrgApacheLuceneSearchSortedNumericSelector_$2 *create_OrgApacheLuceneSearchSortedNumericSelector_$2_initWithOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneIndexNumericDocValues *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSelector_$2, initWithOrgApacheLuceneIndexNumericDocValues_, capture$0)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSelector_$2)

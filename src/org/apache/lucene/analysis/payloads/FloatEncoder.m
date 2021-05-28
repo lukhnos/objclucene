@@ -11,16 +11,11 @@
 #include "org/apache/lucene/analysis/payloads/PayloadHelper.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
-@implementation OrgApacheLuceneAnalysisPayloadsFloatEncoder
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/payloads/FloatEncoder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-- (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer
-                                             withInt:(jint)offset
-                                             withInt:(jint)length {
-  jfloat payload = JavaLangFloat_parseFloatWithNSString_([NSString stringWithCharacters:buffer offset:offset length:length]);
-  IOSByteArray *bytes = OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(payload);
-  OrgApacheLuceneUtilBytesRef *result = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(bytes);
-  return result;
-}
+@implementation OrgApacheLuceneAnalysisPayloadsFloatEncoder
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -29,12 +24,28 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer
+                                             withInt:(jint)offset
+                                             withInt:(jint)length {
+  jfloat payload = JavaLangFloat_parseFloatWithNSString_([NSString java_stringWithCharacters:buffer offset:offset length:length]);
+  IOSByteArray *bytes = OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(payload);
+  OrgApacheLuceneUtilBytesRef *result = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(bytes);
+  return result;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "encodeWithCharArray:withInt:withInt:", "encode", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "init", "FloatEncoder", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsFloatEncoder = { 2, "FloatEncoder", "org.apache.lucene.analysis.payloads", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(encodeWithCharArray:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "encode", "[CII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsFloatEncoder = { "FloatEncoder", "org.apache.lucene.analysis.payloads", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPayloadsFloatEncoder;
 }
 

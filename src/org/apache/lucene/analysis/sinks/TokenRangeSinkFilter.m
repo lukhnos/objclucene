@@ -3,13 +3,15 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/sinks/TokenRangeSinkFilter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/analysis/sinks/TeeSinkTokenFilter.h"
 #include "org/apache/lucene/analysis/sinks/TokenRangeSinkFilter.h"
 #include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/sinks/TokenRangeSinkFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter () {
  @public
@@ -45,17 +47,25 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:", "TokenRangeSinkFilter", NULL, 0x1, NULL, NULL },
-    { "acceptWithOrgApacheLuceneUtilAttributeSource:", "accept", "Z", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:);
+  methods[1].selector = @selector(acceptWithOrgApacheLuceneUtilAttributeSource:);
+  methods[2].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "lower_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "upper_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "lower_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "upper_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "count_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter = { 2, "TokenRangeSinkFilter", "org.apache.lucene.analysis.sinks", NULL, 0x1, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "II", "accept", "LOrgApacheLuceneUtilAttributeSource;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter = { "TokenRangeSinkFilter", "org.apache.lucene.analysis.sinks", ptrTable, methods, fields, 7, 0x1, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter;
 }
 

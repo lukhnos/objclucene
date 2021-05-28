@@ -3,9 +3,7 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/function/ValueSourceScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/MultiFields.h"
 #include "org/apache/lucene/queries/function/FunctionValues.h"
@@ -13,6 +11,10 @@
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/util/Bits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/ValueSourceScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueriesFunctionValueSourceScorer () {
  @public
@@ -85,28 +87,44 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSourceScorer, liveDocs_, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneQueriesFunctionFunctionValues:", "ValueSourceScorer", NULL, 0x4, NULL, NULL },
-    { "getReader", NULL, "Lorg.apache.lucene.index.IndexReader;", 0x1, NULL, NULL },
-    { "setCheckDeletesWithBoolean:", "setCheckDeletes", "V", 0x1, NULL, NULL },
-    { "matchesWithInt:", "matches", "Z", 0x1, NULL, NULL },
-    { "matchesValueWithInt:", "matchesValue", "Z", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 6, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, 4, 6, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 6, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 6, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneQueriesFunctionFunctionValues:);
+  methods[1].selector = @selector(getReader);
+  methods[2].selector = @selector(setCheckDeletesWithBoolean:);
+  methods[3].selector = @selector(matchesWithInt:);
+  methods[4].selector = @selector(matchesValueWithInt:);
+  methods[5].selector = @selector(docID);
+  methods[6].selector = @selector(nextDoc);
+  methods[7].selector = @selector(advanceWithInt:);
+  methods[8].selector = @selector(score);
+  methods[9].selector = @selector(freq);
+  methods[10].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reader_", NULL, 0x14, "Lorg.apache.lucene.index.IndexReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "values_", NULL, 0x14, "Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "checkDeletes_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "liveDocs_", NULL, 0x12, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
+    { "reader_", "LOrgApacheLuceneIndexIndexReader;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "values_", "LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "checkDeletes_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "liveDocs_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSourceScorer = { 2, "ValueSourceScorer", "org.apache.lucene.queries.function", NULL, 0x1, 11, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneQueriesFunctionFunctionValues;", "setCheckDeletes", "Z", "matches", "I", "matchesValue", "LJavaIoIOException;", "advance" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSourceScorer = { "ValueSourceScorer", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x1, 11, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValueSourceScorer;
 }
 

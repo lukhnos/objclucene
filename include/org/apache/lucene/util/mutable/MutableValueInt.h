@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueInt
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMutableMutableValueInt_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueInt || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueInt))
 #define OrgApacheLuceneUtilMutableMutableValueInt_
 
@@ -23,7 +29,7 @@
 /*!
  @brief <code>MutableValue</code> implementation of type <code>int</code>.
  When mutating instances of this object, the caller is responsible for ensuring 
- that any instance where <code>exists</code> is set to <code>false</code> must also 
+  that any instance where <code>exists</code> is set to <code>false</code> must also  
  <code>value</code> set to <code>0</code> for proper operation.
  */
 @interface OrgApacheLuceneUtilMutableMutableValueInt : OrgApacheLuceneUtilMutableMutableValue {
@@ -33,7 +39,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)compareSameTypeWithId:(id)other;
 
@@ -53,12 +59,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilMutableMutableValueInt)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueInt_init(OrgApacheLuceneUtilMutableMutableValueInt *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueInt *new_OrgApacheLuceneUtilMutableMutableValueInt_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueInt *new_OrgApacheLuceneUtilMutableMutableValueInt_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueInt *create_OrgApacheLuceneUtilMutableMutableValueInt_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueInt *create_OrgApacheLuceneUtilMutableMutableValueInt_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueInt)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueInt")

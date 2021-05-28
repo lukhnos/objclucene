@@ -6,10 +6,9 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Collection.h"
-#include "org/apache/lucene/store/AlreadyClosedException.h"
 #include "org/apache/lucene/store/BufferedChecksumIndexInput.h"
 #include "org/apache/lucene/store/ChecksumIndexInput.h"
 #include "org/apache/lucene/store/Directory.h"
@@ -19,7 +18,18 @@
 #include "org/apache/lucene/store/Lock.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/Directory must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneStoreDirectory
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneStoreDirectory_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSObjectArray *)listAll {
   // can't call an abstract method
@@ -80,7 +90,7 @@
 }
 
 - (NSString *)description {
-  return JreStrcat("$C$", [[self getClass] getSimpleName], '@', JavaLangInteger_toHexStringWithInt_(((jint) [self hash])));
+  return JreStrcat("$C$", [[self java_getClass] getSimpleName], '@', JavaLangInteger_toHexStringWithInt_(((jint) [self hash])));
 }
 
 - (void)copyFromWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)from
@@ -90,15 +100,15 @@
   jboolean success = false;
   @try {
     OrgApacheLuceneStoreIndexInput *is = [((OrgApacheLuceneStoreDirectory *) nil_chk(from)) openInputWithNSString:src withOrgApacheLuceneStoreIOContext:context];
-    NSException *__primaryException2 = nil;
+    JavaLangThrowable *__primaryException2 = nil;
     @try {
       OrgApacheLuceneStoreIndexOutput *os = [self createOutputWithNSString:dest withOrgApacheLuceneStoreIOContext:context];
-      NSException *__primaryException1 = nil;
+      JavaLangThrowable *__primaryException1 = nil;
       @try {
         [((OrgApacheLuceneStoreIndexOutput *) nil_chk(os)) copyBytesWithOrgApacheLuceneStoreDataInput:is withLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(is)) length]];
         success = true;
       }
-      @catch (NSException *e) {
+      @catch (JavaLangThrowable *e) {
         __primaryException1 = e;
         @throw e;
       }
@@ -107,16 +117,18 @@
           if (__primaryException1 != nil) {
             @try {
               [os close];
-            } @catch (NSException *e) {
-              [__primaryException1 addSuppressedWithNSException:e];
             }
-          } else {
+            @catch (JavaLangThrowable *e) {
+              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            }
+          }
+          else {
             [os close];
           }
         }
       }
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException2 = e;
       @throw e;
     }
@@ -125,10 +137,12 @@
         if (__primaryException2 != nil) {
           @try {
             [is close];
-          } @catch (NSException *e) {
-            [__primaryException2 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException2 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [is close];
         }
       }
@@ -144,31 +158,43 @@
 - (void)ensureOpen {
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneStoreDirectory_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "listAll", NULL, "[Ljava.lang.String;", 0x401, "Ljava.io.IOException;", NULL },
-    { "deleteFileWithNSString:", "deleteFile", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "fileLengthWithNSString:", "fileLength", "J", 0x401, "Ljava.io.IOException;", NULL },
-    { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x401, "Ljava.io.IOException;", NULL },
-    { "syncWithJavaUtilCollection:", "sync", "V", 0x401, "Ljava.io.IOException;", "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
-    { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x401, "Ljava.io.IOException;", NULL },
-    { "openChecksumInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openChecksumInput", "Lorg.apache.lucene.store.ChecksumIndexInput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "obtainLockWithNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x401, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "copyFromWithOrgApacheLuceneStoreDirectory:withNSString:withNSString:withOrgApacheLuceneStoreIOContext:", "copyFrom", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "ensureOpen", NULL, "V", 0x4, "Lorg.apache.lucene.store.AlreadyClosedException;", NULL },
-    { "init", "Directory", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LNSString;", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, 1, 2, 0, -1, -1, -1 },
+    { NULL, "J", 0x401, 3, 2, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexOutput;", 0x401, 4, 5, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, 6, 7, 0, 8, -1, -1 },
+    { NULL, "V", 0x401, 9, 10, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x401, 11, 5, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreChecksumIndexInput;", 0x1, 12, 5, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreLock;", 0x401, 13, 2, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 14, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 16, 0, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 17, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreDirectory = { 2, "Directory", "org.apache.lucene.store", NULL, 0x401, 14, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(listAll);
+  methods[2].selector = @selector(deleteFileWithNSString:);
+  methods[3].selector = @selector(fileLengthWithNSString:);
+  methods[4].selector = @selector(createOutputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[5].selector = @selector(syncWithJavaUtilCollection:);
+  methods[6].selector = @selector(renameFileWithNSString:withNSString:);
+  methods[7].selector = @selector(openInputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[8].selector = @selector(openChecksumInputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[9].selector = @selector(obtainLockWithNSString:);
+  methods[10].selector = @selector(close);
+  methods[11].selector = @selector(description);
+  methods[12].selector = @selector(copyFromWithOrgApacheLuceneStoreDirectory:withNSString:withNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[13].selector = @selector(ensureOpen);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;", "deleteFile", "LNSString;", "fileLength", "createOutput", "LNSString;LOrgApacheLuceneStoreIOContext;", "sync", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/String;>;)V", "renameFile", "LNSString;LNSString;", "openInput", "openChecksumInput", "obtainLock", "toString", "copyFrom", "LOrgApacheLuceneStoreDirectory;LNSString;LNSString;LOrgApacheLuceneStoreIOContext;", "LOrgApacheLuceneStoreAlreadyClosedException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreDirectory = { "Directory", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x401, 14, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreDirectory;
 }
 

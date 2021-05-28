@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesTermsQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesTermsQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueriesTermsQuery || defined(INCLUDE_OrgApacheLuceneQueriesTermsQuery))
 #define OrgApacheLuceneQueriesTermsQuery_
 
@@ -32,58 +38,55 @@
 @protocol JavaUtilList;
 
 /*!
- @brief Specialization for a disjunction over many terms that behaves like a
- <code>ConstantScoreQuery</code> over a <code>BooleanQuery</code> containing only
+ @brief Specialization for a disjunction over many terms that behaves like a 
+ <code>ConstantScoreQuery</code> over a <code>BooleanQuery</code> containing only 
  <code>org.apache.lucene.search.BooleanClause.Occur.SHOULD</code> clauses.
  <p>For instance in the following example, both @@{code q1} and <code>q2</code>
- would yield the same scores:
+  would yield the same scores: 
  <pre class="prettyprint">
- Query q1 = new TermsQuery(new Term("field", "foo"), new Term("field", "bar"));
- BooleanQuery bq = new BooleanQuery();
- bq.add(new TermQuery(new Term("field", "foo")), Occur.SHOULD);
- bq.add(new TermQuery(new Term("field", "bar")), Occur.SHOULD);
- Query q2 = new ConstantScoreQuery(bq);
+  Query q1 = new TermsQuery(new Term("field", "foo"), new Term("field", "bar"));
+  BooleanQuery bq = new BooleanQuery();
+  bq.add(new TermQuery(new Term("field", "foo")), Occur.SHOULD);
+  bq.add(new TermQuery(new Term("field", "bar")), Occur.SHOULD);
+  Query q2 = new ConstantScoreQuery(bq); 
  
 @endcode
- <p>When there are few terms, this query executes like a regular disjunction.
- However, when there are many terms, instead of merging iterators on the fly,
- it will populate a bit set with matching docs and return a <code>Scorer</code>
- over this bit set.
+  <p>When there are few terms, this query executes like a regular disjunction.
+  However, when there are many terms, instead of merging iterators on the fly,
+  it will populate a bit set with matching docs and return a <code>Scorer</code>
+  over this bit set. 
  <p>NOTE: This query produces scores that are equal to its boost
  */
 @interface OrgApacheLuceneQueriesTermsQuery : OrgApacheLuceneSearchQuery < OrgApacheLuceneUtilAccountable >
-
-+ (jint)BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD;
+@property (readonly, class) jint BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD NS_SWIFT_NAME(BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD);
 
 #pragma mark Public
 
 /*!
- @brief Creates a new <code>TermsQuery</code> from the given list.
- The list
- can contain duplicate terms and multiple fields.
+ @brief Creates a new <code>TermsQuery</code> from the given list.The list
+  can contain duplicate terms and multiple fields.
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)terms;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)terms;
 
 /*!
  @brief Creates a new <code>TermsQuery</code> from the given <code>BytesRef</code> array for
- a single field.
+  a single field.
  */
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+      withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 
 /*!
  @brief Creates a new <code>TermsQuery</code> from the given <code>BytesRef</code> list for
- a single field.
+  a single field.
  */
-- (instancetype)initWithNSString:(NSString *)field
-                withJavaUtilList:(id<JavaUtilList>)terms;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                          withJavaUtilList:(id<JavaUtilList>)terms;
 
 /*!
- @brief Creates a new <code>TermsQuery</code> from the given array.
- The array can
- contain duplicate terms and multiple fields.
+ @brief Creates a new <code>TermsQuery</code> from the given array.The array can
+  contain duplicate terms and multiple fields.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -94,17 +97,23 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 
 - (NSUInteger)hash;
 
+- (OrgApacheLuceneSearchQuery *)java_clone;
+
 - (jlong)ramBytesUsed;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneQueriesTermsQuery)
 
-inline jint OrgApacheLuceneQueriesTermsQuery_get_BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD();
+inline jint OrgApacheLuceneQueriesTermsQuery_get_BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD(void);
 #define OrgApacheLuceneQueriesTermsQuery_BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD 16
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesTermsQuery, BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD, jint)
 
@@ -136,4 +145,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesTermsQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesTermsQuery")

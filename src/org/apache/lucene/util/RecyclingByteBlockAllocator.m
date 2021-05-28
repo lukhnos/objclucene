@@ -15,6 +15,10 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/RecyclingByteBlockAllocator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/RecyclingByteBlockAllocator must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilRecyclingByteBlockAllocator () {
  @public
   IOSObjectArray *freeByteBlocks_;
@@ -83,7 +87,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     IOSObjectArray_Set(nil_chk(blocks), i, nil);
   }
   [((OrgApacheLuceneUtilCounter *) nil_chk(bytesUsed_)) addAndGetWithLong:-(end - stop) * blockSize_];
-  JreAssert(([bytesUsed_ get] >= 0), (@"org/apache/lucene/util/RecyclingByteBlockAllocator.java:108 condition failed: assert bytesUsed.get() >= 0;"));
+  JreAssert([bytesUsed_ get] >= 0, @"org/apache/lucene/util/RecyclingByteBlockAllocator.java:108 condition failed: assert bytesUsed.get() >= 0;");
 }
 
 - (jint)numBufferedBlocks {
@@ -99,7 +103,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)freeBlocksWithInt:(jint)num {
-  JreAssert((num >= 0), (JreStrcat("$I", @"free blocks must be >= 0 but was: ", num)));
+  JreAssert(num >= 0, JreStrcat("$I", @"free blocks must be >= 0 but was: ", num));
   jint stop;
   jint count;
   if (num > freeBlocks_) {
@@ -114,7 +118,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     IOSObjectArray_Set(nil_chk(freeByteBlocks_), --freeBlocks_, nil);
   }
   [((OrgApacheLuceneUtilCounter *) nil_chk(bytesUsed_)) addAndGetWithLong:-count * blockSize_];
-  JreAssert(([bytesUsed_ get] >= 0), (@"org/apache/lucene/util/RecyclingByteBlockAllocator.java:154 condition failed: assert bytesUsed.get() >= 0;"));
+  JreAssert([bytesUsed_ get] >= 0, @"org/apache/lucene/util/RecyclingByteBlockAllocator.java:154 condition failed: assert bytesUsed.get() >= 0;");
   return count;
 }
 
@@ -125,25 +129,39 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withOrgApacheLuceneUtilCounter:", "RecyclingByteBlockAllocator", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withInt:", "RecyclingByteBlockAllocator", NULL, 0x1, NULL, NULL },
-    { "init", "RecyclingByteBlockAllocator", NULL, 0x1, NULL, NULL },
-    { "getByteBlock", NULL, "[B", 0x1, NULL, NULL },
-    { "recycleByteBlocksWithByteArray2:withInt:withInt:", "recycleByteBlocks", "V", 0x1, NULL, NULL },
-    { "numBufferedBlocks", NULL, "I", 0x1, NULL, NULL },
-    { "bytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "maxBufferedBlocks", NULL, "I", 0x1, NULL, NULL },
-    { "freeBlocksWithInt:", "freeBlocks", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:withOrgApacheLuceneUtilCounter:);
+  methods[1].selector = @selector(initWithInt:withInt:);
+  methods[2].selector = @selector(init);
+  methods[3].selector = @selector(getByteBlock);
+  methods[4].selector = @selector(recycleByteBlocksWithByteArray2:withInt:withInt:);
+  methods[5].selector = @selector(numBufferedBlocks);
+  methods[6].selector = @selector(bytesUsed);
+  methods[7].selector = @selector(maxBufferedBlocks);
+  methods[8].selector = @selector(freeBlocksWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "freeByteBlocks_", NULL, 0x2, "[[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxBufferedBlocks_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freeBlocks_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesUsed_", NULL, 0x12, "Lorg.apache.lucene.util.Counter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_BUFFERED_BLOCKS", "DEFAULT_BUFFERED_BLOCKS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilRecyclingByteBlockAllocator_DEFAULT_BUFFERED_BLOCKS },
+    { "freeByteBlocks_", "[[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxBufferedBlocks_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "freeBlocks_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bytesUsed_", "LOrgApacheLuceneUtilCounter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "DEFAULT_BUFFERED_BLOCKS", "I", .constantValue.asInt = OrgApacheLuceneUtilRecyclingByteBlockAllocator_DEFAULT_BUFFERED_BLOCKS, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRecyclingByteBlockAllocator = { 2, "RecyclingByteBlockAllocator", "org.apache.lucene.util", NULL, 0x11, 9, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IILOrgApacheLuceneUtilCounter;", "II", "recycleByteBlocks", "[[BII", "freeBlocks", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRecyclingByteBlockAllocator = { "RecyclingByteBlockAllocator", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 9, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilRecyclingByteBlockAllocator;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedAbstractPagedMutable
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedAbstractPagedMutable_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractPagedMutable || defined(INCLUDE_OrgApacheLuceneUtilPackedAbstractPagedMutable))
 #define OrgApacheLuceneUtilPackedAbstractPagedMutable_
 
@@ -39,10 +45,8 @@
   IOSObjectArray *subMutables_;
   jint bitsPerValue_;
 }
-
-+ (jint)MIN_BLOCK_SIZE;
-
-+ (jint)MAX_BLOCK_SIZE;
+@property (readonly, class) jint MIN_BLOCK_SIZE NS_SWIFT_NAME(MIN_BLOCK_SIZE);
+@property (readonly, class) jint MAX_BLOCK_SIZE NS_SWIFT_NAME(MAX_BLOCK_SIZE);
 
 #pragma mark Public
 
@@ -53,22 +57,21 @@
 /*!
  @brief Similar to <code>ArrayUtil.grow(long[])</code>.
  */
-- (id)grow;
+- (OrgApacheLuceneUtilPackedAbstractPagedMutable *)grow;
 
 /*!
- @brief Similar to <code>ArrayUtil.grow(long[],int)</code>.
+ @brief Similar to <code>ArrayUtil.grow(long[], int)</code>.
  */
-- (id)growWithLong:(jlong)minSize;
+- (OrgApacheLuceneUtilPackedAbstractPagedMutable *)growWithLong:(jlong)minSize;
 
 - (jlong)ramBytesUsed;
 
 /*!
  @brief Create a new copy of size <code>newSize</code> based on the content of
- this buffer.
- This method is much more efficient than creating a new
- instance and copying values one by one. 
+   this buffer.This method is much more efficient than creating a new
+   instance and copying values one by one.
  */
-- (id)resizeWithLong:(jlong)newSize;
+- (OrgApacheLuceneUtilPackedAbstractPagedMutable *)resizeWithLong:(jlong)newSize;
 
 /*!
  @brief Set value at <code>index</code>.
@@ -92,13 +95,13 @@
 - (OrgApacheLuceneUtilPackedPackedInts_Mutable *)newMutableWithInt:(jint)valueCount
                                                            withInt:(jint)bitsPerValue OBJC_METHOD_FAMILY_NONE;
 
-- (id)newUnfilledCopyWithLong:(jlong)newSize OBJC_METHOD_FAMILY_NONE;
+- (OrgApacheLuceneUtilPackedAbstractPagedMutable *)newUnfilledCopyWithLong:(jlong)newSize OBJC_METHOD_FAMILY_NONE;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)bitsPerValue
-                   withLong:(jlong)size
-                    withInt:(jint)pageSize;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)bitsPerValue
+                                           withLong:(jlong)size
+                                            withInt:(jint)pageSize;
 
 - (jint)indexInPageWithLong:(jlong)index;
 
@@ -108,24 +111,32 @@
 
 - (jint)pageSize;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedAbstractPagedMutable)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedAbstractPagedMutable, subMutables_, IOSObjectArray *)
 
-inline jint OrgApacheLuceneUtilPackedAbstractPagedMutable_get_MIN_BLOCK_SIZE();
+inline jint OrgApacheLuceneUtilPackedAbstractPagedMutable_get_MIN_BLOCK_SIZE(void);
 #define OrgApacheLuceneUtilPackedAbstractPagedMutable_MIN_BLOCK_SIZE 64
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedAbstractPagedMutable, MIN_BLOCK_SIZE, jint)
 
-inline jint OrgApacheLuceneUtilPackedAbstractPagedMutable_get_MAX_BLOCK_SIZE();
+inline jint OrgApacheLuceneUtilPackedAbstractPagedMutable_get_MAX_BLOCK_SIZE(void);
 #define OrgApacheLuceneUtilPackedAbstractPagedMutable_MAX_BLOCK_SIZE 1073741824
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedAbstractPagedMutable, MAX_BLOCK_SIZE, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedAbstractPagedMutable_initWithInt_withLong_withInt_(OrgApacheLuceneUtilPackedAbstractPagedMutable *self, jint bitsPerValue, jlong size, jint pageSize);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedAbstractPagedMutable_initPackagePrivateWithInt_withLong_withInt_(OrgApacheLuceneUtilPackedAbstractPagedMutable *self, jint bitsPerValue, jlong size, jint pageSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedAbstractPagedMutable)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractPagedMutable")

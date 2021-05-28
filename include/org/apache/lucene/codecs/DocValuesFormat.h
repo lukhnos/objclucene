@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsDocValuesFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsDocValuesFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsDocValuesFormat || defined(INCLUDE_OrgApacheLuceneCodecsDocValuesFormat))
 #define OrgApacheLuceneCodecsDocValuesFormat_
 
@@ -30,16 +36,15 @@
 /*!
  @brief Encodes/decodes per-document values.
  <p>
- Note, when extending this class, the name (<code>getName</code>) may
- written into the index in certain configurations. In order for the segment 
- to be read, the name must resolve to your implementation via <code>forName(String)</code>.
- This method uses Java's 
- <code>Service Provider Interface</code> (SPI) to resolve format names.
+  Note, when extending this class, the name (<code>getName</code>) may
+  written into the index in certain configurations. In order for the segment 
+  to be read, the name must resolve to your implementation via <code>forName(String)</code>.
+  This method uses Java's  
+ <code>Service Provider Interface</code> (SPI) to resolve format names. 
  <p>
- If you implement your own format, make sure that it has a no-arg constructor
- so SPI can load it.
+  If you implement your own format, make sure that it has a no-arg constructor
+  so SPI can load it.
  - seealso: ServiceLoader
-  
  */
 @interface OrgApacheLuceneCodecsDocValuesFormat : NSObject < OrgApacheLuceneUtilNamedSPILoader_NamedSPI >
 
@@ -52,19 +57,19 @@
 
 /*!
  @brief Returns a <code>DocValuesConsumer</code> to write docvalues to the
- index.
+   index.
  */
 - (OrgApacheLuceneCodecsDocValuesConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
 /*!
  @brief Returns a <code>DocValuesProducer</code> to read docvalues from the index.
  <p>
- NOTE: by the time this call returns, it must hold open any files it will 
- need to use; else, those files may be deleted. Additionally, required files 
- may be deleted during the execution of this call before there is a chance 
- to open them. Under these circumstances an IOException should be thrown by 
- the implementation. IOExceptions are expected and will automatically cause 
- a retry of the segment opening logic with the newly revised segments.
+  NOTE: by the time this call returns, it must hold open any files it will 
+  need to use; else, those files may be deleted. Additionally, required files 
+  may be deleted during the execution of this call before there is a chance 
+  to open them. Under these circumstances an IOException should be thrown by 
+  the implementation. IOExceptions are expected and will automatically cause 
+  a retry of the segment opening logic with the newly revised segments.
  */
 - (OrgApacheLuceneCodecsDocValuesProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
@@ -78,11 +83,11 @@
 /*!
  @brief Reloads the DocValues format list from the given <code>ClassLoader</code>.
  Changes to the docvalues formats are visible after the method ends, all
- iterators (<code>availableDocValuesFormats()</code>,...) stay consistent. 
+  iterators (<code>availableDocValuesFormats()</code>,...) stay consistent.   
  <p><b>NOTE:</b> Only new docvalues formats are added, existing ones are
- never removed or replaced.
+  never removed or replaced.  
  <p><em>This method is expensive and should only be called for discovery
- of new docvalues formats on the given classpath/classloader!</em>
+  of new docvalues formats on the given classpath/classloader!</em>
  */
 + (void)reloadDocValuesFormatsWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
@@ -93,13 +98,17 @@
 /*!
  @brief Creates a new docvalues format.
  <p>
- The provided name will be written into the index segment in some configurations
- (such as when using <code>PerFieldDocValuesFormat</code>): in such configurations,
- for the segment to be read this class should be registered with Java's
- SPI mechanism (registered in META-INF/ of your jar file, etc).
+  The provided name will be written into the index segment in some configurations
+  (such as when using <code>PerFieldDocValuesFormat</code>): in such configurations,
+  for the segment to be read this class should be registered with Java's
+  SPI mechanism (registered in META-INF/ of your jar file, etc).
  @param name must be all ascii alphanumeric, and less than 128 characters in length.
  */
-- (instancetype)initWithNSString:(NSString *)name;
+- (instancetype __nonnull)initWithNSString:(NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -109,7 +118,7 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsDocValuesFormat_initWithNSString_(Or
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsDocValuesFormat *OrgApacheLuceneCodecsDocValuesFormat_forNameWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneCodecsDocValuesFormat_availableDocValuesFormats();
+FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneCodecsDocValuesFormat_availableDocValuesFormats(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsDocValuesFormat_reloadDocValuesFormatsWithJavaLangClassLoader_(JavaLangClassLoader *classloader);
 
@@ -117,4 +126,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsDocValuesFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsDocValuesFormat")

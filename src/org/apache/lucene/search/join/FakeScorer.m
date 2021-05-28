@@ -3,21 +3,21 @@
 //  source: ./join/src/java/org/apache/lucene/search/join/FakeScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/join/FakeScorer.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/FakeScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchJoinFakeScorer
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchJoinFakeScorer_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneSearchJoinFakeScorer_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)docID {
   return doc_;
@@ -44,38 +44,50 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "FakeScorer", NULL, 0x0, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, 0, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 0, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(docID);
+  methods[2].selector = @selector(nextDoc);
+  methods[3].selector = @selector(advanceWithInt:);
+  methods[4].selector = @selector(cost);
+  methods[5].selector = @selector(freq);
+  methods[6].selector = @selector(score);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "score_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "score_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "freq_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinFakeScorer = { 2, "FakeScorer", "org.apache.lucene.search.join", NULL, 0x0, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoIOException;", "advance", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinFakeScorer = { "FakeScorer", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x0, 7, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinFakeScorer;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinFakeScorer_init(OrgApacheLuceneSearchJoinFakeScorer *self) {
+void OrgApacheLuceneSearchJoinFakeScorer_initPackagePrivate(OrgApacheLuceneSearchJoinFakeScorer *self) {
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, nil);
   self->doc_ = -1;
   self->freq_ = 1;
 }
 
-OrgApacheLuceneSearchJoinFakeScorer *new_OrgApacheLuceneSearchJoinFakeScorer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinFakeScorer, init)
+OrgApacheLuceneSearchJoinFakeScorer *new_OrgApacheLuceneSearchJoinFakeScorer_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinFakeScorer, initPackagePrivate)
 }
 
-OrgApacheLuceneSearchJoinFakeScorer *create_OrgApacheLuceneSearchJoinFakeScorer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinFakeScorer, init)
+OrgApacheLuceneSearchJoinFakeScorer *create_OrgApacheLuceneSearchJoinFakeScorer_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinFakeScorer, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinFakeScorer)

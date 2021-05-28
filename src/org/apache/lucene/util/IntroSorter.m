@@ -8,6 +8,10 @@
 #include "org/apache/lucene/util/IntroSorter.h"
 #include "org/apache/lucene/util/Sorter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/IntroSorter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilIntroSorter
 
 + (jint)ceilLog2WithInt:(jint)n {
@@ -82,15 +86,26 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "ceilLog2WithInt:", "ceilLog2", "I", 0x8, NULL, NULL },
-    { "init", "IntroSorter", NULL, 0x1, NULL, NULL },
-    { "sortWithInt:withInt:", "sort", "V", 0x11, NULL, NULL },
-    { "quicksortWithInt:withInt:withInt:", "quicksort", "V", 0x0, NULL, NULL },
-    { "setPivotWithInt:", "setPivot", "V", 0x404, NULL, NULL },
-    { "comparePivotWithInt:", "comparePivot", "I", 0x404, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "I", 0x8, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x404, 6, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x404, 7, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntroSorter = { 2, "IntroSorter", "org.apache.lucene.util", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(ceilLog2WithInt:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(sortWithInt:withInt:);
+  methods[3].selector = @selector(quicksortWithInt:withInt:withInt:);
+  methods[4].selector = @selector(setPivotWithInt:);
+  methods[5].selector = @selector(comparePivotWithInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "ceilLog2", "I", "sort", "II", "quicksort", "III", "setPivot", "comparePivot" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntroSorter = { "IntroSorter", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x401, 6, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilIntroSorter;
 }
 

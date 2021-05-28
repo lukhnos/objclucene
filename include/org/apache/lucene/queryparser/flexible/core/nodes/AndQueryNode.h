@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_
 
@@ -26,17 +32,16 @@
 
 /*!
  @brief A <code>AndQueryNode</code> represents an AND boolean operation performed on a
- list of nodes.
+  list of nodes.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode
 
 #pragma mark Public
 
 /*!
- @param clauses
- - the query nodes to be and'ed
+ @param clauses - the query nodes to be and'ed
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)clauses;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
@@ -56,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNo
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode")

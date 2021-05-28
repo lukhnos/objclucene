@@ -6,12 +6,12 @@
 /*!
  @brief This package contains SrndQuery and its subclasses.
  <p>
- The parser in the org.apache.lucene.queryparser.surround.parser package
- normally generates a SrndQuery.
+   The parser in the org.apache.lucene.queryparser.surround.parser package
+   normally generates a SrndQuery.  
  <p>
- For searching an org.apache.lucene.search.Query is provided by
- the SrndQuery.makeLuceneQueryField method.
- For this, TermQuery, BooleanQuery and SpanQuery are used from Lucene.
+   For searching an org.apache.lucene.search.Query is provided by
+   the SrndQuery.makeLuceneQueryField method.
+   For this, TermQuery, BooleanQuery and SpanQuery are used from Lucene.
  */
 #include "J2ObjC_header.h"
 
@@ -23,4 +23,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryPackage_info")

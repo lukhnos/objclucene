@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_
 
@@ -25,27 +31,24 @@
 @protocol JavaUtilCollection;
 
 /*!
- @brief A filter to apply normal capitalization rules to Tokens.
- It will make the first letter
- capital and the rest lower case.
+ @brief A filter to apply normal capitalization rules to Tokens.It will make the first letter
+  capital and the rest lower case.
  <p>
- This filter is particularly useful to build nice looking facet parameters.  This filter
- is not appropriate if you intend to use a prefix query.
+  This filter is particularly useful to build nice looking facet parameters.  This filter
+  is not appropriate if you intend to use a prefix query.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter : OrgApacheLuceneAnalysisTokenFilter
-
-+ (jint)DEFAULT_MAX_WORD_COUNT;
-
-+ (jint)DEFAULT_MAX_TOKEN_LENGTH;
+@property (readonly, class) jint DEFAULT_MAX_WORD_COUNT NS_SWIFT_NAME(DEFAULT_MAX_WORD_COUNT);
+@property (readonly, class) jint DEFAULT_MAX_TOKEN_LENGTH NS_SWIFT_NAME(DEFAULT_MAX_TOKEN_LENGTH);
 
 #pragma mark Public
 
 /*!
  @brief Creates a CapitalizationFilter with the default parameters.
  <p>
- Calls <code>CapitalizationFilter(in, true, null, true, null, 0, DEFAULT_MAX_WORD_COUNT, DEFAULT_MAX_TOKEN_LENGTH)</code>
+  Calls <code>CapitalizationFilter(in, true, null, true, null, 0, DEFAULT_MAX_WORD_COUNT, DEFAULT_MAX_TOKEN_LENGTH)</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 /*!
  @brief Creates a CapitalizationFilter with the specified parameters.
@@ -54,20 +57,19 @@
  @param keep a keep word list.  Each word that should be kept separated by whitespace.
  @param forceFirstLetter Force the first letter to be capitalized even if it is in the keep list.
  @param okPrefix do not change word capitalization if a word begins with something in this list.
- @param minWordLength how long the word needs to be to get capitalization applied.  If the
- minWordLength is 3, "and" &gt; "And" but "or" stays "or".
- @param maxWordCount if the token contains more then maxWordCount words, the capitalization is
- assumed to be correct.
+ @param minWordLength how long the word needs to be to get capitalization applied.  If the                       minWordLength is 3, "and" 
+  &gt;  "And" but "or" stays "or".
+ @param maxWordCount if the token contains more then maxWordCount words, the capitalization is                      assumed to be correct.
  @param maxTokenLength ???
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                               withBoolean:(jboolean)onlyFirstWord
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)keep
-                                               withBoolean:(jboolean)forceFirstLetter
-                                    withJavaUtilCollection:(id<JavaUtilCollection>)okPrefix
-                                                   withInt:(jint)minWordLength
-                                                   withInt:(jint)maxWordCount
-                                                   withInt:(jint)maxTokenLength;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                         withBoolean:(jboolean)onlyFirstWord
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)keep
+                                                         withBoolean:(jboolean)forceFirstLetter
+                                              withJavaUtilCollection:(id<JavaUtilCollection>)okPrefix
+                                                             withInt:(jint)minWordLength
+                                                             withInt:(jint)maxWordCount
+                                                             withInt:(jint)maxTokenLength;
 
 - (jboolean)incrementToken;
 
@@ -75,11 +77,11 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter)
 
-inline jint OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_get_DEFAULT_MAX_WORD_COUNT();
+inline jint OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_get_DEFAULT_MAX_WORD_COUNT(void);
 #define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_WORD_COUNT 2147483647
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter, DEFAULT_MAX_WORD_COUNT, jint)
 
-inline jint OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_get_DEFAULT_MAX_TOKEN_LENGTH();
+inline jint OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_get_DEFAULT_MAX_TOKEN_LENGTH(void);
 #define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_TOKEN_LENGTH 2147483647
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter, DEFAULT_MAX_TOKEN_LENGTH, jint)
 
@@ -99,4 +101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter")

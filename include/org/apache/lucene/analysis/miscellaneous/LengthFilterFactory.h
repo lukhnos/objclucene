@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_
 
@@ -27,12 +33,12 @@
 /*!
  @brief Factory for <code>LengthFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_lngth" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.LengthFilterFactory" min="0" max="1" /&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_lngth" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.LengthFilterFactory" min="0" max="1" /&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
@@ -40,17 +46,15 @@
   jint min_;
   jint max_;
 }
-
-+ (NSString *)MIN_KEY;
-
-+ (NSString *)MAX_KEY;
+@property (readonly, copy, class) NSString *MIN_KEY NS_SWIFT_NAME(MIN_KEY);
+@property (readonly, copy, class) NSString *MAX_KEY NS_SWIFT_NAME(MAX_KEY);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new LengthFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -58,12 +62,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_get_MIN_KEY();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_get_MIN_KEY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MIN_KEY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory, MIN_KEY, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_get_MAX_KEY();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_get_MAX_KEY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory, MAX_KEY, NSString *)
@@ -78,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFacto
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory")

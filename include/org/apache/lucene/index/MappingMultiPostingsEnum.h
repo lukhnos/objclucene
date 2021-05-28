@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMappingMultiPostingsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMappingMultiPostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexMappingMultiPostingsEnum || defined(INCLUDE_OrgApacheLuceneIndexMappingMultiPostingsEnum))
 #define OrgApacheLuceneIndexMappingMultiPostingsEnum_
 
@@ -28,7 +34,7 @@
 
 /*!
  @brief Exposes flex API, merged from flex API of sub-segments,
- remapping docIDs (this is used for segment merging).
+  remapping docIDs (this is used for segment merging).
  */
 @interface OrgApacheLuceneIndexMappingMultiPostingsEnum : OrgApacheLuceneIndexPostingsEnum {
  @public
@@ -47,8 +53,8 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field
+                      withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -83,6 +89,10 @@ withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
 - (OrgApacheLuceneIndexMappingMultiPostingsEnum *)resetWithOrgApacheLuceneIndexMultiPostingsEnum:(OrgApacheLuceneIndexMultiPostingsEnum *)postingsEnum;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMappingMultiPostingsEnum)
@@ -92,14 +102,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMappingMultiPostingsEnum, current_, OrgA
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMappingMultiPostingsEnum, multiDocsAndPositionsEnum_, OrgApacheLuceneIndexMultiPostingsEnum *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMappingMultiPostingsEnum, field_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMappingMultiPostingsEnum *self, NSString *field, OrgApacheLuceneIndexMergeState *mergeState);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexMappingMultiPostingsEnum_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMappingMultiPostingsEnum *self, NSString *field, OrgApacheLuceneIndexMergeState *mergeState);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMappingMultiPostingsEnum *new_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexMappingMultiPostingsEnum *new_OrgApacheLuceneIndexMappingMultiPostingsEnum_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMappingMultiPostingsEnum *create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState);
+FOUNDATION_EXPORT OrgApacheLuceneIndexMappingMultiPostingsEnum *create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMappingMultiPostingsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMappingMultiPostingsEnum")

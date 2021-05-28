@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsFilterCodec
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsFilterCodec_) && (INCLUDE_ALL_OrgApacheLuceneCodecsFilterCodec || defined(INCLUDE_OrgApacheLuceneCodecsFilterCodec))
 #define OrgApacheLuceneCodecsFilterCodec_
 
@@ -33,25 +39,25 @@
 /*!
  @brief A codec that forwards all its method calls to another codec.
  <p>
- Extend this class when you need to reuse the functionality of an existing
- codec. For example, if you want to build a codec that redefines LuceneMN's
+  Extend this class when you need to reuse the functionality of an existing
+  codec. For example, if you want to build a codec that redefines LuceneMN's 
  <code>LiveDocsFormat</code>:
- <pre class="prettyprint">
- public final class CustomCodec extends FilterCodec {
- public CustomCodec() {
- super("CustomCodec", new LuceneMNCodec());
- }
- public LiveDocsFormat liveDocsFormat() {
- return new CustomLiveDocsFormat();
- }
- }
+  <pre class="prettyprint">
+    public final class CustomCodec extends FilterCodec {
+      public CustomCodec() {
+        super("CustomCodec", new LuceneMNCodec());
+      }
+      public LiveDocsFormat liveDocsFormat() {
+        return new CustomLiveDocsFormat();
+      }   } 
  
 @endcode
+   
  <p><em>Please note:</em> Don't call <code>Codec.forName</code> from
- the no-arg constructor of your own codec. When the SPI framework
- loads your own Codec as SPI component, SPI has not yet fully initialized!
- If you want to extend another Codec, instantiate it directly by calling
- its constructor.
+  the no-arg constructor of your own codec. When the SPI framework
+  loads your own Codec as SPI component, SPI has not yet fully initialized!
+  If you want to extend another Codec, instantiate it directly by calling
+  its constructor.
  */
 @interface OrgApacheLuceneCodecsFilterCodec : OrgApacheLuceneCodecsCodec {
  @public
@@ -84,13 +90,16 @@
 #pragma mark Protected
 
 /*!
- @brief Sole constructor.
- When subclassing this codec,
- create a no-arg ctor and pass the delegate codec
- and a unique name to this ctor.
+ @brief Sole constructor.When subclassing this codec,
+  create a no-arg ctor and pass the delegate codec
+  and a unique name to this ctor.
  */
-- (instancetype)initWithNSString:(NSString *)name
-  withOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)delegate;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+            withOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)delegate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -104,4 +113,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsFilterCodec)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsFilterCodec")

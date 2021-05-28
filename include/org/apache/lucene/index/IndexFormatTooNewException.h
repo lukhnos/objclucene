@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexFormatTooNewException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexFormatTooNewException_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexFormatTooNewException || defined(INCLUDE_OrgApacheLuceneIndexIndexFormatTooNewException))
 #define OrgApacheLuceneIndexIndexFormatTooNewException_
 
@@ -20,11 +26,12 @@
 #define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
+@class JavaLangThrowable;
 @class OrgApacheLuceneStoreDataInput;
 
 /*!
  @brief This exception is thrown when Lucene detects
- an index that is newer than this Lucene version.
+  an index that is newer than this Lucene version.
  */
 @interface OrgApacheLuceneIndexIndexFormatTooNewException : JavaIoIOException
 
@@ -36,12 +43,11 @@
  @param version_ the version of the file that was too new
  @param minVersion the minimum version accepted
  @param maxVersion the maximum version accepted
-  
  */
-- (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                                              withInt:(jint)version_
-                                              withInt:(jint)minVersion
-                                              withInt:(jint)maxVersion;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                                        withInt:(jint)version_
+                                                        withInt:(jint)minVersion
+                                                        withInt:(jint)maxVersion;
 
 /*!
  @brief Creates an <code>IndexFormatTooNewException</code>
@@ -49,12 +55,11 @@
  @param version_ the version of the file that was too new
  @param minVersion the minimum version accepted
  @param maxVersion the maximum version accepted
-  
  */
-- (instancetype)initWithNSString:(NSString *)resourceDescription
-                         withInt:(jint)version_
-                         withInt:(jint)minVersion
-                         withInt:(jint)maxVersion;
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDescription
+                                   withInt:(jint)version_
+                                   withInt:(jint)minVersion
+                                   withInt:(jint)maxVersion;
 
 /*!
  @brief Returns the maximum version accepted
@@ -76,6 +81,17 @@
  */
 - (jint)getVersion;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexIndexFormatTooNewException)
@@ -96,4 +112,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexFormatTooNewException)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexFormatTooNewException")

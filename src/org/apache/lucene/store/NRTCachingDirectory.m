@@ -27,6 +27,10 @@
 #include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/NRTCachingDirectory must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneStoreNRTCachingDirectory () {
  @public
   OrgApacheLuceneStoreRAMDirectory *cache_;
@@ -42,7 +46,7 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreNRTCachingDirectory, cache_, OrgApacheLuceneStoreRAMDirectory *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreNRTCachingDirectory, uncacheLock_, id)
 
-inline jboolean OrgApacheLuceneStoreNRTCachingDirectory_get_VERBOSE();
+inline jboolean OrgApacheLuceneStoreNRTCachingDirectory_get_VERBOSE(void);
 #define OrgApacheLuceneStoreNRTCachingDirectory_VERBOSE false
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreNRTCachingDirectory, VERBOSE, jboolean)
 
@@ -84,7 +88,7 @@ __attribute__((unused)) static void OrgApacheLuceneStoreNRTCachingDirectory_unCa
         }
       }
     }
-    return [files toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[files size] type:NSString_class_()]];
+    return JreRetainedLocalValue([files toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[files size] type:NSString_class_()]]);
   }
 }
 
@@ -151,10 +155,10 @@ __attribute__((unused)) static void OrgApacheLuceneStoreNRTCachingDirectory_unCa
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   @synchronized(self) {
     if ([((OrgApacheLuceneStoreRAMDirectory *) nil_chk(cache_)) fileNameExistsWithNSString:name]) {
-      return [cache_ openInputWithNSString:name withOrgApacheLuceneStoreIOContext:context];
+      return JreRetainedLocalValue([cache_ openInputWithNSString:name withOrgApacheLuceneStoreIOContext:context]);
     }
     else {
-      return [((OrgApacheLuceneStoreDirectory *) nil_chk(in_)) openInputWithNSString:name withOrgApacheLuceneStoreIOContext:context];
+      return JreRetainedLocalValue([((OrgApacheLuceneStoreDirectory *) nil_chk(in_)) openInputWithNSString:name withOrgApacheLuceneStoreIOContext:context]);
     }
   }
 }
@@ -216,31 +220,51 @@ __attribute__((unused)) static void OrgApacheLuceneStoreNRTCachingDirectory_unCa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDirectory:withDouble:withDouble:", "NRTCachingDirectory", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "listAll", NULL, "[Ljava.lang.String;", 0x21, "Ljava.io.IOException;", NULL },
-    { "deleteFileWithNSString:", "deleteFile", "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "fileLengthWithNSString:", "fileLength", "J", 0x21, "Ljava.io.IOException;", NULL },
-    { "listCachedFiles", NULL, "[Ljava.lang.String;", 0x1, NULL, NULL },
-    { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
-    { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x21, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "doCacheWriteWithNSString:withOrgApacheLuceneStoreIOContext:", "doCacheWrite", "Z", 0x4, NULL, NULL },
-    { "unCacheWithNSString:", "unCache", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "[LNSString;", 0x21, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x21, 3, 4, 2, -1, -1, -1 },
+    { NULL, "J", 0x21, 5, 4, 2, -1, -1, -1 },
+    { NULL, "[LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexOutput;", 0x1, 6, 7, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, 2, 10, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x21, 13, 7, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "Z", 0x4, 14, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 15, 4, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 16, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withDouble:withDouble:);
+  methods[1].selector = @selector(description);
+  methods[2].selector = @selector(listAll);
+  methods[3].selector = @selector(deleteFileWithNSString:);
+  methods[4].selector = @selector(fileLengthWithNSString:);
+  methods[5].selector = @selector(listCachedFiles);
+  methods[6].selector = @selector(createOutputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[7].selector = @selector(syncWithJavaUtilCollection:);
+  methods[8].selector = @selector(renameFileWithNSString:withNSString:);
+  methods[9].selector = @selector(openInputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[10].selector = @selector(close);
+  methods[11].selector = @selector(doCacheWriteWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[12].selector = @selector(unCacheWithNSString:);
+  methods[13].selector = @selector(ramBytesUsed);
+  methods[14].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "cache_", NULL, 0x12, "Lorg.apache.lucene.store.RAMDirectory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxMergeSizeBytes_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxCachedBytes_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "VERBOSE", "VERBOSE", 0x1a, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneStoreNRTCachingDirectory_VERBOSE },
-    { "uncacheLock_", NULL, 0x12, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
+    { "cache_", "LOrgApacheLuceneStoreRAMDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxMergeSizeBytes_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxCachedBytes_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "VERBOSE", "Z", .constantValue.asBOOL = OrgApacheLuceneStoreNRTCachingDirectory_VERBOSE, 0x1a, -1, -1, -1, -1 },
+    { "uncacheLock_", "LNSObject;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreNRTCachingDirectory = { 2, "NRTCachingDirectory", "org.apache.lucene.store", NULL, 0x1, 15, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDirectory;DD", "toString", "LJavaIoIOException;", "deleteFile", "LNSString;", "fileLength", "createOutput", "LNSString;LOrgApacheLuceneStoreIOContext;", "sync", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/String;>;)V", "renameFile", "LNSString;LNSString;", "openInput", "doCacheWrite", "unCache", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreNRTCachingDirectory = { "NRTCachingDirectory", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 15, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreNRTCachingDirectory;
 }
 

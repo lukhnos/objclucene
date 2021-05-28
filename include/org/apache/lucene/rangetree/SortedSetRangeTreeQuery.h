@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery || defined(INCLUDE_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery))
 #define OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_
 
@@ -27,7 +33,6 @@
 /*!
  @brief Finds all previously indexed values that fall within the specified <code>BytesRef</code> range.
  <p>The field must be indexed with <code>RangeTreeDocValuesFormat</code>, and <code>SortedSetDocValuesField</code> added per document.
-  
  */
 @interface OrgApacheLuceneRangetreeSortedSetRangeTreeQuery : OrgApacheLuceneSearchQuery {
  @public
@@ -43,11 +48,11 @@
 /*!
  @brief Matches all values in the specified <code>BytesRef</code> range.
  */
-- (instancetype)initWithNSString:(NSString *)field
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minValue
-                     withBoolean:(jboolean)minInclusive
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxValue
-                     withBoolean:(jboolean)maxInclusive;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minValue
+                               withBoolean:(jboolean)minInclusive
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxValue
+                               withBoolean:(jboolean)maxInclusive;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -57,6 +62,10 @@
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -76,4 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery")

@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/util/automaton/AutomatonProvider.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/AutomatonProvider must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilAutomatonAutomatonProvider : NSObject
 
 @end
@@ -13,10 +17,16 @@
 @implementation OrgApacheLuceneUtilAutomatonAutomatonProvider
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getAutomatonWithNSString:", "getAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonAutomatonProvider = { 2, "AutomatonProvider", "org.apache.lucene.util.automaton", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getAutomatonWithNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getAutomaton", "LNSString;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonAutomatonProvider = { "AutomatonProvider", "org.apache.lucene.util.automaton", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonAutomatonProvider;
 }
 

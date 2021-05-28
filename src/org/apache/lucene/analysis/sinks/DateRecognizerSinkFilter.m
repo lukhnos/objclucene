@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/sinks/DateRecognizerSinkFilter.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/text/DateFormat.h"
 #include "java/text/ParseException.h"
@@ -12,6 +13,10 @@
 #include "org/apache/lucene/analysis/sinks/TeeSinkTokenFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/sinks/DateRecognizerSinkFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 NSString *OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE = @"date";
 
@@ -38,7 +43,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssign(&termAtt_, [((OrgApacheLuceneUtilAttributeSource *) nil_chk(source)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   }
   @try {
-    JavaUtilDate *date = [((JavaTextDateFormat *) nil_chk(dateFormat_)) parseWithNSString:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) description]];
+    JavaUtilDate *date = JreRetainedLocalValue([((JavaTextDateFormat *) nil_chk(dateFormat_)) parseWithNSString:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) description]]);
     if (date != nil) {
       return true;
     }
@@ -55,17 +60,25 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DateRecognizerSinkFilter", NULL, 0x1, NULL, NULL },
-    { "initWithJavaTextDateFormat:", "DateRecognizerSinkFilter", NULL, 0x1, NULL, NULL },
-    { "acceptWithOrgApacheLuceneUtilAttributeSource:", "accept", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithJavaTextDateFormat:);
+  methods[2].selector = @selector(acceptWithOrgApacheLuceneUtilAttributeSource:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DATE_TYPE", "DATE_TYPE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE, NULL, .constantValue.asLong = 0 },
-    { "dateFormat_", NULL, 0x4, "Ljava.text.DateFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x4, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DATE_TYPE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 3, -1, -1 },
+    { "dateFormat_", "LJavaTextDateFormat;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter = { 2, "DateRecognizerSinkFilter", "org.apache.lucene.analysis.sinks", NULL, 0x1, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaTextDateFormat;", "accept", "LOrgApacheLuceneUtilAttributeSource;", &OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter = { "DateRecognizerSinkFilter", "org.apache.lucene.analysis.sinks", ptrTable, methods, fields, 7, 0x1, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter;
 }
 

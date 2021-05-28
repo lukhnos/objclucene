@@ -3,6 +3,7 @@
 //  source: ./highlighter/src/java/org/apache/lucene/search/highlight/TokenGroup.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -12,6 +13,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/search/highlight/TokenGroup.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/TokenGroup must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchHighlightTokenGroup () {
  @public
@@ -34,7 +39,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightTokenGroup, scores_, IOSFloatA
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightTokenGroup, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightTokenGroup, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-inline jint OrgApacheLuceneSearchHighlightTokenGroup_get_MAX_NUM_TOKENS_PER_GROUP();
+inline jint OrgApacheLuceneSearchHighlightTokenGroup_get_MAX_NUM_TOKENS_PER_GROUP(void);
 #define OrgApacheLuceneSearchHighlightTokenGroup_MAX_NUM_TOKENS_PER_GROUP 50
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchHighlightTokenGroup, MAX_NUM_TOKENS_PER_GROUP, jint)
 
@@ -120,32 +125,47 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchHighlightTokenGroup, MAX_NUM_T
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "TokenGroup", NULL, 0x1, NULL, NULL },
-    { "addTokenWithFloat:", "addToken", "V", 0x0, NULL, NULL },
-    { "isDistinct", NULL, "Z", 0x0, NULL, NULL },
-    { "clear", NULL, "V", 0x0, NULL, NULL },
-    { "getTokenWithInt:", "getToken", "Lorg.apache.lucene.analysis.Token;", 0x1, NULL, NULL },
-    { "getScoreWithInt:", "getScore", "F", 0x1, NULL, NULL },
-    { "getStartOffset", NULL, "I", 0x1, NULL, NULL },
-    { "getEndOffset", NULL, "I", 0x1, NULL, NULL },
-    { "getNumTokens", NULL, "I", 0x1, NULL, NULL },
-    { "getTotalScore", NULL, "F", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisToken;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 5, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(addTokenWithFloat:);
+  methods[2].selector = @selector(isDistinct);
+  methods[3].selector = @selector(clear);
+  methods[4].selector = @selector(getTokenWithInt:);
+  methods[5].selector = @selector(getScoreWithInt:);
+  methods[6].selector = @selector(getStartOffset);
+  methods[7].selector = @selector(getEndOffset);
+  methods[8].selector = @selector(getNumTokens);
+  methods[9].selector = @selector(getTotalScore);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MAX_NUM_TOKENS_PER_GROUP", "MAX_NUM_TOKENS_PER_GROUP", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchHighlightTokenGroup_MAX_NUM_TOKENS_PER_GROUP },
-    { "tokens_", NULL, 0x2, "[Lorg.apache.lucene.analysis.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scores_", NULL, 0x2, "[F", NULL, NULL, .constantValue.asLong = 0 },
-    { "numTokens_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "tot_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "matchStartOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "matchEndOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "MAX_NUM_TOKENS_PER_GROUP", "I", .constantValue.asInt = OrgApacheLuceneSearchHighlightTokenGroup_MAX_NUM_TOKENS_PER_GROUP, 0x1a, -1, -1, -1, -1 },
+    { "tokens_", "[LOrgApacheLuceneAnalysisToken;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "scores_", "[F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numTokens_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "startOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "endOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tot_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "matchStartOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "matchEndOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTokenGroup = { 2, "TokenGroup", "org.apache.lucene.search.highlight", NULL, 0x1, 10, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "addToken", "F", "getToken", "I", "getScore" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTokenGroup = { "TokenGroup", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x1, 10, 11, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightTokenGroup;
 }
 

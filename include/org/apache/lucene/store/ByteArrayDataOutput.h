@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreByteArrayDataOutput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreByteArrayDataOutput_) && (INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataOutput || defined(INCLUDE_OrgApacheLuceneStoreByteArrayDataOutput))
 #define OrgApacheLuceneStoreByteArrayDataOutput_
 
@@ -25,19 +31,19 @@
 /*!
  @brief DataOutput backed by a byte array.
  <b>WARNING:</b> This class omits most low-level checks,
- so be sure to test heavily with assertions enabled.
+  so be sure to test heavily with assertions enabled.
  */
 @interface OrgApacheLuceneStoreByteArrayDataOutput : OrgApacheLuceneStoreDataOutput
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithByteArray:(IOSByteArray *)bytes;
+- (instancetype __nonnull)initWithByteArray:(IOSByteArray *)bytes;
 
-- (instancetype)initWithByteArray:(IOSByteArray *)bytes
-                          withInt:(jint)offset
-                          withInt:(jint)len;
+- (instancetype __nonnull)initWithByteArray:(IOSByteArray *)bytes
+                                    withInt:(jint)offset
+                                    withInt:(jint)len;
 
 - (jint)getPosition;
 
@@ -71,12 +77,16 @@ FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *create_OrgApacheLucen
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreByteArrayDataOutput_init(OrgApacheLuceneStoreByteArrayDataOutput *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *new_OrgApacheLuceneStoreByteArrayDataOutput_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *new_OrgApacheLuceneStoreByteArrayDataOutput_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *create_OrgApacheLuceneStoreByteArrayDataOutput_init();
+FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *create_OrgApacheLuceneStoreByteArrayDataOutput_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteArrayDataOutput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataOutput")

@@ -11,6 +11,10 @@
 #include "org/apache/lucene/util/AttributeReflector.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/PayloadAttributeImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl () {
  @public
   OrgApacheLuceneUtilBytesRef *payload_;
@@ -46,8 +50,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&payload_, nil);
 }
 
-- (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *)clone {
-  OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *clone = (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *) cast_chk([super clone], [OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl class]);
+- (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *)java_clone {
+  OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *clone = (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *) cast_chk([super java_clone], [OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl class]);
   if (payload_ != nil) {
     JreStrongAssign(&((OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *) nil_chk(clone))->payload_, OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(payload_));
   }
@@ -55,7 +59,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)other {
-  if (other == self) {
+  if (JreObjectEqualsEquals(other, self)) {
     return true;
   }
   if ([OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_() isInstance:other]) {
@@ -87,22 +91,37 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PayloadAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilBytesRef:", "PayloadAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "setPayloadWithOrgApacheLuceneUtilBytesRef:", "setPayload", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttributeImpl;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(getPayload);
+  methods[3].selector = @selector(setPayloadWithOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(clear);
+  methods[5].selector = @selector(java_clone);
+  methods[6].selector = @selector(isEqual:);
+  methods[7].selector = @selector(hash);
+  methods[8].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[9].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "payload_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl = { 2, "PayloadAttributeImpl", "org.apache.lucene.analysis.tokenattributes", NULL, 0x1, 10, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBytesRef;", "setPayload", "clone", "equals", "LNSObject;", "hashCode", "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl = { "PayloadAttributeImpl", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, fields, 7, 0x1, 10, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl;
 }
 

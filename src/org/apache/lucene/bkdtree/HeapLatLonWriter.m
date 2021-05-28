@@ -10,6 +10,10 @@
 #include "org/apache/lucene/bkdtree/HeapLatLonWriter.h"
 #include "org/apache/lucene/bkdtree/LatLonReader.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/bkdtree/HeapLatLonWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneBkdtreeHeapLatLonWriter () {
  @public
   jint nextWrite_;
@@ -19,8 +23,8 @@
 
 @implementation OrgApacheLuceneBkdtreeHeapLatLonWriter
 
-- (instancetype)initWithInt:(jint)count {
-  OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(self, count);
+- (instancetype)initPackagePrivateWithInt:(jint)count {
+  OrgApacheLuceneBkdtreeHeapLatLonWriter_initPackagePrivateWithInt_(self, count);
   return self;
 }
 
@@ -36,7 +40,7 @@
 }
 
 - (id<OrgApacheLuceneBkdtreeLatLonReader>)getReaderWithLong:(jlong)start {
-  return create_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(latEncs_, lonEncs_, ords_, docIDs_, (jint) start, ((IOSIntArray *) nil_chk(latEncs_))->size_);
+  return create_OrgApacheLuceneBkdtreeHeapLatLonReader_initPackagePrivateWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(latEncs_, lonEncs_, ords_, docIDs_, (jint) start, ((IOSIntArray *) nil_chk(latEncs_))->size_);
 }
 
 - (void)close {
@@ -61,28 +65,39 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "HeapLatLonWriter", NULL, 0x1, NULL, NULL },
-    { "appendWithInt:withInt:withLong:withInt:", "append", "V", 0x1, NULL, NULL },
-    { "getReaderWithLong:", "getReader", "Lorg.apache.lucene.bkdtree.LatLonReader;", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
-    { "destroy", NULL, "V", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneBkdtreeLatLonReader;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:);
+  methods[1].selector = @selector(appendWithInt:withInt:withLong:withInt:);
+  methods[2].selector = @selector(getReaderWithLong:);
+  methods[3].selector = @selector(close);
+  methods[4].selector = @selector(destroy);
+  methods[5].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "latEncs_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lonEncs_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docIDs_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ords_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextWrite_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "latEncs_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "lonEncs_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docIDs_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "ords_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "nextWrite_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeHeapLatLonWriter = { 2, "HeapLatLonWriter", "org.apache.lucene.bkdtree", NULL, 0x10, 6, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "append", "IIJI", "getReader", "J", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeHeapLatLonWriter = { "HeapLatLonWriter", "org.apache.lucene.bkdtree", ptrTable, methods, fields, 7, 0x10, 6, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneBkdtreeHeapLatLonWriter;
 }
 
 @end
 
-void OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(OrgApacheLuceneBkdtreeHeapLatLonWriter *self, jint count) {
+void OrgApacheLuceneBkdtreeHeapLatLonWriter_initPackagePrivateWithInt_(OrgApacheLuceneBkdtreeHeapLatLonWriter *self, jint count) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->latEncs_, [IOSIntArray newArrayWithLength:count]);
   JreStrongAssignAndConsume(&self->lonEncs_, [IOSIntArray newArrayWithLength:count]);
@@ -90,12 +105,12 @@ void OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(OrgApacheLuceneBkdtreeH
   JreStrongAssignAndConsume(&self->ords_, [IOSLongArray newArrayWithLength:count]);
 }
 
-OrgApacheLuceneBkdtreeHeapLatLonWriter *new_OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(jint count) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeHeapLatLonWriter, initWithInt_, count)
+OrgApacheLuceneBkdtreeHeapLatLonWriter *new_OrgApacheLuceneBkdtreeHeapLatLonWriter_initPackagePrivateWithInt_(jint count) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeHeapLatLonWriter, initPackagePrivateWithInt_, count)
 }
 
-OrgApacheLuceneBkdtreeHeapLatLonWriter *create_OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(jint count) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeHeapLatLonWriter, initWithInt_, count)
+OrgApacheLuceneBkdtreeHeapLatLonWriter *create_OrgApacheLuceneBkdtreeHeapLatLonWriter_initPackagePrivateWithInt_(jint count) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeHeapLatLonWriter, initPackagePrivateWithInt_, count)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeHeapLatLonWriter)

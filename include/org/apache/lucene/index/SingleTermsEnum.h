@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSingleTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSingleTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexSingleTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexSingleTermsEnum))
 #define OrgApacheLuceneIndexSingleTermsEnum_
 
@@ -27,9 +33,9 @@
 /*!
  @brief Subclass of FilteredTermsEnum for enumerating a single term.
  <p>
- For example, this can be used by <code>MultiTermQuery</code>s
- that need only visit one term, but want to preserve
- MultiTermQuery semantics such as <code>MultiTermQuery.getRewriteMethod</code>
+  For example, this can be used by <code>MultiTermQuery</code>s
+  that need only visit one term, but want to preserve
+  MultiTermQuery semantics such as <code>MultiTermQuery.getRewriteMethod</code>
  .
  */
 @interface OrgApacheLuceneIndexSingleTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum
@@ -39,15 +45,22 @@
 /*!
  @brief Creates a new <code>SingleTermsEnum</code>.
  <p>
- After calling the constructor the enumeration is already pointing to the term,
- if it exists.
+  After calling the constructor the enumeration is already pointing to the term,
+  if it exists.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
-                      withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)termText;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
+                                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)termText;
 
 #pragma mark Protected
 
 - (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0
+                                                    withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -63,4 +76,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSingleTermsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSingleTermsEnum")

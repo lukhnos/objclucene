@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSortRescorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSortRescorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortRescorer || defined(INCLUDE_OrgApacheLuceneSearchSortRescorer))
 #define OrgApacheLuceneSearchSortRescorer_
 
@@ -27,7 +33,7 @@
 
 /*!
  @brief A <code>Rescorer</code> that re-sorts according to a provided
- Sort.
+  Sort.
  */
 @interface OrgApacheLuceneSearchSortRescorer : OrgApacheLuceneSearchRescorer
 
@@ -36,7 +42,7 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)firstPassExplanation
@@ -45,6 +51,10 @@
 - (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)firstPassTopDocs
                                                                         withInt:(jint)topN;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -60,4 +70,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortRescorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortRescorer")

@@ -3,15 +3,24 @@
 //  source: ./core/src/java/org/apache/lucene/search/Rescorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Rescorer.h"
 #include "org/apache/lucene/search/TopDocs.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/Rescorer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchRescorer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchRescorer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)firstPassTopDocs
@@ -29,20 +38,21 @@
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchRescorer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "rescoreWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchTopDocs:withInt:", "rescore", "Lorg.apache.lucene.search.TopDocs;", 0x401, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchExplanation:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", "Rescorer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x401, 3, 4, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchRescorer = { 2, "Rescorer", "org.apache.lucene.search", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(rescoreWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchTopDocs:withInt:);
+  methods[2].selector = @selector(explainWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchExplanation:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "rescore", "LOrgApacheLuceneSearchIndexSearcher;LOrgApacheLuceneSearchTopDocs;I", "LJavaIoIOException;", "explain", "LOrgApacheLuceneSearchIndexSearcher;LOrgApacheLuceneSearchExplanation;I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchRescorer = { "Rescorer", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchRescorer;
 }
 

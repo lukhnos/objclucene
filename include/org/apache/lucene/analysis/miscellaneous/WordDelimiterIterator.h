@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator))
 #define OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_
 
@@ -44,28 +50,26 @@
   jint end_;
   /*!
    @brief If false, causes case changes to be ignored (subwords will only be generated
- given SUBWORD_DELIM tokens).
+  given SUBWORD_DELIM tokens).
    (Defaults to true)
    */
   jboolean splitOnCaseChange_;
   /*!
    @brief If false, causes numeric changes to be ignored (subwords will only be generated
- given SUBWORD_DELIM tokens).
+  given SUBWORD_DELIM tokens).
    (Defaults to true)
    */
   jboolean splitOnNumerics_;
   /*!
    @brief If true, causes trailing "'s" to be removed for each subword.
-   (Defaults to true)
- <p/>
- "O'Neil's" =&gt; "O", "Neil"
+   (Defaults to true) 
+ <p>
+  "O'Neil's" =&gt; "O", "Neil"
    */
   jboolean stemEnglishPossessive_;
 }
-
-+ (jint)DONE;
-
-+ (IOSByteArray *)DEFAULT_WORD_DELIM_TABLE;
+@property (readonly, class) jint DONE NS_SWIFT_NAME(DONE);
+@property (readonly, class, strong) IOSByteArray *DEFAULT_WORD_DELIM_TABLE NS_SWIFT_NAME(DEFAULT_WORD_DELIM_TABLE);
 
 #pragma mark Public
 
@@ -83,16 +87,15 @@
  @param charTypeTable table containing character types
  @param splitOnCaseChange if true, causes "PowerShot" to be two tokens; ("Power-Shot" remains two parts regards)
  @param splitOnNumerics if true, causes "j2se" to be three tokens; "j" "2" "se"
- @param stemEnglishPossessive if true, causes trailing "'s" to be removed for each subword: "O'Neil's" =&gt; "O", "Neil"
+ @param stemEnglishPossessive if true, causes trailing "'s" to be removed for each subword: "O'Neil's" = &gt;  "O", "Neil"
  */
-- (instancetype)initWithByteArray:(IOSByteArray *)charTypeTable
-                      withBoolean:(jboolean)splitOnCaseChange
-                      withBoolean:(jboolean)splitOnNumerics
-                      withBoolean:(jboolean)stemEnglishPossessive;
+- (instancetype __nonnull)initWithByteArray:(IOSByteArray *)charTypeTable
+                                withBoolean:(jboolean)splitOnCaseChange
+                                withBoolean:(jboolean)splitOnNumerics
+                                withBoolean:(jboolean)stemEnglishPossessive;
 
 /*!
- @brief Determines if the current word contains only one subword.
- Note, it could be potentially surrounded by delimiters
+ @brief Determines if the current word contains only one subword.Note, it could be potentially surrounded by delimiters
  @return <code>true</code> if the current word contains only one subword, <code>false</code> otherwise
  */
 - (jboolean)isSingleWord;
@@ -118,6 +121,10 @@
  */
 - (jint)type;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator)
@@ -127,11 +134,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, t
 /*!
  @brief Indicates the end of iteration
  */
-inline jint OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_get_DONE();
+inline jint OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_get_DONE(void);
 #define OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DONE -1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DONE, jint)
 
-inline IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_get_DEFAULT_WORD_DELIM_TABLE();
+inline IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_get_DEFAULT_WORD_DELIM_TABLE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DEFAULT_WORD_DELIM_TABLE, IOSByteArray *)
@@ -148,4 +155,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIter
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator")

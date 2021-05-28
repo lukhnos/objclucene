@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/util/Accountable.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/Accountable must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilAccountable : NSObject
 
 @end
@@ -13,11 +17,18 @@
 @implementation OrgApacheLuceneUtilAccountable
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "ramBytesUsed", NULL, "J", 0x401, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x401, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x401, -1, -1, -1, 0, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAccountable = { 2, "Accountable", "org.apache.lucene.util", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(ramBytesUsed);
+  methods[1].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAccountable = { "Accountable", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAccountable;
 }
 

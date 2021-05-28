@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder))
 #define OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder_
 
@@ -25,13 +31,13 @@
 
 /*!
  @brief Builds a <code>MultiPhraseQuery</code> object from a <code>MultiPhraseQueryNode</code>
- object.
+  object.
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder : NSObject < OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchMultiPhraseQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
@@ -41,12 +47,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardBuildersMulti
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder_init(OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_
 
@@ -27,7 +33,7 @@
 
 /*!
  @brief Abstract <code>ValueSource</code> implementation which wraps two ValueSources
- and applies an extendible float function to their values.
+  and applies an extendible float function to their values.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
@@ -38,11 +44,11 @@
 #pragma mark Public
 
 /*!
- @param a  the base.
- @param b  the exponent.
+ @param a the base.
+ @param b the exponent.
  */
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)b;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
+                              withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)b;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -64,6 +70,10 @@ withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunction
 
 - (NSString *)name;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction)
@@ -77,4 +87,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFun
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction")

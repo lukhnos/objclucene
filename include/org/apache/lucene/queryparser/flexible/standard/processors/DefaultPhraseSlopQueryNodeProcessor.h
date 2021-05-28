@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor))
 #define OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_
 
@@ -20,17 +26,18 @@
 #define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
+@class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
  @brief This processor verifies if <code>ConfigurationKeys.PHRASE_SLOP</code>
- is defined in the <code>QueryConfigHandler</code>.
- If it is, it looks for every
+  is defined in the <code>QueryConfigHandler</code>.If it is, it looks for every 
  <code>TokenizedPhraseQueryNode</code> and <code>MultiPhraseQueryNode</code> that does
- not have any <code>SlopQueryNode</code> applied to it and creates an
- <code>SlopQueryNode</code> and apply to it. The new <code>SlopQueryNode</code> has the
- same slop value defined in the configuration.
+  not have any <code>SlopQueryNode</code> applied to it and creates an 
+ <code>SlopQueryNode</code> and apply to it.
+ The new <code>SlopQueryNode</code> has the
+  same slop value defined in the configuration.
  - seealso: SlopQueryNode
  - seealso: ConfigurationKeys#PHRASE_SLOP
  */
@@ -38,7 +45,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree;
 
@@ -52,18 +59,26 @@
 
 - (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor")

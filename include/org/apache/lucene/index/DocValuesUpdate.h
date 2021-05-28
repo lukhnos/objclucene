@@ -19,6 +19,12 @@
 #define INCLUDE_OrgApacheLuceneIndexDocValuesUpdate 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocValuesUpdate_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesUpdate || defined(INCLUDE_OrgApacheLuceneIndexDocValuesUpdate))
 #define OrgApacheLuceneIndexDocValuesUpdate_
 
@@ -45,20 +51,24 @@
 
 /*!
  @brief Constructor.
- @param term the <code>Term</code> which determines the documents that will be updated
- @param field the <code>NumericDocValuesField</code> to update
+ @param term the <code>Term</code>  which determines the documents that will be updated
+ @param field the <code>NumericDocValuesField</code>  to update
  @param value the updated value
  */
-- (instancetype)initWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type
-                             withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                             withNSString:(NSString *)field
-                                                   withId:(id)value;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type
+                                                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                                     withNSString:(NSString *)field
+                                                                           withId:(id)value;
 
 #pragma mark Package-Private
 
 - (jint)sizeInBytes;
 
 - (jlong)valueSizeInBytes;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -69,7 +79,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesUpdate, term_, OrgApacheLuceneI
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesUpdate, field_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesUpdate, value_, id)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(OrgApacheLuceneIndexDocValuesUpdate *self, OrgApacheLuceneIndexDocValuesType *type, OrgApacheLuceneIndexTerm *term, NSString *field, id value);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesUpdate_initPackagePrivateWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(OrgApacheLuceneIndexDocValuesUpdate *self, OrgApacheLuceneIndexDocValuesType *type, OrgApacheLuceneIndexTerm *term, NSString *field, id value);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesUpdate)
 
@@ -78,6 +88,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesUpdate)
 #if !defined (OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesUpdate || defined(INCLUDE_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate))
 #define OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_
 
+@class OrgApacheLuceneIndexDocValuesType;
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneUtilBytesRef;
 
@@ -88,11 +99,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesUpdate)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                    withNSString:(NSString *)field
-                 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                              withNSString:(NSString *)field
+                           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
 
 - (jlong)valueSizeInBytes;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)arg0
+                                                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg1
+                                                                     withNSString:(NSString *)arg2
+                                                                           withId:(id)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -112,6 +130,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUp
 #define OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_
 
 @class JavaLangLong;
+@class OrgApacheLuceneIndexDocValuesType;
 @class OrgApacheLuceneIndexTerm;
 
 /*!
@@ -121,11 +140,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUp
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                    withNSString:(NSString *)field
-                                withJavaLangLong:(JavaLangLong *)value;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                              withNSString:(NSString *)field
+                                          withJavaLangLong:(JavaLangLong *)value;
 
 - (jlong)valueSizeInBytes;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)arg0
+                                                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg1
+                                                                     withNSString:(NSString *)arg2
+                                                                           withId:(id)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -141,4 +167,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesU
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesUpdate")

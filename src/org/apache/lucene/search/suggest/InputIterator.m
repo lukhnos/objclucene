@@ -3,13 +3,15 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/InputIterator.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/search/suggest/InputIterator.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefIterator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/InputIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper () {
  @public
@@ -30,27 +32,36 @@ id<OrgApacheLuceneSearchSuggestInputIterator> OrgApacheLuceneSearchSuggestInputI
   return OrgApacheLuceneSearchSuggestInputIterator_EMPTY;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x401, -1, -1, -1, 0, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(weight);
+  methods[1].selector = @selector(payload);
+  methods[2].selector = @selector(hasPayloads);
+  methods[3].selector = @selector(contexts);
+  methods[4].selector = @selector(hasContexts);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY", "LOrgApacheLuceneSearchSuggestInputIterator;", .constantValue.asLong = 0, 0x19, -1, 1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", &OrgApacheLuceneSearchSuggestInputIterator_EMPTY, "LOrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestInputIterator = { "InputIterator", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x609, 5, 1, -1, 2, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSuggestInputIterator;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSuggestInputIterator class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestInputIterator_EMPTY, new_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_(JreLoadStatic(OrgApacheLuceneUtilBytesRefIterator, EMPTY)));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestInputIterator)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "weight", NULL, "J", 0x401, NULL, NULL },
-    { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x401, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x401, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
-    { "hasContexts", NULL, "Z", 0x401, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY", "EMPTY", 0x19, "Lorg.apache.lucene.search.suggest.InputIterator;", &OrgApacheLuceneSearchSuggestInputIterator_EMPTY, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.InputIterator$InputIteratorWrapper;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestInputIterator = { 2, "InputIterator", "org.apache.lucene.search.suggest", NULL, 0x609, 5, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSearchSuggestInputIterator;
 }
 
 @end
@@ -94,19 +105,31 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestInputIterator)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBytesRefIterator:", "InputIteratorWrapper", NULL, 0x1, NULL, NULL },
-    { "weight", NULL, "J", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
-    { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBytesRefIterator:);
+  methods[1].selector = @selector(weight);
+  methods[2].selector = @selector(next);
+  methods[3].selector = @selector(payload);
+  methods[4].selector = @selector(hasPayloads);
+  methods[5].selector = @selector(contexts);
+  methods[6].selector = @selector(hasContexts);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "wrapped_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefIterator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "wrapped_", "LOrgApacheLuceneUtilBytesRefIterator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper = { 2, "InputIteratorWrapper", "org.apache.lucene.search.suggest", "InputIterator", 0x9, 7, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBytesRefIterator;", "LJavaIoIOException;", "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneSearchSuggestInputIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper = { "InputIteratorWrapper", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x9, 7, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper;
 }
 

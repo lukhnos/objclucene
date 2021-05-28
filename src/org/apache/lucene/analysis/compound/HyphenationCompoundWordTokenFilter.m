@@ -3,10 +3,8 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/compound/HyphenationCompoundWordTokenFilter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/CharSequence.h"
 #include "java/util/LinkedList.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -17,6 +15,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 #include "org/xml/sax/InputSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/HyphenationCompoundWordTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter () {
  @public
@@ -71,7 +73,7 @@ withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAn
 }
 
 - (void)decompose {
-  OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *hyphens = [((OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *) nil_chk(hyphenator_)) hyphenateWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length] withInt:1 withInt:1];
+  OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *hyphens = JreRetainedLocalValue([((OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *) nil_chk(hyphenator_)) hyphenateWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ java_length] withInt:1 withInt:1]);
   if (hyphens == nil) {
     return;
   }
@@ -91,7 +93,7 @@ withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAn
       if (dictionary_ == nil || [dictionary_ containsWithCharArray:[termAtt_ buffer] withInt:start withInt:partLength]) {
         if (self->onlyLongestMatch_) {
           if (longestMatchToken != nil) {
-            if ([((id<JavaLangCharSequence>) nil_chk(longestMatchToken->txt_)) length] < partLength) {
+            if ([((id<JavaLangCharSequence>) nil_chk(longestMatchToken->txt_)) java_length] < partLength) {
               longestMatchToken = create_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_withInt_withInt_(self, start, partLength);
             }
           }
@@ -106,7 +108,7 @@ withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAn
       else if ([dictionary_ containsWithCharArray:[termAtt_ buffer] withInt:start withInt:partLength - 1]) {
         if (self->onlyLongestMatch_) {
           if (longestMatchToken != nil) {
-            if ([((id<JavaLangCharSequence>) nil_chk(longestMatchToken->txt_)) length] < partLength - 1) {
+            if ([((id<JavaLangCharSequence>) nil_chk(longestMatchToken->txt_)) java_length] < partLength - 1) {
               longestMatchToken = create_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_withInt_withInt_(self, start, partLength - 1);
             }
           }
@@ -131,19 +133,31 @@ withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAn
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:withOrgApacheLuceneAnalysisUtilCharArraySet:", "HyphenationCompoundWordTokenFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:withOrgApacheLuceneAnalysisUtilCharArraySet:withInt:withInt:withInt:withBoolean:", "HyphenationCompoundWordTokenFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:withInt:withInt:withInt:", "HyphenationCompoundWordTokenFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:", "HyphenationCompoundWordTokenFilter", NULL, 0x1, NULL, NULL },
-    { "getHyphenationTreeWithNSString:", "getHyphenationTree", "Lorg.apache.lucene.analysis.compound.hyphenation.HyphenationTree;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getHyphenationTreeWithOrgXmlSaxInputSource:", "getHyphenationTree", "Lorg.apache.lucene.analysis.compound.hyphenation.HyphenationTree;", 0x9, "Ljava.io.IOException;", NULL },
-    { "decompose", NULL, "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree;", 0x9, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree;", 0x9, 4, 7, 6, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:withOrgApacheLuceneAnalysisUtilCharArraySet:withInt:withInt:withInt:withBoolean:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:withInt:withInt:withInt:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:);
+  methods[4].selector = @selector(getHyphenationTreeWithNSString:);
+  methods[5].selector = @selector(getHyphenationTreeWithOrgXmlSaxInputSource:);
+  methods[6].selector = @selector(decompose);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "hyphenator_", NULL, 0x2, "Lorg.apache.lucene.analysis.compound.hyphenation.HyphenationTree;", NULL, NULL, .constantValue.asLong = 0 },
+    { "hyphenator_", "LOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter = { 2, "HyphenationCompoundWordTokenFilter", "org.apache.lucene.analysis.compound", NULL, 0x1, 7, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree;LOrgApacheLuceneAnalysisUtilCharArraySet;", "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree;LOrgApacheLuceneAnalysisUtilCharArraySet;IIIZ", "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree;III", "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree;", "getHyphenationTree", "LNSString;", "LJavaIoIOException;", "LOrgXmlSaxInputSource;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter = { "HyphenationCompoundWordTokenFilter", "org.apache.lucene.analysis.compound", ptrTable, methods, fields, 7, 0x1, 7, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter;
 }
 

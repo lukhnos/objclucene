@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter))
 #define OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_
 
@@ -25,16 +31,15 @@
 
 /*!
  @brief Like <code>StopFilter</code> except it will not remove the
- last token if that token was not followed by some token
- separator.
- For example, a query 'find the' would
- preserve the 'the' since it was not followed by a space or
- punctuation or something, and mark it KEYWORD so future
- stemmers won't touch it either while a query like "find
- the popsicle' would remove 'the' as a stopword.
+   last token if that token was not followed by some token
+   separator.For example, a query 'find the' would
+   preserve the 'the' since it was not followed by a space or
+   punctuation or something, and mark it KEYWORD so future
+   stemmers won't touch it either while a query like "find
+   the popsicle' would remove 'the' as a stopword.
  <p>Normally you'd use the ordinary <code>StopFilter</code>
- in your indexAnalyzer and then this class in your
- queryAnalyzer, when using one of the analyzing suggesters. 
+   in your indexAnalyzer and then this class in your
+   queryAnalyzer, when using one of the analyzing suggesters.
  */
 @interface OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -43,14 +48,18 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
 
 - (void)end;
 
 - (jboolean)incrementToken;
 
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -66,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilte
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter")

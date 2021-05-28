@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/SuppressForbidden.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/annotation/Annotation.h"
@@ -12,24 +13,64 @@
 #include "java/lang/annotation/Target.h"
 #include "org/apache/lucene/util/SuppressForbidden.h"
 
-@interface OrgApacheLuceneUtilSuppressForbidden : NSObject
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/SuppressForbidden must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-@end
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneUtilSuppressForbidden__Annotations$0(void);
 
 @implementation OrgApacheLuceneUtilSuppressForbidden
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangAnnotationRetention(JreLoadEnum(JavaLangAnnotationRetentionPolicy, CLASS)), create_JavaLangAnnotationTarget([IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(JavaLangAnnotationElementType, CONSTRUCTOR), JreLoadEnum(JavaLangAnnotationElementType, FIELD), JreLoadEnum(JavaLangAnnotationElementType, METHOD), JreLoadEnum(JavaLangAnnotationElementType, TYPE) } count:4 type:NSObject_class_()]) } count:2 type:JavaLangAnnotationAnnotation_class_()];
+@synthesize reason = reason_;
+
+- (IOSClass *)annotationType {
+  return OrgApacheLuceneUtilSuppressForbidden_class_();
+}
+
+- (NSString *)description {
+  return [NSString stringWithFormat:@"@org.apache.lucene.util.SuppressForbidden(reason=%@)", reason_];
+}
+
+- (jboolean)isEqual:(id)obj {
+  return JreAnnotationEquals(self, obj);
+}
+
+- (NSUInteger)hash {
+  return JreAnnotationHashCode(self);
+}
+
+- (void)dealloc {
+  RELEASE_(reason_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "reason", "reason", "Ljava.lang.String;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilSuppressForbidden = { 2, "SuppressForbidden", "org.apache.lucene.util", NULL, 0x2609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(reason);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "reason_", "LNSString;", .constantValue.asLong = 0, 0x1000, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { (void *)&OrgApacheLuceneUtilSuppressForbidden__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilSuppressForbidden = { "SuppressForbidden", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x2609, 1, 1, -1, -1, -1, -1, 0 };
   return &_OrgApacheLuceneUtilSuppressForbidden;
 }
 
 @end
+
+id<OrgApacheLuceneUtilSuppressForbidden> create_OrgApacheLuceneUtilSuppressForbidden(NSString *reason) {
+  OrgApacheLuceneUtilSuppressForbidden *self = AUTORELEASE([[OrgApacheLuceneUtilSuppressForbidden alloc] init]);
+  self->reason_ = RETAIN_(reason);
+  return self;
+}
+
+IOSObjectArray *OrgApacheLuceneUtilSuppressForbidden__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangAnnotationRetention(JreLoadEnum(JavaLangAnnotationRetentionPolicy, CLASS)), create_JavaLangAnnotationTarget([IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(JavaLangAnnotationElementType, CONSTRUCTOR), JreLoadEnum(JavaLangAnnotationElementType, FIELD), JreLoadEnum(JavaLangAnnotationElementType, METHOD), JreLoadEnum(JavaLangAnnotationElementType, TYPE) } count:4 type:JavaLangAnnotationElementType_class_()]) } count:2 type:JavaLangAnnotationAnnotation_class_()];
+}
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilSuppressForbidden)

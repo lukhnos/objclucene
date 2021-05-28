@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchBooleanScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchBooleanScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanScorer || defined(INCLUDE_OrgApacheLuceneSearchBooleanScorer))
 #define OrgApacheLuceneSearchBooleanScorer_
 
@@ -34,9 +40,8 @@
 
 /*!
  @brief <code>BulkScorer</code> that is used for pure disjunctions and disjunctions
- that have low values of <code>BooleanQuery.Builder.setMinimumNumberShouldMatch(int)</code>
- and dense clauses.
- This scorer scores documents by batches of 2048 docs.
+  that have low values of <code>BooleanQuery.Builder.setMinimumNumberShouldMatch(int)</code>
+  and dense clauses.This scorer scores documents by batches of 2048 docs.
  */
 @interface OrgApacheLuceneSearchBooleanScorer : OrgApacheLuceneSearchBulkScorer {
  @public
@@ -51,16 +56,11 @@
   jlong cost_;
   OrgApacheLuceneSearchBooleanScorer_OrCollector *orCollector_;
 }
-
-+ (jint)SHIFT;
-
-+ (jint)SIZE;
-
-+ (jint)MASK;
-
-+ (jint)SET_SIZE;
-
-+ (jint)SET_MASK;
+@property (readonly, class) jint SHIFT NS_SWIFT_NAME(SHIFT);
+@property (readonly, class) jint SIZE NS_SWIFT_NAME(SIZE);
+@property (readonly, class) jint MASK NS_SWIFT_NAME(MASK);
+@property (readonly, class) jint SET_SIZE NS_SWIFT_NAME(SET_SIZE);
+@property (readonly, class) jint SET_MASK NS_SWIFT_NAME(SET_MASK);
 
 #pragma mark Public
 
@@ -73,12 +73,16 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchBooleanWeight:(OrgApacheLuceneSearchBooleanWeight *)weight
-                                               withBoolean:(jboolean)disableCoord
-                                                   withInt:(jint)maxCoord
-                                    withJavaUtilCollection:(id<JavaUtilCollection>)scorers
-                                                   withInt:(jint)minShouldMatch
-                                               withBoolean:(jboolean)needsScores;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchBooleanWeight:(OrgApacheLuceneSearchBooleanWeight *)weight
+                                                                       withBoolean:(jboolean)disableCoord
+                                                                           withInt:(jint)maxCoord
+                                                            withJavaUtilCollection:(id<JavaUtilCollection>)scorers
+                                                                           withInt:(jint)minShouldMatch
+                                                                       withBoolean:(jboolean)needsScores;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -93,31 +97,31 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanScorer, tail_, OrgApacheLuceneSe
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanScorer, fakeScorer_, OrgApacheLuceneSearchFakeScorer *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanScorer, orCollector_, OrgApacheLuceneSearchBooleanScorer_OrCollector *)
 
-inline jint OrgApacheLuceneSearchBooleanScorer_get_SHIFT();
+inline jint OrgApacheLuceneSearchBooleanScorer_get_SHIFT(void);
 #define OrgApacheLuceneSearchBooleanScorer_SHIFT 11
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchBooleanScorer, SHIFT, jint)
 
-inline jint OrgApacheLuceneSearchBooleanScorer_get_SIZE();
+inline jint OrgApacheLuceneSearchBooleanScorer_get_SIZE(void);
 #define OrgApacheLuceneSearchBooleanScorer_SIZE 2048
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchBooleanScorer, SIZE, jint)
 
-inline jint OrgApacheLuceneSearchBooleanScorer_get_MASK();
+inline jint OrgApacheLuceneSearchBooleanScorer_get_MASK(void);
 #define OrgApacheLuceneSearchBooleanScorer_MASK 2047
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchBooleanScorer, MASK, jint)
 
-inline jint OrgApacheLuceneSearchBooleanScorer_get_SET_SIZE();
+inline jint OrgApacheLuceneSearchBooleanScorer_get_SET_SIZE(void);
 #define OrgApacheLuceneSearchBooleanScorer_SET_SIZE 32
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchBooleanScorer, SET_SIZE, jint)
 
-inline jint OrgApacheLuceneSearchBooleanScorer_get_SET_MASK();
+inline jint OrgApacheLuceneSearchBooleanScorer_get_SET_MASK(void);
 #define OrgApacheLuceneSearchBooleanScorer_SET_MASK 31
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchBooleanScorer, SET_MASK, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanScorer_initWithOrgApacheLuceneSearchBooleanWeight_withBoolean_withInt_withJavaUtilCollection_withInt_withBoolean_(OrgApacheLuceneSearchBooleanScorer *self, OrgApacheLuceneSearchBooleanWeight *weight, jboolean disableCoord, jint maxCoord, id<JavaUtilCollection> scorers, jint minShouldMatch, jboolean needsScores);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanScorer_initPackagePrivateWithOrgApacheLuceneSearchBooleanWeight_withBoolean_withInt_withJavaUtilCollection_withInt_withBoolean_(OrgApacheLuceneSearchBooleanScorer *self, OrgApacheLuceneSearchBooleanWeight *weight, jboolean disableCoord, jint maxCoord, id<JavaUtilCollection> scorers, jint minShouldMatch, jboolean needsScores);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanScorer *new_OrgApacheLuceneSearchBooleanScorer_initWithOrgApacheLuceneSearchBooleanWeight_withBoolean_withInt_withJavaUtilCollection_withInt_withBoolean_(OrgApacheLuceneSearchBooleanWeight *weight, jboolean disableCoord, jint maxCoord, id<JavaUtilCollection> scorers, jint minShouldMatch, jboolean needsScores) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanScorer *new_OrgApacheLuceneSearchBooleanScorer_initPackagePrivateWithOrgApacheLuceneSearchBooleanWeight_withBoolean_withInt_withJavaUtilCollection_withInt_withBoolean_(OrgApacheLuceneSearchBooleanWeight *weight, jboolean disableCoord, jint maxCoord, id<JavaUtilCollection> scorers, jint minShouldMatch, jboolean needsScores) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanScorer *create_OrgApacheLuceneSearchBooleanScorer_initWithOrgApacheLuceneSearchBooleanWeight_withBoolean_withInt_withJavaUtilCollection_withInt_withBoolean_(OrgApacheLuceneSearchBooleanWeight *weight, jboolean disableCoord, jint maxCoord, id<JavaUtilCollection> scorers, jint minShouldMatch, jboolean needsScores);
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanScorer *create_OrgApacheLuceneSearchBooleanScorer_initPackagePrivateWithOrgApacheLuceneSearchBooleanWeight_withBoolean_withInt_withJavaUtilCollection_withInt_withBoolean_(OrgApacheLuceneSearchBooleanWeight *weight, jboolean disableCoord, jint maxCoord, id<JavaUtilCollection> scorers, jint minShouldMatch, jboolean needsScores);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanScorer)
 
@@ -134,7 +138,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanScorer)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -142,9 +146,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanScorer_Bucket)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanScorer_Bucket_init(OrgApacheLuceneSearchBooleanScorer_Bucket *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanScorer_Bucket *new_OrgApacheLuceneSearchBooleanScorer_Bucket_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanScorer_Bucket *new_OrgApacheLuceneSearchBooleanScorer_Bucket_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanScorer_Bucket *create_OrgApacheLuceneSearchBooleanScorer_Bucket_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanScorer_Bucket *create_OrgApacheLuceneSearchBooleanScorer_Bucket_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanScorer_Bucket)
 
@@ -159,15 +163,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanScorer_Bucket)
 
 @interface OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc : NSObject {
  @public
-  __unsafe_unretained OrgApacheLuceneSearchBulkScorer *scorer_;
+  WEAK_ OrgApacheLuceneSearchBulkScorer *scorer_;
   jlong cost_;
   jint next_;
 }
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchBooleanScorer:(OrgApacheLuceneSearchBooleanScorer *)outer$
-                       withOrgApacheLuceneSearchBulkScorer:(OrgApacheLuceneSearchBulkScorer *)scorer;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchBooleanScorer:(OrgApacheLuceneSearchBooleanScorer *)outer$
+                                 withOrgApacheLuceneSearchBulkScorer:(OrgApacheLuceneSearchBulkScorer *)scorer;
 
 - (void)advanceWithInt:(jint)min;
 
@@ -202,12 +206,31 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxSize;
+- (instancetype __nonnull)initWithInt:(jint)maxSize;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)addWithId:(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)arg0;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)insertWithOverflowWithId:(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)arg0;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)pop;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)top;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)updateTop;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)updateTopWithId:(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)arg0;
 
 #pragma mark Protected
 
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)getSentinelObject;
+
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)a
                     withId:(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)b;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -236,14 +259,33 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanScorer_HeadPriorityQueue)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxSize;
+- (instancetype __nonnull)initWithInt:(jint)maxSize;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)addWithId:(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)arg0;
 
 - (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)getWithInt:(jint)i;
 
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)insertWithOverflowWithId:(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)arg0;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)pop;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)top;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)updateTop;
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)updateTopWithId:(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)arg0;
+
 #pragma mark Protected
+
+- (OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)getSentinelObject;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)a
                     withId:(OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *)b;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -271,7 +313,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanScorer_TailPriorityQueue)
 
 @interface OrgApacheLuceneSearchBooleanScorer_OrCollector : NSObject < OrgApacheLuceneSearchLeafCollector > {
  @public
-  __unsafe_unretained OrgApacheLuceneSearchScorer *scorer_;
+  WEAK_ OrgApacheLuceneSearchScorer *scorer_;
 }
 
 #pragma mark Public
@@ -282,7 +324,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanScorer_TailPriorityQueue)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchBooleanScorer:(OrgApacheLuceneSearchBooleanScorer *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchBooleanScorer:(OrgApacheLuceneSearchBooleanScorer *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -298,4 +344,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanScorer_OrCollector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBooleanScorer")

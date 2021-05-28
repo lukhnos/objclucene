@@ -7,6 +7,10 @@
 #include "org/apache/lucene/util/InPlaceMergeSorter.h"
 #include "org/apache/lucene/util/Sorter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/InPlaceMergeSorter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilInPlaceMergeSorter
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -36,12 +40,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "InPlaceMergeSorter", NULL, 0x1, NULL, NULL },
-    { "sortWithInt:withInt:", "sort", "V", 0x11, NULL, NULL },
-    { "mergeSortWithInt:withInt:", "mergeSort", "V", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 2, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilInPlaceMergeSorter = { 2, "InPlaceMergeSorter", "org.apache.lucene.util", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(sortWithInt:withInt:);
+  methods[2].selector = @selector(mergeSortWithInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "sort", "II", "mergeSort" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilInPlaceMergeSorter = { "InPlaceMergeSorter", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilInPlaceMergeSorter;
 }
 

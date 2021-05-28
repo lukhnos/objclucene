@@ -13,6 +13,10 @@
 #include "org/apache/lucene/index/IndexOptions.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/FieldInfo must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexFieldInfo () {
  @public
   OrgApacheLuceneIndexDocValuesType *docValuesType_;
@@ -93,7 +97,7 @@ withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOp
   if (self->indexOptions_ == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) || [((OrgApacheLuceneIndexIndexOptions *) nil_chk(self->indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] < 0) {
     self->storePayloads_ = false;
   }
-  JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:133 condition failed: assert checkConsistency();"));
+  JreAssert([self checkConsistency], @"org/apache/lucene/index/FieldInfo.java:133 condition failed: assert checkConsistency();");
 }
 
 - (void)setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type {
@@ -104,7 +108,7 @@ withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOp
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@$$C", @"cannot change DocValues type from ", docValuesType_, @" to ", type, @" for field \"", name_, '"'));
   }
   JreStrongAssign(&docValuesType_, type);
-  JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:144 condition failed: assert checkConsistency();"));
+  JreAssert([self checkConsistency], @"org/apache/lucene/index/FieldInfo.java:144 condition failed: assert checkConsistency();");
 }
 
 - (OrgApacheLuceneIndexIndexOptions *)getIndexOptions {
@@ -131,7 +135,7 @@ withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOp
 
 - (void)setDocValuesGenWithLong:(jlong)dvGen {
   self->dvGen_ = dvGen;
-  JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:180 condition failed: assert checkConsistency();"));
+  JreAssert([self checkConsistency], @"org/apache/lucene/index/FieldInfo.java:180 condition failed: assert checkConsistency();");
 }
 
 - (jlong)getDocValuesGen {
@@ -140,14 +144,14 @@ withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOp
 
 - (void)setStoreTermVectors {
   storeTermVector_ = true;
-  JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:193 condition failed: assert checkConsistency();"));
+  JreAssert([self checkConsistency], @"org/apache/lucene/index/FieldInfo.java:193 condition failed: assert checkConsistency();");
 }
 
 - (void)setStorePayloads {
   if (indexOptions_ != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) && [((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] >= 0) {
     storePayloads_ = true;
   }
-  JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:200 condition failed: assert checkConsistency();"));
+  JreAssert([self checkConsistency], @"org/apache/lucene/index/FieldInfo.java:200 condition failed: assert checkConsistency();");
 }
 
 - (jboolean)omitsNorms {
@@ -195,39 +199,63 @@ withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOp
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withInt:withBoolean:withBoolean:withBoolean:withOrgApacheLuceneIndexIndexOptions:withOrgApacheLuceneIndexDocValuesType:withLong:withJavaUtilMap:", "FieldInfo", NULL, 0x1, NULL, "(Ljava/lang/String;IZZZLorg/apache/lucene/index/IndexOptions;Lorg/apache/lucene/index/DocValuesType;JLjava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "checkConsistency", NULL, "Z", 0x1, NULL, NULL },
-    { "updateWithBoolean:withBoolean:withBoolean:withOrgApacheLuceneIndexIndexOptions:", "update", "V", 0x0, NULL, NULL },
-    { "setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:", "setDocValuesType", "V", 0x0, NULL, NULL },
-    { "getIndexOptions", NULL, "Lorg.apache.lucene.index.IndexOptions;", 0x1, NULL, NULL },
-    { "setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:", "setIndexOptions", "V", 0x1, NULL, NULL },
-    { "getDocValuesType", NULL, "Lorg.apache.lucene.index.DocValuesType;", 0x1, NULL, NULL },
-    { "setDocValuesGenWithLong:", "setDocValuesGen", "V", 0x0, NULL, NULL },
-    { "getDocValuesGen", NULL, "J", 0x1, NULL, NULL },
-    { "setStoreTermVectors", NULL, "V", 0x0, NULL, NULL },
-    { "setStorePayloads", NULL, "V", 0x0, NULL, NULL },
-    { "omitsNorms", NULL, "Z", 0x1, NULL, NULL },
-    { "setOmitsNorms", NULL, "V", 0x1, NULL, NULL },
-    { "hasNorms", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "hasVectors", NULL, "Z", 0x1, NULL, NULL },
-    { "getAttributeWithNSString:", "getAttribute", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "putAttributeWithNSString:withNSString:", "putAttribute", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "attributes", NULL, "Ljava.util.Map;", 0x1, NULL, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexOptions;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocValuesType;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 8, 9, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 14, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withInt:withBoolean:withBoolean:withBoolean:withOrgApacheLuceneIndexIndexOptions:withOrgApacheLuceneIndexDocValuesType:withLong:withJavaUtilMap:);
+  methods[1].selector = @selector(checkConsistency);
+  methods[2].selector = @selector(updateWithBoolean:withBoolean:withBoolean:withOrgApacheLuceneIndexIndexOptions:);
+  methods[3].selector = @selector(setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:);
+  methods[4].selector = @selector(getIndexOptions);
+  methods[5].selector = @selector(setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:);
+  methods[6].selector = @selector(getDocValuesType);
+  methods[7].selector = @selector(setDocValuesGenWithLong:);
+  methods[8].selector = @selector(getDocValuesGen);
+  methods[9].selector = @selector(setStoreTermVectors);
+  methods[10].selector = @selector(setStorePayloads);
+  methods[11].selector = @selector(omitsNorms);
+  methods[12].selector = @selector(setOmitsNorms);
+  methods[13].selector = @selector(hasNorms);
+  methods[14].selector = @selector(hasPayloads);
+  methods[15].selector = @selector(hasVectors);
+  methods[16].selector = @selector(getAttributeWithNSString:);
+  methods[17].selector = @selector(putAttributeWithNSString:withNSString:);
+  methods[18].selector = @selector(attributes);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "name_", NULL, 0x11, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "number_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docValuesType_", NULL, 0x2, "Lorg.apache.lucene.index.DocValuesType;", NULL, NULL, .constantValue.asLong = 0 },
-    { "storeTermVector_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "omitNorms_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexOptions_", NULL, 0x2, "Lorg.apache.lucene.index.IndexOptions;", NULL, NULL, .constantValue.asLong = 0 },
-    { "storePayloads_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "attributes_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "dvGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "name_", "LNSString;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "number_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "docValuesType_", "LOrgApacheLuceneIndexDocValuesType;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "storeTermVector_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "omitNorms_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "indexOptions_", "LOrgApacheLuceneIndexIndexOptions;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "storePayloads_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "attributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 15, -1 },
+    { "dvGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldInfo = { 2, "FieldInfo", "org.apache.lucene.index", NULL, 0x11, 19, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;IZZZLOrgApacheLuceneIndexIndexOptions;LOrgApacheLuceneIndexDocValuesType;JLJavaUtilMap;", "(Ljava/lang/String;IZZZLorg/apache/lucene/index/IndexOptions;Lorg/apache/lucene/index/DocValuesType;JLjava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "update", "ZZZLOrgApacheLuceneIndexIndexOptions;", "setDocValuesType", "LOrgApacheLuceneIndexDocValuesType;", "setIndexOptions", "LOrgApacheLuceneIndexIndexOptions;", "setDocValuesGen", "J", "getAttribute", "LNSString;", "putAttribute", "LNSString;LNSString;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldInfo = { "FieldInfo", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 19, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFieldInfo;
 }
 
@@ -253,7 +281,7 @@ void OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBool
   }
   self->dvGen_ = dvGen;
   JreStrongAssign(&self->attributes_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(attributes));
-  JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:73 condition failed: assert checkConsistency();"));
+  JreAssert([self checkConsistency], @"org/apache/lucene/index/FieldInfo.java:73 condition failed: assert checkConsistency();");
 }
 
 OrgApacheLuceneIndexFieldInfo *new_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexDocValuesType_withLong_withJavaUtilMap_(NSString *name, jint number, jboolean storeTermVector, jboolean omitNorms, jboolean storePayloads, OrgApacheLuceneIndexIndexOptions *indexOptions, OrgApacheLuceneIndexDocValuesType *docValues, jlong dvGen, id<JavaUtilMap> attributes) {

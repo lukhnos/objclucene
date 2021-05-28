@@ -3,11 +3,13 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/StoredFieldsReader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/StoredFieldsReader.h"
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/StoredFieldsReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
@@ -26,7 +28,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   [self doesNotRecognizeSelector:_cmd];
 }
 
-- (OrgApacheLuceneCodecsStoredFieldsReader *)clone {
+- (OrgApacheLuceneCodecsStoredFieldsReader *)java_clone {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -41,20 +43,30 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   return self;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsReader;", 0x401, 3, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsReader;", 0x1, -1, -1, 2, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(visitDocumentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:);
+  methods[2].selector = @selector(java_clone);
+  methods[3].selector = @selector(checkIntegrity);
+  methods[4].selector = @selector(getMergeInstance);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "visitDocument", "ILOrgApacheLuceneIndexStoredFieldVisitor;", "LJavaIoIOException;", "clone" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsStoredFieldsReader = { "StoredFieldsReader", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 5, 0, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsStoredFieldsReader;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "StoredFieldsReader", NULL, 0x4, NULL, NULL },
-    { "visitDocumentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:", "visitDocument", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.codecs.StoredFieldsReader;", 0x401, NULL, NULL },
-    { "checkIntegrity", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.StoredFieldsReader;", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsStoredFieldsReader = { 2, "StoredFieldsReader", "org.apache.lucene.codecs", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneCodecsStoredFieldsReader;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end

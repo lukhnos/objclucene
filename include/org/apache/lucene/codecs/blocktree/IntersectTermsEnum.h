@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum))
 #define OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_
 
@@ -33,16 +39,16 @@
 
 /*!
  @brief This is used to implement efficient <code>Terms.intersect</code> for
- block-tree.
- Note that it cannot seek, except for the initial term on
- init.  It just "nexts" through the intersection of the automaton and
- the terms.  It does not use the terms index at all: on init, it
- loads the root block, and scans its way to the initial term.
- Likewise, in next it scans until it finds a term that matches the
- current automaton transition.  If the index has auto-prefix terms
- (only for DOCS_ONLY fields currently) it will visit these terms
- when possible and then skip the real terms that auto-prefix term
- matched. 
+   block-tree.Note that it cannot seek, except for the initial term on
+   init.
+ It just "nexts" through the intersection of the automaton and
+   the terms.  It does not use the terms index at all: on init, it
+   loads the root block, and scans its way to the initial term.
+   Likewise, in next it scans until it finds a term that matches the
+   current automaton transition.  If the index has auto-prefix terms
+   (only for DOCS_ONLY fields currently) it will visit these terms
+   when possible and then skip the real terms that auto-prefix term
+   matched.
  */
 @interface OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum : OrgApacheLuceneIndexTermsEnum {
  @public
@@ -53,17 +59,16 @@
   OrgApacheLuceneUtilBytesRef *commonSuffix_;
   OrgApacheLuceneCodecsBlocktreeFieldReader *fr_;
 }
-
-+ (OrgApacheLuceneUtilFstOutputs *)fstOutputs;
+@property (readonly, class, strong) OrgApacheLuceneUtilFstOutputs *fstOutputs NS_SWIFT_NAME(fstOutputs);
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneCodecsBlocktreeFieldReader:(OrgApacheLuceneCodecsBlocktreeFieldReader *)fr
-                        withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
-                     withOrgApacheLuceneUtilAutomatonRunAutomaton:(OrgApacheLuceneUtilAutomatonRunAutomaton *)runAutomaton
-                                  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)commonSuffix
-                                  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm
-                                                          withInt:(jint)sinkState;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader:(OrgApacheLuceneCodecsBlocktreeFieldReader *)fr
+                                                withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
+                                             withOrgApacheLuceneUtilAutomatonRunAutomaton:(OrgApacheLuceneUtilAutomatonRunAutomaton *)runAutomaton
+                                                          withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)commonSuffix
+                                                          withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm
+                                                                                  withInt:(jint)sinkState;
 
 - (jint)docFreq;
 
@@ -90,6 +95,10 @@
 
 + (NSString *)brToStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum)
@@ -101,16 +110,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum, automaton_
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum, commonSuffix_, OrgApacheLuceneUtilBytesRef *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum, fr_, OrgApacheLuceneCodecsBlocktreeFieldReader *)
 
-inline OrgApacheLuceneUtilFstOutputs *OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_get_fstOutputs();
+inline OrgApacheLuceneUtilFstOutputs *OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_get_fstOutputs(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstOutputs *OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_fstOutputs;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum, fstOutputs, OrgApacheLuceneUtilFstOutputs *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonRunAutomaton_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *self, OrgApacheLuceneCodecsBlocktreeFieldReader *fr, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneUtilAutomatonRunAutomaton *runAutomaton, OrgApacheLuceneUtilBytesRef *commonSuffix, OrgApacheLuceneUtilBytesRef *startTerm, jint sinkState);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonRunAutomaton_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *self, OrgApacheLuceneCodecsBlocktreeFieldReader *fr, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneUtilAutomatonRunAutomaton *runAutomaton, OrgApacheLuceneUtilBytesRef *commonSuffix, OrgApacheLuceneUtilBytesRef *startTerm, jint sinkState);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *new_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonRunAutomaton_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneUtilAutomatonRunAutomaton *runAutomaton, OrgApacheLuceneUtilBytesRef *commonSuffix, OrgApacheLuceneUtilBytesRef *startTerm, jint sinkState) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *new_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonRunAutomaton_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneUtilAutomatonRunAutomaton *runAutomaton, OrgApacheLuceneUtilBytesRef *commonSuffix, OrgApacheLuceneUtilBytesRef *startTerm, jint sinkState) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *create_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonRunAutomaton_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneUtilAutomatonRunAutomaton *runAutomaton, OrgApacheLuceneUtilBytesRef *commonSuffix, OrgApacheLuceneUtilBytesRef *startTerm, jint sinkState);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *create_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeFieldReader_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonRunAutomaton_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneUtilAutomatonRunAutomaton *runAutomaton, OrgApacheLuceneUtilBytesRef *commonSuffix, OrgApacheLuceneUtilBytesRef *startTerm, jint sinkState);
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_brToStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *b);
 
@@ -118,4 +127,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum")

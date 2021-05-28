@@ -3,14 +3,18 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/config/FieldDateResolutionFCListener.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/document/DateTools.h"
+#include "org/apache/lucene/queryparser/flexible/core/config/ConfigurationKey.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/FieldConfig.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
 #include "org/apache/lucene/queryparser/flexible/standard/config/FieldDateResolutionFCListener.h"
 #include "org/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/config/FieldDateResolutionFCListener must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener () {
  @public
@@ -30,7 +34,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateRes
 
 - (void)buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)fieldConfig {
   OrgApacheLuceneDocumentDateTools_Resolution *dateRes = nil;
-  id<JavaUtilMap> dateResMap = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk(self->config_)) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, FIELD_DATE_RESOLUTION_MAP)];
+  id<JavaUtilMap> dateResMap = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk(self->config_)) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, FIELD_DATE_RESOLUTION_MAP)]);
   if (dateResMap != nil) {
     dateRes = [dateResMap getWithId:[((OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *) nil_chk(fieldConfig)) getField]];
   }
@@ -48,14 +52,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateRes
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:", "FieldDateResolutionFCListener", NULL, 0x1, NULL, NULL },
-    { "buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:", "buildFieldConfig", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:);
+  methods[1].selector = @selector(buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "config_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler;", NULL, NULL, .constantValue.asLong = 0 },
+    { "config_", "LOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener = { 2, "FieldDateResolutionFCListener", "org.apache.lucene.queryparser.flexible.standard.config", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;", "buildFieldConfig", "LOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener = { "FieldDateResolutionFCListener", "org.apache.lucene.queryparser.flexible.standard.config", ptrTable, methods, fields, 7, 0x1, 2, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener;
 }
 

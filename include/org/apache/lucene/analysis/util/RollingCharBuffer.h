@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilRollingCharBuffer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilRollingCharBuffer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilRollingCharBuffer || defined(INCLUDE_OrgApacheLuceneAnalysisUtilRollingCharBuffer))
 #define OrgApacheLuceneAnalysisUtilRollingCharBuffer_
 
@@ -21,23 +27,22 @@
 
 /*!
  @brief Acts like a forever growing char[] as you read
- characters into it from the provided reader, but
- internally it uses a circular buffer to only hold the
- characters that haven't been freed yet.
- This is like a
- PushbackReader, except you don't have to specify
- up-front the max size of the buffer, but you do have to
- periodically call <code>freeBefore</code>. 
+   characters into it from the provided reader, but
+   internally it uses a circular buffer to only hold the
+   characters that haven't been freed yet.This is like a
+   PushbackReader, except you don't have to specify
+   up-front the max size of the buffer, but you do have to
+   periodically call <code>freeBefore</code>.
  */
 @interface OrgApacheLuceneAnalysisUtilRollingCharBuffer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Call this to notify us that no chars before this
- absolute position are needed anymore.
+   absolute position are needed anymore.
  */
 - (void)freeBeforeWithInt:(jint)pos;
 
@@ -57,12 +62,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilRollingCharBuffer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilRollingCharBuffer_init(OrgApacheLuceneAnalysisUtilRollingCharBuffer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilRollingCharBuffer *new_OrgApacheLuceneAnalysisUtilRollingCharBuffer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilRollingCharBuffer *new_OrgApacheLuceneAnalysisUtilRollingCharBuffer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilRollingCharBuffer *create_OrgApacheLuceneAnalysisUtilRollingCharBuffer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilRollingCharBuffer *create_OrgApacheLuceneAnalysisUtilRollingCharBuffer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilRollingCharBuffer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilRollingCharBuffer")

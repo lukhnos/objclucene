@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentCompressionTools
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentCompressionTools_) && (INCLUDE_ALL_OrgApacheLuceneDocumentCompressionTools || defined(INCLUDE_OrgApacheLuceneDocumentCompressionTools))
 #define OrgApacheLuceneDocumentCompressionTools_
 
@@ -21,9 +27,9 @@
 
 /*!
  @brief Simple utility class providing static methods to
- compress and decompress binary data for stored fields.
+   compress and decompress binary data for stored fields.
  This class uses java.util.zip.Deflater and Inflater
- classes to compress and decompress.
+   classes to compress and decompress.
  */
 @interface OrgApacheLuceneDocumentCompressionTools : NSObject
 
@@ -43,8 +49,8 @@
 
 /*!
  @brief Compresses the specified byte range using the
- specified compressionLevel (constants are defined in
- java.util.zip.Deflater).
+   specified compressionLevel (constants are defined in
+   java.util.zip.Deflater).
  */
 + (IOSByteArray *)compressWithByteArray:(IOSByteArray *)value
                                 withInt:(jint)offset
@@ -58,21 +64,21 @@
 
 /*!
  @brief Compresses the String value using the specified
- compressionLevel (constants are defined in
- java.util.zip.Deflater).
+   compressionLevel (constants are defined in
+   java.util.zip.Deflater).
  */
 + (IOSByteArray *)compressStringWithNSString:(NSString *)value
                                      withInt:(jint)compressionLevel;
 
 /*!
  @brief Decompress the byte array previously returned by
- compress
+   compress
  */
 + (IOSByteArray *)decompressWithByteArray:(IOSByteArray *)value;
 
 /*!
  @brief Decompress the byte array previously returned by
- compress
+   compress
  */
 + (IOSByteArray *)decompressWithByteArray:(IOSByteArray *)value
                                   withInt:(jint)offset
@@ -80,19 +86,19 @@
 
 /*!
  @brief Decompress the byte array previously returned by
- compress (referenced by the provided BytesRef)
+   compress (referenced by the provided BytesRef)
  */
 + (IOSByteArray *)decompressWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
 /*!
  @brief Decompress the byte array previously returned by
- compressString back into a String
+   compressString back into a String
  */
 + (NSString *)decompressStringWithByteArray:(IOSByteArray *)value;
 
 /*!
  @brief Decompress the byte array previously returned by
- compressString back into a String
+   compressString back into a String
  */
 + (NSString *)decompressStringWithByteArray:(IOSByteArray *)value
                                     withInt:(jint)offset
@@ -100,7 +106,7 @@
 
 /*!
  @brief Decompress the byte array (referenced by the provided BytesRef) 
- previously returned by compressString back into a String
+   previously returned by compressString back into a String
  */
 + (NSString *)decompressStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
@@ -134,4 +140,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentCompressionTools)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentCompressionTools")

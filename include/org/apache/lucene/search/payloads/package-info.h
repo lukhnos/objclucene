@@ -6,16 +6,16 @@
 /*!
  @brief The payloads package provides Query mechanisms for finding and using payloads.
  <p>
- The following Query implementations are provided:
+    The following Query implementations are provided:   
  <ol>
- <li>
- <code>PayloadScoreQuery</code> --
- Boost a document's score from a SpanQuery based on the values of the payloads located at the matching terms
+     <li>
+       <code>PayloadScoreQuery</code> --
+         Boost a document's score from a SpanQuery based on the values of the payloads located at the matching terms    
  </li>
- <li><code>PayloadTermQuery</code> -- Boost a term's score based on the value of the payload located at that term.</li>
- <li><code>PayloadNearQuery</code> -- A <code>SpanNearQuery</code> that factors in the value of the payloads located 
- at each of the positions where the spans occur.</li>
- </ol>
+     <li><code>PayloadTermQuery</code> -- Boost a term's score based on the value of the payload located at that term.</li>
+     <li><code>PayloadNearQuery</code> -- A <code>SpanNearQuery</code> that factors in the value of the payloads located 
+         at each of the positions where the spans occur.</li>
+    </ol>
  */
 #include "J2ObjC_header.h"
 
@@ -27,4 +27,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPackage_info")

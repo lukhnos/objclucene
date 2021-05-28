@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/store/RAMOutputStream.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/System.h"
 #include "java/util/Collection.h"
@@ -21,6 +19,10 @@
 #include "org/apache/lucene/store/RAMOutputStream.h"
 #include "org/apache/lucene/util/Accountable.h"
 #include "org/apache/lucene/util/Accountables.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/RAMOutputStream must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreRAMOutputStream () {
  @public
@@ -138,7 +140,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)writeBytesWithByteArray:(IOSByteArray *)b
                         withInt:(jint)offset
                         withInt:(jint)len {
-  JreAssert((b != nil), (@"org/apache/lucene/store/RAMOutputStream.java:143 condition failed: assert b != null;"));
+  JreAssert(b != nil, @"org/apache/lucene/store/RAMOutputStream.java:143 condition failed: assert b != null;");
   if (crc_ != nil) {
     [crc_ updateWithByteArray:b withInt:offset withInt:len];
   }
@@ -197,35 +199,56 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "RAMOutputStream", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreRAMFile:withBoolean:", "RAMOutputStream", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneStoreRAMFile:withBoolean:", "RAMOutputStream", NULL, 0x1, NULL, NULL },
-    { "writeToWithOrgApacheLuceneStoreDataOutput:", "writeTo", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeToWithByteArray:withInt:", "writeTo", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeByteWithByte:", "writeByte", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeBytesWithByteArray:withInt:withInt:", "writeBytes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "switchCurrentBuffer", NULL, "V", 0x12, NULL, NULL },
-    { "setFileLength", NULL, "V", 0x2, NULL, NULL },
-    { "flush", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "getChecksum", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 5, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, 4, -1, -1, -1 },
+    { NULL, "V", 0x12, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 4, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 10, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreRAMFile:withBoolean:);
+  methods[2].selector = @selector(initWithNSString:withOrgApacheLuceneStoreRAMFile:withBoolean:);
+  methods[3].selector = @selector(writeToWithOrgApacheLuceneStoreDataOutput:);
+  methods[4].selector = @selector(writeToWithByteArray:withInt:);
+  methods[5].selector = @selector(reset);
+  methods[6].selector = @selector(close);
+  methods[7].selector = @selector(writeByteWithByte:);
+  methods[8].selector = @selector(writeBytesWithByteArray:withInt:withInt:);
+  methods[9].selector = @selector(switchCurrentBuffer);
+  methods[10].selector = @selector(setFileLength);
+  methods[11].selector = @selector(flush);
+  methods[12].selector = @selector(getFilePointer);
+  methods[13].selector = @selector(ramBytesUsed);
+  methods[14].selector = @selector(getChildResources);
+  methods[15].selector = @selector(getChecksum);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "BUFFER_SIZE", "BUFFER_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneStoreRAMOutputStream_BUFFER_SIZE },
-    { "file_", NULL, 0x12, "Lorg.apache.lucene.store.RAMFile;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentBuffer_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentBufferIndex_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferPosition_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferStart_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "crc_", NULL, 0x12, "Ljava.util.zip.Checksum;", NULL, NULL, .constantValue.asLong = 0 },
+    { "BUFFER_SIZE", "I", .constantValue.asInt = OrgApacheLuceneStoreRAMOutputStream_BUFFER_SIZE, 0x18, -1, -1, -1, -1 },
+    { "file_", "LOrgApacheLuceneStoreRAMFile;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentBuffer_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentBufferIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferPosition_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferStart_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "crc_", "LJavaUtilZipChecksum;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMOutputStream = { 2, "RAMOutputStream", "org.apache.lucene.store", NULL, 0x1, 16, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRAMFile;Z", "LNSString;LOrgApacheLuceneStoreRAMFile;Z", "writeTo", "LOrgApacheLuceneStoreDataOutput;", "LJavaIoIOException;", "[BI", "writeByte", "B", "writeBytes", "[BII", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMOutputStream = { "RAMOutputStream", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 16, 8, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreRAMOutputStream;
 }
 

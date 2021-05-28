@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFieldValueHitQueue
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFieldValueHitQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldValueHitQueue || defined(INCLUDE_OrgApacheLuceneSearchFieldValueHitQueue))
 #define OrgApacheLuceneSearchFieldValueHitQueue_
 
@@ -43,16 +49,17 @@
 
 #pragma mark Public
 
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)addWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)arg0;
+
 /*!
  @brief Creates a hit queue sorted by the given list of fields.
  <p><b>NOTE</b>: The instances returned by this method
- pre-allocate a full array of length <code>numHits</code>.
- @param fields
- SortField array we are sorting by in priority order (highest
- priority first); cannot be <code>null</code> or empty
- @param size
- The number of hits to retain. Must be greater than zero.
- @throws IOException if there is a low-level IO error
+  pre-allocate a full array of length <code>numHits</code>.
+ @param fields SortField array we are sorting by in priority order (highest
+            priority first); cannot be 
+  <code> null </code>  or empty
+ @param size The number of hits to retain. Must be greater than zero.
+ @throw IOExceptionif there is a low-level IO error
  */
 + (OrgApacheLuceneSearchFieldValueHitQueue *)createWithOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields
                                                                                    withInt:(jint)size;
@@ -63,7 +70,19 @@
 
 - (IOSIntArray *)getReverseMul;
 
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)insertWithOverflowWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)arg0;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)pop;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)top;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)updateTop;
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)updateTopWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)arg0;
+
 #pragma mark Protected
+
+- (OrgApacheLuceneSearchFieldValueHitQueue_Entry *)getSentinelObject;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)a
                     withId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)b;
@@ -72,10 +91,10 @@
 
 /*!
  @brief Given a queue Entry, creates a corresponding FieldDoc
- that contains the values used to sort the given document.
+  that contains the values used to sort the given document.
  These values are not the raw values out of the index, but the internal
- representation of them. This is so the given search hit can be collated by
- a MultiSearcher with other search hits.
+  representation of them. This is so the given search hit can be collated by
+  a MultiSearcher with other search hits.
  @param entry_ The Entry used to create a FieldDoc
  @return The newly created FieldDoc
  - seealso: IndexSearcher#search(Query,int,Sort)
@@ -86,6 +105,13 @@
  @brief Returns the SortFields being used by this hit queue.
  */
 - (IOSObjectArray *)getFields;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -109,7 +135,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue)
 #include "org/apache/lucene/search/ScoreDoc.h"
 
 /*!
- @brief Extension of ScoreDoc to also store the 
+ @brief Extension of ScoreDoc to also store the  
  <code>FieldComparator</code> slot.
  */
 @interface OrgApacheLuceneSearchFieldValueHitQueue_Entry : OrgApacheLuceneSearchScoreDoc {
@@ -119,11 +145,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)slot
-                    withInt:(jint)doc
-                  withFloat:(jfloat)score;
+- (instancetype __nonnull)initWithInt:(jint)slot
+                              withInt:(jint)doc
+                            withFloat:(jfloat)score;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                            withFloat:(jfloat)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                            withFloat:(jfloat)arg1
+                              withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -139,4 +174,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_Entry)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldValueHitQueue")

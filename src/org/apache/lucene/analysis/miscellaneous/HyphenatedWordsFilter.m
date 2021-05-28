@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -14,6 +13,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/HyphenatedWordsFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter () {
  @public
@@ -49,7 +52,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousHyphenat
 - (jboolean)incrementToken {
   while (!exhausted_ && [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     IOSCharArray *term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAttribute_)) buffer];
-    jint termLength = [termAttribute_ length];
+    jint termLength = [termAttribute_ java_length];
     lastEndOffset_ = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAttribute_)) endOffset];
     if (termLength > 0 && IOSCharArray_Get(nil_chk(term), termLength - 1) == '-') {
       if (savedState_ == nil) {
@@ -96,21 +99,30 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousHyphenat
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "HyphenatedWordsFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "unhyphenate", NULL, "V", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  methods[2].selector = @selector(reset);
+  methods[3].selector = @selector(unhyphenate);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hyphenated_", NULL, 0x12, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "savedState_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
-    { "exhausted_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastEndOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "termAttribute_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAttribute_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "hyphenated_", "LJavaLangStringBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "savedState_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "exhausted_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastEndOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter = { 2, "HyphenatedWordsFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 4, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter = { "HyphenatedWordsFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 4, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter;
 }
 
@@ -137,8 +149,8 @@ void OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_unhyphenate(OrgAp
   [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:self->savedState_];
   JreStrongAssign(&self->savedState_, nil);
   IOSCharArray *term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAttribute_)) buffer];
-  jint length = [((JavaLangStringBuilder *) nil_chk(self->hyphenated_)) length];
-  if (length > [self->termAttribute_ length]) {
+  jint length = [((JavaLangStringBuilder *) nil_chk(self->hyphenated_)) java_length];
+  if (length > [self->termAttribute_ java_length]) {
     term = [self->termAttribute_ resizeBufferWithInt:length];
   }
   [self->hyphenated_ getCharsWithInt:0 withInt:length withCharArray:term withInt:0];

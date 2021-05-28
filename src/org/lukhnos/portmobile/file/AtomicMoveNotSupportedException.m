@@ -3,10 +3,15 @@
 //  source: ./core/src/java/org/lukhnos/portmobile/file/AtomicMoveNotSupportedException.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "org/lukhnos/portmobile/file/AtomicMoveNotSupportedException.h"
+
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/AtomicMoveNotSupportedException must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgLukhnosPortmobileFileAtomicMoveNotSupportedException
 
@@ -18,17 +23,23 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:withNSString:", "AtomicMoveNotSupportedException", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileAtomicMoveNotSupportedException = { 2, "AtomicMoveNotSupportedException", "org.lukhnos.portmobile.file", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:withNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;LNSString;LNSString;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileAtomicMoveNotSupportedException = { "AtomicMoveNotSupportedException", "org.lukhnos.portmobile.file", ptrTable, methods, NULL, 7, 0x1, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgLukhnosPortmobileFileAtomicMoveNotSupportedException;
 }
 
 @end
 
 void OrgLukhnosPortmobileFileAtomicMoveNotSupportedException_initWithNSString_withNSString_withNSString_(OrgLukhnosPortmobileFileAtomicMoveNotSupportedException *self, NSString *source, NSString *target, NSString *reason) {
-  JavaIoIOException_initWithNSString_(self, NSString_formatWithNSString_withNSObjectArray_(@"Atomic move not supported from %s to %s, reason: %s.", [IOSObjectArray arrayWithObjects:(id[]){ source, target, reason } count:3 type:NSObject_class_()]));
+  JavaIoIOException_initWithNSString_(self, NSString_java_formatWithNSString_withNSObjectArray_(@"Atomic move not supported from %s to %s, reason: %s.", [IOSObjectArray arrayWithObjects:(id[]){ source, target, reason } count:3 type:NSObject_class_()]));
 }
 
 OrgLukhnosPortmobileFileAtomicMoveNotSupportedException *new_OrgLukhnosPortmobileFileAtomicMoveNotSupportedException_initWithNSString_withNSString_withNSString_(NSString *source, NSString *target, NSString *reason) {

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreNoLockFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreNoLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreNoLockFactory || defined(INCLUDE_OrgApacheLuceneStoreNoLockFactory))
 #define OrgApacheLuceneStoreNoLockFactory_
 
@@ -30,10 +36,8 @@
  - seealso: LockFactory
  */
 @interface OrgApacheLuceneStoreNoLockFactory : OrgApacheLuceneStoreLockFactory
-
-+ (OrgApacheLuceneStoreNoLockFactory *)INSTANCE;
-
-+ (OrgApacheLuceneStoreNoLockFactory_NoLock *)SINGLETON_LOCK;
+@property (readonly, class, strong) OrgApacheLuceneStoreNoLockFactory *INSTANCE NS_SWIFT_NAME(INSTANCE);
+@property (readonly, class, strong) OrgApacheLuceneStoreNoLockFactory_NoLock *SINGLETON_LOCK NS_SWIFT_NAME(SINGLETON_LOCK);
 
 #pragma mark Public
 
@@ -47,12 +51,12 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneStoreNoLockFactory)
 /*!
  @brief The singleton
  */
-inline OrgApacheLuceneStoreNoLockFactory *OrgApacheLuceneStoreNoLockFactory_get_INSTANCE();
+inline OrgApacheLuceneStoreNoLockFactory *OrgApacheLuceneStoreNoLockFactory_get_INSTANCE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneStoreNoLockFactory *OrgApacheLuceneStoreNoLockFactory_INSTANCE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreNoLockFactory, INSTANCE, OrgApacheLuceneStoreNoLockFactory *)
 
-inline OrgApacheLuceneStoreNoLockFactory_NoLock *OrgApacheLuceneStoreNoLockFactory_get_SINGLETON_LOCK();
+inline OrgApacheLuceneStoreNoLockFactory_NoLock *OrgApacheLuceneStoreNoLockFactory_get_SINGLETON_LOCK(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneStoreNoLockFactory_NoLock *OrgApacheLuceneStoreNoLockFactory_SINGLETON_LOCK;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreNoLockFactory, SINGLETON_LOCK, OrgApacheLuceneStoreNoLockFactory_NoLock *)
@@ -86,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNoLockFactory_NoLock)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreNoLockFactory")

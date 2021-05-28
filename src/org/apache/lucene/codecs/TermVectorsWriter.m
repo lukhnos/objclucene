@@ -3,11 +3,9 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/TermVectorsWriter.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Iterator.h"
 #include "org/apache/lucene/codecs/TermVectorsReader.h"
 #include "org/apache/lucene/codecs/TermVectorsWriter.h"
@@ -23,6 +21,10 @@
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/TermVectorsWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsTermVectorsWriter_addAllDocVectorsWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneCodecsTermVectorsWriter *self, OrgApacheLuceneIndexFields *vectors, OrgApacheLuceneIndexMergeState *mergeState);
 
@@ -161,22 +163,40 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TermVectorsWriter", NULL, 0x4, NULL, NULL },
-    { "startDocumentWithInt:", "startDocument", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "finishDocument", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "startFieldWithOrgApacheLuceneIndexFieldInfo:withInt:withBoolean:withBoolean:withBoolean:", "startField", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "finishField", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "startTermWithOrgApacheLuceneUtilBytesRef:withInt:", "startTerm", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "finishTerm", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "addPositionWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:", "addPosition", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "finishWithOrgApacheLuceneIndexFieldInfos:withInt:", "finish", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "addProxWithInt:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneStoreDataInput:", "addProx", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "mergeWithOrgApacheLuceneIndexMergeState:", "merge", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "addAllDocVectorsWithOrgApacheLuceneIndexFields:withOrgApacheLuceneIndexMergeState:", "addAllDocVectors", "V", 0x14, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 5, 6, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 7, 8, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 9, 10, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, 13, 14, 2, -1, -1, -1 },
+    { NULL, "V", 0x14, 15, 16, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsTermVectorsWriter = { 2, "TermVectorsWriter", "org.apache.lucene.codecs", NULL, 0x401, 13, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(startDocumentWithInt:);
+  methods[2].selector = @selector(finishDocument);
+  methods[3].selector = @selector(startFieldWithOrgApacheLuceneIndexFieldInfo:withInt:withBoolean:withBoolean:withBoolean:);
+  methods[4].selector = @selector(finishField);
+  methods[5].selector = @selector(startTermWithOrgApacheLuceneUtilBytesRef:withInt:);
+  methods[6].selector = @selector(finishTerm);
+  methods[7].selector = @selector(addPositionWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:);
+  methods[8].selector = @selector(finishWithOrgApacheLuceneIndexFieldInfos:withInt:);
+  methods[9].selector = @selector(addProxWithInt:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneStoreDataInput:);
+  methods[10].selector = @selector(mergeWithOrgApacheLuceneIndexMergeState:);
+  methods[11].selector = @selector(addAllDocVectorsWithOrgApacheLuceneIndexFields:withOrgApacheLuceneIndexMergeState:);
+  methods[12].selector = @selector(close);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "startDocument", "I", "LJavaIoIOException;", "startField", "LOrgApacheLuceneIndexFieldInfo;IZZZ", "startTerm", "LOrgApacheLuceneUtilBytesRef;I", "addPosition", "IIILOrgApacheLuceneUtilBytesRef;", "finish", "LOrgApacheLuceneIndexFieldInfos;I", "addProx", "ILOrgApacheLuceneStoreDataInput;LOrgApacheLuceneStoreDataInput;", "merge", "LOrgApacheLuceneIndexMergeState;", "addAllDocVectors", "LOrgApacheLuceneIndexFields;LOrgApacheLuceneIndexMergeState;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsTermVectorsWriter = { "TermVectorsWriter", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 13, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsTermVectorsWriter;
 }
 
@@ -208,7 +228,7 @@ void OrgApacheLuceneCodecsTermVectorsWriter_addAllDocVectorsWithOrgApacheLuceneI
   for (NSString * __strong fieldName in vectors) {
     fieldCount++;
     OrgApacheLuceneIndexFieldInfo *fieldInfo = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState))->mergeFieldInfos_)) fieldInfoWithNSString:fieldName];
-    JreAssert((lastFieldName == nil || [((NSString *) nil_chk(fieldName)) compareToWithId:lastFieldName] > 0), (JreStrcat("$$$$", @"lastFieldName=", lastFieldName, @" fieldName=", fieldName)));
+    JreAssert(lastFieldName == nil || [((NSString *) nil_chk(fieldName)) compareToWithId:lastFieldName] > 0, JreStrcat("$$$$", @"lastFieldName=", lastFieldName, @" fieldName=", fieldName));
     lastFieldName = fieldName;
     OrgApacheLuceneIndexTerms *terms = [vectors termsWithNSString:fieldName];
     if (terms == nil) {
@@ -217,7 +237,7 @@ void OrgApacheLuceneCodecsTermVectorsWriter_addAllDocVectorsWithOrgApacheLuceneI
     jboolean hasPositions = [terms hasPositions];
     jboolean hasOffsets = [terms hasOffsets];
     jboolean hasPayloads = [terms hasPayloads];
-    JreAssert((!hasPayloads || hasPositions), (@"org/apache/lucene/codecs/TermVectorsWriter.java:246 condition failed: assert !hasPayloads || hasPositions;"));
+    JreAssert(!hasPayloads || hasPositions, @"org/apache/lucene/codecs/TermVectorsWriter.java:246 condition failed: assert !hasPayloads || hasPositions;");
     jint numTerms = (jint) [terms size];
     if (numTerms == -1) {
       numTerms = 0;
@@ -235,25 +255,25 @@ void OrgApacheLuceneCodecsTermVectorsWriter_addAllDocVectorsWithOrgApacheLuceneI
       [self startTermWithOrgApacheLuceneUtilBytesRef:[termsEnum term] withInt:freq];
       if (hasPositions || hasOffsets) {
         docsAndPositionsEnum = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:docsAndPositionsEnum withInt:OrgApacheLuceneIndexPostingsEnum_OFFSETS | OrgApacheLuceneIndexPostingsEnum_PAYLOADS];
-        JreAssert((docsAndPositionsEnum != nil), (@"org/apache/lucene/codecs/TermVectorsWriter.java:271 condition failed: assert docsAndPositionsEnum != null;"));
+        JreAssert(docsAndPositionsEnum != nil, @"org/apache/lucene/codecs/TermVectorsWriter.java:271 condition failed: assert docsAndPositionsEnum != null;");
         jint docID = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(docsAndPositionsEnum)) nextDoc];
-        JreAssert((docID != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS), (@"org/apache/lucene/codecs/TermVectorsWriter.java:274 condition failed: assert docID != DocIdSetIterator.NO_MORE_DOCS;"));
-        JreAssert(([docsAndPositionsEnum freq] == freq), (@"org/apache/lucene/codecs/TermVectorsWriter.java:275 condition failed: assert docsAndPositionsEnum.freq() == freq;"));
+        JreAssert(docID != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS, @"org/apache/lucene/codecs/TermVectorsWriter.java:274 condition failed: assert docID != DocIdSetIterator.NO_MORE_DOCS;");
+        JreAssert([docsAndPositionsEnum freq] == freq, @"org/apache/lucene/codecs/TermVectorsWriter.java:275 condition failed: assert docsAndPositionsEnum.freq() == freq;");
         for (jint posUpto = 0; posUpto < freq; posUpto++) {
           jint pos = [docsAndPositionsEnum nextPosition];
           jint startOffset = [docsAndPositionsEnum startOffset];
           jint endOffset = [docsAndPositionsEnum endOffset];
           OrgApacheLuceneUtilBytesRef *payload = [docsAndPositionsEnum getPayload];
-          JreAssert((!hasPositions || pos >= 0), (@"org/apache/lucene/codecs/TermVectorsWriter.java:284 condition failed: assert !hasPositions || pos >= 0 ;"));
+          JreAssert(!hasPositions || pos >= 0, @"org/apache/lucene/codecs/TermVectorsWriter.java:284 condition failed: assert !hasPositions || pos >= 0 ;");
           [self addPositionWithInt:pos withInt:startOffset withInt:endOffset withOrgApacheLuceneUtilBytesRef:payload];
         }
       }
       [self finishTerm];
     }
-    JreAssert((termCount == numTerms), (@"org/apache/lucene/codecs/TermVectorsWriter.java:290 condition failed: assert termCount == numTerms;"));
+    JreAssert(termCount == numTerms, @"org/apache/lucene/codecs/TermVectorsWriter.java:290 condition failed: assert termCount == numTerms;");
     [self finishField];
   }
-  JreAssert((fieldCount == numFields), (@"org/apache/lucene/codecs/TermVectorsWriter.java:293 condition failed: assert fieldCount == numFields;"));
+  JreAssert(fieldCount == numFields, @"org/apache/lucene/codecs/TermVectorsWriter.java:293 condition failed: assert fieldCount == numFields;");
   [self finishDocument];
 }
 

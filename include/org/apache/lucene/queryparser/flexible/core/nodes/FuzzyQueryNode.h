@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_
 
@@ -21,33 +27,29 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 
 @protocol JavaLangCharSequence;
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
 /*!
  @brief A <code>FuzzyQueryNode</code> represents a element that contains
- field/text/similarity tuple
+  field/text/similarity tuple
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode
 
 #pragma mark Public
 
 /*!
- @param field
- - Field name
- @param term
- - Value
- @param minSimilarity
- - similarity value
- @param begin
- - position in the query string
- @param end
- - position in the query string
+ @param field - Field name
+ @param term - Value
+ @param minSimilarity - similarity value
+ @param begin - position in the query string
+ @param end - position in the query string
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)term
-                                   withFloat:(jfloat)minSimilarity
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
+                              withJavaLangCharSequence:(id<JavaLangCharSequence>)term
+                                             withFloat:(jfloat)minSimilarity
+                                               withInt:(jint)begin
+                                               withInt:(jint)end;
 
 - (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *)cloneTree;
 
@@ -58,6 +60,8 @@
  */
 - (jfloat)getSimilarity;
 
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
+
 - (void)setPrefixLengthWithInt:(jint)prefixLength;
 
 - (void)setSimilarityWithFloat:(jfloat)similarity;
@@ -65,6 +69,13 @@
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)arg0
+                              withJavaLangCharSequence:(id<JavaLangCharSequence>)arg1
+                                               withInt:(jint)arg2
+                                               withInt:(jint)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -80,4 +91,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQuery
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode")

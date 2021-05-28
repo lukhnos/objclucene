@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisNlDutchAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNlDutchAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNlDutchAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisNlDutchAnalyzer))
 #define OrgApacheLuceneAnalysisNlDutchAnalyzer_
 
@@ -20,6 +26,7 @@
 #define INCLUDE_OrgApacheLuceneAnalysisAnalyzer 1
 #include "org/apache/lucene/analysis/Analyzer.h"
 
+@class OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 @class OrgApacheLuceneAnalysisUtilCharArrayMap;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
@@ -27,34 +34,33 @@
 /*!
  @brief <code>Analyzer</code> for Dutch language.
  <p>
- Supports an external list of stopwords (words that
- will not be indexed at all), an external list of exclusions (word that will
- not be stemmed, but indexed) and an external list of word-stem pairs that overrule
- the algorithm (dictionary stemming).
- A default set of stopwords is used unless an alternative list is specified, but the
- exclusion list is empty by default.
+  Supports an external list of stopwords (words that
+  will not be indexed at all), an external list of exclusions (word that will
+  not be stemmed, but indexed) and an external list of word-stem pairs that overrule
+  the algorithm (dictionary stemming).
+  A default set of stopwords is used unless an alternative list is specified, but the
+  exclusion list is empty by default. 
  </p>
  */
 @interface OrgApacheLuceneAnalysisNlDutchAnalyzer : OrgApacheLuceneAnalysisAnalyzer
-
-+ (NSString *)DEFAULT_STOPWORD_FILE;
+@property (readonly, copy, class) NSString *DEFAULT_STOPWORD_FILE NS_SWIFT_NAME(DEFAULT_STOPWORD_FILE);
 
 #pragma mark Public
 
 /*!
  @brief Builds an analyzer with the default stop words (<code>getDefaultStopSet()</code>) 
- and a few default entries for the stem exclusion table.
+  and a few default entries for the stem exclusion table.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
-                    withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionTable;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
+                              withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionTable;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
-                    withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionTable
-                    withOrgApacheLuceneAnalysisUtilCharArrayMap:(OrgApacheLuceneAnalysisUtilCharArrayMap *)stemOverrideDict;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
+                              withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionTable
+                              withOrgApacheLuceneAnalysisUtilCharArrayMap:(OrgApacheLuceneAnalysisUtilCharArrayMap *)stemOverrideDict;
 
 /*!
  @brief Returns an unmodifiable instance of the default stop-words set.
@@ -66,13 +72,17 @@
 
 /*!
  @brief Returns a (possibly reused) <code>TokenStream</code> which tokenizes all the 
- text in the provided <code>Reader</code>.
+  text in the provided <code>Reader</code>.
  @return A <code>TokenStream</code> built from a <code>StandardTokenizer</code>
- filtered with <code>StandardFilter</code>, <code>LowerCaseFilter</code>, 
- <code>StopFilter</code>, <code>SetKeywordMarkerFilter</code> if a stem exclusion set is provided,
- <code>StemmerOverrideFilter</code>, and <code>SnowballFilter</code>
+    filtered with <code>StandardFilter</code>, <code>LowerCaseFilter</code>, 
+    <code>StopFilter</code>, <code>SetKeywordMarkerFilter</code> if a stem exclusion set is provided,
+    <code>StemmerOverrideFilter</code>, and <code>SnowballFilter</code>
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -81,18 +91,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNlDutchAnalyzer)
 /*!
  @brief File containing default Dutch stopwords.
  */
-inline NSString *OrgApacheLuceneAnalysisNlDutchAnalyzer_get_DEFAULT_STOPWORD_FILE();
+inline NSString *OrgApacheLuceneAnalysisNlDutchAnalyzer_get_DEFAULT_STOPWORD_FILE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisNlDutchAnalyzer_DEFAULT_STOPWORD_FILE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisNlDutchAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisNlDutchAnalyzer_getDefaultStopSet();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisNlDutchAnalyzer_getDefaultStopSet(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNlDutchAnalyzer_init(OrgApacheLuceneAnalysisNlDutchAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNlDutchAnalyzer *new_OrgApacheLuceneAnalysisNlDutchAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNlDutchAnalyzer *new_OrgApacheLuceneAnalysisNlDutchAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNlDutchAnalyzer *create_OrgApacheLuceneAnalysisNlDutchAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNlDutchAnalyzer *create_OrgApacheLuceneAnalysisNlDutchAnalyzer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNlDutchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisNlDutchAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
@@ -116,4 +126,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNlDutchAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNlDutchAnalyzer")

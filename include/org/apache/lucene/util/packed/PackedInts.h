@@ -28,6 +28,12 @@
 #define INCLUDE_OrgApacheLuceneUtilPackedPackedInts_ReaderIterator 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedPackedInts_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedInts || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedInts))
 #define OrgApacheLuceneUtilPackedPackedInts_
 
@@ -47,39 +53,29 @@
 /*!
  @brief Simplistic compression for array of unsigned long values.
  Each value is <code>>= 0</code> and <code><=</code> a specified maximum value.  The
- values are stored as packed ints, with each value
- consuming a fixed number of bits.
+  values are stored as packed ints, with each value
+  consuming a fixed number of bits.
  */
 @interface OrgApacheLuceneUtilPackedPackedInts : NSObject
-
-+ (jfloat)FASTEST;
-
-+ (jfloat)FAST;
-
-+ (jfloat)DEFAULT;
-
-+ (jfloat)COMPACT;
-
-+ (jint)DEFAULT_BUFFER_SIZE;
-
-+ (NSString *)CODEC_NAME;
-
-+ (jint)VERSION_START;
-
-+ (jint)VERSION_BYTE_ALIGNED;
-
-+ (jint)VERSION_MONOTONIC_WITHOUT_ZIGZAG;
-
-+ (jint)VERSION_CURRENT;
+@property (readonly, class) jfloat FASTEST NS_SWIFT_NAME(FASTEST);
+@property (readonly, class) jfloat FAST NS_SWIFT_NAME(FAST);
+@property (readonly, class) jfloat DEFAULT NS_SWIFT_NAME(DEFAULT);
+@property (readonly, class) jfloat COMPACT NS_SWIFT_NAME(COMPACT);
+@property (readonly, class) jint DEFAULT_BUFFER_SIZE NS_SWIFT_NAME(DEFAULT_BUFFER_SIZE);
+@property (readonly, copy, class) NSString *CODEC_NAME NS_SWIFT_NAME(CODEC_NAME);
+@property (readonly, class) jint VERSION_START NS_SWIFT_NAME(VERSION_START);
+@property (readonly, class) jint VERSION_BYTE_ALIGNED NS_SWIFT_NAME(VERSION_BYTE_ALIGNED);
+@property (readonly, class) jint VERSION_MONOTONIC_WITHOUT_ZIGZAG NS_SWIFT_NAME(VERSION_MONOTONIC_WITHOUT_ZIGZAG);
+@property (readonly, class) jint VERSION_CURRENT NS_SWIFT_NAME(VERSION_CURRENT);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns how many bits are required to hold values up
- to and including maxValue
- NOTE: This method returns at least 1.
+   to and including maxValue
+   NOTE: This method returns at least 1.
  @param maxValue the maximum value that should be representable.
  @return the amount of bits needed to represent values from 0 to maxValue.
  */
@@ -91,9 +87,9 @@
 + (void)checkVersionWithInt:(jint)version_;
 
 /*!
- @brief Copy <code>src[srcPos:srcPos+len]</code> into
+ @brief Copy <code>src[srcPos:srcPos+len]</code> into 
  <code>dest[destPos:destPos+len]</code> using at most <code>mem</code>
- bytes.
+  bytes.
  */
 + (void)copy__WithOrgApacheLuceneUtilPackedPackedInts_Reader:(OrgApacheLuceneUtilPackedPackedInts_Reader *)src
                                                      withInt:(jint)srcPos
@@ -104,15 +100,15 @@
 
 /*!
  @brief Try to find the <code>Format</code> and number of bits per value that would
- restore from disk the fastest reader whose overhead is less than
+  restore from disk the fastest reader whose overhead is less than 
  <code>acceptableOverheadRatio</code>.
  <p>
- The <code>acceptableOverheadRatio</code> parameter makes sense for
- random-access <code>Reader</code>s. In case you only plan to perform
- sequential access on this stream later on, you should probably use
+  The <code>acceptableOverheadRatio</code> parameter makes sense for
+  random-access <code>Reader</code>s. In case you only plan to perform
+  sequential access on this stream later on, you should probably use 
  <code>PackedInts.COMPACT</code>.
- <p>
- If you don't know how many values you are going to write, use
+  <p>
+  If you don't know how many values you are going to write, use 
  <code>valueCount = -1</code>.
  */
 + (OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *)fastestFormatAndBitsWithInt:(jint)valueCount
@@ -121,9 +117,9 @@
 
 /*!
  @brief Get a <code>Decoder</code>.
- @param format         the format used to store packed ints
- @param version_        the compatibility version
- @param bitsPerValue   the number of bits per value
+ @param format the format used to store packed ints
+ @param version_ the compatibility version
+ @param bitsPerValue the number of bits per value
  @return a decoder
  */
 + (id<OrgApacheLuceneUtilPackedPackedInts_Decoder>)getDecoderWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
@@ -131,32 +127,30 @@
                                                                                                     withInt:(jint)bitsPerValue;
 
 /*!
- @brief Construct a direct <code>Reader</code> from an <code>IndexInput</code>.
- This method
- is useful to restore data from streams which have been created using
- <code>PackedInts.getWriter(DataOutput,int,int,float)</code>.
+ @brief Construct a direct <code>Reader</code> from an <code>IndexInput</code>.This method
+  is useful to restore data from streams which have been created using 
+ <code>PackedInts.getWriter(DataOutput, int, int, float)</code>.
  <p>
- The returned reader will have very little memory overhead, but every call
- to <code>Reader.get(int)</code> is likely to perform a disk seek.
- @param inArg           the stream to read data from
+  The returned reader will have very little memory overhead, but every call
+  to <code>Reader.get(int)</code> is likely to perform a disk seek.
+ @param inArg the stream to read data from
  @return a direct Reader
- @throws IOException If there is a low-level I/O error
+ @throw IOExceptionIf there is a low-level I/O error
  */
 + (OrgApacheLuceneUtilPackedPackedInts_Reader *)getDirectReaderWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg;
 
 /*!
  @brief Expert: Construct a direct <code>Reader</code> from a stream without reading
- metadata at the beginning of the stream.
- This method is useful to restore
- data from streams which have been created using
- <code>PackedInts.getWriterNoHeader(DataOutput,Format,int,int,int)</code>.
+  metadata at the beginning of the stream.This method is useful to restore
+  data from streams which have been created using 
+ <code>PackedInts.getWriterNoHeader(DataOutput, Format, int, int, int)</code>.
  <p>
- The returned reader will have very little memory overhead, but every call
- to <code>Reader.get(int)</code> is likely to perform a disk seek.
- @param inArg           the stream to read data from
- @param format       the format used to serialize
- @param version_      the version used to serialize the data
- @param valueCount   how many values the stream holds
+  The returned reader will have very little memory overhead, but every call
+  to <code>Reader.get(int)</code> is likely to perform a disk seek.
+ @param inArg the stream to read data from
+ @param format the format used to serialize
+ @param version_ the version used to serialize the data
+ @param valueCount how many values the stream holds
  @param bitsPerValue the number of bits per value
  @return a direct Reader
  */
@@ -168,9 +162,9 @@
 
 /*!
  @brief Get an <code>Encoder</code>.
- @param format         the format used to store packed ints
- @param version_        the compatibility version
- @param bitsPerValue   the number of bits per value
+ @param format the format used to store packed ints
+ @param version_ the compatibility version
+ @param bitsPerValue the number of bits per value
  @return an encoder
  */
 + (id<OrgApacheLuceneUtilPackedPackedInts_Encoder>)getEncoderWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
@@ -179,19 +173,18 @@
 
 /*!
  @brief Create a packed integer array with the given amount of values initialized
- to 0. the valueCount and the bitsPerValue cannot be changed after creation.
- All Mutables known by this factory are kept fully in RAM.
+  to 0.the valueCount and the bitsPerValue cannot be changed after creation.
+ All Mutables known by this factory are kept fully in RAM. 
  <p>
- Positive values of <code>acceptableOverheadRatio</code> will trade space
- for speed by selecting a faster but potentially less memory-efficient
- implementation. An <code>acceptableOverheadRatio</code> of
+  Positive values of <code>acceptableOverheadRatio</code> will trade space
+  for speed by selecting a faster but potentially less memory-efficient
+  implementation. An <code>acceptableOverheadRatio</code> of 
  <code>PackedInts.COMPACT</code> will make sure that the most memory-efficient
- implementation is selected whereas <code>PackedInts.FASTEST</code> will make sure
- that the fastest implementation is selected.
- @param valueCount   the number of elements
+  implementation is selected whereas <code>PackedInts.FASTEST</code> will make sure
+  that the fastest implementation is selected.
+ @param valueCount the number of elements
  @param bitsPerValue the number of bits available for any given value
- @param acceptableOverheadRatio an acceptable overhead
- ratio per value
+ @param acceptableOverheadRatio an acceptable overhead         ratio per value
  @return a mutable packed integer array
  */
 + (OrgApacheLuceneUtilPackedPackedInts_Mutable *)getMutableWithInt:(jint)valueCount
@@ -199,9 +192,8 @@
                                                          withFloat:(jfloat)acceptableOverheadRatio;
 
 /*!
- @brief Same as <code>getMutable(int,int,float)</code> with a pre-computed number
- of bits per value and format.
-  
+ @brief Same as <code>getMutable(int, int, float)</code> with a pre-computed number
+   of bits per value and format.
  */
 + (OrgApacheLuceneUtilPackedPackedInts_Mutable *)getMutableWithInt:(jint)valueCount
                                                            withInt:(jint)bitsPerValue
@@ -209,9 +201,9 @@
 
 /*!
  @brief Restore a <code>Reader</code> from a stream.
- @param inArg           the stream to read data from
+ @param inArg the stream to read data from
  @return a Reader
- @throws IOException If there is a low-level I/O error
+ @throw IOExceptionIf there is a low-level I/O error
  */
 + (OrgApacheLuceneUtilPackedPackedInts_Reader *)getReaderWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
@@ -220,25 +212,24 @@
  @param inArg positioned at the beginning of a stored packed int structure.
  @param mem how much memory the iterator is allowed to use to read-ahead (likely to speed up iteration)
  @return an iterator to access the values
- @throws IOException if the structure could not be retrieved.
+ @throw IOExceptionif the structure could not be retrieved.
  */
 + (id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator>)getReaderIteratorWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                                                                                      withInt:(jint)mem;
 
 /*!
  @brief Expert: Restore a <code>ReaderIterator</code> from a stream without reading
- metadata at the beginning of the stream.
- This method is useful to restore
- data from streams which have been created using
- <code>PackedInts.getWriterNoHeader(DataOutput,Format,int,int,int)</code>.
- @param inArg           the stream to read data from, positioned at the beginning of the packed values
- @param format       the format used to serialize
- @param version_      the version used to serialize the data
- @param valueCount   how many values the stream holds
+  metadata at the beginning of the stream.This method is useful to restore
+  data from streams which have been created using 
+ <code>PackedInts.getWriterNoHeader(DataOutput, Format, int, int, int)</code>.
+ @param inArg the stream to read data from, positioned at the beginning of the packed values
+ @param format the format used to serialize
+ @param version_ the version used to serialize the data
+ @param valueCount how many values the stream holds
  @param bitsPerValue the number of bits per value
- @param mem          how much memory the iterator is allowed to use to read-ahead (likely to speed up iteration)
+ @param mem how much memory the iterator is allowed to use to read-ahead (likely to speed up iteration)
  @return a ReaderIterator
- - seealso: PackedInts#getWriterNoHeader(DataOutput,Format,int,int,int)
+ - seealso: PackedInts#getWriterNoHeader(DataOutput, Format, int, int, int)
  */
 + (id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator>)getReaderIteratorNoHeaderWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                                                       withOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
@@ -249,18 +240,17 @@
 
 /*!
  @brief Expert: Restore a <code>Reader</code> from a stream without reading metadata at
- the beginning of the stream.
- This method is useful to restore data from
- streams which have been created using
- <code>PackedInts.getWriterNoHeader(DataOutput,Format,int,int,int)</code>.
- @param inArg           the stream to read data from, positioned at the beginning of the packed values
- @param format       the format used to serialize
- @param version_      the version used to serialize the data
- @param valueCount   how many values the stream holds
+  the beginning of the stream.This method is useful to restore data from
+  streams which have been created using 
+ <code>PackedInts.getWriterNoHeader(DataOutput, Format, int, int, int)</code>.
+ @param inArg the stream to read data from, positioned at the beginning of the packed values
+ @param format the format used to serialize
+ @param version_ the version used to serialize the data
+ @param valueCount how many values the stream holds
  @param bitsPerValue the number of bits per value
  @return a Reader
- @throws IOException If there is a low-level I/O error
- - seealso: PackedInts#getWriterNoHeader(DataOutput,Format,int,int,int)
+ @throw IOExceptionIf there is a low-level I/O error
+ - seealso: PackedInts#getWriterNoHeader(DataOutput, Format, int, int, int)
  */
 + (OrgApacheLuceneUtilPackedPackedInts_Reader *)getReaderNoHeaderWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                                     withOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
@@ -270,34 +260,34 @@
 
 /*!
  @brief Create a packed integer array writer for the given output, format, value
- count, and number of bits per value.
+  count, and number of bits per value.
  <p>
- The resulting stream will be long-aligned. This means that depending on
- the format which is used under the hoods, up to 63 bits will be wasted.
- An easy way to make sure that no space is lost is to always use a
- <code>valueCount</code> that is a multiple of 64.
+  The resulting stream will be long-aligned. This means that depending on
+  the format which is used under the hoods, up to 63 bits will be wasted.
+  An easy way to make sure that no space is lost is to always use a 
+ <code>valueCount</code> that is a multiple of 64. 
  <p>
- This method writes metadata to the stream, so that the resulting stream is
- sufficient to restore a <code>Reader</code> from it. You don't need to track
+  This method writes metadata to the stream, so that the resulting stream is
+  sufficient to restore a <code>Reader</code> from it. You don't need to track 
  <code>valueCount</code> or <code>bitsPerValue</code> by yourself. In case
- this is a problem, you should probably look at
- <code>getWriterNoHeader(DataOutput,Format,int,int,int)</code>.
- <p>
- The <code>acceptableOverheadRatio</code> parameter controls how
- readers that will be restored from this stream trade space
- for speed by selecting a faster but potentially less memory-efficient
- implementation. An <code>acceptableOverheadRatio</code> of
+  this is a problem, you should probably look at 
+ <code>getWriterNoHeader(DataOutput, Format, int, int, int)</code>.
+  <p>
+  The <code>acceptableOverheadRatio</code> parameter controls how
+  readers that will be restored from this stream trade space
+  for speed by selecting a faster but potentially less memory-efficient
+  implementation. An <code>acceptableOverheadRatio</code> of 
  <code>PackedInts.COMPACT</code> will make sure that the most memory-efficient
- implementation is selected whereas <code>PackedInts.FASTEST</code> will make sure
- that the fastest implementation is selected. In case you are only interested
- in reading this stream sequentially later on, you should probably use
+  implementation is selected whereas <code>PackedInts.FASTEST</code> will make sure
+  that the fastest implementation is selected. In case you are only interested
+  in reading this stream sequentially later on, you should probably use 
  <code>PackedInts.COMPACT</code>.
- @param outArg          the data output
- @param valueCount   the number of values
+ @param outArg the data output
+ @param valueCount the number of values
  @param bitsPerValue the number of bits per value
  @param acceptableOverheadRatio an acceptable overhead ratio per value
  @return a Writer
- @throws IOException If there is a low-level I/O error
+ @throw IOExceptionIf there is a low-level I/O error
  */
 + (OrgApacheLuceneUtilPackedPackedInts_Writer *)getWriterWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                                                                     withInt:(jint)valueCount
@@ -306,44 +296,44 @@
 
 /*!
  @brief Expert: Create a packed integer array writer for the given output, format,
- value count, and number of bits per value.
+  value count, and number of bits per value.
  <p>
- The resulting stream will be long-aligned. This means that depending on
- the format which is used, up to 63 bits will be wasted. An easy way to
- make sure that no space is lost is to always use a <code>valueCount</code>
- that is a multiple of 64.
+  The resulting stream will be long-aligned. This means that depending on
+  the format which is used, up to 63 bits will be wasted. An easy way to
+  make sure that no space is lost is to always use a <code>valueCount</code>
+  that is a multiple of 64. 
  <p>
- This method does not write any metadata to the stream, meaning that it is
- your responsibility to store it somewhere else in order to be able to
- recover data from the stream later on:
+  This method does not write any metadata to the stream, meaning that it is
+  your responsibility to store it somewhere else in order to be able to
+  recover data from the stream later on: 
  <ul>
- <li><code>format</code> (using <code>Format.getId()</code>),</li>
- <li><code>valueCount</code>,</li>
- <li><code>bitsPerValue</code>,</li>
- <li><code>VERSION_CURRENT</code>.</li>
- </ul>
- <p>
- It is possible to start writing values without knowing how many of them you
- are actually going to write. To do this, just pass <code>-1</code> as
- <code>valueCount</code>. On the other hand, for any positive value of
+    <li><code>format</code> (using <code>Format.getId()</code>),</li>
+    <li><code>valueCount</code>,</li>
+    <li><code>bitsPerValue</code>,</li>
+    <li><code>VERSION_CURRENT</code>.</li>
+  </ul>
+  <p>
+  It is possible to start writing values without knowing how many of them you
+  are actually going to write. To do this, just pass <code>-1</code> as 
+ <code>valueCount</code>. On the other hand, for any positive value of 
  <code>valueCount</code>, the returned writer will make sure that you don't
- write more values than expected and pad the end of stream with zeros in
- case you have written less than <code>valueCount</code> when calling
+  write more values than expected and pad the end of stream with zeros in
+  case you have written less than <code>valueCount</code> when calling 
  <code>Writer.finish()</code>.
- <p>
- The <code>mem</code> parameter lets you control how much memory can be used
- to buffer changes in memory before flushing to disk. High values of
+  <p>
+  The <code>mem</code> parameter lets you control how much memory can be used
+  to buffer changes in memory before flushing to disk. High values of 
  <code>mem</code> are likely to improve throughput. On the other hand, if
- speed is not that important to you, a value of <code>0</code> will use as
- little memory as possible and should already offer reasonable throughput.
- @param outArg          the data output
- @param format       the format to use to serialize the values
- @param valueCount   the number of values
+  speed is not that important to you, a value of <code>0</code> will use as
+  little memory as possible and should already offer reasonable throughput.
+ @param outArg the data output
+ @param format the format to use to serialize the values
+ @param valueCount the number of values
  @param bitsPerValue the number of bits per value
- @param mem          how much memory (in bytes) can be used to speed up serialization
+ @param mem how much memory (in bytes) can be used to speed up serialization
  @return a Writer
- - seealso: PackedInts#getReaderIteratorNoHeader(DataInput,Format,int,int,int,int)
- - seealso: PackedInts#getReaderNoHeader(DataInput,Format,int,int,int)
+ - seealso: PackedInts#getReaderIteratorNoHeader(DataInput, Format, int, int, int, int)
+ - seealso: PackedInts#getReaderNoHeader(DataInput, Format, int, int, int)
  */
 + (OrgApacheLuceneUtilPackedPackedInts_Writer *)getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                                      withOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
@@ -353,7 +343,7 @@
 
 /*!
  @brief Calculates the maximum unsigned long that can be expressed with the given
- number of bits.
+  number of bits.
  @param bitsPerValue the number of bits available for any given value.
  @return the maximum value for the given bits.
  */
@@ -361,7 +351,7 @@
 
 /*!
  @brief Returns how many bits are required to store <code>bits</code>,
- interpreted as an unsigned value.
+  interpreted as an unsigned value.
  NOTE: This method returns at least 1.
  */
 + (jint)unsignedBitsRequiredWithLong:(jlong)bits;
@@ -370,14 +360,14 @@
 
 /*!
  @brief Check that the block size is a power of 2, in the right bounds, and return
- its log in base 2.
+   its log in base 2.
  */
 + (jint)checkBlockSizeWithInt:(jint)blockSize
                       withInt:(jint)minBlockSize
                       withInt:(jint)maxBlockSize;
 
 /*!
- @brief Same as <code>copy(Reader,int,Mutable,int,int,int)</code> but using a pre-allocated buffer.
+ @brief Same as <code>copy(Reader, int, Mutable, int, int, int)</code> but using a pre-allocated buffer.
  */
 + (void)copy__WithOrgApacheLuceneUtilPackedPackedInts_Reader:(OrgApacheLuceneUtilPackedPackedInts_Reader *)src
                                                      withInt:(jint)srcPos
@@ -388,7 +378,7 @@
 
 /*!
  @brief Return the number of blocks required to store <code>size</code> values on
- <code>blockSize</code>.
+   <code>blockSize</code>.
  */
 + (jint)numBlocksWithLong:(jlong)size
                   withInt:(jint)blockSize;
@@ -400,58 +390,64 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedPackedInts)
 /*!
  @brief At most 700% memory overhead, always select a direct implementation.
  */
-inline jfloat OrgApacheLuceneUtilPackedPackedInts_get_FASTEST();
+inline jfloat OrgApacheLuceneUtilPackedPackedInts_get_FASTEST(void);
 #define OrgApacheLuceneUtilPackedPackedInts_FASTEST 7.0f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedInts, FASTEST, jfloat)
 
 /*!
  @brief At most 50% memory overhead, always select a reasonably fast implementation.
  */
-inline jfloat OrgApacheLuceneUtilPackedPackedInts_get_FAST();
+inline jfloat OrgApacheLuceneUtilPackedPackedInts_get_FAST(void);
 #define OrgApacheLuceneUtilPackedPackedInts_FAST 0.5f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedInts, FAST, jfloat)
 
 /*!
  @brief At most 25% memory overhead.
  */
-inline jfloat OrgApacheLuceneUtilPackedPackedInts_get_DEFAULT();
+inline jfloat OrgApacheLuceneUtilPackedPackedInts_get_DEFAULT(void);
 #define OrgApacheLuceneUtilPackedPackedInts_DEFAULT 0.25f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedInts, DEFAULT, jfloat)
 
 /*!
  @brief No memory overhead at all, but the returned implementation may be slow.
  */
-inline jfloat OrgApacheLuceneUtilPackedPackedInts_get_COMPACT();
+inline jfloat OrgApacheLuceneUtilPackedPackedInts_get_COMPACT(void);
 #define OrgApacheLuceneUtilPackedPackedInts_COMPACT 0.0f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedInts, COMPACT, jfloat)
 
 /*!
  @brief Default amount of memory to use for bulk operations.
  */
-inline jint OrgApacheLuceneUtilPackedPackedInts_get_DEFAULT_BUFFER_SIZE();
+inline jint OrgApacheLuceneUtilPackedPackedInts_get_DEFAULT_BUFFER_SIZE(void);
 #define OrgApacheLuceneUtilPackedPackedInts_DEFAULT_BUFFER_SIZE 1024
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedInts, DEFAULT_BUFFER_SIZE, jint)
 
-inline NSString *OrgApacheLuceneUtilPackedPackedInts_get_CODEC_NAME();
+inline NSString *OrgApacheLuceneUtilPackedPackedInts_get_CODEC_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilPackedPackedInts_CODEC_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilPackedPackedInts, CODEC_NAME, NSString *)
 
-inline jint OrgApacheLuceneUtilPackedPackedInts_get_VERSION_START();
+inline jint OrgApacheLuceneUtilPackedPackedInts_get_VERSION_START(void);
 #define OrgApacheLuceneUtilPackedPackedInts_VERSION_START 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedInts, VERSION_START, jint)
 
-inline jint OrgApacheLuceneUtilPackedPackedInts_get_VERSION_BYTE_ALIGNED();
+inline jint OrgApacheLuceneUtilPackedPackedInts_get_VERSION_BYTE_ALIGNED(void);
 #define OrgApacheLuceneUtilPackedPackedInts_VERSION_BYTE_ALIGNED 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedInts, VERSION_BYTE_ALIGNED, jint)
 
-inline jint OrgApacheLuceneUtilPackedPackedInts_get_VERSION_MONOTONIC_WITHOUT_ZIGZAG();
+inline jint OrgApacheLuceneUtilPackedPackedInts_get_VERSION_MONOTONIC_WITHOUT_ZIGZAG(void);
 #define OrgApacheLuceneUtilPackedPackedInts_VERSION_MONOTONIC_WITHOUT_ZIGZAG 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedInts, VERSION_MONOTONIC_WITHOUT_ZIGZAG, jint)
 
-inline jint OrgApacheLuceneUtilPackedPackedInts_get_VERSION_CURRENT();
+inline jint OrgApacheLuceneUtilPackedPackedInts_get_VERSION_CURRENT(void);
 #define OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedInts, VERSION_CURRENT, jint)
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedInts_init(OrgApacheLuceneUtilPackedPackedInts *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts *new_OrgApacheLuceneUtilPackedPackedInts_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts *create_OrgApacheLuceneUtilPackedPackedInts_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedInts_checkVersionWithInt_(jint version_);
 
@@ -495,12 +491,6 @@ FOUNDATION_EXPORT jint OrgApacheLuceneUtilPackedPackedInts_checkBlockSizeWithInt
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilPackedPackedInts_numBlocksWithLong_withInt_(jlong size, jint blockSize);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedInts_init(OrgApacheLuceneUtilPackedPackedInts *self);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts *new_OrgApacheLuceneUtilPackedPackedInts_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts *create_OrgApacheLuceneUtilPackedPackedInts_init();
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts)
 
 #endif
@@ -512,6 +502,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilPackedPackedInts_Format_Enum) {
   OrgApacheLuceneUtilPackedPackedInts_Format_Enum_PACKED = 0,
   OrgApacheLuceneUtilPackedPackedInts_Format_Enum_PACKED_SINGLE_BLOCK = 1,
@@ -520,15 +512,13 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilPackedPackedInts_Format_Enum) {
 /*!
  @brief A format to write packed ints.
  */
-@interface OrgApacheLuceneUtilPackedPackedInts_Format : JavaLangEnum < NSCopying > {
+@interface OrgApacheLuceneUtilPackedPackedInts_Format : JavaLangEnum {
  @public
   jint id__;
 }
 
-+ (OrgApacheLuceneUtilPackedPackedInts_Format *)PACKED;
-
-+ (OrgApacheLuceneUtilPackedPackedInts_Format *)PACKED_SINGLE_BLOCK;
-
+@property (readonly, class, nonnull) OrgApacheLuceneUtilPackedPackedInts_Format *PACKED NS_SWIFT_NAME(PACKED);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilPackedPackedInts_Format *PACKED_SINGLE_BLOCK NS_SWIFT_NAME(PACKED_SINGLE_BLOCK);
 #pragma mark Public
 
 /*!
@@ -538,7 +528,7 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilPackedPackedInts_Format_Enum) {
 
 /*!
  @brief Computes how many byte blocks are needed to store <code>values</code>
- values of size <code>bitsPerValue</code>.
+  values of size <code>bitsPerValue</code>.
  */
 - (jlong)byteCountWithInt:(jint)packedIntsVersion
                   withInt:(jint)valueCount
@@ -551,13 +541,13 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilPackedPackedInts_Format_Enum) {
 
 /*!
  @brief Tests whether the provided number of bits per value is supported by the
- format.
+  format.
  */
 - (jboolean)isSupportedWithInt:(jint)bitsPerValue;
 
 /*!
  @brief Computes how many long blocks are needed to store <code>values</code>
- values of size <code>bitsPerValue</code>.
+  values of size <code>bitsPerValue</code>.
  */
 - (jint)longCountWithInt:(jint)packedIntsVersion
                  withInt:(jint)valueCount
@@ -573,13 +563,12 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilPackedPackedInts_Format_Enum) {
  */
 - (jfloat)overheadRatioWithInt:(jint)bitsPerValue;
 
-#pragma mark Package-Private
++ (OrgApacheLuceneUtilPackedPackedInts_Format *)valueOfWithNSString:(NSString *)name;
 
 + (IOSObjectArray *)values;
 
-+ (OrgApacheLuceneUtilPackedPackedInts_Format *)valueOfWithNSString:(NSString *)name;
+#pragma mark Package-Private
 
-- (id)copyWithZone:(NSZone *)zone;
 - (OrgApacheLuceneUtilPackedPackedInts_Format_Enum)toNSEnum;
 
 @end
@@ -592,23 +581,22 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts_Format *OrgApacheLuceneUti
 /*!
  @brief Compact format, all bits are written contiguously.
  */
-inline OrgApacheLuceneUtilPackedPackedInts_Format *OrgApacheLuceneUtilPackedPackedInts_Format_get_PACKED();
+inline OrgApacheLuceneUtilPackedPackedInts_Format *OrgApacheLuceneUtilPackedPackedInts_Format_get_PACKED(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED)
 
 /*!
  @brief A format that may insert padding bits to improve encoding and decoding
- speed.
- Since this format doesn't support all possible bits per value, you
- should never use it directly, but rather use
- <code>PackedInts.fastestFormatAndBits(int,int,float)</code> to find the
- format that best suits your needs.
+  speed.Since this format doesn't support all possible bits per value, you
+  should never use it directly, but rather use 
+ <code>PackedInts.fastestFormatAndBits(int, int, float)</code> to find the
+  format that best suits your needs.
  */
-inline OrgApacheLuceneUtilPackedPackedInts_Format *OrgApacheLuceneUtilPackedPackedInts_Format_get_PACKED_SINGLE_BLOCK();
+inline OrgApacheLuceneUtilPackedPackedInts_Format *OrgApacheLuceneUtilPackedPackedInts_Format_get_PACKED_SINGLE_BLOCK(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED_SINGLE_BLOCK)
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts_Format *OrgApacheLuceneUtilPackedPackedInts_Format_byIdWithInt_(jint id_);
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilPackedPackedInts_Format_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilPackedPackedInts_Format_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts_Format *OrgApacheLuceneUtilPackedPackedInts_Format_valueOfWithNSString_(NSString *name);
 
@@ -634,10 +622,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Format)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
-                                                           withInt:(jint)bitsPerValue;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
+                                                                     withInt:(jint)bitsPerValue;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -665,41 +657,41 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_FormatAndBits)
 /*!
  @brief A decoder for packed integers.
  */
-@protocol OrgApacheLuceneUtilPackedPackedInts_Decoder < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilPackedPackedInts_Decoder < JavaObject >
 
 /*!
  @brief The minimum number of long blocks to encode in a single iteration, when
- using long encoding.
+  using long encoding.
  */
 - (jint)longBlockCount;
 
 /*!
  @brief The number of values that can be stored in <code>longBlockCount()</code> long
- blocks.
+  blocks.
  */
 - (jint)longValueCount;
 
 /*!
  @brief The minimum number of byte blocks to encode in a single iteration, when
- using byte encoding.
+  using byte encoding.
  */
 - (jint)byteBlockCount;
 
 /*!
  @brief The number of values that can be stored in <code>byteBlockCount()</code> byte
- blocks.
+  blocks.
  */
 - (jint)byteValueCount;
 
 /*!
  @brief Read <code>iterations * blockCount()</code> blocks from <code>blocks</code>,
- decode them and write <code>iterations * valueCount()</code> values into
+  decode them and write <code>iterations * valueCount()</code> values into 
  <code>values</code>.
- @param blocks       the long blocks that hold packed integer values
+ @param blocks the long blocks that hold packed integer values
  @param blocksOffset the offset where to start reading blocks
- @param values       the values buffer
+ @param values the values buffer
  @param valuesOffset the offset where to start writing values
- @param iterations   controls how much data to decode
+ @param iterations controls how much data to decode
  */
 - (void)decodeWithLongArray:(IOSLongArray *)blocks
                     withInt:(jint)blocksOffset
@@ -709,13 +701,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_FormatAndBits)
 
 /*!
  @brief Read <code>8 * iterations * blockCount()</code> blocks from <code>blocks</code>,
- decode them and write <code>iterations * valueCount()</code> values into
+  decode them and write <code>iterations * valueCount()</code> values into 
  <code>values</code>.
- @param blocks       the long blocks that hold packed integer values
+ @param blocks the long blocks that hold packed integer values
  @param blocksOffset the offset where to start reading blocks
- @param values       the values buffer
+ @param values the values buffer
  @param valuesOffset the offset where to start writing values
- @param iterations   controls how much data to decode
+ @param iterations controls how much data to decode
  */
 - (void)decodeWithByteArray:(IOSByteArray *)blocks
                     withInt:(jint)blocksOffset
@@ -725,13 +717,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_FormatAndBits)
 
 /*!
  @brief Read <code>iterations * blockCount()</code> blocks from <code>blocks</code>,
- decode them and write <code>iterations * valueCount()</code> values into
+  decode them and write <code>iterations * valueCount()</code> values into 
  <code>values</code>.
- @param blocks       the long blocks that hold packed integer values
+ @param blocks the long blocks that hold packed integer values
  @param blocksOffset the offset where to start reading blocks
- @param values       the values buffer
+ @param values the values buffer
  @param valuesOffset the offset where to start writing values
- @param iterations   controls how much data to decode
+ @param iterations controls how much data to decode
  */
 - (void)decodeWithLongArray:(IOSLongArray *)blocks
                     withInt:(jint)blocksOffset
@@ -741,13 +733,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_FormatAndBits)
 
 /*!
  @brief Read <code>8 * iterations * blockCount()</code> blocks from <code>blocks</code>,
- decode them and write <code>iterations * valueCount()</code> values into
+  decode them and write <code>iterations * valueCount()</code> values into 
  <code>values</code>.
- @param blocks       the long blocks that hold packed integer values
+ @param blocks the long blocks that hold packed integer values
  @param blocksOffset the offset where to start reading blocks
- @param values       the values buffer
+ @param values the values buffer
  @param valuesOffset the offset where to start writing values
- @param iterations   controls how much data to decode
+ @param iterations controls how much data to decode
  */
 - (void)decodeWithByteArray:(IOSByteArray *)blocks
                     withInt:(jint)blocksOffset
@@ -773,41 +765,41 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Decoder)
 /*!
  @brief An encoder for packed integers.
  */
-@protocol OrgApacheLuceneUtilPackedPackedInts_Encoder < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilPackedPackedInts_Encoder < JavaObject >
 
 /*!
  @brief The minimum number of long blocks to encode in a single iteration, when
- using long encoding.
+  using long encoding.
  */
 - (jint)longBlockCount;
 
 /*!
  @brief The number of values that can be stored in <code>longBlockCount()</code> long
- blocks.
+  blocks.
  */
 - (jint)longValueCount;
 
 /*!
  @brief The minimum number of byte blocks to encode in a single iteration, when
- using byte encoding.
+  using byte encoding.
  */
 - (jint)byteBlockCount;
 
 /*!
  @brief The number of values that can be stored in <code>byteBlockCount()</code> byte
- blocks.
+  blocks.
  */
 - (jint)byteValueCount;
 
 /*!
  @brief Read <code>iterations * valueCount()</code> values from <code>values</code>,
- encode them and write <code>iterations * blockCount()</code> blocks into
+  encode them and write <code>iterations * blockCount()</code> blocks into 
  <code>blocks</code>.
- @param blocks       the long blocks that hold packed integer values
+ @param blocks the long blocks that hold packed integer values
  @param blocksOffset the offset where to start writing blocks
- @param values       the values buffer
+ @param values the values buffer
  @param valuesOffset the offset where to start reading values
- @param iterations   controls how much data to encode
+ @param iterations controls how much data to encode
  */
 - (void)encodeWithLongArray:(IOSLongArray *)values
                     withInt:(jint)valuesOffset
@@ -817,13 +809,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Decoder)
 
 /*!
  @brief Read <code>iterations * valueCount()</code> values from <code>values</code>,
- encode them and write <code>8 * iterations * blockCount()</code> blocks into
+  encode them and write <code>8 * iterations * blockCount()</code> blocks into 
  <code>blocks</code>.
- @param blocks       the long blocks that hold packed integer values
+ @param blocks the long blocks that hold packed integer values
  @param blocksOffset the offset where to start writing blocks
- @param values       the values buffer
+ @param values the values buffer
  @param valuesOffset the offset where to start reading values
- @param iterations   controls how much data to encode
+ @param iterations controls how much data to encode
  */
 - (void)encodeWithLongArray:(IOSLongArray *)values
                     withInt:(jint)valuesOffset
@@ -833,13 +825,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Decoder)
 
 /*!
  @brief Read <code>iterations * valueCount()</code> values from <code>values</code>,
- encode them and write <code>iterations * blockCount()</code> blocks into
+  encode them and write <code>iterations * blockCount()</code> blocks into 
  <code>blocks</code>.
- @param blocks       the long blocks that hold packed integer values
+ @param blocks the long blocks that hold packed integer values
  @param blocksOffset the offset where to start writing blocks
- @param values       the values buffer
+ @param values the values buffer
  @param valuesOffset the offset where to start reading values
- @param iterations   controls how much data to encode
+ @param iterations controls how much data to encode
  */
 - (void)encodeWithIntArray:(IOSIntArray *)values
                    withInt:(jint)valuesOffset
@@ -849,13 +841,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Decoder)
 
 /*!
  @brief Read <code>iterations * valueCount()</code> values from <code>values</code>,
- encode them and write <code>8 * iterations * blockCount()</code> blocks into
+  encode them and write <code>8 * iterations * blockCount()</code> blocks into 
  <code>blocks</code>.
- @param blocks       the long blocks that hold packed integer values
+ @param blocks the long blocks that hold packed integer values
  @param blocksOffset the offset where to start writing blocks
- @param values       the values buffer
+ @param values the values buffer
  @param valuesOffset the offset where to start reading values
- @param iterations   controls how much data to encode
+ @param iterations controls how much data to encode
  */
 - (void)encodeWithIntArray:(IOSIntArray *)values
                    withInt:(jint)valuesOffset
@@ -892,12 +884,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Encoder)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Bulk get: read at least one and at most <code>len</code> longs starting
- from <code>index</code> into <code>arr[off:off+len]</code> and return
- the actual number of values that have been read.
+  from <code>index</code> into <code>arr[off:off+len]</code> and return
+  the actual number of values that have been read.
  */
 - (jint)getWithInt:(jint)index
      withLongArray:(IOSLongArray *)arr
@@ -929,7 +921,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Reader)
 /*!
  @brief Run-once iterator interface, to decode previously saved PackedInts.
  */
-@protocol OrgApacheLuceneUtilPackedPackedInts_ReaderIterator < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilPackedPackedInts_ReaderIterator < JavaObject >
 
 /*!
  @brief Returns next value
@@ -938,7 +930,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Reader)
 
 /*!
  @brief Returns at least 1 and at most <code>count</code> next values,
- the returned ref MUST NOT be modified
+  the returned ref MUST NOT be modified
  */
 - (OrgApacheLuceneUtilLongsRef *)nextWithInt:(jint)count;
 
@@ -987,9 +979,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_ReaderIterator)
 
 #pragma mark Protected
 
-- (instancetype)initWithInt:(jint)valueCount
-                    withInt:(jint)bitsPerValue
-withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
+- (instancetype __nonnull)initWithInt:(jint)valueCount
+                              withInt:(jint)bitsPerValue
+    withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -1017,7 +1013,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImp
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Sets all values to 0.
@@ -1025,7 +1021,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImp
 - (void)clear;
 
 /*!
- @brief Fill the mutable from <code>fromIndex</code> (inclusive) to
+ @brief Fill the mutable from <code>fromIndex</code> (inclusive) to 
  <code>toIndex</code> (exclusive) with <code>val</code>.
  */
 - (void)fillWithInt:(jint)fromIndex
@@ -1034,17 +1030,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImp
 
 /*!
  @return the number of bits used to store any given value.
- Note: This does not imply that memory usage is
+          Note: This does not imply that memory usage is         
  <code>bitsPerValue * #values</code> as implementations are free to
- use non-space-optimal packing of bits.
+          use non-space-optimal packing of bits.
  */
 - (jint)getBitsPerValue;
 
 /*!
- @brief Save this mutable into <code>out</code>.
- Instantiating a reader from
- the generated data will return a reader with the same number of bits
- per value.
+ @brief Save this mutable into <code>out</code>.Instantiating a reader from
+  the generated data will return a reader with the same number of bits
+  per value.
  */
 - (void)saveWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
@@ -1058,10 +1053,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImp
 
 /*!
  @brief Bulk set: set at least one and at most <code>len</code> longs starting
- at <code>off</code> in <code>arr</code> into this mutable, starting at
- <code>index</code>.
- Returns the actual number of values that have been
- set.
+  at <code>off</code> in <code>arr</code> into this mutable, starting at 
+ <code>index</code>.Returns the actual number of values that have been
+  set.
  */
 - (jint)setWithInt:(jint)index
      withLongArray:(IOSLongArray *)arr
@@ -1104,7 +1098,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Mutable)
 
 #pragma mark Protected
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -1135,8 +1133,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_ReaderImpl)
 
 #pragma mark Protected
 
-- (instancetype)initWithInt:(jint)valueCount
-                    withInt:(jint)bitsPerValue;
+- (instancetype __nonnull)initWithInt:(jint)valueCount
+                              withInt:(jint)bitsPerValue;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -1163,7 +1165,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_MutableImpl)
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
 
 - (jlong)getWithInt:(jint)index;
 
@@ -1175,6 +1177,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_MutableImpl)
 - (jlong)ramBytesUsed;
 
 - (jint)size;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -1225,15 +1231,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_NullReader)
 
 /*!
  @brief Returns the current ord in the stream (number of values that have been
- written so far minus one).
+  written so far minus one).
  */
 - (jint)ord;
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
-                                               withInt:(jint)valueCount
-                                               withInt:(jint)bitsPerValue;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
+                                                         withInt:(jint)valueCount
+                                                         withInt:(jint)bitsPerValue;
 
 /*!
  @brief The format used to serialize values.
@@ -1243,6 +1249,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_NullReader)
 #pragma mark Package-Private
 
 - (void)writeHeader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -1256,4 +1266,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Writer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedInts")

@@ -13,22 +13,26 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilSorter || defined(INCLUDE_OrgApacheLuceneUtilSorter))
 #define OrgApacheLuceneUtilSorter_
 
 /*!
  @brief Base class for sorting algorithms implementations.
-  
  */
 @interface OrgApacheLuceneUtilSorter : NSObject
-
-+ (jint)THRESHOLD;
+@property (readonly, class) jint THRESHOLD NS_SWIFT_NAME(THRESHOLD);
 
 #pragma mark Public
 
 /*!
  @brief Sort the slice which starts at <code>from</code> (inclusive) and ends at
- <code>to</code> (exclusive).
+   <code>to</code> (exclusive).
  */
 - (void)sortWithInt:(jint)from
             withInt:(jint)to;
@@ -38,12 +42,12 @@
 /*!
  @brief Sole constructor, used for inheritance.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Compare entries found in slots <code>i</code> and <code>j</code>.
  The contract for the returned value is the same as
- <code>Comparator.compare(Object,Object)</code>. 
+   <code>Comparator.compare(Object, Object)</code>.
  */
 - (jint)compareWithInt:(jint)i
                withInt:(jint)j;
@@ -120,7 +124,7 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilSorter)
 
-inline jint OrgApacheLuceneUtilSorter_get_THRESHOLD();
+inline jint OrgApacheLuceneUtilSorter_get_THRESHOLD(void);
 #define OrgApacheLuceneUtilSorter_THRESHOLD 20
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSorter, THRESHOLD, jint)
 
@@ -134,4 +138,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSorter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSorter")

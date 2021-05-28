@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilArrayIntroSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilArrayIntroSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilArrayIntroSorter || defined(INCLUDE_OrgApacheLuceneUtilArrayIntroSorter))
 #define OrgApacheLuceneUtilArrayIntroSorter_
 
@@ -33,8 +39,8 @@
 /*!
  @brief Create a new <code>ArrayInPlaceMergeSorter</code>.
  */
-- (instancetype)initWithNSObjectArray:(IOSObjectArray *)arr
-               withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
+- (instancetype __nonnull)initPackagePrivateWithNSObjectArray:(IOSObjectArray *)arr
+                                       withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
 #pragma mark Protected
 
@@ -48,18 +54,26 @@
 - (void)swapWithInt:(jint)i
             withInt:(jint)j;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilArrayIntroSorter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(OrgApacheLuceneUtilArrayIntroSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayIntroSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(OrgApacheLuceneUtilArrayIntroSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilArrayIntroSorter *new_OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilArrayIntroSorter *new_OrgApacheLuceneUtilArrayIntroSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilArrayIntroSorter *create_OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator);
+FOUNDATION_EXPORT OrgApacheLuceneUtilArrayIntroSorter *create_OrgApacheLuceneUtilArrayIntroSorter_initPackagePrivateWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilArrayIntroSorter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayIntroSorter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader || defined(INCLUDE_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader))
 #define OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_
 
@@ -26,14 +32,14 @@
 
 /*!
  @brief Simple <code>ResourceLoader</code> that opens resource files
- from the local file system, optionally resolving against
- a base directory.
+  from the local file system, optionally resolving against
+  a base directory.
  <p>This loader wraps a delegate <code>ResourceLoader</code>
- that is used to resolve all files, the current base directory
- does not contain. <code>newInstance</code> is always resolved
- against the delegate, as a <code>ClassLoader</code> is needed.
+  that is used to resolve all files, the current base directory
+  does not contain. <code>newInstance</code> is always resolved
+  against the delegate, as a <code>ClassLoader</code> is needed.  
  <p>You can chain several <code>FilesystemResourceLoader</code>s
- to allow lookup of files in more than one base directory.
+  to allow lookup of files in more than one base directory.
  */
 @interface OrgApacheLuceneAnalysisUtilFilesystemResourceLoader : NSObject < OrgApacheLuceneAnalysisUtilResourceLoader >
 
@@ -41,20 +47,20 @@
 
 /*!
  @brief Creates a resource loader that resolves resources against the given
- base directory (may be <code>null</code> to refer to CWD).
+  base directory (may be <code>null</code> to refer to CWD).
  Files not found in file system and class lookups are delegated to context
- classloader.
+  classloader.
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)baseDirectory;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)baseDirectory;
 
 /*!
  @brief Creates a resource loader that resolves resources against the given
- base directory (may be <code>null</code> to refer to CWD).
+  base directory (may be <code>null</code> to refer to CWD).
  Files not found in file system and class lookups are delegated
- to the given delegate <code>ResourceLoader</code>.
+  to the given delegate <code>ResourceLoader</code>.
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)baseDirectory
-       withOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)delegate;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)baseDirectory
+                 withOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)delegate;
 
 - (IOSClass *)findClassWithNSString:(NSString *)cname
                        withIOSClass:(IOSClass *)expectedType;
@@ -63,6 +69,10 @@
                  withIOSClass:(IOSClass *)expectedType OBJC_METHOD_FAMILY_NONE;
 
 - (JavaIoInputStream *)openResourceWithNSString:(NSString *)resource;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -84,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader")

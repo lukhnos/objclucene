@@ -6,17 +6,26 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Long.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collections.h"
 #include "java/util/Comparator.h"
 #include "java/util/List.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/search/ConjunctionDISI.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/util/CollectionUtil.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ConjunctionDISI must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneSearchConjunctionDISI ()
 
@@ -34,6 +43,23 @@
 __attribute__((unused)) static void OrgApacheLuceneSearchConjunctionDISI_addIteratorWithOrgApacheLuceneSearchDocIdSetIterator_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchDocIdSetIterator *disi, id<JavaUtilList> allIterators, id<JavaUtilList> twoPhaseIterators);
 
 __attribute__((unused)) static jint OrgApacheLuceneSearchConjunctionDISI_doNextWithInt_(OrgApacheLuceneSearchConjunctionDISI *self, jint doc);
+
+@interface OrgApacheLuceneSearchConjunctionDISI_1 : NSObject < JavaUtilComparator >
+
+- (instancetype)init;
+
+- (jint)compareWithId:(OrgApacheLuceneSearchDocIdSetIterator *)o1
+               withId:(OrgApacheLuceneSearchDocIdSetIterator *)o2;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConjunctionDISI_1)
+
+__attribute__((unused)) static void OrgApacheLuceneSearchConjunctionDISI_1_init(OrgApacheLuceneSearchConjunctionDISI_1 *self);
+
+__attribute__((unused)) static OrgApacheLuceneSearchConjunctionDISI_1 *new_OrgApacheLuceneSearchConjunctionDISI_1_init(void) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchConjunctionDISI_1 *create_OrgApacheLuceneSearchConjunctionDISI_1_init(void);
 
 /*!
  @brief <code>TwoPhaseIterator</code> view of a <code>TwoPhase</code> conjunction.
@@ -63,14 +89,13 @@ __attribute__((unused)) static OrgApacheLuceneSearchConjunctionDISI_TwoPhaseConj
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI)
 
 /*!
- @brief A conjunction DISI built on top of approximations.
- This implementation
- verifies that documents actually match by consulting the provided
+ @brief A conjunction DISI built on top of approximations.This implementation
+  verifies that documents actually match by consulting the provided 
  <code>TwoPhaseIterator</code>s.
  Another important difference with <code>ConjunctionDISI</code> is that this
- implementation supports approximations too: the approximation of this
- impl is the conjunction of the approximations of the wrapped iterators.
- This allows eg. <code>+"A B" +C</code> to be approximated as
+  implementation supports approximations too: the approximation of this
+  impl is the conjunction of the approximations of the wrapped iterators.
+  This allows eg. <code>+"A B" +C</code> to be approximated as 
  <code>+(+A +B) +C</code>.
  */
 @interface OrgApacheLuceneSearchConjunctionDISI_TwoPhase : OrgApacheLuceneSearchConjunctionDISI {
@@ -98,25 +123,6 @@ __attribute__((unused)) static OrgApacheLuceneSearchConjunctionDISI_TwoPhase *ne
 __attribute__((unused)) static OrgApacheLuceneSearchConjunctionDISI_TwoPhase *create_OrgApacheLuceneSearchConjunctionDISI_TwoPhase_initWithJavaUtilList_withJavaUtilList_(id<JavaUtilList> iterators, id<JavaUtilList> twoPhaseIterators);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionDISI_TwoPhase)
-
-@interface OrgApacheLuceneSearchConjunctionDISI_$1 : NSObject < JavaUtilComparator >
-
-- (jint)compareWithId:(OrgApacheLuceneSearchDocIdSetIterator *)o1
-               withId:(OrgApacheLuceneSearchDocIdSetIterator *)o2;
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConjunctionDISI_$1)
-
-__attribute__((unused)) static void OrgApacheLuceneSearchConjunctionDISI_$1_init(OrgApacheLuceneSearchConjunctionDISI_$1 *self);
-
-__attribute__((unused)) static OrgApacheLuceneSearchConjunctionDISI_$1 *new_OrgApacheLuceneSearchConjunctionDISI_$1_init() NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchConjunctionDISI_$1 *create_OrgApacheLuceneSearchConjunctionDISI_$1_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionDISI_$1)
 
 @implementation OrgApacheLuceneSearchConjunctionDISI
 
@@ -170,24 +176,38 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionDISI_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "intersectWithJavaUtilList:", "intersect", "Lorg.apache.lucene.search.ConjunctionDISI;", 0x9, NULL, "(Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;)Lorg/apache/lucene/search/ConjunctionDISI;" },
-    { "addIteratorWithOrgApacheLuceneSearchDocIdSetIterator:withJavaUtilList:withJavaUtilList:", "addIterator", "V", 0xa, NULL, "(Lorg/apache/lucene/search/DocIdSetIterator;Ljava/util/List<Lorg/apache/lucene/search/DocIdSetIterator;>;Ljava/util/List<Lorg/apache/lucene/search/TwoPhaseIterator;>;)V" },
-    { "initWithJavaUtilList:", "ConjunctionDISI", NULL, 0x0, NULL, "(Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;)V" },
-    { "matches", NULL, "Z", 0x4, "Ljava.io.IOException;", NULL },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x0, NULL, NULL },
-    { "doNextWithInt:", "doNext", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneSearchConjunctionDISI;", 0x9, 0, 1, -1, 2, -1, -1 },
+    { NULL, "V", 0xa, 3, 4, -1, 5, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, -1, 6, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, 7, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 8, 9, 7, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, 9, 7, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 7, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(intersectWithJavaUtilList:);
+  methods[1].selector = @selector(addIteratorWithOrgApacheLuceneSearchDocIdSetIterator:withJavaUtilList:withJavaUtilList:);
+  methods[2].selector = @selector(initWithJavaUtilList:);
+  methods[3].selector = @selector(matches);
+  methods[4].selector = @selector(asTwoPhaseIterator);
+  methods[5].selector = @selector(doNextWithInt:);
+  methods[6].selector = @selector(advanceWithInt:);
+  methods[7].selector = @selector(docID);
+  methods[8].selector = @selector(nextDoc);
+  methods[9].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "lead_", NULL, 0x10, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "others_", NULL, 0x10, "[Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "lead_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "others_", "[LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.ConjunctionDISI$TwoPhaseConjunctionDISI;", "Lorg.apache.lucene.search.ConjunctionDISI$TwoPhase;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionDISI = { 2, "ConjunctionDISI", "org.apache.lucene.search", NULL, 0x1, 10, methods, 2, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "intersect", "LJavaUtilList;", "(Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;)Lorg/apache/lucene/search/ConjunctionDISI;", "addIterator", "LOrgApacheLuceneSearchDocIdSetIterator;LJavaUtilList;LJavaUtilList;", "(Lorg/apache/lucene/search/DocIdSetIterator;Ljava/util/List<Lorg/apache/lucene/search/DocIdSetIterator;>;Ljava/util/List<Lorg/apache/lucene/search/TwoPhaseIterator;>;)V", "(Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;)V", "LJavaIoIOException;", "doNext", "I", "advance", "LOrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI;LOrgApacheLuceneSearchConjunctionDISI_TwoPhase;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionDISI = { "ConjunctionDISI", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 10, 2, -1, 11, -1, -1, -1 };
   return &_OrgApacheLuceneSearchConjunctionDISI;
 }
 
@@ -213,11 +233,11 @@ OrgApacheLuceneSearchConjunctionDISI *OrgApacheLuceneSearchConjunctionDISI_inter
 
 void OrgApacheLuceneSearchConjunctionDISI_addIteratorWithOrgApacheLuceneSearchDocIdSetIterator_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchDocIdSetIterator *disi, id<JavaUtilList> allIterators, id<JavaUtilList> twoPhaseIterators) {
   OrgApacheLuceneSearchConjunctionDISI_initialize();
-  if ([((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(disi)) getClass] == (id) OrgApacheLuceneSearchConjunctionDISI_class_() || [disi getClass] == (id) OrgApacheLuceneSearchConjunctionDISI_TwoPhase_class_()) {
+  if (JreObjectEqualsEquals([((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(disi)) java_getClass], OrgApacheLuceneSearchConjunctionDISI_class_()) || JreObjectEqualsEquals([disi java_getClass], OrgApacheLuceneSearchConjunctionDISI_TwoPhase_class_())) {
     OrgApacheLuceneSearchConjunctionDISI *conjunction = (OrgApacheLuceneSearchConjunctionDISI *) cast_chk(disi, [OrgApacheLuceneSearchConjunctionDISI class]);
     [((id<JavaUtilList>) nil_chk(allIterators)) addWithId:conjunction->lead_];
     JavaUtilCollections_addAllWithJavaUtilCollection_withNSObjectArray_(allIterators, conjunction->others_);
-    if ([conjunction getClass] == (id) OrgApacheLuceneSearchConjunctionDISI_TwoPhase_class_()) {
+    if (JreObjectEqualsEquals([conjunction java_getClass], OrgApacheLuceneSearchConjunctionDISI_TwoPhase_class_())) {
       OrgApacheLuceneSearchConjunctionDISI_TwoPhase *twoPhase = (OrgApacheLuceneSearchConjunctionDISI_TwoPhase *) cast_chk(conjunction, [OrgApacheLuceneSearchConjunctionDISI_TwoPhase class]);
       JavaUtilCollections_addAllWithJavaUtilCollection_withNSObjectArray_(twoPhaseIterators, ((OrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI *) nil_chk(twoPhase->twoPhaseView_))->twoPhaseIterators_);
     }
@@ -236,8 +256,8 @@ void OrgApacheLuceneSearchConjunctionDISI_addIteratorWithOrgApacheLuceneSearchDo
 
 void OrgApacheLuceneSearchConjunctionDISI_initWithJavaUtilList_(OrgApacheLuceneSearchConjunctionDISI *self, id<JavaUtilList> iterators) {
   OrgApacheLuceneSearchDocIdSetIterator_init(self);
-  JreAssert(([((id<JavaUtilList>) nil_chk(iterators)) size] >= 2), (@"org/apache/lucene/search/ConjunctionDISI.java:82 condition failed: assert iterators.size() >= 2;"));
-  OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_withJavaUtilComparator_(iterators, create_OrgApacheLuceneSearchConjunctionDISI_$1_init());
+  JreAssert([((id<JavaUtilList>) nil_chk(iterators)) size] >= 2, @"org/apache/lucene/search/ConjunctionDISI.java:82 condition failed: assert iterators.size() >= 2;");
+  OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_withJavaUtilComparator_(iterators, create_OrgApacheLuceneSearchConjunctionDISI_1_init());
   JreStrongAssign(&self->lead_, [iterators getWithInt:0]);
   JreStrongAssign(&self->others_, [((id<JavaUtilList>) nil_chk([iterators subListWithInt:1 withInt:[iterators size]])) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchDocIdSetIterator_class_()]]);
 }
@@ -285,6 +305,79 @@ jint OrgApacheLuceneSearchConjunctionDISI_doNextWithInt_(OrgApacheLuceneSearchCo
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConjunctionDISI)
 
+@implementation OrgApacheLuceneSearchConjunctionDISI_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchConjunctionDISI_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (jint)compareWithId:(OrgApacheLuceneSearchDocIdSetIterator *)o1
+               withId:(OrgApacheLuceneSearchDocIdSetIterator *)o2 {
+  return JavaLangLong_compareWithLong_withLong_([((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(o1)) cost], [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(o2)) cost]);
+}
+
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compare", "LOrgApacheLuceneSearchDocIdSetIterator;LOrgApacheLuceneSearchDocIdSetIterator;", "LOrgApacheLuceneSearchConjunctionDISI;", "initWithJavaUtilList:", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/DocIdSetIterator;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionDISI_1 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x8010, 2, 0, 2, -1, 3, 4, -1 };
+  return &_OrgApacheLuceneSearchConjunctionDISI_1;
+}
+
+@end
+
+void OrgApacheLuceneSearchConjunctionDISI_1_init(OrgApacheLuceneSearchConjunctionDISI_1 *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneSearchConjunctionDISI_1 *new_OrgApacheLuceneSearchConjunctionDISI_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConjunctionDISI_1, init)
+}
+
+OrgApacheLuceneSearchConjunctionDISI_1 *create_OrgApacheLuceneSearchConjunctionDISI_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConjunctionDISI_1, init)
+}
+
 @implementation OrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI
 
 - (instancetype)initWithJavaUtilList:(id<JavaUtilList>)iterators
@@ -314,14 +407,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConjunctionDISI)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withJavaUtilList:", "TwoPhaseConjunctionDISI", NULL, 0x2, NULL, "(Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;Ljava/util/List<Lorg/apache/lucene/search/TwoPhaseIterator;>;)V" },
-    { "matches", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, 1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withJavaUtilList:);
+  methods[1].selector = @selector(matches);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "twoPhaseIterators_", NULL, 0x12, "[Lorg.apache.lucene.search.TwoPhaseIterator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "twoPhaseIterators_", "[LOrgApacheLuceneSearchTwoPhaseIterator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI = { 2, "TwoPhaseConjunctionDISI", "org.apache.lucene.search", "ConjunctionDISI", 0xa, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;LJavaUtilList;", "(Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;Ljava/util/List<Lorg/apache/lucene/search/TwoPhaseIterator;>;)V", "LJavaIoIOException;", "LOrgApacheLuceneSearchConjunctionDISI;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI = { "TwoPhaseConjunctionDISI", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI;
 }
 
@@ -329,7 +429,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConjunctionDISI)
 
 void OrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI_initWithJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI *self, id<JavaUtilList> iterators, id<JavaUtilList> twoPhaseIterators) {
   OrgApacheLuceneSearchTwoPhaseIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(self, create_OrgApacheLuceneSearchConjunctionDISI_initWithJavaUtilList_(iterators));
-  JreAssert(([((id<JavaUtilList>) nil_chk(twoPhaseIterators)) size] > 0), (@"org/apache/lucene/search/ConjunctionDISI.java:168 condition failed: assert twoPhaseIterators.size() > 0;"));
+  JreAssert([((id<JavaUtilList>) nil_chk(twoPhaseIterators)) size] > 0, @"org/apache/lucene/search/ConjunctionDISI.java:168 condition failed: assert twoPhaseIterators.size() > 0;");
   JreStrongAssign(&self->twoPhaseIterators_, [twoPhaseIterators toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[twoPhaseIterators size] type:OrgApacheLuceneSearchTwoPhaseIterator_class_()]]);
 }
 
@@ -365,15 +465,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConjunctionDISI_TwoPhaseCo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withJavaUtilList:", "TwoPhase", NULL, 0x2, NULL, "(Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;Ljava/util/List<Lorg/apache/lucene/search/TwoPhaseIterator;>;)V" },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.ConjunctionDISI$TwoPhaseConjunctionDISI;", 0x1, NULL, NULL },
-    { "matches", NULL, "Z", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withJavaUtilList:);
+  methods[1].selector = @selector(asTwoPhaseIterator);
+  methods[2].selector = @selector(matches);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "twoPhaseView_", NULL, 0x10, "Lorg.apache.lucene.search.ConjunctionDISI$TwoPhaseConjunctionDISI;", NULL, NULL, .constantValue.asLong = 0 },
+    { "twoPhaseView_", "LOrgApacheLuceneSearchConjunctionDISI_TwoPhaseConjunctionDISI;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionDISI_TwoPhase = { 2, "TwoPhase", "org.apache.lucene.search", "ConjunctionDISI", 0xa, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;LJavaUtilList;", "(Ljava/util/List<+Lorg/apache/lucene/search/DocIdSetIterator;>;Ljava/util/List<Lorg/apache/lucene/search/TwoPhaseIterator;>;)V", "LJavaIoIOException;", "LOrgApacheLuceneSearchConjunctionDISI;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionDISI_TwoPhase = { "TwoPhase", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 3, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchConjunctionDISI_TwoPhase;
 }
 
@@ -393,43 +501,3 @@ OrgApacheLuceneSearchConjunctionDISI_TwoPhase *create_OrgApacheLuceneSearchConju
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConjunctionDISI_TwoPhase)
-
-@implementation OrgApacheLuceneSearchConjunctionDISI_$1
-
-- (jint)compareWithId:(OrgApacheLuceneSearchDocIdSetIterator *)o1
-               withId:(OrgApacheLuceneSearchDocIdSetIterator *)o2 {
-  return JavaLangLong_compareWithLong_withLong_([((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(o1)) cost], [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(o2)) cost]);
-}
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchConjunctionDISI_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchConjunctionDISI", "initWithJavaUtilList:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConjunctionDISI_$1 = { 2, "", "org.apache.lucene.search", "ConjunctionDISI", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/DocIdSetIterator;>;" };
-  return &_OrgApacheLuceneSearchConjunctionDISI_$1;
-}
-
-@end
-
-void OrgApacheLuceneSearchConjunctionDISI_$1_init(OrgApacheLuceneSearchConjunctionDISI_$1 *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneSearchConjunctionDISI_$1 *new_OrgApacheLuceneSearchConjunctionDISI_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConjunctionDISI_$1, init)
-}
-
-OrgApacheLuceneSearchConjunctionDISI_$1 *create_OrgApacheLuceneSearchConjunctionDISI_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConjunctionDISI_$1, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConjunctionDISI_$1)

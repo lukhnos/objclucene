@@ -15,6 +15,10 @@
 #include "org/apache/lucene/queryparser/surround/query/SrndQuery.h"
 #include "org/apache/lucene/search/Query.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/ComposedQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserSurroundQueryComposedQuery () {
  @public
   jboolean operatorInfix_;
@@ -59,7 +63,7 @@
 - (id<JavaUtilList>)makeLuceneSubQueriesFieldWithNSString:(NSString *)fn
 withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
   id<JavaUtilList> luceneSubQueries = create_JavaUtilArrayList_init();
-  id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
+  id<JavaUtilIterator> sqi = JreRetainedLocalValue([self getSubQueriesIterator]);
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
     [luceneSubQueries addWithId:[((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(([sqi next]))) makeLuceneQueryFieldWithNSString:fn withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf]];
   }
@@ -91,7 +95,7 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 }
 
 - (void)infixToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r {
-  id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
+  id<JavaUtilIterator> sqi = JreRetainedLocalValue([self getSubQueriesIterator]);
   [((JavaLangStringBuilder *) nil_chk(r)) appendWithNSString:[self getBracketOpen]];
   if ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
     [r appendWithNSString:[((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk([sqi next])) description]];
@@ -106,7 +110,7 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 }
 
 - (void)prefixToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r {
-  id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
+  id<JavaUtilIterator> sqi = JreRetainedLocalValue([self getSubQueriesIterator]);
   [((JavaLangStringBuilder *) nil_chk(r)) appendWithNSString:[self getOperatorName]];
   [r appendWithNSString:[self getBracketOpen]];
   if ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
@@ -120,7 +124,7 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 }
 
 - (jboolean)isFieldsSubQueryAcceptable {
-  id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
+  id<JavaUtilIterator> sqi = JreRetainedLocalValue([self getSubQueriesIterator]);
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
     if ([((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(([sqi next]))) isFieldsSubQueryAcceptable]) {
       return true;
@@ -136,29 +140,49 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withBoolean:withNSString:", "ComposedQuery", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLjava/lang/String;)V" },
-    { "recomposeWithJavaUtilList:", "recompose", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;)V" },
-    { "getOperatorName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getSubQueriesIterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;" },
-    { "getNrSubQueries", NULL, "I", 0x1, NULL, NULL },
-    { "getSubQueryWithInt:", "getSubQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x1, NULL, NULL },
-    { "isOperatorInfix", NULL, "Z", 0x1, NULL, NULL },
-    { "makeLuceneSubQueriesFieldWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneSubQueriesField", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/String;Lorg/apache/lucene/queryparser/surround/query/BasicQueryFactory;)Ljava/util/List<Lorg/apache/lucene/search/Query;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getPrefixSeparator", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "getBracketOpen", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "getBracketClose", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "infixToStringWithJavaLangStringBuilder:", "infixToString", "V", 0x4, NULL, NULL },
-    { "prefixToStringWithJavaLangStringBuilder:", "prefixToString", "V", 0x4, NULL, NULL },
-    { "isFieldsSubQueryAcceptable", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x4, 2, 3, -1, 4, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 5, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserSurroundQuerySrndQuery;", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 8, 9, -1, 10, -1, -1 },
+    { NULL, "LNSString;", 0x1, 11, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 12, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 14, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withBoolean:withNSString:);
+  methods[1].selector = @selector(recomposeWithJavaUtilList:);
+  methods[2].selector = @selector(getOperatorName);
+  methods[3].selector = @selector(getSubQueriesIterator);
+  methods[4].selector = @selector(getNrSubQueries);
+  methods[5].selector = @selector(getSubQueryWithInt:);
+  methods[6].selector = @selector(isOperatorInfix);
+  methods[7].selector = @selector(makeLuceneSubQueriesFieldWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  methods[8].selector = @selector(description);
+  methods[9].selector = @selector(getPrefixSeparator);
+  methods[10].selector = @selector(getBracketOpen);
+  methods[11].selector = @selector(getBracketClose);
+  methods[12].selector = @selector(infixToStringWithJavaLangStringBuilder:);
+  methods[13].selector = @selector(prefixToStringWithJavaLangStringBuilder:);
+  methods[14].selector = @selector(isFieldsSubQueryAcceptable);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "opName_", NULL, 0x4, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "queries_", NULL, 0x4, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;", .constantValue.asLong = 0 },
-    { "operatorInfix_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "opName_", "LNSString;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "queries_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 15, -1 },
+    { "operatorInfix_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryComposedQuery = { 2, "ComposedQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x401, 15, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;ZLNSString;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLjava/lang/String;)V", "recompose", "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;)V", "()Ljava/util/Iterator<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;", "getSubQuery", "I", "makeLuceneSubQueriesField", "LNSString;LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;", "(Ljava/lang/String;Lorg/apache/lucene/queryparser/surround/query/BasicQueryFactory;)Ljava/util/List<Lorg/apache/lucene/search/Query;>;", "toString", "infixToString", "LJavaLangStringBuilder;", "prefixToString", "Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryComposedQuery = { "ComposedQuery", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, fields, 7, 0x401, 15, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQueryComposedQuery;
 }
 

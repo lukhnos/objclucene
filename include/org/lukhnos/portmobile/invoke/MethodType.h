@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileInvokeMethodType
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileInvokeMethodType_) && (INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodType || defined(INCLUDE_OrgLukhnosPortmobileInvokeMethodType))
 #define OrgLukhnosPortmobileInvokeMethodType_
 
@@ -31,7 +37,11 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithIOSClass:(IOSClass *)clazz;
+- (instancetype __nonnull)initWithIOSClass:(IOSClass *)clazz;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -51,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodType)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodType")

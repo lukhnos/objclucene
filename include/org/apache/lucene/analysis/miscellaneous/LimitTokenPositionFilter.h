@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_
 
@@ -24,17 +30,17 @@
 
 /*!
  @brief This TokenFilter limits its emitted tokens to those with positions that
- are not greater than the configured limit.
+  are not greater than the configured limit.
  <p>
- By default, this filter ignores any tokens in the wrapped <code>TokenStream</code>
- once the limit has been exceeded, which can result in <code>reset()</code> being 
- called prior to <code>incrementToken()</code> returning <code>false</code>.  For most 
+  By default, this filter ignores any tokens in the wrapped <code>TokenStream</code>
+  once the limit has been exceeded, which can result in <code>reset()</code> being 
+  called prior to <code>incrementToken()</code> returning <code>false</code>.  For most  
  <code>TokenStream</code> implementations this should be acceptable, and faster 
- then consuming the full stream. If you are wrapping a <code>TokenStream</code>
- which requires that the full stream of tokens be exhausted in order to 
- function properly, use the 
+  then consuming the full stream. If you are wrapping a <code>TokenStream</code>
+  which requires that the full stream of tokens be exhausted in order to 
+  function properly, use the  
  <code>consumeAllTokens</code>
- option.
+  option.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -47,23 +53,26 @@
  @param maxTokenPosition max position of tokens to produce (1st token always has position 1)
  - seealso: #LimitTokenPositionFilter(TokenStream,int,boolean)
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)maxTokenPosition;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                             withInt:(jint)maxTokenPosition;
 
 /*!
  @brief Build a filter that limits the maximum position of tokens to emit.
  @param inArg the stream to wrap
  @param maxTokenPosition max position of tokens to produce (1st token always has position 1)
- @param consumeAllTokens whether all tokens from the wrapped input stream must be consumed
- even if maxTokenPosition is exceeded.
+ @param consumeAllTokens whether all tokens from the wrapped input stream must be consumed                          even if maxTokenPosition is exceeded.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)maxTokenPosition
-                                               withBoolean:(jboolean)consumeAllTokens;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                             withInt:(jint)maxTokenPosition
+                                                         withBoolean:(jboolean)consumeAllTokens;
 
 - (jboolean)incrementToken;
 
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -85,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositio
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter")

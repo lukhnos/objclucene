@@ -8,13 +8,16 @@
 #include "java/lang/CharSequence.h"
 #include "java/lang/NullPointerException.h"
 #include "java/lang/StringBuilder.h"
-#include "java/util/AbstractCollection.h"
 #include "java/util/AbstractSet.h"
 #include "java/util/Collection.h"
 #include "java/util/Iterator.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/analysis/util/CharArrayMap.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/CharArraySet must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisUtilCharArraySet () {
  @public
@@ -25,7 +28,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilCharArraySet, map_, OrgApacheLuceneAnalysisUtilCharArrayMap *)
 
-inline id OrgApacheLuceneAnalysisUtilCharArraySet_get_PLACEHOLDER();
+inline id OrgApacheLuceneAnalysisUtilCharArraySet_get_PLACEHOLDER(void);
 static id OrgApacheLuceneAnalysisUtilCharArraySet_PLACEHOLDER;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisUtilCharArraySet, PLACEHOLDER, id)
 
@@ -109,7 +112,7 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet
 - (NSString *)description {
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithNSString_(@"[");
   for (id __strong item in self) {
-    if ([sb length] > 1) [sb appendWithNSString:@", "];
+    if ([sb java_length] > 1) [sb appendWithNSString:@", "];
     if ([item isKindOfClass:[IOSCharArray class]]) {
       [sb appendWithCharArray:(IOSCharArray *) cast_chk(item, [IOSCharArray class])];
     }
@@ -121,12 +124,61 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
   RELEASE_(map_);
   [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, 2, -1, -1 },
+    { NULL, NULL, 0x0, -1, 3, -1, 4, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x9, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x9, 14, 15, -1, 16, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 17, -1, -1 },
+    { NULL, "LNSString;", 0x1, 18, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withBoolean:);
+  methods[1].selector = @selector(initWithJavaUtilCollection:withBoolean:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArrayMap:);
+  methods[3].selector = @selector(clear);
+  methods[4].selector = @selector(containsWithCharArray:withInt:withInt:);
+  methods[5].selector = @selector(containsWithJavaLangCharSequence:);
+  methods[6].selector = @selector(containsWithId:);
+  methods[7].selector = @selector(addWithId:);
+  methods[8].selector = @selector(addWithJavaLangCharSequence:);
+  methods[9].selector = @selector(addWithNSString:);
+  methods[10].selector = @selector(addWithCharArray:);
+  methods[11].selector = @selector(size);
+  methods[12].selector = @selector(unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[13].selector = @selector(copy__WithJavaUtilSet:);
+  methods[14].selector = @selector(iterator);
+  methods[15].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_SET", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x19, -1, 19, -1, -1 },
+    { "PLACEHOLDER", "LNSObject;", .constantValue.asLong = 0, 0x1a, -1, 20, -1, -1 },
+    { "map_", "LOrgApacheLuceneAnalysisUtilCharArrayMap;", .constantValue.asLong = 0, 0x12, -1, -1, 21, -1 },
+  };
+  static const void *ptrTable[] = { "IZ", "LJavaUtilCollection;Z", "(Ljava/util/Collection<*>;Z)V", "LOrgApacheLuceneAnalysisUtilCharArrayMap;", "(Lorg/apache/lucene/analysis/util/CharArrayMap<Ljava/lang/Object;>;)V", "contains", "[CII", "LJavaLangCharSequence;", "LNSObject;", "add", "LNSString;", "[C", "unmodifiableSet", "LOrgApacheLuceneAnalysisUtilCharArraySet;", "copy", "LJavaUtilSet;", "(Ljava/util/Set<*>;)Lorg/apache/lucene/analysis/util/CharArraySet;", "()Ljava/util/Iterator<Ljava/lang/Object;>;", "toString", &OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET, &OrgApacheLuceneAnalysisUtilCharArraySet_PLACEHOLDER, "Lorg/apache/lucene/analysis/util/CharArrayMap<Ljava/lang/Object;>;", "Ljava/util/AbstractSet<Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharArraySet = { "CharArraySet", "org.apache.lucene.analysis.util", ptrTable, methods, fields, 7, 0x1, 16, 3, -1, -1, -1, 22, -1 };
+  return &_OrgApacheLuceneAnalysisUtilCharArraySet;
 }
 
 + (void)initialize {
@@ -135,35 +187,6 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet
     JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisUtilCharArraySet_PLACEHOLDER, new_NSObject_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisUtilCharArraySet)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withBoolean:", "CharArraySet", NULL, 0x1, NULL, NULL },
-    { "initWithJavaUtilCollection:withBoolean:", "CharArraySet", NULL, 0x1, NULL, "(Ljava/util/Collection<*>;Z)V" },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArrayMap:", "CharArraySet", NULL, 0x0, NULL, "(Lorg/apache/lucene/analysis/util/CharArrayMap<Ljava/lang/Object;>;)V" },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "containsWithCharArray:withInt:withInt:", "contains", "Z", 0x1, NULL, NULL },
-    { "containsWithJavaLangCharSequence:", "contains", "Z", 0x1, NULL, NULL },
-    { "containsWithId:", "contains", "Z", 0x1, NULL, NULL },
-    { "addWithId:", "add", "Z", 0x1, NULL, NULL },
-    { "addWithJavaLangCharSequence:", "add", "Z", 0x1, NULL, NULL },
-    { "addWithNSString:", "add", "Z", 0x1, NULL, NULL },
-    { "addWithCharArray:", "add", "Z", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet:", "unmodifiableSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
-    { "copy__WithJavaUtilSet:", "copy", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, "(Ljava/util/Set<*>;)Lorg/apache/lucene/analysis/util/CharArraySet;" },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/Object;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_SET", "EMPTY_SET", 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET, NULL, .constantValue.asLong = 0 },
-    { "PLACEHOLDER", "PLACEHOLDER", 0x1a, "Ljava.lang.Object;", &OrgApacheLuceneAnalysisUtilCharArraySet_PLACEHOLDER, NULL, .constantValue.asLong = 0 },
-    { "map_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArrayMap;", NULL, "Lorg/apache/lucene/analysis/util/CharArrayMap<Ljava/lang/Object;>;", .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Ljava.lang.Object;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharArraySet = { 2, "CharArraySet", "org.apache.lucene.analysis.util", NULL, 0x1, 16, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/util/AbstractSet<Ljava/lang/Object;>;" };
-  return &_OrgApacheLuceneAnalysisUtilCharArraySet;
 }
 
 @end
@@ -209,16 +232,16 @@ OrgApacheLuceneAnalysisUtilCharArraySet *create_OrgApacheLuceneAnalysisUtilCharA
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *set) {
   OrgApacheLuceneAnalysisUtilCharArraySet_initialize();
   if (set == nil) @throw create_JavaLangNullPointerException_initWithNSString_(@"Given set is null");
-  if (set == OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET) return OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET;
+  if (JreObjectEqualsEquals(set, OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET)) return OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET;
   if ([set->map_ isKindOfClass:[OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap class]]) return set;
   return create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_(OrgApacheLuceneAnalysisUtilCharArrayMap_unmodifiableMapWithOrgApacheLuceneAnalysisUtilCharArrayMap_(set->map_));
 }
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet_copy__WithJavaUtilSet_(id<JavaUtilSet> set) {
   OrgApacheLuceneAnalysisUtilCharArraySet_initialize();
-  if (set == OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET) return OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET;
+  if (JreObjectEqualsEquals(set, OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET)) return OrgApacheLuceneAnalysisUtilCharArraySet_EMPTY_SET;
   if ([set isKindOfClass:[OrgApacheLuceneAnalysisUtilCharArraySet class]]) {
-    OrgApacheLuceneAnalysisUtilCharArraySet *source = (OrgApacheLuceneAnalysisUtilCharArraySet *) cast_chk(set, [OrgApacheLuceneAnalysisUtilCharArraySet class]);
+    OrgApacheLuceneAnalysisUtilCharArraySet *source = (OrgApacheLuceneAnalysisUtilCharArraySet *) set;
     return create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_(OrgApacheLuceneAnalysisUtilCharArrayMap_copy__WithJavaUtilMap_(((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(source))->map_));
   }
   return create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(set, false);

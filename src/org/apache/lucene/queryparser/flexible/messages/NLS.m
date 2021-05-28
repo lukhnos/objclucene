@@ -11,6 +11,7 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/SecurityManager.h"
 #include "java/lang/System.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/Void.h"
 #include "java/lang/reflect/Field.h"
 #include "java/lang/reflect/Modifier.h"
@@ -26,6 +27,10 @@
 #include "java/util/Set.h"
 #include "org/apache/lucene/queryparser/flexible/messages/NLS.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/messages/NLS must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleMessagesNLS ()
 
 + (id)getResourceBundleObjectWithNSString:(NSString *)messageKey
@@ -38,8 +43,7 @@
                                   withIOSClass:(IOSClass *)clazz;
 
 /*!
- @param key
- - Message Key
+ @param key - Message Key
  */
 + (void)validateMessageWithNSString:(NSString *)key
                        withIOSClass:(IOSClass *)clazz;
@@ -48,7 +52,7 @@
 
 @end
 
-inline id<JavaUtilMap> OrgApacheLuceneQueryparserFlexibleMessagesNLS_get_bundles();
+inline id<JavaUtilMap> OrgApacheLuceneQueryparserFlexibleMessagesNLS_get_bundles(void);
 inline id<JavaUtilMap> OrgApacheLuceneQueryparserFlexibleMessagesNLS_set_bundles(id<JavaUtilMap> value);
 static id<JavaUtilMap> OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserFlexibleMessagesNLS, bundles, id<JavaUtilMap>)
@@ -63,28 +67,24 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleMessagesNL
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleMessagesNLS_makeAccessibleWithJavaLangReflectField_(JavaLangReflectField *field);
 
-@interface OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1 : NSObject < JavaSecurityPrivilegedAction > {
+@interface OrgApacheLuceneQueryparserFlexibleMessagesNLS_1 : NSObject < JavaSecurityPrivilegedAction > {
  @public
   JavaLangReflectField *val$field_;
 }
 
-- (id)run;
-
 - (instancetype)initWithJavaLangReflectField:(JavaLangReflectField *)capture$0;
+
+- (JavaLangVoid *)run;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleMessagesNLS_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1, val$field_, JavaLangReflectField *)
+__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleMessagesNLS_1_initWithJavaLangReflectField_(OrgApacheLuceneQueryparserFlexibleMessagesNLS_1 *self, JavaLangReflectField *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1 *self, JavaLangReflectField *capture$0);
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleMessagesNLS_1 *new_OrgApacheLuceneQueryparserFlexibleMessagesNLS_1_initWithJavaLangReflectField_(JavaLangReflectField *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1 *new_OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(JavaLangReflectField *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1 *create_OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(JavaLangReflectField *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1)
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleMessagesNLS_1 *create_OrgApacheLuceneQueryparserFlexibleMessagesNLS_1_initWithJavaLangReflectField_(JavaLangReflectField *capture$0);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 
@@ -146,32 +146,48 @@ J2OBJC_IGNORE_DESIGNATED_END
   OrgApacheLuceneQueryparserFlexibleMessagesNLS_makeAccessibleWithJavaLangReflectField_(field);
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 0, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x89, 0, 3, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x89, 0, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0xc, 5, 6, -1, 7, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 8, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 9, 10, -1, 11, -1, -1 },
+    { NULL, "V", 0xa, 12, 13, -1, 14, -1, -1 },
+    { NULL, "V", 0xa, 15, 6, -1, 7, -1, -1 },
+    { NULL, "V", 0xa, 16, 17, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getLocalizedMessageWithNSString:);
+  methods[2].selector = @selector(getLocalizedMessageWithNSString:withJavaUtilLocale:);
+  methods[3].selector = @selector(getLocalizedMessageWithNSString:withJavaUtilLocale:withNSObjectArray:);
+  methods[4].selector = @selector(getLocalizedMessageWithNSString:withNSObjectArray:);
+  methods[5].selector = @selector(initializeMessagesWithNSString:withIOSClass:);
+  methods[6].selector = @selector(getResourceBundleObjectWithNSString:withJavaUtilLocale:);
+  methods[7].selector = @selector(load__WithIOSClass:);
+  methods[8].selector = @selector(loadfieldValueWithJavaLangReflectField:withBoolean:withIOSClass:);
+  methods[9].selector = @selector(validateMessageWithNSString:withIOSClass:);
+  methods[10].selector = @selector(makeAccessibleWithJavaLangReflectField:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "bundles", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 18, 19, -1 },
+  };
+  static const void *ptrTable[] = { "getLocalizedMessage", "LNSString;", "LNSString;LJavaUtilLocale;", "LNSString;LJavaUtilLocale;[LNSObject;", "LNSString;[LNSObject;", "initializeMessages", "LNSString;LIOSClass;", "(Ljava/lang/String;Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/messages/NLS;>;)V", "getResourceBundleObject", "load", "LIOSClass;", "(Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/messages/NLS;>;)V", "loadfieldValue", "LJavaLangReflectField;ZLIOSClass;", "(Ljava/lang/reflect/Field;ZLjava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/messages/NLS;>;)V", "validateMessage", "makeAccessible", "LJavaLangReflectField;", &OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/messages/NLS;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesNLS = { "NLS", "org.apache.lucene.queryparser.flexible.messages", ptrTable, methods, fields, 7, 0x1, 11, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleMessagesNLS;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleMessagesNLS class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles, new_JavaUtilHashMap_initWithInt_(0));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NLS", NULL, 0x4, NULL, NULL },
-    { "getLocalizedMessageWithNSString:", "getLocalizedMessage", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "getLocalizedMessageWithNSString:withJavaUtilLocale:", "getLocalizedMessage", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "getLocalizedMessageWithNSString:withJavaUtilLocale:withNSObjectArray:", "getLocalizedMessage", "Ljava.lang.String;", 0x89, NULL, NULL },
-    { "getLocalizedMessageWithNSString:withNSObjectArray:", "getLocalizedMessage", "Ljava.lang.String;", 0x89, NULL, NULL },
-    { "initializeMessagesWithNSString:withIOSClass:", "initializeMessages", "V", 0xc, NULL, "(Ljava/lang/String;Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/messages/NLS;>;)V" },
-    { "getResourceBundleObjectWithNSString:withJavaUtilLocale:", "getResourceBundleObject", "Ljava.lang.Object;", 0xa, NULL, NULL },
-    { "load__WithIOSClass:", "load", "V", 0xa, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/messages/NLS;>;)V" },
-    { "loadfieldValueWithJavaLangReflectField:withBoolean:withIOSClass:", "loadfieldValue", "V", 0xa, NULL, "(Ljava/lang/reflect/Field;ZLjava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/messages/NLS;>;)V" },
-    { "validateMessageWithNSString:withIOSClass:", "validateMessage", "V", 0xa, NULL, "(Ljava/lang/String;Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/messages/NLS;>;)V" },
-    { "makeAccessibleWithJavaLangReflectField:", "makeAccessible", "V", 0xa, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "bundles", "bundles", 0xa, "Ljava.util.Map;", &OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/messages/NLS;>;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesNLS = { 2, "NLS", "org.apache.lucene.queryparser.flexible.messages", NULL, 0x1, 11, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserFlexibleMessagesNLS;
 }
 
 @end
@@ -222,18 +238,18 @@ void OrgApacheLuceneQueryparserFlexibleMessagesNLS_initializeMessagesWithNSStrin
     OrgApacheLuceneQueryparserFlexibleMessagesNLS_load__WithIOSClass_(clazz);
     if (![((id<JavaUtilMap>) nil_chk(OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles)) containsKeyWithId:bundleName]) [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles)) putWithId:bundleName withId:clazz];
   }
-  @catch (NSException *e) {
+  @catch (JavaLangThrowable *e) {
   }
 }
 
 id OrgApacheLuceneQueryparserFlexibleMessagesNLS_getResourceBundleObjectWithNSString_withJavaUtilLocale_(NSString *messageKey, JavaUtilLocale *locale) {
   OrgApacheLuceneQueryparserFlexibleMessagesNLS_initialize();
-  for (id<JavaUtilIterator> it = [((id<JavaUtilSet>) nil_chk([((id<JavaUtilMap>) nil_chk(OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles)) keySet])) iterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
-    IOSClass *clazz = [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles)) getWithId:[it next]];
+  for (id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilSet>) nil_chk([((id<JavaUtilMap>) nil_chk(OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles)) keySet])) iterator]); [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
+    IOSClass *clazz = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles)) getWithId:[it next]]);
     JavaUtilResourceBundle *resourceBundle = JavaUtilResourceBundle_getBundleWithNSString_withJavaUtilLocale_([((IOSClass *) nil_chk(clazz)) getName], locale);
     if (resourceBundle != nil) {
       @try {
-        id obj = [resourceBundle getObjectWithNSString:messageKey];
+        id obj = JreRetainedLocalValue([resourceBundle getObjectWithNSString:messageKey]);
         if (obj != nil) return obj;
       }
       @catch (JavaUtilMissingResourceException *e) {
@@ -269,8 +285,6 @@ void OrgApacheLuceneQueryparserFlexibleMessagesNLS_loadfieldValueWithJavaLangRef
   }
   @catch (JavaLangIllegalAccessException *e) {
   }
-  @catch (JavaLangException *e) {
-  }
 }
 
 void OrgApacheLuceneQueryparserFlexibleMessagesNLS_validateMessageWithNSString_withIOSClass_(NSString *key, IOSClass *clazz) {
@@ -278,12 +292,12 @@ void OrgApacheLuceneQueryparserFlexibleMessagesNLS_validateMessageWithNSString_w
   @try {
     JavaUtilResourceBundle *resourceBundle = JavaUtilResourceBundle_getBundleWithNSString_withJavaUtilLocale_([((IOSClass *) nil_chk(clazz)) getName], JavaUtilLocale_getDefault());
     if (resourceBundle != nil) {
-      id obj = [resourceBundle getObjectWithNSString:key];
+      id obj = JreRetainedLocalValue([resourceBundle getObjectWithNSString:key]);
     }
   }
   @catch (JavaUtilMissingResourceException *e) {
   }
-  @catch (NSException *e) {
+  @catch (JavaLangThrowable *e) {
   }
 }
 
@@ -293,22 +307,22 @@ void OrgApacheLuceneQueryparserFlexibleMessagesNLS_makeAccessibleWithJavaLangRef
     [((JavaLangReflectField *) nil_chk(field)) setAccessibleWithBoolean:true];
   }
   else {
-    JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_(create_OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(field));
+    JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_(create_OrgApacheLuceneQueryparserFlexibleMessagesNLS_1_initWithJavaLangReflectField_(field));
   }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 
-@implementation OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1
-
-- (id)run {
-  [((JavaLangReflectField *) nil_chk(val$field_)) setAccessibleWithBoolean:true];
-  return nil;
-}
+@implementation OrgApacheLuceneQueryparserFlexibleMessagesNLS_1
 
 - (instancetype)initWithJavaLangReflectField:(JavaLangReflectField *)capture$0 {
-  OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(self, capture$0);
+  OrgApacheLuceneQueryparserFlexibleMessagesNLS_1_initWithJavaLangReflectField_(self, capture$0);
   return self;
+}
+
+- (JavaLangVoid *)run {
+  [((JavaLangReflectField *) nil_chk(val$field_)) setAccessibleWithBoolean:true];
+  return JreRetainedLocalValue(nil);
 }
 
 - (void)dealloc {
@@ -317,31 +331,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "run", NULL, "Ljava.lang.Void;", 0x1, NULL, NULL },
-    { "initWithJavaLangReflectField:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangVoid;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaLangReflectField:);
+  methods[1].selector = @selector(run);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$field_", NULL, 0x1012, "Ljava.lang.reflect.Field;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$field_", "LJavaLangReflectField;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueryparserFlexibleMessagesNLS", "makeAccessibleWithJavaLangReflectField:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1 = { 2, "", "org.apache.lucene.queryparser.flexible.messages", "NLS", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/security/PrivilegedAction<Ljava/lang/Void;>;" };
-  return &_OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1;
+  static const void *ptrTable[] = { "LJavaLangReflectField;", "LOrgApacheLuceneQueryparserFlexibleMessagesNLS;", "makeAccessibleWithJavaLangReflectField:", "Ljava/lang/Object;Ljava/security/PrivilegedAction<Ljava/lang/Void;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesNLS_1 = { "", "org.apache.lucene.queryparser.flexible.messages", ptrTable, methods, fields, 7, 0x8018, 2, 1, 1, -1, 2, 3, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleMessagesNLS_1;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1 *self, JavaLangReflectField *capture$0) {
+void OrgApacheLuceneQueryparserFlexibleMessagesNLS_1_initWithJavaLangReflectField_(OrgApacheLuceneQueryparserFlexibleMessagesNLS_1 *self, JavaLangReflectField *capture$0) {
   JreStrongAssign(&self->val$field_, capture$0);
   NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1 *new_OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(JavaLangReflectField *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1, initWithJavaLangReflectField_, capture$0)
+OrgApacheLuceneQueryparserFlexibleMessagesNLS_1 *new_OrgApacheLuceneQueryparserFlexibleMessagesNLS_1_initWithJavaLangReflectField_(JavaLangReflectField *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleMessagesNLS_1, initWithJavaLangReflectField_, capture$0)
 }
 
-OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1 *create_OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(JavaLangReflectField *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1, initWithJavaLangReflectField_, capture$0)
+OrgApacheLuceneQueryparserFlexibleMessagesNLS_1 *create_OrgApacheLuceneQueryparserFlexibleMessagesNLS_1_initWithJavaLangReflectField_(JavaLangReflectField *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleMessagesNLS_1, initWithJavaLangReflectField_, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1)

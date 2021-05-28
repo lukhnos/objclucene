@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_
 
@@ -23,21 +29,24 @@
 @protocol JavaUtilList;
 
 /*!
- @brief A <code>StandardBooleanQueryNode</code> has the same behavior as
- <code>BooleanQueryNode</code>.
- It only indicates if the coord should be enabled or
- not for this boolean query.
- - seealso: Similarity#coord(int,int)
+ @brief A <code>StandardBooleanQueryNode</code> has the same behavior as 
+ <code>BooleanQueryNode</code>.It only indicates if the coord should be enabled or
+  not for this boolean query.
+ - seealso: Similarity#coord(int, int)
  - seealso: BooleanQuery
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses
-                         withBoolean:(jboolean)disableCoord;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)clauses
+                                   withBoolean:(jboolean)disableCoord;
 
 - (jboolean)isDisableCoord;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -53,4 +62,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesStanda
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode")

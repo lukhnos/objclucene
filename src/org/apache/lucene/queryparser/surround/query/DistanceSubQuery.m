@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/surround/query/DistanceSubQuery.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/DistanceSubQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery : NSObject
 
 @end
@@ -13,11 +17,18 @@
 @implementation OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "distanceSubQueryNotAllowed", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:", "addSpanQueries", "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery = { 2, "DistanceSubQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(distanceSubQueryNotAllowed);
+  methods[1].selector = @selector(addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "addSpanQueries", "LOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery = { "DistanceSubQuery", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery;
 }
 

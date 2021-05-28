@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTermScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTermScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermScorer || defined(INCLUDE_OrgApacheLuceneSearchTermScorer))
 #define OrgApacheLuceneSearchTermScorer_
 
@@ -33,11 +39,10 @@
 
 /*!
  @brief Advances to the first match beyond the current whose document number is
- greater than or equal to a given target.
+  greater than or equal to a given target.
  <br>
- The implementation uses <code>org.apache.lucene.index.PostingsEnum.advance(int)</code>.
- @param target
- The target document number.
+  The implementation uses <code>org.apache.lucene.index.PostingsEnum.advance(int)</code>.
+ @param target The target document number.
  @return the matching document or NO_MORE_DOCS if none exist.
  */
 - (jint)advanceWithInt:(jint)target;
@@ -66,30 +71,37 @@
 
 /*!
  @brief Construct a <code>TermScorer</code>.
- @param weight
- The weight of the <code>Term</code> in the query.
- @param td
- An iterator over the documents matching the <code>Term</code>.
- @param docScorer
- The </code>Similarity.SimScorer</code> implementation
- to be used for score computations.
+ @param weight The weight of the 
+  <code> Term </code>  in the query.
+ @param td An iterator over the documents matching the 
+  <code> Term </code> .
+ @param docScorer The 
+  </code> Similarity.SimScorer </code>  implementation           to be used for score computations.
  */
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-               withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)td
-withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                       withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)td
+                  withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermScorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermScorer *self, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTermScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermScorer *self, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermScorer *new_OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermScorer *new_OrgApacheLuceneSearchTermScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermScorer *create_OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermScorer *create_OrgApacheLuceneSearchTermScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermScorer")

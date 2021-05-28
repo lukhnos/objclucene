@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexLogDocMergePolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexLogDocMergePolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexLogDocMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexLogDocMergePolicy))
 #define OrgApacheLuceneIndexLogDocMergePolicy_
 
@@ -25,24 +31,23 @@
 
 /*!
  @brief This is a <code>LogMergePolicy</code> that measures size of a
- segment as the number of documents (not taking deletions
- into account).
+   segment as the number of documents (not taking deletions
+   into account).
  */
 @interface OrgApacheLuceneIndexLogDocMergePolicy : OrgApacheLuceneIndexLogMergePolicy
-
-+ (jint)DEFAULT_MIN_MERGE_DOCS;
+@property (readonly, class) jint DEFAULT_MIN_MERGE_DOCS NS_SWIFT_NAME(DEFAULT_MIN_MERGE_DOCS);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor, setting all settings to their
- defaults.
+   defaults.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Get the minimum size for a segment to remain
- un-merged.
+   un-merged.
  - seealso: #setMinMergeDocs
  */
 - (jint)getMinMergeDocs;
@@ -50,13 +55,13 @@
 /*!
  @brief Sets the minimum size for the lowest level segments.
  Any segments below this size are considered to be on
- the same level (even if they vary drastically in size)
- and will be merged whenever there are mergeFactor of
- them.  This effectively truncates the "long tail" of
- small segments that would otherwise be created into a
- single level.  If you set this too large, it could
- greatly increase the merging cost during indexing (if
- you flush many small segments). 
+  the same level (even if they vary drastically in size)
+  and will be merged whenever there are mergeFactor of
+  them.  This effectively truncates the "long tail" of
+  small segments that would otherwise be created into a
+  single level.  If you set this too large, it could
+  greatly increase the merging cost during indexing (if
+  you flush many small segments).
  */
 - (void)setMinMergeDocsWithInt:(jint)minMergeDocs;
 
@@ -71,20 +76,24 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexLogDocMergePolicy)
 
 /*!
  @brief Default minimum segment size.
- @@see setMinMergeDocs 
+ @@see setMinMergeDocs
  */
-inline jint OrgApacheLuceneIndexLogDocMergePolicy_get_DEFAULT_MIN_MERGE_DOCS();
+inline jint OrgApacheLuceneIndexLogDocMergePolicy_get_DEFAULT_MIN_MERGE_DOCS(void);
 #define OrgApacheLuceneIndexLogDocMergePolicy_DEFAULT_MIN_MERGE_DOCS 1000
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexLogDocMergePolicy, DEFAULT_MIN_MERGE_DOCS, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexLogDocMergePolicy_init(OrgApacheLuceneIndexLogDocMergePolicy *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexLogDocMergePolicy *new_OrgApacheLuceneIndexLogDocMergePolicy_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexLogDocMergePolicy *new_OrgApacheLuceneIndexLogDocMergePolicy_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexLogDocMergePolicy *create_OrgApacheLuceneIndexLogDocMergePolicy_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexLogDocMergePolicy *create_OrgApacheLuceneIndexLogDocMergePolicy_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexLogDocMergePolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexLogDocMergePolicy")

@@ -3,10 +3,8 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/compound/hyphenation/HyphenationTree.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/PrintStream.h"
 #include "java/lang/Integer.h"
 #include "java/lang/StringBuilder.h"
@@ -20,6 +18,12 @@
 #include "org/apache/lucene/analysis/compound/hyphenation/PatternParser.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/TernaryTree.h"
 #include "org/xml/sax/InputSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/hyphenation/HyphenationTree must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree () {
  @public
@@ -43,7 +47,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)packValuesWithNSString:(NSString *)values {
-  jint i, n = ((jint) [((NSString *) nil_chk(values)) length]);
+  jint i;
+  jint n = [((NSString *) nil_chk(values)) java_length];
   jint m = (n & 1) == 1 ? (JreRShift32(n, 1)) + 2 : (JreRShift32(n, 1)) + 1;
   jint offset = [((OrgApacheLuceneAnalysisCompoundHyphenationByteVector *) nil_chk(vspace_)) alloc__WithInt:m];
   IOSByteArray *va = [((OrgApacheLuceneAnalysisCompoundHyphenationByteVector *) nil_chk(vspace_)) getArray];
@@ -125,7 +130,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     [buf appendWithChar:c];
     v = [((OrgApacheLuceneAnalysisCompoundHyphenationByteVector *) nil_chk(vspace_)) getWithInt:k++];
   }
-  IOSByteArray *res = [IOSByteArray arrayWithLength:[buf length]];
+  IOSByteArray *res = [IOSByteArray arrayWithLength:[buf java_length]];
   for (jint i = 0; i < res->size_; i++) {
     *IOSByteArray_GetRef(res, i) = (jbyte) [buf charAtWithInt:i];
   }
@@ -137,7 +142,8 @@ J2OBJC_IGNORE_DESIGNATED_END
                       withByteArray:(IOSByteArray *)il {
   IOSByteArray *values;
   jint i = index;
-  jchar p, q;
+  jchar p;
+  jchar q;
   jchar sp = IOSCharArray_Get(nil_chk(word), i);
   p = root_;
   while (p > 0 && p < ((IOSCharArray *) nil_chk(sc_))->size_) {
@@ -191,7 +197,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *)hyphenateWithNSString:(NSString *)word
                                                                          withInt:(jint)remainCharCount
                                                                          withInt:(jint)pushCharCount {
-  IOSCharArray *w = [((NSString *) nil_chk(word)) toCharArray];
+  IOSCharArray *w = [((NSString *) nil_chk(word)) java_toCharArray];
   return [self hyphenateWithCharArray:w withInt:0 withInt:((IOSCharArray *) nil_chk(w))->size_ withInt:remainCharCount withInt:pushCharCount];
 }
 
@@ -233,14 +239,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   IOSIntArray *result = [IOSIntArray arrayWithLength:len + 1];
   jint k = 0;
-  NSString *sw = [NSString stringWithCharacters:word offset:1 length:len];
+  NSString *sw = [NSString java_stringWithCharacters:word offset:1 length:len];
   if ([((JavaUtilHashMap *) nil_chk(stoplist_)) containsKeyWithId:sw]) {
-    JavaUtilArrayList *hw = [((JavaUtilHashMap *) nil_chk(stoplist_)) getWithId:sw];
+    JavaUtilArrayList *hw = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(stoplist_)) getWithId:sw]);
     jint j = 0;
     for (i = 0; i < [((JavaUtilArrayList *) nil_chk(hw)) size]; i++) {
-      id o = [hw getWithInt:i];
+      id o = JreRetainedLocalValue([hw getWithInt:i]);
       if ([o isKindOfClass:[NSString class]]) {
-        j += ((jint) [((NSString *) nil_chk(((NSString *) cast_chk(o, [NSString class])))) length]);
+        j += [((NSString *) nil_chk(((NSString *) o))) java_length];
         if (j >= remainCharCount && j < (len - pushCharCount)) {
           *IOSIntArray_GetRef(result, k++) = j + iIgnoreAtBeginning;
         }
@@ -274,11 +280,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addClassWithNSString:(NSString *)chargroup {
-  if (((jint) [((NSString *) nil_chk(chargroup)) length]) > 0) {
+  if ([((NSString *) nil_chk(chargroup)) java_length] > 0) {
     jchar equivChar = [chargroup charAtWithInt:0];
     IOSCharArray *key = [IOSCharArray arrayWithLength:2];
     *IOSCharArray_GetRef(key, 1) = 0;
-    for (jint i = 0; i < ((jint) [chargroup length]); i++) {
+    for (jint i = 0; i < [chargroup java_length]; i++) {
       *IOSCharArray_GetRef(key, 0) = [chargroup charAtWithInt:i];
       [((OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *) nil_chk(classmap_)) insertWithCharArray:key withInt:0 withChar:equivChar];
     }
@@ -314,29 +320,48 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "HyphenationTree", NULL, 0x1, NULL, NULL },
-    { "packValuesWithNSString:", "packValues", "I", 0x4, NULL, NULL },
-    { "unpackValuesWithInt:", "unpackValues", "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "loadPatternsWithOrgXmlSaxInputSource:", "loadPatterns", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "findPatternWithNSString:", "findPattern", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "hstrcmpWithCharArray:withInt:withCharArray:withInt:", "hstrcmp", "I", 0x4, NULL, NULL },
-    { "getValuesWithInt:", "getValues", "[B", 0x4, NULL, NULL },
-    { "searchPatternsWithCharArray:withInt:withByteArray:", "searchPatterns", "V", 0x4, NULL, NULL },
-    { "hyphenateWithNSString:withInt:withInt:", "hyphenate", "Lorg.apache.lucene.analysis.compound.hyphenation.Hyphenation;", 0x1, NULL, NULL },
-    { "hyphenateWithCharArray:withInt:withInt:withInt:withInt:", "hyphenate", "Lorg.apache.lucene.analysis.compound.hyphenation.Hyphenation;", 0x1, NULL, NULL },
-    { "addClassWithNSString:", "addClass", "V", 0x1, NULL, NULL },
-    { "addExceptionWithNSString:withJavaUtilArrayList:", "addException", "V", 0x1, NULL, "(Ljava/lang/String;Ljava/util/ArrayList<Ljava/lang/Object;>;)V" },
-    { "addPatternWithNSString:withNSString:", "addPattern", "V", 0x1, NULL, NULL },
-    { "printStatsWithJavaIoPrintStream:", "printStats", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 8, 9, -1, -1, -1, -1 },
+    { NULL, "[B", 0x4, 10, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 11, 12, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCompoundHyphenationHyphenation;", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCompoundHyphenationHyphenation;", 0x1, 13, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, 19, -1, -1 },
+    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(packValuesWithNSString:);
+  methods[2].selector = @selector(unpackValuesWithInt:);
+  methods[3].selector = @selector(loadPatternsWithOrgXmlSaxInputSource:);
+  methods[4].selector = @selector(findPatternWithNSString:);
+  methods[5].selector = @selector(hstrcmpWithCharArray:withInt:withCharArray:withInt:);
+  methods[6].selector = @selector(getValuesWithInt:);
+  methods[7].selector = @selector(searchPatternsWithCharArray:withInt:withByteArray:);
+  methods[8].selector = @selector(hyphenateWithNSString:withInt:withInt:);
+  methods[9].selector = @selector(hyphenateWithCharArray:withInt:withInt:withInt:withInt:);
+  methods[10].selector = @selector(addClassWithNSString:);
+  methods[11].selector = @selector(addExceptionWithNSString:withJavaUtilArrayList:);
+  methods[12].selector = @selector(addPatternWithNSString:withNSString:);
+  methods[13].selector = @selector(printStatsWithJavaIoPrintStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "vspace_", NULL, 0x4, "Lorg.apache.lucene.analysis.compound.hyphenation.ByteVector;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stoplist_", NULL, 0x4, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/String;Ljava/util/ArrayList<Ljava/lang/Object;>;>;", .constantValue.asLong = 0 },
-    { "classmap_", NULL, 0x4, "Lorg.apache.lucene.analysis.compound.hyphenation.TernaryTree;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ivalues_", NULL, 0x82, "Lorg.apache.lucene.analysis.compound.hyphenation.TernaryTree;", NULL, NULL, .constantValue.asLong = 0 },
+    { "vspace_", "LOrgApacheLuceneAnalysisCompoundHyphenationByteVector;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "stoplist_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x4, -1, -1, 24, -1 },
+    { "classmap_", "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "ivalues_", "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree;", .constantValue.asLong = 0, 0x82, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree = { 2, "HyphenationTree", "org.apache.lucene.analysis.compound.hyphenation", NULL, 0x1, 14, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "packValues", "LNSString;", "unpackValues", "I", "loadPatterns", "LOrgXmlSaxInputSource;", "LJavaIoIOException;", "findPattern", "hstrcmp", "[CI[CI", "getValues", "searchPatterns", "[CI[B", "hyphenate", "LNSString;II", "[CIIII", "addClass", "addException", "LNSString;LJavaUtilArrayList;", "(Ljava/lang/String;Ljava/util/ArrayList<Ljava/lang/Object;>;)V", "addPattern", "LNSString;LNSString;", "printStats", "LJavaIoPrintStream;", "Ljava/util/HashMap<Ljava/lang/String;Ljava/util/ArrayList<Ljava/lang/Object;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree = { "HyphenationTree", "org.apache.lucene.analysis.compound.hyphenation", ptrTable, methods, fields, 7, 0x1, 14, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree;
 }
 

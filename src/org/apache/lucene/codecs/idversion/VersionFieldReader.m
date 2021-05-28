@@ -3,10 +3,8 @@
 //  source: ./sandbox/src/java/org/apache/lucene/codecs/idversion/VersionFieldReader.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
@@ -26,21 +24,25 @@
 #include "org/apache/lucene/util/fst/FST.h"
 #include "org/apache/lucene/util/fst/PairOutputs.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/idversion/VersionFieldReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneCodecsIdversionVersionFieldReader
 
-- (instancetype)initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader:(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *)parent
-                                                withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
-                                                                         withLong:(jlong)numTerms
-                                       withOrgApacheLuceneUtilFstPairOutputs_Pair:(OrgApacheLuceneUtilFstPairOutputs_Pair *)rootCode
-                                                                         withLong:(jlong)sumTotalTermFreq
-                                                                         withLong:(jlong)sumDocFreq
-                                                                          withInt:(jint)docCount
-                                                                         withLong:(jlong)indexStartFP
-                                                                          withInt:(jint)longsSize
-                                               withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)indexIn
-                                                  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minTerm
-                                                  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxTerm {
-  OrgApacheLuceneCodecsIdversionVersionFieldReader_initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(self, parent, fieldInfo, numTerms, rootCode, sumTotalTermFreq, sumDocFreq, docCount, indexStartFP, longsSize, indexIn, minTerm, maxTerm);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader:(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *)parent
+                                                              withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
+                                                                                       withLong:(jlong)numTerms
+                                                     withOrgApacheLuceneUtilFstPairOutputs_Pair:(OrgApacheLuceneUtilFstPairOutputs_Pair *)rootCode
+                                                                                       withLong:(jlong)sumTotalTermFreq
+                                                                                       withLong:(jlong)sumDocFreq
+                                                                                        withInt:(jint)docCount
+                                                                                       withLong:(jlong)indexStartFP
+                                                                                        withInt:(jint)longsSize
+                                                             withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)indexIn
+                                                                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minTerm
+                                                                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxTerm {
+  OrgApacheLuceneCodecsIdversionVersionFieldReader_initPackagePrivateWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(self, parent, fieldInfo, numTerms, rootCode, sumTotalTermFreq, sumDocFreq, docCount, indexStartFP, longsSize, indexIn, minTerm, maxTerm);
   return self;
 }
 
@@ -126,47 +128,67 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader:withOrgApacheLuceneIndexFieldInfo:withLong:withOrgApacheLuceneUtilFstPairOutputs_Pair:withLong:withLong:withInt:withLong:withInt:withOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "VersionFieldReader", NULL, 0x0, "Ljava.io.IOException;", "(Lorg/apache/lucene/codecs/idversion/VersionBlockTreeTermsReader;Lorg/apache/lucene/index/FieldInfo;JLorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;JJIJILorg/apache/lucene/store/IndexInput;Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;)V" },
-    { "getMin", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMax", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "hasFreqs", NULL, "Z", 0x1, NULL, NULL },
-    { "hasOffsets", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPositions", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "size", NULL, "J", 0x1, NULL, NULL },
-    { "getSumTotalTermFreq", NULL, "J", 0x1, NULL, NULL },
-    { "getSumDocFreq", NULL, "J", 0x1, NULL, NULL },
-    { "getDocCount", NULL, "I", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader:withOrgApacheLuceneIndexFieldInfo:withLong:withOrgApacheLuceneUtilFstPairOutputs_Pair:withLong:withLong:withInt:withLong:withInt:withOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(getMin);
+  methods[2].selector = @selector(getMax);
+  methods[3].selector = @selector(hasFreqs);
+  methods[4].selector = @selector(hasOffsets);
+  methods[5].selector = @selector(hasPositions);
+  methods[6].selector = @selector(hasPayloads);
+  methods[7].selector = @selector(iterator);
+  methods[8].selector = @selector(size);
+  methods[9].selector = @selector(getSumTotalTermFreq);
+  methods[10].selector = @selector(getSumDocFreq);
+  methods[11].selector = @selector(getDocCount);
+  methods[12].selector = @selector(ramBytesUsed);
+  methods[13].selector = @selector(getChildResources);
+  methods[14].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "numTerms_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfo_", NULL, 0x10, "Lorg.apache.lucene.index.FieldInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sumTotalTermFreq_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "sumDocFreq_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "docCount_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexStartFP_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "rootBlockFP_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "rootCode_", NULL, 0x10, "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", NULL, "Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;", .constantValue.asLong = 0 },
-    { "minTerm_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTerm_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "longsSize_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "parent_", NULL, 0x10, "Lorg.apache.lucene.codecs.idversion.VersionBlockTreeTermsReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "index_", NULL, 0x10, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;", .constantValue.asLong = 0 },
+    { "numTerms_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fieldInfo_", "LOrgApacheLuceneIndexFieldInfo;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "sumTotalTermFreq_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "sumDocFreq_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docCount_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "indexStartFP_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "rootBlockFP_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "rootCode_", "LOrgApacheLuceneUtilFstPairOutputs_Pair;", .constantValue.asLong = 0, 0x10, -1, -1, 5, -1 },
+    { "minTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "longsSize_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "parent_", "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "index_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x10, -1, -1, 6, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionFieldReader = { 2, "VersionFieldReader", "org.apache.lucene.codecs.idversion", NULL, 0x10, 15, methods, 13, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader;LOrgApacheLuceneIndexFieldInfo;JLOrgApacheLuceneUtilFstPairOutputs_Pair;JJIJILOrgApacheLuceneStoreIndexInput;LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "(Lorg/apache/lucene/codecs/idversion/VersionBlockTreeTermsReader;Lorg/apache/lucene/index/FieldInfo;JLorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;JJIJILorg/apache/lucene/store/IndexInput;Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;)V", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString", "Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;", "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Lorg/apache/lucene/util/BytesRef;Ljava/lang/Long;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionVersionFieldReader = { "VersionFieldReader", "org.apache.lucene.codecs.idversion", ptrTable, methods, fields, 7, 0x10, 15, 13, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsIdversionVersionFieldReader;
 }
 
 @end
 
-void OrgApacheLuceneCodecsIdversionVersionFieldReader_initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsIdversionVersionFieldReader *self, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm) {
+void OrgApacheLuceneCodecsIdversionVersionFieldReader_initPackagePrivateWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsIdversionVersionFieldReader *self, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm) {
   OrgApacheLuceneIndexTerms_init(self);
-  JreAssert((numTerms > 0), (@"org/apache/lucene/codecs/idversion/VersionFieldReader.java:57 condition failed: assert numTerms > 0;"));
+  JreAssert(numTerms > 0, @"org/apache/lucene/codecs/idversion/VersionFieldReader.java:57 condition failed: assert numTerms > 0;");
   JreStrongAssign(&self->fieldInfo_, fieldInfo);
   JreStrongAssign(&self->parent_, parent);
   self->numTerms_ = numTerms;
@@ -180,7 +202,7 @@ void OrgApacheLuceneCodecsIdversionVersionFieldReader_initWithOrgApacheLuceneCod
   JreStrongAssign(&self->maxTerm_, maxTerm);
   self->rootBlockFP_ = JreURShift64([(create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(rootCode))->output1_))->bytes_, ((OrgApacheLuceneUtilBytesRef *) rootCode->output1_)->offset_, ((OrgApacheLuceneUtilBytesRef *) rootCode->output1_)->length_)) readVLong], OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_OUTPUT_FLAGS_NUM_BITS);
   if (indexIn != nil) {
-    OrgApacheLuceneStoreIndexInput *clone = [indexIn clone];
+    OrgApacheLuceneStoreIndexInput *clone = [indexIn java_clone];
     [((OrgApacheLuceneStoreIndexInput *) nil_chk(clone)) seekWithLong:indexStartFP];
     JreStrongAssignAndConsume(&self->index_, new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(clone, JreLoadStatic(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter, FST_OUTPUTS)));
   }
@@ -189,12 +211,12 @@ void OrgApacheLuceneCodecsIdversionVersionFieldReader_initWithOrgApacheLuceneCod
   }
 }
 
-OrgApacheLuceneCodecsIdversionVersionFieldReader *new_OrgApacheLuceneCodecsIdversionVersionFieldReader_initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionVersionFieldReader, initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_, parent, fieldInfo, numTerms, rootCode, sumTotalTermFreq, sumDocFreq, docCount, indexStartFP, longsSize, indexIn, minTerm, maxTerm)
+OrgApacheLuceneCodecsIdversionVersionFieldReader *new_OrgApacheLuceneCodecsIdversionVersionFieldReader_initPackagePrivateWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionVersionFieldReader, initPackagePrivateWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_, parent, fieldInfo, numTerms, rootCode, sumTotalTermFreq, sumDocFreq, docCount, indexStartFP, longsSize, indexIn, minTerm, maxTerm)
 }
 
-OrgApacheLuceneCodecsIdversionVersionFieldReader *create_OrgApacheLuceneCodecsIdversionVersionFieldReader_initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionVersionFieldReader, initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_, parent, fieldInfo, numTerms, rootCode, sumTotalTermFreq, sumDocFreq, docCount, indexStartFP, longsSize, indexIn, minTerm, maxTerm)
+OrgApacheLuceneCodecsIdversionVersionFieldReader *create_OrgApacheLuceneCodecsIdversionVersionFieldReader_initPackagePrivateWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionVersionFieldReader, initPackagePrivateWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_, parent, fieldInfo, numTerms, rootCode, sumTotalTermFreq, sumDocFreq, docCount, indexStartFP, longsSize, indexIn, minTerm, maxTerm)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionVersionFieldReader)

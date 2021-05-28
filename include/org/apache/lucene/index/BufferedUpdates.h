@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexBufferedUpdates
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexBufferedUpdates_) && (INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdates || defined(INCLUDE_OrgApacheLuceneIndexBufferedUpdates))
 #define OrgApacheLuceneIndexBufferedUpdates_
 
@@ -39,26 +45,18 @@
   JavaUtilConcurrentAtomicAtomicLong *bytesUsed_;
   jlong gen_;
 }
-
-+ (jint)BYTES_PER_DEL_TERM;
-
-+ (jint)BYTES_PER_DEL_DOCID;
-
-+ (jint)BYTES_PER_DEL_QUERY;
-
-+ (jint)BYTES_PER_NUMERIC_FIELD_ENTRY;
-
-+ (jint)BYTES_PER_NUMERIC_UPDATE_ENTRY;
-
-+ (jint)BYTES_PER_BINARY_FIELD_ENTRY;
-
-+ (jint)BYTES_PER_BINARY_UPDATE_ENTRY;
-
-+ (JavaLangInteger *)MAX_INT;
+@property (readonly, class) jint BYTES_PER_DEL_TERM NS_SWIFT_NAME(BYTES_PER_DEL_TERM);
+@property (readonly, class) jint BYTES_PER_DEL_DOCID NS_SWIFT_NAME(BYTES_PER_DEL_DOCID);
+@property (readonly, class) jint BYTES_PER_DEL_QUERY NS_SWIFT_NAME(BYTES_PER_DEL_QUERY);
+@property (readonly, class) jint BYTES_PER_NUMERIC_FIELD_ENTRY NS_SWIFT_NAME(BYTES_PER_NUMERIC_FIELD_ENTRY);
+@property (readonly, class) jint BYTES_PER_NUMERIC_UPDATE_ENTRY NS_SWIFT_NAME(BYTES_PER_NUMERIC_UPDATE_ENTRY);
+@property (readonly, class) jint BYTES_PER_BINARY_FIELD_ENTRY NS_SWIFT_NAME(BYTES_PER_BINARY_FIELD_ENTRY);
+@property (readonly, class) jint BYTES_PER_BINARY_UPDATE_ENTRY NS_SWIFT_NAME(BYTES_PER_BINARY_UPDATE_ENTRY);
+@property (readonly, class, strong) JavaLangInteger *MAX_INT NS_SWIFT_NAME(MAX_INT);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 - (void)addBinaryUpdateWithOrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate:(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *)update
                                                                              withInt:(jint)docIDUpto;
@@ -82,6 +80,10 @@
 
 - (void)clear;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexBufferedUpdates)
@@ -96,54 +98,58 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexBufferedUpdates, numericUpdates_, id<Jav
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexBufferedUpdates, binaryUpdates_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexBufferedUpdates, bytesUsed_, JavaUtilConcurrentAtomicAtomicLong *)
 
-inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_DEL_TERM();
+inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_DEL_TERM(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexBufferedUpdates, BYTES_PER_DEL_TERM, jint)
 
-inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_DEL_DOCID();
+inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_DEL_DOCID(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexBufferedUpdates, BYTES_PER_DEL_DOCID, jint)
 
-inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_DEL_QUERY();
+inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_DEL_QUERY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexBufferedUpdates, BYTES_PER_DEL_QUERY, jint)
 
-inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_NUMERIC_FIELD_ENTRY();
+inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_NUMERIC_FIELD_ENTRY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexBufferedUpdates, BYTES_PER_NUMERIC_FIELD_ENTRY, jint)
 
-inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_NUMERIC_UPDATE_ENTRY();
+inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_NUMERIC_UPDATE_ENTRY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexBufferedUpdates, BYTES_PER_NUMERIC_UPDATE_ENTRY, jint)
 
-inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_BINARY_FIELD_ENTRY();
+inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_BINARY_FIELD_ENTRY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexBufferedUpdates, BYTES_PER_BINARY_FIELD_ENTRY, jint)
 
-inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_BINARY_UPDATE_ENTRY();
+inline jint OrgApacheLuceneIndexBufferedUpdates_get_BYTES_PER_BINARY_UPDATE_ENTRY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexBufferedUpdates, BYTES_PER_BINARY_UPDATE_ENTRY, jint)
 
-inline JavaLangInteger *OrgApacheLuceneIndexBufferedUpdates_get_MAX_INT();
+inline JavaLangInteger *OrgApacheLuceneIndexBufferedUpdates_get_MAX_INT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaLangInteger *OrgApacheLuceneIndexBufferedUpdates_MAX_INT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexBufferedUpdates, MAX_INT, JavaLangInteger *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexBufferedUpdates_init(OrgApacheLuceneIndexBufferedUpdates *self);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexBufferedUpdates_initPackagePrivate(OrgApacheLuceneIndexBufferedUpdates *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdates *new_OrgApacheLuceneIndexBufferedUpdates_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdates *new_OrgApacheLuceneIndexBufferedUpdates_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdates *create_OrgApacheLuceneIndexBufferedUpdates_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdates *create_OrgApacheLuceneIndexBufferedUpdates_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdates)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdates")

@@ -8,10 +8,16 @@
 #include "org/apache/lucene/search/PhraseQueue.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/PhraseQueue must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @implementation OrgApacheLuceneSearchPhraseQueue
 
-- (instancetype)initWithInt:(jint)size {
-  OrgApacheLuceneSearchPhraseQueue_initWithInt_(self, size);
+- (instancetype)initPackagePrivateWithInt:(jint)size {
+  OrgApacheLuceneSearchPhraseQueue_initPackagePrivateWithInt_(self, size);
   return self;
 }
 
@@ -29,27 +35,33 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "PhraseQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, "(Lorg/apache/lucene/search/PhrasePositions;Lorg/apache/lucene/search/PhrasePositions;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x14, 1, 2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.PhrasePositions;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQueue = { 2, "PhraseQueue", "org.apache.lucene.search", NULL, 0x10, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/PhrasePositions;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneSearchPhrasePositions;LOrgApacheLuceneSearchPhrasePositions;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/PhrasePositions;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQueue = { "PhraseQueue", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x10, 2, 0, -1, -1, -1, 3, -1 };
   return &_OrgApacheLuceneSearchPhraseQueue;
 }
 
 @end
 
-void OrgApacheLuceneSearchPhraseQueue_initWithInt_(OrgApacheLuceneSearchPhraseQueue *self, jint size) {
+void OrgApacheLuceneSearchPhraseQueue_initPackagePrivateWithInt_(OrgApacheLuceneSearchPhraseQueue *self, jint size) {
   OrgApacheLuceneUtilPriorityQueue_initWithInt_(self, size);
 }
 
-OrgApacheLuceneSearchPhraseQueue *new_OrgApacheLuceneSearchPhraseQueue_initWithInt_(jint size) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPhraseQueue, initWithInt_, size)
+OrgApacheLuceneSearchPhraseQueue *new_OrgApacheLuceneSearchPhraseQueue_initPackagePrivateWithInt_(jint size) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPhraseQueue, initPackagePrivateWithInt_, size)
 }
 
-OrgApacheLuceneSearchPhraseQueue *create_OrgApacheLuceneSearchPhraseQueue_initWithInt_(jint size) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPhraseQueue, initWithInt_, size)
+OrgApacheLuceneSearchPhraseQueue *create_OrgApacheLuceneSearchPhraseQueue_initPackagePrivateWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPhraseQueue, initPackagePrivateWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQueue)

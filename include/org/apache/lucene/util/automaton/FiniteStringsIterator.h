@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonFiniteStringsIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonFiniteStringsIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonFiniteStringsIterator || defined(INCLUDE_OrgApacheLuceneUtilAutomatonFiniteStringsIterator))
 #define OrgApacheLuceneUtilAutomatonFiniteStringsIterator_
 
@@ -22,11 +28,11 @@
 /*!
  @brief Iterates all accepted strings.
  <p>If the <code>Automaton</code> has cycles then this iterator may throw an <code>IllegalArgumentException</code>
- , but this is not guaranteed!
+ , but this is not guaranteed! 
  <p>Be aware that the iteration order is implementation dependent
- and may change across releases.
+  and may change across releases. 
  <p>If the automaton is not determinized then it's possible this iterator
- will return duplicates.
+  will return duplicates.
  */
 @interface OrgApacheLuceneUtilAutomatonFiniteStringsIterator : NSObject
 
@@ -36,7 +42,7 @@
  @brief Constructor.
  @param a Automaton to create finite string from.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
  @brief Generate next finite string.
@@ -44,6 +50,10 @@
  @return Finite string or null, if no more finite strings are available.
  */
 - (OrgApacheLuceneUtilIntsRef *)next;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -59,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonFiniteStringsIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonFiniteStringsIterator")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressionMode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingCompressionMode_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressionMode || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressionMode))
 #define OrgApacheLuceneCodecsCompressingCompressionMode_
 
@@ -20,17 +26,13 @@
 @class OrgApacheLuceneCodecsCompressingDecompressor;
 
 /*!
- @brief A compression mode.
- Tells how much effort should be spent on compression and
- decompression of stored fields.
+ @brief A compression mode.Tells how much effort should be spent on compression and
+  decompression of stored fields.
  */
 @interface OrgApacheLuceneCodecsCompressingCompressionMode : NSObject
-
-+ (OrgApacheLuceneCodecsCompressingCompressionMode *)FAST;
-
-+ (OrgApacheLuceneCodecsCompressingCompressionMode *)HIGH_COMPRESSION;
-
-+ (OrgApacheLuceneCodecsCompressingCompressionMode *)FAST_DECOMPRESSION;
+@property (readonly, class, strong) OrgApacheLuceneCodecsCompressingCompressionMode *FAST NS_SWIFT_NAME(FAST);
+@property (readonly, class, strong) OrgApacheLuceneCodecsCompressingCompressionMode *HIGH_COMPRESSION NS_SWIFT_NAME(HIGH_COMPRESSION);
+@property (readonly, class, strong) OrgApacheLuceneCodecsCompressingCompressionMode *FAST_DECOMPRESSION NS_SWIFT_NAME(FAST_DECOMPRESSION);
 
 #pragma mark Public
 
@@ -49,44 +51,43 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsCompressingCompressionMode)
 
 /*!
- @brief A compression mode that trades compression ratio for speed.
- Although the
- compression ratio might remain high, compression and decompression are
- very fast. Use this mode with indices that have a high update rate but
- should be able to load documents from disk quickly.
+ @brief A compression mode that trades compression ratio for speed.Although the
+  compression ratio might remain high, compression and decompression are
+  very fast.
+ Use this mode with indices that have a high update rate but
+  should be able to load documents from disk quickly.
  */
-inline OrgApacheLuceneCodecsCompressingCompressionMode *OrgApacheLuceneCodecsCompressingCompressionMode_get_FAST();
+inline OrgApacheLuceneCodecsCompressingCompressionMode *OrgApacheLuceneCodecsCompressingCompressionMode_get_FAST(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressionMode *OrgApacheLuceneCodecsCompressingCompressionMode_FAST;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressionMode, FAST, OrgApacheLuceneCodecsCompressingCompressionMode *)
 
 /*!
- @brief A compression mode that trades speed for compression ratio.
- Although
- compression and decompression might be slow, this compression mode should
- provide a good compression ratio. This mode might be interesting if/when
- your index size is much bigger than your OS cache.
+ @brief A compression mode that trades speed for compression ratio.Although
+  compression and decompression might be slow, this compression mode should
+  provide a good compression ratio.
+ This mode might be interesting if/when
+  your index size is much bigger than your OS cache.
  */
-inline OrgApacheLuceneCodecsCompressingCompressionMode *OrgApacheLuceneCodecsCompressingCompressionMode_get_HIGH_COMPRESSION();
+inline OrgApacheLuceneCodecsCompressingCompressionMode *OrgApacheLuceneCodecsCompressingCompressionMode_get_HIGH_COMPRESSION(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressionMode *OrgApacheLuceneCodecsCompressingCompressionMode_HIGH_COMPRESSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressionMode, HIGH_COMPRESSION, OrgApacheLuceneCodecsCompressingCompressionMode *)
 
 /*!
  @brief This compression mode is similar to <code>FAST</code> but it spends more time
- compressing in order to improve the compression ratio.
- This compression
- mode is best used with indices that have a low update rate but should be
- able to load documents from disk quickly.
+  compressing in order to improve the compression ratio.This compression
+  mode is best used with indices that have a low update rate but should be
+  able to load documents from disk quickly.
  */
-inline OrgApacheLuceneCodecsCompressingCompressionMode *OrgApacheLuceneCodecsCompressingCompressionMode_get_FAST_DECOMPRESSION();
+inline OrgApacheLuceneCodecsCompressingCompressionMode *OrgApacheLuceneCodecsCompressingCompressionMode_get_FAST_DECOMPRESSION(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressionMode *OrgApacheLuceneCodecsCompressingCompressionMode_FAST_DECOMPRESSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCompressingCompressionMode, FAST_DECOMPRESSION, OrgApacheLuceneCodecsCompressingCompressionMode *)
@@ -97,4 +98,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressionMode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressionMode")

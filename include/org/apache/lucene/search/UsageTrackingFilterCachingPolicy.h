@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_) && (INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy || defined(INCLUDE_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy))
 #define OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_
 
@@ -26,10 +32,10 @@
 
 /*!
  @brief A <code>FilterCachingPolicy</code> that tracks usage statistics of recently-used
- filters in order to decide on which filters are worth caching.
+  filters in order to decide on which filters are worth caching.
  It also uses some heuristics on segments, filters and the doc id sets that
- they produce in order to cache more aggressively when the execution cost
- significantly outweighs the caching overhead.
+  they produce in order to cache more aggressively when the execution cost
+  significantly outweighs the caching overhead.
  */
 @interface OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy : NSObject < OrgApacheLuceneSearchFilterCachingPolicy >
 
@@ -38,21 +44,21 @@
 /*!
  @brief Create a new instance with sensible defaults.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Create a new instance.
- @param minSizeRatio              the minimum size ratio for segments to be cached, see <code>FilterCachingPolicy.CacheOnLargeSegments</code>
- @param historySize               the number of recently used filters to track
- @param minFrequencyCostlyFilters how many times filters whose <code>getDocIdSet</code> method is expensive should have been seen before being cached
- @param minFrequencyCheapFilters  how many times filters that produce <code>DocIdSet</code>s that are cheap to cached should have been seen before being cached
- @param minFrequencyOtherFilters  how many times other filters should have been seen before being cached
+ @param minSizeRatio the minimum size ratio for segments to be cached, see <code>FilterCachingPolicy.CacheOnLargeSegments</code>
+ @param historySize the number of recently used filters to track
+ @param minFrequencyCostlyFilters how many times filters whose <code>getDocIdSet</code>  method is expensive should have been seen before being cached
+ @param minFrequencyCheapFilters how many times filters that produce <code>DocIdSet</code> s that are cheap to cached should have been seen before being cached
+ @param minFrequencyOtherFilters how many times other filters should have been seen before being cached
  */
-- (instancetype)initWithFloat:(jfloat)minSizeRatio
-                      withInt:(jint)historySize
-                      withInt:(jint)minFrequencyCostlyFilters
-                      withInt:(jint)minFrequencyCheapFilters
-                      withInt:(jint)minFrequencyOtherFilters;
+- (instancetype __nonnull)initWithFloat:(jfloat)minSizeRatio
+                                withInt:(jint)historySize
+                                withInt:(jint)minFrequencyCostlyFilters
+                                withInt:(jint)minFrequencyCheapFilters
+                                withInt:(jint)minFrequencyOtherFilters;
 
 - (void)onUseWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
 
@@ -82,12 +88,16 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *create_
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_init(OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *new_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *new_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *create_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *create_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy")

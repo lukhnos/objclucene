@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneMiscHighFreqTerms
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneMiscHighFreqTerms_) && (INCLUDE_ALL_OrgApacheLuceneMiscHighFreqTerms || defined(INCLUDE_OrgApacheLuceneMiscHighFreqTerms))
 #define OrgApacheLuceneMiscHighFreqTerms_
 
@@ -22,19 +28,18 @@
 
 /*!
  @brief <code>HighFreqTerms</code> class extracts the top n most frequent terms
- (by document frequency) from an existing Lucene index and reports their
- document frequency.
+  (by document frequency) from an existing Lucene index and reports their
+  document frequency.
  <p>
- If the -t flag is given, both document frequency and total tf (total
- number of occurrences) are reported, ordered by descending total tf.
+  If the -t flag is given, both document frequency and total tf (total
+  number of occurrences) are reported, ordered by descending total tf.
  */
 @interface OrgApacheLuceneMiscHighFreqTerms : NSObject
-
-+ (jint)DEFAULT_NUMTERMS;
+@property (readonly, class) jint DEFAULT_NUMTERMS NS_SWIFT_NAME(DEFAULT_NUMTERMS);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns TermStats[] ordered by the specified comparator
@@ -50,19 +55,19 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneMiscHighFreqTerms)
 
-inline jint OrgApacheLuceneMiscHighFreqTerms_get_DEFAULT_NUMTERMS();
+inline jint OrgApacheLuceneMiscHighFreqTerms_get_DEFAULT_NUMTERMS(void);
 #define OrgApacheLuceneMiscHighFreqTerms_DEFAULT_NUMTERMS 100
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneMiscHighFreqTerms, DEFAULT_NUMTERMS, jint)
+
+FOUNDATION_EXPORT void OrgApacheLuceneMiscHighFreqTerms_init(OrgApacheLuceneMiscHighFreqTerms *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms *new_OrgApacheLuceneMiscHighFreqTerms_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms *create_OrgApacheLuceneMiscHighFreqTerms_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneMiscHighFreqTerms_mainWithNSStringArray_(IOSObjectArray *args);
 
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneMiscHighFreqTerms_getHighFreqTermsWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withJavaUtilComparator_(OrgApacheLuceneIndexIndexReader *reader, jint numTerms, NSString *field, id<JavaUtilComparator> comparator);
-
-FOUNDATION_EXPORT void OrgApacheLuceneMiscHighFreqTerms_init(OrgApacheLuceneMiscHighFreqTerms *self);
-
-FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms *new_OrgApacheLuceneMiscHighFreqTerms_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms *create_OrgApacheLuceneMiscHighFreqTerms_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms)
 
@@ -76,6 +81,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms)
 #include "java/util/Comparator.h"
 
 @class OrgApacheLuceneMiscTermStats;
+@protocol JavaUtilFunctionFunction;
+@protocol JavaUtilFunctionToDoubleFunction;
+@protocol JavaUtilFunctionToIntFunction;
+@protocol JavaUtilFunctionToLongFunction;
 
 /*!
  @brief Compares terms by docTermFreq
@@ -84,7 +93,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)compareWithId:(OrgApacheLuceneMiscTermStats *)a
                withId:(OrgApacheLuceneMiscTermStats *)b;
@@ -95,9 +104,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator)
 
 FOUNDATION_EXPORT void OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init(OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator *new_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator *new_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator *create_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init();
+FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator *create_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator)
 
@@ -111,6 +120,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator)
 #include "java/util/Comparator.h"
 
 @class OrgApacheLuceneMiscTermStats;
+@protocol JavaUtilFunctionFunction;
+@protocol JavaUtilFunctionToDoubleFunction;
+@protocol JavaUtilFunctionToIntFunction;
+@protocol JavaUtilFunctionToLongFunction;
 
 /*!
  @brief Compares terms by totalTermFreq
@@ -119,7 +132,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)compareWithId:(OrgApacheLuceneMiscTermStats *)a
                withId:(OrgApacheLuceneMiscTermStats *)b;
@@ -130,9 +143,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparato
 
 FOUNDATION_EXPORT void OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init(OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator *new_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator *new_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator *create_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init();
+FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator *create_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator)
 
@@ -157,18 +170,41 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqCompara
   id<JavaUtilComparator> comparator_;
 }
 
+#pragma mark Public
+
+- (OrgApacheLuceneMiscTermStats *)addWithId:(OrgApacheLuceneMiscTermStats *)arg0;
+
+- (OrgApacheLuceneMiscTermStats *)insertWithOverflowWithId:(OrgApacheLuceneMiscTermStats *)arg0;
+
+- (OrgApacheLuceneMiscTermStats *)pop;
+
+- (OrgApacheLuceneMiscTermStats *)top;
+
+- (OrgApacheLuceneMiscTermStats *)updateTop;
+
+- (OrgApacheLuceneMiscTermStats *)updateTopWithId:(OrgApacheLuceneMiscTermStats *)arg0;
+
 #pragma mark Protected
 
 - (void)fillWithNSString:(NSString *)field
 withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum;
+
+- (OrgApacheLuceneMiscTermStats *)getSentinelObject;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneMiscTermStats *)termInfoA
                     withId:(OrgApacheLuceneMiscTermStats *)termInfoB;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)size
-     withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
+- (instancetype __nonnull)initWithInt:(jint)size
+               withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -186,4 +222,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneMiscHighFreqTerms")

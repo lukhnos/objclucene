@@ -8,7 +8,18 @@
 #include "org/apache/lucene/search/payloads/AveragePayloadFunction.h"
 #include "org/apache/lucene/search/payloads/PayloadFunction.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/payloads/AveragePayloadFunction must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchPayloadsAveragePayloadFunction
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)currentScoreWithInt:(jint)docId
                  withNSString:(NSString *)field
@@ -30,33 +41,36 @@
 - (NSUInteger)hash {
   jint prime = 31;
   jint result = 1;
-  result = prime * result + ((jint) [[self getClass] hash]);
+  result = prime * result + ((jint) [[self java_getClass] hash]);
   return result;
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   return true;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "currentScoreWithInt:withNSString:withInt:withInt:withInt:withFloat:withFloat:", "currentScore", "F", 0x1, NULL, NULL },
-    { "docScoreWithInt:withNSString:withInt:withFloat:", "docScore", "F", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "init", "AveragePayloadFunction", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsAveragePayloadFunction = { 2, "AveragePayloadFunction", "org.apache.lucene.search.payloads", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(currentScoreWithInt:withNSString:withInt:withInt:withInt:withFloat:withFloat:);
+  methods[2].selector = @selector(docScoreWithInt:withNSString:withInt:withFloat:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "currentScore", "ILNSString;IIIFF", "docScore", "ILNSString;IF", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsAveragePayloadFunction = { "AveragePayloadFunction", "org.apache.lucene.search.payloads", ptrTable, methods, NULL, 7, 0x1, 5, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPayloadsAveragePayloadFunction;
 }
 

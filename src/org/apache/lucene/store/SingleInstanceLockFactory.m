@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/store/SingleInstanceLockFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/HashSet.h"
 #include "org/apache/lucene/store/AlreadyClosedException.h"
 #include "org/apache/lucene/store/Directory.h"
@@ -13,6 +11,10 @@
 #include "org/apache/lucene/store/LockFactory.h"
 #include "org/apache/lucene/store/LockObtainFailedException.h"
 #include "org/apache/lucene/store/SingleInstanceLockFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/SingleInstanceLockFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock : OrgApacheLuceneStoreLock {
  @public
@@ -34,7 +36,6 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock, this$0_, OrgApacheLuceneStoreSingleInstanceLockFactory *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock, lockName_, NSString *)
 
 __attribute__((unused)) static void OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock_initWithOrgApacheLuceneStoreSingleInstanceLockFactory_withNSString_(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock *self, OrgApacheLuceneStoreSingleInstanceLockFactory *outer$, NSString *lockName);
@@ -46,6 +47,13 @@ __attribute__((unused)) static OrgApacheLuceneStoreSingleInstanceLockFactory_Sin
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock)
 
 @implementation OrgApacheLuceneStoreSingleInstanceLockFactory
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneStoreSingleInstanceLockFactory_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                              withNSString:(NSString *)lockName {
@@ -59,28 +67,27 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleI
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneStoreSingleInstanceLockFactory_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(locks_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", "SingleInstanceLockFactory", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreLock;", 0x1, 0, 1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "locks_", NULL, 0x10, "Ljava.util.HashSet;", NULL, "Ljava/util/HashSet<Ljava/lang/String;>;", .constantValue.asLong = 0 },
+    { "locks_", "LJavaUtilHashSet;", .constantValue.asLong = 0, 0x10, -1, -1, 3, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.store.SingleInstanceLockFactory$SingleInstanceLock;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreSingleInstanceLockFactory = { 2, "SingleInstanceLockFactory", "org.apache.lucene.store", NULL, 0x11, 2, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "obtainLock", "LOrgApacheLuceneStoreDirectory;LNSString;", "LJavaIoIOException;", "Ljava/util/HashSet<Ljava/lang/String;>;", "LOrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreSingleInstanceLockFactory = { "SingleInstanceLockFactory", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x11, 2, 1, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneStoreSingleInstanceLockFactory;
 }
 
@@ -149,18 +156,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSingleInstanceLockFactory)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreSingleInstanceLockFactory:withNSString:", "SingleInstanceLock", NULL, 0x1, NULL, NULL },
-    { "ensureValid", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x21, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreSingleInstanceLockFactory:withNSString:);
+  methods[1].selector = @selector(ensureValid);
+  methods[2].selector = @selector(close);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.store.SingleInstanceLockFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lockName_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "closed_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneStoreSingleInstanceLockFactory;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "lockName_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "closed_", "Z", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock = { 2, "SingleInstanceLock", "org.apache.lucene.store", "SingleInstanceLockFactory", 0x2, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreSingleInstanceLockFactory;LNSString;", "LJavaIoIOException;", "toString", "LOrgApacheLuceneStoreSingleInstanceLockFactory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock = { "SingleInstanceLock", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x2, 4, 3, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock;
 }
 

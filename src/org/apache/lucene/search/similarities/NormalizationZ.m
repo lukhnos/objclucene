@@ -9,6 +9,10 @@
 #include "org/apache/lucene/search/similarities/Normalization.h"
 #include "org/apache/lucene/search/similarities/NormalizationZ.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/NormalizationZ must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSimilaritiesNormalizationZ
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -38,17 +42,27 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NormalizationZ", NULL, 0x1, NULL, NULL },
-    { "initWithFloat:", "NormalizationZ", NULL, 0x1, NULL, NULL },
-    { "tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "tfn", "F", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getZ", NULL, "F", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithFloat:);
+  methods[2].selector = @selector(tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:);
+  methods[3].selector = @selector(description);
+  methods[4].selector = @selector(getZ);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "z_", NULL, 0x10, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "z_", "F", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesNormalizationZ = { 2, "NormalizationZ", "org.apache.lucene.search.similarities", NULL, 0x1, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "F", "tfn", "LOrgApacheLuceneSearchSimilaritiesBasicStats;FF", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesNormalizationZ = { "NormalizationZ", "org.apache.lucene.search.similarities", ptrTable, methods, fields, 7, 0x1, 5, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesNormalizationZ;
 }
 

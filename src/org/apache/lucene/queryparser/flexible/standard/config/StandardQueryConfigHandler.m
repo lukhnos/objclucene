@@ -3,7 +3,7 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Enum.h"
@@ -12,7 +12,6 @@
 #include "java/util/HashMap.h"
 #include "java/util/LinkedHashMap.h"
 #include "java/util/Locale.h"
-#include "org/apache/lucene/queryparser/flexible/core/config/AbstractQueryConfig.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/ConfigurationKey.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
 #include "org/apache/lucene/queryparser/flexible/standard/config/FieldBoostMapFCListener.h"
@@ -21,6 +20,10 @@
 #include "org/apache/lucene/queryparser/flexible/standard/config/NumericFieldConfigListener.h"
 #include "org/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler.h"
 #include "org/apache/lucene/search/MultiTermQuery.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator *self, NSString *__name, jint __ordinal);
 
@@ -34,11 +37,16 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "StandardQueryConfigHandler", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler$ConfigurationKeys;", "Lorg.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler$Operator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler = { 2, "StandardQueryConfigHandler", "org.apache.lucene.queryparser.flexible.standard.config", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 2, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys;LOrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler = { "StandardQueryConfigHandler", "org.apache.lucene.queryparser.flexible.standard.config", ptrTable, methods, NULL, 7, 0x1, 1, 0, -1, 0, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler;
 }
 
@@ -169,6 +177,39 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "ENABLE_POSITION_INCREMENTS", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 0, 1, -1 },
+    { "LOWERCASE_EXPANDED_TERMS", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 2, 1, -1 },
+    { "ALLOW_LEADING_WILDCARD", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 3, 1, -1 },
+    { "ANALYZER", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 4, 5, -1 },
+    { "DEFAULT_OPERATOR", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 6, 7, -1 },
+    { "PHRASE_SLOP", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 8, 9, -1 },
+    { "LOCALE", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 10, 11, -1 },
+    { "TIMEZONE", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 12, 13, -1 },
+    { "MULTI_TERM_REWRITE_METHOD", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 14, 15, -1 },
+    { "MULTI_FIELDS", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 16, 17, -1 },
+    { "FIELD_BOOST_MAP", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 18, 19, -1 },
+    { "FIELD_DATE_RESOLUTION_MAP", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 20, 21, -1 },
+    { "FUZZY_CONFIG", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 22, 23, -1 },
+    { "DATE_RESOLUTION", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 24, 25, -1 },
+    { "BOOST", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 26, 27, -1 },
+    { "NUMERIC_CONFIG", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 28, 29, -1 },
+    { "NUMERIC_CONFIG_MAP", "LOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;", .constantValue.asLong = 0, 0x19, -1, 30, 31, -1 },
+  };
+  static const void *ptrTable[] = { &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_ENABLE_POSITION_INCREMENTS, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/lang/Boolean;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_LOWERCASE_EXPANDED_TERMS, &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_ALLOW_LEADING_WILDCARD, &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_ANALYZER, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/analysis/Analyzer;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_DEFAULT_OPERATOR, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler$Operator;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_PHRASE_SLOP, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/lang/Integer;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_LOCALE, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/util/Locale;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_TIMEZONE, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/util/TimeZone;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_MULTI_TERM_REWRITE_METHOD, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/search/MultiTermQuery$RewriteMethod;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_MULTI_FIELDS, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<[Ljava/lang/CharSequence;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_FIELD_BOOST_MAP, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Float;>;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_FIELD_DATE_RESOLUTION_MAP, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/util/Map<Ljava/lang/CharSequence;Lorg/apache/lucene/document/DateTools$Resolution;>;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_FUZZY_CONFIG, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/queryparser/flexible/standard/config/FuzzyConfig;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_DATE_RESOLUTION, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/document/DateTools$Resolution;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_BOOST, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/lang/Float;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_NUMERIC_CONFIG, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/queryparser/flexible/standard/config/NumericConfig;>;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_NUMERIC_CONFIG_MAP, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/queryparser/flexible/standard/config/NumericConfig;>;>;", "LOrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys = { "ConfigurationKeys", "org.apache.lucene.queryparser.flexible.standard.config", ptrTable, methods, fields, 7, 0x19, 1, 17, 32, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys class]) {
     JreStrongAssign(&OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_ENABLE_POSITION_INCREMENTS, OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_newInstance());
@@ -190,33 +231,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssign(&OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_NUMERIC_CONFIG_MAP, OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_newInstance());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ConfigurationKeys", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "ENABLE_POSITION_INCREMENTS", "ENABLE_POSITION_INCREMENTS", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_ENABLE_POSITION_INCREMENTS, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/lang/Boolean;>;", .constantValue.asLong = 0 },
-    { "LOWERCASE_EXPANDED_TERMS", "LOWERCASE_EXPANDED_TERMS", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_LOWERCASE_EXPANDED_TERMS, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/lang/Boolean;>;", .constantValue.asLong = 0 },
-    { "ALLOW_LEADING_WILDCARD", "ALLOW_LEADING_WILDCARD", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_ALLOW_LEADING_WILDCARD, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/lang/Boolean;>;", .constantValue.asLong = 0 },
-    { "ANALYZER", "ANALYZER", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_ANALYZER, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/analysis/Analyzer;>;", .constantValue.asLong = 0 },
-    { "DEFAULT_OPERATOR", "DEFAULT_OPERATOR", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_DEFAULT_OPERATOR, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler$Operator;>;", .constantValue.asLong = 0 },
-    { "PHRASE_SLOP", "PHRASE_SLOP", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_PHRASE_SLOP, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
-    { "LOCALE", "LOCALE", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_LOCALE, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/util/Locale;>;", .constantValue.asLong = 0 },
-    { "TIMEZONE", "TIMEZONE", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_TIMEZONE, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/util/TimeZone;>;", .constantValue.asLong = 0 },
-    { "MULTI_TERM_REWRITE_METHOD", "MULTI_TERM_REWRITE_METHOD", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_MULTI_TERM_REWRITE_METHOD, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/search/MultiTermQuery$RewriteMethod;>;", .constantValue.asLong = 0 },
-    { "MULTI_FIELDS", "MULTI_FIELDS", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_MULTI_FIELDS, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<[Ljava/lang/CharSequence;>;", .constantValue.asLong = 0 },
-    { "FIELD_BOOST_MAP", "FIELD_BOOST_MAP", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_FIELD_BOOST_MAP, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Float;>;>;", .constantValue.asLong = 0 },
-    { "FIELD_DATE_RESOLUTION_MAP", "FIELD_DATE_RESOLUTION_MAP", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_FIELD_DATE_RESOLUTION_MAP, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/util/Map<Ljava/lang/CharSequence;Lorg/apache/lucene/document/DateTools$Resolution;>;>;", .constantValue.asLong = 0 },
-    { "FUZZY_CONFIG", "FUZZY_CONFIG", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_FUZZY_CONFIG, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/queryparser/flexible/standard/config/FuzzyConfig;>;", .constantValue.asLong = 0 },
-    { "DATE_RESOLUTION", "DATE_RESOLUTION", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_DATE_RESOLUTION, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/document/DateTools$Resolution;>;", .constantValue.asLong = 0 },
-    { "BOOST", "BOOST", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_BOOST, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/lang/Float;>;", .constantValue.asLong = 0 },
-    { "NUMERIC_CONFIG", "NUMERIC_CONFIG", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_NUMERIC_CONFIG, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Lorg/apache/lucene/queryparser/flexible/standard/config/NumericConfig;>;", .constantValue.asLong = 0 },
-    { "NUMERIC_CONFIG_MAP", "NUMERIC_CONFIG_MAP", 0x19, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", &OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys_NUMERIC_CONFIG_MAP, "Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/queryparser/flexible/standard/config/NumericConfig;>;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys = { 2, "ConfigurationKeys", "org.apache.lucene.queryparser.flexible.standard.config", "StandardQueryConfigHandler", 0x19, 1, methods, 17, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys;
 }
 
 @end
@@ -261,8 +275,24 @@ OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Opera
   return (OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "AND", "LOrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "OR", "LOrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator, AND), &JreEnum(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator, OR), "LOrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler;", "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler$Operator;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator = { "Operator", "org.apache.lucene.queryparser.flexible.standard.config", ptrTable, methods, fields, 7, 0x4019, 2, 2, 4, -1, -1, 5, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator;
 }
 
 + (void)initialize {
@@ -271,22 +301,12 @@ OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Opera
     size_t allocSize = 2 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator, AND) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator_initWithNSString_withInt_(e, @"AND", 0);
-    (JreEnum(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator, OR) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator_initWithNSString_withInt_(e, @"OR", 1);
+    for (jint i = 0; i < 2; i++) {
+      ((void)(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "AND", "AND", 0x4019, "Lorg.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler$Operator;", &JreEnum(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator, AND), NULL, .constantValue.asLong = 0 },
-    { "OR", "OR", 0x4019, "Lorg.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler$Operator;", &JreEnum(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator, OR), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler$Operator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator = { 2, "Operator", "org.apache.lucene.queryparser.flexible.standard.config", "StandardQueryConfigHandler", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler$Operator;>;" };
-  return &_OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Operator;
 }
 
 @end
@@ -308,7 +328,7 @@ OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_Opera
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

@@ -12,6 +12,10 @@
 #include "org/apache/lucene/search/BooleanClause.h"
 #include "org/apache/lucene/search/Query.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/AndQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueryparserSurroundQueryAndQuery
 
 - (instancetype)initWithJavaUtilList:(id<JavaUtilList>)queries
@@ -27,11 +31,18 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withBoolean:withNSString:", "AndQuery", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLjava/lang/String;)V" },
-    { "makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryFieldNoBoost", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryAndQuery = { 2, "AndQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withBoolean:withNSString:);
+  methods[1].selector = @selector(makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaUtilList;ZLNSString;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLjava/lang/String;)V", "makeLuceneQueryFieldNoBoost", "LNSString;LOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryAndQuery = { "AndQuery", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQueryAndQuery;
 }
 

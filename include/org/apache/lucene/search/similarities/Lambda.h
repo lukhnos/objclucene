@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesLambda
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesLambda_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambda || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesLambda))
 #define OrgApacheLuceneSearchSimilaritiesLambda_
 
@@ -21,7 +27,7 @@
 
 /*!
  @brief The <em>lambda (&lambda;<sub>w</sub>)</em> parameter in information-based
- models.
+  models.
  - seealso: IBSimilarity
  */
 @interface OrgApacheLuceneSearchSimilaritiesLambda : NSObject
@@ -31,9 +37,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.)
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Explains the lambda parameter.
@@ -47,10 +53,9 @@
 
 /*!
  @brief Subclasses must override this method to return the code of the lambda
- formula.
- Since the original paper is not very clear on this matter, and
- also uses the DFR naming scheme incorrectly, the codes here were chosen
- arbitrarily.
+  formula.Since the original paper is not very clear on this matter, and
+  also uses the DFR naming scheme incorrectly, the codes here were chosen
+  arbitrarily.
  */
 - (NSString *)description;
 
@@ -64,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesLambda)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambda")

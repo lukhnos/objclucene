@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCzCzechStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCzCzechStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisCzCzechStemmer))
 #define OrgApacheLuceneAnalysisCzCzechStemmer_
 
@@ -21,26 +27,26 @@
 /*!
  @brief Light Stemmer for Czech.
  <p>
- Implements the algorithm described in:  
+  Implements the algorithm described in:   
  <i>
- Indexing and stemming approaches for the Czech language
+  Indexing and stemming approaches for the Czech language 
  </i>
- http://portal.acm.org/citation.cfm?id=1598600
+  http://portal.acm.org/citation.cfm?id=1598600 
  </p>
  */
 @interface OrgApacheLuceneAnalysisCzCzechStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Stem an input buffer of Czech text.
  @param s input buffer
  @param len length of input buffer
- @return length of input buffer after normalization
+ @return length of input buffer after normalization  
  <p><b>NOTE</b>: Input is expected to be in lowercase, 
- but with diacritical marks</p>
+  but with diacritical marks</p>
  */
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -51,12 +57,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCzCzechStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCzCzechStemmer_init(OrgApacheLuceneAnalysisCzCzechStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechStemmer *new_OrgApacheLuceneAnalysisCzCzechStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechStemmer *new_OrgApacheLuceneAnalysisCzCzechStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechStemmer *create_OrgApacheLuceneAnalysisCzCzechStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechStemmer *create_OrgApacheLuceneAnalysisCzCzechStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCzCzechStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemmer")

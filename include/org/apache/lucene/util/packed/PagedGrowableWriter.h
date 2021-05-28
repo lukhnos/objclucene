@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedPagedGrowableWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedPagedGrowableWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPagedGrowableWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedPagedGrowableWriter))
 #define OrgApacheLuceneUtilPackedPagedGrowableWriter_
 
@@ -23,12 +29,11 @@
 @class OrgApacheLuceneUtilPackedPackedInts_Mutable;
 
 /*!
- @brief A <code>PagedGrowableWriter</code>.
- This class slices data into fixed-size blocks
- which have independent numbers of bits per value and grow on-demand.
+ @brief A <code>PagedGrowableWriter</code>.This class slices data into fixed-size blocks
+  which have independent numbers of bits per value and grow on-demand.
  <p>You should use this class instead of the <code>PackedLongValues</code> related ones only when
- you need random write-access. Otherwise this class will likely be slower and
- less memory-efficient.
+  you need random write-access. Otherwise this class will likely be slower and
+  less memory-efficient.
  */
 @interface OrgApacheLuceneUtilPackedPagedGrowableWriter : OrgApacheLuceneUtilPackedAbstractPagedMutable {
  @public
@@ -44,10 +49,16 @@
  @param startBitsPerValue the initial number of bits per value
  @param acceptableOverheadRatio an acceptable overhead ratio
  */
-- (instancetype)initWithLong:(jlong)size
-                     withInt:(jint)pageSize
-                     withInt:(jint)startBitsPerValue
-                   withFloat:(jfloat)acceptableOverheadRatio;
+- (instancetype __nonnull)initWithLong:(jlong)size
+                               withInt:(jint)pageSize
+                               withInt:(jint)startBitsPerValue
+                             withFloat:(jfloat)acceptableOverheadRatio;
+
+- (OrgApacheLuceneUtilPackedPagedGrowableWriter *)grow;
+
+- (OrgApacheLuceneUtilPackedPagedGrowableWriter *)growWithLong:(jlong)arg0;
+
+- (OrgApacheLuceneUtilPackedPagedGrowableWriter *)resizeWithLong:(jlong)arg0;
 
 #pragma mark Protected
 
@@ -60,11 +71,17 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithLong:(jlong)size
-                     withInt:(jint)pageSize
-                     withInt:(jint)startBitsPerValue
-                   withFloat:(jfloat)acceptableOverheadRatio
-                 withBoolean:(jboolean)fillPages;
+- (instancetype __nonnull)initWithLong:(jlong)size
+                               withInt:(jint)pageSize
+                               withInt:(jint)startBitsPerValue
+                             withFloat:(jfloat)acceptableOverheadRatio
+                           withBoolean:(jboolean)fillPages;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                           withLong:(jlong)arg1
+                                            withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -86,4 +103,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPagedGrowableWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPagedGrowableWriter")

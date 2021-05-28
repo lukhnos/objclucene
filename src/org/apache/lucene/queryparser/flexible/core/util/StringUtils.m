@@ -6,11 +6,11 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/util/StringUtils.h"
 
-@implementation OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/util/StringUtils must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-+ (NSString *)toStringWithId:(id)obj {
-  return OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(obj);
-}
+@implementation OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -19,26 +19,27 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (NSString *)toStringWithId:(id)obj {
+  return OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(obj);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "toStringWithId:", "toString", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "init", "StringUtils", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils = { 2, "StringUtils", "org.apache.lucene.queryparser.flexible.core.util", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(toStringWithId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "toString", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils = { "StringUtils", "org.apache.lucene.queryparser.flexible.core.util", ptrTable, methods, NULL, 7, 0x11, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils;
 }
 
 @end
-
-NSString *OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(id obj) {
-  OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_initialize();
-  if (obj != nil) {
-    return [obj description];
-  }
-  else {
-    return nil;
-  }
-}
 
 void OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *self) {
   NSObject_init(self);
@@ -50,6 +51,16 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *new_OrgApacheLuceneQueryp
 
 OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *create_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init() {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils, init)
+}
+
+NSString *OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(id obj) {
+  OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_initialize();
+  if (obj != nil) {
+    return [obj description];
+  }
+  else {
+    return nil;
+  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchMultiTermQueryWrapperFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchMultiTermQueryWrapperFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryWrapperFilter || defined(INCLUDE_OrgApacheLuceneSearchMultiTermQueryWrapperFilter))
 #define OrgApacheLuceneSearchMultiTermQueryWrapperFilter_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
 @class OrgApacheLuceneSearchMultiTermQuery;
@@ -28,13 +33,13 @@
 
 /*!
  @brief A wrapper for <code>MultiTermQuery</code>, that exposes its
- functionality as a <code>Filter</code>.
+  functionality as a <code>Filter</code>.
  <P>
- <code>MultiTermQueryWrapperFilter</code> is not designed to
- be used by itself. Normally you subclass it to provide a Filter
- counterpart for a <code>MultiTermQuery</code> subclass.
+  <code>MultiTermQueryWrapperFilter</code> is not designed to
+  be used by itself. Normally you subclass it to provide a Filter
+  counterpart for a <code>MultiTermQuery</code> subclass. 
  <P>
- For example, <code>TermRangeFilter</code> and <code>PrefixFilter</code> extend
+  For example, <code>TermRangeFilter</code> and <code>PrefixFilter</code> extend 
  <code>MultiTermQueryWrapperFilter</code>.
  */
 @interface OrgApacheLuceneSearchMultiTermQueryWrapperFilter : OrgApacheLuceneSearchFilter {
@@ -48,7 +53,7 @@
 
 /*!
  @brief Returns a DocIdSet with documents that should be permitted in search
- results.
+  results.
  */
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
@@ -67,13 +72,17 @@
 /*!
  @brief Wrap a <code>MultiTermQuery</code> as a Filter.
  */
-- (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiTermQueryWrapperFilter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMultiTermQueryWrapperFilter, query_, id)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMultiTermQueryWrapperFilter, query_, OrgApacheLuceneSearchMultiTermQuery *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQueryWrapperFilter_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQueryWrapperFilter *self, OrgApacheLuceneSearchMultiTermQuery *query);
 
@@ -85,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryWrapperFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryWrapperFilter")

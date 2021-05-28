@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryNotQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQueryNotQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryNotQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryNotQuery))
 #define OrgApacheLuceneQueryparserSurroundQueryNotQuery_
 
@@ -31,11 +37,17 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)queries
-                        withNSString:(NSString *)opName;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)queries
+                                  withNSString:(NSString *)opName;
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
            withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)arg0
+                                   withBoolean:(jboolean)arg1
+                                  withNSString:(NSString *)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -51,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryNotQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryNotQuery")

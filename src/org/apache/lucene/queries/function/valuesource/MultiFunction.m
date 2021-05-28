@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
@@ -16,14 +15,16 @@
 #include "org/apache/lucene/queries/function/valuesource/MultiFunction.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/MultiFunction must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values () {
  @public
   OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *this$0_;
 }
 
 @end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values, this$0_, OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *)
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceMultiFunction
 
@@ -91,7 +92,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(o) java_getClass])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceMultiFunction class]);
   return [((id<JavaUtilList>) nil_chk(self->sources_)) isEqual:other->sources_];
 }
@@ -102,26 +103,43 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "MultiFunction", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;)V" },
-    { "name", NULL, "Ljava.lang.String;", 0x404, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "allExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:", "allExists", "Z", 0x9, NULL, NULL },
-    { "anyExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:", "anyExists", "Z", 0x9, NULL, NULL },
-    { "allExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValues:withOrgApacheLuceneQueriesFunctionFunctionValues:", "allExists", "Z", 0x9, NULL, NULL },
-    { "anyExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValues:withOrgApacheLuceneQueriesFunctionFunctionValues:", "anyExists", "Z", 0x9, NULL, NULL },
-    { "description__WithNSString:withJavaUtilList:", "description", "Ljava.lang.String;", 0x9, NULL, "(Ljava/lang/String;Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;)Ljava/lang/String;" },
-    { "valsArrWithJavaUtilList:withJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "valsArr", "[Lorg.apache.lucene.queries.function.FunctionValues;", 0x9, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;Ljava/util/Map;Lorg/apache/lucene/index/LeafReaderContext;)[Lorg/apache/lucene/queries/function/FunctionValues;" },
-    { "toStringWithNSString:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:withInt:", "toString", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSString;", 0x404, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 5, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 3, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 2, 7, -1, 8, -1, -1 },
+    { NULL, "[LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x9, 9, 10, 11, 12, -1, -1 },
+    { NULL, "LNSString;", 0x9, 13, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 16, 11, -1, -1, -1 },
+    { NULL, "I", 0x1, 17, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 18, 19, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(description__);
+  methods[3].selector = @selector(allExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:);
+  methods[4].selector = @selector(anyExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:);
+  methods[5].selector = @selector(allExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValues:withOrgApacheLuceneQueriesFunctionFunctionValues:);
+  methods[6].selector = @selector(anyExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValues:withOrgApacheLuceneQueriesFunctionFunctionValues:);
+  methods[7].selector = @selector(description__WithNSString:withJavaUtilList:);
+  methods[8].selector = @selector(valsArrWithJavaUtilList:withJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[9].selector = @selector(toStringWithNSString:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:withInt:);
+  methods[10].selector = @selector(createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:);
+  methods[11].selector = @selector(hash);
+  methods[12].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "sources_", NULL, 0x14, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;", .constantValue.asLong = 0 },
+    { "sources_", "LJavaUtilList;", .constantValue.asLong = 0, 0x14, -1, -1, 20, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queries.function.valuesource.MultiFunction$Values;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiFunction = { 2, "MultiFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x401, 13, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;)V", "description", "allExists", "I[LOrgApacheLuceneQueriesFunctionFunctionValues;", "anyExists", "ILOrgApacheLuceneQueriesFunctionFunctionValues;LOrgApacheLuceneQueriesFunctionFunctionValues;", "LNSString;LJavaUtilList;", "(Ljava/lang/String;Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;)Ljava/lang/String;", "valsArr", "LJavaUtilList;LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "(Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;Ljava/util/Map;Lorg/apache/lucene/index/LeafReaderContext;)[Lorg/apache/lucene/queries/function/FunctionValues;", "toString", "LNSString;[LOrgApacheLuceneQueriesFunctionFunctionValues;I", "createWeight", "LJavaUtilMap;LOrgApacheLuceneSearchIndexSearcher;", "hashCode", "equals", "LNSObject;", "Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;", "LOrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiFunction = { "MultiFunction", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x401, 13, 1, -1, 21, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction;
 }
 
@@ -251,16 +269,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMultiF
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:", "Values", NULL, 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValueFiller", NULL, "Lorg.apache.lucene.queries.function.FunctionValues$ValueFiller;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:);
+  methods[1].selector = @selector(toStringWithInt:);
+  methods[2].selector = @selector(getValueFiller);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.valuesource.MultiFunction;", NULL, NULL, .constantValue.asLong = 0 },
-    { "valsArr_", NULL, 0x10, "[Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionValuesourceMultiFunction;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "valsArr_", "[LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values = { 2, "Values", "org.apache.lucene.queries.function.valuesource", "MultiFunction", 0x1, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValuesourceMultiFunction;[LOrgApacheLuceneQueriesFunctionFunctionValues;", "toString", "I", "LOrgApacheLuceneQueriesFunctionValuesourceMultiFunction;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values = { "Values", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x1, 3, 2, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values;
 }
 

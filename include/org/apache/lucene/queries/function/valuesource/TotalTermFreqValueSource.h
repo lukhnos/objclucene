@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_
 
@@ -28,9 +34,9 @@
 
 /*!
  @brief <code>TotalTermFreqValueSource</code> returns the total term freq 
- (sum of term freqs across all documents).
+  (sum of term freqs across all documents).
  Returns -1 if frequencies were omitted for the field, or if 
- the codec doesn't support this statistic.
+  the codec doesn't support this statistic.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource : OrgApacheLuceneQueriesFunctionValueSource {
  @public
@@ -42,10 +48,10 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)val
-                    withNSString:(NSString *)indexedField
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                              withNSString:(NSString *)val
+                              withNSString:(NSString *)indexedField
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -60,6 +66,10 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 - (NSUInteger)hash;
 
 - (NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -80,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFre
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource")

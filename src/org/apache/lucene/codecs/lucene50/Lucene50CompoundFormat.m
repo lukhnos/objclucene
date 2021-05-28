@@ -3,10 +3,9 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/lucene50/Lucene50CompoundFormat.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/codecs/CompoundFormat.h"
@@ -18,6 +17,10 @@
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/store/IndexOutput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50CompoundFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_EXTENSION = @"cfs";
 NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRIES_EXTENSION = @"cfe";
@@ -60,7 +63,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (OrgApacheLuceneStoreDirectory *)getCompoundReaderWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                                                     withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  return create_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(dir, si, context);
+  return create_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(dir, si, context);
 }
 
 - (void)writeWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
@@ -70,10 +73,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   NSString *entriesFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(si->name_, @"", OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRIES_EXTENSION);
   {
     OrgApacheLuceneStoreIndexOutput *data = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) createOutputWithNSString:dataFile withOrgApacheLuceneStoreIOContext:context];
-    NSException *__primaryException2 = nil;
+    JavaLangThrowable *__primaryException2 = nil;
     @try {
       OrgApacheLuceneStoreIndexOutput *entries = [dir createOutputWithNSString:entriesFile withOrgApacheLuceneStoreIOContext:context];
-      NSException *__primaryException1 = nil;
+      JavaLangThrowable *__primaryException1 = nil;
       @try {
         OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(data, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_CODEC, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT, [si getId], @"");
         OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(entries, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRY_CODEC, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT, [si getId], @"");
@@ -82,11 +85,11 @@ J2OBJC_IGNORE_DESIGNATED_END
           jlong startOffset = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(data)) getFilePointer];
           {
             OrgApacheLuceneStoreIndexInput *in = [dir openInputWithNSString:file withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE)];
-            NSException *__primaryException1 = nil;
+            JavaLangThrowable *__primaryException1 = nil;
             @try {
               [data copyBytesWithOrgApacheLuceneStoreDataInput:in withLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(in)) length]];
             }
-            @catch (NSException *e) {
+            @catch (JavaLangThrowable *e) {
               __primaryException1 = e;
               @throw e;
             }
@@ -95,10 +98,12 @@ J2OBJC_IGNORE_DESIGNATED_END
                 if (__primaryException1 != nil) {
                   @try {
                     [in close];
-                  } @catch (NSException *e) {
-                    [__primaryException1 addSuppressedWithNSException:e];
                   }
-                } else {
+                  @catch (JavaLangThrowable *e) {
+                    [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                  }
+                }
+                else {
                   [in close];
                 }
               }
@@ -113,7 +118,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(data);
         OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(entries);
       }
-      @catch (NSException *e) {
+      @catch (JavaLangThrowable *e) {
         __primaryException1 = e;
         @throw e;
       }
@@ -122,16 +127,18 @@ J2OBJC_IGNORE_DESIGNATED_END
           if (__primaryException1 != nil) {
             @try {
               [entries close];
-            } @catch (NSException *e) {
-              [__primaryException1 addSuppressedWithNSException:e];
             }
-          } else {
+            @catch (JavaLangThrowable *e) {
+              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            }
+          }
+          else {
             [entries close];
           }
         }
       }
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException2 = e;
       @throw e;
     }
@@ -140,10 +147,12 @@ J2OBJC_IGNORE_DESIGNATED_END
         if (__primaryException2 != nil) {
           @try {
             [data close];
-          } @catch (NSException *e) {
-            [__primaryException2 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException2 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [data close];
         }
       }
@@ -152,20 +161,28 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lucene50CompoundFormat", NULL, 0x1, NULL, NULL },
-    { "getCompoundReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "getCompoundReader", "Lorg.apache.lucene.store.Directory;", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "write", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreDirectory;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getCompoundReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:);
+  methods[2].selector = @selector(writeWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DATA_EXTENSION", "DATA_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "ENTRIES_EXTENSION", "ENTRIES_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRIES_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "DATA_CODEC", "DATA_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_CODEC, NULL, .constantValue.asLong = 0 },
-    { "ENTRY_CODEC", "ENTRY_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRY_CODEC, NULL, .constantValue.asLong = 0 },
-    { "VERSION_START", "VERSION_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_START },
-    { "VERSION_CURRENT", "VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT },
+    { "DATA_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 4, -1, -1 },
+    { "ENTRIES_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 5, -1, -1 },
+    { "DATA_CODEC", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 6, -1, -1 },
+    { "ENTRY_CODEC", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 7, -1, -1 },
+    { "VERSION_START", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_START, 0x18, -1, -1, -1, -1 },
+    { "VERSION_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT, 0x18, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat = { 2, "Lucene50CompoundFormat", "org.apache.lucene.codecs.lucene50", NULL, 0x11, 3, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "getCompoundReader", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "write", &OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_EXTENSION, &OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRIES_EXTENSION, &OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_CODEC, &OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRY_CODEC };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat = { "Lucene50CompoundFormat", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x11, 3, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat;
 }
 

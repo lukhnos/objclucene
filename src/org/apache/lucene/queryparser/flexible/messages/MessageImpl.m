@@ -3,12 +3,17 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/messages/MessageImpl.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Locale.h"
 #include "org/apache/lucene/queryparser/flexible/messages/MessageImpl.h"
 #include "org/apache/lucene/queryparser/flexible/messages/NLS.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/messages/MessageImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl () {
  @public
@@ -68,20 +73,32 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl, argum
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "MessageImpl", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withNSObjectArray:", "MessageImpl", NULL, 0x81, NULL, NULL },
-    { "getArguments", NULL, "[Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getKey", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getLocalizedMessage", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getLocalizedMessageWithJavaUtilLocale:", "getLocalizedMessage", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 1, -1, -1, -1, -1 },
+    { NULL, "[LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(initWithNSString:withNSObjectArray:);
+  methods[2].selector = @selector(getArguments);
+  methods[3].selector = @selector(getKey);
+  methods[4].selector = @selector(getLocalizedMessage);
+  methods[5].selector = @selector(getLocalizedMessageWithJavaUtilLocale:);
+  methods[6].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "key_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "arguments_", NULL, 0x2, "[Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
+    { "key_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "arguments_", "[LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl = { 2, "MessageImpl", "org.apache.lucene.queryparser.flexible.messages", NULL, 0x1, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "LNSString;[LNSObject;", "getLocalizedMessage", "LJavaUtilLocale;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl = { "MessageImpl", "org.apache.lucene.queryparser.flexible.messages", ptrTable, methods, fields, 7, 0x1, 7, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl;
 }
 

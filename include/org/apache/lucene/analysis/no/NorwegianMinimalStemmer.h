@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer))
 #define OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_
 
@@ -21,7 +27,7 @@
 /*!
  @brief Minimal Stemmer for Norwegian Bokmål (no-nb) and Nynorsk (no-nn)
  <p>
- Stems known plural forms for Norwegian nouns only, together with genitiv -s
+  Stems known plural forms for Norwegian nouns only, together with genitiv -s
  */
 @interface OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer : NSObject {
  @public
@@ -33,13 +39,17 @@
 
 /*!
  @brief Creates a new NorwegianMinimalStemmer
- @param flags set to <code>NorwegianLightStemmer.BOKMAAL</code>, 
- <code>NorwegianLightStemmer.NYNORSK</code>, or both.
+ @param flags set to <code>NorwegianLightStemmer.BOKMAAL</code> , 
+                       <code>NorwegianLightStemmer.NYNORSK</code> , or both.
  */
-- (instancetype)initWithInt:(jint)flags;
+- (instancetype __nonnull)initWithInt:(jint)flags;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -55,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer")

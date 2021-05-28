@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl))
 #define OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_
 
@@ -41,12 +47,12 @@
 
 /*!
  @brief Default implementation of the common attributes used by Lucene:<ul>
- <li><code>CharTermAttribute</code>
- <li><code>TypeAttribute</code>
- <li><code>PositionIncrementAttribute</code>
- <li><code>PositionLengthAttribute</code>
- <li><code>OffsetAttribute</code>
- </ul>
+  <li><code>CharTermAttribute</code>
+  <li><code>TypeAttribute</code>
+  <li><code>PositionIncrementAttribute</code>
+  <li><code>PositionLengthAttribute</code>
+  <li><code>OffsetAttribute</code>
+  </ul>
  */
 @interface OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl : OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl < OrgApacheLuceneAnalysisTokenattributesTypeAttribute, OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute, OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute, OrgApacheLuceneAnalysisTokenattributesOffsetAttribute >
 
@@ -55,19 +61,18 @@
 /*!
  @brief Constructs the attribute implementation.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Resets the attributes
  */
 - (void)clear;
 
-- (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *)clone;
+- (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *)java_clone;
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target OBJC_METHOD_FAMILY_NONE;
 
 /*!
- 
  - seealso: OffsetAttribute
  */
 - (jint)endOffset;
@@ -75,13 +80,11 @@
 - (jboolean)isEqual:(id)obj;
 
 /*!
- 
  - seealso: PositionIncrementAttribute
  */
 - (jint)getPositionIncrement;
 
 /*!
- 
  - seealso: PositionLengthAttribute
  */
 - (jint)getPositionLength;
@@ -91,38 +94,32 @@
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector;
 
 /*!
- 
  - seealso: OffsetAttribute
  */
 - (void)setOffsetWithInt:(jint)startOffset
                  withInt:(jint)endOffset;
 
 /*!
- 
  - seealso: PositionIncrementAttribute
  */
 - (void)setPositionIncrementWithInt:(jint)positionIncrement;
 
 /*!
- 
  - seealso: PositionLengthAttribute
  */
 - (void)setPositionLengthWithInt:(jint)positionLength;
 
 /*!
- 
  - seealso: TypeAttribute
  */
 - (void)setTypeWithNSString:(NSString *)type;
 
 /*!
- 
  - seealso: OffsetAttribute
  */
 - (jint)startOffset;
 
 /*!
- 
  - seealso: TypeAttribute
  */
 - (NSString *)type;
@@ -133,12 +130,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenattributesPackedTokenAttrib
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_init(OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl")

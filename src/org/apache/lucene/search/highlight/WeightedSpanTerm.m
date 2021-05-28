@@ -11,6 +11,10 @@
 #include "org/apache/lucene/search/highlight/WeightedSpanTerm.h"
 #include "org/apache/lucene/search/highlight/WeightedTerm.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/WeightedSpanTerm must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchHighlightWeightedSpanTerm () {
  @public
   id<JavaUtilList> positionSpans_;
@@ -36,9 +40,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightWeightedSpanTerm, positionSpan
 }
 
 - (jboolean)checkPositionWithInt:(jint)position {
-  id<JavaUtilIterator> positionSpanIt = [((id<JavaUtilList>) nil_chk(positionSpans_)) iterator];
+  id<JavaUtilIterator> positionSpanIt = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(positionSpans_)) iterator]);
   while ([((id<JavaUtilIterator>) nil_chk(positionSpanIt)) hasNext]) {
-    OrgApacheLuceneSearchHighlightPositionSpan *posSpan = [positionSpanIt next];
+    OrgApacheLuceneSearchHighlightPositionSpan *posSpan = JreRetainedLocalValue([positionSpanIt next]);
     if (((position >= ((OrgApacheLuceneSearchHighlightPositionSpan *) nil_chk(posSpan))->start_) && (position <= posSpan->end_))) {
       return true;
     }
@@ -68,20 +72,32 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightWeightedSpanTerm, positionSpan
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithFloat:withNSString:", "WeightedSpanTerm", NULL, 0x1, NULL, NULL },
-    { "initWithFloat:withNSString:withBoolean:", "WeightedSpanTerm", NULL, 0x1, NULL, NULL },
-    { "checkPositionWithInt:", "checkPosition", "Z", 0x1, NULL, NULL },
-    { "addPositionSpansWithJavaUtilList:", "addPositionSpans", "V", 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/highlight/PositionSpan;>;)V" },
-    { "isPositionSensitive", NULL, "Z", 0x1, NULL, NULL },
-    { "setPositionSensitiveWithBoolean:", "setPositionSensitive", "V", 0x1, NULL, NULL },
-    { "getPositionSpans", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/search/highlight/PositionSpan;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, 6, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 9, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithFloat:withNSString:);
+  methods[1].selector = @selector(initWithFloat:withNSString:withBoolean:);
+  methods[2].selector = @selector(checkPositionWithInt:);
+  methods[3].selector = @selector(addPositionSpansWithJavaUtilList:);
+  methods[4].selector = @selector(isPositionSensitive);
+  methods[5].selector = @selector(setPositionSensitiveWithBoolean:);
+  methods[6].selector = @selector(getPositionSpans);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "positionSensitive_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionSpans_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/search/highlight/PositionSpan;>;", .constantValue.asLong = 0 },
+    { "positionSensitive_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "positionSpans_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 10, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightWeightedSpanTerm = { 2, "WeightedSpanTerm", "org.apache.lucene.search.highlight", NULL, 0x1, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "FLNSString;", "FLNSString;Z", "checkPosition", "I", "addPositionSpans", "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/search/highlight/PositionSpan;>;)V", "setPositionSensitive", "Z", "()Ljava/util/List<Lorg/apache/lucene/search/highlight/PositionSpan;>;", "Ljava/util/List<Lorg/apache/lucene/search/highlight/PositionSpan;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightWeightedSpanTerm = { "WeightedSpanTerm", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x1, 7, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightWeightedSpanTerm;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_
 
@@ -29,9 +35,9 @@
 
 /*!
  @brief <code>BoolFunction</code> implementation which applies an extendible boolean
- function to the values of a single wrapped <code>ValueSource</code>.
+  function to the values of a single wrapped <code>ValueSource</code>.
  Functions this can be used for include whether a field has a value or not,
- or inverting the boolean value of the wrapped ValueSource.
+  or inverting the boolean value of the wrapped ValueSource.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction : OrgApacheLuceneQueriesFunctionValuesourceBoolFunction {
  @public
@@ -40,7 +46,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -61,6 +67,10 @@ withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunction
 
 - (NSString *)name;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction)
@@ -73,4 +83,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction")

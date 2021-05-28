@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/lucene50/Lucene50DocValuesFormat.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/DocValuesConsumer.h"
 #include "org/apache/lucene/codecs/DocValuesFormat.h"
 #include "org/apache/lucene/codecs/DocValuesProducer.h"
@@ -14,6 +12,10 @@
 #include "org/apache/lucene/codecs/lucene50/Lucene50DocValuesProducer.h"
 #include "org/apache/lucene/index/SegmentReadState.h"
 #include "org/apache/lucene/index/SegmentWriteState.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50DocValuesFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 NSString *OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_CODEC = @"Lucene50DocValuesData";
 NSString *OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_EXTENSION = @"dvd";
@@ -170,57 +172,65 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneCodecsDocValuesConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  return create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(state, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_CODEC, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_EXTENSION, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_CODEC, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_EXTENSION);
+  return create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(state, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_CODEC, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_EXTENSION, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_CODEC, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_EXTENSION);
 }
 
 - (OrgApacheLuceneCodecsDocValuesProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  return create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(state, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_CODEC, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_EXTENSION, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_CODEC, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_EXTENSION);
+  return create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(state, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_CODEC, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_EXTENSION, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_CODEC, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_EXTENSION);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lucene50DocValuesFormat", NULL, 0x1, NULL, NULL },
-    { "fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:", "fieldsConsumer", "Lorg.apache.lucene.codecs.DocValuesConsumer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:", "fieldsProducer", "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesConsumer;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesProducer;", 0x1, 3, 4, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[2].selector = @selector(fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DATA_CODEC", "DATA_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_CODEC, NULL, .constantValue.asLong = 0 },
-    { "DATA_EXTENSION", "DATA_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "META_CODEC", "META_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_CODEC, NULL, .constantValue.asLong = 0 },
-    { "META_EXTENSION", "META_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "VERSION_START", "VERSION_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_VERSION_START },
-    { "VERSION_SORTEDSET_TABLE", "VERSION_SORTEDSET_TABLE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_VERSION_SORTEDSET_TABLE },
-    { "VERSION_CURRENT", "VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_VERSION_CURRENT },
-    { "NUMERIC", "NUMERIC", 0x18, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_NUMERIC },
-    { "BINARY", "BINARY", 0x18, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BINARY },
-    { "SORTED", "SORTED", 0x18, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED },
-    { "SORTED_SET", "SORTED_SET", 0x18, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED_SET },
-    { "SORTED_NUMERIC", "SORTED_NUMERIC", 0x18, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED_NUMERIC },
-    { "INTERVAL_SHIFT", "INTERVAL_SHIFT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_INTERVAL_SHIFT },
-    { "INTERVAL_COUNT", "INTERVAL_COUNT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_INTERVAL_COUNT },
-    { "INTERVAL_MASK", "INTERVAL_MASK", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_INTERVAL_MASK },
-    { "REVERSE_INTERVAL_SHIFT", "REVERSE_INTERVAL_SHIFT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_REVERSE_INTERVAL_SHIFT },
-    { "REVERSE_INTERVAL_COUNT", "REVERSE_INTERVAL_COUNT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_REVERSE_INTERVAL_COUNT },
-    { "REVERSE_INTERVAL_MASK", "REVERSE_INTERVAL_MASK", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_REVERSE_INTERVAL_MASK },
-    { "BLOCK_INTERVAL_SHIFT", "BLOCK_INTERVAL_SHIFT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BLOCK_INTERVAL_SHIFT },
-    { "BLOCK_INTERVAL_COUNT", "BLOCK_INTERVAL_COUNT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BLOCK_INTERVAL_COUNT },
-    { "BLOCK_INTERVAL_MASK", "BLOCK_INTERVAL_MASK", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BLOCK_INTERVAL_MASK },
-    { "DELTA_COMPRESSED", "DELTA_COMPRESSED", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DELTA_COMPRESSED },
-    { "GCD_COMPRESSED", "GCD_COMPRESSED", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_GCD_COMPRESSED },
-    { "TABLE_COMPRESSED", "TABLE_COMPRESSED", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_TABLE_COMPRESSED },
-    { "MONOTONIC_COMPRESSED", "MONOTONIC_COMPRESSED", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_MONOTONIC_COMPRESSED },
-    { "CONST_COMPRESSED", "CONST_COMPRESSED", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_CONST_COMPRESSED },
-    { "BINARY_FIXED_UNCOMPRESSED", "BINARY_FIXED_UNCOMPRESSED", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BINARY_FIXED_UNCOMPRESSED },
-    { "BINARY_VARIABLE_UNCOMPRESSED", "BINARY_VARIABLE_UNCOMPRESSED", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BINARY_VARIABLE_UNCOMPRESSED },
-    { "BINARY_PREFIX_COMPRESSED", "BINARY_PREFIX_COMPRESSED", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BINARY_PREFIX_COMPRESSED },
-    { "SORTED_WITH_ADDRESSES", "SORTED_WITH_ADDRESSES", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED_WITH_ADDRESSES },
-    { "SORTED_SINGLE_VALUED", "SORTED_SINGLE_VALUED", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED_SINGLE_VALUED },
-    { "SORTED_SET_TABLE", "SORTED_SET_TABLE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED_SET_TABLE },
-    { "ALL_LIVE", "ALL_LIVE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_ALL_LIVE },
-    { "ALL_MISSING", "ALL_MISSING", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_ALL_MISSING },
-    { "MONOTONIC_BLOCK_SIZE", "MONOTONIC_BLOCK_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_MONOTONIC_BLOCK_SIZE },
+    { "DATA_CODEC", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 5, -1, -1 },
+    { "DATA_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 6, -1, -1 },
+    { "META_CODEC", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 7, -1, -1 },
+    { "META_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 8, -1, -1 },
+    { "VERSION_START", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_VERSION_START, 0x18, -1, -1, -1, -1 },
+    { "VERSION_SORTEDSET_TABLE", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_VERSION_SORTEDSET_TABLE, 0x18, -1, -1, -1, -1 },
+    { "VERSION_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_VERSION_CURRENT, 0x18, -1, -1, -1, -1 },
+    { "NUMERIC", "B", .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_NUMERIC, 0x18, -1, -1, -1, -1 },
+    { "BINARY", "B", .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BINARY, 0x18, -1, -1, -1, -1 },
+    { "SORTED", "B", .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED, 0x18, -1, -1, -1, -1 },
+    { "SORTED_SET", "B", .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED_SET, 0x18, -1, -1, -1, -1 },
+    { "SORTED_NUMERIC", "B", .constantValue.asChar = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED_NUMERIC, 0x18, -1, -1, -1, -1 },
+    { "INTERVAL_SHIFT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_INTERVAL_SHIFT, 0x18, -1, -1, -1, -1 },
+    { "INTERVAL_COUNT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_INTERVAL_COUNT, 0x18, -1, -1, -1, -1 },
+    { "INTERVAL_MASK", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_INTERVAL_MASK, 0x18, -1, -1, -1, -1 },
+    { "REVERSE_INTERVAL_SHIFT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_REVERSE_INTERVAL_SHIFT, 0x18, -1, -1, -1, -1 },
+    { "REVERSE_INTERVAL_COUNT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_REVERSE_INTERVAL_COUNT, 0x18, -1, -1, -1, -1 },
+    { "REVERSE_INTERVAL_MASK", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_REVERSE_INTERVAL_MASK, 0x18, -1, -1, -1, -1 },
+    { "BLOCK_INTERVAL_SHIFT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BLOCK_INTERVAL_SHIFT, 0x18, -1, -1, -1, -1 },
+    { "BLOCK_INTERVAL_COUNT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BLOCK_INTERVAL_COUNT, 0x18, -1, -1, -1, -1 },
+    { "BLOCK_INTERVAL_MASK", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BLOCK_INTERVAL_MASK, 0x18, -1, -1, -1, -1 },
+    { "DELTA_COMPRESSED", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DELTA_COMPRESSED, 0x18, -1, -1, -1, -1 },
+    { "GCD_COMPRESSED", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_GCD_COMPRESSED, 0x18, -1, -1, -1, -1 },
+    { "TABLE_COMPRESSED", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_TABLE_COMPRESSED, 0x18, -1, -1, -1, -1 },
+    { "MONOTONIC_COMPRESSED", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_MONOTONIC_COMPRESSED, 0x18, -1, -1, -1, -1 },
+    { "CONST_COMPRESSED", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_CONST_COMPRESSED, 0x18, -1, -1, -1, -1 },
+    { "BINARY_FIXED_UNCOMPRESSED", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BINARY_FIXED_UNCOMPRESSED, 0x18, -1, -1, -1, -1 },
+    { "BINARY_VARIABLE_UNCOMPRESSED", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BINARY_VARIABLE_UNCOMPRESSED, 0x18, -1, -1, -1, -1 },
+    { "BINARY_PREFIX_COMPRESSED", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_BINARY_PREFIX_COMPRESSED, 0x18, -1, -1, -1, -1 },
+    { "SORTED_WITH_ADDRESSES", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED_WITH_ADDRESSES, 0x18, -1, -1, -1, -1 },
+    { "SORTED_SINGLE_VALUED", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED_SINGLE_VALUED, 0x18, -1, -1, -1, -1 },
+    { "SORTED_SET_TABLE", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_SORTED_SET_TABLE, 0x18, -1, -1, -1, -1 },
+    { "ALL_LIVE", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_ALL_LIVE, 0x18, -1, -1, -1, -1 },
+    { "ALL_MISSING", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_ALL_MISSING, 0x18, -1, -1, -1, -1 },
+    { "MONOTONIC_BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_MONOTONIC_BLOCK_SIZE, 0x18, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat = { 2, "Lucene50DocValuesFormat", "org.apache.lucene.codecs.lucene50", NULL, 0x11, 3, methods, 35, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "fieldsConsumer", "LOrgApacheLuceneIndexSegmentWriteState;", "LJavaIoIOException;", "fieldsProducer", "LOrgApacheLuceneIndexSegmentReadState;", &OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_CODEC, &OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_DATA_EXTENSION, &OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_CODEC, &OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_META_EXTENSION };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat = { "Lucene50DocValuesFormat", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x11, 3, 35, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat;
 }
 

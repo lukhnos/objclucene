@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/LeafCollector.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/LeafCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchLeafCollector : NSObject
 
 @end
@@ -13,11 +17,18 @@
 @implementation OrgApacheLuceneSearchLeafCollector
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "collectWithInt:", "collect", "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 4, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchLeafCollector = { 2, "LeafCollector", "org.apache.lucene.search", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(collectWithInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setScorer", "LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "collect", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchLeafCollector = { "LeafCollector", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchLeafCollector;
 }
 

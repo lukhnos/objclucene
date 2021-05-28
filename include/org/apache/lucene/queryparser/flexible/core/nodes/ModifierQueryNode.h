@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_
 
@@ -28,12 +34,12 @@
 /*!
  @brief A <code>ModifierQueryNode</code> indicates the modifier value (+,-,?
  ,NONE) for
- each term on the query string. For example "+t1 -t2 t3" will have a tree of:
+  each term on the query string.For example "+t1 -t2 t3" will have a tree of: 
  <blockquote>
- &lt;BooleanQueryNode&gt; &lt;ModifierQueryNode modifier="MOD_REQ"&gt; &lt;t1/&gt;
- &lt;/ModifierQueryNode&gt; &lt;ModifierQueryNode modifier="MOD_NOT"&gt; &lt;t2/&gt;
- &lt;/ModifierQueryNode&gt; &lt;t3/&gt; &lt;/BooleanQueryNode&gt;
- </blockquote>
+  &lt;BooleanQueryNode&gt; &lt;ModifierQueryNode modifier="MOD_REQ"&gt; &lt;t1/&gt;
+  &lt;/ModifierQueryNode&gt; &lt;ModifierQueryNode modifier="MOD_NOT"&gt; &lt;t2/&gt;
+  &lt;/ModifierQueryNode&gt; &lt;t3/&gt; &lt;/BooleanQueryNode&gt;
+  </blockquote>
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
@@ -41,13 +47,11 @@
 
 /*!
  @brief Used to store the modifier value on the original query string
- @param query
- - QueryNode subtree
- @param mod
- - Modifier Value
+ @param query - QueryNode subtree
+ @param mod - Modifier Value
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
-   withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier:(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *)mod;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
+             withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier:(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *)mod;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -60,6 +64,10 @@
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -82,6 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQu
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_Enum) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_Enum_MOD_NONE = 0,
   OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_Enum_MOD_NOT = 1,
@@ -91,14 +101,11 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQ
 /*!
  @brief Modifier type: such as required (REQ), prohibited (NOT)
  */
-@interface OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier : JavaLangEnum
 
-+ (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *)MOD_NONE;
-
-+ (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *)MOD_NOT;
-
-+ (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *)MOD_REQ;
-
+@property (readonly, class, nonnull) OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *MOD_NONE NS_SWIFT_NAME(MOD_NONE);
+@property (readonly, class, nonnull) OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *MOD_NOT NS_SWIFT_NAME(MOD_NOT);
+@property (readonly, class, nonnull) OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *MOD_REQ NS_SWIFT_NAME(MOD_REQ);
 #pragma mark Public
 
 - (NSString *)toDigitString;
@@ -107,13 +114,12 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQ
 
 - (NSString *)description;
 
-#pragma mark Package-Private
++ (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *)valueOfWithNSString:(NSString *)name;
 
 + (IOSObjectArray *)values;
 
-+ (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *)valueOfWithNSString:(NSString *)name;
+#pragma mark Package-Private
 
-- (id)copyWithZone:(NSZone *)zone;
 - (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_Enum)toNSEnum;
 
 @end
@@ -123,16 +129,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_
 /*! INTERNAL ONLY - Use enum accessors declared below. */
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_values_[];
 
-inline OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_get_MOD_NONE();
+inline OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_get_MOD_NONE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NONE)
 
-inline OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_get_MOD_NOT();
+inline OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_get_MOD_NOT(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NOT)
 
-inline OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_get_MOD_REQ();
+inline OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_get_MOD_REQ(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_REQ)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier_valueOfWithNSString_(NSString *name);
 
@@ -142,4 +148,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader || defined(INCLUDE_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader))
 #define OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_
 
@@ -61,20 +67,28 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *self);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_initPackagePrivate(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *new_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *new_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *create_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionPostingsReader *create_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionIDVersionPostingsReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader")

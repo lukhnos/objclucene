@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsSegmentInfoFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsSegmentInfoFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsSegmentInfoFormat || defined(INCLUDE_OrgApacheLuceneCodecsSegmentInfoFormat))
 #define OrgApacheLuceneCodecsSegmentInfoFormat_
 
@@ -22,7 +28,7 @@
 @class OrgApacheLuceneStoreIOContext;
 
 /*!
- @brief Expert: Controls the format of the 
+ @brief Expert: Controls the format of the  
  <code>SegmentInfo</code> (segment metadata file).
  - seealso: SegmentInfo
  */
@@ -36,7 +42,7 @@
  @param segmentName name of the segment to read
  @param segmentID expected identifier for the segment
  @return infos instance to be populated with data
- @throws IOException If an I/O error occurs
+ @throw IOExceptionIf an I/O error occurs
  */
 - (OrgApacheLuceneIndexSegmentInfo *)readWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                               withNSString:(NSString *)segmentName
@@ -45,8 +51,8 @@
 
 /*!
  @brief Write <code>SegmentInfo</code> data.
- The codec must add its SegmentInfo filename(s) to <code>info</code> before doing i/o. 
- @throws IOException If an I/O error occurs
+ The codec must add its SegmentInfo filename(s) to <code>info</code> before doing i/o.
+ @throw IOExceptionIf an I/O error occurs
  */
 - (void)writeWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
@@ -57,9 +63,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -71,4 +77,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsSegmentInfoFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsSegmentInfoFormat")

@@ -16,6 +16,12 @@
 #define INCLUDE_OrgLukhnosPortmobileFileDirectoryStream 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFileDirectoryStream_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileDirectoryStream || defined(INCLUDE_OrgLukhnosPortmobileFileDirectoryStream))
 #define OrgLukhnosPortmobileFileDirectoryStream_
 
@@ -31,7 +37,7 @@
 #define INCLUDE_JavaLangIterable 1
 #include "java/lang/Iterable.h"
 
-@protocol OrgLukhnosPortmobileFileDirectoryStream < JavaLangAutoCloseable, JavaIoCloseable, JavaLangIterable, NSObject, JavaObject >
+@protocol OrgLukhnosPortmobileFileDirectoryStream < JavaLangAutoCloseable, JavaIoCloseable, JavaLangIterable, JavaObject >
 
 @end
 
@@ -44,8 +50,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileDirectoryStream)
 #if !defined (OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileDirectoryStream || defined(INCLUDE_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream))
 #define OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_
 
+@protocol JavaUtilFunctionConsumer;
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
+@protocol JavaUtilSpliterator;
 
 @interface OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream : NSObject < OrgLukhnosPortmobileFileDirectoryStream > {
  @public
@@ -54,13 +62,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileDirectoryStream)
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)paths;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)paths;
 
 - (void)close;
 
 - (id<JavaUtilIterator>)iterator;
 
 #pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -78,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileDirectoryStream_SimpleDirecto
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileDirectoryStream")

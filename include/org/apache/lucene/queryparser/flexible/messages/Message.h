@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesMessage
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleMessagesMessage_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessage || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleMessagesMessage))
 #define OrgApacheLuceneQueryparserFlexibleMessagesMessage_
 
@@ -23,7 +29,7 @@
  @brief Message Interface for a lazy loading.
  For Native Language Support (NLS), system of software internationalization.
  */
-@protocol OrgApacheLuceneQueryparserFlexibleMessagesMessage < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleMessagesMessage < JavaObject >
 
 - (NSString *)getKey;
 
@@ -41,4 +47,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleMessagesMessage)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessage")

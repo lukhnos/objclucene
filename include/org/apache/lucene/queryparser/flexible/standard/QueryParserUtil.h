@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil))
 #define OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_
 
@@ -21,57 +27,53 @@
 @class OrgApacheLuceneSearchQuery;
 
 /*!
- @brief This class defines utility methods to (help) parse query strings into
+ @brief This class defines utility methods to (help) parse query strings into 
  <code>Query</code> objects.
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns a String where those characters that TextParser expects to be
- escaped are escaped by a preceding <code>\</code>.
+  escaped are escaped by a preceding <code>\</code>.
  */
 + (NSString *)escapeWithNSString:(NSString *)s;
 
 /*!
- @brief Parses a query, searching on the fields specified.
- Use this if you need to
- specify certain fields as required, and others as prohibited.
+ @brief Parses a query, searching on the fields specified.Use this if you need to
+  specify certain fields as required, and others as prohibited.
  <p>
- Usage:
+  
+  Usage: 
  <pre class="prettyprint">
- <code>
- String[] fields = {&quot;filename&quot;, &quot;contents&quot;, &quot;description&quot;};
- BooleanClause.Occur[] flags = {BooleanClause.Occur.SHOULD,
- BooleanClause.Occur.MUST,
- BooleanClause.Occur.MUST_NOT};
- MultiFieldQueryParser.parse(&quot;query&quot;, fields, flags, analyzer);
- </code>
- 
-@endcode
- <p>
- The code above would construct a query:
- @code
-
   <code>
-  (filename:query) +(contents:query) -(description:query)
-  </code>
+  String[] fields = {&quot;filename&quot;, &quot;contents&quot;, &quot;description&quot;};
+  BooleanClause.Occur[] flags = {BooleanClause.Occur.SHOULD,
+                 BooleanClause.Occur.MUST,
+                 BooleanClause.Occur.MUST_NOT};
+  MultiFieldQueryParser.parse(&quot;query&quot;, fields, flags, analyzer); 
+ </code>
   
 @endcode
- @param query
- Query string to parse
- @param fields
- Fields to search on
- @param flags
- Flags describing the fields
- @param analyzer
- Analyzer to use
- @throws IllegalArgumentException
+ <p>
+  The code above would construct a query:  
+ @code
+
+   <code>
+  (filename:query) +(contents:query) -(description:query) 
+  </code>
+   
+@endcode
+ @param query Query string to parse
+ @param fields Fields to search on
+ @param flags Flags describing the fields
+ @param analyzer Analyzer to use
+ @throw IllegalArgumentException
  if the length of the fields array differs from the length of the
- flags array
+            flags array
  */
 + (OrgApacheLuceneSearchQuery *)parseWithNSString:(NSString *)query
                                 withNSStringArray:(IOSObjectArray *)fields
@@ -81,63 +83,56 @@ withOrgApacheLuceneSearchBooleanClause_OccurArray:(IOSObjectArray *)flags
 /*!
  @brief Parses a query which searches on the fields specified.
  <p>
- If x fields are specified, this effectively constructs:
+  If x fields are specified, this effectively constructs:  
  @code
 
-  <code>
-  (field1:query1) (field2:query2) (field3:query3)...(fieldx:queryx)
+   <code>
+  (field1:query1) (field2:query2) (field3:query3)...(fieldx:queryx) 
   </code>
-  
+   
 @endcode
- @param queries
- Queries strings to parse
- @param fields
- Fields to search on
- @param analyzer
- Analyzer to use
- @throws IllegalArgumentException
+ @param queries Queries strings to parse
+ @param fields Fields to search on
+ @param analyzer Analyzer to use
+ @throw IllegalArgumentException
  if the length of the queries array differs from the length of the
- fields array
+            fields array
  */
 + (OrgApacheLuceneSearchQuery *)parseWithNSStringArray:(IOSObjectArray *)queries
                                      withNSStringArray:(IOSObjectArray *)fields
                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
- @brief Parses a query, searching on the fields specified.
- Use this if you need to
- specify certain fields as required, and others as prohibited.
+ @brief Parses a query, searching on the fields specified.Use this if you need to
+  specify certain fields as required, and others as prohibited.
  <p>
- Usage:
+  
+  Usage: 
  <pre class="prettyprint">
- <code>
- String[] query = {&quot;query1&quot;, &quot;query2&quot;, &quot;query3&quot;};
- String[] fields = {&quot;filename&quot;, &quot;contents&quot;, &quot;description&quot;};
- BooleanClause.Occur[] flags = {BooleanClause.Occur.SHOULD,
- BooleanClause.Occur.MUST,
- BooleanClause.Occur.MUST_NOT};
- MultiFieldQueryParser.parse(query, fields, flags, analyzer);
- </code>
- 
-@endcode
- <p>
- The code above would construct a query:
- @code
-
   <code>
-  (filename:query1) +(contents:query2) -(description:query3)
-  </code>
+  String[] query = {&quot;query1&quot;, &quot;query2&quot;, &quot;query3&quot;};
+  String[] fields = {&quot;filename&quot;, &quot;contents&quot;, &quot;description&quot;};
+  BooleanClause.Occur[] flags = {BooleanClause.Occur.SHOULD,
+                 BooleanClause.Occur.MUST,
+                 BooleanClause.Occur.MUST_NOT};
+  MultiFieldQueryParser.parse(query, fields, flags, analyzer); 
+ </code>
   
 @endcode
- @param queries
- Queries string to parse
- @param fields
- Fields to search on
- @param flags
- Flags describing the fields
- @param analyzer
- Analyzer to use
- @throws IllegalArgumentException
+ <p>
+  The code above would construct a query:  
+ @code
+
+   <code>
+  (filename:query1) +(contents:query2) -(description:query3) 
+  </code>
+   
+@endcode
+ @param queries Queries string to parse
+ @param fields Fields to search on
+ @param flags Flags describing the fields
+ @param analyzer Analyzer to use
+ @throw IllegalArgumentException
  if the length of the queries, fields, and flags array differ
  */
 + (OrgApacheLuceneSearchQuery *)parseWithNSStringArray:(IOSObjectArray *)queries
@@ -149,6 +144,12 @@ withOrgApacheLuceneSearchBooleanClause_OccurArray:(IOSObjectArray *)flags
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil)
 
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_init(OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil *new_OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil *create_OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_init(void);
+
 FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_parseWithNSStringArray_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_(IOSObjectArray *queries, IOSObjectArray *fields, OrgApacheLuceneAnalysisAnalyzer *analyzer);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_parseWithNSString_withNSStringArray_withOrgApacheLuceneSearchBooleanClause_OccurArray_withOrgApacheLuceneAnalysisAnalyzer_(NSString *query, IOSObjectArray *fields, IOSObjectArray *flags, OrgApacheLuceneAnalysisAnalyzer *analyzer);
@@ -157,14 +158,12 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserFlexible
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_escapeWithNSString_(NSString *s);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_init(OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil *self);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil *new_OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil *create_OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil_init();
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardQueryParserUtil")

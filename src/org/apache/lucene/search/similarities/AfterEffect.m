@@ -3,11 +3,16 @@
 //  source: ./core/src/java/org/apache/lucene/search/similarities/AfterEffect.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/similarities/AfterEffect.h"
 #include "org/apache/lucene/search/similarities/BasicStats.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/AfterEffect must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchSimilaritiesAfterEffect
 
@@ -39,14 +44,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "AfterEffect", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:", "score", "F", 0x401, NULL, NULL },
-    { "explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x401, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x401, 2, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 3, -1, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.similarities.AfterEffect$NoAfterEffect;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesAfterEffect = { 2, "AfterEffect", "org.apache.lucene.search.similarities", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:);
+  methods[2].selector = @selector(explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "score", "LOrgApacheLuceneSearchSimilaritiesBasicStats;F", "explain", "toString", "LOrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesAfterEffect = { "AfterEffect", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x401, 4, 0, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesAfterEffect;
 }
 
@@ -82,13 +95,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NoAfterEffect", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:", "score", "F", 0x11, NULL, NULL },
-    { "explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x11, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x11, 2, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect = { 2, "NoAfterEffect", "org.apache.lucene.search.similarities", "AfterEffect", 0x19, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:);
+  methods[2].selector = @selector(explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "score", "LOrgApacheLuceneSearchSimilaritiesBasicStats;F", "explain", "toString", "LOrgApacheLuceneSearchSimilaritiesAfterEffect;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect = { "NoAfterEffect", "org.apache.lucene.search.similarities", ptrTable, methods, NULL, 7, 0x19, 4, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect;
 }
 

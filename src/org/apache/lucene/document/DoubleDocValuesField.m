@@ -9,6 +9,10 @@
 #include "org/apache/lucene/document/DoubleDocValuesField.h"
 #include "org/apache/lucene/document/NumericDocValuesField.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/DoubleDocValuesField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneDocumentDoubleDocValuesField
 
 - (instancetype)initWithNSString:(NSString *)name
@@ -26,12 +30,20 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDouble:", "DoubleDocValuesField", NULL, 0x1, NULL, NULL },
-    { "setDoubleValueWithDouble:", "setDoubleValue", "V", 0x1, NULL, NULL },
-    { "setLongValueWithLong:", "setLongValue", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDoubleDocValuesField = { 2, "DoubleDocValuesField", "org.apache.lucene.document", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withDouble:);
+  methods[1].selector = @selector(setDoubleValueWithDouble:);
+  methods[2].selector = @selector(setLongValueWithLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;D", "setDoubleValue", "D", "setLongValue", "J" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDoubleDocValuesField = { "DoubleDocValuesField", "org.apache.lucene.document", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneDocumentDoubleDocValuesField;
 }
 

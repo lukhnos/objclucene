@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/messages/Message.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/messages/Message must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleMessagesMessage : NSObject
 
 @end
@@ -13,13 +17,22 @@
 @implementation OrgApacheLuceneQueryparserFlexibleMessagesMessage
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getKey", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getArguments", NULL, "[Ljava.lang.Object;", 0x401, NULL, NULL },
-    { "getLocalizedMessage", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getLocalizedMessageWithJavaUtilLocale:", "getLocalizedMessage", "Ljava.lang.String;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LNSObject;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesMessage = { 2, "Message", "org.apache.lucene.queryparser.flexible.messages", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getKey);
+  methods[1].selector = @selector(getArguments);
+  methods[2].selector = @selector(getLocalizedMessage);
+  methods[3].selector = @selector(getLocalizedMessageWithJavaUtilLocale:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getLocalizedMessage", "LJavaUtilLocale;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesMessage = { "Message", "org.apache.lucene.queryparser.flexible.messages", ptrTable, methods, NULL, 7, 0x609, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleMessagesMessage;
 }
 

@@ -10,6 +10,12 @@
 #include "org/apache/lucene/search/spell/SuggestWordScoreComparator.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/SuggestWordQueue must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneSearchSpellSuggestWordQueue () {
  @public
   id<JavaUtilComparator> comparator_;
@@ -51,26 +57,33 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPAR
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, 2, -1, -1 },
+    { NULL, "Z", 0x14, 3, 4, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(initWithInt:withJavaUtilComparator:);
+  methods[2].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_COMPARATOR", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x19, -1, 5, 6, -1 },
+    { "comparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x2, -1, -1, 6, -1 },
+  };
+  static const void *ptrTable[] = { "I", "ILJavaUtilComparator;", "(ILjava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;)V", "lessThan", "LOrgApacheLuceneSearchSpellSuggestWord;LOrgApacheLuceneSearchSpellSuggestWord;", &OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR, "Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/spell/SuggestWord;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellSuggestWordQueue = { "SuggestWordQueue", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x11, 3, 2, -1, -1, -1, 7, -1 };
+  return &_OrgApacheLuceneSearchSpellSuggestWordQueue;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSpellSuggestWordQueue class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR, new_OrgApacheLuceneSearchSpellSuggestWordScoreComparator_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpellSuggestWordQueue)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "SuggestWordQueue", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withJavaUtilComparator:", "SuggestWordQueue", NULL, 0x1, NULL, "(ILjava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;)V" },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, "(Lorg/apache/lucene/search/spell/SuggestWord;Lorg/apache/lucene/search/spell/SuggestWord;)Z" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_COMPARATOR", "DEFAULT_COMPARATOR", 0x19, "Ljava.util.Comparator;", &OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR, "Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;", .constantValue.asLong = 0 },
-    { "comparator_", NULL, 0x2, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;", .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spell.SuggestWord;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellSuggestWordQueue = { 2, "SuggestWordQueue", "org.apache.lucene.search.spell", NULL, 0x11, 3, methods, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/spell/SuggestWord;>;" };
-  return &_OrgApacheLuceneSearchSpellSuggestWordQueue;
 }
 
 @end

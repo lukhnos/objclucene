@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreUpperCaseFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreUpperCaseFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreUpperCaseFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCoreUpperCaseFilterFactory))
 #define OrgApacheLuceneAnalysisCoreUpperCaseFilterFactory_
 
@@ -32,17 +38,18 @@
 /*!
  @brief Factory for <code>UpperCaseFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_uppercase" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.UpperCaseFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_uppercase" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.UpperCaseFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
+   
  <p><b>NOTE:</b> In Unicode, this transformation may lose information when the
- upper case character represents more than one lower case character. Use this filter
- when you require uppercase tokens.  Use the <code>LowerCaseFilterFactory</code> for 
- general search matching
+  upper case character represents more than one lower case character. Use this filter
+  when you require uppercase tokens.  Use the <code>LowerCaseFilterFactory</code> for 
+  general search matching
  */
 @interface OrgApacheLuceneAnalysisCoreUpperCaseFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
@@ -51,7 +58,7 @@
 /*!
  @brief Creates a new UpperCaseFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCoreUpperCaseFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -71,4 +78,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreUpperCaseFilterFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreUpperCaseFilterFactory")

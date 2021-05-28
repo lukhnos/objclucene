@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory))
 #define OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory_
 
@@ -32,27 +38,27 @@
 /*!
  @brief Factory for <code>HyphenationCompoundWordTokenFilter</code>.
  <p>
- This factory accepts the following parameters:
+  This factory accepts the following parameters: 
  <ul>
- <li><code>hyphenator</code> (mandatory): path to the FOP xml hyphenation pattern. 
- See <a href="http://offo.sourceforge.net/hyphenation/">http://offo.sourceforge.net/hyphenation/</a>.
- <li><code>encoding</code> (optional): encoding of the xml hyphenation file. defaults to UTF-8.
- <li><code>dictionary</code> (optional): dictionary of words. defaults to no dictionary.
- <li><code>minWordSize</code> (optional): minimal word length that gets decomposed. defaults to 5.
- <li><code>minSubwordSize</code> (optional): minimum length of subwords. defaults to 2.
- <li><code>maxSubwordSize</code> (optional): maximum length of subwords. defaults to 15.
- <li><code>onlyLongestMatch</code> (optional): if true, adds only the longest matching subword 
- to the stream. defaults to false.
+   <li><code>hyphenator</code> (mandatory): path to the FOP xml hyphenation pattern. 
+   See <a href="http://offo.sourceforge.net/hyphenation/">http://offo.sourceforge.net/hyphenation/</a>.
+   <li><code>encoding</code> (optional): encoding of the xml hyphenation file. defaults to UTF-8.
+   <li><code>dictionary</code> (optional): dictionary of words. defaults to no dictionary.
+   <li><code>minWordSize</code> (optional): minimal word length that gets decomposed. defaults to 5.
+   <li><code>minSubwordSize</code> (optional): minimum length of subwords. defaults to 2.
+   <li><code>maxSubwordSize</code> (optional): maximum length of subwords. defaults to 15.
+   <li><code>onlyLongestMatch</code> (optional): if true, adds only the longest matching subword 
+     to the stream. defaults to false. 
  </ul>
- <br>
- <pre class="prettyprint">
- &lt;fieldType name="text_hyphncomp" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.HyphenationCompoundWordTokenFilterFactory" hyphenator="hyphenator.xml" encoding="UTF-8"
- dictionary="dictionary.txt" minWordSize="5" minSubwordSize="2" maxSubwordSize="15" onlyLongestMatch="false"/&gt;
- &lt;/analyzer&gt;
- 
+  <br>
+  <pre class="prettyprint">
+  &lt;fieldType name="text_hyphncomp" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.HyphenationCompoundWordTokenFilterFactory" hyphenator="hyphenator.xml" encoding="UTF-8"
+          dictionary="dictionary.txt" minWordSize="5" minSubwordSize="2" maxSubwordSize="15" onlyLongestMatch="false"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  - seealso: HyphenationCompoundWordTokenFilter
  */
@@ -63,7 +69,7 @@
 /*!
  @brief Creates a new HyphenationCompoundWordTokenFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -83,4 +89,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationCompoundWor
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory")

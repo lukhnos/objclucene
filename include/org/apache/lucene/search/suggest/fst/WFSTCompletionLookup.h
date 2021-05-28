@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup))
 #define OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_
 
@@ -31,38 +37,36 @@
 
 /*!
  @brief Suggester based on a weighted FST: it first traverses the prefix, 
- then walks the <i>n</i> shortest paths to retrieve top-ranked
- suggestions.
+  then walks the <i>n</i> shortest paths to retrieve top-ranked
+  suggestions.
  <p>
- <b>NOTE</b>:
- Input weights must be between 0 and <code>Integer.MAX_VALUE</code>, any
- other values will be rejected.
+  <b>NOTE</b>:
+  Input weights must be between 0 and <code>Integer.MAX_VALUE</code>, any
+  other values will be rejected.
  */
 @interface OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup : OrgApacheLuceneSearchSuggestLookup
-
-+ (id<JavaUtilComparator>)weightComparator;
+@property (readonly, class, strong) id<JavaUtilComparator> weightComparator NS_SWIFT_NAME(weightComparator);
 
 #pragma mark Public
 
 /*!
  @brief Calls <code>WFSTCompletionLookup(true)</code>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new suggester.
- @param exactFirst <code>true</code> if suggestions that match the 
- prefix exactly should always be returned first, regardless
- of score. This has no performance impact, but could result
- in low-quality suggestions.
+ @param exactFirst <code> true </code>  if suggestions that match the 
+          prefix exactly should always be returned first, regardless         of score. This has no performance impact, but could result
+          in low-quality suggestions.
  */
-- (instancetype)initWithBoolean:(jboolean)exactFirst;
+- (instancetype __nonnull)initWithBoolean:(jboolean)exactFirst;
 
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
 
 /*!
  @brief Returns the weight associated with an input string,
- or null if it does not exist.
+  or null if it does not exist.
  */
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
@@ -88,16 +92,16 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup)
 
-inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_get_weightComparator();
+inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_get_weightComparator(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_weightComparator;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup, weightComparator, id<JavaUtilComparator>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *create_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *create_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_initWithBoolean_(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *self, jboolean exactFirst);
 
@@ -109,4 +113,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup")

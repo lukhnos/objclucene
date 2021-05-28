@@ -3,11 +3,9 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/BlockTermState.h"
 #include "org/apache/lucene/codecs/PostingsReaderBase.h"
 #include "org/apache/lucene/codecs/blocktree/BlockTreeTermsReader.h"
@@ -25,23 +23,30 @@
 #include "org/apache/lucene/util/automaton/Transition.h"
 #include "org/apache/lucene/util/fst/FST.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
 @interface OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame () {
  @public
-  __unsafe_unretained OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite_;
+  WEAK_ OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite_;
 }
 
 @end
 
 @implementation OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame
 
-- (instancetype)initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum:(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *)ite
-                                                                 withInt:(jint)ord {
-  OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(self, ite, ord);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum:(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *)ite
+                                                                               withInt:(jint)ord {
+  OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(self, ite, ord);
   return self;
 }
 
 - (void)loadNextFloorBlock {
-  JreAssert((numFollowFloorBlocks_ > 0), (JreStrcat("$I", @"nextFloorLabel=", nextFloorLabel_)));
+  JreAssert(numFollowFloorBlocks_ > 0, JreStrcat("$I", @"nextFloorLabel=", nextFloorLabel_));
   do {
     fp_ = fpOrig_ + (JreURShift64([((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(floorDataReader_)) readVLong], 1));
     numFollowFloorBlocks_--;
@@ -78,7 +83,7 @@
       numFollowFloorBlocks_ = [floorDataReader_ readVInt];
       nextFloorLabel_ = [floorDataReader_ readByte] & (jint) 0xff;
       if ([((OrgApacheLuceneUtilAutomatonRunAutomaton *) nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->runAutomaton_)) isAcceptWithInt:state_] == false && transitionCount_ != 0) {
-        JreAssert((transitionIndex_ == 0), (JreStrcat("$I", @"transitionIndex=", transitionIndex_)));
+        JreAssert(transitionIndex_ == 0, JreStrcat("$I", @"transitionIndex=", transitionIndex_));
         while (numFollowFloorBlocks_ != 0 && nextFloorLabel_ <= ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(transition_))->min_) {
           fp_ = fpOrig_ + (JreURShift64([floorDataReader_ readVLong], 1));
           numFollowFloorBlocks_--;
@@ -95,7 +100,7 @@
   [((OrgApacheLuceneStoreIndexInput *) nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->in_)) seekWithLong:fp_];
   jint code = [ite_->in_ readVInt];
   entCount_ = JreURShift32(code, 1);
-  JreAssert((entCount_ > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:191 condition failed: assert entCount > 0;"));
+  JreAssert(entCount_ > 0, @"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:191 condition failed: assert entCount > 0;");
   isLastInFloor_ = ((code & 1) != 0);
   code = [ite_->in_ readVInt];
   isLeafBlock_ = ((code & 1) != 0);
@@ -137,7 +142,7 @@
 }
 
 - (void)nextLeaf {
-  JreAssert((nextEnt_ != -1 && nextEnt_ < entCount_), (JreStrcat("$I$I$J", @"nextEnt=", nextEnt_, @" entCount=", entCount_, @" fp=", fp_)));
+  JreAssert(nextEnt_ != -1 && nextEnt_ < entCount_, JreStrcat("$I$I$J", @"nextEnt=", nextEnt_, @" entCount=", entCount_, @" fp=", fp_));
   nextEnt_++;
   suffix_ = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(suffixesReader_)) readVInt];
   startBytePos_ = [suffixesReader_ getPosition];
@@ -145,7 +150,7 @@
 }
 
 - (jboolean)nextNonLeaf {
-  JreAssert((nextEnt_ != -1 && nextEnt_ < entCount_), (JreStrcat("$I$I$J", @"nextEnt=", nextEnt_, @" entCount=", entCount_, @" fp=", fp_)));
+  JreAssert(nextEnt_ != -1 && nextEnt_ < entCount_, JreStrcat("$I$I$J", @"nextEnt=", nextEnt_, @" entCount=", entCount_, @" fp=", fp_));
   nextEnt_++;
   jint code = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(suffixesReader_)) readVInt];
   if (versionAutoPrefix_ == false) {
@@ -185,7 +190,7 @@
       return false;
       case 3:
       if (suffix_ == 0) {
-        JreAssert((ord_ > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:302 condition failed: assert ord > 0;"));
+        JreAssert(ord_ > 0, @"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:302 condition failed: assert ord > 0;");
         OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *parent = IOSObjectArray_Get(nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->stack_), ord_ - 1);
         floorSuffixLeadStart_ = IOSByteArray_Get(nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *) nil_chk(parent))->suffixBytes_), parent->startBytePos_ + parent->suffix_ - 1) & (jint) 0xff;
       }
@@ -197,7 +202,7 @@
       floorSuffixLeadEnd_ = [suffixesReader_ readByte] & (jint) 0xff;
       return false;
       default:
-      JreAssert((false), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:314 condition failed: assert false;"));
+      JreAssert(false, @"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:314 condition failed: assert false;");
       return false;
     }
   }
@@ -210,7 +215,7 @@
 - (void)decodeMetaData {
   jint limit = [self getTermBlockOrd];
   jboolean absolute = metaDataUpto_ == 0;
-  JreAssert((limit > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:329 condition failed: assert limit > 0;"));
+  JreAssert(limit > 0, @"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:329 condition failed: assert limit > 0;");
   while (metaDataUpto_ < limit) {
     ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(termState_))->docFreq_ = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(statsReader_)) readVInt];
     if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->fr_))->fieldInfo_)) getIndexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS)) {
@@ -249,63 +254,77 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum:withInt:", "IntersectTermsEnumFrame", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "loadNextFloorBlock", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "setStateWithInt:", "setState", "V", 0x1, NULL, NULL },
-    { "load__WithOrgApacheLuceneUtilBytesRef:", "load", "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "next", NULL, "Z", 0x1, NULL, NULL },
-    { "nextLeaf", NULL, "V", 0x1, NULL, NULL },
-    { "nextNonLeaf", NULL, "Z", 0x1, NULL, NULL },
-    { "getTermBlockOrd", NULL, "I", 0x1, NULL, NULL },
-    { "decodeMetaData", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 4, 5, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum:withInt:);
+  methods[1].selector = @selector(loadNextFloorBlock);
+  methods[2].selector = @selector(setStateWithInt:);
+  methods[3].selector = @selector(load__WithOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(next);
+  methods[5].selector = @selector(nextLeaf);
+  methods[6].selector = @selector(nextNonLeaf);
+  methods[7].selector = @selector(getTermBlockOrd);
+  methods[8].selector = @selector(decodeMetaData);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ord_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fp_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "fpOrig_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "fpEnd_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastSubFP_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "state_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastState_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "metaDataUpto_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffixBytes_", NULL, 0x0, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffixesReader_", NULL, 0x10, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "statBytes_", NULL, 0x0, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "statsReader_", NULL, 0x10, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "floorData_", NULL, 0x0, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "floorDataReader_", NULL, 0x10, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefix_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "entCount_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextEnt_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "isLastInFloor_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "isLeafBlock_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "numFollowFloorBlocks_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextFloorLabel_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "transition_", NULL, 0x10, "Lorg.apache.lucene.util.automaton.Transition;", NULL, NULL, .constantValue.asLong = 0 },
-    { "transitionIndex_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "transitionCount_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "versionAutoPrefix_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "arc_", NULL, 0x0, "Lorg.apache.lucene.util.fst.FST$Arc;", NULL, "Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "termState_", NULL, 0x10, "Lorg.apache.lucene.codecs.BlockTermState;", NULL, NULL, .constantValue.asLong = 0 },
-    { "longs_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytes_", NULL, 0x0, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytesReader_", NULL, 0x10, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "outputPrefix_", NULL, 0x0, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "startBytePos_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffix_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "floorSuffixLeadStart_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "floorSuffixLeadEnd_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "isAutoPrefixTerm_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "ite_", NULL, 0x12, "Lorg.apache.lucene.codecs.blocktree.IntersectTermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
+    { "ord_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fp_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fpOrig_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fpEnd_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastSubFP_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "state_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastState_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "metaDataUpto_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "suffixBytes_", "[B", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "suffixesReader_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "statBytes_", "[B", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "statsReader_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "floorData_", "[B", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "floorDataReader_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "prefix_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "entCount_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "nextEnt_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "isLastInFloor_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "isLeafBlock_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "numFollowFloorBlocks_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "nextFloorLabel_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "transition_", "LOrgApacheLuceneUtilAutomatonTransition;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "transitionIndex_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "transitionCount_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "versionAutoPrefix_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "arc_", "LOrgApacheLuceneUtilFstFST_Arc;", .constantValue.asLong = 0, 0x0, -1, -1, 6, -1 },
+    { "termState_", "LOrgApacheLuceneCodecsBlockTermState;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "longs_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "bytes_", "[B", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bytesReader_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "outputPrefix_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "startBytePos_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "suffix_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "floorSuffixLeadStart_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "floorSuffixLeadEnd_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "isAutoPrefixTerm_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ite_", "LOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame = { 2, "IntersectTermsEnumFrame", "org.apache.lucene.codecs.blocktree", NULL, 0x10, 9, methods, 37, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum;I", "LJavaIoIOException;", "setState", "I", "load", "LOrgApacheLuceneUtilBytesRef;", "Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame = { "IntersectTermsEnumFrame", "org.apache.lucene.codecs.blocktree", ptrTable, methods, fields, 7, 0x10, 9, 37, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame;
 }
 
 @end
 
-void OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *self, OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite, jint ord) {
+void OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *self, OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite, jint ord) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->suffixBytes_, [IOSByteArray newArrayWithLength:128]);
   JreStrongAssignAndConsume(&self->suffixesReader_, new_OrgApacheLuceneStoreByteArrayDataInput_init());
@@ -324,12 +343,12 @@ void OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initWithOrgApacheLuce
   self->versionAutoPrefix_ = ite->fr_->parent_->anyAutoPrefixTerms_;
 }
 
-OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *new_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite, jint ord) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_, ite, ord)
+OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *new_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite, jint ord) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_, ite, ord)
 }
 
-OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *create_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite, jint ord) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_, ite, ord)
+OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *create_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite, jint ord) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, initPackagePrivateWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_, ite, ord)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame)

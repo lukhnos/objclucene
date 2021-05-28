@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpellSpellChecker
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpellSpellChecker_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellSpellChecker || defined(INCLUDE_OrgApacheLuceneSearchSpellSpellChecker))
 #define OrgApacheLuceneSearchSpellSpellChecker_
 
@@ -32,18 +38,19 @@
 
 /*!
  @brief <p>
- Spell Checker class  (Main class).
+    Spell Checker class  (Main class).
  <br>
- (initially inspired by the David Spencer code).
+   (initially inspired by the David Spencer code). 
  </p>
- <p>Example Usage:
+  
+ <p>Example Usage:  
  <pre class="prettyprint">
- SpellChecker spellchecker = new SpellChecker(spellIndexDirectory);
- // To index a field of a user index:
- spellchecker.indexDictionary(new LuceneDictionary(my_lucene_reader, a_field));
- // To index a file containing words:
- spellchecker.indexDictionary(new PlainTextDictionary(new File("myfile.txt")));
- String[] suggestions = spellchecker.suggestSimilar("misspelt", 5);
+   SpellChecker spellchecker = new SpellChecker(spellIndexDirectory);
+   // To index a field of a user index:
+   spellchecker.indexDictionary(new LuceneDictionary(my_lucene_reader, a_field));
+   // To index a file containing words:
+   spellchecker.indexDictionary(new PlainTextDictionary(new File("myfile.txt")));
+   String[] suggestions = spellchecker.suggestSimilar("misspelt", 5); 
  
 @endcode
  */
@@ -54,74 +61,69 @@
    */
   OrgApacheLuceneStoreDirectory *spellIndex_;
 }
-
-+ (jfloat)DEFAULT_ACCURACY;
-
-+ (NSString *)F_WORD;
+@property (readonly, class) jfloat DEFAULT_ACCURACY NS_SWIFT_NAME(DEFAULT_ACCURACY);
+@property (readonly, copy, class) NSString *F_WORD NS_SWIFT_NAME(F_WORD);
 
 #pragma mark Public
 
 /*!
- @brief Use the given directory as a spell checker index with a
- <code>LevensteinDistance</code> as the default <code>StringDistance</code>.
- The
- directory is created if it doesn't exist yet.
- @param spellIndex
- the spell index directory
- @throws IOException
+ @brief Use the given directory as a spell checker index with a 
+ <code>LevensteinDistance</code> as the default <code>StringDistance</code>.The
+  directory is created if it doesn't exist yet.
+ @param spellIndex the spell index directory
+ @throw IOException
  if spellchecker can not open the directory
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndex;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndex;
 
 /*!
- @brief Use the given directory as a spell checker index.
- The directory
- is created if it doesn't exist yet.
+ @brief Use the given directory as a spell checker index.The directory
+  is created if it doesn't exist yet.
  @param spellIndex the spell index directory
- @param sd the <code>StringDistance</code> measurement to use
- @throws IOException if Spellchecker can not open the directory
+ @param sd the <code>StringDistance</code>  measurement to use
+ @throw IOExceptionif Spellchecker can not open the directory
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndex
-         withOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)sd;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndex
+                   withOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)sd;
 
 /*!
  @brief Use the given directory as a spell checker index with the given <code>org.apache.lucene.search.spell.StringDistance</code> measure
- and the given <code>java.util.Comparator</code> for sorting the results.
+  and the given <code>java.util.Comparator</code> for sorting the results.
  @param spellIndex The spelling index
  @param sd The distance
  @param comparator The comparator
- @throws IOException if there is a problem opening the index
+ @throw IOExceptionif there is a problem opening the index
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndex
-         withOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)sd
-                               withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndex
+                   withOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)sd
+                                         withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
 /*!
  @brief Removes all terms from the spell check index.
- @throws IOException If there is a low-level I/O error.
- @throws AlreadyClosedException if the Spellchecker is already closed
+ @throw IOExceptionIf there is a low-level I/O error.
+ @throw AlreadyClosedExceptionif the Spellchecker is already closed
  */
 - (void)clearIndex;
 
 /*!
  @brief Close the IndexSearcher used by this SpellChecker
- @throws IOException if the close operation causes an <code>IOException</code>
- @throws AlreadyClosedException if the <code>SpellChecker</code> is already closed
+ @throw IOExceptionif the close operation causes an <code>IOException</code>
+ @throw AlreadyClosedExceptionif the <code>SpellChecker</code> is already closed
  */
 - (void)close;
 
 /*!
  @brief Check whether the word exists in the index.
  @param word word to check
- @throws IOException If there is a low-level I/O error.
- @throws AlreadyClosedException if the Spellchecker is already closed
+ @throw IOExceptionIf there is a low-level I/O error.
+ @throw AlreadyClosedExceptionif the Spellchecker is already closed
  @return true if the word exists in the index
  */
 - (jboolean)existWithNSString:(NSString *)word;
 
 /*!
- @brief The accuracy (minimum score) to be used, unless overridden in <code>suggestSimilar(String,int,IndexReader,String,SuggestMode,float)</code>, to
- decide whether a suggestion is included or not.
+ @brief The accuracy (minimum score) to be used, unless overridden in <code>suggestSimilar(String, int, IndexReader, String, SuggestMode, float)</code>, to
+  decide whether a suggestion is included or not.
  @return The current accuracy setting
  */
 - (jfloat)getAccuracy;
@@ -133,20 +135,20 @@
 - (id<JavaUtilComparator>)getComparator;
 
 /*!
- @brief Returns the <code>StringDistance</code> instance used by this
+ @brief Returns the <code>StringDistance</code> instance used by this 
  <code>SpellChecker</code> instance.
  @return the <code>StringDistance</code> instance used by this
- <code>SpellChecker</code> instance.
+          <code>SpellChecker</code> instance.
  */
 - (id<OrgApacheLuceneSearchSpellStringDistance>)getStringDistance;
 
 /*!
  @brief Indexes the data from the given <code>Dictionary</code>.
  @param dict Dictionary to index
- @param config <code>IndexWriterConfig</code> to use
+ @param config<code>IndexWriterConfig</code>  to use
  @param fullMerge whether or not the spellcheck index should be fully merged
- @throws AlreadyClosedException if the Spellchecker is already closed
- @throws IOException If there is a low-level I/O error.
+ @throw AlreadyClosedExceptionif the Spellchecker is already closed
+ @throw IOExceptionIf there is a low-level I/O error.
  */
 - (void)indexDictionaryWithOrgApacheLuceneSearchSpellDictionary:(id<OrgApacheLuceneSearchSpellDictionary>)dict
                       withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config
@@ -166,36 +168,36 @@
 
 /*!
  @brief Use a different index as the spell checker index or re-open
- the existing index if <code>spellIndex</code> is the same value
- as given in the constructor.
+  the existing index if <code>spellIndex</code> is the same value
+  as given in the constructor.
  @param spellIndexDir the spell directory to use
- @throws AlreadyClosedException if the Spellchecker is already closed
- @throws IOException if spellchecker can not open the directory
+ @throw AlreadyClosedExceptionif the Spellchecker is already closed
+ @throw IOExceptionif spellchecker can not open the directory
  */
 - (void)setSpellIndexWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndexDir;
 
 /*!
- @brief Sets the <code>StringDistance</code> implementation for this
+ @brief Sets the <code>StringDistance</code> implementation for this 
  <code>SpellChecker</code> instance.
- @param sd the <code>StringDistance</code> implementation for this
- <code>SpellChecker</code> instance
+ @param sd the <code>StringDistance</code>  implementation for this
+   <code>SpellChecker</code>  instance
  */
 - (void)setStringDistanceWithOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)sd;
 
 /*!
  @brief Suggest similar words.
  <p>As the Lucene similarity that is used to fetch the most relevant n-grammed terms
- is not the same as the edit distance strategy used to calculate the best
- matching spell-checked word from the hits that Lucene found, one usually has
- to retrieve a couple of numSug's in order to get the true best match.
+  is not the same as the edit distance strategy used to calculate the best
+  matching spell-checked word from the hits that Lucene found, one usually has
+  to retrieve a couple of numSug's in order to get the true best match. 
  <p>I.e. if numSug == 1, don't count on that suggestion being the best one.
- Thus, you should set this value to <b>at least</b> 5 for a good suggestion.
+  Thus, you should set this value to <b>at least</b> 5 for a good suggestion.
  @param word the word you want a spell check done on
  @param numSug the number of suggested words
- @throws IOException if the underlying index throws an <code>IOException</code>
- @throws AlreadyClosedException if the Spellchecker is already closed
+ @throw IOExceptionif the underlying index throws an <code>IOException</code>
+ @throw AlreadyClosedExceptionif the Spellchecker is already closed
  @return String[]
- - seealso: #suggestSimilar(String,int,IndexReader,String,SuggestMode,float)
+ - seealso: #suggestSimilar(String, int, IndexReader, String, SuggestMode, float)
  */
 - (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
                                        withInt:(jint)numSug;
@@ -203,18 +205,18 @@
 /*!
  @brief Suggest similar words.
  <p>As the Lucene similarity that is used to fetch the most relevant n-grammed terms
- is not the same as the edit distance strategy used to calculate the best
- matching spell-checked word from the hits that Lucene found, one usually has
- to retrieve a couple of numSug's in order to get the true best match.
+  is not the same as the edit distance strategy used to calculate the best
+  matching spell-checked word from the hits that Lucene found, one usually has
+  to retrieve a couple of numSug's in order to get the true best match. 
  <p>I.e. if numSug == 1, don't count on that suggestion being the best one.
- Thus, you should set this value to <b>at least</b> 5 for a good suggestion.
+  Thus, you should set this value to <b>at least</b> 5 for a good suggestion.
  @param word the word you want a spell check done on
  @param numSug the number of suggested words
  @param accuracy The minimum score a suggestion must have in order to qualify for inclusion in the results
- @throws IOException if the underlying index throws an <code>IOException</code>
- @throws AlreadyClosedException if the Spellchecker is already closed
+ @throw IOExceptionif the underlying index throws an <code>IOException</code>
+ @throw AlreadyClosedExceptionif the Spellchecker is already closed
  @return String[]
- - seealso: #suggestSimilar(String,int,IndexReader,String,SuggestMode,float)
+ - seealso: #suggestSimilar(String, int, IndexReader, String, SuggestMode, float)
  */
 - (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
                                        withInt:(jint)numSug
@@ -232,24 +234,22 @@
 /*!
  @brief Suggest similar words (optionally restricted to a field of an index).
  <p>As the Lucene similarity that is used to fetch the most relevant n-grammed terms
- is not the same as the edit distance strategy used to calculate the best
- matching spell-checked word from the hits that Lucene found, one usually has
- to retrieve a couple of numSug's in order to get the true best match.
+  is not the same as the edit distance strategy used to calculate the best
+  matching spell-checked word from the hits that Lucene found, one usually has
+  to retrieve a couple of numSug's in order to get the true best match. 
  <p>I.e. if numSug == 1, don't count on that suggestion being the best one.
- Thus, you should set this value to <b>at least</b> 5 for a good suggestion.
+  Thus, you should set this value to <b>at least</b> 5 for a good suggestion.
  @param word the word you want a spell check done on
  @param numSug the number of suggested words
  @param ir the indexReader of the user index (can be null see field param)
- @param field the field of the user index: if field is not null, the suggested
- words are restricted to the words present in this field.
- @param suggestMode 
- (NOTE: if indexReader==null and/or field==null, then this is overridden with SuggestMode.SUGGEST_ALWAYS)
+ @param field the field of the user index: if field is not null, the suggested  words are restricted to the words present in this field.
+ @param suggestMode (NOTE: if indexReader==null and/or field==null, then this is overridden with SuggestMode.SUGGEST_ALWAYS)
  @param accuracy The minimum score a suggestion must have in order to qualify for inclusion in the results
- @throws IOException if the underlying index throws an <code>IOException</code>
- @throws AlreadyClosedException if the Spellchecker is already closed
+ @throw IOExceptionif the underlying index throws an <code>IOException</code>
+ @throw AlreadyClosedExceptionif the Spellchecker is already closed
  @return String[] the sorted list of the suggest words with these 2 criteria:
- first criteria: the edit distance, second criteria (only if restricted mode): the popularity
- of the suggest words in the field of the user index
+  first criteria: the edit distance, second criteria (only if restricted mode): the popularity
+  of the suggest words in the field of the user index
  */
 - (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
                                        withInt:(jint)numSug
@@ -264,17 +264,21 @@
  @brief Creates a new read-only IndexSearcher
  @param dir the directory used to open the searcher
  @return a new read-only IndexSearcher
- @throws IOException f there is a low-level IO error
+ @throw IOExceptionf there is a low-level IO error
  */
 - (OrgApacheLuceneSearchIndexSearcher *)createSearcherWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
  @brief Returns <code>true</code> if and only if the <code>SpellChecker</code> is
- closed, otherwise <code>false</code>.
+  closed, otherwise <code>false</code>.
  @return <code>true</code> if and only if the <code>SpellChecker</code> is
- closed, otherwise <code>false</code>.
+          closed, otherwise <code>false</code>.
  */
 - (jboolean)isClosed;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -285,14 +289,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellSpellChecker, spellIndex_, OrgApac
 /*!
  @brief The default minimum score to use, if not specified by calling <code>setAccuracy(float)</code> .
  */
-inline jfloat OrgApacheLuceneSearchSpellSpellChecker_get_DEFAULT_ACCURACY();
+inline jfloat OrgApacheLuceneSearchSpellSpellChecker_get_DEFAULT_ACCURACY(void);
 #define OrgApacheLuceneSearchSpellSpellChecker_DEFAULT_ACCURACY 0.5f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSpellSpellChecker, DEFAULT_ACCURACY, jfloat)
 
 /*!
  @brief Field name for each word in the ngram index.
  */
-inline NSString *OrgApacheLuceneSearchSpellSpellChecker_get_F_WORD();
+inline NSString *OrgApacheLuceneSearchSpellSpellChecker_get_F_WORD(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSpellSpellChecker, F_WORD, NSString *)
@@ -319,4 +323,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellSpellChecker)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellSpellChecker")

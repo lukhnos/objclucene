@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsDocValuesProducer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsDocValuesProducer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsDocValuesProducer || defined(INCLUDE_OrgApacheLuceneCodecsDocValuesProducer))
 #define OrgApacheLuceneCodecsDocValuesProducer_
 
@@ -34,7 +40,7 @@
 
 /*!
  @brief Abstract API that produces numeric, binary, sorted, sortedset,
- and sortednumeric docvalues.
+   and sortednumeric docvalues.
  */
 @interface OrgApacheLuceneCodecsDocValuesProducer : NSObject < JavaIoCloseable, OrgApacheLuceneUtilAccountable >
 
@@ -43,7 +49,7 @@
 /*!
  @brief Checks consistency of this producer
  <p>
- Note that this may be costly in terms of I/O, e.g.
+  Note that this may be costly in terms of I/O, e.g.
  may involve computing a checksum value against large data files.
  */
 - (void)checkIntegrity;
@@ -51,50 +57,50 @@
 /*!
  @brief Returns <code>BinaryDocValues</code> for this field.
  The returned instance need not be thread-safe: it will only be
- used by a single thread. 
+   used by a single thread.
  */
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 
 /*!
  @brief Returns a <code>Bits</code> at the size of <code>reader.maxDoc()</code>, 
- with turned on bits for each docid that does have a value for this field.
+   with turned on bits for each docid that does have a value for this field.
  The returned instance need not be thread-safe: it will only be
- used by a single thread. 
+   used by a single thread.
  */
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 
 /*!
  @brief Returns an instance optimized for merging.
  <p>
- The default implementation returns <code>this</code> 
+  The default implementation returns <code>this</code>
  */
 - (OrgApacheLuceneCodecsDocValuesProducer *)getMergeInstance;
 
 /*!
  @brief Returns <code>NumericDocValues</code> for this field.
  The returned instance need not be thread-safe: it will only be
- used by a single thread. 
+   used by a single thread.
  */
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 
 /*!
  @brief Returns <code>SortedDocValues</code> for this field.
  The returned instance need not be thread-safe: it will only be
- used by a single thread. 
+   used by a single thread.
  */
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 
 /*!
  @brief Returns <code>SortedNumericDocValues</code> for this field.
  The returned instance need not be thread-safe: it will only be
- used by a single thread. 
+   used by a single thread.
  */
 - (OrgApacheLuceneIndexSortedNumericDocValues *)getSortedNumericWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 
 /*!
  @brief Returns <code>SortedSetDocValues</code> for this field.
  The returned instance need not be thread-safe: it will only be
- used by a single thread. 
+   used by a single thread.
  */
 - (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 
@@ -103,9 +109,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -117,4 +123,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsDocValuesProducer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsDocValuesProducer")

@@ -7,11 +7,14 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Math.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Arrays.h"
 #include "java/util/Comparator.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/index/MultiPostingsEnum.h"
 #include "org/apache/lucene/index/MultiTermsEnum.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
@@ -23,6 +26,13 @@
 #include "org/apache/lucene/util/PriorityQueue.h"
 
 @class OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MultiTermsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneIndexMultiTermsEnum () {
  @public
@@ -54,13 +64,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTermsEnum, lastSeek_, OrgApacheLuce
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTermsEnum, lastSeekScratch_, OrgApacheLuceneUtilBytesRefBuilder *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTermsEnum, current_, OrgApacheLuceneUtilBytesRef *)
 
-inline id<JavaUtilComparator> OrgApacheLuceneIndexMultiTermsEnum_get_INDEX_COMPARATOR();
+inline id<JavaUtilComparator> OrgApacheLuceneIndexMultiTermsEnum_get_INDEX_COMPARATOR(void);
 static id<JavaUtilComparator> OrgApacheLuceneIndexMultiTermsEnum_INDEX_COMPARATOR;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexMultiTermsEnum, INDEX_COMPARATOR, id<JavaUtilComparator>)
 
 __attribute__((unused)) static void OrgApacheLuceneIndexMultiTermsEnum_pullTop(OrgApacheLuceneIndexMultiTermsEnum *self);
 
 __attribute__((unused)) static void OrgApacheLuceneIndexMultiTermsEnum_pushTop(OrgApacheLuceneIndexMultiTermsEnum *self);
+
+@interface OrgApacheLuceneIndexMultiTermsEnum_1 : NSObject < JavaUtilComparator >
+
+- (instancetype)init;
+
+- (jint)compareWithId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)o1
+               withId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)o2;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiTermsEnum_1)
+
+__attribute__((unused)) static void OrgApacheLuceneIndexMultiTermsEnum_1_init(OrgApacheLuceneIndexMultiTermsEnum_1 *self);
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiTermsEnum_1 *new_OrgApacheLuceneIndexMultiTermsEnum_1_init(void) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiTermsEnum_1 *create_OrgApacheLuceneIndexMultiTermsEnum_1_init(void);
 
 @interface OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice () {
  @public
@@ -83,11 +110,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice, subSl
 
 /*!
  @brief Add the <code>top()</code> slice as well as all slices that are positionned
- on the same term to <code>tops</code> and return how many of them there are.
+   on the same term to <code>tops</code> and return how many of them there are.
  */
 - (jint)fillTopWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSliceArray:(IOSObjectArray *)tops;
 
 - (OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)getWithInt:(jint)i;
+
+- (OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)pop;
+
+- (OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)top;
+
+- (OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)insertWithOverflowWithId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)arg0;
+
+- (OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)addWithId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)arg0;
+
+- (OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)getSentinelObject;
+
+- (OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)updateTopWithId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)arg0;
+
+- (OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)updateTop;
 
 @end
 
@@ -104,25 +145,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue
 __attribute__((unused)) static OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue_getWithInt_(OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue *self, jint i);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue)
-
-@interface OrgApacheLuceneIndexMultiTermsEnum_$1 : NSObject < JavaUtilComparator >
-
-- (jint)compareWithId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)o1
-               withId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)o2;
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiTermsEnum_$1)
-
-__attribute__((unused)) static void OrgApacheLuceneIndexMultiTermsEnum_$1_init(OrgApacheLuceneIndexMultiTermsEnum_$1 *self);
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiTermsEnum_$1 *new_OrgApacheLuceneIndexMultiTermsEnum_$1_init() NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexMultiTermsEnum_$1 *create_OrgApacheLuceneIndexMultiTermsEnum_$1_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTermsEnum_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
 
@@ -146,13 +168,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:(IOSObjectArray *)termsEnumsIndex {
-  JreAssert((((IOSObjectArray *) nil_chk(termsEnumsIndex))->size_ <= ((IOSObjectArray *) nil_chk(top_))->size_), (@"org/apache/lucene/index/MultiTermsEnum.java:104 condition failed: assert termsEnumsIndex.length <= top.length;"));
+  JreAssert(((IOSObjectArray *) nil_chk(termsEnumsIndex))->size_ <= ((IOSObjectArray *) nil_chk(top_))->size_, @"org/apache/lucene/index/MultiTermsEnum.java:104 condition failed: assert termsEnumsIndex.length <= top.length;");
   numSubs_ = 0;
   numTop_ = 0;
   [((OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue *) nil_chk(queue_)) clear];
   for (jint i = 0; i < termsEnumsIndex->size_; i++) {
     OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex *termsEnumIndex = IOSObjectArray_Get(termsEnumsIndex, i);
-    JreAssert((termsEnumIndex != nil), (@"org/apache/lucene/index/MultiTermsEnum.java:111 condition failed: assert termsEnumIndex != null;"));
+    JreAssert(termsEnumIndex != nil, @"org/apache/lucene/index/MultiTermsEnum.java:111 condition failed: assert termsEnumIndex != null;");
     OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex *) nil_chk(termsEnumIndex))->termsEnum_)) next];
     if (term != nil) {
       OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *entry_ = IOSObjectArray_Get(nil_chk(subs_), termsEnumIndex->subIndex_);
@@ -206,7 +228,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
     if (status) {
       IOSObjectArray_Set(nil_chk(top_), numTop_++, IOSObjectArray_Get(currentSubs_, i));
       JreStrongAssign(&current_, JreStrongAssign(&((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(currentSubs_, i)))->current_, [((OrgApacheLuceneIndexTermsEnum *) nil_chk(((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(currentSubs_, i)))->terms_)) term]));
-      JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) isEqual:((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(currentSubs_, i)))->current_]), (@"org/apache/lucene/index/MultiTermsEnum.java:173 condition failed: assert term.equals(currentSubs[i].current);"));
+      JreAssert([((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) isEqual:((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(currentSubs_, i)))->current_], @"org/apache/lucene/index/MultiTermsEnum.java:173 condition failed: assert term.equals(currentSubs[i].current);");
     }
   }
   return numTop_ > 0;
@@ -253,11 +275,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
     else {
       if (status == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, NOT_FOUND)) {
         JreStrongAssign(&((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(currentSubs_, i)))->current_, [((OrgApacheLuceneIndexTermsEnum *) nil_chk(((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(currentSubs_, i)))->terms_)) term]);
-        JreAssert((((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(currentSubs_, i)))->current_ != nil), (@"org/apache/lucene/index/MultiTermsEnum.java:229 condition failed: assert currentSubs[i].current != null;"));
+        JreAssert(((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(currentSubs_, i)))->current_ != nil, @"org/apache/lucene/index/MultiTermsEnum.java:229 condition failed: assert currentSubs[i].current != null;");
         [queue_ addWithId:IOSObjectArray_Get(currentSubs_, i)];
       }
       else {
-        JreAssert((status == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, END)), (@"org/apache/lucene/index/MultiTermsEnum.java:232 condition failed: assert status == SeekStatus.END;"));
+        JreAssert(status == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, END), @"org/apache/lucene/index/MultiTermsEnum.java:232 condition failed: assert status == SeekStatus.END;");
         JreStrongAssign(&((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(currentSubs_, i)))->current_, nil);
       }
     }
@@ -293,7 +315,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
 - (OrgApacheLuceneUtilBytesRef *)next {
   if (lastSeekExact_) {
     OrgApacheLuceneIndexTermsEnum_SeekStatus *status = [self seekCeilWithOrgApacheLuceneUtilBytesRef:current_];
-    JreAssert((status == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND)), (@"org/apache/lucene/index/MultiTermsEnum.java:295 condition failed: assert status == SeekStatus.FOUND;"));
+    JreAssert(status == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND), @"org/apache/lucene/index/MultiTermsEnum.java:295 condition failed: assert status == SeekStatus.FOUND;");
     lastSeekExact_ = false;
   }
   JreStrongAssign(&lastSeek_, nil);
@@ -343,9 +365,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
   OrgApacheLuceneUtilArrayUtil_timSortWithNSObjectArray_withInt_withInt_withJavaUtilComparator_(top_, 0, numTop_, OrgApacheLuceneIndexMultiTermsEnum_INDEX_COMPARATOR);
   for (jint i = 0; i < numTop_; i++) {
     OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *entry_ = IOSObjectArray_Get(nil_chk(top_), i);
-    JreAssert((((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(entry_))->index_ < ((IOSObjectArray *) nil_chk(docsEnum->subPostingsEnums_))->size_), (JreStrcat("I$I$I", entry_->index_, @" vs ", docsEnum->subPostingsEnums_->size_, @"; ", ((IOSObjectArray *) nil_chk(subs_))->size_)));
+    JreAssert(((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(entry_))->index_ < ((IOSObjectArray *) nil_chk(docsEnum->subPostingsEnums_))->size_, JreStrcat("I$I$I", entry_->index_, @" vs ", docsEnum->subPostingsEnums_->size_, @"; ", ((IOSObjectArray *) nil_chk(subs_))->size_));
     OrgApacheLuceneIndexPostingsEnum *subPostingsEnum = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(entry_->terms_)) postingsWithOrgApacheLuceneIndexPostingsEnum:IOSObjectArray_Get(docsEnum->subPostingsEnums_, entry_->index_) withInt:flags];
-    JreAssert((subPostingsEnum != nil), (@"org/apache/lucene/index/MultiTermsEnum.java:360 condition failed: assert subPostingsEnum != null;"));
+    JreAssert(subPostingsEnum != nil, @"org/apache/lucene/index/MultiTermsEnum.java:360 condition failed: assert subPostingsEnum != null;");
     IOSObjectArray_Set(docsEnum->subPostingsEnums_, entry_->index_, subPostingsEnum);
     JreStrongAssign(&((OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice *) nil_chk(IOSObjectArray_Get(nil_chk(subDocs_), upto)))->postingsEnum_, subPostingsEnum);
     JreStrongAssign(&((OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice *) nil_chk(IOSObjectArray_Get(subDocs_, upto)))->slice_, entry_->subSlice_);
@@ -370,49 +392,69 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
   [super dealloc];
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneIndexMultiTermsEnum class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneIndexMultiTermsEnum_INDEX_COMPARATOR, new_OrgApacheLuceneIndexMultiTermsEnum_$1_init());
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMultiTermsEnum)
-  }
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum_SeekStatus;", 0x1, 6, 5, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 7, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 8, 9, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 10, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getMatchCount);
+  methods[1].selector = @selector(getMatchArray);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexReaderSliceArray:);
+  methods[3].selector = @selector(term);
+  methods[4].selector = @selector(resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:);
+  methods[5].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:);
+  methods[6].selector = @selector(seekCeilWithOrgApacheLuceneUtilBytesRef:);
+  methods[7].selector = @selector(seekExactWithLong:);
+  methods[8].selector = @selector(ord);
+  methods[9].selector = @selector(pullTop);
+  methods[10].selector = @selector(pushTop);
+  methods[11].selector = @selector(next);
+  methods[12].selector = @selector(docFreq);
+  methods[13].selector = @selector(totalTermFreq);
+  methods[14].selector = @selector(postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:);
+  methods[15].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INDEX_COMPARATOR", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x1a, -1, 11, 12, -1 },
+    { "queue_", "LOrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "subs_", "[LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentSubs_", "[LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "top_", "[LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "subDocs_", "[LOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lastSeek_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastSeekExact_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastSeekScratch_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numTop_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numSubs_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "current_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneIndexReaderSlice;", "reset", "[LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex;", "LJavaIoIOException;", "seekExact", "LOrgApacheLuceneUtilBytesRef;", "seekCeil", "J", "postings", "LOrgApacheLuceneIndexPostingsEnum;I", "toString", &OrgApacheLuceneIndexMultiTermsEnum_INDEX_COMPARATOR, "Ljava/util/Comparator<Lorg/apache/lucene/index/MultiTermsEnum$TermsEnumWithSlice;>;", "LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex;LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;LOrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum = { "MultiTermsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 16, 12, -1, 13, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiTermsEnum;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getMatchCount", NULL, "I", 0x1, NULL, NULL },
-    { "getMatchArray", NULL, "[Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumWithSlice;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexReaderSliceArray:", "MultiTermsEnum", NULL, 0x1, NULL, NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:", "reset", "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, NULL, NULL },
-    { "ord", NULL, "J", 0x1, NULL, NULL },
-    { "pullTop", NULL, "V", 0x2, NULL, NULL },
-    { "pushTop", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "docFreq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "totalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "INDEX_COMPARATOR", "INDEX_COMPARATOR", 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneIndexMultiTermsEnum_INDEX_COMPARATOR, "Ljava/util/Comparator<Lorg/apache/lucene/index/MultiTermsEnum$TermsEnumWithSlice;>;", .constantValue.asLong = 0 },
-    { "queue_", NULL, 0x12, "Lorg.apache.lucene.index.MultiTermsEnum$TermMergeQueue;", NULL, NULL, .constantValue.asLong = 0 },
-    { "subs_", NULL, 0x12, "[Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumWithSlice;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentSubs_", NULL, 0x12, "[Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumWithSlice;", NULL, NULL, .constantValue.asLong = 0 },
-    { "top_", NULL, 0x12, "[Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumWithSlice;", NULL, NULL, .constantValue.asLong = 0 },
-    { "subDocs_", NULL, 0x12, "[Lorg.apache.lucene.index.MultiPostingsEnum$EnumWithSlice;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastSeek_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastSeekExact_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastSeekScratch_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numTop_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numSubs_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumIndex;", "Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumWithSlice;", "Lorg.apache.lucene.index.MultiTermsEnum$TermMergeQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum = { 2, "MultiTermsEnum", "org.apache.lucene.index", NULL, 0x11, 16, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneIndexMultiTermsEnum;
++ (void)initialize {
+  if (self == [OrgApacheLuceneIndexMultiTermsEnum class]) {
+    JreStrongAssignAndConsume(&OrgApacheLuceneIndexMultiTermsEnum_INDEX_COMPARATOR, new_OrgApacheLuceneIndexMultiTermsEnum_1_init());
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMultiTermsEnum)
+  }
 }
 
 @end
@@ -441,14 +483,14 @@ OrgApacheLuceneIndexMultiTermsEnum *create_OrgApacheLuceneIndexMultiTermsEnum_in
 }
 
 void OrgApacheLuceneIndexMultiTermsEnum_pullTop(OrgApacheLuceneIndexMultiTermsEnum *self) {
-  JreAssert((self->numTop_ == 0), (@"org/apache/lucene/index/MultiTermsEnum.java:266 condition failed: assert numTop == 0;"));
+  JreAssert(self->numTop_ == 0, @"org/apache/lucene/index/MultiTermsEnum.java:266 condition failed: assert numTop == 0;");
   self->numTop_ = [((OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue *) nil_chk(self->queue_)) fillTopWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSliceArray:self->top_];
   JreStrongAssign(&self->current_, ((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(nil_chk(self->top_), 0)))->current_);
 }
 
 void OrgApacheLuceneIndexMultiTermsEnum_pushTop(OrgApacheLuceneIndexMultiTermsEnum *self) {
   for (jint i = 0; i < self->numTop_; i++) {
-    OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *top = [((OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue *) nil_chk(self->queue_)) top];
+    OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *top = JreRetainedLocalValue([((OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue *) nil_chk(self->queue_)) top]);
     JreStrongAssign(&((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(top))->current_, [((OrgApacheLuceneIndexTermsEnum *) nil_chk(top->terms_)) next]);
     if (top->current_ == nil) {
       [self->queue_ pop];
@@ -461,6 +503,79 @@ void OrgApacheLuceneIndexMultiTermsEnum_pushTop(OrgApacheLuceneIndexMultiTermsEn
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiTermsEnum)
+
+@implementation OrgApacheLuceneIndexMultiTermsEnum_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneIndexMultiTermsEnum_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (jint)compareWithId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)o1
+               withId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)o2 {
+  return ((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(o1))->index_ - ((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(o2))->index_;
+}
+
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compare", "LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;", "LOrgApacheLuceneIndexMultiTermsEnum;", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/index/MultiTermsEnum$TermsEnumWithSlice;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum_1 = { "", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, -1, 3, -1 };
+  return &_OrgApacheLuceneIndexMultiTermsEnum_1;
+}
+
+@end
+
+void OrgApacheLuceneIndexMultiTermsEnum_1_init(OrgApacheLuceneIndexMultiTermsEnum_1 *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneIndexMultiTermsEnum_1 *new_OrgApacheLuceneIndexMultiTermsEnum_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiTermsEnum_1, init)
+}
+
+OrgApacheLuceneIndexMultiTermsEnum_1 *create_OrgApacheLuceneIndexMultiTermsEnum_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiTermsEnum_1, init)
+}
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex)
 
@@ -483,24 +598,30 @@ IOSObjectArray *OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_EMPTY_ARRAY;
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTermsEnum:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_ARRAY", "[LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex;", .constantValue.asLong = 0, 0x19, -1, 1, -1, -1 },
+    { "subIndex_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "termsEnum_", "LOrgApacheLuceneIndexTermsEnum;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTermsEnum;I", &OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_EMPTY_ARRAY, "LOrgApacheLuceneIndexMultiTermsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex = { "TermsEnumIndex", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8, 1, 3, 2, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_EMPTY_ARRAY, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsEnum:withInt:", "TermsEnumIndex", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_ARRAY", "EMPTY_ARRAY", 0x19, "[Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumIndex;", &OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_EMPTY_ARRAY, NULL, .constantValue.asLong = 0 },
-    { "subIndex_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termsEnum_", NULL, 0x10, "Lorg.apache.lucene.index.TermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex = { 2, "TermsEnumIndex", "org.apache.lucene.index", "MultiTermsEnum", 0x8, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex;
 }
 
 @end
@@ -547,18 +668,26 @@ withOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)subSlice 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneIndexReaderSlice:", "TermsEnumWithSlice", NULL, 0x1, NULL, NULL },
-    { "resetWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilBytesRef:", "reset", "V", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withOrgApacheLuceneIndexReaderSlice:);
+  methods[1].selector = @selector(resetWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "subSlice_", NULL, 0x12, "Lorg.apache.lucene.index.ReaderSlice;", NULL, NULL, .constantValue.asLong = 0 },
-    { "terms_", NULL, 0x0, "Lorg.apache.lucene.index.TermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x1, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "index_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "subSlice_", "LOrgApacheLuceneIndexReaderSlice;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "terms_", "LOrgApacheLuceneIndexTermsEnum;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "current_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "index_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice = { 2, "TermsEnumWithSlice", "org.apache.lucene.index", "MultiTermsEnum", 0x18, 3, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ILOrgApacheLuceneIndexReaderSlice;", "reset", "LOrgApacheLuceneIndexTermsEnum;LOrgApacheLuceneUtilBytesRef;", "toString", "LOrgApacheLuceneIndexMultiTermsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice = { "TermsEnumWithSlice", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x18, 3, 4, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;
 }
 
@@ -568,7 +697,7 @@ void OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice_initWithInt_withOrgAp
   NSObject_init(self);
   JreStrongAssign(&self->subSlice_, subSlice);
   self->index_ = index;
-  JreAssert((((OrgApacheLuceneIndexReaderSlice *) nil_chk(subSlice))->length_ >= 0), (JreStrcat("$I", @"length=", subSlice->length_)));
+  JreAssert(((OrgApacheLuceneIndexReaderSlice *) nil_chk(subSlice))->length_ >= 0, JreStrcat("$I", @"length=", subSlice->length_));
 }
 
 OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *new_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice_initWithInt_withOrgApacheLuceneIndexReaderSlice_(jint index, OrgApacheLuceneIndexReaderSlice *subSlice) {
@@ -626,17 +755,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWit
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TermMergeQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/index/MultiTermsEnum$TermsEnumWithSlice;Lorg/apache/lucene/index/MultiTermsEnum$TermsEnumWithSlice;)Z" },
-    { "fillTopWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSliceArray:", "fillTop", "I", 0x0, NULL, NULL },
-    { "getWithInt:", "get", "Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumWithSlice;", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;", 0x2, 5, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  methods[2].selector = @selector(fillTopWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSliceArray:);
+  methods[3].selector = @selector(getWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stack_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "stack_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumWithSlice;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue = { 2, "TermMergeQueue", "org.apache.lucene.index", "MultiTermsEnum", 0x1a, 4, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/index/MultiTermsEnum$TermsEnumWithSlice;>;" };
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;", "fillTop", "[LOrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice;", "get", "LOrgApacheLuceneIndexMultiTermsEnum;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/index/MultiTermsEnum$TermsEnumWithSlice;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue = { "TermMergeQueue", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1a, 4, 1, 6, -1, -1, 7, -1 };
   return &_OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue;
 }
 
@@ -660,42 +797,3 @@ OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *OrgApacheLuceneIndexMulti
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue)
-
-@implementation OrgApacheLuceneIndexMultiTermsEnum_$1
-
-- (jint)compareWithId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)o1
-               withId:(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *)o2 {
-  return ((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(o1))->index_ - ((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(o2))->index_;
-}
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexMultiTermsEnum_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum_$1 = { 2, "", "org.apache.lucene.index", "MultiTermsEnum", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/index/MultiTermsEnum$TermsEnumWithSlice;>;" };
-  return &_OrgApacheLuceneIndexMultiTermsEnum_$1;
-}
-
-@end
-
-void OrgApacheLuceneIndexMultiTermsEnum_$1_init(OrgApacheLuceneIndexMultiTermsEnum_$1 *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneIndexMultiTermsEnum_$1 *new_OrgApacheLuceneIndexMultiTermsEnum_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiTermsEnum_$1, init)
-}
-
-OrgApacheLuceneIndexMultiTermsEnum_$1 *create_OrgApacheLuceneIndexMultiTermsEnum_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiTermsEnum_$1, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiTermsEnum_$1)

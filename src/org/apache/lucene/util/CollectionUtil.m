@@ -16,6 +16,10 @@
 #include "org/apache/lucene/util/IntroSorter.h"
 #include "org/apache/lucene/util/TimSorter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/CollectionUtil must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilCollectionUtil ()
 
 - (instancetype)init;
@@ -24,9 +28,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneUtilCollectionUtil_init(OrgApacheLuceneUtilCollectionUtil *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil *new_OrgApacheLuceneUtilCollectionUtil_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil *new_OrgApacheLuceneUtilCollectionUtil_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil *create_OrgApacheLuceneUtilCollectionUtil_init();
+__attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil *create_OrgApacheLuceneUtilCollectionUtil_init(void);
 
 @interface OrgApacheLuceneUtilCollectionUtil_ListIntroSorter : OrgApacheLuceneUtilIntroSorter {
  @public
@@ -137,15 +141,24 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CollectionUtil", NULL, 0x2, NULL, NULL },
-    { "introSortWithJavaUtilList:withJavaUtilComparator:", "introSort", "V", 0x9, NULL, "<T:Ljava/lang/Object;>(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;)V" },
-    { "introSortWithJavaUtilList:", "introSort", "V", 0x9, NULL, "<T::Ljava/lang/Comparable<-TT;>;>(Ljava/util/List<TT;>;)V" },
-    { "timSortWithJavaUtilList:withJavaUtilComparator:", "timSort", "V", 0x9, NULL, "<T:Ljava/lang/Object;>(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;)V" },
-    { "timSortWithJavaUtilList:", "timSort", "V", 0x9, NULL, "<T::Ljava/lang/Comparable<-TT;>;>(Ljava/util/List<TT;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 0, 1, -1, 2, -1, -1 },
+    { NULL, "V", 0x9, 0, 3, -1, 4, -1, -1 },
+    { NULL, "V", 0x9, 5, 1, -1, 2, -1, -1 },
+    { NULL, "V", 0x9, 5, 3, -1, 4, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.CollectionUtil$ListIntroSorter;", "Lorg.apache.lucene.util.CollectionUtil$ListTimSorter;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilCollectionUtil = { 2, "CollectionUtil", "org.apache.lucene.util", NULL, 0x11, 5, methods, 0, NULL, 0, NULL, 2, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(introSortWithJavaUtilList:withJavaUtilComparator:);
+  methods[2].selector = @selector(introSortWithJavaUtilList:);
+  methods[3].selector = @selector(timSortWithJavaUtilList:withJavaUtilComparator:);
+  methods[4].selector = @selector(timSortWithJavaUtilList:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "introSort", "LJavaUtilList;LJavaUtilComparator;", "<T:Ljava/lang/Object;>(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;)V", "LJavaUtilList;", "<T::Ljava/lang/Comparable<-TT;>;>(Ljava/util/List<TT;>;)V", "timSort", "LOrgApacheLuceneUtilCollectionUtil_ListIntroSorter;LOrgApacheLuceneUtilCollectionUtil_ListTimSorter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilCollectionUtil = { "CollectionUtil", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x11, 5, 0, -1, 6, -1, -1, -1 };
   return &_OrgApacheLuceneUtilCollectionUtil;
 }
 
@@ -181,7 +194,7 @@ void OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_withJavaUtilCompa
   OrgApacheLuceneUtilCollectionUtil_initialize();
   jint size = [((id<JavaUtilList>) nil_chk(list)) size];
   if (size <= 1) return;
-  [create_OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(list, comp, [list size] / 64) sortWithInt:0 withInt:size];
+  [create_OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(list, comp, JreIntDiv([list size], 64)) sortWithInt:0 withInt:size];
 }
 
 void OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_(id<JavaUtilList> list) {
@@ -227,19 +240,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCollectionUtil)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withJavaUtilComparator:", "ListIntroSorter", NULL, 0x0, NULL, "(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;)V" },
-    { "setPivotWithInt:", "setPivot", "V", 0x4, NULL, NULL },
-    { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
-    { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "comparePivotWithInt:", "comparePivot", "I", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 6, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 7, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withJavaUtilComparator:);
+  methods[1].selector = @selector(setPivotWithInt:);
+  methods[2].selector = @selector(swapWithInt:withInt:);
+  methods[3].selector = @selector(compareWithInt:withInt:);
+  methods[4].selector = @selector(comparePivotWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "pivot_", NULL, 0x0, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
-    { "list_", NULL, 0x10, "Ljava.util.List;", NULL, "Ljava/util/List<TT;>;", .constantValue.asLong = 0 },
-    { "comp_", NULL, 0x10, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<-TT;>;", .constantValue.asLong = 0 },
+    { "pivot_", "LNSObject;", .constantValue.asLong = 0, 0x0, -1, -1, 8, -1 },
+    { "list_", "LJavaUtilList;", .constantValue.asLong = 0, 0x10, -1, -1, 9, -1 },
+    { "comp_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x10, -1, -1, 10, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilCollectionUtil_ListIntroSorter = { 2, "ListIntroSorter", "org.apache.lucene.util", "CollectionUtil", 0x1a, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/IntroSorter;" };
+  static const void *ptrTable[] = { "LJavaUtilList;LJavaUtilComparator;", "(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;)V", "setPivot", "I", "swap", "II", "compare", "comparePivot", "TT;", "Ljava/util/List<TT;>;", "Ljava/util/Comparator<-TT;>;", "LOrgApacheLuceneUtilCollectionUtil;", "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/IntroSorter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilCollectionUtil_ListIntroSorter = { "ListIntroSorter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1a, 5, 3, 11, -1, -1, 12, -1 };
   return &_OrgApacheLuceneUtilCollectionUtil_ListIntroSorter;
 }
 
@@ -311,21 +334,33 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCollectionUtil_ListIntroSort
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withJavaUtilComparator:withInt:", "ListTimSorter", NULL, 0x0, NULL, "(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;I)V" },
-    { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
-    { "copy__WithInt:withInt:", "copy", "V", 0x4, NULL, NULL },
-    { "saveWithInt:withInt:", "save", "V", 0x4, NULL, NULL },
-    { "restoreWithInt:withInt:", "restore", "V", 0x4, NULL, NULL },
-    { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "compareSavedWithInt:withInt:", "compareSaved", "I", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 5, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 6, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 7, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 8, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withJavaUtilComparator:withInt:);
+  methods[1].selector = @selector(swapWithInt:withInt:);
+  methods[2].selector = @selector(copy__WithInt:withInt:);
+  methods[3].selector = @selector(saveWithInt:withInt:);
+  methods[4].selector = @selector(restoreWithInt:withInt:);
+  methods[5].selector = @selector(compareWithInt:withInt:);
+  methods[6].selector = @selector(compareSavedWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "list_", NULL, 0x10, "Ljava.util.List;", NULL, "Ljava/util/List<TT;>;", .constantValue.asLong = 0 },
-    { "comp_", NULL, 0x10, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<-TT;>;", .constantValue.asLong = 0 },
-    { "tmp_", NULL, 0x10, "[Ljava.lang.Object;", NULL, "[TT;", .constantValue.asLong = 0 },
+    { "list_", "LJavaUtilList;", .constantValue.asLong = 0, 0x10, -1, -1, 9, -1 },
+    { "comp_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x10, -1, -1, 10, -1 },
+    { "tmp_", "[LNSObject;", .constantValue.asLong = 0, 0x10, -1, -1, 11, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilCollectionUtil_ListTimSorter = { 2, "ListTimSorter", "org.apache.lucene.util", "CollectionUtil", 0x1a, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/TimSorter;" };
+  static const void *ptrTable[] = { "LJavaUtilList;LJavaUtilComparator;I", "(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;I)V", "swap", "II", "copy", "save", "restore", "compare", "compareSaved", "Ljava/util/List<TT;>;", "Ljava/util/Comparator<-TT;>;", "[TT;", "LOrgApacheLuceneUtilCollectionUtil;", "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/TimSorter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilCollectionUtil_ListTimSorter = { "ListTimSorter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1a, 7, 3, 12, -1, -1, 13, -1 };
   return &_OrgApacheLuceneUtilCollectionUtil_ListTimSorter;
 }
 

@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/CachingCollector.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Math.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -26,6 +24,10 @@
 
 @class OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/CachingCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchCachingCollector () {
  @public
   jboolean cached_;
@@ -35,7 +37,7 @@
 
 @end
 
-inline jint OrgApacheLuceneSearchCachingCollector_get_INITIAL_ARRAY_SIZE();
+inline jint OrgApacheLuceneSearchCachingCollector_get_INITIAL_ARRAY_SIZE(void);
 #define OrgApacheLuceneSearchCachingCollector_INITIAL_ARRAY_SIZE 128
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchCachingCollector, INITIAL_ARRAY_SIZE, jint)
 
@@ -69,9 +71,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCachingCollector_CachedScorer)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_CachedScorer_init(OrgApacheLuceneSearchCachingCollector_CachedScorer *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_CachedScorer *new_OrgApacheLuceneSearchCachingCollector_CachedScorer_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_CachedScorer *new_OrgApacheLuceneSearchCachingCollector_CachedScorer_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_CachedScorer *create_OrgApacheLuceneSearchCachingCollector_CachedScorer_init();
+__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_CachedScorer *create_OrgApacheLuceneSearchCachingCollector_CachedScorer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_CachedScorer)
 
@@ -115,6 +117,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScor
 __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *new_OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *create_OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache);
+
+__attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_(OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *self, OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *collector);
 
 __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_postCollection(OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *self);
 
@@ -178,7 +182,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_ScoreCachingCol
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector, this$0_, OrgApacheLuceneSearchCachingCollector *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector, docs_, IOSIntArray *)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *self, OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache);
@@ -186,6 +189,12 @@ __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScor
 __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *new_OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *create_OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache);
+
+__attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_growWithInt_(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *self, jint newLen);
+
+__attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_invalidate(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *self);
+
+__attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_bufferWithInt_(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *self, jint doc);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector)
 
@@ -224,25 +233,23 @@ __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_ScoreCachin
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector)
 
-@interface OrgApacheLuceneSearchCachingCollector_$1 : OrgApacheLuceneSearchSimpleCollector
+@interface OrgApacheLuceneSearchCachingCollector_1 : OrgApacheLuceneSearchSimpleCollector
+
+- (instancetype)init;
 
 - (void)collectWithInt:(jint)doc;
 
 - (jboolean)needsScores;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCachingCollector_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCachingCollector_1)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_$1_init(OrgApacheLuceneSearchCachingCollector_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_1_init(OrgApacheLuceneSearchCachingCollector_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_$1 *new_OrgApacheLuceneSearchCachingCollector_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_1 *new_OrgApacheLuceneSearchCachingCollector_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_$1 *create_OrgApacheLuceneSearchCachingCollector_$1_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_1 *create_OrgApacheLuceneSearchCachingCollector_1_init(void);
 
 @implementation OrgApacheLuceneSearchCachingCollector
 
@@ -278,20 +285,30 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "createWithBoolean:withDouble:", "create", "Lorg.apache.lucene.search.CachingCollector;", 0x9, NULL, NULL },
-    { "createWithOrgApacheLuceneSearchCollector:withBoolean:withDouble:", "create", "Lorg.apache.lucene.search.CachingCollector;", 0x9, NULL, NULL },
-    { "createWithOrgApacheLuceneSearchCollector:withBoolean:withInt:", "create", "Lorg.apache.lucene.search.CachingCollector;", 0x9, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchCollector:", "CachingCollector", NULL, 0x2, NULL, NULL },
-    { "isCached", NULL, "Z", 0x11, NULL, NULL },
-    { "replayWithOrgApacheLuceneSearchCollector:", "replay", "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneSearchCachingCollector;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchCachingCollector;", 0x9, 0, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchCachingCollector;", 0x9, 0, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 5, 4, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(createWithBoolean:withDouble:);
+  methods[1].selector = @selector(createWithOrgApacheLuceneSearchCollector:withBoolean:withDouble:);
+  methods[2].selector = @selector(createWithOrgApacheLuceneSearchCollector:withBoolean:withInt:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneSearchCollector:);
+  methods[4].selector = @selector(isCached);
+  methods[5].selector = @selector(replayWithOrgApacheLuceneSearchCollector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "INITIAL_ARRAY_SIZE", "INITIAL_ARRAY_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchCachingCollector_INITIAL_ARRAY_SIZE },
-    { "cached_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "INITIAL_ARRAY_SIZE", "I", .constantValue.asInt = OrgApacheLuceneSearchCachingCollector_INITIAL_ARRAY_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "cached_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.CachingCollector$CachedScorer;", "Lorg.apache.lucene.search.CachingCollector$NoScoreCachingCollector;", "Lorg.apache.lucene.search.CachingCollector$ScoreCachingCollector;", "Lorg.apache.lucene.search.CachingCollector$NoScoreCachingLeafCollector;", "Lorg.apache.lucene.search.CachingCollector$ScoreCachingLeafCollector;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector = { 2, "CachingCollector", "org.apache.lucene.search", NULL, 0x401, 6, methods, 2, fields, 0, NULL, 5, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "create", "ZD", "LOrgApacheLuceneSearchCollector;ZD", "LOrgApacheLuceneSearchCollector;ZI", "LOrgApacheLuceneSearchCollector;", "replay", "LJavaIoIOException;", "LOrgApacheLuceneSearchCachingCollector_CachedScorer;LOrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector;LOrgApacheLuceneSearchCachingCollector_ScoreCachingCollector;LOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector;LOrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector = { "CachingCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 6, 2, -1, 7, -1, -1, -1 };
   return &_OrgApacheLuceneSearchCachingCollector;
 }
 
@@ -299,7 +316,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_$1)
 
 OrgApacheLuceneSearchCachingCollector *OrgApacheLuceneSearchCachingCollector_createWithBoolean_withDouble_(jboolean cacheScores, jdouble maxRAMMB) {
   OrgApacheLuceneSearchCachingCollector_initialize();
-  id<OrgApacheLuceneSearchCollector> other = create_OrgApacheLuceneSearchCachingCollector_$1_init();
+  id<OrgApacheLuceneSearchCollector> other = create_OrgApacheLuceneSearchCachingCollector_1_init();
   return OrgApacheLuceneSearchCachingCollector_createWithOrgApacheLuceneSearchCollector_withBoolean_withDouble_(other, cacheScores, maxRAMMB);
 }
 
@@ -363,20 +380,32 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CachedScorer", NULL, 0x2, NULL, NULL },
-    { "score", NULL, "F", 0x11, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x11, NULL, NULL },
-    { "docID", NULL, "I", 0x11, NULL, NULL },
-    { "freq", NULL, "I", 0x11, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x11, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(score);
+  methods[2].selector = @selector(advanceWithInt:);
+  methods[3].selector = @selector(docID);
+  methods[4].selector = @selector(freq);
+  methods[5].selector = @selector(nextDoc);
+  methods[6].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "score_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "score_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_CachedScorer = { 2, "CachedScorer", "org.apache.lucene.search", "CachingCollector", 0x1a, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "advance", "I", "LOrgApacheLuceneSearchCachingCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_CachedScorer = { "CachedScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1a, 7, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchCachingCollector_CachedScorer;
 }
 
@@ -430,9 +459,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_CachedSco
 }
 
 - (void)postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector:(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *)collector {
-  IOSIntArray *docs = [((OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *) nil_chk(collector)) cachedDocs];
-  maxDocsToCache_ -= ((IOSIntArray *) nil_chk(docs))->size_;
-  [((id<JavaUtilList>) nil_chk(self->docs_)) addWithId:docs];
+  OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_(self, collector);
 }
 
 - (void)postCollection {
@@ -458,7 +485,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_CachedSco
   if (!OrgApacheLuceneSearchCachingCollector_isCached(self)) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"cannot replay: cache was cleared because too much RAM was required");
   }
-  JreAssert(([((id<JavaUtilList>) nil_chk(docs_)) size] == [((id<JavaUtilList>) nil_chk(contexts_)) size]), (@"org/apache/lucene/search/CachingCollector.java:150 condition failed: assert docs.size() == contexts.size();"));
+  JreAssert([((id<JavaUtilList>) nil_chk(docs_)) size] == [((id<JavaUtilList>) nil_chk(contexts_)) size], @"org/apache/lucene/search/CachingCollector.java:150 condition failed: assert docs.size() == contexts.size();");
   for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(contexts_)) size]; ++i) {
     OrgApacheLuceneIndexLeafReaderContext *context = [((id<JavaUtilList>) nil_chk(contexts_)) getWithInt:i];
     id<OrgApacheLuceneSearchLeafCollector> collector = [((id<OrgApacheLuceneSearchCollector>) nil_chk(other)) getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context];
@@ -474,23 +501,36 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_CachedSco
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchCollector:withInt:", "NoScoreCachingCollector", NULL, 0x0, NULL, NULL },
-    { "wrapWithOrgApacheLuceneSearchLeafCollector:withInt:", "wrap", "Lorg.apache.lucene.search.CachingCollector$NoScoreCachingLeafCollector;", 0x4, NULL, NULL },
-    { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
-    { "invalidate", NULL, "V", 0x4, NULL, NULL },
-    { "postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector:", "postCollect", "V", 0x4, NULL, NULL },
-    { "postCollection", NULL, "V", 0x2, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchLeafCollector:withInt:", "collect", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "replayWithOrgApacheLuceneSearchCollector:", "replay", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchLeafCollector;", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 8, 2, 5, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, 5, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchCollector:withInt:);
+  methods[1].selector = @selector(wrapWithOrgApacheLuceneSearchLeafCollector:withInt:);
+  methods[2].selector = @selector(getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(invalidate);
+  methods[4].selector = @selector(postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector:);
+  methods[5].selector = @selector(postCollection);
+  methods[6].selector = @selector(collectWithOrgApacheLuceneSearchLeafCollector:withInt:);
+  methods[7].selector = @selector(replayWithOrgApacheLuceneSearchCollector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "contexts_", NULL, 0x0, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", .constantValue.asLong = 0 },
-    { "docs_", NULL, 0x0, "Ljava.util.List;", NULL, "Ljava/util/List<[LI;>;", .constantValue.asLong = 0 },
-    { "maxDocsToCache_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastCollector_", NULL, 0x0, "Lorg.apache.lucene.search.CachingCollector$NoScoreCachingLeafCollector;", NULL, NULL, .constantValue.asLong = 0 },
+    { "contexts_", "LJavaUtilList;", .constantValue.asLong = 0, 0x0, -1, -1, 11, -1 },
+    { "docs_", "LJavaUtilList;", .constantValue.asLong = 0, 0x0, -1, -1, 12, -1 },
+    { "maxDocsToCache_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastCollector_", "LOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector = { 2, "NoScoreCachingCollector", "org.apache.lucene.search", "CachingCollector", 0xa, 8, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchCollector;I", "wrap", "LOrgApacheLuceneSearchLeafCollector;I", "getLeafCollector", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "postCollect", "LOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector;", "collect", "replay", "LOrgApacheLuceneSearchCollector;", "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", "Ljava/util/List<[I>;", "LOrgApacheLuceneSearchCachingCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector = { "NoScoreCachingCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 8, 4, 13, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector;
 }
 
@@ -509,6 +549,12 @@ OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *new_OrgApacheLuce
 
 OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *create_OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector, initWithOrgApacheLuceneSearchCollector_withInt_, inArg, maxDocsToCache)
+}
+
+void OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_(OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *self, OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *collector) {
+  IOSIntArray *docs = [((OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *) nil_chk(collector)) cachedDocs];
+  self->maxDocsToCache_ -= ((IOSIntArray *) nil_chk(docs))->size_;
+  [((id<JavaUtilList>) nil_chk(self->docs_)) addWithId:docs];
 }
 
 void OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_postCollection(OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *self) {
@@ -540,7 +586,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_NoScoreCa
 
 - (void)postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector:(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *)collector {
   OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *coll = (OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *) cast_chk(collector, [OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector class]);
-  [super postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector:coll];
+  OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_(self, coll);
   [((id<JavaUtilList>) nil_chk(scores_)) addWithId:[((OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *) nil_chk(coll)) cachedScores]];
 }
 
@@ -548,7 +594,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_NoScoreCa
                                               withInt:(jint)i {
   IOSIntArray *docs = [((id<JavaUtilList>) nil_chk(self->docs_)) getWithInt:i];
   IOSFloatArray *scores = [((id<JavaUtilList>) nil_chk(self->scores_)) getWithInt:i];
-  JreAssert((((IOSIntArray *) nil_chk(docs))->size_ == ((IOSFloatArray *) nil_chk(scores))->size_), (@"org/apache/lucene/search/CachingCollector.java:183 condition failed: assert docs.length == scores.length;"));
+  JreAssert(((IOSIntArray *) nil_chk(docs))->size_ == ((IOSFloatArray *) nil_chk(scores))->size_, @"org/apache/lucene/search/CachingCollector.java:183 condition failed: assert docs.length == scores.length;");
   OrgApacheLuceneSearchCachingCollector_CachedScorer *scorer = create_OrgApacheLuceneSearchCachingCollector_CachedScorer_init();
   [((id<OrgApacheLuceneSearchLeafCollector>) nil_chk(collector)) setScorerWithOrgApacheLuceneSearchScorer:scorer];
   for (jint j = 0; j < docs->size_; ++j) {
@@ -564,16 +610,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_NoScoreCa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchCollector:withInt:", "ScoreCachingCollector", NULL, 0x0, NULL, NULL },
-    { "wrapWithOrgApacheLuceneSearchLeafCollector:withInt:", "wrap", "Lorg.apache.lucene.search.CachingCollector$NoScoreCachingLeafCollector;", 0x4, NULL, NULL },
-    { "postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector:", "postCollect", "V", 0x4, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchLeafCollector:withInt:", "collect", "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 5, 2, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchCollector:withInt:);
+  methods[1].selector = @selector(wrapWithOrgApacheLuceneSearchLeafCollector:withInt:);
+  methods[2].selector = @selector(postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector:);
+  methods[3].selector = @selector(collectWithOrgApacheLuceneSearchLeafCollector:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "scores_", NULL, 0x0, "Ljava.util.List;", NULL, "Ljava/util/List<[LF;>;", .constantValue.asLong = 0 },
+    { "scores_", "LJavaUtilList;", .constantValue.asLong = 0, 0x0, -1, -1, 7, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector = { 2, "ScoreCachingCollector", "org.apache.lucene.search", "CachingCollector", 0xa, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchCollector;I", "wrap", "LOrgApacheLuceneSearchLeafCollector;I", "postCollect", "LOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector;", "collect", "LJavaIoIOException;", "Ljava/util/List<[F>;", "LOrgApacheLuceneSearchCachingCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector = { "ScoreCachingCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 4, 1, 8, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector;
 }
 
@@ -604,17 +659,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_ScoreCach
 }
 
 - (void)growWithInt:(jint)newLen {
-  JreStrongAssign(&docs_, JavaUtilArrays_copyOfWithIntArray_withInt_(docs_, newLen));
+  OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_growWithInt_(self, newLen);
 }
 
 - (void)invalidate {
-  JreStrongAssign(&docs_, nil);
-  docCount_ = -1;
-  this$0_->cached_ = false;
+  OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_invalidate(self);
 }
 
 - (void)bufferWithInt:(jint)doc {
-  *IOSIntArray_GetRef(nil_chk(docs_), docCount_) = doc;
+  OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_bufferWithInt_(self, doc);
 }
 
 - (void)collectWithInt:(jint)doc {
@@ -651,22 +704,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_ScoreCach
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchCachingCollector:withOrgApacheLuceneSearchLeafCollector:withInt:", "NoScoreCachingLeafCollector", NULL, 0x0, NULL, NULL },
-    { "growWithInt:", "grow", "V", 0x4, NULL, NULL },
-    { "invalidate", NULL, "V", 0x4, NULL, NULL },
-    { "bufferWithInt:", "buffer", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "hasCache", NULL, "Z", 0x0, NULL, NULL },
-    { "cachedDocs", NULL, "[I", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 2, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 2, 4, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[I", 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchCachingCollector:withOrgApacheLuceneSearchLeafCollector:withInt:);
+  methods[1].selector = @selector(growWithInt:);
+  methods[2].selector = @selector(invalidate);
+  methods[3].selector = @selector(bufferWithInt:);
+  methods[4].selector = @selector(collectWithInt:);
+  methods[5].selector = @selector(hasCache);
+  methods[6].selector = @selector(cachedDocs);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.CachingCollector;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDocsToCache_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docs_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docCount_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchCachingCollector;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "maxDocsToCache_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docs_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "docCount_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector = { 2, "NoScoreCachingLeafCollector", "org.apache.lucene.search", "CachingCollector", 0x2, 7, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchCachingCollector;LOrgApacheLuceneSearchLeafCollector;I", "grow", "I", "buffer", "LJavaIoIOException;", "collect", "LOrgApacheLuceneSearchCachingCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector = { "NoScoreCachingLeafCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x2, 7, 4, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector;
 }
 
@@ -688,6 +753,20 @@ OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *create_OrgApa
   J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector, initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_, outer$, inArg, maxDocsToCache)
 }
 
+void OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_growWithInt_(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *self, jint newLen) {
+  JreStrongAssign(&self->docs_, JavaUtilArrays_copyOfWithIntArray_withInt_(self->docs_, newLen));
+}
+
+void OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_invalidate(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *self) {
+  JreStrongAssign(&self->docs_, nil);
+  self->docCount_ = -1;
+  self->this$0_->cached_ = false;
+}
+
+void OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_bufferWithInt_(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *self, jint doc) {
+  *IOSIntArray_GetRef(nil_chk(self->docs_), self->docCount_) = doc;
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector)
 
 @implementation OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector
@@ -705,17 +784,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_NoScoreCa
 }
 
 - (void)growWithInt:(jint)newLen {
-  [super growWithInt:newLen];
+  OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_growWithInt_(self, newLen);
   JreStrongAssign(&scores_, JavaUtilArrays_copyOfWithFloatArray_withInt_(scores_, newLen));
 }
 
 - (void)invalidate {
-  [super invalidate];
+  OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_invalidate(self);
   JreStrongAssign(&scores_, nil);
 }
 
 - (void)bufferWithInt:(jint)doc {
-  [super bufferWithInt:doc];
+  OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_bufferWithInt_(self, doc);
   *IOSFloatArray_GetRef(nil_chk(scores_), docCount_) = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
 }
 
@@ -730,19 +809,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_NoScoreCa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchCachingCollector:withOrgApacheLuceneSearchLeafCollector:withInt:", "ScoreCachingLeafCollector", NULL, 0x0, NULL, NULL },
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "growWithInt:", "grow", "V", 0x4, NULL, NULL },
-    { "invalidate", NULL, "V", 0x4, NULL, NULL },
-    { "bufferWithInt:", "buffer", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "cachedScores", NULL, "[F", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 6, 5, 3, -1, -1, -1 },
+    { NULL, "[F", 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchCachingCollector:withOrgApacheLuceneSearchLeafCollector:withInt:);
+  methods[1].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  methods[2].selector = @selector(growWithInt:);
+  methods[3].selector = @selector(invalidate);
+  methods[4].selector = @selector(bufferWithInt:);
+  methods[5].selector = @selector(cachedScores);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "scorer_", NULL, 0x0, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scores_", NULL, 0x0, "[F", NULL, NULL, .constantValue.asLong = 0 },
+    { "scorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "scores_", "[F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector = { 2, "ScoreCachingLeafCollector", "org.apache.lucene.search", "CachingCollector", 0x2, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchCachingCollector;LOrgApacheLuceneSearchLeafCollector;I", "setScorer", "LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "grow", "I", "buffer", "LOrgApacheLuceneSearchCachingCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector = { "ScoreCachingLeafCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x2, 6, 2, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector;
 }
 
@@ -763,7 +853,14 @@ OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *create_OrgApach
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector)
 
-@implementation OrgApacheLuceneSearchCachingCollector_$1
+@implementation OrgApacheLuceneSearchCachingCollector_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchCachingCollector_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)collectWithInt:(jint)doc {
 }
@@ -772,36 +869,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_ScoreCach
   return true;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchCachingCollector_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "collectWithInt:", "collect", "V", 0x1, NULL, NULL },
-    { "needsScores", NULL, "Z", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchCachingCollector", "createWithBoolean:withDouble:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_$1 = { 2, "", "org.apache.lucene.search", "CachingCollector", 0x8008, 3, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchCachingCollector_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(collectWithInt:);
+  methods[2].selector = @selector(needsScores);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "collect", "I", "LOrgApacheLuceneSearchCachingCollector;", "createWithBoolean:withDouble:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_1 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x8018, 3, 0, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneSearchCachingCollector_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchCachingCollector_$1_init(OrgApacheLuceneSearchCachingCollector_$1 *self) {
+void OrgApacheLuceneSearchCachingCollector_1_init(OrgApacheLuceneSearchCachingCollector_1 *self) {
   OrgApacheLuceneSearchSimpleCollector_init(self);
 }
 
-OrgApacheLuceneSearchCachingCollector_$1 *new_OrgApacheLuceneSearchCachingCollector_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingCollector_$1, init)
+OrgApacheLuceneSearchCachingCollector_1 *new_OrgApacheLuceneSearchCachingCollector_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingCollector_1, init)
 }
 
-OrgApacheLuceneSearchCachingCollector_$1 *create_OrgApacheLuceneSearchCachingCollector_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingCollector_$1, init)
+OrgApacheLuceneSearchCachingCollector_1 *create_OrgApacheLuceneSearchCachingCollector_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingCollector_1, init)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_$1)

@@ -10,12 +10,14 @@
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/AutomatonQuery.h"
-#include "org/apache/lucene/search/MultiTermQuery.h"
 #include "org/apache/lucene/search/PrefixQuery.h"
-#include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/apache/lucene/util/automaton/Automaton.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/PrefixQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchPrefixQuery
 
@@ -52,7 +54,7 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) {
+  if (JreObjectEqualsEquals(self, obj)) {
     return true;
   }
   if (![super isEqual:obj]) {
@@ -66,15 +68,26 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:", "PrefixQuery", NULL, 0x1, NULL, NULL },
-    { "toAutomatonWithOrgApacheLuceneUtilBytesRef:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "getPrefix", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPrefixQuery = { 2, "PrefixQuery", "org.apache.lucene.search", NULL, 0x1, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:);
+  methods[1].selector = @selector(toAutomatonWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(getPrefix);
+  methods[3].selector = @selector(toStringWithNSString:);
+  methods[4].selector = @selector(hash);
+  methods[5].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;", "toAutomaton", "LOrgApacheLuceneUtilBytesRef;", "toString", "LNSString;", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPrefixQuery = { "PrefixQuery", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x1, 6, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPrefixQuery;
 }
 
@@ -107,7 +120,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchPrefixQuery_toAutoma
   [automaton setAcceptWithInt:lastState withBoolean:true];
   [automaton addTransitionWithInt:lastState withInt:lastState withInt:0 withInt:255];
   [automaton finishState];
-  JreAssert(([automaton isDeterministic]), (@"org/apache/lucene/search/PrefixQuery.java:55 condition failed: assert automaton.isDeterministic();"));
+  JreAssert([automaton isDeterministic], @"org/apache/lucene/search/PrefixQuery.java:55 condition failed: assert automaton.isDeterministic();");
   return automaton;
 }
 

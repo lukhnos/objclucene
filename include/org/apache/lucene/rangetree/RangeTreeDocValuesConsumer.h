@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer || defined(INCLUDE_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer))
 #define OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_
 
@@ -42,10 +48,10 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneCodecsDocValuesConsumer:(OrgApacheLuceneCodecsDocValuesConsumer *)delegate
-                     withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
-                                                       withInt:(jint)maxPointsInLeafNode
-                                                       withInt:(jint)maxPointsSortInHeap;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneCodecsDocValuesConsumer:(OrgApacheLuceneCodecsDocValuesConsumer *)delegate
+                                             withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
+                                                                               withInt:(jint)maxPointsInLeafNode
+                                                                               withInt:(jint)maxPointsSortInHeap;
 
 - (void)addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                    withJavaLangIterable:(id<JavaLangIterable>)values;
@@ -68,6 +74,10 @@
 
 - (void)close;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer)
@@ -77,14 +87,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer, out_, Or
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer, fieldIndexFPs_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer, state_, OrgApacheLuceneIndexSegmentWriteState *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_initWithOrgApacheLuceneCodecsDocValuesConsumer_withOrgApacheLuceneIndexSegmentWriteState_withInt_withInt_(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer *self, OrgApacheLuceneCodecsDocValuesConsumer *delegate, OrgApacheLuceneIndexSegmentWriteState *state, jint maxPointsInLeafNode, jint maxPointsSortInHeap);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_initPackagePrivateWithOrgApacheLuceneCodecsDocValuesConsumer_withOrgApacheLuceneIndexSegmentWriteState_withInt_withInt_(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer *self, OrgApacheLuceneCodecsDocValuesConsumer *delegate, OrgApacheLuceneIndexSegmentWriteState *state, jint maxPointsInLeafNode, jint maxPointsSortInHeap);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer *new_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_initWithOrgApacheLuceneCodecsDocValuesConsumer_withOrgApacheLuceneIndexSegmentWriteState_withInt_withInt_(OrgApacheLuceneCodecsDocValuesConsumer *delegate, OrgApacheLuceneIndexSegmentWriteState *state, jint maxPointsInLeafNode, jint maxPointsSortInHeap) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer *new_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_initPackagePrivateWithOrgApacheLuceneCodecsDocValuesConsumer_withOrgApacheLuceneIndexSegmentWriteState_withInt_withInt_(OrgApacheLuceneCodecsDocValuesConsumer *delegate, OrgApacheLuceneIndexSegmentWriteState *state, jint maxPointsInLeafNode, jint maxPointsSortInHeap) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer *create_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_initWithOrgApacheLuceneCodecsDocValuesConsumer_withOrgApacheLuceneIndexSegmentWriteState_withInt_withInt_(OrgApacheLuceneCodecsDocValuesConsumer *delegate, OrgApacheLuceneIndexSegmentWriteState *state, jint maxPointsInLeafNode, jint maxPointsSortInHeap);
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer *create_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_initPackagePrivateWithOrgApacheLuceneCodecsDocValuesConsumer_withOrgApacheLuceneIndexSegmentWriteState_withInt_withInt_(OrgApacheLuceneCodecsDocValuesConsumer *delegate, OrgApacheLuceneIndexSegmentWriteState *state, jint maxPointsInLeafNode, jint maxPointsSortInHeap);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer")

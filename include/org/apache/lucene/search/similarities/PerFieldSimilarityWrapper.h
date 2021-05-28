@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper))
 #define OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_
 
@@ -30,8 +36,8 @@
 /*!
  @brief Provides the ability to use a different <code>Similarity</code> for different fields.
  <p>
- Subclasses should implement <code>get(String)</code> to return an appropriate
- Similarity (for example, using field-specific parameter values) for the field.
+  Subclasses should implement <code>get(String)</code> to return an appropriate
+  Similarity (for example, using field-specific parameter values) for the field.
  */
 @interface OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper : OrgApacheLuceneSearchSimilaritiesSimilarity
 
@@ -40,9 +46,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.)
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jlong)computeNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
 
@@ -92,7 +98,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWr
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -103,12 +109,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_P
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *new_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *new_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *create_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *create_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper")

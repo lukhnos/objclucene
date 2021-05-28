@@ -8,6 +8,10 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/BooleanQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/StandardBooleanQueryNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/nodes/StandardBooleanQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode () {
  @public
   jboolean disableCoord_;
@@ -28,14 +32,21 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withBoolean:", "StandardBooleanQueryNode", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Z)V" },
-    { "isDisableCoord", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:withBoolean:);
+  methods[1].selector = @selector(isDisableCoord);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "disableCoord_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "disableCoord_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode = { 2, "StandardBooleanQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;Z", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Z)V" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode = { "StandardBooleanQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", ptrTable, methods, fields, 7, 0x1, 2, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode;
 }
 

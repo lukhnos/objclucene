@@ -7,6 +7,10 @@
 #include "J2ObjC_source.h"
 #include "org/lukhnos/portmobile/invoke/MethodType.h"
 
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/invoke/MethodType must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgLukhnosPortmobileInvokeMethodType
 
 - (instancetype)initWithIOSClass:(IOSClass *)clazz {
@@ -28,15 +32,23 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithIOSClass:", "MethodType", NULL, 0x0, NULL, "(Ljava/lang/Class<*>;)V" },
-    { "methodTypeWithIOSClass:", "methodType", "Lorg.lukhnos.portmobile.invoke.MethodType;", 0x9, NULL, "(Ljava/lang/Class<*>;)Lorg/lukhnos/portmobile/invoke/MethodType;" },
-    { "getType", NULL, "Ljava.lang.Class;", 0x1, NULL, "()Ljava/lang/Class<*>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileInvokeMethodType;", 0x9, 2, 0, -1, 3, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, 4, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIOSClass:);
+  methods[1].selector = @selector(methodTypeWithIOSClass:);
+  methods[2].selector = @selector(getType);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "clazz_", NULL, 0x0, "Ljava.lang.Class;", NULL, "Ljava/lang/Class<*>;", .constantValue.asLong = 0 },
+    { "clazz_", "LIOSClass;", .constantValue.asLong = 0, 0x0, -1, -1, 5, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodType = { 2, "MethodType", "org.lukhnos.portmobile.invoke", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LIOSClass;", "(Ljava/lang/Class<*>;)V", "methodType", "(Ljava/lang/Class<*>;)Lorg/lukhnos/portmobile/invoke/MethodType;", "()Ljava/lang/Class<*>;", "Ljava/lang/Class<*>;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodType = { "MethodType", "org.lukhnos.portmobile.invoke", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgLukhnosPortmobileInvokeMethodType;
 }
 

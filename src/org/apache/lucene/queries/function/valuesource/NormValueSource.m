@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/index/LeafReader.h"
@@ -14,39 +13,38 @@
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 #include "org/apache/lucene/queries/function/ValueSource.h"
 #include "org/apache/lucene/queries/function/docvalues/FloatDocValues.h"
-#include "org/apache/lucene/queries/function/valuesource/DocFreqValueSource.h"  // fixed by translate.py
+#include "org/apache/lucene/queries/function/valuesource/DocFreqValueSource.h"
 #include "org/apache/lucene/queries/function/valuesource/IDFValueSource.h"
 #include "org/apache/lucene/queries/function/valuesource/NormValueSource.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/similarities/Similarity.h"
 #include "org/apache/lucene/search/similarities/TFIDFSimilarity.h"
 
-@interface OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1 : OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/NormValueSource must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1 : OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues {
  @public
   OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *val$similarity_;
   OrgApacheLuceneIndexNumericDocValues *val$norms_;
 }
 
-- (jfloat)floatValWithInt:(jint)doc;
-
 - (instancetype)initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity:(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)capture$0
                                 withOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$1
-                           withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0;
+                           withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
+
+- (jfloat)floatValWithInt:(jint)doc;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1, val$similarity_, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1, val$norms_, OrgApacheLuceneIndexNumericDocValues *)
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1 *self, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1 *self, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1 *new_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1)
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1 *create_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceNormValueSource
 
@@ -77,20 +75,20 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
   }
   OrgApacheLuceneIndexNumericDocValues *norms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext)) reader])) getNormValuesWithNSString:field_];
   if (norms == nil) {
-    return create_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(0.0, self);
+    return create_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(0.0, self);
   }
-  return create_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(similarity, norms, self);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(similarity, norms, self);
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != (id) [nil_chk(o) getClass]) {
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(o) java_getClass])) {
     return false;
   }
   return [((NSString *) nil_chk(self->field_)) isEqual:((OrgApacheLuceneQueriesFunctionValuesourceNormValueSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceNormValueSource class]))->field_];
 }
 
 - (NSUInteger)hash {
-  return ((jint) [[self getClass] hash]) + ((jint) [((NSString *) nil_chk(field_)) hash]);
+  return ((jint) [[self java_getClass] hash]) + ((jint) [((NSString *) nil_chk(field_)) hash]);
 }
 
 - (void)dealloc {
@@ -99,19 +97,31 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "NormValueSource", NULL, 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x1, 5, 6, 4, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(description__);
+  methods[3].selector = @selector(createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:);
+  methods[4].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[5].selector = @selector(isEqual:);
+  methods[6].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceNormValueSource = { 2, "NormValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 7, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "description", "createWeight", "LJavaUtilMap;LOrgApacheLuceneSearchIndexSearcher;", "LJavaIoIOException;", "getValues", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "equals", "LNSObject;", "hashCode" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceNormValueSource = { "NormValueSource", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x1, 7, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource;
 }
 
@@ -132,17 +142,17 @@ OrgApacheLuceneQueriesFunctionValuesourceNormValueSource *create_OrgApacheLucene
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource)
 
-@implementation OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1
-
-- (jfloat)floatValWithInt:(jint)doc {
-  return [((OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *) nil_chk(val$similarity_)) decodeNormValueWithLong:[((OrgApacheLuceneIndexNumericDocValues *) nil_chk(val$norms_)) getWithInt:doc]];
-}
+@implementation OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1
 
 - (instancetype)initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity:(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)capture$0
                                 withOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$1
-                           withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0 {
-  OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(self, capture$0, capture$1, arg$0);
+                           withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs {
+  OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(self, capture$0, capture$1, vs);
   return self;
+}
+
+- (jfloat)floatValWithInt:(jint)doc {
+  return [((OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *) nil_chk(val$similarity_)) decodeNormValueWithLong:[((OrgApacheLuceneIndexNumericDocValues *) nil_chk(val$norms_)) getWithInt:doc]];
 }
 
 - (void)dealloc {
@@ -152,33 +162,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceNormVa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "floatValWithInt:", "floatVal", "F", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity:withOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneQueriesFunctionValueSource:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity:withOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(floatValWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$similarity_", NULL, 0x1012, "Lorg.apache.lucene.search.similarities.TFIDFSimilarity;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$norms_", NULL, 0x1012, "Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$similarity_", "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$norms_", "LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionValuesourceNormValueSource", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1 = { 2, "", "org.apache.lucene.queries.function.valuesource", "NormValueSource", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;LOrgApacheLuceneIndexNumericDocValues;LOrgApacheLuceneQueriesFunctionValueSource;", "floatVal", "I", "LOrgApacheLuceneQueriesFunctionValuesourceNormValueSource;", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1 = { "", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x8010, 2, 2, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1 *self, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+void OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1 *self, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) {
   JreStrongAssign(&self->val$similarity_, capture$0);
   JreStrongAssign(&self->val$norms_, capture$1);
-  OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, arg$0);
+  OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, vs);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1, initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, capture$1, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1 *new_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1, initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, capture$1, vs)
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1, initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, capture$1, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1 *create_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1_initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_1, initWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, capture$1, vs)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_$1)

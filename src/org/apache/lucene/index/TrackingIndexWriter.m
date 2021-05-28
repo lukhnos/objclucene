@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Iterable.h"
 #include "java/util/concurrent/atomic/AtomicLong.h"
 #include "org/apache/lucene/index/IndexReader.h"
@@ -14,6 +13,10 @@
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/index/TrackingIndexWriter.h"
 #include "org/apache/lucene/search/Query.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/TrackingIndexWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexTrackingIndexWriter () {
  @public
@@ -119,29 +122,50 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTrackingIndexWriter, indexingGen_, JavaU
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexWriter:", "TrackingIndexWriter", NULL, 0x1, NULL, NULL },
-    { "updateDocumentWithOrgApacheLuceneIndexTerm:withJavaLangIterable:", "updateDocument", "J", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/Term;Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;)J" },
-    { "updateDocumentsWithOrgApacheLuceneIndexTerm:withJavaLangIterable:", "updateDocuments", "J", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/Term;Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;)J" },
-    { "deleteDocumentsWithOrgApacheLuceneIndexTerm:", "deleteDocuments", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "deleteDocumentsWithOrgApacheLuceneIndexTermArray:", "deleteDocuments", "J", 0x81, "Ljava.io.IOException;", NULL },
-    { "deleteDocumentsWithOrgApacheLuceneSearchQuery:", "deleteDocuments", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "deleteDocumentsWithOrgApacheLuceneSearchQueryArray:", "deleteDocuments", "J", 0x81, "Ljava.io.IOException;", NULL },
-    { "deleteAll", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "addDocumentWithJavaLangIterable:", "addDocument", "J", 0x1, "Ljava.io.IOException;", "(Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;)J" },
-    { "addDocumentsWithJavaLangIterable:", "addDocuments", "J", 0x1, "Ljava.io.IOException;", "(Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;)J" },
-    { "addIndexesWithOrgApacheLuceneStoreDirectoryArray:", "addIndexes", "J", 0x81, "Ljava.io.IOException;", NULL },
-    { "addIndexesWithOrgApacheLuceneIndexCodecReaderArray:", "addIndexes", "J", 0x81, "Ljava.io.IOException;", NULL },
-    { "getGeneration", NULL, "J", 0x1, NULL, NULL },
-    { "getIndexWriter", NULL, "Lorg.apache.lucene.index.IndexWriter;", 0x1, NULL, NULL },
-    { "getAndIncrementGeneration", NULL, "J", 0x1, NULL, NULL },
-    { "tryDeleteDocumentWithOrgApacheLuceneIndexIndexReader:withInt:", "tryDeleteDocument", "J", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, 3, 4, -1, -1 },
+    { NULL, "J", 0x1, 5, 2, 3, 6, -1, -1 },
+    { NULL, "J", 0x1, 7, 8, 3, -1, -1, -1 },
+    { NULL, "J", 0x81, 7, 9, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, 7, 10, 3, -1, -1, -1 },
+    { NULL, "J", 0x81, 7, 11, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, 12, 13, 3, 14, -1, -1 },
+    { NULL, "J", 0x1, 15, 13, 3, 16, -1, -1 },
+    { NULL, "J", 0x81, 17, 18, 3, -1, -1, -1 },
+    { NULL, "J", 0x81, 17, 19, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriter;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 20, 21, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexWriter:);
+  methods[1].selector = @selector(updateDocumentWithOrgApacheLuceneIndexTerm:withJavaLangIterable:);
+  methods[2].selector = @selector(updateDocumentsWithOrgApacheLuceneIndexTerm:withJavaLangIterable:);
+  methods[3].selector = @selector(deleteDocumentsWithOrgApacheLuceneIndexTerm:);
+  methods[4].selector = @selector(deleteDocumentsWithOrgApacheLuceneIndexTermArray:);
+  methods[5].selector = @selector(deleteDocumentsWithOrgApacheLuceneSearchQuery:);
+  methods[6].selector = @selector(deleteDocumentsWithOrgApacheLuceneSearchQueryArray:);
+  methods[7].selector = @selector(deleteAll);
+  methods[8].selector = @selector(addDocumentWithJavaLangIterable:);
+  methods[9].selector = @selector(addDocumentsWithJavaLangIterable:);
+  methods[10].selector = @selector(addIndexesWithOrgApacheLuceneStoreDirectoryArray:);
+  methods[11].selector = @selector(addIndexesWithOrgApacheLuceneIndexCodecReaderArray:);
+  methods[12].selector = @selector(getGeneration);
+  methods[13].selector = @selector(getIndexWriter);
+  methods[14].selector = @selector(getAndIncrementGeneration);
+  methods[15].selector = @selector(tryDeleteDocumentWithOrgApacheLuceneIndexIndexReader:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "writer_", NULL, 0x12, "Lorg.apache.lucene.index.IndexWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexingGen_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicLong;", NULL, NULL, .constantValue.asLong = 0 },
+    { "writer_", "LOrgApacheLuceneIndexIndexWriter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "indexingGen_", "LJavaUtilConcurrentAtomicAtomicLong;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTrackingIndexWriter = { 2, "TrackingIndexWriter", "org.apache.lucene.index", NULL, 0x1, 16, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexWriter;", "updateDocument", "LOrgApacheLuceneIndexTerm;LJavaLangIterable;", "LJavaIoIOException;", "(Lorg/apache/lucene/index/Term;Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;)J", "updateDocuments", "(Lorg/apache/lucene/index/Term;Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;)J", "deleteDocuments", "LOrgApacheLuceneIndexTerm;", "[LOrgApacheLuceneIndexTerm;", "LOrgApacheLuceneSearchQuery;", "[LOrgApacheLuceneSearchQuery;", "addDocument", "LJavaLangIterable;", "(Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;)J", "addDocuments", "(Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;)J", "addIndexes", "[LOrgApacheLuceneStoreDirectory;", "[LOrgApacheLuceneIndexCodecReader;", "tryDeleteDocument", "LOrgApacheLuceneIndexIndexReader;I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTrackingIndexWriter = { "TrackingIndexWriter", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 16, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexTrackingIndexWriter;
 }
 

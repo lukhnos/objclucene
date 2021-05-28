@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexCoalescedUpdates
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexCoalescedUpdates_) && (INCLUDE_ALL_OrgApacheLuceneIndexCoalescedUpdates || defined(INCLUDE_OrgApacheLuceneIndexCoalescedUpdates))
 #define OrgApacheLuceneIndexCoalescedUpdates_
 
@@ -41,9 +47,13 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 - (void)updateWithOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -54,14 +64,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCoalescedUpdates, terms_, id<JavaUtilLis
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCoalescedUpdates, numericDVUpdates_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCoalescedUpdates, binaryDVUpdates_, id<JavaUtilList>)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexCoalescedUpdates_init(OrgApacheLuceneIndexCoalescedUpdates *self);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexCoalescedUpdates_initPackagePrivate(OrgApacheLuceneIndexCoalescedUpdates *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCoalescedUpdates *new_OrgApacheLuceneIndexCoalescedUpdates_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexCoalescedUpdates *new_OrgApacheLuceneIndexCoalescedUpdates_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCoalescedUpdates *create_OrgApacheLuceneIndexCoalescedUpdates_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexCoalescedUpdates *create_OrgApacheLuceneIndexCoalescedUpdates_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCoalescedUpdates)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexCoalescedUpdates")

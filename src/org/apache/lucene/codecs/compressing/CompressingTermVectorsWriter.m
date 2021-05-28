@@ -8,7 +8,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
@@ -56,6 +55,10 @@
 @class OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData;
 @class OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter () {
  @public
   NSString *segment_;
@@ -71,7 +74,10 @@
   OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData *curDoc_;
   OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *curField_;
   OrgApacheLuceneUtilBytesRef *lastTerm_;
-  IOSIntArray *positionsBuf_, *startOffsetsBuf_, *lengthsBuf_, *payloadLengthsBuf_;
+  IOSIntArray *positionsBuf_;
+  IOSIntArray *startOffsetsBuf_;
+  IOSIntArray *lengthsBuf_;
+  IOSIntArray *payloadLengthsBuf_;
   OrgApacheLuceneUtilGrowableByteArrayDataOutput *termSuffixes_;
   OrgApacheLuceneUtilGrowableByteArrayDataOutput *payloadBytes_;
   OrgApacheLuceneUtilPackedBlockPackedWriter *writer_;
@@ -161,7 +167,9 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingT
   OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *this$0_;
   jint numFields_;
   id<JavaUtilDeque> fields_;
-  jint posStart_, offStart_, payStart_;
+  jint posStart_;
+  jint offStart_;
+  jint payStart_;
 }
 
 - (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter:(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *)outer$
@@ -180,7 +188,6 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingT
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData, this$0_, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData, fields_, id<JavaUtilDeque>)
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_withInt_withInt_withInt_withInt_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData *self, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *outer$, jint numFields, jint posStart, jint offStart, jint payStart);
@@ -197,10 +204,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData : NSObject {
  @public
   OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *this$0_;
-  jboolean hasPositions_, hasOffsets_, hasPayloads_;
-  jint fieldNum_, flags_, numTerms_;
-  IOSIntArray *freqs_, *prefixLengths_, *suffixLengths_;
-  jint posStart_, offStart_, payStart_;
+  jboolean hasPositions_;
+  jboolean hasOffsets_;
+  jboolean hasPayloads_;
+  jint fieldNum_;
+  jint flags_;
+  jint numTerms_;
+  IOSIntArray *freqs_;
+  IOSIntArray *prefixLengths_;
+  IOSIntArray *suffixLengths_;
+  jint posStart_;
+  jint offStart_;
+  jint payStart_;
   jint totalPositions_;
   jint ord_;
 }
@@ -228,7 +243,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData, this$0_, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData, freqs_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData, prefixLengths_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData, suffixLengths_, IOSIntArray *)
@@ -368,7 +382,7 @@ jboolean OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE
 
 - (void)startTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                                          withInt:(jint)freq {
-  JreAssert((freq >= 1), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:298 condition failed: assert freq >= 1;"));
+  JreAssert(freq >= 1, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:298 condition failed: assert freq >= 1;");
   jint prefix = OrgApacheLuceneUtilStringHelper_bytesDifferenceWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(lastTerm_, term);
   [((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *) nil_chk(curField_)) addTermWithInt:freq withInt:prefix withInt:((OrgApacheLuceneUtilBytesRef *) nil_chk(term))->length_ - prefix];
   [((OrgApacheLuceneUtilGrowableByteArrayDataOutput *) nil_chk(termSuffixes_)) writeBytesWithByteArray:term->bytes_ withInt:term->offset_ + prefix withInt:term->length_ - prefix];
@@ -384,7 +398,7 @@ jboolean OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE
                    withInt:(jint)startOffset
                    withInt:(jint)endOffset
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
-  JreAssert((((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *) nil_chk(curField_))->flags_ != 0), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:314 condition failed: assert curField.flags != 0;"));
+  JreAssert(((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *) nil_chk(curField_))->flags_ != 0, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:314 condition failed: assert curField.flags != 0;");
   [curField_ addPositionWithInt:position withInt:startOffset withInt:endOffset - startOffset withInt:payload == nil ? 0 : payload->length_];
   if (((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *) nil_chk(curField_))->hasPayloads_ && payload != nil) {
     [((OrgApacheLuceneUtilGrowableByteArrayDataOutput *) nil_chk(payloadBytes_)) writeBytesWithByteArray:payload->bytes_ withInt:payload->offset_ withInt:payload->length_];
@@ -459,8 +473,8 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
 - (void)addProxWithInt:(jint)numProx
 withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)positions
 withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets {
-  JreAssert(((((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *) nil_chk(curField_))->hasPositions_) == (positions != nil)), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:666 condition failed: assert (curField.hasPositions) == (positions != null);"));
-  JreAssert(((curField_->hasOffsets_) == (offsets != nil)), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:667 condition failed: assert (curField.hasOffsets) == (offsets != null);"));
+  JreAssert((((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *) nil_chk(curField_))->hasPositions_) == (positions != nil), @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:666 condition failed: assert (curField.hasPositions) == (positions != null);");
+  JreAssert((curField_->hasOffsets_) == (offsets != nil), @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:667 condition failed: assert (curField.hasOffsets) == (offsets != null);");
   if (curField_->hasPositions_) {
     jint posStart = curField_->posStart_ + curField_->totalPositions_;
     if (posStart + numProx > ((IOSIntArray *) nil_chk(positionsBuf_))->size_) {
@@ -500,7 +514,9 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets {
       JreStrongAssign(&startOffsetsBuf_, JavaUtilArrays_copyOfWithIntArray_withInt_(startOffsetsBuf_, newLength));
       JreStrongAssign(&lengthsBuf_, JavaUtilArrays_copyOfWithIntArray_withInt_(lengthsBuf_, newLength));
     }
-    jint lastOffset = 0, startOffset, endOffset;
+    jint lastOffset = 0;
+    jint startOffset;
+    jint endOffset;
     for (jint i = 0; i < numProx; ++i) {
       startOffset = lastOffset + [((OrgApacheLuceneStoreDataInput *) nil_chk(offsets)) readVInt];
       endOffset = startOffset + [offsets readVInt];
@@ -515,7 +531,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets {
 - (jint)mergeWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState {
   jint docCount = 0;
   jint numReaders = ((IOSIntArray *) nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState))->maxDocs_))->size_;
-  OrgApacheLuceneCodecsCompressingMatchingReaders *matching = create_OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneIndexMergeState_(mergeState);
+  OrgApacheLuceneCodecsCompressingMatchingReaders *matching = create_OrgApacheLuceneCodecsCompressingMatchingReaders_initPackagePrivateWithOrgApacheLuceneIndexMergeState_(mergeState);
   for (jint readerIndex = 0; readerIndex < numReaders; readerIndex++) {
     OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *matchingVectorsReader = nil;
     OrgApacheLuceneCodecsTermVectorsReader *vectorsReader = IOSObjectArray_Get(nil_chk(mergeState->termVectorsReaders_), readerIndex);
@@ -526,14 +542,14 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets {
     }
     jint maxDoc = IOSIntArray_Get(mergeState->maxDocs_, readerIndex);
     id<OrgApacheLuceneUtilBits> liveDocs = IOSObjectArray_Get(nil_chk(mergeState->liveDocs_), readerIndex);
-    if (matchingVectorsReader != nil && [matchingVectorsReader getCompressionMode] == compressionMode_ && [matchingVectorsReader getChunkSize] == chunkSize_ && [matchingVectorsReader getVersion] == OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CURRENT && [matchingVectorsReader getPackedIntsVersion] == OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT && OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE_ENABLED && liveDocs == nil && ![self tooDirtyWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:matchingVectorsReader]) {
+    if (matchingVectorsReader != nil && JreObjectEqualsEquals([matchingVectorsReader getCompressionMode], compressionMode_) && [matchingVectorsReader getChunkSize] == chunkSize_ && [matchingVectorsReader getVersion] == OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CURRENT && [matchingVectorsReader getPackedIntsVersion] == OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT && OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE_ENABLED && liveDocs == nil && ![self tooDirtyWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:matchingVectorsReader]) {
       [matchingVectorsReader checkIntegrity];
       if (![((id<JavaUtilDeque>) nil_chk(pendingDocs_)) isEmpty]) {
         OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flush(self);
         numDirtyChunks_++;
       }
-      OrgApacheLuceneStoreIndexInput *rawDocs = [matchingVectorsReader getVectorsStream];
-      OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *index = [matchingVectorsReader getIndexReader];
+      OrgApacheLuceneStoreIndexInput *rawDocs = JreRetainedLocalValue([matchingVectorsReader getVectorsStream]);
+      OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *index = JreRetainedLocalValue([matchingVectorsReader getIndexReader]);
       [((OrgApacheLuceneStoreIndexInput *) nil_chk(rawDocs)) seekWithLong:[((OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *) nil_chk(index)) getStartPointerWithInt:0]];
       jint docID = 0;
       while (docID < maxDoc) {
@@ -614,6 +630,105 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets {
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData;", 0x2, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, 3, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x2, 11, 1, 3, -1, -1, -1 },
+    { NULL, "[I", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, 12, 13, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, 14, 13, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, 15, 1, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, 16, 17, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 19, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 21, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, 22, 23, 3, -1, -1, -1 },
+    { NULL, "Z", 0x0, 24, 25, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(addDocDataWithInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withNSString:withOrgApacheLuceneStoreIOContext:withNSString:withOrgApacheLuceneCodecsCompressingCompressionMode:withInt:withInt:);
+  methods[2].selector = @selector(close);
+  methods[3].selector = @selector(startDocumentWithInt:);
+  methods[4].selector = @selector(finishDocument);
+  methods[5].selector = @selector(startFieldWithOrgApacheLuceneIndexFieldInfo:withInt:withBoolean:withBoolean:withBoolean:);
+  methods[6].selector = @selector(finishField);
+  methods[7].selector = @selector(startTermWithOrgApacheLuceneUtilBytesRef:withInt:);
+  methods[8].selector = @selector(addPositionWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:);
+  methods[9].selector = @selector(triggerFlush);
+  methods[10].selector = @selector(flush);
+  methods[11].selector = @selector(flushNumFieldsWithInt:);
+  methods[12].selector = @selector(flushFieldNums);
+  methods[13].selector = @selector(flushFieldsWithInt:withIntArray:);
+  methods[14].selector = @selector(flushFlagsWithInt:withIntArray:);
+  methods[15].selector = @selector(flushNumTermsWithInt:);
+  methods[16].selector = @selector(flushTermLengths);
+  methods[17].selector = @selector(flushTermFreqs);
+  methods[18].selector = @selector(flushPositions);
+  methods[19].selector = @selector(flushOffsetsWithIntArray:);
+  methods[20].selector = @selector(flushPayloadLengths);
+  methods[21].selector = @selector(finishWithOrgApacheLuceneIndexFieldInfos:withInt:);
+  methods[22].selector = @selector(addProxWithInt:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneStoreDataInput:);
+  methods[23].selector = @selector(mergeWithOrgApacheLuceneIndexMergeState:);
+  methods[24].selector = @selector(tooDirtyWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "MAX_DOCUMENTS_PER_CHUNK", "I", .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_MAX_DOCUMENTS_PER_CHUNK, 0x18, -1, -1, -1, -1 },
+    { "VECTORS_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 26, -1, -1 },
+    { "VECTORS_INDEX_EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 27, -1, -1 },
+    { "CODEC_SFX_IDX", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 28, -1, -1 },
+    { "CODEC_SFX_DAT", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 29, -1, -1 },
+    { "VERSION_START", "I", .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_START, 0x18, -1, -1, -1, -1 },
+    { "VERSION_CHUNK_STATS", "I", .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CHUNK_STATS, 0x18, -1, -1, -1, -1 },
+    { "VERSION_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CURRENT, 0x18, -1, -1, -1, -1 },
+    { "PACKED_BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_PACKED_BLOCK_SIZE, 0x18, -1, -1, -1, -1 },
+    { "POSITIONS", "I", .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_POSITIONS, 0x18, -1, -1, -1, -1 },
+    { "OFFSETS", "I", .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_OFFSETS, 0x18, -1, -1, -1, -1 },
+    { "PAYLOADS", "I", .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_PAYLOADS, 0x18, -1, -1, -1, -1 },
+    { "FLAGS_BITS", "I", .constantValue.asLong = 0, 0x18, -1, 30, -1, -1 },
+    { "segment_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "indexWriter_", "LOrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "vectorsStream_", "LOrgApacheLuceneStoreIndexOutput;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "compressionMode_", "LOrgApacheLuceneCodecsCompressingCompressionMode;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "compressor_", "LOrgApacheLuceneCodecsCompressingCompressor;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "chunkSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numChunks_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numDirtyChunks_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numDocs_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pendingDocs_", "LJavaUtilDeque;", .constantValue.asLong = 0, 0x12, -1, -1, 31, -1 },
+    { "curDoc_", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curField_", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "positionsBuf_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "startOffsetsBuf_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lengthsBuf_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payloadLengthsBuf_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termSuffixes_", "LOrgApacheLuceneUtilGrowableByteArrayDataOutput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payloadBytes_", "LOrgApacheLuceneUtilGrowableByteArrayDataOutput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "writer_", "LOrgApacheLuceneUtilPackedBlockPackedWriter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "BULK_MERGE_ENABLED_SYSPROP", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 32, -1, -1 },
+    { "BULK_MERGE_ENABLED", "Z", .constantValue.asLong = 0, 0x18, -1, 33, -1, -1 },
+  };
+  static const void *ptrTable[] = { "addDocData", "I", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LNSString;LOrgApacheLuceneStoreIOContext;LNSString;LOrgApacheLuceneCodecsCompressingCompressionMode;II", "LJavaIoIOException;", "startDocument", "startField", "LOrgApacheLuceneIndexFieldInfo;IZZZ", "startTerm", "LOrgApacheLuceneUtilBytesRef;I", "addPosition", "IIILOrgApacheLuceneUtilBytesRef;", "flushNumFields", "flushFields", "I[I", "flushFlags", "flushNumTerms", "flushOffsets", "[I", "finish", "LOrgApacheLuceneIndexFieldInfos;I", "addProx", "ILOrgApacheLuceneStoreDataInput;LOrgApacheLuceneStoreDataInput;", "merge", "LOrgApacheLuceneIndexMergeState;", "tooDirty", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;", &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_EXTENSION, &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_INDEX_EXTENSION, &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_CODEC_SFX_IDX, &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_CODEC_SFX_DAT, &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FLAGS_BITS, "Ljava/util/Deque<Lorg/apache/lucene/codecs/compressing/CompressingTermVectorsWriter$DocData;>;", &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE_ENABLED_SYSPROP, &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE_ENABLED, "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData;LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter = { "CompressingTermVectorsWriter", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x11, 25, 35, -1, 34, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter class]) {
     OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FLAGS_BITS = OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_POSITIONS | OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_OFFSETS | OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_PAYLOADS);
@@ -631,81 +746,11 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets {
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addDocDataWithInt:", "addDocData", "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsWriter$DocData;", 0x2, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withNSString:withOrgApacheLuceneStoreIOContext:withNSString:withOrgApacheLuceneCodecsCompressingCompressionMode:withInt:withInt:", "CompressingTermVectorsWriter", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "startDocumentWithInt:", "startDocument", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "finishDocument", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "startFieldWithOrgApacheLuceneIndexFieldInfo:withInt:withBoolean:withBoolean:withBoolean:", "startField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "finishField", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "startTermWithOrgApacheLuceneUtilBytesRef:withInt:", "startTerm", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "addPositionWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:", "addPosition", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "triggerFlush", NULL, "Z", 0x2, NULL, NULL },
-    { "flush", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushNumFieldsWithInt:", "flushNumFields", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushFieldNums", NULL, "[I", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushFieldsWithInt:withIntArray:", "flushFields", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushFlagsWithInt:withIntArray:", "flushFlags", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushNumTermsWithInt:", "flushNumTerms", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushTermLengths", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushTermFreqs", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushPositions", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushOffsetsWithIntArray:", "flushOffsets", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushPayloadLengths", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "finishWithOrgApacheLuceneIndexFieldInfos:withInt:", "finish", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "addProxWithInt:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneStoreDataInput:", "addProx", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "mergeWithOrgApacheLuceneIndexMergeState:", "merge", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "tooDirtyWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:", "tooDirty", "Z", 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "MAX_DOCUMENTS_PER_CHUNK", "MAX_DOCUMENTS_PER_CHUNK", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_MAX_DOCUMENTS_PER_CHUNK },
-    { "VECTORS_EXTENSION", "VECTORS_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "VECTORS_INDEX_EXTENSION", "VECTORS_INDEX_EXTENSION", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_INDEX_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "CODEC_SFX_IDX", "CODEC_SFX_IDX", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_CODEC_SFX_IDX, NULL, .constantValue.asLong = 0 },
-    { "CODEC_SFX_DAT", "CODEC_SFX_DAT", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_CODEC_SFX_DAT, NULL, .constantValue.asLong = 0 },
-    { "VERSION_START", "VERSION_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_START },
-    { "VERSION_CHUNK_STATS", "VERSION_CHUNK_STATS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CHUNK_STATS },
-    { "VERSION_CURRENT", "VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CURRENT },
-    { "PACKED_BLOCK_SIZE", "PACKED_BLOCK_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_PACKED_BLOCK_SIZE },
-    { "POSITIONS", "POSITIONS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_POSITIONS },
-    { "OFFSETS", "OFFSETS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_OFFSETS },
-    { "PAYLOADS", "PAYLOADS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_PAYLOADS },
-    { "FLAGS_BITS", "FLAGS_BITS", 0x18, "I", &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FLAGS_BITS, NULL, .constantValue.asLong = 0 },
-    { "segment_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexWriter_", NULL, 0x2, "Lorg.apache.lucene.codecs.compressing.CompressingStoredFieldsIndexWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "vectorsStream_", NULL, 0x2, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "compressionMode_", NULL, 0x12, "Lorg.apache.lucene.codecs.compressing.CompressionMode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "compressor_", NULL, 0x12, "Lorg.apache.lucene.codecs.compressing.Compressor;", NULL, NULL, .constantValue.asLong = 0 },
-    { "chunkSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numChunks_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "numDirtyChunks_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "numDocs_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pendingDocs_", NULL, 0x12, "Ljava.util.Deque;", NULL, "Ljava/util/Deque<Lorg/apache/lucene/codecs/compressing/CompressingTermVectorsWriter$DocData;>;", .constantValue.asLong = 0 },
-    { "curDoc_", NULL, 0x2, "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsWriter$DocData;", NULL, NULL, .constantValue.asLong = 0 },
-    { "curField_", NULL, 0x2, "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsWriter$FieldData;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastTerm_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionsBuf_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startOffsetsBuf_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lengthsBuf_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadLengthsBuf_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termSuffixes_", NULL, 0x12, "Lorg.apache.lucene.util.GrowableByteArrayDataOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadBytes_", NULL, 0x12, "Lorg.apache.lucene.util.GrowableByteArrayDataOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "writer_", NULL, 0x12, "Lorg.apache.lucene.util.packed.BlockPackedWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "BULK_MERGE_ENABLED_SYSPROP", "BULK_MERGE_ENABLED_SYSPROP", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE_ENABLED_SYSPROP, NULL, .constantValue.asLong = 0 },
-    { "BULK_MERGE_ENABLED", "BULK_MERGE_ENABLED", 0x18, "Z", &OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE_ENABLED, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsWriter$DocData;", "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsWriter$FieldData;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter = { 2, "CompressingTermVectorsWriter", "org.apache.lucene.codecs.compressing", NULL, 0x11, 25, methods, 35, fields, 0, NULL, 2, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter;
-}
-
 @end
 
 OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_addDocDataWithInt_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *self, jint numVectorFields) {
   OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *last = nil;
-  for (id<JavaUtilIterator> it = [((id<JavaUtilDeque>) nil_chk(self->pendingDocs_)) descendingIterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
+  for (id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilDeque>) nil_chk(self->pendingDocs_)) descendingIterator]); [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
     OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData *doc = [it next];
     if (![((id<JavaUtilDeque>) nil_chk(((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData *) nil_chk(doc))->fields_)) isEmpty]) {
       last = [doc->fields_ getLast];
@@ -728,7 +773,7 @@ OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData *OrgApacheL
 
 void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *self, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *si, NSString *segmentSuffix, OrgApacheLuceneStoreIOContext *context, NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint blockSize) {
   OrgApacheLuceneCodecsTermVectorsWriter_init(self);
-  JreAssert((directory != nil), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:211 condition failed: assert directory != null;"));
+  JreAssert(directory != nil, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:211 condition failed: assert directory != null;");
   JreStrongAssign(&self->segment_, ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si))->name_);
   JreStrongAssign(&self->compressionMode_, compressionMode);
   JreStrongAssign(&self->compressor_, [((OrgApacheLuceneCodecsCompressingCompressionMode *) nil_chk(compressionMode)) newCompressor]);
@@ -739,15 +784,15 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_initWithOrgApa
   JreStrongAssignAndConsume(&self->payloadBytes_, new_OrgApacheLuceneUtilGrowableByteArrayDataOutput_initWithInt_(OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1, 1)));
   JreStrongAssignAndConsume(&self->lastTerm_, new_OrgApacheLuceneUtilBytesRef_initWithInt_(OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(30, 1)));
   jboolean success = false;
-  OrgApacheLuceneStoreIndexOutput *indexStream = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) createOutputWithNSString:OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(self->segment_, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_INDEX_EXTENSION) withOrgApacheLuceneStoreIOContext:context];
+  OrgApacheLuceneStoreIndexOutput *indexStream = JreRetainedLocalValue([((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) createOutputWithNSString:OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(self->segment_, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_INDEX_EXTENSION) withOrgApacheLuceneStoreIOContext:context]);
   @try {
     JreStrongAssign(&self->vectorsStream_, [directory createOutputWithNSString:OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(self->segment_, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_EXTENSION) withOrgApacheLuceneStoreIOContext:context]);
     NSString *codecNameIdx = JreStrcat("$$", formatName, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_CODEC_SFX_IDX);
     NSString *codecNameDat = JreStrcat("$$", formatName, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_CODEC_SFX_DAT);
     OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(indexStream, codecNameIdx, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CURRENT, [si getId], segmentSuffix);
     OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(self->vectorsStream_, codecNameDat, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CURRENT, [si getId], segmentSuffix);
-    JreAssert((OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(codecNameDat, segmentSuffix) == [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->vectorsStream_)) getFilePointer]), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:234 condition failed: assert CodecUtil.indexHeaderLength(codecNameDat, segmentSuffix) == vectorsStream.getFilePointer();"));
-    JreAssert((OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(codecNameIdx, segmentSuffix) == [((OrgApacheLuceneStoreIndexOutput *) nil_chk(indexStream)) getFilePointer]), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:235 condition failed: assert CodecUtil.indexHeaderLength(codecNameIdx, segmentSuffix) == indexStream.getFilePointer();"));
+    JreAssert(OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(codecNameDat, segmentSuffix) == [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->vectorsStream_)) getFilePointer], @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:234 condition failed: assert CodecUtil.indexHeaderLength(codecNameDat, segmentSuffix) == vectorsStream.getFilePointer();");
+    JreAssert(OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(codecNameIdx, segmentSuffix) == [((OrgApacheLuceneStoreIndexOutput *) nil_chk(indexStream)) getFilePointer], @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:235 condition failed: assert CodecUtil.indexHeaderLength(codecNameIdx, segmentSuffix) == indexStream.getFilePointer();");
     JreStrongAssignAndConsume(&self->indexWriter_, new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_initWithOrgApacheLuceneStoreIndexOutput_withInt_(indexStream, blockSize));
     indexStream = nil;
     [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->vectorsStream_)) writeVIntWithInt:OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT];
@@ -780,7 +825,7 @@ jboolean OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_triggerFlu
 
 void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flush(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *self) {
   jint chunkDocs = [((id<JavaUtilDeque>) nil_chk(self->pendingDocs_)) size];
-  JreAssert((chunkDocs > 0), (JavaLangInteger_valueOfWithInt_(chunkDocs)));
+  JreAssert(chunkDocs > 0, JavaLangInteger_valueOfWithInt_(chunkDocs));
   [((OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter *) nil_chk(self->indexWriter_)) writeIndexWithInt:chunkDocs withLong:[((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->vectorsStream_)) getFilePointer]];
   jint docBase = self->numDocs_ - chunkDocs;
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->vectorsStream_)) writeVIntWithInt:docBase];
@@ -831,7 +876,7 @@ IOSIntArray *OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushF
     }
   }
   jint numDistinctFields = [fieldNums size];
-  JreAssert((numDistinctFields > 0), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:399 condition failed: assert numDistinctFields > 0;"));
+  JreAssert(numDistinctFields > 0, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:399 condition failed: assert numDistinctFields > 0;");
   jint bitsRequired = OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_([((JavaLangInteger *) nil_chk([fieldNums last])) intValue]);
   jint token = (JreLShift32(JavaLangMath_minWithInt_withInt_(numDistinctFields - 1, (jint) 0x07), 5)) | bitsRequired;
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->vectorsStream_)) writeByteWithByte:(jbyte) token];
@@ -856,7 +901,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushFieldsWit
   for (OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData * __strong dd in nil_chk(self->pendingDocs_)) {
     for (OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData * __strong fd in nil_chk(((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData *) nil_chk(dd))->fields_)) {
       jint fieldNumIndex = JavaUtilArrays_binarySearchWithIntArray_withInt_(fieldNums, ((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *) nil_chk(fd))->fieldNum_);
-      JreAssert((fieldNumIndex >= 0), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:425 condition failed: assert fieldNumIndex >= 0;"));
+      JreAssert(fieldNumIndex >= 0, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:425 condition failed: assert fieldNumIndex >= 0;");
       [((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) addWithLong:fieldNumIndex];
     }
   }
@@ -870,7 +915,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushFlagsWith
   for (OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData * __strong dd in nil_chk(self->pendingDocs_)) {
     for (OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData * __strong fd in nil_chk(((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData *) nil_chk(dd))->fields_)) {
       jint fieldNumOff = JavaUtilArrays_binarySearchWithIntArray_withInt_(fieldNums, ((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *) nil_chk(fd))->fieldNum_);
-      JreAssert((fieldNumOff >= 0), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:441 condition failed: assert fieldNumOff >= 0;"));
+      JreAssert(fieldNumOff >= 0, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:441 condition failed: assert fieldNumOff >= 0;");
       if (IOSIntArray_Get(fieldFlags, fieldNumOff) == -1) {
         *IOSIntArray_GetRef(fieldFlags, fieldNumOff) = fd->flags_;
       }
@@ -890,11 +935,11 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushFlagsWith
       jint const *e__ = b__ + a__->size_;
       while (b__ < e__) {
         jint flags = *b__++;
-        JreAssert((flags >= 0), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:456 condition failed: assert flags >= 0;"));
+        JreAssert(flags >= 0, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:456 condition failed: assert flags >= 0;");
         [((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) addWithLong:flags];
       }
     }
-    JreAssert(([((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) ord] == fieldFlags->size_ - 1), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:459 condition failed: assert writer.ord() == fieldFlags.length - 1;"));
+    JreAssert([((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) ord] == fieldFlags->size_ - 1, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:459 condition failed: assert writer.ord() == fieldFlags.length - 1;");
     [writer finish];
   }
   else {
@@ -905,7 +950,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushFlagsWith
         [((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) addWithLong:((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *) nil_chk(fd))->flags_];
       }
     }
-    JreAssert(([((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) ord] == totalFields - 1), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:470 condition failed: assert writer.ord() == totalFields - 1;"));
+    JreAssert([((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) ord] == totalFields - 1, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:470 condition failed: assert writer.ord() == totalFields - 1;");
     [writer finish];
   }
 }
@@ -925,7 +970,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushNumTermsW
       [((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) addWithLong:((OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData *) nil_chk(fd))->numTerms_];
     }
   }
-  JreAssert(([((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) ord] == totalFields - 1), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:491 condition failed: assert writer.ord() == totalFields - 1;"));
+  JreAssert([((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) ord] == totalFields - 1, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:491 condition failed: assert writer.ord() == totalFields - 1;");
   [writer finish];
 }
 
@@ -976,7 +1021,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushPositions
             previousPosition = position;
           }
         }
-        JreAssert((pos == fd->totalPositions_), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:542 condition failed: assert pos == fd.totalPositions;"));
+        JreAssert(pos == fd->totalPositions_, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:542 condition failed: assert pos == fd.totalPositions;");
       }
     }
   }
@@ -1006,7 +1051,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushOffsetsWi
             ++pos;
           }
         }
-        JreAssert((pos == fd->totalPositions_), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:572 condition failed: assert pos == fd.totalPositions;"));
+        JreAssert(pos == fd->totalPositions_, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:572 condition failed: assert pos == fd.totalPositions;");
       }
     }
   }
@@ -1053,7 +1098,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushOffsetsWi
             [self->writer_ addWithLong:IOSIntArray_Get(nil_chk(self->lengthsBuf_), fd->offStart_ + pos++) - IOSIntArray_Get(nil_chk(fd->prefixLengths_), i) - IOSIntArray_Get(nil_chk(fd->suffixLengths_), i)];
           }
         }
-        JreAssert((pos == fd->totalPositions_), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:627 condition failed: assert pos == fd.totalPositions;"));
+        JreAssert(pos == fd->totalPositions_, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsWriter.java:627 condition failed: assert pos == fd.totalPositions;");
       }
     }
   }
@@ -1114,19 +1159,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter:withInt:withInt:withInt:withInt:", "DocData", NULL, 0x0, NULL, NULL },
-    { "addFieldWithInt:withInt:withBoolean:withBoolean:withBoolean:", "addField", "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsWriter$FieldData;", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData;", 0x0, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter:withInt:withInt:withInt:withInt:);
+  methods[1].selector = @selector(addFieldWithInt:withInt:withBoolean:withBoolean:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numFields_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fields_", NULL, 0x10, "Ljava.util.Deque;", NULL, "Ljava/util/Deque<Lorg/apache/lucene/codecs/compressing/CompressingTermVectorsWriter$FieldData;>;", .constantValue.asLong = 0 },
-    { "posStart_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "offStart_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payStart_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "numFields_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fields_", "LJavaUtilDeque;", .constantValue.asLong = 0, 0x10, -1, -1, 3, -1 },
+    { "posStart_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "offStart_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "payStart_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData = { 2, "DocData", "org.apache.lucene.codecs.compressing", "CompressingTermVectorsWriter", 0x2, 2, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter;IIII", "addField", "IIZZZ", "Ljava/util/Deque<Lorg/apache/lucene/codecs/compressing/CompressingTermVectorsWriter$FieldData;>;", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData = { "DocData", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x2, 2, 6, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData;
 }
 
@@ -1213,29 +1265,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter:withInt:withInt:withBoolean:withBoolean:withBoolean:withInt:withInt:withInt:", "FieldData", NULL, 0x0, NULL, NULL },
-    { "addTermWithInt:withInt:withInt:", "addTerm", "V", 0x0, NULL, NULL },
-    { "addPositionWithInt:withInt:withInt:withInt:", "addPosition", "V", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter:withInt:withInt:withBoolean:withBoolean:withBoolean:withInt:withInt:withInt:);
+  methods[1].selector = @selector(addTermWithInt:withInt:withInt:);
+  methods[2].selector = @selector(addPositionWithInt:withInt:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasPositions_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasOffsets_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasPayloads_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldNum_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "flags_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numTerms_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freqs_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixLengths_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffixLengths_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "posStart_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "offStart_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payStart_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalPositions_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ord_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "hasPositions_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "hasOffsets_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "hasPayloads_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fieldNum_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "flags_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "numTerms_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "freqs_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "prefixLengths_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "suffixLengths_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "posStart_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "offStart_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "payStart_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "totalPositions_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ord_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData = { 2, "FieldData", "org.apache.lucene.codecs.compressing", "CompressingTermVectorsWriter", 0x2, 3, methods, 15, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter;IIZZZIII", "addTerm", "III", "addPosition", "IIII", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData = { "FieldData", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x2, 3, 15, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FieldData;
 }
 

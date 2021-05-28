@@ -13,6 +13,10 @@
 #include "org/apache/lucene/search/TopDocsCollector.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TopDocsCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 #pragma clang diagnostic ignored "-Wprotocol"
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopDocsCollector)
@@ -78,31 +82,44 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOC
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0x4, 4, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0x1, 5, 7, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilPriorityQueue:);
+  methods[1].selector = @selector(populateResultsWithOrgApacheLuceneSearchScoreDocArray:withInt:);
+  methods[2].selector = @selector(newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:);
+  methods[3].selector = @selector(getTotalHits);
+  methods[4].selector = @selector(topDocsSize);
+  methods[5].selector = @selector(topDocs);
+  methods[6].selector = @selector(topDocsWithInt:);
+  methods[7].selector = @selector(topDocsWithInt:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_TOPDOCS", "LOrgApacheLuceneSearchTopDocs;", .constantValue.asLong = 0, 0x1c, -1, 8, -1, -1 },
+    { "pq_", "LOrgApacheLuceneUtilPriorityQueue;", .constantValue.asLong = 0, 0x4, -1, -1, 9, -1 },
+    { "totalHits_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilPriorityQueue;", "(Lorg/apache/lucene/util/PriorityQueue<TT;>;)V", "populateResults", "[LOrgApacheLuceneSearchScoreDoc;I", "newTopDocs", "topDocs", "I", "II", &OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS, "Lorg/apache/lucene/util/PriorityQueue<TT;>;", "<T:Lorg/apache/lucene/search/ScoreDoc;>Ljava/lang/Object;Lorg/apache/lucene/search/Collector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocsCollector = { "TopDocsCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 8, 3, -1, -1, -1, 10, -1 };
+  return &_OrgApacheLuceneSearchTopDocsCollector;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchTopDocsCollector class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS, new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(0, [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchScoreDoc_class_()], JavaLangFloat_NaN));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchTopDocsCollector)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilPriorityQueue:", "TopDocsCollector", NULL, 0x4, NULL, "(Lorg/apache/lucene/util/PriorityQueue<TT;>;)V" },
-    { "populateResultsWithOrgApacheLuceneSearchScoreDocArray:withInt:", "populateResults", "V", 0x4, NULL, NULL },
-    { "newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:", "newTopDocs", "Lorg.apache.lucene.search.TopDocs;", 0x4, NULL, NULL },
-    { "getTotalHits", NULL, "I", 0x1, NULL, NULL },
-    { "topDocsSize", NULL, "I", 0x4, NULL, NULL },
-    { "topDocs", NULL, "Lorg.apache.lucene.search.TopDocs;", 0x1, NULL, NULL },
-    { "topDocsWithInt:", "topDocs", "Lorg.apache.lucene.search.TopDocs;", 0x1, NULL, NULL },
-    { "topDocsWithInt:withInt:", "topDocs", "Lorg.apache.lucene.search.TopDocs;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_TOPDOCS", "EMPTY_TOPDOCS", 0x1c, "Lorg.apache.lucene.search.TopDocs;", &OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS, NULL, .constantValue.asLong = 0 },
-    { "pq_", NULL, 0x4, "Lorg.apache.lucene.util.PriorityQueue;", NULL, "Lorg/apache/lucene/util/PriorityQueue<TT;>;", .constantValue.asLong = 0 },
-    { "totalHits_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocsCollector = { 2, "TopDocsCollector", "org.apache.lucene.search", NULL, 0x401, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Lorg/apache/lucene/search/ScoreDoc;>Ljava/lang/Object;Lorg/apache/lucene/search/Collector;" };
-  return &_OrgApacheLuceneSearchTopDocsCollector;
 }
 
 @end

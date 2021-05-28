@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionScorer || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionScorer))
 #define OrgApacheLuceneSearchSuggestDocumentCompletionScorer_
 
@@ -29,12 +35,12 @@
 
 /*!
  @brief Expert: Responsible for executing the query against an
- appropriate suggester and collecting the results
- via a collector.
- <code>score(LeafCollector,Bits,int,int)</code> is called
- for each leaf reader.
- <code>accept(int,Bits)</code> and <code>score(float,float)</code>
- is called for every matched completion (i.e. document)
+  appropriate suggester and collecting the results
+  via a collector.
+ <code>score(LeafCollector, Bits, int, int)</code> is called
+  for each leaf reader. 
+ <code>accept(int,Bits)</code> and <code>score(float, float)</code>
+  is called for every matched completion (i.e. document)
  */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionScorer : OrgApacheLuceneSearchBulkScorer {
  @public
@@ -51,10 +57,10 @@
 
 /*!
  @brief Returns true if a document with <code>docID</code> is accepted,
- false if the docID maps to a deleted
- document or has been filtered out
- @param liveDocs the <code>Bits</code> representing live docs, or possibly
- <code>null</code> if all docs are live
+  false if the docID maps to a deleted
+  document or has been filtered out
+ @param liveDocs the <code>Bits</code>  representing live docs, or possibly
+                   <code>null</code>  if all docs are live
  */
 - (jboolean)acceptWithInt:(jint)docID
 withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
@@ -63,8 +69,8 @@ withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
 
 /*!
  @brief Returns the score for a matched completion
- based on the query time boost and the
- index time weight.
+  based on the query time boost and the
+  index time weight.
  */
 - (jfloat)scoreWithFloat:(jfloat)weight
                withFloat:(jfloat)boost;
@@ -79,12 +85,16 @@ withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
 /*!
  @brief Creates a scorer for a field-specific <code>suggester</code> scoped by <code>acceptDocs</code>
  */
-- (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight:(OrgApacheLuceneSearchSuggestDocumentCompletionWeight *)weight
-                        withOrgApacheLuceneSearchSuggestDocumentNRTSuggester:(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester
-                                          withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
-                                                 withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)filterDocs
-                                                                 withBoolean:(jboolean)filtered
-                                   withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight:(OrgApacheLuceneSearchSuggestDocumentCompletionWeight *)weight
+                                  withOrgApacheLuceneSearchSuggestDocumentNRTSuggester:(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester
+                                                    withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
+                                                           withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)filterDocs
+                                                                           withBoolean:(jboolean)filtered
+                                             withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -104,4 +114,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionScorer")

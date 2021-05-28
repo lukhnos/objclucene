@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsNormsProducer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsNormsProducer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsNormsProducer || defined(INCLUDE_OrgApacheLuceneCodecsNormsProducer))
 #define OrgApacheLuceneCodecsNormsProducer_
 
@@ -37,7 +43,7 @@
 /*!
  @brief Checks consistency of this producer
  <p>
- Note that this may be costly in terms of I/O, e.g.
+  Note that this may be costly in terms of I/O, e.g.
  may involve computing a checksum value against large data files.
  */
 - (void)checkIntegrity;
@@ -45,14 +51,14 @@
 /*!
  @brief Returns an instance optimized for merging.
  <p>
- The default implementation returns <code>this</code> 
+  The default implementation returns <code>this</code>
  */
 - (OrgApacheLuceneCodecsNormsProducer *)getMergeInstance;
 
 /*!
  @brief Returns <code>NumericDocValues</code> for this field.
  The returned instance need not be thread-safe: it will only be
- used by a single thread. 
+   used by a single thread.
  */
 - (OrgApacheLuceneIndexNumericDocValues *)getNormsWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 
@@ -61,9 +67,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -75,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsNormsProducer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsNormsProducer")

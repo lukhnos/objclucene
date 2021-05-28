@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter || defined(INCLUDE_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter))
 #define OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_
 
@@ -35,7 +41,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxSize;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)maxSize;
 
 - (void)appendWithInt:(jint)latEnc
               withInt:(jint)lonEnc
@@ -50,6 +56,10 @@
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter)
@@ -59,14 +69,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter, lonEncs_, IOS
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter, docIDs_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter, ords_, IOSLongArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initWithInt_(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *self, jint maxSize);
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initPackagePrivateWithInt_(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *self, jint maxSize);
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *new_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *new_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initPackagePrivateWithInt_(jint maxSize) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *create_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initWithInt_(jint maxSize);
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *create_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initPackagePrivateWithInt_(jint maxSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexExitableDirectoryReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexExitableDirectoryReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexExitableDirectoryReader || defined(INCLUDE_OrgApacheLuceneIndexExitableDirectoryReader))
 #define OrgApacheLuceneIndexExitableDirectoryReader_
 
@@ -21,14 +27,14 @@
 #include "org/apache/lucene/index/FilterDirectoryReader.h"
 
 @class OrgApacheLuceneIndexDirectoryReader;
+@class OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper;
 @protocol OrgApacheLuceneIndexQueryTimeout;
 
 /*!
  @brief The <code>ExitableDirectoryReader</code> wraps a real index <code>DirectoryReader</code> and
- allows for a <code>QueryTimeout</code> implementation object to be checked periodically
- to see if the thread should exit or not.
- If <code>QueryTimeout.shouldExit()</code>
- returns true, an <code>ExitingReaderException</code> is thrown.
+  allows for a <code>QueryTimeout</code> implementation object to be checked periodically
+  to see if the thread should exit or not.If <code>QueryTimeout.shouldExit()</code>
+  returns true, an <code>ExitingReaderException</code> is thrown.
  */
 @interface OrgApacheLuceneIndexExitableDirectoryReader : OrgApacheLuceneIndexFilterDirectoryReader
 
@@ -39,16 +45,15 @@
  @param inArg DirectoryReader that this ExitableDirectoryReader wraps around to make it Exitable.
  @param queryTimeout The object to periodically check if the query should time out.
  */
-- (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg
-                       withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg
+                                 withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
 
 - (NSString *)description;
 
 /*!
- @brief Wraps a provided DirectoryReader.
- Note that for convenience, the returned reader
- can be used normally (e.g. passed to <code>DirectoryReader.openIfChanged(DirectoryReader)</code>)
- and so on.
+ @brief Wraps a provided DirectoryReader.Note that for convenience, the returned reader
+  can be used normally (e.g. passed to <code>DirectoryReader.openIfChanged(DirectoryReader)</code>)
+  and so on.
  */
 + (OrgApacheLuceneIndexDirectoryReader *)wrapWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg
                                                 withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
@@ -56,6 +61,11 @@
 #pragma mark Protected
 
 - (OrgApacheLuceneIndexDirectoryReader *)doWrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)arg0
+       withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper:(OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -80,6 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader)
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+@class JavaLangThrowable;
+
 /*!
  @brief Exception that is thrown to prematurely terminate a term enumeration.
  */
@@ -90,7 +102,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader)
 /*!
  @brief Constructor
  */
-- (instancetype)initWithNSString:(NSString *)msg;
+- (instancetype __nonnull)initWithNSString:(NSString *)msg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1
+                               withBoolean:(jboolean)arg2
+                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -126,9 +152,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitingRe
 /*!
  @brief Constructor
  */
-- (instancetype)initWithOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
 
 - (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -156,8 +186,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableS
 @protocol OrgApacheLuceneIndexQueryTimeout;
 
 /*!
- @brief Wrapper class for another FilterAtomicReader.
- This is used by ExitableSubReaderWrapper.
+ @brief Wrapper class for another FilterAtomicReader.This is used by ExitableSubReaderWrapper.
  */
 @interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader : OrgApacheLuceneIndexFilterLeafReader
 
@@ -166,14 +195,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableS
 /*!
  @brief Constructor
  */
-- (instancetype)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg
-                  withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg
+                            withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
 
 - (OrgApacheLuceneIndexFields *)fields;
 
 - (id)getCombinedCoreAndDeletesKey;
 
 - (id)getCoreCacheKey;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -210,12 +243,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableF
 /*!
  @brief Constructor
  */
-- (instancetype)initWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)fields
-              withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)fields
+                        withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -254,13 +291,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableF
 /*!
  @brief Constructor
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-             withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
+                       withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
 
 - (OrgApacheLuceneIndexTermsEnum *)intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled
                                                               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm;
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -289,7 +330,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableT
 
 /*!
  @brief Wrapper class for TermsEnum that is used by ExitableTerms for implementing an
- exitable enumeration of terms.
+  exitable enumeration of terms.
  */
 @interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum : OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum
 
@@ -298,10 +339,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableT
 /*!
  @brief Constructor
  */
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
-                 withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
+                           withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
 
 - (OrgApacheLuceneUtilBytesRef *)next;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -317,4 +362,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableT
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexExitableDirectoryReader")

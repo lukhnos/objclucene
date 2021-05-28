@@ -8,7 +8,18 @@
 #include "java/lang/Float.h"
 #include "org/apache/lucene/analysis/payloads/PayloadHelper.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/payloads/PayloadHelper must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisPayloadsPayloadHelper
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (IOSByteArray *)encodeFloatWithFloat:(jfloat)payload {
   return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(payload);
@@ -44,29 +55,47 @@
   return OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeIntWithByteArray_withInt_(bytes, offset);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "encodeFloatWithFloat:", "encodeFloat", "[B", 0x9, NULL, NULL },
-    { "encodeFloatWithFloat:withByteArray:withInt:", "encodeFloat", "[B", 0x9, NULL, NULL },
-    { "encodeIntWithInt:", "encodeInt", "[B", 0x9, NULL, NULL },
-    { "encodeIntWithInt:withByteArray:withInt:", "encodeInt", "[B", 0x9, NULL, NULL },
-    { "decodeFloatWithByteArray:", "decodeFloat", "F", 0x9, NULL, NULL },
-    { "decodeFloatWithByteArray:withInt:", "decodeFloat", "F", 0x19, NULL, NULL },
-    { "decodeIntWithByteArray:withInt:", "decodeInt", "I", 0x19, NULL, NULL },
-    { "init", "PayloadHelper", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, 0, 2, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "[B", 0x9, 3, 5, -1, -1, -1, -1 },
+    { NULL, "F", 0x9, 6, 7, -1, -1, -1, -1 },
+    { NULL, "F", 0x19, 6, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x19, 9, 8, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsPayloadHelper = { 2, "PayloadHelper", "org.apache.lucene.analysis.payloads", NULL, 0x1, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(encodeFloatWithFloat:);
+  methods[2].selector = @selector(encodeFloatWithFloat:withByteArray:withInt:);
+  methods[3].selector = @selector(encodeIntWithInt:);
+  methods[4].selector = @selector(encodeIntWithInt:withByteArray:withInt:);
+  methods[5].selector = @selector(decodeFloatWithByteArray:);
+  methods[6].selector = @selector(decodeFloatWithByteArray:withInt:);
+  methods[7].selector = @selector(decodeIntWithByteArray:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "encodeFloat", "F", "F[BI", "encodeInt", "I", "I[BI", "decodeFloat", "[B", "[BI", "decodeInt" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsPayloadHelper = { "PayloadHelper", "org.apache.lucene.analysis.payloads", ptrTable, methods, NULL, 7, 0x1, 8, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPayloadsPayloadHelper;
 }
 
 @end
+
+void OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(OrgApacheLuceneAnalysisPayloadsPayloadHelper *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneAnalysisPayloadsPayloadHelper *new_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsPayloadHelper, init)
+}
+
+OrgApacheLuceneAnalysisPayloadsPayloadHelper *create_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsPayloadHelper, init)
+}
 
 IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(jfloat payload) {
   OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
@@ -105,18 +134,6 @@ jfloat OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeFloatWithByteArray_wit
 jint OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeIntWithByteArray_withInt_(IOSByteArray *bytes, jint offset) {
   OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
   return (JreLShift32((IOSByteArray_Get(nil_chk(bytes), offset) & (jint) 0xFF), 24)) | (JreLShift32((IOSByteArray_Get(bytes, offset + 1) & (jint) 0xFF), 16)) | (JreLShift32((IOSByteArray_Get(bytes, offset + 2) & (jint) 0xFF), 8)) | (IOSByteArray_Get(bytes, offset + 3) & (jint) 0xFF);
-}
-
-void OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(OrgApacheLuceneAnalysisPayloadsPayloadHelper *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneAnalysisPayloadsPayloadHelper *new_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsPayloadHelper, init)
-}
-
-OrgApacheLuceneAnalysisPayloadsPayloadHelper *create_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsPayloadHelper, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsPayloadHelper)

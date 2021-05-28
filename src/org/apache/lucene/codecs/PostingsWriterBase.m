@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/PostingsWriterBase.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/BlockTermState.h"
 #include "org/apache/lucene/codecs/PostingsWriterBase.h"
 #include "org/apache/lucene/index/FieldInfo.h"
@@ -16,6 +14,10 @@
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/FixedBitSet.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/PostingsWriterBase must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneCodecsPostingsWriterBase
 
@@ -61,15 +63,26 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)s
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PostingsWriterBase", NULL, 0x4, NULL, NULL },
-    { "init__WithOrgApacheLuceneStoreIndexOutput:withOrgApacheLuceneIndexSegmentWriteState:", "init", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "writeTermWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilFixedBitSet:", "writeTerm", "Lorg.apache.lucene.codecs.BlockTermState;", 0x401, "Ljava.io.IOException;", NULL },
-    { "encodeTermWithLongArray:withOrgApacheLuceneStoreDataOutput:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withBoolean:", "encodeTerm", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "setFieldWithOrgApacheLuceneIndexFieldInfo:", "setField", "I", 0x401, NULL, NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsBlockTermState;", 0x401, 3, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 5, 6, 2, -1, -1, -1 },
+    { NULL, "I", 0x401, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPostingsWriterBase = { 2, "PostingsWriterBase", "org.apache.lucene.codecs", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(init__WithOrgApacheLuceneStoreIndexOutput:withOrgApacheLuceneIndexSegmentWriteState:);
+  methods[2].selector = @selector(writeTermWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilFixedBitSet:);
+  methods[3].selector = @selector(encodeTermWithLongArray:withOrgApacheLuceneStoreDataOutput:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withBoolean:);
+  methods[4].selector = @selector(setFieldWithOrgApacheLuceneIndexFieldInfo:);
+  methods[5].selector = @selector(close);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "init", "LOrgApacheLuceneStoreIndexOutput;LOrgApacheLuceneIndexSegmentWriteState;", "LJavaIoIOException;", "writeTerm", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneIndexTermsEnum;LOrgApacheLuceneUtilFixedBitSet;", "encodeTerm", "[JLOrgApacheLuceneStoreDataOutput;LOrgApacheLuceneIndexFieldInfo;LOrgApacheLuceneCodecsBlockTermState;Z", "setField", "LOrgApacheLuceneIndexFieldInfo;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPostingsWriterBase = { "PostingsWriterBase", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 6, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsPostingsWriterBase;
 }
 

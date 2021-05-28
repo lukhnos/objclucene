@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTerms
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTerms_) && (INCLUDE_ALL_OrgApacheLuceneIndexTerms || defined(INCLUDE_OrgApacheLuceneIndexTerms))
 #define OrgApacheLuceneIndexTerms_
 
@@ -22,71 +28,66 @@
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
- @brief Access to the terms in a specific field.
- See <code>Fields</code>.
+ @brief Access to the terms in a specific field.See <code>Fields</code>.
  */
 @interface OrgApacheLuceneIndexTerms : NSObject
-
-+ (IOSObjectArray *)EMPTY_ARRAY;
+@property (readonly, class, strong) IOSObjectArray *EMPTY_ARRAY NS_SWIFT_NAME(EMPTY_ARRAY);
 
 #pragma mark Public
 
 /*!
  @brief Returns the number of documents that have at least one
- term for this field, or -1 if this measure isn't
- stored by the codec.
- Note that, just like other term
- measures, this measure does not take deleted documents
- into account. 
+   term for this field, or -1 if this measure isn't
+   stored by the codec.Note that, just like other term
+   measures, this measure does not take deleted documents
+   into account.
  */
 - (jint)getDocCount;
 
 /*!
  @brief Returns the largest term (in lexicographic order) in the field.
  Note that, just like other term measures, this measure does not 
- take deleted documents into account.  This returns
- null when there are no terms. 
+   take deleted documents into account.  This returns
+   null when there are no terms.
  */
 - (OrgApacheLuceneUtilBytesRef *)getMax;
 
 /*!
  @brief Returns the smallest term (in lexicographic order) in the field.
  Note that, just like other term measures, this measure does not 
- take deleted documents into account.  This returns
- null when there are no terms. 
+   take deleted documents into account.  This returns
+   null when there are no terms.
  */
 - (OrgApacheLuceneUtilBytesRef *)getMin;
 
 /*!
  @brief Expert: returns additional information about this Terms instance
- for debugging purposes.
+  for debugging purposes.
  */
 - (id)getStats;
 
 /*!
  @brief Returns the sum of <code>TermsEnum.docFreq()</code> for
- all terms in this field, or -1 if this measure isn't
- stored by the codec.
- Note that, just like other term
- measures, this measure does not take deleted documents
- into account. 
+   all terms in this field, or -1 if this measure isn't
+   stored by the codec.Note that, just like other term
+   measures, this measure does not take deleted documents
+   into account.
  */
 - (jlong)getSumDocFreq;
 
 /*!
  @brief Returns the sum of <code>TermsEnum.totalTermFreq</code> for
- all terms in this field, or -1 if this measure isn't
- stored by the codec (or if this fields omits term freq
- and positions).
- Note that, just like other term
- measures, this measure does not take deleted documents
- into account. 
+   all terms in this field, or -1 if this measure isn't
+   stored by the codec (or if this fields omits term freq
+   and positions).Note that, just like other term
+   measures, this measure does not take deleted documents
+   into account.
  */
 - (jlong)getSumTotalTermFreq;
 
 /*!
  @brief Returns true if documents in this field store
- per-document term frequency (<code>PostingsEnum.freq</code>).
+   per-document term frequency (<code>PostingsEnum.freq</code>).
  */
 - (jboolean)hasFreqs;
 
@@ -107,41 +108,41 @@
 
 /*!
  @brief Returns a TermsEnum that iterates over all terms and
- documents that are accepted by the provided <code>CompiledAutomaton</code>
- .
- If the <code>startTerm</code> is
- provided then the returned enum will only return terms
+   documents that are accepted by the provided <code>CompiledAutomaton</code>
+ .If the <code>startTerm</code> is
+   provided then the returned enum will only return terms  
  <code>> startTerm</code>, but you still must call
- next() first to get to the first term.  Note that the
- provided <code>startTerm</code> must be accepted by
- the automaton.
+   next() first to get to the first term.
+ Note that the
+   provided <code>startTerm</code> must be accepted by
+   the automaton. 
  <p><b>NOTE</b>: the returned TermsEnum cannot
- seek</p>.
+  seek</p>.
+   
  <p><b>NOTE</b>: the terms dictionary is free to
- return arbitrary terms as long as the resulted visited
- docs is the same.  E.g., <code>BlockTreeTermsWriter</code>
- creates auto-prefix terms during indexing to reduce the
- number of terms visited. 
+   return arbitrary terms as long as the resulted visited
+   docs is the same.  E.g., <code>BlockTreeTermsWriter</code>
+   creates auto-prefix terms during indexing to reduce the
+   number of terms visited.
  */
 - (OrgApacheLuceneIndexTermsEnum *)intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled
                                                               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm;
 
 /*!
  @brief Returns an iterator that will step through all
- terms.
- This method will not return null.  If you have
- a previous TermsEnum, for example from a different
- field, you can pass it for possible reuse if the
- implementation can do so. 
+   terms.This method will not return null.
+ If you have
+   a previous TermsEnum, for example from a different
+   field, you can pass it for possible reuse if the
+   implementation can do so.
  */
 - (OrgApacheLuceneIndexTermsEnum *)iterator;
 
 /*!
  @brief Returns the number of terms for this field, or -1 if this 
- measure isn't stored by the codec.
- Note that, just like 
- other term measures, this measure does not take deleted 
- documents into account. 
+   measure isn't stored by the codec.Note that, just like 
+   other term measures, this measure does not take deleted 
+   documents into account.
  */
 - (jlong)size;
 
@@ -150,9 +151,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -161,7 +162,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexTerms)
 /*!
  @brief Zero-length array of <code>Terms</code>.
  */
-inline IOSObjectArray *OrgApacheLuceneIndexTerms_get_EMPTY_ARRAY();
+inline IOSObjectArray *OrgApacheLuceneIndexTerms_get_EMPTY_ARRAY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexTerms_EMPTY_ARRAY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexTerms, EMPTY_ARRAY, IOSObjectArray *)
@@ -172,4 +173,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTerms)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTerms")

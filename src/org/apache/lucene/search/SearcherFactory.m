@@ -3,19 +3,16 @@
 //  source: ./core/src/java/org/apache/lucene/search/SearcherFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/SearcherFactory.h"
 
-@implementation OrgApacheLuceneSearchSearcherFactory
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/SearcherFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-- (OrgApacheLuceneSearchIndexSearcher *)newSearcherWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                   withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)previousReader {
-  return create_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(reader);
-}
+@implementation OrgApacheLuceneSearchSearcherFactory
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -24,12 +21,24 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (OrgApacheLuceneSearchIndexSearcher *)newSearcherWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                                   withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)previousReader {
+  return create_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(reader);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "newSearcherWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexIndexReader:", "newSearcher", "Lorg.apache.lucene.search.IndexSearcher;", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", "SearcherFactory", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchIndexSearcher;", 0x1, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherFactory = { 2, "SearcherFactory", "org.apache.lucene.search", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(newSearcherWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexIndexReader:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "newSearcher", "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherFactory = { "SearcherFactory", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSearcherFactory;
 }
 

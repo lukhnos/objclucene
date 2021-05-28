@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightScorer || defined(INCLUDE_OrgApacheLuceneSearchHighlightScorer))
 #define OrgApacheLuceneSearchHighlightScorer_
 
@@ -20,21 +26,19 @@
 @class OrgApacheLuceneSearchHighlightTextFragment;
 
 /*!
- @brief A Scorer is responsible for scoring a stream of tokens.
- These token scores
- can then be used to compute <code>TextFragment</code> scores.
+ @brief A Scorer is responsible for scoring a stream of tokens.These token scores
+  can then be used to compute <code>TextFragment</code> scores.
  */
-@protocol OrgApacheLuceneSearchHighlightScorer < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchHighlightScorer < JavaObject >
 
 /*!
- @brief Called to init the Scorer with a <code>TokenStream</code>.
- You can grab references to
- the attributes you are interested in here and access them from <code>getTokenScore()</code>.
- @param tokenStream the <code>TokenStream</code> that will be scored.
+ @brief Called to init the Scorer with a <code>TokenStream</code>.You can grab references to
+  the attributes you are interested in here and access them from <code>getTokenScore()</code>.
+ @param tokenStream the <code>TokenStream</code>  that will be scored.
  @return either a <code>TokenStream</code> that the Highlighter should continue using (eg
- if you read the tokenSream in this method) or null to continue
- using the same <code>TokenStream</code> that was passed in.
- @throws IOException If there is a low-level I/O error
+          if you read the tokenSream in this method) or null to continue
+          using the same <code>TokenStream</code> that was passed in.
+ @throw IOExceptionIf there is a low-level I/O error
  */
 - (OrgApacheLuceneAnalysisTokenStream *)init__WithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream OBJC_METHOD_FAMILY_NONE;
 
@@ -45,19 +49,18 @@
 - (void)startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:(OrgApacheLuceneSearchHighlightTextFragment *)newFragment;
 
 /*!
- @brief Called for each token in the current fragment.
- The <code>Highlighter</code> will
- increment the <code>TokenStream</code> passed to init on every call.
+ @brief Called for each token in the current fragment.The <code>Highlighter</code> will
+  increment the <code>TokenStream</code> passed to init on every call.
  @return a score which is passed to the <code>Highlighter</code> class to influence the
- mark-up of the text (this return value is NOT used to score the
- fragment)
+          mark-up of the text (this return value is NOT used to score the
+          fragment)
  */
 - (jfloat)getTokenScore;
 
 /*!
  @brief Called when the <code>Highlighter</code> has no more tokens for the current fragment -
- the Scorer returns the weighting it has derived for the most recent
- fragment, typically based on the results of <code>getTokenScore()</code>.
+  the Scorer returns the weighting it has derived for the most recent
+  fragment, typically based on the results of <code>getTokenScore()</code>.
  */
 - (jfloat)getFragmentScore;
 
@@ -69,4 +72,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightScorer")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocValuesTermsQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocValuesTermsQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesTermsQuery || defined(INCLUDE_OrgApacheLuceneSearchDocValuesTermsQuery))
 #define OrgApacheLuceneSearchDocValuesTermsQuery_
 
@@ -27,65 +33,65 @@
 
 /*!
  @brief A <code>Query</code> that only accepts documents whose
- term value in the specified field is contained in the
- provided set of allowed terms.
+  term value in the specified field is contained in the
+  provided set of allowed terms.
  <p>
- This is the same functionality as TermsQuery (from
- queries/), but because of drastically different
- implementations, they also have different performance
- characteristics, as described below.
+  This is the same functionality as TermsQuery (from
+  queries/), but because of drastically different
+  implementations, they also have different performance
+  characteristics, as described below. 
  <p>
- <b>NOTE</b>: be very careful using this query: it is
- typically much slower than using <code>TermsQuery</code>,
- but in certain specialized cases may be faster.
+  <b>NOTE</b>: be very careful using this query: it is
+  typically much slower than using <code>TermsQuery</code>,
+  but in certain specialized cases may be faster. 
  <p>
- With each search, this query translates the specified
- set of Terms into a private <code>LongBitSet</code> keyed by
- term number per unique <code>IndexReader</code> (normally one
- reader per segment).  Then, during matching, the term
- number for each docID is retrieved from the cache and
- then checked for inclusion using the <code>LongBitSet</code>.
- Since all testing is done using RAM resident data
- structures, performance should be very fast, most likely
- fast enough to not require further caching of the
- DocIdSet for each possible combination of terms.
- However, because docIDs are simply scanned linearly, an
- index with a great many small documents may find this
- linear scan too costly.
+  With each search, this query translates the specified
+  set of Terms into a private <code>LongBitSet</code> keyed by
+  term number per unique <code>IndexReader</code> (normally one
+  reader per segment).  Then, during matching, the term
+  number for each docID is retrieved from the cache and
+  then checked for inclusion using the <code>LongBitSet</code>.
+  Since all testing is done using RAM resident data
+  structures, performance should be very fast, most likely
+  fast enough to not require further caching of the
+  DocIdSet for each possible combination of terms.
+  However, because docIDs are simply scanned linearly, an
+  index with a great many small documents may find this
+  linear scan too costly. 
  <p>
- In contrast, TermsQuery builds up an <code>FixedBitSet</code>,
- keyed by docID, every time it's created, by enumerating
- through all matching docs using <code>org.apache.lucene.index.PostingsEnum</code> to seek
- and scan through each term's docID list.  While there is
- no linear scan of all docIDs, besides the allocation of
- the underlying array in the <code>FixedBitSet</code>, this
- approach requires a number of "disk seeks" in proportion
- to the number of terms, which can be exceptionally costly
- when there are cache misses in the OS's IO cache.
+  In contrast, TermsQuery builds up an <code>FixedBitSet</code>,
+  keyed by docID, every time it's created, by enumerating
+  through all matching docs using <code>org.apache.lucene.index.PostingsEnum</code> to seek
+  and scan through each term's docID list.  While there is
+  no linear scan of all docIDs, besides the allocation of
+  the underlying array in the <code>FixedBitSet</code>, this
+  approach requires a number of "disk seeks" in proportion
+  to the number of terms, which can be exceptionally costly
+  when there are cache misses in the OS's IO cache. 
  <p>
- Generally, this filter will be slower on the first
- invocation for a given field, but subsequent invocations,
- even if you change the allowed set of Terms, should be
- faster than TermsQuery, especially as the number of
- Terms being matched increases.  If you are matching only
- a very small number of terms, and those terms in turn
- match a very small number of documents, TermsQuery may
- perform faster.
+  Generally, this filter will be slower on the first
+  invocation for a given field, but subsequent invocations,
+  even if you change the allowed set of Terms, should be
+  faster than TermsQuery, especially as the number of
+  Terms being matched increases.  If you are matching only
+  a very small number of terms, and those terms in turn
+  match a very small number of documents, TermsQuery may
+  perform faster. 
  <p>
- Which query is best is very application dependent.
+  Which query is best is very application dependent.
  */
 @interface OrgApacheLuceneSearchDocValuesTermsQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+      withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 
-- (instancetype)initWithNSString:(NSString *)field
-          withJavaUtilCollection:(id<JavaUtilCollection>)terms;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                    withJavaUtilCollection:(id<JavaUtilCollection>)terms;
 
-- (instancetype)initWithNSString:(NSString *)field
-               withNSStringArray:(IOSObjectArray *)terms;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                         withNSStringArray:(IOSObjectArray *)terms;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -95,6 +101,10 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -122,4 +132,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesTermsQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesTermsQuery")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 1
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 
 /*!
@@ -32,14 +37,19 @@
 
 /*!
  @brief Build a filter that removes words that are too long or too
- short from the text.
+  short from the text.
  */
-- (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                        withInt:(jint)min
-                        withInt:(jint)max;
+- (instancetype __nonnull)initWithBoolean:(jboolean)enablePositionIncrements
+   withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                  withInt:(jint)min
+                                  withInt:(jint)max;
 
 - (jboolean)accept;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithBoolean:(jboolean)arg0
+   withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -55,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter")

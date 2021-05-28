@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Arrays.h"
 #include "java/util/Map.h"
@@ -18,11 +17,19 @@
 #include "org/apache/lucene/queries/function/valuesource/MultiFunction.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 
-@interface OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1 : OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/MultiFloatFunction must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1 : OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues {
  @public
   OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *this$0_;
   IOSObjectArray *val$valsArr_;
 }
+
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *)outer$
+                              withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)capture$0
+                                      withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
 
 - (jfloat)floatValWithInt:(jint)doc;
 
@@ -30,24 +37,15 @@
 
 - (NSString *)toStringWithInt:(jint)doc;
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *)outer$
-                              withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)capture$0
-                                      withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1, this$0_, OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1, val$valsArr_, IOSObjectArray *)
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1 *self, OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1 *new_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1)
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1 *create_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction
 
@@ -103,7 +101,7 @@ withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr 
   for (jint i = 0; i < sources_->size_; i++) {
     IOSObjectArray_Set(valsArr, i, [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(IOSObjectArray_Get(sources_, i))) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:readerContext]);
   }
-  return create_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(self, valsArr, self);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(self, valsArr, self);
 }
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
@@ -124,7 +122,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(o) java_getClass])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction class]);
   return [((NSString *) nil_chk([self name])) isEqual:[other name]] && JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(self->sources_, other->sources_);
 }
@@ -135,21 +133,35 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSourceArray:", "MultiFloatFunction", NULL, 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x404, NULL, NULL },
-    { "funcWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:", "func", "F", 0x404, NULL, NULL },
-    { "existsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:", "exists", "Z", 0x4, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x404, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x404, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x1, 5, 6, 7, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, 7, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 11, 12, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValueSourceArray:);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(funcWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:);
+  methods[3].selector = @selector(existsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:);
+  methods[4].selector = @selector(description__);
+  methods[5].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[6].selector = @selector(createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:);
+  methods[7].selector = @selector(hash);
+  methods[8].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "sources_", NULL, 0x14, "[Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
+    { "sources_", "[LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction = { 2, "MultiFloatFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x401, 9, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneQueriesFunctionValueSource;", "func", "I[LOrgApacheLuceneQueriesFunctionFunctionValues;", "exists", "description", "getValues", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "createWeight", "LJavaUtilMap;LOrgApacheLuceneSearchIndexSearcher;", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction = { "MultiFloatFunction", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x401, 9, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction;
 }
 
@@ -162,7 +174,14 @@ void OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_initWithOrgApac
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction)
 
-@implementation OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1
+@implementation OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1
+
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *)outer$
+                              withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)capture$0
+                                      withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs {
+  OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, vs);
+  return self;
+}
 
 - (jfloat)floatValWithInt:(jint)doc {
   return [this$0_ funcWithInt:doc withOrgApacheLuceneQueriesFunctionFunctionValuesArray:val$valsArr_];
@@ -176,13 +195,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMultiF
   return OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_toStringWithNSString_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withInt_([this$0_ name], val$valsArr_, doc);
 }
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *)outer$
-                              withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)capture$0
-                                      withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0 {
-  OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(val$valsArr_);
@@ -190,35 +202,41 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMultiF
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "floatValWithInt:", "floatVal", "F", 0x1, NULL, NULL },
-    { "existsWithInt:", "exists", "Z", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:withOrgApacheLuceneQueriesFunctionValueSource:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(floatValWithInt:);
+  methods[2].selector = @selector(existsWithInt:);
+  methods[3].selector = @selector(toStringWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.valuesource.MultiFloatFunction;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$valsArr_", NULL, 0x1012, "[Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$valsArr_", "[LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1 = { 2, "", "org.apache.lucene.queries.function.valuesource", "MultiFloatFunction", 0x8008, 4, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction;[LOrgApacheLuceneQueriesFunctionFunctionValues;LOrgApacheLuceneQueriesFunctionValueSource;", "floatVal", "I", "exists", "toString", "LOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction;", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1 = { "", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x8010, 4, 2, 5, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+void OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1 *self, OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$valsArr_, capture$0);
-  OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, arg$0);
+  OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, vs);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1 *new_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1, initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, vs)
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1 *create_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *outer$, IOSObjectArray *capture$0, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_1, initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, vs)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_$1)

@@ -10,10 +10,17 @@
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Iterator.h"
 #include "java/util/NoSuchElementException.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/util/MergedIterator.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
 @class OrgApacheLuceneUtilMergedIterator_TermMergeQueue;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/MergedIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneUtilMergedIterator () {
  @public
@@ -30,7 +37,7 @@
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMergedIterator, current_, id)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMergedIterator, current_, id<JavaLangComparable>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMergedIterator, queue_, OrgApacheLuceneUtilMergedIterator_TermMergeQueue *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMergedIterator, top_, IOSObjectArray *)
 
@@ -52,13 +59,13 @@ __attribute__((unused)) static void OrgApacheLuceneUtilMergedIterator_pushTop(Or
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilMergedIterator_SubIterator)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMergedIterator_SubIterator, iterator_, id<JavaUtilIterator>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMergedIterator_SubIterator, current_, id)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMergedIterator_SubIterator, current_, id<JavaLangComparable>)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilMergedIterator_SubIterator_init(OrgApacheLuceneUtilMergedIterator_SubIterator *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilMergedIterator_SubIterator *new_OrgApacheLuceneUtilMergedIterator_SubIterator_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilMergedIterator_SubIterator *new_OrgApacheLuceneUtilMergedIterator_SubIterator_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilMergedIterator_SubIterator *create_OrgApacheLuceneUtilMergedIterator_SubIterator_init();
+__attribute__((unused)) static OrgApacheLuceneUtilMergedIterator_SubIterator *create_OrgApacheLuceneUtilMergedIterator_SubIterator_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator_SubIterator)
 
@@ -68,6 +75,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator_SubIterator)
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneUtilMergedIterator_SubIterator *)a
                     withId:(OrgApacheLuceneUtilMergedIterator_SubIterator *)b;
+
+- (OrgApacheLuceneUtilMergedIterator_SubIterator *)pop;
+
+- (OrgApacheLuceneUtilMergedIterator_SubIterator *)top;
+
+- (OrgApacheLuceneUtilMergedIterator_SubIterator *)insertWithOverflowWithId:(OrgApacheLuceneUtilMergedIterator_SubIterator *)arg0;
+
+- (OrgApacheLuceneUtilMergedIterator_SubIterator *)addWithId:(OrgApacheLuceneUtilMergedIterator_SubIterator *)arg0;
+
+- (OrgApacheLuceneUtilMergedIterator_SubIterator *)getSentinelObject;
+
+- (OrgApacheLuceneUtilMergedIterator_SubIterator *)updateTopWithId:(OrgApacheLuceneUtilMergedIterator_SubIterator *)arg0;
+
+- (OrgApacheLuceneUtilMergedIterator_SubIterator *)updateTop;
 
 @end
 
@@ -106,7 +127,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator_TermMergeQueue)
   return false;
 }
 
-- (id)next {
+- (id<JavaLangComparable>)next {
   OrgApacheLuceneUtilMergedIterator_pushTop(self);
   if ([((OrgApacheLuceneUtilMergedIterator_TermMergeQueue *) nil_chk(queue_)) size] > 0) {
     OrgApacheLuceneUtilMergedIterator_pullTop(self);
@@ -132,6 +153,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator_TermMergeQueue)
   OrgApacheLuceneUtilMergedIterator_pushTop(self);
 }
 
+- (void)forEachRemainingWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaUtilIterator_forEachRemainingWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
 - (void)dealloc {
   RELEASE_(current_);
   RELEASE_(queue_);
@@ -140,24 +165,35 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator_TermMergeQueue)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilIteratorArray:", "MergedIterator", NULL, 0x81, NULL, NULL },
-    { "initWithBoolean:withJavaUtilIteratorArray:", "MergedIterator", NULL, 0x81, NULL, NULL },
-    { "hasNext", NULL, "Z", 0x1, NULL, NULL },
-    { "next", NULL, "TT;", 0x1, NULL, "()TT;" },
-    { "remove", NULL, "V", 0x1, NULL, NULL },
-    { "pullTop", NULL, "V", 0x2, NULL, NULL },
-    { "pushTop", NULL, "V", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x81, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 2, -1, 3, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangComparable;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilIteratorArray:);
+  methods[1].selector = @selector(initWithBoolean:withJavaUtilIteratorArray:);
+  methods[2].selector = @selector(hasNext);
+  methods[3].selector = @selector(next);
+  methods[4].selector = @selector(remove);
+  methods[5].selector = @selector(pullTop);
+  methods[6].selector = @selector(pushTop);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "current_", NULL, 0x2, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
-    { "queue_", NULL, 0x12, "Lorg.apache.lucene.util.MergedIterator$TermMergeQueue;", NULL, "Lorg/apache/lucene/util/MergedIterator$TermMergeQueue<TT;>;", .constantValue.asLong = 0 },
-    { "top_", NULL, 0x12, "[Lorg.apache.lucene.util.MergedIterator$SubIterator;", NULL, "[Lorg/apache/lucene/util/MergedIterator$SubIterator<TT;>;", .constantValue.asLong = 0 },
-    { "removeDuplicates_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "numTop_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "current_", "LJavaLangComparable;", .constantValue.asLong = 0, 0x2, -1, -1, 5, -1 },
+    { "queue_", "LOrgApacheLuceneUtilMergedIterator_TermMergeQueue;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
+    { "top_", "[LOrgApacheLuceneUtilMergedIterator_SubIterator;", .constantValue.asLong = 0, 0x12, -1, -1, 7, -1 },
+    { "removeDuplicates_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numTop_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.MergedIterator$SubIterator;", "Lorg.apache.lucene.util.MergedIterator$TermMergeQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMergedIterator = { 2, "MergedIterator", "org.apache.lucene.util", NULL, 0x11, 7, methods, 5, fields, 0, NULL, 2, inner_classes, NULL, "<T::Ljava/lang/Comparable<TT;>;>Ljava/lang/Object;Ljava/util/Iterator<TT;>;" };
+  static const void *ptrTable[] = { "[LJavaUtilIterator;", "([Ljava/util/Iterator<TT;>;)V", "Z[LJavaUtilIterator;", "(Z[Ljava/util/Iterator<TT;>;)V", "()TT;", "TT;", "Lorg/apache/lucene/util/MergedIterator$TermMergeQueue<TT;>;", "[Lorg/apache/lucene/util/MergedIterator$SubIterator<TT;>;", "LOrgApacheLuceneUtilMergedIterator_SubIterator;LOrgApacheLuceneUtilMergedIterator_TermMergeQueue;", "<T::Ljava/lang/Comparable<TT;>;>Ljava/lang/Object;Ljava/util/Iterator<TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMergedIterator = { "MergedIterator", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 7, 5, -1, 8, -1, 9, -1 };
   return &_OrgApacheLuceneUtilMergedIterator;
 }
 
@@ -207,7 +243,7 @@ OrgApacheLuceneUtilMergedIterator *create_OrgApacheLuceneUtilMergedIterator_init
 }
 
 void OrgApacheLuceneUtilMergedIterator_pullTop(OrgApacheLuceneUtilMergedIterator *self) {
-  JreAssert((self->numTop_ == 0), (@"org/apache/lucene/util/MergedIterator.java:113 condition failed: assert numTop == 0;"));
+  JreAssert(self->numTop_ == 0, @"org/apache/lucene/util/MergedIterator.java:113 condition failed: assert numTop == 0;");
   IOSObjectArray_Set(nil_chk(self->top_), self->numTop_++, [((OrgApacheLuceneUtilMergedIterator_TermMergeQueue *) nil_chk(self->queue_)) pop]);
   if (self->removeDuplicates_) {
     while ([self->queue_ size] != 0 && [((id<JavaLangComparable>) nil_chk(((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk([self->queue_ top]))->current_)) isEqual:((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(IOSObjectArray_Get(self->top_, 0)))->current_]) {
@@ -248,15 +284,21 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SubIterator", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "iterator_", NULL, 0x0, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<TI;>;", .constantValue.asLong = 0 },
-    { "current_", NULL, 0x0, "TI;", NULL, "TI;", .constantValue.asLong = 0 },
-    { "index_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "iterator_", "LJavaUtilIterator;", .constantValue.asLong = 0, 0x0, -1, -1, 0, -1 },
+    { "current_", "LJavaLangComparable;", .constantValue.asLong = 0, 0x0, -1, -1, 1, -1 },
+    { "index_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMergedIterator_SubIterator = { 2, "SubIterator", "org.apache.lucene.util", "MergedIterator", 0xa, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<I::Ljava/lang/Comparable<TI;>;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "Ljava/util/Iterator<TI;>;", "TI;", "LOrgApacheLuceneUtilMergedIterator;", "<I::Ljava/lang/Comparable<TI;>;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMergedIterator_SubIterator = { "SubIterator", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0xa, 1, 3, 2, -1, -1, 3, -1 };
   return &_OrgApacheLuceneUtilMergedIterator_SubIterator;
 }
 
@@ -285,7 +327,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMergedIterator_SubIterator)
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneUtilMergedIterator_SubIterator *)a
                     withId:(OrgApacheLuceneUtilMergedIterator_SubIterator *)b {
-  jint cmp = [((id<JavaLangComparable>) nil_chk(((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(a))->current_)) compareToWithId:((id<JavaLangComparable>) ((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(b))->current_)];
+  jint cmp = [((id<JavaLangComparable>) nil_chk(((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(a))->current_)) compareToWithId:((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(b))->current_];
   if (cmp != 0) {
     return cmp < 0;
   }
@@ -295,12 +337,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMergedIterator_SubIterator)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TermMergeQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/util/MergedIterator$SubIterator<TC;>;Lorg/apache/lucene/util/MergedIterator$SubIterator<TC;>;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 1, 2, -1, 3, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.MergedIterator$SubIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMergedIterator_TermMergeQueue = { 2, "TermMergeQueue", "org.apache.lucene.util", "MergedIterator", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "<C::Ljava/lang/Comparable<TC;>;>Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/util/MergedIterator$SubIterator<TC;>;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneUtilMergedIterator_SubIterator;LOrgApacheLuceneUtilMergedIterator_SubIterator;", "(Lorg/apache/lucene/util/MergedIterator$SubIterator<TC;>;Lorg/apache/lucene/util/MergedIterator$SubIterator<TC;>;)Z", "LOrgApacheLuceneUtilMergedIterator;", "<C::Ljava/lang/Comparable<TC;>;>Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/util/MergedIterator$SubIterator<TC;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMergedIterator_TermMergeQueue = { "TermMergeQueue", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0xa, 2, 0, 4, -1, -1, 5, -1 };
   return &_OrgApacheLuceneUtilMergedIterator_TermMergeQueue;
 }
 

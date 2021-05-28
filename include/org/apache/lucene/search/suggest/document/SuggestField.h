@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentSuggestField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentSuggestField_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentSuggestField || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentSuggestField))
 #define OrgApacheLuceneSearchSuggestDocumentSuggestField_
 
@@ -20,54 +26,58 @@
 #define INCLUDE_OrgApacheLuceneDocumentField 1
 #include "org/apache/lucene/document/Field.h"
 
+@class IOSByteArray;
+@class JavaIoReader;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneDocumentFieldType;
+@class OrgApacheLuceneDocumentField_Index;
+@class OrgApacheLuceneDocumentField_Store;
+@class OrgApacheLuceneDocumentField_TermVector;
 @class OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream;
+@class OrgApacheLuceneUtilBytesRef;
 
 /*!
  @brief <p>
- Field that indexes a string value and a weight as a weighted completion
- against a named suggester.
+  Field that indexes a string value and a weight as a weighted completion
+  against a named suggester.
  Field is tokenized, not stored and stores documents, frequencies and positions.
- Field can be used to provide near real time document suggestions.
+  Field can be used to provide near real time document suggestions. 
  </p>
- <p>
- Besides the usual <code>org.apache.lucene.analysis.Analyzer</code>s,
- <code>CompletionAnalyzer</code>
- can be used to tune suggest field only parameters
- (e.g. preserving token seperators, preserving position increments
- when converting the token stream to an automaton)
+  <p>
+  Besides the usual <code>org.apache.lucene.analysis.Analyzer</code>s,
+  <code>CompletionAnalyzer</code>
+  can be used to tune suggest field only parameters
+  (e.g. preserving token seperators, preserving position increments
+  when converting the token stream to an automaton) 
  </p>
- <p>
- Example indexing usage:
+  <p>
+  Example indexing usage: 
  <pre class="prettyprint">
- document.add(new SuggestField(name, "suggestion", 4));
+  document.add(new SuggestField(name, "suggestion", 4)); 
  
 @endcode
- To perform document suggestions based on the this field, use
- <code>SuggestIndexSearcher.suggest(CompletionQuery,int)</code>
+  To perform document suggestions based on the this field, use 
+ <code>SuggestIndexSearcher.suggest(CompletionQuery, int)</code>
  */
 @interface OrgApacheLuceneSearchSuggestDocumentSuggestField : OrgApacheLuceneDocumentField
-
-+ (OrgApacheLuceneDocumentFieldType *)FIELD_TYPE;
-
-+ (jbyte)TYPE;
+@property (readonly, class, strong) OrgApacheLuceneDocumentFieldType *FIELD_TYPE NS_SWIFT_NAME(FIELD_TYPE);
+@property (readonly, class) jbyte TYPE NS_SWIFT_NAME(TYPE);
 
 #pragma mark Public
 
 /*!
  @brief Creates a <code>SuggestField</code>
- @param name   field name
- @param value  field value to get suggestions on
+ @param name field name
+ @param value field value to get suggestions on
  @param weight field weight
- @throws IllegalArgumentException if either the name or value is null,
- if value is an empty string, if the weight is negative, if value contains
- any reserved characters
+ @throw IllegalArgumentExceptionif either the name or value is null,
+  if value is an empty string, if the weight is negative, if value contains
+  any reserved characters
  */
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value
-                         withInt:(jint)weight;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                              withNSString:(NSString *)value
+                                   withInt:(jint)weight;
 
 - (OrgApacheLuceneAnalysisTokenStream *)tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)reuse;
@@ -85,6 +95,70 @@
  */
 - (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *)wrapTokenStreamWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentSuggestField)
@@ -92,12 +166,12 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentSuggestField)
 /*!
  @brief Default field type for suggest field
  */
-inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneSearchSuggestDocumentSuggestField_get_FIELD_TYPE();
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneSearchSuggestDocumentSuggestField_get_FIELD_TYPE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestDocumentSuggestField, FIELD_TYPE, OrgApacheLuceneDocumentFieldType *)
 
-inline jbyte OrgApacheLuceneSearchSuggestDocumentSuggestField_get_TYPE();
+inline jbyte OrgApacheLuceneSearchSuggestDocumentSuggestField_get_TYPE(void);
 #define OrgApacheLuceneSearchSuggestDocumentSuggestField_TYPE 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentSuggestField, TYPE, jbyte)
 
@@ -111,4 +185,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentSuggestField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentSuggestField")

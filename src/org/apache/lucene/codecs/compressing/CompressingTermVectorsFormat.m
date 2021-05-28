@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/codecs/TermVectorsFormat.h"
 #include "org/apache/lucene/codecs/TermVectorsReader.h"
@@ -18,6 +17,10 @@
 #include "org/apache/lucene/index/SegmentInfo.h"
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/IOContext.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/compressing/CompressingTermVectorsFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat () {
  @public
@@ -59,7 +62,7 @@ withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompre
 }
 
 - (NSString *)description {
-  return JreStrcat("$$@$I$IC", [[self getClass] getSimpleName], @"(compressionMode=", compressionMode_, @", chunkSize=", chunkSize_, @", blockSize=", blockSize_, ')');
+  return JreStrcat("$$@$I$IC", [[self java_getClass] getSimpleName], @"(compressionMode=", compressionMode_, @", chunkSize=", chunkSize_, @", blockSize=", blockSize_, ')');
 }
 
 - (void)dealloc {
@@ -70,20 +73,29 @@ withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompre
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:withOrgApacheLuceneCodecsCompressingCompressionMode:withInt:withInt:", "CompressingTermVectorsFormat", NULL, 0x1, NULL, NULL },
-    { "vectorsReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:", "vectorsReader", "Lorg.apache.lucene.codecs.TermVectorsReader;", 0x11, "Ljava.io.IOException;", NULL },
-    { "vectorsWriterWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "vectorsWriter", "Lorg.apache.lucene.codecs.TermVectorsWriter;", 0x11, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsReader;", 0x11, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsWriter;", 0x11, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:withOrgApacheLuceneCodecsCompressingCompressionMode:withInt:withInt:);
+  methods[1].selector = @selector(vectorsReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:);
+  methods[2].selector = @selector(vectorsWriterWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "formatName_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentSuffix_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "compressionMode_", NULL, 0x12, "Lorg.apache.lucene.codecs.compressing.CompressionMode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "chunkSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "formatName_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "segmentSuffix_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "compressionMode_", "LOrgApacheLuceneCodecsCompressingCompressionMode;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "chunkSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "blockSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat = { 2, "CompressingTermVectorsFormat", "org.apache.lucene.codecs.compressing", NULL, 0x1, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LNSString;LOrgApacheLuceneCodecsCompressingCompressionMode;II", "vectorsReader", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneIndexFieldInfos;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "vectorsWriter", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneStoreIOContext;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat = { "CompressingTermVectorsFormat", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x1, 4, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat;
 }
 

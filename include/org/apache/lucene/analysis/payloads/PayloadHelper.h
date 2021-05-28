@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPayloadsPayloadHelper
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPayloadsPayloadHelper_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadHelper || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsPayloadHelper))
 #define OrgApacheLuceneAnalysisPayloadsPayloadHelper_
 
@@ -25,10 +31,10 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- - seealso: #decodeFloat(byte[],int)
+ - seealso: #decodeFloat(byte[], int)
  - seealso: #encodeFloat(float)
  @return the decoded float
  */
@@ -64,6 +70,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsPayloadHelper)
 
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(OrgApacheLuceneAnalysisPayloadsPayloadHelper *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsPayloadHelper *new_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsPayloadHelper *create_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(void);
+
 FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(jfloat payload);
 
 FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(jfloat payload, IOSByteArray *data, jint offset);
@@ -78,14 +90,12 @@ FOUNDATION_EXPORT jfloat OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeFloa
 
 FOUNDATION_EXPORT jint OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeIntWithByteArray_withInt_(IOSByteArray *bytes, jint offset);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(OrgApacheLuceneAnalysisPayloadsPayloadHelper *self);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsPayloadHelper *new_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsPayloadHelper *create_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init();
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsPayloadHelper)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadHelper")

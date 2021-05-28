@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentSortedSetDocValuesField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentSortedSetDocValuesField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentSortedSetDocValuesField || defined(INCLUDE_OrgApacheLuceneDocumentSortedSetDocValuesField))
 #define OrgApacheLuceneDocumentSortedSetDocValuesField_
 
@@ -20,27 +26,33 @@
 #define INCLUDE_OrgApacheLuceneDocumentField 1
 #include "org/apache/lucene/document/Field.h"
 
+@class IOSByteArray;
+@class JavaIoReader;
+@class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneDocumentFieldType;
+@class OrgApacheLuceneDocumentField_Index;
+@class OrgApacheLuceneDocumentField_Store;
+@class OrgApacheLuceneDocumentField_TermVector;
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
  @brief <p>
- Field that stores
- a set of per-document <code>BytesRef</code> values, indexed for
- faceting,grouping,joining.
- Here's an example usage:
+  Field that stores
+  a set of per-document <code>BytesRef</code> values, indexed for
+  faceting,grouping,joining.
+ Here's an example usage:  
  <pre class="prettyprint">
- document.add(new SortedSetDocValuesField(name, new BytesRef("hello")));
- document.add(new SortedSetDocValuesField(name, new BytesRef("world")));
+    document.add(new SortedSetDocValuesField(name, new BytesRef("hello")));
+    document.add(new SortedSetDocValuesField(name, new BytesRef("world"))); 
  
 @endcode
+   
  <p>
- If you also need to store the value, you should add a
- separate <code>StoredField</code> instance.
+  If you also need to store the value, you should add a
+  separate <code>StoredField</code> instance.
  */
 @interface OrgApacheLuceneDocumentSortedSetDocValuesField : OrgApacheLuceneDocumentField
-
-+ (OrgApacheLuceneDocumentFieldType *)TYPE;
+@property (readonly, class, strong) OrgApacheLuceneDocumentFieldType *TYPE NS_SWIFT_NAME(TYPE);
 
 #pragma mark Public
 
@@ -48,10 +60,74 @@
  @brief Create a new sorted DocValues field.
  @param name field name
  @param bytes binary content
- @throws IllegalArgumentException if the field name is null
+ @throw IllegalArgumentExceptionif the field name is null
  */
-- (instancetype)initWithNSString:(NSString *)name
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -60,7 +136,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentSortedSetDocValuesField)
 /*!
  @brief Type for sorted bytes DocValues
  */
-inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedSetDocValuesField_get_TYPE();
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedSetDocValuesField_get_TYPE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedSetDocValuesField_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentSortedSetDocValuesField, TYPE, OrgApacheLuceneDocumentFieldType *)
@@ -75,4 +151,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentSortedSetDocValuesField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentSortedSetDocValuesField")

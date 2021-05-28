@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileFileAttributeBasicFileAttributes
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFileAttributeBasicFileAttributes_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeBasicFileAttributes || defined(INCLUDE_OrgLukhnosPortmobileFileAttributeBasicFileAttributes))
 #define OrgLukhnosPortmobileFileAttributeBasicFileAttributes_
 
@@ -26,18 +32,17 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoFile:(JavaIoFile *)file;
+- (instancetype __nonnull)initWithJavaIoFile:(JavaIoFile *)file;
 
 /*!
- @brief WARNING: This is NOT the actual creation time.
- This curretly works just because of how
- SimpleFSLock works!!
+ @brief WARNING: This is NOT the actual creation time.This curretly works just because of how
+  SimpleFSLock works!!
  */
 - (OrgLukhnosPortmobileFileAttributeFileTime *)creationTime;
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -53,12 +58,16 @@ FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *create_O
 
 FOUNDATION_EXPORT void OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *self);
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *new_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *new_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *create_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init();
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *create_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileAttributeBasicFileAttributes)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeBasicFileAttributes")

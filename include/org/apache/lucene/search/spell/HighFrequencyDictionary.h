@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpellHighFrequencyDictionary
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpellHighFrequencyDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellHighFrequencyDictionary || defined(INCLUDE_OrgApacheLuceneSearchSpellHighFrequencyDictionary))
 #define OrgApacheLuceneSearchSpellHighFrequencyDictionary_
 
@@ -25,11 +31,11 @@
 
 /*!
  @brief HighFrequencyDictionary: terms taken from the given field
- of a Lucene index, which appear in a number of documents
- above a given threshold.
+  of a Lucene index, which appear in a number of documents
+  above a given threshold.
  Threshold is a value in [0..1] representing the minimum
- number of documents (of the total) where a term should appear.
- Based on LuceneDictionary.
+  number of documents (of the total) where a term should appear. 
+  Based on LuceneDictionary.
  */
 @interface OrgApacheLuceneSearchSpellHighFrequencyDictionary : NSObject < OrgApacheLuceneSearchSpellDictionary >
 
@@ -37,16 +43,20 @@
 
 /*!
  @brief Creates a new Dictionary, pulling source terms from
- the specified <code>field</code> in the provided <code>reader</code>.
+  the specified <code>field</code> in the provided <code>reader</code>.
  <p>
- Terms appearing in less than <code>thresh</code> percentage of documents
- will be excluded.
+  Terms appearing in less than <code>thresh</code> percentage of documents
+  will be excluded.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                           withNSString:(NSString *)field
-                                              withFloat:(jfloat)thresh;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                                     withNSString:(NSString *)field
+                                                        withFloat:(jfloat)thresh;
 
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -91,7 +101,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellHighFrequencyDictionary)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary:(OrgApacheLuceneSearchSpellHighFrequencyDictionary *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary:(OrgApacheLuceneSearchSpellHighFrequencyDictionary *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -107,4 +121,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellHighFrequencyDictionary_Hig
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellHighFrequencyDictionary")

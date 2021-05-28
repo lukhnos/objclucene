@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/NumericRangeFilter.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
@@ -15,6 +16,10 @@
 #include "org/apache/lucene/search/NumericRangeFilter.h"
 #include "org/apache/lucene/search/NumericRangeQuery.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/NumericRangeFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchNumericRangeFilter ()
 
 - (instancetype)initWithOrgApacheLuceneSearchNumericRangeQuery:(OrgApacheLuceneSearchNumericRangeQuery *)query;
@@ -26,6 +31,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchNumericRangeFilter_init
 __attribute__((unused)) static OrgApacheLuceneSearchNumericRangeFilter *new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery *query) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static OrgApacheLuceneSearchNumericRangeFilter *create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery *query);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchNumericRangeFilter__Annotations$0(void);
 
 @implementation OrgApacheLuceneSearchNumericRangeFilter
 
@@ -110,11 +117,11 @@ __attribute__((unused)) static OrgApacheLuceneSearchNumericRangeFilter *create_O
   return [((OrgApacheLuceneSearchNumericRangeQuery *) nil_chk(query_)) includesMax];
 }
 
-- (id)getMin {
+- (NSNumber *)getMin {
   return [((OrgApacheLuceneSearchNumericRangeQuery *) nil_chk(query_)) getMin];
 }
 
-- (id)getMax {
+- (NSNumber *)getMax {
   return [((OrgApacheLuceneSearchNumericRangeQuery *) nil_chk(query_)) getMax];
 }
 
@@ -122,29 +129,43 @@ __attribute__((unused)) static OrgApacheLuceneSearchNumericRangeFilter *create_O
   return [((OrgApacheLuceneSearchNumericRangeQuery *) nil_chk(query_)) getPrecisionStep];
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchNumericRangeQuery:", "NumericRangeFilter", NULL, 0x2, NULL, "(Lorg/apache/lucene/search/NumericRangeQuery<TT;>;)V" },
-    { "newLongRangeWithNSString:withInt:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:", "newLongRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Long;Ljava/lang/Long;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Long;>;" },
-    { "newLongRangeWithNSString:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:", "newLongRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Long;>;" },
-    { "newIntRangeWithNSString:withInt:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:", "newIntRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Integer;>;" },
-    { "newIntRangeWithNSString:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:", "newIntRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Integer;>;" },
-    { "newDoubleRangeWithNSString:withInt:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:", "newDoubleRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Double;Ljava/lang/Double;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Double;>;" },
-    { "newDoubleRangeWithNSString:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:", "newDoubleRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Double;Ljava/lang/Double;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Double;>;" },
-    { "newFloatRangeWithNSString:withInt:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:", "newFloatRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Float;Ljava/lang/Float;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Float;>;" },
-    { "newFloatRangeWithNSString:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:", "newFloatRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Float;Ljava/lang/Float;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Float;>;" },
-    { "includesMin", NULL, "Z", 0x1, NULL, NULL },
-    { "includesMax", NULL, "Z", 0x1, NULL, NULL },
-    { "getMin", NULL, "TT;", 0x1, NULL, "()TT;" },
-    { "getMax", NULL, "TT;", 0x1, NULL, "()TT;" },
-    { "getPrecisionStep", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeFilter;", 0x9, 2, 3, -1, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeFilter;", 0x9, 2, 5, -1, 6, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeFilter;", 0x9, 7, 8, -1, 9, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeFilter;", 0x9, 7, 10, -1, 11, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeFilter;", 0x9, 12, 13, -1, 14, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeFilter;", 0x9, 12, 15, -1, 16, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeFilter;", 0x9, 17, 18, -1, 19, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeFilter;", 0x9, 17, 20, -1, 21, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSNumber;", 0x1, -1, -1, -1, 22, -1, -1 },
+    { NULL, "LNSNumber;", 0x1, -1, -1, -1, 22, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.NumericRangeQuery;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchNumericRangeFilter = { 2, "NumericRangeFilter", "org.apache.lucene.search", NULL, 0x11, 14, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "<T:Ljava/lang/Number;>Lorg/apache/lucene/search/MultiTermQueryWrapperFilter<Lorg/apache/lucene/search/NumericRangeQuery<TT;>;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchNumericRangeQuery:);
+  methods[1].selector = @selector(newLongRangeWithNSString:withInt:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:);
+  methods[2].selector = @selector(newLongRangeWithNSString:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:);
+  methods[3].selector = @selector(newIntRangeWithNSString:withInt:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:);
+  methods[4].selector = @selector(newIntRangeWithNSString:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:);
+  methods[5].selector = @selector(newDoubleRangeWithNSString:withInt:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:);
+  methods[6].selector = @selector(newDoubleRangeWithNSString:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:);
+  methods[7].selector = @selector(newFloatRangeWithNSString:withInt:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:);
+  methods[8].selector = @selector(newFloatRangeWithNSString:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:);
+  methods[9].selector = @selector(includesMin);
+  methods[10].selector = @selector(includesMax);
+  methods[11].selector = @selector(getMin);
+  methods[12].selector = @selector(getMax);
+  methods[13].selector = @selector(getPrecisionStep);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchNumericRangeQuery;", "(Lorg/apache/lucene/search/NumericRangeQuery<TT;>;)V", "newLongRange", "LNSString;ILJavaLangLong;LJavaLangLong;ZZ", "(Ljava/lang/String;ILjava/lang/Long;Ljava/lang/Long;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Long;>;", "LNSString;LJavaLangLong;LJavaLangLong;ZZ", "(Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Long;>;", "newIntRange", "LNSString;ILJavaLangInteger;LJavaLangInteger;ZZ", "(Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Integer;>;", "LNSString;LJavaLangInteger;LJavaLangInteger;ZZ", "(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Integer;>;", "newDoubleRange", "LNSString;ILJavaLangDouble;LJavaLangDouble;ZZ", "(Ljava/lang/String;ILjava/lang/Double;Ljava/lang/Double;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Double;>;", "LNSString;LJavaLangDouble;LJavaLangDouble;ZZ", "(Ljava/lang/String;Ljava/lang/Double;Ljava/lang/Double;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Double;>;", "newFloatRange", "LNSString;ILJavaLangFloat;LJavaLangFloat;ZZ", "(Ljava/lang/String;ILjava/lang/Float;Ljava/lang/Float;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Float;>;", "LNSString;LJavaLangFloat;LJavaLangFloat;ZZ", "(Ljava/lang/String;Ljava/lang/Float;Ljava/lang/Float;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Float;>;", "()TT;", "<T:Ljava/lang/Number;>Lorg/apache/lucene/search/MultiTermQueryWrapperFilter<Lorg/apache/lucene/search/NumericRangeQuery<TT;>;>;", (void *)&OrgApacheLuceneSearchNumericRangeFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchNumericRangeFilter = { "NumericRangeFilter", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x11, 14, 0, -1, -1, -1, 23, 24 };
   return &_OrgApacheLuceneSearchNumericRangeFilter;
 }
 
@@ -200,6 +221,10 @@ OrgApacheLuceneSearchNumericRangeFilter *OrgApacheLuceneSearchNumericRangeFilter
 OrgApacheLuceneSearchNumericRangeFilter *OrgApacheLuceneSearchNumericRangeFilter_newFloatRangeWithNSString_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(NSString *field, JavaLangFloat *min, JavaLangFloat *max, jboolean minInclusive, jboolean maxInclusive) {
   OrgApacheLuceneSearchNumericRangeFilter_initialize();
   return create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newFloatRangeWithNSString_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(field, min, max, minInclusive, maxInclusive));
+}
+
+IOSObjectArray *OrgApacheLuceneSearchNumericRangeFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchNumericRangeFilter)

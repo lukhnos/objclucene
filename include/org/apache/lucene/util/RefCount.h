@@ -13,12 +13,17 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilRefCount
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilRefCount_) && (INCLUDE_ALL_OrgApacheLuceneUtilRefCount || defined(INCLUDE_OrgApacheLuceneUtilRefCount))
 #define OrgApacheLuceneUtilRefCount_
 
 /*!
- @brief Manages reference counting for a given object.
- Extensions can override
+ @brief Manages reference counting for a given object.Extensions can override 
  <code>release()</code> to do custom logic when reference counting hits 0.
  */
 @interface OrgApacheLuceneUtilRefCount : NSObject {
@@ -28,12 +33,11 @@
 
 #pragma mark Public
 
-- (instancetype)initWithId:(id)object;
+- (instancetype __nonnull)initWithId:(id)object;
 
 /*!
- @brief Decrements the reference counting of this object.
- When reference counting
- hits 0, calls <code>release()</code>.
+ @brief Decrements the reference counting of this object.When reference counting
+  hits 0, calls <code>release()</code>.
  */
 - (void)decRef;
 
@@ -45,21 +49,23 @@
 - (jint)getRefCount;
 
 /*!
- @brief Increments the reference count.
- Calls to this method must be matched with
- calls to <code>decRef()</code>.
+ @brief Increments the reference count.Calls to this method must be matched with
+  calls to <code>decRef()</code>.
  */
 - (void)incRef;
 
 #pragma mark Protected
 
 /*!
- @brief Called when reference counting hits 0.
- By default this method does nothing,
- but extensions can override to e.g. release resources attached to object
- that is managed by this class.
+ @brief Called when reference counting hits 0.By default this method does nothing,
+  but extensions can override to e.g. release resources attached to object
+  that is managed by this class.
  */
 - (void)release__;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -77,4 +83,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRefCount)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilRefCount")

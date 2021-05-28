@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collections.h"
 #include "java/util/Map.h"
 #include "java/util/WeakHashMap.h"
@@ -22,6 +21,10 @@
 #include "org/apache/lucene/search/join/QueryBitSetProducer.h"
 #include "org/apache/lucene/util/BitDocIdSet.h"
 #include "org/apache/lucene/util/BitSet.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/QueryBitSetProducer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchJoinQueryBitSetProducer () {
  @public
@@ -48,7 +51,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinQueryBitSetProducer, cache_, id<Jav
 - (OrgApacheLuceneUtilBitSet *)getBitSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   OrgApacheLuceneIndexLeafReader *reader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader];
   id key = [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) getCoreCacheKey];
-  OrgApacheLuceneSearchDocIdSet *docIdSet = [((id<JavaUtilMap>) nil_chk(cache_)) getWithId:key];
+  OrgApacheLuceneSearchDocIdSet *docIdSet = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(cache_)) getWithId:key]);
   if (docIdSet == nil) {
     OrgApacheLuceneIndexIndexReaderContext *topLevelContext = OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context);
     OrgApacheLuceneSearchIndexSearcher *searcher = create_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(topLevelContext);
@@ -63,15 +66,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinQueryBitSetProducer, cache_, id<Jav
     }
     [cache_ putWithId:key withId:docIdSet];
   }
-  return docIdSet == JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY) ? nil : [((OrgApacheLuceneUtilBitDocIdSet *) nil_chk(((OrgApacheLuceneUtilBitDocIdSet *) cast_chk(docIdSet, [OrgApacheLuceneUtilBitDocIdSet class])))) bits];
+  return JreObjectEqualsEquals(docIdSet, JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY)) ? nil : [((OrgApacheLuceneUtilBitDocIdSet *) nil_chk(((OrgApacheLuceneUtilBitDocIdSet *) cast_chk(docIdSet, [OrgApacheLuceneUtilBitDocIdSet class])))) bits];
 }
 
 - (NSString *)description {
-  return JreStrcat("$C$C", [[self getClass] getSimpleName], '(', [((OrgApacheLuceneSearchQuery *) nil_chk(query_)) description], ')');
+  return JreStrcat("$C$C", [[self java_getClass] getSimpleName], '(', [((OrgApacheLuceneSearchQuery *) nil_chk(query_)) description], ')');
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == nil || [self getClass] != (id) [o getClass]) {
+  if (o == nil || !JreObjectEqualsEquals([self java_getClass], [o java_getClass])) {
     return false;
   }
   OrgApacheLuceneSearchJoinQueryBitSetProducer *other = (OrgApacheLuceneSearchJoinQueryBitSetProducer *) cast_chk(o, [OrgApacheLuceneSearchJoinQueryBitSetProducer class]);
@@ -79,7 +82,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinQueryBitSetProducer, cache_, id<Jav
 }
 
 - (NSUInteger)hash {
-  return 31 * ((jint) [[self getClass] hash]) + ((jint) [((OrgApacheLuceneSearchQuery *) nil_chk(query_)) hash]);
+  return 31 * ((jint) [[self java_getClass] hash]) + ((jint) [((OrgApacheLuceneSearchQuery *) nil_chk(query_)) hash]);
 }
 
 - (void)dealloc {
@@ -89,19 +92,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinQueryBitSetProducer, cache_, id<Jav
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQuery:", "QueryBitSetProducer", NULL, 0x1, NULL, NULL },
-    { "getQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "getBitSetWithOrgApacheLuceneIndexLeafReaderContext:", "getBitSet", "Lorg.apache.lucene.util.BitSet;", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBitSet;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(getQuery);
+  methods[2].selector = @selector(getBitSetWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(description);
+  methods[4].selector = @selector(isEqual:);
+  methods[5].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "query_", NULL, 0x12, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "cache_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Object;Lorg/apache/lucene/search/DocIdSet;>;", .constantValue.asLong = 0 },
+    { "query_", "LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "cache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 8, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinQueryBitSetProducer = { 2, "QueryBitSetProducer", "org.apache.lucene.search.join", NULL, 0x1, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchQuery;", "getBitSet", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "toString", "equals", "LNSObject;", "hashCode", "Ljava/util/Map<Ljava/lang/Object;Lorg/apache/lucene/search/DocIdSet;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinQueryBitSetProducer = { "QueryBitSetProducer", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x1, 6, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinQueryBitSetProducer;
 }
 

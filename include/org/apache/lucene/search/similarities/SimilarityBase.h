@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesSimilarityBase
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesSimilarityBase_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesSimilarityBase || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesSimilarityBase))
 #define OrgApacheLuceneSearchSimilaritiesSimilarityBase_
 
@@ -33,24 +39,24 @@
 
 /*!
  @brief A subclass of <code>Similarity</code> that provides a simplified API for its
- descendants.
- Subclasses are only required to implement the <code>score</code>
- and <code>toString()</code> methods. Implementing
- <code>explain(List,BasicStats,int,float,float)</code> is optional,
- inasmuch as SimilarityBase already provides a basic explanation of the score
- and the term frequency. However, implementers of a subclass are encouraged to
- include as much detail about the scoring method as possible.
+  descendants.Subclasses are only required to implement the <code>score</code>
+  and <code>toString()</code> methods.
+ Implementing 
+ <code>explain(List, BasicStats, int, float, float)</code> is optional,
+  inasmuch as SimilarityBase already provides a basic explanation of the score
+  and the term frequency. However, implementers of a subclass are encouraged to
+  include as much detail about the scoring method as possible. 
  <p>
- Note: multi-word queries such as phrase queries are scored in a different way
- than Lucene's default ranking algorithm: whereas it "fakes" an IDF value for
- the phrase as a whole (since it does not know it), this class instead scores
- phrases as a summation of the individual term scores.
+  Note: multi-word queries such as phrase queries are scored in a different way
+  than Lucene's default ranking algorithm: whereas it "fakes" an IDF value for
+  the phrase as a whole (since it does not know it), this class instead scores
+  phrases as a summation of the individual term scores.
  */
 @interface OrgApacheLuceneSearchSimilaritiesSimilarityBase : OrgApacheLuceneSearchSimilaritiesSimilarity {
  @public
   /*!
    @brief True if overlap tokens (tokens with a position of increment of zero) are
- discounted from the document's length.
+  discounted from the document's length.
    */
   jboolean discountOverlaps_;
 }
@@ -60,9 +66,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.)
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Encodes the document length in the same way as <code>TFIDFSimilarity</code>.
@@ -86,10 +92,9 @@
 
 /*!
  @brief Determines whether overlap tokens (Tokens with
- 0 position increment) are ignored when computing
- norm.
- By default this is true, meaning overlap
- tokens do not count when computing norms.
+   0 position increment) are ignored when computing
+   norm.By default this is true, meaning overlap
+   tokens do not count when computing norms.
  - seealso: #computeNorm
  */
 - (void)setDiscountOverlapsWithBoolean:(jboolean)v;
@@ -99,7 +104,7 @@
 
 /*!
  @brief Subclasses must override this method to return the name of the Similarity
- and preferably the values of parameters (if any) as well.
+  and preferably the values of parameters (if any) as well.
  */
 - (NSString *)description;
 
@@ -118,14 +123,14 @@
                         withFloat:(jfloat)length;
 
 /*!
- @brief Explains the score.
- The implementation here provides a basic explanation
- in the format <em>score(name-of-similarity, doc=doc-id,
- freq=term-frequency), computed from:</em>, and
- attaches the score (computed via the <code>score(BasicStats,float,float)</code>
- method) and the explanation for the term frequency. Subclasses content with
- this format may add additional details in
- <code>explain(List,BasicStats,int,float,float)</code>.
+ @brief Explains the score.The implementation here provides a basic explanation
+  in the format <em>score(name-of-similarity, doc=doc-id,
+  freq=term-frequency), computed from:</em>, and
+  attaches the score (computed via the <code>score(BasicStats, float, float)</code>
+  method) and the explanation for the term frequency.
+ Subclasses content with
+  this format may add additional details in 
+ <code>explain(List, BasicStats, int, float, float)</code>.
  @param stats the corpus level statistics.
  @param doc the document id.
  @param freq the term frequency and its explanation.
@@ -140,9 +145,9 @@
 /*!
  @brief Subclasses should implement this method to explain the score.
  <code>expl</code>
- already contains the score, the name of the class and the doc id, as well
- as the term frequency and its explanation; subclasses can add additional
- clauses to explain details of their scoring formulae.
+  already contains the score, the name of the class and the doc id, as well
+  as the term frequency and its explanation; subclasses can add additional
+  clauses to explain details of their scoring formulae. 
  <p>The default implementation does nothing.</p>
  @param subExpls the list of details of the explanation to extend
  @param stats the corpus level statistics.
@@ -158,7 +163,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 
 /*!
  @brief Fills all member fields defined in <code>BasicStats</code> in <code>stats</code>.
- Subclasses can override this method to fill additional stats. 
+ Subclasses can override this method to fill additional stats.
  */
 - (void)fillBasicStatsWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                         withOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
@@ -194,4 +199,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesSimilarityBase)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesSimilarityBase")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeGrowingHeapSliceWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeGrowingHeapSliceWriter_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeGrowingHeapSliceWriter || defined(INCLUDE_OrgApacheLuceneRangetreeGrowingHeapSliceWriter))
 #define OrgApacheLuceneRangetreeGrowingHeapSliceWriter_
 
@@ -34,7 +40,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxSize;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)maxSize;
 
 - (void)appendWithLong:(jlong)value
               withLong:(jlong)ord
@@ -48,6 +54,10 @@
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeGrowingHeapSliceWriter)
@@ -56,14 +66,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeGrowingHeapSliceWriter, values_, IOS
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeGrowingHeapSliceWriter, docIDs_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeGrowingHeapSliceWriter, ords_, IOSLongArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(OrgApacheLuceneRangetreeGrowingHeapSliceWriter *self, jint maxSize);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initPackagePrivateWithInt_(OrgApacheLuceneRangetreeGrowingHeapSliceWriter *self, jint maxSize);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeGrowingHeapSliceWriter *new_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeGrowingHeapSliceWriter *new_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initPackagePrivateWithInt_(jint maxSize) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeGrowingHeapSliceWriter *create_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(jint maxSize);
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeGrowingHeapSliceWriter *create_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initPackagePrivateWithInt_(jint maxSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeGrowingHeapSliceWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeGrowingHeapSliceWriter")

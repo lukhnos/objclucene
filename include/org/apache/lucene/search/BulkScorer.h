@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchBulkScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchBulkScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchBulkScorer || defined(INCLUDE_OrgApacheLuceneSearchBulkScorer))
 #define OrgApacheLuceneSearchBulkScorer_
 
@@ -21,18 +27,17 @@
 
 /*!
  @brief This class is used to score a range of documents at
- once, and is returned by <code>Weight.bulkScorer</code>.
- Only
- queries that have a more optimized means of scoring
- across a range of documents need to override this.
+   once, and is returned by <code>Weight.bulkScorer</code>.Only
+   queries that have a more optimized means of scoring
+   across a range of documents need to override this.
  Otherwise, a default implementation is wrapped around
- the <code>Scorer</code> returned by <code>Weight.scorer</code>. 
+   the <code>Scorer</code> returned by <code>Weight.scorer</code>.
  */
 @interface OrgApacheLuceneSearchBulkScorer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Same as <code>Scorer.cost()</code> for bulk scorers.
@@ -42,48 +47,48 @@
 /*!
  @brief Scores and collects all matching documents.
  @param collector The collector to which all matching documents are passed.
- @param acceptDocs <code>Bits</code> that represents the allowed documents to match, or
- <code>null</code> if they are all allowed to match.
+ @param acceptDocs<code>Bits</code>  that represents the allowed documents to match, or                    
+ <code>null</code>  if they are all allowed to match.
  */
 - (void)scoreWithOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)collector
                         withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
 /*!
  @brief Collects matching documents in a range and return an estimation of the
- next matching document which is on or after <code>max</code>.
+  next matching document which is on or after <code>max</code>.
  <p>The return value must be:</p><ul>
- <li>&gt;= <code>max</code>,</li>
- <li><code>DocIdSetIterator.NO_MORE_DOCS</code> if there are no more matches,</li>
- <li>&lt;= the first matching document that is &gt;= <code>max</code> otherwise.</li>
- </ul>
- <p><code>min</code> is the minimum document to be considered for matching. All
- documents strictly before this value must be ignored.</p>
- <p>Although <code>max</code> would be a legal return value for this method, higher
- values might help callers skip more efficiently over non-matching portions
- of the docID space.</p>
- <p>For instance, a <code>Scorer</code>-based implementation could look like
- below:</p>
- <pre class="prettyprint">
- private final Scorer scorer; // set via constructor
- public int score(LeafCollector collector, Bits acceptDocs, int min, int max) throws IOException {
- collector.setScorer(scorer);
- int doc = scorer.docID();
- if (doc &lt; min) {
- doc = scorer.advance(min);
- }
- while (doc &lt; max) {
- if (acceptDocs == null || acceptDocs.get(doc)) {
- collector.collect(doc);
- }
- doc = scorer.nextDoc();
- }
- return doc;
- }
+    <li>&gt;= <code>max</code>,</li>
+    <li><code>DocIdSetIterator.NO_MORE_DOCS</code> if there are no more matches,</li>
+    <li>&lt;= the first matching document that is &gt;= <code>max</code> otherwise.</li>
+  </ul>
+  <p><code>min</code> is the minimum document to be considered for matching. All
+  documents strictly before this value must be ignored.</p>
+  <p>Although <code>max</code> would be a legal return value for this method, higher
+  values might help callers skip more efficiently over non-matching portions
+  of the docID space.</p>
+  <p>For instance, a <code>Scorer</code>-based implementation could look like
+  below:</p>
+  <pre class="prettyprint">
+  private final Scorer scorer; // set via constructor
+  public int score(LeafCollector collector, Bits acceptDocs, int min, int max) throws IOException {
+    collector.setScorer(scorer);
+    int doc = scorer.docID();
+    if (doc &lt; min) {
+      doc = scorer.advance(min);
+    }
+    while (doc &lt; max) {
+      if (acceptDocs == null || acceptDocs.get(doc)) {
+        collector.collect(doc);
+      }
+      doc = scorer.nextDoc();
+    }
+    return doc;
+  } 
  
 @endcode
  @param collector The collector to which all matching documents are passed.
- @param acceptDocs <code>Bits</code> that represents the allowed documents to match, or
- <code>null</code> if they are all allowed to match.
+ @param acceptDocs<code>Bits</code>  that represents the allowed documents to match, or                    
+ <code>null</code>  if they are all allowed to match.
  @param min Score starting at, including, this document
  @param max Score up to, but not including, this doc
  @return an under-estimation of the next matching doc after max
@@ -103,4 +108,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBulkScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBulkScorer")

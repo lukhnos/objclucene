@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/rangetree/SliceWriter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/rangetree/SliceWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneRangetreeSliceWriter : NSObject
 
 @end
@@ -13,12 +17,20 @@
 @implementation OrgApacheLuceneRangetreeSliceWriter
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "appendWithLong:withLong:withInt:", "append", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "getReaderWithLong:", "getReader", "Lorg.apache.lucene.rangetree.SliceReader;", 0x401, "Ljava.io.IOException;", NULL },
-    { "destroy", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneRangetreeSliceReader;", 0x401, 3, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSliceWriter = { 2, "SliceWriter", "org.apache.lucene.rangetree", NULL, 0x608, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(appendWithLong:withLong:withInt:);
+  methods[1].selector = @selector(getReaderWithLong:);
+  methods[2].selector = @selector(destroy);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "append", "JJI", "LJavaIoIOException;", "getReader", "J" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSliceWriter = { "SliceWriter", "org.apache.lucene.rangetree", ptrTable, methods, NULL, 7, 0x608, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneRangetreeSliceWriter;
 }
 

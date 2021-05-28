@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedDirect64
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedDirect64_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirect64 || defined(INCLUDE_OrgApacheLuceneUtilPackedDirect64))
 #define OrgApacheLuceneUtilPackedDirect64_
 
@@ -58,11 +64,16 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)valueCount;
 
-- (instancetype)initWithInt:(jint)packedIntsVersion
-withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                    withInt:(jint)valueCount;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)packedIntsVersion
+                  withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                            withInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                              withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -70,20 +81,24 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedDirect64)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedDirect64, values_, IOSLongArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirect64_initWithInt_(OrgApacheLuceneUtilPackedDirect64 *self, jint valueCount);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirect64_initPackagePrivateWithInt_(OrgApacheLuceneUtilPackedDirect64 *self, jint valueCount);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect64 *new_OrgApacheLuceneUtilPackedDirect64_initWithInt_(jint valueCount) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect64 *new_OrgApacheLuceneUtilPackedDirect64_initPackagePrivateWithInt_(jint valueCount) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect64 *create_OrgApacheLuceneUtilPackedDirect64_initWithInt_(jint valueCount);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect64 *create_OrgApacheLuceneUtilPackedDirect64_initPackagePrivateWithInt_(jint valueCount);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirect64_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedDirect64 *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirect64_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedDirect64 *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect64 *new_OrgApacheLuceneUtilPackedDirect64_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect64 *new_OrgApacheLuceneUtilPackedDirect64_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect64 *create_OrgApacheLuceneUtilPackedDirect64_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect64 *create_OrgApacheLuceneUtilPackedDirect64_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirect64)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirect64")

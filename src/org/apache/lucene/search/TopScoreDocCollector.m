@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
@@ -18,6 +17,10 @@
 #include "org/apache/lucene/search/TopDocsCollector.h"
 #include "org/apache/lucene/search/TopScoreDocCollector.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TopScoreDocCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
@@ -39,30 +42,26 @@ __attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_SimpleT
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector)
 
-@interface OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 : OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector {
+@interface OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1 : OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector {
  @public
   OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *this$0_;
   jint val$docBase_;
 }
 
-- (void)collectWithInt:(jint)doc;
-
 - (instancetype)initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector:(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *)outer$
                                                                                      withInt:(jint)capture$0;
 
+- (void)collectWithInt:(jint)doc;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1, this$0_, OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *)
+__attribute__((unused)) static void OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1 *self, OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *self, OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0);
+__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1 *new_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *new_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1 *create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0);
 
 @interface OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector : OrgApacheLuceneSearchTopScoreDocCollector {
  @public
@@ -94,32 +93,28 @@ __attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_PagingT
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector)
 
-@interface OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 : OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector {
+@interface OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1 : OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector {
  @public
   OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *this$0_;
   jint val$afterDoc_;
   jint val$docBase_;
 }
 
-- (void)collectWithInt:(jint)doc;
-
 - (instancetype)initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector:(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *)outer$
                                                                                      withInt:(jint)capture$0
                                                                                      withInt:(jint)capture$1;
 
+- (void)collectWithInt:(jint)doc;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1, this$0_, OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *)
+__attribute__((unused)) static void OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1 *self, OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *self, OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1);
+__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1 *new_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *new_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1 *create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1);
 
 @implementation OrgApacheLuceneSearchTopScoreDocCollector
 
@@ -165,19 +160,27 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopSc
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "createWithInt:", "create", "Lorg.apache.lucene.search.TopScoreDocCollector;", 0x9, NULL, NULL },
-    { "createWithInt:withOrgApacheLuceneSearchScoreDoc:", "create", "Lorg.apache.lucene.search.TopScoreDocCollector;", 0x9, NULL, NULL },
-    { "initWithInt:", "TopScoreDocCollector", NULL, 0x0, NULL, NULL },
-    { "newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:", "newTopDocs", "Lorg.apache.lucene.search.TopDocs;", 0x4, NULL, NULL },
-    { "needsScores", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneSearchTopScoreDocCollector;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopScoreDocCollector;", 0x9, 0, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(createWithInt:);
+  methods[1].selector = @selector(createWithInt:withOrgApacheLuceneSearchScoreDoc:);
+  methods[2].selector = @selector(initWithInt:);
+  methods[3].selector = @selector(newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:);
+  methods[4].selector = @selector(needsScores);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "pqTop_", NULL, 0x0, "Lorg.apache.lucene.search.ScoreDoc;", NULL, NULL, .constantValue.asLong = 0 },
+    { "pqTop_", "LOrgApacheLuceneSearchScoreDoc;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.ScoreDoc;"};
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.TopScoreDocCollector$ScorerLeafCollector;", "Lorg.apache.lucene.search.TopScoreDocCollector$SimpleTopScoreDocCollector;", "Lorg.apache.lucene.search.TopScoreDocCollector$PagingTopScoreDocCollector;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector = { 2, "TopScoreDocCollector", "org.apache.lucene.search", NULL, 0x401, 5, methods, 1, fields, 1, superclass_type_args, 3, inner_classes, NULL, "Lorg/apache/lucene/search/TopDocsCollector<Lorg/apache/lucene/search/ScoreDoc;>;" };
+  static const void *ptrTable[] = { "create", "I", "ILOrgApacheLuceneSearchScoreDoc;", "newTopDocs", "[LOrgApacheLuceneSearchScoreDoc;I", "LOrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector;LOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector;LOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector;", "Lorg/apache/lucene/search/TopDocsCollector<Lorg/apache/lucene/search/ScoreDoc;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector = { "TopScoreDocCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 5, 1, -1, 5, -1, 6, -1 };
   return &_OrgApacheLuceneSearchTopScoreDocCollector;
 }
 
@@ -202,17 +205,13 @@ OrgApacheLuceneSearchTopScoreDocCollector *OrgApacheLuceneSearchTopScoreDocColle
 }
 
 void OrgApacheLuceneSearchTopScoreDocCollector_initWithInt_(OrgApacheLuceneSearchTopScoreDocCollector *self, jint numHits) {
-  OrgApacheLuceneSearchTopDocsCollector_initWithOrgApacheLuceneUtilPriorityQueue_(self, create_OrgApacheLuceneSearchHitQueue_initWithInt_withBoolean_(numHits, true));
+  OrgApacheLuceneSearchTopDocsCollector_initWithOrgApacheLuceneUtilPriorityQueue_(self, create_OrgApacheLuceneSearchHitQueue_initPackagePrivateWithInt_withBoolean_(numHits, true));
   JreStrongAssign(&self->pqTop_, [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(self->pq_)) top]);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector)
 
 @implementation OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector
-
-- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
-  JreStrongAssign(&self->scorer_, scorer);
-}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -221,20 +220,31 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
+  JreStrongAssign(&self->scorer_, scorer);
+}
+
 - (void)dealloc {
   RELEASE_(scorer_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", "ScorerLeafCollector", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "scorer_", NULL, 0x0, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "scorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector = { 2, "ScorerLeafCollector", "org.apache.lucene.search", "TopScoreDocCollector", 0x408, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setScorer", "LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "LOrgApacheLuceneSearchTopScoreDocCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector = { "ScorerLeafCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x408, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector;
 }
 
@@ -255,15 +265,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_Score
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   jint docBase = ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->docBase_;
-  return create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(self, docBase);
+  return create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(self, docBase);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "SimpleTopScoreDocCollector", NULL, 0x0, NULL, NULL },
-    { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchLeafCollector;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector = { 2, "SimpleTopScoreDocCollector", "org.apache.lucene.search", "TopScoreDocCollector", 0xa, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "getLeafCollector", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "LOrgApacheLuceneSearchTopScoreDocCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector = { "SimpleTopScoreDocCollector", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0xa, 2, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector;
 }
 
@@ -283,12 +300,18 @@ OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *create_Org
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector)
 
-@implementation OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1
+@implementation OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1
+
+- (instancetype)initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector:(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *)outer$
+                                                                                     withInt:(jint)capture$0 {
+  OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(self, outer$, capture$0);
+  return self;
+}
 
 - (void)collectWithInt:(jint)doc {
   jfloat score = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
-  JreAssert((score != JavaLangFloat_NEGATIVE_INFINITY), (@"org/apache/lucene/search/TopScoreDocCollector.java:67 condition failed: assert score != Float.NEGATIVE_INFINITY;"));
-  JreAssert((!JavaLangFloat_isNaNWithFloat_(score)), (@"org/apache/lucene/search/TopScoreDocCollector.java:68 condition failed: assert !Float.isNaN(score);"));
+  JreAssert(score != JavaLangFloat_NEGATIVE_INFINITY, @"org/apache/lucene/search/TopScoreDocCollector.java:67 condition failed: assert score != Float.NEGATIVE_INFINITY;");
+  JreAssert(!JavaLangFloat_isNaNWithFloat_(score), @"org/apache/lucene/search/TopScoreDocCollector.java:68 condition failed: assert !Float.isNaN(score);");
   this$0_->totalHits_++;
   if (score <= ((OrgApacheLuceneSearchScoreDoc *) nil_chk(this$0_->pqTop_))->score_) {
     return;
@@ -298,48 +321,46 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_Simpl
   JreStrongAssign(&this$0_->pqTop_, [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(this$0_->pq_)) updateTop]);
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector:(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *)outer$
-                                                                                     withInt:(jint)capture$0 {
-  OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(self, outer$, capture$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector:withInt:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector:withInt:);
+  methods[1].selector = @selector(collectWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.TopScoreDocCollector$SimpleTopScoreDocCollector;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$docBase_", NULL, 0x1012, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$docBase_", "I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector", "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 = { 2, "", "org.apache.lucene.search", "TopScoreDocCollector$SimpleTopScoreDocCollector", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector;I", "collect", "I", "LJavaIoIOException;", "LOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector;", "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 2, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *self, OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) {
+void OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1 *self, OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) {
   JreStrongAssign(&self->this$0_, outer$);
   self->val$docBase_ = capture$0;
   OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector_init(self);
 }
 
-OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *new_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1, initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_, outer$, capture$0)
+OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1 *new_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1, initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_, outer$, capture$0)
 }
 
-OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1, initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_, outer$, capture$0)
+OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1 *create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_1, initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_, outer$, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1)
 
 @implementation OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector
 
@@ -361,7 +382,7 @@ withOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after {
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   jint docBase = ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->docBase_;
   jint afterDoc = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(after_))->doc_ - context->docBase_;
-  return create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(self, afterDoc, docBase);
+  return create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(self, afterDoc, docBase);
 }
 
 - (void)dealloc {
@@ -370,17 +391,26 @@ withOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneSearchScoreDoc:", "PagingTopScoreDocCollector", NULL, 0x0, NULL, NULL },
-    { "topDocsSize", NULL, "I", 0x4, NULL, NULL },
-    { "newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:", "newTopDocs", "Lorg.apache.lucene.search.TopDocs;", 0x4, NULL, NULL },
-    { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTopDocs;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchLeafCollector;", 0x1, 3, 4, 5, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withOrgApacheLuceneSearchScoreDoc:);
+  methods[1].selector = @selector(topDocsSize);
+  methods[2].selector = @selector(newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:);
+  methods[3].selector = @selector(getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "after_", NULL, 0x12, "Lorg.apache.lucene.search.ScoreDoc;", NULL, NULL, .constantValue.asLong = 0 },
-    { "collectedHits_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "after_", "LOrgApacheLuceneSearchScoreDoc;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "collectedHits_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector = { 2, "PagingTopScoreDocCollector", "org.apache.lucene.search", "TopScoreDocCollector", 0xa, 4, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ILOrgApacheLuceneSearchScoreDoc;", "newTopDocs", "[LOrgApacheLuceneSearchScoreDoc;I", "getLeafCollector", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "LOrgApacheLuceneSearchTopScoreDocCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector = { "PagingTopScoreDocCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 4, 2, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector;
 }
 
@@ -402,12 +432,19 @@ OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *create_Org
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector)
 
-@implementation OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1
+@implementation OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1
+
+- (instancetype)initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector:(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *)outer$
+                                                                                     withInt:(jint)capture$0
+                                                                                     withInt:(jint)capture$1 {
+  OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(self, outer$, capture$0, capture$1);
+  return self;
+}
 
 - (void)collectWithInt:(jint)doc {
   jfloat score = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
-  JreAssert((score != JavaLangFloat_NEGATIVE_INFINITY), (@"org/apache/lucene/search/TopScoreDocCollector.java:118 condition failed: assert score != Float.NEGATIVE_INFINITY;"));
-  JreAssert((!JavaLangFloat_isNaNWithFloat_(score)), (@"org/apache/lucene/search/TopScoreDocCollector.java:119 condition failed: assert !Float.isNaN(score);"));
+  JreAssert(score != JavaLangFloat_NEGATIVE_INFINITY, @"org/apache/lucene/search/TopScoreDocCollector.java:118 condition failed: assert score != Float.NEGATIVE_INFINITY;");
+  JreAssert(!JavaLangFloat_isNaNWithFloat_(score), @"org/apache/lucene/search/TopScoreDocCollector.java:119 condition failed: assert !Float.isNaN(score);");
   this$0_->totalHits_++;
   if (score > ((OrgApacheLuceneSearchScoreDoc *) nil_chk(this$0_->after_))->score_ || (score == this$0_->after_->score_ && doc <= val$afterDoc_)) {
     return;
@@ -421,48 +458,45 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_Pagin
   JreStrongAssign(&this$0_->pqTop_, [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(this$0_->pq_)) updateTop]);
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector:(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *)outer$
-                                                                                     withInt:(jint)capture$0
-                                                                                     withInt:(jint)capture$1 {
-  OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(self, outer$, capture$0, capture$1);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector:withInt:withInt:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector:withInt:withInt:);
+  methods[1].selector = @selector(collectWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.TopScoreDocCollector$PagingTopScoreDocCollector;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$afterDoc_", NULL, 0x1012, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$docBase_", NULL, 0x1012, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$afterDoc_", "I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$docBase_", "I", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector", "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 = { 2, "", "org.apache.lucene.search", "TopScoreDocCollector$PagingTopScoreDocCollector", 0x8008, 2, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector;II", "collect", "I", "LJavaIoIOException;", "LOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector;", "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 3, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *self, OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) {
+void OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1 *self, OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) {
   JreStrongAssign(&self->this$0_, outer$);
   self->val$afterDoc_ = capture$0;
   self->val$docBase_ = capture$1;
   OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector_init(self);
 }
 
-OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *new_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1, initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_, outer$, capture$0, capture$1)
+OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1 *new_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1, initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_, outer$, capture$0, capture$1)
 }
 
-OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1, initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_, outer$, capture$0, capture$1)
+OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1 *create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_1, initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_, outer$, capture$0, capture$1)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1)

@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/FileNotFoundException.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/List.h"
@@ -16,7 +15,6 @@
 #include "java/util/concurrent/ConcurrentHashMap.h"
 #include "java/util/concurrent/atomic/AtomicLong.h"
 #include "org/apache/lucene/store/BaseDirectory.h"
-#include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/FSDirectory.h"
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
@@ -30,6 +28,10 @@
 #include "org/apache/lucene/util/Accountables.h"
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/RAMDirectory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreRAMDirectory ()
 
@@ -74,7 +76,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSObjectArray *)listAll {
   [self ensureOpen];
-  id<JavaUtilSet> fileNames = [((id<JavaUtilMap>) nil_chk(fileMap_)) keySet];
+  id<JavaUtilSet> fileNames = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fileMap_)) keySet]);
   id<JavaUtilList> names = create_JavaUtilArrayList_initWithInt_([((id<JavaUtilSet>) nil_chk(fileNames)) size]);
   for (NSString * __strong name in fileNames) [names addWithId:name];
   return [names toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[names size] type:NSString_class_()]];
@@ -87,7 +89,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jlong)fileLengthWithNSString:(NSString *)name {
   [self ensureOpen];
-  OrgApacheLuceneStoreRAMFile *file = [((id<JavaUtilMap>) nil_chk(fileMap_)) getWithId:name];
+  OrgApacheLuceneStoreRAMFile *file = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fileMap_)) getWithId:name]);
   if (file == nil) {
     @throw create_JavaIoFileNotFoundException_initWithNSString_(name);
   }
@@ -105,7 +107,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)deleteFileWithNSString:(NSString *)name {
   [self ensureOpen];
-  OrgApacheLuceneStoreRAMFile *file = [((id<JavaUtilMap>) nil_chk(fileMap_)) removeWithId:name];
+  OrgApacheLuceneStoreRAMFile *file = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fileMap_)) removeWithId:name]);
   if (file != nil) {
     JreStrongAssign(&file->directory_, nil);
     [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(sizeInBytes_)) addAndGetWithLong:-file->sizeInBytes_];
@@ -118,8 +120,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (OrgApacheLuceneStoreIndexOutput *)createOutputWithNSString:(NSString *)name
                             withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   [self ensureOpen];
-  OrgApacheLuceneStoreRAMFile *file = [self newRAMFile];
-  OrgApacheLuceneStoreRAMFile *existing = [((id<JavaUtilMap>) nil_chk(fileMap_)) removeWithId:name];
+  OrgApacheLuceneStoreRAMFile *file = JreRetainedLocalValue([self newRAMFile]);
+  OrgApacheLuceneStoreRAMFile *existing = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fileMap_)) removeWithId:name]);
   if (existing != nil) {
     [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(sizeInBytes_)) addAndGetWithLong:-existing->sizeInBytes_];
     JreStrongAssign(&existing->directory_, nil);
@@ -138,7 +140,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)renameFileWithNSString:(NSString *)source
                   withNSString:(NSString *)dest {
   [self ensureOpen];
-  OrgApacheLuceneStoreRAMFile *file = [((id<JavaUtilMap>) nil_chk(fileMap_)) getWithId:source];
+  OrgApacheLuceneStoreRAMFile *file = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fileMap_)) getWithId:source]);
   if (file == nil) {
     @throw create_JavaIoFileNotFoundException_initWithNSString_(source);
   }
@@ -149,7 +151,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   [self ensureOpen];
-  OrgApacheLuceneStoreRAMFile *file = [((id<JavaUtilMap>) nil_chk(fileMap_)) getWithId:name];
+  OrgApacheLuceneStoreRAMFile *file = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fileMap_)) getWithId:name]);
   if (file == nil) {
     @throw create_JavaIoFileNotFoundException_initWithNSString_(name);
   }
@@ -168,29 +170,50 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "RAMDirectory", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreLockFactory:", "RAMDirectory", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreFSDirectory:withOrgApacheLuceneStoreIOContext:", "RAMDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneStoreFSDirectory:withBoolean:withOrgApacheLuceneStoreIOContext:", "RAMDirectory", NULL, 0x2, "Ljava.io.IOException;", NULL },
-    { "listAll", NULL, "[Ljava.lang.String;", 0x11, NULL, NULL },
-    { "fileNameExistsWithNSString:", "fileNameExists", "Z", 0x11, NULL, NULL },
-    { "fileLengthWithNSString:", "fileLength", "J", 0x11, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x11, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "deleteFileWithNSString:", "deleteFile", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "newRAMFile", NULL, "Lorg.apache.lucene.store.RAMFile;", 0x4, NULL, NULL },
-    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
-    { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, 2, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, 3, 2, -1, -1, -1 },
+    { NULL, "[LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 4, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, 6, 5, 2, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 7, -1, -1 },
+    { NULL, "V", 0x1, 8, 5, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexOutput;", 0x1, 9, 10, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreRAMFile;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, 2, 13, -1, -1 },
+    { NULL, "V", 0x1, 14, 15, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 16, 10, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreLockFactory:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneStoreFSDirectory:withOrgApacheLuceneStoreIOContext:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneStoreFSDirectory:withBoolean:withOrgApacheLuceneStoreIOContext:);
+  methods[4].selector = @selector(listAll);
+  methods[5].selector = @selector(fileNameExistsWithNSString:);
+  methods[6].selector = @selector(fileLengthWithNSString:);
+  methods[7].selector = @selector(ramBytesUsed);
+  methods[8].selector = @selector(getChildResources);
+  methods[9].selector = @selector(deleteFileWithNSString:);
+  methods[10].selector = @selector(createOutputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[11].selector = @selector(newRAMFile);
+  methods[12].selector = @selector(syncWithJavaUtilCollection:);
+  methods[13].selector = @selector(renameFileWithNSString:withNSString:);
+  methods[14].selector = @selector(openInputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[15].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fileMap_", NULL, 0x14, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/store/RAMFile;>;", .constantValue.asLong = 0 },
-    { "sizeInBytes_", NULL, 0x14, "Ljava.util.concurrent.atomic.AtomicLong;", NULL, NULL, .constantValue.asLong = 0 },
+    { "fileMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x14, -1, -1, 17, -1 },
+    { "sizeInBytes_", "LJavaUtilConcurrentAtomicAtomicLong;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMDirectory = { 2, "RAMDirectory", "org.apache.lucene.store", NULL, 0x1, 16, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreLockFactory;", "LOrgApacheLuceneStoreFSDirectory;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "LOrgApacheLuceneStoreFSDirectory;ZLOrgApacheLuceneStoreIOContext;", "fileNameExists", "LNSString;", "fileLength", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "deleteFile", "createOutput", "LNSString;LOrgApacheLuceneStoreIOContext;", "sync", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/String;>;)V", "renameFile", "LNSString;LNSString;", "openInput", "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/store/RAMFile;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMDirectory = { "RAMDirectory", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 16, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreRAMDirectory;
 }
 

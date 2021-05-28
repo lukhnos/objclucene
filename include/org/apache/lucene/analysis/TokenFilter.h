@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisTokenFilter))
 #define OrgApacheLuceneAnalysisTokenFilter_
 
@@ -20,10 +26,13 @@
 #define INCLUDE_OrgApacheLuceneAnalysisTokenStream 1
 #include "org/apache/lucene/analysis/TokenStream.h"
 
+@class OrgApacheLuceneUtilAttributeFactory;
+@class OrgApacheLuceneUtilAttributeSource;
+
 /*!
  @brief A TokenFilter is a TokenStream whose input is another TokenStream.
  <p>
- This is an abstract class; subclasses must override <code>incrementToken()</code>.
+   This is an abstract class; subclasses must override <code>incrementToken()</code>.
  - seealso: TokenStream
  */
 @interface OrgApacheLuceneAnalysisTokenFilter : OrgApacheLuceneAnalysisTokenStream {
@@ -37,29 +46,26 @@
 #pragma mark Public
 
 /*!
- @brief 
- <p>
- <b>NOTE:</b> 
- The default implementation chains the call to the input TokenStream, so
- be sure to call <code>super.close()</code> when overriding this method.
+ @brief <p>
+  <b>NOTE:</b> 
+  The default implementation chains the call to the input TokenStream, so
+  be sure to call <code>super.close()</code> when overriding this method.
  */
 - (void)close;
 
 /*!
- @brief 
- <p> 
+ @brief <p>  
  <b>NOTE:</b> 
- The default implementation chains the call to the input TokenStream, so
- be sure to call <code>super.end()</code> first when overriding this method.
+  The default implementation chains the call to the input TokenStream, so
+  be sure to call <code>super.end()</code> first when overriding this method.
  */
 - (void)end;
 
 /*!
- @brief 
- <p>
- <b>NOTE:</b> 
- The default implementation chains the call to the input TokenStream, so
- be sure to call <code>super.reset()</code> when overriding this method.
+ @brief <p>
+  <b>NOTE:</b> 
+  The default implementation chains the call to the input TokenStream, so
+  be sure to call <code>super.reset()</code> when overriding this method.
  */
 - (void)reset;
 
@@ -68,7 +74,15 @@
 /*!
  @brief Construct a token stream filtering the given input.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -82,4 +96,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenFilter")

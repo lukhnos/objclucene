@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTopFieldDocs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTopFieldDocs_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopFieldDocs || defined(INCLUDE_OrgApacheLuceneSearchTopFieldDocs))
 #define OrgApacheLuceneSearchTopFieldDocs_
 
@@ -38,15 +44,24 @@
 
 /*!
  @brief Creates one of these objects.
- @param totalHits  Total number of hits for the query.
- @param scoreDocs  The top hits for the query.
- @param fields     The sort criteria used to find the top hits.
- @param maxScore   The maximum score encountered.
+ @param totalHits Total number of hits for the query.
+ @param scoreDocs The top hits for the query.
+ @param fields The sort criteria used to find the top hits.
+ @param maxScore The maximum score encountered.
  */
-- (instancetype)initWithInt:(jint)totalHits
+- (instancetype __nonnull)initWithInt:(jint)totalHits
 withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
 withOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields
-                  withFloat:(jfloat)maxScore;
+                            withFloat:(jfloat)maxScore;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)arg1
+                            withFloat:(jfloat)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -64,4 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldDocs)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopFieldDocs")

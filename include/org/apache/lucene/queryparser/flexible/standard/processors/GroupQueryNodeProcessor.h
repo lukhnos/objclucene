@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor))
 #define OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_
 
@@ -25,22 +31,22 @@
 
 /*!
  @brief The <code>SyntaxParser</code>
- generates query node trees that consider the boolean operator precedence, but
- Lucene current syntax does not support boolean precedence, so this processor
- remove all the precedence and apply the equivalent modifier according to the
- boolean operation defined on an specific query node.
+  generates query node trees that consider the boolean operator precedence, but
+  Lucene current syntax does not support boolean precedence, so this processor
+  remove all the precedence and apply the equivalent modifier according to the
+  boolean operation defined on an specific query node.
  <p>
- If there is a <code>GroupQueryNode</code> in the query node tree, the query node
- tree is not merged with the one above it.
+  If there is a <code>GroupQueryNode</code> in the query node tree, the query node
+  tree is not merged with the one above it. 
  <p>
- Example: TODO: describe a good example to show how this processor works
+  Example: TODO: describe a good example to show how this processor works
  - seealso: org.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor : NSObject < OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)getQueryConfigHandler;
 
@@ -54,12 +60,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardProcessorsGro
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor")

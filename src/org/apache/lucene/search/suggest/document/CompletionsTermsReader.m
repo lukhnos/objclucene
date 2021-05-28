@@ -3,15 +3,18 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/CompletionsTermsReader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/search/suggest/document/CompletionsTermsReader.h"
 #include "org/apache/lucene/search/suggest/document/NRTSuggester.h"
 #include "org/apache/lucene/store/IndexInput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/CompletionsTermsReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader () {
  @public
@@ -39,33 +42,33 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader, 
 - (OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester {
   @synchronized(self) {
     if (suggester_ == nil) {
-      {
-        OrgApacheLuceneStoreIndexInput *dictClone = [((OrgApacheLuceneStoreIndexInput *) nil_chk(dictIn_)) clone];
-        NSException *__primaryException1 = nil;
-        @try {
-          [((OrgApacheLuceneStoreIndexInput *) nil_chk(dictClone)) seekWithLong:offset_];
-          JreStrongAssign(&suggester_, OrgApacheLuceneSearchSuggestDocumentNRTSuggester_load__WithOrgApacheLuceneStoreIndexInput_(dictClone));
-        }
-        @catch (NSException *e) {
-          __primaryException1 = e;
-          @throw e;
-        }
-        @finally {
-          if (dictClone != nil) {
-            if (__primaryException1 != nil) {
-              @try {
-                [dictClone close];
-              } @catch (NSException *e) {
-                [__primaryException1 addSuppressedWithNSException:e];
-              }
-            } else {
+      OrgApacheLuceneStoreIndexInput *dictClone = [((OrgApacheLuceneStoreIndexInput *) nil_chk(dictIn_)) java_clone];
+      JavaLangThrowable *__primaryException1 = nil;
+      @try {
+        [((OrgApacheLuceneStoreIndexInput *) nil_chk(dictClone)) seekWithLong:offset_];
+        JreStrongAssign(&suggester_, OrgApacheLuceneSearchSuggestDocumentNRTSuggester_load__WithOrgApacheLuceneStoreIndexInput_(dictClone));
+      }
+      @catch (JavaLangThrowable *e) {
+        __primaryException1 = e;
+        @throw e;
+      }
+      @finally {
+        if (dictClone != nil) {
+          if (__primaryException1 != nil) {
+            @try {
               [dictClone close];
             }
+            @catch (JavaLangThrowable *e) {
+              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            }
+          }
+          else {
+            [dictClone close];
           }
         }
       }
     }
-    return suggester_;
+    return JreRetainedLocalValue(suggester_);
   }
 }
 
@@ -84,21 +87,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:withLong:withLong:withLong:withByte:", "CompletionsTermsReader", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "suggester", NULL, "Lorg.apache.lucene.search.suggest.document.NRTSuggester;", 0x21, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester;", 0x21, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 2, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexInput:withLong:withLong:withLong:withByte:);
+  methods[1].selector = @selector(suggester);
+  methods[2].selector = @selector(ramBytesUsed);
+  methods[3].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "minWeight_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxWeight_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "type_", NULL, 0x11, "B", NULL, NULL, .constantValue.asLong = 0 },
-    { "dictIn_", NULL, 0x12, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offset_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "suggester_", NULL, 0x2, "Lorg.apache.lucene.search.suggest.document.NRTSuggester;", NULL, NULL, .constantValue.asLong = 0 },
+    { "minWeight_", "J", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "maxWeight_", "J", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "type_", "B", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "dictIn_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offset_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "suggester_", "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader = { 2, "CompletionsTermsReader", "org.apache.lucene.search.suggest.document", NULL, 0x11, 4, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;JJJB", "LJavaIoIOException;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader = { "CompletionsTermsReader", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x11, 4, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader;
 }
 
@@ -106,8 +118,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader, 
 
 void OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *self, OrgApacheLuceneStoreIndexInput *dictIn, jlong offset, jlong minWeight, jlong maxWeight, jbyte type) {
   NSObject_init(self);
-  JreAssert((minWeight <= maxWeight), (@"org/apache/lucene/search/suggest/document/CompletionsTermsReader.java:50 condition failed: assert minWeight <= maxWeight;"));
-  JreAssert((offset >= 0l && offset < [((OrgApacheLuceneStoreIndexInput *) nil_chk(dictIn)) length]), (@"org/apache/lucene/search/suggest/document/CompletionsTermsReader.java:51 condition failed: assert offset >= 0l && offset < dictIn.length();"));
+  JreAssert(minWeight <= maxWeight, @"org/apache/lucene/search/suggest/document/CompletionsTermsReader.java:50 condition failed: assert minWeight <= maxWeight;");
+  JreAssert(offset >= 0l && offset < [((OrgApacheLuceneStoreIndexInput *) nil_chk(dictIn)) length], @"org/apache/lucene/search/suggest/document/CompletionsTermsReader.java:51 condition failed: assert offset >= 0l && offset < dictIn.length();");
   JreStrongAssign(&self->dictIn_, dictIn);
   self->offset_ = offset;
   self->minWeight_ = minWeight;

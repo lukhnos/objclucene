@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightFragmenter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightFragmenter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightFragmenter || defined(INCLUDE_OrgApacheLuceneSearchHighlightFragmenter))
 #define OrgApacheLuceneSearchHighlightFragmenter_
 
@@ -20,28 +26,25 @@
 
 /*!
  @brief Implements the policy for breaking text into multiple fragments for
- consideration by the <code>Highlighter</code> class.
- A sophisticated
- implementation may do this on the basis of detecting end of sentences in the
- text.
+  consideration by the <code>Highlighter</code> class.A sophisticated
+  implementation may do this on the basis of detecting end of sentences in the
+  text.
  */
-@protocol OrgApacheLuceneSearchHighlightFragmenter < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchHighlightFragmenter < JavaObject >
 
 /*!
- @brief Initializes the Fragmenter.
- You can grab references to the Attributes you are
- interested in from tokenStream and then access the values in <code>isNewFragment()</code>.
+ @brief Initializes the Fragmenter.You can grab references to the Attributes you are
+  interested in from tokenStream and then access the values in <code>isNewFragment()</code>.
  @param originalText the original source text
- @param tokenStream the <code>TokenStream</code> to be fragmented
+ @param tokenStream the <code>TokenStream</code>  to be fragmented
  */
 - (void)startWithNSString:(NSString *)originalText
 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
 
 /*!
  @brief Test to see if this token from the stream should be held in a new
- TextFragment.
- Every time this is called, the TokenStream
- passed to start(String, TokenStream) will have been incremented.
+  TextFragment.Every time this is called, the TokenStream
+  passed to start(String, TokenStream) will have been incremented.
  */
 - (jboolean)isNewFragment;
 
@@ -53,4 +56,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightFragmenter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightFragmenter")

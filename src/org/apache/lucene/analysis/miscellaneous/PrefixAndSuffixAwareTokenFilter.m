@@ -3,13 +3,15 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/miscellaneous/PrefixAndSuffixAwareTokenFilter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/Token.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/PrefixAndSuffixAwareTokenFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/PrefixAwareTokenFilter.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/PrefixAndSuffixAwareTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter () {
  @public
@@ -20,57 +22,49 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter, suffix_, OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *)
 
-@interface OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1 : OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter {
+@interface OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1 : OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter {
  @public
   OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *this$0_;
 }
 
+- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *)outer$
+                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)prefix
+                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)suffix;
+
 - (OrgApacheLuceneAnalysisToken *)updateSuffixTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)suffixToken
                                                    withOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)lastInputToken;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *)outer$
-                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg$0
-                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg$1;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1, this$0_, OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *)
+__attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1 *self, OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix);
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1 *self, OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1);
+__attribute__((unused)) static OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1 *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1 *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1 *create_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1 *create_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1)
-
-@interface OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2 : OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter {
+@interface OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2 : OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter {
  @public
   OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *this$0_;
 }
 
+- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *)outer$
+                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)prefix
+                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)suffix;
+
 - (OrgApacheLuceneAnalysisToken *)updateSuffixTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)suffixToken
                                                    withOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)lastInputToken;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *)outer$
-                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg$0
-                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg$1;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2, this$0_, OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *)
+__attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2 *self, OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix);
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2 *self, OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1);
+__attribute__((unused)) static OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2 *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2 *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2 *create_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2)
+__attribute__((unused)) static OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2 *create_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix);
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter
 
@@ -115,19 +109,31 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAw
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:", "PrefixAndSuffixAwareTokenFilter", NULL, 0x1, NULL, NULL },
-    { "updateInputTokenWithOrgApacheLuceneAnalysisToken:withOrgApacheLuceneAnalysisToken:", "updateInputToken", "Lorg.apache.lucene.analysis.Token;", 0x1, NULL, NULL },
-    { "updateSuffixTokenWithOrgApacheLuceneAnalysisToken:withOrgApacheLuceneAnalysisToken:", "updateSuffixToken", "Lorg.apache.lucene.analysis.Token;", 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisToken;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisToken;", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(updateInputTokenWithOrgApacheLuceneAnalysisToken:withOrgApacheLuceneAnalysisToken:);
+  methods[2].selector = @selector(updateSuffixTokenWithOrgApacheLuceneAnalysisToken:withOrgApacheLuceneAnalysisToken:);
+  methods[3].selector = @selector(incrementToken);
+  methods[4].selector = @selector(reset);
+  methods[5].selector = @selector(close);
+  methods[6].selector = @selector(end);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "suffix_", NULL, 0x2, "Lorg.apache.lucene.analysis.miscellaneous.PrefixAwareTokenFilter;", NULL, NULL, .constantValue.asLong = 0 },
+    { "suffix_", "LOrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter = { 2, "PrefixAndSuffixAwareTokenFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 7, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisTokenStream;", "updateInputToken", "LOrgApacheLuceneAnalysisToken;LOrgApacheLuceneAnalysisToken;", "updateSuffixToken", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter = { "PrefixAndSuffixAwareTokenFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x1, 7, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter;
 }
 
@@ -135,8 +141,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAw
 
 void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisTokenStream *suffix) {
   OrgApacheLuceneAnalysisTokenStream_initWithOrgApacheLuceneUtilAttributeSource_(self, suffix);
-  prefix = create_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, prefix, input);
-  JreStrongAssignAndConsume(&self->suffix_, new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, prefix, suffix));
+  prefix = create_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, prefix, input);
+  JreStrongAssignAndConsume(&self->suffix_, new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, prefix, suffix));
 }
 
 OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisTokenStream *suffix) {
@@ -149,18 +155,18 @@ OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *create_OrgA
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter)
 
-@implementation OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1
+@implementation OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1
+
+- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *)outer$
+                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)prefix
+                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)suffix {
+  OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, outer$, prefix, suffix);
+  return self;
+}
 
 - (OrgApacheLuceneAnalysisToken *)updateSuffixTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)suffixToken
                                                    withOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)lastInputToken {
-  return [this$0_ updateInputTokenWithOrgApacheLuceneAnalysisToken:suffixToken withOrgApacheLuceneAnalysisToken:lastInputToken];
-}
-
-- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *)outer$
-                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg$0
-                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg$1 {
-  OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, outer$, arg$0, arg$1);
-  return self;
+  return JreRetainedLocalValue([this$0_ updateInputTokenWithOrgApacheLuceneAnalysisToken:suffixToken withOrgApacheLuceneAnalysisToken:lastInputToken]);
 }
 
 - (void)dealloc {
@@ -169,47 +175,51 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "updateSuffixTokenWithOrgApacheLuceneAnalysisToken:withOrgApacheLuceneAnalysisToken:", "updateSuffixToken", "Lorg.apache.lucene.analysis.Token;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisToken;", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(updateSuffixTokenWithOrgApacheLuceneAnalysisToken:withOrgApacheLuceneAnalysisToken:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.analysis.miscellaneous.PrefixAndSuffixAwareTokenFilter;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter", "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1 = { 2, "", "org.apache.lucene.analysis.miscellaneous", "PrefixAndSuffixAwareTokenFilter", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter;LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisTokenStream;", "updateSuffixToken", "LOrgApacheLuceneAnalysisToken;LOrgApacheLuceneAnalysisToken;", "LOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter;", "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1 = { "", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x8010, 2, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1 *self, OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
+void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1 *self, OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, arg$0, arg$1);
+  OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, prefix, suffix);
 }
 
-OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1 *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1, initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_, outer$, arg$0, arg$1)
+OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1 *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1, initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_, outer$, prefix, suffix)
 }
 
-OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1 *create_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1, initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_, outer$, arg$0, arg$1)
+OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1 *create_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_1, initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_, outer$, prefix, suffix)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$1)
+@implementation OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2
 
-@implementation OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2
+- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *)outer$
+                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)prefix
+                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)suffix {
+  OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, outer$, prefix, suffix);
+  return self;
+}
 
 - (OrgApacheLuceneAnalysisToken *)updateSuffixTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)suffixToken
                                                    withOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)lastInputToken {
-  return [this$0_ updateSuffixTokenWithOrgApacheLuceneAnalysisToken:suffixToken withOrgApacheLuceneAnalysisToken:lastInputToken];
-}
-
-- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *)outer$
-                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg$0
-                                                     withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg$1 {
-  OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, outer$, arg$0, arg$1);
-  return self;
+  return JreRetainedLocalValue([this$0_ updateSuffixTokenWithOrgApacheLuceneAnalysisToken:suffixToken withOrgApacheLuceneAnalysisToken:lastInputToken]);
 }
 
 - (void)dealloc {
@@ -218,31 +228,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "updateSuffixTokenWithOrgApacheLuceneAnalysisToken:withOrgApacheLuceneAnalysisToken:", "updateSuffixToken", "Lorg.apache.lucene.analysis.Token;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisToken;", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(updateSuffixTokenWithOrgApacheLuceneAnalysisToken:withOrgApacheLuceneAnalysisToken:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.analysis.miscellaneous.PrefixAndSuffixAwareTokenFilter;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter", "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2 = { 2, "", "org.apache.lucene.analysis.miscellaneous", "PrefixAndSuffixAwareTokenFilter", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter;LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisTokenStream;", "updateSuffixToken", "LOrgApacheLuceneAnalysisToken;LOrgApacheLuceneAnalysisToken;", "LOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter;", "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2 = { "", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x8010, 2, 1, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2 *self, OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
+void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2 *self, OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, arg$0, arg$1);
+  OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, prefix, suffix);
 }
 
-OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2 *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2, initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_, outer$, arg$0, arg$1)
+OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2 *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2, initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_, outer$, prefix, suffix)
 }
 
-OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2 *create_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2, initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_, outer$, arg$0, arg$1)
+OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2 *create_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2_initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *outer$, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_2, initWithOrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_, outer$, prefix, suffix)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_$2)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory))
 #define OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_
 
@@ -27,12 +33,12 @@
 /*!
  @brief Factory for <code>KeywordTokenizer</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_keyword" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.KeywordTokenizerFactory"/&gt;
- &lt;/analyzer&gt;
- 
-@endcode 
+  &lt;fieldType name="text_keyword" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.KeywordTokenizerFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
+@endcode
  */
 @interface OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
@@ -41,7 +47,7 @@
 /*!
  @brief Creates a new KeywordTokenizerFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCoreKeywordTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
@@ -59,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory")

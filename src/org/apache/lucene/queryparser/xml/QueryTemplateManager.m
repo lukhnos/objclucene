@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/InputStream.h"
 #include "java/io/StringWriter.h"
 #include "java/util/Enumeration.h"
@@ -13,12 +12,9 @@
 #include "java/util/Properties.h"
 #include "javax/xml/parsers/DocumentBuilder.h"
 #include "javax/xml/parsers/DocumentBuilderFactory.h"
-#include "javax/xml/parsers/ParserConfigurationException.h"
 #include "javax/xml/transform/Result.h"
 #include "javax/xml/transform/Templates.h"
 #include "javax/xml/transform/Transformer.h"
-#include "javax/xml/transform/TransformerConfigurationException.h"
-#include "javax/xml/transform/TransformerException.h"
 #include "javax/xml/transform/TransformerFactory.h"
 #include "javax/xml/transform/dom/DOMResult.h"
 #include "javax/xml/transform/dom/DOMSource.h"
@@ -28,7 +24,10 @@
 #include "org/w3c/dom/Document.h"
 #include "org/w3c/dom/Element.h"
 #include "org/w3c/dom/Node.h"
-#include "org/xml/sax/SAXException.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/QueryTemplateManager must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserXmlQueryTemplateManager)
 
@@ -68,13 +67,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)getQueryAsXmlStringWithJavaUtilProperties:(JavaUtilProperties *)formProperties
                                            withNSString:(NSString *)queryTemplateName {
-  id<JavaxXmlTransformTemplates> ts = [((JavaUtilHashMap *) nil_chk(compiledTemplatesCache_)) getWithId:queryTemplateName];
+  id<JavaxXmlTransformTemplates> ts = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(compiledTemplatesCache_)) getWithId:queryTemplateName]);
   return OrgApacheLuceneQueryparserXmlQueryTemplateManager_getQueryAsXmlStringWithJavaUtilProperties_withJavaxXmlTransformTemplates_(formProperties, ts);
 }
 
 - (id<OrgW3cDomDocument>)getQueryAsDOMWithJavaUtilProperties:(JavaUtilProperties *)formProperties
                                                 withNSString:(NSString *)queryTemplateName {
-  id<JavaxXmlTransformTemplates> ts = [((JavaUtilHashMap *) nil_chk(compiledTemplatesCache_)) getWithId:queryTemplateName];
+  id<JavaxXmlTransformTemplates> ts = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(compiledTemplatesCache_)) getWithId:queryTemplateName]);
   return OrgApacheLuceneQueryparserXmlQueryTemplateManager_getQueryAsDOMWithJavaUtilProperties_withJavaxXmlTransformTemplates_(formProperties, ts);
 }
 
@@ -134,41 +133,62 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, 6, 7, -1, -1, -1 },
+    { NULL, "LOrgW3cDomDocument;", 0x1, 8, 6, 7, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, 9, 7, -1, -1, -1 },
+    { NULL, "LOrgW3cDomDocument;", 0x1, 8, 9, 7, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 5, 10, 11, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 5, 12, 7, -1, -1, -1 },
+    { NULL, "LOrgW3cDomDocument;", 0x9, 8, 10, 11, -1, -1, -1 },
+    { NULL, "LOrgW3cDomDocument;", 0x9, 8, 12, 7, -1, -1, -1 },
+    { NULL, "V", 0x9, 13, 14, 7, -1, -1, -1 },
+    { NULL, "V", 0x9, 13, 15, 11, -1, -1, -1 },
+    { NULL, "V", 0x9, 13, 16, 11, -1, -1, -1 },
+    { NULL, "LJavaxXmlTransformTemplates;", 0x9, 17, 0, 18, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithJavaIoInputStream:);
+  methods[2].selector = @selector(addDefaultQueryTemplateWithJavaIoInputStream:);
+  methods[3].selector = @selector(addQueryTemplateWithNSString:withJavaIoInputStream:);
+  methods[4].selector = @selector(getQueryAsXmlStringWithJavaUtilProperties:withNSString:);
+  methods[5].selector = @selector(getQueryAsDOMWithJavaUtilProperties:withNSString:);
+  methods[6].selector = @selector(getQueryAsXmlStringWithJavaUtilProperties:);
+  methods[7].selector = @selector(getQueryAsDOMWithJavaUtilProperties:);
+  methods[8].selector = @selector(getQueryAsXmlStringWithJavaUtilProperties:withJavaxXmlTransformTemplates:);
+  methods[9].selector = @selector(getQueryAsXmlStringWithJavaUtilProperties:withJavaIoInputStream:);
+  methods[10].selector = @selector(getQueryAsDOMWithJavaUtilProperties:withJavaxXmlTransformTemplates:);
+  methods[11].selector = @selector(getQueryAsDOMWithJavaUtilProperties:withJavaIoInputStream:);
+  methods[12].selector = @selector(transformCriteriaWithJavaUtilProperties:withJavaIoInputStream:withJavaxXmlTransformResult:);
+  methods[13].selector = @selector(transformCriteriaWithJavaUtilProperties:withJavaxXmlTransformTemplates:withJavaxXmlTransformResult:);
+  methods[14].selector = @selector(transformCriteriaWithJavaUtilProperties:withJavaxXmlTransformTransformer:withJavaxXmlTransformResult:);
+  methods[15].selector = @selector(getTemplatesWithJavaIoInputStream:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "dbf", "LJavaxXmlParsersDocumentBuilderFactory;", .constantValue.asLong = 0, 0x18, -1, 19, -1, -1 },
+    { "tFactory", "LJavaxXmlTransformTransformerFactory;", .constantValue.asLong = 0, 0x18, -1, 20, -1, -1 },
+    { "compiledTemplatesCache_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x0, -1, -1, 21, -1 },
+    { "defaultCompiledTemplates_", "LJavaxXmlTransformTemplates;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LJavaIoInputStream;", "LJavaxXmlTransformTransformerConfigurationException;LJavaxXmlParsersParserConfigurationException;LOrgXmlSaxSAXException;LJavaIoIOException;", "addDefaultQueryTemplate", "addQueryTemplate", "LNSString;LJavaIoInputStream;", "getQueryAsXmlString", "LJavaUtilProperties;LNSString;", "LOrgXmlSaxSAXException;LJavaIoIOException;LJavaxXmlParsersParserConfigurationException;LJavaxXmlTransformTransformerException;", "getQueryAsDOM", "LJavaUtilProperties;", "LJavaUtilProperties;LJavaxXmlTransformTemplates;", "LJavaxXmlParsersParserConfigurationException;LJavaxXmlTransformTransformerException;", "LJavaUtilProperties;LJavaIoInputStream;", "transformCriteria", "LJavaUtilProperties;LJavaIoInputStream;LJavaxXmlTransformResult;", "LJavaUtilProperties;LJavaxXmlTransformTemplates;LJavaxXmlTransformResult;", "LJavaUtilProperties;LJavaxXmlTransformTransformer;LJavaxXmlTransformResult;", "getTemplates", "LJavaxXmlParsersParserConfigurationException;LOrgXmlSaxSAXException;LJavaIoIOException;LJavaxXmlTransformTransformerConfigurationException;", &OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf, &OrgApacheLuceneQueryparserXmlQueryTemplateManager_tFactory, "Ljava/util/HashMap<Ljava/lang/String;Ljavax/xml/transform/Templates;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlQueryTemplateManager = { "QueryTemplateManager", "org.apache.lucene.queryparser.xml", ptrTable, methods, fields, 7, 0x1, 16, 4, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserXmlQueryTemplateManager;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserXmlQueryTemplateManager class]) {
     JreStrongAssign(&OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf, JavaxXmlParsersDocumentBuilderFactory_newInstance());
     JreStrongAssign(&OrgApacheLuceneQueryparserXmlQueryTemplateManager_tFactory, JavaxXmlTransformTransformerFactory_newInstance());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserXmlQueryTemplateManager)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "QueryTemplateManager", NULL, 0x1, NULL, NULL },
-    { "initWithJavaIoInputStream:", "QueryTemplateManager", NULL, 0x1, "Ljavax.xml.transform.TransformerConfigurationException;Ljavax.xml.parsers.ParserConfigurationException;Lorg.xml.sax.SAXException;Ljava.io.IOException;", NULL },
-    { "addDefaultQueryTemplateWithJavaIoInputStream:", "addDefaultQueryTemplate", "V", 0x1, "Ljavax.xml.transform.TransformerConfigurationException;Ljavax.xml.parsers.ParserConfigurationException;Lorg.xml.sax.SAXException;Ljava.io.IOException;", NULL },
-    { "addQueryTemplateWithNSString:withJavaIoInputStream:", "addQueryTemplate", "V", 0x1, "Ljavax.xml.transform.TransformerConfigurationException;Ljavax.xml.parsers.ParserConfigurationException;Lorg.xml.sax.SAXException;Ljava.io.IOException;", NULL },
-    { "getQueryAsXmlStringWithJavaUtilProperties:withNSString:", "getQueryAsXmlString", "Ljava.lang.String;", 0x1, "Lorg.xml.sax.SAXException;Ljava.io.IOException;Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "getQueryAsDOMWithJavaUtilProperties:withNSString:", "getQueryAsDOM", "Lorg.w3c.dom.Document;", 0x1, "Lorg.xml.sax.SAXException;Ljava.io.IOException;Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "getQueryAsXmlStringWithJavaUtilProperties:", "getQueryAsXmlString", "Ljava.lang.String;", 0x1, "Lorg.xml.sax.SAXException;Ljava.io.IOException;Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "getQueryAsDOMWithJavaUtilProperties:", "getQueryAsDOM", "Lorg.w3c.dom.Document;", 0x1, "Lorg.xml.sax.SAXException;Ljava.io.IOException;Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "getQueryAsXmlStringWithJavaUtilProperties:withJavaxXmlTransformTemplates:", "getQueryAsXmlString", "Ljava.lang.String;", 0x9, "Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "getQueryAsXmlStringWithJavaUtilProperties:withJavaIoInputStream:", "getQueryAsXmlString", "Ljava.lang.String;", 0x9, "Lorg.xml.sax.SAXException;Ljava.io.IOException;Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "getQueryAsDOMWithJavaUtilProperties:withJavaxXmlTransformTemplates:", "getQueryAsDOM", "Lorg.w3c.dom.Document;", 0x9, "Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "getQueryAsDOMWithJavaUtilProperties:withJavaIoInputStream:", "getQueryAsDOM", "Lorg.w3c.dom.Document;", 0x9, "Lorg.xml.sax.SAXException;Ljava.io.IOException;Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "transformCriteriaWithJavaUtilProperties:withJavaIoInputStream:withJavaxXmlTransformResult:", "transformCriteria", "V", 0x9, "Lorg.xml.sax.SAXException;Ljava.io.IOException;Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "transformCriteriaWithJavaUtilProperties:withJavaxXmlTransformTemplates:withJavaxXmlTransformResult:", "transformCriteria", "V", 0x9, "Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "transformCriteriaWithJavaUtilProperties:withJavaxXmlTransformTransformer:withJavaxXmlTransformResult:", "transformCriteria", "V", 0x9, "Ljavax.xml.parsers.ParserConfigurationException;Ljavax.xml.transform.TransformerException;", NULL },
-    { "getTemplatesWithJavaIoInputStream:", "getTemplates", "Ljavax.xml.transform.Templates;", 0x9, "Ljavax.xml.parsers.ParserConfigurationException;Lorg.xml.sax.SAXException;Ljava.io.IOException;Ljavax.xml.transform.TransformerConfigurationException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "dbf", "dbf", 0x18, "Ljavax.xml.parsers.DocumentBuilderFactory;", &OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf, NULL, .constantValue.asLong = 0 },
-    { "tFactory", "tFactory", 0x18, "Ljavax.xml.transform.TransformerFactory;", &OrgApacheLuceneQueryparserXmlQueryTemplateManager_tFactory, NULL, .constantValue.asLong = 0 },
-    { "compiledTemplatesCache_", NULL, 0x0, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/String;Ljavax/xml/transform/Templates;>;", .constantValue.asLong = 0 },
-    { "defaultCompiledTemplates_", NULL, 0x0, "Ljavax.xml.transform.Templates;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlQueryTemplateManager = { 2, "QueryTemplateManager", "org.apache.lucene.queryparser.xml", NULL, 0x1, 16, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserXmlQueryTemplateManager;
 }
 
 @end
@@ -235,12 +255,12 @@ id<OrgW3cDomDocument> OrgApacheLuceneQueryparserXmlQueryTemplateManager_getQuery
 void OrgApacheLuceneQueryparserXmlQueryTemplateManager_transformCriteriaWithJavaUtilProperties_withJavaIoInputStream_withJavaxXmlTransformResult_(JavaUtilProperties *formProperties, JavaIoInputStream *xslIs, id<JavaxXmlTransformResult> result) {
   OrgApacheLuceneQueryparserXmlQueryTemplateManager_initialize();
   [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf)) setNamespaceAwareWithBoolean:true];
-  JavaxXmlParsersDocumentBuilder *builder = [OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf newDocumentBuilder];
-  id<OrgW3cDomDocument> xslDoc = [((JavaxXmlParsersDocumentBuilder *) nil_chk(builder)) parseWithJavaIoInputStream:xslIs];
+  JavaxXmlParsersDocumentBuilder *builder = JreRetainedLocalValue([OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf newDocumentBuilder]);
+  id<OrgW3cDomDocument> xslDoc = JreRetainedLocalValue([((JavaxXmlParsersDocumentBuilder *) nil_chk(builder)) parseWithJavaIoInputStream:xslIs]);
   JavaxXmlTransformDomDOMSource *ds = create_JavaxXmlTransformDomDOMSource_initWithOrgW3cDomNode_(xslDoc);
   JavaxXmlTransformTransformer *transformer = nil;
   @synchronized(OrgApacheLuceneQueryparserXmlQueryTemplateManager_tFactory) {
-    transformer = [((JavaxXmlTransformTransformerFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_tFactory)) newTransformerWithJavaxXmlTransformSource:ds];
+    transformer = JreRetainedLocalValue([((JavaxXmlTransformTransformerFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_tFactory)) newTransformerWithJavaxXmlTransformSource:ds]);
   }
   OrgApacheLuceneQueryparserXmlQueryTemplateManager_transformCriteriaWithJavaUtilProperties_withJavaxXmlTransformTransformer_withJavaxXmlTransformResult_(formProperties, transformer, result);
 }
@@ -253,15 +273,15 @@ void OrgApacheLuceneQueryparserXmlQueryTemplateManager_transformCriteriaWithJava
 void OrgApacheLuceneQueryparserXmlQueryTemplateManager_transformCriteriaWithJavaUtilProperties_withJavaxXmlTransformTransformer_withJavaxXmlTransformResult_(JavaUtilProperties *formProperties, JavaxXmlTransformTransformer *transformer, id<JavaxXmlTransformResult> result) {
   OrgApacheLuceneQueryparserXmlQueryTemplateManager_initialize();
   [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf)) setNamespaceAwareWithBoolean:true];
-  JavaxXmlParsersDocumentBuilder *db = [OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf newDocumentBuilder];
-  id<OrgW3cDomDocument> doc = [((JavaxXmlParsersDocumentBuilder *) nil_chk(db)) newDocument];
-  id<OrgW3cDomElement> root = [((id<OrgW3cDomDocument>) nil_chk(doc)) createElementWithNSString:@"Document"];
+  JavaxXmlParsersDocumentBuilder *db = JreRetainedLocalValue([OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf newDocumentBuilder]);
+  id<OrgW3cDomDocument> doc = JreRetainedLocalValue([((JavaxXmlParsersDocumentBuilder *) nil_chk(db)) newDocument]);
+  id<OrgW3cDomElement> root = JreRetainedLocalValue([((id<OrgW3cDomDocument>) nil_chk(doc)) createElementWithNSString:@"Document"]);
   [doc appendChildWithOrgW3cDomNode:root];
-  id<JavaUtilEnumeration> keysEnum = [((JavaUtilProperties *) nil_chk(formProperties)) keys];
+  id<JavaUtilEnumeration> keysEnum = JreRetainedLocalValue([((JavaUtilProperties *) nil_chk(formProperties)) keys]);
   while ([((id<JavaUtilEnumeration>) nil_chk(keysEnum)) hasMoreElements]) {
     NSString *propName = (NSString *) cast_chk([keysEnum nextElement], [NSString class]);
-    NSString *value = [formProperties getPropertyWithNSString:propName];
-    if ((value != nil) && (((jint) [((NSString *) nil_chk(value)) length]) > 0)) {
+    NSString *value = JreRetainedLocalValue([formProperties getPropertyWithNSString:propName]);
+    if ((value != nil) && ([((NSString *) nil_chk(value)) java_length] > 0)) {
       OrgApacheLuceneQueryparserXmlDOMUtils_insertChildWithOrgW3cDomElement_withNSString_withNSString_(root, propName, value);
     }
   }
@@ -272,8 +292,8 @@ void OrgApacheLuceneQueryparserXmlQueryTemplateManager_transformCriteriaWithJava
 id<JavaxXmlTransformTemplates> OrgApacheLuceneQueryparserXmlQueryTemplateManager_getTemplatesWithJavaIoInputStream_(JavaIoInputStream *xslIs) {
   OrgApacheLuceneQueryparserXmlQueryTemplateManager_initialize();
   [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf)) setNamespaceAwareWithBoolean:true];
-  JavaxXmlParsersDocumentBuilder *builder = [OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf newDocumentBuilder];
-  id<OrgW3cDomDocument> xslDoc = [((JavaxXmlParsersDocumentBuilder *) nil_chk(builder)) parseWithJavaIoInputStream:xslIs];
+  JavaxXmlParsersDocumentBuilder *builder = JreRetainedLocalValue([OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf newDocumentBuilder]);
+  id<OrgW3cDomDocument> xslDoc = JreRetainedLocalValue([((JavaxXmlParsersDocumentBuilder *) nil_chk(builder)) parseWithJavaIoInputStream:xslIs]);
   JavaxXmlTransformDomDOMSource *ds = create_JavaxXmlTransformDomDOMSource_initWithOrgW3cDomNode_(xslDoc);
   return [((JavaxXmlTransformTransformerFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_tFactory)) newTemplatesWithJavaxXmlTransformSource:ds];
 }

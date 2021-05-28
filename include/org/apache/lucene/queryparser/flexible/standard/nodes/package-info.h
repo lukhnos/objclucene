@@ -6,10 +6,10 @@
 /*!
  @brief Standard Lucene Query Nodes.
  <h2>Standard Lucene Query Nodes</h2>
- <p>
- The package org.apache.lucene.queryparser.flexible.standard.nodes contains QueryNode classes
- that are used specifically for Lucene query node tree. Any other generic QueryNode is
- defined under org.apache.lucene.queryParser.nodes.
+  <p>
+  The package org.apache.lucene.queryparser.flexible.standard.nodes contains QueryNode classes
+  that are used specifically for Lucene query node tree. Any other generic QueryNode is
+  defined under org.apache.lucene.queryParser.nodes.
  */
 #include "J2ObjC_header.h"
 
@@ -21,4 +21,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesPackage_info")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestBitsProducer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestBitsProducer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestBitsProducer || defined(INCLUDE_OrgApacheLuceneSearchSuggestBitsProducer))
 #define OrgApacheLuceneSearchSuggestBitsProducer_
 
@@ -27,10 +33,9 @@
 #pragma mark Public
 
 /*!
- @brief Return <code>Bits</code> for the given leaf.
- The returned instance must
- be non-null and have a <code>length</code> equal to
- <code>maxDoc</code>. 
+ @brief Return <code>Bits</code> for the given leaf.The returned instance must
+   be non-null and have a <code>length</code> equal to
+   <code>maxDoc</code>.
  */
 - (id<OrgApacheLuceneUtilBits>)getBitsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -39,7 +44,7 @@
 /*!
  @brief Sole constructor, typically invoked by sub-classes.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -51,4 +56,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestBitsProducer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestBitsProducer")

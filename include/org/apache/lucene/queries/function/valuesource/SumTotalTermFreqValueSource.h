@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_
 
@@ -28,8 +34,8 @@
 /*!
  @brief <code>SumTotalTermFreqValueSource</code> returns the number of tokens.
  (sum of term freqs across all documents, across all terms).
- Returns -1 if frequencies were omitted for the field, or if 
- the codec doesn't support this statistic.
+  Returns -1 if frequencies were omitted for the field, or if 
+  the codec doesn't support this statistic.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource : OrgApacheLuceneQueriesFunctionValueSource {
  @public
@@ -38,7 +44,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)indexedField;
+- (instancetype __nonnull)initWithNSString:(NSString *)indexedField;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -53,6 +59,10 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 - (NSUInteger)hash;
 
 - (NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -70,4 +80,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTerm
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource")

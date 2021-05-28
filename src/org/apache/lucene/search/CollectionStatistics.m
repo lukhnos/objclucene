@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/CollectionStatistics.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/CollectionStatistics must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchCollectionStatistics () {
  @public
   NSString *field_;
@@ -56,22 +60,33 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchCollectionStatistics, field_, NSString 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withLong:withLong:withLong:withLong:", "CollectionStatistics", NULL, 0x1, NULL, NULL },
-    { "field", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "maxDoc", NULL, "J", 0x11, NULL, NULL },
-    { "docCount", NULL, "J", 0x11, NULL, NULL },
-    { "sumTotalTermFreq", NULL, "J", 0x11, NULL, NULL },
-    { "sumDocFreq", NULL, "J", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withLong:withLong:withLong:withLong:);
+  methods[1].selector = @selector(field);
+  methods[2].selector = @selector(maxDoc);
+  methods[3].selector = @selector(docCount);
+  methods[4].selector = @selector(sumTotalTermFreq);
+  methods[5].selector = @selector(sumDocFreq);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "docCount_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "sumTotalTermFreq_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "sumDocFreq_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxDoc_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "docCount_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "sumTotalTermFreq_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "sumDocFreq_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchCollectionStatistics = { 2, "CollectionStatistics", "org.apache.lucene.search", NULL, 0x1, 6, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;JJJJ" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchCollectionStatistics = { "CollectionStatistics", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 6, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchCollectionStatistics;
 }
 
@@ -79,10 +94,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchCollectionStatistics, field_, NSString 
 
 void OrgApacheLuceneSearchCollectionStatistics_initWithNSString_withLong_withLong_withLong_withLong_(OrgApacheLuceneSearchCollectionStatistics *self, NSString *field, jlong maxDoc, jlong docCount, jlong sumTotalTermFreq, jlong sumDocFreq) {
   NSObject_init(self);
-  JreAssert((maxDoc >= 0), (@"org/apache/lucene/search/CollectionStatistics.java:35 condition failed: assert maxDoc >= 0;"));
-  JreAssert((docCount >= -1 && docCount <= maxDoc), (@"org/apache/lucene/search/CollectionStatistics.java:36 condition failed: assert docCount >= -1 && docCount <= maxDoc;"));
-  JreAssert((sumDocFreq == -1 || sumDocFreq >= docCount), (@"org/apache/lucene/search/CollectionStatistics.java:37 condition failed: assert sumDocFreq == -1 || sumDocFreq >= docCount;"));
-  JreAssert((sumTotalTermFreq == -1 || sumTotalTermFreq >= sumDocFreq), (@"org/apache/lucene/search/CollectionStatistics.java:38 condition failed: assert sumTotalTermFreq == -1 || sumTotalTermFreq >= sumDocFreq;"));
+  JreAssert(maxDoc >= 0, @"org/apache/lucene/search/CollectionStatistics.java:35 condition failed: assert maxDoc >= 0;");
+  JreAssert(docCount >= -1 && docCount <= maxDoc, @"org/apache/lucene/search/CollectionStatistics.java:36 condition failed: assert docCount >= -1 && docCount <= maxDoc;");
+  JreAssert(sumDocFreq == -1 || sumDocFreq >= docCount, @"org/apache/lucene/search/CollectionStatistics.java:37 condition failed: assert sumDocFreq == -1 || sumDocFreq >= docCount;");
+  JreAssert(sumTotalTermFreq == -1 || sumTotalTermFreq >= sumDocFreq, @"org/apache/lucene/search/CollectionStatistics.java:38 condition failed: assert sumTotalTermFreq == -1 || sumTotalTermFreq >= sumDocFreq;");
   JreStrongAssign(&self->field_, field);
   self->maxDoc_ = maxDoc;
   self->docCount_ = docCount;

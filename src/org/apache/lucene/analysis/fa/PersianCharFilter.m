@@ -3,13 +3,15 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/fa/PersianCharFilter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "org/apache/lucene/analysis/CharFilter.h"
 #include "org/apache/lucene/analysis/fa/PersianCharFilter.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/fa/PersianCharFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneAnalysisFaPersianCharFilter
 
@@ -47,13 +49,22 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaIoReader:", "PersianCharFilter", NULL, 0x1, NULL, NULL },
-    { "readWithCharArray:withInt:withInt:", "read", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "read", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "correctWithInt:", "correct", "I", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x4, 4, 5, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFaPersianCharFilter = { 2, "PersianCharFilter", "org.apache.lucene.analysis.fa", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaIoReader:);
+  methods[1].selector = @selector(readWithCharArray:withInt:withInt:);
+  methods[2].selector = @selector(read);
+  methods[3].selector = @selector(correctWithInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoReader;", "read", "[CII", "LJavaIoIOException;", "correct", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFaPersianCharFilter = { "PersianCharFilter", "org.apache.lucene.analysis.fa", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisFaPersianCharFilter;
 }
 

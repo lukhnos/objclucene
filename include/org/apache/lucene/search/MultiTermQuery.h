@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchMultiTermQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchMultiTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQuery || defined(INCLUDE_OrgApacheLuceneSearchMultiTermQuery))
 #define OrgApacheLuceneSearchMultiTermQuery_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneIndexTerms;
 @class OrgApacheLuceneIndexTermsEnum;
@@ -29,58 +34,52 @@
 
 /*!
  @brief An abstract <code>Query</code> that matches documents
- containing a subset of terms provided by a <code>FilteredTermsEnum</code>
+  containing a subset of terms provided by a <code>FilteredTermsEnum</code>
   enumeration.
  <p>This query cannot be used directly; you must subclass
- it and define <code>getTermsEnum(Terms,AttributeSource)</code> to provide a <code>FilteredTermsEnum</code>
+  it and define <code>getTermsEnum(Terms,AttributeSource)</code> to provide a <code>FilteredTermsEnum</code>
   that iterates through the terms to be
- matched.
- <p><b>NOTE</b>: if <code>setRewriteMethod</code> is either
+  matched. 
+ <p><b>NOTE</b>: if <code>setRewriteMethod</code> is either 
  <code>CONSTANT_SCORE_BOOLEAN_REWRITE</code> or <code>SCORING_BOOLEAN_REWRITE</code>
- , you may encounter a
+ , you may encounter a 
  <code>BooleanQuery.TooManyClauses</code> exception during
- searching, which happens when the number of terms to be
- searched exceeds <code>BooleanQuery.getMaxClauseCount()</code>
+  searching, which happens when the number of terms to be
+  searched exceeds <code>BooleanQuery.getMaxClauseCount()</code>
  .  Setting <code>setRewriteMethod</code>
   to <code>CONSTANT_SCORE_REWRITE</code>
- prevents this.
+  prevents this. 
  <p>The recommended rewrite method is <code>CONSTANT_SCORE_REWRITE</code>
  : it doesn't spend CPU
- computing unhelpful scores, and is the most
- performant rewrite method given the query. If you
- need scoring (like <code>FuzzyQuery</code>, use
+  computing unhelpful scores, and is the most
+  performant rewrite method given the query. If you
+  need scoring (like <code>FuzzyQuery</code>, use 
  <code>TopTermsScoringBooleanQueryRewrite</code> which uses
- a priority queue to only collect competitive terms
- and not hit this limitation.
- Note that org.apache.lucene.queryparser.classic.QueryParser produces
- MultiTermQueries using <code>CONSTANT_SCORE_REWRITE</code>
- by default.
+  a priority queue to only collect competitive terms
+  and not hit this limitation.
+  Note that org.apache.lucene.queryparser.classic.QueryParser produces
+  MultiTermQueries using <code>CONSTANT_SCORE_REWRITE</code>
+  by default.
  */
 @interface OrgApacheLuceneSearchMultiTermQuery : OrgApacheLuceneSearchQuery {
  @public
   NSString *field_;
   OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *rewriteMethod_;
 }
-
-+ (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)CONSTANT_SCORE_REWRITE;
-
-+ (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)CONSTANT_SCORE_FILTER_REWRITE;
-
-+ (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)SCORING_BOOLEAN_REWRITE;
-
-+ (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)SCORING_BOOLEAN_QUERY_REWRITE;
-
-+ (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)CONSTANT_SCORE_BOOLEAN_REWRITE;
-
-+ (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE;
+@property (readonly, class, strong) OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *CONSTANT_SCORE_REWRITE NS_SWIFT_NAME(CONSTANT_SCORE_REWRITE);
+@property (readonly, class, strong) OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *CONSTANT_SCORE_FILTER_REWRITE NS_SWIFT_NAME(CONSTANT_SCORE_FILTER_REWRITE);
+@property (readonly, class, strong) OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *SCORING_BOOLEAN_REWRITE NS_SWIFT_NAME(SCORING_BOOLEAN_REWRITE);
+@property (readonly, class, strong) OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *SCORING_BOOLEAN_QUERY_REWRITE NS_SWIFT_NAME(SCORING_BOOLEAN_QUERY_REWRITE);
+@property (readonly, class, strong) OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *CONSTANT_SCORE_BOOLEAN_REWRITE NS_SWIFT_NAME(CONSTANT_SCORE_BOOLEAN_REWRITE);
+@property (readonly, class, strong) OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE NS_SWIFT_NAME(CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE);
 
 #pragma mark Public
 
 /*!
  @brief Constructs a query matching terms that cannot be represented with a single
- Term.
+  Term.
  */
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -98,17 +97,15 @@
 
 /*!
  @brief To rewrite to a simpler form, instead return a simpler
- enum from <code>getTermsEnum(Terms,AttributeSource)</code>.
- For example,
- to rewrite to a single term, return a <code>SingleTermsEnum</code>
+  enum from <code>getTermsEnum(Terms, AttributeSource)</code>.For example,
+  to rewrite to a single term, return a <code>SingleTermsEnum</code>
  */
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 /*!
  @brief Sets the rewrite method to be used when executing the
- query.
- You can use one of the four core methods, or
- implement your own subclass of <code>RewriteMethod</code>. 
+  query.You can use one of the four core methods, or
+  implement your own subclass of <code>RewriteMethod</code>.
  */
 - (void)setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method;
 
@@ -116,26 +113,30 @@
 
 /*!
  @brief Convenience method, if no attributes are needed:
- This simply passes empty attributes and is equal to:
+  This simply passes empty attributes and is equal to: 
  <code>getTermsEnum(terms, new AttributeSource())</code>
  */
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
 
 /*!
  @brief Construct the enumeration to be used, expanding the
- pattern term.
- This method should only be called if
- the field exists (ie, implementations can assume the
- field does exist).  This method should not return null
- (should instead return <code>TermsEnum.EMPTY</code> if no
- terms match).  The TermsEnum must already be
- positioned to the first matching term.
- The given <code>AttributeSource</code> is passed by the <code>RewriteMethod</code> to
- provide attributes, the rewrite method uses to inform about e.g. maximum competitive boosts.
- This is currently only used by <code>TopTermsRewrite</code>
+   pattern term.This method should only be called if
+   the field exists (ie, implementations can assume the
+   field does exist).
+ This method should not return null
+   (should instead return <code>TermsEnum.EMPTY</code> if no
+   terms match).  The TermsEnum must already be
+   positioned to the first matching term.
+  The given <code>AttributeSource</code> is passed by the <code>RewriteMethod</code> to
+  provide attributes, the rewrite method uses to inform about e.g. maximum competitive boosts.
+  This is currently only used by <code>TopTermsRewrite</code>
  */
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
                                       withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -146,18 +147,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMultiTermQuery, rewriteMethod_, OrgApac
 
 /*!
  @brief A rewrite method that first creates a private Filter,
- by visiting each term in sequence and marking all docs
- for that term.
- Matching documents are assigned a
- constant score equal to the query's boost.
+   by visiting each term in sequence and marking all docs
+   for that term.Matching documents are assigned a
+   constant score equal to the query's boost.
  <p> This method is faster than the BooleanQuery
- rewrite methods when the number of matched terms or
- matched documents is non-trivial. Also, it will never
- hit an errant <code>BooleanQuery.TooManyClauses</code>
- exception.
+   rewrite methods when the number of matched terms or
+   matched documents is non-trivial. Also, it will never
+   hit an errant <code>BooleanQuery.TooManyClauses</code>
+   exception.
  - seealso: #setRewriteMethod
  */
-inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_CONSTANT_SCORE_REWRITE();
+inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_CONSTANT_SCORE_REWRITE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_REWRITE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchMultiTermQuery, CONSTANT_SCORE_REWRITE, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
@@ -165,26 +165,25 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchMultiTermQuery, CONSTANT_SCOR
 /*!
  @brief Old name of <code>CONSTANT_SCORE_REWRITE</code>
  */
-inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_CONSTANT_SCORE_FILTER_REWRITE();
+inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_CONSTANT_SCORE_FILTER_REWRITE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_FILTER_REWRITE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchMultiTermQuery, CONSTANT_SCORE_FILTER_REWRITE, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
 
 /*!
  @brief A rewrite method that first translates each term into
- <code>BooleanClause.Occur.SHOULD</code> clause in a
- BooleanQuery, and keeps the scores as computed by the
- query.
- Note that typically such scores are
- meaningless to the user, and require non-trivial CPU
- to compute, so it's almost always better to use <code>CONSTANT_SCORE_REWRITE</code>
+   <code>BooleanClause.Occur.SHOULD</code> clause in a
+   BooleanQuery, and keeps the scores as computed by the
+   query.Note that typically such scores are
+   meaningless to the user, and require non-trivial CPU
+   to compute, so it's almost always better to use <code>CONSTANT_SCORE_REWRITE</code>
   instead.
  <p><b>NOTE</b>: This rewrite method will hit <code>BooleanQuery.TooManyClauses</code>
   if the number of terms
- exceeds <code>BooleanQuery.getMaxClauseCount</code>.
+   exceeds <code>BooleanQuery.getMaxClauseCount</code>.
  - seealso: #setRewriteMethod
  */
-inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_SCORING_BOOLEAN_REWRITE();
+inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_SCORING_BOOLEAN_REWRITE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_SCORING_BOOLEAN_REWRITE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchMultiTermQuery, SCORING_BOOLEAN_REWRITE, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
@@ -192,23 +191,22 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchMultiTermQuery, SCORING_BOOLE
 /*!
  @brief Old name of <code>SCORING_BOOLEAN_REWRITE</code>
  */
-inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_SCORING_BOOLEAN_QUERY_REWRITE();
+inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_SCORING_BOOLEAN_QUERY_REWRITE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_SCORING_BOOLEAN_QUERY_REWRITE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchMultiTermQuery, SCORING_BOOLEAN_QUERY_REWRITE, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
 
 /*!
  @brief Like <code>SCORING_BOOLEAN_REWRITE</code> except
- scores are not computed.
- Instead, each matching
- document receives a constant score equal to the
- query's boost.
+   scores are not computed.Instead, each matching
+   document receives a constant score equal to the
+   query's boost.
  <p><b>NOTE</b>: This rewrite method will hit <code>BooleanQuery.TooManyClauses</code>
   if the number of terms
- exceeds <code>BooleanQuery.getMaxClauseCount</code>.
+   exceeds <code>BooleanQuery.getMaxClauseCount</code>.
  - seealso: #setRewriteMethod
  */
-inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_CONSTANT_SCORE_BOOLEAN_REWRITE();
+inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_CONSTANT_SCORE_BOOLEAN_REWRITE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_BOOLEAN_REWRITE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchMultiTermQuery, CONSTANT_SCORE_BOOLEAN_REWRITE, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
@@ -216,7 +214,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchMultiTermQuery, CONSTANT_SCOR
 /*!
  @brief Old name of <code>CONSTANT_SCORE_BOOLEAN_REWRITE</code>
  */
-inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE();
+inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_get_CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchMultiTermQuery, CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
@@ -244,7 +242,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                    withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
@@ -253,7 +251,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery)
 
 /*!
  @brief Returns the <code>MultiTermQuery</code>s <code>TermsEnum</code>
- - seealso: MultiTermQuery#getTermsEnum(Terms,AttributeSource)
+ - seealso: MultiTermQuery#getTermsEnum(Terms, AttributeSource)
  */
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query
                                                          withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
@@ -282,12 +280,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod)
 @class OrgApacheLuceneSearchQuery;
 
 /*!
- @brief A rewrite method that first translates each term into
+ @brief A rewrite method that first translates each term into 
  <code>BooleanClause.Occur.SHOULD</code> clause in a BooleanQuery, and keeps the
- scores as computed by the query.
+  scores as computed by the query.
  <p>
- This rewrite method only uses the top scoring terms so it will not overflow
- the boolean max clause count. It is the default rewrite method for
+  This rewrite method only uses the top scoring terms so it will not overflow
+  the boolean max clause count. It is the default rewrite method for 
  <code>FuzzyQuery</code>.
  - seealso: #setRewriteMethod
  */
@@ -297,12 +295,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod)
 
 /*!
  @brief Create a TopTermsScoringBooleanQueryRewrite for 
- at most <code>size</code> terms.
+  at most <code>size</code> terms.
  <p>
- NOTE: if <code>BooleanQuery.getMaxClauseCount</code> is smaller than 
- <code>size</code>, then it will be used instead. 
+  NOTE: if <code>BooleanQuery.getMaxClauseCount</code> is smaller than  
+ <code>size</code>, then it will be used instead.
  */
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
 
 #pragma mark Protected
 
@@ -345,14 +343,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBo
 @class OrgApacheLuceneSearchQuery;
 
 /*!
- @brief A rewrite method that first translates each term into
+ @brief A rewrite method that first translates each term into 
  <code>BooleanClause.Occur.SHOULD</code> clause in a BooleanQuery, but adjusts
- the frequencies used for scoring to be blended across the terms, otherwise
- the rarest term typically ranks highest (often not useful eg in the set of
- expanded terms in a FuzzyQuery).
+  the frequencies used for scoring to be blended across the terms, otherwise
+  the rarest term typically ranks highest (often not useful eg in the set of
+  expanded terms in a FuzzyQuery).
  <p>
- This rewrite method only uses the top scoring terms so it will not overflow
- the boolean max clause count.
+  This rewrite method only uses the top scoring terms so it will not overflow
+  the boolean max clause count.
  - seealso: #setRewriteMethod
  */
 @interface OrgApacheLuceneSearchMultiTermQuery_TopTermsBlendedFreqScoringRewrite : OrgApacheLuceneSearchTopTermsRewrite
@@ -360,13 +358,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBo
 #pragma mark Public
 
 /*!
- @brief Create a TopTermsBlendedScoringBooleanQueryRewrite for at most
+ @brief Create a TopTermsBlendedScoringBooleanQueryRewrite for at most 
  <code>size</code> terms.
  <p>
- NOTE: if <code>BooleanQuery.getMaxClauseCount</code> is smaller than
+  NOTE: if <code>BooleanQuery.getMaxClauseCount</code> is smaller than 
  <code>size</code>, then it will be used instead.
  */
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
 
 #pragma mark Protected
 
@@ -409,12 +407,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_TopTermsBlendedFr
 @class OrgApacheLuceneSearchQuery;
 
 /*!
- @brief A rewrite method that first translates each term into
+ @brief A rewrite method that first translates each term into 
  <code>BooleanClause.Occur.SHOULD</code> clause in a BooleanQuery, but the scores
- are only computed as the boost.
+  are only computed as the boost.
  <p>
- This rewrite method only uses the top scoring terms so it will not overflow
- the boolean max clause count.
+  This rewrite method only uses the top scoring terms so it will not overflow
+  the boolean max clause count.
  - seealso: #setRewriteMethod
  */
 @interface OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite : OrgApacheLuceneSearchTopTermsRewrite
@@ -423,12 +421,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_TopTermsBlendedFr
 
 /*!
  @brief Create a TopTermsBoostOnlyBooleanQueryRewrite for 
- at most <code>size</code> terms.
+  at most <code>size</code> terms.
  <p>
- NOTE: if <code>BooleanQuery.getMaxClauseCount</code> is smaller than 
- <code>size</code>, then it will be used instead. 
+  NOTE: if <code>BooleanQuery.getMaxClauseCount</code> is smaller than  
+ <code>size</code>, then it will be used instead.
  */
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
 
 #pragma mark Protected
 
@@ -458,4 +456,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnly
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQuery")

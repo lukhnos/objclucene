@@ -10,6 +10,7 @@
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
@@ -17,10 +18,8 @@
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
-#include "org/apache/lucene/index/BaseCompositeReader.h"
 #include "org/apache/lucene/index/DirectoryReader.h"
 #include "org/apache/lucene/index/IndexCommit.h"
-#include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/IndexWriter.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/ReadersAndUpdates.h"
@@ -34,6 +33,12 @@
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/IOUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/StandardDirectoryReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneIndexStandardDirectoryReader () {
  @public
@@ -67,6 +72,50 @@ __attribute__((unused)) static OrgApacheLuceneIndexDirectoryReader *OrgApacheLuc
 
 __attribute__((unused)) static OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader_doOpenFromCommitWithOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneIndexStandardDirectoryReader *self, OrgApacheLuceneIndexIndexCommit *commit);
 
+@interface OrgApacheLuceneIndexStandardDirectoryReader_1 : OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile
+
+- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
+
+- (OrgApacheLuceneIndexDirectoryReader *)doBodyWithNSString:(NSString *)segmentFileName;
+
+- (OrgApacheLuceneIndexDirectoryReader *)run;
+
+- (OrgApacheLuceneIndexDirectoryReader *)runWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)arg0;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexStandardDirectoryReader_1)
+
+__attribute__((unused)) static void OrgApacheLuceneIndexStandardDirectoryReader_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader_1 *self, OrgApacheLuceneStoreDirectory *directory);
+
+__attribute__((unused)) static OrgApacheLuceneIndexStandardDirectoryReader_1 *new_OrgApacheLuceneIndexStandardDirectoryReader_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexStandardDirectoryReader_1 *create_OrgApacheLuceneIndexStandardDirectoryReader_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory);
+
+@interface OrgApacheLuceneIndexStandardDirectoryReader_2 : OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile {
+ @public
+  OrgApacheLuceneIndexStandardDirectoryReader *this$0_;
+}
+
+- (instancetype)initWithOrgApacheLuceneIndexStandardDirectoryReader:(OrgApacheLuceneIndexStandardDirectoryReader *)outer$
+                                  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
+
+- (OrgApacheLuceneIndexDirectoryReader *)doBodyWithNSString:(NSString *)segmentFileName;
+
+- (OrgApacheLuceneIndexDirectoryReader *)run;
+
+- (OrgApacheLuceneIndexDirectoryReader *)runWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)arg0;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexStandardDirectoryReader_2)
+
+__attribute__((unused)) static void OrgApacheLuceneIndexStandardDirectoryReader_2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader_2 *self, OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *directory);
+
+__attribute__((unused)) static OrgApacheLuceneIndexStandardDirectoryReader_2 *new_OrgApacheLuceneIndexStandardDirectoryReader_2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *directory) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexStandardDirectoryReader_2 *create_OrgApacheLuceneIndexStandardDirectoryReader_2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *directory);
+
 @interface OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit () {
  @public
   NSString *segmentsFileName_;
@@ -79,56 +128,14 @@ __attribute__((unused)) static OrgApacheLuceneIndexDirectoryReader *OrgApacheLuc
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit, segmentsFileName_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit, reader_, OrgApacheLuceneIndexStandardDirectoryReader *)
 
-@interface OrgApacheLuceneIndexStandardDirectoryReader_$1 : OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile
-
-- (OrgApacheLuceneIndexDirectoryReader *)doBodyWithNSString:(NSString *)segmentFileName;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexStandardDirectoryReader_$1)
-
-__attribute__((unused)) static void OrgApacheLuceneIndexStandardDirectoryReader_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader_$1 *self, OrgApacheLuceneStoreDirectory *arg$0);
-
-__attribute__((unused)) static OrgApacheLuceneIndexStandardDirectoryReader_$1 *new_OrgApacheLuceneIndexStandardDirectoryReader_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexStandardDirectoryReader_$1 *create_OrgApacheLuceneIndexStandardDirectoryReader_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader_$1)
-
-@interface OrgApacheLuceneIndexStandardDirectoryReader_$2 : OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile {
- @public
-  OrgApacheLuceneIndexStandardDirectoryReader *this$0_;
-}
-
-- (OrgApacheLuceneIndexDirectoryReader *)doBodyWithNSString:(NSString *)segmentFileName;
-
-- (instancetype)initWithOrgApacheLuceneIndexStandardDirectoryReader:(OrgApacheLuceneIndexStandardDirectoryReader *)outer$
-                                  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexStandardDirectoryReader_$2)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexStandardDirectoryReader_$2, this$0_, OrgApacheLuceneIndexStandardDirectoryReader *)
-
-__attribute__((unused)) static void OrgApacheLuceneIndexStandardDirectoryReader_$2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader_$2 *self, OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *arg$0);
-
-__attribute__((unused)) static OrgApacheLuceneIndexStandardDirectoryReader_$2 *new_OrgApacheLuceneIndexStandardDirectoryReader_$2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexStandardDirectoryReader_$2 *create_OrgApacheLuceneIndexStandardDirectoryReader_$2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader_$2)
-
 @implementation OrgApacheLuceneIndexStandardDirectoryReader
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
-              withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
-                  withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                 withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)sis
-                                          withBoolean:(jboolean)applyAllDeletes {
-  OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(self, directory, readers, writer, sis, applyAllDeletes);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
+                            withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
+                                withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
+                               withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)sis
+                                                        withBoolean:(jboolean)applyAllDeletes {
+  OrgApacheLuceneIndexStandardDirectoryReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(self, directory, readers, writer, sis, applyAllDeletes);
   return self;
 }
 
@@ -155,7 +162,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader_$2)
 
 - (NSString *)description {
   JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
-  [buffer appendWithNSString:[[self getClass] getSimpleName]];
+  [buffer appendWithNSString:[[self java_getClass] getSimpleName]];
   [buffer appendWithChar:'('];
   NSString *segmentsFile = [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos_)) getSegmentsFileName];
   if (segmentsFile != nil) {
@@ -189,7 +196,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader_$2)
 - (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChangedWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
                                                                                 withBoolean:(jboolean)applyAllDeletes {
   [self ensureOpen];
-  if (writer == self->writer_ && applyAllDeletes == self->applyAllDeletes_) {
+  if (JreObjectEqualsEquals(writer, self->writer_) && applyAllDeletes == self->applyAllDeletes_) {
     return OrgApacheLuceneIndexStandardDirectoryReader_doOpenFromWriterWithOrgApacheLuceneIndexIndexCommit_(self, nil);
   }
   else {
@@ -230,12 +237,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader_$2)
 }
 
 - (void)doClose {
-  NSException *firstExc = nil;
+  JavaLangThrowable *firstExc = nil;
   for (OrgApacheLuceneIndexLeafReader * __strong r in nil_chk([self getSequentialSubReaders])) {
     @try {
       [((OrgApacheLuceneIndexLeafReader *) nil_chk(r)) decRef];
     }
-    @catch (NSException *t) {
+    @catch (JavaLangThrowable *t) {
       if (firstExc == nil) {
         firstExc = t;
       }
@@ -248,7 +255,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader_$2)
     @catch (OrgApacheLuceneStoreAlreadyClosedException *ex) {
     }
   }
-  OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(firstExc);
+  OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(firstExc);
 }
 
 - (OrgApacheLuceneIndexIndexCommit *)getIndexCommit {
@@ -263,55 +270,76 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader_$2)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexLeafReaderArray:withOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexSegmentInfos:withBoolean:", "StandardDirectoryReader", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "openWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexIndexCommit:", "open", "Lorg.apache.lucene.index.DirectoryReader;", 0x8, "Ljava.io.IOException;", NULL },
-    { "openWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexSegmentInfos:withBoolean:", "open", "Lorg.apache.lucene.index.DirectoryReader;", 0x8, "Ljava.io.IOException;", NULL },
-    { "openWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfos:withJavaUtilList:", "open", "Lorg.apache.lucene.index.DirectoryReader;", 0xa, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/Directory;Lorg/apache/lucene/index/SegmentInfos;Ljava/util/List<+Lorg/apache/lucene/index/LeafReader;>;)Lorg/apache/lucene/index/DirectoryReader;" },
-    { "decRefWhileHandlingExceptionWithOrgApacheLuceneIndexSegmentReaderArray:", "decRefWhileHandlingException", "V", 0xa, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "doOpenIfChanged", NULL, "Lorg.apache.lucene.index.DirectoryReader;", 0x4, "Ljava.io.IOException;", NULL },
-    { "doOpenIfChangedWithOrgApacheLuceneIndexIndexCommit:", "doOpenIfChanged", "Lorg.apache.lucene.index.DirectoryReader;", 0x4, "Ljava.io.IOException;", NULL },
-    { "doOpenIfChangedWithOrgApacheLuceneIndexIndexWriter:withBoolean:", "doOpenIfChanged", "Lorg.apache.lucene.index.DirectoryReader;", 0x4, "Ljava.io.IOException;", NULL },
-    { "doOpenFromWriterWithOrgApacheLuceneIndexIndexCommit:", "doOpenFromWriter", "Lorg.apache.lucene.index.DirectoryReader;", 0x2, "Ljava.io.IOException;", NULL },
-    { "doOpenNoWriterWithOrgApacheLuceneIndexIndexCommit:", "doOpenNoWriter", "Lorg.apache.lucene.index.DirectoryReader;", 0x2, "Ljava.io.IOException;", NULL },
-    { "doOpenFromCommitWithOrgApacheLuceneIndexIndexCommit:", "doOpenFromCommit", "Lorg.apache.lucene.index.DirectoryReader;", 0x2, "Ljava.io.IOException;", NULL },
-    { "doOpenIfChangedWithOrgApacheLuceneIndexSegmentInfos:", "doOpenIfChanged", "Lorg.apache.lucene.index.DirectoryReader;", 0x0, "Ljava.io.IOException;", NULL },
-    { "getVersion", NULL, "J", 0x1, NULL, NULL },
-    { "isCurrent", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "doClose", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "getIndexCommit", NULL, "Lorg.apache.lucene.index.IndexCommit;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x8, 2, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x8, 2, 4, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0xa, 2, 5, 1, 6, -1, -1 },
+    { NULL, "V", 0xa, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x4, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x4, 10, 11, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x4, 10, 12, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x2, 13, 11, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x2, 14, 11, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x2, 15, 11, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x0, 10, 16, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexCommit;", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexLeafReaderArray:withOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexSegmentInfos:withBoolean:);
+  methods[1].selector = @selector(openWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexIndexCommit:);
+  methods[2].selector = @selector(openWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexSegmentInfos:withBoolean:);
+  methods[3].selector = @selector(openWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfos:withJavaUtilList:);
+  methods[4].selector = @selector(decRefWhileHandlingExceptionWithOrgApacheLuceneIndexSegmentReaderArray:);
+  methods[5].selector = @selector(description);
+  methods[6].selector = @selector(doOpenIfChanged);
+  methods[7].selector = @selector(doOpenIfChangedWithOrgApacheLuceneIndexIndexCommit:);
+  methods[8].selector = @selector(doOpenIfChangedWithOrgApacheLuceneIndexIndexWriter:withBoolean:);
+  methods[9].selector = @selector(doOpenFromWriterWithOrgApacheLuceneIndexIndexCommit:);
+  methods[10].selector = @selector(doOpenNoWriterWithOrgApacheLuceneIndexIndexCommit:);
+  methods[11].selector = @selector(doOpenFromCommitWithOrgApacheLuceneIndexIndexCommit:);
+  methods[12].selector = @selector(doOpenIfChangedWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[13].selector = @selector(getVersion);
+  methods[14].selector = @selector(isCurrent);
+  methods[15].selector = @selector(doClose);
+  methods[16].selector = @selector(getIndexCommit);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "writer_", NULL, 0x10, "Lorg.apache.lucene.index.IndexWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentInfos_", NULL, 0x10, "Lorg.apache.lucene.index.SegmentInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "applyAllDeletes_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "writer_", "LOrgApacheLuceneIndexIndexWriter;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "segmentInfos_", "LOrgApacheLuceneIndexSegmentInfos;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "applyAllDeletes_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.StandardDirectoryReader$ReaderCommit;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexStandardDirectoryReader = { 2, "StandardDirectoryReader", "org.apache.lucene.index", NULL, 0x10, 17, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDirectory;[LOrgApacheLuceneIndexLeafReader;LOrgApacheLuceneIndexIndexWriter;LOrgApacheLuceneIndexSegmentInfos;Z", "LJavaIoIOException;", "open", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexIndexCommit;", "LOrgApacheLuceneIndexIndexWriter;LOrgApacheLuceneIndexSegmentInfos;Z", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfos;LJavaUtilList;", "(Lorg/apache/lucene/store/Directory;Lorg/apache/lucene/index/SegmentInfos;Ljava/util/List<+Lorg/apache/lucene/index/LeafReader;>;)Lorg/apache/lucene/index/DirectoryReader;", "decRefWhileHandlingException", "[LOrgApacheLuceneIndexSegmentReader;", "toString", "doOpenIfChanged", "LOrgApacheLuceneIndexIndexCommit;", "LOrgApacheLuceneIndexIndexWriter;Z", "doOpenFromWriter", "doOpenNoWriter", "doOpenFromCommit", "LOrgApacheLuceneIndexSegmentInfos;", "LOrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexStandardDirectoryReader = { "StandardDirectoryReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 17, 3, -1, 17, -1, -1, -1 };
   return &_OrgApacheLuceneIndexStandardDirectoryReader;
 }
 
 @end
 
-void OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneIndexStandardDirectoryReader *self, OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes) {
+void OrgApacheLuceneIndexStandardDirectoryReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneIndexStandardDirectoryReader *self, OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes) {
   OrgApacheLuceneIndexDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_(self, directory, readers);
   JreStrongAssign(&self->writer_, writer);
   JreStrongAssign(&self->segmentInfos_, sis);
   self->applyAllDeletes_ = applyAllDeletes;
 }
 
-OrgApacheLuceneIndexStandardDirectoryReader *new_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexStandardDirectoryReader, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_, directory, readers, writer, sis, applyAllDeletes)
+OrgApacheLuceneIndexStandardDirectoryReader *new_OrgApacheLuceneIndexStandardDirectoryReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexStandardDirectoryReader, initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_, directory, readers, writer, sis, applyAllDeletes)
 }
 
-OrgApacheLuceneIndexStandardDirectoryReader *create_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexStandardDirectoryReader, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_, directory, readers, writer, sis, applyAllDeletes)
+OrgApacheLuceneIndexStandardDirectoryReader *create_OrgApacheLuceneIndexStandardDirectoryReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexStandardDirectoryReader, initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_, directory, readers, writer, sis, applyAllDeletes)
 }
 
 OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader_openWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexIndexCommit *commit) {
   OrgApacheLuceneIndexStandardDirectoryReader_initialize();
-  return [create_OrgApacheLuceneIndexStandardDirectoryReader_$1_initWithOrgApacheLuceneStoreDirectory_(directory) runWithOrgApacheLuceneIndexIndexCommit:commit];
+  return [create_OrgApacheLuceneIndexStandardDirectoryReader_1_initWithOrgApacheLuceneStoreDirectory_(directory) runWithOrgApacheLuceneIndexIndexCommit:commit];
 }
 
 OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader_openWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *infos, jboolean applyAllDeletes) {
@@ -319,13 +347,13 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
   jint numSegments = [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(infos)) size];
   id<JavaUtilList> readers = create_JavaUtilArrayList_init();
   OrgApacheLuceneStoreDirectory *dir = [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) getDirectory];
-  OrgApacheLuceneIndexSegmentInfos *segmentInfos = [infos clone];
+  OrgApacheLuceneIndexSegmentInfos *segmentInfos = [infos java_clone];
   jint infosUpto = 0;
   jboolean success = false;
   @try {
     for (jint i = 0; i < numSegments; i++) {
       OrgApacheLuceneIndexSegmentCommitInfo *info = [infos infoWithInt:i];
-      JreAssert((((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->dir_ == dir), (@"org/apache/lucene/index/StandardDirectoryReader.java:96 condition failed: assert info.info.dir == dir;"));
+      JreAssert(JreObjectEqualsEquals(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->dir_, dir), @"org/apache/lucene/index/StandardDirectoryReader.java:96 condition failed: assert info.info.dir == dir;");
       OrgApacheLuceneIndexReadersAndUpdates *rld = [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(writer->readerPool_)) getWithOrgApacheLuceneIndexSegmentCommitInfo:info withBoolean:true];
       @try {
         OrgApacheLuceneIndexSegmentReader *reader = [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld)) getReadOnlyCloneWithOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READ)];
@@ -343,7 +371,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
       }
     }
     [writer incRefDeleterWithOrgApacheLuceneIndexSegmentInfos:segmentInfos];
-    OrgApacheLuceneIndexStandardDirectoryReader *result = create_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(dir, [readers toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[readers size] type:OrgApacheLuceneIndexSegmentReader_class_()]], writer, segmentInfos, applyAllDeletes);
+    OrgApacheLuceneIndexStandardDirectoryReader *result = create_OrgApacheLuceneIndexStandardDirectoryReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(dir, [readers toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[readers size] type:OrgApacheLuceneIndexSegmentReader_class_()]], writer, segmentInfos, applyAllDeletes);
     success = true;
     return result;
   }
@@ -353,7 +381,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
         @try {
           [((OrgApacheLuceneIndexSegmentReader *) nil_chk(r)) decRef];
         }
-        @catch (NSException *th) {
+        @catch (JavaLangThrowable *th) {
         }
       }
     }
@@ -371,8 +399,8 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
   }
   IOSObjectArray *newReaders = [IOSObjectArray arrayWithLength:[((OrgApacheLuceneIndexSegmentInfos *) nil_chk(infos)) size] type:OrgApacheLuceneIndexSegmentReader_class_()];
   for (jint i = [infos size] - 1; i >= 0; i--) {
-    OrgApacheLuceneIndexSegmentCommitInfo *commitInfo = [infos infoWithInt:i];
-    JavaLangInteger *oldReaderIndex = [segmentReaders getWithId:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(commitInfo))->info_))->name_];
+    OrgApacheLuceneIndexSegmentCommitInfo *commitInfo = JreRetainedLocalValue([infos infoWithInt:i]);
+    JavaLangInteger *oldReaderIndex = JreRetainedLocalValue([segmentReaders getWithId:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(commitInfo))->info_))->name_]);
     OrgApacheLuceneIndexSegmentReader *oldReader;
     if (oldReaderIndex == nil) {
       oldReader = nil;
@@ -393,7 +421,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
           IOSObjectArray_Set(newReaders, i, oldReader);
         }
         else {
-          JreAssert((commitInfo->info_->dir_ == ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([oldReader getSegmentInfo]))->info_->dir_), (@"org/apache/lucene/index/StandardDirectoryReader.java:183 condition failed: assert commitInfo.info.dir == oldReader.getSegmentInfo().info.dir;"));
+          JreAssert(JreObjectEqualsEquals(commitInfo->info_->dir_, ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([oldReader getSegmentInfo]))->info_->dir_), @"org/apache/lucene/index/StandardDirectoryReader.java:183 condition failed: assert commitInfo.info.dir == oldReader.getSegmentInfo().info.dir;");
           jboolean illegalDocCountChange = [commitInfo->info_ maxDoc] != [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([oldReader getSegmentInfo]))->info_ maxDoc];
           jboolean hasNeitherDeletionsNorUpdates = [commitInfo hasDeletions] == false && [commitInfo hasFieldUpdates] == false;
           jboolean deletesWereLost = [commitInfo getDelGen] == -1 && [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([oldReader getSegmentInfo])) getDelGen] != -1;
@@ -416,7 +444,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
       }
     }
   }
-  return create_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(directory, newReaders, nil, infos, false);
+  return create_OrgApacheLuceneIndexStandardDirectoryReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(directory, newReaders, nil, infos, false);
 }
 
 void OrgApacheLuceneIndexStandardDirectoryReader_decRefWhileHandlingExceptionWithOrgApacheLuceneIndexSegmentReaderArray_(IOSObjectArray *readers) {
@@ -431,7 +459,7 @@ void OrgApacheLuceneIndexStandardDirectoryReader_decRefWhileHandlingExceptionWit
         @try {
           [reader decRef];
         }
-        @catch (NSException *t) {
+        @catch (JavaLangThrowable *t) {
         }
       }
     }
@@ -445,7 +473,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
   if ([((OrgApacheLuceneIndexIndexWriter *) nil_chk(self->writer_)) nrtIsCurrentWithOrgApacheLuceneIndexSegmentInfos:self->segmentInfos_]) {
     return nil;
   }
-  OrgApacheLuceneIndexDirectoryReader *reader = [self->writer_ getReaderWithBoolean:self->applyAllDeletes_];
+  OrgApacheLuceneIndexDirectoryReader *reader = JreRetainedLocalValue([self->writer_ getReaderWithBoolean:self->applyAllDeletes_]);
   if ([((OrgApacheLuceneIndexDirectoryReader *) nil_chk(reader)) getVersion] == [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->segmentInfos_)) getVersion]) {
     [reader decRef];
     return nil;
@@ -460,7 +488,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
     }
   }
   else {
-    if (self->directory_ != [commit getDirectory]) {
+    if (!JreObjectEqualsEquals(self->directory_, [commit getDirectory])) {
       @throw create_JavaIoIOException_initWithNSString_(@"the specified commit does not match the specified Directory");
     }
     if (self->segmentInfos_ != nil && [((NSString *) nil_chk([commit getSegmentsFileName])) isEqual:[self->segmentInfos_ getSegmentsFileName]]) {
@@ -471,10 +499,118 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
 }
 
 OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader_doOpenFromCommitWithOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneIndexStandardDirectoryReader *self, OrgApacheLuceneIndexIndexCommit *commit) {
-  return [create_OrgApacheLuceneIndexStandardDirectoryReader_$2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(self, self->directory_) runWithOrgApacheLuceneIndexIndexCommit:commit];
+  return [create_OrgApacheLuceneIndexStandardDirectoryReader_2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(self, self->directory_) runWithOrgApacheLuceneIndexIndexCommit:commit];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexStandardDirectoryReader)
+
+@implementation OrgApacheLuceneIndexStandardDirectoryReader_1
+
+- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory {
+  OrgApacheLuceneIndexStandardDirectoryReader_1_initWithOrgApacheLuceneStoreDirectory_(self, directory);
+  return self;
+}
+
+- (OrgApacheLuceneIndexDirectoryReader *)doBodyWithNSString:(NSString *)segmentFileName {
+  OrgApacheLuceneIndexSegmentInfos *sis = OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(directory_, segmentFileName);
+  IOSObjectArray *readers = [IOSObjectArray arrayWithLength:[((OrgApacheLuceneIndexSegmentInfos *) nil_chk(sis)) size] type:OrgApacheLuceneIndexSegmentReader_class_()];
+  jboolean success = false;
+  @try {
+    for (jint i = [sis size] - 1; i >= 0; i--) {
+      IOSObjectArray_SetAndConsume(readers, i, new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_([sis infoWithInt:i], JreLoadStatic(OrgApacheLuceneStoreIOContext, READ)));
+    }
+    OrgApacheLuceneIndexDirectoryReader *reader = create_OrgApacheLuceneIndexStandardDirectoryReader_initPackagePrivateWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(directory_, readers, nil, sis, false);
+    success = true;
+    return JreRetainedLocalValue(reader);
+  }
+  @finally {
+    if (success == false) {
+      OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_(readers);
+    }
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x4, 1, 2, 3, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDirectory:);
+  methods[1].selector = @selector(doBodyWithNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDirectory;", "doBody", "LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneIndexStandardDirectoryReader;", "openWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexIndexCommit:", "Lorg/apache/lucene/index/SegmentInfos$FindSegmentsFile<Lorg/apache/lucene/index/DirectoryReader;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexStandardDirectoryReader_1 = { "", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 4, -1, 5, 6, -1 };
+  return &_OrgApacheLuceneIndexStandardDirectoryReader_1;
+}
+
+@end
+
+void OrgApacheLuceneIndexStandardDirectoryReader_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader_1 *self, OrgApacheLuceneStoreDirectory *directory) {
+  OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile_initWithOrgApacheLuceneStoreDirectory_(self, directory);
+}
+
+OrgApacheLuceneIndexStandardDirectoryReader_1 *new_OrgApacheLuceneIndexStandardDirectoryReader_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexStandardDirectoryReader_1, initWithOrgApacheLuceneStoreDirectory_, directory)
+}
+
+OrgApacheLuceneIndexStandardDirectoryReader_1 *create_OrgApacheLuceneIndexStandardDirectoryReader_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexStandardDirectoryReader_1, initWithOrgApacheLuceneStoreDirectory_, directory)
+}
+
+@implementation OrgApacheLuceneIndexStandardDirectoryReader_2
+
+- (instancetype)initWithOrgApacheLuceneIndexStandardDirectoryReader:(OrgApacheLuceneIndexStandardDirectoryReader *)outer$
+                                  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory {
+  OrgApacheLuceneIndexStandardDirectoryReader_2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(self, outer$, directory);
+  return self;
+}
+
+- (OrgApacheLuceneIndexDirectoryReader *)doBodyWithNSString:(NSString *)segmentFileName {
+  OrgApacheLuceneIndexSegmentInfos *infos = OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(directory_, segmentFileName);
+  return JreRetainedLocalValue([this$0_ doOpenIfChangedWithOrgApacheLuceneIndexSegmentInfos:infos]);
+}
+
+- (void)dealloc {
+  RELEASE_(this$0_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x4, 1, 2, 3, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexStandardDirectoryReader:withOrgApacheLuceneStoreDirectory:);
+  methods[1].selector = @selector(doBodyWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "this$0_", "LOrgApacheLuceneIndexStandardDirectoryReader;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexStandardDirectoryReader;LOrgApacheLuceneStoreDirectory;", "doBody", "LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneIndexStandardDirectoryReader;", "doOpenFromCommitWithOrgApacheLuceneIndexIndexCommit:", "Lorg/apache/lucene/index/SegmentInfos$FindSegmentsFile<Lorg/apache/lucene/index/DirectoryReader;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexStandardDirectoryReader_2 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8010, 2, 1, 4, -1, 5, 6, -1 };
+  return &_OrgApacheLuceneIndexStandardDirectoryReader_2;
+}
+
+@end
+
+void OrgApacheLuceneIndexStandardDirectoryReader_2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader_2 *self, OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *directory) {
+  JreStrongAssign(&self->this$0_, outer$);
+  OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile_initWithOrgApacheLuceneStoreDirectory_(self, directory);
+}
+
+OrgApacheLuceneIndexStandardDirectoryReader_2 *new_OrgApacheLuceneIndexStandardDirectoryReader_2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *directory) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexStandardDirectoryReader_2, initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_, outer$, directory)
+}
+
+OrgApacheLuceneIndexStandardDirectoryReader_2 *create_OrgApacheLuceneIndexStandardDirectoryReader_2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *directory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexStandardDirectoryReader_2, initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_, outer$, directory)
+}
 
 @implementation OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit
 
@@ -535,29 +671,45 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexStandardDirectoryReader)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexStandardDirectoryReader:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneStoreDirectory:", "ReaderCommit", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getSegmentCount", NULL, "I", 0x1, NULL, NULL },
-    { "getSegmentsFileName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getFileNames", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Ljava/lang/String;>;" },
-    { "getDirectory", NULL, "Lorg.apache.lucene.store.Directory;", 0x1, NULL, NULL },
-    { "getGeneration", NULL, "J", 0x1, NULL, NULL },
-    { "isDeleted", NULL, "Z", 0x1, NULL, NULL },
-    { "getUserData", NULL, "Ljava.util.Map;", 0x1, NULL, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "delete__", "delete", "V", 0x1, NULL, NULL },
-    { "getReader", NULL, "Lorg.apache.lucene.index.StandardDirectoryReader;", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreDirectory;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "V", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexStandardDirectoryReader;", 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexStandardDirectoryReader:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneStoreDirectory:);
+  methods[1].selector = @selector(description);
+  methods[2].selector = @selector(getSegmentCount);
+  methods[3].selector = @selector(getSegmentsFileName);
+  methods[4].selector = @selector(getFileNames);
+  methods[5].selector = @selector(getDirectory);
+  methods[6].selector = @selector(getGeneration);
+  methods[7].selector = @selector(isDeleted);
+  methods[8].selector = @selector(getUserData);
+  methods[9].selector = @selector(delete__);
+  methods[10].selector = @selector(getReader);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "segmentsFileName_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "files_", NULL, 0x0, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "dir_", NULL, 0x0, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "generation_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "userData_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "segmentCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "reader_", NULL, 0x12, "Lorg.apache.lucene.index.StandardDirectoryReader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "segmentsFileName_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "files_", "LJavaUtilCollection;", .constantValue.asLong = 0, 0x0, -1, -1, 6, -1 },
+    { "dir_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "generation_", "J", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x10, -1, -1, 7, -1 },
+    { "segmentCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "reader_", "LOrgApacheLuceneIndexStandardDirectoryReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit = { 2, "ReaderCommit", "org.apache.lucene.index", "StandardDirectoryReader", 0x18, 11, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexStandardDirectoryReader;LOrgApacheLuceneIndexSegmentInfos;LOrgApacheLuceneStoreDirectory;", "LJavaIoIOException;", "toString", "()Ljava/util/Collection<Ljava/lang/String;>;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "delete", "Ljava/util/Collection<Ljava/lang/String;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "LOrgApacheLuceneIndexStandardDirectoryReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit = { "ReaderCommit", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x18, 11, 7, 8, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit;
 }
 
@@ -583,105 +735,3 @@ OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit *create_OrgApacheLucene
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit)
-
-@implementation OrgApacheLuceneIndexStandardDirectoryReader_$1
-
-- (OrgApacheLuceneIndexDirectoryReader *)doBodyWithNSString:(NSString *)segmentFileName {
-  OrgApacheLuceneIndexSegmentInfos *sis = OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(directory_, segmentFileName);
-  IOSObjectArray *readers = [IOSObjectArray arrayWithLength:[((OrgApacheLuceneIndexSegmentInfos *) nil_chk(sis)) size] type:OrgApacheLuceneIndexSegmentReader_class_()];
-  jboolean success = false;
-  @try {
-    for (jint i = [sis size] - 1; i >= 0; i--) {
-      IOSObjectArray_SetAndConsume(readers, i, new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_([sis infoWithInt:i], JreLoadStatic(OrgApacheLuceneStoreIOContext, READ)));
-    }
-    OrgApacheLuceneIndexDirectoryReader *reader = create_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(directory_, readers, nil, sis, false);
-    success = true;
-    return reader;
-  }
-  @finally {
-    if (success == false) {
-      OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_(readers);
-    }
-  }
-}
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg$0 {
-  OrgApacheLuceneIndexStandardDirectoryReader_$1_initWithOrgApacheLuceneStoreDirectory_(self, arg$0);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "doBodyWithNSString:", "doBody", "Lorg.apache.lucene.index.DirectoryReader;", 0x4, "Ljava.io.IOException;", "(Ljava/lang/String;)Lorg/apache/lucene/index/DirectoryReader;" },
-    { "initWithOrgApacheLuceneStoreDirectory:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.DirectoryReader;"};
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexStandardDirectoryReader", "openWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexIndexCommit:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexStandardDirectoryReader_$1 = { 2, "", "org.apache.lucene.index", "StandardDirectoryReader", 0x8008, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, &enclosing_method, "Lorg/apache/lucene/index/SegmentInfos$FindSegmentsFile<Lorg/apache/lucene/index/DirectoryReader;>;" };
-  return &_OrgApacheLuceneIndexStandardDirectoryReader_$1;
-}
-
-@end
-
-void OrgApacheLuceneIndexStandardDirectoryReader_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader_$1 *self, OrgApacheLuceneStoreDirectory *arg$0) {
-  OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile_initWithOrgApacheLuceneStoreDirectory_(self, arg$0);
-}
-
-OrgApacheLuceneIndexStandardDirectoryReader_$1 *new_OrgApacheLuceneIndexStandardDirectoryReader_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexStandardDirectoryReader_$1, initWithOrgApacheLuceneStoreDirectory_, arg$0)
-}
-
-OrgApacheLuceneIndexStandardDirectoryReader_$1 *create_OrgApacheLuceneIndexStandardDirectoryReader_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexStandardDirectoryReader_$1, initWithOrgApacheLuceneStoreDirectory_, arg$0)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexStandardDirectoryReader_$1)
-
-@implementation OrgApacheLuceneIndexStandardDirectoryReader_$2
-
-- (OrgApacheLuceneIndexDirectoryReader *)doBodyWithNSString:(NSString *)segmentFileName {
-  OrgApacheLuceneIndexSegmentInfos *infos = OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(directory_, segmentFileName);
-  return [this$0_ doOpenIfChangedWithOrgApacheLuceneIndexSegmentInfos:infos];
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexStandardDirectoryReader:(OrgApacheLuceneIndexStandardDirectoryReader *)outer$
-                                  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg$0 {
-  OrgApacheLuceneIndexStandardDirectoryReader_$2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(self, outer$, arg$0);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(this$0_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "doBodyWithNSString:", "doBody", "Lorg.apache.lucene.index.DirectoryReader;", 0x4, "Ljava.io.IOException;", "(Ljava/lang/String;)Lorg/apache/lucene/index/DirectoryReader;" },
-    { "initWithOrgApacheLuceneIndexStandardDirectoryReader:withOrgApacheLuceneStoreDirectory:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.StandardDirectoryReader;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.DirectoryReader;"};
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexStandardDirectoryReader", "doOpenFromCommitWithOrgApacheLuceneIndexIndexCommit:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexStandardDirectoryReader_$2 = { 2, "", "org.apache.lucene.index", "StandardDirectoryReader", 0x8008, 2, methods, 1, fields, 1, superclass_type_args, 0, NULL, &enclosing_method, "Lorg/apache/lucene/index/SegmentInfos$FindSegmentsFile<Lorg/apache/lucene/index/DirectoryReader;>;" };
-  return &_OrgApacheLuceneIndexStandardDirectoryReader_$2;
-}
-
-@end
-
-void OrgApacheLuceneIndexStandardDirectoryReader_$2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader_$2 *self, OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *arg$0) {
-  JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile_initWithOrgApacheLuceneStoreDirectory_(self, arg$0);
-}
-
-OrgApacheLuceneIndexStandardDirectoryReader_$2 *new_OrgApacheLuceneIndexStandardDirectoryReader_$2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexStandardDirectoryReader_$2, initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_, outer$, arg$0)
-}
-
-OrgApacheLuceneIndexStandardDirectoryReader_$2 *create_OrgApacheLuceneIndexStandardDirectoryReader_$2_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *outer$, OrgApacheLuceneStoreDirectory *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexStandardDirectoryReader_$2, initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneStoreDirectory_, outer$, arg$0)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexStandardDirectoryReader_$2)

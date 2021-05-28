@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexBinaryDocValuesFieldUpdates
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_) && (INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValuesFieldUpdates || defined(INCLUDE_OrgApacheLuceneIndexBinaryDocValuesFieldUpdates))
 #define OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_
 
@@ -21,17 +27,18 @@
 #include "org/apache/lucene/index/DocValuesFieldUpdates.h"
 
 @class OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_Iterator;
+@class OrgApacheLuceneIndexDocValuesType;
 
 /*!
- @brief A <code>DocValuesFieldUpdates</code> which holds updates of documents, of a single
+ @brief A <code>DocValuesFieldUpdates</code> which holds updates of documents, of a single 
  <code>BinaryDocValuesField</code>.
  */
 @interface OrgApacheLuceneIndexBinaryDocValuesFieldUpdates : OrgApacheLuceneIndexDocValuesFieldUpdates
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                         withInt:(jint)maxDoc;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field
+                                                 withInt:(jint)maxDoc;
 
 - (void)addWithInt:(jint)doc
             withId:(id)value;
@@ -44,15 +51,20 @@
 
 - (jlong)ramBytesPerDoc;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0
+                   withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)arg1 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexBinaryDocValuesFieldUpdates)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_initWithNSString_withInt_(OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *self, NSString *field, jint maxDoc);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_initPackagePrivateWithNSString_withInt_(OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *self, NSString *field, jint maxDoc);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *new_OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_initWithNSString_withInt_(NSString *field, jint maxDoc) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *new_OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_initPackagePrivateWithNSString_withInt_(NSString *field, jint maxDoc) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *create_OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_initWithNSString_withInt_(NSString *field, jint maxDoc);
+FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *create_OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_initPackagePrivateWithNSString_withInt_(NSString *field, jint maxDoc);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBinaryDocValuesFieldUpdates)
 
@@ -73,11 +85,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBinaryDocValuesFieldUpdates)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)size
+- (instancetype __nonnull)initWithInt:(jint)size
 withOrgApacheLuceneUtilPackedPagedGrowableWriter:(OrgApacheLuceneUtilPackedPagedGrowableWriter *)offsets
 withOrgApacheLuceneUtilPackedPagedGrowableWriter:(OrgApacheLuceneUtilPackedPagedGrowableWriter *)lengths
 withOrgApacheLuceneUtilPackedPagedMutable:(OrgApacheLuceneUtilPackedPagedMutable *)docs
-withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)values;
+      withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)values;
 
 - (jint)doc;
 
@@ -86,6 +98,10 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)values;
 - (void)reset;
 
 - (OrgApacheLuceneUtilBytesRef *)value;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -101,4 +117,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_Itera
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValuesFieldUpdates")

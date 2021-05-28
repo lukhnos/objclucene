@@ -13,6 +13,12 @@
 #include "org/apache/lucene/search/TermRangeQuery.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TermRangeFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchTermRangeFilter__Annotations$0(void);
+
 @implementation OrgApacheLuceneSearchTermRangeFilter
 
 - (instancetype)initWithNSString:(NSString *)fieldName
@@ -58,23 +64,31 @@
   return [((OrgApacheLuceneSearchTermRangeQuery *) nil_chk(query_)) includesUpper];
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:", "TermRangeFilter", NULL, 0x1, NULL, NULL },
-    { "newStringRangeWithNSString:withNSString:withNSString:withBoolean:withBoolean:", "newStringRange", "Lorg.apache.lucene.search.TermRangeFilter;", 0x9, NULL, NULL },
-    { "LessWithNSString:withOrgApacheLuceneUtilBytesRef:", "Less", "Lorg.apache.lucene.search.TermRangeFilter;", 0x9, NULL, NULL },
-    { "MoreWithNSString:withOrgApacheLuceneUtilBytesRef:", "More", "Lorg.apache.lucene.search.TermRangeFilter;", 0x9, NULL, NULL },
-    { "getLowerTerm", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getUpperTerm", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "includesLower", NULL, "Z", 0x1, NULL, NULL },
-    { "includesUpper", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTermRangeFilter;", 0x9, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTermRangeFilter;", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTermRangeFilter;", 0x9, 5, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.TermRangeQuery;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermRangeFilter = { 2, "TermRangeFilter", "org.apache.lucene.search", NULL, 0x1, 8, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/MultiTermQueryWrapperFilter<Lorg/apache/lucene/search/TermRangeQuery;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:);
+  methods[1].selector = @selector(newStringRangeWithNSString:withNSString:withNSString:withBoolean:withBoolean:);
+  methods[2].selector = @selector(LessWithNSString:withOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(MoreWithNSString:withOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(getLowerTerm);
+  methods[5].selector = @selector(getUpperTerm);
+  methods[6].selector = @selector(includesLower);
+  methods[7].selector = @selector(includesUpper);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;ZZ", "newStringRange", "LNSString;LNSString;LNSString;ZZ", "Less", "LNSString;LOrgApacheLuceneUtilBytesRef;", "More", "Lorg/apache/lucene/search/MultiTermQueryWrapperFilter<Lorg/apache/lucene/search/TermRangeQuery;>;", (void *)&OrgApacheLuceneSearchTermRangeFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermRangeFilter = { "TermRangeFilter", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x1, 8, 0, -1, -1, -1, 6, 7 };
   return &_OrgApacheLuceneSearchTermRangeFilter;
 }
 
@@ -107,6 +121,10 @@ OrgApacheLuceneSearchTermRangeFilter *OrgApacheLuceneSearchTermRangeFilter_LessW
 OrgApacheLuceneSearchTermRangeFilter *OrgApacheLuceneSearchTermRangeFilter_MoreWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *fieldName, OrgApacheLuceneUtilBytesRef *lowerTerm) {
   OrgApacheLuceneSearchTermRangeFilter_initialize();
   return create_OrgApacheLuceneSearchTermRangeFilter_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(fieldName, lowerTerm, nil, true, false);
+}
+
+IOSObjectArray *OrgApacheLuceneSearchTermRangeFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermRangeFilter)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder))
 #define OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_
 
@@ -30,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
@@ -40,12 +46,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilde
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init(OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder *new_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder *new_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder *create_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder *create_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder")

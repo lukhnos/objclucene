@@ -10,6 +10,10 @@
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/ByteArrayDataOutput must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneStoreByteArrayDataOutput () {
  @public
   IOSByteArray *bytes_;
@@ -59,14 +63,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)writeByteWithByte:(jbyte)b {
-  JreAssert((pos_ < limit_), (@"org/apache/lucene/store/ByteArrayDataOutput.java:62 condition failed: assert pos < limit;"));
+  JreAssert(pos_ < limit_, @"org/apache/lucene/store/ByteArrayDataOutput.java:62 condition failed: assert pos < limit;");
   *IOSByteArray_GetRef(nil_chk(bytes_), pos_++) = b;
 }
 
 - (void)writeBytesWithByteArray:(IOSByteArray *)b
                         withInt:(jint)offset
                         withInt:(jint)length {
-  JreAssert((pos_ + length <= limit_), (@"org/apache/lucene/store/ByteArrayDataOutput.java:68 condition failed: assert pos + length <= limit;"));
+  JreAssert(pos_ + length <= limit_, @"org/apache/lucene/store/ByteArrayDataOutput.java:68 condition failed: assert pos + length <= limit;");
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(b, offset, bytes_, pos_, length);
   pos_ += length;
 }
@@ -77,22 +81,35 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithByteArray:", "ByteArrayDataOutput", NULL, 0x1, NULL, NULL },
-    { "initWithByteArray:withInt:withInt:", "ByteArrayDataOutput", NULL, 0x1, NULL, NULL },
-    { "init", "ByteArrayDataOutput", NULL, 0x1, NULL, NULL },
-    { "resetWithByteArray:", "reset", "V", 0x1, NULL, NULL },
-    { "resetWithByteArray:withInt:withInt:", "reset", "V", 0x1, NULL, NULL },
-    { "getPosition", NULL, "I", 0x1, NULL, NULL },
-    { "writeByteWithByte:", "writeByte", "V", 0x1, NULL, NULL },
-    { "writeBytesWithByteArray:withInt:withInt:", "writeBytes", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithByteArray:);
+  methods[1].selector = @selector(initWithByteArray:withInt:withInt:);
+  methods[2].selector = @selector(init);
+  methods[3].selector = @selector(resetWithByteArray:);
+  methods[4].selector = @selector(resetWithByteArray:withInt:withInt:);
+  methods[5].selector = @selector(getPosition);
+  methods[6].selector = @selector(writeByteWithByte:);
+  methods[7].selector = @selector(writeBytesWithByteArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bytes_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "limit_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "bytes_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "limit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteArrayDataOutput = { 2, "ByteArrayDataOutput", "org.apache.lucene.store", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[B", "[BII", "reset", "writeByte", "B", "writeBytes" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteArrayDataOutput = { "ByteArrayDataOutput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 8, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreByteArrayDataOutput;
 }
 

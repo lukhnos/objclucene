@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileFileFileVisitResult
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFileFileVisitResult_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileFileVisitResult || defined(INCLUDE_OrgLukhnosPortmobileFileFileVisitResult))
 #define OrgLukhnosPortmobileFileFileVisitResult_
 
@@ -20,21 +26,23 @@
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgLukhnosPortmobileFileFileVisitResult_Enum) {
   OrgLukhnosPortmobileFileFileVisitResult_Enum_CONTINUE = 0,
 };
 
-@interface OrgLukhnosPortmobileFileFileVisitResult : JavaLangEnum < NSCopying >
+@interface OrgLukhnosPortmobileFileFileVisitResult : JavaLangEnum
 
-+ (OrgLukhnosPortmobileFileFileVisitResult *)CONTINUE;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgLukhnosPortmobileFileFileVisitResult *CONTINUE NS_SWIFT_NAME(CONTINUE);
+#pragma mark Public
 
 + (OrgLukhnosPortmobileFileFileVisitResult *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgLukhnosPortmobileFileFileVisitResult_Enum)toNSEnum;
 
 @end
@@ -44,10 +52,10 @@ J2OBJC_STATIC_INIT(OrgLukhnosPortmobileFileFileVisitResult)
 /*! INTERNAL ONLY - Use enum accessors declared below. */
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_values_[];
 
-inline OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_get_CONTINUE();
+inline OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_get_CONTINUE(void);
 J2OBJC_ENUM_CONSTANT(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgLukhnosPortmobileFileFileVisitResult_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgLukhnosPortmobileFileFileVisitResult_values(void);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_valueOfWithNSString_(NSString *name);
 
@@ -57,4 +65,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileFileVisitResult)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFileVisitResult")

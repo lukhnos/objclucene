@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/ArrayIndexOutOfBoundsException.h"
 #include "java/lang/Character.h"
@@ -17,6 +16,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/wikipedia/WikipediaTokenizer.h"
 #include "org/apache/lucene/analysis/wikipedia/WikipediaTokenizerImpl.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/wikipedia/WikipediaTokenizerImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl () {
  @public
@@ -34,7 +37,7 @@
   jint zzLexicalState_;
   /*!
    @brief this buffer contains the current text to be matched and is
- the source of the yytext() string
+       the source of the yytext() string
    */
   IOSCharArray *zzBuffer_;
   /*!
@@ -51,7 +54,7 @@
   jint zzStartRead_;
   /*!
    @brief endRead marks the last character in the buffer, that has been read
- from input
+       from input
    */
   jint zzEndRead_;
   /*!
@@ -64,7 +67,7 @@
   jint yychar_;
   /*!
    @brief the number of characters from the last newline up to the start of the 
- matched text
+  matched text
    */
   jint yycolumn_;
   /*!
@@ -82,8 +85,8 @@
   /*!
    @brief The number of occupied positions in zzBuffer beyond zzEndRead.
    When a lead/high surrogate has been read from the input stream
- into the final zzBuffer position, this will have a value of 1;
- otherwise, it will have a value of 0.
+  into the final zzBuffer position, this will have a value of 1;
+  otherwise, it will have a value of 0.
    */
   jint zzFinalHighSurrogate_;
   jint currentTokType_;
@@ -119,7 +122,7 @@
 
 /*!
  @brief Unpacks the compressed character translation table.
- @param packed   the packed character translation table
+ @param packed the packed character translation table
  @return the unpacked character translation table
  */
 + (IOSCharArray *)zzUnpackCMapWithNSString:(NSString *)packed;
@@ -127,20 +130,20 @@
 /*!
  @brief Refills the input buffer.
  @return <code>false</code>, iff there was new input.
- @exception java.io.IOException  if any I/O-Error occurs
+ @throw java.io.IOExceptionif any I/O-Error occurs
  */
 - (jboolean)zzRefill;
 
 /*!
  @brief Reports an error that occured while scanning.
  In a wellformed scanner (no or only correct usage of 
- yypushback(int) and a match-all fallback rule) this method 
- will only be called with things that "Can't Possibly Happen".
- If this method is called, something is seriously wrong
- (e.g. a JFlex bug producing a faulty scanner etc.).
- Usual syntax/scanner level error handling should be done
- in error fallback rules.
- @param errorCode  the code of the errormessage to display
+  yypushback(int) and a match-all fallback rule) this method 
+  will only be called with things that "Can't Possibly Happen".
+  If this method is called, something is seriously wrong
+  (e.g. a JFlex bug producing a faulty scanner etc.).
+  Usual syntax/scanner level error handling should be done
+  in error fallback rules.
+ @param errorCode the code of the errormessage to display
  */
 - (void)zzScanErrorWithInt:(jint)errorCode;
 
@@ -152,107 +155,107 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, zzBu
 /*!
  @brief initial size of the lookahead buffer
  */
-inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_BUFFERSIZE();
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_BUFFERSIZE(void);
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_BUFFERSIZE 4096
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_BUFFERSIZE, jint)
 
 /*!
  @brief ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
- ZZ_LEXSTATE[l+1] is the state in the DFA for the lexical state l
- at the beginning of a line
- l is of the form l = 2*k, k a non negative integer
+  ZZ_LEXSTATE[l+1] is the state in the DFA for the lexical state l
+                   at the beginning of a line
+  l is of the form l = 2*k, k a non negative integer
  */
-inline IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_LEXSTATE();
+inline IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_LEXSTATE(void);
 static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_LEXSTATE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_LEXSTATE, IOSIntArray *)
 
 /*!
  @brief Translates characters to character classes
  */
-inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_CMAP_PACKED();
-static NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_CMAP_PACKED;
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_CMAP_PACKED(void);
+static NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_CMAP_PACKED = @"\t\x00\x01\x14\x01\x13\x01\x00\x01\x14\x01\x12\x12\x00\x01\x14\x01\x00\x01\n\x01+\x02\x00\x01\x03\x01\x01\x04\x00\x01\x0c\x01\x05\x01\x02\x01\x08\n\x0e\x01\x17\x01\x00\x01\x07\x01\t\x01\x0b\x01+\x01\x04\x02\x0d\x01\x18\x05\x0d\x01!\x11\x0d\x01\x15\x01\x00\x01\x16\x01\x00\x01\x06\x01\x00\x01\x19\x01#\x02\x0d\x01\x1b\x01 \x01\x1c\x01(\x01!\x04\x0d\x01\"\x01\x1d\x01)\x01\x0d\x01\x1e\x01*\x01\x1a\x03\x0d\x01$\x01\x1f\x01\x0d\x01%\x01'\x01&B\x00\x17\x0d\x01\x00\x1f\x0d\x01\x00\u0568\x0d\n\x0f\xc2\x86\x0d\n\x0f\u026c\x0d\n\x0fv\x0d\n\x0fv\x0d\n\x0fv\x0d\n\x0fv\x0d\n\x0fw\x0d\t\x0fv\x0d\n\x0fv\x0d\n\x0fv\x0d\n\x0f\u00e0\x0d\n\x0fv\x0d\n\x0f\u0166\x0d\n\x0f\u00b6\x0d\u0100\x0d\u0e00\x0d\u1040\x00\u0150\x11`\x00\x10\x11\u0100\x00\xc2\x80\x11\xc2\x80\x00\u19c0\x11@\x00\u5200\x11\u0c00\x00\u2bb0\x10\u2150\x00\u0200\x11\u0465\x00;\x11=\x0d\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00\uffff\x00""3\x00";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_CMAP_PACKED, NSString *)
 
 /*!
  @brief Translates characters to character classes
  */
-inline IOSCharArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_CMAP();
+inline IOSCharArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_CMAP(void);
 static IOSCharArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_CMAP;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_CMAP, IOSCharArray *)
 
 /*!
  @brief Translates DFA states to action switch labels.
  */
-inline IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ACTION();
+inline IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ACTION(void);
 static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ACTION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_ACTION, IOSIntArray *)
 
-inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ACTION_PACKED_0();
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ACTION_PACKED_0(void);
 static NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ACTION_PACKED_0 = @"\n\x00\x04\x01\x04\x02\x01\x03\x01\x04\x01\x01\x02\x05\x01\x06\x01\x05\x01\x07\x01\x05\x02\x08\x01\t\x01\x05\x01\n\x01\t\x01\x0b\x01\x0c\x01\x0d\x01\x0e\x01\x0d\x01\x0f\x01\x10\x01\x08\x01\x11\x01\x08\x04\x12\x01\x13\x01\x14\x01\x15\x01\x16\x03\x00\x01\x17\x0c\x00\x01\x18\x01\x19\x01\x1a\x01\x1b\x01\t\x01\x00\x01\x1c\x01\x1d\x01\x1e\x01\x00\x01\x1f\x01\x00\x01 \x03\x00\x01!\x01\"\x02#\x01\"\x02$\x02\x00\x01#\x01\x00\x0c#\x01\"\x03\x00\x01\t\x01%\x03\x00\x01&\x01'\x05\x00\x01(\x04\x00\x01(\x02\x00\x02(\x02\x00\x01\t\x05\x00\x01\x19\x01\"\x01#\x01)\x03\x00\x01\t\x02\x00\x01*\x18\x00\x01+\x02\x00\x01,\x01-\x01.";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_ACTION_PACKED_0, NSString *)
 
 /*!
  @brief Translates a state to a row index in the transition table
  */
-inline IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ROWMAP();
+inline IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ROWMAP(void);
 static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ROWMAP;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_ROWMAP, IOSIntArray *)
 
-inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ROWMAP_PACKED_0();
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ROWMAP_PACKED_0(void);
 static NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ROWMAP_PACKED_0 = @"\x00\x00\x00,\x00X\x00\xc2\x84\x00\u00b0\x00\u00dc\x00\u0108\x00\u0134\x00\u0160\x00\u018c\x00\u01b8\x00\u01e4\x00\u0210\x00\u023c\x00\u0268\x00\u0294\x00\u02c0\x00\u02ec\x00\u01b8\x00\u0318\x00\u0344\x00\u01b8\x00\u0370\x00\u039c\x00\u03c8\x00\u03f4\x00\u0420\x00\u01b8\x00\u0370\x00\u044c\x00\u0478\x00\u01b8\x00\u04a4\x00\u04d0\x00\u04fc\x00\u0528\x00\u0554\x00\u0580\x00\u05ac\x00\u05d8\x00\u0604\x00\u0630\x00\u065c\x00\u01b8\x00\u0688\x00\u0370\x00\u06b4\x00\u06e0\x00\u070c\x00\u01b8\x00\u01b8\x00\u0738\x00\u0764\x00\u0790\x00\u01b8\x00\u07bc\x00\u07e8\x00\u0814\x00\u0840\x00\u086c\x00\u0898\x00\u08c4\x00\u08f0\x00\u091c\x00\u0948\x00\u0974\x00\u09a0\x00\u09cc\x00\u09f8\x00\u01b8\x00\u01b8\x00\u0a24\x00\u0a50\x00\u0a7c\x00\u0a7c\x00\u01b8\x00\u0aa8\x00\u0ad4\x00\u0b00\x00\u0b2c\x00\u0b58\x00\u0b84\x00\u0bb0\x00\u0bdc\x00\u0c08\x00\u0c34\x00\u0c60\x00\u0c8c\x00\u0814\x00\u0cb8\x00\u0ce4\x00\u0d10\x00\u0d3c\x00\u0d68\x00\u0d94\x00\u0dc0\x00\u0dec\x00\u0e18\x00\u0e44\x00\u0e70\x00\u0e9c\x00\u0ec8\x00\u0ef4\x00\u0f20\x00\u0f4c\x00\u0f78\x00\u0fa4\x00\u0fd0\x00\u0ffc\x00\u1028\x00\u1054\x00\u01b8\x00\u1080\x00\u10ac\x00\u10d8\x00\u1104\x00\u01b8\x00\u1130\x00\u115c\x00\u1188\x00\u11b4\x00\u11e0\x00\u120c\x00\u1238\x00\u1264\x00\u1290\x00\u12bc\x00\u12e8\x00\u1314\x00\u1340\x00\u07e8\x00\u0974\x00\u136c\x00\u1398\x00\u13c4\x00\u13f0\x00\u141c\x00\u1448\x00\u1474\x00\u14a0\x00\u01b8\x00\u14cc\x00\u14f8\x00\u1524\x00\u1550\x00\u157c\x00\u15a8\x00\u15d4\x00\u1600\x00\u162c\x00\u01b8\x00\u1658\x00\u1684\x00\u16b0\x00\u16dc\x00\u1708\x00\u1734\x00\u1760\x00\u178c\x00\u17b8\x00\u17e4\x00\u1810\x00\u183c\x00\u1868\x00\u1894\x00\u18c0\x00\u18ec\x00\u1918\x00\u1944\x00\u1970\x00\u199c\x00\u19c8\x00\u19f4\x00\u1a20\x00\u1a4c\x00\u1a78\x00\u1aa4\x00\u1ad0\x00\u01b8\x00\u01b8\x00\u01b8";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_ROWMAP_PACKED_0, NSString *)
 
 /*!
  @brief The transition table of the DFA
  */
-inline IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_TRANS();
+inline IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_TRANS(void);
 static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_TRANS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_TRANS, IOSIntArray *)
 
-inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_TRANS_PACKED_0();
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_TRANS_PACKED_0(void);
 static NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_TRANS_PACKED_0 = @"\x01\x0b\x01\x0c\x05\x0b\x01\x0d\x01\x0b\x01\x0e\x03\x0b\x01\x0f\x01\x10\x01\x11\x01\x12\x01\x13\x03\x0b\x01\x14\x02\x0b\x0d\x0f\x01\x15\x02\x0b\x03\x0f\x01\x0b\x07\x16\x01\x17\x05\x16\x04\x18\x05\x16\x01\x19\x01\x16\x0d\x18\x03\x16\x03\x18\x08\x16\x01\x17\x05\x16\x04\x1a\x05\x16\x01\x1b\x01\x16\x0d\x1a\x03\x16\x03\x1a\x01\x16\x07\x1c\x01\x1d\x05\x1c\x04\x1e\x01\x1c\x01\x1f\x02\x16\x01\x1c\x01 \x01\x1c\x0d\x1e\x03\x1c\x01!\x02\x1e\x02\x1c\x01\"\x05\x1c\x01\x1d\x05\x1c\x04#\x04\x1c\x01$\x02\x1c\x0d#\x03\x1c\x03#\x08\x1c\x01\x1d\x05\x1c\x04%\x04\x1c\x01$\x02\x1c\x0d%\x03\x1c\x03%\x08\x1c\x01\x1d\x05\x1c\x04%\x04\x1c\x01&\x02\x1c\x0d%\x03\x1c\x03%\x08\x1c\x01\x1d\x01\x1c\x01'\x03\x1c\x04(\x07\x1c\x0d(\x03\x1c\x03(\x08\x1c\x01)\x05\x1c\x04*\x07\x1c\x0d*\x01\x1c\x01+\x01\x1c\x03*\x01\x1c\x01,\x01-\x05,\x01.\x01,\x01/\x03,\x04""0\x04,\x01""1\x02,\x0d""0\x02,\x01""2\x03""0\x01,-\x00\x01""32\x00\x01""4\x04\x00\x04""5\x07\x00\x06""5\x01""6\x06""5\x03\x00\x03""5\n\x00\x01""7#\x00\x01""8\x01""9\x01:\x01;\x02<\x01\x00\x01=\x03\x00\x01=\x01\x0f\x01\x10\x01\x11\x01\x12\x07\x00\x0d\x0f\x03\x00\x03\x0f\x03\x00\x01>\x01\x00\x01?\x02@\x01\x00\x01""A\x03\x00\x01""A\x03\x10\x01\x12\x07\x00\x0d\x10\x03\x00\x03\x10\x02\x00\x01""8\x01""B\x01:\x01;\x02@\x01\x00\x01""A\x03\x00\x01""A\x01\x11\x01\x10\x01\x11\x01\x12\x07\x00\x0d\x11\x03\x00\x03\x11\x03\x00\x01""C\x01\x00\x01?\x02<\x01\x00\x01=\x03\x00\x01=\x04\x12\x07\x00\x0d\x12\x03\x00\x03\x12\x16\x00\x01""D;\x00\x01""E\x0e\x00\x01""4\x04\x00\x04""5\x07\x00\x0d""5\x03\x00\x03""5\x0e\x00\x04\x18\x07\x00\x0d\x18\x03\x00\x03\x18\x17\x00\x01""F\"\x00\x04\x1a\x07\x00\x0d\x1a\x03\x00\x03\x1a\x17\x00\x01G\"\x00\x04\x1e\x07\x00\x0d\x1e\x03\x00\x03\x1e\x14\x00\x01\x16%\x00\x04\x1e\x07\x00\x02\x1e\x01H\n\x1e\x03\x00\x03\x1e\x02\x00\x01I7\x00\x04#\x07\x00\x0d#\x03\x00\x03#\x16\x00\x01J#\x00\x04%\x07\x00\x0d%\x03\x00\x03%\x16\x00\x01K\x1f\x00\x01L/\x00\x04(\x07\x00\x0d(\x03\x00\x03(\t\x00\x01M\x04\x00\x04""5\x07\x00\x0d""5\x03\x00\x03""5\x0e\x00\x04*\x07\x00\x0d*\x03\x00\x03*'\x00\x01L\x06\x00\x01N3\x00\x01O/\x00\x04""0\x07\x00\x0d""0\x03\x00\x03""0\x16\x00\x01P#\x00\x04""5\x07\x00\x0d""5\x03\x00\x03""5\x0c\x00\x01\x1c\x01\x00\x04Q\x01\x00\x03R\x03\x00\x0dQ\x03\x00\x03Q\x0c\x00\x01\x1c\x01\x00\x04Q\x01\x00\x03R\x03\x00\x03Q\x01S\tQ\x03\x00\x03Q\x0e\x00\x01T\x01\x00\x01T\x08\x00\x0dT\x03\x00\x03T\x0e\x00\x01U\x01V\x01W\x01X\x07\x00\x0dU\x03\x00\x03U\x0e\x00\x01Y\x01\x00\x01Y\x08\x00\x0dY\x03\x00\x03Y\x0e\x00\x01Z\x01[\x01Z\x01[\x07\x00\x0dZ\x03\x00\x03Z\x0e\x00\x01\\\x02]\x01^\x07\x00\x0d\\\x03\x00\x03\\\x0e\x00\x01=\x02_\x08\x00\x0d=\x03\x00\x03=\x0e\x00\x01`\x02""a\x01""b\x07\x00\x0d`\x03\x00\x03`\x0e\x00\x04[\x07\x00\x0d[\x03\x00\x03[\x0e\x00\x01""c\x02""d\x01""e\x07\x00\x0d""c\x03\x00\x03""c\x0e\x00\x01""f\x02g\x01h\x07\x00\x0d""f\x03\x00\x03""f\x0e\x00\x01i\x01""a\x01j\x01""b\x07\x00\x0di\x03\x00\x03i\x0e\x00\x01k\x02V\x01X\x07\x00\x0dk\x03\x00\x03k\x18\x00\x01l\x01m4\x00\x01n\x17\x00\x04\x1e\x07\x00\x02\x1e\x01o\n\x1e\x03\x00\x03\x1e\x02\x00\x01pA\x00\x01q\x01r \x00\x04""5\x07\x00\x06""5\x01s\x06""5\x03\x00\x03""5\x02\x00\x01t3\x00\x01u9\x00\x01v\x01w\x1c\x00\x01x\x01\x00\x01\x1c\x01\x00\x04Q\x01\x00\x03R\x03\x00\x0dQ\x03\x00\x03Q\x0e\x00\x04y\x01\x00\x03R\x03\x00\x0dy\x03\x00\x03y\n\x00\x01x\x01\x00\x01\x1c\x01\x00\x04Q\x01\x00\x03R\x03\x00\x08Q\x01z\x04Q\x03\x00\x03Q\x02\x00\x01""8\x0b\x00\x01T\x01\x00\x01T\x08\x00\x0dT\x03\x00\x03T\x03\x00\x01{\x01\x00\x01?\x02|\x06\x00\x01U\x01V\x01W\x01X\x07\x00\x0dU\x03\x00\x03U\x03\x00\x01}\x01\x00\x01?\x02~\x01\x00\x01\x7f\x03\x00\x01\x7f\x03V\x01X\x07\x00\x0dV\x03\x00\x03V\x03\x00\x01\xc2\x80\x01\x00\x01?\x02~\x01\x00\x01\x7f\x03\x00\x01\x7f\x01W\x01V\x01W\x01X\x07\x00\x0dW\x03\x00\x03W\x03\x00\x01\xc2\x81\x01\x00\x01?\x02|\x06\x00\x04X\x07\x00\x0dX\x03\x00\x03X\x03\x00\x01\xc2\x82\x02\x00\x01\xc2\x82\x07\x00\x01Z\x01[\x01Z\x01[\x07\x00\x0dZ\x03\x00\x03Z\x03\x00\x01\xc2\x82\x02\x00\x01\xc2\x82\x07\x00\x04[\x07\x00\x0d[\x03\x00\x03[\x03\x00\x01|\x01\x00\x01?\x02|\x06\x00\x01\\\x02]\x01^\x07\x00\x0d\\\x03\x00\x03\\\x03\x00\x01~\x01\x00\x01?\x02~\x01\x00\x01\x7f\x03\x00\x01\x7f\x03]\x01^\x07\x00\x0d]\x03\x00\x03]\x03\x00\x01|\x01\x00\x01?\x02|\x06\x00\x04^\x07\x00\x0d^\x03\x00\x03^\x03\x00\x01\x7f\x02\x00\x02\x7f\x01\x00\x01\x7f\x03\x00\x01\x7f\x03_\x08\x00\x0d_\x03\x00\x03_\x03\x00\x01""C\x01\x00\x01?\x02<\x01\x00\x01=\x03\x00\x01=\x01`\x02""a\x01""b\x07\x00\x0d`\x03\x00\x03`\x03\x00\x01>\x01\x00\x01?\x02@\x01\x00\x01""A\x03\x00\x01""A\x03""a\x01""b\x07\x00\x0d""a\x03\x00\x03""a\x03\x00\x01""C\x01\x00\x01?\x02<\x01\x00\x01=\x03\x00\x01=\x04""b\x07\x00\x0d""b\x03\x00\x03""b\x03\x00\x01<\x01\x00\x01?\x02<\x01\x00\x01=\x03\x00\x01=\x01""c\x02""d\x01""e\x07\x00\x0d""c\x03\x00\x03""c\x03\x00\x01@\x01\x00\x01?\x02@\x01\x00\x01""A\x03\x00\x01""A\x03""d\x01""e\x07\x00\x0d""d\x03\x00\x03""d\x03\x00\x01<\x01\x00\x01?\x02<\x01\x00\x01=\x03\x00\x01=\x04""e\x07\x00\x0d""e\x03\x00\x03""e\x03\x00\x01=\x02\x00\x02=\x01\x00\x01=\x03\x00\x01=\x01""f\x02g\x01h\x07\x00\x0d""f\x03\x00\x03""f\x03\x00\x01""A\x02\x00\x02""A\x01\x00\x01""A\x03\x00\x01""A\x03g\x01h\x07\x00\x0dg\x03\x00\x03g\x03\x00\x01=\x02\x00\x02=\x01\x00\x01=\x03\x00\x01=\x04h\x07\x00\x0dh\x03\x00\x03h\x03\x00\x01\xc2\x83\x01\x00\x01?\x02<\x01\x00\x01=\x03\x00\x01=\x01i\x01""a\x01j\x01""b\x07\x00\x0di\x03\x00\x03i\x03\x00\x01\xc2\x84\x01\x00\x01?\x02@\x01\x00\x01""A\x03\x00\x01""A\x01j\x01""a\x01j\x01""b\x07\x00\x0dj\x03\x00\x03j\x03\x00\x01\xc2\x81\x01\x00\x01?\x02|\x06\x00\x01k\x02V\x01X\x07\x00\x0dk\x03\x00\x03k\x19\x00\x01m,\x00\x01\xc2\x85""4\x00\x01\xc2\x86\x16\x00\x04\x1e\x07\x00\x0d\x1e\x03\x00\x01\x1e\x01\xc2\x87\x01\x1e\x19\x00\x01r,\x00\x01\xc2\x88\x1d\x00\x01\x1c\x01\x00\x04Q\x01\x00\x03R\x03\x00\x03Q\x01\xc2\x89\tQ\x03\x00\x03Q\x02\x00\x01\xc2\x8a""B\x00\x01w,\x00\x01\xc2\x8b\x1c\x00\x01\xc2\x8c*\x00\x01x\x03\x00\x04y\x07\x00\x0dy\x03\x00\x03y\n\x00\x01x\x01\x00\x01\xc2\x8d\x01\x00\x04Q\x01\x00\x03R\x03\x00\x0dQ\x03\x00\x03Q\x0e\x00\x01\xc2\x8e\x01X\x01\xc2\x8e\x01X\x07\x00\x0d\xc2\x8e\x03\x00\x03\xc2\x8e\x0e\x00\x04^\x07\x00\x0d^\x03\x00\x03^\x0e\x00\x04""b\x07\x00\x0d""b\x03\x00\x03""b\x0e\x00\x04""e\x07\x00\x0d""e\x03\x00\x03""e\x0e\x00\x04h\x07\x00\x0dh\x03\x00\x03h\x0e\x00\x01\xc2\x8f\x01""b\x01\xc2\x8f\x01""b\x07\x00\x0d\xc2\x8f\x03\x00\x03\xc2\x8f\x0e\x00\x04X\x07\x00\x0dX\x03\x00\x03X\x0e\x00\x04\xc2\x90\x07\x00\x0d\xc2\x90\x03\x00\x03\xc2\x90\x1b\x00\x01\xc2\x91""1\x00\x01\xc2\x92\x18\x00\x04\x1e\x06\x00\x01\xc2\x93\x0d\x1e\x03\x00\x02\x1e\x01\xc2\x94\x1b\x00\x01\xc2\x95\x1a\x00\x01x\x01\x00\x01\x1c\x01\x00\x04Q\x01\x00\x03R\x03\x00\x08Q\x01\xc2\x96\x04Q\x03\x00\x03Q\x02\x00\x01\xc2\x97""D\x00\x01\xc2\x98\x1e\x00\x04\xc2\x99\x07\x00\x0d\xc2\x99\x03\x00\x03\xc2\x99\x03\x00\x01{\x01\x00\x01?\x02|\x06\x00\x01\xc2\x8e\x01X\x01\xc2\x8e\x01X\x07\x00\x0d\xc2\x8e\x03\x00\x03\xc2\x8e\x03\x00\x01\xc2\x83\x01\x00\x01?\x02<\x01\x00\x01=\x03\x00\x01=\x01\xc2\x8f\x01""b\x01\xc2\x8f\x01""b\x07\x00\x0d\xc2\x8f\x03\x00\x03\xc2\x8f\x03\x00\x01\xc2\x82\x02\x00\x01\xc2\x82\x07\x00\x04\xc2\x90\x07\x00\x0d\xc2\x90\x03\x00\x03\xc2\x90\x1c\x00\x01\xc2\x9a-\x00\x01\xc2\x9b\x16\x00\x01\xc2\x9c""0\x00\x04\x1e\x06\x00\x01\xc2\x93\x0d\x1e\x03\x00\x03\x1e\x1c\x00\x01\xc2\x9d\x19\x00\x01x\x01\x00\x01L\x01\x00\x04Q\x01\x00\x03R\x03\x00\x0dQ\x03\x00\x03Q\x1c\x00\x01\xc2\x9e\x1a\x00\x01\xc2\x9f\x02\x00\x04\xc2\x99\x07\x00\x0d\xc2\x99\x03\x00\x03\xc2\x99\x1d\x00\x01\u00a02\x00\x01\u00a1\x10\x00\x01\u00a2?\x00\x01\u00a3+\x00\x01\u00a4\x1a\x00\x01\x1c\x01\x00\x04y\x01\x00\x03R\x03\x00\x0dy\x03\x00\x03y\x1e\x00\x01\u00a5+\x00\x01\u00a6\x1b\x00\x04\u00a7\x07\x00\x0d\u00a7\x03\x00\x03\u00a7\x1e\x00\x01\u00a8+\x00\x01\u00a9,\x00\x01\u00aa1\x00\x01\u00ab\t\x00\x01\u00ac\n\x00\x04\u00a7\x07\x00\x0d\u00a7\x03\x00\x03\u00a7\x1f\x00\x01\u00ad+\x00\x01\u00ae,\x00\x01\u00af\x12\x00\x01\x0b""2\x00\x04\u00b0\x07\x00\x0d\u00b0\x03\x00\x03\u00b0 \x00\x01\u00b1+\x00\x01\u00b2#\x00\x01\u00b3\x16\x00\x02\u00b0\x01\x00\x02\u00b0\x01\x00\x02\u00b0\x02\x00\x05\u00b0\x07\x00\x0d\u00b0\x03\x00\x04\u00b0\x17\x00\x01\u00b4+\x00\x01\u00b5\x14\x00";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_TRANS_PACKED_0, NSString *)
 
-inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_UNKNOWN_ERROR();
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_UNKNOWN_ERROR(void);
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_UNKNOWN_ERROR 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_UNKNOWN_ERROR, jint)
 
-inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_NO_MATCH();
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_NO_MATCH(void);
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_NO_MATCH 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_NO_MATCH, jint)
 
-inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_PUSHBACK_2BIG();
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_PUSHBACK_2BIG(void);
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_PUSHBACK_2BIG 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_PUSHBACK_2BIG, jint)
 
-inline IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ERROR_MSG();
+inline IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ERROR_MSG(void);
 static IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ERROR_MSG;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_ERROR_MSG, IOSObjectArray *)
 
 /*!
  @brief ZZ_ATTRIBUTE[aState] contains the attributes of state <code>aState</code>
  */
-inline IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ATTRIBUTE();
+inline IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ATTRIBUTE(void);
 static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ATTRIBUTE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_ATTRIBUTE, IOSIntArray *)
 
-inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ATTRIBUTE_PACKED_0();
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_get_ZZ_ATTRIBUTE_PACKED_0(void);
 static NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ATTRIBUTE_PACKED_0 = @"\n\x00\x01\t\x07\x01\x01\t\x02\x01\x01\t\x05\x01\x01\t\x03\x01\x01\t\x0b\x01\x01\t\x05\x01\x02\t\x03\x00\x01\t\x0c\x00\x02\x01\x02\t\x01\x01\x01\x00\x02\x01\x01\t\x01\x00\x01\x01\x01\x00\x01\x01\x03\x00\x07\x01\x02\x00\x01\x01\x01\x00\x0d\x01\x03\x00\x01\x01\x01\t\x03\x00\x01\x01\x01\t\x05\x00\x01\x01\x04\x00\x01\x01\x02\x00\x02\x01\x02\x00\x01\x01\x05\x00\x01\t\x03\x01\x03\x00\x01\x01\x02\x00\x01\t\x18\x00\x01\x01\x02\x00\x03\t";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, ZZ_ATTRIBUTE_PACKED_0, NSString *)
 
-__attribute__((unused)) static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackAction();
+__attribute__((unused)) static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackAction(void);
 
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackActionWithNSString_withInt_withIntArray_(NSString *packed, jint offset, IOSIntArray *result);
 
-__attribute__((unused)) static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackRowMap();
+__attribute__((unused)) static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackRowMap(void);
 
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackRowMapWithNSString_withInt_withIntArray_(NSString *packed, jint offset, IOSIntArray *result);
 
-__attribute__((unused)) static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackTrans();
+__attribute__((unused)) static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackTrans(void);
 
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackTransWithNSString_withInt_withIntArray_(NSString *packed, jint offset, IOSIntArray *result);
 
-__attribute__((unused)) static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackAttribute();
+__attribute__((unused)) static IOSIntArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackAttribute(void);
 
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackAttributeWithNSString_withInt_withIntArray_(NSString *packed, jint offset, IOSIntArray *result);
 
@@ -462,8 +465,8 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYP
   numWikiTokensSeen_ = 0;
 }
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initWithJavaIoReader_(self, inArg);
+- (instancetype)initPackagePrivateWithJavaIoReader:(JavaIoReader *)inArg {
+  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initPackagePrivateWithJavaIoReader_(self, inArg);
   return self;
 }
 
@@ -503,7 +506,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYP
 }
 
 - (NSString *)yytext {
-  return [NSString stringWithCharacters:zzBuffer_ offset:zzStartRead_ length:zzMarkedPos_ - zzStartRead_];
+  return [NSString java_stringWithCharacters:zzBuffer_ offset:zzStartRead_ length:zzMarkedPos_ - zzStartRead_];
 }
 
 - (jchar)yycharatWithInt:(jint)pos {
@@ -998,10 +1001,143 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYP
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[I", 0xa, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 0, 1, -1, -1, -1, -1 },
+    { NULL, "[I", 0xa, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 2, 1, -1, -1, -1, -1 },
+    { NULL, "[I", 0xa, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 3, 1, -1, -1, -1, -1 },
+    { NULL, "[I", 0xa, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 4, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x10, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x10, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x10, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 9, -1, -1, -1, -1 },
+    { NULL, "[C", 0xa, 10, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, 12, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 12, -1, -1, -1 },
+    { NULL, "V", 0x11, 13, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 14, 15, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "C", 0x11, 16, 15, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 17, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 15, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 12, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(zzUnpackAction);
+  methods[1].selector = @selector(zzUnpackActionWithNSString:withInt:withIntArray:);
+  methods[2].selector = @selector(zzUnpackRowMap);
+  methods[3].selector = @selector(zzUnpackRowMapWithNSString:withInt:withIntArray:);
+  methods[4].selector = @selector(zzUnpackTrans);
+  methods[5].selector = @selector(zzUnpackTransWithNSString:withInt:withIntArray:);
+  methods[6].selector = @selector(zzUnpackAttribute);
+  methods[7].selector = @selector(zzUnpackAttributeWithNSString:withInt:withIntArray:);
+  methods[8].selector = @selector(getNumWikiTokensSeen);
+  methods[9].selector = @selector(yychar);
+  methods[10].selector = @selector(getPositionIncrement);
+  methods[11].selector = @selector(getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:);
+  methods[12].selector = @selector(setTextWithJavaLangStringBuilder:);
+  methods[13].selector = @selector(reset);
+  methods[14].selector = @selector(initPackagePrivateWithJavaIoReader:);
+  methods[15].selector = @selector(zzUnpackCMapWithNSString:);
+  methods[16].selector = @selector(zzRefill);
+  methods[17].selector = @selector(yyclose);
+  methods[18].selector = @selector(yyresetWithJavaIoReader:);
+  methods[19].selector = @selector(yystate);
+  methods[20].selector = @selector(yybeginWithInt:);
+  methods[21].selector = @selector(yytext);
+  methods[22].selector = @selector(yycharatWithInt:);
+  methods[23].selector = @selector(yylength);
+  methods[24].selector = @selector(zzScanErrorWithInt:);
+  methods[25].selector = @selector(yypushbackWithInt:);
+  methods[26].selector = @selector(getNextToken);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "YYEOF", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF, 0x19, -1, -1, -1, -1 },
+    { "ZZ_BUFFERSIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_BUFFERSIZE, 0x1a, -1, -1, -1, -1 },
+    { "YYINITIAL", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYINITIAL, 0x19, -1, -1, -1, -1 },
+    { "CATEGORY_STATE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_CATEGORY_STATE, 0x19, -1, -1, -1, -1 },
+    { "INTERNAL_LINK_STATE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_INTERNAL_LINK_STATE, 0x19, -1, -1, -1, -1 },
+    { "EXTERNAL_LINK_STATE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_EXTERNAL_LINK_STATE, 0x19, -1, -1, -1, -1 },
+    { "TWO_SINGLE_QUOTES_STATE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TWO_SINGLE_QUOTES_STATE, 0x19, -1, -1, -1, -1 },
+    { "THREE_SINGLE_QUOTES_STATE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_THREE_SINGLE_QUOTES_STATE, 0x19, -1, -1, -1, -1 },
+    { "FIVE_SINGLE_QUOTES_STATE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_FIVE_SINGLE_QUOTES_STATE, 0x19, -1, -1, -1, -1 },
+    { "DOUBLE_EQUALS_STATE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_DOUBLE_EQUALS_STATE, 0x19, -1, -1, -1, -1 },
+    { "DOUBLE_BRACE_STATE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_DOUBLE_BRACE_STATE, 0x19, -1, -1, -1, -1 },
+    { "STRING", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_STRING, 0x19, -1, -1, -1, -1 },
+    { "ZZ_LEXSTATE", "[I", .constantValue.asLong = 0, 0x1a, -1, 19, -1, -1 },
+    { "ZZ_CMAP_PACKED", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 20, -1, -1 },
+    { "ZZ_CMAP", "[C", .constantValue.asLong = 0, 0x1a, -1, 21, -1, -1 },
+    { "ZZ_ACTION", "[I", .constantValue.asLong = 0, 0x1a, -1, 22, -1, -1 },
+    { "ZZ_ACTION_PACKED_0", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 23, -1, -1 },
+    { "ZZ_ROWMAP", "[I", .constantValue.asLong = 0, 0x1a, -1, 24, -1, -1 },
+    { "ZZ_ROWMAP_PACKED_0", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 25, -1, -1 },
+    { "ZZ_TRANS", "[I", .constantValue.asLong = 0, 0x1a, -1, 26, -1, -1 },
+    { "ZZ_TRANS_PACKED_0", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 27, -1, -1 },
+    { "ZZ_UNKNOWN_ERROR", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_UNKNOWN_ERROR, 0x1a, -1, -1, -1, -1 },
+    { "ZZ_NO_MATCH", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_NO_MATCH, 0x1a, -1, -1, -1, -1 },
+    { "ZZ_PUSHBACK_2BIG", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_PUSHBACK_2BIG, 0x1a, -1, -1, -1, -1 },
+    { "ZZ_ERROR_MSG", "[LNSString;", .constantValue.asLong = 0, 0x1a, -1, 28, -1, -1 },
+    { "ZZ_ATTRIBUTE", "[I", .constantValue.asLong = 0, 0x1a, -1, 29, -1, -1 },
+    { "ZZ_ATTRIBUTE_PACKED_0", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 30, -1, -1 },
+    { "zzReader_", "LJavaIoReader;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzState_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzLexicalState_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzBuffer_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzMarkedPos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzCurrentPos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzStartRead_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzEndRead_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "yyline_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "yychar_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "yycolumn_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzAtBOL_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzAtEOF_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzEOFDone_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "zzFinalHighSurrogate_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "ALPHANUM", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ALPHANUM, 0x19, -1, -1, -1, -1 },
+    { "APOSTROPHE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_APOSTROPHE, 0x19, -1, -1, -1, -1 },
+    { "ACRONYM", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ACRONYM, 0x19, -1, -1, -1, -1 },
+    { "COMPANY", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_COMPANY, 0x19, -1, -1, -1, -1 },
+    { "EMAIL", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_EMAIL, 0x19, -1, -1, -1, -1 },
+    { "HOST", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_HOST, 0x19, -1, -1, -1, -1 },
+    { "NUM", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_NUM, 0x19, -1, -1, -1, -1 },
+    { "CJ", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_CJ, 0x19, -1, -1, -1, -1 },
+    { "INTERNAL_LINK", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_INTERNAL_LINK, 0x19, -1, -1, -1, -1 },
+    { "EXTERNAL_LINK", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_EXTERNAL_LINK, 0x19, -1, -1, -1, -1 },
+    { "CITATION", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_CITATION, 0x19, -1, -1, -1, -1 },
+    { "CATEGORY", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_CATEGORY, 0x19, -1, -1, -1, -1 },
+    { "BOLD", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_BOLD, 0x19, -1, -1, -1, -1 },
+    { "ITALICS", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ITALICS, 0x19, -1, -1, -1, -1 },
+    { "BOLD_ITALICS", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_BOLD_ITALICS, 0x19, -1, -1, -1, -1 },
+    { "HEADING", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_HEADING, 0x19, -1, -1, -1, -1 },
+    { "SUB_HEADING", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_SUB_HEADING, 0x19, -1, -1, -1, -1 },
+    { "EXTERNAL_LINK_URL", "I", .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_EXTERNAL_LINK_URL, 0x19, -1, -1, -1, -1 },
+    { "currentTokType_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numBalanced_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "positionInc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numLinkToks_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numWikiTokensSeen_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "TOKEN_TYPES", "[LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
+  };
+  static const void *ptrTable[] = { "zzUnpackAction", "LNSString;I[I", "zzUnpackRowMap", "zzUnpackTrans", "zzUnpackAttribute", "getText", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", "setText", "LJavaLangStringBuilder;", "LJavaIoReader;", "zzUnpackCMap", "LNSString;", "LJavaIoIOException;", "yyreset", "yybegin", "I", "yycharat", "zzScanError", "yypushback", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_LEXSTATE, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_CMAP_PACKED, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_CMAP, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ACTION, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ACTION_PACKED_0, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ROWMAP, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ROWMAP_PACKED_0, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_TRANS, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_TRANS_PACKED_0, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ERROR_MSG, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ATTRIBUTE, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ATTRIBUTE_PACKED_0, &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYPES };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl = { "WikipediaTokenizerImpl", "org.apache.lucene.analysis.wikipedia", ptrTable, methods, fields, 7, 0x0, 27, 66, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_LEXSTATE, [IOSIntArray newArrayWithInts:(jint[]){ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 } count:20]);
-    JreStrongAssign(&OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_CMAP_PACKED, JreStrcat("$$", @"\t\x00\x01\x14\x01\x13\x01\x00\x01\x14\x01\x12\x12\x00\x01\x14\x01\x00\x01\n\x01+\x02\x00\x01\x03\x01\x01\x04\x00\x01\x0c\x01\x05\x01\x02\x01\x08\n\x0e\x01\x17\x01\x00\x01\x07\x01\t\x01\x0b\x01+\x01\x04\x02\x0d\x01\x18\x05\x0d\x01!\x11\x0d\x01\x15\x01\x00\x01\x16\x01\x00\x01\x06\x01\x00\x01\x19\x01#\x02\x0d\x01\x1b\x01 \x01\x1c\x01(\x01!\x04\x0d\x01\"\x01\x1d\x01)\x01\x0d\x01\x1e\x01*\x01\x1a\x03\x0d\x01$\x01\x1f\x01\x0d\x01%\x01'\x01&B\x00\x17\x0d\x01\x00\x1f\x0d\x01\x00\u0568\x0d\n\x0f\xc2\x86\x0d\n\x0f\u026c\x0d\n\x0fv\x0d\n\x0fv\x0d\n\x0fv\x0d\n\x0fv\x0d\n\x0fw\x0d\t\x0fv\x0d\n\x0fv\x0d\n\x0fv\x0d\n\x0f\u00e0\x0d\n\x0fv\x0d\n\x0f\u0166\x0d\n\x0f\u00b6\x0d\u0100\x0d\u0e00\x0d\u1040\x00\u0150\x11`\x00\x10\x11\u0100\x00\xc2\x80\x11\xc2\x80\x00\u19c0\x11@\x00\u5200\x11\u0c00\x00\u2bb0\x10\u2150\x00", [NSString stringWithCharacters:(jchar[]) { (int) 0x200, (int) 0x11, (int) 0x465, (int) 0x0, (int) 0x3b, (int) 0x11, (int) 0x3d, (int) 0xd, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0xffff, (int) 0x0, (int) 0x33, (int) 0x0 } length:42]));
     JreStrongAssign(&OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_CMAP, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackCMapWithNSString_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_CMAP_PACKED));
     JreStrongAssign(&OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ACTION, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackAction());
     JreStrongAssign(&OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ROWMAP, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackRowMap());
@@ -1011,108 +1147,6 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYP
     JreStrongAssign(&OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYPES, JreLoadStatic(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, TOKEN_TYPES));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "zzUnpackAction", NULL, "[I", 0xa, NULL, NULL },
-    { "zzUnpackActionWithNSString:withInt:withIntArray:", "zzUnpackAction", "I", 0xa, NULL, NULL },
-    { "zzUnpackRowMap", NULL, "[I", 0xa, NULL, NULL },
-    { "zzUnpackRowMapWithNSString:withInt:withIntArray:", "zzUnpackRowMap", "I", 0xa, NULL, NULL },
-    { "zzUnpackTrans", NULL, "[I", 0xa, NULL, NULL },
-    { "zzUnpackTransWithNSString:withInt:withIntArray:", "zzUnpackTrans", "I", 0xa, NULL, NULL },
-    { "zzUnpackAttribute", NULL, "[I", 0xa, NULL, NULL },
-    { "zzUnpackAttributeWithNSString:withInt:withIntArray:", "zzUnpackAttribute", "I", 0xa, NULL, NULL },
-    { "getNumWikiTokensSeen", NULL, "I", 0x11, NULL, NULL },
-    { "yychar", NULL, "I", 0x11, NULL, NULL },
-    { "getPositionIncrement", NULL, "I", 0x11, NULL, NULL },
-    { "getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:", "getText", "V", 0x10, NULL, NULL },
-    { "setTextWithJavaLangStringBuilder:", "setText", "I", 0x10, NULL, NULL },
-    { "reset", NULL, "V", 0x10, NULL, NULL },
-    { "initWithJavaIoReader:", "WikipediaTokenizerImpl", NULL, 0x0, NULL, NULL },
-    { "zzUnpackCMapWithNSString:", "zzUnpackCMap", "[C", 0xa, NULL, NULL },
-    { "zzRefill", NULL, "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "yyclose", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "yyresetWithJavaIoReader:", "yyreset", "V", 0x11, NULL, NULL },
-    { "yystate", NULL, "I", 0x11, NULL, NULL },
-    { "yybeginWithInt:", "yybegin", "V", 0x11, NULL, NULL },
-    { "yytext", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "yycharatWithInt:", "yycharat", "C", 0x11, NULL, NULL },
-    { "yylength", NULL, "I", 0x11, NULL, NULL },
-    { "zzScanErrorWithInt:", "zzScanError", "V", 0x2, NULL, NULL },
-    { "yypushbackWithInt:", "yypushback", "V", 0x1, NULL, NULL },
-    { "getNextToken", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "YYEOF", "YYEOF", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF },
-    { "ZZ_BUFFERSIZE", "ZZ_BUFFERSIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_BUFFERSIZE },
-    { "YYINITIAL", "YYINITIAL", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYINITIAL },
-    { "CATEGORY_STATE", "CATEGORY_STATE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_CATEGORY_STATE },
-    { "INTERNAL_LINK_STATE", "INTERNAL_LINK_STATE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_INTERNAL_LINK_STATE },
-    { "EXTERNAL_LINK_STATE", "EXTERNAL_LINK_STATE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_EXTERNAL_LINK_STATE },
-    { "TWO_SINGLE_QUOTES_STATE", "TWO_SINGLE_QUOTES_STATE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TWO_SINGLE_QUOTES_STATE },
-    { "THREE_SINGLE_QUOTES_STATE", "THREE_SINGLE_QUOTES_STATE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_THREE_SINGLE_QUOTES_STATE },
-    { "FIVE_SINGLE_QUOTES_STATE", "FIVE_SINGLE_QUOTES_STATE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_FIVE_SINGLE_QUOTES_STATE },
-    { "DOUBLE_EQUALS_STATE", "DOUBLE_EQUALS_STATE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_DOUBLE_EQUALS_STATE },
-    { "DOUBLE_BRACE_STATE", "DOUBLE_BRACE_STATE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_DOUBLE_BRACE_STATE },
-    { "STRING", "STRING", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_STRING },
-    { "ZZ_LEXSTATE", "ZZ_LEXSTATE", 0x1a, "[I", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_LEXSTATE, NULL, .constantValue.asLong = 0 },
-    { "ZZ_CMAP_PACKED", "ZZ_CMAP_PACKED", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_CMAP_PACKED, NULL, .constantValue.asLong = 0 },
-    { "ZZ_CMAP", "ZZ_CMAP", 0x1a, "[C", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_CMAP, NULL, .constantValue.asLong = 0 },
-    { "ZZ_ACTION", "ZZ_ACTION", 0x1a, "[I", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ACTION, NULL, .constantValue.asLong = 0 },
-    { "ZZ_ACTION_PACKED_0", "ZZ_ACTION_PACKED_0", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ACTION_PACKED_0, NULL, .constantValue.asLong = 0 },
-    { "ZZ_ROWMAP", "ZZ_ROWMAP", 0x1a, "[I", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ROWMAP, NULL, .constantValue.asLong = 0 },
-    { "ZZ_ROWMAP_PACKED_0", "ZZ_ROWMAP_PACKED_0", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ROWMAP_PACKED_0, NULL, .constantValue.asLong = 0 },
-    { "ZZ_TRANS", "ZZ_TRANS", 0x1a, "[I", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_TRANS, NULL, .constantValue.asLong = 0 },
-    { "ZZ_TRANS_PACKED_0", "ZZ_TRANS_PACKED_0", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_TRANS_PACKED_0, NULL, .constantValue.asLong = 0 },
-    { "ZZ_UNKNOWN_ERROR", "ZZ_UNKNOWN_ERROR", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_UNKNOWN_ERROR },
-    { "ZZ_NO_MATCH", "ZZ_NO_MATCH", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_NO_MATCH },
-    { "ZZ_PUSHBACK_2BIG", "ZZ_PUSHBACK_2BIG", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_PUSHBACK_2BIG },
-    { "ZZ_ERROR_MSG", "ZZ_ERROR_MSG", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ERROR_MSG, NULL, .constantValue.asLong = 0 },
-    { "ZZ_ATTRIBUTE", "ZZ_ATTRIBUTE", 0x1a, "[I", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ATTRIBUTE, NULL, .constantValue.asLong = 0 },
-    { "ZZ_ATTRIBUTE_PACKED_0", "ZZ_ATTRIBUTE_PACKED_0", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ATTRIBUTE_PACKED_0, NULL, .constantValue.asLong = 0 },
-    { "zzReader_", NULL, 0x2, "Ljava.io.Reader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzState_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzLexicalState_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzBuffer_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzMarkedPos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzCurrentPos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzStartRead_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzEndRead_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "yyline_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "yychar_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "yycolumn_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzAtBOL_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzAtEOF_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzEOFDone_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "zzFinalHighSurrogate_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ALPHANUM", "ALPHANUM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ALPHANUM },
-    { "APOSTROPHE", "APOSTROPHE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_APOSTROPHE },
-    { "ACRONYM", "ACRONYM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ACRONYM },
-    { "COMPANY", "COMPANY", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_COMPANY },
-    { "EMAIL", "EMAIL", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_EMAIL },
-    { "HOST", "HOST", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_HOST },
-    { "NUM", "NUM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_NUM },
-    { "CJ", "CJ", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_CJ },
-    { "INTERNAL_LINK", "INTERNAL_LINK", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_INTERNAL_LINK },
-    { "EXTERNAL_LINK", "EXTERNAL_LINK", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_EXTERNAL_LINK },
-    { "CITATION", "CITATION", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_CITATION },
-    { "CATEGORY", "CATEGORY", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_CATEGORY },
-    { "BOLD", "BOLD", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_BOLD },
-    { "ITALICS", "ITALICS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ITALICS },
-    { "BOLD_ITALICS", "BOLD_ITALICS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_BOLD_ITALICS },
-    { "HEADING", "HEADING", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_HEADING },
-    { "SUB_HEADING", "SUB_HEADING", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_SUB_HEADING },
-    { "EXTERNAL_LINK_URL", "EXTERNAL_LINK_URL", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_EXTERNAL_LINK_URL },
-    { "currentTokType_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numBalanced_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionInc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numLinkToks_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numWikiTokensSeen_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "TOKEN_TYPES", "TOKEN_TYPES", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYPES, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl = { 2, "WikipediaTokenizerImpl", "org.apache.lucene.analysis.wikipedia", NULL, 0x0, 27, methods, 66, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl;
 }
 
 @end
@@ -1129,7 +1163,7 @@ jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackActionWithNS
   OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initialize();
   jint i = 0;
   jint j = offset;
-  jint l = ((jint) [((NSString *) nil_chk(packed)) length]);
+  jint l = [((NSString *) nil_chk(packed)) java_length];
   while (i < l) {
     jint count = [packed charAtWithInt:i++];
     jint value = [packed charAtWithInt:i++];
@@ -1151,7 +1185,7 @@ jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackRowMapWithNS
   OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initialize();
   jint i = 0;
   jint j = offset;
-  jint l = ((jint) [((NSString *) nil_chk(packed)) length]);
+  jint l = [((NSString *) nil_chk(packed)) java_length];
   while (i < l) {
     jint high = JreLShift32([packed charAtWithInt:i++], 16);
     *IOSIntArray_GetRef(nil_chk(result), j++) = high | [packed charAtWithInt:i++];
@@ -1171,7 +1205,7 @@ jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackTransWithNSS
   OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initialize();
   jint i = 0;
   jint j = offset;
-  jint l = ((jint) [((NSString *) nil_chk(packed)) length]);
+  jint l = [((NSString *) nil_chk(packed)) java_length];
   while (i < l) {
     jint count = [packed charAtWithInt:i++];
     jint value = [packed charAtWithInt:i++];
@@ -1194,7 +1228,7 @@ jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackAttributeWit
   OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initialize();
   jint i = 0;
   jint j = offset;
-  jint l = ((jint) [((NSString *) nil_chk(packed)) length]);
+  jint l = [((NSString *) nil_chk(packed)) java_length];
   while (i < l) {
     jint count = [packed charAtWithInt:i++];
     jint value = [packed charAtWithInt:i++];
@@ -1204,7 +1238,7 @@ jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackAttributeWit
   return j;
 }
 
-void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initWithJavaIoReader_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *self, JavaIoReader *inArg) {
+void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initPackagePrivateWithJavaIoReader_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *self, JavaIoReader *inArg) {
   NSObject_init(self);
   self->zzLexicalState_ = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYINITIAL;
   JreStrongAssignAndConsume(&self->zzBuffer_, [IOSCharArray newArrayWithLength:OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_BUFFERSIZE]);
@@ -1217,12 +1251,12 @@ void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initWithJavaIoReader
   JreStrongAssign(&self->zzReader_, inArg);
 }
 
-OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initWithJavaIoReader_(JavaIoReader *inArg) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, initWithJavaIoReader_, inArg)
+OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initPackagePrivateWithJavaIoReader_(JavaIoReader *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, initPackagePrivateWithJavaIoReader_, inArg)
 }
 
-OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *create_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initWithJavaIoReader_(JavaIoReader *inArg) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, initWithJavaIoReader_, inArg)
+OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *create_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initPackagePrivateWithJavaIoReader_(JavaIoReader *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, initPackagePrivateWithJavaIoReader_, inArg)
 }
 
 IOSCharArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzUnpackCMapWithNSString_(NSString *packed) {

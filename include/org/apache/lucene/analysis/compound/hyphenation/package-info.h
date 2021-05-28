@@ -5,9 +5,9 @@
 
 /*!
  @brief Hyphenation code for the CompoundWordTokenFilter.
- The code for the compound word hyphenation is taken from the 
+ The code for the compound word hyphenation is taken from the  
  <a href="http://xmlgraphics.apache.org/fop/">Apache FOP project</a>. 
- All credits for the hyphenation code belongs to them.
+  All credits for the hyphenation code belongs to them.
  */
 #include "J2ObjC_header.h"
 
@@ -19,4 +19,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPackage_info")

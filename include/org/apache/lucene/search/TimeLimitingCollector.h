@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTimeLimitingCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTimeLimitingCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchTimeLimitingCollector || defined(INCLUDE_OrgApacheLuceneSearchTimeLimitingCollector))
 #define OrgApacheLuceneSearchTimeLimitingCollector_
 
@@ -27,9 +33,8 @@
 
 /*!
  @brief The <code>TimeLimitingCollector</code> is used to timeout search requests that
- take longer than the maximum allowed search time limit.
- After this time is
- exceeded, the search thread is stopped by throwing a
+  take longer than the maximum allowed search time limit.After this time is
+  exceeded, the search thread is stopped by throwing a 
  <code>TimeExceededException</code>.
  */
 @interface OrgApacheLuceneSearchTimeLimitingCollector : NSObject < OrgApacheLuceneSearchCollector >
@@ -40,22 +45,22 @@
  @brief Create a TimeLimitedCollector wrapper over another <code>Collector</code> with a specified timeout.
  @param collector the wrapped <code>Collector</code>
  @param clock the timer clock
- @param ticksAllowed max time allowed for collecting
- hits after which <code>TimeExceededException</code> is thrown
+ @param ticksAllowed max time allowed for collecting  hits after which 
+ <code>TimeExceededException</code>  is thrown
  */
-- (instancetype)initWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
-                        withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)clock
-                                              withLong:(jlong)ticksAllowed;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
+                                  withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)clock
+                                                        withLong:(jlong)ticksAllowed;
 
 /*!
  @brief Returns the global TimerThreads <code>Counter</code>
  <p>
- Invoking this creates may create a new instance of <code>TimerThread</code> iff
- the global <code>TimerThread</code> has never been accessed before.
+  Invoking this creates may create a new instance of <code>TimerThread</code> iff
+  the global <code>TimerThread</code> has never been accessed before.
  The thread
- returned from this method is started on creation and will be alive unless
- you stop the <code>TimerThread</code> via <code>TimerThread.stopTimer()</code>.
- </p>
+  returned from this method is started on creation and will be alive unless
+  you stop the <code>TimerThread</code> via <code>TimerThread.stopTimer()</code>.
+  </p>
  @return the global TimerThreads <code>Counter</code>
  */
 + (OrgApacheLuceneUtilCounter *)getGlobalCounter;
@@ -63,11 +68,11 @@
 /*!
  @brief Returns the global <code>TimerThread</code>.
  <p>
- Invoking this creates may create a new instance of <code>TimerThread</code> iff
- the global <code>TimerThread</code> has never been accessed before. The thread
- returned from this method is started on creation and will be alive unless
- you stop the <code>TimerThread</code> via <code>TimerThread.stopTimer()</code>.
- </p>
+  Invoking this creates may create a new instance of <code>TimerThread</code> iff
+  the global <code>TimerThread</code> has never been accessed before. The thread
+  returned from this method is started on creation and will be alive unless
+  you stop the <code>TimerThread</code> via <code>TimerThread.stopTimer()</code>.
+  </p>
  @return the global <code>TimerThread</code>
  */
 + (OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *)getGlobalTimerThread;
@@ -77,9 +82,9 @@
 /*!
  @brief Checks if this time limited collector is greedy in collecting the last hit.
  A non greedy collector, upon a timeout, would throw a <code>TimeExceededException</code> 
- without allowing the wrapped collector to collect current doc. A greedy one would 
- first allow the wrapped hit collector to collect current doc and only then 
- throw a <code>TimeExceededException</code>.  However, if the timeout is detected in
+  without allowing the wrapped collector to collect current doc. A greedy one would 
+  first allow the wrapped hit collector to collect current doc and only then 
+  throw a <code>TimeExceededException</code>.  However, if the timeout is detected in 
  <code>getLeafCollector</code> then no current document is collected.
  - seealso: #setGreedy(boolean)
  */
@@ -89,25 +94,24 @@
 
 /*!
  @brief Syntactic sugar for <code>setBaseline(long)</code> using <code>Counter.get()</code>
- on the clock passed to the constructor.
+  on the clock passed to the constructor.
  */
 - (void)setBaseline;
 
 /*!
- @brief Sets the baseline for this collector.
- By default the collectors baseline is 
- initialized once the first reader is passed to the collector. 
+ @brief Sets the baseline for this collector.By default the collectors baseline is 
+  initialized once the first reader is passed to the collector.
  To include operations executed in prior to the actual document collection
- set the baseline through this method in your prelude.
+  set the baseline through this method in your prelude. 
  <p>
- Example usage:
+  Example usage: 
  <pre class="prettyprint">
- Counter clock = ...;
- long baseline = clock.get();
- // ... prepare search
- TimeLimitingCollector collector = new TimeLimitingCollector(c, clock, numTicks);
- collector.setBaseline(baseline);
- indexSearcher.search(query, collector);
+    Counter clock = ...;
+    long baseline = clock.get();
+    // ... prepare search
+    TimeLimitingCollector collector = new TimeLimitingCollector(c, clock, numTicks);
+    collector.setBaseline(baseline);
+    indexSearcher.search(query, collector); 
  
 @endcode
  - seealso: #setBaseline()
@@ -117,7 +121,7 @@
 /*!
  @brief This is so the same timer can be used with a multi-phase search process such as grouping.
  We don't want to create a new TimeLimitingCollector for each phase because that would 
- reset the timer for each phase.  Once time is up subsequent phases need to timeout quickly.
+  reset the timer for each phase.  Once time is up subsequent phases need to timeout quickly.
  @param collector The actual collector performing search functionality
  */
 - (void)setCollectorWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector;
@@ -129,6 +133,10 @@
  */
 - (void)setGreedyWithBoolean:(jboolean)greedy;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTimeLimitingCollector)
@@ -139,9 +147,9 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector *new_OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector *create_OrgApacheLuceneSearchTimeLimitingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneUtilCounter_withLong_(id<OrgApacheLuceneSearchCollector> collector, OrgApacheLuceneUtilCounter *clock, jlong ticksAllowed);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilCounter *OrgApacheLuceneSearchTimeLimitingCollector_getGlobalCounter();
+FOUNDATION_EXPORT OrgApacheLuceneUtilCounter *OrgApacheLuceneSearchTimeLimitingCollector_getGlobalCounter(void);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *OrgApacheLuceneSearchTimeLimitingCollector_getGlobalTimerThread();
+FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *OrgApacheLuceneSearchTimeLimitingCollector_getGlobalTimerThread(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector)
 
@@ -153,6 +161,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector)
 #define RESTRICT_JavaLangRuntimeException 1
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
+
+@class JavaLangThrowable;
 
 /*!
  @brief Thrown when elapsed search time exceeds allowed search time.
@@ -176,6 +186,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector)
  */
 - (jlong)getTimeElapsed;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1
+                               withBoolean:(jboolean)arg2
+                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException)
@@ -191,7 +217,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector_TimeExceed
 #define INCLUDE_JavaLangThread 1
 #include "java/lang/Thread.h"
 
+@class JavaLangThreadGroup;
 @class OrgApacheLuceneUtilCounter;
+@protocol JavaLangRunnable;
 
 /*!
  @brief Thread used to timeout search requests.
@@ -201,17 +229,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector_TimeExceed
  @public
   OrgApacheLuceneUtilCounter *counter_;
 }
-
-+ (NSString *)THREAD_NAME;
-
-+ (jint)DEFAULT_RESOLUTION;
+@property (readonly, copy, class) NSString *THREAD_NAME NS_SWIFT_NAME(THREAD_NAME);
+@property (readonly, class) jint DEFAULT_RESOLUTION NS_SWIFT_NAME(DEFAULT_RESOLUTION);
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
 
-- (instancetype)initWithLong:(jlong)resolution
-withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
+- (instancetype __nonnull)initWithLong:(jlong)resolution
+        withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
 
 /*!
  @brief Get the timer value in milliseconds.
@@ -229,16 +255,16 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
 /*!
  @brief Set the timer resolution.
  The default timer resolution is 20 milliseconds. 
- This means that a search required to take no longer than 
- 800 milliseconds may be stopped after 780 to 820 milliseconds.
- <br>Note that: 
+  This means that a search required to take no longer than 
+  800 milliseconds may be stopped after 780 to 820 milliseconds. 
+ <br>Note that:  
  <ul>
- <li>Finer (smaller) resolution is more accurate but less efficient.</li>
- <li>Setting resolution to less than 5 milliseconds will be silently modified to 5 milliseconds.</li>
- <li>Setting resolution smaller than current resolution might take effect only after current 
- resolution. (Assume current resolution of 20 milliseconds is modified to 5 milliseconds, 
- then it can take up to 20 milliseconds for the change to have effect.</li>
- </ul>      
+  <li>Finer (smaller) resolution is more accurate but less efficient.</li>
+  <li>Setting resolution to less than 5 milliseconds will be silently modified to 5 milliseconds.</li>
+  <li>Setting resolution smaller than current resolution might take effect only after current 
+  resolution. (Assume current resolution of 20 milliseconds is modified to 5 milliseconds, 
+  then it can take up to 20 milliseconds for the change to have effect.</li>
+  </ul>
  */
 - (void)setResolutionWithLong:(jlong)resolution;
 
@@ -247,18 +273,44 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
  */
 - (void)stopTimer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangRunnable:(id<JavaLangRunnable>)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangRunnable:(id<JavaLangRunnable>)arg0
+                                      withNSString:(NSString *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
+                                 withJavaLangRunnable:(id<JavaLangRunnable>)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
+                                 withJavaLangRunnable:(id<JavaLangRunnable>)arg1
+                                         withNSString:(NSString *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
+                                 withJavaLangRunnable:(id<JavaLangRunnable>)arg1
+                                         withNSString:(NSString *)arg2
+                                             withLong:(jlong)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
+                                         withNSString:(NSString *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread, counter_, OrgApacheLuceneUtilCounter *)
 
-inline NSString *OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_get_THREAD_NAME();
+inline NSString *OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_get_THREAD_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_THREAD_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread, THREAD_NAME, NSString *)
 
-inline jint OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_get_DEFAULT_RESOLUTION();
+inline jint OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_get_DEFAULT_RESOLUTION(void);
 #define OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_DEFAULT_RESOLUTION 20
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread, DEFAULT_RESOLUTION, jint)
 
@@ -278,4 +330,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector_TimerThrea
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTimeLimitingCollector")

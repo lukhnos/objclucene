@@ -11,6 +11,12 @@
 #include "org/tartarus/snowball/SnowballProgram.h"
 #include "org/tartarus/snowball/ext/TurkishStemmer.h"
 
+static void (*OrgTartarusSnowballExtTurkishStemmer_super$_copy_fromWithOrgTartarusSnowballSnowballProgram_)(id, SEL, id);
+
+#if __has_feature(objc_arc)
+#error "org/tartarus/snowball/ext/TurkishStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgTartarusSnowballExtTurkishStemmer () {
  @public
   jboolean B_continue_stemming_noun_suffixes_;
@@ -101,141 +107,143 @@
 
 @end
 
-inline jlong OrgTartarusSnowballExtTurkishStemmer_get_serialVersionUID();
+inline jlong OrgTartarusSnowballExtTurkishStemmer_get_serialVersionUID(void);
 #define OrgTartarusSnowballExtTurkishStemmer_serialVersionUID 1LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgTartarusSnowballExtTurkishStemmer, serialVersionUID, jlong)
 
-inline OrgTartarusSnowballExtTurkishStemmer *OrgTartarusSnowballExtTurkishStemmer_get_methodObject();
+inline OrgTartarusSnowballExtTurkishStemmer *OrgTartarusSnowballExtTurkishStemmer_get_methodObject(void);
 static OrgTartarusSnowballExtTurkishStemmer *OrgTartarusSnowballExtTurkishStemmer_methodObject;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, methodObject, OrgTartarusSnowballExtTurkishStemmer *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_0();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_0(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_0;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_0, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_1();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_1(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_1;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_1, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_2();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_2(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_2;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_2, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_3();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_3(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_3;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_3, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_4();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_4(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_4;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_4, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_5();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_5(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_5;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_5, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_6();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_6(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_6;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_6, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_7();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_7(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_7;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_7, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_8();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_8(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_8;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_8, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_9();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_9(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_9;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_9, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_10();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_10(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_10;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_10, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_11();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_11(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_11;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_11, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_12();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_12(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_12;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_12, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_13();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_13(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_13;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_13, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_14();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_14(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_14;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_14, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_15();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_15(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_15;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_15, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_16();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_16(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_16;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_16, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_17();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_17(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_17;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_17, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_18();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_18(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_18;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_18, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_19();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_19(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_19;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_19, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_20();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_20(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_20;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_20, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_21();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_21(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_21;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_21, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_22();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_22(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_22;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_22, IOSObjectArray *)
 
-inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_23();
+inline IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_get_a_23(void);
 static IOSObjectArray *OrgTartarusSnowballExtTurkishStemmer_a_23;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, a_23, IOSObjectArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel();
+inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel(void);
 static IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_g_vowel;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, g_vowel, IOSCharArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_U();
+inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_U(void);
 static IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_g_U;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, g_U, IOSCharArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel1();
+inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel1(void);
 static IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_g_vowel1;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, g_vowel1, IOSCharArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel2();
+inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel2(void);
 static IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_g_vowel2;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, g_vowel2, IOSCharArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel3();
+inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel3(void);
 static IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_g_vowel3;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, g_vowel3, IOSCharArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel4();
+inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel4(void);
 static IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_g_vowel4;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, g_vowel4, IOSCharArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel5();
+inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel5(void);
 static IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_g_vowel5;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, g_vowel5, IOSCharArray *)
 
-inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel6();
+inline IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_get_g_vowel6(void);
 static IOSCharArray *OrgTartarusSnowballExtTurkishStemmer_g_vowel6;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtTurkishStemmer, g_vowel6, IOSCharArray *)
+
+__attribute__((unused)) static void OrgTartarusSnowballExtTurkishStemmer_copy_fromWithOrgTartarusSnowballExtTurkishStemmer_(OrgTartarusSnowballExtTurkishStemmer *self, OrgTartarusSnowballExtTurkishStemmer *other);
 
 __attribute__((unused)) static jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusSnowballExtTurkishStemmer *self);
 
@@ -321,10 +329,15 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtTurkishStemmer)
 
 @implementation OrgTartarusSnowballExtTurkishStemmer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgTartarusSnowballExtTurkishStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)copy_fromWithOrgTartarusSnowballExtTurkishStemmer:(OrgTartarusSnowballExtTurkishStemmer *)other {
-  B_continue_stemming_noun_suffixes_ = ((OrgTartarusSnowballExtTurkishStemmer *) nil_chk(other))->B_continue_stemming_noun_suffixes_;
-  I_strlen_ = other->I_strlen_;
-  [super copy_fromWithOrgTartarusSnowballSnowballProgram:other];
+  OrgTartarusSnowballExtTurkishStemmer_copy_fromWithOrgTartarusSnowballExtTurkishStemmer_(self, other);
 }
 
 - (jboolean)r_check_vowel_harmony {
@@ -531,15 +544,149 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtTurkishStemmer)
   return ((jint) [((NSString *) nil_chk([OrgTartarusSnowballExtTurkishStemmer_class_() getName])) hash]);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgTartarusSnowballExtTurkishStemmer_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(copy_fromWithOrgTartarusSnowballExtTurkishStemmer:);
+  methods[2].selector = @selector(r_check_vowel_harmony);
+  methods[3].selector = @selector(r_mark_suffix_with_optional_n_consonant);
+  methods[4].selector = @selector(r_mark_suffix_with_optional_s_consonant);
+  methods[5].selector = @selector(r_mark_suffix_with_optional_y_consonant);
+  methods[6].selector = @selector(r_mark_suffix_with_optional_U_vowel);
+  methods[7].selector = @selector(r_mark_possessives);
+  methods[8].selector = @selector(r_mark_sU);
+  methods[9].selector = @selector(r_mark_lArI);
+  methods[10].selector = @selector(r_mark_yU);
+  methods[11].selector = @selector(r_mark_nU);
+  methods[12].selector = @selector(r_mark_nUn);
+  methods[13].selector = @selector(r_mark_yA);
+  methods[14].selector = @selector(r_mark_nA);
+  methods[15].selector = @selector(r_mark_DA);
+  methods[16].selector = @selector(r_mark_ndA);
+  methods[17].selector = @selector(r_mark_DAn);
+  methods[18].selector = @selector(r_mark_ndAn);
+  methods[19].selector = @selector(r_mark_ylA);
+  methods[20].selector = @selector(r_mark_ki);
+  methods[21].selector = @selector(r_mark_ncA);
+  methods[22].selector = @selector(r_mark_yUm);
+  methods[23].selector = @selector(r_mark_sUn);
+  methods[24].selector = @selector(r_mark_yUz);
+  methods[25].selector = @selector(r_mark_sUnUz);
+  methods[26].selector = @selector(r_mark_lAr);
+  methods[27].selector = @selector(r_mark_nUz);
+  methods[28].selector = @selector(r_mark_DUr);
+  methods[29].selector = @selector(r_mark_cAsInA);
+  methods[30].selector = @selector(r_mark_yDU);
+  methods[31].selector = @selector(r_mark_ysA);
+  methods[32].selector = @selector(r_mark_ymUs_);
+  methods[33].selector = @selector(r_mark_yken);
+  methods[34].selector = @selector(r_stem_nominal_verb_suffixes);
+  methods[35].selector = @selector(r_stem_suffix_chain_before_ki);
+  methods[36].selector = @selector(r_stem_noun_suffixes);
+  methods[37].selector = @selector(r_post_process_last_consonants);
+  methods[38].selector = @selector(r_append_U_to_stems_ending_with_d_or_g);
+  methods[39].selector = @selector(r_more_than_one_syllable_word);
+  methods[40].selector = @selector(r_is_reserved_word);
+  methods[41].selector = @selector(r_postlude);
+  methods[42].selector = @selector(stem);
+  methods[43].selector = @selector(isEqual:);
+  methods[44].selector = @selector(hash);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "serialVersionUID", "J", .constantValue.asLong = OrgTartarusSnowballExtTurkishStemmer_serialVersionUID, 0x1a, -1, -1, -1, -1 },
+    { "methodObject", "LOrgTartarusSnowballExtTurkishStemmer;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "a_0", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 6, -1, -1 },
+    { "a_1", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 7, -1, -1 },
+    { "a_2", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 8, -1, -1 },
+    { "a_3", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 9, -1, -1 },
+    { "a_4", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 10, -1, -1 },
+    { "a_5", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 11, -1, -1 },
+    { "a_6", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
+    { "a_7", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 13, -1, -1 },
+    { "a_8", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 14, -1, -1 },
+    { "a_9", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 15, -1, -1 },
+    { "a_10", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 16, -1, -1 },
+    { "a_11", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 17, -1, -1 },
+    { "a_12", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 18, -1, -1 },
+    { "a_13", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 19, -1, -1 },
+    { "a_14", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 20, -1, -1 },
+    { "a_15", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 21, -1, -1 },
+    { "a_16", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 22, -1, -1 },
+    { "a_17", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 23, -1, -1 },
+    { "a_18", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 24, -1, -1 },
+    { "a_19", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 25, -1, -1 },
+    { "a_20", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 26, -1, -1 },
+    { "a_21", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 27, -1, -1 },
+    { "a_22", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 28, -1, -1 },
+    { "a_23", "[LOrgTartarusSnowballAmong;", .constantValue.asLong = 0, 0x1a, -1, 29, -1, -1 },
+    { "g_vowel", "[C", .constantValue.asLong = 0, 0x1a, -1, 30, -1, -1 },
+    { "g_U", "[C", .constantValue.asLong = 0, 0x1a, -1, 31, -1, -1 },
+    { "g_vowel1", "[C", .constantValue.asLong = 0, 0x1a, -1, 32, -1, -1 },
+    { "g_vowel2", "[C", .constantValue.asLong = 0, 0x1a, -1, 33, -1, -1 },
+    { "g_vowel3", "[C", .constantValue.asLong = 0, 0x1a, -1, 34, -1, -1 },
+    { "g_vowel4", "[C", .constantValue.asLong = 0, 0x1a, -1, 35, -1, -1 },
+    { "g_vowel5", "[C", .constantValue.asLong = 0, 0x1a, -1, 36, -1, -1 },
+    { "g_vowel6", "[C", .constantValue.asLong = 0, 0x1a, -1, 37, -1, -1 },
+    { "B_continue_stemming_noun_suffixes_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "I_strlen_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "copy_from", "LOrgTartarusSnowballExtTurkishStemmer;", "equals", "LNSObject;", "hashCode", &OrgTartarusSnowballExtTurkishStemmer_methodObject, &OrgTartarusSnowballExtTurkishStemmer_a_0, &OrgTartarusSnowballExtTurkishStemmer_a_1, &OrgTartarusSnowballExtTurkishStemmer_a_2, &OrgTartarusSnowballExtTurkishStemmer_a_3, &OrgTartarusSnowballExtTurkishStemmer_a_4, &OrgTartarusSnowballExtTurkishStemmer_a_5, &OrgTartarusSnowballExtTurkishStemmer_a_6, &OrgTartarusSnowballExtTurkishStemmer_a_7, &OrgTartarusSnowballExtTurkishStemmer_a_8, &OrgTartarusSnowballExtTurkishStemmer_a_9, &OrgTartarusSnowballExtTurkishStemmer_a_10, &OrgTartarusSnowballExtTurkishStemmer_a_11, &OrgTartarusSnowballExtTurkishStemmer_a_12, &OrgTartarusSnowballExtTurkishStemmer_a_13, &OrgTartarusSnowballExtTurkishStemmer_a_14, &OrgTartarusSnowballExtTurkishStemmer_a_15, &OrgTartarusSnowballExtTurkishStemmer_a_16, &OrgTartarusSnowballExtTurkishStemmer_a_17, &OrgTartarusSnowballExtTurkishStemmer_a_18, &OrgTartarusSnowballExtTurkishStemmer_a_19, &OrgTartarusSnowballExtTurkishStemmer_a_20, &OrgTartarusSnowballExtTurkishStemmer_a_21, &OrgTartarusSnowballExtTurkishStemmer_a_22, &OrgTartarusSnowballExtTurkishStemmer_a_23, &OrgTartarusSnowballExtTurkishStemmer_g_vowel, &OrgTartarusSnowballExtTurkishStemmer_g_U, &OrgTartarusSnowballExtTurkishStemmer_g_vowel1, &OrgTartarusSnowballExtTurkishStemmer_g_vowel2, &OrgTartarusSnowballExtTurkishStemmer_g_vowel3, &OrgTartarusSnowballExtTurkishStemmer_g_vowel4, &OrgTartarusSnowballExtTurkishStemmer_g_vowel5, &OrgTartarusSnowballExtTurkishStemmer_g_vowel6 };
+  static const J2ObjcClassInfo _OrgTartarusSnowballExtTurkishStemmer = { "TurkishStemmer", "org.tartarus.snowball.ext", ptrTable, methods, fields, 7, 0x1, 45, 36, -1, -1, -1, -1, -1 };
+  return &_OrgTartarusSnowballExtTurkishStemmer;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgTartarusSnowballExtTurkishStemmer class]) {
+    OrgTartarusSnowballExtTurkishStemmer_super$_copy_fromWithOrgTartarusSnowballSnowballProgram_ = (void (*)(id, SEL, id))[OrgTartarusSnowballSnowballProgram instanceMethodForSelector:@selector(copy_fromWithOrgTartarusSnowballSnowballProgram:)];
     JreStrongAssignAndConsume(&OrgTartarusSnowballExtTurkishStemmer_methodObject, new_OrgTartarusSnowballExtTurkishStemmer_init());
     JreStrongAssignAndConsume(&OrgTartarusSnowballExtTurkishStemmer_a_0, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"m", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"n", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"miz", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"niz", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"muz", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"nuz", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"m\u00fcz", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"n\u00fcz", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"m\u0131z", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"n\u0131z", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject) } count:10 type:OrgTartarusSnowballAmong_class_()]);
     JreStrongAssignAndConsume(&OrgTartarusSnowballExtTurkishStemmer_a_1, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"leri", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"lar\u0131", -1, -1, @"", OrgTartarusSnowballExtTurkishStemmer_methodObject) } count:2 type:OrgTartarusSnowballAmong_class_()]);
@@ -577,97 +724,25 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "copy_fromWithOrgTartarusSnowballExtTurkishStemmer:", "copy_from", "V", 0x2, NULL, NULL },
-    { "r_check_vowel_harmony", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_suffix_with_optional_n_consonant", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_suffix_with_optional_s_consonant", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_suffix_with_optional_y_consonant", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_suffix_with_optional_U_vowel", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_possessives", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_sU", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_lArI", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_yU", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_nU", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_nUn", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_yA", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_nA", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_DA", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_ndA", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_DAn", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_ndAn", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_ylA", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_ki", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_ncA", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_yUm", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_sUn", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_yUz", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_sUnUz", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_lAr", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_nUz", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_DUr", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_cAsInA", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_yDU", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_ysA", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_ymUs_", NULL, "Z", 0x2, NULL, NULL },
-    { "r_mark_yken", NULL, "Z", 0x2, NULL, NULL },
-    { "r_stem_nominal_verb_suffixes", NULL, "Z", 0x2, NULL, NULL },
-    { "r_stem_suffix_chain_before_ki", NULL, "Z", 0x2, NULL, NULL },
-    { "r_stem_noun_suffixes", NULL, "Z", 0x2, NULL, NULL },
-    { "r_post_process_last_consonants", NULL, "Z", 0x2, NULL, NULL },
-    { "r_append_U_to_stems_ending_with_d_or_g", NULL, "Z", 0x2, NULL, NULL },
-    { "r_more_than_one_syllable_word", NULL, "Z", 0x2, NULL, NULL },
-    { "r_is_reserved_word", NULL, "Z", 0x2, NULL, NULL },
-    { "r_postlude", NULL, "Z", 0x2, NULL, NULL },
-    { "stem", NULL, "Z", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", "TurkishStemmer", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "serialVersionUID", "serialVersionUID", 0x1a, "J", NULL, NULL, .constantValue.asLong = OrgTartarusSnowballExtTurkishStemmer_serialVersionUID },
-    { "methodObject", "methodObject", 0x1a, "Lorg.tartarus.snowball.ext.TurkishStemmer;", &OrgTartarusSnowballExtTurkishStemmer_methodObject, NULL, .constantValue.asLong = 0 },
-    { "a_0", "a_0", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_0, NULL, .constantValue.asLong = 0 },
-    { "a_1", "a_1", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_1, NULL, .constantValue.asLong = 0 },
-    { "a_2", "a_2", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_2, NULL, .constantValue.asLong = 0 },
-    { "a_3", "a_3", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_3, NULL, .constantValue.asLong = 0 },
-    { "a_4", "a_4", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_4, NULL, .constantValue.asLong = 0 },
-    { "a_5", "a_5", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_5, NULL, .constantValue.asLong = 0 },
-    { "a_6", "a_6", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_6, NULL, .constantValue.asLong = 0 },
-    { "a_7", "a_7", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_7, NULL, .constantValue.asLong = 0 },
-    { "a_8", "a_8", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_8, NULL, .constantValue.asLong = 0 },
-    { "a_9", "a_9", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_9, NULL, .constantValue.asLong = 0 },
-    { "a_10", "a_10", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_10, NULL, .constantValue.asLong = 0 },
-    { "a_11", "a_11", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_11, NULL, .constantValue.asLong = 0 },
-    { "a_12", "a_12", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_12, NULL, .constantValue.asLong = 0 },
-    { "a_13", "a_13", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_13, NULL, .constantValue.asLong = 0 },
-    { "a_14", "a_14", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_14, NULL, .constantValue.asLong = 0 },
-    { "a_15", "a_15", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_15, NULL, .constantValue.asLong = 0 },
-    { "a_16", "a_16", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_16, NULL, .constantValue.asLong = 0 },
-    { "a_17", "a_17", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_17, NULL, .constantValue.asLong = 0 },
-    { "a_18", "a_18", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_18, NULL, .constantValue.asLong = 0 },
-    { "a_19", "a_19", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_19, NULL, .constantValue.asLong = 0 },
-    { "a_20", "a_20", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_20, NULL, .constantValue.asLong = 0 },
-    { "a_21", "a_21", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_21, NULL, .constantValue.asLong = 0 },
-    { "a_22", "a_22", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_22, NULL, .constantValue.asLong = 0 },
-    { "a_23", "a_23", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtTurkishStemmer_a_23, NULL, .constantValue.asLong = 0 },
-    { "g_vowel", "g_vowel", 0x1a, "[C", &OrgTartarusSnowballExtTurkishStemmer_g_vowel, NULL, .constantValue.asLong = 0 },
-    { "g_U", "g_U", 0x1a, "[C", &OrgTartarusSnowballExtTurkishStemmer_g_U, NULL, .constantValue.asLong = 0 },
-    { "g_vowel1", "g_vowel1", 0x1a, "[C", &OrgTartarusSnowballExtTurkishStemmer_g_vowel1, NULL, .constantValue.asLong = 0 },
-    { "g_vowel2", "g_vowel2", 0x1a, "[C", &OrgTartarusSnowballExtTurkishStemmer_g_vowel2, NULL, .constantValue.asLong = 0 },
-    { "g_vowel3", "g_vowel3", 0x1a, "[C", &OrgTartarusSnowballExtTurkishStemmer_g_vowel3, NULL, .constantValue.asLong = 0 },
-    { "g_vowel4", "g_vowel4", 0x1a, "[C", &OrgTartarusSnowballExtTurkishStemmer_g_vowel4, NULL, .constantValue.asLong = 0 },
-    { "g_vowel5", "g_vowel5", 0x1a, "[C", &OrgTartarusSnowballExtTurkishStemmer_g_vowel5, NULL, .constantValue.asLong = 0 },
-    { "g_vowel6", "g_vowel6", 0x1a, "[C", &OrgTartarusSnowballExtTurkishStemmer_g_vowel6, NULL, .constantValue.asLong = 0 },
-    { "B_continue_stemming_noun_suffixes_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "I_strlen_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgTartarusSnowballExtTurkishStemmer = { 2, "TurkishStemmer", "org.tartarus.snowball.ext", NULL, 0x1, 45, methods, 36, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgTartarusSnowballExtTurkishStemmer;
+@end
+
+void OrgTartarusSnowballExtTurkishStemmer_init(OrgTartarusSnowballExtTurkishStemmer *self) {
+  OrgTartarusSnowballSnowballProgram_init(self);
 }
 
-@end
+OrgTartarusSnowballExtTurkishStemmer *new_OrgTartarusSnowballExtTurkishStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgTartarusSnowballExtTurkishStemmer, init)
+}
+
+OrgTartarusSnowballExtTurkishStemmer *create_OrgTartarusSnowballExtTurkishStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgTartarusSnowballExtTurkishStemmer, init)
+}
+
+void OrgTartarusSnowballExtTurkishStemmer_copy_fromWithOrgTartarusSnowballExtTurkishStemmer_(OrgTartarusSnowballExtTurkishStemmer *self, OrgTartarusSnowballExtTurkishStemmer *other) {
+  self->B_continue_stemming_noun_suffixes_ = ((OrgTartarusSnowballExtTurkishStemmer *) nil_chk(other))->B_continue_stemming_noun_suffixes_;
+  self->I_strlen_ = other->I_strlen_;
+  OrgTartarusSnowballExtTurkishStemmer_super$_copy_fromWithOrgTartarusSnowballSnowballProgram_(self, @selector(copy_fromWithOrgTartarusSnowballSnowballProgram:), other);
+}
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusSnowballExtTurkishStemmer *self) {
   jint v_1;
@@ -2968,18 +3043,6 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_postlude(OrgTartarusSnowballExtT
   self->cursor_ = self->limit_ - v_3;
   self->cursor_ = self->limit_backward_;
   return true;
-}
-
-void OrgTartarusSnowballExtTurkishStemmer_init(OrgTartarusSnowballExtTurkishStemmer *self) {
-  OrgTartarusSnowballSnowballProgram_init(self);
-}
-
-OrgTartarusSnowballExtTurkishStemmer *new_OrgTartarusSnowballExtTurkishStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgTartarusSnowballExtTurkishStemmer, init)
-}
-
-OrgTartarusSnowballExtTurkishStemmer *create_OrgTartarusSnowballExtTurkishStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgTartarusSnowballExtTurkishStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgTartarusSnowballExtTurkishStemmer)

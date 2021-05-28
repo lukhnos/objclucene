@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedMonotonicLongValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedMonotonicLongValues_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicLongValues || defined(INCLUDE_OrgApacheLuceneUtilPackedMonotonicLongValues))
 #define OrgApacheLuceneUtilPackedMonotonicLongValues_
 
@@ -31,13 +37,13 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)pageShift
-                    withInt:(jint)pageMask
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)pageShift
+                                            withInt:(jint)pageMask
 withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
-              withLongArray:(IOSLongArray *)mins
-             withFloatArray:(IOSFloatArray *)averages
-                   withLong:(jlong)size
-                   withLong:(jlong)ramBytesUsed;
+                                      withLongArray:(IOSLongArray *)mins
+                                     withFloatArray:(IOSFloatArray *)averages
+                                           withLong:(jlong)size
+                                           withLong:(jlong)ramBytesUsed;
 
 - (jint)decodeBlockWithInt:(jint)block
              withLongArray:(IOSLongArray *)dest;
@@ -45,17 +51,26 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
 - (jlong)getWithInt:(jint)block
             withInt:(jint)element;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1
+withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)arg2
+                                      withLongArray:(IOSLongArray *)arg3
+                                           withLong:(jlong)arg4
+                                           withLong:(jlong)arg5 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilPackedMonotonicLongValues)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedMonotonicLongValues, averages_, IOSFloatArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(OrgApacheLuceneUtilPackedMonotonicLongValues *self, jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, IOSFloatArray *averages, jlong size, jlong ramBytesUsed);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedMonotonicLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(OrgApacheLuceneUtilPackedMonotonicLongValues *self, jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, IOSFloatArray *averages, jlong size, jlong ramBytesUsed);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedMonotonicLongValues *new_OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, IOSFloatArray *averages, jlong size, jlong ramBytesUsed) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedMonotonicLongValues *new_OrgApacheLuceneUtilPackedMonotonicLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, IOSFloatArray *averages, jlong size, jlong ramBytesUsed) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedMonotonicLongValues *create_OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, IOSFloatArray *averages, jlong size, jlong ramBytesUsed);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedMonotonicLongValues *create_OrgApacheLuceneUtilPackedMonotonicLongValues_initPackagePrivateWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, IOSFloatArray *averages, jlong size, jlong ramBytesUsed);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicLongValues)
 
@@ -83,8 +98,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicLongValues)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)pageSize
-                  withFloat:(jfloat)acceptableOverheadRatio;
+- (instancetype __nonnull)initWithInt:(jint)pageSize
+                            withFloat:(jfloat)acceptableOverheadRatio;
 
 - (jlong)baseRamBytesUsed;
 
@@ -111,4 +126,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicLongValues")

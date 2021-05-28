@@ -10,6 +10,10 @@
 #include "org/apache/lucene/search/similarities/BasicStats.h"
 #include "org/apache/lucene/search/similarities/SimilarityBase.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/BasicModelP must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSimilaritiesBasicModelP)
 
 jdouble OrgApacheLuceneSearchSimilaritiesBasicModelP_LOG2_E;
@@ -41,24 +45,32 @@ J2OBJC_IGNORE_DESIGNATED_END
   return @"P";
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x11, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:);
+  methods[2].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "LOG2_E", "D", .constantValue.asLong = 0, 0xc, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "score", "LOrgApacheLuceneSearchSimilaritiesBasicStats;F", "toString", &OrgApacheLuceneSearchSimilaritiesBasicModelP_LOG2_E };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicModelP = { "BasicModelP", "org.apache.lucene.search.similarities", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSimilaritiesBasicModelP;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSimilaritiesBasicModelP class]) {
     OrgApacheLuceneSearchSimilaritiesBasicModelP_LOG2_E = OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_(JavaLangMath_E);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSimilaritiesBasicModelP)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BasicModelP", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:", "score", "F", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "LOG2_E", "LOG2_E", 0xc, "D", &OrgApacheLuceneSearchSimilaritiesBasicModelP_LOG2_E, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicModelP = { 2, "BasicModelP", "org.apache.lucene.search.similarities", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchSimilaritiesBasicModelP;
 }
 
 @end

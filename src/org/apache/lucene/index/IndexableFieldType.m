@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/index/IndexableFieldType.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexableFieldType must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexIndexableFieldType : NSObject
 
 @end
@@ -13,18 +17,31 @@
 @implementation OrgApacheLuceneIndexIndexableFieldType
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stored", NULL, "Z", 0x401, NULL, NULL },
-    { "tokenized", NULL, "Z", 0x401, NULL, NULL },
-    { "storeTermVectors", NULL, "Z", 0x401, NULL, NULL },
-    { "storeTermVectorOffsets", NULL, "Z", 0x401, NULL, NULL },
-    { "storeTermVectorPositions", NULL, "Z", 0x401, NULL, NULL },
-    { "storeTermVectorPayloads", NULL, "Z", 0x401, NULL, NULL },
-    { "omitNorms", NULL, "Z", 0x401, NULL, NULL },
-    { "indexOptions", NULL, "Lorg.apache.lucene.index.IndexOptions;", 0x401, NULL, NULL },
-    { "docValuesType", NULL, "Lorg.apache.lucene.index.DocValuesType;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexOptions;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocValuesType;", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexableFieldType = { 2, "IndexableFieldType", "org.apache.lucene.index", NULL, 0x609, 9, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(stored);
+  methods[1].selector = @selector(tokenized);
+  methods[2].selector = @selector(storeTermVectors);
+  methods[3].selector = @selector(storeTermVectorOffsets);
+  methods[4].selector = @selector(storeTermVectorPositions);
+  methods[5].selector = @selector(storeTermVectorPayloads);
+  methods[6].selector = @selector(omitNorms);
+  methods[7].selector = @selector(indexOptions);
+  methods[8].selector = @selector(docValuesType);
+  #pragma clang diagnostic pop
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexableFieldType = { "IndexableFieldType", "org.apache.lucene.index", NULL, methods, NULL, 7, 0x609, 9, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexableFieldType;
 }
 

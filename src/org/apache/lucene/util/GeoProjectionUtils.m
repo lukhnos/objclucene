@@ -3,12 +3,15 @@
 //  source: ./sandbox/src/java/org/apache/lucene/util/GeoProjectionUtils.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/StrictMath.h"
 #include "org/apache/lucene/util/GeoProjectionUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/GeoProjectionUtils must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilGeoProjectionUtils ()
 
@@ -73,6 +76,13 @@ jdouble OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY;
 + (jdouble)SEMIMINOR_AXIS2 {
   return OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2;
 }
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilGeoProjectionUtils_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (IOSDoubleArray *)ecfToLLAWithDouble:(jdouble)x
                             withDouble:(jdouble)y
@@ -148,12 +158,46 @@ jdouble OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY;
   return OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(lon, lat, bearing, dist, pt);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilGeoProjectionUtils_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[D", 0x19, 0, 1, -1, -1, -1, -1 },
+    { NULL, "[D", 0x19, 2, 1, -1, -1, -1, -1 },
+    { NULL, "[D", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "[D", 0x9, 5, 4, -1, -1, -1, -1 },
+    { NULL, "[D", 0x9, 6, 4, -1, -1, -1, -1 },
+    { NULL, "[D", 0x9, 7, 4, -1, -1, -1, -1 },
+    { NULL, "[[D", 0xa, 8, 9, -1, -1, -1, -1 },
+    { NULL, "[[D", 0xa, 10, 9, -1, -1, -1, -1 },
+    { NULL, "[D", 0x19, 11, 12, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(ecfToLLAWithDouble:withDouble:withDouble:withDoubleArray:);
+  methods[2].selector = @selector(llaToECFWithDouble:withDouble:withDouble:withDoubleArray:);
+  methods[3].selector = @selector(llaToENUWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDoubleArray:);
+  methods[4].selector = @selector(enuToLLAWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDoubleArray:);
+  methods[5].selector = @selector(ecfToENUWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDoubleArray:);
+  methods[6].selector = @selector(enuToECFWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDoubleArray:);
+  methods[7].selector = @selector(createPhiTransformWithDouble:withDouble:withDoubleArray2:);
+  methods[8].selector = @selector(createTransposedPhiTransformWithDouble:withDouble:withDoubleArray2:);
+  methods[9].selector = @selector(pointFromLonLatBearingWithDouble:withDouble:withDouble:withDouble:withDoubleArray:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "SEMIMAJOR_AXIS", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS, 0x18, -1, -1, -1, -1 },
+    { "FLATTENING", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING, 0x18, -1, -1, -1, -1 },
+    { "SEMIMINOR_AXIS", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS, 0x18, -1, -1, -1, -1 },
+    { "ECCENTRICITY", "D", .constantValue.asLong = 0, 0x18, -1, 13, -1, -1 },
+    { "PI_OVER_2", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2, 0x18, -1, -1, -1, -1 },
+    { "SEMIMAJOR_AXIS2", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2, 0x18, -1, -1, -1, -1 },
+    { "SEMIMINOR_AXIS2", "D", .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2, 0x18, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "ecfToLLA", "DDD[D", "llaToECF", "llaToENU", "DDDDDD[D", "enuToLLA", "ecfToENU", "enuToECF", "createPhiTransform", "DD[[D", "createTransposedPhiTransform", "pointFromLonLatBearing", "DDDD[D", &OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilGeoProjectionUtils = { "GeoProjectionUtils", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 10, 7, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilGeoProjectionUtils;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilGeoProjectionUtils class]) {
@@ -162,33 +206,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "ecfToLLAWithDouble:withDouble:withDouble:withDoubleArray:", "ecfToLLA", "[D", 0x19, NULL, NULL },
-    { "llaToECFWithDouble:withDouble:withDouble:withDoubleArray:", "llaToECF", "[D", 0x19, NULL, NULL },
-    { "llaToENUWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDoubleArray:", "llaToENU", "[D", 0x9, NULL, NULL },
-    { "enuToLLAWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDoubleArray:", "enuToLLA", "[D", 0x9, NULL, NULL },
-    { "ecfToENUWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDoubleArray:", "ecfToENU", "[D", 0x9, NULL, NULL },
-    { "enuToECFWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDoubleArray:", "enuToECF", "[D", 0x9, NULL, NULL },
-    { "createPhiTransformWithDouble:withDouble:withDoubleArray2:", "createPhiTransform", "[[D", 0xa, NULL, NULL },
-    { "createTransposedPhiTransformWithDouble:withDouble:withDoubleArray2:", "createTransposedPhiTransform", "[[D", 0xa, NULL, NULL },
-    { "pointFromLonLatBearingWithDouble:withDouble:withDouble:withDouble:withDoubleArray:", "pointFromLonLatBearing", "[D", 0x19, NULL, NULL },
-    { "init", "GeoProjectionUtils", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "SEMIMAJOR_AXIS", "SEMIMAJOR_AXIS", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS },
-    { "FLATTENING", "FLATTENING", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING },
-    { "SEMIMINOR_AXIS", "SEMIMINOR_AXIS", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS },
-    { "ECCENTRICITY", "ECCENTRICITY", 0x18, "D", &OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY, NULL, .constantValue.asLong = 0 },
-    { "PI_OVER_2", "PI_OVER_2", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2 },
-    { "SEMIMAJOR_AXIS2", "SEMIMAJOR_AXIS2", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2 },
-    { "SEMIMINOR_AXIS2", "SEMIMINOR_AXIS2", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilGeoProjectionUtils = { 2, "GeoProjectionUtils", "org.apache.lucene.util", NULL, 0x1, 10, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilGeoProjectionUtils;
+@end
+
+void OrgApacheLuceneUtilGeoProjectionUtils_init(OrgApacheLuceneUtilGeoProjectionUtils *self) {
+  NSObject_init(self);
 }
 
-@end
+OrgApacheLuceneUtilGeoProjectionUtils *new_OrgApacheLuceneUtilGeoProjectionUtils_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilGeoProjectionUtils, init)
+}
+
+OrgApacheLuceneUtilGeoProjectionUtils *create_OrgApacheLuceneUtilGeoProjectionUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilGeoProjectionUtils, init)
+}
 
 IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_ecfToLLAWithDouble_withDouble_withDouble_withDoubleArray_(jdouble x, jdouble y, jdouble z, IOSDoubleArray *lla) {
   OrgApacheLuceneUtilGeoProjectionUtils_initialize();
@@ -273,7 +303,7 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_llaToECFWithDouble_withDou
   else if (lat > OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2 && lat < 1.001 * OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2) {
     lat = OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2;
   }
-  JreAssert(((lat >= -OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2) || (lat <= OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2)), (@"org/apache/lucene/util/GeoProjectionUtils.java:132 condition failed: assert (lat >= -PI_OVER_2) || (lat <= PI_OVER_2);"));
+  JreAssert((lat >= -OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2) || (lat <= OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2), @"org/apache/lucene/util/GeoProjectionUtils.java:132 condition failed: assert (lat >= -PI_OVER_2) || (lat <= PI_OVER_2);");
   if (lon > JavaLangStrictMath_PI) {
     JreMinusAssignDoubleD(&lon, (2 * JavaLangStrictMath_PI));
   }
@@ -397,7 +427,10 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWith
   jdouble B = uSq / 1024.0 * (256.0 + uSq * (-128.0 + uSq * (74.0 - 47.0 * uSq)));
   jdouble sigma = dist / (OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS * A);
   jdouble sigmaP;
-  jdouble sinSigma, cosSigma, cos2SigmaM, deltaSigma;
+  jdouble sinSigma;
+  jdouble cosSigma;
+  jdouble cos2SigmaM;
+  jdouble deltaSigma;
   do {
     cos2SigmaM = JavaLangStrictMath_cosWithDouble_(2 * sig1 + sigma);
     sinSigma = JavaLangStrictMath_sinWithDouble_(sigma);
@@ -415,18 +448,6 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWith
   *IOSDoubleArray_GetRef(pt, 0) = lon + JavaLangStrictMath_toDegreesWithDouble_(lam);
   *IOSDoubleArray_GetRef(pt, 1) = JavaLangStrictMath_toDegreesWithDouble_(lat2);
   return pt;
-}
-
-void OrgApacheLuceneUtilGeoProjectionUtils_init(OrgApacheLuceneUtilGeoProjectionUtils *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneUtilGeoProjectionUtils *new_OrgApacheLuceneUtilGeoProjectionUtils_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilGeoProjectionUtils, init)
-}
-
-OrgApacheLuceneUtilGeoProjectionUtils *create_OrgApacheLuceneUtilGeoProjectionUtils_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilGeoProjectionUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilGeoProjectionUtils)

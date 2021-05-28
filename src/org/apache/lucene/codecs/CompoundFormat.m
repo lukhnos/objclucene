@@ -3,13 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/CompoundFormat.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/CompoundFormat.h"
 #include "org/apache/lucene/index/SegmentInfo.h"
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/IOContext.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/CompoundFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneCodecsCompoundFormat
 
@@ -36,12 +38,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CompoundFormat", NULL, 0x1, NULL, NULL },
-    { "getCompoundReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "getCompoundReader", "Lorg.apache.lucene.store.Directory;", 0x401, "Ljava.io.IOException;", NULL },
-    { "writeWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "write", "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreDirectory;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompoundFormat = { 2, "CompoundFormat", "org.apache.lucene.codecs", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getCompoundReaderWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:);
+  methods[2].selector = @selector(writeWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getCompoundReader", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "write" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompoundFormat = { "CompoundFormat", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompoundFormat;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstNoOutputs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstNoOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstNoOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstNoOutputs))
 #define OrgApacheLuceneUtilFstNoOutputs_
 
@@ -25,11 +31,10 @@
 
 /*!
  @brief A null FST <code>Outputs</code> implementation; use this if
- you just want to build an FSA.
+  you just want to build an FSA.
  */
 @interface OrgApacheLuceneUtilFstNoOutputs : OrgApacheLuceneUtilFstOutputs
-
-+ (id)NO_OUTPUT;
+@property (readonly, class, strong) id NO_OUTPUT NS_SWIFT_NAME(NO_OUTPUT);
 
 #pragma mark Public
 
@@ -64,15 +69,19 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstNoOutputs)
 
-inline id OrgApacheLuceneUtilFstNoOutputs_get_NO_OUTPUT();
+inline id OrgApacheLuceneUtilFstNoOutputs_get_NO_OUTPUT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstNoOutputs, NO_OUTPUT, id)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstNoOutputs *OrgApacheLuceneUtilFstNoOutputs_getSingleton();
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstNoOutputs *OrgApacheLuceneUtilFstNoOutputs_getSingleton(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstNoOutputs)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstNoOutputs")

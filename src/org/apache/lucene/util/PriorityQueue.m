@@ -10,6 +10,10 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/PriorityQueue must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilPriorityQueue () {
  @public
   jint size_;
@@ -117,7 +121,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPriorityQueue_downHeapWit
 
 - (jboolean)removeWithId:(id)element {
   for (jint i = 1; i <= size_; i++) {
-    if (IOSObjectArray_Get(nil_chk(heap_), i) == element) {
+    if (JreObjectEqualsEquals(IOSObjectArray_Get(nil_chk(heap_), i), element)) {
       IOSObjectArray_Set(heap_, i, IOSObjectArray_Get(heap_, size_));
       IOSObjectArray_Set(heap_, size_, nil);
       size_--;
@@ -150,30 +154,51 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPriorityQueue_downHeapWit
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "PriorityQueue", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withBoolean:", "PriorityQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x404, NULL, "(TT;TT;)Z" },
-    { "getSentinelObject", NULL, "TT;", 0x4, NULL, "()TT;" },
-    { "addWithId:", "add", "TT;", 0x11, NULL, "(TT;)TT;" },
-    { "insertWithOverflowWithId:", "insertWithOverflow", "TT;", 0x1, NULL, "(TT;)TT;" },
-    { "top", NULL, "TT;", 0x11, NULL, "()TT;" },
-    { "pop", NULL, "TT;", 0x11, NULL, "()TT;" },
-    { "updateTop", NULL, "TT;", 0x11, NULL, "()TT;" },
-    { "updateTopWithId:", "updateTop", "TT;", 0x11, NULL, "(TT;)TT;" },
-    { "size", NULL, "I", 0x11, NULL, NULL },
-    { "clear", NULL, "V", 0x11, NULL, NULL },
-    { "removeWithId:", "remove", "Z", 0x11, NULL, "(TT;)Z" },
-    { "upHeapWithInt:", "upHeap", "Z", 0x12, NULL, NULL },
-    { "downHeapWithInt:", "downHeap", "V", 0x12, NULL, NULL },
-    { "getHeapArray", NULL, "[Ljava.lang.Object;", 0x14, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x404, 2, 3, -1, 4, -1, -1 },
+    { NULL, "LNSObject;", 0x4, -1, -1, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x11, 6, 7, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 9, 7, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x11, -1, -1, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x11, -1, -1, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x11, -1, -1, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x11, 10, 7, -1, 8, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 11, 7, -1, 12, -1, -1 },
+    { NULL, "Z", 0x12, 13, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x12, 14, 0, -1, -1, -1, -1 },
+    { NULL, "[LNSObject;", 0x14, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(initWithInt:withBoolean:);
+  methods[2].selector = @selector(lessThanWithId:withId:);
+  methods[3].selector = @selector(getSentinelObject);
+  methods[4].selector = @selector(addWithId:);
+  methods[5].selector = @selector(insertWithOverflowWithId:);
+  methods[6].selector = @selector(top);
+  methods[7].selector = @selector(pop);
+  methods[8].selector = @selector(updateTop);
+  methods[9].selector = @selector(updateTopWithId:);
+  methods[10].selector = @selector(size);
+  methods[11].selector = @selector(clear);
+  methods[12].selector = @selector(removeWithId:);
+  methods[13].selector = @selector(upHeapWithInt:);
+  methods[14].selector = @selector(downHeapWithInt:);
+  methods[15].selector = @selector(getHeapArray);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "size_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "heap_", NULL, 0x12, "[Ljava.lang.Object;", NULL, "[TT;", .constantValue.asLong = 0 },
+    { "size_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "heap_", "[LNSObject;", .constantValue.asLong = 0, 0x12, -1, -1, 15, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPriorityQueue = { 2, "PriorityQueue", "org.apache.lucene.util", NULL, 0x401, 16, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "I", "IZ", "lessThan", "LNSObject;LNSObject;", "(TT;TT;)Z", "()TT;", "add", "LNSObject;", "(TT;)TT;", "insertWithOverflow", "updateTop", "remove", "(TT;)Z", "upHeap", "downHeap", "[TT;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPriorityQueue = { "PriorityQueue", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x401, 16, 3, -1, -1, -1, 16, -1 };
   return &_OrgApacheLuceneUtilPriorityQueue;
 }
 
@@ -200,7 +225,7 @@ void OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(OrgApacheLuceneUt
   JreStrongAssign(&self->heap_, h);
   self->maxSize_ = maxSize;
   if (prepopulate) {
-    id sentinel = [self getSentinelObject];
+    id sentinel = JreRetainedLocalValue([self getSentinelObject]);
     if (sentinel != nil) {
       IOSObjectArray_Set(self->heap_, 1, sentinel);
       for (jint i = 2; i < self->heap_->size_; i++) {

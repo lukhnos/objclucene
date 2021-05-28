@@ -11,6 +11,10 @@
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/search/spell/JaroWinklerDistance.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/JaroWinklerDistance must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSpellJaroWinklerDistance () {
  @public
   jfloat threshold_;
@@ -44,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (m == 0) {
     return 0.0f;
   }
-  jfloat j = ((m / ((jint) [((NSString *) nil_chk(s1)) length]) + m / ((jint) [((NSString *) nil_chk(s2)) length]) + (m - IOSIntArray_Get(mtp, 1)) / m)) / 3;
+  jfloat j = ((m / [((NSString *) nil_chk(s1)) java_length] + m / [((NSString *) nil_chk(s2)) java_length] + (m - IOSIntArray_Get(mtp, 1)) / m)) / 3;
   jfloat jw = j < [self getThreshold] ? j : j + JavaLangMath_minWithFloat_withFloat_(0.1f, 1.0f / IOSIntArray_Get(mtp, 3)) * IOSIntArray_Get(mtp, 2) * (1 - j);
   return jw;
 }
@@ -58,12 +62,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSUInteger)hash {
-  return 113 * JavaLangFloat_floatToIntBitsWithFloat_(threshold_) * ((jint) [[self getClass] hash]);
+  return 113 * JavaLangFloat_floatToIntBitsWithFloat_(threshold_) * ((jint) [[self java_getClass] hash]);
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
-  if (nil == obj || [self getClass] != (id) [obj getClass]) return false;
+  if (JreObjectEqualsEquals(self, obj)) return true;
+  if (nil == obj || !JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneSearchSpellJaroWinklerDistance *o = (OrgApacheLuceneSearchSpellJaroWinklerDistance *) cast_chk(obj, [OrgApacheLuceneSearchSpellJaroWinklerDistance class]);
   return JavaLangFloat_floatToIntBitsWithFloat_(o->threshold_) == JavaLangFloat_floatToIntBitsWithFloat_(self->threshold_);
 }
@@ -73,20 +77,33 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "JaroWinklerDistance", NULL, 0x1, NULL, NULL },
-    { "matchesWithNSString:withNSString:", "matches", "[I", 0x2, NULL, NULL },
-    { "getDistanceWithNSString:withNSString:", "getDistance", "F", 0x1, NULL, NULL },
-    { "setThresholdWithFloat:", "setThreshold", "V", 0x1, NULL, NULL },
-    { "getThreshold", NULL, "F", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[I", 0x2, 0, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(matchesWithNSString:withNSString:);
+  methods[2].selector = @selector(getDistanceWithNSString:withNSString:);
+  methods[3].selector = @selector(setThresholdWithFloat:);
+  methods[4].selector = @selector(getThreshold);
+  methods[5].selector = @selector(hash);
+  methods[6].selector = @selector(isEqual:);
+  methods[7].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "threshold_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "threshold_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellJaroWinklerDistance = { 2, "JaroWinklerDistance", "org.apache.lucene.search.spell", NULL, 0x1, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "matches", "LNSString;LNSString;", "getDistance", "setThreshold", "F", "hashCode", "equals", "LNSObject;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellJaroWinklerDistance = { "JaroWinklerDistance", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x1, 8, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellJaroWinklerDistance;
 }
 
@@ -106,8 +123,9 @@ OrgApacheLuceneSearchSpellJaroWinklerDistance *create_OrgApacheLuceneSearchSpell
 }
 
 IOSIntArray *OrgApacheLuceneSearchSpellJaroWinklerDistance_matchesWithNSString_withNSString_(OrgApacheLuceneSearchSpellJaroWinklerDistance *self, NSString *s1, NSString *s2) {
-  NSString *max, *min;
-  if (((jint) [((NSString *) nil_chk(s1)) length]) > ((jint) [((NSString *) nil_chk(s2)) length])) {
+  NSString *max;
+  NSString *min;
+  if ([((NSString *) nil_chk(s1)) java_length] > [((NSString *) nil_chk(s2)) java_length]) {
     max = s1;
     min = s2;
   }
@@ -115,14 +133,14 @@ IOSIntArray *OrgApacheLuceneSearchSpellJaroWinklerDistance_matchesWithNSString_w
     max = s2;
     min = s1;
   }
-  jint range = JavaLangMath_maxWithInt_withInt_(((jint) [max length]) / 2 - 1, 0);
-  IOSIntArray *matchIndexes = [IOSIntArray arrayWithLength:((jint) [min length])];
+  jint range = JavaLangMath_maxWithInt_withInt_(JreIntDiv([max java_length], 2) - 1, 0);
+  IOSIntArray *matchIndexes = [IOSIntArray arrayWithLength:[min java_length]];
   JavaUtilArrays_fillWithIntArray_withInt_(matchIndexes, -1);
-  IOSBooleanArray *matchFlags = [IOSBooleanArray arrayWithLength:((jint) [max length])];
+  IOSBooleanArray *matchFlags = [IOSBooleanArray arrayWithLength:[max java_length]];
   jint matches = 0;
-  for (jint mi = 0; mi < ((jint) [min length]); mi++) {
+  for (jint mi = 0; mi < [min java_length]; mi++) {
     jchar c1 = [min charAtWithInt:mi];
-    for (jint xi = JavaLangMath_maxWithInt_withInt_(mi - range, 0), xn = JavaLangMath_minWithInt_withInt_(mi + range + 1, ((jint) [max length])); xi < xn; xi++) {
+    for (jint xi = JavaLangMath_maxWithInt_withInt_(mi - range, 0), xn = JavaLangMath_minWithInt_withInt_(mi + range + 1, [max java_length]); xi < xn; xi++) {
       if (!IOSBooleanArray_Get(matchFlags, xi) && c1 == [max charAtWithInt:xi]) {
         *IOSIntArray_GetRef(matchIndexes, mi) = xi;
         *IOSBooleanArray_GetRef(matchFlags, xi) = true;
@@ -133,13 +151,13 @@ IOSIntArray *OrgApacheLuceneSearchSpellJaroWinklerDistance_matchesWithNSString_w
   }
   IOSCharArray *ms1 = [IOSCharArray arrayWithLength:matches];
   IOSCharArray *ms2 = [IOSCharArray arrayWithLength:matches];
-  for (jint i = 0, si = 0; i < ((jint) [min length]); i++) {
+  for (jint i = 0, si = 0; i < [min java_length]; i++) {
     if (IOSIntArray_Get(matchIndexes, i) != -1) {
       *IOSCharArray_GetRef(ms1, si) = [min charAtWithInt:i];
       si++;
     }
   }
-  for (jint i = 0, si = 0; i < ((jint) [max length]); i++) {
+  for (jint i = 0, si = 0; i < [max java_length]; i++) {
     if (IOSBooleanArray_Get(matchFlags, i)) {
       *IOSCharArray_GetRef(ms2, si) = [max charAtWithInt:i];
       si++;
@@ -152,7 +170,7 @@ IOSIntArray *OrgApacheLuceneSearchSpellJaroWinklerDistance_matchesWithNSString_w
     }
   }
   jint prefix = 0;
-  for (jint mi = 0; mi < ((jint) [min length]); mi++) {
+  for (jint mi = 0; mi < [min java_length]; mi++) {
     if ([s1 charAtWithInt:mi] == [s2 charAtWithInt:mi]) {
       prefix++;
     }
@@ -160,7 +178,7 @@ IOSIntArray *OrgApacheLuceneSearchSpellJaroWinklerDistance_matchesWithNSString_w
       break;
     }
   }
-  return [IOSIntArray arrayWithInts:(jint[]){ matches, transpositions / 2, prefix, ((jint) [max length]) } count:4];
+  return [IOSIntArray arrayWithInts:(jint[]){ matches, JreIntDiv(transpositions, 2), prefix, [max java_length] } count:4];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellJaroWinklerDistance)

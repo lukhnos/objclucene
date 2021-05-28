@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestSortedInputIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestSortedInputIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestSortedInputIterator || defined(INCLUDE_OrgApacheLuceneSearchSuggestSortedInputIterator))
 #define OrgApacheLuceneSearchSuggestSortedInputIterator_
 
@@ -38,16 +44,16 @@
 /*!
  @brief Creates a new sorted wrapper, using <code>BytesRef.getUTF8SortedAsUnicodeComparator</code>
   for
- sorting.
+  sorting.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
 
 /*!
  @brief Creates a new sorted wrapper, sorting by BytesRef
- (ascending) then cost (ascending).
+  (ascending) then cost (ascending).
  */
-- (instancetype)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source
-                                           withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source
+                                                     withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
 - (id<JavaUtilSet>)contexts;
 
@@ -92,6 +98,10 @@
                                                        withJavaUtilSet:(id<JavaUtilSet>)contexts
                                                               withLong:(jlong)weight;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestSortedInputIterator)
@@ -112,4 +122,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestSortedInputIterator")

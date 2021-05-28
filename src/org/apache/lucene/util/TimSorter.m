@@ -10,6 +10,10 @@
 #include "org/apache/lucene/util/Sorter.h"
 #include "org/apache/lucene/util/TimSorter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/TimSorter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilTimSorter
 
 + (jint)MINRUN {
@@ -62,7 +66,7 @@
 
 - (jint)nextRun {
   jint runBase = [self runEndWithInt:0];
-  JreAssert((runBase < to_), (@"org/apache/lucene/util/TimSorter.java:102 condition failed: assert runBase < to;"));
+  JreAssert(runBase < to_, @"org/apache/lucene/util/TimSorter.java:102 condition failed: assert runBase < to;");
   if (runBase == to_ - 1) {
     return 1;
   }
@@ -124,7 +128,7 @@
 }
 
 - (void)mergeAtWithInt:(jint)n {
-  JreAssert((stackSize_ >= 2), (@"org/apache/lucene/util/TimSorter.java:168 condition failed: assert stackSize >= 2;"));
+  JreAssert(stackSize_ >= 2, @"org/apache/lucene/util/TimSorter.java:168 condition failed: assert stackSize >= 2;");
   [self mergeWithInt:[self runBaseWithInt:n + 1] withInt:[self runBaseWithInt:n] withInt:[self runEndWithInt:n]];
   for (jint j = n + 1; j > 0; --j) {
     [self setRunEndWithInt:j withInt:[self runEndWithInt:j - 1]];
@@ -164,7 +168,7 @@
   }
   while ([self runEndWithInt:0] < to);
   [self exhaustStack];
-  JreAssert(([self runEndWithInt:0] == to), (@"org/apache/lucene/util/TimSorter.java:204 condition failed: assert runEnd(0) == to;"));
+  JreAssert([self runEndWithInt:0] == to, @"org/apache/lucene/util/TimSorter.java:204 condition failed: assert runEnd(0) == to;");
 }
 
 - (void)doRotateWithInt:(jint)lo
@@ -205,11 +209,13 @@
 - (void)mergeLoWithInt:(jint)lo
                withInt:(jint)mid
                withInt:(jint)hi {
-  JreAssert(([self compareWithInt:lo withInt:mid] > 0), (@"org/apache/lucene/util/TimSorter.java:239 condition failed: assert compare(lo, mid) > 0;"));
+  JreAssert([self compareWithInt:lo withInt:mid] > 0, @"org/apache/lucene/util/TimSorter.java:239 condition failed: assert compare(lo, mid) > 0;");
   jint len1 = mid - lo;
   [self saveWithInt:lo withInt:len1];
   [self copy__WithInt:mid withInt:lo];
-  jint i = 0, j = mid + 1, dest = lo + 1;
+  jint i = 0;
+  jint j = mid + 1;
+  jint dest = lo + 1;
   for (; ; ) {
     for (jint count = 0; count < OrgApacheLuceneUtilTimSorter_MIN_GALLOP; ) {
       if (i >= len1 || j >= hi) {
@@ -234,17 +240,19 @@
   for (; i < len1; ++dest) {
     [self restoreWithInt:i++ withInt:dest];
   }
-  JreAssert((j == dest), (@"org/apache/lucene/util/TimSorter.java:266 condition failed: assert j == dest;"));
+  JreAssert(j == dest, @"org/apache/lucene/util/TimSorter.java:266 condition failed: assert j == dest;");
 }
 
 - (void)mergeHiWithInt:(jint)lo
                withInt:(jint)mid
                withInt:(jint)hi {
-  JreAssert(([self compareWithInt:mid - 1 withInt:hi - 1] > 0), (@"org/apache/lucene/util/TimSorter.java:270 condition failed: assert compare(mid - 1, hi - 1) > 0;"));
+  JreAssert([self compareWithInt:mid - 1 withInt:hi - 1] > 0, @"org/apache/lucene/util/TimSorter.java:270 condition failed: assert compare(mid - 1, hi - 1) > 0;");
   jint len2 = hi - mid;
   [self saveWithInt:mid withInt:len2];
   [self copy__WithInt:mid - 1 withInt:hi - 1];
-  jint i = mid - 2, j = len2 - 1, dest = hi - 2;
+  jint i = mid - 2;
+  jint j = len2 - 1;
+  jint dest = hi - 2;
   for (; ; ) {
     for (jint count = 0; count < OrgApacheLuceneUtilTimSorter_MIN_GALLOP; ) {
       if (i < lo || j < 0) {
@@ -269,7 +277,7 @@
   for (; j >= 0; --dest) {
     [self restoreWithInt:j-- withInt:dest];
   }
-  JreAssert((i == dest), (@"org/apache/lucene/util/TimSorter.java:297 condition failed: assert i == dest;"));
+  JreAssert(i == dest, @"org/apache/lucene/util/TimSorter.java:297 condition failed: assert i == dest;");
 }
 
 - (jint)lowerSavedWithInt:(jint)from
@@ -311,7 +319,8 @@
 - (jint)lowerSaved3WithInt:(jint)from
                    withInt:(jint)to
                    withInt:(jint)val {
-  jint f = from, t = f + 1;
+  jint f = from;
+  jint t = f + 1;
   while (t < to) {
     if ([self compareSavedWithInt:val withInt:t] <= 0) {
       return [self lowerSavedWithInt:f withInt:t withInt:val];
@@ -326,7 +335,8 @@
 - (jint)upperSaved3WithInt:(jint)from
                    withInt:(jint)to
                    withInt:(jint)val {
-  jint f = to - 1, t = to;
+  jint f = to - 1;
+  jint t = to;
   while (f > from) {
     if ([self compareSavedWithInt:val withInt:f] >= 0) {
       return [self upperSavedWithInt:f withInt:t withInt:val];
@@ -369,45 +379,75 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TimSorter", NULL, 0x4, NULL, NULL },
-    { "minRunWithInt:", "minRun", "I", 0x8, NULL, NULL },
-    { "runLenWithInt:", "runLen", "I", 0x0, NULL, NULL },
-    { "runBaseWithInt:", "runBase", "I", 0x0, NULL, NULL },
-    { "runEndWithInt:", "runEnd", "I", 0x0, NULL, NULL },
-    { "setRunEndWithInt:withInt:", "setRunEnd", "V", 0x0, NULL, NULL },
-    { "pushRunLenWithInt:", "pushRunLen", "V", 0x0, NULL, NULL },
-    { "nextRun", NULL, "I", 0x0, NULL, NULL },
-    { "ensureInvariants", NULL, "V", 0x0, NULL, NULL },
-    { "exhaustStack", NULL, "V", 0x0, NULL, NULL },
-    { "resetWithInt:withInt:", "reset", "V", 0x0, NULL, NULL },
-    { "mergeAtWithInt:", "mergeAt", "V", 0x0, NULL, NULL },
-    { "mergeWithInt:withInt:withInt:", "merge", "V", 0x0, NULL, NULL },
-    { "sortWithInt:withInt:", "sort", "V", 0x1, NULL, NULL },
-    { "doRotateWithInt:withInt:withInt:", "doRotate", "V", 0x0, NULL, NULL },
-    { "mergeLoWithInt:withInt:withInt:", "mergeLo", "V", 0x0, NULL, NULL },
-    { "mergeHiWithInt:withInt:withInt:", "mergeHi", "V", 0x0, NULL, NULL },
-    { "lowerSavedWithInt:withInt:withInt:", "lowerSaved", "I", 0x0, NULL, NULL },
-    { "upperSavedWithInt:withInt:withInt:", "upperSaved", "I", 0x0, NULL, NULL },
-    { "lowerSaved3WithInt:withInt:withInt:", "lowerSaved3", "I", 0x0, NULL, NULL },
-    { "upperSaved3WithInt:withInt:withInt:", "upperSaved3", "I", 0x0, NULL, NULL },
-    { "copy__WithInt:withInt:", "copy", "V", 0x404, NULL, NULL },
-    { "saveWithInt:withInt:", "save", "V", 0x404, NULL, NULL },
-    { "restoreWithInt:withInt:", "restore", "V", 0x404, NULL, NULL },
-    { "compareSavedWithInt:withInt:", "compareSaved", "I", 0x404, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, 1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 2, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 3, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 4, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 7, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 8, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 9, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 13, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 14, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 15, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 16, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 17, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 18, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 19, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x404, 20, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x404, 21, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x404, 22, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x404, 23, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(minRunWithInt:);
+  methods[2].selector = @selector(runLenWithInt:);
+  methods[3].selector = @selector(runBaseWithInt:);
+  methods[4].selector = @selector(runEndWithInt:);
+  methods[5].selector = @selector(setRunEndWithInt:withInt:);
+  methods[6].selector = @selector(pushRunLenWithInt:);
+  methods[7].selector = @selector(nextRun);
+  methods[8].selector = @selector(ensureInvariants);
+  methods[9].selector = @selector(exhaustStack);
+  methods[10].selector = @selector(resetWithInt:withInt:);
+  methods[11].selector = @selector(mergeAtWithInt:);
+  methods[12].selector = @selector(mergeWithInt:withInt:withInt:);
+  methods[13].selector = @selector(sortWithInt:withInt:);
+  methods[14].selector = @selector(doRotateWithInt:withInt:withInt:);
+  methods[15].selector = @selector(mergeLoWithInt:withInt:withInt:);
+  methods[16].selector = @selector(mergeHiWithInt:withInt:withInt:);
+  methods[17].selector = @selector(lowerSavedWithInt:withInt:withInt:);
+  methods[18].selector = @selector(upperSavedWithInt:withInt:withInt:);
+  methods[19].selector = @selector(lowerSaved3WithInt:withInt:withInt:);
+  methods[20].selector = @selector(upperSaved3WithInt:withInt:withInt:);
+  methods[21].selector = @selector(copy__WithInt:withInt:);
+  methods[22].selector = @selector(saveWithInt:withInt:);
+  methods[23].selector = @selector(restoreWithInt:withInt:);
+  methods[24].selector = @selector(compareSavedWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MINRUN", "MINRUN", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilTimSorter_MINRUN },
-    { "THRESHOLD", "THRESHOLD", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilTimSorter_THRESHOLD },
-    { "STACKSIZE", "STACKSIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilTimSorter_STACKSIZE },
-    { "MIN_GALLOP", "MIN_GALLOP", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilTimSorter_MIN_GALLOP },
-    { "maxTempSlots_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minRun_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "to_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "stackSize_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "runEnds_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "MINRUN", "I", .constantValue.asInt = OrgApacheLuceneUtilTimSorter_MINRUN, 0x18, -1, -1, -1, -1 },
+    { "THRESHOLD", "I", .constantValue.asInt = OrgApacheLuceneUtilTimSorter_THRESHOLD, 0x18, -1, -1, -1, -1 },
+    { "STACKSIZE", "I", .constantValue.asInt = OrgApacheLuceneUtilTimSorter_STACKSIZE, 0x18, -1, -1, -1, -1 },
+    { "MIN_GALLOP", "I", .constantValue.asInt = OrgApacheLuceneUtilTimSorter_MIN_GALLOP, 0x18, -1, -1, -1, -1 },
+    { "maxTempSlots_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "minRun_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "to_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "stackSize_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "runEnds_", "[I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilTimSorter = { 2, "TimSorter", "org.apache.lucene.util", NULL, 0x401, 25, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "minRun", "runLen", "runBase", "runEnd", "setRunEnd", "II", "pushRunLen", "reset", "mergeAt", "merge", "III", "sort", "doRotate", "mergeLo", "mergeHi", "lowerSaved", "upperSaved", "lowerSaved3", "upperSaved3", "copy", "save", "restore", "compareSaved" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilTimSorter = { "TimSorter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x401, 25, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilTimSorter;
 }
 
@@ -421,7 +461,7 @@ void OrgApacheLuceneUtilTimSorter_initWithInt_(OrgApacheLuceneUtilTimSorter *sel
 
 jint OrgApacheLuceneUtilTimSorter_minRunWithInt_(jint length) {
   OrgApacheLuceneUtilTimSorter_initialize();
-  JreAssert((length >= OrgApacheLuceneUtilTimSorter_MINRUN), (@"org/apache/lucene/util/TimSorter.java:64 condition failed: assert length >= MINRUN;"));
+  JreAssert(length >= OrgApacheLuceneUtilTimSorter_MINRUN, @"org/apache/lucene/util/TimSorter.java:64 condition failed: assert length >= MINRUN;");
   jint n = length;
   jint r = 0;
   while (n >= 64) {
@@ -429,7 +469,7 @@ jint OrgApacheLuceneUtilTimSorter_minRunWithInt_(jint length) {
     JreURShiftAssignInt(&n, 1);
   }
   jint minRun = n + r;
-  JreAssert((minRun >= OrgApacheLuceneUtilTimSorter_MINRUN && minRun <= OrgApacheLuceneUtilTimSorter_THRESHOLD), (@"org/apache/lucene/util/TimSorter.java:72 condition failed: assert minRun >= MINRUN && minRun <= THRESHOLD;"));
+  JreAssert(minRun >= OrgApacheLuceneUtilTimSorter_MINRUN && minRun <= OrgApacheLuceneUtilTimSorter_THRESHOLD, @"org/apache/lucene/util/TimSorter.java:72 condition failed: assert minRun >= MINRUN && minRun <= THRESHOLD;");
   return minRun;
 }
 

@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/index/MultiReader.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
@@ -11,6 +10,10 @@
 #include "org/apache/lucene/index/BaseCompositeReader.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/MultiReader.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MultiReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexMultiReader () {
  @public
@@ -53,16 +56,23 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReaderArray:", "MultiReader", NULL, 0x81, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexIndexReaderArray:withBoolean:", "MultiReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "doClose", NULL, "V", 0x24, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x81, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, 1, -1, -1, -1 },
+    { NULL, "V", 0x24, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReaderArray:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexIndexReaderArray:withBoolean:);
+  methods[2].selector = @selector(doClose);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "closeSubReaders_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "closeSubReaders_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.IndexReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiReader = { 2, "MultiReader", "org.apache.lucene.index", NULL, 0x1, 3, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/index/BaseCompositeReader<Lorg/apache/lucene/index/IndexReader;>;" };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "[LOrgApacheLuceneIndexIndexReader;Z", "Lorg/apache/lucene/index/BaseCompositeReader<Lorg/apache/lucene/index/IndexReader;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiReader = { "MultiReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, 3, -1 };
   return &_OrgApacheLuceneIndexMultiReader;
 }
 
@@ -81,7 +91,7 @@ OrgApacheLuceneIndexMultiReader *create_OrgApacheLuceneIndexMultiReader_initWith
 }
 
 void OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_(OrgApacheLuceneIndexMultiReader *self, IOSObjectArray *subReaders, jboolean closeSubReaders) {
-  OrgApacheLuceneIndexBaseCompositeReader_initWithOrgApacheLuceneIndexIndexReaderArray_(self, [((IOSObjectArray *) nil_chk(subReaders)) clone]);
+  OrgApacheLuceneIndexBaseCompositeReader_initWithOrgApacheLuceneIndexIndexReaderArray_(self, [((IOSObjectArray *) nil_chk(subReaders)) java_clone]);
   self->closeSubReaders_ = closeSubReaders;
   if (!closeSubReaders) {
     for (jint i = 0; i < subReaders->size_; i++) {

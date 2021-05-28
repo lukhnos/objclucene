@@ -11,6 +11,10 @@
 #include "org/apache/lucene/analysis/charfilter/BaseCharFilter.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/charfilter/BaseCharFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisCharfilterBaseCharFilter () {
  @public
   IOSIntArray *offsets_;
@@ -62,7 +66,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterBaseCharFilter, diffs_, IOS
     JreStrongAssign(&offsets_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_(offsets_));
     JreStrongAssign(&diffs_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_(diffs_));
   }
-  JreAssert(((size_ == 0 || off >= IOSIntArray_Get(nil_chk(offsets_), size_ - 1))), (JreStrcat("$ICI$IC$C$", @"Offset #", size_, '(', off, @") is less than the last recorded offset ", IOSIntArray_Get(nil_chk(offsets_), size_ - 1), 0x000a, JavaUtilArrays_toStringWithIntArray_(offsets_), 0x000a, JavaUtilArrays_toStringWithIntArray_(diffs_))));
+  JreAssert((size_ == 0 || off >= IOSIntArray_Get(nil_chk(offsets_), size_ - 1)), JreStrcat("$ICI$IC$C$", @"Offset #", size_, '(', off, @") is less than the last recorded offset ", IOSIntArray_Get(nil_chk(offsets_), size_ - 1), 0x000a, JavaUtilArrays_toStringWithIntArray_(offsets_), 0x000a, JavaUtilArrays_toStringWithIntArray_(diffs_)));
   if (size_ == 0 || off != IOSIntArray_Get(nil_chk(offsets_), size_ - 1)) {
     *IOSIntArray_GetRef(nil_chk(offsets_), size_) = off;
     *IOSIntArray_GetRef(nil_chk(diffs_), size_++) = cumulativeDiff;
@@ -79,18 +83,27 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterBaseCharFilter, diffs_, IOS
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaIoReader:", "BaseCharFilter", NULL, 0x1, NULL, NULL },
-    { "correctWithInt:", "correct", "I", 0x4, NULL, NULL },
-    { "getLastCumulativeDiff", NULL, "I", 0x4, NULL, NULL },
-    { "addOffCorrectMapWithInt:withInt:", "addOffCorrectMap", "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaIoReader:);
+  methods[1].selector = @selector(correctWithInt:);
+  methods[2].selector = @selector(getLastCumulativeDiff);
+  methods[3].selector = @selector(addOffCorrectMapWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "offsets_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "diffs_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "size_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "offsets_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "diffs_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "size_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharfilterBaseCharFilter = { 2, "BaseCharFilter", "org.apache.lucene.analysis.charfilter", NULL, 0x401, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoReader;", "correct", "I", "addOffCorrectMap", "II" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharfilterBaseCharFilter = { "BaseCharFilter", "org.apache.lucene.analysis.charfilter", ptrTable, methods, fields, 7, 0x401, 4, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCharfilterBaseCharFilter;
 }
 

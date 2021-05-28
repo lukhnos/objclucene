@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilLSBRadixSorter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilLSBRadixSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilLSBRadixSorter || defined(INCLUDE_OrgApacheLuceneUtilLSBRadixSorter))
 #define OrgApacheLuceneUtilLSBRadixSorter_
 
@@ -31,20 +37,28 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilLSBRadixSorter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilLSBRadixSorter_init(OrgApacheLuceneUtilLSBRadixSorter *self);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilLSBRadixSorter_initPackagePrivate(OrgApacheLuceneUtilLSBRadixSorter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilLSBRadixSorter *new_OrgApacheLuceneUtilLSBRadixSorter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilLSBRadixSorter *new_OrgApacheLuceneUtilLSBRadixSorter_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilLSBRadixSorter *create_OrgApacheLuceneUtilLSBRadixSorter_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilLSBRadixSorter *create_OrgApacheLuceneUtilLSBRadixSorter_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilLSBRadixSorter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilLSBRadixSorter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadSpanUtil
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPayloadsPayloadSpanUtil_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadSpanUtil || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadSpanUtil))
 #define OrgApacheLuceneSearchPayloadsPayloadSpanUtil_
 
@@ -23,26 +29,29 @@
 /*!
  @brief Experimental class to get set of payloads for most standard Lucene queries.
  Operates like Highlighter - IndexReader should only contain doc of interest,
- best to use MemoryIndex.
+  best to use MemoryIndex.
  */
 @interface OrgApacheLuceneSearchPayloadsPayloadSpanUtil : NSObject
 
 #pragma mark Public
 
 /*!
- @param context
- that contains doc with payloads to extract
+ @param context that contains doc with payloads to extract
  - seealso: IndexReader#getContext()
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context;
 
 /*!
  @brief Query should be rewritten for wild/fuzzy support.
  @param query rewritten query
  @return payloads Collection
- @throws IOException if there is a low-level I/O error
+ @throw IOExceptionif there is a low-level I/O error
  */
 - (id<JavaUtilCollection>)getPayloadsForQueryWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -58,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadSpanUtil)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadSpanUtil")

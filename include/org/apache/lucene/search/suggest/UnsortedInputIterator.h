@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestUnsortedInputIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestUnsortedInputIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestUnsortedInputIterator || defined(INCLUDE_OrgApacheLuceneSearchSuggestUnsortedInputIterator))
 #define OrgApacheLuceneSearchSuggestUnsortedInputIterator_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief This wrapper buffers the incoming elements and makes sure they are in
- random order.
+  random order.
  */
 @interface OrgApacheLuceneSearchSuggestUnsortedInputIterator : OrgApacheLuceneSearchSuggestBufferedInputIterator
 
@@ -34,9 +40,9 @@
 
 /*!
  @brief Creates a new iterator, wrapping the specified iterator and
- returning elements in a random order.
+  returning elements in a random order.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
 
 - (id<JavaUtilSet>)contexts;
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestUnsortedInputIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestUnsortedInputIterator")

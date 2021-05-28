@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentDocument
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentDocument_) && (INCLUDE_ALL_OrgApacheLuceneDocumentDocument || defined(INCLUDE_OrgApacheLuceneDocumentDocument))
 #define OrgApacheLuceneDocumentDocument_
 
@@ -22,18 +28,20 @@
 
 @class IOSObjectArray;
 @class OrgApacheLuceneUtilBytesRef;
+@protocol JavaUtilFunctionConsumer;
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
+@protocol JavaUtilSpliterator;
 @protocol OrgApacheLuceneIndexIndexableField;
 
 /*!
  @brief Documents are the unit of indexing and search.
  A Document is a set of fields.  Each field has a name and a textual value.
- A field may be <code>stored</code> with the document, in which
- case it is returned with search hits on the document.  Thus each document
- should typically contain one or more stored fields which uniquely identify
- it.
- <p>Note that fields which are <i>not</i> <code>stored</code> are
+  A field may be <code>stored</code> with the document, in which
+  case it is returned with search hits on the document.  Thus each document
+  should typically contain one or more stored fields which uniquely identify
+  it. 
+ <p>Note that fields which are <i>not</i> <code>stored</code> are 
  <i>not</i> available in documents retrieved from the index, e.g. with <code>ScoreDoc.doc</code>
   or <code>IndexReader.document(int)</code>.
  */
@@ -44,38 +52,37 @@
 /*!
  @brief Constructs a new document with no fields.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief <p>Adds a field to a document.
  Several fields may be added with
- the same name.  In this case, if the fields are indexed, their text is
- treated as though appended for the purposes of search.</p>
- <p> Note that add like the removeField(s) methods only makes sense 
- prior to adding a document to an index. These methods cannot
- be used to change the content of an existing index! In order to achieve this,
- a document has to be deleted from an index and a new changed version of that
- document has to be added.</p>
+  the same name.  In this case, if the fields are indexed, their text is
+  treated as though appended for the purposes of search.</p>
+  <p> Note that add like the removeField(s) methods only makes sense 
+  prior to adding a document to an index. These methods cannot
+  be used to change the content of an existing index! In order to achieve this,
+  a document has to be deleted from an index and a new changed version of that
+  document has to be added.</p>
  */
 - (void)addWithOrgApacheLuceneIndexIndexableField:(id<OrgApacheLuceneIndexIndexableField>)field;
 
 /*!
  @brief Returns the string value of the field with the given name if any exist in
- this document, or null.
- If multiple fields exist with this name, this
- method returns the first value added. If only binary fields with this name
- exist, returns null.
- For <code>IntField</code>, <code>LongField</code>, <code>FloatField</code>
+  this document, or null.If multiple fields exist with this name, this
+  method returns the first value added.
+ If only binary fields with this name
+  exist, returns null.
+  For <code>IntField</code>, <code>LongField</code>, <code>FloatField</code>
   and <code>DoubleField</code> it returns the string value of the number. If you want
- the actual numeric field instance back, use <code>getField</code>.
+  the actual numeric field instance back, use <code>getField</code>.
  */
 - (NSString *)getWithNSString:(NSString *)name;
 
 /*!
  @brief Returns an array of bytes for the first (or only) field that has the name
- specified as the method parameter.
- This method will return <code>null</code>
- if no binary fields with the specified name are available.
+  specified as the method parameter.This method will return <code>null</code>
+  if no binary fields with the specified name are available.
  There may be non-binary fields with the same name.
  @param name the name of the field.
  @return a <code>BytesRef</code> containing the binary field value or <code>null</code>
@@ -84,10 +91,10 @@
 
 /*!
  @brief Returns an array of byte arrays for of the fields that have the name specified
- as the method parameter.
- This method returns an empty
- array when there are no matching fields.  It never
- returns null.
+  as the method parameter.This method returns an empty
+  array when there are no matching fields.
+ It never
+  returns null.
  @param name the name of the field
  @return a <code>BytesRef[]</code> of binary field values
  */
@@ -95,17 +102,16 @@
 
 /*!
  @brief Returns a field with the given name if any exist in this document, or
- null.
- If multiple fields exists with this name, this method returns the
- first value added.
+  null.If multiple fields exists with this name, this method returns the
+  first value added.
  */
 - (id<OrgApacheLuceneIndexIndexableField>)getFieldWithNSString:(NSString *)name;
 
 /*!
  @brief Returns a List of all the fields in a document.
- <p>Note that fields which are <i>not</i> stored are
+ <p>Note that fields which are <i>not</i> stored are 
  <i>not</i> available in documents retrieved from the
- index, e.g. <code>IndexSearcher.doc(int)</code> or <code>IndexReader.document(int)</code>
+  index, e.g. <code>IndexSearcher.doc(int)</code> or <code>IndexReader.document(int)</code>
  .
  */
 - (id<JavaUtilList>)getFields;
@@ -113,7 +119,7 @@
 /*!
  @brief Returns an array of <code>IndexableField</code>s with the given name.
  This method returns an empty array when there are no
- matching fields.  It never returns null.
+  matching fields.  It never returns null.
  @param name the name of the field
  @return a <code>IndexableField[]</code> array
  */
@@ -122,10 +128,10 @@
 /*!
  @brief Returns an array of values of the field specified as the method parameter.
  This method returns an empty array when there are no
- matching fields.  It never returns null.
- For <code>IntField</code>, <code>LongField</code>, <code>FloatField</code>
+  matching fields.  It never returns null.
+  For <code>IntField</code>, <code>LongField</code>, <code>FloatField</code>
   and <code>DoubleField</code> it returns the string value of the number. If you want
- the actual numeric field instances back, use <code>getFields</code>.
+  the actual numeric field instances back, use <code>getFields</code>.
  @param name the name of the field
  @return a <code>String[]</code> of field values
  */
@@ -136,23 +142,23 @@
 /*!
  @brief <p>Removes field with the specified name from the document.
  If multiple fields exist with this name, this method removes the first field that has been added.
- If there is no field with the specified name, the document remains unchanged.</p>
- <p> Note that the removeField(s) methods like the add method only make sense 
- prior to adding a document to an index. These methods cannot
- be used to change the content of an existing index! In order to achieve this,
- a document has to be deleted from an index and a new changed version of that
- document has to be added.</p>
+  If there is no field with the specified name, the document remains unchanged.</p>
+  <p> Note that the removeField(s) methods like the add method only make sense 
+  prior to adding a document to an index. These methods cannot
+  be used to change the content of an existing index! In order to achieve this,
+  a document has to be deleted from an index and a new changed version of that
+  document has to be added.</p>
  */
 - (void)removeFieldWithNSString:(NSString *)name;
 
 /*!
  @brief <p>Removes all fields with the given name from the document.
  If there is no field with the specified name, the document remains unchanged.</p>
- <p> Note that the removeField(s) methods like the add method only make sense 
- prior to adding a document to an index. These methods cannot
- be used to change the content of an existing index! In order to achieve this,
- a document has to be deleted from an index and a new changed version of that
- document has to be added.</p>
+  <p> Note that the removeField(s) methods like the add method only make sense 
+  prior to adding a document to an index. These methods cannot
+  be used to change the content of an existing index! In order to achieve this,
+  a document has to be deleted from an index and a new changed version of that
+  document has to be added.</p>
  */
 - (void)removeFieldsWithNSString:(NSString *)name;
 
@@ -169,12 +175,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentDocument)
 
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentDocument_init(OrgApacheLuceneDocumentDocument *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentDocument *new_OrgApacheLuceneDocumentDocument_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDocument *new_OrgApacheLuceneDocumentDocument_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentDocument *create_OrgApacheLuceneDocumentDocument_init();
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDocument *create_OrgApacheLuceneDocumentDocument_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentDocument)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentDocument")

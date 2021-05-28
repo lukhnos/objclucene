@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_
 
@@ -31,24 +37,22 @@
 /*!
  @brief A <code>SlopQueryNode</code> represents phrase query with a slop.
  From Lucene FAQ: Is there a way to use a proximity operator (like near or
- within) with Lucene? There is a variable called slop that allows you to
- perform NEAR/WITHIN-like queries. By default, slop is set to 0 so that only
- exact phrases will match. When using TextParser you can use this syntax to
- specify the slop: "doug cutting"~2 will find documents that contain
- "doug cutting" as well as ones that contain "cutting doug".
+  within) with Lucene? There is a variable called slop that allows you to
+  perform NEAR/WITHIN-like queries. By default, slop is set to 0 so that only
+  exact phrases will match. When using TextParser you can use this syntax to
+  specify the slop: "doug cutting"~2 will find documents that contain
+  "doug cutting" as well as ones that contain "cutting doug".
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode >
 
 #pragma mark Public
 
 /*!
- @param query
- - QueryNode Tree with the phrase
- @param value
- - slop value
+ @param query - QueryNode Tree with the phrase
+ @param value - slop value
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
-                                                                     withInt:(jint)value;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
+                                                                               withInt:(jint)value;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -58,11 +62,17 @@
 
 - (jint)getValue;
 
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
+
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -78,4 +88,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryN
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode")

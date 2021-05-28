@@ -4,6 +4,7 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -14,6 +15,10 @@
 #include "org/apache/lucene/index/DocValuesType.h"
 #include "org/apache/lucene/index/IndexOptions.h"
 #include "org/apache/lucene/util/NumericUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/FieldType must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneDocumentFieldType () {
  @public
@@ -165,7 +170,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     [result appendWithNSString:@"stored"];
   }
   if (indexOptions_ != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
-    if ([result length] > 0) [result appendWithNSString:@","];
+    if ([result java_length] > 0) [result appendWithNSString:@","];
     [result appendWithNSString:@"indexed"];
     if ([self tokenized]) {
       [result appendWithNSString:@",tokenized"];
@@ -197,7 +202,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
   }
   if (docValuesType_ != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE)) {
-    if ([result length] > 0) {
+    if ([result java_length] > 0) {
       [result appendWithNSString:@","];
     }
     [result appendWithNSString:@"docValuesType="];
@@ -236,9 +241,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneDocumentFieldType *other = (OrgApacheLuceneDocumentFieldType *) cast_chk(obj, [OrgApacheLuceneDocumentFieldType class]);
   if (docValuesType_ != other->docValuesType_) return false;
   if (indexOptions_ != other->indexOptions_) return false;
@@ -262,53 +267,86 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneDocumentFieldType:", "FieldType", NULL, 0x1, NULL, NULL },
-    { "init", "FieldType", NULL, 0x1, NULL, NULL },
-    { "checkIfFrozen", NULL, "V", 0x4, NULL, NULL },
-    { "freeze", NULL, "V", 0x1, NULL, NULL },
-    { "stored", NULL, "Z", 0x1, NULL, NULL },
-    { "setStoredWithBoolean:", "setStored", "V", 0x1, NULL, NULL },
-    { "tokenized", NULL, "Z", 0x1, NULL, NULL },
-    { "setTokenizedWithBoolean:", "setTokenized", "V", 0x1, NULL, NULL },
-    { "storeTermVectors", NULL, "Z", 0x1, NULL, NULL },
-    { "setStoreTermVectorsWithBoolean:", "setStoreTermVectors", "V", 0x1, NULL, NULL },
-    { "storeTermVectorOffsets", NULL, "Z", 0x1, NULL, NULL },
-    { "setStoreTermVectorOffsetsWithBoolean:", "setStoreTermVectorOffsets", "V", 0x1, NULL, NULL },
-    { "storeTermVectorPositions", NULL, "Z", 0x1, NULL, NULL },
-    { "setStoreTermVectorPositionsWithBoolean:", "setStoreTermVectorPositions", "V", 0x1, NULL, NULL },
-    { "storeTermVectorPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "setStoreTermVectorPayloadsWithBoolean:", "setStoreTermVectorPayloads", "V", 0x1, NULL, NULL },
-    { "omitNorms", NULL, "Z", 0x1, NULL, NULL },
-    { "setOmitNormsWithBoolean:", "setOmitNorms", "V", 0x1, NULL, NULL },
-    { "indexOptions", NULL, "Lorg.apache.lucene.index.IndexOptions;", 0x1, NULL, NULL },
-    { "setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:", "setIndexOptions", "V", 0x1, NULL, NULL },
-    { "setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:", "setNumericType", "V", 0x1, NULL, NULL },
-    { "numericType", NULL, "Lorg.apache.lucene.document.FieldType$NumericType;", 0x1, NULL, NULL },
-    { "setNumericPrecisionStepWithInt:", "setNumericPrecisionStep", "V", 0x1, NULL, NULL },
-    { "numericPrecisionStep", NULL, "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "docValuesType", NULL, "Lorg.apache.lucene.index.DocValuesType;", 0x1, NULL, NULL },
-    { "setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:", "setDocValuesType", "V", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexOptions;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneDocumentFieldType_NumericType;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, 15, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocValuesType;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 18, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 19, 20, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneDocumentFieldType:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(checkIfFrozen);
+  methods[3].selector = @selector(freeze);
+  methods[4].selector = @selector(stored);
+  methods[5].selector = @selector(setStoredWithBoolean:);
+  methods[6].selector = @selector(tokenized);
+  methods[7].selector = @selector(setTokenizedWithBoolean:);
+  methods[8].selector = @selector(storeTermVectors);
+  methods[9].selector = @selector(setStoreTermVectorsWithBoolean:);
+  methods[10].selector = @selector(storeTermVectorOffsets);
+  methods[11].selector = @selector(setStoreTermVectorOffsetsWithBoolean:);
+  methods[12].selector = @selector(storeTermVectorPositions);
+  methods[13].selector = @selector(setStoreTermVectorPositionsWithBoolean:);
+  methods[14].selector = @selector(storeTermVectorPayloads);
+  methods[15].selector = @selector(setStoreTermVectorPayloadsWithBoolean:);
+  methods[16].selector = @selector(omitNorms);
+  methods[17].selector = @selector(setOmitNormsWithBoolean:);
+  methods[18].selector = @selector(indexOptions);
+  methods[19].selector = @selector(setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:);
+  methods[20].selector = @selector(setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:);
+  methods[21].selector = @selector(numericType);
+  methods[22].selector = @selector(setNumericPrecisionStepWithInt:);
+  methods[23].selector = @selector(numericPrecisionStep);
+  methods[24].selector = @selector(description);
+  methods[25].selector = @selector(docValuesType);
+  methods[26].selector = @selector(setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:);
+  methods[27].selector = @selector(hash);
+  methods[28].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stored_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenized_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "storeTermVectors_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "storeTermVectorOffsets_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "storeTermVectorPositions_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "storeTermVectorPayloads_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "omitNorms_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexOptions_", NULL, 0x2, "Lorg.apache.lucene.index.IndexOptions;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numericType_", NULL, 0x2, "Lorg.apache.lucene.document.FieldType$NumericType;", NULL, NULL, .constantValue.asLong = 0 },
-    { "frozen_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "numericPrecisionStep_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docValuesType_", NULL, 0x2, "Lorg.apache.lucene.index.DocValuesType;", NULL, NULL, .constantValue.asLong = 0 },
+    { "stored_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tokenized_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "storeTermVectors_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "storeTermVectorOffsets_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "storeTermVectorPositions_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "storeTermVectorPayloads_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "omitNorms_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "indexOptions_", "LOrgApacheLuceneIndexIndexOptions;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numericType_", "LOrgApacheLuceneDocumentFieldType_NumericType;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "frozen_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numericPrecisionStep_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "docValuesType_", "LOrgApacheLuceneIndexDocValuesType;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.document.FieldType$NumericType;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentFieldType = { 2, "FieldType", "org.apache.lucene.document", NULL, 0x1, 29, methods, 12, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneDocumentFieldType;", "setStored", "Z", "setTokenized", "setStoreTermVectors", "setStoreTermVectorOffsets", "setStoreTermVectorPositions", "setStoreTermVectorPayloads", "setOmitNorms", "setIndexOptions", "LOrgApacheLuceneIndexIndexOptions;", "setNumericType", "LOrgApacheLuceneDocumentFieldType_NumericType;", "setNumericPrecisionStep", "I", "toString", "setDocValuesType", "LOrgApacheLuceneIndexDocValuesType;", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentFieldType = { "FieldType", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x1, 29, 12, -1, 12, -1, -1, -1 };
   return &_OrgApacheLuceneDocumentFieldType;
 }
 
@@ -393,8 +431,26 @@ OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_N
   return (OrgApacheLuceneDocumentFieldType_NumericType_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneDocumentFieldType_NumericType;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneDocumentFieldType_NumericType;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INT", "LOrgApacheLuceneDocumentFieldType_NumericType;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "LONG", "LOrgApacheLuceneDocumentFieldType_NumericType;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "FLOAT", "LOrgApacheLuceneDocumentFieldType_NumericType;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "DOUBLE", "LOrgApacheLuceneDocumentFieldType_NumericType;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, INT), &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG), &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT), &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE), "LOrgApacheLuceneDocumentFieldType;", "Ljava/lang/Enum<Lorg/apache/lucene/document/FieldType$NumericType;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentFieldType_NumericType = { "NumericType", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x4019, 2, 4, 6, -1, -1, 7, -1 };
+  return &_OrgApacheLuceneDocumentFieldType_NumericType;
 }
 
 + (void)initialize {
@@ -403,28 +459,12 @@ OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_N
     size_t allocSize = 4 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, INT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(e, @"INT", 0);
-    (JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(e, @"LONG", 1);
-    (JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(e, @"FLOAT", 2);
-    (JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(e, @"DOUBLE", 3);
+    for (jint i = 0; i < 4; i++) {
+      ((void)(OrgApacheLuceneDocumentFieldType_NumericType_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneDocumentFieldType_NumericType_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentFieldType_NumericType)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "INT", "INT", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, INT), NULL, .constantValue.asLong = 0 },
-    { "LONG", "LONG", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG), NULL, .constantValue.asLong = 0 },
-    { "FLOAT", "FLOAT", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT), NULL, .constantValue.asLong = 0 },
-    { "DOUBLE", "DOUBLE", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.document.FieldType$NumericType;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentFieldType_NumericType = { 2, "NumericType", "org.apache.lucene.document", "FieldType", 0x4019, 0, NULL, 4, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/document/FieldType$NumericType;>;" };
-  return &_OrgApacheLuceneDocumentFieldType_NumericType;
 }
 
 @end
@@ -446,7 +486,7 @@ OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_N
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

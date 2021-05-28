@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisBrBrazilianAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisBrBrazilianAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisBrBrazilianAnalyzer))
 #define OrgApacheLuceneAnalysisBrBrazilianAnalyzer_
 
@@ -26,38 +32,36 @@
 /*!
  @brief <code>Analyzer</code> for Brazilian Portuguese language.
  <p>
- Supports an external list of stopwords (words that
- will not be indexed at all) and an external list of exclusions (words that will
- not be stemmed, but indexed).
+  Supports an external list of stopwords (words that
+  will not be indexed at all) and an external list of exclusions (words that will
+  not be stemmed, but indexed). 
  </p>
+  
  <p><b>NOTE</b>: This class uses the same <code>org.apache.lucene.util.Version</code>
- dependent settings as <code>StandardAnalyzer</code>.</p>
+  dependent settings as <code>StandardAnalyzer</code>.</p>
  */
 @interface OrgApacheLuceneAnalysisBrBrazilianAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
-
-+ (NSString *)DEFAULT_STOPWORD_FILE;
+@property (readonly, copy, class) NSString *DEFAULT_STOPWORD_FILE NS_SWIFT_NAME(DEFAULT_STOPWORD_FILE);
 
 #pragma mark Public
 
 /*!
  @brief Builds an analyzer with the default stop words (<code>getDefaultStopSet()</code>).
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Builds an analyzer with the given stop words
- @param stopwords
- a stopword set
+ @param stopwords a stopword set
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
 /*!
  @brief Builds an analyzer with the given stop words and stemming exclusion words
- @param stopwords
- a stopword set
+ @param stopwords a stopword set
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
-                    withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
+                              withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
 
 /*!
  @brief Returns an unmodifiable instance of the default stop-words set.
@@ -69,12 +73,12 @@
 
 /*!
  @brief Creates
- <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- used to tokenize all the text in the provided <code>Reader</code>.
+  <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+  used to tokenize all the text in the provided <code>Reader</code>.
  @return <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- built from a <code>StandardTokenizer</code> filtered with
- <code>LowerCaseFilter</code>, <code>StandardFilter</code>, <code>StopFilter</code>
- , and <code>BrazilianStemFilter</code>.
+          built from a <code>StandardTokenizer</code> filtered with
+          <code>LowerCaseFilter</code>, <code>StandardFilter</code>, <code>StopFilter</code>
+          , and <code>BrazilianStemFilter</code>.
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
@@ -85,18 +89,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisBrBrazilianAnalyzer)
 /*!
  @brief File containing default Brazilian Portuguese stopwords.
  */
-inline NSString *OrgApacheLuceneAnalysisBrBrazilianAnalyzer_get_DEFAULT_STOPWORD_FILE();
+inline NSString *OrgApacheLuceneAnalysisBrBrazilianAnalyzer_get_DEFAULT_STOPWORD_FILE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisBrBrazilianAnalyzer_DEFAULT_STOPWORD_FILE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisBrBrazilianAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisBrBrazilianAnalyzer_getDefaultStopSet();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisBrBrazilianAnalyzer_getDefaultStopSet(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBrBrazilianAnalyzer_init(OrgApacheLuceneAnalysisBrBrazilianAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianAnalyzer *new_OrgApacheLuceneAnalysisBrBrazilianAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianAnalyzer *new_OrgApacheLuceneAnalysisBrBrazilianAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianAnalyzer *create_OrgApacheLuceneAnalysisBrBrazilianAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianAnalyzer *create_OrgApacheLuceneAnalysisBrBrazilianAnalyzer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBrBrazilianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisBrBrazilianAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
@@ -114,4 +118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisBrBrazilianAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianAnalyzer")

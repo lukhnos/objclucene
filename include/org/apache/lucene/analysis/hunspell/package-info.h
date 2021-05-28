@@ -4,12 +4,12 @@
 //
 
 /*!
- @brief Stemming TokenFilter using a Java implementation of the 
+ @brief Stemming TokenFilter using a Java implementation of the  
  <a href="http://www.ldc.upenn.edu/Catalog/docs/LDC2008T01/acta04.pdf">Hunspell stemming algorithm.
  </a>
  <p>
- Dictionaries can be found on <a href="http://wiki.services.openoffice.org/wiki/Dictionaries">OpenOffice's wiki</a>
- </p>
+  Dictionaries can be found on <a href="http://wiki.services.openoffice.org/wiki/Dictionaries">OpenOffice's wiki</a>
+  </p>
  */
 #include "J2ObjC_header.h"
 
@@ -21,4 +21,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisHunspellPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellPackage_info")

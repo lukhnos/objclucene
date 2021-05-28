@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/ScoreDoc.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ScoreDoc must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchScoreDoc
 
 - (instancetype)initWithInt:(jint)doc
@@ -26,17 +30,25 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withFloat:", "ScoreDoc", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withFloat:withInt:", "ScoreDoc", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withFloat:);
+  methods[1].selector = @selector(initWithInt:withFloat:withInt:);
+  methods[2].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "score_", NULL, 0x1, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "shardIndex_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "score_", "F", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "shardIndex_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchScoreDoc = { 2, "ScoreDoc", "org.apache.lucene.search", NULL, 0x1, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IF", "IFI", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchScoreDoc = { "ScoreDoc", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchScoreDoc;
 }
 

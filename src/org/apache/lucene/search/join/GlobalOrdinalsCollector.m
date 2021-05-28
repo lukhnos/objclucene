@@ -3,9 +3,7 @@
 //  source: ./join/src/java/org/apache/lucene/search/join/GlobalOrdinalsCollector.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/DocValues.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
@@ -17,6 +15,10 @@
 #include "org/apache/lucene/util/LongBitSet.h"
 #include "org/apache/lucene/util/LongValues.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/GlobalOrdinalsCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_OrdinalMapCollector () {
  @public
   OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *this$0_;
@@ -26,7 +28,6 @@
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_OrdinalMapCollector, this$0_, OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_OrdinalMapCollector, docTermOrds_, OrgApacheLuceneIndexSortedDocValues *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_OrdinalMapCollector, segmentOrdToGlobalOrdLookup_, OrgApacheLuceneUtilLongValues *)
 
@@ -38,15 +39,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_OrdinalMapC
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_SegmentOrdinalCollector, this$0_, OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_SegmentOrdinalCollector, docTermOrds_, OrgApacheLuceneIndexSortedDocValues *)
 
 @implementation OrgApacheLuceneSearchJoinGlobalOrdinalsCollector
 
-- (instancetype)initWithNSString:(NSString *)field
+- (instancetype)initPackagePrivateWithNSString:(NSString *)field
 withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
-                        withLong:(jlong)valueCount {
-  OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(self, field, ordinalMap, valueCount);
+                                      withLong:(jlong)valueCount {
+  OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(self, field, ordinalMap, valueCount);
   return self;
 }
 
@@ -61,7 +61,7 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocV
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   OrgApacheLuceneIndexSortedDocValues *docTermOrds = OrgApacheLuceneIndexDocValues_getSortedWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field_);
   if (ordinalMap_ != nil) {
-    OrgApacheLuceneUtilLongValues *segmentOrdToGlobalOrdLookup = [ordinalMap_ getGlobalOrdsWithInt:context->ord_];
+    OrgApacheLuceneUtilLongValues *segmentOrdToGlobalOrdLookup = JreRetainedLocalValue([ordinalMap_ getGlobalOrdsWithInt:context->ord_]);
     return create_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_OrdinalMapCollector_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsCollector_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilLongValues_(self, docTermOrds, segmentOrdToGlobalOrdLookup);
   }
   else {
@@ -77,37 +77,45 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocV
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:withLong:", "GlobalOrdinalsCollector", NULL, 0x0, NULL, NULL },
-    { "getCollectorOrdinals", NULL, "Lorg.apache.lucene.util.LongBitSet;", 0x1, NULL, NULL },
-    { "needsScores", NULL, "Z", 0x1, NULL, NULL },
-    { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilLongBitSet;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchLeafCollector;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithNSString:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:withLong:);
+  methods[1].selector = @selector(getCollectorOrdinals);
+  methods[2].selector = @selector(needsScores);
+  methods[3].selector = @selector(getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "collectedOrds_", NULL, 0x10, "Lorg.apache.lucene.util.LongBitSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ordinalMap_", NULL, 0x10, "Lorg.apache.lucene.index.MultiDocValues$OrdinalMap;", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "collectedOrds_", "LOrgApacheLuceneUtilLongBitSet;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "ordinalMap_", "LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.join.GlobalOrdinalsCollector$OrdinalMapCollector;", "Lorg.apache.lucene.search.join.GlobalOrdinalsCollector$SegmentOrdinalCollector;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsCollector = { 2, "GlobalOrdinalsCollector", "org.apache.lucene.search.join", NULL, 0x10, 4, methods, 3, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;J", "getLeafCollector", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "LOrgApacheLuceneSearchJoinGlobalOrdinalsCollector_OrdinalMapCollector;LOrgApacheLuceneSearchJoinGlobalOrdinalsCollector_SegmentOrdinalCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsCollector = { "GlobalOrdinalsCollector", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x10, 4, 3, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *self, NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount) {
+void OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *self, NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount) {
   NSObject_init(self);
   JreStrongAssign(&self->field_, field);
   JreStrongAssign(&self->ordinalMap_, ordinalMap);
   JreStrongAssignAndConsume(&self->collectedOrds_, new_OrgApacheLuceneUtilLongBitSet_initWithLong_(valueCount));
 }
 
-OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *new_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector, initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_, field, ordinalMap, valueCount)
+OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *new_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector, initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_, field, ordinalMap, valueCount)
 }
 
-OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *create_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector, initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_, field, ordinalMap, valueCount)
+OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *create_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(NSString *field, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jlong valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector, initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_, field, ordinalMap, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsCollector)
@@ -140,17 +148,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsCollecto
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchJoinGlobalOrdinalsCollector:withOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneUtilLongValues:", "OrdinalMapCollector", NULL, 0x0, NULL, NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchJoinGlobalOrdinalsCollector:withOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneUtilLongValues:);
+  methods[1].selector = @selector(collectWithInt:);
+  methods[2].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.join.GlobalOrdinalsCollector;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docTermOrds_", NULL, 0x12, "Lorg.apache.lucene.index.SortedDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentOrdToGlobalOrdLookup_", NULL, 0x12, "Lorg.apache.lucene.util.LongValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchJoinGlobalOrdinalsCollector;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "docTermOrds_", "LOrgApacheLuceneIndexSortedDocValues;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "segmentOrdToGlobalOrdLookup_", "LOrgApacheLuceneUtilLongValues;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_OrdinalMapCollector = { 2, "OrdinalMapCollector", "org.apache.lucene.search.join", "GlobalOrdinalsCollector", 0x10, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchJoinGlobalOrdinalsCollector;LOrgApacheLuceneIndexSortedDocValues;LOrgApacheLuceneUtilLongValues;", "collect", "I", "LJavaIoIOException;", "setScorer", "LOrgApacheLuceneSearchScorer;", "LOrgApacheLuceneSearchJoinGlobalOrdinalsCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_OrdinalMapCollector = { "OrdinalMapCollector", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x10, 3, 3, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_OrdinalMapCollector;
 }
 
@@ -198,16 +214,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsCollecto
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchJoinGlobalOrdinalsCollector:withOrgApacheLuceneIndexSortedDocValues:", "SegmentOrdinalCollector", NULL, 0x0, NULL, NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchJoinGlobalOrdinalsCollector:withOrgApacheLuceneIndexSortedDocValues:);
+  methods[1].selector = @selector(collectWithInt:);
+  methods[2].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.join.GlobalOrdinalsCollector;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docTermOrds_", NULL, 0x12, "Lorg.apache.lucene.index.SortedDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchJoinGlobalOrdinalsCollector;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "docTermOrds_", "LOrgApacheLuceneIndexSortedDocValues;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_SegmentOrdinalCollector = { 2, "SegmentOrdinalCollector", "org.apache.lucene.search.join", "GlobalOrdinalsCollector", 0x10, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchJoinGlobalOrdinalsCollector;LOrgApacheLuceneIndexSortedDocValues;", "collect", "I", "LJavaIoIOException;", "setScorer", "LOrgApacheLuceneSearchScorer;", "LOrgApacheLuceneSearchJoinGlobalOrdinalsCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_SegmentOrdinalCollector = { "SegmentOrdinalCollector", "org.apache.lucene.search.join", ptrTable, methods, fields, 7, 0x10, 3, 2, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_SegmentOrdinalCollector;
 }
 

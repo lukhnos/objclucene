@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilter))
 #define OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilter_
 
@@ -24,18 +30,18 @@
 
 /*!
  @brief A <code>TokenFilter</code> that applies <code>PortugueseMinimalStemmer</code> to stem 
- Portuguese words.
+  Portuguese words.
  <p>
- To prevent terms from being stemmed use an instance of
+  To prevent terms from being stemmed use an instance of 
  <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
- the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
- </p>
+  the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+  </p>
  */
 @interface OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -53,4 +59,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemFilter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_
 
@@ -27,25 +33,27 @@
 
 /*!
  @brief A <code>BooleanQueryNode</code> represents a list of elements which do not have an
- explicit boolean operator defined between them.
- It can be used to express a
- boolean query that intends to use the default boolean operator.
+  explicit boolean operator defined between them.It can be used to express a
+  boolean query that intends to use the default boolean operator.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
 
 /*!
- @param clauses
- - the query nodes to be and'ed
+ @param clauses - the query nodes to be and'ed
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)clauses;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -61,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQue
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode")

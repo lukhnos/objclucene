@@ -16,6 +16,10 @@
 #include "org/w3c/dom/Node.h"
 #include "org/w3c/dom/NodeList.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/BooleanQueryBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder () {
  @public
   id<OrgApacheLuceneQueryparserXmlQueryBuilder> factory_;
@@ -36,18 +40,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder, fa
   OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [bq setDisableCoordWithBoolean:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"disableCoord", false)];
   [bq setMinimumNumberShouldMatchWithInt:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withInt_(e, @"minimumNumberShouldMatch", 0)];
-  id<OrgW3cDomNodeList> nl = [((id<OrgW3cDomElement>) nil_chk(e)) getChildNodes];
+  id<OrgW3cDomNodeList> nl = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(e)) getChildNodes]);
   for (jint i = 0; i < [((id<OrgW3cDomNodeList>) nil_chk(nl)) getLength]; i++) {
-    id<OrgW3cDomNode> node = [nl itemWithInt:i];
+    id<OrgW3cDomNode> node = JreRetainedLocalValue([nl itemWithInt:i]);
     if ([((NSString *) nil_chk([((id<OrgW3cDomNode>) nil_chk(node)) getNodeName])) isEqual:@"Clause"]) {
       id<OrgW3cDomElement> clauseElem = (id<OrgW3cDomElement>) cast_check(node, OrgW3cDomElement_class_());
       OrgApacheLuceneSearchBooleanClause_Occur *occurs = OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_getOccursValueWithOrgW3cDomElement_(clauseElem);
       id<OrgW3cDomElement> clauseQuery = OrgApacheLuceneQueryparserXmlDOMUtils_getFirstChildOrFailWithOrgW3cDomElement_(clauseElem);
-      OrgApacheLuceneSearchQuery *q = [((id<OrgApacheLuceneQueryparserXmlQueryBuilder>) nil_chk(factory_)) getQueryWithOrgW3cDomElement:clauseQuery];
+      OrgApacheLuceneSearchQuery *q = JreRetainedLocalValue([((id<OrgApacheLuceneQueryparserXmlQueryBuilder>) nil_chk(factory_)) getQueryWithOrgW3cDomElement:clauseQuery]);
       [bq addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(q, occurs)];
     }
   }
-  OrgApacheLuceneSearchBooleanQuery *q = [bq build];
+  OrgApacheLuceneSearchBooleanQuery *q = JreRetainedLocalValue([bq build]);
   [((OrgApacheLuceneSearchBooleanQuery *) nil_chk(q)) setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
   return q;
 }
@@ -62,15 +66,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder, fa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserXmlQueryBuilder:", "BooleanQueryBuilder", NULL, 0x1, NULL, NULL },
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "getOccursValueWithOrgW3cDomElement:", "getOccursValue", "Lorg.apache.lucene.search.BooleanClause$Occur;", 0x8, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBooleanClause_Occur;", 0x8, 4, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserXmlQueryBuilder:);
+  methods[1].selector = @selector(getQueryWithOrgW3cDomElement:);
+  methods[2].selector = @selector(getOccursValueWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "factory_", NULL, 0x12, "Lorg.apache.lucene.queryparser.xml.QueryBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "factory_", "LOrgApacheLuceneQueryparserXmlQueryBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder = { 2, "BooleanQueryBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserXmlQueryBuilder;", "getQuery", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;", "getOccursValue" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder = { "BooleanQueryBuilder", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder;
 }
 
@@ -91,14 +103,14 @@ OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder *create_OrgApacheLucene
 
 OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_getOccursValueWithOrgW3cDomElement_(id<OrgW3cDomElement> clauseElem) {
   OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_initialize();
-  NSString *occs = [((id<OrgW3cDomElement>) nil_chk(clauseElem)) getAttributeWithNSString:@"occurs"];
-  if (occs == nil || [@"should" equalsIgnoreCase:occs]) {
+  NSString *occs = JreRetainedLocalValue([((id<OrgW3cDomElement>) nil_chk(clauseElem)) getAttributeWithNSString:@"occurs"]);
+  if (occs == nil || [@"should" java_equalsIgnoreCase:occs]) {
     return JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD);
   }
-  else if ([@"must" equalsIgnoreCase:occs]) {
+  else if ([@"must" java_equalsIgnoreCase:occs]) {
     return JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST);
   }
-  else if ([@"mustNot" equalsIgnoreCase:occs]) {
+  else if ([@"mustNot" java_equalsIgnoreCase:occs]) {
     return JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT);
   }
   else if ([@"filter" isEqual:occs]) {

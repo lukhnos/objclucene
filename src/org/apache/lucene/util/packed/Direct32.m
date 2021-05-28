@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/Direct32.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Math.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/store/DataInput.h"
@@ -14,17 +12,21 @@
 #include "org/apache/lucene/util/packed/Direct32.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/Direct32 must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilPackedDirect32
 
-- (instancetype)initWithInt:(jint)valueCount {
-  OrgApacheLuceneUtilPackedDirect32_initWithInt_(self, valueCount);
+- (instancetype)initPackagePrivateWithInt:(jint)valueCount {
+  OrgApacheLuceneUtilPackedDirect32_initPackagePrivateWithInt_(self, valueCount);
   return self;
 }
 
-- (instancetype)initWithInt:(jint)packedIntsVersion
-withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                    withInt:(jint)valueCount {
-  OrgApacheLuceneUtilPackedDirect32_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(self, packedIntsVersion, inArg, valueCount);
+- (instancetype)initPackagePrivateWithInt:(jint)packedIntsVersion
+        withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                  withInt:(jint)valueCount {
+  OrgApacheLuceneUtilPackedDirect32_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(self, packedIntsVersion, inArg, valueCount);
   return self;
 }
 
@@ -49,9 +51,9 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
      withLongArray:(IOSLongArray *)arr
            withInt:(jint)off
            withInt:(jint)len {
-  JreAssert((len > 0), (JreStrcat("$IC", @"len must be > 0 (got ", len, ')')));
-  JreAssert((index >= 0 && index < valueCount_), (@"org/apache/lucene/util/packed/Direct32.java:79 condition failed: assert index >= 0 && index < valueCount;"));
-  JreAssert((off + len <= ((IOSLongArray *) nil_chk(arr))->size_), (@"org/apache/lucene/util/packed/Direct32.java:80 condition failed: assert off + len <= arr.length;"));
+  JreAssert(len > 0, JreStrcat("$IC", @"len must be > 0 (got ", len, ')'));
+  JreAssert(index >= 0 && index < valueCount_, @"org/apache/lucene/util/packed/Direct32.java:79 condition failed: assert index >= 0 && index < valueCount;");
+  JreAssert(off + len <= ((IOSLongArray *) nil_chk(arr))->size_, @"org/apache/lucene/util/packed/Direct32.java:80 condition failed: assert off + len <= arr.length;");
   jint gets = JavaLangMath_minWithInt_withInt_(valueCount_ - index, len);
   for (jint i = index, o = off, end = index + gets; i < end; ++i, ++o) {
     *IOSLongArray_GetRef(arr, o) = IOSIntArray_Get(nil_chk(values_), i) & (jlong) 0xFFFFFFFFLL;
@@ -63,9 +65,9 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
      withLongArray:(IOSLongArray *)arr
            withInt:(jint)off
            withInt:(jint)len {
-  JreAssert((len > 0), (JreStrcat("$IC", @"len must be > 0 (got ", len, ')')));
-  JreAssert((index >= 0 && index < valueCount_), (@"org/apache/lucene/util/packed/Direct32.java:92 condition failed: assert index >= 0 && index < valueCount;"));
-  JreAssert((off + len <= ((IOSLongArray *) nil_chk(arr))->size_), (@"org/apache/lucene/util/packed/Direct32.java:93 condition failed: assert off + len <= arr.length;"));
+  JreAssert(len > 0, JreStrcat("$IC", @"len must be > 0 (got ", len, ')'));
+  JreAssert(index >= 0 && index < valueCount_, @"org/apache/lucene/util/packed/Direct32.java:92 condition failed: assert index >= 0 && index < valueCount;");
+  JreAssert(off + len <= ((IOSLongArray *) nil_chk(arr))->size_, @"org/apache/lucene/util/packed/Direct32.java:93 condition failed: assert off + len <= arr.length;");
   jint sets = JavaLangMath_minWithInt_withInt_(valueCount_ - index, len);
   for (jint i = index, o = off, end = index + sets; i < end; ++i, ++o) {
     *IOSIntArray_GetRef(nil_chk(values_), i) = (jint) IOSLongArray_Get(arr, o);
@@ -76,7 +78,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 - (void)fillWithInt:(jint)fromIndex
             withInt:(jint)toIndex
            withLong:(jlong)val {
-  JreAssert((val == (val & (jlong) 0xFFFFFFFFLL)), (@"org/apache/lucene/util/packed/Direct32.java:104 condition failed: assert val == (val & 0xFFFFFFFFL);"));
+  JreAssert(val == (val & (jlong) 0xFFFFFFFFLL), @"org/apache/lucene/util/packed/Direct32.java:104 condition failed: assert val == (val & 0xFFFFFFFFL);");
   JavaUtilArrays_fillWithIntArray_withInt_withInt_withInt_(values_, fromIndex, toIndex, (jint) val);
 }
 
@@ -86,41 +88,55 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Direct32", NULL, 0x0, NULL, NULL },
-    { "initWithInt:withOrgApacheLuceneStoreDataInput:withInt:", "Direct32", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "getWithInt:withLongArray:withInt:withInt:", "get", "I", 0x1, NULL, NULL },
-    { "setWithInt:withLongArray:withInt:withInt:", "set", "I", 0x1, NULL, NULL },
-    { "fillWithInt:withInt:withLong:", "fill", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, 3, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:);
+  methods[1].selector = @selector(initPackagePrivateWithInt:withOrgApacheLuceneStoreDataInput:withInt:);
+  methods[2].selector = @selector(getWithInt:);
+  methods[3].selector = @selector(setWithInt:withLong:);
+  methods[4].selector = @selector(ramBytesUsed);
+  methods[5].selector = @selector(clear);
+  methods[6].selector = @selector(getWithInt:withLongArray:withInt:withInt:);
+  methods[7].selector = @selector(setWithInt:withLongArray:withInt:withInt:);
+  methods[8].selector = @selector(fillWithInt:withInt:withLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "values_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "values_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirect32 = { 2, "Direct32", "org.apache.lucene.util.packed", NULL, 0x10, 9, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "ILOrgApacheLuceneStoreDataInput;I", "LJavaIoIOException;", "get", "set", "IJ", "I[JII", "fill", "IIJ" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirect32 = { "Direct32", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x10, 9, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirect32;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedDirect32_initWithInt_(OrgApacheLuceneUtilPackedDirect32 *self, jint valueCount) {
+void OrgApacheLuceneUtilPackedDirect32_initPackagePrivateWithInt_(OrgApacheLuceneUtilPackedDirect32 *self, jint valueCount) {
   OrgApacheLuceneUtilPackedPackedInts_MutableImpl_initWithInt_withInt_(self, valueCount, 32);
   JreStrongAssignAndConsume(&self->values_, [IOSIntArray newArrayWithLength:valueCount]);
 }
 
-OrgApacheLuceneUtilPackedDirect32 *new_OrgApacheLuceneUtilPackedDirect32_initWithInt_(jint valueCount) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirect32, initWithInt_, valueCount)
+OrgApacheLuceneUtilPackedDirect32 *new_OrgApacheLuceneUtilPackedDirect32_initPackagePrivateWithInt_(jint valueCount) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirect32, initPackagePrivateWithInt_, valueCount)
 }
 
-OrgApacheLuceneUtilPackedDirect32 *create_OrgApacheLuceneUtilPackedDirect32_initWithInt_(jint valueCount) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirect32, initWithInt_, valueCount)
+OrgApacheLuceneUtilPackedDirect32 *create_OrgApacheLuceneUtilPackedDirect32_initPackagePrivateWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirect32, initPackagePrivateWithInt_, valueCount)
 }
 
-void OrgApacheLuceneUtilPackedDirect32_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedDirect32 *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
-  OrgApacheLuceneUtilPackedDirect32_initWithInt_(self, valueCount);
+void OrgApacheLuceneUtilPackedDirect32_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedDirect32 *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
+  OrgApacheLuceneUtilPackedDirect32_initPackagePrivateWithInt_(self, valueCount);
   for (jint i = 0; i < valueCount; ++i) {
     *IOSIntArray_GetRef(nil_chk(self->values_), i) = [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readInt];
   }
@@ -130,12 +146,12 @@ void OrgApacheLuceneUtilPackedDirect32_initWithInt_withOrgApacheLuceneStoreDataI
   }
 }
 
-OrgApacheLuceneUtilPackedDirect32 *new_OrgApacheLuceneUtilPackedDirect32_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirect32, initWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
+OrgApacheLuceneUtilPackedDirect32 *new_OrgApacheLuceneUtilPackedDirect32_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirect32, initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
 }
 
-OrgApacheLuceneUtilPackedDirect32 *create_OrgApacheLuceneUtilPackedDirect32_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirect32, initWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
+OrgApacheLuceneUtilPackedDirect32 *create_OrgApacheLuceneUtilPackedDirect32_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirect32, initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirect32)

@@ -3,13 +3,12 @@
 //  source: ./core/src/java/org/apache/lucene/index/SegmentMerger.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/System.h"
+#include "java/lang/Throwable.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/codecs/Codec.h"
 #include "org/apache/lucene/codecs/DocValuesConsumer.h"
@@ -33,6 +32,10 @@
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/util/InfoStream.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SegmentMerger must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexSegmentMerger () {
  @public
   OrgApacheLuceneStoreDirectory *directory_;
@@ -48,14 +51,14 @@
 /*!
  @brief Merge stored fields from each of the segments into the new one.
  @return The number of documents in all of the readers
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  */
 - (jint)mergeFields;
 
 /*!
  @brief Merge the TermVectors from each of the segments into the new one.
- @throws IOException if there is a low-level IO error
+ @throw IOExceptionif there is a low-level IO error
  */
 - (jint)mergeVectors;
 
@@ -80,13 +83,13 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentMerger_mergeTerms
 
 @implementation OrgApacheLuceneIndexSegmentMerger
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)readers
- withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
-   withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
-   withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_FieldNumbers *)fieldNumbers
-   withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(self, readers, segmentInfo, infoStream, dir, fieldNumbers, context);
+- (instancetype)initPackagePrivateWithJavaUtilList:(id<JavaUtilList>)readers
+               withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
+                 withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
+                 withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+   withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_FieldNumbers *)fieldNumbers
+                 withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
+  OrgApacheLuceneIndexSegmentMerger_initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(self, readers, segmentInfo, infoStream, dir, fieldNumbers, context);
   return self;
 }
 
@@ -106,9 +109,9 @@ withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_
   jint numMerged = OrgApacheLuceneIndexSegmentMerger_mergeFields(self);
   if ([mergeState_->infoStream_ isEnabledWithNSString:@"SM"]) {
     jlong t1 = JavaLangSystem_nanoTime();
-    [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", ((t1 - t0) / 1000000), @" msec to merge stored fields [", numMerged, @" docs]")];
+    [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", (JreLongDiv((t1 - t0), 1000000)), @" msec to merge stored fields [", numMerged, @" docs]")];
   }
-  JreAssert((numMerged == [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(mergeState_->segmentInfo_)) maxDoc]), (JreStrcat("$I$I", @"numMerged=", numMerged, @" vs mergeState.segmentInfo.maxDoc()=", [mergeState_->segmentInfo_ maxDoc])));
+  JreAssert(numMerged == [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(mergeState_->segmentInfo_)) maxDoc], JreStrcat("$I$I", @"numMerged=", numMerged, @" vs mergeState.segmentInfo.maxDoc()=", [mergeState_->segmentInfo_ maxDoc]));
   OrgApacheLuceneIndexSegmentWriteState *segmentWriteState = create_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_(mergeState_->infoStream_, directory_, mergeState_->segmentInfo_, mergeState_->mergeFieldInfos_, nil, context_);
   if ([mergeState_->infoStream_ isEnabledWithNSString:@"SM"]) {
     t0 = JavaLangSystem_nanoTime();
@@ -116,7 +119,7 @@ withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_
   OrgApacheLuceneIndexSegmentMerger_mergeTermsWithOrgApacheLuceneIndexSegmentWriteState_(self, segmentWriteState);
   if ([mergeState_->infoStream_ isEnabledWithNSString:@"SM"]) {
     jlong t1 = JavaLangSystem_nanoTime();
-    [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", ((t1 - t0) / 1000000), @" msec to merge postings [", numMerged, @" docs]")];
+    [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", (JreLongDiv((t1 - t0), 1000000)), @" msec to merge postings [", numMerged, @" docs]")];
   }
   if ([mergeState_->infoStream_ isEnabledWithNSString:@"SM"]) {
     t0 = JavaLangSystem_nanoTime();
@@ -126,7 +129,7 @@ withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_
   }
   if ([mergeState_->infoStream_ isEnabledWithNSString:@"SM"]) {
     jlong t1 = JavaLangSystem_nanoTime();
-    [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", ((t1 - t0) / 1000000), @" msec to merge doc values [", numMerged, @" docs]")];
+    [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", (JreLongDiv((t1 - t0), 1000000)), @" msec to merge doc values [", numMerged, @" docs]")];
   }
   if ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState_->mergeFieldInfos_)) hasNorms]) {
     if ([mergeState_->infoStream_ isEnabledWithNSString:@"SM"]) {
@@ -135,7 +138,7 @@ withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_
     OrgApacheLuceneIndexSegmentMerger_mergeNormsWithOrgApacheLuceneIndexSegmentWriteState_(self, segmentWriteState);
     if ([mergeState_->infoStream_ isEnabledWithNSString:@"SM"]) {
       jlong t1 = JavaLangSystem_nanoTime();
-      [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", ((t1 - t0) / 1000000), @" msec to merge norms [", numMerged, @" docs]")];
+      [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", (JreLongDiv((t1 - t0), 1000000)), @" msec to merge norms [", numMerged, @" docs]")];
     }
   }
   if ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState_->mergeFieldInfos_)) hasVectors]) {
@@ -145,9 +148,9 @@ withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_
     numMerged = OrgApacheLuceneIndexSegmentMerger_mergeVectors(self);
     if ([mergeState_->infoStream_ isEnabledWithNSString:@"SM"]) {
       jlong t1 = JavaLangSystem_nanoTime();
-      [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", ((t1 - t0) / 1000000), @" msec to merge vectors [", numMerged, @" docs]")];
+      [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", (JreLongDiv((t1 - t0), 1000000)), @" msec to merge vectors [", numMerged, @" docs]")];
     }
-    JreAssert((numMerged == [mergeState_->segmentInfo_ maxDoc]), (@"org/apache/lucene/index/SegmentMerger.java:132 condition failed: assert numMerged == mergeState.segmentInfo.maxDoc();"));
+    JreAssert(numMerged == [mergeState_->segmentInfo_ maxDoc], @"org/apache/lucene/index/SegmentMerger.java:132 condition failed: assert numMerged == mergeState.segmentInfo.maxDoc();");
   }
   if ([mergeState_->infoStream_ isEnabledWithNSString:@"SM"]) {
     t0 = JavaLangSystem_nanoTime();
@@ -155,7 +158,7 @@ withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_
   [((OrgApacheLuceneCodecsFieldInfosFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(codec_)) fieldInfosFormat])) writeWithOrgApacheLuceneStoreDirectory:directory_ withOrgApacheLuceneIndexSegmentInfo:mergeState_->segmentInfo_ withNSString:@"" withOrgApacheLuceneIndexFieldInfos:mergeState_->mergeFieldInfos_ withOrgApacheLuceneStoreIOContext:context_];
   if ([mergeState_->infoStream_ isEnabledWithNSString:@"SM"]) {
     jlong t1 = JavaLangSystem_nanoTime();
-    [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", ((t1 - t0) / 1000000), @" msec to write field infos [", numMerged, @" docs]")];
+    [mergeState_->infoStream_ messageWithNSString:@"SM" withNSString:JreStrcat("J$I$", (JreLongDiv((t1 - t0), 1000000)), @" msec to write field infos [", numMerged, @" docs]")];
   }
   return mergeState_;
 }
@@ -205,31 +208,45 @@ withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneUtilInfoStream:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexFieldInfos_FieldNumbers:withOrgApacheLuceneStoreIOContext:", "SegmentMerger", NULL, 0x0, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;Lorg/apache/lucene/index/SegmentInfo;Lorg/apache/lucene/util/InfoStream;Lorg/apache/lucene/store/Directory;Lorg/apache/lucene/index/FieldInfos$FieldNumbers;Lorg/apache/lucene/store/IOContext;)V" },
-    { "shouldMerge", NULL, "Z", 0x0, NULL, NULL },
-    { "merge", NULL, "Lorg.apache.lucene.index.MergeState;", 0x0, "Ljava.io.IOException;", NULL },
-    { "mergeDocValuesWithOrgApacheLuceneIndexSegmentWriteState:", "mergeDocValues", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "mergeNormsWithOrgApacheLuceneIndexSegmentWriteState:", "mergeNorms", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "mergeFieldInfos", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "mergeFields", NULL, "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "mergeVectors", NULL, "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "mergeTermsWithOrgApacheLuceneIndexSegmentWriteState:", "mergeTerms", "V", 0x2, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, 2, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergeState;", 0x0, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 3, 4, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 5, 4, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 6, 4, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithJavaUtilList:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneUtilInfoStream:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexFieldInfos_FieldNumbers:withOrgApacheLuceneStoreIOContext:);
+  methods[1].selector = @selector(shouldMerge);
+  methods[2].selector = @selector(merge);
+  methods[3].selector = @selector(mergeDocValuesWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[4].selector = @selector(mergeNormsWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[5].selector = @selector(mergeFieldInfos);
+  methods[6].selector = @selector(mergeFields);
+  methods[7].selector = @selector(mergeVectors);
+  methods[8].selector = @selector(mergeTermsWithOrgApacheLuceneIndexSegmentWriteState:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "directory_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "codec_", NULL, 0x12, "Lorg.apache.lucene.codecs.Codec;", NULL, NULL, .constantValue.asLong = 0 },
-    { "context_", NULL, 0x12, "Lorg.apache.lucene.store.IOContext;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mergeState_", NULL, 0x10, "Lorg.apache.lucene.index.MergeState;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfosBuilder_", NULL, 0x12, "Lorg.apache.lucene.index.FieldInfos$Builder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "directory_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "codec_", "LOrgApacheLuceneCodecsCodec;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "context_", "LOrgApacheLuceneStoreIOContext;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "mergeState_", "LOrgApacheLuceneIndexMergeState;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fieldInfosBuilder_", "LOrgApacheLuceneIndexFieldInfos_Builder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentMerger = { 2, "SegmentMerger", "org.apache.lucene.index", NULL, 0x10, 9, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilList;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneUtilInfoStream;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexFieldInfos_FieldNumbers;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "(Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;Lorg/apache/lucene/index/SegmentInfo;Lorg/apache/lucene/util/InfoStream;Lorg/apache/lucene/store/Directory;Lorg/apache/lucene/index/FieldInfos$FieldNumbers;Lorg/apache/lucene/store/IOContext;)V", "mergeDocValues", "LOrgApacheLuceneIndexSegmentWriteState;", "mergeNorms", "mergeTerms" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentMerger = { "SegmentMerger", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 9, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSegmentMerger;
 }
 
 @end
 
-void OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentMerger *self, id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context) {
+void OrgApacheLuceneIndexSegmentMerger_initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentMerger *self, id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context) {
   NSObject_init(self);
   if (((OrgApacheLuceneStoreIOContext *) nil_chk(context))->context_ != JreLoadEnum(OrgApacheLuceneStoreIOContext_Context, MERGE)) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"IOContext.context should be MERGE; got: ", context->context_));
@@ -241,144 +258,144 @@ void OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneI
   JreStrongAssignAndConsume(&self->fieldInfosBuilder_, new_OrgApacheLuceneIndexFieldInfos_Builder_initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers_(fieldNumbers));
 }
 
-OrgApacheLuceneIndexSegmentMerger *new_OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentMerger, initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_, readers, segmentInfo, infoStream, dir, fieldNumbers, context)
+OrgApacheLuceneIndexSegmentMerger *new_OrgApacheLuceneIndexSegmentMerger_initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentMerger, initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_, readers, segmentInfo, infoStream, dir, fieldNumbers, context)
 }
 
-OrgApacheLuceneIndexSegmentMerger *create_OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentMerger, initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_, readers, segmentInfo, infoStream, dir, fieldNumbers, context)
+OrgApacheLuceneIndexSegmentMerger *create_OrgApacheLuceneIndexSegmentMerger_initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentMerger, initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_, readers, segmentInfo, infoStream, dir, fieldNumbers, context)
 }
 
 void OrgApacheLuceneIndexSegmentMerger_mergeDocValuesWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneIndexSegmentMerger *self, OrgApacheLuceneIndexSegmentWriteState *segmentWriteState) {
-  {
-    OrgApacheLuceneCodecsDocValuesConsumer *consumer = [((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) docValuesFormat])) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:segmentWriteState];
-    NSException *__primaryException1 = nil;
-    @try {
-      [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(consumer)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
-    }
-    @catch (NSException *e) {
-      __primaryException1 = e;
-      @throw e;
-    }
-    @finally {
-      if (consumer != nil) {
-        if (__primaryException1 != nil) {
-          @try {
-            [consumer close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
-          }
-        } else {
+  OrgApacheLuceneCodecsDocValuesConsumer *consumer = [((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) docValuesFormat])) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:segmentWriteState];
+  JavaLangThrowable *__primaryException1 = nil;
+  @try {
+    [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(consumer)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
+  }
+  @catch (JavaLangThrowable *e) {
+    __primaryException1 = e;
+    @throw e;
+  }
+  @finally {
+    if (consumer != nil) {
+      if (__primaryException1 != nil) {
+        @try {
           [consumer close];
         }
+        @catch (JavaLangThrowable *e) {
+          [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+        }
+      }
+      else {
+        [consumer close];
       }
     }
   }
 }
 
 void OrgApacheLuceneIndexSegmentMerger_mergeNormsWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneIndexSegmentMerger *self, OrgApacheLuceneIndexSegmentWriteState *segmentWriteState) {
-  {
-    OrgApacheLuceneCodecsNormsConsumer *consumer = [((OrgApacheLuceneCodecsNormsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) normsFormat])) normsConsumerWithOrgApacheLuceneIndexSegmentWriteState:segmentWriteState];
-    NSException *__primaryException1 = nil;
-    @try {
-      [((OrgApacheLuceneCodecsNormsConsumer *) nil_chk(consumer)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
-    }
-    @catch (NSException *e) {
-      __primaryException1 = e;
-      @throw e;
-    }
-    @finally {
-      if (consumer != nil) {
-        if (__primaryException1 != nil) {
-          @try {
-            [consumer close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
-          }
-        } else {
+  OrgApacheLuceneCodecsNormsConsumer *consumer = [((OrgApacheLuceneCodecsNormsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) normsFormat])) normsConsumerWithOrgApacheLuceneIndexSegmentWriteState:segmentWriteState];
+  JavaLangThrowable *__primaryException1 = nil;
+  @try {
+    [((OrgApacheLuceneCodecsNormsConsumer *) nil_chk(consumer)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
+  }
+  @catch (JavaLangThrowable *e) {
+    __primaryException1 = e;
+    @throw e;
+  }
+  @finally {
+    if (consumer != nil) {
+      if (__primaryException1 != nil) {
+        @try {
           [consumer close];
         }
+        @catch (JavaLangThrowable *e) {
+          [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+        }
+      }
+      else {
+        [consumer close];
       }
     }
   }
 }
 
 jint OrgApacheLuceneIndexSegmentMerger_mergeFields(OrgApacheLuceneIndexSegmentMerger *self) {
-  {
-    OrgApacheLuceneCodecsStoredFieldsWriter *fieldsWriter = [((OrgApacheLuceneCodecsStoredFieldsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) storedFieldsFormat])) fieldsWriterWithOrgApacheLuceneStoreDirectory:self->directory_ withOrgApacheLuceneIndexSegmentInfo:((OrgApacheLuceneIndexMergeState *) nil_chk(self->mergeState_))->segmentInfo_ withOrgApacheLuceneStoreIOContext:self->context_];
-    NSException *__primaryException1 = nil;
-    @try {
-      return [((OrgApacheLuceneCodecsStoredFieldsWriter *) nil_chk(fieldsWriter)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
-    }
-    @catch (NSException *e) {
-      __primaryException1 = e;
-      @throw e;
-    }
-    @finally {
-      if (fieldsWriter != nil) {
-        if (__primaryException1 != nil) {
-          @try {
-            [fieldsWriter close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
-          }
-        } else {
+  OrgApacheLuceneCodecsStoredFieldsWriter *fieldsWriter = [((OrgApacheLuceneCodecsStoredFieldsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) storedFieldsFormat])) fieldsWriterWithOrgApacheLuceneStoreDirectory:self->directory_ withOrgApacheLuceneIndexSegmentInfo:((OrgApacheLuceneIndexMergeState *) nil_chk(self->mergeState_))->segmentInfo_ withOrgApacheLuceneStoreIOContext:self->context_];
+  JavaLangThrowable *__primaryException1 = nil;
+  @try {
+    return [((OrgApacheLuceneCodecsStoredFieldsWriter *) nil_chk(fieldsWriter)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
+  }
+  @catch (JavaLangThrowable *e) {
+    __primaryException1 = e;
+    @throw e;
+  }
+  @finally {
+    if (fieldsWriter != nil) {
+      if (__primaryException1 != nil) {
+        @try {
           [fieldsWriter close];
         }
+        @catch (JavaLangThrowable *e) {
+          [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+        }
+      }
+      else {
+        [fieldsWriter close];
       }
     }
   }
 }
 
 jint OrgApacheLuceneIndexSegmentMerger_mergeVectors(OrgApacheLuceneIndexSegmentMerger *self) {
-  {
-    OrgApacheLuceneCodecsTermVectorsWriter *termVectorsWriter = [((OrgApacheLuceneCodecsTermVectorsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) termVectorsFormat])) vectorsWriterWithOrgApacheLuceneStoreDirectory:self->directory_ withOrgApacheLuceneIndexSegmentInfo:((OrgApacheLuceneIndexMergeState *) nil_chk(self->mergeState_))->segmentInfo_ withOrgApacheLuceneStoreIOContext:self->context_];
-    NSException *__primaryException1 = nil;
-    @try {
-      return [((OrgApacheLuceneCodecsTermVectorsWriter *) nil_chk(termVectorsWriter)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
-    }
-    @catch (NSException *e) {
-      __primaryException1 = e;
-      @throw e;
-    }
-    @finally {
-      if (termVectorsWriter != nil) {
-        if (__primaryException1 != nil) {
-          @try {
-            [termVectorsWriter close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
-          }
-        } else {
+  OrgApacheLuceneCodecsTermVectorsWriter *termVectorsWriter = [((OrgApacheLuceneCodecsTermVectorsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) termVectorsFormat])) vectorsWriterWithOrgApacheLuceneStoreDirectory:self->directory_ withOrgApacheLuceneIndexSegmentInfo:((OrgApacheLuceneIndexMergeState *) nil_chk(self->mergeState_))->segmentInfo_ withOrgApacheLuceneStoreIOContext:self->context_];
+  JavaLangThrowable *__primaryException1 = nil;
+  @try {
+    return [((OrgApacheLuceneCodecsTermVectorsWriter *) nil_chk(termVectorsWriter)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
+  }
+  @catch (JavaLangThrowable *e) {
+    __primaryException1 = e;
+    @throw e;
+  }
+  @finally {
+    if (termVectorsWriter != nil) {
+      if (__primaryException1 != nil) {
+        @try {
           [termVectorsWriter close];
         }
+        @catch (JavaLangThrowable *e) {
+          [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+        }
+      }
+      else {
+        [termVectorsWriter close];
       }
     }
   }
 }
 
 void OrgApacheLuceneIndexSegmentMerger_mergeTermsWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneIndexSegmentMerger *self, OrgApacheLuceneIndexSegmentWriteState *segmentWriteState) {
-  {
-    OrgApacheLuceneCodecsFieldsConsumer *consumer = [((OrgApacheLuceneCodecsPostingsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) postingsFormat])) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:segmentWriteState];
-    NSException *__primaryException1 = nil;
-    @try {
-      [((OrgApacheLuceneCodecsFieldsConsumer *) nil_chk(consumer)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
-    }
-    @catch (NSException *e) {
-      __primaryException1 = e;
-      @throw e;
-    }
-    @finally {
-      if (consumer != nil) {
-        if (__primaryException1 != nil) {
-          @try {
-            [consumer close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
-          }
-        } else {
+  OrgApacheLuceneCodecsFieldsConsumer *consumer = [((OrgApacheLuceneCodecsPostingsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) postingsFormat])) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:segmentWriteState];
+  JavaLangThrowable *__primaryException1 = nil;
+  @try {
+    [((OrgApacheLuceneCodecsFieldsConsumer *) nil_chk(consumer)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
+  }
+  @catch (JavaLangThrowable *e) {
+    __primaryException1 = e;
+    @throw e;
+  }
+  @finally {
+    if (consumer != nil) {
+      if (__primaryException1 != nil) {
+        @try {
           [consumer close];
         }
+        @catch (JavaLangThrowable *e) {
+          [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+        }
+      }
+      else {
+        [consumer close];
       }
     }
   }

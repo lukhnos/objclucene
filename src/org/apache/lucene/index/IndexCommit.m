@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/IndexCommit.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Long.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Collection.h"
@@ -13,6 +11,10 @@
 #include "org/apache/lucene/index/IndexCommit.h"
 #include "org/apache/lucene/index/StandardDirectoryReader.h"
 #include "org/apache/lucene/store/Directory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexCommit must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneIndexIndexCommit
 
@@ -60,8 +62,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isEqual:(id)other {
   if ([other isKindOfClass:[OrgApacheLuceneIndexIndexCommit class]]) {
-    OrgApacheLuceneIndexIndexCommit *otherCommit = (OrgApacheLuceneIndexIndexCommit *) cast_chk(other, [OrgApacheLuceneIndexIndexCommit class]);
-    return [((OrgApacheLuceneIndexIndexCommit *) nil_chk(otherCommit)) getDirectory] == [self getDirectory] && [otherCommit getGeneration] == [self getGeneration];
+    OrgApacheLuceneIndexIndexCommit *otherCommit = (OrgApacheLuceneIndexIndexCommit *) other;
+    return JreObjectEqualsEquals([((OrgApacheLuceneIndexIndexCommit *) nil_chk(otherCommit)) getDirectory], [self getDirectory]) && [otherCommit getGeneration] == [self getGeneration];
   }
   else {
     return false;
@@ -86,7 +88,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareToWithId:(OrgApacheLuceneIndexIndexCommit *)commit {
   cast_chk(commit, [OrgApacheLuceneIndexIndexCommit class]);
-  if ([self getDirectory] != [((OrgApacheLuceneIndexIndexCommit *) nil_chk(commit)) getDirectory]) {
+  if (!JreObjectEqualsEquals([self getDirectory], [((OrgApacheLuceneIndexIndexCommit *) nil_chk(commit)) getDirectory])) {
     @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"cannot compare IndexCommits from different Directory instances");
   }
   jlong gen = [self getGeneration];
@@ -99,22 +101,40 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getSegmentsFileName", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getFileNames", NULL, "Ljava.util.Collection;", 0x401, "Ljava.io.IOException;", "()Ljava/util/Collection<Ljava/lang/String;>;" },
-    { "getDirectory", NULL, "Lorg.apache.lucene.store.Directory;", 0x401, NULL, NULL },
-    { "delete__", "delete", "V", 0x401, NULL, NULL },
-    { "isDeleted", NULL, "Z", 0x401, NULL, NULL },
-    { "getSegmentCount", NULL, "I", 0x401, NULL, NULL },
-    { "init", "IndexCommit", NULL, 0x4, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "getGeneration", NULL, "J", 0x401, NULL, NULL },
-    { "getUserData", NULL, "Ljava.util.Map;", 0x401, "Ljava.io.IOException;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
-    { "getReader", NULL, "Lorg.apache.lucene.index.StandardDirectoryReader;", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x401, -1, -1, 0, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreDirectory;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 2, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x401, -1, -1, 0, 6, -1, -1 },
+    { NULL, "I", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexStandardDirectoryReader;", 0x0, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexCommit = { 2, "IndexCommit", "org.apache.lucene.index", NULL, 0x401, 13, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/IndexCommit;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getSegmentsFileName);
+  methods[1].selector = @selector(getFileNames);
+  methods[2].selector = @selector(getDirectory);
+  methods[3].selector = @selector(delete__);
+  methods[4].selector = @selector(isDeleted);
+  methods[5].selector = @selector(getSegmentCount);
+  methods[6].selector = @selector(init);
+  methods[7].selector = @selector(isEqual:);
+  methods[8].selector = @selector(hash);
+  methods[9].selector = @selector(getGeneration);
+  methods[10].selector = @selector(getUserData);
+  methods[11].selector = @selector(compareToWithId:);
+  methods[12].selector = @selector(getReader);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;", "()Ljava/util/Collection<Ljava/lang/String;>;", "delete", "equals", "LNSObject;", "hashCode", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "compareTo", "LOrgApacheLuceneIndexIndexCommit;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/IndexCommit;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexCommit = { "IndexCommit", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x401, 13, 0, -1, -1, -1, 9, -1 };
   return &_OrgApacheLuceneIndexIndexCommit;
 }
 

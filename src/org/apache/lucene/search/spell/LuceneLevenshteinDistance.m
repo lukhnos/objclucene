@@ -11,6 +11,10 @@
 #include "org/apache/lucene/search/spell/LuceneLevenshteinDistance.h"
 #include "org/apache/lucene/util/IntsRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/LuceneLevenshteinDistance must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSpellLuceneLevenshteinDistance ()
 
 + (OrgApacheLuceneUtilIntsRef *)toIntsRefWithNSString:(NSString *)s;
@@ -75,12 +79,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LuceneLevenshteinDistance", NULL, 0x1, NULL, NULL },
-    { "getDistanceWithNSString:withNSString:", "getDistance", "F", 0x1, NULL, NULL },
-    { "toIntsRefWithNSString:", "toIntsRef", "Lorg.apache.lucene.util.IntsRef;", 0xa, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilIntsRef;", 0xa, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellLuceneLevenshteinDistance = { 2, "LuceneLevenshteinDistance", "org.apache.lucene.search.spell", NULL, 0x11, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getDistanceWithNSString:withNSString:);
+  methods[2].selector = @selector(toIntsRefWithNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getDistance", "LNSString;LNSString;", "toIntsRef", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellLuceneLevenshteinDistance = { "LuceneLevenshteinDistance", "org.apache.lucene.search.spell", ptrTable, methods, NULL, 7, 0x11, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellLuceneLevenshteinDistance;
 }
 
@@ -100,8 +112,8 @@ OrgApacheLuceneSearchSpellLuceneLevenshteinDistance *create_OrgApacheLuceneSearc
 
 OrgApacheLuceneUtilIntsRef *OrgApacheLuceneSearchSpellLuceneLevenshteinDistance_toIntsRefWithNSString_(NSString *s) {
   OrgApacheLuceneSearchSpellLuceneLevenshteinDistance_initialize();
-  OrgApacheLuceneUtilIntsRef *ref = create_OrgApacheLuceneUtilIntsRef_initWithInt_(((jint) [((NSString *) nil_chk(s)) length]));
-  jint utf16Len = ((jint) [s length]);
+  OrgApacheLuceneUtilIntsRef *ref = create_OrgApacheLuceneUtilIntsRef_initWithInt_([((NSString *) nil_chk(s)) java_length]);
+  jint utf16Len = [s java_length];
   for (jint i = 0, cp = 0; i < utf16Len; i += JavaLangCharacter_charCountWithInt_(cp)) {
     cp = *IOSIntArray_GetRef(nil_chk(ref->ints_), ref->length_++) = JavaLangCharacter_codePointAtWithJavaLangCharSequence_withInt_(s, i);
   }

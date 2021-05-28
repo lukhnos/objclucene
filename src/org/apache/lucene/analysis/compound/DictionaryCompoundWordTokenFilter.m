@@ -14,6 +14,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/DictionaryCompoundWordTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
@@ -33,7 +37,7 @@
 }
 
 - (void)decompose {
-  jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
+  jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) java_length];
   for (jint i = 0; i <= len - self->minSubwordSize_; ++i) {
     OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken *longestMatchToken = nil;
     for (jint j = self->minSubwordSize_; j <= self->maxSubwordSize_; ++j) {
@@ -43,7 +47,7 @@
       if ([((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(dictionary_)) containsWithCharArray:[termAtt_ buffer] withInt:i withInt:j]) {
         if (self->onlyLongestMatch_) {
           if (longestMatchToken != nil) {
-            if ([((id<JavaLangCharSequence>) nil_chk(longestMatchToken->txt_)) length] < j) {
+            if ([((id<JavaLangCharSequence>) nil_chk(longestMatchToken->txt_)) java_length] < j) {
               longestMatchToken = create_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_withInt_withInt_(self, i, j);
             }
           }
@@ -63,12 +67,20 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:", "DictionaryCompoundWordTokenFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:withInt:withInt:withInt:withBoolean:", "DictionaryCompoundWordTokenFilter", NULL, 0x1, NULL, NULL },
-    { "decompose", NULL, "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter = { 2, "DictionaryCompoundWordTokenFilter", "org.apache.lucene.analysis.compound", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:withInt:withInt:withInt:withBoolean:);
+  methods[2].selector = @selector(decompose);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;", "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;IIIZ" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter = { "DictionaryCompoundWordTokenFilter", "org.apache.lucene.analysis.compound", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter;
 }
 

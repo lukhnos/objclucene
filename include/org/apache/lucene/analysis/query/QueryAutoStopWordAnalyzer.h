@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer))
 #define OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_
 
@@ -22,94 +28,92 @@
 
 @class IOSObjectArray;
 @class OrgApacheLuceneAnalysisAnalyzer;
+@class OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 @class OrgApacheLuceneIndexIndexReader;
 @protocol JavaUtilCollection;
 
 /*!
  @brief An <code>Analyzer</code> used primarily at query time to wrap another analyzer and provide a layer of protection
- which prevents very common words from being passed into queries.
+  which prevents very common words from being passed into queries.
  <p>
- For very large indexes the cost
- of reading TermDocs for a very common word can be  high. This analyzer was created after experience with
- a 38 million doc index which had a term in around 50% of docs and was causing TermQueries for 
- this term to take 2 seconds.
+  For very large indexes the cost
+  of reading TermDocs for a very common word can be  high. This analyzer was created after experience with
+  a 38 million doc index which had a term in around 50% of docs and was causing TermQueries for 
+  this term to take 2 seconds. 
  </p>
  */
 @interface OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer : OrgApacheLuceneAnalysisAnalyzerWrapper
-
-+ (jfloat)defaultMaxDocFreqPercent;
+@property (readonly, class) jfloat defaultMaxDocFreqPercent NS_SWIFT_NAME(defaultMaxDocFreqPercent);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new QueryAutoStopWordAnalyzer with stopwords calculated for all
- indexed fields from terms with a document frequency percentage greater than
+  indexed fields from terms with a document frequency percentage greater than 
  <code>defaultMaxDocFreqPercent</code>
  @param delegate Analyzer whose TokenStream will be filtered
  @param indexReader IndexReader to identify the stopwords from
- @throws IOException Can be thrown while reading from the IndexReader
+ @throw IOExceptionCan be thrown while reading from the IndexReader
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
+                              withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader;
 
 /*!
  @brief Creates a new QueryAutoStopWordAnalyzer with stopwords calculated for the
- given selection of fields from terms with a document frequency percentage
- greater than the given maxPercentDocs
+  given selection of fields from terms with a document frequency percentage
+  greater than the given maxPercentDocs
  @param delegate Analyzer whose TokenStream will be filtered
  @param indexReader IndexReader to identify the stopwords from
  @param fields Selection of fields to calculate stopwords for
- @param maxPercentDocs The maximum percentage (between 0.0 and 1.0) of index documents which
- contain a term, after which the word is considered to be a stop word
- @throws IOException Can be thrown while reading from the IndexReader
+ @param maxPercentDocs The maximum percentage (between 0.0 and 1.0) of index documents which                       contain a term, after which the word is considered to be a stop word
+ @throw IOExceptionCan be thrown while reading from the IndexReader
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
-                                 withJavaUtilCollection:(id<JavaUtilCollection>)fields
-                                              withFloat:(jfloat)maxPercentDocs;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
+                              withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
+                                           withJavaUtilCollection:(id<JavaUtilCollection>)fields
+                                                        withFloat:(jfloat)maxPercentDocs;
 
 /*!
  @brief Creates a new QueryAutoStopWordAnalyzer with stopwords calculated for the
- given selection of fields from terms with a document frequency greater than
- the given maxDocFreq
+  given selection of fields from terms with a document frequency greater than
+  the given maxDocFreq
  @param delegate Analyzer whose TokenStream will be filtered
  @param indexReader IndexReader to identify the stopwords from
  @param fields Selection of fields to calculate stopwords for
  @param maxDocFreq Document frequency terms should be above in order to be stopwords
- @throws IOException Can be thrown while reading from the IndexReader
+ @throw IOExceptionCan be thrown while reading from the IndexReader
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
-                                 withJavaUtilCollection:(id<JavaUtilCollection>)fields
-                                                withInt:(jint)maxDocFreq;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
+                              withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
+                                           withJavaUtilCollection:(id<JavaUtilCollection>)fields
+                                                          withInt:(jint)maxDocFreq;
 
 /*!
  @brief Creates a new QueryAutoStopWordAnalyzer with stopwords calculated for all
- indexed fields from terms with a document frequency percentage greater than
- the given maxPercentDocs
+  indexed fields from terms with a document frequency percentage greater than
+  the given maxPercentDocs
  @param delegate Analyzer whose TokenStream will be filtered
  @param indexReader IndexReader to identify the stopwords from
- @param maxPercentDocs The maximum percentage (between 0.0 and 1.0) of index documents which
- contain a term, after which the word is considered to be a stop word
- @throws IOException Can be thrown while reading from the IndexReader
+ @param maxPercentDocs The maximum percentage (between 0.0 and 1.0) of index documents which                       contain a term, after which the word is considered to be a stop word
+ @throw IOExceptionCan be thrown while reading from the IndexReader
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
-                                              withFloat:(jfloat)maxPercentDocs;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
+                              withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
+                                                        withFloat:(jfloat)maxPercentDocs;
 
 /*!
  @brief Creates a new QueryAutoStopWordAnalyzer with stopwords calculated for all
- indexed fields from terms with a document frequency greater than the given
- maxDocFreq
+  indexed fields from terms with a document frequency greater than the given
+  maxDocFreq
  @param delegate Analyzer whose TokenStream will be filtered
  @param indexReader IndexReader to identify the stopwords from
  @param maxDocFreq Document frequency terms should be above in order to be stopwords
- @throws IOException Can be thrown while reading from the IndexReader
+ @throw IOExceptionCan be thrown while reading from the IndexReader
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
-                                                withInt:(jint)maxDocFreq;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
+                              withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
+                                                          withInt:(jint)maxDocFreq;
 
 /*!
  @brief Provides information on which stop words have been identified for all fields
@@ -119,8 +123,7 @@
 
 /*!
  @brief Provides information on which stop words have been identified for a field
- @param fieldName The field for which stop words identified in "addStopWords"
- method calls will be returned
+ @param fieldName The field for which stop words identified in "addStopWords"                   method calls will be returned
  @return the stop words identified for a field
  */
 - (IOSObjectArray *)getStopWordsWithNSString:(NSString *)fieldName;
@@ -132,11 +135,15 @@
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer)
 
-inline jfloat OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_get_defaultMaxDocFreqPercent();
+inline jfloat OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_get_defaultMaxDocFreqPercent(void);
 #define OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_defaultMaxDocFreqPercent 0.4f
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer, defaultMaxDocFreqPercent, jfloat)
 
@@ -174,4 +181,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueStr
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMutableMutableValueStr_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueStr || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueStr))
 #define OrgApacheLuceneUtilMutableMutableValueStr_
 
@@ -25,8 +31,8 @@
 /*!
  @brief <code>MutableValue</code> implementation of type <code>String</code>.
  When mutating instances of this object, the caller is responsible for ensuring 
- that any instance where <code>exists</code> is set to <code>false</code> must also 
- have a <code>value</code> with a length set to 0.
+  that any instance where <code>exists</code> is set to <code>false</code> must also 
+  have a <code>value</code> with a length set to 0.
  */
 @interface OrgApacheLuceneUtilMutableMutableValueStr : OrgApacheLuceneUtilMutableMutableValue {
  @public
@@ -35,7 +41,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)compareSameTypeWithId:(id)other;
 
@@ -57,12 +63,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMutableMutableValueStr, value_, OrgApache
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueStr_init(OrgApacheLuceneUtilMutableMutableValueStr *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueStr *new_OrgApacheLuceneUtilMutableMutableValueStr_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueStr *new_OrgApacheLuceneUtilMutableMutableValueStr_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueStr *create_OrgApacheLuceneUtilMutableMutableValueStr_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueStr *create_OrgApacheLuceneUtilMutableMutableValueStr_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueStr)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueStr")

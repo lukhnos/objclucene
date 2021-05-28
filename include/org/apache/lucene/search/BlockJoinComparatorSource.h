@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchBlockJoinComparatorSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchBlockJoinComparatorSource_) && (INCLUDE_ALL_OrgApacheLuceneSearchBlockJoinComparatorSource || defined(INCLUDE_OrgApacheLuceneSearchBlockJoinComparatorSource))
 #define OrgApacheLuceneSearchBlockJoinComparatorSource_
 
@@ -27,11 +33,11 @@
 /*!
  @brief Helper class to sort readers that contain blocks of documents.
  <p>
- Note that this class is intended to used with <code>SortingMergePolicy</code>,
- and for other purposes has some limitations:
+  Note that this class is intended to used with <code>SortingMergePolicy</code>,
+  and for other purposes has some limitations: 
  <ul>
- <li>Cannot yet be used with <code>IndexSearcher.searchAfter</code>
- <li>Filling sort field values is not yet supported.
+     <li>Cannot yet be used with <code>IndexSearcher.searchAfter</code>
+     <li>Filling sort field values is not yet supported. 
  </ul>
  */
 @interface OrgApacheLuceneSearchBlockJoinComparatorSource : OrgApacheLuceneSearchFieldComparatorSource {
@@ -45,23 +51,23 @@
 
 /*!
  @brief Create a new BlockJoinComparatorSource, sorting only blocks of documents
- with <code>parentSort</code> and not reordering children with a block.
+  with <code>parentSort</code> and not reordering children with a block.
  @param parentsFilter Filter identifying parent documents
  @param parentSort Sort for parent documents
  */
-- (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)parentsFilter
-                      withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)parentSort;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)parentsFilter
+                                withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)parentSort;
 
 /*!
  @brief Create a new BlockJoinComparatorSource, specifying the sort order for both
- blocks of documents and children within a block.
+  blocks of documents and children within a block.
  @param parentsFilter Filter identifying parent documents
  @param parentSort Sort for parent documents
  @param childSort Sort for child documents in the same block
  */
-- (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)parentsFilter
-                      withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)parentSort
-                      withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)childSort;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)parentsFilter
+                                withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)parentSort
+                                withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)childSort;
 
 - (OrgApacheLuceneSearchFieldComparator *)newComparatorWithNSString:(NSString *)fieldname
                                                             withInt:(jint)numHits
@@ -69,6 +75,10 @@
                                                         withBoolean:(jboolean)reversed OBJC_METHOD_FAMILY_NONE;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -94,4 +104,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBlockJoinComparatorSource)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBlockJoinComparatorSource")

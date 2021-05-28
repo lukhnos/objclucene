@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingDecompressor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingDecompressor_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingDecompressor || defined(INCLUDE_OrgApacheLuceneCodecsCompressingDecompressor))
 #define OrgApacheLuceneCodecsCompressingDecompressor_
 
@@ -26,21 +32,21 @@
 
 #pragma mark Public
 
-- (OrgApacheLuceneCodecsCompressingDecompressor *)clone;
+- (OrgApacheLuceneCodecsCompressingDecompressor *)java_clone;
 
 /*!
- @brief Decompress bytes that were stored between offsets <code>offset</code> and
- <code>offset+length</code> in the original stream from the compressed
- stream <code>in</code> to <code>bytes</code>.
- After returning, the length
- of <code>bytes</code> (<code>bytes.length</code>) must be equal to
- <code>length</code>. Implementations of this method are free to resize
+ @brief Decompress bytes that were stored between offsets <code>offset</code> and 
+ <code>offset+length</code> in the original stream from the compressed stream 
+ <code>in</code> to <code>bytes</code>.After returning, the length
+  of <code>bytes</code> (<code>bytes.length</code>) must be equal to 
+ <code>length</code>.
+ Implementations of this method are free to resize 
  <code>bytes</code> depending on their needs.
  @param inArg the input that stores the compressed stream
  @param originalLength the length of the original data (before compression)
  @param offset bytes before this offset do not need to be decompressed
- @param length bytes after <code>offset+length</code> do not need to be decompressed
- @param bytes a <code>BytesRef</code> where to store the decompressed data
+ @param length bytes after  <code> offset+length </code>  do not need to be decompressed
+ @param bytes a <code>BytesRef</code>  where to store the decompressed data
  */
 - (void)decompressWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                             withInt:(jint)originalLength
@@ -53,7 +59,7 @@
 /*!
  @brief Sole constructor, typically called from sub-classes.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -65,4 +71,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingDecompressor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingDecompressor")

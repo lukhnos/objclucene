@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenStreamToAutomaton
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenStreamToAutomaton_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenStreamToAutomaton || defined(INCLUDE_OrgApacheLuceneAnalysisTokenStreamToAutomaton))
 #define OrgApacheLuceneAnalysisTokenStreamToAutomaton_
 
@@ -22,25 +28,21 @@
 
 /*!
  @brief Consumes a TokenStream and creates an <code>Automaton</code>
- where the transition labels are UTF8 bytes (or Unicode 
- code points if unicodeArcs is true) from the <code>TermToBytesRefAttribute</code>
- .
- Between tokens we insert
- POS_SEP and for holes we insert HOLE.
-  
+   where the transition labels are UTF8 bytes (or Unicode 
+   code points if unicodeArcs is true) from the <code>TermToBytesRefAttribute</code>
+ .Between tokens we insert
+   POS_SEP and for holes we insert HOLE.
  */
 @interface OrgApacheLuceneAnalysisTokenStreamToAutomaton : NSObject
-
-+ (jint)POS_SEP;
-
-+ (jint)HOLE;
+@property (readonly, class) jint POS_SEP NS_SWIFT_NAME(POS_SEP);
+@property (readonly, class) jint HOLE NS_SWIFT_NAME(HOLE);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Whether to generate holes in the automaton for missing positions, <code>true</code> by default.
@@ -49,7 +51,7 @@
 
 /*!
  @brief Whether to make transition labels Unicode code points instead of UTF8 bytes, 
- <code>false</code> by default
+   <code>false</code> by default
  */
 - (void)setUnicodeArcsWithBoolean:(jboolean)unicodeArcs;
 
@@ -57,8 +59,8 @@
  @brief Pulls the graph (including <code>PositionLengthAttribute</code>
  ) from the provided <code>TokenStream</code>
  , and creates the corresponding
- automaton where arcs are bytes (or Unicode code points 
- if unicodeArcs = true) from each term.
+   automaton where arcs are bytes (or Unicode code points 
+   if unicodeArcs = true) from each term.
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
@@ -66,8 +68,8 @@
 
 /*!
  @brief Subclass and implement this if you need to change the
- token (such as escaping certain bytes) before it's
- turned into a graph.
+   token (such as escaping certain bytes) before it's
+   turned into a graph.
  */
 - (OrgApacheLuceneUtilBytesRef *)changeTokenWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)inArg;
 
@@ -78,25 +80,29 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenStreamToAutomaton)
 /*!
  @brief We create transition between two adjacent tokens.
  */
-inline jint OrgApacheLuceneAnalysisTokenStreamToAutomaton_get_POS_SEP();
+inline jint OrgApacheLuceneAnalysisTokenStreamToAutomaton_get_POS_SEP(void);
 #define OrgApacheLuceneAnalysisTokenStreamToAutomaton_POS_SEP 31
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisTokenStreamToAutomaton, POS_SEP, jint)
 
 /*!
  @brief We add this arc to represent a hole.
  */
-inline jint OrgApacheLuceneAnalysisTokenStreamToAutomaton_get_HOLE();
+inline jint OrgApacheLuceneAnalysisTokenStreamToAutomaton_get_HOLE(void);
 #define OrgApacheLuceneAnalysisTokenStreamToAutomaton_HOLE 30
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisTokenStreamToAutomaton, HOLE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenStreamToAutomaton_init(OrgApacheLuceneAnalysisTokenStreamToAutomaton *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenStreamToAutomaton *new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenStreamToAutomaton *new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenStreamToAutomaton *create_OrgApacheLuceneAnalysisTokenStreamToAutomaton_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenStreamToAutomaton *create_OrgApacheLuceneAnalysisTokenStreamToAutomaton_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenStreamToAutomaton)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenStreamToAutomaton")

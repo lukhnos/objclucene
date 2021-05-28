@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsLiveDocsFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsLiveDocsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLiveDocsFormat || defined(INCLUDE_OrgApacheLuceneCodecsLiveDocsFormat))
 #define OrgApacheLuceneCodecsLiveDocsFormat_
 
@@ -25,7 +31,6 @@
 
 /*!
  @brief Format for live/deleted documents
-  
  */
 @interface OrgApacheLuceneCodecsLiveDocsFormat : NSObject
 
@@ -55,10 +60,9 @@
                                            withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 /*!
- @brief Persist live docs bits.
- Use <code>SegmentCommitInfo.getNextDelGen</code>
+ @brief Persist live docs bits.Use <code>SegmentCommitInfo.getNextDelGen</code>
   to determine the
- generation of the deletes file you should write to. 
+   generation of the deletes file you should write to.
  */
 - (void)writeLiveDocsWithOrgApacheLuceneUtilMutableBits:(id<OrgApacheLuceneUtilMutableBits>)bits
                       withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
@@ -71,9 +75,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -85,4 +89,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLiveDocsFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLiveDocsFormat")

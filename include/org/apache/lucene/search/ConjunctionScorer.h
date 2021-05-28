@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchConjunctionScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchConjunctionScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchConjunctionScorer || defined(INCLUDE_OrgApacheLuceneSearchConjunctionScorer))
 #define OrgApacheLuceneSearchConjunctionScorer_
 
@@ -50,33 +56,37 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                   withJavaUtilList:(id<JavaUtilList>)required
-                                   withJavaUtilList:(id<JavaUtilList>)scorers;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                           withJavaUtilList:(id<JavaUtilList>)required
+                                                           withJavaUtilList:(id<JavaUtilList>)scorers;
 
 /*!
  @brief Create a new <code>ConjunctionScorer</code>, note that <code>scorers</code> must be a subset of <code>required</code>.
  */
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                   withJavaUtilList:(id<JavaUtilList>)required
-                                   withJavaUtilList:(id<JavaUtilList>)scorers
-                                          withFloat:(jfloat)coord;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                           withJavaUtilList:(id<JavaUtilList>)required
+                                                           withJavaUtilList:(id<JavaUtilList>)scorers
+                                                                  withFloat:(jfloat)coord;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConjunctionScorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchConjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchConjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *new_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *new_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers);
+FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *create_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchConjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchConjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *new_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *new_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord);
+FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *create_OrgApacheLuceneSearchConjunctionScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionScorer)
 
@@ -96,7 +106,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionScorer)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -114,4 +128,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchConjunctionScorer")

@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/store/BufferedChecksumIndexInput.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/zip/CRC32.h"
 #include "java/util/zip/Checksum.h"
@@ -14,6 +12,10 @@
 #include "org/apache/lucene/store/BufferedChecksumIndexInput.h"
 #include "org/apache/lucene/store/ChecksumIndexInput.h"
 #include "org/apache/lucene/store/IndexInput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/BufferedChecksumIndexInput must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneStoreBufferedChecksumIndexInput
 
@@ -51,7 +53,7 @@
   return [((OrgApacheLuceneStoreIndexInput *) nil_chk(main_)) length];
 }
 
-- (OrgApacheLuceneStoreIndexInput *)clone {
+- (OrgApacheLuceneStoreIndexInput *)java_clone {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
@@ -68,22 +70,36 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:", "BufferedChecksumIndexInput", NULL, 0x1, NULL, NULL },
-    { "readByte", NULL, "B", 0x1, "Ljava.io.IOException;", NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChecksum", NULL, "J", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
-    { "length", NULL, "J", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.store.IndexInput;", 0x1, NULL, NULL },
-    { "sliceWithNSString:withLong:withLong:", "slice", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 5, 6, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexInput:);
+  methods[1].selector = @selector(readByte);
+  methods[2].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  methods[3].selector = @selector(getChecksum);
+  methods[4].selector = @selector(close);
+  methods[5].selector = @selector(getFilePointer);
+  methods[6].selector = @selector(length);
+  methods[7].selector = @selector(java_clone);
+  methods[8].selector = @selector(sliceWithNSString:withLong:withLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "main_", NULL, 0x10, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "digest_", NULL, 0x10, "Ljava.util.zip.Checksum;", NULL, NULL, .constantValue.asLong = 0 },
+    { "main_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "digest_", "LJavaUtilZipChecksum;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreBufferedChecksumIndexInput = { 2, "BufferedChecksumIndexInput", "org.apache.lucene.store", NULL, 0x1, 9, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;", "LJavaIoIOException;", "readBytes", "[BII", "clone", "slice", "LNSString;JJ" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreBufferedChecksumIndexInput = { "BufferedChecksumIndexInput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 9, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreBufferedChecksumIndexInput;
 }
 

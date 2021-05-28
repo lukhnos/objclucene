@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_
 
@@ -32,12 +38,12 @@
 /*!
  @brief Factory for <code>ASCIIFoldingFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_ascii" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.ASCIIFoldingFilterFactory" preserveOriginal="false"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_ascii" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.ASCIIFoldingFilterFactory" preserveOriginal="false"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
@@ -47,7 +53,7 @@
 /*!
  @brief Creates a new ASCIIFoldingFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -67,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilte
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory")

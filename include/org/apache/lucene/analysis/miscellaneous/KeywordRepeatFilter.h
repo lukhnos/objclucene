@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_
 
@@ -23,10 +29,10 @@
 @class OrgApacheLuceneAnalysisTokenStream;
 
 /*!
- @brief This TokenFilter emits each incoming token twice once as keyword and once non-keyword, in other words once with
+ @brief This TokenFilter emits each incoming token twice once as keyword and once non-keyword, in other words once with 
  <code>KeywordAttribute.setKeyword(boolean)</code> set to <code>true</code> and once set to <code>false</code>.
  This is useful if used with a stem filter that respects the <code>KeywordAttribute</code> to index the stemmed and the
- un-stemmed version of a term into the same field.
+  un-stemmed version of a term into the same field.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -35,7 +41,7 @@
 /*!
  @brief Construct a token stream filtering the given input.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
 
@@ -55,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter")

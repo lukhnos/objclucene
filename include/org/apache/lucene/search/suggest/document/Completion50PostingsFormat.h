@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat))
 #define OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_
 
@@ -24,7 +30,7 @@
 
 /*!
  @brief <code>org.apache.lucene.search.suggest.document.CompletionPostingsFormat</code>
- for <code>org.apache.lucene.codecs.lucene50.Lucene50PostingsFormat</code>
+  for <code>org.apache.lucene.codecs.lucene50.Lucene50PostingsFormat</code>
  */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat : OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat
 
@@ -33,7 +39,7 @@
 /*!
  @brief Sole Constructor
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Protected
 
@@ -45,12 +51,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletion50Posting
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_init(OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat *new_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat *new_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat *create_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat *create_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat")

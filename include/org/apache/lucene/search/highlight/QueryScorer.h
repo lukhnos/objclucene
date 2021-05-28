@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightQueryScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightQueryScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightQueryScorer || defined(INCLUDE_OrgApacheLuceneSearchHighlightQueryScorer))
 #define OrgApacheLuceneSearchHighlightQueryScorer_
 
@@ -30,10 +36,9 @@
 
 /*!
  @brief <code>Scorer</code> implementation which scores text fragments by the number of
- unique query terms found.
- This class converts appropriate <code>Query</code>s to
+  unique query terms found.This class converts appropriate <code>Query</code>s to 
  <code>SpanQuery</code>s and attempts to score only those terms that participated in
- generating the 'hit' on the document.
+  generating the 'hit' on the document.
  */
 @interface OrgApacheLuceneSearchHighlightQueryScorer : NSObject < OrgApacheLuceneSearchHighlightScorer >
 
@@ -42,61 +47,60 @@
 /*!
  @param query Query to use for highlighting
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 /*!
  @param query Query to use for highlighting
  @param field Field to highlight - pass null to ignore fields
- @param reader <code>IndexReader</code> to use for quasi tf/idf scoring
+ @param reader<code>IndexReader</code>  to use for quasi tf/idf scoring
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-               withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                      withNSString:(NSString *)field;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                         withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                                withNSString:(NSString *)field;
 
 /*!
  @param query to use for highlighting
- @param reader <code>IndexReader</code> to use for quasi tf/idf scoring
+ @param reader<code>IndexReader</code>  to use for quasi tf/idf scoring
  @param field to highlight - pass null to ignore fields
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-               withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                      withNSString:(NSString *)field
-                                      withNSString:(NSString *)defaultField;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                         withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                                withNSString:(NSString *)field
+                                                withNSString:(NSString *)defaultField;
 
 /*!
  @param query Query to use for highlighting
  @param field Field to highlight - pass null to ignore fields
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                      withNSString:(NSString *)field;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                                                withNSString:(NSString *)field;
 
 /*!
  @param defaultField - The default field for queries with the field name unspecified
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                      withNSString:(NSString *)field
-                                      withNSString:(NSString *)defaultField;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
+                                                withNSString:(NSString *)field
+                                                withNSString:(NSString *)defaultField;
 
 /*!
- @param weightedTerms an array of pre-created <code>WeightedSpanTerm</code>s
+ @param weightedTerms an array of pre-created <code>WeightedSpanTerm</code> s
  */
-- (instancetype)initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray:(IOSObjectArray *)weightedTerms;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray:(IOSObjectArray *)weightedTerms;
 
 - (jfloat)getFragmentScore;
 
 /*!
  @return The highest weighted term (useful for passing to
- GradientFormatter to set top end of coloring scale).
+          GradientFormatter to set top end of coloring scale).
  */
 - (jfloat)getMaxTermWeight;
 
 - (jfloat)getTokenScore;
 
 /*!
- @brief Retrieve the <code>WeightedSpanTerm</code> for the specified token.
- Useful for passing
- Span information to a <code>Fragmenter</code>.
- @param token to get <code>WeightedSpanTerm</code> for
+ @brief Retrieve the <code>WeightedSpanTerm</code> for the specified token.Useful for passing
+  Span information to a <code>Fragmenter</code>.
+ @param token to get <code>WeightedSpanTerm</code>  for
  @return WeightedSpanTerm for token
  */
 - (OrgApacheLuceneSearchHighlightWeightedSpanTerm *)getWeightedSpanTermWithNSString:(NSString *)token;
@@ -116,7 +120,7 @@
 
 /*!
  @brief Controls whether or not multi-term queries are expanded
- against a <code>MemoryIndex</code> <code>IndexReader</code>.
+  against a <code>MemoryIndex</code> <code>IndexReader</code>.
  @param expandMultiTermQuery true if multi-term queries should be expanded
  */
 - (void)setExpandMultiTermQueryWithBoolean:(jboolean)expandMultiTermQuery;
@@ -126,13 +130,12 @@
 - (void)setUsePayloadsWithBoolean:(jboolean)usePayloads;
 
 /*!
- @brief By default, <code>TokenStream</code>s that are not of the type
+ @brief By default, <code>TokenStream</code>s that are not of the type 
  <code>CachingTokenFilter</code> are wrapped in a <code>CachingTokenFilter</code> to
- ensure an efficient reset - if you are already using a different caching
+  ensure an efficient reset - if you are already using a different caching 
  <code>TokenStream</code> impl and you don't want it to be wrapped, set this to
- false.
- Note that term-vector based tokenstreams are detected and won't be
- wrapped either.
+  false.Note that term-vector based tokenstreams are detected and won't be
+  wrapped either.
  */
 - (void)setWrapIfNotCachingTokenFilterWithBoolean:(jboolean)wrap;
 
@@ -141,6 +144,10 @@
 #pragma mark Protected
 
 - (OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor *)newTermExtractorWithNSString:(NSString *)defaultField OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -186,4 +193,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightQueryScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightQueryScorer")

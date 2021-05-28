@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexDocValuesFieldUpdates
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocValuesFieldUpdates_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesFieldUpdates || defined(INCLUDE_OrgApacheLuceneIndexDocValuesFieldUpdates))
 #define OrgApacheLuceneIndexDocValuesFieldUpdates_
 
@@ -27,14 +33,12 @@
   NSString *field_;
   OrgApacheLuceneIndexDocValuesType *type_;
 }
-
-// + (jint)PAGE_SIZE; // disabled by translate.py
+@property (readonly, class) jint PAGE_SIZE_ NS_SWIFT_NAME(PAGE_SIZE_);
 
 #pragma mark Public
 
 /*!
- @brief Add an update to a document.
- For unsetting a value you should pass
+ @brief Add an update to a document.For unsetting a value you should pass 
  <code>null</code>.
  */
 - (void)addWithInt:(jint)doc
@@ -47,15 +51,15 @@
 
 /*!
  @brief Returns an <code>Iterator</code> over the updated documents and their
- values.
+  values.
  */
 - (OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator *)iterator;
 
 /*!
- @brief Merge with another <code>DocValuesFieldUpdates</code>.
- This is called for a
- segment which received updates while it was being merged. The given updates
- should override whatever updates are in that instance.
+ @brief Merge with another <code>DocValuesFieldUpdates</code>.This is called for a
+  segment which received updates while it was being merged.
+ The given updates
+  should override whatever updates are in that instance.
  */
 - (void)mergeWithOrgApacheLuceneIndexDocValuesFieldUpdates:(OrgApacheLuceneIndexDocValuesFieldUpdates *)other;
 
@@ -66,14 +70,18 @@
 
 #pragma mark Protected
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type;
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)field
+                   withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type;
 
 /*!
  @brief Returns the estimated capacity of a <code>PagedGrowableWriter</code> given the
- actual number of stored elements.
+  actual number of stored elements.
  */
 + (jint)estimateCapacityWithInt:(jint)size;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -82,11 +90,11 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocValuesFieldUpdates)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesFieldUpdates, field_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesFieldUpdates, type_, OrgApacheLuceneIndexDocValuesType *)
 
-inline jint OrgApacheLuceneIndexDocValuesFieldUpdates_get_PAGE_SIZE();
+inline jint OrgApacheLuceneIndexDocValuesFieldUpdates_get_PAGE_SIZE(void);
 #define OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE 1024
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocValuesFieldUpdates, PAGE_SIZE, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesFieldUpdates_initWithNSString_withOrgApacheLuceneIndexDocValuesType_(OrgApacheLuceneIndexDocValuesFieldUpdates *self, NSString *field, OrgApacheLuceneIndexDocValuesType *type);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesFieldUpdates_initPackagePrivateWithNSString_withOrgApacheLuceneIndexDocValuesType_(OrgApacheLuceneIndexDocValuesFieldUpdates *self, NSString *field, OrgApacheLuceneIndexDocValuesType *type);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexDocValuesFieldUpdates_estimateCapacityWithInt_(jint size);
 
@@ -98,16 +106,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesFieldUpdates)
 #define OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator_
 
 /*!
- @brief An iterator over documents and their updated values.
- Only documents with
- updates are returned by this iterator, and the documents are returned in
- increasing order.
+ @brief An iterator over documents and their updated values.Only documents with
+  updates are returned by this iterator, and the documents are returned in
+  increasing order.
  */
 @interface OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator : NSObject
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns the current document this iterator is on.
@@ -115,23 +122,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesFieldUpdates)
 - (jint)doc;
 
 /*!
- @brief Returns the next document which has an update, or
+ @brief Returns the next document which has an update, or 
  <code>DocIdSetIterator.NO_MORE_DOCS</code> if there are no more documents to
- return.
+  return.
  */
 - (jint)nextDoc;
 
 /*!
- @brief Reset the iterator's state.
- Should be called before <code>nextDoc()</code>
- and <code>value()</code>.
+ @brief Reset the iterator's state.Should be called before <code>nextDoc()</code>
+  and <code>value()</code>.
  */
 - (void)reset;
 
 /*!
- @brief Returns the value of the document returned from <code>nextDoc()</code>.
- A
- <code>null</code> value means that it was unset for this document.
+ @brief Returns the value of the document returned from <code>nextDoc()</code>.A
+  <code>null</code> value means that it was unset for this document.
  */
 - (id)value;
 
@@ -164,7 +169,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jboolean)any;
 
@@ -188,12 +193,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesFieldUpdates_Container, binaryD
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init(OrgApacheLuceneIndexDocValuesFieldUpdates_Container *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesFieldUpdates_Container *new_OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesFieldUpdates_Container *new_OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesFieldUpdates_Container *create_OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesFieldUpdates_Container *create_OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesFieldUpdates_Container)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesFieldUpdates")

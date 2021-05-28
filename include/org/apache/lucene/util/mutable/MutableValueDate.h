@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueDate
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMutableMutableValueDate_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDate || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueDate))
 #define OrgApacheLuceneUtilMutableMutableValueDate_
 
@@ -30,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneUtilMutableMutableValue *)duplicate;
 
@@ -42,12 +48,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilMutableMutableValueDate)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueDate_init(OrgApacheLuceneUtilMutableMutableValueDate *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDate *new_OrgApacheLuceneUtilMutableMutableValueDate_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDate *new_OrgApacheLuceneUtilMutableMutableValueDate_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDate *create_OrgApacheLuceneUtilMutableMutableValueDate_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDate *create_OrgApacheLuceneUtilMutableMutableValueDate_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueDate)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDate")

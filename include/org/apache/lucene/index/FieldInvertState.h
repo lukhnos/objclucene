@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFieldInvertState
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFieldInvertState_) && (INCLUDE_ALL_OrgApacheLuceneIndexFieldInvertState || defined(INCLUDE_OrgApacheLuceneIndexFieldInvertState))
 #define OrgApacheLuceneIndexFieldInvertState_
 
@@ -24,9 +30,8 @@
 
 /*!
  @brief This class tracks the number and position / offset parameters of terms
- being added to the index.
- The information collected in this class is
- also used to calculate the normalization factor for a field.
+  being added to the index.The information collected in this class is
+  also used to calculate the normalization factor for a field.
  */
 @interface OrgApacheLuceneIndexFieldInvertState : NSObject {
  @public
@@ -51,33 +56,32 @@
 
 /*!
  @brief Creates {code FieldInvertState} for the specified
- field name.
+   field name.
  */
-- (instancetype)initWithNSString:(NSString *)name;
+- (instancetype __nonnull)initWithNSString:(NSString *)name;
 
 /*!
  @brief Creates {code FieldInvertState} for the specified
- field name and values for all fields.
+   field name and values for all fields.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)position
-                         withInt:(jint)length
-                         withInt:(jint)numOverlap
-                         withInt:(jint)offset
-                       withFloat:(jfloat)boost;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                   withInt:(jint)position
+                                   withInt:(jint)length
+                                   withInt:(jint)numOverlap
+                                   withInt:(jint)offset
+                                 withFloat:(jfloat)boost;
 
 /*!
  @brief Returns the <code>AttributeSource</code> from the <code>TokenStream</code>
   that provided the indexed tokens for this
- field.
+   field.
  */
 - (OrgApacheLuceneUtilAttributeSource *)getAttributeSource;
 
 /*!
- @brief Get boost value.
- This is the cumulative product of
- document boost and field boost for all field instances
- sharing the same field name.
+ @brief Get boost value.This is the cumulative product of
+  document boost and field boost for all field instances
+  sharing the same field name.
  @return the boost
  */
 - (jfloat)getBoost;
@@ -89,10 +93,9 @@
 - (jint)getLength;
 
 /*!
- @brief Get the maximum term-frequency encountered for any term in the field.
- A
- field containing "the quick brown fox jumps over the lazy dog" would have
- a value of 2, because "the" appears twice.
+ @brief Get the maximum term-frequency encountered for any term in the field.A
+  field containing "the quick brown fox jumps over the lazy dog" would have
+  a value of 2, because "the" appears twice.
  */
 - (jint)getMaxTermFrequency;
 
@@ -136,7 +139,7 @@
 
 /*!
  @brief Set number of terms with <code>positionIncrement ==
- 0</code>
+   0</code>
  .
  */
 - (void)setNumOverlapWithInt:(jint)numOverlap;
@@ -152,6 +155,10 @@
  @brief Sets attributeSource to a new instance.
  */
 - (void)setAttributeSourceWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)attributeSource;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -180,4 +187,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInvertState)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFieldInvertState")

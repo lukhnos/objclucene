@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedBlockPackedReaderIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedBlockPackedReaderIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedReaderIterator || defined(INCLUDE_OrgApacheLuceneUtilPackedBlockPackedReaderIterator))
 #define OrgApacheLuceneUtilPackedBlockPackedReaderIterator_
 
@@ -42,14 +48,13 @@
 
 /*!
  @brief Sole constructor.
- @param blockSize the number of values of a block, must be equal to the
- block size of the <code>BlockPackedWriter</code> which has
- been used to write the stream
+ @param blockSize the number of values of a block, must be equal to the                   block size of the 
+ <code>BlockPackedWriter</code>  which has                   been used to write the stream
  */
-- (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                                              withInt:(jint)packedIntsVersion
-                                              withInt:(jint)blockSize
-                                             withLong:(jlong)valueCount;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                                        withInt:(jint)packedIntsVersion
+                                                        withInt:(jint)blockSize
+                                                       withLong:(jlong)valueCount;
 
 /*!
  @brief Read the next value.
@@ -68,8 +73,7 @@
 
 /*!
  @brief Reset the current reader to wrap a stream of <code>valueCount</code>
- values contained in <code>in</code>.
- The block size remains unchanged. 
+  values contained in <code>in</code>.The block size remains unchanged.
  */
 - (void)resetWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                       withLong:(jlong)valueCount;
@@ -82,6 +86,10 @@
 #pragma mark Package-Private
 
 + (jlong)readVLongWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -104,4 +112,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedBlockPackedReaderIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedReaderIterator")

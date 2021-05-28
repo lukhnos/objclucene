@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector))
 #define OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_
 
@@ -26,18 +32,18 @@
 
 /*!
  @brief <code>org.apache.lucene.search.Collector</code> that collects completion and
- score, along with document id
+  score, along with document id
  <p>
- Non scoring collector that collect completions in order of their
- pre-computed scores.
+  Non scoring collector that collect completions in order of their
+  pre-computed scores.
  <p>
- NOTE: One document can be collected multiple times if a document
- is matched for multiple unique completions for a given query
+  NOTE: One document can be collected multiple times if a document
+  is matched for multiple unique completions for a given query 
  <p>
- Subclasses should only override
- <code>TopSuggestDocsCollector.collect(int,CharSequence,CharSequence,float)</code>.
- <p>
- NOTE: <code>setScorer(org.apache.lucene.search.Scorer)</code> and
+  Subclasses should only override 
+ <code>TopSuggestDocsCollector.collect(int, CharSequence, CharSequence, float)</code>.
+  <p>
+  NOTE: <code>setScorer(org.apache.lucene.search.Scorer)</code> and 
  <code>collect(int)</code> is not used
  */
 @interface OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector : OrgApacheLuceneSearchSimpleCollector {
@@ -52,10 +58,10 @@
 
 /*!
  @brief Sole constructor
- Collects at most <code>num</code> completions
- with corresponding document and weight
+  Collects at most <code>num</code> completions
+  with corresponding document and weight
  */
-- (instancetype)initWithInt:(jint)num;
+- (instancetype __nonnull)initWithInt:(jint)num;
 
 /*!
  @brief Ignored
@@ -64,10 +70,10 @@
 
 /*!
  @brief Called for every matched completion,
- similar to <code>org.apache.lucene.search.LeafCollector.collect(int)</code>
- but for completions.
+  similar to <code>org.apache.lucene.search.LeafCollector.collect(int)</code>
+  but for completions.
  NOTE: collection at the leaf level is guaranteed to be in
- descending order of score
+  descending order of score
  */
 - (void)collectWithInt:(jint)docID
 withJavaLangCharSequence:(id<JavaLangCharSequence>)key
@@ -93,6 +99,10 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)context
 
 - (void)doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector)
@@ -107,4 +117,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCol
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector")

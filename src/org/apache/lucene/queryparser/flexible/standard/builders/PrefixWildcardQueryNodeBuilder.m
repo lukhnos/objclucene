@@ -3,17 +3,19 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/builders/PrefixWildcardQueryNodeBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
 #include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/builders/PrefixWildcardQueryNodeBuilder.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/PrefixWildcardQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/processors/MultiTermRewriteMethodProcessor.h"
 #include "org/apache/lucene/search/MultiTermQuery.h"
 #include "org/apache/lucene/search/PrefixQuery.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/builders/PrefixWildcardQueryNodeBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder
 
@@ -26,7 +28,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchPrefixQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
   OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *wildcardNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode class]);
-  NSString *text = [((id<JavaLangCharSequence>) nil_chk([((id<JavaLangCharSequence>) nil_chk([((OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *) nil_chk(wildcardNode)) getText])) subSequenceFrom:0 to:[((id<JavaLangCharSequence>) nil_chk([wildcardNode getText])) length] - 1])) description];
+  NSString *text = JreRetainedLocalValue([((id<JavaLangCharSequence>) nil_chk([((id<JavaLangCharSequence>) nil_chk([((OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *) nil_chk(wildcardNode)) getText])) subSequenceFrom:0 to:[((id<JavaLangCharSequence>) nil_chk([wildcardNode getText])) java_length] - 1])) description]);
   OrgApacheLuceneSearchPrefixQuery *q = create_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([wildcardNode getFieldAsString], text));
   OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) cast_chk([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiTermRewriteMethodProcessor_TAG_ID], [OrgApacheLuceneSearchMultiTermQuery_RewriteMethod class]);
   if (method != nil) {
@@ -36,11 +38,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PrefixWildcardQueryNodeBuilder", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Lorg.apache.lucene.search.PrefixQuery;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchPrefixQuery;", 0x1, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder = { 2, "PrefixWildcardQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "build", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", "LOrgApacheLuceneQueryparserFlexibleCoreQueryNodeException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder = { "PrefixWildcardQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder;
 }
 

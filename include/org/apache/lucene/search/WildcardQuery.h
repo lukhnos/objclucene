@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchWildcardQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchWildcardQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchWildcardQuery || defined(INCLUDE_OrgApacheLuceneSearchWildcardQuery))
 #define OrgApacheLuceneSearchWildcardQuery_
 
@@ -24,42 +30,39 @@
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 
 /*!
- @brief Implements the wildcard search query.
- Supported wildcards are <code>*</code>, which
- matches any character sequence (including the empty one), and <code>?</code>,
- which matches any single character. '\' is the escape character.
+ @brief Implements the wildcard search query.Supported wildcards are <code>
+ *</code>, which matches any character sequence (including the empty one), and <code>?
+ </code>,
+  which matches any single character. '\' is the escape character. 
  <p>
- Note this query can be slow, as it
- needs to iterate over many terms. In order to prevent extremely slow WildcardQueries,
- a Wildcard term should not start with the wildcard <code>*</code>
+  Note this query can be slow, as it
+  needs to iterate over many terms. In order to prevent extremely slow WildcardQueries,
+  a Wildcard term should not start with the wildcard <code>
+ *</code>  
  <p>This query uses the <code>MultiTermQuery.CONSTANT_SCORE_REWRITE</code>
- rewrite method.
+  rewrite method.
  - seealso: AutomatonQuery
  */
 @interface OrgApacheLuceneSearchWildcardQuery : OrgApacheLuceneSearchAutomatonQuery
-
-+ (jchar)WILDCARD_STRING;
-
-+ (jchar)WILDCARD_CHAR;
-
-+ (jchar)WILDCARD_ESCAPE;
+@property (readonly, class) jchar WILDCARD_STRING NS_SWIFT_NAME(WILDCARD_STRING);
+@property (readonly, class) jchar WILDCARD_CHAR NS_SWIFT_NAME(WILDCARD_CHAR);
+@property (readonly, class) jchar WILDCARD_ESCAPE NS_SWIFT_NAME(WILDCARD_ESCAPE);
 
 #pragma mark Public
 
 /*!
  @brief Constructs a query for terms matching <code>term</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 /*!
  @brief Constructs a query for terms matching <code>term</code>.
- @param maxDeterminizedStates maximum number of states in the resulting
- automata.  If the automata would need more than this many states
- TooComplextToDeterminizeException is thrown.  Higher number require more
- space but can process more complex automata.
+ @param maxDeterminizedStates maximum number of states in the resulting    automata.  If the automata would need more than this many states
+     TooComplextToDeterminizeException is thrown.  Higher number require more
+     space but can process more complex automata.
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)maxDeterminizedStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                   withInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief Returns the pattern term.
@@ -76,6 +79,20 @@
  */
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1
+                                                   withInt:(jint)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1
+                                                   withInt:(jint)arg2
+                                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchWildcardQuery)
@@ -83,21 +100,21 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchWildcardQuery)
 /*!
  @brief String equality with support for wildcards
  */
-inline jchar OrgApacheLuceneSearchWildcardQuery_get_WILDCARD_STRING();
+inline jchar OrgApacheLuceneSearchWildcardQuery_get_WILDCARD_STRING(void);
 #define OrgApacheLuceneSearchWildcardQuery_WILDCARD_STRING '*'
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchWildcardQuery, WILDCARD_STRING, jchar)
 
 /*!
  @brief Char equality with support for wildcards
  */
-inline jchar OrgApacheLuceneSearchWildcardQuery_get_WILDCARD_CHAR();
+inline jchar OrgApacheLuceneSearchWildcardQuery_get_WILDCARD_CHAR(void);
 #define OrgApacheLuceneSearchWildcardQuery_WILDCARD_CHAR '?'
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchWildcardQuery, WILDCARD_CHAR, jchar)
 
 /*!
  @brief Escape character
  */
-inline jchar OrgApacheLuceneSearchWildcardQuery_get_WILDCARD_ESCAPE();
+inline jchar OrgApacheLuceneSearchWildcardQuery_get_WILDCARD_ESCAPE(void);
 #define OrgApacheLuceneSearchWildcardQuery_WILDCARD_ESCAPE '\\'
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchWildcardQuery, WILDCARD_ESCAPE, jchar)
 
@@ -119,4 +136,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchWildcardQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchWildcardQuery")

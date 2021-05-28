@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisFiFinnishLightStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisFiFinnishLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFiFinnishLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisFiFinnishLightStemmer))
 #define OrgApacheLuceneAnalysisFiFinnishLightStemmer_
 
@@ -21,15 +27,15 @@
 /*!
  @brief Light Stemmer for Finnish.
  <p>
- This stemmer implements the algorithm described in:
+  This stemmer implements the algorithm described in: 
  <i>Report on CLEF-2003 Monolingual Tracks</i>
- Jacques Savoy
+  Jacques Savoy
  */
 @interface OrgApacheLuceneAnalysisFiFinnishLightStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -40,12 +46,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisFiFinnishLightStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(OrgApacheLuceneAnalysisFiFinnishLightStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFiFinnishLightStemmer *new_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFiFinnishLightStemmer *new_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFiFinnishLightStemmer *create_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFiFinnishLightStemmer *create_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFiFinnishLightStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFiFinnishLightStemmer")

@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/LeafFieldComparator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/LeafFieldComparator must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchLeafFieldComparator : NSObject
 
 @end
@@ -13,14 +17,24 @@
 @implementation OrgApacheLuceneSearchLeafFieldComparator
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setBottomWithInt:", "setBottom", "V", 0x401, NULL, NULL },
-    { "compareBottomWithInt:", "compareBottom", "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "compareTopWithInt:", "compareTop", "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "copy__WithInt:withInt:", "copy", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, 2, 1, 3, -1, -1, -1 },
+    { NULL, "I", 0x401, 4, 1, 3, -1, -1, -1 },
+    { NULL, "V", 0x401, 5, 6, 3, -1, -1, -1 },
+    { NULL, "V", 0x401, 7, 8, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchLeafFieldComparator = { 2, "LeafFieldComparator", "org.apache.lucene.search", NULL, 0x609, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setBottomWithInt:);
+  methods[1].selector = @selector(compareBottomWithInt:);
+  methods[2].selector = @selector(compareTopWithInt:);
+  methods[3].selector = @selector(copy__WithInt:withInt:);
+  methods[4].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setBottom", "I", "compareBottom", "LJavaIoIOException;", "compareTop", "copy", "II", "setScorer", "LOrgApacheLuceneSearchScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchLeafFieldComparator = { "LeafFieldComparator", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x609, 5, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchLeafFieldComparator;
 }
 

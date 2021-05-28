@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute))
 #define OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_
 
@@ -23,24 +29,24 @@
 /*!
  @brief The start and end character offset of a Token.
  */
-@protocol OrgApacheLuceneAnalysisTokenattributesOffsetAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisTokenattributesOffsetAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
  @brief Returns this Token's starting offset, the position of the first character
- corresponding to this token in the source text.
+  corresponding to this token in the source text.
  <p>
- Note that the difference between <code>endOffset()</code> and <code>startOffset()</code> 
- may not be equal to termText.length(), as the term text may have been altered by a
- stemmer or some other filter.
- - seealso: #setOffset(int,int)
+  Note that the difference between <code>endOffset()</code> and <code>startOffset()</code> 
+  may not be equal to termText.length(), as the term text may have been altered by a
+  stemmer or some other filter.
+ - seealso: #setOffset(int, int)
  */
 - (jint)startOffset;
 
 /*!
  @brief Set the starting and ending offset.
- @throws IllegalArgumentException If <code>startOffset</code> or <code>endOffset</code>
- are negative, or if <code>startOffset</code> is greater than 
- <code>endOffset</code>
+ @throw IllegalArgumentExceptionIf <code>startOffset</code> or <code>endOffset</code>
+          are negative, or if <code>startOffset</code> is greater than 
+          <code>endOffset</code>
  - seealso: #startOffset()
  - seealso: #endOffset()
  */
@@ -49,10 +55,9 @@
 
 /*!
  @brief Returns this Token's ending offset, one greater than the position of the
- last character corresponding to this token in the source text.
- The length
- of the token in the source text is (<code>endOffset()</code> - <code>startOffset()</code>). 
- - seealso: #setOffset(int,int)
+  last character corresponding to this token in the source text.The length
+  of the token in the source text is (<code>endOffset()</code> - <code>startOffset()</code>).
+ - seealso: #setOffset(int, int)
  */
 - (jint)endOffset;
 
@@ -64,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesOffsetAttribute
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute")

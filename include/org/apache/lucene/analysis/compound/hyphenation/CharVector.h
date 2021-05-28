@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationCharVector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundHyphenationCharVector_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationCharVector || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationCharVector))
 #define OrgApacheLuceneAnalysisCompoundHyphenationCharVector_
 
@@ -20,21 +26,21 @@
 
 /*!
  @brief This class implements a simple char vector with access to the underlying
- array.
- This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified. 
+  array.
+ This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified.
  */
 @interface OrgApacheLuceneAnalysisCompoundHyphenationCharVector : NSObject < NSCopying >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithCharArray:(IOSCharArray *)a;
+- (instancetype __nonnull)initWithCharArray:(IOSCharArray *)a;
 
-- (instancetype)initWithCharArray:(IOSCharArray *)a
-                          withInt:(jint)capacity;
+- (instancetype __nonnull)initWithCharArray:(IOSCharArray *)a
+                                    withInt:(jint)capacity;
 
-- (instancetype)initWithInt:(jint)capacity;
+- (instancetype __nonnull)initWithInt:(jint)capacity;
 
 - (jint)alloc__WithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
 
@@ -48,7 +54,7 @@
  */
 - (void)clear;
 
-- (OrgApacheLuceneAnalysisCompoundHyphenationCharVector *)clone;
+- (OrgApacheLuceneAnalysisCompoundHyphenationCharVector *)java_clone;
 
 - (jchar)getWithInt:(jint)index;
 
@@ -70,9 +76,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCompoundHyphenationCharVector)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init(OrgApacheLuceneAnalysisCompoundHyphenationCharVector *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationCharVector *new_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationCharVector *new_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationCharVector *create_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationCharVector *create_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithInt_(OrgApacheLuceneAnalysisCompoundHyphenationCharVector *self, jint capacity);
 
@@ -96,4 +102,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationCharVector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationCharVector")

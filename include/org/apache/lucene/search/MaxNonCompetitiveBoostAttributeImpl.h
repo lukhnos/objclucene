@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl || defined(INCLUDE_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl))
 #define OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_
 
@@ -34,7 +40,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)clear;
 
@@ -43,6 +49,8 @@
 - (OrgApacheLuceneUtilBytesRef *)getCompetitiveTerm;
 
 - (jfloat)getMaxNonCompetitiveBoost;
+
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone;
 
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector;
 
@@ -56,12 +64,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImp
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *new_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *new_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *create_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *create_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl")

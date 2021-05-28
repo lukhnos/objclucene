@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/util/DocIdSetBuilder.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
@@ -20,6 +18,10 @@
 #include "org/apache/lucene/util/IntArrayDocIdSet.h"
 #include "org/apache/lucene/util/LSBRadixSorter.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/DocIdSetBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilDocIdSetBuilder () {
  @public
@@ -73,7 +75,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWith
   }
   else {
     while (true) {
-      JreAssert((((IOSIntArray *) nil_chk(buffer_))->size_ <= threshold_), (@"org/apache/lucene/util/DocIdSetBuilder.java:90 condition failed: assert buffer.length <= threshold;"));
+      JreAssert(((IOSIntArray *) nil_chk(buffer_))->size_ <= threshold_, @"org/apache/lucene/util/DocIdSetBuilder.java:90 condition failed: assert buffer.length <= threshold;");
       jint end = buffer_->size_;
       for (jint i = bufferSize_; i < end; ++i) {
         jint doc = [iter nextDoc];
@@ -145,13 +147,13 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWith
       }
     }
     else {
-      OrgApacheLuceneUtilLSBRadixSorter *sorter = create_OrgApacheLuceneUtilLSBRadixSorter_init();
+      OrgApacheLuceneUtilLSBRadixSorter *sorter = create_OrgApacheLuceneUtilLSBRadixSorter_initPackagePrivate();
       [sorter sortWithIntArray:buffer_ withInt:0 withInt:bufferSize_];
       jint l = OrgApacheLuceneUtilDocIdSetBuilder_dedupWithIntArray_withInt_(buffer_, bufferSize_);
-      JreAssert((l <= bufferSize_), (@"org/apache/lucene/util/DocIdSetBuilder.java:192 condition failed: assert l <= bufferSize;"));
+      JreAssert(l <= bufferSize_, @"org/apache/lucene/util/DocIdSetBuilder.java:192 condition failed: assert l <= bufferSize;");
       JreStrongAssign(&buffer_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(buffer_, l + 1));
       *IOSIntArray_GetRef(nil_chk(buffer_), l) = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
-      return create_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(buffer_, l);
+      return create_OrgApacheLuceneUtilIntArrayDocIdSet_initPackagePrivateWithIntArray_withInt_(buffer_, l);
     }
   }
   @finally {
@@ -168,25 +170,39 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWith
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "DocIdSetBuilder", NULL, 0x1, NULL, NULL },
-    { "upgradeToBitSet", NULL, "V", 0x2, NULL, NULL },
-    { "growBufferWithInt:", "growBuffer", "V", 0x2, NULL, NULL },
-    { "addWithOrgApacheLuceneSearchDocIdSetIterator:", "add", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "growWithInt:", "grow", "V", 0x1, NULL, NULL },
-    { "addWithInt:", "add", "V", 0x1, NULL, NULL },
-    { "dedupWithIntArray:withInt:", "dedup", "I", 0xa, NULL, NULL },
-    { "build", NULL, "Lorg.apache.lucene.search.DocIdSet;", 0x1, NULL, NULL },
-    { "buildWithLong:", "build", "Lorg.apache.lucene.search.DocIdSet;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x1, 8, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(upgradeToBitSet);
+  methods[2].selector = @selector(growBufferWithInt:);
+  methods[3].selector = @selector(addWithOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[4].selector = @selector(growWithInt:);
+  methods[5].selector = @selector(addWithInt:);
+  methods[6].selector = @selector(dedupWithIntArray:withInt:);
+  methods[7].selector = @selector(build);
+  methods[8].selector = @selector(buildWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "maxDoc_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "threshold_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bitSet_", NULL, 0x2, "Lorg.apache.lucene.util.BitSet;", NULL, NULL, .constantValue.asLong = 0 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "threshold_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "buffer_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bitSet_", "LOrgApacheLuceneUtilBitSet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilDocIdSetBuilder = { 2, "DocIdSetBuilder", "org.apache.lucene.util", NULL, 0x11, 9, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "growBuffer", "add", "LOrgApacheLuceneSearchDocIdSetIterator;", "LJavaIoIOException;", "grow", "dedup", "[II", "build", "J" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilDocIdSetBuilder = { "DocIdSetBuilder", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 9, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilDocIdSetBuilder;
 }
 
@@ -210,7 +226,7 @@ OrgApacheLuceneUtilDocIdSetBuilder *create_OrgApacheLuceneUtilDocIdSetBuilder_in
 }
 
 void OrgApacheLuceneUtilDocIdSetBuilder_upgradeToBitSet(OrgApacheLuceneUtilDocIdSetBuilder *self) {
-  JreAssert((self->bitSet_ == nil), (@"org/apache/lucene/util/DocIdSetBuilder.java:58 condition failed: assert bitSet == null;"));
+  JreAssert(self->bitSet_ == nil, @"org/apache/lucene/util/DocIdSetBuilder.java:58 condition failed: assert bitSet == null;");
   JreStrongAssignAndConsume(&self->bitSet_, new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(self->maxDoc_));
   for (jint i = 0; i < self->bufferSize_; ++i) {
     [((OrgApacheLuceneUtilBitSet *) nil_chk(self->bitSet_)) setWithInt:IOSIntArray_Get(nil_chk(self->buffer_), i)];
@@ -220,7 +236,7 @@ void OrgApacheLuceneUtilDocIdSetBuilder_upgradeToBitSet(OrgApacheLuceneUtilDocId
 }
 
 void OrgApacheLuceneUtilDocIdSetBuilder_growBufferWithInt_(OrgApacheLuceneUtilDocIdSetBuilder *self, jint minSize) {
-  JreAssert((minSize < self->threshold_), (@"org/apache/lucene/util/DocIdSetBuilder.java:69 condition failed: assert minSize < threshold;"));
+  JreAssert(minSize < self->threshold_, @"org/apache/lucene/util/DocIdSetBuilder.java:69 condition failed: assert minSize < threshold;");
   if (((IOSIntArray *) nil_chk(self->buffer_))->size_ < minSize) {
     jint nextSize = JavaLangMath_minWithInt_withInt_(self->threshold_, OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT));
     IOSIntArray *newBuffer = [IOSIntArray arrayWithLength:nextSize];
@@ -238,7 +254,7 @@ jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWithIntArray_withInt_(IOSIntArray *
   jint previous = IOSIntArray_Get(nil_chk(arr), 0);
   for (jint i = 1; i < length; ++i) {
     jint value = IOSIntArray_Get(arr, i);
-    JreAssert((value >= previous), (@"org/apache/lucene/util/DocIdSetBuilder.java:160 condition failed: assert value >= previous;"));
+    JreAssert(value >= previous, @"org/apache/lucene/util/DocIdSetBuilder.java:160 condition failed: assert value >= previous;");
     if (value != previous) {
       *IOSIntArray_GetRef(arr, l++) = value;
       previous = value;

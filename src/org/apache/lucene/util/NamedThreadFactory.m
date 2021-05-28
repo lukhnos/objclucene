@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/NamedThreadFactory.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Integer.h"
@@ -14,6 +15,10 @@
 #include "java/util/Locale.h"
 #include "java/util/concurrent/atomic/AtomicInteger.h"
 #include "org/apache/lucene/util/NamedThreadFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/NamedThreadFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilNamedThreadFactory () {
  @public
@@ -30,11 +35,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilNamedThreadFactory, group_, JavaLangThrea
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilNamedThreadFactory, threadNumber_, JavaUtilConcurrentAtomicAtomicInteger *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilNamedThreadFactory, threadNamePrefix_, NSString *)
 
-inline JavaUtilConcurrentAtomicAtomicInteger *OrgApacheLuceneUtilNamedThreadFactory_get_threadPoolNumber();
+inline JavaUtilConcurrentAtomicAtomicInteger *OrgApacheLuceneUtilNamedThreadFactory_get_threadPoolNumber(void);
 static JavaUtilConcurrentAtomicAtomicInteger *OrgApacheLuceneUtilNamedThreadFactory_threadPoolNumber;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilNamedThreadFactory, threadPoolNumber, JavaUtilConcurrentAtomicAtomicInteger *)
 
-inline NSString *OrgApacheLuceneUtilNamedThreadFactory_get_NAME_PATTERN();
+inline NSString *OrgApacheLuceneUtilNamedThreadFactory_get_NAME_PATTERN(void);
 static NSString *OrgApacheLuceneUtilNamedThreadFactory_NAME_PATTERN = @"%s-%d-thread";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilNamedThreadFactory, NAME_PATTERN, NSString *)
 
@@ -54,7 +59,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilNamedThreadFactory)
 }
 
 - (JavaLangThread *)newThreadWithJavaLangRunnable:(id<JavaLangRunnable>)r {
-  JavaLangThread *t = create_JavaLangThread_initWithJavaLangThreadGroup_withJavaLangRunnable_withNSString_withLong_(group_, r, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%s-%d", [IOSObjectArray arrayWithObjects:(id[]){ self->threadNamePrefix_, JavaLangInteger_valueOfWithInt_([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(threadNumber_)) getAndIncrement]) } count:2 type:NSObject_class_()]), 0);
+  JavaLangThread *t = create_JavaLangThread_initWithJavaLangThreadGroup_withJavaLangRunnable_withNSString_withLong_(group_, r, NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%s-%d", [IOSObjectArray arrayWithObjects:(id[]){ self->threadNamePrefix_, JavaLangInteger_valueOfWithInt_([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(threadNumber_)) getAndIncrement]) } count:2 type:NSObject_class_()]), 0);
   [t setDaemonWithBoolean:false];
   [t setPriorityWithInt:JavaLangThread_NORM_PRIORITY];
   return t;
@@ -67,28 +72,36 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilNamedThreadFactory)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0xa, 1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangThread;", 0x1, 2, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(checkPrefixWithNSString:);
+  methods[2].selector = @selector(newThreadWithJavaLangRunnable:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "threadPoolNumber", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x1a, -1, 4, -1, -1 },
+    { "group_", "LJavaLangThreadGroup;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "threadNumber_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "NAME_PATTERN", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "threadNamePrefix_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;", "checkPrefix", "newThread", "LJavaLangRunnable;", &OrgApacheLuceneUtilNamedThreadFactory_threadPoolNumber, &OrgApacheLuceneUtilNamedThreadFactory_NAME_PATTERN };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNamedThreadFactory = { "NamedThreadFactory", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 3, 5, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilNamedThreadFactory;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilNamedThreadFactory class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilNamedThreadFactory_threadPoolNumber, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilNamedThreadFactory)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "NamedThreadFactory", NULL, 0x1, NULL, NULL },
-    { "checkPrefixWithNSString:", "checkPrefix", "Ljava.lang.String;", 0xa, NULL, NULL },
-    { "newThreadWithJavaLangRunnable:", "newThread", "Ljava.lang.Thread;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "threadPoolNumber", "threadPoolNumber", 0x1a, "Ljava.util.concurrent.atomic.AtomicInteger;", &OrgApacheLuceneUtilNamedThreadFactory_threadPoolNumber, NULL, .constantValue.asLong = 0 },
-    { "group_", NULL, 0x12, "Ljava.lang.ThreadGroup;", NULL, NULL, .constantValue.asLong = 0 },
-    { "threadNumber_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "NAME_PATTERN", "NAME_PATTERN", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneUtilNamedThreadFactory_NAME_PATTERN, NULL, .constantValue.asLong = 0 },
-    { "threadNamePrefix_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNamedThreadFactory = { 2, "NamedThreadFactory", "org.apache.lucene.util", NULL, 0x1, 3, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilNamedThreadFactory;
 }
 
 @end
@@ -98,7 +111,7 @@ void OrgApacheLuceneUtilNamedThreadFactory_initWithNSString_(OrgApacheLuceneUtil
   JreStrongAssignAndConsume(&self->threadNumber_, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1));
   JavaLangSecurityManager *s = JavaLangSystem_getSecurityManager();
   JreStrongAssign(&self->group_, (s != nil) ? [((JavaLangSecurityManager *) nil_chk(s)) getThreadGroup] : [((JavaLangThread *) nil_chk(JavaLangThread_currentThread())) getThreadGroup]);
-  JreStrongAssign(&self->threadNamePrefix_, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), OrgApacheLuceneUtilNamedThreadFactory_NAME_PATTERN, [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneUtilNamedThreadFactory_checkPrefixWithNSString_(threadNamePrefix), JavaLangInteger_valueOfWithInt_([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(OrgApacheLuceneUtilNamedThreadFactory_threadPoolNumber)) getAndIncrement]) } count:2 type:NSObject_class_()]));
+  JreStrongAssign(&self->threadNamePrefix_, NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), OrgApacheLuceneUtilNamedThreadFactory_NAME_PATTERN, [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneUtilNamedThreadFactory_checkPrefixWithNSString_(threadNamePrefix), JavaLangInteger_valueOfWithInt_([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(OrgApacheLuceneUtilNamedThreadFactory_threadPoolNumber)) getAndIncrement]) } count:2 type:NSObject_class_()]));
 }
 
 OrgApacheLuceneUtilNamedThreadFactory *new_OrgApacheLuceneUtilNamedThreadFactory_initWithNSString_(NSString *threadNamePrefix) {
@@ -111,7 +124,7 @@ OrgApacheLuceneUtilNamedThreadFactory *create_OrgApacheLuceneUtilNamedThreadFact
 
 NSString *OrgApacheLuceneUtilNamedThreadFactory_checkPrefixWithNSString_(NSString *prefix) {
   OrgApacheLuceneUtilNamedThreadFactory_initialize();
-  return prefix == nil || ((jint) [prefix length]) == 0 ? @"Lucene" : prefix;
+  return prefix == nil || [prefix java_length] == 0 ? @"Lucene" : prefix;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNamedThreadFactory)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer))
 #define OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer_
 
@@ -21,12 +27,12 @@
 #include "org/apache/lucene/analysis/AnalyzerWrapper.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
+@class OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 
 /*!
- @brief This Analyzer limits the number of tokens while indexing.
- It is
- a replacement for the maximum field length setting inside <code>org.apache.lucene.index.IndexWriter</code>.
+ @brief This Analyzer limits the number of tokens while indexing.It is
+  a replacement for the maximum field length setting inside <code>org.apache.lucene.index.IndexWriter</code>.
  - seealso: LimitTokenCountFilter
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer : OrgApacheLuceneAnalysisAnalyzerWrapper
@@ -38,8 +44,8 @@
  This analyzer will not consume any tokens beyond the maxTokenCount limit
  - seealso: #LimitTokenCountAnalyzer(Analyzer,int,boolean)
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                                                withInt:(jint)maxTokenCount;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
+                                                          withInt:(jint)maxTokenCount;
 
 /*!
  @brief Build an analyzer that limits the maximum number of tokens per field.
@@ -47,9 +53,9 @@
  @param maxTokenCount max number of tokens to produce
  @param consumeAllTokens whether all tokens from the delegate should be consumed even if maxTokenCount is reached.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                                                withInt:(jint)maxTokenCount
-                                            withBoolean:(jboolean)consumeAllTokens;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
+                                                          withInt:(jint)maxTokenCount
+                                                      withBoolean:(jboolean)consumeAllTokens;
 
 - (NSString *)description;
 
@@ -59,6 +65,10 @@
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -80,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAn
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer")

@@ -7,6 +7,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/rangetree/HeapSliceReader.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/rangetree/HeapSliceReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneRangetreeHeapSliceReader () {
  @public
   jint curRead_;
@@ -16,12 +20,12 @@
 
 @implementation OrgApacheLuceneRangetreeHeapSliceReader
 
-- (instancetype)initWithLongArray:(IOSLongArray *)values
-                    withLongArray:(IOSLongArray *)ords
-                     withIntArray:(IOSIntArray *)docIDs
-                          withInt:(jint)start
-                          withInt:(jint)end {
-  OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(self, values, ords, docIDs, start, end);
+- (instancetype)initPackagePrivateWithLongArray:(IOSLongArray *)values
+                                  withLongArray:(IOSLongArray *)ords
+                                   withIntArray:(IOSIntArray *)docIDs
+                                        withInt:(jint)start
+                                        withInt:(jint)end {
+  OrgApacheLuceneRangetreeHeapSliceReader_initPackagePrivateWithLongArray_withLongArray_withIntArray_withInt_withInt_(self, values, ords, docIDs, start, end);
   return self;
 }
 
@@ -53,28 +57,39 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithLongArray:withLongArray:withIntArray:withInt:withInt:", "HeapSliceReader", NULL, 0x0, NULL, NULL },
-    { "next", NULL, "Z", 0x1, NULL, NULL },
-    { "value", NULL, "J", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "ord", NULL, "J", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithLongArray:withLongArray:withIntArray:withInt:withInt:);
+  methods[1].selector = @selector(next);
+  methods[2].selector = @selector(value);
+  methods[3].selector = @selector(docID);
+  methods[4].selector = @selector(ord);
+  methods[5].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "curRead_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "values_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "ords_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "docIDs_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "curRead_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "values_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "ords_", "[J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docIDs_", "[I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "end_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeHeapSliceReader = { 2, "HeapSliceReader", "org.apache.lucene.rangetree", NULL, 0x10, 6, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[J[J[III" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeHeapSliceReader = { "HeapSliceReader", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x10, 6, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneRangetreeHeapSliceReader;
 }
 
 @end
 
-void OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(OrgApacheLuceneRangetreeHeapSliceReader *self, IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) {
+void OrgApacheLuceneRangetreeHeapSliceReader_initPackagePrivateWithLongArray_withLongArray_withIntArray_withInt_withInt_(OrgApacheLuceneRangetreeHeapSliceReader *self, IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) {
   NSObject_init(self);
   JreStrongAssign(&self->values_, values);
   JreStrongAssign(&self->ords_, ords);
@@ -83,12 +98,12 @@ void OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_wit
   self->end_ = end;
 }
 
-OrgApacheLuceneRangetreeHeapSliceReader *new_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeHeapSliceReader, initWithLongArray_withLongArray_withIntArray_withInt_withInt_, values, ords, docIDs, start, end)
+OrgApacheLuceneRangetreeHeapSliceReader *new_OrgApacheLuceneRangetreeHeapSliceReader_initPackagePrivateWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeHeapSliceReader, initPackagePrivateWithLongArray_withLongArray_withIntArray_withInt_withInt_, values, ords, docIDs, start, end)
 }
 
-OrgApacheLuceneRangetreeHeapSliceReader *create_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeHeapSliceReader, initWithLongArray_withLongArray_withIntArray_withInt_withInt_, values, ords, docIDs, start, end)
+OrgApacheLuceneRangetreeHeapSliceReader *create_OrgApacheLuceneRangetreeHeapSliceReader_initPackagePrivateWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeHeapSliceReader, initPackagePrivateWithLongArray_withLongArray_withIntArray_withInt_withInt_, values, ords, docIDs, start, end)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeHeapSliceReader)

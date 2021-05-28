@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueLong
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMutableMutableValueLong_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueLong || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueLong))
 #define OrgApacheLuceneUtilMutableMutableValueLong_
 
@@ -23,7 +29,7 @@
 /*!
  @brief <code>MutableValue</code> implementation of type <code>long</code>.
  When mutating instances of this object, the caller is responsible for ensuring 
- that any instance where <code>exists</code> is set to <code>false</code> must also 
+  that any instance where <code>exists</code> is set to <code>false</code> must also  
  <code>value</code> set to <code>0L</code> for proper operation.
  */
 @interface OrgApacheLuceneUtilMutableMutableValueLong : OrgApacheLuceneUtilMutableMutableValue {
@@ -33,7 +39,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)compareSameTypeWithId:(id)other;
 
@@ -53,12 +59,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilMutableMutableValueLong)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueLong_init(OrgApacheLuceneUtilMutableMutableValueLong *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueLong *new_OrgApacheLuceneUtilMutableMutableValueLong_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueLong *new_OrgApacheLuceneUtilMutableMutableValueLong_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueLong *create_OrgApacheLuceneUtilMutableMutableValueLong_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueLong *create_OrgApacheLuceneUtilMutableMutableValueLong_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueLong)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueLong")

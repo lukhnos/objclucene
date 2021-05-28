@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser || defined(INCLUDE_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser))
 #define OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_
 
@@ -26,17 +32,22 @@
 /*!
  @brief Parser for wordnet prolog format
  <p>
- See http://wordnet.princeton.edu/man/prologdb.5WN.html for a description of the format.
+  See http://wordnet.princeton.edu/man/prologdb.5WN.html for a description of the format.
  */
 @interface OrgApacheLuceneAnalysisSynonymWordnetSynonymParser : OrgApacheLuceneAnalysisSynonymSynonymMap_Parser
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)dedup
-                    withBoolean:(jboolean)expand
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithBoolean:(jboolean)dedup
+                              withBoolean:(jboolean)expand
+      withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 - (void)parseWithJavaIoReader:(JavaIoReader *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithBoolean:(jboolean)arg0
+      withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -52,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymWordnetSynonymParser)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser")

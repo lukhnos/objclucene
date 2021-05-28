@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_
 
@@ -21,35 +27,34 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 
 @protocol JavaLangCharSequence;
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
 /*!
  @brief A <code>WildcardQueryNode</code> represents wildcard query This does not apply to
- phrases.
- Examples: a*b*c Fl?w? m?ke*g
+  phrases.Examples: a*b*c Fl?
+ w? m?ke*g
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode
 
 #pragma mark Public
 
 /*!
- @param field
- - field name
- @param text
- - value that contains one or more wild card characters (? or *)
- @param begin
- - position in the query string
- @param end
- - position in the query string
+ @param field - field name
+ @param text - value that contains one or more wild card characters (? or *)
+ @param begin - position in the query string
+ @param end - position in the query string
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
+                              withJavaLangCharSequence:(id<JavaLangCharSequence>)text
+                                               withInt:(jint)begin
+                                               withInt:(jint)end;
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)fqn;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)fqn;
 
 - (OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *)cloneTree;
+
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
 
@@ -75,4 +80,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesWildca
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode")

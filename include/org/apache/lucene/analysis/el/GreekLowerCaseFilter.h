@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisElGreekLowerCaseFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisElGreekLowerCaseFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilter || defined(INCLUDE_OrgApacheLuceneAnalysisElGreekLowerCaseFilter))
 #define OrgApacheLuceneAnalysisElGreekLowerCaseFilter_
 
@@ -24,7 +30,7 @@
 
 /*!
  @brief Normalizes token text to lower case, removes some Greek diacritics,
- and standardizes final sigma to sigma.
+  and standardizes final sigma to sigma.
  */
 @interface OrgApacheLuceneAnalysisElGreekLowerCaseFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -34,7 +40,7 @@
  @brief Create a GreekLowerCaseFilter that normalizes Greek token text.
  @param inArg TokenStream to filter
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
 
@@ -52,4 +58,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisElGreekLowerCaseFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilter")

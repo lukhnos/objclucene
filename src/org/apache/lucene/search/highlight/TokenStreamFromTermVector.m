@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -24,7 +23,6 @@
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/search/highlight/TokenStreamFromTermVector.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefArray.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
@@ -33,6 +31,10 @@
 #include "org/apache/lucene/util/UnicodeUtil.h"
 
 @class OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/TokenStreamFromTermVector must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchHighlightTokenStreamFromTermVector () {
  @public
@@ -82,9 +84,11 @@ __attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightTok
   OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *next_;
 }
 
+- (instancetype)init;
+
 /*!
  @brief Given the head of a linked-list (possibly null) this inserts the token at the correct
- spot to maintain the desired order, and returns the head (which could be this token if it's the smallest).
+  spot to maintain the desired order, and returns the head (which could be this token if it's the smallest).
  O(N^2) complexity but N should be a handful at most.
  */
 - (OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *)insertIntoSortedLinkedListWithOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL:(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *)head;
@@ -94,8 +98,6 @@ __attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightTok
  */
 - (jint)compareOffsetsWithOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL:(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *)tokenB;
 
-- (instancetype)init;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL)
@@ -104,9 +106,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_Toke
 
 __attribute__((unused)) static void OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL_init(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *new_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *new_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *create_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL_init();
+__attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *create_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL)
 
@@ -147,7 +149,7 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneSearchHighlightTokenStreamFr
   if (incrementToken_ == nil) {
     if (!initialized_) {
       OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init__(self);
-      JreAssert((initialized_), (@"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:263 condition failed: assert initialized;"));
+      JreAssert(initialized_, @"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:263 condition failed: assert initialized;");
     }
     JreStrongAssign(&incrementToken_, firstToken_);
     if (incrementToken_ == nil) {
@@ -191,40 +193,50 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneSearchHighlightTokenStreamFr
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 2, -1, 1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL;", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerms:withInt:);
+  methods[1].selector = @selector(getTermVectorTerms);
+  methods[2].selector = @selector(reset);
+  methods[3].selector = @selector(init__);
+  methods[4].selector = @selector(initTokensArray);
+  methods[5].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "ATTRIBUTE_FACTORY", "LOrgApacheLuceneUtilAttributeFactory;", .constantValue.asLong = 0, 0x19, -1, 3, -1, -1 },
+    { "vector_", "LOrgApacheLuceneIndexTerms;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAttribute_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "positionIncrementAttribute_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxStartOffset_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAttribute_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payloadAttribute_", "LOrgApacheLuceneAnalysisTokenattributesPayloadAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termCharsBuilder_", "LOrgApacheLuceneUtilCharsRefBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payloadsBytesRefArray_", "LOrgApacheLuceneUtilBytesRefArray;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "spareBytesRefBuilder_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "firstToken_", "LOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "incrementToken_", "LOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "initialized_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerms;I", "LJavaIoIOException;", "init", &OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_ATTRIBUTE_FACTORY, "LOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTokenStreamFromTermVector = { "TokenStreamFromTermVector", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x11, 6, 13, -1, 4, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchHighlightTokenStreamFromTermVector class]) {
     JreStrongAssign(&OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_ATTRIBUTE_FACTORY, OrgApacheLuceneUtilAttributeFactory_getStaticImplementationWithOrgApacheLuceneUtilAttributeFactory_withIOSClass_(JreLoadStatic(OrgApacheLuceneUtilAttributeFactory, DEFAULT_ATTRIBUTE_FACTORY), OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_class_()));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerms:withInt:", "TokenStreamFromTermVector", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getTermVectorTerms", NULL, "Lorg.apache.lucene.index.Terms;", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "init__", "init", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "initTokensArray", NULL, "[Lorg.apache.lucene.search.highlight.TokenStreamFromTermVector$TokenLL;", 0x2, "Ljava.io.IOException;", NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "ATTRIBUTE_FACTORY", "ATTRIBUTE_FACTORY", 0x19, "Lorg.apache.lucene.util.AttributeFactory;", &OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_ATTRIBUTE_FACTORY, NULL, .constantValue.asLong = 0 },
-    { "vector_", NULL, 0x12, "Lorg.apache.lucene.index.Terms;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionIncrementAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxStartOffset_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAttribute_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadAttribute_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termCharsBuilder_", NULL, 0x2, "Lorg.apache.lucene.util.CharsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadsBytesRefArray_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRefArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "spareBytesRefBuilder_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "firstToken_", NULL, 0x2, "Lorg.apache.lucene.search.highlight.TokenStreamFromTermVector$TokenLL;", NULL, NULL, .constantValue.asLong = 0 },
-    { "incrementToken_", NULL, 0x2, "Lorg.apache.lucene.search.highlight.TokenStreamFromTermVector$TokenLL;", NULL, NULL, .constantValue.asLong = 0 },
-    { "initialized_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.highlight.TokenStreamFromTermVector$TokenLL;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTokenStreamFromTermVector = { 2, "TokenStreamFromTermVector", "org.apache.lucene.search.highlight", NULL, 0x11, 6, methods, 13, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector;
 }
 
 @end
@@ -235,11 +247,11 @@ void OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLu
   JreStrongAssign(&self->incrementToken_, nil);
   self->initialized_ = false;
   self->maxStartOffset_ = maxStartOffset < 0 ? JavaLangInteger_MAX_VALUE : maxStartOffset;
-  JreAssert((![self hasAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()]), (@"AttributeFactory shouldn't have payloads *yet*"));
+  JreAssert(![self hasAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()], @"AttributeFactory shouldn't have payloads *yet*");
   if (![((OrgApacheLuceneIndexTerms *) nil_chk(vector)) hasPositions] && ![vector hasOffsets]) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"The term vector needs positions and/or offsets.");
   }
-  JreAssert(([vector hasFreqs]), (@"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:99 condition failed: assert vector.hasFreqs();"));
+  JreAssert([vector hasFreqs], @"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:99 condition failed: assert vector.hasFreqs();");
   JreStrongAssign(&self->vector_, vector);
   JreStrongAssign(&self->termAttribute_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->positionIncrementAttribute_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
@@ -254,7 +266,7 @@ OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *create_OrgApacheLuceneS
 }
 
 void OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init__(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *self) {
-  JreAssert((!self->initialized_), (@"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:115 condition failed: assert !initialized;"));
+  JreAssert(!self->initialized_, @"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:115 condition failed: assert !initialized;");
   jshort dpEnumFlags = OrgApacheLuceneIndexPostingsEnum_POSITIONS;
   if ([((OrgApacheLuceneIndexTerms *) nil_chk(self->vector_)) hasOffsets]) {
     dpEnumFlags |= OrgApacheLuceneIndexPostingsEnum_OFFSETS;
@@ -280,7 +292,7 @@ void OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init__(OrgApacheLuc
     jint termCharsOff = [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(self->termCharsBuilder_)) length];
     [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(self->termCharsBuilder_)) appendWithCharArray:[tempCharsRefBuilder chars] withInt:0 withInt:termCharsLen];
     dpEnum = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:dpEnum withInt:dpEnumFlags];
-    JreAssert((dpEnum != nil), (@"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:152 condition failed: assert dpEnum != null;"));
+    JreAssert(dpEnum != nil, @"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:152 condition failed: assert dpEnum != null;");
     [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(dpEnum)) nextDoc];
     jint freq = [dpEnum freq];
     for (jint j = 0; j < freq; j++) {
@@ -319,11 +331,11 @@ void OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init__(OrgApacheLuc
       continue;
     }
     if (prevToken != nil) {
-      JreAssert((prevToken->next_ == nil), (@"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:206 condition failed: assert prevToken.next == null;"));
+      JreAssert(prevToken->next_ == nil, @"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:206 condition failed: assert prevToken.next == null;");
       JreStrongAssign(&prevToken->next_, token);
     }
     else {
-      JreAssert((self->firstToken_ == nil), (@"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:209 condition failed: assert firstToken == null;"));
+      JreAssert(self->firstToken_ == nil, @"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:209 condition failed: assert firstToken == null;");
       JreStrongAssign(&self->firstToken_, token);
     }
     if ([self->vector_ hasPositions]) {
@@ -370,8 +382,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTokenStreamFromTe
 
 @implementation OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *)insertIntoSortedLinkedListWithOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL:(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *)head {
-  JreAssert((next_ == nil), (@"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:308 condition failed: assert next == null;"));
+  JreAssert(next_ == nil, @"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:308 condition failed: assert next == null;");
   if (head == nil) {
     return self;
   }
@@ -379,7 +398,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTokenStreamFromTe
     JreStrongAssign(&self->next_, head);
     return self;
   }
-  OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *prev = head;
+  OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL *prev = JreRetainedLocalValue(head);
   while (prev->next_ != nil && [self compareOffsetsWithOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL:prev->next_] > 0) {
     prev = prev->next_;
   }
@@ -396,34 +415,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTokenStreamFromTe
   return cmp;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(next_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "insertIntoSortedLinkedListWithOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL:", "insertIntoSortedLinkedList", "Lorg.apache.lucene.search.highlight.TokenStreamFromTermVector$TokenLL;", 0x0, NULL, NULL },
-    { "compareOffsetsWithOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL:", "compareOffsets", "I", 0x0, NULL, NULL },
-    { "init", "TokenLL", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL;", 0x0, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 2, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(insertIntoSortedLinkedListWithOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL:);
+  methods[2].selector = @selector(compareOffsetsWithOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termCharsOff_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termCharsLen_", NULL, 0x0, "S", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionIncrement_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startOffset_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endOffsetInc_", NULL, 0x0, "S", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadIndex_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x0, "Lorg.apache.lucene.search.highlight.TokenStreamFromTermVector$TokenLL;", NULL, NULL, .constantValue.asLong = 0 },
+    { "termCharsOff_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "termCharsLen_", "S", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "positionIncrement_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "startOffset_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "endOffsetInc_", "S", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "payloadIndex_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "next_", "LOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL = { 2, "TokenLL", "org.apache.lucene.search.highlight", "TokenStreamFromTermVector", 0xa, 3, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "insertIntoSortedLinkedList", "LOrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL;", "compareOffsets", "LOrgApacheLuceneSearchHighlightTokenStreamFromTermVector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL = { "TokenLL", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0xa, 3, 7, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL;
 }
 

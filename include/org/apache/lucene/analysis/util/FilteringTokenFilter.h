@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisUtilFilteringTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisUtilFilteringTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilteringTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisUtilFilteringTokenFilter))
 #define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_
 
@@ -25,8 +31,8 @@
 /*!
  @brief Abstract base class for TokenFilters that may remove tokens.
  You have to implement <code>accept</code> and return a boolean if the current
- token should be preserved. <code>incrementToken</code> uses this method
- to decide if a token should be passed to the caller.
+  token should be preserved. <code>incrementToken</code> uses this method
+  to decide if a token should be passed to the caller.
  */
 @interface OrgApacheLuceneAnalysisUtilFilteringTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -34,9 +40,9 @@
 
 /*!
  @brief Create a new <code>FilteringTokenFilter</code>.
- @param inArg      the <code>TokenStream</code> to consume
+ @param inArg the <code>TokenStream</code>  to consume
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (void)end;
 
@@ -61,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilFilteringTokenFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilteringTokenFilter")

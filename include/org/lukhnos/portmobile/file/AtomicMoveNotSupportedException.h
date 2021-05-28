@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileFileAtomicMoveNotSupportedException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFileAtomicMoveNotSupportedException_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileAtomicMoveNotSupportedException || defined(INCLUDE_OrgLukhnosPortmobileFileAtomicMoveNotSupportedException))
 #define OrgLukhnosPortmobileFileAtomicMoveNotSupportedException_
 
@@ -20,13 +26,26 @@
 #define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
+@class JavaLangThrowable;
+
 @interface OrgLukhnosPortmobileFileAtomicMoveNotSupportedException : JavaIoIOException
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)source
-                    withNSString:(NSString *)target
-                    withNSString:(NSString *)reason;
+- (instancetype __nonnull)initWithNSString:(NSString *)source
+                              withNSString:(NSString *)target
+                              withNSString:(NSString *)reason;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -42,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileAtomicMoveNotSupportedExcepti
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileAtomicMoveNotSupportedException")

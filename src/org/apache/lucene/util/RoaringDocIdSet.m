@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Math.h"
 #include "java/util/Arrays.h"
@@ -18,6 +17,10 @@
 #include "org/apache/lucene/util/NotDocIdSet.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/RoaringDocIdSet.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/RoaringDocIdSet must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilRoaringDocIdSet () {
  @public
@@ -33,15 +36,15 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRoaringDocIdSet, docIdSets_, IOSObjectArray *)
 
-inline jint OrgApacheLuceneUtilRoaringDocIdSet_get_BLOCK_SIZE();
+inline jint OrgApacheLuceneUtilRoaringDocIdSet_get_BLOCK_SIZE(void);
 #define OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE 65536
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRoaringDocIdSet, BLOCK_SIZE, jint)
 
-inline jint OrgApacheLuceneUtilRoaringDocIdSet_get_MAX_ARRAY_LENGTH();
+inline jint OrgApacheLuceneUtilRoaringDocIdSet_get_MAX_ARRAY_LENGTH(void);
 #define OrgApacheLuceneUtilRoaringDocIdSet_MAX_ARRAY_LENGTH 4096
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRoaringDocIdSet, MAX_ARRAY_LENGTH, jint)
 
-inline jlong OrgApacheLuceneUtilRoaringDocIdSet_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilRoaringDocIdSet_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRoaringDocIdSet, BASE_RAM_BYTES_USED, jlong)
 
@@ -93,7 +96,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet, docIDs_, IOSShortArray *)
 
-inline jlong OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_get_BASE_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_get_BASE_RAM_BYTES_USED(void);
 static jlong OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet, BASE_RAM_BYTES_USED, jlong)
 
@@ -105,12 +108,14 @@ __attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocI
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
 
-@interface OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 : OrgApacheLuceneSearchDocIdSetIterator {
+@interface OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1 : OrgApacheLuceneSearchDocIdSetIterator {
  @public
   OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *this$0_;
   jint i_;
   jint doc_;
 }
+
+- (instancetype)initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet:(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *)outer$;
 
 - (jint)docIdWithInt:(jint)i;
 
@@ -122,23 +127,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet
 
 - (jint)advanceWithInt:(jint)target;
 
-- (instancetype)initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet:(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1, this$0_, OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *)
+__attribute__((unused)) static void OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1 *self, OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$);
 
-__attribute__((unused)) static jint OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_docIdWithInt_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *self, jint i);
+__attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1 *new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static void OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *self, OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$);
+__attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1 *create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1)
+__attribute__((unused)) static jint OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_docIdWithInt_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1 *self, jint i);
 
 @interface OrgApacheLuceneUtilRoaringDocIdSet_Iterator : OrgApacheLuceneSearchDocIdSetIterator {
  @public
@@ -164,7 +163,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilRoaringDocIdSet_Iterator)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRoaringDocIdSet_Iterator, this$0_, OrgApacheLuceneUtilRoaringDocIdSet *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRoaringDocIdSet_Iterator, sub_, OrgApacheLuceneSearchDocIdSetIterator *)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilRoaringDocIdSet_Iterator_initWithOrgApacheLuceneUtilRoaringDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_Iterator *self, OrgApacheLuceneUtilRoaringDocIdSet *outer$);
@@ -215,33 +213,43 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSetIterator;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchDocIdSetArray:withInt:);
+  methods[1].selector = @selector(isCacheable);
+  methods[2].selector = @selector(ramBytesUsed);
+  methods[3].selector = @selector(iterator);
+  methods[4].selector = @selector(cardinality);
+  methods[5].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "MAX_ARRAY_LENGTH", "I", .constantValue.asInt = OrgApacheLuceneUtilRoaringDocIdSet_MAX_ARRAY_LENGTH, 0x1a, -1, -1, -1, -1 },
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 3, -1, -1 },
+    { "docIdSets_", "[LOrgApacheLuceneSearchDocIdSet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "cardinality_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "ramBytesUsed_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneSearchDocIdSet;I", "LJavaIoIOException;", "toString", &OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED, "LOrgApacheLuceneUtilRoaringDocIdSet_Builder;LOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet;LOrgApacheLuceneUtilRoaringDocIdSet_Iterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet = { "RoaringDocIdSet", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 6, 6, -1, 4, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilRoaringDocIdSet;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilRoaringDocIdSet class]) {
     OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilRoaringDocIdSet_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilRoaringDocIdSet)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchDocIdSetArray:withInt:", "RoaringDocIdSet", NULL, 0x2, NULL, NULL },
-    { "isCacheable", NULL, "Z", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x1, "Ljava.io.IOException;", NULL },
-    { "cardinality", NULL, "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BLOCK_SIZE", "BLOCK_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE },
-    { "MAX_ARRAY_LENGTH", "MAX_ARRAY_LENGTH", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilRoaringDocIdSet_MAX_ARRAY_LENGTH },
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "docIdSets_", NULL, 0x12, "[Lorg.apache.lucene.search.DocIdSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "cardinality_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ramBytesUsed_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.RoaringDocIdSet$Builder;", "Lorg.apache.lucene.util.RoaringDocIdSet$ShortArrayDocIdSet;", "Lorg.apache.lucene.util.RoaringDocIdSet$Iterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet = { 2, "RoaringDocIdSet", "org.apache.lucene.util", NULL, 0x1, 6, methods, 6, fields, 0, NULL, 3, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilRoaringDocIdSet;
 }
 
 @end
@@ -339,24 +347,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Builder", NULL, 0x1, NULL, NULL },
-    { "flush", NULL, "V", 0x2, NULL, NULL },
-    { "addWithInt:", "add", "Lorg.apache.lucene.util.RoaringDocIdSet$Builder;", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneSearchDocIdSetIterator:", "add", "Lorg.apache.lucene.util.RoaringDocIdSet$Builder;", 0x1, "Ljava.io.IOException;", NULL },
-    { "build", NULL, "Lorg.apache.lucene.util.RoaringDocIdSet;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilRoaringDocIdSet_Builder;", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilRoaringDocIdSet_Builder;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilRoaringDocIdSet;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(flush);
+  methods[2].selector = @selector(addWithInt:);
+  methods[3].selector = @selector(addWithOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[4].selector = @selector(build);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "maxDoc_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "sets_", NULL, 0x12, "[Lorg.apache.lucene.search.DocIdSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "cardinality_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastDocId_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentBlock_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentBlockCardinality_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x12, "[S", NULL, NULL, .constantValue.asLong = 0 },
-    { "denseBuffer_", NULL, 0x2, "Lorg.apache.lucene.util.FixedBitSet;", NULL, NULL, .constantValue.asLong = 0 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "sets_", "[LOrgApacheLuceneSearchDocIdSet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "cardinality_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastDocId_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentBlock_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentBlockCardinality_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "buffer_", "[S", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "denseBuffer_", "LOrgApacheLuceneUtilFixedBitSet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet_Builder = { 2, "Builder", "org.apache.lucene.util", "RoaringDocIdSet", 0x9, 5, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "add", "LOrgApacheLuceneSearchDocIdSetIterator;", "LJavaIoIOException;", "LOrgApacheLuceneUtilRoaringDocIdSet;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet_Builder = { "Builder", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x9, 5, 8, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilRoaringDocIdSet_Builder;
 }
 
@@ -380,26 +398,26 @@ OrgApacheLuceneUtilRoaringDocIdSet_Builder *create_OrgApacheLuceneUtilRoaringDoc
 }
 
 void OrgApacheLuceneUtilRoaringDocIdSet_Builder_flush(OrgApacheLuceneUtilRoaringDocIdSet_Builder *self) {
-  JreAssert((self->currentBlockCardinality_ <= OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE), (@"org/apache/lucene/util/RoaringDocIdSet.java:71 condition failed: assert currentBlockCardinality <= BLOCK_SIZE;"));
+  JreAssert(self->currentBlockCardinality_ <= OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE, @"org/apache/lucene/util/RoaringDocIdSet.java:71 condition failed: assert currentBlockCardinality <= BLOCK_SIZE;");
   if (self->currentBlockCardinality_ <= OrgApacheLuceneUtilRoaringDocIdSet_MAX_ARRAY_LENGTH) {
-    JreAssert((self->denseBuffer_ == nil), (@"org/apache/lucene/util/RoaringDocIdSet.java:74 condition failed: assert denseBuffer == null;"));
+    JreAssert(self->denseBuffer_ == nil, @"org/apache/lucene/util/RoaringDocIdSet.java:74 condition failed: assert denseBuffer == null;");
     if (self->currentBlockCardinality_ > 0) {
       IOSObjectArray_SetAndConsume(nil_chk(self->sets_), self->currentBlock_, new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(JavaUtilArrays_copyOfWithShortArray_withInt_(self->buffer_, self->currentBlockCardinality_)));
     }
   }
   else {
-    JreAssert((self->denseBuffer_ != nil), (@"org/apache/lucene/util/RoaringDocIdSet.java:79 condition failed: assert denseBuffer != null;"));
-    JreAssert(([((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) cardinality] == self->currentBlockCardinality_), (@"org/apache/lucene/util/RoaringDocIdSet.java:80 condition failed: assert denseBuffer.cardinality() == currentBlockCardinality;"));
+    JreAssert(self->denseBuffer_ != nil, @"org/apache/lucene/util/RoaringDocIdSet.java:79 condition failed: assert denseBuffer != null;");
+    JreAssert([((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) cardinality] == self->currentBlockCardinality_, @"org/apache/lucene/util/RoaringDocIdSet.java:80 condition failed: assert denseBuffer.cardinality() == currentBlockCardinality;");
     if ([((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) length] == OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE && OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE - self->currentBlockCardinality_ < OrgApacheLuceneUtilRoaringDocIdSet_MAX_ARRAY_LENGTH) {
       IOSShortArray *excludedDocs = [IOSShortArray arrayWithLength:OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE - self->currentBlockCardinality_];
       [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) flipWithInt:0 withInt:[self->denseBuffer_ length]];
       jint excludedDoc = -1;
       for (jint i = 0; i < excludedDocs->size_; ++i) {
         excludedDoc = [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) nextSetBitWithInt:excludedDoc + 1];
-        JreAssert((excludedDoc != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS), (@"org/apache/lucene/util/RoaringDocIdSet.java:88 condition failed: assert excludedDoc != DocIdSetIterator.NO_MORE_DOCS;"));
+        JreAssert(excludedDoc != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS, @"org/apache/lucene/util/RoaringDocIdSet.java:88 condition failed: assert excludedDoc != DocIdSetIterator.NO_MORE_DOCS;");
         *IOSShortArray_GetRef(excludedDocs, i) = (jshort) excludedDoc;
       }
-      JreAssert((excludedDoc + 1 == [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) length] || [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) nextSetBitWithInt:excludedDoc + 1] == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS), (@"org/apache/lucene/util/RoaringDocIdSet.java:91 condition failed: assert excludedDoc + 1 == denseBuffer.length() || denseBuffer.nextSetBit(excludedDoc + 1) == DocIdSetIterator.NO_MORE_DOCS;"));
+      JreAssert(excludedDoc + 1 == [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) length] || [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) nextSetBitWithInt:excludedDoc + 1] == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS, @"org/apache/lucene/util/RoaringDocIdSet.java:91 condition failed: assert excludedDoc + 1 == denseBuffer.length() || denseBuffer.nextSetBit(excludedDoc + 1) == DocIdSetIterator.NO_MORE_DOCS;");
       IOSObjectArray_SetAndConsume(nil_chk(self->sets_), self->currentBlock_, new_OrgApacheLuceneUtilNotDocIdSet_initWithInt_withOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE, create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(excludedDocs)));
     }
     else {
@@ -428,7 +446,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
 }
 
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator {
-  return create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(self);
+  return create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(self);
 }
 
 - (void)dealloc {
@@ -436,25 +454,33 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSetIterator;", 0x1, -1, -1, 1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithShortArray:);
+  methods[1].selector = @selector(ramBytesUsed);
+  methods[2].selector = @selector(iterator);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BASE_RAM_BYTES_USED", "J", .constantValue.asLong = 0, 0x1a, -1, 2, -1, -1 },
+    { "docIDs_", "[S", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "[S", "LJavaIoIOException;", &OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED, "LOrgApacheLuceneUtilRoaringDocIdSet;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet = { "ShortArrayDocIdSet", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0xa, 3, 2, 3, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet class]) {
     OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithShortArray:", "ShortArrayDocIdSet", NULL, 0x2, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
-    { "docIDs_", NULL, 0x12, "[S", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet = { 2, "ShortArrayDocIdSet", "org.apache.lucene.util", "RoaringDocIdSet", 0xa, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet;
 }
 
 @end
@@ -474,17 +500,22 @@ OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *create_OrgApacheLuceneUti
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
 
-@implementation OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1
+@implementation OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1
+
+- (instancetype)initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet:(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *)outer$ {
+  OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(self, outer$);
+  return self;
+}
 
 - (jint)docIdWithInt:(jint)i {
-  return OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_docIdWithInt_(self, i);
+  return OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_docIdWithInt_(self, i);
 }
 
 - (jint)nextDoc {
   if (++i_ >= ((IOSShortArray *) nil_chk(this$0_->docIDs_))->size_) {
     return doc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
   }
-  return doc_ = OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_docIdWithInt_(self, i_);
+  return doc_ = OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_docIdWithInt_(self, i_);
 }
 
 - (jint)docID {
@@ -500,7 +531,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDo
   jint hi = ((IOSShortArray *) nil_chk(this$0_->docIDs_))->size_ - 1;
   while (lo <= hi) {
     jint mid = JreURShift32((lo + hi), 1);
-    jint midDoc = OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_docIdWithInt_(self, mid);
+    jint midDoc = OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_docIdWithInt_(self, mid);
     if (midDoc < target) {
       lo = mid + 1;
     }
@@ -514,13 +545,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDo
   }
   else {
     i_ = lo;
-    return doc_ = OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_docIdWithInt_(self, i_);
+    return doc_ = OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_docIdWithInt_(self, i_);
   }
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet:(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *)outer$ {
-  OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(self, outer$);
-  return self;
 }
 
 - (void)dealloc {
@@ -529,46 +555,54 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "docIdWithInt:", "docId", "I", 0x2, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet:);
+  methods[1].selector = @selector(docIdWithInt:);
+  methods[2].selector = @selector(nextDoc);
+  methods[3].selector = @selector(docID);
+  methods[4].selector = @selector(cost);
+  methods[5].selector = @selector(advanceWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.RoaringDocIdSet$ShortArrayDocIdSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "i_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "i_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet", "iterator" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 = { 2, "", "org.apache.lucene.util", "RoaringDocIdSet$ShortArrayDocIdSet", 0x8008, 6, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet;", "docId", "I", "LJavaIoIOException;", "advance", "iterator" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1 = { "", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x8010, 6, 3, 0, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1;
 }
 
 @end
 
-jint OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_docIdWithInt_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *self, jint i) {
-  return IOSShortArray_Get(nil_chk(self->this$0_->docIDs_), i) & (jint) 0xFFFF;
-}
-
-void OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *self, OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) {
+void OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1 *self, OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneSearchDocIdSetIterator_init(self);
   self->i_ = -1;
   self->doc_ = -1;
 }
 
-OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1, initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_, outer$)
+OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1 *new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1, initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_, outer$)
 }
 
-OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1, initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_, outer$)
+OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1 *create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1, initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_, outer$)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1)
+jint OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1_docIdWithInt_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_1 *self, jint i) {
+  return IOSShortArray_Get(nil_chk(self->this$0_->docIDs_), i) & (jint) 0xFFFF;
+}
 
 @implementation OrgApacheLuceneUtilRoaringDocIdSet_Iterator
 
@@ -624,21 +658,32 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilRoaringDocIdSet:", "Iterator", NULL, 0x0, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "firstDocFromNextBlock", NULL, "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilRoaringDocIdSet:);
+  methods[1].selector = @selector(docID);
+  methods[2].selector = @selector(nextDoc);
+  methods[3].selector = @selector(advanceWithInt:);
+  methods[4].selector = @selector(firstDocFromNextBlock);
+  methods[5].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.RoaringDocIdSet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "block_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "sub_", NULL, 0x0, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneUtilRoaringDocIdSet;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "block_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "sub_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet_Iterator = { 2, "Iterator", "org.apache.lucene.util", "RoaringDocIdSet", 0x2, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilRoaringDocIdSet;", "LJavaIoIOException;", "advance", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet_Iterator = { "Iterator", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x2, 6, 4, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilRoaringDocIdSet_Iterator;
 }
 
@@ -671,7 +716,7 @@ jint OrgApacheLuceneUtilRoaringDocIdSet_Iterator_firstDocFromNextBlock(OrgApache
     else if (IOSObjectArray_Get(self->this$0_->docIdSets_, self->block_) != nil) {
       JreStrongAssign(&self->sub_, [((OrgApacheLuceneSearchDocIdSet *) nil_chk(IOSObjectArray_Get(self->this$0_->docIdSets_, self->block_))) iterator]);
       jint subNext = [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(self->sub_)) nextDoc];
-      JreAssert((subNext != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS), (@"org/apache/lucene/util/RoaringDocIdSet.java:319 condition failed: assert subNext != NO_MORE_DOCS;"));
+      JreAssert(subNext != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS, @"org/apache/lucene/util/RoaringDocIdSet.java:319 condition failed: assert subNext != NO_MORE_DOCS;");
       return self->doc_ = (JreLShift32(self->block_, 16)) | subNext;
     }
   }

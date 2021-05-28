@@ -13,7 +13,16 @@
 #include "org/apache/lucene/index/LiveIndexWriterConfig.h"
 #include "org/apache/lucene/util/InfoStream.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/FlushByRamOrCountsPolicy must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexFlushByRamOrCountsPolicy
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneIndexFlushByRamOrCountsPolicy_initPackagePrivate(self);
+  return self;
+}
 
 - (void)onDeleteWithOrgApacheLuceneIndexDocumentsWriterFlushControl:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)control
    withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)state {
@@ -66,39 +75,44 @@
   return [((OrgApacheLuceneIndexLiveIndexWriterConfig *) nil_chk(indexWriterConfig_)) getRAMBufferSizeMB] != OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "onDeleteWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "onDelete", "V", 0x1, NULL, NULL },
-    { "onInsertWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "onInsert", "V", 0x1, NULL, NULL },
-    { "markLargestWriterPendingWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:withLong:", "markLargestWriterPending", "V", 0x4, NULL, NULL },
-    { "flushOnDocCount", NULL, "Z", 0x4, NULL, NULL },
-    { "flushOnDeleteTerms", NULL, "Z", 0x4, NULL, NULL },
-    { "flushOnRAM", NULL, "Z", 0x4, NULL, NULL },
-    { "init", "FlushByRamOrCountsPolicy", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFlushByRamOrCountsPolicy = { 2, "FlushByRamOrCountsPolicy", "org.apache.lucene.index", NULL, 0x0, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(onDeleteWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:);
+  methods[2].selector = @selector(onInsertWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:);
+  methods[3].selector = @selector(markLargestWriterPendingWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:withLong:);
+  methods[4].selector = @selector(flushOnDocCount);
+  methods[5].selector = @selector(flushOnDeleteTerms);
+  methods[6].selector = @selector(flushOnRAM);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "onDelete", "LOrgApacheLuceneIndexDocumentsWriterFlushControl;LOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;", "onInsert", "markLargestWriterPending", "LOrgApacheLuceneIndexDocumentsWriterFlushControl;LOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;J" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFlushByRamOrCountsPolicy = { "FlushByRamOrCountsPolicy", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x0, 7, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFlushByRamOrCountsPolicy;
 }
 
 @end
 
-void OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init(OrgApacheLuceneIndexFlushByRamOrCountsPolicy *self) {
-  OrgApacheLuceneIndexFlushPolicy_init(self);
+void OrgApacheLuceneIndexFlushByRamOrCountsPolicy_initPackagePrivate(OrgApacheLuceneIndexFlushByRamOrCountsPolicy *self) {
+  OrgApacheLuceneIndexFlushPolicy_initPackagePrivate(self);
 }
 
-OrgApacheLuceneIndexFlushByRamOrCountsPolicy *new_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFlushByRamOrCountsPolicy, init)
+OrgApacheLuceneIndexFlushByRamOrCountsPolicy *new_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFlushByRamOrCountsPolicy, initPackagePrivate)
 }
 
-OrgApacheLuceneIndexFlushByRamOrCountsPolicy *create_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFlushByRamOrCountsPolicy, init)
+OrgApacheLuceneIndexFlushByRamOrCountsPolicy *create_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFlushByRamOrCountsPolicy, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFlushByRamOrCountsPolicy)

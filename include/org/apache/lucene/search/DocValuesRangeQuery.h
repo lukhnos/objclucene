@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocValuesRangeQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocValuesRangeQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRangeQuery || defined(INCLUDE_OrgApacheLuceneSearchDocValuesRangeQuery))
 #define OrgApacheLuceneSearchDocValuesRangeQuery_
 
@@ -27,15 +33,16 @@
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
- @brief A range query that works on top of the doc values APIs.
- Such queries are
- usually slow since they do not use an inverted index. However, in the
- dense case where most documents match this query, it <b>might</b> be as
- fast or faster than a regular <code>NumericRangeQuery</code>.
+ @brief A range query that works on top of the doc values APIs.Such queries are
+  usually slow since they do not use an inverted index.
+ However, in the
+  dense case where most documents match this query, it <b>might</b> be as
+  fast or faster than a regular <code>NumericRangeQuery</code>.
+  
  <p>
- <b>NOTE</b>: be very careful using this query: it is
- typically much slower than using <code>TermsQuery</code>,
- but in certain specialized cases may be faster.
+  <b>NOTE</b>: be very careful using this query: it is
+  typically much slower than using <code>TermsQuery</code>,
+  but in certain specialized cases may be faster.
  */
 @interface OrgApacheLuceneSearchDocValuesRangeQuery : OrgApacheLuceneSearchQuery
 
@@ -49,10 +56,9 @@
 - (NSUInteger)hash;
 
 /*!
- @brief Create a new numeric range query on a numeric doc-values field.
- The field
- must has been indexed with <code>DocValuesType.SORTED</code> or
- <code>DocValuesType.SORTED_SET</code> doc values. 
+ @brief Create a new numeric range query on a numeric doc-values field.The field
+   must has been indexed with <code>DocValuesType.SORTED</code> or
+   <code>DocValuesType.SORTED_SET</code> doc values.
  */
 + (OrgApacheLuceneSearchQuery *)newBytesRefRangeWithNSString:(NSString *)field
                              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerVal
@@ -61,10 +67,9 @@
                                                  withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief Create a new numeric range query on a numeric doc-values field.
- The field
- must has been indexed with either <code>DocValuesType.NUMERIC</code> or
- <code>DocValuesType.SORTED_NUMERIC</code> doc values. 
+ @brief Create a new numeric range query on a numeric doc-values field.The field
+   must has been indexed with either <code>DocValuesType.NUMERIC</code> or
+   <code>DocValuesType.SORTED_NUMERIC</code> doc values.
  */
 + (OrgApacheLuceneSearchQuery *)newLongRangeWithNSString:(NSString *)field
                                         withJavaLangLong:(JavaLangLong *)lowerVal
@@ -75,6 +80,10 @@
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -88,4 +97,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRangeQuery")

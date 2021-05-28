@@ -11,6 +11,10 @@
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SingletonSortedSetDocValues must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexSingletonSortedSetDocValues () {
  @public
   OrgApacheLuceneIndexSortedDocValues *in_;
@@ -24,8 +28,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingletonSortedSetDocValues, in_, OrgApa
 
 @implementation OrgApacheLuceneIndexSingletonSortedSetDocValues
 
-- (instancetype)initWithOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)inArg {
-  OrgApacheLuceneIndexSingletonSortedSetDocValues_initWithOrgApacheLuceneIndexSortedDocValues_(self, inArg);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)inArg {
+  OrgApacheLuceneIndexSingletonSortedSetDocValues_initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_(self, inArg);
   return self;
 }
 
@@ -73,41 +77,56 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingletonSortedSetDocValues, in_, OrgApa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSortedDocValues:", "SingletonSortedSetDocValues", NULL, 0x1, NULL, NULL },
-    { "getSortedDocValues", NULL, "Lorg.apache.lucene.index.SortedDocValues;", 0x1, NULL, NULL },
-    { "nextOrd", NULL, "J", 0x1, NULL, NULL },
-    { "setDocumentWithInt:", "setDocument", "V", 0x1, NULL, NULL },
-    { "lookupOrdWithLong:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getValueCount", NULL, "J", 0x1, NULL, NULL },
-    { "lookupTermWithOrgApacheLuceneUtilBytesRef:", "lookupTerm", "J", 0x1, NULL, NULL },
-    { "ordAtWithInt:", "ordAt", "J", 0x1, NULL, NULL },
-    { "cardinality", NULL, "I", 0x1, NULL, NULL },
-    { "termsEnum", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedDocValues;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 7, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues:);
+  methods[1].selector = @selector(getSortedDocValues);
+  methods[2].selector = @selector(nextOrd);
+  methods[3].selector = @selector(setDocumentWithInt:);
+  methods[4].selector = @selector(lookupOrdWithLong:);
+  methods[5].selector = @selector(getValueCount);
+  methods[6].selector = @selector(lookupTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[7].selector = @selector(ordAtWithInt:);
+  methods[8].selector = @selector(cardinality);
+  methods[9].selector = @selector(termsEnum);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x12, "Lorg.apache.lucene.index.SortedDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentOrd_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "ord_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneIndexSortedDocValues;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentOrd_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "ord_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSingletonSortedSetDocValues = { 2, "SingletonSortedSetDocValues", "org.apache.lucene.index", NULL, 0x10, 10, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSortedDocValues;", "setDocument", "I", "lookupOrd", "J", "lookupTerm", "LOrgApacheLuceneUtilBytesRef;", "ordAt" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSingletonSortedSetDocValues = { "SingletonSortedSetDocValues", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 10, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSingletonSortedSetDocValues;
 }
 
 @end
 
-void OrgApacheLuceneIndexSingletonSortedSetDocValues_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSingletonSortedSetDocValues *self, OrgApacheLuceneIndexSortedDocValues *inArg) {
+void OrgApacheLuceneIndexSingletonSortedSetDocValues_initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSingletonSortedSetDocValues *self, OrgApacheLuceneIndexSortedDocValues *inArg) {
   OrgApacheLuceneIndexRandomAccessOrds_init(self);
   JreStrongAssign(&self->in_, inArg);
-  JreAssert((OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS == -1), (@"org/apache/lucene/index/SingletonSortedSetDocValues.java:36 condition failed: assert NO_MORE_ORDS == -1;"));
+  JreAssert(OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS == -1, @"org/apache/lucene/index/SingletonSortedSetDocValues.java:36 condition failed: assert NO_MORE_ORDS == -1;");
 }
 
-OrgApacheLuceneIndexSingletonSortedSetDocValues *new_OrgApacheLuceneIndexSingletonSortedSetDocValues_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *inArg) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSingletonSortedSetDocValues, initWithOrgApacheLuceneIndexSortedDocValues_, inArg)
+OrgApacheLuceneIndexSingletonSortedSetDocValues *new_OrgApacheLuceneIndexSingletonSortedSetDocValues_initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSingletonSortedSetDocValues, initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_, inArg)
 }
 
-OrgApacheLuceneIndexSingletonSortedSetDocValues *create_OrgApacheLuceneIndexSingletonSortedSetDocValues_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *inArg) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSingletonSortedSetDocValues, initWithOrgApacheLuceneIndexSortedDocValues_, inArg)
+OrgApacheLuceneIndexSingletonSortedSetDocValues *create_OrgApacheLuceneIndexSingletonSortedSetDocValues_initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSingletonSortedSetDocValues, initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSingletonSortedSetDocValues)

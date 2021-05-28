@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/payloads/PayloadEncoder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisPayloadsPayloadEncoder : NSObject
 
 @end
@@ -13,11 +17,18 @@
 @implementation OrgApacheLuceneAnalysisPayloadsPayloadEncoder
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "encodeWithCharArray:", "encode", "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
-    { "encodeWithCharArray:withInt:withInt:", "encode", "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x401, 0, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsPayloadEncoder = { 2, "PayloadEncoder", "org.apache.lucene.analysis.payloads", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(encodeWithCharArray:);
+  methods[1].selector = @selector(encodeWithCharArray:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "encode", "[C", "[CII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsPayloadEncoder = { "PayloadEncoder", "org.apache.lucene.analysis.payloads", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPayloadsPayloadEncoder;
 }
 

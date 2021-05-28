@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_
 
@@ -26,8 +32,8 @@
 
 /*!
  @brief A <code>BoostQueryNode</code> boosts the QueryNode tree which is under this node.
- So, it must only and always have one child.
- The boost value may vary from 0.0 to 1.0.
+ So, it must only and always have one child. 
+  The boost value may vary from 0.0 to 1.0.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
@@ -35,13 +41,11 @@
 
 /*!
  @brief Constructs a boost node
- @param query
- the query to be boosted
- @param value
- the boost value, it may vary from 0.0 to 1.0
+ @param query the query to be boosted
+ @param value the boost value, it may vary from 0.0 to 1.0
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
-                                                                   withFloat:(jfloat)value;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
+                                                                             withFloat:(jfloat)value;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -52,8 +56,7 @@
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)getChild;
 
 /*!
- @brief Returns the boost value.
- It may vary from 0.0 to 1.0.
+ @brief Returns the boost value.It may vary from 0.0 to 1.0.
  @return the boost value
  */
 - (jfloat)getValue;
@@ -61,6 +64,10 @@
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -76,4 +83,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQuery
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode")

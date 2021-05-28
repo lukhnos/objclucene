@@ -10,6 +10,10 @@
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/IOContext.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SegmentReadState must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexSegmentReadState
 
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
@@ -45,19 +49,27 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:", "SegmentReadState", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:withNSString:", "SegmentReadState", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexSegmentReadState:withNSString:", "SegmentReadState", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:withNSString:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexSegmentReadState:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "directory_", NULL, 0x11, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentInfo_", NULL, 0x11, "Lorg.apache.lucene.index.SegmentInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfos_", NULL, 0x11, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "context_", NULL, 0x11, "Lorg.apache.lucene.store.IOContext;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentSuffix_", NULL, 0x11, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "directory_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "segmentInfo_", "LOrgApacheLuceneIndexSegmentInfo;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "fieldInfos_", "LOrgApacheLuceneIndexFieldInfos;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "context_", "LOrgApacheLuceneStoreIOContext;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "segmentSuffix_", "LNSString;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentReadState = { 2, "SegmentReadState", "org.apache.lucene.index", NULL, 0x1, 3, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneIndexFieldInfos;LOrgApacheLuceneStoreIOContext;", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LOrgApacheLuceneIndexFieldInfos;LOrgApacheLuceneStoreIOContext;LNSString;", "LOrgApacheLuceneIndexSegmentReadState;LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentReadState = { "SegmentReadState", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 3, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSegmentReadState;
 }
 

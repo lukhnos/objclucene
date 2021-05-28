@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilCloseableThreadLocal
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilCloseableThreadLocal_) && (INCLUDE_ALL_OrgApacheLuceneUtilCloseableThreadLocal || defined(INCLUDE_OrgApacheLuceneUtilCloseableThreadLocal))
 #define OrgApacheLuceneUtilCloseableThreadLocal_
 
@@ -22,33 +28,33 @@
 
 /*!
  @brief Java's builtin ThreadLocal has a serious flaw:
- it can take an arbitrarily long amount of time to
- dereference the things you had stored in it, even once the
- ThreadLocal instance itself is no longer referenced.
+   it can take an arbitrarily long amount of time to
+   dereference the things you had stored in it, even once the
+   ThreadLocal instance itself is no longer referenced.
  This is because there is single, master map stored for
- each thread, which all ThreadLocals share, and that
- master map only periodically purges "stale" entries.
- While not technically a memory leak, because eventually
- the memory will be reclaimed, it can take a long time
- and you can easily hit OutOfMemoryError because from the
- GC's standpoint the stale entries are not reclaimable.
- This class works around that, by only enrolling
- WeakReference values into the ThreadLocal, and
- separately holding a hard reference to each stored
- value.  When you call <code>close</code>, these hard
- references are cleared and then GC is freely able to
- reclaim space by objects stored in it.
- We can not rely on <code>ThreadLocal.remove()</code> as it
- only removes the value for the caller thread, whereas
+   each thread, which all ThreadLocals share, and that
+   master map only periodically purges "stale" entries.
+   While not technically a memory leak, because eventually
+   the memory will be reclaimed, it can take a long time
+   and you can easily hit OutOfMemoryError because from the
+   GC's standpoint the stale entries are not reclaimable. 
+   This class works around that, by only enrolling
+   WeakReference values into the ThreadLocal, and
+   separately holding a hard reference to each stored
+   value.  When you call <code>close</code>, these hard
+   references are cleared and then GC is freely able to
+   reclaim space by objects stored in it.
+   We can not rely on <code>ThreadLocal.remove()</code> as it
+   only removes the value for the caller thread, whereas  
  <code>close</code> takes care of all
- threads.  You should not call <code>close</code> until all
- threads are done using the instance.
+   threads.  You should not call <code>close</code> until all
+   threads are done using the instance.
  */
 @interface OrgApacheLuceneUtilCloseableThreadLocal : NSObject < JavaIoCloseable >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)close;
 
@@ -66,12 +72,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilCloseableThreadLocal)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilCloseableThreadLocal_init(OrgApacheLuceneUtilCloseableThreadLocal *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilCloseableThreadLocal *new_OrgApacheLuceneUtilCloseableThreadLocal_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilCloseableThreadLocal *new_OrgApacheLuceneUtilCloseableThreadLocal_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilCloseableThreadLocal *create_OrgApacheLuceneUtilCloseableThreadLocal_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilCloseableThreadLocal *create_OrgApacheLuceneUtilCloseableThreadLocal_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCloseableThreadLocal)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilCloseableThreadLocal")

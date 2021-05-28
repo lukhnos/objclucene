@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchReqExclScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchReqExclScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchReqExclScorer || defined(INCLUDE_OrgApacheLuceneSearchReqExclScorer))
 #define OrgApacheLuceneSearchReqExclScorer_
 
@@ -21,14 +27,15 @@
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneSearchTwoPhaseIterator;
+@class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilCollection;
 
 /*!
  @brief A Scorer for queries with a required subscorer
- and an excluding (prohibited) sub <code>Scorer</code>.
+  and an excluding (prohibited) sub <code>Scorer</code>.
  <br>
- This <code>Scorer</code> implements <code>Scorer.advance(int)</code>,
- and it uses the advance() on the given scorers.
+  This <code>Scorer</code> implements <code>Scorer.advance(int)</code>,
+  and it uses the advance() on the given scorers.
  */
 @interface OrgApacheLuceneSearchReqExclScorer : OrgApacheLuceneSearchScorer
 
@@ -39,8 +46,8 @@
  @param reqScorer The scorer that must match, except where
  @param exclScorer indicates exclusion.
  */
-- (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)exclScorer;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
+                                            withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)exclScorer;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -58,18 +65,26 @@
 
 - (jfloat)score;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchReqExclScorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchReqExclScorer *self, OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchReqExclScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchReqExclScorer *self, OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchReqExclScorer *new_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchReqExclScorer *new_OrgApacheLuceneSearchReqExclScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchReqExclScorer *create_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer);
+FOUNDATION_EXPORT OrgApacheLuceneSearchReqExclScorer *create_OrgApacheLuceneSearchReqExclScorer_initPackagePrivateWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchReqExclScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchReqExclScorer")

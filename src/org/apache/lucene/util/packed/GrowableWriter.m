@@ -3,15 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/GrowableWriter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Math.h"
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/packed/GrowableWriter.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/GrowableWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilPackedGrowableWriter () {
  @public
@@ -122,29 +124,49 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedGrowableWriter_ensu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withFloat:", "GrowableWriter", NULL, 0x1, NULL, NULL },
-    { "maskWithInt:", "mask", "J", 0xa, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "getBitsPerValue", NULL, "I", 0x1, NULL, NULL },
-    { "getMutable", NULL, "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", 0x1, NULL, NULL },
-    { "ensureCapacityWithLong:", "ensureCapacity", "V", 0x2, NULL, NULL },
-    { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "resizeWithInt:", "resize", "Lorg.apache.lucene.util.packed.GrowableWriter;", 0x1, NULL, NULL },
-    { "getWithInt:withLongArray:withInt:withInt:", "get", "I", 0x1, NULL, NULL },
-    { "setWithInt:withLongArray:withInt:withInt:", "set", "I", 0x1, NULL, NULL },
-    { "fillWithInt:withInt:withLong:", "fill", "V", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "saveWithOrgApacheLuceneStoreDataOutput:", "save", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0xa, 1, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedPackedInts_Mutable;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilPackedGrowableWriter;", 0x1, 8, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, 14, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:withFloat:);
+  methods[1].selector = @selector(maskWithInt:);
+  methods[2].selector = @selector(getWithInt:);
+  methods[3].selector = @selector(size);
+  methods[4].selector = @selector(getBitsPerValue);
+  methods[5].selector = @selector(getMutable);
+  methods[6].selector = @selector(ensureCapacityWithLong:);
+  methods[7].selector = @selector(setWithInt:withLong:);
+  methods[8].selector = @selector(clear);
+  methods[9].selector = @selector(resizeWithInt:);
+  methods[10].selector = @selector(getWithInt:withLongArray:withInt:withInt:);
+  methods[11].selector = @selector(setWithInt:withLongArray:withInt:withInt:);
+  methods[12].selector = @selector(fillWithInt:withInt:withLong:);
+  methods[13].selector = @selector(ramBytesUsed);
+  methods[14].selector = @selector(saveWithOrgApacheLuceneStoreDataOutput:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "currentMask_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x2, "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", NULL, NULL, .constantValue.asLong = 0 },
-    { "acceptableOverheadRatio_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "currentMask_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "current_", "LOrgApacheLuceneUtilPackedPackedInts_Mutable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "acceptableOverheadRatio_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedGrowableWriter = { 2, "GrowableWriter", "org.apache.lucene.util.packed", NULL, 0x1, 15, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IIF", "mask", "I", "get", "ensureCapacity", "J", "set", "IJ", "resize", "I[JII", "fill", "IIJ", "save", "LOrgApacheLuceneStoreDataOutput;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedGrowableWriter = { "GrowableWriter", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x1, 15, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedGrowableWriter;
 }
 
@@ -175,7 +197,7 @@ void OrgApacheLuceneUtilPackedGrowableWriter_ensureCapacityWithLong_(OrgApacheLu
     return;
   }
   jint bitsRequired = OrgApacheLuceneUtilPackedPackedInts_unsignedBitsRequiredWithLong_(value);
-  JreAssert((bitsRequired > [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(self->current_)) getBitsPerValue]), (@"org/apache/lucene/util/packed/GrowableWriter.java:78 condition failed: assert bitsRequired > current.getBitsPerValue();"));
+  JreAssert(bitsRequired > [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(self->current_)) getBitsPerValue], @"org/apache/lucene/util/packed/GrowableWriter.java:78 condition failed: assert bitsRequired > current.getBitsPerValue();");
   jint valueCount = [self size];
   OrgApacheLuceneUtilPackedPackedInts_Mutable *next = OrgApacheLuceneUtilPackedPackedInts_getMutableWithInt_withInt_withFloat_(valueCount, bitsRequired, self->acceptableOverheadRatio_);
   OrgApacheLuceneUtilPackedPackedInts_copy__WithOrgApacheLuceneUtilPackedPackedInts_Reader_withInt_withOrgApacheLuceneUtilPackedPackedInts_Mutable_withInt_withInt_withInt_(self->current_, 0, next, 0, valueCount, OrgApacheLuceneUtilPackedPackedInts_DEFAULT_BUFFER_SIZE);

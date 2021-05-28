@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansNearSpansUnordered
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansNearSpansUnordered_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansUnordered || defined(INCLUDE_OrgApacheLuceneSearchSpansNearSpansUnordered))
 #define OrgApacheLuceneSearchSpansNearSpansUnordered_
 
@@ -28,14 +34,14 @@
 /*!
  @brief Similar to <code>NearSpansOrdered</code>, but for the unordered case.
  Expert:
- Only public for subclassing.  Most implementations should not need this class
+  Only public for subclassing.  Most implementations should not need this class
  */
 @interface OrgApacheLuceneSearchSpansNearSpansUnordered : OrgApacheLuceneSearchSpansNearSpans
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)query
-                                               withJavaUtilList:(id<JavaUtilList>)subSpans;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)query
+                                                         withJavaUtilList:(id<JavaUtilList>)subSpans;
 
 - (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
 
@@ -54,13 +60,18 @@
 /*!
  @brief Check whether two Spans in the same document are ordered with possible overlap.
  @return true iff spans1 starts before spans2
- or the spans start at the same position,
- and spans1 ends before spans2.
+               or the spans start at the same position,
+               and spans1 ends before spans2.
  */
 + (jboolean)positionsOrderedWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans1
                             withOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans2;
 
 - (jboolean)twoPhaseCurrentDocMatches;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)arg0
+                                                                       withJavaUtilList:(id<JavaUtilList>)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -78,4 +89,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansUnordered")

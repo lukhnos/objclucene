@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
@@ -17,6 +16,10 @@
 #include "org/apache/lucene/store/BufferedIndexInput.h"
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/util/MathUtil.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/MultiLevelSkipListReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneCodecsMultiLevelSkipListReader () {
  @public
@@ -49,7 +52,7 @@
   IOSLongArray *childPointer_;
   /*!
    @brief childPointer of last read skip entry with docId &lt;=
- target.
+   target.
    */
   jlong lastChildPointer_;
   jboolean inputIsBuffered_;
@@ -187,7 +190,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuf
                withInt:(jint)df {
   *IOSLongArray_GetRef(nil_chk(self->skipPointer_), 0) = skipPointer;
   self->docCount_ = df;
-  JreAssert((skipPointer >= 0 && skipPointer <= [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(skipStream_), 0))) length]), (JreStrcat("$J$J", @"invalid skip pointer: ", skipPointer, @", length=", [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(skipStream_), 0))) length])));
+  JreAssert(skipPointer >= 0 && skipPointer <= [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(skipStream_), 0))) length], JreStrcat("$J$J", @"invalid skip pointer: ", skipPointer, @", length=", [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(skipStream_), 0))) length]));
   JavaUtilArrays_fillWithIntArray_withInt_(skipDoc_, 0);
   JavaUtilArrays_fillWithIntArray_withInt_(numSkipped_, 0);
   JavaUtilArrays_fillWithLongArray_withLong_(childPointer_, 0);
@@ -224,37 +227,52 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:withInt:", "MultiLevelSkipListReader", NULL, 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:", "MultiLevelSkipListReader", NULL, 0x4, NULL, NULL },
-    { "getDoc", NULL, "I", 0x1, NULL, NULL },
-    { "skipToWithInt:", "skipTo", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "loadNextSkipWithInt:", "loadNextSkip", "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "seekChildWithInt:", "seekChild", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "init__WithLong:withInt:", "init", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "loadSkipLevels", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "readSkipDataWithInt:withOrgApacheLuceneStoreIndexInput:", "readSkipData", "I", 0x404, "Ljava.io.IOException;", NULL },
-    { "setLastSkipDataWithInt:", "setLastSkipData", "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x4, -1, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "Z", 0x2, 5, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x4, 6, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, 4, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 4, -1, -1, -1 },
+    { NULL, "I", 0x404, 9, 10, 4, -1, -1, -1 },
+    { NULL, "V", 0x4, 11, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:);
+  methods[2].selector = @selector(getDoc);
+  methods[3].selector = @selector(skipToWithInt:);
+  methods[4].selector = @selector(loadNextSkipWithInt:);
+  methods[5].selector = @selector(seekChildWithInt:);
+  methods[6].selector = @selector(close);
+  methods[7].selector = @selector(init__WithLong:withInt:);
+  methods[8].selector = @selector(loadSkipLevels);
+  methods[9].selector = @selector(readSkipDataWithInt:withOrgApacheLuceneStoreIndexInput:);
+  methods[10].selector = @selector(setLastSkipDataWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "maxNumberOfSkipLevels_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numberOfSkipLevels_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numberOfLevelsToBuffer_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "skipStream_", NULL, 0x2, "[Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "skipPointer_", NULL, 0x2, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "skipInterval_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numSkipped_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "skipDoc_", NULL, 0x4, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastDoc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "childPointer_", NULL, 0x2, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastChildPointer_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "inputIsBuffered_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "skipMultiplier_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "maxNumberOfSkipLevels_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "numberOfSkipLevels_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numberOfLevelsToBuffer_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "docCount_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "skipStream_", "[LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "skipPointer_", "[J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "skipInterval_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numSkipped_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "skipDoc_", "[I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "lastDoc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "childPointer_", "[J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastChildPointer_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "inputIsBuffered_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "skipMultiplier_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.MultiLevelSkipListReader$SkipBuffer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsMultiLevelSkipListReader = { 2, "MultiLevelSkipListReader", "org.apache.lucene.codecs", NULL, 0x401, 11, methods, 14, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;III", "LOrgApacheLuceneStoreIndexInput;II", "skipTo", "I", "LJavaIoIOException;", "loadNextSkip", "seekChild", "init", "JI", "readSkipData", "ILOrgApacheLuceneStoreIndexInput;", "setLastSkipData", "LOrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsMultiLevelSkipListReader = { "MultiLevelSkipListReader", "org.apache.lucene.codecs", ptrTable, methods, fields, 7, 0x401, 11, 14, -1, 12, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsMultiLevelSkipListReader;
 }
 
@@ -303,7 +321,7 @@ void OrgApacheLuceneCodecsMultiLevelSkipListReader_loadSkipLevels(OrgApacheLucen
     self->numberOfSkipLevels_ = 1;
   }
   else {
-    self->numberOfSkipLevels_ = 1 + OrgApacheLuceneUtilMathUtil_logWithLong_withInt_(self->docCount_ / IOSIntArray_Get(self->skipInterval_, 0), self->skipMultiplier_);
+    self->numberOfSkipLevels_ = 1 + OrgApacheLuceneUtilMathUtil_logWithLong_withInt_(JreIntDiv(self->docCount_, IOSIntArray_Get(self->skipInterval_, 0)), self->skipMultiplier_);
   }
   if (self->numberOfSkipLevels_ > self->maxNumberOfSkipLevels_) {
     self->numberOfSkipLevels_ = self->maxNumberOfSkipLevels_;
@@ -318,7 +336,7 @@ void OrgApacheLuceneCodecsMultiLevelSkipListReader_loadSkipLevels(OrgApacheLucen
       toBuffer--;
     }
     else {
-      IOSObjectArray_Set(nil_chk(self->skipStream_), i, [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, 0))) clone]);
+      IOSObjectArray_Set(nil_chk(self->skipStream_), i, [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, 0))) java_clone]);
       if (self->inputIsBuffered_ && length < OrgApacheLuceneStoreBufferedIndexInput_BUFFER_SIZE) {
         [((OrgApacheLuceneStoreBufferedIndexInput *) nil_chk(((OrgApacheLuceneStoreBufferedIndexInput *) cast_chk(IOSObjectArray_Get(nil_chk(self->skipStream_), i), [OrgApacheLuceneStoreBufferedIndexInput class])))) setBufferSizeWithInt:JavaLangMath_maxWithInt_withInt_(OrgApacheLuceneStoreBufferedIndexInput_MIN_BUFFER_SIZE, (jint) length)];
       }
@@ -377,22 +395,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsMultiLevelSkipListReader)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:withInt:", "SkipBuffer", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
-    { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
-    { "length", NULL, "J", 0x1, NULL, NULL },
-    { "readByte", NULL, "B", 0x1, NULL, NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, NULL, NULL },
-    { "seekWithLong:", "seek", "V", 0x1, NULL, NULL },
-    { "sliceWithNSString:withLong:withLong:", "slice", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 6, 7, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexInput:withInt:);
+  methods[1].selector = @selector(close);
+  methods[2].selector = @selector(getFilePointer);
+  methods[3].selector = @selector(length);
+  methods[4].selector = @selector(readByte);
+  methods[5].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  methods[6].selector = @selector(seekWithLong:);
+  methods[7].selector = @selector(sliceWithNSString:withLong:withLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "data_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "pointer_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "data_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pointer_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer = { 2, "SkipBuffer", "org.apache.lucene.codecs", "MultiLevelSkipListReader", 0x1a, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;I", "LJavaIoIOException;", "readBytes", "[BII", "seek", "J", "slice", "LNSString;JJ", "LOrgApacheLuceneCodecsMultiLevelSkipListReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer = { "SkipBuffer", "org.apache.lucene.codecs", ptrTable, methods, fields, 7, 0x1a, 8, 3, 8, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer;
 }
 

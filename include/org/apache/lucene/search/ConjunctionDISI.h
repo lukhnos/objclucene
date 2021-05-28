@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchConjunctionDISI
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchConjunctionDISI_) && (INCLUDE_ALL_OrgApacheLuceneSearchConjunctionDISI || defined(INCLUDE_OrgApacheLuceneSearchConjunctionDISI))
 #define OrgApacheLuceneSearchConjunctionDISI_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief A conjunction of DocIdSetIterators.
- This iterates over the doc ids that are present in each given DocIdSetIterator.
+ This iterates over the doc ids that are present in each given DocIdSetIterator. 
  <br>Public only for use in <code>org.apache.lucene.search.spans</code>.
  */
 @interface OrgApacheLuceneSearchConjunctionDISI : OrgApacheLuceneSearchDocIdSetIterator {
@@ -45,7 +51,7 @@
 
 /*!
  @brief Create a conjunction over the provided iterators, taking advantage of
- <code>TwoPhaseIterator</code>.
+   <code>TwoPhaseIterator</code>.
  */
 + (OrgApacheLuceneSearchConjunctionDISI *)intersectWithJavaUtilList:(id<JavaUtilList>)iterators;
 
@@ -57,9 +63,13 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)iterators;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)iterators;
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -80,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionDISI)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchConjunctionDISI")

@@ -16,6 +16,10 @@
 #include "org/apache/lucene/codecs/StoredFieldsFormat.h"
 #include "org/apache/lucene/codecs/TermVectorsFormat.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/FilterCodec must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneCodecsFilterCodec
 
 - (instancetype)initWithNSString:(NSString *)name
@@ -66,22 +70,37 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneCodecsCodec:", "FilterCodec", NULL, 0x4, NULL, NULL },
-    { "docValuesFormat", NULL, "Lorg.apache.lucene.codecs.DocValuesFormat;", 0x1, NULL, NULL },
-    { "fieldInfosFormat", NULL, "Lorg.apache.lucene.codecs.FieldInfosFormat;", 0x1, NULL, NULL },
-    { "liveDocsFormat", NULL, "Lorg.apache.lucene.codecs.LiveDocsFormat;", 0x1, NULL, NULL },
-    { "normsFormat", NULL, "Lorg.apache.lucene.codecs.NormsFormat;", 0x1, NULL, NULL },
-    { "postingsFormat", NULL, "Lorg.apache.lucene.codecs.PostingsFormat;", 0x1, NULL, NULL },
-    { "segmentInfoFormat", NULL, "Lorg.apache.lucene.codecs.SegmentInfoFormat;", 0x1, NULL, NULL },
-    { "storedFieldsFormat", NULL, "Lorg.apache.lucene.codecs.StoredFieldsFormat;", 0x1, NULL, NULL },
-    { "termVectorsFormat", NULL, "Lorg.apache.lucene.codecs.TermVectorsFormat;", 0x1, NULL, NULL },
-    { "compoundFormat", NULL, "Lorg.apache.lucene.codecs.CompoundFormat;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldInfosFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsLiveDocsFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsNormsFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsPostingsFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsSegmentInfoFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCompoundFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneCodecsCodec:);
+  methods[1].selector = @selector(docValuesFormat);
+  methods[2].selector = @selector(fieldInfosFormat);
+  methods[3].selector = @selector(liveDocsFormat);
+  methods[4].selector = @selector(normsFormat);
+  methods[5].selector = @selector(postingsFormat);
+  methods[6].selector = @selector(segmentInfoFormat);
+  methods[7].selector = @selector(storedFieldsFormat);
+  methods[8].selector = @selector(termVectorsFormat);
+  methods[9].selector = @selector(compoundFormat);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "delegate_", NULL, 0x14, "Lorg.apache.lucene.codecs.Codec;", NULL, NULL, .constantValue.asLong = 0 },
+    { "delegate_", "LOrgApacheLuceneCodecsCodec;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsFilterCodec = { 2, "FilterCodec", "org.apache.lucene.codecs", NULL, 0x401, 10, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneCodecsCodec;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsFilterCodec = { "FilterCodec", "org.apache.lucene.codecs", ptrTable, methods, fields, 7, 0x401, 10, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsFilterCodec;
 }
 

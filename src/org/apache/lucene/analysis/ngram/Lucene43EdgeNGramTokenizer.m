@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/Enum.h"
@@ -21,7 +20,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ngram/Lucene43EdgeNGramTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer () {
  @public
@@ -52,31 +54,31 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer, inSt
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_init__WithOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_withInt_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer *self, OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *side, jint minGram, jint maxGram);
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer__Annotations$1(void);
+
 __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *self, NSString *__name, jint __ordinal);
 
-@interface OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1 : OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side < NSCopying >
+@interface OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1 : OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side
 
 - (NSString *)getLabel;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1)
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1 *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1 *self, NSString *__name, jint __ordinal);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1)
-
-@interface OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2 : OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side < NSCopying >
+@interface OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2 : OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side
 
 - (NSString *)getLabel;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2)
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2 *self, NSString *__name, jint __ordinal);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2)
+__attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2 *self, NSString *__name, jint __ordinal);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer)
 
@@ -165,8 +167,8 @@ withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:(OrgApacheLucene
         chars = OrgApacheLuceneUtilArrayUtil_growWithCharArray_(chars);
       }
     }
-    JreStrongAssign(&inStr_, [NSString stringWithCharacters:chars offset:0 length:charsRead_]);
-    JreStrongAssign(&inStr_, [inStr_ trim]);
+    JreStrongAssign(&inStr_, [NSString java_stringWithCharacters:chars offset:0 length:charsRead_]);
+    JreStrongAssign(&inStr_, [inStr_ java_trim]);
     if (!exhausted) {
       IOSCharArray *throwaway = [IOSCharArray arrayWithLength:1024];
       while (true) {
@@ -177,7 +179,7 @@ withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:(OrgApacheLucene
         charsRead_ += inc;
       }
     }
-    inLen_ = ((jint) [((NSString *) nil_chk(inStr_)) length]);
+    inLen_ = [((NSString *) nil_chk(inStr_)) java_length];
     if (inLen_ == 0) {
       return false;
     }
@@ -211,14 +213,6 @@ withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:(OrgApacheLucene
   started_ = false;
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithNSString_withInt_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(termAtt_);
   RELEASE_(offsetAtt_);
@@ -228,45 +222,59 @@ withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:(OrgApacheLucene
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, 5, -1 },
+    { NULL, NULL, 0x1, -1, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 7, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 8, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 8, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 8, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:withInt:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:withInt:withInt:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withNSString:withInt:withInt:);
+  methods[3].selector = @selector(initWithInt:withInt:);
+  methods[4].selector = @selector(initWithNSString:withInt:withInt:);
+  methods[5].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withInt:withInt:);
+  methods[6].selector = @selector(init__WithOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:withInt:withInt:);
+  methods[7].selector = @selector(incrementToken);
+  methods[8].selector = @selector(end);
+  methods[9].selector = @selector(reset);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_SIDE", "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;", .constantValue.asLong = 0, 0x19, -1, 9, -1, -1 },
+    { "DEFAULT_MAX_GRAM_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_DEFAULT_MAX_GRAM_SIZE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MIN_GRAM_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_DEFAULT_MIN_GRAM_SIZE, 0x19, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncrAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minGram_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxGram_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "gramSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "side_", "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "started_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "inLen_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "charsRead_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "inStr_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;II", "LOrgApacheLuceneUtilAttributeFactory;LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;II", "LOrgApacheLuceneUtilAttributeFactory;LNSString;II", "II", "LNSString;II", (void *)&OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer__Annotations$0, "LOrgApacheLuceneUtilAttributeFactory;II", "init", "LJavaIoIOException;", &OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_DEFAULT_SIDE, "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;", (void *)&OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer__Annotations$1 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer = { "Lucene43EdgeNGramTokenizer", "org.apache.lucene.analysis.ngram", ptrTable, methods, fields, 7, 0x11, 10, 14, -1, 10, -1, -1, 11 };
+  return &_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer class]) {
     JreStrongAssign(&OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_DEFAULT_SIDE, JreLoadEnum(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, FRONT));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:withInt:withInt:", "Lucene43EdgeNGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:withInt:withInt:", "Lucene43EdgeNGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withNSString:withInt:withInt:", "Lucene43EdgeNGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withInt:", "Lucene43EdgeNGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withInt:withInt:", "Lucene43EdgeNGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withInt:withInt:", "Lucene43EdgeNGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "init__WithOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side:withInt:withInt:", "init", "V", 0x2, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_SIDE", "DEFAULT_SIDE", 0x19, "Lorg.apache.lucene.analysis.ngram.Lucene43EdgeNGramTokenizer$Side;", &OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_DEFAULT_SIDE, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_MAX_GRAM_SIZE", "DEFAULT_MAX_GRAM_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_DEFAULT_MAX_GRAM_SIZE },
-    { "DEFAULT_MIN_GRAM_SIZE", "DEFAULT_MIN_GRAM_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_DEFAULT_MIN_GRAM_SIZE },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncrAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minGram_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxGram_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "gramSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "side_", NULL, 0x2, "Lorg.apache.lucene.analysis.ngram.Lucene43EdgeNGramTokenizer$Side;", NULL, NULL, .constantValue.asLong = 0 },
-    { "started_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "inLen_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "charsRead_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "inStr_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.ngram.Lucene43EdgeNGramTokenizer$Side;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer = { 2, "Lucene43EdgeNGramTokenizer", "org.apache.lucene.analysis.ngram", NULL, 0x11, 10, methods, 14, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer;
 }
 
 @end
@@ -367,6 +375,14 @@ void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_init__WithOrgApacheL
   JreStrongAssign(&self->side_, side);
 }
 
+IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side)
@@ -405,42 +421,52 @@ OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnal
   return (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;", 0x9, 2, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getLabel);
+  methods[1].selector = @selector(getSideWithNSString:);
+  methods[2].selector = @selector(values);
+  methods[3].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "FRONT", "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "BACK", "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "getSide", "LNSString;", "valueOf", &JreEnum(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, FRONT), &JreEnum(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, BACK), "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer;", "Ljava/lang/Enum<Lorg/apache/lucene/analysis/ngram/Lucene43EdgeNGramTokenizer$Side;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side = { "Side", "org.apache.lucene.analysis.ngram", ptrTable, methods, fields, 7, 0x4409, 4, 2, 5, -1, -1, 6, -1 };
+  return &_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side class]) {
     size_t allocSize = 0;
-    size_t objSize_FRONT = class_getInstanceSize([OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1 class]);
+    size_t objSize_FRONT = class_getInstanceSize([OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1 class]);
     allocSize += objSize_FRONT;
-    size_t objSize_BACK = class_getInstanceSize([OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2 class]);
+    size_t objSize_BACK = class_getInstanceSize([OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2 class]);
     allocSize += objSize_BACK;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, FRONT) = e = objc_constructInstance([OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1 class], (void *)ptr), ptr += objSize_FRONT);
-    OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1_initWithNSString_withInt_(e, @"FRONT", 0);
-    (JreEnum(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, BACK) = e = objc_constructInstance([OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2 class], (void *)ptr), ptr += objSize_BACK);
-    OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2_initWithNSString_withInt_(e, @"BACK", 1);
+    ((void) (JreEnum(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, FRONT) = e = objc_constructInstance([OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1 class], (void *)ptr)), ptr += objSize_FRONT);
+    OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1_initWithNSString_withInt_(e, @"FRONT", 0);
+    ((void) (JreEnum(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, BACK) = e = objc_constructInstance([OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2 class], (void *)ptr)), ptr += objSize_BACK);
+    OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2_initWithNSString_withInt_(e, @"BACK", 1);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side)
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getLabel", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getSideWithNSString:", "getSide", "Lorg.apache.lucene.analysis.ngram.Lucene43EdgeNGramTokenizer$Side;", 0x9, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "FRONT", "FRONT", 0x4019, "Lorg.apache.lucene.analysis.ngram.Lucene43EdgeNGramTokenizer$Side;", &JreEnum(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, FRONT), NULL, .constantValue.asLong = 0 },
-    { "BACK", "BACK", 0x4019, "Lorg.apache.lucene.analysis.ngram.Lucene43EdgeNGramTokenizer$Side;", &JreEnum(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, BACK), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.analysis.ngram.Lucene43EdgeNGramTokenizer$Side;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side = { 2, "Side", "org.apache.lucene.analysis.ngram", "Lucene43EdgeNGramTokenizer", 0x4409, 2, methods, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/analysis/ngram/Lucene43EdgeNGramTokenizer$Side;>;" };
-  return &_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;
-}
-
 @end
+
+void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
 
 OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_getSideWithNSString_(NSString *sideName) {
   OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_initialize();
@@ -451,10 +477,6 @@ OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnal
     return JreEnum(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side, BACK);
   }
   return nil;
-}
-
-void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
 IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_values() {
@@ -470,7 +492,7 @@ OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnal
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 
@@ -484,56 +506,64 @@ OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side *OrgApacheLuceneAnal
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side)
 
-@implementation OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1
+@implementation OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1
 
 - (NSString *)getLabel {
   return @"front";
 }
 
 - (void)dealloc {
-  JreCheckFinalize(self, [OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1 class]);
+  JreCheckFinalize(self, [OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1 class]);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getLabel", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1 = { 2, "", "org.apache.lucene.analysis.ngram", "Lucene43EdgeNGramTokenizer$Side", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getLabel);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1 = { "", "org.apache.lucene.analysis.ngram", ptrTable, methods, NULL, 7, 0xc018, 1, 0, 0, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1 *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_1 *self, NSString *__name, jint __ordinal) {
   OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$1)
-
-@implementation OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2
+@implementation OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2
 
 - (NSString *)getLabel {
   return @"back";
 }
 
 - (void)dealloc {
-  JreCheckFinalize(self, [OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2 class]);
+  JreCheckFinalize(self, [OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2 class]);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getLabel", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2 = { 2, "", "org.apache.lucene.analysis.ngram", "Lucene43EdgeNGramTokenizer$Side", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getLabel);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2 = { "", "org.apache.lucene.analysis.ngram", ptrTable, methods, NULL, 7, 0xc018, 1, 0, 0, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2 *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2_initWithNSString_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_2 *self, NSString *__name, jint __ordinal) {
   OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_initWithNSString_withInt_(self, __name, __ordinal);
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_Side_$2)

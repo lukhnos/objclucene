@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchQueryWrapperFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchQueryWrapperFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchQueryWrapperFilter || defined(INCLUDE_OrgApacheLuceneSearchQueryWrapperFilter))
 #define OrgApacheLuceneSearchQueryWrapperFilter_
 
@@ -28,21 +34,21 @@
 
 /*!
  @brief Constrains search results to only match those which also match a provided
- query.
+  query.
  <p> This could be used, for example, with a <code>NumericRangeQuery</code> on a suitably
- formatted date field to implement date filtering.  One could re-use a single
- CachingWrapperFilter(QueryWrapperFilter) that matches, e.g., only documents modified 
- within the last week.  This would only need to be reconstructed once per day.
+  formatted date field to implement date filtering.  One could re-use a single
+  CachingWrapperFilter(QueryWrapperFilter) that matches, e.g., only documents modified 
+  within the last week.  This would only need to be reconstructed once per day.
  */
 @interface OrgApacheLuceneSearchQueryWrapperFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
 /*!
- @brief Constructs a filter which only matches documents matching
+ @brief Constructs a filter which only matches documents matching 
  <code>query</code>.
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (jboolean)isEqual:(id)o;
 
@@ -60,6 +66,10 @@
 
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchQueryWrapperFilter)
@@ -74,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryWrapperFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchQueryWrapperFilter")

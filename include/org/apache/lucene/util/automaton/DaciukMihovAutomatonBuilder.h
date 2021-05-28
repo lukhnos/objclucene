@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder || defined(INCLUDE_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder))
 #define OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_
 
@@ -23,9 +29,8 @@
 
 /*!
  @brief Builds a minimal, deterministic <code>Automaton</code> that accepts a set of 
- strings.
- The algorithm requires sorted input data, but is very fast 
- (nearly linear with the input size).
+  strings.The algorithm requires sorted input data, but is very fast 
+  (nearly linear with the input size).
  - seealso: #build(Collection)
  - seealso: Automata#makeStringUnion(Collection)
  */
@@ -34,43 +39,44 @@
 #pragma mark Public
 
 /*!
- @brief Add another character sequence to this automaton.
- The sequence must be
- lexicographically larger or equal compared to any previous sequences added
- to this automaton (the input must be sorted).
+ @brief Add another character sequence to this automaton.The sequence must be
+  lexicographically larger or equal compared to any previous sequences added
+  to this automaton (the input must be sorted).
  */
 - (void)addWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)current;
 
 /*!
  @brief Build a minimal, deterministic automaton from a sorted list of <code>BytesRef</code> representing
- strings in UTF-8.
- These strings must be binary-sorted.
+  strings in UTF-8.These strings must be binary-sorted.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)buildWithJavaUtilCollection:(id<JavaUtilCollection>)input;
 
 /*!
- @brief Finalize the automaton and return the root state.
- No more strings can be
- added to the builder after this call.
+ @brief Finalize the automaton and return the root state.No more strings can be
+  added to the builder after this call.
  @return Root automaton state.
  */
 - (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)complete;
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder)
 
+FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_initPackagePrivate(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *new_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_initPackagePrivate(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *create_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_initPackagePrivate(void);
+
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_buildWithJavaUtilCollection_(id<JavaUtilCollection> input);
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *self);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *new_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *create_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder)
 
@@ -88,20 +94,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuild
 @interface OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State : NSObject {
  @public
   /*!
-   @brief Labels of outgoing transitions.
-   Indexed identically to <code>states</code>.
- Labels must be sorted lexicographically.
+   @brief Labels of outgoing transitions.Indexed identically to <code>states</code>.
+   Labels must be sorted lexicographically.
    */
   IOSIntArray *labels_;
   /*!
-   @brief States reachable from outgoing transitions.
-   Indexed identically to
+   @brief States reachable from outgoing transitions.Indexed identically to 
  <code>labels</code>.
    */
   IOSObjectArray *states_;
   /*!
    @brief <code>true</code> if this state corresponds to the end of at least one
- input sequence.
+  input sequence.
    */
   jboolean is_final_;
 }
@@ -109,12 +113,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuild
 #pragma mark Public
 
 /*!
- @brief Two states are equal if:
+ @brief Two states are equal if: 
  <ul>
- <li>they have an identical number of outgoing transitions, labeled with
- the same labels</li>
- <li>corresponding outgoing transitions lead to the same states (to states
- with an identical right-language).
+  <li>they have an identical number of outgoing transitions, labeled with
+  the same labels</li>
+  <li>corresponding outgoing transitions lead to the same states (to states
+  with an identical right-language).
  </ul>
  */
 - (jboolean)isEqual:(id)obj;
@@ -128,15 +132,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuild
 
 /*!
  @brief Returns the target state of a transition leaving this state and labeled
- with <code>label</code>.
- If no such transition exists, returns
+  with <code>label</code>.If no such transition exists, returns 
  <code>null</code>.
  */
 - (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)getStateWithInt:(jint)label;
 
 /*!
  @brief Return <code>true</code> if this state has any children (outgoing
- transitions).
+  transitions).
  */
 - (jboolean)hasChildren;
 
@@ -146,20 +149,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuild
 - (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)lastChild;
 
 /*!
- @brief Return the associated state if the most recent transition is labeled with
+ @brief Return the associated state if the most recent transition is labeled with 
  <code>label</code>.
  */
 - (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)lastChildWithInt:(jint)label;
 
 /*!
  @brief Create a new outgoing transition labeled <code>label</code> and return
- the newly created target state for this transition.
+  the newly created target state for this transition.
  */
 - (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)newStateWithInt:(jint)label OBJC_METHOD_FAMILY_NONE;
 
 /*!
  @brief Replace the last added outgoing transition's target state with the given
- state.
+  state.
  */
 - (void)replaceLastChildWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)state;
 
@@ -174,4 +177,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuild
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder")

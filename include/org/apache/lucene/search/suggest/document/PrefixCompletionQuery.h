@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery))
 #define OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_
 
@@ -29,12 +35,12 @@
 
 /*!
  @brief A <code>CompletionQuery</code> which takes an <code>Analyzer</code>
- to analyze the prefix of the query term.
+  to analyze the prefix of the query term.
  <p>
- Example usage of querying an analyzed prefix 'sugg'
- against a field 'suggest_field' is as follows:
+  Example usage of querying an analyzed prefix 'sugg'
+  against a field 'suggest_field' is as follows: 
  <pre class="prettyprint">
- CompletionQuery query = new PrefixCompletionQuery(analyzer, new Term("suggest_field", "sugg"));
+   CompletionQuery query = new PrefixCompletionQuery(analyzer, new Term("suggest_field", "sugg")); 
  
 @endcode
  */
@@ -49,25 +55,30 @@
 #pragma mark Public
 
 /*!
- @brief Calls <code>PrefixCompletionQuery.PrefixCompletionQuery(Analyzer,Term,BitsProducer)</code>
- with no filter
+ @brief Calls <code>PrefixCompletionQuery.PrefixCompletionQuery(Analyzer, Term, BitsProducer)</code>
+  with no filter
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 /*!
  @brief Constructs an analyzed prefix completion query
  @param analyzer used to analyze the provided <code>Term.text()</code>
- @param term query is run against <code>Term.field()</code> and <code>Term.text()</code>
- is analyzed with <code>analyzer</code>
+ @param term query is run against <code>Term.field()</code>  and <code>Term.text()</code>
+               is analyzed with  <code> analyzer </code>
  @param filter used to query on a sub set of documents
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-           withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                     withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+              withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -91,4 +102,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQ
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery")

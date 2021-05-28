@@ -3,11 +3,10 @@
 //  source: ./core/src/java/org/apache/lucene/document/DocumentStoredFieldVisitor.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
+#include "java/nio/charset/Charset.h"
 #include "java/util/HashSet.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/document/Document.h"
@@ -20,6 +19,10 @@
 #include "org/apache/lucene/index/IndexOptions.h"
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/DocumentStoredFieldVisitor must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneDocumentDocumentStoredFieldVisitor () {
  @public
@@ -62,7 +65,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [ft setStoreTermVectorsWithBoolean:[((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) hasVectors]];
   [ft setOmitNormsWithBoolean:[fieldInfo omitsNorms]];
   [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:[fieldInfo getIndexOptions]];
-  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(fieldInfo->name_, [NSString stringWithBytes:value charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)], ft)];
+  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(fieldInfo->name_, [NSString java_stringWithBytes:value charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)], ft)];
 }
 
 - (void)intFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
@@ -100,24 +103,40 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilSet:", "DocumentStoredFieldVisitor", NULL, 0x1, NULL, "(Ljava/util/Set<Ljava/lang/String;>;)V" },
-    { "initWithNSStringArray:", "DocumentStoredFieldVisitor", NULL, 0x81, NULL, NULL },
-    { "init", "DocumentStoredFieldVisitor", NULL, 0x1, NULL, NULL },
-    { "binaryFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:", "binaryField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "stringFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:", "stringField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "intFieldWithOrgApacheLuceneIndexFieldInfo:withInt:", "intField", "V", 0x1, NULL, NULL },
-    { "longFieldWithOrgApacheLuceneIndexFieldInfo:withLong:", "longField", "V", 0x1, NULL, NULL },
-    { "floatFieldWithOrgApacheLuceneIndexFieldInfo:withFloat:", "floatField", "V", 0x1, NULL, NULL },
-    { "doubleFieldWithOrgApacheLuceneIndexFieldInfo:withDouble:", "doubleField", "V", 0x1, NULL, NULL },
-    { "needsFieldWithOrgApacheLuceneIndexFieldInfo:", "needsField", "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getDocument", NULL, "Lorg.apache.lucene.document.Document;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 4, 5, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexStoredFieldVisitor_Status;", 0x1, 15, 16, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneDocumentDocument;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilSet:);
+  methods[1].selector = @selector(initWithNSStringArray:);
+  methods[2].selector = @selector(init);
+  methods[3].selector = @selector(binaryFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:);
+  methods[4].selector = @selector(stringFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:);
+  methods[5].selector = @selector(intFieldWithOrgApacheLuceneIndexFieldInfo:withInt:);
+  methods[6].selector = @selector(longFieldWithOrgApacheLuceneIndexFieldInfo:withLong:);
+  methods[7].selector = @selector(floatFieldWithOrgApacheLuceneIndexFieldInfo:withFloat:);
+  methods[8].selector = @selector(doubleFieldWithOrgApacheLuceneIndexFieldInfo:withDouble:);
+  methods[9].selector = @selector(needsFieldWithOrgApacheLuceneIndexFieldInfo:);
+  methods[10].selector = @selector(getDocument);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "doc_", NULL, 0x12, "Lorg.apache.lucene.document.Document;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldsToAdd_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
+    { "doc_", "LOrgApacheLuceneDocumentDocument;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fieldsToAdd_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 17, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDocumentStoredFieldVisitor = { 2, "DocumentStoredFieldVisitor", "org.apache.lucene.document", NULL, 0x1, 11, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilSet;", "(Ljava/util/Set<Ljava/lang/String;>;)V", "[LNSString;", "binaryField", "LOrgApacheLuceneIndexFieldInfo;[B", "LJavaIoIOException;", "stringField", "intField", "LOrgApacheLuceneIndexFieldInfo;I", "longField", "LOrgApacheLuceneIndexFieldInfo;J", "floatField", "LOrgApacheLuceneIndexFieldInfo;F", "doubleField", "LOrgApacheLuceneIndexFieldInfo;D", "needsField", "LOrgApacheLuceneIndexFieldInfo;", "Ljava/util/Set<Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDocumentStoredFieldVisitor = { "DocumentStoredFieldVisitor", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x1, 11, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneDocumentDocumentStoredFieldVisitor;
 }
 

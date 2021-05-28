@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer))
 #define OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_
 
@@ -21,47 +27,43 @@
 #include "org/apache/lucene/analysis/AnalyzerWrapper.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
+@class OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 
 /*!
  @brief Wraps an <code>org.apache.lucene.analysis.Analyzer</code>
- to provide additional completion-only tuning
- (e.g. preserving token separators, preserving position increments while converting
- a token stream to an automaton)
+  to provide additional completion-only tuning
+  (e.g.preserving token separators, preserving position increments while converting
+  a token stream to an automaton) 
  <p>
- Can be used to index <code>SuggestField</code> and <code>ContextSuggestField</code>
- and as a query analyzer to <code>PrefixCompletionQuery</code> amd <code>FuzzyCompletionQuery</code>
- <p>
- NOTE: In most cases, index and query analyzer should have same values for <code>preservePositionIncrements()</code>
- and <code>preserveSep()</code>
+  Can be used to index <code>SuggestField</code> and <code>ContextSuggestField</code>
+  and as a query analyzer to <code>PrefixCompletionQuery</code> amd <code>FuzzyCompletionQuery</code>
+  <p>
+  NOTE: In most cases, index and query analyzer should have same values for <code>preservePositionIncrements()</code>
+  and <code>preserveSep()</code>
  */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer : OrgApacheLuceneAnalysisAnalyzerWrapper
-
-+ (jint)SEP_LABEL;
-
-+ (jint)HOLE_CHARACTER;
-
-+ (jint)DEFAULT_MAX_GRAPH_EXPANSIONS;
-
-+ (jboolean)DEFAULT_PRESERVE_SEP;
-
-+ (jboolean)DEFAULT_PRESERVE_POSITION_INCREMENTS;
+@property (readonly, class) jint SEP_LABEL NS_SWIFT_NAME(SEP_LABEL);
+@property (readonly, class) jint HOLE_CHARACTER NS_SWIFT_NAME(HOLE_CHARACTER);
+@property (readonly, class) jint DEFAULT_MAX_GRAPH_EXPANSIONS NS_SWIFT_NAME(DEFAULT_MAX_GRAPH_EXPANSIONS);
+@property (readonly, class) jboolean DEFAULT_PRESERVE_SEP NS_SWIFT_NAME(DEFAULT_PRESERVE_SEP);
+@property (readonly, class) jboolean DEFAULT_PRESERVE_POSITION_INCREMENTS NS_SWIFT_NAME(DEFAULT_PRESERVE_POSITION_INCREMENTS);
 
 #pragma mark Public
 
 /*!
- @brief Calls <code>CompletionAnalyzer(org.apache.lucene.analysis.Analyzer,boolean,boolean,int)</code>
- preserving token separation, position increments and no limit on graph expansions
+ @brief Calls <code>CompletionAnalyzer(org.apache.lucene.analysis.Analyzer, boolean, boolean, int)</code>
+  preserving token separation, position increments and no limit on graph expansions
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
- @brief Calls <code>CompletionAnalyzer(org.apache.lucene.analysis.Analyzer,boolean,boolean,int)</code>
- with no limit on graph expansions
+ @brief Calls <code>CompletionAnalyzer(org.apache.lucene.analysis.Analyzer, boolean, boolean, int)</code>
+  with no limit on graph expansions
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                            withBoolean:(jboolean)preserveSep
-                                            withBoolean:(jboolean)preservePositionIncrements;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                                      withBoolean:(jboolean)preserveSep
+                                                      withBoolean:(jboolean)preservePositionIncrements;
 
 /*!
  @brief Wraps an analyzer to convert it's output token stream to an automaton
@@ -70,27 +72,27 @@
  @param preservePositionIncrements Preserve position increments for tokens when converting to an automaton
  @param maxGraphExpansions Sets the maximum number of graph expansions of a completion automaton
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                            withBoolean:(jboolean)preserveSep
-                                            withBoolean:(jboolean)preservePositionIncrements
-                                                withInt:(jint)maxGraphExpansions;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                                      withBoolean:(jboolean)preserveSep
+                                                      withBoolean:(jboolean)preservePositionIncrements
+                                                          withInt:(jint)maxGraphExpansions;
 
 /*!
- @brief Calls <code>CompletionAnalyzer(org.apache.lucene.analysis.Analyzer,boolean,boolean,int)</code>
- preserving token separation and position increments
+ @brief Calls <code>CompletionAnalyzer(org.apache.lucene.analysis.Analyzer, boolean, boolean, int)</code>
+  preserving token separation and position increments
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                                withInt:(jint)maxGraphExpansions;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                                                          withInt:(jint)maxGraphExpansions;
 
 /*!
  @brief Returns true if position increments are preserved when converting
- the token stream to an automaton
+  the token stream to an automaton
  */
 - (jboolean)preservePositionIncrements;
 
 /*!
  @brief Returns true if separation between tokens are preserved when converting
- the token stream to an automaton
+  the token stream to an automaton
  */
 - (jboolean)preserveSep;
 
@@ -101,37 +103,41 @@
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer)
 
 /*!
- @brief Represents the separation between tokens, if
+ @brief Represents the separation between tokens, if 
  <code>preserveSep</code> is <code>true</code>
  <p>
- Same label is used as a delimiter in the <code>org.apache.lucene.search.suggest.document.CompletionTokenStream</code>
- payload
+  Same label is used as a delimiter in the <code>org.apache.lucene.search.suggest.document.CompletionTokenStream</code>
+  payload
  */
-inline jint OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_get_SEP_LABEL();
+inline jint OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_get_SEP_LABEL(void);
 #define OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL 31
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, SEP_LABEL, jint)
 
 /*!
  @brief Represent a hole character, inserted by <code>org.apache.lucene.analysis.TokenStreamToAutomaton</code>
  */
-inline jint OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_get_HOLE_CHARACTER();
+inline jint OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_get_HOLE_CHARACTER(void);
 #define OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_HOLE_CHARACTER 30
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, HOLE_CHARACTER, jint)
 
-inline jint OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_get_DEFAULT_MAX_GRAPH_EXPANSIONS();
+inline jint OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_get_DEFAULT_MAX_GRAPH_EXPANSIONS(void);
 #define OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_MAX_GRAPH_EXPANSIONS 10000
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, DEFAULT_MAX_GRAPH_EXPANSIONS, jint)
 
-inline jboolean OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_get_DEFAULT_PRESERVE_SEP();
+inline jboolean OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_get_DEFAULT_PRESERVE_SEP(void);
 #define OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_PRESERVE_SEP true
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, DEFAULT_PRESERVE_SEP, jboolean)
 
-inline jboolean OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_get_DEFAULT_PRESERVE_POSITION_INCREMENTS();
+inline jboolean OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_get_DEFAULT_PRESERVE_POSITION_INCREMENTS(void);
 #define OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_PRESERVE_POSITION_INCREMENTS true
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, DEFAULT_PRESERVE_POSITION_INCREMENTS, jboolean)
 
@@ -163,4 +169,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyze
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer")

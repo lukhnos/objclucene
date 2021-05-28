@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_
 
@@ -24,32 +30,31 @@
 
 /*!
  @brief When the plain text is extracted from documents, we will often have many words hyphenated and broken into
- two lines.
- This is often the case with documents where narrow text columns are used, such as newsletters.
+  two lines.This is often the case with documents where narrow text columns are used, such as newsletters.
  In order to increase search efficiency, this filter puts hyphenated words broken into two lines back together.
- This filter should be used on indexing time only.
- Example field definition in schema.xml:
+  This filter should be used on indexing time only.
+  Example field definition in schema.xml: 
  <pre class="prettyprint">
- &lt;fieldtype name="text" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer type="index"&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.SynonymFilterFactory" synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/&gt;
- &lt;filter class="solr.StopFilterFactory" ignoreCase="true"/&gt;
- &lt;filter class="solr.HyphenatedWordsFilterFactory"/&gt;
- &lt;filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0"/&gt;
- &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
- &lt;filter class="solr.RemoveDuplicatesTokenFilterFactory"/&gt;
- &lt;/analyzer&gt;
- &lt;analyzer type="query"&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/&gt;
- &lt;filter class="solr.StopFilterFactory" ignoreCase="true"/&gt;
- &lt;filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="0" catenateNumbers="0" catenateAll="0"/&gt;
- &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
- &lt;filter class="solr.RemoveDuplicatesTokenFilterFactory"/&gt;
- &lt;/analyzer&gt;
- &lt;/fieldtype&gt;
- 
+  &lt;fieldtype name="text" class="solr.TextField" positionIncrementGap="100"&gt;
+   &lt;analyzer type="index"&gt;
+     &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+       &lt;filter class="solr.SynonymFilterFactory" synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/&gt;
+       &lt;filter class="solr.StopFilterFactory" ignoreCase="true"/&gt;
+       &lt;filter class="solr.HyphenatedWordsFilterFactory"/&gt;
+       &lt;filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0"/&gt;
+       &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+       &lt;filter class="solr.RemoveDuplicatesTokenFilterFactory"/&gt;
+   &lt;/analyzer&gt;
+   &lt;analyzer type="query"&gt;
+       &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+       &lt;filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/&gt;
+       &lt;filter class="solr.StopFilterFactory" ignoreCase="true"/&gt;
+       &lt;filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="0" catenateNumbers="0" catenateAll="0"/&gt;
+       &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+       &lt;filter class="solr.RemoveDuplicatesTokenFilterFactory"/&gt;
+   &lt;/analyzer&gt;
+  &lt;/fieldtype&gt;
+  
 @endcode
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter : OrgApacheLuceneAnalysisTokenFilter
@@ -60,15 +65,13 @@
  @brief Creates a new HyphenatedWordsFilter
  @param inArg TokenStream that will be filtered
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 /*!
- 
  */
 - (jboolean)incrementToken;
 
 /*!
- 
  */
 - (void)reset;
 
@@ -86,4 +89,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFi
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter")

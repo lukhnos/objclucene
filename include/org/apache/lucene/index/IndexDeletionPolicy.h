@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexDeletionPolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexDeletionPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexDeletionPolicy || defined(INCLUDE_OrgApacheLuceneIndexIndexDeletionPolicy))
 #define OrgApacheLuceneIndexIndexDeletionPolicy_
 
@@ -21,30 +27,31 @@
 /*!
  @brief <p>Expert: policy for deletion of stale <code>index commits</code>.
  <p>Implement this interface, and pass it to one
- of the <code>IndexWriter</code> or <code>IndexReader</code>
- constructors, to customize when older
+  of the <code>IndexWriter</code> or <code>IndexReader</code>
+  constructors, to customize when older 
  <code>point-in-time commits</code>
- are deleted from the index directory.  The default deletion policy
- is <code>KeepOnlyLastCommitDeletionPolicy</code>, which always
- removes old commits as soon as a new commit is done (this
- matches the behavior before 2.2).</p>
+  are deleted from the index directory.  The default deletion policy
+  is <code>KeepOnlyLastCommitDeletionPolicy</code>, which always
+  removes old commits as soon as a new commit is done (this
+  matches the behavior before 2.2).</p>
+  
  <p>One expected use case for this (and the reason why it
- was first created) is to work around problems with an
- index directory accessed via filesystems like NFS because
- NFS does not provide the "delete on last close" semantics
- that Lucene's "point in time" search normally relies on.
- By implementing a custom deletion policy, such as "a
- commit is only removed once it has been stale for more
- than X minutes", you can give your readers time to
- refresh to the new commit before <code>IndexWriter</code>
- removes the old commits.  Note that doing so will
- increase the storage requirements of the index.  See <a
- target="top"
- href="http://issues.apache.org/jira/browse/LUCENE-710">LUCENE-710</a>
- for details.</p>
+  was first created) is to work around problems with an
+  index directory accessed via filesystems like NFS because
+  NFS does not provide the "delete on last close" semantics
+  that Lucene's "point in time" search normally relies on.
+  By implementing a custom deletion policy, such as "a
+  commit is only removed once it has been stale for more
+  than X minutes", you can give your readers time to
+  refresh to the new commit before <code>IndexWriter</code>
+  removes the old commits.  Note that doing so will
+  increase the storage requirements of the index.  See <a target="top" href="http://issues.apache.org/jira/browse/LUCENE-710">
+ LUCENE-710</a>
+  for details.</p>
+  
  <p>Implementers of sub-classes should make sure that <code>clone()</code>
- returns an independent instance able to work with any other <code>IndexWriter</code>
- or <code>Directory</code> instance.</p>
+  returns an independent instance able to work with any other <code>IndexWriter</code>
+  or <code>Directory</code> instance.</p>
  */
 @interface OrgApacheLuceneIndexIndexDeletionPolicy : NSObject
 
@@ -53,42 +60,45 @@
 /*!
  @brief <p>This is called each time the writer completed a commit.
  This gives the policy a chance to remove old commit points
- with each commit.</p>
+  with each commit.</p>
+  
  <p>The policy may now choose to delete old commit points 
- by calling method <code>delete()</code> 
- of <code>IndexCommit</code>.</p>
+  by calling method <code>delete()</code> 
+  of <code>IndexCommit</code>.</p>
+   
  <p>This method is only called when <code>IndexWriter.commit</code>
   or <code>IndexWriter.close</code> is
- called, or possibly not at all if the <code>IndexWriter.rollback</code>
-  is called.
+  called, or possibly not at all if the <code>IndexWriter.rollback</code>
+  is called. 
  <p><u>Note:</u> the last CommitPoint is the most recent one,
- i.e. the "front index state". Be careful not to delete it,
- unless you know for sure what you are doing, and unless 
- you can afford to lose the index content while doing that.
- @param commits List of <code>IndexCommit</code>,
- sorted by age (the 0th one is the oldest commit).
+  i.e. the "front index state". Be careful not to delete it,
+  unless you know for sure what you are doing, and unless 
+  you can afford to lose the index content while doing that.
+ @param commits List of <code>IndexCommit</code> ,
+    sorted by age (the 0th one is the oldest commit).
  */
 - (void)onCommitWithJavaUtilList:(id<JavaUtilList>)commits;
 
 /*!
  @brief <p>This is called once when a writer is first
- instantiated to give the policy a chance to remove old
- commit points.
+  instantiated to give the policy a chance to remove old
+  commit points.
  </p>
+   
  <p>The writer locates all index commits present in the 
- index directory and calls this method.  The policy may 
- choose to delete some of the commit points, doing so by
- calling method <code>delete()</code> 
- of <code>IndexCommit</code>.</p>
+  index directory and calls this method.  The policy may 
+  choose to delete some of the commit points, doing so by
+  calling method <code>delete()</code> 
+  of <code>IndexCommit</code>.</p>
+   
  <p><u>Note:</u> the last CommitPoint is the most recent one,
- i.e. the "front index state". Be careful not to delete it,
- unless you know for sure what you are doing, and unless 
- you can afford to lose the index content while doing that. 
- @param commits List of current 
- <code>point-in-time commits</code>,
- sorted by age (the 0th one is the oldest commit).
- Note that for a new index this method is invoked with
- an empty list.
+  i.e. the "front index state". Be careful not to delete it,
+  unless you know for sure what you are doing, and unless 
+  you can afford to lose the index content while doing that.
+ @param commits List of current   
+ <code>point-in-time commits</code> ,   sorted by age (the 0th one is the oldest commit).
+    Note that for a new index this method is invoked with
+    an empty list.
  */
 - (void)onInitWithJavaUtilList:(id<JavaUtilList>)commits;
 
@@ -97,7 +107,7 @@
 /*!
  @brief Sole constructor, typically called by sub-classes constructors.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -109,4 +119,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexDeletionPolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexDeletionPolicy")

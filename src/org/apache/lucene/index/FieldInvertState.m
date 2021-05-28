@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/FieldInvertState.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/PayloadAttribute.h"
@@ -10,6 +11,10 @@
 #include "org/apache/lucene/analysis/tokenattributes/TermToBytesRefAttribute.h"
 #include "org/apache/lucene/index/FieldInvertState.h"
 #include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/FieldInvertState must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneIndexFieldInvertState
 
@@ -41,7 +46,7 @@
 }
 
 - (void)setAttributeSourceWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)attributeSource {
-  if (self->attributeSource_ != attributeSource) {
+  if (!JreObjectEqualsEquals(self->attributeSource_, attributeSource)) {
     JreStrongAssign(&self->attributeSource_, attributeSource);
     JreStrongAssign(&termAttribute_, [((OrgApacheLuceneUtilAttributeSource *) nil_chk(attributeSource)) getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()]);
     JreStrongAssign(&posIncrAttribute_, [attributeSource addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
@@ -109,42 +114,63 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "FieldInvertState", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withInt:withInt:withInt:withInt:withFloat:", "FieldInvertState", NULL, 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x0, NULL, NULL },
-    { "setAttributeSourceWithOrgApacheLuceneUtilAttributeSource:", "setAttributeSource", "V", 0x0, NULL, NULL },
-    { "getPosition", NULL, "I", 0x1, NULL, NULL },
-    { "getLength", NULL, "I", 0x1, NULL, NULL },
-    { "setLengthWithInt:", "setLength", "V", 0x1, NULL, NULL },
-    { "getNumOverlap", NULL, "I", 0x1, NULL, NULL },
-    { "setNumOverlapWithInt:", "setNumOverlap", "V", 0x1, NULL, NULL },
-    { "getOffset", NULL, "I", 0x1, NULL, NULL },
-    { "getBoost", NULL, "F", 0x1, NULL, NULL },
-    { "setBoostWithFloat:", "setBoost", "V", 0x1, NULL, NULL },
-    { "getMaxTermFrequency", NULL, "I", 0x1, NULL, NULL },
-    { "getUniqueTermCount", NULL, "I", 0x1, NULL, NULL },
-    { "getAttributeSource", NULL, "Lorg.apache.lucene.util.AttributeSource;", 0x1, NULL, NULL },
-    { "getName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeSource;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(initWithNSString:withInt:withInt:withInt:withInt:withFloat:);
+  methods[2].selector = @selector(reset);
+  methods[3].selector = @selector(setAttributeSourceWithOrgApacheLuceneUtilAttributeSource:);
+  methods[4].selector = @selector(getPosition);
+  methods[5].selector = @selector(getLength);
+  methods[6].selector = @selector(setLengthWithInt:);
+  methods[7].selector = @selector(getNumOverlap);
+  methods[8].selector = @selector(setNumOverlapWithInt:);
+  methods[9].selector = @selector(getOffset);
+  methods[10].selector = @selector(getBoost);
+  methods[11].selector = @selector(setBoostWithFloat:);
+  methods[12].selector = @selector(getMaxTermFrequency);
+  methods[13].selector = @selector(getUniqueTermCount);
+  methods[14].selector = @selector(getAttributeSource);
+  methods[15].selector = @selector(getName);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "name_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "position_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numOverlap_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "offset_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTermFrequency_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "uniqueTermCount_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "boost_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastStartOffset_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastPosition_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "attributeSource_", NULL, 0x0, "Lorg.apache.lucene.util.AttributeSource;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAttribute_", NULL, 0x0, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncrAttribute_", NULL, 0x0, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadAttribute_", NULL, 0x0, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAttribute_", NULL, 0x0, "Lorg.apache.lucene.analysis.tokenattributes.TermToBytesRefAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "name_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "position_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "numOverlap_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "offset_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "maxTermFrequency_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "uniqueTermCount_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "boost_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastStartOffset_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "lastPosition_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "attributeSource_", "LOrgApacheLuceneUtilAttributeSource;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "offsetAttribute_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "posIncrAttribute_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "payloadAttribute_", "LOrgApacheLuceneAnalysisTokenattributesPayloadAttribute;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "termAttribute_", "LOrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldInvertState = { 2, "FieldInvertState", "org.apache.lucene.index", NULL, 0x11, 16, methods, 15, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "LNSString;IIIIF", "setAttributeSource", "LOrgApacheLuceneUtilAttributeSource;", "setLength", "I", "setNumOverlap", "setBoost", "F" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldInvertState = { "FieldInvertState", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 16, 15, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFieldInvertState;
 }
 

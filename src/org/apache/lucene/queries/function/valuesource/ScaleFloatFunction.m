@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
@@ -20,6 +19,10 @@
 #include "org/apache/lucene/search/IndexSearcher.h"
 
 @class OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/ScaleFloatFunction must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction ()
 
@@ -44,13 +47,13 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunc
 
 __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo_init(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo *self);
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo *new_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo *new_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo *create_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo_init();
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo *create_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo)
 
-@interface OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1 : OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues {
+@interface OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1 : OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues {
  @public
   OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *this$0_;
   OrgApacheLuceneQueriesFunctionFunctionValues *val$vals_;
@@ -59,33 +62,28 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFu
   jfloat val$maxSource_;
 }
 
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction:(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *)outer$
+                                   withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)capture$0
+                                                                          withFloat:(jfloat)capture$1
+                                                                          withFloat:(jfloat)capture$2
+                                                                          withFloat:(jfloat)capture$3
+                                      withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
+
 - (jboolean)existsWithInt:(jint)doc;
 
 - (jfloat)floatValWithInt:(jint)doc;
 
 - (NSString *)toStringWithInt:(jint)doc;
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction:(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *)outer$
-                                   withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)capture$0
-                                                                          withFloat:(jfloat)capture$1
-                                                                          withFloat:(jfloat)capture$2
-                                                                          withFloat:(jfloat)capture$3
-                                      withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1, this$0_, OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1, val$vals_, OrgApacheLuceneQueriesFunctionFunctionValues *)
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1 *self, OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1 *new_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *vs) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1)
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1 *create_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction
 
@@ -115,7 +113,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFu
   jfloat minSource = scaleInfo->minVal_;
   jfloat maxSource = scaleInfo->maxVal_;
   OrgApacheLuceneQueriesFunctionFunctionValues *vals = [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(source_)) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:readerContext];
-  return create_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(self, vals, minSource, scale_, maxSource, self);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(self, vals, minSource, scale_, maxSource, self);
 }
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
@@ -133,7 +131,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if (OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_class_() != (id) [nil_chk(o) getClass]) return false;
+  if (!JreObjectEqualsEquals(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_class_(), [nil_chk(o) java_getClass])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction class]);
   return self->min_ == other->min_ && self->max_ == other->max_ && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) isEqual:other->source_];
 }
@@ -144,22 +142,33 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSource:withFloat:withFloat:", "ScaleFloatFunction", NULL, 0x1, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "createScaleInfoWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "createScaleInfo", "Lorg.apache.lucene.queries.function.valuesource.ScaleFloatFunction$ScaleInfo;", 0x2, "Ljava.io.IOException;", NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo;", 0x2, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x1, 5, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, 4, -1, -1, -1 },
+    { NULL, "I", 0x1, 8, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 9, 10, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValueSource:withFloat:withFloat:);
+  methods[1].selector = @selector(description__);
+  methods[2].selector = @selector(createScaleInfoWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[4].selector = @selector(createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:);
+  methods[5].selector = @selector(hash);
+  methods[6].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "source_", NULL, 0x14, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
-    { "min_", NULL, 0x14, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "max_", NULL, 0x14, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "source_", "LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "min_", "F", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "max_", "F", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queries.function.valuesource.ScaleFloatFunction$ScaleInfo;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction = { 2, "ScaleFloatFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValueSource;FF", "description", "createScaleInfo", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "getValues", "createWeight", "LJavaUtilMap;LOrgApacheLuceneSearchIndexSearcher;", "hashCode", "equals", "LNSObject;", "LOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction = { "ScaleFloatFunction", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x1, 7, 3, -1, 11, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction;
 }
 
@@ -186,7 +195,7 @@ OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo *OrgApache
   jfloat maxVal = JavaLangFloat_NEGATIVE_INFINITY;
   for (OrgApacheLuceneIndexLeafReaderContext * __strong leaf in nil_chk(leaves)) {
     jint maxDoc = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(leaf)) reader])) maxDoc];
-    OrgApacheLuceneQueriesFunctionFunctionValues *vals = [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:leaf];
+    OrgApacheLuceneQueriesFunctionFunctionValues *vals = JreRetainedLocalValue([((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:leaf]);
     for (jint i = 0; i < maxDoc; i++) {
       if (![((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(vals)) existsWithInt:i]) {
         continue;
@@ -225,14 +234,20 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ScaleInfo", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "minVal_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxVal_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "minVal_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "maxVal_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo = { 2, "ScaleInfo", "org.apache.lucene.queries.function.valuesource", "ScaleFloatFunction", 0xa, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo = { "ScaleInfo", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0xa, 1, 2, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo;
 }
 
@@ -252,7 +267,17 @@ OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo *create_Or
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo)
 
-@implementation OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1
+@implementation OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1
+
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction:(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *)outer$
+                                   withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)capture$0
+                                                                          withFloat:(jfloat)capture$1
+                                                                          withFloat:(jfloat)capture$2
+                                                                          withFloat:(jfloat)capture$3
+                                      withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs {
+  OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, capture$1, capture$2, capture$3, vs);
+  return self;
+}
 
 - (jboolean)existsWithInt:(jint)doc {
   return [((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(val$vals_)) existsWithInt:doc];
@@ -266,16 +291,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceScaleF
   return JreStrcat("$$$F$F$F$FC", @"scale(", [((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(val$vals_)) toStringWithInt:doc], @",toMin=", this$0_->min_, @",toMax=", this$0_->max_, @",fromMin=", val$minSource_, @",fromMax=", val$maxSource_, ')');
 }
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction:(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *)outer$
-                                   withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)capture$0
-                                                                          withFloat:(jfloat)capture$1
-                                                                          withFloat:(jfloat)capture$2
-                                                                          withFloat:(jfloat)capture$3
-                                      withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0 {
-  OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, capture$1, capture$2, capture$3, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(val$vals_);
@@ -283,41 +298,47 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceScaleF
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "existsWithInt:", "exists", "Z", 0x1, NULL, NULL },
-    { "floatValWithInt:", "floatVal", "F", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction:withOrgApacheLuceneQueriesFunctionFunctionValues:withFloat:withFloat:withFloat:withOrgApacheLuceneQueriesFunctionValueSource:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction:withOrgApacheLuceneQueriesFunctionFunctionValues:withFloat:withFloat:withFloat:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(existsWithInt:);
+  methods[2].selector = @selector(floatValWithInt:);
+  methods[3].selector = @selector(toStringWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.valuesource.ScaleFloatFunction;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$vals_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$minSource_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$scale_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$maxSource_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$vals_", "LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$minSource_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$scale_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$maxSource_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1 = { 2, "", "org.apache.lucene.queries.function.valuesource", "ScaleFloatFunction", 0x8008, 4, methods, 5, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction;LOrgApacheLuceneQueriesFunctionFunctionValues;FFFLOrgApacheLuceneQueriesFunctionValueSource;", "exists", "I", "floatVal", "toString", "LOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction;", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1 = { "", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x8010, 4, 5, 5, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+void OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1 *self, OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *vs) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$vals_, capture$0);
   self->val$minSource_ = capture$1;
   self->val$scale_ = capture$2;
   self->val$maxSource_ = capture$3;
-  OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, arg$0);
+  OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, vs);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, capture$2, capture$3, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1 *new_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1, initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, capture$2, capture$3, vs)
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, capture$2, capture$3, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1 *create_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1_initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, jfloat capture$1, jfloat capture$2, jfloat capture$3, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_1, initWithOrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withFloat_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, capture$2, capture$3, vs)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_$1)

@@ -11,7 +11,16 @@
 #include "org/apache/lucene/search/BooleanQuery.h"
 #include "org/apache/lucene/search/Query.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/SrndBooleanQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_initPackagePrivate(self);
+  return self;
+}
 
 + (void)addQueriesToBooleanWithOrgApacheLuceneSearchBooleanQuery_Builder:(OrgApacheLuceneSearchBooleanQuery_Builder *)bq
                                                         withJavaUtilList:(id<JavaUtilList>)queries
@@ -24,24 +33,37 @@
   return OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_makeBooleanQueryWithJavaUtilList_withOrgApacheLuceneSearchBooleanClause_Occur_(queries, occur);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addQueriesToBooleanWithOrgApacheLuceneSearchBooleanQuery_Builder:withJavaUtilList:withOrgApacheLuceneSearchBooleanClause_Occur:", "addQueriesToBoolean", "V", 0x9, NULL, "(Lorg/apache/lucene/search/BooleanQuery$Builder;Ljava/util/List<Lorg/apache/lucene/search/Query;>;Lorg/apache/lucene/search/BooleanClause$Occur;)V" },
-    { "makeBooleanQueryWithJavaUtilList:withOrgApacheLuceneSearchBooleanClause_Occur:", "makeBooleanQuery", "Lorg.apache.lucene.search.Query;", 0x9, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Query;>;Lorg/apache/lucene/search/BooleanClause$Occur;)Lorg/apache/lucene/search/Query;" },
-    { "init", "SrndBooleanQuery", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 0, 1, -1, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x9, 3, 4, -1, 5, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery = { 2, "SrndBooleanQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x0, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(addQueriesToBooleanWithOrgApacheLuceneSearchBooleanQuery_Builder:withJavaUtilList:withOrgApacheLuceneSearchBooleanClause_Occur:);
+  methods[2].selector = @selector(makeBooleanQueryWithJavaUtilList:withOrgApacheLuceneSearchBooleanClause_Occur:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "addQueriesToBoolean", "LOrgApacheLuceneSearchBooleanQuery_Builder;LJavaUtilList;LOrgApacheLuceneSearchBooleanClause_Occur;", "(Lorg/apache/lucene/search/BooleanQuery$Builder;Ljava/util/List<Lorg/apache/lucene/search/Query;>;Lorg/apache/lucene/search/BooleanClause$Occur;)V", "makeBooleanQuery", "LJavaUtilList;LOrgApacheLuceneSearchBooleanClause_Occur;", "(Ljava/util/List<Lorg/apache/lucene/search/Query;>;Lorg/apache/lucene/search/BooleanClause$Occur;)Lorg/apache/lucene/search/Query;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery = { "SrndBooleanQuery", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, NULL, 7, 0x0, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery;
 }
 
 @end
+
+void OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_initPackagePrivate(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery, initPackagePrivate)
+}
+
+OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *create_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery, initPackagePrivate)
+}
 
 void OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_addQueriesToBooleanWithOrgApacheLuceneSearchBooleanQuery_Builder_withJavaUtilList_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchBooleanQuery_Builder *bq, id<JavaUtilList> queries, OrgApacheLuceneSearchBooleanClause_Occur *occur) {
   OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_initialize();
@@ -58,18 +80,6 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQu
   OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_addQueriesToBooleanWithOrgApacheLuceneSearchBooleanQuery_Builder_withJavaUtilList_withOrgApacheLuceneSearchBooleanClause_Occur_(bq, [queries subListWithInt:0 withInt:[queries size]], occur);
   return [bq build];
-}
-
-void OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_init(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery, init)
-}
-
-OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *create_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery)

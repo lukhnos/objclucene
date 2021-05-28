@@ -14,6 +14,10 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/BooleanClause must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchBooleanClause () {
  @public
   /*!
@@ -28,55 +32,51 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanClause, query_, OrgApacheLuceneSearchQuery *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanClause, occur_, OrgApacheLuceneSearchBooleanClause_Occur *)
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchBooleanClause__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchBooleanClause__Annotations$1(void);
+
 __attribute__((unused)) static void OrgApacheLuceneSearchBooleanClause_Occur_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur *self, NSString *__name, jint __ordinal);
 
-@interface OrgApacheLuceneSearchBooleanClause_Occur_$1 : OrgApacheLuceneSearchBooleanClause_Occur < NSCopying >
+@interface OrgApacheLuceneSearchBooleanClause_Occur_1 : OrgApacheLuceneSearchBooleanClause_Occur
 
 - (NSString *)description;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanClause_Occur_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanClause_Occur_1)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchBooleanClause_Occur_$1_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_$1 *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneSearchBooleanClause_Occur_1_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_1 *self, NSString *__name, jint __ordinal);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_Occur_$1)
-
-@interface OrgApacheLuceneSearchBooleanClause_Occur_$2 : OrgApacheLuceneSearchBooleanClause_Occur < NSCopying >
+@interface OrgApacheLuceneSearchBooleanClause_Occur_2 : OrgApacheLuceneSearchBooleanClause_Occur
 
 - (NSString *)description;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanClause_Occur_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanClause_Occur_2)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchBooleanClause_Occur_$2_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_$2 *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneSearchBooleanClause_Occur_2_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_2 *self, NSString *__name, jint __ordinal);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_Occur_$2)
-
-@interface OrgApacheLuceneSearchBooleanClause_Occur_$3 : OrgApacheLuceneSearchBooleanClause_Occur < NSCopying >
+@interface OrgApacheLuceneSearchBooleanClause_Occur_3 : OrgApacheLuceneSearchBooleanClause_Occur
 
 - (NSString *)description;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanClause_Occur_$3)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanClause_Occur_3)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchBooleanClause_Occur_$3_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_$3 *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneSearchBooleanClause_Occur_3_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_3 *self, NSString *__name, jint __ordinal);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_Occur_$3)
-
-@interface OrgApacheLuceneSearchBooleanClause_Occur_$4 : OrgApacheLuceneSearchBooleanClause_Occur < NSCopying >
+@interface OrgApacheLuceneSearchBooleanClause_Occur_4 : OrgApacheLuceneSearchBooleanClause_Occur
 
 - (NSString *)description;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanClause_Occur_$4)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanClause_Occur_4)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchBooleanClause_Occur_$4_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_$4 *self, NSString *__name, jint __ordinal);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_Occur_$4)
+__attribute__((unused)) static void OrgApacheLuceneSearchBooleanClause_Occur_4_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_4 *self, NSString *__name, jint __ordinal);
 
 @implementation OrgApacheLuceneSearchBooleanClause
 
@@ -128,14 +128,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_Occur_$4)
   JreStrongAssign(&self->query_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(query, @"Query must not be null"));
 }
 
-+ (IOSObjectArray *)__annotations_setOccurWithOrgApacheLuceneSearchBooleanClause_Occur_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_setQueryWithOrgApacheLuceneSearchQuery_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(query_);
   RELEASE_(occur_);
@@ -143,25 +135,40 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_Occur_$4)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchBooleanClause_Occur:", "BooleanClause", NULL, 0x1, NULL, NULL },
-    { "getOccur", NULL, "Lorg.apache.lucene.search.BooleanClause$Occur;", 0x1, NULL, NULL },
-    { "getQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "isProhibited", NULL, "Z", 0x1, NULL, NULL },
-    { "isRequired", NULL, "Z", 0x1, NULL, NULL },
-    { "isScoring", NULL, "Z", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "setOccurWithOrgApacheLuceneSearchBooleanClause_Occur:", "setOccur", "V", 0x1, NULL, NULL },
-    { "setQueryWithOrgApacheLuceneSearchQuery:", "setQuery", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBooleanClause_Occur;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, 7, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, 10, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchBooleanClause_Occur:);
+  methods[1].selector = @selector(getOccur);
+  methods[2].selector = @selector(getQuery);
+  methods[3].selector = @selector(isProhibited);
+  methods[4].selector = @selector(isRequired);
+  methods[5].selector = @selector(isScoring);
+  methods[6].selector = @selector(isEqual:);
+  methods[7].selector = @selector(hash);
+  methods[8].selector = @selector(description);
+  methods[9].selector = @selector(setOccurWithOrgApacheLuceneSearchBooleanClause_Occur:);
+  methods[10].selector = @selector(setQueryWithOrgApacheLuceneSearchQuery:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "query_", NULL, 0x2, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "occur_", NULL, 0x2, "Lorg.apache.lucene.search.BooleanClause$Occur;", NULL, NULL, .constantValue.asLong = 0 },
+    { "query_", "LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "occur_", "LOrgApacheLuceneSearchBooleanClause_Occur;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.BooleanClause$Occur;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause = { 2, "BooleanClause", "org.apache.lucene.search", NULL, 0x11, 11, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchQuery;LOrgApacheLuceneSearchBooleanClause_Occur;", "equals", "LNSObject;", "hashCode", "toString", "setOccur", "LOrgApacheLuceneSearchBooleanClause_Occur;", (void *)&OrgApacheLuceneSearchBooleanClause__Annotations$0, "setQuery", "LOrgApacheLuceneSearchQuery;", (void *)&OrgApacheLuceneSearchBooleanClause__Annotations$1 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause = { "BooleanClause", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 11, 2, -1, 6, -1, -1, -1 };
   return &_OrgApacheLuceneSearchBooleanClause;
 }
 
@@ -179,6 +186,14 @@ OrgApacheLuceneSearchBooleanClause *new_OrgApacheLuceneSearchBooleanClause_initW
 
 OrgApacheLuceneSearchBooleanClause *create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchBooleanClause_Occur *occur) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanClause, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_, query, occur)
+}
+
+IOSObjectArray *OrgApacheLuceneSearchBooleanClause__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchBooleanClause__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanClause)
@@ -217,45 +232,51 @@ OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneSearchBooleanClause_Occ
   return (OrgApacheLuceneSearchBooleanClause_Occur_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneSearchBooleanClause_Occur;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBooleanClause_Occur;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "MUST", "LOrgApacheLuceneSearchBooleanClause_Occur;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "FILTER", "LOrgApacheLuceneSearchBooleanClause_Occur;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "SHOULD", "LOrgApacheLuceneSearchBooleanClause_Occur;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "MUST_NOT", "LOrgApacheLuceneSearchBooleanClause_Occur;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST), &JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, FILTER), &JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD), &JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT), "LOrgApacheLuceneSearchBooleanClause;", "Ljava/lang/Enum<Lorg/apache/lucene/search/BooleanClause$Occur;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause_Occur = { "Occur", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x4009, 2, 4, 6, -1, -1, 7, -1 };
+  return &_OrgApacheLuceneSearchBooleanClause_Occur;
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchBooleanClause_Occur class]) {
     size_t allocSize = 0;
-    size_t objSize_MUST = class_getInstanceSize([OrgApacheLuceneSearchBooleanClause_Occur_$1 class]);
+    size_t objSize_MUST = class_getInstanceSize([OrgApacheLuceneSearchBooleanClause_Occur_1 class]);
     allocSize += objSize_MUST;
-    size_t objSize_FILTER = class_getInstanceSize([OrgApacheLuceneSearchBooleanClause_Occur_$2 class]);
+    size_t objSize_FILTER = class_getInstanceSize([OrgApacheLuceneSearchBooleanClause_Occur_2 class]);
     allocSize += objSize_FILTER;
-    size_t objSize_SHOULD = class_getInstanceSize([OrgApacheLuceneSearchBooleanClause_Occur_$3 class]);
+    size_t objSize_SHOULD = class_getInstanceSize([OrgApacheLuceneSearchBooleanClause_Occur_3 class]);
     allocSize += objSize_SHOULD;
-    size_t objSize_MUST_NOT = class_getInstanceSize([OrgApacheLuceneSearchBooleanClause_Occur_$4 class]);
+    size_t objSize_MUST_NOT = class_getInstanceSize([OrgApacheLuceneSearchBooleanClause_Occur_4 class]);
     allocSize += objSize_MUST_NOT;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST) = e = objc_constructInstance([OrgApacheLuceneSearchBooleanClause_Occur_$1 class], (void *)ptr), ptr += objSize_MUST);
-    OrgApacheLuceneSearchBooleanClause_Occur_$1_initWithNSString_withInt_(e, @"MUST", 0);
-    (JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, FILTER) = e = objc_constructInstance([OrgApacheLuceneSearchBooleanClause_Occur_$2 class], (void *)ptr), ptr += objSize_FILTER);
-    OrgApacheLuceneSearchBooleanClause_Occur_$2_initWithNSString_withInt_(e, @"FILTER", 1);
-    (JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD) = e = objc_constructInstance([OrgApacheLuceneSearchBooleanClause_Occur_$3 class], (void *)ptr), ptr += objSize_SHOULD);
-    OrgApacheLuceneSearchBooleanClause_Occur_$3_initWithNSString_withInt_(e, @"SHOULD", 2);
-    (JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT) = e = objc_constructInstance([OrgApacheLuceneSearchBooleanClause_Occur_$4 class], (void *)ptr), ptr += objSize_MUST_NOT);
-    OrgApacheLuceneSearchBooleanClause_Occur_$4_initWithNSString_withInt_(e, @"MUST_NOT", 3);
+    ((void) (JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST) = e = objc_constructInstance([OrgApacheLuceneSearchBooleanClause_Occur_1 class], (void *)ptr)), ptr += objSize_MUST);
+    OrgApacheLuceneSearchBooleanClause_Occur_1_initWithNSString_withInt_(e, @"MUST", 0);
+    ((void) (JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, FILTER) = e = objc_constructInstance([OrgApacheLuceneSearchBooleanClause_Occur_2 class], (void *)ptr)), ptr += objSize_FILTER);
+    OrgApacheLuceneSearchBooleanClause_Occur_2_initWithNSString_withInt_(e, @"FILTER", 1);
+    ((void) (JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD) = e = objc_constructInstance([OrgApacheLuceneSearchBooleanClause_Occur_3 class], (void *)ptr)), ptr += objSize_SHOULD);
+    OrgApacheLuceneSearchBooleanClause_Occur_3_initWithNSString_withInt_(e, @"SHOULD", 2);
+    ((void) (JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT) = e = objc_constructInstance([OrgApacheLuceneSearchBooleanClause_Occur_4 class], (void *)ptr)), ptr += objSize_MUST_NOT);
+    OrgApacheLuceneSearchBooleanClause_Occur_4_initWithNSString_withInt_(e, @"MUST_NOT", 3);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchBooleanClause_Occur)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "MUST", "MUST", 0x4019, "Lorg.apache.lucene.search.BooleanClause$Occur;", &JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST), NULL, .constantValue.asLong = 0 },
-    { "FILTER", "FILTER", 0x4019, "Lorg.apache.lucene.search.BooleanClause$Occur;", &JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, FILTER), NULL, .constantValue.asLong = 0 },
-    { "SHOULD", "SHOULD", 0x4019, "Lorg.apache.lucene.search.BooleanClause$Occur;", &JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD), NULL, .constantValue.asLong = 0 },
-    { "MUST_NOT", "MUST_NOT", 0x4019, "Lorg.apache.lucene.search.BooleanClause$Occur;", &JreEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.BooleanClause$Occur;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause_Occur = { 2, "Occur", "org.apache.lucene.search", "BooleanClause", 0x4009, 0, NULL, 4, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/BooleanClause$Occur;>;" };
-  return &_OrgApacheLuceneSearchBooleanClause_Occur;
 }
 
 @end
@@ -277,7 +298,7 @@ OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneSearchBooleanClause_Occ
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 
@@ -291,110 +312,126 @@ OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneSearchBooleanClause_Occ
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanClause_Occur)
 
-@implementation OrgApacheLuceneSearchBooleanClause_Occur_$1
+@implementation OrgApacheLuceneSearchBooleanClause_Occur_1
 
 - (NSString *)description {
   return @"+";
 }
 
 - (void)dealloc {
-  JreCheckFinalize(self, [OrgApacheLuceneSearchBooleanClause_Occur_$1 class]);
+  JreCheckFinalize(self, [OrgApacheLuceneSearchBooleanClause_Occur_1 class]);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause_Occur_$1 = { 2, "", "org.apache.lucene.search", "BooleanClause$Occur", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchBooleanClause_Occur_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "toString", "LOrgApacheLuceneSearchBooleanClause_Occur;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause_Occur_1 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0xc018, 1, 0, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchBooleanClause_Occur_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchBooleanClause_Occur_$1_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_$1 *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneSearchBooleanClause_Occur_1_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_1 *self, NSString *__name, jint __ordinal) {
   OrgApacheLuceneSearchBooleanClause_Occur_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanClause_Occur_$1)
-
-@implementation OrgApacheLuceneSearchBooleanClause_Occur_$2
+@implementation OrgApacheLuceneSearchBooleanClause_Occur_2
 
 - (NSString *)description {
   return @"#";
 }
 
 - (void)dealloc {
-  JreCheckFinalize(self, [OrgApacheLuceneSearchBooleanClause_Occur_$2 class]);
+  JreCheckFinalize(self, [OrgApacheLuceneSearchBooleanClause_Occur_2 class]);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause_Occur_$2 = { 2, "", "org.apache.lucene.search", "BooleanClause$Occur", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchBooleanClause_Occur_$2;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "toString", "LOrgApacheLuceneSearchBooleanClause_Occur;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause_Occur_2 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0xc018, 1, 0, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchBooleanClause_Occur_2;
 }
 
 @end
 
-void OrgApacheLuceneSearchBooleanClause_Occur_$2_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_$2 *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneSearchBooleanClause_Occur_2_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_2 *self, NSString *__name, jint __ordinal) {
   OrgApacheLuceneSearchBooleanClause_Occur_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanClause_Occur_$2)
-
-@implementation OrgApacheLuceneSearchBooleanClause_Occur_$3
+@implementation OrgApacheLuceneSearchBooleanClause_Occur_3
 
 - (NSString *)description {
   return @"";
 }
 
 - (void)dealloc {
-  JreCheckFinalize(self, [OrgApacheLuceneSearchBooleanClause_Occur_$3 class]);
+  JreCheckFinalize(self, [OrgApacheLuceneSearchBooleanClause_Occur_3 class]);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause_Occur_$3 = { 2, "", "org.apache.lucene.search", "BooleanClause$Occur", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchBooleanClause_Occur_$3;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "toString", "LOrgApacheLuceneSearchBooleanClause_Occur;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause_Occur_3 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0xc018, 1, 0, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchBooleanClause_Occur_3;
 }
 
 @end
 
-void OrgApacheLuceneSearchBooleanClause_Occur_$3_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_$3 *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneSearchBooleanClause_Occur_3_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_3 *self, NSString *__name, jint __ordinal) {
   OrgApacheLuceneSearchBooleanClause_Occur_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanClause_Occur_$3)
-
-@implementation OrgApacheLuceneSearchBooleanClause_Occur_$4
+@implementation OrgApacheLuceneSearchBooleanClause_Occur_4
 
 - (NSString *)description {
   return @"-";
 }
 
 - (void)dealloc {
-  JreCheckFinalize(self, [OrgApacheLuceneSearchBooleanClause_Occur_$4 class]);
+  JreCheckFinalize(self, [OrgApacheLuceneSearchBooleanClause_Occur_4 class]);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause_Occur_$4 = { 2, "", "org.apache.lucene.search", "BooleanClause$Occur", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchBooleanClause_Occur_$4;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "toString", "LOrgApacheLuceneSearchBooleanClause_Occur;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause_Occur_4 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0xc018, 1, 0, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchBooleanClause_Occur_4;
 }
 
 @end
 
-void OrgApacheLuceneSearchBooleanClause_Occur_$4_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_$4 *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneSearchBooleanClause_Occur_4_initWithNSString_withInt_(OrgApacheLuceneSearchBooleanClause_Occur_4 *self, NSString *__name, jint __ordinal) {
   OrgApacheLuceneSearchBooleanClause_Occur_initWithNSString_withInt_(self, __name, __ordinal);
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanClause_Occur_$4)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_
 
@@ -23,19 +29,18 @@
 @class OrgApacheLuceneAnalysisTokenStream;
 
 /*!
- @brief This TokenFilter limits the number of tokens while indexing.
- It is
- a replacement for the maximum field length setting inside <code>org.apache.lucene.index.IndexWriter</code>.
+ @brief This TokenFilter limits the number of tokens while indexing.It is
+  a replacement for the maximum field length setting inside <code>org.apache.lucene.index.IndexWriter</code>.
  <p>
- By default, this filter ignores any tokens in the wrapped <code>TokenStream</code>
- once the limit has been reached, which can result in <code>reset()</code> being 
- called prior to <code>incrementToken()</code> returning <code>false</code>.  For most 
+  By default, this filter ignores any tokens in the wrapped <code>TokenStream</code>
+  once the limit has been reached, which can result in <code>reset()</code> being 
+  called prior to <code>incrementToken()</code> returning <code>false</code>.  For most  
  <code>TokenStream</code> implementations this should be acceptable, and faster 
- then consuming the full stream. If you are wrapping a <code>TokenStream</code> 
- which requires that the full stream of tokens be exhausted in order to 
- function properly, use the 
+  then consuming the full stream. If you are wrapping a <code>TokenStream</code> 
+  which requires that the full stream of tokens be exhausted in order to 
+  function properly, use the  
  <code>consumeAllTokens</code> 
- option.
+  option.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -46,8 +51,8 @@
  This filter will not consume any tokens beyond the maxTokenCount limit
  - seealso: #LimitTokenCountFilter(TokenStream,int,boolean)
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)maxTokenCount;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                             withInt:(jint)maxTokenCount;
 
 /*!
  @brief Build an filter that limits the maximum number of tokens per field.
@@ -55,13 +60,17 @@
  @param maxTokenCount max number of tokens to produce
  @param consumeAllTokens whether all tokens from the input must be consumed even if maxTokenCount is reached.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)maxTokenCount
-                                               withBoolean:(jboolean)consumeAllTokens;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                                                             withInt:(jint)maxTokenCount
+                                                         withBoolean:(jboolean)consumeAllTokens;
 
 - (jboolean)incrementToken;
 
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -83,4 +92,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFi
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter")

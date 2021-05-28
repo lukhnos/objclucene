@@ -3,9 +3,7 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/SuggestIndexSearcher.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/LeafReader.h"
@@ -21,6 +19,10 @@
 #include "org/apache/lucene/search/suggest/document/TopSuggestDocs.h"
 #include "org/apache/lucene/search/suggest/document/TopSuggestDocsCollector.h"
 #include "org/apache/lucene/util/Bits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/SuggestIndexSearcher must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher
 
@@ -39,9 +41,9 @@
 - (void)suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
        withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *)collector {
   query = (OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) cast_chk([((OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) nil_chk(query)) rewriteWithOrgApacheLuceneIndexIndexReader:[self getIndexReader]], [OrgApacheLuceneSearchSuggestDocumentCompletionQuery class]);
-  OrgApacheLuceneSearchWeight *weight = [((OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) nil_chk(query)) createWeightWithOrgApacheLuceneSearchIndexSearcher:self withBoolean:[((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *) nil_chk(collector)) needsScores]];
+  OrgApacheLuceneSearchWeight *weight = JreRetainedLocalValue([((OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) nil_chk(query)) createWeightWithOrgApacheLuceneSearchIndexSearcher:self withBoolean:[((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *) nil_chk(collector)) needsScores]]);
   for (OrgApacheLuceneIndexLeafReaderContext * __strong context in nil_chk([((OrgApacheLuceneIndexIndexReader *) nil_chk([self getIndexReader])) leaves])) {
-    OrgApacheLuceneSearchBulkScorer *scorer = [((OrgApacheLuceneSearchWeight *) nil_chk(weight)) bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+    OrgApacheLuceneSearchBulkScorer *scorer = JreRetainedLocalValue([((OrgApacheLuceneSearchWeight *) nil_chk(weight)) bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
     if (scorer != nil) {
       @try {
         [scorer scoreWithOrgApacheLuceneSearchLeafCollector:[collector getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context] withOrgApacheLuceneUtilBits:[((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getLiveDocs]];
@@ -53,12 +55,20 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReader:", "SuggestIndexSearcher", NULL, 0x1, NULL, NULL },
-    { "suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withInt:", "suggest", "Lorg.apache.lucene.search.suggest.document.TopSuggestDocs;", 0x1, "Ljava.io.IOException;", NULL },
-    { "suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:", "suggest", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 4, 3, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher = { 2, "SuggestIndexSearcher", "org.apache.lucene.search.suggest.document", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:);
+  methods[1].selector = @selector(suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withInt:);
+  methods[2].selector = @selector(suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReader;", "suggest", "LOrgApacheLuceneSearchSuggestDocumentCompletionQuery;I", "LJavaIoIOException;", "LOrgApacheLuceneSearchSuggestDocumentCompletionQuery;LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher = { "SuggestIndexSearcher", "org.apache.lucene.search.suggest.document", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher;
 }
 

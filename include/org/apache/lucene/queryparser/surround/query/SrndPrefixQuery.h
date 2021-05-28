@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery))
 #define OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_
 
@@ -23,6 +29,7 @@
 @class JavaLangStringBuilder;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneIndexTerm;
+@class OrgApacheLuceneQueryparserSurroundQuerySrndQuery;
 @protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
 
 /*!
@@ -32,15 +39,17 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)prefix
-                     withBoolean:(jboolean)quoted
-                        withChar:(jchar)truncator;
+- (instancetype __nonnull)initWithNSString:(NSString *)prefix
+                               withBoolean:(jboolean)quoted
+                                  withChar:(jchar)truncator;
 
 - (OrgApacheLuceneIndexTerm *)getLucenePrefixTermWithNSString:(NSString *)fieldName;
 
 - (NSString *)getPrefix;
 
 - (jchar)getSuffixOperator;
+
+- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)java_clone;
 
 - (NSString *)toStringUnquoted;
 
@@ -51,6 +60,10 @@ withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<Or
 #pragma mark Protected
 
 - (void)suffixToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithBoolean:(jboolean)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -66,4 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuer
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery")

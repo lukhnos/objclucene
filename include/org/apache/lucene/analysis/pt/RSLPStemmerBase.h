@@ -19,6 +19,12 @@
 #define INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPtRSLPStemmerBase_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase || defined(INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase))
 #define OrgApacheLuceneAnalysisPtRSLPStemmerBase_
 
@@ -28,54 +34,54 @@
 /*!
  @brief Base class for stemmers that use a set of RSLP-like stemming steps.
  <p>
- RSLP (Removedor de Sufixos da Lingua Portuguesa) is an algorithm designed
- originally for stemming the Portuguese language, described in the paper
- <i>A Stemming Algorithm for the Portuguese Language</i>, Orengo et. al.
+  RSLP (Removedor de Sufixos da Lingua Portuguesa) is an algorithm designed
+  originally for stemming the Portuguese language, described in the paper 
+ <i>A Stemming Algorithm for the Portuguese Language</i>, Orengo et. al. 
  <p>
- Since this time a plural-only modification (RSLP-S) as well as a modification
- for the Galician language have been implemented. This class parses a configuration
- file that describes <code>Step</code>s, where each Step contains a set of <code>Rule</code>s.
- <p>
- The general rule format is: 
+  Since this time a plural-only modification (RSLP-S) as well as a modification
+  for the Galician language have been implemented. This class parses a configuration
+  file that describes <code>Step</code>s, where each Step contains a set of <code>Rule</code>s.
+  <p>
+  The general rule format is:  
  <blockquote>{ "suffix", N, "replacement", { "exception1", "exception2", ...}}</blockquote>
- where:
+  where: 
  <ul>
- <li><code>suffix</code> is the suffix to be removed (such as "inho").
- <li><code>N</code> is the min stem size, where stem is defined as the candidate stem 
- after removing the suffix (but before appending the replacement!)
+    <li><code>suffix</code> is the suffix to be removed (such as "inho").
+    <li><code>N</code> is the min stem size, where stem is defined as the candidate stem 
+        after removing the suffix (but before appending the replacement!)   
  <li><code>replacement</code> is an optimal string to append after removing the suffix.
- This can be the empty string.
+        This can be the empty string.   
  <li><code>exceptions</code> is an optional list of exceptions, patterns that should 
- not be stemmed. These patterns can be specified as whole word or suffix (ends-with) 
- patterns, depending upon the exceptions format flag in the step header.
+        not be stemmed. These patterns can be specified as whole word or suffix (ends-with) 
+        patterns, depending upon the exceptions format flag in the step header. 
  </ul>
- <p>
- A step is an ordered list of rules, with a structure in this format:
+  <p>
+  A step is an ordered list of rules, with a structure in this format: 
  <blockquote>{ "name", N, B, { "cond1", "cond2", ... }
- ... rules ... };
+                ... rules ... }; 
  </blockquote>
- where:
+  where: 
  <ul>
- <li><code>name</code> is a name for the step (such as "Plural").
- <li><code>N</code> is the min word size. Words that are less than this length bypass
- the step completely, as an optimization. Note: N can be zero, in this case this 
- implementation will automatically calculate the appropriate value from the underlying 
- rules.
+    <li><code>name</code> is a name for the step (such as "Plural").
+    <li><code>N</code> is the min word size. Words that are less than this length bypass
+        the step completely, as an optimization. Note: N can be zero, in this case this 
+        implementation will automatically calculate the appropriate value from the underlying 
+        rules.   
  <li><code>B</code> is a "boolean" flag specifying how exceptions in the rules are matched.
- A value of 1 indicates whole-word pattern matching, a value of 0 indicates that 
- exceptions are actually suffixes and should be matched with ends-with.
+        A value of 1 indicates whole-word pattern matching, a value of 0 indicates that 
+        exceptions are actually suffixes and should be matched with ends-with.   
  <li><code>conds</code> are an optional list of conditions to enter the step at all. If
- the list is non-empty, then a word must end with one of these conditions or it will
- bypass the step completely as an optimization.
+        the list is non-empty, then a word must end with one of these conditions or it will
+        bypass the step completely as an optimization. 
  </ul>
- <p>
+  <p>
  - seealso: <a href="http://www.inf.ufrgs.br/~viviane/rslp/index.htm">RSLP description</a>
  */
 @interface OrgApacheLuceneAnalysisPtRSLPStemmerBase : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Protected
 
@@ -90,9 +96,9 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
 
-FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseWithIOSClass_withNSString_(IOSClass *clazz, NSString *resource);
-
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_init(OrgApacheLuceneAnalysisPtRSLPStemmerBase *self);
+
+FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseWithIOSClass_withNSString_(IOSClass *clazz, NSString *resource);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
 
@@ -121,9 +127,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
  @param min minimum stem length
  @param replacement replacement string
  */
-- (instancetype)initWithNSString:(NSString *)suffix
-                         withInt:(jint)min
-                    withNSString:(NSString *)replacement;
+- (instancetype __nonnull)initWithNSString:(NSString *)suffix
+                                   withInt:(jint)min
+                              withNSString:(NSString *)replacement;
 
 /*!
  @return true if the word matches this rule.
@@ -136,6 +142,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
  */
 - (jint)replaceWithCharArray:(IOSCharArray *)s
                      withInt:(jint)len;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -171,13 +181,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule)
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)suffix
-                         withInt:(jint)min
-                    withNSString:(NSString *)replacement
-               withNSStringArray:(IOSObjectArray *)exceptions;
+- (instancetype __nonnull)initWithNSString:(NSString *)suffix
+                                   withInt:(jint)min
+                              withNSString:(NSString *)replacement
+                         withNSStringArray:(IOSObjectArray *)exceptions;
 
 - (jboolean)matchesWithCharArray:(IOSCharArray *)s
                          withInt:(jint)len;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                                   withInt:(jint)arg1
+                              withNSString:(NSString *)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -211,13 +227,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetE
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)suffix
-                         withInt:(jint)min
-                    withNSString:(NSString *)replacement
-               withNSStringArray:(IOSObjectArray *)exceptions;
+- (instancetype __nonnull)initWithNSString:(NSString *)suffix
+                                   withInt:(jint)min
+                              withNSString:(NSString *)replacement
+                         withNSStringArray:(IOSObjectArray *)exceptions;
 
 - (jboolean)matchesWithCharArray:(IOSCharArray *)s
                          withInt:(jint)len;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                                   withInt:(jint)arg1
+                              withNSString:(NSString *)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -261,16 +283,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuff
  @param min minimum word size. if this is 0 it is automatically calculated.
  @param suffixes optional list of conditional suffixes. may be null.
  */
-- (instancetype)initWithNSString:(NSString *)name
+- (instancetype __nonnull)initWithNSString:(NSString *)name
 withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray:(IOSObjectArray *)rules
-                         withInt:(jint)min
-               withNSStringArray:(IOSObjectArray *)suffixes;
+                                   withInt:(jint)min
+                         withNSStringArray:(IOSObjectArray *)suffixes;
 
 /*!
  @return new valid length of the string after applying the entire step.
  */
 - (jint)applyWithCharArray:(IOSCharArray *)s
                    withInt:(jint)len;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -290,4 +316,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileUtilObjects
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileUtilObjects_) && (INCLUDE_ALL_OrgLukhnosPortmobileUtilObjects || defined(INCLUDE_OrgLukhnosPortmobileUtilObjects))
 #define OrgLukhnosPortmobileUtilObjects_
 
@@ -22,7 +28,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 + (jboolean)equalsWithId:(id)a
                   withId:(id)b;
@@ -42,6 +48,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileUtilObjects)
 
+FOUNDATION_EXPORT void OrgLukhnosPortmobileUtilObjects_init(OrgLukhnosPortmobileUtilObjects *self);
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileUtilObjects *new_OrgLukhnosPortmobileUtilObjects_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileUtilObjects *create_OrgLukhnosPortmobileUtilObjects_init(void);
+
 FOUNDATION_EXPORT id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(id obj);
 
 FOUNDATION_EXPORT id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(id obj, NSString *msg);
@@ -54,14 +66,12 @@ FOUNDATION_EXPORT NSString *OrgLukhnosPortmobileUtilObjects_toStringWithId_(id o
 
 FOUNDATION_EXPORT jboolean OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(id a, id b);
 
-FOUNDATION_EXPORT void OrgLukhnosPortmobileUtilObjects_init(OrgLukhnosPortmobileUtilObjects *self);
-
-FOUNDATION_EXPORT OrgLukhnosPortmobileUtilObjects *new_OrgLukhnosPortmobileUtilObjects_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgLukhnosPortmobileUtilObjects *create_OrgLukhnosPortmobileUtilObjects_init();
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileUtilObjects)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileUtilObjects")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder))
 #define OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_
 
@@ -24,9 +30,8 @@
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief This builder does nothing.
- Commonly used for <code>QueryNode</code> objects that
- are built by its parent's builder.
+ @brief This builder does nothing.Commonly used for <code>QueryNode</code> objects that
+  are built by its parent's builder.
  - seealso: StandardQueryBuilder
  - seealso: QueryTreeBuilder
  */
@@ -37,7 +42,7 @@
 /*!
  @brief Constructs a <code>DummyQueryNodeBuilder</code> object.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Always return <code>null</code>.
@@ -51,12 +56,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardBuildersDummy
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_init(OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder")

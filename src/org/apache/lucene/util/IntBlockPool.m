@@ -11,6 +11,10 @@
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/util/IntBlockPool.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/IntBlockPool must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilIntBlockPool () {
  @public
   /*!
@@ -40,23 +44,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilIntBlockPool, allocator_, OrgApacheLucene
 
 /*!
  @brief An array holding the offset into the <code>IntBlockPool.LEVEL_SIZE_ARRAY</code>
- to quickly navigate to the next slice level.
+  to quickly navigate to the next slice level.
  */
-inline IOSIntArray *OrgApacheLuceneUtilIntBlockPool_get_NEXT_LEVEL_ARRAY();
+inline IOSIntArray *OrgApacheLuceneUtilIntBlockPool_get_NEXT_LEVEL_ARRAY(void);
 static IOSIntArray *OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilIntBlockPool, NEXT_LEVEL_ARRAY, IOSIntArray *)
 
 /*!
  @brief An array holding the level sizes for int slices.
  */
-inline IOSIntArray *OrgApacheLuceneUtilIntBlockPool_get_LEVEL_SIZE_ARRAY();
+inline IOSIntArray *OrgApacheLuceneUtilIntBlockPool_get_LEVEL_SIZE_ARRAY(void);
 static IOSIntArray *OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilIntBlockPool, LEVEL_SIZE_ARRAY, IOSIntArray *)
 
 /*!
  @brief The first level size for new slices
  */
-inline jint OrgApacheLuceneUtilIntBlockPool_get_FIRST_LEVEL_SIZE();
+inline jint OrgApacheLuceneUtilIntBlockPool_get_FIRST_LEVEL_SIZE(void);
 static jint OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilIntBlockPool, FIRST_LEVEL_SIZE, jint)
 
@@ -190,6 +194,48 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1a, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 7, 8, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilIntBlockPool_Allocator:);
+  methods[2].selector = @selector(reset);
+  methods[3].selector = @selector(resetWithBoolean:withBoolean:);
+  methods[4].selector = @selector(nextBuffer);
+  methods[5].selector = @selector(newSliceWithInt:);
+  methods[6].selector = @selector(assertSliceBufferWithIntArray:);
+  methods[7].selector = @selector(allocSliceWithIntArray:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INT_BLOCK_SHIFT", "I", .constantValue.asInt = OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SHIFT, 0x19, -1, -1, -1, -1 },
+    { "INT_BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE, 0x19, -1, -1, -1, -1 },
+    { "INT_BLOCK_MASK", "I", .constantValue.asInt = OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_MASK, 0x19, -1, -1, -1, -1 },
+    { "buffers_", "[[I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "bufferUpto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "intUpto_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "buffer_", "[I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "intOffset_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "allocator_", "LOrgApacheLuceneUtilIntBlockPool_Allocator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "NEXT_LEVEL_ARRAY", "[I", .constantValue.asLong = 0, 0x1a, -1, 9, -1, -1 },
+    { "LEVEL_SIZE_ARRAY", "[I", .constantValue.asLong = 0, 0x1a, -1, 10, -1, -1 },
+    { "FIRST_LEVEL_SIZE", "I", .constantValue.asLong = 0, 0x1a, -1, 11, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilIntBlockPool_Allocator;", "reset", "ZZ", "newSlice", "I", "assertSliceBuffer", "[I", "allocSlice", "[II", &OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY, &OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY, &OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE, "LOrgApacheLuceneUtilIntBlockPool_Allocator;LOrgApacheLuceneUtilIntBlockPool_DirectAllocator;LOrgApacheLuceneUtilIntBlockPool_SliceWriter;LOrgApacheLuceneUtilIntBlockPool_SliceReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool = { "IntBlockPool", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 8, 12, -1, 12, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilIntBlockPool;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilIntBlockPool class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY, [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 3, 4, 5, 6, 7, 8, 9, 9 } count:10]);
@@ -197,36 +243,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE = IOSIntArray_Get(OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY, 0);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilIntBlockPool)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "IntBlockPool", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilIntBlockPool_Allocator:", "IntBlockPool", NULL, 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "resetWithBoolean:withBoolean:", "reset", "V", 0x1, NULL, NULL },
-    { "nextBuffer", NULL, "V", 0x1, NULL, NULL },
-    { "newSliceWithInt:", "newSlice", "I", 0x2, NULL, NULL },
-    { "assertSliceBufferWithIntArray:", "assertSliceBuffer", "Z", 0x1a, NULL, NULL },
-    { "allocSliceWithIntArray:withInt:", "allocSlice", "I", 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "INT_BLOCK_SHIFT", "INT_BLOCK_SHIFT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SHIFT },
-    { "INT_BLOCK_SIZE", "INT_BLOCK_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE },
-    { "INT_BLOCK_MASK", "INT_BLOCK_MASK", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_MASK },
-    { "buffers_", NULL, 0x1, "[[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferUpto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "intUpto_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x1, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "intOffset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "allocator_", NULL, 0x12, "Lorg.apache.lucene.util.IntBlockPool$Allocator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "NEXT_LEVEL_ARRAY", "NEXT_LEVEL_ARRAY", 0x1a, "[I", &OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY, NULL, .constantValue.asLong = 0 },
-    { "LEVEL_SIZE_ARRAY", "LEVEL_SIZE_ARRAY", 0x1a, "[I", &OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY, NULL, .constantValue.asLong = 0 },
-    { "FIRST_LEVEL_SIZE", "FIRST_LEVEL_SIZE", 0x1a, "I", &OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.IntBlockPool$Allocator;", "Lorg.apache.lucene.util.IntBlockPool$DirectAllocator;", "Lorg.apache.lucene.util.IntBlockPool$SliceWriter;", "Lorg.apache.lucene.util.IntBlockPool$SliceReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool = { 2, "IntBlockPool", "org.apache.lucene.util", NULL, 0x11, 8, methods, 12, fields, 0, NULL, 4, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilIntBlockPool;
 }
 
 @end
@@ -263,7 +279,7 @@ OrgApacheLuceneUtilIntBlockPool *create_OrgApacheLuceneUtilIntBlockPool_initWith
 jint OrgApacheLuceneUtilIntBlockPool_newSliceWithInt_(OrgApacheLuceneUtilIntBlockPool *self, jint size) {
   if (self->intUpto_ > OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE - size) {
     [self nextBuffer];
-    JreAssert((OrgApacheLuceneUtilIntBlockPool_assertSliceBufferWithIntArray_(self->buffer_)), (@"org/apache/lucene/util/IntBlockPool.java:169 condition failed: assert assertSliceBuffer(buffer);"));
+    JreAssert(OrgApacheLuceneUtilIntBlockPool_assertSliceBufferWithIntArray_(self->buffer_), @"org/apache/lucene/util/IntBlockPool.java:169 condition failed: assert assertSliceBuffer(buffer);");
   }
   jint upto = self->intUpto_;
   self->intUpto_ += size;
@@ -286,7 +302,7 @@ jint OrgApacheLuceneUtilIntBlockPool_allocSliceWithIntArray_withInt_(OrgApacheLu
   jint newSize = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY), newLevel);
   if (self->intUpto_ > OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE - newSize) {
     [self nextBuffer];
-    JreAssert((OrgApacheLuceneUtilIntBlockPool_assertSliceBufferWithIntArray_(self->buffer_)), (@"org/apache/lucene/util/IntBlockPool.java:215 condition failed: assert assertSliceBuffer(buffer);"));
+    JreAssert(OrgApacheLuceneUtilIntBlockPool_assertSliceBufferWithIntArray_(self->buffer_), @"org/apache/lucene/util/IntBlockPool.java:215 condition failed: assert assertSliceBuffer(buffer);");
   }
   jint newUpto = self->intUpto_;
   jint offset = newUpto + self->intOffset_;
@@ -317,15 +333,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "Allocator", NULL, 0x1, NULL, NULL },
-    { "recycleIntBlocksWithIntArray2:withInt:withInt:", "recycleIntBlocks", "V", 0x401, NULL, NULL },
-    { "getIntBlock", NULL, "[I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 1, 2, -1, -1, -1, -1 },
+    { NULL, "[I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(recycleIntBlocksWithIntArray2:withInt:withInt:);
+  methods[2].selector = @selector(getIntBlock);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "blockSize_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "blockSize_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool_Allocator = { 2, "Allocator", "org.apache.lucene.util", "IntBlockPool", 0x409, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "recycleIntBlocks", "[[III", "LOrgApacheLuceneUtilIntBlockPool;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool_Allocator = { "Allocator", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x409, 3, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilIntBlockPool_Allocator;
 }
 
@@ -353,11 +377,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DirectAllocator", NULL, 0x1, NULL, NULL },
-    { "recycleIntBlocksWithIntArray2:withInt:withInt:", "recycleIntBlocks", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool_DirectAllocator = { 2, "DirectAllocator", "org.apache.lucene.util", "IntBlockPool", 0x19, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(recycleIntBlocksWithIntArray2:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "recycleIntBlocks", "[[III", "LOrgApacheLuceneUtilIntBlockPool;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool_DirectAllocator = { "DirectAllocator", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x19, 2, 0, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilIntBlockPool_DirectAllocator;
 }
 
@@ -390,7 +421,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_DirectAllocator
 
 - (void)writeIntWithInt:(jint)value {
   IOSIntArray *ints = IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilIntBlockPool *) nil_chk(pool_))->buffers_), JreRShift32(offset_, OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SHIFT));
-  JreAssert((ints != nil), (@"org/apache/lucene/util/IntBlockPool.java:257 condition failed: assert ints != null;"));
+  JreAssert(ints != nil, @"org/apache/lucene/util/IntBlockPool.java:257 condition failed: assert ints != null;");
   jint relativeOffset = offset_ & OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_MASK;
   if (IOSIntArray_Get(nil_chk(ints), relativeOffset) != 0) {
     relativeOffset = OrgApacheLuceneUtilIntBlockPool_allocSliceWithIntArray_withInt_(pool_, ints, relativeOffset);
@@ -415,18 +446,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_DirectAllocator
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilIntBlockPool:", "SliceWriter", NULL, 0x1, NULL, NULL },
-    { "resetWithInt:", "reset", "V", 0x1, NULL, NULL },
-    { "writeIntWithInt:", "writeInt", "V", 0x1, NULL, NULL },
-    { "startNewSlice", NULL, "I", 0x1, NULL, NULL },
-    { "getCurrentOffset", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilIntBlockPool:);
+  methods[1].selector = @selector(resetWithInt:);
+  methods[2].selector = @selector(writeIntWithInt:);
+  methods[3].selector = @selector(startNewSlice);
+  methods[4].selector = @selector(getCurrentOffset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "offset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pool_", NULL, 0x12, "Lorg.apache.lucene.util.IntBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
+    { "offset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pool_", "LOrgApacheLuceneUtilIntBlockPool;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool_SliceWriter = { 2, "SliceWriter", "org.apache.lucene.util", "IntBlockPool", 0x9, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilIntBlockPool;", "reset", "I", "writeInt" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool_SliceWriter = { "SliceWriter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x9, 5, 2, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilIntBlockPool_SliceWriter;
 }
 
@@ -456,7 +497,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_SliceWriter)
 
 - (void)resetWithInt:(jint)startOffset
              withInt:(jint)endOffset {
-  bufferUpto_ = startOffset / OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
+  bufferUpto_ = JreIntDiv(startOffset, OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE);
   bufferOffset_ = bufferUpto_ * OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
   self->end_ = endOffset;
   upto_ = startOffset;
@@ -473,13 +514,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_SliceWriter)
 }
 
 - (jboolean)endOfSlice {
-  JreAssert((upto_ + bufferOffset_ <= end_), (@"org/apache/lucene/util/IntBlockPool.java:340 condition failed: assert upto + bufferOffset <= end;"));
+  JreAssert(upto_ + bufferOffset_ <= end_, @"org/apache/lucene/util/IntBlockPool.java:340 condition failed: assert upto + bufferOffset <= end;");
   return upto_ + bufferOffset_ == end_;
 }
 
 - (jint)readInt {
-  JreAssert((![self endOfSlice]), (@"org/apache/lucene/util/IntBlockPool.java:349 condition failed: assert !endOfSlice();"));
-  JreAssert((upto_ <= limit_), (@"org/apache/lucene/util/IntBlockPool.java:350 condition failed: assert upto <= limit;"));
+  JreAssert(![self endOfSlice], @"org/apache/lucene/util/IntBlockPool.java:349 condition failed: assert !endOfSlice();");
+  JreAssert(upto_ <= limit_, @"org/apache/lucene/util/IntBlockPool.java:350 condition failed: assert upto <= limit;");
   if (upto_ == limit_) OrgApacheLuceneUtilIntBlockPool_SliceReader_nextSlice(self);
   return IOSIntArray_Get(nil_chk(buffer_), upto_++);
 }
@@ -495,24 +536,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_SliceWriter)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilIntBlockPool:", "SliceReader", NULL, 0x1, NULL, NULL },
-    { "resetWithInt:withInt:", "reset", "V", 0x1, NULL, NULL },
-    { "endOfSlice", NULL, "Z", 0x1, NULL, NULL },
-    { "readInt", NULL, "I", 0x1, NULL, NULL },
-    { "nextSlice", NULL, "V", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilIntBlockPool:);
+  methods[1].selector = @selector(resetWithInt:withInt:);
+  methods[2].selector = @selector(endOfSlice);
+  methods[3].selector = @selector(readInt);
+  methods[4].selector = @selector(nextSlice);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "pool_", NULL, 0x12, "Lorg.apache.lucene.util.IntBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "upto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferUpto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "limit_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "level_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "pool_", "LOrgApacheLuceneUtilIntBlockPool;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "upto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferUpto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "buffer_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "limit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "level_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "end_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool_SliceReader = { 2, "SliceReader", "org.apache.lucene.util", "IntBlockPool", 0x19, 5, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilIntBlockPool;", "reset", "II" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool_SliceReader = { "SliceReader", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x19, 5, 8, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilIntBlockPool_SliceReader;
 }
 
@@ -535,12 +586,12 @@ void OrgApacheLuceneUtilIntBlockPool_SliceReader_nextSlice(OrgApacheLuceneUtilIn
   jint nextIndex = IOSIntArray_Get(nil_chk(self->buffer_), self->limit_);
   self->level_ = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilIntBlockPool, NEXT_LEVEL_ARRAY)), self->level_ - 1);
   jint newSize = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilIntBlockPool, LEVEL_SIZE_ARRAY)), self->level_);
-  self->bufferUpto_ = nextIndex / OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
+  self->bufferUpto_ = JreIntDiv(nextIndex, OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE);
   self->bufferOffset_ = self->bufferUpto_ * OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
   JreStrongAssign(&self->buffer_, IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilIntBlockPool *) nil_chk(self->pool_))->buffers_), self->bufferUpto_));
   self->upto_ = nextIndex & OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_MASK;
   if (nextIndex + newSize >= self->end_) {
-    JreAssert((self->end_ - nextIndex > 0), (@"org/apache/lucene/util/IntBlockPool.java:370 condition failed: assert end - nextIndex > 0;"));
+    JreAssert(self->end_ - nextIndex > 0, @"org/apache/lucene/util/IntBlockPool.java:370 condition failed: assert end - nextIndex > 0;");
     self->limit_ = self->end_ - self->bufferOffset_;
   }
   else {

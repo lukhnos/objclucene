@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/store/RandomAccessInput.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/RandomAccessInput must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneStoreRandomAccessInput : NSObject
 
 @end
@@ -13,13 +17,22 @@
 @implementation OrgApacheLuceneStoreRandomAccessInput
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "readByteWithLong:", "readByte", "B", 0x401, "Ljava.io.IOException;", NULL },
-    { "readShortWithLong:", "readShort", "S", 0x401, "Ljava.io.IOException;", NULL },
-    { "readIntWithLong:", "readInt", "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "readLongWithLong:", "readLong", "J", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "B", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "S", 0x401, 3, 1, 2, -1, -1, -1 },
+    { NULL, "I", 0x401, 4, 1, 2, -1, -1, -1 },
+    { NULL, "J", 0x401, 5, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRandomAccessInput = { 2, "RandomAccessInput", "org.apache.lucene.store", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(readByteWithLong:);
+  methods[1].selector = @selector(readShortWithLong:);
+  methods[2].selector = @selector(readIntWithLong:);
+  methods[3].selector = @selector(readLongWithLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "readByte", "J", "LJavaIoIOException;", "readShort", "readInt", "readLong" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRandomAccessInput = { "RandomAccessInput", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x609, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreRandomAccessInput;
 }
 

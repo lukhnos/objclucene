@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/bkdtree/LatLonWriter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/bkdtree/LatLonWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneBkdtreeLatLonWriter : NSObject
 
 @end
@@ -13,12 +17,20 @@
 @implementation OrgApacheLuceneBkdtreeLatLonWriter
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "appendWithInt:withInt:withLong:withInt:", "append", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "getReaderWithLong:", "getReader", "Lorg.apache.lucene.bkdtree.LatLonReader;", 0x401, "Ljava.io.IOException;", NULL },
-    { "destroy", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneBkdtreeLatLonReader;", 0x401, 3, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeLatLonWriter = { 2, "LatLonWriter", "org.apache.lucene.bkdtree", NULL, 0x608, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(appendWithInt:withInt:withLong:withInt:);
+  methods[1].selector = @selector(getReaderWithLong:);
+  methods[2].selector = @selector(destroy);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "append", "IIJI", "LJavaIoIOException;", "getReader", "J" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeLatLonWriter = { "LatLonWriter", "org.apache.lucene.bkdtree", ptrTable, methods, NULL, 7, 0x608, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneBkdtreeLatLonWriter;
 }
 

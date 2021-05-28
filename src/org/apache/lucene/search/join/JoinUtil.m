@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/util/List.h"
@@ -33,6 +32,10 @@
 #include "org/apache/lucene/util/BytesRefHash.h"
 #include "org/apache/lucene/util/LongBitSet.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/JoinUtil must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchJoinJoinUtil ()
 
 - (instancetype)init;
@@ -41,9 +44,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneSearchJoinJoinUtil_init(OrgApacheLuceneSearchJoinJoinUtil *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinJoinUtil *new_OrgApacheLuceneSearchJoinJoinUtil_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinJoinUtil *new_OrgApacheLuceneSearchJoinJoinUtil_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinJoinUtil *create_OrgApacheLuceneSearchJoinJoinUtil_init();
+__attribute__((unused)) static OrgApacheLuceneSearchJoinJoinUtil *create_OrgApacheLuceneSearchJoinJoinUtil_init(void);
 
 @implementation OrgApacheLuceneSearchJoinJoinUtil
 
@@ -84,13 +87,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "JoinUtil", NULL, 0x2, NULL, NULL },
-    { "createJoinQueryWithNSString:withBoolean:withNSString:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchJoinScoreMode:", "createJoinQuery", "Lorg.apache.lucene.search.Query;", 0x9, "Ljava.io.IOException;", NULL },
-    { "createJoinQueryWithNSString:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchJoinScoreMode:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:", "createJoinQuery", "Lorg.apache.lucene.search.Query;", 0x9, "Ljava.io.IOException;", NULL },
-    { "createJoinQueryWithNSString:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchJoinScoreMode:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:withInt:withInt:", "createJoinQuery", "Lorg.apache.lucene.search.Query;", 0x9, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x9, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x9, 0, 3, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x9, 0, 4, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinJoinUtil = { 2, "JoinUtil", "org.apache.lucene.search.join", NULL, 0x11, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(createJoinQueryWithNSString:withBoolean:withNSString:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchJoinScoreMode:);
+  methods[2].selector = @selector(createJoinQueryWithNSString:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchJoinScoreMode:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:);
+  methods[3].selector = @selector(createJoinQueryWithNSString:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchJoinScoreMode:withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "createJoinQuery", "LNSString;ZLNSString;LOrgApacheLuceneSearchQuery;LOrgApacheLuceneSearchIndexSearcher;LOrgApacheLuceneSearchJoinScoreMode;", "LJavaIoIOException;", "LNSString;LOrgApacheLuceneSearchQuery;LOrgApacheLuceneSearchQuery;LOrgApacheLuceneSearchIndexSearcher;LOrgApacheLuceneSearchJoinScoreMode;LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;", "LNSString;LOrgApacheLuceneSearchQuery;LOrgApacheLuceneSearchQuery;LOrgApacheLuceneSearchIndexSearcher;LOrgApacheLuceneSearchJoinScoreMode;LOrgApacheLuceneIndexMultiDocValues_OrdinalMap;II" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinJoinUtil = { "JoinUtil", "org.apache.lucene.search.join", ptrTable, methods, NULL, 7, 0x11, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinJoinUtil;
 }
 
@@ -117,16 +129,16 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchJoinJoinUtil_createJoinQueryWit
       case OrgApacheLuceneSearchJoinScoreMode_Enum_None:
       termsCollector = OrgApacheLuceneSearchJoinTermsCollector_createWithNSString_withBoolean_(fromField, multipleValuesPerDocument);
       [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(fromSearcher)) searchWithOrgApacheLuceneSearchQuery:fromQuery withOrgApacheLuceneSearchCollector:termsCollector];
-      return create_OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(toField, fromQuery, [((OrgApacheLuceneSearchJoinTermsCollector *) nil_chk(termsCollector)) getCollectorTerms]);
+      return create_OrgApacheLuceneSearchJoinTermsQuery_initPackagePrivateWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(toField, fromQuery, [((OrgApacheLuceneSearchJoinTermsCollector *) nil_chk(termsCollector)) getCollectorTerms]);
       case OrgApacheLuceneSearchJoinScoreMode_Enum_Total:
       case OrgApacheLuceneSearchJoinScoreMode_Enum_Max:
       case OrgApacheLuceneSearchJoinScoreMode_Enum_Min:
       case OrgApacheLuceneSearchJoinScoreMode_Enum_Avg:
       termsWithScoreCollector = OrgApacheLuceneSearchJoinTermsWithScoreCollector_createWithNSString_withBoolean_withOrgApacheLuceneSearchJoinScoreMode_(fromField, multipleValuesPerDocument, scoreMode);
       [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(fromSearcher)) searchWithOrgApacheLuceneSearchQuery:fromQuery withOrgApacheLuceneSearchCollector:termsWithScoreCollector];
-      return create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(toField, multipleValuesPerDocument, [((OrgApacheLuceneSearchJoinTermsWithScoreCollector *) nil_chk(termsWithScoreCollector)) getCollectedTerms], [termsWithScoreCollector getScoresPerTerm], fromQuery);
+      return create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initPackagePrivateWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(toField, multipleValuesPerDocument, [((OrgApacheLuceneSearchJoinTermsWithScoreCollector *) nil_chk(termsWithScoreCollector)) getCollectedTerms], [termsWithScoreCollector getScoresPerTerm], fromQuery);
       default:
-      @throw create_JavaLangIllegalArgumentException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Score mode %s isn't supported.", [IOSObjectArray arrayWithObjects:(id[]){ scoreMode } count:1 type:NSObject_class_()]));
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Score mode %s isn't supported.", [IOSObjectArray arrayWithObjects:(id[]){ scoreMode } count:1 type:NSObject_class_()]));
     }
   }
 }
@@ -138,7 +150,7 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchJoinJoinUtil_createJoinQueryWit
 
 OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchJoinJoinUtil_createJoinQueryWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchIndexSearcher_withOrgApacheLuceneSearchJoinScoreMode_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withInt_withInt_(NSString *joinField, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchIndexSearcher *searcher, OrgApacheLuceneSearchJoinScoreMode *scoreMode, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jint min, jint max) {
   OrgApacheLuceneSearchJoinJoinUtil_initialize();
-  OrgApacheLuceneIndexIndexReader *indexReader = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader];
+  OrgApacheLuceneIndexIndexReader *indexReader = JreRetainedLocalValue([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader]);
   jint numSegments = [((id<JavaUtilList>) nil_chk([((OrgApacheLuceneIndexIndexReader *) nil_chk(indexReader)) leaves])) size];
   jlong valueCount;
   if (numSegments == 0) {
@@ -146,8 +158,8 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchJoinJoinUtil_createJoinQueryWit
   }
   else if (numSegments == 1) {
     ordinalMap = nil;
-    OrgApacheLuceneIndexLeafReader *leafReader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([((id<JavaUtilList>) nil_chk([((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher getIndexReader])) leaves])) getWithInt:0])) reader];
-    OrgApacheLuceneIndexSortedDocValues *joinSortedDocValues = [((OrgApacheLuceneIndexLeafReader *) nil_chk(leafReader)) getSortedDocValuesWithNSString:joinField];
+    OrgApacheLuceneIndexLeafReader *leafReader = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([((id<JavaUtilList>) nil_chk([((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher getIndexReader])) leaves])) getWithInt:0])) reader]);
+    OrgApacheLuceneIndexSortedDocValues *joinSortedDocValues = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk(leafReader)) getSortedDocValuesWithNSString:joinField]);
     if (joinSortedDocValues != nil) {
       valueCount = [joinSortedDocValues getValueCount];
     }
@@ -179,19 +191,19 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchJoinJoinUtil_createJoinQueryWit
     break;
     case OrgApacheLuceneSearchJoinScoreMode_Enum_None:
     if (min <= 0 && max == JavaLangInteger_MAX_VALUE) {
-      OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *globalOrdinalsCollector = create_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(joinField, ordinalMap, valueCount);
+      OrgApacheLuceneSearchJoinGlobalOrdinalsCollector *globalOrdinalsCollector = create_OrgApacheLuceneSearchJoinGlobalOrdinalsCollector_initPackagePrivateWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_(joinField, ordinalMap, valueCount);
       [searcher searchWithOrgApacheLuceneSearchQuery:rewrittenFromQuery withOrgApacheLuceneSearchCollector:globalOrdinalsCollector];
-      return create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_([globalOrdinalsCollector getCollectorOrdinals], joinField, ordinalMap, rewrittenToQuery, rewrittenFromQuery, indexReader);
+      return create_OrgApacheLuceneSearchJoinGlobalOrdinalsQuery_initPackagePrivateWithOrgApacheLuceneUtilLongBitSet_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_([globalOrdinalsCollector getCollectorOrdinals], joinField, ordinalMap, rewrittenToQuery, rewrittenFromQuery, indexReader);
     }
     else {
       globalOrdinalsWithScoreCollector = create_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_NoScore_initWithNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withLong_withInt_withInt_(joinField, ordinalMap, valueCount, min, max);
       break;
     }
     default:
-    @throw create_JavaLangIllegalArgumentException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Score mode %s isn't supported.", [IOSObjectArray arrayWithObjects:(id[]){ scoreMode } count:1 type:NSObject_class_()]));
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Score mode %s isn't supported.", [IOSObjectArray arrayWithObjects:(id[]){ scoreMode } count:1 type:NSObject_class_()]));
   }
   [searcher searchWithOrgApacheLuceneSearchQuery:rewrittenFromQuery withOrgApacheLuceneSearchCollector:globalOrdinalsWithScoreCollector];
-  return create_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withInt_withInt_withOrgApacheLuceneIndexIndexReader_(globalOrdinalsWithScoreCollector, joinField, ordinalMap, rewrittenToQuery, rewrittenFromQuery, min, max, indexReader);
+  return create_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_initPackagePrivateWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withInt_withInt_withOrgApacheLuceneIndexIndexReader_(globalOrdinalsWithScoreCollector, joinField, ordinalMap, rewrittenToQuery, rewrittenFromQuery, min, max, indexReader);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinJoinUtil)

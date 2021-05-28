@@ -3,20 +3,20 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/StoredFieldsWriter.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
+#include "java/nio/charset/Charset.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/codecs/StoredFieldsReader.h"
 #include "org/apache/lucene/codecs/StoredFieldsWriter.h"
+#include "org/apache/lucene/document/FieldType.h"
 #include "org/apache/lucene/document/StoredField.h"
 #include "org/apache/lucene/index/FieldInfo.h"
 #include "org/apache/lucene/index/FieldInfos.h"
@@ -28,14 +28,16 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/StoredFieldsWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor () {
  @public
   OrgApacheLuceneCodecsStoredFieldsWriter *this$0_;
 }
 
 @end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor, this$0_, OrgApacheLuceneCodecsStoredFieldsWriter *)
 
 @implementation OrgApacheLuceneCodecsStoredFieldsWriter
 
@@ -94,17 +96,28 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "StoredFieldsWriter", NULL, 0x4, NULL, NULL },
-    { "startDocument", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "finishDocument", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeFieldWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneIndexIndexableField:", "writeField", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "finishWithOrgApacheLuceneIndexFieldInfos:withInt:", "finish", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "mergeWithOrgApacheLuceneIndexMergeState:", "merge", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, 1, 2, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 4, 0, -1, -1, -1 },
+    { NULL, "I", 0x1, 5, 6, 0, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 0, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.StoredFieldsWriter$MergeVisitor;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsStoredFieldsWriter = { 2, "StoredFieldsWriter", "org.apache.lucene.codecs", NULL, 0x401, 7, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(startDocument);
+  methods[2].selector = @selector(finishDocument);
+  methods[3].selector = @selector(writeFieldWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneIndexIndexableField:);
+  methods[4].selector = @selector(finishWithOrgApacheLuceneIndexFieldInfos:withInt:);
+  methods[5].selector = @selector(mergeWithOrgApacheLuceneIndexMergeState:);
+  methods[6].selector = @selector(close);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;", "writeField", "LOrgApacheLuceneIndexFieldInfo;LOrgApacheLuceneIndexIndexableField;", "finish", "LOrgApacheLuceneIndexFieldInfos;I", "merge", "LOrgApacheLuceneIndexMergeState;", "LOrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsStoredFieldsWriter = { "StoredFieldsWriter", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 7, 0, -1, 7, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsStoredFieldsWriter;
 }
 
@@ -135,7 +148,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsStoredFieldsWriter)
 - (void)stringFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                        withByteArray:(IOSByteArray *)value {
   [self resetWithOrgApacheLuceneIndexFieldInfo:fieldInfo];
-  JreStrongAssign(&stringValue_, [NSString stringWithBytes:value charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)]);
+  JreStrongAssign(&stringValue_, [NSString java_stringWithBytes:value charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)]);
   [self write];
 }
 
@@ -231,35 +244,58 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsStoredFieldsWriter)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsStoredFieldsWriter:withOrgApacheLuceneIndexMergeState:withInt:", "MergeVisitor", NULL, 0x1, NULL, NULL },
-    { "binaryFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:", "binaryField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "stringFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:", "stringField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "intFieldWithOrgApacheLuceneIndexFieldInfo:withInt:", "intField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "longFieldWithOrgApacheLuceneIndexFieldInfo:withLong:", "longField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "floatFieldWithOrgApacheLuceneIndexFieldInfo:withFloat:", "floatField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "doubleFieldWithOrgApacheLuceneIndexFieldInfo:withDouble:", "doubleField", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "needsFieldWithOrgApacheLuceneIndexFieldInfo:", "needsField", "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", 0x1, "Ljava.io.IOException;", NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "fieldType", NULL, "Lorg.apache.lucene.index.IndexableFieldType;", 0x1, NULL, NULL },
-    { "binaryValue", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "stringValue", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "numericValue", NULL, "Ljava.lang.Number;", 0x1, NULL, NULL },
-    { "readerValue", NULL, "Ljava.io.Reader;", 0x1, NULL, NULL },
-    { "boost", NULL, "F", 0x1, NULL, NULL },
-    { "tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisTokenStream:", "tokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, "Ljava.io.IOException;", NULL },
-    { "resetWithOrgApacheLuceneIndexFieldInfo:", "reset", "V", 0x0, NULL, NULL },
-    { "write", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexStoredFieldVisitor_Status;", 0x1, 13, 14, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexableFieldType;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSNumber;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaIoReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, 15, 16, 3, -1, -1, -1 },
+    { NULL, "V", 0x0, 17, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsStoredFieldsWriter:withOrgApacheLuceneIndexMergeState:withInt:);
+  methods[1].selector = @selector(binaryFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:);
+  methods[2].selector = @selector(stringFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:);
+  methods[3].selector = @selector(intFieldWithOrgApacheLuceneIndexFieldInfo:withInt:);
+  methods[4].selector = @selector(longFieldWithOrgApacheLuceneIndexFieldInfo:withLong:);
+  methods[5].selector = @selector(floatFieldWithOrgApacheLuceneIndexFieldInfo:withFloat:);
+  methods[6].selector = @selector(doubleFieldWithOrgApacheLuceneIndexFieldInfo:withDouble:);
+  methods[7].selector = @selector(needsFieldWithOrgApacheLuceneIndexFieldInfo:);
+  methods[8].selector = @selector(name);
+  methods[9].selector = @selector(fieldType);
+  methods[10].selector = @selector(binaryValue);
+  methods[11].selector = @selector(stringValue);
+  methods[12].selector = @selector(numericValue);
+  methods[13].selector = @selector(readerValue);
+  methods[14].selector = @selector(boost);
+  methods[15].selector = @selector(tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[16].selector = @selector(resetWithOrgApacheLuceneIndexFieldInfo:);
+  methods[17].selector = @selector(write);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.StoredFieldsWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "binaryValue_", NULL, 0x0, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stringValue_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numericValue_", NULL, 0x0, "Ljava.lang.Number;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentField_", NULL, 0x0, "Lorg.apache.lucene.index.FieldInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "remapper_", NULL, 0x0, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsStoredFieldsWriter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "binaryValue_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "stringValue_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "numericValue_", "LNSNumber;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "currentField_", "LOrgApacheLuceneIndexFieldInfo;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "remapper_", "LOrgApacheLuceneIndexFieldInfos;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor = { 2, "MergeVisitor", "org.apache.lucene.codecs", "StoredFieldsWriter", 0x4, 18, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsStoredFieldsWriter;LOrgApacheLuceneIndexMergeState;I", "binaryField", "LOrgApacheLuceneIndexFieldInfo;[B", "LJavaIoIOException;", "stringField", "intField", "LOrgApacheLuceneIndexFieldInfo;I", "longField", "LOrgApacheLuceneIndexFieldInfo;J", "floatField", "LOrgApacheLuceneIndexFieldInfo;F", "doubleField", "LOrgApacheLuceneIndexFieldInfo;D", "needsField", "LOrgApacheLuceneIndexFieldInfo;", "tokenStream", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneAnalysisTokenStream;", "reset", "LOrgApacheLuceneCodecsStoredFieldsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor = { "MergeVisitor", "org.apache.lucene.codecs", ptrTable, methods, fields, 7, 0x4, 18, 6, 18, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor;
 }
 
@@ -269,7 +305,7 @@ void OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_initWithOrgApacheLucen
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneIndexStoredFieldVisitor_init(self);
   for (OrgApacheLuceneIndexFieldInfo * __strong fi in nil_chk(IOSObjectArray_Get(nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState))->fieldInfos_), readerIndex))) {
-    OrgApacheLuceneIndexFieldInfo *other = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) fieldInfoWithInt:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi))->number_];
+    OrgApacheLuceneIndexFieldInfo *other = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) fieldInfoWithInt:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi))->number_]);
     if (other == nil || ![((NSString *) nil_chk(other->name_)) isEqual:fi->name_]) {
       JreStrongAssign(&self->remapper_, mergeState->mergeFieldInfos_);
       break;

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilderFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlFilterBuilderFactory_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilderFactory || defined(INCLUDE_OrgApacheLuceneQueryparserXmlFilterBuilderFactory))
 #define OrgApacheLuceneQueryparserXmlFilterBuilderFactory_
 
@@ -34,7 +40,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)addBuilderWithNSString:(NSString *)nodeName
 withOrgApacheLuceneQueryparserXmlFilterBuilder:(id<OrgApacheLuceneQueryparserXmlFilterBuilder>)builder;
@@ -51,12 +57,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlFilterBuilderFactory, builders_
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init(OrgApacheLuceneQueryparserXmlFilterBuilderFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlFilterBuilderFactory *new_OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlFilterBuilderFactory *new_OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlFilterBuilderFactory *create_OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlFilterBuilderFactory *create_OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlFilterBuilderFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilderFactory")

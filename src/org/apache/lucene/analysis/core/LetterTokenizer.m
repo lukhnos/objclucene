@@ -9,6 +9,10 @@
 #include "org/apache/lucene/analysis/util/CharTokenizer.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/LetterTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisCoreLetterTokenizer
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -28,12 +32,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LetterTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "LetterTokenizer", NULL, 0x1, NULL, NULL },
-    { "isTokenCharWithInt:", "isTokenChar", "Z", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 1, 2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLetterTokenizer = { 2, "LetterTokenizer", "org.apache.lucene.analysis.core", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:);
+  methods[2].selector = @selector(isTokenCharWithInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAttributeFactory;", "isTokenChar", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLetterTokenizer = { "LetterTokenizer", "org.apache.lucene.analysis.core", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCoreLetterTokenizer;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexableFieldType
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexableFieldType_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexableFieldType || defined(INCLUDE_OrgApacheLuceneIndexIndexableFieldType))
 #define OrgApacheLuceneIndexIndexableFieldType_
 
@@ -21,9 +27,8 @@
 
 /*!
  @brief Describes the properties of a field.
-  
  */
-@protocol OrgApacheLuceneIndexIndexableFieldType < NSObject, JavaObject >
+@protocol OrgApacheLuceneIndexIndexableFieldType < JavaObject >
 
 /*!
  @brief True if the field's value should be stored
@@ -31,71 +36,71 @@
 - (jboolean)stored;
 
 /*!
- @brief True if this field's value should be analyzed by the
+ @brief True if this field's value should be analyzed by the 
  <code>Analyzer</code>.
  <p>
- This has no effect if <code>indexOptions()</code> returns
- IndexOptions.NONE.
+  This has no effect if <code>indexOptions()</code> returns
+  IndexOptions.NONE.
  */
 - (jboolean)tokenized;
 
 /*!
  @brief True if this field's indexed form should be also stored 
- into term vectors.
+  into term vectors.
  <p>
- This builds a miniature inverted-index for this field which
- can be accessed in a document-oriented way from 
+  This builds a miniature inverted-index for this field which
+  can be accessed in a document-oriented way from  
  <code>IndexReader.getTermVector(int,String)</code>.
- <p>
- This option is illegal if <code>indexOptions()</code> returns
- IndexOptions.NONE.
+  <p>
+  This option is illegal if <code>indexOptions()</code> returns
+  IndexOptions.NONE.
  */
 - (jboolean)storeTermVectors;
 
 /*!
  @brief True if this field's token character offsets should also
- be stored into term vectors.
+  be stored into term vectors.
  <p>
- This option is illegal if term vectors are not enabled for the field
- (<code>storeTermVectors()</code> is false)
+  This option is illegal if term vectors are not enabled for the field
+  (<code>storeTermVectors()</code> is false)
  */
 - (jboolean)storeTermVectorOffsets;
 
 /*!
  @brief True if this field's token positions should also be stored
- into the term vectors.
+  into the term vectors.
  <p>
- This option is illegal if term vectors are not enabled for the field
- (<code>storeTermVectors()</code> is false). 
+  This option is illegal if term vectors are not enabled for the field
+  (<code>storeTermVectors()</code> is false).
  */
 - (jboolean)storeTermVectorPositions;
 
 /*!
  @brief True if this field's token payloads should also be stored
- into the term vectors.
+  into the term vectors.
  <p>
- This option is illegal if term vector positions are not enabled 
- for the field (<code>storeTermVectors()</code> is false).
+  This option is illegal if term vector positions are not enabled 
+  for the field (<code>storeTermVectors()</code> is false).
  */
 - (jboolean)storeTermVectorPayloads;
 
 /*!
  @brief True if normalization values should be omitted for the field.
  <p>
- This saves memory, but at the expense of scoring quality (length normalization
- will be disabled), and if you omit norms, you cannot use index-time boosts. 
+  This saves memory, but at the expense of scoring quality (length normalization
+  will be disabled), and if you omit norms, you cannot use index-time boosts.
  */
 - (jboolean)omitNorms;
 
 /*!
  @brief <code>IndexOptions</code>, describing what should be
- recorded into the inverted index
+   recorded into the inverted index
  */
 - (OrgApacheLuceneIndexIndexOptions *)indexOptions;
 
 /*!
  @brief DocValues <code>DocValuesType</code>: how the field's value will be indexed
- into docValues.
+  into docValues.
  */
 - (OrgApacheLuceneIndexDocValuesType *)docValuesType;
 
@@ -107,4 +112,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexableFieldType)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexableFieldType")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSingletonSortedNumericDocValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSingletonSortedNumericDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexSingletonSortedNumericDocValues || defined(INCLUDE_OrgApacheLuceneIndexSingletonSortedNumericDocValues))
 #define OrgApacheLuceneIndexSingletonSortedNumericDocValues_
 
@@ -26,15 +32,15 @@
 /*!
  @brief Exposes multi-valued view over a single-valued instance.
  <p>
- This can be used if you want to have one multi-valued implementation
- that works for single or multi-valued types.
+  This can be used if you want to have one multi-valued implementation
+  that works for single or multi-valued types.
  */
 @interface OrgApacheLuceneIndexSingletonSortedNumericDocValues : OrgApacheLuceneIndexSortedNumericDocValues
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)inArg
-                                 withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)docsWithField;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)inArg
+                                                         withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)docsWithField;
 
 - (jint)count;
 
@@ -52,18 +58,26 @@
 
 - (jlong)valueAtWithInt:(jint)index;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSingletonSortedNumericDocValues)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexSingletonSortedNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSingletonSortedNumericDocValues *self, OrgApacheLuceneIndexNumericDocValues *inArg, id<OrgApacheLuceneUtilBits> docsWithField);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexSingletonSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSingletonSortedNumericDocValues *self, OrgApacheLuceneIndexNumericDocValues *inArg, id<OrgApacheLuceneUtilBits> docsWithField);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSingletonSortedNumericDocValues *new_OrgApacheLuceneIndexSingletonSortedNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexNumericDocValues *inArg, id<OrgApacheLuceneUtilBits> docsWithField) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexSingletonSortedNumericDocValues *new_OrgApacheLuceneIndexSingletonSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexNumericDocValues *inArg, id<OrgApacheLuceneUtilBits> docsWithField) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSingletonSortedNumericDocValues *create_OrgApacheLuceneIndexSingletonSortedNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexNumericDocValues *inArg, id<OrgApacheLuceneUtilBits> docsWithField);
+FOUNDATION_EXPORT OrgApacheLuceneIndexSingletonSortedNumericDocValues *create_OrgApacheLuceneIndexSingletonSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexNumericDocValues *inArg, id<OrgApacheLuceneUtilBits> docsWithField);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSingletonSortedNumericDocValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSingletonSortedNumericDocValues")

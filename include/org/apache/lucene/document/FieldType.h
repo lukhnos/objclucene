@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentFieldType
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentFieldType_) && (INCLUDE_ALL_OrgApacheLuceneDocumentFieldType || defined(INCLUDE_OrgApacheLuceneDocumentFieldType))
 #define OrgApacheLuceneDocumentFieldType_
 
@@ -34,17 +40,16 @@
 /*!
  @brief Create a new FieldType with default properties.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Create a new mutable FieldType with all of the properties from <code>ref</code>
  */
-- (instancetype)initWithOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)ref;
+- (instancetype __nonnull)initWithOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)ref;
 
 /*!
- @brief 
- <p>
- The default is <code>null</code> (no docValues)
+ @brief <p>
+  The default is <code>null</code> (no docValues)
  - seealso: #setDocValuesType(DocValuesType)
  */
 - (OrgApacheLuceneIndexDocValuesType *)docValuesType;
@@ -52,19 +57,17 @@
 - (jboolean)isEqual:(id)obj;
 
 /*!
- @brief Prevents future changes.
- Note, it is recommended that this is called once
- the FieldTypes's properties have been set, to prevent unintentional state
- changes.
+ @brief Prevents future changes.Note, it is recommended that this is called once
+  the FieldTypes's properties have been set, to prevent unintentional state
+  changes.
  */
 - (void)freeze;
 
 - (NSUInteger)hash;
 
 /*!
- @brief 
- <p>
- The default is <code>IndexOptions.DOCS_AND_FREQS_AND_POSITIONS</code>.
+ @brief <p>
+  The default is <code>IndexOptions.DOCS_AND_FREQS_AND_POSITIONS</code>.
  - seealso: #setIndexOptions(IndexOptions)
  */
 - (OrgApacheLuceneIndexIndexOptions *)indexOptions;
@@ -72,27 +75,26 @@
 /*!
  @brief Precision step for numeric field.
  <p>
- This has no effect if <code>numericType()</code> returns null.
+  This has no effect if <code>numericType()</code> returns null. 
  <p>
- The default is <code>NumericUtils.PRECISION_STEP_DEFAULT</code>
+  The default is <code>NumericUtils.PRECISION_STEP_DEFAULT</code>
  - seealso: #setNumericPrecisionStep(int)
  */
 - (jint)numericPrecisionStep;
 
 /*!
  @brief NumericType: if non-null then the field's value will be indexed
- numerically so that <code>NumericRangeQuery</code> can be used at 
- search time.
+  numerically so that <code>NumericRangeQuery</code> can be used at 
+  search time.
  <p>
- The default is <code>null</code> (no numeric type) 
+  The default is <code>null</code> (no numeric type)
  - seealso: #setNumericType(NumericType)
  */
 - (OrgApacheLuceneDocumentFieldType_NumericType *)numericType;
 
 /*!
- @brief 
- <p>
- The default is <code>false</code>.
+ @brief <p>
+  The default is <code>false</code>.
  - seealso: #setOmitNorms(boolean)
  */
 - (jboolean)omitNorms;
@@ -100,8 +102,8 @@
 /*!
  @brief Sets the field's DocValuesType
  @param type DocValues type, or null if no DocValues should be stored.
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #docValuesType()
  */
 - (void)setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type;
@@ -109,8 +111,8 @@
 /*!
  @brief Sets the indexing options for the field:
  @param value indexing options
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #indexOptions()
  */
 - (void)setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)value;
@@ -118,9 +120,9 @@
 /*!
  @brief Sets the numeric precision step for the field.
  @param precisionStep numeric precision step for the field
- @throws IllegalArgumentException if precisionStep is less than 1.
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalArgumentExceptionif precisionStep is less than 1.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #numericPrecisionStep()
  */
 - (void)setNumericPrecisionStepWithInt:(jint)precisionStep;
@@ -128,8 +130,8 @@
 /*!
  @brief Specifies the field's numeric type.
  @param type numeric type, or null if the field has no numeric type.
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #numericType()
  */
 - (void)setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldType_NumericType *)type;
@@ -137,8 +139,8 @@
 /*!
  @brief Set to <code>true</code> to omit normalization values for the field.
  @param value true if this field should omit norms.
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #omitNorms()
  */
 - (void)setOmitNormsWithBoolean:(jboolean)value;
@@ -146,106 +148,100 @@
 /*!
  @brief Set to <code>true</code> to store this field.
  @param value true if this field should be stored.
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #stored()
  */
 - (void)setStoredWithBoolean:(jboolean)value;
 
 /*!
  @brief Set to <code>true</code> to also store token character offsets into the term
- vector for this field.
+  vector for this field.
  @param value true if this field should store term vector offsets.
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #storeTermVectorOffsets()
  */
 - (void)setStoreTermVectorOffsetsWithBoolean:(jboolean)value;
 
 /*!
  @brief Set to <code>true</code> to also store token payloads into the term
- vector for this field.
+  vector for this field.
  @param value true if this field should store term vector payloads.
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #storeTermVectorPayloads()
  */
 - (void)setStoreTermVectorPayloadsWithBoolean:(jboolean)value;
 
 /*!
  @brief Set to <code>true</code> to also store token positions into the term
- vector for this field.
+  vector for this field.
  @param value true if this field should store term vector positions.
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #storeTermVectorPositions()
  */
 - (void)setStoreTermVectorPositionsWithBoolean:(jboolean)value;
 
 /*!
  @brief Set to <code>true</code> if this field's indexed form should be also stored 
- into term vectors.
+  into term vectors.
  @param value true if this field should store term vectors.
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #storeTermVectors()
  */
 - (void)setStoreTermVectorsWithBoolean:(jboolean)value;
 
 /*!
  @brief Set to <code>true</code> to tokenize this field's contents via the 
- configured <code>Analyzer</code>.
+  configured <code>Analyzer</code>.
  @param value true if this field should be tokenized.
- @throws IllegalStateException if this FieldType is frozen against
- future modifications.
+ @throw IllegalStateExceptionif this FieldType is frozen against
+          future modifications.
  - seealso: #tokenized()
  */
 - (void)setTokenizedWithBoolean:(jboolean)value;
 
 /*!
- @brief 
- <p>
- The default is <code>false</code>.
+ @brief <p>
+  The default is <code>false</code>.
  - seealso: #setStored(boolean)
  */
 - (jboolean)stored;
 
 /*!
- @brief 
- <p>
- The default is <code>false</code>.
+ @brief <p>
+  The default is <code>false</code>.
  - seealso: #setStoreTermVectorOffsets(boolean)
  */
 - (jboolean)storeTermVectorOffsets;
 
 /*!
- @brief 
- <p>
- The default is <code>false</code>.
+ @brief <p>
+  The default is <code>false</code>.
  - seealso: #setStoreTermVectorPayloads(boolean)
  */
 - (jboolean)storeTermVectorPayloads;
 
 /*!
- @brief 
- <p>
- The default is <code>false</code>.
+ @brief <p>
+  The default is <code>false</code>.
  - seealso: #setStoreTermVectorPositions(boolean)
  */
 - (jboolean)storeTermVectorPositions;
 
 /*!
- @brief 
- <p>
- The default is <code>false</code>.
+ @brief <p>
+  The default is <code>false</code>.
  - seealso: #setStoreTermVectors(boolean)
  */
 - (jboolean)storeTermVectors;
 
 /*!
- @brief 
- <p>
- The default is <code>true</code>.
+ @brief <p>
+  The default is <code>true</code>.
  - seealso: #setTokenized(boolean)
  */
 - (jboolean)tokenized;
@@ -258,9 +254,8 @@
 #pragma mark Protected
 
 /*!
- @brief Throws an exception if this FieldType is frozen.
- Subclasses should
- call this within setters for additional state.
+ @brief Throws an exception if this FieldType is frozen.Subclasses should
+  call this within setters for additional state.
  */
 - (void)checkIfFrozen;
 
@@ -276,9 +271,9 @@ FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *create_OrgApacheLuceneDocume
 
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentFieldType_init(OrgApacheLuceneDocumentFieldType *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *new_OrgApacheLuceneDocumentFieldType_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *new_OrgApacheLuceneDocumentFieldType_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *create_OrgApacheLuceneDocumentFieldType_init();
+FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *create_OrgApacheLuceneDocumentFieldType_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentFieldType)
 
@@ -291,6 +286,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentFieldType)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneDocumentFieldType_NumericType_Enum) {
   OrgApacheLuceneDocumentFieldType_NumericType_Enum_INT = 0,
   OrgApacheLuceneDocumentFieldType_NumericType_Enum_LONG = 1,
@@ -302,23 +299,20 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneDocumentFieldType_NumericType_Enum) {
  @brief Data type of the numeric value
  @since 3.2
  */
-@interface OrgApacheLuceneDocumentFieldType_NumericType : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneDocumentFieldType_NumericType : JavaLangEnum
 
-+ (OrgApacheLuceneDocumentFieldType_NumericType *)INT;
-
-+ (OrgApacheLuceneDocumentFieldType_NumericType *)LONG;
-
-+ (OrgApacheLuceneDocumentFieldType_NumericType *)FLOAT;
-
-+ (OrgApacheLuceneDocumentFieldType_NumericType *)DOUBLE;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentFieldType_NumericType *INT NS_SWIFT_NAME(INT);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentFieldType_NumericType *LONG NS_SWIFT_NAME(LONG);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentFieldType_NumericType *FLOAT NS_SWIFT_NAME(FLOAT);
+@property (readonly, class, nonnull) OrgApacheLuceneDocumentFieldType_NumericType *DOUBLE NS_SWIFT_NAME(DOUBLE);
+#pragma mark Public
 
 + (OrgApacheLuceneDocumentFieldType_NumericType *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneDocumentFieldType_NumericType_Enum)toNSEnum;
 
 @end
@@ -331,28 +325,28 @@ FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneD
 /*!
  @brief 32-bit integer numeric type
  */
-inline OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_get_INT();
+inline OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_get_INT(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentFieldType_NumericType, INT)
 
 /*!
  @brief 64-bit long numeric type
  */
-inline OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_get_LONG();
+inline OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_get_LONG(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentFieldType_NumericType, LONG)
 
 /*!
  @brief 32-bit float numeric type
  */
-inline OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_get_FLOAT();
+inline OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_get_FLOAT(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT)
 
 /*!
  @brief 64-bit double numeric type
  */
-inline OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_get_DOUBLE();
+inline OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_get_DOUBLE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneDocumentFieldType_NumericType_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneDocumentFieldType_NumericType_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_valueOfWithNSString_(NSString *name);
 
@@ -362,4 +356,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentFieldType_NumericType)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentFieldType")

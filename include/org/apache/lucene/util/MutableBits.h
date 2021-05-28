@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMutableBits
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMutableBits_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableBits || defined(INCLUDE_OrgApacheLuceneUtilMutableBits))
 #define OrgApacheLuceneUtilMutableBits_
 
@@ -23,13 +29,11 @@
 /*!
  @brief Extension of Bits for live documents.
  */
-@protocol OrgApacheLuceneUtilMutableBits < OrgApacheLuceneUtilBits, NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilMutableBits < OrgApacheLuceneUtilBits, JavaObject >
 
 /*!
  @brief Sets the bit specified by <code>index</code> to false.
- @param index index, should be non-negative and &lt; <code>length()</code>.
- The result of passing negative or out of bounds values is undefined
- by this interface, <b>just don't do it!</b>
+ @param index index, should be non-negative and  &lt;  <code>length()</code> .         The result of passing negative or out of bounds values is undefined         by this interface,  <b> just don't do it! </b>
  */
 - (void)clearWithInt:(jint)index;
 
@@ -41,4 +45,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableBits)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableBits")

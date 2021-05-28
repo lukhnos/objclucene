@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_
 
@@ -26,7 +32,7 @@
 /*!
  @brief Factory for <code>KeywordRepeatFilter</code>.
  Since <code>KeywordRepeatFilter</code> emits two tokens for every input token, and any tokens that aren't transformed
- later in the analysis chain will be in the document twice. Therefore, consider adding
+  later in the analysis chain will be in the document twice. Therefore, consider adding 
  <code>RemoveDuplicatesTokenFilterFactory</code> later in the analysis chain.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
@@ -36,7 +42,7 @@
 /*!
  @brief Creates a new KeywordRepeatFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -54,4 +60,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory")

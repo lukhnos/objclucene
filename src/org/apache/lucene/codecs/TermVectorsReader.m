@@ -3,11 +3,13 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/TermVectorsReader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/TermVectorsReader.h"
 #include "org/apache/lucene/index/Fields.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/TermVectorsReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
@@ -31,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self doesNotRecognizeSelector:_cmd];
 }
 
-- (OrgApacheLuceneCodecsTermVectorsReader *)clone {
+- (OrgApacheLuceneCodecsTermVectorsReader *)java_clone {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -41,20 +43,30 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsReader;", 0x401, 3, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsReader;", 0x1, -1, -1, 2, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getWithInt:);
+  methods[2].selector = @selector(checkIntegrity);
+  methods[3].selector = @selector(java_clone);
+  methods[4].selector = @selector(getMergeInstance);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "get", "I", "LJavaIoIOException;", "clone" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsTermVectorsReader = { "TermVectorsReader", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 5, 0, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsTermVectorsReader;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TermVectorsReader", NULL, 0x4, NULL, NULL },
-    { "getWithInt:", "get", "Lorg.apache.lucene.index.Fields;", 0x401, "Ljava.io.IOException;", NULL },
-    { "checkIntegrity", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.codecs.TermVectorsReader;", 0x401, NULL, NULL },
-    { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.TermVectorsReader;", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsTermVectorsReader = { 2, "TermVectorsReader", "org.apache.lucene.codecs", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneCodecsTermVectorsReader;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end

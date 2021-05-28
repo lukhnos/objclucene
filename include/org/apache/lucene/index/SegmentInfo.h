@@ -13,11 +13,16 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSegmentInfo
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSegmentInfo_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentInfo || defined(INCLUDE_OrgApacheLuceneIndexSegmentInfo))
 #define OrgApacheLuceneIndexSegmentInfo_
 
 @class IOSByteArray;
-@class IOSObjectArray;
 @class OrgApacheLuceneCodecsCodec;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneUtilVersion;
@@ -27,7 +32,7 @@
 
 /*!
  @brief Information about a segment such as its name, directory, and files related
- to the segment.
+  to the segment.
  */
 @interface OrgApacheLuceneIndexSegmentInfo : NSObject {
  @public
@@ -40,43 +45,41 @@
    */
   OrgApacheLuceneStoreDirectory *dir_;
 }
-
-+ (jint)NO_;
-
-+ (jint)YES_;
+@property (readonly, class) jint NO_ NS_SWIFT_NAME(NO_);
+@property (readonly, class) jint YES_ NS_SWIFT_NAME(YES_);
 
 #pragma mark Public
 
 /*!
  @brief Construct a new complete SegmentInfo instance from input.
  <p>Note: this is public only to allow access from
- the codecs package.</p>
+  the codecs package.</p>
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                       withOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)version_
-                                         withNSString:(NSString *)name
-                                              withInt:(jint)maxDoc
-                                          withBoolean:(jboolean)isCompoundFile
-                       withOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)codec
-                                      withJavaUtilMap:(id<JavaUtilMap>)diagnostics
-                                        withByteArray:(IOSByteArray *)id_
-                                      withJavaUtilMap:(id<JavaUtilMap>)attributes;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                                 withOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)version_
+                                                   withNSString:(NSString *)name
+                                                        withInt:(jint)maxDoc
+                                                    withBoolean:(jboolean)isCompoundFile
+                                 withOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)codec
+                                                withJavaUtilMap:(id<JavaUtilMap>)diagnostics
+                                                  withByteArray:(IOSByteArray *)id_
+                                                withJavaUtilMap:(id<JavaUtilMap>)attributes;
 
 /*!
  @brief Add this file to the set of files written for this
- segment.
+   segment.
  */
 - (void)addFileWithNSString:(NSString *)file;
 
 /*!
  @brief Add these files to the set of files written for this
- segment.
+   segment.
  */
 - (void)addFilesWithJavaUtilCollection:(id<JavaUtilCollection>)files;
 
 /*!
  @brief We consider another SegmentInfo instance equal if it
- has the same dir and same name.
+   has the same dir and same name.
  */
 - (jboolean)isEqual:(id)obj;
 
@@ -103,8 +106,7 @@
 
 /*!
  @brief Returns diagnostics saved into the segment when it was
- written.
- The map is immutable. 
+   written.The map is immutable.
  */
 - (id<JavaUtilMap>)getDiagnostics;
 
@@ -115,7 +117,7 @@
 
 /*!
  @brief Returns true if this segment is stored as a compound
- file; else, false.
+  file; else, false.
  */
 - (jboolean)getUseCompoundFile;
 
@@ -128,19 +130,19 @@
 
 /*!
  @brief Returns number of documents in this segment (deletions
- are not taken into account).
+   are not taken into account).
  */
 - (jint)maxDoc;
 
 /*!
  @brief Puts a codec attribute value.
  <p>
- This is a key-value mapping for the field that the codec can use to store
- additional metadata, and will be available to the codec when reading the
- segment via <code>getAttribute(String)</code>
- <p>
- If a value already exists for the field, it will be replaced with the new
- value.
+  This is a key-value mapping for the field that the codec can use to store
+  additional metadata, and will be available to the codec when reading the
+  segment via <code>getAttribute(String)</code>
+  <p>
+  If a value already exists for the field, it will be replaced with the new
+  value.
  */
 - (NSString *)putAttributeWithNSString:(NSString *)key
                           withNSString:(NSString *)value;
@@ -164,16 +166,15 @@
                                                 withInt:(jint)delCount;
 
 /*!
- @brief Used for debugging.
- Format may suddenly change.
+ @brief Used for debugging.Format may suddenly change.
  <p>Current format looks like
- <code>_a(3.1):c45/4:[sorter=&lt;long: "timestamp"&gt;!]</code>, which means
- the segment's name is <code>_a</code>; it was created with Lucene 3.1 (or
- '?' if it's unknown); it's using compound file
- format (would be <code>C</code> if not compound); it
- has 45 documents; it has 4 deletions (this part is
- left off when there are no deletions); it is sorted by the timestamp field
- in descending order (this part is omitted for unsorted segments).</p>
+   <code>_a(3.1):c45/4:[sorter=&lt;long: "timestamp"&gt;!]</code>, which means
+   the segment's name is <code>_a</code>; it was created with Lucene 3.1 (or
+   '?' if it's unknown); it's using compound file
+   format (would be <code>C</code> if not compound); it
+   has 45 documents; it has 4 deletions (this part is
+   left off when there are no deletions); it is sorted by the timestamp field
+   in descending order (this part is omitted for unsorted segments).</p>
  */
 - (NSString *)toStringWithInt:(jint)delCount;
 
@@ -181,7 +182,7 @@
 
 /*!
  @brief strips any segment name from the file, naming it with this segment
- this is because "segment names" can change, e.g. by addIndexes(Dir)
+  this is because "segment names" can change, e.g.by addIndexes(Dir)
  */
 - (NSString *)namedForThisSegmentWithNSString:(NSString *)file;
 
@@ -191,10 +192,13 @@
 
 /*!
  @brief Mark whether this segment is stored as a compound file.
- @param isCompoundFile true if this is a compound file;
- else, false
+ @param isCompoundFile true if this is a compound file;  else, false
  */
 - (void)setUseCompoundFileWithBoolean:(jboolean)isCompoundFile;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -205,17 +209,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentInfo, dir_, OrgApacheLuceneStoreD
 
 /*!
  @brief Used by some member fields to mean not present (e.g.,
- norms, deletions).
+   norms, deletions).
  */
-inline jint OrgApacheLuceneIndexSegmentInfo_get_NO();
+inline jint OrgApacheLuceneIndexSegmentInfo_get_NO(void);
 #define OrgApacheLuceneIndexSegmentInfo_NO -1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexSegmentInfo, NO, jint)
 
 /*!
  @brief Used by some member fields to mean present (e.g.,
- norms, deletions).
+   norms, deletions).
  */
-inline jint OrgApacheLuceneIndexSegmentInfo_get_YES();
+inline jint OrgApacheLuceneIndexSegmentInfo_get_YES(void);
 #define OrgApacheLuceneIndexSegmentInfo_YES 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexSegmentInfo, YES, jint)
 
@@ -229,4 +233,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentInfo)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentInfo")

@@ -6,27 +6,27 @@
 /*!
  @brief The logical representation of a <code>org.apache.lucene.document.Document</code> for indexing and searching.
  <p>The document package provides the user level logical representation of content to be indexed and searched.  The
- package also provides utilities for working with <code>org.apache.lucene.document.Document</code>s and <code>org.apache.lucene.index.IndexableField</code>s.</p>
- <h2>Document and IndexableField</h2>
- <p>A <code>org.apache.lucene.document.Document</code> is a collection of <code>org.apache.lucene.index.IndexableField</code>s.  A
- <code>org.apache.lucene.index.IndexableField</code> is a logical representation of a user's content that needs to be indexed or stored.
- <code>org.apache.lucene.index.IndexableField</code>s have a number of properties that tell Lucene how to treat the content (like indexed, tokenized,
- stored, etc.)  See the <code>org.apache.lucene.document.Field</code> implementation of <code>org.apache.lucene.index.IndexableField</code>
- for specifics on these properties.
+  package also provides utilities for working with <code>org.apache.lucene.document.Document</code>s and <code>org.apache.lucene.index.IndexableField</code>s.</p>
+  <h2>Document and IndexableField</h2>
+  <p>A <code>org.apache.lucene.document.Document</code> is a collection of <code>org.apache.lucene.index.IndexableField</code>s.  A
+    <code>org.apache.lucene.index.IndexableField</code> is a logical representation of a user's content that needs to be indexed or stored.
+    <code>org.apache.lucene.index.IndexableField</code>s have a number of properties that tell Lucene how to treat the content (like indexed, tokenized,
+    stored, etc.)  See the <code>org.apache.lucene.document.Field</code> implementation of <code>org.apache.lucene.index.IndexableField</code>
+    for specifics on these properties. 
  </p>
- <p>Note: it is common to refer to <code>org.apache.lucene.document.Document</code>s having <code>org.apache.lucene.document.Field</code>s, even though technically they have
+  <p>Note: it is common to refer to <code>org.apache.lucene.document.Document</code>s having <code>org.apache.lucene.document.Field</code>s, even though technically they have 
  <code>org.apache.lucene.index.IndexableField</code>s.</p>
- <h2>Working with Documents</h2>
- <p>First and foremost, a <code>org.apache.lucene.document.Document</code> is something created by the user application.  It is your job
- to create Documents based on the content of the files you are working with in your application (Word, txt, PDF, Excel or any other format.)
- How this is done is completely up to you.  That being said, there are many tools available in other projects that can make
- the process of taking a file and converting it into a Lucene <code>org.apache.lucene.document.Document</code>.
- </p>
- <p>The <code>org.apache.lucene.document.DateTools</code> is a utility class to make dates and times searchable
- (remember, Lucene only searches text). <code>org.apache.lucene.document.IntField</code>, <code>org.apache.lucene.document.LongField</code>,
- <code>org.apache.lucene.document.FloatField</code> and <code>org.apache.lucene.document.DoubleField</code> are a special helper class
- to simplify indexing of numeric values (and also dates) for fast range range queries with <code>org.apache.lucene.search.NumericRangeQuery</code>
- (using a special sortable string representation of numeric values).</p>
+  <h2>Working with Documents</h2>
+  <p>First and foremost, a <code>org.apache.lucene.document.Document</code> is something created by the user application.  It is your job
+    to create Documents based on the content of the files you are working with in your application (Word, txt, PDF, Excel or any other format.)
+    How this is done is completely up to you.  That being said, there are many tools available in other projects that can make
+    the process of taking a file and converting it into a Lucene <code>org.apache.lucene.document.Document</code>.
+  </p>
+  <p>The <code>org.apache.lucene.document.DateTools</code> is a utility class to make dates and times searchable
+  (remember, Lucene only searches text). <code>org.apache.lucene.document.IntField</code>, <code>org.apache.lucene.document.LongField</code>,
+  <code>org.apache.lucene.document.FloatField</code> and <code>org.apache.lucene.document.DoubleField</code> are a special helper class
+  to simplify indexing of numeric values (and also dates) for fast range range queries with <code>org.apache.lucene.search.NumericRangeQuery</code>
+  (using a special sortable string representation of numeric values).</p>
  */
 #include "J2ObjC_header.h"
 
@@ -38,4 +38,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentPackage_info")

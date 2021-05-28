@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisDeGermanMinimalStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisDeGermanMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanMinimalStemmer))
 #define OrgApacheLuceneAnalysisDeGermanMinimalStemmer_
 
@@ -21,15 +27,15 @@
 /*!
  @brief Minimal Stemmer for German.
  <p>
- This stemmer implements the following algorithm:
+  This stemmer implements the following algorithm: 
  <i>Morphologie et recherche d'information</i>
- Jacques Savoy.
+  Jacques Savoy.
  */
 @interface OrgApacheLuceneAnalysisDeGermanMinimalStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -40,12 +46,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisDeGermanMinimalStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init(OrgApacheLuceneAnalysisDeGermanMinimalStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanMinimalStemmer *new_OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanMinimalStemmer *new_OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanMinimalStemmer *create_OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanMinimalStemmer *create_OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanMinimalStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemmer")

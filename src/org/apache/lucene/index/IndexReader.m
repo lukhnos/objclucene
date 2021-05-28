@@ -3,12 +3,11 @@
 //  source: ./core/src/java/org/apache/lucene/index/IndexReader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Error.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/System.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Collections.h"
 #include "java/util/LinkedHashSet.h"
 #include "java/util/List.h"
@@ -28,6 +27,10 @@
 #include "org/apache/lucene/store/AlreadyClosedException.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexIndexReader () {
  @public
   jboolean closed_;
@@ -37,7 +40,7 @@
   id<JavaUtilSet> parentReaders_;
 }
 
-- (void)notifyReaderClosedListenersWithNSException:(NSException *)th;
+- (void)notifyReaderClosedListenersWithJavaLangThrowable:(JavaLangThrowable *)th;
 
 - (void)reportCloseToParentReaders;
 
@@ -47,7 +50,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexReader, refCount_, JavaUtilConcurre
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexReader, readerClosedListeners_, id<JavaUtilSet>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexReader, parentReaders_, id<JavaUtilSet>)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithNSException_(OrgApacheLuceneIndexIndexReader *self, NSException *th);
+__attribute__((unused)) static void OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithJavaLangThrowable_(OrgApacheLuceneIndexIndexReader *self, JavaLangThrowable *th);
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexReader_reportCloseToParentReaders(OrgApacheLuceneIndexIndexReader *self);
 
@@ -87,8 +90,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<JavaUtilSet>) nil_chk(parentReaders_)) addWithId:reader];
 }
 
-- (void)notifyReaderClosedListenersWithNSException:(NSException *)th {
-  OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithNSException_(self, th);
+- (void)notifyReaderClosedListenersWithJavaLangThrowable:(JavaLangThrowable *)th {
+  OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithJavaLangThrowable_(self, th);
 }
 
 - (void)reportCloseToParentReaders {
@@ -118,7 +121,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)obj {
-  return self == obj;
+  return (JreObjectEqualsEquals(self, obj));
 }
 
 - (NSUInteger)hash {
@@ -133,7 +136,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneIndexTerms *)getTermVectorWithInt:(jint)docID
                                        withNSString:(NSString *)field {
-  OrgApacheLuceneIndexFields *vectors = [self getTermVectorsWithInt:docID];
+  OrgApacheLuceneIndexFields *vectors = JreRetainedLocalValue([self getTermVectorsWithInt:docID]);
   if (vectors == nil) {
     return nil;
   }
@@ -249,50 +252,87 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "IndexReader", NULL, 0x0, NULL, NULL },
-    { "addReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:", "addReaderClosedListener", "V", 0x11, NULL, NULL },
-    { "removeReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:", "removeReaderClosedListener", "V", 0x11, NULL, NULL },
-    { "registerParentReaderWithOrgApacheLuceneIndexIndexReader:", "registerParentReader", "V", 0x11, NULL, NULL },
-    { "notifyReaderClosedListenersWithNSException:", "notifyReaderClosedListeners", "V", 0x2, NULL, NULL },
-    { "reportCloseToParentReaders", NULL, "V", 0x2, NULL, NULL },
-    { "getRefCount", NULL, "I", 0x11, NULL, NULL },
-    { "incRef", NULL, "V", 0x11, NULL, NULL },
-    { "tryIncRef", NULL, "Z", 0x11, NULL, NULL },
-    { "decRef", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "ensureOpen", NULL, "V", 0x14, "Lorg.apache.lucene.store.AlreadyClosedException;", NULL },
-    { "isEqual:", "equals", "Z", 0x11, NULL, NULL },
-    { "hash", "hashCode", "I", 0x11, NULL, NULL },
-    { "getTermVectorsWithInt:", "getTermVectors", "Lorg.apache.lucene.index.Fields;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getTermVectorWithInt:withNSString:", "getTermVector", "Lorg.apache.lucene.index.Terms;", 0x11, "Ljava.io.IOException;", NULL },
-    { "numDocs", NULL, "I", 0x401, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x401, NULL, NULL },
-    { "numDeletedDocs", NULL, "I", 0x11, NULL, NULL },
-    { "documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:", "document", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "documentWithInt:", "document", "Lorg.apache.lucene.document.Document;", 0x11, "Ljava.io.IOException;", NULL },
-    { "documentWithInt:withJavaUtilSet:", "document", "Lorg.apache.lucene.document.Document;", 0x11, "Ljava.io.IOException;", "(ILjava/util/Set<Ljava/lang/String;>;)Lorg/apache/lucene/document/Document;" },
-    { "hasDeletions", NULL, "Z", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x31, "Ljava.io.IOException;", NULL },
-    { "doClose", NULL, "V", 0x404, "Ljava.io.IOException;", NULL },
-    { "getContext", NULL, "Lorg.apache.lucene.index.IndexReaderContext;", 0x401, NULL, NULL },
-    { "leaves", NULL, "Ljava.util.List;", 0x11, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;" },
-    { "getCoreCacheKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getCombinedCoreAndDeletesKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "docFreqWithOrgApacheLuceneIndexTerm:", "docFreq", "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "totalTermFreqWithOrgApacheLuceneIndexTerm:", "totalTermFreq", "J", 0x401, "Ljava.io.IOException;", NULL },
-    { "getSumDocFreqWithNSString:", "getSumDocFreq", "J", 0x401, "Ljava.io.IOException;", NULL },
-    { "getDocCountWithNSString:", "getDocCount", "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "getSumTotalTermFreqWithNSString:", "getSumTotalTermFreq", "J", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 7, -1, -1, -1 },
+    { NULL, "V", 0x14, -1, -1, 8, -1, -1, -1 },
+    { NULL, "Z", 0x11, 9, 10, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 11, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x401, 12, 13, 7, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x11, 14, 15, 7, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 16, 17, 7, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneDocumentDocument;", 0x11, 16, 13, 7, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneDocumentDocument;", 0x11, 16, 18, 7, 19, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x31, -1, -1, 7, -1, -1, -1 },
+    { NULL, "V", 0x404, -1, -1, 7, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexReaderContext;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x11, -1, -1, -1, 20, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, 21, 22, 7, -1, -1, -1 },
+    { NULL, "J", 0x401, 23, 22, 7, -1, -1, -1 },
+    { NULL, "J", 0x401, 24, 25, 7, -1, -1, -1 },
+    { NULL, "I", 0x401, 26, 25, 7, -1, -1, -1 },
+    { NULL, "J", 0x401, 27, 25, 7, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(addReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:);
+  methods[2].selector = @selector(removeReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:);
+  methods[3].selector = @selector(registerParentReaderWithOrgApacheLuceneIndexIndexReader:);
+  methods[4].selector = @selector(notifyReaderClosedListenersWithJavaLangThrowable:);
+  methods[5].selector = @selector(reportCloseToParentReaders);
+  methods[6].selector = @selector(getRefCount);
+  methods[7].selector = @selector(incRef);
+  methods[8].selector = @selector(tryIncRef);
+  methods[9].selector = @selector(decRef);
+  methods[10].selector = @selector(ensureOpen);
+  methods[11].selector = @selector(isEqual:);
+  methods[12].selector = @selector(hash);
+  methods[13].selector = @selector(getTermVectorsWithInt:);
+  methods[14].selector = @selector(getTermVectorWithInt:withNSString:);
+  methods[15].selector = @selector(numDocs);
+  methods[16].selector = @selector(maxDoc);
+  methods[17].selector = @selector(numDeletedDocs);
+  methods[18].selector = @selector(documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:);
+  methods[19].selector = @selector(documentWithInt:);
+  methods[20].selector = @selector(documentWithInt:withJavaUtilSet:);
+  methods[21].selector = @selector(hasDeletions);
+  methods[22].selector = @selector(close);
+  methods[23].selector = @selector(doClose);
+  methods[24].selector = @selector(getContext);
+  methods[25].selector = @selector(leaves);
+  methods[26].selector = @selector(getCoreCacheKey);
+  methods[27].selector = @selector(getCombinedCoreAndDeletesKey);
+  methods[28].selector = @selector(docFreqWithOrgApacheLuceneIndexTerm:);
+  methods[29].selector = @selector(totalTermFreqWithOrgApacheLuceneIndexTerm:);
+  methods[30].selector = @selector(getSumDocFreqWithNSString:);
+  methods[31].selector = @selector(getDocCountWithNSString:);
+  methods[32].selector = @selector(getSumTotalTermFreqWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "closed_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "closedByChild_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "refCount_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "readerClosedListeners_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/index/IndexReader$ReaderClosedListener;>;", .constantValue.asLong = 0 },
-    { "parentReaders_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/index/IndexReader;>;", .constantValue.asLong = 0 },
+    { "closed_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "closedByChild_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "refCount_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "readerClosedListeners_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 28, -1 },
+    { "parentReaders_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 29, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.IndexReader$ReaderClosedListener;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexReader = { 2, "IndexReader", "org.apache.lucene.index", NULL, 0x401, 33, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "addReaderClosedListener", "LOrgApacheLuceneIndexIndexReader_ReaderClosedListener;", "removeReaderClosedListener", "registerParentReader", "LOrgApacheLuceneIndexIndexReader;", "notifyReaderClosedListeners", "LJavaLangThrowable;", "LJavaIoIOException;", "LOrgApacheLuceneStoreAlreadyClosedException;", "equals", "LNSObject;", "hashCode", "getTermVectors", "I", "getTermVector", "ILNSString;", "document", "ILOrgApacheLuceneIndexStoredFieldVisitor;", "ILJavaUtilSet;", "(ILjava/util/Set<Ljava/lang/String;>;)Lorg/apache/lucene/document/Document;", "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", "docFreq", "LOrgApacheLuceneIndexTerm;", "totalTermFreq", "getSumDocFreq", "LNSString;", "getDocCount", "getSumTotalTermFreq", "Ljava/util/Set<Lorg/apache/lucene/index/IndexReader$ReaderClosedListener;>;", "Ljava/util/Set<Lorg/apache/lucene/index/IndexReader;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexReader = { "IndexReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 33, 5, -1, 1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexReader;
 }
 
@@ -308,22 +348,22 @@ void OrgApacheLuceneIndexIndexReader_init(OrgApacheLuceneIndexIndexReader *self)
   if (!([self isKindOfClass:[OrgApacheLuceneIndexCompositeReader class]] || [self isKindOfClass:[OrgApacheLuceneIndexLeafReader class]])) @throw create_JavaLangError_initWithNSString_(@"IndexReader should never be directly extended, subclass LeafReader or CompositeReader instead.");
 }
 
-void OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithNSException_(OrgApacheLuceneIndexIndexReader *self, NSException *th) {
+void OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithJavaLangThrowable_(OrgApacheLuceneIndexIndexReader *self, JavaLangThrowable *th) {
   @synchronized(self->readerClosedListeners_) {
     for (id<OrgApacheLuceneIndexIndexReader_ReaderClosedListener> __strong listener in nil_chk(self->readerClosedListeners_)) {
       @try {
         [((id<OrgApacheLuceneIndexIndexReader_ReaderClosedListener>) nil_chk(listener)) onCloseWithOrgApacheLuceneIndexIndexReader:self];
       }
-      @catch (NSException *t) {
+      @catch (JavaLangThrowable *t) {
         if (th == nil) {
           th = t;
         }
         else {
-          [th addSuppressedWithNSException:t];
+          [th addSuppressedWithJavaLangThrowable:t];
         }
       }
     }
-    OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithNSException_(th);
+    OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithJavaLangThrowable_(th);
   }
 }
 
@@ -354,11 +394,11 @@ void OrgApacheLuceneIndexIndexReader_decRef(OrgApacheLuceneIndexIndexReader *sel
   jint rc = [self->refCount_ decrementAndGet];
   if (rc == 0) {
     self->closed_ = true;
-    NSException *throwable = nil;
+    JavaLangThrowable *throwable = nil;
     @try {
       [self doClose];
     }
-    @catch (NSException *th) {
+    @catch (JavaLangThrowable *th) {
       throwable = th;
     }
     @finally {
@@ -366,7 +406,7 @@ void OrgApacheLuceneIndexIndexReader_decRef(OrgApacheLuceneIndexIndexReader *sel
         OrgApacheLuceneIndexIndexReader_reportCloseToParentReaders(self);
       }
       @finally {
-        OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithNSException_(self, throwable);
+        OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithJavaLangThrowable_(self, throwable);
       }
     }
   }
@@ -393,10 +433,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexReader)
 @implementation OrgApacheLuceneIndexIndexReader_ReaderClosedListener
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "onCloseWithOrgApacheLuceneIndexIndexReader:", "onClose", "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexReader_ReaderClosedListener = { 2, "ReaderClosedListener", "org.apache.lucene.index", "IndexReader", 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(onCloseWithOrgApacheLuceneIndexIndexReader:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "onClose", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexReader_ReaderClosedListener = { "ReaderClosedListener", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x609, 1, 0, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexReader_ReaderClosedListener;
 }
 

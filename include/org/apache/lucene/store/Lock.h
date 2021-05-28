@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreLock
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreLock_) && (INCLUDE_ALL_OrgApacheLuceneStoreLock || defined(INCLUDE_OrgApacheLuceneStoreLock))
 #define OrgApacheLuceneStoreLock_
 
@@ -23,9 +29,9 @@
 /*!
  @brief An interprocess mutex lock.
  <p>Typical use might look like:<pre class="prettyprint">
- try (final Lock lock = directory.obtainLock("my.lock")) {
- // ... code to execute while locked ...
- }
+    try (final Lock lock = directory.obtainLock("my.lock")) {
+      // ... code to execute while locked ...
+    } 
  
 @endcode
  - seealso: Directory#obtainLock(String)
@@ -34,29 +40,28 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Releases exclusive access.
  <p>
- Note that exceptions thrown from close may require
- human intervention, as it may mean the lock was no
- longer valid, or that fs permissions prevent removal
- of the lock file, or other reasons.
+  Note that exceptions thrown from close may require
+  human intervention, as it may mean the lock was no
+  longer valid, or that fs permissions prevent removal
+  of the lock file, or other reasons. 
  <p>
   
- @throws LockReleaseFailedException optional specific exception) if 
- the lock could not be properly released.
+ @throw LockReleaseFailedExceptionoptional specific exception) if 
+          the lock could not be properly released.
  */
 - (void)close;
 
 /*!
- @brief Best effort check that this lock is still valid.
- Locks
- could become invalidated externally for a number of reasons,
- for example if a user deletes the lock file manually or
- when a network filesystem is in use. 
- @throws IOException if the lock is no longer valid.
+ @brief Best effort check that this lock is still valid.Locks
+  could become invalidated externally for a number of reasons,
+  for example if a user deletes the lock file manually or
+  when a network filesystem is in use.
+ @throw IOExceptionif the lock is no longer valid.
  */
 - (void)ensureValid;
 
@@ -70,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLock)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreLock")

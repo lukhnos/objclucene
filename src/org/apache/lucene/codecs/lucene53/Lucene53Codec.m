@@ -26,6 +26,10 @@
 #include "org/apache/lucene/codecs/perfield/PerFieldPostingsFormat.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene53/Lucene53Codec must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCodecsLucene53Lucene53Codec () {
  @public
   OrgApacheLuceneCodecsTermVectorsFormat *vectorsFormat_;
@@ -55,51 +59,43 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene53Lucene53Codec, defaultFormat_, 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene53Lucene53Codec, defaultDVFormat_, OrgApacheLuceneCodecsDocValuesFormat *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene53Lucene53Codec, normsFormat_, OrgApacheLuceneCodecsNormsFormat *)
 
-@interface OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 : OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat {
+@interface OrgApacheLuceneCodecsLucene53Lucene53Codec_1 : OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat {
  @public
   OrgApacheLuceneCodecsLucene53Lucene53Codec *this$0_;
 }
+
+- (instancetype)initWithOrgApacheLuceneCodecsLucene53Lucene53Codec:(OrgApacheLuceneCodecsLucene53Lucene53Codec *)outer$;
 
 - (OrgApacheLuceneCodecsPostingsFormat *)getPostingsFormatForFieldWithNSString:(NSString *)field;
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene53Lucene53Codec:(OrgApacheLuceneCodecsLucene53Lucene53Codec *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene53Lucene53Codec_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1, this$0_, OrgApacheLuceneCodecsLucene53Lucene53Codec *)
+__attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53Codec_1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec_1 *self, OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$);
 
-__attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *self, OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$);
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_1 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_1 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1)
-
-@interface OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 : OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat {
+@interface OrgApacheLuceneCodecsLucene53Lucene53Codec_2 : OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat {
  @public
   OrgApacheLuceneCodecsLucene53Lucene53Codec *this$0_;
 }
 
-- (OrgApacheLuceneCodecsDocValuesFormat *)getDocValuesFormatForFieldWithNSString:(NSString *)field;
-
 - (instancetype)initWithOrgApacheLuceneCodecsLucene53Lucene53Codec:(OrgApacheLuceneCodecsLucene53Lucene53Codec *)outer$;
+
+- (OrgApacheLuceneCodecsDocValuesFormat *)getDocValuesFormatForFieldWithNSString:(NSString *)field;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene53Lucene53Codec_2)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2, this$0_, OrgApacheLuceneCodecsLucene53Lucene53Codec *)
+__attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53Codec_2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec_2 *self, OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$);
 
-__attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *self, OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$);
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_2 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2)
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_2 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$);
 
 @implementation OrgApacheLuceneCodecsLucene53Lucene53Codec
 
@@ -175,35 +171,53 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lucene53Codec", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:", "Lucene53Codec", NULL, 0x1, NULL, NULL },
-    { "storedFieldsFormat", NULL, "Lorg.apache.lucene.codecs.StoredFieldsFormat;", 0x11, NULL, NULL },
-    { "termVectorsFormat", NULL, "Lorg.apache.lucene.codecs.TermVectorsFormat;", 0x11, NULL, NULL },
-    { "postingsFormat", NULL, "Lorg.apache.lucene.codecs.PostingsFormat;", 0x11, NULL, NULL },
-    { "fieldInfosFormat", NULL, "Lorg.apache.lucene.codecs.FieldInfosFormat;", 0x11, NULL, NULL },
-    { "segmentInfoFormat", NULL, "Lorg.apache.lucene.codecs.SegmentInfoFormat;", 0x11, NULL, NULL },
-    { "liveDocsFormat", NULL, "Lorg.apache.lucene.codecs.LiveDocsFormat;", 0x11, NULL, NULL },
-    { "compoundFormat", NULL, "Lorg.apache.lucene.codecs.CompoundFormat;", 0x11, NULL, NULL },
-    { "getPostingsFormatForFieldWithNSString:", "getPostingsFormatForField", "Lorg.apache.lucene.codecs.PostingsFormat;", 0x1, NULL, NULL },
-    { "getDocValuesFormatForFieldWithNSString:", "getDocValuesFormatForField", "Lorg.apache.lucene.codecs.DocValuesFormat;", 0x1, NULL, NULL },
-    { "docValuesFormat", NULL, "Lorg.apache.lucene.codecs.DocValuesFormat;", 0x11, NULL, NULL },
-    { "normsFormat", NULL, "Lorg.apache.lucene.codecs.NormsFormat;", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsFormat;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsFormat;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsPostingsFormat;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsFieldInfosFormat;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsSegmentInfoFormat;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsLiveDocsFormat;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCompoundFormat;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsPostingsFormat;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesFormat;", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesFormat;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsNormsFormat;", 0x11, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:);
+  methods[2].selector = @selector(storedFieldsFormat);
+  methods[3].selector = @selector(termVectorsFormat);
+  methods[4].selector = @selector(postingsFormat);
+  methods[5].selector = @selector(fieldInfosFormat);
+  methods[6].selector = @selector(segmentInfoFormat);
+  methods[7].selector = @selector(liveDocsFormat);
+  methods[8].selector = @selector(compoundFormat);
+  methods[9].selector = @selector(getPostingsFormatForFieldWithNSString:);
+  methods[10].selector = @selector(getDocValuesFormatForFieldWithNSString:);
+  methods[11].selector = @selector(docValuesFormat);
+  methods[12].selector = @selector(normsFormat);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "vectorsFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.TermVectorsFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldInfosFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.FieldInfosFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "segmentInfosFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.SegmentInfoFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "liveDocsFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.LiveDocsFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "compoundFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.CompoundFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "postingsFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.PostingsFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docValuesFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.DocValuesFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "storedFieldsFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.StoredFieldsFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "defaultFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.PostingsFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "defaultDVFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.DocValuesFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "normsFormat_", NULL, 0x12, "Lorg.apache.lucene.codecs.NormsFormat;", NULL, NULL, .constantValue.asLong = 0 },
+    { "vectorsFormat_", "LOrgApacheLuceneCodecsTermVectorsFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fieldInfosFormat_", "LOrgApacheLuceneCodecsFieldInfosFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "segmentInfosFormat_", "LOrgApacheLuceneCodecsSegmentInfoFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "liveDocsFormat_", "LOrgApacheLuceneCodecsLiveDocsFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "compoundFormat_", "LOrgApacheLuceneCodecsCompoundFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "postingsFormat_", "LOrgApacheLuceneCodecsPostingsFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "docValuesFormat_", "LOrgApacheLuceneCodecsDocValuesFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "storedFieldsFormat_", "LOrgApacheLuceneCodecsStoredFieldsFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "defaultFormat_", "LOrgApacheLuceneCodecsPostingsFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "defaultDVFormat_", "LOrgApacheLuceneCodecsDocValuesFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "normsFormat_", "LOrgApacheLuceneCodecsNormsFormat;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene53Lucene53Codec = { 2, "Lucene53Codec", "org.apache.lucene.codecs.lucene53", NULL, 0x1, 13, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode;", "getPostingsFormatForField", "LNSString;", "getDocValuesFormatForField" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene53Lucene53Codec = { "Lucene53Codec", "org.apache.lucene.codecs.lucene53", ptrTable, methods, fields, 7, 0x1, 13, 11, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene53Lucene53Codec;
 }
 
@@ -228,8 +242,8 @@ void OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLuc
   JreStrongAssignAndConsume(&self->segmentInfosFormat_, new_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init());
   JreStrongAssignAndConsume(&self->liveDocsFormat_, new_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_init());
   JreStrongAssignAndConsume(&self->compoundFormat_, new_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_init());
-  JreStrongAssignAndConsume(&self->postingsFormat_, new_OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(self));
-  JreStrongAssignAndConsume(&self->docValuesFormat_, new_OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(self));
+  JreStrongAssignAndConsume(&self->postingsFormat_, new_OrgApacheLuceneCodecsLucene53Lucene53Codec_1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(self));
+  JreStrongAssignAndConsume(&self->docValuesFormat_, new_OrgApacheLuceneCodecsLucene53Lucene53Codec_2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(self));
   JreStrongAssign(&self->defaultFormat_, OrgApacheLuceneCodecsPostingsFormat_forNameWithNSString_(@"Lucene50"));
   JreStrongAssign(&self->defaultDVFormat_, OrgApacheLuceneCodecsDocValuesFormat_forNameWithNSString_(@"Lucene50"));
   JreStrongAssignAndConsume(&self->normsFormat_, new_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init());
@@ -246,15 +260,15 @@ OrgApacheLuceneCodecsLucene53Lucene53Codec *create_OrgApacheLuceneCodecsLucene53
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53Codec)
 
-@implementation OrgApacheLuceneCodecsLucene53Lucene53Codec_$1
-
-- (OrgApacheLuceneCodecsPostingsFormat *)getPostingsFormatForFieldWithNSString:(NSString *)field {
-  return [this$0_ getPostingsFormatForFieldWithNSString:field];
-}
+@implementation OrgApacheLuceneCodecsLucene53Lucene53Codec_1
 
 - (instancetype)initWithOrgApacheLuceneCodecsLucene53Lucene53Codec:(OrgApacheLuceneCodecsLucene53Lucene53Codec *)outer$ {
-  OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(self, outer$);
+  OrgApacheLuceneCodecsLucene53Lucene53Codec_1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(self, outer$);
   return self;
+}
+
+- (OrgApacheLuceneCodecsPostingsFormat *)getPostingsFormatForFieldWithNSString:(NSString *)field {
+  return JreRetainedLocalValue([this$0_ getPostingsFormatForFieldWithNSString:field]);
 }
 
 - (void)dealloc {
@@ -263,43 +277,48 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53Codec)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getPostingsFormatForFieldWithNSString:", "getPostingsFormatForField", "Lorg.apache.lucene.codecs.PostingsFormat;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneCodecsLucene53Lucene53Codec:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsPostingsFormat;", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsLucene53Lucene53Codec:);
+  methods[1].selector = @selector(getPostingsFormatForFieldWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.lucene53.Lucene53Codec;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsLucene53Lucene53Codec;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 = { 2, "", "org.apache.lucene.codecs.lucene53", "Lucene53Codec", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneCodecsLucene53Lucene53Codec_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsLucene53Lucene53Codec;", "getPostingsFormatForField", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene53Lucene53Codec_1 = { "", "org.apache.lucene.codecs.lucene53", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsLucene53Lucene53Codec_1;
 }
 
 @end
 
-void OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *self, OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
+void OrgApacheLuceneCodecsLucene53Lucene53Codec_1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec_1 *self, OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_init(self);
 }
 
-OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
+OrgApacheLuceneCodecsLucene53Lucene53Codec_1 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_1, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
 }
 
-OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
+OrgApacheLuceneCodecsLucene53Lucene53Codec_1 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_1, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1)
-
-@implementation OrgApacheLuceneCodecsLucene53Lucene53Codec_$2
-
-- (OrgApacheLuceneCodecsDocValuesFormat *)getDocValuesFormatForFieldWithNSString:(NSString *)field {
-  return [this$0_ getDocValuesFormatForFieldWithNSString:field];
-}
+@implementation OrgApacheLuceneCodecsLucene53Lucene53Codec_2
 
 - (instancetype)initWithOrgApacheLuceneCodecsLucene53Lucene53Codec:(OrgApacheLuceneCodecsLucene53Lucene53Codec *)outer$ {
-  OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(self, outer$);
+  OrgApacheLuceneCodecsLucene53Lucene53Codec_2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(self, outer$);
   return self;
+}
+
+- (OrgApacheLuceneCodecsDocValuesFormat *)getDocValuesFormatForFieldWithNSString:(NSString *)field {
+  return JreRetainedLocalValue([this$0_ getDocValuesFormatForFieldWithNSString:field]);
 }
 
 - (void)dealloc {
@@ -308,30 +327,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDocValuesFormatForFieldWithNSString:", "getDocValuesFormatForField", "Lorg.apache.lucene.codecs.DocValuesFormat;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneCodecsLucene53Lucene53Codec:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesFormat;", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsLucene53Lucene53Codec:);
+  methods[1].selector = @selector(getDocValuesFormatForFieldWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.lucene53.Lucene53Codec;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsLucene53Lucene53Codec;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 = { 2, "", "org.apache.lucene.codecs.lucene53", "Lucene53Codec", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneCodecsLucene53Lucene53Codec_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsLucene53Lucene53Codec;", "getDocValuesFormatForField", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene53Lucene53Codec_2 = { "", "org.apache.lucene.codecs.lucene53", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsLucene53Lucene53Codec_2;
 }
 
 @end
 
-void OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *self, OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
+void OrgApacheLuceneCodecsLucene53Lucene53Codec_2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec_2 *self, OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_init(self);
 }
 
-OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
+OrgApacheLuceneCodecsLucene53Lucene53Codec_2 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_2, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
 }
 
-OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
+OrgApacheLuceneCodecsLucene53Lucene53Codec_2 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_2, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2)

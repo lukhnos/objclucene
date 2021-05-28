@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor))
 #define OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_
 
@@ -20,23 +26,24 @@
 #define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
+@class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief This processor is used to convert <code>FieldQueryNode</code>s to
- <code>NumericRangeQueryNode</code>s.
- It looks for
+ @brief This processor is used to convert <code>FieldQueryNode</code>s to 
+ <code>NumericRangeQueryNode</code>s.It looks for 
  <code>ConfigurationKeys.NUMERIC_CONFIG</code> set in the <code>FieldConfig</code> of
- every <code>FieldQueryNode</code> found. If
- <code>ConfigurationKeys.NUMERIC_CONFIG</code> is found, it considers that
- <code>FieldQueryNode</code> to be a numeric query and convert it to
+  every <code>FieldQueryNode</code> found.
+ If 
+ <code>ConfigurationKeys.NUMERIC_CONFIG</code> is found, it considers that 
+ <code>FieldQueryNode</code> to be a numeric query and convert it to 
  <code>NumericRangeQueryNode</code> with upper and lower inclusive and lower and
- upper equals to the value represented by the <code>FieldQueryNode</code> converted
- to <code>Number</code>. It means that <b>field:1</b> is converted to <b>field:[1
- TO 1]</b>. <br>
- <br>
- Note that <code>FieldQueryNode</code>s children of a
+  upper equals to the value represented by the <code>FieldQueryNode</code> converted
+  to <code>Number</code>. It means that <b>field:1</b> is converted to <b>field:[1
+  TO 1]</b>. <br>
+  <br>
+  Note that <code>FieldQueryNode</code>s children of a 
  <code>RangeQueryNode</code> are ignored.
  - seealso: ConfigurationKeys#NUMERIC_CONFIG
  - seealso: FieldQueryNode
@@ -50,7 +57,7 @@
 /*!
  @brief Constructs a <code>NumericQueryNodeProcessor</code> object.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Protected
 
@@ -60,18 +67,26 @@
 
 - (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor")

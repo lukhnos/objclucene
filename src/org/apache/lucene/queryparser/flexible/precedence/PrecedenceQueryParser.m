@@ -5,11 +5,14 @@
 
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryParserHelper.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
 #include "org/apache/lucene/queryparser/flexible/precedence/PrecedenceQueryParser.h"
 #include "org/apache/lucene/queryparser/flexible/precedence/processors/PrecedenceQueryNodeProcessorPipeline.h"
 #include "org/apache/lucene/queryparser/flexible/standard/StandardQueryParser.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/precedence/PrecedenceQueryParser must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser
 
@@ -26,11 +29,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PrecedenceQueryParser", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:", "PrecedenceQueryParser", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser = { 2, "PrecedenceQueryParser", "org.apache.lucene.queryparser.flexible.precedence", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser = { "PrecedenceQueryParser", "org.apache.lucene.queryparser.flexible.precedence", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser;
 }
 

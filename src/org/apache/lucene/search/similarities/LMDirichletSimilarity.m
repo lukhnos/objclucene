@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/similarities/LMDirichletSimilarity.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Float.h"
@@ -13,6 +14,10 @@
 #include "org/apache/lucene/search/similarities/BasicStats.h"
 #include "org/apache/lucene/search/similarities/LMDirichletSimilarity.h"
 #include "org/apache/lucene/search/similarities/LMSimilarity.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/similarities/LMDirichletSimilarity must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity () {
  @public
@@ -76,24 +81,37 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 }
 
 - (NSString *)getName {
-  return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Dirichlet(%f)", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangFloat_valueOfWithFloat_([self getMu]) } count:1 type:NSObject_class_()]);
+  return NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Dirichlet(%f)", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangFloat_valueOfWithFloat_([self getMu]) } count:1 type:NSObject_class_()]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:withFloat:", "LMDirichletSimilarity", NULL, 0x1, NULL, NULL },
-    { "initWithFloat:", "LMDirichletSimilarity", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:", "LMDirichletSimilarity", NULL, 0x1, NULL, NULL },
-    { "init", "LMDirichletSimilarity", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x4, NULL, NULL },
-    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" },
-    { "getMu", NULL, "F", 0x1, NULL, NULL },
-    { "getName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 5, 6, -1, 7, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:withFloat:);
+  methods[1].selector = @selector(initWithFloat:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:);
+  methods[3].selector = @selector(init);
+  methods[4].selector = @selector(scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:);
+  methods[5].selector = @selector(explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:);
+  methods[6].selector = @selector(getMu);
+  methods[7].selector = @selector(getName);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "mu_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "mu_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity = { 2, "LMDirichletSimilarity", "org.apache.lucene.search.similarities", NULL, 0x1, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;F", "F", "LOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;", "score", "LOrgApacheLuceneSearchSimilaritiesBasicStats;FF", "explain", "LJavaUtilList;LOrgApacheLuceneSearchSimilaritiesBasicStats;IFF", "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity = { "LMDirichletSimilarity", "org.apache.lucene.search.similarities", ptrTable, methods, fields, 7, 0x1, 8, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity;
 }
 

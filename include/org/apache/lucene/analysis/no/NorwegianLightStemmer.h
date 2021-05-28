@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisNoNorwegianLightStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNoNorwegianLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisNoNorwegianLightStemmer))
 #define OrgApacheLuceneAnalysisNoNorwegianLightStemmer_
 
@@ -21,30 +27,32 @@
 /*!
  @brief Light Stemmer for Norwegian.
  <p>
- Parts of this stemmer is adapted from SwedishLightStemFilter, except
- that while the Swedish one has a pre-defined rule set and a corresponding
- corpus to validate against whereas the Norwegian one is hand crafted.
+  Parts of this stemmer is adapted from SwedishLightStemFilter, except
+  that while the Swedish one has a pre-defined rule set and a corresponding
+  corpus to validate against whereas the Norwegian one is hand crafted.
  */
 @interface OrgApacheLuceneAnalysisNoNorwegianLightStemmer : NSObject {
  @public
   jboolean useBokmaal_;
   jboolean useNynorsk_;
 }
-
-+ (jint)BOKMAAL;
-
-+ (jint)NYNORSK;
+@property (readonly, class) jint BOKMAAL NS_SWIFT_NAME(BOKMAAL);
+@property (readonly, class) jint NYNORSK NS_SWIFT_NAME(NYNORSK);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new NorwegianLightStemmer
- @param flags set to <code>BOKMAAL</code>, <code>NYNORSK</code>, or both.
+ @param flags set to <code>BOKMAAL</code> , <code>NYNORSK</code> , or both.
  */
-- (instancetype)initWithInt:(jint)flags;
+- (instancetype __nonnull)initWithInt:(jint)flags;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -53,14 +61,14 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNoNorwegianLightStemmer)
 /*!
  @brief Constant to remove Bokmål-specific endings
  */
-inline jint OrgApacheLuceneAnalysisNoNorwegianLightStemmer_get_BOKMAAL();
+inline jint OrgApacheLuceneAnalysisNoNorwegianLightStemmer_get_BOKMAAL(void);
 #define OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNoNorwegianLightStemmer, BOKMAAL, jint)
 
 /*!
  @brief Constant to remove Nynorsk-specific endings
  */
-inline jint OrgApacheLuceneAnalysisNoNorwegianLightStemmer_get_NYNORSK();
+inline jint OrgApacheLuceneAnalysisNoNorwegianLightStemmer_get_NYNORSK(void);
 #define OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNoNorwegianLightStemmer, NYNORSK, jint)
 
@@ -74,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNoNorwegianLightStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianLightStemmer")

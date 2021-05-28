@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_
 
@@ -27,15 +33,14 @@
 
 /*!
  @brief Returns the value of <code>IndexReader.maxDoc()</code>
- for every document.
- This is the number of documents
- including deletions.
+  for every document.This is the number of documents
+  including deletions.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -57,12 +62,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSou
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource")

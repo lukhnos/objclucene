@@ -8,6 +8,10 @@
 #include "java/lang/System.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/StemmerUtil must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisUtilStemmerUtil ()
 
 /*!
@@ -19,9 +23,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisUtilStemmerUtil_init(OrgApacheLuceneAnalysisUtilStemmerUtil *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisUtilStemmerUtil *new_OrgApacheLuceneAnalysisUtilStemmerUtil_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisUtilStemmerUtil *new_OrgApacheLuceneAnalysisUtilStemmerUtil_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisUtilStemmerUtil *create_OrgApacheLuceneAnalysisUtilStemmerUtil_init();
+__attribute__((unused)) static OrgApacheLuceneAnalysisUtilStemmerUtil *create_OrgApacheLuceneAnalysisUtilStemmerUtil_init(void);
 
 @implementation OrgApacheLuceneAnalysisUtilStemmerUtil
 
@@ -64,15 +68,26 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "StemmerUtil", NULL, 0x2, NULL, NULL },
-    { "startsWithWithCharArray:withInt:withNSString:", "startsWith", "Z", 0x9, NULL, NULL },
-    { "endsWithWithCharArray:withInt:withNSString:", "endsWith", "Z", 0x9, NULL, NULL },
-    { "endsWithWithCharArray:withInt:withCharArray:", "endsWith", "Z", 0x9, NULL, NULL },
-    { "delete__WithCharArray:withInt:withInt:", "delete", "I", 0x9, NULL, NULL },
-    { "deleteNWithCharArray:withInt:withInt:withInt:", "deleteN", "I", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 2, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 6, 7, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilStemmerUtil = { 2, "StemmerUtil", "org.apache.lucene.analysis.util", NULL, 0x1, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(startsWithWithCharArray:withInt:withNSString:);
+  methods[2].selector = @selector(endsWithWithCharArray:withInt:withNSString:);
+  methods[3].selector = @selector(endsWithWithCharArray:withInt:withCharArray:);
+  methods[4].selector = @selector(delete__WithCharArray:withInt:withInt:);
+  methods[5].selector = @selector(deleteNWithCharArray:withInt:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "startsWith", "[CILNSString;", "endsWith", "[CI[C", "delete", "[CII", "deleteN", "[CIII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilStemmerUtil = { "StemmerUtil", "org.apache.lucene.analysis.util", ptrTable, methods, NULL, 7, 0x1, 6, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisUtilStemmerUtil;
 }
 
@@ -92,7 +107,7 @@ OrgApacheLuceneAnalysisUtilStemmerUtil *create_OrgApacheLuceneAnalysisUtilStemme
 
 jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_startsWithWithCharArray_withInt_withNSString_(IOSCharArray *s, jint len, NSString *prefix) {
   OrgApacheLuceneAnalysisUtilStemmerUtil_initialize();
-  jint prefixLen = ((jint) [((NSString *) nil_chk(prefix)) length]);
+  jint prefixLen = [((NSString *) nil_chk(prefix)) java_length];
   if (prefixLen > len) return false;
   for (jint i = 0; i < prefixLen; i++) if (IOSCharArray_Get(nil_chk(s), i) != [prefix charAtWithInt:i]) return false;
   return true;
@@ -100,7 +115,7 @@ jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_startsWithWithCharArray_withInt_
 
 jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(IOSCharArray *s, jint len, NSString *suffix) {
   OrgApacheLuceneAnalysisUtilStemmerUtil_initialize();
-  jint suffixLen = ((jint) [((NSString *) nil_chk(suffix)) length]);
+  jint suffixLen = [((NSString *) nil_chk(suffix)) java_length];
   if (suffixLen > len) return false;
   for (jint i = suffixLen - 1; i >= 0; i--) if (IOSCharArray_Get(nil_chk(s), len - (suffixLen - i)) != [suffix charAtWithInt:i]) return false;
   return true;
@@ -116,7 +131,7 @@ jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_wi
 
 jint OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(IOSCharArray *s, jint pos, jint len) {
   OrgApacheLuceneAnalysisUtilStemmerUtil_initialize();
-  JreAssert((pos < len), (@"org/apache/lucene/analysis/util/StemmerUtil.java:94 condition failed: assert pos < len;"));
+  JreAssert(pos < len, @"org/apache/lucene/analysis/util/StemmerUtil.java:94 condition failed: assert pos < len;");
   if (pos < len - 1) {
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(s, pos + 1, s, pos, len - pos - 1);
   }
@@ -125,7 +140,7 @@ jint OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withIn
 
 jint OrgApacheLuceneAnalysisUtilStemmerUtil_deleteNWithCharArray_withInt_withInt_withInt_(IOSCharArray *s, jint pos, jint len, jint nChars) {
   OrgApacheLuceneAnalysisUtilStemmerUtil_initialize();
-  JreAssert((pos + nChars <= len), (@"org/apache/lucene/analysis/util/StemmerUtil.java:111 condition failed: assert pos + nChars <= len;"));
+  JreAssert(pos + nChars <= len, @"org/apache/lucene/analysis/util/StemmerUtil.java:111 condition failed: assert pos + nChars <= len;");
   if (pos + nChars < len) {
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(s, pos + nChars, s, pos, len - pos - nChars);
   }

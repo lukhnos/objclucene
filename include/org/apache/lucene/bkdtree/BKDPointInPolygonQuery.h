@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery || defined(INCLUDE_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery))
 #define OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_
 
@@ -27,10 +33,9 @@
 /*!
  @brief Finds all previously indexed points that fall within the specified polygon.
  <p>The field must be indexed with <code>BKDTreeDocValuesFormat</code>, and <code>BKDPointField</code> added per document.
- <p>Because this implementation cannot intersect each cell with the polygon, it will be costly especially for large polygons, as every
- possible point must be checked.
+   <p>Because this implementation cannot intersect each cell with the polygon, it will be costly especially for large polygons, as every
+    possible point must be checked.  
  <p><b>NOTE</b>: for fastest performance, this allocates FixedBitSet(maxDoc) for each segment.  The score of each hit is the query boost.
-  
  */
 @interface OrgApacheLuceneBkdtreeBKDPointInPolygonQuery : OrgApacheLuceneSearchQuery {
  @public
@@ -48,9 +53,9 @@
 /*!
  @brief The lats/lons must be clockwise or counter-clockwise.
  */
-- (instancetype)initWithNSString:(NSString *)field
-                 withDoubleArray:(IOSDoubleArray *)polyLats
-                 withDoubleArray:(IOSDoubleArray *)polyLons;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                           withDoubleArray:(IOSDoubleArray *)polyLats
+                           withDoubleArray:(IOSDoubleArray *)polyLons;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -60,6 +65,10 @@
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -79,4 +88,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery")

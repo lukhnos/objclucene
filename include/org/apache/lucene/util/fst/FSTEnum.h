@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstFSTEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstFSTEnum_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstFSTEnum || defined(INCLUDE_OrgApacheLuceneUtilFstFSTEnum))
 #define OrgApacheLuceneUtilFstFSTEnum_
 
@@ -40,10 +46,10 @@
 
 /*!
  @brief doFloor controls the behavior of advance: if it's true
- doFloor is true, advance positions to the biggest
- term before target.
+   doFloor is true, advance positions to the biggest
+   term before target.
  */
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst;
 
 - (void)doNext;
 
@@ -70,11 +76,15 @@
 
 /*!
  @brief Rewinds enum state to match the shared prefix between
- current term and target term
+   current term and target term
  */
 - (void)rewindPrefix;
 
 - (void)setCurrentLabelWithInt:(jint)label;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -87,10 +97,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFSTEnum, NO_OUTPUT_, id)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFSTEnum, fstReader_, OrgApacheLuceneUtilFstFST_BytesReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFSTEnum, scratchArc_, OrgApacheLuceneUtilFstFST_Arc *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstFSTEnum_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFSTEnum *self, OrgApacheLuceneUtilFstFST *fst);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstFSTEnum_initPackagePrivateWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFSTEnum *self, OrgApacheLuceneUtilFstFST *fst);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFSTEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstFSTEnum")

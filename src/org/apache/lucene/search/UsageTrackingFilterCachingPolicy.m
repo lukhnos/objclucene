@@ -3,11 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/UsageTrackingFilterCachingPolicy.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/lang/Integer.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/DocIdSet.h"
 #include "org/apache/lucene/search/Filter.h"
@@ -17,6 +14,10 @@
 #include "org/apache/lucene/search/QueryWrapperFilter.h"
 #include "org/apache/lucene/search/UsageTrackingFilterCachingPolicy.h"
 #include "org/apache/lucene/util/FrequencyTrackingRingBuffer.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/UsageTrackingFilterCachingPolicy must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy () {
  @public
@@ -38,7 +39,7 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy, segmentPolicy_, OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy, recentlyUsedFilters_, OrgApacheLuceneUtilFrequencyTrackingRingBuffer *)
 
-inline jint OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_get_SENTINEL();
+inline jint OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_get_SENTINEL(void);
 #define OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_SENTINEL ((jint) 0x80000000)
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy, SENTINEL, jint)
 
@@ -118,24 +119,36 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "isCostlyWithOrgApacheLuceneSearchFilter:", "isCostly", "Z", 0x8, NULL, NULL },
-    { "isCheapToCacheWithOrgApacheLuceneSearchDocIdSet:", "isCheapToCache", "Z", 0x8, NULL, NULL },
-    { "initWithFloat:withInt:withInt:withInt:withInt:", "UsageTrackingFilterCachingPolicy", NULL, 0x1, NULL, NULL },
-    { "init", "UsageTrackingFilterCachingPolicy", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments:withInt:withInt:withInt:withInt:", "UsageTrackingFilterCachingPolicy", NULL, 0x2, NULL, NULL },
-    { "onUseWithOrgApacheLuceneSearchFilter:", "onUse", "V", 0x1, NULL, NULL },
-    { "shouldCacheWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchDocIdSet:", "shouldCache", "Z", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x8, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x8, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, 9, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(isCostlyWithOrgApacheLuceneSearchFilter:);
+  methods[1].selector = @selector(isCheapToCacheWithOrgApacheLuceneSearchDocIdSet:);
+  methods[2].selector = @selector(initWithFloat:withInt:withInt:withInt:withInt:);
+  methods[3].selector = @selector(init);
+  methods[4].selector = @selector(initWithOrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments:withInt:withInt:withInt:withInt:);
+  methods[5].selector = @selector(onUseWithOrgApacheLuceneSearchFilter:);
+  methods[6].selector = @selector(shouldCacheWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchDocIdSet:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "SENTINEL", "SENTINEL", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_SENTINEL },
-    { "segmentPolicy_", NULL, 0x12, "Lorg.apache.lucene.search.FilterCachingPolicy$CacheOnLargeSegments;", NULL, NULL, .constantValue.asLong = 0 },
-    { "recentlyUsedFilters_", NULL, 0x12, "Lorg.apache.lucene.util.FrequencyTrackingRingBuffer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minFrequencyCostlyFilters_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minFrequencyCheapFilters_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minFrequencyOtherFilters_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "SENTINEL", "I", .constantValue.asInt = OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_SENTINEL, 0x1a, -1, -1, -1, -1 },
+    { "segmentPolicy_", "LOrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "recentlyUsedFilters_", "LOrgApacheLuceneUtilFrequencyTrackingRingBuffer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minFrequencyCostlyFilters_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minFrequencyCheapFilters_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minFrequencyOtherFilters_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy = { 2, "UsageTrackingFilterCachingPolicy", "org.apache.lucene.search", NULL, 0x11, 7, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "isCostly", "LOrgApacheLuceneSearchFilter;", "isCheapToCache", "LOrgApacheLuceneSearchDocIdSet;", "FIIII", "LOrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments;IIII", "onUse", "shouldCache", "LOrgApacheLuceneSearchFilter;LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneSearchDocIdSet;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy = { "UsageTrackingFilterCachingPolicy", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 7, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy;
 }
 

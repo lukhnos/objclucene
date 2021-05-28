@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
@@ -23,6 +22,10 @@
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/DocTermOrdsRangeFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchDocTermOrdsRangeFilter ()
 
 - (instancetype)initWithNSString:(NSString *)field
@@ -35,57 +38,53 @@
 
 __attribute__((unused)) static void OrgApacheLuceneSearchDocTermOrdsRangeFilter_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(OrgApacheLuceneSearchDocTermOrdsRangeFilter *self, NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper);
 
-@interface OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1 : OrgApacheLuceneSearchDocTermOrdsRangeFilter
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchDocTermOrdsRangeFilter__Annotations$0(void);
+
+@interface OrgApacheLuceneSearchDocTermOrdsRangeFilter_1 : OrgApacheLuceneSearchDocTermOrdsRangeFilter
+
+- (instancetype)initWithNSString:(NSString *)field
+ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerVal
+ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperVal
+                     withBoolean:(jboolean)includeLower
+                     withBoolean:(jboolean)includeUpper;
 
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
-- (instancetype)initWithNSString:(NSString *)arg$0
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)arg$1
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)arg$2
-                     withBoolean:(jboolean)arg$3
-                     withBoolean:(jboolean)arg$4;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocTermOrdsRangeFilter_1)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1 *self, NSString *arg$0, OrgApacheLuceneUtilBytesRef *arg$1, OrgApacheLuceneUtilBytesRef *arg$2, jboolean arg$3, jboolean arg$4);
+__attribute__((unused)) static void OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(OrgApacheLuceneSearchDocTermOrdsRangeFilter_1 *self, NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper);
 
-__attribute__((unused)) static OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1 *new_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *arg$0, OrgApacheLuceneUtilBytesRef *arg$1, OrgApacheLuceneUtilBytesRef *arg$2, jboolean arg$3, jboolean arg$4) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchDocTermOrdsRangeFilter_1 *new_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1 *create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *arg$0, OrgApacheLuceneUtilBytesRef *arg$1, OrgApacheLuceneUtilBytesRef *arg$2, jboolean arg$3, jboolean arg$4);
+__attribute__((unused)) static OrgApacheLuceneSearchDocTermOrdsRangeFilter_1 *create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1)
-
-@interface OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1 : OrgApacheLuceneSearchDocValuesDocIdSet {
+@interface OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1 : OrgApacheLuceneSearchDocValuesDocIdSet {
  @public
   OrgApacheLuceneIndexSortedSetDocValues *val$docTermOrds_;
   jlong val$inclusiveUpperPoint_;
   jlong val$inclusiveLowerPoint_;
 }
 
-- (jboolean)matchDocWithInt:(jint)doc;
-
 - (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)capture$0
                                                       withLong:(jlong)capture$1
                                                       withLong:(jlong)capture$2
-                                                       withInt:(jint)arg$0
-                                   withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)arg$1;
+                                                       withInt:(jint)maxDoc
+                                   withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
+
+- (jboolean)matchDocWithInt:(jint)doc;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1, val$docTermOrds_, OrgApacheLuceneIndexSortedSetDocValues *)
+__attribute__((unused)) static void OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1 *self, OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint maxDoc, id<OrgApacheLuceneUtilBits> acceptDocs);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1 *self, OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1);
+__attribute__((unused)) static OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1 *new_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint maxDoc, id<OrgApacheLuceneUtilBits> acceptDocs) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1 *new_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1 *create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1 *create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint maxDoc, id<OrgApacheLuceneUtilBits> acceptDocs);
 
 @implementation OrgApacheLuceneSearchDocTermOrdsRangeFilter
 
@@ -119,7 +118,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1)
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return true;
+  if (JreObjectEqualsEquals(self, o)) return true;
   if ([super isEqual:o] == false) return false;
   OrgApacheLuceneSearchDocTermOrdsRangeFilter *other = (OrgApacheLuceneSearchDocTermOrdsRangeFilter *) cast_chk(o, [OrgApacheLuceneSearchDocTermOrdsRangeFilter class]);
   if (![((NSString *) nil_chk(self->field_)) isEqual:((OrgApacheLuceneSearchDocTermOrdsRangeFilter *) nil_chk(other))->field_] || self->includeLower_ != other->includeLower_ || self->includeUpper_ != other->includeUpper_) {
@@ -160,10 +159,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1)
   return upperVal_;
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(field_);
   RELEASE_(lowerVal_);
@@ -172,27 +167,43 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:", "DocTermOrdsRangeFilter", NULL, 0x2, NULL, NULL },
-    { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:", "getDocIdSet", "Lorg.apache.lucene.search.DocIdSet;", 0x401, "Ljava.io.IOException;", NULL },
-    { "newBytesRefRangeWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:", "newBytesRefRange", "Lorg.apache.lucene.search.DocTermOrdsRangeFilter;", 0x9, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x11, NULL, NULL },
-    { "hash", "hashCode", "I", 0x11, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "includesLower", NULL, "Z", 0x1, NULL, NULL },
-    { "includesUpper", NULL, "Z", 0x1, NULL, NULL },
-    { "getLowerVal", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getUpperVal", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x401, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocTermOrdsRangeFilter;", 0x9, 4, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 9, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:);
+  methods[1].selector = @selector(getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:);
+  methods[2].selector = @selector(newBytesRefRangeWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:);
+  methods[3].selector = @selector(toStringWithNSString:);
+  methods[4].selector = @selector(isEqual:);
+  methods[5].selector = @selector(hash);
+  methods[6].selector = @selector(getField);
+  methods[7].selector = @selector(includesLower);
+  methods[8].selector = @selector(includesUpper);
+  methods[9].selector = @selector(getLowerVal);
+  methods[10].selector = @selector(getUpperVal);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lowerVal_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "upperVal_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "includeLower_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "includeUpper_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "lowerVal_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "upperVal_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "includeLower_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "includeUpper_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocTermOrdsRangeFilter = { 2, "DocTermOrdsRangeFilter", "org.apache.lucene.search", NULL, 0x401, 11, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;ZZ", "getDocIdSet", "LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneUtilBits;", "LJavaIoIOException;", "newBytesRefRange", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", (void *)&OrgApacheLuceneSearchDocTermOrdsRangeFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocTermOrdsRangeFilter = { "DocTermOrdsRangeFilter", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 11, 5, -1, -1, -1, -1, 10 };
   return &_OrgApacheLuceneSearchDocTermOrdsRangeFilter;
 }
 
@@ -209,19 +220,33 @@ void OrgApacheLuceneSearchDocTermOrdsRangeFilter_initWithNSString_withOrgApacheL
 
 OrgApacheLuceneSearchDocTermOrdsRangeFilter *OrgApacheLuceneSearchDocTermOrdsRangeFilter_newBytesRefRangeWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper) {
   OrgApacheLuceneSearchDocTermOrdsRangeFilter_initialize();
-  return create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(field, lowerVal, upperVal, includeLower, includeUpper);
+  return create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(field, lowerVal, upperVal, includeLower, includeUpper);
+}
+
+IOSObjectArray *OrgApacheLuceneSearchDocTermOrdsRangeFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocTermOrdsRangeFilter)
 
-@implementation OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1
+@implementation OrgApacheLuceneSearchDocTermOrdsRangeFilter_1
+
+- (instancetype)initWithNSString:(NSString *)field
+ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerVal
+ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperVal
+                     withBoolean:(jboolean)includeLower
+                     withBoolean:(jboolean)includeUpper {
+  OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(self, field, lowerVal, upperVal, includeLower, includeUpper);
+  return self;
+}
 
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
   OrgApacheLuceneIndexSortedSetDocValues *docTermOrds = OrgApacheLuceneIndexDocValues_getSortedSetWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field_);
   jlong lowerPoint = lowerVal_ == nil ? -1 : [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(docTermOrds)) lookupTermWithOrgApacheLuceneUtilBytesRef:lowerVal_];
   jlong upperPoint = upperVal_ == nil ? -1 : [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(docTermOrds)) lookupTermWithOrgApacheLuceneUtilBytesRef:upperVal_];
-  jlong inclusiveLowerPoint, inclusiveUpperPoint;
+  jlong inclusiveLowerPoint;
+  jlong inclusiveUpperPoint;
   if (lowerPoint == -1 && lowerVal_ == nil) {
     inclusiveLowerPoint = 0;
   }
@@ -247,48 +272,52 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocTermOrdsRangeFilter)
     inclusiveUpperPoint = -upperPoint - 2;
   }
   if (inclusiveUpperPoint < 0 || inclusiveLowerPoint > inclusiveUpperPoint) {
-    return nil;
+    return JreRetainedLocalValue(nil);
   }
-  JreAssert((inclusiveLowerPoint >= 0 && inclusiveUpperPoint >= 0), (@"org/apache/lucene/search/DocTermOrdsRangeFilter.java:98 condition failed: assert inclusiveLowerPoint >= 0 && inclusiveUpperPoint >= 0;"));
-  return create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(docTermOrds, inclusiveUpperPoint, inclusiveLowerPoint, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], acceptDocs);
-}
-
-- (instancetype)initWithNSString:(NSString *)arg$0
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)arg$1
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)arg$2
-                     withBoolean:(jboolean)arg$3
-                     withBoolean:(jboolean)arg$4 {
-  OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(self, arg$0, arg$1, arg$2, arg$3, arg$4);
-  return self;
+  JreAssert(inclusiveLowerPoint >= 0 && inclusiveUpperPoint >= 0, @"org/apache/lucene/search/DocTermOrdsRangeFilter.java:98 condition failed: assert inclusiveLowerPoint >= 0 && inclusiveUpperPoint >= 0;");
+  return create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(docTermOrds, inclusiveUpperPoint, inclusiveLowerPoint, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], acceptDocs);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:", "getDocIdSet", "Lorg.apache.lucene.search.DocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchDocTermOrdsRangeFilter", "newBytesRefRangeWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1 = { 2, "", "org.apache.lucene.search", "DocTermOrdsRangeFilter", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:);
+  methods[1].selector = @selector(getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;ZZ", "getDocIdSet", "LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneUtilBits;", "LJavaIoIOException;", "LOrgApacheLuceneSearchDocTermOrdsRangeFilter;", "newBytesRefRangeWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocTermOrdsRangeFilter_1 = { "", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1 *self, NSString *arg$0, OrgApacheLuceneUtilBytesRef *arg$1, OrgApacheLuceneUtilBytesRef *arg$2, jboolean arg$3, jboolean arg$4) {
-  OrgApacheLuceneSearchDocTermOrdsRangeFilter_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(self, arg$0, arg$1, arg$2, arg$3, arg$4);
+void OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(OrgApacheLuceneSearchDocTermOrdsRangeFilter_1 *self, NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper) {
+  OrgApacheLuceneSearchDocTermOrdsRangeFilter_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(self, field, lowerVal, upperVal, includeLower, includeUpper);
 }
 
-OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1 *new_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *arg$0, OrgApacheLuceneUtilBytesRef *arg$1, OrgApacheLuceneUtilBytesRef *arg$2, jboolean arg$3, jboolean arg$4) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1, initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_, arg$0, arg$1, arg$2, arg$3, arg$4)
+OrgApacheLuceneSearchDocTermOrdsRangeFilter_1 *new_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocTermOrdsRangeFilter_1, initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_, field, lowerVal, upperVal, includeLower, includeUpper)
 }
 
-OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1 *create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *arg$0, OrgApacheLuceneUtilBytesRef *arg$1, OrgApacheLuceneUtilBytesRef *arg$2, jboolean arg$3, jboolean arg$4) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1, initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_, arg$0, arg$1, arg$2, arg$3, arg$4)
+OrgApacheLuceneSearchDocTermOrdsRangeFilter_1 *create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocTermOrdsRangeFilter_1, initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_, field, lowerVal, upperVal, includeLower, includeUpper)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1)
+@implementation OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1
 
-@implementation OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1
+- (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)capture$0
+                                                      withLong:(jlong)capture$1
+                                                      withLong:(jlong)capture$2
+                                                       withInt:(jint)maxDoc
+                                   withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
+  OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(self, capture$0, capture$1, capture$2, maxDoc, acceptDocs);
+  return self;
+}
 
 - (jboolean)matchDocWithInt:(jint)doc {
   [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(val$docTermOrds_)) setDocumentWithInt:doc];
@@ -304,50 +333,45 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1)
   return false;
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)capture$0
-                                                      withLong:(jlong)capture$1
-                                                      withLong:(jlong)capture$2
-                                                       withInt:(jint)arg$0
-                                   withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)arg$1 {
-  OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(self, capture$0, capture$1, capture$2, arg$0, arg$1);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(val$docTermOrds_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "matchDocWithInt:", "matchDoc", "Z", 0x14, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexSortedSetDocValues:withLong:withLong:withInt:withOrgApacheLuceneUtilBits:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x14, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSortedSetDocValues:withLong:withLong:withInt:withOrgApacheLuceneUtilBits:);
+  methods[1].selector = @selector(matchDocWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$docTermOrds_", NULL, 0x1012, "Lorg.apache.lucene.index.SortedSetDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$inclusiveUpperPoint_", NULL, 0x1012, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$inclusiveLowerPoint_", NULL, 0x1012, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$docTermOrds_", "LOrgApacheLuceneIndexSortedSetDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$inclusiveUpperPoint_", "J", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$inclusiveLowerPoint_", "J", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1", "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1 = { 2, "", "org.apache.lucene.search", "DocTermOrdsRangeFilter$", 0x8008, 2, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSortedSetDocValues;JJILOrgApacheLuceneUtilBits;", "matchDoc", "I", "LOrgApacheLuceneSearchDocTermOrdsRangeFilter_1;", "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 3, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1 *self, OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) {
+void OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1 *self, OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint maxDoc, id<OrgApacheLuceneUtilBits> acceptDocs) {
   JreStrongAssign(&self->val$docTermOrds_, capture$0);
   self->val$inclusiveUpperPoint_ = capture$1;
   self->val$inclusiveLowerPoint_ = capture$2;
-  OrgApacheLuceneSearchDocValuesDocIdSet_initWithInt_withOrgApacheLuceneUtilBits_(self, arg$0, arg$1);
+  OrgApacheLuceneSearchDocValuesDocIdSet_initWithInt_withOrgApacheLuceneUtilBits_(self, maxDoc, acceptDocs);
 }
 
-OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1 *new_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1, initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_, capture$0, capture$1, capture$2, arg$0, arg$1)
+OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1 *new_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint maxDoc, id<OrgApacheLuceneUtilBits> acceptDocs) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1, initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_, capture$0, capture$1, capture$2, maxDoc, acceptDocs)
 }
 
-OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1 *create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1, initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_, capture$0, capture$1, capture$2, arg$0, arg$1)
+OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1 *create_OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, jint maxDoc, id<OrgApacheLuceneUtilBits> acceptDocs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocTermOrdsRangeFilter_1_1, initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withInt_withOrgApacheLuceneUtilBits_, capture$0, capture$1, capture$2, maxDoc, acceptDocs)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1)

@@ -6,7 +6,7 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
+#include "java/io/Reader.h"
 #include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/System.h"
@@ -18,17 +18,22 @@
 #include "org/apache/lucene/analysis/tokenattributes/PositionLengthAttribute.h"
 #include "org/apache/lucene/analysis/util/CharacterUtils.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ngram/NGramTokenizer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisNgramNGramTokenizer () {
  @public
   OrgApacheLuceneAnalysisUtilCharacterUtils *charUtils_;
   OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *charBuffer_;
   IOSIntArray *buffer_;
-  jint bufferStart_, bufferEnd_;
+  jint bufferStart_;
+  jint bufferEnd_;
   jint offset_;
   jint gramSize_;
-  jint minGram_, maxGram_;
+  jint minGram_;
+  jint maxGram_;
   jboolean exhausted_;
   jint lastCheckedChar_;
   jint lastNonTokenChar_;
@@ -131,7 +136,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     if (gramSize_ > maxGram_ || (bufferStart_ + gramSize_) > bufferEnd_) {
       if (bufferStart_ + 1 + minGram_ > bufferEnd_) {
-        JreAssert((exhausted_), (@"org/apache/lucene/analysis/ngram/NGramTokenizer.java:155 condition failed: assert exhausted;"));
+        JreAssert(exhausted_, @"org/apache/lucene/analysis/ngram/NGramTokenizer.java:155 condition failed: assert exhausted;");
         return false;
       }
       OrgApacheLuceneAnalysisNgramNGramTokenizer_consume(self);
@@ -169,7 +174,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)end {
   [super end];
-  JreAssert((bufferStart_ <= bufferEnd_), (@"org/apache/lucene/analysis/ngram/NGramTokenizer.java:209 condition failed: assert bufferStart <= bufferEnd;"));
+  JreAssert(bufferStart_ <= bufferEnd_, @"org/apache/lucene/analysis/ngram/NGramTokenizer.java:209 condition failed: assert bufferStart <= bufferEnd;");
   jint endOffset = offset_;
   for (jint i = bufferStart_; i < bufferEnd_; ++i) {
     endOffset += JavaLangCharacter_charCountWithInt_(IOSIntArray_Get(nil_chk(buffer_), i));
@@ -200,42 +205,59 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withBoolean:", "NGramTokenizer", NULL, 0x0, NULL, NULL },
-    { "initWithInt:withInt:", "NGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withInt:withInt:withBoolean:", "NGramTokenizer", NULL, 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withInt:withInt:", "NGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "init", "NGramTokenizer", NULL, 0x1, NULL, NULL },
-    { "init__WithInt:withInt:withBoolean:", "init", "V", 0x2, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "updateLastNonTokenChar", NULL, "V", 0x2, NULL, NULL },
-    { "consume", NULL, "V", 0x2, NULL, NULL },
-    { "isTokenCharWithInt:", "isTokenChar", "Z", 0x4, NULL, NULL },
-    { "end", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 4, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 5, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 5, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 5, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:withBoolean:);
+  methods[1].selector = @selector(initWithInt:withInt:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withInt:withInt:withBoolean:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:withInt:withInt:);
+  methods[4].selector = @selector(init);
+  methods[5].selector = @selector(init__WithInt:withInt:withBoolean:);
+  methods[6].selector = @selector(incrementToken);
+  methods[7].selector = @selector(updateLastNonTokenChar);
+  methods[8].selector = @selector(consume);
+  methods[9].selector = @selector(isTokenCharWithInt:);
+  methods[10].selector = @selector(end);
+  methods[11].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_MIN_NGRAM_SIZE", "DEFAULT_MIN_NGRAM_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisNgramNGramTokenizer_DEFAULT_MIN_NGRAM_SIZE },
-    { "DEFAULT_MAX_NGRAM_SIZE", "DEFAULT_MAX_NGRAM_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisNgramNGramTokenizer_DEFAULT_MAX_NGRAM_SIZE },
-    { "charUtils_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharacterUtils;", NULL, NULL, .constantValue.asLong = 0 },
-    { "charBuffer_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharacterUtils$CharacterBuffer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferStart_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferEnd_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "offset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "gramSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minGram_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxGram_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "exhausted_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastCheckedChar_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastNonTokenChar_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "edgesOnly_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posLenAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionLengthAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_MIN_NGRAM_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisNgramNGramTokenizer_DEFAULT_MIN_NGRAM_SIZE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_NGRAM_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisNgramNGramTokenizer_DEFAULT_MAX_NGRAM_SIZE, 0x19, -1, -1, -1, -1 },
+    { "charUtils_", "LOrgApacheLuceneAnalysisUtilCharacterUtils;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "charBuffer_", "LOrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "buffer_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferStart_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferEnd_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "offset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "gramSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "minGram_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxGram_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "exhausted_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastCheckedChar_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastNonTokenChar_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "edgesOnly_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posLenAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramNGramTokenizer = { 2, "NGramTokenizer", "org.apache.lucene.analysis.ngram", NULL, 0x1, 12, methods, 19, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "IIZ", "II", "LOrgApacheLuceneUtilAttributeFactory;IIZ", "LOrgApacheLuceneUtilAttributeFactory;II", "init", "LJavaIoIOException;", "isTokenChar", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramNGramTokenizer = { "NGramTokenizer", "org.apache.lucene.analysis.ngram", ptrTable, methods, fields, 7, 0x1, 12, 19, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisNgramNGramTokenizer;
 }
 

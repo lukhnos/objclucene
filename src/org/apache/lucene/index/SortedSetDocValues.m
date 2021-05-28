@@ -9,6 +9,10 @@
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SortedSetDocValues must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexSortedSetDocValues
 
 + (jlong)NO_MORE_ORDS {
@@ -66,23 +70,35 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)termsEnum {
-  return create_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedSetDocValues_(self);
+  return create_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexSortedSetDocValues_(self);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SortedSetDocValues", NULL, 0x4, NULL, NULL },
-    { "nextOrd", NULL, "J", 0x401, NULL, NULL },
-    { "setDocumentWithInt:", "setDocument", "V", 0x401, NULL, NULL },
-    { "lookupOrdWithLong:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
-    { "getValueCount", NULL, "J", 0x401, NULL, NULL },
-    { "lookupTermWithOrgApacheLuceneUtilBytesRef:", "lookupTerm", "J", 0x1, NULL, NULL },
-    { "termsEnum", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x401, 2, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(nextOrd);
+  methods[2].selector = @selector(setDocumentWithInt:);
+  methods[3].selector = @selector(lookupOrdWithLong:);
+  methods[4].selector = @selector(getValueCount);
+  methods[5].selector = @selector(lookupTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[6].selector = @selector(termsEnum);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "NO_MORE_ORDS", "NO_MORE_ORDS", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS },
+    { "NO_MORE_ORDS", "J", .constantValue.asLong = OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSortedSetDocValues = { 2, "SortedSetDocValues", "org.apache.lucene.index", NULL, 0x401, 7, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setDocument", "I", "lookupOrd", "J", "lookupTerm", "LOrgApacheLuceneUtilBytesRef;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSortedSetDocValues = { "SortedSetDocValues", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 7, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSortedSetDocValues;
 }
 

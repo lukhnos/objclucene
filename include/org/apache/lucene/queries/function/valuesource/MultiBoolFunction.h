@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_
 
@@ -29,7 +35,7 @@
 
 /*!
  @brief Abstract <code>ValueSource</code> implementation which wraps multiple ValueSources
- and applies an extendible boolean function to their values.
+  and applies an extendible boolean function to their values.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction : OrgApacheLuceneQueriesFunctionValuesourceBoolFunction {
  @public
@@ -38,7 +44,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)sources;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)sources;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -59,6 +65,10 @@ withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)vals;
 
 - (NSString *)name;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction)
@@ -71,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFun
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction")

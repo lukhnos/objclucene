@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightTermVectorLeafReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightTermVectorLeafReader_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightTermVectorLeafReader || defined(INCLUDE_OrgApacheLuceneSearchHighlightTermVectorLeafReader))
 #define OrgApacheLuceneSearchHighlightTermVectorLeafReader_
 
@@ -39,8 +45,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-   withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+             withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
@@ -81,6 +87,10 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (void)doClose;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightTermVectorLeafReader)
@@ -95,4 +105,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTermVectorLeafReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightTermVectorLeafReader")

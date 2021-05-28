@@ -12,6 +12,7 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/OutOfMemoryError.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/Void.h"
 #include "java/lang/reflect/Method.h"
 #include "java/nio/ByteBuffer.h"
@@ -22,7 +23,6 @@
 #include "java/security/PrivilegedActionException.h"
 #include "java/security/PrivilegedExceptionAction.h"
 #include "java/util/Locale.h"
-#include "org/apache/lucene/store/BaseDirectory.h"
 #include "org/apache/lucene/store/ByteBufferIndexInput.h"
 #include "org/apache/lucene/store/FSDirectory.h"
 #include "org/apache/lucene/store/FSLockFactory.h"
@@ -34,6 +34,10 @@
 #include "org/lukhnos/portmobile/channels/utils/FileChannelUtils.h"
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/StandardOpenOption.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/MMapDirectory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreMMapDirectory () {
  @public
@@ -47,7 +51,7 @@
 
 @end
 
-inline id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> OrgApacheLuceneStoreMMapDirectory_get_CLEANER();
+inline id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> OrgApacheLuceneStoreMMapDirectory_get_CLEANER(void);
 static id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> OrgApacheLuceneStoreMMapDirectory_CLEANER;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreMMapDirectory, CLEANER, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner>)
 
@@ -55,65 +59,57 @@ __attribute__((unused)) static IOSObjectArray *OrgApacheLuceneStoreMMapDirectory
 
 __attribute__((unused)) static JavaIoIOException *OrgApacheLuceneStoreMMapDirectory_convertMapFailedIOExceptionWithJavaIoIOException_withNSString_withInt_(OrgApacheLuceneStoreMMapDirectory *self, JavaIoIOException *ioe, NSString *resourceDescription, jint bufSize);
 
-@interface OrgApacheLuceneStoreMMapDirectory_$1 : NSObject < JavaSecurityPrivilegedAction >
-
-- (JavaLangBoolean *)run;
+@interface OrgApacheLuceneStoreMMapDirectory_1 : NSObject < JavaSecurityPrivilegedAction >
 
 - (instancetype)init;
 
+- (JavaLangBoolean *)run;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreMMapDirectory_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreMMapDirectory_1)
 
-__attribute__((unused)) static void OrgApacheLuceneStoreMMapDirectory_$1_init(OrgApacheLuceneStoreMMapDirectory_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneStoreMMapDirectory_1_init(OrgApacheLuceneStoreMMapDirectory_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$1 *new_OrgApacheLuceneStoreMMapDirectory_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_1 *new_OrgApacheLuceneStoreMMapDirectory_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$1 *create_OrgApacheLuceneStoreMMapDirectory_$1_init();
+__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_1 *create_OrgApacheLuceneStoreMMapDirectory_1_init(void);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreMMapDirectory_$1)
+@interface OrgApacheLuceneStoreMMapDirectory_2 : NSObject < OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner >
 
-@interface OrgApacheLuceneStoreMMapDirectory_$2 : NSObject < OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner >
+- (instancetype)init;
 
 - (void)freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:(OrgApacheLuceneStoreByteBufferIndexInput *)parent
                                          withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreMMapDirectory_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreMMapDirectory_2)
 
-__attribute__((unused)) static void OrgApacheLuceneStoreMMapDirectory_$2_init(OrgApacheLuceneStoreMMapDirectory_$2 *self);
+__attribute__((unused)) static void OrgApacheLuceneStoreMMapDirectory_2_init(OrgApacheLuceneStoreMMapDirectory_2 *self);
 
-__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$2 *new_OrgApacheLuceneStoreMMapDirectory_$2_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_2 *new_OrgApacheLuceneStoreMMapDirectory_2_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$2 *create_OrgApacheLuceneStoreMMapDirectory_$2_init();
+__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_2 *create_OrgApacheLuceneStoreMMapDirectory_2_init(void);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreMMapDirectory_$2)
-
-@interface OrgApacheLuceneStoreMMapDirectory_$2_$1 : NSObject < JavaSecurityPrivilegedExceptionAction > {
+@interface OrgApacheLuceneStoreMMapDirectory_2_1 : NSObject < JavaSecurityPrivilegedExceptionAction > {
  @public
   JavaNioByteBuffer *val$buffer_;
 }
 
-- (id)run;
-
 - (instancetype)initWithJavaNioByteBuffer:(JavaNioByteBuffer *)capture$0;
+
+- (JavaLangVoid *)run;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreMMapDirectory_$2_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreMMapDirectory_2_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreMMapDirectory_$2_$1, val$buffer_, JavaNioByteBuffer *)
+__attribute__((unused)) static void OrgApacheLuceneStoreMMapDirectory_2_1_initWithJavaNioByteBuffer_(OrgApacheLuceneStoreMMapDirectory_2_1 *self, JavaNioByteBuffer *capture$0);
 
-__attribute__((unused)) static void OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(OrgApacheLuceneStoreMMapDirectory_$2_$1 *self, JavaNioByteBuffer *capture$0);
+__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_2_1 *new_OrgApacheLuceneStoreMMapDirectory_2_1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$2_$1 *new_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$2_$1 *create_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreMMapDirectory_$2_$1)
+__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_2_1 *create_OrgApacheLuceneStoreMMapDirectory_2_1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneStoreMMapDirectory)
 
@@ -178,16 +174,16 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED;
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   [self ensureOpen];
-  OrgLukhnosPortmobileFilePath *path = [((OrgLukhnosPortmobileFilePath *) nil_chk(directory_)) resolveWithNSString:name];
+  OrgLukhnosPortmobileFilePath *path = JreRetainedLocalValue([((OrgLukhnosPortmobileFilePath *) nil_chk(directory_)) resolveWithNSString:name]);
   {
     JavaNioChannelsFileChannel *c = OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(path, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ) } count:1 type:OrgLukhnosPortmobileFileStandardOpenOption_class_()]);
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       NSString *resourceDescription = JreStrcat("$$$", @"MMapIndexInput(path=\"", [((OrgLukhnosPortmobileFilePath *) nil_chk(path)) description], @"\")");
       jboolean useUnmap = [self getUseUnmap];
       return OrgApacheLuceneStoreByteBufferIndexInput_newInstanceWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withBoolean_(resourceDescription, OrgApacheLuceneStoreMMapDirectory_mapWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_(self, resourceDescription, c, 0, [((JavaNioChannelsFileChannel *) nil_chk(c)) size]), [c size], chunkSizePower_, useUnmap ? OrgApacheLuceneStoreMMapDirectory_CLEANER : nil, useUnmap);
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -196,10 +192,12 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED;
         if (__primaryException1 != nil) {
           @try {
             [c close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [c close];
         }
       }
@@ -220,40 +218,57 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED;
   return OrgApacheLuceneStoreMMapDirectory_convertMapFailedIOExceptionWithJavaIoIOException_withNSString_withInt_(self, ioe, resourceDescription, bufSize);
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 8, 9, 1, -1, -1, -1 },
+    { NULL, "[LJavaNioByteBuffer;", 0x10, 10, 11, 1, -1, -1, -1 },
+    { NULL, "LJavaIoIOException;", 0x2, 12, 13, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:);
+  methods[1].selector = @selector(initWithOrgLukhnosPortmobileFilePath:);
+  methods[2].selector = @selector(initWithOrgLukhnosPortmobileFilePath:withInt:);
+  methods[3].selector = @selector(initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:withInt:);
+  methods[4].selector = @selector(setUseUnmapWithBoolean:);
+  methods[5].selector = @selector(getUseUnmap);
+  methods[6].selector = @selector(setPreloadWithBoolean:);
+  methods[7].selector = @selector(getPreload);
+  methods[8].selector = @selector(getMaxChunkSize);
+  methods[9].selector = @selector(openInputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[10].selector = @selector(mapWithNSString:withJavaNioChannelsFileChannel:withLong:withLong:);
+  methods[11].selector = @selector(convertMapFailedIOExceptionWithJavaIoIOException:withNSString:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "useUnmapHack_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "preload_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_CHUNK_SIZE", "I", .constantValue.asLong = 0, 0x19, -1, 14, -1, -1 },
+    { "chunkSizePower_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "UNMAP_SUPPORTED", "Z", .constantValue.asLong = 0, 0x19, -1, 15, -1, -1 },
+    { "CLEANER", "LOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;", .constantValue.asLong = 0, 0x1a, -1, 16, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgLukhnosPortmobileFilePath;LOrgApacheLuceneStoreLockFactory;", "LJavaIoIOException;", "LOrgLukhnosPortmobileFilePath;", "LOrgLukhnosPortmobileFilePath;I", "LOrgLukhnosPortmobileFilePath;LOrgApacheLuceneStoreLockFactory;I", "setUseUnmap", "Z", "setPreload", "openInput", "LNSString;LOrgApacheLuceneStoreIOContext;", "map", "LNSString;LJavaNioChannelsFileChannel;JJ", "convertMapFailedIOException", "LJavaIoIOException;LNSString;I", &OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE, &OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED, &OrgApacheLuceneStoreMMapDirectory_CLEANER };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory = { "MMapDirectory", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 12, 6, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneStoreMMapDirectory;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneStoreMMapDirectory class]) {
     OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE = JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_64BIT) ? (JreLShift32(1, 30)) : (JreLShift32(1, 28));
-    OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED = [((JavaLangBoolean *) nil_chk(JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_(create_OrgApacheLuceneStoreMMapDirectory_$1_init()))) booleanValue];
-    JreStrongAssignAndConsume(&OrgApacheLuceneStoreMMapDirectory_CLEANER, new_OrgApacheLuceneStoreMMapDirectory_$2_init());
+    OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED = [((JavaLangBoolean *) nil_chk(JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_(create_OrgApacheLuceneStoreMMapDirectory_1_init()))) booleanValue];
+    JreStrongAssignAndConsume(&OrgApacheLuceneStoreMMapDirectory_CLEANER, new_OrgApacheLuceneStoreMMapDirectory_2_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneStoreMMapDirectory)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:", "MMapDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:", "MMapDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:withInt:", "MMapDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:withInt:", "MMapDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "setUseUnmapWithBoolean:", "setUseUnmap", "V", 0x1, NULL, NULL },
-    { "getUseUnmap", NULL, "Z", 0x1, NULL, NULL },
-    { "setPreloadWithBoolean:", "setPreload", "V", 0x1, NULL, NULL },
-    { "getPreload", NULL, "Z", 0x1, NULL, NULL },
-    { "getMaxChunkSize", NULL, "I", 0x11, NULL, NULL },
-    { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "mapWithNSString:withJavaNioChannelsFileChannel:withLong:withLong:", "map", "[Ljava.nio.ByteBuffer;", 0x10, "Ljava.io.IOException;", NULL },
-    { "convertMapFailedIOExceptionWithJavaIoIOException:withNSString:withInt:", "convertMapFailedIOException", "Ljava.io.IOException;", 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "useUnmapHack_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "preload_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_MAX_CHUNK_SIZE", "DEFAULT_MAX_CHUNK_SIZE", 0x19, "I", &OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE, NULL, .constantValue.asLong = 0 },
-    { "chunkSizePower_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "UNMAP_SUPPORTED", "UNMAP_SUPPORTED", 0x19, "Z", &OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED, NULL, .constantValue.asLong = 0 },
-    { "CLEANER", "CLEANER", 0x1a, "Lorg.apache.lucene.store.ByteBufferIndexInput$BufferCleaner;", &OrgApacheLuceneStoreMMapDirectory_CLEANER, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory = { 2, "MMapDirectory", "org.apache.lucene.store", NULL, 0x1, 12, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneStoreMMapDirectory;
 }
 
 @end
@@ -301,7 +316,7 @@ void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_with
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Maximum chunk size for mmap must be >0");
   }
   self->chunkSizePower_ = 31 - JavaLangInteger_numberOfLeadingZerosWithInt_(maxChunkSize);
-  JreAssert((self->chunkSizePower_ >= 0 && self->chunkSizePower_ <= 30), (@"org/apache/lucene/store/MMapDirectory.java:162 condition failed: assert this.chunkSizePower >= 0 && this.chunkSizePower <= 30;"));
+  JreAssert(self->chunkSizePower_ >= 0 && self->chunkSizePower_ <= 30, @"org/apache/lucene/store/MMapDirectory.java:162 condition failed: assert this.chunkSizePower >= 0 && this.chunkSizePower <= 30;");
 }
 
 OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory, jint maxChunkSize) {
@@ -325,7 +340,7 @@ IOSObjectArray *OrgApacheLuceneStoreMMapDirectory_mapWithNSString_withJavaNioCha
       buffer = [((JavaNioChannelsFileChannel *) nil_chk(fc)) mapWithJavaNioChannelsFileChannel_MapMode:JreLoadStatic(JavaNioChannelsFileChannel_MapMode, READ_ONLY) withLong:offset + bufferStart withLong:bufSize];
     }
     @catch (JavaIoIOException *ioe) {
-      @throw OrgApacheLuceneStoreMMapDirectory_convertMapFailedIOExceptionWithJavaIoIOException_withNSString_withInt_(self, ioe, resourceDescription, bufSize);
+      @throw nil_chk(OrgApacheLuceneStoreMMapDirectory_convertMapFailedIOExceptionWithJavaIoIOException_withNSString_withInt_(self, ioe, resourceDescription, bufSize));
     }
     if (self->preload_) {
       [((JavaNioMappedByteBuffer *) nil_chk(buffer)) load__];
@@ -338,7 +353,7 @@ IOSObjectArray *OrgApacheLuceneStoreMMapDirectory_mapWithNSString_withJavaNioCha
 
 JavaIoIOException *OrgApacheLuceneStoreMMapDirectory_convertMapFailedIOExceptionWithJavaIoIOException_withNSString_withInt_(OrgApacheLuceneStoreMMapDirectory *self, JavaIoIOException *ioe, NSString *resourceDescription, jint bufSize) {
   NSString *originalMessage;
-  NSException *originalCause;
+  JavaLangThrowable *originalCause;
   if ([[((JavaIoIOException *) nil_chk(ioe)) getCause] isKindOfClass:[JavaLangOutOfMemoryError class]]) {
     originalMessage = @"Map failed";
     originalCause = nil;
@@ -360,14 +375,21 @@ JavaIoIOException *OrgApacheLuceneStoreMMapDirectory_convertMapFailedIOException
   else {
     moreInfo = @"Please review 'ulimit -v', 'ulimit -m' (both should return 'unlimited'). ";
   }
-  JavaIoIOException *newIoe = create_JavaIoIOException_initWithNSString_withNSException_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ENGLISH), @"%s: %s [this may be caused by lack of enough unfragmented virtual address space or too restrictive virtual memory limits enforced by the operating system, preventing us to map a chunk of %d bytes. %sMore information: http://blog.thetaphi.de/2012/07/use-lucenes-mmapdirectory-on-64bit.html]", [IOSObjectArray arrayWithObjects:(id[]){ originalMessage, resourceDescription, JavaLangInteger_valueOfWithInt_(bufSize), moreInfo } count:4 type:NSObject_class_()]), originalCause);
+  JavaIoIOException *newIoe = create_JavaIoIOException_initWithNSString_withJavaLangThrowable_(NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ENGLISH), @"%s: %s [this may be caused by lack of enough unfragmented virtual address space or too restrictive virtual memory limits enforced by the operating system, preventing us to map a chunk of %d bytes. %sMore information: http://blog.thetaphi.de/2012/07/use-lucenes-mmapdirectory-on-64bit.html]", [IOSObjectArray arrayWithObjects:(id[]){ originalMessage, resourceDescription, JavaLangInteger_valueOfWithInt_(bufSize), moreInfo } count:4 type:NSObject_class_()]), originalCause);
   [newIoe setStackTraceWithJavaLangStackTraceElementArray:[ioe getStackTrace]];
   return newIoe;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory)
 
-@implementation OrgApacheLuceneStoreMMapDirectory_$1
+@implementation OrgApacheLuceneStoreMMapDirectory_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneStoreMMapDirectory_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (JavaLangBoolean *)run {
   @try {
@@ -381,97 +403,100 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory)
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneStoreMMapDirectory_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "run", NULL, "Ljava.lang.Boolean;", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangBoolean;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory_$1 = { 2, "", "org.apache.lucene.store", "MMapDirectory", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/security/PrivilegedAction<Ljava/lang/Boolean;>;" };
-  return &_OrgApacheLuceneStoreMMapDirectory_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(run);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreMMapDirectory;", "Ljava/lang/Object;Ljava/security/PrivilegedAction<Ljava/lang/Boolean;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory_1 = { "", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 0, -1, -1, 1, -1 };
+  return &_OrgApacheLuceneStoreMMapDirectory_1;
 }
 
 @end
 
-void OrgApacheLuceneStoreMMapDirectory_$1_init(OrgApacheLuceneStoreMMapDirectory_$1 *self) {
+void OrgApacheLuceneStoreMMapDirectory_1_init(OrgApacheLuceneStoreMMapDirectory_1 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneStoreMMapDirectory_$1 *new_OrgApacheLuceneStoreMMapDirectory_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory_$1, init)
+OrgApacheLuceneStoreMMapDirectory_1 *new_OrgApacheLuceneStoreMMapDirectory_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory_1, init)
 }
 
-OrgApacheLuceneStoreMMapDirectory_$1 *create_OrgApacheLuceneStoreMMapDirectory_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory_$1, init)
+OrgApacheLuceneStoreMMapDirectory_1 *create_OrgApacheLuceneStoreMMapDirectory_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory_1, init)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory_$1)
+@implementation OrgApacheLuceneStoreMMapDirectory_2
 
-@implementation OrgApacheLuceneStoreMMapDirectory_$2
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneStoreMMapDirectory_2_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:(OrgApacheLuceneStoreByteBufferIndexInput *)parent
                                          withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer {
   @try {
-    JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedExceptionAction_(create_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(buffer));
+    JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedExceptionAction_(create_OrgApacheLuceneStoreMMapDirectory_2_1_initWithJavaNioByteBuffer_(buffer));
   }
   @catch (JavaSecurityPrivilegedActionException *e) {
-    @throw create_JavaIoIOException_initWithNSString_withNSException_(JreStrcat("$$", @"Unable to unmap the mapped buffer: ", [((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(parent)) description]), [((JavaSecurityPrivilegedActionException *) nil_chk(e)) getCause]);
+    @throw create_JavaIoIOException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Unable to unmap the mapped buffer: ", [((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(parent)) description]), [e getCause]);
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneStoreMMapDirectory_$2_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:withJavaNioByteBuffer:", "freeBuffer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory_$2 = { 2, "", "org.apache.lucene.store", "MMapDirectory", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneStoreMMapDirectory_$2;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:withJavaNioByteBuffer:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "freeBuffer", "LOrgApacheLuceneStoreByteBufferIndexInput;LJavaNioByteBuffer;", "LJavaIoIOException;", "LOrgApacheLuceneStoreMMapDirectory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory_2 = { "", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 3, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneStoreMMapDirectory_2;
 }
 
 @end
 
-void OrgApacheLuceneStoreMMapDirectory_$2_init(OrgApacheLuceneStoreMMapDirectory_$2 *self) {
+void OrgApacheLuceneStoreMMapDirectory_2_init(OrgApacheLuceneStoreMMapDirectory_2 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneStoreMMapDirectory_$2 *new_OrgApacheLuceneStoreMMapDirectory_$2_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory_$2, init)
+OrgApacheLuceneStoreMMapDirectory_2 *new_OrgApacheLuceneStoreMMapDirectory_2_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory_2, init)
 }
 
-OrgApacheLuceneStoreMMapDirectory_$2 *create_OrgApacheLuceneStoreMMapDirectory_$2_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory_$2, init)
+OrgApacheLuceneStoreMMapDirectory_2 *create_OrgApacheLuceneStoreMMapDirectory_2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory_2, init)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory_$2)
+@implementation OrgApacheLuceneStoreMMapDirectory_2_1
 
-@implementation OrgApacheLuceneStoreMMapDirectory_$2_$1
+- (instancetype)initWithJavaNioByteBuffer:(JavaNioByteBuffer *)capture$0 {
+  OrgApacheLuceneStoreMMapDirectory_2_1_initWithJavaNioByteBuffer_(self, capture$0);
+  return self;
+}
 
-- (id)run {
-  JavaLangReflectMethod *getCleanerMethod = [[((JavaNioByteBuffer *) nil_chk(val$buffer_)) getClass] getMethod:@"cleaner" parameterTypes:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]];
+- (JavaLangVoid *)run {
+  JavaLangReflectMethod *getCleanerMethod = [[((JavaNioByteBuffer *) nil_chk(val$buffer_)) java_getClass] getMethod:@"cleaner" parameterTypes:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]];
   [((JavaLangReflectMethod *) nil_chk(getCleanerMethod)) setAccessibleWithBoolean:true];
   id cleaner = [getCleanerMethod invokeWithId:val$buffer_ withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]];
   if (cleaner != nil) {
-    [((JavaLangReflectMethod *) nil_chk([[cleaner getClass] getMethod:@"clean" parameterTypes:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]])) invokeWithId:cleaner withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]];
+    [((JavaLangReflectMethod *) nil_chk([[cleaner java_getClass] getMethod:@"clean" parameterTypes:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]])) invokeWithId:cleaner withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]];
   }
-  return nil;
-}
-
-- (instancetype)initWithJavaNioByteBuffer:(JavaNioByteBuffer *)capture$0 {
-  OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(self, capture$0);
-  return self;
+  return JreRetainedLocalValue(nil);
 }
 
 - (void)dealloc {
@@ -480,31 +505,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory_$2)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "run", NULL, "Ljava.lang.Void;", 0x1, "Ljava.lang.Exception;", NULL },
-    { "initWithJavaNioByteBuffer:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangVoid;", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaNioByteBuffer:);
+  methods[1].selector = @selector(run);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$buffer_", NULL, 0x1012, "Ljava.nio.ByteBuffer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$buffer_", "LJavaNioByteBuffer;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneStoreMMapDirectory_$2", "freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:withJavaNioByteBuffer:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory_$2_$1 = { 2, "", "org.apache.lucene.store", "MMapDirectory$", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/security/PrivilegedExceptionAction<Ljava/lang/Void;>;" };
-  return &_OrgApacheLuceneStoreMMapDirectory_$2_$1;
+  static const void *ptrTable[] = { "LJavaNioByteBuffer;", "LJavaLangException;", "LOrgApacheLuceneStoreMMapDirectory_2;", "freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:withJavaNioByteBuffer:", "Ljava/lang/Object;Ljava/security/PrivilegedExceptionAction<Ljava/lang/Void;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory_2_1 = { "", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x8010, 2, 1, 2, -1, 3, 4, -1 };
+  return &_OrgApacheLuceneStoreMMapDirectory_2_1;
 }
 
 @end
 
-void OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(OrgApacheLuceneStoreMMapDirectory_$2_$1 *self, JavaNioByteBuffer *capture$0) {
+void OrgApacheLuceneStoreMMapDirectory_2_1_initWithJavaNioByteBuffer_(OrgApacheLuceneStoreMMapDirectory_2_1 *self, JavaNioByteBuffer *capture$0) {
   JreStrongAssign(&self->val$buffer_, capture$0);
   NSObject_init(self);
 }
 
-OrgApacheLuceneStoreMMapDirectory_$2_$1 *new_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory_$2_$1, initWithJavaNioByteBuffer_, capture$0)
+OrgApacheLuceneStoreMMapDirectory_2_1 *new_OrgApacheLuceneStoreMMapDirectory_2_1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory_2_1, initWithJavaNioByteBuffer_, capture$0)
 }
 
-OrgApacheLuceneStoreMMapDirectory_$2_$1 *create_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory_$2_$1, initWithJavaNioByteBuffer_, capture$0)
+OrgApacheLuceneStoreMMapDirectory_2_1 *create_OrgApacheLuceneStoreMMapDirectory_2_1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory_2_1, initWithJavaNioByteBuffer_, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory_$2_$1)

@@ -13,41 +13,44 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTwoPhaseCommit
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTwoPhaseCommit_) && (INCLUDE_ALL_OrgApacheLuceneIndexTwoPhaseCommit || defined(INCLUDE_OrgApacheLuceneIndexTwoPhaseCommit))
 #define OrgApacheLuceneIndexTwoPhaseCommit_
 
 /*!
- @brief An interface for implementations that support 2-phase commit.
- You can use
- <code>TwoPhaseCommitTool</code> to execute a 2-phase commit algorithm over several
+ @brief An interface for implementations that support 2-phase commit.You can use 
+ <code>TwoPhaseCommitTool</code> to execute a 2-phase commit algorithm over several 
  <code>TwoPhaseCommit</code>s.
  */
-@protocol OrgApacheLuceneIndexTwoPhaseCommit < NSObject, JavaObject >
+@protocol OrgApacheLuceneIndexTwoPhaseCommit < JavaObject >
 
 /*!
- @brief The first stage of a 2-phase commit.
- Implementations should do as much work
- as possible in this method, but avoid actual committing changes. If the
- 2-phase commit fails, <code>rollback()</code> is called to discard all changes
- since last successful commit.
+ @brief The first stage of a 2-phase commit.Implementations should do as much work
+  as possible in this method, but avoid actual committing changes.
+ If the
+  2-phase commit fails, <code>rollback()</code> is called to discard all changes
+  since last successful commit.
  */
 - (void)prepareCommit;
 
 /*!
- @brief The second phase of a 2-phase commit.
- Implementations should ideally do
- very little work in this method (following <code>prepareCommit()</code>, and
- after it returns, the caller can assume that the changes were successfully
- committed to the underlying storage.
+ @brief The second phase of a 2-phase commit.Implementations should ideally do
+  very little work in this method (following <code>prepareCommit()</code>, and
+  after it returns, the caller can assume that the changes were successfully
+  committed to the underlying storage.
  */
 - (void)commit;
 
 /*!
- @brief Discards any changes that have occurred since the last commit.
- In a 2-phase
- commit algorithm, where one of the objects failed to <code>commit()</code> or
+ @brief Discards any changes that have occurred since the last commit.In a 2-phase
+  commit algorithm, where one of the objects failed to <code>commit()</code> or 
  <code>prepareCommit()</code>, this method is used to roll all other objects
- back to their previous state.
+  back to their previous state.
  */
 - (void)rollback;
 
@@ -59,4 +62,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTwoPhaseCommit)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTwoPhaseCommit")

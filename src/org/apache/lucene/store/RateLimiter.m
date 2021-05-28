@@ -3,15 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/store/RateLimiter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/InterruptedException.h"
 #include "java/lang/System.h"
 #include "java/lang/Thread.h"
 #include "org/apache/lucene/store/RateLimiter.h"
 #include "org/apache/lucene/util/ThreadInterruptedException.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/RateLimiter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter () {
  @public
@@ -22,11 +24,18 @@
 
 @end
 
-inline jint OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_get_MIN_PAUSE_CHECK_MSEC();
+inline jint OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_get_MIN_PAUSE_CHECK_MSEC(void);
 #define OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_MIN_PAUSE_CHECK_MSEC 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter, MIN_PAUSE_CHECK_MSEC, jint)
 
 @implementation OrgApacheLuceneStoreRateLimiter
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneStoreRateLimiter_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setMBPerSecWithDouble:(jdouble)mbPerSec {
   // can't call an abstract method
@@ -51,23 +60,25 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter, 
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneStoreRateLimiter_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setMBPerSecWithDouble:", "setMBPerSec", "V", 0x401, NULL, NULL },
-    { "getMBPerSec", NULL, "D", 0x401, NULL, NULL },
-    { "pauseWithLong:", "pause", "J", 0x401, "Ljava.io.IOException;", NULL },
-    { "getMinPauseCheckBytes", NULL, "J", 0x401, NULL, NULL },
-    { "init", "RateLimiter", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "D", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, 2, 3, 4, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.store.RateLimiter$SimpleRateLimiter;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRateLimiter = { 2, "RateLimiter", "org.apache.lucene.store", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setMBPerSecWithDouble:);
+  methods[2].selector = @selector(getMBPerSec);
+  methods[3].selector = @selector(pauseWithLong:);
+  methods[4].selector = @selector(getMinPauseCheckBytes);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setMBPerSec", "D", "pause", "J", "LJavaIoIOException;", "LOrgApacheLuceneStoreRateLimiter_SimpleRateLimiter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRateLimiter = { "RateLimiter", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x401, 5, 0, -1, 5, -1, -1, -1 };
   return &_OrgApacheLuceneStoreRateLimiter;
 }
 
@@ -123,8 +134,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRateLimiter)
           sleepNS = 0;
         }
         else {
-          sleepMS = (jint) (pauseNS / 1000000);
-          sleepNS = (jint) (pauseNS % 1000000);
+          sleepMS = (jint) (JreLongDiv(pauseNS, 1000000));
+          sleepNS = (jint) (JreLongMod(pauseNS, 1000000));
         }
         JavaLangThread_sleepWithLong_withInt_(sleepMS, sleepNS);
       }
@@ -140,20 +151,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRateLimiter)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithDouble:", "SimpleRateLimiter", NULL, 0x1, NULL, NULL },
-    { "setMBPerSecWithDouble:", "setMBPerSec", "V", 0x1, NULL, NULL },
-    { "getMinPauseCheckBytes", NULL, "J", 0x1, NULL, NULL },
-    { "getMBPerSec", NULL, "D", 0x1, NULL, NULL },
-    { "pauseWithLong:", "pause", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithDouble:);
+  methods[1].selector = @selector(setMBPerSecWithDouble:);
+  methods[2].selector = @selector(getMinPauseCheckBytes);
+  methods[3].selector = @selector(getMBPerSec);
+  methods[4].selector = @selector(pauseWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MIN_PAUSE_CHECK_MSEC", "MIN_PAUSE_CHECK_MSEC", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_MIN_PAUSE_CHECK_MSEC },
-    { "mbPerSec_", NULL, 0x42, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "minPauseCheckBytes_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastNS_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "MIN_PAUSE_CHECK_MSEC", "I", .constantValue.asInt = OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_MIN_PAUSE_CHECK_MSEC, 0x1a, -1, -1, -1, -1 },
+    { "mbPerSec_", "D", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "minPauseCheckBytes_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "lastNS_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter = { 2, "SimpleRateLimiter", "org.apache.lucene.store", "RateLimiter", 0x9, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "D", "setMBPerSec", "pause", "J", "LOrgApacheLuceneStoreRateLimiter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter = { "SimpleRateLimiter", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x9, 5, 4, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter;
 }
 

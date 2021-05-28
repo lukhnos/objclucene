@@ -10,6 +10,10 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/GrowableByteArrayDataOutput.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/GrowableByteArrayDataOutput must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilGrowableByteArrayDataOutput
 
 - (instancetype)initWithInt:(jint)cp {
@@ -39,16 +43,24 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "GrowableByteArrayDataOutput", NULL, 0x1, NULL, NULL },
-    { "writeByteWithByte:", "writeByte", "V", 0x1, NULL, NULL },
-    { "writeBytesWithByteArray:withInt:withInt:", "writeBytes", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(writeByteWithByte:);
+  methods[2].selector = @selector(writeBytesWithByteArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bytes_", NULL, 0x1, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "bytes_", "[B", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilGrowableByteArrayDataOutput = { 2, "GrowableByteArrayDataOutput", "org.apache.lucene.util", NULL, 0x11, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "writeByte", "B", "writeBytes", "[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilGrowableByteArrayDataOutput = { "GrowableByteArrayDataOutput", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 3, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilGrowableByteArrayDataOutput;
 }
 

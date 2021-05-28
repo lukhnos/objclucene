@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_
 
@@ -24,13 +30,13 @@
 
 /*!
  @brief This interface should be implemented by a <code>QueryNode</code> that represents
- some kind of range query.
+  some kind of range query.
  */
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode, NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode, JavaObject >
 
-- (id)getLowerBound;
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>)getLowerBound;
 
-- (id)getUpperBound;
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>)getUpperBound;
 
 - (jboolean)isLowerInclusive;
 
@@ -44,4 +50,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQuery
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode")

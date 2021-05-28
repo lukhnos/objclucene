@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder))
 #define OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_
 
@@ -24,15 +30,15 @@
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief Builds no object, it only returns the <code>Query</code> object set on the
- <code>GroupQueryNode</code> object using a
+ @brief Builds no object, it only returns the <code>Query</code> object set on the 
+ <code>GroupQueryNode</code> object using a 
  <code>QueryTreeBuilder.QUERY_TREE_BUILDER_TAGID</code> tag.
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder : NSObject < OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
@@ -42,12 +48,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardBuildersGroup
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_init(OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder")

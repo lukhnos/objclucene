@@ -6,14 +6,15 @@
 /*!
  @brief Precedence Query Parser Implementation
  <h2>Lucene Precedence Query Parser</h2>
+   
  <p>
- The Precedence Query Parser extends the Standard Query Parser and enables 
- the boolean precedence.
- So, the query &lt;a AND b OR c AND d&gt; is parsed to 
+  The Precedence Query Parser extends the Standard Query Parser and enables 
+  the boolean precedence.
+ So, the query &lt;a AND b OR c AND d&gt; is parsed to  
  &lt;(+a +b) (+c +d)&gt; instead of &lt;+a +b +c +d&gt;.
- <p>
- Check <code>org.apache.lucene.queryparser.flexible.standard.StandardQueryParser</code> for more details about the
- supported syntax and query parser functionalities. 
+  <p>
+  Check <code>org.apache.lucene.queryparser.flexible.standard.StandardQueryParser</code> for more details about the
+  supported syntax and query parser functionalities.
  */
 #include "J2ObjC_header.h"
 
@@ -25,4 +26,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info")

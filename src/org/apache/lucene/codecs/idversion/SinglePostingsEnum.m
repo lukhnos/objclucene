@@ -10,6 +10,10 @@
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/idversion/SinglePostingsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCodecsIdversionSinglePostingsEnum () {
  @public
   jint doc_;
@@ -25,12 +29,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsIdversionSinglePostingsEnum, payload_, 
 
 @implementation OrgApacheLuceneCodecsIdversionSinglePostingsEnum
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneCodecsIdversionSinglePostingsEnum_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)resetWithInt:(jint)singleDocID
             withLong:(jlong)version_ {
@@ -74,7 +76,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)nextPosition {
-  JreAssert((pos_ == -1), (@"org/apache/lucene/codecs/idversion/SinglePostingsEnum.java:82 condition failed: assert pos == -1;"));
+  JreAssert(pos_ == -1, @"org/apache/lucene/codecs/idversion/SinglePostingsEnum.java:82 condition failed: assert pos == -1;");
   pos_ = 0;
   OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_longToBytesWithLong_withOrgApacheLuceneUtilBytesRef_(version__, payload_);
   return pos_;
@@ -98,44 +100,60 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SinglePostingsEnum", NULL, 0x1, NULL, NULL },
-    { "resetWithInt:withLong:", "reset", "V", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, NULL, NULL },
-    { "nextPosition", NULL, "I", 0x1, NULL, NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "startOffset", NULL, "I", 0x1, NULL, NULL },
-    { "endOffset", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(resetWithInt:withLong:);
+  methods[2].selector = @selector(nextDoc);
+  methods[3].selector = @selector(docID);
+  methods[4].selector = @selector(advanceWithInt:);
+  methods[5].selector = @selector(cost);
+  methods[6].selector = @selector(freq);
+  methods[7].selector = @selector(nextPosition);
+  methods[8].selector = @selector(getPayload);
+  methods[9].selector = @selector(startOffset);
+  methods[10].selector = @selector(endOffset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "doc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "singleDocID_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "version__", "version", 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "payload_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "singleDocID_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "version__", "J", .constantValue.asLong = 0, 0x2, 4, -1, -1, -1 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionSinglePostingsEnum = { 2, "SinglePostingsEnum", "org.apache.lucene.codecs.idversion", NULL, 0x0, 11, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "reset", "IJ", "advance", "I", "version" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionSinglePostingsEnum = { "SinglePostingsEnum", "org.apache.lucene.codecs.idversion", ptrTable, methods, fields, 7, 0x0, 11, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsIdversionSinglePostingsEnum;
 }
 
 @end
 
-void OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init(OrgApacheLuceneCodecsIdversionSinglePostingsEnum *self) {
+void OrgApacheLuceneCodecsIdversionSinglePostingsEnum_initPackagePrivate(OrgApacheLuceneCodecsIdversionSinglePostingsEnum *self) {
   OrgApacheLuceneIndexPostingsEnum_init(self);
   JreStrongAssignAndConsume(&self->payload_, new_OrgApacheLuceneUtilBytesRef_initWithInt_(8));
   self->payload_->length_ = 8;
 }
 
-OrgApacheLuceneCodecsIdversionSinglePostingsEnum *new_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionSinglePostingsEnum, init)
+OrgApacheLuceneCodecsIdversionSinglePostingsEnum *new_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionSinglePostingsEnum, initPackagePrivate)
 }
 
-OrgApacheLuceneCodecsIdversionSinglePostingsEnum *create_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionSinglePostingsEnum, init)
+OrgApacheLuceneCodecsIdversionSinglePostingsEnum *create_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionSinglePostingsEnum, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionSinglePostingsEnum)

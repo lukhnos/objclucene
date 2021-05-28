@@ -6,13 +6,15 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Character.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/reverse/ReverseStringFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/reverse/ReverseStringFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisReverseReverseStringFilter () {
  @public
@@ -24,7 +26,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReverseReverseStringFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_NOMARKER();
+inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_NOMARKER(void);
 #define OrgApacheLuceneAnalysisReverseReverseStringFilter_NOMARKER 0xffff
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisReverseReverseStringFilter, NOMARKER, jchar)
 
@@ -59,7 +61,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisReverseReverseStringFilter, 
 
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
+    jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) java_length];
     if (marker_ != OrgApacheLuceneAnalysisReverseReverseStringFilter_NOMARKER) {
       len++;
       [termAtt_ resizeBufferWithInt:len];
@@ -99,25 +101,37 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisReverseReverseStringFilter, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "ReverseStringFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withChar:", "ReverseStringFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "reverseWithNSString:", "reverse", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "reverseWithCharArray:", "reverse", "V", 0x9, NULL, NULL },
-    { "reverseWithCharArray:withInt:", "reverse", "V", 0x9, NULL, NULL },
-    { "reverseWithCharArray:withInt:withInt:", "reverse", "V", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 3, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 3, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 3, 7, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withChar:);
+  methods[2].selector = @selector(incrementToken);
+  methods[3].selector = @selector(reverseWithNSString:);
+  methods[4].selector = @selector(reverseWithCharArray:);
+  methods[5].selector = @selector(reverseWithCharArray:withInt:);
+  methods[6].selector = @selector(reverseWithCharArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "marker_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "NOMARKER", "NOMARKER", 0x1a, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisReverseReverseStringFilter_NOMARKER },
-    { "START_OF_HEADING_MARKER", "START_OF_HEADING_MARKER", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisReverseReverseStringFilter_START_OF_HEADING_MARKER },
-    { "INFORMATION_SEPARATOR_MARKER", "INFORMATION_SEPARATOR_MARKER", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisReverseReverseStringFilter_INFORMATION_SEPARATOR_MARKER },
-    { "PUA_EC00_MARKER", "PUA_EC00_MARKER", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisReverseReverseStringFilter_PUA_EC00_MARKER },
-    { "RTL_DIRECTION_MARKER", "RTL_DIRECTION_MARKER", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisReverseReverseStringFilter_RTL_DIRECTION_MARKER },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "marker_", "C", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "NOMARKER", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisReverseReverseStringFilter_NOMARKER, 0x1a, -1, -1, -1, -1 },
+    { "START_OF_HEADING_MARKER", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisReverseReverseStringFilter_START_OF_HEADING_MARKER, 0x19, -1, -1, -1, -1 },
+    { "INFORMATION_SEPARATOR_MARKER", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisReverseReverseStringFilter_INFORMATION_SEPARATOR_MARKER, 0x19, -1, -1, -1, -1 },
+    { "PUA_EC00_MARKER", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisReverseReverseStringFilter_PUA_EC00_MARKER, 0x19, -1, -1, -1, -1 },
+    { "RTL_DIRECTION_MARKER", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisReverseReverseStringFilter_RTL_DIRECTION_MARKER, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisReverseReverseStringFilter = { 2, "ReverseStringFilter", "org.apache.lucene.analysis.reverse", NULL, 0x11, 7, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LOrgApacheLuceneAnalysisTokenStream;C", "LJavaIoIOException;", "reverse", "LNSString;", "[C", "[CI", "[CII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisReverseReverseStringFilter = { "ReverseStringFilter", "org.apache.lucene.analysis.reverse", ptrTable, methods, fields, 7, 0x11, 7, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisReverseReverseStringFilter;
 }
 
@@ -151,9 +165,9 @@ OrgApacheLuceneAnalysisReverseReverseStringFilter *create_OrgApacheLuceneAnalysi
 
 NSString *OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithNSString_(NSString *input) {
   OrgApacheLuceneAnalysisReverseReverseStringFilter_initialize();
-  IOSCharArray *charInput = [((NSString *) nil_chk(input)) toCharArray];
+  IOSCharArray *charInput = [((NSString *) nil_chk(input)) java_toCharArray];
   OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithCharArray_withInt_withInt_(charInput, 0, ((IOSCharArray *) nil_chk(charInput))->size_);
-  return [NSString stringWithCharacters:charInput];
+  return [NSString java_stringWithCharacters:charInput];
 }
 
 void OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithCharArray_(IOSCharArray *buffer) {
@@ -172,7 +186,8 @@ void OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithCharArray_with
   jint end = (start + len) - 1;
   jchar frontHigh = IOSCharArray_Get(nil_chk(buffer), start);
   jchar endLow = IOSCharArray_Get(buffer, end);
-  jboolean allowFrontSur = true, allowEndSur = true;
+  jboolean allowFrontSur = true;
+  jboolean allowEndSur = true;
   jint mid = start + (JreRShift32(len, 1));
   for (jint i = start; i < mid; ++i, --end) {
     jchar frontLow = IOSCharArray_Get(buffer, i + 1);

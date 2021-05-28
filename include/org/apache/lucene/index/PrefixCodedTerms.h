@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexPrefixCodedTerms
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexPrefixCodedTerms_) && (INCLUDE_ALL_OrgApacheLuceneIndexPrefixCodedTerms || defined(INCLUDE_OrgApacheLuceneIndexPrefixCodedTerms))
 #define OrgApacheLuceneIndexPrefixCodedTerms_
 
@@ -57,6 +63,10 @@
  */
 - (jlong)size;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexPrefixCodedTerms)
@@ -83,7 +93,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPrefixCodedTerms)
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief add a term
@@ -101,9 +111,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexPrefixCodedTerms_Builder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexPrefixCodedTerms_Builder_init(OrgApacheLuceneIndexPrefixCodedTerms_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexPrefixCodedTerms_Builder *new_OrgApacheLuceneIndexPrefixCodedTerms_Builder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexPrefixCodedTerms_Builder *new_OrgApacheLuceneIndexPrefixCodedTerms_Builder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexPrefixCodedTerms_Builder *create_OrgApacheLuceneIndexPrefixCodedTerms_Builder_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexPrefixCodedTerms_Builder *create_OrgApacheLuceneIndexPrefixCodedTerms_Builder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPrefixCodedTerms_Builder)
 
@@ -141,6 +151,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPrefixCodedTerms_Builder)
 
 - (OrgApacheLuceneUtilBytesRef *)next;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivate NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator)
@@ -154,4 +168,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexPrefixCodedTerms")

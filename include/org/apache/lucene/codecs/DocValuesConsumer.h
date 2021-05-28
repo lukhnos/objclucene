@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsDocValuesConsumer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsDocValuesConsumer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsDocValuesConsumer || defined(INCLUDE_OrgApacheLuceneCodecsDocValuesConsumer))
 #define OrgApacheLuceneCodecsDocValuesConsumer_
 
@@ -27,24 +33,23 @@
 
 /*!
  @brief Abstract API that consumes numeric, binary and
- sorted docvalues.
- Concrete implementations of this
- actually do "something" with the docvalues (write it into
- the index in a specific format).
+  sorted docvalues.Concrete implementations of this
+  actually do "something" with the docvalues (write it into
+  the index in a specific format).
  <p>
- The lifecycle is:
+  The lifecycle is: 
  <ol>
- <li>DocValuesConsumer is created by 
- <code>NormsFormat.normsConsumer(SegmentWriteState)</code>.
- <li><code>addNumericField</code>, <code>addBinaryField</code>,
- <code>addSortedField</code>, <code>addSortedSetField</code>,
- or <code>addSortedNumericField</code> are called for each Numeric,
- Binary, Sorted, SortedSet, or SortedNumeric docvalues field. 
- The API is a "pull" rather than "push", and the implementation 
- is free to iterate over the values multiple times 
- (<code>Iterable.iterator()</code>).
- <li>After all fields are added, the consumer is <code>close</code>d.
- </ol>
+    <li>DocValuesConsumer is created by 
+        <code>NormsFormat.normsConsumer(SegmentWriteState)</code>.
+    <li><code>addNumericField</code>, <code>addBinaryField</code>,
+        <code>addSortedField</code>, <code>addSortedSetField</code>,
+        or <code>addSortedNumericField</code> are called for each Numeric,
+        Binary, Sorted, SortedSet, or SortedNumeric docvalues field. 
+        The API is a "pull" rather than "push", and the implementation 
+        is free to iterate over the values multiple times 
+        (<code>Iterable.iterator()</code>).
+    <li>After all fields are added, the consumer is <code>close</code>d.
+  </ol>
  */
 @interface OrgApacheLuceneCodecsDocValuesConsumer : NSObject < JavaIoCloseable >
 
@@ -53,9 +58,9 @@
 /*!
  @brief Writes binary docvalues for a field.
  @param field field information
- @param values Iterable of binary values (one for each document). <code>null</code> indicates
- a missing value.
- @throws IOException if an I/O error occurred.
+ @param values Iterable of binary values (one for each document). <code>null</code>  indicates
+                 a missing value.
+ @throw IOExceptionif an I/O error occurred.
  */
 - (void)addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                    withJavaLangIterable:(id<JavaLangIterable>)values;
@@ -63,9 +68,9 @@
 /*!
  @brief Writes numeric docvalues for a field.
  @param field field information
- @param values Iterable of numeric values (one for each document). <code>null</code> indicates
- a missing value.
- @throws IOException if an I/O error occurred.
+ @param values Iterable of numeric values (one for each document). <code>null</code>  indicates
+                 a missing value.
+ @throw IOExceptionif an I/O error occurred.
  */
 - (void)addNumericFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                     withJavaLangIterable:(id<JavaLangIterable>)values;
@@ -74,9 +79,9 @@
  @brief Writes pre-sorted binary docvalues for a field.
  @param field field information
  @param values Iterable of binary values in sorted order (deduplicated).
- @param docToOrd Iterable of ordinals (one for each document). <code>-1</code> indicates
- a missing value.
- @throws IOException if an I/O error occurred.
+ @param docToOrd Iterable of ordinals (one for each document). <code>-1</code>  indicates
+                   a missing value.
+ @throw IOExceptionif an I/O error occurred.
  */
 - (void)addSortedFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                    withJavaLangIterable:(id<JavaLangIterable>)values
@@ -85,10 +90,9 @@
 /*!
  @brief Writes pre-sorted numeric docvalues for a field
  @param field field information
- @param docToValueCount Iterable of the number of values for each document. A zero
- count indicates a missing value.
+ @param docToValueCount Iterable of the number of values for each document. A zero                         count indicates a missing value.
  @param values Iterable of numeric values in sorted order (not deduplicated).
- @throws IOException if an I/O error occurred.
+ @throw IOExceptionif an I/O error occurred.
  */
 - (void)addSortedNumericFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                           withJavaLangIterable:(id<JavaLangIterable>)docToValueCount
@@ -98,10 +102,9 @@
  @brief Writes pre-sorted set docvalues for a field
  @param field field information
  @param values Iterable of binary values in sorted order (deduplicated).
- @param docToOrdCount Iterable of the number of values for each document. A zero ordinal
- count indicates a missing value.
+ @param docToOrdCount Iterable of the number of values for each document. A zero ordinal                       count indicates a missing value.
  @param ords Iterable of ordinal occurrences (docToOrdCount*maxDoc total).
- @throws IOException if an I/O error occurred.
+ @throw IOExceptionif an I/O error occurred.
  */
 - (void)addSortedSetFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                       withJavaLangIterable:(id<JavaLangIterable>)values
@@ -115,22 +118,21 @@
 
 /*!
  @brief Merges in the fields from the readers in 
- <code>mergeState</code>.
- The default implementation 
- calls <code>mergeNumericField</code>, <code>mergeBinaryField</code>,
- <code>mergeSortedField</code>, <code>mergeSortedSetField</code>,
- or <code>mergeSortedNumericField</code> for each field,
- depending on its type.
+   <code>mergeState</code>.The default implementation 
+   calls <code>mergeNumericField</code>, <code>mergeBinaryField</code>,
+   <code>mergeSortedField</code>, <code>mergeSortedSetField</code>,
+   or <code>mergeSortedNumericField</code> for each field,
+   depending on its type.
  Implementations can override this method 
- for more sophisticated merging (bulk-byte copying, etc). 
+   for more sophisticated merging (bulk-byte copying, etc).
  */
 - (void)mergeWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
 /*!
  @brief Merges the binary docvalues from <code>toMerge</code>.
  <p>
- The default implementation calls <code>addBinaryField</code>, passing
- an Iterable that merges and filters deleted documents on the fly.
+  The default implementation calls <code>addBinaryField</code>, passing
+  an Iterable that merges and filters deleted documents on the fly.
  */
 - (void)mergeBinaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                        withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
@@ -140,8 +142,8 @@
 /*!
  @brief Merges the numeric docvalues from <code>toMerge</code>.
  <p>
- The default implementation calls <code>addNumericField</code>, passing
- an Iterable that merges and filters deleted documents on the fly.
+  The default implementation calls <code>addNumericField</code>, passing
+  an Iterable that merges and filters deleted documents on the fly.
  */
 - (void)mergeNumericFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                         withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
@@ -151,8 +153,8 @@
 /*!
  @brief Merges the sorted docvalues from <code>toMerge</code>.
  <p>
- The default implementation calls <code>addSortedField</code>, passing
- an Iterable that merges ordinals and values and filters deleted documents .
+  The default implementation calls <code>addSortedField</code>, passing
+  an Iterable that merges ordinals and values and filters deleted documents .
  */
 - (void)mergeSortedFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                        withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
@@ -161,8 +163,8 @@
 /*!
  @brief Merges the sorted docvalues from <code>toMerge</code>.
  <p>
- The default implementation calls <code>addSortedNumericField</code>, passing
- iterables that filter deleted documents.
+  The default implementation calls <code>addSortedNumericField</code>, passing
+  iterables that filter deleted documents.
  */
 - (void)mergeSortedNumericFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                               withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
@@ -171,8 +173,8 @@
 /*!
  @brief Merges the sortedset docvalues from <code>toMerge</code>.
  <p>
- The default implementation calls <code>addSortedSetField</code>, passing
- an Iterable that merges ordinals and values and filters deleted documents .
+  The default implementation calls <code>addSortedSetField</code>, passing
+  an Iterable that merges ordinals and values and filters deleted documents .
  */
 - (void)mergeSortedSetFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                           withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
@@ -190,9 +192,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -231,8 +233,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsDocValuesConsumer)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)inArg
-                    withOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)liveTerms;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)inArg
+                              withOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)liveTerms;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg0
+                                                    withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -250,4 +259,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsDocValuesConsumer_BitsFilteredTe
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsDocValuesConsumer")

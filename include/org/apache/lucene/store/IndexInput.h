@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreIndexInput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreIndexInput || defined(INCLUDE_OrgApacheLuceneStoreIndexInput))
 #define OrgApacheLuceneStoreIndexInput_
 
@@ -27,19 +33,19 @@
 @protocol OrgApacheLuceneStoreRandomAccessInput;
 
 /*!
- @brief Abstract base class for input from a file in a <code>Directory</code>.
- A
- random-access input stream.  Used for all Lucene index input operations.
+ @brief Abstract base class for input from a file in a <code>Directory</code>.A
+  random-access input stream.
+ Used for all Lucene index input operations. 
  <p><code>IndexInput</code> may only be used from one thread, because it is not
- thread safe (it keeps internal state like file position). To allow
- multithreaded use, every <code>IndexInput</code> instance must be cloned before
- it is used in another thread. Subclasses must therefore implement <code>clone()</code>,
- returning a new <code>IndexInput</code> which operates on the same underlying
- resource, but positioned independently. 
- <p><b>Warning:</b> Lucene never closes cloned
- <code>IndexInput</code>s, it will only call <code>close()</code> on the original object.
+  thread safe (it keeps internal state like file position). To allow
+  multithreaded use, every <code>IndexInput</code> instance must be cloned before
+  it is used in another thread. Subclasses must therefore implement <code>clone()</code>,
+  returning a new <code>IndexInput</code> which operates on the same underlying
+  resource, but positioned independently.   
+ <p><b>Warning:</b> Lucene never closes cloned 
+ <code>IndexInput</code>s, it will only call <code>close()</code> on the original object.  
  <p>If you access the cloned IndexInput after closing the original object,
- any <code>readXXX</code> methods will throw <code>AlreadyClosedException</code>.
+  any <code>readXXX</code> methods will throw <code>AlreadyClosedException</code>.
  - seealso: Directory
  */
 @interface OrgApacheLuceneStoreIndexInput : OrgApacheLuceneStoreDataInput < NSCopying, JavaIoCloseable >
@@ -47,13 +53,12 @@
 #pragma mark Public
 
 /*!
- @brief 
- <p><b>Warning:</b> Lucene never closes cloned
+ @brief <p><b>Warning:</b> Lucene never closes cloned 
  <code>IndexInput</code>s, it will only call <code>close()</code> on the original object.
  <p>If you access the cloned IndexInput after closing the original object,
- any <code>readXXX</code> methods will throw <code>AlreadyClosedException</code>.
+  any <code>readXXX</code> methods will throw <code>AlreadyClosedException</code>.
  */
-- (OrgApacheLuceneStoreIndexInput *)clone;
+- (OrgApacheLuceneStoreIndexInput *)java_clone;
 
 /*!
  @brief Closes the stream to further operations.
@@ -62,7 +67,7 @@
 
 /*!
  @brief Returns the current position in this file, where the next read will
- occur.
+  occur.
  - seealso: #seek(long)
  */
 - (jlong)getFilePointer;
@@ -75,8 +80,8 @@
 /*!
  @brief Creates a random-access slice of this index input, with the given offset and length.
  <p>
- The default implementation calls <code>slice</code>, and it doesn't support random access,
- it implements absolute reads as seek+read.
+  The default implementation calls <code>slice</code>, and it doesn't support random access,
+  it implements absolute reads as seek+read.
  */
 - (id<OrgApacheLuceneStoreRandomAccessInput>)randomAccessSliceWithLong:(jlong)offset
                                                               withLong:(jlong)length;
@@ -101,15 +106,19 @@
 
 /*!
  @brief resourceDescription should be a non-null, opaque string
- describing this resource; it's returned from
+   describing this resource; it's returned from  
  <code>toString</code>.
  */
-- (instancetype)initWithNSString:(NSString *)resourceDescription;
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDescription;
 
 /*!
  @brief Subclasses call this to get the String for resourceDescription of a slice of this <code>IndexInput</code>.
  */
 - (NSString *)getFullSliceDescriptionWithNSString:(NSString *)sliceDescription;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -121,4 +130,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexInput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreIndexInput")

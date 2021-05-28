@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreBufferedChecksumIndexInput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreBufferedChecksumIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksumIndexInput || defined(INCLUDE_OrgApacheLuceneStoreBufferedChecksumIndexInput))
 #define OrgApacheLuceneStoreBufferedChecksumIndexInput_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief Simple implementation of <code>ChecksumIndexInput</code> that wraps
- another input and delegates calls.
+  another input and delegates calls.
  */
 @interface OrgApacheLuceneStoreBufferedChecksumIndexInput : OrgApacheLuceneStoreChecksumIndexInput {
  @public
@@ -39,9 +45,9 @@
 /*!
  @brief Creates a new BufferedChecksumIndexInput
  */
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)main;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)main;
 
-- (OrgApacheLuceneStoreIndexInput *)clone;
+- (OrgApacheLuceneStoreIndexInput *)java_clone;
 
 - (void)close;
 
@@ -61,6 +67,10 @@
                                              withLong:(jlong)offset
                                              withLong:(jlong)length;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreBufferedChecksumIndexInput)
@@ -78,4 +88,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreBufferedChecksumIndexInput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksumIndexInput")

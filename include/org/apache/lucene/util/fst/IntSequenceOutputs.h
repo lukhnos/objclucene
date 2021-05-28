@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilFstIntSequenceOutputs
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstIntSequenceOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstIntSequenceOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstIntSequenceOutputs))
 #define OrgApacheLuceneUtilFstIntSequenceOutputs_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief An FST <code>Outputs</code> implementation where each output
- is a sequence of ints.
+  is a sequence of ints.
  */
 @interface OrgApacheLuceneUtilFstIntSequenceOutputs : OrgApacheLuceneUtilFstOutputs
 
@@ -42,11 +48,16 @@
 
 + (OrgApacheLuceneUtilFstIntSequenceOutputs *)getSingleton;
 
+- (OrgApacheLuceneUtilIntsRef *)mergeWithId:(OrgApacheLuceneUtilIntsRef *)arg0
+                                     withId:(OrgApacheLuceneUtilIntsRef *)arg1;
+
 - (NSString *)outputToStringWithId:(OrgApacheLuceneUtilIntsRef *)output;
 
 - (jlong)ramBytesUsedWithId:(OrgApacheLuceneUtilIntsRef *)output;
 
 - (OrgApacheLuceneUtilIntsRef *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
+
+- (OrgApacheLuceneUtilIntsRef *)readFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)arg0;
 
 - (void)skipOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
@@ -62,10 +73,14 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstIntSequenceOutputs)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstIntSequenceOutputs *OrgApacheLuceneUtilFstIntSequenceOutputs_getSingleton();
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstIntSequenceOutputs *OrgApacheLuceneUtilFstIntSequenceOutputs_getSingleton(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstIntSequenceOutputs)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstIntSequenceOutputs")

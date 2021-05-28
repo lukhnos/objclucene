@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserExtExtensionQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserExtExtensionQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserExtExtensionQuery || defined(INCLUDE_OrgApacheLuceneQueryparserExtExtensionQuery))
 #define OrgApacheLuceneQueryparserExtExtensionQuery_
 
@@ -20,7 +26,7 @@
 
 /*!
  @brief <code>ExtensionQuery</code> holds all query components extracted from the original
- query string like the query field and the extension query string.
+  query string like the query field and the extension query string.
  - seealso: Extensions
  - seealso: ExtendableQueryParser
  - seealso: ParserExtension
@@ -31,14 +37,12 @@
 
 /*!
  @brief Creates a new <code>ExtensionQuery</code>
- @param field
- the query field
- @param rawQueryString
- the raw extension query string
+ @param field the query field
+ @param rawQueryString the raw extension query string
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)topLevelParser
-                                                        withNSString:(NSString *)field
-                                                        withNSString:(NSString *)rawQueryString;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)topLevelParser
+                                                                  withNSString:(NSString *)field
+                                                                  withNSString:(NSString *)rawQueryString;
 
 /*!
  @brief Returns the query field
@@ -58,6 +62,10 @@
  */
 - (OrgApacheLuceneQueryparserClassicQueryParser *)getTopLevelParser;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserExtExtensionQuery)
@@ -72,4 +80,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserExtExtensionQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserExtExtensionQuery")

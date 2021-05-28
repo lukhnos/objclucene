@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexByteSliceWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexByteSliceWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexByteSliceWriter || defined(INCLUDE_OrgApacheLuceneIndexByteSliceWriter))
 #define OrgApacheLuceneIndexByteSliceWriter_
 
@@ -25,9 +31,8 @@
 
 /*!
  @brief Class to write byte streams into slices of shared
- byte[].
- This is used by DocumentsWriter to hold the
- posting list for many terms in RAM.
+  byte[].This is used by DocumentsWriter to hold the
+  posting list for many terms in RAM.
  */
 @interface OrgApacheLuceneIndexByteSliceWriter : OrgApacheLuceneStoreDataOutput {
  @public
@@ -36,7 +41,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool;
 
 - (jint)getAddress;
 
@@ -54,18 +59,26 @@
                         withInt:(jint)offset
                         withInt:(jint)len;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexByteSliceWriter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneIndexByteSliceWriter *self, OrgApacheLuceneUtilByteBlockPool *pool);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexByteSliceWriter_initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneIndexByteSliceWriter *self, OrgApacheLuceneUtilByteBlockPool *pool);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceWriter *new_OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceWriter *new_OrgApacheLuceneIndexByteSliceWriter_initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceWriter *create_OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool);
+FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceWriter *create_OrgApacheLuceneIndexByteSliceWriter_initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexByteSliceWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexByteSliceWriter")

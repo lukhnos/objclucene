@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinToParentBlockJoinSortField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinToParentBlockJoinSortField_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinSortField || defined(INCLUDE_OrgApacheLuceneSearchJoinToParentBlockJoinSortField))
 #define OrgApacheLuceneSearchJoinToParentBlockJoinSortField_
 
@@ -21,6 +27,7 @@
 #include "org/apache/lucene/search/SortField.h"
 
 @class OrgApacheLuceneSearchFieldComparator;
+@class OrgApacheLuceneSearchFieldComparatorSource;
 @class OrgApacheLuceneSearchSortField_Type;
 @protocol OrgApacheLuceneSearchJoinBitSetProducer;
 
@@ -33,17 +40,16 @@
 #pragma mark Public
 
 /*!
- @brief Create ToParentBlockJoinSortField.
- The parent document ordering is based on child document ordering (reverse).
+ @brief Create ToParentBlockJoinSortField.The parent document ordering is based on child document ordering (reverse).
  @param field The sort field on the nested / child level.
  @param type The sort type on the nested / child level.
  @param reverse Whether natural order should be reversed on the nested / child level.
  @param parentFilter Filter that identifies the parent documents.
  @param childFilter Filter that defines which child documents participates in sorting.
  */
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
-                     withBoolean:(jboolean)reverse
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
+                               withBoolean:(jboolean)reverse
 withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentFilter
 withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)childFilter;
 
@@ -56,15 +62,31 @@ withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetP
  @param parentFilter Filter that identifies the parent documents.
  @param childFilter Filter that defines which child documents participates in sorting.
  */
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
-                     withBoolean:(jboolean)reverse
-                     withBoolean:(jboolean)order
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
+                               withBoolean:(jboolean)reverse
+                               withBoolean:(jboolean)order
 withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentFilter
 withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)childFilter;
 
 - (OrgApacheLuceneSearchFieldComparator *)getComparatorWithInt:(jint)numHits
                                                        withInt:(jint)sortPos;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)arg1
+                               withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+   withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)arg1
+                               withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -86,4 +108,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinSortField")

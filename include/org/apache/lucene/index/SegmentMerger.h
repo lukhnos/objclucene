@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSegmentMerger
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSegmentMerger_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentMerger || defined(INCLUDE_OrgApacheLuceneIndexSegmentMerger))
 #define OrgApacheLuceneIndexSegmentMerger_
 
@@ -26,9 +32,8 @@
 
 /*!
  @brief The SegmentMerger class combines two or more Segments, represented by an
- IndexReader, into a single Segment.
- Call the merge method to combine the
- segments.
+  IndexReader, into a single Segment.Call the merge method to combine the
+  segments.
  - seealso: #merge
  */
 @interface OrgApacheLuceneIndexSegmentMerger : NSObject {
@@ -42,18 +47,18 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)readers
- withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
-   withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
-   withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_FieldNumbers *)fieldNumbers
-   withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
+- (instancetype __nonnull)initPackagePrivateWithJavaUtilList:(id<JavaUtilList>)readers
+                         withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
+                           withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
+                           withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+             withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_FieldNumbers *)fieldNumbers
+                           withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 /*!
  @brief Merges the readers into the directory passed to the constructor
  @return The number of documents that were merged
- @throws CorruptIndexException if the index is corrupt
- @throws IOException if there is a low-level IO error
+ @throw CorruptIndexExceptionif the index is corrupt
+ @throw IOExceptionif there is a low-level IO error
  */
 - (OrgApacheLuceneIndexMergeState *)merge;
 
@@ -62,20 +67,28 @@ withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_
  */
 - (jboolean)shouldMerge;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSegmentMerger)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentMerger, mergeState_, OrgApacheLuceneIndexMergeState *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentMerger *self, id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentMerger_initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentMerger *self, id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentMerger *new_OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentMerger *new_OrgApacheLuceneIndexSegmentMerger_initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentMerger *create_OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context);
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentMerger *create_OrgApacheLuceneIndexSegmentMerger_initPackagePrivateWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentMerger)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentMerger")

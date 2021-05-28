@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/index/AutomatonTermsEnum.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
@@ -21,6 +19,10 @@
 #include "org/apache/lucene/util/automaton/ByteRunAutomaton.h"
 #include "org/apache/lucene/util/automaton/CompiledAutomaton.h"
 #include "org/apache/lucene/util/automaton/Transition.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/AutomatonTermsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexAutomatonTermsEnum () {
  @public
@@ -39,44 +41,42 @@
 
 /*!
  @brief Sets the enum to operate in linear fashion, as we have found
- a looping transition at position: we set an upper bound and 
- act like a TermRangeQuery for this portion of the term space.
+  a looping transition at position: we set an upper bound and 
+  act like a TermRangeQuery for this portion of the term space.
  */
 - (void)setLinearWithInt:(jint)position;
 
 /*!
  @brief Increments the byte buffer to the next String in binary order after s that will not put
- the machine into a reject state.
- If such a string does not exist, returns
- false.
+  the machine into a reject state.If such a string does not exist, returns
+  false.
  The correctness of this method depends upon the automaton being deterministic,
- and having no transitions to dead states.
+  and having no transitions to dead states.
  @return true if more possible solutions exist for the DFA
  */
 - (jboolean)nextString;
 
 /*!
  @brief Returns the next String in lexicographic order that will not put
- the machine into a reject state.
+  the machine into a reject state.
  This method traverses the DFA from the given position in the String,
- starting at the given state.
- If this cannot satisfy the machine, returns false. This method will
- walk the minimal path, in lexicographic order, as long as possible.
- If this method returns false, then there might still be more solutions,
- it is necessary to backtrack to find out.
+  starting at the given state. 
+  If this cannot satisfy the machine, returns false. This method will
+  walk the minimal path, in lexicographic order, as long as possible. 
+  If this method returns false, then there might still be more solutions,
+  it is necessary to backtrack to find out.
  @param state current non-reject state
  @param position useful portion of the string
  @return true if more possible solutions exist for the DFA from this
- position
+          position
  */
 - (jboolean)nextStringWithInt:(jint)state
                       withInt:(jint)position;
 
 /*!
  @brief Attempts to backtrack thru the string after encountering a dead end
- at some given position.
- Returns false if no more possible strings 
- can match.
+  at some given position.Returns false if no more possible strings 
+  can match.
  @param position current position in the input String
  @return <code>position >= 0</code> if more possible solutions exist for the DFA
  */
@@ -121,7 +121,7 @@ __attribute__((unused)) static jint OrgApacheLuceneIndexAutomatonTermsEnum_backt
 
 - (OrgApacheLuceneUtilBytesRef *)nextSeekTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   if (term == nil) {
-    JreAssert(([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(seekBytesRef_)) length] == 0), (@"org/apache/lucene/index/AutomatonTermsEnum.java:111 condition failed: assert seekBytesRef.length() == 0;"));
+    JreAssert([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(seekBytesRef_)) length] == 0, @"org/apache/lucene/index/AutomatonTermsEnum.java:111 condition failed: assert seekBytesRef.length() == 0;");
     if ([((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(runAutomaton_)) isAcceptWithInt:[runAutomaton_ getInitialState]]) {
       return [seekBytesRef_ get];
     }
@@ -167,29 +167,41 @@ __attribute__((unused)) static jint OrgApacheLuceneIndexAutomatonTermsEnum_backt
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilAutomatonCompiledAutomaton:", "AutomatonTermsEnum", NULL, 0x1, NULL, NULL },
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x4, NULL, NULL },
-    { "nextSeekTermWithOrgApacheLuceneUtilBytesRef:", "nextSeekTerm", "Lorg.apache.lucene.util.BytesRef;", 0x4, "Ljava.io.IOException;", NULL },
-    { "setLinearWithInt:", "setLinear", "V", 0x2, NULL, NULL },
-    { "nextString", NULL, "Z", 0x2, NULL, NULL },
-    { "nextStringWithInt:withInt:", "nextString", "Z", 0x2, NULL, NULL },
-    { "backtrackWithInt:", "backtrack", "I", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x4, 3, 2, 4, -1, -1, -1 },
+    { NULL, "V", 0x2, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 9, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilAutomatonCompiledAutomaton:);
+  methods[1].selector = @selector(acceptWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(nextSeekTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(setLinearWithInt:);
+  methods[4].selector = @selector(nextString);
+  methods[5].selector = @selector(nextStringWithInt:withInt:);
+  methods[6].selector = @selector(backtrackWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "runAutomaton_", NULL, 0x12, "Lorg.apache.lucene.util.automaton.ByteRunAutomaton;", NULL, NULL, .constantValue.asLong = 0 },
-    { "commonSuffixRef_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "finite_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "automaton_", NULL, 0x12, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
-    { "visited_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "curGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "seekBytesRef_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "linear_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "linearUpperBound_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "transition_", NULL, 0x2, "Lorg.apache.lucene.util.automaton.Transition;", NULL, NULL, .constantValue.asLong = 0 },
-    { "savedStates_", NULL, 0x12, "Lorg.apache.lucene.util.IntsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "runAutomaton_", "LOrgApacheLuceneUtilAutomatonByteRunAutomaton;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "commonSuffixRef_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "finite_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "automaton_", "LOrgApacheLuceneUtilAutomatonAutomaton;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "visited_", "[J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "curGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "seekBytesRef_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "linear_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "linearUpperBound_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "transition_", "LOrgApacheLuceneUtilAutomatonTransition;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "savedStates_", "LOrgApacheLuceneUtilIntsRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexAutomatonTermsEnum = { 2, "AutomatonTermsEnum", "org.apache.lucene.index", NULL, 0x1, 7, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTermsEnum;LOrgApacheLuceneUtilAutomatonCompiledAutomaton;", "accept", "LOrgApacheLuceneUtilBytesRef;", "nextSeekTerm", "LJavaIoIOException;", "setLinear", "I", "nextString", "II", "backtrack" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexAutomatonTermsEnum = { "AutomatonTermsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 7, 11, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexAutomatonTermsEnum;
 }
 
@@ -204,7 +216,7 @@ void OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheLuceneIndexTermsEnu
   JreStrongAssignAndConsume(&self->savedStates_, new_OrgApacheLuceneUtilIntsRefBuilder_init());
   self->finite_ = [((JavaLangBoolean *) nil_chk(((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled))->finite_)) booleanValue];
   JreStrongAssign(&self->runAutomaton_, compiled->runAutomaton_);
-  JreAssert((self->runAutomaton_ != nil), (@"org/apache/lucene/index/AutomatonTermsEnum.java:81 condition failed: assert this.runAutomaton != null;"));
+  JreAssert(self->runAutomaton_ != nil, @"org/apache/lucene/index/AutomatonTermsEnum.java:81 condition failed: assert this.runAutomaton != null;");
   JreStrongAssign(&self->commonSuffixRef_, compiled->commonSuffixRef_);
   JreStrongAssign(&self->automaton_, compiled->automaton_);
   JreStrongAssignAndConsume(&self->visited_, [IOSLongArray newArrayWithLength:[((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(self->runAutomaton_)) getSize]]);
@@ -219,13 +231,13 @@ OrgApacheLuceneIndexAutomatonTermsEnum *create_OrgApacheLuceneIndexAutomatonTerm
 }
 
 void OrgApacheLuceneIndexAutomatonTermsEnum_setLinearWithInt_(OrgApacheLuceneIndexAutomatonTermsEnum *self, jint position) {
-  JreAssert((self->linear_ == false), (@"org/apache/lucene/index/AutomatonTermsEnum.java:136 condition failed: assert linear == false;"));
+  JreAssert(self->linear_ == false, @"org/apache/lucene/index/AutomatonTermsEnum.java:136 condition failed: assert linear == false;");
   jint state = [((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(self->runAutomaton_)) getInitialState];
-  JreAssert((state == 0), (@"org/apache/lucene/index/AutomatonTermsEnum.java:139 condition failed: assert state == 0;"));
+  JreAssert(state == 0, @"org/apache/lucene/index/AutomatonTermsEnum.java:139 condition failed: assert state == 0;");
   jint maxInterval = (jint) 0xff;
   for (jint i = 0; i < position; i++) {
     state = [self->runAutomaton_ stepWithInt:state withInt:[((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->seekBytesRef_)) byteAtWithInt:i] & (jint) 0xff];
-    JreAssert((state >= 0), (JreStrcat("$I", @"state=", state)));
+    JreAssert(state >= 0, JreStrcat("$I", @"state=", state));
   }
   jint numTransitions = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(self->automaton_)) getNumTransitionsWithInt:state];
   [self->automaton_ initTransitionWithInt:state withOrgApacheLuceneUtilAutomatonTransition:self->transition_];

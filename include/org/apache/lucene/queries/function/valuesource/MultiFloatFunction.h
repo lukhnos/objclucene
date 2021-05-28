@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_
 
@@ -28,7 +34,7 @@
 
 /*!
  @brief Abstract <code>ValueSource</code> implementation which wraps multiple ValueSources
- and applies an extendible float function to their values.
+  and applies an extendible float function to their values.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
@@ -37,7 +43,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSourceArray:(IOSObjectArray *)sources;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValueSourceArray:(IOSObjectArray *)sources;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -55,7 +61,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 
 /*!
  @brief Called by <code>FunctionValues.exists</code> for each document.
- Default impl returns true if <em>all</em> of the specified <code>values</code> 
+ Default impl returns true if <em>all</em> of the specified <code>values</code>  
  <code>FunctionValues.exists</code> for the specified doc, else false.
  - seealso: FunctionValues#exists
  - seealso: MultiFunction#allExists
@@ -67,6 +73,10 @@ withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
 withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
 
 - (NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -80,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction")

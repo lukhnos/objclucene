@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/util/Attribute.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/Attribute must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilAttribute : NSObject
 
 @end
@@ -13,7 +17,7 @@
 @implementation OrgApacheLuceneUtilAttribute
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttribute = { 2, "Attribute", "org.apache.lucene.util", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttribute = { "Attribute", "org.apache.lucene.util", NULL, NULL, NULL, 7, 0x609, 0, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAttribute;
 }
 

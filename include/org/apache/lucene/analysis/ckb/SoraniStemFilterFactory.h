@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory))
 #define OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_
 
@@ -27,13 +33,13 @@
 /*!
  @brief Factory for <code>SoraniStemFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_ckbstem" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
- &lt;filter class="solr.SoraniNormalizationFilterFactory"/&gt;
- &lt;filter class="solr.SoraniStemFilterFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_ckbstem" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+      &lt;filter class="solr.SoraniNormalizationFilterFactory"/&gt;
+      &lt;filter class="solr.SoraniStemFilterFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
@@ -43,7 +49,7 @@
 /*!
  @brief Creates a new SoraniStemFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCkbSoraniStemFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -61,4 +67,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory")

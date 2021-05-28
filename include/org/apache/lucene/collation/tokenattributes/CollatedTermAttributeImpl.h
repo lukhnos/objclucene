@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl || defined(INCLUDE_OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl))
 #define OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl_
 
@@ -25,7 +31,7 @@
 
 /*!
  @brief Extension of <code>CharTermAttributeImpl</code> that encodes the term
- text as a binary Unicode collation key instead of as UTF-8 bytes.
+  text as a binary Unicode collation key instead of as UTF-8 bytes.
  */
 @interface OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl : OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl
 
@@ -35,9 +41,13 @@
  @brief Create a new CollatedTermAttributeImpl
  @param collator Collation key generator
  */
-- (instancetype)initWithJavaTextCollator:(JavaTextCollator *)collator;
+- (instancetype __nonnull)initWithJavaTextCollator:(JavaTextCollator *)collator;
 
 - (OrgApacheLuceneUtilBytesRef *)getBytesRef;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -53,4 +63,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCollationTokenattributesCollatedTermAt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl")

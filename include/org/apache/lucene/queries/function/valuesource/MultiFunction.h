@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction))
 #define OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_
 
@@ -29,7 +35,7 @@
 
 /*!
  @brief Abstract parent class for <code>ValueSource</code> implementations that wrap multiple
- ValueSources and apply their own logic.
+  ValueSources and apply their own logic.
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMultiFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
@@ -38,13 +44,13 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)sources;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)sources;
 
 /*!
  @brief Equivilent the the <code>FunctionValues[]</code> method with the same name, but optimized for 
- dealing with exactly 2 arguments.
+  dealing with exactly 2 arguments.
  @return true if <em>both</em> of the specified <code>values</code>
- <code>FunctionValues.exists</code> for the specified doc, else false.
+          <code>FunctionValues.exists</code> for the specified doc, else false.
  - seealso: #anyExists(int,FunctionValues[])
  */
 + (jboolean)allExistsWithInt:(jint)doc
@@ -54,16 +60,16 @@ withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunction
 /*!
  @brief Helper utility for <code>FunctionValues</code>
  @return true if <em>all</em> of the specified <code>values</code>
- <code>FunctionValues.exists</code> for the specified doc, else false.
+          <code>FunctionValues.exists</code> for the specified doc, else false.
  */
 + (jboolean)allExistsWithInt:(jint)doc
 withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)values;
 
 /*!
  @brief Equivilent the the <code>FunctionValues[]</code> method with the same name, but optimized for 
- dealing with exactly 2 arguments.
+  dealing with exactly 2 arguments.
  @return true if <em>either</em> of the specified <code>values</code>
- <code>FunctionValues.exists</code> for the specified doc, else false.
+          <code>FunctionValues.exists</code> for the specified doc, else false.
  - seealso: #anyExists(int,FunctionValues[])
  */
 + (jboolean)anyExistsWithInt:(jint)doc
@@ -73,7 +79,7 @@ withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunction
 /*!
  @brief Helper utility for <code>FunctionValues</code>
  @return true if <em>any</em> of the specified <code>values</code>
- <code>FunctionValues.exists</code> for the specified doc, else false.
+          <code>FunctionValues.exists</code> for the specified doc, else false.
  */
 + (jboolean)anyExistsWithInt:(jint)doc
 withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)values;
@@ -101,6 +107,10 @@ withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr
 #pragma mark Protected
 
 - (NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -146,12 +156,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiFunctio
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *)outer$
-                         withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *)outer$
+                                   withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
 
 - (NSString *)toStringWithInt:(jint)doc;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -169,4 +183,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiFunctio
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction")

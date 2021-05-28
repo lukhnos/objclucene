@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
@@ -15,7 +14,10 @@
 #include "org/apache/lucene/analysis/miscellaneous/Lucene43TrimFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/Lucene43TrimFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter () {
  @public
@@ -28,6 +30,8 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter__Annotations$0(void);
+
 @implementation OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
@@ -39,7 +43,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, offs
 - (jboolean)incrementToken {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return false;
   IOSCharArray *termBuffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-  jint len = [termAtt_ length];
+  jint len = [termAtt_ java_length];
   if (len == 0) {
     return true;
   }
@@ -67,10 +71,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, offs
   return true;
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(termAtt_);
   RELEASE_(offsetAtt_);
@@ -78,16 +78,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, offs
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:", "Lucene43TrimFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:);
+  methods[1].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "updateOffsets_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "updateOffsets_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter = { 2, "Lucene43TrimFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;Z", "LJavaIoIOException;", (void *)&OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter = { "Lucene43TrimFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 2, 3, -1, -1, -1, -1, 2 };
   return &_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter;
 }
 
@@ -106,6 +113,10 @@ OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *new_OrgApacheLuceneAnaly
 
 OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *create_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jboolean updateOffsets) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_, inArg, updateOffsets)
+}
+
+IOSObjectArray *OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter)

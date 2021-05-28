@@ -8,10 +8,16 @@
 #include "org/apache/lucene/search/spans/Spans.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spans/SpanPositionQueue must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @implementation OrgApacheLuceneSearchSpansSpanPositionQueue
 
-- (instancetype)initWithInt:(jint)maxSize {
-  OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(self, maxSize);
+- (instancetype)initPackagePrivateWithInt:(jint)maxSize {
+  OrgApacheLuceneSearchSpansSpanPositionQueue_initPackagePrivateWithInt_(self, maxSize);
   return self;
 }
 
@@ -23,27 +29,33 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "SpanPositionQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/spans/Spans;Lorg/apache/lucene/search/spans/Spans;)Z" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 1, 2, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spans.Spans;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanPositionQueue = { 2, "SpanPositionQueue", "org.apache.lucene.search.spans", NULL, 0x0, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/spans/Spans;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:);
+  methods[1].selector = @selector(lessThanWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I", "lessThan", "LOrgApacheLuceneSearchSpansSpans;LOrgApacheLuceneSearchSpansSpans;", "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/spans/Spans;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanPositionQueue = { "SpanPositionQueue", "org.apache.lucene.search.spans", ptrTable, methods, NULL, 7, 0x0, 2, 0, -1, -1, -1, 3, -1 };
   return &_OrgApacheLuceneSearchSpansSpanPositionQueue;
 }
 
 @end
 
-void OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(OrgApacheLuceneSearchSpansSpanPositionQueue *self, jint maxSize) {
+void OrgApacheLuceneSearchSpansSpanPositionQueue_initPackagePrivateWithInt_(OrgApacheLuceneSearchSpansSpanPositionQueue *self, jint maxSize) {
   OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(self, maxSize, false);
 }
 
-OrgApacheLuceneSearchSpansSpanPositionQueue *new_OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(jint maxSize) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanPositionQueue, initWithInt_, maxSize)
+OrgApacheLuceneSearchSpansSpanPositionQueue *new_OrgApacheLuceneSearchSpansSpanPositionQueue_initPackagePrivateWithInt_(jint maxSize) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanPositionQueue, initPackagePrivateWithInt_, maxSize)
 }
 
-OrgApacheLuceneSearchSpansSpanPositionQueue *create_OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(jint maxSize) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanPositionQueue, initWithInt_, maxSize)
+OrgApacheLuceneSearchSpansSpanPositionQueue *create_OrgApacheLuceneSearchSpansSpanPositionQueue_initPackagePrivateWithInt_(jint maxSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanPositionQueue, initPackagePrivateWithInt_, maxSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanPositionQueue)

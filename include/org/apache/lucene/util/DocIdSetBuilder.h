@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilDocIdSetBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilDocIdSetBuilder_) && (INCLUDE_ALL_OrgApacheLuceneUtilDocIdSetBuilder || defined(INCLUDE_OrgApacheLuceneUtilDocIdSetBuilder))
 #define OrgApacheLuceneUtilDocIdSetBuilder_
 
@@ -20,9 +26,8 @@
 @class OrgApacheLuceneSearchDocIdSetIterator;
 
 /*!
- @brief A builder of <code>DocIdSet</code>s.
- At first it uses a sparse structure to gather
- documents, and then upgrades to a non-sparse bit set once enough hits match.
+ @brief A builder of <code>DocIdSet</code>s.At first it uses a sparse structure to gather
+  documents, and then upgrades to a non-sparse bit set once enough hits match.
  */
 @interface OrgApacheLuceneUtilDocIdSetBuilder : NSObject
 
@@ -31,11 +36,11 @@
 /*!
  @brief Create a builder that can contain doc IDs between <code>0</code> and <code>maxDoc</code>.
  */
-- (instancetype)initWithInt:(jint)maxDoc;
+- (instancetype __nonnull)initWithInt:(jint)maxDoc;
 
 /*!
  @brief Add the content of the provided <code>DocIdSetIterator</code> to this builder.
- NOTE: if you need to build a <code>DocIdSet</code> out of a single
+ NOTE: if you need to build a <code>DocIdSet</code> out of a single 
  <code>DocIdSetIterator</code>, you should rather use <code>RoaringDocIdSet.Builder</code>.
  */
 - (void)addWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
@@ -43,7 +48,7 @@
 /*!
  @brief Add a document to this builder.
  NOTE: doc IDs do not need to be provided in order.
- NOTE: if you plan on adding several docs at once, look into using
+  NOTE: if you plan on adding several docs at once, look into using 
  <code>grow(int)</code> to reserve space.
  */
 - (void)addWithInt:(jint)doc;
@@ -54,7 +59,7 @@
 - (OrgApacheLuceneSearchDocIdSet *)build;
 
 /*!
- @brief Expert: build a <code>DocIdSet</code> with a hint on the cost that the resulting
+ @brief Expert: build a <code>DocIdSet</code> with a hint on the cost that the resulting 
  <code>DocIdSet</code> would have.
  */
 - (OrgApacheLuceneSearchDocIdSet *)buildWithLong:(jlong)costHint;
@@ -63,6 +68,10 @@
  @brief Reserve space so that this builder can hold <code>numDocs</code> MORE documents.
  */
 - (void)growWithInt:(jint)numDocs;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -78,4 +87,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilDocIdSetBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilDocIdSetBuilder")

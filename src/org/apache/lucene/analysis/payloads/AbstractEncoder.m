@@ -6,16 +6,15 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/payloads/AbstractEncoder.h"
-#include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/payloads/AbstractEncoder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisPayloadsAbstractEncoder
-
-- (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer {
-  return [self encodeWithCharArray:buffer withInt:0 withInt:((IOSCharArray *) nil_chk(buffer))->size_];
-}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -24,12 +23,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer {
+  return [self encodeWithCharArray:buffer withInt:0 withInt:((IOSCharArray *) nil_chk(buffer))->size_];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "encodeWithCharArray:", "encode", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "init", "AbstractEncoder", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsAbstractEncoder = { 2, "AbstractEncoder", "org.apache.lucene.analysis.payloads", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(encodeWithCharArray:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "encode", "[C" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsAbstractEncoder = { "AbstractEncoder", "org.apache.lucene.analysis.payloads", ptrTable, methods, NULL, 7, 0x401, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPayloadsAbstractEncoder;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter))
 #define OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter_
 
@@ -26,9 +32,9 @@
 /*!
  @brief A <code>org.apache.lucene.analysis.TokenFilter</code> that decomposes compound words found in many Germanic languages.
  <p>
- "Donaudampfschiff" becomes Donau, dampf, schiff so that you can find
- "Donaudampfschiff" even when you only enter "schiff".
- It uses a brute-force algorithm to achieve this.
+  "Donaudampfschiff" becomes Donau, dampf, schiff so that you can find
+  "Donaudampfschiff" even when you only enter "schiff".
+   It uses a brute-force algorithm to achieve this.
  */
 @interface OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter : OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase
 
@@ -36,39 +42,39 @@
 
 /*!
  @brief Creates a new <code>DictionaryCompoundWordTokenFilter</code>
- @param input
- the <code>org.apache.lucene.analysis.TokenStream</code> to process
- @param dictionary
- the word dictionary to match against.
+ @param input the 
+ <code>org.apache.lucene.analysis.TokenStream</code>  to process
+ @param dictionary the word dictionary to match against.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary;
 
 /*!
  @brief Creates a new <code>DictionaryCompoundWordTokenFilter</code>
- @param input
- the <code>org.apache.lucene.analysis.TokenStream</code> to process
- @param dictionary
- the word dictionary to match against.
- @param minWordSize
- only words longer than this get processed
- @param minSubwordSize
- only subwords longer than this get to the output stream
- @param maxSubwordSize
- only subwords shorter than this get to the output stream
- @param onlyLongestMatch
- Add only the longest matching subword to the stream
+ @param input the 
+ <code>org.apache.lucene.analysis.TokenStream</code>  to process
+ @param dictionary the word dictionary to match against.
+ @param minWordSize only words longer than this get processed
+ @param minSubwordSize only subwords longer than this get to the output stream
+ @param maxSubwordSize only subwords shorter than this get to the output stream
+ @param onlyLongestMatch Add only the longest matching subword to the stream
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
-                                                   withInt:(jint)minWordSize
-                                                   withInt:(jint)minSubwordSize
-                                                   withInt:(jint)maxSubwordSize
-                                               withBoolean:(jboolean)onlyLongestMatch;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
+                                                             withInt:(jint)minWordSize
+                                                             withInt:(jint)minSubwordSize
+                                                             withInt:(jint)maxSubwordSize
+                                                         withBoolean:(jboolean)onlyLongestMatch;
 
 #pragma mark Protected
 
 - (void)decompose;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)arg1
+                                                         withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -90,4 +96,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundDictionaryCompoundWord
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMultiFields
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMultiFields_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiFields || defined(INCLUDE_OrgApacheLuceneIndexMultiFields))
 #define OrgApacheLuceneIndexMultiFields_
 
@@ -34,13 +40,14 @@
  @brief Exposes flex API, merged from flex API of sub-segments.
  This is useful when you're interacting with an <code>IndexReader</code>
   implementation that consists of sequential
- sub-readers (eg <code>DirectoryReader</code> or <code>MultiReader</code>
+  sub-readers (eg <code>DirectoryReader</code> or <code>MultiReader</code>
  ).
+  
  <p><b>NOTE</b>: for composite readers, you'll get better
- performance by gathering the sub readers using
+  performance by gathering the sub readers using 
  <code>IndexReader.getContext()</code> to get the
- atomic leaves and then operate per-LeafReader,
- instead of using this class.
+  atomic leaves and then operate per-LeafReader,
+  instead of using this class.
  */
 @interface OrgApacheLuceneIndexMultiFields : OrgApacheLuceneIndexFields
 
@@ -49,61 +56,58 @@
 /*!
  @brief Expert: construct a new MultiFields instance directly.
  */
-- (instancetype)initWithOrgApacheLuceneIndexFieldsArray:(IOSObjectArray *)subs
-               withOrgApacheLuceneIndexReaderSliceArray:(IOSObjectArray *)subSlices;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexFieldsArray:(IOSObjectArray *)subs
+                         withOrgApacheLuceneIndexReaderSliceArray:(IOSObjectArray *)subSlices;
 
 /*!
  @brief Returns a single <code>Fields</code> instance for this
- reader, merging fields/terms/docs/positions on the
- fly.
- This method will return null if the reader 
- has no postings.
+   reader, merging fields/terms/docs/positions on the
+   fly.This method will return null if the reader 
+   has no postings.
  <p><b>NOTE</b>: this is a slow way to access postings.
- It's better to get the sub-readers and iterate through them
- yourself. 
+   It's better to get the sub-readers and iterate through them
+   yourself.
  */
 + (OrgApacheLuceneIndexFields *)getFieldsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 /*!
  @brief Call this to get the (merged) FieldInfos representing the
- set of indexed fields <b>only</b> for a composite reader.
+   set of indexed fields <b>only</b> for a composite reader.
  <p>
- NOTE: the returned field numbers will likely not
- correspond to the actual field numbers in the underlying
- readers, and codec metadata (<code>FieldInfo.getAttribute(String)</code>
- will be unavailable.
+   NOTE: the returned field numbers will likely not
+   correspond to the actual field numbers in the underlying
+   readers, and codec metadata (<code>FieldInfo.getAttribute(String)</code>
+   will be unavailable.
  */
 + (id<JavaUtilCollection>)getIndexedFieldsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 /*!
  @brief Returns a single <code>Bits</code> instance for this
- reader, merging live Documents on the
- fly.
- This method will return null if the reader 
- has no deletions.
+   reader, merging live Documents on the
+   fly.This method will return null if the reader 
+   has no deletions.
  <p><b>NOTE</b>: this is a very slow way to access live docs.
- For example, each Bits access will require a binary search.
- It's better to get the sub-readers and iterate through them
- yourself. 
+   For example, each Bits access will require a binary search.
+   It's better to get the sub-readers and iterate through them
+   yourself.
  */
 + (id<OrgApacheLuceneUtilBits>)getLiveDocsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 /*!
  @brief Call this to get the (merged) FieldInfos for a
- composite reader.
+   composite reader.
  <p>
- NOTE: the returned field numbers will likely not
- correspond to the actual field numbers in the underlying
- readers, and codec metadata (<code>FieldInfo.getAttribute(String)</code>
- will be unavailable.
+   NOTE: the returned field numbers will likely not
+   correspond to the actual field numbers in the underlying
+   readers, and codec metadata (<code>FieldInfo.getAttribute(String)</code>
+   will be unavailable.
  */
 + (OrgApacheLuceneIndexFieldInfos *)getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 /*!
  @brief Returns <code>PostingsEnum</code> for the specified field and
- term.
- This will return null if the field or term does
- not exist. 
+   term.This will return null if the field or term does
+   not exist.
  */
 + (OrgApacheLuceneIndexPostingsEnum *)getTermDocsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                             withNSString:(NSString *)field
@@ -111,10 +115,10 @@
 
 /*!
  @brief Returns <code>PostingsEnum</code> for the specified field and
- term, with control over whether freqs are required.
+   term, with control over whether freqs are required.
  Some codecs may be able to optimize their
- implementation when freqs are not required.  This will
- return null if the field or term does not exist.  See <code>TermsEnum.postings(PostingsEnum,int)</code>
+   implementation when freqs are not required.  This will
+   return null if the field or term does not exist.  See <code>TermsEnum.postings(PostingsEnum,int)</code>
  .
  */
 + (OrgApacheLuceneIndexPostingsEnum *)getTermDocsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
@@ -124,10 +128,9 @@
 
 /*!
  @brief Returns <code>PostingsEnum</code> for the specified
- field and term.
- This will return null if the field or
- term does not exist or positions were not indexed. 
- - seealso: #getTermPositionsEnum(IndexReader,String,BytesRef,int)
+   field and term.This will return null if the field or
+   term does not exist or positions were not indexed.
+ - seealso: #getTermPositionsEnum(IndexReader, String, BytesRef, int)
  */
 + (OrgApacheLuceneIndexPostingsEnum *)getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                                  withNSString:(NSString *)field
@@ -135,12 +138,12 @@
 
 /*!
  @brief Returns <code>PostingsEnum</code> for the specified
- field and term, with control over whether offsets and payloads are
- required.
- Some codecs may be able to optimize
- their implementation when offsets and/or payloads are not
- required. This will return null if the field or term does not
- exist. See <code>TermsEnum.postings(PostingsEnum,int)</code>. 
+   field and term, with control over whether offsets and payloads are
+   required.Some codecs may be able to optimize
+   their implementation when offsets and/or payloads are not
+   required.
+ This will return null if the field or term does not
+   exist. See <code>TermsEnum.postings(PostingsEnum,int)</code>.
  */
 + (OrgApacheLuceneIndexPostingsEnum *)getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                                  withNSString:(NSString *)field
@@ -160,6 +163,10 @@
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -193,4 +200,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiFields)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiFields")

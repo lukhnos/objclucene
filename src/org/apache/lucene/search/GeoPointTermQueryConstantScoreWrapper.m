@@ -3,9 +3,7 @@
 //  source: ./sandbox/src/java/org/apache/lucene/search/GeoPointTermQueryConstantScoreWrapper.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
@@ -28,10 +26,17 @@
 #include "org/apache/lucene/util/DocIdSetBuilder.h"
 #include "org/apache/lucene/util/GeoUtils.h"
 
-@interface OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 : OrgApacheLuceneSearchConstantScoreWeight {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/GeoPointTermQueryConstantScoreWrapper must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 : OrgApacheLuceneSearchConstantScoreWeight {
  @public
   OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *this$0_;
 }
+
+- (instancetype)initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper:(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *)outer$
+                                                    withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (OrgApacheLuceneSearchDocIdSet *)getDocIDsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -41,31 +46,24 @@
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
-- (instancetype)initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper:(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *)outer$
-                                                    withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1, this$0_, OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *)
+__attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_getDocIDsWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneIndexLeafReaderContext *context);
+__attribute__((unused)) static OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 *new_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_scorerWithOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneSearchDocIdSet *set);
+__attribute__((unused)) static OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 *create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_getDocIDsWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneIndexLeafReaderContext *context);
 
-__attribute__((unused)) static OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 *new_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 *create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_scorerWithOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneSearchDocIdSet *set);
 
 @implementation OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper
 
-- (instancetype)initWithOrgApacheLuceneSearchGeoPointTermQuery:(OrgApacheLuceneSearchGeoPointTermQuery *)query {
-  OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchGeoPointTermQuery_(self, query);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery:(OrgApacheLuceneSearchGeoPointTermQuery *)query {
+  OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery_(self, query);
   return self;
 }
 
@@ -87,7 +85,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWr
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(self, self);
+  return create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (void)dealloc {
@@ -96,63 +94,73 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWr
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchGeoPointTermQuery:", "GeoPointTermQueryConstantScoreWrapper", NULL, 0x4, NULL, "(TQ;)V" },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x11, NULL, NULL },
-    { "hash", "hashCode", "I", 0x11, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 7, 8, 9, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery:);
+  methods[1].selector = @selector(toStringWithNSString:);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "query_", NULL, 0x14, "TQ;", NULL, "TQ;", .constantValue.asLong = 0 },
+    { "query_", "LOrgApacheLuceneSearchGeoPointTermQuery;", .constantValue.asLong = 0, 0x14, -1, -1, 10, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper = { 2, "GeoPointTermQueryConstantScoreWrapper", "org.apache.lucene.search", NULL, 0x10, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, "<Q:Lorg/apache/lucene/search/GeoPointTermQuery;>Lorg/apache/lucene/search/Query;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchGeoPointTermQuery;", "(TQ;)V", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "TQ;", "<Q:Lorg/apache/lucene/search/GeoPointTermQuery;>Lorg/apache/lucene/search/Query;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper = { "GeoPointTermQueryConstantScoreWrapper", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x10, 5, 1, -1, -1, -1, 11, -1 };
   return &_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper;
 }
 
 @end
 
-void OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *self, OrgApacheLuceneSearchGeoPointTermQuery *query) {
+void OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *self, OrgApacheLuceneSearchGeoPointTermQuery *query) {
   OrgApacheLuceneSearchQuery_init(self);
   JreStrongAssign(&self->query_, query);
 }
 
-OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQuery *query) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper, initWithOrgApacheLuceneSearchGeoPointTermQuery_, query)
+OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQuery *query) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper, initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery_, query)
 }
 
-OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQuery *query) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper, initWithOrgApacheLuceneSearchGeoPointTermQuery_, query)
+OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper, initPackagePrivateWithOrgApacheLuceneSearchGeoPointTermQuery_, query)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper)
 
-@implementation OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1
+@implementation OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1
+
+- (instancetype)initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper:(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *)outer$
+                                                    withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
+  OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(self, outer$, query);
+  return self;
+}
 
 - (OrgApacheLuceneSearchDocIdSet *)getDocIDsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  return OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_getDocIDsWithOrgApacheLuceneIndexLeafReaderContext_(self, context);
+  return OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_getDocIDsWithOrgApacheLuceneIndexLeafReaderContext_(self, context);
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set {
-  return OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, set);
+  return OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, set);
 }
 
 - (OrgApacheLuceneSearchBulkScorer *)bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneSearchScorer *scorer = OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_getDocIDsWithOrgApacheLuceneIndexLeafReaderContext_(self, context));
+  OrgApacheLuceneSearchScorer *scorer = OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_getDocIDsWithOrgApacheLuceneIndexLeafReaderContext_(self, context));
   if (scorer == nil) {
-    return nil;
+    return JreRetainedLocalValue(nil);
   }
   return create_OrgApacheLuceneSearchWeight_DefaultBulkScorer_initWithOrgApacheLuceneSearchScorer_(scorer);
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  return OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_getDocIDsWithOrgApacheLuceneIndexLeafReaderContext_(self, context));
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper:(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *)outer$
-                                                    withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0 {
-  OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
-  return self;
+  return OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_getDocIDsWithOrgApacheLuceneIndexLeafReaderContext_(self, context));
 }
 
 - (void)dealloc {
@@ -161,34 +169,56 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointTermQueryConstantS
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDocIDsWithOrgApacheLuceneIndexLeafReaderContext:", "getDocIDs", "Lorg.apache.lucene.search.DocIdSet;", 0x2, "Ljava.io.IOException;", NULL },
-    { "scorerWithOrgApacheLuceneSearchDocIdSet:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x2, "Ljava.io.IOException;", NULL },
-    { "bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:", "bulkScorer", "Lorg.apache.lucene.search.BulkScorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper:withOrgApacheLuceneSearchQuery:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x2, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x2, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBulkScorer;", 0x1, 6, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 4, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper:withOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(getDocIDsWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[2].selector = @selector(scorerWithOrgApacheLuceneSearchDocIdSet:);
+  methods[3].selector = @selector(bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[4].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.GeoPointTermQueryConstantScoreWrapper;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper;", .constantValue.asLong = 0, 0x1012, -1, -1, 7, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 = { 2, "", "org.apache.lucene.search", "GeoPointTermQueryConstantScoreWrapper", 0x8008, 5, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper;LOrgApacheLuceneSearchQuery;", "getDocIDs", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "scorer", "LOrgApacheLuceneSearchDocIdSet;", "bulkScorer", "Lorg/apache/lucene/search/GeoPointTermQueryConstantScoreWrapper<TQ;>;", "LOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper;", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 5, 1, 8, -1, 9, -1, -1 };
+  return &_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1;
 }
 
 @end
 
-OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_getDocIDsWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneIndexLeafReaderContext *context) {
+void OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *query) {
+  JreStrongAssign(&self->this$0_, outer$);
+  OrgApacheLuceneSearchConstantScoreWeight_initWithOrgApacheLuceneSearchQuery_(self, query);
+}
+
+OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 *new_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1, initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_, outer$, query)
+}
+
+OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 *create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1, initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_, outer$, query)
+}
+
+OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_getDocIDsWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneIndexLeafReaderContext *context) {
   OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) termsWithNSString:((OrgApacheLuceneSearchGeoPointTermQuery *) nil_chk(self->this$0_->query_))->field_];
   if (terms == nil) {
     return JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY);
   }
   OrgApacheLuceneSearchGeoPointTermsEnum *termsEnum = (OrgApacheLuceneSearchGeoPointTermsEnum *) cast_chk(([self->this$0_->query_ getTermsEnumWithOrgApacheLuceneIndexTerms:terms]), [OrgApacheLuceneSearchGeoPointTermsEnum class]);
-  JreAssert((termsEnum != nil), (@"org/apache/lucene/search/GeoPointTermQueryConstantScoreWrapper.java:73 condition failed: assert termsEnum != null;"));
-  OrgApacheLuceneIndexLeafReader *reader = [context reader];
+  JreAssert(termsEnum != nil, @"org/apache/lucene/search/GeoPointTermQueryConstantScoreWrapper.java:73 condition failed: assert termsEnum != null;");
+  OrgApacheLuceneIndexLeafReader *reader = JreRetainedLocalValue([context reader]);
   OrgApacheLuceneUtilDocIdSetBuilder *builder = create_OrgApacheLuceneUtilDocIdSetBuilder_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]);
   OrgApacheLuceneIndexPostingsEnum *docs = nil;
-  OrgApacheLuceneIndexSortedNumericDocValues *sdv = [reader getSortedNumericDocValuesWithNSString:self->this$0_->query_->field_];
+  OrgApacheLuceneIndexSortedNumericDocValues *sdv = JreRetainedLocalValue([reader getSortedNumericDocValuesWithNSString:self->this$0_->query_->field_]);
   while ([((OrgApacheLuceneSearchGeoPointTermsEnum *) nil_chk(termsEnum)) next] != nil) {
     docs = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:docs withInt:OrgApacheLuceneIndexPostingsEnum_NONE];
     if ([termsEnum boundaryTerm]) {
@@ -213,7 +243,7 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchGeoPointTermQueryConstantSco
   return [builder build];
 }
 
-OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_scorerWithOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneSearchDocIdSet *set) {
+OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1_scorerWithOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneSearchDocIdSet *set) {
   if (set == nil) {
     return nil;
   }
@@ -223,18 +253,3 @@ OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchGeoPointTermQueryConstantScore
   }
   return create_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchDocIdSetIterator_(self, [self score], disi);
 }
-
-void OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchConstantScoreWeight_initWithOrgApacheLuceneSearchQuery_(self, arg$0);
-}
-
-OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 *new_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1, initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
-}
-
-OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1 *create_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1, initWithOrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_$1)

@@ -13,27 +13,33 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilSentinelIntSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilSentinelIntSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilSentinelIntSet || defined(INCLUDE_OrgApacheLuceneUtilSentinelIntSet))
 #define OrgApacheLuceneUtilSentinelIntSet_
 
 @class IOSIntArray;
 
 /*!
- @brief A native int hash-based set where one value is reserved to mean "EMPTY" internally.
- The space overhead is fairly low
- as there is only one power-of-two sized int[] to hold the values.  The set is re-hashed when adding a value that
- would make it &gt;= 75% full.  Consider extending and over-riding <code>hash(int)</code> if the values might be poor
- hash keys; Lucene docids should be fine.
- The internal fields are exposed publicly to enable more efficient use at the expense of better O-O principles.
+ @brief A native int hash-based set where one value is reserved to mean "EMPTY" internally.The space overhead is fairly low
+  as there is only one power-of-two sized int[] to hold the values.
+ The set is re-hashed when adding a value that
+  would make it &gt;= 75% full.  Consider extending and over-riding <code>hash(int)</code> if the values might be poor
+  hash keys; Lucene docids should be fine.
+  The internal fields are exposed publicly to enable more efficient use at the expense of better O-O principles. 
  <p>
- To iterate over the integers held in this set, simply use code like this:
+  To iterate over the integers held in this set, simply use code like this: 
  <pre class="prettyprint">
- SentinelIntSet set = ...
- for (int v : set.keys) {
- if (v == set.emptyVal)
- continue;
- //use v...
- 
+  SentinelIntSet set = ...
+  for (int v : set.keys) {
+    if (v == set.emptyVal)
+      continue;
+    //use v...
+  }
 @endcode
  */
 @interface OrgApacheLuceneUtilSentinelIntSet : NSObject {
@@ -53,12 +59,11 @@
 #pragma mark Public
 
 /*!
- @param size  The minimum number of elements this set should be able to hold without rehashing
- (i.e. the slots are guaranteed not to change)
+ @param size The minimum number of elements this set should be able to hold without rehashing               (i.e. the slots are guaranteed not to change)
  @param emptyVal The integer value to use for EMPTY
  */
-- (instancetype)initWithInt:(jint)size
-                    withInt:(jint)emptyVal;
+- (instancetype __nonnull)initWithInt:(jint)size
+                              withInt:(jint)emptyVal;
 
 - (void)clear;
 
@@ -78,15 +83,14 @@
 - (jint)getSlotWithInt:(jint)key;
 
 /*!
- @brief (internal) Return the hash for the key.
- The default implementation just returns the key,
- which is not appropriate for general purpose use.
+ @brief (internal) Return the hash for the key.The default implementation just returns the key,
+  which is not appropriate for general purpose use.
  */
 - (jint)hash__WithInt:(jint)key;
 
 /*!
  @brief Puts this integer (key) in the set, and returns the slot index it was added to.
- It rehashes if adding it would make the set more than 75% full. 
+ It rehashes if adding it would make the set more than 75% full.
  */
 - (jint)putWithInt:(jint)key;
 
@@ -105,6 +109,10 @@
  */
 - (jint)size;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilSentinelIntSet)
@@ -121,4 +129,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSentinelIntSet)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSentinelIntSet")

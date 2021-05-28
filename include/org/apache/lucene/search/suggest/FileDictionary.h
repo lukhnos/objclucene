@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestFileDictionary
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestFileDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFileDictionary || defined(INCLUDE_OrgApacheLuceneSearchSuggestFileDictionary))
 #define OrgApacheLuceneSearchSuggestFileDictionary_
 
@@ -27,70 +33,73 @@
 /*!
  @brief Dictionary represented by a text file.
  <p>Format allowed: 1 entry per line:<br>
- An entry can be: <br>
+  An entry can be: <br>
+  <ul>
+  <li>suggestion</li>
+  <li>suggestion <code>fieldDelimiter</code> weight</li>
+  <li>suggestion <code>fieldDelimiter</code> weight <code>fieldDelimiter</code> payload</li>
+  </ul>
+  where the default <code>fieldDelimiter</code> is #DEFAULT_FIELD_DELIMITER<br>
+  <p>
+  <b>NOTE:</b>  
  <ul>
- <li>suggestion</li>
- <li>suggestion <code>fieldDelimiter</code> weight</li>
- <li>suggestion <code>fieldDelimiter</code> weight <code>fieldDelimiter</code> payload</li>
- </ul>
- where the default <code>fieldDelimiter</code> is #DEFAULT_FIELD_DELIMITER<br>
- <p>
- <b>NOTE:</b> 
- <ul>
- <li>In order to have payload enabled, the first entry has to have a payload</li>
- <li>If the weight for an entry is not specified then a value of 1 is used</li>
- <li>A payload cannot be specified without having the weight specified for an entry</li>
- <li>If the payload for an entry is not specified (assuming payload is enabled) 
- then an empty payload is returned</li>
- <li>An entry cannot have more than two <code>fieldDelimiter</code></li>
- </ul>
- <p>
- <b>Example:</b><br>
- word1 word2 TAB 100 TAB payload1<br>
- word3 TAB 101<br>
- word4 word3 TAB 102<br>
+  <li>In order to have payload enabled, the first entry has to have a payload</li>
+  <li>If the weight for an entry is not specified then a value of 1 is used</li>
+  <li>A payload cannot be specified without having the weight specified for an entry</li>
+  <li>If the payload for an entry is not specified (assuming payload is enabled) 
+   then an empty payload is returned</li>
+  <li>An entry cannot have more than two <code>fieldDelimiter</code></li>
+  </ul>
+  <p>
+  <b>Example:</b><br>
+  word1 word2 TAB 100 TAB payload1<br>
+  word3 TAB 101<br>
+  word4 word3 TAB 102<br>
  */
 @interface OrgApacheLuceneSearchSuggestFileDictionary : NSObject < OrgApacheLuceneSearchSpellDictionary >
-
-+ (NSString *)DEFAULT_FIELD_DELIMITER;
+@property (readonly, copy, class) NSString *DEFAULT_FIELD_DELIMITER NS_SWIFT_NAME(DEFAULT_FIELD_DELIMITER);
 
 #pragma mark Public
 
 /*!
  @brief Creates a dictionary based on an inputstream.
  Using <code>DEFAULT_FIELD_DELIMITER</code> as the 
- field seperator in a line.
+  field seperator in a line. 
  <p>
- NOTE: content is treated as UTF-8
+  NOTE: content is treated as UTF-8
  */
-- (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)dictFile;
+- (instancetype __nonnull)initWithJavaIoInputStream:(JavaIoInputStream *)dictFile;
 
 /*!
  @brief Creates a dictionary based on an inputstream.
  Using <code>fieldDelimiter</code> to seperate out the
- fields in a line.
+  fields in a line. 
  <p>
- NOTE: content is treated as UTF-8
+  NOTE: content is treated as UTF-8
  */
-- (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)dictFile
-                             withNSString:(NSString *)fieldDelimiter;
+- (instancetype __nonnull)initWithJavaIoInputStream:(JavaIoInputStream *)dictFile
+                                       withNSString:(NSString *)fieldDelimiter;
 
 /*!
  @brief Creates a dictionary based on a reader.
  Using <code>DEFAULT_FIELD_DELIMITER</code> as the 
- field seperator in a line.
+  field seperator in a line.
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)reader;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)reader;
 
 /*!
  @brief Creates a dictionary based on a reader.
  Using <code>fieldDelimiter</code> to seperate out the
- fields in a line.
+  fields in a line.
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)reader
-                        withNSString:(NSString *)fieldDelimiter;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)reader
+                                  withNSString:(NSString *)fieldDelimiter;
 
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -99,7 +108,7 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFileDictionary)
 /*!
  @brief Tab-delimited fields are most common thus the default, but one can override this via the constructor
  */
-inline NSString *OrgApacheLuceneSearchSuggestFileDictionary_get_DEFAULT_FIELD_DELIMITER();
+inline NSString *OrgApacheLuceneSearchSuggestFileDictionary_get_DEFAULT_FIELD_DELIMITER(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestFileDictionary, DEFAULT_FIELD_DELIMITER, NSString *)
@@ -158,6 +167,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFileDictionary)
 
 - (jlong)weight;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFileDictionary_FileIterator)
@@ -166,4 +179,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFileDictionary_FileIterat
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFileDictionary")

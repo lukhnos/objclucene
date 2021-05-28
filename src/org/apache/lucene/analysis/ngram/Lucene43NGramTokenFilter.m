@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -21,17 +20,22 @@
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/PositionLengthAttribute.h"
 #include "org/apache/lucene/analysis/util/CharacterUtils.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ngram/Lucene43NGramTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter () {
  @public
-  jint minGram_, maxGram_;
+  jint minGram_;
+  jint maxGram_;
   IOSCharArray *curTermBuffer_;
   jint curTermLength_;
   jint curCodePointCount_;
   jint curGramSize_;
   jint curPos_;
-  jint curPosInc_, curPosLen_;
+  jint curPosInc_;
+  jint curPosLen_;
   jint tokStart_;
   jint tokEnd_;
   jboolean hasIllegalOffsets_;
@@ -51,45 +55,43 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter, posInc
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter, posLenAtt_, id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 
-@interface OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 : NSObject < OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute >
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter__Annotations$0(void);
+
+@interface OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1 : NSObject < OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute >
+
+- (instancetype)init;
 
 - (void)setPositionIncrementWithInt:(jint)positionIncrement;
 
 - (jint)getPositionIncrement;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1)
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1_init(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1 *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init();
+__attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1_init(void);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1)
+@interface OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2 : NSObject < OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute >
 
-@interface OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 : NSObject < OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute >
+- (instancetype)init;
 
 - (void)setPositionLengthWithInt:(jint)positionLength;
 
 - (jint)getPositionLength;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2)
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *self);
+__attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2_init(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2 *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init();
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2)
+__attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2_init(void);
 
 @implementation OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter
 
@@ -120,8 +122,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_
         return false;
       }
       else {
-        JreStrongAssign(&curTermBuffer_, [((IOSCharArray *) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer])) clone]);
-        curTermLength_ = [termAtt_ length];
+        JreStrongAssign(&curTermBuffer_, [((IOSCharArray *) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer])) java_clone]);
+        curTermLength_ = [termAtt_ java_length];
         curCodePointCount_ = [((OrgApacheLuceneAnalysisUtilCharacterUtils *) nil_chk(charUtils_)) codePointCountWithJavaLangCharSequence:termAtt_];
         curGramSize_ = minGram_;
         curPos_ = 0;
@@ -157,10 +159,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_
   JreStrongAssign(&curTermBuffer_, nil);
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(curTermBuffer_);
   RELEASE_(charUtils_);
@@ -172,34 +170,43 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:", "Lucene43NGramTokenFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "Lucene43NGramTokenFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[2].selector = @selector(incrementToken);
+  methods[3].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_MIN_NGRAM_SIZE", "DEFAULT_MIN_NGRAM_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_DEFAULT_MIN_NGRAM_SIZE },
-    { "DEFAULT_MAX_NGRAM_SIZE", "DEFAULT_MAX_NGRAM_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_DEFAULT_MAX_NGRAM_SIZE },
-    { "minGram_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxGram_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curTermBuffer_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "curTermLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curCodePointCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curGramSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curPos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curPosInc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curPosLen_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokStart_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokEnd_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasIllegalOffsets_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "charUtils_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharacterUtils;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posLenAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionLengthAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_MIN_NGRAM_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_DEFAULT_MIN_NGRAM_SIZE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_NGRAM_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_DEFAULT_MAX_NGRAM_SIZE, 0x19, -1, -1, -1, -1 },
+    { "minGram_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxGram_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "curTermBuffer_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curTermLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curCodePointCount_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curGramSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curPos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curPosInc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "curPosLen_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tokStart_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tokEnd_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "hasIllegalOffsets_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "charUtils_", "LOrgApacheLuceneAnalysisUtilCharacterUtils;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posLenAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter = { 2, "Lucene43NGramTokenFilter", "org.apache.lucene.analysis.ngram", NULL, 0x11, 4, methods, 19, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;II", "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", (void *)&OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter = { "Lucene43NGramTokenFilter", "org.apache.lucene.analysis.ngram", ptrTable, methods, fields, 7, 0x11, 4, 19, -1, -1, -1, -1, 3 };
   return &_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter;
 }
 
@@ -218,8 +225,8 @@ void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLucen
   }
   self->minGram_ = minGram;
   self->maxGram_ = maxGram;
-  JreStrongAssignAndConsume(&self->posIncAtt_, new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init());
-  JreStrongAssignAndConsume(&self->posLenAtt_, new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init());
+  JreStrongAssignAndConsume(&self->posIncAtt_, new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1_init());
+  JreStrongAssignAndConsume(&self->posLenAtt_, new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2_init());
 }
 
 OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram) {
@@ -242,9 +249,20 @@ OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter *create_OrgApacheLuceneAnal
   J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
+IOSObjectArray *OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter)
 
-@implementation OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1
+@implementation OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPositionIncrementWithInt:(jint)positionIncrement {
 }
@@ -253,41 +271,46 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43NGramTokenF
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setPositionIncrementWithInt:", "setPositionIncrement", "V", 0x1, NULL, NULL },
-    { "getPositionIncrement", NULL, "I", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter", "initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 = { 2, "", "org.apache.lucene.analysis.ngram", "Lucene43NGramTokenFilter", 0x8008, 3, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setPositionIncrementWithInt:);
+  methods[2].selector = @selector(getPositionIncrement);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setPositionIncrement", "I", "LOrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter;", "initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1 = { "", "org.apache.lucene.analysis.ngram", ptrTable, methods, NULL, 7, 0x8010, 3, 0, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *self) {
+void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1_init(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1, init)
+OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1, init)
 }
 
-OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1, init)
+OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_1, init)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1)
+@implementation OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2
 
-@implementation OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPositionLengthWithInt:(jint)positionLength {
 }
@@ -296,36 +319,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43NGramTokenF
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setPositionLengthWithInt:", "setPositionLength", "V", 0x1, NULL, NULL },
-    { "getPositionLength", NULL, "I", 0x1, NULL, NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter", "initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 = { 2, "", "org.apache.lucene.analysis.ngram", "Lucene43NGramTokenFilter", 0x8008, 3, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setPositionLengthWithInt:);
+  methods[2].selector = @selector(getPositionLength);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setPositionLength", "I", "LOrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter;", "initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2 = { "", "org.apache.lucene.analysis.ngram", ptrTable, methods, NULL, 7, 0x8010, 3, 0, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *self) {
+void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2_init(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2 *self) {
   NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2, init)
+OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2, init)
 }
 
-OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2, init)
+OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_2, init)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2)

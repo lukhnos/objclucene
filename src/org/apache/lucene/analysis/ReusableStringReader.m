@@ -3,16 +3,20 @@
 //  source: ./core/src/java/org/apache/lucene/analysis/ReusableStringReader.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Reader.h"
 #include "java/lang/Math.h"
 #include "org/apache/lucene/analysis/ReusableStringReader.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/ReusableStringReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisReusableStringReader () {
  @public
-  jint pos_, size_;
+  jint pos_;
+  jint size_;
   NSString *s_;
 }
 
@@ -22,9 +26,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReusableStringReader, s_, NSString *)
 
 @implementation OrgApacheLuceneAnalysisReusableStringReader
 
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneAnalysisReusableStringReader_initPackagePrivate(self);
+  return self;
+}
+
 - (void)setValueWithNSString:(NSString *)s {
   JreStrongAssign(&self->s_, s);
-  self->size_ = ((jint) [((NSString *) nil_chk(s)) length]);
+  self->size_ = [((NSString *) nil_chk(s)) java_length];
   self->pos_ = 0;
 }
 
@@ -43,7 +52,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReusableStringReader, s_, NSString *)
                   withInt:(jint)len {
   if (pos_ < size_) {
     len = JavaLangMath_minWithInt_withInt_(len, size_ - pos_);
-    [((NSString *) nil_chk(s_)) getChars:pos_ sourceEnd:pos_ + len destination:c destinationBegin:off];
+    [((NSString *) nil_chk(s_)) java_getChars:pos_ sourceEnd:pos_ + len destination:c destinationBegin:off];
     pos_ += len;
     return len;
   }
@@ -58,50 +67,53 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReusableStringReader, s_, NSString *)
   JreStrongAssign(&s_, nil);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisReusableStringReader_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(s_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setValueWithNSString:", "setValue", "V", 0x0, NULL, NULL },
-    { "read", NULL, "I", 0x1, NULL, NULL },
-    { "readWithCharArray:withInt:withInt:", "read", "I", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
-    { "init", "ReusableStringReader", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(setValueWithNSString:);
+  methods[2].selector = @selector(read);
+  methods[3].selector = @selector(readWithCharArray:withInt:withInt:);
+  methods[4].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "size_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "s_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "pos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "size_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "s_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisReusableStringReader = { 2, "ReusableStringReader", "org.apache.lucene.analysis", NULL, 0x10, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setValue", "LNSString;", "read", "[CII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisReusableStringReader = { "ReusableStringReader", "org.apache.lucene.analysis", ptrTable, methods, fields, 7, 0x10, 5, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisReusableStringReader;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisReusableStringReader_init(OrgApacheLuceneAnalysisReusableStringReader *self) {
+void OrgApacheLuceneAnalysisReusableStringReader_initPackagePrivate(OrgApacheLuceneAnalysisReusableStringReader *self) {
   JavaIoReader_init(self);
   self->pos_ = 0;
   self->size_ = 0;
   JreStrongAssign(&self->s_, nil);
 }
 
-OrgApacheLuceneAnalysisReusableStringReader *new_OrgApacheLuceneAnalysisReusableStringReader_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisReusableStringReader, init)
+OrgApacheLuceneAnalysisReusableStringReader *new_OrgApacheLuceneAnalysisReusableStringReader_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisReusableStringReader, initPackagePrivate)
 }
 
-OrgApacheLuceneAnalysisReusableStringReader *create_OrgApacheLuceneAnalysisReusableStringReader_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisReusableStringReader, init)
+OrgApacheLuceneAnalysisReusableStringReader *create_OrgApacheLuceneAnalysisReusableStringReader_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisReusableStringReader, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisReusableStringReader)

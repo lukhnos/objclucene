@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/BlockPackedWriter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "org/apache/lucene/store/DataOutput.h"
@@ -14,6 +12,10 @@
 #include "org/apache/lucene/util/packed/AbstractBlockPackedWriter.h"
 #include "org/apache/lucene/util/packed/BlockPackedWriter.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/BlockPackedWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneUtilPackedBlockPackedWriter
 
@@ -24,8 +26,9 @@
 }
 
 - (void)flush {
-  JreAssert((off_ > 0), (@"org/apache/lucene/util/packed/BlockPackedWriter.java:71 condition failed: assert off > 0;"));
-  jlong min = JavaLangLong_MAX_VALUE, max = JavaLangLong_MIN_VALUE;
+  JreAssert(off_ > 0, @"org/apache/lucene/util/packed/BlockPackedWriter.java:71 condition failed: assert off > 0;");
+  jlong min = JavaLangLong_MAX_VALUE;
+  jlong max = JavaLangLong_MIN_VALUE;
   for (jint i = 0; i < off_; ++i) {
     min = JavaLangMath_minWithLong_withLong_(IOSLongArray_Get(nil_chk(values_), i), min);
     max = JavaLangMath_maxWithLong_withLong_(IOSLongArray_Get(values_, i), max);
@@ -55,18 +58,25 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDataOutput:withInt:", "BlockPackedWriter", NULL, 0x1, NULL, NULL },
-    { "flush", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBlockPackedWriter = { 2, "BlockPackedWriter", "org.apache.lucene.util.packed", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDataOutput:withInt:);
+  methods[1].selector = @selector(flush);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDataOutput;I", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBlockPackedWriter = { "BlockPackedWriter", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x11, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedBlockPackedWriter;
 }
 
 @end
 
 void OrgApacheLuceneUtilPackedBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneUtilPackedBlockPackedWriter *self, OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) {
-  OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(self, outArg, blockSize);
+  OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_initPackagePrivateWithOrgApacheLuceneStoreDataOutput_withInt_(self, outArg, blockSize);
 }
 
 OrgApacheLuceneUtilPackedBlockPackedWriter *new_OrgApacheLuceneUtilPackedBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) {

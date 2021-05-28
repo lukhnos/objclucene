@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -36,6 +35,12 @@
 #include "org/apache/lucene/util/automaton/CompiledAutomaton.h"
 #include "org/apache/lucene/util/automaton/LevenshteinAutomata.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/FuzzyTermsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneSearchFuzzyTermsEnum () {
  @public
   OrgApacheLuceneIndexTermsEnum *actualEnum_;
@@ -57,8 +62,8 @@
 - (id<JavaUtilList>)initAutomataWithInt:(jint)maxDistance OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief fired when the max non-competitive boost has changed. this is the hook to
- swap in a smarter actualEnum
+ @brief fired when the max non-competitive boost has changed.this is the hook to
+  swap in a smarter actualEnum
  */
 - (void)bottomChangedWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lastTerm
                                          withBoolean:(jboolean)init_;
@@ -91,9 +96,9 @@ __attribute__((unused)) static jfloat OrgApacheLuceneSearchFuzzyTermsEnum_calcul
 /*!
  @brief Implement fuzzy enumeration with Terms.intersect.
  <p>
- This is the fastest method as opposed to LinearFuzzyTermsEnum:
- as enumeration is logarithmic to the number of terms (instead of linear)
- and comparison is linear to length of the term (rather than quadratic)
+  This is the fastest method as opposed to LinearFuzzyTermsEnum:
+  as enumeration is logarithmic to the number of terms (instead of linear)
+  and comparison is linear to length of the term (rather than quadratic)
  */
 @interface OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum {
  @public
@@ -122,7 +127,6 @@ __attribute__((unused)) static jfloat OrgApacheLuceneSearchFuzzyTermsEnum_calcul
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum, this$0_, OrgApacheLuceneSearchFuzzyTermsEnum *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum, matchers_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum, termRef_, OrgApacheLuceneUtilBytesRef *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum, boostAtt_, id<OrgApacheLuceneSearchBoostAttribute>)
@@ -191,9 +195,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttri
 - (void)maxEditDistanceChangedWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lastTerm
                                                       withInt:(jint)maxEdits
                                                   withBoolean:(jboolean)init_ {
-  OrgApacheLuceneIndexTermsEnum *newEnum = [self getAutomatonEnumWithInt:maxEdits withOrgApacheLuceneUtilBytesRef:lastTerm];
+  OrgApacheLuceneIndexTermsEnum *newEnum = JreRetainedLocalValue([self getAutomatonEnumWithInt:maxEdits withOrgApacheLuceneUtilBytesRef:lastTerm]);
   if (newEnum == nil) {
-    JreAssert((maxEdits > OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE), (@"org/apache/lucene/search/FuzzyTermsEnum.java:214 condition failed: assert maxEdits > LevenshteinAutomata.MAXIMUM_SUPPORTED_DISTANCE;"));
+    JreAssert(maxEdits > OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE, @"org/apache/lucene/search/FuzzyTermsEnum.java:214 condition failed: assert maxEdits > LevenshteinAutomata.MAXIMUM_SUPPORTED_DISTANCE;");
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxEdits cannot be > LevenshteinAutomata.MAXIMUM_SUPPORTED_DISTANCE");
   }
   [self setEnumWithOrgApacheLuceneIndexTermsEnum:newEnum];
@@ -213,11 +217,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttri
     OrgApacheLuceneSearchFuzzyTermsEnum_bottomChangedWithOrgApacheLuceneUtilBytesRef_withBoolean_(self, queuedBottom_, false);
     JreStrongAssign(&queuedBottom_, nil);
   }
-  OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(actualEnum_)) next];
+  OrgApacheLuceneUtilBytesRef *term = JreRetainedLocalValue([((OrgApacheLuceneIndexTermsEnum *) nil_chk(actualEnum_)) next]);
   [((id<OrgApacheLuceneSearchBoostAttribute>) nil_chk(boostAtt_)) setBoostWithFloat:[((id<OrgApacheLuceneSearchBoostAttribute>) nil_chk(actualBoostAtt_)) getBoost]];
   jfloat bottom = [((id<OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute>) nil_chk(maxBoostAtt_)) getMaxNonCompetitiveBoost];
   OrgApacheLuceneUtilBytesRef *bottomTerm = [maxBoostAtt_ getCompetitiveTerm];
-  if (term != nil && (bottom != self->bottom_ || bottomTerm != self->bottomTerm_)) {
+  if (term != nil && (bottom != self->bottom_ || !JreObjectEqualsEquals(bottomTerm, self->bottomTerm_))) {
     self->bottom_ = bottom;
     JreStrongAssign(&self->bottomTerm_, bottomTerm);
     JreStrongAssign(&queuedBottom_, OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(term));
@@ -291,52 +295,77 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttri
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:withOrgApacheLuceneIndexTerm:withFloat:withInt:withBoolean:", "FuzzyTermsEnum", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getAutomatonEnumWithInt:withOrgApacheLuceneUtilBytesRef:", "getAutomatonEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x4, "Ljava.io.IOException;", NULL },
-    { "initAutomataWithInt:", "initAutomata", "Ljava.util.List;", 0x2, NULL, "(I)Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;" },
-    { "setEnumWithOrgApacheLuceneIndexTermsEnum:", "setEnum", "V", 0x4, NULL, NULL },
-    { "bottomChangedWithOrgApacheLuceneUtilBytesRef:withBoolean:", "bottomChanged", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "maxEditDistanceChangedWithOrgApacheLuceneUtilBytesRef:withInt:withBoolean:", "maxEditDistanceChanged", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "initialMaxDistanceWithFloat:withInt:", "initialMaxDistance", "I", 0x2, NULL, NULL },
-    { "calculateMaxBoostWithInt:", "calculateMaxBoost", "F", 0x2, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "docFreq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "totalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "termState", NULL, "Lorg.apache.lucene.index.TermState;", 0x1, "Ljava.io.IOException;", NULL },
-    { "ord", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMinSimilarity", NULL, "F", 0x1, NULL, NULL },
-    { "getScaleFactor", NULL, "F", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x4, 2, 3, 1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x2, 4, 5, -1, 6, -1, -1 },
+    { NULL, "V", 0x4, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 9, 10, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, 11, 12, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, 13, 14, -1, -1, -1, -1 },
+    { NULL, "F", 0x2, 15, 5, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 16, 17, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 19, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermState;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 18, 20, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum_SeekStatus;", 0x1, 21, 20, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 22, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:withOrgApacheLuceneIndexTerm:withFloat:withInt:withBoolean:);
+  methods[1].selector = @selector(getAutomatonEnumWithInt:withOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(initAutomataWithInt:);
+  methods[3].selector = @selector(setEnumWithOrgApacheLuceneIndexTermsEnum:);
+  methods[4].selector = @selector(bottomChangedWithOrgApacheLuceneUtilBytesRef:withBoolean:);
+  methods[5].selector = @selector(maxEditDistanceChangedWithOrgApacheLuceneUtilBytesRef:withInt:withBoolean:);
+  methods[6].selector = @selector(initialMaxDistanceWithFloat:withInt:);
+  methods[7].selector = @selector(calculateMaxBoostWithInt:);
+  methods[8].selector = @selector(next);
+  methods[9].selector = @selector(docFreq);
+  methods[10].selector = @selector(totalTermFreq);
+  methods[11].selector = @selector(postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:);
+  methods[12].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:);
+  methods[13].selector = @selector(termState);
+  methods[14].selector = @selector(ord);
+  methods[15].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:);
+  methods[16].selector = @selector(seekCeilWithOrgApacheLuceneUtilBytesRef:);
+  methods[17].selector = @selector(seekExactWithLong:);
+  methods[18].selector = @selector(term);
+  methods[19].selector = @selector(getMinSimilarity);
+  methods[20].selector = @selector(getScaleFactor);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "actualEnum_", NULL, 0x2, "Lorg.apache.lucene.index.TermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "actualBoostAtt_", NULL, 0x2, "Lorg.apache.lucene.search.BoostAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "boostAtt_", NULL, 0x12, "Lorg.apache.lucene.search.BoostAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxBoostAtt_", NULL, 0x12, "Lorg.apache.lucene.search.MaxNonCompetitiveBoostAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "dfaAtt_", NULL, 0x12, "Lorg.apache.lucene.search.FuzzyTermsEnum$LevenshteinAutomataAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bottom_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "bottomTerm_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termComparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "minSimilarity_", NULL, 0x14, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "scale_factor_", NULL, 0x14, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "termLength_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxEdits_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "raw_", NULL, 0x14, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "terms_", NULL, 0x14, "Lorg.apache.lucene.index.Terms;", NULL, NULL, .constantValue.asLong = 0 },
-    { "term_", NULL, 0x12, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termText_", NULL, 0x14, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "realPrefixLength_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "transpositions_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "queuedBottom_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "actualEnum_", "LOrgApacheLuceneIndexTermsEnum;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "actualBoostAtt_", "LOrgApacheLuceneSearchBoostAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "boostAtt_", "LOrgApacheLuceneSearchBoostAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxBoostAtt_", "LOrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "dfaAtt_", "LOrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "bottom_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bottomTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termComparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 23, -1 },
+    { "minSimilarity_", "F", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "scale_factor_", "F", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "termLength_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "maxEdits_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "raw_", "Z", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "terms_", "LOrgApacheLuceneIndexTerms;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "term_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termText_", "[I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "realPrefixLength_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "transpositions_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "queuedBottom_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.FuzzyTermsEnum$AutomatonFuzzyTermsEnum;", "Lorg.apache.lucene.search.FuzzyTermsEnum$LevenshteinAutomataAttribute;", "Lorg.apache.lucene.search.FuzzyTermsEnum$LevenshteinAutomataAttributeImpl;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum = { 2, "FuzzyTermsEnum", "org.apache.lucene.search", NULL, 0x1, 21, methods, 19, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerms;LOrgApacheLuceneUtilAttributeSource;LOrgApacheLuceneIndexTerm;FIZ", "LJavaIoIOException;", "getAutomatonEnum", "ILOrgApacheLuceneUtilBytesRef;", "initAutomata", "I", "(I)Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;", "setEnum", "LOrgApacheLuceneIndexTermsEnum;", "bottomChanged", "LOrgApacheLuceneUtilBytesRef;Z", "maxEditDistanceChanged", "LOrgApacheLuceneUtilBytesRef;IZ", "initialMaxDistance", "FI", "calculateMaxBoost", "postings", "LOrgApacheLuceneIndexPostingsEnum;I", "seekExact", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneIndexTermState;", "LOrgApacheLuceneUtilBytesRef;", "seekCeil", "J", "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum;LOrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute;LOrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum = { "FuzzyTermsEnum", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 21, 19, -1, 24, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFuzzyTermsEnum;
 }
 
@@ -353,8 +382,8 @@ void OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withO
   JreStrongAssign(&self->terms_, terms);
   JreStrongAssign(&self->term_, term);
   NSString *utf16 = [((OrgApacheLuceneIndexTerm *) nil_chk(term)) text];
-  JreStrongAssignAndConsume(&self->termText_, [IOSIntArray newArrayWithLength:[((NSString *) nil_chk(utf16)) codePointCount:0 endIndex:((jint) [utf16 length])]]);
-  for (jint cp, i = 0, j = 0; i < ((jint) [utf16 length]); i += JavaLangCharacter_charCountWithInt_(cp)) *IOSIntArray_GetRef(self->termText_, j++) = cp = [utf16 codePointAt:i];
+  JreStrongAssignAndConsume(&self->termText_, [IOSIntArray newArrayWithLength:[((NSString *) nil_chk(utf16)) java_codePointCount:0 endIndex:[utf16 java_length]]]);
+  for (jint cp, i = 0, j = 0; i < [utf16 java_length]; i += JavaLangCharacter_charCountWithInt_(cp)) *IOSIntArray_GetRef(self->termText_, j++) = cp = [utf16 java_codePointAt:i];
   self->termLength_ = self->termText_->size_;
   JreStrongAssign(&self->dfaAtt_, [((OrgApacheLuceneUtilAttributeSource *) nil_chk(atts)) addAttributeWithIOSClass:OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute_class_()]);
   self->realPrefixLength_ = prefixLength > self->termLength_ ? self->termLength_ : prefixLength;
@@ -393,7 +422,7 @@ id<JavaUtilList> OrgApacheLuceneSearchFuzzyTermsEnum_initAutomataWithInt_(OrgApa
     OrgApacheLuceneUtilAutomatonLevenshteinAutomata *builder = create_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithNSString_withBoolean_(OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(self->termText_, self->realPrefixLength_, ((IOSIntArray *) nil_chk(self->termText_))->size_ - self->realPrefixLength_), self->transpositions_);
     NSString *prefix = OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(self->termText_, 0, self->realPrefixLength_);
     for (jint i = [runAutomata size]; i <= maxDistance; i++) {
-      OrgApacheLuceneUtilAutomatonAutomaton *a = [builder toAutomatonWithInt:i withNSString:prefix];
+      OrgApacheLuceneUtilAutomatonAutomaton *a = JreRetainedLocalValue([builder toAutomatonWithInt:i withNSString:prefix]);
       [runAutomata addWithId:create_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(a, JavaLangBoolean_valueOfWithBoolean_(true), false)];
     }
   }
@@ -470,18 +499,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchFuzzyTermsEnum:withOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray:", "AutomatonFuzzyTermsEnum", NULL, 0x1, NULL, NULL },
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x4, NULL, NULL },
-    { "matchesWithOrgApacheLuceneUtilBytesRef:withInt:", "matches", "Z", 0x10, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x10, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchFuzzyTermsEnum:withOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray:);
+  methods[1].selector = @selector(acceptWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(matchesWithOrgApacheLuceneUtilBytesRef:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.FuzzyTermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "matchers_", NULL, 0x12, "[Lorg.apache.lucene.util.automaton.ByteRunAutomaton;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termRef_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "boostAtt_", NULL, 0x12, "Lorg.apache.lucene.search.BoostAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchFuzzyTermsEnum;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "matchers_", "[LOrgApacheLuceneUtilAutomatonByteRunAutomaton;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termRef_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "boostAtt_", "LOrgApacheLuceneSearchBoostAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum = { 2, "AutomatonFuzzyTermsEnum", "org.apache.lucene.search", "FuzzyTermsEnum", 0x2, 3, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchFuzzyTermsEnum;LOrgApacheLuceneIndexTermsEnum;[LOrgApacheLuceneUtilAutomatonCompiledAutomaton;", "accept", "LOrgApacheLuceneUtilBytesRef;", "matches", "LOrgApacheLuceneUtilBytesRef;I", "LOrgApacheLuceneSearchFuzzyTermsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum = { "AutomatonFuzzyTermsEnum", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x2, 3, 4, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum;
 }
 
@@ -513,10 +550,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFu
 @implementation OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "automata", NULL, "Ljava.util.List;", 0x401, NULL, "()Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LJavaUtilList;", 0x401, -1, -1, -1, 0, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute = { 2, "LevenshteinAutomataAttribute", "org.apache.lucene.search", "FuzzyTermsEnum", 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(automata);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "()Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;", "LOrgApacheLuceneSearchFuzzyTermsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute = { "LevenshteinAutomataAttribute", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x609, 1, 0, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute;
 }
 
@@ -525,6 +568,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFu
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute)
 
 @implementation OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<JavaUtilList>)automata {
   return automata_;
@@ -539,7 +589,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum_Levensh
 }
 
 - (jboolean)isEqual:(id)other {
-  if (self == other) return true;
+  if (JreObjectEqualsEquals(self, other)) return true;
   if (!([other isKindOfClass:[OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl class]])) return false;
   return [((id<JavaUtilList>) nil_chk(automata_)) isEqual:((OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *) nil_chk(((OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *) cast_chk(other, [OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl class]))))->automata_];
 }
@@ -554,32 +604,37 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum_Levensh
   [((id<OrgApacheLuceneUtilAttributeReflector>) nil_chk(reflector)) reflectWithIOSClass:OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute_class_() withNSString:@"automata" withId:automata_];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(automata_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "automata", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;" },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
-    { "init", "LevenshteinAutomataAttributeImpl", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 0, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(automata);
+  methods[2].selector = @selector(clear);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(isEqual:);
+  methods[5].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[6].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "automata_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;", .constantValue.asLong = 0 },
+    { "automata_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 8, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl = { 2, "LevenshteinAutomataAttributeImpl", "org.apache.lucene.search", "FuzzyTermsEnum", 0x19, 7, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "()Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;", "hashCode", "equals", "LNSObject;", "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;", "Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;", "LOrgApacheLuceneSearchFuzzyTermsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl = { "LevenshteinAutomataAttributeImpl", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x19, 7, 1, 9, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl;
 }
 

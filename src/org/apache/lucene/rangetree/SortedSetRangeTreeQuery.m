@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Long.h"
@@ -30,36 +29,38 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 
-@interface OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1 : OrgApacheLuceneSearchConstantScoreWeight {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/rangetree/SortedSetRangeTreeQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1 : OrgApacheLuceneSearchConstantScoreWeight {
  @public
   OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *this$0_;
 }
 
-- (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
 - (instancetype)initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery:(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *)outer$
-                                         withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0;
+                                         withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+
+- (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1, this$0_, OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *)
+__attribute__((unused)) static void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1 *self, OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1 *self, OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
+__attribute__((unused)) static OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1 *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1 *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1 *create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1 *create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1)
-
-@interface OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1 : OrgApacheLuceneIndexSortedNumericDocValues {
+@interface OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1 : OrgApacheLuceneIndexSortedNumericDocValues {
  @public
+  OrgApacheLuceneIndexSortedSetDocValues *val$ssdv_;
   IOSLongArray *ords_;
   jint count_;
-  OrgApacheLuceneIndexSortedSetDocValues *val$ssdv_;
 }
+
+- (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)capture$0;
 
 - (void)setDocumentWithInt:(jint)doc;
 
@@ -67,22 +68,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1)
 
 - (jlong)valueAtWithInt:(jint)index;
 
-- (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)capture$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1, ords_, IOSLongArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1, val$ssdv_, OrgApacheLuceneIndexSortedSetDocValues *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1, ords_, IOSLongArray *)
 
-__attribute__((unused)) static void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1 *self, OrgApacheLuceneIndexSortedSetDocValues *capture$0);
+__attribute__((unused)) static void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1 *self, OrgApacheLuceneIndexSortedSetDocValues *capture$0);
 
-__attribute__((unused)) static OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1 *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1 *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1 *create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1)
+__attribute__((unused)) static OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1 *create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0);
 
 @implementation OrgApacheLuceneRangetreeSortedSetRangeTreeQuery
 
@@ -97,7 +93,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(self, self);
+  return create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (NSUInteger)hash {
@@ -117,7 +113,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1
 
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
-  [sb appendWithNSString:[[self getClass] getSimpleName]];
+  [sb appendWithNSString:[[self java_getClass] getSimpleName]];
   [sb appendWithChar:':'];
   if ([((NSString *) nil_chk(self->field_)) isEqual:field] == false) {
     [sb appendWithNSString:@"field="];
@@ -135,21 +131,31 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:withBoolean:withOrgApacheLuceneUtilBytesRef:withBoolean:", "SortedSetRangeTreeQuery", NULL, 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:withBoolean:withOrgApacheLuceneUtilBytesRef:withBoolean:);
+  methods[1].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[2].selector = @selector(hash);
+  methods[3].selector = @selector(isEqual:);
+  methods[4].selector = @selector(toStringWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minValue_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxValue_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minInclusive_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxInclusive_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "minValue_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxValue_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "minInclusive_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "maxInclusive_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSortedSetRangeTreeQuery = { 2, "SortedSetRangeTreeQuery", "org.apache.lucene.rangetree", NULL, 0x1, 5, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneUtilBytesRef;ZLOrgApacheLuceneUtilBytesRef;Z", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "hashCode", "equals", "LNSObject;", "toString", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSortedSetRangeTreeQuery = { "SortedSetRangeTreeQuery", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x1, 5, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery;
 }
 
@@ -174,19 +180,25 @@ OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *create_OrgApacheLuceneRangetree
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery)
 
-@implementation OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1
+@implementation OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1
+
+- (instancetype)initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery:(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *)outer$
+                                         withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
+  OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(self, outer$, query);
+  return self;
+}
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneIndexLeafReader *reader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader];
+  OrgApacheLuceneIndexLeafReader *reader = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader]);
   OrgApacheLuceneIndexSortedSetDocValues *ssdv = [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) getSortedSetDocValuesWithNSString:this$0_->field_];
   if (ssdv == nil) {
-    return nil;
+    return JreRetainedLocalValue(nil);
   }
   if ([ssdv isKindOfClass:[OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues class]] == false) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@", @"field \"", this$0_->field_, @"\" was not indexed with RangeTreeDocValuesFormat: got: ", ssdv));
   }
   OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *treeDV = (OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *) cast_chk(ssdv, [OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues class]);
-  OrgApacheLuceneRangetreeRangeTreeReader *tree = [treeDV getRangeTreeReader];
+  OrgApacheLuceneRangetreeRangeTreeReader *tree = JreRetainedLocalValue([treeDV getRangeTreeReader]);
   jlong minOrdIncl;
   if (this$0_->minValue_ == nil) {
     minOrdIncl = 0;
@@ -224,18 +236,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery
     }
   }
   if (maxOrdIncl < minOrdIncl) {
-    return nil;
+    return JreRetainedLocalValue(nil);
   }
-  OrgApacheLuceneIndexSortedNumericDocValues *ords = create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(ssdv);
-  OrgApacheLuceneSearchDocIdSet *result = [((OrgApacheLuceneRangetreeRangeTreeReader *) nil_chk(tree)) intersectWithLong:minOrdIncl withLong:maxOrdIncl withOrgApacheLuceneIndexSortedNumericDocValues:ords withInt:[((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]];
+  OrgApacheLuceneIndexSortedNumericDocValues *ords = create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_(ssdv);
+  OrgApacheLuceneSearchDocIdSet *result = JreRetainedLocalValue([((OrgApacheLuceneRangetreeRangeTreeReader *) nil_chk(tree)) intersectWithLong:minOrdIncl withLong:maxOrdIncl withOrgApacheLuceneIndexSortedNumericDocValues:ords withInt:[((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]]);
   OrgApacheLuceneSearchDocIdSetIterator *disi = [((OrgApacheLuceneSearchDocIdSet *) nil_chk(result)) iterator];
   return create_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchDocIdSetIterator_(self, [self score], disi);
-}
-
-- (instancetype)initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery:(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *)outer$
-                                         withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0 {
-  OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
-  return self;
 }
 
 - (void)dealloc {
@@ -244,36 +250,45 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery:withOrgApacheLuceneSearchQuery:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery:withOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.rangetree.SortedSetRangeTreeQuery;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneRangetreeSortedSetRangeTreeQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneRangetreeSortedSetRangeTreeQuery", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1 = { 2, "", "org.apache.lucene.rangetree", "SortedSetRangeTreeQuery", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneRangetreeSortedSetRangeTreeQuery;LOrgApacheLuceneSearchQuery;", "scorer", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "LOrgApacheLuceneRangetreeSortedSetRangeTreeQuery;", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1 = { "", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x8010, 2, 1, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1;
 }
 
 @end
 
-void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1 *self, OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
+void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1 *self, OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *query) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchConstantScoreWeight_initWithOrgApacheLuceneSearchQuery_(self, arg$0);
+  OrgApacheLuceneSearchConstantScoreWeight_initWithOrgApacheLuceneSearchQuery_(self, query);
 }
 
-OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1 *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1, initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1 *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1, initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_, outer$, query)
 }
 
-OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1 *create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1, initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1 *create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1, initWithOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_withOrgApacheLuceneSearchQuery_, outer$, query)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1)
+@implementation OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1
 
-@implementation OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1
+- (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)capture$0 {
+  OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_(self, capture$0);
+  return self;
+}
 
 - (void)setDocumentWithInt:(jint)doc {
   [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(val$ssdv_)) setDocumentWithInt:doc];
@@ -295,48 +310,49 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery
   return IOSLongArray_Get(nil_chk(ords_), index);
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)capture$0 {
-  OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(self, capture$0);
-  return self;
-}
-
 - (void)dealloc {
-  RELEASE_(ords_);
   RELEASE_(val$ssdv_);
+  RELEASE_(ords_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setDocumentWithInt:", "setDocument", "V", 0x1, NULL, NULL },
-    { "count", NULL, "I", 0x1, NULL, NULL },
-    { "valueAtWithInt:", "valueAt", "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexSortedSetDocValues:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 3, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSortedSetDocValues:);
+  methods[1].selector = @selector(setDocumentWithInt:);
+  methods[2].selector = @selector(count);
+  methods[3].selector = @selector(valueAtWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ords_", NULL, 0x2, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$ssdv_", NULL, 0x1012, "Lorg.apache.lucene.index.SortedSetDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$ssdv_", "LOrgApacheLuceneIndexSortedSetDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "ords_", "[J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "count_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1", "scorerWithOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1 = { 2, "", "org.apache.lucene.rangetree", "SortedSetRangeTreeQuery$", 0x8008, 4, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSortedSetDocValues;", "setDocument", "I", "valueAt", "LOrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1;", "scorerWithOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1 = { "", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x8010, 4, 3, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1;
 }
 
 @end
 
-void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1 *self, OrgApacheLuceneIndexSortedSetDocValues *capture$0) {
+void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1 *self, OrgApacheLuceneIndexSortedSetDocValues *capture$0) {
   JreStrongAssign(&self->val$ssdv_, capture$0);
   OrgApacheLuceneIndexSortedNumericDocValues_init(self);
   JreStrongAssignAndConsume(&self->ords_, [IOSLongArray newArrayWithLength:2]);
 }
 
-OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1 *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1, initWithOrgApacheLuceneIndexSortedSetDocValues_, capture$0)
+OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1 *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1, initWithOrgApacheLuceneIndexSortedSetDocValues_, capture$0)
 }
 
-OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1 *create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1, initWithOrgApacheLuceneIndexSortedSetDocValues_, capture$0)
+OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1 *create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_1_1, initWithOrgApacheLuceneIndexSortedSetDocValues_, capture$0)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1)

@@ -7,7 +7,7 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Collections.h"
 #include "java/util/LinkedHashSet.h"
 #include "java/util/Set.h"
@@ -36,42 +36,51 @@
 #include "org/apache/lucene/util/CloseableThreadLocal.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SegmentCoreReaders must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/index/SegmentCoreReaders must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneIndexSegmentCoreReaders () {
  @public
   JavaUtilConcurrentAtomicAtomicInteger *ref_;
   id<JavaUtilSet> coreClosedListeners_;
 }
 
-- (void)notifyCoreClosedListenersWithNSException:(NSException *)th;
+- (void)notifyCoreClosedListenersWithJavaLangThrowable:(JavaLangThrowable *)th;
 
 @end
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCoreReaders, ref_, JavaUtilConcurrentAtomicAtomicInteger *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCoreReaders, coreClosedListeners_, id<JavaUtilSet>)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexSegmentCoreReaders_notifyCoreClosedListenersWithNSException_(OrgApacheLuceneIndexSegmentCoreReaders *self, NSException *th);
+__attribute__((unused)) static void OrgApacheLuceneIndexSegmentCoreReaders_notifyCoreClosedListenersWithJavaLangThrowable_(OrgApacheLuceneIndexSegmentCoreReaders *self, JavaLangThrowable *th);
 
 @interface OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal () {
  @public
-  __unsafe_unretained OrgApacheLuceneIndexSegmentCoreReaders *this$0_;
+  WEAK_ OrgApacheLuceneIndexSegmentCoreReaders *this$0_;
 }
 
 @end
 
 @interface OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal () {
  @public
-  __unsafe_unretained OrgApacheLuceneIndexSegmentCoreReaders *this$0_;
+  WEAK_ OrgApacheLuceneIndexSegmentCoreReaders *this$0_;
 }
 
 @end
 
 @implementation OrgApacheLuceneIndexSegmentCoreReaders
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)owner
-                        withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
-                        withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(self, owner, dir, si, context);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)owner
+                                      withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                              withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
+                                      withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
+  OrgApacheLuceneIndexSegmentCoreReaders_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(self, owner, dir, si, context);
   return self;
 }
 
@@ -91,21 +100,21 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentCoreReaders_notif
 
 - (void)decRef {
   if ([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(ref_)) decrementAndGet] == 0) {
-    NSException *th = nil;
+    JavaLangThrowable *th = nil;
     @try {
       OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ termVectorsLocal_, fieldsReaderLocal_, fields_, termVectorsReaderOrig_, fieldsReaderOrig_, cfsReader_, normsProducer_ } count:7 type:JavaIoCloseable_class_()]);
     }
-    @catch (NSException *throwable) {
+    @catch (JavaLangThrowable *throwable) {
       th = throwable;
     }
     @finally {
-      OrgApacheLuceneIndexSegmentCoreReaders_notifyCoreClosedListenersWithNSException_(self, th);
+      OrgApacheLuceneIndexSegmentCoreReaders_notifyCoreClosedListenersWithJavaLangThrowable_(self, th);
     }
   }
 }
 
-- (void)notifyCoreClosedListenersWithNSException:(NSException *)th {
-  OrgApacheLuceneIndexSegmentCoreReaders_notifyCoreClosedListenersWithNSException_(self, th);
+- (void)notifyCoreClosedListenersWithJavaLangThrowable:(JavaLangThrowable *)th {
+  OrgApacheLuceneIndexSegmentCoreReaders_notifyCoreClosedListenersWithJavaLangThrowable_(self, th);
 }
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
@@ -131,35 +140,46 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentCoreReaders_notif
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSegmentReader:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreIOContext:", "SegmentCoreReaders", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "getRefCount", NULL, "I", 0x0, NULL, NULL },
-    { "incRef", NULL, "V", 0x0, NULL, NULL },
-    { "decRef", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "notifyCoreClosedListenersWithNSException:", "notifyCoreClosedListeners", "V", 0x2, NULL, NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x0, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 6, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexSegmentReader:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreIOContext:);
+  methods[1].selector = @selector(getRefCount);
+  methods[2].selector = @selector(incRef);
+  methods[3].selector = @selector(decRef);
+  methods[4].selector = @selector(notifyCoreClosedListenersWithJavaLangThrowable:);
+  methods[5].selector = @selector(addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[6].selector = @selector(removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ref_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fields_", NULL, 0x10, "Lorg.apache.lucene.codecs.FieldsProducer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "normsProducer_", NULL, 0x10, "Lorg.apache.lucene.codecs.NormsProducer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldsReaderOrig_", NULL, 0x10, "Lorg.apache.lucene.codecs.StoredFieldsReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termVectorsReaderOrig_", NULL, 0x10, "Lorg.apache.lucene.codecs.TermVectorsReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "cfsReader_", NULL, 0x10, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "coreFieldInfos_", NULL, 0x10, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldsReaderLocal_", NULL, 0x10, "Lorg.apache.lucene.util.CloseableThreadLocal;", NULL, "Lorg/apache/lucene/util/CloseableThreadLocal<Lorg/apache/lucene/codecs/StoredFieldsReader;>;", .constantValue.asLong = 0 },
-    { "termVectorsLocal_", NULL, 0x10, "Lorg.apache.lucene.util.CloseableThreadLocal;", NULL, "Lorg/apache/lucene/util/CloseableThreadLocal<Lorg/apache/lucene/codecs/TermVectorsReader;>;", .constantValue.asLong = 0 },
-    { "coreClosedListeners_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/index/LeafReader$CoreClosedListener;>;", .constantValue.asLong = 0 },
+    { "ref_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fields_", "LOrgApacheLuceneCodecsFieldsProducer;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "normsProducer_", "LOrgApacheLuceneCodecsNormsProducer;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fieldsReaderOrig_", "LOrgApacheLuceneCodecsStoredFieldsReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "termVectorsReaderOrig_", "LOrgApacheLuceneCodecsTermVectorsReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "cfsReader_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "coreFieldInfos_", "LOrgApacheLuceneIndexFieldInfos;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fieldsReaderLocal_", "LOrgApacheLuceneUtilCloseableThreadLocal;", .constantValue.asLong = 0, 0x10, -1, -1, 7, -1 },
+    { "termVectorsLocal_", "LOrgApacheLuceneUtilCloseableThreadLocal;", .constantValue.asLong = 0, 0x10, -1, -1, 8, -1 },
+    { "coreClosedListeners_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 9, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.SegmentCoreReaders$FieldsReaderLocal;", "Lorg.apache.lucene.index.SegmentCoreReaders$TermVectorsLocal;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCoreReaders = { 2, "SegmentCoreReaders", "org.apache.lucene.index", NULL, 0x10, 7, methods, 10, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentReader;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentCommitInfo;LOrgApacheLuceneStoreIOContext;", "LJavaIoIOException;", "notifyCoreClosedListeners", "LJavaLangThrowable;", "addCoreClosedListener", "LOrgApacheLuceneIndexLeafReader_CoreClosedListener;", "removeCoreClosedListener", "Lorg/apache/lucene/util/CloseableThreadLocal<Lorg/apache/lucene/codecs/StoredFieldsReader;>;", "Lorg/apache/lucene/util/CloseableThreadLocal<Lorg/apache/lucene/codecs/TermVectorsReader;>;", "Ljava/util/Set<Lorg/apache/lucene/index/LeafReader$CoreClosedListener;>;", "LOrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal;LOrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCoreReaders = { "SegmentCoreReaders", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 7, 10, -1, 10, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSegmentCoreReaders;
 }
 
 @end
 
-void OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentCoreReaders *self, OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) {
+void OrgApacheLuceneIndexSegmentCoreReaders_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentCoreReaders *self, OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->ref_, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1));
   JreStrongAssignAndConsume(&self->fieldsReaderLocal_, new_OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal_initWithOrgApacheLuceneIndexSegmentCoreReaders_(self));
@@ -180,10 +200,10 @@ void OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentR
     OrgApacheLuceneIndexSegmentReadState *segmentReadState = create_OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_(cfsDir, si->info_, self->coreFieldInfos_, context);
     OrgApacheLuceneCodecsPostingsFormat *format = [codec postingsFormat];
     JreStrongAssign(&self->fields_, [((OrgApacheLuceneCodecsPostingsFormat *) nil_chk(format)) fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:segmentReadState]);
-    JreAssert((self->fields_ != nil), (@"org/apache/lucene/index/SegmentCoreReaders.java:114 condition failed: assert fields != null;"));
+    JreAssert(self->fields_ != nil, @"org/apache/lucene/index/SegmentCoreReaders.java:114 condition failed: assert fields != null;");
     if ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(self->coreFieldInfos_)) hasNorms]) {
       JreStrongAssign(&self->normsProducer_, [((OrgApacheLuceneCodecsNormsFormat *) nil_chk([codec normsFormat])) normsProducerWithOrgApacheLuceneIndexSegmentReadState:segmentReadState]);
-      JreAssert((self->normsProducer_ != nil), (@"org/apache/lucene/index/SegmentCoreReaders.java:121 condition failed: assert normsProducer != null;"));
+      JreAssert(self->normsProducer_ != nil, @"org/apache/lucene/index/SegmentCoreReaders.java:121 condition failed: assert normsProducer != null;");
     }
     else {
       JreStrongAssign(&self->normsProducer_, nil);
@@ -204,30 +224,30 @@ void OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentR
   }
 }
 
-OrgApacheLuceneIndexSegmentCoreReaders *new_OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentCoreReaders, initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_, owner, dir, si, context)
+OrgApacheLuceneIndexSegmentCoreReaders *new_OrgApacheLuceneIndexSegmentCoreReaders_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentCoreReaders, initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_, owner, dir, si, context)
 }
 
-OrgApacheLuceneIndexSegmentCoreReaders *create_OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentCoreReaders, initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_, owner, dir, si, context)
+OrgApacheLuceneIndexSegmentCoreReaders *create_OrgApacheLuceneIndexSegmentCoreReaders_initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentCoreReaders, initPackagePrivateWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_, owner, dir, si, context)
 }
 
-void OrgApacheLuceneIndexSegmentCoreReaders_notifyCoreClosedListenersWithNSException_(OrgApacheLuceneIndexSegmentCoreReaders *self, NSException *th) {
+void OrgApacheLuceneIndexSegmentCoreReaders_notifyCoreClosedListenersWithJavaLangThrowable_(OrgApacheLuceneIndexSegmentCoreReaders *self, JavaLangThrowable *th) {
   @synchronized(self->coreClosedListeners_) {
     for (id<OrgApacheLuceneIndexLeafReader_CoreClosedListener> __strong listener in nil_chk(self->coreClosedListeners_)) {
       @try {
         [((id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>) nil_chk(listener)) onCloseWithId:self];
       }
-      @catch (NSException *t) {
+      @catch (JavaLangThrowable *t) {
         if (th == nil) {
           th = t;
         }
         else {
-          [th addSuppressedWithNSException:t];
+          [th addSuppressedWithJavaLangThrowable:t];
         }
       }
     }
-    OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithNSException_(th);
+    OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithJavaLangThrowable_(th);
   }
 }
 
@@ -235,13 +255,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentCoreReaders)
 
 @implementation OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal
 
-- (OrgApacheLuceneCodecsStoredFieldsReader *)initialValue {
-  return [((OrgApacheLuceneCodecsStoredFieldsReader *) nil_chk(this$0_->fieldsReaderOrig_)) clone];
-}
-
 - (instancetype)initWithOrgApacheLuceneIndexSegmentCoreReaders:(OrgApacheLuceneIndexSegmentCoreReaders *)outer$ {
   OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal_initWithOrgApacheLuceneIndexSegmentCoreReaders_(self, outer$);
   return self;
+}
+
+- (OrgApacheLuceneCodecsStoredFieldsReader *)initialValue {
+  return [((OrgApacheLuceneCodecsStoredFieldsReader *) nil_chk(this$0_->fieldsReaderOrig_)) java_clone];
 }
 
 - (void)__javaClone:(OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal *)original {
@@ -250,15 +270,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentCoreReaders)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initialValue", NULL, "Lorg.apache.lucene.codecs.StoredFieldsReader;", 0x4, NULL, "()Lorg/apache/lucene/codecs/StoredFieldsReader;" },
-    { "initWithOrgApacheLuceneIndexSegmentCoreReaders:", "FieldsReaderLocal", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsStoredFieldsReader;", 0x4, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSegmentCoreReaders:);
+  methods[1].selector = @selector(initialValue);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.SegmentCoreReaders;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexSegmentCoreReaders;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.codecs.StoredFieldsReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal = { 2, "FieldsReaderLocal", "org.apache.lucene.index", "SegmentCoreReaders", 0x0, 2, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/CloseableThreadLocal<Lorg/apache/lucene/codecs/StoredFieldsReader;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentCoreReaders;", "Lorg/apache/lucene/util/CloseableThreadLocal<Lorg/apache/lucene/codecs/StoredFieldsReader;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal = { "FieldsReaderLocal", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 2, 1, 0, -1, -1, 1, -1 };
   return &_OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal;
 }
 
@@ -281,13 +307,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentCoreReaders_FieldsRe
 
 @implementation OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal
 
-- (OrgApacheLuceneCodecsTermVectorsReader *)initialValue {
-  return (this$0_->termVectorsReaderOrig_ == nil) ? nil : [((OrgApacheLuceneCodecsTermVectorsReader *) nil_chk(this$0_->termVectorsReaderOrig_)) clone];
-}
-
 - (instancetype)initWithOrgApacheLuceneIndexSegmentCoreReaders:(OrgApacheLuceneIndexSegmentCoreReaders *)outer$ {
   OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal_initWithOrgApacheLuceneIndexSegmentCoreReaders_(self, outer$);
   return self;
+}
+
+- (OrgApacheLuceneCodecsTermVectorsReader *)initialValue {
+  return (this$0_->termVectorsReaderOrig_ == nil) ? nil : [((OrgApacheLuceneCodecsTermVectorsReader *) nil_chk(this$0_->termVectorsReaderOrig_)) java_clone];
 }
 
 - (void)__javaClone:(OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal *)original {
@@ -296,15 +322,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentCoreReaders_FieldsRe
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initialValue", NULL, "Lorg.apache.lucene.codecs.TermVectorsReader;", 0x4, NULL, "()Lorg/apache/lucene/codecs/TermVectorsReader;" },
-    { "initWithOrgApacheLuceneIndexSegmentCoreReaders:", "TermVectorsLocal", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsReader;", 0x4, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSegmentCoreReaders:);
+  methods[1].selector = @selector(initialValue);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.SegmentCoreReaders;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexSegmentCoreReaders;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.codecs.TermVectorsReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal = { 2, "TermVectorsLocal", "org.apache.lucene.index", "SegmentCoreReaders", 0x0, 2, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/CloseableThreadLocal<Lorg/apache/lucene/codecs/TermVectorsReader;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentCoreReaders;", "Lorg/apache/lucene/util/CloseableThreadLocal<Lorg/apache/lucene/codecs/TermVectorsReader;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal = { "TermVectorsLocal", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 2, 1, 0, -1, -1, 1, -1 };
   return &_OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal;
 }
 

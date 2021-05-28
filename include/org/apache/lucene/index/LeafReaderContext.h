@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexLeafReaderContext
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexLeafReaderContext_) && (INCLUDE_ALL_OrgApacheLuceneIndexLeafReaderContext || defined(INCLUDE_OrgApacheLuceneIndexLeafReaderContext))
 #define OrgApacheLuceneIndexLeafReaderContext_
 
@@ -54,14 +60,20 @@
 /*!
  @brief Creates a new <code>LeafReaderContext</code>
  */
-- (instancetype)initWithOrgApacheLuceneIndexCompositeReaderContext:(OrgApacheLuceneIndexCompositeReaderContext *)parent
-                                withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
-                                                           withInt:(jint)ord
-                                                           withInt:(jint)docBase
-                                                           withInt:(jint)leafOrd
-                                                           withInt:(jint)leafDocBase;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexCompositeReaderContext:(OrgApacheLuceneIndexCompositeReaderContext *)parent
+                                          withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
+                                                                     withInt:(jint)ord
+                                                                     withInt:(jint)docBase
+                                                                     withInt:(jint)leafOrd
+                                                                     withInt:(jint)leafDocBase;
 
-- (instancetype)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)leafReader;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)leafReader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexCompositeReaderContext:(OrgApacheLuceneIndexCompositeReaderContext *)arg0
+                                                                     withInt:(jint)arg1
+                                                                     withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -83,4 +95,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexLeafReaderContext)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexLeafReaderContext")

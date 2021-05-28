@@ -3,16 +3,18 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/ext/ExtendableQueryParser.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
-#include "org/apache/lucene/queryparser/classic/ParseException.h"
 #include "org/apache/lucene/queryparser/classic/QueryParser.h"
 #include "org/apache/lucene/queryparser/ext/ExtendableQueryParser.h"
 #include "org/apache/lucene/queryparser/ext/ExtensionQuery.h"
 #include "org/apache/lucene/queryparser/ext/Extensions.h"
 #include "org/apache/lucene/queryparser/ext/ParserExtension.h"
 #include "org/apache/lucene/search/Query.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/ext/ExtendableQueryParser must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserExtExtendableQueryParser () {
  @public
@@ -28,7 +30,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserExtExtendableQueryParser, extensio
 /*!
  @brief Default empty extensions instance
  */
-inline OrgApacheLuceneQueryparserExtExtensions *OrgApacheLuceneQueryparserExtExtendableQueryParser_get_DEFAULT_EXTENSION();
+inline OrgApacheLuceneQueryparserExtExtensions *OrgApacheLuceneQueryparserExtExtendableQueryParser_get_DEFAULT_EXTENSION(void);
 static OrgApacheLuceneQueryparserExtExtensions *OrgApacheLuceneQueryparserExtExtendableQueryParser_DEFAULT_EXTENSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserExtExtendableQueryParser, DEFAULT_EXTENSION, OrgApacheLuceneQueryparserExtExtensions *)
 
@@ -57,9 +59,9 @@ withOrgApacheLuceneQueryparserExtExtensions:(OrgApacheLuceneQueryparserExtExtens
                                              withNSString:(NSString *)queryText
                                               withBoolean:(jboolean)quoted {
   OrgApacheLuceneQueryparserExtExtensions_Pair *splitExtensionField = [((OrgApacheLuceneQueryparserExtExtensions *) nil_chk(self->extensions_)) splitExtensionFieldWithNSString:defaultField_ withNSString:field];
-  OrgApacheLuceneQueryparserExtParserExtension *extension = [self->extensions_ getExtensionWithNSString:((NSString *) ((OrgApacheLuceneQueryparserExtExtensions_Pair *) nil_chk(splitExtensionField))->cud_)];
+  OrgApacheLuceneQueryparserExtParserExtension *extension = [self->extensions_ getExtensionWithNSString:((OrgApacheLuceneQueryparserExtExtensions_Pair *) nil_chk(splitExtensionField))->cud_];
   if (extension != nil) {
-    return [extension parseWithOrgApacheLuceneQueryparserExtExtensionQuery:create_OrgApacheLuceneQueryparserExtExtensionQuery_initWithOrgApacheLuceneQueryparserClassicQueryParser_withNSString_withNSString_(self, ((NSString *) splitExtensionField->cur_), queryText)];
+    return [extension parseWithOrgApacheLuceneQueryparserExtExtensionQuery:create_OrgApacheLuceneQueryparserExtExtensionQuery_initWithOrgApacheLuceneQueryparserClassicQueryParser_withNSString_withNSString_(self, splitExtensionField->cur_, queryText)];
   }
   return [super getFieldQueryWithNSString:field withNSString:queryText withBoolean:quoted];
 }
@@ -70,27 +72,36 @@ withOrgApacheLuceneQueryparserExtExtensions:(OrgApacheLuceneQueryparserExtExtens
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "C", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x4, 2, 3, 4, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[1].selector = @selector(initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserExtExtensions:);
+  methods[2].selector = @selector(getExtensionFieldDelimiter);
+  methods[3].selector = @selector(getFieldQueryWithNSString:withNSString:withBoolean:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "defaultField_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "extensions_", "LOrgApacheLuceneQueryparserExtExtensions;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "DEFAULT_EXTENSION", "LOrgApacheLuceneQueryparserExtExtensions;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneAnalysisAnalyzer;", "LNSString;LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneQueryparserExtExtensions;", "getFieldQuery", "LNSString;LNSString;Z", "LOrgApacheLuceneQueryparserClassicParseException;", &OrgApacheLuceneQueryparserExtExtendableQueryParser_DEFAULT_EXTENSION };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserExtExtendableQueryParser = { "ExtendableQueryParser", "org.apache.lucene.queryparser.ext", ptrTable, methods, fields, 7, 0x1, 4, 3, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserExtExtendableQueryParser;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserExtExtendableQueryParser class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserExtExtendableQueryParser_DEFAULT_EXTENSION, new_OrgApacheLuceneQueryparserExtExtensions_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserExtExtendableQueryParser)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:", "ExtendableQueryParser", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserExtExtensions:", "ExtendableQueryParser", NULL, 0x1, NULL, NULL },
-    { "getExtensionFieldDelimiter", NULL, "C", 0x1, NULL, NULL },
-    { "getFieldQueryWithNSString:withNSString:withBoolean:", "getFieldQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "defaultField_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "extensions_", NULL, 0x12, "Lorg.apache.lucene.queryparser.ext.Extensions;", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_EXTENSION", "DEFAULT_EXTENSION", 0x1a, "Lorg.apache.lucene.queryparser.ext.Extensions;", &OrgApacheLuceneQueryparserExtExtendableQueryParser_DEFAULT_EXTENSION, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserExtExtendableQueryParser = { 2, "ExtendableQueryParser", "org.apache.lucene.queryparser.ext", NULL, 0x1, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserExtExtendableQueryParser;
 }
 
 @end

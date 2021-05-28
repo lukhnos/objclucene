@@ -19,102 +19,98 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/fst/FST.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/fst/FSTCompletion must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestFstFSTCompletion () {
  @public
   /*!
-   @brief Finite state automaton encoding all the lookup terms.
-   See class notes for
- details.
+   @brief Finite state automaton encoding all the lookup terms.See class notes for
+  details.
    */
   OrgApacheLuceneUtilFstFST *automaton_;
   /*!
    @brief An array of arcs leaving the root automaton state and encoding weights of
- all completions in their sub-trees.
+  all completions in their sub-trees.
    */
   IOSObjectArray *rootArcs_;
   /*!
-   - seealso: #FSTCompletion(FST,boolean,boolean)
+   - seealso: #FSTCompletion(FST, boolean, boolean)
    */
   jboolean exactFirst_;
   /*!
-   - seealso: #FSTCompletion(FST,boolean,boolean)
+   - seealso: #FSTCompletion(FST, boolean, boolean)
    */
   jboolean higherWeightsFirst_;
 }
 
 /*!
  @brief Cache the root node's output arcs starting with completions with the
- highest weights.
+  highest weights.
  */
 + (IOSObjectArray *)cacheRootArcsWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)automaton;
 
 /*!
  @brief Returns the first exact match by traversing root arcs, starting from the
- arc <code>rootArcIndex</code>.
- @param rootArcIndex
- The first root arc index in <code>rootArcs</code> to consider when
- matching.
- @param utf8
- The sequence of utf8 bytes to follow.
+  arc <code>rootArcIndex</code>.
+ @param rootArcIndex The first root arc index in 
+ <code>rootArcs</code>  to consider when           matching.
+ @param utf8 The sequence of utf8 bytes to follow.
  @return Returns the bucket number of the match or <code>-1</code> if no
- match was found.
+          match was found.
  */
 - (jint)getExactMatchStartingFromRootArcWithInt:(jint)rootArcIndex
                 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
 
 /*!
  @brief Lookup suggestions sorted alphabetically <b>if weights are not
- constant</b>.
- This is a workaround: in general, use constant weights for
- alphabetically sorted result.
+  constant</b>.This is a workaround: in general, use constant weights for
+  alphabetically sorted result.
  */
 - (id<JavaUtilList>)lookupSortedAlphabeticallyWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key
                                                                       withInt:(jint)num;
 
 /*!
  @brief Lookup suggestions sorted by weight (descending order).
- @param collectAll
- If <code>true</code>, the routine terminates immediately when
- <code>num</code> suggestions have been collected. If
- <code>false</code>, it will collect suggestions from all weight
- arcs (needed for <code>lookupSortedAlphabetically</code>.
+ @param collectAll If 
+  <code> true </code> , the routine terminates immediately when           
+  <code> num </code>  suggestions have been collected. If           
+  <code> false </code> , it will collect suggestions from all weight           arcs (needed for 
+ <code>lookupSortedAlphabetically</code> .
  */
 - (JavaUtilArrayList *)lookupSortedByWeightWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key
                                                                    withInt:(jint)num
                                                                withBoolean:(jboolean)collectAll;
 
 /*!
- @brief Checks if the list of
- <code>org.apache.lucene.search.suggest.Lookup.LookupResult</code>s already has a
- <code>key</code>.
- If so, reorders that
+ @brief Checks if the list of 
+ <code>org.apache.lucene.search.suggest.Lookup.LookupResult</code>s already has a 
+ <code>key</code>.If so, reorders that 
  <code>org.apache.lucene.search.suggest.Lookup.LookupResult</code> to the first
- position.
+  position.
  @return Returns <code>true<code> if and only if <code>list</code> contained
- <code>key</code>.
+          <code>key</code>.
  */
 - (jboolean)checkExistingAndReorderWithJavaUtilArrayList:(JavaUtilArrayList *)list
                          withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key;
 
 /*!
  @brief Descend along the path starting at <code>arc</code> and going through bytes
- in the argument.
- @param arc
- The starting arc. This argument is modified in-place.
- @param utf8
- The term to descend along.
+  in the argument.
+ @param arc The starting arc. This argument is modified in-place.
+ @param utf8 The term to descend along.
  @return If <code>true</code>, <code>arc</code> will be set to the arc
- matching last byte of <code>term</code>. <code>false</code> is
- returned if no such prefix exists.
+          matching last byte of <code>term</code>. <code>false</code> is
+          returned if no such prefix exists.
  */
 - (jboolean)descendWithPrefixWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
                                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
 
 /*!
- @brief Recursive collect lookup results from the automaton subgraph starting at
+ @brief Recursive collect lookup results from the automaton subgraph starting at 
  <code>arc</code>.
- @param num
- Maximum number of results needed (early termination).
+ @param num Maximum number of results needed (early termination).
  */
 - (jboolean)collectWithJavaUtilList:(id<JavaUtilList>)res
                             withInt:(jint)num
@@ -128,11 +124,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstFSTCompletion, automaton_, Or
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstFSTCompletion, rootArcs_, IOSObjectArray *)
 
 /*!
- @brief An empty result.
- Keep this an <code>ArrayList</code> to keep all the returned
- lists of single type (monomorphic calls).
+ @brief An empty result.Keep this an <code>ArrayList</code> to keep all the returned
+  lists of single type (monomorphic calls).
  */
-inline JavaUtilArrayList *OrgApacheLuceneSearchSuggestFstFSTCompletion_get_EMPTY_RESULT();
+inline JavaUtilArrayList *OrgApacheLuceneSearchSuggestFstFSTCompletion_get_EMPTY_RESULT(void);
 static JavaUtilArrayList *OrgApacheLuceneSearchSuggestFstFSTCompletion_EMPTY_RESULT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestFstFSTCompletion, EMPTY_RESULT, JavaUtilArrayList *)
 
@@ -181,7 +176,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestFstFSTCompletion)
 
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                            withInt:(jint)num {
-  if ([((id<JavaLangCharSequence>) nil_chk(key)) length] == 0 || automaton_ == nil) {
+  if ([((id<JavaLangCharSequence>) nil_chk(key)) java_length] == 0 || automaton_ == nil) {
     return OrgApacheLuceneSearchSuggestFstFSTCompletion_EMPTY_RESULT;
   }
   @try {
@@ -194,7 +189,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestFstFSTCompletion)
     }
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -245,40 +240,57 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestFstFSTCompletion)
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, 3, -1, -1 },
+    { NULL, "[LOrgApacheLuceneUtilFstFST_Arc;", 0xa, 4, 2, -1, 5, -1, -1 },
+    { NULL, "I", 0x2, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 8, 9, -1, 10, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x2, 11, 12, 13, 14, -1, -1 },
+    { NULL, "LJavaUtilArrayList;", 0x2, 15, 16, 13, 17, -1, -1 },
+    { NULL, "Z", 0x2, 18, 19, -1, 20, -1, -1 },
+    { NULL, "Z", 0x2, 21, 22, 13, 23, -1, -1 },
+    { NULL, "Z", 0x2, 24, 25, 13, 26, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 27, 28, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstFST;", 0x1, -1, -1, -1, 29, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilFstFST:withBoolean:withBoolean:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilFstFST:);
+  methods[2].selector = @selector(cacheRootArcsWithOrgApacheLuceneUtilFstFST:);
+  methods[3].selector = @selector(getExactMatchStartingFromRootArcWithInt:withOrgApacheLuceneUtilBytesRef:);
+  methods[4].selector = @selector(lookupWithJavaLangCharSequence:withInt:);
+  methods[5].selector = @selector(lookupSortedAlphabeticallyWithOrgApacheLuceneUtilBytesRef:withInt:);
+  methods[6].selector = @selector(lookupSortedByWeightWithOrgApacheLuceneUtilBytesRef:withInt:withBoolean:);
+  methods[7].selector = @selector(checkExistingAndReorderWithJavaUtilArrayList:withOrgApacheLuceneUtilBytesRef:);
+  methods[8].selector = @selector(descendWithPrefixWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilBytesRef:);
+  methods[9].selector = @selector(collectWithJavaUtilList:withInt:withInt:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilFstFST_Arc:);
+  methods[10].selector = @selector(getBucketCount);
+  methods[11].selector = @selector(getBucketWithJavaLangCharSequence:);
+  methods[12].selector = @selector(getFST);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_BUCKETS", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestFstFSTCompletion_DEFAULT_BUCKETS, 0x19, -1, -1, -1, -1 },
+    { "EMPTY_RESULT", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x1a, -1, 30, 31, -1 },
+    { "automaton_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x12, -1, -1, 32, -1 },
+    { "rootArcs_", "[LOrgApacheLuceneUtilFstFST_Arc;", .constantValue.asLong = 0, 0x12, -1, -1, 33, -1 },
+    { "exactFirst_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "higherWeightsFirst_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilFstFST;ZZ", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;ZZ)V", "LOrgApacheLuceneUtilFstFST;", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;)V", "cacheRootArcs", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;)[Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Object;>;", "getExactMatchStartingFromRootArc", "ILOrgApacheLuceneUtilBytesRef;", "lookup", "LJavaLangCharSequence;I", "(Ljava/lang/CharSequence;I)Ljava/util/List<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;", "lookupSortedAlphabetically", "LOrgApacheLuceneUtilBytesRef;I", "LJavaIoIOException;", "(Lorg/apache/lucene/util/BytesRef;I)Ljava/util/List<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;", "lookupSortedByWeight", "LOrgApacheLuceneUtilBytesRef;IZ", "(Lorg/apache/lucene/util/BytesRef;IZ)Ljava/util/ArrayList<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;", "checkExistingAndReorder", "LJavaUtilArrayList;LOrgApacheLuceneUtilBytesRef;", "(Ljava/util/ArrayList<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;Lorg/apache/lucene/util/BytesRef;)Z", "descendWithPrefix", "LOrgApacheLuceneUtilFstFST_Arc;LOrgApacheLuceneUtilBytesRef;", "(Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Object;>;Lorg/apache/lucene/util/BytesRef;)Z", "collect", "LJavaUtilList;IILOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilFstFST_Arc;", "(Ljava/util/List<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;IILorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Object;>;)Z", "getBucket", "LJavaLangCharSequence;", "()Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;", &OrgApacheLuceneSearchSuggestFstFSTCompletion_EMPTY_RESULT, "Ljava/util/ArrayList<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;", "Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;", "[Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Object;>;", "LOrgApacheLuceneSearchSuggestFstFSTCompletion_Completion;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstFSTCompletion = { "FSTCompletion", "org.apache.lucene.search.suggest.fst", ptrTable, methods, fields, 7, 0x1, 13, 6, -1, 34, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSuggestFstFSTCompletion;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSuggestFstFSTCompletion class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestFstFSTCompletion_EMPTY_RESULT, new_JavaUtilArrayList_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestFstFSTCompletion)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:withBoolean:withBoolean:", "FSTCompletion", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;ZZ)V" },
-    { "initWithOrgApacheLuceneUtilFstFST:", "FSTCompletion", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;)V" },
-    { "cacheRootArcsWithOrgApacheLuceneUtilFstFST:", "cacheRootArcs", "[Lorg.apache.lucene.util.fst.FST$Arc;", 0xa, NULL, "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;)[Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Object;>;" },
-    { "getExactMatchStartingFromRootArcWithInt:withOrgApacheLuceneUtilBytesRef:", "getExactMatchStartingFromRootArc", "I", 0x2, NULL, NULL },
-    { "lookupWithJavaLangCharSequence:withInt:", "lookup", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/CharSequence;I)Ljava/util/List<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;" },
-    { "lookupSortedAlphabeticallyWithOrgApacheLuceneUtilBytesRef:withInt:", "lookupSortedAlphabetically", "Ljava.util.List;", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/BytesRef;I)Ljava/util/List<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;" },
-    { "lookupSortedByWeightWithOrgApacheLuceneUtilBytesRef:withInt:withBoolean:", "lookupSortedByWeight", "Ljava.util.ArrayList;", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/BytesRef;IZ)Ljava/util/ArrayList<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;" },
-    { "checkExistingAndReorderWithJavaUtilArrayList:withOrgApacheLuceneUtilBytesRef:", "checkExistingAndReorder", "Z", 0x2, NULL, "(Ljava/util/ArrayList<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;Lorg/apache/lucene/util/BytesRef;)Z" },
-    { "descendWithPrefixWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilBytesRef:", "descendWithPrefix", "Z", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Object;>;Lorg/apache/lucene/util/BytesRef;)Z" },
-    { "collectWithJavaUtilList:withInt:withInt:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilFstFST_Arc:", "collect", "Z", 0x2, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;IILorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Object;>;)Z" },
-    { "getBucketCount", NULL, "I", 0x1, NULL, NULL },
-    { "getBucketWithJavaLangCharSequence:", "getBucket", "I", 0x1, NULL, NULL },
-    { "getFST", NULL, "Lorg.apache.lucene.util.fst.FST;", 0x1, NULL, "()Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_BUCKETS", "DEFAULT_BUCKETS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestFstFSTCompletion_DEFAULT_BUCKETS },
-    { "EMPTY_RESULT", "EMPTY_RESULT", 0x1a, "Ljava.util.ArrayList;", &OrgApacheLuceneSearchSuggestFstFSTCompletion_EMPTY_RESULT, "Ljava/util/ArrayList<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;", .constantValue.asLong = 0 },
-    { "automaton_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Ljava/lang/Object;>;", .constantValue.asLong = 0 },
-    { "rootArcs_", NULL, 0x12, "[Lorg.apache.lucene.util.fst.FST$Arc;", NULL, "[Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Object;>;", .constantValue.asLong = 0 },
-    { "exactFirst_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "higherWeightsFirst_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.fst.FSTCompletion$Completion;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstFSTCompletion = { 2, "FSTCompletion", "org.apache.lucene.search.suggest.fst", NULL, 0x1, 13, methods, 6, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSearchSuggestFstFSTCompletion;
 }
 
 @end
@@ -320,8 +332,8 @@ IOSObjectArray *OrgApacheLuceneSearchSuggestFstFSTCompletion_cacheRootArcsWithOr
   OrgApacheLuceneSearchSuggestFstFSTCompletion_initialize();
   @try {
     id<JavaUtilList> rootArcs = create_JavaUtilArrayList_init();
-    OrgApacheLuceneUtilFstFST_Arc *arc = [((OrgApacheLuceneUtilFstFST *) nil_chk(automaton)) getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()];
-    OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [automaton getBytesReader];
+    OrgApacheLuceneUtilFstFST_Arc *arc = JreRetainedLocalValue([((OrgApacheLuceneUtilFstFST *) nil_chk(automaton)) getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()]);
+    OrgApacheLuceneUtilFstFST_BytesReader *fstReader = JreRetainedLocalValue([automaton getBytesReader]);
     [automaton readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
     while (true) {
       [rootArcs addWithId:[create_OrgApacheLuceneUtilFstFST_Arc_init() copyFromWithOrgApacheLuceneUtilFstFST_Arc:arc]];
@@ -332,14 +344,14 @@ IOSObjectArray *OrgApacheLuceneSearchSuggestFstFSTCompletion_cacheRootArcsWithOr
     return [rootArcs toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[rootArcs size] type:OrgApacheLuceneUtilFstFST_Arc_class_()]];
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
 jint OrgApacheLuceneSearchSuggestFstFSTCompletion_getExactMatchStartingFromRootArcWithInt_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestFstFSTCompletion *self, jint rootArcIndex, OrgApacheLuceneUtilBytesRef *utf8) {
   @try {
     OrgApacheLuceneUtilFstFST_Arc *scratch = create_OrgApacheLuceneUtilFstFST_Arc_init();
-    OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [((OrgApacheLuceneUtilFstFST *) nil_chk(self->automaton_)) getBytesReader];
+    OrgApacheLuceneUtilFstFST_BytesReader *fstReader = JreRetainedLocalValue([((OrgApacheLuceneUtilFstFST *) nil_chk(self->automaton_)) getBytesReader]);
     for (; rootArcIndex < ((IOSObjectArray *) nil_chk(self->rootArcs_))->size_; rootArcIndex++) {
       OrgApacheLuceneUtilFstFST_Arc *rootArc = IOSObjectArray_Get(self->rootArcs_, rootArcIndex);
       OrgApacheLuceneUtilFstFST_Arc *arc = [scratch copyFromWithOrgApacheLuceneUtilFstFST_Arc:rootArc];
@@ -352,7 +364,7 @@ jint OrgApacheLuceneSearchSuggestFstFSTCompletion_getExactMatchStartingFromRootA
     }
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
   return -1;
 }
@@ -418,9 +430,9 @@ jboolean OrgApacheLuceneSearchSuggestFstFSTCompletion_collectWithJavaUtilList_wi
   if (((OrgApacheLuceneUtilBytesRef *) nil_chk(output))->length_ == ((IOSByteArray *) nil_chk(output->bytes_))->size_) {
     JreStrongAssign(&output->bytes_, OrgApacheLuceneUtilArrayUtil_growWithByteArray_(output->bytes_));
   }
-  JreAssert((output->offset_ == 0), (@"org/apache/lucene/search/suggest/fst/FSTCompletion.java:363 condition failed: assert output.offset == 0;"));
+  JreAssert(output->offset_ == 0, @"org/apache/lucene/search/suggest/fst/FSTCompletion.java:363 condition failed: assert output.offset == 0;");
   *IOSByteArray_GetRef(nil_chk(output->bytes_), output->length_++) = (jbyte) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_;
-  OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [((OrgApacheLuceneUtilFstFST *) nil_chk(self->automaton_)) getBytesReader];
+  OrgApacheLuceneUtilFstFST_BytesReader *fstReader = JreRetainedLocalValue([((OrgApacheLuceneUtilFstFST *) nil_chk(self->automaton_)) getBytesReader]);
   [self->automaton_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
   while (true) {
     if (arc->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
@@ -467,16 +479,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFstFSTCompletion)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBytesRef:withInt:", "Completion", NULL, 0x0, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBytesRef:withInt:);
+  methods[1].selector = @selector(description);
+  methods[2].selector = @selector(compareToWithId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "utf8_", NULL, 0x11, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bucket_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "utf8_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "bucket_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion = { 2, "Completion", "org.apache.lucene.search.suggest.fst", "FSTCompletion", 0x19, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBytesRef;I", "toString", "compareTo", "LOrgApacheLuceneSearchSuggestFstFSTCompletion_Completion;", "LOrgApacheLuceneSearchSuggestFstFSTCompletion;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/fst/FSTCompletion$Completion;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion = { "Completion", "org.apache.lucene.search.suggest.fst", ptrTable, methods, fields, 7, 0x19, 3, 2, 4, -1, -1, 5, -1 };
   return &_OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion;
 }
 

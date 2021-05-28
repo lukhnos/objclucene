@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchConstantScoreScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchConstantScoreScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreScorer || defined(INCLUDE_OrgApacheLuceneSearchConstantScoreScorer))
 #define OrgApacheLuceneSearchConstantScoreScorer_
 
@@ -33,27 +39,25 @@
 
 /*!
  @brief Constructor based on a <code>DocIdSetIterator</code> which will be used to
- drive iteration.
- Two phase iteration will not be supported.
+   drive iteration.Two phase iteration will not be supported.
  @param weight the parent weight
  @param score the score to return on each document
  @param disi the iterator that defines matching documents
  */
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                          withFloat:(jfloat)score
-          withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)disi;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                    withFloat:(jfloat)score
+                    withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)disi;
 
 /*!
- @brief Constructor based on a <code>TwoPhaseIterator</code>.
- In that case the
- <code>Scorer</code> will support two-phase iteration.
+ @brief Constructor based on a <code>TwoPhaseIterator</code>.In that case the
+   <code>Scorer</code> will support two-phase iteration.
  @param weight the parent weight
  @param score the score to return on each document
  @param twoPhaseIterator the iterator that defines matching documents
  */
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                          withFloat:(jfloat)score
-          withOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator *)twoPhaseIterator;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                    withFloat:(jfloat)score
+                    withOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator *)twoPhaseIterator;
 
 - (jint)advanceWithInt:(jint)target;
 
@@ -68,6 +72,10 @@
 - (jint)nextDoc;
 
 - (jfloat)score;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -89,4 +97,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreScorer")

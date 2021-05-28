@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreFileSwitchDirectory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreFileSwitchDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreFileSwitchDirectory || defined(INCLUDE_OrgApacheLuceneStoreFileSwitchDirectory))
 #define OrgApacheLuceneStoreFileSwitchDirectory_
 
@@ -30,25 +36,26 @@
 
 /*!
  @brief Expert: A Directory instance that switches files between
- two other Directory instances.
+  two other Directory instances.
  <p>Files with the specified extensions are placed in the
- primary directory; others are placed in the secondary
- directory.  The provided Set must not change once passed
- to this class, and must allow multiple threads to call
- contains at once.</p>
+  primary directory; others are placed in the secondary
+  directory.  The provided Set must not change once passed
+  to this class, and must allow multiple threads to call
+  contains at once.</p>
+  
  <p>Locks with a name having the specified extensions are
- delegated to the primary directory; others are delegated
- to the secondary directory. Ideally, both Directory
- instances should use the same lock factory.</p>
+  delegated to the primary directory; others are delegated
+  to the secondary directory. Ideally, both Directory
+  instances should use the same lock factory.</p>
  */
 @interface OrgApacheLuceneStoreFileSwitchDirectory : OrgApacheLuceneStoreDirectory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilSet:(id<JavaUtilSet>)primaryExtensions
-  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)primaryDir
-  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)secondaryDir
-                        withBoolean:(jboolean)doClose;
+- (instancetype __nonnull)initWithJavaUtilSet:(id<JavaUtilSet>)primaryExtensions
+            withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)primaryDir
+            withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)secondaryDir
+                                  withBoolean:(jboolean)doClose;
 
 - (void)close;
 
@@ -86,6 +93,10 @@
 
 - (void)syncWithJavaUtilCollection:(id<JavaUtilCollection>)names;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreFileSwitchDirectory)
@@ -102,4 +113,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFileSwitchDirectory)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreFileSwitchDirectory")

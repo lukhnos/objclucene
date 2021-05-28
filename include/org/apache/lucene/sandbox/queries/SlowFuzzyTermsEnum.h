@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum || defined(INCLUDE_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum))
 #define OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneSearchFuzzyTermsEnum 1
 #include "org/apache/lucene/search/FuzzyTermsEnum.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneIndexTerms;
 @class OrgApacheLuceneUtilAttributeSource;
@@ -28,30 +33,39 @@
 
 /*!
  @brief Potentially slow fuzzy TermsEnum for enumerating all terms that are similar
- to the specified filter term.
+  to the specified filter term.
  <p> If the minSimilarity or maxEdits is greater than the Automaton's
- allowable range, this backs off to the classic (brute force)
- fuzzy terms enum method by calling FuzzyTermsEnum's getAutomatonEnum.
+  allowable range, this backs off to the classic (brute force)
+  fuzzy terms enum method by calling FuzzyTermsEnum's getAutomatonEnum. 
  </p>
- <p>Term enumerations are always ordered by
+  <p>Term enumerations are always ordered by 
  <code>BytesRef.compareTo</code>.  Each term in the enumeration is
- greater than all that precede it.</p>
+  greater than all that precede it.</p>
  */
 @interface OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum : OrgApacheLuceneSearchFuzzyTermsEnum
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-           withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts
-                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                        withFloat:(jfloat)minSimilarity
-                                          withInt:(jint)prefixLength;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
+                     withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts
+                               withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                                  withFloat:(jfloat)minSimilarity
+                                                    withInt:(jint)prefixLength;
 
 #pragma mark Protected
 
 - (void)maxEditDistanceChangedWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lastTerm
                                                       withInt:(jint)maxEdits
                                                   withBoolean:(jboolean)init_;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg0
+                     withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)arg1
+                               withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg2
+                                                  withFloat:(jfloat)arg3
+                                                    withInt:(jint)arg4
+                                                withBoolean:(jboolean)arg5 NS_UNAVAILABLE;
 
 @end
 
@@ -67,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum")

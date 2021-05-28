@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Double.h"
 #include "java/lang/Integer.h"
 #include "java/util/Map.h"
@@ -20,11 +19,15 @@
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/DocFreqValueSource must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues
 
-- (instancetype)initWithInt:(jint)val
+- (instancetype)initPackagePrivateWithInt:(jint)val
 withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)parent {
-  OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(self, val, parent);
+  OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(self, val, parent);
   return self;
 }
 
@@ -59,30 +62,42 @@ withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionVal
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneQueriesFunctionValueSource:", "ConstIntDocValues", NULL, 0x0, NULL, NULL },
-    { "floatValWithInt:", "floatVal", "F", 0x1, NULL, NULL },
-    { "intValWithInt:", "intVal", "I", 0x1, NULL, NULL },
-    { "longValWithInt:", "longVal", "J", 0x1, NULL, NULL },
-    { "doubleValWithInt:", "doubleVal", "D", 0x1, NULL, NULL },
-    { "strValWithInt:", "strVal", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 4, 2, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(floatValWithInt:);
+  methods[2].selector = @selector(intValWithInt:);
+  methods[3].selector = @selector(longValWithInt:);
+  methods[4].selector = @selector(doubleValWithInt:);
+  methods[5].selector = @selector(strValWithInt:);
+  methods[6].selector = @selector(toStringWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ival_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fval_", NULL, 0x10, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "dval_", NULL, 0x10, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "lval_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "sval_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "parent_", NULL, 0x10, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
+    { "ival_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fval_", "F", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "dval_", "D", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "lval_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "sval_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "parent_", "LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues = { 2, "ConstIntDocValues", "org.apache.lucene.queries.function.valuesource", NULL, 0x0, 7, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ILOrgApacheLuceneQueriesFunctionValueSource;", "floatVal", "I", "intVal", "longVal", "doubleVal", "strVal", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues = { "ConstIntDocValues", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x0, 7, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *self, jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
+void OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *self, jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
   OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, parent);
   self->ival_ = val;
   self->fval_ = val;
@@ -92,21 +107,21 @@ void OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_with
   JreStrongAssign(&self->parent_, parent);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues, initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
+OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues, initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues, initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
+OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues, initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues)
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues
 
-- (instancetype)initWithDouble:(jdouble)val
+- (instancetype)initPackagePrivateWithDouble:(jdouble)val
 withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)parent {
-  OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(self, val, parent);
+  OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(self, val, parent);
   return self;
 }
 
@@ -141,30 +156,42 @@ withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionVal
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithDouble:withOrgApacheLuceneQueriesFunctionValueSource:", "ConstDoubleDocValues", NULL, 0x0, NULL, NULL },
-    { "floatValWithInt:", "floatVal", "F", 0x1, NULL, NULL },
-    { "intValWithInt:", "intVal", "I", 0x1, NULL, NULL },
-    { "longValWithInt:", "longVal", "J", 0x1, NULL, NULL },
-    { "doubleValWithInt:", "doubleVal", "D", 0x1, NULL, NULL },
-    { "strValWithInt:", "strVal", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 4, 2, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 7, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithDouble:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(floatValWithInt:);
+  methods[2].selector = @selector(intValWithInt:);
+  methods[3].selector = @selector(longValWithInt:);
+  methods[4].selector = @selector(doubleValWithInt:);
+  methods[5].selector = @selector(strValWithInt:);
+  methods[6].selector = @selector(toStringWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ival_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fval_", NULL, 0x10, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "dval_", NULL, 0x10, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "lval_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "sval_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "parent_", NULL, 0x10, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
+    { "ival_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "fval_", "F", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "dval_", "D", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "lval_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "sval_", "LNSString;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "parent_", "LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues = { 2, "ConstDoubleDocValues", "org.apache.lucene.queries.function.valuesource", NULL, 0x0, 7, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "DLOrgApacheLuceneQueriesFunctionValueSource;", "floatVal", "I", "intVal", "longVal", "doubleVal", "strVal", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues = { "ConstDoubleDocValues", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x0, 7, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *self, jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
+void OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *self, jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
   OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, parent);
   self->ival_ = JreFpToInt(val);
   self->fval_ = (jfloat) val;
@@ -174,12 +201,12 @@ void OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDoubl
   JreStrongAssign(&self->parent_, parent);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues, initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
+OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues, initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues, initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
+OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues, initPackagePrivateWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues)
@@ -206,7 +233,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceConstD
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
   OrgApacheLuceneSearchIndexSearcher *searcher = (OrgApacheLuceneSearchIndexSearcher *) cast_chk([((id<JavaUtilMap>) nil_chk(context)) getWithId:@"searcher"], [OrgApacheLuceneSearchIndexSearcher class]);
   jint docfreq = [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) docFreqWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(indexedField_, indexedBytes_)];
-  return create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(docfreq, self);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initPackagePrivateWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(docfreq, self);
 }
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
@@ -215,11 +242,11 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (NSUInteger)hash {
-  return ((jint) [[self getClass] hash]) + ((jint) [((NSString *) nil_chk(indexedField_)) hash]) * 29 + ((jint) [((OrgApacheLuceneUtilBytesRef *) nil_chk(indexedBytes_)) hash]);
+  return ((jint) [[self java_getClass] hash]) + ((jint) [((NSString *) nil_chk(indexedField_)) hash]) * 29 + ((jint) [((OrgApacheLuceneUtilBytesRef *) nil_chk(indexedBytes_)) hash]);
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(o) java_getClass])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource class]);
   return [((NSString *) nil_chk(self->indexedField_)) isEqual:other->indexedField_] && [((OrgApacheLuceneUtilBytesRef *) nil_chk(self->indexedBytes_)) isEqual:other->indexedBytes_];
 }
@@ -233,22 +260,34 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:withNSString:withOrgApacheLuceneUtilBytesRef:", "DocFreqValueSource", NULL, 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, 4, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 8, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:withNSString:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(name);
+  methods[2].selector = @selector(description__);
+  methods[3].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[4].selector = @selector(createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:);
+  methods[5].selector = @selector(hash);
+  methods[6].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexedField_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexedBytes_", NULL, 0x14, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "indexedField_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "val_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "indexedBytes_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource = { 2, "DocFreqValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 7, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LNSString;LNSString;LOrgApacheLuceneUtilBytesRef;", "description", "getValues", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "createWeight", "LJavaUtilMap;LOrgApacheLuceneSearchIndexSearcher;", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource = { "DocFreqValueSource", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x1, 7, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource;
 }
 

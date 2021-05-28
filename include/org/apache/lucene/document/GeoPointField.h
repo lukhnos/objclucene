@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentGeoPointField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentGeoPointField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentGeoPointField || defined(INCLUDE_OrgApacheLuceneDocumentGeoPointField))
 #define OrgApacheLuceneDocumentGeoPointField_
 
@@ -20,33 +26,37 @@
 #define INCLUDE_OrgApacheLuceneDocumentField 1
 #include "org/apache/lucene/document/Field.h"
 
+@class IOSByteArray;
+@class JavaIoReader;
+@class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneDocumentFieldType;
+@class OrgApacheLuceneDocumentField_Index;
 @class OrgApacheLuceneDocumentField_Store;
+@class OrgApacheLuceneDocumentField_TermVector;
+@class OrgApacheLuceneUtilBytesRef;
 
 /*!
  @brief <p>
- Field that indexes <code>latitude</code> <code>longitude</code> decimal-degree values
- for efficient encoding, sorting, and querying.
+  Field that indexes <code>latitude</code> <code>longitude</code> decimal-degree values
+  for efficient encoding, sorting, and querying.
  This Geo capability is intended
- to provide a basic and efficient out of the box field type for indexing and
- querying 2 dimensional points in WGS-84 decimal degrees. An example usage is as follows:
+  to provide a basic and efficient out of the box field type for indexing and
+  querying 2 dimensional points in WGS-84 decimal degrees. An example usage is as follows: 
  <pre class="prettyprint">
- document.add(new GeoPointField(name, -96.33, 32.66, Field.Store.NO));
+   document.add(new GeoPointField(name, -96.33, 32.66, Field.Store.NO)); 
  
 @endcode
+  
  <p>To perform simple geospatial queries against a <code>GeoPointField</code>,
- see <code>org.apache.lucene.search.GeoPointInBBoxQuery</code>, <code>org.apache.lucene.search.GeoPointInPolygonQuery</code>,
- or <code>org.apache.lucene.search.GeoPointDistanceQuery</code>
- NOTE: This indexes only high precision encoded terms which may result in visiting a high number
- of terms for large queries. See LUCENE-6481 for a future improvement.
+  see <code>org.apache.lucene.search.GeoPointInBBoxQuery</code>, <code>org.apache.lucene.search.GeoPointInPolygonQuery</code>,
+  or <code>org.apache.lucene.search.GeoPointDistanceQuery</code>
+  NOTE: This indexes only high precision encoded terms which may result in visiting a high number
+  of terms for large queries. See LUCENE-6481 for a future improvement.
  */
 @interface OrgApacheLuceneDocumentGeoPointField : OrgApacheLuceneDocumentField
-
-+ (jint)PRECISION_STEP;
-
-+ (OrgApacheLuceneDocumentFieldType *)TYPE_NOT_STORED;
-
-+ (OrgApacheLuceneDocumentFieldType *)TYPE_STORED;
+@property (readonly, class) jint PRECISION_STEP NS_SWIFT_NAME(PRECISION_STEP);
+@property (readonly, class, strong) OrgApacheLuceneDocumentFieldType *TYPE_NOT_STORED NS_SWIFT_NAME(TYPE_NOT_STORED);
+@property (readonly, class, strong) OrgApacheLuceneDocumentFieldType *TYPE_STORED NS_SWIFT_NAME(TYPE_STORED);
 
 #pragma mark Public
 
@@ -56,53 +66,117 @@
  @param name field name
  @param lon longitude double value [-180.0 : 180.0]
  @param lat latitude double value [-90.0 : 90.0]
- @param type customized field type: must have <code>FieldType.numericType()</code>
- of <code>FieldType.NumericType.LONG</code>.
- @throws IllegalArgumentException if the field name or type is null, or
- if the field type does not have a LONG numericType()
+ @param type customized field type: must have <code>FieldType.numericType()</code>          of 
+ <code>FieldType.NumericType.LONG</code> .
+ @throw IllegalArgumentExceptionif the field name or type is null, or
+           if the field type does not have a LONG numericType()
  */
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)lon
-                      withDouble:(jdouble)lat
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                withDouble:(jdouble)lon
+                                withDouble:(jdouble)lat
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
 
 /*!
  @brief Creates a stored or un-stored GeoPointField with the provided value
- and default <code>precisionStep</code> set to 64 to avoid wasteful
- indexing of lower precision terms.
+   and default <code>precisionStep</code> set to 64 to avoid wasteful
+   indexing of lower precision terms.
  @param name field name
  @param lon longitude double value [-180.0 : 180.0]
  @param lat latitude double value [-90.0 : 90.0]
  @param stored Store.YES if the content should also be stored
- @throws IllegalArgumentException if the field name is null.
+ @throw IllegalArgumentExceptionif the field name is null.
  */
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)lon
-                      withDouble:(jdouble)lat
-withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)stored;
+- (instancetype __nonnull)initWithNSString:(NSString *)name
+                                withDouble:(jdouble)lon
+                                withDouble:(jdouble)lat
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)stored;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+                                   withInt:(jint)arg2
+                                   withInt:(jint)arg3
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                             withByteArray:(IOSByteArray *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                          withJavaIoReader:(JavaIoReader *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+    withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)arg2
+    withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)arg3
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)arg1
+      withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)arg2 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentGeoPointField)
 
-inline jint OrgApacheLuceneDocumentGeoPointField_get_PRECISION_STEP();
+inline jint OrgApacheLuceneDocumentGeoPointField_get_PRECISION_STEP(void);
 #define OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP 9
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneDocumentGeoPointField, PRECISION_STEP, jint)
 
 /*!
  @brief Type for an GeoPointField that is not stored:
- normalization factors, frequencies, and positions are omitted.
+  normalization factors, frequencies, and positions are omitted.
  */
-inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_get_TYPE_NOT_STORED();
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_get_TYPE_NOT_STORED(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentGeoPointField, TYPE_NOT_STORED, OrgApacheLuceneDocumentFieldType *)
 
 /*!
  @brief Type for a stored GeoPointField:
- normalization factors, frequencies, and positions are omitted.
+  normalization factors, frequencies, and positions are omitted.
  */
-inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_get_TYPE_STORED();
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_get_TYPE_STORED(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_TYPE_STORED;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentGeoPointField, TYPE_STORED, OrgApacheLuceneDocumentFieldType *)
@@ -123,4 +197,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentGeoPointField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentGeoPointField")

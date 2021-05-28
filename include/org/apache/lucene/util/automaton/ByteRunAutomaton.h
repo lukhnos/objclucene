@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonByteRunAutomaton
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonByteRunAutomaton_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonByteRunAutomaton || defined(INCLUDE_OrgApacheLuceneUtilAutomatonByteRunAutomaton))
 #define OrgApacheLuceneUtilAutomatonByteRunAutomaton_
 
@@ -33,14 +39,14 @@
 /*!
  @brief Converts incoming automaton to byte-based (UTF32ToUTF8) first
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
 /*!
  @brief expert: if utf8 is true, the input is already byte-based
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                  withBoolean:(jboolean)isBinary
-                                                      withInt:(jint)maxDeterminizedStates;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
+                                                            withBoolean:(jboolean)isBinary
+                                                                withInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief Returns true if the given byte array is accepted by this automaton
@@ -48,6 +54,17 @@
 - (jboolean)runWithByteArray:(IOSByteArray *)s
                      withInt:(jint)offset
                      withInt:(jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg0
+                                                                withInt:(jint)arg1
+                                                            withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg0
+                                                                withInt:(jint)arg1
+                                                            withBoolean:(jboolean)arg2
+                                                                withInt:(jint)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -69,4 +86,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonByteRunAutomaton)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonByteRunAutomaton")

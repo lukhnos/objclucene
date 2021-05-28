@@ -9,6 +9,10 @@
 #include "org/apache/lucene/util/packed/BulkOperation.h"
 #include "org/apache/lucene/util/packed/BulkOperationPackedSingleBlock.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/BulkOperationPackedSingleBlock must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock () {
  @public
   jint bitsPerValue_;
@@ -35,7 +39,7 @@
 
 @end
 
-inline jint OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_get_BLOCK_COUNT();
+inline jint OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_get_BLOCK_COUNT(void);
 #define OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_BLOCK_COUNT 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock, BLOCK_COUNT, jint)
 
@@ -51,8 +55,8 @@ __attribute__((unused)) static jlong OrgApacheLuceneUtilPackedBulkOperationPacke
 
 @implementation OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock
 
-- (instancetype)initWithInt:(jint)bitsPerValue {
-  OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(self, bitsPerValue);
+- (instancetype)initPackagePrivateWithInt:(jint)bitsPerValue {
+  OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(self, bitsPerValue);
   return self;
 }
 
@@ -198,51 +202,74 @@ __attribute__((unused)) static jlong OrgApacheLuceneUtilPackedBulkOperationPacke
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "BulkOperationPackedSingleBlock", NULL, 0x1, NULL, NULL },
-    { "longBlockCount", NULL, "I", 0x11, NULL, NULL },
-    { "byteBlockCount", NULL, "I", 0x11, NULL, NULL },
-    { "longValueCount", NULL, "I", 0x1, NULL, NULL },
-    { "byteValueCount", NULL, "I", 0x11, NULL, NULL },
-    { "readLongWithByteArray:withInt:", "readLong", "J", 0xa, NULL, NULL },
-    { "decodeWithLong:withLongArray:withInt:", "decode", "I", 0x2, NULL, NULL },
-    { "decodeWithLong:withIntArray:withInt:", "decode", "I", 0x2, NULL, NULL },
-    { "encodeWithLongArray:withInt:", "encode", "J", 0x2, NULL, NULL },
-    { "encodeWithIntArray:withInt:", "encode", "J", 0x2, NULL, NULL },
-    { "decodeWithLongArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithByteArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithByteArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "encodeWithLongArray:withInt:withLongArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
-    { "encodeWithIntArray:withInt:withLongArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
-    { "encodeWithLongArray:withInt:withByteArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
-    { "encodeWithIntArray:withInt:withByteArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0xa, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x2, 6, 7, -1, -1, -1, -1 },
+    { NULL, "J", 0x2, 6, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 15, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithInt:);
+  methods[1].selector = @selector(longBlockCount);
+  methods[2].selector = @selector(byteBlockCount);
+  methods[3].selector = @selector(longValueCount);
+  methods[4].selector = @selector(byteValueCount);
+  methods[5].selector = @selector(readLongWithByteArray:withInt:);
+  methods[6].selector = @selector(decodeWithLong:withLongArray:withInt:);
+  methods[7].selector = @selector(decodeWithLong:withIntArray:withInt:);
+  methods[8].selector = @selector(encodeWithLongArray:withInt:);
+  methods[9].selector = @selector(encodeWithIntArray:withInt:);
+  methods[10].selector = @selector(decodeWithLongArray:withInt:withLongArray:withInt:withInt:);
+  methods[11].selector = @selector(decodeWithByteArray:withInt:withLongArray:withInt:withInt:);
+  methods[12].selector = @selector(decodeWithLongArray:withInt:withIntArray:withInt:withInt:);
+  methods[13].selector = @selector(decodeWithByteArray:withInt:withIntArray:withInt:withInt:);
+  methods[14].selector = @selector(encodeWithLongArray:withInt:withLongArray:withInt:withInt:);
+  methods[15].selector = @selector(encodeWithIntArray:withInt:withLongArray:withInt:withInt:);
+  methods[16].selector = @selector(encodeWithLongArray:withInt:withByteArray:withInt:withInt:);
+  methods[17].selector = @selector(encodeWithIntArray:withInt:withByteArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "BLOCK_COUNT", "BLOCK_COUNT", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_BLOCK_COUNT },
-    { "bitsPerValue_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "valueCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "mask_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "BLOCK_COUNT", "I", .constantValue.asInt = OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_BLOCK_COUNT, 0x1a, -1, -1, -1, -1 },
+    { "bitsPerValue_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "valueCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "mask_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock = { 2, "BulkOperationPackedSingleBlock", "org.apache.lucene.util.packed", NULL, 0x10, 18, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "readLong", "[BI", "decode", "J[JI", "J[II", "encode", "[JI", "[II", "[JI[JII", "[BI[JII", "[JI[III", "[BI[III", "[II[JII", "[JI[BII", "[II[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock = { "BulkOperationPackedSingleBlock", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x10, 18, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *self, jint bitsPerValue) {
-  OrgApacheLuceneUtilPackedBulkOperation_init(self);
+void OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *self, jint bitsPerValue) {
+  OrgApacheLuceneUtilPackedBulkOperation_initPackagePrivate(self);
   self->bitsPerValue_ = bitsPerValue;
-  self->valueCount_ = 64 / bitsPerValue;
+  self->valueCount_ = JreIntDiv(64, bitsPerValue);
   self->mask_ = (JreLShift64(1LL, bitsPerValue)) - 1;
 }
 
-OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *new_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(jint bitsPerValue) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock, initWithInt_, bitsPerValue)
+OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *new_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(jint bitsPerValue) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock, initPackagePrivateWithInt_, bitsPerValue)
 }
 
-OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(jint bitsPerValue) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock, initWithInt_, bitsPerValue)
+OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(jint bitsPerValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock, initPackagePrivateWithInt_, bitsPerValue)
 }
 
 jlong OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_readLongWithByteArray_withInt_(IOSByteArray *blocks, jint blocksOffset) {

@@ -14,6 +14,10 @@
 #include "org/apache/lucene/util/BytesRefBuilder.h"
 #include "org/apache/lucene/util/UnicodeUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/BytesRefBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilBytesRefBuilder () {
  @public
   OrgApacheLuceneUtilBytesRef *ref_;
@@ -100,7 +104,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)copyCharsWithJavaLangCharSequence:(id<JavaLangCharSequence>)text {
-  [self copyCharsWithJavaLangCharSequence:text withInt:0 withInt:[((id<JavaLangCharSequence>) nil_chk(text)) length]];
+  [self copyCharsWithJavaLangCharSequence:text withInt:0 withInt:[((id<JavaLangCharSequence>) nil_chk(text)) java_length]];
 }
 
 - (void)copyCharsWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
@@ -118,7 +122,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneUtilBytesRef *)get {
-  JreAssert((((OrgApacheLuceneUtilBytesRef *) nil_chk(ref_))->offset_ == 0), (@"Modifying the offset of the returned ref is illegal"));
+  JreAssert(((OrgApacheLuceneUtilBytesRef *) nil_chk(ref_))->offset_ == 0, @"Modifying the offset of the returned ref is illegal");
   return ref_;
 }
 
@@ -140,34 +144,61 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BytesRefBuilder", NULL, 0x1, NULL, NULL },
-    { "bytes", NULL, "[B", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "setLengthWithInt:", "setLength", "V", 0x1, NULL, NULL },
-    { "byteAtWithInt:", "byteAt", "B", 0x1, NULL, NULL },
-    { "setByteAtWithInt:withByte:", "setByteAt", "V", 0x1, NULL, NULL },
-    { "growWithInt:", "grow", "V", 0x1, NULL, NULL },
-    { "appendWithByte:", "append", "V", 0x1, NULL, NULL },
-    { "appendWithByteArray:withInt:withInt:", "append", "V", 0x1, NULL, NULL },
-    { "appendWithOrgApacheLuceneUtilBytesRef:", "append", "V", 0x1, NULL, NULL },
-    { "appendWithOrgApacheLuceneUtilBytesRefBuilder:", "append", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "copyBytesWithByteArray:withInt:withInt:", "copyBytes", "V", 0x1, NULL, NULL },
-    { "copyBytesWithOrgApacheLuceneUtilBytesRef:", "copyBytes", "V", 0x1, NULL, NULL },
-    { "copyBytesWithOrgApacheLuceneUtilBytesRefBuilder:", "copyBytes", "V", 0x1, NULL, NULL },
-    { "copyCharsWithJavaLangCharSequence:", "copyChars", "V", 0x1, NULL, NULL },
-    { "copyCharsWithJavaLangCharSequence:withInt:withInt:", "copyChars", "V", 0x1, NULL, NULL },
-    { "copyCharsWithCharArray:withInt:withInt:", "copyChars", "V", 0x1, NULL, NULL },
-    { "get", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "toBytesRef", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 15, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 18, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(bytes);
+  methods[2].selector = @selector(length);
+  methods[3].selector = @selector(setLengthWithInt:);
+  methods[4].selector = @selector(byteAtWithInt:);
+  methods[5].selector = @selector(setByteAtWithInt:withByte:);
+  methods[6].selector = @selector(growWithInt:);
+  methods[7].selector = @selector(appendWithByte:);
+  methods[8].selector = @selector(appendWithByteArray:withInt:withInt:);
+  methods[9].selector = @selector(appendWithOrgApacheLuceneUtilBytesRef:);
+  methods[10].selector = @selector(appendWithOrgApacheLuceneUtilBytesRefBuilder:);
+  methods[11].selector = @selector(clear);
+  methods[12].selector = @selector(copyBytesWithByteArray:withInt:withInt:);
+  methods[13].selector = @selector(copyBytesWithOrgApacheLuceneUtilBytesRef:);
+  methods[14].selector = @selector(copyBytesWithOrgApacheLuceneUtilBytesRefBuilder:);
+  methods[15].selector = @selector(copyCharsWithJavaLangCharSequence:);
+  methods[16].selector = @selector(copyCharsWithJavaLangCharSequence:withInt:withInt:);
+  methods[17].selector = @selector(copyCharsWithCharArray:withInt:withInt:);
+  methods[18].selector = @selector(get);
+  methods[19].selector = @selector(toBytesRef);
+  methods[20].selector = @selector(isEqual:);
+  methods[21].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ref_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "ref_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefBuilder = { 2, "BytesRefBuilder", "org.apache.lucene.util", NULL, 0x1, 22, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setLength", "I", "byteAt", "setByteAt", "IB", "grow", "append", "B", "[BII", "LOrgApacheLuceneUtilBytesRef;", "LOrgApacheLuceneUtilBytesRefBuilder;", "copyBytes", "copyChars", "LJavaLangCharSequence;", "LJavaLangCharSequence;II", "[CII", "equals", "LNSObject;", "hashCode" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefBuilder = { "BytesRefBuilder", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 22, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilBytesRefBuilder;
 }
 

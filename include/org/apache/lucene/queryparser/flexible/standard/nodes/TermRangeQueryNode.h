@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_
 
@@ -21,10 +27,11 @@
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode.h"
 
 @class OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode;
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
  @brief This query node represents a range query composed by <code>FieldQueryNode</code>
- bounds, which means the bound values are strings.
+  bounds, which means the bound values are strings.
  - seealso: FieldQueryNode
  - seealso: AbstractRangeQueryNode
  */
@@ -33,17 +40,27 @@
 #pragma mark Public
 
 /*!
- @brief Constructs a <code>TermRangeQueryNode</code> object using the given
+ @brief Constructs a <code>TermRangeQueryNode</code> object using the given 
  <code>FieldQueryNode</code> as its bounds.
  @param lower the lower bound
  @param upper the upper bound
- @param lowerInclusive <code>true</code> if the lower bound is inclusive, otherwise, <code>false</code>
- @param upperInclusive <code>true</code> if the upper bound is inclusive, otherwise, <code>false</code>
+ @param lowerInclusive <code> true </code>  if the lower bound is inclusive, otherwise,  <code> false </code>
+ @param upperInclusive <code> true </code>  if the upper bound is inclusive, otherwise,  <code> false </code>
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)lower
-                    withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)upper
-                                                                      withBoolean:(jboolean)lowerInclusive
-                                                                      withBoolean:(jboolean)upperInclusive;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)lower
+                              withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)upper
+                                                                                withBoolean:(jboolean)lowerInclusive
+                                                                                withBoolean:(jboolean)upperInclusive;
+
+- (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)getLowerBound;
+
+- (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)getUpperBound;
+
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -59,4 +76,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesTermRa
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode")

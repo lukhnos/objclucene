@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
@@ -26,6 +25,10 @@
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ConstantScoreQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer ()
 
 - (id<OrgApacheLuceneSearchLeafCollector>)wrapCollectorWithOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)collector;
@@ -34,90 +37,81 @@
 
 __attribute__((unused)) static id<OrgApacheLuceneSearchLeafCollector> OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_wrapCollectorWithOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *self, id<OrgApacheLuceneSearchLeafCollector> collector);
 
-@interface OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 : OrgApacheLuceneSearchFilterLeafCollector {
+@interface OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 : OrgApacheLuceneSearchFilterLeafCollector {
  @public
   OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *this$0_;
 }
 
-- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
-
 - (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer:(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *)outer$
-                                            withOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)arg$0;
+                                            withOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)inArg;
+
+- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1, this$0_, OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *)
+__attribute__((unused)) static void OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *self, OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *self, OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *new_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *new_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg);
 
-__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1)
-
-@interface OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1 : OrgApacheLuceneSearchFilterScorer {
+@interface OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1 : OrgApacheLuceneSearchFilterScorer {
  @public
-  OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *this$0_;
+  OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *this$0_;
 }
+
+- (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1:(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *)outer$
+                                                     withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg;
 
 - (jfloat)score;
 
 - (jint)freq;
 
-- (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1:(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *)outer$
-                                                      withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1, this$0_, OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *)
+__attribute__((unused)) static void OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1 *self, OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *outer$, OrgApacheLuceneSearchScorer *inArg);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1 *self, OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *outer$, OrgApacheLuceneSearchScorer *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1 *new_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *outer$, OrgApacheLuceneSearchScorer *inArg) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1 *new_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *outer$, OrgApacheLuceneSearchScorer *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1 *create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *outer$, OrgApacheLuceneSearchScorer *inArg);
 
-__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1 *create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *outer$, OrgApacheLuceneSearchScorer *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1)
-
-@interface OrgApacheLuceneSearchConstantScoreQuery_$1 : OrgApacheLuceneSearchConstantScoreWeight {
+@interface OrgApacheLuceneSearchConstantScoreQuery_1 : OrgApacheLuceneSearchConstantScoreWeight {
  @public
   OrgApacheLuceneSearchConstantScoreQuery *this$0_;
   OrgApacheLuceneSearchWeight *val$innerWeight_;
 }
 
+- (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery:(OrgApacheLuceneSearchConstantScoreQuery *)outer$
+                                withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)capture$0
+                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+
 - (OrgApacheLuceneSearchBulkScorer *)bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
-- (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery:(OrgApacheLuceneSearchConstantScoreQuery *)outer$
-                                withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)capture$0
-                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConstantScoreQuery_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConstantScoreQuery_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchConstantScoreQuery_$1, this$0_, OrgApacheLuceneSearchConstantScoreQuery *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchConstantScoreQuery_$1, val$innerWeight_, OrgApacheLuceneSearchWeight *)
+__attribute__((unused)) static void OrgApacheLuceneSearchConstantScoreQuery_1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery_1 *self, OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchConstantScoreQuery_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery_$1 *self, OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_1 *new_OrgApacheLuceneSearchConstantScoreQuery_1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_$1 *new_OrgApacheLuceneSearchConstantScoreQuery_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_1 *create_OrgApacheLuceneSearchConstantScoreQuery_1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_$1 *create_OrgApacheLuceneSearchConstantScoreQuery_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_$1)
-
-@interface OrgApacheLuceneSearchConstantScoreQuery_$1_$1 : OrgApacheLuceneSearchFilterScorer {
+@interface OrgApacheLuceneSearchConstantScoreQuery_1_1 : OrgApacheLuceneSearchFilterScorer {
  @public
   jfloat val$score_;
   OrgApacheLuceneSearchScorer *val$innerScorer_;
 }
+
+- (instancetype)initWithFloat:(jfloat)capture$0
+withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)capture$1
+withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg;
 
 - (jfloat)score;
 
@@ -125,23 +119,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_$1)
 
 - (id<JavaUtilCollection>)getChildren;
 
-- (instancetype)initWithFloat:(jfloat)capture$0
-withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)capture$1
-withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConstantScoreQuery_$1_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConstantScoreQuery_1_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchConstantScoreQuery_$1_$1, val$innerScorer_, OrgApacheLuceneSearchScorer *)
+__attribute__((unused)) static void OrgApacheLuceneSearchConstantScoreQuery_1_1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_1_1 *self, jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *inArg);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchConstantScoreQuery_$1_$1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_$1_$1 *self, jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_1_1 *new_OrgApacheLuceneSearchConstantScoreQuery_1_1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *inArg) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_$1_$1 *new_OrgApacheLuceneSearchConstantScoreQuery_$1_$1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_$1_$1 *create_OrgApacheLuceneSearchConstantScoreQuery_$1_$1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_$1_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchConstantScoreQuery_1_1 *create_OrgApacheLuceneSearchConstantScoreQuery_1_1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *inArg);
 
 @implementation OrgApacheLuceneSearchConstantScoreQuery
 
@@ -155,15 +141,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_$1_$1)
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
-  OrgApacheLuceneSearchQuery *rewritten = [((OrgApacheLuceneSearchQuery *) nil_chk(query_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader];
-  if ([((OrgApacheLuceneSearchQuery *) nil_chk(rewritten)) getClass] == (id) [self getClass]) {
+  OrgApacheLuceneSearchQuery *rewritten = JreRetainedLocalValue([((OrgApacheLuceneSearchQuery *) nil_chk(query_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader]);
+  if (JreObjectEqualsEquals([((OrgApacheLuceneSearchQuery *) nil_chk(rewritten)) java_getClass], [self java_getClass])) {
     if ([self getBoost] != [rewritten getBoost]) {
-      rewritten = [rewritten clone];
+      rewritten = [rewritten java_clone];
       [((OrgApacheLuceneSearchQuery *) nil_chk(rewritten)) setBoostWithFloat:[self getBoost]];
     }
     return rewritten;
   }
-  if (rewritten != query_) {
+  if (!JreObjectEqualsEquals(rewritten, query_)) {
     rewritten = create_OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApacheLuceneSearchQuery_(rewritten);
     [rewritten setBoostWithFloat:[self getBoost]];
     return rewritten;
@@ -175,7 +161,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_$1_$1)
                                                                         withBoolean:(jboolean)needsScores {
   OrgApacheLuceneSearchWeight *innerWeight = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) createWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:false];
   if (needsScores) {
-    return create_OrgApacheLuceneSearchConstantScoreQuery_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, innerWeight, self);
+    return create_OrgApacheLuceneSearchConstantScoreQuery_1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, innerWeight, self);
   }
   else {
     return innerWeight;
@@ -187,10 +173,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_$1_$1)
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return true;
+  if (JreObjectEqualsEquals(self, o)) return true;
   if (![super isEqual:o]) return false;
   if ([o isKindOfClass:[OrgApacheLuceneSearchConstantScoreQuery class]]) {
-    OrgApacheLuceneSearchConstantScoreQuery *other = (OrgApacheLuceneSearchConstantScoreQuery *) cast_chk(o, [OrgApacheLuceneSearchConstantScoreQuery class]);
+    OrgApacheLuceneSearchConstantScoreQuery *other = (OrgApacheLuceneSearchConstantScoreQuery *) o;
     return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchConstantScoreQuery *) nil_chk(other))->query_];
   }
   return false;
@@ -206,20 +192,31 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_$1_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQuery:", "ConstantScoreQuery", NULL, 0x1, NULL, NULL },
-    { "getQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(getQuery);
+  methods[2].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[3].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[4].selector = @selector(toStringWithNSString:);
+  methods[5].selector = @selector(isEqual:);
+  methods[6].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "query_", NULL, 0x14, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
+    { "query_", "LOrgApacheLuceneSearchQuery;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.ConstantScoreQuery$ConstantBulkScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery = { 2, "ConstantScoreQuery", "org.apache.lucene.search", NULL, 0x1, 7, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchQuery;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "LOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery = { "ConstantScoreQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 7, 1, -1, 11, -1, -1, -1 };
   return &_OrgApacheLuceneSearchConstantScoreQuery;
 }
 
@@ -272,18 +269,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchConstantScoreQuery:withOrgApacheLuceneSearchBulkScorer:withOrgApacheLuceneSearchWeight:withFloat:", "ConstantBulkScorer", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneUtilBits:withInt:withInt:", "score", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "wrapCollectorWithOrgApacheLuceneSearchLeafCollector:", "wrapCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x2, NULL, NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchLeafCollector;", 0x2, 4, 5, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchConstantScoreQuery:withOrgApacheLuceneSearchBulkScorer:withOrgApacheLuceneSearchWeight:withFloat:);
+  methods[1].selector = @selector(scoreWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneUtilBits:withInt:withInt:);
+  methods[2].selector = @selector(wrapCollectorWithOrgApacheLuceneSearchLeafCollector:);
+  methods[3].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bulkScorer_", NULL, 0x10, "Lorg.apache.lucene.search.BulkScorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "weight_", NULL, 0x10, "Lorg.apache.lucene.search.Weight;", NULL, NULL, .constantValue.asLong = 0 },
-    { "theScore_", NULL, 0x10, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "bulkScorer_", "LOrgApacheLuceneSearchBulkScorer;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "weight_", "LOrgApacheLuceneSearchWeight;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "theScore_", "F", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer = { 2, "ConstantBulkScorer", "org.apache.lucene.search", "ConstantScoreQuery", 0x4, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchConstantScoreQuery;LOrgApacheLuceneSearchBulkScorer;LOrgApacheLuceneSearchWeight;F", "score", "LOrgApacheLuceneSearchLeafCollector;LOrgApacheLuceneUtilBits;II", "LJavaIoIOException;", "wrapCollector", "LOrgApacheLuceneSearchLeafCollector;", "LOrgApacheLuceneSearchConstantScoreQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer = { "ConstantBulkScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x4, 4, 3, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer;
 }
 
@@ -305,21 +311,21 @@ OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *create_OrgApacheLuce
 }
 
 id<OrgApacheLuceneSearchLeafCollector> OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_wrapCollectorWithOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *self, id<OrgApacheLuceneSearchLeafCollector> collector) {
-  return create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(self, collector);
+  return create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(self, collector);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer)
 
-@implementation OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1
-
-- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
-  [((id<OrgApacheLuceneSearchLeafCollector>) nil_chk(in_)) setScorerWithOrgApacheLuceneSearchScorer:create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_withOrgApacheLuceneSearchScorer_(self, scorer)];
-}
+@implementation OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1
 
 - (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer:(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *)outer$
-                                            withOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)arg$0 {
-  OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(self, outer$, arg$0);
+                                            withOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)inArg {
+  OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(self, outer$, inArg);
   return self;
+}
+
+- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
+  [((id<OrgApacheLuceneSearchLeafCollector>) nil_chk(in_)) setScorerWithOrgApacheLuceneSearchScorer:create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_withOrgApacheLuceneSearchScorer_(self, scorer)];
 }
 
 - (void)dealloc {
@@ -328,36 +334,46 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery_Constan
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer:withOrgApacheLuceneSearchLeafCollector:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer:withOrgApacheLuceneSearchLeafCollector:);
+  methods[1].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.ConstantScoreQuery$ConstantBulkScorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer", "wrapCollectorWithOrgApacheLuceneSearchLeafCollector:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 = { 2, "", "org.apache.lucene.search", "ConstantScoreQuery$ConstantBulkScorer", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer;LOrgApacheLuceneSearchLeafCollector;", "setScorer", "LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "LOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer;", "wrapCollectorWithOrgApacheLuceneSearchLeafCollector:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 1, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *self, OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) {
+void OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *self, OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchFilterLeafCollector_initWithOrgApacheLuceneSearchLeafCollector_(self, arg$0);
+  OrgApacheLuceneSearchFilterLeafCollector_initWithOrgApacheLuceneSearchLeafCollector_(self, inArg);
 }
 
-OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *new_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1, initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_, outer$, arg$0)
+OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *new_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1, initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_, outer$, inArg)
 }
 
-OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1, initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_, outer$, arg$0)
+OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1, initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_withOrgApacheLuceneSearchLeafCollector_, outer$, inArg)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1)
+@implementation OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1
 
-@implementation OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1
+- (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1:(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *)outer$
+                                                     withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg {
+  OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_withOrgApacheLuceneSearchScorer_(self, outer$, inArg);
+  return self;
+}
 
 - (jfloat)score {
   return this$0_->this$0_->theScore_;
@@ -367,54 +383,60 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery_Constan
   return 1;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1:(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *)outer$
-                                                      withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg$0 {
-  OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_withOrgApacheLuceneSearchScorer_(self, outer$, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1:withOrgApacheLuceneSearchScorer:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1:withOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(score);
+  methods[2].selector = @selector(freq);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.ConstantScoreQuery$ConstantBulkScorer$1;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1", "setScorerWithOrgApacheLuceneSearchScorer:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1 = { 2, "", "org.apache.lucene.search", "ConstantScoreQuery$ConstantBulkScorer$", 0x8008, 3, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1;LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "LOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1;", "setScorerWithOrgApacheLuceneSearchScorer:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 3, 1, 2, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1 *self, OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *outer$, OrgApacheLuceneSearchScorer *arg$0) {
+void OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1 *self, OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *outer$, OrgApacheLuceneSearchScorer *inArg) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchFilterScorer_initWithOrgApacheLuceneSearchScorer_(self, arg$0);
+  OrgApacheLuceneSearchFilterScorer_initWithOrgApacheLuceneSearchScorer_(self, inArg);
 }
 
-OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1 *new_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *outer$, OrgApacheLuceneSearchScorer *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1, initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_withOrgApacheLuceneSearchScorer_, outer$, arg$0)
+OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1 *new_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *outer$, OrgApacheLuceneSearchScorer *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1, initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_withOrgApacheLuceneSearchScorer_, outer$, inArg)
 }
 
-OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1 *create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1 *outer$, OrgApacheLuceneSearchScorer *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1, initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_withOrgApacheLuceneSearchScorer_, outer$, arg$0)
+OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1 *create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1_initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1 *outer$, OrgApacheLuceneSearchScorer *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_1, initWithOrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_1_withOrgApacheLuceneSearchScorer_, outer$, inArg)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_$1_$1)
+@implementation OrgApacheLuceneSearchConstantScoreQuery_1
 
-@implementation OrgApacheLuceneSearchConstantScoreQuery_$1
+- (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery:(OrgApacheLuceneSearchConstantScoreQuery *)outer$
+                                withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)capture$0
+                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
+  OrgApacheLuceneSearchConstantScoreQuery_1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, outer$, capture$0, query);
+  return self;
+}
 
 - (OrgApacheLuceneSearchBulkScorer *)bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   OrgApacheLuceneSearchBulkScorer *innerScorer = [((OrgApacheLuceneSearchWeight *) nil_chk(val$innerWeight_)) bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:context];
   if (innerScorer == nil) {
-    return nil;
+    return JreRetainedLocalValue(nil);
   }
   return create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchBulkScorer_withOrgApacheLuceneSearchWeight_withFloat_(this$0_, innerScorer, self, [self score]);
 }
@@ -422,17 +444,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery_Constan
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   OrgApacheLuceneSearchScorer *innerScorer = [((OrgApacheLuceneSearchWeight *) nil_chk(val$innerWeight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
   if (innerScorer == nil) {
-    return nil;
+    return JreRetainedLocalValue(nil);
   }
   jfloat score = [self score];
-  return create_OrgApacheLuceneSearchConstantScoreQuery_$1_$1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(score, innerScorer, innerScorer);
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchConstantScoreQuery:(OrgApacheLuceneSearchConstantScoreQuery *)outer$
-                                withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)capture$0
-                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0 {
-  OrgApacheLuceneSearchConstantScoreQuery_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, outer$, capture$0, arg$0);
-  return self;
+  return create_OrgApacheLuceneSearchConstantScoreQuery_1_1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(score, innerScorer, innerScorer);
 }
 
 - (void)dealloc {
@@ -442,39 +457,51 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery_Constan
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:", "bulkScorer", "Lorg.apache.lucene.search.BulkScorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchConstantScoreQuery:withOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchQuery:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBulkScorer;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 4, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchConstantScoreQuery:withOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[2].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.ConstantScoreQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$innerWeight_", NULL, 0x1012, "Lorg.apache.lucene.search.Weight;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchConstantScoreQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$innerWeight_", "LOrgApacheLuceneSearchWeight;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchConstantScoreQuery", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery_$1 = { 2, "", "org.apache.lucene.search", "ConstantScoreQuery", 0x8008, 3, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchConstantScoreQuery_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchConstantScoreQuery;LOrgApacheLuceneSearchWeight;LOrgApacheLuceneSearchQuery;", "bulkScorer", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "scorer", "LOrgApacheLuceneSearchConstantScoreQuery;", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 3, 2, 5, -1, 6, -1, -1 };
+  return &_OrgApacheLuceneSearchConstantScoreQuery_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchConstantScoreQuery_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery_$1 *self, OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) {
+void OrgApacheLuceneSearchConstantScoreQuery_1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery_1 *self, OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *query) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$innerWeight_, capture$0);
-  OrgApacheLuceneSearchConstantScoreWeight_initWithOrgApacheLuceneSearchQuery_(self, arg$0);
+  OrgApacheLuceneSearchConstantScoreWeight_initWithOrgApacheLuceneSearchQuery_(self, query);
 }
 
-OrgApacheLuceneSearchConstantScoreQuery_$1 *new_OrgApacheLuceneSearchConstantScoreQuery_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConstantScoreQuery_$1, initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_, outer$, capture$0, arg$0)
+OrgApacheLuceneSearchConstantScoreQuery_1 *new_OrgApacheLuceneSearchConstantScoreQuery_1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConstantScoreQuery_1, initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_, outer$, capture$0, query)
 }
 
-OrgApacheLuceneSearchConstantScoreQuery_$1 *create_OrgApacheLuceneSearchConstantScoreQuery_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConstantScoreQuery_$1, initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_, outer$, capture$0, arg$0)
+OrgApacheLuceneSearchConstantScoreQuery_1 *create_OrgApacheLuceneSearchConstantScoreQuery_1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConstantScoreQuery_1, initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_, outer$, capture$0, query)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery_$1)
+@implementation OrgApacheLuceneSearchConstantScoreQuery_1_1
 
-@implementation OrgApacheLuceneSearchConstantScoreQuery_$1_$1
+- (instancetype)initWithFloat:(jfloat)capture$0
+withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)capture$1
+withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)inArg {
+  OrgApacheLuceneSearchConstantScoreQuery_1_1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, capture$0, capture$1, inArg);
+  return self;
+}
 
 - (jfloat)score {
   return val$score_;
@@ -488,48 +515,47 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery_$1)
   return JavaUtilCollections_singletonWithId_(create_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(val$innerScorer_, @"constant"));
 }
 
-- (instancetype)initWithFloat:(jfloat)capture$0
-withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)capture$1
-withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)arg$0 {
-  OrgApacheLuceneSearchConstantScoreQuery_$1_$1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, capture$0, capture$1, arg$0);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(val$innerScorer_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
-    { "initWithFloat:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorer:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 2, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithFloat:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(score);
+  methods[2].selector = @selector(freq);
+  methods[3].selector = @selector(getChildren);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$score_", NULL, 0x1012, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$innerScorer_", NULL, 0x1012, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$score_", "F", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$innerScorer_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchConstantScoreQuery_$1", "scorerWithOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery_$1_$1 = { 2, "", "org.apache.lucene.search", "ConstantScoreQuery$", 0x8008, 4, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchConstantScoreQuery_$1_$1;
+  static const void *ptrTable[] = { "FLOrgApacheLuceneSearchScorer;LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;", "LOrgApacheLuceneSearchConstantScoreQuery_1;", "scorerWithOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreQuery_1_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 4, 2, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneSearchConstantScoreQuery_1_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchConstantScoreQuery_$1_$1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_$1_$1 *self, jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *arg$0) {
+void OrgApacheLuceneSearchConstantScoreQuery_1_1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchConstantScoreQuery_1_1 *self, jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *inArg) {
   self->val$score_ = capture$0;
   JreStrongAssign(&self->val$innerScorer_, capture$1);
-  OrgApacheLuceneSearchFilterScorer_initWithOrgApacheLuceneSearchScorer_(self, arg$0);
+  OrgApacheLuceneSearchFilterScorer_initWithOrgApacheLuceneSearchScorer_(self, inArg);
 }
 
-OrgApacheLuceneSearchConstantScoreQuery_$1_$1 *new_OrgApacheLuceneSearchConstantScoreQuery_$1_$1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConstantScoreQuery_$1_$1, initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, capture$0, capture$1, arg$0)
+OrgApacheLuceneSearchConstantScoreQuery_1_1 *new_OrgApacheLuceneSearchConstantScoreQuery_1_1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *inArg) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchConstantScoreQuery_1_1, initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, capture$0, capture$1, inArg)
 }
 
-OrgApacheLuceneSearchConstantScoreQuery_$1_$1 *create_OrgApacheLuceneSearchConstantScoreQuery_$1_$1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConstantScoreQuery_$1_$1, initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, capture$0, capture$1, arg$0)
+OrgApacheLuceneSearchConstantScoreQuery_1_1 *create_OrgApacheLuceneSearchConstantScoreQuery_1_1_initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(jfloat capture$0, OrgApacheLuceneSearchScorer *capture$1, OrgApacheLuceneSearchScorer *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchConstantScoreQuery_1_1, initWithFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, capture$0, capture$1, inArg)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConstantScoreQuery_$1_$1)

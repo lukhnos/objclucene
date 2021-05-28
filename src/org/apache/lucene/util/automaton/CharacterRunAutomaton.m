@@ -11,6 +11,10 @@
 #include "org/apache/lucene/util/automaton/Operations.h"
 #include "org/apache/lucene/util/automaton/RunAutomaton.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/CharacterRunAutomaton must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilAutomatonCharacterRunAutomaton
 
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a {
@@ -26,9 +30,9 @@
 
 - (jboolean)runWithNSString:(NSString *)s {
   jint p = initial_;
-  jint l = ((jint) [((NSString *) nil_chk(s)) length]);
+  jint l = [((NSString *) nil_chk(s)) java_length];
   for (jint i = 0, cp = 0; i < l; i += JavaLangCharacter_charCountWithInt_(cp)) {
-    p = [self stepWithInt:p withInt:cp = [s codePointAt:i]];
+    p = [self stepWithInt:p withInt:cp = [s java_codePointAt:i]];
     if (p == -1) return false;
   }
   return IOSBooleanArray_Get(nil_chk(accept_), p);
@@ -47,13 +51,22 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:", "CharacterRunAutomaton", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "CharacterRunAutomaton", NULL, 0x1, NULL, NULL },
-    { "runWithNSString:", "run", "Z", 0x1, NULL, NULL },
-    { "runWithCharArray:withInt:withInt:", "run", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCharacterRunAutomaton = { 2, "CharacterRunAutomaton", "org.apache.lucene.util.automaton", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:);
+  methods[2].selector = @selector(runWithNSString:);
+  methods[3].selector = @selector(runWithCharArray:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAutomatonAutomaton;", "LOrgApacheLuceneUtilAutomatonAutomaton;I", "run", "LNSString;", "[CII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCharacterRunAutomaton = { "CharacterRunAutomaton", "org.apache.lucene.util.automaton", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton;
 }
 

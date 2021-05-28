@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonMinimizationOperations
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonMinimizationOperations_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonMinimizationOperations || defined(INCLUDE_OrgApacheLuceneUtilAutomatonMinimizationOperations))
 #define OrgApacheLuceneUtilAutomatonMinimizationOperations_
 
@@ -27,10 +33,9 @@
 
 /*!
  @brief Minimizes (and determinizes if not already deterministic) the given
- automaton using Hopcroft's algorighm.
- @param maxDeterminizedStates maximum number of states determinizing the
- automaton can result in.  Set higher to allow more complex queries and
- lower to prevent memory exhaustion.
+  automaton using Hopcroft's algorighm.
+ @param maxDeterminizedStates maximum number of states determinizing the   automaton can result in.  Set higher to allow more complex queries and
+    lower to prevent memory exhaustion.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)minimizeWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                                                      withInt:(jint)maxDeterminizedStates;
@@ -50,13 +55,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonMinimizationOperations)
 
 @interface OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair : NSObject {
  @public
-  jint n1_, n2_;
+  jint n1_;
+  jint n2_;
 }
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)n1
-                    withInt:(jint)n2;
+- (instancetype __nonnull)initWithInt:(jint)n1
+                              withInt:(jint)n2;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -80,12 +90,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonMinimizationOperations_In
 @interface OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList : NSObject {
  @public
   jint size_;
-  OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *first_, *last_;
+  OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *first_;
+  OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *last_;
 }
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *)addWithInt:(jint)q;
 
@@ -98,9 +109,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_init(OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *create_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *create_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList)
 
@@ -114,16 +125,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonMinimizationOperations_St
 @interface OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode : NSObject {
  @public
   jint q_;
-  OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *next_, *prev_;
+  OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *next_;
+  OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *prev_;
   OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *sl_;
 }
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)q
+- (instancetype __nonnull)initWithInt:(jint)q
 withOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList:(OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *)sl;
 
 - (void)remove;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -143,4 +159,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonMinimizationOperations_St
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonMinimizationOperations")

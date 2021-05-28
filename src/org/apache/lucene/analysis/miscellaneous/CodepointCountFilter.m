@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/miscellaneous/CodepointCountFilter.java
 //
 
+#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Character.h"
@@ -11,7 +12,10 @@
 #include "org/apache/lucene/analysis/miscellaneous/CodepointCountFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/CodepointCountFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter () {
  @public
@@ -34,7 +38,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter, te
 }
 
 - (jboolean)accept {
-  jint max32 = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
+  jint max32 = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) java_length];
   jint min32 = JreRShift32(max32, 1);
   if (min32 >= min_ && max32 <= max_) {
     return true;
@@ -43,7 +47,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter, te
     return false;
   }
   else {
-    jint len = JavaLangCharacter_codePointCountWithCharArray_withInt_withInt_([termAtt_ buffer], 0, [termAtt_ length]);
+    jint len = JavaLangCharacter_codePointCountWithCharArray_withInt_withInt_([termAtt_ buffer], 0, [termAtt_ java_length]);
     return (len >= min_ && len <= max_);
   }
 }
@@ -54,16 +58,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter, te
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:", "CodepointCountFilter", NULL, 0x1, NULL, NULL },
-    { "accept", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:);
+  methods[1].selector = @selector(accept);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "min_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "max_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "min_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "max_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter = { 2, "CodepointCountFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;II" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter = { "CodepointCountFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 2, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter;
 }
 

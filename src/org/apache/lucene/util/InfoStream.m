@@ -7,14 +7,20 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/util/InfoStream.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/InfoStream must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 #pragma clang diagnostic ignored "-Wprotocol"
 
-inline OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_get_defaultInfoStream();
+inline OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_get_defaultInfoStream(void);
 inline OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_set_defaultInfoStream(OrgApacheLuceneUtilInfoStream *value);
 static OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_defaultInfoStream;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneUtilInfoStream, defaultInfoStream, OrgApacheLuceneUtilInfoStream *)
 
 @interface OrgApacheLuceneUtilInfoStream_NoOutput : OrgApacheLuceneUtilInfoStream
+
+- (instancetype)init;
 
 - (void)messageWithNSString:(NSString *)component
                withNSString:(NSString *)message;
@@ -23,17 +29,15 @@ J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneUtilInfoStream, defaultInfoStream, OrgApa
 
 - (void)close;
 
-- (instancetype)init;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilInfoStream_NoOutput)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilInfoStream_NoOutput_init(OrgApacheLuceneUtilInfoStream_NoOutput *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilInfoStream_NoOutput *new_OrgApacheLuceneUtilInfoStream_NoOutput_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilInfoStream_NoOutput *new_OrgApacheLuceneUtilInfoStream_NoOutput_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilInfoStream_NoOutput *create_OrgApacheLuceneUtilInfoStream_NoOutput_init();
+__attribute__((unused)) static OrgApacheLuceneUtilInfoStream_NoOutput *create_OrgApacheLuceneUtilInfoStream_NoOutput_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilInfoStream_NoOutput)
 
@@ -46,6 +50,13 @@ OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT;
 + (OrgApacheLuceneUtilInfoStream *)NO_OUTPUT {
   return OrgApacheLuceneUtilInfoStream_NO_OUTPUT;
 }
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilInfoStream_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)messageWithNSString:(NSString *)component
                withNSString:(NSString *)message {
@@ -67,12 +78,31 @@ OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT;
   OrgApacheLuceneUtilInfoStream_setDefaultWithOrgApacheLuceneUtilInfoStream_(infoStream);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilInfoStream_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilInfoStream;", 0x29, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x29, 4, 5, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(messageWithNSString:withNSString:);
+  methods[2].selector = @selector(isEnabledWithNSString:);
+  methods[3].selector = @selector(getDefault);
+  methods[4].selector = @selector(setDefaultWithOrgApacheLuceneUtilInfoStream:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "NO_OUTPUT", "LOrgApacheLuceneUtilInfoStream;", .constantValue.asLong = 0, 0x19, -1, 6, -1, -1 },
+    { "defaultInfoStream", "LOrgApacheLuceneUtilInfoStream;", .constantValue.asLong = 0, 0xa, -1, 7, -1, -1 },
+  };
+  static const void *ptrTable[] = { "message", "LNSString;LNSString;", "isEnabled", "LNSString;", "setDefault", "LOrgApacheLuceneUtilInfoStream;", &OrgApacheLuceneUtilInfoStream_NO_OUTPUT, &OrgApacheLuceneUtilInfoStream_defaultInfoStream, "LOrgApacheLuceneUtilInfoStream_NoOutput;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilInfoStream = { "InfoStream", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x401, 5, 2, -1, 8, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilInfoStream;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilInfoStream class]) {
@@ -82,29 +112,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "messageWithNSString:withNSString:", "message", "V", 0x401, NULL, NULL },
-    { "isEnabledWithNSString:", "isEnabled", "Z", 0x401, NULL, NULL },
-    { "getDefault", NULL, "Lorg.apache.lucene.util.InfoStream;", 0x29, NULL, NULL },
-    { "setDefaultWithOrgApacheLuceneUtilInfoStream:", "setDefault", "V", 0x29, NULL, NULL },
-    { "init", "InfoStream", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "NO_OUTPUT", "NO_OUTPUT", 0x19, "Lorg.apache.lucene.util.InfoStream;", &OrgApacheLuceneUtilInfoStream_NO_OUTPUT, NULL, .constantValue.asLong = 0 },
-    { "defaultInfoStream", "defaultInfoStream", 0xa, "Lorg.apache.lucene.util.InfoStream;", &OrgApacheLuceneUtilInfoStream_defaultInfoStream, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.InfoStream$NoOutput;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilInfoStream = { 2, "InfoStream", "org.apache.lucene.util", NULL, 0x401, 5, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilInfoStream;
-}
-
 @end
+
+void OrgApacheLuceneUtilInfoStream_init(OrgApacheLuceneUtilInfoStream *self) {
+  NSObject_init(self);
+}
 
 OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_getDefault() {
   OrgApacheLuceneUtilInfoStream_initialize();
   @synchronized(OrgApacheLuceneUtilInfoStream_class_()) {
-    return OrgApacheLuceneUtilInfoStream_defaultInfoStream;
+    return JreRetainedLocalValue(OrgApacheLuceneUtilInfoStream_defaultInfoStream);
   }
 }
 
@@ -118,17 +135,20 @@ void OrgApacheLuceneUtilInfoStream_setDefaultWithOrgApacheLuceneUtilInfoStream_(
   }
 }
 
-void OrgApacheLuceneUtilInfoStream_init(OrgApacheLuceneUtilInfoStream *self) {
-  NSObject_init(self);
-}
-
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilInfoStream)
 
 @implementation OrgApacheLuceneUtilInfoStream_NoOutput
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilInfoStream_NoOutput_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)messageWithNSString:(NSString *)component
                withNSString:(NSString *)message {
-  JreAssert((false), (@"message() should not be called when isEnabled returns false"));
+  JreAssert(false, @"message() should not be called when isEnabled returns false");
 }
 
 - (jboolean)isEnabledWithNSString:(NSString *)component {
@@ -138,21 +158,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilInfoStream)
 - (void)close {
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilInfoStream_NoOutput_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "messageWithNSString:withNSString:", "message", "V", 0x1, NULL, NULL },
-    { "isEnabledWithNSString:", "isEnabled", "Z", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
-    { "init", "NoOutput", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilInfoStream_NoOutput = { 2, "NoOutput", "org.apache.lucene.util", "InfoStream", 0x1a, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(messageWithNSString:withNSString:);
+  methods[2].selector = @selector(isEnabledWithNSString:);
+  methods[3].selector = @selector(close);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "message", "LNSString;LNSString;", "isEnabled", "LNSString;", "LOrgApacheLuceneUtilInfoStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilInfoStream_NoOutput = { "NoOutput", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x1a, 4, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilInfoStream_NoOutput;
 }
 

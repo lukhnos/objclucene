@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/BinaryDocValues.h"
@@ -28,9 +27,16 @@
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/LeafReader must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/index/LeafReader must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
 @interface OrgApacheLuceneIndexLeafReader () {
  @public
-  __unsafe_unretained OrgApacheLuceneIndexLeafReaderContext *readerContext_;
+  WEAK_ OrgApacheLuceneIndexLeafReaderContext *readerContext_;
 }
 
 @end
@@ -38,6 +44,10 @@
 __attribute__((unused)) static OrgApacheLuceneIndexTerms *OrgApacheLuceneIndexLeafReader_termsWithNSString_(OrgApacheLuceneIndexLeafReader *self, NSString *field);
 
 __attribute__((unused)) static OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexLeafReader_postingsWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneIndexLeafReader *self, OrgApacheLuceneIndexTerm *term, jint flags);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexLeafReader__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexLeafReader__Annotations$1(void);
 
 @interface OrgApacheLuceneIndexLeafReader_CoreClosedListener : NSObject
 
@@ -235,8 +245,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneIndexDocsEnum *)termDocsEnumWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  JreAssert(([((OrgApacheLuceneIndexTerm *) nil_chk(term)) field] != nil), (@"org/apache/lucene/index/LeafReader.java:322 condition failed: assert term.field() != null;"));
-  JreAssert(([term bytes] != nil), (@"org/apache/lucene/index/LeafReader.java:323 condition failed: assert term.bytes() != null;"));
+  JreAssert([((OrgApacheLuceneIndexTerm *) nil_chk(term)) field] != nil, @"org/apache/lucene/index/LeafReader.java:322 condition failed: assert term.field() != null;");
+  JreAssert([term bytes] != nil, @"org/apache/lucene/index/LeafReader.java:323 condition failed: assert term.bytes() != null;");
   OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexLeafReader_termsWithNSString_(self, [term field]);
   if (terms != nil) {
     OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
@@ -248,8 +258,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneIndexDocsAndPositionsEnum *)termPositionsEnumWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  JreAssert(([((OrgApacheLuceneIndexTerm *) nil_chk(term)) field] != nil), (@"org/apache/lucene/index/LeafReader.java:340 condition failed: assert term.field() != null;"));
-  JreAssert(([term bytes] != nil), (@"org/apache/lucene/index/LeafReader.java:341 condition failed: assert term.bytes() != null;"));
+  JreAssert([((OrgApacheLuceneIndexTerm *) nil_chk(term)) field] != nil, @"org/apache/lucene/index/LeafReader.java:340 condition failed: assert term.field() != null;");
+  JreAssert([term bytes] != nil, @"org/apache/lucene/index/LeafReader.java:341 condition failed: assert term.bytes() != null;");
   OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexLeafReader_termsWithNSString_(self, [term field]);
   if (terms != nil) {
     OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
@@ -265,49 +275,72 @@ J2OBJC_IGNORE_DESIGNATED_END
   [readerContext_ release];
 }
 
-+ (IOSObjectArray *)__annotations_termDocsEnumWithOrgApacheLuceneIndexTerm_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_termPositionsEnumWithOrgApacheLuceneIndexTerm_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LeafReader", NULL, 0x4, NULL, NULL },
-    { "getContext", NULL, "Lorg.apache.lucene.index.LeafReaderContext;", 0x11, NULL, NULL },
-    { "addCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListenerAsReaderClosedListener", "V", 0xc, NULL, NULL },
-    { "removeCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListenerAsReaderClosedListener", "V", 0xc, NULL, NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x401, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x401, NULL, NULL },
-    { "fields", NULL, "Lorg.apache.lucene.index.Fields;", 0x401, "Ljava.io.IOException;", NULL },
-    { "docFreqWithOrgApacheLuceneIndexTerm:", "docFreq", "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "totalTermFreqWithOrgApacheLuceneIndexTerm:", "totalTermFreq", "J", 0x11, "Ljava.io.IOException;", NULL },
-    { "getSumDocFreqWithNSString:", "getSumDocFreq", "J", 0x11, "Ljava.io.IOException;", NULL },
-    { "getDocCountWithNSString:", "getDocCount", "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "getSumTotalTermFreqWithNSString:", "getSumTotalTermFreq", "J", 0x11, "Ljava.io.IOException;", NULL },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x11, "Ljava.io.IOException;", NULL },
-    { "postingsWithOrgApacheLuceneIndexTerm:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x11, "Ljava.io.IOException;", NULL },
-    { "postingsWithOrgApacheLuceneIndexTerm:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x11, "Ljava.io.IOException;", NULL },
-    { "getNumericDocValuesWithNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getBinaryDocValuesWithNSString:", "getBinaryDocValues", "Lorg.apache.lucene.index.BinaryDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getSortedDocValuesWithNSString:", "getSortedDocValues", "Lorg.apache.lucene.index.SortedDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getSortedNumericDocValuesWithNSString:", "getSortedNumericDocValues", "Lorg.apache.lucene.index.SortedNumericDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getSortedSetDocValuesWithNSString:", "getSortedSetDocValues", "Lorg.apache.lucene.index.SortedSetDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getDocsWithFieldWithNSString:", "getDocsWithField", "Lorg.apache.lucene.util.Bits;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getNormValuesWithNSString:", "getNormValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getFieldInfos", NULL, "Lorg.apache.lucene.index.FieldInfos;", 0x401, NULL, NULL },
-    { "getLiveDocs", NULL, "Lorg.apache.lucene.util.Bits;", 0x401, NULL, NULL },
-    { "checkIntegrity", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "termDocsEnumWithOrgApacheLuceneIndexTerm:", "termDocsEnum", "Lorg.apache.lucene.index.DocsEnum;", 0x11, "Ljava.io.IOException;", NULL },
-    { "termPositionsEnumWithOrgApacheLuceneIndexTerm:", "termPositionsEnum", "Lorg.apache.lucene.index.DocsAndPositionsEnum;", 0x11, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexLeafReaderContext;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0xc, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0xc, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 5, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x401, -1, -1, 6, -1, -1, -1 },
+    { NULL, "I", 0x11, 7, 8, 6, -1, -1, -1 },
+    { NULL, "J", 0x11, 9, 8, 6, -1, -1, -1 },
+    { NULL, "J", 0x11, 10, 11, 6, -1, -1, -1 },
+    { NULL, "I", 0x11, 12, 11, 6, -1, -1, -1 },
+    { NULL, "J", 0x11, 13, 11, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x11, 14, 11, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x11, 15, 16, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x11, 15, 8, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x401, 17, 11, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexBinaryDocValues;", 0x401, 18, 11, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedDocValues;", 0x401, 19, 11, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedNumericDocValues;", 0x401, 20, 11, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedSetDocValues;", 0x401, 21, 11, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x401, 22, 11, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x401, 23, 11, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFieldInfos;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocsEnum;", 0x11, 24, 8, 6, -1, 25, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocsAndPositionsEnum;", 0x11, 26, 8, 6, -1, 27, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getContext);
+  methods[2].selector = @selector(addCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[3].selector = @selector(removeCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[4].selector = @selector(addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[5].selector = @selector(removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[6].selector = @selector(fields);
+  methods[7].selector = @selector(docFreqWithOrgApacheLuceneIndexTerm:);
+  methods[8].selector = @selector(totalTermFreqWithOrgApacheLuceneIndexTerm:);
+  methods[9].selector = @selector(getSumDocFreqWithNSString:);
+  methods[10].selector = @selector(getDocCountWithNSString:);
+  methods[11].selector = @selector(getSumTotalTermFreqWithNSString:);
+  methods[12].selector = @selector(termsWithNSString:);
+  methods[13].selector = @selector(postingsWithOrgApacheLuceneIndexTerm:withInt:);
+  methods[14].selector = @selector(postingsWithOrgApacheLuceneIndexTerm:);
+  methods[15].selector = @selector(getNumericDocValuesWithNSString:);
+  methods[16].selector = @selector(getBinaryDocValuesWithNSString:);
+  methods[17].selector = @selector(getSortedDocValuesWithNSString:);
+  methods[18].selector = @selector(getSortedNumericDocValuesWithNSString:);
+  methods[19].selector = @selector(getSortedSetDocValuesWithNSString:);
+  methods[20].selector = @selector(getDocsWithFieldWithNSString:);
+  methods[21].selector = @selector(getNormValuesWithNSString:);
+  methods[22].selector = @selector(getFieldInfos);
+  methods[23].selector = @selector(getLiveDocs);
+  methods[24].selector = @selector(checkIntegrity);
+  methods[25].selector = @selector(termDocsEnumWithOrgApacheLuceneIndexTerm:);
+  methods[26].selector = @selector(termPositionsEnumWithOrgApacheLuceneIndexTerm:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "readerContext_", NULL, 0x12, "Lorg.apache.lucene.index.LeafReaderContext;", NULL, NULL, .constantValue.asLong = 0 },
+    { "readerContext_", "LOrgApacheLuceneIndexLeafReaderContext;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.LeafReader$CoreClosedListener;", "Lorg.apache.lucene.index.LeafReader$CoreClosedListenerWrapper;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexLeafReader = { 2, "LeafReader", "org.apache.lucene.index", NULL, 0x401, 27, methods, 1, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "addCoreClosedListenerAsReaderClosedListener", "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneIndexLeafReader_CoreClosedListener;", "removeCoreClosedListenerAsReaderClosedListener", "addCoreClosedListener", "LOrgApacheLuceneIndexLeafReader_CoreClosedListener;", "removeCoreClosedListener", "LJavaIoIOException;", "docFreq", "LOrgApacheLuceneIndexTerm;", "totalTermFreq", "getSumDocFreq", "LNSString;", "getDocCount", "getSumTotalTermFreq", "terms", "postings", "LOrgApacheLuceneIndexTerm;I", "getNumericDocValues", "getBinaryDocValues", "getSortedDocValues", "getSortedNumericDocValues", "getSortedSetDocValues", "getDocsWithField", "getNormValues", "termDocsEnum", (void *)&OrgApacheLuceneIndexLeafReader__Annotations$0, "termPositionsEnum", (void *)&OrgApacheLuceneIndexLeafReader__Annotations$1, "LOrgApacheLuceneIndexLeafReader_CoreClosedListener;LOrgApacheLuceneIndexLeafReader_CoreClosedListenerWrapper;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexLeafReader = { "LeafReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 27, 1, -1, 28, -1, -1, -1 };
   return &_OrgApacheLuceneIndexLeafReader;
 }
 
@@ -333,8 +366,8 @@ OrgApacheLuceneIndexTerms *OrgApacheLuceneIndexLeafReader_termsWithNSString_(Org
 }
 
 OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexLeafReader_postingsWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneIndexLeafReader *self, OrgApacheLuceneIndexTerm *term, jint flags) {
-  JreAssert(([((OrgApacheLuceneIndexTerm *) nil_chk(term)) field] != nil), (@"org/apache/lucene/index/LeafReader.java:220 condition failed: assert term.field() != null;"));
-  JreAssert(([term bytes] != nil), (@"org/apache/lucene/index/LeafReader.java:221 condition failed: assert term.bytes() != null;"));
+  JreAssert([((OrgApacheLuceneIndexTerm *) nil_chk(term)) field] != nil, @"org/apache/lucene/index/LeafReader.java:220 condition failed: assert term.field() != null;");
+  JreAssert([term bytes] != nil, @"org/apache/lucene/index/LeafReader.java:221 condition failed: assert term.bytes() != null;");
   OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexLeafReader_termsWithNSString_(self, [term field]);
   if (terms != nil) {
     OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
@@ -345,15 +378,29 @@ OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexLeafReader_postingsWithOrg
   return nil;
 }
 
+IOSObjectArray *OrgApacheLuceneIndexLeafReader__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneIndexLeafReader__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexLeafReader)
 
 @implementation OrgApacheLuceneIndexLeafReader_CoreClosedListener
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "onCloseWithId:", "onClose", "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexLeafReader_CoreClosedListener = { 2, "CoreClosedListener", "org.apache.lucene.index", "LeafReader", 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(onCloseWithId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "onClose", "LNSObject;", "LJavaIoIOException;", "LOrgApacheLuceneIndexLeafReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexLeafReader_CoreClosedListener = { "CoreClosedListener", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x609, 1, 0, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 }
 
@@ -389,16 +436,25 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexLeafReader_CoreClosedLi
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "CoreClosedListenerWrapper", NULL, 0x0, NULL, NULL },
-    { "onCloseWithOrgApacheLuceneIndexIndexReader:", "onClose", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[1].selector = @selector(onCloseWithOrgApacheLuceneIndexIndexReader:);
+  methods[2].selector = @selector(hash);
+  methods[3].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "listener_", NULL, 0x12, "Lorg.apache.lucene.index.LeafReader$CoreClosedListener;", NULL, NULL, .constantValue.asLong = 0 },
+    { "listener_", "LOrgApacheLuceneIndexLeafReader_CoreClosedListener;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexLeafReader_CoreClosedListenerWrapper = { 2, "CoreClosedListenerWrapper", "org.apache.lucene.index", "LeafReader", 0xa, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexLeafReader_CoreClosedListener;", "onClose", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "hashCode", "equals", "LNSObject;", "LOrgApacheLuceneIndexLeafReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexLeafReader_CoreClosedListenerWrapper = { "CoreClosedListenerWrapper", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 4, 1, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexLeafReader_CoreClosedListenerWrapper;
 }
 

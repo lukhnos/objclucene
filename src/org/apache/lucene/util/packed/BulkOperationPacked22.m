@@ -8,14 +8,16 @@
 #include "org/apache/lucene/util/packed/BulkOperationPacked.h"
 #include "org/apache/lucene/util/packed/BulkOperationPacked22.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/BulkOperationPacked22 must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilPackedBulkOperationPacked22
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilPackedBulkOperationPacked22_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneUtilPackedBulkOperationPacked22_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)decodeWithLongArray:(IOSLongArray *)blocks
                     withInt:(jint)blocksOffset
@@ -170,29 +172,39 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BulkOperationPacked22", NULL, 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithByteArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithByteArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked22 = { 2, "BulkOperationPacked22", "org.apache.lucene.util.packed", NULL, 0x10, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(decodeWithLongArray:withInt:withIntArray:withInt:withInt:);
+  methods[2].selector = @selector(decodeWithByteArray:withInt:withIntArray:withInt:withInt:);
+  methods[3].selector = @selector(decodeWithLongArray:withInt:withLongArray:withInt:withInt:);
+  methods[4].selector = @selector(decodeWithByteArray:withInt:withLongArray:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "decode", "[JI[III", "[BI[III", "[JI[JII", "[BI[JII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked22 = { "BulkOperationPacked22", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x10, 5, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedBulkOperationPacked22;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedBulkOperationPacked22_init(OrgApacheLuceneUtilPackedBulkOperationPacked22 *self) {
-  OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(self, 22);
+void OrgApacheLuceneUtilPackedBulkOperationPacked22_initPackagePrivate(OrgApacheLuceneUtilPackedBulkOperationPacked22 *self) {
+  OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(self, 22);
 }
 
-OrgApacheLuceneUtilPackedBulkOperationPacked22 *new_OrgApacheLuceneUtilPackedBulkOperationPacked22_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked22, init)
+OrgApacheLuceneUtilPackedBulkOperationPacked22 *new_OrgApacheLuceneUtilPackedBulkOperationPacked22_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked22, initPackagePrivate)
 }
 
-OrgApacheLuceneUtilPackedBulkOperationPacked22 *create_OrgApacheLuceneUtilPackedBulkOperationPacked22_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked22, init)
+OrgApacheLuceneUtilPackedBulkOperationPacked22 *create_OrgApacheLuceneUtilPackedBulkOperationPacked22_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked22, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedBulkOperationPacked22)

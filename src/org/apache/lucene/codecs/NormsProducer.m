@@ -3,12 +3,14 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/NormsProducer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/codecs/NormsProducer.h"
 #include "org/apache/lucene/index/FieldInfo.h"
 #include "org/apache/lucene/index/NumericDocValues.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/NormsProducer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
@@ -37,13 +39,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NormsProducer", NULL, 0x4, NULL, NULL },
-    { "getNormsWithOrgApacheLuceneIndexFieldInfo:", "getNorms", "Lorg.apache.lucene.index.NumericDocValues;", 0x401, "Ljava.io.IOException;", NULL },
-    { "checkIntegrity", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.NormsProducer;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsNormsProducer;", 0x1, -1, -1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsNormsProducer = { 2, "NormsProducer", "org.apache.lucene.codecs", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getNormsWithOrgApacheLuceneIndexFieldInfo:);
+  methods[2].selector = @selector(checkIntegrity);
+  methods[3].selector = @selector(getMergeInstance);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getNorms", "LOrgApacheLuceneIndexFieldInfo;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsNormsProducer = { "NormsProducer", "org.apache.lucene.codecs", ptrTable, methods, NULL, 7, 0x401, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsNormsProducer;
 }
 

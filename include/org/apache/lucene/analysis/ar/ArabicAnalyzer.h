@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisArArabicAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisArArabicAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisArArabicAnalyzer))
 #define OrgApacheLuceneAnalysisArArabicAnalyzer_
 
@@ -26,49 +32,44 @@
 /*!
  @brief <code>Analyzer</code> for Arabic.
  <p>
- This analyzer implements light-stemming as specified by:
+  This analyzer implements light-stemming as specified by: 
  <i>
- Light Stemming for Arabic Information Retrieval
+  Light Stemming for Arabic Information Retrieval 
  </i>    
- http://www.mtholyoke.edu/~lballest/Pubs/arab_stem05.pdf
+  http://www.mtholyoke.edu/~lballest/Pubs/arab_stem05.pdf 
  <p>
- The analysis package contains three primary components:
+  The analysis package contains three primary components: 
  <ul>
- <li><code>ArabicNormalizationFilter</code>: Arabic orthographic normalization.
- <li><code>ArabicStemFilter</code>: Arabic light stemming
- <li>Arabic stop words file: a set of default Arabic stop words.
+   <li><code>ArabicNormalizationFilter</code>: Arabic orthographic normalization.
+   <li><code>ArabicStemFilter</code>: Arabic light stemming
+   <li>Arabic stop words file: a set of default Arabic stop words. 
  </ul>
  */
 @interface OrgApacheLuceneAnalysisArArabicAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
-
-+ (NSString *)DEFAULT_STOPWORD_FILE;
+@property (readonly, copy, class) NSString *DEFAULT_STOPWORD_FILE NS_SWIFT_NAME(DEFAULT_STOPWORD_FILE);
 
 #pragma mark Public
 
 /*!
  @brief Builds an analyzer with the default stop words: <code>DEFAULT_STOPWORD_FILE</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Builds an analyzer with the given stop words
- @param stopwords
- a stopword set
+ @param stopwords a stopword set
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
 /*!
- @brief Builds an analyzer with the given stop word.
- If a none-empty stem exclusion set is
- provided this analyzer will add a <code>SetKeywordMarkerFilter</code> before
+ @brief Builds an analyzer with the given stop word.If a none-empty stem exclusion set is
+  provided this analyzer will add a <code>SetKeywordMarkerFilter</code> before 
  <code>ArabicStemFilter</code>.
- @param stopwords
- a stopword set
- @param stemExclusionSet
- a set of terms not to be stemmed
+ @param stopwords a stopword set
+ @param stemExclusionSet a set of terms not to be stemmed
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
-                    withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
+                              withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
 
 /*!
  @brief Returns an unmodifiable instance of the default stop-words set.
@@ -80,13 +81,13 @@
 
 /*!
  @brief Creates
- <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- used to tokenize all the text in the provided <code>Reader</code>.
+  <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+  used to tokenize all the text in the provided <code>Reader</code>.
  @return <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- built from an <code>StandardTokenizer</code> filtered with
- <code>LowerCaseFilter</code>, <code>StopFilter</code>,
- <code>ArabicNormalizationFilter</code>, <code>SetKeywordMarkerFilter</code>
- if a stem exclusion set is provided and <code>ArabicStemFilter</code>.
+          built from an <code>StandardTokenizer</code> filtered with
+          <code>LowerCaseFilter</code>, <code>StopFilter</code>,
+          <code>ArabicNormalizationFilter</code>, <code>SetKeywordMarkerFilter</code>
+          if a stem exclusion set is provided and <code>ArabicStemFilter</code>.
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
@@ -97,20 +98,20 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisArArabicAnalyzer)
 /*!
  @brief File containing default Arabic stopwords.
  Default stopword list is from http://members.unine.ch/jacques.savoy/clef/index.html
- The stopword list is BSD-Licensed.
+  The stopword list is BSD-Licensed.
  */
-inline NSString *OrgApacheLuceneAnalysisArArabicAnalyzer_get_DEFAULT_STOPWORD_FILE();
+inline NSString *OrgApacheLuceneAnalysisArArabicAnalyzer_get_DEFAULT_STOPWORD_FILE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisArArabicAnalyzer_DEFAULT_STOPWORD_FILE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisArArabicAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisArArabicAnalyzer_getDefaultStopSet();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisArArabicAnalyzer_getDefaultStopSet(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisArArabicAnalyzer_init(OrgApacheLuceneAnalysisArArabicAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicAnalyzer *new_OrgApacheLuceneAnalysisArArabicAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicAnalyzer *new_OrgApacheLuceneAnalysisArArabicAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicAnalyzer *create_OrgApacheLuceneAnalysisArArabicAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicAnalyzer *create_OrgApacheLuceneAnalysisArArabicAnalyzer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisArArabicAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisArArabicAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
@@ -128,4 +129,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisArArabicAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicAnalyzer")

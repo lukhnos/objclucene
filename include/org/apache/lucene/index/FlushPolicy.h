@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFlushPolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFlushPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexFlushPolicy || defined(INCLUDE_OrgApacheLuceneIndexFlushPolicy))
 #define OrgApacheLuceneIndexFlushPolicy_
 
@@ -23,27 +29,27 @@
 
 /*!
  @brief <code>FlushPolicy</code> controls when segments are flushed from a RAM resident
- internal data-structure to the <code>IndexWriter</code>s <code>Directory</code>.
+  internal data-structure to the <code>IndexWriter</code>s <code>Directory</code>.
  <p>
- Segments are traditionally flushed by:
+  Segments are traditionally flushed by: 
  <ul>
- <li>RAM consumption - configured via
+  <li>RAM consumption - configured via 
  <code>IndexWriterConfig.setRAMBufferSizeMB(double)</code></li>
- <li>Number of RAM resident documents - configured via
+  <li>Number of RAM resident documents - configured via 
  <code>IndexWriterConfig.setMaxBufferedDocs(int)</code></li>
- </ul>
- The policy also applies pending delete operations (by term and/or query),
- given the threshold set in
+  </ul>
+  The policy also applies pending delete operations (by term and/or query),
+  given the threshold set in 
  <code>IndexWriterConfig.setMaxBufferedDeleteTerms(int)</code>.
- <p>
- <code>IndexWriter</code> consults the provided <code>FlushPolicy</code> to control the
- flushing process. The policy is informed for each added or updated document
- as well as for each delete term. Based on the <code>FlushPolicy</code>, the
- information provided via <code>ThreadState</code> and
- <code>DocumentsWriterFlushControl</code>, the <code>FlushPolicy</code> decides if a
+  <p>
+  <code>IndexWriter</code> consults the provided <code>FlushPolicy</code> to control the
+  flushing process. The policy is informed for each added or updated document
+  as well as for each delete term. Based on the <code>FlushPolicy</code>, the
+  information provided via <code>ThreadState</code> and 
+ <code>DocumentsWriterFlushControl</code>, the <code>FlushPolicy</code> decides if a 
  <code>DocumentsWriterPerThread</code> needs flushing and mark it as flush-pending
- via <code>DocumentsWriterFlushControl.setFlushPending</code>, or if deletes need
- to be applied.
+  via <code>DocumentsWriterFlushControl.setFlushPending</code>, or if deletes need
+  to be applied.
  - seealso: ThreadState
  - seealso: DocumentsWriterFlushControl
  - seealso: DocumentsWriterPerThread
@@ -51,42 +57,41 @@
  */
 @interface OrgApacheLuceneIndexFlushPolicy : NSObject {
  @public
-  OrgApacheLuceneIndexLiveIndexWriterConfig *indexWriterConfig_;
+  WEAK_ OrgApacheLuceneIndexLiveIndexWriterConfig *indexWriterConfig_;
   OrgApacheLuceneUtilInfoStream *infoStream_;
 }
 
 #pragma mark Public
 
 /*!
- @brief Called for each delete term.
- If this is a delete triggered due to an update
- the given <code>ThreadState</code> is non-null.
+ @brief Called for each delete term.If this is a delete triggered due to an update
+  the given <code>ThreadState</code> is non-null.
  <p>
- Note: This method is called synchronized on the given
+  Note: This method is called synchronized on the given 
  <code>DocumentsWriterFlushControl</code> and it is guaranteed that the calling
- thread holds the lock on the given <code>ThreadState</code>
+  thread holds the lock on the given <code>ThreadState</code>
  */
 - (void)onDeleteWithOrgApacheLuceneIndexDocumentsWriterFlushControl:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)control
    withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)state;
 
 /*!
  @brief Called for each document addition on the given <code>ThreadState</code>s
- <code>DocumentsWriterPerThread</code>.
+  <code>DocumentsWriterPerThread</code>.
  <p>
- Note: This method is synchronized by the given
+  Note: This method is synchronized by the given 
  <code>DocumentsWriterFlushControl</code> and it is guaranteed that the calling
- thread holds the lock on the given <code>ThreadState</code>
+  thread holds the lock on the given <code>ThreadState</code>
  */
 - (void)onInsertWithOrgApacheLuceneIndexDocumentsWriterFlushControl:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)control
    withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)state;
 
 /*!
  @brief Called for each document update on the given <code>ThreadState</code>'s
- <code>DocumentsWriterPerThread</code>.
+  <code>DocumentsWriterPerThread</code>.
  <p>
- Note: This method is called  synchronized on the given
+  Note: This method is called  synchronized on the given 
  <code>DocumentsWriterFlushControl</code> and it is guaranteed that the calling
- thread holds the lock on the given <code>ThreadState</code>
+  thread holds the lock on the given <code>ThreadState</code>
  */
 - (void)onUpdateWithOrgApacheLuceneIndexDocumentsWriterFlushControl:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)control
    withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)state;
@@ -95,9 +100,9 @@
 
 /*!
  @brief Returns the current most RAM consuming non-pending <code>ThreadState</code> with
- at least one indexed document.
+  at least one indexed document.
  <p>
- This method will never return <code>null</code>
+  This method will never return <code>null</code>
  */
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)findLargestNonPendingWriterWithOrgApacheLuceneIndexDocumentsWriterFlushControl:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)control
                                                                                 withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)perThreadState;
@@ -109,19 +114,26 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFlushPolicy)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFlushPolicy, indexWriterConfig_, OrgApacheLuceneIndexLiveIndexWriterConfig *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFlushPolicy, infoStream_, OrgApacheLuceneUtilInfoStream *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexFlushPolicy_init(OrgApacheLuceneIndexFlushPolicy *self);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexFlushPolicy_initPackagePrivate(OrgApacheLuceneIndexFlushPolicy *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFlushPolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFlushPolicy")

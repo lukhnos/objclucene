@@ -23,6 +23,10 @@
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 #include "org/apache/lucene/util/Version.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/hi/HindiAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisHiHindiAnalyzer () {
  @public
   OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet_;
@@ -32,13 +36,13 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHiHindiAnalyzer, stemExclusionSet_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline NSString *OrgApacheLuceneAnalysisHiHindiAnalyzer_get_STOPWORDS_COMMENT();
+inline NSString *OrgApacheLuceneAnalysisHiHindiAnalyzer_get_STOPWORDS_COMMENT(void);
 static NSString *OrgApacheLuceneAnalysisHiHindiAnalyzer_STOPWORDS_COMMENT = @"#";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHiHindiAnalyzer, STOPWORDS_COMMENT, NSString *)
 
 /*!
  @brief Atomically loads the DEFAULT_STOP_SET in a lazy fashion once the outer class 
- accesses the static final set the first time
+  accesses the static final set the first time
  .;
  */
 @interface OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder : NSObject
@@ -49,15 +53,15 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHiHindiAnalyzer, STOPWORDS_
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_init(OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder *self);
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_init();
+__attribute__((unused)) static OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder)
 
@@ -114,20 +118,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDefaultStopSet", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:", "HindiAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "HindiAnalyzer", NULL, 0x1, NULL, NULL },
-    { "init", "HindiAnalyzer", NULL, 0x1, NULL, NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneAnalysisUtilCharArraySet;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getDefaultStopSet);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[3].selector = @selector(init);
+  methods[4].selector = @selector(createComponentsWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stemExclusionSet_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_STOPWORD_FILE", "DEFAULT_STOPWORD_FILE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHiHindiAnalyzer_DEFAULT_STOPWORD_FILE, NULL, .constantValue.asLong = 0 },
-    { "STOPWORDS_COMMENT", "STOPWORDS_COMMENT", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHiHindiAnalyzer_STOPWORDS_COMMENT, NULL, .constantValue.asLong = 0 },
+    { "stemExclusionSet_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "DEFAULT_STOPWORD_FILE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "STOPWORDS_COMMENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.hi.HindiAnalyzer$DefaultSetHolder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHiHindiAnalyzer = { 2, "HindiAnalyzer", "org.apache.lucene.analysis.hi", NULL, 0x11, 5, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisUtilCharArraySet;LOrgApacheLuceneAnalysisUtilCharArraySet;", "LOrgApacheLuceneAnalysisUtilCharArraySet;", "createComponents", "LNSString;", &OrgApacheLuceneAnalysisHiHindiAnalyzer_DEFAULT_STOPWORD_FILE, &OrgApacheLuceneAnalysisHiHindiAnalyzer_STOPWORDS_COMMENT, "LOrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHiHindiAnalyzer = { "HindiAnalyzer", "org.apache.lucene.analysis.hi", ptrTable, methods, fields, 7, 0x11, 5, 3, -1, 6, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisHiHindiAnalyzer;
 }
 
@@ -188,6 +201,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "DEFAULT_STOP_SET", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x18, -1, 0, -1, -1 },
+  };
+  static const void *ptrTable[] = { &OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, "LOrgApacheLuceneAnalysisHiHindiAnalyzer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder = { "DefaultSetHolder", "org.apache.lucene.analysis.hi", ptrTable, methods, fields, 7, 0xa, 1, 1, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder class]) {
     {
@@ -200,17 +230,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "DefaultSetHolder", NULL, 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOP_SET", "DEFAULT_STOP_SET", 0x18, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder = { 2, "DefaultSetHolder", "org.apache.lucene.analysis.hi", "HindiAnalyzer", 0xa, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder;
 }
 
 @end

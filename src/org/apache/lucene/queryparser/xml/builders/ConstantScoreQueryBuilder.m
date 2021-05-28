@@ -3,15 +3,17 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/ConstantScoreQueryBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/xml/DOMUtils.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/QueryBuilderFactory.h"
 #include "org/apache/lucene/queryparser/xml/builders/ConstantScoreQueryBuilder.h"
 #include "org/apache/lucene/search/ConstantScoreQuery.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/w3c/dom/Element.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/builders/ConstantScoreQueryBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserXmlBuildersConstantScoreQueryBuilder () {
  @public
@@ -42,14 +44,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersConstantScoreQueryBuild
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory:", "ConstantScoreQueryBuilder", NULL, 0x1, NULL, NULL },
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory:);
+  methods[1].selector = @selector(getQueryWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queryFactory_", NULL, 0x12, "Lorg.apache.lucene.queryparser.xml.QueryBuilderFactory;", NULL, NULL, .constantValue.asLong = 0 },
+    { "queryFactory_", "LOrgApacheLuceneQueryparserXmlQueryBuilderFactory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersConstantScoreQueryBuilder = { 2, "ConstantScoreQueryBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserXmlQueryBuilderFactory;", "getQuery", "LOrgW3cDomElement;", "LOrgApacheLuceneQueryparserXmlParserException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersConstantScoreQueryBuilder = { "ConstantScoreQueryBuilder", "org.apache.lucene.queryparser.xml.builders", ptrTable, methods, fields, 7, 0x1, 2, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlBuildersConstantScoreQueryBuilder;
 }
 

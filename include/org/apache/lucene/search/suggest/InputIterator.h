@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneSearchSuggestInputIterator 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestInputIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestInputIterator || defined(INCLUDE_OrgApacheLuceneSearchSuggestInputIterator))
 #define OrgApacheLuceneSearchSuggestInputIterator_
 
@@ -28,10 +34,10 @@
 
 /*!
  @brief Interface for enumerating term,weight,payload triples for suggester consumption;
- currently only <code>AnalyzingSuggester</code>, <code>FuzzySuggester</code>
+  currently only <code>AnalyzingSuggester</code>, <code>FuzzySuggester</code>
   and <code>AnalyzingInfixSuggester</code> support payloads.
  */
-@protocol OrgApacheLuceneSearchSuggestInputIterator < OrgApacheLuceneUtilBytesRefIterator, NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchSuggestInputIterator < OrgApacheLuceneUtilBytesRefIterator, JavaObject >
 
 /*!
  @brief A term's weight, higher numbers mean better suggestions.
@@ -39,10 +45,9 @@
 - (jlong)weight;
 
 /*!
- @brief An arbitrary byte[] to record per suggestion.
- See
- <code>LookupResult.payload</code> to retrieve the payload
- for each suggestion. 
+ @brief An arbitrary byte[] to record per suggestion.See
+   <code>LookupResult.payload</code> to retrieve the payload
+   for each suggestion.
  */
 - (OrgApacheLuceneUtilBytesRef *)payload;
 
@@ -65,8 +70,7 @@
 @end
 
 @interface OrgApacheLuceneSearchSuggestInputIterator : NSObject
-
-+ (id<OrgApacheLuceneSearchSuggestInputIterator>)EMPTY;
+@property (readonly, class, strong) id<OrgApacheLuceneSearchSuggestInputIterator> EMPTY NS_SWIFT_NAME(EMPTY);
 
 @end
 
@@ -75,7 +79,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestInputIterator)
 /*!
  @brief Singleton InputIterator that iterates over 0 BytesRefs.
  */
-inline id<OrgApacheLuceneSearchSuggestInputIterator> OrgApacheLuceneSearchSuggestInputIterator_get_EMPTY();
+inline id<OrgApacheLuceneSearchSuggestInputIterator> OrgApacheLuceneSearchSuggestInputIterator_get_EMPTY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<OrgApacheLuceneSearchSuggestInputIterator> OrgApacheLuceneSearchSuggestInputIterator_EMPTY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestInputIterator, EMPTY, id<OrgApacheLuceneSearchSuggestInputIterator>)
@@ -93,7 +97,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestInputIterator)
 
 /*!
  @brief Wraps a BytesRefIterator as a suggester InputIterator, with all weights
- set to <code>1</code> and carries no payload
+  set to <code>1</code> and carries no payload
  */
 @interface OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper : NSObject < OrgApacheLuceneSearchSuggestInputIterator >
 
@@ -101,10 +105,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestInputIterator)
 
 /*!
  @brief Creates a new wrapper, wrapping the specified iterator and 
- specifying a weight value of <code>1</code> for all terms 
- and nullifies associated payloads.
+  specifying a weight value of <code>1</code> for all terms 
+  and nullifies associated payloads.
  */
-- (instancetype)initWithOrgApacheLuceneUtilBytesRefIterator:(id<OrgApacheLuceneUtilBytesRefIterator>)wrapped;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilBytesRefIterator:(id<OrgApacheLuceneUtilBytesRefIterator>)wrapped;
 
 - (id<JavaUtilSet>)contexts;
 
@@ -117,6 +121,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestInputIterator)
 - (OrgApacheLuceneUtilBytesRef *)payload;
 
 - (jlong)weight;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -132,4 +140,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestInputIterator_InputIterat
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestInputIterator")

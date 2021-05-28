@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexCommit
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexCommit_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexCommit || defined(INCLUDE_OrgApacheLuceneIndexIndexCommit))
 #define OrgApacheLuceneIndexIndexCommit_
 
@@ -26,18 +32,20 @@
 @protocol JavaUtilMap;
 
 /*!
- @brief <p>Expert: represents a single commit into an index as seen by the
+ @brief <p>Expert: represents a single commit into an index as seen by the 
  <code>IndexDeletionPolicy</code> or <code>IndexReader</code>.
  </p>
+  
  <p> Changes to the content of an index are made visible
- only after the writer who made that change commits by
- writing a new segments file
- (<code>segments_N</code>). This point in time, when the
- action of writing of a new segments file to the directory
- is completed, is an index commit.</p>
+  only after the writer who made that change commits by
+  writing a new segments file
+  (<code>segments_N</code>). This point in time, when the
+  action of writing of a new segments file to the directory
+  is completed, is an index commit.</p>
+  
  <p>Each index commit point has a unique segments file
- associated with it. The segments file associated with a
- later index commit point would have a larger N.</p>
+  associated with it. The segments file associated with a
+  later index commit point would have a larger N.</p>
  */
 @interface OrgApacheLuceneIndexIndexCommit : NSObject < JavaLangComparable >
 
@@ -46,16 +54,15 @@
 - (jint)compareToWithId:(OrgApacheLuceneIndexIndexCommit *)commit;
 
 /*!
- @brief Delete this commit point.
- This only applies when using
- the commit point in the context of IndexWriter's
- IndexDeletionPolicy.
+ @brief Delete this commit point.This only applies when using
+  the commit point in the context of IndexWriter's
+  IndexDeletionPolicy.
  <p>
- Upon calling this, the writer is notified that this commit 
- point should be deleted. 
+  Upon calling this, the writer is notified that this commit 
+  point should be deleted.  
  <p>
- Decision that a commit-point should be deleted is taken by the <code>IndexDeletionPolicy</code> in effect
- and therefore this should only be called by its <code>onInit()</code> or 
+  Decision that a commit-point should be deleted is taken by the <code>IndexDeletionPolicy</code> in effect
+  and therefore this should only be called by its <code>onInit()</code> or  
  <code>onCommit()</code> methods.
  */
 - (void)delete__;
@@ -77,7 +84,7 @@
 
 /*!
  @brief Returns the generation (the _N in segments_N) for this
- IndexCommit
+   IndexCommit
  */
 - (jlong)getGeneration;
 
@@ -88,15 +95,14 @@
 
 /*!
  @brief Get the segments file (<code>segments_N</code>) associated 
- with this commit point.
+  with this commit point.
  */
 - (NSString *)getSegmentsFileName;
 
 /*!
  @brief Returns userData, previously passed to <code>IndexWriter.setCommitData(Map)</code>
-  for this commit.
- Map is
- <code>String -> String</code>. 
+  for this commit.Map is
+   <code>String -> String</code>.
  */
 - (id<JavaUtilMap>)getUserData;
 
@@ -104,8 +110,8 @@
 
 /*!
  @brief Returns true if this commit should be deleted; this is
- only used by <code>IndexWriter</code> after invoking the
- <code>IndexDeletionPolicy</code>.
+   only used by <code>IndexWriter</code> after invoking the
+   <code>IndexDeletionPolicy</code>.
  */
 - (jboolean)isDeleted;
 
@@ -114,9 +120,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Package-Private
 
@@ -135,4 +141,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexCommit)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexCommit")

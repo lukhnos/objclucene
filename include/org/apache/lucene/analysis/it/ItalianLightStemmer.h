@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisItItalianLightStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisItItalianLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisItItalianLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisItItalianLightStemmer))
 #define OrgApacheLuceneAnalysisItItalianLightStemmer_
 
@@ -21,15 +27,15 @@
 /*!
  @brief Light Stemmer for Italian.
  <p>
- This stemmer implements the algorithm described in:
+  This stemmer implements the algorithm described in: 
  <i>Report on CLEF-2001 Experiments</i>
- Jacques Savoy
+  Jacques Savoy
  */
 @interface OrgApacheLuceneAnalysisItItalianLightStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -40,12 +46,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisItItalianLightStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisItItalianLightStemmer_init(OrgApacheLuceneAnalysisItItalianLightStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisItItalianLightStemmer *new_OrgApacheLuceneAnalysisItItalianLightStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisItItalianLightStemmer *new_OrgApacheLuceneAnalysisItItalianLightStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisItItalianLightStemmer *create_OrgApacheLuceneAnalysisItItalianLightStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisItItalianLightStemmer *create_OrgApacheLuceneAnalysisItItalianLightStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisItItalianLightStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisItItalianLightStemmer")

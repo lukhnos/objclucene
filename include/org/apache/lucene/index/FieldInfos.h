@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFieldInfos
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFieldInfos_) && (INCLUDE_ALL_OrgApacheLuceneIndexFieldInfos || defined(INCLUDE_OrgApacheLuceneIndexFieldInfos))
 #define OrgApacheLuceneIndexFieldInfos_
 
@@ -22,7 +28,9 @@
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexFieldInfo;
+@protocol JavaUtilFunctionConsumer;
 @protocol JavaUtilIterator;
+@protocol JavaUtilSpliterator;
 
 /*!
  @brief Collection of <code>FieldInfo</code>s (accessible by number or by name).
@@ -34,21 +42,21 @@
 /*!
  @brief Constructs a new FieldInfos from an array of FieldInfo objects
  */
-- (instancetype)initWithOrgApacheLuceneIndexFieldInfoArray:(IOSObjectArray *)infos;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexFieldInfoArray:(IOSObjectArray *)infos;
 
 /*!
  @brief Return the fieldinfo object referenced by the fieldNumber.
  @param fieldNumber field's number.
  @return the FieldInfo object or null when the given fieldNumber
- doesn't exist.
- @throws IllegalArgumentException if fieldNumber is negative
+  doesn't exist.
+ @throw IllegalArgumentExceptionif fieldNumber is negative
  */
 - (OrgApacheLuceneIndexFieldInfo *)fieldInfoWithInt:(jint)fieldNumber;
 
 /*!
  @brief Return the fieldinfo object referenced by the field name
  @return the FieldInfo object or null when the given fieldName
- doesn't exist.
+  doesn't exist.
  */
 - (OrgApacheLuceneIndexFieldInfo *)fieldInfoWithNSString:(NSString *)fieldName;
 
@@ -89,7 +97,7 @@
 
 /*!
  @brief Returns an iterator over all the fieldinfo objects present,
- ordered by ascending field number
+  ordered by ascending field number
  */
 - (id<JavaUtilIterator>)iterator;
 
@@ -99,6 +107,10 @@
 - (jint)size;
 
 #pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -124,14 +136,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfos)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Returns the global field number for the given field name.
- If the name
- does not exist yet it tries to add it with the given preferred field
- number assigned if possible otherwise the first unassigned field number
- is used as the field number.
+ @brief Returns the global field number for the given field name.If the name
+  does not exist yet it tries to add it with the given preferred field
+  number assigned if possible otherwise the first unassigned field number
+  is used as the field number.
  */
 - (jint)addOrGetWithNSString:(NSString *)fieldName
                      withInt:(jint)preferredFieldNumber
@@ -141,7 +152,7 @@ withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)dvTyp
 
 /*!
  @brief Returns true if the <code>fieldName</code> exists in the map and is of the
- same <code>dvType</code>.
+  same <code>dvType</code>.
  */
 - (jboolean)containsWithNSString:(NSString *)fieldName
 withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)dvType;
@@ -160,9 +171,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFieldInfos_FieldNumbers)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldInfos_FieldNumbers_init(OrgApacheLuceneIndexFieldInfos_FieldNumbers *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_FieldNumbers *new_OrgApacheLuceneIndexFieldInfos_FieldNumbers_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_FieldNumbers *new_OrgApacheLuceneIndexFieldInfos_FieldNumbers_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_FieldNumbers *create_OrgApacheLuceneIndexFieldInfos_FieldNumbers_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_FieldNumbers *create_OrgApacheLuceneIndexFieldInfos_FieldNumbers_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfos_FieldNumbers)
 
@@ -195,12 +206,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfos_FieldNumbers)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new instance with the given <code>FieldNumbers</code>.
  */
-- (instancetype)initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_FieldNumbers *)globalFieldNumbers;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_FieldNumbers *)globalFieldNumbers;
 
 - (OrgApacheLuceneIndexFieldInfos *)finish;
 
@@ -212,9 +223,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFieldInfos_Builder, globalFieldNumbers_,
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldInfos_Builder_init(OrgApacheLuceneIndexFieldInfos_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_Builder *new_OrgApacheLuceneIndexFieldInfos_Builder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_Builder *new_OrgApacheLuceneIndexFieldInfos_Builder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_Builder *create_OrgApacheLuceneIndexFieldInfos_Builder_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_Builder *create_OrgApacheLuceneIndexFieldInfos_Builder_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldInfos_Builder_initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers_(OrgApacheLuceneIndexFieldInfos_Builder *self, OrgApacheLuceneIndexFieldInfos_FieldNumbers *globalFieldNumbers);
 
@@ -226,4 +237,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfos_Builder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFieldInfos")

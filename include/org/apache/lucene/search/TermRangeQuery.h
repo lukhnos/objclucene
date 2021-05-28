@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTermRangeQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTermRangeQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermRangeQuery || defined(INCLUDE_OrgApacheLuceneSearchTermRangeQuery))
 #define OrgApacheLuceneSearchTermRangeQuery_
 
@@ -20,15 +26,17 @@
 #define INCLUDE_OrgApacheLuceneSearchAutomatonQuery 1
 #include "org/apache/lucene/search/AutomatonQuery.h"
 
+@class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
  @brief A Query that matches documents within an range of terms.
  <p>This query matches the documents looking for terms that fall into the
- supplied range according to <code>BytesRef.compareTo(BytesRef)</code>.
+  supplied range according to <code>BytesRef.compareTo(BytesRef)</code>.
+  
  <p>This query uses the <code>MultiTermQuery.CONSTANT_SCORE_REWRITE</code>
- rewrite method.
+  rewrite method.
  @since 2.9
  */
 @interface OrgApacheLuceneSearchTermRangeQuery : OrgApacheLuceneSearchAutomatonQuery
@@ -37,29 +45,25 @@
 
 /*!
  @brief Constructs a query selecting all terms greater/equal than <code>lowerTerm</code>
- but less/equal than <code>upperTerm</code>.
+  but less/equal than <code>upperTerm</code>.
  <p>
- If an endpoint is null, it is said 
- to be "open". Either or both endpoints may be open.  Open endpoints may not 
- be exclusive (you can't select all but the first or last term without 
- explicitly specifying the term to exclude.)
+  If an endpoint is null, it is said 
+  to be "open". Either or both endpoints may be open.  Open endpoints may not 
+  be exclusive (you can't select all but the first or last term without 
+  explicitly specifying the term to exclude.)
  @param field The field that holds both lower and upper terms.
- @param lowerTerm
- The term text at the lower end of the range
- @param upperTerm
- The term text at the upper end of the range
- @param includeLower
- If true, the <code>lowerTerm</code> is
- included in the range.
- @param includeUpper
- If true, the <code>upperTerm</code> is
- included in the range.
+ @param lowerTerm The term text at the lower end of the range
+ @param upperTerm The term text at the upper end of the range
+ @param includeLower If true, the 
+  <code> lowerTerm </code>  is           included in the range.
+ @param includeUpper If true, the 
+  <code> upperTerm </code>  is           included in the range.
  */
-- (instancetype)initWithNSString:(NSString *)field
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerTerm
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperTerm
-                     withBoolean:(jboolean)includeLower
-                     withBoolean:(jboolean)includeUpper;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerTerm
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperTerm
+                               withBoolean:(jboolean)includeLower
+                               withBoolean:(jboolean)includeUpper;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -104,6 +108,20 @@
  */
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1
+                                                   withInt:(jint)arg2 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+                 withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)arg1
+                                                   withInt:(jint)arg2
+                                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermRangeQuery)
@@ -122,4 +140,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermRangeQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermRangeQuery")

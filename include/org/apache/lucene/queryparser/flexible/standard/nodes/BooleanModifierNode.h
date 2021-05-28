@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode))
 #define OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode_
 
@@ -24,8 +30,8 @@
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief A <code>BooleanModifierNode</code> has the same behaviour as
- <code>ModifierQueryNode</code>, it only indicates that this modifier was added by
+ @brief A <code>BooleanModifierNode</code> has the same behaviour as 
+ <code>ModifierQueryNode</code>, it only indicates that this modifier was added by 
  <code>GroupQueryNodeProcessor</code> and not by the user.
  - seealso: ModifierQueryNode
  */
@@ -33,8 +39,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node
-   withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier:(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *)mod;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node
+             withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier:(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *)mod;
 
 @end
 
@@ -50,4 +56,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesBoolea
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode")

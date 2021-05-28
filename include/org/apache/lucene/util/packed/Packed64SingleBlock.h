@@ -55,6 +55,12 @@
 #define INCLUDE_OrgApacheLuceneUtilPackedPacked64SingleBlock 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedPacked64SingleBlock_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked64SingleBlock || defined(INCLUDE_OrgApacheLuceneUtilPackedPacked64SingleBlock))
 #define OrgApacheLuceneUtilPackedPacked64SingleBlock_
 
@@ -68,15 +74,14 @@
 
 /*!
  @brief This class is similar to <code>Packed64</code> except that it trades space for
- speed by ensuring that a single block needs to be read/written in order to
- read/write a value.
+  speed by ensuring that a single block needs to be read/written in order to
+  read/write a value.
  */
 @interface OrgApacheLuceneUtilPackedPacked64SingleBlock : OrgApacheLuceneUtilPackedPackedInts_MutableImpl {
  @public
   IOSLongArray *blocks_;
 }
-
-+ (jint)MAX_SUPPORTED_BITS_PER_VALUE;
+@property (readonly, class) jint MAX_SUPPORTED_BITS_PER_VALUE NS_SWIFT_NAME(MAX_SUPPORTED_BITS_PER_VALUE);
 
 #pragma mark Public
 
@@ -115,8 +120,13 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount
-                    withInt:(jint)bitsPerValue;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)valueCount
+                                            withInt:(jint)bitsPerValue;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                              withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -124,13 +134,13 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilPackedPacked64SingleBlock)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPacked64SingleBlock, blocks_, IOSLongArray *)
 
-inline jint OrgApacheLuceneUtilPackedPacked64SingleBlock_get_MAX_SUPPORTED_BITS_PER_VALUE();
+inline jint OrgApacheLuceneUtilPackedPacked64SingleBlock_get_MAX_SUPPORTED_BITS_PER_VALUE(void);
 #define OrgApacheLuceneUtilPackedPacked64SingleBlock_MAX_SUPPORTED_BITS_PER_VALUE 32
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPacked64SingleBlock, MAX_SUPPORTED_BITS_PER_VALUE, jint)
 
 FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilPackedPacked64SingleBlock_isSupportedWithInt_(jint bitsPerValue);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked64SingleBlock_initWithInt_withInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock *self, jint valueCount, jint bitsPerValue);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked64SingleBlock_initPackagePrivateWithInt_withInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock *self, jint valueCount, jint bitsPerValue);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked64SingleBlock *OrgApacheLuceneUtilPackedPacked64SingleBlock_createWithOrgApacheLuceneStoreDataInput_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint valueCount, jint bitsPerValue);
 
@@ -154,7 +164,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -184,7 +199,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -214,7 +234,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -244,7 +269,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -274,7 +304,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -304,7 +339,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -334,7 +374,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -364,7 +409,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -394,7 +444,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -424,7 +479,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -454,7 +514,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -484,7 +549,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -514,7 +584,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -544,7 +619,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initWithInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)arg0
+                                            withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -560,4 +640,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked64SingleBlock")

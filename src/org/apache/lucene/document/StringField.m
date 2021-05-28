@@ -10,6 +10,10 @@
 #include "org/apache/lucene/index/IndexOptions.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/StringField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentStringField)
 
 OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED;
@@ -39,6 +43,26 @@ withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)sto
   return self;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:withOrgApacheLuceneDocumentField_Store:);
+  methods[1].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneDocumentField_Store:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "TYPE_NOT_STORED", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 2, -1, -1 },
+    { "TYPE_STORED", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;LNSString;LOrgApacheLuceneDocumentField_Store;", "LNSString;LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneDocumentField_Store;", &OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED, &OrgApacheLuceneDocumentStringField_TYPE_STORED };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentStringField = { "StringField", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x11, 2, 2, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneDocumentStringField;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentStringField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED, new_OrgApacheLuceneDocumentFieldType_init());
@@ -56,19 +80,6 @@ withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)sto
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentStringField)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:withOrgApacheLuceneDocumentField_Store:", "StringField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneDocumentField_Store:", "StringField", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "TYPE_NOT_STORED", "TYPE_NOT_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED, NULL, .constantValue.asLong = 0 },
-    { "TYPE_STORED", "TYPE_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentStringField_TYPE_STORED, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentStringField = { 2, "StringField", "org.apache.lucene.document", NULL, 0x11, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentStringField;
 }
 
 @end

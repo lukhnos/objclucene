@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneDocumentDocumentStoredFieldVisitor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneDocumentDocumentStoredFieldVisitor_) && (INCLUDE_ALL_OrgApacheLuceneDocumentDocumentStoredFieldVisitor || defined(INCLUDE_OrgApacheLuceneDocumentDocumentStoredFieldVisitor))
 #define OrgApacheLuceneDocumentDocumentStoredFieldVisitor_
 
@@ -30,11 +36,10 @@
 /*!
  @brief A <code>StoredFieldVisitor</code> that creates a <code>Document</code>
   containing all stored fields, or only specific
- requested fields provided to <code>DocumentStoredFieldVisitor(Set)</code>.
+   requested fields provided to <code>DocumentStoredFieldVisitor(Set)</code>.
  <p>
- This is used by <code>IndexReader.document(int)</code> to load a
- document.
-  
+   This is used by <code>IndexReader.document(int)</code> to load a
+   document.
  */
 @interface OrgApacheLuceneDocumentDocumentStoredFieldVisitor : OrgApacheLuceneIndexStoredFieldVisitor
 
@@ -43,18 +48,18 @@
 /*!
  @brief Load all stored fields.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Load only fields named in the provided <code>Set&lt;String&gt;</code>.
- @param fieldsToAdd Set of fields to load, or <code>null</code> (all fields).
+ @param fieldsToAdd Set of fields to load, or  <code> null </code>  (all fields).
  */
-- (instancetype)initWithJavaUtilSet:(id<JavaUtilSet>)fieldsToAdd;
+- (instancetype __nonnull)initWithJavaUtilSet:(id<JavaUtilSet>)fieldsToAdd;
 
 /*!
  @brief Load only fields named in the provided fields.
  */
-- (instancetype)initWithNSStringArray:(IOSObjectArray *)fields;
+- (instancetype __nonnull)initWithNSStringArray:(IOSObjectArray *)fields;
 
 - (void)binaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                        withByteArray:(IOSByteArray *)value;
@@ -68,9 +73,9 @@
 /*!
  @brief Retrieve the visited document.
  @return Document populated with stored fields. Note that only
- the stored information in the field instances is valid,
- data such as boosts, indexing options, term vector options,
- etc is not set.
+          the stored information in the field instances is valid,
+          data such as boosts, indexing options, term vector options,
+          etc is not set.
  */
 - (OrgApacheLuceneDocumentDocument *)getDocument;
 
@@ -103,12 +108,16 @@ FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *create_OrgA
 
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init(OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init();
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentDocumentStoredFieldVisitor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentDocumentStoredFieldVisitor")

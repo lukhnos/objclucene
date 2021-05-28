@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisInIndicNormalizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisInIndicNormalizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizer || defined(INCLUDE_OrgApacheLuceneAnalysisInIndicNormalizer))
 #define OrgApacheLuceneAnalysisInIndicNormalizer_
 
@@ -21,15 +27,15 @@
 /*!
  @brief Normalizes the Unicode representation of text in Indian languages.
  <p>
- Follows guidelines from Unicode 5.2, chapter 6, South Asian Scripts I
- and graphical decompositions from http://ldc.upenn.edu/myl/IndianScriptsUnicode.html
+  Follows guidelines from Unicode 5.2, chapter 6, South Asian Scripts I
+  and graphical decompositions from http://ldc.upenn.edu/myl/IndianScriptsUnicode.html 
  </p>
  */
 @interface OrgApacheLuceneAnalysisInIndicNormalizer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Normalizes input text, and returns the new length.
@@ -47,12 +53,16 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisInIndicNormalizer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisInIndicNormalizer_init(OrgApacheLuceneAnalysisInIndicNormalizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizer *new_OrgApacheLuceneAnalysisInIndicNormalizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizer *new_OrgApacheLuceneAnalysisInIndicNormalizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizer *create_OrgApacheLuceneAnalysisInIndicNormalizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizer *create_OrgApacheLuceneAnalysisInIndicNormalizer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisInIndicNormalizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizer")

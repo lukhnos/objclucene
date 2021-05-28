@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/MultiTermQueryConstantScoreWrapper.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Math.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
@@ -37,7 +35,11 @@
 #include "org/apache/lucene/util/DocIdSetBuilder.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
-inline jint OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_get_BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/MultiTermQueryConstantScoreWrapper must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline jint OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_get_BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD(void);
 #define OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD 16
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper, BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD, jint)
 
@@ -100,18 +102,22 @@ __attribute__((unused)) static OrgApacheLuceneSearchMultiTermQueryConstantScoreW
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet)
 
-@interface OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 : OrgApacheLuceneSearchConstantScoreWeight {
+@interface OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 : OrgApacheLuceneSearchConstantScoreWeight {
  @public
   OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *this$0_;
   OrgApacheLuceneSearchIndexSearcher *val$searcher_;
   jboolean val$needsScores_;
 }
 
+- (instancetype)initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper:(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *)outer$
+                                         withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)capture$0
+                                                                    withBoolean:(jboolean)capture$1
+                                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+
 /*!
  @brief Try to collect terms from the given terms enum and return true iff all
- terms could be collected.
- If <code>false</code> is returned, the enum is
- left positioned on the next term. 
+   terms could be collected.If <code>false</code> is returned, the enum is
+   left positioned on the next term.
  */
 - (jboolean)collectTermsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                 withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
@@ -119,7 +125,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapp
 
 /*!
  @brief On the given leaf context, try to either rewrite to a disjunction if
- there are few terms, or build a bitset containing matching docs.
+  there are few terms, or build a bitset containing matching docs.
  */
 - (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *)rewriteWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -129,36 +135,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapp
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
-- (instancetype)initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper:(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *)outer$
-                                         withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)capture$0
-                                                                    withBoolean:(jboolean)capture$1
-                                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1, this$0_, OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1, val$searcher_, OrgApacheLuceneSearchIndexSearcher *)
+__attribute__((unused)) static void OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static jboolean OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_collectTermsWithOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneIndexTermsEnum_withJavaUtilList_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneIndexLeafReaderContext *context, OrgApacheLuceneIndexTermsEnum *termsEnum, id<JavaUtilList> terms);
+__attribute__((unused)) static OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_rewriteWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneIndexLeafReaderContext *context);
+__attribute__((unused)) static OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_scorerWithOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneSearchDocIdSet *set);
+__attribute__((unused)) static jboolean OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_collectTermsWithOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneIndexTermsEnum_withJavaUtilList_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneIndexLeafReaderContext *context, OrgApacheLuceneIndexTermsEnum *termsEnum, id<JavaUtilList> terms);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_rewriteWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneIndexLeafReaderContext *context);
 
-__attribute__((unused)) static OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_scorerWithOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneSearchDocIdSet *set);
 
 @implementation OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper
 
-- (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
-  OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(self, query);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
+  OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery_(self, query);
   return self;
 }
 
@@ -184,7 +180,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapp
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(self, searcher, needsScores, self);
+  return create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(self, searcher, needsScores, self);
 }
 
 - (void)dealloc {
@@ -193,36 +189,46 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapp
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchMultiTermQuery:", "MultiTermQueryConstantScoreWrapper", NULL, 0x4, NULL, "(TQ;)V" },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x11, NULL, NULL },
-    { "hash", "hashCode", "I", 0x11, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 7, 8, 9, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery:);
+  methods[1].selector = @selector(toStringWithNSString:);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(getField);
+  methods[5].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD", "BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD },
-    { "query_", NULL, 0x14, "TQ;", NULL, "TQ;", .constantValue.asLong = 0 },
+    { "BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD", "I", .constantValue.asInt = OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD, 0x1a, -1, -1, -1, -1 },
+    { "query_", "LOrgApacheLuceneSearchMultiTermQuery;", .constantValue.asLong = 0, 0x14, -1, -1, 10, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.MultiTermQueryConstantScoreWrapper$TermAndState;", "Lorg.apache.lucene.search.MultiTermQueryConstantScoreWrapper$WeightOrDocIdSet;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper = { 2, "MultiTermQueryConstantScoreWrapper", "org.apache.lucene.search", NULL, 0x10, 6, methods, 2, fields, 0, NULL, 2, inner_classes, NULL, "<Q:Lorg/apache/lucene/search/MultiTermQuery;>Lorg/apache/lucene/search/Query;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchMultiTermQuery;", "(TQ;)V", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "TQ;", "LOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_TermAndState;LOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet;", "<Q:Lorg/apache/lucene/search/MultiTermQuery;>Lorg/apache/lucene/search/Query;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper = { "MultiTermQueryConstantScoreWrapper", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x10, 6, 2, -1, 11, -1, 12, -1 };
   return &_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper;
 }
 
 @end
 
-void OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *self, OrgApacheLuceneSearchMultiTermQuery *query) {
+void OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *self, OrgApacheLuceneSearchMultiTermQuery *query) {
   OrgApacheLuceneSearchQuery_init(self);
   JreStrongAssign(&self->query_, query);
 }
 
-OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper, initWithOrgApacheLuceneSearchMultiTermQuery_, query)
+OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper, initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery_, query)
 }
 
-OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper, initWithOrgApacheLuceneSearchMultiTermQuery_, query)
+OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper, initPackagePrivateWithOrgApacheLuceneSearchMultiTermQuery_, query)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper)
@@ -244,16 +250,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQueryConstantScor
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:withInt:withLong:", "TermAndState", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:withInt:withLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "term_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "state_", NULL, 0x10, "Lorg.apache.lucene.index.TermState;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docFreq_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalTermFreq_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "term_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "state_", "LOrgApacheLuceneIndexTermState;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docFreq_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "totalTermFreq_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_TermAndState = { 2, "TermAndState", "org.apache.lucene.search", "MultiTermQueryConstantScoreWrapper", 0xa, 1, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneIndexTermState;IJ", "LOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_TermAndState = { "TermAndState", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 1, 4, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_TermAndState;
 }
 
@@ -296,15 +308,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQueryConstantScor
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:", "WeightOrDocIdSet", NULL, 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchDocIdSet:", "WeightOrDocIdSet", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchWeight:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneSearchDocIdSet:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "weight_", NULL, 0x10, "Lorg.apache.lucene.search.Weight;", NULL, NULL, .constantValue.asLong = 0 },
-    { "set_", NULL, 0x10, "Lorg.apache.lucene.search.DocIdSet;", NULL, NULL, .constantValue.asLong = 0 },
+    { "weight_", "LOrgApacheLuceneSearchWeight;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "set_", "LOrgApacheLuceneSearchDocIdSet;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet = { 2, "WeightOrDocIdSet", "org.apache.lucene.search", "MultiTermQueryConstantScoreWrapper", 0xa, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchWeight;", "LOrgApacheLuceneSearchDocIdSet;", "LOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet = { "WeightOrDocIdSet", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 2, 2, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet;
 }
 
@@ -340,52 +359,52 @@ OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *create
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet)
 
-@implementation OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1
+@implementation OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1
+
+- (instancetype)initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper:(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *)outer$
+                                         withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)capture$0
+                                                                    withBoolean:(jboolean)capture$1
+                                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
+  OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(self, outer$, capture$0, capture$1, query);
+  return self;
+}
 
 - (jboolean)collectTermsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                 withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
                                                  withJavaUtilList:(id<JavaUtilList>)terms {
-  return OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_collectTermsWithOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneIndexTermsEnum_withJavaUtilList_(self, context, termsEnum, terms);
+  return OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_collectTermsWithOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneIndexTermsEnum_withJavaUtilList_(self, context, termsEnum, terms);
 }
 
 - (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *)rewriteWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  return OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_rewriteWithOrgApacheLuceneIndexLeafReaderContext_(self, context);
+  return OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_rewriteWithOrgApacheLuceneIndexLeafReaderContext_(self, context);
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set {
-  return OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, set);
+  return OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, set);
 }
 
 - (OrgApacheLuceneSearchBulkScorer *)bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *weightOrBitSet = OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_rewriteWithOrgApacheLuceneIndexLeafReaderContext_(self, context);
+  OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *weightOrBitSet = OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_rewriteWithOrgApacheLuceneIndexLeafReaderContext_(self, context);
   if (((OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *) nil_chk(weightOrBitSet))->weight_ != nil) {
-    return [weightOrBitSet->weight_ bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+    return JreRetainedLocalValue([weightOrBitSet->weight_ bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
   }
   else {
-    OrgApacheLuceneSearchScorer *scorer = OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, weightOrBitSet->set_);
+    OrgApacheLuceneSearchScorer *scorer = OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, weightOrBitSet->set_);
     if (scorer == nil) {
-      return nil;
+      return JreRetainedLocalValue(nil);
     }
     return create_OrgApacheLuceneSearchWeight_DefaultBulkScorer_initWithOrgApacheLuceneSearchScorer_(scorer);
   }
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *weightOrBitSet = OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_rewriteWithOrgApacheLuceneIndexLeafReaderContext_(self, context);
+  OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *weightOrBitSet = OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_rewriteWithOrgApacheLuceneIndexLeafReaderContext_(self, context);
   if (((OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *) nil_chk(weightOrBitSet))->weight_ != nil) {
-    return [weightOrBitSet->weight_ scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+    return JreRetainedLocalValue([weightOrBitSet->weight_ scorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
   }
   else {
-    return OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, weightOrBitSet->set_);
+    return OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_scorerWithOrgApacheLuceneSearchDocIdSet_(self, weightOrBitSet->set_);
   }
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper:(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *)outer$
-                                         withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)capture$0
-                                                                    withBoolean:(jboolean)capture$1
-                                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0 {
-  OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(self, outer$, capture$0, capture$1, arg$0);
-  return self;
 }
 
 - (void)dealloc {
@@ -395,34 +414,59 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQueryConstantScor
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "collectTermsWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneIndexTermsEnum:withJavaUtilList:", "collectTerms", "Z", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/LeafReaderContext;Lorg/apache/lucene/index/TermsEnum;Ljava/util/List<Lorg/apache/lucene/search/MultiTermQueryConstantScoreWrapper$TermAndState;>;)Z" },
-    { "rewriteWithOrgApacheLuceneIndexLeafReaderContext:", "rewrite", "Lorg.apache.lucene.search.MultiTermQueryConstantScoreWrapper$WeightOrDocIdSet;", 0x2, "Ljava.io.IOException;", NULL },
-    { "scorerWithOrgApacheLuceneSearchDocIdSet:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x2, "Ljava.io.IOException;", NULL },
-    { "bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:", "bulkScorer", "Lorg.apache.lucene.search.BulkScorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper:withOrgApacheLuceneSearchIndexSearcher:withBoolean:withOrgApacheLuceneSearchQuery:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 1, 2, 3, 4, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet;", 0x2, 5, 6, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x2, 7, 8, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBulkScorer;", 0x1, 9, 6, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 7, 6, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper:withOrgApacheLuceneSearchIndexSearcher:withBoolean:withOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(collectTermsWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneIndexTermsEnum:withJavaUtilList:);
+  methods[2].selector = @selector(rewriteWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(scorerWithOrgApacheLuceneSearchDocIdSet:);
+  methods[4].selector = @selector(bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[5].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.MultiTermQueryConstantScoreWrapper;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$searcher_", NULL, 0x1012, "Lorg.apache.lucene.search.IndexSearcher;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$needsScores_", NULL, 0x1012, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper;", .constantValue.asLong = 0, 0x1012, -1, -1, 10, -1 },
+    { "val$searcher_", "LOrgApacheLuceneSearchIndexSearcher;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$needsScores_", "Z", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 = { 2, "", "org.apache.lucene.search", "MultiTermQueryConstantScoreWrapper", 0x8008, 6, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper;LOrgApacheLuceneSearchIndexSearcher;ZLOrgApacheLuceneSearchQuery;", "collectTerms", "LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneIndexTermsEnum;LJavaUtilList;", "LJavaIoIOException;", "(Lorg/apache/lucene/index/LeafReaderContext;Lorg/apache/lucene/index/TermsEnum;Ljava/util/List<Lorg/apache/lucene/search/MultiTermQueryConstantScoreWrapper$TermAndState;>;)Z", "rewrite", "LOrgApacheLuceneIndexLeafReaderContext;", "scorer", "LOrgApacheLuceneSearchDocIdSet;", "bulkScorer", "Lorg/apache/lucene/search/MultiTermQueryConstantScoreWrapper<TQ;>;", "LOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper;", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 6, 3, 11, -1, 12, -1, -1 };
+  return &_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1;
 }
 
 @end
 
-jboolean OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_collectTermsWithOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneIndexTermsEnum_withJavaUtilList_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneIndexLeafReaderContext *context, OrgApacheLuceneIndexTermsEnum *termsEnum, id<JavaUtilList> terms) {
+void OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *query) {
+  JreStrongAssign(&self->this$0_, outer$);
+  JreStrongAssign(&self->val$searcher_, capture$0);
+  self->val$needsScores_ = capture$1;
+  OrgApacheLuceneSearchConstantScoreWeight_initWithOrgApacheLuceneSearchQuery_(self, query);
+}
+
+OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1, initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_, outer$, capture$0, capture$1, query)
+}
+
+OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1, initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_, outer$, capture$0, capture$1, query)
+}
+
+jboolean OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_collectTermsWithOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneIndexTermsEnum_withJavaUtilList_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneIndexLeafReaderContext *context, OrgApacheLuceneIndexTermsEnum *termsEnum, id<JavaUtilList> terms) {
   jint threshold = JavaLangMath_minWithInt_withInt_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_BOOLEAN_REWRITE_TERM_COUNT_THRESHOLD, OrgApacheLuceneSearchBooleanQuery_getMaxClauseCount());
   for (jint i = 0; i < threshold; ++i) {
     OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next];
     if (term == nil) {
       return true;
     }
-    OrgApacheLuceneIndexTermState *state = [termsEnum termState];
+    OrgApacheLuceneIndexTermState *state = JreRetainedLocalValue([termsEnum termState]);
     if ([((OrgApacheLuceneIndexTermState *) nil_chk(state)) isRealTerm] == false) {
       return false;
     }
@@ -431,16 +475,16 @@ jboolean OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_collectTerms
   return [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next] == nil;
 }
 
-OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_rewriteWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneIndexLeafReaderContext *context) {
+OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_rewriteWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneIndexLeafReaderContext *context) {
   OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) termsWithNSString:((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(self->this$0_->query_))->field_];
   if (terms == nil) {
     return create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_(nil);
   }
   OrgApacheLuceneIndexTermsEnum *termsEnum = [self->this$0_->query_ getTermsEnumWithOrgApacheLuceneIndexTerms:terms];
-  JreAssert((termsEnum != nil), (@"org/apache/lucene/search/MultiTermQueryConstantScoreWrapper.java:146 condition failed: assert termsEnum != null;"));
+  JreAssert(termsEnum != nil, @"org/apache/lucene/search/MultiTermQueryConstantScoreWrapper.java:146 condition failed: assert termsEnum != null;");
   OrgApacheLuceneIndexPostingsEnum *docs = nil;
   id<JavaUtilList> collectedTerms = create_JavaUtilArrayList_init();
-  if (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_collectTermsWithOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneIndexTermsEnum_withJavaUtilList_(self, context, termsEnum, collectedTerms)) {
+  if (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_collectTermsWithOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneIndexTermsEnum_withJavaUtilList_(self, context, termsEnum, collectedTerms)) {
     OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
     for (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_TermAndState * __strong t in collectedTerms) {
       OrgApacheLuceneIndexTermContext *termContext = create_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(self->val$searcher_)) getTopReaderContext]);
@@ -453,7 +497,7 @@ OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *OrgApa
   }
   OrgApacheLuceneUtilDocIdSetBuilder *builder = create_OrgApacheLuceneUtilDocIdSetBuilder_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]);
   if ([collectedTerms isEmpty] == false) {
-    OrgApacheLuceneIndexTermsEnum *termsEnum2 = [terms iterator];
+    OrgApacheLuceneIndexTermsEnum *termsEnum2 = JreRetainedLocalValue([terms iterator]);
     for (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_TermAndState * __strong t in collectedTerms) {
       [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum2)) seekExactWithOrgApacheLuceneUtilBytesRef:((OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_TermAndState *) nil_chk(t))->term_ withOrgApacheLuceneIndexTermState:t->state_];
       docs = [termsEnum2 postingsWithOrgApacheLuceneIndexPostingsEnum:docs withInt:OrgApacheLuceneIndexPostingsEnum_NONE];
@@ -468,7 +512,7 @@ OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *OrgApa
   return create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_([builder build]);
 }
 
-OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_scorerWithOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneSearchDocIdSet *set) {
+OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1_scorerWithOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_1 *self, OrgApacheLuceneSearchDocIdSet *set) {
   if (set == nil) {
     return nil;
   }
@@ -478,20 +522,3 @@ OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchMultiTermQueryConstantScoreWra
   }
   return create_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchDocIdSetIterator_(self, [self score], disi);
 }
-
-void OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *self, OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *arg$0) {
-  JreStrongAssign(&self->this$0_, outer$);
-  JreStrongAssign(&self->val$searcher_, capture$0);
-  self->val$needsScores_ = capture$1;
-  OrgApacheLuceneSearchConstantScoreWeight_initWithOrgApacheLuceneSearchQuery_(self, arg$0);
-}
-
-OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1, initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_, outer$, capture$0, capture$1, arg$0)
-}
-
-OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1 *create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *outer$, OrgApacheLuceneSearchIndexSearcher *capture$0, jboolean capture$1, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1, initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_, outer$, capture$0, capture$1, arg$0)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1)

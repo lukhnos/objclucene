@@ -3,15 +3,24 @@
 //  source: ./core/src/java/org/apache/lucene/util/fst/Outputs.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/fst/Outputs.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/fst/Outputs must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilFstOutputs
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilFstOutputs_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)commonWithId:(id)output1
             withId:(id)output2 {
@@ -86,31 +95,43 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilFstOutputs_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "commonWithId:withId:", "common", "TT;", 0x401, NULL, "(TT;TT;)TT;" },
-    { "subtractWithId:withId:", "subtract", "TT;", 0x401, NULL, "(TT;TT;)TT;" },
-    { "addWithId:withId:", "add", "TT;", 0x401, NULL, "(TT;TT;)TT;" },
-    { "writeWithId:withOrgApacheLuceneStoreDataOutput:", "write", "V", 0x401, "Ljava.io.IOException;", "(TT;Lorg/apache/lucene/store/DataOutput;)V" },
-    { "writeFinalOutputWithId:withOrgApacheLuceneStoreDataOutput:", "writeFinalOutput", "V", 0x1, "Ljava.io.IOException;", "(TT;Lorg/apache/lucene/store/DataOutput;)V" },
-    { "readWithOrgApacheLuceneStoreDataInput:", "read", "TT;", 0x401, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;)TT;" },
-    { "skipOutputWithOrgApacheLuceneStoreDataInput:", "skipOutput", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "readFinalOutputWithOrgApacheLuceneStoreDataInput:", "readFinalOutput", "TT;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;)TT;" },
-    { "skipFinalOutputWithOrgApacheLuceneStoreDataInput:", "skipFinalOutput", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getNoOutput", NULL, "TT;", 0x401, NULL, "()TT;" },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x401, NULL, "(TT;)Ljava/lang/String;" },
-    { "mergeWithId:withId:", "merge", "TT;", 0x1, NULL, "(TT;TT;)TT;" },
-    { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x401, NULL, "(TT;)J" },
-    { "init", "Outputs", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 0, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 3, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 4, 1, -1, 2, -1, -1 },
+    { NULL, "V", 0x401, 5, 6, 7, 8, -1, -1 },
+    { NULL, "V", 0x1, 9, 6, 7, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 10, 11, 7, 12, -1, -1 },
+    { NULL, "V", 0x1, 13, 11, 7, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 14, 11, 7, 12, -1, -1 },
+    { NULL, "V", 0x1, 15, 11, 7, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, -1, -1, -1, 16, -1, -1 },
+    { NULL, "LNSString;", 0x401, 17, 18, -1, 19, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 20, 1, -1, 2, -1, -1 },
+    { NULL, "J", 0x401, 21, 18, -1, 22, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstOutputs = { 2, "Outputs", "org.apache.lucene.util.fst", NULL, 0x401, 14, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(commonWithId:withId:);
+  methods[2].selector = @selector(subtractWithId:withId:);
+  methods[3].selector = @selector(addWithId:withId:);
+  methods[4].selector = @selector(writeWithId:withOrgApacheLuceneStoreDataOutput:);
+  methods[5].selector = @selector(writeFinalOutputWithId:withOrgApacheLuceneStoreDataOutput:);
+  methods[6].selector = @selector(readWithOrgApacheLuceneStoreDataInput:);
+  methods[7].selector = @selector(skipOutputWithOrgApacheLuceneStoreDataInput:);
+  methods[8].selector = @selector(readFinalOutputWithOrgApacheLuceneStoreDataInput:);
+  methods[9].selector = @selector(skipFinalOutputWithOrgApacheLuceneStoreDataInput:);
+  methods[10].selector = @selector(getNoOutput);
+  methods[11].selector = @selector(outputToStringWithId:);
+  methods[12].selector = @selector(mergeWithId:withId:);
+  methods[13].selector = @selector(ramBytesUsedWithId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "common", "LNSObject;LNSObject;", "(TT;TT;)TT;", "subtract", "add", "write", "LNSObject;LOrgApacheLuceneStoreDataOutput;", "LJavaIoIOException;", "(TT;Lorg/apache/lucene/store/DataOutput;)V", "writeFinalOutput", "read", "LOrgApacheLuceneStoreDataInput;", "(Lorg/apache/lucene/store/DataInput;)TT;", "skipOutput", "readFinalOutput", "skipFinalOutput", "()TT;", "outputToString", "LNSObject;", "(TT;)Ljava/lang/String;", "merge", "ramBytesUsed", "(TT;)J", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstOutputs = { "Outputs", "org.apache.lucene.util.fst", ptrTable, methods, NULL, 7, 0x401, 14, 0, -1, -1, -1, 23, -1 };
   return &_OrgApacheLuceneUtilFstOutputs;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedPackedDataInput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedPackedDataInput_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedDataInput || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedDataInput))
 #define OrgApacheLuceneUtilPackedPackedDataInput_
 
@@ -20,9 +26,8 @@
 
 /*!
  @brief A <code>DataInput</code> wrapper to read unaligned, variable-length packed
- integers.
- This API is much slower than the <code>PackedInts</code> fixed-length
- API but can be convenient to save space.
+  integers.This API is much slower than the <code>PackedInts</code> fixed-length
+  API but can be convenient to save space.
  - seealso: PackedDataOutput
  */
 @interface OrgApacheLuceneUtilPackedPackedDataInput : NSObject {
@@ -37,7 +42,7 @@
 /*!
  @brief Create a new instance that wraps <code>in</code>.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
 /*!
  @brief Read the next long using exactly <code>bitsPerValue</code> bits.
@@ -46,9 +51,13 @@
 
 /*!
  @brief If there are pending bits (at most 7), they will be ignored and the next
- value will be read starting at the next byte.
+  value will be read starting at the next byte.
  */
 - (void)skipToNextByte;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -66,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedDataInput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedDataInput")

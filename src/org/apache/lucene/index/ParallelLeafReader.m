@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/index/ParallelLeafReader.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
@@ -20,7 +19,6 @@
 #include "org/apache/lucene/index/FieldInfo.h"
 #include "org/apache/lucene/index/FieldInfos.h"
 #include "org/apache/lucene/index/Fields.h"
-#include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/NumericDocValues.h"
 #include "org/apache/lucene/index/ParallelLeafReader.h"
@@ -33,14 +31,20 @@
 
 @class OrgApacheLuceneIndexParallelLeafReader_ParallelFields;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/ParallelLeafReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexParallelLeafReader () {
  @public
   OrgApacheLuceneIndexFieldInfos *fieldInfos_;
   OrgApacheLuceneIndexParallelLeafReader_ParallelFields *fields_;
-  IOSObjectArray *parallelReaders_, *storedFieldsReaders_;
+  IOSObjectArray *parallelReaders_;
+  IOSObjectArray *storedFieldsReaders_;
   id<JavaUtilSet> completeReaderSet_;
   jboolean closeSubReaders_;
-  jint maxDoc_, numDocs_;
+  jint maxDoc_;
+  jint numDocs_;
   jboolean hasDeletions_;
   id<JavaUtilSortedMap> fieldToReader_;
   id<JavaUtilSortedMap> tvFieldToReader_;
@@ -163,8 +167,8 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   [self ensureOpen];
   OrgApacheLuceneIndexParallelLeafReader_ParallelFields *fields = nil;
   for (id<JavaUtilMap_Entry> __strong ent in nil_chk([((id<JavaUtilSortedMap>) nil_chk(tvFieldToReader_)) entrySet])) {
-    NSString *fieldName = [((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey];
-    OrgApacheLuceneIndexTerms *vector = [((OrgApacheLuceneIndexLeafReader *) nil_chk([ent getValue])) getTermVectorWithInt:docID withNSString:fieldName];
+    NSString *fieldName = JreRetainedLocalValue([((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey]);
+    OrgApacheLuceneIndexTerms *vector = JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk([ent getValue])) getTermVectorWithInt:docID withNSString:fieldName]);
     if (vector != nil) {
       if (fields == nil) {
         fields = create_OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuceneIndexParallelLeafReader_(self);
@@ -197,43 +201,43 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexLeafReader *reader = [((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field];
+  OrgApacheLuceneIndexLeafReader *reader = JreRetainedLocalValue([((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field]);
   return reader == nil ? nil : [reader getNumericDocValuesWithNSString:field];
 }
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexLeafReader *reader = [((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field];
+  OrgApacheLuceneIndexLeafReader *reader = JreRetainedLocalValue([((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field]);
   return reader == nil ? nil : [reader getBinaryDocValuesWithNSString:field];
 }
 
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexLeafReader *reader = [((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field];
+  OrgApacheLuceneIndexLeafReader *reader = JreRetainedLocalValue([((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field]);
   return reader == nil ? nil : [reader getSortedDocValuesWithNSString:field];
 }
 
 - (OrgApacheLuceneIndexSortedNumericDocValues *)getSortedNumericDocValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexLeafReader *reader = [((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field];
+  OrgApacheLuceneIndexLeafReader *reader = JreRetainedLocalValue([((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field]);
   return reader == nil ? nil : [reader getSortedNumericDocValuesWithNSString:field];
 }
 
 - (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetDocValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexLeafReader *reader = [((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field];
+  OrgApacheLuceneIndexLeafReader *reader = JreRetainedLocalValue([((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field]);
   return reader == nil ? nil : [reader getSortedSetDocValuesWithNSString:field];
 }
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexLeafReader *reader = [((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field];
+  OrgApacheLuceneIndexLeafReader *reader = JreRetainedLocalValue([((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field]);
   return reader == nil ? nil : [reader getDocsWithFieldWithNSString:field];
 }
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNormValuesWithNSString:(NSString *)field {
   [self ensureOpen];
-  OrgApacheLuceneIndexLeafReader *reader = [((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field];
+  OrgApacheLuceneIndexLeafReader *reader = JreRetainedLocalValue([((id<JavaUtilSortedMap>) nil_chk(fieldToReader_)) getWithId:field]);
   OrgApacheLuceneIndexNumericDocValues *values = reader == nil ? nil : [reader getNormValuesWithNSString:field];
   return values;
 }
@@ -262,46 +266,73 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexLeafReaderArray:", "ParallelLeafReader", NULL, 0x81, "Ljava.io.IOException;", NULL },
-    { "initWithBoolean:withOrgApacheLuceneIndexLeafReaderArray:", "ParallelLeafReader", NULL, 0x81, "Ljava.io.IOException;", NULL },
-    { "initWithBoolean:withOrgApacheLuceneIndexLeafReaderArray:withOrgApacheLuceneIndexLeafReaderArray:", "ParallelLeafReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "getFieldInfos", NULL, "Lorg.apache.lucene.index.FieldInfos;", 0x1, NULL, NULL },
-    { "getLiveDocs", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, NULL, NULL },
-    { "fields", NULL, "Lorg.apache.lucene.index.Fields;", 0x1, NULL, NULL },
-    { "numDocs", NULL, "I", 0x1, NULL, NULL },
-    { "maxDoc", NULL, "I", 0x1, NULL, NULL },
-    { "documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:", "document", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getTermVectorsWithInt:", "getTermVectors", "Lorg.apache.lucene.index.Fields;", 0x1, "Ljava.io.IOException;", NULL },
-    { "doClose", NULL, "V", 0x24, "Ljava.io.IOException;", NULL },
-    { "getNumericDocValuesWithNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getBinaryDocValuesWithNSString:", "getBinaryDocValues", "Lorg.apache.lucene.index.BinaryDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSortedDocValuesWithNSString:", "getSortedDocValues", "Lorg.apache.lucene.index.SortedDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSortedNumericDocValuesWithNSString:", "getSortedNumericDocValues", "Lorg.apache.lucene.index.SortedNumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSortedSetDocValuesWithNSString:", "getSortedSetDocValues", "Lorg.apache.lucene.index.SortedSetDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getDocsWithFieldWithNSString:", "getDocsWithField", "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getNormValuesWithNSString:", "getNormValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getParallelReaders", NULL, "[Lorg.apache.lucene.index.LeafReader;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x81, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 2, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFieldInfos;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x1, 10, 11, 1, -1, -1, -1 },
+    { NULL, "V", 0x24, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x1, 12, 13, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexBinaryDocValues;", 0x1, 14, 13, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedDocValues;", 0x1, 15, 13, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedNumericDocValues;", 0x1, 16, 13, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedSetDocValues;", 0x1, 17, 13, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, 18, 13, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x1, 19, 13, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexLeafReader;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexLeafReaderArray:);
+  methods[1].selector = @selector(initWithBoolean:withOrgApacheLuceneIndexLeafReaderArray:);
+  methods[2].selector = @selector(initWithBoolean:withOrgApacheLuceneIndexLeafReaderArray:withOrgApacheLuceneIndexLeafReaderArray:);
+  methods[3].selector = @selector(description);
+  methods[4].selector = @selector(addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[5].selector = @selector(removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:);
+  methods[6].selector = @selector(getFieldInfos);
+  methods[7].selector = @selector(getLiveDocs);
+  methods[8].selector = @selector(fields);
+  methods[9].selector = @selector(numDocs);
+  methods[10].selector = @selector(maxDoc);
+  methods[11].selector = @selector(documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:);
+  methods[12].selector = @selector(getTermVectorsWithInt:);
+  methods[13].selector = @selector(doClose);
+  methods[14].selector = @selector(getNumericDocValuesWithNSString:);
+  methods[15].selector = @selector(getBinaryDocValuesWithNSString:);
+  methods[16].selector = @selector(getSortedDocValuesWithNSString:);
+  methods[17].selector = @selector(getSortedNumericDocValuesWithNSString:);
+  methods[18].selector = @selector(getSortedSetDocValuesWithNSString:);
+  methods[19].selector = @selector(getDocsWithFieldWithNSString:);
+  methods[20].selector = @selector(getNormValuesWithNSString:);
+  methods[21].selector = @selector(checkIntegrity);
+  methods[22].selector = @selector(getParallelReaders);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fieldInfos_", NULL, 0x12, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fields_", NULL, 0x12, "Lorg.apache.lucene.index.ParallelLeafReader$ParallelFields;", NULL, NULL, .constantValue.asLong = 0 },
-    { "parallelReaders_", NULL, 0x12, "[Lorg.apache.lucene.index.LeafReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "storedFieldsReaders_", NULL, 0x12, "[Lorg.apache.lucene.index.LeafReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "completeReaderSet_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/index/LeafReader;>;", .constantValue.asLong = 0 },
-    { "closeSubReaders_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numDocs_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasDeletions_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldToReader_", NULL, 0x12, "Ljava.util.SortedMap;", NULL, "Ljava/util/SortedMap<Ljava/lang/String;Lorg/apache/lucene/index/LeafReader;>;", .constantValue.asLong = 0 },
-    { "tvFieldToReader_", NULL, 0x12, "Ljava.util.SortedMap;", NULL, "Ljava/util/SortedMap<Ljava/lang/String;Lorg/apache/lucene/index/LeafReader;>;", .constantValue.asLong = 0 },
+    { "fieldInfos_", "LOrgApacheLuceneIndexFieldInfos;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fields_", "LOrgApacheLuceneIndexParallelLeafReader_ParallelFields;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "parallelReaders_", "[LOrgApacheLuceneIndexLeafReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "storedFieldsReaders_", "[LOrgApacheLuceneIndexLeafReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "completeReaderSet_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 20, -1 },
+    { "closeSubReaders_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numDocs_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "hasDeletions_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fieldToReader_", "LJavaUtilSortedMap;", .constantValue.asLong = 0, 0x12, -1, -1, 21, -1 },
+    { "tvFieldToReader_", "LJavaUtilSortedMap;", .constantValue.asLong = 0, 0x12, -1, -1, 21, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.ParallelLeafReader$ParallelFields;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexParallelLeafReader = { 2, "ParallelLeafReader", "org.apache.lucene.index", NULL, 0x1, 23, methods, 11, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneIndexLeafReader;", "LJavaIoIOException;", "Z[LOrgApacheLuceneIndexLeafReader;", "Z[LOrgApacheLuceneIndexLeafReader;[LOrgApacheLuceneIndexLeafReader;", "toString", "addCoreClosedListener", "LOrgApacheLuceneIndexLeafReader_CoreClosedListener;", "removeCoreClosedListener", "document", "ILOrgApacheLuceneIndexStoredFieldVisitor;", "getTermVectors", "I", "getNumericDocValues", "LNSString;", "getBinaryDocValues", "getSortedDocValues", "getSortedNumericDocValues", "getSortedSetDocValues", "getDocsWithField", "getNormValues", "Ljava/util/Set<Lorg/apache/lucene/index/LeafReader;>;", "Ljava/util/SortedMap<Ljava/lang/String;Lorg/apache/lucene/index/LeafReader;>;", "LOrgApacheLuceneIndexParallelLeafReader_ParallelFields;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexParallelLeafReader = { "ParallelLeafReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 23, 11, -1, 22, -1, -1, -1 };
   return &_OrgApacheLuceneIndexParallelLeafReader;
 }
 
@@ -339,8 +370,8 @@ void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneI
   JreStrongAssignAndConsume(&self->tvFieldToReader_, new_JavaUtilTreeMap_init());
   self->closeSubReaders_ = closeSubReaders;
   if (((IOSObjectArray *) nil_chk(readers))->size_ == 0 && ((IOSObjectArray *) nil_chk(storedFieldsReaders))->size_ > 0) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"There must be at least one main reader if storedFieldsReaders are used.");
-  JreStrongAssign(&self->parallelReaders_, [readers clone]);
-  JreStrongAssign(&self->storedFieldsReaders_, [((IOSObjectArray *) nil_chk(storedFieldsReaders)) clone]);
+  JreStrongAssign(&self->parallelReaders_, [readers java_clone]);
+  JreStrongAssign(&self->storedFieldsReaders_, [((IOSObjectArray *) nil_chk(storedFieldsReaders)) java_clone]);
   if (((IOSObjectArray *) nil_chk(self->parallelReaders_))->size_ > 0) {
     OrgApacheLuceneIndexLeafReader *first = IOSObjectArray_Get(self->parallelReaders_, 0);
     self->maxDoc_ = [((OrgApacheLuceneIndexLeafReader *) nil_chk(first)) maxDoc];
@@ -386,7 +417,7 @@ void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneI
       OrgApacheLuceneIndexLeafReader *reader = *b__++;
       OrgApacheLuceneIndexFields *readerFields = [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) fields];
       for (NSString * __strong field in nil_chk(readerFields)) {
-        if ([self->fieldToReader_ getWithId:field] == reader) {
+        if (JreObjectEqualsEquals([self->fieldToReader_ getWithId:field], reader)) {
           [self->fields_ addFieldWithNSString:field withOrgApacheLuceneIndexTerms:[readerFields termsWithNSString:field]];
         }
       }
@@ -435,7 +466,7 @@ withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms {
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -444,17 +475,27 @@ withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexParallelLeafReader:", "ParallelFields", NULL, 0x0, NULL, NULL },
-    { "addFieldWithNSString:withOrgApacheLuceneIndexTerms:", "addField", "V", 0x0, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexParallelLeafReader:);
+  methods[1].selector = @selector(addFieldWithNSString:withOrgApacheLuceneIndexTerms:);
+  methods[2].selector = @selector(iterator);
+  methods[3].selector = @selector(termsWithNSString:);
+  methods[4].selector = @selector(size);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fields_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/Terms;>;", .constantValue.asLong = 0 },
+    { "fields_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x10, -1, -1, 6, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexParallelLeafReader_ParallelFields = { 2, "ParallelFields", "org.apache.lucene.index", "ParallelLeafReader", 0x12, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexParallelLeafReader;", "addField", "LNSString;LOrgApacheLuceneIndexTerms;", "()Ljava/util/Iterator<Ljava/lang/String;>;", "terms", "LNSString;", "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/Terms;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexParallelLeafReader_ParallelFields = { "ParallelFields", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x12, 5, 1, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexParallelLeafReader_ParallelFields;
 }
 

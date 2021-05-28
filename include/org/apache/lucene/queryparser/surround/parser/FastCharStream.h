@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundParserFastCharStream
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundParserFastCharStream_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserFastCharStream || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundParserFastCharStream))
 #define OrgApacheLuceneQueryparserSurroundParserFastCharStream_
 
@@ -26,9 +32,9 @@
 /*!
  @brief An efficient implementation of JavaCC's CharStream interface.
  <p>Note that
- this does not do line-number counting, but instead keeps track of the
- character position of the token in the input, as required by Lucene's <code>org.apache.lucene.analysis.Token</code>
-  API. 
+  this does not do line-number counting, but instead keeps track of the
+  character position of the token in the input, as required by Lucene's <code>org.apache.lucene.analysis.Token</code>
+  API.
  */
 @interface OrgApacheLuceneQueryparserSurroundParserFastCharStream : NSObject < OrgApacheLuceneQueryparserSurroundParserCharStream > {
  @public
@@ -45,7 +51,7 @@
 /*!
  @brief Constructs from a Reader.
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)r;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)r;
 
 - (void)backupWithInt:(jint)amount;
 
@@ -71,6 +77,10 @@
 
 - (jchar)readChar;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundParserFastCharStream)
@@ -88,4 +98,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundParserFastCharStrea
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserFastCharStream")

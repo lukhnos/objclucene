@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Character.h"
 #include "java/util/ArrayList.h"
@@ -17,7 +16,6 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/KeywordAttribute.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
 #include "org/apache/lucene/util/BytesRefHash.h"
@@ -29,6 +27,10 @@
 #include "org/apache/lucene/util/fst/ByteSequenceOutputs.h"
 #include "org/apache/lucene/util/fst/FST.h"
 #include "org/apache/lucene/util/fst/Outputs.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/StemmerOverrideFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter () {
  @public
@@ -89,11 +91,11 @@ withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap
       return true;
     }
     if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) isKeyword]) {
-      OrgApacheLuceneUtilBytesRef *stem = [((OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *) nil_chk(stemmerOverrideMap_)) getWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length] withOrgApacheLuceneUtilFstFST_Arc:scratchArc_ withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
+      OrgApacheLuceneUtilBytesRef *stem = [((OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *) nil_chk(stemmerOverrideMap_)) getWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ java_length] withOrgApacheLuceneUtilFstFST_Arc:scratchArc_ withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
       if (stem != nil) {
         JreStrongAssign(&spare_, OrgApacheLuceneUtilArrayUtil_growWithCharArray_withInt_([termAtt_ buffer], stem->length_));
         jint length = OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF16WithOrgApacheLuceneUtilBytesRef_withCharArray_(stem, spare_);
-        if (spare_ != [termAtt_ buffer]) {
+        if (!JreObjectEqualsEquals(spare_, [termAtt_ buffer])) {
           [termAtt_ copyBufferWithCharArray:spare_ withInt:0 withInt:length];
         }
         else {
@@ -120,20 +122,26 @@ withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap:", "StemmerOverrideFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap:);
+  methods[1].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stemmerOverrideMap_", NULL, 0x12, "Lorg.apache.lucene.analysis.miscellaneous.StemmerOverrideFilter$StemmerOverrideMap;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "keywordAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.KeywordAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fstReader_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST$BytesReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchArc_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST$Arc;", NULL, "Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "spare_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
+    { "stemmerOverrideMap_", "LOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "keywordAtt_", "LOrgApacheLuceneAnalysisTokenattributesKeywordAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fstReader_", "LOrgApacheLuceneUtilFstFST_BytesReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratchArc_", "LOrgApacheLuceneUtilFstFST_Arc;", .constantValue.asLong = 0, 0x12, -1, -1, 2, -1 },
+    { "spare_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.miscellaneous.StemmerOverrideFilter$StemmerOverrideMap;", "Lorg.apache.lucene.analysis.miscellaneous.StemmerOverrideFilter$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter = { 2, "StemmerOverrideFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 6, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap;", "LJavaIoIOException;", "Lorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap;LOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter = { "StemmerOverrideFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 2, 6, -1, 3, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter;
 }
 
@@ -180,7 +188,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOver
                                           withInt:(jint)bufferLen
                 withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)scratchArc
         withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)fstReader {
-  OrgApacheLuceneUtilBytesRef *pendingOutput = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) getNoOutput];
+  OrgApacheLuceneUtilBytesRef *pendingOutput = JreRetainedLocalValue([((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) getNoOutput]);
   OrgApacheLuceneUtilBytesRef *matchOutput = nil;
   jint bufUpto = 0;
   [fst_ getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:scratchArc];
@@ -189,11 +197,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOver
     if ([fst_ findTargetArcWithInt:ignoreCase_ ? JavaLangCharacter_toLowerCaseWithInt_(codePoint) : codePoint withOrgApacheLuceneUtilFstFST_Arc:scratchArc withOrgApacheLuceneUtilFstFST_Arc:scratchArc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader] == nil) {
       return nil;
     }
-    pendingOutput = [fst_->outputs_ addWithId:pendingOutput withId:((OrgApacheLuceneUtilBytesRef *) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(scratchArc))->output_)];
+    pendingOutput = [fst_->outputs_ addWithId:pendingOutput withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(scratchArc))->output_];
     bufUpto += JavaLangCharacter_charCountWithInt_(codePoint);
   }
   if ([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(scratchArc)) isFinal]) {
-    matchOutput = [fst_->outputs_ addWithId:pendingOutput withId:((OrgApacheLuceneUtilBytesRef *) scratchArc->nextFinalOutput_)];
+    matchOutput = [fst_->outputs_ addWithId:pendingOutput withId:scratchArc->nextFinalOutput_];
   }
   return matchOutput;
 }
@@ -204,16 +212,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOver
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:withBoolean:", "StemmerOverrideMap", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;Z)V" },
-    { "getBytesReader", NULL, "Lorg.apache.lucene.util.fst.FST$BytesReader;", 0x1, NULL, NULL },
-    { "getWithCharArray:withInt:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "get", "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", "([CILorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/BytesRef;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilFstFST_BytesReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, 2, 3, 4, 5, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilFstFST:withBoolean:);
+  methods[1].selector = @selector(getBytesReader);
+  methods[2].selector = @selector(getWithCharArray:withInt:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fst_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "fst_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
+    { "ignoreCase_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap = { 2, "StemmerOverrideMap", "org.apache.lucene.analysis.miscellaneous", "StemmerOverrideFilter", 0x19, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilFstFST;Z", "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;Z)V", "get", "[CILOrgApacheLuceneUtilFstFST_Arc;LOrgApacheLuceneUtilFstFST_BytesReader;", "LJavaIoIOException;", "([CILorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/BytesRef;", "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;", "LOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap = { "StemmerOverrideMap", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x19, 3, 2, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap;
 }
 
@@ -251,7 +267,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)input
                withJavaLangCharSequence:(id<JavaLangCharSequence>)output {
-  jint length = [((id<JavaLangCharSequence>) nil_chk(input)) length];
+  jint length = [((id<JavaLangCharSequence>) nil_chk(input)) java_length];
   if (ignoreCase_) {
     [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(charsSpare_)) growWithInt:length];
     IOSCharArray *buffer = [charsSpare_ chars];
@@ -279,7 +295,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   OrgApacheLuceneUtilBytesRef *spare = create_OrgApacheLuceneUtilBytesRef_init();
   for (jint i = 0; i < size; i++) {
     jint id_ = IOSIntArray_Get(nil_chk(sort), i);
-    OrgApacheLuceneUtilBytesRef *bytesRef = [hash__ getWithInt:id_ withOrgApacheLuceneUtilBytesRef:spare];
+    OrgApacheLuceneUtilBytesRef *bytesRef = JreRetainedLocalValue([hash__ getWithInt:id_ withOrgApacheLuceneUtilBytesRef:spare]);
     [intsSpare copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:bytesRef];
     [builder addWithOrgApacheLuceneUtilIntsRef:[intsSpare get] withId:create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([((JavaUtilArrayList *) nil_chk(outputValues_)) getWithInt:id_])];
   }
@@ -295,20 +311,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Builder", NULL, 0x1, NULL, NULL },
-    { "initWithBoolean:", "Builder", NULL, 0x1, NULL, NULL },
-    { "addWithJavaLangCharSequence:withJavaLangCharSequence:", "add", "Z", 0x1, NULL, NULL },
-    { "build", NULL, "Lorg.apache.lucene.analysis.miscellaneous.StemmerOverrideFilter$StemmerOverrideMap;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap;", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithBoolean:);
+  methods[2].selector = @selector(addWithJavaLangCharSequence:withJavaLangCharSequence:);
+  methods[3].selector = @selector(build);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "hash__", "hash", 0x12, "Lorg.apache.lucene.util.BytesRefHash;", NULL, NULL, .constantValue.asLong = 0 },
-    { "spare_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "outputValues_", NULL, 0x12, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Ljava/lang/CharSequence;>;", .constantValue.asLong = 0 },
-    { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "charsSpare_", NULL, 0x12, "Lorg.apache.lucene.util.CharsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "hash__", "LOrgApacheLuceneUtilBytesRefHash;", .constantValue.asLong = 0, 0x12, 4, -1, -1, -1 },
+    { "spare_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "outputValues_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
+    { "ignoreCase_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "charsSpare_", "LOrgApacheLuceneUtilCharsRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder = { 2, "Builder", "org.apache.lucene.analysis.miscellaneous", "StemmerOverrideFilter", 0x9, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "Z", "add", "LJavaLangCharSequence;LJavaLangCharSequence;", "LJavaIoIOException;", "hash", "Ljava/util/ArrayList<Ljava/lang/CharSequence;>;", "LOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder = { "Builder", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x9, 4, 5, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder;
 }
 

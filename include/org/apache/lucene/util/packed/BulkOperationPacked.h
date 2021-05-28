@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedBulkOperationPacked
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedBulkOperationPacked_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperationPacked || defined(INCLUDE_OrgApacheLuceneUtilPackedBulkOperationPacked))
 #define OrgApacheLuceneUtilPackedBulkOperationPacked_
 
@@ -31,7 +37,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)bitsPerValue;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)bitsPerValue;
 
 - (jint)byteBlockCount;
 
@@ -89,18 +95,26 @@
 
 - (jint)longValueCount;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivate NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedBulkOperationPacked)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(OrgApacheLuceneUtilPackedBulkOperationPacked *self, jint bitsPerValue);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(OrgApacheLuceneUtilPackedBulkOperationPacked *self, jint bitsPerValue);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperationPacked *new_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(jint bitsPerValue) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperationPacked *new_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(jint bitsPerValue) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperationPacked *create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(jint bitsPerValue);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperationPacked *create_OrgApacheLuceneUtilPackedBulkOperationPacked_initPackagePrivateWithInt_(jint bitsPerValue);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedBulkOperationPacked)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperationPacked")

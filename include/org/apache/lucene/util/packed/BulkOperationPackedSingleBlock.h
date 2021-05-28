@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock || defined(INCLUDE_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock))
 #define OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_
 
@@ -31,7 +37,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)bitsPerValue;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)bitsPerValue;
 
 - (jint)byteBlockCount;
 
@@ -89,18 +95,26 @@
 
 - (jint)longValueCount;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivate NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *self, jint bitsPerValue);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *self, jint bitsPerValue);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *new_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(jint bitsPerValue) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *new_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(jint bitsPerValue) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(jint bitsPerValue);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initPackagePrivateWithInt_(jint bitsPerValue);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock")

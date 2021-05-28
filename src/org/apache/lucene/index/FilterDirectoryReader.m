@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/DirectoryReader.h"
 #include "org/apache/lucene/index/FilterDirectoryReader.h"
@@ -14,6 +13,10 @@
 #include "org/apache/lucene/index/IndexWriter.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/store/Directory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/FilterDirectoryReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexFilterDirectoryReader ()
 
@@ -92,25 +95,41 @@ withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper:(OrgApacheLuceneI
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "unwrapWithOrgApacheLuceneIndexDirectoryReader:", "unwrap", "Lorg.apache.lucene.index.DirectoryReader;", 0x9, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper:", "FilterDirectoryReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "doWrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:", "doWrapDirectoryReader", "Lorg.apache.lucene.index.DirectoryReader;", 0x404, "Ljava.io.IOException;", NULL },
-    { "wrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:", "wrapDirectoryReader", "Lorg.apache.lucene.index.DirectoryReader;", 0x12, "Ljava.io.IOException;", NULL },
-    { "doOpenIfChanged", NULL, "Lorg.apache.lucene.index.DirectoryReader;", 0x14, "Ljava.io.IOException;", NULL },
-    { "doOpenIfChangedWithOrgApacheLuceneIndexIndexCommit:", "doOpenIfChanged", "Lorg.apache.lucene.index.DirectoryReader;", 0x14, "Ljava.io.IOException;", NULL },
-    { "doOpenIfChangedWithOrgApacheLuceneIndexIndexWriter:withBoolean:", "doOpenIfChanged", "Lorg.apache.lucene.index.DirectoryReader;", 0x14, "Ljava.io.IOException;", NULL },
-    { "getVersion", NULL, "J", 0x1, NULL, NULL },
-    { "isCurrent", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "getIndexCommit", NULL, "Lorg.apache.lucene.index.IndexCommit;", 0x1, "Ljava.io.IOException;", NULL },
-    { "doClose", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "getDelegate", NULL, "Lorg.apache.lucene.index.DirectoryReader;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x404, 4, 1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x12, 5, 1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x14, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x14, 6, 7, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x14, 6, 8, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexCommit;", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(unwrapWithOrgApacheLuceneIndexDirectoryReader:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper:);
+  methods[2].selector = @selector(doWrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:);
+  methods[3].selector = @selector(wrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:);
+  methods[4].selector = @selector(doOpenIfChanged);
+  methods[5].selector = @selector(doOpenIfChangedWithOrgApacheLuceneIndexIndexCommit:);
+  methods[6].selector = @selector(doOpenIfChangedWithOrgApacheLuceneIndexIndexWriter:withBoolean:);
+  methods[7].selector = @selector(getVersion);
+  methods[8].selector = @selector(isCurrent);
+  methods[9].selector = @selector(getIndexCommit);
+  methods[10].selector = @selector(doClose);
+  methods[11].selector = @selector(getDelegate);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x14, "Lorg.apache.lucene.index.DirectoryReader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneIndexDirectoryReader;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.FilterDirectoryReader$SubReaderWrapper;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilterDirectoryReader = { 2, "FilterDirectoryReader", "org.apache.lucene.index", NULL, 0x401, 12, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "unwrap", "LOrgApacheLuceneIndexDirectoryReader;", "LOrgApacheLuceneIndexDirectoryReader;LOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper;", "LJavaIoIOException;", "doWrapDirectoryReader", "wrapDirectoryReader", "doOpenIfChanged", "LOrgApacheLuceneIndexIndexCommit;", "LOrgApacheLuceneIndexIndexWriter;Z", "LOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilterDirectoryReader = { "FilterDirectoryReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 12, 1, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFilterDirectoryReader;
 }
 
@@ -155,12 +174,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "wrapWithJavaUtilList:", "wrap", "[Lorg.apache.lucene.index.LeafReader;", 0x2, NULL, "(Ljava/util/List<+Lorg/apache/lucene/index/LeafReader;>;)[Lorg/apache/lucene/index/LeafReader;" },
-    { "init", "SubReaderWrapper", NULL, 0x1, NULL, NULL },
-    { "wrapWithOrgApacheLuceneIndexLeafReader:", "wrap", "Lorg.apache.lucene.index.LeafReader;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneIndexLeafReader;", 0x2, 0, 1, -1, 2, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexLeafReader;", 0x401, 0, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper = { 2, "SubReaderWrapper", "org.apache.lucene.index", "FilterDirectoryReader", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(wrapWithJavaUtilList:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(wrapWithOrgApacheLuceneIndexLeafReader:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "wrap", "LJavaUtilList;", "(Ljava/util/List<+Lorg/apache/lucene/index/LeafReader;>;)[Lorg/apache/lucene/index/LeafReader;", "LOrgApacheLuceneIndexLeafReader;", "LOrgApacheLuceneIndexFilterDirectoryReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper = { "SubReaderWrapper", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x409, 3, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper;
 }
 

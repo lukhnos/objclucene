@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchJoinToChildBlockJoinQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchJoinToChildBlockJoinQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinToChildBlockJoinQuery || defined(INCLUDE_OrgApacheLuceneSearchJoinToChildBlockJoinQuery))
 #define OrgApacheLuceneSearchJoinToChildBlockJoinQuery_
 
@@ -27,15 +33,13 @@
 
 /*!
  @brief Just like <code>ToParentBlockJoinQuery</code>, except this
- query joins in reverse: you provide a Query matching
- parent documents and it joins down to child
- documents.
+  query joins in reverse: you provide a Query matching
+  parent documents and it joins down to child
+  documents.
  */
 @interface OrgApacheLuceneSearchJoinToChildBlockJoinQuery : OrgApacheLuceneSearchQuery
-
-+ (NSString *)INVALID_QUERY_MESSAGE;
-
-+ (NSString *)ILLEGAL_ADVANCE_ON_PARENT;
+@property (readonly, copy, class) NSString *INVALID_QUERY_MESSAGE NS_SWIFT_NAME(INVALID_QUERY_MESSAGE);
+@property (readonly, copy, class) NSString *ILLEGAL_ADVANCE_ON_PARENT NS_SWIFT_NAME(ILLEGAL_ADVANCE_ON_PARENT);
 
 #pragma mark Public
 
@@ -44,10 +48,10 @@
  @param parentQuery Query that matches parent documents
  @param parentsFilter Filter identifying the parent documents.
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)parentQuery
-       withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)parentQuery
+                 withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter;
 
-- (OrgApacheLuceneSearchJoinToChildBlockJoinQuery *)clone;
+- (OrgApacheLuceneSearchJoinToChildBlockJoinQuery *)java_clone;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -65,6 +69,10 @@
 
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
@@ -72,14 +80,14 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
 /*!
  @brief Message thrown from <code>ToChildBlockJoinScorer.validateParentDoc</code>
   on mis-use,
- when the parent query incorrectly returns child docs.
+   when the parent query incorrectly returns child docs.
  */
-inline NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_get_INVALID_QUERY_MESSAGE();
+inline NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_get_INVALID_QUERY_MESSAGE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_INVALID_QUERY_MESSAGE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchJoinToChildBlockJoinQuery, INVALID_QUERY_MESSAGE, NSString *)
 
-inline NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_get_ILLEGAL_ADVANCE_ON_PARENT();
+inline NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_get_ILLEGAL_ADVANCE_ON_PARENT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARENT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchJoinToChildBlockJoinQuery, ILLEGAL_ADVANCE_ON_PARENT, NSString *)
@@ -109,10 +117,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)parentScorer
-                      withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parentBits
-                                        withBoolean:(jboolean)doScores;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                              withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)parentScorer
+                                withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parentBits
+                                                  withBoolean:(jboolean)doScores;
 
 - (jint)advanceWithInt:(jint)childTarget;
 
@@ -132,6 +140,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
 
 - (jint)getParentDoc;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer)
@@ -146,4 +158,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinToChildBlockJoinQuery")

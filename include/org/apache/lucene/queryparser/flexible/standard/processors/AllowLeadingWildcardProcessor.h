@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor))
 #define OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_
 
@@ -20,23 +26,23 @@
 #define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
+@class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief This processor verifies if
- <code>ConfigurationKeys.ALLOW_LEADING_WILDCARD</code> is defined in the
- <code>QueryConfigHandler</code>.
- If it is and leading wildcard is not allowed, it
- looks for every <code>WildcardQueryNode</code> contained in the query node tree
- and throws an exception if any of them has a leading wildcard ('*' or '?').
+ @brief This processor verifies if 
+ <code>ConfigurationKeys.ALLOW_LEADING_WILDCARD</code> is defined in the 
+ <code>QueryConfigHandler</code>.If it is and leading wildcard is not allowed, it
+  looks for every <code>WildcardQueryNode</code> contained in the query node tree
+  and throws an exception if any of them has a leading wildcard ('*' or '?').
  - seealso: ConfigurationKeys#ALLOW_LEADING_WILDCARD
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor : OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree;
 
@@ -48,18 +54,26 @@
 
 - (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor")

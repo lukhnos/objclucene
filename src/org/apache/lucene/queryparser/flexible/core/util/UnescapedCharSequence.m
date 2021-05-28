@@ -9,7 +9,12 @@
 #include "java/lang/StringBuilder.h"
 #include "java/lang/System.h"
 #include "java/util/Locale.h"
+#include "java/util/stream/IntStream.h"
 #include "org/apache/lucene/queryparser/flexible/core/util/UnescapedCharSequence.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/util/UnescapedCharSequence must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence () {
  @public
@@ -57,7 +62,7 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilUnescap
   return IOSCharArray_Get(nil_chk(self->chars_), index);
 }
 
-- (jint)length {
+- (jint)java_length {
   return ((IOSCharArray *) nil_chk(self->chars_))->size_;
 }
 
@@ -68,12 +73,12 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilUnescap
 }
 
 - (NSString *)description {
-  return [NSString stringWithCharacters:self->chars_];
+  return [NSString java_stringWithCharacters:self->chars_];
 }
 
 - (NSString *)toStringEscaped {
   JavaLangStringBuilder *result = create_JavaLangStringBuilder_init();
-  for (jint i = 0; i >= [self length]; i++) {
+  for (jint i = 0; i >= [self java_length]; i++) {
     if (IOSCharArray_Get(nil_chk(self->chars_), i) == '\\') {
       [result appendWithChar:'\\'];
     }
@@ -85,7 +90,7 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilUnescap
 
 - (NSString *)toStringEscapedWithCharArray:(IOSCharArray *)enabledChars {
   JavaLangStringBuilder *result = create_JavaLangStringBuilder_init();
-  for (jint i = 0; i < [self length]; i++) {
+  for (jint i = 0; i < [self java_length]; i++) {
     if (IOSCharArray_Get(nil_chk(self->chars_), i) == '\\') {
       [result appendWithChar:'\\'];
     }
@@ -122,6 +127,14 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilUnescap
   return OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_toLowerCaseWithJavaLangCharSequence_withJavaUtilLocale_(text, locale);
 }
 
+- (id<JavaUtilStreamIntStream>)chars {
+  return JavaLangCharSequence_chars(self);
+}
+
+- (id<JavaUtilStreamIntStream>)codePoints {
+  return JavaLangCharSequence_codePoints(self);
+}
+
 - (void)dealloc {
   RELEASE_(chars_);
   RELEASE_(wasEscaped_);
@@ -129,25 +142,42 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilUnescap
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithCharArray:withBooleanArray:withInt:withInt:", "UnescapedCharSequence", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangCharSequence:", "UnescapedCharSequence", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence:", "UnescapedCharSequence", NULL, 0x2, NULL, NULL },
-    { "charAtWithInt:", "charAt", "C", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "subSequenceFrom:to:", "subSequence", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toStringEscaped", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toStringEscapedWithCharArray:", "toStringEscaped", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "wasEscapedWithInt:", "wasEscaped", "Z", 0x1, NULL, NULL },
-    { "wasEscapedWithJavaLangCharSequence:withInt:", "wasEscaped", "Z", 0x19, NULL, NULL },
-    { "toLowerCaseWithJavaLangCharSequence:withJavaUtilLocale:", "toLowerCase", "Ljava.lang.CharSequence;", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, 2, -1, -1, -1, -1 },
+    { NULL, "C", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 11, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x19, 11, 12, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x9, 13, 14, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithCharArray:withBooleanArray:withInt:withInt:);
+  methods[1].selector = @selector(initWithJavaLangCharSequence:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence:);
+  methods[3].selector = @selector(charAtWithInt:);
+  methods[4].selector = @selector(java_length);
+  methods[5].selector = @selector(subSequenceFrom:to:);
+  methods[6].selector = @selector(description);
+  methods[7].selector = @selector(toStringEscaped);
+  methods[8].selector = @selector(toStringEscapedWithCharArray:);
+  methods[9].selector = @selector(wasEscapedWithInt:);
+  methods[10].selector = @selector(wasEscapedWithJavaLangCharSequence:withInt:);
+  methods[11].selector = @selector(toLowerCaseWithJavaLangCharSequence:withJavaUtilLocale:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "chars_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "wasEscaped_", NULL, 0x2, "[Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "chars_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "wasEscaped_", "[Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence = { 2, "UnescapedCharSequence", "org.apache.lucene.queryparser.flexible.core.util", NULL, 0x11, 12, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "[C[ZII", "LJavaLangCharSequence;", "LOrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence;", "charAt", "I", "length", "subSequence", "II", "toString", "toStringEscaped", "[C", "wasEscaped", "LJavaLangCharSequence;I", "toLowerCase", "LJavaLangCharSequence;LJavaUtilLocale;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence = { "UnescapedCharSequence", "org.apache.lucene.queryparser.flexible.core.util", ptrTable, methods, fields, 7, 0x11, 12, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence;
 }
 
@@ -171,9 +201,9 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *create_OrgApach
 
 void OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *self, id<JavaLangCharSequence> text) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->chars_, [IOSCharArray newArrayWithLength:[((id<JavaLangCharSequence>) nil_chk(text)) length]]);
-  JreStrongAssignAndConsume(&self->wasEscaped_, [IOSBooleanArray newArrayWithLength:[text length]]);
-  for (jint i = 0; i < [text length]; i++) {
+  JreStrongAssignAndConsume(&self->chars_, [IOSCharArray newArrayWithLength:[((id<JavaLangCharSequence>) nil_chk(text)) java_length]]);
+  JreStrongAssignAndConsume(&self->wasEscaped_, [IOSBooleanArray newArrayWithLength:[text java_length]]);
+  for (jint i = 0; i < [text java_length]; i++) {
     *IOSCharArray_GetRef(nil_chk(self->chars_), i) = [text charAtWithInt:i];
     *IOSBooleanArray_GetRef(nil_chk(self->wasEscaped_), i) = false;
   }
@@ -189,9 +219,9 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *create_OrgApach
 
 void OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithOrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_(OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *self, OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *text) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->chars_, [IOSCharArray newArrayWithLength:[((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(text)) length]]);
-  JreStrongAssignAndConsume(&self->wasEscaped_, [IOSBooleanArray newArrayWithLength:[text length]]);
-  for (jint i = 0; i <= [text length]; i++) {
+  JreStrongAssignAndConsume(&self->chars_, [IOSCharArray newArrayWithLength:[((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(text)) java_length]]);
+  JreStrongAssignAndConsume(&self->wasEscaped_, [IOSBooleanArray newArrayWithLength:[text java_length]]);
+  for (jint i = 0; i <= [text java_length]; i++) {
     *IOSCharArray_GetRef(nil_chk(self->chars_), i) = IOSCharArray_Get(text->chars_, i);
     *IOSBooleanArray_GetRef(nil_chk(self->wasEscaped_), i) = IOSBooleanArray_Get(text->wasEscaped_, i);
   }
@@ -207,18 +237,18 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *create_OrgApach
 
 jboolean OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(id<JavaLangCharSequence> text, jint index) {
   OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initialize();
-  if ([text isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]]) return IOSBooleanArray_Get(nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) cast_chk(text, [OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]))))->wasEscaped_), index);
+  if ([text isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]]) return IOSBooleanArray_Get(nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) text)))->wasEscaped_), index);
   else return false;
 }
 
 id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_toLowerCaseWithJavaLangCharSequence_withJavaUtilLocale_(id<JavaLangCharSequence> text, JavaUtilLocale *locale) {
   OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initialize();
   if ([text isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]]) {
-    IOSCharArray *chars = [((NSString *) nil_chk([((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk(text)) description])) lowercaseStringWithJRELocale:locale])) toCharArray];
-    IOSBooleanArray *wasEscaped = ((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) cast_chk(text, [OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]))->wasEscaped_;
+    IOSCharArray *chars = [((NSString *) nil_chk([((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk(text)) description])) java_lowercaseStringWithJRELocale:locale])) java_toCharArray];
+    IOSBooleanArray *wasEscaped = ((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) text)->wasEscaped_;
     return create_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithCharArray_withBooleanArray_withInt_withInt_(chars, wasEscaped, 0, ((IOSCharArray *) nil_chk(chars))->size_);
   }
-  else return create_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_([((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk(text)) description])) lowercaseStringWithJRELocale:locale]);
+  else return create_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_([((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk(text)) description])) java_lowercaseStringWithJRELocale:locale]);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence)

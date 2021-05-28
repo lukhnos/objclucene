@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory))
 #define OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory_
 
@@ -28,13 +34,13 @@
 /*!
  @brief Factory for <code>PatternReplaceFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_ptnreplace" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.KeywordTokenizerFactory"/&gt;
- &lt;filter class="solr.PatternReplaceFilterFactory" pattern="([^a-z])" replacement=""
- replace="all"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_ptnreplace" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.KeywordTokenizerFactory"/&gt;
+      &lt;filter class="solr.PatternReplaceFilterFactory" pattern="([^a-z])" replacement=""
+              replace="all"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  - seealso: PatternReplaceFilter
  */
@@ -50,7 +56,7 @@
 /*!
  @brief Creates a new PatternReplaceFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisPatternPatternReplaceFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -71,4 +77,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternReplaceFilterFac
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory")

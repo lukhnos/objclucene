@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightSpanGradientFormatter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightSpanGradientFormatter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightSpanGradientFormatter || defined(INCLUDE_OrgApacheLuceneSearchHighlightSpanGradientFormatter))
 #define OrgApacheLuceneSearchHighlightSpanGradientFormatter_
 
@@ -24,20 +30,19 @@
 
 /*!
  @brief Formats text with different color intensity depending on the score of the
- term using the span tag.
- GradientFormatter uses a bgcolor argument to the font tag which
- doesn't work in Mozilla, thus this class.
+  term using the span tag.GradientFormatter uses a bgcolor argument to the font tag which
+  doesn't work in Mozilla, thus this class.
  - seealso: GradientFormatter
  */
 @interface OrgApacheLuceneSearchHighlightSpanGradientFormatter : OrgApacheLuceneSearchHighlightGradientFormatter
 
 #pragma mark Public
 
-- (instancetype)initWithFloat:(jfloat)maxScore
-                 withNSString:(NSString *)minForegroundColor
-                 withNSString:(NSString *)maxForegroundColor
-                 withNSString:(NSString *)minBackgroundColor
-                 withNSString:(NSString *)maxBackgroundColor;
+- (instancetype __nonnull)initWithFloat:(jfloat)maxScore
+                           withNSString:(NSString *)minForegroundColor
+                           withNSString:(NSString *)maxForegroundColor
+                           withNSString:(NSString *)minBackgroundColor
+                           withNSString:(NSString *)maxBackgroundColor;
 
 - (NSString *)highlightTermWithNSString:(NSString *)originalText
 withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightTokenGroup *)tokenGroup;
@@ -56,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSpanGradientFormatter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSpanGradientFormatter")

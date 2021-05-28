@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSingletonSortedSetDocValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSingletonSortedSetDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexSingletonSortedSetDocValues || defined(INCLUDE_OrgApacheLuceneIndexSingletonSortedSetDocValues))
 #define OrgApacheLuceneIndexSingletonSortedSetDocValues_
 
@@ -27,8 +33,8 @@
 /*!
  @brief Exposes multi-valued view over a single-valued instance.
  <p>
- This can be used if you want to have one multi-valued implementation
- that works for single or multi-valued types.
+  This can be used if you want to have one multi-valued implementation
+  that works for single or multi-valued types.
  */
 @interface OrgApacheLuceneIndexSingletonSortedSetDocValues : OrgApacheLuceneIndexRandomAccessOrds
 
@@ -37,7 +43,7 @@
 /*!
  @brief Creates a multi-valued view over the provided SortedDocValues
  */
-- (instancetype)initWithOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)inArg;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)inArg;
 
 - (jint)cardinality;
 
@@ -60,18 +66,26 @@
 
 - (OrgApacheLuceneIndexTermsEnum *)termsEnum;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSingletonSortedSetDocValues)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexSingletonSortedSetDocValues_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSingletonSortedSetDocValues *self, OrgApacheLuceneIndexSortedDocValues *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexSingletonSortedSetDocValues_initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSingletonSortedSetDocValues *self, OrgApacheLuceneIndexSortedDocValues *inArg);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSingletonSortedSetDocValues *new_OrgApacheLuceneIndexSingletonSortedSetDocValues_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexSingletonSortedSetDocValues *new_OrgApacheLuceneIndexSingletonSortedSetDocValues_initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *inArg) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSingletonSortedSetDocValues *create_OrgApacheLuceneIndexSingletonSortedSetDocValues_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *inArg);
+FOUNDATION_EXPORT OrgApacheLuceneIndexSingletonSortedSetDocValues *create_OrgApacheLuceneIndexSingletonSortedSetDocValues_initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *inArg);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSingletonSortedSetDocValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSingletonSortedSetDocValues")

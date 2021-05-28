@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexBitsSlice
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexBitsSlice_) && (INCLUDE_ALL_OrgApacheLuceneIndexBitsSlice || defined(INCLUDE_OrgApacheLuceneIndexBitsSlice))
 #define OrgApacheLuceneIndexBitsSlice_
 
@@ -29,25 +35,33 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)parent
-            withOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)slice;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)parent
+                                    withOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)slice;
 
 - (jboolean)getWithInt:(jint)doc;
 
 - (jint)length;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexBitsSlice)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(OrgApacheLuceneIndexBitsSlice *self, id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexBitsSlice_initPackagePrivateWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(OrgApacheLuceneIndexBitsSlice *self, id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBitsSlice *new_OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexBitsSlice *new_OrgApacheLuceneIndexBitsSlice_initPackagePrivateWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBitsSlice *create_OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice);
+FOUNDATION_EXPORT OrgApacheLuceneIndexBitsSlice *create_OrgApacheLuceneIndexBitsSlice_initPackagePrivateWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBitsSlice)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexBitsSlice")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCharfilterMappingCharFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCharfilterMappingCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterMappingCharFilter))
 #define OrgApacheLuceneAnalysisCharfilterMappingCharFilter_
 
@@ -26,12 +32,12 @@
 
 /*!
  @brief Simplistic <code>CharFilter</code> that applies the mappings
- contained in a <code>NormalizeCharMap</code> to the character
- stream, and correcting the resulting changes to the
- offsets.
- Matching is greedy (longest pattern matching at
- a given point wins).  Replacement is allowed to be the
- empty string.
+  contained in a <code>NormalizeCharMap</code> to the character
+  stream, and correcting the resulting changes to the
+  offsets.Matching is greedy (longest pattern matching at
+  a given point wins).
+ Replacement is allowed to be the
+  empty string.
  */
 @interface OrgApacheLuceneAnalysisCharfilterMappingCharFilter : OrgApacheLuceneAnalysisCharfilterBaseCharFilter
 
@@ -40,8 +46,8 @@
 /*!
  @brief Default constructor that takes a <code>Reader</code>.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap:(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *)normMap
-                                                         withJavaIoReader:(JavaIoReader *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap:(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *)normMap
+                                                                   withJavaIoReader:(JavaIoReader *)inArg;
 
 - (jint)read;
 
@@ -50,6 +56,10 @@
                   withInt:(jint)len;
 
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -65,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_
 
@@ -23,9 +29,9 @@
 
 /*!
  @brief A <code>QueryNode</code> is a interface implemented by all nodes on a QueryNode
- tree.
+  tree.
  */
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode < JavaObject >
 
 /*!
  @brief convert to a query string understood by the query parser
@@ -61,7 +67,7 @@
 
 /*!
  @brief Recursive clone the QueryNode tree The tags are not copied to the new tree
- when you call the cloneTree() method
+  when you call the cloneTree() method
  @return the cloned tree
  */
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
@@ -73,16 +79,16 @@
 - (void)setWithJavaUtilList:(id<JavaUtilList>)children;
 
 /*!
- @brief Associate the specified value with the specified tagName.
- If the tagName
- already exists, the old value is replaced. The tagName and value cannot be
- null. tagName will be converted to lowercase.
+ @brief Associate the specified value with the specified tagName.If the tagName
+  already exists, the old value is replaced.
+ The tagName and value cannot be
+  null. tagName will be converted to lowercase.
  */
 - (void)setTagWithNSString:(NSString *)tagName
                     withId:(id)value;
 
 /*!
- @brief Unset a tag. tagName will be converted to lowercase.
+ @brief Unset a tag.tagName will be converted to lowercase.
  */
 - (void)unsetTagWithNSString:(NSString *)tagName;
 
@@ -111,4 +117,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode")

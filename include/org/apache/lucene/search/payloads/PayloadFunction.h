@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadFunction
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPayloadsPayloadFunction_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadFunction || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadFunction))
 #define OrgApacheLuceneSearchPayloadsPayloadFunction_
 
@@ -20,16 +26,14 @@
 
 /*!
  @brief An abstract class that defines a way for Payload*Query instances to transform
- the cumulative effects of payload scores for a document.
- - seealso: org.apache.lucene.search.payloads.PayloadTermQuery for more information
-  This class and its derivations are experimental and subject to
- change
+  the cumulative effects of payload scores for a document.
+ - seealso: org.apache.lucene.search.payloads.PayloadTermQueryfor more information
  */
 @interface OrgApacheLuceneSearchPayloadsPayloadFunction : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Calculate the score up to this point for this doc and field
@@ -83,4 +87,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadFunction)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadFunction")

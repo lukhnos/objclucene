@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/highlight/Formatter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/Formatter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchHighlightFormatter : NSObject
 
 @end
@@ -13,10 +17,16 @@
 @implementation OrgApacheLuceneSearchHighlightFormatter
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "highlightTermWithNSString:withOrgApacheLuceneSearchHighlightTokenGroup:", "highlightTerm", "Ljava.lang.String;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightFormatter = { 2, "Formatter", "org.apache.lucene.search.highlight", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(highlightTermWithNSString:withOrgApacheLuceneSearchHighlightTokenGroup:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "highlightTerm", "LNSString;LOrgApacheLuceneSearchHighlightTokenGroup;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightFormatter = { "Formatter", "org.apache.lucene.search.highlight", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightFormatter;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl))
 #define OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_
 
@@ -31,10 +37,10 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)key;
+- (instancetype __nonnull)initWithNSString:(NSString *)key;
 
-- (instancetype)initWithNSString:(NSString *)key
-               withNSObjectArray:(IOSObjectArray *)args;
+- (instancetype __nonnull)initWithNSString:(NSString *)key
+                         withNSObjectArray:(IOSObjectArray *)args;
 
 - (IOSObjectArray *)getArguments;
 
@@ -45,6 +51,10 @@
 - (NSString *)getLocalizedMessageWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -66,4 +76,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl")

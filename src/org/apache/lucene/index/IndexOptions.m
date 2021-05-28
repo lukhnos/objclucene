@@ -3,11 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/index/IndexOptions.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/index/IndexOptions.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexOptions must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(OrgApacheLuceneIndexIndexOptions *self, NSString *__name, jint __ordinal);
 
@@ -49,8 +53,27 @@ OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_values_[5];
   return (OrgApacheLuceneIndexIndexOptions_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneIndexIndexOptions;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexOptions;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "NONE", "LOrgApacheLuceneIndexIndexOptions;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "DOCS", "LOrgApacheLuceneIndexIndexOptions;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "DOCS_AND_FREQS", "LOrgApacheLuceneIndexIndexOptions;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "DOCS_AND_FREQS_AND_POSITIONS", "LOrgApacheLuceneIndexIndexOptions;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+    { "DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", "LOrgApacheLuceneIndexIndexOptions;", .constantValue.asLong = 0, 0x4019, -1, 6, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneIndexIndexOptions, NONE), &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS), &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS), &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS), &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS), "Ljava/lang/Enum<Lorg/apache/lucene/index/IndexOptions;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexOptions = { "IndexOptions", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x4011, 2, 5, -1, -1, -1, 7, -1 };
+  return &_OrgApacheLuceneIndexIndexOptions;
 }
 
 + (void)initialize {
@@ -59,31 +82,12 @@ OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_values_[5];
     size_t allocSize = 5 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneIndexIndexOptions, NONE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"NONE", 0);
-    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS", 1);
-    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS_AND_FREQS", 2);
-    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS_AND_FREQS_AND_POSITIONS", 3);
-    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", 4);
+    for (jint i = 0; i < 5; i++) {
+      ((void)(OrgApacheLuceneIndexIndexOptions_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneIndexIndexOptions_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexIndexOptions)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "NONE", "NONE", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &JreEnum(OrgApacheLuceneIndexIndexOptions, NONE), NULL, .constantValue.asLong = 0 },
-    { "DOCS", "DOCS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS), NULL, .constantValue.asLong = 0 },
-    { "DOCS_AND_FREQS", "DOCS_AND_FREQS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS), NULL, .constantValue.asLong = 0 },
-    { "DOCS_AND_FREQS_AND_POSITIONS", "DOCS_AND_FREQS_AND_POSITIONS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS), NULL, .constantValue.asLong = 0 },
-    { "DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", "DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.IndexOptions;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexOptions = { 2, "IndexOptions", "org.apache.lucene.index", NULL, 0x4011, 0, NULL, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/IndexOptions;>;" };
-  return &_OrgApacheLuceneIndexIndexOptions;
 }
 
 @end
@@ -105,7 +109,7 @@ OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_valueOfWithNS
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

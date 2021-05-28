@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestTstTernaryTreeNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestTstTernaryTreeNode_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstTernaryTreeNode || defined(INCLUDE_OrgApacheLuceneSearchSuggestTstTernaryTreeNode))
 #define OrgApacheLuceneSearchSuggestTstTernaryTreeNode_
 
@@ -31,7 +37,7 @@
   OrgApacheLuceneSearchSuggestTstTernaryTreeNode *loKid_;
   /*!
    @brief a reference object to the node containing character next to this node's character as 
- occurring in the inserted token.
+   occurring in the inserted token.
    */
   OrgApacheLuceneSearchSuggestTstTernaryTreeNode *eqKid_;
   /*!
@@ -40,7 +46,7 @@
   OrgApacheLuceneSearchSuggestTstTernaryTreeNode *hiKid_;
   /*!
    @brief used by leaf nodes to store the complete tokens to be added to suggest list while 
- auto-completing the prefix.
+  auto-completing the prefix.
    */
   NSString *token_;
   id val_;
@@ -51,7 +57,7 @@
 /*!
  @brief Creates a new empty node
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Package-Private
 
@@ -69,12 +75,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestTstTernaryTreeNode, val_, id)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init(OrgApacheLuceneSearchSuggestTstTernaryTreeNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestTstTernaryTreeNode *new_OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestTstTernaryTreeNode *new_OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestTstTernaryTreeNode *create_OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestTstTernaryTreeNode *create_OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestTstTernaryTreeNode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstTernaryTreeNode")

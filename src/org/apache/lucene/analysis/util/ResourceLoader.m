@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/ResourceLoader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisUtilResourceLoader : NSObject
 
 @end
@@ -13,12 +17,20 @@
 @implementation OrgApacheLuceneAnalysisUtilResourceLoader
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "openResourceWithNSString:", "openResource", "Ljava.io.InputStream;", 0x401, "Ljava.io.IOException;", NULL },
-    { "findClassWithNSString:withIOSClass:", "findClass", "Ljava.lang.Class;", 0x401, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)Ljava/lang/Class<+TT;>;" },
-    { "newInstanceWithNSString:withIOSClass:", "newInstance", "TT;", 0x401, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LJavaIoInputStream;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x401, 3, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 6, 4, -1, 7, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilResourceLoader = { 2, "ResourceLoader", "org.apache.lucene.analysis.util", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(openResourceWithNSString:);
+  methods[1].selector = @selector(findClassWithNSString:withIOSClass:);
+  methods[2].selector = @selector(newInstanceWithNSString:withIOSClass:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "openResource", "LNSString;", "LJavaIoIOException;", "findClass", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)Ljava/lang/Class<+TT;>;", "newInstance", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilResourceLoader = { "ResourceLoader", "org.apache.lucene.analysis.util", ptrTable, methods, NULL, 7, 0x609, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisUtilResourceLoader;
 }
 

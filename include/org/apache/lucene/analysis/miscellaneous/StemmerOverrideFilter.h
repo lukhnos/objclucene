@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_
 
@@ -25,7 +31,7 @@
 
 /*!
  @brief Provides the ability to override any <code>KeywordAttribute</code> aware stemmer
- with custom dictionary-based stemming.
+  with custom dictionary-based stemming.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -33,16 +39,20 @@
 
 /*!
  @brief Create a new StemmerOverrideFilter, performing dictionary-based stemming
- with the provided <code>dictionary</code>.
+  with the provided <code>dictionary</code>.
  <p>
- Any dictionary-stemmed terms will be marked with <code>KeywordAttribute</code>
- so that they will not be stemmed with stemmers down the chain.
+  Any dictionary-stemmed terms will be marked with <code>KeywordAttribute</code>
+  so that they will not be stemmed with stemmers down the chain. 
  </p>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
 withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap:(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *)stemmerOverrideMap;
 
 - (jboolean)incrementToken;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -69,7 +79,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFi
 
 /*!
  @brief A read-only 4-byte FST backed map that allows fast case-insensitive key
- value lookups for <code>StemmerOverrideFilter</code>
+  value lookups for <code>StemmerOverrideFilter</code>
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap : NSObject
 
@@ -80,8 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFi
  @param fst the fst to lookup the overrides
  @param ignoreCase if the keys case should be ingored
  */
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-                                      withBoolean:(jboolean)ignoreCase;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
+                                                withBoolean:(jboolean)ignoreCase;
 
 /*!
  @brief Returns the value mapped to the given key or <code>null</code> if the key is not in the FST dictionary.
@@ -92,9 +102,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFi
         withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)fstReader;
 
 /*!
- @brief Returns a <code>BytesReader</code> to pass to the <code>get(char[],int,FST.Arc,FST.BytesReader)</code> method.
+ @brief Returns a <code>BytesReader</code> to pass to the <code>get(char[], int, FST.Arc, FST.BytesReader)</code> method.
  */
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getBytesReader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -126,13 +140,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFi
 /*!
  @brief Creates a new <code>Builder</code> with ignoreCase set to <code>false</code>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new <code>Builder</code>
  @param ignoreCase if the input case should be ignored.
  */
-- (instancetype)initWithBoolean:(jboolean)ignoreCase;
+- (instancetype __nonnull)initWithBoolean:(jboolean)ignoreCase;
 
 /*!
  @brief Adds an input string and its stemmer override output to this builder.
@@ -146,7 +160,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFi
 /*!
  @brief Returns an <code>StemmerOverrideMap</code> to be used with the <code>StemmerOverrideFilter</code>
  @return an <code>StemmerOverrideMap</code> to be used with the <code>StemmerOverrideFilter</code>
- @throws IOException if an <code>IOException</code> occurs;
+ @throw IOExceptionif an <code>IOException</code> occurs;
  */
 - (OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *)build;
 
@@ -156,9 +170,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilt
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *self, jboolean ignoreCase);
 
@@ -170,4 +184,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFi
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSortedDocValuesTermsEnum
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSortedDocValuesTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValuesTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexSortedDocValuesTermsEnum))
 #define OrgApacheLuceneIndexSortedDocValuesTermsEnum_
 
@@ -27,7 +33,7 @@
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
- @brief Implements a <code>TermsEnum</code> wrapping a provided
+ @brief Implements a <code>TermsEnum</code> wrapping a provided 
  <code>SortedDocValues</code>.
  */
 @interface OrgApacheLuceneIndexSortedDocValuesTermsEnum : OrgApacheLuceneIndexTermsEnum
@@ -37,7 +43,7 @@
 /*!
  @brief Creates a new TermsEnum over the provided values
  */
-- (instancetype)initWithOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values;
 
 - (jint)docFreq;
 
@@ -63,18 +69,26 @@
 
 - (jlong)totalTermFreq;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSortedDocValuesTermsEnum)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexSortedDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValuesTermsEnum *self, OrgApacheLuceneIndexSortedDocValues *values);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexSortedDocValuesTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValuesTermsEnum *self, OrgApacheLuceneIndexSortedDocValues *values);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValuesTermsEnum *new_OrgApacheLuceneIndexSortedDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *values) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValuesTermsEnum *new_OrgApacheLuceneIndexSortedDocValuesTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *values) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValuesTermsEnum *create_OrgApacheLuceneIndexSortedDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *values);
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValuesTermsEnum *create_OrgApacheLuceneIndexSortedDocValuesTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *values);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedDocValuesTermsEnum)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValuesTermsEnum")

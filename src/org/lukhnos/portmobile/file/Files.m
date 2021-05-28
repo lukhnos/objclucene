@@ -28,7 +28,18 @@
 #include "org/lukhnos/portmobile/file/StandardOpenOption.h"
 #include "org/lukhnos/portmobile/file/attribute/BasicFileAttributes.h"
 
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/Files must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgLukhnosPortmobileFileFiles
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgLukhnosPortmobileFileFiles_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgLukhnosPortmobileFilePath *)createDirectoriesWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)dir {
   return OrgLukhnosPortmobileFileFiles_createDirectoriesWithOrgLukhnosPortmobileFilePath_(dir);
@@ -125,43 +136,75 @@
   return OrgLukhnosPortmobileFileFiles_readAttributesWithOrgLukhnosPortmobileFilePath_withIOSClass_(path, clz);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgLukhnosPortmobileFileFiles_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "createDirectoriesWithOrgLukhnosPortmobileFilePath:", "createDirectories", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
-    { "newByteChannelWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardOpenOption:", "newByteChannel", "Ljava.nio.channels.SeekableByteChannel;", 0x9, "Ljava.io.IOException;", NULL },
-    { "createFileWithOrgLukhnosPortmobileFilePath:", "createFile", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
-    { "sizeWithOrgLukhnosPortmobileFilePath:", "size", "J", 0x9, "Ljava.io.IOException;", NULL },
-    { "existsWithOrgLukhnosPortmobileFilePath:", "exists", "Z", 0x9, NULL, NULL },
-    { "notExistsWithOrgLukhnosPortmobileFilePath:", "notExists", "Z", 0x9, NULL, NULL },
-    { "isDirectoryWithOrgLukhnosPortmobileFilePath:", "isDirectory", "Z", 0x9, NULL, NULL },
-    { "isWritableWithOrgLukhnosPortmobileFilePath:", "isWritable", "Z", 0x9, NULL, NULL },
-    { "newOutputStreamWithOrgLukhnosPortmobileFilePath:", "newOutputStream", "Ljava.io.FileOutputStream;", 0x9, "Ljava.io.IOException;", NULL },
-    { "newInputStreamWithOrgLukhnosPortmobileFilePath:", "newInputStream", "Ljava.io.FileInputStream;", 0x9, "Ljava.io.IOException;", NULL },
-    { "newBufferedReaderWithOrgLukhnosPortmobileFilePath:withJavaNioCharsetCharset:", "newBufferedReader", "Ljava.io.BufferedReader;", 0x9, "Ljava.io.IOException;", NULL },
-    { "newDirectoryStreamWithOrgLukhnosPortmobileFilePath:", "newDirectoryStream", "Lorg.lukhnos.portmobile.file.DirectoryStream;", 0x9, "Ljava.io.IOException;", "(Lorg/lukhnos/portmobile/file/Path;)Lorg/lukhnos/portmobile/file/DirectoryStream<Lorg/lukhnos/portmobile/file/Path;>;" },
-    { "deleteIfExistsWithOrgLukhnosPortmobileFilePath:", "deleteIfExists", "Z", 0x9, "Ljava.io.IOException;", NULL },
-    { "createTempFileWithOrgLukhnosPortmobileFilePath:withNSString:withNSString:", "createTempFile", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
-    { "copy__WithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardCopyOptionArray:", "copy", "Lorg.lukhnos.portmobile.file.Path;", 0x89, "Ljava.io.IOException;", NULL },
-    { "delete__WithOrgLukhnosPortmobileFilePath:", "delete", "V", 0x9, "Ljava.io.IOException;", NULL },
-    { "moveWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardCopyOptionArray:", "move", "Lorg.lukhnos.portmobile.file.Path;", 0x89, "Ljava.io.IOException;", NULL },
-    { "walkFileTreeWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileFileVisitor:", "walkFileTree", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", "(Lorg/lukhnos/portmobile/file/Path;Lorg/lukhnos/portmobile/file/FileVisitor<-Lorg/lukhnos/portmobile/file/Path;>;)Lorg/lukhnos/portmobile/file/Path;" },
-    { "createTempDirectoryWithNSString:", "createTempDirectory", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
-    { "createTempDirectoryWithOrgLukhnosPortmobileFilePath:withNSString:", "createTempDirectory", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
-    { "readAttributesWithOrgLukhnosPortmobileFilePath:withIOSClass:", "readAttributes", "Lorg.lukhnos.portmobile.file.attribute.BasicFileAttributes;", 0x9, "Lorg.lukhnos.portmobile.file.NoSuchFileException;", "(Lorg/lukhnos/portmobile/file/Path;Ljava/lang/Class<*>;)Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;" },
-    { "init", "Files", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x9, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LJavaNioChannelsSeekableByteChannel;", 0x9, 3, 4, 2, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x9, 5, 1, 2, -1, -1, -1 },
+    { NULL, "J", 0x9, 6, 1, 2, -1, -1, -1 },
+    { NULL, "Z", 0x9, 7, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 8, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 9, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 10, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaIoFileOutputStream;", 0x9, 11, 1, 2, -1, -1, -1 },
+    { NULL, "LJavaIoFileInputStream;", 0x9, 12, 1, 2, -1, -1, -1 },
+    { NULL, "LJavaIoBufferedReader;", 0x9, 13, 14, 2, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileDirectoryStream;", 0x9, 15, 1, 2, 16, -1, -1 },
+    { NULL, "Z", 0x9, 17, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x9, 18, 19, 2, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x89, 20, 21, 2, -1, -1, -1 },
+    { NULL, "V", 0x9, 22, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x89, 23, 21, 2, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x9, 24, 25, 2, 26, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x9, 27, 28, 2, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFilePath;", 0x9, 27, 29, 2, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileAttributeBasicFileAttributes;", 0x9, 30, 31, 32, 33, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFiles = { 2, "Files", "org.lukhnos.portmobile.file", NULL, 0x1, 22, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(createDirectoriesWithOrgLukhnosPortmobileFilePath:);
+  methods[2].selector = @selector(newByteChannelWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardOpenOption:);
+  methods[3].selector = @selector(createFileWithOrgLukhnosPortmobileFilePath:);
+  methods[4].selector = @selector(sizeWithOrgLukhnosPortmobileFilePath:);
+  methods[5].selector = @selector(existsWithOrgLukhnosPortmobileFilePath:);
+  methods[6].selector = @selector(notExistsWithOrgLukhnosPortmobileFilePath:);
+  methods[7].selector = @selector(isDirectoryWithOrgLukhnosPortmobileFilePath:);
+  methods[8].selector = @selector(isWritableWithOrgLukhnosPortmobileFilePath:);
+  methods[9].selector = @selector(newOutputStreamWithOrgLukhnosPortmobileFilePath:);
+  methods[10].selector = @selector(newInputStreamWithOrgLukhnosPortmobileFilePath:);
+  methods[11].selector = @selector(newBufferedReaderWithOrgLukhnosPortmobileFilePath:withJavaNioCharsetCharset:);
+  methods[12].selector = @selector(newDirectoryStreamWithOrgLukhnosPortmobileFilePath:);
+  methods[13].selector = @selector(deleteIfExistsWithOrgLukhnosPortmobileFilePath:);
+  methods[14].selector = @selector(createTempFileWithOrgLukhnosPortmobileFilePath:withNSString:withNSString:);
+  methods[15].selector = @selector(copy__WithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardCopyOptionArray:);
+  methods[16].selector = @selector(delete__WithOrgLukhnosPortmobileFilePath:);
+  methods[17].selector = @selector(moveWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardCopyOptionArray:);
+  methods[18].selector = @selector(walkFileTreeWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileFileVisitor:);
+  methods[19].selector = @selector(createTempDirectoryWithNSString:);
+  methods[20].selector = @selector(createTempDirectoryWithOrgLukhnosPortmobileFilePath:withNSString:);
+  methods[21].selector = @selector(readAttributesWithOrgLukhnosPortmobileFilePath:withIOSClass:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "createDirectories", "LOrgLukhnosPortmobileFilePath;", "LJavaIoIOException;", "newByteChannel", "LOrgLukhnosPortmobileFilePath;LOrgLukhnosPortmobileFileStandardOpenOption;", "createFile", "size", "exists", "notExists", "isDirectory", "isWritable", "newOutputStream", "newInputStream", "newBufferedReader", "LOrgLukhnosPortmobileFilePath;LJavaNioCharsetCharset;", "newDirectoryStream", "(Lorg/lukhnos/portmobile/file/Path;)Lorg/lukhnos/portmobile/file/DirectoryStream<Lorg/lukhnos/portmobile/file/Path;>;", "deleteIfExists", "createTempFile", "LOrgLukhnosPortmobileFilePath;LNSString;LNSString;", "copy", "LOrgLukhnosPortmobileFilePath;LOrgLukhnosPortmobileFilePath;[LOrgLukhnosPortmobileFileStandardCopyOption;", "delete", "move", "walkFileTree", "LOrgLukhnosPortmobileFilePath;LOrgLukhnosPortmobileFileFileVisitor;", "(Lorg/lukhnos/portmobile/file/Path;Lorg/lukhnos/portmobile/file/FileVisitor<-Lorg/lukhnos/portmobile/file/Path;>;)Lorg/lukhnos/portmobile/file/Path;", "createTempDirectory", "LNSString;", "LOrgLukhnosPortmobileFilePath;LNSString;", "readAttributes", "LOrgLukhnosPortmobileFilePath;LIOSClass;", "LOrgLukhnosPortmobileFileNoSuchFileException;", "(Lorg/lukhnos/portmobile/file/Path;Ljava/lang/Class<*>;)Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFiles = { "Files", "org.lukhnos.portmobile.file", ptrTable, methods, NULL, 7, 0x1, 22, 0, -1, -1, -1, -1, -1 };
   return &_OrgLukhnosPortmobileFileFiles;
 }
 
 @end
+
+void OrgLukhnosPortmobileFileFiles_init(OrgLukhnosPortmobileFileFiles *self) {
+  NSObject_init(self);
+}
+
+OrgLukhnosPortmobileFileFiles *new_OrgLukhnosPortmobileFileFiles_init() {
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileFiles, init)
+}
+
+OrgLukhnosPortmobileFileFiles *create_OrgLukhnosPortmobileFileFiles_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileFiles, init)
+}
 
 OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createDirectoriesWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *dir) {
   OrgLukhnosPortmobileFileFiles_initialize();
@@ -349,18 +392,6 @@ OrgLukhnosPortmobileFileAttributeBasicFileAttributes *OrgLukhnosPortmobileFileFi
     return create_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_initWithJavaIoFile_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile]);
   }
   @throw create_OrgLukhnosPortmobileFileNoSuchFileException_init();
-}
-
-void OrgLukhnosPortmobileFileFiles_init(OrgLukhnosPortmobileFileFiles *self) {
-  NSObject_init(self);
-}
-
-OrgLukhnosPortmobileFileFiles *new_OrgLukhnosPortmobileFileFiles_init() {
-  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileFiles, init)
-}
-
-OrgLukhnosPortmobileFileFiles *create_OrgLukhnosPortmobileFileFiles_init() {
-  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileFiles, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileFiles)

@@ -10,18 +10,17 @@
 #include "org/apache/lucene/analysis/gl/GalicianMinimalStemmer.h"
 #include "org/apache/lucene/analysis/pt/RSLPStemmerBase.h"
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_get_pluralStep();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/gl/GalicianMinimalStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_get_pluralStep(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_pluralStep;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer, pluralStep, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer)
 
 @implementation OrgApacheLuceneAnalysisGlGalicianMinimalStemmer
-
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len {
-  return [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_pluralStep)) applyWithCharArray:s withInt:len];
-}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -30,23 +29,35 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (jint)stemWithCharArray:(IOSCharArray *)s
+                  withInt:(jint)len {
+  return [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_pluralStep)) applyWithCharArray:s withInt:len];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "pluralStep", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 2, -1, -1 },
+  };
+  static const void *ptrTable[] = { "stem", "[CI", &OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_pluralStep };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGlGalicianMinimalStemmer = { "GalicianMinimalStemmer", "org.apache.lucene.analysis.gl", ptrTable, methods, fields, 7, 0x1, 2, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisGlGalicianMinimalStemmer class]) {
     JreStrongAssign(&OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_pluralStep, [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseWithIOSClass_withNSString_(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_class_(), @"galician.rslp"))) getWithId:@"Plural"]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "init", "GalicianMinimalStemmer", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "pluralStep", "pluralStep", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_pluralStep, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGlGalicianMinimalStemmer = { 2, "GalicianMinimalStemmer", "org.apache.lucene.analysis.gl", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer;
 }
 
 @end

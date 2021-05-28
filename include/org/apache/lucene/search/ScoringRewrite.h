@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchScoringRewrite
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchScoringRewrite_) && (INCLUDE_ALL_OrgApacheLuceneSearchScoringRewrite || defined(INCLUDE_OrgApacheLuceneSearchScoringRewrite))
 #define OrgApacheLuceneSearchScoringRewrite_
 
@@ -27,19 +33,16 @@
 
 /*!
  @brief Base rewrite method that translates each term into a query, and keeps
- the scores as computed by the query.
+  the scores as computed by the query.
  <p>
-  Only public to be accessible by spans package. 
  */
 @interface OrgApacheLuceneSearchScoringRewrite : OrgApacheLuceneSearchTermCollectingRewrite
-
-+ (OrgApacheLuceneSearchScoringRewrite *)SCORING_BOOLEAN_REWRITE;
-
-+ (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)CONSTANT_SCORE_BOOLEAN_REWRITE;
+@property (readonly, class, strong) OrgApacheLuceneSearchScoringRewrite *SCORING_BOOLEAN_REWRITE NS_SWIFT_NAME(SCORING_BOOLEAN_REWRITE);
+@property (readonly, class, strong) OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *CONSTANT_SCORE_BOOLEAN_REWRITE NS_SWIFT_NAME(CONSTANT_SCORE_BOOLEAN_REWRITE);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                    withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
@@ -48,10 +51,14 @@
 
 /*!
  @brief This method is called after every new term to check if the number of max clauses
- (e.g. in BooleanQuery) is not exceeded.
- Throws the corresponding <code>RuntimeException</code>. 
+  (e.g.in BooleanQuery) is not exceeded.
+ Throws the corresponding <code>RuntimeException</code>.
  */
 - (void)checkMaxClauseCountWithInt:(jint)count;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivate NS_UNAVAILABLE;
 
 @end
 
@@ -59,35 +66,33 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchScoringRewrite)
 
 /*!
  @brief A rewrite method that first translates each term into
- <code>BooleanClause.Occur.SHOULD</code> clause in a
- BooleanQuery, and keeps the scores as computed by the
- query.
- Note that typically such scores are
- meaningless to the user, and require non-trivial CPU
- to compute, so it's almost always better to use <code>MultiTermQuery.CONSTANT_SCORE_REWRITE</code>
+   <code>BooleanClause.Occur.SHOULD</code> clause in a
+   BooleanQuery, and keeps the scores as computed by the
+   query.Note that typically such scores are
+   meaningless to the user, and require non-trivial CPU
+   to compute, so it's almost always better to use <code>MultiTermQuery.CONSTANT_SCORE_REWRITE</code>
   instead.
  <p><b>NOTE</b>: This rewrite method will hit <code>BooleanQuery.TooManyClauses</code>
   if the number of terms
- exceeds <code>BooleanQuery.getMaxClauseCount</code>.
+   exceeds <code>BooleanQuery.getMaxClauseCount</code>.
  - seealso: MultiTermQuery#setRewriteMethod
  */
-inline OrgApacheLuceneSearchScoringRewrite *OrgApacheLuceneSearchScoringRewrite_get_SCORING_BOOLEAN_REWRITE();
+inline OrgApacheLuceneSearchScoringRewrite *OrgApacheLuceneSearchScoringRewrite_get_SCORING_BOOLEAN_REWRITE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchScoringRewrite *OrgApacheLuceneSearchScoringRewrite_SCORING_BOOLEAN_REWRITE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchScoringRewrite, SCORING_BOOLEAN_REWRITE, OrgApacheLuceneSearchScoringRewrite *)
 
 /*!
  @brief Like <code>SCORING_BOOLEAN_REWRITE</code> except
- scores are not computed.
- Instead, each matching
- document receives a constant score equal to the
- query's boost.
+   scores are not computed.Instead, each matching
+   document receives a constant score equal to the
+   query's boost.
  <p><b>NOTE</b>: This rewrite method will hit <code>BooleanQuery.TooManyClauses</code>
   if the number of terms
- exceeds <code>BooleanQuery.getMaxClauseCount</code>.
+   exceeds <code>BooleanQuery.getMaxClauseCount</code>.
  - seealso: MultiTermQuery#setRewriteMethod
  */
-inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchScoringRewrite_get_CONSTANT_SCORE_BOOLEAN_REWRITE();
+inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchScoringRewrite_get_CONSTANT_SCORE_BOOLEAN_REWRITE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchScoringRewrite_CONSTANT_SCORE_BOOLEAN_REWRITE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchScoringRewrite, CONSTANT_SCORE_BOOLEAN_REWRITE, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
@@ -126,7 +131,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoringRewrite)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchScoringRewrite:(OrgApacheLuceneSearchScoringRewrite *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchScoringRewrite:(OrgApacheLuceneSearchScoringRewrite *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -156,6 +165,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoringRewrite_ParallelArraysTer
 @class IOSFloatArray;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class OrgApacheLuceneUtilCounter;
 
 /*!
  @brief Special implementation of BytesStartArray that keeps parallel arrays for boost and docFreq
@@ -168,13 +178,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoringRewrite_ParallelArraysTer
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)initSize;
+- (instancetype __nonnull)initWithInt:(jint)initSize;
 
 - (IOSIntArray *)clear;
 
 - (IOSIntArray *)grow;
 
 - (IOSIntArray *)init__ OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+       withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -193,4 +208,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByte
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchScoringRewrite")

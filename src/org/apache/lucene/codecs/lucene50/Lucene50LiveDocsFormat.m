@@ -3,13 +3,12 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/lucene50/Lucene50LiveDocsFormat.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/Character.h"
 #include "java/lang/Long.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Collection.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/codecs/LiveDocsFormat.h"
@@ -26,28 +25,32 @@
 #include "org/apache/lucene/util/FixedBitSet.h"
 #include "org/apache/lucene/util/MutableBits.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/lucene50/Lucene50LiveDocsFormat must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 /*!
  @brief extension of live docs
  */
-inline NSString *OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_get_EXTENSION();
+inline NSString *OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_get_EXTENSION(void);
 static NSString *OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_EXTENSION = @"liv";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat, EXTENSION, NSString *)
 
 /*!
  @brief codec of live docs
  */
-inline NSString *OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_get_CODEC_NAME();
+inline NSString *OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_get_CODEC_NAME(void);
 static NSString *OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_CODEC_NAME = @"Lucene50LiveDocs";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat, CODEC_NAME, NSString *)
 
 /*!
  @brief supported version range
  */
-inline jint OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_get_VERSION_START();
+inline jint OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_get_VERSION_START(void);
 #define OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_VERSION_START 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat, VERSION_START, jint)
 
-inline jint OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_get_VERSION_CURRENT();
+inline jint OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_get_VERSION_CURRENT(void);
 #define OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_VERSION_CURRENT 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat, VERSION_CURRENT, jint)
 
@@ -68,7 +71,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneUtilMutableBits>)newLiveDocsWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)existing {
   OrgApacheLuceneUtilFixedBitSet *fbs = (OrgApacheLuceneUtilFixedBitSet *) cast_chk(existing, [OrgApacheLuceneUtilFixedBitSet class]);
-  return [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(fbs)) clone];
+  return [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(fbs)) java_clone];
 }
 
 - (id<OrgApacheLuceneUtilBits>)readLiveDocsWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
@@ -79,9 +82,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint length = [info->info_ maxDoc];
   {
     OrgApacheLuceneStoreChecksumIndexInput *input = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) openChecksumInputWithNSString:name withOrgApacheLuceneStoreIOContext:context];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      NSException *priorE = nil;
+      JavaLangThrowable *priorE = nil;
       @try {
         OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(input, OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_CODEC_NAME, OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_VERSION_START, OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_VERSION_CURRENT, [info->info_ getId], JavaLangLong_toStringWithLong_withInt_(gen, JavaLangCharacter_MAX_RADIX));
         IOSLongArray *data = [IOSLongArray arrayWithLength:OrgApacheLuceneUtilFixedBitSet_bits2wordsWithInt_(length)];
@@ -94,14 +97,14 @@ J2OBJC_IGNORE_DESIGNATED_END
         }
         return fbs;
       }
-      @catch (NSException *exception) {
+      @catch (JavaLangThrowable *exception) {
         priorE = exception;
       }
       @finally {
-        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withNSException_(input, priorE);
+        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(input, priorE);
       }
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -110,10 +113,12 @@ J2OBJC_IGNORE_DESIGNATED_END
         if (__primaryException1 != nil) {
           @try {
             [input close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [input close];
         }
       }
@@ -136,7 +141,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   IOSLongArray *data = [fbs getBits];
   {
     OrgApacheLuceneStoreIndexOutput *output = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) createOutputWithNSString:name withOrgApacheLuceneStoreIOContext:context];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(output, OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_CODEC_NAME, OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_VERSION_CURRENT, [info->info_ getId], JavaLangLong_toStringWithLong_withInt_(gen, JavaLangCharacter_MAX_RADIX));
       for (jint i = 0; i < ((IOSLongArray *) nil_chk(data))->size_; i++) {
@@ -144,7 +149,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(output);
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -153,10 +158,12 @@ J2OBJC_IGNORE_DESIGNATED_END
         if (__primaryException1 != nil) {
           @try {
             [output close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [output close];
         }
       }
@@ -172,21 +179,32 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lucene50LiveDocsFormat", NULL, 0x1, NULL, NULL },
-    { "newLiveDocsWithInt:", "newLiveDocs", "Lorg.apache.lucene.util.MutableBits;", 0x1, "Ljava.io.IOException;", NULL },
-    { "newLiveDocsWithOrgApacheLuceneUtilBits:", "newLiveDocs", "Lorg.apache.lucene.util.MutableBits;", 0x1, "Ljava.io.IOException;", NULL },
-    { "readLiveDocsWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreIOContext:", "readLiveDocs", "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeLiveDocsWithOrgApacheLuceneUtilMutableBits:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withInt:withOrgApacheLuceneStoreIOContext:", "writeLiveDocs", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "filesWithOrgApacheLuceneIndexSegmentCommitInfo:withJavaUtilCollection:", "files", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/util/Collection<Ljava/lang/String;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilMutableBits;", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilMutableBits;", 0x1, 0, 3, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, 4, 5, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, 2, 10, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(newLiveDocsWithInt:);
+  methods[2].selector = @selector(newLiveDocsWithOrgApacheLuceneUtilBits:);
+  methods[3].selector = @selector(readLiveDocsWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreIOContext:);
+  methods[4].selector = @selector(writeLiveDocsWithOrgApacheLuceneUtilMutableBits:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withInt:withOrgApacheLuceneStoreIOContext:);
+  methods[5].selector = @selector(filesWithOrgApacheLuceneIndexSegmentCommitInfo:withJavaUtilCollection:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "EXTENSION", "EXTENSION", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_EXTENSION, NULL, .constantValue.asLong = 0 },
-    { "CODEC_NAME", "CODEC_NAME", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_CODEC_NAME, NULL, .constantValue.asLong = 0 },
-    { "VERSION_START", "VERSION_START", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_VERSION_START },
-    { "VERSION_CURRENT", "VERSION_CURRENT", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_VERSION_CURRENT },
+    { "EXTENSION", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 11, -1, -1 },
+    { "CODEC_NAME", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
+    { "VERSION_START", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_VERSION_START, 0x1a, -1, -1, -1, -1 },
+    { "VERSION_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_VERSION_CURRENT, 0x1a, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat = { 2, "Lucene50LiveDocsFormat", "org.apache.lucene.codecs.lucene50", NULL, 0x11, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "newLiveDocs", "I", "LJavaIoIOException;", "LOrgApacheLuceneUtilBits;", "readLiveDocs", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentCommitInfo;LOrgApacheLuceneStoreIOContext;", "writeLiveDocs", "LOrgApacheLuceneUtilMutableBits;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentCommitInfo;ILOrgApacheLuceneStoreIOContext;", "files", "LOrgApacheLuceneIndexSegmentCommitInfo;LJavaUtilCollection;", "(Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/util/Collection<Ljava/lang/String;>;)V", &OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_EXTENSION, &OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_CODEC_NAME };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat = { "Lucene50LiveDocsFormat", "org.apache.lucene.codecs.lucene50", ptrTable, methods, fields, 7, 0x11, 6, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat;
 }
 

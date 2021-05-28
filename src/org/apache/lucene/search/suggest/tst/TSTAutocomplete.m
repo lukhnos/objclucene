@@ -11,6 +11,10 @@
 #include "org/apache/lucene/search/suggest/tst/TSTAutocomplete.h"
 #include "org/apache/lucene/search/suggest/tst/TernaryTreeNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/tst/TSTAutocomplete must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSuggestTstTSTAutocomplete
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -26,7 +30,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                               withInt:(jint)hi
 withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:(OrgApacheLuceneSearchSuggestTstTernaryTreeNode *)root {
   if (lo > hi) return;
-  jint mid = (lo + hi) / 2;
+  jint mid = JreIntDiv((lo + hi), 2);
   root = [self insertWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:root withJavaLangCharSequence:(NSString *) cast_chk(IOSObjectArray_Get(nil_chk(tokens), mid), [NSString class]) withId:IOSObjectArray_Get(nil_chk(vals), mid) withInt:0];
   [self balancedTreeWithNSObjectArray:tokens withNSObjectArray:vals withInt:lo withInt:mid - 1 withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:root];
   [self balancedTreeWithNSObjectArray:tokens withNSObjectArray:vals withInt:mid + 1 withInt:hi withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:root];
@@ -36,14 +40,14 @@ withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:(OrgApacheLuceneSearchSuggest
                                                                                     withJavaLangCharSequence:(id<JavaLangCharSequence>)s
                                                                                                       withId:(id)val
                                                                                                      withInt:(jint)x {
-  if (s == nil || [s length] <= x) {
+  if (s == nil || [s java_length] <= x) {
     return currentNode;
   }
   if (currentNode == nil) {
     OrgApacheLuceneSearchSuggestTstTernaryTreeNode *newNode = create_OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init();
     newNode->splitchar_ = [s charAtWithInt:x];
     currentNode = newNode;
-    if (x < [s length] - 1) {
+    if (x < [s java_length] - 1) {
       JreStrongAssign(&currentNode->eqKid_, [self insertWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:currentNode->eqKid_ withJavaLangCharSequence:s withId:val withInt:x + 1]);
     }
     else {
@@ -56,7 +60,7 @@ withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:(OrgApacheLuceneSearchSuggest
     JreStrongAssign(&currentNode->loKid_, [self insertWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:currentNode->loKid_ withJavaLangCharSequence:s withId:val withInt:x]);
   }
   else if (currentNode->splitchar_ == [s charAtWithInt:x]) {
-    if (x < [s length] - 1) {
+    if (x < [s java_length] - 1) {
       JreStrongAssign(&currentNode->eqKid_, [self insertWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:currentNode->eqKid_ withJavaLangCharSequence:s withId:val withInt:x + 1]);
     }
     else {
@@ -74,14 +78,14 @@ withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:(OrgApacheLuceneSearchSuggest
 - (JavaUtilArrayList *)prefixCompletionWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:(OrgApacheLuceneSearchSuggestTstTernaryTreeNode *)root
                                                                  withJavaLangCharSequence:(id<JavaLangCharSequence>)s
                                                                                   withInt:(jint)x {
-  OrgApacheLuceneSearchSuggestTstTernaryTreeNode *p = root;
+  OrgApacheLuceneSearchSuggestTstTernaryTreeNode *p = JreRetainedLocalValue(root);
   JavaUtilArrayList *suggest = create_JavaUtilArrayList_init();
   while (p != nil) {
     if ([((id<JavaLangCharSequence>) nil_chk(s)) charAtWithInt:x] < p->splitchar_) {
       p = p->loKid_;
     }
     else if ([s charAtWithInt:x] == p->splitchar_) {
-      if (x == [s length] - 1) {
+      if (x == [s java_length] - 1) {
         break;
       }
       else {
@@ -106,7 +110,7 @@ withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:(OrgApacheLuceneSearchSuggest
   JavaUtilStack *st = create_JavaUtilStack_init();
   [st pushWithId:p];
   while (![st empty]) {
-    OrgApacheLuceneSearchSuggestTstTernaryTreeNode *top = [st peek];
+    OrgApacheLuceneSearchSuggestTstTernaryTreeNode *top = JreRetainedLocalValue([st peek]);
     [st pop];
     if (((OrgApacheLuceneSearchSuggestTstTernaryTreeNode *) nil_chk(top))->token_ != nil) {
       [suggest addWithId:top];
@@ -125,13 +129,22 @@ withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:(OrgApacheLuceneSearchSuggest
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TSTAutocomplete", NULL, 0x0, NULL, NULL },
-    { "balancedTreeWithNSObjectArray:withNSObjectArray:withInt:withInt:withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:", "balancedTree", "V", 0x1, NULL, NULL },
-    { "insertWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:withJavaLangCharSequence:withId:withInt:", "insert", "Lorg.apache.lucene.search.suggest.tst.TernaryTreeNode;", 0x1, NULL, NULL },
-    { "prefixCompletionWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:withJavaLangCharSequence:withInt:", "prefixCompletion", "Ljava.util.ArrayList;", 0x1, NULL, "(Lorg/apache/lucene/search/suggest/tst/TernaryTreeNode;Ljava/lang/CharSequence;I)Ljava/util/ArrayList<Lorg/apache/lucene/search/suggest/tst/TernaryTreeNode;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestTstTernaryTreeNode;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilArrayList;", 0x1, 4, 5, -1, 6, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestTstTSTAutocomplete = { 2, "TSTAutocomplete", "org.apache.lucene.search.suggest.tst", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(balancedTreeWithNSObjectArray:withNSObjectArray:withInt:withInt:withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:);
+  methods[2].selector = @selector(insertWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:withJavaLangCharSequence:withId:withInt:);
+  methods[3].selector = @selector(prefixCompletionWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:withJavaLangCharSequence:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "balancedTree", "[LNSObject;[LNSObject;IILOrgApacheLuceneSearchSuggestTstTernaryTreeNode;", "insert", "LOrgApacheLuceneSearchSuggestTstTernaryTreeNode;LJavaLangCharSequence;LNSObject;I", "prefixCompletion", "LOrgApacheLuceneSearchSuggestTstTernaryTreeNode;LJavaLangCharSequence;I", "(Lorg/apache/lucene/search/suggest/tst/TernaryTreeNode;Ljava/lang/CharSequence;I)Ljava/util/ArrayList<Lorg/apache/lucene/search/suggest/tst/TernaryTreeNode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestTstTSTAutocomplete = { "TSTAutocomplete", "org.apache.lucene.search.suggest.tst", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestTstTSTAutocomplete;
 }
 

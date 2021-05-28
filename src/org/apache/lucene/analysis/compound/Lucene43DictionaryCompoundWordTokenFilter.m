@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/compound/Lucene43DictionaryCompoundWordTokenFilter.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -16,6 +17,12 @@
 #include "org/apache/lucene/analysis/compound/Lucene43DictionaryCompoundWordTokenFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/Lucene43DictionaryCompoundWordTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter__Annotations$0(void);
 
 @implementation OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter
 
@@ -36,7 +43,7 @@
 }
 
 - (void)decompose {
-  jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
+  jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) java_length];
   for (jint i = 0; i <= len - self->minSubwordSize_; ++i) {
     OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken *longestMatchToken = nil;
     for (jint j = self->minSubwordSize_; j <= self->maxSubwordSize_; ++j) {
@@ -46,7 +53,7 @@
       if ([((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(dictionary_)) containsWithCharArray:[termAtt_ buffer] withInt:i withInt:j]) {
         if (self->onlyLongestMatch_) {
           if (longestMatchToken != nil) {
-            if ([((id<JavaLangCharSequence>) nil_chk(longestMatchToken->txt_)) length] < j) {
+            if ([((id<JavaLangCharSequence>) nil_chk(longestMatchToken->txt_)) java_length] < j) {
               longestMatchToken = create_OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_withInt_withInt_(self, i, j);
             }
           }
@@ -65,17 +72,21 @@
   }
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:", "Lucene43DictionaryCompoundWordTokenFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:withInt:withInt:withInt:withBoolean:", "Lucene43DictionaryCompoundWordTokenFilter", NULL, 0x1, NULL, NULL },
-    { "decompose", NULL, "V", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter = { 2, "Lucene43DictionaryCompoundWordTokenFilter", "org.apache.lucene.analysis.compound", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:withInt:withInt:withInt:withBoolean:);
+  methods[2].selector = @selector(decompose);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;", "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisUtilCharArraySet;IIIZ", (void *)&OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter = { "Lucene43DictionaryCompoundWordTokenFilter", "org.apache.lucene.analysis.compound", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, 2 };
   return &_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter;
 }
 
@@ -109,6 +120,10 @@ OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *new_Or
 
 OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *create_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jint minWordSize, jint minSubwordSize, jint maxSubwordSize, jboolean onlyLongestMatch) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_, input, dictionary, minWordSize, minSubwordSize, maxSubwordSize, onlyLongestMatch)
+}
+
+IOSObjectArray *OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter)

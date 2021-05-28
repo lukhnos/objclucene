@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer))
 #define OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_
 
@@ -27,16 +33,16 @@
 
 /*!
  @brief <p>
- Completion index (.cmp) is opened and read at instantiation to read in <code>SuggestField</code>
- numbers and their FST offsets in the Completion dictionary (.lkp).
+  Completion index (.cmp) is opened and read at instantiation to read in <code>SuggestField</code>
+  numbers and their FST offsets in the Completion dictionary (.lkp).
  </p>
- <p>
- Completion dictionary (.lkp) is opened at instantiation and a field's FST is loaded
- into memory the first time it is requested via <code>terms(String)</code>.
- </p>
- <p>
- NOTE: Only the footer is validated for Completion dictionary (.lkp) and not the checksum due
- to random access pattern and checksum validation being too costly at instantiation
+  <p>
+  Completion dictionary (.lkp) is opened at instantiation and a field's FST is loaded
+  into memory the first time it is requested via <code>terms(String)</code>.
+  </p>
+  <p>
+  NOTE: Only the footer is validated for Completion dictionary (.lkp) and not the checksum due
+  to random access pattern and checksum validation being too costly at instantiation 
  </p>
  */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer : OrgApacheLuceneCodecsFieldsProducer
@@ -61,20 +67,28 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *self, OrgApacheLuceneIndexSegmentReadState *state);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *self, OrgApacheLuceneIndexSegmentReadState *state);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state);
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer")

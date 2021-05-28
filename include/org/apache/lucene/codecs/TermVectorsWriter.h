@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsTermVectorsWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsTermVectorsWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsWriter || defined(INCLUDE_OrgApacheLuceneCodecsTermVectorsWriter))
 #define OrgApacheLuceneCodecsTermVectorsWriter_
 
@@ -28,23 +34,23 @@
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
- @brief Codec API for writing term vectors:
+ @brief Codec API for writing term vectors: 
  <ol>
- <li>For every document, <code>startDocument(int)</code> is called,
- informing the Codec how many fields will be written.
- <li><code>startField(FieldInfo,int,boolean,boolean,boolean)</code> is called for 
- each field in the document, informing the codec how many terms
- will be written for that field, and whether or not positions,
- offsets, or payloads are enabled.
- <li>Within each field, <code>startTerm(BytesRef,int)</code> is called
- for each term.
+    <li>For every document, <code>startDocument(int)</code> is called,
+        informing the Codec how many fields will be written.
+ <li><code>startField(FieldInfo, int, boolean, boolean, boolean)</code> is called for 
+        each field in the document, informing the codec how many terms
+        will be written for that field, and whether or not positions,
+        offsets, or payloads are enabled.   
+ <li>Within each field, <code>startTerm(BytesRef, int)</code> is called
+        for each term.   
  <li>If offsets and/or positions are enabled, then 
- <code>addPosition(int,int,int,BytesRef)</code> will be called for each term
- occurrence.
- <li>After all documents have been written, <code>finish(FieldInfos,int)</code> 
- is called for verification/sanity-checks.
+        <code>addPosition(int, int, int, BytesRef)</code> will be called for each term
+        occurrence.   
+ <li>After all documents have been written, <code>finish(FieldInfos, int)</code> 
+        is called for verification/sanity-checks.   
  <li>Finally the writer is closed (<code>close()</code>)
- </ol>
+  </ol>
  */
 @interface OrgApacheLuceneCodecsTermVectorsWriter : NSObject < JavaIoCloseable >
 
@@ -61,14 +67,14 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 /*!
  @brief Called by IndexWriter when writing new segments.
  <p>
- This is an expert API that allows the codec to consume 
- positions and offsets directly from the indexer.
+  This is an expert API that allows the codec to consume 
+  positions and offsets directly from the indexer. 
  <p>
- The default implementation calls <code>addPosition(int,int,int,BytesRef)</code>,
- but subclasses can override this if they want to efficiently write 
- all the positions, then all the offsets, for example.
+  The default implementation calls <code>addPosition(int, int, int, BytesRef)</code>,
+  but subclasses can override this if they want to efficiently write 
+  all the positions, then all the offsets, for example. 
  <p>
- NOTE: This API is extremely expert and subject to change or removal!!!
+  NOTE: This API is extremely expert and subject to change or removal!!!
  */
 - (void)addProxWithInt:(jint)numProx
 withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)positions
@@ -78,12 +84,11 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets;
 
 /*!
  @brief Called before <code>close()</code>, passing in the number
- of documents that were written.
- Note that this is 
- intentionally redundant (equivalent to the number of
- calls to <code>startDocument(int)</code>, but a Codec should
- check that this is the case to detect the JRE bug described 
- in LUCENE-1282. 
+   of documents that were written.Note that this is 
+   intentionally redundant (equivalent to the number of
+   calls to <code>startDocument(int)</code>, but a Codec should
+   check that this is the case to detect the JRE bug described 
+   in LUCENE-1282.
  */
 - (void)finishWithOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fis
                                          withInt:(jint)numDocs;
@@ -105,31 +110,30 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets;
 
 /*!
  @brief Merges in the term vectors from the readers in 
- <code>mergeState</code>.
- The default implementation skips
- over deleted documents, and uses <code>startDocument(int)</code>,
- <code>startField(FieldInfo,int,boolean,boolean,boolean)</code>, 
- <code>startTerm(BytesRef,int)</code>, <code>addPosition(int,int,int,BytesRef)</code>,
- and <code>finish(FieldInfos,int)</code>,
- returning the number of documents that were written.
+   <code>mergeState</code>.The default implementation skips
+   over deleted documents, and uses <code>startDocument(int)</code>,
+   <code>startField(FieldInfo, int, boolean, boolean, boolean)</code>, 
+   <code>startTerm(BytesRef, int)</code>, <code>addPosition(int, int, int, BytesRef)</code>,
+   and <code>finish(FieldInfos, int)</code>,
+   returning the number of documents that were written.
  Implementations can override this method for more sophisticated
- merging (bulk-byte copying, etc). 
+   merging (bulk-byte copying, etc).
  */
 - (jint)mergeWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
 /*!
  @brief Called before writing the term vectors of the document.
- <code>startField(FieldInfo,int,boolean,boolean,boolean)</code> will 
- be called <code>numVectorFields</code> times. Note that if term 
- vectors are enabled, this is called even if the document 
- has no vector fields, in this case <code>numVectorFields</code> 
- will be zero. 
+ <code>startField(FieldInfo, int, boolean, boolean, boolean)</code> will 
+   be called <code>numVectorFields</code> times. Note that if term 
+   vectors are enabled, this is called even if the document 
+   has no vector fields, in this case <code>numVectorFields</code> 
+   will be zero.
  */
 - (void)startDocumentWithInt:(jint)numVectorFields;
 
 /*!
  @brief Called before writing the terms of the field.
- <code>startTerm(BytesRef,int)</code> will be called <code>numTerms</code> times. 
+ <code>startTerm(BytesRef, int)</code> will be called <code>numTerms</code> times.
  */
 - (void)startFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)info
                                             withInt:(jint)numTerms
@@ -139,8 +143,8 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets;
 
 /*!
  @brief Adds a term and its term frequency <code>freq</code>.
- If this field has positions and/or offsets enabled, then
- <code>addPosition(int,int,int,BytesRef)</code> will be called 
+ If this field has positions and/or offsets enabled, then 
+ <code>addPosition(int, int, int, BytesRef)</code> will be called  
  <code>freq</code> times respectively.
  */
 - (void)startTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
@@ -151,13 +155,13 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets;
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Safe (but, slowish) default method to write every
- vector field in the document.
+   vector field in the document.
  */
 - (void)addAllDocVectorsWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)vectors
                     withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
@@ -172,4 +176,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsTermVectorsWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsWriter")

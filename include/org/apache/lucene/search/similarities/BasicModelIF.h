@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelIF
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesBasicModelIF_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIF || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModelIF))
 #define OrgApacheLuceneSearchSimilaritiesBasicModelIF_
 
@@ -32,7 +38,7 @@
 /*!
  @brief Sole constructor: parameter-free
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn;
@@ -45,12 +51,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesBasicModelIF)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBasicModelIF_init(OrgApacheLuceneSearchSimilaritiesBasicModelIF *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIF *new_OrgApacheLuceneSearchSimilaritiesBasicModelIF_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIF *new_OrgApacheLuceneSearchSimilaritiesBasicModelIF_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIF *create_OrgApacheLuceneSearchSimilaritiesBasicModelIF_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIF *create_OrgApacheLuceneSearchSimilaritiesBasicModelIF_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicModelIF)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIF")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreOutputStreamDataOutput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreOutputStreamDataOutput_) && (INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamDataOutput || defined(INCLUDE_OrgApacheLuceneStoreOutputStreamDataOutput))
 #define OrgApacheLuceneStoreOutputStreamDataOutput_
 
@@ -34,7 +40,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)os;
+- (instancetype __nonnull)initWithJavaIoOutputStream:(JavaIoOutputStream *)os;
 
 - (void)close;
 
@@ -43,6 +49,10 @@
 - (void)writeBytesWithByteArray:(IOSByteArray *)b
                         withInt:(jint)offset
                         withInt:(jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -58,4 +68,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreOutputStreamDataOutput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamDataOutput")

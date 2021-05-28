@@ -28,16 +28,24 @@
 #include "org/apache/lucene/search/similarities/Similarity.h"
 #include "org/apache/lucene/util/InfoStream.h"
 #include "org/apache/lucene/util/PrintStreamInfoStream.h"
-#include "org/apache/lucene/util/SetOnce.h"
+#include "org/lukhnos/portmobile/lucene/WeakSetOnce.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexWriterConfig must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexIndexWriterConfig () {
  @public
-  OrgApacheLuceneUtilSetOnce *writer_;
+  OrgLukhnosPortmobileLuceneWeakSetOnce *writer_;
 }
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriterConfig, writer_, OrgApacheLuceneUtilSetOnce *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexWriterConfig, writer_, OrgLukhnosPortmobileLuceneWeakSetOnce *)
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexIndexWriterConfig__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexIndexWriterConfig__Annotations$1(void);
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriterConfig_OpenMode_initWithNSString_withInt_(OrgApacheLuceneIndexIndexWriterConfig_OpenMode *self, NSString *__name, jint __ordinal);
 
@@ -80,10 +88,10 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriterConfig_OpenMo
 }
 
 - (OrgApacheLuceneIndexIndexWriterConfig *)setIndexWriterWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
-  if ([((OrgApacheLuceneUtilSetOnce *) nil_chk(self->writer_)) get] != nil) {
+  if ([((OrgLukhnosPortmobileLuceneWeakSetOnce *) nil_chk(self->writer_)) get] != nil) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"do not share IndexWriterConfig instances across IndexWriters");
   }
-  [((OrgApacheLuceneUtilSetOnce *) nil_chk(self->writer_)) setWithId:writer];
+  [((OrgLukhnosPortmobileLuceneWeakSetOnce *) nil_chk(self->writer_)) setWithId:writer];
   return self;
 }
 
@@ -301,16 +309,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriterConfig_OpenMo
 
 - (NSString *)description {
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithNSString_([super description]);
-  [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"writer="])) appendWithId:[((OrgApacheLuceneUtilSetOnce *) nil_chk(writer_)) get]])) appendWithNSString:@"\n"];
+  [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"writer="])) appendWithId:[((OrgLukhnosPortmobileLuceneWeakSetOnce *) nil_chk(writer_)) get]])) appendWithNSString:@"\n"];
   return [sb description];
-}
-
-+ (IOSObjectArray *)__annotations_WRITE_LOCK_TIMEOUT_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_setWriteLockTimeoutWithLong_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 - (void)dealloc {
@@ -319,65 +319,112 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriterConfig_OpenMo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setIndexWriterWithOrgApacheLuceneIndexIndexWriter:", "setIndexWriter", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:", "IndexWriterConfig", NULL, 0x1, NULL, NULL },
-    { "setOpenModeWithOrgApacheLuceneIndexIndexWriterConfig_OpenMode:", "setOpenMode", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "getOpenMode", NULL, "Lorg.apache.lucene.index.IndexWriterConfig$OpenMode;", 0x1, NULL, NULL },
-    { "setIndexDeletionPolicyWithOrgApacheLuceneIndexIndexDeletionPolicy:", "setIndexDeletionPolicy", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "getIndexDeletionPolicy", NULL, "Lorg.apache.lucene.index.IndexDeletionPolicy;", 0x1, NULL, NULL },
-    { "setIndexCommitWithOrgApacheLuceneIndexIndexCommit:", "setIndexCommit", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "getIndexCommit", NULL, "Lorg.apache.lucene.index.IndexCommit;", 0x1, NULL, NULL },
-    { "setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:", "setSimilarity", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "getSimilarity", NULL, "Lorg.apache.lucene.search.similarities.Similarity;", 0x1, NULL, NULL },
-    { "setMergeSchedulerWithOrgApacheLuceneIndexMergeScheduler:", "setMergeScheduler", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "getMergeScheduler", NULL, "Lorg.apache.lucene.index.MergeScheduler;", 0x1, NULL, NULL },
-    { "setWriteLockTimeoutWithLong:", "setWriteLockTimeout", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "getWriteLockTimeout", NULL, "J", 0x1, NULL, NULL },
-    { "setCodecWithOrgApacheLuceneCodecsCodec:", "setCodec", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "getCodec", NULL, "Lorg.apache.lucene.codecs.Codec;", 0x1, NULL, NULL },
-    { "getMergePolicy", NULL, "Lorg.apache.lucene.index.MergePolicy;", 0x1, NULL, NULL },
-    { "setIndexerThreadPoolWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool:", "setIndexerThreadPool", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x0, NULL, NULL },
-    { "getIndexerThreadPool", NULL, "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool;", 0x0, NULL, NULL },
-    { "setReaderPoolingWithBoolean:", "setReaderPooling", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "getReaderPooling", NULL, "Z", 0x1, NULL, NULL },
-    { "setIndexingChainWithOrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain:", "setIndexingChain", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x0, NULL, NULL },
-    { "getIndexingChain", NULL, "Lorg.apache.lucene.index.DocumentsWriterPerThread$IndexingChain;", 0x0, NULL, NULL },
-    { "setFlushPolicyWithOrgApacheLuceneIndexFlushPolicy:", "setFlushPolicy", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x0, NULL, NULL },
-    { "setRAMPerThreadHardLimitMBWithInt:", "setRAMPerThreadHardLimitMB", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "getRAMPerThreadHardLimitMB", NULL, "I", 0x1, NULL, NULL },
-    { "getFlushPolicy", NULL, "Lorg.apache.lucene.index.FlushPolicy;", 0x0, NULL, NULL },
-    { "getInfoStream", NULL, "Lorg.apache.lucene.util.InfoStream;", 0x1, NULL, NULL },
-    { "getAnalyzer", NULL, "Lorg.apache.lucene.analysis.Analyzer;", 0x1, NULL, NULL },
-    { "getMaxBufferedDeleteTerms", NULL, "I", 0x1, NULL, NULL },
-    { "getMaxBufferedDocs", NULL, "I", 0x1, NULL, NULL },
-    { "getMergedSegmentWarmer", NULL, "Lorg.apache.lucene.index.IndexWriter$IndexReaderWarmer;", 0x1, NULL, NULL },
-    { "getRAMBufferSizeMB", NULL, "D", 0x1, NULL, NULL },
-    { "setInfoStreamWithOrgApacheLuceneUtilInfoStream:", "setInfoStream", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "setInfoStreamWithJavaIoPrintStream:", "setInfoStream", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "setMergePolicyWithOrgApacheLuceneIndexMergePolicy:", "setMergePolicy", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "setMaxBufferedDeleteTermsWithInt:", "setMaxBufferedDeleteTerms", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "setMaxBufferedDocsWithInt:", "setMaxBufferedDocs", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "setMergedSegmentWarmerWithOrgApacheLuceneIndexIndexWriter_IndexReaderWarmer:", "setMergedSegmentWarmer", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "setRAMBufferSizeMBWithDouble:", "setRAMBufferSizeMB", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "setUseCompoundFileWithBoolean:", "setUseCompoundFile", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "setCommitOnCloseWithBoolean:", "setCommitOnClose", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x0, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig_OpenMode;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexDeletionPolicy;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexCommit;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSimilaritiesSimilarity;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 11, 12, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergeScheduler;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 13, 14, -1, -1, 15, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCodec;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergePolicy;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x0, 18, 19, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x0, 22, 23, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x0, 24, 25, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 26, 27, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFlushPolicy;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilInfoStream;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriter_IndexReaderWarmer;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 28, 29, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 28, 30, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 31, 32, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 33, 27, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 34, 27, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 35, 36, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 37, 38, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 39, 21, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig;", 0x1, 40, 21, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 41, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setIndexWriterWithOrgApacheLuceneIndexIndexWriter:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:);
+  methods[2].selector = @selector(setOpenModeWithOrgApacheLuceneIndexIndexWriterConfig_OpenMode:);
+  methods[3].selector = @selector(getOpenMode);
+  methods[4].selector = @selector(setIndexDeletionPolicyWithOrgApacheLuceneIndexIndexDeletionPolicy:);
+  methods[5].selector = @selector(getIndexDeletionPolicy);
+  methods[6].selector = @selector(setIndexCommitWithOrgApacheLuceneIndexIndexCommit:);
+  methods[7].selector = @selector(getIndexCommit);
+  methods[8].selector = @selector(setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:);
+  methods[9].selector = @selector(getSimilarity);
+  methods[10].selector = @selector(setMergeSchedulerWithOrgApacheLuceneIndexMergeScheduler:);
+  methods[11].selector = @selector(getMergeScheduler);
+  methods[12].selector = @selector(setWriteLockTimeoutWithLong:);
+  methods[13].selector = @selector(getWriteLockTimeout);
+  methods[14].selector = @selector(setCodecWithOrgApacheLuceneCodecsCodec:);
+  methods[15].selector = @selector(getCodec);
+  methods[16].selector = @selector(getMergePolicy);
+  methods[17].selector = @selector(setIndexerThreadPoolWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool:);
+  methods[18].selector = @selector(getIndexerThreadPool);
+  methods[19].selector = @selector(setReaderPoolingWithBoolean:);
+  methods[20].selector = @selector(getReaderPooling);
+  methods[21].selector = @selector(setIndexingChainWithOrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain:);
+  methods[22].selector = @selector(getIndexingChain);
+  methods[23].selector = @selector(setFlushPolicyWithOrgApacheLuceneIndexFlushPolicy:);
+  methods[24].selector = @selector(setRAMPerThreadHardLimitMBWithInt:);
+  methods[25].selector = @selector(getRAMPerThreadHardLimitMB);
+  methods[26].selector = @selector(getFlushPolicy);
+  methods[27].selector = @selector(getInfoStream);
+  methods[28].selector = @selector(getAnalyzer);
+  methods[29].selector = @selector(getMaxBufferedDeleteTerms);
+  methods[30].selector = @selector(getMaxBufferedDocs);
+  methods[31].selector = @selector(getMergedSegmentWarmer);
+  methods[32].selector = @selector(getRAMBufferSizeMB);
+  methods[33].selector = @selector(setInfoStreamWithOrgApacheLuceneUtilInfoStream:);
+  methods[34].selector = @selector(setInfoStreamWithJavaIoPrintStream:);
+  methods[35].selector = @selector(setMergePolicyWithOrgApacheLuceneIndexMergePolicy:);
+  methods[36].selector = @selector(setMaxBufferedDeleteTermsWithInt:);
+  methods[37].selector = @selector(setMaxBufferedDocsWithInt:);
+  methods[38].selector = @selector(setMergedSegmentWarmerWithOrgApacheLuceneIndexIndexWriter_IndexReaderWarmer:);
+  methods[39].selector = @selector(setRAMBufferSizeMBWithDouble:);
+  methods[40].selector = @selector(setUseCompoundFileWithBoolean:);
+  methods[41].selector = @selector(setCommitOnCloseWithBoolean:);
+  methods[42].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DISABLE_AUTO_FLUSH", "DISABLE_AUTO_FLUSH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH },
-    { "DEFAULT_MAX_BUFFERED_DELETE_TERMS", "DEFAULT_MAX_BUFFERED_DELETE_TERMS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_MAX_BUFFERED_DELETE_TERMS },
-    { "DEFAULT_MAX_BUFFERED_DOCS", "DEFAULT_MAX_BUFFERED_DOCS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_MAX_BUFFERED_DOCS },
-    { "DEFAULT_RAM_BUFFER_SIZE_MB", "DEFAULT_RAM_BUFFER_SIZE_MB", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_RAM_BUFFER_SIZE_MB },
-    { "WRITE_LOCK_TIMEOUT", "WRITE_LOCK_TIMEOUT", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneIndexIndexWriterConfig_WRITE_LOCK_TIMEOUT },
-    { "DEFAULT_READER_POOLING", "DEFAULT_READER_POOLING", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_READER_POOLING },
-    { "DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB", "DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB },
-    { "DEFAULT_USE_COMPOUND_FILE_SYSTEM", "DEFAULT_USE_COMPOUND_FILE_SYSTEM", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_USE_COMPOUND_FILE_SYSTEM },
-    { "DEFAULT_COMMIT_ON_CLOSE", "DEFAULT_COMMIT_ON_CLOSE", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_COMMIT_ON_CLOSE },
-    { "writer_", NULL, 0x2, "Lorg.apache.lucene.util.SetOnce;", NULL, "Lorg/apache/lucene/util/SetOnce<Lorg/apache/lucene/index/IndexWriter;>;", .constantValue.asLong = 0 },
+    { "DISABLE_AUTO_FLUSH", "I", .constantValue.asInt = OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_BUFFERED_DELETE_TERMS", "I", .constantValue.asInt = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_MAX_BUFFERED_DELETE_TERMS, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_BUFFERED_DOCS", "I", .constantValue.asInt = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_MAX_BUFFERED_DOCS, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_RAM_BUFFER_SIZE_MB", "D", .constantValue.asDouble = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_RAM_BUFFER_SIZE_MB, 0x19, -1, -1, -1, -1 },
+    { "WRITE_LOCK_TIMEOUT", "J", .constantValue.asLong = OrgApacheLuceneIndexIndexWriterConfig_WRITE_LOCK_TIMEOUT, 0x19, -1, -1, -1, 42 },
+    { "DEFAULT_READER_POOLING", "Z", .constantValue.asBOOL = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_READER_POOLING, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB", "I", .constantValue.asInt = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_RAM_PER_THREAD_HARD_LIMIT_MB, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_USE_COMPOUND_FILE_SYSTEM", "Z", .constantValue.asBOOL = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_USE_COMPOUND_FILE_SYSTEM, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_COMMIT_ON_CLOSE", "Z", .constantValue.asBOOL = OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_COMMIT_ON_CLOSE, 0x19, -1, -1, -1, -1 },
+    { "writer_", "LOrgLukhnosPortmobileLuceneWeakSetOnce;", .constantValue.asLong = 0, 0x2, -1, -1, 43, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.IndexWriterConfig$OpenMode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriterConfig = { 2, "IndexWriterConfig", "org.apache.lucene.index", NULL, 0x11, 43, methods, 10, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "setIndexWriter", "LOrgApacheLuceneIndexIndexWriter;", "LOrgApacheLuceneAnalysisAnalyzer;", "setOpenMode", "LOrgApacheLuceneIndexIndexWriterConfig_OpenMode;", "setIndexDeletionPolicy", "LOrgApacheLuceneIndexIndexDeletionPolicy;", "setIndexCommit", "LOrgApacheLuceneIndexIndexCommit;", "setSimilarity", "LOrgApacheLuceneSearchSimilaritiesSimilarity;", "setMergeScheduler", "LOrgApacheLuceneIndexMergeScheduler;", "setWriteLockTimeout", "J", (void *)&OrgApacheLuceneIndexIndexWriterConfig__Annotations$0, "setCodec", "LOrgApacheLuceneCodecsCodec;", "setIndexerThreadPool", "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool;", "setReaderPooling", "Z", "setIndexingChain", "LOrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain;", "setFlushPolicy", "LOrgApacheLuceneIndexFlushPolicy;", "setRAMPerThreadHardLimitMB", "I", "setInfoStream", "LOrgApacheLuceneUtilInfoStream;", "LJavaIoPrintStream;", "setMergePolicy", "LOrgApacheLuceneIndexMergePolicy;", "setMaxBufferedDeleteTerms", "setMaxBufferedDocs", "setMergedSegmentWarmer", "LOrgApacheLuceneIndexIndexWriter_IndexReaderWarmer;", "setRAMBufferSizeMB", "D", "setUseCompoundFile", "setCommitOnClose", "toString", (void *)&OrgApacheLuceneIndexIndexWriterConfig__Annotations$1, "Lorg/lukhnos/portmobile/lucene/WeakSetOnce<Lorg/apache/lucene/index/IndexWriter;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriterConfig = { "IndexWriterConfig", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 43, 10, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexWriterConfig;
 }
 
@@ -385,7 +432,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexWriterConfig_OpenMo
 
 void OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneIndexIndexWriterConfig *self, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
   OrgApacheLuceneIndexLiveIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
-  JreStrongAssignAndConsume(&self->writer_, new_OrgApacheLuceneUtilSetOnce_init());
+  JreStrongAssignAndConsume(&self->writer_, new_OrgLukhnosPortmobileLuceneWeakSetOnce_init());
 }
 
 OrgApacheLuceneIndexIndexWriterConfig *new_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
@@ -394,6 +441,14 @@ OrgApacheLuceneIndexIndexWriterConfig *new_OrgApacheLuceneIndexIndexWriterConfig
 
 OrgApacheLuceneIndexIndexWriterConfig *create_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexWriterConfig, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
+}
+
+IOSObjectArray *OrgApacheLuceneIndexIndexWriterConfig__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneIndexIndexWriterConfig__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexWriterConfig)
@@ -428,8 +483,25 @@ OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLuceneIndexIndexWriterC
   return (OrgApacheLuceneIndexIndexWriterConfig_OpenMode_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneIndexIndexWriterConfig_OpenMode;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexWriterConfig_OpenMode;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "CREATE", "LOrgApacheLuceneIndexIndexWriterConfig_OpenMode;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "APPEND", "LOrgApacheLuceneIndexIndexWriterConfig_OpenMode;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "CREATE_OR_APPEND", "LOrgApacheLuceneIndexIndexWriterConfig_OpenMode;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE), &JreEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, APPEND), &JreEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE_OR_APPEND), "LOrgApacheLuceneIndexIndexWriterConfig;", "Ljava/lang/Enum<Lorg/apache/lucene/index/IndexWriterConfig$OpenMode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriterConfig_OpenMode = { "OpenMode", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x4019, 2, 3, 5, -1, -1, 6, -1 };
+  return &_OrgApacheLuceneIndexIndexWriterConfig_OpenMode;
 }
 
 + (void)initialize {
@@ -438,25 +510,12 @@ OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLuceneIndexIndexWriterC
     size_t allocSize = 3 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexIndexWriterConfig_OpenMode_initWithNSString_withInt_(e, @"CREATE", 0);
-    (JreEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, APPEND) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexIndexWriterConfig_OpenMode_initWithNSString_withInt_(e, @"APPEND", 1);
-    (JreEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE_OR_APPEND) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneIndexIndexWriterConfig_OpenMode_initWithNSString_withInt_(e, @"CREATE_OR_APPEND", 2);
+    for (jint i = 0; i < 3; i++) {
+      ((void)(OrgApacheLuceneIndexIndexWriterConfig_OpenMode_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneIndexIndexWriterConfig_OpenMode_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneIndexIndexWriterConfig_OpenMode_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexIndexWriterConfig_OpenMode)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "CREATE", "CREATE", 0x4019, "Lorg.apache.lucene.index.IndexWriterConfig$OpenMode;", &JreEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE), NULL, .constantValue.asLong = 0 },
-    { "APPEND", "APPEND", 0x4019, "Lorg.apache.lucene.index.IndexWriterConfig$OpenMode;", &JreEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, APPEND), NULL, .constantValue.asLong = 0 },
-    { "CREATE_OR_APPEND", "CREATE_OR_APPEND", 0x4019, "Lorg.apache.lucene.index.IndexWriterConfig$OpenMode;", &JreEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE_OR_APPEND), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.IndexWriterConfig$OpenMode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexWriterConfig_OpenMode = { 2, "OpenMode", "org.apache.lucene.index", "IndexWriterConfig", 0x4019, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/IndexWriterConfig$OpenMode;>;" };
-  return &_OrgApacheLuceneIndexIndexWriterConfig_OpenMode;
 }
 
 @end
@@ -478,7 +537,7 @@ OrgApacheLuceneIndexIndexWriterConfig_OpenMode *OrgApacheLuceneIndexIndexWriterC
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

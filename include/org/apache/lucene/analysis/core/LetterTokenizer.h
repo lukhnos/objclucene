@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreLetterTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreLetterTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLetterTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisCoreLetterTokenizer))
 #define OrgApacheLuceneAnalysisCoreLetterTokenizer_
 
@@ -23,13 +29,12 @@
 @class OrgApacheLuceneUtilAttributeFactory;
 
 /*!
- @brief A LetterTokenizer is a tokenizer that divides text at non-letters.
- That's to
- say, it defines tokens as maximal strings of adjacent letters, as defined by
- java.lang.Character.isLetter() predicate.
+ @brief A LetterTokenizer is a tokenizer that divides text at non-letters.That's to
+  say, it defines tokens as maximal strings of adjacent letters, as defined by
+  java.lang.Character.isLetter() predicate.
  <p>
- Note: this does a decent job for most European languages, but does a terrible
- job for some Asian languages, where words are not separated by spaces.
+  Note: this does a decent job for most European languages, but does a terrible
+  job for some Asian languages, where words are not separated by spaces. 
  </p>
  */
 @interface OrgApacheLuceneAnalysisCoreLetterTokenizer : OrgApacheLuceneAnalysisUtilCharTokenizer
@@ -39,20 +44,20 @@
 /*!
  @brief Construct a new LetterTokenizer.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Construct a new LetterTokenizer using a given
+ @brief Construct a new LetterTokenizer using a given 
  <code>org.apache.lucene.util.AttributeFactory</code>.
- @param factory
- the attribute factory to use for this <code>Tokenizer</code>
+ @param factory the attribute factory to use for this 
+ <code>Tokenizer</code>
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 #pragma mark Protected
 
 /*!
- @brief Collects only characters which satisfy
+ @brief Collects only characters which satisfy 
  <code>Character.isLetter(int)</code>.
  */
 - (jboolean)isTokenCharWithInt:(jint)c;
@@ -63,9 +68,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreLetterTokenizer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLetterTokenizer_init(OrgApacheLuceneAnalysisCoreLetterTokenizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLetterTokenizer *new_OrgApacheLuceneAnalysisCoreLetterTokenizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLetterTokenizer *new_OrgApacheLuceneAnalysisCoreLetterTokenizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLetterTokenizer *create_OrgApacheLuceneAnalysisCoreLetterTokenizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLetterTokenizer *create_OrgApacheLuceneAnalysisCoreLetterTokenizer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreLetterTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
 
@@ -77,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLetterTokenizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLetterTokenizer")

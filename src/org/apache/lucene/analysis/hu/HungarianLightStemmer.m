@@ -8,6 +8,10 @@
 #include "org/apache/lucene/analysis/hu/HungarianLightStemmer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/hu/HungarianLightStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisHuHungarianLightStemmer ()
 
 - (jint)removeCaseWithCharArray:(IOSCharArray *)s
@@ -37,6 +41,13 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisHuHungarianLightStemm
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisHuHungarianLightStemmer_isVowelWithChar_(OrgApacheLuceneAnalysisHuHungarianLightStemmer *self, jchar ch);
 
 @implementation OrgApacheLuceneAnalysisHuHungarianLightStemmer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -95,28 +106,45 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisHuHungarianLightS
   return OrgApacheLuceneAnalysisHuHungarianLightStemmer_isVowelWithChar_(self, ch);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "removeCaseWithCharArray:withInt:", "removeCase", "I", 0x2, NULL, NULL },
-    { "removePossessiveWithCharArray:withInt:", "removePossessive", "I", 0x2, NULL, NULL },
-    { "removePluralWithCharArray:withInt:", "removePlural", "I", 0x2, NULL, NULL },
-    { "normalizeWithCharArray:withInt:", "normalize", "I", 0x2, NULL, NULL },
-    { "isVowelWithChar:", "isVowel", "Z", 0x2, NULL, NULL },
-    { "init", "HungarianLightStemmer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 5, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 6, 7, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHuHungarianLightStemmer = { 2, "HungarianLightStemmer", "org.apache.lucene.analysis.hu", NULL, 0x1, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  methods[2].selector = @selector(removeCaseWithCharArray:withInt:);
+  methods[3].selector = @selector(removePossessiveWithCharArray:withInt:);
+  methods[4].selector = @selector(removePluralWithCharArray:withInt:);
+  methods[5].selector = @selector(normalizeWithCharArray:withInt:);
+  methods[6].selector = @selector(isVowelWithChar:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "stem", "[CI", "removeCase", "removePossessive", "removePlural", "normalize", "isVowel", "C" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHuHungarianLightStemmer = { "HungarianLightStemmer", "org.apache.lucene.analysis.hu", ptrTable, methods, NULL, 7, 0x1, 7, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisHuHungarianLightStemmer;
 }
 
 @end
+
+void OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(OrgApacheLuceneAnalysisHuHungarianLightStemmer *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneAnalysisHuHungarianLightStemmer *new_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHuHungarianLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisHuHungarianLightStemmer *create_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHuHungarianLightStemmer, init)
+}
 
 jint OrgApacheLuceneAnalysisHuHungarianLightStemmer_removeCaseWithCharArray_withInt_(OrgApacheLuceneAnalysisHuHungarianLightStemmer *self, IOSCharArray *s, jint len) {
   if (len > 6 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"kent")) return len - 4;
@@ -206,18 +234,6 @@ jboolean OrgApacheLuceneAnalysisHuHungarianLightStemmer_isVowelWithChar_(OrgApac
     default:
     return false;
   }
-}
-
-void OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(OrgApacheLuceneAnalysisHuHungarianLightStemmer *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneAnalysisHuHungarianLightStemmer *new_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHuHungarianLightStemmer, init)
-}
-
-OrgApacheLuceneAnalysisHuHungarianLightStemmer *create_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHuHungarianLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHuHungarianLightStemmer)

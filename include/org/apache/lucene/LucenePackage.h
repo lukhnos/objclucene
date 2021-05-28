@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneLucenePackage
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneLucenePackage_) && (INCLUDE_ALL_OrgApacheLuceneLucenePackage || defined(INCLUDE_OrgApacheLuceneLucenePackage))
 #define OrgApacheLuceneLucenePackage_
 
@@ -34,10 +40,14 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneLucenePackage)
 
-FOUNDATION_EXPORT JavaLangPackage *OrgApacheLuceneLucenePackage_get();
+FOUNDATION_EXPORT JavaLangPackage *OrgApacheLuceneLucenePackage_get(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneLucenePackage)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneLucenePackage")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilLongValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilLongValues_) && (INCLUDE_ALL_OrgApacheLuceneUtilLongValues || defined(INCLUDE_OrgApacheLuceneUtilLongValues))
 #define OrgApacheLuceneUtilLongValues_
 
@@ -23,17 +29,15 @@
 /*!
  @brief Abstraction over an array of longs.
  This class extends NumericDocValues so that we don't need to add another
- level of abstraction every time we want eg. to use the <code>PackedInts</code>
- utility classes to represent a <code>NumericDocValues</code> instance.
-  
+   level of abstraction every time we want eg. to use the <code>PackedInts</code>
+   utility classes to represent a <code>NumericDocValues</code> instance.
  */
 @interface OrgApacheLuceneUtilLongValues : OrgApacheLuceneIndexNumericDocValues
-
-+ (OrgApacheLuceneUtilLongValues *)IDENTITY;
+@property (readonly, class, strong) OrgApacheLuceneUtilLongValues *IDENTITY NS_SWIFT_NAME(IDENTITY);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jlong)getWithInt:(jint)idx;
 
@@ -49,7 +53,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilLongValues)
 /*!
  @brief An instance that returns the provided value.
  */
-inline OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilLongValues_get_IDENTITY();
+inline OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilLongValues_get_IDENTITY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilLongValues_IDENTITY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilLongValues, IDENTITY, OrgApacheLuceneUtilLongValues *)
@@ -60,4 +64,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilLongValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilLongValues")

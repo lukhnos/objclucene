@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDisjunctionSumScorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDisjunctionSumScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionSumScorer || defined(INCLUDE_OrgApacheLuceneSearchDisjunctionSumScorer))
 #define OrgApacheLuceneSearchDisjunctionSumScorer_
 
@@ -27,7 +33,7 @@
 
 /*!
  @brief A Scorer for OR like queries, counterpart of <code>ConjunctionScorer</code>.
- This Scorer implements <code>Scorer.advance(int)</code> and uses advance() on the given Scorers. 
+ This Scorer implements <code>Scorer.advance(int)</code> and uses advance() on the given Scorers.
  */
 @interface OrgApacheLuceneSearchDisjunctionSumScorer : OrgApacheLuceneSearchDisjunctionScorer
 
@@ -43,23 +49,33 @@
  @param subScorers Array of at least two subscorers.
  @param coord Table of coordination factors
  */
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                   withJavaUtilList:(id<JavaUtilList>)subScorers
-                                     withFloatArray:(IOSFloatArray *)coord
-                                        withBoolean:(jboolean)needsScores;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                                                           withJavaUtilList:(id<JavaUtilList>)subScorers
+                                                             withFloatArray:(IOSFloatArray *)coord
+                                                                withBoolean:(jboolean)needsScores;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)arg0
+                                                           withJavaUtilList:(id<JavaUtilList>)arg1
+                                                                withBoolean:(jboolean)arg2 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDisjunctionSumScorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(OrgApacheLuceneSearchDisjunctionSumScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, IOSFloatArray *coord, jboolean needsScores);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDisjunctionSumScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(OrgApacheLuceneSearchDisjunctionSumScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, IOSFloatArray *coord, jboolean needsScores);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDisjunctionSumScorer *new_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, IOSFloatArray *coord, jboolean needsScores) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchDisjunctionSumScorer *new_OrgApacheLuceneSearchDisjunctionSumScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, IOSFloatArray *coord, jboolean needsScores) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDisjunctionSumScorer *create_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, IOSFloatArray *coord, jboolean needsScores);
+FOUNDATION_EXPORT OrgApacheLuceneSearchDisjunctionSumScorer *create_OrgApacheLuceneSearchDisjunctionSumScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, IOSFloatArray *coord, jboolean needsScores);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionSumScorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionSumScorer")

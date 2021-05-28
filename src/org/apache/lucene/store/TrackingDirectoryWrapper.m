@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/store/TrackingDirectoryWrapper.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collections.h"
 #include "java/util/HashSet.h"
 #include "java/util/Set.h"
@@ -14,6 +12,10 @@
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/store/TrackingDirectoryWrapper.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/TrackingDirectoryWrapper must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreTrackingDirectoryWrapper () {
  @public
@@ -38,7 +40,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreTrackingDirectoryWrapper, createdFileNam
 
 - (OrgApacheLuceneStoreIndexOutput *)createOutputWithNSString:(NSString *)name
                             withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  OrgApacheLuceneStoreIndexOutput *output = [((OrgApacheLuceneStoreDirectory *) nil_chk(in_)) createOutputWithNSString:name withOrgApacheLuceneStoreIOContext:context];
+  OrgApacheLuceneStoreIndexOutput *output = JreRetainedLocalValue([((OrgApacheLuceneStoreDirectory *) nil_chk(in_)) createOutputWithNSString:name withOrgApacheLuceneStoreIOContext:context]);
   [((id<JavaUtilSet>) nil_chk(createdFileNames_)) addWithId:name];
   return output;
 }
@@ -70,18 +72,29 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreTrackingDirectoryWrapper, createdFileNam
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDirectory:", "TrackingDirectoryWrapper", NULL, 0x1, NULL, NULL },
-    { "deleteFileWithNSString:", "deleteFile", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "copyFromWithOrgApacheLuceneStoreDirectory:withNSString:withNSString:withOrgApacheLuceneStoreIOContext:", "copyFrom", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getCreatedFiles", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexOutput;", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, 3, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 10, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDirectory:);
+  methods[1].selector = @selector(deleteFileWithNSString:);
+  methods[2].selector = @selector(createOutputWithNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[3].selector = @selector(copyFromWithOrgApacheLuceneStoreDirectory:withNSString:withNSString:withOrgApacheLuceneStoreIOContext:);
+  methods[4].selector = @selector(renameFileWithNSString:withNSString:);
+  methods[5].selector = @selector(getCreatedFiles);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "createdFileNames_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
+    { "createdFileNames_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 11, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreTrackingDirectoryWrapper = { 2, "TrackingDirectoryWrapper", "org.apache.lucene.store", NULL, 0x11, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDirectory;", "deleteFile", "LNSString;", "LJavaIoIOException;", "createOutput", "LNSString;LOrgApacheLuceneStoreIOContext;", "copyFrom", "LOrgApacheLuceneStoreDirectory;LNSString;LNSString;LOrgApacheLuceneStoreIOContext;", "renameFile", "LNSString;LNSString;", "()Ljava/util/Set<Ljava/lang/String;>;", "Ljava/util/Set<Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreTrackingDirectoryWrapper = { "TrackingDirectoryWrapper", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x11, 6, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreTrackingDirectoryWrapper;
 }
 

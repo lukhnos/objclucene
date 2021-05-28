@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/HashMap.h"
@@ -28,6 +27,10 @@
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/CharsRefBuilder.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/query/QueryAutoStopWordAnalyzer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer () {
  @public
@@ -88,7 +91,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer, stopW
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components {
-  id<JavaUtilSet> stopWords = [((id<JavaUtilMap>) nil_chk(stopWordsPerField_)) getWithId:fieldName];
+  id<JavaUtilSet> stopWords = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(stopWordsPerField_)) getWithId:fieldName]);
   if (stopWords == nil) {
     return components;
   }
@@ -97,14 +100,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer, stopW
 }
 
 - (IOSObjectArray *)getStopWordsWithNSString:(NSString *)fieldName {
-  id<JavaUtilSet> stopWords = [((id<JavaUtilMap>) nil_chk(stopWordsPerField_)) getWithId:fieldName];
+  id<JavaUtilSet> stopWords = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(stopWordsPerField_)) getWithId:fieldName]);
   return stopWords != nil ? [stopWords toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[stopWords size] type:NSString_class_()]] : [IOSObjectArray arrayWithLength:0 type:NSString_class_()];
 }
 
 - (IOSObjectArray *)getStopWords {
   id<JavaUtilList> allStopWords = create_JavaUtilArrayList_init();
   for (NSString * __strong fieldName in nil_chk([((id<JavaUtilMap>) nil_chk(stopWordsPerField_)) keySet])) {
-    id<JavaUtilSet> stopWords = [stopWordsPerField_ getWithId:fieldName];
+    id<JavaUtilSet> stopWords = JreRetainedLocalValue([stopWordsPerField_ getWithId:fieldName]);
     for (NSString * __strong text in nil_chk(stopWords)) {
       [allStopWords addWithId:create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, text)];
     }
@@ -119,23 +122,37 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer, stopW
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:", "QueryAutoStopWordAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withInt:", "QueryAutoStopWordAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withFloat:", "QueryAutoStopWordAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withJavaUtilCollection:withFloat:", "QueryAutoStopWordAnalyzer", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/analysis/Analyzer;Lorg/apache/lucene/index/IndexReader;Ljava/util/Collection<Ljava/lang/String;>;F)V" },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withJavaUtilCollection:withInt:", "QueryAutoStopWordAnalyzer", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/analysis/Analyzer;Lorg/apache/lucene/index/IndexReader;Ljava/util/Collection<Ljava/lang/String;>;I)V" },
-    { "getWrappedAnalyzerWithNSString:", "getWrappedAnalyzer", "Lorg.apache.lucene.analysis.Analyzer;", 0x4, NULL, NULL },
-    { "wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:", "wrapComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-    { "getStopWordsWithNSString:", "getStopWords", "[Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getStopWords", NULL, "[Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, 1, 5, -1, -1 },
+    { NULL, NULL, 0x1, -1, 6, 1, 7, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer;", 0x4, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", 0x4, 10, 11, -1, -1, -1, -1 },
+    { NULL, "[LNSString;", 0x1, 12, 9, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withInt:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withFloat:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withJavaUtilCollection:withFloat:);
+  methods[4].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withJavaUtilCollection:withInt:);
+  methods[5].selector = @selector(getWrappedAnalyzerWithNSString:);
+  methods[6].selector = @selector(wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:);
+  methods[7].selector = @selector(getStopWordsWithNSString:);
+  methods[8].selector = @selector(getStopWords);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "delegate_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stopWordsPerField_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Ljava/lang/String;>;>;", .constantValue.asLong = 0 },
-    { "defaultMaxDocFreqPercent", "defaultMaxDocFreqPercent", 0x19, "F", NULL, NULL, .constantValue.asFloat = OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_defaultMaxDocFreqPercent },
+    { "delegate_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "stopWordsPerField_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 13, -1 },
+    { "defaultMaxDocFreqPercent", "F", .constantValue.asFloat = OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_defaultMaxDocFreqPercent, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer = { 2, "QueryAutoStopWordAnalyzer", "org.apache.lucene.analysis.query", NULL, 0x11, 9, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexIndexReader;I", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexIndexReader;F", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexIndexReader;LJavaUtilCollection;F", "(Lorg/apache/lucene/analysis/Analyzer;Lorg/apache/lucene/index/IndexReader;Ljava/util/Collection<Ljava/lang/String;>;F)V", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexIndexReader;LJavaUtilCollection;I", "(Lorg/apache/lucene/analysis/Analyzer;Lorg/apache/lucene/index/IndexReader;Ljava/util/Collection<Ljava/lang/String;>;I)V", "getWrappedAnalyzer", "LNSString;", "wrapComponents", "LNSString;LOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;", "getStopWords", "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Ljava/lang/String;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer = { "QueryAutoStopWordAnalyzer", "org.apache.lucene.analysis.query", ptrTable, methods, fields, 7, 0x11, 9, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer;
 }
 
@@ -198,7 +215,7 @@ void OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuce
     OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(indexReader, field);
     OrgApacheLuceneUtilCharsRefBuilder *spare = create_OrgApacheLuceneUtilCharsRefBuilder_init();
     if (terms != nil) {
-      OrgApacheLuceneIndexTermsEnum *te = [terms iterator];
+      OrgApacheLuceneIndexTermsEnum *te = JreRetainedLocalValue([terms iterator]);
       OrgApacheLuceneUtilBytesRef *text;
       while ((text = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(te)) next]) != nil) {
         if ([te docFreq] > maxDocFreq) {

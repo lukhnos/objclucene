@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/RangeQueryNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/RangeQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode : NSObject
 
 @end
@@ -13,13 +17,22 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getLowerBound", NULL, "TT;", 0x401, NULL, "()TT;" },
-    { "getUpperBound", NULL, "TT;", 0x401, NULL, "()TT;" },
-    { "isLowerInclusive", NULL, "Z", 0x401, NULL, NULL },
-    { "isUpperInclusive", NULL, "Z", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;", 0x401, -1, -1, -1, 0, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;", 0x401, -1, -1, -1, 0, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode = { 2, "RangeQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T::Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<*>;>Ljava/lang/Object;Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldableNode;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getLowerBound);
+  methods[1].selector = @selector(getUpperBound);
+  methods[2].selector = @selector(isLowerInclusive);
+  methods[3].selector = @selector(isUpperInclusive);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "()TT;", "<T::Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<*>;>Ljava/lang/Object;Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldableNode;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode = { "RangeQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, methods, NULL, 7, 0x609, 4, 0, -1, -1, -1, 1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode;
 }
 

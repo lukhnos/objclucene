@@ -13,14 +13,19 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonTransition
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonTransition_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTransition || defined(INCLUDE_OrgApacheLuceneUtilAutomatonTransition))
 #define OrgApacheLuceneUtilAutomatonTransition_
 
 /*!
- @brief Holds one transition from an <code>Automaton</code>.
- This is typically
- used temporarily when iterating through transitions by invoking
- <code>Automaton.initTransition</code> and <code>Automaton.getNextTransition</code>. 
+ @brief Holds one transition from an <code>Automaton</code>.This is typically
+   used temporarily when iterating through transitions by invoking  
+ <code>Automaton.initTransition</code> and <code>Automaton.getNextTransition</code>.
  */
 @interface OrgApacheLuceneUtilAutomatonTransition : NSObject {
  @public
@@ -42,7 +47,7 @@
   jint max_;
   /*!
    @brief Remembers where we are in the iteration; init to -1 to provoke
- exception if nextTransition is called without first initTransition.
+   exception if nextTransition is called without first initTransition.
    */
   jint transitionUpto_;
 }
@@ -52,7 +57,7 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (NSString *)description;
 
@@ -62,12 +67,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonTransition)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonTransition_init(OrgApacheLuceneUtilAutomatonTransition *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonTransition *new_OrgApacheLuceneUtilAutomatonTransition_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonTransition *new_OrgApacheLuceneUtilAutomatonTransition_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonTransition *create_OrgApacheLuceneUtilAutomatonTransition_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonTransition *create_OrgApacheLuceneUtilAutomatonTransition_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonTransition)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTransition")

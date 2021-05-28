@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Math.h"
 #include "java/lang/StringBuilder.h"
@@ -26,17 +25,20 @@
 @class OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence;
 @class OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/shingle/ShingleFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisShingleShingleFilter () {
  @public
   /*!
    @brief The sequence of input stream tokens (or filler tokens, if necessary)
- that will be composed to form output shingles.
+  that will be composed to form output shingles.
    */
   JavaUtilLinkedList *inputWindow_;
   /*!
-   @brief The number of input tokens in the next output token.
-   This is the "n" in
- "token n-grams".
+   @brief The number of input tokens in the next output token.This is the "n" in
+  "token n-grams".
    */
   OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence *gramSize_;
   /*!
@@ -53,12 +55,12 @@
   NSString *tokenSeparator_;
   /*!
    @brief The string to insert for each position at which there is no token
- (i.e., when position increment is greater than one).
+  (i.e., when position increment is greater than one).
    */
   IOSCharArray *fillerToken_;
   /*!
    @brief By default, we output unigrams (individual tokens) as well as shingles
- (token n-grams).
+  (token n-grams).
    */
   jboolean outputUnigrams_;
   /*!
@@ -75,14 +77,14 @@
   jint minShingleSize_;
   /*!
    @brief The remaining number of filler tokens to be inserted into the input stream
- from which shingles are composed, to handle position increments greater
- than one.
+  from which shingles are composed, to handle position increments greater
+  than one.
    */
   jint numFillerTokensToInsert_;
   /*!
    @brief When the next input stream token has a position increment greater than
- one, it is stored in this field until sufficient filler tokens have been
- inserted to account for the position increment.
+  one, it is stored in this field until sufficient filler tokens have been
+  inserted to account for the position increment.
    */
   OrgApacheLuceneUtilAttributeSource *nextInputStreamToken_;
   /*!
@@ -91,12 +93,12 @@
   jboolean isNextInputStreamToken_;
   /*!
    @brief Whether at least one unigram or shingle has been output at the current 
- position.
+  position.
    */
   jboolean isOutputHere_;
   /*!
    @brief Holds the State after input.end() was called, so we can
- restore it in our end() impl.
+  restore it in our end() impl.
    */
   OrgApacheLuceneUtilAttributeSource_State *endState_;
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
@@ -110,19 +112,19 @@
 /*!
  @brief <p>Get the next token from the input stream.
  <p>If the next token has <code>positionIncrement &gt; 1</code>,
- <code>positionIncrement - 1</code> <code>fillerToken</code>s are
- inserted first.
+  <code>positionIncrement - 1</code> <code>fillerToken</code>s are
+  inserted first.
  @param target Where to put the new token; if null, a new instance is created.
  @return On success, the populated token; null otherwise
- @throws IOException if the input stream has a problem
+ @throw IOExceptionif the input stream has a problem
  */
 - (OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *)getNextTokenWithOrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken:(OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *)target;
 
 /*!
  @brief <p>Fills <code>inputWindow</code> with input stream tokens, if available, 
- shifting to the right if the window was previously full.
+  shifting to the right if the window was previously full.
  <p>Resets <code>gramSize</code> to its minimum value.
- @throws IOException if there's a problem getting the next token
+ @throw IOExceptionif there's a problem getting the next token
  */
 - (void)shiftInputWindow;
 
@@ -148,11 +150,11 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisShingleShingleFilter_
 
 /*!
  @brief <p>An instance of this class is used to maintain the number of input
- stream tokens that will be used to compose the next unigram or shingle:
+  stream tokens that will be used to compose the next unigram or shingle: 
  <code>gramSize</code>.
- <p><code>gramSize</code> will take on values from the circular sequence
+ <p><code>gramSize</code> will take on values from the circular sequence 
  <b>{ [ 1, ] <code>minShingleSize</code> [ , ... , <code>maxShingleSize</code> ] }</b>.
- <p>1 is included in the circular sequence only if 
+  <p>1 is included in the circular sequence only if  
  <code>outputUnigrams</code> = true.
  */
 @interface OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence : NSObject {
@@ -173,31 +175,31 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisShingleShingleFilter_
 
 /*!
  @brief <p>Increments this circular number's value to the next member in the
- circular sequence
- <code>gramSize</code> will take on values from the circular sequence
+  circular sequence 
+ <code>gramSize</code> will take on values from the circular sequence 
  <b>{ [ 1, ] <code>minShingleSize</code> [ , ... , <code>maxShingleSize</code> ] }</b>.
- <p>1 is included in the circular sequence only if 
+ <p>1 is included in the circular sequence only if  
  <code>outputUnigrams</code> = true.
  */
 - (void)advance;
 
 /*!
  @brief <p>Sets this circular number's value to the first member of the 
- circular sequence
- <p><code>gramSize</code> will take on values from the circular sequence
+  circular sequence 
+ <p><code>gramSize</code> will take on values from the circular sequence 
  <b>{ [ 1, ] <code>minShingleSize</code> [ , ... , <code>maxShingleSize</code> ] }</b>.
- <p>1 is included in the circular sequence only if 
+ <p>1 is included in the circular sequence only if  
  <code>outputUnigrams</code> = true.
  */
 - (void)reset;
 
 /*!
  @brief <p>Returns true if the current value is the first member of the circular
- sequence.
+  sequence.
  <p>If <code>outputUnigrams</code> = true, the first member of the circular
- sequence will be 1; otherwise, it will be <code>minShingleSize</code>.
+  sequence will be 1; otherwise, it will be <code>minShingleSize</code>.
  @return true if the current value is the first member of the circular
- sequence; false otherwise
+   sequence; false otherwise
  */
 - (jboolean)atMinValue;
 
@@ -209,8 +211,6 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisShingleShingleFilter_
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence, this$0_, OrgApacheLuceneAnalysisShingleShingleFilter *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence_initWithOrgApacheLuceneAnalysisShingleShingleFilter_(OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence *self, OrgApacheLuceneAnalysisShingleShingleFilter *outer$);
 
@@ -333,7 +333,7 @@ NSString *OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR = 
 }
 
 - (void)setFillerTokenWithNSString:(NSString *)fillerToken {
-  JreStrongAssign(&self->fillerToken_, nil == fillerToken ? [IOSCharArray arrayWithLength:0] : [fillerToken toCharArray]);
+  JreStrongAssign(&self->fillerToken_, nil == fillerToken ? [IOSCharArray arrayWithLength:0] : [fillerToken java_toCharArray]);
 }
 
 - (jboolean)incrementToken {
@@ -349,14 +349,14 @@ NSString *OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR = 
   if ([((JavaUtilLinkedList *) nil_chk(inputWindow_)) size] >= [((OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence *) nil_chk(gramSize_)) getValue]) {
     jboolean isAllFiller = true;
     OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *nextToken = nil;
-    id<JavaUtilIterator> iter = [((JavaUtilLinkedList *) nil_chk(inputWindow_)) iterator];
+    id<JavaUtilIterator> iter = JreRetainedLocalValue([((JavaUtilLinkedList *) nil_chk(inputWindow_)) iterator]);
     for (jint gramNum = 1; [((id<JavaUtilIterator>) nil_chk(iter)) hasNext] && builtGramSize < [((OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence *) nil_chk(gramSize_)) getValue]; ++gramNum) {
       nextToken = [iter next];
       if (builtGramSize < gramNum) {
         if (builtGramSize > 0) {
           [((JavaLangStringBuilder *) nil_chk(gramBuilder_)) appendWithNSString:tokenSeparator_];
         }
-        [((JavaLangStringBuilder *) nil_chk(gramBuilder_)) appendWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(((OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *) nil_chk(nextToken))->termAtt_)) buffer] withInt:0 withInt:[nextToken->termAtt_ length]];
+        [((JavaLangStringBuilder *) nil_chk(gramBuilder_)) appendWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(((OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *) nil_chk(nextToken))->termAtt_)) buffer] withInt:0 withInt:[nextToken->termAtt_ java_length]];
         ++builtGramSize;
       }
       if (isAllFiller && ((OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *) nil_chk(nextToken))->isFiller_) {
@@ -437,55 +437,75 @@ NSString *OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR = 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:", "ShingleFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withInt:", "ShingleFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "ShingleFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withNSString:", "ShingleFilter", NULL, 0x1, NULL, NULL },
-    { "setTokenTypeWithNSString:", "setTokenType", "V", 0x1, NULL, NULL },
-    { "setOutputUnigramsWithBoolean:", "setOutputUnigrams", "V", 0x1, NULL, NULL },
-    { "setOutputUnigramsIfNoShinglesWithBoolean:", "setOutputUnigramsIfNoShingles", "V", 0x1, NULL, NULL },
-    { "setMaxShingleSizeWithInt:", "setMaxShingleSize", "V", 0x1, NULL, NULL },
-    { "setMinShingleSizeWithInt:", "setMinShingleSize", "V", 0x1, NULL, NULL },
-    { "setTokenSeparatorWithNSString:", "setTokenSeparator", "V", 0x1, NULL, NULL },
-    { "setFillerTokenWithNSString:", "setFillerToken", "V", 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "getNextTokenWithOrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken:", "getNextToken", "Lorg.apache.lucene.analysis.shingle.ShingleFilter$InputWindowToken;", 0x2, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "shiftInputWindow", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 14, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken;", 0x2, 15, 16, 14, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 14, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 14, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 14, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withInt:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withNSString:);
+  methods[4].selector = @selector(setTokenTypeWithNSString:);
+  methods[5].selector = @selector(setOutputUnigramsWithBoolean:);
+  methods[6].selector = @selector(setOutputUnigramsIfNoShinglesWithBoolean:);
+  methods[7].selector = @selector(setMaxShingleSizeWithInt:);
+  methods[8].selector = @selector(setMinShingleSizeWithInt:);
+  methods[9].selector = @selector(setTokenSeparatorWithNSString:);
+  methods[10].selector = @selector(setFillerTokenWithNSString:);
+  methods[11].selector = @selector(incrementToken);
+  methods[12].selector = @selector(getNextTokenWithOrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken:);
+  methods[13].selector = @selector(end);
+  methods[14].selector = @selector(shiftInputWindow);
+  methods[15].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_FILLER_TOKEN", "DEFAULT_FILLER_TOKEN", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_MAX_SHINGLE_SIZE", "DEFAULT_MAX_SHINGLE_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_MAX_SHINGLE_SIZE },
-    { "DEFAULT_MIN_SHINGLE_SIZE", "DEFAULT_MIN_SHINGLE_SIZE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_MIN_SHINGLE_SIZE },
-    { "DEFAULT_TOKEN_TYPE", "DEFAULT_TOKEN_TYPE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_TYPE, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_TOKEN_SEPARATOR", "DEFAULT_TOKEN_SEPARATOR", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR, NULL, .constantValue.asLong = 0 },
-    { "inputWindow_", NULL, 0x2, "Ljava.util.LinkedList;", NULL, "Ljava/util/LinkedList<Lorg/apache/lucene/analysis/shingle/ShingleFilter$InputWindowToken;>;", .constantValue.asLong = 0 },
-    { "gramSize_", NULL, 0x2, "Lorg.apache.lucene.analysis.shingle.ShingleFilter$CircularSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "gramBuilder_", NULL, 0x2, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenType_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenSeparator_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fillerToken_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "outputUnigrams_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "outputUnigramsIfNoShingles_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxShingleSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minShingleSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numFillerTokensToInsert_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextInputStreamToken_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource;", NULL, NULL, .constantValue.asLong = 0 },
-    { "isNextInputStreamToken_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "isOutputHere_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "noShingleOutput_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "endState_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncrAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posLenAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionLengthAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "exhausted_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_FILLER_TOKEN", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 17, -1, -1 },
+    { "DEFAULT_MAX_SHINGLE_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_MAX_SHINGLE_SIZE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MIN_SHINGLE_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_MIN_SHINGLE_SIZE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_TOKEN_TYPE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 18, -1, -1 },
+    { "DEFAULT_TOKEN_SEPARATOR", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 19, -1, -1 },
+    { "inputWindow_", "LJavaUtilLinkedList;", .constantValue.asLong = 0, 0x2, -1, -1, 20, -1 },
+    { "gramSize_", "LOrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "gramBuilder_", "LJavaLangStringBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tokenType_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tokenSeparator_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fillerToken_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "outputUnigrams_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "outputUnigramsIfNoShingles_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxShingleSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "minShingleSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "numFillerTokensToInsert_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "nextInputStreamToken_", "LOrgApacheLuceneUtilAttributeSource;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "isNextInputStreamToken_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "isOutputHere_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "noShingleOutput_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "endState_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posIncrAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posLenAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "typeAtt_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "exhausted_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.shingle.ShingleFilter$CircularSequence;", "Lorg.apache.lucene.analysis.shingle.ShingleFilter$InputWindowToken;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisShingleShingleFilter = { 2, "ShingleFilter", "org.apache.lucene.analysis.shingle", NULL, 0x11, 16, methods, 27, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;II", "LOrgApacheLuceneAnalysisTokenStream;I", "LOrgApacheLuceneAnalysisTokenStream;", "LOrgApacheLuceneAnalysisTokenStream;LNSString;", "setTokenType", "LNSString;", "setOutputUnigrams", "Z", "setOutputUnigramsIfNoShingles", "setMaxShingleSize", "I", "setMinShingleSize", "setTokenSeparator", "setFillerToken", "LJavaIoIOException;", "getNextToken", "LOrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken;", &OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN, &OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_TYPE, &OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR, "Ljava/util/LinkedList<Lorg/apache/lucene/analysis/shingle/ShingleFilter$InputWindowToken;>;", "LOrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence;LOrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisShingleShingleFilter = { "ShingleFilter", "org.apache.lucene.analysis.shingle", ptrTable, methods, fields, 7, 0x11, 16, 27, -1, 21, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisShingleShingleFilter;
 }
 
@@ -497,7 +517,7 @@ void OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysis
   JreStrongAssignAndConsume(&self->gramBuilder_, new_JavaLangStringBuilder_init());
   JreStrongAssign(&self->tokenType_, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_TYPE);
   JreStrongAssign(&self->tokenSeparator_, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR);
-  JreStrongAssign(&self->fillerToken_, [((NSString *) nil_chk(OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN)) toCharArray]);
+  JreStrongAssign(&self->fillerToken_, [((NSString *) nil_chk(OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN)) java_toCharArray]);
   self->outputUnigrams_ = true;
   self->outputUnigramsIfNoShingles_ = false;
   self->isNextInputStreamToken_ = false;
@@ -558,7 +578,7 @@ OrgApacheLuceneAnalysisShingleShingleFilter *create_OrgApacheLuceneAnalysisShing
 }
 
 OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *OrgApacheLuceneAnalysisShingleShingleFilter_getNextTokenWithOrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken_(OrgApacheLuceneAnalysisShingleShingleFilter *self, OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *target) {
-  OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *newTarget = target;
+  OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *newTarget = JreRetainedLocalValue(target);
   if (self->numFillerTokensToInsert_ > 0) {
     if (nil == target) {
       newTarget = create_OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken_initWithOrgApacheLuceneAnalysisShingleShingleFilter_withOrgApacheLuceneUtilAttributeSource_(self, [((OrgApacheLuceneUtilAttributeSource *) nil_chk(self->nextInputStreamToken_)) cloneAttributes]);
@@ -615,7 +635,7 @@ OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *OrgApacheLuceneAna
       if (self->numFillerTokensToInsert_ > 0) {
         JreStrongAssignAndConsume(&self->nextInputStreamToken_, new_OrgApacheLuceneUtilAttributeSource_initWithOrgApacheLuceneUtilAttributeFactory_([self getAttributeFactory]));
         [self->nextInputStreamToken_ addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
-        id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> newOffsetAtt = [((OrgApacheLuceneUtilAttributeSource *) nil_chk(self->nextInputStreamToken_)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
+        id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> newOffsetAtt = JreRetainedLocalValue([((OrgApacheLuceneUtilAttributeSource *) nil_chk(self->nextInputStreamToken_)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
         [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(newOffsetAtt)) setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) endOffset] withInt:[self->offsetAtt_ endOffset]];
         return OrgApacheLuceneAnalysisShingleShingleFilter_getNextTokenWithOrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken_(self, target);
       }
@@ -706,21 +726,32 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisShingleShingleFilter)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisShingleShingleFilter:", "CircularSequence", NULL, 0x1, NULL, NULL },
-    { "getValue", NULL, "I", 0x1, NULL, NULL },
-    { "advance", NULL, "V", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "atMinValue", NULL, "Z", 0x1, NULL, NULL },
-    { "getPreviousValue", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisShingleShingleFilter:);
+  methods[1].selector = @selector(getValue);
+  methods[2].selector = @selector(advance);
+  methods[3].selector = @selector(reset);
+  methods[4].selector = @selector(atMinValue);
+  methods[5].selector = @selector(getPreviousValue);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.analysis.shingle.ShingleFilter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "value_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "previousValue_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minValue_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneAnalysisShingleShingleFilter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "value_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "previousValue_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "minValue_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence = { 2, "CircularSequence", "org.apache.lucene.analysis.shingle", "ShingleFilter", 0x2, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisShingleShingleFilter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence = { "CircularSequence", "org.apache.lucene.analysis.shingle", ptrTable, methods, fields, 7, 0x2, 6, 4, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence;
 }
 
@@ -759,16 +790,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisShingleShingleFilter_Cir
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisShingleShingleFilter:withOrgApacheLuceneUtilAttributeSource:", "InputWindowToken", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisShingleShingleFilter:withOrgApacheLuceneUtilAttributeSource:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "attSource_", NULL, 0x10, "Lorg.apache.lucene.util.AttributeSource;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x10, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x10, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "isFiller_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "attSource_", "LOrgApacheLuceneUtilAttributeSource;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "isFiller_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken = { 2, "InputWindowToken", "org.apache.lucene.analysis.shingle", "ShingleFilter", 0x2, 1, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisShingleShingleFilter;LOrgApacheLuceneUtilAttributeSource;", "LOrgApacheLuceneAnalysisShingleShingleFilter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken = { "InputWindowToken", "org.apache.lucene.analysis.shingle", ptrTable, methods, fields, 7, 0x2, 1, 4, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken;
 }
 

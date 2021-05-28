@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues || defined(INCLUDE_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues))
 #define OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_
 
@@ -30,8 +36,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneRangetreeRangeTreeReader:(OrgApacheLuceneRangetreeRangeTreeReader *)rangeTreeReader
-                 withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)delegate;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader:(OrgApacheLuceneRangetreeRangeTreeReader *)rangeTreeReader
+                                         withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)delegate;
 
 - (jint)count;
 
@@ -41,6 +47,10 @@
 
 - (jlong)valueAtWithInt:(jint)index;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues)
@@ -48,14 +58,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues, rangeTreeReader_, OrgApacheLuceneRangetreeRangeTreeReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues, delegate_, OrgApacheLuceneIndexSortedNumericDocValues *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *self, OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *self, OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *new_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *new_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *create_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate);
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *create_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initPackagePrivateWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues")

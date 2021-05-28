@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedDirectPackedReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedDirectPackedReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectPackedReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectPackedReader))
 #define OrgApacheLuceneUtilPackedDirectPackedReader_
 
@@ -38,9 +44,13 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)bitsPerValue
-                    withInt:(jint)valueCount
-withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)bitsPerValue
+                                            withInt:(jint)valueCount
+                 withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -48,14 +58,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedDirectPackedReader)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedDirectPackedReader, in_, OrgApacheLuceneStoreIndexInput *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneUtilPackedDirectPackedReader *self, jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectPackedReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneUtilPackedDirectPackedReader *self, jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectPackedReader *new_OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectPackedReader *new_OrgApacheLuceneUtilPackedDirectPackedReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectPackedReader *create_OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectPackedReader *create_OrgApacheLuceneUtilPackedDirectPackedReader_initPackagePrivateWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectPackedReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectPackedReader")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory))
 #define OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_
 
@@ -41,12 +47,12 @@
 /*!
  @brief Factory for <code>MappingCharFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_map" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;charFilter class="solr.MappingCharFilterFactory" mapping="mapping.txt"/&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_map" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;charFilter class="solr.MappingCharFilterFactory" mapping="mapping.txt"/&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  @since Solr 1.4
  */
@@ -55,17 +61,14 @@
   OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *normMap_;
   IOSCharArray *out_;
 }
-
-+ (JavaUtilRegexPattern *)p;
-
-+ (void)setP:(JavaUtilRegexPattern *)value;
+@property (class, strong) JavaUtilRegexPattern *p NS_SWIFT_NAME(p);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new MappingCharFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (JavaIoReader *)createWithJavaIoReader:(JavaIoReader *)input;
 
@@ -87,7 +90,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory, normMap_, OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory, out_, IOSCharArray *)
 
-inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_get_p();
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_get_p(void);
 inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_set_p(JavaUtilRegexPattern *value);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_p;
@@ -103,4 +106,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFac
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory")

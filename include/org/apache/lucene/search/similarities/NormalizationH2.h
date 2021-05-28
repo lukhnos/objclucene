@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalizationH2
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesNormalizationH2_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH2 || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalizationH2))
 #define OrgApacheLuceneSearchSimilaritiesNormalizationH2_
 
@@ -24,12 +30,12 @@
 
 /*!
  @brief Normalization model in which the term frequency is inversely related to the
- length.
- <p>While this model is parameterless in the
+  length.
+ <p>While this model is parameterless in the 
  <a href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.101.742">
- original article</a>, the <a href="http://theses.gla.ac.uk/1570/">thesis</a>
- introduces the parameterized variant.
- The default value for the <code>c</code> parameter is <code>1</code>.</p>
+  original article</a>, the <a href="http://theses.gla.ac.uk/1570/">thesis</a>
+  introduces the parameterized variant.
+  The default value for the <code>c</code> parameter is <code>1</code>.</p>
  */
 @interface OrgApacheLuceneSearchSimilaritiesNormalizationH2 : OrgApacheLuceneSearchSimilaritiesNormalization
 
@@ -38,14 +44,13 @@
 /*!
  @brief Calls <code>NormalizationH2(1)</code>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates NormalizationH2 with the supplied parameter <code>c</code>.
- @param c hyper-parameter that controls the term frequency 
- normalization with respect to the document length.
+ @param c hyper-parameter that controls the term frequency   normalization with respect to the document length.
  */
-- (instancetype)initWithFloat:(jfloat)c;
+- (instancetype __nonnull)initWithFloat:(jfloat)c;
 
 /*!
  @brief Returns the <code>c</code> parameter.
@@ -71,12 +76,16 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH2 *create_OrgAp
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationH2_init(OrgApacheLuceneSearchSimilaritiesNormalizationH2 *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH2 *new_OrgApacheLuceneSearchSimilaritiesNormalizationH2_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH2 *new_OrgApacheLuceneSearchSimilaritiesNormalizationH2_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH2 *create_OrgApacheLuceneSearchSimilaritiesNormalizationH2_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH2 *create_OrgApacheLuceneSearchSimilaritiesNormalizationH2_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalizationH2)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH2")

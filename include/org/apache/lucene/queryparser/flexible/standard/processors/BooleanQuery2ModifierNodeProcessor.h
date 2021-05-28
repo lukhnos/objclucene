@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor))
 #define OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_
 
@@ -26,26 +32,26 @@
 
 /*!
  @brief <p>
- This processor is used to apply the correct <code>ModifierQueryNode</code> to
+  This processor is used to apply the correct <code>ModifierQueryNode</code> to 
  <code>BooleanQueryNode</code>s children.
- This is a variant of
- <code>BooleanModifiersQueryNodeProcessor</code> which ignores precedence.
+ This is a variant of 
+ <code>BooleanModifiersQueryNodeProcessor</code> which ignores precedence. 
  </p>
- <p>
- The <code>StandardSyntaxParser</code> knows the rules of precedence, but lucene
- does not. e.g. <code>(A AND B OR C AND D)</code> ist treated like
+  <p>
+  The <code>StandardSyntaxParser</code> knows the rules of precedence, but lucene
+  does not. e.g. <code>(A AND B OR C AND D)</code> ist treated like 
  <code>(+A +B +C +D)</code>.
- </p>
- <p>
- This processor walks through the query node tree looking for
+  </p>
+  <p>
+  This processor walks through the query node tree looking for 
  <code>BooleanQueryNode</code>s. If an <code>AndQueryNode</code> is found, every child,
- which is not a <code>ModifierQueryNode</code> or the <code>ModifierQueryNode</code> is
- <code>Modifier.MOD_NONE</code>, becomes a <code>Modifier.MOD_REQ</code>. For default
- <code>BooleanQueryNode</code>, it checks the default operator is
- <code>Operator.AND</code>, if it is, the same operation when an
+  which is not a <code>ModifierQueryNode</code> or the <code>ModifierQueryNode</code> is 
+ <code>Modifier.MOD_NONE</code>, becomes a <code>Modifier.MOD_REQ</code>. For default 
+ <code>BooleanQueryNode</code>, it checks the default operator is 
+ <code>Operator.AND</code>, if it is, the same operation when an 
  <code>AndQueryNode</code> is found is applied to it. Each <code>BooleanQueryNode</code>
- which direct parent is also a <code>BooleanQueryNode</code> is removed (to ignore
- the rules of precedence).
+  which direct parent is also a <code>BooleanQueryNode</code> is removed (to ignore
+  the rules of precedence). 
  </p>
  - seealso: ConfigurationKeys#DEFAULT_OPERATOR
  - seealso: BooleanModifiersQueryNodeProcessor
@@ -54,16 +60,13 @@
  @public
   OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfigHandler_;
 }
-
-+ (NSString *)TAG_REMOVE;
-
-+ (NSString *)TAG_MODIFIER;
-
-+ (NSString *)TAG_BOOLEAN_ROOT;
+@property (readonly, copy, class) NSString *TAG_REMOVE NS_SWIFT_NAME(TAG_REMOVE);
+@property (readonly, copy, class) NSString *TAG_MODIFIER NS_SWIFT_NAME(TAG_MODIFIER);
+@property (readonly, copy, class) NSString *TAG_BOOLEAN_ROOT NS_SWIFT_NAME(TAG_BOOLEAN_ROOT);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)getQueryConfigHandler;
 
@@ -92,29 +95,33 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardProcessorsBoo
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor, queryConfigHandler_, OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_get_TAG_REMOVE();
+inline NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_get_TAG_REMOVE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_TAG_REMOVE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor, TAG_REMOVE, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_get_TAG_MODIFIER();
+inline NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_get_TAG_MODIFIER(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_TAG_MODIFIER;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor, TAG_MODIFIER, NSString *)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_get_TAG_BOOLEAN_ROOT();
+inline NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_get_TAG_BOOLEAN_ROOT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_TAG_BOOLEAN_ROOT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor, TAG_BOOLEAN_ROOT, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor")

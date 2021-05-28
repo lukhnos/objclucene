@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCjkCJKAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCjkCJKAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisCjkCJKAnalyzer))
 #define OrgApacheLuceneAnalysisCjkCJKAnalyzer_
 
@@ -25,27 +31,25 @@
 
 /*!
  @brief An <code>Analyzer</code> that tokenizes text with <code>StandardTokenizer</code>,
- normalizes content with <code>CJKWidthFilter</code>, folds case with
+  normalizes content with <code>CJKWidthFilter</code>, folds case with 
  <code>LowerCaseFilter</code>, forms bigrams of CJK with <code>CJKBigramFilter</code>,
- and filters stopwords with <code>StopFilter</code>
+  and filters stopwords with <code>StopFilter</code>
  */
 @interface OrgApacheLuceneAnalysisCjkCJKAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
-
-+ (NSString *)DEFAULT_STOPWORD_FILE;
+@property (readonly, copy, class) NSString *DEFAULT_STOPWORD_FILE NS_SWIFT_NAME(DEFAULT_STOPWORD_FILE);
 
 #pragma mark Public
 
 /*!
  @brief Builds an analyzer which removes words in <code>getDefaultStopSet()</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Builds an analyzer with the given stop words
- @param stopwords
- a stopword set
+ @param stopwords a stopword set
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
 /*!
  @brief Returns an unmodifiable instance of the default stop-words set.
@@ -64,21 +68,21 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCjkCJKAnalyzer)
 /*!
  @brief File containing default CJK stopwords.
  <p>
- Currently it contains some common English words that are not usually
- useful for searching and some double-byte interpunctions.
+  Currently it contains some common English words that are not usually
+  useful for searching and some double-byte interpunctions.
  */
-inline NSString *OrgApacheLuceneAnalysisCjkCJKAnalyzer_get_DEFAULT_STOPWORD_FILE();
+inline NSString *OrgApacheLuceneAnalysisCjkCJKAnalyzer_get_DEFAULT_STOPWORD_FILE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCjkCJKAnalyzer_DEFAULT_STOPWORD_FILE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCjkCJKAnalyzer_getDefaultStopSet();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCjkCJKAnalyzer_getDefaultStopSet(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCjkCJKAnalyzer_init(OrgApacheLuceneAnalysisCjkCJKAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCjkCJKAnalyzer *new_OrgApacheLuceneAnalysisCjkCJKAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCjkCJKAnalyzer *new_OrgApacheLuceneAnalysisCjkCJKAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCjkCJKAnalyzer *create_OrgApacheLuceneAnalysisCjkCJKAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCjkCJKAnalyzer *create_OrgApacheLuceneAnalysisCjkCJKAnalyzer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCjkCJKAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCjkCJKAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
@@ -90,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCjkCJKAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKAnalyzer")

@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/PatternConsumer.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/hyphenation/PatternConsumer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer : NSObject
 
 @end
@@ -13,12 +17,20 @@
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addClassWithNSString:", "addClass", "V", 0x401, NULL, NULL },
-    { "addExceptionWithNSString:withJavaUtilArrayList:", "addException", "V", 0x401, NULL, "(Ljava/lang/String;Ljava/util/ArrayList<Ljava/lang/Object;>;)V" },
-    { "addPatternWithNSString:withNSString:", "addPattern", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 2, 3, -1, 4, -1, -1 },
+    { NULL, "V", 0x401, 5, 6, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer = { 2, "PatternConsumer", "org.apache.lucene.analysis.compound.hyphenation", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(addClassWithNSString:);
+  methods[1].selector = @selector(addExceptionWithNSString:withJavaUtilArrayList:);
+  methods[2].selector = @selector(addPatternWithNSString:withNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "addClass", "LNSString;", "addException", "LNSString;LJavaUtilArrayList;", "(Ljava/lang/String;Ljava/util/ArrayList<Ljava/lang/Object;>;)V", "addPattern", "LNSString;LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer = { "PatternConsumer", "org.apache.lucene.analysis.compound.hyphenation", ptrTable, methods, NULL, 7, 0x609, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer;
 }
 

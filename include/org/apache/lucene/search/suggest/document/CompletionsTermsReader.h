@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader))
 #define OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_
 
@@ -26,7 +32,7 @@
 
 /*!
  @brief Holder for suggester and field-level info
- for a suggest field
+  for a suggest field
  */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -52,7 +58,7 @@
 
 /*!
  @brief Returns the suggester for a field, if not loaded already, loads
- the appropriate suggester from CompletionDictionary
+  the appropriate suggester from CompletionDictionary
  */
 - (OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester;
 
@@ -60,13 +66,17 @@
 
 /*!
  @brief Creates a CompletionTermsReader to load a field-specific suggester
- from the index <code>dictIn</code> with <code>offset</code>
+  from the index <code>dictIn</code> with <code>offset</code>
  */
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)dictIn
-                                              withLong:(jlong)offset
-                                              withLong:(jlong)minWeight
-                                              withLong:(jlong)maxWeight
-                                              withByte:(jbyte)type;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)dictIn
+                                                        withLong:(jlong)offset
+                                                        withLong:(jlong)minWeight
+                                                        withLong:(jlong)maxWeight
+                                                        withByte:(jbyte)type;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -82,4 +92,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsR
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader")

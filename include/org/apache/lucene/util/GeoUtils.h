@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilGeoUtils
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilGeoUtils_) && (INCLUDE_ALL_OrgApacheLuceneUtilGeoUtils || defined(INCLUDE_OrgApacheLuceneUtilGeoUtils))
 #define OrgApacheLuceneUtilGeoUtils_
 
@@ -24,18 +30,12 @@
  @brief Basic reusable geo-spatial utility methods
  */
 @interface OrgApacheLuceneUtilGeoUtils : NSObject
-
-+ (jshort)BITS;
-
-+ (jdouble)TOLERANCE;
-
-+ (jdouble)MIN_LON_INCL;
-
-+ (jdouble)MAX_LON_INCL;
-
-+ (jdouble)MIN_LAT_INCL;
-
-+ (jdouble)MAX_LAT_INCL;
+@property (readonly, class) jshort BITS NS_SWIFT_NAME(BITS);
+@property (readonly, class) jdouble TOLERANCE NS_SWIFT_NAME(TOLERANCE);
+@property (readonly, class) jdouble MIN_LON_INCL NS_SWIFT_NAME(MIN_LON_INCL);
+@property (readonly, class) jdouble MAX_LON_INCL NS_SWIFT_NAME(MAX_LON_INCL);
+@property (readonly, class) jdouble MIN_LAT_INCL NS_SWIFT_NAME(MIN_LAT_INCL);
+@property (readonly, class) jdouble MAX_LAT_INCL NS_SWIFT_NAME(MAX_LAT_INCL);
 
 #pragma mark Public
 
@@ -93,12 +93,12 @@
 
 /*!
  @brief simple even-odd point in polygon computation
- 1.
- Determine if point is contained in the longitudinal range
- 2.  Determine whether point crosses the edge by computing the latitudinal delta
- between the end-point of a parallel vector (originating at the point) and the
- y-component of the edge sink
- NOTE: Requires polygon point (x,y) order either clockwise or counter-clockwise
+     1.Determine if point is contained in the longitudinal range
+     2.
+ Determine whether point crosses the edge by computing the latitudinal delta
+         between the end-point of a parallel vector (originating at the point) and the
+         y-component of the edge sink
+  NOTE: Requires polygon point (x,y) order either clockwise or counter-clockwise
  */
 + (jboolean)pointInPolygonWithDoubleArray:(IOSDoubleArray *)x
                           withDoubleArray:(IOSDoubleArray *)y
@@ -211,39 +211,39 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilGeoUtils)
 
-inline jshort OrgApacheLuceneUtilGeoUtils_get_BITS();
+inline jshort OrgApacheLuceneUtilGeoUtils_get_BITS(void);
 #define OrgApacheLuceneUtilGeoUtils_BITS 32
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, BITS, jshort)
 
-inline jdouble OrgApacheLuceneUtilGeoUtils_get_TOLERANCE();
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_TOLERANCE(void);
 #define OrgApacheLuceneUtilGeoUtils_TOLERANCE 1.0E-6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, TOLERANCE, jdouble)
 
 /*!
  @brief Minimum longitude value.
  */
-inline jdouble OrgApacheLuceneUtilGeoUtils_get_MIN_LON_INCL();
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_MIN_LON_INCL(void);
 #define OrgApacheLuceneUtilGeoUtils_MIN_LON_INCL -180.0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MIN_LON_INCL, jdouble)
 
 /*!
  @brief Maximum longitude value.
  */
-inline jdouble OrgApacheLuceneUtilGeoUtils_get_MAX_LON_INCL();
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_MAX_LON_INCL(void);
 #define OrgApacheLuceneUtilGeoUtils_MAX_LON_INCL 180.0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MAX_LON_INCL, jdouble)
 
 /*!
  @brief Minimum latitude value.
  */
-inline jdouble OrgApacheLuceneUtilGeoUtils_get_MIN_LAT_INCL();
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_MIN_LAT_INCL(void);
 #define OrgApacheLuceneUtilGeoUtils_MIN_LAT_INCL -90.0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MIN_LAT_INCL, jdouble)
 
 /*!
  @brief Maximum latitude value.
  */
-inline jdouble OrgApacheLuceneUtilGeoUtils_get_MAX_LAT_INCL();
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_MAX_LAT_INCL(void);
 #define OrgApacheLuceneUtilGeoUtils_MAX_LAT_INCL 90.0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MAX_LAT_INCL, jdouble)
 
@@ -295,4 +295,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilGeoUtils)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilGeoUtils")

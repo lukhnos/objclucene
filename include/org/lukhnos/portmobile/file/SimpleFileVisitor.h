@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgLukhnosPortmobileFileSimpleFileVisitor
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileFileSimpleFileVisitor_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileSimpleFileVisitor || defined(INCLUDE_OrgLukhnosPortmobileFileSimpleFileVisitor))
 #define OrgLukhnosPortmobileFileSimpleFileVisitor_
 
@@ -28,7 +34,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgLukhnosPortmobileFileFileVisitResult *)postVisitDirectoryWithId:(id)dir
                                                 withJavaIoIOException:(JavaIoIOException *)exc;
@@ -48,12 +54,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileFileSimpleFileVisitor)
 
 FOUNDATION_EXPORT void OrgLukhnosPortmobileFileSimpleFileVisitor_init(OrgLukhnosPortmobileFileSimpleFileVisitor *self);
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileSimpleFileVisitor *new_OrgLukhnosPortmobileFileSimpleFileVisitor_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileSimpleFileVisitor *new_OrgLukhnosPortmobileFileSimpleFileVisitor_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileSimpleFileVisitor *create_OrgLukhnosPortmobileFileSimpleFileVisitor_init();
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileSimpleFileVisitor *create_OrgLukhnosPortmobileFileSimpleFileVisitor_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileSimpleFileVisitor)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileSimpleFileVisitor")

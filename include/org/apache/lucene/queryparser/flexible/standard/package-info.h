@@ -6,17 +6,17 @@
 /*!
  @brief Implementation of the Lucene classic query parser using the flexible query parser frameworks
  <h2>Lucene Flexible Query Parser Implementation</h2>
- <p>
- The old Lucene query parser used to have only one class that performed 
- all the parsing operations.
+  <p>
+  The old Lucene query parser used to have only one class that performed 
+  all the parsing operations.
  In the new query parser structure, the 
- parsing was divided in 3 steps: parsing (syntax), processing (semantic)
- and building.
+  parsing was divided in 3 steps: parsing (syntax), processing (semantic)
+  and building. 
  <p>
- The classes contained in the package org.apache.lucene.queryParser.standard
- are used to reproduce the same behavior as the old query parser.
+  The classes contained in the package org.apache.lucene.queryParser.standard
+  are used to reproduce the same behavior as the old query parser.  
  <p>
- Check <code>org.apache.lucene.queryparser.flexible.standard.StandardQueryParser</code> to quick start using the Lucene query parser.
+  Check <code>org.apache.lucene.queryparser.flexible.standard.StandardQueryParser</code> to quick start using the Lucene query parser.
  */
 #include "J2ObjC_header.h"
 
@@ -28,4 +28,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardPackage_info")

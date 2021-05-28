@@ -8,6 +8,10 @@
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/DisiWrapper must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchDisiWrapper
 
 - (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator {
@@ -24,20 +28,26 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchDocIdSetIterator:", "DisiWrapper", NULL, 0x1, NULL, "(TIter;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchDocIdSetIterator:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "iterator_", NULL, 0x11, "TIter;", NULL, "TIter;", .constantValue.asLong = 0 },
-    { "cost_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x1, "Lorg.apache.lucene.search.DisiWrapper;", NULL, "Lorg/apache/lucene/search/DisiWrapper<TIter;>;", .constantValue.asLong = 0 },
-    { "approximation_", NULL, 0x11, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "twoPhaseView_", NULL, 0x11, "Lorg.apache.lucene.search.TwoPhaseIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastApproxMatchDoc_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastApproxNonMatchDoc_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "iterator_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x11, -1, -1, 2, -1 },
+    { "cost_", "J", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "next_", "LOrgApacheLuceneSearchDisiWrapper;", .constantValue.asLong = 0, 0x1, -1, -1, 3, -1 },
+    { "approximation_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "twoPhaseView_", "LOrgApacheLuceneSearchTwoPhaseIterator;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "lastApproxMatchDoc_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "lastApproxNonMatchDoc_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisiWrapper = { 2, "DisiWrapper", "org.apache.lucene.search", NULL, 0x1, 1, methods, 8, fields, 0, NULL, 0, NULL, NULL, "<Iter:Lorg/apache/lucene/search/DocIdSetIterator;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchDocIdSetIterator;", "(TIter;)V", "TIter;", "Lorg/apache/lucene/search/DisiWrapper<TIter;>;", "<Iter:Lorg/apache/lucene/search/DocIdSetIterator;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisiWrapper = { "DisiWrapper", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 1, 8, -1, -1, -1, 4, -1 };
   return &_OrgApacheLuceneSearchDisiWrapper;
 }
 

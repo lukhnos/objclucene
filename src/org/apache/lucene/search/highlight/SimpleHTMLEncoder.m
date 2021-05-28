@@ -7,6 +7,10 @@
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/search/highlight/SimpleHTMLEncoder.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/SimpleHTMLEncoder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchHighlightSimpleHTMLEncoder
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -25,12 +29,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SimpleHTMLEncoder", NULL, 0x1, NULL, NULL },
-    { "encodeTextWithNSString:", "encodeText", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "htmlEncodeWithNSString:", "htmlEncode", "Ljava.lang.String;", 0x19, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x19, 2, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleHTMLEncoder = { 2, "SimpleHTMLEncoder", "org.apache.lucene.search.highlight", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(encodeTextWithNSString:);
+  methods[2].selector = @selector(htmlEncodeWithNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "encodeText", "LNSString;", "htmlEncode" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleHTMLEncoder = { "SimpleHTMLEncoder", "org.apache.lucene.search.highlight", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder;
 }
 
@@ -50,11 +62,11 @@ OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *create_OrgApacheLuceneSearchHig
 
 NSString *OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_htmlEncodeWithNSString_(NSString *plainText) {
   OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_initialize();
-  if (plainText == nil || ((jint) [plainText length]) == 0) {
+  if (plainText == nil || [plainText java_length] == 0) {
     return @"";
   }
-  JavaLangStringBuilder *result = create_JavaLangStringBuilder_initWithInt_(((jint) [plainText length]));
-  for (jint index = 0; index < ((jint) [plainText length]); index++) {
+  JavaLangStringBuilder *result = create_JavaLangStringBuilder_initWithInt_([plainText java_length]);
+  for (jint index = 0; index < [plainText java_length]; index++) {
     jchar ch = [plainText charAtWithInt:index];
     switch (ch) {
       case '"':

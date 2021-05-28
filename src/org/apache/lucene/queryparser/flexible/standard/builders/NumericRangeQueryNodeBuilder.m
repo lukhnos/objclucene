@@ -23,6 +23,10 @@
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/NumericRangeQueryNode.h"
 #include "org/apache/lucene/search/NumericRangeQuery.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/builders/NumericRangeQueryNodeBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -34,12 +38,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchNumericRangeQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
   OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *numericRangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode class]);
-  OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *lowerNumericNode = [((OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *) nil_chk(numericRangeNode)) getLowerBound];
-  OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *upperNumericNode = [numericRangeNode getUpperBound];
-  NSNumber *lowerNumber = [((OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *) nil_chk(lowerNumericNode)) getValue];
-  NSNumber *upperNumber = [((OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *) nil_chk(upperNumericNode)) getValue];
-  OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig = [numericRangeNode getNumericConfig];
-  OrgApacheLuceneDocumentFieldType_NumericType *numberType = [((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(numericConfig)) getType];
+  OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *lowerNumericNode = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *) nil_chk(numericRangeNode)) getLowerBound]);
+  OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *upperNumericNode = JreRetainedLocalValue([numericRangeNode getUpperBound]);
+  NSNumber *lowerNumber = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *) nil_chk(lowerNumericNode)) getValue]);
+  NSNumber *upperNumber = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *) nil_chk(upperNumericNode)) getValue]);
+  OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig = JreRetainedLocalValue([numericRangeNode getNumericConfig]);
+  OrgApacheLuceneDocumentFieldType_NumericType *numberType = JreRetainedLocalValue([((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(numericConfig)) getType]);
   NSString *field = OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_([numericRangeNode getField]);
   jboolean minInclusive = [numericRangeNode isLowerInclusive];
   jboolean maxInclusive = [numericRangeNode isUpperInclusive];
@@ -59,11 +63,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NumericRangeQueryNodeBuilder", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;)Lorg/apache/lucene/search/NumericRangeQuery<+Ljava/lang/Number;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchNumericRangeQuery;", 0x1, 0, 1, 2, 3, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder = { 2, "NumericRangeQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "build", "LOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;", "LOrgApacheLuceneQueryparserFlexibleCoreQueryNodeException;", "(Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;)Lorg/apache/lucene/search/NumericRangeQuery<+Ljava/lang/Number;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder = { "NumericRangeQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder;
 }
 

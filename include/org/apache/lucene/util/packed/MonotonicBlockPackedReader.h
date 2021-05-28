@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader || defined(INCLUDE_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader))
 #define OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_
 
@@ -31,12 +37,13 @@
 @protocol JavaUtilCollection;
 
 /*!
- @brief Provides random access to a stream written with
+ @brief Provides random access to a stream written with 
  <code>MonotonicBlockPackedWriter</code>.
  */
 @interface OrgApacheLuceneUtilPackedMonotonicBlockPackedReader : OrgApacheLuceneUtilLongValues < OrgApacheLuceneUtilAccountable > {
  @public
-  jint blockShift_, blockMask_;
+  jint blockShift_;
+  jint blockMask_;
   jlong valueCount_;
   IOSLongArray *minValues_;
   IOSFloatArray *averages_;
@@ -78,6 +85,10 @@
                 withFloat:(jfloat)average
                   withInt:(jint)index;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader)
@@ -94,4 +105,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader")

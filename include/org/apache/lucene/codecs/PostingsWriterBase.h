@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsPostingsWriterBase
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsPostingsWriterBase_) && (INCLUDE_ALL_OrgApacheLuceneCodecsPostingsWriterBase || defined(INCLUDE_OrgApacheLuceneCodecsPostingsWriterBase))
 #define OrgApacheLuceneCodecsPostingsWriterBase_
 
@@ -44,15 +50,15 @@
 /*!
  @brief Encode metadata as long[] and byte[].
  <code>absolute</code> controls whether 
- current term is delta encoded according to latest term. 
- Usually elements in <code>longs</code> are file pointers, so each one always 
- increases when a new term is consumed. <code>out</code> is used to write generic
- bytes, which are not monotonic.
- NOTE: sometimes long[] might contain "don't care" values that are unused, e.g. 
- the pointer to postings list may not be defined for some terms but is defined
- for others, if it is designed to inline  some postings data in term dictionary.
- In this case, the postings writer should always use the last value, so that each
- element in metadata long[] remains monotonic.
+  current term is delta encoded according to latest term. 
+  Usually elements in <code>longs</code> are file pointers, so each one always 
+  increases when a new term is consumed. <code>out</code> is used to write generic
+  bytes, which are not monotonic.
+  NOTE: sometimes long[] might contain "don't care" values that are unused, e.g. 
+  the pointer to postings list may not be defined for some terms but is defined
+  for others, if it is designed to inline  some postings data in term dictionary.
+  In this case, the postings writer should always use the last value, so that each
+  element in metadata long[] remains monotonic.
  */
 - (void)encodeTermWithLongArray:(IOSLongArray *)longs
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
@@ -62,30 +68,29 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)s
 
 /*!
  @brief Called once after startup, before any terms have been
- added.
- Implementations typically write a header to
- the provided <code>termsOut</code>. 
+   added.Implementations typically write a header to
+   the provided <code>termsOut</code>.
  */
 - (void)init__WithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)termsOut
         withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state OBJC_METHOD_FAMILY_NONE;
 
 /*!
  @brief Sets the current field for writing, and returns the
- fixed length of long[] metadata (which is fixed per
- field), called when the writing switches to another field.
+  fixed length of long[] metadata (which is fixed per
+  field), called when the writing switches to another field.
  */
 - (jint)setFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 /*!
  @brief Write all postings for one term; use the provided
- <code>TermsEnum</code> to pull a <code>org.apache.lucene.index.PostingsEnum</code>.
+   <code>TermsEnum</code> to pull a <code>org.apache.lucene.index.PostingsEnum</code>.
  This method should not
- re-position the <code>TermsEnum</code>!  It is already
- positioned on the term that should be written.  This
- method must set the bit in the provided <code>FixedBitSet</code>
+   re-position the <code>TermsEnum</code>!  It is already
+   positioned on the term that should be written.  This
+   method must set the bit in the provided <code>FixedBitSet</code>
   for every docID written.  If no docs
- were written, this method should return null, and the
- terms dict will skip the term. 
+   were written, this method should return null, and the
+   terms dict will skip the term.
  */
 - (OrgApacheLuceneCodecsBlockTermState *)writeTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                                                 withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
@@ -96,9 +101,9 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)s
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -110,4 +115,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPostingsWriterBase)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPostingsWriterBase")

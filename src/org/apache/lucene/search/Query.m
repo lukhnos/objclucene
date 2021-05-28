@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/CloneNotSupportedException.h"
 #include "java/lang/Float.h"
 #include "java/lang/RuntimeException.h"
@@ -15,6 +14,10 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/Weight.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/Query must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchQuery () {
  @public
   jfloat boost_;
@@ -23,6 +26,13 @@
 @end
 
 @implementation OrgApacheLuceneSearchQuery
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchQuery_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setBoostWithFloat:(jfloat)b {
   boost_ = b;
@@ -51,57 +61,65 @@
   return self;
 }
 
-- (OrgApacheLuceneSearchQuery *)clone {
+- (OrgApacheLuceneSearchQuery *)java_clone {
   @try {
-    return (OrgApacheLuceneSearchQuery *) cast_chk([super clone], [OrgApacheLuceneSearchQuery class]);
+    return (OrgApacheLuceneSearchQuery *) cast_chk([super java_clone], [OrgApacheLuceneSearchQuery class]);
   }
   @catch (JavaLangCloneNotSupportedException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"Clone not supported: ", [((JavaLangCloneNotSupportedException *) nil_chk(e)) getMessage]));
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"Clone not supported: ", [e getMessage]));
   }
 }
 
 - (NSUInteger)hash {
-  return JavaLangFloat_floatToIntBitsWithFloat_([self getBoost]) ^ ((jint) [[self getClass] hash]);
+  return JavaLangFloat_floatToIntBitsWithFloat_([self getBoost]) ^ ((jint) [[self java_getClass] hash]);
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneSearchQuery *other = (OrgApacheLuceneSearchQuery *) cast_chk(obj, [OrgApacheLuceneSearchQuery class]);
   if (JavaLangFloat_floatToIntBitsWithFloat_(boost_) != JavaLangFloat_floatToIntBitsWithFloat_(other->boost_)) return false;
   return true;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchQuery_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, 2, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 4, 5, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 7, 8, 6, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 11, 12, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setBoostWithFloat:);
+  methods[2].selector = @selector(getBoost);
+  methods[3].selector = @selector(toStringWithNSString:);
+  methods[4].selector = @selector(description);
+  methods[5].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[6].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[7].selector = @selector(java_clone);
+  methods[8].selector = @selector(hash);
+  methods[9].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "boost_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "setBoost", "F", "toString", "LNSString;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "clone", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchQuery = { "Query", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 10, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchQuery;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setBoostWithFloat:", "setBoost", "V", 0x1, NULL, NULL },
-    { "getBoost", NULL, "F", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "init", "Query", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "boost_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchQuery = { 2, "Query", "org.apache.lucene.search", NULL, 0x401, 10, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchQuery;
+  return [[self java_clone] retain];
 }
 
 @end

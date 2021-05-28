@@ -13,39 +13,44 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreDataInput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreDataInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreDataInput || defined(INCLUDE_OrgApacheLuceneStoreDataInput))
 #define OrgApacheLuceneStoreDataInput_
 
 @class IOSByteArray;
-@class IOSObjectArray;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
 
 /*!
  @brief Abstract base class for performing read operations of Lucene's low-level
- data types.
+  data types.
  <p><code>DataInput</code> may only be used from one thread, because it is not
- thread safe (it keeps internal state like file position). To allow
- multithreaded use, every <code>DataInput</code> instance must be cloned before
- used in another thread. Subclasses must therefore implement <code>clone()</code>,
- returning a new <code>DataInput</code> which operates on the same underlying
- resource, but positioned independently.
+  thread safe (it keeps internal state like file position). To allow
+  multithreaded use, every <code>DataInput</code> instance must be cloned before
+  used in another thread. Subclasses must therefore implement <code>clone()</code>,
+  returning a new <code>DataInput</code> which operates on the same underlying
+  resource, but positioned independently.
  */
 @interface OrgApacheLuceneStoreDataInput : NSObject < NSCopying >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Returns a clone of this stream.
  <p>Clones of a stream access the same data, and are positioned at the same
- point as the stream they were cloned from.
+  point as the stream they were cloned from. 
  <p>Expert: Subclasses must ensure that clones may be positioned at
- different points in the input from each other and from the stream they
- were cloned from.
+  different points in the input from each other and from the stream they
+  were cloned from.
  */
-- (OrgApacheLuceneStoreDataInput *)clone;
+- (OrgApacheLuceneStoreDataInput *)java_clone;
 
 /*!
  @brief Reads and returns a single byte.
@@ -66,16 +71,14 @@
 
 /*!
  @brief Reads a specified number of bytes into an array at the
- specified offset with control over whether the read
- should be buffered (callers who have their own buffer
- should pass in "false" for useBuffer).
- Currently only
+  specified offset with control over whether the read
+  should be buffered (callers who have their own buffer
+  should pass in "false" for useBuffer).Currently only 
  <code>BufferedIndexInput</code> respects this parameter.
  @param b the array to read bytes into
  @param offset the offset in the array to start storing bytes
  @param len the number of bytes to read
- @param useBuffer set to false if the caller will handle
- buffering.
+ @param useBuffer set to false if the caller will handle  buffering.
  - seealso: DataOutput#writeBytes(byte[],int)
  */
 - (void)readBytesWithByteArray:(IOSByteArray *)b
@@ -97,14 +100,14 @@
 
 /*!
  @brief Reads a Map&lt;String,String&gt; previously written
- with <code>DataOutput.writeMapOfStrings(Map)</code>.
+  with <code>DataOutput.writeMapOfStrings(Map)</code>.
  @return An immutable map containing the written contents.
  */
 - (id<JavaUtilMap>)readMapOfStrings;
 
 /*!
  @brief Reads a Set&lt;String&gt; previously written
- with <code>DataOutput.writeSetOfStrings(Set)</code>.
+  with <code>DataOutput.writeSetOfStrings(Set)</code>.
  @return An immutable set containing the written contents.
  */
 - (id<JavaUtilSet>)readSetOfStrings;
@@ -123,60 +126,59 @@
 
 /*!
  @brief Reads a Set&lt;String&gt; previously written
- with <code>DataOutput.writeStringSet(Set)</code>.
+   with <code>DataOutput.writeStringSet(Set)</code>.
  */
 - (id<JavaUtilSet>)readStringSet;
 
 /*!
  @brief Reads a Map&lt;String,String&gt; previously written
- with <code>DataOutput.writeStringStringMap(Map)</code>.
+   with <code>DataOutput.writeStringStringMap(Map)</code>.
  */
 - (id<JavaUtilMap>)readStringStringMap;
 
 /*!
- @brief Reads an int stored in variable-length format.
- Reads between one and
- five bytes.  Smaller values take fewer bytes.  Negative numbers are not
- supported.
+ @brief Reads an int stored in variable-length format.Reads between one and
+  five bytes.
+ Smaller values take fewer bytes.  Negative numbers are not
+  supported. 
  <p>
- The format is described further in <code>DataOutput.writeVInt(int)</code>.
+  The format is described further in <code>DataOutput.writeVInt(int)</code>.
  - seealso: DataOutput#writeVInt(int)
  */
 - (jint)readVInt;
 
 /*!
- @brief Reads a long stored in variable-length format.
- Reads between one and
- nine bytes.  Smaller values take fewer bytes.  Negative numbers are not
- supported.
+ @brief Reads a long stored in variable-length format.Reads between one and
+  nine bytes.
+ Smaller values take fewer bytes.  Negative numbers are not
+  supported. 
  <p>
- The format is described further in <code>DataOutput.writeVInt(int)</code>.
+  The format is described further in <code>DataOutput.writeVInt(int)</code>.
  - seealso: DataOutput#writeVLong(long)
  */
 - (jlong)readVLong;
 
 /*!
  @brief Read a <code>zig-zag</code>-encoded
- <code>variable-length</code> integer.
+  <code>variable-length</code> integer.
  - seealso: DataOutput#writeZInt(int)
  */
 - (jint)readZInt;
 
 /*!
  @brief Read a <code>zig-zag</code>-encoded
- <code>variable-length</code> integer.
- Reads between one and ten
- bytes.
+  <code>variable-length</code> integer.Reads between one and ten
+  bytes.
  - seealso: DataOutput#writeZLong(long)
  */
 - (jlong)readZLong;
 
 /*!
- @brief Skip over <code>numBytes</code> bytes.
- The contract on this method is that it
- should have the same behavior as reading the same number of bytes into a
- buffer and discarding its content. Negative values of <code>numBytes</code>
- are not supported.
+ @brief Skip over <code>numBytes</code> bytes.The contract on this method is that it
+  should have the same behavior as reading the same number of bytes into a
+  buffer and discarding its content.
+ Negative values of <code>numBytes</code>
+  are not supported.
  */
 - (void)skipBytesWithLong:(jlong)numBytes;
 
@@ -190,4 +192,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreDataInput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreDataInput")

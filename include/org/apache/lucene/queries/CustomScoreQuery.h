@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesCustomScoreQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesCustomScoreQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueriesCustomScoreQuery || defined(INCLUDE_OrgApacheLuceneQueriesCustomScoreQuery))
 #define OrgApacheLuceneQueriesCustomScoreQuery_
 
@@ -29,13 +35,13 @@
 @class OrgApacheLuceneSearchWeight;
 
 /*!
- @brief Query that sets document score as a programmatic function of several (sub) scores:
+ @brief Query that sets document score as a programmatic function of several (sub) scores: 
  <ol>
- <li>the score of its subQuery (any query)</li>
- <li>(optional) the score of its <code>FunctionQuery</code> (or queries).
+     <li>the score of its subQuery (any query)</li>
+     <li>(optional) the score of its <code>FunctionQuery</code> (or queries).
  </li>
- </ol>
- Subclasses can modify the computation by overriding <code>getCustomScoreProvider</code>.
+  </ol>
+  Subclasses can modify the computation by overriding <code>getCustomScoreProvider</code>.
  */
 @interface OrgApacheLuceneQueriesCustomScoreQuery : OrgApacheLuceneSearchQuery
 
@@ -45,27 +51,25 @@
  @brief Create a CustomScoreQuery over input subQuery.
  @param subQuery the sub query whose scored is being customized. Must not be null.
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery;
 
 /*!
  @brief Create a CustomScoreQuery over input subQuery and a <code>org.apache.lucene.queries.function.FunctionQuery</code>.
  @param subQuery the sub query whose score is being customized. Must not be null.
- @param scoringQuery a value source query whose scores are used in the custom score
- computation.  This parameter is optional - it can be null.
+ @param scoringQuery a value source query whose scores are used in the custom score  computation.  This parameter is optional - it can be null.
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery
-   withOrgApacheLuceneQueriesFunctionFunctionQuery:(OrgApacheLuceneQueriesFunctionFunctionQuery *)scoringQuery;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery
+             withOrgApacheLuceneQueriesFunctionFunctionQuery:(OrgApacheLuceneQueriesFunctionFunctionQuery *)scoringQuery;
 
 /*!
  @brief Create a CustomScoreQuery over input subQuery and a <code>org.apache.lucene.queries.function.FunctionQuery</code>.
  @param subQuery the sub query whose score is being customized. Must not be null.
- @param scoringQueries value source queries whose scores are used in the custom score
- computation.  This parameter is optional - it can be null or even an empty array.
+ @param scoringQueries value source queries whose scores are used in the custom score  computation.  This parameter is optional - it can be null or even an empty array.
  */
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery
-withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQueries;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery
+        withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQueries;
 
-- (OrgApacheLuceneQueriesCustomScoreQuery *)clone;
+- (OrgApacheLuceneQueriesCustomScoreQuery *)java_clone;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -93,11 +97,11 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
 /*!
  @brief Checks if this is strict custom scoring.
  In strict custom scoring, the <code>ValueSource</code> part does not participate in weight normalization.
- This may be useful when one wants full control over how scores are modified, and does 
- not care about normalizing by the <code>ValueSource</code> part.
- One particular case where this is useful if for testing this query.   
+  This may be useful when one wants full control over how scores are modified, and does 
+  not care about normalizing by the <code>ValueSource</code> part.
+  One particular case where this is useful if for testing this query.    
  <P>
- Note: only has effect when the <code>ValueSource</code> part is not null.
+  Note: only has effect when the <code>ValueSource</code> part is not null.
  */
 - (jboolean)isStrict;
 
@@ -121,12 +125,15 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
 
 /*!
  @brief Returns a <code>CustomScoreProvider</code> that calculates the custom scores
- for the given <code>IndexReader</code>.
- The default implementation returns a default
- implementation as specified in the docs of <code>CustomScoreProvider</code>.
+  for the given <code>IndexReader</code>.The default implementation returns a default
+  implementation as specified in the docs of <code>CustomScoreProvider</code>.
  @since 2.9.2
  */
 - (OrgApacheLuceneQueriesCustomScoreProvider *)getCustomScoreProviderWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -154,4 +161,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesCustomScoreQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesCustomScoreQuery")

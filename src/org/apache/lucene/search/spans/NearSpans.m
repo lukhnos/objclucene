@@ -9,11 +9,15 @@
 #include "org/apache/lucene/search/spans/NearSpans.h"
 #include "org/apache/lucene/search/spans/SpanNearQuery.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spans/NearSpans must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSpansNearSpans
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)query
-                                               withJavaUtilList:(id<JavaUtilList>)subSpans {
-  OrgApacheLuceneSearchSpansNearSpans_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(self, query, subSpans);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)query
+                                                             withJavaUtilList:(id<JavaUtilList>)subSpans {
+  OrgApacheLuceneSearchSpansNearSpans_initPackagePrivateWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(self, query, subSpans);
   return self;
 }
 
@@ -23,21 +27,27 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilList:", "NearSpans", NULL, 0x0, NULL, "(Lorg/apache/lucene/search/spans/SpanNearQuery;Ljava/util/List<Lorg/apache/lucene/search/spans/Spans;>;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilList:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "query_", NULL, 0x10, "Lorg.apache.lucene.search.spans.SpanNearQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "allowedSlop_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "query_", "LOrgApacheLuceneSearchSpansSpanNearQuery;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "allowedSlop_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpans = { 2, "NearSpans", "org.apache.lucene.search.spans", NULL, 0x400, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpansSpanNearQuery;LJavaUtilList;", "(Lorg/apache/lucene/search/spans/SpanNearQuery;Ljava/util/List<Lorg/apache/lucene/search/spans/Spans;>;)V" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpans = { "NearSpans", "org.apache.lucene.search.spans", ptrTable, methods, fields, 7, 0x400, 1, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansNearSpans;
 }
 
 @end
 
-void OrgApacheLuceneSearchSpansNearSpans_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansNearSpans *self, OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans) {
-  OrgApacheLuceneSearchSpansConjunctionSpans_initWithJavaUtilList_(self, subSpans);
+void OrgApacheLuceneSearchSpansNearSpans_initPackagePrivateWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansNearSpans *self, OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans) {
+  OrgApacheLuceneSearchSpansConjunctionSpans_initPackagePrivateWithJavaUtilList_(self, subSpans);
   JreStrongAssign(&self->query_, query);
   self->allowedSlop_ = [((OrgApacheLuceneSearchSpansSpanNearQuery *) nil_chk(query)) getSlop];
 }

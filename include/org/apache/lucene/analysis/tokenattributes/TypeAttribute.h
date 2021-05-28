@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesTypeAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesTypeAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesTypeAttribute))
 #define OrgApacheLuceneAnalysisTokenattributesTypeAttribute_
 
@@ -21,14 +27,12 @@
 #include "org/apache/lucene/util/Attribute.h"
 
 /*!
- @brief A Token's lexical type.
- The Default value is "word". 
+ @brief A Token's lexical type.The Default value is "word".
  */
-@protocol OrgApacheLuceneAnalysisTokenattributesTypeAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisTokenattributesTypeAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
- @brief Returns this Token's lexical type.
- Defaults to "word". 
+ @brief Returns this Token's lexical type.Defaults to "word".
  - seealso: #setType(String)
  */
 - (NSString *)type;
@@ -42,8 +46,7 @@
 @end
 
 @interface OrgApacheLuceneAnalysisTokenattributesTypeAttribute : NSObject
-
-+ (NSString *)DEFAULT_TYPE;
+@property (readonly, copy, class) NSString *DEFAULT_TYPE NS_SWIFT_NAME(DEFAULT_TYPE);
 
 @end
 
@@ -52,7 +55,7 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenattributesTypeAttribute)
 /*!
  @brief the default type
  */
-inline NSString *OrgApacheLuceneAnalysisTokenattributesTypeAttribute_get_DEFAULT_TYPE();
+inline NSString *OrgApacheLuceneAnalysisTokenattributesTypeAttribute_get_DEFAULT_TYPE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisTokenattributesTypeAttribute, DEFAULT_TYPE, NSString *)
@@ -61,4 +64,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesTypeAttribute)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttribute")

@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/MultiTermAwareComponent must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisUtilMultiTermAwareComponent : NSObject
 
 @end
@@ -13,10 +17,15 @@
 @implementation OrgApacheLuceneAnalysisUtilMultiTermAwareComponent
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilMultiTermAwareComponent = { 2, "MultiTermAwareComponent", "org.apache.lucene.analysis.util", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getMultiTermComponent);
+  #pragma clang diagnostic pop
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilMultiTermAwareComponent = { "MultiTermAwareComponent", "org.apache.lucene.analysis.util", NULL, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent;
 }
 

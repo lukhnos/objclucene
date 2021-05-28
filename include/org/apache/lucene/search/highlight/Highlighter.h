@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightHighlighter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightHighlighter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightHighlighter || defined(INCLUDE_OrgApacheLuceneSearchHighlightHighlighter))
 #define OrgApacheLuceneSearchHighlightHighlighter_
 
@@ -26,34 +32,33 @@
 
 /*!
  @brief Class used to markup highlighted terms found in the best sections of a
- text, using configurable <code>Fragmenter</code>, <code>Scorer</code>, <code>Formatter</code>,
- <code>Encoder</code> and tokenizers.
+  text, using configurable <code>Fragmenter</code>, <code>Scorer</code>, <code>Formatter</code>,
+  <code>Encoder</code> and tokenizers.
  */
 @interface OrgApacheLuceneSearchHighlightHighlighter : NSObject
-
-+ (jint)DEFAULT_MAX_CHARS_TO_ANALYZE;
+@property (readonly, class) jint DEFAULT_MAX_CHARS_TO_ANALYZE NS_SWIFT_NAME(DEFAULT_MAX_CHARS_TO_ANALYZE);
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchHighlightFormatter:(id<OrgApacheLuceneSearchHighlightFormatter>)formatter
-                      withOrgApacheLuceneSearchHighlightEncoder:(id<OrgApacheLuceneSearchHighlightEncoder>)encoder
-                       withOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)fragmentScorer;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchHighlightFormatter:(id<OrgApacheLuceneSearchHighlightFormatter>)formatter
+                                withOrgApacheLuceneSearchHighlightEncoder:(id<OrgApacheLuceneSearchHighlightEncoder>)encoder
+                                 withOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)fragmentScorer;
 
-- (instancetype)initWithOrgApacheLuceneSearchHighlightFormatter:(id<OrgApacheLuceneSearchHighlightFormatter>)formatter
-                       withOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)fragmentScorer;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchHighlightFormatter:(id<OrgApacheLuceneSearchHighlightFormatter>)formatter
+                                 withOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)fragmentScorer;
 
-- (instancetype)initWithOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)fragmentScorer;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)fragmentScorer;
 
 /*!
  @brief Highlights chosen terms in a text, extracting the most relevant section.
- This is a convenience method that calls
- <code>getBestFragment(TokenStream,String)</code>
- @param analyzer   the analyzer that will be used to split <code>text</code>
- into chunks
+ This is a convenience method that calls 
+ <code>getBestFragment(TokenStream, String)</code>
+ @param analyzer the analyzer that will be used to split  <code> text </code>
+   into chunks
  @param text text to highlight terms in
  @param fieldName Name of field used to influence analyzer's tokenization policy
  @return highlighted text fragment or null if no terms found
- @throws InvalidTokenOffsetsException thrown if any token's endOffset exceeds the provided text's length
+ @throw InvalidTokenOffsetsExceptionthrown if any token's endOffset exceeds the provided text's length
  */
 - (NSString *)getBestFragmentWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                     withNSString:(NSString *)fieldName
@@ -62,31 +67,30 @@
 /*!
  @brief Highlights chosen terms in a text, extracting the most relevant section.
  The document text is analysed in chunks to record hit statistics
- across the document. After accumulating stats, the fragment with the highest score
- is returned
- @param tokenStream   a stream of tokens identified in the text parameter, including offset information.
- This is typically produced by an analyzer re-parsing a document's
- text. Some work may be done on retrieving TokenStreams more efficiently
- by adding support for storing original text position data in the Lucene
- index but this support is not currently available (as of Lucene 1.4 rc2).
+  across the document. After accumulating stats, the fragment with the highest score
+  is returned
+ @param tokenStream a stream of tokens identified in the text parameter, including offset information.  This is typically produced by an analyzer re-parsing a document's
+   text. Some work may be done on retrieving TokenStreams more efficiently
+   by adding support for storing original text position data in the Lucene
+   index but this support is not currently available (as of Lucene 1.4 rc2).
  @param text text to highlight terms in
  @return highlighted text fragment or null if no terms found
- @throws InvalidTokenOffsetsException thrown if any token's endOffset exceeds the provided text's length
+ @throw InvalidTokenOffsetsExceptionthrown if any token's endOffset exceeds the provided text's length
  */
 - (NSString *)getBestFragmentWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
                                                        withNSString:(NSString *)text;
 
 /*!
  @brief Highlights chosen terms in a text, extracting the most relevant sections.
- This is a convenience method that calls
- <code>getBestFragments(TokenStream,String,int)</code>
- @param analyzer   the analyzer that will be used to split <code>text</code>
- into chunks
- @param fieldName     the name of the field being highlighted (used by analyzer)
- @param text          text to highlight terms in
- @param maxNumFragments  the maximum number of fragments.
+ This is a convenience method that calls 
+ <code>getBestFragments(TokenStream, String, int)</code>
+ @param analyzer the analyzer that will be used to split  <code> text </code>
+   into chunks
+ @param fieldName the name of the field being highlighted (used by analyzer)
+ @param text text to highlight terms in
+ @param maxNumFragments the maximum number of fragments.
  @return highlighted text fragments (between 0 and maxNumFragments number of fragments)
- @throws InvalidTokenOffsetsException thrown if any token's endOffset exceeds the provided text's length
+ @throw InvalidTokenOffsetsExceptionthrown if any token's endOffset exceeds the provided text's length
  */
 - (IOSObjectArray *)getBestFragmentsWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                            withNSString:(NSString *)fieldName
@@ -96,13 +100,13 @@
 /*!
  @brief Highlights chosen terms in a text, extracting the most relevant sections.
  The document text is analysed in chunks to record hit statistics
- across the document. After accumulating stats, the fragments with the highest scores
- are returned as an array of strings in order of score (contiguous fragments are merged into
- one in their original order to improve readability)
- @param text          text to highlight terms in
- @param maxNumFragments  the maximum number of fragments.
+  across the document. After accumulating stats, the fragments with the highest scores
+  are returned as an array of strings in order of score (contiguous fragments are merged into
+  one in their original order to improve readability)
+ @param text text to highlight terms in
+ @param maxNumFragments the maximum number of fragments.
  @return highlighted text fragments (between 0 and maxNumFragments number of fragments)
- @throws InvalidTokenOffsetsException thrown if any token's endOffset exceeds the provided text's length
+ @throw InvalidTokenOffsetsExceptionthrown if any token's endOffset exceeds the provided text's length
  */
 - (IOSObjectArray *)getBestFragmentsWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
                                                               withNSString:(NSString *)text
@@ -110,15 +114,15 @@
 
 /*!
  @brief Highlights terms in the  text , extracting the most relevant sections
- and concatenating the chosen fragments with a separator (typically "...").
+  and concatenating the chosen fragments with a separator (typically "...").
  The document text is analysed in chunks to record hit statistics
- across the document. After accumulating stats, the fragments with the highest scores
- are returned in order as "separator" delimited strings.
- @param text        text to highlight terms in
- @param maxNumFragments  the maximum number of fragments.
- @param separator  the separator used to intersperse the document fragments (typically "...")
+  across the document. After accumulating stats, the fragments with the highest scores
+  are returned in order as "separator" delimited strings.
+ @param text text to highlight terms in
+ @param maxNumFragments the maximum number of fragments.
+ @param separator the separator used to intersperse the document fragments (typically "...")
  @return highlighted text
- @throws InvalidTokenOffsetsException thrown if any token's endOffset exceeds the provided text's length
+ @throw InvalidTokenOffsetsExceptionthrown if any token's endOffset exceeds the provided text's length
  */
 - (NSString *)getBestFragmentsWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
                                                         withNSString:(NSString *)text
@@ -128,9 +132,9 @@
 /*!
  @brief Low level api to get the most relevant (formatted) sections of the document.
  This method has been made public to allow visibility of score information held in TextFragment objects.
- Thanks to Jason Calabrese for help in redefining the interface.
- @throws IOException If there is a low-level I/O error
- @throws InvalidTokenOffsetsException thrown if any token's endOffset exceeds the provided text's length
+  Thanks to Jason Calabrese for help in redefining the interface.
+ @throw IOExceptionIf there is a low-level I/O error
+ @throw InvalidTokenOffsetsExceptionthrown if any token's endOffset exceeds the provided text's length
  */
 - (IOSObjectArray *)getBestTextFragmentsWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
                                                                   withNSString:(NSString *)text
@@ -156,11 +160,15 @@
 
 - (void)setTextFragmenterWithOrgApacheLuceneSearchHighlightFragmenter:(id<OrgApacheLuceneSearchHighlightFragmenter>)fragmenter;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightHighlighter)
 
-inline jint OrgApacheLuceneSearchHighlightHighlighter_get_DEFAULT_MAX_CHARS_TO_ANALYZE();
+inline jint OrgApacheLuceneSearchHighlightHighlighter_get_DEFAULT_MAX_CHARS_TO_ANALYZE(void);
 #define OrgApacheLuceneSearchHighlightHighlighter_DEFAULT_MAX_CHARS_TO_ANALYZE 51200
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchHighlightHighlighter, DEFAULT_MAX_CHARS_TO_ANALYZE, jint)
 
@@ -199,23 +207,50 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightHighlighter)
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)size;
+
+- (OrgApacheLuceneSearchHighlightTextFragment *)addWithId:(OrgApacheLuceneSearchHighlightTextFragment *)arg0;
+
+- (OrgApacheLuceneSearchHighlightTextFragment *)insertWithOverflowWithId:(OrgApacheLuceneSearchHighlightTextFragment *)arg0;
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchHighlightTextFragment *)fragA
                     withId:(OrgApacheLuceneSearchHighlightTextFragment *)fragB;
+
+- (OrgApacheLuceneSearchHighlightTextFragment *)pop;
+
+- (OrgApacheLuceneSearchHighlightTextFragment *)top;
+
+- (OrgApacheLuceneSearchHighlightTextFragment *)updateTop;
+
+- (OrgApacheLuceneSearchHighlightTextFragment *)updateTopWithId:(OrgApacheLuceneSearchHighlightTextFragment *)arg0;
+
+#pragma mark Protected
+
+- (OrgApacheLuceneSearchHighlightTextFragment *)getSentinelObject;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                          withBoolean:(jboolean)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightFragmentQueue)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightFragmentQueue_initWithInt_(OrgApacheLuceneSearchHighlightFragmentQueue *self, jint size);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightFragmentQueue_initPackagePrivateWithInt_(OrgApacheLuceneSearchHighlightFragmentQueue *self, jint size);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightFragmentQueue *new_OrgApacheLuceneSearchHighlightFragmentQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightFragmentQueue *new_OrgApacheLuceneSearchHighlightFragmentQueue_initPackagePrivateWithInt_(jint size) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightFragmentQueue *create_OrgApacheLuceneSearchHighlightFragmentQueue_initWithInt_(jint size);
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightFragmentQueue *create_OrgApacheLuceneSearchHighlightFragmentQueue_initPackagePrivateWithInt_(jint size);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightFragmentQueue)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightHighlighter")

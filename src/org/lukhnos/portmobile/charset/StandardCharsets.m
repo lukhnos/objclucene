@@ -7,6 +7,10 @@
 #include "java/nio/charset/Charset.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
 
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/charset/StandardCharsets must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgLukhnosPortmobileCharsetStandardCharsets)
 
 JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1;
@@ -29,24 +33,30 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "ISO_8859_1", "LJavaNioCharsetCharset;", .constantValue.asLong = 0, 0x19, -1, 0, -1, -1 },
+    { "UTF_8", "LJavaNioCharsetCharset;", .constantValue.asLong = 0, 0x19, -1, 1, -1, -1 },
+  };
+  static const void *ptrTable[] = { &OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1, &OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8 };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileCharsetStandardCharsets = { "StandardCharsets", "org.lukhnos.portmobile.charset", ptrTable, methods, fields, 7, 0x1, 1, 2, -1, -1, -1, -1, -1 };
+  return &_OrgLukhnosPortmobileCharsetStandardCharsets;
+}
+
 + (void)initialize {
   if (self == [OrgLukhnosPortmobileCharsetStandardCharsets class]) {
     JreStrongAssign(&OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1, JavaNioCharsetCharset_forNameWithNSString_(@"ISO-8859-1"));
     JreStrongAssign(&OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8, JavaNioCharsetCharset_forNameWithNSString_(@"UTF-8"));
     J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileCharsetStandardCharsets)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "StandardCharsets", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "ISO_8859_1", "ISO_8859_1", 0x19, "Ljava.nio.charset.Charset;", &OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1, NULL, .constantValue.asLong = 0 },
-    { "UTF_8", "UTF_8", 0x19, "Ljava.nio.charset.Charset;", &OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileCharsetStandardCharsets = { 2, "StandardCharsets", "org.lukhnos.portmobile.charset", NULL, 0x1, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgLukhnosPortmobileCharsetStandardCharsets;
 }
 
 @end

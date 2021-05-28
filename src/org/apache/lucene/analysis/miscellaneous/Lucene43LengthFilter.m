@@ -6,14 +6,16 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/Lucene43LengthFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/Lucene43LengthFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter () {
  @public
@@ -26,6 +28,8 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter__Annotations$0(void);
+
 @implementation OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter
 
 - (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
@@ -37,12 +41,8 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inA
 }
 
 - (jboolean)accept {
-  jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
+  jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) java_length];
   return (len >= min_ && len <= max_);
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 - (void)dealloc {
@@ -51,16 +51,23 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inA
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:withInt:withInt:", "Lucene43LengthFilter", NULL, 0x1, NULL, NULL },
-    { "accept", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:withInt:withInt:);
+  methods[1].selector = @selector(accept);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "min_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "max_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "min_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "max_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter = { 2, "Lucene43LengthFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ZLOrgApacheLuceneAnalysisTokenStream;II", "LJavaIoIOException;", (void *)&OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter = { "Lucene43LengthFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 2, 3, -1, -1, -1, -1, 2 };
   return &_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter;
 }
 
@@ -79,6 +86,10 @@ OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *new_OrgApacheLuceneAna
 
 OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *create_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, enablePositionIncrements, inArg, min, max)
+}
+
+IOSObjectArray *OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter)

@@ -3,11 +3,14 @@
 //  source: ./core/src/java/org/lukhnos/portmobile/file/attribute/BasicFileAttributes.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/File.h"
 #include "org/lukhnos/portmobile/file/attribute/BasicFileAttributes.h"
 #include "org/lukhnos/portmobile/file/attribute/FileTime.h"
+
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/file/attribute/BasicFileAttributes must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgLukhnosPortmobileFileAttributeBasicFileAttributes
 
@@ -36,15 +39,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaIoFile:", "BasicFileAttributes", NULL, 0x1, NULL, NULL },
-    { "init", "BasicFileAttributes", NULL, 0x0, NULL, NULL },
-    { "creationTime", NULL, "Lorg.lukhnos.portmobile.file.attribute.FileTime;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgLukhnosPortmobileFileAttributeFileTime;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaIoFile:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(creationTime);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "file_", NULL, 0x0, "Ljava.io.File;", NULL, NULL, .constantValue.asLong = 0 },
+    { "file_", "LJavaIoFile;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileAttributeBasicFileAttributes = { 2, "BasicFileAttributes", "org.lukhnos.portmobile.file.attribute", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoFile;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileAttributeBasicFileAttributes = { "BasicFileAttributes", "org.lukhnos.portmobile.file.attribute", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgLukhnosPortmobileFileAttributeBasicFileAttributes;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryComposedQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQueryComposedQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryComposedQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryComposedQuery))
 #define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_
 
@@ -36,9 +42,9 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)qs
-                         withBoolean:(jboolean)operatorInfix
-                        withNSString:(NSString *)opName;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)qs
+                                   withBoolean:(jboolean)operatorInfix
+                                  withNSString:(NSString *)opName;
 
 - (jint)getNrSubQueries;
 
@@ -71,6 +77,10 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 
 - (void)recomposeWithJavaUtilList:(id<JavaUtilList>)queries;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQueryComposedQuery)
@@ -84,4 +94,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryComposedQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryComposedQuery")

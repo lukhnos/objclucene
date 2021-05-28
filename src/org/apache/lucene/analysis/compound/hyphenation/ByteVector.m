@@ -8,6 +8,10 @@
 #include "java/lang/System.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/ByteVector.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/hyphenation/ByteVector must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisCompoundHyphenationByteVector () {
  @public
   jint blockSize_;
@@ -28,7 +32,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, array_
 /*!
  @brief Capacity increment size
  */
-inline jint OrgApacheLuceneAnalysisCompoundHyphenationByteVector_get_DEFAULT_BLOCK_SIZE();
+inline jint OrgApacheLuceneAnalysisCompoundHyphenationByteVector_get_DEFAULT_BLOCK_SIZE(void);
 #define OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE 2048
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, DEFAULT_BLOCK_SIZE, jint)
 
@@ -104,26 +108,42 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ByteVector", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "ByteVector", NULL, 0x1, NULL, NULL },
-    { "initWithByteArray:", "ByteVector", NULL, 0x1, NULL, NULL },
-    { "initWithByteArray:withInt:", "ByteVector", NULL, 0x1, NULL, NULL },
-    { "getArray", NULL, "[B", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "capacity", NULL, "I", 0x1, NULL, NULL },
-    { "putWithInt:withByte:", "put", "V", 0x1, NULL, NULL },
-    { "getWithInt:", "get", "B", 0x1, NULL, NULL },
-    { "alloc__WithInt:", "alloc", "I", 0x1, NULL, NULL },
-    { "trimToSize", NULL, "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "[B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, 5, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(initWithByteArray:);
+  methods[3].selector = @selector(initWithByteArray:withInt:);
+  methods[4].selector = @selector(getArray);
+  methods[5].selector = @selector(length);
+  methods[6].selector = @selector(capacity);
+  methods[7].selector = @selector(putWithInt:withByte:);
+  methods[8].selector = @selector(getWithInt:);
+  methods[9].selector = @selector(alloc__WithInt:);
+  methods[10].selector = @selector(trimToSize);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_BLOCK_SIZE", "DEFAULT_BLOCK_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE },
-    { "blockSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "array_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "n_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "blockSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "array_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "n_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationByteVector = { 2, "ByteVector", "org.apache.lucene.analysis.compound.hyphenation", NULL, 0x1, 11, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "[B", "[BI", "put", "IB", "get", "alloc" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationByteVector = { "ByteVector", "org.apache.lucene.analysis.compound.hyphenation", ptrTable, methods, fields, 7, 0x1, 11, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCompoundHyphenationByteVector;
 }
 

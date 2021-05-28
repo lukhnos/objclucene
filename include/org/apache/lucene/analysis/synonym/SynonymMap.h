@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisSynonymSynonymMap_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymMap || defined(INCLUDE_OrgApacheLuceneAnalysisSynonymSynonymMap))
 #define OrgApacheLuceneAnalysisSynonymSynonymMap_
 
@@ -40,14 +46,17 @@
    */
   jint maxHorizontalContext_;
 }
-
-+ (jchar)WORD_SEPARATOR;
+@property (readonly, class) jchar WORD_SEPARATOR NS_SWIFT_NAME(WORD_SEPARATOR);
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-              withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)words
-                                          withInt:(jint)maxHorizontalContext;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
+                        withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)words
+                                                    withInt:(jint)maxHorizontalContext;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -59,7 +68,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSynonymSynonymMap, words_, OrgApacheL
 /*!
  @brief for multiword support, you must separate words with this separator
  */
-inline jchar OrgApacheLuceneAnalysisSynonymSynonymMap_get_WORD_SEPARATOR();
+inline jchar OrgApacheLuceneAnalysisSynonymSynonymMap_get_WORD_SEPARATOR(void);
 #define OrgApacheLuceneAnalysisSynonymSynonymMap_WORD_SEPARATOR 0x0000
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisSynonymSynonymMap, WORD_SEPARATOR, jchar)
 
@@ -84,7 +93,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap)
 /*!
  @brief Builds an FSTSynonymMap.
  <p>
- Call add() until you have added all the mappings, then call build() to get an FSTSynonymMap
+  Call add() until you have added all the mappings, then call build() to get an FSTSynonymMap
  */
 @interface OrgApacheLuceneAnalysisSynonymSynonymMap_Builder : NSObject
 
@@ -92,16 +101,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap)
 
 /*!
  @brief If dedup is true then identical rules (same input,
- same output) will be added only once.
+   same output) will be added only once.
  */
-- (instancetype)initWithBoolean:(jboolean)dedup;
+- (instancetype __nonnull)initWithBoolean:(jboolean)dedup;
 
 /*!
  @brief Add a phrase-&gt;phrase synonym mapping.
  Phrases are character sequences where words are
- separated with character zero (U+0000).  Empty words
- (two U+0000s in a row) are not allowed in the input nor
- the output!
+  separated with character zero (U+0000).  Empty words
+  (two U+0000s in a row) are not allowed in the input nor
+  the output!
  @param input input phrase
  @param output output phrase
  @param includeOrig true if the original should be included
@@ -117,12 +126,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap)
 
 /*!
  @brief Sugar: just joins the provided terms with <code>SynonymMap.WORD_SEPARATOR</code>
- .
- reuse and its chars
- must not be null. 
+ .reuse and its chars
+   must not be null.
  */
 + (OrgApacheLuceneUtilCharsRef *)joinWithNSStringArray:(IOSObjectArray *)words
                 withOrgApacheLuceneUtilCharsRefBuilder:(OrgApacheLuceneUtilCharsRefBuilder *)reuse;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -155,13 +167,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder)
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)dedup
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithBoolean:(jboolean)dedup
+      withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  @brief Sugar: analyzes the text with the analyzer and
- separates by <code>SynonymMap.WORD_SEPARATOR</code>.
- reuse and its chars must not be null. 
+   separates by <code>SynonymMap.WORD_SEPARATOR</code>.
+ reuse and its chars must not be null.
  */
 - (OrgApacheLuceneUtilCharsRef *)analyzeWithNSString:(NSString *)text
               withOrgApacheLuceneUtilCharsRefBuilder:(OrgApacheLuceneUtilCharsRefBuilder *)reuse;
@@ -171,6 +183,10 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
  @param inArg The input to parse
  */
 - (void)parseWithJavaIoReader:(JavaIoReader *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithBoolean:(jboolean)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -182,4 +198,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap_Parser)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymMap")

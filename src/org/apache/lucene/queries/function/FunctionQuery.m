@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
@@ -23,6 +22,10 @@
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/Weight.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/FunctionQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight () {
  @public
   OrgApacheLuceneQueriesFunctionFunctionQuery *this$0_;
@@ -30,16 +33,12 @@
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight, this$0_, OrgApacheLuceneQueriesFunctionFunctionQuery *)
-
 @interface OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer () {
  @public
   OrgApacheLuceneQueriesFunctionFunctionQuery *this$0_;
 }
 
 @end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer, this$0_, OrgApacheLuceneQueriesFunctionFunctionQuery *)
 
 @implementation OrgApacheLuceneQueriesFunctionFunctionQuery
 
@@ -82,20 +81,31 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer, this$
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSource:", "FunctionQuery", NULL, 0x1, NULL, NULL },
-    { "getValueSource", NULL, "Lorg.apache.lucene.queries.function.ValueSource;", 0x1, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionValueSource;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(getValueSource);
+  methods[2].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[3].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[4].selector = @selector(toStringWithNSString:);
+  methods[5].selector = @selector(isEqual:);
+  methods[6].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "func_", NULL, 0x10, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
+    { "func_", "LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.queries.function.FunctionQuery$FunctionWeight;", "Lorg.apache.lucene.queries.function.FunctionQuery$AllScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionQuery = { 2, "FunctionQuery", "org.apache.lucene.queries.function", NULL, 0x1, 7, methods, 1, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValueSource;", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "LJavaIoIOException;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "LOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight;LOrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionQuery = { "FunctionQuery", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x1, 7, 1, -1, 11, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionFunctionQuery;
 }
 
@@ -155,22 +165,33 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionFunctionQuery:withOrgApacheLuceneSearchIndexSearcher:", "FunctionWeight", NULL, 0x1, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, 4, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 7, 8, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 9, 10, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionFunctionQuery:withOrgApacheLuceneSearchIndexSearcher:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(getValueForNormalization);
+  methods[3].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[4].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[5].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.FunctionQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "searcher_", NULL, 0x14, "Lorg.apache.lucene.search.IndexSearcher;", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryNorm_", NULL, 0x4, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryWeight_", NULL, 0x4, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "context_", NULL, 0x14, "Ljava.util.Map;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionFunctionQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "searcher_", "LOrgApacheLuceneSearchIndexSearcher;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "queryNorm_", "F", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "queryWeight_", "F", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "context_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight = { 2, "FunctionWeight", "org.apache.lucene.queries.function", "FunctionQuery", 0x4, 6, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionFunctionQuery;LOrgApacheLuceneSearchIndexSearcher;", "LJavaIoIOException;", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "normalize", "FF", "scorer", "LOrgApacheLuceneIndexLeafReaderContext;", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "LOrgApacheLuceneQueriesFunctionFunctionQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight = { "FunctionWeight", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x4, 6, 5, 11, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight;
 }
 
@@ -247,26 +268,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionQuery_Fun
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionFunctionQuery:withOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight:withFloat:", "AllScorer", NULL, 0x1, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 4, 3, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionFunctionQuery:withOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight:withFloat:);
+  methods[1].selector = @selector(docID);
+  methods[2].selector = @selector(nextDoc);
+  methods[3].selector = @selector(advanceWithInt:);
+  methods[4].selector = @selector(score);
+  methods[5].selector = @selector(cost);
+  methods[6].selector = @selector(freq);
+  methods[7].selector = @selector(explainWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.FunctionQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "reader_", NULL, 0x10, "Lorg.apache.lucene.index.IndexReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "weight_AllScorer_", "weight", 0x10, "Lorg.apache.lucene.queries.function.FunctionQuery$FunctionWeight;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "qWeight_", NULL, 0x10, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "vals_", NULL, 0x10, "Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionFunctionQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "reader_", "LOrgApacheLuceneIndexIndexReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "weight_AllScorer_", "LOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight;", .constantValue.asLong = 0, 0x10, 5, -1, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "qWeight_", "F", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "vals_", "LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer = { 2, "AllScorer", "org.apache.lucene.queries.function", "FunctionQuery", 0x4, 8, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionFunctionQuery;LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight;F", "LJavaIoIOException;", "advance", "I", "explain", "weight", "LOrgApacheLuceneQueriesFunctionFunctionQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer = { "AllScorer", "org.apache.lucene.queries.function", ptrTable, methods, fields, 7, 0x4, 8, 7, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer;
 }
 

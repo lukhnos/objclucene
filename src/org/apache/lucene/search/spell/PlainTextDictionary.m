@@ -8,7 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/BufferedReader.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/io/InputStream.h"
 #include "java/io/Reader.h"
 #include "java/nio/charset/Charset.h"
@@ -20,6 +19,10 @@
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/PlainTextDictionary must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSpellPlainTextDictionary () {
  @public
@@ -39,7 +42,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellPlainTextDictionary, in_, JavaIoBu
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator, this$0_, OrgApacheLuceneSearchSpellPlainTextDictionary *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator, spare_, OrgApacheLuceneUtilBytesRefBuilder *)
 
 @implementation OrgApacheLuceneSearchSpellPlainTextDictionary
@@ -69,17 +71,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgLukhnosPortmobileFilePath:", "PlainTextDictionary", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithJavaIoInputStream:", "PlainTextDictionary", NULL, 0x1, NULL, NULL },
-    { "initWithJavaIoReader:", "PlainTextDictionary", NULL, 0x1, NULL, NULL },
-    { "getEntryIterator", NULL, "Lorg.apache.lucene.search.suggest.InputIterator;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestInputIterator;", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgLukhnosPortmobileFilePath:);
+  methods[1].selector = @selector(initWithJavaIoInputStream:);
+  methods[2].selector = @selector(initWithJavaIoReader:);
+  methods[3].selector = @selector(getEntryIterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x2, "Ljava.io.BufferedReader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LJavaIoBufferedReader;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.spell.PlainTextDictionary$FileIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellPlainTextDictionary = { 2, "PlainTextDictionary", "org.apache.lucene.search.spell", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgLukhnosPortmobileFilePath;", "LJavaIoIOException;", "LJavaIoInputStream;", "LJavaIoReader;", "LOrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellPlainTextDictionary = { "PlainTextDictionary", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellPlainTextDictionary;
 }
 
@@ -128,6 +138,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellPlainTextDictionary)
 
 @implementation OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator
 
+- (instancetype)initWithOrgApacheLuceneSearchSpellPlainTextDictionary:(OrgApacheLuceneSearchSpellPlainTextDictionary *)outer$ {
+  OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator_initWithOrgApacheLuceneSearchSpellPlainTextDictionary_(self, outer$);
+  return self;
+}
+
 - (OrgApacheLuceneUtilBytesRef *)next {
   if (done_) {
     return nil;
@@ -155,11 +170,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellPlainTextDictionary)
   return result;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchSpellPlainTextDictionary:(OrgApacheLuceneSearchSpellPlainTextDictionary *)outer$ {
-  OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator_initWithOrgApacheLuceneSearchSpellPlainTextDictionary_(self, outer$);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(spare_);
@@ -167,16 +177,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellPlainTextDictionary)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchSpellPlainTextDictionary:", "FileIterator", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSpellPlainTextDictionary:);
+  methods[1].selector = @selector(next);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.spell.PlainTextDictionary;", NULL, NULL, .constantValue.asLong = 0 },
-    { "done_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "spare_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchSpellPlainTextDictionary;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "done_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "spare_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator = { 2, "FileIterator", "org.apache.lucene.search.spell", "PlainTextDictionary", 0x10, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSpellPlainTextDictionary;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator = { "FileIterator", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x10, 2, 3, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator;
 }
 

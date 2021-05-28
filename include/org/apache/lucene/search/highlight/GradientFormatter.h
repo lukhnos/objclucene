@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightGradientFormatter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightGradientFormatter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightGradientFormatter || defined(INCLUDE_OrgApacheLuceneSearchHighlightGradientFormatter))
 #define OrgApacheLuceneSearchHighlightGradientFormatter_
 
@@ -24,15 +30,23 @@
 
 /*!
  @brief Formats text with different color intensity depending on the score of the
- term.
+  term.
  */
 @interface OrgApacheLuceneSearchHighlightGradientFormatter : NSObject < OrgApacheLuceneSearchHighlightFormatter > {
  @public
-  jint fgRMin_, fgGMin_, fgBMin_;
-  jint fgRMax_, fgGMax_, fgBMax_;
+  jint fgRMin_;
+  jint fgGMin_;
+  jint fgBMin_;
+  jint fgRMax_;
+  jint fgGMax_;
+  jint fgBMax_;
   jboolean highlightForeground_;
-  jint bgRMin_, bgGMin_, bgBMin_;
-  jint bgRMax_, bgGMax_, bgBMax_;
+  jint bgRMin_;
+  jint bgGMin_;
+  jint bgBMin_;
+  jint bgRMax_;
+  jint bgGMax_;
+  jint bgBMax_;
   jboolean highlightBackground_;
 }
 
@@ -40,43 +54,37 @@
 
 /*!
  @brief Sets the color range for the IDF scores
- @param maxScore
- The score (and above) displayed as maxColor (See QueryScorer.getMaxWeight 
- which can be used to calibrate scoring scale)
- @param minForegroundColor
- The hex color used for representing IDF scores of zero eg
- #FFFFFF (white) or null if no foreground color required
- @param maxForegroundColor
- The largest hex color used for representing IDF scores eg
- #000000 (black) or null if no foreground color required
- @param minBackgroundColor
- The hex color used for representing IDF scores of zero eg
- #FFFFFF (white) or null if no background color required
- @param maxBackgroundColor
- The largest hex color used for representing IDF scores eg
- #000000 (black) or null if no background color required
+ @param maxScore The score (and above) displayed as maxColor (See QueryScorer.getMaxWeight 
+           which can be used to calibrate scoring scale)
+ @param minForegroundColor The hex color used for representing IDF scores of zero eg
+              #FFFFFF (white) or null if no foreground color required
+ @param maxForegroundColor The largest hex color used for representing IDF scores eg
+              #000000 (black) or null if no foreground color required
+ @param minBackgroundColor The hex color used for representing IDF scores of zero eg
+              #FFFFFF (white) or null if no background color required
+ @param maxBackgroundColor The largest hex color used for representing IDF scores eg
+              #000000 (black) or null if no background color required
  */
-- (instancetype)initWithFloat:(jfloat)maxScore
-                 withNSString:(NSString *)minForegroundColor
-                 withNSString:(NSString *)maxForegroundColor
-                 withNSString:(NSString *)minBackgroundColor
-                 withNSString:(NSString *)maxBackgroundColor;
+- (instancetype __nonnull)initWithFloat:(jfloat)maxScore
+                           withNSString:(NSString *)minForegroundColor
+                           withNSString:(NSString *)maxForegroundColor
+                           withNSString:(NSString *)minBackgroundColor
+                           withNSString:(NSString *)maxBackgroundColor;
 
 /*!
- @brief Converts a hex string into an int.
- Integer.parseInt(hex, 16) assumes the
- input is nonnegative unless there is a preceding minus sign. This method
- reads the input as twos complement instead, so if the input is 8 bytes
- long, it will correctly restore a negative int produced by
- Integer.toHexString() but not necessarily one produced by
- Integer.toString(x,16) since that method will produce a string like '-FF'
- for negative integer values.
- @param hex
- A string in capital or lower case hex, of no more then 16
- characters.
- @throws NumberFormatException
+ @brief Converts a hex string into an int.Integer.parseInt(hex, 16) assumes the
+  input is nonnegative unless there is a preceding minus sign.
+ This method
+  reads the input as twos complement instead, so if the input is 8 bytes
+  long, it will correctly restore a negative int produced by
+  Integer.toHexString() but not necessarily one produced by
+  Integer.toString(x,16) since that method will produce a string like '-FF'
+  for negative integer values.
+ @param hex A string in capital or lower case hex, of no more then 16
+              characters.
+ @throw NumberFormatException
  if the string is more than 16 characters long, or if any
- character is not in the set [0-9a-fA-f]
+              character is not in the set [0-9a-fA-f]
  */
 + (jint)hexToIntWithNSString:(NSString *)hex;
 
@@ -88,6 +96,10 @@ withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightToke
 - (NSString *)getBackgroundColorStringWithFloat:(jfloat)score;
 
 - (NSString *)getForegroundColorStringWithFloat:(jfloat)score;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -105,4 +117,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightGradientFormatter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightGradientFormatter")

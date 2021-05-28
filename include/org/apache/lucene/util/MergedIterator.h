@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilMergedIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilMergedIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilMergedIterator || defined(INCLUDE_OrgApacheLuceneUtilMergedIterator))
 #define OrgApacheLuceneUtilMergedIterator_
 
@@ -22,42 +28,47 @@
 
 @class IOSObjectArray;
 @protocol JavaLangComparable;
+@protocol JavaUtilFunctionConsumer;
 
 /*!
  @brief Provides a merged sorted view from several sorted iterators.
  <p>
- If built with <code>removeDuplicates</code> set to true and an element
- appears in multiple iterators then it is deduplicated, that is this iterator
- returns the sorted union of elements.
+  If built with <code>removeDuplicates</code> set to true and an element
+  appears in multiple iterators then it is deduplicated, that is this iterator
+  returns the sorted union of elements. 
  <p>
- If built with <code>removeDuplicates</code> set to false then all elements
- in all iterators are returned.
+  If built with <code>removeDuplicates</code> set to false then all elements
+  in all iterators are returned. 
  <p>
- Caveats:
+  Caveats: 
  <ul>
- <li>The behavior is undefined if the iterators are not actually sorted.
- <li>Null elements are unsupported.
- <li>If removeDuplicates is set to true and if a single iterator contains
- duplicates then they will not be deduplicated.
+    <li>The behavior is undefined if the iterators are not actually sorted.
+    <li>Null elements are unsupported.
+    <li>If removeDuplicates is set to true and if a single iterator contains
+        duplicates then they will not be deduplicated.   
  <li>When elements are deduplicated it is not defined which one is returned.
- <li>If removeDuplicates is set to false then the order in which duplicates
- are returned isn't defined.
+    <li>If removeDuplicates is set to false then the order in which duplicates
+        are returned isn't defined. 
  </ul>
  */
 @interface OrgApacheLuceneUtilMergedIterator : NSObject < JavaUtilIterator >
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)removeDuplicates
-      withJavaUtilIteratorArray:(IOSObjectArray *)iterators;
+- (instancetype __nonnull)initWithBoolean:(jboolean)removeDuplicates
+                withJavaUtilIteratorArray:(IOSObjectArray *)iterators;
 
-- (instancetype)initWithJavaUtilIteratorArray:(IOSObjectArray *)iterators;
+- (instancetype __nonnull)initWithJavaUtilIteratorArray:(IOSObjectArray *)iterators;
 
 - (jboolean)hasNext;
 
-- (id)next;
+- (id<JavaLangComparable>)next;
 
 - (void)remove;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -79,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMergedIterator")

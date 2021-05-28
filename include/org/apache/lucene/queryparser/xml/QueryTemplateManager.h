@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlQueryTemplateManager
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlQueryTemplateManager_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryTemplateManager || defined(INCLUDE_OrgApacheLuceneQueryparserXmlQueryTemplateManager))
 #define OrgApacheLuceneQueryparserXmlQueryTemplateManager_
 
@@ -28,29 +34,26 @@
 
 /*!
  @brief Provides utilities for turning query form input (such as from a web page or Swing gui) into
- Lucene XML queries by using XSL templates.
- This approach offers a convenient way of externalizing
- and changing how user input is turned into Lucene queries.
+  Lucene XML queries by using XSL templates.This approach offers a convenient way of externalizing
+  and changing how user input is turned into Lucene queries.
  Database applications often adopt similar practices by externalizing SQL in template files that can
- be easily changed/optimized by a DBA.
- The static methods can be used on their own or by creating an instance of this class you can store and
- re-use compiled stylesheets for fast use (e.g. in a server environment)
+  be easily changed/optimized by a DBA.
+  The static methods can be used on their own or by creating an instance of this class you can store and
+  re-use compiled stylesheets for fast use (e.g. in a server environment)
  */
 @interface OrgApacheLuceneQueryparserXmlQueryTemplateManager : NSObject {
  @public
   JavaUtilHashMap *compiledTemplatesCache_;
   id<JavaxXmlTransformTemplates> defaultCompiledTemplates_;
 }
-
-+ (JavaxXmlParsersDocumentBuilderFactory *)dbf;
-
-+ (JavaxXmlTransformTransformerFactory *)tFactory;
+@property (readonly, class, strong) JavaxXmlParsersDocumentBuilderFactory *dbf NS_SWIFT_NAME(dbf);
+@property (readonly, class, strong) JavaxXmlTransformTransformerFactory *tFactory NS_SWIFT_NAME(tFactory);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)xslIs;
+- (instancetype __nonnull)initWithJavaIoInputStream:(JavaIoInputStream *)xslIs;
 
 - (void)addDefaultQueryTemplateWithJavaIoInputStream:(JavaIoInputStream *)xslIs;
 
@@ -121,21 +124,21 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserXmlQueryTemplateManager)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlQueryTemplateManager, compiledTemplatesCache_, JavaUtilHashMap *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlQueryTemplateManager, defaultCompiledTemplates_, id<JavaxXmlTransformTemplates>)
 
-inline JavaxXmlParsersDocumentBuilderFactory *OrgApacheLuceneQueryparserXmlQueryTemplateManager_get_dbf();
+inline JavaxXmlParsersDocumentBuilderFactory *OrgApacheLuceneQueryparserXmlQueryTemplateManager_get_dbf(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaxXmlParsersDocumentBuilderFactory *OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserXmlQueryTemplateManager, dbf, JavaxXmlParsersDocumentBuilderFactory *)
 
-inline JavaxXmlTransformTransformerFactory *OrgApacheLuceneQueryparserXmlQueryTemplateManager_get_tFactory();
+inline JavaxXmlTransformTransformerFactory *OrgApacheLuceneQueryparserXmlQueryTemplateManager_get_tFactory(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaxXmlTransformTransformerFactory *OrgApacheLuceneQueryparserXmlQueryTemplateManager_tFactory;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserXmlQueryTemplateManager, tFactory, JavaxXmlTransformTransformerFactory *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlQueryTemplateManager_init(OrgApacheLuceneQueryparserXmlQueryTemplateManager *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlQueryTemplateManager *new_OrgApacheLuceneQueryparserXmlQueryTemplateManager_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlQueryTemplateManager *new_OrgApacheLuceneQueryparserXmlQueryTemplateManager_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlQueryTemplateManager *create_OrgApacheLuceneQueryparserXmlQueryTemplateManager_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlQueryTemplateManager *create_OrgApacheLuceneQueryparserXmlQueryTemplateManager_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlQueryTemplateManager_initWithJavaIoInputStream_(OrgApacheLuceneQueryparserXmlQueryTemplateManager *self, JavaIoInputStream *xslIs);
 
@@ -163,4 +166,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlQueryTemplateManager)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryTemplateManager")

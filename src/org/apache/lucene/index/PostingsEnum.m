@@ -3,13 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/index/PostingsEnum.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/PostingsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexPostingsEnum () {
  @public
@@ -99,26 +101,39 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "featureRequestedWithInt:withShort:", "featureRequested", "Z", 0x9, NULL, NULL },
-    { "init", "PostingsEnum", NULL, 0x4, NULL, NULL },
-    { "freq", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "attributes", NULL, "Lorg.apache.lucene.util.AttributeSource;", 0x1, NULL, NULL },
-    { "nextPosition", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "startOffset", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "endOffset", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeSource;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x401, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(featureRequestedWithInt:withShort:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(freq);
+  methods[3].selector = @selector(attributes);
+  methods[4].selector = @selector(nextPosition);
+  methods[5].selector = @selector(startOffset);
+  methods[6].selector = @selector(endOffset);
+  methods[7].selector = @selector(getPayload);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "NONE", "NONE", 0x19, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_NONE },
-    { "FREQS", "FREQS", 0x19, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_FREQS },
-    { "POSITIONS", "POSITIONS", 0x19, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_POSITIONS },
-    { "OFFSETS", "OFFSETS", 0x19, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_OFFSETS },
-    { "PAYLOADS", "PAYLOADS", 0x19, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_PAYLOADS },
-    { "ALL", "ALL", 0x19, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_ALL },
-    { "atts_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource;", NULL, NULL, .constantValue.asLong = 0 },
+    { "NONE", "S", .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_NONE, 0x19, -1, -1, -1, -1 },
+    { "FREQS", "S", .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_FREQS, 0x19, -1, -1, -1, -1 },
+    { "POSITIONS", "S", .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_POSITIONS, 0x19, -1, -1, -1, -1 },
+    { "OFFSETS", "S", .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_OFFSETS, 0x19, -1, -1, -1, -1 },
+    { "PAYLOADS", "S", .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_PAYLOADS, 0x19, -1, -1, -1, -1 },
+    { "ALL", "S", .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_ALL, 0x19, -1, -1, -1, -1 },
+    { "atts_", "LOrgApacheLuceneUtilAttributeSource;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexPostingsEnum = { 2, "PostingsEnum", "org.apache.lucene.index", NULL, 0x401, 8, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "featureRequested", "IS", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexPostingsEnum = { "PostingsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 8, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexPostingsEnum;
 }
 

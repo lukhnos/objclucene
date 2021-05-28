@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
@@ -14,6 +13,10 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/fst/ListOfOutputs.h"
 #include "org/apache/lucene/util/fst/Outputs.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/fst/ListOfOutputs must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilFstListOfOutputs () {
  @public
@@ -24,7 +27,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstListOfOutputs, outputs_, OrgApacheLuceneUtilFstOutputs *)
 
-inline jlong OrgApacheLuceneUtilFstListOfOutputs_get_BASE_LIST_NUM_BYTES();
+inline jlong OrgApacheLuceneUtilFstListOfOutputs_get_BASE_LIST_NUM_BYTES(void);
 static jlong OrgApacheLuceneUtilFstListOfOutputs_BASE_LIST_NUM_BYTES;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFstListOfOutputs, BASE_LIST_NUM_BYTES, jlong)
 
@@ -49,7 +52,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstListOfOutputs)
 
 - (id)addWithId:(id)prefix
          withId:(id)output {
-  JreAssert((!([JavaUtilList_class_() isInstance:prefix])), (@"org/apache/lucene/util/fst/ListOfOutputs.java:89 condition failed: assert !(prefix instanceof List);"));
+  JreAssert(!([JavaUtilList_class_() isInstance:prefix]), @"org/apache/lucene/util/fst/ListOfOutputs.java:89 condition failed: assert !(prefix instanceof List);");
   if (!([JavaUtilList_class_() isInstance:output])) {
     return [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) addWithId:prefix withId:output];
   }
@@ -65,7 +68,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstListOfOutputs)
 
 - (void)writeWithId:(id)output
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
-  JreAssert((!([JavaUtilList_class_() isInstance:output])), (@"org/apache/lucene/util/fst/ListOfOutputs.java:104 condition failed: assert !(output instanceof List);"));
+  JreAssert(!([JavaUtilList_class_() isInstance:output]), @"org/apache/lucene/util/fst/ListOfOutputs.java:104 condition failed: assert !(output instanceof List);");
   [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) writeWithId:output withOrgApacheLuceneStoreDataOutput:outArg];
 }
 
@@ -190,39 +193,59 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 4, 3, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 5, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, 8, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 7, 8, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 10, 11, 8, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 11, 8, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 13, 11, 8, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 11, 8, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 17, 3, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 18, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, 19, 16, -1, 20, -1, -1 },
+    { NULL, "J", 0x1, 21, 16, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilFstOutputs:);
+  methods[1].selector = @selector(commonWithId:withId:);
+  methods[2].selector = @selector(subtractWithId:withId:);
+  methods[3].selector = @selector(addWithId:withId:);
+  methods[4].selector = @selector(writeWithId:withOrgApacheLuceneStoreDataOutput:);
+  methods[5].selector = @selector(writeFinalOutputWithId:withOrgApacheLuceneStoreDataOutput:);
+  methods[6].selector = @selector(readWithOrgApacheLuceneStoreDataInput:);
+  methods[7].selector = @selector(skipOutputWithOrgApacheLuceneStoreDataInput:);
+  methods[8].selector = @selector(readFinalOutputWithOrgApacheLuceneStoreDataInput:);
+  methods[9].selector = @selector(skipFinalOutputWithOrgApacheLuceneStoreDataInput:);
+  methods[10].selector = @selector(getNoOutput);
+  methods[11].selector = @selector(outputToStringWithId:);
+  methods[12].selector = @selector(mergeWithId:withId:);
+  methods[13].selector = @selector(description);
+  methods[14].selector = @selector(asListWithId:);
+  methods[15].selector = @selector(ramBytesUsedWithId:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "outputs_", "LOrgApacheLuceneUtilFstOutputs;", .constantValue.asLong = 0, 0x12, -1, -1, 22, -1 },
+    { "BASE_LIST_NUM_BYTES", "J", .constantValue.asLong = 0, 0x1a, -1, 23, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilFstOutputs;", "(Lorg/apache/lucene/util/fst/Outputs<TT;>;)V", "common", "LNSObject;LNSObject;", "subtract", "add", "write", "LNSObject;LOrgApacheLuceneStoreDataOutput;", "LJavaIoIOException;", "writeFinalOutput", "read", "LOrgApacheLuceneStoreDataInput;", "skipOutput", "readFinalOutput", "skipFinalOutput", "outputToString", "LNSObject;", "merge", "toString", "asList", "(Ljava/lang/Object;)Ljava/util/List<TT;>;", "ramBytesUsed", "Lorg/apache/lucene/util/fst/Outputs<TT;>;", &OrgApacheLuceneUtilFstListOfOutputs_BASE_LIST_NUM_BYTES, "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/fst/Outputs<Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstListOfOutputs = { "ListOfOutputs", "org.apache.lucene.util.fst", ptrTable, methods, fields, 7, 0x11, 16, 2, -1, -1, -1, 24, -1 };
+  return &_OrgApacheLuceneUtilFstListOfOutputs;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFstListOfOutputs class]) {
     OrgApacheLuceneUtilFstListOfOutputs_BASE_LIST_NUM_BYTES = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(create_JavaUtilArrayList_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFstListOfOutputs)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstOutputs:", "ListOfOutputs", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/Outputs<TT;>;)V" },
-    { "commonWithId:withId:", "common", "Ljava.lang.Object;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" },
-    { "subtractWithId:withId:", "subtract", "Ljava.lang.Object;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" },
-    { "addWithId:withId:", "add", "Ljava.lang.Object;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" },
-    { "writeWithId:withOrgApacheLuceneStoreDataOutput:", "write", "V", 0x1, "Ljava.io.IOException;", "(Ljava/lang/Object;Lorg/apache/lucene/store/DataOutput;)V" },
-    { "writeFinalOutputWithId:withOrgApacheLuceneStoreDataOutput:", "writeFinalOutput", "V", 0x1, "Ljava.io.IOException;", "(Ljava/lang/Object;Lorg/apache/lucene/store/DataOutput;)V" },
-    { "readWithOrgApacheLuceneStoreDataInput:", "read", "Ljava.lang.Object;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;)Ljava/lang/Object;" },
-    { "skipOutputWithOrgApacheLuceneStoreDataInput:", "skipOutput", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "readFinalOutputWithOrgApacheLuceneStoreDataInput:", "readFinalOutput", "Ljava.lang.Object;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;)Ljava/lang/Object;" },
-    { "skipFinalOutputWithOrgApacheLuceneStoreDataInput:", "skipFinalOutput", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getNoOutput", NULL, "Ljava.lang.Object;", 0x1, NULL, "()Ljava/lang/Object;" },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, "(Ljava/lang/Object;)Ljava/lang/String;" },
-    { "mergeWithId:withId:", "merge", "Ljava.lang.Object;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "asListWithId:", "asList", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/Object;)Ljava/util/List<TT;>;" },
-    { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, "(Ljava/lang/Object;)J" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "outputs_", NULL, 0x12, "Lorg.apache.lucene.util.fst.Outputs;", NULL, "Lorg/apache/lucene/util/fst/Outputs<TT;>;", .constantValue.asLong = 0 },
-    { "BASE_LIST_NUM_BYTES", "BASE_LIST_NUM_BYTES", 0x1a, "J", &OrgApacheLuceneUtilFstListOfOutputs_BASE_LIST_NUM_BYTES, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Ljava.lang.Object;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstListOfOutputs = { 2, "ListOfOutputs", "org.apache.lucene.util.fst", NULL, 0x11, 16, methods, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/fst/Outputs<Ljava/lang/Object;>;" };
-  return &_OrgApacheLuceneUtilFstListOfOutputs;
 }
 
 @end

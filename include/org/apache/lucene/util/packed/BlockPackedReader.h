@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedBlockPackedReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedBlockPackedReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedReader || defined(INCLUDE_OrgApacheLuceneUtilPackedBlockPackedReader))
 #define OrgApacheLuceneUtilPackedBlockPackedReader_
 
@@ -37,11 +43,11 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
-                                               withInt:(jint)packedIntsVersion
-                                               withInt:(jint)blockSize
-                                              withLong:(jlong)valueCount
-                                           withBoolean:(jboolean)direct;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
+                                                         withInt:(jint)packedIntsVersion
+                                                         withInt:(jint)blockSize
+                                                        withLong:(jlong)valueCount
+                                                     withBoolean:(jboolean)direct;
 
 - (jlong)getWithLong:(jlong)index;
 
@@ -50,6 +56,10 @@
 - (jlong)ramBytesUsed;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -65,4 +75,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedBlockPackedReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedReader")

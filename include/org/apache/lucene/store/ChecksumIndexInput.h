@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreChecksumIndexInput
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreChecksumIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreChecksumIndexInput || defined(INCLUDE_OrgApacheLuceneStoreChecksumIndexInput))
 #define OrgApacheLuceneStoreChecksumIndexInput_
 
@@ -34,10 +40,10 @@
 - (jlong)getChecksum;
 
 /*!
- @brief 
+ @brief  
  <code>ChecksumIndexInput</code> can only seek forward and seeks are expensive
- since they imply to read bytes in-between the current position and the
- target position in order to update the checksum.
+  since they imply to read bytes in-between the current position and the
+  target position in order to update the checksum.
  */
 - (void)seekWithLong:(jlong)pos;
 
@@ -45,10 +51,10 @@
 
 /*!
  @brief resourceDescription should be a non-null, opaque string
- describing this resource; it's returned from
+   describing this resource; it's returned from  
  <code>toString</code>.
  */
-- (instancetype)initWithNSString:(NSString *)resourceDescription;
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDescription;
 
 @end
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreChecksumIndexInput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreChecksumIndexInput")

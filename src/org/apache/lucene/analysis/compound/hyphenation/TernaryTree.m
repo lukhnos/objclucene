@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/compound/hyphenation/TernaryTree.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -14,6 +15,10 @@
 #include "java/util/Stack.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/CharVector.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/TernaryTree.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/compound/hyphenation/TernaryTree must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree ()
 
@@ -56,8 +61,6 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisCompoundHyphenationTe
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator, this$0_, OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *)
-
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_up(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *self);
 
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_run(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *self);
@@ -75,13 +78,11 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisCompoundHyphenationTe
                                                                               withChar:(jchar)p
                                                                               withChar:(jchar)c;
 
-- (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *)clone;
+- (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *)java_clone;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item, this$0_, OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *self, OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$);
 
@@ -123,12 +124,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)insertWithNSString:(NSString *)key
                   withChar:(jchar)val {
-  jint len = ((jint) [((NSString *) nil_chk(key)) length]) + 1;
+  jint len = [((NSString *) nil_chk(key)) java_length] + 1;
   if (freenode_ + len > ((IOSCharArray *) nil_chk(eq_))->size_) {
     OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_redimNodeArraysWithInt_(self, eq_->size_ + OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_BLOCK_SIZE);
   }
   IOSCharArray *strkey = [IOSCharArray arrayWithLength:len--];
-  [key getChars:0 sourceEnd:len destination:strkey destinationBegin:0];
+  [key java_getChars:0 sourceEnd:len destination:strkey destinationBegin:0];
   *IOSCharArray_GetRef(strkey, len) = 0;
   root_ = OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_insertWithChar_withCharArray_withInt_withChar_(self, root_, strkey, 0, val);
 }
@@ -180,9 +181,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)findWithNSString:(NSString *)key {
-  jint len = ((jint) [((NSString *) nil_chk(key)) length]);
+  jint len = [((NSString *) nil_chk(key)) java_length];
   IOSCharArray *strkey = [IOSCharArray arrayWithLength:len + 1];
-  [key getChars:0 sourceEnd:len destination:strkey destinationBegin:0];
+  [key java_getChars:0 sourceEnd:len destination:strkey destinationBegin:0];
   *IOSCharArray_GetRef(strkey, len) = 0;
   return [self findWithCharArray:strkey withInt:0];
 }
@@ -233,13 +234,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   return length_;
 }
 
-- (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *)clone {
+- (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *)java_clone {
   OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *t = create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init();
-  JreStrongAssign(&t->lo_, [((IOSCharArray *) nil_chk(self->lo_)) clone]);
-  JreStrongAssign(&t->hi_, [((IOSCharArray *) nil_chk(self->hi_)) clone]);
-  JreStrongAssign(&t->eq_, [((IOSCharArray *) nil_chk(self->eq_)) clone]);
-  JreStrongAssign(&t->sc_, [((IOSCharArray *) nil_chk(self->sc_)) clone]);
-  JreStrongAssign(&t->kv_, [((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->kv_)) clone]);
+  JreStrongAssign(&t->lo_, [((IOSCharArray *) nil_chk(self->lo_)) java_clone]);
+  JreStrongAssign(&t->hi_, [((IOSCharArray *) nil_chk(self->hi_)) java_clone]);
+  JreStrongAssign(&t->eq_, [((IOSCharArray *) nil_chk(self->eq_)) java_clone]);
+  JreStrongAssign(&t->sc_, [((IOSCharArray *) nil_chk(self->sc_)) java_clone]);
+  JreStrongAssign(&t->kv_, [((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->kv_)) java_clone]);
   t->root_ = self->root_;
   t->freenode_ = self->freenode_;
   t->length_ = self->length_;
@@ -261,7 +262,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)balance {
-  jint i = 0, n = length_;
+  jint i = 0;
+  jint n = length_;
   IOSObjectArray *k = [IOSObjectArray arrayWithLength:n type:NSString_class_()];
   IOSCharArray *v = [IOSCharArray arrayWithLength:n];
   OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *iter = create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_(self);
@@ -309,49 +311,75 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 0, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 3, -1, -1, -1, -1 },
+    { NULL, "C", 0x2, 1, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 5, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 8, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 9, 10, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 9, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 12, 10, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 14, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 15, 16, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree;", 0x1, 17, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 20, 21, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilEnumeration;", 0x1, -1, -1, -1, 22, -1, -1 },
+    { NULL, "V", 0x1, 23, 24, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(init__);
+  methods[2].selector = @selector(insertWithNSString:withChar:);
+  methods[3].selector = @selector(insertWithCharArray:withInt:withChar:);
+  methods[4].selector = @selector(insertWithChar:withCharArray:withInt:withChar:);
+  methods[5].selector = @selector(strcmpWithCharArray:withInt:withCharArray:withInt:);
+  methods[6].selector = @selector(strcmpWithNSString:withCharArray:withInt:);
+  methods[7].selector = @selector(strcpyWithCharArray:withInt:withCharArray:withInt:);
+  methods[8].selector = @selector(strlenWithCharArray:withInt:);
+  methods[9].selector = @selector(strlenWithCharArray:);
+  methods[10].selector = @selector(findWithNSString:);
+  methods[11].selector = @selector(findWithCharArray:withInt:);
+  methods[12].selector = @selector(knowsWithNSString:);
+  methods[13].selector = @selector(redimNodeArraysWithInt:);
+  methods[14].selector = @selector(size);
+  methods[15].selector = @selector(java_clone);
+  methods[16].selector = @selector(insertBalancedWithNSStringArray:withCharArray:withInt:withInt:);
+  methods[17].selector = @selector(balance);
+  methods[18].selector = @selector(trimToSize);
+  methods[19].selector = @selector(compactWithOrgApacheLuceneAnalysisCompoundHyphenationCharVector:withOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree:withChar:);
+  methods[20].selector = @selector(keys);
+  methods[21].selector = @selector(printStatsWithJavaIoPrintStream:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "lo_", "[C", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "hi_", "[C", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "eq_", "[C", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "sc_", "[C", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "kv_", "LOrgApacheLuceneAnalysisCompoundHyphenationCharVector;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "root_", "C", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "freenode_", "C", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "BLOCK_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_BLOCK_SIZE, 0x1c, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "init", "insert", "LNSString;C", "[CIC", "C[CIC", "strcmp", "[CI[CI", "LNSString;[CI", "strcpy", "strlen", "[CI", "[C", "find", "LNSString;", "knows", "redimNodeArrays", "I", "clone", "insertBalanced", "[LNSString;[CII", "compact", "LOrgApacheLuceneAnalysisCompoundHyphenationCharVector;LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree;C", "()Ljava/util/Enumeration<Ljava/lang/String;>;", "printStats", "LJavaIoPrintStream;", "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree = { "TernaryTree", "org.apache.lucene.analysis.compound.hyphenation", ptrTable, methods, fields, 7, 0x1, 22, 9, -1, 25, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TernaryTree", NULL, 0x0, NULL, NULL },
-    { "init__", "init", "V", 0x4, NULL, NULL },
-    { "insertWithNSString:withChar:", "insert", "V", 0x1, NULL, NULL },
-    { "insertWithCharArray:withInt:withChar:", "insert", "V", 0x1, NULL, NULL },
-    { "insertWithChar:withCharArray:withInt:withChar:", "insert", "C", 0x2, NULL, NULL },
-    { "strcmpWithCharArray:withInt:withCharArray:withInt:", "strcmp", "I", 0x9, NULL, NULL },
-    { "strcmpWithNSString:withCharArray:withInt:", "strcmp", "I", 0x9, NULL, NULL },
-    { "strcpyWithCharArray:withInt:withCharArray:withInt:", "strcpy", "V", 0x9, NULL, NULL },
-    { "strlenWithCharArray:withInt:", "strlen", "I", 0x9, NULL, NULL },
-    { "strlenWithCharArray:", "strlen", "I", 0x9, NULL, NULL },
-    { "findWithNSString:", "find", "I", 0x1, NULL, NULL },
-    { "findWithCharArray:withInt:", "find", "I", 0x1, NULL, NULL },
-    { "knowsWithNSString:", "knows", "Z", 0x1, NULL, NULL },
-    { "redimNodeArraysWithInt:", "redimNodeArrays", "V", 0x2, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.analysis.compound.hyphenation.TernaryTree;", 0x1, NULL, NULL },
-    { "insertBalancedWithNSStringArray:withCharArray:withInt:withInt:", "insertBalanced", "V", 0x4, NULL, NULL },
-    { "balance", NULL, "V", 0x1, NULL, NULL },
-    { "trimToSize", NULL, "V", 0x1, NULL, NULL },
-    { "compactWithOrgApacheLuceneAnalysisCompoundHyphenationCharVector:withOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree:withChar:", "compact", "V", 0x2, NULL, NULL },
-    { "keys", NULL, "Ljava.util.Enumeration;", 0x1, NULL, "()Ljava/util/Enumeration<Ljava/lang/String;>;" },
-    { "printStatsWithJavaIoPrintStream:", "printStats", "V", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "lo_", NULL, 0x4, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "hi_", NULL, 0x4, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "eq_", NULL, 0x4, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "sc_", NULL, 0x4, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "kv_", NULL, 0x4, "Lorg.apache.lucene.analysis.compound.hyphenation.CharVector;", NULL, NULL, .constantValue.asLong = 0 },
-    { "root_", NULL, 0x4, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "freenode_", NULL, 0x4, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "BLOCK_SIZE", "BLOCK_SIZE", 0x1c, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_BLOCK_SIZE },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.compound.hyphenation.TernaryTree$Iterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree = { 2, "TernaryTree", "org.apache.lucene.analysis.compound.hyphenation", NULL, 0x1, 22, methods, 9, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end
@@ -444,7 +472,9 @@ jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_strcmpWithCharArray_w
 
 jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_strcmpWithNSString_withCharArray_withInt_(NSString *str, IOSCharArray *a, jint start) {
   OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_initialize();
-  jint i, d, len = ((jint) [((NSString *) nil_chk(str)) length]);
+  jint i;
+  jint d;
+  jint len = [((NSString *) nil_chk(str)) java_length];
   for (i = 0; i < len; i++) {
     d = (jint) [str charAtWithInt:i] - IOSCharArray_Get(nil_chk(a), start + i);
     if (d != 0) {
@@ -572,24 +602,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationTerna
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree:", "Iterator", NULL, 0x1, NULL, NULL },
-    { "rewind", NULL, "V", 0x1, NULL, NULL },
-    { "nextElement", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValue", NULL, "C", 0x1, NULL, NULL },
-    { "hasMoreElements", NULL, "Z", 0x1, NULL, NULL },
-    { "up", NULL, "I", 0x2, NULL, NULL },
-    { "run", NULL, "I", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "C", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree:);
+  methods[1].selector = @selector(rewind);
+  methods[2].selector = @selector(nextElement);
+  methods[3].selector = @selector(getValue);
+  methods[4].selector = @selector(hasMoreElements);
+  methods[5].selector = @selector(up);
+  methods[6].selector = @selector(run);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.analysis.compound.hyphenation.TernaryTree;", NULL, NULL, .constantValue.asLong = 0 },
-    { "cur_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curkey_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ns_", NULL, 0x0, "Ljava.util.Stack;", NULL, "Ljava/util/Stack<Lorg/apache/lucene/analysis/compound/hyphenation/TernaryTree$Iterator$Item;>;", .constantValue.asLong = 0 },
-    { "ks_", NULL, 0x0, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "cur_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "curkey_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "ns_", "LJavaUtilStack;", .constantValue.asLong = 0, 0x0, -1, -1, 1, -1 },
+    { "ks_", "LJavaLangStringBuilder;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.compound.hyphenation.TernaryTree$Iterator$Item;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator = { 2, "Iterator", "org.apache.lucene.analysis.compound.hyphenation", "TernaryTree", 0x1, 7, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, "Ljava/lang/Object;Ljava/util/Enumeration<Ljava/lang/String;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree;", "Ljava/util/Stack<Lorg/apache/lucene/analysis/compound/hyphenation/TernaryTree$Iterator$Item;>;", "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item;", "Ljava/lang/Object;Ljava/util/Enumeration<Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator = { "Iterator", "org.apache.lucene.analysis.compound.hyphenation", ptrTable, methods, fields, 7, 0x1, 7, 5, 0, 2, -1, 3, -1 };
   return &_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator;
 }
 
@@ -629,21 +670,21 @@ jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_up(OrgApache
       case 1:
       if (IOSCharArray_Get(nil_chk(self->this$0_->sc_), i->parent_) != 0) {
         res = IOSCharArray_Get(nil_chk(self->this$0_->eq_), i->parent_);
-        [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[i clone]];
+        [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[i java_clone]];
         [((JavaLangStringBuilder *) nil_chk(self->ks_)) appendWithChar:IOSCharArray_Get(nil_chk(self->this$0_->sc_), i->parent_)];
       }
       else {
         i->child_++;
-        [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[i clone]];
+        [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[i java_clone]];
         res = IOSCharArray_Get(nil_chk(self->this$0_->hi_), i->parent_);
       }
       climb = false;
       break;
       case 2:
       res = IOSCharArray_Get(nil_chk(self->this$0_->hi_), i->parent_);
-      [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[i clone]];
-      if ([((JavaLangStringBuilder *) nil_chk(self->ks_)) length] > 0) {
-        [((JavaLangStringBuilder *) nil_chk(self->ks_)) setLengthWithInt:[self->ks_ length] - 1];
+      [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[i java_clone]];
+      if ([((JavaLangStringBuilder *) nil_chk(self->ks_)) java_length] > 0) {
+        [((JavaLangStringBuilder *) nil_chk(self->ks_)) setLengthWithInt:[self->ks_ java_length] - 1];
       }
       climb = false;
       break;
@@ -711,7 +752,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationTerna
   return self;
 }
 
-- (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *)clone {
+- (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *)java_clone {
   return create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(this$0_, parent_, child_);
 }
 
@@ -720,23 +761,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationTerna
   [super dealloc];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item;", 0x1, 2, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator:withChar:withChar:);
+  methods[2].selector = @selector(java_clone);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "this$0_", "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "parent_", "C", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "child_", "C", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator;", "LOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator;CC", "clone" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item = { "Item", "org.apache.lucene.analysis.compound.hyphenation", ptrTable, methods, fields, 7, 0x2, 3, 3, 0, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator:", "Item", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator:withChar:withChar:", "Item", NULL, 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.analysis.compound.hyphenation.TernaryTree$Iterator$Item;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.analysis.compound.hyphenation.TernaryTree$Iterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "parent_", NULL, 0x0, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "child_", NULL, 0x0, "C", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item = { 2, "Item", "org.apache.lucene.analysis.compound.hyphenation", "TernaryTree$Iterator", 0x2, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end

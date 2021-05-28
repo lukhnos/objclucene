@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/Scorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
@@ -13,6 +11,10 @@
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/Weight.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/Scorer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchScorer
 
@@ -51,19 +53,29 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:", "Scorer", NULL, 0x4, NULL, NULL },
-    { "score", NULL, "F", 0x401, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "getWeight", NULL, "Lorg.apache.lucene.search.Weight;", 0x1, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchWeight:);
+  methods[1].selector = @selector(score);
+  methods[2].selector = @selector(freq);
+  methods[3].selector = @selector(getWeight);
+  methods[4].selector = @selector(getChildren);
+  methods[5].selector = @selector(asTwoPhaseIterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "weight_", NULL, 0x14, "Lorg.apache.lucene.search.Weight;", NULL, NULL, .constantValue.asLong = 0 },
+    { "weight_", "LOrgApacheLuceneSearchWeight;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.Scorer$ChildScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchScorer = { 2, "Scorer", "org.apache.lucene.search", NULL, 0x401, 6, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchWeight;", "LJavaIoIOException;", "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;", "LOrgApacheLuceneSearchScorer_ChildScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchScorer = { "Scorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 6, 1, -1, 3, -1, -1, -1 };
   return &_OrgApacheLuceneSearchScorer;
 }
 
@@ -91,14 +103,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchScorer)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchScorer:withNSString:", "ChildScorer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchScorer:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "child_", NULL, 0x11, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "relationship_", NULL, 0x11, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "child_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "relationship_", "LNSString;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchScorer_ChildScorer = { 2, "ChildScorer", "org.apache.lucene.search", "Scorer", 0x9, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchScorer;LNSString;", "LOrgApacheLuceneSearchScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchScorer_ChildScorer = { "ChildScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x9, 1, 2, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchScorer_ChildScorer;
 }
 

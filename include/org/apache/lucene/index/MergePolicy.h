@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMergePolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMergePolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexMergePolicy))
 #define OrgApacheLuceneIndexMergePolicy_
 
@@ -25,25 +31,28 @@
 
 /*!
  @brief <p>Expert: a MergePolicy determines the sequence of
- primitive merge operations.
+  primitive merge operations.
  </p>
- <p>Whenever the segments in an index have been altered by
+   
+ <p>Whenever the segments in an index have been altered by 
  <code>IndexWriter</code>, either the addition of a newly
- flushed segment, addition of many segments from
- addIndexes* calls, or a previous merge that may now need
- to cascade, <code>IndexWriter</code> invokes <code>findMerges</code>
+  flushed segment, addition of many segments from
+  addIndexes* calls, or a previous merge that may now need
+  to cascade, <code>IndexWriter</code> invokes <code>findMerges</code>
   to give the MergePolicy a chance to pick
- merges that are now required.  This method returns a
+  merges that are now required.  This method returns a 
  <code>MergeSpecification</code> instance describing the set of
- merges that should be done, or null if no merges are
- necessary.  When IndexWriter.forceMerge is called, it calls
- <code>findForcedMerges(SegmentInfos,int,Map,IndexWriter)</code> and the MergePolicy should
- then return the necessary merges.</p>
+  merges that should be done, or null if no merges are
+  necessary.  When IndexWriter.forceMerge is called, it calls 
+ <code>findForcedMerges(SegmentInfos,int,Map, IndexWriter)</code> and the MergePolicy should
+  then return the necessary merges.</p>
+  
  <p>Note that the policy can return more than one merge at
- a time.  In this case, if the writer is using <code>SerialMergeScheduler</code>
+  a time.  In this case, if the writer is using <code>SerialMergeScheduler</code>
  , the merges will be run
- sequentially but if it is using <code>ConcurrentMergeScheduler</code>
+  sequentially but if it is using <code>ConcurrentMergeScheduler</code>
   they will be run concurrently.</p>
+   
  <p>The default MergePolicy is <code>TieredMergePolicy</code>
  .</p>
  */
@@ -51,33 +60,30 @@
  @public
   /*!
    @brief If the size of the merge segment exceeds this ratio of
- the total index size then it will remain in
- non-compound format
+   the total index size then it will remain in
+   non-compound format
    */
   jdouble noCFSRatio_;
   /*!
    @brief If the size of the merged segment exceeds
- this value then it will not use compound file format.
+   this value then it will not use compound file format.
    */
   jlong maxCFSSegmentSize_;
 }
-
-+ (jdouble)DEFAULT_NO_CFS_RATIO;
-
-+ (jlong)DEFAULT_MAX_CFS_SEGMENT_SIZE;
+@property (readonly, class) jdouble DEFAULT_NO_CFS_RATIO NS_SWIFT_NAME(DEFAULT_NO_CFS_RATIO);
+@property (readonly, class) jlong DEFAULT_MAX_CFS_SEGMENT_SIZE NS_SWIFT_NAME(DEFAULT_MAX_CFS_SEGMENT_SIZE);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new merge policy instance.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Determine what set of merge operations is necessary in order to expunge all
- deletes from the index.
- @param segmentInfos
- the total set of segments in the index
+  deletes from the index.
+ @param segmentInfos the total set of segments in the index
  @param writer the IndexWriter to find the merges on
  */
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
@@ -85,24 +91,21 @@
 
 /*!
  @brief Determine what set of merge operations is necessary in
- order to merge to <code><=</code> the specified segment count.
- <code>IndexWriter</code> calls this when its
+  order to merge to <code><=</code> the specified segment count.
+ <code>IndexWriter</code> calls this when its 
  <code>IndexWriter.forceMerge</code> method is called. This call is always
- synchronized on the <code>IndexWriter</code> instance so only one thread at a
- time will call this method.
- @param segmentInfos
- the total set of segments in the index
- @param maxSegmentCount
- requested maximum number of segments in the index (currently this
- is always 1)
- @param segmentsToMerge
- contains the specific SegmentInfo instances that must be merged
- away. This may be a subset of all
- SegmentInfos.  If the value is True for a
- given SegmentInfo, that means this segment was
- an original segment present in the
- to-be-merged index; else, it was a segment
- produced by a cascaded merge.
+  synchronized on the <code>IndexWriter</code> instance so only one thread at a
+  time will call this method.
+ @param segmentInfos the total set of segments in the index
+ @param maxSegmentCount requested maximum number of segments in the index (currently this
+            is always 1)
+ @param segmentsToMerge contains the specific SegmentInfo instances that must be merged
+            away. This may be a subset of all
+            SegmentInfos.  If the value is True for a
+            given SegmentInfo, that means this segment was
+            an original segment present in the
+            to-be-merged index; else, it was a segment
+            produced by a cascaded merge.
  @param writer the IndexWriter to find the merges on
  */
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
@@ -113,11 +116,10 @@
 /*!
  @brief Determine what set of merge operations are now necessary on the index.
  <code>IndexWriter</code> calls this whenever there is a change to the segments.
- This call is always synchronized on the <code>IndexWriter</code> instance so
- only one thread at a time will call this method.
+  This call is always synchronized on the <code>IndexWriter</code> instance so
+  only one thread at a time will call this method.
  @param mergeTrigger the event that triggered the merge
- @param segmentInfos
- the total set of segments in the index
+ @param segmentInfos the total set of segments in the index
  @param writer the IndexWriter to find the merges on
  */
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)mergeTrigger
@@ -137,29 +139,28 @@
 
 /*!
  @brief If a merged segment will be more than this value,
- leave the segment as
- non-compound file even if compound file is enabled.
+   leave the segment as
+   non-compound file even if compound file is enabled.
  Set this to Double.POSITIVE_INFINITY (default) and noCFSRatio to 1.0
- to always use CFS regardless of merge size. 
+   to always use CFS regardless of merge size.
  */
 - (void)setMaxCFSSegmentSizeMBWithDouble:(jdouble)v;
 
 /*!
  @brief If a merged segment will be more than this percentage
- of the total size of the index, leave the segment as
- non-compound file even if compound file is enabled.
+   of the total size of the index, leave the segment as
+   non-compound file even if compound file is enabled.
  Set to 1.0 to always use CFS regardless of merge
- size. 
+   size.
  */
 - (void)setNoCFSRatioWithDouble:(jdouble)noCFSRatio;
 
 /*!
  @brief Returns true if a new segment (regardless of its origin) should use the
- compound file format.
- The default implementation returns <code>true</code>
- iff the size of the given mergedInfo is less or equal to
+  compound file format.The default implementation returns <code>true</code>
+  iff the size of the given mergedInfo is less or equal to 
  <code>getMaxCFSSegmentSizeMB()</code> and the size is less or equal to the
- TotalIndexSize * <code>getNoCFSRatio()</code> otherwise <code>false</code>.
+  TotalIndexSize * <code>getNoCFSRatio()</code> otherwise <code>false</code>.
  */
 - (jboolean)useCompoundFileWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                       withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)mergedInfo
@@ -169,17 +170,16 @@
 
 /*!
  @brief Creates a new merge policy instance with default settings for noCFSRatio
- and maxCFSSegmentSize.
- This ctor should be used by subclasses using different
- defaults than the <code>MergePolicy</code>
+  and maxCFSSegmentSize.This ctor should be used by subclasses using different
+  defaults than the <code>MergePolicy</code>
  */
-- (instancetype)initWithDouble:(jdouble)defaultNoCFSRatio
-                      withLong:(jlong)defaultMaxCFSSegmentSize;
+- (instancetype __nonnull)initWithDouble:(jdouble)defaultNoCFSRatio
+                                withLong:(jlong)defaultMaxCFSSegmentSize;
 
 /*!
  @brief Returns true if this single info is already fully merged (has no
- pending deletes, is in the same dir as the
- writer, and matches the current compound file setting
+   pending deletes, is in the same dir as the
+   writer, and matches the current compound file setting
  */
 - (jboolean)isMergedWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
@@ -188,7 +188,7 @@
 /*!
  @brief Return the byte size of the provided <code>SegmentCommitInfo</code>
  , pro-rated by percentage of
- non-deleted documents is set.
+   non-deleted documents is set.
  */
 - (jlong)sizeWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
                    withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
@@ -198,19 +198,17 @@
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMergePolicy)
 
 /*!
- @brief Default ratio for compound file system usage.
- Set to <tt>1.0</tt>, always use 
- compound file system.
+ @brief Default ratio for compound file system usage.Set to <tt>1.0</tt>, always use 
+  compound file system.
  */
-inline jdouble OrgApacheLuceneIndexMergePolicy_get_DEFAULT_NO_CFS_RATIO();
+inline jdouble OrgApacheLuceneIndexMergePolicy_get_DEFAULT_NO_CFS_RATIO(void);
 #define OrgApacheLuceneIndexMergePolicy_DEFAULT_NO_CFS_RATIO 1.0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexMergePolicy, DEFAULT_NO_CFS_RATIO, jdouble)
 
 /*!
- @brief Default max segment size in order to use compound file system.
- Set to <code>Long.MAX_VALUE</code>.
+ @brief Default max segment size in order to use compound file system.Set to <code>Long.MAX_VALUE</code>.
  */
-inline jlong OrgApacheLuceneIndexMergePolicy_get_DEFAULT_MAX_CFS_SEGMENT_SIZE();
+inline jlong OrgApacheLuceneIndexMergePolicy_get_DEFAULT_MAX_CFS_SEGMENT_SIZE(void);
 #define OrgApacheLuceneIndexMergePolicy_DEFAULT_MAX_CFS_SEGMENT_SIZE 9223372036854775807LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexMergePolicy, DEFAULT_MAX_CFS_SEGMENT_SIZE, jlong)
 
@@ -242,7 +240,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy)
 /*!
  @brief Sole constructor, typically invoked from sub-classes constructors.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Package-Private
 
@@ -264,6 +262,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_DocMap)
 #if !defined (OrgApacheLuceneIndexMergePolicy_OneMerge_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexMergePolicy_OneMerge))
 #define OrgApacheLuceneIndexMergePolicy_OneMerge_
 
+@class JavaLangThrowable;
 @class OrgApacheLuceneIndexMergePolicy_DocMap;
 @class OrgApacheLuceneIndexMergeRateLimiter;
 @class OrgApacheLuceneIndexMergeState;
@@ -273,12 +272,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_DocMap)
 
 /*!
  @brief OneMerge provides the information necessary to perform
- an individual primitive merge operation, resulting in
- a single new segment.
- The merge spec includes the
- subset of segments to be merged as well as whether the
- new segment should use the compound file format.
-  
+   an individual primitive merge operation, resulting in
+   a single new segment.The merge spec includes the
+   subset of segments to be merged as well as whether the
+   new segment should use the compound file format.
  */
 @interface OrgApacheLuceneIndexMergePolicy_OneMerge : NSObject {
  @public
@@ -306,42 +303,41 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_DocMap)
    @brief Total number of documents in segments to be merged, not accounting for deletions.
    */
   jint totalMaxDoc_;
-  NSException *error_;
+  JavaLangThrowable *error_;
 }
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor.
- @param segments List of <code>SegmentCommitInfo</code>s
- to be merged.
+ @param segments List of <code>SegmentCommitInfo</code> s
+          to be merged.
  */
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)segments;
+- (instancetype __nonnull)initWithJavaUtilList:(id<JavaUtilList>)segments;
 
 /*!
  @brief Expert: If <code>getMergeReaders()</code> reorders document IDs, this method
- must be overridden to return a mapping from the <i>natural</i> doc ID
- (the doc ID that would result from a natural merge) to the actual doc
- ID.
- This mapping is used to apply deletions that happened during the
- merge to the new segment. 
+   must be overridden to return a mapping from the <i>natural</i> doc ID
+   (the doc ID that would result from a natural merge) to the actual doc
+   ID.This mapping is used to apply deletions that happened during the
+   merge to the new segment.
  */
 - (OrgApacheLuceneIndexMergePolicy_DocMap *)getDocMapWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
 /*!
  @brief Returns the <code>SegmentCommitInfo</code> for the merged segment,
- or null if it hasn't been set yet.
+  or null if it hasn't been set yet.
  */
 - (OrgApacheLuceneIndexSegmentCommitInfo *)getMergeInfo;
 
 /*!
- @brief Expert: Get the list of readers to merge.
- Note that this list does not
- necessarily match the list of segments to merge and should only be used
- to feed SegmentMerger to initialize a merge. When a <code>OneMerge</code>
- reorders doc IDs, it must override <code>getDocMap</code> too so that
- deletes that happened during the merge can be applied to the newly
- merged segment. 
+ @brief Expert: Get the list of readers to merge.Note that this list does not
+   necessarily match the list of segments to merge and should only be used
+   to feed SegmentMerger to initialize a merge.
+ When a <code>OneMerge</code>
+   reorders doc IDs, it must override <code>getDocMap</code> too so that
+   deletes that happened during the merge can be applied to the newly
+   merged segment.
  */
 - (id<JavaUtilList>)getMergeReaders;
 
@@ -357,7 +353,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_DocMap)
 
 /*!
  @brief Returns a readable description of the current merge
- state.
+   state.
  */
 - (NSString *)segString;
 
@@ -368,11 +364,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_DocMap)
 - (void)setMergeInfoWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info;
 
 /*!
- @brief Returns the total size in bytes of this merge.
- Note that this does not
- indicate the size of the merged segment, but the
- input total size. This is only set once the merge is
- initialized by IndexWriter.
+ @brief Returns the total size in bytes of this merge.Note that this does not
+  indicate the size of the merged segment, but the
+  input total size.
+ This is only set once the merge is
+  initialized by IndexWriter.
  */
 - (jlong)totalBytesSize;
 
@@ -388,13 +384,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_DocMap)
  @brief Retrieve previous exception set by <code>setException</code>
  .
  */
-- (NSException *)getException;
+- (JavaLangThrowable *)getException;
 
 /*!
  @brief Record that an exception occurred while executing
- this merge
+   this merge
  */
-- (void)setExceptionWithNSException:(NSException *)error;
+- (void)setExceptionWithJavaLangThrowable:(JavaLangThrowable *)error;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -404,7 +404,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergePolicy_OneMerge, info_, OrgApacheLu
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergePolicy_OneMerge, readers_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergePolicy_OneMerge, segments_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergePolicy_OneMerge, rateLimiter_, OrgApacheLuceneIndexMergeRateLimiter *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergePolicy_OneMerge, error_, NSException *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergePolicy_OneMerge, error_, JavaLangThrowable *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMergePolicy_OneMerge_initWithJavaUtilList_(OrgApacheLuceneIndexMergePolicy_OneMerge *self, id<JavaUtilList> segments);
 
@@ -425,9 +425,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_OneMerge)
 
 /*!
  @brief A MergeSpecification instance provides the information
- necessary to perform multiple merges.
- It simply
- contains a list of <code>OneMerge</code> instances.
+  necessary to perform multiple merges.It simply
+  contains a list of <code>OneMerge</code> instances.
  */
 @interface OrgApacheLuceneIndexMergePolicy_MergeSpecification : NSObject {
  @public
@@ -440,21 +439,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_OneMerge)
 #pragma mark Public
 
 /*!
- @brief Sole constructor.
- Use <code>add(MergePolicy.OneMerge)</code>
-  to add merges. 
+ @brief Sole constructor.Use <code>add(MergePolicy.OneMerge)</code>
+  to add merges.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Adds the provided <code>OneMerge</code> to this
- specification.
+   specification.
  */
 - (void)addWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
 /*!
  @brief Returns a description of the merges in this
- specification.
+   specification.
  */
 - (NSString *)segStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
@@ -466,9 +464,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergePolicy_MergeSpecification, merges_,
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMergePolicy_MergeSpecification_init(OrgApacheLuceneIndexMergePolicy_MergeSpecification *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeSpecification *new_OrgApacheLuceneIndexMergePolicy_MergeSpecification_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeSpecification *new_OrgApacheLuceneIndexMergePolicy_MergeSpecification_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeSpecification *create_OrgApacheLuceneIndexMergePolicy_MergeSpecification_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeSpecification *create_OrgApacheLuceneIndexMergePolicy_MergeSpecification_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_MergeSpecification)
 
@@ -481,11 +479,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_MergeSpecification)
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+@class JavaLangThrowable;
 @class OrgApacheLuceneStoreDirectory;
 
 /*!
  @brief Exception thrown if there are any problems while
- executing a merge.
+   executing a merge.
  */
 @interface OrgApacheLuceneIndexMergePolicy_MergeException : JavaLangRuntimeException
 
@@ -494,20 +493,36 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_MergeSpecification)
 /*!
  @brief Create a <code>MergeException</code>.
  */
-- (instancetype)initWithNSString:(NSString *)message
-withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
+- (instancetype __nonnull)initWithNSString:(NSString *)message
+         withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
  @brief Create a <code>MergeException</code>.
  */
-- (instancetype)initWithNSException:(NSException *)exc
-  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)exc
+                  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 /*!
  @brief Returns the <code>Directory</code> of the index that hit
- the exception.
+   the exception.
  */
 - (OrgApacheLuceneStoreDirectory *)getDirectory;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1
+                               withBoolean:(jboolean)arg2
+                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -519,11 +534,11 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeException *new_OrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeException *create_OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSString_withOrgApacheLuceneStoreDirectory_(NSString *message, OrgApacheLuceneStoreDirectory *dir);
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSException_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexMergePolicy_MergeException *self, NSException *exc, OrgApacheLuceneStoreDirectory *dir);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexMergePolicy_MergeException_initWithJavaLangThrowable_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexMergePolicy_MergeException *self, JavaLangThrowable *exc, OrgApacheLuceneStoreDirectory *dir);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeException *new_OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSException_withOrgApacheLuceneStoreDirectory_(NSException *exc, OrgApacheLuceneStoreDirectory *dir) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeException *new_OrgApacheLuceneIndexMergePolicy_MergeException_initWithJavaLangThrowable_withOrgApacheLuceneStoreDirectory_(JavaLangThrowable *exc, OrgApacheLuceneStoreDirectory *dir) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeException *create_OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSException_withOrgApacheLuceneStoreDirectory_(NSException *exc, OrgApacheLuceneStoreDirectory *dir);
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeException *create_OrgApacheLuceneIndexMergePolicy_MergeException_initWithJavaLangThrowable_withOrgApacheLuceneStoreDirectory_(JavaLangThrowable *exc, OrgApacheLuceneStoreDirectory *dir);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_MergeException)
 
@@ -536,12 +551,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_MergeException)
 #define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
+@class JavaLangThrowable;
+
 /*!
  @brief Thrown when a merge was explicity aborted because
- <code>IndexWriter.abortMerges</code> was called.
- Normally
- this exception is privately caught and suppresed by
- <code>IndexWriter</code>. 
+   <code>IndexWriter.abortMerges</code> was called.Normally
+   this exception is privately caught and suppresed by  
+ <code>IndexWriter</code>.
  */
 @interface OrgApacheLuceneIndexMergePolicy_MergeAbortedException : JavaIoIOException
 
@@ -550,13 +566,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_MergeException)
 /*!
  @brief Create a <code>MergeAbortedException</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Create a <code>MergeAbortedException</code> with a
- specified message.
+   specified message.
  */
-- (instancetype)initWithNSString:(NSString *)message;
+- (instancetype __nonnull)initWithNSString:(NSString *)message;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -564,9 +587,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMergePolicy_MergeAbortedException)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMergePolicy_MergeAbortedException_init(OrgApacheLuceneIndexMergePolicy_MergeAbortedException *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeAbortedException *new_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeAbortedException *new_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeAbortedException *create_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy_MergeAbortedException *create_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMergePolicy_MergeAbortedException_initWithNSString_(OrgApacheLuceneIndexMergePolicy_MergeAbortedException *self, NSString *message);
 
@@ -578,4 +601,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_MergeAbortedException
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergePolicy")

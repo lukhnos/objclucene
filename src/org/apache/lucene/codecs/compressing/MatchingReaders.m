@@ -12,10 +12,14 @@
 #include "org/apache/lucene/index/MergeState.h"
 #include "org/apache/lucene/util/InfoStream.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/compressing/MatchingReaders must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneCodecsCompressingMatchingReaders
 
-- (instancetype)initWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState {
-  OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneIndexMergeState_(self, mergeState);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState {
+  OrgApacheLuceneCodecsCompressingMatchingReaders_initPackagePrivateWithOrgApacheLuceneIndexMergeState_(self, mergeState);
   return self;
 }
 
@@ -25,20 +29,26 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexMergeState:", "MatchingReaders", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexMergeState:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "matchingReaders_", NULL, 0x10, "[Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "matchingReaders_", "[Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "count_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingMatchingReaders = { 2, "MatchingReaders", "org.apache.lucene.codecs.compressing", NULL, 0x0, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexMergeState;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingMatchingReaders = { "MatchingReaders", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x0, 1, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompressingMatchingReaders;
 }
 
 @end
 
-void OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneCodecsCompressingMatchingReaders *self, OrgApacheLuceneIndexMergeState *mergeState) {
+void OrgApacheLuceneCodecsCompressingMatchingReaders_initPackagePrivateWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneCodecsCompressingMatchingReaders *self, OrgApacheLuceneIndexMergeState *mergeState) {
   NSObject_init(self);
   jint numReaders = ((IOSIntArray *) nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState))->maxDocs_))->size_;
   jint matchedCount = 0;
@@ -46,7 +56,7 @@ void OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneInde
   for (jint i = 0; i < numReaders; i++) {
     {
       for (OrgApacheLuceneIndexFieldInfo * __strong fi in nil_chk(IOSObjectArray_Get(nil_chk(mergeState->fieldInfos_), i))) {
-        OrgApacheLuceneIndexFieldInfo *other = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) fieldInfoWithInt:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi))->number_];
+        OrgApacheLuceneIndexFieldInfo *other = JreRetainedLocalValue([((OrgApacheLuceneIndexFieldInfos *) nil_chk(mergeState->mergeFieldInfos_)) fieldInfoWithInt:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi))->number_]);
         if (other == nil || ![((NSString *) nil_chk(other->name_)) isEqual:fi->name_]) {
           goto continue_nextReader;
         }
@@ -65,12 +75,12 @@ void OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneInde
   }
 }
 
-OrgApacheLuceneCodecsCompressingMatchingReaders *new_OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMergeState *mergeState) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingMatchingReaders, initWithOrgApacheLuceneIndexMergeState_, mergeState)
+OrgApacheLuceneCodecsCompressingMatchingReaders *new_OrgApacheLuceneCodecsCompressingMatchingReaders_initPackagePrivateWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMergeState *mergeState) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingMatchingReaders, initPackagePrivateWithOrgApacheLuceneIndexMergeState_, mergeState)
 }
 
-OrgApacheLuceneCodecsCompressingMatchingReaders *create_OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMergeState *mergeState) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingMatchingReaders, initWithOrgApacheLuceneIndexMergeState_, mergeState)
+OrgApacheLuceneCodecsCompressingMatchingReaders *create_OrgApacheLuceneCodecsCompressingMatchingReaders_initPackagePrivateWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMergeState *mergeState) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingMatchingReaders, initPackagePrivateWithOrgApacheLuceneIndexMergeState_, mergeState)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingMatchingReaders)

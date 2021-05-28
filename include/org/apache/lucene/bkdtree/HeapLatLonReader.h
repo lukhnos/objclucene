@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneBkdtreeHeapLatLonReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneBkdtreeHeapLatLonReader_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonReader || defined(INCLUDE_OrgApacheLuceneBkdtreeHeapLatLonReader))
 #define OrgApacheLuceneBkdtreeHeapLatLonReader_
 
@@ -48,12 +54,16 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithIntArray:(IOSIntArray *)latEncs
-                    withIntArray:(IOSIntArray *)lonEncs
-                   withLongArray:(IOSLongArray *)ords
-                    withIntArray:(IOSIntArray *)docIDs
-                         withInt:(jint)start
-                         withInt:(jint)end;
+- (instancetype __nonnull)initPackagePrivateWithIntArray:(IOSIntArray *)latEncs
+                                            withIntArray:(IOSIntArray *)lonEncs
+                                           withLongArray:(IOSLongArray *)ords
+                                            withIntArray:(IOSIntArray *)docIDs
+                                                 withInt:(jint)start
+                                                 withInt:(jint)end;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -64,14 +74,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeHeapLatLonReader, lonEncs_, IOSIntArra
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeHeapLatLonReader, ords_, IOSLongArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeHeapLatLonReader, docIDs_, IOSIntArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(OrgApacheLuceneBkdtreeHeapLatLonReader *self, IOSIntArray *latEncs, IOSIntArray *lonEncs, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end);
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeHeapLatLonReader_initPackagePrivateWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(OrgApacheLuceneBkdtreeHeapLatLonReader *self, IOSIntArray *latEncs, IOSIntArray *lonEncs, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end);
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonReader *new_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(IOSIntArray *latEncs, IOSIntArray *lonEncs, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonReader *new_OrgApacheLuceneBkdtreeHeapLatLonReader_initPackagePrivateWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(IOSIntArray *latEncs, IOSIntArray *lonEncs, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonReader *create_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(IOSIntArray *latEncs, IOSIntArray *lonEncs, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end);
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonReader *create_OrgApacheLuceneBkdtreeHeapLatLonReader_initPackagePrivateWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(IOSIntArray *latEncs, IOSIntArray *lonEncs, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeHeapLatLonReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonReader")

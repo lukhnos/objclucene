@@ -37,6 +37,12 @@
 #define INCLUDE_OrgApacheLuceneSearchFieldComparator_NumericComparator 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFieldComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator))
 #define OrgApacheLuceneSearchFieldComparator_
 
@@ -45,37 +51,38 @@
 
 /*!
  @brief Expert: a FieldComparator compares hits so as to determine their
- sort order when collecting the top results with <code>TopFieldCollector</code>
- .
- The concrete public FieldComparator
- classes here correspond to the SortField types.
+  sort order when collecting the top results with <code>TopFieldCollector</code>
+ .The concrete public FieldComparator
+  classes here correspond to the SortField types.
  <p>This API is designed to achieve high performance
- sorting, by exposing a tight interaction with <code>FieldValueHitQueue</code>
+  sorting, by exposing a tight interaction with <code>FieldValueHitQueue</code>
   as it visits hits.  Whenever a hit is
- competitive, it's enrolled into a virtual slot, which is
- an int ranging from 0 to numHits-1. Segment transitions are
- handled by creating a dedicated per-segment
+  competitive, it's enrolled into a virtual slot, which is
+  an int ranging from 0 to numHits-1. Segment transitions are
+  handled by creating a dedicated per-segment 
  <code>LeafFieldComparator</code> which also needs to interact
- with the <code>FieldValueHitQueue</code> but can optimize based
- on the segment to collect.</p>
+  with the <code>FieldValueHitQueue</code> but can optimize based
+  on the segment to collect.</p>
+   
  <p>The following functions need to be implemented</p>
- <ul>
- <li> <code>compare</code> Compare a hit at 'slot a'
- with hit 'slot b'.
+  <ul>
+   <li> <code>compare</code> Compare a hit at 'slot a'
+        with hit 'slot b'.   
  <li> <code>setTopValue</code> This method is called by
- <code>TopFieldCollector</code> to notify the
- FieldComparator of the top most value, which is
- used by future calls to
+        <code>TopFieldCollector</code> to notify the
+        FieldComparator of the top most value, which is
+        used by future calls to       
  <code>LeafFieldComparator.compareTop</code>.
- <li> <code>getLeafComparator(org.apache.lucene.index.LeafReaderContext)</code> Invoked
- when the search is switching to the next segment.
- You may need to update internal state of the
- comparator, for example retrieving new values from
- DocValues.
+  
+   <li> <code>getLeafComparator(org.apache.lucene.index.LeafReaderContext)</code> Invoked
+        when the search is switching to the next segment.
+        You may need to update internal state of the
+        comparator, for example retrieving new values from
+        DocValues.  
  <li> <code>value</code> Return the sort value stored in
- the specified slot.  This is only called at the end
- of the search, in order to populate <code>FieldDoc.fields</code>
-  when returning the top results.
+        the specified slot.  This is only called at the end
+        of the search, in order to populate <code>FieldDoc.fields</code>
+  when returning the top results. 
  </ul>
  - seealso: LeafFieldComparator
  */
@@ -83,49 +90,46 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Compare hit at slot1 with hit at slot2.
  @param slot1 first slot to compare
  @param slot2 second slot to compare
  @return any <code>N < 0</code> if slot2's value is sorted after
- slot1, any <code>N > 0</code> if the slot2's value is sorted before
- slot1 and <code>0</code> if they are equal
+  slot1, any <code>N > 0</code> if the slot2's value is sorted before
+  slot1 and <code>0</code> if they are equal
  */
 - (jint)compareWithInt:(jint)slot1
                withInt:(jint)slot2;
 
 /*!
  @brief Returns a negative integer if first is less than second,
- 0 if they are equal and a positive integer otherwise.
- Default
- impl to assume the type implements Comparable and
- invoke .compareTo; be sure to override this method if
- your FieldComparator's type isn't a Comparable or
- if your values may sometimes be null 
+   0 if they are equal and a positive integer otherwise.Default
+   impl to assume the type implements Comparable and
+   invoke .compareTo; be sure to override this method if
+   your FieldComparator's type isn't a Comparable or
+   if your values may sometimes be null
  */
 - (jint)compareValuesWithId:(id)first
                      withId:(id)second;
 
 /*!
- @brief Get a per-segment <code>LeafFieldComparator</code> to collect the given
- <code>org.apache.lucene.index.LeafReaderContext</code>.
- All docIDs supplied to
- this <code>LeafFieldComparator</code> are relative to the current reader (you
- must add docBase if you need to map it to a top-level docID).
+ @brief Get a per-segment <code>LeafFieldComparator</code> to collect the given 
+ <code>org.apache.lucene.index.LeafReaderContext</code>.All docIDs supplied to
+  this <code>LeafFieldComparator</code> are relative to the current reader (you
+  must add docBase if you need to map it to a top-level docID).
  @param context current reader context
  @return the comparator to use for this segment
- @throws IOException if there is a low-level IO error
+ @throw IOExceptionif there is a low-level IO error
  */
 - (id<OrgApacheLuceneSearchLeafFieldComparator>)getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 /*!
  @brief Record the top value, for future calls to <code>LeafFieldComparator.compareTop</code>
- .
- This is only called for searches that
- use searchAfter (deep paging), and is called before any
- calls to <code>getLeafComparator(LeafReaderContext)</code>.
+ .This is only called for searches that
+  use searchAfter (deep paging), and is called before any
+  calls to <code>getLeafComparator(LeafReaderContext)</code>.
  */
 - (void)setTopValueWithId:(id)value;
 
@@ -170,8 +174,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator)
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSNumber:(NSNumber *)missingValue;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                              withNSNumber:(NSNumber *)missingValue;
+
+- (NSNumber *)valueWithInt:(jint)arg0;
 
 #pragma mark Protected
 
@@ -189,11 +195,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator)
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFieldComparator_NumericComparator)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldComparator_NumericComparator, missingValue_, id)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldComparator_NumericComparator, missingValue_, NSNumber *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldComparator_NumericComparator, field_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldComparator_NumericComparator, docsWithField_, id<OrgApacheLuceneUtilBits>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldComparator_NumericComparator, currentReaderValues_, OrgApacheLuceneIndexNumericDocValues *)
@@ -219,11 +229,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_NumericComparato
 
 /*!
  @brief Creates a new comparator based on <code>Double.compare</code> for <code>numHits</code>.
- When a document has no value for the field, <code>missingValue</code> is substituted. 
+ When a document has no value for the field, <code>missingValue</code> is substituted.
  */
-- (instancetype)initWithInt:(jint)numHits
-               withNSString:(NSString *)field
-         withJavaLangDouble:(JavaLangDouble *)missingValue;
+- (instancetype __nonnull)initWithInt:(jint)numHits
+                         withNSString:(NSString *)field
+                   withJavaLangDouble:(JavaLangDouble *)missingValue;
 
 - (jint)compareWithInt:(jint)slot1
                withInt:(jint)slot2;
@@ -240,6 +250,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_NumericComparato
 - (void)setTopValueWithId:(JavaLangDouble *)value;
 
 - (JavaLangDouble *)valueWithInt:(jint)slot;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSNumber:(NSNumber *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -270,11 +285,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DoubleComparator
 
 /*!
  @brief Creates a new comparator based on <code>Float.compare</code> for <code>numHits</code>.
- When a document has no value for the field, <code>missingValue</code> is substituted. 
+ When a document has no value for the field, <code>missingValue</code> is substituted.
  */
-- (instancetype)initWithInt:(jint)numHits
-               withNSString:(NSString *)field
-          withJavaLangFloat:(JavaLangFloat *)missingValue;
+- (instancetype __nonnull)initWithInt:(jint)numHits
+                         withNSString:(NSString *)field
+                    withJavaLangFloat:(JavaLangFloat *)missingValue;
 
 - (jint)compareWithInt:(jint)slot1
                withInt:(jint)slot2;
@@ -291,6 +306,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DoubleComparator
 - (void)setTopValueWithId:(JavaLangFloat *)value;
 
 - (JavaLangFloat *)valueWithInt:(jint)slot;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSNumber:(NSNumber *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -321,11 +341,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_FloatComparator)
 
 /*!
  @brief Creates a new comparator based on <code>Integer.compare</code> for <code>numHits</code>.
- When a document has no value for the field, <code>missingValue</code> is substituted. 
+ When a document has no value for the field, <code>missingValue</code> is substituted.
  */
-- (instancetype)initWithInt:(jint)numHits
-               withNSString:(NSString *)field
-        withJavaLangInteger:(JavaLangInteger *)missingValue;
+- (instancetype __nonnull)initWithInt:(jint)numHits
+                         withNSString:(NSString *)field
+                  withJavaLangInteger:(JavaLangInteger *)missingValue;
 
 - (jint)compareWithInt:(jint)slot1
                withInt:(jint)slot2;
@@ -342,6 +362,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_FloatComparator)
 - (void)setTopValueWithId:(JavaLangInteger *)value;
 
 - (JavaLangInteger *)valueWithInt:(jint)slot;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSNumber:(NSNumber *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -372,11 +397,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_IntComparator)
 
 /*!
  @brief Creates a new comparator based on <code>Long.compare</code> for <code>numHits</code>.
- When a document has no value for the field, <code>missingValue</code> is substituted. 
+ When a document has no value for the field, <code>missingValue</code> is substituted.
  */
-- (instancetype)initWithInt:(jint)numHits
-               withNSString:(NSString *)field
-           withJavaLangLong:(JavaLangLong *)missingValue;
+- (instancetype __nonnull)initWithInt:(jint)numHits
+                         withNSString:(NSString *)field
+                     withJavaLangLong:(JavaLangLong *)missingValue;
 
 - (jint)compareWithInt:(jint)slot1
                withInt:(jint)slot2;
@@ -393,6 +418,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_IntComparator)
 - (void)setTopValueWithId:(JavaLangLong *)value;
 
 - (JavaLangLong *)valueWithInt:(jint)slot;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSNumber:(NSNumber *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -420,13 +450,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_LongComparator)
 @class OrgApacheLuceneSearchScorer;
 
 /*!
- @brief Sorts by descending relevance.
- NOTE: if you are
- sorting only by descending relevance and then
- secondarily by ascending docID, performance is faster
- using <code>TopScoreDocCollector</code> directly (which <code>IndexSearcher.search</code>
+ @brief Sorts by descending relevance.NOTE: if you are
+   sorting only by descending relevance and then
+   secondarily by ascending docID, performance is faster
+   using <code>TopScoreDocCollector</code> directly (which <code>IndexSearcher.search</code>
   uses when no <code>Sort</code> is
- specified). 
+   specified).
  */
 @interface OrgApacheLuceneSearchFieldComparator_RelevanceComparator : OrgApacheLuceneSearchFieldComparator < OrgApacheLuceneSearchLeafFieldComparator >
 
@@ -435,7 +464,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_LongComparator)
 /*!
  @brief Creates a new comparator based on relevance for <code>numHits</code>.
  */
-- (instancetype)initWithInt:(jint)numHits;
+- (instancetype __nonnull)initWithInt:(jint)numHits;
 
 - (jint)compareWithInt:(jint)slot1
                withInt:(jint)slot2;
@@ -459,6 +488,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_LongComparator)
 - (void)setTopValueWithId:(JavaLangFloat *)value;
 
 - (JavaLangFloat *)valueWithInt:(jint)slot;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -495,7 +528,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_RelevanceCompara
 /*!
  @brief Creates a new comparator based on document ids for <code>numHits</code>
  */
-- (instancetype)initWithInt:(jint)numHits;
+- (instancetype __nonnull)initWithInt:(jint)numHits;
 
 - (jint)compareWithInt:(jint)slot1
                withInt:(jint)slot2;
@@ -516,6 +549,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_RelevanceCompara
 - (void)setTopValueWithId:(JavaLangInteger *)value;
 
 - (JavaLangInteger *)valueWithInt:(jint)slot;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -547,15 +584,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DocComparator)
 
 /*!
  @brief Sorts by field's natural Term sort order, using
- ordinals.
- This is functionally equivalent to <code>org.apache.lucene.search.FieldComparator.TermValComparator</code>
+   ordinals.This is functionally equivalent to <code>org.apache.lucene.search.FieldComparator.TermValComparator</code>
  , but it first resolves the string
- to their relative ordinal positions (using the index
- returned by <code>org.apache.lucene.index.LeafReader.getSortedDocValues(String)</code>), and
- does most comparisons using the ordinals.  For medium
- to large results, this comparator will be much faster
- than <code>org.apache.lucene.search.FieldComparator.TermValComparator</code>.  For very small
- result sets it may be slower. 
+   to their relative ordinal positions (using the index
+   returned by <code>org.apache.lucene.index.LeafReader.getSortedDocValues(String)</code>), and
+   does most comparisons using the ordinals.
+ For medium
+   to large results, this comparator will be much faster
+   than <code>org.apache.lucene.search.FieldComparator.TermValComparator</code>.  For very small
+   result sets it may be slower.
  */
 @interface OrgApacheLuceneSearchFieldComparator_TermOrdValComparator : OrgApacheLuceneSearchFieldComparator < OrgApacheLuceneSearchLeafFieldComparator > {
  @public
@@ -576,7 +613,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DocComparator)
   jint topOrd_;
   /*!
    @brief -1 if missing values are sorted first, 1 if they are
- sorted last
+   sorted last
    */
   jint missingSortCmp_;
   /*!
@@ -590,18 +627,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DocComparator)
 /*!
  @brief Creates this, sorting missing values first.
  */
-- (instancetype)initWithInt:(jint)numHits
-               withNSString:(NSString *)field;
+- (instancetype __nonnull)initWithInt:(jint)numHits
+                         withNSString:(NSString *)field;
 
 /*!
  @brief Creates this, with control over how missing values
- are sorted.
- Pass sortMissingLast=true to put
- missing values at the end. 
+   are sorted.Pass sortMissingLast=true to put
+   missing values at the end.
  */
-- (instancetype)initWithInt:(jint)numHits
-               withNSString:(NSString *)field
-                withBoolean:(jboolean)sortMissingLast;
+- (instancetype __nonnull)initWithInt:(jint)numHits
+                         withNSString:(NSString *)field
+                          withBoolean:(jboolean)sortMissingLast;
 
 - (jint)compareWithInt:(jint)slot1
                withInt:(jint)slot2;
@@ -633,6 +669,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DocComparator)
  */
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                         withNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -675,11 +715,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_TermOrdValCompar
 @protocol OrgApacheLuceneUtilBits;
 
 /*!
- @brief Sorts by field's natural Term sort order.
- All
- comparisons are done using BytesRef.compareTo, which is
- slow for medium to large result sets but possibly
- very fast for very small results sets. 
+ @brief Sorts by field's natural Term sort order.All
+   comparisons are done using BytesRef.compareTo, which is
+   slow for medium to large result sets but possibly
+   very fast for very small results sets.
  */
 @interface OrgApacheLuceneSearchFieldComparator_TermValComparator : OrgApacheLuceneSearchFieldComparator < OrgApacheLuceneSearchLeafFieldComparator >
 
@@ -688,9 +727,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_TermOrdValCompar
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithInt:(jint)numHits
-               withNSString:(NSString *)field
-                withBoolean:(jboolean)sortMissingLast;
+- (instancetype __nonnull)initWithInt:(jint)numHits
+                         withNSString:(NSString *)field
+                          withBoolean:(jboolean)sortMissingLast;
 
 - (jint)compareWithInt:(jint)slot1
                withInt:(jint)slot2;
@@ -730,15 +769,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_TermOrdValCompar
                                                                             withNSString:(NSString *)field;
 
 /*!
- @brief Check whether the given value represents <tt>null</tt>.
- This can be
- useful if the <code>BinaryDocValues</code> returned by <code>getBinaryDocValues</code>
- use a special value as a sentinel. The default implementation checks
+ @brief Check whether the given value represents <tt>null</tt>.This can be
+   useful if the <code>BinaryDocValues</code> returned by <code>getBinaryDocValues</code>
+   use a special value as a sentinel.
+ The default implementation checks  
  <code>getDocsWithField</code>.
- <p>NOTE: The null value can only be an EMPTY <code>BytesRef</code>. 
+   <p>NOTE: The null value can only be an EMPTY <code>BytesRef</code>.
  */
 - (jboolean)isNullWithInt:(jint)doc
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -754,4 +797,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_TermValComparato
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator")

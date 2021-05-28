@@ -8,21 +8,25 @@
 #include "org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages.h"
 #include "org/apache/lucene/queryparser/flexible/messages/NLS.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages ()
 
 - (instancetype)init;
 
 @end
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_BUNDLE_NAME();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_get_BUNDLE_NAME(void);
 static NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_BUNDLE_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, BUNDLE_NAME, NSString *)
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_init(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages *self);
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages *new_OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages *new_OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages *create_OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_init();
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages *create_OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_init(void);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages)
 
@@ -198,6 +202,41 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "BUNDLE_NAME", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 0, -1, -1 },
+    { "INVALID_SYNTAX", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 1, -1, -1 },
+    { "INVALID_SYNTAX_CANNOT_PARSE", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 2, -1, -1 },
+    { "INVALID_SYNTAX_FUZZY_LIMITS", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 3, -1, -1 },
+    { "INVALID_SYNTAX_FUZZY_EDITS", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 4, -1, -1 },
+    { "INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 5, -1, -1 },
+    { "INVALID_SYNTAX_ESCAPE_CHARACTER", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 6, -1, -1 },
+    { "INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 7, -1, -1 },
+    { "NODE_ACTION_NOT_SUPPORTED", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 8, -1, -1 },
+    { "PARAMETER_VALUE_NOT_SUPPORTED", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 9, -1, -1 },
+    { "LUCENE_QUERY_CONVERSION_ERROR", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 10, -1, -1 },
+    { "EMPTY_MESSAGE", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 11, -1, -1 },
+    { "WILDCARD_NOT_SUPPORTED", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 12, -1, -1 },
+    { "TOO_MANY_BOOLEAN_CLAUSES", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 13, -1, -1 },
+    { "LEADING_WILDCARD_NOT_ALLOWED", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 14, -1, -1 },
+    { "COULD_NOT_PARSE_NUMBER", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 15, -1, -1 },
+    { "NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 16, -1, -1 },
+    { "UNSUPPORTED_NUMERIC_DATA_TYPE", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 17, -1, -1 },
+    { "NUMERIC_CANNOT_BE_EMPTY", "LNSString;", .constantValue.asLong = 0, 0x9, -1, 18, -1, -1 },
+  };
+  static const void *ptrTable[] = { &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_BUNDLE_NAME, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_CANNOT_PARSE, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_FUZZY_LIMITS, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_FUZZY_EDITS, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_ESCAPE_CHARACTER, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_NODE_ACTION_NOT_SUPPORTED, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_PARAMETER_VALUE_NOT_SUPPORTED, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_LUCENE_QUERY_CONVERSION_ERROR, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_EMPTY_MESSAGE, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_WILDCARD_NOT_SUPPORTED, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_TOO_MANY_BOOLEAN_CLAUSES, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_LEADING_WILDCARD_NOT_ALLOWED, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_COULD_NOT_PARSE_NUMBER, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_UNSUPPORTED_NUMERIC_DATA_TYPE, &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_NUMERIC_CANNOT_BE_EMPTY };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages = { "QueryParserMessages", "org.apache.lucene.queryparser.flexible.core.messages", ptrTable, methods, fields, 7, 0x1, 1, 19, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages class]) {
     JreStrongAssign(&OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_BUNDLE_NAME, [OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_class_() getName]);
@@ -206,35 +245,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "QueryParserMessages", NULL, 0x2, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BUNDLE_NAME", "BUNDLE_NAME", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_BUNDLE_NAME, NULL, .constantValue.asLong = 0 },
-    { "INVALID_SYNTAX", "INVALID_SYNTAX", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX, NULL, .constantValue.asLong = 0 },
-    { "INVALID_SYNTAX_CANNOT_PARSE", "INVALID_SYNTAX_CANNOT_PARSE", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_CANNOT_PARSE, NULL, .constantValue.asLong = 0 },
-    { "INVALID_SYNTAX_FUZZY_LIMITS", "INVALID_SYNTAX_FUZZY_LIMITS", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_FUZZY_LIMITS, NULL, .constantValue.asLong = 0 },
-    { "INVALID_SYNTAX_FUZZY_EDITS", "INVALID_SYNTAX_FUZZY_EDITS", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_FUZZY_EDITS, NULL, .constantValue.asLong = 0 },
-    { "INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION", "INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION, NULL, .constantValue.asLong = 0 },
-    { "INVALID_SYNTAX_ESCAPE_CHARACTER", "INVALID_SYNTAX_ESCAPE_CHARACTER", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_ESCAPE_CHARACTER, NULL, .constantValue.asLong = 0 },
-    { "INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE", "INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE, NULL, .constantValue.asLong = 0 },
-    { "NODE_ACTION_NOT_SUPPORTED", "NODE_ACTION_NOT_SUPPORTED", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_NODE_ACTION_NOT_SUPPORTED, NULL, .constantValue.asLong = 0 },
-    { "PARAMETER_VALUE_NOT_SUPPORTED", "PARAMETER_VALUE_NOT_SUPPORTED", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_PARAMETER_VALUE_NOT_SUPPORTED, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_QUERY_CONVERSION_ERROR", "LUCENE_QUERY_CONVERSION_ERROR", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_LUCENE_QUERY_CONVERSION_ERROR, NULL, .constantValue.asLong = 0 },
-    { "EMPTY_MESSAGE", "EMPTY_MESSAGE", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_EMPTY_MESSAGE, NULL, .constantValue.asLong = 0 },
-    { "WILDCARD_NOT_SUPPORTED", "WILDCARD_NOT_SUPPORTED", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_WILDCARD_NOT_SUPPORTED, NULL, .constantValue.asLong = 0 },
-    { "TOO_MANY_BOOLEAN_CLAUSES", "TOO_MANY_BOOLEAN_CLAUSES", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_TOO_MANY_BOOLEAN_CLAUSES, NULL, .constantValue.asLong = 0 },
-    { "LEADING_WILDCARD_NOT_ALLOWED", "LEADING_WILDCARD_NOT_ALLOWED", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_LEADING_WILDCARD_NOT_ALLOWED, NULL, .constantValue.asLong = 0 },
-    { "COULD_NOT_PARSE_NUMBER", "COULD_NOT_PARSE_NUMBER", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_COULD_NOT_PARSE_NUMBER, NULL, .constantValue.asLong = 0 },
-    { "NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY", "NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY, NULL, .constantValue.asLong = 0 },
-    { "UNSUPPORTED_NUMERIC_DATA_TYPE", "UNSUPPORTED_NUMERIC_DATA_TYPE", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_UNSUPPORTED_NUMERIC_DATA_TYPE, NULL, .constantValue.asLong = 0 },
-    { "NUMERIC_CANNOT_BE_EMPTY", "NUMERIC_CANNOT_BE_EMPTY", 0x9, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_NUMERIC_CANNOT_BE_EMPTY, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages = { 2, "QueryParserMessages", "org.apache.lucene.queryparser.flexible.core.messages", NULL, 0x1, 1, methods, 19, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages;
 }
 
 @end

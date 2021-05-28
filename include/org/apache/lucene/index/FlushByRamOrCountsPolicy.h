@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFlushByRamOrCountsPolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFlushByRamOrCountsPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexFlushByRamOrCountsPolicy || defined(INCLUDE_OrgApacheLuceneIndexFlushByRamOrCountsPolicy))
 #define OrgApacheLuceneIndexFlushByRamOrCountsPolicy_
 
@@ -25,40 +31,39 @@
 
 /*!
  @brief Default <code>FlushPolicy</code> implementation that flushes new segments based on
- RAM used and document count depending on the IndexWriter's
- <code>IndexWriterConfig</code>.
- It also applies pending deletes based on the
- number of buffered delete terms.
+  RAM used and document count depending on the IndexWriter's 
+ <code>IndexWriterConfig</code>.It also applies pending deletes based on the
+  number of buffered delete terms.
  <ul>
- <li>
- <code>onDelete(DocumentsWriterFlushControl,DocumentsWriterPerThreadPool.ThreadState)</code>
- - applies pending delete operations based on the global number of buffered
- delete terms iff <code>IndexWriterConfig.getMaxBufferedDeleteTerms()</code> is
- enabled</li>
- <li>
- <code>onInsert(DocumentsWriterFlushControl,DocumentsWriterPerThreadPool.ThreadState)</code>
- - flushes either on the number of documents per
- <code>DocumentsWriterPerThread</code> (
+  <li>
+  <code>onDelete(DocumentsWriterFlushControl, DocumentsWriterPerThreadPool.ThreadState)</code>
+  - applies pending delete operations based on the global number of buffered
+  delete terms iff <code>IndexWriterConfig.getMaxBufferedDeleteTerms()</code> is
+  enabled</li>
+  <li>
+  <code>onInsert(DocumentsWriterFlushControl, DocumentsWriterPerThreadPool.ThreadState)</code>
+  - flushes either on the number of documents per 
+ <code>DocumentsWriterPerThread</code> ( 
  <code>DocumentsWriterPerThread.getNumDocsInRAM()</code>) or on the global active
- memory consumption in the current indexing session iff
- <code>IndexWriterConfig.getMaxBufferedDocs()</code> or
+  memory consumption in the current indexing session iff 
+ <code>IndexWriterConfig.getMaxBufferedDocs()</code> or 
  <code>IndexWriterConfig.getRAMBufferSizeMB()</code> is enabled respectively</li>
- <li>
- <code>onUpdate(DocumentsWriterFlushControl,DocumentsWriterPerThreadPool.ThreadState)</code>
- - calls
- <code>onInsert(DocumentsWriterFlushControl,DocumentsWriterPerThreadPool.ThreadState)</code>
- and
- <code>onDelete(DocumentsWriterFlushControl,DocumentsWriterPerThreadPool.ThreadState)</code>
- in order</li>
- </ul>
- All <code>IndexWriterConfig</code> settings are used to mark
+  <li>
+  <code>onUpdate(DocumentsWriterFlushControl, DocumentsWriterPerThreadPool.ThreadState)</code>
+  - calls 
+ <code>onInsert(DocumentsWriterFlushControl, DocumentsWriterPerThreadPool.ThreadState)</code>
+  and 
+ <code>onDelete(DocumentsWriterFlushControl, DocumentsWriterPerThreadPool.ThreadState)</code>
+  in order</li>
+  </ul>
+  All <code>IndexWriterConfig</code> settings are used to mark 
  <code>DocumentsWriterPerThread</code> as flush pending during indexing with
- respect to their live updates.
+  respect to their live updates. 
  <p>
- If <code>IndexWriterConfig.setRAMBufferSizeMB(double)</code> is enabled, the
- largest ram consuming <code>DocumentsWriterPerThread</code> will be marked as
- pending iff the global active RAM consumption is <code>>=</code> the configured max RAM
- buffer.
+  If <code>IndexWriterConfig.setRAMBufferSizeMB(double)</code> is enabled, the
+  largest ram consuming <code>DocumentsWriterPerThread</code> will be marked as
+  pending iff the global active RAM consumption is <code>>=</code> the configured max RAM
+  buffer.
  */
 @interface OrgApacheLuceneIndexFlushByRamOrCountsPolicy : OrgApacheLuceneIndexFlushPolicy
 
@@ -73,29 +78,29 @@
 #pragma mark Protected
 
 /*!
- @brief Returns <code>true</code> if this <code>FlushPolicy</code> flushes on
- <code>IndexWriterConfig.getMaxBufferedDeleteTerms()</code>, otherwise
+ @brief Returns <code>true</code> if this <code>FlushPolicy</code> flushes on 
+ <code>IndexWriterConfig.getMaxBufferedDeleteTerms()</code>, otherwise 
  <code>false</code>.
  */
 - (jboolean)flushOnDeleteTerms;
 
 /*!
- @brief Returns <code>true</code> if this <code>FlushPolicy</code> flushes on
- <code>IndexWriterConfig.getMaxBufferedDocs()</code>, otherwise
+ @brief Returns <code>true</code> if this <code>FlushPolicy</code> flushes on 
+ <code>IndexWriterConfig.getMaxBufferedDocs()</code>, otherwise 
  <code>false</code>.
  */
 - (jboolean)flushOnDocCount;
 
 /*!
- @brief Returns <code>true</code> if this <code>FlushPolicy</code> flushes on
- <code>IndexWriterConfig.getRAMBufferSizeMB()</code>, otherwise
+ @brief Returns <code>true</code> if this <code>FlushPolicy</code> flushes on 
+ <code>IndexWriterConfig.getRAMBufferSizeMB()</code>, otherwise 
  <code>false</code>.
  */
 - (jboolean)flushOnRAM;
 
 /*!
  @brief Marks the most ram consuming active <code>DocumentsWriterPerThread</code> flush
- pending
+  pending
  */
 - (void)markLargestWriterPendingWithOrgApacheLuceneIndexDocumentsWriterFlushControl:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)control
                    withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)perThreadState
@@ -103,20 +108,24 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFlushByRamOrCountsPolicy)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init(OrgApacheLuceneIndexFlushByRamOrCountsPolicy *self);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexFlushByRamOrCountsPolicy_initPackagePrivate(OrgApacheLuceneIndexFlushByRamOrCountsPolicy *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFlushByRamOrCountsPolicy *new_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexFlushByRamOrCountsPolicy *new_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFlushByRamOrCountsPolicy *create_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexFlushByRamOrCountsPolicy *create_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFlushByRamOrCountsPolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFlushByRamOrCountsPolicy")

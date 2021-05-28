@@ -10,6 +10,10 @@
 #include "org/apache/lucene/misc/SweetSpotSimilarity.h"
 #include "org/apache/lucene/search/similarities/DefaultSimilarity.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/misc/SweetSpotSimilarity must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneMiscSweetSpotSimilarity () {
  @public
   jint ln_min_;
@@ -95,29 +99,43 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SweetSpotSimilarity", NULL, 0x1, NULL, NULL },
-    { "setBaselineTfFactorsWithFloat:withFloat:", "setBaselineTfFactors", "V", 0x1, NULL, NULL },
-    { "setHyperbolicTfFactorsWithFloat:withFloat:withDouble:withFloat:", "setHyperbolicTfFactors", "V", 0x1, NULL, NULL },
-    { "setLengthNormFactorsWithInt:withInt:withFloat:withBoolean:", "setLengthNormFactors", "V", 0x1, NULL, NULL },
-    { "lengthNormWithOrgApacheLuceneIndexFieldInvertState:", "lengthNorm", "F", 0x1, NULL, NULL },
-    { "computeLengthNormWithInt:", "computeLengthNorm", "F", 0x1, NULL, NULL },
-    { "tfWithFloat:", "tf", "F", 0x1, NULL, NULL },
-    { "baselineTfWithFloat:", "baselineTf", "F", 0x1, NULL, NULL },
-    { "hyperbolicTfWithFloat:", "hyperbolicTf", "F", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 12, 11, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 13, 11, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setBaselineTfFactorsWithFloat:withFloat:);
+  methods[2].selector = @selector(setHyperbolicTfFactorsWithFloat:withFloat:withDouble:withFloat:);
+  methods[3].selector = @selector(setLengthNormFactorsWithInt:withInt:withFloat:withBoolean:);
+  methods[4].selector = @selector(lengthNormWithOrgApacheLuceneIndexFieldInvertState:);
+  methods[5].selector = @selector(computeLengthNormWithInt:);
+  methods[6].selector = @selector(tfWithFloat:);
+  methods[7].selector = @selector(baselineTfWithFloat:);
+  methods[8].selector = @selector(hyperbolicTfWithFloat:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ln_min_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ln_max_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ln_steep_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "tf_base_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "tf_min_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "tf_hyper_min_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "tf_hyper_max_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "tf_hyper_base_", NULL, 0x2, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "tf_hyper_xoffset_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
+    { "ln_min_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "ln_max_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "ln_steep_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tf_base_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tf_min_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tf_hyper_min_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tf_hyper_max_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tf_hyper_base_", "D", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tf_hyper_xoffset_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneMiscSweetSpotSimilarity = { 2, "SweetSpotSimilarity", "org.apache.lucene.misc", NULL, 0x1, 9, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setBaselineTfFactors", "FF", "setHyperbolicTfFactors", "FFDF", "setLengthNormFactors", "IIFZ", "lengthNorm", "LOrgApacheLuceneIndexFieldInvertState;", "computeLengthNorm", "I", "tf", "F", "baselineTf", "hyperbolicTf" };
+  static const J2ObjcClassInfo _OrgApacheLuceneMiscSweetSpotSimilarity = { "SweetSpotSimilarity", "org.apache.lucene.misc", ptrTable, methods, fields, 7, 0x1, 9, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneMiscSweetSpotSimilarity;
 }
 

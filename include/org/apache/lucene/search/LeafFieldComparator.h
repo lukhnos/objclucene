@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchLeafFieldComparator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchLeafFieldComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchLeafFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchLeafFieldComparator))
 #define OrgApacheLuceneSearchLeafFieldComparator_
 
@@ -20,80 +26,82 @@
 
 /*!
  @brief Expert: comparator that gets instantiated on each leaf
- from a top-level <code>FieldComparator</code> instance.
+  from a top-level <code>FieldComparator</code> instance.
  <p>A leaf comparator must define these functions:</p>
+  
  <ul>
- <li> <code>setBottom</code> This method is called by
- <code>FieldValueHitQueue</code> to notify the
- FieldComparator of the current weakest ("bottom")
- slot.  Note that this slot may not hold the weakest
- value according to your comparator, in cases where
- your comparator is not the primary one (ie, is only
- used to break ties from the comparators before it).
+   <li> <code>setBottom</code> This method is called by
+        <code>FieldValueHitQueue</code> to notify the
+        FieldComparator of the current weakest ("bottom")
+        slot.  Note that this slot may not hold the weakest
+        value according to your comparator, in cases where
+        your comparator is not the primary one (ie, is only
+        used to break ties from the comparators before it).  
  <li> <code>compareBottom</code> Compare a new hit (docID)
- against the "weakest" (bottom) entry in the queue.
+        against the "weakest" (bottom) entry in the queue.  
  <li> <code>compareBottom</code> Compare a new hit (docID)
- against the "weakest" (bottom) entry in the queue.
+        against the "weakest" (bottom) entry in the queue.  
  <li> <code>compareTop</code> Compare a new hit (docID)
- against the top value previously set by a call to
+        against the top value previously set by a call to       
  <code>FieldComparator.setTopValue</code>.
- <li> <code>copy</code> Installs a new hit into the
- priority queue.  The <code>FieldValueHitQueue</code>
- calls this method when a new hit is competitive.
+   <li> <code>copy</code> Installs a new hit into the
+        priority queue.  The <code>FieldValueHitQueue</code>
+        calls this method when a new hit is competitive. 
  </ul>
  - seealso: FieldComparator
  */
-@protocol OrgApacheLuceneSearchLeafFieldComparator < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchLeafFieldComparator < JavaObject >
 
 /*!
  @brief Set the bottom slot, ie the "weakest" (sorted last)
- entry in the queue.
- When <code>compareBottom</code> is
- called, you should compare against this slot.  This
- will always be called before <code>compareBottom</code>.
+  entry in the queue.When <code>compareBottom</code> is
+  called, you should compare against this slot.
+ This
+  will always be called before <code>compareBottom</code>.
  @param slot the currently weakest (sorted last) slot in the queue
  */
 - (void)setBottomWithInt:(jint)slot;
 
 /*!
- @brief Compare the bottom of the queue with this doc.
- This will
- only invoked after setBottom has been called.  This
- should return the same result as <code>FieldComparator.compare(int,int)</code>
+ @brief Compare the bottom of the queue with this doc.This will
+  only invoked after setBottom has been called.
+ This
+  should return the same result as <code>FieldComparator.compare(int,int)</code>
  } as if bottom were slot1 and the new
- document were slot 2.
+  document were slot 2.
+      
  <p>For a search that hits many results, this method
- will be the hotspot (invoked by far the most
- frequently).</p>
+  will be the hotspot (invoked by far the most
+  frequently).</p>
  @param doc that was hit
  @return any <code>N < 0</code> if the doc's value is sorted after
- the bottom entry (not competitive), any <code>N > 0</code> if the
- doc's value is sorted before the bottom entry and <code>0</code> if
- they are equal.
+  the bottom entry (not competitive), any <code>N > 0</code> if the
+  doc's value is sorted before the bottom entry and <code>0</code> if
+  they are equal.
  */
 - (jint)compareBottomWithInt:(jint)doc;
 
 /*!
- @brief Compare the top value with this doc.
- This will
- only invoked after setTopValue has been called.  This
- should return the same result as <code>FieldComparator.compare(int,int)</code>
+ @brief Compare the top value with this doc.This will
+  only invoked after setTopValue has been called.
+ This
+  should return the same result as <code>FieldComparator.compare(int,int)</code>
  } as if topValue were slot1 and the new
- document were slot 2.  This is only called for searches that
- use searchAfter (deep paging).
+  document were slot 2.  This is only called for searches that
+  use searchAfter (deep paging).
  @param doc that was hit
  @return any <code>N < 0</code> if the doc's value is sorted after
- the bottom entry (not competitive), any <code>N > 0</code> if the
- doc's value is sorted before the bottom entry and <code>0</code> if
- they are equal.
+  the bottom entry (not competitive), any <code>N > 0</code> if the
+  doc's value is sorted before the bottom entry and <code>0</code> if
+  they are equal.
  */
 - (jint)compareTopWithInt:(jint)doc;
 
 /*!
  @brief This method is called when a new hit is competitive.
  You should copy any state associated with this document
- that will be required for future comparisons, into the
- specified slot.
+  that will be required for future comparisons, into the
+  specified slot.
  @param slot which slot to copy the hit to
  @param doc docID relative to current reader
  */
@@ -102,9 +110,8 @@
 
 /*!
  @brief Sets the Scorer to use in case a document's score is
- needed.
- @param scorer Scorer instance that you should use to
- obtain the current hit's score, if necessary.
+   needed.
+ @param scorer Scorer instance that you should use to  obtain the current hit's score, if necessary.
  */
 - (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
 
@@ -116,4 +123,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchLeafFieldComparator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchLeafFieldComparator")

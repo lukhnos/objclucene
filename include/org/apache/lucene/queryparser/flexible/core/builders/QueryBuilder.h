@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder))
 #define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_
 
@@ -20,15 +26,14 @@
 
 /*!
  @brief This interface is used by implementors classes that builds some kind of
- object from a query tree.
+  object from a query tree.
  - seealso: QueryTreeBuilder
  */
-@protocol OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder < NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder < JavaObject >
 
 /*!
  @brief Builds some kind of object from a query tree.
- @param queryNode
- the query tree root node
+ @param queryNode the query tree root node
  @return some object generated from the query tree
  */
 - (id)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
@@ -41,4 +46,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBu
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder")

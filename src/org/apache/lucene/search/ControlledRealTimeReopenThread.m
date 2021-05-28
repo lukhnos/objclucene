@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/search/ControlledRealTimeReopenThread.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -19,6 +18,10 @@
 #include "org/apache/lucene/search/ControlledRealTimeReopenThread.h"
 #include "org/apache/lucene/search/ReferenceManager.h"
 #include "org/apache/lucene/util/ThreadInterruptedException.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ControlledRealTimeReopenThread must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchControlledRealTimeReopenThread () {
  @public
@@ -50,17 +53,15 @@ __attribute__((unused)) static void OrgApacheLuceneSearchControlledRealTimeReope
   OrgApacheLuceneSearchControlledRealTimeReopenThread *this$0_;
 }
 
+- (instancetype)initWithOrgApacheLuceneSearchControlledRealTimeReopenThread:(OrgApacheLuceneSearchControlledRealTimeReopenThread *)outer$;
+
 - (void)beforeRefresh;
 
 - (void)afterRefreshWithBoolean:(jboolean)didRefresh;
 
-- (instancetype)initWithOrgApacheLuceneSearchControlledRealTimeReopenThread:(OrgApacheLuceneSearchControlledRealTimeReopenThread *)outer$;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh, this$0_, OrgApacheLuceneSearchControlledRealTimeReopenThread *)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_(OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh *self, OrgApacheLuceneSearchControlledRealTimeReopenThread *outer$);
 
@@ -101,7 +102,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
       @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie);
     }
     JreAssignVolatileLong(&searchingGen_, JavaLangLong_MAX_VALUE);
-    [self notifyAll];
+    [self java_notifyAll];
   }
 }
 
@@ -125,18 +126,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
       @finally {
         [reopenLock_ unlock];
       }
-      jlong startMS = JavaLangSystem_nanoTime() / 1000000;
+      jlong startMS = JreLongDiv(JavaLangSystem_nanoTime(), 1000000);
       while (targetGen > JreLoadVolatileLong(&searchingGen_)) {
         if (maxMS < 0) {
-          [self wait];
+          [self java_wait];
         }
         else {
-          jlong msLeft = (startMS + maxMS) - (JavaLangSystem_nanoTime()) / 1000000;
+          jlong msLeft = (startMS + maxMS) - JreLongDiv((JavaLangSystem_nanoTime()), 1000000);
           if (msLeft <= 0) {
             return false;
           }
           else {
-            [self waitWithLong:msLeft];
+            [self java_waitWithLong:msLeft];
           }
         }
       }
@@ -178,7 +179,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
       [((OrgApacheLuceneSearchReferenceManager *) nil_chk(manager_)) maybeRefreshBlocking];
     }
     @catch (JavaIoIOException *ioe) {
-      @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
+      @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe);
     }
   }
 }
@@ -192,28 +193,38 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTrackingIndexWriter:withOrgApacheLuceneSearchReferenceManager:withDouble:withDouble:", "ControlledRealTimeReopenThread", NULL, 0x1, NULL, "(Lorg/apache/lucene/index/TrackingIndexWriter;Lorg/apache/lucene/search/ReferenceManager<TT;>;DD)V" },
-    { "refreshDone", NULL, "V", 0x22, NULL, NULL },
-    { "close", NULL, "V", 0x21, NULL, NULL },
-    { "waitForGenerationWithLong:", "waitForGeneration", "V", 0x1, "Ljava.lang.InterruptedException;", NULL },
-    { "waitForGenerationWithLong:withInt:", "waitForGeneration", "Z", 0x21, "Ljava.lang.InterruptedException;", NULL },
-    { "run", NULL, "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x22, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x21, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "Z", 0x21, 2, 5, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTrackingIndexWriter:withOrgApacheLuceneSearchReferenceManager:withDouble:withDouble:);
+  methods[1].selector = @selector(refreshDone);
+  methods[2].selector = @selector(close);
+  methods[3].selector = @selector(waitForGenerationWithLong:);
+  methods[4].selector = @selector(waitForGenerationWithLong:withInt:);
+  methods[5].selector = @selector(run);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "manager_", NULL, 0x12, "Lorg.apache.lucene.search.ReferenceManager;", NULL, "Lorg/apache/lucene/search/ReferenceManager<TT;>;", .constantValue.asLong = 0 },
-    { "targetMaxStaleNS_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "targetMinStaleNS_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "writer_", NULL, 0x12, "Lorg.apache.lucene.index.TrackingIndexWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "finish_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "waitingGen_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "searchingGen_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "refreshStartGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "reopenLock_", NULL, 0x12, "Ljava.util.concurrent.locks.ReentrantLock;", NULL, NULL, .constantValue.asLong = 0 },
-    { "reopenCond_", NULL, 0x12, "Ljava.util.concurrent.locks.Condition;", NULL, NULL, .constantValue.asLong = 0 },
+    { "manager_", "LOrgApacheLuceneSearchReferenceManager;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
+    { "targetMaxStaleNS_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "targetMinStaleNS_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "writer_", "LOrgApacheLuceneIndexTrackingIndexWriter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "finish_", "Z", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "waitingGen_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "searchingGen_", "J", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "refreshStartGen_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "reopenLock_", "LJavaUtilConcurrentLocksReentrantLock;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "reopenCond_", "LJavaUtilConcurrentLocksCondition;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.ControlledRealTimeReopenThread$HandleRefresh;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchControlledRealTimeReopenThread = { 2, "ControlledRealTimeReopenThread", "org.apache.lucene.search", NULL, 0x1, 6, methods, 10, fields, 0, NULL, 1, inner_classes, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Thread;Ljava/io/Closeable;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTrackingIndexWriter;LOrgApacheLuceneSearchReferenceManager;DD", "(Lorg/apache/lucene/index/TrackingIndexWriter;Lorg/apache/lucene/search/ReferenceManager<TT;>;DD)V", "waitForGeneration", "J", "LJavaLangInterruptedException;", "JI", "Lorg/apache/lucene/search/ReferenceManager<TT;>;", "LOrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh;", "<T:Ljava/lang/Object;>Ljava/lang/Thread;Ljava/io/Closeable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchControlledRealTimeReopenThread = { "ControlledRealTimeReopenThread", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 6, 10, -1, 7, -1, 8, -1 };
   return &_OrgApacheLuceneSearchControlledRealTimeReopenThread;
 }
 
@@ -222,7 +233,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
 void OrgApacheLuceneSearchControlledRealTimeReopenThread_initWithOrgApacheLuceneIndexTrackingIndexWriter_withOrgApacheLuceneSearchReferenceManager_withDouble_withDouble_(OrgApacheLuceneSearchControlledRealTimeReopenThread *self, OrgApacheLuceneIndexTrackingIndexWriter *writer, OrgApacheLuceneSearchReferenceManager *manager, jdouble targetMaxStaleSec, jdouble targetMinStaleSec) {
   JavaLangThread_init(self);
   JreStrongAssignAndConsume(&self->reopenLock_, new_JavaUtilConcurrentLocksReentrantLock_init());
-  JreStrongAssign(&self->reopenCond_, [((JavaUtilConcurrentLocksReentrantLock *) nil_chk(self->reopenLock_)) newCondition]);
+  JreStrongAssign(&self->reopenCond_, [self->reopenLock_ newCondition]);
   if (targetMaxStaleSec < targetMinStaleSec) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$DC", @"targetMaxScaleSec (= ", targetMaxStaleSec, @") < targetMinStaleSec (=", targetMinStaleSec, ')'));
   }
@@ -244,13 +255,18 @@ OrgApacheLuceneSearchControlledRealTimeReopenThread *create_OrgApacheLuceneSearc
 void OrgApacheLuceneSearchControlledRealTimeReopenThread_refreshDone(OrgApacheLuceneSearchControlledRealTimeReopenThread *self) {
   @synchronized(self) {
     JreAssignVolatileLong(&self->searchingGen_, self->refreshStartGen_);
-    [self notifyAll];
+    [self java_notifyAll];
   }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchControlledRealTimeReopenThread)
 
 @implementation OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh
+
+- (instancetype)initWithOrgApacheLuceneSearchControlledRealTimeReopenThread:(OrgApacheLuceneSearchControlledRealTimeReopenThread *)outer$ {
+  OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_(self, outer$);
+  return self;
+}
 
 - (void)beforeRefresh {
 }
@@ -259,26 +275,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchControlledRealTimeReopenTh
   OrgApacheLuceneSearchControlledRealTimeReopenThread_refreshDone(this$0_);
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchControlledRealTimeReopenThread:(OrgApacheLuceneSearchControlledRealTimeReopenThread *)outer$ {
-  OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_(self, outer$);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "beforeRefresh", NULL, "V", 0x1, NULL, NULL },
-    { "afterRefreshWithBoolean:", "afterRefresh", "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchControlledRealTimeReopenThread:", "HandleRefresh", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchControlledRealTimeReopenThread:);
+  methods[1].selector = @selector(beforeRefresh);
+  methods[2].selector = @selector(afterRefreshWithBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.ControlledRealTimeReopenThread;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchControlledRealTimeReopenThread;", .constantValue.asLong = 0, 0x1012, -1, -1, 3, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh = { 2, "HandleRefresh", "org.apache.lucene.search", "ControlledRealTimeReopenThread", 0x2, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchControlledRealTimeReopenThread;", "afterRefresh", "Z", "Lorg/apache/lucene/search/ControlledRealTimeReopenThread<TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh = { "HandleRefresh", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x2, 3, 1, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh;
 }
 

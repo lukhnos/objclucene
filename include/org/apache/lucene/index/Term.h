@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTerm
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTerm_) && (INCLUDE_ALL_OrgApacheLuceneIndexTerm || defined(INCLUDE_OrgApacheLuceneIndexTerm))
 #define OrgApacheLuceneIndexTerm_
 
@@ -23,12 +29,12 @@
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
- @brief A Term represents a word from text.
- This is the unit of search.  It is
- composed of two elements, the text of the word, as a string, and the name of
- the field that the text occurred in.
- Note that terms may represent more than words from text fields, but also
- things like dates, email addresses, urls, etc.  
+ @brief A Term represents a word from text.This is the unit of search.
+ It is
+   composed of two elements, the text of the word, as a string, and the name of
+   the field that the text occurred in.
+   Note that terms may represent more than words from text fields, but also
+   things like dates, email addresses, urls, etc.
  */
 @interface OrgApacheLuceneIndexTerm : NSObject < JavaLangComparable > {
  @public
@@ -41,30 +47,30 @@
 /*!
  @brief Constructs a Term with the given field and empty text.
  This serves two purposes: 1) reuse of a Term with the same field.
- 2) pattern for a query.
+  2) pattern for a query.
  @param fld field's name
  */
-- (instancetype)initWithNSString:(NSString *)fld;
+- (instancetype __nonnull)initWithNSString:(NSString *)fld;
 
 /*!
  @brief Constructs a Term with the given field and bytes.
  <p>Note that a null field or null bytes value results in undefined
- behavior for most Lucene APIs that accept a Term parameter. 
+  behavior for most Lucene APIs that accept a Term parameter.  
  <p>WARNING: the provided BytesRef is not copied, but used directly.
- Therefore the bytes should not be modified after construction, for
- example, you should clone a copy by <code>BytesRef.deepCopyOf</code>
- rather than pass reused bytes from a TermsEnum.
+  Therefore the bytes should not be modified after construction, for
+  example, you should clone a copy by <code>BytesRef.deepCopyOf</code>
+  rather than pass reused bytes from a TermsEnum.
  */
-- (instancetype)initWithNSString:(NSString *)fld
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
+- (instancetype __nonnull)initWithNSString:(NSString *)fld
+           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
 /*!
  @brief Constructs a Term with the given field and text.
  <p>Note that a null field or null text value results in undefined
- behavior for most Lucene APIs that accept a Term parameter. 
+  behavior for most Lucene APIs that accept a Term parameter.
  */
-- (instancetype)initWithNSString:(NSString *)fld
-                    withNSString:(NSString *)text;
+- (instancetype __nonnull)initWithNSString:(NSString *)fld
+                              withNSString:(NSString *)text;
 
 /*!
  @brief Returns the bytes of this term.
@@ -73,8 +79,8 @@
 
 /*!
  @brief Compares two terms, returning a negative integer if this
- term belongs before the argument, zero if this term is equal to the
- argument, and a positive integer if this term belongs after the argument.
+     term belongs before the argument, zero if this term is equal to the
+     argument, and a positive integer if this term belongs after the argument.
  The ordering of terms is first by field, then by text.
  */
 - (jint)compareToWithId:(OrgApacheLuceneIndexTerm *)other;
@@ -82,28 +88,26 @@
 - (jboolean)isEqual:(id)obj;
 
 /*!
- @brief Returns the field of this term.
- The field indicates
- the part of a document which this term came from. 
+ @brief Returns the field of this term.The field indicates
+     the part of a document which this term came from.
  */
 - (NSString *)field;
 
 - (NSUInteger)hash;
 
 /*!
- @brief Returns the text of this term.
- In the case of words, this is simply the
- text of the word.  In the case of dates and other types, this is an
- encoding of the object as a string.  
+ @brief Returns the text of this term.In the case of words, this is simply the
+     text of the word.
+ In the case of dates and other types, this is an
+     encoding of the object as a string.
  */
 - (NSString *)text;
 
 - (NSString *)description;
 
 /*!
- @brief Returns human-readable form of the term text.
- If the term is not unicode,
- the raw bytes will be printed instead. 
+ @brief Returns human-readable form of the term text.If the term is not unicode,
+  the raw bytes will be printed instead.
  */
 + (NSString *)toStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)termText;
 
@@ -112,12 +116,16 @@
 /*!
  @brief Resets the field and text of a Term.
  <p>WARNING: the provided BytesRef is not copied, but used directly.
- Therefore the bytes should not be modified after construction, for
- example, you should clone a copy rather than pass reused bytes from
- a TermsEnum.
+  Therefore the bytes should not be modified after construction, for
+  example, you should clone a copy rather than pass reused bytes from
+  a TermsEnum.
  */
 - (void)setWithNSString:(NSString *)fld
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -150,4 +158,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTerm)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTerm")

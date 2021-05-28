@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_
 
@@ -38,7 +44,7 @@
  @brief Creates a new <code>KeywordMarkerFilter</code>
  @param inArg the input stream
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)isKeyword;
 
@@ -52,4 +58,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter")

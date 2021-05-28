@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -26,6 +25,10 @@
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/IntsRef.h"
 #include "org/apache/lucene/util/automaton/Automaton.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/CompletionWeight must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionWeight () {
  @public
@@ -58,7 +61,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionWeight, automa
     return nil;
   }
   if ([terms isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentCompletionTerms class]]) {
-    OrgApacheLuceneSearchSuggestDocumentCompletionTerms *completionTerms = (OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) cast_chk(terms, [OrgApacheLuceneSearchSuggestDocumentCompletionTerms class]);
+    OrgApacheLuceneSearchSuggestDocumentCompletionTerms *completionTerms = (OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) terms;
     if ((suggester = [((OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) nil_chk(completionTerms)) suggester]) == nil) {
       return nil;
     }
@@ -66,11 +69,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionWeight, automa
   else {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", [completionQuery_ getField], @" is not a SuggestField"));
   }
-  OrgApacheLuceneSearchSuggestBitsProducer *filter = [completionQuery_ getFilter];
+  OrgApacheLuceneSearchSuggestBitsProducer *filter = JreRetainedLocalValue([completionQuery_ getFilter]);
   id<OrgApacheLuceneUtilBits> filteredDocs = nil;
   if (filter != nil) {
     filteredDocs = [filter getBitsWithOrgApacheLuceneIndexLeafReaderContext:context];
-    if ([((id<OrgApacheLuceneUtilBits>) nil_chk(filteredDocs)) getClass] == (id) OrgApacheLuceneUtilBits_MatchNoBits_class_()) {
+    if (JreObjectEqualsEquals([((id<OrgApacheLuceneUtilBits>) nil_chk(filteredDocs)) java_getClass], OrgApacheLuceneUtilBits_MatchNoBits_class_())) {
       return nil;
     }
   }
@@ -115,24 +118,40 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionWeight, automa
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withOrgApacheLuceneUtilAutomatonAutomaton:", "CompletionWeight", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getAutomaton", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
-    { "bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:", "bulkScorer", "Lorg.apache.lucene.search.BulkScorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "setNextMatchWithOrgApacheLuceneUtilIntsRef:", "setNextMatch", "V", 0x4, NULL, NULL },
-    { "boost", NULL, "F", 0x4, NULL, NULL },
-    { "context", NULL, "Ljava.lang.CharSequence;", 0x4, NULL, NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchBulkScorer;", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, -1, -1, -1, -1 },
+    { NULL, "F", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 6, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, 9, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 10, 11, 1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[1].selector = @selector(getAutomaton);
+  methods[2].selector = @selector(bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(setNextMatchWithOrgApacheLuceneUtilIntsRef:);
+  methods[4].selector = @selector(boost);
+  methods[5].selector = @selector(context);
+  methods[6].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[7].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[8].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  methods[9].selector = @selector(getValueForNormalization);
+  methods[10].selector = @selector(normalizeWithFloat:withFloat:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "completionQuery_", NULL, 0x12, "Lorg.apache.lucene.search.suggest.document.CompletionQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "automaton_", NULL, 0x12, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
+    { "completionQuery_", "LOrgApacheLuceneSearchSuggestDocumentCompletionQuery;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "automaton_", "LOrgApacheLuceneUtilAutomatonAutomaton;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionWeight = { 2, "CompletionWeight", "org.apache.lucene.search.suggest.document", NULL, 0x1, 11, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestDocumentCompletionQuery;LOrgApacheLuceneUtilAutomatonAutomaton;", "LJavaIoIOException;", "bulkScorer", "LOrgApacheLuceneIndexLeafReaderContext;", "setNextMatch", "LOrgApacheLuceneUtilIntsRef;", "scorer", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "normalize", "FF" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionWeight = { "CompletionWeight", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x1, 11, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionWeight;
 }
 

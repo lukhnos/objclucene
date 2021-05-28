@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline))
 #define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_
 
@@ -27,19 +33,25 @@
 @class IOSObjectArray;
 @class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 @protocol JavaUtilCollection;
+@protocol JavaUtilComparator;
+@protocol JavaUtilFunctionConsumer;
+@protocol JavaUtilFunctionPredicate;
+@protocol JavaUtilFunctionUnaryOperator;
 @protocol JavaUtilIterator;
 @protocol JavaUtilListIterator;
+@protocol JavaUtilSpliterator;
+@protocol JavaUtilStreamStream;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
  @brief A <code>QueryNodeProcessorPipeline</code> class should be used to build a query
- node processor pipeline.
+  node processor pipeline.
  When a query node tree is processed using this class, it passes the query
- node tree to each processor on the pipeline and the result from each
- processor is passed to the next one, always following the order the
- processors were on the pipeline.
- When a <code>QueryConfigHandler</code> object is set on a
- <code>QueryNodeProcessorPipeline</code>, it also takes care of setting this
+  node tree to each processor on the pipeline and the result from each
+  processor is passed to the next one, always following the order the
+  processors were on the pipeline. 
+  When a <code>QueryConfigHandler</code> object is set on a 
+ <code>QueryNodeProcessorPipeline</code>, it also takes care of setting this 
  <code>QueryConfigHandler</code> on all processor on pipeline.
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline : NSObject < OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor, JavaUtilList >
@@ -49,15 +61,15 @@
 /*!
  @brief Constructs an empty query node processor pipeline.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Constructs with a <code>QueryConfigHandler</code> object.
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfigHandler;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfigHandler;
 
 /*!
- - seealso: List#add(int,Object)
+ - seealso: List#add(int, Object)
  */
 - (void)addWithInt:(jint)index
             withId:(id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>)processor;
@@ -73,7 +85,7 @@
 - (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 /*!
- - seealso: List#addAll(int,Collection)
+ - seealso: List#addAll(int, Collection)
  */
 - (jboolean)addAllWithInt:(jint)index
    withJavaUtilCollection:(id<JavaUtilCollection>)c;
@@ -99,7 +111,7 @@
 - (id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>)getWithInt:(jint)index;
 
 /*!
- @brief For reference about this method check:
+ @brief For reference about this method check: 
  <code>QueryNodeProcessor.getQueryConfigHandler()</code>.
  @return QueryConfigHandler the query configuration handler to be set.
  - seealso: QueryNodeProcessor#setQueryConfigHandler(QueryConfigHandler)
@@ -138,11 +150,11 @@
 - (id<JavaUtilListIterator>)listIteratorWithInt:(jint)index;
 
 /*!
- @brief For reference about this method check:
+ @brief For reference about this method check: 
  <code>QueryNodeProcessor.process(QueryNode)</code>.
  @param queryTree the query node tree to be processed
- @throws QueryNodeException if something goes wrong during the query node
- processing
+ @throw QueryNodeExceptionif something goes wrong during the query node
+          processing
  - seealso: QueryNode
  */
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree;
@@ -168,13 +180,13 @@
 - (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 /*!
- - seealso: List#set(int,Object)
+ - seealso: List#set(int, Object)
  */
 - (id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>)setWithInt:(jint)index
                                                                               withId:(id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>)processor;
 
 /*!
- @brief For reference about this method check:
+ @brief For reference about this method check: 
  <code>QueryNodeProcessor.setQueryConfigHandler(QueryConfigHandler)</code>.
  @param queryConfigHandler the query configuration handler to be set.
  - seealso: QueryNodeProcessor#getQueryConfigHandler()
@@ -188,7 +200,7 @@
 - (jint)size;
 
 /*!
- - seealso: List#subList(int,int)
+ - seealso: List#subList(int, int)
  */
 - (id<JavaUtilList>)subListWithInt:(jint)fromIndex
                            withInt:(jint)toIndex;
@@ -211,9 +223,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNo
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_init(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *create_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *create_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *self, OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfigHandler);
 
@@ -225,4 +237,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQuery
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline")

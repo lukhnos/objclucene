@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionTermState
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsIdversionIDVersionTermState_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionTermState || defined(INCLUDE_OrgApacheLuceneCodecsIdversionIDVersionTermState))
 #define OrgApacheLuceneCodecsIdversionIDVersionTermState_
 
@@ -30,26 +36,34 @@
 
 #pragma mark Public
 
-- (OrgApacheLuceneCodecsIdversionIDVersionTermState *)clone;
+- (OrgApacheLuceneCodecsIdversionIDVersionTermState *)java_clone;
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)_other OBJC_METHOD_FAMILY_NONE;
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsIdversionIDVersionTermState)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionTermState_init(OrgApacheLuceneCodecsIdversionIDVersionTermState *self);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionTermState_initPackagePrivate(OrgApacheLuceneCodecsIdversionIDVersionTermState *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionTermState *new_OrgApacheLuceneCodecsIdversionIDVersionTermState_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionTermState *new_OrgApacheLuceneCodecsIdversionIDVersionTermState_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionTermState *create_OrgApacheLuceneCodecsIdversionIDVersionTermState_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionTermState *create_OrgApacheLuceneCodecsIdversionIDVersionTermState_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionIDVersionTermState)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionTermState")

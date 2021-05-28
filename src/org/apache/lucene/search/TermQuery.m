@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Set.h"
@@ -35,6 +34,10 @@
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TermQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchTermQuery () {
  @public
   OrgApacheLuceneIndexTerm *term_;
@@ -57,7 +60,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermQuery, perReaderTermState_, OrgApac
 
 /*!
  @brief Returns a <code>TermsEnum</code> positioned at this weights Term or null if
- the term does not exist in the given context
+  the term does not exist in the given context
  */
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -66,7 +69,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermQuery, perReaderTermState_, OrgApac
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermQuery_TermWeight, this$0_, OrgApacheLuceneSearchTermQuery *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermQuery_TermWeight, similarity_, OrgApacheLuceneSearchSimilaritiesSimilarity *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermQuery_TermWeight, stats_, OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermQuery_TermWeight, termStates_, OrgApacheLuceneIndexTermContext *)
@@ -96,7 +98,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchTermQuery_TermWeigh
                                                                         withBoolean:(jboolean)needsScores {
   OrgApacheLuceneIndexIndexReaderContext *context = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getTopReaderContext];
   OrgApacheLuceneIndexTermContext *termState;
-  if (perReaderTermState_ == nil || perReaderTermState_->topReaderContext_ != context) {
+  if (perReaderTermState_ == nil || !JreObjectEqualsEquals(perReaderTermState_->topReaderContext_, context)) {
     termState = OrgApacheLuceneIndexTermContext_buildWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTerm_(context, term_);
   }
   else {
@@ -133,21 +135,32 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchTermQuery_TermWeigh
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:", "TermQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneIndexTermContext:", "TermQuery", NULL, 0x1, NULL, NULL },
-    { "getTerm", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerm;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneIndexTermContext:);
+  methods[2].selector = @selector(getTerm);
+  methods[3].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[4].selector = @selector(toStringWithNSString:);
+  methods[5].selector = @selector(isEqual:);
+  methods[6].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "term_", NULL, 0x12, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
-    { "perReaderTermState_", NULL, 0x12, "Lorg.apache.lucene.index.TermContext;", NULL, NULL, .constantValue.asLong = 0 },
+    { "term_", "LOrgApacheLuceneIndexTerm;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "perReaderTermState_", "LOrgApacheLuceneIndexTermContext;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.TermQuery$TermWeight;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermQuery = { 2, "TermQuery", "org.apache.lucene.search", NULL, 0x1, 7, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;", "LOrgApacheLuceneIndexTerm;LOrgApacheLuceneIndexTermContext;", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "LOrgApacheLuceneSearchTermQuery_TermWeight;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermQuery = { "TermQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 7, 2, -1, 10, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTermQuery;
 }
 
@@ -169,7 +182,7 @@ OrgApacheLuceneSearchTermQuery *create_OrgApacheLuceneSearchTermQuery_initWithOr
 
 void OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneSearchTermQuery *self, OrgApacheLuceneIndexTerm *t, OrgApacheLuceneIndexTermContext *states) {
   OrgApacheLuceneSearchQuery_init(self);
-  JreAssert((states != nil), (@"org/apache/lucene/search/TermQuery.java:168 condition failed: assert states != null;"));
+  JreAssert(states != nil, @"org/apache/lucene/search/TermQuery.java:168 condition failed: assert states != null;");
   JreStrongAssign(&self->term_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(t));
   if ([((OrgApacheLuceneIndexTermContext *) nil_chk(states)) hasOnlyRealTerms] == false) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Term queries must be created on real terms");
@@ -215,14 +228,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermQuery)
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  JreAssert((((OrgApacheLuceneIndexTermContext *) nil_chk(termStates_))->topReaderContext_ == OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context)), (JreStrcat("$@$@", @"The top-reader used to create Weight (", termStates_->topReaderContext_, @") is not the same as the current reader's top-reader (", OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context))));
+  JreAssert(JreObjectEqualsEquals(((OrgApacheLuceneIndexTermContext *) nil_chk(termStates_))->topReaderContext_, OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context)), JreStrcat("$@$@", @"The top-reader used to create Weight (", termStates_->topReaderContext_, @") is not the same as the current reader's top-reader (", OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context)));
   OrgApacheLuceneIndexTermsEnum *termsEnum = OrgApacheLuceneSearchTermQuery_TermWeight_getTermsEnumWithOrgApacheLuceneIndexLeafReaderContext_(self, context);
   if (termsEnum == nil) {
     return nil;
   }
-  OrgApacheLuceneIndexPostingsEnum *docs = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:nil withInt:needsScores_ ? OrgApacheLuceneIndexPostingsEnum_FREQS : OrgApacheLuceneIndexPostingsEnum_NONE];
-  JreAssert((docs != nil), (@"org/apache/lucene/search/TermQuery.java:107 condition failed: assert docs != null;"));
-  return create_OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(self, docs, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context]);
+  OrgApacheLuceneIndexPostingsEnum *docs = JreRetainedLocalValue([termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:nil withInt:needsScores_ ? OrgApacheLuceneIndexPostingsEnum_FREQS : OrgApacheLuceneIndexPostingsEnum_NONE]);
+  JreAssert(docs != nil, @"org/apache/lucene/search/TermQuery.java:107 condition failed: assert docs != null;");
+  return create_OrgApacheLuceneSearchTermScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(self, docs, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context]);
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
@@ -236,15 +249,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermQuery)
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc {
-  OrgApacheLuceneSearchScorer *scorer = [self scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+  OrgApacheLuceneSearchScorer *scorer = JreRetainedLocalValue([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
   if (scorer != nil) {
     jint newDoc = [scorer advanceWithInt:doc];
     if (newDoc == doc) {
       jfloat freq = [scorer freq];
-      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer = [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context];
+      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer = JreRetainedLocalValue([((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context]);
       OrgApacheLuceneSearchExplanation *freqExplanation = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(freq, JreStrcat("$F", @"termFreq=", freq), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-      OrgApacheLuceneSearchExplanation *scoreExplanation = [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freqExplanation];
-      return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(scoreExplanation)) getValue], JreStrcat("$@$I$$$", @"weight(", [self getQuery], @" in ", doc, @") [", [[similarity_ getClass] getSimpleName], @"], result of:"), [IOSObjectArray arrayWithObjects:(id[]){ scoreExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
+      OrgApacheLuceneSearchExplanation *scoreExplanation = JreRetainedLocalValue([((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freqExplanation]);
+      return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(scoreExplanation)) getValue], JreStrcat("$@$I$$$", @"weight(", [self getQuery], @" in ", doc, @") [", [[similarity_ java_getClass] getSimpleName], @"], result of:"), [IOSObjectArray arrayWithObjects:(id[]){ scoreExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
     }
   }
   return OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(@"no matching term", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
@@ -259,25 +272,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchTermQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:withOrgApacheLuceneIndexTermContext:", "TermWeight", NULL, 0x1, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValueForNormalization", NULL, "F", 0x1, NULL, NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getTermsEnumWithOrgApacheLuceneIndexLeafReaderContext:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x2, "Ljava.io.IOException;", NULL },
-    { "termNotInReaderWithOrgApacheLuceneIndexLeafReader:withOrgApacheLuceneIndexTerm:", "termNotInReader", "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, 4, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchScorer;", 0x1, 8, 9, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x2, 10, 9, 1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 11, 12, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 13, 14, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchTermQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:withOrgApacheLuceneIndexTermContext:);
+  methods[1].selector = @selector(extractTermsWithJavaUtilSet:);
+  methods[2].selector = @selector(description);
+  methods[3].selector = @selector(getValueForNormalization);
+  methods[4].selector = @selector(normalizeWithFloat:withFloat:);
+  methods[5].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[6].selector = @selector(getTermsEnumWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[7].selector = @selector(termNotInReaderWithOrgApacheLuceneIndexLeafReader:withOrgApacheLuceneIndexTerm:);
+  methods[8].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.TermQuery;", NULL, NULL, .constantValue.asLong = 0 },
-    { "similarity_", NULL, 0x12, "Lorg.apache.lucene.search.similarities.Similarity;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stats_", NULL, 0x12, "Lorg.apache.lucene.search.similarities.Similarity$SimWeight;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termStates_", NULL, 0x12, "Lorg.apache.lucene.index.TermContext;", NULL, NULL, .constantValue.asLong = 0 },
-    { "needsScores_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchTermQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "similarity_", "LOrgApacheLuceneSearchSimilaritiesSimilarity;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "stats_", "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termStates_", "LOrgApacheLuceneIndexTermContext;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "needsScores_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermQuery_TermWeight = { 2, "TermWeight", "org.apache.lucene.search", "TermQuery", 0x10, 9, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchTermQuery;LOrgApacheLuceneSearchIndexSearcher;ZLOrgApacheLuceneIndexTermContext;", "LJavaIoIOException;", "extractTerms", "LJavaUtilSet;", "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V", "toString", "normalize", "FF", "scorer", "LOrgApacheLuceneIndexLeafReaderContext;", "getTermsEnum", "termNotInReader", "LOrgApacheLuceneIndexLeafReader;LOrgApacheLuceneIndexTerm;", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "LOrgApacheLuceneSearchTermQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermQuery_TermWeight = { "TermWeight", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x10, 9, 5, 15, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTermQuery_TermWeight;
 }
 
@@ -287,8 +314,8 @@ void OrgApacheLuceneSearchTermQuery_TermWeight_initWithOrgApacheLuceneSearchTerm
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneSearchWeight_initWithOrgApacheLuceneSearchQuery_(self, outer$);
   self->needsScores_ = needsScores;
-  JreAssert((termStates != nil), (@"TermContext must not be null"));
-  JreAssert(([((OrgApacheLuceneIndexTermContext *) nil_chk(termStates)) hasOnlyRealTerms]), (@"org/apache/lucene/search/TermQuery.java:58 condition failed: assert termStates.hasOnlyRealTerms();"));
+  JreAssert(termStates != nil, @"TermContext must not be null");
+  JreAssert([((OrgApacheLuceneIndexTermContext *) nil_chk(termStates)) hasOnlyRealTerms], @"org/apache/lucene/search/TermQuery.java:58 condition failed: assert termStates.hasOnlyRealTerms();");
   JreStrongAssign(&self->termStates_, termStates);
   JreStrongAssign(&self->similarity_, [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getSimilarityWithBoolean:needsScores]);
   OrgApacheLuceneSearchCollectionStatistics *collectionStats;
@@ -318,7 +345,7 @@ OrgApacheLuceneSearchTermQuery_TermWeight *create_OrgApacheLuceneSearchTermQuery
 OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneSearchTermQuery_TermWeight_getTermsEnumWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchTermQuery_TermWeight *self, OrgApacheLuceneIndexLeafReaderContext *context) {
   OrgApacheLuceneIndexTermState *state = [((OrgApacheLuceneIndexTermContext *) nil_chk(self->termStates_)) getWithInt:((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->ord_];
   if (state == nil) {
-    JreAssert((OrgApacheLuceneSearchTermQuery_TermWeight_termNotInReaderWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexTerm_(self, [context reader], self->this$0_->term_)), (JreStrcat("$@", @"no termstate found but term exists in reader term=", self->this$0_->term_)));
+    JreAssert(OrgApacheLuceneSearchTermQuery_TermWeight_termNotInReaderWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexTerm_(self, [context reader], self->this$0_->term_), JreStrcat("$@", @"no termstate found but term exists in reader term=", self->this$0_->term_));
     return nil;
   }
   OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) termsWithNSString:[((OrgApacheLuceneIndexTerm *) nil_chk(self->this$0_->term_)) field]])) iterator];

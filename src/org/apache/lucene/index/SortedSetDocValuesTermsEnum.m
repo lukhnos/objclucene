@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/SortedSetDocValuesTermsEnum.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "org/apache/lucene/index/OrdTermState.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
@@ -15,6 +13,10 @@
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SortedSetDocValuesTermsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexSortedSetDocValuesTermsEnum () {
  @public
@@ -30,8 +32,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum, scratch_, O
 
 @implementation OrgApacheLuceneIndexSortedSetDocValuesTermsEnum
 
-- (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)values {
-  OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedSetDocValues_(self, values);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)values {
+  OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexSortedSetDocValues_(self, values);
   return self;
 }
 
@@ -67,7 +69,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum, scratch_, O
 }
 
 - (void)seekExactWithLong:(jlong)ord {
-  JreAssert((ord >= 0 && ord < [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(values_)) getValueCount]), (@"org/apache/lucene/index/SortedSetDocValuesTermsEnum.java:72 condition failed: assert ord >= 0 && ord < values.getValueCount();"));
+  JreAssert(ord >= 0 && ord < [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(values_)) getValueCount], @"org/apache/lucene/index/SortedSetDocValuesTermsEnum.java:72 condition failed: assert ord >= 0 && ord < values.getValueCount();");
   currentOrd_ = (jint) ord;
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(scratch_)) copyBytesWithOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(values_)) lookupOrdWithLong:currentOrd_]];
 }
@@ -104,7 +106,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum, scratch_, O
 
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state {
-  JreAssert((state != nil && [state isKindOfClass:[OrgApacheLuceneIndexOrdTermState class]]), (@"org/apache/lucene/index/SortedSetDocValuesTermsEnum.java:114 condition failed: assert state != null && state instanceof OrdTermState;"));
+  JreAssert(state != nil && [state isKindOfClass:[OrgApacheLuceneIndexOrdTermState class]], @"org/apache/lucene/index/SortedSetDocValuesTermsEnum.java:114 condition failed: assert state != null && state instanceof OrdTermState;");
   [self seekExactWithLong:((OrgApacheLuceneIndexOrdTermState *) nil_chk(((OrgApacheLuceneIndexOrdTermState *) cast_chk(state, [OrgApacheLuceneIndexOrdTermState class]))))->ord_];
 }
 
@@ -121,44 +123,61 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum, scratch_, O
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSortedSetDocValues:", "SortedSetDocValuesTermsEnum", NULL, 0x1, NULL, NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "ord", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "docFreq", NULL, "I", 0x1, NULL, NULL },
-    { "totalTermFreq", NULL, "J", 0x1, NULL, NULL },
-    { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "termState", NULL, "Lorg.apache.lucene.index.TermState;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum_SeekStatus;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "Z", 0x1, 4, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x1, 6, 7, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 8, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermState;", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexSortedSetDocValues:);
+  methods[1].selector = @selector(seekCeilWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(seekExactWithLong:);
+  methods[4].selector = @selector(next);
+  methods[5].selector = @selector(term);
+  methods[6].selector = @selector(ord);
+  methods[7].selector = @selector(docFreq);
+  methods[8].selector = @selector(totalTermFreq);
+  methods[9].selector = @selector(postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:);
+  methods[10].selector = @selector(seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:);
+  methods[11].selector = @selector(termState);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "values_", NULL, 0x12, "Lorg.apache.lucene.index.SortedSetDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentOrd_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratch_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "values_", "LOrgApacheLuceneIndexSortedSetDocValues;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentOrd_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "scratch_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSortedSetDocValuesTermsEnum = { 2, "SortedSetDocValuesTermsEnum", "org.apache.lucene.index", NULL, 0x0, 12, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSortedSetDocValues;", "seekCeil", "LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "seekExact", "J", "postings", "LOrgApacheLuceneIndexPostingsEnum;I", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneIndexTermState;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSortedSetDocValuesTermsEnum = { "SortedSetDocValuesTermsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 12, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum;
 }
 
 @end
 
-void OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum *self, OrgApacheLuceneIndexSortedSetDocValues *values) {
+void OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum *self, OrgApacheLuceneIndexSortedSetDocValues *values) {
   OrgApacheLuceneIndexTermsEnum_init(self);
   self->currentOrd_ = -1;
   JreStrongAssign(&self->values_, values);
   JreStrongAssignAndConsume(&self->scratch_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
 }
 
-OrgApacheLuceneIndexSortedSetDocValuesTermsEnum *new_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *values) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum, initWithOrgApacheLuceneIndexSortedSetDocValues_, values)
+OrgApacheLuceneIndexSortedSetDocValuesTermsEnum *new_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *values) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum, initPackagePrivateWithOrgApacheLuceneIndexSortedSetDocValues_, values)
 }
 
-OrgApacheLuceneIndexSortedSetDocValuesTermsEnum *create_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *values) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum, initWithOrgApacheLuceneIndexSortedSetDocValues_, values)
+OrgApacheLuceneIndexSortedSetDocValuesTermsEnum *create_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initPackagePrivateWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *values) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum, initPackagePrivateWithOrgApacheLuceneIndexSortedSetDocValues_, values)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum)

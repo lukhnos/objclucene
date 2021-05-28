@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTrimFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousTrimFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousTrimFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousTrimFilter_
 
@@ -31,9 +37,9 @@
 
 /*!
  @brief Create a new <code>TrimFilter</code>.
- @param inArg            the stream to consume
+ @param inArg the stream to consume
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
 
@@ -51,4 +57,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousTrimFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilter")

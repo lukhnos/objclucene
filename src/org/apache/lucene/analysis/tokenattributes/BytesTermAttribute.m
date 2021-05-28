@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/tokenattributes/BytesTermAttribute.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/BytesTermAttribute must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute : NSObject
 
 @end
@@ -13,10 +17,16 @@
 @implementation OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setBytesRefWithOrgApacheLuceneUtilBytesRef:", "setBytesRef", "V", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute = { 2, "BytesTermAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(setBytesRefWithOrgApacheLuceneUtilBytesRef:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "setBytesRef", "LOrgApacheLuceneUtilBytesRef;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute = { "BytesTermAttribute", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute;
 }
 

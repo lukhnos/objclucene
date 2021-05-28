@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat))
 #define OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_
 
@@ -28,53 +34,48 @@
 /*!
  @brief Lucene 5.0 Segment info format.
  <p>
- Files:
+  Files: 
  <ul>
- <li><tt>.si</tt>: Header, SegVersion, SegSize, IsCompoundFile, Diagnostics, Files, Attributes, Footer
+    <li><tt>.si</tt>: Header, SegVersion, SegSize, IsCompoundFile, Diagnostics, Files, Attributes, Footer 
  </ul>
- Data types:
+  Data types: 
  <ul>
- <li>Header --&gt; <code>IndexHeader</code></li>
- <li>SegSize --&gt; <code>Int32</code></li>
- <li>SegVersion --&gt; <code>String</code></li>
- <li>Files --&gt; <code>Set&lt;String&gt;</code></li>
- <li>Diagnostics,Attributes --&gt; <code>Map&lt;String,String&gt;</code></li>
- <li>IsCompoundFile --&gt; <code>Int8</code></li>
- <li>Footer --&gt; <code>CodecFooter</code></li>
- </ul>
- Field Descriptions:
+    <li>Header --&gt; <code>IndexHeader</code></li>
+    <li>SegSize --&gt; <code>Int32</code></li>
+    <li>SegVersion --&gt; <code>String</code></li>
+    <li>Files --&gt; <code>Set&lt;String&gt;</code></li>
+    <li>Diagnostics,Attributes --&gt; <code>Map&lt;String,String&gt;</code></li>
+    <li>IsCompoundFile --&gt; <code>Int8</code></li>
+    <li>Footer --&gt; <code>CodecFooter</code></li>
+  </ul>
+  Field Descriptions: 
  <ul>
- <li>SegVersion is the code version that created the segment.</li>
- <li>SegSize is the number of documents contained in the segment index.</li>
- <li>IsCompoundFile records whether the segment is written as a compound file or
- not. If this is -1, the segment is not a compound file. If it is 1, the segment
- is a compound file.</li>
- <li>The Diagnostics Map is privately written by <code>IndexWriter</code>, as a debugging aid,
- for each segment it creates. It includes metadata like the current Lucene
- version, OS, Java version, why the segment was created (merge, flush,
- addIndexes), etc.</li>
- <li>Files is a list of files referred to by this segment.</li>
- </ul>
+    <li>SegVersion is the code version that created the segment.</li>
+    <li>SegSize is the number of documents contained in the segment index.</li>
+    <li>IsCompoundFile records whether the segment is written as a compound file or
+        not. If this is -1, the segment is not a compound file. If it is 1, the segment
+        is a compound file.</li>
+    <li>The Diagnostics Map is privately written by <code>IndexWriter</code>, as a debugging aid,
+        for each segment it creates. It includes metadata like the current Lucene
+        version, OS, Java version, why the segment was created (merge, flush,
+        addIndexes), etc.</li>
+    <li>Files is a list of files referred to by this segment.</li>
+  </ul>
  - seealso: SegmentInfos
  */
 @interface OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat : OrgApacheLuceneCodecsSegmentInfoFormat
-
-+ (NSString *)SI_EXTENSION;
-
-+ (NSString *)CODEC_NAME;
-
-+ (jint)VERSION_START;
-
-+ (jint)VERSION_SAFE_MAPS;
-
-+ (jint)VERSION_CURRENT;
+@property (readonly, copy, class) NSString *SI_EXTENSION NS_SWIFT_NAME(SI_EXTENSION);
+@property (readonly, copy, class) NSString *CODEC_NAME NS_SWIFT_NAME(CODEC_NAME);
+@property (readonly, class) jint VERSION_START NS_SWIFT_NAME(VERSION_START);
+@property (readonly, class) jint VERSION_SAFE_MAPS NS_SWIFT_NAME(VERSION_SAFE_MAPS);
+@property (readonly, class) jint VERSION_CURRENT NS_SWIFT_NAME(VERSION_CURRENT);
 
 #pragma mark Public
 
 /*!
  @brief Sole constructor.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneIndexSegmentInfo *)readWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                               withNSString:(NSString *)segment
@@ -92,36 +93,40 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat)
 /*!
  @brief File extension used to store <code>SegmentInfo</code>.
  */
-inline NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_get_SI_EXTENSION();
+inline NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_get_SI_EXTENSION(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat, SI_EXTENSION, NSString *)
 
-inline NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_get_CODEC_NAME();
+inline NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_get_CODEC_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat, CODEC_NAME, NSString *)
 
-inline jint OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_get_VERSION_START();
+inline jint OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_get_VERSION_START(void);
 #define OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_START 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat, VERSION_START, jint)
 
-inline jint OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_get_VERSION_SAFE_MAPS();
+inline jint OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_get_VERSION_SAFE_MAPS(void);
 #define OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_SAFE_MAPS 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat, VERSION_SAFE_MAPS, jint)
 
-inline jint OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_get_VERSION_CURRENT();
+inline jint OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_get_VERSION_CURRENT(void);
 #define OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_CURRENT 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat, VERSION_CURRENT, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat *new_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat *new_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat *create_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat *create_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexCompositeReaderContext
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexCompositeReaderContext_) && (INCLUDE_ALL_OrgApacheLuceneIndexCompositeReaderContext || defined(INCLUDE_OrgApacheLuceneIndexCompositeReaderContext))
 #define OrgApacheLuceneIndexCompositeReaderContext_
 
@@ -41,21 +47,27 @@
 /*!
  @brief Creates a <code>CompositeReaderContext</code> for top-level readers with parent set to <code>null</code>
  */
-- (instancetype)initWithOrgApacheLuceneIndexCompositeReader:(OrgApacheLuceneIndexCompositeReader *)reader
-                                           withJavaUtilList:(id<JavaUtilList>)children
-                                           withJavaUtilList:(id<JavaUtilList>)leaves;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexCompositeReader:(OrgApacheLuceneIndexCompositeReader *)reader
+                                                     withJavaUtilList:(id<JavaUtilList>)children
+                                                     withJavaUtilList:(id<JavaUtilList>)leaves;
 
 /*!
  @brief Creates a <code>CompositeReaderContext</code> for intermediate readers that aren't
- not top-level readers in the current context
+  not top-level readers in the current context
  */
-- (instancetype)initWithOrgApacheLuceneIndexCompositeReaderContext:(OrgApacheLuceneIndexCompositeReaderContext *)parent
-                           withOrgApacheLuceneIndexCompositeReader:(OrgApacheLuceneIndexCompositeReader *)reader
-                                                           withInt:(jint)ordInParent
-                                                           withInt:(jint)docbaseInParent
-                                                  withJavaUtilList:(id<JavaUtilList>)children;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexCompositeReaderContext:(OrgApacheLuceneIndexCompositeReaderContext *)parent
+                                     withOrgApacheLuceneIndexCompositeReader:(OrgApacheLuceneIndexCompositeReader *)reader
+                                                                     withInt:(jint)ordInParent
+                                                                     withInt:(jint)docbaseInParent
+                                                            withJavaUtilList:(id<JavaUtilList>)children;
 
 + (OrgApacheLuceneIndexCompositeReaderContext *)createWithOrgApacheLuceneIndexCompositeReader:(OrgApacheLuceneIndexCompositeReader *)reader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexCompositeReaderContext:(OrgApacheLuceneIndexCompositeReaderContext *)arg0
+                                                                     withInt:(jint)arg1
+                                                                     withInt:(jint)arg2 NS_UNAVAILABLE;
 
 @end
 
@@ -79,4 +91,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReaderContext)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexCompositeReaderContext")

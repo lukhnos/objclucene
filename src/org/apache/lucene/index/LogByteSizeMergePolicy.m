@@ -3,14 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/index/LogByteSizeMergePolicy.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/Long.h"
 #include "org/apache/lucene/index/IndexWriter.h"
 #include "org/apache/lucene/index/LogByteSizeMergePolicy.h"
 #include "org/apache/lucene/index/LogMergePolicy.h"
 #include "org/apache/lucene/index/SegmentCommitInfo.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/LogByteSizeMergePolicy must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneIndexLogByteSizeMergePolicy
 
@@ -63,22 +64,35 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LogByteSizeMergePolicy", NULL, 0x1, NULL, NULL },
-    { "sizeWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:", "size", "J", 0x4, "Ljava.io.IOException;", NULL },
-    { "setMaxMergeMBWithDouble:", "setMaxMergeMB", "V", 0x1, NULL, NULL },
-    { "getMaxMergeMB", NULL, "D", 0x1, NULL, NULL },
-    { "setMaxMergeMBForForcedMergeWithDouble:", "setMaxMergeMBForForcedMerge", "V", 0x1, NULL, NULL },
-    { "getMaxMergeMBForForcedMerge", NULL, "D", 0x1, NULL, NULL },
-    { "setMinMergeMBWithDouble:", "setMinMergeMB", "V", 0x1, NULL, NULL },
-    { "getMinMergeMB", NULL, "D", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x4, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 4, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 4, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(sizeWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:);
+  methods[2].selector = @selector(setMaxMergeMBWithDouble:);
+  methods[3].selector = @selector(getMaxMergeMB);
+  methods[4].selector = @selector(setMaxMergeMBForForcedMergeWithDouble:);
+  methods[5].selector = @selector(getMaxMergeMBForForcedMerge);
+  methods[6].selector = @selector(setMinMergeMBWithDouble:);
+  methods[7].selector = @selector(getMinMergeMB);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_MIN_MERGE_MB", "DEFAULT_MIN_MERGE_MB", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MIN_MERGE_MB },
-    { "DEFAULT_MAX_MERGE_MB", "DEFAULT_MAX_MERGE_MB", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MAX_MERGE_MB },
-    { "DEFAULT_MAX_MERGE_MB_FOR_FORCED_MERGE", "DEFAULT_MAX_MERGE_MB_FOR_FORCED_MERGE", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MAX_MERGE_MB_FOR_FORCED_MERGE },
+    { "DEFAULT_MIN_MERGE_MB", "D", .constantValue.asDouble = OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MIN_MERGE_MB, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_MERGE_MB", "D", .constantValue.asDouble = OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MAX_MERGE_MB, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_MERGE_MB_FOR_FORCED_MERGE", "D", .constantValue.asDouble = OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MAX_MERGE_MB_FOR_FORCED_MERGE, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexLogByteSizeMergePolicy = { 2, "LogByteSizeMergePolicy", "org.apache.lucene.index", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "size", "LOrgApacheLuceneIndexSegmentCommitInfo;LOrgApacheLuceneIndexIndexWriter;", "LJavaIoIOException;", "setMaxMergeMB", "D", "setMaxMergeMBForForcedMerge", "setMinMergeMB" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexLogByteSizeMergePolicy = { "LogByteSizeMergePolicy", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 8, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexLogByteSizeMergePolicy;
 }
 

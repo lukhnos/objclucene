@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisTokenizer))
 #define OrgApacheLuceneAnalysisTokenizer_
 
@@ -22,15 +28,16 @@
 
 @class JavaIoReader;
 @class OrgApacheLuceneUtilAttributeFactory;
+@class OrgApacheLuceneUtilAttributeSource;
 
 /*!
  @brief A Tokenizer is a TokenStream whose input is a Reader.
  <p>
- This is an abstract class; subclasses must override <code>incrementToken()</code>
- <p>
- NOTE: Subclasses overriding <code>incrementToken()</code> must
- call <code>AttributeSource.clearAttributes()</code> before
- setting attributes.
+   This is an abstract class; subclasses must override <code>incrementToken()</code>
+   <p>
+   NOTE: Subclasses overriding <code>incrementToken()</code> must
+   call <code>AttributeSource.clearAttributes()</code> before
+   setting attributes.
  */
 @interface OrgApacheLuceneAnalysisTokenizer : OrgApacheLuceneAnalysisTokenStream {
  @public
@@ -43,21 +50,19 @@
 #pragma mark Public
 
 /*!
- @brief 
- <p>
- <b>NOTE:</b> 
- The default implementation closes the input Reader, so
- be sure to call <code>super.close()</code> when overriding this method.
+ @brief <p>
+  <b>NOTE:</b> 
+  The default implementation closes the input Reader, so
+  be sure to call <code>super.close()</code> when overriding this method.
  */
 - (void)close;
 
 - (void)reset;
 
 /*!
- @brief Expert: Set a new reader on the Tokenizer.
- Typically, an
- analyzer (in its tokenStream method) will use
- this to re-use a previously created tokenizer. 
+ @brief Expert: Set a new reader on the Tokenizer.Typically, an
+   analyzer (in its tokenStream method) will use
+   this to re-use a previously created tokenizer.
  */
 - (void)setReaderWithJavaIoReader:(JavaIoReader *)input;
 
@@ -65,21 +70,20 @@
 
 /*!
  @brief Construct a tokenizer with no input, awaiting a call to <code>setReader(java.io.Reader)</code>
- to provide input.
+  to provide input.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Construct a tokenizer with no input, awaiting a call to <code>setReader(java.io.Reader)</code> to
- provide input.
+  provide input.
  @param factory attribute factory.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 /*!
- @brief Return the corrected offset.
- If <code>input</code> is a <code>CharFilter</code> subclass
- this method calls <code>CharFilter.correctOffset</code>, else returns <code>currentOff</code>.
+ @brief Return the corrected offset.If <code>input</code> is a <code>CharFilter</code> subclass
+  this method calls <code>CharFilter.correctOffset</code>, else returns <code>currentOff</code>.
  @param currentOff offset as seen in the output
  @return corrected offset based on the input
  - seealso: CharFilter#correctOffset
@@ -89,6 +93,10 @@
 #pragma mark Package-Private
 
 - (void)setReaderTestPoint;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -104,4 +112,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenizer")

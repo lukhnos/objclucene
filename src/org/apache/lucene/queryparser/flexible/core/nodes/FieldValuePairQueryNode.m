@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode : NSObject
 
 @end
@@ -13,7 +17,8 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode = { 2, "FieldValuePairQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldableNode;Lorg/apache/lucene/queryparser/flexible/core/nodes/ValueQueryNode<TT;>;" };
+  static const void *ptrTable[] = { "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldableNode;Lorg/apache/lucene/queryparser/flexible/core/nodes/ValueQueryNode<TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode = { "FieldValuePairQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", ptrTable, NULL, NULL, 7, 0x609, 0, 0, -1, -1, -1, 0, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;
 }
 

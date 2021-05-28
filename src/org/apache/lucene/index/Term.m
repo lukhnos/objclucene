@@ -16,6 +16,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/Term must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 __attribute__((unused)) static NSString *OrgApacheLuceneIndexTerm_text(OrgApacheLuceneIndexTerm *self);
 
 @implementation OrgApacheLuceneIndexTerm
@@ -54,9 +58,9 @@ __attribute__((unused)) static NSString *OrgApacheLuceneIndexTerm_text(OrgApache
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
   OrgApacheLuceneIndexTerm *other = (OrgApacheLuceneIndexTerm *) cast_chk(obj, [OrgApacheLuceneIndexTerm class]);
   if (field_ == nil) {
     if (other->field_ != nil) return false;
@@ -104,25 +108,42 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:", "Term", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withNSString:", "Term", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:", "Term", NULL, 0x1, NULL, NULL },
-    { "field", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "text", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "toStringWithOrgApacheLuceneUtilBytesRef:", "toString", "Ljava.lang.String;", 0x19, NULL, NULL },
-    { "bytes", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x11, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x11, NULL, NULL },
-    { "setWithNSString:withOrgApacheLuceneUtilBytesRef:", "set", "V", 0x10, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x19, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 8, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x10, 10, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, 3, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(initWithNSString:withNSString:);
+  methods[2].selector = @selector(initWithNSString:);
+  methods[3].selector = @selector(field);
+  methods[4].selector = @selector(text);
+  methods[5].selector = @selector(toStringWithOrgApacheLuceneUtilBytesRef:);
+  methods[6].selector = @selector(bytes);
+  methods[7].selector = @selector(isEqual:);
+  methods[8].selector = @selector(hash);
+  methods[9].selector = @selector(compareToWithId:);
+  methods[10].selector = @selector(setWithNSString:withOrgApacheLuceneUtilBytesRef:);
+  methods[11].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bytes_", NULL, 0x0, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bytes_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTerm = { 2, "Term", "org.apache.lucene.index", NULL, 0x11, 12, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/Term;>;" };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneUtilBytesRef;", "LNSString;LNSString;", "LNSString;", "toString", "LOrgApacheLuceneUtilBytesRef;", "equals", "LNSObject;", "hashCode", "compareTo", "LOrgApacheLuceneIndexTerm;", "set", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/Term;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTerm = { "Term", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 12, 2, -1, -1, -1, 11, -1 };
   return &_OrgApacheLuceneIndexTerm;
 }
 
@@ -172,7 +193,7 @@ NSString *OrgApacheLuceneIndexTerm_text(OrgApacheLuceneIndexTerm *self) {
 
 NSString *OrgApacheLuceneIndexTerm_toStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *termText) {
   OrgApacheLuceneIndexTerm_initialize();
-  JavaNioCharsetCharsetDecoder *decoder = [((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8))) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)];
+  JavaNioCharsetCharsetDecoder *decoder = JreRetainedLocalValue([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8))) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)]);
   @try {
     return [((JavaNioCharBuffer *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk(decoder)) decodeWithJavaNioByteBuffer:JavaNioByteBuffer_wrapWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(termText))->bytes_, termText->offset_, termText->length_)])) description];
   }

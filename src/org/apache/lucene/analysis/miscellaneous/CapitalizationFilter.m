@@ -6,10 +6,8 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/lang/Integer.h"
 #include "java/lang/System.h"
 #include "java/util/Collection.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
@@ -17,7 +15,10 @@
 #include "org/apache/lucene/analysis/miscellaneous/CapitalizationFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/CapitalizationFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter () {
  @public
@@ -74,7 +75,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousCapitali
 - (jboolean)incrementToken {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return false;
   IOSCharArray *termBuffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-  jint termBufferLength = [termAtt_ length];
+  jint termBufferLength = [termAtt_ java_length];
   IOSCharArray *backup = nil;
   if (maxWordCount_ < OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_WORD_COUNT) {
     backup = [IOSCharArray arrayWithLength:termBufferLength];
@@ -119,25 +120,34 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousCapitali
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "CapitalizationFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:withOrgApacheLuceneAnalysisUtilCharArraySet:withBoolean:withJavaUtilCollection:withInt:withInt:withInt:", "CapitalizationFilter", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/TokenStream;ZLorg/apache/lucene/analysis/util/CharArraySet;ZLjava/util/Collection<[LC;>;III)V" },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "processWordWithCharArray:withInt:withInt:withInt:", "processWord", "V", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, 2, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, 4, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:withOrgApacheLuceneAnalysisUtilCharArraySet:withBoolean:withJavaUtilCollection:withInt:withInt:withInt:);
+  methods[2].selector = @selector(incrementToken);
+  methods[3].selector = @selector(processWordWithCharArray:withInt:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_MAX_WORD_COUNT", "DEFAULT_MAX_WORD_COUNT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_WORD_COUNT },
-    { "DEFAULT_MAX_TOKEN_LENGTH", "DEFAULT_MAX_TOKEN_LENGTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_TOKEN_LENGTH },
-    { "onlyFirstWord_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "keep_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "forceFirstLetter_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "okPrefix_", NULL, 0x12, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<[LC;>;", .constantValue.asLong = 0 },
-    { "minWordLength_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxWordCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxTokenLength_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_MAX_WORD_COUNT", "I", .constantValue.asInt = OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_WORD_COUNT, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_TOKEN_LENGTH", "I", .constantValue.asInt = OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_TOKEN_LENGTH, 0x19, -1, -1, -1, -1 },
+    { "onlyFirstWord_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "keep_", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "forceFirstLetter_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "okPrefix_", "LJavaUtilCollection;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
+    { "minWordLength_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxWordCount_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxTokenLength_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter = { 2, "CapitalizationFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 4, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LOrgApacheLuceneAnalysisTokenStream;ZLOrgApacheLuceneAnalysisUtilCharArraySet;ZLJavaUtilCollection;III", "(Lorg/apache/lucene/analysis/TokenStream;ZLorg/apache/lucene/analysis/util/CharArraySet;ZLjava/util/Collection<[C>;III)V", "LJavaIoIOException;", "processWord", "[CIII", "Ljava/util/Collection<[C>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter = { "CapitalizationFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x11, 4, 10, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter;
 }
 

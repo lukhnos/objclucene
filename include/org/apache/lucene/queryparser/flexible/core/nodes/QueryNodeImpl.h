@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_
 
@@ -25,7 +31,7 @@
 @protocol JavaUtilMap;
 
 /*!
- @brief A <code>QueryNodeImpl</code> is the default implementation of the interface
+ @brief A <code>QueryNodeImpl</code> is the default implementation of the interface 
  <code>QueryNode</code>
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl : NSObject < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, NSCopying > {
@@ -35,18 +41,17 @@
    */
   jboolean toQueryStringIgnoreFields_;
 }
-
-+ (NSString *)PLAINTEXT_FIELD_NAME;
+@property (readonly, copy, class) NSString *PLAINTEXT_FIELD_NAME NS_SWIFT_NAME(PLAINTEXT_FIELD_NAME);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)addWithJavaUtilList:(id<JavaUtilList>)children;
 
 - (void)addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)child;
 
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)clone;
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -57,7 +62,7 @@
 
 /*!
  @return a List for QueryNode object. Returns null, for nodes that do not
- contain children. All leaf Nodes return null.
+          contain children. All leaf Nodes return null.
  */
 - (id<JavaUtilList>)getChildren;
 
@@ -83,8 +88,8 @@
                     withId:(id)value;
 
 /*!
- @brief Every implementation of this class should return pseudo xml like this:
- For FieldQueryNode: &lt;field start='1' end='2' field='subject' text='foo'/&gt;
+ @brief Every implementation of this class should return pseudo xml like this: 
+  For FieldQueryNode: &lt;field start='1' end='2' field='subject' text='foo'/&gt;
  - seealso: org.apache.lucene.queryparser.flexible.core.nodes.QueryNode#toString()
  */
 - (NSString *)description;
@@ -110,7 +115,7 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl)
 
-inline NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_get_PLAINTEXT_FIELD_NAME();
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_get_PLAINTEXT_FIELD_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIELD_NAME;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl, PLAINTEXT_FIELD_NAME, NSString *)
@@ -121,4 +126,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeI
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl")

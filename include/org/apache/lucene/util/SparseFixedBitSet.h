@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilSparseFixedBitSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilSparseFixedBitSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilSparseFixedBitSet || defined(INCLUDE_OrgApacheLuceneUtilSparseFixedBitSet))
 #define OrgApacheLuceneUtilSparseFixedBitSet_
 
@@ -35,11 +41,11 @@
 /*!
  @brief A bit set that only stores longs that have at least one bit which is set.
  The way it works is that the space of bits is divided into blocks of
- 4096 bits, which is 64 longs. Then for each block, we have:<ul>
- <li>a long[] which stores the non-zero longs for that block</li>
- <li>a long so that bit <tt>i</tt> being set means that the <code>i-th</code>
- long of the block is non-null, and its offset in the array of longs is
- the number of one bits on the right of the <code>i-th</code> bit.</li></ul>
+  4096 bits, which is 64 longs. Then for each block, we have:<ul>
+  <li>a long[] which stores the non-zero longs for that block</li>
+  <li>a long so that bit <tt>i</tt> being set means that the <code>i-th</code>
+      long of the block is non-null, and its offset in the array of longs is
+      the number of one bits on the right of the <code>i-th</code> bit.</li></ul>
  */
 @interface OrgApacheLuceneUtilSparseFixedBitSet : OrgApacheLuceneUtilBitSet < OrgApacheLuceneUtilBits, OrgApacheLuceneUtilAccountable > {
  @public
@@ -54,9 +60,9 @@
 
 /*!
  @brief Create a <code>SparseFixedBitSet</code> that can contain bits between
- <code>0</code> included and <code>length</code> excluded.
+   <code>0</code> included and <code>length</code> excluded.
  */
-- (instancetype)initWithInt:(jint)length;
+- (instancetype __nonnull)initWithInt:(jint)length;
 
 - (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
 
@@ -91,6 +97,10 @@
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilSparseFixedBitSet)
@@ -108,4 +118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSparseFixedBitSet)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSparseFixedBitSet")

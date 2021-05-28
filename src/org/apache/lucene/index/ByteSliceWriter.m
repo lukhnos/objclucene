@@ -11,6 +11,10 @@
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/ByteBlockPool.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/ByteSliceWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexByteSliceWriter () {
  @public
   IOSByteArray *slice_;
@@ -25,29 +29,29 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexByteSliceWriter, pool_, OrgApacheLuceneU
 
 @implementation OrgApacheLuceneIndexByteSliceWriter
 
-- (instancetype)initWithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool {
-  OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(self, pool);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool {
+  OrgApacheLuceneIndexByteSliceWriter_initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool_(self, pool);
   return self;
 }
 
 - (void)init__WithInt:(jint)address {
   JreStrongAssign(&slice_, IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool_))->buffers_), JreRShift32(address, OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SHIFT)));
-  JreAssert((slice_ != nil), (@"org/apache/lucene/index/ByteSliceWriter.java:47 condition failed: assert slice != null;"));
+  JreAssert(slice_ != nil, @"org/apache/lucene/index/ByteSliceWriter.java:47 condition failed: assert slice != null;");
   upto_ = address & OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_MASK;
   offset0_ = address;
-  JreAssert((upto_ < ((IOSByteArray *) nil_chk(slice_))->size_), (@"org/apache/lucene/index/ByteSliceWriter.java:50 condition failed: assert upto < slice.length;"));
+  JreAssert(upto_ < ((IOSByteArray *) nil_chk(slice_))->size_, @"org/apache/lucene/index/ByteSliceWriter.java:50 condition failed: assert upto < slice.length;");
 }
 
 - (void)writeByteWithByte:(jbyte)b {
-  JreAssert((slice_ != nil), (@"org/apache/lucene/index/ByteSliceWriter.java:56 condition failed: assert slice != null;"));
+  JreAssert(slice_ != nil, @"org/apache/lucene/index/ByteSliceWriter.java:56 condition failed: assert slice != null;");
   if (IOSByteArray_Get(nil_chk(slice_), upto_) != 0) {
     upto_ = [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool_)) allocSliceWithByteArray:slice_ withInt:upto_];
     JreStrongAssign(&slice_, pool_->buffer_);
     offset0_ = pool_->byteOffset_;
-    JreAssert((slice_ != nil), (@"org/apache/lucene/index/ByteSliceWriter.java:61 condition failed: assert slice != null;"));
+    JreAssert(slice_ != nil, @"org/apache/lucene/index/ByteSliceWriter.java:61 condition failed: assert slice != null;");
   }
   *IOSByteArray_GetRef(nil_chk(slice_), upto_++) = b;
-  JreAssert((upto_ != slice_->size_), (@"org/apache/lucene/index/ByteSliceWriter.java:64 condition failed: assert upto != slice.length;"));
+  JreAssert(upto_ != slice_->size_, @"org/apache/lucene/index/ByteSliceWriter.java:64 condition failed: assert upto != slice.length;");
 }
 
 - (void)writeBytesWithByteArray:(IOSByteArray *)b
@@ -61,7 +65,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexByteSliceWriter, pool_, OrgApacheLuceneU
       offset0_ = pool_->byteOffset_;
     }
     *IOSByteArray_GetRef(nil_chk(slice_), upto_++) = IOSByteArray_Get(nil_chk(b), offset++);
-    JreAssert((upto_ != slice_->size_), (@"org/apache/lucene/index/ByteSliceWriter.java:79 condition failed: assert upto != slice.length;"));
+    JreAssert(upto_ != slice_->size_, @"org/apache/lucene/index/ByteSliceWriter.java:79 condition failed: assert upto != slice.length;");
   }
 }
 
@@ -76,36 +80,46 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexByteSliceWriter, pool_, OrgApacheLuceneU
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilByteBlockPool:", "ByteSliceWriter", NULL, 0x1, NULL, NULL },
-    { "init__WithInt:", "init", "V", 0x1, NULL, NULL },
-    { "writeByteWithByte:", "writeByte", "V", 0x1, NULL, NULL },
-    { "writeBytesWithByteArray:withInt:withInt:", "writeBytes", "V", 0x1, NULL, NULL },
-    { "getAddress", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool:);
+  methods[1].selector = @selector(init__WithInt:);
+  methods[2].selector = @selector(writeByteWithByte:);
+  methods[3].selector = @selector(writeBytesWithByteArray:withInt:withInt:);
+  methods[4].selector = @selector(getAddress);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "slice_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "upto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "pool_", NULL, 0x12, "Lorg.apache.lucene.util.ByteBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offset0_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "slice_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "upto_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "pool_", "LOrgApacheLuceneUtilByteBlockPool;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "offset0_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexByteSliceWriter = { 2, "ByteSliceWriter", "org.apache.lucene.index", NULL, 0x10, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilByteBlockPool;", "init", "I", "writeByte", "B", "writeBytes", "[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexByteSliceWriter = { "ByteSliceWriter", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 5, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexByteSliceWriter;
 }
 
 @end
 
-void OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneIndexByteSliceWriter *self, OrgApacheLuceneUtilByteBlockPool *pool) {
+void OrgApacheLuceneIndexByteSliceWriter_initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneIndexByteSliceWriter *self, OrgApacheLuceneUtilByteBlockPool *pool) {
   OrgApacheLuceneStoreDataOutput_init(self);
   JreStrongAssign(&self->pool_, pool);
 }
 
-OrgApacheLuceneIndexByteSliceWriter *new_OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexByteSliceWriter, initWithOrgApacheLuceneUtilByteBlockPool_, pool)
+OrgApacheLuceneIndexByteSliceWriter *new_OrgApacheLuceneIndexByteSliceWriter_initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexByteSliceWriter, initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool_, pool)
 }
 
-OrgApacheLuceneIndexByteSliceWriter *create_OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexByteSliceWriter, initWithOrgApacheLuceneUtilByteBlockPool_, pool)
+OrgApacheLuceneIndexByteSliceWriter *create_OrgApacheLuceneIndexByteSliceWriter_initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexByteSliceWriter, initPackagePrivateWithOrgApacheLuceneUtilByteBlockPool_, pool)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexByteSliceWriter)

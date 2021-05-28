@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/index/NumericDocValuesFieldUpdates.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
@@ -17,6 +16,10 @@
 #include "org/apache/lucene/util/packed/PackedInts.h"
 #include "org/apache/lucene/util/packed/PagedGrowableWriter.h"
 #include "org/apache/lucene/util/packed/PagedMutable.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/NumericDocValuesFieldUpdates must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexNumericDocValuesFieldUpdates () {
  @public
@@ -47,11 +50,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator, v
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator, docs_, OrgApacheLuceneUtilPackedPagedMutable *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator, value_, JavaLangLong *)
 
-@interface OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 : OrgApacheLuceneUtilInPlaceMergeSorter {
+@interface OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1 : OrgApacheLuceneUtilInPlaceMergeSorter {
  @public
   OrgApacheLuceneUtilPackedPagedMutable *val$docs_;
   OrgApacheLuceneUtilPackedPagedGrowableWriter *val$values_;
 }
+
+- (instancetype)initWithOrgApacheLuceneUtilPackedPagedMutable:(OrgApacheLuceneUtilPackedPagedMutable *)capture$0
+             withOrgApacheLuceneUtilPackedPagedGrowableWriter:(OrgApacheLuceneUtilPackedPagedGrowableWriter *)capture$1;
 
 - (void)swapWithInt:(jint)i
             withInt:(jint)j;
@@ -59,29 +65,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator, v
 - (jint)compareWithInt:(jint)i
                withInt:(jint)j;
 
-- (instancetype)initWithOrgApacheLuceneUtilPackedPagedMutable:(OrgApacheLuceneUtilPackedPagedMutable *)capture$0
-             withOrgApacheLuceneUtilPackedPagedGrowableWriter:(OrgApacheLuceneUtilPackedPagedGrowableWriter *)capture$1;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1, val$docs_, OrgApacheLuceneUtilPackedPagedMutable *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1, val$values_, OrgApacheLuceneUtilPackedPagedGrowableWriter *)
+__attribute__((unused)) static void OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1 *self, OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *self, OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1);
+__attribute__((unused)) static OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1 *new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1)
+__attribute__((unused)) static OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1 *create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1);
 
 @implementation OrgApacheLuceneIndexNumericDocValuesFieldUpdates
 
-- (instancetype)initWithNSString:(NSString *)field
-                         withInt:(jint)maxDoc {
-  OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(self, field, maxDoc);
+- (instancetype)initPackagePrivateWithNSString:(NSString *)field
+                                       withInt:(jint)maxDoc {
+  OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initPackagePrivateWithNSString_withInt_(self, field, maxDoc);
   return self;
 }
 
@@ -103,12 +101,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1)
 - (OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator *)iterator {
   OrgApacheLuceneUtilPackedPagedMutable *docs = self->docs_;
   OrgApacheLuceneUtilPackedPagedGrowableWriter *values = self->values_;
-  [create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(docs, values) sortWithInt:0 withInt:size_];
+  [create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(docs, values) sortWithInt:0 withInt:size_];
   return create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator_initWithInt_withOrgApacheLuceneUtilPackedPagedGrowableWriter_withOrgApacheLuceneUtilPackedPagedMutable_(size_, values, docs);
 }
 
 - (void)mergeWithOrgApacheLuceneIndexDocValuesFieldUpdates:(OrgApacheLuceneIndexDocValuesFieldUpdates *)other {
-  JreAssert(([other isKindOfClass:[OrgApacheLuceneIndexNumericDocValuesFieldUpdates class]]), (@"org/apache/lucene/index/NumericDocValuesFieldUpdates.java:145 condition failed: assert other instanceof NumericDocValuesFieldUpdates;"));
+  JreAssert([other isKindOfClass:[OrgApacheLuceneIndexNumericDocValuesFieldUpdates class]], @"org/apache/lucene/index/NumericDocValuesFieldUpdates.java:145 condition failed: assert other instanceof NumericDocValuesFieldUpdates;");
   OrgApacheLuceneIndexNumericDocValuesFieldUpdates *otherUpdates = (OrgApacheLuceneIndexNumericDocValuesFieldUpdates *) cast_chk(other, [OrgApacheLuceneIndexNumericDocValuesFieldUpdates class]);
   if (size_ + ((OrgApacheLuceneIndexNumericDocValuesFieldUpdates *) nil_chk(otherUpdates))->size_ > JavaLangInteger_MAX_VALUE) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"cannot support more than Integer.MAX_VALUE doc/value entries; size=", size_, @" other.size=", otherUpdates->size_));
@@ -141,41 +139,51 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withInt:", "NumericDocValuesFieldUpdates", NULL, 0x1, NULL, NULL },
-    { "addWithInt:withId:", "add", "V", 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.index.NumericDocValuesFieldUpdates$Iterator;", 0x1, NULL, NULL },
-    { "mergeWithOrgApacheLuceneIndexDocValuesFieldUpdates:", "merge", "V", 0x1, NULL, NULL },
-    { "any", NULL, "Z", 0x1, NULL, NULL },
-    { "ramBytesPerDoc", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithNSString:withInt:);
+  methods[1].selector = @selector(addWithInt:withId:);
+  methods[2].selector = @selector(iterator);
+  methods[3].selector = @selector(mergeWithOrgApacheLuceneIndexDocValuesFieldUpdates:);
+  methods[4].selector = @selector(any);
+  methods[5].selector = @selector(ramBytesPerDoc);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "bitsPerValue_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docs_", NULL, 0x2, "Lorg.apache.lucene.util.packed.PagedMutable;", NULL, NULL, .constantValue.asLong = 0 },
-    { "values_", NULL, 0x2, "Lorg.apache.lucene.util.packed.PagedGrowableWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "size_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "bitsPerValue_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "docs_", "LOrgApacheLuceneUtilPackedPagedMutable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "values_", "LOrgApacheLuceneUtilPackedPagedGrowableWriter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "size_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.NumericDocValuesFieldUpdates$Iterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexNumericDocValuesFieldUpdates = { 2, "NumericDocValuesFieldUpdates", "org.apache.lucene.index", NULL, 0x0, 6, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;I", "add", "ILNSObject;", "merge", "LOrgApacheLuceneIndexDocValuesFieldUpdates;", "LOrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexNumericDocValuesFieldUpdates = { "NumericDocValuesFieldUpdates", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x0, 6, 4, -1, 5, -1, -1, -1 };
   return &_OrgApacheLuceneIndexNumericDocValuesFieldUpdates;
 }
 
 @end
 
-void OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(OrgApacheLuceneIndexNumericDocValuesFieldUpdates *self, NSString *field, jint maxDoc) {
-  OrgApacheLuceneIndexDocValuesFieldUpdates_initWithNSString_withOrgApacheLuceneIndexDocValuesType_(self, field, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC));
+void OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initPackagePrivateWithNSString_withInt_(OrgApacheLuceneIndexNumericDocValuesFieldUpdates *self, NSString *field, jint maxDoc) {
+  OrgApacheLuceneIndexDocValuesFieldUpdates_initPackagePrivateWithNSString_withOrgApacheLuceneIndexDocValuesType_(self, field, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC));
   self->bitsPerValue_ = OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(maxDoc - 1);
   JreStrongAssignAndConsume(&self->docs_, new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withFloat_(1, OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE, self->bitsPerValue_, OrgApacheLuceneUtilPackedPackedInts_COMPACT));
   JreStrongAssignAndConsume(&self->values_, new_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_(1, OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE, 1, OrgApacheLuceneUtilPackedPackedInts_FAST));
   self->size_ = 0;
 }
 
-OrgApacheLuceneIndexNumericDocValuesFieldUpdates *new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(NSString *field, jint maxDoc) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates, initWithNSString_withInt_, field, maxDoc)
+OrgApacheLuceneIndexNumericDocValuesFieldUpdates *new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initPackagePrivateWithNSString_withInt_(NSString *field, jint maxDoc) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates, initPackagePrivateWithNSString_withInt_, field, maxDoc)
 }
 
-OrgApacheLuceneIndexNumericDocValuesFieldUpdates *create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(NSString *field, jint maxDoc) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates, initWithNSString_withInt_, field, maxDoc)
+OrgApacheLuceneIndexNumericDocValuesFieldUpdates *create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initPackagePrivateWithNSString_withInt_(NSString *field, jint maxDoc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates, initPackagePrivateWithNSString_withInt_, field, maxDoc)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexNumericDocValuesFieldUpdates)
@@ -225,22 +233,32 @@ withOrgApacheLuceneUtilPackedPagedMutable:(OrgApacheLuceneUtilPackedPagedMutable
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneUtilPackedPagedGrowableWriter:withOrgApacheLuceneUtilPackedPagedMutable:", "Iterator", NULL, 0x0, NULL, NULL },
-    { "value", NULL, "Ljava.lang.Long;", 0x0, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x0, NULL, NULL },
-    { "doc", NULL, "I", 0x0, NULL, NULL },
-    { "reset", NULL, "V", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangLong;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withOrgApacheLuceneUtilPackedPagedGrowableWriter:withOrgApacheLuceneUtilPackedPagedMutable:);
+  methods[1].selector = @selector(value);
+  methods[2].selector = @selector(nextDoc);
+  methods[3].selector = @selector(doc);
+  methods[4].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "size_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "values_", NULL, 0x12, "Lorg.apache.lucene.util.packed.PagedGrowableWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docs_", NULL, 0x12, "Lorg.apache.lucene.util.packed.PagedMutable;", NULL, NULL, .constantValue.asLong = 0 },
-    { "idx_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "value_", NULL, 0x2, "Ljava.lang.Long;", NULL, NULL, .constantValue.asLong = 0 },
+    { "size_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "values_", "LOrgApacheLuceneUtilPackedPagedGrowableWriter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "docs_", "LOrgApacheLuceneUtilPackedPagedMutable;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "idx_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "value_", "LJavaLangLong;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator = { 2, "Iterator", "org.apache.lucene.index", "NumericDocValuesFieldUpdates", 0x18, 5, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ILOrgApacheLuceneUtilPackedPagedGrowableWriter;LOrgApacheLuceneUtilPackedPagedMutable;", "LOrgApacheLuceneIndexNumericDocValuesFieldUpdates;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator = { "Iterator", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x18, 5, 6, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator;
 }
 
@@ -266,7 +284,13 @@ OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator *create_OrgApacheLucen
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator)
 
-@implementation OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1
+@implementation OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1
+
+- (instancetype)initWithOrgApacheLuceneUtilPackedPagedMutable:(OrgApacheLuceneUtilPackedPagedMutable *)capture$0
+             withOrgApacheLuceneUtilPackedPagedGrowableWriter:(OrgApacheLuceneUtilPackedPagedGrowableWriter *)capture$1 {
+  OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(self, capture$0, capture$1);
+  return self;
+}
 
 - (void)swapWithInt:(jint)i
             withInt:(jint)j {
@@ -285,12 +309,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexNumericDocValuesFieldUpdate
   return (x < y) ? -1 : ((x == y) ? 0 : 1);
 }
 
-- (instancetype)initWithOrgApacheLuceneUtilPackedPagedMutable:(OrgApacheLuceneUtilPackedPagedMutable *)capture$0
-             withOrgApacheLuceneUtilPackedPagedGrowableWriter:(OrgApacheLuceneUtilPackedPagedGrowableWriter *)capture$1 {
-  OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(self, capture$0, capture$1);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(val$docs_);
   RELEASE_(val$values_);
@@ -298,34 +316,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexNumericDocValuesFieldUpdate
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
-    { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilPackedPagedMutable:withOrgApacheLuceneUtilPackedPagedGrowableWriter:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 3, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilPackedPagedMutable:withOrgApacheLuceneUtilPackedPagedGrowableWriter:);
+  methods[1].selector = @selector(swapWithInt:withInt:);
+  methods[2].selector = @selector(compareWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$docs_", NULL, 0x1012, "Lorg.apache.lucene.util.packed.PagedMutable;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$values_", NULL, 0x1012, "Lorg.apache.lucene.util.packed.PagedGrowableWriter;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$docs_", "LOrgApacheLuceneUtilPackedPagedMutable;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$values_", "LOrgApacheLuceneUtilPackedPagedGrowableWriter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexNumericDocValuesFieldUpdates", "iterator" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 = { 2, "", "org.apache.lucene.index", "NumericDocValuesFieldUpdates", 0x8008, 3, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilPackedPagedMutable;LOrgApacheLuceneUtilPackedPagedGrowableWriter;", "swap", "II", "compare", "LOrgApacheLuceneIndexNumericDocValuesFieldUpdates;", "iterator" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8010, 3, 2, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *self, OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) {
+void OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1 *self, OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) {
   JreStrongAssign(&self->val$docs_, capture$0);
   JreStrongAssign(&self->val$values_, capture$1);
   OrgApacheLuceneUtilInPlaceMergeSorter_init(self);
 }
 
-OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1, initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_, capture$0, capture$1)
+OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1 *new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1, initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_, capture$0, capture$1)
 }
 
-OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1, initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_, capture$0, capture$1)
+OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1 *create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_1, initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_, capture$0, capture$1)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1)

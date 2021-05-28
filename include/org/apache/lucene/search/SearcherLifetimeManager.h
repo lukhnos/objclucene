@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneSearchSearcherLifetimeManager_Pruner 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSearcherLifetimeManager_) && (INCLUDE_ALL_OrgApacheLuceneSearchSearcherLifetimeManager || defined(INCLUDE_OrgApacheLuceneSearchSearcherLifetimeManager))
 #define OrgApacheLuceneSearchSearcherLifetimeManager_
 
@@ -28,130 +34,129 @@
 
 /*!
  @brief Keeps track of current plus old IndexSearchers, closing
- the old ones once they have timed out.
- Use it like this:
+  the old ones once they have timed out.
+ Use it like this: 
  <pre class="prettyprint">
- SearcherLifetimeManager mgr = new SearcherLifetimeManager();
+    SearcherLifetimeManager mgr = new SearcherLifetimeManager(); 
  
 @endcode
- Per search-request, if it's a "new" search request, then
- obtain the latest searcher you have (for example, by
- using <code>SearcherManager</code>), and then record this
- searcher:
+  Per search-request, if it's a "new" search request, then
+  obtain the latest searcher you have (for example, by
+  using <code>SearcherManager</code>), and then record this
+  searcher: 
  <pre class="prettyprint">
- // Record the current searcher, and save the returend
- // token into user's search results (eg as a  hidden
- // HTML form field):
- long token = mgr.record(searcher);
+    // Record the current searcher, and save the returend
+    // token into user's search results (eg as a  hidden
+    // HTML form field):
+    long token = mgr.record(searcher); 
  
 @endcode
- When a follow-up search arrives, for example the user
- clicks next page, drills down/up, etc., take the token
- that you saved from the previous search and:
+  When a follow-up search arrives, for example the user
+  clicks next page, drills down/up, etc., take the token
+  that you saved from the previous search and: 
  <pre class="prettyprint">
- // If possible, obtain the same searcher as the last
- // search:
- IndexSearcher searcher = mgr.acquire(token);
- if (searcher != null) {
- // Searcher is still here
- try {
- // do searching...
- } finally {
- mgr.release(searcher);
- // Do not use searcher after this!
- searcher = null;
- }
- } else {
- // Searcher was pruned -- notify user session timed
- // out, or, pull fresh searcher again
- }
+    // If possible, obtain the same searcher as the last
+    // search:
+    IndexSearcher searcher = mgr.acquire(token);
+    if (searcher != null) {
+      // Searcher is still here
+      try {
+        // do searching...
+      } finally {
+        mgr.release(searcher);
+        // Do not use searcher after this!
+        searcher = null;
+      }
+    } else {
+      // Searcher was pruned -- notify user session timed
+      // out, or, pull fresh searcher again
+    } 
  
 @endcode
- Finally, in a separate thread, ideally the same thread
- that's periodically reopening your searchers, you should
- periodically prune old searchers:
+  Finally, in a separate thread, ideally the same thread
+  that's periodically reopening your searchers, you should
+  periodically prune old searchers: 
  <pre class="prettyprint">
- mgr.prune(new PruneByAge(600.0));
+    mgr.prune(new PruneByAge(600.0)); 
  
 @endcode
+  
  <p><b>NOTE</b>: keeping many searchers around means
- you'll use more resources (open files, RAM) than a single
- searcher.  However, as long as you are using <code>DirectoryReader.openIfChanged(DirectoryReader)</code>
+  you'll use more resources (open files, RAM) than a single
+  searcher.  However, as long as you are using <code>DirectoryReader.openIfChanged(DirectoryReader)</code>
  , the searchers
- will usually share almost all segments and the added resource usage
- is contained.  When a large merge has completed, and
- you reopen, because that is a large change, the new
- searcher will use higher additional RAM than other
- searchers; but large merges don't complete very often and
- it's unlikely you'll hit two of them in your expiration
- window.  Still you should budget plenty of heap in the
- JVM to have a good safety margin.
+  will usually share almost all segments and the added resource usage
+  is contained.  When a large merge has completed, and
+  you reopen, because that is a large change, the new
+  searcher will use higher additional RAM than other
+  searchers; but large merges don't complete very often and
+  it's unlikely you'll hit two of them in your expiration
+  window.  Still you should budget plenty of heap in the
+  JVM to have a good safety margin.
  */
 @interface OrgApacheLuceneSearchSearcherLifetimeManager : NSObject < JavaIoCloseable >
-
-+ (jdouble)NANOS_PER_SEC;
+@property (readonly, class) jdouble NANOS_PER_SEC NS_SWIFT_NAME(NANOS_PER_SEC);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Retrieve a previously recorded <code>IndexSearcher</code>, if it
- has not yet been closed
+   has not yet been closed
  <p><b>NOTE</b>: this may return null when the
- requested searcher has already timed out.
+   requested searcher has already timed out.
  When this
- happens you should notify your user that their session
- timed out and that they'll have to restart their
- search.
+   happens you should notify your user that their session
+   timed out and that they'll have to restart their
+   search.  
  <p>If this returns a non-null result, you must match
- later call <code>release</code> on this searcher, best
- from a finally clause. 
+   later call <code>release</code> on this searcher, best
+   from a finally clause.
  */
 - (OrgApacheLuceneSearchIndexSearcher *)acquireWithLong:(jlong)version_;
 
 /*!
  @brief Close this to future searching; any searches still in
- process in other threads won't be affected, and they
- should still call <code>release</code> after they are
- done.
+   process in other threads won't be affected, and they
+   should still call <code>release</code> after they are
+   done.
  <p><b>NOTE</b>: you must ensure no other threads are
- calling <code>record</code> while you call close();
- otherwise it's possible not all searcher references
- will be freed. 
+   calling <code>record</code> while you call close();
+   otherwise it's possible not all searcher references
+   will be freed.
  */
 - (void)close;
 
 /*!
- @brief Calls provided <code>Pruner</code> to prune entries.
- The
- entries are passed to the Pruner in sorted (newest to
- oldest IndexSearcher) order.
+ @brief Calls provided <code>Pruner</code> to prune entries.The
+   entries are passed to the Pruner in sorted (newest to
+   oldest IndexSearcher) order.
  <p><b>NOTE</b>: you must peridiocally call this, ideally
- from the same background thread that opens new
- searchers. 
+   from the same background thread that opens new
+   searchers.
  */
 - (void)pruneWithOrgApacheLuceneSearchSearcherLifetimeManager_Pruner:(id<OrgApacheLuceneSearchSearcherLifetimeManager_Pruner>)pruner;
 
 /*!
  @brief Records that you are now using this IndexSearcher.
  Always call this when you've obtained a possibly new
- <code>IndexSearcher</code>, for example from <code>SearcherManager</code>
+   <code>IndexSearcher</code>, for example from <code>SearcherManager</code>
  .  It's fine if you already passed the
- same searcher to this method before.
+   same searcher to this method before.  
  <p>This returns the long token that you can later pass
- to <code>acquire</code> to retrieve the same IndexSearcher.
- You should record this long token in the search results
- sent to your user, such that if the user performs a
- follow-on action (clicks next page, drills down, etc.)
- the token is returned. 
+   to <code>acquire</code> to retrieve the same IndexSearcher.
+   You should record this long token in the search results
+   sent to your user, such that if the user performs a
+   follow-on action (clicks next page, drills down, etc.)
+   the token is returned.
  */
 - (jlong)recordWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
 
 /*!
  @brief Release a searcher previously obtained from <code>acquire</code>
  .
- <p><b>NOTE</b>: it's fine to call this after close. 
+ <p><b>NOTE</b>: it's fine to call this after close.
  */
 - (void)release__WithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)s;
 
@@ -159,15 +164,15 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSearcherLifetimeManager)
 
-inline jdouble OrgApacheLuceneSearchSearcherLifetimeManager_get_NANOS_PER_SEC();
+inline jdouble OrgApacheLuceneSearchSearcherLifetimeManager_get_NANOS_PER_SEC(void);
 #define OrgApacheLuceneSearchSearcherLifetimeManager_NANOS_PER_SEC 1.0E9
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSearcherLifetimeManager, NANOS_PER_SEC, jdouble)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSearcherLifetimeManager_init(OrgApacheLuceneSearchSearcherLifetimeManager *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSearcherLifetimeManager *new_OrgApacheLuceneSearchSearcherLifetimeManager_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSearcherLifetimeManager *new_OrgApacheLuceneSearchSearcherLifetimeManager_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSearcherLifetimeManager *create_OrgApacheLuceneSearchSearcherLifetimeManager_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSearcherLifetimeManager *create_OrgApacheLuceneSearchSearcherLifetimeManager_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager)
 
@@ -181,12 +186,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager)
 /*!
  @brief See <code>prune</code>.
  */
-@protocol OrgApacheLuceneSearchSearcherLifetimeManager_Pruner < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchSearcherLifetimeManager_Pruner < JavaObject >
 
 /*!
  @brief Return true if this searcher should be removed.
- @param ageSec how much time has passed since this
- searcher was the current (live) searcher
+ @param ageSec how much time has passed since this          searcher was the current (live) searcher
  @param searcher Searcher
  */
 - (jboolean)doPruneWithDouble:(jdouble)ageSec
@@ -207,17 +211,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_Pruner)
 
 /*!
  @brief Simple pruner that drops any searcher older by
- more than the specified seconds, than the newest
- searcher.
+   more than the specified seconds, than the newest
+   searcher.
  */
 @interface OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge : NSObject < OrgApacheLuceneSearchSearcherLifetimeManager_Pruner >
 
 #pragma mark Public
 
-- (instancetype)initWithDouble:(jdouble)maxAgeSec;
+- (instancetype __nonnull)initWithDouble:(jdouble)maxAgeSec;
 
 - (jboolean)doPruneWithDouble:(jdouble)ageSec
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -233,4 +241,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_PruneByA
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSearcherLifetimeManager")

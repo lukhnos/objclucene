@@ -3,16 +3,20 @@
 //  source: ./core/src/java/org/apache/lucene/store/VerifyingLockFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/io/InputStream.h"
 #include "java/io/OutputStream.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Throwable.h"
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/Lock.h"
 #include "org/apache/lucene/store/LockFactory.h"
 #include "org/apache/lucene/store/VerifyingLockFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/VerifyingLockFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock : OrgApacheLuceneStoreLock {
  @public
@@ -33,7 +37,6 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock, this$0_, OrgApacheLuceneStoreVerifyingLockFactory *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock, lock_, OrgApacheLuceneStoreLock *)
 
 __attribute__((unused)) static void OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_initWithOrgApacheLuceneStoreVerifyingLockFactory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock *self, OrgApacheLuceneStoreVerifyingLockFactory *outer$, OrgApacheLuceneStoreLock *lock);
@@ -68,17 +71,23 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreLockFactory:withJavaIoInputStream:withJavaIoOutputStream:", "VerifyingLockFactory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreLock;", 0x1, 2, 3, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreLockFactory:withJavaIoInputStream:withJavaIoOutputStream:);
+  methods[1].selector = @selector(obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "lf_", NULL, 0x10, "Lorg.apache.lucene.store.LockFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "in_", NULL, 0x10, "Ljava.io.InputStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "out_", NULL, 0x10, "Ljava.io.OutputStream;", NULL, NULL, .constantValue.asLong = 0 },
+    { "lf_", "LOrgApacheLuceneStoreLockFactory;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "in_", "LJavaIoInputStream;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "out_", "LJavaIoOutputStream;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.store.VerifyingLockFactory$CheckedLock;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreVerifyingLockFactory = { 2, "VerifyingLockFactory", "org.apache.lucene.store", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreLockFactory;LJavaIoInputStream;LJavaIoOutputStream;", "LJavaIoIOException;", "obtainLock", "LOrgApacheLuceneStoreDirectory;LNSString;", "LOrgApacheLuceneStoreVerifyingLockFactory_CheckedLock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreVerifyingLockFactory = { "VerifyingLockFactory", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x11, 2, 3, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneStoreVerifyingLockFactory;
 }
 
@@ -114,28 +123,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreVerifyingLockFactory)
 }
 
 - (void)close {
-  {
-    OrgApacheLuceneStoreLock *l = lock_;
-    NSException *__primaryException1 = nil;
-    @try {
-      [((OrgApacheLuceneStoreLock *) nil_chk(l)) ensureValid];
-      OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_verifyWithByte_(self, (jbyte) 0);
-    }
-    @catch (NSException *e) {
-      __primaryException1 = e;
-      @throw e;
-    }
-    @finally {
-      if (l != nil) {
-        if (__primaryException1 != nil) {
-          @try {
-            [l close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
-          }
-        } else {
+  OrgApacheLuceneStoreLock *l = lock_;
+  JavaLangThrowable *__primaryException1 = nil;
+  @try {
+    [((OrgApacheLuceneStoreLock *) nil_chk(l)) ensureValid];
+    OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_verifyWithByte_(self, (jbyte) 0);
+  }
+  @catch (JavaLangThrowable *e) {
+    __primaryException1 = e;
+    @throw e;
+  }
+  @finally {
+    if (l != nil) {
+      if (__primaryException1 != nil) {
+        @try {
           [l close];
         }
+        @catch (JavaLangThrowable *e) {
+          [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+        }
+      }
+      else {
+        [l close];
       }
     }
   }
@@ -152,17 +161,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreVerifyingLockFactory)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreVerifyingLockFactory:withOrgApacheLuceneStoreLock:", "CheckedLock", NULL, 0x1, NULL, NULL },
-    { "ensureValid", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "verifyWithByte:", "verify", "V", 0x2, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 2, 3, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreVerifyingLockFactory:withOrgApacheLuceneStoreLock:);
+  methods[1].selector = @selector(ensureValid);
+  methods[2].selector = @selector(close);
+  methods[3].selector = @selector(verifyWithByte:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.store.VerifyingLockFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "lock_", NULL, 0x12, "Lorg.apache.lucene.store.Lock;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneStoreVerifyingLockFactory;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "lock_", "LOrgApacheLuceneStoreLock;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock = { 2, "CheckedLock", "org.apache.lucene.store", "VerifyingLockFactory", 0x2, 4, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreVerifyingLockFactory;LOrgApacheLuceneStoreLock;", "LJavaIoIOException;", "verify", "B", "LOrgApacheLuceneStoreVerifyingLockFactory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock = { "CheckedLock", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x2, 4, 2, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock;
 }
 

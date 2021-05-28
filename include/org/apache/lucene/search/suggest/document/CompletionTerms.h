@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionTerms
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionTerms_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionTerms || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionTerms))
 #define OrgApacheLuceneSearchSuggestDocumentCompletionTerms_
 
@@ -26,8 +32,8 @@
 
 /*!
  @brief Wrapped <code>org.apache.lucene.index.Terms</code>
- used by <code>SuggestField</code> and <code>ContextSuggestField</code>
- to access corresponding suggester and their attributes
+  used by <code>SuggestField</code> and <code>ContextSuggestField</code>
+  to access corresponding suggester and their attributes
  */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionTerms : OrgApacheLuceneIndexFilterLeafReader_FilterTerms
 
@@ -44,15 +50,15 @@
 - (jlong)getMinWeight;
 
 /*!
- @brief Returns the type of FST, either <code>SuggestField.TYPE</code> or
+ @brief Returns the type of FST, either <code>SuggestField.TYPE</code> or 
  <code>ContextSuggestField.TYPE</code>
  */
 - (jbyte)getType;
 
 /*!
  @brief Returns a <code>NRTSuggester</code> for the field
- or <code>null</code> if no FST
- was indexed for this field
+  or <code>null</code> if no FST
+  was indexed for this field
  */
 - (OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester;
 
@@ -61,8 +67,12 @@
 /*!
  @brief Creates a completionTerms based on <code>CompletionsTermsReader</code>
  */
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg
 withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader:(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *)reader;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -78,4 +88,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionTerms)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionTerms")

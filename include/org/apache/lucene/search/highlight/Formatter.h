@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchHighlightFormatter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchHighlightFormatter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightFormatter || defined(INCLUDE_OrgApacheLuceneSearchHighlightFormatter))
 #define OrgApacheLuceneSearchHighlightFormatter_
 
@@ -20,14 +26,13 @@
 
 /*!
  @brief Processes terms found in the original text, typically by applying some form 
- of mark-up to highlight terms in HTML search results pages.
+  of mark-up to highlight terms in HTML search results pages.
  */
-@protocol OrgApacheLuceneSearchHighlightFormatter < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchHighlightFormatter < JavaObject >
 
 /*!
  @param originalText The section of text being considered for markup
- @param tokenGroup contains one or several overlapping Tokens along with
- their scores and positions.
+ @param tokenGroup contains one or several overlapping Tokens along with  their scores and positions.
  */
 - (NSString *)highlightTermWithNSString:(NSString *)originalText
 withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightTokenGroup *)tokenGroup;
@@ -40,4 +45,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightFormatter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightFormatter")

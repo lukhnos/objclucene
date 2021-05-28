@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBM25Similarity
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesBM25Similarity_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBM25Similarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBM25Similarity))
 #define OrgApacheLuceneSearchSimilaritiesBM25Similarity_
 
@@ -31,17 +37,17 @@
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
- @brief BM25 Similarity.
- Introduced in Stephen E. Robertson, Steve Walker,
- Susan Jones, Micheline Hancock-Beaulieu, and Mike Gatford. Okapi at TREC-3.
- In Proceedings of the Third <b>T</b>ext <b>RE</b>trieval <b>C</b>onference (TREC 1994).
- Gaithersburg, USA, November 1994.
+ @brief BM25 Similarity.Introduced in Stephen E.
+ Robertson, Steve Walker,
+  Susan Jones, Micheline Hancock-Beaulieu, and Mike Gatford. Okapi at TREC-3.
+  In Proceedings of the Third <b>T</b>ext <b>RE</b>trieval <b>C</b>onference (TREC 1994).
+  Gaithersburg, USA, November 1994.
  */
 @interface OrgApacheLuceneSearchSimilaritiesBM25Similarity : OrgApacheLuceneSearchSimilaritiesSimilarity {
  @public
   /*!
    @brief True if overlap tokens (tokens with a position of increment of zero) are
- discounted from the document's length.
+  discounted from the document's length.
    */
   jboolean discountOverlaps_;
 }
@@ -49,22 +55,22 @@
 #pragma mark Public
 
 /*!
- @brief BM25 with these default values:
+ @brief BM25 with these default values: 
  <ul>
- <li><code>k1 = 1.2</code>,
- <li><code>b = 0.75</code>.
+    <li><code>k1 = 1.2</code>,
+    <li><code>b = 0.75</code>.
  </li>
- </ul>
+  </ul>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief BM25 with the supplied parameter values.
  @param k1 Controls non-linear term frequency normalization (saturation).
  @param b Controls to what degree document length normalizes tf values.
  */
-- (instancetype)initWithFloat:(jfloat)k1
-                    withFloat:(jfloat)b;
+- (instancetype __nonnull)initWithFloat:(jfloat)k1
+                              withFloat:(jfloat)b;
 
 - (jlong)computeNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
 
@@ -74,7 +80,7 @@
 
 /*!
  @brief Returns the <code>b</code> parameter
- - seealso: #BM25Similarity(float,float)
+ - seealso: #BM25Similarity(float, float)
  */
 - (jfloat)getB;
 
@@ -86,28 +92,29 @@
 
 /*!
  @brief Returns the <code>k1</code> parameter
- - seealso: #BM25Similarity(float,float)
+ - seealso: #BM25Similarity(float, float)
  */
 - (jfloat)getK1;
 
 /*!
  @brief Computes a score factor for a simple term and returns an explanation
- for that score factor.
+  for that score factor.
  <p>
- The default implementation uses:
+  The default implementation uses:  
  <pre class="prettyprint">
- idf(docFreq, searcher.maxDoc());
+  idf(docFreq, searcher.maxDoc()); 
  
 @endcode
- Note that <code>CollectionStatistics.maxDoc()</code> is used instead of
- <code>IndexReader#numDocs()</code> because also 
+  
+  Note that <code>CollectionStatistics.maxDoc()</code> is used instead of 
+ <code>IndexReader.numDocs()</code> because also  
  <code>TermStatistics.docFreq()</code> is used, and when the latter 
- is inaccurate, so is <code>CollectionStatistics.maxDoc()</code>, and in the same direction.
- In addition, <code>CollectionStatistics.maxDoc()</code> is more efficient to compute
+  is inaccurate, so is <code>CollectionStatistics.maxDoc()</code>, and in the same direction.
+  In addition, <code>CollectionStatistics.maxDoc()</code> is more efficient to compute
  @param collectionStats collection-level statistics
  @param termStats term-level statistics for the term
  @return an Explain object that includes both an idf score factor 
- and an explanation for the term.
+              and an explanation for the term.
  */
 - (OrgApacheLuceneSearchExplanation *)idfExplainWithOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
                                                       withOrgApacheLuceneSearchTermStatistics:(OrgApacheLuceneSearchTermStatistics *)termStats;
@@ -115,22 +122,21 @@
 /*!
  @brief Computes a score factor for a phrase.
  <p>
- The default implementation sums the idf factor for
- each term in the phrase.
+  The default implementation sums the idf factor for
+  each term in the phrase.
  @param collectionStats collection-level statistics
  @param termStats term-level statistics for the terms in the phrase
  @return an Explain object that includes both an idf 
- score factor for the phrase and an explanation 
- for each term.
+          score factor for the phrase and an explanation 
+          for each term.
  */
 - (OrgApacheLuceneSearchExplanation *)idfExplainWithOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
                                                  withOrgApacheLuceneSearchTermStatisticsArray:(IOSObjectArray *)termStats;
 
 /*!
  @brief Sets whether overlap tokens (Tokens with 0 position increment) are 
- ignored when computing norm.
- By default this is true, meaning overlap
- tokens do not count when computing norms. 
+   ignored when computing norm.By default this is true, meaning overlap
+   tokens do not count when computing norms.
  */
 - (void)setDiscountOverlapsWithBoolean:(jboolean)v;
 
@@ -143,23 +149,23 @@
 
 /*!
  @brief The default implementation computes the average as <code>sumTotalTermFreq / maxDoc</code>,
- or returns <code>1</code> if the index does not store sumTotalTermFreq:
- any field that omits frequency information).
+  or returns <code>1</code> if the index does not store sumTotalTermFreq:
+  any field that omits frequency information).
  */
 - (jfloat)avgFieldLengthWithOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats;
 
 /*!
  @brief The default implementation returns <code>1 / f<sup>2</sup></code>
- where <code>f</code> is <code>SmallFloat.byte315ToFloat(byte)</code>.
+  where <code>f</code> is <code>SmallFloat.byte315ToFloat(byte)</code>.
  */
 - (jfloat)decodeNormValueWithByte:(jbyte)b;
 
 /*!
  @brief The default implementation encodes <code>boost / sqrt(length)</code>
- with <code>SmallFloat.floatToByte315(float)</code>.
- This is compatible with 
- Lucene's default implementation.  If you change this, then you should 
- change <code>decodeNormValue(byte)</code> to match. 
+  with <code>SmallFloat.floatToByte315(float)</code>.This is compatible with 
+  Lucene's default implementation.
+ If you change this, then you should  change 
+ <code>decodeNormValue(byte)</code> to match.
  */
 - (jbyte)encodeNormValueWithFloat:(jfloat)boost
                           withInt:(jint)fieldLength;
@@ -195,12 +201,16 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBM25Similarity *create_OrgApa
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBM25Similarity_init(OrgApacheLuceneSearchSimilaritiesBM25Similarity *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBM25Similarity *new_OrgApacheLuceneSearchSimilaritiesBM25Similarity_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBM25Similarity *new_OrgApacheLuceneSearchSimilaritiesBM25Similarity_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBM25Similarity *create_OrgApacheLuceneSearchSimilaritiesBM25Similarity_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBM25Similarity *create_OrgApacheLuceneSearchSimilaritiesBM25Similarity_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBM25Similarity)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBM25Similarity")

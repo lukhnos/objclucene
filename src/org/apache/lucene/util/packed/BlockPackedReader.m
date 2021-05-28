@@ -20,9 +20,14 @@
 #include "org/apache/lucene/util/packed/BlockPackedReaderIterator.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/BlockPackedReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilPackedBlockPackedReader () {
  @public
-  jint blockShift_, blockMask_;
+  jint blockShift_;
+  jint blockMask_;
   jlong valueCount_;
   IOSLongArray *minValues_;
   IOSObjectArray *subReaders_;
@@ -46,7 +51,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedBlockPackedReader, subReaders_, IOS
 }
 
 - (jlong)getWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < valueCount_), (@"org/apache/lucene/util/packed/BlockPackedReader.java:90 condition failed: assert index >= 0 && index < valueCount;"));
+  JreAssert(index >= 0 && index < valueCount_, @"org/apache/lucene/util/packed/BlockPackedReader.java:90 condition failed: assert index >= 0 && index < valueCount;");
   jint block = (jint) (JreURShift64(index, blockShift_));
   jint idx = (jint) (index & blockMask_);
   return (minValues_ == nil ? 0 : IOSLongArray_Get(minValues_, block)) + [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(IOSObjectArray_Get(nil_chk(subReaders_), block))) getWithInt:idx];
@@ -71,8 +76,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedBlockPackedReader, subReaders_, IOS
 }
 
 - (NSString *)description {
-  jlong avgBPV = ((IOSObjectArray *) nil_chk(subReaders_))->size_ == 0 ? 0 : sumBPV_ / subReaders_->size_;
-  return JreStrcat("$$I$J$JC", [[self getClass] getSimpleName], @"(blocksize=", (JreLShift32(1, blockShift_)), @",size=", valueCount_, @",avgBPV=", avgBPV, ')');
+  jlong avgBPV = ((IOSObjectArray *) nil_chk(subReaders_))->size_ == 0 ? 0 : JreLongDiv(sumBPV_, subReaders_->size_);
+  return JreStrcat("$$I$J$JC", [[self java_getClass] getSimpleName], @"(blocksize=", (JreLShift32(1, blockShift_)), @",size=", valueCount_, @",avgBPV=", avgBPV, ')');
 }
 
 - (void)dealloc {
@@ -82,22 +87,32 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedBlockPackedReader, subReaders_, IOS
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:withLong:withBoolean:", "BlockPackedReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:withLong:withBoolean:);
+  methods[1].selector = @selector(getWithLong:);
+  methods[2].selector = @selector(ramBytesUsed);
+  methods[3].selector = @selector(getChildResources);
+  methods[4].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "blockShift_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockMask_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "valueCount_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "minValues_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "subReaders_", NULL, 0x12, "[Lorg.apache.lucene.util.packed.PackedInts$Reader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sumBPV_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "blockShift_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "blockMask_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "valueCount_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minValues_", "[J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "subReaders_", "[LOrgApacheLuceneUtilPackedPackedInts_Reader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "sumBPV_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBlockPackedReader = { 2, "BlockPackedReader", "org.apache.lucene.util.packed", NULL, 0x11, 5, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;IIJZ", "LJavaIoIOException;", "get", "J", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBlockPackedReader = { "BlockPackedReader", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x11, 5, 6, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedBlockPackedReader;
 }
 

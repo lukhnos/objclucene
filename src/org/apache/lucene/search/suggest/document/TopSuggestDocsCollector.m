@@ -3,10 +3,8 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/TopSuggestDocsCollector.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
@@ -15,6 +13,10 @@
 #include "org/apache/lucene/search/suggest/document/SuggestScoreDocPriorityQueue.h"
 #include "org/apache/lucene/search/suggest/document/TopSuggestDocs.h"
 #include "org/apache/lucene/search/suggest/document/TopSuggestDocsCollector.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/TopSuggestDocsCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector () {
  @public
@@ -46,7 +48,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)key
 withJavaLangCharSequence:(id<JavaLangCharSequence>)context
              withFloat:(jfloat)score {
   OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *current = create_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_initWithInt_withJavaLangCharSequence_withJavaLangCharSequence_withFloat_(docBase_ + docID, key, context, score);
-  if (current == [((OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *) nil_chk(priorityQueue_)) insertWithOverflowWithId:current]) {
+  if (JreObjectEqualsEquals(current, [((OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *) nil_chk(priorityQueue_)) insertWithOverflowWithId:current])) {
     @throw create_OrgApacheLuceneSearchCollectionTerminatedException_init();
   }
 }
@@ -74,21 +76,33 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)context
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TopSuggestDocsCollector", NULL, 0x1, NULL, NULL },
-    { "getCountToCollect", NULL, "I", 0x1, NULL, NULL },
-    { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "collectWithInt:withJavaLangCharSequence:withJavaLangCharSequence:withFloat:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "get", NULL, "Lorg.apache.lucene.search.suggest.document.TopSuggestDocs;", 0x1, "Ljava.io.IOException;", NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "needsScores", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 0, 3, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(getCountToCollect);
+  methods[2].selector = @selector(doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(collectWithInt:withJavaLangCharSequence:withJavaLangCharSequence:withFloat:);
+  methods[4].selector = @selector(get);
+  methods[5].selector = @selector(collectWithInt:);
+  methods[6].selector = @selector(needsScores);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "priorityQueue_", NULL, 0x12, "Lorg.apache.lucene.search.suggest.document.SuggestScoreDocPriorityQueue;", NULL, NULL, .constantValue.asLong = 0 },
-    { "num_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "docBase_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "priorityQueue_", "LOrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "num_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "docBase_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector = { 2, "TopSuggestDocsCollector", "org.apache.lucene.search.suggest.document", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "doSetNextReader", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "collect", "ILJavaLangCharSequence;LJavaLangCharSequence;F" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector = { "TopSuggestDocsCollector", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x1, 7, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector;
 }
 
@@ -100,7 +114,7 @@ void OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_initWithInt_(Or
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"'num' must be > 0");
   }
   self->num_ = num;
-  JreStrongAssignAndConsume(&self->priorityQueue_, new_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(num));
+  JreStrongAssignAndConsume(&self->priorityQueue_, new_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initPackagePrivateWithInt_(num));
 }
 
 OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_initWithInt_(jint num) {

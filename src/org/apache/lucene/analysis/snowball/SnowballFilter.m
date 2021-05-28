@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Exception.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
@@ -14,8 +13,11 @@
 #include "org/apache/lucene/analysis/snowball/SnowballFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/KeywordAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 #include "org/tartarus/snowball/SnowballProgram.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/snowball/SnowballFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisSnowballSnowballFilter () {
  @public
@@ -48,12 +50,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSnowballSnowballFilter, keywordAttr_,
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword]) {
       IOSCharArray *termBuffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-      jint length = [termAtt_ length];
+      jint length = [termAtt_ java_length];
       [((OrgTartarusSnowballSnowballProgram *) nil_chk(stemmer_)) setCurrentWithCharArray:termBuffer withInt:length];
       [stemmer_ stem];
       IOSCharArray *finalTerm = [stemmer_ getCurrentBuffer];
       jint newLength = [stemmer_ getCurrentBufferLength];
-      if (finalTerm != termBuffer) [termAtt_ copyBufferWithCharArray:finalTerm withInt:0 withInt:newLength];
+      if (!JreObjectEqualsEquals(finalTerm, termBuffer)) [termAtt_ copyBufferWithCharArray:finalTerm withInt:0 withInt:newLength];
       else [termAtt_ setLengthWithInt:newLength];
     }
     return true;
@@ -71,17 +73,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSnowballSnowballFilter, keywordAttr_,
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgTartarusSnowballSnowballProgram:", "SnowballFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withNSString:", "SnowballFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgTartarusSnowballSnowballProgram:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withNSString:);
+  methods[2].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stemmer_", NULL, 0x12, "Lorg.tartarus.snowball.SnowballProgram;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "keywordAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.KeywordAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "stemmer_", "LOrgTartarusSnowballSnowballProgram;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "keywordAttr_", "LOrgApacheLuceneAnalysisTokenattributesKeywordAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSnowballSnowballFilter = { 2, "SnowballFilter", "org.apache.lucene.analysis.snowball", NULL, 0x11, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgTartarusSnowballSnowballProgram;", "LOrgApacheLuceneAnalysisTokenStream;LNSString;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSnowballSnowballFilter = { "SnowballFilter", "org.apache.lucene.analysis.snowball", ptrTable, methods, fields, 7, 0x11, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisSnowballSnowballFilter;
 }
 
@@ -111,7 +121,7 @@ void OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalys
     JreStrongAssign(&self->stemmer_, [((IOSClass *) nil_chk(stemClass)) newInstance]);
   }
   @catch (JavaLangException *e) {
-    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$", @"Invalid stemmer class specified: ", name), e);
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Invalid stemmer class specified: ", name), e);
   }
 }
 

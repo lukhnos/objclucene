@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFilterClause
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFilterClause_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFilterClause || defined(INCLUDE_OrgApacheLuceneQueriesFilterClause))
 #define OrgApacheLuceneQueriesFilterClause_
 
@@ -21,9 +27,9 @@
 
 /*!
  @brief A Filter that wrapped with an indication of how that filter
- is used when composed with another filter.
+  is used when composed with another filter.
  (Follows the boolean logic in BooleanClause for composition 
- of queries.)
+  of queries.)
  */
 @interface OrgApacheLuceneQueriesFilterClause : NSObject
 
@@ -34,8 +40,8 @@
  @param filter A Filter object containing a BitSet
  @param occur A parameter implementation indicating SHOULD, MUST or MUST NOT
  */
-- (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-       withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
+                 withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur;
 
 - (jboolean)isEqual:(id)o;
 
@@ -57,6 +63,10 @@
 
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFilterClause)
@@ -71,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFilterClause)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFilterClause")

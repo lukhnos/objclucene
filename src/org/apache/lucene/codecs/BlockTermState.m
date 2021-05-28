@@ -9,6 +9,10 @@
 #include "org/apache/lucene/index/OrdTermState.h"
 #include "org/apache/lucene/index/TermState.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/BlockTermState must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneCodecsBlockTermState
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -19,7 +23,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)_other {
-  JreAssert(([_other isKindOfClass:[OrgApacheLuceneCodecsBlockTermState class]]), (JreStrcat("$$", @"can not copy from ", [[((OrgApacheLuceneIndexTermState *) nil_chk(_other)) getClass] getName])));
+  JreAssert([_other isKindOfClass:[OrgApacheLuceneCodecsBlockTermState class]], JreStrcat("$$", @"can not copy from ", [[((OrgApacheLuceneIndexTermState *) nil_chk(_other)) java_getClass] getName]));
   OrgApacheLuceneCodecsBlockTermState *other = (OrgApacheLuceneCodecsBlockTermState *) cast_chk(_other, [OrgApacheLuceneCodecsBlockTermState class]);
   [super copyFromWithOrgApacheLuceneIndexTermState:_other];
   docFreq_ = other->docFreq_;
@@ -38,20 +42,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "BlockTermState", NULL, 0x4, NULL, NULL },
-    { "copyFromWithOrgApacheLuceneIndexTermState:", "copyFrom", "V", 0x1, NULL, NULL },
-    { "isRealTerm", NULL, "Z", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(copyFromWithOrgApacheLuceneIndexTermState:);
+  methods[2].selector = @selector(isRealTerm);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "docFreq_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalTermFreq_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "termBlockOrd_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockFilePointer_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "isRealTerm_", NULL, 0x1, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "docFreq_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "totalTermFreq_", "J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "termBlockOrd_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "blockFilePointer_", "J", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "isRealTerm_", "Z", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlockTermState = { 2, "BlockTermState", "org.apache.lucene.codecs", NULL, 0x1, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "copyFrom", "LOrgApacheLuceneIndexTermState;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlockTermState = { "BlockTermState", "org.apache.lucene.codecs", ptrTable, methods, fields, 7, 0x1, 4, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsBlockTermState;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester))
 #define OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester 1
 #include "org/apache/lucene/search/suggest/analyzing/AnalyzingInfixSuggester.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneDocumentFieldType;
 @class OrgApacheLuceneSearchBooleanQuery;
@@ -36,84 +41,76 @@
 
 /*!
  @brief Extension of the AnalyzingInfixSuggester which transforms the weight
- after search to take into account the position of the searched term into
- the indexed text.
+  after search to take into account the position of the searched term into
+  the indexed text.
  Please note that it increases the number of elements searched and applies the
- ponderation after. It might be costly for long suggestions.
+  ponderation after. It might be costly for long suggestions.
  */
 @interface OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester : OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester
-
-+ (jdouble)LINEAR_COEF;
-
-+ (void)setLINEAR_COEF:(jdouble)value;
-
-+ (jint)DEFAULT_NUM_FACTOR;
-
-+ (void)setDEFAULT_NUM_FACTOR:(jint)value;
+@property (class) jdouble LINEAR_COEF NS_SWIFT_NAME(LINEAR_COEF);
+@property (class) jint DEFAULT_NUM_FACTOR NS_SWIFT_NAME(DEFAULT_NUM_FACTOR);
 
 #pragma mark Public
 
 /*!
  @brief Create a new instance, loading from a previously built
- directory, if it exists.
+  directory, if it exists.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  @brief Create a new instance, loading from a previously built
- directory, if it exists.
+  directory, if it exists.
  @param blenderType Type of blending strategy, see BlenderType for more precisions
- @param numFactor   Factor to multiply the number of searched elements before ponderate
- @param commitOnBuild Call commit after the index has finished building. This would persist the
- suggester index to disk and future instances of this suggester can use this pre-built dictionary.
- @throws IOException If there are problems opening the underlying Lucene index.
+ @param numFactor Factor to multiply the number of searched elements before ponderate
+ @param commitOnBuild Call commit after the index has finished building. This would persist the                       suggester index to disk and future instances of this suggester can use this pre-built dictionary.
+ @throw IOExceptionIf there are problems opening the underlying Lucene index.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                              withInt:(jint)minPrefixChars
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                        withInt:(jint)minPrefixChars
 withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType:(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)blenderType
-                                              withInt:(jint)numFactor
-                                          withBoolean:(jboolean)commitOnBuild;
+                                                        withInt:(jint)numFactor
+                                                    withBoolean:(jboolean)commitOnBuild;
 
 /*!
  @brief Create a new instance, loading from a previously built
- directory, if it exists.
+  directory, if it exists.
  @param blenderType Type of blending strategy, see BlenderType for more precisions
- @param numFactor   Factor to multiply the number of searched elements before ponderate
- @param commitOnBuild Call commit after the index has finished building. This would persist the
- suggester index to disk and future instances of this suggester can use this pre-built dictionary.
+ @param numFactor Factor to multiply the number of searched elements before ponderate
+ @param commitOnBuild Call commit after the index has finished building. This would persist the                       suggester index to disk and future instances of this suggester can use this pre-built dictionary.
  @param allTermsRequired All terms in the suggest query must be matched.
  @param highlight Highlight suggest query in suggestions.
- @throws IOException If there are problems opening the underlying Lucene index.
+ @throw IOExceptionIf there are problems opening the underlying Lucene index.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                              withInt:(jint)minPrefixChars
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                        withInt:(jint)minPrefixChars
 withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType:(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)blenderType
-                                              withInt:(jint)numFactor
-                                          withBoolean:(jboolean)commitOnBuild
-                                          withBoolean:(jboolean)allTermsRequired
-                                          withBoolean:(jboolean)highlight;
+                                                        withInt:(jint)numFactor
+                                                    withBoolean:(jboolean)commitOnBuild
+                                                    withBoolean:(jboolean)allTermsRequired
+                                                    withBoolean:(jboolean)highlight;
 
 /*!
  */
-- (instancetype)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
-                 withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
+                           withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  */
-- (instancetype)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
-                 withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                           withInt:(jint)minPrefixChars
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
+                           withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
+                                                     withInt:(jint)minPrefixChars
 withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType:(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)blenderType
-                                           withInt:(jint)numFactor
-                                       withBoolean:(jboolean)commitOnBuild;
+                                                     withInt:(jint)numFactor
+                                                 withBoolean:(jboolean)commitOnBuild;
 
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
              withOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)contextQuery
@@ -158,6 +155,38 @@ withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType:(OrgA
 
 - (OrgApacheLuceneDocumentFieldType *)getTextFieldType;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg0
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg1
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg2
+                                                        withInt:(jint)arg3
+                                                    withBoolean:(jboolean)arg4 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg0
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg1
+                            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg2
+                                                        withInt:(jint)arg3
+                                                    withBoolean:(jboolean)arg4
+                                                    withBoolean:(jboolean)arg5
+                                                    withBoolean:(jboolean)arg6 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)arg0
+                           withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg1
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg2
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg3
+                                                     withInt:(jint)arg4
+                                                 withBoolean:(jboolean)arg5 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)arg0
+                           withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg1
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg2
+                         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg3
+                                                     withInt:(jint)arg4
+                                                 withBoolean:(jboolean)arg5
+                                                 withBoolean:(jboolean)arg6
+                                                 withBoolean:(jboolean)arg7 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester)
@@ -165,9 +194,9 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester)
 /*!
  @brief Coefficient used for linear blending
  */
-inline jdouble OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_get_LINEAR_COEF();
+inline jdouble OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_get_LINEAR_COEF(void);
 inline jdouble OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_set_LINEAR_COEF(jdouble value);
-inline jdouble *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_getRef_LINEAR_COEF();
+inline jdouble *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_getRef_LINEAR_COEF(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jdouble OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LINEAR_COEF;
 J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, LINEAR_COEF, jdouble)
@@ -175,9 +204,9 @@ J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixS
 /*!
  @brief Default factor
  */
-inline jint OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_get_DEFAULT_NUM_FACTOR();
+inline jint OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_get_DEFAULT_NUM_FACTOR(void);
 inline jint OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_set_DEFAULT_NUM_FACTOR(jint value);
-inline jint *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_getRef_DEFAULT_NUM_FACTOR();
+inline jint *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_getRef_DEFAULT_NUM_FACTOR(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_DEFAULT_NUM_FACTOR;
 J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, DEFAULT_NUM_FACTOR, jint)
@@ -223,6 +252,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSugg
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_Enum) {
   OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_Enum_CUSTOM = 0,
   OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_Enum_POSITION_LINEAR = 1,
@@ -232,21 +263,19 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSug
 /*!
  @brief The different types of blender.
  */
-@interface OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType : JavaLangEnum
 
-+ (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)CUSTOM;
-
-+ (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)POSITION_LINEAR;
-
-+ (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)POSITION_RECIPROCAL;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *CUSTOM NS_SWIFT_NAME(CUSTOM);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *POSITION_LINEAR NS_SWIFT_NAME(POSITION_LINEAR);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *POSITION_RECIPROCAL NS_SWIFT_NAME(POSITION_RECIPROCAL);
+#pragma mark Public
 
 + (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_Enum)toNSEnum;
 
 @end
@@ -260,22 +289,22 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_Ble
  @brief Application dependent; override <code>calculateCoefficient</code>
   to compute it.
  */
-inline OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_get_CUSTOM();
+inline OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_get_CUSTOM(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, CUSTOM)
 
 /*!
  @brief weight*(1 - 0.10*position)
  */
-inline OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_get_POSITION_LINEAR();
+inline OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_get_POSITION_LINEAR(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, POSITION_LINEAR)
 
 /*!
  @brief weight/(1+position)
  */
-inline OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_get_POSITION_RECIPROCAL();
+inline OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_get_POSITION_RECIPROCAL(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, POSITION_RECIPROCAL)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_valueOfWithNSString_(NSString *name);
 
@@ -285,4 +314,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSugg
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester")

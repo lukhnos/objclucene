@@ -25,35 +25,33 @@
 #include "org/apache/lucene/queries/function/valuesource/JoinDocFreqValueSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
-@interface OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1 : OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/JoinDocFreqValueSource must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1 : OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues {
  @public
   OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *this$0_;
   OrgApacheLuceneIndexBinaryDocValues *val$terms_;
   OrgApacheLuceneIndexTermsEnum *val$termsEnum_;
 }
 
-- (jint)intValWithInt:(jint)doc;
-
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource:(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *)outer$
                                                 withOrgApacheLuceneIndexBinaryDocValues:(OrgApacheLuceneIndexBinaryDocValues *)capture$0
                                                       withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)capture$1
-                                          withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0;
+                                          withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
+
+- (jint)intValWithInt:(jint)doc;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1, this$0_, OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1, val$terms_, OrgApacheLuceneIndexBinaryDocValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1, val$termsEnum_, OrgApacheLuceneIndexTermsEnum *)
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1 *self, OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1 *new_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1)
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1 *create_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
 NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_NAME = @"joindf";
 
@@ -79,11 +77,11 @@ NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_NAME =
   OrgApacheLuceneIndexIndexReader *top = [((OrgApacheLuceneIndexIndexReaderContext *) nil_chk(OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(readerContext))) reader];
   OrgApacheLuceneIndexTerms *t = OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(top, qfield_);
   OrgApacheLuceneIndexTermsEnum *termsEnum = t == nil ? JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY) : [t iterator];
-  return create_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(self, terms, termsEnum, self);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(self, terms, termsEnum, self);
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([nil_chk(o) getClass] != (id) OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_class_()) return false;
+  if (!JreObjectEqualsEquals([nil_chk(o) java_getClass], OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_class_())) return false;
   OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource class]);
   if (![((NSString *) nil_chk(qfield_)) isEqual:other->qfield_]) return false;
   return [super isEqual:other];
@@ -99,18 +97,28 @@ NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_NAME =
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:", "JoinDocFreqValueSource", NULL, 0x1, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:);
+  methods[1].selector = @selector(description__);
+  methods[2].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[3].selector = @selector(isEqual:);
+  methods[4].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "NAME", "NAME", 0x19, "Ljava.lang.String;", &OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_NAME, NULL, .constantValue.asLong = 0 },
-    { "qfield_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 8, -1, -1 },
+    { "qfield_", "LNSString;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource = { 2, "JoinDocFreqValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LNSString;", "description", "getValues", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "equals", "LNSObject;", "hashCode", &OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_NAME };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource = { "JoinDocFreqValueSource", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource;
 }
 
@@ -131,7 +139,15 @@ OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *create_OrgApach
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource)
 
-@implementation OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1
+@implementation OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1
+
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource:(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *)outer$
+                                                withOrgApacheLuceneIndexBinaryDocValues:(OrgApacheLuceneIndexBinaryDocValues *)capture$0
+                                                      withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)capture$1
+                                          withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs {
+  OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, capture$1, vs);
+  return self;
+}
 
 - (jint)intValWithInt:(jint)doc {
   @try {
@@ -144,16 +160,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceJoinDo
     }
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(JreStrcat("$$$I", @"caught exception in function ", [this$0_ description__], @" : doc=", doc), e);
+    @throw create_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$$I", @"caught exception in function ", [this$0_ description__], @" : doc=", doc), e);
   }
-}
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource:(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *)outer$
-                                                withOrgApacheLuceneIndexBinaryDocValues:(OrgApacheLuceneIndexBinaryDocValues *)capture$0
-                                                      withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)capture$1
-                                          withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0 {
-  OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, capture$1, arg$0);
-  return self;
 }
 
 - (void)dealloc {
@@ -164,35 +172,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceJoinDo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "intValWithInt:", "intVal", "I", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource:withOrgApacheLuceneIndexBinaryDocValues:withOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneQueriesFunctionValueSource:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource:withOrgApacheLuceneIndexBinaryDocValues:withOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(intValWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.valuesource.JoinDocFreqValueSource;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$terms_", NULL, 0x1012, "Lorg.apache.lucene.index.BinaryDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$termsEnum_", NULL, 0x1012, "Lorg.apache.lucene.index.TermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$terms_", "LOrgApacheLuceneIndexBinaryDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$termsEnum_", "LOrgApacheLuceneIndexTermsEnum;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1 = { 2, "", "org.apache.lucene.queries.function.valuesource", "JoinDocFreqValueSource", 0x8008, 2, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource;LOrgApacheLuceneIndexBinaryDocValues;LOrgApacheLuceneIndexTermsEnum;LOrgApacheLuceneQueriesFunctionValueSource;", "intVal", "I", "LOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource;", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1 = { "", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x8010, 2, 3, 3, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+void OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1 *self, OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$terms_, capture$0);
   JreStrongAssign(&self->val$termsEnum_, capture$1);
-  OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, arg$0);
+  OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, vs);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1 *new_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1, initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, vs)
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1 *create_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1_initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *outer$, OrgApacheLuceneIndexBinaryDocValues *capture$0, OrgApacheLuceneIndexTermsEnum *capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_1, initWithOrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, vs)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_$1)

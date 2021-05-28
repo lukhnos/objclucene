@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchTopDocsCollector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchTopDocsCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopDocsCollector || defined(INCLUDE_OrgApacheLuceneSearchTopDocsCollector))
 #define OrgApacheLuceneSearchTopDocsCollector_
 
@@ -25,25 +31,24 @@
 @class OrgApacheLuceneUtilPriorityQueue;
 
 /*!
- @brief A base class for all collectors that return a <code>TopDocs</code> output.
- This
- collector allows easy extension by providing a single constructor which
- accepts a <code>PriorityQueue</code> as well as protected members for that
- priority queue and a counter of the number of total hits.<br>
- Extending classes can override any of the methods to provide their own
- implementation, as well as avoid the use of the priority queue entirely by
- passing null to <code>TopDocsCollector(PriorityQueue)</code>. In that case
- however, you might want to consider overriding all methods, in order to avoid
- a NullPointerException.
+ @brief A base class for all collectors that return a <code>TopDocs</code> output.This
+  collector allows easy extension by providing a single constructor which
+  accepts a <code>PriorityQueue</code> as well as protected members for that
+  priority queue and a counter of the number of total hits.
+ <br>
+  Extending classes can override any of the methods to provide their own
+  implementation, as well as avoid the use of the priority queue entirely by
+  passing null to <code>TopDocsCollector(PriorityQueue)</code>. In that case
+  however, you might want to consider overriding all methods, in order to avoid
+  a NullPointerException.
  */
 @interface OrgApacheLuceneSearchTopDocsCollector : NSObject < OrgApacheLuceneSearchCollector > {
  @public
   /*!
-   @brief The priority queue which holds the top documents.
-   Note that different
- implementations of PriorityQueue give different meaning to 'top documents'.
- HitQueue for example aggregates the top scoring documents, while other PQ
- implementations may hold documents sorted by other criteria.
+   @brief The priority queue which holds the top documents.Note that different
+  implementations of PriorityQueue give different meaning to 'top documents'.
+   HitQueue for example aggregates the top scoring documents, while other PQ
+  implementations may hold documents sorted by other criteria.
    */
   OrgApacheLuceneUtilPriorityQueue *pq_;
   /*!
@@ -51,8 +56,7 @@
    */
   jint totalHits_;
 }
-
-+ (OrgApacheLuceneSearchTopDocs *)EMPTY_TOPDOCS;
+@property (readonly, class, strong) OrgApacheLuceneSearchTopDocs *EMPTY_TOPDOCS NS_SWIFT_NAME(EMPTY_TOPDOCS);
 
 #pragma mark Public
 
@@ -67,56 +71,54 @@
 - (OrgApacheLuceneSearchTopDocs *)topDocs;
 
 /*!
- @brief Returns the documents in the range [start .. pq.size()) that were collected
- by this collector.
+ @brief Returns the documents in the range [start ..pq.size()) that were collected
+  by this collector.
  Note that if <code>start >= pq.size()</code>, an empty TopDocs is
- returned.<br>
- This method is convenient to call if the application always asks for the
- last results, starting from the last 'page'.<br>
- <b>NOTE:</b> you cannot call this method more than once for each search
- execution. If you need to call it more than once, passing each time a
- different <code>start</code>, you should call <code>topDocs()</code> and work
- with the returned <code>TopDocs</code> object, which will contain all the
- results this search execution collected.
+  returned.<br>
+  This method is convenient to call if the application always asks for the
+  last results, starting from the last 'page'.<br>
+  <b>NOTE:</b> you cannot call this method more than once for each search
+  execution. If you need to call it more than once, passing each time a
+  different <code>start</code>, you should call <code>topDocs()</code> and work
+  with the returned <code>TopDocs</code> object, which will contain all the
+  results this search execution collected.
  */
 - (OrgApacheLuceneSearchTopDocs *)topDocsWithInt:(jint)start;
 
 /*!
- @brief Returns the documents in the range [start .. start+howMany) that were
- collected by this collector.
+ @brief Returns the documents in the range [start ..start+howMany) that were
+  collected by this collector.
  Note that if <code>start >= pq.size()</code>, an empty
- TopDocs is returned, and if pq.size() - start &lt; howMany, then only the
- available documents in [start .. pq.size()) are returned.<br>
- This method is useful to call in case pagination of search results is
- allowed by the search application, as well as it attempts to optimize the
- memory used by allocating only as much as requested by howMany.<br>
- <b>NOTE:</b> you cannot call this method more than once for each search
- execution. If you need to call it more than once, passing each time a
- different range, you should call <code>topDocs()</code> and work with the
- returned <code>TopDocs</code> object, which will contain all the results this
- search execution collected.
+  TopDocs is returned, and if pq.size() - start &lt; howMany, then only the
+  available documents in [start .. pq.size()) are returned.<br>
+  This method is useful to call in case pagination of search results is
+  allowed by the search application, as well as it attempts to optimize the
+  memory used by allocating only as much as requested by howMany.<br>
+  <b>NOTE:</b> you cannot call this method more than once for each search
+  execution. If you need to call it more than once, passing each time a
+  different range, you should call <code>topDocs()</code> and work with the
+  returned <code>TopDocs</code> object, which will contain all the results this
+  search execution collected.
  */
 - (OrgApacheLuceneSearchTopDocs *)topDocsWithInt:(jint)start
                                          withInt:(jint)howMany;
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneUtilPriorityQueue:(OrgApacheLuceneUtilPriorityQueue *)pq;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilPriorityQueue:(OrgApacheLuceneUtilPriorityQueue *)pq;
 
 /*!
- @brief Returns a <code>TopDocs</code> instance containing the given results.
- If
- <code>results</code> is null it means there are no results to return,
- either because there were 0 calls to collect() or because the arguments to
- topDocs were invalid.
+ @brief Returns a <code>TopDocs</code> instance containing the given results.If
+  <code>results</code> is null it means there are no results to return,
+  either because there were 0 calls to collect() or because the arguments to
+  topDocs were invalid.
  */
 - (OrgApacheLuceneSearchTopDocs *)newTopDocsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results
                                                                            withInt:(jint)start OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @brief Populates the results array with the ScoreDoc instances.
- This can be
- overridden in case a different ScoreDoc type should be returned.
+ @brief Populates the results array with the ScoreDoc instances.This can be
+  overridden in case a different ScoreDoc type should be returned.
  */
 - (void)populateResultsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results
                                                       withInt:(jint)howMany;
@@ -126,6 +128,10 @@
  */
 - (jint)topDocsSize;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchTopDocsCollector)
@@ -134,9 +140,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopDocsCollector, pq_, OrgApacheLuceneU
 
 /*!
  @brief This is used in case topDocs() is called with illegal parameters, or there
- simply aren't (enough) results.
+   simply aren't (enough) results.
  */
-inline OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_get_EMPTY_TOPDOCS();
+inline OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_get_EMPTY_TOPDOCS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchTopDocsCollector, EMPTY_TOPDOCS, OrgApacheLuceneSearchTopDocs *)
@@ -147,4 +153,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopDocsCollector)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopDocsCollector")

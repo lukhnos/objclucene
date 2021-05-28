@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadScoreQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchPayloadsPayloadScoreQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadScoreQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadScoreQuery))
 #define OrgApacheLuceneSearchPayloadsPayloadScoreQuery_
 
@@ -26,11 +32,11 @@
 
 /*!
  @brief A Query class that uses a <code>PayloadFunction</code> to modify the score of a
- wrapped SpanQuery
- NOTE: In order to take advantage of this with the default scoring implementation
- (<code>DefaultSimilarity</code>), you must override <code>DefaultSimilarity.scorePayload(int,int,int,BytesRef)</code>,
- which returns 1 by default.
- - seealso: org.apache.lucene.search.similarities.Similarity.SimScorer#computePayloadFactor(int,int,int,BytesRef)
+  wrapped SpanQuery
+  NOTE: In order to take advantage of this with the default scoring implementation
+  (<code>DefaultSimilarity</code>), you must override <code>DefaultSimilarity.scorePayload(int, int, int, BytesRef)</code>,
+  which returns 1 by default.
+ - seealso: org.apache.lucene.search.similarities.Similarity.SimScorer#computePayloadFactor(int, int, int, BytesRef)
  */
 @interface OrgApacheLuceneSearchPayloadsPayloadScoreQuery : OrgApacheLuceneSearchSpansSpanQuery
 
@@ -41,8 +47,8 @@
  @param wrappedQuery the query to wrap
  @param function a PayloadFunction to use to modify the scores
  */
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)wrappedQuery
-           withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)wrappedQuery
+                     withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -54,6 +60,10 @@
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -69,4 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadScoreQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadScoreQuery")

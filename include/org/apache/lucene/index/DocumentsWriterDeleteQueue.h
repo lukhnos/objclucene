@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexDocumentsWriterDeleteQueue
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocumentsWriterDeleteQueue_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterDeleteQueue || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterDeleteQueue))
 #define OrgApacheLuceneIndexDocumentsWriterDeleteQueue_
 
@@ -30,41 +36,42 @@
 
 /*!
  @brief <code>DocumentsWriterDeleteQueue</code> is a non-blocking linked pending deletes
- queue.
- In contrast to other queue implementation we only maintain the
- tail of the queue. A delete queue is always used in a context of a set of
- DWPTs and a global delete pool. Each of the DWPT and the global pool need to
- maintain their 'own' head of the queue (as a DeleteSlice instance per DWPT).
- The difference between the DWPT and the global pool is that the DWPT starts
- maintaining a head once it has added its first document since for its segments
- private deletes only the deletes after that document are relevant. The global
- pool instead starts maintaining the head once this instance is created by
- taking the sentinel instance as its initial head.
+  queue.In contrast to other queue implementation we only maintain the
+  tail of the queue.
+ A delete queue is always used in a context of a set of
+  DWPTs and a global delete pool. Each of the DWPT and the global pool need to
+  maintain their 'own' head of the queue (as a DeleteSlice instance per DWPT).
+  The difference between the DWPT and the global pool is that the DWPT starts
+  maintaining a head once it has added its first document since for its segments
+  private deletes only the deletes after that document are relevant. The global
+  pool instead starts maintaining the head once this instance is created by
+  taking the sentinel instance as its initial head. 
  <p>
- Since each <code>DeleteSlice</code> maintains its own head and the list is only
- single linked the garbage collector takes care of pruning the list for us.
- All nodes in the list that are still relevant should be either directly or
- indirectly referenced by one of the DWPT's private <code>DeleteSlice</code> or by
- the global <code>BufferedUpdates</code> slice.
+  Since each <code>DeleteSlice</code> maintains its own head and the list is only
+  single linked the garbage collector takes care of pruning the list for us.
+  All nodes in the list that are still relevant should be either directly or
+  indirectly referenced by one of the DWPT's private <code>DeleteSlice</code> or by
+  the global <code>BufferedUpdates</code> slice. 
  <p>
- Each DWPT as well as the global delete pool maintain their private
- DeleteSlice instance. In the DWPT case updating a slice is equivalent to
- atomically finishing the document. The slice update guarantees a "happens
- before" relationship to all other updates in the same indexing session. When a
- DWPT updates a document it:
+  Each DWPT as well as the global delete pool maintain their private
+  DeleteSlice instance. In the DWPT case updating a slice is equivalent to
+  atomically finishing the document. The slice update guarantees a "happens
+  before" relationship to all other updates in the same indexing session. When a
+  DWPT updates a document it:  
  <ol>
- <li>consumes a document and finishes its processing</li>
- <li>updates its private <code>DeleteSlice</code> either by calling
- <code>updateSlice(DeleteSlice)</code> or <code>add(Term,DeleteSlice)</code> (if the
- document has a delTerm)</li>
- <li>applies all deletes in the slice to its private <code>BufferedUpdates</code>
- and resets it</li>
- <li>increments its internal document id</li>
- </ol>
- The DWPT also doesn't apply its current documents delete term until it has
- updated its delete slice which ensures the consistency of the update. If the
- update fails before the DeleteSlice could have been updated the deleteTerm
- will also not be added to its private deletes neither to the global deletes.
+  <li>consumes a document and finishes its processing</li>
+  <li>updates its private <code>DeleteSlice</code> either by calling 
+ <code>updateSlice(DeleteSlice)</code> or <code>add(Term, DeleteSlice)</code> (if the
+  document has a delTerm)</li>
+  <li>applies all deletes in the slice to its private <code>BufferedUpdates</code>
+  and resets it</li>
+  <li>increments its internal document id</li>
+  </ol>
+  
+  The DWPT also doesn't apply its current documents delete term until it has
+  updated its delete slice which ensures the consistency of the update. If the
+  update fails before the DeleteSlice could have been updated the deleteTerm
+  will also not be added to its private deletes neither to the global deletes.
  */
 @interface OrgApacheLuceneIndexDocumentsWriterDeleteQueue : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -85,12 +92,12 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
-- (instancetype)initWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)globalBufferedUpdates
-                                                   withLong:(jlong)generation;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)globalBufferedUpdates
+                                                                           withLong:(jlong)generation;
 
-- (instancetype)initWithLong:(jlong)generation;
+- (instancetype __nonnull)initPackagePrivateWithLong:(jlong)generation;
 
 - (void)addWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node *)item;
 
@@ -118,27 +125,31 @@ withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneI
 
 - (jboolean)updateSliceWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice *)slice;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriterDeleteQueue)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_init(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *self);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initPackagePrivate(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *create_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *create_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initPackagePrivate(void);
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithLong_(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *self, jlong generation);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initPackagePrivateWithLong_(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *self, jlong generation);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithLong_(jlong generation) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initPackagePrivateWithLong_(jlong generation) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *create_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithLong_(jlong generation);
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *create_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initPackagePrivateWithLong_(jlong generation);
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithOrgApacheLuceneIndexBufferedUpdates_withLong_(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *self, OrgApacheLuceneIndexBufferedUpdates *globalBufferedUpdates, jlong generation);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withLong_(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *self, OrgApacheLuceneIndexBufferedUpdates *globalBufferedUpdates, jlong generation);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithOrgApacheLuceneIndexBufferedUpdates_withLong_(OrgApacheLuceneIndexBufferedUpdates *globalBufferedUpdates, jlong generation) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withLong_(OrgApacheLuceneIndexBufferedUpdates *globalBufferedUpdates, jlong generation) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *create_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithOrgApacheLuceneIndexBufferedUpdates_withLong_(OrgApacheLuceneIndexBufferedUpdates *globalBufferedUpdates, jlong generation);
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterDeleteQueue *create_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withLong_(OrgApacheLuceneIndexBufferedUpdates *globalBufferedUpdates, jlong generation);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue)
 
@@ -158,7 +169,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node *)currentTail;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node *)currentTail;
 
 - (void)applyWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)del
                                              withInt:(jint)docIDUpto;
@@ -167,11 +178,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue)
 
 /*!
  @brief Returns <code>true</code> iff the given item is identical to the item
- hold by the slices tail, otherwise <code>false</code>.
+  hold by the slices tail, otherwise <code>false</code>.
  */
 - (jboolean)isTailItemWithId:(id)item;
 
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -201,12 +216,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Delete
   volatile_id next_;
   id item_;
 }
-
-+ (JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *)nextUpdater;
+@property (readonly, class, strong) JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *nextUpdater NS_SWIFT_NAME(nextUpdater);
 
 #pragma mark Package-Private
 
-- (instancetype)initWithId:(id)item;
+- (instancetype __nonnull)initWithId:(id)item;
 
 - (void)applyWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)bufferedDeletes
                                              withInt:(jint)docIDUpto;
@@ -221,7 +235,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node)
 J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node, next_, OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node, item_, id)
 
-inline JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node_get_nextUpdater();
+inline JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node_get_nextUpdater(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node_nextUpdater;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node, nextUpdater, JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *)
@@ -236,4 +250,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterDeleteQueue")

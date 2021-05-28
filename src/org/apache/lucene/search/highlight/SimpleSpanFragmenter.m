@@ -3,6 +3,7 @@
 //  source: ./highlighter/src/java/org/apache/lucene/search/highlight/SimpleSpanFragmenter.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -13,6 +14,10 @@
 #include "org/apache/lucene/search/highlight/QueryScorer.h"
 #include "org/apache/lucene/search/highlight/SimpleSpanFragmenter.h"
 #include "org/apache/lucene/search/highlight/WeightedSpanTerm.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/SimpleSpanFragmenter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchHighlightSimpleSpanFragmenter () {
  @public
@@ -34,7 +39,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, termAtt_
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, posIncAtt_, id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 
-inline jint OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_get_DEFAULT_FRAGMENT_SIZE();
+inline jint OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_get_DEFAULT_FRAGMENT_SIZE(void);
 #define OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_DEFAULT_FRAGMENT_SIZE 100
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, DEFAULT_FRAGMENT_SIZE, jint)
 
@@ -59,9 +64,9 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter,
   else if (waitForPos_ != -1) {
     return false;
   }
-  OrgApacheLuceneSearchHighlightWeightedSpanTerm *wSpanTerm = [((OrgApacheLuceneSearchHighlightQueryScorer *) nil_chk(queryScorer_)) getWeightedSpanTermWithNSString:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) description]];
+  OrgApacheLuceneSearchHighlightWeightedSpanTerm *wSpanTerm = JreRetainedLocalValue([((OrgApacheLuceneSearchHighlightQueryScorer *) nil_chk(queryScorer_)) getWeightedSpanTermWithNSString:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) description]]);
   if (wSpanTerm != nil) {
-    id<JavaUtilList> positionSpans = [wSpanTerm getPositionSpans];
+    id<JavaUtilList> positionSpans = JreRetainedLocalValue([wSpanTerm getPositionSpans]);
     for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(positionSpans)) size]; i++) {
       if (((OrgApacheLuceneSearchHighlightPositionSpan *) nil_chk([positionSpans getWithInt:i]))->start_ == position_) {
         waitForPos_ = ((OrgApacheLuceneSearchHighlightPositionSpan *) nil_chk([positionSpans getWithInt:i]))->end_ + 1;
@@ -80,7 +85,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter,
 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream {
   position_ = -1;
   currentNumFrags_ = 1;
-  textSize_ = ((jint) [((NSString *) nil_chk(originalText)) length]);
+  textSize_ = [((NSString *) nil_chk(originalText)) java_length];
   JreStrongAssign(&termAtt_, [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(tokenStream)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&posIncAtt_, [tokenStream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
   JreStrongAssign(&offsetAtt_, [tokenStream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
@@ -95,25 +100,34 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchHighlightQueryScorer:", "SimpleSpanFragmenter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchHighlightQueryScorer:withInt:", "SimpleSpanFragmenter", NULL, 0x1, NULL, NULL },
-    { "isNewFragment", NULL, "Z", 0x1, NULL, NULL },
-    { "startWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "start", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchHighlightQueryScorer:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneSearchHighlightQueryScorer:withInt:);
+  methods[2].selector = @selector(isNewFragment);
+  methods[3].selector = @selector(startWithNSString:withOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_FRAGMENT_SIZE", "DEFAULT_FRAGMENT_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_DEFAULT_FRAGMENT_SIZE },
-    { "fragmentSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentNumFrags_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "position_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryScorer_", NULL, 0x2, "Lorg.apache.lucene.search.highlight.QueryScorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "waitForPos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "textSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_FRAGMENT_SIZE", "I", .constantValue.asInt = OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_DEFAULT_FRAGMENT_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "fragmentSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentNumFrags_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "position_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "queryScorer_", "LOrgApacheLuceneSearchHighlightQueryScorer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "waitForPos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "textSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "posIncAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleSpanFragmenter = { 2, "SimpleSpanFragmenter", "org.apache.lucene.search.highlight", NULL, 0x1, 4, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchHighlightQueryScorer;", "LOrgApacheLuceneSearchHighlightQueryScorer;I", "start", "LNSString;LOrgApacheLuceneAnalysisTokenStream;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleSpanFragmenter = { "SimpleSpanFragmenter", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x1, 4, 10, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter;
 }
 

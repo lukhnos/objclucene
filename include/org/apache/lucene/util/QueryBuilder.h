@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilQueryBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneUtilQueryBuilder || defined(INCLUDE_OrgApacheLuceneUtilQueryBuilder))
 #define OrgApacheLuceneUtilQueryBuilder_
 
@@ -26,18 +32,18 @@
 /*!
  @brief Creates queries from the <code>Analyzer</code> chain.
  <p>
- Example usage:
+  Example usage: 
  <pre class="prettyprint">
- QueryBuilder builder = new QueryBuilder(analyzer);
- Query a = builder.createBooleanQuery("body", "just a test");
- Query b = builder.createPhraseQuery("body", "another test");
- Query c = builder.createMinShouldMatchQuery("body", "another test", 0.5f);
+    QueryBuilder builder = new QueryBuilder(analyzer);
+    Query a = builder.createBooleanQuery("body", "just a test");
+    Query b = builder.createPhraseQuery("body", "another test");
+    Query c = builder.createMinShouldMatchQuery("body", "another test", 0.5f); 
  
 @endcode
- <p>
- This can also be used as a subclass for query parsers to make it easier
- to interact with the analysis chain. Factory methods such as <code>newTermQuery</code> 
- are provided so that the generated queries can be customized.
+  <p>
+  This can also be used as a subclass for query parsers to make it easier
+  to interact with the analysis chain. Factory methods such as <code>newTermQuery</code> 
+  are provided so that the generated queries can be customized.
  */
 @interface OrgApacheLuceneUtilQueryBuilder : NSObject
 
@@ -46,16 +52,16 @@
 /*!
  @brief Creates a new QueryBuilder using the given analyzer.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 /*!
  @brief Creates a boolean query from the query text.
  <p>
- This is equivalent to <code>createBooleanQuery(field, queryText, Occur.SHOULD)</code>
+  This is equivalent to <code>createBooleanQuery(field, queryText, Occur.SHOULD)</code>
  @param field field name
  @param queryText text to be passed to the analyzer
  @return <code>TermQuery</code> or <code>BooleanQuery</code>, based on the analysis
- of <code>queryText</code>
+          of <code>queryText</code>
  */
 - (OrgApacheLuceneSearchQuery *)createBooleanQueryWithNSString:(NSString *)field
                                                   withNSString:(NSString *)queryText;
@@ -67,7 +73,7 @@
  @param queryText text to be passed to the analyzer
  @param operator_ operator used for clauses between analyzer tokens.
  @return <code>TermQuery</code> or <code>BooleanQuery</code>, based on the analysis 
- of <code>queryText</code>
+          of <code>queryText</code>
  */
 - (OrgApacheLuceneSearchQuery *)createBooleanQueryWithNSString:(NSString *)field
                                                   withNSString:(NSString *)queryText
@@ -78,9 +84,9 @@
  <p>
  @param field field name
  @param queryText text to be passed to the analyzer
- @param fraction of query terms <code>[0..1]</code> that should match
+ @param fraction of query terms <code>[0..1]</code>  that should match
  @return <code>TermQuery</code> or <code>BooleanQuery</code>, based on the analysis 
- of <code>queryText</code>
+          of <code>queryText</code>
  */
 - (OrgApacheLuceneSearchQuery *)createMinShouldMatchQueryWithNSString:(NSString *)field
                                                          withNSString:(NSString *)queryText
@@ -89,11 +95,11 @@
 /*!
  @brief Creates a phrase query from the query text.
  <p>
- This is equivalent to <code>createPhraseQuery(field, queryText, 0)</code>
+  This is equivalent to <code>createPhraseQuery(field, queryText, 0)</code>
  @param field field name
  @param queryText text to be passed to the analyzer
  @return <code>TermQuery</code>, <code>BooleanQuery</code>, <code>PhraseQuery</code>, or
- <code>MultiPhraseQuery</code>, based on the analysis of <code>queryText</code>
+          <code>MultiPhraseQuery</code>, based on the analysis of <code>queryText</code>
  */
 - (OrgApacheLuceneSearchQuery *)createPhraseQueryWithNSString:(NSString *)field
                                                  withNSString:(NSString *)queryText;
@@ -105,7 +111,7 @@
  @param queryText text to be passed to the analyzer
  @param phraseSlop number of other words permitted between words in query phrase
  @return <code>TermQuery</code>, <code>BooleanQuery</code>, <code>PhraseQuery</code>, or
- <code>MultiPhraseQuery</code>, based on the analysis of <code>queryText</code>
+          <code>MultiPhraseQuery</code>, based on the analysis of <code>queryText</code>
  */
 - (OrgApacheLuceneSearchQuery *)createPhraseQueryWithNSString:(NSString *)field
                                                  withNSString:(NSString *)queryText
@@ -131,12 +137,12 @@
 /*!
  @brief Set to <code>true</code> to enable position increments in result query.
  <p>
- When set, result phrase and multi-phrase queries will
- be aware of position increments.
- Useful when e.g. a StopFilter increases the position increment of
- the token that follows an omitted token.
+  When set, result phrase and multi-phrase queries will
+  be aware of position increments.
+  Useful when e.g. a StopFilter increases the position increment of
+  the token that follows an omitted token. 
  <p>
- Default: true.
+  Default: true.
  */
 - (void)setEnablePositionIncrementsWithBoolean:(jboolean)enable;
 
@@ -145,9 +151,9 @@
 /*!
  @brief Creates a query from the analysis chain.
  <p>
- Expert: this is more useful for subclasses such as queryparsers. 
- If using this class directly, just use <code>createBooleanQuery(String,String)</code>
- and <code>createPhraseQuery(String,String)</code>
+  Expert: this is more useful for subclasses such as queryparsers. 
+  If using this class directly, just use <code>createBooleanQuery(String, String)</code>
+  and <code>createPhraseQuery(String, String)</code>
  @param analyzer analyzer used for this query
  @param operator_ default boolean operator used for this query
  @param field field to create queries against
@@ -165,7 +171,7 @@
 /*!
  @brief Builds a new BooleanQuery instance.
  <p>
- This is intended for subclasses that wish to customize the generated queries.
+  This is intended for subclasses that wish to customize the generated queries.
  @param disableCoord disable coord
  @return new BooleanQuery instance
  */
@@ -174,7 +180,7 @@
 /*!
  @brief Builds a new MultiPhraseQuery instance.
  <p>
- This is intended for subclasses that wish to customize the generated queries.
+  This is intended for subclasses that wish to customize the generated queries.
  @return new MultiPhraseQuery instance
  */
 - (OrgApacheLuceneSearchMultiPhraseQuery *)newMultiPhraseQuery OBJC_METHOD_FAMILY_NONE;
@@ -182,11 +188,15 @@
 /*!
  @brief Builds a new TermQuery instance.
  <p>
- This is intended for subclasses that wish to customize the generated queries.
+  This is intended for subclasses that wish to customize the generated queries.
  @param term term
  @return new TermQuery instance
  */
 - (OrgApacheLuceneSearchQuery *)newTermQueryWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term OBJC_METHOD_FAMILY_NONE;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -202,4 +212,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilQueryBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilQueryBuilder")

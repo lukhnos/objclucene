@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper))
 #define OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_
 
@@ -32,38 +38,37 @@
 
 /*!
  @brief Wraps any <code>MultiTermQuery</code> as a <code>SpanQuery</code>, 
- so it can be nested within other SpanQuery classes.
+  so it can be nested within other SpanQuery classes.
  <p>
- The query is rewritten by default to a <code>SpanOrQuery</code> containing
- the expanded terms, but this can be customized. 
+  The query is rewritten by default to a <code>SpanOrQuery</code> containing
+  the expanded terms, but this can be customized.  
  <p>
- Example:
+  Example: 
  <blockquote><pre class="prettyprint">
- <code>WildcardQuery wildcard = new WildcardQuery(new Term("field", "bro?n"));
- SpanQuery spanWildcard = new SpanMultiTermQueryWrapper<WildcardQuery>(wildcard);
- // do something with spanWildcard, such as use it in a SpanFirstQuery</code>
- 
+  <code>WildcardQuery wildcard = new WildcardQuery(new Term("field", "bro?n"));
+  SpanQuery spanWildcard = new SpanMultiTermQueryWrapper<WildcardQuery>(wildcard);
+  // do something with spanWildcard, such as use it in a SpanFirstQuery</code>
+  
 @endcode</blockquote>
  */
 @interface OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper : OrgApacheLuceneSearchSpansSpanQuery {
  @public
   OrgApacheLuceneSearchMultiTermQuery *query_;
 }
-
-+ (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *)SCORING_SPAN_QUERY_REWRITE;
+@property (readonly, class, strong) OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *SCORING_SPAN_QUERY_REWRITE NS_SWIFT_NAME(SCORING_SPAN_QUERY_REWRITE);
 
 #pragma mark Public
 
 /*!
  @brief Create a new SpanMultiTermQueryWrapper.
- @param query Query to wrap.
- <p>
- NOTE: This will call <code>MultiTermQuery.setRewriteMethod(MultiTermQuery.RewriteMethod)</code>
- on the wrapped <code>query</code>, changing its rewrite method to a suitable one for spans.
- Be sure to not change the rewrite method on the wrapped query afterwards! Doing so will
- throw <code>UnsupportedOperationException</code> on rewriting this query!
+ @param query Query to wrap.  
+  <p>  NOTE: This will call 
+ <code>MultiTermQuery.setRewriteMethod(MultiTermQuery.RewriteMethod)</code>  on the wrapped 
+  <code> query </code> , changing its rewrite method to a suitable one for spans.  Be sure to not change the rewrite method on the wrapped query afterwards! Doing so will
+   throw <code>UnsupportedOperationException</code>
+   on rewriting this query!
  */
-- (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -87,27 +92,30 @@
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 /*!
- @brief Expert: sets the rewrite method.
- This only makes sense
- to be a span rewrite method.
+ @brief Expert: sets the rewrite method.This only makes sense
+  to be a span rewrite method.
  */
 - (void)setRewriteMethodWithOrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod:(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *)rewriteMethod;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper, query_, id)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper, query_, OrgApacheLuceneSearchMultiTermQuery *)
 
 /*!
- @brief A rewrite method that first translates each term into a SpanTermQuery in a
+ @brief A rewrite method that first translates each term into a SpanTermQuery in a 
  <code>Occur.SHOULD</code> clause in a BooleanQuery, and keeps the
- scores as computed by the query.
+  scores as computed by the query.
  - seealso: #setRewriteMethod
  */
-inline OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_get_SCORING_SPAN_QUERY_REWRITE();
+inline OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_get_SCORING_SPAN_QUERY_REWRITE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper, SCORING_SPAN_QUERY_REWRITE, OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *)
@@ -140,7 +148,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                             withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
@@ -163,12 +171,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_S
 @class OrgApacheLuceneSearchSpansSpanQuery;
 
 /*!
- @brief A rewrite method that first translates each term into a SpanTermQuery in a
+ @brief A rewrite method that first translates each term into a SpanTermQuery in a 
  <code>Occur.SHOULD</code> clause in a BooleanQuery, and keeps the
- scores as computed by the query.
+  scores as computed by the query.
  <p>
- This rewrite method only uses the top scoring terms so it will not overflow
- the boolean max clause count.
+  This rewrite method only uses the top scoring terms so it will not overflow
+  the boolean max clause count.
  - seealso: #setRewriteMethod
  */
 @interface OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite : OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod
@@ -177,9 +185,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_S
 
 /*!
  @brief Create a TopTermsSpanBooleanQueryRewrite for 
- at most <code>size</code> terms.
+  at most <code>size</code> terms.
  */
-- (instancetype)initWithInt:(jint)size;
+- (instancetype __nonnull)initWithInt:(jint)size;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -192,6 +200,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_S
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                             withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -207,4 +219,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_T
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper")

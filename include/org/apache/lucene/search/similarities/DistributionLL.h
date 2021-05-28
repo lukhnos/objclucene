@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesDistributionLL
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesDistributionLL_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistributionLL || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesDistributionLL))
 #define OrgApacheLuceneSearchSimilaritiesDistributionLL_
 
@@ -25,8 +31,8 @@
 /*!
  @brief Log-logistic distribution.
  <p>Unlike for DFR, the natural logarithm is used, as
- it is faster to compute and the original paper does not express any
- preference to a specific base.</p>
+  it is faster to compute and the original paper does not express any
+  preference to a specific base.</p>
  */
 @interface OrgApacheLuceneSearchSimilaritiesDistributionLL : OrgApacheLuceneSearchSimilaritiesDistribution
 
@@ -35,7 +41,7 @@
 /*!
  @brief Sole constructor: parameter-free
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn
@@ -49,12 +55,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesDistributionLL)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesDistributionLL_init(OrgApacheLuceneSearchSimilaritiesDistributionLL *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesDistributionLL *new_OrgApacheLuceneSearchSimilaritiesDistributionLL_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesDistributionLL *new_OrgApacheLuceneSearchSimilaritiesDistributionLL_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesDistributionLL *create_OrgApacheLuceneSearchSimilaritiesDistributionLL_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesDistributionLL *create_OrgApacheLuceneSearchSimilaritiesDistributionLL_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesDistributionLL)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistributionLL")

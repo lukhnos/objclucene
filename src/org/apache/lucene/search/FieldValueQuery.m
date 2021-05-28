@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Float.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
@@ -19,6 +18,10 @@
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/FieldValueQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchFieldValueQuery () {
  @public
   NSString *field_;
@@ -28,29 +31,25 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldValueQuery, field_, NSString *)
 
-@interface OrgApacheLuceneSearchFieldValueQuery_$1 : OrgApacheLuceneSearchRandomAccessWeight {
+@interface OrgApacheLuceneSearchFieldValueQuery_1 : OrgApacheLuceneSearchRandomAccessWeight {
  @public
   OrgApacheLuceneSearchFieldValueQuery *this$0_;
 }
 
-- (id<OrgApacheLuceneUtilBits>)getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
 - (instancetype)initWithOrgApacheLuceneSearchFieldValueQuery:(OrgApacheLuceneSearchFieldValueQuery *)outer$
-                              withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0;
+                              withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+
+- (id<OrgApacheLuceneUtilBits>)getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFieldValueQuery_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFieldValueQuery_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldValueQuery_$1, this$0_, OrgApacheLuceneSearchFieldValueQuery *)
+__attribute__((unused)) static void OrgApacheLuceneSearchFieldValueQuery_1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery_1 *self, OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *query);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery_$1 *self, OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
+__attribute__((unused)) static OrgApacheLuceneSearchFieldValueQuery_1 *new_OrgApacheLuceneSearchFieldValueQuery_1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchFieldValueQuery_$1 *new_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchFieldValueQuery_$1 *create_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchFieldValueQuery_1 *create_OrgApacheLuceneSearchFieldValueQuery_1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *query);
 
 @implementation OrgApacheLuceneSearchFieldValueQuery
 
@@ -68,7 +67,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery_$1)
 }
 
 - (NSUInteger)hash {
-  return OrgLukhnosPortmobileUtilObjects_hash__WithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ [self getClass], field_, JavaLangFloat_valueOfWithFloat_([self getBoost]) } count:3 type:NSObject_class_()]);
+  return OrgLukhnosPortmobileUtilObjects_hash__WithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ [self java_getClass], field_, JavaLangFloat_valueOfWithFloat_([self getBoost]) } count:3 type:NSObject_class_()]);
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
@@ -77,7 +76,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery_$1)
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return create_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(self, self);
+  return create_OrgApacheLuceneSearchFieldValueQuery_1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (void)dealloc {
@@ -86,17 +85,27 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "FieldValueQuery", NULL, 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchWeight;", 0x1, 5, 6, 7, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(isEqual:);
+  methods[2].selector = @selector(hash);
+  methods[3].selector = @selector(toStringWithNSString:);
+  methods[4].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueQuery = { 2, "FieldValueQuery", "org.apache.lucene.search", NULL, 0x11, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;", "equals", "LNSObject;", "hashCode", "toString", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueQuery = { "FieldValueQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 5, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFieldValueQuery;
 }
 
@@ -117,16 +126,16 @@ OrgApacheLuceneSearchFieldValueQuery *create_OrgApacheLuceneSearchFieldValueQuer
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueQuery)
 
-@implementation OrgApacheLuceneSearchFieldValueQuery_$1
-
-- (id<OrgApacheLuceneUtilBits>)getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  return [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getDocsWithFieldWithNSString:this$0_->field_];
-}
+@implementation OrgApacheLuceneSearchFieldValueQuery_1
 
 - (instancetype)initWithOrgApacheLuceneSearchFieldValueQuery:(OrgApacheLuceneSearchFieldValueQuery *)outer$
-                              withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg$0 {
-  OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
+                              withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
+  OrgApacheLuceneSearchFieldValueQuery_1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(self, outer$, query);
   return self;
+}
+
+- (id<OrgApacheLuceneUtilBits>)getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
+  return JreRetainedLocalValue([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getDocsWithFieldWithNSString:this$0_->field_]);
 }
 
 - (void)dealloc {
@@ -135,31 +144,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueQuery)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:", "getMatchingDocs", "Lorg.apache.lucene.util.Bits;", 0x4, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchFieldValueQuery:withOrgApacheLuceneSearchQuery:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x4, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchFieldValueQuery:withOrgApacheLuceneSearchQuery:);
+  methods[1].selector = @selector(getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.FieldValueQuery;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchFieldValueQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchFieldValueQuery", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueQuery_$1 = { 2, "", "org.apache.lucene.search", "FieldValueQuery", 0x8008, 2, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneSearchFieldValueQuery_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchFieldValueQuery;LOrgApacheLuceneSearchQuery;", "getMatchingDocs", "LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "LOrgApacheLuceneSearchFieldValueQuery;", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueQuery_1 = { "", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x8010, 2, 1, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneSearchFieldValueQuery_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery_$1 *self, OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
+void OrgApacheLuceneSearchFieldValueQuery_1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery_1 *self, OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *query) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchRandomAccessWeight_initWithOrgApacheLuceneSearchQuery_(self, arg$0);
+  OrgApacheLuceneSearchRandomAccessWeight_initWithOrgApacheLuceneSearchQuery_(self, query);
 }
 
-OrgApacheLuceneSearchFieldValueQuery_$1 *new_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueQuery_$1, initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+OrgApacheLuceneSearchFieldValueQuery_1 *new_OrgApacheLuceneSearchFieldValueQuery_1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueQuery_1, initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_, outer$, query)
 }
 
-OrgApacheLuceneSearchFieldValueQuery_$1 *create_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueQuery_$1, initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+OrgApacheLuceneSearchFieldValueQuery_1 *create_OrgApacheLuceneSearchFieldValueQuery_1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueQuery_1, initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_, outer$, query)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueQuery_$1)

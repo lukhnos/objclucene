@@ -8,33 +8,43 @@
 #include "org/apache/lucene/search/GeoBoundingBox.h"
 #include "org/apache/lucene/util/GeoUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/GeoBoundingBox must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchGeoBoundingBox
 
-- (instancetype)initWithDouble:(jdouble)minLon
-                    withDouble:(jdouble)maxLon
-                    withDouble:(jdouble)minLat
-                    withDouble:(jdouble)maxLat {
-  OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(self, minLon, maxLon, minLat, maxLat);
+- (instancetype)initPackagePrivateWithDouble:(jdouble)minLon
+                                  withDouble:(jdouble)maxLon
+                                  withDouble:(jdouble)minLat
+                                  withDouble:(jdouble)maxLat {
+  OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(self, minLon, maxLon, minLat, maxLat);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithDouble:withDouble:withDouble:withDouble:", "GeoBoundingBox", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithDouble:withDouble:withDouble:withDouble:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "minLon_", NULL, 0x11, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxLon_", NULL, 0x11, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "minLat_", NULL, 0x11, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxLat_", NULL, 0x11, "D", NULL, NULL, .constantValue.asLong = 0 },
+    { "minLon_", "D", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "maxLon_", "D", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "minLat_", "D", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "maxLat_", "D", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoBoundingBox = { 2, "GeoBoundingBox", "org.apache.lucene.search", NULL, 0x0, 1, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "DDDD" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoBoundingBox = { "GeoBoundingBox", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x0, 1, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchGeoBoundingBox;
 }
 
 @end
 
-void OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoBoundingBox *self, jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
+void OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoBoundingBox *self, jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
   NSObject_init(self);
   if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(minLon) == false) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLon ", minLon));
@@ -54,12 +64,12 @@ void OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_wi
   self->maxLat_ = maxLat;
 }
 
-OrgApacheLuceneSearchGeoBoundingBox *new_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoBoundingBox, initWithDouble_withDouble_withDouble_withDouble_, minLon, maxLon, minLat, maxLat)
+OrgApacheLuceneSearchGeoBoundingBox *new_OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoBoundingBox, initPackagePrivateWithDouble_withDouble_withDouble_withDouble_, minLon, maxLon, minLat, maxLat)
 }
 
-OrgApacheLuceneSearchGeoBoundingBox *create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoBoundingBox, initWithDouble_withDouble_withDouble_withDouble_, minLon, maxLon, minLat, maxLat)
+OrgApacheLuceneSearchGeoBoundingBox *create_OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoBoundingBox, initPackagePrivateWithDouble_withDouble_withDouble_withDouble_, minLon, maxLon, minLat, maxLat)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoBoundingBox)

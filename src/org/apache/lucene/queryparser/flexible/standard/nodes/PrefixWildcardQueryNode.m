@@ -3,13 +3,17 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/nodes/PrefixWildcardQueryNode.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/PrefixWildcardQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/WildcardQueryNode.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/nodes/PrefixWildcardQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode
 
@@ -36,13 +40,22 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangCharSequence:withJavaLangCharSequence:withInt:withInt:", "PrefixWildcardQueryNode", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:", "PrefixWildcardQueryNode", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.standard.nodes.PrefixWildcardQueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode;", 0x1, -1, -1, 3, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode = { 2, "PrefixWildcardQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaLangCharSequence:withJavaLangCharSequence:withInt:withInt:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:);
+  methods[2].selector = @selector(description);
+  methods[3].selector = @selector(cloneTree);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaLangCharSequence;LJavaLangCharSequence;II", "LOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode;", "toString", "LJavaLangCloneNotSupportedException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode = { "PrefixWildcardQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode;
 }
 

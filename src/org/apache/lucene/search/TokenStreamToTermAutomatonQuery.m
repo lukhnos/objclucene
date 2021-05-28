@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Math.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -17,6 +16,10 @@
 #include "org/apache/lucene/search/TermAutomatonQuery.h"
 #include "org/apache/lucene/search/TokenStreamToTermAutomatonQuery.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TokenStreamToTermAutomatonQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery () {
  @public
@@ -40,10 +43,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchTermAutomatonQuery *)toQueryWithNSString:(NSString *)field
                           withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
-  id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termBytesAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(inArg)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
-  id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt = [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()];
-  id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute> posLengthAtt = [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_()];
-  id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
+  id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termBytesAtt = ((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(inArg)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()]);
+  id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt = ((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
+  id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute> posLengthAtt = ((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_()]);
+  id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = ((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
   [inArg reset];
   OrgApacheLuceneSearchTermAutomatonQuery *query = create_OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(field);
   jint pos = -1;
@@ -56,7 +59,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     if (preservePositionIncrements_ == false && posInc > 1) {
       posInc = 1;
     }
-    JreAssert((pos > -1 || posInc > 0), (@"org/apache/lucene/search/TokenStreamToTermAutomatonQuery.java:78 condition failed: assert pos > -1 || posInc > 0;"));
+    JreAssert(pos > -1 || posInc > 0, @"org/apache/lucene/search/TokenStreamToTermAutomatonQuery.java:78 condition failed: assert pos > -1 || posInc > 0;");
     if (posInc > 1) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"cannot handle holes; to accept any term, use '*' term");
     }
@@ -67,7 +70,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     while (state < endPos) {
       state = [query createState];
     }
-    OrgApacheLuceneUtilBytesRef *term = [((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(termBytesAtt)) getBytesRef];
+    OrgApacheLuceneUtilBytesRef *term = JreRetainedLocalValue([((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(termBytesAtt)) getBytesRef]);
     if (((OrgApacheLuceneUtilBytesRef *) nil_chk(term))->length_ == 1 && IOSByteArray_Get(nil_chk(term->bytes_), term->offset_) == (jbyte) '*') {
       [query addAnyTransitionWithInt:pos withInt:endPos];
     }
@@ -84,15 +87,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TokenStreamToTermAutomatonQuery", NULL, 0x1, NULL, NULL },
-    { "setPreservePositionIncrementsWithBoolean:", "setPreservePositionIncrements", "V", 0x1, NULL, NULL },
-    { "toQueryWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "toQuery", "Lorg.apache.lucene.search.TermAutomatonQuery;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTermAutomatonQuery;", 0x1, 2, 3, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setPreservePositionIncrementsWithBoolean:);
+  methods[2].selector = @selector(toQueryWithNSString:withOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "preservePositionIncrements_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "preservePositionIncrements_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery = { 2, "TokenStreamToTermAutomatonQuery", "org.apache.lucene.search", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setPreservePositionIncrements", "Z", "toQuery", "LNSString;LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery = { "TokenStreamToTermAutomatonQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery;
 }
 

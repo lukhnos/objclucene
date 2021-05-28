@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsCompressingLZ4
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsCompressingLZ4_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingLZ4 || defined(INCLUDE_OrgApacheLuceneCodecsCompressingLZ4))
 #define OrgApacheLuceneCodecsCompressingLZ4_
 
@@ -25,31 +31,24 @@
 /*!
  @brief LZ4 compression and decompression routines.
  http://code.google.com/p/lz4/
- http://fastcompression.blogspot.fr/p/lz4.html
+  http://fastcompression.blogspot.fr/p/lz4.html
  */
 @interface OrgApacheLuceneCodecsCompressingLZ4 : NSObject
-
-+ (jint)MEMORY_USAGE;
-
-+ (jint)MIN_MATCH;
-
-+ (jint)MAX_DISTANCE;
-
-+ (jint)LAST_LITERALS;
-
-+ (jint)HASH_LOG_HC;
-
-+ (jint)HASH_TABLE_SIZE_HC;
-
-+ (jint)OPTIMAL_ML;
+@property (readonly, class) jint MEMORY_USAGE NS_SWIFT_NAME(MEMORY_USAGE);
+@property (readonly, class) jint MIN_MATCH NS_SWIFT_NAME(MIN_MATCH);
+@property (readonly, class) jint MAX_DISTANCE NS_SWIFT_NAME(MAX_DISTANCE);
+@property (readonly, class) jint LAST_LITERALS NS_SWIFT_NAME(LAST_LITERALS);
+@property (readonly, class) jint HASH_LOG_HC NS_SWIFT_NAME(HASH_LOG_HC);
+@property (readonly, class) jint HASH_TABLE_SIZE_HC NS_SWIFT_NAME(HASH_TABLE_SIZE_HC);
+@property (readonly, class) jint OPTIMAL_ML NS_SWIFT_NAME(OPTIMAL_ML);
 
 #pragma mark Public
 
 /*!
  @brief Compress <code>bytes[off:off+len]</code> into <code>out</code> using
- at most 16KB of memory.
+  at most 16KB of memory.
  <code>ht</code> shouldn't be shared across threads
- but can safely be reused.
+  but can safely be reused.
  */
 + (void)compressWithByteArray:(IOSByteArray *)bytes
                       withInt:(jint)off
@@ -58,14 +57,14 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
 withOrgApacheLuceneCodecsCompressingLZ4_HashTable:(OrgApacheLuceneCodecsCompressingLZ4_HashTable *)ht;
 
 /*!
- @brief Compress <code>bytes[off:off+len]</code> into <code>out</code>.
- Compared to
- <code>LZ4.compress(byte[],int,int,DataOutput,HashTable)</code>, this method
- is slower and uses more memory (~ 256KB per thread) but should provide
- better compression ratios (especially on large inputs) because it chooses
- the best match among up to 256 candidates and then performs trade-offs to
- fix overlapping matches. <code>ht</code> shouldn't be shared across threads
- but can safely be reused.
+ @brief Compress <code>bytes[off:off+len]</code> into <code>out</code>.Compared to 
+ <code>LZ4.compress(byte[], int, int, DataOutput, HashTable)</code>, this method
+  is slower and uses more memory (~ 256KB per thread) but should provide
+  better compression ratios (especially on large inputs) because it chooses
+  the best match among up to 256 candidates and then performs trade-offs to
+  fix overlapping matches.
+ <code>ht</code> shouldn't be shared across threads
+  but can safely be reused.
  */
 + (void)compressHCWithByteArray:(IOSByteArray *)src
                         withInt:(jint)srcOff
@@ -74,46 +73,49 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
 withOrgApacheLuceneCodecsCompressingLZ4_HCHashTable:(OrgApacheLuceneCodecsCompressingLZ4_HCHashTable *)ht;
 
 /*!
- @brief Decompress at least <code>decompressedLen</code> bytes into
- <code>dest[dOff:]</code>.
- Please note that <code>dest</code> must be large
- enough to be able to hold <b>all</b> decompressed data (meaning that you
- need to know the total decompressed length).
+ @brief Decompress at least <code>decompressedLen</code> bytes into 
+ <code>dest[dOff:]</code>.Please note that <code>dest</code> must be large
+  enough to be able to hold <b>all</b> decompressed data (meaning that you
+  need to know the total decompressed length).
  */
 + (jint)decompressWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)compressed
                                             withInt:(jint)decompressedLen
                                       withByteArray:(IOSByteArray *)dest
                                             withInt:(jint)dOff;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingLZ4)
 
-inline jint OrgApacheLuceneCodecsCompressingLZ4_get_MEMORY_USAGE();
+inline jint OrgApacheLuceneCodecsCompressingLZ4_get_MEMORY_USAGE(void);
 #define OrgApacheLuceneCodecsCompressingLZ4_MEMORY_USAGE 14
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingLZ4, MEMORY_USAGE, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingLZ4_get_MIN_MATCH();
+inline jint OrgApacheLuceneCodecsCompressingLZ4_get_MIN_MATCH(void);
 #define OrgApacheLuceneCodecsCompressingLZ4_MIN_MATCH 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingLZ4, MIN_MATCH, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingLZ4_get_MAX_DISTANCE();
+inline jint OrgApacheLuceneCodecsCompressingLZ4_get_MAX_DISTANCE(void);
 #define OrgApacheLuceneCodecsCompressingLZ4_MAX_DISTANCE 65536
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingLZ4, MAX_DISTANCE, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingLZ4_get_LAST_LITERALS();
+inline jint OrgApacheLuceneCodecsCompressingLZ4_get_LAST_LITERALS(void);
 #define OrgApacheLuceneCodecsCompressingLZ4_LAST_LITERALS 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingLZ4, LAST_LITERALS, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingLZ4_get_HASH_LOG_HC();
+inline jint OrgApacheLuceneCodecsCompressingLZ4_get_HASH_LOG_HC(void);
 #define OrgApacheLuceneCodecsCompressingLZ4_HASH_LOG_HC 15
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingLZ4, HASH_LOG_HC, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingLZ4_get_HASH_TABLE_SIZE_HC();
+inline jint OrgApacheLuceneCodecsCompressingLZ4_get_HASH_TABLE_SIZE_HC(void);
 #define OrgApacheLuceneCodecsCompressingLZ4_HASH_TABLE_SIZE_HC 32768
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingLZ4, HASH_TABLE_SIZE_HC, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingLZ4_get_OPTIMAL_ML();
+inline jint OrgApacheLuceneCodecsCompressingLZ4_get_OPTIMAL_ML(void);
 #define OrgApacheLuceneCodecsCompressingLZ4_OPTIMAL_ML 18
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingLZ4, OPTIMAL_ML, jint)
 
@@ -134,7 +136,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingLZ4)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)resetWithInt:(jint)len;
 
@@ -144,9 +146,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingLZ4_HashTable)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsCompressingLZ4_HashTable_init(OrgApacheLuceneCodecsCompressingLZ4_HashTable *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingLZ4_HashTable *new_OrgApacheLuceneCodecsCompressingLZ4_HashTable_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingLZ4_HashTable *new_OrgApacheLuceneCodecsCompressingLZ4_HashTable_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingLZ4_HashTable *create_OrgApacheLuceneCodecsCompressingLZ4_HashTable_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingLZ4_HashTable *create_OrgApacheLuceneCodecsCompressingLZ4_HashTable_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingLZ4_HashTable)
 
@@ -162,14 +164,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingLZ4_HashTable)
  @public
   jint nextToUpdate_;
 }
-
-+ (jint)MAX_ATTEMPTS;
-
-+ (jint)MASK;
+@property (readonly, class) jint MAX_ATTEMPTS NS_SWIFT_NAME(MAX_ATTEMPTS);
+@property (readonly, class) jint MASK NS_SWIFT_NAME(MASK);
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)insertWithInt:(jint)off
         withByteArray:(IOSByteArray *)bytes;
@@ -190,22 +190,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingLZ4_HashTable)
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingLZ4_HCHashTable)
 
-inline jint OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_get_MAX_ATTEMPTS();
+inline jint OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_get_MAX_ATTEMPTS(void);
 #define OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_MAX_ATTEMPTS 256
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingLZ4_HCHashTable, MAX_ATTEMPTS, jint)
 
-inline jint OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_get_MASK();
+inline jint OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_get_MASK(void);
 #define OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_MASK 65535
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsCompressingLZ4_HCHashTable, MASK, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_init(OrgApacheLuceneCodecsCompressingLZ4_HCHashTable *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingLZ4_HCHashTable *new_OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingLZ4_HCHashTable *new_OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingLZ4_HCHashTable *create_OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingLZ4_HCHashTable *create_OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingLZ4_HCHashTable)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingLZ4")

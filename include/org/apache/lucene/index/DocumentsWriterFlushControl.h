@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexDocumentsWriterFlushControl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocumentsWriterFlushControl_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushControl || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushControl))
 #define OrgApacheLuceneIndexDocumentsWriterFlushControl_
 
@@ -34,16 +40,15 @@
 
 /*!
  @brief This class controls <code>DocumentsWriterPerThread</code> flushing during
- indexing.
- It tracks the memory consumption per
+  indexing.It tracks the memory consumption per 
  <code>DocumentsWriterPerThread</code> and uses a configured <code>FlushPolicy</code> to
- decide if a <code>DocumentsWriterPerThread</code> must flush.
+  decide if a <code>DocumentsWriterPerThread</code> must flush.
  <p>
- In addition to the <code>FlushPolicy</code> the flush control might set certain
- <code>DocumentsWriterPerThread</code> as flush pending iff a
- <code>DocumentsWriterPerThread</code> exceeds the
+  In addition to the <code>FlushPolicy</code> the flush control might set certain 
+ <code>DocumentsWriterPerThread</code> as flush pending iff a 
+ <code>DocumentsWriterPerThread</code> exceeds the 
  <code>IndexWriterConfig.getRAMPerThreadHardLimitMB()</code> to prevent address
- space exhaustion.
+  space exhaustion.
  */
 @interface OrgApacheLuceneIndexDocumentsWriterFlushControl : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -91,10 +96,9 @@
 - (void)setApplyAllDeletes;
 
 /*!
- @brief Sets flush pending state on the given <code>ThreadState</code>.
- The
- <code>ThreadState</code> must have indexed at least on Document and must not be
- already pending.
+ @brief Sets flush pending state on the given <code>ThreadState</code>.The
+  <code>ThreadState</code> must have indexed at least on Document and must not be
+  already pending.
  */
 - (void)setFlushPendingWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)perThread;
 
@@ -104,9 +108,9 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexDocumentsWriter:(OrgApacheLuceneIndexDocumentsWriter *)documentsWriter
-              withOrgApacheLuceneIndexLiveIndexWriterConfig:(OrgApacheLuceneIndexLiveIndexWriterConfig *)config
-              withOrgApacheLuceneIndexBufferedUpdatesStream:(OrgApacheLuceneIndexBufferedUpdatesStream *)bufferedUpdatesStream;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriter:(OrgApacheLuceneIndexDocumentsWriter *)documentsWriter
+                                      withOrgApacheLuceneIndexLiveIndexWriterConfig:(OrgApacheLuceneIndexLiveIndexWriterConfig *)config
+                                      withOrgApacheLuceneIndexBufferedUpdatesStream:(OrgApacheLuceneIndexBufferedUpdatesStream *)bufferedUpdatesStream;
 
 - (void)abortFullFlushes;
 
@@ -145,9 +149,8 @@
 
 /*!
  @brief Returns the number of flushes that are checked out but not yet available
- for flushing.
- This only applies during a full flush if a DWPT needs
- flushing but must not be flushed until the full flush has finished.
+  for flushing.This only applies during a full flush if a DWPT needs
+  flushing but must not be flushed until the full flush has finished.
  */
 - (jint)numBlockedFlushes;
 
@@ -155,7 +158,7 @@
 
 /*!
  @brief Returns the number of flushes that are already checked out but not yet
- actively flushing
+  actively flushing
  */
 - (jint)numQueuedFlushes;
 
@@ -167,9 +170,13 @@
 
 /*!
  @brief This method will block if too many DWPT are currently flushing and no
- checked out DWPT are available
+  checked out DWPT are available
  */
 - (void)waitIfStalled;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -178,14 +185,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriterFlushControl)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushControl, flushDeletes_, JavaUtilConcurrentAtomicAtomicBoolean *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushControl, stallControl_, OrgApacheLuceneIndexDocumentsWriterStallControl *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(OrgApacheLuceneIndexDocumentsWriterFlushControl *self, OrgApacheLuceneIndexDocumentsWriter *documentsWriter, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterFlushControl_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(OrgApacheLuceneIndexDocumentsWriterFlushControl *self, OrgApacheLuceneIndexDocumentsWriter *documentsWriter, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushControl *new_OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(OrgApacheLuceneIndexDocumentsWriter *documentsWriter, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushControl *new_OrgApacheLuceneIndexDocumentsWriterFlushControl_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(OrgApacheLuceneIndexDocumentsWriter *documentsWriter, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushControl *create_OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(OrgApacheLuceneIndexDocumentsWriter *documentsWriter, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream);
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushControl *create_OrgApacheLuceneIndexDocumentsWriterFlushControl_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(OrgApacheLuceneIndexDocumentsWriter *documentsWriter, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushControl")

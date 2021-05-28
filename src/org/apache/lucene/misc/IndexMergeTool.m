@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/PrintStream.h"
 #include "java/lang/System.h"
 #include "org/apache/lucene/index/IndexWriter.h"
@@ -17,11 +16,11 @@
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/Paths.h"
 
-@implementation OrgApacheLuceneMiscIndexMergeTool
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/misc/IndexMergeTool must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-+ (void)mainWithNSStringArray:(IOSObjectArray *)args {
-  OrgApacheLuceneMiscIndexMergeTool_mainWithNSStringArray_(args);
-}
+@implementation OrgApacheLuceneMiscIndexMergeTool
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -30,16 +29,39 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (void)mainWithNSStringArray:(IOSObjectArray *)args {
+  OrgApacheLuceneMiscIndexMergeTool_mainWithNSStringArray_(args);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "mainWithNSStringArray:", "main", "V", 0x9, "Ljava.io.IOException;", NULL },
-    { "init", "IndexMergeTool", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneMiscIndexMergeTool = { 2, "IndexMergeTool", "org.apache.lucene.misc", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(mainWithNSStringArray:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "main", "[LNSString;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneMiscIndexMergeTool = { "IndexMergeTool", "org.apache.lucene.misc", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneMiscIndexMergeTool;
 }
 
 @end
+
+void OrgApacheLuceneMiscIndexMergeTool_init(OrgApacheLuceneMiscIndexMergeTool *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneMiscIndexMergeTool *new_OrgApacheLuceneMiscIndexMergeTool_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscIndexMergeTool, init)
+}
+
+OrgApacheLuceneMiscIndexMergeTool *create_OrgApacheLuceneMiscIndexMergeTool_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscIndexMergeTool, init)
+}
 
 void OrgApacheLuceneMiscIndexMergeTool_mainWithNSStringArray_(IOSObjectArray *args) {
   OrgApacheLuceneMiscIndexMergeTool_initialize();
@@ -55,22 +77,10 @@ void OrgApacheLuceneMiscIndexMergeTool_mainWithNSStringArray_(IOSObjectArray *ar
   }
   [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"Merging..."];
   [writer addIndexesWithOrgApacheLuceneStoreDirectoryArray:indexes];
-  [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:@"Full merge..."];
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"Full merge..."];
   [writer forceMergeWithInt:1];
   [writer close];
-  [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:@"Done."];
-}
-
-void OrgApacheLuceneMiscIndexMergeTool_init(OrgApacheLuceneMiscIndexMergeTool *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneMiscIndexMergeTool *new_OrgApacheLuceneMiscIndexMergeTool_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscIndexMergeTool, init)
-}
-
-OrgApacheLuceneMiscIndexMergeTool *create_OrgApacheLuceneMiscIndexMergeTool_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscIndexMergeTool, init)
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"Done."];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscIndexMergeTool)

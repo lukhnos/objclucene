@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchLRUQueryCache
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchLRUQueryCache_) && (INCLUDE_ALL_OrgApacheLuceneSearchLRUQueryCache || defined(INCLUDE_OrgApacheLuceneSearchLRUQueryCache))
 #define OrgApacheLuceneSearchLRUQueryCache_
 
@@ -36,61 +42,58 @@
 
 /*!
  @brief A <code>QueryCache</code> that evicts queries using a LRU (least-recently-used)
- eviction policy in order to remain under a given maximum size and number of
- bytes used.
+  eviction policy in order to remain under a given maximum size and number of
+  bytes used.
  This class is thread-safe.
- Note that query eviction runs in linear time with the total number of
- segments that have cache entries so this cache works best with
+  Note that query eviction runs in linear time with the total number of
+  segments that have cache entries so this cache works best with 
  <code>caching policies</code> that only cache on "large"
- segments, and it is advised to not share this cache across too many indices.
- Typical usage looks like this:
+  segments, and it is advised to not share this cache across too many indices.
+  Typical usage looks like this: 
  <pre class="prettyprint">
- final int maxNumberOfCachedQueries = 256;
- final long maxRamBytesUsed = 50 * 1024L * 1024L; // 50MB
- // these cache and policy instances can be shared across several queries and readers
- // it is fine to eg. store them into static variables
- final QueryCache queryCache = new LRUQueryCache(maxNumberOfCachedQueries, maxRamBytesUsed);
- final QueryCachingPolicy defaultCachingPolicy = new UsageTrackingQueryCachingPolicy();
- // ...
- // Then at search time
- Query myQuery = ...;
- Query myCacheQuery = queryCache.doCache(myQuery, defaultCachingPolicy);
- // myCacheQuery is now a wrapper around the original query that will interact with the cache
- IndexSearcher searcher = ...;
- TopDocs topDocs = searcher.search(new ConstantScoreQuery(myCacheQuery), 10);
+    final int maxNumberOfCachedQueries = 256;
+    final long maxRamBytesUsed = 50 * 1024L * 1024L; // 50MB
+    // these cache and policy instances can be shared across several queries and readers
+    // it is fine to eg. store them into static variables
+    final QueryCache queryCache = new LRUQueryCache(maxNumberOfCachedQueries, maxRamBytesUsed);
+    final QueryCachingPolicy defaultCachingPolicy = new UsageTrackingQueryCachingPolicy();
+    // ...
+    // Then at search time
+    Query myQuery = ...;
+    Query myCacheQuery = queryCache.doCache(myQuery, defaultCachingPolicy);
+    // myCacheQuery is now a wrapper around the original query that will interact with the cache
+    IndexSearcher searcher = ...;
+    TopDocs topDocs = searcher.search(new ConstantScoreQuery(myCacheQuery), 10); 
  
 @endcode
- This cache exposes some global statistics (<code>hit count</code>,
- <code>miss count</code>, <code>number of cache
- entries</code>
+  This cache exposes some global statistics (<code>hit count</code>,
+  <code>miss count</code>, <code>number of cache
+  entries</code>
  , <code>total number of DocIdSets that have ever
- been cached</code>
+  been cached</code>
  , <code>number of evicted entries</code>). In
- case you would like to have more fine-grained statistics, such as per-index
- or per-query-class statistics, it is possible to override various callbacks:
+  case you would like to have more fine-grained statistics, such as per-index
+  or per-query-class statistics, it is possible to override various callbacks: 
  <code>onHit</code>, <code>onMiss</code>,
- <code>onQueryCache</code>, <code>onQueryEviction</code>,
- <code>onDocIdSetCache</code>, <code>onDocIdSetEviction</code> and <code>onClear</code>.
- It is better to not perform heavy computations in these methods though since
- they are called synchronously and under a lock.
+  <code>onQueryCache</code>, <code>onQueryEviction</code>,
+  <code>onDocIdSetCache</code>, <code>onDocIdSetEviction</code> and <code>onClear</code>.
+  It is better to not perform heavy computations in these methods though since
+  they are called synchronously and under a lock.
  - seealso: QueryCachingPolicy
  */
 @interface OrgApacheLuceneSearchLRUQueryCache : NSObject < OrgApacheLuceneSearchQueryCache, OrgApacheLuceneUtilAccountable >
-
-+ (jlong)QUERY_DEFAULT_RAM_BYTES_USED;
-
-+ (jlong)HASHTABLE_RAM_BYTES_PER_ENTRY;
-
-+ (jlong)LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY;
+@property (readonly, class) jlong QUERY_DEFAULT_RAM_BYTES_USED NS_SWIFT_NAME(QUERY_DEFAULT_RAM_BYTES_USED);
+@property (readonly, class) jlong HASHTABLE_RAM_BYTES_PER_ENTRY NS_SWIFT_NAME(HASHTABLE_RAM_BYTES_PER_ENTRY);
+@property (readonly, class) jlong LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY NS_SWIFT_NAME(LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY);
 
 #pragma mark Public
 
 /*!
  @brief Create a new instance that will cache at most <code>maxSize</code> queries
- with at most <code>maxRamBytesUsed</code> bytes of memory.
+  with at most <code>maxRamBytesUsed</code> bytes of memory.
  */
-- (instancetype)initWithInt:(jint)maxSize
-                   withLong:(jlong)maxRamBytesUsed;
+- (instancetype __nonnull)initWithInt:(jint)maxSize
+                             withLong:(jlong)maxRamBytesUsed;
 
 /*!
  @brief Clear the content of this cache.
@@ -112,12 +115,11 @@
 
 /*!
  @brief Return the total number of cache entries that have been generated and put
- in the cache.
- It is highly desirable to have a <code>hit
- count</code>
+  in the cache.It is highly desirable to have a <code>hit
+  count</code>
   that is much higher than the <code>cache count</code>
- as the opposite would indicate that the query cache makes efforts in order
- to cache queries but then they do not get reused.
+  as the opposite would indicate that the query cache makes efforts in order
+  to cache queries but then they do not get reused.
  - seealso: #getCacheSize()
  - seealso: #getEvictionCount()
  */
@@ -125,7 +127,7 @@
 
 /*!
  @brief Return the total number of <code>DocIdSet</code>s which are currently stored
- in the cache.
+  in the cache.
  - seealso: #getCacheCount()
  - seealso: #getEvictionCount()
  */
@@ -135,12 +137,11 @@
 
 /*!
  @brief Return the number of cache entries that have been removed from the cache
- either in order to stay under the maximum configured size/ram usage, or
- because a segment has been closed.
- High numbers of evictions might mean
- that queries are not reused or that the <code>caching policy</code>
+  either in order to stay under the maximum configured size/ram usage, or
+  because a segment has been closed.High numbers of evictions might mean
+  that queries are not reused or that the <code>caching policy</code>
   caches too aggressively on NRT segments which get merged
- early.
+  early.
  - seealso: #getCacheCount()
  - seealso: #getCacheSize()
  */
@@ -148,8 +149,8 @@
 
 /*!
  @brief Over the <code>total</code> number of times that a query has
- been looked up, return how many times a cached <code>DocIdSet</code> has been
- found and returned.
+  been looked up, return how many times a cached <code>DocIdSet</code> has been
+  found and returned.
  - seealso: #getTotalCount()
  - seealso: #getMissCount()
  */
@@ -157,8 +158,8 @@
 
 /*!
  @brief Over the <code>total</code> number of times that a query has
- been looked up, return how many times this query was not contained in the
- cache.
+  been looked up, return how many times this query was not contained in the
+  cache.
  - seealso: #getTotalCount()
  - seealso: #getHitCount()
  */
@@ -166,11 +167,10 @@
 
 /*!
  @brief Return the total number of times that a <code>Query</code> has been looked up
- in this <code>QueryCache</code>.
- Note that this number is incremented once per
- segment so running a cached query only once will increment this counter
- by the number of segments that are wrapped by the searcher.
- Note that by definition, <code>getTotalCount()</code> is the sum of
+  in this <code>QueryCache</code>.Note that this number is incremented once per
+  segment so running a cached query only once will increment this counter
+  by the number of segments that are wrapped by the searcher.
+ Note that by definition, <code>getTotalCount()</code> is the sum of 
  <code>getHitCount()</code> and <code>getMissCount()</code>.
  - seealso: #getHitCount()
  - seealso: #getMissCount()
@@ -195,7 +195,7 @@
 /*!
  @brief Expert: callback when a <code>DocIdSet</code> is added to this cache.
  Implementing this method is typically useful in order to compute more
- fine-grained statistics about the query cache.
+  fine-grained statistics about the query cache.
  - seealso: #onDocIdSetEviction
  */
 - (void)onDocIdSetCacheWithId:(id)readerCoreKey
@@ -203,7 +203,7 @@
 
 /*!
  @brief Expert: callback when one or more <code>DocIdSet</code>s are removed from this
- cache.
+  cache.
  - seealso: #onDocIdSetCache
  */
 - (void)onDocIdSetEvictionWithId:(id)readerCoreKey
@@ -213,7 +213,7 @@
 /*!
  @brief Expert: callback when there is a cache hit on a given query.
  Implementing this method is typically useful in order to compute more
- fine-grained statistics about the query cache.
+  fine-grained statistics about the query cache.
  - seealso: #onMiss
  */
 - (void)onHitWithId:(id)readerCoreKey
@@ -229,7 +229,7 @@ withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 /*!
  @brief Expert: callback when a query is added to this cache.
  Implementing this method is typically useful in order to compute more
- fine-grained statistics about the query cache.
+  fine-grained statistics about the query cache.
  - seealso: #onQueryEviction
  */
 - (void)onQueryCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -243,10 +243,9 @@ withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
                                              withLong:(jlong)ramBytesUsed;
 
 /*!
- @brief Return the number of bytes used by the given query.
- The default
- implementation returns <code>Accountable.ramBytesUsed()</code> if the query
- implements <code>Accountable</code> and <code>1024</code> otherwise.
+ @brief Return the number of bytes used by the given query.The default
+  implementation returns <code>Accountable.ramBytesUsed()</code> if the query
+  implements <code>Accountable</code> and <code>1024</code> otherwise.
  */
 - (jlong)ramBytesUsedWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
@@ -270,20 +269,24 @@ withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
  */
 - (jboolean)requiresEviction;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchLRUQueryCache)
 
-inline jlong OrgApacheLuceneSearchLRUQueryCache_get_QUERY_DEFAULT_RAM_BYTES_USED();
+inline jlong OrgApacheLuceneSearchLRUQueryCache_get_QUERY_DEFAULT_RAM_BYTES_USED(void);
 #define OrgApacheLuceneSearchLRUQueryCache_QUERY_DEFAULT_RAM_BYTES_USED 192LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchLRUQueryCache, QUERY_DEFAULT_RAM_BYTES_USED, jlong)
 
-inline jlong OrgApacheLuceneSearchLRUQueryCache_get_HASHTABLE_RAM_BYTES_PER_ENTRY();
+inline jlong OrgApacheLuceneSearchLRUQueryCache_get_HASHTABLE_RAM_BYTES_PER_ENTRY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jlong OrgApacheLuceneSearchLRUQueryCache_HASHTABLE_RAM_BYTES_PER_ENTRY;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneSearchLRUQueryCache, HASHTABLE_RAM_BYTES_PER_ENTRY, jlong)
 
-inline jlong OrgApacheLuceneSearchLRUQueryCache_get_LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY();
+inline jlong OrgApacheLuceneSearchLRUQueryCache_get_LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jlong OrgApacheLuceneSearchLRUQueryCache_LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneSearchLRUQueryCache, LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY, jlong)
@@ -298,4 +301,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchLRUQueryCache)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchLRUQueryCache")

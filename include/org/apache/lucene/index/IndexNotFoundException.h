@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexNotFoundException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexNotFoundException_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexNotFoundException || defined(INCLUDE_OrgApacheLuceneIndexIndexNotFoundException))
 #define OrgApacheLuceneIndexIndexNotFoundException_
 
@@ -21,9 +27,8 @@
 #include "java/io/FileNotFoundException.h"
 
 /*!
- @brief Signals that no index was found in the Directory.
- Possibly because the
- directory is empty, however can also indicate an index corruption.
+ @brief Signals that no index was found in the Directory.Possibly because the
+  directory is empty, however can also indicate an index corruption.
  */
 @interface OrgApacheLuceneIndexIndexNotFoundException : JavaIoFileNotFoundException
 
@@ -31,9 +36,16 @@
 
 /*!
  @brief Creates IndexFileNotFoundException with the
- description message.
+   description message.
  */
-- (instancetype)initWithNSString:(NSString *)msg;
+- (instancetype __nonnull)initWithNSString:(NSString *)msg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                              withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -49,4 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexNotFoundException)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexNotFoundException")

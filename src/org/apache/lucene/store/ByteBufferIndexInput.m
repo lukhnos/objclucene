@@ -26,6 +26,10 @@
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/util/WeakIdentityMap.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/ByteBufferIndexInput must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneStoreByteBufferIndexInput ()
 
 - (void)setPosWithLong:(jlong)pos
@@ -33,8 +37,8 @@
 
 /*!
  @brief Returns a sliced view from a set of already-existing buffers: 
- the last buffer's limit() will be correct, but
- you must deal with offset separately (the first buffer will not be adjusted)
+   the last buffer's limit() will be correct, but
+   you must deal with offset separately (the first buffer will not be adjusted)
  */
 - (IOSObjectArray *)buildSliceWithJavaNioByteBufferArray:(IOSObjectArray *)buffers
                                                 withLong:(jlong)offset
@@ -52,7 +56,21 @@
 
 @end
 
+__attribute__((unused)) static jlong OrgApacheLuceneStoreByteBufferIndexInput_getFilePointer(OrgApacheLuceneStoreByteBufferIndexInput *self);
+
+__attribute__((unused)) static void OrgApacheLuceneStoreByteBufferIndexInput_seekWithLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos);
+
+__attribute__((unused)) static jbyte OrgApacheLuceneStoreByteBufferIndexInput_readByteWithLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos);
+
 __attribute__((unused)) static void OrgApacheLuceneStoreByteBufferIndexInput_setPosWithLong_withInt_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos, jint bi);
+
+__attribute__((unused)) static jshort OrgApacheLuceneStoreByteBufferIndexInput_readShortWithLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos);
+
+__attribute__((unused)) static jint OrgApacheLuceneStoreByteBufferIndexInput_readIntWithLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos);
+
+__attribute__((unused)) static jlong OrgApacheLuceneStoreByteBufferIndexInput_readLongWithLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos);
+
+__attribute__((unused)) static OrgApacheLuceneStoreByteBufferIndexInput *OrgApacheLuceneStoreByteBufferIndexInput_buildSliceWithNSString_withLong_withLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, NSString *sliceDescription, jlong offset, jlong length);
 
 __attribute__((unused)) static IOSObjectArray *OrgApacheLuceneStoreByteBufferIndexInput_buildSliceWithJavaNioByteBufferArray_withLong_withLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, IOSObjectArray *buffers, jlong offset, jlong length);
 
@@ -82,13 +100,13 @@ __attribute__((unused)) static void OrgApacheLuceneStoreByteBufferIndexInput_fre
   return OrgApacheLuceneStoreByteBufferIndexInput_newInstanceWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withBoolean_(resourceDescription, buffers, length, chunkSizePower, cleaner, trackClones);
 }
 
-- (instancetype)initWithNSString:(NSString *)resourceDescription
-      withJavaNioByteBufferArray:(IOSObjectArray *)buffers
-                        withLong:(jlong)length
-                         withInt:(jint)chunkSizePower
+- (instancetype)initPackagePrivateWithNSString:(NSString *)resourceDescription
+                    withJavaNioByteBufferArray:(IOSObjectArray *)buffers
+                                      withLong:(jlong)length
+                                       withInt:(jint)chunkSizePower
 withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:(id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner>)cleaner
-withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clones {
-  OrgApacheLuceneStoreByteBufferIndexInput_initWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(self, resourceDescription, buffers, length, chunkSizePower, cleaner, clones);
+        withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clones {
+  OrgApacheLuceneStoreByteBufferIndexInput_initPackagePrivateWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(self, resourceDescription, buffers, length, chunkSizePower, cleaner, clones);
   return self;
 }
 
@@ -177,52 +195,15 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
 }
 
 - (jlong)getFilePointer {
-  @try {
-    return (JreLShift64(((jlong) curBufIndex_), chunkSizePower_)) + [((JavaNioByteBuffer *) nil_chk(curBuf_)) position];
-  }
-  @catch (JavaLangNullPointerException *npe) {
-    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
-  }
+  return OrgApacheLuceneStoreByteBufferIndexInput_getFilePointer(self);
 }
 
 - (void)seekWithLong:(jlong)pos {
-  jint bi = (jint) (JreRShift64(pos, chunkSizePower_));
-  @try {
-    if (bi == curBufIndex_) {
-      [((JavaNioByteBuffer *) nil_chk(curBuf_)) positionWithInt:(jint) (pos & chunkSizeMask_)];
-    }
-    else {
-      JavaNioByteBuffer *b = IOSObjectArray_Get(nil_chk(buffers_), bi);
-      [((JavaNioByteBuffer *) nil_chk(b)) positionWithInt:(jint) (pos & chunkSizeMask_)];
-      self->curBufIndex_ = bi;
-      JreStrongAssign(&self->curBuf_, b);
-    }
-  }
-  @catch (JavaLangArrayIndexOutOfBoundsException *e) {
-    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
-  }
-  @catch (JavaLangIllegalArgumentException *e) {
-    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
-  }
-  @catch (JavaLangRuntimeException *e) {
-    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
-  }
-  @catch (JavaLangNullPointerException *npe) {
-    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
-  }
+  OrgApacheLuceneStoreByteBufferIndexInput_seekWithLong_(self, pos);
 }
 
 - (jbyte)readByteWithLong:(jlong)pos {
-  @try {
-    jint bi = (jint) (JreRShift64(pos, chunkSizePower_));
-    return [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(nil_chk(buffers_), bi))) getWithInt:(jint) (pos & chunkSizeMask_)];
-  }
-  @catch (JavaLangIndexOutOfBoundsException *ioobe) {
-    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
-  }
-  @catch (JavaLangNullPointerException *npe) {
-    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
-  }
+  return OrgApacheLuceneStoreByteBufferIndexInput_readByteWithLong_(self, pos);
 }
 
 - (void)setPosWithLong:(jlong)pos
@@ -231,52 +212,22 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
 }
 
 - (jshort)readShortWithLong:(jlong)pos {
-  jint bi = (jint) (JreRShift64(pos, chunkSizePower_));
-  @try {
-    return [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(nil_chk(buffers_), bi))) getShortWithInt:(jint) (pos & chunkSizeMask_)];
-  }
-  @catch (JavaLangIndexOutOfBoundsException *ioobe) {
-    OrgApacheLuceneStoreByteBufferIndexInput_setPosWithLong_withInt_(self, pos, bi);
-    return [self readShort];
-  }
-  @catch (JavaLangNullPointerException *npe) {
-    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
-  }
+  return OrgApacheLuceneStoreByteBufferIndexInput_readShortWithLong_(self, pos);
 }
 
 - (jint)readIntWithLong:(jlong)pos {
-  jint bi = (jint) (JreRShift64(pos, chunkSizePower_));
-  @try {
-    return [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(nil_chk(buffers_), bi))) getIntWithInt:(jint) (pos & chunkSizeMask_)];
-  }
-  @catch (JavaLangIndexOutOfBoundsException *ioobe) {
-    OrgApacheLuceneStoreByteBufferIndexInput_setPosWithLong_withInt_(self, pos, bi);
-    return [self readInt];
-  }
-  @catch (JavaLangNullPointerException *npe) {
-    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
-  }
+  return OrgApacheLuceneStoreByteBufferIndexInput_readIntWithLong_(self, pos);
 }
 
 - (jlong)readLongWithLong:(jlong)pos {
-  jint bi = (jint) (JreRShift64(pos, chunkSizePower_));
-  @try {
-    return [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(nil_chk(buffers_), bi))) getLongWithInt:(jint) (pos & chunkSizeMask_)];
-  }
-  @catch (JavaLangIndexOutOfBoundsException *ioobe) {
-    OrgApacheLuceneStoreByteBufferIndexInput_setPosWithLong_withInt_(self, pos, bi);
-    return [self readLong];
-  }
-  @catch (JavaLangNullPointerException *npe) {
-    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
-  }
+  return OrgApacheLuceneStoreByteBufferIndexInput_readLongWithLong_(self, pos);
 }
 
 - (jlong)length {
   return length_;
 }
 
-- (OrgApacheLuceneStoreByteBufferIndexInput *)clone {
+- (OrgApacheLuceneStoreByteBufferIndexInput *)java_clone {
   OrgApacheLuceneStoreByteBufferIndexInput *clone = [self buildSliceWithNSString:nil withLong:0LL withLong:self->length_];
   @try {
     [((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(clone)) seekWithLong:[self getFilePointer]];
@@ -299,17 +250,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
 - (OrgApacheLuceneStoreByteBufferIndexInput *)buildSliceWithNSString:(NSString *)sliceDescription
                                                             withLong:(jlong)offset
                                                             withLong:(jlong)length {
-  if (buffers_ == nil) {
-    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
-  }
-  IOSObjectArray *newBuffers = OrgApacheLuceneStoreByteBufferIndexInput_buildSliceWithJavaNioByteBufferArray_withLong_withLong_(self, buffers_, offset, length);
-  jint ofs = (jint) (offset & chunkSizeMask_);
-  OrgApacheLuceneStoreByteBufferIndexInput *clone = [self newCloneInstanceWithNSString:[self getFullSliceDescriptionWithNSString:sliceDescription] withJavaNioByteBufferArray:newBuffers withInt:ofs withLong:length];
-  ((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(clone))->isClone_ = true;
-  if (clones_ != nil) {
-    [self->clones_ putWithId:clone withId:JreLoadStatic(JavaLangBoolean, TRUE)];
-  }
-  return clone;
+  return OrgApacheLuceneStoreByteBufferIndexInput_buildSliceWithNSString_withLong_withLong_(self, sliceDescription, offset, length);
 }
 
 - (OrgApacheLuceneStoreByteBufferIndexInput *)newCloneInstanceWithNSString:(NSString *)newResourceDescription
@@ -341,9 +282,9 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     }
     if (isClone_) return;
     if (clones_ != nil) {
-      for (id<JavaUtilIterator> it = [self->clones_ keyIterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
+      for (id<JavaUtilIterator> it = JreRetainedLocalValue([self->clones_ keyIterator]); [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
         OrgApacheLuceneStoreByteBufferIndexInput *clone = [it next];
-        JreAssert((((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(clone))->isClone_), (@"org/apache/lucene/store/ByteBufferIndexInput.java:348 condition failed: assert clone.isClone;"));
+        JreAssert(((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(clone))->isClone_, @"org/apache/lucene/store/ByteBufferIndexInput.java:348 condition failed: assert clone.isClone;");
         OrgApacheLuceneStoreByteBufferIndexInput_unsetBuffers(clone);
       }
       [self->clones_ clear];
@@ -380,44 +321,71 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "newInstanceWithNSString:withJavaNioByteBufferArray:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withBoolean:", "newInstance", "Lorg.apache.lucene.store.ByteBufferIndexInput;", 0x9, NULL, NULL },
-    { "initWithNSString:withJavaNioByteBufferArray:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:", "ByteBufferIndexInput", NULL, 0x0, NULL, "(Ljava/lang/String;[Ljava/nio/ByteBuffer;JILorg/apache/lucene/store/ByteBufferIndexInput$BufferCleaner;Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;)V" },
-    { "readByte", NULL, "B", 0x11, "Ljava.io.IOException;", NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "readShort", NULL, "S", 0x11, "Ljava.io.IOException;", NULL },
-    { "readInt", NULL, "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "readLong", NULL, "J", 0x11, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
-    { "seekWithLong:", "seek", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "readByteWithLong:", "readByte", "B", 0x1, "Ljava.io.IOException;", NULL },
-    { "setPosWithLong:withInt:", "setPos", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "readShortWithLong:", "readShort", "S", 0x1, "Ljava.io.IOException;", NULL },
-    { "readIntWithLong:", "readInt", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "readLongWithLong:", "readLong", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "length", NULL, "J", 0x11, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.store.ByteBufferIndexInput;", 0x11, NULL, NULL },
-    { "sliceWithNSString:withLong:withLong:", "slice", "Lorg.apache.lucene.store.ByteBufferIndexInput;", 0x11, NULL, NULL },
-    { "buildSliceWithNSString:withLong:withLong:", "buildSlice", "Lorg.apache.lucene.store.ByteBufferIndexInput;", 0x4, NULL, NULL },
-    { "newCloneInstanceWithNSString:withJavaNioByteBufferArray:withInt:withLong:", "newCloneInstance", "Lorg.apache.lucene.store.ByteBufferIndexInput;", 0x4, NULL, NULL },
-    { "buildSliceWithJavaNioByteBufferArray:withLong:withLong:", "buildSlice", "[Ljava.nio.ByteBuffer;", 0x2, NULL, NULL },
-    { "close", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
-    { "unsetBuffers", NULL, "V", 0x2, NULL, NULL },
-    { "freeBufferWithJavaNioByteBuffer:", "freeBuffer", "V", 0x2, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneStoreByteBufferIndexInput;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 2, -1, 3, -1, -1 },
+    { NULL, "B", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x11, 5, 6, 4, -1, -1, -1 },
+    { NULL, "S", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, 4, -1, -1, -1 },
+    { NULL, "B", 0x1, 9, 8, 4, -1, -1, -1 },
+    { NULL, "V", 0x2, 10, 11, 4, -1, -1, -1 },
+    { NULL, "S", 0x1, 12, 8, 4, -1, -1, -1 },
+    { NULL, "I", 0x1, 13, 8, 4, -1, -1, -1 },
+    { NULL, "J", 0x1, 14, 8, 4, -1, -1, -1 },
+    { NULL, "J", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreByteBufferIndexInput;", 0x11, 15, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreByteBufferIndexInput;", 0x11, 16, 17, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreByteBufferIndexInput;", 0x4, 18, 17, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreByteBufferIndexInput;", 0x4, 19, 20, -1, -1, -1, -1 },
+    { NULL, "[LJavaNioByteBuffer;", 0x2, 18, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, 4, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 22, 23, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(newInstanceWithNSString:withJavaNioByteBufferArray:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withBoolean:);
+  methods[1].selector = @selector(initPackagePrivateWithNSString:withJavaNioByteBufferArray:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:);
+  methods[2].selector = @selector(readByte);
+  methods[3].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  methods[4].selector = @selector(readShort);
+  methods[5].selector = @selector(readInt);
+  methods[6].selector = @selector(readLong);
+  methods[7].selector = @selector(getFilePointer);
+  methods[8].selector = @selector(seekWithLong:);
+  methods[9].selector = @selector(readByteWithLong:);
+  methods[10].selector = @selector(setPosWithLong:withInt:);
+  methods[11].selector = @selector(readShortWithLong:);
+  methods[12].selector = @selector(readIntWithLong:);
+  methods[13].selector = @selector(readLongWithLong:);
+  methods[14].selector = @selector(length);
+  methods[15].selector = @selector(java_clone);
+  methods[16].selector = @selector(sliceWithNSString:withLong:withLong:);
+  methods[17].selector = @selector(buildSliceWithNSString:withLong:withLong:);
+  methods[18].selector = @selector(newCloneInstanceWithNSString:withJavaNioByteBufferArray:withInt:withLong:);
+  methods[19].selector = @selector(buildSliceWithJavaNioByteBufferArray:withLong:withLong:);
+  methods[20].selector = @selector(close);
+  methods[21].selector = @selector(unsetBuffers);
+  methods[22].selector = @selector(freeBufferWithJavaNioByteBuffer:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "cleaner_", NULL, 0x14, "Lorg.apache.lucene.store.ByteBufferIndexInput$BufferCleaner;", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x14, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "chunkSizeMask_", NULL, 0x14, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "chunkSizePower_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffers_", NULL, 0x4, "[Ljava.nio.ByteBuffer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "curBufIndex_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "curBuf_", NULL, 0x4, "Ljava.nio.ByteBuffer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "isClone_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "clones_", NULL, 0x14, "Lorg.apache.lucene.util.WeakIdentityMap;", NULL, "Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;", .constantValue.asLong = 0 },
+    { "cleaner_", "LOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "length_", "J", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "chunkSizeMask_", "J", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "chunkSizePower_", "I", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "buffers_", "[LJavaNioByteBuffer;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "curBufIndex_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "curBuf_", "LJavaNioByteBuffer;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "isClone_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "clones_", "LOrgApacheLuceneUtilWeakIdentityMap;", .constantValue.asLong = 0, 0x14, -1, -1, 24, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.store.ByteBufferIndexInput$BufferCleaner;", "Lorg.apache.lucene.store.ByteBufferIndexInput$SingleBufferImpl;", "Lorg.apache.lucene.store.ByteBufferIndexInput$MultiBufferImpl;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteBufferIndexInput = { 2, "ByteBufferIndexInput", "org.apache.lucene.store", NULL, 0x400, 23, methods, 9, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "newInstance", "LNSString;[LJavaNioByteBuffer;JILOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;Z", "LNSString;[LJavaNioByteBuffer;JILOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;LOrgApacheLuceneUtilWeakIdentityMap;", "(Ljava/lang/String;[Ljava/nio/ByteBuffer;JILorg/apache/lucene/store/ByteBufferIndexInput$BufferCleaner;Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;)V", "LJavaIoIOException;", "readBytes", "[BII", "seek", "J", "readByte", "setPos", "JI", "readShort", "readInt", "readLong", "clone", "slice", "LNSString;JJ", "buildSlice", "newCloneInstance", "LNSString;[LJavaNioByteBuffer;IJ", "[LJavaNioByteBuffer;JJ", "freeBuffer", "LJavaNioByteBuffer;", "Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;", "LOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;LOrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl;LOrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteBufferIndexInput = { "ByteBufferIndexInput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x400, 23, 9, -1, 25, -1, -1, -1 };
   return &_OrgApacheLuceneStoreByteBufferIndexInput;
 }
 
@@ -434,7 +402,7 @@ OrgApacheLuceneStoreByteBufferIndexInput *OrgApacheLuceneStoreByteBufferIndexInp
   }
 }
 
-void OrgApacheLuceneStoreByteBufferIndexInput_initWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(OrgApacheLuceneStoreByteBufferIndexInput *self, NSString *resourceDescription, IOSObjectArray *buffers, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) {
+void OrgApacheLuceneStoreByteBufferIndexInput_initPackagePrivateWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(OrgApacheLuceneStoreByteBufferIndexInput *self, NSString *resourceDescription, IOSObjectArray *buffers, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) {
   OrgApacheLuceneStoreIndexInput_initWithNSString_(self, resourceDescription);
   self->curBufIndex_ = -1;
   self->isClone_ = false;
@@ -444,8 +412,54 @@ void OrgApacheLuceneStoreByteBufferIndexInput_initWithNSString_withJavaNioByteBu
   self->chunkSizeMask_ = (JreLShift64(1LL, chunkSizePower)) - 1LL;
   JreStrongAssign(&self->clones_, clones);
   JreStrongAssign(&self->cleaner_, cleaner);
-  JreAssert((chunkSizePower >= 0 && chunkSizePower <= 30), (@"org/apache/lucene/store/ByteBufferIndexInput.java:69 condition failed: assert chunkSizePower >= 0 && chunkSizePower <= 30;"));
-  JreAssert(((JreURShift64(length, chunkSizePower)) < JavaLangInteger_MAX_VALUE), (@"org/apache/lucene/store/ByteBufferIndexInput.java:70 condition failed: assert (length >>> chunkSizePower) < Integer.MAX_VALUE;"));
+  JreAssert(chunkSizePower >= 0 && chunkSizePower <= 30, @"org/apache/lucene/store/ByteBufferIndexInput.java:69 condition failed: assert chunkSizePower >= 0 && chunkSizePower <= 30;");
+  JreAssert((JreURShift64(length, chunkSizePower)) < JavaLangInteger_MAX_VALUE, @"org/apache/lucene/store/ByteBufferIndexInput.java:70 condition failed: assert (length >>> chunkSizePower) < Integer.MAX_VALUE;");
+}
+
+jlong OrgApacheLuceneStoreByteBufferIndexInput_getFilePointer(OrgApacheLuceneStoreByteBufferIndexInput *self) {
+  @try {
+    return (JreLShift64(((jlong) self->curBufIndex_), self->chunkSizePower_)) + [((JavaNioByteBuffer *) nil_chk(self->curBuf_)) position];
+  }
+  @catch (JavaLangNullPointerException *npe) {
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
+  }
+}
+
+void OrgApacheLuceneStoreByteBufferIndexInput_seekWithLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos) {
+  jint bi = (jint) (JreRShift64(pos, self->chunkSizePower_));
+  @try {
+    if (bi == self->curBufIndex_) {
+      [((JavaNioByteBuffer *) nil_chk(self->curBuf_)) positionWithInt:(jint) (pos & self->chunkSizeMask_)];
+    }
+    else {
+      JavaNioByteBuffer *b = IOSObjectArray_Get(nil_chk(self->buffers_), bi);
+      [((JavaNioByteBuffer *) nil_chk(b)) positionWithInt:(jint) (pos & self->chunkSizeMask_)];
+      self->curBufIndex_ = bi;
+      JreStrongAssign(&self->curBuf_, b);
+    }
+  }
+  @catch (JavaLangArrayIndexOutOfBoundsException *e) {
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
+  }
+  @catch (JavaLangIllegalArgumentException *e) {
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
+  }
+  @catch (JavaLangNullPointerException *npe) {
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
+  }
+}
+
+jbyte OrgApacheLuceneStoreByteBufferIndexInput_readByteWithLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos) {
+  @try {
+    jint bi = (jint) (JreRShift64(pos, self->chunkSizePower_));
+    return [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(nil_chk(self->buffers_), bi))) getWithInt:(jint) (pos & self->chunkSizeMask_)];
+  }
+  @catch (JavaLangIndexOutOfBoundsException *ioobe) {
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
+  }
+  @catch (JavaLangNullPointerException *npe) {
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
+  }
 }
 
 void OrgApacheLuceneStoreByteBufferIndexInput_setPosWithLong_withInt_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos, jint bi) {
@@ -461,12 +475,65 @@ void OrgApacheLuceneStoreByteBufferIndexInput_setPosWithLong_withInt_(OrgApacheL
   @catch (JavaLangIllegalArgumentException *aioobe) {
     @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
   }
-  @catch (JavaLangRuntimeException *aioobe) {
-    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
+  @catch (JavaLangNullPointerException *npe) {
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
+  }
+}
+
+jshort OrgApacheLuceneStoreByteBufferIndexInput_readShortWithLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos) {
+  jint bi = (jint) (JreRShift64(pos, self->chunkSizePower_));
+  @try {
+    return [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(nil_chk(self->buffers_), bi))) getShortWithInt:(jint) (pos & self->chunkSizeMask_)];
+  }
+  @catch (JavaLangIndexOutOfBoundsException *ioobe) {
+    OrgApacheLuceneStoreByteBufferIndexInput_setPosWithLong_withInt_(self, pos, bi);
+    return [self readShort];
   }
   @catch (JavaLangNullPointerException *npe) {
     @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
+}
+
+jint OrgApacheLuceneStoreByteBufferIndexInput_readIntWithLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos) {
+  jint bi = (jint) (JreRShift64(pos, self->chunkSizePower_));
+  @try {
+    return [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(nil_chk(self->buffers_), bi))) getIntWithInt:(jint) (pos & self->chunkSizeMask_)];
+  }
+  @catch (JavaLangIndexOutOfBoundsException *ioobe) {
+    OrgApacheLuceneStoreByteBufferIndexInput_setPosWithLong_withInt_(self, pos, bi);
+    return [self readInt];
+  }
+  @catch (JavaLangNullPointerException *npe) {
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
+  }
+}
+
+jlong OrgApacheLuceneStoreByteBufferIndexInput_readLongWithLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, jlong pos) {
+  jint bi = (jint) (JreRShift64(pos, self->chunkSizePower_));
+  @try {
+    return [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(nil_chk(self->buffers_), bi))) getLongWithInt:(jint) (pos & self->chunkSizeMask_)];
+  }
+  @catch (JavaLangIndexOutOfBoundsException *ioobe) {
+    OrgApacheLuceneStoreByteBufferIndexInput_setPosWithLong_withInt_(self, pos, bi);
+    return [self readLong];
+  }
+  @catch (JavaLangNullPointerException *npe) {
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
+  }
+}
+
+OrgApacheLuceneStoreByteBufferIndexInput *OrgApacheLuceneStoreByteBufferIndexInput_buildSliceWithNSString_withLong_withLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, NSString *sliceDescription, jlong offset, jlong length) {
+  if (self->buffers_ == nil) {
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
+  }
+  IOSObjectArray *newBuffers = OrgApacheLuceneStoreByteBufferIndexInput_buildSliceWithJavaNioByteBufferArray_withLong_withLong_(self, self->buffers_, offset, length);
+  jint ofs = (jint) (offset & self->chunkSizeMask_);
+  OrgApacheLuceneStoreByteBufferIndexInput *clone = [self newCloneInstanceWithNSString:[self getFullSliceDescriptionWithNSString:sliceDescription] withJavaNioByteBufferArray:newBuffers withInt:ofs withLong:length];
+  ((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(clone))->isClone_ = true;
+  if (self->clones_ != nil) {
+    [self->clones_ putWithId:clone withId:JreLoadStatic(JavaLangBoolean, TRUE)];
+  }
+  return clone;
 }
 
 IOSObjectArray *OrgApacheLuceneStoreByteBufferIndexInput_buildSliceWithJavaNioByteBufferArray_withLong_withLong_(OrgApacheLuceneStoreByteBufferIndexInput *self, IOSObjectArray *buffers, jlong offset, jlong length) {
@@ -498,10 +565,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreByteBufferIndexInput)
 @implementation OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:withJavaNioByteBuffer:", "freeBuffer", "V", 0x401, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner = { 2, "BufferCleaner", "org.apache.lucene.store", "ByteBufferIndexInput", 0x608, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:withJavaNioByteBuffer:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "freeBuffer", "LOrgApacheLuceneStoreByteBufferIndexInput;LJavaNioByteBuffer;", "LJavaIoIOException;", "LOrgApacheLuceneStoreByteBufferIndexInput;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner = { "BufferCleaner", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x608, 1, 0, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;
 }
 
@@ -527,7 +600,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if (pos < 0) {
-      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
     }
     else {
       @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
@@ -553,7 +626,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if (pos < 0) {
-      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
     }
     else {
       @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
@@ -570,7 +643,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if (pos < 0) {
-      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
     }
     else {
       @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
@@ -587,7 +660,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if (pos < 0) {
-      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
     }
     else {
       @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
@@ -604,7 +677,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if (pos < 0) {
-      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
     }
     else {
       @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
@@ -616,23 +689,35 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaNioByteBuffer:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:", "SingleBufferImpl", NULL, 0x0, NULL, "(Ljava/lang/String;Ljava/nio/ByteBuffer;JILorg/apache/lucene/store/ByteBufferIndexInput$BufferCleaner;Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;)V" },
-    { "seekWithLong:", "seek", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
-    { "readByteWithLong:", "readByte", "B", 0x1, "Ljava.io.IOException;", NULL },
-    { "readShortWithLong:", "readShort", "S", 0x1, "Ljava.io.IOException;", NULL },
-    { "readIntWithLong:", "readInt", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "readLongWithLong:", "readLong", "J", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, 5, 3, 4, -1, -1, -1 },
+    { NULL, "S", 0x1, 6, 3, 4, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, 3, 4, -1, -1, -1 },
+    { NULL, "J", 0x1, 8, 3, 4, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl = { 2, "SingleBufferImpl", "org.apache.lucene.store", "ByteBufferIndexInput", 0x18, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withJavaNioByteBuffer:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:);
+  methods[1].selector = @selector(seekWithLong:);
+  methods[2].selector = @selector(getFilePointer);
+  methods[3].selector = @selector(readByteWithLong:);
+  methods[4].selector = @selector(readShortWithLong:);
+  methods[5].selector = @selector(readIntWithLong:);
+  methods[6].selector = @selector(readLongWithLong:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;LJavaNioByteBuffer;JILOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;LOrgApacheLuceneUtilWeakIdentityMap;", "(Ljava/lang/String;Ljava/nio/ByteBuffer;JILorg/apache/lucene/store/ByteBufferIndexInput$BufferCleaner;Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;)V", "seek", "J", "LJavaIoIOException;", "readByte", "readShort", "readInt", "readLong", "LOrgApacheLuceneStoreByteBufferIndexInput;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl = { "SingleBufferImpl", "org.apache.lucene.store", ptrTable, methods, NULL, 7, 0x18, 7, 0, 9, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl;
 }
 
 @end
 
 void OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl *self, NSString *resourceDescription, JavaNioByteBuffer *buffer, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) {
-  OrgApacheLuceneStoreByteBufferIndexInput_initWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(self, resourceDescription, [IOSObjectArray arrayWithObjects:(id[]){ buffer } count:1 type:JavaNioByteBuffer_class_()], length, chunkSizePower, cleaner, clones);
+  OrgApacheLuceneStoreByteBufferIndexInput_initPackagePrivateWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(self, resourceDescription, [IOSObjectArray arrayWithObjects:(id[]){ buffer } count:1 type:JavaNioByteBuffer_class_()], length, chunkSizePower, cleaner, clones);
   self->curBufIndex_ = 0;
   JreStrongAssign(&self->curBuf_, buffer);
   [((JavaNioByteBuffer *) nil_chk(buffer)) positionWithInt:0];
@@ -662,58 +747,71 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
 }
 
 - (void)seekWithLong:(jlong)pos {
-  JreAssert((pos >= 0LL), (@"org/apache/lucene/store/ByteBufferIndexInput.java:503 condition failed: assert pos >= 0L;"));
-  [super seekWithLong:pos + offset_];
+  JreAssert(pos >= 0LL, @"org/apache/lucene/store/ByteBufferIndexInput.java:503 condition failed: assert pos >= 0L;");
+  OrgApacheLuceneStoreByteBufferIndexInput_seekWithLong_(self, pos + offset_);
 }
 
 - (jlong)getFilePointer {
-  return [super getFilePointer] - offset_;
+  return OrgApacheLuceneStoreByteBufferIndexInput_getFilePointer(self) - offset_;
 }
 
 - (jbyte)readByteWithLong:(jlong)pos {
-  return [super readByteWithLong:pos + offset_];
+  return OrgApacheLuceneStoreByteBufferIndexInput_readByteWithLong_(self, pos + offset_);
 }
 
 - (jshort)readShortWithLong:(jlong)pos {
-  return [super readShortWithLong:pos + offset_];
+  return OrgApacheLuceneStoreByteBufferIndexInput_readShortWithLong_(self, pos + offset_);
 }
 
 - (jint)readIntWithLong:(jlong)pos {
-  return [super readIntWithLong:pos + offset_];
+  return OrgApacheLuceneStoreByteBufferIndexInput_readIntWithLong_(self, pos + offset_);
 }
 
 - (jlong)readLongWithLong:(jlong)pos {
-  return [super readLongWithLong:pos + offset_];
+  return OrgApacheLuceneStoreByteBufferIndexInput_readLongWithLong_(self, pos + offset_);
 }
 
 - (OrgApacheLuceneStoreByteBufferIndexInput *)buildSliceWithNSString:(NSString *)sliceDescription
                                                             withLong:(jlong)ofs
                                                             withLong:(jlong)length {
-  return [super buildSliceWithNSString:sliceDescription withLong:self->offset_ + ofs withLong:length];
+  return OrgApacheLuceneStoreByteBufferIndexInput_buildSliceWithNSString_withLong_withLong_(self, sliceDescription, self->offset_ + ofs, length);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaNioByteBufferArray:withInt:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:", "MultiBufferImpl", NULL, 0x0, NULL, "(Ljava/lang/String;[Ljava/nio/ByteBuffer;IJILorg/apache/lucene/store/ByteBufferIndexInput$BufferCleaner;Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;)V" },
-    { "seekWithLong:", "seek", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
-    { "readByteWithLong:", "readByte", "B", 0x1, "Ljava.io.IOException;", NULL },
-    { "readShortWithLong:", "readShort", "S", 0x1, "Ljava.io.IOException;", NULL },
-    { "readIntWithLong:", "readInt", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "readLongWithLong:", "readLong", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "buildSliceWithNSString:withLong:withLong:", "buildSlice", "Lorg.apache.lucene.store.ByteBufferIndexInput;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, 5, 3, 4, -1, -1, -1 },
+    { NULL, "S", 0x1, 6, 3, 4, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, 3, 4, -1, -1, -1 },
+    { NULL, "J", 0x1, 8, 3, 4, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreByteBufferIndexInput;", 0x4, 9, 10, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withJavaNioByteBufferArray:withInt:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:);
+  methods[1].selector = @selector(seekWithLong:);
+  methods[2].selector = @selector(getFilePointer);
+  methods[3].selector = @selector(readByteWithLong:);
+  methods[4].selector = @selector(readShortWithLong:);
+  methods[5].selector = @selector(readIntWithLong:);
+  methods[6].selector = @selector(readLongWithLong:);
+  methods[7].selector = @selector(buildSliceWithNSString:withLong:withLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "offset_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "offset_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl = { 2, "MultiBufferImpl", "org.apache.lucene.store", "ByteBufferIndexInput", 0x18, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;[LJavaNioByteBuffer;IJILOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;LOrgApacheLuceneUtilWeakIdentityMap;", "(Ljava/lang/String;[Ljava/nio/ByteBuffer;IJILorg/apache/lucene/store/ByteBufferIndexInput$BufferCleaner;Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;)V", "seek", "J", "LJavaIoIOException;", "readByte", "readShort", "readInt", "readLong", "buildSlice", "LNSString;JJ", "LOrgApacheLuceneStoreByteBufferIndexInput;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl = { "MultiBufferImpl", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x18, 8, 1, 11, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl;
 }
 
 @end
 
 void OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl *self, NSString *resourceDescription, IOSObjectArray *buffers, jint offset, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) {
-  OrgApacheLuceneStoreByteBufferIndexInput_initWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(self, resourceDescription, buffers, length, chunkSizePower, cleaner, clones);
+  OrgApacheLuceneStoreByteBufferIndexInput_initPackagePrivateWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(self, resourceDescription, buffers, length, chunkSizePower, cleaner, clones);
   self->offset_ = offset;
   @try {
     [self seekWithLong:0LL];

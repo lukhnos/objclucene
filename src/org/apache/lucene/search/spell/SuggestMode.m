@@ -3,11 +3,15 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/spell/SuggestMode.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/search/spell/SuggestMode.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spell/SuggestMode must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static void OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(OrgApacheLuceneSearchSpellSuggestMode *self, NSString *__name, jint __ordinal);
 
@@ -41,8 +45,25 @@ OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_val
   return (OrgApacheLuceneSearchSpellSuggestMode_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneSearchSpellSuggestMode;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpellSuggestMode;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "SUGGEST_WHEN_NOT_IN_INDEX", "LOrgApacheLuceneSearchSpellSuggestMode;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "SUGGEST_MORE_POPULAR", "LOrgApacheLuceneSearchSpellSuggestMode;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "SUGGEST_ALWAYS", "LOrgApacheLuceneSearchSpellSuggestMode;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_WHEN_NOT_IN_INDEX), &JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_MORE_POPULAR), &JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_ALWAYS), "Ljava/lang/Enum<Lorg/apache/lucene/search/spell/SuggestMode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellSuggestMode = { "SuggestMode", "org.apache.lucene.search.spell", ptrTable, methods, fields, 7, 0x4011, 2, 3, -1, -1, -1, 5, -1 };
+  return &_OrgApacheLuceneSearchSpellSuggestMode;
 }
 
 + (void)initialize {
@@ -51,25 +72,12 @@ OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_val
     size_t allocSize = 3 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_WHEN_NOT_IN_INDEX) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(e, @"SUGGEST_WHEN_NOT_IN_INDEX", 0);
-    (JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_MORE_POPULAR) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(e, @"SUGGEST_MORE_POPULAR", 1);
-    (JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_ALWAYS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(e, @"SUGGEST_ALWAYS", 2);
+    for (jint i = 0; i < 3; i++) {
+      ((void)(OrgApacheLuceneSearchSpellSuggestMode_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneSearchSpellSuggestMode_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpellSuggestMode)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "SUGGEST_WHEN_NOT_IN_INDEX", "SUGGEST_WHEN_NOT_IN_INDEX", 0x4019, "Lorg.apache.lucene.search.spell.SuggestMode;", &JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_WHEN_NOT_IN_INDEX), NULL, .constantValue.asLong = 0 },
-    { "SUGGEST_MORE_POPULAR", "SUGGEST_MORE_POPULAR", 0x4019, "Lorg.apache.lucene.search.spell.SuggestMode;", &JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_MORE_POPULAR), NULL, .constantValue.asLong = 0 },
-    { "SUGGEST_ALWAYS", "SUGGEST_ALWAYS", 0x4019, "Lorg.apache.lucene.search.spell.SuggestMode;", &JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_ALWAYS), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spell.SuggestMode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellSuggestMode = { 2, "SuggestMode", "org.apache.lucene.search.spell", NULL, 0x4011, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/spell/SuggestMode;>;" };
-  return &_OrgApacheLuceneSearchSpellSuggestMode;
 }
 
 @end
@@ -91,7 +99,7 @@ OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_val
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 

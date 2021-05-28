@@ -8,6 +8,10 @@
 #include "org/apache/lucene/analysis/cz/CzechStemmer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/cz/CzechStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisCzCzechStemmer ()
 
 - (jint)removeCaseWithCharArray:(IOSCharArray *)s
@@ -28,6 +32,13 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisCzCzechStemmer_remove
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisCzCzechStemmer_normalizeWithCharArray_withInt_(OrgApacheLuceneAnalysisCzCzechStemmer *self, IOSCharArray *s, jint len);
 
 @implementation OrgApacheLuceneAnalysisCzCzechStemmer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisCzCzechStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -54,26 +65,41 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisCzCzechStemmer_normal
   return OrgApacheLuceneAnalysisCzCzechStemmer_normalizeWithCharArray_withInt_(self, s, len);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisCzCzechStemmer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "removeCaseWithCharArray:withInt:", "removeCase", "I", 0x2, NULL, NULL },
-    { "removePossessivesWithCharArray:withInt:", "removePossessives", "I", 0x2, NULL, NULL },
-    { "normalizeWithCharArray:withInt:", "normalize", "I", 0x2, NULL, NULL },
-    { "init", "CzechStemmer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCzCzechStemmer = { 2, "CzechStemmer", "org.apache.lucene.analysis.cz", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  methods[2].selector = @selector(removeCaseWithCharArray:withInt:);
+  methods[3].selector = @selector(removePossessivesWithCharArray:withInt:);
+  methods[4].selector = @selector(normalizeWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "stem", "[CI", "removeCase", "removePossessives", "normalize" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCzCzechStemmer = { "CzechStemmer", "org.apache.lucene.analysis.cz", ptrTable, methods, NULL, 7, 0x1, 5, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCzCzechStemmer;
 }
 
 @end
+
+void OrgApacheLuceneAnalysisCzCzechStemmer_init(OrgApacheLuceneAnalysisCzCzechStemmer *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneAnalysisCzCzechStemmer *new_OrgApacheLuceneAnalysisCzCzechStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCzCzechStemmer, init)
+}
+
+OrgApacheLuceneAnalysisCzCzechStemmer *create_OrgApacheLuceneAnalysisCzCzechStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCzCzechStemmer, init)
+}
 
 jint OrgApacheLuceneAnalysisCzCzechStemmer_removeCaseWithCharArray_withInt_(OrgApacheLuceneAnalysisCzCzechStemmer *self, IOSCharArray *s, jint len) {
   if (len > 7 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"atech")) return len - 5;
@@ -135,18 +161,6 @@ jint OrgApacheLuceneAnalysisCzCzechStemmer_normalizeWithCharArray_withInt_(OrgAp
     return len;
   }
   return len;
-}
-
-void OrgApacheLuceneAnalysisCzCzechStemmer_init(OrgApacheLuceneAnalysisCzCzechStemmer *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneAnalysisCzCzechStemmer *new_OrgApacheLuceneAnalysisCzCzechStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCzCzechStemmer, init)
-}
-
-OrgApacheLuceneAnalysisCzCzechStemmer *create_OrgApacheLuceneAnalysisCzCzechStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCzCzechStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCzCzechStemmer)

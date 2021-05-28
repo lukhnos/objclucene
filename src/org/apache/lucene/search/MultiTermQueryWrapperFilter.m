@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/LeafReader.h"
@@ -23,6 +22,12 @@
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/MultiTermQueryWrapperFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchMultiTermQueryWrapperFilter__Annotations$0(void);
+
 @implementation OrgApacheLuceneSearchMultiTermQueryWrapperFilter
 
 - (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
@@ -35,7 +40,7 @@
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == self) return true;
+  if (JreObjectEqualsEquals(o, self)) return true;
   if ([super isEqual:o] == false) {
     return false;
   }
@@ -57,7 +62,7 @@
     return nil;
   }
   OrgApacheLuceneIndexTermsEnum *termsEnum = [query_ getTermsEnumWithOrgApacheLuceneIndexTerms:terms];
-  JreAssert((termsEnum != nil), (@"org/apache/lucene/search/MultiTermQueryWrapperFilter.java:90 condition failed: assert termsEnum != null;"));
+  JreAssert(termsEnum != nil, @"org/apache/lucene/search/MultiTermQueryWrapperFilter.java:90 condition failed: assert termsEnum != null;");
   OrgApacheLuceneUtilBitDocIdSet_Builder *builder = create_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]);
   OrgApacheLuceneIndexPostingsEnum *docs = nil;
   while ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next] != nil) {
@@ -67,28 +72,35 @@
   return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_([builder build], acceptDocs);
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(query_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchMultiTermQuery:", "MultiTermQueryWrapperFilter", NULL, 0x4, NULL, "(TQ;)V" },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x11, NULL, NULL },
-    { "hash", "hashCode", "I", 0x11, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:", "getDocIdSet", "Lorg.apache.lucene.search.DocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 6, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x1, 7, 8, 9, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchMultiTermQuery:);
+  methods[1].selector = @selector(toStringWithNSString:);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(getField);
+  methods[5].selector = @selector(getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "query_", NULL, 0x14, "TQ;", NULL, "TQ;", .constantValue.asLong = 0 },
+    { "query_", "LOrgApacheLuceneSearchMultiTermQuery;", .constantValue.asLong = 0, 0x14, -1, -1, 10, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryWrapperFilter = { 2, "MultiTermQueryWrapperFilter", "org.apache.lucene.search", NULL, 0x1, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, "<Q:Lorg/apache/lucene/search/MultiTermQuery;>Lorg/apache/lucene/search/Filter;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchMultiTermQuery;", "(TQ;)V", "toString", "LNSString;", "equals", "LNSObject;", "hashCode", "getDocIdSet", "LOrgApacheLuceneIndexLeafReaderContext;LOrgApacheLuceneUtilBits;", "LJavaIoIOException;", "TQ;", "<Q:Lorg/apache/lucene/search/MultiTermQuery;>Lorg/apache/lucene/search/Filter;", (void *)&OrgApacheLuceneSearchMultiTermQueryWrapperFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryWrapperFilter = { "MultiTermQueryWrapperFilter", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 6, 1, -1, -1, -1, 11, 12 };
   return &_OrgApacheLuceneSearchMultiTermQueryWrapperFilter;
 }
 
@@ -105,6 +117,10 @@ OrgApacheLuceneSearchMultiTermQueryWrapperFilter *new_OrgApacheLuceneSearchMulti
 
 OrgApacheLuceneSearchMultiTermQueryWrapperFilter *create_OrgApacheLuceneSearchMultiTermQueryWrapperFilter_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMultiTermQueryWrapperFilter, initWithOrgApacheLuceneSearchMultiTermQuery_, query)
+}
+
+IOSObjectArray *OrgApacheLuceneSearchMultiTermQueryWrapperFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQueryWrapperFilter)

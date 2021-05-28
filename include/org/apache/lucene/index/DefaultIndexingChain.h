@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexDefaultIndexingChain
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDefaultIndexingChain_) && (INCLUDE_ALL_OrgApacheLuceneIndexDefaultIndexingChain || defined(INCLUDE_OrgApacheLuceneIndexDefaultIndexingChain))
 #define OrgApacheLuceneIndexDefaultIndexingChain_
 
@@ -29,20 +35,20 @@
 
 /*!
  @brief Default general purpose indexing chain, which handles
- indexing all types of fields.
+   indexing all types of fields.
  */
 @interface OrgApacheLuceneIndexDefaultIndexingChain : OrgApacheLuceneIndexDocConsumer {
  @public
   OrgApacheLuceneUtilCounter *bytesUsed_;
   OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *docState_;
-  OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter_;
+  WEAK_ OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter_;
   OrgApacheLuceneIndexFieldInfos_Builder *fieldInfos_;
   OrgApacheLuceneIndexTermsHash *termsHash_;
 }
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter;
 
 - (void)abort;
 
@@ -50,24 +56,31 @@
 
 - (void)processDocument;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivate NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDefaultIndexingChain)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain, bytesUsed_, OrgApacheLuceneUtilCounter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain, docState_, OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain, docWriter_, OrgApacheLuceneIndexDocumentsWriterPerThread *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain, fieldInfos_, OrgApacheLuceneIndexFieldInfos_Builder *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain, termsHash_, OrgApacheLuceneIndexTermsHash *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDefaultIndexingChain_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDefaultIndexingChain *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDefaultIndexingChain_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDefaultIndexingChain *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDefaultIndexingChain *new_OrgApacheLuceneIndexDefaultIndexingChain_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexDefaultIndexingChain *new_OrgApacheLuceneIndexDefaultIndexingChain_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDefaultIndexingChain *create_OrgApacheLuceneIndexDefaultIndexingChain_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter);
+FOUNDATION_EXPORT OrgApacheLuceneIndexDefaultIndexingChain *create_OrgApacheLuceneIndexDefaultIndexingChain_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDefaultIndexingChain)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDefaultIndexingChain")

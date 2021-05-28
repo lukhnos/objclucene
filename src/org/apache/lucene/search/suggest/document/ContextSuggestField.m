@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -22,7 +21,10 @@
 #include "org/apache/lucene/search/suggest/document/CompletionTokenStream.h"
 #include "org/apache/lucene/search/suggest/document/ContextSuggestField.h"
 #include "org/apache/lucene/search/suggest/document/SuggestField.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/ContextSuggestField must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentContextSuggestField () {
  @public
@@ -39,8 +41,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentContextS
 
 /*!
  @brief The <code>PrefixTokenFilter</code> wraps a <code>TokenStream</code> and adds a set
- prefixes ahead.
- The position attribute will not be incremented for the prefixes.
+  prefixes ahead.The position attribute will not be incremented for the prefixes.
  */
 @interface OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter : OrgApacheLuceneAnalysisTokenFilter {
  @public
@@ -53,9 +54,9 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentContextS
 
 /*!
  @brief Create a new <code>PrefixTokenFilter</code>
- @param input <code>TokenStream</code> to wrap
+ @param input<code>TokenStream</code>  to wrap
  @param separator Character used separate prefixes from other tokens
- @param prefixes <code>Iterable</code> of <code>CharSequence</code> which keeps all prefixes
+ @param prefixes<code>Iterable</code>  of <code>CharSequence</code>  which keeps all prefixes
  */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                                                   withChar:(jchar)separator
@@ -111,7 +112,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextSuggestFie
   OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter *prefixTokenFilter = create_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withJavaLangIterable_(stream, (jchar) OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR, [self contexts]);
   OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *completionTokenStream;
   if ([stream isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]]) {
-    completionTokenStream = (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) cast_chk(stream, [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]);
+    completionTokenStream = (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) stream;
     completionTokenStream = create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(prefixTokenFilter, ((OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) nil_chk(completionTokenStream))->preserveSep_, completionTokenStream->preservePositionIncrements_, completionTokenStream->maxGraphExpansions_);
   }
   else {
@@ -134,20 +135,29 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextSuggestFie
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:withInt:withJavaLangCharSequenceArray:", "ContextSuggestField", NULL, 0x81, NULL, NULL },
-    { "contexts", NULL, "Ljava.lang.Iterable;", 0x4, NULL, "()Ljava/lang/Iterable<Ljava/lang/CharSequence;>;" },
-    { "wrapTokenStreamWithOrgApacheLuceneAnalysisTokenStream:", "wrapTokenStream", "Lorg.apache.lucene.search.suggest.document.CompletionTokenStream;", 0x4, NULL, NULL },
-    { "type", NULL, "B", 0x4, NULL, NULL },
-    { "validateWithJavaLangCharSequence:", "validate", "V", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x81, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangIterable;", 0x4, -1, -1, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestDocumentCompletionTokenStream;", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "B", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 4, 5, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withNSString:withInt:withJavaLangCharSequenceArray:);
+  methods[1].selector = @selector(contexts);
+  methods[2].selector = @selector(wrapTokenStreamWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[3].selector = @selector(type);
+  methods[4].selector = @selector(validateWithJavaLangCharSequence:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "CONTEXT_SEPARATOR", "CONTEXT_SEPARATOR", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR },
-    { "TYPE", "TYPE", 0x18, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneSearchSuggestDocumentContextSuggestField_TYPE },
-    { "contexts_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/CharSequence;>;", .constantValue.asLong = 0 },
+    { "CONTEXT_SEPARATOR", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR, 0x19, -1, -1, -1, -1 },
+    { "TYPE", "B", .constantValue.asChar = OrgApacheLuceneSearchSuggestDocumentContextSuggestField_TYPE, 0x18, -1, -1, -1, -1 },
+    { "contexts_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 6, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.document.ContextSuggestField$PrefixTokenFilter;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentContextSuggestField = { 2, "ContextSuggestField", "org.apache.lucene.search.suggest.document", NULL, 0x1, 5, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LNSString;I[LJavaLangCharSequence;", "()Ljava/lang/Iterable<Ljava/lang/CharSequence;>;", "wrapTokenStream", "LOrgApacheLuceneAnalysisTokenStream;", "validate", "LJavaLangCharSequence;", "Ljava/util/Set<Ljava/lang/CharSequence;>;", "LOrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentContextSuggestField = { "ContextSuggestField", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x1, 5, 3, -1, 7, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentContextSuggestField;
 }
 
@@ -171,7 +181,7 @@ OrgApacheLuceneSearchSuggestDocumentContextSuggestField *create_OrgApacheLuceneS
 }
 
 void OrgApacheLuceneSearchSuggestDocumentContextSuggestField_validateWithJavaLangCharSequence_(OrgApacheLuceneSearchSuggestDocumentContextSuggestField *self, id<JavaLangCharSequence> value) {
-  for (jint i = 0; i < [((id<JavaLangCharSequence>) nil_chk(value)) length]; i++) {
+  for (jint i = 0; i < [((id<JavaLangCharSequence>) nil_chk(value)) java_length]; i++) {
     if (OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR == [value charAtWithInt:i]) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$$$I$", @"Illegal value [", value, @"] UTF-16 codepoint [0x", JavaLangInteger_toHexStringWithInt_((jint) [value charAtWithInt:i]), @"] at position ", i, @" is a reserved character"));
     }
@@ -225,19 +235,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentContextSugg
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withChar:withJavaLangIterable:", "PrefixTokenFilter", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/TokenStream;CLjava/lang/Iterable<Ljava/lang/CharSequence;>;)V" },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withChar:withJavaLangIterable:);
+  methods[1].selector = @selector(incrementToken);
+  methods[2].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "separator_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixes_", NULL, 0x12, "Ljava.lang.Iterable;", NULL, "Ljava/lang/Iterable<Ljava/lang/CharSequence;>;", .constantValue.asLong = 0 },
-    { "currentPrefix_", NULL, 0x2, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<Ljava/lang/CharSequence;>;", .constantValue.asLong = 0 },
+    { "separator_", "C", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAttr_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "posAttr_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "prefixes_", "LJavaLangIterable;", .constantValue.asLong = 0, 0x12, -1, -1, 3, -1 },
+    { "currentPrefix_", "LJavaUtilIterator;", .constantValue.asLong = 0, 0x2, -1, -1, 4, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter = { 2, "PrefixTokenFilter", "org.apache.lucene.search.suggest.document", "ContextSuggestField", 0x1a, 3, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;CLJavaLangIterable;", "(Lorg/apache/lucene/analysis/TokenStream;CLjava/lang/Iterable<Ljava/lang/CharSequence;>;)V", "LJavaIoIOException;", "Ljava/lang/Iterable<Ljava/lang/CharSequence;>;", "Ljava/util/Iterator<Ljava/lang/CharSequence;>;", "LOrgApacheLuceneSearchSuggestDocumentContextSuggestField;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter = { "PrefixTokenFilter", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x1a, 3, 5, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter;
 }
 

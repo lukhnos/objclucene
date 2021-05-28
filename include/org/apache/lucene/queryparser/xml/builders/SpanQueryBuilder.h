@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder))
 #define OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_
 
@@ -26,7 +32,7 @@
 /*!
  @brief Interface for retrieving a <code>SpanQuery</code>.
  */
-@protocol OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder < OrgApacheLuceneQueryparserXmlQueryBuilder, NSObject, JavaObject >
+@protocol OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder < OrgApacheLuceneQueryparserXmlQueryBuilder, JavaObject >
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
@@ -38,4 +44,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder")

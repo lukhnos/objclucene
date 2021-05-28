@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedDirectReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedDirectReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader))
 #define OrgApacheLuceneUtilPackedDirectReader_
 
@@ -22,14 +28,14 @@
 /*!
  @brief Retrieves an instance previously written by <code>DirectWriter</code> 
  <p>
- Example usage:
+  Example usage: 
  <pre class="prettyprint">
- int bitsPerValue = 100;
- IndexInput in = dir.openInput("packed", IOContext.DEFAULT);
- LongValues values = DirectReader.getInstance(in.randomAccessSlice(start, end), bitsPerValue);
- for (int i = 0; i &lt; numValues; i++) {
- long value = values.get(i);
- }
+    int bitsPerValue = 100;
+    IndexInput in = dir.openInput("packed", IOContext.DEFAULT);
+    LongValues values = DirectReader.getInstance(in.randomAccessSlice(start, end), bitsPerValue);
+    for (int i = 0; i &lt; numValues; i++) {
+      long value = values.get(i);
+    } 
  
 @endcode
  - seealso: DirectWriter
@@ -38,10 +44,10 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Retrieves an instance from the specified slice written decoding
+ @brief Retrieves an instance from the specified slice written decoding 
  <code>bitsPerValue</code> for each value
  */
 + (OrgApacheLuceneUtilLongValues *)getInstanceWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)slice
@@ -51,13 +57,13 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedDirectReader)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilPackedDirectReader_getInstanceWithOrgApacheLuceneStoreRandomAccessInput_withInt_(id<OrgApacheLuceneStoreRandomAccessInput> slice, jint bitsPerValue);
-
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_init(OrgApacheLuceneUtilPackedDirectReader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader *new_OrgApacheLuceneUtilPackedDirectReader_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader *new_OrgApacheLuceneUtilPackedDirectReader_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader *create_OrgApacheLuceneUtilPackedDirectReader_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader *create_OrgApacheLuceneUtilPackedDirectReader_init(void);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilPackedDirectReader_getInstanceWithOrgApacheLuceneStoreRandomAccessInput_withInt_(id<OrgApacheLuceneStoreRandomAccessInput> slice, jint bitsPerValue);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader)
 
@@ -83,7 +89,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -121,7 +131,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -159,7 +173,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -197,7 +215,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -235,7 +257,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -273,7 +299,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -311,7 +341,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -349,7 +383,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -387,7 +425,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -425,7 +467,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -463,7 +509,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -501,7 +551,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -539,7 +593,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -577,7 +635,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -595,4 +657,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedRea
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader")

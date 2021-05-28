@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder))
 #define OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_
 
@@ -24,85 +30,85 @@
 @protocol OrgW3cDomElement;
 
 /*!
- @brief Creates a <code>NumericRangeFilter</code>.
- The table below specifies the required
- attributes and the defaults if optional attributes are omitted. For more
- detail on what each of the attributes actually do, consult the documentation
- for <code>NumericRangeFilter</code>:
- <table summary="supported attributes">
- <tr>
- <th>Attribute name</th>
- <th>Values</th>
- <th>Required</th>
- <th>Default</th>
- </tr>
- <tr>
- <td>fieldName</td>
- <td>String</td>
- <td>Yes</td>
- <td>N/A</td>
- </tr>
- <tr>
- <td>lowerTerm</td>
- <td>Specified by <tt>type</tt></td>
- <td>Yes</td>
- <td>N/A</td>
- </tr>
- <tr>
- <td>upperTerm</td>
- <td>Specified by <tt>type</tt></td>
- <td>Yes</td>
- <td>N/A</td>
- </tr>
- <tr>
- <td>type</td>
- <td>int, long, float, double</td>
- <td>No</td>
- <td>int</td>
- </tr>
- <tr>
- <td>includeLower</td>
- <td>true, false</td>
- <td>No</td>
- <td>true</td>
- </tr>
- <tr>
- <td>includeUpper</td>
- <td>true, false</td>
- <td>No</td>
- <td>true</td>
- </tr>
- <tr>
- <td>precisionStep</td>
- <td>Integer</td>
- <td>No</td>
- <td>4</td>
- </tr>
- </table>
- <p>
- If an error occurs parsing the supplied <tt>lowerTerm</tt> or
+ @brief Creates a <code>NumericRangeFilter</code>.The table below specifies the required
+  attributes and the defaults if optional attributes are omitted.
+ For more
+  detail on what each of the attributes actually do, consult the documentation
+  for <code>NumericRangeFilter</code>:
+  <table summary="supported attributes">
+  <tr>
+  <th>Attribute name</th>
+  <th>Values</th>
+  <th>Required</th>
+  <th>Default</th>
+  </tr>
+  <tr>
+  <td>fieldName</td>
+  <td>String</td>
+  <td>Yes</td>
+  <td>N/A</td>
+  </tr>
+  <tr>
+  <td>lowerTerm</td>
+  <td>Specified by <tt>type</tt></td>
+  <td>Yes</td>
+  <td>N/A</td>
+  </tr>
+  <tr>
+  <td>upperTerm</td>
+  <td>Specified by <tt>type</tt></td>
+  <td>Yes</td>
+  <td>N/A</td>
+  </tr>
+  <tr>
+  <td>type</td>
+  <td>int, long, float, double</td>
+  <td>No</td>
+  <td>int</td>
+  </tr>
+  <tr>
+  <td>includeLower</td>
+  <td>true, false</td>
+  <td>No</td>
+  <td>true</td>
+  </tr>
+  <tr>
+  <td>includeUpper</td>
+  <td>true, false</td>
+  <td>No</td>
+  <td>true</td>
+  </tr>
+  <tr>
+  <td>precisionStep</td>
+  <td>Integer</td>
+  <td>No</td>
+  <td>4</td>
+  </tr>
+  </table>
+  <p>
+  If an error occurs parsing the supplied <tt>lowerTerm</tt> or 
  <tt>upperTerm</tt> into the numeric type specified by <tt>type</tt>, then the
- error will be silently ignored and the resulting filter will not match any
- documents.
+  error will be silently ignored and the resulting filter will not match any
+  documents.
  */
 @interface OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
 /*!
  @brief Specifies how this <code>NumericRangeFilterBuilder</code> will handle errors.
  <p>
- If this is set to true, <code>getFilter(Element)</code> will throw a
+  If this is set to true, <code>getFilter(Element)</code> will throw a 
  <code>ParserException</code> if it is unable to parse the lowerTerm or upperTerm
- into the appropriate numeric type. If this is set to false, then this
- exception will be silently ignored and the resulting filter will not match
- any documents.
+  into the appropriate numeric type. If this is set to false, then this
+  exception will be silently ignored and the resulting filter will not match
+  any documents. 
  <p>
- Defaults to false.
+  Defaults to false.
  */
 - (void)setStrictModeWithBoolean:(jboolean)strictMode;
 
@@ -112,9 +118,9 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilde
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder)
 
@@ -142,7 +148,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilt
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -150,12 +156,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilter
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder")

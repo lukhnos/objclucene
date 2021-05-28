@@ -21,6 +21,10 @@
 #include "org/apache/lucene/index/ParallelCompositeReader.h"
 #include "org/apache/lucene/index/ParallelLeafReader.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/ParallelCompositeReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexParallelCompositeReader () {
  @public
   jboolean closeSubReaders_;
@@ -42,25 +46,23 @@ __attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexParallelCompo
 
 __attribute__((unused)) static void OrgApacheLuceneIndexParallelCompositeReader_validateWithOrgApacheLuceneIndexCompositeReaderArray_withInt_withIntArray_(IOSObjectArray *readers, jint maxDoc, IOSIntArray *leafMaxDoc);
 
-@interface OrgApacheLuceneIndexParallelCompositeReader_$1 : OrgApacheLuceneIndexParallelLeafReader
+@interface OrgApacheLuceneIndexParallelCompositeReader_1 : OrgApacheLuceneIndexParallelLeafReader
+
+- (instancetype)initWithBoolean:(jboolean)closeSubReaders
+withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
+withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)storedFieldsReaders;
 
 - (void)doClose;
 
-- (instancetype)initWithBoolean:(jboolean)arg$0
-withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)arg$1
-withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)arg$2;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexParallelCompositeReader_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexParallelCompositeReader_1)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelCompositeReader_$1 *self, jboolean arg$0, IOSObjectArray *arg$1, IOSObjectArray *arg$2);
+__attribute__((unused)) static void OrgApacheLuceneIndexParallelCompositeReader_1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelCompositeReader_1 *self, jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders);
 
-__attribute__((unused)) static OrgApacheLuceneIndexParallelCompositeReader_$1 *new_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean arg$0, IOSObjectArray *arg$1, IOSObjectArray *arg$2) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexParallelCompositeReader_1 *new_OrgApacheLuceneIndexParallelCompositeReader_1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexParallelCompositeReader_$1 *create_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean arg$0, IOSObjectArray *arg$1, IOSObjectArray *arg$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexParallelCompositeReader_$1)
+__attribute__((unused)) static OrgApacheLuceneIndexParallelCompositeReader_1 *create_OrgApacheLuceneIndexParallelCompositeReader_1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders);
 
 @implementation OrgApacheLuceneIndexParallelCompositeReader
 
@@ -119,20 +121,30 @@ withOrgApacheLuceneIndexCompositeReaderArray:(IOSObjectArray *)storedFieldReader
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexCompositeReaderArray:", "ParallelCompositeReader", NULL, 0x81, "Ljava.io.IOException;", NULL },
-    { "initWithBoolean:withOrgApacheLuceneIndexCompositeReaderArray:", "ParallelCompositeReader", NULL, 0x81, "Ljava.io.IOException;", NULL },
-    { "initWithBoolean:withOrgApacheLuceneIndexCompositeReaderArray:withOrgApacheLuceneIndexCompositeReaderArray:", "ParallelCompositeReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "prepareLeafReadersWithOrgApacheLuceneIndexCompositeReaderArray:withOrgApacheLuceneIndexCompositeReaderArray:", "prepareLeafReaders", "[Lorg.apache.lucene.index.LeafReader;", 0xa, "Ljava.io.IOException;", NULL },
-    { "validateWithOrgApacheLuceneIndexCompositeReaderArray:withInt:withIntArray:", "validate", "V", 0xa, NULL, NULL },
-    { "doClose", NULL, "V", 0x24, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x81, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x81, -1, 2, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, 1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexLeafReader;", 0xa, 4, 5, 1, -1, -1, -1 },
+    { NULL, "V", 0xa, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x24, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexCompositeReaderArray:);
+  methods[1].selector = @selector(initWithBoolean:withOrgApacheLuceneIndexCompositeReaderArray:);
+  methods[2].selector = @selector(initWithBoolean:withOrgApacheLuceneIndexCompositeReaderArray:withOrgApacheLuceneIndexCompositeReaderArray:);
+  methods[3].selector = @selector(prepareLeafReadersWithOrgApacheLuceneIndexCompositeReaderArray:withOrgApacheLuceneIndexCompositeReaderArray:);
+  methods[4].selector = @selector(validateWithOrgApacheLuceneIndexCompositeReaderArray:withInt:withIntArray:);
+  methods[5].selector = @selector(doClose);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "closeSubReaders_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "completeReaderSet_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/index/IndexReader;>;", .constantValue.asLong = 0 },
+    { "closeSubReaders_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "completeReaderSet_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 8, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.LeafReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexParallelCompositeReader = { 2, "ParallelCompositeReader", "org.apache.lucene.index", NULL, 0x1, 6, methods, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/index/BaseCompositeReader<Lorg/apache/lucene/index/LeafReader;>;" };
+  static const void *ptrTable[] = { "[LOrgApacheLuceneIndexCompositeReader;", "LJavaIoIOException;", "Z[LOrgApacheLuceneIndexCompositeReader;", "Z[LOrgApacheLuceneIndexCompositeReader;[LOrgApacheLuceneIndexCompositeReader;", "prepareLeafReaders", "[LOrgApacheLuceneIndexCompositeReader;[LOrgApacheLuceneIndexCompositeReader;", "validate", "[LOrgApacheLuceneIndexCompositeReader;I[I", "Ljava/util/Set<Lorg/apache/lucene/index/IndexReader;>;", "Lorg/apache/lucene/index/BaseCompositeReader<Lorg/apache/lucene/index/LeafReader;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexParallelCompositeReader = { "ParallelCompositeReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 6, 2, -1, -1, -1, 9, -1 };
   return &_OrgApacheLuceneIndexParallelCompositeReader;
 }
 
@@ -192,7 +204,8 @@ IOSObjectArray *OrgApacheLuceneIndexParallelCompositeReader_prepareLeafReadersWi
   }
   else {
     id<JavaUtilList> firstLeaves = [((OrgApacheLuceneIndexCompositeReader *) nil_chk(IOSObjectArray_Get(readers, 0))) leaves];
-    jint maxDoc = [((OrgApacheLuceneIndexCompositeReader *) nil_chk(IOSObjectArray_Get(readers, 0))) maxDoc], noLeaves = [((id<JavaUtilList>) nil_chk(firstLeaves)) size];
+    jint maxDoc = [((OrgApacheLuceneIndexCompositeReader *) nil_chk(IOSObjectArray_Get(readers, 0))) maxDoc];
+    jint noLeaves = [((id<JavaUtilList>) nil_chk(firstLeaves)) size];
     IOSIntArray *leafMaxDoc = [IOSIntArray arrayWithLength:noLeaves];
     for (jint i = 0; i < noLeaves; i++) {
       OrgApacheLuceneIndexLeafReader *r = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([firstLeaves getWithInt:i])) reader];
@@ -210,7 +223,7 @@ IOSObjectArray *OrgApacheLuceneIndexParallelCompositeReader_prepareLeafReadersWi
       for (jint j = 0; j < storedFieldsReaders->size_; j++) {
         IOSObjectArray_Set(storedSubs, j, [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([((id<JavaUtilList>) nil_chk([((OrgApacheLuceneIndexCompositeReader *) nil_chk(IOSObjectArray_Get(storedFieldsReaders, j))) leaves])) getWithInt:i])) reader]);
       }
-      IOSObjectArray_SetAndConsume(wrappedLeaves, i, new_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(true, subs, storedSubs));
+      IOSObjectArray_SetAndConsume(wrappedLeaves, i, new_OrgApacheLuceneIndexParallelCompositeReader_1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(true, subs, storedSubs));
     }
     return wrappedLeaves;
   }
@@ -239,40 +252,44 @@ void OrgApacheLuceneIndexParallelCompositeReader_validateWithOrgApacheLuceneInde
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexParallelCompositeReader)
 
-@implementation OrgApacheLuceneIndexParallelCompositeReader_$1
+@implementation OrgApacheLuceneIndexParallelCompositeReader_1
+
+- (instancetype)initWithBoolean:(jboolean)closeSubReaders
+withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
+withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)storedFieldsReaders {
+  OrgApacheLuceneIndexParallelCompositeReader_1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(self, closeSubReaders, readers, storedFieldsReaders);
+  return self;
+}
 
 - (void)doClose {
 }
 
-- (instancetype)initWithBoolean:(jboolean)arg$0
-withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)arg$1
-withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)arg$2 {
-  OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(self, arg$0, arg$1, arg$2);
-  return self;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "doClose", NULL, "V", 0x4, NULL, NULL },
-    { "initWithBoolean:withOrgApacheLuceneIndexLeafReaderArray:withOrgApacheLuceneIndexLeafReaderArray:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexParallelCompositeReader", "prepareLeafReadersWithOrgApacheLuceneIndexCompositeReaderArray:withOrgApacheLuceneIndexCompositeReaderArray:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexParallelCompositeReader_$1 = { 2, "", "org.apache.lucene.index", "ParallelCompositeReader", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexParallelCompositeReader_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithBoolean:withOrgApacheLuceneIndexLeafReaderArray:withOrgApacheLuceneIndexLeafReaderArray:);
+  methods[1].selector = @selector(doClose);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "Z[LOrgApacheLuceneIndexLeafReader;[LOrgApacheLuceneIndexLeafReader;", "LOrgApacheLuceneIndexParallelCompositeReader;", "prepareLeafReadersWithOrgApacheLuceneIndexCompositeReaderArray:withOrgApacheLuceneIndexCompositeReaderArray:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexParallelCompositeReader_1 = { "", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 1, -1, 2, -1, -1 };
+  return &_OrgApacheLuceneIndexParallelCompositeReader_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelCompositeReader_$1 *self, jboolean arg$0, IOSObjectArray *arg$1, IOSObjectArray *arg$2) {
-  OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(self, arg$0, arg$1, arg$2);
+void OrgApacheLuceneIndexParallelCompositeReader_1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelCompositeReader_1 *self, jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders) {
+  OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(self, closeSubReaders, readers, storedFieldsReaders);
 }
 
-OrgApacheLuceneIndexParallelCompositeReader_$1 *new_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean arg$0, IOSObjectArray *arg$1, IOSObjectArray *arg$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelCompositeReader_$1, initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_, arg$0, arg$1, arg$2)
+OrgApacheLuceneIndexParallelCompositeReader_1 *new_OrgApacheLuceneIndexParallelCompositeReader_1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelCompositeReader_1, initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_, closeSubReaders, readers, storedFieldsReaders)
 }
 
-OrgApacheLuceneIndexParallelCompositeReader_$1 *create_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean arg$0, IOSObjectArray *arg$1, IOSObjectArray *arg$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelCompositeReader_$1, initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_, arg$0, arg$1, arg$2)
+OrgApacheLuceneIndexParallelCompositeReader_1 *create_OrgApacheLuceneIndexParallelCompositeReader_1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelCompositeReader_1, initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_, closeSubReaders, readers, storedFieldsReaders)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexParallelCompositeReader_$1)

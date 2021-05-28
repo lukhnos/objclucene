@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSandboxQueriesDuplicateFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSandboxQueriesDuplicateFilter_) && (INCLUDE_ALL_OrgApacheLuceneSandboxQueriesDuplicateFilter || defined(INCLUDE_OrgApacheLuceneSandboxQueriesDuplicateFilter))
 #define OrgApacheLuceneSandboxQueriesDuplicateFilter_
 
@@ -20,7 +26,6 @@
 #define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode;
 @class OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode;
@@ -30,18 +35,18 @@
 /*!
  @brief Filter to remove duplicate values from search results.
  <p>
- WARNING: for this to work correctly, you may have to wrap
- your reader as it cannot current deduplicate across different
- index segments.
+  WARNING: for this to work correctly, you may have to wrap
+  your reader as it cannot current deduplicate across different
+  index segments.
  - seealso: SlowCompositeReaderWrapper
  */
 @interface OrgApacheLuceneSandboxQueriesDuplicateFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)fieldName;
+- (instancetype __nonnull)initWithNSString:(NSString *)fieldName;
 
-- (instancetype)initWithNSString:(NSString *)fieldName
+- (instancetype __nonnull)initWithNSString:(NSString *)fieldName
 withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode:(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)keepMode
 withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)processingMode;
 
@@ -65,6 +70,10 @@ withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:(OrgApacheLucene
 - (void)setProcessingModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)processingMode;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -93,6 +102,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesDuplicateFilter)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_Enum) {
   OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_Enum_KM_USE_FIRST_OCCURRENCE = 0,
   OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_Enum_KM_USE_LAST_OCCURRENCE = 1,
@@ -100,22 +111,20 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMod
 
 /*!
  @brief KeepMode determines which document id to consider as the master, all others being
- identified as duplicates.
- Selecting the "first occurrence" can potentially save on IO.
+  identified as duplicates.Selecting the "first occurrence" can potentially save on IO.
  */
-@interface OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode : JavaLangEnum
 
-+ (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)KM_USE_FIRST_OCCURRENCE;
-
-+ (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)KM_USE_LAST_OCCURRENCE;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *KM_USE_FIRST_OCCURRENCE NS_SWIFT_NAME(KM_USE_FIRST_OCCURRENCE);
+@property (readonly, class, nonnull) OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *KM_USE_LAST_OCCURRENCE NS_SWIFT_NAME(KM_USE_LAST_OCCURRENCE);
+#pragma mark Public
 
 + (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_Enum)toNSEnum;
 
 @end
@@ -125,13 +134,13 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode)
 /*! INTERNAL ONLY - Use enum accessors declared below. */
 FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_values_[];
 
-inline OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_get_KM_USE_FIRST_OCCURRENCE();
+inline OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_get_KM_USE_FIRST_OCCURRENCE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_FIRST_OCCURRENCE)
 
-inline OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_get_KM_USE_LAST_OCCURRENCE();
+inline OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_get_KM_USE_LAST_OCCURRENCE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_LAST_OCCURRENCE)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_valueOfWithNSString_(NSString *name);
 
@@ -148,6 +157,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_Enum) {
   OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_Enum_PM_FULL_VALIDATION = 0,
   OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_Enum_PM_FAST_INVALIDATION = 1,
@@ -155,27 +166,26 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneSandboxQueriesDuplicateFilter_Process
 
 /*!
  @brief "Full" processing mode starts by setting all bits to false and only setting bits
- for documents that contain the given field and are identified as none-duplicates.
+  for documents that contain the given field and are identified as none-duplicates.
  <p>
- "Fast" processing sets all bits to true then unsets all duplicate docs found for the
- given field. This approach avoids the need to read DocsEnum for terms that are seen
- to have a document frequency of exactly "1" (i.e. no duplicates). While a potentially
- faster approach , the downside is that bitsets produced will include bits set for
- documents that do not actually contain the field given.
+  "Fast" processing sets all bits to true then unsets all duplicate docs found for the
+  given field. This approach avoids the need to read DocsEnum for terms that are seen
+  to have a document frequency of exactly "1" (i.e. no duplicates). While a potentially
+  faster approach , the downside is that bitsets produced will include bits set for
+  documents that do not actually contain the field given.
  */
-@interface OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode : JavaLangEnum
 
-+ (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)PM_FULL_VALIDATION;
-
-+ (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)PM_FAST_INVALIDATION;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *PM_FULL_VALIDATION NS_SWIFT_NAME(PM_FULL_VALIDATION);
+@property (readonly, class, nonnull) OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *PM_FAST_INVALIDATION NS_SWIFT_NAME(PM_FAST_INVALIDATION);
+#pragma mark Public
 
 + (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_Enum)toNSEnum;
 
 @end
@@ -185,13 +195,13 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode)
 /*! INTERNAL ONLY - Use enum accessors declared below. */
 FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_values_[];
 
-inline OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_get_PM_FULL_VALIDATION();
+inline OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_get_PM_FULL_VALIDATION(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FULL_VALIDATION)
 
-inline OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_get_PM_FAST_INVALIDATION();
+inline OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_get_PM_FAST_INVALIDATION(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FAST_INVALIDATION)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_valueOfWithNSString_(NSString *name);
 
@@ -201,4 +211,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesDuplicateFilter_Processi
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSandboxQueriesDuplicateFilter")

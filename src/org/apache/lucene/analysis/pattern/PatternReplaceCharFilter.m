@@ -3,10 +3,8 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/pattern/PatternReplaceCharFilter.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "java/io/StringReader.h"
 #include "java/lang/CharSequence.h"
@@ -17,6 +15,10 @@
 #include "java/util/regex/Pattern.h"
 #include "org/apache/lucene/analysis/charfilter/BaseCharFilter.h"
 #include "org/apache/lucene/analysis/pattern/PatternReplaceCharFilter.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/pattern/PatternReplaceCharFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter () {
  @public
@@ -77,9 +79,9 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternReplace
     jint groupSize = [m end] - [m start];
     jint skippedSize = [m start] - lastMatchEnd;
     lastMatchEnd = [m end];
-    jint lengthBeforeReplacement = [cumulativeOutput length] + skippedSize;
+    jint lengthBeforeReplacement = [cumulativeOutput java_length] + skippedSize;
     [m appendReplacementWithJavaLangStringBuffer:cumulativeOutput withNSString:replacement_];
-    jint replacementSize = [cumulativeOutput length] - lengthBeforeReplacement;
+    jint replacementSize = [cumulativeOutput java_length] - lengthBeforeReplacement;
     if (groupSize != replacementSize) {
       if (replacementSize < groupSize) {
         cumulative += groupSize - replacementSize;
@@ -105,20 +107,31 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternReplace
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilRegexPattern:withNSString:withJavaIoReader:", "PatternReplaceCharFilter", NULL, 0x1, NULL, NULL },
-    { "readWithCharArray:withInt:withInt:", "read", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "fill", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "read", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "correctWithInt:", "correct", "I", 0x4, NULL, NULL },
-    { "processPatternWithJavaLangCharSequence:", "processPattern", "Ljava.lang.CharSequence;", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 3, -1, -1, -1 },
+    { NULL, "I", 0x4, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x0, 6, 7, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilRegexPattern:withNSString:withJavaIoReader:);
+  methods[1].selector = @selector(readWithCharArray:withInt:withInt:);
+  methods[2].selector = @selector(fill);
+  methods[3].selector = @selector(read);
+  methods[4].selector = @selector(correctWithInt:);
+  methods[5].selector = @selector(processPatternWithJavaLangCharSequence:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "pattern_", NULL, 0x12, "Ljava.util.regex.Pattern;", NULL, NULL, .constantValue.asLong = 0 },
-    { "replacement_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "transformedInput_", NULL, 0x2, "Ljava.io.Reader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "pattern_", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "replacement_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "transformedInput_", "LJavaIoReader;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter = { 2, "PatternReplaceCharFilter", "org.apache.lucene.analysis.pattern", NULL, 0x1, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilRegexPattern;LNSString;LJavaIoReader;", "read", "[CII", "LJavaIoIOException;", "correct", "I", "processPattern", "LJavaLangCharSequence;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter = { "PatternReplaceCharFilter", "org.apache.lucene.analysis.pattern", ptrTable, methods, fields, 7, 0x1, 6, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter;
 }
 

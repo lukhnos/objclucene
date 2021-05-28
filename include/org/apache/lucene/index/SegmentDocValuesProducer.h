@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSegmentDocValuesProducer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSegmentDocValuesProducer_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValuesProducer || defined(INCLUDE_OrgApacheLuceneIndexSegmentDocValuesProducer))
 #define OrgApacheLuceneIndexSegmentDocValuesProducer_
 
@@ -80,11 +86,15 @@
  @param allInfos all fieldinfos including updated ones
  @param segDocValues producer map
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
-                            withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                           withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)coreInfos
-                           withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)allInfos
-                     withOrgApacheLuceneIndexSegmentDocValues:(OrgApacheLuceneIndexSegmentDocValues *)segDocValues;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
+                                                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
+                                                   withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)coreInfos
+                                                   withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)allInfos
+                                             withOrgApacheLuceneIndexSegmentDocValues:(OrgApacheLuceneIndexSegmentDocValues *)segDocValues;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -94,14 +104,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentDocValuesProducer, dvProducersByF
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentDocValuesProducer, dvProducers_, id<JavaUtilSet>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentDocValuesProducer, dvGens_, id<JavaUtilList>)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentDocValuesProducer *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentDocValuesProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentDocValuesProducer *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentDocValuesProducer *new_OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentDocValuesProducer *new_OrgApacheLuceneIndexSegmentDocValuesProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentDocValuesProducer *create_OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues);
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentDocValuesProducer *create_OrgApacheLuceneIndexSegmentDocValuesProducer_initPackagePrivateWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentDocValuesProducer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValuesProducer")

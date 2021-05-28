@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/Token.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/PrefixAwareTokenFilter.h"
@@ -16,8 +15,11 @@
 #include "org/apache/lucene/analysis/tokenattributes/PayloadAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/miscellaneous/PrefixAwareTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter () {
  @public
@@ -87,9 +89,9 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnal
     }
     else {
       [((OrgApacheLuceneAnalysisToken *) nil_chk(previousPrefixToken_)) reinitWithOrgApacheLuceneAnalysisToken:nextToken];
-      OrgApacheLuceneUtilBytesRef *p = [((OrgApacheLuceneAnalysisToken *) nil_chk(previousPrefixToken_)) getPayload];
+      OrgApacheLuceneUtilBytesRef *p = JreRetainedLocalValue([((OrgApacheLuceneAnalysisToken *) nil_chk(previousPrefixToken_)) getPayload]);
       if (p != nil) {
-        [((OrgApacheLuceneAnalysisToken *) nil_chk(previousPrefixToken_)) setPayloadWithOrgApacheLuceneUtilBytesRef:[p clone]];
+        [((OrgApacheLuceneAnalysisToken *) nil_chk(previousPrefixToken_)) setPayloadWithOrgApacheLuceneUtilBytesRef:[p java_clone]];
       }
       OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_setCurrentTokenWithOrgApacheLuceneAnalysisToken_(self, nextToken);
       return true;
@@ -180,41 +182,59 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnal
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:", "PrefixAwareTokenFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "setCurrentTokenWithOrgApacheLuceneAnalysisToken:", "setCurrentToken", "V", 0x2, NULL, NULL },
-    { "getNextPrefixInputTokenWithOrgApacheLuceneAnalysisToken:", "getNextPrefixInputToken", "Lorg.apache.lucene.analysis.Token;", 0x2, "Ljava.io.IOException;", NULL },
-    { "getNextSuffixInputTokenWithOrgApacheLuceneAnalysisToken:", "getNextSuffixInputToken", "Lorg.apache.lucene.analysis.Token;", 0x2, "Ljava.io.IOException;", NULL },
-    { "updateSuffixTokenWithOrgApacheLuceneAnalysisToken:withOrgApacheLuceneAnalysisToken:", "updateSuffixToken", "Lorg.apache.lucene.analysis.Token;", 0x1, NULL, NULL },
-    { "end", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getPrefix", NULL, "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
-    { "setPrefixWithOrgApacheLuceneAnalysisTokenStream:", "setPrefix", "V", 0x1, NULL, NULL },
-    { "getSuffix", NULL, "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
-    { "setSuffixWithOrgApacheLuceneAnalysisTokenStream:", "setSuffix", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisToken;", 0x2, 4, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisToken;", 0x2, 5, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisToken;", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  methods[2].selector = @selector(setCurrentTokenWithOrgApacheLuceneAnalysisToken:);
+  methods[3].selector = @selector(getNextPrefixInputTokenWithOrgApacheLuceneAnalysisToken:);
+  methods[4].selector = @selector(getNextSuffixInputTokenWithOrgApacheLuceneAnalysisToken:);
+  methods[5].selector = @selector(updateSuffixTokenWithOrgApacheLuceneAnalysisToken:withOrgApacheLuceneAnalysisToken:);
+  methods[6].selector = @selector(end);
+  methods[7].selector = @selector(close);
+  methods[8].selector = @selector(reset);
+  methods[9].selector = @selector(getPrefix);
+  methods[10].selector = @selector(setPrefixWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[11].selector = @selector(getSuffix);
+  methods[12].selector = @selector(setSuffixWithOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "prefix_", NULL, 0x2, "Lorg.apache.lucene.analysis.TokenStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffix_", NULL, 0x2, "Lorg.apache.lucene.analysis.TokenStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncrAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "flagsAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.FlagsAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "p_termAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "p_posIncrAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "p_payloadAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "p_offsetAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "p_typeAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "p_flagsAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.FlagsAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "previousPrefixToken_", NULL, 0x2, "Lorg.apache.lucene.analysis.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "reusableToken_", NULL, 0x2, "Lorg.apache.lucene.analysis.Token;", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixExhausted_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "prefix_", "LOrgApacheLuceneAnalysisTokenStream;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "suffix_", "LOrgApacheLuceneAnalysisTokenStream;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "posIncrAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payloadAtt_", "LOrgApacheLuceneAnalysisTokenattributesPayloadAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "typeAtt_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "flagsAtt_", "LOrgApacheLuceneAnalysisTokenattributesFlagsAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "p_termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "p_posIncrAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "p_payloadAtt_", "LOrgApacheLuceneAnalysisTokenattributesPayloadAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "p_offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "p_typeAtt_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "p_flagsAtt_", "LOrgApacheLuceneAnalysisTokenattributesFlagsAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "previousPrefixToken_", "LOrgApacheLuceneAnalysisToken;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "reusableToken_", "LOrgApacheLuceneAnalysisToken;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "prefixExhausted_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter = { 2, "PrefixAwareTokenFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 13, methods, 17, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", "setCurrentToken", "LOrgApacheLuceneAnalysisToken;", "getNextPrefixInputToken", "getNextSuffixInputToken", "updateSuffixToken", "LOrgApacheLuceneAnalysisToken;LOrgApacheLuceneAnalysisToken;", "setPrefix", "LOrgApacheLuceneAnalysisTokenStream;", "setSuffix" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter = { "PrefixAwareTokenFilter", "org.apache.lucene.analysis.miscellaneous", ptrTable, methods, fields, 7, 0x1, 13, 17, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter;
 }
 
@@ -252,7 +272,7 @@ OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *create_OrgApacheLuce
 void OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_setCurrentTokenWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *self, OrgApacheLuceneAnalysisToken *token) {
   if (token == nil) return;
   [self clearAttributes];
-  [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) copyBufferWithCharArray:[token buffer] withInt:0 withInt:[token length]];
+  [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) copyBufferWithCharArray:[token buffer] withInt:0 withInt:[token java_length]];
   [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->posIncrAtt_)) setPositionIncrementWithInt:[token getPositionIncrement]];
   [((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(self->flagsAtt_)) setFlagsWithInt:[token getFlags]];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) setOffsetWithInt:[token startOffset] withInt:[token endOffset]];
@@ -262,7 +282,7 @@ void OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_setCurrentTokenW
 
 OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_getNextPrefixInputTokenWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *self, OrgApacheLuceneAnalysisToken *token) {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(self->prefix_)) incrementToken]) return nil;
-  [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) copyBufferWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->p_termAtt_)) buffer] withInt:0 withInt:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->p_termAtt_)) length]];
+  [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) copyBufferWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->p_termAtt_)) buffer] withInt:0 withInt:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->p_termAtt_)) java_length]];
   [token setPositionIncrementWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->p_posIncrAtt_)) getPositionIncrement]];
   [token setFlagsWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(self->p_flagsAtt_)) getFlags]];
   [token setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->p_offsetAtt_)) startOffset] withInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->p_offsetAtt_)) endOffset]];
@@ -273,7 +293,7 @@ OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTok
 
 OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_getNextSuffixInputTokenWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *self, OrgApacheLuceneAnalysisToken *token) {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(self->suffix_)) incrementToken]) return nil;
-  [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) copyBufferWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) buffer] withInt:0 withInt:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) length]];
+  [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) copyBufferWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) buffer] withInt:0 withInt:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) java_length]];
   [token setPositionIncrementWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->posIncrAtt_)) getPositionIncrement]];
   [token setFlagsWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(self->flagsAtt_)) getFlags]];
   [token setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) startOffset] withInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) endOffset]];

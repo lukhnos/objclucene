@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilToStringUtils
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilToStringUtils_) && (INCLUDE_ALL_OrgApacheLuceneUtilToStringUtils || defined(INCLUDE_OrgApacheLuceneUtilToStringUtils))
 #define OrgApacheLuceneUtilToStringUtils_
 
@@ -50,4 +56,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilToStringUtils)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilToStringUtils")

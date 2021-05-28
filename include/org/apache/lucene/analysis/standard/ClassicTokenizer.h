@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisStandardClassicTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisStandardClassicTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisStandardClassicTokenizer))
 #define OrgApacheLuceneAnalysisStandardClassicTokenizer_
 
@@ -25,58 +31,48 @@
 
 /*!
  @brief A grammar-based tokenizer constructed with JFlex
- <p> This should be a good tokenizer for most European-language documents:
+ <p> This should be a good tokenizer for most European-language documents: 
  <ul>
- <li>Splits words at punctuation characters, removing punctuation.
+    <li>Splits words at punctuation characters, removing punctuation.
  However, a 
- dot that's not followed by whitespace is considered part of a token.
+      dot that's not followed by whitespace is considered part of a token.   
  <li>Splits words at hyphens, unless there's a number in the token, in which case
- the whole token is interpreted as a product number and is not split.
- <li>Recognizes email addresses and internet hostnames as one token.
+      the whole token is interpreted as a product number and is not split.   
+ <li>Recognizes email addresses and internet hostnames as one token. 
  </ul>
+  
  <p>Many applications have specific tokenizer needs.  If this tokenizer does
- not suit your application, please consider copying this source code
- directory to your project and maintaining your own grammar-based tokenizer.
- ClassicTokenizer was named StandardTokenizer in Lucene versions prior to 3.1.
- As of 3.1, <code>StandardTokenizer</code> implements Unicode text segmentation,
- as specified by UAX#29.
+  not suit your application, please consider copying this source code
+  directory to your project and maintaining your own grammar-based tokenizer.
+  ClassicTokenizer was named StandardTokenizer in Lucene versions prior to 3.1.
+  As of 3.1, <code>StandardTokenizer</code> implements Unicode text segmentation,
+  as specified by UAX#29.
  */
 @interface OrgApacheLuceneAnalysisStandardClassicTokenizer : OrgApacheLuceneAnalysisTokenizer
-
-+ (jint)ALPHANUM;
-
-+ (jint)APOSTROPHE;
-
-+ (jint)ACRONYM;
-
-+ (jint)COMPANY;
-
-+ (jint)EMAIL;
-
-+ (jint)HOST;
-
-+ (jint)NUM;
-
-+ (jint)CJ;
-
-+ (jint)ACRONYM_DEP;
-
-+ (IOSObjectArray *)TOKEN_TYPES;
+@property (readonly, class) jint ALPHANUM NS_SWIFT_NAME(ALPHANUM);
+@property (readonly, class) jint APOSTROPHE NS_SWIFT_NAME(APOSTROPHE);
+@property (readonly, class) jint ACRONYM NS_SWIFT_NAME(ACRONYM);
+@property (readonly, class) jint COMPANY NS_SWIFT_NAME(COMPANY);
+@property (readonly, class) jint EMAIL NS_SWIFT_NAME(EMAIL);
+@property (readonly, class) jint HOST NS_SWIFT_NAME(HOST);
+@property (readonly, class) jint NUM NS_SWIFT_NAME(NUM);
+@property (readonly, class) jint CJ NS_SWIFT_NAME(CJ);
+@property (readonly, class) jint ACRONYM_DEP NS_SWIFT_NAME(ACRONYM_DEP);
+@property (readonly, class, strong) IOSObjectArray *TOKEN_TYPES NS_SWIFT_NAME(TOKEN_TYPES);
 
 #pragma mark Public
 
 /*!
- @brief Creates a new instance of the <code>ClassicTokenizer</code>.
- Attaches
- the <code>input</code> to the newly created JFlex scanner.
+ @brief Creates a new instance of the <code>ClassicTokenizer</code>.Attaches
+  the <code>input</code> to the newly created JFlex scanner.
  See http://issues.apache.org/jira/browse/LUCENE-1068
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new ClassicTokenizer with a given <code>org.apache.lucene.util.AttributeFactory</code>
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 - (void)close;
 
@@ -92,9 +88,8 @@
 - (void)reset;
 
 /*!
- @brief Set the max allowed token length.
- Any token longer
- than this is skipped. 
+ @brief Set the max allowed token length.Any token longer
+   than this is skipped.
  */
 - (void)setMaxTokenLengthWithInt:(jint)length;
 
@@ -102,55 +97,55 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardClassicTokenizer)
 
-inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_ALPHANUM();
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_ALPHANUM(void);
 #define OrgApacheLuceneAnalysisStandardClassicTokenizer_ALPHANUM 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizer, ALPHANUM, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_APOSTROPHE();
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_APOSTROPHE(void);
 #define OrgApacheLuceneAnalysisStandardClassicTokenizer_APOSTROPHE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizer, APOSTROPHE, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_ACRONYM();
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_ACRONYM(void);
 #define OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizer, ACRONYM, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_COMPANY();
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_COMPANY(void);
 #define OrgApacheLuceneAnalysisStandardClassicTokenizer_COMPANY 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizer, COMPANY, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_EMAIL();
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_EMAIL(void);
 #define OrgApacheLuceneAnalysisStandardClassicTokenizer_EMAIL 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizer, EMAIL, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_HOST();
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_HOST(void);
 #define OrgApacheLuceneAnalysisStandardClassicTokenizer_HOST 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizer, HOST, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_NUM();
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_NUM(void);
 #define OrgApacheLuceneAnalysisStandardClassicTokenizer_NUM 6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizer, NUM, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_CJ();
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_CJ(void);
 #define OrgApacheLuceneAnalysisStandardClassicTokenizer_CJ 7
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizer, CJ, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_ACRONYM_DEP();
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizer_get_ACRONYM_DEP(void);
 #define OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM_DEP 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizer, ACRONYM_DEP, jint)
 
 /*!
  @brief String token types that correspond to token type int constants
  */
-inline IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizer_get_TOKEN_TYPES();
+inline IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizer_get_TOKEN_TYPES(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisStandardClassicTokenizer, TOKEN_TYPES, IOSObjectArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardClassicTokenizer_init(OrgApacheLuceneAnalysisStandardClassicTokenizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicTokenizer *new_OrgApacheLuceneAnalysisStandardClassicTokenizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicTokenizer *new_OrgApacheLuceneAnalysisStandardClassicTokenizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicTokenizer *create_OrgApacheLuceneAnalysisStandardClassicTokenizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicTokenizer *create_OrgApacheLuceneAnalysisStandardClassicTokenizer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardClassicTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisStandardClassicTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
 
@@ -162,4 +157,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardClassicTokenizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicTokenizer")

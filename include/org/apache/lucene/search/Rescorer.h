@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchRescorer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchRescorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchRescorer || defined(INCLUDE_OrgApacheLuceneSearchRescorer))
 #define OrgApacheLuceneSearchRescorer_
 
@@ -22,25 +28,25 @@
 
 /*!
  @brief Re-scores the topN results (<code>TopDocs</code>) from an original
- query.
- See <code>QueryRescorer</code> for an actual
- implementation.  Typically, you run a low-cost
- first-pass query across the entire index, collecting the
- top few hundred hits perhaps, and then use this class to
- mix in a more costly second pass scoring.
+  query.See <code>QueryRescorer</code> for an actual
+  implementation.
+ Typically, you run a low-cost
+  first-pass query across the entire index, collecting the
+  top few hundred hits perhaps, and then use this class to
+  mix in a more costly second pass scoring. 
  <p>See <code>QueryRescorer.rescore(IndexSearcher,TopDocs,Query,double,int)</code>
- for a simple static method to call to rescore using a 2nd
- pass <code>Query</code>.
+  for a simple static method to call to rescore using a 2nd
+  pass <code>Query</code>.
  */
 @interface OrgApacheLuceneSearchRescorer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Explains how the score for the specified document was
- computed.
+  computed.
  */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)firstPassExplanation
@@ -48,12 +54,10 @@
 
 /*!
  @brief Rescore an initial first-pass <code>TopDocs</code>.
- @param searcher <code>IndexSearcher</code> used to produce the
- first pass topDocs
- @param firstPassTopDocs Hits from the first pass
- search.  It's very important that these hits were
- produced by the provided searcher; otherwise the doc
- IDs will not match!
+ @param searcher<code>IndexSearcher</code>  used to produce the    first pass topDocs
+ @param firstPassTopDocs Hits from the first pass    search.  It's very important that these hits were
+     produced by the provided searcher; otherwise the doc
+     IDs will not match!
  @param topN How many re-scored hits to return
  */
 - (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
@@ -70,4 +74,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchRescorer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchRescorer")

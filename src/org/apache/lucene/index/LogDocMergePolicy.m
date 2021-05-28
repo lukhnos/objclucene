@@ -3,14 +3,16 @@
 //  source: ./core/src/java/org/apache/lucene/index/LogDocMergePolicy.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Long.h"
 #include "org/apache/lucene/index/IndexWriter.h"
 #include "org/apache/lucene/index/LogDocMergePolicy.h"
 #include "org/apache/lucene/index/LogMergePolicy.h"
 #include "org/apache/lucene/index/SegmentCommitInfo.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/LogDocMergePolicy must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneIndexLogDocMergePolicy
 
@@ -39,16 +41,25 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LogDocMergePolicy", NULL, 0x1, NULL, NULL },
-    { "sizeWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:", "size", "J", 0x4, "Ljava.io.IOException;", NULL },
-    { "setMinMergeDocsWithInt:", "setMinMergeDocs", "V", 0x1, NULL, NULL },
-    { "getMinMergeDocs", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x4, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(sizeWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:);
+  methods[2].selector = @selector(setMinMergeDocsWithInt:);
+  methods[3].selector = @selector(getMinMergeDocs);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_MIN_MERGE_DOCS", "DEFAULT_MIN_MERGE_DOCS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexLogDocMergePolicy_DEFAULT_MIN_MERGE_DOCS },
+    { "DEFAULT_MIN_MERGE_DOCS", "I", .constantValue.asInt = OrgApacheLuceneIndexLogDocMergePolicy_DEFAULT_MIN_MERGE_DOCS, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexLogDocMergePolicy = { 2, "LogDocMergePolicy", "org.apache.lucene.index", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "size", "LOrgApacheLuceneIndexSegmentCommitInfo;LOrgApacheLuceneIndexIndexWriter;", "LJavaIoIOException;", "setMinMergeDocs", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexLogDocMergePolicy = { "LogDocMergePolicy", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexLogDocMergePolicy;
 }
 

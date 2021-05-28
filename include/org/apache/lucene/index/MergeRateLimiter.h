@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexMergeRateLimiter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexMergeRateLimiter_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergeRateLimiter || defined(INCLUDE_OrgApacheLuceneIndexMergeRateLimiter))
 #define OrgApacheLuceneIndexMergeRateLimiter_
 
@@ -24,11 +30,10 @@
 
 /*!
  @brief This is the <code>RateLimiter</code> that <code>IndexWriter</code> assigns to each running merge, to 
- give <code>MergeScheduler</code>s ionice like control.
+   give <code>MergeScheduler</code>s ionice like control.
  This is similar to <code>SimpleRateLimiter</code>, except it's merge-private,
- it will wake up if its rate changes while it's paused, it tracks how
- much time it spent stopped and paused, and it supports aborting.
-  
+   it will wake up if its rate changes while it's paused, it tracks how
+   much time it spent stopped and paused, and it supports aborting.
  */
 @interface OrgApacheLuceneIndexMergeRateLimiter : OrgApacheLuceneStoreRateLimiter {
  @public
@@ -44,7 +49,7 @@
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
 /*!
  @brief Throws <code>MergePolicy.MergeAbortedException</code> if this merge was aborted.
@@ -84,6 +89,10 @@
 
 - (void)setMBPerSecWithDouble:(jdouble)mbPerSec;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMergeRateLimiter)
@@ -100,4 +109,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeRateLimiter")

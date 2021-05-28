@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer))
 #define OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_
 
@@ -34,7 +40,8 @@
  */
 @interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer : OrgApacheLuceneCodecsDocValuesConsumer < JavaIoCloseable > {
  @public
-  OrgApacheLuceneStoreIndexOutput *data_, *meta_;
+  OrgApacheLuceneStoreIndexOutput *data_;
+  OrgApacheLuceneStoreIndexOutput *meta_;
   jint maxDoc_;
 }
 
@@ -43,11 +50,11 @@
 /*!
  @brief expert: Creates a new writer
  */
-- (instancetype)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
-                                                 withNSString:(NSString *)dataCodec
-                                                 withNSString:(NSString *)dataExtension
-                                                 withNSString:(NSString *)metaCodec
-                                                 withNSString:(NSString *)metaExtension;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
+                                                                         withNSString:(NSString *)dataCodec
+                                                                         withNSString:(NSString *)dataExtension
+                                                                         withNSString:(NSString *)metaCodec
+                                                                         withNSString:(NSString *)metaExtension;
 
 - (void)addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                    withJavaLangIterable:(id<JavaLangIterable>)values;
@@ -78,6 +85,10 @@
 
 - (void)writeMissingBitsetWithJavaLangIterable:(id<JavaLangIterable>)values;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer)
@@ -85,14 +96,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer, data_, OrgApacheLuceneStoreIndexOutput *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer, meta_, OrgApacheLuceneStoreIndexOutput *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *self, OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *self, OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initPackagePrivateWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer")

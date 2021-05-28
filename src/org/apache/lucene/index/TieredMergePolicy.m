@@ -22,6 +22,10 @@
 #include "java/util/List.h"
 #include "java/util/Locale.h"
 #include "java/util/Map.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/index/IndexWriter.h"
 #include "org/apache/lucene/index/MergePolicy.h"
 #include "org/apache/lucene/index/MergeTrigger.h"
@@ -30,6 +34,12 @@
 #include "org/apache/lucene/index/SegmentInfos.h"
 #include "org/apache/lucene/index/TieredMergePolicy.h"
 #include "org/apache/lucene/util/InfoStream.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/TieredMergePolicy must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneIndexTieredMergePolicy () {
  @public
@@ -73,7 +83,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexTieredMergePolicy_messag
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending, this$0_, OrgApacheLuceneIndexTieredMergePolicy *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending, writer_, OrgApacheLuceneIndexIndexWriter *)
 
 __attribute__((unused)) static void OrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending_initWithOrgApacheLuceneIndexTieredMergePolicy_withOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending *self, OrgApacheLuceneIndexTieredMergePolicy *outer$, OrgApacheLuceneIndexIndexWriter *writer);
@@ -84,32 +93,30 @@ __attribute__((unused)) static OrgApacheLuceneIndexTieredMergePolicy_SegmentByte
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending)
 
-@interface OrgApacheLuceneIndexTieredMergePolicy_$1 : OrgApacheLuceneIndexTieredMergePolicy_MergeScore {
+@interface OrgApacheLuceneIndexTieredMergePolicy_1 : OrgApacheLuceneIndexTieredMergePolicy_MergeScore {
  @public
   jdouble val$finalMergeScore_;
   jdouble val$skew_;
   jdouble val$nonDelRatio_;
 }
 
-- (jdouble)getScore;
-
-- (NSString *)getExplanation;
-
 - (instancetype)initWithDouble:(jdouble)capture$0
                     withDouble:(jdouble)capture$1
                     withDouble:(jdouble)capture$2;
 
+- (jdouble)getScore;
+
+- (NSString *)getExplanation;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTieredMergePolicy_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTieredMergePolicy_1)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexTieredMergePolicy_$1_initWithDouble_withDouble_withDouble_(OrgApacheLuceneIndexTieredMergePolicy_$1 *self, jdouble capture$0, jdouble capture$1, jdouble capture$2);
+__attribute__((unused)) static void OrgApacheLuceneIndexTieredMergePolicy_1_initWithDouble_withDouble_withDouble_(OrgApacheLuceneIndexTieredMergePolicy_1 *self, jdouble capture$0, jdouble capture$1, jdouble capture$2);
 
-__attribute__((unused)) static OrgApacheLuceneIndexTieredMergePolicy_$1 *new_OrgApacheLuceneIndexTieredMergePolicy_$1_initWithDouble_withDouble_withDouble_(jdouble capture$0, jdouble capture$1, jdouble capture$2) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexTieredMergePolicy_1 *new_OrgApacheLuceneIndexTieredMergePolicy_1_initWithDouble_withDouble_withDouble_(jdouble capture$0, jdouble capture$1, jdouble capture$2) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexTieredMergePolicy_$1 *create_OrgApacheLuceneIndexTieredMergePolicy_$1_initWithDouble_withDouble_withDouble_(jdouble capture$0, jdouble capture$1, jdouble capture$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_$1)
+__attribute__((unused)) static OrgApacheLuceneIndexTieredMergePolicy_1 *create_OrgApacheLuceneIndexTieredMergePolicy_1_initWithDouble_withDouble_withDouble_(jdouble capture$0, jdouble capture$1, jdouble capture$2);
 
 @implementation OrgApacheLuceneIndexTieredMergePolicy
 
@@ -235,7 +242,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       else if (segBytes < floorSegmentBytes_) {
         JreStrAppend(&extra, "$", @" [floored]");
       }
-      OrgApacheLuceneIndexTieredMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$$$$$$", @"  seg=", [writer segStringWithOrgApacheLuceneIndexSegmentCommitInfo:info], @" size=", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(segBytes / 1024 / 1024.) } count:1 type:NSObject_class_()]), @" MB", extra), writer);
+      OrgApacheLuceneIndexTieredMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$$$$$$", @"  seg=", [writer segStringWithOrgApacheLuceneIndexSegmentCommitInfo:info], @" size=", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(segBytes / 1024 / 1024.) } count:1 type:NSObject_class_()]), @" MB", extra), writer);
     }
     minSegmentBytes = JavaLangMath_minWithLong_withLong_(segBytes, minSegmentBytes);
     totIndexBytes += segBytes;
@@ -303,10 +310,10 @@ J2OBJC_IGNORE_DESIGNATED_END
           [candidate addWithId:info];
           totAfterMergeBytes += segBytes;
         }
-        JreAssert(([candidate size] > 0), (@"org/apache/lucene/index/TieredMergePolicy.java:409 condition failed: assert candidate.size() > 0;"));
+        JreAssert([candidate size] > 0, @"org/apache/lucene/index/TieredMergePolicy.java:409 condition failed: assert candidate.size() > 0;");
         OrgApacheLuceneIndexTieredMergePolicy_MergeScore *score = [self scoreWithJavaUtilList:candidate withBoolean:hitTooLarge withLong:mergingBytes withOrgApacheLuceneIndexIndexWriter:writer];
         if (OrgApacheLuceneIndexTieredMergePolicy_verboseWithOrgApacheLuceneIndexIndexWriter_(self, writer)) {
-          OrgApacheLuceneIndexTieredMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$$$DC$$Z$$", @"  maybe=", [writer segStringWithJavaLangIterable:candidate], @" score=", [((OrgApacheLuceneIndexTieredMergePolicy_MergeScore *) nil_chk(score)) getScore], ' ', [score getExplanation], @" tooLarge=", hitTooLarge, @" size=", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(totAfterMergeBytes / 1024. / 1024.) } count:1 type:NSObject_class_()])), writer);
+          OrgApacheLuceneIndexTieredMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$$$DC$$Z$$", @"  maybe=", [writer segStringWithJavaLangIterable:candidate], @" score=", [((OrgApacheLuceneIndexTieredMergePolicy_MergeScore *) nil_chk(score)) getScore], ' ', [score getExplanation], @" tooLarge=", hitTooLarge, @" size=", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(totAfterMergeBytes / 1024. / 1024.) } count:1 type:NSObject_class_()])), writer);
         }
         if ((bestScore == nil || [((OrgApacheLuceneIndexTieredMergePolicy_MergeScore *) nil_chk(score)) getScore] < [bestScore getScore]) && (!hitTooLarge || !maxMergeIsRunning)) {
           best = candidate;
@@ -325,7 +332,7 @@ J2OBJC_IGNORE_DESIGNATED_END
           [toBeMerged addWithId:info];
         }
         if (OrgApacheLuceneIndexTieredMergePolicy_verboseWithOrgApacheLuceneIndexIndexWriter_(self, writer)) {
-          OrgApacheLuceneIndexTieredMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$$$$$$C$$", @"  add merge=", [writer segStringWithJavaLangIterable:merge->segments_], @" size=", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(bestMergeBytes / 1024. / 1024.) } count:1 type:NSObject_class_()]), @" score=", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_([((OrgApacheLuceneIndexTieredMergePolicy_MergeScore *) nil_chk(bestScore)) getScore]) } count:1 type:NSObject_class_()]), ' ', [bestScore getExplanation], (bestTooLarge ? @" [max merge]" : @"")), writer);
+          OrgApacheLuceneIndexTieredMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$$$$$$C$$", @"  add merge=", [writer segStringWithJavaLangIterable:merge->segments_], @" size=", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(bestMergeBytes / 1024. / 1024.) } count:1 type:NSObject_class_()]), @" score=", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_([((OrgApacheLuceneIndexTieredMergePolicy_MergeScore *) nil_chk(bestScore)) getScore]) } count:1 type:NSObject_class_()]), ' ', [bestScore getExplanation], (bestTooLarge ? @" [max merge]" : @"")), writer);
         }
       }
       else {
@@ -363,7 +370,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   jdouble nonDelRatio = ((jdouble) totAfterMergeBytes) / totBeforeMergeBytes;
   JreTimesAssignDoubleD(&mergeScore, JavaLangMath_powWithDouble_withDouble_(nonDelRatio, reclaimDeletesWeight_));
   jdouble finalMergeScore = mergeScore;
-  return create_OrgApacheLuceneIndexTieredMergePolicy_$1_initWithDouble_withDouble_withDouble_(finalMergeScore, skew, nonDelRatio);
+  return create_OrgApacheLuceneIndexTieredMergePolicy_1_initWithDouble_withDouble_withDouble_(finalMergeScore, skew, nonDelRatio);
 }
 
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
@@ -479,7 +486,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithNSString_(JreStrcat("C$$", '[', [[self getClass] getSimpleName], @": "));
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithNSString_(JreStrcat("C$$", '[', [[self java_getClass] getSimpleName], @": "));
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"maxMergeAtOnce="])) appendWithInt:maxMergeAtOnce_])) appendWithNSString:@", "];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"maxMergeAtOnceExplicit="])) appendWithInt:maxMergeAtOnceExplicit_])) appendWithNSString:@", "];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"maxMergedSegmentMB="])) appendWithDouble:maxMergedSegmentBytes_ / 1024 / 1024.])) appendWithNSString:@", "];
@@ -492,43 +499,70 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TieredMergePolicy", NULL, 0x1, NULL, NULL },
-    { "setMaxMergeAtOnceWithInt:", "setMaxMergeAtOnce", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getMaxMergeAtOnce", NULL, "I", 0x1, NULL, NULL },
-    { "setMaxMergeAtOnceExplicitWithInt:", "setMaxMergeAtOnceExplicit", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getMaxMergeAtOnceExplicit", NULL, "I", 0x1, NULL, NULL },
-    { "setMaxMergedSegmentMBWithDouble:", "setMaxMergedSegmentMB", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getMaxMergedSegmentMB", NULL, "D", 0x1, NULL, NULL },
-    { "setReclaimDeletesWeightWithDouble:", "setReclaimDeletesWeight", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getReclaimDeletesWeight", NULL, "D", 0x1, NULL, NULL },
-    { "setFloorSegmentMBWithDouble:", "setFloorSegmentMB", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getFloorSegmentMB", NULL, "D", 0x1, NULL, NULL },
-    { "setForceMergeDeletesPctAllowedWithDouble:", "setForceMergeDeletesPctAllowed", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getForceMergeDeletesPctAllowed", NULL, "D", 0x1, NULL, NULL },
-    { "setSegmentsPerTierWithDouble:", "setSegmentsPerTier", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getSegmentsPerTier", NULL, "D", 0x1, NULL, NULL },
-    { "findMergesWithOrgApacheLuceneIndexMergeTrigger:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
-    { "scoreWithJavaUtilList:withBoolean:withLong:withOrgApacheLuceneIndexIndexWriter:", "score", "Lorg.apache.lucene.index.TieredMergePolicy$MergeScore;", 0x4, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;ZJLorg/apache/lucene/index/IndexWriter;)Lorg/apache/lucene/index/TieredMergePolicy$MergeScore;" },
-    { "findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:", "findForcedMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/SegmentInfos;ILjava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;Lorg/apache/lucene/index/IndexWriter;)Lorg/apache/lucene/index/MergePolicy$MergeSpecification;" },
-    { "findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findForcedDeletesMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
-    { "floorSizeWithLong:", "floorSize", "J", 0x2, NULL, NULL },
-    { "verboseWithOrgApacheLuceneIndexIndexWriter:", "verbose", "Z", 0x2, NULL, NULL },
-    { "messageWithNSString:withOrgApacheLuceneIndexIndexWriter:", "message", "V", 0x2, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTieredMergePolicy;", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTieredMergePolicy;", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTieredMergePolicy;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTieredMergePolicy;", 0x1, 5, 4, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTieredMergePolicy;", 0x1, 6, 4, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTieredMergePolicy;", 0x1, 7, 4, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTieredMergePolicy;", 0x1, 8, 4, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergePolicy_MergeSpecification;", 0x1, 9, 10, 11, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTieredMergePolicy_MergeScore;", 0x4, 12, 13, 11, 14, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergePolicy_MergeSpecification;", 0x1, 15, 16, 11, 17, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergePolicy_MergeSpecification;", 0x1, 18, 19, 11, -1, -1, -1 },
+    { NULL, "J", 0x2, 20, 21, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 24, 25, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 26, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(setMaxMergeAtOnceWithInt:);
+  methods[2].selector = @selector(getMaxMergeAtOnce);
+  methods[3].selector = @selector(setMaxMergeAtOnceExplicitWithInt:);
+  methods[4].selector = @selector(getMaxMergeAtOnceExplicit);
+  methods[5].selector = @selector(setMaxMergedSegmentMBWithDouble:);
+  methods[6].selector = @selector(getMaxMergedSegmentMB);
+  methods[7].selector = @selector(setReclaimDeletesWeightWithDouble:);
+  methods[8].selector = @selector(getReclaimDeletesWeight);
+  methods[9].selector = @selector(setFloorSegmentMBWithDouble:);
+  methods[10].selector = @selector(getFloorSegmentMB);
+  methods[11].selector = @selector(setForceMergeDeletesPctAllowedWithDouble:);
+  methods[12].selector = @selector(getForceMergeDeletesPctAllowed);
+  methods[13].selector = @selector(setSegmentsPerTierWithDouble:);
+  methods[14].selector = @selector(getSegmentsPerTier);
+  methods[15].selector = @selector(findMergesWithOrgApacheLuceneIndexMergeTrigger:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:);
+  methods[16].selector = @selector(scoreWithJavaUtilList:withBoolean:withLong:withOrgApacheLuceneIndexIndexWriter:);
+  methods[17].selector = @selector(findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:);
+  methods[18].selector = @selector(findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:);
+  methods[19].selector = @selector(floorSizeWithLong:);
+  methods[20].selector = @selector(verboseWithOrgApacheLuceneIndexIndexWriter:);
+  methods[21].selector = @selector(messageWithNSString:withOrgApacheLuceneIndexIndexWriter:);
+  methods[22].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_NO_CFS_RATIO", "DEFAULT_NO_CFS_RATIO", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneIndexTieredMergePolicy_DEFAULT_NO_CFS_RATIO },
-    { "maxMergeAtOnce_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxMergedSegmentBytes_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxMergeAtOnceExplicit_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "floorSegmentBytes_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "segsPerTier_", NULL, 0x2, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "forceMergeDeletesPctAllowed_", NULL, 0x2, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "reclaimDeletesWeight_", NULL, 0x2, "D", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_NO_CFS_RATIO", "D", .constantValue.asDouble = OrgApacheLuceneIndexTieredMergePolicy_DEFAULT_NO_CFS_RATIO, 0x19, -1, -1, -1, -1 },
+    { "maxMergeAtOnce_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxMergedSegmentBytes_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxMergeAtOnceExplicit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "floorSegmentBytes_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "segsPerTier_", "D", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "forceMergeDeletesPctAllowed_", "D", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "reclaimDeletesWeight_", "D", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.TieredMergePolicy$SegmentByteSizeDescending;", "Lorg.apache.lucene.index.TieredMergePolicy$MergeScore;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTieredMergePolicy = { 2, "TieredMergePolicy", "org.apache.lucene.index", NULL, 0x1, 23, methods, 8, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "setMaxMergeAtOnce", "I", "setMaxMergeAtOnceExplicit", "setMaxMergedSegmentMB", "D", "setReclaimDeletesWeight", "setFloorSegmentMB", "setForceMergeDeletesPctAllowed", "setSegmentsPerTier", "findMerges", "LOrgApacheLuceneIndexMergeTrigger;LOrgApacheLuceneIndexSegmentInfos;LOrgApacheLuceneIndexIndexWriter;", "LJavaIoIOException;", "score", "LJavaUtilList;ZJLOrgApacheLuceneIndexIndexWriter;", "(Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;ZJLorg/apache/lucene/index/IndexWriter;)Lorg/apache/lucene/index/TieredMergePolicy$MergeScore;", "findForcedMerges", "LOrgApacheLuceneIndexSegmentInfos;ILJavaUtilMap;LOrgApacheLuceneIndexIndexWriter;", "(Lorg/apache/lucene/index/SegmentInfos;ILjava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;Lorg/apache/lucene/index/IndexWriter;)Lorg/apache/lucene/index/MergePolicy$MergeSpecification;", "findForcedDeletesMerges", "LOrgApacheLuceneIndexSegmentInfos;LOrgApacheLuceneIndexIndexWriter;", "floorSize", "J", "verbose", "LOrgApacheLuceneIndexIndexWriter;", "message", "LNSString;LOrgApacheLuceneIndexIndexWriter;", "toString", "LOrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending;LOrgApacheLuceneIndexTieredMergePolicy_MergeScore;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTieredMergePolicy = { "TieredMergePolicy", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 23, 8, -1, 27, -1, -1, -1 };
   return &_OrgApacheLuceneIndexTieredMergePolicy;
 }
 
@@ -591,8 +625,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTieredMergePolicy)
     }
   }
   @catch (JavaIoIOException *ioe) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe);
   }
+}
+
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
 }
 
 - (void)dealloc {
@@ -602,15 +665,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTieredMergePolicy)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTieredMergePolicy:withOrgApacheLuceneIndexIndexWriter:", "SegmentByteSizeDescending", NULL, 0x0, NULL, NULL },
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTieredMergePolicy:withOrgApacheLuceneIndexIndexWriter:);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.index.TieredMergePolicy;", NULL, NULL, .constantValue.asLong = 0 },
-    { "writer_", NULL, 0x12, "Lorg.apache.lucene.index.IndexWriter;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneIndexTieredMergePolicy;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "writer_", "LOrgApacheLuceneIndexIndexWriter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending = { 2, "SegmentByteSizeDescending", "org.apache.lucene.index", "TieredMergePolicy", 0x2, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/index/SegmentCommitInfo;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTieredMergePolicy;LOrgApacheLuceneIndexIndexWriter;", "compare", "LOrgApacheLuceneIndexSegmentCommitInfo;LOrgApacheLuceneIndexSegmentCommitInfo;", "LOrgApacheLuceneIndexTieredMergePolicy;", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/index/SegmentCommitInfo;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending = { "SegmentByteSizeDescending", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x2, 2, 2, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending;
 }
 
@@ -654,12 +724,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "MergeScore", NULL, 0x4, NULL, NULL },
-    { "getScore", NULL, "D", 0x400, NULL, NULL },
-    { "getExplanation", NULL, "Ljava.lang.String;", 0x400, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "D", 0x400, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x400, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTieredMergePolicy_MergeScore = { 2, "MergeScore", "org.apache.lucene.index", "TieredMergePolicy", 0x40c, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getScore);
+  methods[2].selector = @selector(getExplanation);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTieredMergePolicy;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTieredMergePolicy_MergeScore = { "MergeScore", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x40c, 3, 0, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexTieredMergePolicy_MergeScore;
 }
 
@@ -671,54 +749,59 @@ void OrgApacheLuceneIndexTieredMergePolicy_MergeScore_init(OrgApacheLuceneIndexT
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTieredMergePolicy_MergeScore)
 
-@implementation OrgApacheLuceneIndexTieredMergePolicy_$1
+@implementation OrgApacheLuceneIndexTieredMergePolicy_1
+
+- (instancetype)initWithDouble:(jdouble)capture$0
+                    withDouble:(jdouble)capture$1
+                    withDouble:(jdouble)capture$2 {
+  OrgApacheLuceneIndexTieredMergePolicy_1_initWithDouble_withDouble_withDouble_(self, capture$0, capture$1, capture$2);
+  return self;
+}
 
 - (jdouble)getScore {
   return val$finalMergeScore_;
 }
 
 - (NSString *)getExplanation {
-  return JreStrcat("$$$$", @"skew=", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(val$skew_) } count:1 type:NSObject_class_()]), @" nonDelRatio=", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(val$nonDelRatio_) } count:1 type:NSObject_class_()]));
-}
-
-- (instancetype)initWithDouble:(jdouble)capture$0
-                    withDouble:(jdouble)capture$1
-                    withDouble:(jdouble)capture$2 {
-  OrgApacheLuceneIndexTieredMergePolicy_$1_initWithDouble_withDouble_withDouble_(self, capture$0, capture$1, capture$2);
-  return self;
+  return JreStrcat("$$$$", @"skew=", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(val$skew_) } count:1 type:NSObject_class_()]), @" nonDelRatio=", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(val$nonDelRatio_) } count:1 type:NSObject_class_()]));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getScore", NULL, "D", 0x1, NULL, NULL },
-    { "getExplanation", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "initWithDouble:withDouble:withDouble:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithDouble:withDouble:withDouble:);
+  methods[1].selector = @selector(getScore);
+  methods[2].selector = @selector(getExplanation);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$finalMergeScore_", NULL, 0x1012, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$skew_", NULL, 0x1012, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$nonDelRatio_", NULL, 0x1012, "D", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$finalMergeScore_", "D", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$skew_", "D", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$nonDelRatio_", "D", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexTieredMergePolicy", "scoreWithJavaUtilList:withBoolean:withLong:withOrgApacheLuceneIndexIndexWriter:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTieredMergePolicy_$1 = { 2, "", "org.apache.lucene.index", "TieredMergePolicy", 0x8008, 3, methods, 3, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneIndexTieredMergePolicy_$1;
+  static const void *ptrTable[] = { "DDD", "LOrgApacheLuceneIndexTieredMergePolicy;", "scoreWithJavaUtilList:withBoolean:withLong:withOrgApacheLuceneIndexIndexWriter:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTieredMergePolicy_1 = { "", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8010, 3, 3, 1, -1, 2, -1, -1 };
+  return &_OrgApacheLuceneIndexTieredMergePolicy_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexTieredMergePolicy_$1_initWithDouble_withDouble_withDouble_(OrgApacheLuceneIndexTieredMergePolicy_$1 *self, jdouble capture$0, jdouble capture$1, jdouble capture$2) {
+void OrgApacheLuceneIndexTieredMergePolicy_1_initWithDouble_withDouble_withDouble_(OrgApacheLuceneIndexTieredMergePolicy_1 *self, jdouble capture$0, jdouble capture$1, jdouble capture$2) {
   self->val$finalMergeScore_ = capture$0;
   self->val$skew_ = capture$1;
   self->val$nonDelRatio_ = capture$2;
   OrgApacheLuceneIndexTieredMergePolicy_MergeScore_init(self);
 }
 
-OrgApacheLuceneIndexTieredMergePolicy_$1 *new_OrgApacheLuceneIndexTieredMergePolicy_$1_initWithDouble_withDouble_withDouble_(jdouble capture$0, jdouble capture$1, jdouble capture$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTieredMergePolicy_$1, initWithDouble_withDouble_withDouble_, capture$0, capture$1, capture$2)
+OrgApacheLuceneIndexTieredMergePolicy_1 *new_OrgApacheLuceneIndexTieredMergePolicy_1_initWithDouble_withDouble_withDouble_(jdouble capture$0, jdouble capture$1, jdouble capture$2) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTieredMergePolicy_1, initWithDouble_withDouble_withDouble_, capture$0, capture$1, capture$2)
 }
 
-OrgApacheLuceneIndexTieredMergePolicy_$1 *create_OrgApacheLuceneIndexTieredMergePolicy_$1_initWithDouble_withDouble_withDouble_(jdouble capture$0, jdouble capture$1, jdouble capture$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTieredMergePolicy_$1, initWithDouble_withDouble_withDouble_, capture$0, capture$1, capture$2)
+OrgApacheLuceneIndexTieredMergePolicy_1 *create_OrgApacheLuceneIndexTieredMergePolicy_1_initWithDouble_withDouble_withDouble_(jdouble capture$0, jdouble capture$1, jdouble capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTieredMergePolicy_1, initWithDouble_withDouble_withDouble_, capture$0, capture$1, capture$2)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTieredMergePolicy_$1)

@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/index/MultiPostingsEnum.h"
 #include "org/apache/lucene/index/MultiTermsEnum.h"
@@ -14,6 +13,10 @@
 #include "org/apache/lucene/index/ReaderSlice.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/MultiPostingsEnum must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexMultiPostingsEnum () {
  @public
@@ -35,7 +38,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiPostingsEnum, subs_, IOSObjectArray
 }
 
 - (jboolean)canReuseWithOrgApacheLuceneIndexMultiTermsEnum:(OrgApacheLuceneIndexMultiTermsEnum *)parent {
-  return self->parent_ == parent;
+  return JreObjectEqualsEquals(self->parent_, parent);
 }
 
 - (OrgApacheLuceneIndexMultiPostingsEnum *)resetWithOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSliceArray:(IOSObjectArray *)subs
@@ -60,7 +63,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiPostingsEnum, subs_, IOSObjectArray
 }
 
 - (jint)freq {
-  JreAssert((current_ != nil), (@"org/apache/lucene/index/MultiPostingsEnum.java:86 condition failed: assert current != null;"));
+  JreAssert(current_ != nil, @"org/apache/lucene/index/MultiPostingsEnum.java:86 condition failed: assert current != null;");
   return [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(current_)) freq];
 }
 
@@ -69,7 +72,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiPostingsEnum, subs_, IOSObjectArray
 }
 
 - (jint)advanceWithInt:(jint)target {
-  JreAssert((target > doc_), (@"org/apache/lucene/index/MultiPostingsEnum.java:97 condition failed: assert target > doc;"));
+  JreAssert(target > doc_, @"org/apache/lucene/index/MultiPostingsEnum.java:97 condition failed: assert target > doc;");
   while (true) {
     if (current_ != nil) {
       jint doc;
@@ -156,35 +159,54 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiPostingsEnum, subs_, IOSObjectArray
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexMultiTermsEnum:withInt:", "MultiPostingsEnum", NULL, 0x1, NULL, NULL },
-    { "canReuseWithOrgApacheLuceneIndexMultiTermsEnum:", "canReuse", "Z", 0x1, NULL, NULL },
-    { "resetWithOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSliceArray:withInt:", "reset", "Lorg.apache.lucene.index.MultiPostingsEnum;", 0x1, NULL, NULL },
-    { "getNumSubs", NULL, "I", 0x1, NULL, NULL },
-    { "getSubs", NULL, "[Lorg.apache.lucene.index.MultiPostingsEnum$EnumWithSlice;", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "nextPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "startOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "endOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMultiPostingsEnum;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 5, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 6, 7, 5, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 5, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 5, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 5, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 5, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexMultiTermsEnum:withInt:);
+  methods[1].selector = @selector(canReuseWithOrgApacheLuceneIndexMultiTermsEnum:);
+  methods[2].selector = @selector(resetWithOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSliceArray:withInt:);
+  methods[3].selector = @selector(getNumSubs);
+  methods[4].selector = @selector(getSubs);
+  methods[5].selector = @selector(freq);
+  methods[6].selector = @selector(docID);
+  methods[7].selector = @selector(advanceWithInt:);
+  methods[8].selector = @selector(nextDoc);
+  methods[9].selector = @selector(nextPosition);
+  methods[10].selector = @selector(startOffset);
+  methods[11].selector = @selector(endOffset);
+  methods[12].selector = @selector(getPayload);
+  methods[13].selector = @selector(cost);
+  methods[14].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "parent_", NULL, 0x12, "Lorg.apache.lucene.index.MultiTermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "subPostingsEnums_", NULL, 0x10, "[Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "subs_", NULL, 0x12, "[Lorg.apache.lucene.index.MultiPostingsEnum$EnumWithSlice;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numSubs_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "upto_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x0, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentBase_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "parent_", "LOrgApacheLuceneIndexMultiTermsEnum;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "subPostingsEnums_", "[LOrgApacheLuceneIndexPostingsEnum;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "subs_", "[LOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numSubs_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "upto_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "current_", "LOrgApacheLuceneIndexPostingsEnum;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "currentBase_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.MultiPostingsEnum$EnumWithSlice;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiPostingsEnum = { 2, "MultiPostingsEnum", "org.apache.lucene.index", NULL, 0x11, 15, methods, 8, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexMultiTermsEnum;I", "canReuse", "LOrgApacheLuceneIndexMultiTermsEnum;", "reset", "[LOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice;I", "LJavaIoIOException;", "advance", "I", "toString", "LOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiPostingsEnum = { "MultiPostingsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 15, 8, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMultiPostingsEnum;
 }
 
@@ -231,15 +253,22 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "EnumWithSlice", NULL, 0x0, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 0, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "postingsEnum_", NULL, 0x1, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "slice_", NULL, 0x1, "Lorg.apache.lucene.index.ReaderSlice;", NULL, NULL, .constantValue.asLong = 0 },
+    { "postingsEnum_", "LOrgApacheLuceneIndexPostingsEnum;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "slice_", "LOrgApacheLuceneIndexReaderSlice;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice = { 2, "EnumWithSlice", "org.apache.lucene.index", "MultiPostingsEnum", 0x19, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "toString", "LOrgApacheLuceneIndexMultiPostingsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice = { "EnumWithSlice", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x19, 2, 2, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice;
 }
 

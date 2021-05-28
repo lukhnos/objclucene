@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneSearchQueryCachingPolicy 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchQueryCachingPolicy_) && (INCLUDE_ALL_OrgApacheLuceneSearchQueryCachingPolicy || defined(INCLUDE_OrgApacheLuceneSearchQueryCachingPolicy))
 #define OrgApacheLuceneSearchQueryCachingPolicy_
 
@@ -28,22 +34,22 @@
  - seealso: UsageTrackingQueryCachingPolicy
  - seealso: LRUQueryCache
  */
-@protocol OrgApacheLuceneSearchQueryCachingPolicy < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchQueryCachingPolicy < JavaObject >
 
 /*!
  @brief Callback that is called every time that a cached filter is used.
  This is typically useful if the policy wants to track usage statistics
- in order to make decisions. 
+   in order to make decisions.
  */
 - (void)onUseWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 /*!
  @brief Whether the given <code>DocIdSet</code> should be cached on a given segment.
  This method will be called on each leaf context to know if the filter
- should be cached on this particular leaf. The filter cache will first
- attempt to load a <code>DocIdSet</code> from the cache. If it is not cached
- yet and this method returns <tt>true</tt> then a cache entry will be
- generated. Otherwise an uncached set will be returned. 
+   should be cached on this particular leaf. The filter cache will first
+   attempt to load a <code>DocIdSet</code> from the cache. If it is not cached
+   yet and this method returns <tt>true</tt> then a cache entry will be
+   generated. Otherwise an uncached set will be returned.
  */
 - (jboolean)shouldCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
             withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
@@ -51,8 +57,7 @@
 @end
 
 @interface OrgApacheLuceneSearchQueryCachingPolicy : NSObject
-
-+ (id<OrgApacheLuceneSearchQueryCachingPolicy>)ALWAYS_CACHE;
+@property (readonly, class, strong) id<OrgApacheLuceneSearchQueryCachingPolicy> ALWAYS_CACHE NS_SWIFT_NAME(ALWAYS_CACHE);
 
 @end
 
@@ -61,7 +66,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchQueryCachingPolicy)
 /*!
  @brief A simple policy that caches all the provided filters on all segments.
  */
-inline id<OrgApacheLuceneSearchQueryCachingPolicy> OrgApacheLuceneSearchQueryCachingPolicy_get_ALWAYS_CACHE();
+inline id<OrgApacheLuceneSearchQueryCachingPolicy> OrgApacheLuceneSearchQueryCachingPolicy_get_ALWAYS_CACHE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<OrgApacheLuceneSearchQueryCachingPolicy> OrgApacheLuceneSearchQueryCachingPolicy_ALWAYS_CACHE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchQueryCachingPolicy, ALWAYS_CACHE, id<OrgApacheLuceneSearchQueryCachingPolicy>)
@@ -79,29 +84,32 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryCachingPolicy)
 /*!
  @brief A simple policy that only caches on the largest segments of an index.
  The reasoning is that these segments likely account for most of the
- execution time of queries and are also more likely to stay around longer
- than small segments, which makes them more interesting for caching.
+   execution time of queries and are also more likely to stay around longer
+   than small segments, which makes them more interesting for caching.
  */
 @interface OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments : NSObject < OrgApacheLuceneSearchQueryCachingPolicy >
-
-+ (OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *)DEFAULT;
+@property (readonly, class, strong) OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *DEFAULT NS_SWIFT_NAME(DEFAULT);
 
 #pragma mark Public
 
 /*!
  @brief Create a <code>CacheOnLargeSegments</code> instance that only caches on a
- given segment if the total number of documents in the index is greater
- than <code>minIndexSize</code> and the number of documents in the segment
- divided by the total number of documents in the index is greater than
- or equal to <code>minSizeRatio</code>.
+  given segment if the total number of documents in the index is greater
+  than <code>minIndexSize</code> and the number of documents in the segment
+  divided by the total number of documents in the index is greater than
+  or equal to <code>minSizeRatio</code>.
  */
-- (instancetype)initWithInt:(jint)minIndexSize
-                  withFloat:(jfloat)minSizeRatio;
+- (instancetype __nonnull)initWithInt:(jint)minIndexSize
+                            withFloat:(jfloat)minSizeRatio;
 
 - (void)onUseWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (jboolean)shouldCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
             withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -109,14 +117,13 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments)
 
 /*!
  @brief <code>CacheOnLargeSegments</code> instance that only caches on segments that
- account for more than 3% of the total index size.
- This should guarantee
- that all segments from the upper <code>tier</code> will be
- cached while ensuring that at most <tt>33</tt> segments can make it to
- the cache (given that some implementations such as <code>LRUQueryCache</code>
- perform better when the number of cached segments is low). 
+   account for more than 3% of the total index size.This should guarantee
+   that all segments from the upper <code>tier</code> will be
+   cached while ensuring that at most <tt>33</tt> segments can make it to
+   the cache (given that some implementations such as <code>LRUQueryCache</code>
+   perform better when the number of cached segments is low).
  */
-inline OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments_get_DEFAULT();
+inline OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments_get_DEFAULT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments_DEFAULT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments, DEFAULT, OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *)
@@ -131,4 +138,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeS
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchQueryCachingPolicy")

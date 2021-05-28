@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl))
 #define OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_
 
@@ -36,7 +42,7 @@
 /*!
  @brief Initialize this attribute with startOffset and endOffset of 0.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)clear;
 
@@ -47,6 +53,8 @@
 - (jboolean)isEqual:(id)other;
 
 - (NSUInteger)hash;
+
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone;
 
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector;
 
@@ -61,12 +69,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenattributesOffsetAttributeIm
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init(OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl")

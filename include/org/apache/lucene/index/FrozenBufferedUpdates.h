@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexFrozenBufferedUpdates
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexFrozenBufferedUpdates_) && (INCLUDE_ALL_OrgApacheLuceneIndexFrozenBufferedUpdates || defined(INCLUDE_OrgApacheLuceneIndexFrozenBufferedUpdates))
 #define OrgApacheLuceneIndexFrozenBufferedUpdates_
 
@@ -24,11 +30,11 @@
 @protocol JavaLangIterable;
 
 /*!
- @brief Holds buffered deletes and updates by term or query, once pushed.
- Pushed
- deletes/updates are write-once, so we shift to more memory efficient data
- structure to hold them. We don't hold docIDs because these are applied on
- flush.
+ @brief Holds buffered deletes and updates by term or query, once pushed.Pushed
+  deletes/updates are write-once, so we shift to more memory efficient data
+  structure to hold them.
+ We don't hold docIDs because these are applied on
+  flush.
  */
 @interface OrgApacheLuceneIndexFrozenBufferedUpdates : NSObject {
  @public
@@ -41,13 +47,12 @@
   jint numTermDeletes_;
   jboolean isSegmentPrivate_;
 }
-
-+ (jint)BYTES_PER_DEL_QUERY;
+@property (readonly, class) jint BYTES_PER_DEL_QUERY NS_SWIFT_NAME(BYTES_PER_DEL_QUERY);
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)deletes
-                                                withBoolean:(jboolean)isSegmentPrivate;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)deletes
+                                                                        withBoolean:(jboolean)isSegmentPrivate;
 
 - (jlong)delGen;
 
@@ -63,6 +68,10 @@
 
 - (jboolean)any;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexFrozenBufferedUpdates)
@@ -73,19 +82,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFrozenBufferedUpdates, queryLimits_, IOS
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFrozenBufferedUpdates, numericDVUpdates_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFrozenBufferedUpdates, binaryDVUpdates_, IOSObjectArray *)
 
-inline jint OrgApacheLuceneIndexFrozenBufferedUpdates_get_BYTES_PER_DEL_QUERY();
+inline jint OrgApacheLuceneIndexFrozenBufferedUpdates_get_BYTES_PER_DEL_QUERY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexFrozenBufferedUpdates, BYTES_PER_DEL_QUERY, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexFrozenBufferedUpdates *self, OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexFrozenBufferedUpdates_initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexFrozenBufferedUpdates *self, OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFrozenBufferedUpdates *new_OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexFrozenBufferedUpdates *new_OrgApacheLuceneIndexFrozenBufferedUpdates_initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFrozenBufferedUpdates *create_OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate);
+FOUNDATION_EXPORT OrgApacheLuceneIndexFrozenBufferedUpdates *create_OrgApacheLuceneIndexFrozenBufferedUpdates_initPackagePrivateWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFrozenBufferedUpdates)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFrozenBufferedUpdates")

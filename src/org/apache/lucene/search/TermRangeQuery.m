@@ -9,13 +9,15 @@
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/AutomatonQuery.h"
-#include "org/apache/lucene/search/MultiTermQuery.h"
-#include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/TermRangeQuery.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/apache/lucene/util/automaton/Automata.h"
 #include "org/apache/lucene/util/automaton/Automaton.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TermRangeQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchTermRangeQuery () {
  @public
@@ -98,9 +100,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermRangeQuery, upperTerm_, OrgApacheLu
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
+  if (JreObjectEqualsEquals(self, obj)) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [nil_chk(obj) java_getClass])) return false;
   OrgApacheLuceneSearchTermRangeQuery *other = (OrgApacheLuceneSearchTermRangeQuery *) cast_chk(obj, [OrgApacheLuceneSearchTermRangeQuery class]);
   if (includeLower_ != other->includeLower_) return false;
   if (includeUpper_ != other->includeUpper_) return false;
@@ -122,25 +124,40 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermRangeQuery, upperTerm_, OrgApacheLu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:", "TermRangeQuery", NULL, 0x1, NULL, NULL },
-    { "toAutomatonWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "newStringRangeWithNSString:withNSString:withNSString:withBoolean:withBoolean:", "newStringRange", "Lorg.apache.lucene.search.TermRangeQuery;", 0x9, NULL, NULL },
-    { "getLowerTerm", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getUpperTerm", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "includesLower", NULL, "Z", 0x1, NULL, NULL },
-    { "includesUpper", NULL, "Z", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x9, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTermRangeQuery;", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 7, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 8, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:);
+  methods[1].selector = @selector(toAutomatonWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:);
+  methods[2].selector = @selector(newStringRangeWithNSString:withNSString:withNSString:withBoolean:withBoolean:);
+  methods[3].selector = @selector(getLowerTerm);
+  methods[4].selector = @selector(getUpperTerm);
+  methods[5].selector = @selector(includesLower);
+  methods[6].selector = @selector(includesUpper);
+  methods[7].selector = @selector(toStringWithNSString:);
+  methods[8].selector = @selector(hash);
+  methods[9].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "lowerTerm_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "upperTerm_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "includeLower_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "includeUpper_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "lowerTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "upperTerm_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "includeLower_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "includeUpper_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermRangeQuery = { 2, "TermRangeQuery", "org.apache.lucene.search", NULL, 0x1, 10, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;ZZ", "toAutomaton", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;ZZ", "newStringRange", "LNSString;LNSString;LNSString;ZZ", "toString", "LNSString;", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermRangeQuery = { "TermRangeQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 10, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTermRangeQuery;
 }
 

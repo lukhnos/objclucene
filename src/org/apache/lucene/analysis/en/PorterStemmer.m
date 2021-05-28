@@ -10,10 +10,17 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/en/PorterStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneAnalysisEnPorterStemmer () {
  @public
   IOSCharArray *b_;
-  jint i_, j_, k_, k0_;
+  jint i_;
+  jint j_;
+  jint k_;
+  jint k0_;
   jboolean dirty_;
 }
 
@@ -45,7 +52,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnPorterStemmer, b_, IOSCharArray *)
 
-inline jint OrgApacheLuceneAnalysisEnPorterStemmer_get_INITIAL_SIZE();
+inline jint OrgApacheLuceneAnalysisEnPorterStemmer_get_INITIAL_SIZE(void);
 #define OrgApacheLuceneAnalysisEnPorterStemmer_INITIAL_SIZE 50
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisEnPorterStemmer, INITIAL_SIZE, jint)
 
@@ -75,12 +82,10 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
 
 @implementation OrgApacheLuceneAnalysisEnPorterStemmer
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisEnPorterStemmer_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneAnalysisEnPorterStemmer_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)reset {
   i_ = 0;
@@ -95,7 +100,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  return [NSString stringWithCharacters:b_ offset:0 length:i_];
+  return [NSString java_stringWithCharacters:b_ offset:0 length:i_];
 }
 
 - (jint)getResultLength {
@@ -131,7 +136,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)settoWithNSString:(NSString *)s {
-  jint l = ((jint) [((NSString *) nil_chk(s)) length]);
+  jint l = [((NSString *) nil_chk(s)) java_length];
   jint o = j_ + 1;
   for (jint i = 0; i < l; i++) *IOSCharArray_GetRef(nil_chk(b_), o + i) = [s charAtWithInt:i];
   k_ = j_ + l;
@@ -167,7 +172,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)stemWithNSString:(NSString *)s {
-  if ([self stemWithCharArray:[((NSString *) nil_chk(s)) toCharArray] withInt:((jint) [s length])]) return [self description];
+  if ([self stemWithCharArray:[((NSString *) nil_chk(s)) java_toCharArray] withInt:[s java_length]]) return [self description];
   else return s;
 }
 
@@ -218,62 +223,93 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PorterStemmer", NULL, 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "addWithChar:", "add", "V", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getResultLength", NULL, "I", 0x1, NULL, NULL },
-    { "getResultBuffer", NULL, "[C", 0x1, NULL, NULL },
-    { "consWithInt:", "cons", "Z", 0x12, NULL, NULL },
-    { "m", NULL, "I", 0x12, NULL, NULL },
-    { "vowelinstem", NULL, "Z", 0x12, NULL, NULL },
-    { "doublecWithInt:", "doublec", "Z", 0x12, NULL, NULL },
-    { "cvcWithInt:", "cvc", "Z", 0x12, NULL, NULL },
-    { "endsWithNSString:", "ends", "Z", 0x12, NULL, NULL },
-    { "settoWithNSString:", "setto", "V", 0x0, NULL, NULL },
-    { "rWithNSString:", "r", "V", 0x0, NULL, NULL },
-    { "step1", NULL, "V", 0x12, NULL, NULL },
-    { "step2", NULL, "V", 0x12, NULL, NULL },
-    { "step3", NULL, "V", 0x12, NULL, NULL },
-    { "step4", NULL, "V", 0x12, NULL, NULL },
-    { "step5", NULL, "V", 0x12, NULL, NULL },
-    { "step6", NULL, "V", 0x12, NULL, NULL },
-    { "stemWithNSString:", "stem", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "stemWithCharArray:", "stem", "Z", 0x1, NULL, NULL },
-    { "stemWithCharArray:withInt:withInt:", "stem", "Z", 0x1, NULL, NULL },
-    { "stemWithCharArray:withInt:", "stem", "Z", 0x1, NULL, NULL },
-    { "stem", NULL, "Z", 0x1, NULL, NULL },
-    { "stemWithInt:", "stem", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[C", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x12, 3, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x12, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x12, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x12, 5, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x12, 6, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x12, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 9, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 10, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x12, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x12, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x12, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x12, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x12, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x12, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 11, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 11, 12, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 11, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 11, 14, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 11, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(reset);
+  methods[2].selector = @selector(addWithChar:);
+  methods[3].selector = @selector(description);
+  methods[4].selector = @selector(getResultLength);
+  methods[5].selector = @selector(getResultBuffer);
+  methods[6].selector = @selector(consWithInt:);
+  methods[7].selector = @selector(m);
+  methods[8].selector = @selector(vowelinstem);
+  methods[9].selector = @selector(doublecWithInt:);
+  methods[10].selector = @selector(cvcWithInt:);
+  methods[11].selector = @selector(endsWithNSString:);
+  methods[12].selector = @selector(settoWithNSString:);
+  methods[13].selector = @selector(rWithNSString:);
+  methods[14].selector = @selector(step1);
+  methods[15].selector = @selector(step2);
+  methods[16].selector = @selector(step3);
+  methods[17].selector = @selector(step4);
+  methods[18].selector = @selector(step5);
+  methods[19].selector = @selector(step6);
+  methods[20].selector = @selector(stemWithNSString:);
+  methods[21].selector = @selector(stemWithCharArray:);
+  methods[22].selector = @selector(stemWithCharArray:withInt:withInt:);
+  methods[23].selector = @selector(stemWithCharArray:withInt:);
+  methods[24].selector = @selector(stem);
+  methods[25].selector = @selector(stemWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "b_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "i_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "j_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "k_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "k0_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "dirty_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "INITIAL_SIZE", "INITIAL_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisEnPorterStemmer_INITIAL_SIZE },
+    { "b_", "[C", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "i_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "j_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "k_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "k0_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "dirty_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "INITIAL_SIZE", "I", .constantValue.asInt = OrgApacheLuceneAnalysisEnPorterStemmer_INITIAL_SIZE, 0x1a, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnPorterStemmer = { 2, "PorterStemmer", "org.apache.lucene.analysis.en", NULL, 0x0, 26, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "add", "C", "toString", "cons", "I", "doublec", "cvc", "ends", "LNSString;", "setto", "r", "stem", "[C", "[CII", "[CI" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnPorterStemmer = { "PorterStemmer", "org.apache.lucene.analysis.en", ptrTable, methods, fields, 7, 0x0, 26, 7, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisEnPorterStemmer;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisEnPorterStemmer_init(OrgApacheLuceneAnalysisEnPorterStemmer *self) {
+void OrgApacheLuceneAnalysisEnPorterStemmer_initPackagePrivate(OrgApacheLuceneAnalysisEnPorterStemmer *self) {
   NSObject_init(self);
   self->dirty_ = false;
   JreStrongAssignAndConsume(&self->b_, [IOSCharArray newArrayWithLength:OrgApacheLuceneAnalysisEnPorterStemmer_INITIAL_SIZE]);
   self->i_ = 0;
 }
 
-OrgApacheLuceneAnalysisEnPorterStemmer *new_OrgApacheLuceneAnalysisEnPorterStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisEnPorterStemmer, init)
+OrgApacheLuceneAnalysisEnPorterStemmer *new_OrgApacheLuceneAnalysisEnPorterStemmer_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisEnPorterStemmer, initPackagePrivate)
 }
 
-OrgApacheLuceneAnalysisEnPorterStemmer *create_OrgApacheLuceneAnalysisEnPorterStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisEnPorterStemmer, init)
+OrgApacheLuceneAnalysisEnPorterStemmer *create_OrgApacheLuceneAnalysisEnPorterStemmer_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisEnPorterStemmer, initPackagePrivate)
 }
 
 jboolean OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(OrgApacheLuceneAnalysisEnPorterStemmer *self, jint i) {
@@ -339,7 +375,7 @@ jboolean OrgApacheLuceneAnalysisEnPorterStemmer_cvcWithInt_(OrgApacheLuceneAnaly
 }
 
 jboolean OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(OrgApacheLuceneAnalysisEnPorterStemmer *self, NSString *s) {
-  jint l = ((jint) [((NSString *) nil_chk(s)) length]);
+  jint l = [((NSString *) nil_chk(s)) java_length];
   jint o = self->k_ - l + 1;
   if (o < self->k0_) return false;
   for (jint i = 0; i < l; i++) if (IOSCharArray_Get(nil_chk(self->b_), o + i) != [s charAtWithInt:i]) return false;

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonCompiledAutomaton
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonCompiledAutomaton_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonCompiledAutomaton || defined(INCLUDE_OrgApacheLuceneUtilAutomatonCompiledAutomaton))
 #define OrgApacheLuceneUtilAutomatonCompiledAutomaton_
 
@@ -27,9 +33,8 @@
 
 /*!
  @brief Immutable class holding compiled details for a given
- Automaton.
- The Automaton is deterministic, must not have
- dead states but is not necessarily minimal.
+  Automaton.The Automaton is deterministic, must not have
+  dead states but is not necessarily minimal.
  */
 @interface OrgApacheLuceneUtilAutomatonCompiledAutomaton : NSObject {
  @public
@@ -48,24 +53,23 @@
   OrgApacheLuceneUtilAutomatonByteRunAutomaton *runAutomaton_;
   /*!
    @brief Two dimensional array of transitions, indexed by state
- number for traversal.
-   The state numbering is consistent with
- <code>runAutomaton</code>. 
- Only valid for <code>AUTOMATON_TYPE.NORMAL</code>.
+  number for traversal.The state numbering is consistent with 
+ <code>runAutomaton</code>.
+   Only valid for <code>AUTOMATON_TYPE.NORMAL</code>.
    */
   OrgApacheLuceneUtilAutomatonAutomaton *automaton_;
   /*!
-   @brief Shared common suffix accepted by the automaton.
-   Only valid
- for <code>AUTOMATON_TYPE.NORMAL</code>, and only when the
- automaton accepts an infinite language.  This will be null
- if the common prefix is length 0.
+   @brief Shared common suffix accepted by the automaton.Only valid
+  for <code>AUTOMATON_TYPE.NORMAL</code>, and only when the
+  automaton accepts an infinite language.
+   This will be null
+  if the common prefix is length 0.
    */
   OrgApacheLuceneUtilBytesRef *commonSuffixRef_;
   /*!
    @brief Indicates if the automaton accepts a finite set of strings.
    Null if this was not computed.
- Only valid for <code>AUTOMATON_TYPE.NORMAL</code>.
+  Only valid for <code>AUTOMATON_TYPE.NORMAL</code>.
    */
   JavaLangBoolean *finite_;
   /*!
@@ -78,59 +82,63 @@
 
 /*!
  @brief Create this, passing simplify=true and finite=null, so that we try
- to simplify the automaton and determine if it is finite.
+   to simplify the automaton and determine if it is finite.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
 
 /*!
- @brief Create this.
- If finite is null, we use <code>Operations.isFinite</code>
- to determine whether it is finite.  If simplify is true, we run
- possibly expensive operations to determine if the automaton is one
- the cases in <code>CompiledAutomaton.AUTOMATON_TYPE</code>. 
+ @brief Create this.If finite is null, we use <code>Operations.isFinite</code>
+   to determine whether it is finite.
+ If simplify is true, we run
+   possibly expensive operations to determine if the automaton is one
+   the cases in <code>CompiledAutomaton.AUTOMATON_TYPE</code>.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
-                                          withJavaLangBoolean:(JavaLangBoolean *)finite
-                                                  withBoolean:(jboolean)simplify;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
+                                                    withJavaLangBoolean:(JavaLangBoolean *)finite
+                                                            withBoolean:(jboolean)simplify;
 
 /*!
- @brief Create this.
- If finite is null, we use <code>Operations.isFinite</code>
- to determine whether it is finite.  If simplify is true, we run
- possibly expensive operations to determine if the automaton is one
- the cases in <code>CompiledAutomaton.AUTOMATON_TYPE</code>. If simplify
- requires determinizing the autaomaton then only maxDeterminizedStates
- will be created.  Any more than that will cause a
- TooComplexToDeterminizeException.
+ @brief Create this.If finite is null, we use <code>Operations.isFinite</code>
+   to determine whether it is finite.
+ If simplify is true, we run
+   possibly expensive operations to determine if the automaton is one
+   the cases in <code>CompiledAutomaton.AUTOMATON_TYPE</code>. If simplify
+   requires determinizing the autaomaton then only maxDeterminizedStates
+   will be created.  Any more than that will cause a
+   TooComplexToDeterminizeException.
  */
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
-                                          withJavaLangBoolean:(JavaLangBoolean *)finite
-                                                  withBoolean:(jboolean)simplify
-                                                      withInt:(jint)maxDeterminizedStates
-                                                  withBoolean:(jboolean)isBinary;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
+                                                    withJavaLangBoolean:(JavaLangBoolean *)finite
+                                                            withBoolean:(jboolean)simplify
+                                                                withInt:(jint)maxDeterminizedStates
+                                                            withBoolean:(jboolean)isBinary;
 
 - (jboolean)isEqual:(id)obj;
 
 /*!
  @brief Finds largest term accepted by this Automaton, that's
- &lt;= the provided input term.
- The result is placed in
- output; it's fine for output and input to point to
- the same bytes.  The returned result is either the
- provided output, or null if there is no floor term
- (ie, the provided input term is before the first term
- accepted by this Automaton). 
+   &lt;= the provided input term.The result is placed in
+   output; it's fine for output and input to point to
+   the same bytes.
+ The returned result is either the
+   provided output, or null if there is no floor term
+   (ie, the provided input term is before the first term
+   accepted by this Automaton).
  */
 - (OrgApacheLuceneUtilBytesRef *)floorWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)input
                                withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)output;
 
 /*!
  @brief Return a <code>TermsEnum</code> intersecting the provided <code>Terms</code>
- with the terms accepted by this automaton.
+   with the terms accepted by this automaton.
  */
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
 
 - (NSUInteger)hash;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -172,6 +180,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonCompiledAutomaton)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum) {
   OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum_NONE = 0,
   OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum_ALL = 1,
@@ -181,25 +191,22 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMA
 
 /*!
  @brief Automata are compiled into different internal forms for the
- most efficient execution depending upon the language they accept.
+  most efficient execution depending upon the language they accept.
  */
-@interface OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE : JavaLangEnum
 
-+ (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *)NONE;
-
-+ (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *)ALL;
-
-+ (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *)SINGLE;
-
-+ (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *)NORMAL;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *NONE NS_SWIFT_NAME(NONE);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *ALL NS_SWIFT_NAME(ALL);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *SINGLE NS_SWIFT_NAME(SINGLE);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *NORMAL NS_SWIFT_NAME(NORMAL);
+#pragma mark Public
 
 + (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum)toNSEnum;
 
 @end
@@ -212,28 +219,28 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *
 /*!
  @brief Automaton that accepts no strings.
  */
-inline OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_get_NONE();
+inline OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_get_NONE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NONE)
 
 /*!
  @brief Automaton that accepts all possible strings.
  */
-inline OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_get_ALL();
+inline OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_get_ALL(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, ALL)
 
 /*!
  @brief Automaton that accepts only a single fixed string.
  */
-inline OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_get_SINGLE();
+inline OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_get_SINGLE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, SINGLE)
 
 /*!
  @brief Catch-all for any other automata.
  */
-inline OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_get_NORMAL();
+inline OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_get_NORMAL(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NORMAL)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_valueOfWithNSString_(NSString *name);
 
@@ -243,4 +250,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMAT
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonCompiledAutomaton")

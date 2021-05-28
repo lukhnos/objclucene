@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpellLuceneDictionary
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpellLuceneDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellLuceneDictionary || defined(INCLUDE_OrgApacheLuceneSearchSpellLuceneDictionary))
 #define OrgApacheLuceneSearchSpellLuceneDictionary_
 
@@ -25,7 +31,7 @@
 
 /*!
  @brief Lucene Dictionary: terms taken from the given field
- of a Lucene index.
+  of a Lucene index.
  */
 @interface OrgApacheLuceneSearchSpellLuceneDictionary : NSObject < OrgApacheLuceneSearchSpellDictionary >
 
@@ -33,12 +39,16 @@
 
 /*!
  @brief Creates a new Dictionary, pulling source terms from
- the specified <code>field</code> in the provided <code>reader</code>
+  the specified <code>field</code> in the provided <code>reader</code>
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                           withNSString:(NSString *)field;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                                     withNSString:(NSString *)field;
 
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -54,4 +64,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellLuceneDictionary)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellLuceneDictionary")

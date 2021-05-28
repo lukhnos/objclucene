@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline || defined(INCLUDE_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline))
 #define OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline_
 
@@ -24,13 +30,13 @@
 
 /*!
  @brief <p>
- This processor pipeline extends <code>StandardQueryNodeProcessorPipeline</code> and enables
- boolean precedence on it.
+  This processor pipeline extends <code>StandardQueryNodeProcessorPipeline</code> and enables
+  boolean precedence on it.
  </p>
- <p>
- EXPERT: the precedence is enabled by removing <code>GroupQueryNodeProcessor</code> from the
+  <p>
+  EXPERT: the precedence is enabled by removing <code>GroupQueryNodeProcessor</code> from the 
  <code>StandardQueryNodeProcessorPipeline</code> and appending <code>BooleanModifiersQueryNodeProcessor</code>
- to the pipeline.
+  to the pipeline. 
  </p>
  - seealso: PrecedenceQueryParser
  - seealso: StandardQueryNodeProcessorPipeline
@@ -42,7 +48,7 @@
 /*!
  - seealso: StandardQueryNodeProcessorPipeline#StandardQueryNodeProcessorPipeline(QueryConfigHandler)
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfig;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfig;
 
 #pragma mark Package-Private
 
@@ -60,4 +66,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexiblePrecedenceProcessor
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline")

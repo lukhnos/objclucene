@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Iterable.h"
@@ -34,9 +33,16 @@
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/perfield/PerFieldDocValuesFormat must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/codecs/perfield/PerFieldDocValuesFormat must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
 @interface OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter : OrgApacheLuceneCodecsDocValuesConsumer {
  @public
-  OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat *this$0_;
+  WEAK_ OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat *this$0_;
   id<JavaUtilMap> formats_;
   id<JavaUtilMap> suffixes_;
   OrgApacheLuceneIndexSegmentWriteState *segmentWriteState_;
@@ -72,7 +78,6 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter, this$0_, OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter, formats_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter, suffixes_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter, segmentWriteState_, OrgApacheLuceneIndexSegmentWriteState *)
@@ -89,7 +94,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_
 
 @interface OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader : OrgApacheLuceneCodecsDocValuesProducer {
  @public
-  OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat *this$0_;
+  WEAK_ OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat *this$0_;
   id<JavaUtilMap> fields_;
   id<JavaUtilMap> formats_;
 }
@@ -128,7 +133,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader, this$0_, OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader, fields_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader, formats_, id<JavaUtilMap>)
 
@@ -197,31 +201,41 @@ J2OBJC_IGNORE_DESIGNATED_END
   return 0;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesConsumer;", 0x11, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0x8, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x8, 5, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesProducer;", 0x11, 6, 7, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesFormat;", 0x401, 8, 9, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[2].selector = @selector(getSuffixWithNSString:withNSString:);
+  methods[3].selector = @selector(getFullSegmentSuffixWithNSString:withNSString:);
+  methods[4].selector = @selector(fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:);
+  methods[5].selector = @selector(getDocValuesFormatForFieldWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "PER_FIELD_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 10, -1, -1 },
+    { "PER_FIELD_FORMAT_KEY", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 11, -1, -1 },
+    { "PER_FIELD_SUFFIX_KEY", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 12, -1, -1 },
+  };
+  static const void *ptrTable[] = { "fieldsConsumer", "LOrgApacheLuceneIndexSegmentWriteState;", "LJavaIoIOException;", "getSuffix", "LNSString;LNSString;", "getFullSegmentSuffix", "fieldsProducer", "LOrgApacheLuceneIndexSegmentReadState;", "getDocValuesFormatForField", "LNSString;", &OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_NAME, &OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_FORMAT_KEY, &OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_SUFFIX_KEY, "LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix;LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter;LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat = { "PerFieldDocValuesFormat", "org.apache.lucene.codecs.perfield", ptrTable, methods, fields, 7, 0x401, 6, 3, -1, 13, -1, -1, -1 };
+  return &_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat class]) {
     JreStrongAssign(&OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_FORMAT_KEY, JreStrcat("$$", [OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_class_() getSimpleName], @".format"));
     JreStrongAssign(&OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_SUFFIX_KEY, JreStrcat("$$", [OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_class_() getSimpleName], @".suffix"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "PerFieldDocValuesFormat", NULL, 0x1, NULL, NULL },
-    { "fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:", "fieldsConsumer", "Lorg.apache.lucene.codecs.DocValuesConsumer;", 0x11, "Ljava.io.IOException;", NULL },
-    { "getSuffixWithNSString:withNSString:", "getSuffix", "Ljava.lang.String;", 0x8, NULL, NULL },
-    { "getFullSegmentSuffixWithNSString:withNSString:", "getFullSegmentSuffix", "Ljava.lang.String;", 0x8, NULL, NULL },
-    { "fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:", "fieldsProducer", "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x11, "Ljava.io.IOException;", NULL },
-    { "getDocValuesFormatForFieldWithNSString:", "getDocValuesFormatForField", "Lorg.apache.lucene.codecs.DocValuesFormat;", 0x401, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "PER_FIELD_NAME", "PER_FIELD_NAME", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_NAME, NULL, .constantValue.asLong = 0 },
-    { "PER_FIELD_FORMAT_KEY", "PER_FIELD_FORMAT_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_FORMAT_KEY, NULL, .constantValue.asLong = 0 },
-    { "PER_FIELD_SUFFIX_KEY", "PER_FIELD_SUFFIX_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_SUFFIX_KEY, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.perfield.PerFieldDocValuesFormat$ConsumerAndSuffix;", "Lorg.apache.lucene.codecs.perfield.PerFieldDocValuesFormat$FieldsWriter;", "Lorg.apache.lucene.codecs.perfield.PerFieldDocValuesFormat$FieldsReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat = { 2, "PerFieldDocValuesFormat", "org.apache.lucene.codecs.perfield", NULL, 0x401, 6, methods, 3, fields, 0, NULL, 3, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat;
 }
 
 @end
@@ -237,7 +251,7 @@ NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_getSuffixWithNSSt
 
 NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_getFullSegmentSuffixWithNSString_withNSString_(NSString *outerSegmentSuffix, NSString *segmentSuffix) {
   OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_initialize();
-  if (((jint) [((NSString *) nil_chk(outerSegmentSuffix)) length]) == 0) {
+  if ([((NSString *) nil_chk(outerSegmentSuffix)) java_length] == 0) {
     return segmentSuffix;
   }
   else {
@@ -249,10 +263,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesF
 
 @implementation OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix
 
-- (void)close {
-  [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(consumer_)) close];
-}
-
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix_init(self);
@@ -260,21 +270,32 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (void)close {
+  [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(consumer_)) close];
+}
+
 - (void)dealloc {
   RELEASE_(consumer_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", "ConsumerAndSuffix", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 0, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "consumer_", NULL, 0x0, "Lorg.apache.lucene.codecs.DocValuesConsumer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffix_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "consumer_", "LOrgApacheLuceneCodecsDocValuesConsumer;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "suffix_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix = { 2, "ConsumerAndSuffix", "org.apache.lucene.codecs.perfield", "PerFieldDocValuesFormat", 0x8, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoIOException;", "LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix = { "ConsumerAndSuffix", "org.apache.lucene.codecs.perfield", ptrTable, methods, fields, 7, 0x8, 2, 2, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix;
 }
 
@@ -339,8 +360,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesF
   OrgApacheLuceneUtilIOUtils_closeWithJavaLangIterable_([((id<JavaUtilMap>) nil_chk(formats_)) values]);
 }
 
+- (void)__javaClone:(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter *)original {
+  [super __javaClone:original];
+  [this$0_ release];
+}
+
 - (void)dealloc {
-  RELEASE_(this$0_);
   RELEASE_(formats_);
   RELEASE_(suffixes_);
   RELEASE_(segmentWriteState_);
@@ -348,30 +373,43 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesF
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat:withOrgApacheLuceneIndexSegmentWriteState:", "FieldsWriter", NULL, 0x1, NULL, NULL },
-    { "addNumericFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addNumericField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addBinaryField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;)V" },
-    { "addSortedFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:", "addSortedField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "addSortedNumericFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:", "addSortedNumericField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "addSortedSetFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:withJavaLangIterable:", "addSortedSetField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
-    { "getInstanceWithOrgApacheLuceneIndexFieldInfo:", "getInstance", "Lorg.apache.lucene.codecs.DocValuesConsumer;", 0x2, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, 4, -1, -1 },
+    { NULL, "V", 0x1, 5, 2, 3, 6, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, 3, 9, -1, -1 },
+    { NULL, "V", 0x1, 10, 8, 3, 11, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, 3, 14, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesConsumer;", 0x2, 15, 16, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat:withOrgApacheLuceneIndexSegmentWriteState:);
+  methods[1].selector = @selector(addNumericFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:);
+  methods[2].selector = @selector(addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:);
+  methods[3].selector = @selector(addSortedFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:);
+  methods[4].selector = @selector(addSortedNumericFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:);
+  methods[5].selector = @selector(addSortedSetFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:withJavaLangIterable:withJavaLangIterable:);
+  methods[6].selector = @selector(getInstanceWithOrgApacheLuceneIndexFieldInfo:);
+  methods[7].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.perfield.PerFieldDocValuesFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "formats_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Lorg/apache/lucene/codecs/DocValuesFormat;Lorg/apache/lucene/codecs/perfield/PerFieldDocValuesFormat$ConsumerAndSuffix;>;", .constantValue.asLong = 0 },
-    { "suffixes_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
-    { "segmentWriteState_", NULL, 0x12, "Lorg.apache.lucene.index.SegmentWriteState;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "formats_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 17, -1 },
+    { "suffixes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 18, -1 },
+    { "segmentWriteState_", "LOrgApacheLuceneIndexSegmentWriteState;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter = { 2, "FieldsWriter", "org.apache.lucene.codecs.perfield", "PerFieldDocValuesFormat", 0x2, 8, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat;LOrgApacheLuceneIndexSegmentWriteState;", "addNumericField", "LOrgApacheLuceneIndexFieldInfo;LJavaLangIterable;", "LJavaIoIOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;)V", "addBinaryField", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;)V", "addSortedField", "LOrgApacheLuceneIndexFieldInfo;LJavaLangIterable;LJavaLangIterable;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V", "addSortedNumericField", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V", "addSortedSetField", "LOrgApacheLuceneIndexFieldInfo;LJavaLangIterable;LJavaLangIterable;LJavaLangIterable;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Iterable<Ljava/lang/Number;>;Ljava/lang/Iterable<Ljava/lang/Number;>;)V", "getInstance", "LOrgApacheLuceneIndexFieldInfo;", "Ljava/util/Map<Lorg/apache/lucene/codecs/DocValuesFormat;Lorg/apache/lucene/codecs/perfield/PerFieldDocValuesFormat$ConsumerAndSuffix;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter = { "FieldsWriter", "org.apache.lucene.codecs.perfield", ptrTable, methods, fields, 7, 0x2, 8, 4, 19, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter;
 }
 
 @end
 
 void OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter_initWithOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter *self, OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat *outer$, OrgApacheLuceneIndexSegmentWriteState *state) {
-  JreStrongAssign(&self->this$0_, outer$);
+  self->this$0_ = outer$;
   OrgApacheLuceneCodecsDocValuesConsumer_init(self);
   JreStrongAssignAndConsume(&self->formats_, new_JavaUtilHashMap_init());
   JreStrongAssignAndConsume(&self->suffixes_, new_JavaUtilHashMap_init());
@@ -401,12 +439,12 @@ OrgApacheLuceneCodecsDocValuesConsumer *OrgApacheLuceneCodecsPerfieldPerFieldDoc
     @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$C", @"invalid null DocValuesFormat for field=\"", field->name_, '"'));
   }
   NSString *formatName = [format getName];
-  NSString *previousValue = [field putAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_FORMAT_KEY) withNSString:formatName];
+  NSString *previousValue = JreRetainedLocalValue([field putAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_FORMAT_KEY) withNSString:formatName]);
   if ([field getDocValuesGen] == -1 && previousValue != nil) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$$$$$", @"found existing value for ", JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_FORMAT_KEY), @", field=", field->name_, @", old=", previousValue, @", new=", formatName));
   }
   JavaLangInteger *suffix = nil;
-  OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix *consumer = [((id<JavaUtilMap>) nil_chk(self->formats_)) getWithId:format];
+  OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix *consumer = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(self->formats_)) getWithId:format]);
   if (consumer == nil) {
     if ([field getDocValuesGen] != -1) {
       NSString *suffixAtt = [field getAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_SUFFIX_KEY)];
@@ -431,7 +469,7 @@ OrgApacheLuceneCodecsDocValuesConsumer *OrgApacheLuceneCodecsPerfieldPerFieldDoc
     [self->formats_ putWithId:format withId:consumer];
   }
   else {
-    JreAssert(([((id<JavaUtilMap>) nil_chk(self->suffixes_)) containsKeyWithId:formatName]), (@"org/apache/lucene/codecs/perfield/PerFieldDocValuesFormat.java:192 condition failed: assert suffixes.containsKey(formatName);"));
+    JreAssert([((id<JavaUtilMap>) nil_chk(self->suffixes_)) containsKeyWithId:formatName], @"org/apache/lucene/codecs/perfield/PerFieldDocValuesFormat.java:196 condition failed: assert suffixes.containsKey(formatName);");
     suffix = JavaLangInteger_valueOfWithInt_(consumer->suffix_);
   }
   previousValue = [field putAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_SUFFIX_KEY) withNSString:JavaLangInteger_toStringWithInt_([suffix intValue])];
@@ -458,32 +496,32 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesF
 }
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field {
-  OrgApacheLuceneCodecsDocValuesProducer *producer = [((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_];
+  OrgApacheLuceneCodecsDocValuesProducer *producer = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_]);
   return producer == nil ? nil : [producer getNumericWithOrgApacheLuceneIndexFieldInfo:field];
 }
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field {
-  OrgApacheLuceneCodecsDocValuesProducer *producer = [((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_];
+  OrgApacheLuceneCodecsDocValuesProducer *producer = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_]);
   return producer == nil ? nil : [producer getBinaryWithOrgApacheLuceneIndexFieldInfo:field];
 }
 
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field {
-  OrgApacheLuceneCodecsDocValuesProducer *producer = [((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_];
+  OrgApacheLuceneCodecsDocValuesProducer *producer = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_]);
   return producer == nil ? nil : [producer getSortedWithOrgApacheLuceneIndexFieldInfo:field];
 }
 
 - (OrgApacheLuceneIndexSortedNumericDocValues *)getSortedNumericWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field {
-  OrgApacheLuceneCodecsDocValuesProducer *producer = [((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_];
+  OrgApacheLuceneCodecsDocValuesProducer *producer = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_]);
   return producer == nil ? nil : [producer getSortedNumericWithOrgApacheLuceneIndexFieldInfo:field];
 }
 
 - (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field {
-  OrgApacheLuceneCodecsDocValuesProducer *producer = [((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_];
+  OrgApacheLuceneCodecsDocValuesProducer *producer = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_]);
   return producer == nil ? nil : [producer getSortedSetWithOrgApacheLuceneIndexFieldInfo:field];
 }
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field {
-  OrgApacheLuceneCodecsDocValuesProducer *producer = [((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_];
+  OrgApacheLuceneCodecsDocValuesProducer *producer = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fields_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_]);
   return producer == nil ? nil : [producer getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:field];
 }
 
@@ -494,7 +532,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesF
 - (jlong)ramBytesUsed {
   jlong size = 0;
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(formats_)) entrySet])) {
-    size += (((jint) [((NSString *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey])) length]) * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR) + [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk([entry_ getValue])) ramBytesUsed];
+    size += ([((NSString *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey])) java_length] * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR) + [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk([entry_ getValue])) ramBytesUsed];
   }
   return size;
 }
@@ -517,55 +555,78 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesF
   return JreStrcat("$IC", @"PerFieldDocValues(formats=", [((id<JavaUtilMap>) nil_chk(formats_)) size], ')');
 }
 
+- (void)__javaClone:(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader *)original {
+  [super __javaClone:original];
+  [this$0_ release];
+}
+
 - (void)dealloc {
-  RELEASE_(this$0_);
   RELEASE_(fields_);
   RELEASE_(formats_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat:withOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader:", "FieldsReader", NULL, 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat:withOrgApacheLuceneIndexSegmentReadState:", "FieldsReader", NULL, 0x1, NULL, NULL },
-    { "getNumericWithOrgApacheLuceneIndexFieldInfo:", "getNumeric", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getBinaryWithOrgApacheLuceneIndexFieldInfo:", "getBinary", "Lorg.apache.lucene.index.BinaryDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSortedWithOrgApacheLuceneIndexFieldInfo:", "getSorted", "Lorg.apache.lucene.index.SortedDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSortedNumericWithOrgApacheLuceneIndexFieldInfo:", "getSortedNumeric", "Lorg.apache.lucene.index.SortedNumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSortedSetWithOrgApacheLuceneIndexFieldInfo:", "getSortedSet", "Lorg.apache.lucene.index.SortedSetDocValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:", "getDocsWithField", "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexNumericDocValues;", 0x1, 3, 4, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexBinaryDocValues;", 0x1, 5, 4, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedDocValues;", 0x1, 6, 4, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedNumericDocValues;", 0x1, 7, 4, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSortedSetDocValues;", 0x1, 8, 4, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBits;", 0x1, 9, 4, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 10, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsDocValuesProducer;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 11, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat:withOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat:withOrgApacheLuceneIndexSegmentReadState:);
+  methods[2].selector = @selector(getNumericWithOrgApacheLuceneIndexFieldInfo:);
+  methods[3].selector = @selector(getBinaryWithOrgApacheLuceneIndexFieldInfo:);
+  methods[4].selector = @selector(getSortedWithOrgApacheLuceneIndexFieldInfo:);
+  methods[5].selector = @selector(getSortedNumericWithOrgApacheLuceneIndexFieldInfo:);
+  methods[6].selector = @selector(getSortedSetWithOrgApacheLuceneIndexFieldInfo:);
+  methods[7].selector = @selector(getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:);
+  methods[8].selector = @selector(close);
+  methods[9].selector = @selector(ramBytesUsed);
+  methods[10].selector = @selector(getChildResources);
+  methods[11].selector = @selector(checkIntegrity);
+  methods[12].selector = @selector(getMergeInstance);
+  methods[13].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.perfield.PerFieldDocValuesFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fields_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/DocValuesProducer;>;", .constantValue.asLong = 0 },
-    { "formats_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/DocValuesProducer;>;", .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "fields_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 12, -1 },
+    { "formats_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 12, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader = { 2, "FieldsReader", "org.apache.lucene.codecs.perfield", "PerFieldDocValuesFormat", 0x2, 14, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat;LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader;", "LJavaIoIOException;", "LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat;LOrgApacheLuceneIndexSegmentReadState;", "getNumeric", "LOrgApacheLuceneIndexFieldInfo;", "getBinary", "getSorted", "getSortedNumeric", "getSortedSet", "getDocsWithField", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString", "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/DocValuesProducer;>;", "LOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader = { "FieldsReader", "org.apache.lucene.codecs.perfield", ptrTable, methods, fields, 7, 0x2, 14, 3, 13, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader;
 }
 
 @end
 
 void OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader_initWithOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_withOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader_(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader *self, OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat *outer$, OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader *other) {
-  JreStrongAssign(&self->this$0_, outer$);
+  self->this$0_ = outer$;
   OrgApacheLuceneCodecsDocValuesProducer_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_JavaUtilTreeMap_init());
   JreStrongAssignAndConsume(&self->formats_, new_JavaUtilHashMap_init());
   id<JavaUtilMap> oldToNew = create_JavaUtilIdentityHashMap_init();
   for (id<JavaUtilMap_Entry> __strong ent in nil_chk([((OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader *) nil_chk(other))->formats_ entrySet])) {
-    OrgApacheLuceneCodecsDocValuesProducer *values = [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(ent)) getValue])) getMergeInstance];
+    OrgApacheLuceneCodecsDocValuesProducer *values = JreRetainedLocalValue([((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(ent)) getValue])) getMergeInstance]);
     [self->formats_ putWithId:[ent getKey] withId:values];
     [oldToNew putWithId:[ent getValue] withId:values];
   }
   for (id<JavaUtilMap_Entry> __strong ent in nil_chk([other->fields_ entrySet])) {
-    OrgApacheLuceneCodecsDocValuesProducer *producer = [oldToNew getWithId:[((id<JavaUtilMap_Entry>) nil_chk(ent)) getValue]];
-    JreAssert((producer != nil), (@"org/apache/lucene/codecs/perfield/PerFieldDocValuesFormat.java:244 condition failed: assert producer != null;"));
+    OrgApacheLuceneCodecsDocValuesProducer *producer = JreRetainedLocalValue([oldToNew getWithId:[((id<JavaUtilMap_Entry>) nil_chk(ent)) getValue]]);
+    JreAssert(producer != nil, @"org/apache/lucene/codecs/perfield/PerFieldDocValuesFormat.java:249 condition failed: assert producer != null;");
     [self->fields_ putWithId:[ent getKey] withId:producer];
   }
 }
@@ -579,7 +640,7 @@ OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader *create_OrgApa
 }
 
 void OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader_initWithOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader *self, OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat *outer$, OrgApacheLuceneIndexSegmentReadState *readState) {
-  JreStrongAssign(&self->this$0_, outer$);
+  self->this$0_ = outer$;
   OrgApacheLuceneCodecsDocValuesProducer_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_JavaUtilTreeMap_init());
   JreStrongAssignAndConsume(&self->formats_, new_JavaUtilHashMap_init());

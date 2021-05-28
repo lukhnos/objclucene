@@ -3,6 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/el/GreekStemmer.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -10,6 +11,10 @@
 #include "java/util/List.h"
 #include "org/apache/lucene/analysis/el/GreekStemmer.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/el/GreekStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisElGreekStemmer ()
 
@@ -84,10 +89,10 @@
 
 /*!
  @brief Checks if the word contained in the leading portion of char[] array , 
- ends with the suffix given as parameter.
+  ends with the suffix given as parameter.
  @param s A char[] array that represents a word.
  @param len The length of the char[] array.
- @param suffix A <code>String</code> object to check if the word given ends with these characters.
+ @param suffix A <code>String</code>  object to check if the word given ends with these characters.
  @return True if the word ends with the suffix given , false otherwise.
  */
 - (jboolean)endsWithWithCharArray:(IOSCharArray *)s
@@ -96,89 +101,89 @@
 
 /*!
  @brief Checks if the word contained in the leading portion of char[] array , 
- ends with a Greek vowel.
+  ends with a Greek vowel.
  @param s A char[] array that represents a word.
  @param len The length of the char[] array.
  @return True if the word contained in the leading portion of char[] array , 
- ends with a vowel , false otherwise.
+  ends with a vowel , false otherwise.
  */
 - (jboolean)endsWithVowelWithCharArray:(IOSCharArray *)s
                                withInt:(jint)len;
 
 /*!
  @brief Checks if the word contained in the leading portion of char[] array , 
- ends with a Greek vowel.
+  ends with a Greek vowel.
  @param s A char[] array that represents a word.
  @param len The length of the char[] array.
  @return True if the word contained in the leading portion of char[] array , 
- ends with a vowel , false otherwise.
+  ends with a vowel , false otherwise.
  */
 - (jboolean)endsWithVowelNoYWithCharArray:(IOSCharArray *)s
                                   withInt:(jint)len;
 
 @end
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc4();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc4(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc4;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc4, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc6();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc6(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc6;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc6, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc7();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc7(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc7;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc7, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc8a();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc8a(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc8a;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc8a, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc8b();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc8b(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc8b;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc8b, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc9();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc9(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc9;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc9, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc12a();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc12a(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc12a;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc12a, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc12b();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc12b(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc12b;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc12b, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc13();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc13(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc13;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc13, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc14();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc14(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc14;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc14, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc15a();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc15a(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc15a;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc15a, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc15b();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc15b(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc15b;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc15b, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc16();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc16(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc16;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc16, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc17();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc17(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc17;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc17, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc18();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc18(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc18;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc18, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc19();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_get_exc19(void);
 static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekStemmer_exc19;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekStemmer, exc19, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
@@ -237,6 +242,13 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisElGreekStemmer_en
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisElGreekStemmer)
 
 @implementation OrgApacheLuceneAnalysisElGreekStemmer
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisElGreekStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -398,12 +410,91 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisElGreekStemmer)
   return OrgApacheLuceneAnalysisElGreekStemmer_endsWithVowelNoYWithCharArray_withInt_(self, s, len);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisElGreekStemmer_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 3, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 5, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 6, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 7, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 8, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 9, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 10, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 11, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 12, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 13, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 14, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 15, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 16, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 17, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 18, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 19, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 20, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 21, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 22, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 23, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 24, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 25, 26, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 27, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 28, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  methods[2].selector = @selector(rule0WithCharArray:withInt:);
+  methods[3].selector = @selector(rule1WithCharArray:withInt:);
+  methods[4].selector = @selector(rule2WithCharArray:withInt:);
+  methods[5].selector = @selector(rule3WithCharArray:withInt:);
+  methods[6].selector = @selector(rule4WithCharArray:withInt:);
+  methods[7].selector = @selector(rule5WithCharArray:withInt:);
+  methods[8].selector = @selector(rule6WithCharArray:withInt:);
+  methods[9].selector = @selector(rule7WithCharArray:withInt:);
+  methods[10].selector = @selector(rule8WithCharArray:withInt:);
+  methods[11].selector = @selector(rule9WithCharArray:withInt:);
+  methods[12].selector = @selector(rule10WithCharArray:withInt:);
+  methods[13].selector = @selector(rule11WithCharArray:withInt:);
+  methods[14].selector = @selector(rule12WithCharArray:withInt:);
+  methods[15].selector = @selector(rule13WithCharArray:withInt:);
+  methods[16].selector = @selector(rule14WithCharArray:withInt:);
+  methods[17].selector = @selector(rule15WithCharArray:withInt:);
+  methods[18].selector = @selector(rule16WithCharArray:withInt:);
+  methods[19].selector = @selector(rule17WithCharArray:withInt:);
+  methods[20].selector = @selector(rule18WithCharArray:withInt:);
+  methods[21].selector = @selector(rule19WithCharArray:withInt:);
+  methods[22].selector = @selector(rule20WithCharArray:withInt:);
+  methods[23].selector = @selector(rule21WithCharArray:withInt:);
+  methods[24].selector = @selector(rule22WithCharArray:withInt:);
+  methods[25].selector = @selector(endsWithWithCharArray:withInt:withNSString:);
+  methods[26].selector = @selector(endsWithVowelWithCharArray:withInt:);
+  methods[27].selector = @selector(endsWithVowelNoYWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "exc4", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 29, -1, -1 },
+    { "exc6", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 30, -1, -1 },
+    { "exc7", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 31, -1, -1 },
+    { "exc8a", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 32, -1, -1 },
+    { "exc8b", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 33, -1, -1 },
+    { "exc9", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 34, -1, -1 },
+    { "exc12a", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 35, -1, -1 },
+    { "exc12b", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 36, -1, -1 },
+    { "exc13", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 37, -1, -1 },
+    { "exc14", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 38, -1, -1 },
+    { "exc15a", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 39, -1, -1 },
+    { "exc15b", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 40, -1, -1 },
+    { "exc16", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 41, -1, -1 },
+    { "exc17", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 42, -1, -1 },
+    { "exc18", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 43, -1, -1 },
+    { "exc19", "LOrgApacheLuceneAnalysisUtilCharArraySet;", .constantValue.asLong = 0, 0x1a, -1, 44, -1, -1 },
+  };
+  static const void *ptrTable[] = { "stem", "[CI", "rule0", "rule1", "rule2", "rule3", "rule4", "rule5", "rule6", "rule7", "rule8", "rule9", "rule10", "rule11", "rule12", "rule13", "rule14", "rule15", "rule16", "rule17", "rule18", "rule19", "rule20", "rule21", "rule22", "endsWith", "[CILNSString;", "endsWithVowel", "endsWithVowelNoY", &OrgApacheLuceneAnalysisElGreekStemmer_exc4, &OrgApacheLuceneAnalysisElGreekStemmer_exc6, &OrgApacheLuceneAnalysisElGreekStemmer_exc7, &OrgApacheLuceneAnalysisElGreekStemmer_exc8a, &OrgApacheLuceneAnalysisElGreekStemmer_exc8b, &OrgApacheLuceneAnalysisElGreekStemmer_exc9, &OrgApacheLuceneAnalysisElGreekStemmer_exc12a, &OrgApacheLuceneAnalysisElGreekStemmer_exc12b, &OrgApacheLuceneAnalysisElGreekStemmer_exc13, &OrgApacheLuceneAnalysisElGreekStemmer_exc14, &OrgApacheLuceneAnalysisElGreekStemmer_exc15a, &OrgApacheLuceneAnalysisElGreekStemmer_exc15b, &OrgApacheLuceneAnalysisElGreekStemmer_exc16, &OrgApacheLuceneAnalysisElGreekStemmer_exc17, &OrgApacheLuceneAnalysisElGreekStemmer_exc18, &OrgApacheLuceneAnalysisElGreekStemmer_exc19 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisElGreekStemmer = { "GreekStemmer", "org.apache.lucene.analysis.el", ptrTable, methods, fields, 7, 0x1, 28, 16, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisElGreekStemmer;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisElGreekStemmer class]) {
@@ -427,60 +518,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "rule0WithCharArray:withInt:", "rule0", "I", 0x2, NULL, NULL },
-    { "rule1WithCharArray:withInt:", "rule1", "I", 0x2, NULL, NULL },
-    { "rule2WithCharArray:withInt:", "rule2", "I", 0x2, NULL, NULL },
-    { "rule3WithCharArray:withInt:", "rule3", "I", 0x2, NULL, NULL },
-    { "rule4WithCharArray:withInt:", "rule4", "I", 0x2, NULL, NULL },
-    { "rule5WithCharArray:withInt:", "rule5", "I", 0x2, NULL, NULL },
-    { "rule6WithCharArray:withInt:", "rule6", "I", 0x2, NULL, NULL },
-    { "rule7WithCharArray:withInt:", "rule7", "I", 0x2, NULL, NULL },
-    { "rule8WithCharArray:withInt:", "rule8", "I", 0x2, NULL, NULL },
-    { "rule9WithCharArray:withInt:", "rule9", "I", 0x2, NULL, NULL },
-    { "rule10WithCharArray:withInt:", "rule10", "I", 0x2, NULL, NULL },
-    { "rule11WithCharArray:withInt:", "rule11", "I", 0x2, NULL, NULL },
-    { "rule12WithCharArray:withInt:", "rule12", "I", 0x2, NULL, NULL },
-    { "rule13WithCharArray:withInt:", "rule13", "I", 0x2, NULL, NULL },
-    { "rule14WithCharArray:withInt:", "rule14", "I", 0x2, NULL, NULL },
-    { "rule15WithCharArray:withInt:", "rule15", "I", 0x2, NULL, NULL },
-    { "rule16WithCharArray:withInt:", "rule16", "I", 0x2, NULL, NULL },
-    { "rule17WithCharArray:withInt:", "rule17", "I", 0x2, NULL, NULL },
-    { "rule18WithCharArray:withInt:", "rule18", "I", 0x2, NULL, NULL },
-    { "rule19WithCharArray:withInt:", "rule19", "I", 0x2, NULL, NULL },
-    { "rule20WithCharArray:withInt:", "rule20", "I", 0x2, NULL, NULL },
-    { "rule21WithCharArray:withInt:", "rule21", "I", 0x2, NULL, NULL },
-    { "rule22WithCharArray:withInt:", "rule22", "I", 0x2, NULL, NULL },
-    { "endsWithWithCharArray:withInt:withNSString:", "endsWith", "Z", 0x2, NULL, NULL },
-    { "endsWithVowelWithCharArray:withInt:", "endsWithVowel", "Z", 0x2, NULL, NULL },
-    { "endsWithVowelNoYWithCharArray:withInt:", "endsWithVowelNoY", "Z", 0x2, NULL, NULL },
-    { "init", "GreekStemmer", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "exc4", "exc4", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc4, NULL, .constantValue.asLong = 0 },
-    { "exc6", "exc6", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc6, NULL, .constantValue.asLong = 0 },
-    { "exc7", "exc7", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc7, NULL, .constantValue.asLong = 0 },
-    { "exc8a", "exc8a", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc8a, NULL, .constantValue.asLong = 0 },
-    { "exc8b", "exc8b", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc8b, NULL, .constantValue.asLong = 0 },
-    { "exc9", "exc9", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc9, NULL, .constantValue.asLong = 0 },
-    { "exc12a", "exc12a", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc12a, NULL, .constantValue.asLong = 0 },
-    { "exc12b", "exc12b", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc12b, NULL, .constantValue.asLong = 0 },
-    { "exc13", "exc13", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc13, NULL, .constantValue.asLong = 0 },
-    { "exc14", "exc14", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc14, NULL, .constantValue.asLong = 0 },
-    { "exc15a", "exc15a", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc15a, NULL, .constantValue.asLong = 0 },
-    { "exc15b", "exc15b", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc15b, NULL, .constantValue.asLong = 0 },
-    { "exc16", "exc16", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc16, NULL, .constantValue.asLong = 0 },
-    { "exc17", "exc17", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc17, NULL, .constantValue.asLong = 0 },
-    { "exc18", "exc18", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc18, NULL, .constantValue.asLong = 0 },
-    { "exc19", "exc19", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekStemmer_exc19, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisElGreekStemmer = { 2, "GreekStemmer", "org.apache.lucene.analysis.el", NULL, 0x1, 28, methods, 16, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisElGreekStemmer;
+@end
+
+void OrgApacheLuceneAnalysisElGreekStemmer_init(OrgApacheLuceneAnalysisElGreekStemmer *self) {
+  NSObject_init(self);
 }
 
-@end
+OrgApacheLuceneAnalysisElGreekStemmer *new_OrgApacheLuceneAnalysisElGreekStemmer_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisElGreekStemmer, init)
+}
+
+OrgApacheLuceneAnalysisElGreekStemmer *create_OrgApacheLuceneAnalysisElGreekStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisElGreekStemmer, init)
+}
 
 jint OrgApacheLuceneAnalysisElGreekStemmer_rule0WithCharArray_withInt_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len) {
   if (len > 9 && (OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03ba\u03b1\u03b8\u03b5\u03c3\u03c4\u03c9\u03c4\u03bf\u03c3") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03ba\u03b1\u03b8\u03b5\u03c3\u03c4\u03c9\u03c4\u03c9\u03bd"))) return len - 4;
@@ -808,7 +858,7 @@ jint OrgApacheLuceneAnalysisElGreekStemmer_rule22WithCharArray_withInt_(OrgApach
 }
 
 jboolean OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len, NSString *suffix) {
-  jint suffixLen = ((jint) [((NSString *) nil_chk(suffix)) length]);
+  jint suffixLen = [((NSString *) nil_chk(suffix)) java_length];
   if (suffixLen > len) return false;
   for (jint i = suffixLen - 1; i >= 0; i--) if (IOSCharArray_Get(nil_chk(s), len - (suffixLen - i)) != [suffix charAtWithInt:i]) return false;
   return true;
@@ -843,18 +893,6 @@ jboolean OrgApacheLuceneAnalysisElGreekStemmer_endsWithVowelNoYWithCharArray_wit
     default:
     return false;
   }
-}
-
-void OrgApacheLuceneAnalysisElGreekStemmer_init(OrgApacheLuceneAnalysisElGreekStemmer *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneAnalysisElGreekStemmer *new_OrgApacheLuceneAnalysisElGreekStemmer_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisElGreekStemmer, init)
-}
-
-OrgApacheLuceneAnalysisElGreekStemmer *create_OrgApacheLuceneAnalysisElGreekStemmer_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisElGreekStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisElGreekStemmer)

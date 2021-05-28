@@ -6,13 +6,11 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Comparable.h"
 #include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/lang/Integer.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/StringBuilder.h"
@@ -30,15 +28,19 @@
 #include "org/apache/lucene/index/SegmentInfos.h"
 #include "org/apache/lucene/util/InfoStream.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/LogMergePolicy must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexLogMergePolicy ()
 
 /*!
  @brief Returns the merges necessary to merge the index, taking the max merge
- size or max merge docs into consideration.
- This method attempts to respect
- the <code>maxNumSegments</code> parameter, however it might be, due to size
- constraints, that more than that number of segments will remain in the
- index. Also, this method does not guarantee that exactly <code>maxNumSegments</code>
+  size or max merge docs into consideration.This method attempts to respect
+  the <code>maxNumSegments</code> parameter, however it might be, due to size
+  constraints, that more than that number of segments will remain in the
+  index.
+ Also, this method does not guarantee that exactly <code>maxNumSegments</code>
   will remain, but &lt;= that number.
  */
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesSizeLimitWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
@@ -47,10 +49,9 @@
                                                                                   withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
 /*!
- @brief Returns the merges necessary to forceMerge the index.
- This method constraints
- the returned merges only by the <code>maxNumSegments</code> parameter, and
- guaranteed that exactly that number of segments will remain in the index.
+ @brief Returns the merges necessary to forceMerge the index.This method constraints
+  the returned merges only by the <code>maxNumSegments</code> parameter, and
+  guaranteed that exactly that number of segments will remain in the index.
  */
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesMaxNumSegmentsWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                                                                                                                    withInt:(jint)maxNumSegments
@@ -147,7 +148,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
                        withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   if (calibrateSizeByDeletes_) {
     jint delCount = [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) numDeletedDocsWithOrgApacheLuceneIndexSegmentCommitInfo:info];
-    JreAssert((delCount <= [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_)) maxDoc]), (@"org/apache/lucene/index/LogMergePolicy.java:155 condition failed: assert delCount <= info.info.maxDoc();"));
+    JreAssert(delCount <= [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_)) maxDoc], @"org/apache/lucene/index/LogMergePolicy.java:155 condition failed: assert delCount <= info.info.maxDoc();");
     return ([info->info_ maxDoc] - (jlong) delCount);
   }
   else {
@@ -201,7 +202,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
                                                                                                      withInt:(jint)maxNumSegments
                                                                                              withJavaUtilMap:(id<JavaUtilMap>)segmentsToMerge
                                                                          withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
-  JreAssert((maxNumSegments > 0), (@"org/apache/lucene/index/LogMergePolicy.java:314 condition failed: assert maxNumSegments > 0;"));
+  JreAssert(maxNumSegments > 0, @"org/apache/lucene/index/LogMergePolicy.java:314 condition failed: assert maxNumSegments > 0;");
   if ([self verboseWithOrgApacheLuceneIndexIndexWriter:writer]) {
     [self messageWithNSString:JreStrcat("$I$@", @"findForcedMerges: maxNumSegs=", maxNumSegments, @" segsToMerge=", segmentsToMerge) withOrgApacheLuceneIndexIndexWriter:writer];
   }
@@ -233,7 +234,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   }
   jboolean anyTooLarge = false;
   for (jint i = 0; i < last; i++) {
-    OrgApacheLuceneIndexSegmentCommitInfo *info = [infos infoWithInt:i];
+    OrgApacheLuceneIndexSegmentCommitInfo *info = JreRetainedLocalValue([infos infoWithInt:i]);
     if ([self sizeWithOrgApacheLuceneIndexSegmentCommitInfo:info withOrgApacheLuceneIndexIndexWriter:writer] > maxMergeSizeForForcedMerge_ || [self sizeDocsWithOrgApacheLuceneIndexSegmentCommitInfo:info withOrgApacheLuceneIndexIndexWriter:writer] > maxMergeDocs_) {
       anyTooLarge = true;
       break;
@@ -256,7 +257,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   }
   OrgApacheLuceneIndexMergePolicy_MergeSpecification *spec = create_OrgApacheLuceneIndexMergePolicy_MergeSpecification_init();
   jint firstSegmentWithDeletions = -1;
-  JreAssert((writer != nil), (@"org/apache/lucene/index/LogMergePolicy.java:389 condition failed: assert writer != null;"));
+  JreAssert(writer != nil, @"org/apache/lucene/index/LogMergePolicy.java:389 condition failed: assert writer != null;");
   for (jint i = 0; i < numSegments; i++) {
     OrgApacheLuceneIndexSegmentCommitInfo *info = [segmentInfos infoWithInt:i];
     jint delCount = [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) numDeletedDocsWithOrgApacheLuceneIndexSegmentCommitInfo:info];
@@ -314,7 +315,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
       if (size >= maxMergeSize_) {
         JreStrAppend(&extra, "$", @" [skip: too large]");
       }
-      [self messageWithNSString:JreStrcat("$$$F$$$", @"seg=", [writer segStringWithOrgApacheLuceneIndexSegmentCommitInfo:info], @" level=", infoLevel->level_, @" size=", NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(segBytes / 1024 / 1024.) } count:1 type:NSObject_class_()]), extra) withOrgApacheLuceneIndexIndexWriter:writer];
+      [self messageWithNSString:JreStrcat("$$$F$$$", @"seg=", [writer segStringWithOrgApacheLuceneIndexSegmentCommitInfo:info], @" level=", infoLevel->level_, @" size=", NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%.3f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(segBytes / 1024 / 1024.) } count:1 type:NSObject_class_()]), extra) withOrgApacheLuceneIndexIndexWriter:writer];
     }
   }
   jfloat levelFloor;
@@ -370,7 +371,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
         id<JavaUtilList> mergeInfos = create_JavaUtilArrayList_init();
         for (jint i = start; i < end; i++) {
           [mergeInfos addWithId:((OrgApacheLuceneIndexLogMergePolicy_SegmentInfoAndLevel *) nil_chk([levels getWithInt:i]))->info_];
-          JreAssert(([infos containsWithOrgApacheLuceneIndexSegmentCommitInfo:((OrgApacheLuceneIndexLogMergePolicy_SegmentInfoAndLevel *) nil_chk([levels getWithInt:i]))->info_]), (@"org/apache/lucene/index/LogMergePolicy.java:570 condition failed: assert infos.contains(levels.get(i).info);"));
+          JreAssert([infos containsWithOrgApacheLuceneIndexSegmentCommitInfo:((OrgApacheLuceneIndexLogMergePolicy_SegmentInfoAndLevel *) nil_chk([levels getWithInt:i]))->info_], @"org/apache/lucene/index/LogMergePolicy.java:570 condition failed: assert infos.contains(levels.get(i).info);");
         }
         if ([self verboseWithOrgApacheLuceneIndexIndexWriter:writer]) {
           [self messageWithNSString:JreStrcat("$$$I$I", @"  add merge=", [writer segStringWithJavaLangIterable:mergeInfos], @" start=", start, @" end=", end) withOrgApacheLuceneIndexIndexWriter:writer];
@@ -397,7 +398,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithNSString_(JreStrcat("C$$", '[', [[self getClass] getSimpleName], @": "));
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithNSString_(JreStrcat("C$$", '[', [[self java_getClass] getSimpleName], @": "));
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"minMergeSize="])) appendWithLong:minMergeSize_])) appendWithNSString:@", "];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"mergeFactor="])) appendWithInt:mergeFactor_])) appendWithNSString:@", "];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"maxMergeSize="])) appendWithLong:maxMergeSize_])) appendWithNSString:@", "];
@@ -411,40 +412,62 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "LogMergePolicy", NULL, 0x1, NULL, NULL },
-    { "verboseWithOrgApacheLuceneIndexIndexWriter:", "verbose", "Z", 0x4, NULL, NULL },
-    { "messageWithNSString:withOrgApacheLuceneIndexIndexWriter:", "message", "V", 0x4, NULL, NULL },
-    { "getMergeFactor", NULL, "I", 0x1, NULL, NULL },
-    { "setMergeFactorWithInt:", "setMergeFactor", "V", 0x1, NULL, NULL },
-    { "setCalibrateSizeByDeletesWithBoolean:", "setCalibrateSizeByDeletes", "V", 0x1, NULL, NULL },
-    { "getCalibrateSizeByDeletes", NULL, "Z", 0x1, NULL, NULL },
-    { "sizeDocsWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:", "sizeDocs", "J", 0x4, "Ljava.io.IOException;", NULL },
-    { "sizeBytesWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:", "sizeBytes", "J", 0x4, "Ljava.io.IOException;", NULL },
-    { "isMergedWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:", "isMerged", "Z", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/SegmentInfos;ILjava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;Lorg/apache/lucene/index/IndexWriter;)Z" },
-    { "findForcedMergesSizeLimitWithOrgApacheLuceneIndexSegmentInfos:withInt:withInt:withOrgApacheLuceneIndexIndexWriter:", "findForcedMergesSizeLimit", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x2, "Ljava.io.IOException;", NULL },
-    { "findForcedMergesMaxNumSegmentsWithOrgApacheLuceneIndexSegmentInfos:withInt:withInt:withOrgApacheLuceneIndexIndexWriter:", "findForcedMergesMaxNumSegments", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x2, "Ljava.io.IOException;", NULL },
-    { "findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:", "findForcedMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/SegmentInfos;ILjava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;Lorg/apache/lucene/index/IndexWriter;)Lorg/apache/lucene/index/MergePolicy$MergeSpecification;" },
-    { "findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findForcedDeletesMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
-    { "findMergesWithOrgApacheLuceneIndexMergeTrigger:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
-    { "setMaxMergeDocsWithInt:", "setMaxMergeDocs", "V", 0x1, NULL, NULL },
-    { "getMaxMergeDocs", NULL, "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x4, 8, 9, 10, -1, -1, -1 },
+    { NULL, "J", 0x4, 11, 9, 10, -1, -1, -1 },
+    { NULL, "Z", 0x4, 12, 13, 10, 14, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergePolicy_MergeSpecification;", 0x2, 15, 16, 10, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergePolicy_MergeSpecification;", 0x2, 17, 16, 10, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergePolicy_MergeSpecification;", 0x1, 18, 13, 10, 19, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergePolicy_MergeSpecification;", 0x1, 20, 21, 10, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexMergePolicy_MergeSpecification;", 0x1, 22, 23, 10, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 25, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(verboseWithOrgApacheLuceneIndexIndexWriter:);
+  methods[2].selector = @selector(messageWithNSString:withOrgApacheLuceneIndexIndexWriter:);
+  methods[3].selector = @selector(getMergeFactor);
+  methods[4].selector = @selector(setMergeFactorWithInt:);
+  methods[5].selector = @selector(setCalibrateSizeByDeletesWithBoolean:);
+  methods[6].selector = @selector(getCalibrateSizeByDeletes);
+  methods[7].selector = @selector(sizeDocsWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:);
+  methods[8].selector = @selector(sizeBytesWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:);
+  methods[9].selector = @selector(isMergedWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:);
+  methods[10].selector = @selector(findForcedMergesSizeLimitWithOrgApacheLuceneIndexSegmentInfos:withInt:withInt:withOrgApacheLuceneIndexIndexWriter:);
+  methods[11].selector = @selector(findForcedMergesMaxNumSegmentsWithOrgApacheLuceneIndexSegmentInfos:withInt:withInt:withOrgApacheLuceneIndexIndexWriter:);
+  methods[12].selector = @selector(findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:);
+  methods[13].selector = @selector(findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:);
+  methods[14].selector = @selector(findMergesWithOrgApacheLuceneIndexMergeTrigger:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:);
+  methods[15].selector = @selector(setMaxMergeDocsWithInt:);
+  methods[16].selector = @selector(getMaxMergeDocs);
+  methods[17].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LEVEL_LOG_SPAN", "LEVEL_LOG_SPAN", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneIndexLogMergePolicy_LEVEL_LOG_SPAN },
-    { "DEFAULT_MERGE_FACTOR", "DEFAULT_MERGE_FACTOR", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexLogMergePolicy_DEFAULT_MERGE_FACTOR },
-    { "DEFAULT_MAX_MERGE_DOCS", "DEFAULT_MAX_MERGE_DOCS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexLogMergePolicy_DEFAULT_MAX_MERGE_DOCS },
-    { "DEFAULT_NO_CFS_RATIO", "DEFAULT_NO_CFS_RATIO", 0x19, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneIndexLogMergePolicy_DEFAULT_NO_CFS_RATIO },
-    { "mergeFactor_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minMergeSize_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxMergeSize_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxMergeSizeForForcedMerge_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxMergeDocs_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "calibrateSizeByDeletes_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "LEVEL_LOG_SPAN", "D", .constantValue.asDouble = OrgApacheLuceneIndexLogMergePolicy_LEVEL_LOG_SPAN, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MERGE_FACTOR", "I", .constantValue.asInt = OrgApacheLuceneIndexLogMergePolicy_DEFAULT_MERGE_FACTOR, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_MERGE_DOCS", "I", .constantValue.asInt = OrgApacheLuceneIndexLogMergePolicy_DEFAULT_MAX_MERGE_DOCS, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_NO_CFS_RATIO", "D", .constantValue.asDouble = OrgApacheLuceneIndexLogMergePolicy_DEFAULT_NO_CFS_RATIO, 0x19, -1, -1, -1, -1 },
+    { "mergeFactor_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "minMergeSize_", "J", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "maxMergeSize_", "J", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "maxMergeSizeForForcedMerge_", "J", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "maxMergeDocs_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "calibrateSizeByDeletes_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.LogMergePolicy$SegmentInfoAndLevel;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexLogMergePolicy = { 2, "LogMergePolicy", "org.apache.lucene.index", NULL, 0x401, 18, methods, 10, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "verbose", "LOrgApacheLuceneIndexIndexWriter;", "message", "LNSString;LOrgApacheLuceneIndexIndexWriter;", "setMergeFactor", "I", "setCalibrateSizeByDeletes", "Z", "sizeDocs", "LOrgApacheLuceneIndexSegmentCommitInfo;LOrgApacheLuceneIndexIndexWriter;", "LJavaIoIOException;", "sizeBytes", "isMerged", "LOrgApacheLuceneIndexSegmentInfos;ILJavaUtilMap;LOrgApacheLuceneIndexIndexWriter;", "(Lorg/apache/lucene/index/SegmentInfos;ILjava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;Lorg/apache/lucene/index/IndexWriter;)Z", "findForcedMergesSizeLimit", "LOrgApacheLuceneIndexSegmentInfos;IILOrgApacheLuceneIndexIndexWriter;", "findForcedMergesMaxNumSegments", "findForcedMerges", "(Lorg/apache/lucene/index/SegmentInfos;ILjava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;Lorg/apache/lucene/index/IndexWriter;)Lorg/apache/lucene/index/MergePolicy$MergeSpecification;", "findForcedDeletesMerges", "LOrgApacheLuceneIndexSegmentInfos;LOrgApacheLuceneIndexIndexWriter;", "findMerges", "LOrgApacheLuceneIndexMergeTrigger;LOrgApacheLuceneIndexSegmentInfos;LOrgApacheLuceneIndexIndexWriter;", "setMaxMergeDocs", "toString", "LOrgApacheLuceneIndexLogMergePolicy_SegmentInfoAndLevel;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexLogMergePolicy = { "LogMergePolicy", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 18, 10, -1, 26, -1, -1, -1 };
   return &_OrgApacheLuceneIndexLogMergePolicy;
 }
 
@@ -463,7 +486,7 @@ OrgApacheLuceneIndexMergePolicy_MergeSpecification *OrgApacheLuceneIndexLogMerge
   id<JavaUtilList> segments = [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(infos)) asList];
   jint start = last - 1;
   while (start >= 0) {
-    OrgApacheLuceneIndexSegmentCommitInfo *info = [infos infoWithInt:start];
+    OrgApacheLuceneIndexSegmentCommitInfo *info = JreRetainedLocalValue([infos infoWithInt:start]);
     if ([self sizeWithOrgApacheLuceneIndexSegmentCommitInfo:info withOrgApacheLuceneIndexIndexWriter:writer] > self->maxMergeSizeForForcedMerge_ || [self sizeDocsWithOrgApacheLuceneIndexSegmentCommitInfo:info withOrgApacheLuceneIndexIndexWriter:writer] > self->maxMergeDocs_) {
       if ([self verboseWithOrgApacheLuceneIndexIndexWriter:writer]) {
         [self messageWithNSString:JreStrcat("$@$J$IC", @"findForcedMergesSizeLimit: skip segment=", info, @": size is > maxMergeSize (", self->maxMergeSizeForForcedMerge_, @") or sizeDocs is > maxMergeDocs (", self->maxMergeDocs_, ')') withOrgApacheLuceneIndexIndexWriter:writer];
@@ -540,16 +563,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexLogMergePolicy)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSegmentCommitInfo:withFloat:withInt:", "SegmentInfoAndLevel", NULL, 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSegmentCommitInfo:withFloat:withInt:);
+  methods[1].selector = @selector(compareToWithId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "info_", NULL, 0x0, "Lorg.apache.lucene.index.SegmentCommitInfo;", NULL, NULL, .constantValue.asLong = 0 },
-    { "level_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "index_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "info_", "LOrgApacheLuceneIndexSegmentCommitInfo;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "level_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "index_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexLogMergePolicy_SegmentInfoAndLevel = { 2, "SegmentInfoAndLevel", "org.apache.lucene.index", "LogMergePolicy", 0xa, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/LogMergePolicy$SegmentInfoAndLevel;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentCommitInfo;FI", "compareTo", "LOrgApacheLuceneIndexLogMergePolicy_SegmentInfoAndLevel;", "LOrgApacheLuceneIndexLogMergePolicy;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/LogMergePolicy$SegmentInfoAndLevel;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexLogMergePolicy_SegmentInfoAndLevel = { "SegmentInfoAndLevel", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0xa, 2, 3, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneIndexLogMergePolicy_SegmentInfoAndLevel;
 }
 

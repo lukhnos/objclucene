@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/spans/SpanQuery.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collection.h"
 #include "java/util/Map.h"
 #include "java/util/TreeMap.h"
@@ -15,7 +13,18 @@
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 #include "org/apache/lucene/search/spans/SpanWeight.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spans/SpanQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSpansSpanQuery
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSpansSpanQuery_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)getField {
   // can't call an abstract method
@@ -38,26 +47,33 @@
   return OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithJavaUtilCollection_(weights);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSpansSpanQuery_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getField", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.spans.SpanWeight;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray:", "getTermContexts", "Ljava.util.Map;", 0x8c, NULL, "([Lorg/apache/lucene/search/spans/SpanWeight;)Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;" },
-    { "getTermContextsWithJavaUtilCollection:", "getTermContexts", "Ljava.util.Map;", 0xc, NULL, "(Ljava/util/Collection<Lorg/apache/lucene/search/spans/SpanWeight;>;)Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;" },
-    { "init", "SpanQuery", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpansSpanWeight;", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x8c, 3, 4, -1, 5, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0xc, 3, 6, -1, 7, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanQuery = { 2, "SpanQuery", "org.apache.lucene.search.spans", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getField);
+  methods[2].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[3].selector = @selector(getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray:);
+  methods[4].selector = @selector(getTermContextsWithJavaUtilCollection:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "getTermContexts", "[LOrgApacheLuceneSearchSpansSpanWeight;", "([Lorg/apache/lucene/search/spans/SpanWeight;)Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;", "LJavaUtilCollection;", "(Ljava/util/Collection<Lorg/apache/lucene/search/spans/SpanWeight;>;)Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanQuery = { "SpanQuery", "org.apache.lucene.search.spans", ptrTable, methods, NULL, 7, 0x401, 5, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansSpanQuery;
 }
 
 @end
+
+void OrgApacheLuceneSearchSpansSpanQuery_init(OrgApacheLuceneSearchSpansSpanQuery *self) {
+  OrgApacheLuceneSearchQuery_init(self);
+}
 
 id<JavaUtilMap> OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray_(IOSObjectArray *weights) {
   OrgApacheLuceneSearchSpansSpanQuery_initialize();
@@ -81,10 +97,6 @@ id<JavaUtilMap> OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithJavaUtilC
     [((OrgApacheLuceneSearchSpansSpanWeight *) nil_chk(w)) extractTermContextsWithJavaUtilMap:terms];
   }
   return terms;
-}
-
-void OrgApacheLuceneSearchSpansSpanQuery_init(OrgApacheLuceneSearchSpansSpanQuery *self) {
-  OrgApacheLuceneSearchQuery_init(self);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanQuery)

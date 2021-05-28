@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexNoMergeScheduler
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexNoMergeScheduler_) && (INCLUDE_ALL_OrgApacheLuceneIndexNoMergeScheduler || defined(INCLUDE_OrgApacheLuceneIndexNoMergeScheduler))
 #define OrgApacheLuceneIndexNoMergeScheduler_
 
@@ -24,23 +30,22 @@
 @class OrgApacheLuceneIndexMergeTrigger;
 
 /*!
- @brief A <code>MergeScheduler</code> which never executes any merges.
- It is also a
- singleton and can be accessed through <code>NoMergeScheduler.INSTANCE</code>. Use
- it if you want to prevent an <code>IndexWriter</code> from ever executing merges,
- regardless of the <code>MergePolicy</code> used. Note that you can achieve the
- same thing by using <code>NoMergePolicy</code>, however with
- <code>NoMergeScheduler</code> you also ensure that no unnecessary code of any
+ @brief A <code>MergeScheduler</code> which never executes any merges.It is also a
+  singleton and can be accessed through <code>NoMergeScheduler.INSTANCE</code>.
+ Use
+  it if you want to prevent an <code>IndexWriter</code> from ever executing merges,
+  regardless of the <code>MergePolicy</code> used. Note that you can achieve the
+  same thing by using <code>NoMergePolicy</code>, however with 
+ <code>NoMergeScheduler</code> you also ensure that no unnecessary code of any 
  <code>MergeScheduler</code> implementation is ever executed. Hence it is
- recommended to use both if you want to disable merges from ever happening.
+  recommended to use both if you want to disable merges from ever happening.
  */
 @interface OrgApacheLuceneIndexNoMergeScheduler : OrgApacheLuceneIndexMergeScheduler
-
-+ (OrgApacheLuceneIndexMergeScheduler *)INSTANCE;
+@property (readonly, class, strong) OrgApacheLuceneIndexMergeScheduler *INSTANCE NS_SWIFT_NAME(INSTANCE);
 
 #pragma mark Public
 
-- (OrgApacheLuceneIndexMergeScheduler *)clone;
+- (OrgApacheLuceneIndexMergeScheduler *)java_clone;
 
 - (void)close;
 
@@ -55,7 +60,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexNoMergeScheduler)
 /*!
  @brief The single instance of <code>NoMergeScheduler</code>
  */
-inline OrgApacheLuceneIndexMergeScheduler *OrgApacheLuceneIndexNoMergeScheduler_get_INSTANCE();
+inline OrgApacheLuceneIndexMergeScheduler *OrgApacheLuceneIndexNoMergeScheduler_get_INSTANCE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneIndexMergeScheduler *OrgApacheLuceneIndexNoMergeScheduler_INSTANCE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexNoMergeScheduler, INSTANCE, OrgApacheLuceneIndexMergeScheduler *)
@@ -64,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNoMergeScheduler)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexNoMergeScheduler")

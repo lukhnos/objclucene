@@ -10,6 +10,10 @@
 #include "org/apache/lucene/analysis/no/NorwegianMinimalStemmer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/no/NorwegianMinimalStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer
 
 - (instancetype)initWithInt:(jint)flags {
@@ -31,15 +35,22 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "NorwegianMinimalStemmer", NULL, 0x1, NULL, NULL },
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "useBokmaal_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "useNynorsk_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "useBokmaal_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "useNynorsk_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer = { 2, "NorwegianMinimalStemmer", "org.apache.lucene.analysis.no", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "stem", "[CI" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer = { "NorwegianMinimalStemmer", "org.apache.lucene.analysis.no", ptrTable, methods, fields, 7, 0x1, 2, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer;
 }
 

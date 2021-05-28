@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSortedSetSelector
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSortedSetSelector_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector || defined(INCLUDE_OrgApacheLuceneSearchSortedSetSelector))
 #define OrgApacheLuceneSearchSortedSetSelector_
 
@@ -27,7 +33,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Wraps a multi-valued SortedSetDocValues as a single-valued view, using the specified selector
@@ -39,13 +45,13 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedSetSelector)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_Type_(OrgApacheLuceneIndexSortedSetDocValues *sortedSet, OrgApacheLuceneSearchSortedSetSelector_Type *selector);
-
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_init(OrgApacheLuceneSearchSortedSetSelector *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector *new_OrgApacheLuceneSearchSortedSetSelector_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector *new_OrgApacheLuceneSearchSortedSetSelector_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector *create_OrgApacheLuceneSearchSortedSetSelector_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector *create_OrgApacheLuceneSearchSortedSetSelector_init(void);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_Type_(OrgApacheLuceneIndexSortedSetDocValues *sortedSet, OrgApacheLuceneSearchSortedSetSelector_Type *selector);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector)
 
@@ -58,6 +64,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector)
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
+@class IOSObjectArray;
+
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSortedSetSelector_Type_Enum) {
   OrgApacheLuceneSearchSortedSetSelector_Type_Enum_MIN = 0,
   OrgApacheLuceneSearchSortedSetSelector_Type_Enum_MAX = 1,
@@ -68,32 +76,29 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSortedSetSelector_Type_Enum) {
 /*!
  @brief Type of selection to perform.
  <p>
- Limitations:
+  Limitations: 
  <ul>
- <li>Fields containing <code>Integer.MAX_VALUE</code> or more unique values
- are unsupported.
+    <li>Fields containing <code>Integer.MAX_VALUE</code> or more unique values
+        are unsupported.   
  <li>Selectors other than (<code>Type.MIN</code>) require 
- optional codec support. However several codecs provided by Lucene, 
- including the current default codec, support this.
+        optional codec support. However several codecs provided by Lucene, 
+        including the current default codec, support this. 
  </ul>
  */
-@interface OrgApacheLuceneSearchSortedSetSelector_Type : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneSearchSortedSetSelector_Type : JavaLangEnum
 
-+ (OrgApacheLuceneSearchSortedSetSelector_Type *)MIN;
-
-+ (OrgApacheLuceneSearchSortedSetSelector_Type *)MAX;
-
-+ (OrgApacheLuceneSearchSortedSetSelector_Type *)MIDDLE_MIN;
-
-+ (OrgApacheLuceneSearchSortedSetSelector_Type *)MIDDLE_MAX;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortedSetSelector_Type *MIN NS_SWIFT_NAME(MIN);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortedSetSelector_Type *MAX NS_SWIFT_NAME(MAX);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortedSetSelector_Type *MIDDLE_MIN NS_SWIFT_NAME(MIDDLE_MIN);
+@property (readonly, class, nonnull) OrgApacheLuceneSearchSortedSetSelector_Type *MIDDLE_MAX NS_SWIFT_NAME(MIDDLE_MAX);
+#pragma mark Public
 
 + (OrgApacheLuceneSearchSortedSetSelector_Type *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneSearchSortedSetSelector_Type_Enum)toNSEnum;
 
 @end
@@ -106,32 +111,32 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSe
 /*!
  @brief Selects the minimum value in the set
  */
-inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MIN();
+inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MIN(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortedSetSelector_Type, MIN)
 
 /*!
  @brief Selects the maximum value in the set
  */
-inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MAX();
+inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MAX(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortedSetSelector_Type, MAX)
 
 /*!
  @brief Selects the middle value in the set.
  <p>
- If the set has an even number of values, the lower of the middle two is chosen.
+  If the set has an even number of values, the lower of the middle two is chosen.
  */
-inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MIDDLE_MIN();
+inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MIDDLE_MIN(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortedSetSelector_Type, MIDDLE_MIN)
 
 /*!
  @brief Selects the middle value in the set.
  <p>
- If the set has an even number of values, the higher of the middle two is chosen
+  If the set has an even number of values, the higher of the middle two is chosen
  */
-inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MIDDLE_MAX();
+inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MIDDLE_MAX(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortedSetSelector_Type, MIDDLE_MAX)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSortedSetSelector_Type_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSortedSetSelector_Type_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_valueOfWithNSString_(NSString *name);
 
@@ -171,7 +176,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_Type)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -219,7 +228,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MinValue)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -267,7 +280,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MaxValue)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -315,7 +332,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -333,4 +354,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector")

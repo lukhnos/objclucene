@@ -11,12 +11,11 @@
 #include "org/apache/lucene/util/LongValues.h"
 #include "org/apache/lucene/util/packed/DirectReader.h"
 
-@implementation OrgApacheLuceneUtilPackedDirectReader
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/packed/DirectReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-+ (OrgApacheLuceneUtilLongValues *)getInstanceWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)slice
-                                                                                withInt:(jint)bitsPerValue {
-  return OrgApacheLuceneUtilPackedDirectReader_getInstanceWithOrgApacheLuceneStoreRandomAccessInput_withInt_(slice, bitsPerValue);
-}
+@implementation OrgApacheLuceneUtilPackedDirectReader
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -25,17 +24,40 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (OrgApacheLuceneUtilLongValues *)getInstanceWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)slice
+                                                                                withInt:(jint)bitsPerValue {
+  return OrgApacheLuceneUtilPackedDirectReader_getInstanceWithOrgApacheLuceneStoreRandomAccessInput_withInt_(slice, bitsPerValue);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getInstanceWithOrgApacheLuceneStoreRandomAccessInput:withInt:", "getInstance", "Lorg.apache.lucene.util.LongValues;", 0x9, NULL, NULL },
-    { "init", "DirectReader", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilLongValues;", 0x9, 0, 1, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader1;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader2;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader4;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader8;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader12;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader16;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader20;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader24;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader28;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader32;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader40;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader48;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader56;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader64;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader = { 2, "DirectReader", "org.apache.lucene.util.packed", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 14, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getInstanceWithOrgApacheLuceneStoreRandomAccessInput:withInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getInstance", "LOrgApacheLuceneStoreRandomAccessInput;I", "LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56;LOrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader = { "DirectReader", "org.apache.lucene.util.packed", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, 2, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader;
 }
 
 @end
+
+void OrgApacheLuceneUtilPackedDirectReader_init(OrgApacheLuceneUtilPackedDirectReader *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneUtilPackedDirectReader *new_OrgApacheLuceneUtilPackedDirectReader_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader, init)
+}
+
+OrgApacheLuceneUtilPackedDirectReader *create_OrgApacheLuceneUtilPackedDirectReader_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader, init)
+}
 
 OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilPackedDirectReader_getInstanceWithOrgApacheLuceneStoreRandomAccessInput_withInt_(id<OrgApacheLuceneStoreRandomAccessInput> slice, jint bitsPerValue) {
   OrgApacheLuceneUtilPackedDirectReader_initialize();
@@ -73,18 +95,6 @@ OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilPackedDirectReader_getInstance
   }
 }
 
-void OrgApacheLuceneUtilPackedDirectReader_init(OrgApacheLuceneUtilPackedDirectReader *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneUtilPackedDirectReader *new_OrgApacheLuceneUtilPackedDirectReader_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader, init)
-}
-
-OrgApacheLuceneUtilPackedDirectReader *create_OrgApacheLuceneUtilPackedDirectReader_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader, init)
-}
-
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader)
 
 @implementation OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1
@@ -100,7 +110,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader)
     return (JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readByteWithLong:JreURShift64(index, 3)], shift)) & (jint) 0x1;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -110,14 +120,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader1", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1 = { 2, "DirectPackedReader1", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1 = { "DirectPackedReader1", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1;
 }
 
@@ -151,7 +168,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return (JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readByteWithLong:JreURShift64(index, 2)], shift)) & (jint) 0x3;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -161,14 +178,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader2", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2 = { 2, "DirectPackedReader2", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2 = { "DirectPackedReader2", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2;
 }
 
@@ -202,7 +226,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return (JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readByteWithLong:JreURShift64(index, 1)], shift)) & (jint) 0xF;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -212,14 +236,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader4", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4 = { 2, "DirectPackedReader4", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4 = { "DirectPackedReader4", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4;
 }
 
@@ -252,7 +283,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readByteWithLong:index] & (jint) 0xFF;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -262,14 +293,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader8", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8 = { 2, "DirectPackedReader8", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8 = { "DirectPackedReader8", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8;
 }
 
@@ -304,7 +342,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return (JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readShortWithLong:offset], shift)) & (jint) 0xFFF;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -314,14 +352,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader12", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12 = { 2, "DirectPackedReader12", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12 = { "DirectPackedReader12", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12;
 }
 
@@ -354,7 +399,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readShortWithLong:JreLShift64(index, 1)] & (jint) 0xFFFF;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -364,14 +409,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader16", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16 = { 2, "DirectPackedReader16", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16 = { "DirectPackedReader16", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16;
 }
 
@@ -407,7 +459,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return (JreURShift32(v, shift)) & (jint) 0xFFFFF;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -417,14 +469,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader20", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20 = { 2, "DirectPackedReader20", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20 = { "DirectPackedReader20", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20;
 }
 
@@ -457,7 +516,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readIntWithLong:index * 3], 8);
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -467,14 +526,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader24", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24 = { 2, "DirectPackedReader24", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24 = { "DirectPackedReader24", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24;
 }
 
@@ -509,7 +575,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return (JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readIntWithLong:offset], shift)) & (jlong) 0xFFFFFFFLL;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -519,14 +585,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader28", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28 = { 2, "DirectPackedReader28", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28 = { "DirectPackedReader28", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28;
 }
 
@@ -559,7 +632,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readIntWithLong:JreLShift64(index, 2)] & (jlong) 0xFFFFFFFFLL;
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -569,14 +642,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader32", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32 = { 2, "DirectPackedReader32", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32 = { "DirectPackedReader32", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32;
 }
 
@@ -609,7 +689,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return JreURShift64([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readLongWithLong:index * 5], 24);
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -619,14 +699,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader40", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40 = { 2, "DirectPackedReader40", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40 = { "DirectPackedReader40", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40;
 }
 
@@ -659,7 +746,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return JreURShift64([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readLongWithLong:index * 6], 16);
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -669,14 +756,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader48", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48 = { 2, "DirectPackedReader48", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48 = { "DirectPackedReader48", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48;
 }
 
@@ -709,7 +803,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return JreURShift64([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readLongWithLong:index * 7], 8);
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -719,14 +813,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader56", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56 = { 2, "DirectPackedReader56", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56 = { "DirectPackedReader56", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56;
 }
 
@@ -759,7 +860,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readLongWithLong:JreLShift64(index, 3)];
   }
   @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
   }
 }
 
@@ -769,14 +870,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreRandomAccessInput:", "DirectPackedReader64", NULL, 0x0, NULL, NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreRandomAccessInput:);
+  methods[1].selector = @selector(getWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.RandomAccessInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreRandomAccessInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64 = { 2, "DirectPackedReader64", "org.apache.lucene.util.packed", "DirectReader", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreRandomAccessInput;", "get", "J", "LOrgApacheLuceneUtilPackedDirectReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64 = { "DirectPackedReader64", "org.apache.lucene.util.packed", ptrTable, methods, fields, 7, 0x18, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64;
 }
 

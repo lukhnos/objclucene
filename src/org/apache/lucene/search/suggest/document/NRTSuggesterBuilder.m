@@ -3,9 +3,7 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/NRTSuggesterBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Comparable.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
@@ -24,6 +22,10 @@
 #include "org/apache/lucene/util/fst/PositiveIntOutputs.h"
 #include "org/apache/lucene/util/fst/Util.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/NRTSuggesterBuilder must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder () {
  @public
   OrgApacheLuceneUtilFstPairOutputs *outputs_;
@@ -38,11 +40,11 @@
 
 /*!
  @brief Num arcs for nth dedup byte:
- if n <= 5: 1 + (2 * n)
- else: (1 + (2 * n)) * n
+  if n <= 5: 1 + (2 * n)
+  else: (1 + (2 * n)) * n
  <p>
- TODO: is there a better way to make the fst built to be
- more TopNSearcher friendly?
+  TODO: is there a better way to make the fst built to be
+  more TopNSearcher friendly?
  */
 + (jint)maxNumArcsForDedupByteWithInt:(jint)currentNumDedupBytes;
 
@@ -91,12 +93,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuild
   return OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_END_BYTE;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)startTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)analyzed {
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->analyzed_)) copyBytesWithOrgApacheLuceneUtilBytesRef:analyzed];
@@ -137,7 +137,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)surfaceForm
     return false;
   }
   [build saveWithOrgApacheLuceneStoreDataOutput:output];
-  JreAssert((maxAnalyzedPathsPerOutput_ > 0), (@"org/apache/lucene/search/suggest/document/NRTSuggesterBuilder.java:128 condition failed: assert maxAnalyzedPathsPerOutput > 0;"));
+  JreAssert(maxAnalyzedPathsPerOutput_ > 0, @"org/apache/lucene/search/suggest/document/NRTSuggesterBuilder.java:128 condition failed: assert maxAnalyzedPathsPerOutput > 0;");
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(output)) writeVIntWithInt:maxAnalyzedPathsPerOutput_];
   [output writeVIntWithInt:OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_END_BYTE];
   [output writeVIntWithInt:OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_PAYLOAD_SEP];
@@ -158,34 +158,44 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)surfaceForm
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "NRTSuggesterBuilder", NULL, 0x1, NULL, NULL },
-    { "startTermWithOrgApacheLuceneUtilBytesRef:", "startTerm", "V", 0x1, NULL, NULL },
-    { "addEntryWithInt:withOrgApacheLuceneUtilBytesRef:withLong:", "addEntry", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "finishTerm", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "storeWithOrgApacheLuceneStoreDataOutput:", "store", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "maxNumArcsForDedupByteWithInt:", "maxNumArcsForDedupByte", "I", 0xa, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 4, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, 4, -1, -1, -1 },
+    { NULL, "I", 0xa, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(startTermWithOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(addEntryWithInt:withOrgApacheLuceneUtilBytesRef:withLong:);
+  methods[3].selector = @selector(finishTerm);
+  methods[4].selector = @selector(storeWithOrgApacheLuceneStoreDataOutput:);
+  methods[5].selector = @selector(maxNumArcsForDedupByteWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "PAYLOAD_SEP", "PAYLOAD_SEP", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_PAYLOAD_SEP },
-    { "END_BYTE", "END_BYTE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_END_BYTE },
-    { "outputs_", NULL, 0x12, "Lorg.apache.lucene.util.fst.PairOutputs;", NULL, "Lorg/apache/lucene/util/fst/PairOutputs<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "builder_", NULL, 0x12, "Lorg.apache.lucene.util.fst.Builder;", NULL, "Lorg/apache/lucene/util/fst/Builder<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;", .constantValue.asLong = 0 },
-    { "scratchInts_", NULL, 0x12, "Lorg.apache.lucene.util.IntsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "analyzed_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "entries_", NULL, 0x12, "Ljava.util.PriorityQueue;", NULL, "Ljava/util/PriorityQueue<Lorg/apache/lucene/search/suggest/document/NRTSuggesterBuilder$Entry;>;", .constantValue.asLong = 0 },
-    { "payloadSep_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endByte_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxAnalyzedPathsPerOutput_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "PAYLOAD_SEP", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_PAYLOAD_SEP, 0x19, -1, -1, -1, -1 },
+    { "END_BYTE", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_END_BYTE, 0x19, -1, -1, -1, -1 },
+    { "outputs_", "LOrgApacheLuceneUtilFstPairOutputs;", .constantValue.asLong = 0, 0x12, -1, -1, 9, -1 },
+    { "builder_", "LOrgApacheLuceneUtilFstBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, 10, -1 },
+    { "scratchInts_", "LOrgApacheLuceneUtilIntsRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "analyzed_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "entries_", "LJavaUtilPriorityQueue;", .constantValue.asLong = 0, 0x12, -1, -1, 11, -1 },
+    { "payloadSep_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "endByte_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxAnalyzedPathsPerOutput_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.document.NRTSuggesterBuilder$Entry;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder = { 2, "NRTSuggesterBuilder", "org.apache.lucene.search.suggest.document", NULL, 0x10, 6, methods, 10, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "startTerm", "LOrgApacheLuceneUtilBytesRef;", "addEntry", "ILOrgApacheLuceneUtilBytesRef;J", "LJavaIoIOException;", "store", "LOrgApacheLuceneStoreDataOutput;", "maxNumArcsForDedupByte", "I", "Lorg/apache/lucene/util/fst/PairOutputs<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;", "Lorg/apache/lucene/util/fst/Builder<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;", "Ljava/util/PriorityQueue<Lorg/apache/lucene/search/suggest/document/NRTSuggesterBuilder$Entry;>;", "LOrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_Entry;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder = { "NRTSuggesterBuilder", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x10, 6, 10, -1, 12, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_init(OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder *self) {
+void OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_initPackagePrivate(OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder *self) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->scratchInts_, new_OrgApacheLuceneUtilIntsRefBuilder_init());
   JreStrongAssignAndConsume(&self->analyzed_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
@@ -197,12 +207,12 @@ void OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_init(OrgApacheLucen
   JreStrongAssignAndConsume(&self->builder_, new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_(JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1), self->outputs_));
 }
 
-OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder, init)
+OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder, initPackagePrivate)
 }
 
-OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder, init)
+OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder, initPackagePrivate)
 }
 
 jint OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_maxNumArcsForDedupByteWithInt_(jint currentNumDedupBytes) {
@@ -235,15 +245,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggeste
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilBytesRef:withLong:", "Entry", NULL, 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilBytesRef:withLong:);
+  methods[1].selector = @selector(compareToWithId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "payload_", NULL, 0x10, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "weight_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "weight_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_Entry = { 2, "Entry", "org.apache.lucene.search.suggest.document", "NRTSuggesterBuilder", 0x1a, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/document/NRTSuggesterBuilder$Entry;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilBytesRef;J", "compareTo", "LOrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_Entry;", "LOrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/document/NRTSuggesterBuilder$Entry;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_Entry = { "Entry", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x1a, 2, 2, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_Entry;
 }
 

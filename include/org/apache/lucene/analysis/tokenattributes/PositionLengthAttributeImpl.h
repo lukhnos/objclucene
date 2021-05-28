@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl))
 #define OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_
 
@@ -36,7 +42,7 @@
 /*!
  @brief Initializes this attribute with position length of 1.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)clear;
 
@@ -48,6 +54,8 @@
 
 - (NSUInteger)hash;
 
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone;
+
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector;
 
 - (void)setPositionLengthWithInt:(jint)positionLength;
@@ -58,12 +66,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenattributesPositionLengthAtt
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init(OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl")

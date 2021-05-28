@@ -3,15 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/store/BaseDirectory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/NullPointerException.h"
 #include "org/apache/lucene/store/AlreadyClosedException.h"
 #include "org/apache/lucene/store/BaseDirectory.h"
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/Lock.h"
 #include "org/apache/lucene/store/LockFactory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/BaseDirectory must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneStoreBaseDirectory
 
@@ -38,17 +40,26 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreLockFactory:", "BaseDirectory", NULL, 0x4, NULL, NULL },
-    { "obtainLockWithNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x11, "Ljava.io.IOException;", NULL },
-    { "ensureOpen", NULL, "V", 0x14, "Lorg.apache.lucene.store.AlreadyClosedException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreLock;", 0x11, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x14, -1, -1, 4, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreLockFactory:);
+  methods[1].selector = @selector(obtainLockWithNSString:);
+  methods[2].selector = @selector(ensureOpen);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "isOpen_", NULL, 0x44, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "lockFactory_", NULL, 0x14, "Lorg.apache.lucene.store.LockFactory;", NULL, NULL, .constantValue.asLong = 0 },
+    { "isOpen_", "Z", .constantValue.asLong = 0, 0x44, -1, -1, -1, -1 },
+    { "lockFactory_", "LOrgApacheLuceneStoreLockFactory;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreBaseDirectory = { 2, "BaseDirectory", "org.apache.lucene.store", NULL, 0x401, 4, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreLockFactory;", "obtainLock", "LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneStoreAlreadyClosedException;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreBaseDirectory = { "BaseDirectory", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x401, 4, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreBaseDirectory;
 }
 

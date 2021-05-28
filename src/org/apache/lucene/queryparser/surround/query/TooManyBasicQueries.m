@@ -7,6 +7,10 @@
 #include "java/io/IOException.h"
 #include "org/apache/lucene/queryparser/surround/query/TooManyBasicQueries.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/surround/query/TooManyBasicQueries must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries
 
 - (instancetype)initWithInt:(jint)maxBasicQueries {
@@ -15,10 +19,16 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TooManyBasicQueries", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries = { 2, "TooManyBasicQueries", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries = { "TooManyBasicQueries", "org.apache.lucene.queryparser.surround.query", ptrTable, methods, NULL, 7, 0x1, 1, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries;
 }
 

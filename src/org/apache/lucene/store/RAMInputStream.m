@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/store/RAMInputStream.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/EOFException.h"
@@ -14,7 +13,12 @@
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/store/RAMFile.h"
 #include "org/apache/lucene/store/RAMInputStream.h"
-#include "org/apache/lucene/store/RAMOutputStream.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/RAMInputStream must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneStoreRAMInputStream () {
  @public
@@ -34,12 +38,25 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreRAMInputStream, file_, OrgApacheLuceneStoreRAMFile *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreRAMInputStream, currentBuffer_, IOSByteArray *)
 
+__attribute__((unused)) static jlong OrgApacheLuceneStoreRAMInputStream_length(OrgApacheLuceneStoreRAMInputStream *self);
+
 __attribute__((unused)) static void OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(OrgApacheLuceneStoreRAMInputStream *self, jboolean enforceEOF);
 
-@interface OrgApacheLuceneStoreRAMInputStream_$1 : OrgApacheLuceneStoreRAMInputStream {
+__attribute__((unused)) static jlong OrgApacheLuceneStoreRAMInputStream_getFilePointer(OrgApacheLuceneStoreRAMInputStream *self);
+
+__attribute__((unused)) static void OrgApacheLuceneStoreRAMInputStream_seekWithLong_(OrgApacheLuceneStoreRAMInputStream *self, jlong pos);
+
+__attribute__((unused)) static OrgApacheLuceneStoreIndexInput *OrgApacheLuceneStoreRAMInputStream_sliceWithNSString_withLong_withLong_(OrgApacheLuceneStoreRAMInputStream *self, NSString *sliceDescription, jlong offset, jlong length);
+
+@interface OrgApacheLuceneStoreRAMInputStream_1 : OrgApacheLuceneStoreRAMInputStream {
  @public
   jlong val$offset_;
 }
+
+- (instancetype)initWithLong:(jlong)capture$0
+                withNSString:(NSString *)name
+withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
+                    withLong:(jlong)length;
 
 - (void)seekWithLong:(jlong)pos;
 
@@ -51,22 +68,17 @@ __attribute__((unused)) static void OrgApacheLuceneStoreRAMInputStream_switchCur
                                              withLong:(jlong)ofs
                                              withLong:(jlong)len;
 
-- (instancetype)initWithLong:(jlong)capture$0
-                withNSString:(NSString *)arg$0
-withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)arg$1
-                    withLong:(jlong)arg$2;
+- (OrgApacheLuceneStoreIndexInput *)java_clone;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreRAMInputStream_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreRAMInputStream_1)
 
-__attribute__((unused)) static void OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(OrgApacheLuceneStoreRAMInputStream_$1 *self, jlong capture$0, NSString *arg$0, OrgApacheLuceneStoreRAMFile *arg$1, jlong arg$2);
+__attribute__((unused)) static void OrgApacheLuceneStoreRAMInputStream_1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(OrgApacheLuceneStoreRAMInputStream_1 *self, jlong capture$0, NSString *name, OrgApacheLuceneStoreRAMFile *f, jlong length);
 
-__attribute__((unused)) static OrgApacheLuceneStoreRAMInputStream_$1 *new_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *arg$0, OrgApacheLuceneStoreRAMFile *arg$1, jlong arg$2) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneStoreRAMInputStream_1 *new_OrgApacheLuceneStoreRAMInputStream_1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *name, OrgApacheLuceneStoreRAMFile *f, jlong length) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneStoreRAMInputStream_$1 *create_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *arg$0, OrgApacheLuceneStoreRAMFile *arg$1, jlong arg$2);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMInputStream_$1)
+__attribute__((unused)) static OrgApacheLuceneStoreRAMInputStream_1 *create_OrgApacheLuceneStoreRAMInputStream_1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *name, OrgApacheLuceneStoreRAMFile *f, jlong length);
 
 @implementation OrgApacheLuceneStoreRAMInputStream
 
@@ -91,7 +103,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMInputStream_$1)
 }
 
 - (jlong)length {
-  return length_;
+  return OrgApacheLuceneStoreRAMInputStream_length(self);
 }
 
 - (jbyte)readByte {
@@ -124,24 +136,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMInputStream_$1)
 }
 
 - (jlong)getFilePointer {
-  return currentBufferIndex_ < 0 ? 0 : bufferStart_ + bufferPosition_;
+  return OrgApacheLuceneStoreRAMInputStream_getFilePointer(self);
 }
 
 - (void)seekWithLong:(jlong)pos {
-  if (currentBuffer_ == nil || pos < bufferStart_ || pos >= bufferStart_ + OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE) {
-    currentBufferIndex_ = (jint) (pos / OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE);
-    OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(self, false);
-  }
-  bufferPosition_ = (jint) (pos % OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE);
+  OrgApacheLuceneStoreRAMInputStream_seekWithLong_(self, pos);
 }
 
 - (OrgApacheLuceneStoreIndexInput *)sliceWithNSString:(NSString *)sliceDescription
                                              withLong:(jlong)offset
                                              withLong:(jlong)length {
-  if (offset < 0 || length < 0 || offset + length > self->length_) {
-    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"slice() ", sliceDescription, @" out of bounds: ", self));
-  }
-  return create_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(offset, [self getFullSliceDescriptionWithNSString:sliceDescription], file_, offset + length);
+  return OrgApacheLuceneStoreRAMInputStream_sliceWithNSString_withLong_withLong_(self, sliceDescription, offset, length);
 }
 
 - (void)dealloc {
@@ -151,29 +156,44 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMInputStream_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneStoreRAMFile:", "RAMInputStream", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithNSString:withOrgApacheLuceneStoreRAMFile:withLong:", "RAMInputStream", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
-    { "length", NULL, "J", 0x1, NULL, NULL },
-    { "readByte", NULL, "B", 0x1, "Ljava.io.IOException;", NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "switchCurrentBufferWithBoolean:", "switchCurrentBuffer", "V", 0x12, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
-    { "seekWithLong:", "seek", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "sliceWithNSString:withLong:withLong:", "slice", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 2, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 1, -1, -1, -1 },
+    { NULL, "V", 0x12, 5, 6, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 9, 10, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withOrgApacheLuceneStoreRAMFile:);
+  methods[1].selector = @selector(initWithNSString:withOrgApacheLuceneStoreRAMFile:withLong:);
+  methods[2].selector = @selector(close);
+  methods[3].selector = @selector(length);
+  methods[4].selector = @selector(readByte);
+  methods[5].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  methods[6].selector = @selector(switchCurrentBufferWithBoolean:);
+  methods[7].selector = @selector(getFilePointer);
+  methods[8].selector = @selector(seekWithLong:);
+  methods[9].selector = @selector(sliceWithNSString:withLong:withLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "BUFFER_SIZE", "BUFFER_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE },
-    { "file_", NULL, 0x12, "Lorg.apache.lucene.store.RAMFile;", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentBuffer_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentBufferIndex_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferPosition_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferStart_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "BUFFER_SIZE", "I", .constantValue.asInt = OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE, 0x18, -1, -1, -1, -1 },
+    { "file_", "LOrgApacheLuceneStoreRAMFile;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "length_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentBuffer_", "[B", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentBufferIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferPosition_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferStart_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "bufferLength_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMInputStream = { 2, "RAMInputStream", "org.apache.lucene.store", NULL, 0x1, 10, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;LOrgApacheLuceneStoreRAMFile;", "LJavaIoIOException;", "LNSString;LOrgApacheLuceneStoreRAMFile;J", "readBytes", "[BII", "switchCurrentBuffer", "Z", "seek", "J", "slice", "LNSString;JJ" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMInputStream = { "RAMInputStream", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 10, 8, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreRAMInputStream;
 }
 
@@ -195,7 +215,7 @@ void OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStor
   OrgApacheLuceneStoreIndexInput_initWithNSString_(self, JreStrcat("$$C", @"RAMInputStream(name=", name, ')'));
   JreStrongAssign(&self->file_, f);
   self->length_ = length;
-  if (length / OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE >= JavaLangInteger_MAX_VALUE) {
+  if (JreLongDiv(length, OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE) >= JavaLangInteger_MAX_VALUE) {
     @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$J$$", @"RAMInputStream too large length=", length, @": ", name));
   }
   self->currentBufferIndex_ = -1;
@@ -208,6 +228,10 @@ OrgApacheLuceneStoreRAMInputStream *new_OrgApacheLuceneStoreRAMInputStream_initW
 
 OrgApacheLuceneStoreRAMInputStream *create_OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withLong_(NSString *name, OrgApacheLuceneStoreRAMFile *f, jlong length) {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMInputStream, initWithNSString_withOrgApacheLuceneStoreRAMFile_withLong_, name, f, length)
+}
+
+jlong OrgApacheLuceneStoreRAMInputStream_length(OrgApacheLuceneStoreRAMInputStream *self) {
+  return self->length_;
 }
 
 void OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(OrgApacheLuceneStoreRAMInputStream *self, jboolean enforceEOF) {
@@ -229,71 +253,97 @@ void OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(OrgApach
   }
 }
 
+jlong OrgApacheLuceneStoreRAMInputStream_getFilePointer(OrgApacheLuceneStoreRAMInputStream *self) {
+  return self->currentBufferIndex_ < 0 ? 0 : self->bufferStart_ + self->bufferPosition_;
+}
+
+void OrgApacheLuceneStoreRAMInputStream_seekWithLong_(OrgApacheLuceneStoreRAMInputStream *self, jlong pos) {
+  if (self->currentBuffer_ == nil || pos < self->bufferStart_ || pos >= self->bufferStart_ + OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE) {
+    self->currentBufferIndex_ = (jint) (JreLongDiv(pos, OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE));
+    OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(self, false);
+  }
+  self->bufferPosition_ = (jint) (JreLongMod(pos, OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE));
+}
+
+OrgApacheLuceneStoreIndexInput *OrgApacheLuceneStoreRAMInputStream_sliceWithNSString_withLong_withLong_(OrgApacheLuceneStoreRAMInputStream *self, NSString *sliceDescription, jlong offset, jlong length) {
+  if (offset < 0 || length < 0 || offset + length > self->length_) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"slice() ", sliceDescription, @" out of bounds: ", self));
+  }
+  return create_OrgApacheLuceneStoreRAMInputStream_1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(offset, [self getFullSliceDescriptionWithNSString:sliceDescription], self->file_, offset + length);
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRAMInputStream)
 
-@implementation OrgApacheLuceneStoreRAMInputStream_$1
+@implementation OrgApacheLuceneStoreRAMInputStream_1
+
+- (instancetype)initWithLong:(jlong)capture$0
+                withNSString:(NSString *)name
+withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
+                    withLong:(jlong)length {
+  OrgApacheLuceneStoreRAMInputStream_1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(self, capture$0, name, f, length);
+  return self;
+}
 
 - (void)seekWithLong:(jlong)pos {
   if (pos < 0LL) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Seeking to negative position: ", self));
   }
-  [super seekWithLong:pos + val$offset_];
+  OrgApacheLuceneStoreRAMInputStream_seekWithLong_(self, pos + val$offset_);
 }
 
 - (jlong)getFilePointer {
-  return [super getFilePointer] - val$offset_;
+  return OrgApacheLuceneStoreRAMInputStream_getFilePointer(self) - val$offset_;
 }
 
 - (jlong)length {
-  return [super length] - val$offset_;
+  return OrgApacheLuceneStoreRAMInputStream_length(self) - val$offset_;
 }
 
 - (OrgApacheLuceneStoreIndexInput *)sliceWithNSString:(NSString *)sliceDescription
                                              withLong:(jlong)ofs
                                              withLong:(jlong)len {
-  return [super sliceWithNSString:sliceDescription withLong:val$offset_ + ofs withLong:len];
-}
-
-- (instancetype)initWithLong:(jlong)capture$0
-                withNSString:(NSString *)arg$0
-withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)arg$1
-                    withLong:(jlong)arg$2 {
-  OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(self, capture$0, arg$0, arg$1, arg$2);
-  return self;
+  return OrgApacheLuceneStoreRAMInputStream_sliceWithNSString_withLong_withLong_(self, sliceDescription, val$offset_ + ofs, len);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "seekWithLong:", "seek", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
-    { "length", NULL, "J", 0x1, NULL, NULL },
-    { "sliceWithNSString:withLong:withLong:", "slice", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithLong:withNSString:withOrgApacheLuceneStoreRAMFile:withLong:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x1, 4, 5, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithLong:withNSString:withOrgApacheLuceneStoreRAMFile:withLong:);
+  methods[1].selector = @selector(seekWithLong:);
+  methods[2].selector = @selector(getFilePointer);
+  methods[3].selector = @selector(length);
+  methods[4].selector = @selector(sliceWithNSString:withLong:withLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$offset_", NULL, 0x1012, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$offset_", "J", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneStoreRAMInputStream", "sliceWithNSString:withLong:withLong:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMInputStream_$1 = { 2, "", "org.apache.lucene.store", "RAMInputStream", 0x8008, 5, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneStoreRAMInputStream_$1;
+  static const void *ptrTable[] = { "JLNSString;LOrgApacheLuceneStoreRAMFile;J", "LJavaIoIOException;", "seek", "J", "slice", "LNSString;JJ", "LOrgApacheLuceneStoreRAMInputStream;", "sliceWithNSString:withLong:withLong:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMInputStream_1 = { "", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x8010, 5, 1, 6, -1, 7, -1, -1 };
+  return &_OrgApacheLuceneStoreRAMInputStream_1;
 }
 
 @end
 
-void OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(OrgApacheLuceneStoreRAMInputStream_$1 *self, jlong capture$0, NSString *arg$0, OrgApacheLuceneStoreRAMFile *arg$1, jlong arg$2) {
+void OrgApacheLuceneStoreRAMInputStream_1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(OrgApacheLuceneStoreRAMInputStream_1 *self, jlong capture$0, NSString *name, OrgApacheLuceneStoreRAMFile *f, jlong length) {
   self->val$offset_ = capture$0;
-  OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withLong_(self, arg$0, arg$1, arg$2);
+  OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withLong_(self, name, f, length);
   {
     [self seekWithLong:0LL];
   }
 }
 
-OrgApacheLuceneStoreRAMInputStream_$1 *new_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *arg$0, OrgApacheLuceneStoreRAMFile *arg$1, jlong arg$2) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMInputStream_$1, initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_, capture$0, arg$0, arg$1, arg$2)
+OrgApacheLuceneStoreRAMInputStream_1 *new_OrgApacheLuceneStoreRAMInputStream_1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *name, OrgApacheLuceneStoreRAMFile *f, jlong length) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMInputStream_1, initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_, capture$0, name, f, length)
 }
 
-OrgApacheLuceneStoreRAMInputStream_$1 *create_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *arg$0, OrgApacheLuceneStoreRAMFile *arg$1, jlong arg$2) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMInputStream_$1, initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_, capture$0, arg$0, arg$1, arg$2)
+OrgApacheLuceneStoreRAMInputStream_1 *create_OrgApacheLuceneStoreRAMInputStream_1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *name, OrgApacheLuceneStoreRAMFile *f, jlong length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMInputStream_1, initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_, capture$0, name, f, length)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRAMInputStream_$1)

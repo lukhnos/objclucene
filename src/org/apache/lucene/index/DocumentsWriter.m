@@ -6,10 +6,10 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Double.h"
 #include "java/lang/Iterable.h"
 #include "java/lang/Thread.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
@@ -39,6 +39,13 @@
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/util/InfoStream.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/DocumentsWriter must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/index/DocumentsWriter must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
+
 @interface OrgApacheLuceneIndexDocumentsWriter () {
  @public
   OrgApacheLuceneStoreDirectory *directoryOrig_;
@@ -49,7 +56,7 @@
   JavaUtilConcurrentAtomicAtomicInteger *numDocsInRAM_;
   OrgApacheLuceneIndexDocumentsWriterFlushQueue *ticketQueue_;
   volatile_jboolean pendingChangesInCurrentFullFlush_;
-  __unsafe_unretained OrgApacheLuceneIndexIndexWriter *writer_;
+  WEAK_ OrgApacheLuceneIndexIndexWriter *writer_;
   id<JavaUtilQueue> events_;
   volatile_id currentFullFlushDelQueue_;
 }
@@ -116,9 +123,9 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriter_putEvent
 
 __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_init(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent *new_OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent *new_OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent *create_OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_init();
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent *create_OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_init(void);
 
 @interface OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent () {
  @public
@@ -131,9 +138,9 @@ __attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesE
 
 __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_init(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent *new_OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent *new_OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent *create_OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_init();
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent *create_OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_init(void);
 
 @interface OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent () {
  @public
@@ -146,9 +153,9 @@ __attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_MergePendingE
 
 __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_init(OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent *new_OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent *new_OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent *create_OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_init();
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent *create_OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_init(void);
 
 @interface OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent () {
  @public
@@ -170,11 +177,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
 
 @implementation OrgApacheLuceneIndexDocumentsWriter
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-          withOrgApacheLuceneIndexLiveIndexWriterConfig:(OrgApacheLuceneIndexLiveIndexWriterConfig *)config
-                      withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directoryOrig
-                      withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory {
-  OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(self, writer, config, directoryOrig, directory);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
+                        withOrgApacheLuceneIndexLiveIndexWriterConfig:(OrgApacheLuceneIndexLiveIndexWriterConfig *)config
+                                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directoryOrig
+                                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory {
+  OrgApacheLuceneIndexDocumentsWriter_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(self, writer, config, directoryOrig, directory);
   return self;
 }
 
@@ -233,7 +240,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
 
 - (void)abortWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   @synchronized(self) {
-    JreAssert((!JavaLangThread_holdsLockWithId_(writer)), (@"IndexWriter lock should never be hold when aborting"));
+    JreAssert(!JavaLangThread_holdsLockWithId_(writer), @"IndexWriter lock should never be hold when aborting");
     jboolean success = false;
     @try {
       [((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(JreLoadVolatileId(&deleteQueue_))) clear];
@@ -265,7 +272,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
 
 - (jlong)lockAndAbortAllWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)indexWriter {
   @synchronized(self) {
-    JreAssert(([((OrgApacheLuceneIndexIndexWriter *) nil_chk(indexWriter)) holdsFullFlushLock]), (@"org/apache/lucene/index/DocumentsWriter.java:239 condition failed: assert indexWriter.holdsFullFlushLock();"));
+    JreAssert([((OrgApacheLuceneIndexIndexWriter *) nil_chk(indexWriter)) holdsFullFlushLock], @"org/apache/lucene/index/DocumentsWriter.java:239 condition failed: assert indexWriter.holdsFullFlushLock();");
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"DW"]) {
       [infoStream_ messageWithNSString:@"DW" withNSString:@"lockAndAbortAll"];
     }
@@ -303,7 +310,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
 
 - (void)unlockAllAfterAbortAllWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)indexWriter {
   @synchronized(self) {
-    JreAssert(([((OrgApacheLuceneIndexIndexWriter *) nil_chk(indexWriter)) holdsFullFlushLock]), (@"org/apache/lucene/index/DocumentsWriter.java:290 condition failed: assert indexWriter.holdsFullFlushLock();"));
+    JreAssert([((OrgApacheLuceneIndexIndexWriter *) nil_chk(indexWriter)) holdsFullFlushLock], @"org/apache/lucene/index/DocumentsWriter.java:290 condition failed: assert indexWriter.holdsFullFlushLock();");
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"DW"]) {
       [infoStream_ messageWithNSString:@"DW" withNSString:@"unlockAll"];
     }
@@ -316,9 +323,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
           [perThread unlock];
         }
       }
-      @catch (NSException *e) {
+      @catch (JavaLangThrowable *e) {
         if ([infoStream_ isEnabledWithNSString:@"DW"]) {
-          [infoStream_ messageWithNSString:@"DW" withNSString:JreStrcat("$I$$", @"unlockAll: could not unlock state: ", i, @" msg:", [((NSException *) nil_chk(e)) getMessage])];
+          [infoStream_ messageWithNSString:@"DW" withNSString:JreStrcat("$I$$", @"unlockAll: could not unlock state: ", i, @" msg:", [e getMessage])];
         }
       }
     }
@@ -372,7 +379,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
   @try {
     OrgApacheLuceneIndexDocumentsWriter_ensureOpen(self);
     OrgApacheLuceneIndexDocumentsWriter_ensureInitializedWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_(self, perThread);
-    JreAssert(([((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(perThread)) isInitialized]), (@"org/apache/lucene/index/DocumentsWriter.java:413 condition failed: assert perThread.isInitialized();"));
+    JreAssert([((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(perThread)) isInitialized], @"org/apache/lucene/index/DocumentsWriter.java:413 condition failed: assert perThread.isInitialized();");
     OrgApacheLuceneIndexDocumentsWriterPerThread *dwpt = perThread->dwpt_;
     jint dwptNumDocs = [((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(dwpt)) getNumDocsInRAM];
     @try {
@@ -404,7 +411,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
   @try {
     OrgApacheLuceneIndexDocumentsWriter_ensureOpen(self);
     OrgApacheLuceneIndexDocumentsWriter_ensureInitializedWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_(self, perThread);
-    JreAssert(([((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(perThread)) isInitialized]), (@"org/apache/lucene/index/DocumentsWriter.java:450 condition failed: assert perThread.isInitialized();"));
+    JreAssert([((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(perThread)) isInitialized], @"org/apache/lucene/index/DocumentsWriter.java:450 condition failed: assert perThread.isInitialized();");
     OrgApacheLuceneIndexDocumentsWriterPerThread *dwpt = perThread->dwpt_;
     jint dwptNumDocs = [((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(dwpt)) getNumDocsInRAM];
     @try {
@@ -436,7 +443,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
   while (![numDocsInRAM_ compareAndSetWithInt:oldValue withInt:oldValue - numFlushed]) {
     oldValue = [numDocsInRAM_ get];
   }
-  JreAssert(([numDocsInRAM_ get] >= 0), (@"org/apache/lucene/index/DocumentsWriter.java:578 condition failed: assert numDocsInRAM.get() >= 0;"));
+  JreAssert([numDocsInRAM_ get] >= 0, @"org/apache/lucene/index/DocumentsWriter.java:578 condition failed: assert numDocsInRAM.get() >= 0;");
 }
 
 - (jboolean)setFlushingDeleteQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *)session {
@@ -452,10 +459,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
     JreAssignVolatileBoolean(&pendingChangesInCurrentFullFlush_, [self anyChanges]);
     flushingDeleteQueue = JreLoadVolatileId(&deleteQueue_);
     [((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(flushControl_)) markForFullFlush];
-    JreAssert((OrgApacheLuceneIndexDocumentsWriter_setFlushingDeleteQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_(self, flushingDeleteQueue)), (@"org/apache/lucene/index/DocumentsWriter.java:609 condition failed: assert setFlushingDeleteQueue(flushingDeleteQueue);"));
+    JreAssert(OrgApacheLuceneIndexDocumentsWriter_setFlushingDeleteQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_(self, flushingDeleteQueue), @"org/apache/lucene/index/DocumentsWriter.java:609 condition failed: assert setFlushingDeleteQueue(flushingDeleteQueue);");
   }
-  JreAssert((JreLoadVolatileId(&currentFullFlushDelQueue_) != nil), (@"org/apache/lucene/index/DocumentsWriter.java:611 condition failed: assert currentFullFlushDelQueue != null;"));
-  JreAssert((JreLoadVolatileId(&currentFullFlushDelQueue_) != JreLoadVolatileId(&deleteQueue_)), (@"org/apache/lucene/index/DocumentsWriter.java:612 condition failed: assert currentFullFlushDelQueue != deleteQueue;"));
+  JreAssert(JreLoadVolatileId(&currentFullFlushDelQueue_) != nil, @"org/apache/lucene/index/DocumentsWriter.java:611 condition failed: assert currentFullFlushDelQueue != null;");
+  JreAssert(!JreObjectEqualsEquals(JreLoadVolatileId(&currentFullFlushDelQueue_), JreLoadVolatileId(&deleteQueue_)), @"org/apache/lucene/index/DocumentsWriter.java:612 condition failed: assert currentFullFlushDelQueue != deleteQueue;");
   jboolean anythingFlushed = false;
   @try {
     OrgApacheLuceneIndexDocumentsWriterPerThread *flushingDWPT;
@@ -470,22 +477,22 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
       [((OrgApacheLuceneIndexDocumentsWriterFlushQueue *) nil_chk(ticketQueue_)) addDeletesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:flushingDeleteQueue];
     }
     [((OrgApacheLuceneIndexDocumentsWriterFlushQueue *) nil_chk(ticketQueue_)) forcePurgeWithOrgApacheLuceneIndexIndexWriter:writer_];
-    JreAssert((![((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(flushingDeleteQueue)) anyChanges] && ![ticketQueue_ hasTickets]), (@"org/apache/lucene/index/DocumentsWriter.java:630 condition failed: assert !flushingDeleteQueue.anyChanges() && !ticketQueue.hasTickets();"));
+    JreAssert(![((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(flushingDeleteQueue)) anyChanges] && ![ticketQueue_ hasTickets], @"org/apache/lucene/index/DocumentsWriter.java:630 condition failed: assert !flushingDeleteQueue.anyChanges() && !ticketQueue.hasTickets();");
   }
   @finally {
-    JreAssert((flushingDeleteQueue == JreLoadVolatileId(&currentFullFlushDelQueue_)), (@"org/apache/lucene/index/DocumentsWriter.java:632 condition failed: assert flushingDeleteQueue == currentFullFlushDelQueue;"));
+    JreAssert(JreObjectEqualsEquals(flushingDeleteQueue, JreLoadVolatileId(&currentFullFlushDelQueue_)), @"org/apache/lucene/index/DocumentsWriter.java:632 condition failed: assert flushingDeleteQueue == currentFullFlushDelQueue;");
   }
   return anythingFlushed;
 }
 
 - (void)finishFullFlushWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)indexWriter
                                                withBoolean:(jboolean)success {
-  JreAssert(([((OrgApacheLuceneIndexIndexWriter *) nil_chk(indexWriter)) holdsFullFlushLock]), (@"org/apache/lucene/index/DocumentsWriter.java:638 condition failed: assert indexWriter.holdsFullFlushLock();"));
+  JreAssert([((OrgApacheLuceneIndexIndexWriter *) nil_chk(indexWriter)) holdsFullFlushLock], @"org/apache/lucene/index/DocumentsWriter.java:638 condition failed: assert indexWriter.holdsFullFlushLock();");
   @try {
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"DW"]) {
       [infoStream_ messageWithNSString:@"DW" withNSString:JreStrcat("$$Z", [((JavaLangThread *) nil_chk(JavaLangThread_currentThread())) getName], @" finishFullFlush success=", success)];
     }
-    JreAssert((OrgApacheLuceneIndexDocumentsWriter_setFlushingDeleteQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_(self, nil)), (@"org/apache/lucene/index/DocumentsWriter.java:643 condition failed: assert setFlushingDeleteQueue(null);"));
+    JreAssert(OrgApacheLuceneIndexDocumentsWriter_setFlushingDeleteQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_(self, nil), @"org/apache/lucene/index/DocumentsWriter.java:643 condition failed: assert setFlushingDeleteQueue(null);");
     if (success) {
       [((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(flushControl_)) finishFullFlush];
     }
@@ -542,70 +549,107 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent, fil
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexLiveIndexWriterConfig:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:", "DocumentsWriter", NULL, 0x0, NULL, NULL },
-    { "deleteQueriesWithOrgApacheLuceneSearchQueryArray:", "deleteQueries", "Z", 0xa0, "Ljava.io.IOException;", NULL },
-    { "deleteTermsWithOrgApacheLuceneIndexTermArray:", "deleteTerms", "Z", 0xa0, "Ljava.io.IOException;", NULL },
-    { "updateDocValuesWithOrgApacheLuceneIndexDocValuesUpdateArray:", "updateDocValues", "Z", 0xa0, "Ljava.io.IOException;", NULL },
-    { "currentDeleteSession", NULL, "Lorg.apache.lucene.index.DocumentsWriterDeleteQueue;", 0x0, NULL, NULL },
-    { "applyAllDeletesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:", "applyAllDeletes", "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "purgeBufferWithOrgApacheLuceneIndexIndexWriter:withBoolean:", "purgeBuffer", "I", 0x0, "Ljava.io.IOException;", NULL },
-    { "getNumDocs", NULL, "I", 0x0, NULL, NULL },
-    { "ensureOpen", NULL, "V", 0x2, "Lorg.apache.lucene.store.AlreadyClosedException;", NULL },
-    { "abortWithOrgApacheLuceneIndexIndexWriter:", "abort", "V", 0x20, NULL, NULL },
-    { "lockAndAbortAllWithOrgApacheLuceneIndexIndexWriter:", "lockAndAbortAll", "J", 0x20, NULL, NULL },
-    { "abortThreadStateWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "abortThreadState", "I", 0x2, NULL, NULL },
-    { "unlockAllAfterAbortAllWithOrgApacheLuceneIndexIndexWriter:", "unlockAllAfterAbortAll", "V", 0x20, NULL, NULL },
-    { "anyChanges", NULL, "Z", 0x0, NULL, NULL },
-    { "getBufferedDeleteTermsSize", NULL, "I", 0x1, NULL, NULL },
-    { "getNumBufferedDeleteTerms", NULL, "I", 0x1, NULL, NULL },
-    { "anyDeletions", NULL, "Z", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
-    { "preUpdate", NULL, "Z", 0x2, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "postUpdateWithOrgApacheLuceneIndexDocumentsWriterPerThread:withBoolean:", "postUpdate", "Z", 0x2, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "ensureInitializedWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "ensureInitialized", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "updateDocumentsWithJavaLangIterable:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:", "updateDocuments", "Z", 0x0, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", "(Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;Lorg/apache/lucene/analysis/Analyzer;Lorg/apache/lucene/index/Term;)Z" },
-    { "updateDocumentWithJavaLangIterable:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:", "updateDocument", "Z", 0x0, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", "(Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;Lorg/apache/lucene/analysis/Analyzer;Lorg/apache/lucene/index/Term;)Z" },
-    { "doFlushWithOrgApacheLuceneIndexDocumentsWriterPerThread:", "doFlush", "Z", 0x2, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "subtractFlushedNumDocsWithInt:", "subtractFlushedNumDocs", "V", 0x0, NULL, NULL },
-    { "setFlushingDeleteQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:", "setFlushingDeleteQueue", "Z", 0x22, NULL, NULL },
-    { "flushAllThreads", NULL, "Z", 0x0, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "finishFullFlushWithOrgApacheLuceneIndexIndexWriter:withBoolean:", "finishFullFlush", "V", 0x0, NULL, NULL },
-    { "getIndexWriterConfig", NULL, "Lorg.apache.lucene.index.LiveIndexWriterConfig;", 0x1, NULL, NULL },
-    { "putEventWithOrgApacheLuceneIndexIndexWriter_Event:", "putEvent", "V", 0x2, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "eventQueue", NULL, "Ljava.util.Queue;", 0x1, NULL, "()Ljava/util/Queue<Lorg/apache/lucene/index/IndexWriter$Event;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa0, 1, 2, 3, -1, -1, -1 },
+    { NULL, "Z", 0xa0, 4, 5, 3, -1, -1, -1 },
+    { NULL, "Z", 0xa0, 6, 7, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDocumentsWriterDeleteQueue;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 8, 9, 3, -1, -1, -1 },
+    { NULL, "I", 0x0, 10, 11, 3, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 12, -1, -1, -1 },
+    { NULL, "V", 0x20, 13, 14, -1, -1, -1, -1 },
+    { NULL, "J", 0x20, 15, 14, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 16, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x20, 18, 14, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, 19, -1, -1, -1 },
+    { NULL, "Z", 0x2, 20, 21, 19, -1, -1, -1 },
+    { NULL, "V", 0x2, 22, 17, 3, -1, -1, -1 },
+    { NULL, "Z", 0x0, 23, 24, 19, 25, -1, -1 },
+    { NULL, "Z", 0x0, 26, 24, 19, 27, -1, -1 },
+    { NULL, "Z", 0x2, 28, 29, 19, -1, -1, -1 },
+    { NULL, "V", 0x0, 30, 31, -1, -1, -1, -1 },
+    { NULL, "Z", 0x22, 32, 9, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, -1, -1, 19, -1, -1, -1 },
+    { NULL, "V", 0x0, 33, 11, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexLiveIndexWriterConfig;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 34, 35, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 36, -1, -1 },
+    { NULL, "LJavaUtilQueue;", 0x1, -1, -1, -1, 37, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexLiveIndexWriterConfig:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:);
+  methods[1].selector = @selector(deleteQueriesWithOrgApacheLuceneSearchQueryArray:);
+  methods[2].selector = @selector(deleteTermsWithOrgApacheLuceneIndexTermArray:);
+  methods[3].selector = @selector(updateDocValuesWithOrgApacheLuceneIndexDocValuesUpdateArray:);
+  methods[4].selector = @selector(currentDeleteSession);
+  methods[5].selector = @selector(applyAllDeletesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:);
+  methods[6].selector = @selector(purgeBufferWithOrgApacheLuceneIndexIndexWriter:withBoolean:);
+  methods[7].selector = @selector(getNumDocs);
+  methods[8].selector = @selector(ensureOpen);
+  methods[9].selector = @selector(abortWithOrgApacheLuceneIndexIndexWriter:);
+  methods[10].selector = @selector(lockAndAbortAllWithOrgApacheLuceneIndexIndexWriter:);
+  methods[11].selector = @selector(abortThreadStateWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:);
+  methods[12].selector = @selector(unlockAllAfterAbortAllWithOrgApacheLuceneIndexIndexWriter:);
+  methods[13].selector = @selector(anyChanges);
+  methods[14].selector = @selector(getBufferedDeleteTermsSize);
+  methods[15].selector = @selector(getNumBufferedDeleteTerms);
+  methods[16].selector = @selector(anyDeletions);
+  methods[17].selector = @selector(close);
+  methods[18].selector = @selector(preUpdate);
+  methods[19].selector = @selector(postUpdateWithOrgApacheLuceneIndexDocumentsWriterPerThread:withBoolean:);
+  methods[20].selector = @selector(ensureInitializedWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:);
+  methods[21].selector = @selector(updateDocumentsWithJavaLangIterable:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:);
+  methods[22].selector = @selector(updateDocumentWithJavaLangIterable:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:);
+  methods[23].selector = @selector(doFlushWithOrgApacheLuceneIndexDocumentsWriterPerThread:);
+  methods[24].selector = @selector(subtractFlushedNumDocsWithInt:);
+  methods[25].selector = @selector(setFlushingDeleteQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:);
+  methods[26].selector = @selector(flushAllThreads);
+  methods[27].selector = @selector(finishFullFlushWithOrgApacheLuceneIndexIndexWriter:withBoolean:);
+  methods[28].selector = @selector(getIndexWriterConfig);
+  methods[29].selector = @selector(putEventWithOrgApacheLuceneIndexIndexWriter_Event:);
+  methods[30].selector = @selector(ramBytesUsed);
+  methods[31].selector = @selector(getChildResources);
+  methods[32].selector = @selector(eventQueue);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "directoryOrig_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "directory_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "closed_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "infoStream_", NULL, 0x12, "Lorg.apache.lucene.util.InfoStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "config_", NULL, 0x12, "Lorg.apache.lucene.index.LiveIndexWriterConfig;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numDocsInRAM_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
-    { "deleteQueue_", NULL, 0x40, "Lorg.apache.lucene.index.DocumentsWriterDeleteQueue;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ticketQueue_", NULL, 0x12, "Lorg.apache.lucene.index.DocumentsWriterFlushQueue;", NULL, NULL, .constantValue.asLong = 0 },
-    { "pendingChangesInCurrentFullFlush_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "perThreadPool_", NULL, 0x10, "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "flushPolicy_", NULL, 0x10, "Lorg.apache.lucene.index.FlushPolicy;", NULL, NULL, .constantValue.asLong = 0 },
-    { "flushControl_", NULL, 0x10, "Lorg.apache.lucene.index.DocumentsWriterFlushControl;", NULL, NULL, .constantValue.asLong = 0 },
-    { "writer_", NULL, 0x12, "Lorg.apache.lucene.index.IndexWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "events_", NULL, 0x12, "Ljava.util.Queue;", NULL, "Ljava/util/Queue<Lorg/apache/lucene/index/IndexWriter$Event;>;", .constantValue.asLong = 0 },
-    { "currentFullFlushDelQueue_", NULL, 0x42, "Lorg.apache.lucene.index.DocumentsWriterDeleteQueue;", NULL, NULL, .constantValue.asLong = 0 },
+    { "directoryOrig_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "directory_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "closed_", "Z", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "infoStream_", "LOrgApacheLuceneUtilInfoStream;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "config_", "LOrgApacheLuceneIndexLiveIndexWriterConfig;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numDocsInRAM_", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "deleteQueue_", "LOrgApacheLuceneIndexDocumentsWriterDeleteQueue;", .constantValue.asLong = 0, 0x40, -1, -1, -1, -1 },
+    { "ticketQueue_", "LOrgApacheLuceneIndexDocumentsWriterFlushQueue;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "pendingChangesInCurrentFullFlush_", "Z", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "perThreadPool_", "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "flushPolicy_", "LOrgApacheLuceneIndexFlushPolicy;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "flushControl_", "LOrgApacheLuceneIndexDocumentsWriterFlushControl;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "writer_", "LOrgApacheLuceneIndexIndexWriter;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "events_", "LJavaUtilQueue;", .constantValue.asLong = 0, 0x12, -1, -1, 38, -1 },
+    { "currentFullFlushDelQueue_", "LOrgApacheLuceneIndexDocumentsWriterDeleteQueue;", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.DocumentsWriter$ApplyDeletesEvent;", "Lorg.apache.lucene.index.DocumentsWriter$MergePendingEvent;", "Lorg.apache.lucene.index.DocumentsWriter$ForcedPurgeEvent;", "Lorg.apache.lucene.index.DocumentsWriter$FlushFailedEvent;", "Lorg.apache.lucene.index.DocumentsWriter$DeleteNewFilesEvent;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter = { 2, "DocumentsWriter", "org.apache.lucene.index", NULL, 0x10, 33, methods, 15, fields, 0, NULL, 5, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexWriter;LOrgApacheLuceneIndexLiveIndexWriterConfig;LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneStoreDirectory;", "deleteQueries", "[LOrgApacheLuceneSearchQuery;", "LJavaIoIOException;", "deleteTerms", "[LOrgApacheLuceneIndexTerm;", "updateDocValues", "[LOrgApacheLuceneIndexDocValuesUpdate;", "applyAllDeletes", "LOrgApacheLuceneIndexDocumentsWriterDeleteQueue;", "purgeBuffer", "LOrgApacheLuceneIndexIndexWriter;Z", "LOrgApacheLuceneStoreAlreadyClosedException;", "abort", "LOrgApacheLuceneIndexIndexWriter;", "lockAndAbortAll", "abortThreadState", "LOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;", "unlockAllAfterAbortAll", "LJavaIoIOException;LOrgApacheLuceneIndexAbortingException;", "postUpdate", "LOrgApacheLuceneIndexDocumentsWriterPerThread;Z", "ensureInitialized", "updateDocuments", "LJavaLangIterable;LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneIndexTerm;", "(Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;Lorg/apache/lucene/analysis/Analyzer;Lorg/apache/lucene/index/Term;)Z", "updateDocument", "(Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;Lorg/apache/lucene/analysis/Analyzer;Lorg/apache/lucene/index/Term;)Z", "doFlush", "LOrgApacheLuceneIndexDocumentsWriterPerThread;", "subtractFlushedNumDocs", "I", "setFlushingDeleteQueue", "finishFullFlush", "putEvent", "LOrgApacheLuceneIndexIndexWriter_Event;", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "()Ljava/util/Queue<Lorg/apache/lucene/index/IndexWriter$Event;>;", "Ljava/util/Queue<Lorg/apache/lucene/index/IndexWriter$Event;>;", "LOrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent;LOrgApacheLuceneIndexDocumentsWriter_MergePendingEvent;LOrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent;LOrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent;LOrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter = { "DocumentsWriter", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 33, 15, -1, 39, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocumentsWriter;
 }
 
 @end
 
-void OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexDocumentsWriter *self, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory) {
+void OrgApacheLuceneIndexDocumentsWriter_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexDocumentsWriter *self, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->numDocsInRAM_, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(0));
-  JreVolatileStrongAssignAndConsume(&self->deleteQueue_, new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_init());
-  JreStrongAssignAndConsume(&self->ticketQueue_, new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_init());
+  JreVolatileStrongAssign(&self->deleteQueue_, create_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initPackagePrivate());
+  JreStrongAssignAndConsume(&self->ticketQueue_, new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_initPackagePrivate());
   JreVolatileStrongAssign(&self->currentFullFlushDelQueue_, nil);
   JreStrongAssign(&self->directoryOrig_, directoryOrig);
   JreStrongAssign(&self->directory_, directory);
@@ -615,15 +659,15 @@ void OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter
   JreStrongAssign(&self->flushPolicy_, [config getFlushPolicy]);
   self->writer_ = writer;
   JreStrongAssignAndConsume(&self->events_, new_JavaUtilConcurrentConcurrentLinkedQueue_init());
-  JreStrongAssignAndConsume(&self->flushControl_, new_OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(self, config, ((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer))->bufferedUpdatesStream_));
+  JreStrongAssignAndConsume(&self->flushControl_, new_OrgApacheLuceneIndexDocumentsWriterFlushControl_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(self, config, ((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer))->bufferedUpdatesStream_));
 }
 
-OrgApacheLuceneIndexDocumentsWriter *new_OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriter, initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_, writer, config, directoryOrig, directory)
+OrgApacheLuceneIndexDocumentsWriter *new_OrgApacheLuceneIndexDocumentsWriter_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriter, initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_, writer, config, directoryOrig, directory)
 }
 
-OrgApacheLuceneIndexDocumentsWriter *create_OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriter, initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_, writer, config, directoryOrig, directory)
+OrgApacheLuceneIndexDocumentsWriter *create_OrgApacheLuceneIndexDocumentsWriter_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriter, initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_, writer, config, directoryOrig, directory)
 }
 
 jboolean OrgApacheLuceneIndexDocumentsWriter_applyAllDeletesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_(OrgApacheLuceneIndexDocumentsWriter *self, OrgApacheLuceneIndexDocumentsWriterDeleteQueue *deleteQueue) {
@@ -644,7 +688,7 @@ void OrgApacheLuceneIndexDocumentsWriter_ensureOpen(OrgApacheLuceneIndexDocument
 }
 
 jint OrgApacheLuceneIndexDocumentsWriter_abortThreadStateWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_(OrgApacheLuceneIndexDocumentsWriter *self, OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *perThread) {
-  JreAssert(([((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(perThread)) isHeldByCurrentThread]), (@"org/apache/lucene/index/DocumentsWriter.java:272 condition failed: assert perThread.isHeldByCurrentThread();"));
+  JreAssert([((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(perThread)) isHeldByCurrentThread], @"org/apache/lucene/index/DocumentsWriter.java:272 condition failed: assert perThread.isHeldByCurrentThread();");
   if ([perThread isInitialized]) {
     @try {
       jint abortedDocCount = [((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(perThread->dwpt_)) getNumDocsInRAM];
@@ -704,7 +748,7 @@ jboolean OrgApacheLuceneIndexDocumentsWriter_postUpdateWithOrgApacheLuceneIndexD
 void OrgApacheLuceneIndexDocumentsWriter_ensureInitializedWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_(OrgApacheLuceneIndexDocumentsWriter *self, OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *state) {
   if (((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(state))->dwpt_ == nil) {
     OrgApacheLuceneIndexFieldInfos_Builder *infos = create_OrgApacheLuceneIndexFieldInfos_Builder_initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers_(((OrgApacheLuceneIndexIndexWriter *) nil_chk(self->writer_))->globalFieldNumberMap_);
-    JreStrongAssignAndConsume(&state->dwpt_, new_OrgApacheLuceneIndexDocumentsWriterPerThread_initWithOrgApacheLuceneIndexIndexWriter_withNSString_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_withOrgApacheLuceneIndexFieldInfos_Builder_withJavaUtilConcurrentAtomicAtomicLong_withBoolean_(self->writer_, [self->writer_ newSegmentName], self->directoryOrig_, self->directory_, self->config_, self->infoStream_, JreLoadVolatileId(&self->deleteQueue_), infos, self->writer_->pendingNumDocs_, self->writer_->enableTestPoints_));
+    JreStrongAssignAndConsume(&state->dwpt_, new_OrgApacheLuceneIndexDocumentsWriterPerThread_initPackagePrivateWithOrgApacheLuceneIndexIndexWriter_withNSString_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_withOrgApacheLuceneIndexFieldInfos_Builder_withJavaUtilConcurrentAtomicAtomicLong_withBoolean_(self->writer_, [self->writer_ newSegmentName], self->directoryOrig_, self->directory_, self->config_, self->infoStream_, JreLoadVolatileId(&self->deleteQueue_), infos, self->writer_->pendingNumDocs_, self->writer_->enableTestPoints_));
   }
 }
 
@@ -715,7 +759,7 @@ jboolean OrgApacheLuceneIndexDocumentsWriter_doFlushWithOrgApacheLuceneIndexDocu
     jboolean success = false;
     OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *ticket = nil;
     @try {
-      JreAssert((JreLoadVolatileId(&self->currentFullFlushDelQueue_) == nil || flushingDWPT->deleteQueue_ == JreLoadVolatileId(&self->currentFullFlushDelQueue_)), (JreStrcat("$@$@CZ", @"expected: ", JreLoadVolatileId(&self->currentFullFlushDelQueue_), @"but was: ", flushingDWPT->deleteQueue_, ' ', [((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(self->flushControl_)) isFullFlush])));
+      JreAssert(JreLoadVolatileId(&self->currentFullFlushDelQueue_) == nil || JreObjectEqualsEquals(flushingDWPT->deleteQueue_, JreLoadVolatileId(&self->currentFullFlushDelQueue_)), JreStrcat("$@$@CZ", @"expected: ", JreLoadVolatileId(&self->currentFullFlushDelQueue_), @"but was: ", flushingDWPT->deleteQueue_, ' ', [((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(self->flushControl_)) isFullFlush]));
       @try {
         ticket = [((OrgApacheLuceneIndexDocumentsWriterFlushQueue *) nil_chk(self->ticketQueue_)) addFlushTicketWithOrgApacheLuceneIndexDocumentsWriterPerThread:flushingDWPT];
         jint flushingDocsInRam = [flushingDWPT getNumDocsInRAM];
@@ -761,7 +805,7 @@ jboolean OrgApacheLuceneIndexDocumentsWriter_doFlushWithOrgApacheLuceneIndexDocu
     hasEvents = true;
     if (!OrgApacheLuceneIndexDocumentsWriter_applyAllDeletesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_(self, JreLoadVolatileId(&self->deleteQueue_))) {
       if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"DW"]) {
-        [self->infoStream_ messageWithNSString:@"DW" withNSString:NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"force apply deletes bytesUsed=%.1f MB vs ramBuffer=%.1f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_([((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(self->flushControl_)) getDeleteBytesUsed] / (1024. * 1024.)), JavaLangDouble_valueOfWithDouble_(ramBufferSizeMB) } count:2 type:NSObject_class_()])];
+        [self->infoStream_ messageWithNSString:@"DW" withNSString:NSString_java_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"force apply deletes bytesUsed=%.1f MB vs ramBuffer=%.1f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_([((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(self->flushControl_)) getDeleteBytesUsed] / (1024. * 1024.)), JavaLangDouble_valueOfWithDouble_(ramBufferSizeMB) } count:2 type:NSObject_class_()])];
       }
       OrgApacheLuceneIndexDocumentsWriter_putEventWithOrgApacheLuceneIndexIndexWriter_Event_(self, JreLoadStatic(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent, INSTANCE));
     }
@@ -805,6 +849,26 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) applyDeletesAndPurgeWithBoolean:true];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INSTANCE", "LOrgApacheLuceneIndexIndexWriter_Event;", .constantValue.asLong = 0, 0x18, -1, 3, -1, -1 },
+    { "instCount_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "process", "LOrgApacheLuceneIndexIndexWriter;ZZ", "LJavaIoIOException;", &OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_INSTANCE, "LOrgApacheLuceneIndexDocumentsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent = { "ApplyDeletesEvent", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x18, 2, 2, 4, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_INSTANCE, new_OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_init());
@@ -812,25 +876,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ApplyDeletesEvent", NULL, 0x2, NULL, NULL },
-    { "processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:", "process", "V", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "INSTANCE", "INSTANCE", 0x18, "Lorg.apache.lucene.index.IndexWriter$Event;", &OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_INSTANCE, NULL, .constantValue.asLong = 0 },
-    { "instCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent = { 2, "ApplyDeletesEvent", "org.apache.lucene.index", "DocumentsWriter", 0x18, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent;
-}
-
 @end
 
 void OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_init(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent *self) {
   NSObject_init(self);
   self->instCount_ = 0;
-  JreAssert((self->instCount_ == 0), (@"org/apache/lucene/index/DocumentsWriter.java:679 condition failed: assert instCount == 0;"));
+  JreAssert(self->instCount_ == 0, @"org/apache/lucene/index/DocumentsWriter.java:679 condition failed: assert instCount == 0;");
   self->instCount_++;
 }
 
@@ -867,6 +918,26 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) doAfterSegmentFlushedWithBoolean:triggerMerge withBoolean:forcePurge];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INSTANCE", "LOrgApacheLuceneIndexIndexWriter_Event;", .constantValue.asLong = 0, 0x18, -1, 3, -1, -1 },
+    { "instCount_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "process", "LOrgApacheLuceneIndexIndexWriter;ZZ", "LJavaIoIOException;", &OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_INSTANCE, "LOrgApacheLuceneIndexDocumentsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent = { "MergePendingEvent", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x18, 2, 2, 4, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_INSTANCE, new_OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_init());
@@ -874,25 +945,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "MergePendingEvent", NULL, 0x2, NULL, NULL },
-    { "processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:", "process", "V", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "INSTANCE", "INSTANCE", 0x18, "Lorg.apache.lucene.index.IndexWriter$Event;", &OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_INSTANCE, NULL, .constantValue.asLong = 0 },
-    { "instCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent = { 2, "MergePendingEvent", "org.apache.lucene.index", "DocumentsWriter", 0x18, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent;
-}
-
 @end
 
 void OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_init(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent *self) {
   NSObject_init(self);
   self->instCount_ = 0;
-  JreAssert((self->instCount_ == 0), (@"org/apache/lucene/index/DocumentsWriter.java:693 condition failed: assert instCount == 0;"));
+  JreAssert(self->instCount_ == 0, @"org/apache/lucene/index/DocumentsWriter.java:693 condition failed: assert instCount == 0;");
   self->instCount_++;
 }
 
@@ -929,6 +987,26 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) purgeWithBoolean:true];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INSTANCE", "LOrgApacheLuceneIndexIndexWriter_Event;", .constantValue.asLong = 0, 0x18, -1, 3, -1, -1 },
+    { "instCount_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "process", "LOrgApacheLuceneIndexIndexWriter;ZZ", "LJavaIoIOException;", &OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_INSTANCE, "LOrgApacheLuceneIndexDocumentsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent = { "ForcedPurgeEvent", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x18, 2, 2, 4, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_INSTANCE, new_OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_init());
@@ -936,25 +1014,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "ForcedPurgeEvent", NULL, 0x2, NULL, NULL },
-    { "processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:", "process", "V", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "INSTANCE", "INSTANCE", 0x18, "Lorg.apache.lucene.index.IndexWriter$Event;", &OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_INSTANCE, NULL, .constantValue.asLong = 0 },
-    { "instCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent = { 2, "ForcedPurgeEvent", "org.apache.lucene.index", "DocumentsWriter", 0x18, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent;
-}
-
 @end
 
 void OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_init(OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent *self) {
   NSObject_init(self);
   self->instCount_ = 0;
-  JreAssert((self->instCount_ == 0), (@"org/apache/lucene/index/DocumentsWriter.java:707 condition failed: assert instCount == 0;"));
+  JreAssert(self->instCount_ == 0, @"org/apache/lucene/index/DocumentsWriter.java:707 condition failed: assert instCount == 0;");
   self->instCount_++;
 }
 
@@ -987,14 +1052,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriter_ForcedPurge
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSegmentInfo:", "FlushFailedEvent", NULL, 0x1, NULL, NULL },
-    { "processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:", "process", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexSegmentInfo:);
+  methods[1].selector = @selector(processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "info_", NULL, 0x12, "Lorg.apache.lucene.index.SegmentInfo;", NULL, NULL, .constantValue.asLong = 0 },
+    { "info_", "LOrgApacheLuceneIndexSegmentInfo;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent = { 2, "FlushFailedEvent", "org.apache.lucene.index", "DocumentsWriter", 0x8, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexSegmentInfo;", "process", "LOrgApacheLuceneIndexIndexWriter;ZZ", "LJavaIoIOException;", "LOrgApacheLuceneIndexDocumentsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent = { "FlushFailedEvent", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8, 2, 1, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent;
 }
 
@@ -1034,14 +1106,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriter_FlushFailed
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilCollection:", "DeleteNewFilesEvent", NULL, 0x1, NULL, "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
-    { "processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:", "process", "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, 4, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilCollection:);
+  methods[1].selector = @selector(processWithOrgApacheLuceneIndexIndexWriter:withBoolean:withBoolean:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "files_", NULL, 0x12, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<Ljava/lang/String;>;", .constantValue.asLong = 0 },
+    { "files_", "LJavaUtilCollection;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent = { 2, "DeleteNewFilesEvent", "org.apache.lucene.index", "DocumentsWriter", 0x8, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/String;>;)V", "process", "LOrgApacheLuceneIndexIndexWriter;ZZ", "LJavaIoIOException;", "Ljava/util/Collection<Ljava/lang/String;>;", "LOrgApacheLuceneIndexDocumentsWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent = { "DeleteNewFilesEvent", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x8, 2, 1, 6, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent;
 }
 

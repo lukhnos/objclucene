@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser || defined(INCLUDE_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser))
 #define OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_
 
@@ -25,8 +31,8 @@
 
 /*!
  @brief Assembles a QueryBuilder which uses Query objects from
- Lucene's <code>sandbox</code> and <code>queries</code>
- modules in addition to core queries.
+  Lucene's <code>sandbox</code> and <code>queries</code>
+  modules in addition to core queries.
  */
 @interface OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser : OrgApacheLuceneQueryparserXmlCoreParser
 
@@ -34,18 +40,18 @@
 
 /*!
  @brief Construct an XML parser that uses a single instance QueryParser for handling
- UserQuery tags - all parse operations are synchronized on this parser
+  UserQuery tags - all parse operations are synchronized on this parser
  @param parser A QueryParser which will be synchronized on during parse calls.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-       withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
+                 withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser;
 
 /*!
  @brief Constructs an XML parser that creates a QueryParser for each UserQuery request.
  @param defaultField The default field name used by QueryParsers constructed for UserQuery tags
  */
-- (instancetype)initWithNSString:(NSString *)defaultField
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
+- (instancetype __nonnull)initWithNSString:(NSString *)defaultField
+       withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 @end
 
@@ -67,4 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser")

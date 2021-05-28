@@ -3,7 +3,6 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/DocumentValueSourceDictionary.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
@@ -19,6 +18,10 @@
 #include "org/apache/lucene/search/suggest/DocumentDictionary.h"
 #include "org/apache/lucene/search/suggest/DocumentValueSourceDictionary.h"
 #include "org/apache/lucene/search/suggest/InputIterator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/DocumentValueSourceDictionary must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary () {
  @public
@@ -49,7 +52,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary, w
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator, this$1_, OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator, currentWeightValues_, OrgApacheLuceneQueriesFunctionFunctionValues *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator, leaves_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator, starts_, IOSIntArray *)
@@ -90,17 +92,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_Do
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneQueriesFunctionValueSource:withNSString:withNSString:", "DocumentValueSourceDictionary", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneQueriesFunctionValueSource:withNSString:", "DocumentValueSourceDictionary", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneQueriesFunctionValueSource:", "DocumentValueSourceDictionary", NULL, 0x1, NULL, NULL },
-    { "getEntryIterator", NULL, "Lorg.apache.lucene.search.suggest.InputIterator;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestInputIterator;", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneQueriesFunctionValueSource:withNSString:withNSString:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneQueriesFunctionValueSource:withNSString:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[3].selector = @selector(getEntryIterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "weightsValueSource_", NULL, 0x12, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
+    { "weightsValueSource_", "LOrgApacheLuceneQueriesFunctionValueSource;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.DocumentValueSourceDictionary$DocumentValueSourceInputIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary = { 2, "DocumentValueSourceDictionary", "org.apache.lucene.search.suggest", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReader;LNSString;LOrgApacheLuceneQueriesFunctionValueSource;LNSString;LNSString;", "LOrgApacheLuceneIndexIndexReader;LNSString;LOrgApacheLuceneQueriesFunctionValueSource;LNSString;", "LOrgApacheLuceneIndexIndexReader;LNSString;LOrgApacheLuceneQueriesFunctionValueSource;", "LJavaIoIOException;", "LOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary = { "DocumentValueSourceDictionary", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary;
 }
 
@@ -168,7 +178,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentValueSource
       JreStrongAssign(&currentWeightValues_, [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(this$1_->weightsValueSource_)) getValuesWithJavaUtilMap:create_JavaUtilHashMap_init() withOrgApacheLuceneIndexLeafReaderContext:[((id<JavaUtilList>) nil_chk(leaves_)) getWithInt:currentLeafIndex_]]);
     }
     @catch (JavaIoIOException *e) {
-      @throw create_JavaLangRuntimeException_initWithNSException_(e);
+      @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
     }
   }
   return [((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(currentWeightValues_)) longValWithInt:docId - IOSIntArray_Get(nil_chk(starts_), subIndex)];
@@ -183,18 +193,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentValueSource
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary:withBoolean:withBoolean:", "DocumentValueSourceInputIterator", NULL, 0x1, NULL, NULL },
-    { "getWeightWithOrgApacheLuceneDocumentDocument:withInt:", "getWeight", "J", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "J", 0x4, 2, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary:withBoolean:withBoolean:);
+  methods[1].selector = @selector(getWeightWithOrgApacheLuceneDocumentDocument:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$1_", NULL, 0x1012, "Lorg.apache.lucene.search.suggest.DocumentValueSourceDictionary;", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentWeightValues_", NULL, 0x2, "Lorg.apache.lucene.queries.function.FunctionValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "leaves_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", .constantValue.asLong = 0 },
-    { "starts_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "currentLeafIndex_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$1_", "LOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "currentWeightValues_", "LOrgApacheLuceneQueriesFunctionFunctionValues;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "leaves_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 4, -1 },
+    { "starts_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "currentLeafIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator = { 2, "DocumentValueSourceInputIterator", "org.apache.lucene.search.suggest", "DocumentValueSourceDictionary", 0x10, 2, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary;ZZ", "LJavaIoIOException;", "getWeight", "LOrgApacheLuceneDocumentDocument;I", "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", "LOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator = { "DocumentValueSourceInputIterator", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x10, 2, 5, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator;
 }
 

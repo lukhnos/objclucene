@@ -19,6 +19,12 @@
 #define INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocumentsWriterFlushQueue_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushQueue || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushQueue))
 #define OrgApacheLuceneIndexDocumentsWriterFlushQueue_
 
@@ -29,7 +35,6 @@
 @class OrgApacheLuceneIndexIndexWriter;
 
 /*!
-  
  */
 @interface OrgApacheLuceneIndexDocumentsWriterFlushQueue : NSObject
 
@@ -39,7 +44,7 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 - (void)addDeletesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *)deleteQueue;
 
@@ -58,15 +63,19 @@
 
 - (jint)tryPurgeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriterFlushQueue)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterFlushQueue_init(OrgApacheLuceneIndexDocumentsWriterFlushQueue *self);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterFlushQueue_initPackagePrivate(OrgApacheLuceneIndexDocumentsWriterFlushQueue *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushQueue *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushQueue *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushQueue *create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushQueue *create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushQueue)
 
@@ -87,7 +96,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushQueue)
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)frozenUpdates;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)frozenUpdates;
 
 - (jboolean)canPublish;
 
@@ -99,14 +108,17 @@ withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLucene
 
 /*!
  @brief Publishes the flushed segment, segment private deletes (if any) and its
- associated global delete (if present) to IndexWriter.
- The actual
- publishing operation is synced on <code>IW -> BDS</code> so that the <code>SegmentInfo</code>'s
- delete generation is always GlobalPacket_deleteGeneration + 1
+  associated global delete (if present) to IndexWriter.The actual
+  publishing operation is synced on <code>IW -> BDS</code> so that the <code>SegmentInfo</code>'s
+  delete generation is always GlobalPacket_deleteGeneration + 1
  */
 - (void)publishFlushedSegmentWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)indexWriter
  withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *)newSegment
                    withOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)globalPacket;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -130,7 +142,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTi
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)frozenUpdates;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)frozenUpdates;
 
 - (jboolean)canPublish;
 
@@ -161,7 +173,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalD
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)frozenDeletes;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)frozenDeletes;
 
 - (jboolean)canPublish;
 
@@ -185,4 +197,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_Segment
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushQueue")

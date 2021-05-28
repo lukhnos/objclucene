@@ -3,7 +3,6 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/NRTSuggester.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
@@ -18,6 +17,10 @@
 #include "java/util/Collections.h"
 #include "java/util/Comparator.h"
 #include "java/util/List.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/search/suggest/analyzing/FSTUtil.h"
 #include "org/apache/lucene/search/suggest/document/CompletionScorer.h"
@@ -40,23 +43,28 @@
 #include "org/apache/lucene/util/fst/PositiveIntOutputs.h"
 #include "org/apache/lucene/util/fst/Util.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/NRTSuggester must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @interface OrgApacheLuceneSearchSuggestDocumentNRTSuggester () {
  @public
   /*!
    @brief FST<Weight,Surface>:
- input is the analyzed form, with a null byte between terms
- and a <code>NRTSuggesterBuilder.END_BYTE</code> to denote the
- end of the input
- weight is a long
- surface is the original, unanalyzed form followed by the docID
+  input is the analyzed form, with a null byte between terms
+  and a <code>NRTSuggesterBuilder.END_BYTE</code> to denote the
+  end of the input
+  weight is a long
+  surface is the original, unanalyzed form followed by the docID
    */
   OrgApacheLuceneUtilFstFST *fst_;
   /*!
    @brief Highest number of analyzed paths we saw for any single
- input surface form.
-   This can be > 1, when index analyzer
- creates graphs or if multiple surface form(s) yields the
- same analyzed form
+  input surface form.This can be > 1, when index analyzer
+  creates graphs or if multiple surface form(s) yields the
+  same analyzed form
    */
   jint maxAnalyzedPathsPerOutput_;
   /*!
@@ -73,17 +81,16 @@
 
 /*!
  @brief Simple heuristics to try to avoid over-pruning potential suggestions by the
- TopNSearcher.
- Since suggestion entries can be rejected if they belong
- to a deleted document, the length of the TopNSearcher queue has to
- be increased by some factor, to account for the filtered out suggestions.
+  TopNSearcher.Since suggestion entries can be rejected if they belong
+  to a deleted document, the length of the TopNSearcher queue has to
+  be increased by some factor, to account for the filtered out suggestions.
  This heuristic will try to make the searcher admissible, but the search
- can still lead to over-pruning
+  can still lead to over-pruning 
  <p>
- If a <code>filter</code> is applied, the queue size is increased by
- half the number of live documents.
+  If a <code>filter</code> is applied, the queue size is increased by
+  half the number of live documents. 
  <p>
- The maximum queue size is <code>MAX_TOP_N_QUEUE_SIZE</code>
+  The maximum queue size is <code>MAX_TOP_N_QUEUE_SIZE</code>
  */
 - (jint)getMaxTopNSearcherQueueSizeWithInt:(jint)topN
                                    withInt:(jint)numDocs
@@ -99,9 +106,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester, fst_, OrgA
 
 /*!
  @brief Maximum queue depth for TopNSearcher
- NOTE: value should be <= Integer.MAX_VALUE
+  NOTE: value should be <= Integer.MAX_VALUE
  */
-inline jlong OrgApacheLuceneSearchSuggestDocumentNRTSuggester_get_MAX_TOP_N_QUEUE_SIZE();
+inline jlong OrgApacheLuceneSearchSuggestDocumentNRTSuggester_get_MAX_TOP_N_QUEUE_SIZE(void);
 #define OrgApacheLuceneSearchSuggestDocumentNRTSuggester_MAX_TOP_N_QUEUE_SIZE 5000LL
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentNRTSuggester, MAX_TOP_N_QUEUE_SIZE, jlong)
 
@@ -111,15 +118,48 @@ __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester 
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_(OrgApacheLuceneUtilFstFST *fst, jint maxAnalyzedPathsPerOutput, jint payloadSep);
 
-__attribute__((unused)) static id<JavaUtilComparator> OrgApacheLuceneSearchSuggestDocumentNRTSuggester_getComparator();
+__attribute__((unused)) static id<JavaUtilComparator> OrgApacheLuceneSearchSuggestDocumentNRTSuggester_getComparator(void);
 
 __attribute__((unused)) static jint OrgApacheLuceneSearchSuggestDocumentNRTSuggester_getMaxTopNSearcherQueueSizeWithInt_withInt_withDouble_withBoolean_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *self, jint topN, jint numDocs, jdouble liveDocsRatio, jboolean filterEnabled);
 
 __attribute__((unused)) static jdouble OrgApacheLuceneSearchSuggestDocumentNRTSuggester_calculateLiveDocRatioWithInt_withInt_(jint numDocs, jint maxDocs);
 
+@interface OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1 : OrgApacheLuceneUtilFstUtil_TopNSearcher {
+ @public
+  OrgApacheLuceneSearchSuggestDocumentNRTSuggester *this$0_;
+  OrgApacheLuceneSearchSuggestDocumentCompletionScorer *val$scorer_;
+  id<OrgApacheLuceneUtilBits> val$acceptDocs_;
+  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *val$collector_;
+  OrgApacheLuceneUtilCharsRefBuilder *spare_;
+}
+
+- (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester:(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)outer$
+                withOrgApacheLuceneSearchSuggestDocumentCompletionScorer:(OrgApacheLuceneSearchSuggestDocumentCompletionScorer *)capture$0
+                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$1
+         withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *)capture$2
+                                           withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
+                                                                 withInt:(jint)topN
+                                                                 withInt:(jint)maxQueueDepth
+                                                  withJavaUtilComparator:(id<JavaUtilComparator>)comparator
+                                                  withJavaUtilComparator:(id<JavaUtilComparator>)pathComparator;
+
+- (jboolean)acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1)
+
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1, spare_, OrgApacheLuceneUtilCharsRefBuilder *)
+
+__attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1 *self, OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator);
+
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1 *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1 *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator);
+
 /*!
- @brief Compares partial completion paths using <code>CompletionScorer.score(float,float)</code>,
- breaks ties comparing path inputs
+ @brief Compares partial completion paths using <code>CompletionScorer.score(float, float)</code>,
+  breaks ties comparing path inputs
  */
 @interface OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator : NSObject < JavaUtilComparator > {
  @public
@@ -145,67 +185,26 @@ __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester_
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator)
 
-inline jint OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_get_MAX_DOC_ID_LEN_WITH_SEP();
-#define OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_MAX_DOC_ID_LEN_WITH_SEP 6
-J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor, MAX_DOC_ID_LEN_WITH_SEP, jint)
+@interface OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2 : NSObject < JavaUtilComparator >
 
-@interface OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1 : OrgApacheLuceneUtilFstUtil_TopNSearcher {
- @public
-  OrgApacheLuceneSearchSuggestDocumentNRTSuggester *this$0_;
-  OrgApacheLuceneUtilCharsRefBuilder *spare_;
-  OrgApacheLuceneSearchSuggestDocumentCompletionScorer *val$scorer_;
-  id<OrgApacheLuceneUtilBits> val$acceptDocs_;
-  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *val$collector_;
-}
-
-- (jboolean)acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path;
-
-- (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester:(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)outer$
-                withOrgApacheLuceneSearchSuggestDocumentCompletionScorer:(OrgApacheLuceneSearchSuggestDocumentCompletionScorer *)capture$0
-                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$1
-         withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *)capture$2
-                                           withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)arg$0
-                                                                 withInt:(jint)arg$1
-                                                                 withInt:(jint)arg$2
-                                                  withJavaUtilComparator:(id<JavaUtilComparator>)arg$3
-                                                  withJavaUtilComparator:(id<JavaUtilComparator>)arg$4;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1, this$0_, OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1, spare_, OrgApacheLuceneUtilCharsRefBuilder *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1, val$scorer_, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1, val$acceptDocs_, id<OrgApacheLuceneUtilBits>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1, val$collector_, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *)
-
-__attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1 *self, OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3, id<JavaUtilComparator> arg$4);
-
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1 *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3, id<JavaUtilComparator> arg$4) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1 *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3, id<JavaUtilComparator> arg$4);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1)
-
-@interface OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2 : NSObject < JavaUtilComparator >
+- (instancetype)init;
 
 - (jint)compareWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)o1
                withId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)o2;
 
-- (instancetype)init;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2_init(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2 *self);
+__attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2_init(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2 *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2 *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2 *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2 *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2_init();
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2 *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2_init(void);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2)
+inline jint OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_get_MAX_DOC_ID_LEN_WITH_SEP(void);
+#define OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_MAX_DOC_ID_LEN_WITH_SEP 6
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor, MAX_DOC_ID_LEN_WITH_SEP, jint)
 
 @implementation OrgApacheLuceneSearchSuggestDocumentNRTSuggester
 
@@ -234,10 +233,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2)
   id<JavaUtilList> prefixPaths = OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_intersectPrefixPathsWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilFstFST_(scorer->automaton_, fst_);
   jint queueSize = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_getMaxTopNSearcherQueueSizeWithInt_withInt_withDouble_withBoolean_(self, [((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *) nil_chk(collector)) getCountToCollect] * [((id<JavaUtilList>) nil_chk(prefixPaths)) size], [scorer->reader_ numDocs], liveDocsRatio, scorer->filtered_);
   id<JavaUtilComparator> comparator = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_getComparator();
-  OrgApacheLuceneUtilFstUtil_TopNSearcher *searcher = create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(self, scorer, acceptDocs, collector, fst_, [collector getCountToCollect], queueSize, comparator, create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator_initWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer_(scorer));
+  OrgApacheLuceneUtilFstUtil_TopNSearcher *searcher = create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(self, scorer, acceptDocs, collector, fst_, [collector getCountToCollect], queueSize, comparator, create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator_initWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer_(scorer));
   for (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path * __strong path in prefixPaths) {
     [((OrgApacheLuceneSearchSuggestDocumentCompletionWeight *) nil_chk(scorer->weight_)) setNextMatchWithOrgApacheLuceneUtilIntsRef:[((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(((OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *) nil_chk(path))->input_)) get]];
-    [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:path->fstNode_ withId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) path->output_) withBoolean:false withOrgApacheLuceneUtilIntsRefBuilder:path->input_ withFloat:[scorer->weight_ boost] withJavaLangCharSequence:[scorer->weight_ context]];
+    [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:path->fstNode_ withId:path->output_ withBoolean:false withOrgApacheLuceneUtilIntsRefBuilder:path->input_ withFloat:[scorer->weight_ boost] withJavaLangCharSequence:[scorer->weight_ context]];
   }
   [searcher search];
 }
@@ -276,26 +275,40 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:withInt:withInt:", "NRTSuggester", NULL, 0x2, NULL, "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;II)V" },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "lookupWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:", "lookup", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getComparator", NULL, "Ljava.util.Comparator;", 0xa, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;" },
-    { "getMaxTopNSearcherQueueSizeWithInt:withInt:withDouble:withBoolean:", "getMaxTopNSearcherQueueSize", "I", 0x2, NULL, NULL },
-    { "calculateLiveDocRatioWithInt:withInt:", "calculateLiveDocRatio", "D", 0xa, NULL, NULL },
-    { "load__WithOrgApacheLuceneStoreIndexInput:", "load", "Lorg.apache.lucene.search.suggest.document.NRTSuggester;", 0x9, "Ljava.io.IOException;", NULL },
-    { "encodeWithLong:", "encode", "J", 0x8, NULL, NULL },
-    { "decodeWithLong:", "decode", "J", 0x8, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, 1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 2, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "LJavaUtilComparator;", 0xa, -1, -1, -1, 6, -1, -1 },
+    { NULL, "I", 0x2, 7, 8, -1, -1, -1, -1 },
+    { NULL, "D", 0xa, 9, 10, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester;", 0x9, 11, 12, 5, -1, -1, -1 },
+    { NULL, "J", 0x8, 13, 14, -1, -1, -1, -1 },
+    { NULL, "J", 0x8, 15, 14, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilFstFST:withInt:withInt:);
+  methods[1].selector = @selector(ramBytesUsed);
+  methods[2].selector = @selector(getChildResources);
+  methods[3].selector = @selector(lookupWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:);
+  methods[4].selector = @selector(getComparator);
+  methods[5].selector = @selector(getMaxTopNSearcherQueueSizeWithInt:withInt:withDouble:withBoolean:);
+  methods[6].selector = @selector(calculateLiveDocRatioWithInt:withInt:);
+  methods[7].selector = @selector(load__WithOrgApacheLuceneStoreIndexInput:);
+  methods[8].selector = @selector(encodeWithLong:);
+  methods[9].selector = @selector(decodeWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fst_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;", .constantValue.asLong = 0 },
-    { "maxAnalyzedPathsPerOutput_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadSep_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "MAX_TOP_N_QUEUE_SIZE", "MAX_TOP_N_QUEUE_SIZE", 0x1a, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_MAX_TOP_N_QUEUE_SIZE },
+    { "fst_", "LOrgApacheLuceneUtilFstFST;", .constantValue.asLong = 0, 0x12, -1, -1, 16, -1 },
+    { "maxAnalyzedPathsPerOutput_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payloadSep_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "MAX_TOP_N_QUEUE_SIZE", "J", .constantValue.asLong = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_MAX_TOP_N_QUEUE_SIZE, 0x1a, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.document.NRTSuggester$ScoringPathComparator;", "Lorg.apache.lucene.search.suggest.document.NRTSuggester$PayLoadProcessor;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggester = { 2, "NRTSuggester", "org.apache.lucene.search.suggest.document", NULL, 0x11, 10, methods, 4, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilFstFST;II", "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;II)V", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "lookup", "LOrgApacheLuceneSearchSuggestDocumentCompletionScorer;LOrgApacheLuceneUtilBits;LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector;", "LJavaIoIOException;", "()Ljava/util/Comparator<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;", "getMaxTopNSearcherQueueSize", "IIDZ", "calculateLiveDocRatio", "II", "load", "LOrgApacheLuceneStoreIndexInput;", "encode", "J", "decode", "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;", "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator;LOrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggester = { "NRTSuggester", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x11, 10, 4, -1, 17, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentNRTSuggester;
 }
 
@@ -318,15 +331,15 @@ OrgApacheLuceneSearchSuggestDocumentNRTSuggester *create_OrgApacheLuceneSearchSu
 
 id<JavaUtilComparator> OrgApacheLuceneSearchSuggestDocumentNRTSuggester_getComparator() {
   OrgApacheLuceneSearchSuggestDocumentNRTSuggester_initialize();
-  return create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2_init();
+  return create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2_init();
 }
 
 jint OrgApacheLuceneSearchSuggestDocumentNRTSuggester_getMaxTopNSearcherQueueSizeWithInt_withInt_withDouble_withBoolean_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *self, jint topN, jint numDocs, jdouble liveDocsRatio, jboolean filterEnabled) {
   jlong maxQueueSize = topN * self->maxAnalyzedPathsPerOutput_;
-  JreAssert((liveDocsRatio <= 1.0), (@"org/apache/lucene/search/suggest/document/NRTSuggester.java:217 condition failed: assert liveDocsRatio <= 1.0d;"));
+  JreAssert(liveDocsRatio <= 1.0, @"org/apache/lucene/search/suggest/document/NRTSuggester.java:217 condition failed: assert liveDocsRatio <= 1.0d;");
   maxQueueSize = JreFpToLong((maxQueueSize / liveDocsRatio));
   if (filterEnabled) {
-    maxQueueSize = maxQueueSize + (numDocs / 2);
+    maxQueueSize = maxQueueSize + (JreIntDiv(numDocs, 2));
   }
   return (jint) JavaLangMath_minWithLong_withLong_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_MAX_TOP_N_QUEUE_SIZE, maxQueueSize);
 }
@@ -355,11 +368,93 @@ jlong OrgApacheLuceneSearchSuggestDocumentNRTSuggester_encodeWithLong_(jlong inp
 
 jlong OrgApacheLuceneSearchSuggestDocumentNRTSuggester_decodeWithLong_(jlong output) {
   OrgApacheLuceneSearchSuggestDocumentNRTSuggester_initialize();
-  JreAssert((output >= 0 && output <= JavaLangInteger_MAX_VALUE), (JreStrcat("$J$", @"decoded output: ", output, @" is not within 0 and Integer.MAX_VALUE")));
+  JreAssert(output >= 0 && output <= JavaLangInteger_MAX_VALUE, JreStrcat("$J$", @"decoded output: ", output, @" is not within 0 and Integer.MAX_VALUE"));
   return JavaLangInteger_MAX_VALUE - output;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggester)
+
+@implementation OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1
+
+- (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester:(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)outer$
+                withOrgApacheLuceneSearchSuggestDocumentCompletionScorer:(OrgApacheLuceneSearchSuggestDocumentCompletionScorer *)capture$0
+                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$1
+         withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *)capture$2
+                                           withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
+                                                                 withInt:(jint)topN
+                                                                 withInt:(jint)maxQueueDepth
+                                                  withJavaUtilComparator:(id<JavaUtilComparator>)comparator
+                                                  withJavaUtilComparator:(id<JavaUtilComparator>)pathComparator {
+  OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(self, outer$, capture$0, capture$1, capture$2, fst, topN, maxQueueDepth, comparator, pathComparator);
+  return self;
+}
+
+- (jboolean)acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path {
+  jint payloadSepIndex = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseSurfaceFormWithOrgApacheLuceneUtilBytesRef_withInt_withOrgApacheLuceneUtilCharsRefBuilder_(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->cost_))->output2_, this$0_->payloadSep_, spare_);
+  jint docID = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseDocIDWithOrgApacheLuceneUtilBytesRef_withInt_(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(path->cost_))->output2_, payloadSepIndex);
+  if (![((OrgApacheLuceneSearchSuggestDocumentCompletionScorer *) nil_chk(val$scorer_)) acceptWithInt:docID withOrgApacheLuceneUtilBits:val$acceptDocs_]) {
+    return false;
+  }
+  @try {
+    jfloat score = [val$scorer_ scoreWithFloat:OrgApacheLuceneSearchSuggestDocumentNRTSuggester_decodeWithLong_([((JavaLangLong *) nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(path->cost_))->output1_)) longLongValue]) withFloat:path->boost_];
+    [((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *) nil_chk(val$collector_)) collectWithInt:docID withJavaLangCharSequence:[((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(spare_)) toCharsRef] withJavaLangCharSequence:path->context_ withFloat:score];
+    return true;
+  }
+  @catch (JavaIoIOException *e) {
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
+  }
+}
+
+- (void)dealloc {
+  RELEASE_(this$0_);
+  RELEASE_(val$scorer_);
+  RELEASE_(val$acceptDocs_);
+  RELEASE_(val$collector_);
+  RELEASE_(spare_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, 1, -1, -1 },
+    { NULL, "Z", 0x4, 2, 3, -1, 4, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester:withOrgApacheLuceneSearchSuggestDocumentCompletionScorer:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:withOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:withJavaUtilComparator:);
+  methods[1].selector = @selector(acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "this$0_", "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$scorer_", "LOrgApacheLuceneSearchSuggestDocumentCompletionScorer;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$acceptDocs_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$collector_", "LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "spare_", "LOrgApacheLuceneUtilCharsRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester;LOrgApacheLuceneSearchSuggestDocumentCompletionScorer;LOrgApacheLuceneUtilBits;LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector;LOrgApacheLuceneUtilFstFST;IILJavaUtilComparator;LJavaUtilComparator;", "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;IILjava/util/Comparator<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;>;)V", "acceptResult", "LOrgApacheLuceneUtilFstUtil_FSTPath;", "(Lorg/apache/lucene/util/fst/Util$FSTPath<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;)Z", "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester;", "lookupWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:", "Lorg/apache/lucene/util/fst/Util$TopNSearcher<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1 = { "", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x8010, 2, 5, 5, -1, 6, 7, -1 };
+  return &_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1;
+}
+
+@end
+
+void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1 *self, OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator) {
+  JreStrongAssign(&self->this$0_, outer$);
+  JreStrongAssign(&self->val$scorer_, capture$0);
+  JreStrongAssign(&self->val$acceptDocs_, capture$1);
+  JreStrongAssign(&self->val$collector_, capture$2);
+  OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(self, fst, topN, maxQueueDepth, comparator, pathComparator);
+  JreStrongAssignAndConsume(&self->spare_, new_OrgApacheLuceneUtilCharsRefBuilder_init());
+}
+
+OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1 *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1, initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_, outer$, capture$0, capture$1, capture$2, fst, topN, maxQueueDepth, comparator, pathComparator)
+}
+
+OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1 *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_1, initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_, outer$, capture$0, capture$1, capture$2, fst, topN, maxQueueDepth, comparator, pathComparator)
+}
 
 @implementation OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator
 
@@ -374,20 +469,56 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggeste
   return (cmp != 0) ? cmp : [((OrgApacheLuceneUtilIntsRef *) nil_chk([((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(first->input_)) get])) compareToWithId:[second->input_ get]];
 }
 
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
+
 - (void)dealloc {
   RELEASE_(scorer_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer:", "ScoringPathComparator", NULL, 0x1, NULL, NULL },
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, "(Lorg/apache/lucene/util/fst/Util$FSTPath<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;Lorg/apache/lucene/util/fst/Util$FSTPath<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;)I" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, 3, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer:);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "scorer_", NULL, 0x12, "Lorg.apache.lucene.search.suggest.document.CompletionScorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "scorer_", "LOrgApacheLuceneSearchSuggestDocumentCompletionScorer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator = { 2, "ScoringPathComparator", "org.apache.lucene.search.suggest.document", "NRTSuggester", 0xa, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestDocumentCompletionScorer;", "compare", "LOrgApacheLuceneUtilFstUtil_FSTPath;LOrgApacheLuceneUtilFstUtil_FSTPath;", "(Lorg/apache/lucene/util/fst/Util$FSTPath<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;Lorg/apache/lucene/util/fst/Util$FSTPath<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;)I", "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester;", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator = { "ScoringPathComparator", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0xa, 2, 1, 4, -1, -1, 5, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator;
 }
 
@@ -408,7 +539,87 @@ OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator *create_O
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator)
 
+@implementation OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (jint)compareWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)o1
+               withId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)o2 {
+  return JavaLangLong_compareWithLong_withLong_([((JavaLangLong *) nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(o1))->output1_)) longLongValue], [((JavaLangLong *) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(o2))->output1_) longLongValue]);
+}
+
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, 2, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compare", "LOrgApacheLuceneUtilFstPairOutputs_Pair;LOrgApacheLuceneUtilFstPairOutputs_Pair;", "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;)I", "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester;", "getComparator", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2 = { "", "org.apache.lucene.search.suggest.document", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 3, -1, 4, 5, -1 };
+  return &_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2;
+}
+
+@end
+
+void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2_init(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2 *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2 *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2, init)
+}
+
+OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2 *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_2, init)
+}
+
 @implementation OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jint)parseSurfaceFormWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)output
                                                 withInt:(jint)payloadSep
@@ -427,28 +638,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggeste
   return OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_makeWithOrgApacheLuceneUtilBytesRef_withInt_withInt_(surface, docID, payloadSep);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "parseSurfaceFormWithOrgApacheLuceneUtilBytesRef:withInt:withOrgApacheLuceneUtilCharsRefBuilder:", "parseSurfaceForm", "I", 0x8, NULL, NULL },
-    { "parseDocIDWithOrgApacheLuceneUtilBytesRef:withInt:", "parseDocID", "I", 0x8, NULL, NULL },
-    { "makeWithOrgApacheLuceneUtilBytesRef:withInt:withInt:", "make", "Lorg.apache.lucene.util.BytesRef;", 0x8, "Ljava.io.IOException;", NULL },
-    { "init", "PayLoadProcessor", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x8, 4, 5, 6, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(parseSurfaceFormWithOrgApacheLuceneUtilBytesRef:withInt:withOrgApacheLuceneUtilCharsRefBuilder:);
+  methods[2].selector = @selector(parseDocIDWithOrgApacheLuceneUtilBytesRef:withInt:);
+  methods[3].selector = @selector(makeWithOrgApacheLuceneUtilBytesRef:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "MAX_DOC_ID_LEN_WITH_SEP", "MAX_DOC_ID_LEN_WITH_SEP", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_MAX_DOC_ID_LEN_WITH_SEP },
+    { "MAX_DOC_ID_LEN_WITH_SEP", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_MAX_DOC_ID_LEN_WITH_SEP, 0x1a, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor = { 2, "PayLoadProcessor", "org.apache.lucene.search.suggest.document", "NRTSuggester", 0x18, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "parseSurfaceForm", "LOrgApacheLuceneUtilBytesRef;ILOrgApacheLuceneUtilCharsRefBuilder;", "parseDocID", "LOrgApacheLuceneUtilBytesRef;I", "make", "LOrgApacheLuceneUtilBytesRef;II", "LJavaIoIOException;", "LOrgApacheLuceneSearchSuggestDocumentNRTSuggester;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor = { "PayLoadProcessor", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x18, 4, 1, 7, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor;
 }
 
 @end
+
+void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_init(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor, init)
+}
+
+OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor, init)
+}
 
 jint OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseSurfaceFormWithOrgApacheLuceneUtilBytesRef_withInt_withOrgApacheLuceneUtilCharsRefBuilder_(OrgApacheLuceneUtilBytesRef *output, jint payloadSep, OrgApacheLuceneUtilCharsRefBuilder *spare) {
   OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_initialize();
@@ -459,14 +684,14 @@ jint OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseSurf
       break;
     }
   }
-  JreAssert((surfaceFormLen != -1), (@"no payloadSep found, unable to determine surface form"));
+  JreAssert(surfaceFormLen != -1, @"no payloadSep found, unable to determine surface form");
   [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(spare)) copyUTF8BytesWithByteArray:output->bytes_ withInt:output->offset_ withInt:surfaceFormLen];
   return surfaceFormLen;
 }
 
 jint OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseDocIDWithOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneUtilBytesRef *output, jint payloadSepIndex) {
   OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_initialize();
-  JreAssert((payloadSepIndex != -1), (@"payload sep index can not be -1"));
+  JreAssert(payloadSepIndex != -1, @"payload sep index can not be -1");
   OrgApacheLuceneStoreByteArrayDataInput *input = create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(output))->bytes_, payloadSepIndex + output->offset_ + 1, output->length_ - (payloadSepIndex + output->offset_));
   return [input readVInt];
 }
@@ -482,135 +707,4 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneSearchSuggestDocumentNRTSuggester_Pa
   return create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(buffer, 0, [output getPosition]);
 }
 
-void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_init(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor, init)
-}
-
-OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor, init)
-}
-
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor)
-
-@implementation OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1
-
-- (jboolean)acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path {
-  jint payloadSepIndex = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseSurfaceFormWithOrgApacheLuceneUtilBytesRef_withInt_withOrgApacheLuceneUtilCharsRefBuilder_(((OrgApacheLuceneUtilBytesRef *) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->cost_))->output2_), this$0_->payloadSep_, spare_);
-  jint docID = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseDocIDWithOrgApacheLuceneUtilBytesRef_withInt_(((OrgApacheLuceneUtilBytesRef *) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(path->cost_))->output2_), payloadSepIndex);
-  if (![((OrgApacheLuceneSearchSuggestDocumentCompletionScorer *) nil_chk(val$scorer_)) acceptWithInt:docID withOrgApacheLuceneUtilBits:val$acceptDocs_]) {
-    return false;
-  }
-  @try {
-    jfloat score = [val$scorer_ scoreWithFloat:OrgApacheLuceneSearchSuggestDocumentNRTSuggester_decodeWithLong_([((JavaLangLong *) nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(path->cost_))->output1_)) longLongValue]) withFloat:path->boost_];
-    [((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *) nil_chk(val$collector_)) collectWithInt:docID withJavaLangCharSequence:[((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(spare_)) toCharsRef] withJavaLangCharSequence:path->context_ withFloat:score];
-    return true;
-  }
-  @catch (JavaIoIOException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(e);
-  }
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester:(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)outer$
-                withOrgApacheLuceneSearchSuggestDocumentCompletionScorer:(OrgApacheLuceneSearchSuggestDocumentCompletionScorer *)capture$0
-                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$1
-         withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *)capture$2
-                                           withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)arg$0
-                                                                 withInt:(jint)arg$1
-                                                                 withInt:(jint)arg$2
-                                                  withJavaUtilComparator:(id<JavaUtilComparator>)arg$3
-                                                  withJavaUtilComparator:(id<JavaUtilComparator>)arg$4 {
-  OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(self, outer$, capture$0, capture$1, capture$2, arg$0, arg$1, arg$2, arg$3, arg$4);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(this$0_);
-  RELEASE_(spare_);
-  RELEASE_(val$scorer_);
-  RELEASE_(val$acceptDocs_);
-  RELEASE_(val$collector_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:", "acceptResult", "Z", 0x4, NULL, "(Lorg/apache/lucene/util/fst/Util$FSTPath<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;)Z" },
-    { "initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester:withOrgApacheLuceneSearchSuggestDocumentCompletionScorer:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:withOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:withJavaUtilComparator:", "", NULL, 0x0, NULL, "(Lorg/apache/lucene/search/suggest/document/NRTSuggester;Lorg/apache/lucene/search/suggest/document/CompletionScorer;Lorg/apache/lucene/util/Bits;Lorg/apache/lucene/search/suggest/document/TopSuggestDocsCollector;Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;IILjava/util/Comparator<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;>;)V" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.suggest.document.NRTSuggester;", NULL, NULL, .constantValue.asLong = 0 },
-    { "spare_", NULL, 0x12, "Lorg.apache.lucene.util.CharsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$scorer_", NULL, 0x1012, "Lorg.apache.lucene.search.suggest.document.CompletionScorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$acceptDocs_", NULL, 0x1012, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$collector_", NULL, 0x1012, "Lorg.apache.lucene.search.suggest.document.TopSuggestDocsCollector;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.fst.PairOutputs$Pair;"};
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchSuggestDocumentNRTSuggester", "lookupWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1 = { 2, "", "org.apache.lucene.search.suggest.document", "NRTSuggester", 0x8008, 2, methods, 5, fields, 1, superclass_type_args, 0, NULL, &enclosing_method, "Lorg/apache/lucene/util/fst/Util$TopNSearcher<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;" };
-  return &_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1;
-}
-
-@end
-
-void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1 *self, OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3, id<JavaUtilComparator> arg$4) {
-  JreStrongAssign(&self->this$0_, outer$);
-  JreStrongAssign(&self->val$scorer_, capture$0);
-  JreStrongAssign(&self->val$acceptDocs_, capture$1);
-  JreStrongAssign(&self->val$collector_, capture$2);
-  OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(self, arg$0, arg$1, arg$2, arg$3, arg$4);
-  JreStrongAssignAndConsume(&self->spare_, new_OrgApacheLuceneUtilCharsRefBuilder_init());
-}
-
-OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1 *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3, id<JavaUtilComparator> arg$4) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1, initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_, outer$, capture$0, capture$1, capture$2, arg$0, arg$1, arg$2, arg$3, arg$4)
-}
-
-OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1 *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionScorer *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *capture$2, OrgApacheLuceneUtilFstFST *arg$0, jint arg$1, jint arg$2, id<JavaUtilComparator> arg$3, id<JavaUtilComparator> arg$4) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1, initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_, outer$, capture$0, capture$1, capture$2, arg$0, arg$1, arg$2, arg$3, arg$4)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1)
-
-@implementation OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2
-
-- (jint)compareWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)o1
-               withId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)o2 {
-  return JavaLangLong_compareWithLong_withLong_([((JavaLangLong *) nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(o1))->output1_)) longLongValue], [((JavaLangLong *) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(o2))->output1_) longLongValue]);
-}
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, "(Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;)I" },
-    { "init", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchSuggestDocumentNRTSuggester", "getComparator" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2 = { 2, "", "org.apache.lucene.search.suggest.document", "NRTSuggester", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;" };
-  return &_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2;
-}
-
-@end
-
-void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2_init(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2 *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2 *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2, init)
-}
-
-OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2 *create_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2)

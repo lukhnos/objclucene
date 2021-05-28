@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsStoredFieldsReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsStoredFieldsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsReader || defined(INCLUDE_OrgApacheLuceneCodecsStoredFieldsReader))
 #define OrgApacheLuceneCodecsStoredFieldsReader_
 
@@ -29,9 +35,9 @@
 /*!
  @brief Codec API for reading stored fields.
  <p>
- You need to implement <code>visitDocument(int,StoredFieldVisitor)</code> to
- read the stored fields for a document, implement <code>clone()</code> (creating
- clones of any IndexInputs used, etc), and <code>close()</code>
+  You need to implement <code>visitDocument(int, StoredFieldVisitor)</code> to
+  read the stored fields for a document, implement <code>clone()</code> (creating
+  clones of any IndexInputs used, etc), and <code>close()</code>
  */
 @interface OrgApacheLuceneCodecsStoredFieldsReader : NSObject < NSCopying, JavaIoCloseable, OrgApacheLuceneUtilAccountable >
 
@@ -40,17 +46,17 @@
 /*!
  @brief Checks consistency of this reader.
  <p>
- Note that this may be costly in terms of I/O, e.g. 
- may involve computing a checksum value against large data files.
+  Note that this may be costly in terms of I/O, e.g. 
+  may involve computing a checksum value against large data files.
  */
 - (void)checkIntegrity;
 
-- (OrgApacheLuceneCodecsStoredFieldsReader *)clone;
+- (OrgApacheLuceneCodecsStoredFieldsReader *)java_clone;
 
 /*!
  @brief Returns an instance optimized for merging.
  <p>
- The default implementation returns <code>this</code> 
+  The default implementation returns <code>this</code>
  */
 - (OrgApacheLuceneCodecsStoredFieldsReader *)getMergeInstance;
 
@@ -65,9 +71,9 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -79,4 +85,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsReader")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter || defined(INCLUDE_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter))
 #define OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_
 
@@ -24,7 +30,7 @@
 
 /*!
  @brief Normalises token text to lower case, handling t-prothesis
- and n-eclipsis (i.e., that 'nAthair' should become 'n-athair')
+  and n-eclipsis (i.e., that 'nAthair' should become 'n-athair')
  */
 @interface OrgApacheLuceneAnalysisGaIrishLowerCaseFilter : OrgApacheLuceneAnalysisTokenFilter
 
@@ -33,7 +39,7 @@
 /*!
  @brief Create an IrishLowerCaseFilter that normalises Irish token text.
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
 
@@ -51,4 +57,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisGaIrishLowerCaseFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig))
 #define OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_
 
@@ -20,12 +26,12 @@
 
 /*!
  @brief <p>
- This class is the base of <code>QueryConfigHandler</code> and <code>FieldConfig</code>.
- It has operations to set, unset and get configuration values.
+  This class is the base of <code>QueryConfigHandler</code> and <code>FieldConfig</code>.
+ It has operations to set, unset and get configuration values. 
  </p>
- <p>
- Each configuration is is a key-&gt;value pair. The key should be an unique
- <code>ConfigurationKey</code> instance and it also holds the value's type.
+  <p>
+  Each configuration is is a key-&gt;value pair. The key should be an unique 
+ <code>ConfigurationKey</code> instance and it also holds the value's type. 
  </p>
  - seealso: ConfigurationKey
  */
@@ -35,21 +41,21 @@
 
 /*!
  @brief Returns the value held by the given key.
- @param key the key, cannot be <code>null</code>
+ @param key the key, cannot be  <code> null </code>
  @return the value held by the given key
  */
 - (id)getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key;
 
 /*!
  @brief Returns true if there is a value set with the given key, otherwise false.
- @param key the key, cannot be <code>null</code>
+ @param key the key, cannot be  <code> null </code>
  @return true if there is a value set with the given key, otherwise false
  */
 - (jboolean)hasWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key;
 
 /*!
  @brief Sets a key and its value.
- @param key the key, cannot be <code>null</code>
+ @param key the key, cannot be  <code> null </code>
  @param value value to set
  */
 - (void)setWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key
@@ -64,7 +70,7 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -76,4 +82,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQ
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig")

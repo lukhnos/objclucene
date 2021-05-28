@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexSortingLeafReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexSortingLeafReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortingLeafReader || defined(INCLUDE_OrgApacheLuceneIndexSortingLeafReader))
 #define OrgApacheLuceneIndexSortingLeafReader_
 
@@ -33,17 +39,16 @@
 @protocol OrgApacheLuceneUtilBits;
 
 /*!
- @brief An <code>org.apache.lucene.index.LeafReader</code> which supports sorting documents by a given
- <code>Sort</code>.
- You can use this class to sort an index as follows:
+ @brief An <code>org.apache.lucene.index.LeafReader</code> which supports sorting documents by a given 
+ <code>Sort</code>.You can use this class to sort an index as follows: 
  <pre class="prettyprint">
- IndexWriter writer; // writer to which the sorted index will be added
- DirectoryReader reader; // reader on the input index
- Sort sort; // determines how the documents are sorted
- LeafReader sortingReader = SortingLeafReader.wrap(SlowCompositeReaderWrapper.wrap(reader), sort);
- writer.addIndexes(reader);
- writer.close();
- reader.close();
+  IndexWriter writer; // writer to which the sorted index will be added
+  DirectoryReader reader; // reader on the input index
+  Sort sort; // determines how the documents are sorted
+  LeafReader sortingReader = SortingLeafReader.wrap(SlowCompositeReaderWrapper.wrap(reader), sort);
+  writer.addIndexes(reader);
+  writer.close();
+  reader.close(); 
  
 @endcode
  */
@@ -81,9 +86,8 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Return a sorted view of <code>reader</code> according to the order
- defined by <code>sort</code>.
- If the reader is already sorted, this
- method might return the reader as-is. 
+   defined by <code>sort</code>.If the reader is already sorted, this
+   method might return the reader as-is.
  */
 + (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                              withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
@@ -91,10 +95,14 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 #pragma mark Package-Private
 
 /*!
- @brief Expert: same as <code>wrap(org.apache.lucene.index.LeafReader,Sort)</code> but operates directly on a <code>Sorter.DocMap</code>.
+ @brief Expert: same as <code>wrap(org.apache.lucene.index.LeafReader, Sort)</code> but operates directly on a <code>Sorter.DocMap</code>.
  */
 + (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                      withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -143,10 +151,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)maxDoc
+- (instancetype __nonnull)initWithInt:(jint)maxDoc
 withOrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum:(OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *)reuse
-withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
-                withBoolean:(jboolean)withFreqs
+ withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
+                          withBoolean:(jboolean)withFreqs
 withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap;
 
 /*!
@@ -155,6 +163,10 @@ withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMa
 - (OrgApacheLuceneIndexPostingsEnum *)getWrapped;
 
 - (jboolean)reusedWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)other;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -203,11 +215,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)maxDoc
+- (instancetype __nonnull)initWithInt:(jint)maxDoc
 withOrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum:(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *)reuse
-withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
+ withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
 withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap
-                withBoolean:(jboolean)storeOffsets;
+                          withBoolean:(jboolean)storeOffsets;
 
 /*!
  @brief Returns the wrapped <code>PostingsEnum</code>.
@@ -215,6 +227,10 @@ withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMa
 - (OrgApacheLuceneIndexPostingsEnum *)getWrapped;
 
 - (jboolean)reusedWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)other;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -230,4 +246,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingPostings
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortingLeafReader")

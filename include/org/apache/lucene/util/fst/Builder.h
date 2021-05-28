@@ -19,6 +19,12 @@
 #define INCLUDE_OrgApacheLuceneUtilFstBuilder_Node 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilFstBuilder_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstBuilder || defined(INCLUDE_OrgApacheLuceneUtilFstBuilder))
 #define OrgApacheLuceneUtilFstBuilder_
 
@@ -31,19 +37,21 @@
 
 /*!
  @brief Builds a minimal FST (maps an IntsRef term to an arbitrary
- output) from pre-sorted terms with outputs.
- The FST
- becomes an FSA if you use NoOutputs.  The FST is written
- on-the-fly into a compact serialized format byte array, which can
- be saved to / loaded from a Directory or used directly
- for traversal.  The FST is always finite (no cycles).
+  output) from pre-sorted terms with outputs.The FST
+  becomes an FSA if you use NoOutputs.
+ The FST is written
+  on-the-fly into a compact serialized format byte array, which can
+  be saved to / loaded from a Directory or used directly
+  for traversal.  The FST is always finite (no cycles). 
  <p>NOTE: The algorithm is described at
- http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.24.3698</p>
+  http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.24.3698</p>
+  
  <p>The parameterized type T is the output type.  See the
- subclasses of <code>Outputs</code>.
+  subclasses of <code>Outputs</code>.
+  
  <p>FSTs larger than 2.1GB are now possible (as of Lucene
- 4.2).  FSTs containing more than 2.1B nodes are also now
- possible, however they cannot be packed.
+  4.2).  FSTs containing more than 2.1B nodes are also now
+  possible, however they cannot be packed.
  */
 @interface OrgApacheLuceneUtilFstBuilder : NSObject {
  @public
@@ -60,87 +68,77 @@
 
 /*!
  @brief Instantiates an FST/FSA builder with all the possible tuning and construction
- tweaks.
- Read parameter documentation carefully.
- @param inputType 
- The input type (transition labels). Can be anything from <code>INPUT_TYPE</code>
- enumeration. Shorter types will consume less memory. Strings (character sequences) are 
- represented as <code>INPUT_TYPE.BYTE4</code> (full unicode codepoints).
- @param minSuffixCount1
- If pruning the input graph during construction, this threshold is used for telling
- if a node is kept or pruned. If transition_count(node) &gt;= minSuffixCount1, the node
- is kept.
- @param minSuffixCount2
- (Note: only Mike McCandless knows what this one is really doing...)
- @param doShareSuffix 
- If <code>true</code>, the shared suffixes will be compacted into unique paths.
- This requires an additional RAM-intensive hash map for lookups in memory. Setting this parameter to
- <code>false</code> creates a single suffix path for all input sequences. This will result in a larger
- FST, but requires substantially less memory and CPU during building.
- @param doShareNonSingletonNodes
- Only used if doShareSuffix is true.  Set this to
- true to ensure FST is fully minimal, at cost of more
- CPU and more RAM during building.
- @param shareMaxTailLength
- Only used if doShareSuffix is true.  Set this to
- Integer.MAX_VALUE to ensure FST is fully minimal, at cost of more
- CPU and more RAM during building.
- @param outputs The output type for each input sequence. Applies only if building an FST. For
- FSA, use <code>NoOutputs.getSingleton()</code> and <code>NoOutputs.getNoOutput()</code> as the
- singleton output object.
+  tweaks.Read parameter documentation carefully.
+ @param inputType The input type (transition labels). Can be anything from 
+ <code>INPUT_TYPE</code>     enumeration. Shorter types will consume less memory. Strings (character sequences) are 
+      represented as 
+ <code>INPUT_TYPE.BYTE4</code>  (full unicode codepoints).
+ @param minSuffixCount1 If pruning the input graph during construction, this threshold is used for telling
+      if a node is kept or pruned. If transition_count(node) 
+  &gt; = minSuffixCount1, the node     is kept.
+ @param minSuffixCount2 (Note: only Mike McCandless knows what this one is really doing...)
+ @param doShareSuffix If 
+  <code> true </code> , the shared suffixes will be compacted into unique paths.     This requires an additional RAM-intensive hash map for lookups in memory. Setting this parameter to
+       <code>
+  false </code>  creates a single suffix path for all input sequences. This will result in a larger     FST, but requires substantially less memory and CPU during building.
+ @param doShareNonSingletonNodes Only used if doShareSuffix is true.  Set this to
+      true to ensure FST is fully minimal, at cost of more
+      CPU and more RAM during building.
+ @param shareMaxTailLength Only used if doShareSuffix is true.  Set this to
+      Integer.MAX_VALUE to ensure FST is fully minimal, at cost of more
+      CPU and more RAM during building.
+ @param outputs The output type for each input sequence. Applies only if building an FST. For     FSA, use 
+ <code>NoOutputs.getSingleton()</code>  and <code>NoOutputs.getNoOutput()</code>  as the     singleton output object.
  @param doPackFST Pass true to create a packed FST.
- @param acceptableOverheadRatio How to trade speed for space when building the FST. This option
- is only relevant when doPackFST is true. @@see PackedInts#getMutable(int, int, float)
- @param allowArrayArcs Pass false to disable the array arc optimization
- while building the FST; this will make the resulting
- FST smaller but slower to traverse.
- @param bytesPageBits How many bits wide to make each
- byte[] block in the BytesStore; if you know the FST
- will be large then make this larger.  For example 15
- bits = 32768 byte pages.
+ @param acceptableOverheadRatio How to trade speed for space when building the FST. This option     is only relevant when doPackFST is true. @@see PackedInts#getMutable(int, int, float)
+ @param allowArrayArcs Pass false to disable the array arc optimization     while building the FST; this will make the resulting
+      FST smaller but slower to traverse.
+ @param bytesPageBits How many bits wide to make each     byte[] block in the BytesStore; if you know the FST
+      will be large then make this larger.  For example 15
+      bits = 32768 byte pages.
  */
-- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE:(OrgApacheLuceneUtilFstFST_INPUT_TYPE *)inputType
-                                                     withInt:(jint)minSuffixCount1
-                                                     withInt:(jint)minSuffixCount2
-                                                 withBoolean:(jboolean)doShareSuffix
-                                                 withBoolean:(jboolean)doShareNonSingletonNodes
-                                                     withInt:(jint)shareMaxTailLength
-                           withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
-                                                 withBoolean:(jboolean)doPackFST
-                                                   withFloat:(jfloat)acceptableOverheadRatio
-                                                 withBoolean:(jboolean)allowArrayArcs
-                                                     withInt:(jint)bytesPageBits;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE:(OrgApacheLuceneUtilFstFST_INPUT_TYPE *)inputType
+                                                               withInt:(jint)minSuffixCount1
+                                                               withInt:(jint)minSuffixCount2
+                                                           withBoolean:(jboolean)doShareSuffix
+                                                           withBoolean:(jboolean)doShareNonSingletonNodes
+                                                               withInt:(jint)shareMaxTailLength
+                                     withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
+                                                           withBoolean:(jboolean)doPackFST
+                                                             withFloat:(jfloat)acceptableOverheadRatio
+                                                           withBoolean:(jboolean)allowArrayArcs
+                                                               withInt:(jint)bytesPageBits;
 
 /*!
- @brief Instantiates an FST/FSA builder without any pruning.
- A shortcut
- to <code>Builder(FST.INPUT_TYPE,int,int,boolean,boolean,int,Outputs,boolean,float,boolean,int)</code>
+ @brief Instantiates an FST/FSA builder without any pruning.A shortcut
+  to <code>Builder(FST.INPUT_TYPE, int, int, boolean,
+ boolean, int, Outputs, boolean, float,
+ boolean, int)</code>
   with pruning options turned off.
  */
-- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE:(OrgApacheLuceneUtilFstFST_INPUT_TYPE *)inputType
-                           withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE:(OrgApacheLuceneUtilFstFST_INPUT_TYPE *)inputType
+                                     withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs;
 
 /*!
- @brief Add the next input/output pair.
- The provided input
- must be sorted after the previous one according to
- <code>IntsRef.compareTo</code>.  It's also OK to add the same
- input twice in a row with different outputs, as long
- as <code>Outputs</code> implements the <code>Outputs.merge</code>
- method. Note that input is fully consumed after this
- method is returned (so caller is free to reuse), but
- output is not.  So if your outputs are changeable (eg
+ @brief Add the next input/output pair.The provided input
+   must be sorted after the previous one according to  
+ <code>IntsRef.compareTo</code>.
+ It's also OK to add the same
+   input twice in a row with different outputs, as long
+   as <code>Outputs</code> implements the <code>Outputs.merge</code>
+   method. Note that input is fully consumed after this
+   method is returned (so caller is free to reuse), but
+   output is not.  So if your outputs are changeable (eg  
  <code>ByteSequenceOutputs</code> or <code>IntSequenceOutputs</code>
  ) then you cannot reuse across
- calls. 
+   calls.
  */
 - (void)addWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
                                    withId:(id)output;
 
 /*!
- @brief Returns final FST.
- NOTE: this will return null if
- nothing is accepted by the FST. 
+ @brief Returns final FST.NOTE: this will return null if
+   nothing is accepted by the FST.
  */
 - (OrgApacheLuceneUtilFstFST *)finish;
 
@@ -153,6 +151,10 @@
 - (jlong)getNodeCount;
 
 - (jlong)getTermCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -189,7 +191,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder)
 @interface OrgApacheLuceneUtilFstBuilder_Arc : NSObject {
  @public
   jint label_;
-  __unsafe_unretained id<OrgApacheLuceneUtilFstBuilder_Node> target_;
+  WEAK_ id<OrgApacheLuceneUtilFstBuilder_Node> target_;
   jboolean isFinal_;
   id output_;
   id nextFinalOutput_;
@@ -197,7 +199,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder)
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -208,9 +210,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBuilder_Arc, nextFinalOutput_, id)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBuilder_Arc_init(OrgApacheLuceneUtilFstBuilder_Arc *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBuilder_Arc *new_OrgApacheLuceneUtilFstBuilder_Arc_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBuilder_Arc *new_OrgApacheLuceneUtilFstBuilder_Arc_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBuilder_Arc *create_OrgApacheLuceneUtilFstBuilder_Arc_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBuilder_Arc *create_OrgApacheLuceneUtilFstBuilder_Arc_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder_Arc)
 
@@ -219,7 +221,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder_Arc)
 #if !defined (OrgApacheLuceneUtilFstBuilder_Node_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstBuilder || defined(INCLUDE_OrgApacheLuceneUtilFstBuilder_Node))
 #define OrgApacheLuceneUtilFstBuilder_Node_
 
-@protocol OrgApacheLuceneUtilFstBuilder_Node < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilFstBuilder_Node < JavaObject >
 
 - (jboolean)isCompiled;
 
@@ -245,7 +247,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder_Node)
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -253,9 +255,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstBuilder_CompiledNode)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBuilder_CompiledNode_init(OrgApacheLuceneUtilFstBuilder_CompiledNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBuilder_CompiledNode *new_OrgApacheLuceneUtilFstBuilder_CompiledNode_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBuilder_CompiledNode *new_OrgApacheLuceneUtilFstBuilder_CompiledNode_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBuilder_CompiledNode *create_OrgApacheLuceneUtilFstBuilder_CompiledNode_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBuilder_CompiledNode *create_OrgApacheLuceneUtilFstBuilder_CompiledNode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder_CompiledNode)
 
@@ -273,7 +275,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder_CompiledNode)
  */
 @interface OrgApacheLuceneUtilFstBuilder_UnCompiledNode : NSObject < OrgApacheLuceneUtilFstBuilder_Node > {
  @public
-  __unsafe_unretained OrgApacheLuceneUtilFstBuilder *owner_;
+  WEAK_ OrgApacheLuceneUtilFstBuilder *owner_;
   jint numArcs_;
   IOSObjectArray *arcs_;
   id output_;
@@ -288,13 +290,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder_CompiledNode)
 #pragma mark Public
 
 /*!
- @param depth
- The node's depth starting from the automaton root. Needed for
- LUCENE-2934 (node expansion based on conditions other than the
- fanout size).
+ @param depth The node's depth starting from the automaton root. Needed for
+            LUCENE-2934 (node expansion based on conditions other than the
+            fanout size).
  */
-- (instancetype)initWithOrgApacheLuceneUtilFstBuilder:(OrgApacheLuceneUtilFstBuilder *)owner
-                                              withInt:(jint)depth;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilFstBuilder:(OrgApacheLuceneUtilFstBuilder *)owner
+                                                        withInt:(jint)depth;
 
 - (void)addArcWithInt:(jint)label
 withOrgApacheLuceneUtilFstBuilder_Node:(id<OrgApacheLuceneUtilFstBuilder_Node>)target;
@@ -318,6 +319,10 @@ withOrgApacheLuceneUtilFstBuilder_Node:(id<OrgApacheLuceneUtilFstBuilder_Node>)t
 - (void)setLastOutputWithInt:(jint)labelToMatch
                       withId:(id)newOutput;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstBuilder_UnCompiledNode)
@@ -335,4 +340,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder_UnCompiledNode)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstBuilder")

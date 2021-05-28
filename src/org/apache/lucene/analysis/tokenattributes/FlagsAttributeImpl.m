@@ -11,6 +11,12 @@
 #include "org/apache/lucene/util/AttributeImpl.h"
 #include "org/apache/lucene/util/AttributeReflector.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/tokenattributes/FlagsAttributeImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl () {
  @public
   jint flags_;
@@ -40,11 +46,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)other {
-  if (self == other) {
+  if (JreObjectEqualsEquals(self, other)) {
     return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl class]]) {
-    return ((OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *) nil_chk(((OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *) cast_chk(other, [OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl class]))))->flags_ == flags_;
+    return ((OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *) nil_chk(((OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *) other)))->flags_ == flags_;
   }
   return false;
 }
@@ -63,20 +69,33 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "FlagsAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "getFlags", NULL, "I", 0x1, NULL, NULL },
-    { "setFlagsWithInt:", "setFlags", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getFlags);
+  methods[2].selector = @selector(setFlagsWithInt:);
+  methods[3].selector = @selector(clear);
+  methods[4].selector = @selector(isEqual:);
+  methods[5].selector = @selector(hash);
+  methods[6].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[7].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "flags_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "flags_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl = { 2, "FlagsAttributeImpl", "org.apache.lucene.analysis.tokenattributes", NULL, 0x1, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "setFlags", "I", "equals", "LNSObject;", "hashCode", "copyTo", "LOrgApacheLuceneUtilAttributeImpl;", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl = { "FlagsAttributeImpl", "org.apache.lucene.analysis.tokenattributes", ptrTable, methods, fields, 7, 0x1, 8, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl;
 }
 

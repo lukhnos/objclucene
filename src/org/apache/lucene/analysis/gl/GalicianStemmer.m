@@ -10,31 +10,35 @@
 #include "org/apache/lucene/analysis/gl/GalicianStemmer.h"
 #include "org/apache/lucene/analysis/pt/RSLPStemmerBase.h"
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_plural();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/gl/GalicianStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_plural(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_plural;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGlGalicianStemmer, plural, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_unification();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_unification(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_unification;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGlGalicianStemmer, unification, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_adverb();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_adverb(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_adverb;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGlGalicianStemmer, adverb, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_augmentative();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_augmentative(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_augmentative;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGlGalicianStemmer, augmentative, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_noun();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_noun(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_noun;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGlGalicianStemmer, noun, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_verb();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_verb(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_verb;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGlGalicianStemmer, verb, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_vowel();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_get_vowel(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisGlGalicianStemmer_vowel;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisGlGalicianStemmer, vowel, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
@@ -42,9 +46,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisGlGalicianStemmer)
 
 @implementation OrgApacheLuceneAnalysisGlGalicianStemmer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisGlGalicianStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
-  JreAssert((((IOSCharArray *) nil_chk(s))->size_ >= len + 1), (@"this stemmer requires an oversized array of at least 1"));
+  JreAssert(((IOSCharArray *) nil_chk(s))->size_ >= len + 1, @"this stemmer requires an oversized array of at least 1");
   len = [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisGlGalicianStemmer_plural)) applyWithCharArray:s withInt:len];
   len = [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisGlGalicianStemmer_unification)) applyWithCharArray:s withInt:len];
   len = [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisGlGalicianStemmer_adverb)) applyWithCharArray:s withInt:len];
@@ -81,12 +92,30 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisGlGalicianStemmer)
   return len;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisGlGalicianStemmer_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "plural", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 2, -1, -1 },
+    { "unification", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 3, -1, -1 },
+    { "adverb", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 4, -1, -1 },
+    { "augmentative", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "noun", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 6, -1, -1 },
+    { "verb", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 7, -1, -1 },
+    { "vowel", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 8, -1, -1 },
+  };
+  static const void *ptrTable[] = { "stem", "[CI", &OrgApacheLuceneAnalysisGlGalicianStemmer_plural, &OrgApacheLuceneAnalysisGlGalicianStemmer_unification, &OrgApacheLuceneAnalysisGlGalicianStemmer_adverb, &OrgApacheLuceneAnalysisGlGalicianStemmer_augmentative, &OrgApacheLuceneAnalysisGlGalicianStemmer_noun, &OrgApacheLuceneAnalysisGlGalicianStemmer_verb, &OrgApacheLuceneAnalysisGlGalicianStemmer_vowel };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGlGalicianStemmer = { "GalicianStemmer", "org.apache.lucene.analysis.gl", ptrTable, methods, fields, 7, 0x1, 2, 7, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisGlGalicianStemmer;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisGlGalicianStemmer class]) {
@@ -102,24 +131,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisGlGalicianStemmer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "init", "GalicianStemmer", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "plural", "plural", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisGlGalicianStemmer_plural, NULL, .constantValue.asLong = 0 },
-    { "unification", "unification", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisGlGalicianStemmer_unification, NULL, .constantValue.asLong = 0 },
-    { "adverb", "adverb", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisGlGalicianStemmer_adverb, NULL, .constantValue.asLong = 0 },
-    { "augmentative", "augmentative", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisGlGalicianStemmer_augmentative, NULL, .constantValue.asLong = 0 },
-    { "noun", "noun", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisGlGalicianStemmer_noun, NULL, .constantValue.asLong = 0 },
-    { "verb", "verb", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisGlGalicianStemmer_verb, NULL, .constantValue.asLong = 0 },
-    { "vowel", "vowel", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisGlGalicianStemmer_vowel, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGlGalicianStemmer = { 2, "GalicianStemmer", "org.apache.lucene.analysis.gl", NULL, 0x1, 2, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisGlGalicianStemmer;
 }
 
 @end

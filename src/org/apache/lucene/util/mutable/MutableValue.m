@@ -7,7 +7,18 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/mutable/MutableValue must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilMutableMutableValue
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilMutableMutableValue_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copy__WithOrgApacheLuceneUtilMutableMutableValue:(OrgApacheLuceneUtilMutableMutableValue *)source {
   // can't call an abstract method
@@ -44,9 +55,9 @@
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilMutableMutableValue *)other {
   cast_chk(other, [OrgApacheLuceneUtilMutableMutableValue class]);
-  IOSClass *c1 = [self getClass];
-  IOSClass *c2 = [((OrgApacheLuceneUtilMutableMutableValue *) nil_chk(other)) getClass];
-  if (c1 != c2) {
+  IOSClass *c1 = [self java_getClass];
+  IOSClass *c2 = [((OrgApacheLuceneUtilMutableMutableValue *) nil_chk(other)) java_getClass];
+  if (!JreObjectEqualsEquals(c1, c2)) {
     jint c = ((jint) [c1 hash]) - ((jint) [c2 hash]);
     if (c == 0) {
       c = [((NSString *) nil_chk([c1 getCanonicalName])) compareToWithId:[c2 getCanonicalName]];
@@ -57,7 +68,7 @@
 }
 
 - (jboolean)isEqual:(id)other {
-  return ([self getClass] == (id) [nil_chk(other) getClass]) && [self equalsSameTypeWithId:other];
+  return (JreObjectEqualsEquals([self java_getClass], [nil_chk(other) java_getClass])) && [self equalsSameTypeWithId:other];
 }
 
 - (NSUInteger)hash {
@@ -70,31 +81,40 @@
   return [self exists] ? [nil_chk([self toObject]) description] : @"(null)";
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilMutableMutableValue_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "copy__WithOrgApacheLuceneUtilMutableMutableValue:", "copy", "V", 0x401, NULL, NULL },
-    { "duplicate", NULL, "Lorg.apache.lucene.util.mutable.MutableValue;", 0x401, NULL, NULL },
-    { "equalsSameTypeWithId:", "equalsSameType", "Z", 0x401, NULL, NULL },
-    { "compareSameTypeWithId:", "compareSameType", "I", 0x401, NULL, NULL },
-    { "toObject", NULL, "Ljava.lang.Object;", 0x401, NULL, NULL },
-    { "exists", NULL, "Z", 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x401, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "MutableValue", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilMutableMutableValue;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, 4, 3, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 5, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 6, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, 7, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(copy__WithOrgApacheLuceneUtilMutableMutableValue:);
+  methods[2].selector = @selector(duplicate);
+  methods[3].selector = @selector(equalsSameTypeWithId:);
+  methods[4].selector = @selector(compareSameTypeWithId:);
+  methods[5].selector = @selector(toObject);
+  methods[6].selector = @selector(exists);
+  methods[7].selector = @selector(compareToWithId:);
+  methods[8].selector = @selector(isEqual:);
+  methods[9].selector = @selector(hash);
+  methods[10].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "exists_", NULL, 0x1, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "exists_", "Z", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMutableMutableValue = { 2, "MutableValue", "org.apache.lucene.util.mutable", NULL, 0x401, 11, methods, 1, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/mutable/MutableValue;>;" };
+  static const void *ptrTable[] = { "copy", "LOrgApacheLuceneUtilMutableMutableValue;", "equalsSameType", "LNSObject;", "compareSameType", "compareTo", "equals", "hashCode", "toString", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/mutable/MutableValue;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMutableMutableValue = { "MutableValue", "org.apache.lucene.util.mutable", ptrTable, methods, fields, 7, 0x401, 11, 1, -1, -1, -1, 9, -1 };
   return &_OrgApacheLuceneUtilMutableMutableValue;
 }
 

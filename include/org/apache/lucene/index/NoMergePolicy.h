@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexNoMergePolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexNoMergePolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexNoMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexNoMergePolicy))
 #define OrgApacheLuceneIndexNoMergePolicy_
 
@@ -28,13 +34,11 @@
 @protocol JavaUtilMap;
 
 /*!
- @brief A <code>MergePolicy</code> which never returns merges to execute.
- Use it if you
- want to prevent segment merges.
+ @brief A <code>MergePolicy</code> which never returns merges to execute.Use it if you
+  want to prevent segment merges.
  */
 @interface OrgApacheLuceneIndexNoMergePolicy : OrgApacheLuceneIndexMergePolicy
-
-+ (OrgApacheLuceneIndexMergePolicy *)INSTANCE;
+@property (readonly, class, strong) OrgApacheLuceneIndexMergePolicy *INSTANCE NS_SWIFT_NAME(INSTANCE);
 
 #pragma mark Public
 
@@ -61,6 +65,11 @@
 - (jlong)sizeWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
                    withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithDouble:(jdouble)arg0
+                                withLong:(jlong)arg1 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexNoMergePolicy)
@@ -68,7 +77,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexNoMergePolicy)
 /*!
  @brief Singleton instance.
  */
-inline OrgApacheLuceneIndexMergePolicy *OrgApacheLuceneIndexNoMergePolicy_get_INSTANCE();
+inline OrgApacheLuceneIndexMergePolicy *OrgApacheLuceneIndexNoMergePolicy_get_INSTANCE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneIndexMergePolicy *OrgApacheLuceneIndexNoMergePolicy_INSTANCE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexNoMergePolicy, INSTANCE, OrgApacheLuceneIndexMergePolicy *)
@@ -77,4 +86,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNoMergePolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexNoMergePolicy")

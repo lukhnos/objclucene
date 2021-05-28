@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexRandomAccessOrds
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexRandomAccessOrds_) && (INCLUDE_ALL_OrgApacheLuceneIndexRandomAccessOrds || defined(INCLUDE_OrgApacheLuceneIndexRandomAccessOrds))
 #define OrgApacheLuceneIndexRandomAccessOrds_
 
@@ -22,13 +28,13 @@
 
 /*!
  @brief Extension of <code>SortedSetDocValues</code> that supports random access
- to the ordinals of a document.
+  to the ordinals of a document.
  <p>
- Operations via this API are independent of the iterator api (<code>nextOrd()</code>)
- and do not impact its state.
+  Operations via this API are independent of the iterator api (<code>nextOrd()</code>)
+  and do not impact its state. 
  <p>
- Codecs can optionally extend this API if they support constant-time access
- to ordinals for the document.
+  Codecs can optionally extend this API if they support constant-time access
+  to ordinals for the document.
  */
 @interface OrgApacheLuceneIndexRandomAccessOrds : OrgApacheLuceneIndexSortedSetDocValues
 
@@ -36,17 +42,17 @@
 
 /*!
  @brief Returns the cardinality for the current document (previously
- set by <code>setDocument(int)</code>.
+  set by <code>setDocument(int)</code>.
  */
 - (jint)cardinality;
 
 /*!
  @brief Retrieve the ordinal for the current document (previously
- set by <code>setDocument(int)</code> at the specified index.
+  set by <code>setDocument(int)</code> at the specified index.
  <p>
- An index ranges from <code>0</code> to <code>cardinality()-1</code>.
- The first ordinal value is at index <code>0</code>, the next at index <code>1</code>,
- and so on, as for array indexing.
+  An index ranges from <code>0</code> to <code>cardinality()-1</code>.
+  The first ordinal value is at index <code>0</code>, the next at index <code>1</code>,
+  and so on, as for array indexing.
  @param index index of the ordinal for the document.
  @return ordinal for the document at the specified index.
  */
@@ -57,9 +63,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+  constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -71,4 +77,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexRandomAccessOrds)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexRandomAccessOrds")

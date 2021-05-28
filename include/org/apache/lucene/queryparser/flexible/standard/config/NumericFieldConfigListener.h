@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener))
 #define OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener_
 
@@ -24,9 +30,9 @@
 @class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 
 /*!
- @brief This listener is used to listen to <code>FieldConfig</code> requests in
+ @brief This listener is used to listen to <code>FieldConfig</code> requests in 
  <code>QueryConfigHandler</code> and add <code>ConfigurationKeys.NUMERIC_CONFIG</code>
- based on the <code>ConfigurationKeys.NUMERIC_CONFIG_MAP</code> set in the
+  based on the <code>ConfigurationKeys.NUMERIC_CONFIG_MAP</code> set in the 
  <code>QueryConfigHandler</code>.
  - seealso: NumericConfig
  - seealso: QueryConfigHandler
@@ -39,11 +45,15 @@
 
 /*!
  @brief Construcs a <code>NumericFieldConfigListener</code> object using the given <code>QueryConfigHandler</code>.
- @param config the <code>QueryConfigHandler</code> it will listen too
+ @param config the <code>QueryConfigHandler</code>  it will listen too
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)config;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)config;
 
 - (void)buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)fieldConfig;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -59,4 +69,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumer
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener")

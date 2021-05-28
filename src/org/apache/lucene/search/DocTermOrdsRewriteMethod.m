@@ -14,6 +14,10 @@
 #include "org/apache/lucene/search/MultiTermQuery.h"
 #include "org/apache/lucene/search/Query.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/DocTermOrdsRewriteMethod must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchDocTermOrdsRewriteMethod () {
  @public
   OrgApacheLuceneSearchDocValuesRewriteMethod *rewriteMethod_;
@@ -23,23 +27,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocTermOrdsRewriteMethod, rewriteMethod_, OrgApacheLuceneSearchDocValuesRewriteMethod *)
 
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchDocTermOrdsRewriteMethod__Annotations$0(void);
+
 @implementation OrgApacheLuceneSearchDocTermOrdsRewriteMethod
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                   withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
-  return [((OrgApacheLuceneSearchDocValuesRewriteMethod *) nil_chk(rewriteMethod_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:query];
-}
-
-- (jboolean)isEqual:(id)obj {
-  if (self == obj) return true;
-  if (obj == nil) return false;
-  if ([self getClass] != (id) [obj getClass]) return false;
-  return true;
-}
-
-- (NSUInteger)hash {
-  return 877;
-}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -48,8 +38,20 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                   withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
+  return [((OrgApacheLuceneSearchDocValuesRewriteMethod *) nil_chk(rewriteMethod_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:query];
+}
+
+- (jboolean)isEqual:(id)obj {
+  if (JreObjectEqualsEquals(self, obj)) return true;
+  if (obj == nil) return false;
+  if (!JreObjectEqualsEquals([self java_getClass], [obj java_getClass])) return false;
+  return true;
+}
+
+- (NSUInteger)hash {
+  return 877;
 }
 
 - (void)dealloc {
@@ -58,16 +60,25 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", "DocTermOrdsRewriteMethod", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(hash);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "rewriteMethod_", NULL, 0x12, "Lorg.apache.lucene.search.DocValuesRewriteMethod;", NULL, NULL, .constantValue.asLong = 0 },
+    { "rewriteMethod_", "LOrgApacheLuceneSearchDocValuesRewriteMethod;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocTermOrdsRewriteMethod = { 2, "DocTermOrdsRewriteMethod", "org.apache.lucene.search", NULL, 0x11, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "rewrite", "LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneSearchMultiTermQuery;", "equals", "LNSObject;", "hashCode", (void *)&OrgApacheLuceneSearchDocTermOrdsRewriteMethod__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocTermOrdsRewriteMethod = { "DocTermOrdsRewriteMethod", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 4, 1, -1, -1, -1, -1, 5 };
   return &_OrgApacheLuceneSearchDocTermOrdsRewriteMethod;
 }
 
@@ -84,6 +95,10 @@ OrgApacheLuceneSearchDocTermOrdsRewriteMethod *new_OrgApacheLuceneSearchDocTermO
 
 OrgApacheLuceneSearchDocTermOrdsRewriteMethod *create_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init() {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocTermOrdsRewriteMethod, init)
+}
+
+IOSObjectArray *OrgApacheLuceneSearchDocTermOrdsRewriteMethod__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocTermOrdsRewriteMethod)

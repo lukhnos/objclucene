@@ -21,6 +21,10 @@
 #include "org/apache/lucene/util/GeoUtils.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/GeoPointDistanceQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchGeoPointDistanceQuery ()
 
 - (instancetype)initWithNSString:(NSString *)field
@@ -59,15 +63,15 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   if (maxLon_ < minLon_) {
     OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
-    OrgApacheLuceneSearchGeoPointDistanceQueryImpl *left = create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(-180.0, maxLon_, minLat_, maxLat_));
+    OrgApacheLuceneSearchGeoPointDistanceQueryImpl *left = create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initPackagePrivateWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, create_OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(-180.0, maxLon_, minLat_, maxLat_));
     [left setBoostWithFloat:[self getBoost]];
     [bq addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(left, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD))];
-    OrgApacheLuceneSearchGeoPointDistanceQueryImpl *right = create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(minLon_, 180.0, minLat_, maxLat_));
+    OrgApacheLuceneSearchGeoPointDistanceQueryImpl *right = create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initPackagePrivateWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, create_OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(minLon_, 180.0, minLat_, maxLat_));
     [right setBoostWithFloat:[self getBoost]];
     [bq addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(right, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD))];
     return [bq build];
   }
-  return create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(self->minLon_, self->maxLon_, self->minLat_, self->maxLat_));
+  return create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initPackagePrivateWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, create_OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(self->minLon_, self->maxLon_, self->minLat_, self->maxLat_));
 }
 
 + (OrgApacheLuceneSearchGeoBoundingBox *)computeBBoxWithDouble:(jdouble)centerLon
@@ -77,7 +81,7 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return true;
+  if (JreObjectEqualsEquals(self, o)) return true;
   if (!([o isKindOfClass:[OrgApacheLuceneSearchGeoPointDistanceQuery class]])) return false;
   if (![super isEqual:o]) return false;
   OrgApacheLuceneSearchGeoPointDistanceQuery *that = (OrgApacheLuceneSearchGeoPointDistanceQuery *) cast_chk(o, [OrgApacheLuceneSearchGeoPointDistanceQuery class]);
@@ -101,7 +105,7 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
-  [sb appendWithNSString:[[self getClass] getSimpleName]];
+  [sb appendWithNSString:[[self java_getClass] getSimpleName]];
   [sb appendWithChar:':'];
   if (![((NSString *) nil_chk(self->field_)) isEqual:field]) {
     [sb appendWithNSString:@" field="];
@@ -124,24 +128,39 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDouble:withDouble:withDouble:", "GeoPointDistanceQuery", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneSearchGeoBoundingBox:withDouble:withDouble:withDouble:", "GeoPointDistanceQuery", NULL, 0x2, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "computeBBoxWithDouble:withDouble:withDouble:", "computeBBox", "Lorg.apache.lucene.search.GeoBoundingBox;", 0x8, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getCenterLon", NULL, "D", 0x1, NULL, NULL },
-    { "getCenterLat", NULL, "D", 0x1, NULL, NULL },
-    { "getRadius", NULL, "D", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchGeoBoundingBox;", 0x8, 4, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 8, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withDouble:withDouble:withDouble:);
+  methods[1].selector = @selector(initWithNSString:withOrgApacheLuceneSearchGeoBoundingBox:withDouble:withDouble:withDouble:);
+  methods[2].selector = @selector(rewriteWithOrgApacheLuceneIndexIndexReader:);
+  methods[3].selector = @selector(computeBBoxWithDouble:withDouble:withDouble:);
+  methods[4].selector = @selector(isEqual:);
+  methods[5].selector = @selector(hash);
+  methods[6].selector = @selector(toStringWithNSString:);
+  methods[7].selector = @selector(getCenterLon);
+  methods[8].selector = @selector(getCenterLat);
+  methods[9].selector = @selector(getRadius);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "centerLon_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "centerLat_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "radius_", NULL, 0x14, "D", NULL, NULL, .constantValue.asLong = 0 },
+    { "centerLon_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "centerLat_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
+    { "radius_", "D", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointDistanceQuery = { 2, "GeoPointDistanceQuery", "org.apache.lucene.search", NULL, 0x11, 10, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LNSString;DDD", "LNSString;LOrgApacheLuceneSearchGeoBoundingBox;DDD", "rewrite", "LOrgApacheLuceneIndexIndexReader;", "computeBBox", "DDD", "equals", "LNSObject;", "hashCode", "toString", "LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointDistanceQuery = { "GeoPointDistanceQuery", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 10, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchGeoPointDistanceQuery;
 }
 
@@ -186,7 +205,7 @@ OrgApacheLuceneSearchGeoBoundingBox *OrgApacheLuceneSearchGeoPointDistanceQuery_
   IOSDoubleArray *r = OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(centerLon, centerLat, 90, radius, nil);
   IOSDoubleArray *b = OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(centerLon, centerLat, 180, radius, nil);
   IOSDoubleArray *l = OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(centerLon, centerLat, 270, radius, nil);
-  return create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneUtilGeoUtils_normalizeLonWithDouble_(IOSDoubleArray_Get(nil_chk(l), 0)), OrgApacheLuceneUtilGeoUtils_normalizeLonWithDouble_(IOSDoubleArray_Get(nil_chk(r), 0)), OrgApacheLuceneUtilGeoUtils_normalizeLatWithDouble_(IOSDoubleArray_Get(nil_chk(b), 1)), OrgApacheLuceneUtilGeoUtils_normalizeLatWithDouble_(IOSDoubleArray_Get(nil_chk(t), 1)));
+  return create_OrgApacheLuceneSearchGeoBoundingBox_initPackagePrivateWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneUtilGeoUtils_normalizeLonWithDouble_(IOSDoubleArray_Get(nil_chk(l), 0)), OrgApacheLuceneUtilGeoUtils_normalizeLonWithDouble_(IOSDoubleArray_Get(nil_chk(r), 0)), OrgApacheLuceneUtilGeoUtils_normalizeLatWithDouble_(IOSDoubleArray_Get(nil_chk(b), 1)), OrgApacheLuceneUtilGeoUtils_normalizeLatWithDouble_(IOSDoubleArray_Get(nil_chk(t), 1)));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointDistanceQuery)

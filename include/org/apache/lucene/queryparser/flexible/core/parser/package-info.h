@@ -6,15 +6,15 @@
 /*!
  @brief Necessary interfaces to implement text parsers.
  <h2>Parser</h2>
- <p>
- The package <tt>org.apache.lucene.queryparser.flexible.parser</tt> contains interfaces
- that should be implemented by the parsers.
- Parsers produce QueryNode Trees from a string object.
- These package still needs some work to add support to for multiple parsers.
- Features that should be supported for the future, related with the parser:
- - QueryNode tree should be able convertible to any parser syntax.
- - The query syntax should support calling other parsers.
- - QueryNode tree created by multiple parsers.
+  <p>
+  The package <tt>org.apache.lucene.queryparser.flexible.parser</tt> contains interfaces
+  that should be implemented by the parsers. 
+  Parsers produce QueryNode Trees from a string object.
+  These package still needs some work to add support to for multiple parsers. 
+  Features that should be supported for the future, related with the parser:
+  - QueryNode tree should be able convertible to any parser syntax.
+  - The query syntax should support calling other parsers.
+  - QueryNode tree created by multiple parsers.
  */
 #include "J2ObjC_header.h"
 
@@ -26,4 +26,14 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info")

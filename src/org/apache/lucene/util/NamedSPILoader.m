@@ -8,6 +8,7 @@
 #include "java/lang/ClassLoader.h"
 #include "java/lang/Exception.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Iterable.h"
 #include "java/lang/Thread.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
@@ -16,8 +17,14 @@
 #include "java/util/Map.h"
 #include "java/util/ServiceConfigurationError.h"
 #include "java/util/Set.h"
+#include "java/util/Spliterator.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/util/NamedSPILoader.h"
 #include "org/apache/lucene/util/SPIClassIterator.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/NamedSPILoader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneUtilNamedSPILoader () {
  @public
@@ -68,7 +75,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilNamedSPILoader_isLett
       }
     }
     @catch (JavaLangException *e) {
-      @throw create_JavaUtilServiceConfigurationError_initWithNSString_withNSException_(JreStrcat("$$", @"Cannot instantiate SPI class: ", [c getName]), e);
+      @throw create_JavaUtilServiceConfigurationError_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Cannot instantiate SPI class: ", [c getName]), e);
     }
   }
   JreVolatileStrongAssign(&self->services_, JavaUtilCollections_unmodifiableMapWithJavaUtilMap_(services));
@@ -82,7 +89,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilNamedSPILoader_isLett
   return OrgApacheLuceneUtilNamedSPILoader_isLetterOrDigitWithChar_(c);
 }
 
-- (id)lookupWithNSString:(NSString *)name {
+- (id<OrgApacheLuceneUtilNamedSPILoader_NamedSPI>)lookupWithNSString:(NSString *)name {
   id<OrgApacheLuceneUtilNamedSPILoader_NamedSPI> service = [((id<JavaUtilMap>) nil_chk(JreLoadVolatileId(&services_))) getWithId:name];
   if (service != nil) return service;
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$$@", @"An SPI class of type ", [((IOSClass *) nil_chk(clazz_)) getName], @" with name '", name, @"' does not exist.  You need to add the corresponding JAR file supporting this SPI to your classpath.  The current classpath supports the following names: ", [self availableServices]));
@@ -96,13 +103,21 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilNamedSPILoader_isLett
   return [((id<JavaUtilCollection>) nil_chk([((id<JavaUtilMap>) nil_chk(JreLoadVolatileId(&services_))) values])) iterator];
 }
 
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
+}
+
 - (void)__javaClone:(OrgApacheLuceneUtilNamedSPILoader *)original {
   [super __javaClone:original];
   JreCloneVolatileStrong(&services_, &original->services_);
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -112,22 +127,34 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilNamedSPILoader_isLett
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithIOSClass:", "NamedSPILoader", NULL, 0x1, NULL, "(Ljava/lang/Class<TS;>;)V" },
-    { "initWithIOSClass:withJavaLangClassLoader:", "NamedSPILoader", NULL, 0x1, NULL, "(Ljava/lang/Class<TS;>;Ljava/lang/ClassLoader;)V" },
-    { "reloadWithJavaLangClassLoader:", "reload", "V", 0x1, NULL, NULL },
-    { "checkServiceNameWithNSString:", "checkServiceName", "V", 0x9, NULL, NULL },
-    { "isLetterOrDigitWithChar:", "isLetterOrDigit", "Z", 0xa, NULL, NULL },
-    { "lookupWithNSString:", "lookup", "TS;", 0x1, NULL, "(Ljava/lang/String;)TS;" },
-    { "availableServices", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<TS;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, 3, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 6, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilNamedSPILoader_NamedSPI;", 0x1, 10, 7, -1, 11, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 12, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 13, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIOSClass:);
+  methods[1].selector = @selector(initWithIOSClass:withJavaLangClassLoader:);
+  methods[2].selector = @selector(reloadWithJavaLangClassLoader:);
+  methods[3].selector = @selector(checkServiceNameWithNSString:);
+  methods[4].selector = @selector(isLetterOrDigitWithChar:);
+  methods[5].selector = @selector(lookupWithNSString:);
+  methods[6].selector = @selector(availableServices);
+  methods[7].selector = @selector(iterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "services_", NULL, 0x42, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;TS;>;", .constantValue.asLong = 0 },
-    { "clazz_", NULL, 0x12, "Ljava.lang.Class;", NULL, "Ljava/lang/Class<TS;>;", .constantValue.asLong = 0 },
+    { "services_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x42, -1, -1, 14, -1 },
+    { "clazz_", "LIOSClass;", .constantValue.asLong = 0, 0x12, -1, -1, 15, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.NamedSPILoader$NamedSPI;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNamedSPILoader = { 2, "NamedSPILoader", "org.apache.lucene.util", NULL, 0x11, 8, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, "<S::Lorg/apache/lucene/util/NamedSPILoader$NamedSPI;>Ljava/lang/Object;Ljava/lang/Iterable<TS;>;" };
+  static const void *ptrTable[] = { "LIOSClass;", "(Ljava/lang/Class<TS;>;)V", "LIOSClass;LJavaLangClassLoader;", "(Ljava/lang/Class<TS;>;Ljava/lang/ClassLoader;)V", "reload", "LJavaLangClassLoader;", "checkServiceName", "LNSString;", "isLetterOrDigit", "C", "lookup", "(Ljava/lang/String;)TS;", "()Ljava/util/Set<Ljava/lang/String;>;", "()Ljava/util/Iterator<TS;>;", "Ljava/util/Map<Ljava/lang/String;TS;>;", "Ljava/lang/Class<TS;>;", "LOrgApacheLuceneUtilNamedSPILoader_NamedSPI;", "<S::Lorg/apache/lucene/util/NamedSPILoader$NamedSPI;>Ljava/lang/Object;Ljava/lang/Iterable<TS;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNamedSPILoader = { "NamedSPILoader", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 8, 2, -1, 16, -1, 17, -1 };
   return &_OrgApacheLuceneUtilNamedSPILoader;
 }
 
@@ -166,10 +193,10 @@ OrgApacheLuceneUtilNamedSPILoader *create_OrgApacheLuceneUtilNamedSPILoader_init
 
 void OrgApacheLuceneUtilNamedSPILoader_checkServiceNameWithNSString_(NSString *name) {
   OrgApacheLuceneUtilNamedSPILoader_initialize();
-  if (((jint) [((NSString *) nil_chk(name)) length]) >= 128) {
+  if ([((NSString *) nil_chk(name)) java_length] >= 128) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Illegal service name: '", name, @"' is too long (must be < 128 chars)."));
   }
-  for (jint i = 0, len = ((jint) [name length]); i < len; i++) {
+  for (jint i = 0, len = [name java_length]; i < len; i++) {
     jchar c = [name charAtWithInt:i];
     if (!OrgApacheLuceneUtilNamedSPILoader_isLetterOrDigitWithChar_(c)) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Illegal service name: '", name, @"' must be simple ascii alphanumeric."));
@@ -187,10 +214,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNamedSPILoader)
 @implementation OrgApacheLuceneUtilNamedSPILoader_NamedSPI
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getName", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNamedSPILoader_NamedSPI = { 2, "NamedSPI", "org.apache.lucene.util", "NamedSPILoader", 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(getName);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilNamedSPILoader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNamedSPILoader_NamedSPI = { "NamedSPI", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x609, 1, 0, 0, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilNamedSPILoader_NamedSPI;
 }
 

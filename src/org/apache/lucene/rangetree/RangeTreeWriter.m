@@ -14,8 +14,13 @@
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
+#include "java/lang/Throwable.h"
 #include "java/util/Arrays.h"
 #include "java/util/Comparator.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/rangetree/GrowingHeapSliceWriter.h"
 #include "org/apache/lucene/rangetree/HeapSliceWriter.h"
 #include "org/apache/lucene/rangetree/OfflineSliceWriter.h"
@@ -31,12 +36,17 @@
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/InPlaceMergeSorter.h"
 #include "org/apache/lucene/util/OfflineSorter.h"
-#include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/lukhnos/portmobile/file/DirectoryStream.h"
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
 
 @class OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/rangetree/RangeTreeWriter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneRangetreeRangeTreeWriter () {
  @public
@@ -60,7 +70,7 @@
 
 /*!
  @brief Changes incoming <code>ByteSequencesWriter</code> file to to fixed-width-per-entry file, because we need to be able to slice
- as we recurse in <code>build</code>.
+   as we recurse in <code>build</code>.
  */
 - (id<OrgApacheLuceneRangetreeSliceWriter>)convertToFixedWidthWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)inArg;
 
@@ -106,6 +116,52 @@ __attribute__((unused)) static jlong OrgApacheLuceneRangetreeRangeTreeWriter_get
 
 __attribute__((unused)) static void OrgApacheLuceneRangetreeRangeTreeWriter_buildWithInt_withInt_withOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_withOrgApacheLuceneStoreIndexOutput_withLong_withLong_withLongArray_withLongArray_(OrgApacheLuceneRangetreeRangeTreeWriter *self, jint nodeID, jint leafNodeOffset, OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *source, OrgApacheLuceneStoreIndexOutput *outArg, jlong minValue, jlong maxValue, IOSLongArray *blockMinValues, IOSLongArray *leafBlockFPs);
 
+@interface OrgApacheLuceneRangetreeRangeTreeWriter_1 : OrgApacheLuceneUtilInPlaceMergeSorter {
+ @public
+  OrgApacheLuceneRangetreeRangeTreeWriter *this$0_;
+}
+
+- (instancetype)initWithOrgApacheLuceneRangetreeRangeTreeWriter:(OrgApacheLuceneRangetreeRangeTreeWriter *)outer$;
+
+- (void)swapWithInt:(jint)i
+            withInt:(jint)j;
+
+- (jint)compareWithInt:(jint)i
+               withInt:(jint)j;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeWriter_1)
+
+__attribute__((unused)) static void OrgApacheLuceneRangetreeRangeTreeWriter_1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter_1 *self, OrgApacheLuceneRangetreeRangeTreeWriter *outer$);
+
+__attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeWriter_1 *new_OrgApacheLuceneRangetreeRangeTreeWriter_1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeWriter_1 *create_OrgApacheLuceneRangetreeRangeTreeWriter_1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter *outer$);
+
+@interface OrgApacheLuceneRangetreeRangeTreeWriter_2 : NSObject < JavaUtilComparator > {
+ @public
+  OrgApacheLuceneStoreByteArrayDataInput *val$reader_;
+  OrgApacheLuceneStoreByteArrayDataInput *readerB_;
+}
+
+- (instancetype)initWithOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInput *)capture$0;
+
+- (jint)compareWithId:(OrgApacheLuceneUtilBytesRef *)a
+               withId:(OrgApacheLuceneUtilBytesRef *)b;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeWriter_2)
+
+J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeWriter_2, readerB_, OrgApacheLuceneStoreByteArrayDataInput *)
+
+__attribute__((unused)) static void OrgApacheLuceneRangetreeRangeTreeWriter_2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneRangetreeRangeTreeWriter_2 *self, OrgApacheLuceneStoreByteArrayDataInput *capture$0);
+
+__attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeWriter_2 *new_OrgApacheLuceneRangetreeRangeTreeWriter_2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneStoreByteArrayDataInput *capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeWriter_2 *create_OrgApacheLuceneRangetreeRangeTreeWriter_2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneStoreByteArrayDataInput *capture$0);
+
 /*!
  @brief Sliced reference to points in an OfflineSorter.ByteSequencesWriter file.
  */
@@ -136,59 +192,6 @@ __attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice)
 
-@interface OrgApacheLuceneRangetreeRangeTreeWriter_$1 : OrgApacheLuceneUtilInPlaceMergeSorter {
- @public
-  OrgApacheLuceneRangetreeRangeTreeWriter *this$0_;
-}
-
-- (void)swapWithInt:(jint)i
-            withInt:(jint)j;
-
-- (jint)compareWithInt:(jint)i
-               withInt:(jint)j;
-
-- (instancetype)initWithOrgApacheLuceneRangetreeRangeTreeWriter:(OrgApacheLuceneRangetreeRangeTreeWriter *)outer$;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeWriter_$1)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeWriter_$1, this$0_, OrgApacheLuceneRangetreeRangeTreeWriter *)
-
-__attribute__((unused)) static void OrgApacheLuceneRangetreeRangeTreeWriter_$1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter_$1 *self, OrgApacheLuceneRangetreeRangeTreeWriter *outer$);
-
-__attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeWriter_$1 *new_OrgApacheLuceneRangetreeRangeTreeWriter_$1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter *outer$) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeWriter_$1 *create_OrgApacheLuceneRangetreeRangeTreeWriter_$1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeWriter_$1)
-
-@interface OrgApacheLuceneRangetreeRangeTreeWriter_$2 : NSObject < JavaUtilComparator > {
- @public
-  OrgApacheLuceneStoreByteArrayDataInput *readerB_;
-  OrgApacheLuceneStoreByteArrayDataInput *val$reader_;
-}
-
-- (jint)compareWithId:(OrgApacheLuceneUtilBytesRef *)a
-               withId:(OrgApacheLuceneUtilBytesRef *)b;
-
-- (instancetype)initWithOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInput *)capture$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeWriter_$2)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeWriter_$2, readerB_, OrgApacheLuceneStoreByteArrayDataInput *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeWriter_$2, val$reader_, OrgApacheLuceneStoreByteArrayDataInput *)
-
-__attribute__((unused)) static void OrgApacheLuceneRangetreeRangeTreeWriter_$2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneRangetreeRangeTreeWriter_$2 *self, OrgApacheLuceneStoreByteArrayDataInput *capture$0);
-
-__attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeWriter_$2 *new_OrgApacheLuceneRangetreeRangeTreeWriter_$2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneStoreByteArrayDataInput *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeWriter_$2 *create_OrgApacheLuceneRangetreeRangeTreeWriter_$2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneStoreByteArrayDataInput *capture$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeWriter_$2)
-
 @implementation OrgApacheLuceneRangetreeRangeTreeWriter
 
 + (jint)BYTES_PER_DOC {
@@ -203,16 +206,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeWriter_$2)
   return OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_SORT_IN_HEAP;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneRangetreeRangeTreeWriter_init(self);
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivate(self);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithInt:(jint)maxValuesInLeafNode
-                    withInt:(jint)maxValuesSortInHeap {
-  OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(self, maxValuesInLeafNode, maxValuesSortInHeap);
+- (instancetype)initPackagePrivateWithInt:(jint)maxValuesInLeafNode
+                                  withInt:(jint)maxValuesSortInHeap {
+  OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivateWithInt_withInt_(self, maxValuesInLeafNode, maxValuesSortInHeap);
   return self;
 }
 
@@ -273,7 +274,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint numLeaves = (jint) (innerNodeCount + 1);
   IOSLongArray *blockMinValues = [IOSLongArray arrayWithLength:numLeaves];
   IOSLongArray *leafBlockFPs = [IOSLongArray arrayWithLength:numLeaves];
-  JreAssert((valueCount_ / blockMinValues->size_ <= maxValuesInLeafNode_), (JreStrcat("$J$I$I", @"valueCount=", valueCount_, @" blockMinValues.length=", blockMinValues->size_, @" maxValuesInLeafNode=", maxValuesInLeafNode_)));
+  JreAssert(JreLongDiv(valueCount_, blockMinValues->size_) <= maxValuesInLeafNode_, JreStrcat("$J$I$I", @"valueCount=", valueCount_, @" blockMinValues.length=", blockMinValues->size_, @" maxValuesInLeafNode=", maxValuesInLeafNode_));
   id<OrgApacheLuceneRangetreeSliceWriter> sortedWriter = nil;
   jboolean success = false;
   @try {
@@ -291,14 +292,14 @@ J2OBJC_IGNORE_DESIGNATED_END
       @try {
         [((id<OrgApacheLuceneRangetreeSliceWriter>) nil_chk(sortedWriter)) destroy];
       }
-      @catch (NSException *t) {
+      @catch (JavaLangThrowable *t) {
       }
       OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgLukhnosPortmobileFilePathArray_([IOSObjectArray arrayWithObjects:(id[]){ tempInput_ } count:1 type:OrgLukhnosPortmobileFilePath_class_()]);
     }
   }
   jlong indexFP = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(outArg)) getFilePointer];
   [outArg writeVIntWithInt:numLeaves];
-  [outArg writeVIntWithInt:(jint) (valueCount_ / numLeaves)];
+  [outArg writeVIntWithInt:(jint) (JreLongDiv(valueCount_, numLeaves))];
   for (jint i = 0; i < blockMinValues->size_; i++) {
     [outArg writeLongWithLong:IOSLongArray_Get(blockMinValues, i)];
   }
@@ -307,7 +308,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   [outArg writeLongWithLong:globalMaxValue_];
   if (tempDir_ != nil) {
-    JreAssert((OrgApacheLuceneRangetreeRangeTreeWriter_directoryIsEmptyWithOrgLukhnosPortmobileFilePath_(self, tempDir_)), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:391 condition failed: assert directoryIsEmpty(tempDir);"));
+    JreAssert(OrgApacheLuceneRangetreeRangeTreeWriter_directoryIsEmptyWithOrgLukhnosPortmobileFilePath_(self, tempDir_), @"org/apache/lucene/rangetree/RangeTreeWriter.java:391 condition failed: assert directoryIsEmpty(tempDir);");
     OrgApacheLuceneUtilIOUtils_rmWithOrgLukhnosPortmobileFilePathArray_([IOSObjectArray arrayWithObjects:(id[]){ tempDir_ } count:1 type:OrgLukhnosPortmobileFilePath_class_()]);
   }
   return indexFP;
@@ -337,10 +338,10 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)outArg
 
 - (id<OrgApacheLuceneRangetreeSliceWriter>)getWriterWithLong:(jlong)count {
   if (count < maxValuesSortInHeap_) {
-    return create_OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_((jint) count);
+    return create_OrgApacheLuceneRangetreeHeapSliceWriter_initPackagePrivateWithInt_((jint) count);
   }
   else {
-    return create_OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(tempDir_, count);
+    return create_OrgApacheLuceneRangetreeOfflineSliceWriter_initPackagePrivateWithOrgLukhnosPortmobileFilePath_withLong_(tempDir_, count);
   }
 }
 
@@ -355,56 +356,72 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)outArg
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "RangeTreeWriter", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithInt:withInt:", "RangeTreeWriter", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "verifyParamsWithInt:withInt:", "verifyParams", "V", 0x9, NULL, NULL },
-    { "switchToOffline", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "addWithLong:withInt:", "add", "V", 0x0, "Ljava.io.IOException;", NULL },
-    { "convertToFixedWidthWithOrgLukhnosPortmobileFilePath:", "convertToFixedWidth", "Lorg.apache.lucene.rangetree.SliceWriter;", 0x2, "Ljava.io.IOException;", NULL },
-    { "sort", NULL, "Lorg.apache.lucene.rangetree.SliceWriter;", 0x2, "Ljava.io.IOException;", NULL },
-    { "finishWithOrgApacheLuceneStoreIndexOutput:", "finish", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "directoryIsEmptyWithOrgLukhnosPortmobileFilePath:", "directoryIsEmpty", "Z", 0x2, NULL, NULL },
-    { "getSplitValueWithOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice:withLong:withLong:withLong:", "getSplitValue", "J", 0x2, "Ljava.io.IOException;", NULL },
-    { "buildWithInt:withInt:withOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice:withOrgApacheLuceneStoreIndexOutput:withLong:withLong:withLongArray:withLongArray:", "build", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "getWriterWithLong:", "getWriter", "Lorg.apache.lucene.rangetree.SliceWriter;", 0x0, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, 0, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, 0, -1, -1, -1 },
+    { NULL, "V", 0x9, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x0, 3, 4, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneRangetreeSliceWriter;", 0x2, 5, 6, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneRangetreeSliceWriter;", 0x2, -1, -1, 0, -1, -1, -1 },
+    { NULL, "J", 0x1, 7, 8, 0, -1, -1, -1 },
+    { NULL, "Z", 0x2, 9, 6, -1, -1, -1, -1 },
+    { NULL, "J", 0x2, 10, 11, 0, -1, -1, -1 },
+    { NULL, "V", 0x2, 12, 13, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneRangetreeSliceWriter;", 0x0, 14, 15, 0, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(initPackagePrivateWithInt:withInt:);
+  methods[2].selector = @selector(verifyParamsWithInt:withInt:);
+  methods[3].selector = @selector(switchToOffline);
+  methods[4].selector = @selector(addWithLong:withInt:);
+  methods[5].selector = @selector(convertToFixedWidthWithOrgLukhnosPortmobileFilePath:);
+  methods[6].selector = @selector(sort);
+  methods[7].selector = @selector(finishWithOrgApacheLuceneStoreIndexOutput:);
+  methods[8].selector = @selector(directoryIsEmptyWithOrgLukhnosPortmobileFilePath:);
+  methods[9].selector = @selector(getSplitValueWithOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice:withLong:withLong:withLong:);
+  methods[10].selector = @selector(buildWithInt:withInt:withOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice:withOrgApacheLuceneStoreIndexOutput:withLong:withLong:withLongArray:withLongArray:);
+  methods[11].selector = @selector(getWriterWithLong:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "BYTES_PER_DOC", "BYTES_PER_DOC", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneRangetreeRangeTreeWriter_BYTES_PER_DOC },
-    { "DEFAULT_MAX_VALUES_IN_LEAF_NODE", "DEFAULT_MAX_VALUES_IN_LEAF_NODE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_IN_LEAF_NODE },
-    { "DEFAULT_MAX_VALUES_SORT_IN_HEAP", "DEFAULT_MAX_VALUES_SORT_IN_HEAP", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_SORT_IN_HEAP },
-    { "scratchBytes_", NULL, 0x12, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchBytesOutput_", NULL, 0x12, "Lorg.apache.lucene.store.ByteArrayDataOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "writer_", NULL, 0x2, "Lorg.apache.lucene.util.OfflineSorter$ByteSequencesWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "heapWriter_", NULL, 0x2, "Lorg.apache.lucene.rangetree.GrowingHeapSliceWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tempInput_", NULL, 0x2, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tempDir_", NULL, 0x2, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxValuesInLeafNode_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxValuesSortInHeap_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "valueCount_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "globalMinValue_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "globalMaxValue_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "BYTES_PER_DOC", "I", .constantValue.asInt = OrgApacheLuceneRangetreeRangeTreeWriter_BYTES_PER_DOC, 0x18, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_VALUES_IN_LEAF_NODE", "I", .constantValue.asInt = OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_IN_LEAF_NODE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_VALUES_SORT_IN_HEAP", "I", .constantValue.asInt = OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_SORT_IN_HEAP, 0x19, -1, -1, -1, -1 },
+    { "scratchBytes_", "[B", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "scratchBytesOutput_", "LOrgApacheLuceneStoreByteArrayDataOutput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "writer_", "LOrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "heapWriter_", "LOrgApacheLuceneRangetreeGrowingHeapSliceWriter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tempInput_", "LOrgLukhnosPortmobileFilePath;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tempDir_", "LOrgLukhnosPortmobileFilePath;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "maxValuesInLeafNode_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxValuesSortInHeap_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "valueCount_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "globalMinValue_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "globalMaxValue_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.rangetree.RangeTreeWriter$PathSlice;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeWriter = { 2, "RangeTreeWriter", "org.apache.lucene.rangetree", NULL, 0x0, 12, methods, 14, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoIOException;", "II", "verifyParams", "add", "JI", "convertToFixedWidth", "LOrgLukhnosPortmobileFilePath;", "finish", "LOrgApacheLuceneStoreIndexOutput;", "directoryIsEmpty", "getSplitValue", "LOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice;JJJ", "build", "IILOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice;LOrgApacheLuceneStoreIndexOutput;JJ[J[J", "getWriter", "J", "LOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeWriter = { "RangeTreeWriter", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x0, 12, 14, -1, 16, -1, -1, -1 };
   return &_OrgApacheLuceneRangetreeRangeTreeWriter;
 }
 
 @end
 
-void OrgApacheLuceneRangetreeRangeTreeWriter_init(OrgApacheLuceneRangetreeRangeTreeWriter *self) {
-  OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(self, OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_IN_LEAF_NODE, OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_SORT_IN_HEAP);
+void OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivate(OrgApacheLuceneRangetreeRangeTreeWriter *self) {
+  OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivateWithInt_withInt_(self, OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_IN_LEAF_NODE, OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_SORT_IN_HEAP);
 }
 
-OrgApacheLuceneRangetreeRangeTreeWriter *new_OrgApacheLuceneRangetreeRangeTreeWriter_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter, init)
+OrgApacheLuceneRangetreeRangeTreeWriter *new_OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter, initPackagePrivate)
 }
 
-OrgApacheLuceneRangetreeRangeTreeWriter *create_OrgApacheLuceneRangetreeRangeTreeWriter_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter, init)
+OrgApacheLuceneRangetreeRangeTreeWriter *create_OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter, initPackagePrivate)
 }
 
-void OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(OrgApacheLuceneRangetreeRangeTreeWriter *self, jint maxValuesInLeafNode, jint maxValuesSortInHeap) {
+void OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivateWithInt_withInt_(OrgApacheLuceneRangetreeRangeTreeWriter *self, jint maxValuesInLeafNode, jint maxValuesSortInHeap) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->scratchBytes_, [IOSByteArray newArrayWithLength:OrgApacheLuceneRangetreeRangeTreeWriter_BYTES_PER_DOC]);
   JreStrongAssignAndConsume(&self->scratchBytesOutput_, new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(self->scratchBytes_));
@@ -413,15 +430,15 @@ void OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(OrgApacheLucen
   OrgApacheLuceneRangetreeRangeTreeWriter_verifyParamsWithInt_withInt_(maxValuesInLeafNode, maxValuesSortInHeap);
   self->maxValuesInLeafNode_ = maxValuesInLeafNode;
   self->maxValuesSortInHeap_ = maxValuesSortInHeap;
-  JreStrongAssignAndConsume(&self->heapWriter_, new_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(maxValuesSortInHeap));
+  JreStrongAssignAndConsume(&self->heapWriter_, new_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initPackagePrivateWithInt_(maxValuesSortInHeap));
 }
 
-OrgApacheLuceneRangetreeRangeTreeWriter *new_OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter, initWithInt_withInt_, maxValuesInLeafNode, maxValuesSortInHeap)
+OrgApacheLuceneRangetreeRangeTreeWriter *new_OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivateWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter, initPackagePrivateWithInt_withInt_, maxValuesInLeafNode, maxValuesSortInHeap)
 }
 
-OrgApacheLuceneRangetreeRangeTreeWriter *create_OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter, initWithInt_withInt_, maxValuesInLeafNode, maxValuesSortInHeap)
+OrgApacheLuceneRangetreeRangeTreeWriter *create_OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivateWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter, initPackagePrivateWithInt_withInt_, maxValuesInLeafNode, maxValuesSortInHeap)
 }
 
 void OrgApacheLuceneRangetreeRangeTreeWriter_verifyParamsWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap) {
@@ -457,7 +474,7 @@ void OrgApacheLuceneRangetreeRangeTreeWriter_switchToOffline(OrgApacheLuceneRang
 id<OrgApacheLuceneRangetreeSliceWriter> OrgApacheLuceneRangetreeRangeTreeWriter_convertToFixedWidthWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneRangetreeRangeTreeWriter *self, OrgLukhnosPortmobileFilePath *inArg) {
   OrgApacheLuceneUtilBytesRefBuilder *scratch = create_OrgApacheLuceneUtilBytesRefBuilder_init();
   [scratch growWithInt:OrgApacheLuceneRangetreeRangeTreeWriter_BYTES_PER_DOC];
-  OrgApacheLuceneUtilBytesRef *bytes = [scratch get];
+  OrgApacheLuceneUtilBytesRef *bytes = JreRetainedLocalValue([scratch get]);
   OrgApacheLuceneStoreByteArrayDataInput *dataReader = create_OrgApacheLuceneStoreByteArrayDataInput_init();
   OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader = nil;
   id<OrgApacheLuceneRangetreeSliceWriter> sortedWriter = nil;
@@ -467,11 +484,11 @@ id<OrgApacheLuceneRangetreeSliceWriter> OrgApacheLuceneRangetreeRangeTreeWriter_
     sortedWriter = [self getWriterWithLong:self->valueCount_];
     for (jlong i = 0; i < self->valueCount_; i++) {
       jboolean result = [reader readWithOrgApacheLuceneUtilBytesRefBuilder:scratch];
-      JreAssert((result), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:178 condition failed: assert result;"));
+      JreAssert(result, @"org/apache/lucene/rangetree/RangeTreeWriter.java:178 condition failed: assert result;");
       [dataReader resetWithByteArray:((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes))->bytes_ withInt:bytes->offset_ withInt:bytes->length_];
       jlong value = [dataReader readLong];
       jint docID = [dataReader readVInt];
-      JreAssert((docID >= 0), (JreStrcat("$I", @"docID=", docID)));
+      JreAssert(docID >= 0, JreStrcat("$I", @"docID=", docID));
       jlong ord = [dataReader readVLong];
       [((id<OrgApacheLuceneRangetreeSliceWriter>) nil_chk(sortedWriter)) appendWithLong:value withLong:ord withInt:docID];
     }
@@ -486,7 +503,7 @@ id<OrgApacheLuceneRangetreeSliceWriter> OrgApacheLuceneRangetreeRangeTreeWriter_
       @try {
         [((id<OrgApacheLuceneRangetreeSliceWriter>) nil_chk(sortedWriter)) destroy];
       }
-      @catch (NSException *t) {
+      @catch (JavaLangThrowable *t) {
       }
     }
   }
@@ -495,19 +512,19 @@ id<OrgApacheLuceneRangetreeSliceWriter> OrgApacheLuceneRangetreeRangeTreeWriter_
 
 id<OrgApacheLuceneRangetreeSliceWriter> OrgApacheLuceneRangetreeRangeTreeWriter_sort(OrgApacheLuceneRangetreeRangeTreeWriter *self) {
   if (self->heapWriter_ != nil) {
-    JreAssert((self->valueCount_ < JavaLangInteger_MAX_VALUE), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:206 condition failed: assert valueCount < Integer.MAX_VALUE;"));
-    [create_OrgApacheLuceneRangetreeRangeTreeWriter_$1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(self) sortWithInt:0 withInt:(jint) self->valueCount_];
-    OrgApacheLuceneRangetreeHeapSliceWriter *sorted = create_OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_((jint) self->valueCount_);
+    JreAssert(self->valueCount_ < JavaLangInteger_MAX_VALUE, @"org/apache/lucene/rangetree/RangeTreeWriter.java:206 condition failed: assert valueCount < Integer.MAX_VALUE;");
+    [create_OrgApacheLuceneRangetreeRangeTreeWriter_1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(self) sortWithInt:0 withInt:(jint) self->valueCount_];
+    OrgApacheLuceneRangetreeHeapSliceWriter *sorted = create_OrgApacheLuceneRangetreeHeapSliceWriter_initPackagePrivateWithInt_((jint) self->valueCount_);
     for (jint i = 0; i < self->valueCount_; i++) {
       [sorted appendWithLong:IOSLongArray_Get(nil_chk(((OrgApacheLuceneRangetreeGrowingHeapSliceWriter *) nil_chk(self->heapWriter_))->values_), i) withLong:IOSLongArray_Get(nil_chk(self->heapWriter_->ords_), i) withInt:IOSIntArray_Get(nil_chk(self->heapWriter_->docIDs_), i)];
     }
     return sorted;
   }
   else {
-    JreAssert((self->tempDir_ != nil), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:253 condition failed: assert tempDir != null;"));
+    JreAssert(self->tempDir_ != nil, @"org/apache/lucene/rangetree/RangeTreeWriter.java:253 condition failed: assert tempDir != null;");
     OrgApacheLuceneStoreByteArrayDataInput *reader = create_OrgApacheLuceneStoreByteArrayDataInput_init();
-    id<JavaUtilComparator> cmp = create_OrgApacheLuceneRangetreeRangeTreeWriter_$2_initWithOrgApacheLuceneStoreByteArrayDataInput_(reader);
-    OrgLukhnosPortmobileFilePath *sorted = [((OrgLukhnosPortmobileFilePath *) nil_chk(self->tempDir_)) resolveWithNSString:@"sorted"];
+    id<JavaUtilComparator> cmp = create_OrgApacheLuceneRangetreeRangeTreeWriter_2_initWithOrgApacheLuceneStoreByteArrayDataInput_(reader);
+    OrgLukhnosPortmobileFilePath *sorted = JreRetainedLocalValue([((OrgLukhnosPortmobileFilePath *) nil_chk(self->tempDir_)) resolveWithNSString:@"sorted"]);
     jboolean success = false;
     @try {
       OrgApacheLuceneUtilOfflineSorter *sorter = create_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(cmp, OrgApacheLuceneUtilOfflineSorter_BufferSize_automatic(), self->tempDir_, OrgApacheLuceneUtilOfflineSorter_MAX_TEMPFILES);
@@ -530,14 +547,14 @@ id<OrgApacheLuceneRangetreeSliceWriter> OrgApacheLuceneRangetreeRangeTreeWriter_
 jboolean OrgApacheLuceneRangetreeRangeTreeWriter_directoryIsEmptyWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneRangetreeRangeTreeWriter *self, OrgLukhnosPortmobileFilePath *inArg) {
   @try {
     id<OrgLukhnosPortmobileFileDirectoryStream> dir = OrgLukhnosPortmobileFileFiles_newDirectoryStreamWithOrgLukhnosPortmobileFilePath_(inArg);
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       for (OrgLukhnosPortmobileFilePath * __strong path in nil_chk(dir)) {
-        JreAssert((false), (JreStrcat("$@$@", @"dir=", inArg, @" still has file=", path)));
+        JreAssert(false, JreStrcat("$@$@", @"dir=", inArg, @" still has file=", path));
         return false;
       }
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -546,10 +563,12 @@ jboolean OrgApacheLuceneRangetreeRangeTreeWriter_directoryIsEmptyWithOrgLukhnosP
         if (__primaryException1 != nil) {
           @try {
             [dir close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [dir close];
         }
       }
@@ -561,14 +580,14 @@ jboolean OrgApacheLuceneRangetreeRangeTreeWriter_directoryIsEmptyWithOrgLukhnosP
 }
 
 jlong OrgApacheLuceneRangetreeRangeTreeWriter_getSplitValueWithOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_withLong_withLong_withLong_(OrgApacheLuceneRangetreeRangeTreeWriter *self, OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *source, jlong leftCount, jlong minValue, jlong maxValue) {
-  id<OrgApacheLuceneRangetreeSliceReader> reader = [((id<OrgApacheLuceneRangetreeSliceWriter>) nil_chk(((OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *) nil_chk(source))->writer_)) getReaderWithLong:source->start_ + leftCount];
+  id<OrgApacheLuceneRangetreeSliceReader> reader = JreRetainedLocalValue([((id<OrgApacheLuceneRangetreeSliceWriter>) nil_chk(((OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *) nil_chk(source))->writer_)) getReaderWithLong:source->start_ + leftCount]);
   jboolean success = false;
   jlong splitValue;
   @try {
     jboolean result = [((id<OrgApacheLuceneRangetreeSliceReader>) nil_chk(reader)) next];
-    JreAssert((result), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:437 condition failed: assert result;"));
+    JreAssert(result, @"org/apache/lucene/rangetree/RangeTreeWriter.java:437 condition failed: assert result;");
     splitValue = [reader value];
-    JreAssert((splitValue >= minValue && splitValue <= maxValue), (JreStrcat("$J$J$J$@", @"splitValue=", splitValue, @" minValue=", minValue, @" maxValue=", maxValue, @" reader=", reader)));
+    JreAssert(splitValue >= minValue && splitValue <= maxValue, JreStrcat("$J$J$J$@", @"splitValue=", splitValue, @" minValue=", minValue, @" maxValue=", maxValue, @" reader=", reader));
     success = true;
   }
   @finally {
@@ -585,25 +604,25 @@ jlong OrgApacheLuceneRangetreeRangeTreeWriter_getSplitValueWithOrgApacheLuceneRa
 void OrgApacheLuceneRangetreeRangeTreeWriter_buildWithInt_withInt_withOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_withOrgApacheLuceneStoreIndexOutput_withLong_withLong_withLongArray_withLongArray_(OrgApacheLuceneRangetreeRangeTreeWriter *self, jint nodeID, jint leafNodeOffset, OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *source, OrgApacheLuceneStoreIndexOutput *outArg, jlong minValue, jlong maxValue, IOSLongArray *blockMinValues, IOSLongArray *leafBlockFPs) {
   jlong count = ((OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *) nil_chk(source))->count_;
   if ([source->writer_ isKindOfClass:[OrgApacheLuceneRangetreeOfflineSliceWriter class]] && count <= self->maxValuesSortInHeap_) {
-    id<OrgApacheLuceneRangetreeSliceWriter> writer = create_OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_((jint) count);
-    id<OrgApacheLuceneRangetreeSliceReader> reader = [((id<OrgApacheLuceneRangetreeSliceWriter>) nil_chk(source->writer_)) getReaderWithLong:source->start_];
+    id<OrgApacheLuceneRangetreeSliceWriter> writer = create_OrgApacheLuceneRangetreeHeapSliceWriter_initPackagePrivateWithInt_((jint) count);
+    id<OrgApacheLuceneRangetreeSliceReader> reader = JreRetainedLocalValue([((id<OrgApacheLuceneRangetreeSliceWriter>) nil_chk(source->writer_)) getReaderWithLong:source->start_]);
     for (jint i = 0; i < count; i++) {
       jboolean hasNext = [((id<OrgApacheLuceneRangetreeSliceReader>) nil_chk(reader)) next];
-      JreAssert((hasNext), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:468 condition failed: assert hasNext;"));
+      JreAssert(hasNext, @"org/apache/lucene/rangetree/RangeTreeWriter.java:468 condition failed: assert hasNext;");
       [writer appendWithLong:[reader value] withLong:[reader ord] withInt:[reader docID]];
     }
     source = create_OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(writer, 0, count);
   }
-  JreAssert((count > 0), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:475 condition failed: assert count > 0;"));
+  JreAssert(count > 0, @"org/apache/lucene/rangetree/RangeTreeWriter.java:475 condition failed: assert count > 0;");
   if (nodeID >= leafNodeOffset) {
-    JreAssert((maxValue >= minValue), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:479 condition failed: assert maxValue >= minValue;"));
-    id<OrgApacheLuceneRangetreeSliceReader> reader = [((id<OrgApacheLuceneRangetreeSliceWriter>) nil_chk(source->writer_)) getReaderWithLong:source->start_];
+    JreAssert(maxValue >= minValue, @"org/apache/lucene/rangetree/RangeTreeWriter.java:479 condition failed: assert maxValue >= minValue;");
+    id<OrgApacheLuceneRangetreeSliceReader> reader = JreRetainedLocalValue([((id<OrgApacheLuceneRangetreeSliceWriter>) nil_chk(source->writer_)) getReaderWithLong:source->start_]);
     IOSIntArray *docIDs = [IOSIntArray arrayWithLength:(jint) count];
     jboolean success = false;
     @try {
       for (jint i = 0; i < source->count_; i++) {
         jboolean result = [((id<OrgApacheLuceneRangetreeSliceReader>) nil_chk(reader)) next];
-        JreAssert((result), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:501 condition failed: assert result;"));
+        JreAssert(result, @"org/apache/lucene/rangetree/RangeTreeWriter.java:501 condition failed: assert result;");
         *IOSIntArray_GetRef(docIDs, i) = [reader docID];
       }
       success = true;
@@ -626,7 +645,7 @@ void OrgApacheLuceneRangetreeRangeTreeWriter_buildWithInt_withInt_withOrgApacheL
         lastDocID = docID;
       }
     }
-    JreAssert((uniqueCount <= count), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:529 condition failed: assert uniqueCount <= count;"));
+    JreAssert(uniqueCount <= count, @"org/apache/lucene/rangetree/RangeTreeWriter.java:529 condition failed: assert uniqueCount <= count;");
     jlong startFP = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(outArg)) getFilePointer];
     [outArg writeVIntWithInt:uniqueCount];
     jint blockID = nodeID - leafNodeOffset;
@@ -642,9 +661,9 @@ void OrgApacheLuceneRangetreeRangeTreeWriter_buildWithInt_withInt_withOrgApacheL
     }
   }
   else {
-    JreAssert((nodeID < ((IOSLongArray *) nil_chk(blockMinValues))->size_), (JreStrcat("$I$I", @"nodeID=", nodeID, @" blockMinValues.length=", blockMinValues->size_)));
-    JreAssert((source->count_ == count), (@"org/apache/lucene/rangetree/RangeTreeWriter.java:562 condition failed: assert source.count == count;"));
-    jlong leftCount = source->count_ / 2;
+    JreAssert(nodeID < ((IOSLongArray *) nil_chk(blockMinValues))->size_, JreStrcat("$I$I", @"nodeID=", nodeID, @" blockMinValues.length=", blockMinValues->size_));
+    JreAssert(source->count_ == count, @"org/apache/lucene/rangetree/RangeTreeWriter.java:562 condition failed: assert source.count == count;");
+    jlong leftCount = JreLongDiv(source->count_, 2);
     jlong splitValue = OrgApacheLuceneRangetreeRangeTreeWriter_getSplitValueWithOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_withLong_withLong_withLong_(self, source, leftCount, minValue, maxValue);
     OrgApacheLuceneRangetreeRangeTreeWriter_buildWithInt_withInt_withOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_withOrgApacheLuceneStoreIndexOutput_withLong_withLong_withLongArray_withLongArray_(self, 2 * nodeID, leafNodeOffset, create_OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(source->writer_, source->start_, leftCount), outArg, minValue, splitValue, blockMinValues, leafBlockFPs);
     OrgApacheLuceneRangetreeRangeTreeWriter_buildWithInt_withInt_withOrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_withOrgApacheLuceneStoreIndexOutput_withLong_withLong_withLongArray_withLongArray_(self, 2 * nodeID + 1, leafNodeOffset, create_OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(source->writer_, source->start_ + leftCount, count - leftCount), outArg, splitValue, maxValue, blockMinValues, leafBlockFPs);
@@ -653,58 +672,12 @@ void OrgApacheLuceneRangetreeRangeTreeWriter_buildWithInt_withInt_withOrgApacheL
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeWriter)
 
-@implementation OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice
+@implementation OrgApacheLuceneRangetreeRangeTreeWriter_1
 
-- (instancetype)initWithOrgApacheLuceneRangetreeSliceWriter:(id<OrgApacheLuceneRangetreeSliceWriter>)writer
-                                                   withLong:(jlong)start
-                                                   withLong:(jlong)count {
-  OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(self, writer, start, count);
+- (instancetype)initWithOrgApacheLuceneRangetreeRangeTreeWriter:(OrgApacheLuceneRangetreeRangeTreeWriter *)outer$ {
+  OrgApacheLuceneRangetreeRangeTreeWriter_1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(self, outer$);
   return self;
 }
-
-- (NSString *)description {
-  return JreStrcat("$J$J$@C", @"PathSlice(start=", start_, @" count=", count_, @" writer=", writer_, ')');
-}
-
-- (void)dealloc {
-  RELEASE_(writer_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneRangetreeSliceWriter:withLong:withLong:", "PathSlice", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "writer_", NULL, 0x10, "Lorg.apache.lucene.rangetree.SliceWriter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "start_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice = { 2, "PathSlice", "org.apache.lucene.rangetree", "RangeTreeWriter", 0x1a, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice;
-}
-
-@end
-
-void OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *self, id<OrgApacheLuceneRangetreeSliceWriter> writer, jlong start, jlong count) {
-  NSObject_init(self);
-  JreStrongAssign(&self->writer_, writer);
-  self->start_ = start;
-  self->count_ = count;
-}
-
-OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *new_OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(id<OrgApacheLuceneRangetreeSliceWriter> writer, jlong start, jlong count) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice, initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_, writer, start, count)
-}
-
-OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *create_OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(id<OrgApacheLuceneRangetreeSliceWriter> writer, jlong start, jlong count) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice, initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_, writer, start, count)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice)
-
-@implementation OrgApacheLuceneRangetreeRangeTreeWriter_$1
 
 - (void)swapWithInt:(jint)i
             withInt:(jint)j {
@@ -732,48 +705,53 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeWriter_PathSli
   return JavaLangLong_compareWithLong_withLong_(IOSLongArray_Get(nil_chk(((OrgApacheLuceneRangetreeGrowingHeapSliceWriter *) nil_chk(this$0_->heapWriter_))->ords_), i), IOSLongArray_Get(this$0_->heapWriter_->ords_, j));
 }
 
-- (instancetype)initWithOrgApacheLuceneRangetreeRangeTreeWriter:(OrgApacheLuceneRangetreeRangeTreeWriter *)outer$ {
-  OrgApacheLuceneRangetreeRangeTreeWriter_$1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(self, outer$);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
-    { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneRangetreeRangeTreeWriter:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 3, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneRangetreeRangeTreeWriter:);
+  methods[1].selector = @selector(swapWithInt:withInt:);
+  methods[2].selector = @selector(compareWithInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.rangetree.RangeTreeWriter;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneRangetreeRangeTreeWriter;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneRangetreeRangeTreeWriter", "sort" };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeWriter_$1 = { 2, "", "org.apache.lucene.rangetree", "RangeTreeWriter", 0x8008, 3, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneRangetreeRangeTreeWriter_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneRangetreeRangeTreeWriter;", "swap", "II", "compare", "sort" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeWriter_1 = { "", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x8010, 3, 1, 0, -1, 4, -1, -1 };
+  return &_OrgApacheLuceneRangetreeRangeTreeWriter_1;
 }
 
 @end
 
-void OrgApacheLuceneRangetreeRangeTreeWriter_$1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter_$1 *self, OrgApacheLuceneRangetreeRangeTreeWriter *outer$) {
+void OrgApacheLuceneRangetreeRangeTreeWriter_1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter_1 *self, OrgApacheLuceneRangetreeRangeTreeWriter *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneUtilInPlaceMergeSorter_init(self);
 }
 
-OrgApacheLuceneRangetreeRangeTreeWriter_$1 *new_OrgApacheLuceneRangetreeRangeTreeWriter_$1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_$1, initWithOrgApacheLuceneRangetreeRangeTreeWriter_, outer$)
+OrgApacheLuceneRangetreeRangeTreeWriter_1 *new_OrgApacheLuceneRangetreeRangeTreeWriter_1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_1, initWithOrgApacheLuceneRangetreeRangeTreeWriter_, outer$)
 }
 
-OrgApacheLuceneRangetreeRangeTreeWriter_$1 *create_OrgApacheLuceneRangetreeRangeTreeWriter_$1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_$1, initWithOrgApacheLuceneRangetreeRangeTreeWriter_, outer$)
+OrgApacheLuceneRangetreeRangeTreeWriter_1 *create_OrgApacheLuceneRangetreeRangeTreeWriter_1_initWithOrgApacheLuceneRangetreeRangeTreeWriter_(OrgApacheLuceneRangetreeRangeTreeWriter *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_1, initWithOrgApacheLuceneRangetreeRangeTreeWriter_, outer$)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeWriter_$1)
+@implementation OrgApacheLuceneRangetreeRangeTreeWriter_2
 
-@implementation OrgApacheLuceneRangetreeRangeTreeWriter_$2
+- (instancetype)initWithOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInput *)capture$0 {
+  OrgApacheLuceneRangetreeRangeTreeWriter_2_initWithOrgApacheLuceneStoreByteArrayDataInput_(self, capture$0);
+  return self;
+}
 
 - (jint)compareWithId:(OrgApacheLuceneUtilBytesRef *)a
                withId:(OrgApacheLuceneUtilBytesRef *)b {
@@ -796,45 +774,131 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeWriter_$1)
   return JavaLangLong_compareWithLong_withLong_(ordA, ordB);
 }
 
-- (instancetype)initWithOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInput *)capture$0 {
-  OrgApacheLuceneRangetreeRangeTreeWriter_$2_initWithOrgApacheLuceneStoreByteArrayDataInput_(self, capture$0);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
 }
 
 - (void)dealloc {
-  RELEASE_(readerB_);
   RELEASE_(val$reader_);
+  RELEASE_(readerB_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreByteArrayDataInput:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreByteArrayDataInput:);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "readerB_", NULL, 0x12, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$reader_", NULL, 0x1012, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$reader_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "readerB_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneRangetreeRangeTreeWriter", "sort" };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeWriter_$2 = { 2, "", "org.apache.lucene.rangetree", "RangeTreeWriter", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" };
-  return &_OrgApacheLuceneRangetreeRangeTreeWriter_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreByteArrayDataInput;", "compare", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "LOrgApacheLuceneRangetreeRangeTreeWriter;", "sort", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeWriter_2 = { "", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x8010, 2, 2, 3, -1, 4, 5, -1 };
+  return &_OrgApacheLuceneRangetreeRangeTreeWriter_2;
 }
 
 @end
 
-void OrgApacheLuceneRangetreeRangeTreeWriter_$2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneRangetreeRangeTreeWriter_$2 *self, OrgApacheLuceneStoreByteArrayDataInput *capture$0) {
+void OrgApacheLuceneRangetreeRangeTreeWriter_2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneRangetreeRangeTreeWriter_2 *self, OrgApacheLuceneStoreByteArrayDataInput *capture$0) {
   JreStrongAssign(&self->val$reader_, capture$0);
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->readerB_, new_OrgApacheLuceneStoreByteArrayDataInput_init());
 }
 
-OrgApacheLuceneRangetreeRangeTreeWriter_$2 *new_OrgApacheLuceneRangetreeRangeTreeWriter_$2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneStoreByteArrayDataInput *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_$2, initWithOrgApacheLuceneStoreByteArrayDataInput_, capture$0)
+OrgApacheLuceneRangetreeRangeTreeWriter_2 *new_OrgApacheLuceneRangetreeRangeTreeWriter_2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneStoreByteArrayDataInput *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_2, initWithOrgApacheLuceneStoreByteArrayDataInput_, capture$0)
 }
 
-OrgApacheLuceneRangetreeRangeTreeWriter_$2 *create_OrgApacheLuceneRangetreeRangeTreeWriter_$2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneStoreByteArrayDataInput *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_$2, initWithOrgApacheLuceneStoreByteArrayDataInput_, capture$0)
+OrgApacheLuceneRangetreeRangeTreeWriter_2 *create_OrgApacheLuceneRangetreeRangeTreeWriter_2_initWithOrgApacheLuceneStoreByteArrayDataInput_(OrgApacheLuceneStoreByteArrayDataInput *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_2, initWithOrgApacheLuceneStoreByteArrayDataInput_, capture$0)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeWriter_$2)
+@implementation OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice
+
+- (instancetype)initWithOrgApacheLuceneRangetreeSliceWriter:(id<OrgApacheLuceneRangetreeSliceWriter>)writer
+                                                   withLong:(jlong)start
+                                                   withLong:(jlong)count {
+  OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(self, writer, start, count);
+  return self;
+}
+
+- (NSString *)description {
+  return JreStrcat("$J$J$@C", @"PathSlice(start=", start_, @" count=", count_, @" writer=", writer_, ')');
+}
+
+- (void)dealloc {
+  RELEASE_(writer_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneRangetreeSliceWriter:withLong:withLong:);
+  methods[1].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "writer_", "LOrgApacheLuceneRangetreeSliceWriter;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "start_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "count_", "J", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneRangetreeSliceWriter;JJ", "toString", "LOrgApacheLuceneRangetreeRangeTreeWriter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice = { "PathSlice", "org.apache.lucene.rangetree", ptrTable, methods, fields, 7, 0x1a, 2, 3, 2, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice;
+}
+
+@end
+
+void OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *self, id<OrgApacheLuceneRangetreeSliceWriter> writer, jlong start, jlong count) {
+  NSObject_init(self);
+  JreStrongAssign(&self->writer_, writer);
+  self->start_ = start;
+  self->count_ = count;
+}
+
+OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *new_OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(id<OrgApacheLuceneRangetreeSliceWriter> writer, jlong start, jlong count) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice, initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_, writer, start, count)
+}
+
+OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice *create_OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice_initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_(id<OrgApacheLuceneRangetreeSliceWriter> writer, jlong start, jlong count) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice, initWithOrgApacheLuceneRangetreeSliceWriter_withLong_withLong_, writer, start, count)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeWriter_PathSlice)

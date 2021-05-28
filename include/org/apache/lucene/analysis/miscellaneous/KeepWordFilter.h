@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter))
 #define OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_
 
@@ -25,8 +31,7 @@
 
 /*!
  @brief A TokenFilter that only keeps tokens with text contained in the
- required words.
- This filter behaves like the inverse of StopFilter.
+  required words.This filter behaves like the inverse of StopFilter.
  @since solr 1.3
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter : OrgApacheLuceneAnalysisUtilFilteringTokenFilter
@@ -36,14 +41,18 @@
 /*!
  @brief Create a new <code>KeepWordFilter</code>.
  <p><b>NOTE</b>: The words set passed to this constructor will be directly
- used by this filter and should not be modified.
- @param inArg      the <code>TokenStream</code> to consume
- @param words   the words to keep
+  used by this filter and should not be modified.
+ @param inArg the <code>TokenStream</code>  to consume
+ @param words the words to keep
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)words;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
+                         withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)words;
 
 - (jboolean)accept;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -59,4 +68,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter")

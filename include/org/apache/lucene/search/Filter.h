@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilter || defined(INCLUDE_OrgApacheLuceneSearchFilter))
 #define OrgApacheLuceneSearchFilter_
 
@@ -27,39 +33,36 @@
 
 /*!
  @brief Convenient base class for building queries that only perform matching, but
- no scoring.
- The scorer produced by such queries always returns 0 as score.
+   no scoring.The scorer produced by such queries always returns 0 as score.
  */
 @interface OrgApacheLuceneSearchFilter : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a <code>DocIdSet</code> enumerating the documents that should be
- permitted in search results.
+  permitted in search results.
  <b>NOTE:</b> null can be
- returned if no documents are accepted by this Filter.
+  returned if no documents are accepted by this Filter. 
  <p>
- Note: This method will be called once per segment in
- the index during searching.  The returned <code>DocIdSet</code>
- must refer to document IDs for that segment, not for
- the top-level reader.
- @param context a <code>org.apache.lucene.index.LeafReaderContext</code> instance opened on the index currently
- searched on. Note, it is likely that the provided reader info does not
- represent the whole underlying index i.e. if the index has more than
- one segment the given reader only represents a single segment.
- The provided context is always an atomic context, so you can call
- <code>org.apache.lucene.index.LeafReader.fields()</code>
- on the context's reader, for example.
- @param acceptDocs
- Bits that represent the allowable docs to match (typically deleted docs
- but possibly filtering other documents)
+  Note: This method will be called once per segment in
+  the index during searching.  The returned <code>DocIdSet</code>
+  must refer to document IDs for that segment, not for
+  the top-level reader.
+ @param context a <code>org.apache.lucene.index.LeafReaderContext</code>  instance opened on the index currently
+           searched on. Note, it is likely that the provided reader info does not          represent the whole underlying index i.e. if the index has more than
+           one segment the given reader only represents a single segment.
+           The provided context is always an atomic context, so you can call
+           <code>org.apache.lucene.index.LeafReader.fields()</code>
+           on the context's reader, for example.
+ @param acceptDocs Bits that represent the allowable docs to match (typically deleted docs
+            but possibly filtering other documents)
  @return a DocIdSet that provides the documents which should be permitted or
- prohibited in search results. <b>NOTE:</b> <code>null</code> should be returned if
- the filter doesn't accept any documents otherwise internal optimization might not apply
- in the case an <i>empty</i> <code>DocIdSet</code> is returned.
+          prohibited in search results. <b>NOTE:</b> <code>null</code> should be returned if
+          the filter doesn't accept any documents otherwise internal optimization might not apply
+          in the case an <i>empty</i> <code>DocIdSet</code> is returned.
  */
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
@@ -76,4 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilter")

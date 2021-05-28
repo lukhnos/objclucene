@@ -6,15 +6,17 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/payloads/DelimitedPayloadTokenFilter.h"
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/PayloadAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/payloads/DelimitedPayloadTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter () {
  @public
@@ -46,7 +48,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter, 
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-    jint length = [termAtt_ length];
+    jint length = [termAtt_ java_length];
     for (jint i = 0; i < length; i++) {
       if (IOSCharArray_Get(nil_chk(buffer), i) == delimiter_) {
         [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:[((id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder>) nil_chk(encoder_)) encodeWithCharArray:buffer withInt:i + 1 withInt:(length - (i + 1))]];
@@ -68,18 +70,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withChar:withOrgApacheLuceneAnalysisPayloadsPayloadEncoder:", "DelimitedPayloadTokenFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withChar:withOrgApacheLuceneAnalysisPayloadsPayloadEncoder:);
+  methods[1].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_DELIMITER", "DEFAULT_DELIMITER", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_DEFAULT_DELIMITER },
-    { "delimiter_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "encoder_", NULL, 0x12, "Lorg.apache.lucene.analysis.payloads.PayloadEncoder;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_DELIMITER", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_DEFAULT_DELIMITER, 0x19, -1, -1, -1, -1 },
+    { "delimiter_", "C", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payAtt_", "LOrgApacheLuceneAnalysisTokenattributesPayloadAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "encoder_", "LOrgApacheLuceneAnalysisPayloadsPayloadEncoder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter = { 2, "DelimitedPayloadTokenFilter", "org.apache.lucene.analysis.payloads", NULL, 0x11, 2, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;CLOrgApacheLuceneAnalysisPayloadsPayloadEncoder;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter = { "DelimitedPayloadTokenFilter", "org.apache.lucene.analysis.payloads", ptrTable, methods, fields, 7, 0x11, 2, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter;
 }
 

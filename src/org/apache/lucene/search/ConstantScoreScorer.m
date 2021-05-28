@@ -3,14 +3,16 @@
 //  source: ./core/src/java/org/apache/lucene/search/ConstantScoreScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/ConstantScoreScorer.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/Weight.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/ConstantScoreScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchConstantScoreScorer () {
  @public
@@ -75,23 +77,37 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchConstantScoreScorer, disi_, OrgApacheLu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:withFloat:withOrgApacheLuceneSearchDocIdSetIterator:", "ConstantScoreScorer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchWeight:withFloat:withOrgApacheLuceneSearchTwoPhaseIterator:", "ConstantScoreScorer", NULL, 0x1, NULL, NULL },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 4, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchWeight:withFloat:withOrgApacheLuceneSearchDocIdSetIterator:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneSearchWeight:withFloat:withOrgApacheLuceneSearchTwoPhaseIterator:);
+  methods[2].selector = @selector(asTwoPhaseIterator);
+  methods[3].selector = @selector(score);
+  methods[4].selector = @selector(freq);
+  methods[5].selector = @selector(docID);
+  methods[6].selector = @selector(nextDoc);
+  methods[7].selector = @selector(advanceWithInt:);
+  methods[8].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "score_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "twoPhaseIterator_", NULL, 0x12, "Lorg.apache.lucene.search.TwoPhaseIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "disi_", NULL, 0x12, "Lorg.apache.lucene.search.DocIdSetIterator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "score_", "F", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "twoPhaseIterator_", "LOrgApacheLuceneSearchTwoPhaseIterator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "disi_", "LOrgApacheLuceneSearchDocIdSetIterator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreScorer = { 2, "ConstantScoreScorer", "org.apache.lucene.search", NULL, 0x11, 9, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchWeight;FLOrgApacheLuceneSearchDocIdSetIterator;", "LOrgApacheLuceneSearchWeight;FLOrgApacheLuceneSearchTwoPhaseIterator;", "LJavaIoIOException;", "advance", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreScorer = { "ConstantScoreScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 9, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchConstantScoreScorer;
 }
 

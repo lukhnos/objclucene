@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexDocumentsWriterPerThreadPool
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterPerThreadPool || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterPerThreadPool))
 #define OrgApacheLuceneIndexDocumentsWriterPerThreadPool_
 
@@ -23,25 +29,25 @@
 
 /*!
  @brief <code>DocumentsWriterPerThreadPool</code> controls <code>ThreadState</code> instances
- and their thread assignments during indexing.
- Each <code>ThreadState</code> holds
- a reference to a <code>DocumentsWriterPerThread</code> that is once a
+  and their thread assignments during indexing.Each <code>ThreadState</code> holds
+  a reference to a <code>DocumentsWriterPerThread</code> that is once a 
  <code>ThreadState</code> is obtained from the pool exclusively used for indexing a
- single document by the obtaining thread. Each indexing thread must obtain
- such a <code>ThreadState</code> to make progress. Depending on the
+  single document by the obtaining thread.
+ Each indexing thread must obtain
+  such a <code>ThreadState</code> to make progress. Depending on the 
  <code>DocumentsWriterPerThreadPool</code> implementation <code>ThreadState</code>
- assignments might differ from document to document.
+  assignments might differ from document to document. 
  <p>
- Once a <code>DocumentsWriterPerThread</code> is selected for flush the thread pool
- is reusing the flushing <code>DocumentsWriterPerThread</code>s ThreadState with a
- new <code>DocumentsWriterPerThread</code> instance.
+  Once a <code>DocumentsWriterPerThread</code> is selected for flush the thread pool
+  is reusing the flushing <code>DocumentsWriterPerThread</code>s ThreadState with a
+  new <code>DocumentsWriterPerThread</code> instance. 
  </p>
  */
 @interface OrgApacheLuceneIndexDocumentsWriterPerThreadPool : NSObject
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
 - (void)clearAbort;
 
@@ -60,18 +66,18 @@
 
 /*!
  @brief Returns the <i>i</i>th active <code>ThreadState</code> where <i>i</i> is the
- given ord.
- @param ord
- the ordinal of the <code>ThreadState</code>
+  given ord.
+ @param ord the ordinal of the 
+ <code>ThreadState</code>
  @return the <i>i</i>th active <code>ThreadState</code> where <i>i</i> is the
- given ord.
+          given ord.
  */
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)getThreadStateWithInt:(jint)ord;
 
 /*!
  @brief Returns the ThreadState with the minimum estimated number of threads
- waiting to acquire its lock or <code>null</code> if no <code>ThreadState</code>
- is yet visible to the calling thread.
+  waiting to acquire its lock or <code>null</code> if no <code>ThreadState</code>
+  is yet visible to the calling thread.
  */
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)minContendedThreadState;
 
@@ -83,15 +89,19 @@
 
 - (void)setAbort;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriterPerThreadPool)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init(OrgApacheLuceneIndexDocumentsWriterPerThreadPool *self);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterPerThreadPool_initPackagePrivate(OrgApacheLuceneIndexDocumentsWriterPerThreadPool *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterPerThreadPool *new_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterPerThreadPool *new_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterPerThreadPool *create_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterPerThreadPool *create_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThreadPool)
 
@@ -107,16 +117,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThreadPool)
 @class OrgApacheLuceneIndexDocumentsWriterPerThread;
 
 /*!
- @brief <code>ThreadState</code> references and guards a
+ @brief <code>ThreadState</code> references and guards a 
  <code>DocumentsWriterPerThread</code> instance that is used during indexing to
- build a in-memory index segment.
+  build a in-memory index segment.
  <code>ThreadState</code> also holds all flush
- related per-thread data controlled by <code>DocumentsWriterFlushControl</code>.
- <p>
- A <code>ThreadState</code>, its methods and members should only accessed by one
- thread a time. Users must acquire the lock via <code>ThreadState.lock()</code>
- and release the lock in a finally block via <code>ThreadState.unlock()</code>
- before accessing the state.
+  related per-thread data controlled by <code>DocumentsWriterFlushControl</code>.
+  <p>
+  A <code>ThreadState</code>, its methods and members should only accessed by one
+  thread a time. Users must acquire the lock via <code>ThreadState.lock()</code>
+  and release the lock in a finally block via <code>ThreadState.unlock()</code>
+  before accessing the state.
  */
 @interface OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState : JavaUtilConcurrentLocksReentrantLock {
  @public
@@ -128,7 +138,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThreadPool)
 #pragma mark Public
 
 /*!
- @brief Returns the number of currently active bytes in this ThreadState's
+ @brief Returns the number of currently active bytes in this ThreadState's 
  <code>DocumentsWriterPerThread</code>
  */
 - (jlong)getBytesUsedPerThread;
@@ -140,15 +150,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThreadPool)
 
 /*!
  @brief Returns <code>true</code> iff this <code>ThreadState</code> is marked as flush
- pending otherwise <code>false</code>
+  pending otherwise <code>false</code>
  */
 - (jboolean)isFlushPending;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)dpwt;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)dpwt;
 
 - (jboolean)isInitialized;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithBoolean:(jboolean)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -166,4 +182,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_Thre
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterPerThreadPool")

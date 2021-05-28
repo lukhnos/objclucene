@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer))
 #define OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_
 
@@ -21,15 +27,15 @@
 /*!
  @brief Light Stemmer for French.
  <p>
- This stemmer implements the following algorithm:
+  This stemmer implements the following algorithm: 
  <i>A Stemming procedure and stopword list for general French corpora.</i>
- Jacques Savoy.
+  Jacques Savoy.
  */
 @interface OrgApacheLuceneAnalysisFrFrenchMinimalStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
@@ -40,12 +46,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisFrFrenchMinimalStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_init(OrgApacheLuceneAnalysisFrFrenchMinimalStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchMinimalStemmer *new_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchMinimalStemmer *new_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchMinimalStemmer *create_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchMinimalStemmer *create_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFrFrenchMinimalStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer")

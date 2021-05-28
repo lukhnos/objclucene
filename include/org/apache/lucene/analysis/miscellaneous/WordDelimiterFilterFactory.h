@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_
 
@@ -34,16 +40,16 @@
 /*!
  @brief Factory for <code>WordDelimiterFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_wd" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.WordDelimiterFilterFactory" protected="protectedword.txt"
- preserveOriginal="0" splitOnNumerics="1" splitOnCaseChange="1"
- catenateWords="0" catenateNumbers="0" catenateAll="0"
- generateWordParts="1" generateNumberParts="1" stemEnglishPossessive="1"
- types="wdfftypes.txt" /&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_wd" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.WordDelimiterFilterFactory" protected="protectedword.txt"
+              preserveOriginal="0" splitOnNumerics="1" splitOnCaseChange="1"
+              catenateWords="0" catenateNumbers="0" catenateAll="0"
+              generateWordParts="1" generateNumberParts="1" stemEnglishPossessive="1"
+              types="wdfftypes.txt" /&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware > {
@@ -51,17 +57,15 @@
   IOSByteArray *typeTable_;
   IOSCharArray *out_;
 }
-
-+ (NSString *)PROTECTED_TOKENS;
-
-+ (NSString *)TYPES;
+@property (readonly, copy, class) NSString *PROTECTED_TOKENS NS_SWIFT_NAME(PROTECTED_TOKENS);
+@property (readonly, copy, class) NSString *TYPES NS_SWIFT_NAME(TYPES);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new WordDelimiterFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -74,12 +78,12 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactor
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, typeTable_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, out_, IOSCharArray *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_get_PROTECTED_TOKENS();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_get_PROTECTED_TOKENS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, PROTECTED_TOKENS, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_get_TYPES();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_get_TYPES(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, TYPES, NSString *)
@@ -94,4 +98,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilt
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory")

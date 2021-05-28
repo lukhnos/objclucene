@@ -3,13 +3,15 @@
 //  source: ./core/src/java/org/apache/lucene/store/OutputStreamDataOutput.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/OutputStream.h"
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/store/OutputStreamDataOutput.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/OutputStreamDataOutput must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneStoreOutputStreamDataOutput () {
  @public
@@ -47,16 +49,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreOutputStreamDataOutput, os_, JavaIoOutpu
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaIoOutputStream:", "OutputStreamDataOutput", NULL, 0x1, NULL, NULL },
-    { "writeByteWithByte:", "writeByte", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeBytesWithByteArray:withInt:withInt:", "writeBytes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaIoOutputStream:);
+  methods[1].selector = @selector(writeByteWithByte:);
+  methods[2].selector = @selector(writeBytesWithByteArray:withInt:withInt:);
+  methods[3].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "os_", NULL, 0x12, "Ljava.io.OutputStream;", NULL, NULL, .constantValue.asLong = 0 },
+    { "os_", "LJavaIoOutputStream;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreOutputStreamDataOutput = { 2, "OutputStreamDataOutput", "org.apache.lucene.store", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoOutputStream;", "writeByte", "B", "LJavaIoIOException;", "writeBytes", "[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreOutputStreamDataOutput = { "OutputStreamDataOutput", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreOutputStreamDataOutput;
 }
 

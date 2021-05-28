@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/Collections.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/index/IndexReaderContext.h"
@@ -17,7 +16,6 @@
 #include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Query.h"
-#include "org/apache/lucene/search/Weight.h"
 #include "org/apache/lucene/search/payloads/PayloadFunction.h"
 #include "org/apache/lucene/search/payloads/PayloadTermQuery.h"
 #include "org/apache/lucene/search/similarities/Similarity.h"
@@ -32,6 +30,10 @@
 
 @class OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer;
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/payloads/PayloadTermQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchPayloadsPayloadTermQuery () {
  @public
   jboolean includeSpanScore_;
@@ -44,13 +46,13 @@
   OrgApacheLuceneUtilBytesRef *payload_;
 }
 
+- (instancetype)init;
+
 - (void)collectLeafWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
                                                 withInt:(jint)position
                            withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 - (void)reset;
-
-- (instancetype)init;
 
 @end
 
@@ -60,9 +62,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCol
 
 __attribute__((unused)) static void OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector_init(OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector *new_OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector *new_OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector *create_OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector_init();
+__attribute__((unused)) static OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector *create_OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector)
 
@@ -84,8 +86,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadTermQuery_Payload
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight, this$1_, OrgApacheLuceneSearchPayloadsPayloadTermQuery *)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_initWithOrgApacheLuceneSearchPayloadsPayloadTermQuery_withOrgApacheLuceneIndexTermContext_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight *self, OrgApacheLuceneSearchPayloadsPayloadTermQuery *outer$, OrgApacheLuceneIndexTermContext *context, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms);
 
@@ -117,16 +117,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadTermQuery_Payload
 
 /*!
  @return <code>getSpanScore()</code> * <code>getPayloadScore()</code>
- @throws IOException if there is a low-level I/O error
+ @throw IOExceptionif there is a low-level I/O error
  */
 - (jfloat)scoreCurrentDoc;
 
 /*!
  @brief Returns the SpanScorer score only.
  <p>
- Should not be overridden without good cause!
+  Should not be overridden without good cause!
  @return the score for just the Span part w/o the payload
- @throws IOException if there is a low-level I/O error
+ @throw IOExceptionif there is a low-level I/O error
  - seealso: #score()
  */
 - (jfloat)getSpanScore;
@@ -134,7 +134,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadTermQuery_Payload
 /*!
  @brief The score for the payload
  @return The score, as calculated by
- <code>PayloadFunction.docScore(int,String,int,float)</code>
+          <code>PayloadFunction.docScore(int, String, int, float)</code>
  */
 - (jfloat)getPayloadScore;
 
@@ -142,7 +142,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadTermQuery_Payload
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer, this$0_, OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer, payload_, OrgApacheLuceneUtilBytesRef *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer, payloadCollector_, OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector *)
 
@@ -197,19 +196,28 @@ withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsP
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchPayloadsPayloadFunction:", "PayloadTermQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchPayloadsPayloadFunction:withBoolean:", "PayloadTermQuery", NULL, 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.spans.SpanWeight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSpansSpanWeight;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "I", 0x1, 5, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchPayloadsPayloadFunction:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchPayloadsPayloadFunction:withBoolean:);
+  methods[2].selector = @selector(createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "function_", NULL, 0x4, "Lorg.apache.lucene.search.payloads.PayloadFunction;", NULL, NULL, .constantValue.asLong = 0 },
-    { "includeSpanScore_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "function_", "LOrgApacheLuceneSearchPayloadsPayloadFunction;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "includeSpanScore_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.payloads.PayloadTermQuery$PayloadTermCollector;", "Lorg.apache.lucene.search.payloads.PayloadTermQuery$PayloadTermWeight;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadTermQuery = { 2, "PayloadTermQuery", "org.apache.lucene.search.payloads", NULL, 0x1, 5, methods, 2, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerm;LOrgApacheLuceneSearchPayloadsPayloadFunction;", "LOrgApacheLuceneIndexTerm;LOrgApacheLuceneSearchPayloadsPayloadFunction;Z", "createWeight", "LOrgApacheLuceneSearchIndexSearcher;Z", "LJavaIoIOException;", "hashCode", "equals", "LNSObject;", "LOrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector;LOrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadTermQuery = { "PayloadTermQuery", "org.apache.lucene.search.payloads", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, 8, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPayloadsPayloadTermQuery;
 }
 
@@ -245,6 +253,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadTermQuery)
 
 @implementation OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)collectLeafWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
                                                 withInt:(jint)position
                            withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
@@ -255,28 +270,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadTermQuery)
   JreStrongAssign(&payload_, nil);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(payload_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "collectLeafWithOrgApacheLuceneIndexPostingsEnum:withInt:withOrgApacheLuceneIndexTerm:", "collectLeaf", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "init", "PayloadTermCollector", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(collectLeafWithOrgApacheLuceneIndexPostingsEnum:withInt:withOrgApacheLuceneIndexTerm:);
+  methods[2].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "payload_", NULL, 0x0, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector = { 2, "PayloadTermCollector", "org.apache.lucene.search.payloads", "PayloadTermQuery", 0xa, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "collectLeaf", "LOrgApacheLuceneIndexPostingsEnum;ILOrgApacheLuceneIndexTerm;", "LJavaIoIOException;", "LOrgApacheLuceneSearchPayloadsPayloadTermQuery;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector = { "PayloadTermCollector", "org.apache.lucene.search.payloads", ptrTable, methods, fields, 7, 0xa, 3, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector;
 }
 
@@ -314,17 +330,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadTermQuery_P
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc {
-  OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer *scorer = [self scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
+  OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer *scorer = JreRetainedLocalValue([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context]);
   if (scorer != nil) {
     jint newDoc = [scorer advanceWithInt:doc];
     if (newDoc == doc) {
       jfloat freq = [scorer sloppyFreq];
       OrgApacheLuceneSearchExplanation *freqExplanation = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(freq, JreStrcat("$F", @"phraseFreq=", freq), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer = [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:simWeight_ withOrgApacheLuceneIndexLeafReaderContext:context];
-      OrgApacheLuceneSearchExplanation *scoreExplanation = [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freqExplanation];
-      OrgApacheLuceneSearchExplanation *expl = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(scoreExplanation)) getValue], JreStrcat("$@$I$$$", @"weight(", [self getQuery], @" in ", doc, @") [", [[similarity_ getClass] getSimpleName], @"], result of:"), [IOSObjectArray arrayWithObjects:(id[]){ scoreExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
-      NSString *field = [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(((OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([self getQuery], [OrgApacheLuceneSearchSpansSpanQuery class])))) getField];
-      OrgApacheLuceneSearchExplanation *payloadExpl = [((OrgApacheLuceneSearchPayloadsPayloadFunction *) nil_chk(this$1_->function_)) explainWithInt:doc withNSString:field withInt:scorer->payloadsSeen_ withFloat:scorer->payloadScore_];
+      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer = JreRetainedLocalValue([((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:simWeight_ withOrgApacheLuceneIndexLeafReaderContext:context]);
+      OrgApacheLuceneSearchExplanation *scoreExplanation = JreRetainedLocalValue([((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freqExplanation]);
+      OrgApacheLuceneSearchExplanation *expl = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(scoreExplanation)) getValue], JreStrcat("$@$I$$$", @"weight(", [self getQuery], @" in ", doc, @") [", [[similarity_ java_getClass] getSimpleName], @"], result of:"), [IOSObjectArray arrayWithObjects:(id[]){ scoreExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
+      NSString *field = JreRetainedLocalValue([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(((OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([self getQuery], [OrgApacheLuceneSearchSpansSpanQuery class])))) getField]);
+      OrgApacheLuceneSearchExplanation *payloadExpl = JreRetainedLocalValue([((OrgApacheLuceneSearchPayloadsPayloadFunction *) nil_chk(this$1_->function_)) explainWithInt:doc withNSString:field withInt:scorer->payloadsSeen_ withFloat:scorer->payloadScore_]);
       if (this$1_->includeSpanScore_) {
         return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(expl)) getValue] * [((OrgApacheLuceneSearchExplanation *) nil_chk(payloadExpl)) getValue], @"btq, product of:", [IOSObjectArray arrayWithObjects:(id[]){ expl, payloadExpl } count:2 type:OrgApacheLuceneSearchExplanation_class_()]);
       }
@@ -342,16 +358,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadTermQuery_P
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchPayloadsPayloadTermQuery:withOrgApacheLuceneIndexTermContext:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:", "PayloadTermWeight", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/payloads/PayloadTermQuery;Lorg/apache/lucene/index/TermContext;Lorg/apache/lucene/search/IndexSearcher;Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)V" },
-    { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.payloads.PayloadTermQuery$PayloadTermWeight$PayloadTermSpanScorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, 2, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer;", 0x1, 3, 4, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 5, 6, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchPayloadsPayloadTermQuery:withOrgApacheLuceneIndexTermContext:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:);
+  methods[1].selector = @selector(scorerWithOrgApacheLuceneIndexLeafReaderContext:);
+  methods[2].selector = @selector(explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$1_", NULL, 0x1012, "Lorg.apache.lucene.search.payloads.PayloadTermQuery;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$1_", "LOrgApacheLuceneSearchPayloadsPayloadTermQuery;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.payloads.PayloadTermQuery$PayloadTermWeight$PayloadTermSpanScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight = { 2, "PayloadTermWeight", "org.apache.lucene.search.payloads", "PayloadTermQuery", 0x2, 3, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchPayloadsPayloadTermQuery;LOrgApacheLuceneIndexTermContext;LOrgApacheLuceneSearchIndexSearcher;LJavaUtilMap;", "LJavaIoIOException;", "(Lorg/apache/lucene/index/TermContext;Lorg/apache/lucene/search/IndexSearcher;Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)V", "scorer", "LOrgApacheLuceneIndexLeafReaderContext;", "explain", "LOrgApacheLuceneIndexLeafReaderContext;I", "LOrgApacheLuceneSearchPayloadsPayloadTermQuery;", "LOrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight = { "PayloadTermWeight", "org.apache.lucene.search.payloads", ptrTable, methods, fields, 7, 0x2, 3, 1, 7, 8, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight;
 }
 
@@ -419,23 +442,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadTermQuery_P
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight:withOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpanWeight:withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:", "PayloadTermSpanScorer", NULL, 0x1, NULL, NULL },
-    { "doStartCurrentDoc", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "doCurrentSpans", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "processPayload", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "scoreCurrentDoc", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSpanScore", NULL, "F", 0x4, "Ljava.io.IOException;", NULL },
-    { "getPayloadScore", NULL, "F", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, 1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "F", 0x4, -1, -1, 1, -1, -1, -1 },
+    { NULL, "F", 0x4, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight:withOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpanWeight:withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:);
+  methods[1].selector = @selector(doStartCurrentDoc);
+  methods[2].selector = @selector(doCurrentSpans);
+  methods[3].selector = @selector(processPayload);
+  methods[4].selector = @selector(scoreCurrentDoc);
+  methods[5].selector = @selector(getSpanScore);
+  methods[6].selector = @selector(getPayloadScore);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.payloads.PayloadTermQuery$PayloadTermWeight;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payload_", NULL, 0x4, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadScore_", NULL, 0x4, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadsSeen_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadCollector_", NULL, 0x12, "Lorg.apache.lucene.search.payloads.PayloadTermQuery$PayloadTermCollector;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "payloadScore_", "F", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "payloadsSeen_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "payloadCollector_", "LOrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer = { 2, "PayloadTermSpanScorer", "org.apache.lucene.search.payloads", "PayloadTermQuery$PayloadTermWeight", 0x4, 7, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight;LOrgApacheLuceneSearchSpansSpans;LOrgApacheLuceneSearchSpansSpanWeight;LOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;", "LJavaIoIOException;", "LOrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer = { "PayloadTermSpanScorer", "org.apache.lucene.search.payloads", ptrTable, methods, fields, 7, 0x4, 7, 5, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermWeight_PayloadTermSpanScorer;
 }
 

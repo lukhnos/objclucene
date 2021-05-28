@@ -5,10 +5,13 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/FilterLeafCollector.h"
 #include "org/apache/lucene/search/LeafCollector.h"
 #include "org/apache/lucene/search/Scorer.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/FilterLeafCollector must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchFilterLeafCollector
 
@@ -26,7 +29,7 @@
 }
 
 - (NSString *)description {
-  return JreStrcat("$C@C", [[self getClass] getSimpleName], '(', in_, ')');
+  return JreStrcat("$C@C", [[self java_getClass] getSimpleName], '(', in_, ')');
 }
 
 - (void)dealloc {
@@ -35,16 +38,25 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchLeafCollector:", "FilterLeafCollector", NULL, 0x1, NULL, NULL },
-    { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, 3, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchLeafCollector:);
+  methods[1].selector = @selector(setScorerWithOrgApacheLuceneSearchScorer:);
+  methods[2].selector = @selector(collectWithInt:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x14, "Lorg.apache.lucene.search.LeafCollector;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneSearchLeafCollector;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilterLeafCollector = { 2, "FilterLeafCollector", "org.apache.lucene.search", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchLeafCollector;", "setScorer", "LOrgApacheLuceneSearchScorer;", "LJavaIoIOException;", "collect", "I", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilterLeafCollector = { "FilterLeafCollector", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFilterLeafCollector;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat))
 #define OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_
 
@@ -26,10 +32,9 @@
 @class JavaTextParsePosition;
 
 /*!
- @brief This <code>Format</code> parses <code>Long</code> into date strings and vice-versa.
- It
- uses the given <code>DateFormat</code> to parse and format dates, but before, it
- converts <code>Long</code> to <code>Date</code> objects or vice-versa.
+ @brief This <code>Format</code> parses <code>Long</code> into date strings and vice-versa.It
+  uses the given <code>DateFormat</code> to parse and format dates, but before, it
+  converts <code>Long</code> to <code>Date</code> objects or vice-versa.
  */
 @interface OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat : JavaTextNumberFormat
 
@@ -37,9 +42,9 @@
 
 /*!
  @brief Constructs a <code>NumberDateFormat</code> object using the given <code>DateFormat</code>.
- @param dateFormat <code>DateFormat</code> used to parse and format dates
+ @param dateFormat<code>DateFormat</code>  used to parse and format dates
  */
-- (instancetype)initWithJavaTextDateFormat:(JavaTextDateFormat *)dateFormat;
+- (instancetype __nonnull)initWithJavaTextDateFormat:(JavaTextDateFormat *)dateFormat;
 
 - (JavaLangStringBuffer *)formatWithDouble:(jdouble)number
                   withJavaLangStringBuffer:(JavaLangStringBuffer *)toAppendTo
@@ -56,6 +61,10 @@
 - (NSNumber *)parseWithNSString:(NSString *)source
       withJavaTextParsePosition:(JavaTextParsePosition *)parsePosition;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat)
@@ -70,4 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumbe
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat")

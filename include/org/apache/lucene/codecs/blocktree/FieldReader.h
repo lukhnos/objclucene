@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsBlocktreeFieldReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsBlocktreeFieldReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeFieldReader || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeFieldReader))
 #define OrgApacheLuceneCodecsBlocktreeFieldReader_
 
@@ -50,7 +56,7 @@
   OrgApacheLuceneUtilBytesRef *minTerm_;
   OrgApacheLuceneUtilBytesRef *maxTerm_;
   jint longsSize_;
-  __unsafe_unretained OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *parent_;
+  WEAK_ OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *parent_;
   OrgApacheLuceneUtilFstFST *index_;
 }
 
@@ -94,18 +100,22 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader:(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *)parent
-                                         withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
-                                                                  withLong:(jlong)numTerms
-                                           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)rootCode
-                                                                  withLong:(jlong)sumTotalTermFreq
-                                                                  withLong:(jlong)sumDocFreq
-                                                                   withInt:(jint)docCount
-                                                                  withLong:(jlong)indexStartFP
-                                                                   withInt:(jint)longsSize
-                                        withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)indexIn
-                                           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minTerm
-                                           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxTerm;
+- (instancetype __nonnull)initWithOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader:(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *)parent
+                                                   withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
+                                                                            withLong:(jlong)numTerms
+                                                     withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)rootCode
+                                                                            withLong:(jlong)sumTotalTermFreq
+                                                                            withLong:(jlong)sumDocFreq
+                                                                             withInt:(jint)docCount
+                                                                            withLong:(jlong)indexStartFP
+                                                                             withInt:(jint)longsSize
+                                                  withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)indexIn
+                                                     withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minTerm
+                                                     withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxTerm;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -127,4 +137,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeFieldReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeFieldReader")

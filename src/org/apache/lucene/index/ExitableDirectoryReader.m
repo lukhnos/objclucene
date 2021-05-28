@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/ExitableDirectoryReader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/Thread.h"
 #include "org/apache/lucene/index/DirectoryReader.h"
@@ -19,6 +17,10 @@
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/automaton/CompiledAutomaton.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/ExitableDirectoryReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneIndexExitableDirectoryReader () {
  @public
@@ -72,7 +74,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms, q
 
 /*!
  @brief Throws <code>ExitingReaderException</code> if <code>QueryTimeout.shouldExit()</code> returns true,
- or if <code>Thread.interrupted()</code> returns true.
+  or if <code>Thread.interrupted()</code> returns true.
  */
 - (void)checkAndThrow;
 
@@ -109,17 +111,25 @@ __attribute__((unused)) static void OrgApacheLuceneIndexExitableDirectoryReader_
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneIndexQueryTimeout:", "ExitableDirectoryReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "doWrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:", "doWrapDirectoryReader", "Lorg.apache.lucene.index.DirectoryReader;", 0x4, "Ljava.io.IOException;", NULL },
-    { "wrapWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneIndexQueryTimeout:", "wrap", "Lorg.apache.lucene.index.DirectoryReader;", 0x9, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x4, 2, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexDirectoryReader;", 0x9, 4, 0, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneIndexQueryTimeout:);
+  methods[1].selector = @selector(doWrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:);
+  methods[2].selector = @selector(wrapWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneIndexQueryTimeout:);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
+    { "queryTimeout_", "LOrgApacheLuceneIndexQueryTimeout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.ExitableDirectoryReader$ExitingReaderException;", "Lorg.apache.lucene.index.ExitableDirectoryReader$ExitableSubReaderWrapper;", "Lorg.apache.lucene.index.ExitableDirectoryReader$ExitableFilterAtomicReader;", "Lorg.apache.lucene.index.ExitableDirectoryReader$ExitableFields;", "Lorg.apache.lucene.index.ExitableDirectoryReader$ExitableTerms;", "Lorg.apache.lucene.index.ExitableDirectoryReader$ExitableTermsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader = { 2, "ExitableDirectoryReader", "org.apache.lucene.index", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 6, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexDirectoryReader;LOrgApacheLuceneIndexQueryTimeout;", "LJavaIoIOException;", "doWrapDirectoryReader", "LOrgApacheLuceneIndexDirectoryReader;", "wrap", "toString", "LOrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException;LOrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper;LOrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader;LOrgApacheLuceneIndexExitableDirectoryReader_ExitableFields;LOrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms;LOrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader = { "ExitableDirectoryReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, 6, -1, -1, -1 };
   return &_OrgApacheLuceneIndexExitableDirectoryReader;
 }
 
@@ -153,10 +163,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "ExitingReaderException", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException = { 2, "ExitingReaderException", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;", "LOrgApacheLuceneIndexExitableDirectoryReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException = { "ExitingReaderException", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x9, 1, 0, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException;
 }
 
@@ -193,14 +209,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexQueryTimeout:", "ExitableSubReaderWrapper", NULL, 0x1, NULL, NULL },
-    { "wrapWithOrgApacheLuceneIndexLeafReader:", "wrap", "Lorg.apache.lucene.index.LeafReader;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexLeafReader;", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexQueryTimeout:);
+  methods[1].selector = @selector(wrapWithOrgApacheLuceneIndexLeafReader:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
+    { "queryTimeout_", "LOrgApacheLuceneIndexQueryTimeout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper = { 2, "ExitableSubReaderWrapper", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexQueryTimeout;", "wrap", "LOrgApacheLuceneIndexLeafReader;", "LOrgApacheLuceneIndexExitableDirectoryReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper = { "ExitableSubReaderWrapper", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x9, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper;
 }
 
@@ -247,16 +270,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexLeafReader:withOrgApacheLuceneIndexQueryTimeout:", "ExitableFilterAtomicReader", NULL, 0x1, NULL, NULL },
-    { "fields", NULL, "Lorg.apache.lucene.index.Fields;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getCoreCacheKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getCombinedCoreAndDeletesKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexLeafReader:withOrgApacheLuceneIndexQueryTimeout:);
+  methods[1].selector = @selector(fields);
+  methods[2].selector = @selector(getCoreCacheKey);
+  methods[3].selector = @selector(getCombinedCoreAndDeletesKey);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
+    { "queryTimeout_", "LOrgApacheLuceneIndexQueryTimeout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader = { 2, "ExitableFilterAtomicReader", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexLeafReader;LOrgApacheLuceneIndexQueryTimeout;", "LJavaIoIOException;", "LOrgApacheLuceneIndexExitableDirectoryReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader = { "ExitableFilterAtomicReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x9, 4, 1, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader;
 }
 
@@ -286,7 +318,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 }
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field {
-  OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexFields *) nil_chk(in_)) termsWithNSString:field];
+  OrgApacheLuceneIndexTerms *terms = JreRetainedLocalValue([((OrgApacheLuceneIndexFields *) nil_chk(in_)) termsWithNSString:field]);
   if (terms == nil) {
     return nil;
   }
@@ -294,7 +326,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -303,14 +335,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFields:withOrgApacheLuceneIndexQueryTimeout:", "ExitableFields", NULL, 0x1, NULL, NULL },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexFields:withOrgApacheLuceneIndexQueryTimeout:);
+  methods[1].selector = @selector(termsWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
+    { "queryTimeout_", "LOrgApacheLuceneIndexQueryTimeout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields = { 2, "ExitableFields", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexFields;LOrgApacheLuceneIndexQueryTimeout;", "terms", "LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneIndexExitableDirectoryReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields = { "ExitableFields", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x9, 2, 1, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields;
 }
 
@@ -354,15 +393,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneIndexQueryTimeout:", "ExitableTerms", NULL, 0x1, NULL, NULL },
-    { "intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:withOrgApacheLuceneUtilBytesRef:", "intersect", "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, 1, 2, 3, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneIndexQueryTimeout:);
+  methods[1].selector = @selector(intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:withOrgApacheLuceneUtilBytesRef:);
+  methods[2].selector = @selector(iterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
+    { "queryTimeout_", "LOrgApacheLuceneIndexQueryTimeout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms = { 2, "ExitableTerms", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTerms;LOrgApacheLuceneIndexQueryTimeout;", "intersect", "LOrgApacheLuceneUtilAutomatonCompiledAutomaton;LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "LOrgApacheLuceneIndexExitableDirectoryReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms = { "ExitableTerms", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x9, 3, 1, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms;
 }
 
@@ -406,15 +453,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneIndexQueryTimeout:", "ExitableTermsEnum", NULL, 0x1, NULL, NULL },
-    { "checkAndThrow", NULL, "V", 0x2, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneIndexQueryTimeout:);
+  methods[1].selector = @selector(checkAndThrow);
+  methods[2].selector = @selector(next);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
+    { "queryTimeout_", "LOrgApacheLuceneIndexQueryTimeout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum = { 2, "ExitableTermsEnum", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexTermsEnum;LOrgApacheLuceneIndexQueryTimeout;", "LJavaIoIOException;", "LOrgApacheLuceneIndexExitableDirectoryReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum = { "ExitableTermsEnum", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x9, 3, 1, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum;
 }
 

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionWeight
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionWeight || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionWeight))
 #define OrgApacheLuceneSearchSuggestDocumentCompletionWeight_
 
@@ -23,6 +29,7 @@
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchBulkScorer;
 @class OrgApacheLuceneSearchExplanation;
+@class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneSearchSuggestDocumentCompletionQuery;
 @class OrgApacheLuceneUtilAutomatonAutomaton;
@@ -32,11 +39,11 @@
 
 /*!
  @brief Expert: the Weight for CompletionQuery, used to
- score and explain these queries.
+  score and explain these queries.
  Subclasses can override <code>setNextMatch(IntsRef)</code>,
- <code>boost()</code> and <code>context()</code>
- to calculate the boost and extract the context of
- a matched path prefix.
+  <code>boost()</code> and <code>context()</code>
+  to calculate the boost and extract the context of
+  a matched path prefix.
  */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionWeight : OrgApacheLuceneSearchWeight
 
@@ -44,10 +51,10 @@
 
 /*!
  @brief Creates a weight for <code>query</code> with an <code>automaton</code>,
- using the <code>reader</code> for index stats
+  using the <code>reader</code> for index stats
  */
-- (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
-                                  withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
+                                            withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
 
 - (OrgApacheLuceneSearchBulkScorer *)bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -58,7 +65,7 @@
 
 /*!
  @brief Returns the automaton specified
- by the <code>CompletionQuery</code>
+  by the <code>CompletionQuery</code>
  @return query automaton
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)getAutomaton;
@@ -86,12 +93,16 @@
 
 /*!
  @brief Set for every partial path in the index that matched the query
- automaton.
+  automaton.
  Subclasses should override <code>boost()</code> and <code>context()</code>
- to return an appropriate value with respect to the current pathPrefix.
+  to return an appropriate value with respect to the current pathPrefix.
  @param pathPrefix the prefix of a matched path
  */
 - (void)setNextMatchWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)pathPrefix;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -107,4 +118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionWeight)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionWeight")

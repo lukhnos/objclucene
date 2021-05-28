@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesMltMoreLikeThis
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesMltMoreLikeThis_) && (INCLUDE_ALL_OrgApacheLuceneQueriesMltMoreLikeThis || defined(INCLUDE_OrgApacheLuceneQueriesMltMoreLikeThis))
 #define OrgApacheLuceneQueriesMltMoreLikeThis_
 
@@ -27,13 +33,13 @@
 
 /*!
  @brief Generate "more like this" similarity queries.
- Based on this mail:
+ Based on this mail: 
  @code
 <code>
   Lucene does let you access the document frequency of terms, with IndexReader.docFreq().
   Term frequencies can be computed by re-tokenizing the text, which, for a single document,
   is usually fast enough.  But looking up the docFreq() of every term in the document is
-  probably too slow.
+  probably too slow. 
   You can use some heuristics to prune the set of terms, to avoid calling docFreq() too much,
   or at all.  Since you're trying to maximize a tf*idf score, you're probably most interested
   in terms with a high tf. Choosing a tf threshold even as low as two or three will radically
@@ -41,68 +47,68 @@
   high idf (i.e., a low df) tend to be longer.  So you could threshold the terms by the
   number of characters, not selecting anything less than, e.g., six or seven characters.
   With these sorts of heuristics you can usually find small set of, e.g., ten or fewer terms
-  that do a pretty good job of characterizing a document.
+  that do a pretty good job of characterizing a document. 
   It all depends on what you're trying to do.  If you're trying to eek out that last percent
   of precision and recall regardless of computational difficulty so that you can win a TREC
   competition, then the techniques I mention above are useless.  But if you're trying to
   provide a "more like this" button on a search results page that does a decent job and has
-  good performance, such techniques might be useful.
+  good performance, such techniques might be useful. 
   An efficient, effective "more-like-this" query generator would be a great contribution, if
   anyone's interested.  I'd imagine that it would take a Reader or a String (the document's
   text), analyzer Analyzer, and return a set of representative terms using heuristics like those
-  above.  The frequency and length thresholds could be parameters, etc.
-  Doug
-  
+  above.  The frequency and length thresholds could be parameters, etc. 
+  Doug 
+  </code>
 @endcode
- <h3>Initial Usage</h3>
- <p>
- This class has lots of options to try to make it efficient and flexible.
- The simplest possible usage is as follows. The bold
- fragment is specific to this class.
+  <h3>Initial Usage</h3>
+  <p>
+  This class has lots of options to try to make it efficient and flexible.
+  The simplest possible usage is as follows. The bold
+  fragment is specific to this class. 
  <br>
- <pre class="prettyprint">
- IndexReader ir = ...
- IndexSearcher is = ...
- MoreLikeThis mlt = new MoreLikeThis(ir);
- Reader target = ... // orig source of doc you want to find similarities to
- Query query = mlt.like( target);
- Hits hits = is.search(query);
- // now the usual iteration thru 'hits' - the only thing to watch for is to make sure
- //you ignore the doc if it matches your 'target' document, as it should be similar to itself
+  <pre class="prettyprint">
+  IndexReader ir = ...
+  IndexSearcher is = ...
+  MoreLikeThis mlt = new MoreLikeThis(ir);
+  Reader target = ... // orig source of doc you want to find similarities to
+  Query query = mlt.like( target); 
+  Hits hits = is.search(query);
+  // now the usual iteration thru 'hits' - the only thing to watch for is to make sure
+  //you ignore the doc if it matches your 'target' document, as it should be similar to itself 
  
 @endcode
- <p>
- Thus you:
+  <p>
+  Thus you: 
  <ol>
- <li> do your normal, Lucene setup for searching,
- <li> create a MoreLikeThis,
- <li> get the text of the doc you want to find similarities to
- <li> then call one of the like() calls to generate a similarity query
- <li> call the searcher to find the similar docs
+  <li> do your normal, Lucene setup for searching, 
+ <li> create a MoreLikeThis, 
+ <li> get the text of the doc you want to find similarities to 
+ <li> then call one of the like() calls to generate a similarity query 
+ <li> call the searcher to find the similar docs 
  </ol>
- <br>
- <h3>More Advanced Usage</h3>
+  <br>
+  <h3>More Advanced Usage</h3>
+  <p>
+  You may want to use <code>setFieldNames(...)</code> so you can examine
+  multiple fields (e.g. body and title) for similarity. 
  <p>
- You may want to use <code>setFieldNames(...)</code> so you can examine
- multiple fields (e.g. body and title) for similarity.
- <p>
- Depending on the size of your index and the size and makeup of your documents you
- may want to call the other set methods to control how the similarity queries are
- generated:
+  Depending on the size of your index and the size and makeup of your documents you
+  may want to call the other set methods to control how the similarity queries are
+  generated: 
  <ul>
- <li> <code>setMinTermFreq(...)</code>
- <li> <code>setMinDocFreq(...)</code>
- <li> <code>setMaxDocFreq(...)</code>
- <li> <code>setMaxDocFreqPct(...)</code>
- <li> <code>setMinWordLen(...)</code>
- <li> <code>setMaxWordLen(...)</code>
- <li> <code>setMaxQueryTerms(...)</code>
- <li> <code>setMaxNumTokensParsed(...)</code>
- <li> <code>setStopWord(...)</code>
- </ul>
- <br>
- <hr>
- @code
+  <li> <code>setMinTermFreq(...)</code>
+  <li> <code>setMinDocFreq(...)</code>
+  <li> <code>setMaxDocFreq(...)</code>
+  <li> <code>setMaxDocFreqPct(...)</code>
+  <li> <code>setMinWordLen(...)</code>
+  <li> <code>setMaxWordLen(...)</code>
+  <li> <code>setMaxQueryTerms(...)</code>
+  <li> <code>setMaxNumTokensParsed(...)</code>
+  <li> <code>setStopWord(...)</code>
+  </ul>
+  <br>
+  <hr>
+  @code
 
   Changes: Mark Harwood 29/02/04
   Some bugfixing, some refactoring, some optimisation.
@@ -110,41 +116,31 @@
   - bugfix: No significant terms being created for fields with a termvector - because
   was only counting one occurrence per term/field pair in calculations(ie not including frequency info from TermVector)
   - refactor: moved common code into isNoiseWord()
-  - optimise: when no termvector support available - used maxNumTermsParsed to limit amount of tokenization
+  - optimise: when no termvector support available - used maxNumTermsParsed to limit amount of tokenization 
   
 @endcode
  */
 @interface OrgApacheLuceneQueriesMltMoreLikeThis : NSObject
-
-+ (jint)DEFAULT_MAX_NUM_TOKENS_PARSED;
-
-+ (jint)DEFAULT_MIN_TERM_FREQ;
-
-+ (jint)DEFAULT_MIN_DOC_FREQ;
-
-+ (jint)DEFAULT_MAX_DOC_FREQ;
-
-+ (jboolean)DEFAULT_BOOST;
-
-+ (IOSObjectArray *)DEFAULT_FIELD_NAMES;
-
-+ (jint)DEFAULT_MIN_WORD_LENGTH;
-
-+ (jint)DEFAULT_MAX_WORD_LENGTH;
-
-+ (id<JavaUtilSet>)DEFAULT_STOP_WORDS;
-
-+ (jint)DEFAULT_MAX_QUERY_TERMS;
+@property (readonly, class) jint DEFAULT_MAX_NUM_TOKENS_PARSED NS_SWIFT_NAME(DEFAULT_MAX_NUM_TOKENS_PARSED);
+@property (readonly, class) jint DEFAULT_MIN_TERM_FREQ NS_SWIFT_NAME(DEFAULT_MIN_TERM_FREQ);
+@property (readonly, class) jint DEFAULT_MIN_DOC_FREQ NS_SWIFT_NAME(DEFAULT_MIN_DOC_FREQ);
+@property (readonly, class) jint DEFAULT_MAX_DOC_FREQ NS_SWIFT_NAME(DEFAULT_MAX_DOC_FREQ);
+@property (readonly, class) jboolean DEFAULT_BOOST NS_SWIFT_NAME(DEFAULT_BOOST);
+@property (readonly, class, strong) IOSObjectArray *DEFAULT_FIELD_NAMES NS_SWIFT_NAME(DEFAULT_FIELD_NAMES);
+@property (readonly, class) jint DEFAULT_MIN_WORD_LENGTH NS_SWIFT_NAME(DEFAULT_MIN_WORD_LENGTH);
+@property (readonly, class) jint DEFAULT_MAX_WORD_LENGTH NS_SWIFT_NAME(DEFAULT_MAX_WORD_LENGTH);
+@property (readonly, class, strong) id<JavaUtilSet> DEFAULT_STOP_WORDS NS_SWIFT_NAME(DEFAULT_STOP_WORDS);
+@property (readonly, class) jint DEFAULT_MAX_QUERY_TERMS NS_SWIFT_NAME(DEFAULT_MAX_QUERY_TERMS);
 
 #pragma mark Public
 
 /*!
  @brief Constructor requiring an IndexReader.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir;
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir
-   withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity:(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)sim;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir
+             withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity:(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)sim;
 
 /*!
  @brief Describe the parameters that control how the "more like this" query is formed.
@@ -152,9 +148,8 @@
 - (NSString *)describeParams;
 
 /*!
- @brief Returns an analyzer that will be used to parse source doc with.
- The default analyzer
- is not set.
+ @brief Returns an analyzer that will be used to parse source doc with.The default analyzer
+  is not set.
  @return the analyzer that will be used to parse source doc with.
  */
 - (OrgApacheLuceneAnalysisAnalyzer *)getAnalyzer;
@@ -175,10 +170,10 @@
 
 /*!
  @brief Returns the maximum frequency in which words may still appear.
- Words that appear in more than this many docs will be ignored. The default frequency is
+ Words that appear in more than this many docs will be ignored. The default frequency is 
  <code>DEFAULT_MAX_DOC_FREQ</code>.
  @return get the maximum frequency at which words are still allowed,
- words which occur in more docs than this are ignored.
+          words which occur in more docs than this are ignored.
  */
 - (jint)getMaxDocFreq;
 
@@ -196,34 +191,32 @@
 - (jint)getMaxQueryTerms;
 
 /*!
- @brief Returns the maximum word length above which words will be ignored.
- Set this to 0 for no
- maximum word length. The default is <code>DEFAULT_MAX_WORD_LENGTH</code>.
+ @brief Returns the maximum word length above which words will be ignored.Set this to 0 for no
+  maximum word length.
+ The default is <code>DEFAULT_MAX_WORD_LENGTH</code>.
  @return the maximum word length above which words will be ignored.
  */
 - (jint)getMaxWordLen;
 
 /*!
  @brief Returns the frequency at which words will be ignored which do not occur in at least this
- many docs.
- The default frequency is <code>DEFAULT_MIN_DOC_FREQ</code>.
+  many docs.The default frequency is <code>DEFAULT_MIN_DOC_FREQ</code>.
  @return the frequency at which words will be ignored which do not occur in at least this
- many docs.
+          many docs.
  */
 - (jint)getMinDocFreq;
 
 /*!
- @brief Returns the frequency below which terms will be ignored in the source doc.
- The default
- frequency is the <code>DEFAULT_MIN_TERM_FREQ</code>.
+ @brief Returns the frequency below which terms will be ignored in the source doc.The default
+  frequency is the <code>DEFAULT_MIN_TERM_FREQ</code>.
  @return the frequency below which terms will be ignored in the source doc.
  */
 - (jint)getMinTermFreq;
 
 /*!
- @brief Returns the minimum word length below which words will be ignored.
- Set this to 0 for no
- minimum word length. The default is <code>DEFAULT_MIN_WORD_LENGTH</code>.
+ @brief Returns the minimum word length below which words will be ignored.Set this to 0 for no
+  minimum word length.
+ The default is <code>DEFAULT_MIN_WORD_LENGTH</code>.
  @return the minimum word length below which words will be ignored.
  */
 - (jint)getMinWordLen;
@@ -237,8 +230,7 @@
 - (id<JavaUtilSet>)getStopWords;
 
 /*!
- @brief Returns whether to boost terms in query based on "score" or not.
- The default is
+ @brief Returns whether to boost terms in query based on "score" or not.The default is 
  <code>DEFAULT_BOOST</code>.
  @return whether to boost terms in query based on "score" or not.
  - seealso: #setBoost
@@ -267,7 +259,7 @@
                            withJavaIoReaderArray:(IOSObjectArray *)readers;
 
 /*!
- - seealso: #retrieveInterestingTerms(java.io.Reader,String)
+ - seealso: #retrieveInterestingTerms(java.io.Reader, String)
  */
 - (IOSObjectArray *)retrieveInterestingTermsWithInt:(jint)docNum;
 
@@ -277,15 +269,14 @@
  @param r the source document
  @param fieldName field passed to analyzer to use when analyzing the content
  @return the most interesting words in the document
- - seealso: #retrieveTerms(java.io.Reader,String)
+ - seealso: #retrieveTerms(java.io.Reader, String)
  - seealso: #setMaxQueryTerms
  */
 - (IOSObjectArray *)retrieveInterestingTermsWithJavaIoReader:(JavaIoReader *)r
                                                 withNSString:(NSString *)fieldName;
 
 /*!
- @brief Sets the analyzer to use.
- An analyzer is not required for generating a query with the
+ @brief Sets the analyzer to use.An analyzer is not required for generating a query with the 
  <code>like(int)</code> method, all other 'like' methods require an analyzer.
  @param analyzer the analyzer to use to tokenize text.
  */
@@ -307,27 +298,22 @@
 /*!
  @brief Sets the field names that will be used when generating the 'More Like This' query.
  Set this to null for the field names to be determined at runtime from the IndexReader
- provided in the constructor.
- @param fieldNames the field names that will be used when generating the 'More Like This'
- query.
+  provided in the constructor.
+ @param fieldNames the field names that will be used when generating the 'More Like This'  query.
  */
 - (void)setFieldNamesWithNSStringArray:(IOSObjectArray *)fieldNames;
 
 /*!
- @brief Set the maximum frequency in which words may still appear.
- Words that appear
- in more than this many docs will be ignored.
- @param maxFreq the maximum count of documents that a term may appear
- in to be still considered relevant
+ @brief Set the maximum frequency in which words may still appear.Words that appear
+  in more than this many docs will be ignored.
+ @param maxFreq the maximum count of documents that a term may appear  in to be still considered relevant
  */
 - (void)setMaxDocFreqWithInt:(jint)maxFreq;
 
 /*!
- @brief Set the maximum percentage in which words may still appear.
- Words that appear
- in more than this many percent of all docs will be ignored.
- @param maxPercentage the maximum percentage of documents (0-100) that a term may appear
- in to be still considered relevant
+ @brief Set the maximum percentage in which words may still appear.Words that appear
+  in more than this many percent of all docs will be ignored.
+ @param maxPercentage the maximum percentage of documents (0-100) that a term may appear  in to be still considered relevant
  */
 - (void)setMaxDocFreqPctWithInt:(jint)maxPercentage;
 
@@ -338,8 +324,7 @@
 
 /*!
  @brief Sets the maximum number of query terms that will be included in any generated query.
- @param maxQueryTerms the maximum number of query terms that will be included in any
- generated query.
+ @param maxQueryTerms the maximum number of query terms that will be included in any  generated query.
  */
 - (void)setMaxQueryTermsWithInt:(jint)maxQueryTerms;
 
@@ -351,9 +336,8 @@
 
 /*!
  @brief Sets the frequency at which words will be ignored which do not occur in at least this
- many docs.
- @param minDocFreq the frequency at which words will be ignored which do not occur in at
- least this many docs.
+  many docs.
+ @param minDocFreq the frequency at which words will be ignored which do not occur in at  least this many docs.
  */
 - (void)setMinDocFreqWithInt:(jint)minDocFreq;
 
@@ -374,12 +358,16 @@
 /*!
  @brief Set the set of stopwords.
  Any word in this set is considered "uninteresting" and ignored.
- Even if your Analyzer allows stopwords, you might want to tell the MoreLikeThis code to ignore them, as
- for the purposes of document similarity it seems reasonable to assume that "a stop word is never interesting".
+  Even if your Analyzer allows stopwords, you might want to tell the MoreLikeThis code to ignore them, as
+  for the purposes of document similarity it seems reasonable to assume that "a stop word is never interesting".
  @param stopWords set of stopwords, if null it means to allow stop words
  - seealso: #getStopWords
  */
 - (void)setStopWordsWithJavaUtilSet:(id<JavaUtilSet>)stopWords;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -389,7 +377,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueriesMltMoreLikeThis)
  @brief Default maximum number of tokens to parse in each example doc field that is not stored with TermVector support.
  - seealso: #getMaxNumTokensParsed
  */
-inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MAX_NUM_TOKENS_PARSED();
+inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MAX_NUM_TOKENS_PARSED(void);
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_NUM_TOKENS_PARSED 5000
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_NUM_TOKENS_PARSED, jint)
 
@@ -398,7 +386,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_
  - seealso: #getMinTermFreq
  - seealso: #setMinTermFreq
  */
-inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MIN_TERM_FREQ();
+inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MIN_TERM_FREQ(void);
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_TERM_FREQ 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MIN_TERM_FREQ, jint)
 
@@ -407,7 +395,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MIN_
  - seealso: #getMinDocFreq
  - seealso: #setMinDocFreq
  */
-inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MIN_DOC_FREQ();
+inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MIN_DOC_FREQ(void);
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_DOC_FREQ 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MIN_DOC_FREQ, jint)
 
@@ -417,7 +405,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MIN_
  - seealso: #setMaxDocFreq
  - seealso: #setMaxDocFreqPct
  */
-inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MAX_DOC_FREQ();
+inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MAX_DOC_FREQ(void);
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_DOC_FREQ 2147483647
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_DOC_FREQ, jint)
 
@@ -426,16 +414,15 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_
  - seealso: #isBoost
  - seealso: #setBoost
  */
-inline jboolean OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_BOOST();
+inline jboolean OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_BOOST(void);
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_BOOST false
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_BOOST, jboolean)
 
 /*!
- @brief Default field names.
- Null is used to specify that the field names should be looked
- up at runtime from the provided reader.
+ @brief Default field names.Null is used to specify that the field names should be looked
+  up at runtime from the provided reader.
  */
-inline IOSObjectArray *OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_FIELD_NAMES();
+inline IOSObjectArray *OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_FIELD_NAMES(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_FIELD_NAMES, IOSObjectArray *)
@@ -445,7 +432,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_FIE
  - seealso: #getMinWordLen
  - seealso: #setMinWordLen
  */
-inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MIN_WORD_LENGTH();
+inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MIN_WORD_LENGTH(void);
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_WORD_LENGTH 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MIN_WORD_LENGTH, jint)
 
@@ -454,7 +441,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MIN_
  - seealso: #getMaxWordLen
  - seealso: #setMaxWordLen
  */
-inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MAX_WORD_LENGTH();
+inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MAX_WORD_LENGTH(void);
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_WORD_LENGTH 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_WORD_LENGTH, jint)
 
@@ -464,7 +451,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_
  - seealso: #setStopWords
  - seealso: #getStopWords
  */
-inline id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_STOP_WORDS();
+inline id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_STOP_WORDS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_STOP_WORDS, id<JavaUtilSet>)
@@ -475,7 +462,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_STO
  - seealso: #getMaxQueryTerms
  - seealso: #setMaxQueryTerms
  */
-inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MAX_QUERY_TERMS();
+inline jint OrgApacheLuceneQueriesMltMoreLikeThis_get_DEFAULT_MAX_QUERY_TERMS(void);
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_QUERY_TERMS 25
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_QUERY_TERMS, jint)
 
@@ -495,4 +482,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesMltMoreLikeThis)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesMltMoreLikeThis")

@@ -8,11 +8,14 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/Long.h"
 #include "java/util/Comparator.h"
 #include "java/util/HashSet.h"
 #include "java/util/Set.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 #include "org/apache/lucene/search/suggest/InputIterator.h"
 #include "org/apache/lucene/search/suggest/SortedInputIterator.h"
 #include "org/apache/lucene/store/ByteArrayDataInput.h"
@@ -24,6 +27,12 @@
 #include "org/apache/lucene/util/OfflineSorter.h"
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/SortedInputIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneSearchSuggestSortedInputIterator () {
  @public
@@ -65,7 +74,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilOfflineSorter_ByteSequencesRea
 
 __attribute__((unused)) static void OrgApacheLuceneSearchSuggestSortedInputIterator_close(OrgApacheLuceneSearchSuggestSortedInputIterator *self);
 
-@interface OrgApacheLuceneSearchSuggestSortedInputIterator_$1 : NSObject < JavaUtilComparator > {
+@interface OrgApacheLuceneSearchSuggestSortedInputIterator_1 : NSObject < JavaUtilComparator > {
  @public
   OrgApacheLuceneSearchSuggestSortedInputIterator *this$0_;
   OrgApacheLuceneUtilBytesRef *leftScratch_;
@@ -73,27 +82,24 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestSortedInputItera
   OrgApacheLuceneStoreByteArrayDataInput *input_;
 }
 
+- (instancetype)initWithOrgApacheLuceneSearchSuggestSortedInputIterator:(OrgApacheLuceneSearchSuggestSortedInputIterator *)outer$;
+
 - (jint)compareWithId:(OrgApacheLuceneUtilBytesRef *)left
                withId:(OrgApacheLuceneUtilBytesRef *)right;
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestSortedInputIterator:(OrgApacheLuceneSearchSuggestSortedInputIterator *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestSortedInputIterator_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1, this$0_, OrgApacheLuceneSearchSuggestSortedInputIterator *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1, leftScratch_, OrgApacheLuceneUtilBytesRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1, rightScratch_, OrgApacheLuceneUtilBytesRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1, input_, OrgApacheLuceneStoreByteArrayDataInput *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestSortedInputIterator_1, leftScratch_, OrgApacheLuceneUtilBytesRef *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestSortedInputIterator_1, rightScratch_, OrgApacheLuceneUtilBytesRef *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestSortedInputIterator_1, input_, OrgApacheLuceneStoreByteArrayDataInput *)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *self, OrgApacheLuceneSearchSuggestSortedInputIterator *outer$);
+__attribute__((unused)) static void OrgApacheLuceneSearchSuggestSortedInputIterator_1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator_1 *self, OrgApacheLuceneSearchSuggestSortedInputIterator *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *new_OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestSortedInputIterator_1 *new_OrgApacheLuceneSearchSuggestSortedInputIterator_1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *create_OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestSortedInputIterator_1 *create_OrgApacheLuceneSearchSuggestSortedInputIterator_1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$);
 
 @implementation OrgApacheLuceneSearchSuggestSortedInputIterator
 
@@ -261,38 +267,57 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestInputIterator:", "SortedInputIterator", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchSuggestInputIterator:withJavaUtilComparator:", "SortedInputIterator", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/suggest/InputIterator;Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V" },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "weight", NULL, "J", 0x1, NULL, NULL },
-    { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
-    { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
-    { "sort", NULL, "Lorg.apache.lucene.util.OfflineSorter$ByteSequencesReader;", 0x2, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "encodeWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter:withOrgApacheLuceneStoreByteArrayDataOutput:withByteArray:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withJavaUtilSet:withLong:", "encode", "V", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/OfflineSorter$ByteSequencesWriter;Lorg/apache/lucene/store/ByteArrayDataOutput;[BLorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;J)V" },
-    { "decodeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:", "decode", "J", 0x4, NULL, NULL },
-    { "decodeContextsWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:", "decodeContexts", "Ljava.util.Set;", 0x4, NULL, "(Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/store/ByteArrayDataInput;)Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
-    { "decodePayloadWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:", "decodePayload", "Lorg.apache.lucene.util.BytesRef;", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, 1, 3, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader;", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, 5, 6, 1, 7, -1, -1 },
+    { NULL, "J", 0x4, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x4, 10, 9, -1, 11, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x4, 12, 9, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestInputIterator:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneSearchSuggestInputIterator:withJavaUtilComparator:);
+  methods[2].selector = @selector(next);
+  methods[3].selector = @selector(weight);
+  methods[4].selector = @selector(payload);
+  methods[5].selector = @selector(hasPayloads);
+  methods[6].selector = @selector(contexts);
+  methods[7].selector = @selector(hasContexts);
+  methods[8].selector = @selector(sort);
+  methods[9].selector = @selector(close);
+  methods[10].selector = @selector(encodeWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter:withOrgApacheLuceneStoreByteArrayDataOutput:withByteArray:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withJavaUtilSet:withLong:);
+  methods[11].selector = @selector(decodeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:);
+  methods[12].selector = @selector(decodeContextsWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:);
+  methods[13].selector = @selector(decodePayloadWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "source_", NULL, 0x12, "Lorg.apache.lucene.search.suggest.InputIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tempInput_", NULL, 0x2, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tempSorted_", NULL, 0x2, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
-    { "reader_", NULL, 0x12, "Lorg.apache.lucene.util.OfflineSorter$ByteSequencesReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "hasPayloads_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "hasContexts_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "done_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "weight_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratch_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payload_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "contexts_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "tieBreakByCostComparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
+    { "source_", "LOrgApacheLuceneSearchSuggestInputIterator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "tempInput_", "LOrgLukhnosPortmobileFilePath;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tempSorted_", "LOrgLukhnosPortmobileFilePath;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "reader_", "LOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "comparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 13, -1 },
+    { "hasPayloads_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "hasContexts_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "done_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "weight_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "scratch_", "LOrgApacheLuceneUtilBytesRefBuilder;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "contexts_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 14, -1 },
+    { "tieBreakByCostComparator_", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x12, -1, -1, 13, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestSortedInputIterator = { 2, "SortedInputIterator", "org.apache.lucene.search.suggest", NULL, 0x1, 14, methods, 13, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestInputIterator;", "LJavaIoIOException;", "LOrgApacheLuceneSearchSuggestInputIterator;LJavaUtilComparator;", "(Lorg/apache/lucene/search/suggest/InputIterator;Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V", "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", "encode", "LOrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter;LOrgApacheLuceneStoreByteArrayDataOutput;[BLOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;LJavaUtilSet;J", "(Lorg/apache/lucene/util/OfflineSorter$ByteSequencesWriter;Lorg/apache/lucene/store/ByteArrayDataOutput;[BLorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;J)V", "decode", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneStoreByteArrayDataInput;", "decodeContexts", "(Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/store/ByteArrayDataInput;)Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", "decodePayload", "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", "Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestSortedInputIterator = { "SortedInputIterator", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x1, 14, 13, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestSortedInputIterator;
 }
 
@@ -316,7 +341,7 @@ void OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSear
   JreStrongAssignAndConsume(&self->scratch_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   JreStrongAssignAndConsume(&self->payload_, new_OrgApacheLuceneUtilBytesRef_init());
   JreStrongAssign(&self->contexts_, nil);
-  JreStrongAssignAndConsume(&self->tieBreakByCostComparator_, new_OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(self));
+  JreStrongAssignAndConsume(&self->tieBreakByCostComparator_, new_OrgApacheLuceneSearchSuggestSortedInputIterator_1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(self));
   self->hasPayloads_ = [((id<OrgApacheLuceneSearchSuggestInputIterator>) nil_chk(source)) hasPayloads];
   self->hasContexts_ = [source hasContexts];
   JreStrongAssign(&self->source_, source);
@@ -333,7 +358,7 @@ OrgApacheLuceneSearchSuggestSortedInputIterator *create_OrgApacheLuceneSearchSug
 }
 
 OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *OrgApacheLuceneSearchSuggestSortedInputIterator_sort(OrgApacheLuceneSearchSuggestSortedInputIterator *self) {
-  NSString *prefix = [[self getClass] getSimpleName];
+  NSString *prefix = [[self java_getClass] getSimpleName];
   OrgLukhnosPortmobileFilePath *directory = OrgApacheLuceneUtilOfflineSorter_defaultTempDir();
   JreStrongAssign(&self->tempInput_, OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(directory, prefix, @".input"));
   JreStrongAssign(&self->tempSorted_, OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(directory, prefix, @".sorted"));
@@ -385,7 +410,12 @@ void OrgApacheLuceneSearchSuggestSortedInputIterator_close(OrgApacheLuceneSearch
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestSortedInputIterator)
 
-@implementation OrgApacheLuceneSearchSuggestSortedInputIterator_$1
+@implementation OrgApacheLuceneSearchSuggestSortedInputIterator_1
+
+- (instancetype)initWithOrgApacheLuceneSearchSuggestSortedInputIterator:(OrgApacheLuceneSearchSuggestSortedInputIterator *)outer$ {
+  OrgApacheLuceneSearchSuggestSortedInputIterator_1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(self, outer$);
+  return self;
+}
 
 - (jint)compareWithId:(OrgApacheLuceneUtilBytesRef *)left
                withId:(OrgApacheLuceneUtilBytesRef *)right {
@@ -412,9 +442,33 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestSortedInputIterator
   return JavaLangLong_compareWithLong_withLong_(leftCost, rightCost);
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestSortedInputIterator:(OrgApacheLuceneSearchSuggestSortedInputIterator *)outer$ {
-  OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(self, outer$);
-  return self;
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
 }
 
 - (void)dealloc {
@@ -426,23 +480,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestSortedInputIterator
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSuggestSortedInputIterator:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchSuggestSortedInputIterator:);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.suggest.SortedInputIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "leftScratch_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "rightScratch_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "input_", NULL, 0x12, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneSearchSuggestSortedInputIterator;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "leftScratch_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "rightScratch_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "input_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestSortedInputIterator_$1 = { 2, "", "org.apache.lucene.search.suggest", "SortedInputIterator", 0x8008, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" };
-  return &_OrgApacheLuceneSearchSuggestSortedInputIterator_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchSuggestSortedInputIterator;", "compare", "LOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestSortedInputIterator_1 = { "", "org.apache.lucene.search.suggest", ptrTable, methods, fields, 7, 0x8010, 2, 4, 0, -1, -1, 3, -1 };
+  return &_OrgApacheLuceneSearchSuggestSortedInputIterator_1;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *self, OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) {
+void OrgApacheLuceneSearchSuggestSortedInputIterator_1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator_1 *self, OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->leftScratch_, new_OrgApacheLuceneUtilBytesRef_init());
@@ -450,12 +511,10 @@ void OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneS
   JreStrongAssignAndConsume(&self->input_, new_OrgApacheLuceneStoreByteArrayDataInput_init());
 }
 
-OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *new_OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestSortedInputIterator_$1, initWithOrgApacheLuceneSearchSuggestSortedInputIterator_, outer$)
+OrgApacheLuceneSearchSuggestSortedInputIterator_1 *new_OrgApacheLuceneSearchSuggestSortedInputIterator_1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestSortedInputIterator_1, initWithOrgApacheLuceneSearchSuggestSortedInputIterator_, outer$)
 }
 
-OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *create_OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestSortedInputIterator_$1, initWithOrgApacheLuceneSearchSuggestSortedInputIterator_, outer$)
+OrgApacheLuceneSearchSuggestSortedInputIterator_1 *create_OrgApacheLuceneSearchSuggestSortedInputIterator_1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestSortedInputIterator_1, initWithOrgApacheLuceneSearchSuggestSortedInputIterator_, outer$)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)

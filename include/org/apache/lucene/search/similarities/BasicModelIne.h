@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelIne
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSimilaritiesBasicModelIne_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIne || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModelIne))
 #define OrgApacheLuceneSearchSimilaritiesBasicModelIne_
 
@@ -24,7 +30,7 @@
 
 /*!
  @brief Tf-idf model of randomness, based on a mixture of Poisson and inverse
- document frequency.
+  document frequency.
  */
 @interface OrgApacheLuceneSearchSimilaritiesBasicModelIne : OrgApacheLuceneSearchSimilaritiesBasicModel
 
@@ -33,7 +39,7 @@
 /*!
  @brief Sole constructor: parameter-free
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn;
@@ -46,12 +52,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesBasicModelIne)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBasicModelIne_init(OrgApacheLuceneSearchSimilaritiesBasicModelIne *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIne *new_OrgApacheLuceneSearchSimilaritiesBasicModelIne_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIne *new_OrgApacheLuceneSearchSimilaritiesBasicModelIne_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIne *create_OrgApacheLuceneSearchSimilaritiesBasicModelIne_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIne *create_OrgApacheLuceneSearchSimilaritiesBasicModelIne_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicModelIne)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIne")

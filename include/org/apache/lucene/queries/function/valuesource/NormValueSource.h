@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource))
 #define OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_
 
@@ -27,11 +33,10 @@
 
 /*!
  @brief Function that returns <code>TFIDFSimilarity.decodeNormValue(long)</code>
- for every document.
+  for every document.
  <p>
- Note that the configured Similarity for the field must be
- a subclass of <code>TFIDFSimilarity</code>
-  
+  Note that the configured Similarity for the field must be
+  a subclass of <code>TFIDFSimilarity</code>
  */
 @interface OrgApacheLuceneQueriesFunctionValuesourceNormValueSource : OrgApacheLuceneQueriesFunctionValueSource {
  @public
@@ -40,7 +45,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype __nonnull)initWithNSString:(NSString *)field;
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
@@ -55,6 +60,10 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 - (NSUInteger)hash;
 
 - (NSString *)name;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -72,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceNormValueSou
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource")

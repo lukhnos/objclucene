@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgTartarusSnowballSnowballProgram
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgTartarusSnowballSnowballProgram_) && (INCLUDE_ALL_OrgTartarusSnowballSnowballProgram || defined(INCLUDE_OrgTartarusSnowballSnowballProgram))
 #define OrgTartarusSnowballSnowballProgram_
 
@@ -23,12 +29,12 @@
 
 /*!
  @brief This is the rev 502 of the Snowball SVN trunk,
- but modified:
- made abstract and introduced abstract method stem to avoid expensive reflection in filter class.
+  but modified:
+  made abstract and introduced abstract method stem to avoid expensive reflection in filter class.
  refactored StringBuffers to StringBuilder
- uses char[] as buffer instead of StringBuffer/StringBuilder
- eq_s,eq_s_b,insert,replace_s take CharSequence like eq_v and eq_v_b
- reflection calls (Lovins, etc) use EMPTY_ARGS/EMPTY_PARAMS
+  uses char[] as buffer instead of StringBuffer/StringBuilder
+  eq_s,eq_s_b,insert,replace_s take CharSequence like eq_v and eq_v_b
+  reflection calls (Lovins, etc) use EMPTY_ARGS/EMPTY_PARAMS
  */
 @interface OrgTartarusSnowballSnowballProgram : NSObject {
  @public
@@ -49,21 +55,21 @@
 /*!
  @brief Get the current buffer containing the stem.
  <p>
- NOTE: this may be a reference to a different character array than the
- one originally provided with setCurrent, in the exceptional case that 
- stemming produced a longer intermediate or result string. 
+  NOTE: this may be a reference to a different character array than the
+  one originally provided with setCurrent, in the exceptional case that 
+  stemming produced a longer intermediate or result string.  
  </p>
- <p>
- It is necessary to use <code>getCurrentBufferLength()</code> to determine
- the valid length of the returned buffer. For example, many words are
- stemmed simply by subtracting from the length to remove suffixes.
+  <p>
+  It is necessary to use <code>getCurrentBufferLength()</code> to determine
+  the valid length of the returned buffer. For example, many words are
+  stemmed simply by subtracting from the length to remove suffixes. 
  </p>
  - seealso: #getCurrentBufferLength()
  */
 - (IOSCharArray *)getCurrentBuffer;
 
 /*!
- @brief Get the valid length of the character array in 
+ @brief Get the valid length of the character array in  
  <code>getCurrentBuffer()</code>.
  @return valid length of the array.
  */
@@ -86,7 +92,7 @@
 
 #pragma mark Protected
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (JavaLangStringBuilder *)assign_toWithJavaLangStringBuilder:(JavaLangStringBuilder *)s;
 
@@ -162,4 +168,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgTartarusSnowballSnowballProgram)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgTartarusSnowballSnowballProgram")

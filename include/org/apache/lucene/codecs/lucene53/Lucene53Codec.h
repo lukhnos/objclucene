@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsLucene53Lucene53Codec
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsLucene53Lucene53Codec_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53Codec || defined(INCLUDE_OrgApacheLuceneCodecsLucene53Lucene53Codec))
 #define OrgApacheLuceneCodecsLucene53Lucene53Codec_
 
@@ -33,11 +39,11 @@
 
 /*!
  @brief Implements the Lucene 5.3 index format, with configurable per-field postings
- and docvalues formats.
+  and docvalues formats.
  <p>
- If you want to reuse functionality of this codec in another codec, extend
+  If you want to reuse functionality of this codec in another codec, extend 
  <code>FilterCodec</code>.
- - seealso: org.apache.lucene.codecs.lucene53 package documentation for file format details.
+ - seealso: org.apache.lucene.codecs.lucene53package documentation for file format details.
  */
 @interface OrgApacheLuceneCodecsLucene53Lucene53Codec : OrgApacheLuceneCodecsCodec
 
@@ -46,15 +52,14 @@
 /*!
  @brief Instantiates a new codec.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Instantiates a new codec, specifying the stored fields compression
- mode to use.
- @param mode stored fields compression mode to use for newly 
- flushed/merged segments.
+  mode to use.
+ @param mode stored fields compression mode to use for newly               flushed/merged segments.
  */
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *)mode;
+- (instancetype __nonnull)initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *)mode;
 
 - (OrgApacheLuceneCodecsCompoundFormat *)compoundFormat;
 
@@ -64,23 +69,23 @@
 
 /*!
  @brief Returns the docvalues format that should be used for writing 
- new segments of <code>field</code>.
+   new segments of <code>field</code>.
  The default implementation always returns "Lucene50".
- <p>
- <b>WARNING:</b> if you subclass, you are responsible for index 
- backwards compatibility: future version of Lucene are only 
- guaranteed to be able to read the default implementation. 
+   <p>
+   <b>WARNING:</b> if you subclass, you are responsible for index 
+   backwards compatibility: future version of Lucene are only 
+   guaranteed to be able to read the default implementation.
  */
 - (OrgApacheLuceneCodecsDocValuesFormat *)getDocValuesFormatForFieldWithNSString:(NSString *)field;
 
 /*!
  @brief Returns the postings format that should be used for writing 
- new segments of <code>field</code>.
+   new segments of <code>field</code>.
  The default implementation always returns "Lucene50".
- <p>
- <b>WARNING:</b> if you subclass, you are responsible for index 
- backwards compatibility: future version of Lucene are only 
- guaranteed to be able to read the default implementation. 
+   <p>
+   <b>WARNING:</b> if you subclass, you are responsible for index 
+   backwards compatibility: future version of Lucene are only 
+   guaranteed to be able to read the default implementation.
  */
 - (OrgApacheLuceneCodecsPostingsFormat *)getPostingsFormatForFieldWithNSString:(NSString *)field;
 
@@ -96,15 +101,19 @@
 
 - (OrgApacheLuceneCodecsTermVectorsFormat *)termVectorsFormat;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene53Lucene53Codec)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene53Lucene53Codec_init(OrgApacheLuceneCodecsLucene53Lucene53Codec *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53Codec *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53Codec *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53Codec *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53Codec *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_(OrgApacheLuceneCodecsLucene53Lucene53Codec *self, OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *mode);
 
@@ -116,4 +125,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53Codec)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53Codec")

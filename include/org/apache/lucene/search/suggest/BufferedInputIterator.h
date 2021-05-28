@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestBufferedInputIterator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestBufferedInputIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestBufferedInputIterator || defined(INCLUDE_OrgApacheLuceneSearchSuggestBufferedInputIterator))
 #define OrgApacheLuceneSearchSuggestBufferedInputIterator_
 
@@ -58,7 +64,7 @@
 /*!
  @brief Creates a new iterator, buffering entries from the specified iterator
  */
-- (instancetype)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
 
 - (id<JavaUtilSet>)contexts;
 
@@ -71,6 +77,10 @@
 - (OrgApacheLuceneUtilBytesRef *)payload;
 
 - (jlong)weight;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -91,4 +101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestBufferedInputIterator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestBufferedInputIterator")

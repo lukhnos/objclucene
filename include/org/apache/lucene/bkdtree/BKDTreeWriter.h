@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneBkdtreeBKDTreeWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneBkdtreeBKDTreeWriter_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDTreeWriter || defined(INCLUDE_OrgApacheLuceneBkdtreeBKDTreeWriter))
 #define OrgApacheLuceneBkdtreeBKDTreeWriter_
 
@@ -21,45 +27,35 @@
 
 /*!
  @brief Recursively builds a BKD tree to assign all incoming points to smaller
- and smaller rectangles until the number of points in a given
- rectangle is &lt= the <code>maxPointsInLeafNode</code>.
- The tree is
- fully balanced, which means the leaf nodes will have between 50% and 100% of
- the requested <code>maxPointsInLeafNode</code>, except for the adversarial case
- of indexing exactly the same point many times.
+   and smaller rectangles until the number of points in a given
+   rectangle is &lt= the <code>maxPointsInLeafNode</code>.The tree is
+   fully balanced, which means the leaf nodes will have between 50% and 100% of
+   the requested <code>maxPointsInLeafNode</code>, except for the adversarial case
+   of indexing exactly the same point many times.
  <p>
- See <a href="https://www.cs.duke.edu/~pankaj/publications/papers/bkd-sstd.pdf">this paper</a> for details.
- <p>This consumes heap during writing: it allocates a <code>LongBitSet(numPoints)</code>, 
- and for any nodes with fewer than <code>maxPointsSortInHeap</code>, it holds
- the points in memory as simple java arrays.
+   See <a href="https://www.cs.duke.edu/~pankaj/publications/papers/bkd-sstd.pdf">this paper</a> for details.
+   <p>This consumes heap during writing: it allocates a <code>LongBitSet(numPoints)</code>, 
+   and for any nodes with fewer than <code>maxPointsSortInHeap</code>, it holds
+   the points in memory as simple java arrays.  
  <p>
- <b>NOTE</b>: This can write at most Integer.MAX_VALUE * <code>maxPointsInLeafNode</code> total points.
-  
+   <b>NOTE</b>: This can write at most Integer.MAX_VALUE * <code>maxPointsInLeafNode</code> total points.
  */
 @interface OrgApacheLuceneBkdtreeBKDTreeWriter : NSObject
-
-+ (jint)BYTES_PER_DOC;
-
-+ (jint)DEFAULT_MAX_POINTS_IN_LEAF_NODE;
-
-+ (jint)DEFAULT_MAX_POINTS_SORT_IN_HEAP;
-
-+ (jdouble)MAX_LAT_INCL;
-
-+ (jdouble)MAX_LON_INCL;
-
-+ (jdouble)MIN_LAT_INCL;
-
-+ (jdouble)MIN_LON_INCL;
-
-+ (jdouble)TOLERANCE;
+@property (readonly, class) jint BYTES_PER_DOC NS_SWIFT_NAME(BYTES_PER_DOC);
+@property (readonly, class) jint DEFAULT_MAX_POINTS_IN_LEAF_NODE NS_SWIFT_NAME(DEFAULT_MAX_POINTS_IN_LEAF_NODE);
+@property (readonly, class) jint DEFAULT_MAX_POINTS_SORT_IN_HEAP NS_SWIFT_NAME(DEFAULT_MAX_POINTS_SORT_IN_HEAP);
+@property (readonly, class) jdouble MAX_LAT_INCL NS_SWIFT_NAME(MAX_LAT_INCL);
+@property (readonly, class) jdouble MAX_LON_INCL NS_SWIFT_NAME(MAX_LON_INCL);
+@property (readonly, class) jdouble MIN_LAT_INCL NS_SWIFT_NAME(MIN_LAT_INCL);
+@property (readonly, class) jdouble MIN_LON_INCL NS_SWIFT_NAME(MIN_LON_INCL);
+@property (readonly, class) jdouble TOLERANCE NS_SWIFT_NAME(TOLERANCE);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
-- (instancetype)initWithInt:(jint)maxPointsInLeafNode
-                    withInt:(jint)maxPointsSortInHeap;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)maxPointsInLeafNode
+                                            withInt:(jint)maxPointsSortInHeap;
 
 - (void)addWithDouble:(jdouble)lat
            withDouble:(jdouble)lon
@@ -105,61 +101,65 @@
 
 + (jboolean)validLonWithDouble:(jdouble)lon;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneBkdtreeBKDTreeWriter)
 
-inline jint OrgApacheLuceneBkdtreeBKDTreeWriter_get_BYTES_PER_DOC();
+inline jint OrgApacheLuceneBkdtreeBKDTreeWriter_get_BYTES_PER_DOC(void);
 #define OrgApacheLuceneBkdtreeBKDTreeWriter_BYTES_PER_DOC 20
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneBkdtreeBKDTreeWriter, BYTES_PER_DOC, jint)
 
-inline jint OrgApacheLuceneBkdtreeBKDTreeWriter_get_DEFAULT_MAX_POINTS_IN_LEAF_NODE();
+inline jint OrgApacheLuceneBkdtreeBKDTreeWriter_get_DEFAULT_MAX_POINTS_IN_LEAF_NODE(void);
 #define OrgApacheLuceneBkdtreeBKDTreeWriter_DEFAULT_MAX_POINTS_IN_LEAF_NODE 1024
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneBkdtreeBKDTreeWriter, DEFAULT_MAX_POINTS_IN_LEAF_NODE, jint)
 
 /*!
  @brief This works out to max of ~10 MB peak heap tied up during writing:
  */
-inline jint OrgApacheLuceneBkdtreeBKDTreeWriter_get_DEFAULT_MAX_POINTS_SORT_IN_HEAP();
+inline jint OrgApacheLuceneBkdtreeBKDTreeWriter_get_DEFAULT_MAX_POINTS_SORT_IN_HEAP(void);
 #define OrgApacheLuceneBkdtreeBKDTreeWriter_DEFAULT_MAX_POINTS_SORT_IN_HEAP 131072
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneBkdtreeBKDTreeWriter, DEFAULT_MAX_POINTS_SORT_IN_HEAP, jint)
 
-inline jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_get_MAX_LAT_INCL();
+inline jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_get_MAX_LAT_INCL(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_MAX_LAT_INCL;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneBkdtreeBKDTreeWriter, MAX_LAT_INCL, jdouble)
 
-inline jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_get_MAX_LON_INCL();
+inline jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_get_MAX_LON_INCL(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_MAX_LON_INCL;
 J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneBkdtreeBKDTreeWriter, MAX_LON_INCL, jdouble)
 
-inline jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_get_MIN_LAT_INCL();
+inline jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_get_MIN_LAT_INCL(void);
 #define OrgApacheLuceneBkdtreeBKDTreeWriter_MIN_LAT_INCL -90.0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneBkdtreeBKDTreeWriter, MIN_LAT_INCL, jdouble)
 
-inline jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_get_MIN_LON_INCL();
+inline jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_get_MIN_LON_INCL(void);
 #define OrgApacheLuceneBkdtreeBKDTreeWriter_MIN_LON_INCL -180.0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneBkdtreeBKDTreeWriter, MIN_LON_INCL, jdouble)
 
 /*!
  @brief Max quantization error for both lat and lon when encoding/decoding into 32 bits
  */
-inline jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_get_TOLERANCE();
+inline jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_get_TOLERANCE(void);
 #define OrgApacheLuceneBkdtreeBKDTreeWriter_TOLERANCE 1.0E-7
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneBkdtreeBKDTreeWriter, TOLERANCE, jdouble)
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeWriter_init(OrgApacheLuceneBkdtreeBKDTreeWriter *self);
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeWriter_initPackagePrivate(OrgApacheLuceneBkdtreeBKDTreeWriter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeWriter *new_OrgApacheLuceneBkdtreeBKDTreeWriter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeWriter *new_OrgApacheLuceneBkdtreeBKDTreeWriter_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeWriter *create_OrgApacheLuceneBkdtreeBKDTreeWriter_init();
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeWriter *create_OrgApacheLuceneBkdtreeBKDTreeWriter_initPackagePrivate(void);
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeWriter_initWithInt_withInt_(OrgApacheLuceneBkdtreeBKDTreeWriter *self, jint maxPointsInLeafNode, jint maxPointsSortInHeap);
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeWriter_initPackagePrivateWithInt_withInt_(OrgApacheLuceneBkdtreeBKDTreeWriter *self, jint maxPointsInLeafNode, jint maxPointsSortInHeap);
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeWriter *new_OrgApacheLuceneBkdtreeBKDTreeWriter_initWithInt_withInt_(jint maxPointsInLeafNode, jint maxPointsSortInHeap) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeWriter *new_OrgApacheLuceneBkdtreeBKDTreeWriter_initPackagePrivateWithInt_withInt_(jint maxPointsInLeafNode, jint maxPointsSortInHeap) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeWriter *create_OrgApacheLuceneBkdtreeBKDTreeWriter_initWithInt_withInt_(jint maxPointsInLeafNode, jint maxPointsSortInHeap);
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeWriter *create_OrgApacheLuceneBkdtreeBKDTreeWriter_initPackagePrivateWithInt_withInt_(jint maxPointsInLeafNode, jint maxPointsSortInHeap);
 
 FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeWriter_verifyParamsWithInt_withInt_(jint maxPointsInLeafNode, jint maxPointsSortInHeap);
 
@@ -179,4 +179,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDTreeWriter")

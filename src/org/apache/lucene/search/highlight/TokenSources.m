@@ -21,6 +21,10 @@
 #include "org/apache/lucene/search/highlight/TokenSources.h"
 #include "org/apache/lucene/search/highlight/TokenStreamFromTermVector.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/TokenSources must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchHighlightTokenSources ()
 
 - (instancetype)init;
@@ -29,9 +33,25 @@
 
 __attribute__((unused)) static void OrgApacheLuceneSearchHighlightTokenSources_init(OrgApacheLuceneSearchHighlightTokenSources *self);
 
-__attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenSources *new_OrgApacheLuceneSearchHighlightTokenSources_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenSources *new_OrgApacheLuceneSearchHighlightTokenSources_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenSources *create_OrgApacheLuceneSearchHighlightTokenSources_init();
+__attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenSources *create_OrgApacheLuceneSearchHighlightTokenSources_init(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$1(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$2(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$3(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$4(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$5(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$6(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$7(void);
 
 @implementation OrgApacheLuceneSearchHighlightTokenSources
 
@@ -105,53 +125,37 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithNSString_withNSString_withOrgApacheLuceneAnalysisAnalyzer_(field, contents, analyzer);
 }
 
-+ (IOSObjectArray *)__annotations_getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withOrgApacheLuceneDocumentDocument_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_getTokenStreamWithOrgApacheLuceneIndexTerms_withBoolean_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_getTokenStreamWithOrgApacheLuceneIndexTerms_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_getTokenStreamWithOffsetsWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_getTokenStreamWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_getTokenStreamWithOrgApacheLuceneDocumentDocument_withNSString_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_getTokenStreamWithNSString_withNSString_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TokenSources", NULL, 0x2, NULL, NULL },
-    { "getTokenStreamWithNSString:withOrgApacheLuceneIndexFields:withNSString:withOrgApacheLuceneAnalysisAnalyzer:withInt:", "getTokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getTermVectorTokenStreamOrNullWithNSString:withOrgApacheLuceneIndexFields:withInt:", "getTermVectorTokenStreamOrNull", "Lorg.apache.lucene.analysis.TokenStream;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader:withInt:withNSString:withOrgApacheLuceneDocumentDocument:withOrgApacheLuceneAnalysisAnalyzer:", "getAnyTokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader:withInt:withNSString:withOrgApacheLuceneAnalysisAnalyzer:", "getAnyTokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getTokenStreamWithOrgApacheLuceneIndexTerms:withBoolean:", "getTokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getTokenStreamWithOrgApacheLuceneIndexTerms:", "getTokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getTokenStreamWithOffsetsWithOrgApacheLuceneIndexIndexReader:withInt:withNSString:", "getTokenStreamWithOffsets", "Lorg.apache.lucene.analysis.TokenStream;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getTokenStreamWithOrgApacheLuceneIndexIndexReader:withInt:withNSString:withOrgApacheLuceneAnalysisAnalyzer:", "getTokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getTokenStreamWithOrgApacheLuceneDocumentDocument:withNSString:withOrgApacheLuceneAnalysisAnalyzer:", "getTokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x9, NULL, NULL },
-    { "getTokenStreamWithNSString:withNSString:withOrgApacheLuceneAnalysisAnalyzer:", "getTokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x9, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x9, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x9, 3, 4, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x9, 5, 6, 2, -1, 7, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x9, 5, 8, 2, -1, 9, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x9, 0, 10, 2, -1, 11, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x9, 0, 12, 2, -1, 13, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x9, 14, 15, 2, -1, 16, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x9, 0, 8, 2, -1, 17, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x9, 0, 18, -1, -1, 19, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x9, 0, 20, -1, -1, 21, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTokenSources = { 2, "TokenSources", "org.apache.lucene.search.highlight", NULL, 0x1, 11, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getTokenStreamWithNSString:withOrgApacheLuceneIndexFields:withNSString:withOrgApacheLuceneAnalysisAnalyzer:withInt:);
+  methods[2].selector = @selector(getTermVectorTokenStreamOrNullWithNSString:withOrgApacheLuceneIndexFields:withInt:);
+  methods[3].selector = @selector(getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader:withInt:withNSString:withOrgApacheLuceneDocumentDocument:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[4].selector = @selector(getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader:withInt:withNSString:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[5].selector = @selector(getTokenStreamWithOrgApacheLuceneIndexTerms:withBoolean:);
+  methods[6].selector = @selector(getTokenStreamWithOrgApacheLuceneIndexTerms:);
+  methods[7].selector = @selector(getTokenStreamWithOffsetsWithOrgApacheLuceneIndexIndexReader:withInt:withNSString:);
+  methods[8].selector = @selector(getTokenStreamWithOrgApacheLuceneIndexIndexReader:withInt:withNSString:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[9].selector = @selector(getTokenStreamWithOrgApacheLuceneDocumentDocument:withNSString:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[10].selector = @selector(getTokenStreamWithNSString:withNSString:withOrgApacheLuceneAnalysisAnalyzer:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "getTokenStream", "LNSString;LOrgApacheLuceneIndexFields;LNSString;LOrgApacheLuceneAnalysisAnalyzer;I", "LJavaIoIOException;", "getTermVectorTokenStreamOrNull", "LNSString;LOrgApacheLuceneIndexFields;I", "getAnyTokenStream", "LOrgApacheLuceneIndexIndexReader;ILNSString;LOrgApacheLuceneDocumentDocument;LOrgApacheLuceneAnalysisAnalyzer;", (void *)&OrgApacheLuceneSearchHighlightTokenSources__Annotations$0, "LOrgApacheLuceneIndexIndexReader;ILNSString;LOrgApacheLuceneAnalysisAnalyzer;", (void *)&OrgApacheLuceneSearchHighlightTokenSources__Annotations$1, "LOrgApacheLuceneIndexTerms;Z", (void *)&OrgApacheLuceneSearchHighlightTokenSources__Annotations$2, "LOrgApacheLuceneIndexTerms;", (void *)&OrgApacheLuceneSearchHighlightTokenSources__Annotations$3, "getTokenStreamWithOffsets", "LOrgApacheLuceneIndexIndexReader;ILNSString;", (void *)&OrgApacheLuceneSearchHighlightTokenSources__Annotations$4, (void *)&OrgApacheLuceneSearchHighlightTokenSources__Annotations$5, "LOrgApacheLuceneDocumentDocument;LNSString;LOrgApacheLuceneAnalysisAnalyzer;", (void *)&OrgApacheLuceneSearchHighlightTokenSources__Annotations$6, "LNSString;LNSString;LOrgApacheLuceneAnalysisAnalyzer;", (void *)&OrgApacheLuceneSearchHighlightTokenSources__Annotations$7 };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTokenSources = { "TokenSources", "org.apache.lucene.search.highlight", ptrTable, methods, NULL, 7, 0x1, 11, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightTokenSources;
 }
 
@@ -176,7 +180,7 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
     return tokenStream;
   }
   tokenStream = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer)) tokenStreamWithNSString:field withNSString:text];
-  if (maxStartOffset >= 0 && maxStartOffset < ((jint) [((NSString *) nil_chk(text)) length]) - 1) {
+  if (maxStartOffset >= 0 && maxStartOffset < [((NSString *) nil_chk(text)) java_length] - 1) {
     tokenStream = create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(tokenStream, maxStartOffset);
   }
   return tokenStream;
@@ -197,9 +201,9 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
 OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withOrgApacheLuceneDocumentDocument_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneIndexIndexReader *reader, jint docId, NSString *field, OrgApacheLuceneDocumentDocument *document, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
   OrgApacheLuceneSearchHighlightTokenSources_initialize();
   OrgApacheLuceneAnalysisTokenStream *ts = nil;
-  OrgApacheLuceneIndexFields *vectors = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getTermVectorsWithInt:docId];
+  OrgApacheLuceneIndexFields *vectors = JreRetainedLocalValue([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getTermVectorsWithInt:docId]);
   if (vectors != nil) {
-    OrgApacheLuceneIndexTerms *vector = [vectors termsWithNSString:field];
+    OrgApacheLuceneIndexTerms *vector = JreRetainedLocalValue([vectors termsWithNSString:field]);
     if (vector != nil) {
       ts = OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithOrgApacheLuceneIndexTerms_(vector);
     }
@@ -213,9 +217,9 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
 OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneIndexIndexReader *reader, jint docId, NSString *field, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
   OrgApacheLuceneSearchHighlightTokenSources_initialize();
   OrgApacheLuceneAnalysisTokenStream *ts = nil;
-  OrgApacheLuceneIndexFields *vectors = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getTermVectorsWithInt:docId];
+  OrgApacheLuceneIndexFields *vectors = JreRetainedLocalValue([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getTermVectorsWithInt:docId]);
   if (vectors != nil) {
-    OrgApacheLuceneIndexTerms *vector = [vectors termsWithNSString:field];
+    OrgApacheLuceneIndexTerms *vector = JreRetainedLocalValue([vectors termsWithNSString:field]);
     if (vector != nil) {
       ts = OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithOrgApacheLuceneIndexTerms_(vector);
     }
@@ -241,11 +245,11 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
 
 OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithOffsetsWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_(OrgApacheLuceneIndexIndexReader *reader, jint docId, NSString *field) {
   OrgApacheLuceneSearchHighlightTokenSources_initialize();
-  OrgApacheLuceneIndexFields *vectors = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getTermVectorsWithInt:docId];
+  OrgApacheLuceneIndexFields *vectors = JreRetainedLocalValue([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getTermVectorsWithInt:docId]);
   if (vectors == nil) {
     return nil;
   }
-  OrgApacheLuceneIndexTerms *vector = [vectors termsWithNSString:field];
+  OrgApacheLuceneIndexTerms *vector = JreRetainedLocalValue([vectors termsWithNSString:field]);
   if (vector == nil) {
     return nil;
   }
@@ -257,13 +261,13 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
 
 OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneIndexIndexReader *reader, jint docId, NSString *field, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
   OrgApacheLuceneSearchHighlightTokenSources_initialize();
-  OrgApacheLuceneDocumentDocument *doc = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) documentWithInt:docId];
+  OrgApacheLuceneDocumentDocument *doc = JreRetainedLocalValue([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) documentWithInt:docId]);
   return OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithOrgApacheLuceneDocumentDocument_withNSString_withOrgApacheLuceneAnalysisAnalyzer_(doc, field, analyzer);
 }
 
 OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithOrgApacheLuceneDocumentDocument_withNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneDocumentDocument *doc, NSString *field, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
   OrgApacheLuceneSearchHighlightTokenSources_initialize();
-  NSString *contents = [((OrgApacheLuceneDocumentDocument *) nil_chk(doc)) getWithNSString:field];
+  NSString *contents = JreRetainedLocalValue([((OrgApacheLuceneDocumentDocument *) nil_chk(doc)) getWithNSString:field]);
   if (contents == nil) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Field ", field, @" in document is not stored and cannot be analyzed"));
   }
@@ -276,8 +280,40 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
     return [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer)) tokenStreamWithNSString:field withNSString:contents];
   }
   @catch (JavaIoIOException *ex) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(ex);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(ex);
   }
+}
+
+IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$2() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$3() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$4() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$5() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$6() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneSearchHighlightTokenSources__Annotations$7() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTokenSources)

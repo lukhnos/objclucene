@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchIndexSearcher
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchIndexSearcher_) && (INCLUDE_ALL_OrgApacheLuceneSearchIndexSearcher || defined(INCLUDE_OrgApacheLuceneSearchIndexSearcher))
 #define OrgApacheLuceneSearchIndexSearcher_
 
@@ -44,28 +50,28 @@
 
 /*!
  @brief Implements search over a single IndexReader.
- <p>Applications usually need only call the inherited
+ <p>Applications usually need only call the inherited 
  <code>search(Query,int)</code>
- or <code>search(Query,Filter,int)</code> methods. For
- performance reasons, if your index is unchanging, you
- should share a single IndexSearcher instance across
- multiple searches instead of creating a new one
- per-search.  If your index has changed and you wish to
- see the changes reflected in searching, you should
- use <code>DirectoryReader.openIfChanged(DirectoryReader)</code>
- to obtain a new reader and
- then create a new IndexSearcher from that.  Also, for
- low-latency turnaround it's best to use a near-real-time
- reader (<code>DirectoryReader.open(IndexWriter,boolean)</code>).
- Once you have a new <code>IndexReader</code>, it's relatively
- cheap to create a new IndexSearcher from it.
+  or <code>search(Query,Filter,int)</code> methods. For
+  performance reasons, if your index is unchanging, you
+  should share a single IndexSearcher instance across
+  multiple searches instead of creating a new one
+  per-search.  If your index has changed and you wish to
+  see the changes reflected in searching, you should
+  use <code>DirectoryReader.openIfChanged(DirectoryReader)</code>
+  to obtain a new reader and
+  then create a new IndexSearcher from that.  Also, for
+  low-latency turnaround it's best to use a near-real-time
+  reader (<code>DirectoryReader.open(IndexWriter,boolean)</code>).
+  Once you have a new <code>IndexReader</code>, it's relatively
+  cheap to create a new IndexSearcher from it.  
  <a name="thread-safety"></a><p><b>NOTE</b>: <code><code>IndexSearcher</code>
  </code> instances are completely
- thread safe, meaning multiple threads can call any of its
- methods, concurrently.  If your application requires
- external synchronization, you should <b>not</b>
- synchronize on the <code>IndexSearcher</code> instance;
- use your own (non-Lucene) objects instead.</p>
+  thread safe, meaning multiple threads can call any of its
+  methods, concurrently.  If your application requires
+  external synchronization, you should <b>not</b>
+  synchronize on the <code>IndexSearcher</code> instance;
+  use your own (non-Lucene) objects instead.</p>
  */
 @interface OrgApacheLuceneSearchIndexSearcher : NSObject {
  @public
@@ -83,52 +89,51 @@
 /*!
  @brief Creates a searcher searching the provided index.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r;
 
 /*!
  @brief Runs searches for each segment separately, using the
- provided ExecutorService.
- IndexSearcher will not
- close/awaitTermination this ExecutorService on
- close; you must do so, eventually, on your own.  NOTE:
- if you are using <code>NIOFSDirectory</code>, do not use
- the shutdownNow method of ExecutorService as this uses
- Thread.interrupt under-the-hood which can silently
- close file descriptors (see <a
- href="https://issues.apache.org/jira/browse/LUCENE-2239">LUCENE-2239</a>).
-  
+   provided ExecutorService.IndexSearcher will not
+   close/awaitTermination this ExecutorService on
+   close; you must do so, eventually, on your own.
+ NOTE:
+   if you are using <code>NIOFSDirectory</code>, do not use
+   the shutdownNow method of ExecutorService as this uses
+   Thread.interrupt under-the-hood which can silently
+   close file descriptors (see <a href="https://issues.apache.org/jira/browse/LUCENE-2239">
+ LUCENE-2239</a>).
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                  withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
+                            withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
 
 /*!
  @brief Creates a searcher searching the provided top-level <code>IndexReaderContext</code>.
  - seealso: IndexReaderContext
  - seealso: IndexReader#getContext()
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context;
 
 /*!
  @brief Creates a searcher searching the provided top-level <code>IndexReaderContext</code>.
  <p>
- Given a non-<code>null</code> <code>ExecutorService</code> this method runs
- searches for each segment separately, using the provided ExecutorService.
- IndexSearcher will not close/awaitTermination this ExecutorService on
- close; you must do so, eventually, on your own. NOTE: if you are using
+  Given a non-<code>null</code> <code>ExecutorService</code> this method runs
+  searches for each segment separately, using the provided ExecutorService.
+  IndexSearcher will not close/awaitTermination this ExecutorService on
+  close; you must do so, eventually, on your own. NOTE: if you are using 
  <code>NIOFSDirectory</code>, do not use the shutdownNow method of
- ExecutorService as this uses Thread.interrupt under-the-hood which can
- silently close file descriptors (see <a
- href="https://issues.apache.org/jira/browse/LUCENE-2239">LUCENE-2239</a>).
+  ExecutorService as this uses Thread.interrupt under-the-hood which can
+  silently close file descriptors (see <a href="https://issues.apache.org/jira/browse/LUCENE-2239">
+ LUCENE-2239</a>).
  - seealso: IndexReaderContext
  - seealso: IndexReader#getContext()
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context
-                         withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context
+                                   withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
 
 /*!
  @brief Returns <code>CollectionStatistics</code> for a field.
  This can be overridden for example, to return a field's statistics
- across a distributed collection.
+  across a distributed collection.
  */
 - (OrgApacheLuceneSearchCollectionStatistics *)collectionStatisticsWithNSString:(NSString *)field;
 
@@ -140,15 +145,15 @@
 /*!
  @brief Creates a normalized weight for a top-level <code>Query</code>.
  The query is rewritten by this method and <code>Query.createWeight</code> called,
- afterwards the <code>Weight</code> is normalized. The returned <code>Weight</code>
- can then directly be used to get a <code>Scorer</code>.
+  afterwards the <code>Weight</code> is normalized. The returned <code>Weight</code>
+  can then directly be used to get a <code>Scorer</code>.
  */
 - (OrgApacheLuceneSearchWeight *)createNormalizedWeightWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                           withBoolean:(jboolean)needsScores;
 
 /*!
  @brief Creates a <code>Weight</code> for the given query, potentially adding caching
- if possible and configured.
+  if possible and configured.
  */
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                 withBoolean:(jboolean)needsScores;
@@ -161,25 +166,25 @@
 
 /*!
  @brief Sugar for <code>.getIndexReader().document(docID, fieldsToLoad)</code>
- - seealso: IndexReader#document(int,Set)
+ - seealso: IndexReader#document(int, Set)
  */
 - (OrgApacheLuceneDocumentDocument *)docWithInt:(jint)docID
                                 withJavaUtilSet:(id<JavaUtilSet>)fieldsToLoad;
 
 /*!
  @brief Sugar for <code>.getIndexReader().document(docID, fieldVisitor)</code>
- - seealso: IndexReader#document(int,StoredFieldVisitor)
+ - seealso: IndexReader#document(int, StoredFieldVisitor)
  */
 - (void)docWithInt:(jint)docID
 withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisitor *)fieldVisitor;
 
 /*!
- @brief Returns an Explanation that describes how <code>doc</code> scored against
+ @brief Returns an Explanation that describes how <code>doc</code> scored against 
  <code>query</code>.
  <p>This is intended to be used in developing Similarity implementations,
- and, for good performance, should not be displayed with every hit.
- Computing an explanation is as expensive as executing the query over the
- entire index.
+  and, for good performance, should not be displayed with every hit.
+  Computing an explanation is as expensive as executing the query over the
+  entire index.
  */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                     withInt:(jint)doc;
@@ -197,7 +202,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 /*!
  @brief Expert: returns a default Similarity instance.
  In general, this method is only called to initialize searchers and writers.
- User code and query implementations should respect
+  User code and query implementations should respect 
  <code>IndexSearcher.getSimilarity(boolean)</code>.
  */
 + (OrgApacheLuceneSearchSimilaritiesSimilarity *)getDefaultSimilarity;
@@ -208,14 +213,13 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (OrgApacheLuceneIndexIndexReader *)getIndexReader;
 
 /*!
- @brief Expert: Get the <code>Similarity</code> to use to compute scores.
- When
- <code>needsScores</code> is <code>false</code>, this method will return a simple
- <code>Similarity</code> that does not leverage scoring factors such as norms.
+ @brief Expert: Get the <code>Similarity</code> to use to compute scores.When
+   <code>needsScores</code> is <code>false</code>, this method will return a simple
+   <code>Similarity</code> that does not leverage scoring factors such as norms.
  When <code>needsScores</code> is <code>true</code>, this returns the
- <code>Similarity</code> that has been set through <code>setSimilarity(Similarity)</code>
- or the <code>getDefaultSimilarity()</code> default <code>Similarity</code> if none
- has been set explicitely. 
+   <code>Similarity</code> that has been set through <code>setSimilarity(Similarity)</code>
+   or the <code>getDefaultSimilarity()</code> default <code>Similarity</code> if none
+   has been set explicitely.
  */
 - (OrgApacheLuceneSearchSimilaritiesSimilarity *)getSimilarityWithBoolean:(jboolean)needsScores;
 
@@ -227,16 +231,16 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Expert: called to re-write queries into primitive queries.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)original;
 
 /*!
  @brief Lower-level search API.
  <p><code>LeafCollector.collect(int)</code> is called for every matching document.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (void)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
           withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)results;
@@ -244,9 +248,9 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 /*!
  @brief Lower-level search API.
  Search all leaves using the given <code>CollectorManager</code>. In contrast
- to <code>search(Query,Collector)</code>, this method will use the searcher's
+  to <code>search(Query, Collector)</code>, this method will use the searcher's 
  <code>ExecutorService</code> in order to parallelize execution of the collection
- on the configured <code>leafSlices</code>.
+  on the configured <code>leafSlices</code>.
  - seealso: CollectorManager
  */
 - (id)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -255,12 +259,12 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 /*!
  @brief Lower-level search API.
  <p><code>LeafCollector.collect(int)</code> is called for every matching
- document.
+  document.
  @param query to match documents
  @param filter if non-null, used to permit documents to be collected.
  @param results to receive hits
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (void)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
              withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
@@ -268,25 +272,24 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Finds the top <code>n</code>
- hits for <code>query</code>, applying <code>filter</code> if non-null.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  hits for <code>query</code>, applying <code>filter</code> if non-null.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                        withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
                                                                withInt:(jint)n;
 
 /*!
- @brief Search implementation with arbitrary sorting.
- Finds
- the top <code>n</code> hits for <code>query</code>, applying
- <code>filter</code> if non-null, and sorting the hits by the criteria in
+ @brief Search implementation with arbitrary sorting.Finds
+  the top <code>n</code> hits for <code>query</code>, applying 
+ <code>filter</code> if non-null, and sorting the hits by the criteria in 
  <code>sort</code>.
- <p>NOTE: this does not compute scores by default; use
+ <p>NOTE: this does not compute scores by default; use 
  <code>IndexSearcher.search(Query,Filter,int,Sort,boolean,boolean)</code> to
- control scoring.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  control scoring.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                             withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
@@ -295,18 +298,18 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Search implementation with arbitrary sorting, plus
- control over whether hit scores and max score
- should be computed.
- Finds
- the top <code>n</code> hits for <code>query</code>, applying
- <code>filter</code> if non-null, and sorting the hits by the criteria in
- <code>sort</code>.  If <code>doDocScores</code> is <code>true</code>
- then the score of each hit will be computed and
- returned.  If <code>doMaxScore</code> is
+  control over whether hit scores and max score
+  should be computed.Finds
+  the top <code>n</code> hits for <code>query</code>, applying 
+ <code>filter</code> if non-null, and sorting the hits by the criteria in 
+ <code>sort</code>.
+ If <code>doDocScores</code> is <code>true</code>
+  then the score of each hit will be computed and
+  returned.  If <code>doMaxScore</code> is 
  <code>true</code> then the maximum score over all
- collected hits will be computed.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  collected hits will be computed.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                             withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
@@ -317,9 +320,9 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Finds the top <code>n</code>
- hits for <code>query</code>.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  hits for <code>query</code>.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                withInt:(jint)n;
@@ -328,9 +331,9 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
  @brief Search implementation with arbitrary sorting and no filter.
  @param query The query to search for
  @param n Return only the top n results
- @param sort The <code>org.apache.lucene.search.Sort</code> object
+ @param sort The <code>org.apache.lucene.search.Sort</code>  object
  @return The top docs, sorted according to the supplied <code>org.apache.lucene.search.Sort</code> instance
- @throws IOException if there is a low-level I/O error
+ @throw IOExceptionif there is a low-level I/O error
  */
 - (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                     withInt:(jint)n
@@ -338,18 +341,18 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Search implementation with arbitrary sorting, plus
- control over whether hit scores and max score
- should be computed.
- Finds
- the top <code>n</code> hits for <code>query</code>, applying
- <code>filter</code> if non-null, and sorting the hits by the criteria in
- <code>sort</code>.  If <code>doDocScores</code> is <code>true</code>
- then the score of each hit will be computed and
- returned.  If <code>doMaxScore</code> is
+  control over whether hit scores and max score
+  should be computed.Finds
+  the top <code>n</code> hits for <code>query</code>, applying 
+ <code>filter</code> if non-null, and sorting the hits by the criteria in 
+ <code>sort</code>.
+ If <code>doDocScores</code> is <code>true</code>
+  then the score of each hit will be computed and
+  returned.  If <code>doMaxScore</code> is 
  <code>true</code> then the maximum score over all
- collected hits will be computed.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  collected hits will be computed.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                     withInt:(jint)n
@@ -359,14 +362,14 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Finds the top <code>n</code>
- hits for <code>query</code>, applying <code>filter</code> if non-null,
- where all results are after a previous result (<code>after</code>).
+  hits for <code>query</code>, applying <code>filter</code> if non-null,
+  where all results are after a previous result (<code>after</code>).
  <p>
- By passing the bottom result from a previous page as <code>after</code>,
- this method can be used for efficient 'deep-paging' across potentially
- large result sets.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  By passing the bottom result from a previous page as <code>after</code>,
+  this method can be used for efficient 'deep-paging' across potentially
+  large result sets.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
                                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -375,14 +378,14 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Finds the top <code>n</code>
- hits for <code>query</code>, applying <code>filter</code> if non-null,
- where all results are after a previous result (<code>after</code>).
+  hits for <code>query</code>, applying <code>filter</code> if non-null,
+  where all results are after a previous result (<code>after</code>).
  <p>
- By passing the bottom result from a previous page as <code>after</code>,
- this method can be used for efficient 'deep-paging' across potentially
- large result sets.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  By passing the bottom result from a previous page as <code>after</code>,
+  this method can be used for efficient 'deep-paging' across potentially
+  large result sets.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopFieldDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
                                                      withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -392,19 +395,19 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Finds the top <code>n</code>
- hits for <code>query</code> where all results are after a previous
- result (<code>after</code>), allowing control over
- whether hit scores and max score should be computed.
+  hits for <code>query</code> where all results are after a previous
+  result (<code>after</code>), allowing control over
+  whether hit scores and max score should be computed.
  <p>
- By passing the bottom result from a previous page as <code>after</code>,
- this method can be used for efficient 'deep-paging' across potentially
- large result sets.  If <code>doDocScores</code> is <code>true</code>
- then the score of each hit will be computed and
- returned.  If <code>doMaxScore</code> is
+  By passing the bottom result from a previous page as <code>after</code>,
+  this method can be used for efficient 'deep-paging' across potentially
+  large result sets.  If <code>doDocScores</code> is <code>true</code>
+  then the score of each hit will be computed and
+  returned.  If <code>doMaxScore</code> is 
  <code>true</code> then the maximum score over all
- collected hits will be computed.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  collected hits will be computed.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopFieldDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
                                                      withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -416,14 +419,14 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Finds the top <code>n</code>
- hits for <code>query</code> where all results are after a previous 
- result (<code>after</code>).
+  hits for <code>query</code> where all results are after a previous 
+  result (<code>after</code>).
  <p>
- By passing the bottom result from a previous page as <code>after</code>,
- this method can be used for efficient 'deep-paging' across potentially
- large result sets.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  By passing the bottom result from a previous page as <code>after</code>,
+  this method can be used for efficient 'deep-paging' across potentially
+  large result sets.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
                                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -431,14 +434,14 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Finds the top <code>n</code>
- hits for <code>query</code> where all results are after a previous
- result (<code>after</code>).
+  hits for <code>query</code> where all results are after a previous
+  result (<code>after</code>).
  <p>
- By passing the bottom result from a previous page as <code>after</code>,
- this method can be used for efficient 'deep-paging' across potentially
- large result sets.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  By passing the bottom result from a previous page as <code>after</code>,
+  this method can be used for efficient 'deep-paging' across potentially
+  large result sets.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
                                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -447,19 +450,19 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Finds the top <code>n</code>
- hits for <code>query</code> where all results are after a previous 
- result (<code>after</code>), allowing control over
- whether hit scores and max score should be computed.
+  hits for <code>query</code> where all results are after a previous 
+  result (<code>after</code>), allowing control over
+  whether hit scores and max score should be computed.
  <p>
- By passing the bottom result from a previous page as <code>after</code>,
- this method can be used for efficient 'deep-paging' across potentially
- large result sets.  If <code>doDocScores</code> is <code>true</code>
- then the score of each hit will be computed and
- returned.  If <code>doMaxScore</code> is
+  By passing the bottom result from a previous page as <code>after</code>,
+  this method can be used for efficient 'deep-paging' across potentially
+  large result sets.  If <code>doDocScores</code> is <code>true</code>
+  then the score of each hit will be computed and
+  returned.  If <code>doMaxScore</code> is 
  <code>true</code> then the maximum score over all
- collected hits will be computed.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  collected hits will be computed.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchTopFieldDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
                                                      withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -481,17 +484,17 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 /*!
  @brief Set the <code>QueryCache</code> to use when scores are not needed.
  A value of <code>null</code> indicates that query matches should never be
- cached. This method should be called <b>before</b> starting using this
+  cached. This method should be called <b>before</b> starting using this 
  <code>IndexSearcher</code>.
- <p>NOTE: When using a query cache, queries should not be modified after
- they have been passed to IndexSearcher.
+  <p>NOTE: When using a query cache, queries should not be modified after
+  they have been passed to IndexSearcher.
  - seealso: QueryCache
  */
 - (void)setQueryCacheWithOrgApacheLuceneSearchQueryCache:(id<OrgApacheLuceneSearchQueryCache>)queryCache;
 
 /*!
  @brief Set the <code>QueryCachingPolicy</code> to use for query caching.
- This method should be called <b>before</b> starting using this
+ This method should be called <b>before</b> starting using this 
  <code>IndexSearcher</code>.
  - seealso: QueryCachingPolicy
  */
@@ -505,7 +508,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 /*!
  @brief Returns <code>TermStatistics</code> for a term.
  This can be overridden for example, to return a term's statistics
- across a distributed collection.
+  across a distributed collection.
  */
 - (OrgApacheLuceneSearchTermStatistics *)termStatisticsWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                                 withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context;
@@ -516,15 +519,15 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 /*!
  @brief Expert: low-level implementation method
- Returns an Explanation that describes how <code>doc</code> scored against
+  Returns an Explanation that describes how <code>doc</code> scored against 
  <code>weight</code>.
  <p>This is intended to be used in developing Similarity implementations,
- and, for good performance, should not be displayed with every hit.
- Computing an explanation is as expensive as executing the query over the
- entire index.
- <p>Applications should call <code>IndexSearcher.explain(Query,int)</code>.
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  and, for good performance, should not be displayed with every hit.
+  Computing an explanation is as expensive as executing the query over the
+  entire index. 
+ <p>Applications should call <code>IndexSearcher.explain(Query, int)</code>.
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
                                                                      withInt:(jint)doc;
@@ -532,18 +535,16 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 /*!
  @brief Lower-level search API.
  <p>
- <code>LeafCollector.collect(int)</code> is called for every document. <br>
+  <code>LeafCollector.collect(int)</code> is called for every document. <br>
+   
  <p>
- NOTE: this method executes the searches on all given leaves exclusively.
- To search across all the searchers leaves use <code>leafContexts</code>.
- @param leaves 
- the searchers leaves to execute the searches on
- @param weight
- to match documents
- @param collector
- to receive hits
- @throws BooleanQuery.TooManyClauses If a query would exceed 
- <code>BooleanQuery.getMaxClauseCount()</code> clauses.
+  NOTE: this method executes the searches on all given leaves exclusively.
+  To search across all the searchers leaves use <code>leafContexts</code>.
+ @param leaves the searchers leaves to execute the searches on
+ @param weight to match documents
+ @param collector to receive hits
+ @throw BooleanQuery.TooManyClausesIf a query would exceed 
+          <code>BooleanQuery.getMaxClauseCount()</code> clauses.
  */
 - (void)searchWithJavaUtilList:(id<JavaUtilList>)leaves
 withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
@@ -552,7 +553,7 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
 /*!
  @brief Expert: Creates an array of leaf slices each holding a subset of the given leaves.
  Each <code>LeafSlice</code> is executed in a single thread. By default there
- will be one <code>LeafSlice</code> per leaf (<code>org.apache.lucene.index.LeafReaderContext</code>).
+  will be one <code>LeafSlice</code> per leaf (<code>org.apache.lucene.index.LeafReaderContext</code>).
  */
 - (IOSObjectArray *)slicesWithJavaUtilList:(id<JavaUtilList>)leaves;
 
@@ -560,6 +561,10 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
  */
 - (OrgApacheLuceneSearchQuery *)wrapFilterWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                          withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -570,13 +575,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchIndexSearcher, readerContext_, OrgApach
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchIndexSearcher, leafContexts_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchIndexSearcher, leafSlices_, IOSObjectArray *)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesSimilarity *OrgApacheLuceneSearchIndexSearcher_getDefaultSimilarity();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesSimilarity *OrgApacheLuceneSearchIndexSearcher_getDefaultSimilarity(void);
 
-FOUNDATION_EXPORT id<OrgApacheLuceneSearchQueryCache> OrgApacheLuceneSearchIndexSearcher_getDefaultQueryCache();
+FOUNDATION_EXPORT id<OrgApacheLuceneSearchQueryCache> OrgApacheLuceneSearchIndexSearcher_getDefaultQueryCache(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchIndexSearcher_setDefaultQueryCacheWithOrgApacheLuceneSearchQueryCache_(id<OrgApacheLuceneSearchQueryCache> defaultQueryCache);
 
-FOUNDATION_EXPORT id<OrgApacheLuceneSearchQueryCachingPolicy> OrgApacheLuceneSearchIndexSearcher_getDefaultQueryCachingPolicy();
+FOUNDATION_EXPORT id<OrgApacheLuceneSearchQueryCachingPolicy> OrgApacheLuceneSearchIndexSearcher_getDefaultQueryCachingPolicy(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchIndexSearcher_setDefaultQueryCachingPolicyWithOrgApacheLuceneSearchQueryCachingPolicy_(id<OrgApacheLuceneSearchQueryCachingPolicy> defaultQueryCachingPolicy);
 
@@ -615,7 +620,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchIndexSearcher)
 
 /*!
  @brief A class holding a subset of the <code>IndexSearcher</code>s leaf contexts to be
- executed within a single thread.
+  executed within a single thread.
  */
 @interface OrgApacheLuceneSearchIndexSearcher_LeafSlice : NSObject {
  @public
@@ -624,7 +629,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchIndexSearcher)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexLeafReaderContextArray:(IOSObjectArray *)leaves;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexLeafReaderContextArray:(IOSObjectArray *)leaves;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -642,4 +651,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchIndexSearcher_LeafSlice)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchIndexSearcher")

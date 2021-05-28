@@ -18,6 +18,10 @@
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/CompositeReaderContext must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneIndexCompositeReaderContext () {
  @public
   id<JavaUtilList> children_;
@@ -111,7 +115,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReaderContext_Builder)
 
 - (id<JavaUtilList>)leaves {
   if (!isTopLevel_) @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"This is not a top-level context.");
-  JreAssert((leaves_ != nil), (@"org/apache/lucene/index/CompositeReaderContext.java:66 condition failed: assert leaves != null;"));
+  JreAssert(leaves_ != nil, @"org/apache/lucene/index/CompositeReaderContext.java:66 condition failed: assert leaves != null;");
   return leaves_;
 }
 
@@ -131,22 +135,33 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReaderContext_Builder)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "createWithOrgApacheLuceneIndexCompositeReader:", "create", "Lorg.apache.lucene.index.CompositeReaderContext;", 0x8, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexCompositeReader:withInt:withInt:withJavaUtilList:", "CompositeReaderContext", NULL, 0x0, NULL, "(Lorg/apache/lucene/index/CompositeReaderContext;Lorg/apache/lucene/index/CompositeReader;IILjava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;)V" },
-    { "initWithOrgApacheLuceneIndexCompositeReader:withJavaUtilList:withJavaUtilList:", "CompositeReaderContext", NULL, 0x0, NULL, "(Lorg/apache/lucene/index/CompositeReader;Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;)V" },
-    { "initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexCompositeReader:withInt:withInt:withJavaUtilList:withJavaUtilList:", "CompositeReaderContext", NULL, 0x2, NULL, "(Lorg/apache/lucene/index/CompositeReaderContext;Lorg/apache/lucene/index/CompositeReader;IILjava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;)V" },
-    { "leaves", NULL, "Ljava.util.List;", 0x1, "Ljava.lang.UnsupportedOperationException;", "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;" },
-    { "children", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;" },
-    { "reader", NULL, "Lorg.apache.lucene.index.CompositeReader;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LOrgApacheLuceneIndexCompositeReaderContext;", 0x8, 0, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x0, -1, 2, -1, 3, -1, -1 },
+    { NULL, NULL, 0x0, -1, 4, -1, 5, -1, -1 },
+    { NULL, NULL, 0x2, -1, 6, -1, 7, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, 8, 9, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexCompositeReader;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(createWithOrgApacheLuceneIndexCompositeReader:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexCompositeReader:withInt:withInt:withJavaUtilList:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexCompositeReader:withJavaUtilList:withJavaUtilList:);
+  methods[3].selector = @selector(initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexCompositeReader:withInt:withInt:withJavaUtilList:withJavaUtilList:);
+  methods[4].selector = @selector(leaves);
+  methods[5].selector = @selector(children);
+  methods[6].selector = @selector(reader);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "children_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;", .constantValue.asLong = 0 },
-    { "leaves_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", .constantValue.asLong = 0 },
-    { "reader_", NULL, 0x12, "Lorg.apache.lucene.index.CompositeReader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "children_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 11, -1 },
+    { "leaves_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 12, -1 },
+    { "reader_", "LOrgApacheLuceneIndexCompositeReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.CompositeReaderContext$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexCompositeReaderContext = { 2, "CompositeReaderContext", "org.apache.lucene.index", NULL, 0x11, 7, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "create", "LOrgApacheLuceneIndexCompositeReader;", "LOrgApacheLuceneIndexCompositeReaderContext;LOrgApacheLuceneIndexCompositeReader;IILJavaUtilList;", "(Lorg/apache/lucene/index/CompositeReaderContext;Lorg/apache/lucene/index/CompositeReader;IILjava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;)V", "LOrgApacheLuceneIndexCompositeReader;LJavaUtilList;LJavaUtilList;", "(Lorg/apache/lucene/index/CompositeReader;Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;)V", "LOrgApacheLuceneIndexCompositeReaderContext;LOrgApacheLuceneIndexCompositeReader;IILJavaUtilList;LJavaUtilList;", "(Lorg/apache/lucene/index/CompositeReaderContext;Lorg/apache/lucene/index/CompositeReader;IILjava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;)V", "LJavaLangUnsupportedOperationException;", "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", "()Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;", "Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;", "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", "LOrgApacheLuceneIndexCompositeReaderContext_Builder;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexCompositeReaderContext = { "CompositeReaderContext", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 7, 3, -1, 13, -1, -1, -1 };
   return &_OrgApacheLuceneIndexCompositeReaderContext;
 }
 
@@ -223,17 +238,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCompositeReaderContext)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexCompositeReader:", "Builder", NULL, 0x1, NULL, NULL },
-    { "build", NULL, "Lorg.apache.lucene.index.CompositeReaderContext;", 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexIndexReader:withInt:withInt:", "build", "Lorg.apache.lucene.index.IndexReaderContext;", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexCompositeReaderContext;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexReaderContext;", 0x2, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexCompositeReader:);
+  methods[1].selector = @selector(build);
+  methods[2].selector = @selector(buildWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexIndexReader:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reader_", NULL, 0x12, "Lorg.apache.lucene.index.CompositeReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "leaves_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", .constantValue.asLong = 0 },
-    { "leafDocBase_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "reader_", "LOrgApacheLuceneIndexCompositeReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "leaves_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 3, -1 },
+    { "leafDocBase_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexCompositeReaderContext_Builder = { 2, "Builder", "org.apache.lucene.index", "CompositeReaderContext", 0x1a, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexCompositeReader;", "build", "LOrgApacheLuceneIndexCompositeReaderContext;LOrgApacheLuceneIndexIndexReader;II", "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", "LOrgApacheLuceneIndexCompositeReaderContext;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexCompositeReaderContext_Builder = { "Builder", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x1a, 3, 3, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexCompositeReaderContext_Builder;
 }
 
@@ -256,7 +279,7 @@ OrgApacheLuceneIndexCompositeReaderContext_Builder *create_OrgApacheLuceneIndexC
 
 OrgApacheLuceneIndexIndexReaderContext *OrgApacheLuceneIndexCompositeReaderContext_Builder_buildWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexIndexReader_withInt_withInt_(OrgApacheLuceneIndexCompositeReaderContext_Builder *self, OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexIndexReader *reader, jint ord, jint docBase) {
   if ([reader isKindOfClass:[OrgApacheLuceneIndexLeafReader class]]) {
-    OrgApacheLuceneIndexLeafReader *ar = (OrgApacheLuceneIndexLeafReader *) cast_chk(reader, [OrgApacheLuceneIndexLeafReader class]);
+    OrgApacheLuceneIndexLeafReader *ar = (OrgApacheLuceneIndexLeafReader *) reader;
     OrgApacheLuceneIndexLeafReaderContext *atomic = create_OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexLeafReader_withInt_withInt_withInt_withInt_(parent, ar, ord, docBase, [((id<JavaUtilList>) nil_chk(self->leaves_)) size], self->leafDocBase_);
     [self->leaves_ addWithId:atomic];
     self->leafDocBase_ += [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) maxDoc];
@@ -279,7 +302,7 @@ OrgApacheLuceneIndexIndexReaderContext *OrgApacheLuceneIndexCompositeReaderConte
       [((id<JavaUtilList>) nil_chk(children)) setWithInt:i withId:OrgApacheLuceneIndexCompositeReaderContext_Builder_buildWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexIndexReader_withInt_withInt_(self, newParent, r, i, newDocBase)];
       newDocBase += [((OrgApacheLuceneIndexIndexReader *) nil_chk(r)) maxDoc];
     }
-    JreAssert((newDocBase == [cr maxDoc]), (@"org/apache/lucene/index/CompositeReaderContext.java:117 condition failed: assert newDocBase == cr.maxDoc();"));
+    JreAssert(newDocBase == [cr maxDoc], @"org/apache/lucene/index/CompositeReaderContext.java:117 condition failed: assert newDocBase == cr.maxDoc();");
     return newParent;
   }
 }

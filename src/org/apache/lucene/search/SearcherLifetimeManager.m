@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/SearcherLifetimeManager.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/Comparable.h"
 #include "java/lang/Double.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -24,6 +22,10 @@
 #include "org/apache/lucene/search/SearcherLifetimeManager.h"
 #include "org/apache/lucene/store/AlreadyClosedException.h"
 #include "org/apache/lucene/util/IOUtils.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/SearcherLifetimeManager must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSearcherLifetimeManager () {
  @public
@@ -83,6 +85,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_Searcher
   return OrgApacheLuceneSearchSearcherLifetimeManager_NANOS_PER_SEC;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSearcherLifetimeManager_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (void)ensureOpen {
   OrgApacheLuceneSearchSearcherLifetimeManager_ensureOpen(self);
 }
@@ -90,14 +99,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_Searcher
 - (jlong)recordWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher {
   OrgApacheLuceneSearchSearcherLifetimeManager_ensureOpen(self);
   jlong version_ = [((OrgApacheLuceneIndexDirectoryReader *) nil_chk(((OrgApacheLuceneIndexDirectoryReader *) cast_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader], [OrgApacheLuceneIndexDirectoryReader class])))) getVersion];
-  OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *tracker = [((JavaUtilConcurrentConcurrentHashMap *) nil_chk(searchers_)) getWithId:JavaLangLong_valueOfWithLong_(version_)];
+  OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *tracker = JreRetainedLocalValue([((JavaUtilConcurrentConcurrentHashMap *) nil_chk(searchers_)) getWithId:JavaLangLong_valueOfWithLong_(version_)]);
   if (tracker == nil) {
     tracker = create_OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker_initWithOrgApacheLuceneSearchIndexSearcher_(searcher);
     if ([searchers_ putIfAbsentWithId:JavaLangLong_valueOfWithLong_(version_) withId:tracker] != nil) {
       [tracker close];
     }
   }
-  else if (tracker->searcher_ != searcher) {
+  else if (!JreObjectEqualsEquals(tracker->searcher_, searcher)) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@", @"the provided searcher has the same underlying reader version yet the searcher instance differs from before (new=", searcher, @" vs old=", tracker->searcher_));
   }
   return version_;
@@ -156,45 +165,43 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_Searcher
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSearcherLifetimeManager_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(searchers_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "ensureOpen", NULL, "V", 0x2, NULL, NULL },
-    { "recordWithOrgApacheLuceneSearchIndexSearcher:", "record", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "acquireWithLong:", "acquire", "Lorg.apache.lucene.search.IndexSearcher;", 0x1, NULL, NULL },
-    { "release__WithOrgApacheLuceneSearchIndexSearcher:", "release", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "pruneWithOrgApacheLuceneSearchSearcherLifetimeManager_Pruner:", "prune", "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "init", "SearcherLifetimeManager", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 0, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchIndexSearcher;", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x21, 6, 7, 2, -1, -1, -1 },
+    { NULL, "V", 0x21, -1, -1, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(ensureOpen);
+  methods[2].selector = @selector(recordWithOrgApacheLuceneSearchIndexSearcher:);
+  methods[3].selector = @selector(acquireWithLong:);
+  methods[4].selector = @selector(release__WithOrgApacheLuceneSearchIndexSearcher:);
+  methods[5].selector = @selector(pruneWithOrgApacheLuceneSearchSearcherLifetimeManager_Pruner:);
+  methods[6].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "NANOS_PER_SEC", "NANOS_PER_SEC", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneSearchSearcherLifetimeManager_NANOS_PER_SEC },
-    { "closed_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "searchers_", NULL, 0x12, "Ljava.util.concurrent.ConcurrentHashMap;", NULL, "Ljava/util/concurrent/ConcurrentHashMap<Ljava/lang/Long;Lorg/apache/lucene/search/SearcherLifetimeManager$SearcherTracker;>;", .constantValue.asLong = 0 },
+    { "NANOS_PER_SEC", "D", .constantValue.asDouble = OrgApacheLuceneSearchSearcherLifetimeManager_NANOS_PER_SEC, 0x18, -1, -1, -1, -1 },
+    { "closed_", "Z", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
+    { "searchers_", "LJavaUtilConcurrentConcurrentHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 8, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.SearcherLifetimeManager$SearcherTracker;", "Lorg.apache.lucene.search.SearcherLifetimeManager$Pruner;", "Lorg.apache.lucene.search.SearcherLifetimeManager$PruneByAge;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherLifetimeManager = { 2, "SearcherLifetimeManager", "org.apache.lucene.search", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "record", "LOrgApacheLuceneSearchIndexSearcher;", "LJavaIoIOException;", "acquire", "J", "release", "prune", "LOrgApacheLuceneSearchSearcherLifetimeManager_Pruner;", "Ljava/util/concurrent/ConcurrentHashMap<Ljava/lang/Long;Lorg/apache/lucene/search/SearcherLifetimeManager$SearcherTracker;>;", "LOrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker;LOrgApacheLuceneSearchSearcherLifetimeManager_Pruner;LOrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherLifetimeManager = { "SearcherLifetimeManager", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x1, 7, 3, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSearcherLifetimeManager;
 }
 
 @end
-
-void OrgApacheLuceneSearchSearcherLifetimeManager_ensureOpen(OrgApacheLuceneSearchSearcherLifetimeManager *self) {
-  if (JreLoadVolatileBoolean(&self->closed_)) {
-    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this SearcherLifetimeManager instance is closed");
-  }
-}
 
 void OrgApacheLuceneSearchSearcherLifetimeManager_init(OrgApacheLuceneSearchSearcherLifetimeManager *self) {
   NSObject_init(self);
@@ -207,6 +214,12 @@ OrgApacheLuceneSearchSearcherLifetimeManager *new_OrgApacheLuceneSearchSearcherL
 
 OrgApacheLuceneSearchSearcherLifetimeManager *create_OrgApacheLuceneSearchSearcherLifetimeManager_init() {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSearcherLifetimeManager, init)
+}
+
+void OrgApacheLuceneSearchSearcherLifetimeManager_ensureOpen(OrgApacheLuceneSearchSearcherLifetimeManager *self) {
+  if (JreLoadVolatileBoolean(&self->closed_)) {
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this SearcherLifetimeManager instance is closed");
+  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSearcherLifetimeManager)
@@ -235,17 +248,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSearcherLifetimeManager)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchIndexSearcher:", "SearcherTracker", NULL, 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x21, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x21, -1, -1, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchIndexSearcher:);
+  methods[1].selector = @selector(compareToWithId:);
+  methods[2].selector = @selector(close);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "searcher_", NULL, 0x11, "Lorg.apache.lucene.search.IndexSearcher;", NULL, NULL, .constantValue.asLong = 0 },
-    { "recordTimeSec_", NULL, 0x11, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "version__", "version", 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "searcher_", "LOrgApacheLuceneSearchIndexSearcher;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "recordTimeSec_", "D", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "version__", "J", .constantValue.asLong = 0, 0x11, 4, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker = { 2, "SearcherTracker", "org.apache.lucene.search", "SearcherLifetimeManager", 0xa, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/SearcherLifetimeManager$SearcherTracker;>;Ljava/io/Closeable;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchIndexSearcher;", "compareTo", "LOrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker;", "LJavaIoIOException;", "version", "LOrgApacheLuceneSearchSearcherLifetimeManager;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/SearcherLifetimeManager$SearcherTracker;>;Ljava/io/Closeable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker = { "SearcherTracker", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0xa, 3, 3, 5, -1, -1, 6, -1 };
   return &_OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker;
 }
 
@@ -272,10 +293,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSearcherLifetimeManager_Se
 @implementation OrgApacheLuceneSearchSearcherLifetimeManager_Pruner
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "doPruneWithDouble:withOrgApacheLuceneSearchIndexSearcher:", "doPrune", "Z", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x401, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherLifetimeManager_Pruner = { 2, "Pruner", "org.apache.lucene.search", "SearcherLifetimeManager", 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(doPruneWithDouble:withOrgApacheLuceneSearchIndexSearcher:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "doPrune", "DLOrgApacheLuceneSearchIndexSearcher;", "LOrgApacheLuceneSearchSearcherLifetimeManager;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherLifetimeManager_Pruner = { "Pruner", "org.apache.lucene.search", ptrTable, methods, NULL, 7, 0x609, 1, 0, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSearcherLifetimeManager_Pruner;
 }
 
@@ -296,14 +323,21 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithDouble:", "PruneByAge", NULL, 0x1, NULL, NULL },
-    { "doPruneWithDouble:withOrgApacheLuceneSearchIndexSearcher:", "doPrune", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithDouble:);
+  methods[1].selector = @selector(doPruneWithDouble:withOrgApacheLuceneSearchIndexSearcher:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "maxAgeSec_", NULL, 0x12, "D", NULL, NULL, .constantValue.asLong = 0 },
+    { "maxAgeSec_", "D", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge = { 2, "PruneByAge", "org.apache.lucene.search", "SearcherLifetimeManager", 0x19, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "D", "doPrune", "DLOrgApacheLuceneSearchIndexSearcher;", "LOrgApacheLuceneSearchSearcherLifetimeManager;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge = { "PruneByAge", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x19, 2, 1, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge;
 }
 

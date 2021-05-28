@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilIntArrayDocIdSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilIntArrayDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilIntArrayDocIdSet || defined(INCLUDE_OrgApacheLuceneUtilIntArrayDocIdSet))
 #define OrgApacheLuceneUtilIntArrayDocIdSet_
 
@@ -33,18 +39,22 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithIntArray:(IOSIntArray *)docs
-                         withInt:(jint)length;
+- (instancetype __nonnull)initPackagePrivateWithIntArray:(IOSIntArray *)docs
+                                                 withInt:(jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilIntArrayDocIdSet)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(OrgApacheLuceneUtilIntArrayDocIdSet *self, IOSIntArray *docs, jint length);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilIntArrayDocIdSet_initPackagePrivateWithIntArray_withInt_(OrgApacheLuceneUtilIntArrayDocIdSet *self, IOSIntArray *docs, jint length);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntArrayDocIdSet *new_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(IOSIntArray *docs, jint length) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilIntArrayDocIdSet *new_OrgApacheLuceneUtilIntArrayDocIdSet_initPackagePrivateWithIntArray_withInt_(IOSIntArray *docs, jint length) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntArrayDocIdSet *create_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(IOSIntArray *docs, jint length);
+FOUNDATION_EXPORT OrgApacheLuceneUtilIntArrayDocIdSet *create_OrgApacheLuceneUtilIntArrayDocIdSet_initPackagePrivateWithIntArray_withInt_(IOSIntArray *docs, jint length);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntArrayDocIdSet)
 
@@ -73,8 +83,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntArrayDocIdSet)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithIntArray:(IOSIntArray *)docs
-                         withInt:(jint)length;
+- (instancetype __nonnull)initWithIntArray:(IOSIntArray *)docs
+                                   withInt:(jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -90,4 +104,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetI
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilIntArrayDocIdSet")

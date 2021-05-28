@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPackedPacked8ThreeBlocks
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPackedPacked8ThreeBlocks_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked8ThreeBlocks || defined(INCLUDE_OrgApacheLuceneUtilPackedPacked8ThreeBlocks))
 #define OrgApacheLuceneUtilPackedPacked8ThreeBlocks_
 
@@ -31,8 +37,7 @@
  @public
   IOSByteArray *blocks_;
 }
-
-+ (jint)MAX_SIZE;
+@property (readonly, class) jint MAX_SIZE NS_SWIFT_NAME(MAX_SIZE);
 
 #pragma mark Public
 
@@ -63,11 +68,16 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)valueCount;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)valueCount;
 
-- (instancetype)initWithInt:(jint)packedIntsVersion
-withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                    withInt:(jint)valueCount;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)packedIntsVersion
+                  withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                            withInt:(jint)valueCount;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0
+                              withInt:(jint)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -75,24 +85,28 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedPacked8ThreeBlocks)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPacked8ThreeBlocks, blocks_, IOSByteArray *)
 
-inline jint OrgApacheLuceneUtilPackedPacked8ThreeBlocks_get_MAX_SIZE();
+inline jint OrgApacheLuceneUtilPackedPacked8ThreeBlocks_get_MAX_SIZE(void);
 #define OrgApacheLuceneUtilPackedPacked8ThreeBlocks_MAX_SIZE 715827882
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPacked8ThreeBlocks, MAX_SIZE, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_(OrgApacheLuceneUtilPackedPacked8ThreeBlocks *self, jint valueCount);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initPackagePrivateWithInt_(OrgApacheLuceneUtilPackedPacked8ThreeBlocks *self, jint valueCount);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked8ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_(jint valueCount) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked8ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initPackagePrivateWithInt_(jint valueCount) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked8ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_(jint valueCount);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked8ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initPackagePrivateWithInt_(jint valueCount);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPacked8ThreeBlocks *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPacked8ThreeBlocks *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked8ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked8ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked8ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked8ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initPackagePrivateWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked8ThreeBlocks)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked8ThreeBlocks")

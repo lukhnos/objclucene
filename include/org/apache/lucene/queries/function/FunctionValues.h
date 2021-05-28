@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueriesFunctionFunctionValues
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueriesFunctionFunctionValues_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionValues || defined(INCLUDE_OrgApacheLuceneQueriesFunctionFunctionValues))
 #define OrgApacheLuceneQueriesFunctionFunctionValues_
 
@@ -37,7 +43,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (jboolean)boolValWithInt:(jint)doc;
 
@@ -78,7 +84,6 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
 - (OrgApacheLuceneQueriesFunctionValueSourceScorer *)getScorerWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 /*!
-   
  */
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
 
@@ -105,7 +110,7 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
 /*!
  @param doc The doc to retrieve to sort ordinal for
  @return the sort ordinal for the specified doc
- TODO: Maybe we can just use intVal for this...
+  TODO: Maybe we can just use intVal for this...
  */
 - (jint)ordValWithInt:(jint)doc;
 
@@ -138,20 +143,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionValues)
 
 /*!
  @brief Abstraction of the logic required to fill the value of a specified doc into
- a reusable <code>MutableValue</code>.
- Implementations of <code>FunctionValues</code>
- are encouraged to define their own implementations of ValueFiller if their
- value is not a float.
+  a reusable <code>MutableValue</code>.Implementations of <code>FunctionValues</code>
+  are encouraged to define their own implementations of ValueFiller if their
+  value is not a float.
  */
 @interface OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief MutableValue will be reused across calls.
- Returns true if the value exists. 
+ @brief MutableValue will be reused across calls.Returns true if the value exists.
  */
 - (void)fillValueWithInt:(jint)doc;
 
@@ -170,4 +173,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionValues_ValueFil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionValues")

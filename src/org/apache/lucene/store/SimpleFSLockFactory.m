@@ -6,6 +6,7 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
+#include "java/lang/Throwable.h"
 #include "org/apache/lucene/store/AlreadyClosedException.h"
 #include "org/apache/lucene/store/FSDirectory.h"
 #include "org/apache/lucene/store/FSLockFactory.h"
@@ -20,6 +21,10 @@
 #include "org/lukhnos/portmobile/file/attribute/BasicFileAttributes.h"
 #include "org/lukhnos/portmobile/file/attribute/FileTime.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/store/SimpleFSLockFactory must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneStoreSimpleFSLockFactory ()
 
 - (instancetype)init;
@@ -28,9 +33,9 @@
 
 __attribute__((unused)) static void OrgApacheLuceneStoreSimpleFSLockFactory_init(OrgApacheLuceneStoreSimpleFSLockFactory *self);
 
-__attribute__((unused)) static OrgApacheLuceneStoreSimpleFSLockFactory *new_OrgApacheLuceneStoreSimpleFSLockFactory_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneStoreSimpleFSLockFactory *new_OrgApacheLuceneStoreSimpleFSLockFactory_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneStoreSimpleFSLockFactory *create_OrgApacheLuceneStoreSimpleFSLockFactory_init();
+__attribute__((unused)) static OrgApacheLuceneStoreSimpleFSLockFactory *create_OrgApacheLuceneStoreSimpleFSLockFactory_init(void);
 
 @interface OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock () {
  @public
@@ -63,23 +68,39 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneStoreLock *)obtainFSLockWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *)dir
                                                                  withNSString:(NSString *)lockName {
-  OrgLukhnosPortmobileFilePath *lockDir = [((OrgApacheLuceneStoreFSDirectory *) nil_chk(dir)) getDirectory];
+  OrgLukhnosPortmobileFilePath *lockDir = JreRetainedLocalValue([((OrgApacheLuceneStoreFSDirectory *) nil_chk(dir)) getDirectory]);
   OrgLukhnosPortmobileFileFiles_createDirectoriesWithOrgLukhnosPortmobileFilePath_(lockDir);
-  OrgLukhnosPortmobileFilePath *lockFile = [((OrgLukhnosPortmobileFilePath *) nil_chk(lockDir)) resolveWithNSString:lockName];
+  OrgLukhnosPortmobileFilePath *lockFile = JreRetainedLocalValue([((OrgLukhnosPortmobileFilePath *) nil_chk(lockDir)) resolveWithNSString:lockName]);
   @try {
     OrgLukhnosPortmobileFileFiles_createFileWithOrgLukhnosPortmobileFilePath_(lockFile);
   }
   @catch (OrgLukhnosPortmobileFileFileAlreadyExistsException *e) {
-    @throw create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withNSException_(JreStrcat("$@", @"Lock held elsewhere: ", lockFile), e);
+    @throw create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Lock held elsewhere: ", lockFile), e);
   }
   @catch (OrgLukhnosPortmobileFileAccessDeniedException *e) {
-    @throw create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withNSException_(JreStrcat("$@", @"Lock held elsewhere: ", lockFile), e);
-  }
-  @catch (JavaIoIOException *e) {
-    @throw create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withNSException_(JreStrcat("$@", @"Lock held elsewhere: ", lockFile), e);
+    @throw create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Lock held elsewhere: ", lockFile), e);
   }
   OrgLukhnosPortmobileFileAttributeFileTime *creationTime = [((OrgLukhnosPortmobileFileAttributeBasicFileAttributes *) nil_chk(OrgLukhnosPortmobileFileFiles_readAttributesWithOrgLukhnosPortmobileFilePath_withIOSClass_(lockFile, OrgLukhnosPortmobileFileAttributeBasicFileAttributes_class_()))) creationTime];
   return create_OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_initWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileAttributeFileTime_(lockFile, creationTime);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreLock;", 0x4, 0, 1, 2, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(obtainFSLockWithOrgApacheLuceneStoreFSDirectory:withNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INSTANCE", "LOrgApacheLuceneStoreSimpleFSLockFactory;", .constantValue.asLong = 0, 0x19, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "obtainFSLock", "LOrgApacheLuceneStoreFSDirectory;LNSString;", "LJavaIoIOException;", &OrgApacheLuceneStoreSimpleFSLockFactory_INSTANCE, "LOrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreSimpleFSLockFactory = { "SimpleFSLockFactory", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x11, 2, 1, -1, 4, -1, -1, -1 };
+  return &_OrgApacheLuceneStoreSimpleFSLockFactory;
 }
 
 + (void)initialize {
@@ -87,19 +108,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssignAndConsume(&OrgApacheLuceneStoreSimpleFSLockFactory_INSTANCE, new_OrgApacheLuceneStoreSimpleFSLockFactory_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneStoreSimpleFSLockFactory)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SimpleFSLockFactory", NULL, 0x2, NULL, NULL },
-    { "obtainFSLockWithOrgApacheLuceneStoreFSDirectory:withNSString:", "obtainFSLock", "Lorg.apache.lucene.store.Lock;", 0x4, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "INSTANCE", "INSTANCE", 0x19, "Lorg.apache.lucene.store.SimpleFSLockFactory;", &OrgApacheLuceneStoreSimpleFSLockFactory_INSTANCE, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.store.SimpleFSLockFactory$SimpleFSLock;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreSimpleFSLockFactory = { 2, "SimpleFSLockFactory", "org.apache.lucene.store", NULL, 0x11, 2, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneStoreSimpleFSLockFactory;
 }
 
 @end
@@ -130,7 +138,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSimpleFSLockFactory)
   if (JreLoadVolatileBoolean(&closed_)) {
     @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Lock instance already released: ", self));
   }
-  OrgLukhnosPortmobileFileAttributeFileTime *ctime = [((OrgLukhnosPortmobileFileAttributeBasicFileAttributes *) nil_chk(OrgLukhnosPortmobileFileFiles_readAttributesWithOrgLukhnosPortmobileFilePath_withIOSClass_(path_, OrgLukhnosPortmobileFileAttributeBasicFileAttributes_class_()))) creationTime];
+  OrgLukhnosPortmobileFileAttributeFileTime *ctime = JreRetainedLocalValue([((OrgLukhnosPortmobileFileAttributeBasicFileAttributes *) nil_chk(OrgLukhnosPortmobileFileFiles_readAttributesWithOrgLukhnosPortmobileFilePath_withIOSClass_(path_, OrgLukhnosPortmobileFileAttributeBasicFileAttributes_class_()))) creationTime]);
   if (![((OrgLukhnosPortmobileFileAttributeFileTime *) nil_chk(creationTime_)) isEqual:ctime]) {
     @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@$@C", @"Underlying file changed by an external force at ", creationTime_, @", (lock=", self, ')'));
   }
@@ -145,14 +153,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSimpleFSLockFactory)
       @try {
         [self ensureValid];
       }
-      @catch (NSException *exc) {
-        @throw create_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withNSException_(@"Lock file cannot be safely removed. Manual intervention is recommended.", exc);
+      @catch (JavaLangThrowable *exc) {
+        @throw create_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withJavaLangThrowable_(@"Lock file cannot be safely removed. Manual intervention is recommended.", exc);
       }
       @try {
         OrgLukhnosPortmobileFileFiles_delete__WithOrgLukhnosPortmobileFilePath_(path_);
       }
-      @catch (NSException *exc) {
-        @throw create_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withNSException_(@"Unable to remove lock file. Manual intervention is recommended", exc);
+      @catch (JavaLangThrowable *exc) {
+        @throw create_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withJavaLangThrowable_(@"Unable to remove lock file. Manual intervention is recommended", exc);
       }
     }
     @finally {
@@ -172,18 +180,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSimpleFSLockFactory)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileAttributeFileTime:", "SimpleFSLock", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "ensureValid", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "close", NULL, "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x21, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 2, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileAttributeFileTime:);
+  methods[1].selector = @selector(ensureValid);
+  methods[2].selector = @selector(close);
+  methods[3].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "path_", NULL, 0x12, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
-    { "creationTime_", NULL, 0x12, "Lorg.lukhnos.portmobile.file.attribute.FileTime;", NULL, NULL, .constantValue.asLong = 0 },
-    { "closed_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "path_", "LOrgLukhnosPortmobileFilePath;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "creationTime_", "LOrgLukhnosPortmobileFileAttributeFileTime;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "closed_", "Z", .constantValue.asLong = 0, 0x42, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock = { 2, "SimpleFSLock", "org.apache.lucene.store", "SimpleFSLockFactory", 0x18, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgLukhnosPortmobileFilePath;LOrgLukhnosPortmobileFileAttributeFileTime;", "LJavaIoIOException;", "toString", "LOrgApacheLuceneStoreSimpleFSLockFactory;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock = { "SimpleFSLock", "org.apache.lucene.store", ptrTable, methods, fields, 7, 0x18, 4, 3, 3, -1, -1, -1, -1 };
   return &_OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock;
 }
 

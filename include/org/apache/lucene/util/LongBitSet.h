@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilLongBitSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilLongBitSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilLongBitSet || defined(INCLUDE_OrgApacheLuceneUtilLongBitSet))
 #define OrgApacheLuceneUtilLongBitSet_
 
@@ -20,9 +26,8 @@
 
 /*!
  @brief BitSet of fixed length (numBits), backed by accessible (<code>getBits</code>)
- long[], accessed with a long index.
- Use it only if you intend to store more
- than 2.1B bits, otherwise you should use <code>FixedBitSet</code>.
+  long[], accessed with a long index.Use it only if you intend to store more
+  than 2.1B bits, otherwise you should use <code>FixedBitSet</code>.
  */
 @interface OrgApacheLuceneUtilLongBitSet : NSObject
 
@@ -33,17 +38,17 @@
  The internally allocated long array will be exactly the size needed to accommodate the numBits specified.
  @param numBits the number of bits needed
  */
-- (instancetype)initWithLong:(jlong)numBits;
+- (instancetype __nonnull)initWithLong:(jlong)numBits;
 
 /*!
  @brief Creates a new LongBitSet using the provided long[] array as backing store.
  The storedBits array must be large enough to accommodate the numBits specified, but may be larger.
- In that case the 'extra' or 'ghost' bits must be clear (or they may provoke spurious side-effects)
+  In that case the 'extra' or 'ghost' bits must be clear (or they may provoke spurious side-effects)
  @param storedBits the array to use as backing store
  @param numBits the number of bits actually needed
  */
-- (instancetype)initWithLongArray:(IOSLongArray *)storedBits
-                         withLong:(jlong)numBits;
+- (instancetype __nonnull)initWithLongArray:(IOSLongArray *)storedBits
+                                   withLong:(jlong)numBits;
 
 /*!
  @brief this = this AND other
@@ -61,10 +66,9 @@
 + (jint)bits2wordsWithLong:(jlong)numBits;
 
 /*!
- @brief Returns number of set bits.
- NOTE: this visits every
- long in the backing bits array, and the result is not
- internally cached!
+ @brief Returns number of set bits.NOTE: this visits every
+   long in the backing bits array, and the result is not
+   internally cached!
  */
 - (jlong)cardinality;
 
@@ -78,16 +82,16 @@
 - (void)clearWithLong:(jlong)startIndex
              withLong:(jlong)endIndex;
 
-- (OrgApacheLuceneUtilLongBitSet *)clone;
+- (OrgApacheLuceneUtilLongBitSet *)java_clone;
 
 /*!
- @brief If the given <code>LongBitSet</code> is large enough to hold
- <code>numBits+1</code>, returns the given bits, otherwise returns a new
+ @brief If the given <code>LongBitSet</code> is large enough to hold 
+ <code>numBits+1</code>, returns the given bits, otherwise returns a new 
  <code>LongBitSet</code> which can hold the requested number of bits.
  <p>
- <b>NOTE:</b> the returned bitset reuses the underlying <code>long[]</code> of
- the given <code>bits</code> if possible. Also, calling <code>length()</code> on the
- returned bits may return a value greater than <code>numBits</code>.
+  <b>NOTE:</b> the returned bitset reuses the underlying <code>long[]</code> of
+  the given <code>bits</code> if possible. Also, calling <code>length()</code> on the
+  returned bits may return a value greater than <code>numBits</code>.
  */
 + (OrgApacheLuceneUtilLongBitSet *)ensureCapacityWithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)bits
                                                                           withLong:(jlong)numBits;
@@ -174,6 +178,10 @@
  */
 - (void)xor__WithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)other;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilLongBitSet)
@@ -198,4 +206,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilLongBitSet)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilLongBitSet")

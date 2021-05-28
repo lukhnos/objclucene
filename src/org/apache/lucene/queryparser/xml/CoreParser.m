@@ -3,7 +3,6 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/CoreParser.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/InputStream.h"
 #include "java/lang/Exception.h"
@@ -41,6 +40,10 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/w3c/dom/Document.h"
 #include "org/w3c/dom/Element.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/xml/CoreParser must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneQueryparserXmlCoreParser ()
 
@@ -112,24 +115,37 @@ withOrgApacheLuceneQueryparserXmlFilterBuilder:(id<OrgApacheLuceneQueryparserXml
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserClassicQueryParser:", "CoreParser", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:", "CoreParser", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserClassicQueryParser:", "CoreParser", NULL, 0x4, NULL, NULL },
-    { "parseWithJavaIoInputStream:", "parse", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "addQueryBuilderWithNSString:withOrgApacheLuceneQueryparserXmlQueryBuilder:", "addQueryBuilder", "V", 0x1, NULL, NULL },
-    { "addFilterBuilderWithNSString:withOrgApacheLuceneQueryparserXmlFilterBuilder:", "addFilterBuilder", "V", 0x1, NULL, NULL },
-    { "parseXMLWithJavaIoInputStream:", "parseXML", "Lorg.w3c.dom.Document;", 0xa, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x4, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 3, 4, 5, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LOrgW3cDomDocument;", 0xa, 10, 4, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchQuery;", 0x1, 11, 12, 5, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserClassicQueryParser:);
+  methods[1].selector = @selector(initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[2].selector = @selector(initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserClassicQueryParser:);
+  methods[3].selector = @selector(parseWithJavaIoInputStream:);
+  methods[4].selector = @selector(addQueryBuilderWithNSString:withOrgApacheLuceneQueryparserXmlQueryBuilder:);
+  methods[5].selector = @selector(addFilterBuilderWithNSString:withOrgApacheLuceneQueryparserXmlFilterBuilder:);
+  methods[6].selector = @selector(parseXMLWithJavaIoInputStream:);
+  methods[7].selector = @selector(getQueryWithOrgW3cDomElement:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "analyzer_", NULL, 0x4, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "parser_", NULL, 0x4, "Lorg.apache.lucene.queryparser.classic.QueryParser;", NULL, NULL, .constantValue.asLong = 0 },
-    { "queryFactory_", NULL, 0x4, "Lorg.apache.lucene.queryparser.xml.QueryBuilderFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "filterFactory_", NULL, 0x4, "Lorg.apache.lucene.queryparser.xml.FilterBuilderFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxNumCachedFilters", "maxNumCachedFilters", 0x9, "I", &OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters, NULL, .constantValue.asLong = 0 },
+    { "analyzer_", "LOrgApacheLuceneAnalysisAnalyzer;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "parser_", "LOrgApacheLuceneQueryparserClassicQueryParser;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "queryFactory_", "LOrgApacheLuceneQueryparserXmlQueryBuilderFactory;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "filterFactory_", "LOrgApacheLuceneQueryparserXmlFilterBuilderFactory;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "maxNumCachedFilters", "I", .constantValue.asLong = 0, 0x9, -1, 13, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlCoreParser = { 2, "CoreParser", "org.apache.lucene.queryparser.xml", NULL, 0x1, 8, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneQueryparserClassicQueryParser;", "LNSString;LOrgApacheLuceneAnalysisAnalyzer;", "LNSString;LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneQueryparserClassicQueryParser;", "parse", "LJavaIoInputStream;", "LOrgApacheLuceneQueryparserXmlParserException;", "addQueryBuilder", "LNSString;LOrgApacheLuceneQueryparserXmlQueryBuilder;", "addFilterBuilder", "LNSString;LOrgApacheLuceneQueryparserXmlFilterBuilder;", "parseXML", "getQuery", "LOrgW3cDomElement;", &OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlCoreParser = { "CoreParser", "org.apache.lucene.queryparser.xml", ptrTable, methods, fields, 7, 0x1, 8, 5, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserXmlCoreParser;
 }
 
@@ -223,14 +239,14 @@ id<OrgW3cDomDocument> OrgApacheLuceneQueryparserXmlCoreParser_parseXMLWithJavaIo
     db = [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(dbf)) newDocumentBuilder];
   }
   @catch (JavaLangException *se) {
-    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(@"XML Parser configuration error", se);
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(@"XML Parser configuration error", se);
   }
   id<OrgW3cDomDocument> doc = nil;
   @try {
     doc = [((JavaxXmlParsersDocumentBuilder *) nil_chk(db)) parseWithJavaIoInputStream:pXmlFile];
   }
   @catch (JavaLangException *se) {
-    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(JreStrcat("$@", @"Error parsing XML stream:", se), se);
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Error parsing XML stream:", se), se);
   }
   return doc;
 }

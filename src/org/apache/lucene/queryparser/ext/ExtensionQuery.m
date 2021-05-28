@@ -7,6 +7,10 @@
 #include "org/apache/lucene/queryparser/classic/QueryParser.h"
 #include "org/apache/lucene/queryparser/ext/ExtensionQuery.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/ext/ExtensionQuery must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneQueryparserExtExtensionQuery () {
  @public
   NSString *field_;
@@ -49,18 +53,27 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserExtExtensionQuery, topLevelParser_
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserClassicQueryParser:withNSString:withNSString:", "ExtensionQuery", NULL, 0x1, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getRawQueryString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getTopLevelParser", NULL, "Lorg.apache.lucene.queryparser.classic.QueryParser;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueryparserClassicQueryParser;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueryparserClassicQueryParser:withNSString:withNSString:);
+  methods[1].selector = @selector(getField);
+  methods[2].selector = @selector(getRawQueryString);
+  methods[3].selector = @selector(getTopLevelParser);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "rawQueryString_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "topLevelParser_", NULL, 0x12, "Lorg.apache.lucene.queryparser.classic.QueryParser;", NULL, NULL, .constantValue.asLong = 0 },
+    { "field_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "rawQueryString_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "topLevelParser_", "LOrgApacheLuceneQueryparserClassicQueryParser;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserExtExtensionQuery = { 2, "ExtensionQuery", "org.apache.lucene.queryparser.ext", NULL, 0x1, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueryparserClassicQueryParser;LNSString;LNSString;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserExtExtensionQuery = { "ExtensionQuery", "org.apache.lucene.queryparser.ext", ptrTable, methods, fields, 7, 0x1, 4, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueryparserExtExtensionQuery;
 }
 

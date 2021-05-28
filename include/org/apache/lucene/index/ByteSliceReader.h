@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexByteSliceReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexByteSliceReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexByteSliceReader || defined(INCLUDE_OrgApacheLuceneIndexByteSliceReader))
 #define OrgApacheLuceneIndexByteSliceReader_
 
@@ -56,7 +62,11 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -65,14 +75,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexByteSliceReader)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexByteSliceReader, pool_, OrgApacheLuceneUtilByteBlockPool *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexByteSliceReader, buffer_, IOSByteArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexByteSliceReader_init(OrgApacheLuceneIndexByteSliceReader *self);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexByteSliceReader_initPackagePrivate(OrgApacheLuceneIndexByteSliceReader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceReader *new_OrgApacheLuceneIndexByteSliceReader_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceReader *new_OrgApacheLuceneIndexByteSliceReader_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceReader *create_OrgApacheLuceneIndexByteSliceReader_init();
+FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceReader *create_OrgApacheLuceneIndexByteSliceReader_initPackagePrivate(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexByteSliceReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexByteSliceReader")

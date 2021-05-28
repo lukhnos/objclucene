@@ -13,12 +13,20 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexOptions
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexOptions_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexOptions || defined(INCLUDE_OrgApacheLuceneIndexIndexOptions))
 #define OrgApacheLuceneIndexIndexOptions_
 
 #define RESTRICT_JavaLangEnum 1
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
+
+@class IOSObjectArray;
 
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexIndexOptions_Enum) {
   OrgApacheLuceneIndexIndexOptions_Enum_NONE = 0,
@@ -31,25 +39,21 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexIndexOptions_Enum) {
 /*!
  @brief Controls how much information is stored in the postings lists.
  */
-@interface OrgApacheLuceneIndexIndexOptions : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneIndexIndexOptions : JavaLangEnum
 
-+ (OrgApacheLuceneIndexIndexOptions *)NONE;
-
-+ (OrgApacheLuceneIndexIndexOptions *)DOCS;
-
-+ (OrgApacheLuceneIndexIndexOptions *)DOCS_AND_FREQS;
-
-+ (OrgApacheLuceneIndexIndexOptions *)DOCS_AND_FREQS_AND_POSITIONS;
-
-+ (OrgApacheLuceneIndexIndexOptions *)DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneIndexIndexOptions *NONE NS_SWIFT_NAME(NONE);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexIndexOptions *DOCS NS_SWIFT_NAME(DOCS);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexIndexOptions *DOCS_AND_FREQS NS_SWIFT_NAME(DOCS_AND_FREQS);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexIndexOptions *DOCS_AND_FREQS_AND_POSITIONS NS_SWIFT_NAME(DOCS_AND_FREQS_AND_POSITIONS);
+@property (readonly, class, nonnull) OrgApacheLuceneIndexIndexOptions *DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS NS_SWIFT_NAME(DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
+#pragma mark Public
 
 + (OrgApacheLuceneIndexIndexOptions *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneIndexIndexOptions_Enum)toNSEnum;
 
 @end
@@ -62,41 +66,41 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOpt
 /*!
  @brief Not indexed
  */
-inline OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_get_NONE();
+inline OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_get_NONE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexIndexOptions, NONE)
 
 /*!
  @brief Only documents are indexed: term frequencies and positions are omitted.
  Phrase and other positional queries on the field will throw an exception, and scoring
- will behave as if any term in the document appears only once.
+  will behave as if any term in the document appears only once.
  */
-inline OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_get_DOCS();
+inline OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_get_DOCS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexIndexOptions, DOCS)
 
 /*!
  @brief Only documents and term frequencies are indexed: positions are omitted.
  This enables normal scoring, except Phrase and other positional queries
- will throw an exception.
+  will throw an exception.
  */
-inline OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_get_DOCS_AND_FREQS();
+inline OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_get_DOCS_AND_FREQS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS)
 
 /*!
  @brief Indexes documents, frequencies and positions.
  This is a typical default for full-text search: full scoring is enabled
- and positional queries are supported.
+  and positional queries are supported.
  */
-inline OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_get_DOCS_AND_FREQS_AND_POSITIONS();
+inline OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_get_DOCS_AND_FREQS_AND_POSITIONS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)
 
 /*!
  @brief Indexes documents, frequencies, positions and offsets.
- Character offsets are encoded alongside the positions. 
+ Character offsets are encoded alongside the positions.
  */
-inline OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_get_DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS();
+inline OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_get_DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexIndexOptions_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexIndexOptions_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_valueOfWithNSString_(NSString *name);
 
@@ -106,4 +110,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexOptions)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexOptions")

@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Double.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/index/DocValues.h"
@@ -22,11 +21,19 @@
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 #include "org/apache/lucene/util/mutable/MutableValueDouble.h"
 
-@interface OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 : OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues {
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queries/function/valuesource/DoubleFieldSource must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+@interface OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 : OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues {
  @public
   OrgApacheLuceneIndexNumericDocValues *val$arr_;
   id<OrgApacheLuceneUtilBits> val$valid_;
 }
+
+- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0
+                                 withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$1
+               withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
 
 - (jdouble)doubleValWithInt:(jint)doc;
 
@@ -34,51 +41,39 @@
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
 
-- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0
-                                 withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$1
-               withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1, val$arr_, OrgApacheLuceneIndexNumericDocValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1, val$valid_, id<OrgApacheLuceneUtilBits>)
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs);
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1)
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1 : OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller {
+@interface OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1 : OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller {
  @public
-  OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *this$0_;
+  OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *this$0_;
   OrgApacheLuceneUtilMutableMutableValueDouble *mval_;
 }
+
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1:(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *)outer$;
 
 - (OrgApacheLuceneUtilMutableMutableValue *)getValue;
 
 - (void)fillValueWithInt:(jint)doc;
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1:(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1, this$0_, OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1, mval_, OrgApacheLuceneUtilMutableMutableValueDouble *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1, mval_, OrgApacheLuceneUtilMutableMutableValueDouble *)
 
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *outer$);
+__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1 *self, OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *outer$);
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *outer$) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1 *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1)
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1 *create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *outer$);
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource
 
@@ -99,11 +94,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldS
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
   OrgApacheLuceneIndexNumericDocValues *arr = OrgApacheLuceneIndexDocValues_getNumericWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext)) reader], field_);
   id<OrgApacheLuceneUtilBits> valid = OrgApacheLuceneIndexDocValues_getDocsWithFieldWithOrgApacheLuceneIndexLeafReader_withNSString_([readerContext reader], field_);
-  return create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(arr, valid, self);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(arr, valid, self);
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([nil_chk(o) getClass] != (id) OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_class_()) return false;
+  if (!JreObjectEqualsEquals([nil_chk(o) java_getClass], OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_class_())) return false;
   OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource *other = (OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource class]);
   return [super isEqual:other];
 }
@@ -115,15 +110,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldS
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "DoubleFieldSource", NULL, 0x1, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getSortFieldWithBoolean:", "getSortField", "Lorg.apache.lucene.search.SortField;", 0x1, NULL, NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSortField;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues;", 0x1, 4, 5, 6, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource = { 2, "DoubleFieldSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:);
+  methods[1].selector = @selector(description__);
+  methods[2].selector = @selector(getSortFieldWithBoolean:);
+  methods[3].selector = @selector(getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:);
+  methods[4].selector = @selector(isEqual:);
+  methods[5].selector = @selector(hash);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LNSString;", "description", "getSortField", "Z", "getValues", "LJavaUtilMap;LOrgApacheLuceneIndexLeafReaderContext;", "LJavaIoIOException;", "equals", "LNSObject;", "hashCode" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource = { "DoubleFieldSource", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, NULL, 7, 0x1, 6, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource;
 }
 
@@ -143,7 +149,14 @@ OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource *create_OrgApacheLuce
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource)
 
-@implementation OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1
+@implementation OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1
+
+- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0
+                                 withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$1
+               withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs {
+  OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(self, capture$0, capture$1, vs);
+  return self;
+}
 
 - (jdouble)doubleValWithInt:(jint)doc {
   return JavaLangDouble_longBitsToDoubleWithLong_([((OrgApacheLuceneIndexNumericDocValues *) nil_chk(val$arr_)) getWithInt:doc]);
@@ -154,14 +167,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceDouble
 }
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller {
-  return create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_(self);
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$0
-                                 withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$1
-               withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)arg$0 {
-  OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(self, capture$0, capture$1, arg$0);
-  return self;
+  return create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_(self);
 }
 
 - (void)dealloc {
@@ -171,53 +177,59 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceDouble
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "doubleValWithInt:", "doubleVal", "D", 0x1, NULL, NULL },
-    { "existsWithInt:", "exists", "Z", 0x1, NULL, NULL },
-    { "getValueFiller", NULL, "Lorg.apache.lucene.queries.function.FunctionValues$ValueFiller;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneUtilBits:withOrgApacheLuceneQueriesFunctionValueSource:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "D", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneUtilBits:withOrgApacheLuceneQueriesFunctionValueSource:);
+  methods[1].selector = @selector(doubleValWithInt:);
+  methods[2].selector = @selector(existsWithInt:);
+  methods[3].selector = @selector(getValueFiller);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$arr_", NULL, 0x1012, "Lorg.apache.lucene.index.NumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$valid_", NULL, 0x1012, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$arr_", "LOrgApacheLuceneIndexNumericDocValues;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$valid_", "LOrgApacheLuceneUtilBits;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 = { 2, "", "org.apache.lucene.queries.function.valuesource", "DoubleFieldSource", 0x8008, 4, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexNumericDocValues;LOrgApacheLuceneUtilBits;LOrgApacheLuceneQueriesFunctionValueSource;", "doubleVal", "I", "exists", "LOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource;", "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 = { "", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x8010, 4, 2, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+void OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *self, OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) {
   JreStrongAssign(&self->val$arr_, capture$0);
   JreStrongAssign(&self->val$valid_, capture$1);
-  OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, arg$0);
+  OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, vs);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1, initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, capture$1, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1, initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, capture$1, vs)
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1, initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, capture$1, arg$0)
+OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *vs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1, initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, capture$1, vs)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1)
+@implementation OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1
 
-@implementation OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1
+- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1:(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *)outer$ {
+  OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_(self, outer$);
+  return self;
+}
 
 - (OrgApacheLuceneUtilMutableMutableValue *)getValue {
-  return mval_;
+  return JreRetainedLocalValue(mval_);
 }
 
 - (void)fillValueWithInt:(jint)doc {
   ((OrgApacheLuceneUtilMutableMutableValueDouble *) nil_chk(mval_))->value_ = [this$0_ doubleValWithInt:doc];
   mval_->exists_ = (mval_->value_ != 0 || [((id<OrgApacheLuceneUtilBits>) nil_chk(this$0_->val$valid_)) getWithInt:doc]);
-}
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1:(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *)outer$ {
-  OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_(self, outer$);
-  return self;
 }
 
 - (void)dealloc {
@@ -227,34 +239,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceDouble
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getValue", NULL, "Lorg.apache.lucene.util.mutable.MutableValue;", 0x1, NULL, NULL },
-    { "fillValueWithInt:", "fillValue", "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilMutableMutableValue;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1:);
+  methods[1].selector = @selector(getValue);
+  methods[2].selector = @selector(fillValueWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.valuesource.DoubleFieldSource$1;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mval_", NULL, 0x12, "Lorg.apache.lucene.util.mutable.MutableValueDouble;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "mval_", "LOrgApacheLuceneUtilMutableMutableValueDouble;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1", "getValueFiller" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1 = { 2, "", "org.apache.lucene.queries.function.valuesource", "DoubleFieldSource$", 0x8008, 3, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1;", "fillValue", "I", "getValueFiller" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1 = { "", "org.apache.lucene.queries.function.valuesource", ptrTable, methods, fields, 7, 0x8010, 3, 2, 0, -1, 3, -1, -1 };
+  return &_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *outer$) {
+void OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1 *self, OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_init(self);
   JreStrongAssignAndConsume(&self->mval_, new_OrgApacheLuceneUtilMutableMutableValueDouble_init());
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_, outer$)
+OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1 *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1, initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_, outer$)
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1 *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_, outer$)
+OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1 *create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1_initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1 *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_1, initWithOrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_1_, outer$)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_$1_$1)

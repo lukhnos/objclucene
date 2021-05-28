@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchQueryCache
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchQueryCache_) && (INCLUDE_ALL_OrgApacheLuceneSearchQueryCache || defined(INCLUDE_OrgApacheLuceneSearchQueryCache))
 #define OrgApacheLuceneSearchQueryCache_
 
@@ -23,11 +29,11 @@
  @brief A cache for queries.
  - seealso: LRUQueryCache
  */
-@protocol OrgApacheLuceneSearchQueryCache < NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchQueryCache < JavaObject >
 
 /*!
  @brief Return a wrapper around the provided <code>weight</code> that will cache
- matching docs per-segment accordingly to the given <code>policy</code>.
+  matching docs per-segment accordingly to the given <code>policy</code>.
  NOTE: The returned weight will only be equivalent if scores are not needed.
  - seealso: Collector#needsScores()
  */
@@ -42,4 +48,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryCache)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchQueryCache")

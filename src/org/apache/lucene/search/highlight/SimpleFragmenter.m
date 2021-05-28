@@ -3,10 +3,15 @@
 //  source: ./highlighter/src/java/org/apache/lucene/search/highlight/SimpleFragmenter.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/search/highlight/SimpleFragmenter.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/SimpleFragmenter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchHighlightSimpleFragmenter () {
  @public
@@ -19,7 +24,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightSimpleFragmenter, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 
-inline jint OrgApacheLuceneSearchHighlightSimpleFragmenter_get_DEFAULT_FRAGMENT_SIZE();
+inline jint OrgApacheLuceneSearchHighlightSimpleFragmenter_get_DEFAULT_FRAGMENT_SIZE(void);
 #define OrgApacheLuceneSearchHighlightSimpleFragmenter_DEFAULT_FRAGMENT_SIZE 100
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchHighlightSimpleFragmenter, DEFAULT_FRAGMENT_SIZE, jint)
 
@@ -65,21 +70,32 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SimpleFragmenter", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "SimpleFragmenter", NULL, 0x1, NULL, NULL },
-    { "startWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "start", "V", 0x1, NULL, NULL },
-    { "isNewFragment", NULL, "Z", 0x1, NULL, NULL },
-    { "getFragmentSize", NULL, "I", 0x1, NULL, NULL },
-    { "setFragmentSizeWithInt:", "setFragmentSize", "V", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(startWithNSString:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[3].selector = @selector(isNewFragment);
+  methods[4].selector = @selector(getFragmentSize);
+  methods[5].selector = @selector(setFragmentSizeWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_FRAGMENT_SIZE", "DEFAULT_FRAGMENT_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchHighlightSimpleFragmenter_DEFAULT_FRAGMENT_SIZE },
-    { "currentNumFrags_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fragmentSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_FRAGMENT_SIZE", "I", .constantValue.asInt = OrgApacheLuceneSearchHighlightSimpleFragmenter_DEFAULT_FRAGMENT_SIZE, 0x1a, -1, -1, -1, -1 },
+    { "currentNumFrags_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fragmentSize_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "offsetAtt_", "LOrgApacheLuceneAnalysisTokenattributesOffsetAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleFragmenter = { 2, "SimpleFragmenter", "org.apache.lucene.search.highlight", NULL, 0x1, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "I", "start", "LNSString;LOrgApacheLuceneAnalysisTokenStream;", "setFragmentSize" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleFragmenter = { "SimpleFragmenter", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x1, 6, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchHighlightSimpleFragmenter;
 }
 

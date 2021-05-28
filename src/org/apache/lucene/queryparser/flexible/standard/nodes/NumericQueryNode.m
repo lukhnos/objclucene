@@ -11,6 +11,12 @@
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/NumericQueryNode.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/queryparser/flexible/standard/nodes/NumericQueryNode must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode () {
  @public
   JavaTextNumberFormat *numberFormat_;
@@ -82,24 +88,39 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryN
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangCharSequence:withNSNumber:withJavaTextNumberFormat:", "NumericQueryNode", NULL, 0x1, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "setFieldWithJavaLangCharSequence:", "setField", "V", 0x1, NULL, NULL },
-    { "getTermEscapedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "getTermEscaped", "Ljava.lang.CharSequence;", 0x4, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "setNumberFormatWithJavaTextNumberFormat:", "setNumberFormat", "V", 0x1, NULL, NULL },
-    { "getNumberFormat", NULL, "Ljava.text.NumberFormat;", 0x1, NULL, NULL },
-    { "getValue", NULL, "Ljava.lang.Number;", 0x1, NULL, NULL },
-    { "setValueWithId:", "setValue", "V", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 5, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LJavaTextNumberFormat;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSNumber;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 10, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaLangCharSequence:withNSNumber:withJavaTextNumberFormat:);
+  methods[1].selector = @selector(getField);
+  methods[2].selector = @selector(setFieldWithJavaLangCharSequence:);
+  methods[3].selector = @selector(getTermEscapedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[4].selector = @selector(toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:);
+  methods[5].selector = @selector(setNumberFormatWithJavaTextNumberFormat:);
+  methods[6].selector = @selector(getNumberFormat);
+  methods[7].selector = @selector(getValue);
+  methods[8].selector = @selector(setValueWithId:);
+  methods[9].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "numberFormat_", NULL, 0x2, "Ljava.text.NumberFormat;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x2, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "value_", NULL, 0x2, "Ljava.lang.Number;", NULL, NULL, .constantValue.asLong = 0 },
+    { "numberFormat_", "LJavaTextNumberFormat;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "field_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "value_", "LNSNumber;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode = { 2, "NumericQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", NULL, 0x1, 10, methods, 3, fields, 0, NULL, 0, NULL, NULL, "Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl;Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<Ljava/lang/Number;>;" };
+  static const void *ptrTable[] = { "LJavaLangCharSequence;LNSNumber;LJavaTextNumberFormat;", "setField", "LJavaLangCharSequence;", "getTermEscaped", "LOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;", "toQueryString", "setNumberFormat", "LJavaTextNumberFormat;", "setValue", "LNSNumber;", "toString", "Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl;Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<Ljava/lang/Number;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode = { "NumericQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", ptrTable, methods, fields, 7, 0x1, 10, 3, -1, -1, -1, 11, -1 };
   return &_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode;
 }
 

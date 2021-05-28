@@ -3,11 +3,13 @@
 //  source: ./core/src/java/org/apache/lucene/analysis/CharFilter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/io/Reader.h"
 #include "org/apache/lucene/analysis/CharFilter.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/CharFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisCharFilter_correctOffsetWithInt_(OrgApacheLuceneAnalysisCharFilter *self, jint currentOff);
 
@@ -38,16 +40,25 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisCharFilter_correctOff
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaIoReader:", "CharFilter", NULL, 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "correctWithInt:", "correct", "I", 0x404, NULL, NULL },
-    { "correctOffsetWithInt:", "correctOffset", "I", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x404, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 4, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaIoReader:);
+  methods[1].selector = @selector(close);
+  methods[2].selector = @selector(correctWithInt:);
+  methods[3].selector = @selector(correctOffsetWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "input_", NULL, 0x14, "Ljava.io.Reader;", NULL, NULL, .constantValue.asLong = 0 },
+    { "input_", "LJavaIoReader;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharFilter = { 2, "CharFilter", "org.apache.lucene.analysis", NULL, 0x401, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoReader;", "LJavaIoIOException;", "correct", "I", "correctOffset" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharFilter = { "CharFilter", "org.apache.lucene.analysis", ptrTable, methods, fields, 7, 0x401, 4, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCharFilter;
 }
 

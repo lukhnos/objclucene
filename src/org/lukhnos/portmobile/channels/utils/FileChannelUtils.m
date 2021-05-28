@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/lukhnos/portmobile/channels/utils/FileChannelUtils.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/File.h"
@@ -17,12 +16,11 @@
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/StandardOpenOption.h"
 
-@implementation OrgLukhnosPortmobileChannelsUtilsFileChannelUtils
+#if __has_feature(objc_arc)
+#error "org/lukhnos/portmobile/channels/utils/FileChannelUtils must not be compiled with ARC (-fobjc-arc)"
+#endif
 
-+ (JavaNioChannelsFileChannel *)openWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                 withOrgLukhnosPortmobileFileStandardOpenOptionArray:(IOSObjectArray *)options {
-  return OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(path, options);
-}
+@implementation OrgLukhnosPortmobileChannelsUtilsFileChannelUtils
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -31,16 +29,40 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (JavaNioChannelsFileChannel *)openWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
+                 withOrgLukhnosPortmobileFileStandardOpenOptionArray:(IOSObjectArray *)options {
+  return OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(path, options);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "openWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardOpenOptionArray:", "open", "Ljava.nio.channels.FileChannel;", 0x89, "Ljava.io.IOException;", NULL },
-    { "init", "FileChannelUtils", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaNioChannelsFileChannel;", 0x89, 0, 1, 2, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileChannelsUtilsFileChannelUtils = { 2, "FileChannelUtils", "org.lukhnos.portmobile.channels.utils", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(openWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardOpenOptionArray:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "open", "LOrgLukhnosPortmobileFilePath;[LOrgLukhnosPortmobileFileStandardOpenOption;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileChannelsUtilsFileChannelUtils = { "FileChannelUtils", "org.lukhnos.portmobile.channels.utils", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
   return &_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils;
 }
 
 @end
+
+void OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *self) {
+  NSObject_init(self);
+}
+
+OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *new_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init() {
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils, init)
+}
+
+OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *create_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils, init)
+}
 
 JavaNioChannelsFileChannel *OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(OrgLukhnosPortmobileFilePath *path, IOSObjectArray *options) {
   OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_initialize();
@@ -57,18 +79,6 @@ JavaNioChannelsFileChannel *OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_op
     return [raf getChannel];
   }
   @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Unknown options: ", options));
-}
-
-void OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *self) {
-  NSObject_init(self);
-}
-
-OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *new_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init() {
-  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils, init)
-}
-
-OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *create_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init() {
-  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils)

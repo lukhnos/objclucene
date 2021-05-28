@@ -3,13 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/core/TypeTokenFilter.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/core/TypeTokenFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/core/TypeTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisCoreTypeTokenFilter () {
  @public
@@ -49,17 +53,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreTypeTokenFilter, typeAttribute_, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:withBoolean:", "TypeTokenFilter", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set<Ljava/lang/String;>;Z)V" },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:", "TypeTokenFilter", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set<Ljava/lang/String;>;)V" },
-    { "accept", NULL, "Z", 0x4, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, 3, -1, -1 },
+    { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:withBoolean:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:);
+  methods[2].selector = @selector(accept);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "stopTypes_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "typeAttribute_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "useWhiteList_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "stopTypes_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x12, -1, -1, 4, -1 },
+    { "typeAttribute_", "LOrgApacheLuceneAnalysisTokenattributesTypeAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "useWhiteList_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreTypeTokenFilter = { 2, "TypeTokenFilter", "org.apache.lucene.analysis.core", NULL, 0x11, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;LJavaUtilSet;Z", "(Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set<Ljava/lang/String;>;Z)V", "LOrgApacheLuceneAnalysisTokenStream;LJavaUtilSet;", "(Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set<Ljava/lang/String;>;)V", "Ljava/util/Set<Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreTypeTokenFilter = { "TypeTokenFilter", "org.apache.lucene.analysis.core", ptrTable, methods, fields, 7, 0x11, 3, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisCoreTypeTokenFilter;
 }
 

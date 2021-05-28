@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexPKIndexSplitter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexPKIndexSplitter_) && (INCLUDE_ALL_OrgApacheLuceneIndexPKIndexSplitter || defined(INCLUDE_OrgApacheLuceneIndexPKIndexSplitter))
 #define OrgApacheLuceneIndexPKIndexSplitter_
 
@@ -30,58 +36,59 @@
 #pragma mark Public
 
 /*!
- @brief Split an index based on a <code>Filter</code>.
- All documents that match the filter
- are sent to dir1, remaining ones to dir2.
+ @brief Split an index based on a <code>Filter</code>.All documents that match the filter
+  are sent to dir1, remaining ones to dir2.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                      withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)docsInFirstIndex;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
+                                withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)docsInFirstIndex;
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                      withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)docsInFirstIndex
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config1
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config2;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
+                                withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)docsInFirstIndex
+                      withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config1
+                      withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config2;
 
 /*!
- @brief Split an index based on a <code>Query</code>.
- All documents that match the query
- are sent to dir1, remaining ones to dir2.
+ @brief Split an index based on a <code>Query</code>.All documents that match the query
+  are sent to dir1, remaining ones to dir2.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                       withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)docsInFirstIndex;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
+                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)docsInFirstIndex;
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                       withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)docsInFirstIndex
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config1
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config2;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
+                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)docsInFirstIndex
+                      withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config1
+                      withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config2;
 
 /*!
  @brief Split an index based on a  given primary key term 
- and a 'middle' term.
- If the middle term is present, it's
- sent to dir2.
+  and a 'middle' term.If the middle term is present, it's
+  sent to dir2.
  */
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                         withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)midTerm;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
+                                   withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)midTerm;
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                         withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)midTerm
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config1
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config2;
+- (instancetype __nonnull)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
+                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
+                                   withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)midTerm
+                      withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config1
+                      withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config2;
 
 - (void)split;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -127,4 +134,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPKIndexSplitter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexPKIndexSplitter")

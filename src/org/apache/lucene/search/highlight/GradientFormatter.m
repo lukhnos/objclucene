@@ -13,6 +13,10 @@
 #include "org/apache/lucene/search/highlight/GradientFormatter.h"
 #include "org/apache/lucene/search/highlight/TokenGroup.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/highlight/GradientFormatter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneSearchHighlightGradientFormatter () {
  @public
   jfloat maxScore_;
@@ -26,7 +30,7 @@
 
 @end
 
-inline IOSCharArray *OrgApacheLuceneSearchHighlightGradientFormatter_get_hexDigits();
+inline IOSCharArray *OrgApacheLuceneSearchHighlightGradientFormatter_get_hexDigits(void);
 inline IOSCharArray *OrgApacheLuceneSearchHighlightGradientFormatter_set_hexDigits(IOSCharArray *value);
 static IOSCharArray *OrgApacheLuceneSearchHighlightGradientFormatter_hexDigits;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneSearchHighlightGradientFormatter, hexDigits, IOSCharArray *)
@@ -111,43 +115,55 @@ withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightToke
   return OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_(hex);
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x4, 5, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0xa, 8, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x19, 10, 11, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithFloat:withNSString:withNSString:withNSString:withNSString:);
+  methods[1].selector = @selector(highlightTermWithNSString:withOrgApacheLuceneSearchHighlightTokenGroup:);
+  methods[2].selector = @selector(getForegroundColorStringWithFloat:);
+  methods[3].selector = @selector(getBackgroundColorStringWithFloat:);
+  methods[4].selector = @selector(getColorValWithInt:withInt:withFloat:);
+  methods[5].selector = @selector(intToHexWithInt:);
+  methods[6].selector = @selector(hexToIntWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "maxScore_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fgRMin_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fgGMin_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fgBMin_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fgRMax_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fgGMax_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "fgBMax_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "highlightForeground_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "bgRMin_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bgGMin_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bgBMin_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bgRMax_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bgGMax_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bgBMax_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "highlightBackground_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "hexDigits", "[C", .constantValue.asLong = 0, 0xa, -1, 12, -1, -1 },
+  };
+  static const void *ptrTable[] = { "FLNSString;LNSString;LNSString;LNSString;", "highlightTerm", "LNSString;LOrgApacheLuceneSearchHighlightTokenGroup;", "getForegroundColorString", "F", "getBackgroundColorString", "getColorVal", "IIF", "intToHex", "I", "hexToInt", "LNSString;", &OrgApacheLuceneSearchHighlightGradientFormatter_hexDigits };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightGradientFormatter = { "GradientFormatter", "org.apache.lucene.search.highlight", ptrTable, methods, fields, 7, 0x1, 7, 16, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchHighlightGradientFormatter;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchHighlightGradientFormatter class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchHighlightGradientFormatter_hexDigits, [IOSCharArray newArrayWithChars:(jchar[]){ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' } count:16]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchHighlightGradientFormatter)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithFloat:withNSString:withNSString:withNSString:withNSString:", "GradientFormatter", NULL, 0x1, NULL, NULL },
-    { "highlightTermWithNSString:withOrgApacheLuceneSearchHighlightTokenGroup:", "highlightTerm", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getForegroundColorStringWithFloat:", "getForegroundColorString", "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "getBackgroundColorStringWithFloat:", "getBackgroundColorString", "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "getColorValWithInt:withInt:withFloat:", "getColorVal", "I", 0x2, NULL, NULL },
-    { "intToHexWithInt:", "intToHex", "Ljava.lang.String;", 0xa, NULL, NULL },
-    { "hexToIntWithNSString:", "hexToInt", "I", 0x19, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "maxScore_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "fgRMin_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fgGMin_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fgBMin_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fgRMax_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fgGMax_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fgBMax_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "highlightForeground_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "bgRMin_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bgGMin_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bgBMin_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bgRMax_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bgGMax_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bgBMax_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "highlightBackground_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "hexDigits", "hexDigits", 0xa, "[C", &OrgApacheLuceneSearchHighlightGradientFormatter_hexDigits, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightGradientFormatter = { 2, "GradientFormatter", "org.apache.lucene.search.highlight", NULL, 0x1, 7, methods, 16, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchHighlightGradientFormatter;
 }
 
 @end
@@ -156,33 +172,33 @@ void OrgApacheLuceneSearchHighlightGradientFormatter_initWithFloat_withNSString_
   NSObject_init(self);
   self->highlightForeground_ = ((minForegroundColor != nil) && (maxForegroundColor != nil));
   if (self->highlightForeground_) {
-    if (((jint) [((NSString *) nil_chk(minForegroundColor)) length]) != 7) {
+    if ([((NSString *) nil_chk(minForegroundColor)) java_length] != 7) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minForegroundColor is not 7 bytes long eg a hex RGB value such as #FFFFFF");
     }
-    if (((jint) [((NSString *) nil_chk(maxForegroundColor)) length]) != 7) {
+    if ([((NSString *) nil_chk(maxForegroundColor)) java_length] != 7) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minForegroundColor is not 7 bytes long eg a hex RGB value such as #FFFFFF");
     }
-    self->fgRMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minForegroundColor substring:1 endIndex:3]);
-    self->fgGMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minForegroundColor substring:3 endIndex:5]);
-    self->fgBMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minForegroundColor substring:5 endIndex:7]);
-    self->fgRMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxForegroundColor substring:1 endIndex:3]);
-    self->fgGMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxForegroundColor substring:3 endIndex:5]);
-    self->fgBMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxForegroundColor substring:5 endIndex:7]);
+    self->fgRMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minForegroundColor java_substring:1 endIndex:3]);
+    self->fgGMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minForegroundColor java_substring:3 endIndex:5]);
+    self->fgBMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minForegroundColor java_substring:5 endIndex:7]);
+    self->fgRMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxForegroundColor java_substring:1 endIndex:3]);
+    self->fgGMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxForegroundColor java_substring:3 endIndex:5]);
+    self->fgBMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxForegroundColor java_substring:5 endIndex:7]);
   }
   self->highlightBackground_ = ((minBackgroundColor != nil) && (maxBackgroundColor != nil));
   if (self->highlightBackground_) {
-    if (((jint) [((NSString *) nil_chk(minBackgroundColor)) length]) != 7) {
+    if ([((NSString *) nil_chk(minBackgroundColor)) java_length] != 7) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minBackgroundColor is not 7 bytes long eg a hex RGB value such as #FFFFFF");
     }
-    if (((jint) [((NSString *) nil_chk(maxBackgroundColor)) length]) != 7) {
+    if ([((NSString *) nil_chk(maxBackgroundColor)) java_length] != 7) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minBackgroundColor is not 7 bytes long eg a hex RGB value such as #FFFFFF");
     }
-    self->bgRMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minBackgroundColor substring:1 endIndex:3]);
-    self->bgGMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minBackgroundColor substring:3 endIndex:5]);
-    self->bgBMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minBackgroundColor substring:5 endIndex:7]);
-    self->bgRMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxBackgroundColor substring:1 endIndex:3]);
-    self->bgGMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxBackgroundColor substring:3 endIndex:5]);
-    self->bgBMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxBackgroundColor substring:5 endIndex:7]);
+    self->bgRMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minBackgroundColor java_substring:1 endIndex:3]);
+    self->bgGMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minBackgroundColor java_substring:3 endIndex:5]);
+    self->bgBMin_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([minBackgroundColor java_substring:5 endIndex:7]);
+    self->bgRMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxBackgroundColor java_substring:1 endIndex:3]);
+    self->bgGMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxBackgroundColor java_substring:3 endIndex:5]);
+    self->bgBMax_ = OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_([maxBackgroundColor java_substring:5 endIndex:7]);
   }
   self->maxScore_ = maxScore;
 }
@@ -212,7 +228,7 @@ NSString *OrgApacheLuceneSearchHighlightGradientFormatter_intToHexWithInt_(jint 
 
 jint OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_(NSString *hex) {
   OrgApacheLuceneSearchHighlightGradientFormatter_initialize();
-  jint len = ((jint) [((NSString *) nil_chk(hex)) length]);
+  jint len = [((NSString *) nil_chk(hex)) java_length];
   if (len > 16) @throw create_JavaLangNumberFormatException_init();
   jint l = 0;
   for (jint i = 0; i < len; i++) {

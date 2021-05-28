@@ -6,12 +6,14 @@
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/en/EnglishPossessiveFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/en/EnglishPossessiveFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisEnEnglishPossessiveFilter () {
  @public
@@ -34,7 +36,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnEnglishPossessiveFilter, termAtt_, 
     return false;
   }
   IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-  jint bufferLength = [termAtt_ length];
+  jint bufferLength = [termAtt_ java_length];
   if (bufferLength >= 2 && (IOSCharArray_Get(nil_chk(buffer), bufferLength - 2) == '\'' || IOSCharArray_Get(buffer, bufferLength - 2) == 0x2019 || IOSCharArray_Get(buffer, bufferLength - 2) == 0xff07) && (IOSCharArray_Get(buffer, bufferLength - 1) == 's' || IOSCharArray_Get(buffer, bufferLength - 1) == 'S')) {
     [termAtt_ setLengthWithInt:bufferLength - 2];
   }
@@ -47,14 +49,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnEnglishPossessiveFilter, termAtt_, 
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "EnglishPossessiveFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(incrementToken);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
+    { "termAtt_", "LOrgApacheLuceneAnalysisTokenattributesCharTermAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnEnglishPossessiveFilter = { 2, "EnglishPossessiveFilter", "org.apache.lucene.analysis.en", NULL, 0x11, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnEnglishPossessiveFilter = { "EnglishPossessiveFilter", "org.apache.lucene.analysis.en", ptrTable, methods, fields, 7, 0x11, 2, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisEnEnglishPossessiveFilter;
 }
 

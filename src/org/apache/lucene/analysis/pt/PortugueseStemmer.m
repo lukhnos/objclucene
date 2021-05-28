@@ -10,31 +10,35 @@
 #include "org/apache/lucene/analysis/pt/PortugueseStemmer.h"
 #include "org/apache/lucene/analysis/pt/RSLPStemmerBase.h"
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_plural();
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/pt/PortugueseStemmer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_plural(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_plural;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtPortugueseStemmer, plural, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_feminine();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_feminine(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_feminine;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtPortugueseStemmer, feminine, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_adverb();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_adverb(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_adverb;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtPortugueseStemmer, adverb, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_augmentative();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_augmentative(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_augmentative;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtPortugueseStemmer, augmentative, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_noun();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_noun(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_noun;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtPortugueseStemmer, noun, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_verb();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_verb(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_verb;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtPortugueseStemmer, verb, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
-inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_vowel();
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_get_vowel(void);
 static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseStemmer_vowel;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtPortugueseStemmer, vowel, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
@@ -42,9 +46,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisPtPortugueseStemmer)
 
 @implementation OrgApacheLuceneAnalysisPtPortugueseStemmer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisPtPortugueseStemmer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
-  JreAssert((((IOSCharArray *) nil_chk(s))->size_ >= len + 1), (@"this stemmer requires an oversized array of at least 1"));
+  JreAssert(((IOSCharArray *) nil_chk(s))->size_ >= len + 1, @"this stemmer requires an oversized array of at least 1");
   len = [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisPtPortugueseStemmer_plural)) applyWithCharArray:s withInt:len];
   len = [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisPtPortugueseStemmer_adverb)) applyWithCharArray:s withInt:len];
   len = [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisPtPortugueseStemmer_feminine)) applyWithCharArray:s withInt:len];
@@ -108,12 +119,30 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisPtPortugueseStemmer)
   return len;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisPtPortugueseStemmer_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(stemWithCharArray:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "plural", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 2, -1, -1 },
+    { "feminine", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 3, -1, -1 },
+    { "adverb", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 4, -1, -1 },
+    { "augmentative", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "noun", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 6, -1, -1 },
+    { "verb", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 7, -1, -1 },
+    { "vowel", "LOrgApacheLuceneAnalysisPtRSLPStemmerBase_Step;", .constantValue.asLong = 0, 0x1a, -1, 8, -1, -1 },
+  };
+  static const void *ptrTable[] = { "stem", "[CI", &OrgApacheLuceneAnalysisPtPortugueseStemmer_plural, &OrgApacheLuceneAnalysisPtPortugueseStemmer_feminine, &OrgApacheLuceneAnalysisPtPortugueseStemmer_adverb, &OrgApacheLuceneAnalysisPtPortugueseStemmer_augmentative, &OrgApacheLuceneAnalysisPtPortugueseStemmer_noun, &OrgApacheLuceneAnalysisPtPortugueseStemmer_verb, &OrgApacheLuceneAnalysisPtPortugueseStemmer_vowel };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPtPortugueseStemmer = { "PortugueseStemmer", "org.apache.lucene.analysis.pt", ptrTable, methods, fields, 7, 0x1, 2, 7, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneAnalysisPtPortugueseStemmer;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisPtPortugueseStemmer class]) {
@@ -129,24 +158,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisPtPortugueseStemmer)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "init", "PortugueseStemmer", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "plural", "plural", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisPtPortugueseStemmer_plural, NULL, .constantValue.asLong = 0 },
-    { "feminine", "feminine", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisPtPortugueseStemmer_feminine, NULL, .constantValue.asLong = 0 },
-    { "adverb", "adverb", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisPtPortugueseStemmer_adverb, NULL, .constantValue.asLong = 0 },
-    { "augmentative", "augmentative", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisPtPortugueseStemmer_augmentative, NULL, .constantValue.asLong = 0 },
-    { "noun", "noun", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisPtPortugueseStemmer_noun, NULL, .constantValue.asLong = 0 },
-    { "verb", "verb", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisPtPortugueseStemmer_verb, NULL, .constantValue.asLong = 0 },
-    { "vowel", "vowel", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisPtPortugueseStemmer_vowel, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPtPortugueseStemmer = { 2, "PortugueseStemmer", "org.apache.lucene.analysis.pt", NULL, 0x1, 2, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneAnalysisPtPortugueseStemmer;
 }
 
 @end

@@ -8,6 +8,10 @@
 #include "org/apache/lucene/analysis/fa/PersianNormalizer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/fa/PersianNormalizer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneAnalysisFaPersianNormalizer
 
 + (jchar)YEH {
@@ -46,6 +50,13 @@
   return OrgApacheLuceneAnalysisFaPersianNormalizer_HEH;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneAnalysisFaPersianNormalizer_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (jint)normalizeWithCharArray:(IOSCharArray *)s
                        withInt:(jint)len {
   for (jint i = 0; i < len; i++) {
@@ -72,30 +83,30 @@
   return len;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneAnalysisFaPersianNormalizer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
-    { "init", "PersianNormalizer", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(normalizeWithCharArray:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "YEH", "YEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_YEH },
-    { "FARSI_YEH", "FARSI_YEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_FARSI_YEH },
-    { "YEH_BARREE", "YEH_BARREE", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_YEH_BARREE },
-    { "KEHEH", "KEHEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_KEHEH },
-    { "KAF", "KAF", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_KAF },
-    { "HAMZA_ABOVE", "HAMZA_ABOVE", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_HAMZA_ABOVE },
-    { "HEH_YEH", "HEH_YEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_HEH_YEH },
-    { "HEH_GOAL", "HEH_GOAL", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_HEH_GOAL },
-    { "HEH", "HEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_HEH },
+    { "YEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_YEH, 0x19, -1, -1, -1, -1 },
+    { "FARSI_YEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_FARSI_YEH, 0x19, -1, -1, -1, -1 },
+    { "YEH_BARREE", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_YEH_BARREE, 0x19, -1, -1, -1, -1 },
+    { "KEHEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_KEHEH, 0x19, -1, -1, -1, -1 },
+    { "KAF", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_KAF, 0x19, -1, -1, -1, -1 },
+    { "HAMZA_ABOVE", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_HAMZA_ABOVE, 0x19, -1, -1, -1, -1 },
+    { "HEH_YEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_HEH_YEH, 0x19, -1, -1, -1, -1 },
+    { "HEH_GOAL", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_HEH_GOAL, 0x19, -1, -1, -1, -1 },
+    { "HEH", "C", .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_HEH, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFaPersianNormalizer = { 2, "PersianNormalizer", "org.apache.lucene.analysis.fa", NULL, 0x1, 2, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "normalize", "[CI" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFaPersianNormalizer = { "PersianNormalizer", "org.apache.lucene.analysis.fa", ptrTable, methods, fields, 7, 0x1, 2, 9, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneAnalysisFaPersianNormalizer;
 }
 

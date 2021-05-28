@@ -21,6 +21,7 @@
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/Thread.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/annotation/Annotation.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
@@ -32,6 +33,8 @@
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
+#include "java/util/Spliterator.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/codecs/Codec.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/codecs/SegmentInfoFormat.h"
@@ -53,6 +56,12 @@
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/StringHelper.h"
 #include "org/apache/lucene/util/Version.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/SegmentInfos must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneIndexSegmentInfos () {
  @public
@@ -84,11 +93,11 @@
 - (void)writeWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
 /*!
- @brief Prints the given message to the infoStream.
- Note, this method does not
- check for null infoStream. It assumes this check has been performed by the
- caller, which is recommended to avoid the (usually) expensive message
- creation.
+ @brief Prints the given message to the infoStream.Note, this method does not
+  check for null infoStream.
+ It assumes this check has been performed by the
+  caller, which is recommended to avoid the (usually) expensive message
+  creation.
  */
 + (void)messageWithNSString:(NSString *)message;
 
@@ -101,15 +110,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentInfos, minSegmentLuceneVersion_, 
 
 /*!
  @brief If non-null, information about loading segments_N files
- will be printed here.
+  will be printed here.
  @@see #setInfoStream.
  */
-inline JavaIoPrintStream *OrgApacheLuceneIndexSegmentInfos_get_infoStream();
+inline JavaIoPrintStream *OrgApacheLuceneIndexSegmentInfos_get_infoStream(void);
 inline JavaIoPrintStream *OrgApacheLuceneIndexSegmentInfos_set_infoStream(JavaIoPrintStream *value);
 static JavaIoPrintStream *OrgApacheLuceneIndexSegmentInfos_infoStream;
 J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneIndexSegmentInfos, infoStream, JavaIoPrintStream *)
 
-inline id<JavaUtilList> OrgApacheLuceneIndexSegmentInfos_get_unsupportedCodecs();
+inline id<JavaUtilList> OrgApacheLuceneIndexSegmentInfos_get_unsupportedCodecs(void);
 static id<JavaUtilList> OrgApacheLuceneIndexSegmentInfos_unsupportedCodecs;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexSegmentInfos, unsupportedCodecs, id<JavaUtilList>)
 
@@ -127,23 +136,29 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfos_prepareComm
 
 __attribute__((unused)) static NSString *OrgApacheLuceneIndexSegmentInfos_finishCommitWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos *self, OrgApacheLuceneStoreDirectory *dir);
 
-@interface OrgApacheLuceneIndexSegmentInfos_$1 : OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexSegmentInfos__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneIndexSegmentInfos__Annotations$1(void);
+
+@interface OrgApacheLuceneIndexSegmentInfos_1 : OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile
+
+- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
 - (OrgApacheLuceneIndexSegmentInfos *)doBodyWithNSString:(NSString *)segmentFileName;
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg$0;
+- (OrgApacheLuceneIndexSegmentInfos *)run;
+
+- (OrgApacheLuceneIndexSegmentInfos *)runWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)arg0;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSegmentInfos_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSegmentInfos_1)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfos_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos_$1 *self, OrgApacheLuceneStoreDirectory *arg$0);
+__attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfos_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos_1 *self, OrgApacheLuceneStoreDirectory *directory);
 
-__attribute__((unused)) static OrgApacheLuceneIndexSegmentInfos_$1 *new_OrgApacheLuceneIndexSegmentInfos_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *arg$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexSegmentInfos_1 *new_OrgApacheLuceneIndexSegmentInfos_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneIndexSegmentInfos_$1 *create_OrgApacheLuceneIndexSegmentInfos_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *arg$0);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentInfos_$1)
+__attribute__((unused)) static OrgApacheLuceneIndexSegmentInfos_1 *create_OrgApacheLuceneIndexSegmentInfos_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
 
@@ -221,7 +236,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (IOSByteArray *)getId {
-  return id__ == nil ? nil : [id__ clone];
+  return id__ == nil ? nil : [id__ java_clone];
 }
 
 + (OrgApacheLuceneIndexSegmentInfos *)readCommitWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
@@ -242,19 +257,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   OrgApacheLuceneIndexSegmentInfos_writeWithOrgApacheLuceneStoreDirectory_(self, directory);
 }
 
-- (OrgApacheLuceneIndexSegmentInfos *)clone {
+- (OrgApacheLuceneIndexSegmentInfos *)java_clone {
   @try {
-    OrgApacheLuceneIndexSegmentInfos *sis = (OrgApacheLuceneIndexSegmentInfos *) cast_chk([super clone], [OrgApacheLuceneIndexSegmentInfos class]);
+    OrgApacheLuceneIndexSegmentInfos *sis = (OrgApacheLuceneIndexSegmentInfos *) cast_chk([super java_clone], [OrgApacheLuceneIndexSegmentInfos class]);
     JreStrongAssignAndConsume(&((OrgApacheLuceneIndexSegmentInfos *) nil_chk(sis))->segments_, new_JavaUtilArrayList_initWithInt_([self size]));
     for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in self) {
-      JreAssert(([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_)) getCodec] != nil), (@"org/apache/lucene/index/SegmentInfos.java:608 condition failed: assert info.info.getCodec() != null;"));
-      [sis addWithOrgApacheLuceneIndexSegmentCommitInfo:[info clone]];
+      JreAssert([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_)) getCodec] != nil, @"org/apache/lucene/index/SegmentInfos.java:608 condition failed: assert info.info.getCodec() != null;");
+      [sis addWithOrgApacheLuceneIndexSegmentCommitInfo:[info java_clone]];
     }
     JreStrongAssignAndConsume(&sis->userData_, new_JavaUtilHashMap_initWithJavaUtilMap_(userData_));
     return sis;
   }
   @catch (JavaLangCloneNotSupportedException *e) {
-    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(@"should not happen", e);
+    @throw create_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(@"should not happen", e);
   }
 }
 
@@ -294,7 +309,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setNextWriteGenerationWithLong:(jlong)generation {
-  JreAssert((generation >= self->generation_), (@"org/apache/lucene/index/SegmentInfos.java:775 condition failed: assert generation >= this.generation;"));
+  JreAssert(generation >= self->generation_, @"org/apache/lucene/index/SegmentInfos.java:775 condition failed: assert generation >= this.generation;");
   self->generation_ = generation;
 }
 
@@ -378,7 +393,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in self) {
     count += [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_)) maxDoc];
   }
-  JreAssert((count <= OrgApacheLuceneIndexIndexWriter_getActualMaxDocs()), (@"org/apache/lucene/index/SegmentInfos.java:937 condition failed: assert count <= IndexWriter.getActualMaxDocs();"));
+  JreAssert(count <= OrgApacheLuceneIndexIndexWriter_getActualMaxDocs(), @"org/apache/lucene/index/SegmentInfos.java:937 condition failed: assert count <= IndexWriter.getActualMaxDocs();");
   return (jint) count;
 }
 
@@ -392,7 +407,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   jboolean inserted = false;
   jint newSegIdx = 0;
   for (jint segIdx = 0, cnt = [((id<JavaUtilList>) nil_chk(segments_)) size]; segIdx < cnt; segIdx++) {
-    JreAssert((segIdx >= newSegIdx), (@"org/apache/lucene/index/SegmentInfos.java:953 condition failed: assert segIdx >= newSegIdx;"));
+    JreAssert(segIdx >= newSegIdx, @"org/apache/lucene/index/SegmentInfos.java:953 condition failed: assert segIdx >= newSegIdx;");
     OrgApacheLuceneIndexSegmentCommitInfo *info = [((id<JavaUtilList>) nil_chk(segments_)) getWithInt:segIdx];
     if ([mergedAway containsWithId:info]) {
       if (!inserted && !dropSegment) {
@@ -415,8 +430,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<JavaUtilList>)createBackupSegmentInfos {
   id<JavaUtilList> list = create_JavaUtilArrayList_initWithInt_([self size]);
   for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in self) {
-    JreAssert(([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_)) getCodec] != nil), (@"org/apache/lucene/index/SegmentInfos.java:983 condition failed: assert info.info.getCodec() != null;"));
-    [list addWithId:[info clone]];
+    JreAssert([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_)) getCodec] != nil, @"org/apache/lucene/index/SegmentInfos.java:983 condition failed: assert info.info.getCodec() != null;");
+    [list addWithId:[info java_clone]];
   }
   return list;
 }
@@ -476,16 +491,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return minSegmentLuceneVersion_;
 }
 
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
+}
+
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
-+ (IOSObjectArray *)__annotations_filesWithOrgApacheLuceneStoreDirectory_withBoolean_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_toStringWithOrgApacheLuceneStoreDirectory_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -497,98 +512,153 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSegmentCommitInfo;", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 2, 4, 5, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 6, 3, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 6, 4, 5, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 7, 8, -1, -1, -1, -1 },
+    { NULL, "J", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSegmentInfos;", 0x19, 9, 10, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCodec;", 0xa, 11, 12, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSegmentInfos;", 0x19, 13, 4, 5, -1, -1, -1 },
+    { NULL, "V", 0x2, 14, 4, 5, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSegmentInfos;", 0x1, 15, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 16, 17, -1, -1, -1, -1 },
+    { NULL, "LJavaIoPrintStream;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 18, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 19, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 21, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x10, 24, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x10, 25, 4, 5, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x11, 26, 27, 5, 28, 29, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, 26, 30, 5, 31, -1, -1 },
+    { NULL, "LNSString;", 0x10, 32, 4, 5, -1, -1, -1 },
+    { NULL, "V", 0x10, 33, 4, 5, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 34, 4, -1, -1, 35, -1 },
+    { NULL, "LNSString;", 0x1, 34, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 36, -1, -1 },
+    { NULL, "V", 0x0, 37, 38, -1, 39, -1, -1 },
+    { NULL, "V", 0x0, 40, 20, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 41, 42, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x0, -1, -1, -1, 43, -1, -1 },
+    { NULL, "V", 0x0, 44, 45, -1, 46, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 47, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 43, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 48, 49, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 50, 51, -1, 52, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 53, 49, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 53, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, 54, 49, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 55, 49, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilVersion;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilVersion;", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(infoWithInt:);
+  methods[2].selector = @selector(getLastCommitGenerationWithNSStringArray:);
+  methods[3].selector = @selector(getLastCommitGenerationWithOrgApacheLuceneStoreDirectory:);
+  methods[4].selector = @selector(getLastCommitSegmentsFileNameWithNSStringArray:);
+  methods[5].selector = @selector(getLastCommitSegmentsFileNameWithOrgApacheLuceneStoreDirectory:);
+  methods[6].selector = @selector(getSegmentsFileName);
+  methods[7].selector = @selector(generationFromSegmentsFileNameWithNSString:);
+  methods[8].selector = @selector(getNextPendingGeneration);
+  methods[9].selector = @selector(getId);
+  methods[10].selector = @selector(readCommitWithOrgApacheLuceneStoreDirectory:withNSString:);
+  methods[11].selector = @selector(readCodecWithOrgApacheLuceneStoreDataInput:withBoolean:);
+  methods[12].selector = @selector(readLatestCommitWithOrgApacheLuceneStoreDirectory:);
+  methods[13].selector = @selector(writeWithOrgApacheLuceneStoreDirectory:);
+  methods[14].selector = @selector(java_clone);
+  methods[15].selector = @selector(getVersion);
+  methods[16].selector = @selector(getGeneration);
+  methods[17].selector = @selector(getLastGeneration);
+  methods[18].selector = @selector(setInfoStreamWithJavaIoPrintStream:);
+  methods[19].selector = @selector(getInfoStream);
+  methods[20].selector = @selector(messageWithNSString:);
+  methods[21].selector = @selector(updateGenerationWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[22].selector = @selector(updateGenerationVersionAndCounterWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[23].selector = @selector(setNextWriteGenerationWithLong:);
+  methods[24].selector = @selector(rollbackCommitWithOrgApacheLuceneStoreDirectory:);
+  methods[25].selector = @selector(prepareCommitWithOrgApacheLuceneStoreDirectory:);
+  methods[26].selector = @selector(filesWithOrgApacheLuceneStoreDirectory:withBoolean:);
+  methods[27].selector = @selector(filesWithBoolean:);
+  methods[28].selector = @selector(finishCommitWithOrgApacheLuceneStoreDirectory:);
+  methods[29].selector = @selector(commitWithOrgApacheLuceneStoreDirectory:);
+  methods[30].selector = @selector(toStringWithOrgApacheLuceneStoreDirectory:);
+  methods[31].selector = @selector(description);
+  methods[32].selector = @selector(getUserData);
+  methods[33].selector = @selector(setUserDataWithJavaUtilMap:);
+  methods[34].selector = @selector(replaceWithOrgApacheLuceneIndexSegmentInfos:);
+  methods[35].selector = @selector(totalMaxDoc);
+  methods[36].selector = @selector(changed);
+  methods[37].selector = @selector(applyMergeChangesWithOrgApacheLuceneIndexMergePolicy_OneMerge:withBoolean:);
+  methods[38].selector = @selector(createBackupSegmentInfos);
+  methods[39].selector = @selector(rollbackSegmentInfosWithJavaUtilList:);
+  methods[40].selector = @selector(iterator);
+  methods[41].selector = @selector(asList);
+  methods[42].selector = @selector(size);
+  methods[43].selector = @selector(addWithOrgApacheLuceneIndexSegmentCommitInfo:);
+  methods[44].selector = @selector(addAllWithJavaLangIterable:);
+  methods[45].selector = @selector(clear);
+  methods[46].selector = @selector(removeWithOrgApacheLuceneIndexSegmentCommitInfo:);
+  methods[47].selector = @selector(removeWithInt:);
+  methods[48].selector = @selector(containsWithOrgApacheLuceneIndexSegmentCommitInfo:);
+  methods[49].selector = @selector(indexOfWithOrgApacheLuceneIndexSegmentCommitInfo:);
+  methods[50].selector = @selector(getCommitLuceneVersion);
+  methods[51].selector = @selector(getMinSegmentLuceneVersion);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "VERSION_40", "I", .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_40, 0x19, -1, -1, -1, -1 },
+    { "VERSION_46", "I", .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_46, 0x19, -1, -1, -1, -1 },
+    { "VERSION_48", "I", .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_48, 0x19, -1, -1, -1, -1 },
+    { "VERSION_49", "I", .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_49, 0x19, -1, -1, -1, -1 },
+    { "VERSION_50", "I", .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_50, 0x19, -1, -1, -1, -1 },
+    { "VERSION_51", "I", .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_51, 0x19, -1, -1, -1, -1 },
+    { "VERSION_53", "I", .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_53, 0x19, -1, -1, -1, -1 },
+    { "VERSION_CURRENT", "I", .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_CURRENT, 0x18, -1, -1, -1, -1 },
+    { "counter_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "version__", "J", .constantValue.asLong = 0, 0x1, 56, -1, -1, -1 },
+    { "generation_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lastGeneration_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x1, -1, -1, 57, -1 },
+    { "segments_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 58, -1 },
+    { "infoStream", "LJavaIoPrintStream;", .constantValue.asLong = 0, 0xa, -1, 59, -1, -1 },
+    { "id__", "[B", .constantValue.asLong = 0, 0x2, 60, -1, -1, -1 },
+    { "luceneVersion_", "LOrgApacheLuceneUtilVersion;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "minSegmentLuceneVersion_", "LOrgApacheLuceneUtilVersion;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "unsupportedCodecs", "LJavaUtilList;", .constantValue.asLong = 0, 0x1a, -1, 61, 62, -1 },
+    { "pendingCommit_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "info", "I", "getLastCommitGeneration", "[LNSString;", "LOrgApacheLuceneStoreDirectory;", "LJavaIoIOException;", "getLastCommitSegmentsFileName", "generationFromSegmentsFileName", "LNSString;", "readCommit", "LOrgApacheLuceneStoreDirectory;LNSString;", "readCodec", "LOrgApacheLuceneStoreDataInput;Z", "readLatestCommit", "write", "clone", "setInfoStream", "LJavaIoPrintStream;", "message", "updateGeneration", "LOrgApacheLuceneIndexSegmentInfos;", "updateGenerationVersionAndCounter", "setNextWriteGeneration", "J", "rollbackCommit", "prepareCommit", "files", "LOrgApacheLuceneStoreDirectory;Z", "(Lorg/apache/lucene/store/Directory;Z)Ljava/util/Collection<Ljava/lang/String;>;", (void *)&OrgApacheLuceneIndexSegmentInfos__Annotations$0, "Z", "(Z)Ljava/util/Collection<Ljava/lang/String;>;", "finishCommit", "commit", "toString", (void *)&OrgApacheLuceneIndexSegmentInfos__Annotations$1, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "setUserData", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "replace", "applyMergeChanges", "LOrgApacheLuceneIndexMergePolicy_OneMerge;Z", "()Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;", "rollbackSegmentInfos", "LJavaUtilList;", "(Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;)V", "()Ljava/util/Iterator<Lorg/apache/lucene/index/SegmentCommitInfo;>;", "add", "LOrgApacheLuceneIndexSegmentCommitInfo;", "addAll", "LJavaLangIterable;", "(Ljava/lang/Iterable<Lorg/apache/lucene/index/SegmentCommitInfo;>;)V", "remove", "contains", "indexOf", "version", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;", &OrgApacheLuceneIndexSegmentInfos_infoStream, "id", &OrgApacheLuceneIndexSegmentInfos_unsupportedCodecs, "Ljava/util/List<Ljava/lang/String;>;", "LOrgApacheLuceneIndexSegmentInfos_FindSegmentsFile;", "Ljava/lang/Object;Ljava/lang/Cloneable;Ljava/lang/Iterable<Lorg/apache/lucene/index/SegmentCommitInfo;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfos = { "SegmentInfos", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x11, 52, 20, -1, 63, -1, 64, -1 };
+  return &_OrgApacheLuceneIndexSegmentInfos;
+}
+
 - (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
+  return [[self java_clone] retain];
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexSegmentInfos class]) {
-    JreStrongAssign(&OrgApacheLuceneIndexSegmentInfos_infoStream, nil);
     JreStrongAssign(&OrgApacheLuceneIndexSegmentInfos_unsupportedCodecs, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"Lucene3x" } count:1 type:NSString_class_()]));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexSegmentInfos)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "SegmentInfos", NULL, 0x1, NULL, NULL },
-    { "infoWithInt:", "info", "Lorg.apache.lucene.index.SegmentCommitInfo;", 0x1, NULL, NULL },
-    { "getLastCommitGenerationWithNSStringArray:", "getLastCommitGeneration", "J", 0x9, NULL, NULL },
-    { "getLastCommitGenerationWithOrgApacheLuceneStoreDirectory:", "getLastCommitGeneration", "J", 0x9, "Ljava.io.IOException;", NULL },
-    { "getLastCommitSegmentsFileNameWithNSStringArray:", "getLastCommitSegmentsFileName", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "getLastCommitSegmentsFileNameWithOrgApacheLuceneStoreDirectory:", "getLastCommitSegmentsFileName", "Ljava.lang.String;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getSegmentsFileName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "generationFromSegmentsFileNameWithNSString:", "generationFromSegmentsFileName", "J", 0x9, NULL, NULL },
-    { "getNextPendingGeneration", NULL, "J", 0x2, NULL, NULL },
-    { "getId", NULL, "[B", 0x1, NULL, NULL },
-    { "readCommitWithOrgApacheLuceneStoreDirectory:withNSString:", "readCommit", "Lorg.apache.lucene.index.SegmentInfos;", 0x19, "Ljava.io.IOException;", NULL },
-    { "readCodecWithOrgApacheLuceneStoreDataInput:withBoolean:", "readCodec", "Lorg.apache.lucene.codecs.Codec;", 0xa, "Ljava.io.IOException;", NULL },
-    { "readLatestCommitWithOrgApacheLuceneStoreDirectory:", "readLatestCommit", "Lorg.apache.lucene.index.SegmentInfos;", 0x19, "Ljava.io.IOException;", NULL },
-    { "writeWithOrgApacheLuceneStoreDirectory:", "write", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.index.SegmentInfos;", 0x1, NULL, NULL },
-    { "getVersion", NULL, "J", 0x1, NULL, NULL },
-    { "getGeneration", NULL, "J", 0x1, NULL, NULL },
-    { "getLastGeneration", NULL, "J", 0x1, NULL, NULL },
-    { "setInfoStreamWithJavaIoPrintStream:", "setInfoStream", "V", 0x9, NULL, NULL },
-    { "getInfoStream", NULL, "Ljava.io.PrintStream;", 0x9, NULL, NULL },
-    { "messageWithNSString:", "message", "V", 0xa, NULL, NULL },
-    { "updateGenerationWithOrgApacheLuceneIndexSegmentInfos:", "updateGeneration", "V", 0x0, NULL, NULL },
-    { "updateGenerationVersionAndCounterWithOrgApacheLuceneIndexSegmentInfos:", "updateGenerationVersionAndCounter", "V", 0x0, NULL, NULL },
-    { "setNextWriteGenerationWithLong:", "setNextWriteGeneration", "V", 0x0, NULL, NULL },
-    { "rollbackCommitWithOrgApacheLuceneStoreDirectory:", "rollbackCommit", "V", 0x10, NULL, NULL },
-    { "prepareCommitWithOrgApacheLuceneStoreDirectory:", "prepareCommit", "V", 0x10, "Ljava.io.IOException;", NULL },
-    { "filesWithOrgApacheLuceneStoreDirectory:withBoolean:", "files", "Ljava.util.Collection;", 0x11, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/Directory;Z)Ljava/util/Collection<Ljava/lang/String;>;" },
-    { "filesWithBoolean:", "files", "Ljava.util.Collection;", 0x1, "Ljava.io.IOException;", "(Z)Ljava/util/Collection<Ljava/lang/String;>;" },
-    { "finishCommitWithOrgApacheLuceneStoreDirectory:", "finishCommit", "Ljava.lang.String;", 0x10, "Ljava.io.IOException;", NULL },
-    { "commitWithOrgApacheLuceneStoreDirectory:", "commit", "V", 0x10, "Ljava.io.IOException;", NULL },
-    { "toStringWithOrgApacheLuceneStoreDirectory:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getUserData", NULL, "Ljava.util.Map;", 0x1, NULL, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
-    { "setUserDataWithJavaUtilMap:", "setUserData", "V", 0x0, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
-    { "replaceWithOrgApacheLuceneIndexSegmentInfos:", "replace", "V", 0x0, NULL, NULL },
-    { "totalMaxDoc", NULL, "I", 0x1, NULL, NULL },
-    { "changed", NULL, "V", 0x1, NULL, NULL },
-    { "applyMergeChangesWithOrgApacheLuceneIndexMergePolicy_OneMerge:withBoolean:", "applyMergeChanges", "V", 0x0, NULL, NULL },
-    { "createBackupSegmentInfos", NULL, "Ljava.util.List;", 0x0, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;" },
-    { "rollbackSegmentInfosWithJavaUtilList:", "rollbackSegmentInfos", "V", 0x0, NULL, "(Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;)V" },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/index/SegmentCommitInfo;>;" },
-    { "asList", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;" },
-    { "size", NULL, "I", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneIndexSegmentCommitInfo:", "add", "V", 0x1, NULL, NULL },
-    { "addAllWithJavaLangIterable:", "addAll", "V", 0x1, NULL, "(Ljava/lang/Iterable<Lorg/apache/lucene/index/SegmentCommitInfo;>;)V" },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "removeWithOrgApacheLuceneIndexSegmentCommitInfo:", "remove", "V", 0x1, NULL, NULL },
-    { "removeWithInt:", "remove", "V", 0x0, NULL, NULL },
-    { "containsWithOrgApacheLuceneIndexSegmentCommitInfo:", "contains", "Z", 0x0, NULL, NULL },
-    { "indexOfWithOrgApacheLuceneIndexSegmentCommitInfo:", "indexOf", "I", 0x0, NULL, NULL },
-    { "getCommitLuceneVersion", NULL, "Lorg.apache.lucene.util.Version;", 0x1, NULL, NULL },
-    { "getMinSegmentLuceneVersion", NULL, "Lorg.apache.lucene.util.Version;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "VERSION_40", "VERSION_40", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_40 },
-    { "VERSION_46", "VERSION_46", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_46 },
-    { "VERSION_48", "VERSION_48", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_48 },
-    { "VERSION_49", "VERSION_49", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_49 },
-    { "VERSION_50", "VERSION_50", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_50 },
-    { "VERSION_51", "VERSION_51", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_51 },
-    { "VERSION_53", "VERSION_53", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_53 },
-    { "VERSION_CURRENT", "VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_CURRENT },
-    { "counter_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "version__", "version", 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "generation_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastGeneration_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "userData_", NULL, 0x1, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "segments_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;", .constantValue.asLong = 0 },
-    { "infoStream", "infoStream", 0xa, "Ljava.io.PrintStream;", &OrgApacheLuceneIndexSegmentInfos_infoStream, NULL, .constantValue.asLong = 0 },
-    { "id__", "id", 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "luceneVersion_", NULL, 0x2, "Lorg.apache.lucene.util.Version;", NULL, NULL, .constantValue.asLong = 0 },
-    { "minSegmentLuceneVersion_", NULL, 0x2, "Lorg.apache.lucene.util.Version;", NULL, NULL, .constantValue.asLong = 0 },
-    { "unsupportedCodecs", "unsupportedCodecs", 0x1a, "Ljava.util.List;", &OrgApacheLuceneIndexSegmentInfos_unsupportedCodecs, "Ljava/util/List<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "pendingCommit_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.index.SegmentInfos$FindSegmentsFile;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfos = { 2, "SegmentInfos", "org.apache.lucene.index", NULL, 0x11, 52, methods, 20, fields, 0, NULL, 1, inner_classes, NULL, "Ljava/lang/Object;Ljava/lang/Cloneable;Ljava/lang/Iterable<Lorg/apache/lucene/index/SegmentCommitInfo;>;" };
-  return &_OrgApacheLuceneIndexSegmentInfos;
 }
 
 @end
@@ -616,7 +686,7 @@ jlong OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithNSStringArray_
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       NSString *file = *b__++;
-      if ([((NSString *) nil_chk(file)) hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS] && ![file isEqual:OrgApacheLuceneIndexIndexFileNames_OLD_SEGMENTS_GEN]) {
+      if ([((NSString *) nil_chk(file)) java_hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS] && ![file isEqual:OrgApacheLuceneIndexIndexFileNames_OLD_SEGMENTS_GEN]) {
         jlong gen = OrgApacheLuceneIndexSegmentInfos_generationFromSegmentsFileNameWithNSString_(file);
         if (gen > max) {
           max = gen;
@@ -647,8 +717,8 @@ jlong OrgApacheLuceneIndexSegmentInfos_generationFromSegmentsFileNameWithNSStrin
   if ([((NSString *) nil_chk(fileName)) isEqual:OrgApacheLuceneIndexIndexFileNames_SEGMENTS]) {
     return 0;
   }
-  else if ([fileName hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS]) {
-    return JavaLangLong_parseLongWithNSString_withInt_([fileName substring:1 + ((jint) [((NSString *) nil_chk(OrgApacheLuceneIndexIndexFileNames_SEGMENTS)) length])], JavaLangCharacter_MAX_RADIX);
+  else if ([fileName java_hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS]) {
+    return JavaLangLong_parseLongWithNSString_withInt_([fileName java_substring:1 + [((NSString *) nil_chk(OrgApacheLuceneIndexIndexFileNames_SEGMENTS)) java_length]], JavaLangCharacter_MAX_RADIX);
   }
   else {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"fileName \"", fileName, @"\" is not a segments file"));
@@ -669,7 +739,7 @@ OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWit
   jlong generation = OrgApacheLuceneIndexSegmentInfos_generationFromSegmentsFileNameWithNSString_(segmentFileName);
   {
     OrgApacheLuceneStoreChecksumIndexInput *input = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) openChecksumInputWithNSString:segmentFileName withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READ)];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       jint magic = [((OrgApacheLuceneStoreChecksumIndexInput *) nil_chk(input)) readInt];
       if (magic != OrgApacheLuceneCodecsCodecUtil_CODEC_MAGIC) {
@@ -711,7 +781,7 @@ OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWit
       }
       jlong totalDocs = 0;
       for (jint seg = 0; seg < numSegments; seg++) {
-        NSString *segName = [input readString];
+        NSString *segName = JreRetainedLocalValue([input readString]);
         IOSByteArray *segmentID;
         if (format >= OrgApacheLuceneIndexSegmentInfos_VERSION_50) {
           jbyte hasID = [input readByte];
@@ -730,7 +800,7 @@ OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWit
           segmentID = nil;
         }
         OrgApacheLuceneCodecsCodec *codec = OrgApacheLuceneIndexSegmentInfos_readCodecWithOrgApacheLuceneStoreDataInput_withBoolean_(input, format < OrgApacheLuceneIndexSegmentInfos_VERSION_53);
-        OrgApacheLuceneIndexSegmentInfo *info = [((OrgApacheLuceneCodecsSegmentInfoFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(codec)) segmentInfoFormat])) readWithOrgApacheLuceneStoreDirectory:directory withNSString:segName withByteArray:segmentID withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READ)];
+        OrgApacheLuceneIndexSegmentInfo *info = JreRetainedLocalValue([((OrgApacheLuceneCodecsSegmentInfoFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(codec)) segmentInfoFormat])) readWithOrgApacheLuceneStoreDirectory:directory withNSString:segName withByteArray:segmentID withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READ)]);
         [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info)) setCodecWithOrgApacheLuceneCodecsCodec:codec];
         totalDocs += [info maxDoc];
         jlong delGen = [input readLong];
@@ -793,7 +863,7 @@ OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWit
           }
         }
         [infos addWithOrgApacheLuceneIndexSegmentCommitInfo:siPerCommit];
-        OrgApacheLuceneUtilVersion *segmentVersion = [info getVersion];
+        OrgApacheLuceneUtilVersion *segmentVersion = JreRetainedLocalValue([info getVersion]);
         if (format < OrgApacheLuceneIndexSegmentInfos_VERSION_53) {
           if (infos->minSegmentLuceneVersion_ == nil || [((OrgApacheLuceneUtilVersion *) nil_chk(segmentVersion)) onOrAfterWithOrgApacheLuceneUtilVersion:infos->minSegmentLuceneVersion_] == false) {
             JreStrongAssign(&infos->minSegmentLuceneVersion_, segmentVersion);
@@ -825,7 +895,7 @@ OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWit
       }
       return infos;
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -834,10 +904,12 @@ OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWit
         if (__primaryException1 != nil) {
           @try {
             [input close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [input close];
         }
       }
@@ -853,13 +925,13 @@ OrgApacheLuceneCodecsCodec *OrgApacheLuceneIndexSegmentInfos_readCodecWithOrgApa
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if ([((id<JavaUtilList>) nil_chk(OrgApacheLuceneIndexSegmentInfos_unsupportedCodecs)) containsWithId:name]) {
-      JreAssert((unsupportedAllowed), (@"org/apache/lucene/index/SegmentInfos.java:474 condition failed: assert unsupportedAllowed;"));
+      JreAssert(unsupportedAllowed, @"org/apache/lucene/index/SegmentInfos.java:474 condition failed: assert unsupportedAllowed;");
       JavaIoIOException *newExc = create_OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withNSString_(input, JreStrcat("$$$", @"Codec '", name, @"' is too old"));
-      [newExc initCauseWithNSException:e];
+      [newExc initCauseWithJavaLangThrowable:e];
       @throw newExc;
     }
-    if ([((NSString *) nil_chk(name)) hasPrefix:@"Lucene"]) {
-      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$$", @"Could not load codec '", name, @"'.  Did you forget to add lucene-backward-codecs.jar?"), e);
+    if ([((NSString *) nil_chk(name)) java_hasPrefix:@"Lucene"]) {
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$$", @"Could not load codec '", name, @"'.  Did you forget to add lucene-backward-codecs.jar?"), e);
     }
     @throw e;
   }
@@ -867,7 +939,7 @@ OrgApacheLuceneCodecsCodec *OrgApacheLuceneIndexSegmentInfos_readCodecWithOrgApa
 
 OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readLatestCommitWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory) {
   OrgApacheLuceneIndexSegmentInfos_initialize();
-  return [create_OrgApacheLuceneIndexSegmentInfos_$1_initWithOrgApacheLuceneStoreDirectory_(directory) run];
+  return [create_OrgApacheLuceneIndexSegmentInfos_1_initWithOrgApacheLuceneStoreDirectory_(directory) run];
 }
 
 void OrgApacheLuceneIndexSegmentInfos_writeWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos *self, OrgApacheLuceneStoreDirectory *directory) {
@@ -888,7 +960,7 @@ void OrgApacheLuceneIndexSegmentInfos_writeWithOrgApacheLuceneStoreDirectory_(Or
     if ([self size] > 0) {
       OrgApacheLuceneUtilVersion *minSegmentVersion = nil;
       for (OrgApacheLuceneIndexSegmentCommitInfo * __strong siPerCommit in self) {
-        OrgApacheLuceneUtilVersion *segmentVersion = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(siPerCommit))->info_)) getVersion];
+        OrgApacheLuceneUtilVersion *segmentVersion = JreRetainedLocalValue([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(siPerCommit))->info_)) getVersion]);
         if (minSegmentVersion == nil || [((OrgApacheLuceneUtilVersion *) nil_chk(segmentVersion)) onOrAfterWithOrgApacheLuceneUtilVersion:minSegmentVersion] == false) {
           minSegmentVersion = segmentVersion;
         }
@@ -898,7 +970,7 @@ void OrgApacheLuceneIndexSegmentInfos_writeWithOrgApacheLuceneStoreDirectory_(Or
       [segnOutput writeVIntWithInt:minSegmentVersion->bugfix_];
     }
     for (OrgApacheLuceneIndexSegmentCommitInfo * __strong siPerCommit in self) {
-      OrgApacheLuceneIndexSegmentInfo *si = ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(siPerCommit))->info_;
+      OrgApacheLuceneIndexSegmentInfo *si = JreRetainedLocalValue(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(siPerCommit))->info_);
       [segnOutput writeStringWithNSString:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si))->name_];
       IOSByteArray *segmentID = [si getId];
       if (segmentID == nil) {
@@ -997,6 +1069,14 @@ NSString *OrgApacheLuceneIndexSegmentInfos_finishCommitWithOrgApacheLuceneStoreD
   return dest;
 }
 
+IOSObjectArray *OrgApacheLuceneIndexSegmentInfos__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneIndexSegmentInfos__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentInfos)
 
 @implementation OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile
@@ -1012,7 +1092,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentInfos)
 
 - (id)runWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit {
   if (commit != nil) {
-    if (directory_ != [commit getDirectory]) @throw create_JavaIoIOException_initWithNSString_(@"the specified commit does not match the specified Directory");
+    if (!JreObjectEqualsEquals(directory_, [commit getDirectory])) @throw create_JavaIoIOException_initWithNSString_(@"the specified commit does not match the specified Directory");
     return [self doBodyWithNSString:[commit getSegmentsFileName]];
   }
   jlong lastGen = -1;
@@ -1037,7 +1117,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentInfos)
     else if (gen > lastGen) {
       NSString *segmentFileName = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_SEGMENTS, @"", gen);
       @try {
-        id t = [self doBodyWithNSString:segmentFileName];
+        id t = JreRetainedLocalValue([self doBodyWithNSString:segmentFileName]);
         if (JreLoadStatic(OrgApacheLuceneIndexSegmentInfos, infoStream) != nil) {
           OrgApacheLuceneIndexSegmentInfos_messageWithNSString_(JreStrcat("$$", @"success on ", segmentFileName));
         }
@@ -1053,7 +1133,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentInfos)
       }
     }
     else {
-      @throw exc;
+      @throw nil_chk(exc);
     }
   }
 }
@@ -1070,16 +1150,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentInfos)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDirectory:", "FindSegmentsFile", NULL, 0x1, NULL, NULL },
-    { "run", NULL, "TT;", 0x1, "Ljava.io.IOException;", "()TT;" },
-    { "runWithOrgApacheLuceneIndexIndexCommit:", "run", "TT;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/IndexCommit;)TT;" },
-    { "doBodyWithNSString:", "doBody", "TT;", 0x404, "Ljava.io.IOException;", "(Ljava/lang/String;)TT;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, 1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 3, 4, 1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x404, 6, 7, 1, 8, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDirectory:);
+  methods[1].selector = @selector(run);
+  methods[2].selector = @selector(runWithOrgApacheLuceneIndexIndexCommit:);
+  methods[3].selector = @selector(doBodyWithNSString:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "directory_", NULL, 0x10, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
+    { "directory_", "LOrgApacheLuceneStoreDirectory;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile = { 2, "FindSegmentsFile", "org.apache.lucene.index", "SegmentInfos", 0x409, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDirectory;", "LJavaIoIOException;", "()TT;", "run", "LOrgApacheLuceneIndexIndexCommit;", "(Lorg/apache/lucene/index/IndexCommit;)TT;", "doBody", "LNSString;", "(Ljava/lang/String;)TT;", "LOrgApacheLuceneIndexSegmentInfos;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile = { "FindSegmentsFile", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x409, 4, 1, 9, -1, -1, 10, -1 };
   return &_OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile;
 }
 
@@ -1092,40 +1181,43 @@ void OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile_initWithOrgApacheLuceneSt
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile)
 
-@implementation OrgApacheLuceneIndexSegmentInfos_$1
+@implementation OrgApacheLuceneIndexSegmentInfos_1
+
+- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory {
+  OrgApacheLuceneIndexSegmentInfos_1_initWithOrgApacheLuceneStoreDirectory_(self, directory);
+  return self;
+}
 
 - (OrgApacheLuceneIndexSegmentInfos *)doBodyWithNSString:(NSString *)segmentFileName {
   return OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(directory_, segmentFileName);
 }
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)arg$0 {
-  OrgApacheLuceneIndexSegmentInfos_$1_initWithOrgApacheLuceneStoreDirectory_(self, arg$0);
-  return self;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "doBodyWithNSString:", "doBody", "Lorg.apache.lucene.index.SegmentInfos;", 0x4, "Ljava.io.IOException;", "(Ljava/lang/String;)Lorg/apache/lucene/index/SegmentInfos;" },
-    { "initWithOrgApacheLuceneStoreDirectory:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexSegmentInfos;", 0x4, 1, 2, 3, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.SegmentInfos;"};
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexSegmentInfos", "readLatestCommitWithOrgApacheLuceneStoreDirectory:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfos_$1 = { 2, "", "org.apache.lucene.index", "SegmentInfos", 0x8008, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, &enclosing_method, "Lorg/apache/lucene/index/SegmentInfos$FindSegmentsFile<Lorg/apache/lucene/index/SegmentInfos;>;" };
-  return &_OrgApacheLuceneIndexSegmentInfos_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreDirectory:);
+  methods[1].selector = @selector(doBodyWithNSString:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreDirectory;", "doBody", "LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneIndexSegmentInfos;", "readLatestCommitWithOrgApacheLuceneStoreDirectory:", "Lorg/apache/lucene/index/SegmentInfos$FindSegmentsFile<Lorg/apache/lucene/index/SegmentInfos;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfos_1 = { "", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 4, -1, 5, 6, -1 };
+  return &_OrgApacheLuceneIndexSegmentInfos_1;
 }
 
 @end
 
-void OrgApacheLuceneIndexSegmentInfos_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos_$1 *self, OrgApacheLuceneStoreDirectory *arg$0) {
-  OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile_initWithOrgApacheLuceneStoreDirectory_(self, arg$0);
+void OrgApacheLuceneIndexSegmentInfos_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos_1 *self, OrgApacheLuceneStoreDirectory *directory) {
+  OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile_initWithOrgApacheLuceneStoreDirectory_(self, directory);
 }
 
-OrgApacheLuceneIndexSegmentInfos_$1 *new_OrgApacheLuceneIndexSegmentInfos_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *arg$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentInfos_$1, initWithOrgApacheLuceneStoreDirectory_, arg$0)
+OrgApacheLuceneIndexSegmentInfos_1 *new_OrgApacheLuceneIndexSegmentInfos_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentInfos_1, initWithOrgApacheLuceneStoreDirectory_, directory)
 }
 
-OrgApacheLuceneIndexSegmentInfos_$1 *create_OrgApacheLuceneIndexSegmentInfos_$1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *arg$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentInfos_$1, initWithOrgApacheLuceneStoreDirectory_, arg$0)
+OrgApacheLuceneIndexSegmentInfos_1 *create_OrgApacheLuceneIndexSegmentInfos_1_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentInfos_1, initWithOrgApacheLuceneStoreDirectory_, directory)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentInfos_$1)

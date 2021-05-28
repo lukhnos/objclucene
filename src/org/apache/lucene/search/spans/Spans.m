@@ -5,19 +5,28 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/Integer.h"
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/spans/SpanCollector.h"
 #include "org/apache/lucene/search/spans/Spans.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/spans/Spans must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchSpansSpans
 
 + (jint)NO_MORE_POSITIONS {
   return OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS;
 }
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchSpansSpans_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)nextStartPosition {
   // can't call an abstract method
@@ -54,7 +63,7 @@
 
 - (NSString *)description {
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
-  IOSClass *clazz = [self getClass];
+  IOSClass *clazz = [self java_getClass];
   [sb appendWithNSString:[clazz isAnonymousClass] ? [clazz getName] : [clazz getSimpleName]];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"(doc="])) appendWithInt:[self docID]];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@",start="])) appendWithInt:[self startPosition]];
@@ -63,28 +72,34 @@
   return [sb description];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchSpansSpans_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "nextStartPosition", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "startPosition", NULL, "I", 0x401, NULL, NULL },
-    { "endPosition", NULL, "I", 0x401, NULL, NULL },
-    { "width", NULL, "I", 0x401, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", "Spans", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, 0, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 1, 2, 0, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(nextStartPosition);
+  methods[2].selector = @selector(startPosition);
+  methods[3].selector = @selector(endPosition);
+  methods[4].selector = @selector(width);
+  methods[5].selector = @selector(collectWithOrgApacheLuceneSearchSpansSpanCollector:);
+  methods[6].selector = @selector(asTwoPhaseIterator);
+  methods[7].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "NO_MORE_POSITIONS", "NO_MORE_POSITIONS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS },
+    { "NO_MORE_POSITIONS", "I", .constantValue.asInt = OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpans = { 2, "Spans", "org.apache.lucene.search.spans", NULL, 0x401, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaIoIOException;", "collect", "LOrgApacheLuceneSearchSpansSpanCollector;", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpans = { "Spans", "org.apache.lucene.search.spans", ptrTable, methods, fields, 7, 0x401, 8, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSpansSpans;
 }
 

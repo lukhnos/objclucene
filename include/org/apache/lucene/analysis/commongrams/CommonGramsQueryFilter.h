@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter))
 #define OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_
 
@@ -21,17 +27,18 @@
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisCommongramsCommonGramsFilter;
+@class OrgApacheLuceneAnalysisTokenStream;
 
 /*!
  @brief Wrap a CommonGramsFilter optimizing phrase queries by only returning single
- words when they are not a member of a bigram.
+  words when they are not a member of a bigram.
  Example:
- <ul>
- <li>query input to CommonGramsFilter: "the rain in spain falls mainly"
+  <ul>
+  <li>query input to CommonGramsFilter: "the rain in spain falls mainly" 
  <li>output of CommomGramsFilter/input to CommonGramsQueryFilter:
- |"the, "the-rain"|"rain" "rain-in"|"in, "in-spain"|"spain"|"falls"|"mainly"
+  |"the, "the-rain"|"rain" "rain-in"|"in, "in-spain"|"spain"|"falls"|"mainly" 
  <li>output of CommonGramsQueryFilter:"the-rain", "rain-in" ,"in-spain",
- "falls", "mainly"
+  "falls", "mainly" 
  </ul>
  */
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter : OrgApacheLuceneAnalysisTokenFilter
@@ -42,15 +49,15 @@
  @brief Constructs a new CommonGramsQueryFilter based on the provided CommomGramsFilter
  @param input CommonGramsFilter the QueryFilter will use
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter:(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter:(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *)input;
 
 /*!
- @brief Output bigrams whenever possible to optimize queries.
- Only output unigrams
- when they are not a member of a bigram. Example:
+ @brief Output bigrams whenever possible to optimize queries.Only output unigrams
+  when they are not a member of a bigram.
+ Example: 
  <ul>
- <li>input: "the rain in spain falls mainly"
- <li>output:"the-rain", "rain-in" ,"in-spain", "falls", "mainly"
+  <li>input: "the rain in spain falls mainly" 
+ <li>output:"the-rain", "rain-in" ,"in-spain", "falls", "mainly" 
  </ul>
  */
 - (jboolean)incrementToken;
@@ -62,9 +69,12 @@
 - (jboolean)isGramType;
 
 /*!
- 
  */
 - (void)reset;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -80,4 +90,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFil
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter")

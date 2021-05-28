@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilBitDocIdSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilBitDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilBitDocIdSet || defined(INCLUDE_OrgApacheLuceneUtilBitDocIdSet))
 #define OrgApacheLuceneUtilBitDocIdSet_
 
@@ -31,18 +37,17 @@
 #pragma mark Public
 
 /*!
- @brief Same as <code>BitDocIdSet(BitSet,long)</code> but uses the set's
+ @brief Same as <code>BitDocIdSet(BitSet, long)</code> but uses the set's 
  <code>approximate cardinality</code> as a cost.
  */
-- (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)set;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)set;
 
 /*!
- @brief Wrap the given <code>BitSet</code> as a <code>DocIdSet</code>.
- The provided
+ @brief Wrap the given <code>BitSet</code> as a <code>DocIdSet</code>.The provided 
  <code>BitSet</code> must not be modified afterwards.
  */
-- (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)set
-                                         withLong:(jlong)cost;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)set
+                                                   withLong:(jlong)cost;
 
 - (OrgApacheLuceneUtilBitSet *)bits;
 
@@ -56,6 +61,10 @@
 - (jlong)ramBytesUsed;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -80,14 +89,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitDocIdSet)
 #if !defined (OrgApacheLuceneUtilBitDocIdSet_Builder_) && (INCLUDE_ALL_OrgApacheLuceneUtilBitDocIdSet || defined(INCLUDE_OrgApacheLuceneUtilBitDocIdSet_Builder))
 #define OrgApacheLuceneUtilBitDocIdSet_Builder_
 
-@class IOSObjectArray;
 @class OrgApacheLuceneSearchDocIdSetIterator;
 @class OrgApacheLuceneUtilBitDocIdSet;
 
 /*!
- @brief A builder of <code>DocIdSet</code>s that supports random access.
- If you don't
- need random access, you should rather use <code>DocIdSetBuilder</code>.
+ @brief A builder of <code>DocIdSet</code>s that supports random access.If you don't
+  need random access, you should rather use <code>DocIdSetBuilder</code>.
  */
 @interface OrgApacheLuceneUtilBitDocIdSet_Builder : NSObject
 
@@ -96,13 +103,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitDocIdSet)
 /*!
  @brief Create a new empty instance.
  */
-- (instancetype)initWithInt:(jint)maxDoc;
+- (instancetype __nonnull)initWithInt:(jint)maxDoc;
 
 /*!
  @brief Create a new instance that can hold <code>maxDoc</code> documents and is optionally <code>full</code>.
  */
-- (instancetype)initWithInt:(jint)maxDoc
-                withBoolean:(jboolean)full;
+- (instancetype __nonnull)initWithInt:(jint)maxDoc
+                          withBoolean:(jboolean)full;
 
 /*!
  @brief Removes from this builder documents that are not contained in <code>it</code>.
@@ -117,17 +124,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitDocIdSet)
 /*!
  @brief Build a <code>DocIdSet</code> that contains all doc ids that have been added.
  This method may return <tt>null</tt> if no documents were addded to this
- builder.
- NOTE: this is a destructive operation, the builder should not be used
- anymore after this method has been called.
+  builder.
+  NOTE: this is a destructive operation, the builder should not be used
+  anymore after this method has been called.
  */
 - (OrgApacheLuceneUtilBitDocIdSet *)build;
 
 /*!
  @brief Is this builder definitely empty?
- If so, <code>build()</code> will return null.  This is usually the same as
- simply being empty but if this builder was constructed with the <code>full</code> option or if an iterator was passed
- that iterated over no documents, then we're not sure.
+ If so, <code>build()</code> will return null.This is usually the same as
+  simply being empty but if this builder was constructed with the <code>full</code> option or if an iterator was passed
+  that iterated over no documents, then we're not sure.
  */
 - (jboolean)isDefinitelyEmpty;
 
@@ -139,6 +146,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitDocIdSet)
 #pragma mark Package-Private
 
 - (jboolean)dense;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -160,4 +171,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitDocIdSet_Builder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBitDocIdSet")

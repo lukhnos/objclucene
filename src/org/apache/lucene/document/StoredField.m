@@ -14,6 +14,10 @@
 #include "org/apache/lucene/document/StoredField.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/StoredField must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentStoredField)
 
 OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStoredField_TYPE;
@@ -74,6 +78,37 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStoredField_TYPE;
   return self;
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 6, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 7, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithNSString:withByteArray:);
+  methods[1].selector = @selector(initWithNSString:withByteArray:withInt:withInt:);
+  methods[2].selector = @selector(initWithNSString:withOrgApacheLuceneUtilBytesRef:);
+  methods[3].selector = @selector(initWithNSString:withNSString:);
+  methods[4].selector = @selector(initWithNSString:withInt:);
+  methods[5].selector = @selector(initWithNSString:withFloat:);
+  methods[6].selector = @selector(initWithNSString:withLong:);
+  methods[7].selector = @selector(initWithNSString:withDouble:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "TYPE", "LOrgApacheLuceneDocumentFieldType;", .constantValue.asLong = 0, 0x19, -1, 8, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;[B", "LNSString;[BII", "LNSString;LOrgApacheLuceneUtilBytesRef;", "LNSString;LNSString;", "LNSString;I", "LNSString;F", "LNSString;J", "LNSString;D", &OrgApacheLuceneDocumentStoredField_TYPE };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentStoredField = { "StoredField", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x11, 8, 1, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneDocumentStoredField;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentStoredField class]) {
     {
@@ -83,24 +118,6 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStoredField_TYPE;
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentStoredField)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withByteArray:", "StoredField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withByteArray:withInt:withInt:", "StoredField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:", "StoredField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withNSString:", "StoredField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withInt:", "StoredField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withFloat:", "StoredField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withLong:", "StoredField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withDouble:", "StoredField", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "TYPE", "TYPE", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentStoredField_TYPE, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentStoredField = { 2, "StoredField", "org.apache.lucene.document", NULL, 0x11, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentStoredField;
 }
 
 @end

@@ -3,7 +3,6 @@
 //  source: ./misc/src/java/org/apache/lucene/document/LazyDocument.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
@@ -25,6 +24,10 @@
 #include "org/apache/lucene/index/IndexableField.h"
 #include "org/apache/lucene/index/IndexableFieldType.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/LazyDocument must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneDocumentLazyDocument () {
  @public
@@ -62,7 +65,6 @@ __attribute__((unused)) static void OrgApacheLuceneDocumentLazyDocument_fetchRea
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentLazyDocument_LazyField, this$0_, OrgApacheLuceneDocumentLazyDocument *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentLazyDocument_LazyField, name_, NSString *)
 
 __attribute__((unused)) static void OrgApacheLuceneDocumentLazyDocument_LazyField_initWithOrgApacheLuceneDocumentLazyDocument_withNSString_withInt_(OrgApacheLuceneDocumentLazyDocument_LazyField *self, OrgApacheLuceneDocumentLazyDocument *outer$, NSString *name, jint fieldNum);
@@ -83,7 +85,7 @@ __attribute__((unused)) static id<OrgApacheLuceneIndexIndexableField> OrgApacheL
 
 - (id<OrgApacheLuceneIndexIndexableField>)getFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
   [((id<JavaUtilSet>) nil_chk(fieldNames_)) addWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_];
-  id<JavaUtilList> values = [((id<JavaUtilMap>) nil_chk(fields_)) getWithId:JavaLangInteger_valueOfWithInt_(fieldInfo->number_)];
+  id<JavaUtilList> values = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(fields_)) getWithId:JavaLangInteger_valueOfWithInt_(fieldInfo->number_)]);
   if (nil == values) {
     values = create_JavaUtilArrayList_init();
     [((id<JavaUtilMap>) nil_chk(fields_)) putWithId:JavaLangInteger_valueOfWithInt_(fieldInfo->number_) withId:values];
@@ -103,10 +105,10 @@ __attribute__((unused)) static id<OrgApacheLuceneIndexIndexableField> OrgApacheL
         JreStrongAssign(&doc_, [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader_)) documentWithInt:docID_ withJavaUtilSet:fieldNames_]);
       }
       @catch (JavaIoIOException *ioe) {
-        @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"unable to load document", ioe);
+        @throw create_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"unable to load document", ioe);
       }
     }
-    return doc_;
+    return JreRetainedLocalValue(doc_);
   }
 }
 
@@ -124,21 +126,29 @@ __attribute__((unused)) static id<OrgApacheLuceneIndexIndexableField> OrgApacheL
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReader:withInt:", "LazyDocument", NULL, 0x1, NULL, NULL },
-    { "getFieldWithOrgApacheLuceneIndexFieldInfo:", "getField", "Lorg.apache.lucene.index.IndexableField;", 0x1, NULL, NULL },
-    { "getDocument", NULL, "Lorg.apache.lucene.document.Document;", 0x20, NULL, NULL },
-    { "fetchRealValuesWithNSString:withInt:", "fetchRealValues", "V", 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexableField;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneDocumentDocument;", 0x20, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 3, 4, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withInt:);
+  methods[1].selector = @selector(getFieldWithOrgApacheLuceneIndexFieldInfo:);
+  methods[2].selector = @selector(getDocument);
+  methods[3].selector = @selector(fetchRealValuesWithNSString:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "reader_", NULL, 0x12, "Lorg.apache.lucene.index.IndexReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docID_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x2, "Lorg.apache.lucene.document.Document;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fields_", NULL, 0x2, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Integer;Ljava/util/List<Lorg/apache/lucene/document/LazyDocument$LazyField;>;>;", .constantValue.asLong = 0 },
-    { "fieldNames_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
+    { "reader_", "LOrgApacheLuceneIndexIndexReader;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "docID_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "doc_", "LOrgApacheLuceneDocumentDocument;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fields_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 5, -1 },
+    { "fieldNames_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 6, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.document.LazyDocument$LazyField;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentLazyDocument = { 2, "LazyDocument", "org.apache.lucene.document", NULL, 0x1, 4, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReader;I", "getField", "LOrgApacheLuceneIndexFieldInfo;", "fetchRealValues", "LNSString;I", "Ljava/util/Map<Ljava/lang/Integer;Ljava/util/List<Lorg/apache/lucene/document/LazyDocument$LazyField;>;>;", "Ljava/util/Set<Ljava/lang/String;>;", "LOrgApacheLuceneDocumentLazyDocument_LazyField;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentLazyDocument = { "LazyDocument", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x1, 4, 5, -1, 7, -1, -1, -1 };
   return &_OrgApacheLuceneDocumentLazyDocument;
 }
 
@@ -161,12 +171,12 @@ OrgApacheLuceneDocumentLazyDocument *create_OrgApacheLuceneDocumentLazyDocument_
 }
 
 void OrgApacheLuceneDocumentLazyDocument_fetchRealValuesWithNSString_withInt_(OrgApacheLuceneDocumentLazyDocument *self, NSString *name, jint fieldNum) {
-  OrgApacheLuceneDocumentDocument *d = [self getDocument];
-  id<JavaUtilList> lazyValues = [((id<JavaUtilMap>) nil_chk(self->fields_)) getWithId:JavaLangInteger_valueOfWithInt_(fieldNum)];
+  OrgApacheLuceneDocumentDocument *d = JreRetainedLocalValue([self getDocument]);
+  id<JavaUtilList> lazyValues = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(self->fields_)) getWithId:JavaLangInteger_valueOfWithInt_(fieldNum)]);
   IOSObjectArray *realValues = [((OrgApacheLuceneDocumentDocument *) nil_chk(d)) getFieldsWithNSString:name];
-  JreAssert((((IOSObjectArray *) nil_chk(realValues))->size_ <= [((id<JavaUtilList>) nil_chk(lazyValues)) size]), (JreStrcat("$$", @"More lazy values then real values for field: ", name)));
+  JreAssert(((IOSObjectArray *) nil_chk(realValues))->size_ <= [((id<JavaUtilList>) nil_chk(lazyValues)) size], JreStrcat("$$", @"More lazy values then real values for field: ", name));
   for (jint i = 0; i < [lazyValues size]; i++) {
-    OrgApacheLuceneDocumentLazyDocument_LazyField *f = [lazyValues getWithInt:i];
+    OrgApacheLuceneDocumentLazyDocument_LazyField *f = JreRetainedLocalValue([lazyValues getWithInt:i]);
     if (nil != f) {
       JreVolatileStrongAssign(&f->realValue_, IOSObjectArray_Get(realValues, i));
     }
@@ -238,26 +248,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentLazyDocument)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneDocumentLazyDocument:withNSString:withInt:", "LazyField", NULL, 0x2, NULL, NULL },
-    { "hasBeenLoaded", NULL, "Z", 0x1, NULL, NULL },
-    { "getRealValue", NULL, "Lorg.apache.lucene.index.IndexableField;", 0x2, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "boost", NULL, "F", 0x1, NULL, NULL },
-    { "binaryValue", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "stringValue", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "readerValue", NULL, "Ljava.io.Reader;", 0x1, NULL, NULL },
-    { "numericValue", NULL, "Ljava.lang.Number;", 0x1, NULL, NULL },
-    { "fieldType", NULL, "Lorg.apache.lucene.index.IndexableFieldType;", 0x1, NULL, NULL },
-    { "tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisTokenStream:", "tokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexableField;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaIoReader;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSNumber;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexableFieldType;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStream;", 0x1, 1, 2, 3, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneDocumentLazyDocument:withNSString:withInt:);
+  methods[1].selector = @selector(hasBeenLoaded);
+  methods[2].selector = @selector(getRealValue);
+  methods[3].selector = @selector(name);
+  methods[4].selector = @selector(boost);
+  methods[5].selector = @selector(binaryValue);
+  methods[6].selector = @selector(stringValue);
+  methods[7].selector = @selector(readerValue);
+  methods[8].selector = @selector(numericValue);
+  methods[9].selector = @selector(fieldType);
+  methods[10].selector = @selector(tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisTokenStream:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.document.LazyDocument;", NULL, NULL, .constantValue.asLong = 0 },
-    { "name_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldNum_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "realValue_", NULL, 0x40, "Lorg.apache.lucene.index.IndexableField;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneDocumentLazyDocument;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "name_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fieldNum_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "realValue_", "LOrgApacheLuceneIndexIndexableField;", .constantValue.asLong = 0, 0x40, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentLazyDocument_LazyField = { 2, "LazyField", "org.apache.lucene.document", "LazyDocument", 0x1, 11, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneDocumentLazyDocument;LNSString;I", "tokenStream", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", "LOrgApacheLuceneDocumentLazyDocument;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentLazyDocument_LazyField = { "LazyField", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x1, 11, 4, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneDocumentLazyDocument_LazyField;
 }
 
@@ -283,8 +309,8 @@ id<OrgApacheLuceneIndexIndexableField> OrgApacheLuceneDocumentLazyDocument_LazyF
   if (nil == JreLoadVolatileId(&self->realValue_)) {
     OrgApacheLuceneDocumentLazyDocument_fetchRealValuesWithNSString_withInt_(self->this$0_, self->name_, self->fieldNum_);
   }
-  JreAssert(([self hasBeenLoaded]), (@"field value was not lazy loaded"));
-  JreAssert(([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(JreLoadVolatileId(&self->realValue_))) name])) isEqual:[self name]]), (JreStrcat("$$$$", @"realvalue name != name: ", [((id<OrgApacheLuceneIndexIndexableField>) nil_chk(JreLoadVolatileId(&self->realValue_))) name], @" != ", [self name])));
+  JreAssert([self hasBeenLoaded], @"field value was not lazy loaded");
+  JreAssert([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(JreLoadVolatileId(&self->realValue_))) name])) isEqual:[self name]], JreStrcat("$$$$", @"realvalue name != name: ", [((id<OrgApacheLuceneIndexIndexableField>) nil_chk(JreLoadVolatileId(&self->realValue_))) name], @" != ", [self name]));
   return JreLoadVolatileId(&self->realValue_);
 }
 

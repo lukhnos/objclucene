@@ -3,10 +3,8 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/analyzing/FuzzySuggester.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/System.h"
@@ -26,6 +24,10 @@
 #include "org/apache/lucene/util/automaton/Operations.h"
 #include "org/apache/lucene/util/automaton/UTF32ToUTF8.h"
 #include "org/apache/lucene/util/fst/FST.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/analyzing/FuzzySuggester must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester () {
  @public
@@ -89,13 +91,13 @@
 - (id<JavaUtilList>)getFullPrefixPathsWithJavaUtilList:(id<JavaUtilList>)prefixPaths
              withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)lookupAutomaton
                          withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst {
-  OrgApacheLuceneUtilAutomatonAutomaton *levA = [self convertAutomatonWithOrgApacheLuceneUtilAutomatonAutomaton:[self toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:lookupAutomaton]];
+  OrgApacheLuceneUtilAutomatonAutomaton *levA = JreRetainedLocalValue([self convertAutomatonWithOrgApacheLuceneUtilAutomatonAutomaton:[self toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:lookupAutomaton]]);
   return OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_intersectPrefixPathsWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilFstFST_(levA, fst);
 }
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)convertAutomatonWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a {
   if (unicodeAware_) {
-    OrgApacheLuceneUtilAutomatonAutomaton *utf8automaton = [create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init() convertWithOrgApacheLuceneUtilAutomatonAutomaton:a];
+    OrgApacheLuceneUtilAutomatonAutomaton *utf8automaton = JreRetainedLocalValue([create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init() convertWithOrgApacheLuceneUtilAutomatonAutomaton:a]);
     utf8automaton = OrgApacheLuceneUtilAutomatonOperations_determinizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(utf8automaton, OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES);
     return utf8automaton;
   }
@@ -137,28 +139,40 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:", "FuzzySuggester", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:", "FuzzySuggester", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withInt:withInt:withBoolean:withInt:withBoolean:withInt:withInt:withBoolean:", "FuzzySuggester", NULL, 0x1, NULL, NULL },
-    { "getFullPrefixPathsWithJavaUtilList:withOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilFstFST:", "getFullPrefixPaths", "Ljava.util.List;", 0x4, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/search/suggest/analyzing/FSTUtil$Path<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;>;Lorg/apache/lucene/util/automaton/Automaton;Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;)Ljava/util/List<Lorg/apache/lucene/search/suggest/analyzing/FSTUtil$Path<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;>;" },
-    { "convertAutomatonWithOrgApacheLuceneUtilAutomatonAutomaton:", "convertAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x4, NULL, NULL },
-    { "getTokenStreamToAutomaton", NULL, "Lorg.apache.lucene.analysis.TokenStreamToAutomaton;", 0x0, NULL, NULL },
-    { "toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:", "toLevenshteinAutomata", "Lorg.apache.lucene.util.automaton.Automaton;", 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x4, 3, 4, 5, 6, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x4, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneAnalysisTokenStreamToAutomaton;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAutomatonAutomaton;", 0x0, 9, 8, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withInt:withInt:withBoolean:withInt:withBoolean:withInt:withInt:withBoolean:);
+  methods[3].selector = @selector(getFullPrefixPathsWithJavaUtilList:withOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilFstFST:);
+  methods[4].selector = @selector(convertAutomatonWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  methods[5].selector = @selector(getTokenStreamToAutomaton);
+  methods[6].selector = @selector(toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "maxEdits_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "transpositions_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "nonFuzzyPrefix_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "minFuzzyLength_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "unicodeAware_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_UNICODE_AWARE", "DEFAULT_UNICODE_AWARE", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_UNICODE_AWARE },
-    { "DEFAULT_MIN_FUZZY_LENGTH", "DEFAULT_MIN_FUZZY_LENGTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_MIN_FUZZY_LENGTH },
-    { "DEFAULT_NON_FUZZY_PREFIX", "DEFAULT_NON_FUZZY_PREFIX", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_NON_FUZZY_PREFIX },
-    { "DEFAULT_MAX_EDITS", "DEFAULT_MAX_EDITS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_MAX_EDITS },
-    { "DEFAULT_TRANSPOSITIONS", "DEFAULT_TRANSPOSITIONS", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_TRANSPOSITIONS },
+    { "maxEdits_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "transpositions_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "nonFuzzyPrefix_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "minFuzzyLength_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "unicodeAware_", "Z", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "DEFAULT_UNICODE_AWARE", "Z", .constantValue.asBOOL = OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_UNICODE_AWARE, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MIN_FUZZY_LENGTH", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_MIN_FUZZY_LENGTH, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_NON_FUZZY_PREFIX", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_NON_FUZZY_PREFIX, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_MAX_EDITS", "I", .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_MAX_EDITS, 0x19, -1, -1, -1, -1 },
+    { "DEFAULT_TRANSPOSITIONS", "Z", .constantValue.asBOOL = OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_TRANSPOSITIONS, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester = { 2, "FuzzySuggester", "org.apache.lucene.search.suggest.analyzing", NULL, 0x11, 7, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneAnalysisAnalyzer;", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneAnalysisAnalyzer;", "LOrgApacheLuceneAnalysisAnalyzer;LOrgApacheLuceneAnalysisAnalyzer;IIIZIZIIZ", "getFullPrefixPaths", "LJavaUtilList;LOrgApacheLuceneUtilAutomatonAutomaton;LOrgApacheLuceneUtilFstFST;", "LJavaIoIOException;", "(Ljava/util/List<Lorg/apache/lucene/search/suggest/analyzing/FSTUtil$Path<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;>;Lorg/apache/lucene/util/automaton/Automaton;Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;)Ljava/util/List<Lorg/apache/lucene/search/suggest/analyzing/FSTUtil$Path<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;>;", "convertAutomaton", "LOrgApacheLuceneUtilAutomatonAutomaton;", "toLevenshteinAutomata" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester = { "FuzzySuggester", "org.apache.lucene.search.suggest.analyzing", ptrTable, methods, fields, 7, 0x11, 7, 10, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester;
 }
 

@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/SearcherManager.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "org/apache/lucene/index/DirectoryReader.h"
 #include "org/apache/lucene/index/IndexReader.h"
@@ -15,6 +13,12 @@
 #include "org/apache/lucene/search/SearcherFactory.h"
 #include "org/apache/lucene/search/SearcherManager.h"
 #include "org/apache/lucene/store/Directory.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/SearcherManager must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneSearchSearcherManager () {
  @public
@@ -52,7 +56,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSearcherManager, searcherFactory_, OrgA
 
 - (OrgApacheLuceneSearchIndexSearcher *)refreshIfNeededWithId:(OrgApacheLuceneSearchIndexSearcher *)referenceToRefresh {
   OrgApacheLuceneIndexIndexReader *r = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(referenceToRefresh)) getIndexReader];
-  JreAssert(([r isKindOfClass:[OrgApacheLuceneIndexDirectoryReader class]]), (JreStrcat("$@", @"searcher's IndexReader should be a DirectoryReader, but got ", r)));
+  JreAssert([r isKindOfClass:[OrgApacheLuceneIndexDirectoryReader class]], JreStrcat("$@", @"searcher's IndexReader should be a DirectoryReader, but got ", r));
   OrgApacheLuceneIndexIndexReader *newReader = OrgApacheLuceneIndexDirectoryReader_openIfChangedWithOrgApacheLuceneIndexDirectoryReader_((OrgApacheLuceneIndexDirectoryReader *) cast_chk(r, [OrgApacheLuceneIndexDirectoryReader class]));
   if (newReader == nil) {
     return nil;
@@ -74,7 +78,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSearcherManager, searcherFactory_, OrgA
   OrgApacheLuceneSearchIndexSearcher *searcher = [self acquire];
   @try {
     OrgApacheLuceneIndexIndexReader *r = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader];
-    JreAssert(([r isKindOfClass:[OrgApacheLuceneIndexDirectoryReader class]]), (JreStrcat("$@", @"searcher's IndexReader should be a DirectoryReader, but got ", r)));
+    JreAssert([r isKindOfClass:[OrgApacheLuceneIndexDirectoryReader class]], JreStrcat("$@", @"searcher's IndexReader should be a DirectoryReader, but got ", r));
     return [((OrgApacheLuceneIndexDirectoryReader *) nil_chk(((OrgApacheLuceneIndexDirectoryReader *) cast_chk(r, [OrgApacheLuceneIndexDirectoryReader class])))) isCurrent];
   }
   @finally {
@@ -94,22 +98,35 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSearcherManager, searcherFactory_, OrgA
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexWriter:withBoolean:withOrgApacheLuceneSearchSearcherFactory:", "SearcherManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchSearcherFactory:", "SearcherManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneSearchSearcherFactory:", "SearcherManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "decRefWithId:", "decRef", "V", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/IndexSearcher;)V" },
-    { "refreshIfNeededWithId:", "refreshIfNeeded", "Lorg.apache.lucene.search.IndexSearcher;", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/IndexSearcher;)Lorg/apache/lucene/search/IndexSearcher;" },
-    { "tryIncRefWithId:", "tryIncRef", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/IndexSearcher;)Z" },
-    { "getRefCountWithId:", "getRefCount", "I", 0x4, NULL, "(Lorg/apache/lucene/search/IndexSearcher;)I" },
-    { "isSearcherCurrent", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSearcherWithOrgApacheLuceneSearchSearcherFactory:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexIndexReader:", "getSearcher", "Lorg.apache.lucene.search.IndexSearcher;", 0x9, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, 1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, 1, -1, -1, -1 },
+    { NULL, "V", 0x4, 4, 5, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchIndexSearcher;", 0x4, 6, 5, 1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 7, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 8, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchIndexSearcher;", 0x9, 9, 10, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexWriter:withBoolean:withOrgApacheLuceneSearchSearcherFactory:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchSearcherFactory:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneSearchSearcherFactory:);
+  methods[3].selector = @selector(decRefWithId:);
+  methods[4].selector = @selector(refreshIfNeededWithId:);
+  methods[5].selector = @selector(tryIncRefWithId:);
+  methods[6].selector = @selector(getRefCountWithId:);
+  methods[7].selector = @selector(isSearcherCurrent);
+  methods[8].selector = @selector(getSearcherWithOrgApacheLuceneSearchSearcherFactory:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexIndexReader:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "searcherFactory_", NULL, 0x12, "Lorg.apache.lucene.search.SearcherFactory;", NULL, NULL, .constantValue.asLong = 0 },
+    { "searcherFactory_", "LOrgApacheLuceneSearchSearcherFactory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.IndexSearcher;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherManager = { 2, "SearcherManager", "org.apache.lucene.search", NULL, 0x11, 9, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/ReferenceManager<Lorg/apache/lucene/search/IndexSearcher;>;" };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexWriter;ZLOrgApacheLuceneSearchSearcherFactory;", "LJavaIoIOException;", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneSearchSearcherFactory;", "LOrgApacheLuceneIndexDirectoryReader;LOrgApacheLuceneSearchSearcherFactory;", "decRef", "LOrgApacheLuceneSearchIndexSearcher;", "refreshIfNeeded", "tryIncRef", "getRefCount", "getSearcher", "LOrgApacheLuceneSearchSearcherFactory;LOrgApacheLuceneIndexIndexReader;LOrgApacheLuceneIndexIndexReader;", "Lorg/apache/lucene/search/ReferenceManager<Lorg/apache/lucene/search/IndexSearcher;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherManager = { "SearcherManager", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x11, 9, 1, -1, -1, -1, 11, -1 };
   return &_OrgApacheLuceneSearchSearcherManager;
 }
 
@@ -172,7 +189,7 @@ OrgApacheLuceneSearchIndexSearcher *OrgApacheLuceneSearchSearcherManager_getSear
   OrgApacheLuceneSearchIndexSearcher *searcher;
   @try {
     searcher = [((OrgApacheLuceneSearchSearcherFactory *) nil_chk(searcherFactory)) newSearcherWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneIndexIndexReader:previousReader];
-    if ([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader] != reader) {
+    if (!JreObjectEqualsEquals([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader], reader)) {
       @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$@C", @"SearcherFactory must wrap exactly the provided reader (got ", [searcher getIndexReader], @" but expected ", reader, ')'));
     }
     success = true;

@@ -3,15 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/search/TermScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/TermScorer.h"
 #include "org/apache/lucene/search/Weight.h"
 #include "org/apache/lucene/search/similarities/Similarity.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/TermScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneSearchTermScorer () {
  @public
@@ -26,10 +28,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermScorer, docScorer_, OrgApacheLucene
 
 @implementation OrgApacheLuceneSearchTermScorer
 
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-               withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)td
-withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer {
-  OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(self, weight, td, docScorer);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
+                             withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)td
+        withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer {
+  OrgApacheLuceneSearchTermScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(self, weight, td, docScorer);
   return self;
 }
 
@@ -46,7 +48,7 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
 }
 
 - (jfloat)score {
-  JreAssert(([self docID] != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS), (@"org/apache/lucene/search/TermScorer.java:70 condition failed: assert docID() != NO_MORE_DOCS;"));
+  JreAssert([self docID] != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS, @"org/apache/lucene/search/TermScorer.java:70 condition failed: assert docID() != NO_MORE_DOCS;");
   return [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer_)) scoreWithInt:[((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) docID] withFloat:[postingsEnum_ freq]];
 }
 
@@ -69,38 +71,51 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:withOrgApacheLuceneIndexPostingsEnum:withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:", "TermScorer", NULL, 0x0, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 4, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneSearchWeight:withOrgApacheLuceneIndexPostingsEnum:withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:);
+  methods[1].selector = @selector(docID);
+  methods[2].selector = @selector(freq);
+  methods[3].selector = @selector(nextDoc);
+  methods[4].selector = @selector(score);
+  methods[5].selector = @selector(advanceWithInt:);
+  methods[6].selector = @selector(cost);
+  methods[7].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "postingsEnum_", NULL, 0x12, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docScorer_", NULL, 0x12, "Lorg.apache.lucene.search.similarities.Similarity$SimScorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "postingsEnum_", "LOrgApacheLuceneIndexPostingsEnum;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "docScorer_", "LOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermScorer = { 2, "TermScorer", "org.apache.lucene.search", NULL, 0x10, 8, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchWeight;LOrgApacheLuceneIndexPostingsEnum;LOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;", "LJavaIoIOException;", "advance", "I", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermScorer = { "TermScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x10, 8, 2, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchTermScorer;
 }
 
 @end
 
-void OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermScorer *self, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
+void OrgApacheLuceneSearchTermScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermScorer *self, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, weight);
   JreStrongAssign(&self->docScorer_, docScorer);
   JreStrongAssign(&self->postingsEnum_, td);
 }
 
-OrgApacheLuceneSearchTermScorer *new_OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermScorer, initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_, weight, td, docScorer)
+OrgApacheLuceneSearchTermScorer *new_OrgApacheLuceneSearchTermScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermScorer, initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_, weight, td, docScorer)
 }
 
-OrgApacheLuceneSearchTermScorer *create_OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermScorer, initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_, weight, td, docScorer)
+OrgApacheLuceneSearchTermScorer *create_OrgApacheLuceneSearchTermScorer_initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermScorer, initPackagePrivateWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_, weight, td, docScorer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermScorer)

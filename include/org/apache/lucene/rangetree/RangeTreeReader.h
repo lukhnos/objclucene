@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeRangeTreeReader
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeRangeTreeReader_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeReader || defined(INCLUDE_OrgApacheLuceneRangetreeRangeTreeReader))
 #define OrgApacheLuceneRangetreeRangeTreeReader_
 
@@ -27,7 +33,6 @@
 
 /*!
  @brief Handles intersection of a range with a numeric tree previously written with <code>RangeTreeWriter</code>.
-  
  */
 @interface OrgApacheLuceneRangetreeRangeTreeReader : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -38,7 +43,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg;
 
 - (id<JavaUtilCollection>)getChildResources;
 
@@ -53,20 +58,28 @@
 
 - (jlong)ramBytesUsed;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeReader)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeReader, in_, OrgApacheLuceneStoreIndexInput *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneRangetreeRangeTreeReader *self, OrgApacheLuceneStoreIndexInput *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneRangetreeRangeTreeReader *self, OrgApacheLuceneStoreIndexInput *inArg);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeReader *new_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeReader *new_OrgApacheLuceneRangetreeRangeTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeReader *create_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg);
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeReader *create_OrgApacheLuceneRangetreeRangeTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeReader)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeReader")

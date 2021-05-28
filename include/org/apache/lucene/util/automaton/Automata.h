@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonAutomata
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonAutomata_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomata || defined(INCLUDE_OrgApacheLuceneUtilAutomatonAutomata))
 #define OrgApacheLuceneUtilAutomatonAutomata_
 
@@ -58,19 +64,19 @@
 
 /*!
  @brief Returns a new (deterministic) automaton that accepts the single given
- binary term.
+  binary term.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeBinaryWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 /*!
  @brief Creates a new deterministic, minimal automaton accepting
- all binary terms in the specified interval.
- Note that unlike
- <code>makeDecimalInterval</code>, the returned automaton is infinite,
- because terms behave like floating point numbers leading with
- a decimal point.  However, in the special case where min == max,
- and both are inclusive, the automata will be finite and accept
- exactly one term. 
+   all binary terms in the specified interval.Note that unlike
+   <code>makeDecimalInterval</code>, the returned automaton is infinite,
+   because terms behave like floating point numbers leading with
+   a decimal point.
+ However, in the special case where min == max,
+   and both are inclusive, the automata will be finite and accept
+   exactly one term.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeBinaryIntervalWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)min
                                                                                  withBoolean:(jboolean)minInclusive
@@ -79,29 +85,26 @@
 
 /*!
  @brief Returns a new (deterministic) automaton that accepts a single codepoint of
- the given value.
+  the given value.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeCharWithInt:(jint)c;
 
 /*!
  @brief Returns a new (deterministic) automaton that accepts a single codepoint whose
- value is in the given interval (including both end points).
+  value is in the given interval (including both end points).
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeCharRangeWithInt:(jint)min
                                                         withInt:(jint)max;
 
 /*!
  @brief Returns a new automaton that accepts strings representing decimal (base 10)
- non-negative integers in the given interval.
+  non-negative integers in the given interval.
  @param min minimal value of interval
- @param max maximal value of interval (both end points are included in the
- interval)
- @param digits if &gt; 0, use fixed number of digits (strings must be prefixed
- by 0's to obtain the right length) - otherwise, the number of
- digits is not fixed (any number of leading 0s is accepted)
- @exception IllegalArgumentException if min &gt; max or if numbers in the
- interval cannot be expressed with the given fixed number of
- digits
+ @param max maximal value of interval (both end points are included in the           interval)
+ @param digits if  &gt;  0, use fixed number of digits (strings must be prefixed           by 0's to obtain the right length) - otherwise, the number of           digits is not fixed (any number of leading 0s is accepted)
+ @throw IllegalArgumentExceptionif min &gt; max or if numbers in the
+               interval cannot be expressed with the given fixed number of
+               digits
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeDecimalIntervalWithInt:(jint)min
                                                               withInt:(jint)max
@@ -119,7 +122,7 @@
 
 /*!
  @brief Returns a new (deterministic) automaton that accepts the single given
- string from the specified unicode code points.
+  string from the specified unicode code points.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeStringWithIntArray:(IOSIntArray *)word
                                                           withInt:(jint)offset
@@ -127,20 +130,19 @@
 
 /*!
  @brief Returns a new (deterministic) automaton that accepts the single given
- string.
+  string.
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeStringWithNSString:(NSString *)s;
 
 /*!
  @brief Returns a new (deterministic and minimal) automaton that accepts the union
- of the given collection of <code>BytesRef</code>s representing UTF-8 encoded
- strings.
- @param utf8Strings
- The input strings, UTF-8 encoded. The collection must be in sorted
- order.
+  of the given collection of <code>BytesRef</code>s representing UTF-8 encoded
+  strings.
+ @param utf8Strings The input strings, UTF-8 encoded. The collection must be in sorted
+            order.
  @return An <code>Automaton</code> accepting all input strings. The resulting
- automaton is codepoint based (full unicode codepoints on
- transitions).
+          automaton is codepoint based (full unicode codepoints on
+          transitions).
  */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeStringUnionWithJavaUtilCollection:(id<JavaUtilCollection>)utf8Strings;
 
@@ -148,15 +150,15 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonAutomata)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeEmpty();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeEmpty(void);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeEmptyString();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeEmptyString(void);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeAnyString();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeAnyString(void);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeAnyBinary();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeAnyBinary(void);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeAnyChar();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeAnyChar(void);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilAutomatonAutomata_appendAnyCharWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint state);
 
@@ -182,4 +184,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomata)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomata")

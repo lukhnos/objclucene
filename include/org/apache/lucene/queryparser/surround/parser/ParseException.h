@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundParserParseException
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundParserParseException_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserParseException || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundParserParseException))
 #define OrgApacheLuceneQueryparserSurroundParserParseException_
 
@@ -21,37 +27,35 @@
 #include "java/lang/Exception.h"
 
 @class IOSObjectArray;
+@class JavaLangThrowable;
 @class OrgApacheLuceneQueryparserSurroundParserToken;
 
 /*!
  @brief This exception is thrown when parse errors are encountered.
  You can explicitly create objects of this exception type by
- calling the method generateParseException in the generated
- parser.
- You can modify this class to customize your error reporting
- mechanisms so long as you retain the public fields.
+  calling the method generateParseException in the generated
+  parser.
+  You can modify this class to customize your error reporting
+  mechanisms so long as you retain the public fields.
  */
 @interface OrgApacheLuceneQueryparserSurroundParserParseException : JavaLangException {
  @public
   /*!
-   @brief This is the last token that has been consumed successfully.
-   If
- this object has been created due to a parse error, the token
- followng this token will (therefore) be the first error token.
+   @brief This is the last token that has been consumed successfully.If
+  this object has been created due to a parse error, the token
+  followng this token will (therefore) be the first error token.
    */
   OrgApacheLuceneQueryparserSurroundParserToken *currentToken_;
   /*!
-   @brief Each entry in this array is an array of integers.
-   Each array
- of integers represents a sequence of tokens (by their ordinal
- values) that is expected at this point of the parse.
+   @brief Each entry in this array is an array of integers.Each array
+  of integers represents a sequence of tokens (by their ordinal
+  values) that is expected at this point of the parse.
    */
   IOSObjectArray *expectedTokenSequences_;
   /*!
    @brief This is a reference to the "tokenImage" array of the generated
- parser within which the parse error occurred.
-   This array is
- defined in the generated ...Constants interface.
+  parser within which the parse error occurred.This array is
+  defined in the generated ...Constants interface.
    */
   IOSObjectArray *tokenImage_;
   /*!
@@ -64,40 +68,51 @@
 
 /*!
  @brief The following constructors are for use by you for whatever
- purpose you can think of.
- Constructing the exception in this
- manner makes the exception behave in the normal way - i.e., as
- documented in the class "Throwable".  The fields "errorToken",
- "expectedTokenSequences", and "tokenImage" do not contain
- relevant information.  The JavaCC generated code does not use
- these constructors.
+  purpose you can think of.Constructing the exception in this
+  manner makes the exception behave in the normal way - i.e., as
+  documented in the class "Throwable".
+ The fields "errorToken",
+  "expectedTokenSequences", and "tokenImage" do not contain
+  relevant information.  The JavaCC generated code does not use
+  these constructors.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Constructor with message.
  */
-- (instancetype)initWithNSString:(NSString *)message;
+- (instancetype __nonnull)initWithNSString:(NSString *)message;
 
 /*!
  @brief This constructor is used by the method "generateParseException"
- in the generated parser.
- Calling this constructor generates
- a new object of this type with the fields "currentToken",
- "expectedTokenSequences", and "tokenImage" set.
+  in the generated parser.Calling this constructor generates
+  a new object of this type with the fields "currentToken",
+  "expectedTokenSequences", and "tokenImage" set.
  */
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundParserToken:(OrgApacheLuceneQueryparserSurroundParserToken *)currentTokenVal
-                                                        withIntArray2:(IOSObjectArray *)expectedTokenSequencesVal
-                                                    withNSStringArray:(IOSObjectArray *)tokenImageVal;
+- (instancetype __nonnull)initWithOrgApacheLuceneQueryparserSurroundParserToken:(OrgApacheLuceneQueryparserSurroundParserToken *)currentTokenVal
+                                                                  withIntArray2:(IOSObjectArray *)expectedTokenSequencesVal
+                                                              withNSStringArray:(IOSObjectArray *)tokenImageVal;
 
 #pragma mark Package-Private
 
 /*!
  @brief Used to convert raw characters to their escaped version
- when these raw version cannot be used as part of an ASCII
- string literal.
+  when these raw version cannot be used as part of an ASCII
+  string literal.
  */
 + (NSString *)add_escapesWithNSString:(NSString *)str;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1
+                               withBoolean:(jboolean)arg2
+                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -116,9 +131,9 @@ FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserParseException *create
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserParseException_init(OrgApacheLuceneQueryparserSurroundParserParseException *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserParseException *new_OrgApacheLuceneQueryparserSurroundParserParseException_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserParseException *new_OrgApacheLuceneQueryparserSurroundParserParseException_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserParseException *create_OrgApacheLuceneQueryparserSurroundParserParseException_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserParseException *create_OrgApacheLuceneQueryparserSurroundParserParseException_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(OrgApacheLuceneQueryparserSurroundParserParseException *self, NSString *message);
 
@@ -132,4 +147,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundParserParseExceptio
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserParseException")

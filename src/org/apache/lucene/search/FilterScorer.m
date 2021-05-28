@@ -3,14 +3,16 @@
 //  source: ./core/src/java/org/apache/lucene/search/FilterScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/NullPointerException.h"
 #include "org/apache/lucene/search/FilterScorer.h"
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/Weight.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/FilterScorer must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchFilterScorer
 
@@ -59,21 +61,35 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchScorer:", "FilterScorer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchWeight:", "FilterScorer", NULL, 0x1, NULL, NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x11, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x11, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x11, 3, 4, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchTwoPhaseIterator;", 0x11, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneSearchScorer:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchWeight:);
+  methods[2].selector = @selector(score);
+  methods[3].selector = @selector(freq);
+  methods[4].selector = @selector(docID);
+  methods[5].selector = @selector(nextDoc);
+  methods[6].selector = @selector(advanceWithInt:);
+  methods[7].selector = @selector(cost);
+  methods[8].selector = @selector(asTwoPhaseIterator);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x14, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneSearchScorer;", .constantValue.asLong = 0, 0x14, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilterScorer = { 2, "FilterScorer", "org.apache.lucene.search", NULL, 0x401, 9, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneSearchScorer;", "LOrgApacheLuceneSearchScorer;LOrgApacheLuceneSearchWeight;", "LJavaIoIOException;", "advance", "I" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilterScorer = { "FilterScorer", "org.apache.lucene.search", ptrTable, methods, fields, 7, 0x401, 9, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchFilterScorer;
 }
 

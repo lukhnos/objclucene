@@ -7,16 +7,20 @@
 #include "java/util/concurrent/atomic/AtomicLong.h"
 #include "org/apache/lucene/util/Counter.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/Counter must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneUtilCounter_SerialCounter : OrgApacheLuceneUtilCounter {
  @public
   jlong count_;
 }
 
+- (instancetype)init;
+
 - (jlong)addAndGetWithLong:(jlong)delta;
 
 - (jlong)get;
-
-- (instancetype)init;
 
 @end
 
@@ -24,9 +28,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilCounter_SerialCounter)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilCounter_SerialCounter_init(OrgApacheLuceneUtilCounter_SerialCounter *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilCounter_SerialCounter *new_OrgApacheLuceneUtilCounter_SerialCounter_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilCounter_SerialCounter *new_OrgApacheLuceneUtilCounter_SerialCounter_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilCounter_SerialCounter *create_OrgApacheLuceneUtilCounter_SerialCounter_init();
+__attribute__((unused)) static OrgApacheLuceneUtilCounter_SerialCounter *create_OrgApacheLuceneUtilCounter_SerialCounter_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCounter_SerialCounter)
 
@@ -35,11 +39,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCounter_SerialCounter)
   JavaUtilConcurrentAtomicAtomicLong *count_;
 }
 
+- (instancetype)init;
+
 - (jlong)addAndGetWithLong:(jlong)delta;
 
 - (jlong)get;
-
-- (instancetype)init;
 
 @end
 
@@ -49,13 +53,20 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilCounter_AtomicCounter, count_, JavaUtilCo
 
 __attribute__((unused)) static void OrgApacheLuceneUtilCounter_AtomicCounter_init(OrgApacheLuceneUtilCounter_AtomicCounter *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilCounter_AtomicCounter *new_OrgApacheLuceneUtilCounter_AtomicCounter_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilCounter_AtomicCounter *new_OrgApacheLuceneUtilCounter_AtomicCounter_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilCounter_AtomicCounter *create_OrgApacheLuceneUtilCounter_AtomicCounter_init();
+__attribute__((unused)) static OrgApacheLuceneUtilCounter_AtomicCounter *create_OrgApacheLuceneUtilCounter_AtomicCounter_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCounter_AtomicCounter)
 
 @implementation OrgApacheLuceneUtilCounter
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilCounter_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jlong)addAndGetWithLong:(jlong)delta {
   // can't call an abstract method
@@ -77,27 +88,33 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCounter_AtomicCounter)
   return OrgApacheLuceneUtilCounter_newCounterWithBoolean_(threadSafe);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilCounter_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addAndGetWithLong:", "addAndGet", "J", 0x401, NULL, NULL },
-    { "get", NULL, "J", 0x401, NULL, NULL },
-    { "newCounter", NULL, "Lorg.apache.lucene.util.Counter;", 0x9, NULL, NULL },
-    { "newCounterWithBoolean:", "newCounter", "Lorg.apache.lucene.util.Counter;", 0x9, NULL, NULL },
-    { "init", "Counter", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "J", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCounter;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCounter;", 0x9, 2, 3, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.Counter$SerialCounter;", "Lorg.apache.lucene.util.Counter$AtomicCounter;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilCounter = { 2, "Counter", "org.apache.lucene.util", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 2, inner_classes, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(addAndGetWithLong:);
+  methods[2].selector = @selector(get);
+  methods[3].selector = @selector(newCounter);
+  methods[4].selector = @selector(newCounterWithBoolean:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "addAndGet", "J", "newCounter", "Z", "LOrgApacheLuceneUtilCounter_SerialCounter;LOrgApacheLuceneUtilCounter_AtomicCounter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilCounter = { "Counter", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x401, 5, 0, -1, 4, -1, -1, -1 };
   return &_OrgApacheLuceneUtilCounter;
 }
 
 @end
+
+void OrgApacheLuceneUtilCounter_init(OrgApacheLuceneUtilCounter *self) {
+  NSObject_init(self);
+}
 
 OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounter() {
   OrgApacheLuceneUtilCounter_initialize();
@@ -106,16 +123,19 @@ OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounter() {
 
 OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounterWithBoolean_(jboolean threadSafe) {
   OrgApacheLuceneUtilCounter_initialize();
-  return threadSafe ? create_OrgApacheLuceneUtilCounter_AtomicCounter_init() : create_OrgApacheLuceneUtilCounter_SerialCounter_init();
-}
-
-void OrgApacheLuceneUtilCounter_init(OrgApacheLuceneUtilCounter *self) {
-  NSObject_init(self);
+  return threadSafe ? create_OrgApacheLuceneUtilCounter_AtomicCounter_init() : (id) create_OrgApacheLuceneUtilCounter_SerialCounter_init();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCounter)
 
 @implementation OrgApacheLuceneUtilCounter_SerialCounter
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilCounter_SerialCounter_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jlong)addAndGetWithLong:(jlong)delta {
   return count_ += delta;
@@ -125,23 +145,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCounter)
   return count_;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilCounter_SerialCounter_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addAndGetWithLong:", "addAndGet", "J", 0x1, NULL, NULL },
-    { "get", NULL, "J", 0x1, NULL, NULL },
-    { "init", "SerialCounter", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(addAndGetWithLong:);
+  methods[2].selector = @selector(get);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "count_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "count_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilCounter_SerialCounter = { 2, "SerialCounter", "org.apache.lucene.util", "Counter", 0x1a, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "addAndGet", "J", "LOrgApacheLuceneUtilCounter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilCounter_SerialCounter = { "SerialCounter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1a, 3, 1, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilCounter_SerialCounter;
 }
 
@@ -164,6 +185,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCounter_SerialCounter)
 
 @implementation OrgApacheLuceneUtilCounter_AtomicCounter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilCounter_AtomicCounter_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (jlong)addAndGetWithLong:(jlong)delta {
   return [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(count_)) addAndGetWithLong:delta];
 }
@@ -172,28 +200,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCounter_SerialCounter)
   return [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(count_)) get];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilCounter_AtomicCounter_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(count_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addAndGetWithLong:", "addAndGet", "J", 0x1, NULL, NULL },
-    { "get", NULL, "J", 0x1, NULL, NULL },
-    { "init", "AtomicCounter", NULL, 0x2, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(addAndGetWithLong:);
+  methods[2].selector = @selector(get);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "count_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicLong;", NULL, NULL, .constantValue.asLong = 0 },
+    { "count_", "LJavaUtilConcurrentAtomicAtomicLong;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilCounter_AtomicCounter = { 2, "AtomicCounter", "org.apache.lucene.util", "Counter", 0x1a, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "addAndGet", "J", "LOrgApacheLuceneUtilCounter;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilCounter_AtomicCounter = { "AtomicCounter", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1a, 3, 1, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilCounter_AtomicCounter;
 }
 

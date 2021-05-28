@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneStoreSimpleFSLockFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreSimpleFSLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSLockFactory || defined(INCLUDE_OrgApacheLuceneStoreSimpleFSLockFactory))
 #define OrgApacheLuceneStoreSimpleFSLockFactory_
 
@@ -27,32 +33,36 @@
  @brief <p>Implements <code>LockFactory</code> using <code>Files.createFile</code>
  .
  </p>
+  
  <p>The main downside with using this API for locking is 
- that the Lucene write lock may not be released when 
- the JVM exits abnormally.</p>
+  that the Lucene write lock may not be released when 
+  the JVM exits abnormally.</p>
+  
  <p>When this happens, an <code>LockObtainFailedException</code>
- is hit when trying to create a writer, in which case you may
- need to explicitly clear the lock file first by
- manually removing the file.  But, first be certain that
- no writer is in fact writing to the index otherwise you
- can easily corrupt your index.</p>
+  is hit when trying to create a writer, in which case you may
+  need to explicitly clear the lock file first by
+  manually removing the file.  But, first be certain that
+  no writer is in fact writing to the index otherwise you
+  can easily corrupt your index.</p>
+  
  <p>Special care needs to be taken if you change the locking
- implementation: First be certain that no writer is in fact
- writing to the index otherwise you can easily corrupt
- your index. Be sure to do the LockFactory change all Lucene
- instances and clean up all leftover lock files before starting
- the new configuration for the first time. Different implementations
- can not work together!</p>
+  implementation: First be certain that no writer is in fact
+  writing to the index otherwise you can easily corrupt
+  your index. Be sure to do the LockFactory change all Lucene
+  instances and clean up all leftover lock files before starting
+  the new configuration for the first time. Different implementations
+  can not work together!</p>
+  
  <p>If you suspect that this or any other LockFactory is
- not working properly in your environment, you can easily
- test it by using <code>VerifyingLockFactory</code>, <code>LockVerifyServer</code>
+  not working properly in your environment, you can easily
+  test it by using <code>VerifyingLockFactory</code>, <code>LockVerifyServer</code>
   and <code>LockStressTest</code>.</p>
+   
  <p>This is a singleton, you have to use <code>INSTANCE</code>.
  - seealso: LockFactory
  */
 @interface OrgApacheLuceneStoreSimpleFSLockFactory : OrgApacheLuceneStoreFSLockFactory
-
-+ (OrgApacheLuceneStoreSimpleFSLockFactory *)INSTANCE;
+@property (readonly, class, strong) OrgApacheLuceneStoreSimpleFSLockFactory *INSTANCE NS_SWIFT_NAME(INSTANCE);
 
 #pragma mark Protected
 
@@ -66,7 +76,7 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneStoreSimpleFSLockFactory)
 /*!
  @brief Singleton instance
  */
-inline OrgApacheLuceneStoreSimpleFSLockFactory *OrgApacheLuceneStoreSimpleFSLockFactory_get_INSTANCE();
+inline OrgApacheLuceneStoreSimpleFSLockFactory *OrgApacheLuceneStoreSimpleFSLockFactory_get_INSTANCE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSLockFactory *OrgApacheLuceneStoreSimpleFSLockFactory_INSTANCE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreSimpleFSLockFactory, INSTANCE, OrgApacheLuceneStoreSimpleFSLockFactory *)
@@ -97,8 +107,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSLockFactory)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-       withOrgLukhnosPortmobileFileAttributeFileTime:(OrgLukhnosPortmobileFileAttributeFileTime *)creationTime;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
+                 withOrgLukhnosPortmobileFileAttributeFileTime:(OrgLukhnosPortmobileFileAttributeFileTime *)creationTime;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -114,4 +128,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSLockFactory")

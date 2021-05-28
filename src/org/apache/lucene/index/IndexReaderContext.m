@@ -3,15 +3,20 @@
 //  source: ./core/src/java/org/apache/lucene/index/IndexReaderContext.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Error.h"
-#include "java/lang/UnsupportedOperationException.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/CompositeReaderContext.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/IndexReaderContext.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/IndexReaderContext must not be compiled with ARC (-fobjc-arc)"
+#if !__has_feature(objc_arc_weak)
+#error "org/apache/lucene/index/IndexReaderContext must be compiled with weak references support (-fobjc-weak)"
+#endif
+#endif
 
 @implementation OrgApacheLuceneIndexIndexReaderContext
 
@@ -40,25 +45,34 @@
   return 0;
 }
 
-- (void)dealloc {
-  RELEASE_(parent_);
-  [super dealloc];
+- (void)__javaClone:(OrgApacheLuceneIndexIndexReaderContext *)original {
+  [super __javaClone:original];
+  [parent_ release];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexCompositeReaderContext:withInt:withInt:", "IndexReaderContext", NULL, 0x0, NULL, NULL },
-    { "reader", NULL, "Lorg.apache.lucene.index.IndexReader;", 0x401, NULL, NULL },
-    { "leaves", NULL, "Ljava.util.List;", 0x401, "Ljava.lang.UnsupportedOperationException;", "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;" },
-    { "children", NULL, "Ljava.util.List;", 0x401, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexReader;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x401, -1, -1, 1, 2, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x401, -1, -1, -1, 3, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexCompositeReaderContext:withInt:withInt:);
+  methods[1].selector = @selector(reader);
+  methods[2].selector = @selector(leaves);
+  methods[3].selector = @selector(children);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "parent_", NULL, 0x11, "Lorg.apache.lucene.index.CompositeReaderContext;", NULL, NULL, .constantValue.asLong = 0 },
-    { "isTopLevel_", NULL, 0x11, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "docBaseInParent_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ordInParent_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "parent_", "LOrgApacheLuceneIndexCompositeReaderContext;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "isTopLevel_", "Z", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "docBaseInParent_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "ordInParent_", "I", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexReaderContext = { 2, "IndexReaderContext", "org.apache.lucene.index", NULL, 0x401, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexCompositeReaderContext;II", "LJavaLangUnsupportedOperationException;", "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", "()Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexReaderContext = { "IndexReaderContext", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x401, 4, 4, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexIndexReaderContext;
 }
 
@@ -67,7 +81,7 @@
 void OrgApacheLuceneIndexIndexReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withInt_withInt_(OrgApacheLuceneIndexIndexReaderContext *self, OrgApacheLuceneIndexCompositeReaderContext *parent, jint ordInParent, jint docBaseInParent) {
   NSObject_init(self);
   if (!([self isKindOfClass:[OrgApacheLuceneIndexCompositeReaderContext class]] || [self isKindOfClass:[OrgApacheLuceneIndexLeafReaderContext class]])) @throw create_JavaLangError_initWithNSString_(@"This class should never be extended by custom code!");
-  JreStrongAssign(&self->parent_, parent);
+  self->parent_ = parent;
   self->docBaseInParent_ = docBaseInParent;
   self->ordInParent_ = ordInParent;
   self->isTopLevel_ = (parent == nil);

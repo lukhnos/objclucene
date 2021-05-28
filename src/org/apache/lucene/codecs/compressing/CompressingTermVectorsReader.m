@@ -8,16 +8,17 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
-#include "java/io/IOException.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/Iterator.h"
 #include "java/util/NoSuchElementException.h"
 #include "java/util/Set.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/codecs/TermVectorsReader.h"
 #include "org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexReader.h"
@@ -51,6 +52,10 @@
 #include "org/apache/lucene/util/packed/BlockPackedReaderIterator.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/codecs/compressing/CompressingTermVectorsReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader () {
  @public
   OrgApacheLuceneIndexFieldInfos *fieldInfos_;
@@ -70,7 +75,7 @@
 - (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *)reader;
 
 /*!
- @throws AlreadyClosedException if this TermVectorsReader is closed
+ @throw AlreadyClosedExceptionif this TermVectorsReader is closed
  */
 - (void)ensureOpen;
 
@@ -114,9 +119,21 @@ __attribute__((unused)) static jint OrgApacheLuceneCodecsCompressingCompressingT
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields : OrgApacheLuceneIndexFields {
  @public
   OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *this$0_;
-  IOSIntArray *fieldNums_, *fieldFlags_, *fieldNumOffs_, *numTerms_, *fieldLengths_;
-  IOSObjectArray *prefixLengths_, *suffixLengths_, *termFreqs_, *positionIndex_, *positions_, *startOffsets_, *lengths_, *payloadIndex_;
-  OrgApacheLuceneUtilBytesRef *suffixBytes_, *payloadBytes_;
+  IOSIntArray *fieldNums_;
+  IOSIntArray *fieldFlags_;
+  IOSIntArray *fieldNumOffs_;
+  IOSIntArray *numTerms_;
+  IOSIntArray *fieldLengths_;
+  IOSObjectArray *prefixLengths_;
+  IOSObjectArray *suffixLengths_;
+  IOSObjectArray *termFreqs_;
+  IOSObjectArray *positionIndex_;
+  IOSObjectArray *positions_;
+  IOSObjectArray *startOffsets_;
+  IOSObjectArray *lengths_;
+  IOSObjectArray *payloadIndex_;
+  OrgApacheLuceneUtilBytesRef *suffixBytes_;
+  OrgApacheLuceneUtilBytesRef *payloadBytes_;
 }
 
 - (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *)outer$
@@ -146,7 +163,6 @@ __attribute__((unused)) static jint OrgApacheLuceneCodecsCompressingCompressingT
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields, this$0_, OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields, fieldNums_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields, fieldFlags_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields, fieldNumOffs_, IOSIntArray *)
@@ -171,11 +187,13 @@ __attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVe
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields)
 
-@interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1 : NSObject < JavaUtilIterator > {
+@interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1 : NSObject < JavaUtilIterator > {
  @public
   OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *this$0_;
   jint i_;
 }
+
+- (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields:(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *)outer$;
 
 - (jboolean)hasNext;
 
@@ -183,27 +201,30 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
 
 - (void)remove;
 
-- (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields:(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *)outer$;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1, this$0_, OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *)
+__attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1 *self, OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$);
 
-__attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1 *self, OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$);
+__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1 *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1 *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1 *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1)
+__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1 *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$);
 
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTerms : OrgApacheLuceneIndexTerms {
  @public
-  jint numTerms_, flags_;
-  IOSIntArray *prefixLengths_, *suffixLengths_, *termFreqs_, *positionIndex_, *positions_, *startOffsets_, *lengths_, *payloadIndex_;
-  OrgApacheLuceneUtilBytesRef *termBytes_, *payloadBytes_;
+  jint numTerms_;
+  jint flags_;
+  IOSIntArray *prefixLengths_;
+  IOSIntArray *suffixLengths_;
+  IOSIntArray *termFreqs_;
+  IOSIntArray *positionIndex_;
+  IOSIntArray *positions_;
+  IOSIntArray *startOffsets_;
+  IOSIntArray *lengths_;
+  IOSIntArray *payloadIndex_;
+  OrgApacheLuceneUtilBytesRef *termBytes_;
+  OrgApacheLuceneUtilBytesRef *payloadBytes_;
 }
 
 - (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *)outer$
@@ -263,8 +284,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
 
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum : OrgApacheLuceneIndexTermsEnum {
  @public
-  jint numTerms_, startPos_, ord_;
-  IOSIntArray *prefixLengths_, *suffixLengths_, *termFreqs_, *positionIndex_, *positions_, *startOffsets_, *lengths_, *payloadIndex_;
+  jint numTerms_;
+  jint startPos_;
+  jint ord_;
+  IOSIntArray *prefixLengths_;
+  IOSIntArray *suffixLengths_;
+  IOSIntArray *termFreqs_;
+  IOSIntArray *positionIndex_;
+  IOSIntArray *positions_;
+  IOSIntArray *startOffsets_;
+  IOSIntArray *lengths_;
+  IOSIntArray *payloadIndex_;
   OrgApacheLuceneStoreByteArrayDataInput *in_;
   OrgApacheLuceneUtilBytesRef *payloads_;
   OrgApacheLuceneUtilBytesRef *term_;
@@ -322,9 +352,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum_init(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum *self);
 
-__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum_init();
+__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum)
 
@@ -386,9 +416,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum_init(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum *self);
 
-__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum_init();
+__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum_init(void);
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum_checkDoc(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum *self);
 
@@ -461,7 +491,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
   }
 }
 
-- (OrgApacheLuceneCodecsTermVectorsReader *)clone {
+- (OrgApacheLuceneCodecsTermVectorsReader *)java_clone {
   return create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_(self);
 }
 
@@ -503,7 +533,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
   IOSIntArray *fieldNums;
   {
     jint token = [vectorsStream_ readByte] & (jint) 0xFF;
-    JreAssert((token != 0), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:292 condition failed: assert token != 0;"));
+    JreAssert(token != 0, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:292 condition failed: assert token != 0;");
     jint bitsPerFieldNum = token & (jint) 0x1F;
     jint totalDistinctFields = JreURShift32(token, 5);
     if (totalDistinctFields == (jint) 0x07) {
@@ -530,7 +560,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
         f = OrgApacheLuceneUtilPackedPackedInts_getMutableWithInt_withInt_withFloat_(totalFields, JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter, FLAGS_BITS), OrgApacheLuceneUtilPackedPackedInts_COMPACT);
         for (jint i = 0; i < totalFields; ++i) {
           jint fieldNumOff = (jint) [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(allFieldNumOffs)) getWithInt:i];
-          JreAssert((fieldNumOff >= 0 && fieldNumOff < fieldNums->size_), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:318 condition failed: assert fieldNumOff >= 0 && fieldNumOff < fieldNums.length;"));
+          JreAssert(fieldNumOff >= 0 && fieldNumOff < fieldNums->size_, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:318 condition failed: assert fieldNumOff >= 0 && fieldNumOff < fieldNums.length;");
           jint fgs = (jint) [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(fieldFlags)) getWithInt:fieldNumOff];
           [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(f)) setWithInt:i withLong:fgs];
         }
@@ -558,7 +588,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
     }
     totalTerms = sum;
   }
-  jint docOff = 0, docLen = 0, totalLen;
+  jint docOff = 0;
+  jint docLen = 0;
+  jint totalLen;
   IOSIntArray *fieldLengths = [IOSIntArray arrayWithLength:numFields];
   IOSObjectArray *prefixLengths = [IOSObjectArray arrayWithLength:numFields type:IOSClass_intArray(1)];
   IOSObjectArray *suffixLengths = [IOSObjectArray arrayWithLength:numFields type:IOSClass_intArray(1)];
@@ -618,7 +650,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
       }
     }
   }
-  jint totalPositions = 0, totalOffsets = 0, totalPayloads = 0;
+  jint totalPositions = 0;
+  jint totalOffsets = 0;
+  jint totalPayloads = 0;
   for (jint i = 0, termIndex = 0; i < totalFields; ++i) {
     jint f = (jint) [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(flags)) getWithInt:i];
     jint termCount = (jint) [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(numTerms)) getWithInt:i];
@@ -634,10 +668,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
         totalPayloads += freq;
       }
     }
-    JreAssert((i != totalFields - 1 || termIndex == totalTerms), (JreStrcat("ICI", termIndex, ' ', totalTerms)));
+    JreAssert(i != totalFields - 1 || termIndex == totalTerms, JreStrcat("ICI", termIndex, ' ', totalTerms));
   }
   IOSObjectArray *positionIndex = OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_positionIndexWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Reader_withIntArray_(self, skip, numFields, numTerms, termFreqs);
-  IOSObjectArray *positions, *startOffsets, *lengths;
+  IOSObjectArray *positions;
+  IOSObjectArray *startOffsets;
+  IOSObjectArray *lengths;
   if (totalPositions > 0) {
     positions = OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_readPositionsWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Reader_withOrgApacheLuceneUtilPackedPackedInts_Reader_withIntArray_withInt_withInt_withIntArray2_(self, skip, numFields, flags, numTerms, termFreqs, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_POSITIONS, totalPositions, positionIndex);
   }
@@ -730,7 +766,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
             ++posIdx;
           }
         }
-        JreAssert((posIdx == totalFreq), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:539 condition failed: assert posIdx == totalFreq;"));
+        JreAssert(posIdx == totalFreq, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:539 condition failed: assert posIdx == totalFreq;");
       }
       termIndex += termCount;
     }
@@ -748,7 +784,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
       }
       termIndex += termCount;
     }
-    JreAssert((termIndex == totalTerms), (JreStrcat("ICI", termIndex, ' ', totalTerms)));
+    JreAssert(termIndex == totalTerms, JreStrcat("ICI", termIndex, ' ', totalTerms));
   }
   OrgApacheLuceneUtilBytesRef *suffixBytes = create_OrgApacheLuceneUtilBytesRef_init();
   [((OrgApacheLuceneCodecsCompressingDecompressor *) nil_chk(decompressor_)) decompressWithOrgApacheLuceneStoreDataInput:vectorsStream_ withInt:totalLen + totalPayloadLength withInt:docOff + payloadOff withInt:docLen + payloadLen withOrgApacheLuceneUtilBytesRef:suffixBytes];
@@ -776,7 +812,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
       }
     }
   }
-  JreAssert((OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_sumWithIntArray_(fieldLengths) == docLen), (JreStrcat("I$I", OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_sumWithIntArray_(fieldLengths), @" != ", docLen)));
+  JreAssert(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_sumWithIntArray_(fieldLengths) == docLen, JreStrcat("I$I", OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_sumWithIntArray_(fieldLengths), @" != ", docLen));
   return create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_withIntArray_withIntArray_withIntArray_withIntArray_withIntArray_withIntArray2_withIntArray2_withIntArray2_withIntArray2_withIntArray2_withIntArray2_withIntArray2_withOrgApacheLuceneUtilBytesRef_withIntArray2_withOrgApacheLuceneUtilBytesRef_(self, fieldNums, fieldFlags, fieldNumOffs, fieldNumTerms, fieldLengths, prefixLengths, suffixLengths, fieldTermFreqs, positionIndex, positions, startOffsets, lengths, payloadBytes, payloadIndex, suffixBytes);
 }
 
@@ -815,7 +851,7 @@ withOrgApacheLuceneUtilPackedPackedInts_Reader:(OrgApacheLuceneUtilPackedPackedI
 }
 
 - (NSString *)description {
-  return JreStrcat("$$@$IC", [[self getClass] getSimpleName], @"(mode=", compressionMode_, @",chunksize=", chunkSize_, ')');
+  return JreStrcat("$$@$IC", [[self java_getClass] getSimpleName], @"(mode=", compressionMode_, @",chunksize=", chunkSize_, ')');
 }
 
 - (void)dealloc {
@@ -829,48 +865,74 @@ withOrgApacheLuceneUtilPackedPackedInts_Reader:(OrgApacheLuceneUtilPackedPackedI
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:", "CompressingTermVectorsReader", NULL, 0x2, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withNSString:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:withNSString:withOrgApacheLuceneCodecsCompressingCompressionMode:", "CompressingTermVectorsReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getCompressionMode", NULL, "Lorg.apache.lucene.codecs.compressing.CompressionMode;", 0x0, NULL, NULL },
-    { "getChunkSize", NULL, "I", 0x0, NULL, NULL },
-    { "getPackedIntsVersion", NULL, "I", 0x0, NULL, NULL },
-    { "getVersion", NULL, "I", 0x0, NULL, NULL },
-    { "getIndexReader", NULL, "Lorg.apache.lucene.codecs.compressing.CompressingStoredFieldsIndexReader;", 0x0, NULL, NULL },
-    { "getVectorsStream", NULL, "Lorg.apache.lucene.store.IndexInput;", 0x0, NULL, NULL },
-    { "getMaxPointer", NULL, "J", 0x0, NULL, NULL },
-    { "getNumChunks", NULL, "J", 0x0, NULL, NULL },
-    { "getNumDirtyChunks", NULL, "J", 0x0, NULL, NULL },
-    { "ensureOpen", NULL, "V", 0x2, "Lorg.apache.lucene.store.AlreadyClosedException;", NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "clone", NULL, "Lorg.apache.lucene.codecs.TermVectorsReader;", 0x1, NULL, NULL },
-    { "getWithInt:", "get", "Lorg.apache.lucene.index.Fields;", 0x1, "Ljava.io.IOException;", NULL },
-    { "positionIndexWithInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_Reader:withIntArray:", "positionIndex", "[[I", 0x2, NULL, NULL },
-    { "readPositionsWithInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_Reader:withOrgApacheLuceneUtilPackedPackedInts_Reader:withIntArray:withInt:withInt:withIntArray2:", "readPositions", "[[I", 0x2, "Ljava.io.IOException;", NULL },
-    { "sumWithIntArray:", "sum", "I", 0xa, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
-    { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCompressingCompressionMode;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneStoreIndexInput;", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, 3, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneCodecsTermVectorsReader;", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexFields;", 0x1, 5, 6, 2, -1, -1, -1 },
+    { NULL, "[[I", 0x2, 7, 8, -1, -1, -1, -1 },
+    { NULL, "[[I", 0x2, 9, 10, 2, -1, -1, -1 },
+    { NULL, "I", 0xa, 11, 12, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 13, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 14, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withNSString:withOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreIOContext:withNSString:withOrgApacheLuceneCodecsCompressingCompressionMode:);
+  methods[2].selector = @selector(getCompressionMode);
+  methods[3].selector = @selector(getChunkSize);
+  methods[4].selector = @selector(getPackedIntsVersion);
+  methods[5].selector = @selector(getVersion);
+  methods[6].selector = @selector(getIndexReader);
+  methods[7].selector = @selector(getVectorsStream);
+  methods[8].selector = @selector(getMaxPointer);
+  methods[9].selector = @selector(getNumChunks);
+  methods[10].selector = @selector(getNumDirtyChunks);
+  methods[11].selector = @selector(ensureOpen);
+  methods[12].selector = @selector(close);
+  methods[13].selector = @selector(java_clone);
+  methods[14].selector = @selector(getWithInt:);
+  methods[15].selector = @selector(positionIndexWithInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_Reader:withIntArray:);
+  methods[16].selector = @selector(readPositionsWithInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_Reader:withOrgApacheLuceneUtilPackedPackedInts_Reader:withIntArray:withInt:withInt:withIntArray2:);
+  methods[17].selector = @selector(sumWithIntArray:);
+  methods[18].selector = @selector(ramBytesUsed);
+  methods[19].selector = @selector(getChildResources);
+  methods[20].selector = @selector(checkIntegrity);
+  methods[21].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "fieldInfos_", NULL, 0x12, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexReader_", NULL, 0x10, "Lorg.apache.lucene.codecs.compressing.CompressingStoredFieldsIndexReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "vectorsStream_", NULL, 0x10, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "version__", "version", 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "packedIntsVersion_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "compressionMode_", NULL, 0x12, "Lorg.apache.lucene.codecs.compressing.CompressionMode;", NULL, NULL, .constantValue.asLong = 0 },
-    { "decompressor_", NULL, 0x12, "Lorg.apache.lucene.codecs.compressing.Decompressor;", NULL, NULL, .constantValue.asLong = 0 },
-    { "chunkSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numDocs_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "closed_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "reader_", NULL, 0x12, "Lorg.apache.lucene.util.packed.BlockPackedReaderIterator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "numChunks_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "numDirtyChunks_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxPointer_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "fieldInfos_", "LOrgApacheLuceneIndexFieldInfos;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "indexReader_", "LOrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "vectorsStream_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "version__", "I", .constantValue.asLong = 0, 0x12, 15, -1, -1, -1 },
+    { "packedIntsVersion_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "compressionMode_", "LOrgApacheLuceneCodecsCompressingCompressionMode;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "decompressor_", "LOrgApacheLuceneCodecsCompressingDecompressor;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "chunkSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numDocs_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "closed_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "reader_", "LOrgApacheLuceneUtilPackedBlockPackedReaderIterator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numChunks_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numDirtyChunks_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxPointer_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsReader$TVFields;", "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsReader$TVTerms;", "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsReader$TVTermsEnum;", "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsReader$TVPostingsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader = { 2, "CompressingTermVectorsReader", "org.apache.lucene.codecs.compressing", NULL, 0x11, 22, methods, 14, fields, 0, NULL, 4, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;", "LOrgApacheLuceneStoreDirectory;LOrgApacheLuceneIndexSegmentInfo;LNSString;LOrgApacheLuceneIndexFieldInfos;LOrgApacheLuceneStoreIOContext;LNSString;LOrgApacheLuceneCodecsCompressingCompressionMode;", "LJavaIoIOException;", "LOrgApacheLuceneStoreAlreadyClosedException;", "clone", "get", "I", "positionIndex", "IILOrgApacheLuceneUtilPackedPackedInts_Reader;[I", "readPositions", "IILOrgApacheLuceneUtilPackedPackedInts_Reader;LOrgApacheLuceneUtilPackedPackedInts_Reader;[III[[I", "sum", "[I", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "toString", "version", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields;LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTerms;LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum;LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader = { "CompressingTermVectorsReader", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x11, 22, 14, -1, 16, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;
 }
 
@@ -879,11 +941,11 @@ withOrgApacheLuceneUtilPackedPackedInts_Reader:(OrgApacheLuceneUtilPackedPackedI
 void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *self, OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *reader) {
   OrgApacheLuceneCodecsTermVectorsReader_init(self);
   JreStrongAssign(&self->fieldInfos_, ((OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *) nil_chk(reader))->fieldInfos_);
-  JreStrongAssign(&self->vectorsStream_, [((OrgApacheLuceneStoreIndexInput *) nil_chk(reader->vectorsStream_)) clone]);
-  JreStrongAssign(&self->indexReader_, [((OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *) nil_chk(reader->indexReader_)) clone]);
+  JreStrongAssign(&self->vectorsStream_, [((OrgApacheLuceneStoreIndexInput *) nil_chk(reader->vectorsStream_)) java_clone]);
+  JreStrongAssign(&self->indexReader_, [((OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *) nil_chk(reader->indexReader_)) java_clone]);
   self->packedIntsVersion_ = reader->packedIntsVersion_;
   JreStrongAssign(&self->compressionMode_, reader->compressionMode_);
-  JreStrongAssign(&self->decompressor_, [((OrgApacheLuceneCodecsCompressingDecompressor *) nil_chk(reader->decompressor_)) clone]);
+  JreStrongAssign(&self->decompressor_, [((OrgApacheLuceneCodecsCompressingDecompressor *) nil_chk(reader->decompressor_)) java_clone]);
   self->chunkSize_ = reader->chunkSize_;
   self->numDocs_ = reader->numDocs_;
   JreStrongAssignAndConsume(&self->reader_, new_OrgApacheLuceneUtilPackedBlockPackedReaderIterator_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withLong_(self->vectorsStream_, self->packedIntsVersion_, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_PACKED_BLOCK_SIZE, 0));
@@ -915,24 +977,24 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApa
   NSString *indexName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(segment, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_INDEX_EXTENSION);
   {
     OrgApacheLuceneStoreChecksumIndexInput *input = [((OrgApacheLuceneStoreDirectory *) nil_chk(d)) openChecksumInputWithNSString:indexName withOrgApacheLuceneStoreIOContext:context];
-    NSException *__primaryException1 = nil;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      NSException *priorE = nil;
+      JavaLangThrowable *priorE = nil;
       @try {
         NSString *codecNameIdx = JreStrcat("$$", formatName, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_CODEC_SFX_IDX);
         version_ = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(input, codecNameIdx, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_START, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CURRENT, [si getId], segmentSuffix);
-        JreAssert((OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(codecNameIdx, segmentSuffix) == [((OrgApacheLuceneStoreChecksumIndexInput *) nil_chk(input)) getFilePointer]), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:127 condition failed: assert CodecUtil.indexHeaderLength(codecNameIdx, segmentSuffix) == input.getFilePointer();"));
+        JreAssert(OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(codecNameIdx, segmentSuffix) == [((OrgApacheLuceneStoreChecksumIndexInput *) nil_chk(input)) getFilePointer], @"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:127 condition failed: assert CodecUtil.indexHeaderLength(codecNameIdx, segmentSuffix) == input.getFilePointer();");
         indexReader = create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_initWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneIndexSegmentInfo_(input, si);
         maxPointer = [input readVLong];
       }
-      @catch (NSException *exception) {
+      @catch (JavaLangThrowable *exception) {
         priorE = exception;
       }
       @finally {
-        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withNSException_(input, priorE);
+        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(input, priorE);
       }
     }
-    @catch (NSException *e) {
+    @catch (JavaLangThrowable *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -941,10 +1003,12 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApa
         if (__primaryException1 != nil) {
           @try {
             [input close];
-          } @catch (NSException *e) {
-            [__primaryException1 addSuppressedWithNSException:e];
           }
-        } else {
+          @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
+        }
+        else {
           [input close];
         }
       }
@@ -961,7 +1025,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApa
     if (version_ != version2) {
       @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"Version mismatch between stored fields index and data: ", version_, @" != ", version2), self->vectorsStream_);
     }
-    JreAssert((OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(codecNameDat, segmentSuffix) == [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->vectorsStream_)) getFilePointer]), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:150 condition failed: assert CodecUtil.indexHeaderLength(codecNameDat, segmentSuffix) == vectorsStream.getFilePointer();"));
+    JreAssert(OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(codecNameDat, segmentSuffix) == [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->vectorsStream_)) getFilePointer], @"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:150 condition failed: assert CodecUtil.indexHeaderLength(codecNameDat, segmentSuffix) == vectorsStream.getFilePointer();");
     jlong pos = [self->vectorsStream_ getFilePointer];
     if (version_ >= OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VERSION_CHUNK_STATS) {
       [self->vectorsStream_ seekWithLong:maxPointer];
@@ -1099,7 +1163,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
 }
 
 - (id<JavaUtilIterator>)iterator {
-  return create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(self);
+  return create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(self);
 }
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field {
@@ -1117,7 +1181,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
   if (idx == -1 || IOSIntArray_Get(nil_chk(numTerms_), idx) == 0) {
     return nil;
   }
-  jint fieldOff = 0, fieldLen = -1;
+  jint fieldOff = 0;
+  jint fieldLen = -1;
   for (jint i = 0; i < fieldNumOffs_->size_; ++i) {
     if (i < idx) {
       fieldOff += IOSIntArray_Get(nil_chk(fieldLengths_), i);
@@ -1127,7 +1192,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
       break;
     }
   }
-  JreAssert((fieldLen >= 0), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:737 condition failed: assert fieldLen >= 0;"));
+  JreAssert(fieldLen >= 0, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:737 condition failed: assert fieldLen >= 0;");
   return create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTerms_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_withInt_withInt_withIntArray_withIntArray_withIntArray_withIntArray_withIntArray_withIntArray_withIntArray_withIntArray_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(this$0_, IOSIntArray_Get(nil_chk(numTerms_), idx), IOSIntArray_Get(nil_chk(fieldFlags_), idx), IOSObjectArray_Get(nil_chk(prefixLengths_), idx), IOSObjectArray_Get(nil_chk(suffixLengths_), idx), IOSObjectArray_Get(nil_chk(termFreqs_), idx), IOSObjectArray_Get(nil_chk(positionIndex_), idx), IOSObjectArray_Get(nil_chk(positions_), idx), IOSObjectArray_Get(nil_chk(startOffsets_), idx), IOSObjectArray_Get(nil_chk(lengths_), idx), IOSObjectArray_Get(nil_chk(payloadIndex_), idx), payloadBytes_, create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(suffixBytes_))->bytes_, suffixBytes_->offset_ + fieldOff, fieldLen));
 }
 
@@ -1136,7 +1201,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -1160,31 +1225,40 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray2:withIntArray2:withIntArray2:withIntArray2:withIntArray2:withIntArray2:withIntArray2:withOrgApacheLuceneUtilBytesRef:withIntArray2:withOrgApacheLuceneUtilBytesRef:", "TVFields", NULL, 0x1, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTerms;", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray2:withIntArray2:withIntArray2:withIntArray2:withIntArray2:withIntArray2:withIntArray2:withOrgApacheLuceneUtilBytesRef:withIntArray2:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(termsWithNSString:);
+  methods[3].selector = @selector(size);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldNums_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldFlags_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldNumOffs_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "numTerms_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "fieldLengths_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixLengths_", NULL, 0x12, "[[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffixLengths_", NULL, 0x12, "[[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termFreqs_", NULL, 0x12, "[[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionIndex_", NULL, 0x12, "[[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positions_", NULL, 0x12, "[[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startOffsets_", NULL, 0x12, "[[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lengths_", NULL, 0x12, "[[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadIndex_", NULL, 0x12, "[[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffixBytes_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadBytes_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "fieldNums_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fieldFlags_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fieldNumOffs_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "numTerms_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "fieldLengths_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "prefixLengths_", "[[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "suffixLengths_", "[[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termFreqs_", "[[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "positionIndex_", "[[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "positions_", "[[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "startOffsets_", "[[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lengths_", "[[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payloadIndex_", "[[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "suffixBytes_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payloadBytes_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields = { 2, "TVFields", "org.apache.lucene.codecs.compressing", "CompressingTermVectorsReader", 0x2, 4, methods, 16, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;[I[I[I[I[I[[I[[I[[I[[I[[I[[I[[ILOrgApacheLuceneUtilBytesRef;[[ILOrgApacheLuceneUtilBytesRef;", "()Ljava/util/Iterator<Ljava/lang/String;>;", "terms", "LNSString;", "LJavaIoIOException;", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields = { "TVFields", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x2, 4, 16, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields;
 }
 
@@ -1220,7 +1294,12 @@ OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *create_Or
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields)
 
-@implementation OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1
+@implementation OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1
+
+- (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields:(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *)outer$ {
+  OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(self, outer$);
+  return self;
+}
 
 - (jboolean)hasNext {
   return i_ < ((IOSIntArray *) nil_chk(this$0_->fieldNumOffs_))->size_;
@@ -1231,16 +1310,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
     @throw create_JavaUtilNoSuchElementException_init();
   }
   jint fieldNum = IOSIntArray_Get(nil_chk(this$0_->fieldNums_), IOSIntArray_Get(nil_chk(this$0_->fieldNumOffs_), i_++));
-  return ((OrgApacheLuceneIndexFieldInfo *) nil_chk([((OrgApacheLuceneIndexFieldInfos *) nil_chk(this$0_->this$0_->fieldInfos_)) fieldInfoWithInt:fieldNum]))->name_;
+  return JreRetainedLocalValue(((OrgApacheLuceneIndexFieldInfo *) nil_chk([((OrgApacheLuceneIndexFieldInfos *) nil_chk(this$0_->this$0_->fieldInfos_)) fieldInfoWithInt:fieldNum]))->name_);
 }
 
 - (void)remove {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-- (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields:(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *)outer$ {
-  OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(self, outer$);
-  return self;
+- (void)forEachRemainingWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaUtilIterator_forEachRemainingWithJavaUtilFunctionConsumer_(self, arg0);
 }
 
 - (void)dealloc {
@@ -1249,38 +1327,44 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "hasNext", NULL, "Z", 0x1, NULL, NULL },
-    { "next", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "remove", NULL, "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields:);
+  methods[1].selector = @selector(hasNext);
+  methods[2].selector = @selector(next);
+  methods[3].selector = @selector(remove);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsReader$TVFields;", NULL, NULL, .constantValue.asLong = 0 },
-    { "i_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "this$0_", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "i_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields", "iterator" };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1 = { 2, "", "org.apache.lucene.codecs.compressing", "CompressingTermVectorsReader$TVFields", 0x8008, 4, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/util/Iterator<Ljava/lang/String;>;" };
-  return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1;
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields;", "iterator", "Ljava/lang/Object;Ljava/util/Iterator<Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1 = { "", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x8010, 4, 2, 0, -1, 1, 2, -1 };
+  return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1;
 }
 
 @end
 
-void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1 *self, OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$) {
+void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1 *self, OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   NSObject_init(self);
   self->i_ = 0;
 }
 
-OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1 *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1, initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_, outer$)
+OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1 *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1, initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_, outer$)
 }
 
-OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1 *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1, initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_, outer$)
+OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1 *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_1, initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_, outer$)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVFields_$1)
 
 @implementation OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTerms
 
@@ -1354,33 +1438,48 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:withInt:withInt:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "TVTerms", NULL, 0x0, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "size", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSumTotalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "getSumDocFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "getDocCount", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "hasFreqs", NULL, "Z", 0x1, NULL, NULL },
-    { "hasOffsets", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPositions", NULL, "Z", 0x1, NULL, NULL },
-    { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum;", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader:withInt:withInt:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(size);
+  methods[3].selector = @selector(getSumTotalTermFreq);
+  methods[4].selector = @selector(getSumDocFreq);
+  methods[5].selector = @selector(getDocCount);
+  methods[6].selector = @selector(hasFreqs);
+  methods[7].selector = @selector(hasOffsets);
+  methods[8].selector = @selector(hasPositions);
+  methods[9].selector = @selector(hasPayloads);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "numTerms_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "flags_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixLengths_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffixLengths_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termFreqs_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionIndex_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positions_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startOffsets_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lengths_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadIndex_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termBytes_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadBytes_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "numTerms_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "flags_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "prefixLengths_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "suffixLengths_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termFreqs_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "positionIndex_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "positions_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "startOffsets_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "lengths_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payloadIndex_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "termBytes_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payloadBytes_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTerms = { 2, "TVTerms", "org.apache.lucene.codecs.compressing", "CompressingTermVectorsReader", 0x2, 10, methods, 12, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;II[I[I[I[I[I[I[I[ILOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneUtilBytesRef;", "LJavaIoIOException;", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTerms = { "TVTerms", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0x2, 10, 12, 2, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTerms;
 }
 
@@ -1459,7 +1558,7 @@ withOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInp
     return nil;
   }
   else {
-    JreAssert((ord_ < numTerms_), (@"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:867 condition failed: assert ord < numTerms;"));
+    JreAssert(ord_ < numTerms_, @"org/apache/lucene/codecs/compressing/CompressingTermVectorsReader.java:867 condition failed: assert ord < numTerms;");
     ++ord_;
   }
   ((OrgApacheLuceneUtilBytesRef *) nil_chk(term_))->offset_ = 0;
@@ -1550,36 +1649,52 @@ withOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInp
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TVTermsEnum", NULL, 0x2, NULL, NULL },
-    { "resetWithInt:withInt:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:", "reset", "V", 0x0, NULL, NULL },
-    { "reset", NULL, "V", 0x0, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "ord", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "docFreq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "totalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x11, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermsEnum_SeekStatus;", 0x1, 3, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexPostingsEnum;", 0x11, 7, 8, 2, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(resetWithInt:withInt:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withIntArray:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:);
+  methods[2].selector = @selector(reset);
+  methods[3].selector = @selector(next);
+  methods[4].selector = @selector(seekCeilWithOrgApacheLuceneUtilBytesRef:);
+  methods[5].selector = @selector(seekExactWithLong:);
+  methods[6].selector = @selector(term);
+  methods[7].selector = @selector(ord);
+  methods[8].selector = @selector(docFreq);
+  methods[9].selector = @selector(totalTermFreq);
+  methods[10].selector = @selector(postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "numTerms_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startPos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ord_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefixLengths_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "suffixLengths_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termFreqs_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionIndex_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positions_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startOffsets_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lengths_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadIndex_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "in_", NULL, 0x2, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloads_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "term_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
+    { "numTerms_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "startPos_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "ord_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "prefixLengths_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "suffixLengths_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termFreqs_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "positionIndex_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "positions_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "startOffsets_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lengths_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payloadIndex_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "in_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payloads_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "term_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum = { 2, "TVTermsEnum", "org.apache.lucene.codecs.compressing", "CompressingTermVectorsReader", 0xa, 11, methods, 14, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "reset", "II[I[I[I[I[I[I[I[ILOrgApacheLuceneUtilBytesRef;LOrgApacheLuceneStoreByteArrayDataInput;", "LJavaIoIOException;", "seekCeil", "LOrgApacheLuceneUtilBytesRef;", "seekExact", "J", "postings", "LOrgApacheLuceneIndexPostingsEnum;I", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum = { "TVTermsEnum", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0xa, 11, 14, 9, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum;
 }
 
@@ -1722,34 +1837,52 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payloads
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TVPostingsEnum", NULL, 0x0, NULL, NULL },
-    { "resetWithInt:withInt:withIntArray:withIntArray:withIntArray:withOrgApacheLuceneUtilBytesRef:withIntArray:", "reset", "V", 0x1, NULL, NULL },
-    { "checkDoc", NULL, "V", 0x2, NULL, NULL },
-    { "checkPosition", NULL, "V", 0x2, NULL, NULL },
-    { "nextPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "startOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "endOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, 2, -1, -1, -1 },
+    { NULL, "I", 0x1, 3, 4, 2, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(resetWithInt:withInt:withIntArray:withIntArray:withIntArray:withOrgApacheLuceneUtilBytesRef:withIntArray:);
+  methods[2].selector = @selector(checkDoc);
+  methods[3].selector = @selector(checkPosition);
+  methods[4].selector = @selector(nextPosition);
+  methods[5].selector = @selector(startOffset);
+  methods[6].selector = @selector(endOffset);
+  methods[7].selector = @selector(getPayload);
+  methods[8].selector = @selector(freq);
+  methods[9].selector = @selector(docID);
+  methods[10].selector = @selector(nextDoc);
+  methods[11].selector = @selector(advanceWithInt:);
+  methods[12].selector = @selector(cost);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "doc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termFreq_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positionIndex_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "positions_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startOffsets_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lengths_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "payload_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadIndex_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "basePayloadOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "i_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "doc_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "termFreq_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "positionIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "positions_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "startOffsets_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "lengths_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "payload_", "LOrgApacheLuceneUtilBytesRef;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "payloadIndex_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "basePayloadOffset_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "i_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum = { 2, "TVPostingsEnum", "org.apache.lucene.codecs.compressing", "CompressingTermVectorsReader", 0xa, 13, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "reset", "II[I[I[ILOrgApacheLuceneUtilBytesRef;[I", "LJavaIoIOException;", "advance", "I", "LOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum = { "TVPostingsEnum", "org.apache.lucene.codecs.compressing", ptrTable, methods, fields, 7, 0xa, 13, 10, 5, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum;
 }
 

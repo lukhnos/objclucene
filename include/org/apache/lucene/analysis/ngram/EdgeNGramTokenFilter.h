@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter))
 #define OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_
 
@@ -25,41 +31,43 @@
 /*!
  @brief Tokenizes the given token into n-grams of given size(s).
  <p>
- This <code>TokenFilter</code> create n-grams from the beginning edge of a input token.
+  This <code>TokenFilter</code> create n-grams from the beginning edge of a input token. 
  <p><a name="match_version"></a>As of Lucene 4.4, this filter handles correctly
- supplementary characters.
+  supplementary characters.
  */
 @interface OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter : OrgApacheLuceneAnalysisTokenFilter
-
-+ (jint)DEFAULT_MAX_GRAM_SIZE;
-
-+ (jint)DEFAULT_MIN_GRAM_SIZE;
+@property (readonly, class) jint DEFAULT_MAX_GRAM_SIZE NS_SWIFT_NAME(DEFAULT_MAX_GRAM_SIZE);
+@property (readonly, class) jint DEFAULT_MIN_GRAM_SIZE NS_SWIFT_NAME(DEFAULT_MIN_GRAM_SIZE);
 
 #pragma mark Public
 
 /*!
  @brief Creates EdgeNGramTokenFilter that can generate n-grams in the sizes of the given range
- @param input <code>TokenStream</code> holding the input to be tokenized
+ @param input<code>TokenStream</code>  holding the input to be tokenized
  @param minGram the smallest n-gram to generate
  @param maxGram the largest n-gram to generate
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)minGram
-                                                   withInt:(jint)maxGram;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                             withInt:(jint)minGram
+                                                             withInt:(jint)maxGram;
 
 - (jboolean)incrementToken;
 
 - (void)reset;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter)
 
-inline jint OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_get_DEFAULT_MAX_GRAM_SIZE();
+inline jint OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_get_DEFAULT_MAX_GRAM_SIZE(void);
 #define OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_DEFAULT_MAX_GRAM_SIZE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter, DEFAULT_MAX_GRAM_SIZE, jint)
 
-inline jint OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_get_DEFAULT_MIN_GRAM_SIZE();
+inline jint OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_get_DEFAULT_MIN_GRAM_SIZE(void);
 #define OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_DEFAULT_MIN_GRAM_SIZE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter, DEFAULT_MIN_GRAM_SIZE, jint)
 
@@ -73,4 +81,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter")

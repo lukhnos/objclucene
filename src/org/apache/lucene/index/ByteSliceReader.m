@@ -3,29 +3,36 @@
 //  source: ./core/src/java/org/apache/lucene/index/ByteSliceReader.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/System.h"
 #include "org/apache/lucene/index/ByteSliceReader.h"
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/ByteBlockPool.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/ByteSliceReader must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexByteSliceReader
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneIndexByteSliceReader_initPackagePrivate(self);
+  return self;
+}
 
 - (void)init__WithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool
                                            withInt:(jint)startIndex
                                            withInt:(jint)endIndex {
-  JreAssert((endIndex - startIndex >= 0), (@"org/apache/lucene/index/ByteSliceReader.java:44 condition failed: assert endIndex-startIndex >= 0;"));
-  JreAssert((startIndex >= 0), (@"org/apache/lucene/index/ByteSliceReader.java:45 condition failed: assert startIndex >= 0;"));
-  JreAssert((endIndex >= 0), (@"org/apache/lucene/index/ByteSliceReader.java:46 condition failed: assert endIndex >= 0;"));
+  JreAssert(endIndex - startIndex >= 0, @"org/apache/lucene/index/ByteSliceReader.java:44 condition failed: assert endIndex-startIndex >= 0;");
+  JreAssert(startIndex >= 0, @"org/apache/lucene/index/ByteSliceReader.java:45 condition failed: assert startIndex >= 0;");
+  JreAssert(endIndex >= 0, @"org/apache/lucene/index/ByteSliceReader.java:46 condition failed: assert endIndex >= 0;");
   JreStrongAssign(&self->pool_, pool);
   self->endIndex_ = endIndex;
   level_ = 0;
-  bufferUpto_ = startIndex / OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
+  bufferUpto_ = JreIntDiv(startIndex, OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE);
   bufferOffset_ = bufferUpto_ * OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
   JreStrongAssign(&buffer_, IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool))->buffers_), bufferUpto_));
   upto_ = startIndex & OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_MASK;
@@ -37,13 +44,13 @@
 }
 
 - (jboolean)eof {
-  JreAssert((upto_ + bufferOffset_ <= endIndex_), (@"org/apache/lucene/index/ByteSliceReader.java:67 condition failed: assert upto + bufferOffset <= endIndex;"));
+  JreAssert(upto_ + bufferOffset_ <= endIndex_, @"org/apache/lucene/index/ByteSliceReader.java:67 condition failed: assert upto + bufferOffset <= endIndex;");
   return upto_ + bufferOffset_ == endIndex_;
 }
 
 - (jbyte)readByte {
-  JreAssert((![self eof]), (@"org/apache/lucene/index/ByteSliceReader.java:73 condition failed: assert !eof();"));
-  JreAssert((upto_ <= limit_), (@"org/apache/lucene/index/ByteSliceReader.java:74 condition failed: assert upto <= limit;"));
+  JreAssert(![self eof], @"org/apache/lucene/index/ByteSliceReader.java:73 condition failed: assert !eof();");
+  JreAssert(upto_ <= limit_, @"org/apache/lucene/index/ByteSliceReader.java:74 condition failed: assert upto <= limit;");
   if (upto_ == limit_) [self nextSlice];
   return IOSByteArray_Get(nil_chk(buffer_), upto_++);
 }
@@ -52,7 +59,7 @@
   jlong size = 0;
   while (true) {
     if (limit_ + bufferOffset_ == endIndex_) {
-      JreAssert((endIndex_ - bufferOffset_ >= upto_), (@"org/apache/lucene/index/ByteSliceReader.java:84 condition failed: assert endIndex - bufferOffset >= upto;"));
+      JreAssert(endIndex_ - bufferOffset_ >= upto_, @"org/apache/lucene/index/ByteSliceReader.java:84 condition failed: assert endIndex - bufferOffset >= upto;");
       [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeBytesWithByteArray:buffer_ withInt:upto_ withInt:limit_ - upto_];
       size += limit_ - upto_;
       break;
@@ -70,12 +77,12 @@
   jint nextIndex = (JreLShift32((IOSByteArray_Get(nil_chk(buffer_), limit_) & (jint) 0xff), 24)) + (JreLShift32((IOSByteArray_Get(buffer_, 1 + limit_) & (jint) 0xff), 16)) + (JreLShift32((IOSByteArray_Get(buffer_, 2 + limit_) & (jint) 0xff), 8)) + (IOSByteArray_Get(buffer_, 3 + limit_) & (jint) 0xff);
   level_ = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, NEXT_LEVEL_ARRAY)), level_);
   jint newSize = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, LEVEL_SIZE_ARRAY)), level_);
-  bufferUpto_ = nextIndex / OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
+  bufferUpto_ = JreIntDiv(nextIndex, OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE);
   bufferOffset_ = bufferUpto_ * OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
   JreStrongAssign(&buffer_, IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool_))->buffers_), bufferUpto_));
   upto_ = nextIndex & OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_MASK;
   if (nextIndex + newSize >= endIndex_) {
-    JreAssert((endIndex_ - nextIndex > 0), (@"org/apache/lucene/index/ByteSliceReader.java:114 condition failed: assert endIndex - nextIndex > 0;"));
+    JreAssert(endIndex_ - nextIndex > 0, @"org/apache/lucene/index/ByteSliceReader.java:114 condition failed: assert endIndex - nextIndex > 0;");
     limit_ = endIndex_ - bufferOffset_;
   }
   else {
@@ -102,13 +109,6 @@
   }
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexByteSliceReader_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 - (void)dealloc {
   RELEASE_(pool_);
   RELEASE_(buffer_);
@@ -116,41 +116,53 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init__WithOrgApacheLuceneUtilByteBlockPool:withInt:withInt:", "init", "V", 0x1, NULL, NULL },
-    { "eof", NULL, "Z", 0x1, NULL, NULL },
-    { "readByte", NULL, "B", 0x1, NULL, NULL },
-    { "writeToWithOrgApacheLuceneStoreDataOutput:", "writeTo", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "nextSlice", NULL, "V", 0x1, NULL, NULL },
-    { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, NULL, NULL },
-    { "init", "ByteSliceReader", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "B", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, 2, 3, 4, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(init__WithOrgApacheLuceneUtilByteBlockPool:withInt:withInt:);
+  methods[2].selector = @selector(eof);
+  methods[3].selector = @selector(readByte);
+  methods[4].selector = @selector(writeToWithOrgApacheLuceneStoreDataOutput:);
+  methods[5].selector = @selector(nextSlice);
+  methods[6].selector = @selector(readBytesWithByteArray:withInt:withInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "pool_", NULL, 0x0, "Lorg.apache.lucene.util.ByteBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferUpto_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "buffer_", NULL, 0x0, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "upto_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "limit_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "level_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "bufferOffset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endIndex_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "pool_", "LOrgApacheLuceneUtilByteBlockPool;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bufferUpto_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "buffer_", "[B", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "upto_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "limit_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "level_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "bufferOffset_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "endIndex_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexByteSliceReader = { 2, "ByteSliceReader", "org.apache.lucene.index", NULL, 0x10, 7, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "init", "LOrgApacheLuceneUtilByteBlockPool;II", "writeTo", "LOrgApacheLuceneStoreDataOutput;", "LJavaIoIOException;", "readBytes", "[BII" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexByteSliceReader = { "ByteSliceReader", "org.apache.lucene.index", ptrTable, methods, fields, 7, 0x10, 7, 8, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexByteSliceReader;
 }
 
 @end
 
-void OrgApacheLuceneIndexByteSliceReader_init(OrgApacheLuceneIndexByteSliceReader *self) {
+void OrgApacheLuceneIndexByteSliceReader_initPackagePrivate(OrgApacheLuceneIndexByteSliceReader *self) {
   OrgApacheLuceneStoreDataInput_init(self);
 }
 
-OrgApacheLuceneIndexByteSliceReader *new_OrgApacheLuceneIndexByteSliceReader_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexByteSliceReader, init)
+OrgApacheLuceneIndexByteSliceReader *new_OrgApacheLuceneIndexByteSliceReader_initPackagePrivate() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexByteSliceReader, initPackagePrivate)
 }
 
-OrgApacheLuceneIndexByteSliceReader *create_OrgApacheLuceneIndexByteSliceReader_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexByteSliceReader, init)
+OrgApacheLuceneIndexByteSliceReader *create_OrgApacheLuceneIndexByteSliceReader_initPackagePrivate() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexByteSliceReader, initPackagePrivate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexByteSliceReader)

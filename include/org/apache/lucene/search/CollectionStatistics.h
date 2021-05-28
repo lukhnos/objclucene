@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchCollectionStatistics
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchCollectionStatistics_) && (INCLUDE_ALL_OrgApacheLuceneSearchCollectionStatistics || defined(INCLUDE_OrgApacheLuceneSearchCollectionStatistics))
 #define OrgApacheLuceneSearchCollectionStatistics_
 
@@ -23,15 +29,15 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                        withLong:(jlong)maxDoc
-                        withLong:(jlong)docCount
-                        withLong:(jlong)sumTotalTermFreq
-                        withLong:(jlong)sumDocFreq;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                                  withLong:(jlong)maxDoc
+                                  withLong:(jlong)docCount
+                                  withLong:(jlong)sumTotalTermFreq
+                                  withLong:(jlong)sumDocFreq;
 
 /*!
  @brief returns the total number of documents that
- have at least one term for this field.
+  have at least one term for this field.
  - seealso: Terms#getDocCount()
  */
 - (jlong)docCount;
@@ -43,7 +49,7 @@
 
 /*!
  @brief returns the total number of documents, regardless of 
- whether they all contain values for this field.
+  whether they all contain values for this field.
  - seealso: IndexReader#maxDoc()
  */
 - (jlong)maxDoc;
@@ -60,6 +66,10 @@
  */
 - (jlong)sumTotalTermFreq;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCollectionStatistics)
@@ -74,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCollectionStatistics)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCollectionStatistics")

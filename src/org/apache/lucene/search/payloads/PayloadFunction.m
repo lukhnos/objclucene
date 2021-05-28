@@ -9,7 +9,18 @@
 #include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/payloads/PayloadFunction.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/payloads/PayloadFunction must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneSearchPayloadsPayloadFunction
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneSearchPayloadsPayloadFunction_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)currentScoreWithInt:(jint)docId
                  withNSString:(NSString *)field
@@ -36,7 +47,7 @@
                                         withNSString:(NSString *)field
                                              withInt:(jint)numPayloadsSeen
                                            withFloat:(jfloat)payloadScore {
-  return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([self docScoreWithInt:docId withNSString:field withInt:numPayloadsSeen withFloat:payloadScore], JreStrcat("$$", [[self getClass] getSimpleName], @".docScore()"), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
+  return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([self docScoreWithInt:docId withNSString:field withInt:numPayloadsSeen withFloat:payloadScore], JreStrcat("$$", [[self java_getClass] getSimpleName], @".docScore()"), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
 }
 
 - (NSUInteger)hash {
@@ -51,23 +62,27 @@
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneSearchPayloadsPayloadFunction_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "currentScoreWithInt:withNSString:withInt:withInt:withInt:withFloat:withFloat:", "currentScore", "F", 0x401, NULL, NULL },
-    { "docScoreWithInt:withNSString:withInt:withFloat:", "docScore", "F", 0x401, NULL, NULL },
-    { "explainWithInt:withNSString:withInt:withFloat:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x401, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x401, NULL, NULL },
-    { "init", "PayloadFunction", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchExplanation;", 0x1, 4, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, 5, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, 6, 7, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadFunction = { 2, "PayloadFunction", "org.apache.lucene.search.payloads", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(currentScoreWithInt:withNSString:withInt:withInt:withInt:withFloat:withFloat:);
+  methods[2].selector = @selector(docScoreWithInt:withNSString:withInt:withFloat:);
+  methods[3].selector = @selector(explainWithInt:withNSString:withInt:withFloat:);
+  methods[4].selector = @selector(hash);
+  methods[5].selector = @selector(isEqual:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "currentScore", "ILNSString;IIIFF", "docScore", "ILNSString;IF", "explain", "hashCode", "equals", "LNSObject;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadFunction = { "PayloadFunction", "org.apache.lucene.search.payloads", ptrTable, methods, NULL, 7, 0x401, 6, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchPayloadsPayloadFunction;
 }
 

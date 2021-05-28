@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_) && (INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy || defined(INCLUDE_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy))
 #define OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_
 
@@ -25,10 +31,10 @@
 
 /*!
  @brief A <code>QueryCachingPolicy</code> that tracks usage statistics of recently-used
- filters in order to decide on which filters are worth caching.
+  filters in order to decide on which filters are worth caching.
  It also uses some heuristics on segments, filters and the doc id sets that
- they produce in order to cache more aggressively when the execution cost
- significantly outweighs the caching overhead.
+  they produce in order to cache more aggressively when the execution cost
+  significantly outweighs the caching overhead.
  */
 @interface OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy : NSObject < OrgApacheLuceneSearchQueryCachingPolicy >
 
@@ -37,17 +43,17 @@
 /*!
  @brief Create a new instance with an history size of 256.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Create a new instance.
- @param minIndexSize              the minimum size of the top-level index
- @param minSizeRatio              the minimum size ratio for segments to be cached, see <code>QueryCachingPolicy.CacheOnLargeSegments</code>
- @param historySize               the number of recently used filters to track
+ @param minIndexSize the minimum size of the top-level index
+ @param minSizeRatio the minimum size ratio for segments to be cached, see <code>QueryCachingPolicy.CacheOnLargeSegments</code>
+ @param historySize the number of recently used filters to track
  */
-- (instancetype)initWithInt:(jint)minIndexSize
-                  withFloat:(jfloat)minSizeRatio
-                    withInt:(jint)historySize;
+- (instancetype __nonnull)initWithInt:(jint)minIndexSize
+                            withFloat:(jfloat)minSizeRatio
+                              withInt:(jint)historySize;
 
 - (void)onUseWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
@@ -58,7 +64,7 @@
 
 /*!
  @brief For a given query, return how many times it should appear in the history
- before being cached.
+  before being cached.
  */
 - (jint)minFrequencyToCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
@@ -86,12 +92,16 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *create_O
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init(OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *new_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *new_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *create_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *create_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy")

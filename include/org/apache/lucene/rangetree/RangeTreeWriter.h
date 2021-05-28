@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneRangetreeRangeTreeWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneRangetreeRangeTreeWriter_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeWriter || defined(INCLUDE_OrgApacheLuceneRangetreeRangeTreeWriter))
 #define OrgApacheLuceneRangetreeRangeTreeWriter_
 
@@ -21,35 +27,30 @@
 
 /*!
  @brief Recursively builds a 1d BKD tree to assign all incoming <code>long</code> values to smaller
- and smaller ranges until the number of points in a given
- range is &lt= the <code>maxPointsInLeafNode</code>.
- The tree is
- fully balanced, which means the leaf nodes will have between 50% and 100% of
- the requested <code>maxPointsInLeafNode</code>, except for the adversarial case
- of indexing exactly the same value many times.
+   and smaller ranges until the number of points in a given
+   range is &lt= the <code>maxPointsInLeafNode</code>.The tree is
+   fully balanced, which means the leaf nodes will have between 50% and 100% of
+   the requested <code>maxPointsInLeafNode</code>, except for the adversarial case
+   of indexing exactly the same value many times.
  <p>
- See <a href="https://www.cs.duke.edu/~pankaj/publications/papers/bkd-sstd.pdf">this paper</a> for details.
- <p>This consumes heap during writing: for any nodes with fewer than <code>maxPointsSortInHeap</code>, it holds
- the points in memory as simple java arrays.
+   See <a href="https://www.cs.duke.edu/~pankaj/publications/papers/bkd-sstd.pdf">this paper</a> for details.
+   <p>This consumes heap during writing: for any nodes with fewer than <code>maxPointsSortInHeap</code>, it holds
+   the points in memory as simple java arrays.  
  <p>
- <b>NOTE</b>: This can write at most Integer.MAX_VALUE * <code>maxPointsInLeafNode</code> total values,
- which should be plenty since a Lucene index can have at most Integer.MAX_VALUE-1 documents.
-  
+   <b>NOTE</b>: This can write at most Integer.MAX_VALUE * <code>maxPointsInLeafNode</code> total values,
+   which should be plenty since a Lucene index can have at most Integer.MAX_VALUE-1 documents.
  */
 @interface OrgApacheLuceneRangetreeRangeTreeWriter : NSObject
-
-+ (jint)BYTES_PER_DOC;
-
-+ (jint)DEFAULT_MAX_VALUES_IN_LEAF_NODE;
-
-+ (jint)DEFAULT_MAX_VALUES_SORT_IN_HEAP;
+@property (readonly, class) jint BYTES_PER_DOC NS_SWIFT_NAME(BYTES_PER_DOC);
+@property (readonly, class) jint DEFAULT_MAX_VALUES_IN_LEAF_NODE NS_SWIFT_NAME(DEFAULT_MAX_VALUES_IN_LEAF_NODE);
+@property (readonly, class) jint DEFAULT_MAX_VALUES_SORT_IN_HEAP NS_SWIFT_NAME(DEFAULT_MAX_VALUES_SORT_IN_HEAP);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
 
-- (instancetype)initWithInt:(jint)maxValuesInLeafNode
-                    withInt:(jint)maxValuesSortInHeap;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)maxValuesInLeafNode
+                                            withInt:(jint)maxValuesSortInHeap;
 
 /*!
  @brief Writes the 1d BKD tree to the provided <code>IndexOutput</code> and returns the file offset where index was written.
@@ -66,36 +67,40 @@
 
 - (id<OrgApacheLuceneRangetreeSliceWriter>)getWriterWithLong:(jlong)count;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeWriter)
 
-inline jint OrgApacheLuceneRangetreeRangeTreeWriter_get_BYTES_PER_DOC();
+inline jint OrgApacheLuceneRangetreeRangeTreeWriter_get_BYTES_PER_DOC(void);
 #define OrgApacheLuceneRangetreeRangeTreeWriter_BYTES_PER_DOC 20
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneRangetreeRangeTreeWriter, BYTES_PER_DOC, jint)
 
-inline jint OrgApacheLuceneRangetreeRangeTreeWriter_get_DEFAULT_MAX_VALUES_IN_LEAF_NODE();
+inline jint OrgApacheLuceneRangetreeRangeTreeWriter_get_DEFAULT_MAX_VALUES_IN_LEAF_NODE(void);
 #define OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_IN_LEAF_NODE 1024
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneRangetreeRangeTreeWriter, DEFAULT_MAX_VALUES_IN_LEAF_NODE, jint)
 
 /*!
  @brief This works out to max of ~10 MB peak heap tied up during writing:
  */
-inline jint OrgApacheLuceneRangetreeRangeTreeWriter_get_DEFAULT_MAX_VALUES_SORT_IN_HEAP();
+inline jint OrgApacheLuceneRangetreeRangeTreeWriter_get_DEFAULT_MAX_VALUES_SORT_IN_HEAP(void);
 #define OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_SORT_IN_HEAP 131072
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneRangetreeRangeTreeWriter, DEFAULT_MAX_VALUES_SORT_IN_HEAP, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeWriter_init(OrgApacheLuceneRangetreeRangeTreeWriter *self);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivate(OrgApacheLuceneRangetreeRangeTreeWriter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeWriter *new_OrgApacheLuceneRangetreeRangeTreeWriter_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeWriter *new_OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivate(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeWriter *create_OrgApacheLuceneRangetreeRangeTreeWriter_init();
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeWriter *create_OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivate(void);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(OrgApacheLuceneRangetreeRangeTreeWriter *self, jint maxValuesInLeafNode, jint maxValuesSortInHeap);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivateWithInt_withInt_(OrgApacheLuceneRangetreeRangeTreeWriter *self, jint maxValuesInLeafNode, jint maxValuesSortInHeap);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeWriter *new_OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeWriter *new_OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivateWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeWriter *create_OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap);
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeWriter *create_OrgApacheLuceneRangetreeRangeTreeWriter_initPackagePrivateWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap);
 
 FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeWriter_verifyParamsWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap);
 
@@ -103,4 +108,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeWriter")

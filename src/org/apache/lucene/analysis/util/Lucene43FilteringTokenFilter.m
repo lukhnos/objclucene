@@ -6,14 +6,16 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter () {
  @public
@@ -25,6 +27,8 @@
 @end
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter, posIncrAtt_, id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>)
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter__Annotations$0(void);
 
 @implementation OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter
 
@@ -74,28 +78,33 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
   first_ = true;
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 - (void)dealloc {
   RELEASE_(posIncrAtt_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:", "Lucene43FilteringTokenFilter", NULL, 0x1, NULL, NULL },
-    { "accept", NULL, "Z", 0x404, "Ljava.io.IOException;", NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "Z", 0x404, -1, -1, 1, -1, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, 1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, 1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:);
+  methods[1].selector = @selector(accept);
+  methods[2].selector = @selector(incrementToken);
+  methods[3].selector = @selector(reset);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "posIncrAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "enablePositionIncrements_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "first_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "posIncrAtt_", "LOrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "enablePositionIncrements_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "first_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter = { 2, "Lucene43FilteringTokenFilter", "org.apache.lucene.analysis.util", NULL, 0x401, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "ZLOrgApacheLuceneAnalysisTokenStream;", "LJavaIoIOException;", (void *)&OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter = { "Lucene43FilteringTokenFilter", "org.apache.lucene.analysis.util", ptrTable, methods, fields, 7, 0x401, 4, 3, -1, -1, -1, -1, 2 };
   return &_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter;
 }
 
@@ -106,6 +115,10 @@ void OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_initWithBoolean_wit
   JreStrongAssign(&self->posIncrAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
   self->first_ = true;
   self->enablePositionIncrements_ = enablePositionIncrements;
+}
+
+IOSObjectArray *OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter)

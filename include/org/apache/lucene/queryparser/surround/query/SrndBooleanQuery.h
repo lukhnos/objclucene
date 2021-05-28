@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery))
 #define OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_
 
@@ -34,24 +40,32 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)initPackagePrivate;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery)
 
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_initPackagePrivate(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_initPackagePrivate(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *create_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_initPackagePrivate(void);
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_addQueriesToBooleanWithOrgApacheLuceneSearchBooleanQuery_Builder_withJavaUtilList_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchBooleanQuery_Builder *bq, id<JavaUtilList> queries, OrgApacheLuceneSearchBooleanClause_Occur *occur);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_makeBooleanQueryWithJavaUtilList_withOrgApacheLuceneSearchBooleanClause_Occur_(id<JavaUtilList> queries, OrgApacheLuceneSearchBooleanClause_Occur *occur);
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_init(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *self);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *create_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery")

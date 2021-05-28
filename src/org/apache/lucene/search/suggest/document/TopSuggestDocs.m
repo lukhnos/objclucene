@@ -14,6 +14,10 @@
 #include "org/apache/lucene/search/suggest/document/SuggestScoreDocPriorityQueue.h"
 #include "org/apache/lucene/search/suggest/document/TopSuggestDocs.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/suggest/document/TopSuggestDocs must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
 
 OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_EMPTY;
@@ -40,25 +44,32 @@ withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray:(IOS
   return OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_mergeWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray_(topN, shardHits);
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;", 0x9, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray:withFloat:);
+  methods[1].selector = @selector(scoreLookupDocs);
+  methods[2].selector = @selector(mergeWithInt:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY", "LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;", .constantValue.asLong = 0, 0x19, -1, 3, -1, -1 },
+  };
+  static const void *ptrTable[] = { "I[LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;F", "merge", "I[LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;", &OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_EMPTY, "LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs = { "TopSuggestDocs", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, 4, -1, -1, -1 };
+  return &_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_EMPTY, new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(0, [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_class_()], 0));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray:withFloat:", "TopSuggestDocs", NULL, 0x1, NULL, NULL },
-    { "scoreLookupDocs", NULL, "[Lorg.apache.lucene.search.suggest.document.TopSuggestDocs$SuggestScoreDoc;", 0x1, NULL, NULL },
-    { "mergeWithInt:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray:", "merge", "Lorg.apache.lucene.search.suggest.document.TopSuggestDocs;", 0x9, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY", "EMPTY", 0x19, "Lorg.apache.lucene.search.suggest.document.TopSuggestDocs;", &OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_EMPTY, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.document.TopSuggestDocs$SuggestScoreDoc;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs = { 2, "TopSuggestDocs", "org.apache.lucene.search.suggest.document", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;
 }
 
 @end
@@ -77,7 +88,7 @@ OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *create_OrgApacheLuceneSearch
 
 OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_mergeWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray_(jint topN, IOSObjectArray *shardHits) {
   OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initialize();
-  OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *priorityQueue = create_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(topN);
+  OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *priorityQueue = create_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initPackagePrivateWithInt_(topN);
   {
     IOSObjectArray *a__ = shardHits;
     OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -90,7 +101,7 @@ OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *OrgApacheLuceneSearchSuggest
         OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc * const *e__ = b__ + a__->size_;
         while (b__ < e__) {
           OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *scoreDoc = *b__++;
-          if (scoreDoc == [priorityQueue insertWithOverflowWithId:scoreDoc]) {
+          if (JreObjectEqualsEquals(scoreDoc, [priorityQueue insertWithOverflowWithId:scoreDoc])) {
             break;
           }
         }
@@ -130,15 +141,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentTopSuggestD
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withJavaLangCharSequence:withJavaLangCharSequence:withFloat:", "SuggestScoreDoc", NULL, 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 1, 2, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withJavaLangCharSequence:withJavaLangCharSequence:withFloat:);
+  methods[1].selector = @selector(compareToWithId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "key_", NULL, 0x11, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "context_", NULL, 0x11, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
+    { "key_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
+    { "context_", "LJavaLangCharSequence;", .constantValue.asLong = 0, 0x11, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc = { 2, "SuggestScoreDoc", "org.apache.lucene.search.suggest.document", "TopSuggestDocs", 0x9, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Lorg/apache/lucene/search/ScoreDoc;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/document/TopSuggestDocs$SuggestScoreDoc;>;" };
+  static const void *ptrTable[] = { "ILJavaLangCharSequence;LJavaLangCharSequence;F", "compareTo", "LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;", "LOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;", "Lorg/apache/lucene/search/ScoreDoc;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/document/TopSuggestDocs$SuggestScoreDoc;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc = { "SuggestScoreDoc", "org.apache.lucene.search.suggest.document", ptrTable, methods, fields, 7, 0x9, 2, 2, 3, -1, -1, 4, -1 };
   return &_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;
 }
 

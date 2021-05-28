@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexIndexFileDeleter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexIndexFileDeleter_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexFileDeleter || defined(INCLUDE_OrgApacheLuceneIndexIndexFileDeleter))
 #define OrgApacheLuceneIndexIndexFileDeleter_
 
@@ -32,46 +38,42 @@
  @public
   jboolean startingCommitDeleted_;
 }
-
-+ (jboolean)VERBOSE_REF_COUNTS;
-
-+ (void)setVERBOSE_REF_COUNTS:(jboolean)value;
+@property (class) jboolean VERBOSE_REF_COUNTS NS_SWIFT_NAME(VERBOSE_REF_COUNTS);
 
 #pragma mark Public
 
 /*!
  @brief Initialize the deleter: find all previous commits in
- the Directory, incref the files they reference, call
- the policy to let it delete commits.
- This will remove
- any files not referenced by any of the commits.
- @throws IOException if there is a low-level IO error
+  the Directory, incref the files they reference, call
+  the policy to let it delete commits.This will remove
+  any files not referenced by any of the commits.
+ @throw IOExceptionif there is a low-level IO error
  */
-- (instancetype)initWithNSStringArray:(IOSObjectArray *)files
-    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directoryOrig
-    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
-withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)policy
- withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-    withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
-  withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                          withBoolean:(jboolean)initialIndexExists
-                          withBoolean:(jboolean)isReaderInit;
+- (instancetype __nonnull)initPackagePrivateWithNSStringArray:(IOSObjectArray *)files
+                            withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directoryOrig
+                            withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
+                  withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)policy
+                         withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
+                            withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
+                          withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
+                                                  withBoolean:(jboolean)initialIndexExists
+                                                  withBoolean:(jboolean)isReaderInit;
 
 /*!
  @brief For definition of "check point" see IndexWriter comments:
- "Clarification: Check Points (and commits)".
+  "Clarification: Check Points (and commits)".
  Writer calls this when it has made a "consistent
- change" to the index, meaning new files are written to
- the index and the in-memory SegmentInfos have been
- modified to point to those files.
- This may or may not be a commit (segments_N may or may
- not have been written).
- We simply incref the files referenced by the new
- SegmentInfos and decref the files we had previously
- seen (if any).
- If this is a commit, we also call the policy to give it
- a chance to remove other commits.  If any commits are
- removed, we decref their files as well.
+  change" to the index, meaning new files are written to
+  the index and the in-memory SegmentInfos have been
+  modified to point to those files.
+  This may or may not be a commit (segments_N may or may
+  not have been written).
+  We simply incref the files referenced by the new
+  SegmentInfos and decref the files we had previously
+  seen (if any).
+  If this is a commit, we also call the policy to give it
+  a chance to remove other commits.  If any commits are
+  removed, we decref their files as well.
  */
 - (void)checkpointWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
                                            withBoolean:(jboolean)isCommit;
@@ -95,13 +97,13 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
 
 /*!
  @brief Decrefs all provided files, ignoring any exceptions hit; call this if
- you are already handling an exception.
+   you are already handling an exception.
  */
 - (void)decRefWhileHandlingExceptionWithJavaUtilCollection:(id<JavaUtilCollection>)files;
 
 /*!
  @brief Deletes the specified files, but only if they are new
- (have not yet been incref'd).
+   (have not yet been incref'd).
  */
 - (void)deleteNewFilesWithJavaUtilCollection:(id<JavaUtilCollection>)files;
 
@@ -116,7 +118,7 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
 
 /*!
  @brief Set all gens beyond what we currently see in the directory, to avoid double-write in cases where the previous IndexWriter did not
- gracefully close/rollback (e.g. os/machine crashed or lost power).
+   gracefully close/rollback (e.g.os/machine crashed or lost power).
  */
 + (void)inflateGensWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                                  withJavaUtilCollection:(id<JavaUtilCollection>)files
@@ -128,25 +130,29 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
 
 /*!
  @brief Writer calls this when it has hit an error and had to
- roll back, to tell us that there may now be
- unreferenced files in the filesystem.
- So we re-list
- the filesystem and delete such files.  If segmentName
- is non-null, we will only delete files corresponding to
- that segment.
+  roll back, to tell us that there may now be
+  unreferenced files in the filesystem.So we re-list
+  the filesystem and delete such files.
+ If segmentName
+  is non-null, we will only delete files corresponding to
+  that segment.
  */
 - (void)refreshWithNSString:(NSString *)segmentName;
 
 /*!
- @brief Revisits the <code>IndexDeletionPolicy</code> by calling its
+ @brief Revisits the <code>IndexDeletionPolicy</code> by calling its 
  <code>IndexDeletionPolicy.onCommit(List)</code> again with the known commits.
  This is useful in cases where a deletion policy which holds onto index
- commits is used. The application may know that some commits are not held by
- the deletion policy anymore and call
+  commits is used. The application may know that some commits are not held by
+  the deletion policy anymore and call 
  <code>IndexWriter.deleteUnusedFiles()</code>, which will attempt to delete the
- unused commits again.
+  unused commits again.
  */
 - (void)revisitPolicy;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -154,20 +160,20 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexIndexFileDeleter)
 
 /*!
  @brief Change to true to see details of reference counts when
- infoStream is enabled
+   infoStream is enabled
  */
-inline jboolean OrgApacheLuceneIndexIndexFileDeleter_get_VERBOSE_REF_COUNTS();
+inline jboolean OrgApacheLuceneIndexIndexFileDeleter_get_VERBOSE_REF_COUNTS(void);
 inline jboolean OrgApacheLuceneIndexIndexFileDeleter_set_VERBOSE_REF_COUNTS(jboolean value);
-inline jboolean *OrgApacheLuceneIndexIndexFileDeleter_getRef_VERBOSE_REF_COUNTS();
+inline jboolean *OrgApacheLuceneIndexIndexFileDeleter_getRef_VERBOSE_REF_COUNTS(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT jboolean OrgApacheLuceneIndexIndexFileDeleter_VERBOSE_REF_COUNTS;
 J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneIndexIndexFileDeleter, VERBOSE_REF_COUNTS, jboolean)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexFileDeleter_initWithNSStringArray_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexIndexWriter_withBoolean_withBoolean_(OrgApacheLuceneIndexIndexFileDeleter *self, IOSObjectArray *files, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexIndexDeletionPolicy *policy, OrgApacheLuceneIndexSegmentInfos *segmentInfos, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneIndexIndexWriter *writer, jboolean initialIndexExists, jboolean isReaderInit);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexFileDeleter_initPackagePrivateWithNSStringArray_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexIndexWriter_withBoolean_withBoolean_(OrgApacheLuceneIndexIndexFileDeleter *self, IOSObjectArray *files, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexIndexDeletionPolicy *policy, OrgApacheLuceneIndexSegmentInfos *segmentInfos, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneIndexIndexWriter *writer, jboolean initialIndexExists, jboolean isReaderInit);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFileDeleter *new_OrgApacheLuceneIndexIndexFileDeleter_initWithNSStringArray_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexIndexWriter_withBoolean_withBoolean_(IOSObjectArray *files, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexIndexDeletionPolicy *policy, OrgApacheLuceneIndexSegmentInfos *segmentInfos, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneIndexIndexWriter *writer, jboolean initialIndexExists, jboolean isReaderInit) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFileDeleter *new_OrgApacheLuceneIndexIndexFileDeleter_initPackagePrivateWithNSStringArray_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexIndexWriter_withBoolean_withBoolean_(IOSObjectArray *files, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexIndexDeletionPolicy *policy, OrgApacheLuceneIndexSegmentInfos *segmentInfos, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneIndexIndexWriter *writer, jboolean initialIndexExists, jboolean isReaderInit) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFileDeleter *create_OrgApacheLuceneIndexIndexFileDeleter_initWithNSStringArray_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexIndexWriter_withBoolean_withBoolean_(IOSObjectArray *files, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexIndexDeletionPolicy *policy, OrgApacheLuceneIndexSegmentInfos *segmentInfos, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneIndexIndexWriter *writer, jboolean initialIndexExists, jboolean isReaderInit);
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFileDeleter *create_OrgApacheLuceneIndexIndexFileDeleter_initPackagePrivateWithNSStringArray_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexIndexWriter_withBoolean_withBoolean_(IOSObjectArray *files, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexIndexDeletionPolicy *policy, OrgApacheLuceneIndexSegmentInfos *segmentInfos, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneIndexIndexWriter *writer, jboolean initialIndexExists, jboolean isReaderInit);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexFileDeleter_inflateGensWithOrgApacheLuceneIndexSegmentInfos_withJavaUtilCollection_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexSegmentInfos *infos, id<JavaUtilCollection> files, OrgApacheLuceneUtilInfoStream *infoStream);
 
@@ -175,4 +181,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexFileDeleter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexFileDeleter")

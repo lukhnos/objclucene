@@ -19,12 +19,19 @@
 #include "java/util/Map.h"
 #include "java/util/NoSuchElementException.h"
 #include "java/util/Set.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/util/Attribute.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
 #include "org/apache/lucene/util/AttributeImpl.h"
 #include "org/apache/lucene/util/AttributeReflector.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/lukhnos/portmobile/lang/ClassValue.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/AttributeSource must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface OrgApacheLuceneUtilAttributeSource () {
  @public
@@ -46,7 +53,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAttributeSource, factory_, OrgApacheLucen
 /*!
  @brief a cache that stores all interfaces for known implementation classes for performance (slow reflection)
  */
-inline OrgLukhnosPortmobileLangClassValue *OrgApacheLuceneUtilAttributeSource_get_implInterfaces();
+inline OrgLukhnosPortmobileLangClassValue *OrgApacheLuceneUtilAttributeSource_get_implInterfaces(void);
 static OrgLukhnosPortmobileLangClassValue *OrgApacheLuceneUtilAttributeSource_implInterfaces;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAttributeSource, implInterfaces, OrgLukhnosPortmobileLangClassValue *)
 
@@ -60,11 +67,12 @@ __attribute__((unused)) static NSString *OrgApacheLuceneUtilAttributeSource_refl
 
 __attribute__((unused)) static void OrgApacheLuceneUtilAttributeSource_reflectWithWithOrgApacheLuceneUtilAttributeReflector_(OrgApacheLuceneUtilAttributeSource *self, id<OrgApacheLuceneUtilAttributeReflector> reflector);
 
-@interface OrgApacheLuceneUtilAttributeSource_$2 : NSObject < JavaUtilIterator > {
+@interface OrgApacheLuceneUtilAttributeSource_1 : NSObject < JavaUtilIterator > {
  @public
   OrgApacheLuceneUtilAttributeSource_State *state_;
-  OrgApacheLuceneUtilAttributeSource_State *val$initState_;
 }
+
+- (instancetype)initWithOrgApacheLuceneUtilAttributeSource_State:(OrgApacheLuceneUtilAttributeSource_State *)capture$0;
 
 - (void)remove;
 
@@ -72,67 +80,58 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAttributeSource_reflectWi
 
 - (jboolean)hasNext;
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeSource_State:(OrgApacheLuceneUtilAttributeSource_State *)capture$0;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAttributeSource_$2)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAttributeSource_1)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAttributeSource_$2, state_, OrgApacheLuceneUtilAttributeSource_State *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAttributeSource_$2, val$initState_, OrgApacheLuceneUtilAttributeSource_State *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAttributeSource_1, state_, OrgApacheLuceneUtilAttributeSource_State *)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilAttributeSource_$2_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_$2 *self, OrgApacheLuceneUtilAttributeSource_State *capture$0);
+__attribute__((unused)) static void OrgApacheLuceneUtilAttributeSource_1_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_1 *self, OrgApacheLuceneUtilAttributeSource_State *capture$0);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_$2 *new_OrgApacheLuceneUtilAttributeSource_$2_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_State *capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_1 *new_OrgApacheLuceneUtilAttributeSource_1_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_State *capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_$2 *create_OrgApacheLuceneUtilAttributeSource_$2_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_State *capture$0);
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_1 *create_OrgApacheLuceneUtilAttributeSource_1_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_State *capture$0);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeSource_$2)
-
-@interface OrgApacheLuceneUtilAttributeSource_$1 : OrgLukhnosPortmobileLangClassValue
-
-- (IOSObjectArray *)computeValueWithIOSClass:(IOSClass *)clazz;
+@interface OrgApacheLuceneUtilAttributeSource_2 : OrgLukhnosPortmobileLangClassValue
 
 - (instancetype)init;
 
+- (IOSObjectArray *)computeValueWithIOSClass:(IOSClass *)clazz;
+
+- (IOSObjectArray *)getWithIOSClass:(IOSClass *)arg0;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAttributeSource_$1)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAttributeSource_2)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilAttributeSource_$1_init(OrgApacheLuceneUtilAttributeSource_$1 *self);
+__attribute__((unused)) static void OrgApacheLuceneUtilAttributeSource_2_init(OrgApacheLuceneUtilAttributeSource_2 *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_$1 *new_OrgApacheLuceneUtilAttributeSource_$1_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_2 *new_OrgApacheLuceneUtilAttributeSource_2_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_$1 *create_OrgApacheLuceneUtilAttributeSource_$1_init();
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_2 *create_OrgApacheLuceneUtilAttributeSource_2_init(void);
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeSource_$1)
-
-@interface OrgApacheLuceneUtilAttributeSource_$3 : NSObject < OrgApacheLuceneUtilAttributeReflector > {
+@interface OrgApacheLuceneUtilAttributeSource_3 : NSObject < OrgApacheLuceneUtilAttributeReflector > {
  @public
   JavaLangStringBuilder *val$buffer_;
   jboolean val$prependAttClass_;
 }
 
+- (instancetype)initWithJavaLangStringBuilder:(JavaLangStringBuilder *)capture$0
+                                  withBoolean:(jboolean)capture$1;
+
 - (void)reflectWithIOSClass:(IOSClass *)attClass
                withNSString:(NSString *)key
                      withId:(id)value;
 
-- (instancetype)initWithJavaLangStringBuilder:(JavaLangStringBuilder *)capture$0
-                                  withBoolean:(jboolean)capture$1;
-
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAttributeSource_$3)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAttributeSource_3)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAttributeSource_$3, val$buffer_, JavaLangStringBuilder *)
+__attribute__((unused)) static void OrgApacheLuceneUtilAttributeSource_3_initWithJavaLangStringBuilder_withBoolean_(OrgApacheLuceneUtilAttributeSource_3 *self, JavaLangStringBuilder *capture$0, jboolean capture$1);
 
-__attribute__((unused)) static void OrgApacheLuceneUtilAttributeSource_$3_initWithJavaLangStringBuilder_withBoolean_(OrgApacheLuceneUtilAttributeSource_$3 *self, JavaLangStringBuilder *capture$0, jboolean capture$1);
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_3 *new_OrgApacheLuceneUtilAttributeSource_3_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_$3 *new_OrgApacheLuceneUtilAttributeSource_$3_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_$3 *create_OrgApacheLuceneUtilAttributeSource_$3_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1);
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeSource_$3)
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeSource_3 *create_OrgApacheLuceneUtilAttributeSource_3_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAttributeSource)
 
@@ -166,7 +165,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<JavaUtilIterator>)getAttributeImplsIterator {
   OrgApacheLuceneUtilAttributeSource_State *initState = OrgApacheLuceneUtilAttributeSource_getCurrentState(self);
   if (initState != nil) {
-    return create_OrgApacheLuceneUtilAttributeSource_$2_initWithOrgApacheLuceneUtilAttributeSource_State_(initState);
+    return create_OrgApacheLuceneUtilAttributeSource_1_initWithOrgApacheLuceneUtilAttributeSource_State_(initState);
   }
   else {
     return [((id<JavaUtilSet>) nil_chk(JavaUtilCollections_emptySet())) iterator];
@@ -181,8 +180,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   OrgApacheLuceneUtilAttributeSource_addAttributeImplWithOrgApacheLuceneUtilAttributeImpl_(self, att);
 }
 
-- (id)addAttributeWithIOSClass:(IOSClass *)attClass {
-  OrgApacheLuceneUtilAttributeImpl *attImpl = [((id<JavaUtilMap>) nil_chk(attributes_)) getWithId:attClass];
+- (id<OrgApacheLuceneUtilAttribute>)addAttributeWithIOSClass:(IOSClass *)attClass {
+  OrgApacheLuceneUtilAttributeImpl *attImpl = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(attributes_)) getWithId:attClass]);
   if (attImpl == nil) {
     if (!([((IOSClass *) nil_chk(attClass)) isInterface] && [OrgApacheLuceneUtilAttribute_class_() isAssignableFrom:attClass])) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"addAttribute() only accepts an interface that extends Attribute, but ", [attClass getName], @" does not fulfil this contract."));
@@ -200,7 +199,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((id<JavaUtilMap>) nil_chk(self->attributes_)) containsKeyWithId:attClass];
 }
 
-- (id)getAttributeWithIOSClass:(IOSClass *)attClass {
+- (id<OrgApacheLuceneUtilAttribute>)getAttributeWithIOSClass:(IOSClass *)attClass {
   return [((IOSClass *) nil_chk(attClass)) cast:[((id<JavaUtilMap>) nil_chk(attributes_)) getWithId:attClass]];
 }
 
@@ -216,15 +215,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilAttributeSource_State *)captureState {
   OrgApacheLuceneUtilAttributeSource_State *state = OrgApacheLuceneUtilAttributeSource_getCurrentState(self);
-  return (state == nil) ? nil : [((OrgApacheLuceneUtilAttributeSource_State *) nil_chk(state)) clone];
+  return (state == nil) ? nil : [((OrgApacheLuceneUtilAttributeSource_State *) nil_chk(state)) java_clone];
 }
 
 - (void)restoreStateWithOrgApacheLuceneUtilAttributeSource_State:(OrgApacheLuceneUtilAttributeSource_State *)state {
   if (state == nil) return;
   do {
-    OrgApacheLuceneUtilAttributeImpl *targetImpl = [((id<JavaUtilMap>) nil_chk(attributeImpls_)) getWithId:[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) getClass]];
+    OrgApacheLuceneUtilAttributeImpl *targetImpl = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(attributeImpls_)) getWithId:[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) java_getClass]]);
     if (targetImpl == nil) {
-      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"State contains AttributeImpl of type ", [[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) getClass] getName], @" that is not in in this AttributeSource"));
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"State contains AttributeImpl of type ", [[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) java_getClass] getName], @" that is not in in this AttributeSource"));
     }
     [((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) copyToWithOrgApacheLuceneUtilAttributeImpl:targetImpl];
     state = state->next_;
@@ -241,11 +240,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (obj == self) {
+  if (JreObjectEqualsEquals(obj, self)) {
     return true;
   }
   if ([obj isKindOfClass:[OrgApacheLuceneUtilAttributeSource class]]) {
-    OrgApacheLuceneUtilAttributeSource *other = (OrgApacheLuceneUtilAttributeSource *) cast_chk(obj, [OrgApacheLuceneUtilAttributeSource class]);
+    OrgApacheLuceneUtilAttributeSource *other = (OrgApacheLuceneUtilAttributeSource *) obj;
     if (OrgApacheLuceneUtilAttributeSource_hasAttributes(self)) {
       if (!OrgApacheLuceneUtilAttributeSource_hasAttributes(nil_chk(other))) {
         return false;
@@ -256,7 +255,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       OrgApacheLuceneUtilAttributeSource_State *thisState = OrgApacheLuceneUtilAttributeSource_getCurrentState(self);
       OrgApacheLuceneUtilAttributeSource_State *otherState = OrgApacheLuceneUtilAttributeSource_getCurrentState(other);
       while (thisState != nil && otherState != nil) {
-        if ([((OrgApacheLuceneUtilAttributeImpl *) nil_chk(otherState->attribute_)) getClass] != (id) [((OrgApacheLuceneUtilAttributeImpl *) nil_chk(thisState->attribute_)) getClass] || ![((OrgApacheLuceneUtilAttributeImpl *) nil_chk(otherState->attribute_)) isEqual:thisState->attribute_]) {
+        if (!JreObjectEqualsEquals([((OrgApacheLuceneUtilAttributeImpl *) nil_chk(otherState->attribute_)) java_getClass], [((OrgApacheLuceneUtilAttributeImpl *) nil_chk(thisState->attribute_)) java_getClass]) || ![((OrgApacheLuceneUtilAttributeImpl *) nil_chk(otherState->attribute_)) isEqual:thisState->attribute_]) {
           return false;
         }
         thisState = thisState->next_;
@@ -283,10 +282,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   OrgApacheLuceneUtilAttributeSource *clone = create_OrgApacheLuceneUtilAttributeSource_initWithOrgApacheLuceneUtilAttributeFactory_(self->factory_);
   if (OrgApacheLuceneUtilAttributeSource_hasAttributes(self)) {
     for (OrgApacheLuceneUtilAttributeSource_State *state = OrgApacheLuceneUtilAttributeSource_getCurrentState(self); state != nil; state = state->next_) {
-      [((id<JavaUtilMap>) nil_chk(clone->attributeImpls_)) putWithId:[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) getClass] withId:[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) clone]];
+      [((id<JavaUtilMap>) nil_chk(clone->attributeImpls_)) putWithId:[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) java_getClass] withId:[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) java_clone]];
     }
     for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(self->attributes_)) entrySet])) {
-      [clone->attributes_ putWithId:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withId:[((id<JavaUtilMap>) nil_chk(clone->attributeImpls_)) getWithId:[((OrgApacheLuceneUtilAttributeImpl *) nil_chk([entry_ getValue])) getClass]]];
+      [clone->attributes_ putWithId:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withId:[((id<JavaUtilMap>) nil_chk(clone->attributeImpls_)) getWithId:[((OrgApacheLuceneUtilAttributeImpl *) nil_chk([entry_ getValue])) java_getClass]]];
     }
   }
   return clone;
@@ -294,16 +293,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)target {
   for (OrgApacheLuceneUtilAttributeSource_State *state = OrgApacheLuceneUtilAttributeSource_getCurrentState(self); state != nil; state = state->next_) {
-    OrgApacheLuceneUtilAttributeImpl *targetImpl = [((id<JavaUtilMap>) nil_chk(((OrgApacheLuceneUtilAttributeSource *) nil_chk(target))->attributeImpls_)) getWithId:[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) getClass]];
+    OrgApacheLuceneUtilAttributeImpl *targetImpl = [((id<JavaUtilMap>) nil_chk(((OrgApacheLuceneUtilAttributeSource *) nil_chk(target))->attributeImpls_)) getWithId:[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) java_getClass]];
     if (targetImpl == nil) {
-      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"This AttributeSource contains AttributeImpl of type ", [[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) getClass] getName], @" that is not in the target"));
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"This AttributeSource contains AttributeImpl of type ", [[((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) java_getClass] getName], @" that is not in the target"));
     }
     [((OrgApacheLuceneUtilAttributeImpl *) nil_chk(state->attribute_)) copyToWithOrgApacheLuceneUtilAttributeImpl:targetImpl];
   }
 }
 
 - (NSString *)description {
-  return JreStrcat("$C$C$", [[self getClass] getSimpleName], '@', JavaLangInteger_toHexStringWithInt_(JavaLangSystem_identityHashCodeWithId_(self)), ' ', OrgApacheLuceneUtilAttributeSource_reflectAsStringWithBoolean_(self, false));
+  return JreStrcat("$C$C$", [[self java_getClass] getSimpleName], '@', JavaLangInteger_toHexStringWithInt_(JavaLangSystem_identityHashCodeWithId_(self)), ' ', OrgApacheLuceneUtilAttributeSource_reflectAsStringWithBoolean_(self, false));
 }
 
 - (void)dealloc {
@@ -314,49 +313,76 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneUtilAttributeSource class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAttributeSource_implInterfaces, new_OrgApacheLuceneUtilAttributeSource_$1_init());
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAttributeSource)
-  }
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeFactory;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x11, -1, -1, -1, 2, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x11, -1, -1, -1, 3, -1, -1 },
+    { NULL, "[LIOSClass;", 0x8, 4, 5, -1, 6, -1, -1 },
+    { NULL, "V", 0x11, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttribute;", 0x11, 9, 5, -1, 10, -1, -1 },
+    { NULL, "Z", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 11, 5, -1, 12, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttribute;", 0x11, 13, 5, -1, 10, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeSource_State;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeSource_State;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 14, 15, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 16, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, 19, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 21, 22, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeSource;", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 23, 0, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 24, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithOrgApacheLuceneUtilAttributeSource:);
+  methods[2].selector = @selector(initWithOrgApacheLuceneUtilAttributeFactory:);
+  methods[3].selector = @selector(getAttributeFactory);
+  methods[4].selector = @selector(getAttributeClassesIterator);
+  methods[5].selector = @selector(getAttributeImplsIterator);
+  methods[6].selector = @selector(getAttributeInterfacesWithIOSClass:);
+  methods[7].selector = @selector(addAttributeImplWithOrgApacheLuceneUtilAttributeImpl:);
+  methods[8].selector = @selector(addAttributeWithIOSClass:);
+  methods[9].selector = @selector(hasAttributes);
+  methods[10].selector = @selector(hasAttributeWithIOSClass:);
+  methods[11].selector = @selector(getAttributeWithIOSClass:);
+  methods[12].selector = @selector(getCurrentState);
+  methods[13].selector = @selector(clearAttributes);
+  methods[14].selector = @selector(captureState);
+  methods[15].selector = @selector(restoreStateWithOrgApacheLuceneUtilAttributeSource_State:);
+  methods[16].selector = @selector(hash);
+  methods[17].selector = @selector(isEqual:);
+  methods[18].selector = @selector(reflectAsStringWithBoolean:);
+  methods[19].selector = @selector(reflectWithWithOrgApacheLuceneUtilAttributeReflector:);
+  methods[20].selector = @selector(cloneAttributes);
+  methods[21].selector = @selector(copyToWithOrgApacheLuceneUtilAttributeSource:);
+  methods[22].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "attributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 25, -1 },
+    { "attributeImpls_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x12, -1, -1, 26, -1 },
+    { "currentState_", "[LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "factory_", "LOrgApacheLuceneUtilAttributeFactory;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "implInterfaces", "LOrgLukhnosPortmobileLangClassValue;", .constantValue.asLong = 0, 0x1a, -1, 27, 28, -1 },
+  };
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAttributeSource;", "LOrgApacheLuceneUtilAttributeFactory;", "()Ljava/util/Iterator<Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;>;", "()Ljava/util/Iterator<Lorg/apache/lucene/util/AttributeImpl;>;", "getAttributeInterfaces", "LIOSClass;", "(Ljava/lang/Class<+Lorg/apache/lucene/util/AttributeImpl;>;)[Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;", "addAttributeImpl", "LOrgApacheLuceneUtilAttributeImpl;", "addAttribute", "<T::Lorg/apache/lucene/util/Attribute;>(Ljava/lang/Class<TT;>;)TT;", "hasAttribute", "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;)Z", "getAttribute", "restoreState", "LOrgApacheLuceneUtilAttributeSource_State;", "hashCode", "equals", "LNSObject;", "reflectAsString", "Z", "reflectWith", "LOrgApacheLuceneUtilAttributeReflector;", "copyTo", "toString", "Ljava/util/Map<Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;Lorg/apache/lucene/util/AttributeImpl;>;", "Ljava/util/Map<Ljava/lang/Class<+Lorg/apache/lucene/util/AttributeImpl;>;Lorg/apache/lucene/util/AttributeImpl;>;", &OrgApacheLuceneUtilAttributeSource_implInterfaces, "Lorg/lukhnos/portmobile/lang/ClassValue<[Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeSource = { "AttributeSource", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x1, 23, 5, -1, 15, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilAttributeSource;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "AttributeSource", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeSource:", "AttributeSource", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "AttributeSource", NULL, 0x1, NULL, NULL },
-    { "getAttributeFactory", NULL, "Lorg.apache.lucene.util.AttributeFactory;", 0x11, NULL, NULL },
-    { "getAttributeClassesIterator", NULL, "Ljava.util.Iterator;", 0x11, NULL, "()Ljava/util/Iterator<Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;>;" },
-    { "getAttributeImplsIterator", NULL, "Ljava.util.Iterator;", 0x11, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/util/AttributeImpl;>;" },
-    { "getAttributeInterfacesWithIOSClass:", "getAttributeInterfaces", "[Ljava.lang.Class;", 0x8, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/AttributeImpl;>;)[Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;" },
-    { "addAttributeImplWithOrgApacheLuceneUtilAttributeImpl:", "addAttributeImpl", "V", 0x11, NULL, NULL },
-    { "addAttributeWithIOSClass:", "addAttribute", "TT;", 0x11, NULL, "<T::Lorg/apache/lucene/util/Attribute;>(Ljava/lang/Class<TT;>;)TT;" },
-    { "hasAttributes", NULL, "Z", 0x11, NULL, NULL },
-    { "hasAttributeWithIOSClass:", "hasAttribute", "Z", 0x11, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;)Z" },
-    { "getAttributeWithIOSClass:", "getAttribute", "TT;", 0x11, NULL, "<T::Lorg/apache/lucene/util/Attribute;>(Ljava/lang/Class<TT;>;)TT;" },
-    { "getCurrentState", NULL, "Lorg.apache.lucene.util.AttributeSource$State;", 0x2, NULL, NULL },
-    { "clearAttributes", NULL, "V", 0x11, NULL, NULL },
-    { "captureState", NULL, "Lorg.apache.lucene.util.AttributeSource$State;", 0x11, NULL, NULL },
-    { "restoreStateWithOrgApacheLuceneUtilAttributeSource_State:", "restoreState", "V", 0x11, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "reflectAsStringWithBoolean:", "reflectAsString", "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x11, NULL, NULL },
-    { "cloneAttributes", NULL, "Lorg.apache.lucene.util.AttributeSource;", 0x11, NULL, NULL },
-    { "copyToWithOrgApacheLuceneUtilAttributeSource:", "copyTo", "V", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "attributes_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;Lorg/apache/lucene/util/AttributeImpl;>;", .constantValue.asLong = 0 },
-    { "attributeImpls_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Class<+Lorg/apache/lucene/util/AttributeImpl;>;Lorg/apache/lucene/util/AttributeImpl;>;", .constantValue.asLong = 0 },
-    { "currentState_", NULL, 0x12, "[Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
-    { "factory_", NULL, 0x12, "Lorg.apache.lucene.util.AttributeFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "implInterfaces", "implInterfaces", 0x1a, "Lorg.lukhnos.portmobile.lang.ClassValue;", &OrgApacheLuceneUtilAttributeSource_implInterfaces, "Lorg/lukhnos/portmobile/lang/ClassValue<[Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;>;", .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.AttributeSource$State;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeSource = { 2, "AttributeSource", "org.apache.lucene.util", NULL, 0x1, 23, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
-  return &_OrgApacheLuceneUtilAttributeSource;
++ (void)initialize {
+  if (self == [OrgApacheLuceneUtilAttributeSource class]) {
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAttributeSource_implInterfaces, new_OrgApacheLuceneUtilAttributeSource_2_init());
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAttributeSource)
+  }
 }
 
 @end
@@ -414,7 +440,7 @@ IOSObjectArray *OrgApacheLuceneUtilAttributeSource_getAttributeInterfacesWithIOS
 }
 
 void OrgApacheLuceneUtilAttributeSource_addAttributeImplWithOrgApacheLuceneUtilAttributeImpl_(OrgApacheLuceneUtilAttributeSource *self, OrgApacheLuceneUtilAttributeImpl *att) {
-  IOSClass *clazz = [((OrgApacheLuceneUtilAttributeImpl *) nil_chk(att)) getClass];
+  IOSClass *clazz = [((OrgApacheLuceneUtilAttributeImpl *) nil_chk(att)) java_getClass];
   if ([((id<JavaUtilMap>) nil_chk(self->attributeImpls_)) containsKeyWithId:clazz]) return;
   {
     IOSObjectArray *a__ = OrgApacheLuceneUtilAttributeSource_getAttributeInterfacesWithIOSClass_(clazz);
@@ -453,7 +479,7 @@ OrgApacheLuceneUtilAttributeSource_State *OrgApacheLuceneUtilAttributeSource_get
 
 NSString *OrgApacheLuceneUtilAttributeSource_reflectAsStringWithBoolean_(OrgApacheLuceneUtilAttributeSource *self, jboolean prependAttClass) {
   JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
-  OrgApacheLuceneUtilAttributeSource_reflectWithWithOrgApacheLuceneUtilAttributeReflector_(self, create_OrgApacheLuceneUtilAttributeSource_$3_initWithJavaLangStringBuilder_withBoolean_(buffer, prependAttClass));
+  OrgApacheLuceneUtilAttributeSource_reflectWithWithOrgApacheLuceneUtilAttributeReflector_(self, create_OrgApacheLuceneUtilAttributeSource_3_initWithJavaLangStringBuilder_withBoolean_(buffer, prependAttClass));
   return [buffer description];
 }
 
@@ -467,15 +493,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource)
 
 @implementation OrgApacheLuceneUtilAttributeSource_State
 
-- (OrgApacheLuceneUtilAttributeSource_State *)clone {
-  OrgApacheLuceneUtilAttributeSource_State *clone = create_OrgApacheLuceneUtilAttributeSource_State_init();
-  JreStrongAssign(&clone->attribute_, [((OrgApacheLuceneUtilAttributeImpl *) nil_chk(attribute_)) clone]);
-  if (next_ != nil) {
-    JreStrongAssign(&clone->next_, [next_ clone]);
-  }
-  return clone;
-}
-
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAttributeSource_State_init(self);
@@ -483,27 +500,43 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (OrgApacheLuceneUtilAttributeSource_State *)java_clone {
+  OrgApacheLuceneUtilAttributeSource_State *clone = create_OrgApacheLuceneUtilAttributeSource_State_init();
+  JreStrongAssign(&clone->attribute_, [((OrgApacheLuceneUtilAttributeImpl *) nil_chk(attribute_)) java_clone]);
+  if (next_ != nil) {
+    JreStrongAssign(&clone->next_, [next_ java_clone]);
+  }
+  return clone;
+}
+
 - (void)dealloc {
   RELEASE_(attribute_);
   RELEASE_(next_);
   [super dealloc];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeSource_State;", 0x1, 0, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(java_clone);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "attribute_", "LOrgApacheLuceneUtilAttributeImpl;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "next_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "clone", "LOrgApacheLuceneUtilAttributeSource;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeSource_State = { "State", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x19, 2, 2, 1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneUtilAttributeSource_State;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "clone", NULL, "Lorg.apache.lucene.util.AttributeSource$State;", 0x1, NULL, NULL },
-    { "init", "State", NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "attribute_", NULL, 0x0, "Lorg.apache.lucene.util.AttributeImpl;", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x0, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeSource_State = { 2, "State", "org.apache.lucene.util", "AttributeSource", 0x19, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneUtilAttributeSource_State;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end
@@ -522,7 +555,12 @@ OrgApacheLuceneUtilAttributeSource_State *create_OrgApacheLuceneUtilAttributeSou
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource_State)
 
-@implementation OrgApacheLuceneUtilAttributeSource_$2
+@implementation OrgApacheLuceneUtilAttributeSource_1
+
+- (instancetype)initWithOrgApacheLuceneUtilAttributeSource_State:(OrgApacheLuceneUtilAttributeSource_State *)capture$0 {
+  OrgApacheLuceneUtilAttributeSource_1_initWithOrgApacheLuceneUtilAttributeSource_State_(self, capture$0);
+  return self;
+}
 
 - (void)remove {
   @throw create_JavaLangUnsupportedOperationException_init();
@@ -532,59 +570,68 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource_State)
   if (state_ == nil) @throw create_JavaUtilNoSuchElementException_init();
   OrgApacheLuceneUtilAttributeImpl *att = state_->attribute_;
   JreStrongAssign(&state_, state_->next_);
-  return att;
+  return JreRetainedLocalValue(att);
 }
 
 - (jboolean)hasNext {
   return state_ != nil;
 }
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeSource_State:(OrgApacheLuceneUtilAttributeSource_State *)capture$0 {
-  OrgApacheLuceneUtilAttributeSource_$2_initWithOrgApacheLuceneUtilAttributeSource_State_(self, capture$0);
-  return self;
+- (void)forEachRemainingWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaUtilIterator_forEachRemainingWithJavaUtilFunctionConsumer_(self, arg0);
 }
 
 - (void)dealloc {
   RELEASE_(state_);
-  RELEASE_(val$initState_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "remove", NULL, "V", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.AttributeImpl;", 0x1, NULL, NULL },
-    { "hasNext", NULL, "Z", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeSource_State:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilAttributeImpl;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneUtilAttributeSource_State:);
+  methods[1].selector = @selector(remove);
+  methods[2].selector = @selector(next);
+  methods[3].selector = @selector(hasNext);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "state_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$initState_", NULL, 0x1012, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
+    { "state_", "LOrgApacheLuceneUtilAttributeSource_State;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilAttributeSource", "getAttributeImplsIterator" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeSource_$2 = { 2, "", "org.apache.lucene.util", "AttributeSource", 0x8008, 4, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Ljava/util/Iterator<Lorg/apache/lucene/util/AttributeImpl;>;" };
-  return &_OrgApacheLuceneUtilAttributeSource_$2;
+  static const void *ptrTable[] = { "LOrgApacheLuceneUtilAttributeSource_State;", "LOrgApacheLuceneUtilAttributeSource;", "getAttributeImplsIterator", "Ljava/lang/Object;Ljava/util/Iterator<Lorg/apache/lucene/util/AttributeImpl;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeSource_1 = { "", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x8010, 4, 1, 1, -1, 2, 3, -1 };
+  return &_OrgApacheLuceneUtilAttributeSource_1;
 }
 
 @end
 
-void OrgApacheLuceneUtilAttributeSource_$2_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_$2 *self, OrgApacheLuceneUtilAttributeSource_State *capture$0) {
-  JreStrongAssign(&self->val$initState_, capture$0);
+void OrgApacheLuceneUtilAttributeSource_1_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_1 *self, OrgApacheLuceneUtilAttributeSource_State *capture$0) {
   NSObject_init(self);
-  JreStrongAssign(&self->state_, self->val$initState_);
+  JreStrongAssign(&self->state_, capture$0);
 }
 
-OrgApacheLuceneUtilAttributeSource_$2 *new_OrgApacheLuceneUtilAttributeSource_$2_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_State *capture$0) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeSource_$2, initWithOrgApacheLuceneUtilAttributeSource_State_, capture$0)
+OrgApacheLuceneUtilAttributeSource_1 *new_OrgApacheLuceneUtilAttributeSource_1_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_State *capture$0) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeSource_1, initWithOrgApacheLuceneUtilAttributeSource_State_, capture$0)
 }
 
-OrgApacheLuceneUtilAttributeSource_$2 *create_OrgApacheLuceneUtilAttributeSource_$2_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_State *capture$0) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeSource_$2, initWithOrgApacheLuceneUtilAttributeSource_State_, capture$0)
+OrgApacheLuceneUtilAttributeSource_1 *create_OrgApacheLuceneUtilAttributeSource_1_initWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneUtilAttributeSource_State *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeSource_1, initWithOrgApacheLuceneUtilAttributeSource_State_, capture$0)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource_$2)
+@implementation OrgApacheLuceneUtilAttributeSource_2
 
-@implementation OrgApacheLuceneUtilAttributeSource_$1
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  OrgApacheLuceneUtilAttributeSource_2_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSObjectArray *)computeValueWithIOSClass:(IOSClass *)clazz {
   id<JavaUtilSet> intfSet = create_JavaUtilLinkedHashSet_init();
@@ -595,7 +642,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource_$2)
       IOSClass * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
         IOSClass *curInterface = *b__++;
-        if (curInterface != OrgApacheLuceneUtilAttribute_class_() && [OrgApacheLuceneUtilAttribute_class_() isAssignableFrom:curInterface]) {
+        if (!JreObjectEqualsEquals(curInterface, OrgApacheLuceneUtilAttribute_class_()) && [OrgApacheLuceneUtilAttribute_class_() isAssignableFrom:curInterface]) {
           [intfSet addWithId:[((IOSClass *) nil_chk(curInterface)) asSubclass:OrgApacheLuceneUtilAttribute_class_()]];
         }
       }
@@ -604,48 +651,51 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource_$2)
   }
   while (clazz != nil);
   IOSObjectArray *a = [intfSet toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[intfSet size] type:IOSClass_class_()]];
-  return a;
+  return JreRetainedLocalValue(a);
 }
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneUtilAttributeSource_$1_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "computeValueWithIOSClass:", "computeValue", "[Ljava.lang.Class;", 0x4, NULL, "(Ljava/lang/Class<*>;)[Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;" },
-    { "init", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "[LIOSClass;", 0x4, 0, 1, -1, 2, -1, -1 },
   };
-  static const char *superclass_type_args[] = {"[Ljava.lang.Class;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeSource_$1 = { 2, "", "org.apache.lucene.util", "AttributeSource", 0x8008, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/lukhnos/portmobile/lang/ClassValue<[Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;>;" };
-  return &_OrgApacheLuceneUtilAttributeSource_$1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(computeValueWithIOSClass:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "computeValue", "LIOSClass;", "(Ljava/lang/Class<*>;)[Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;", "LOrgApacheLuceneUtilAttributeSource;", "Lorg/lukhnos/portmobile/lang/ClassValue<[Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeSource_2 = { "", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 3, -1, -1, 4, -1 };
+  return &_OrgApacheLuceneUtilAttributeSource_2;
 }
 
 @end
 
-void OrgApacheLuceneUtilAttributeSource_$1_init(OrgApacheLuceneUtilAttributeSource_$1 *self) {
+void OrgApacheLuceneUtilAttributeSource_2_init(OrgApacheLuceneUtilAttributeSource_2 *self) {
   OrgLukhnosPortmobileLangClassValue_init(self);
 }
 
-OrgApacheLuceneUtilAttributeSource_$1 *new_OrgApacheLuceneUtilAttributeSource_$1_init() {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeSource_$1, init)
+OrgApacheLuceneUtilAttributeSource_2 *new_OrgApacheLuceneUtilAttributeSource_2_init() {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeSource_2, init)
 }
 
-OrgApacheLuceneUtilAttributeSource_$1 *create_OrgApacheLuceneUtilAttributeSource_$1_init() {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeSource_$1, init)
+OrgApacheLuceneUtilAttributeSource_2 *create_OrgApacheLuceneUtilAttributeSource_2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeSource_2, init)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource_$1)
+@implementation OrgApacheLuceneUtilAttributeSource_3
 
-@implementation OrgApacheLuceneUtilAttributeSource_$3
+- (instancetype)initWithJavaLangStringBuilder:(JavaLangStringBuilder *)capture$0
+                                  withBoolean:(jboolean)capture$1 {
+  OrgApacheLuceneUtilAttributeSource_3_initWithJavaLangStringBuilder_withBoolean_(self, capture$0, capture$1);
+  return self;
+}
 
 - (void)reflectWithIOSClass:(IOSClass *)attClass
                withNSString:(NSString *)key
                      withId:(id)value {
-  if ([((JavaLangStringBuilder *) nil_chk(val$buffer_)) length] > 0) {
+  if ([((JavaLangStringBuilder *) nil_chk(val$buffer_)) java_length] > 0) {
     [val$buffer_ appendWithChar:','];
   }
   if (val$prependAttClass_) {
@@ -654,45 +704,43 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource_$1)
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([val$buffer_ appendWithNSString:key])) appendWithChar:'='])) appendWithId:(value == nil) ? @"null" : value];
 }
 
-- (instancetype)initWithJavaLangStringBuilder:(JavaLangStringBuilder *)capture$0
-                                  withBoolean:(jboolean)capture$1 {
-  OrgApacheLuceneUtilAttributeSource_$3_initWithJavaLangStringBuilder_withBoolean_(self, capture$0, capture$1);
-  return self;
-}
-
 - (void)dealloc {
   RELEASE_(val$buffer_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "reflectWithIOSClass:withNSString:withId:", "reflect", "V", 0x1, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;Ljava/lang/String;Ljava/lang/Object;)V" },
-    { "initWithJavaLangStringBuilder:withBoolean:", "", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, 3, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaLangStringBuilder:withBoolean:);
+  methods[1].selector = @selector(reflectWithIOSClass:withNSString:withId:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "val$buffer_", NULL, 0x1012, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "val$prependAttClass_", NULL, 0x1012, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "val$buffer_", "LJavaLangStringBuilder;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$prependAttClass_", "Z", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilAttributeSource", "reflectAsStringWithBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeSource_$3 = { 2, "", "org.apache.lucene.util", "AttributeSource", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilAttributeSource_$3;
+  static const void *ptrTable[] = { "LJavaLangStringBuilder;Z", "reflect", "LIOSClass;LNSString;LNSObject;", "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;Ljava/lang/String;Ljava/lang/Object;)V", "LOrgApacheLuceneUtilAttributeSource;", "reflectAsStringWithBoolean:" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeSource_3 = { "", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x8010, 2, 2, 4, -1, 5, -1, -1 };
+  return &_OrgApacheLuceneUtilAttributeSource_3;
 }
 
 @end
 
-void OrgApacheLuceneUtilAttributeSource_$3_initWithJavaLangStringBuilder_withBoolean_(OrgApacheLuceneUtilAttributeSource_$3 *self, JavaLangStringBuilder *capture$0, jboolean capture$1) {
+void OrgApacheLuceneUtilAttributeSource_3_initWithJavaLangStringBuilder_withBoolean_(OrgApacheLuceneUtilAttributeSource_3 *self, JavaLangStringBuilder *capture$0, jboolean capture$1) {
   JreStrongAssign(&self->val$buffer_, capture$0);
   self->val$prependAttClass_ = capture$1;
   NSObject_init(self);
 }
 
-OrgApacheLuceneUtilAttributeSource_$3 *new_OrgApacheLuceneUtilAttributeSource_$3_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeSource_$3, initWithJavaLangStringBuilder_withBoolean_, capture$0, capture$1)
+OrgApacheLuceneUtilAttributeSource_3 *new_OrgApacheLuceneUtilAttributeSource_3_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeSource_3, initWithJavaLangStringBuilder_withBoolean_, capture$0, capture$1)
 }
 
-OrgApacheLuceneUtilAttributeSource_$3 *create_OrgApacheLuceneUtilAttributeSource_$3_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeSource_$3, initWithJavaLangStringBuilder_withBoolean_, capture$0, capture$1)
+OrgApacheLuceneUtilAttributeSource_3 *create_OrgApacheLuceneUtilAttributeSource_3_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeSource_3, initWithJavaLangStringBuilder_withBoolean_, capture$0, capture$1)
 }
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource_$3)

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil))
 #define OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_
 
@@ -22,7 +28,7 @@
 
 /*!
  @brief Exposes a utility method to enumerate all paths
- intersecting an <code>Automaton</code> with an <code>FST</code>.
+  intersecting an <code>Automaton</code> with an <code>FST</code>.
  */
 @interface OrgApacheLuceneSearchSuggestAnalyzingFSTUtil : NSObject
 
@@ -30,7 +36,7 @@
 
 /*!
  @brief Enumerates all minimal prefix paths in the automaton that also intersect the FST,
- accumulating the FST end node and output for each path.
+  accumulating the FST end node and output for each path.
  */
 + (id<JavaUtilList>)intersectPrefixPathsWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                     withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst;
@@ -79,10 +85,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil)
 /*!
  @brief Sole constructor.
  */
-- (instancetype)initWithInt:(jint)state
-withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)fstNode
-                     withId:(id)output
+- (instancetype __nonnull)initWithInt:(jint)state
+    withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)fstNode
+                               withId:(id)output
 withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -102,4 +112,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil")

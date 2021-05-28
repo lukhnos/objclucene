@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder))
 #define OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_
 
@@ -30,7 +36,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
@@ -40,12 +46,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryB
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init(OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder")

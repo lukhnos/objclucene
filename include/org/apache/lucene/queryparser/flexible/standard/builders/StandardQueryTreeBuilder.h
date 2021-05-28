@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder))
 #define OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder_
 
@@ -28,10 +34,9 @@
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
 /*!
- @brief This query tree builder only defines the necessary map to build a
- <code>Query</code> tree object.
- It should be used to generate a <code>Query</code> tree
- object from a query node tree processed by a
+ @brief This query tree builder only defines the necessary map to build a 
+ <code>Query</code> tree object.It should be used to generate a <code>Query</code> tree
+  object from a query node tree processed by a 
  <code>StandardQueryNodeProcessorPipeline</code>.
  - seealso: QueryTreeBuilder
  - seealso: StandardQueryNodeProcessorPipeline
@@ -40,7 +45,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneSearchQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
@@ -50,12 +55,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardBuildersStand
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder_init(OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_
 
@@ -29,6 +35,7 @@
 #include "org/apache/lucene/queryparser/flexible/core/nodes/TextableQueryNode.h"
 
 @protocol JavaLangCharSequence;
+@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
 /*!
@@ -61,19 +68,15 @@
 #pragma mark Public
 
 /*!
- @param field
- - field name
- @param text
- - value
- @param begin
- - position in the query string
- @param end
- - position in the query string
+ @param field - field name
+ @param text - value
+ @param begin - position in the query string
+ @param end - position in the query string
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
+                              withJavaLangCharSequence:(id<JavaLangCharSequence>)text
+                                               withInt:(jint)begin
+                                               withInt:(jint)end;
 
 - (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)cloneTree;
 
@@ -104,6 +107,8 @@
 
 - (id<JavaLangCharSequence>)getValue;
 
+- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)java_clone;
+
 - (void)setBeginWithInt:(jint)begin;
 
 - (void)setEndWithInt:(jint)end;
@@ -113,8 +118,7 @@
 - (void)setPositionIncrementWithInt:(jint)pi;
 
 /*!
- @param text
- the text to set
+ @param text the text to set
  */
 - (void)setTextWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
@@ -129,6 +133,10 @@
 - (id<JavaLangCharSequence>)getTermEscapedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
 
 - (id<JavaLangCharSequence>)getTermEscapeQuotedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -147,4 +155,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQuery
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode")

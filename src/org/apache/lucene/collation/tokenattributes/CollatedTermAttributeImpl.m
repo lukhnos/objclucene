@@ -12,6 +12,10 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/collation/tokenattributes/CollatedTermAttributeImpl must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @interface OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl () {
  @public
   JavaTextCollator *collator_;
@@ -42,14 +46,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCollationTokenattributesCollatedTermAttribute
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaTextCollator:", "CollatedTermAttributeImpl", NULL, 0x1, NULL, NULL },
-    { "getBytesRef", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaTextCollator:);
+  methods[1].selector = @selector(getBytesRef);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "collator_", NULL, 0x12, "Ljava.text.Collator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "collator_", "LJavaTextCollator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl = { 2, "CollatedTermAttributeImpl", "org.apache.lucene.collation.tokenattributes", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LJavaTextCollator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl = { "CollatedTermAttributeImpl", "org.apache.lucene.collation.tokenattributes", ptrTable, methods, fields, 7, 0x1, 2, 1, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl;
 }
 
@@ -57,7 +68,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCollationTokenattributesCollatedTermAttribute
 
 void OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl_initWithJavaTextCollator_(OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl *self, JavaTextCollator *collator) {
   OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init(self);
-  JreStrongAssign(&self->collator_, (JavaTextCollator *) cast_chk([((JavaTextCollator *) nil_chk(collator)) clone], [JavaTextCollator class]));
+  JreStrongAssign(&self->collator_, (JavaTextCollator *) cast_chk([((JavaTextCollator *) nil_chk(collator)) java_clone], [JavaTextCollator class]));
 }
 
 OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl *new_OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl_initWithJavaTextCollator_(JavaTextCollator *collator) {

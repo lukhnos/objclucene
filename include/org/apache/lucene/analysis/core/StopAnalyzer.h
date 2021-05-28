@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreStopAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreStopAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisCoreStopAnalyzer))
 #define OrgApacheLuceneAnalysisCoreStopAnalyzer_
 
@@ -29,46 +35,45 @@
  @brief Filters <code>LetterTokenizer</code> with <code>LowerCaseFilter</code> and <code>StopFilter</code>.
  */
 @interface OrgApacheLuceneAnalysisCoreStopAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)ENGLISH_STOP_WORDS_SET;
+@property (readonly, class, strong) OrgApacheLuceneAnalysisUtilCharArraySet *ENGLISH_STOP_WORDS_SET NS_SWIFT_NAME(ENGLISH_STOP_WORDS_SET);
 
 #pragma mark Public
 
 /*!
  @brief Builds an analyzer which removes words in
- <code>ENGLISH_STOP_WORDS_SET</code>.
+   <code>ENGLISH_STOP_WORDS_SET</code>.
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Builds an analyzer with the stop words from the given set.
  @param stopWords Set of stop words
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
 
 /*!
  @brief Builds an analyzer with the stop words from the given path.
  - seealso: WordlistLoader#getWordSet(Reader)
  @param stopwordsFile File to load stop words from
  */
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)stopwordsFile;
+- (instancetype __nonnull)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)stopwordsFile;
 
 /*!
  @brief Builds an analyzer with the stop words from the given reader.
  - seealso: WordlistLoader#getWordSet(Reader)
  @param stopwords Reader to load stop words from
  */
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)stopwords;
+- (instancetype __nonnull)initWithJavaIoReader:(JavaIoReader *)stopwords;
 
 #pragma mark Protected
 
 /*!
  @brief Creates
- <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- used to tokenize all the text in the provided <code>Reader</code>.
+  <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+  used to tokenize all the text in the provided <code>Reader</code>.
  @return <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- built from a <code>LowerCaseTokenizer</code> filtered with
- <code>StopFilter</code>
+          built from a <code>LowerCaseTokenizer</code> filtered with
+          <code>StopFilter</code>
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
@@ -78,18 +83,18 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisCoreStopAnalyzer)
 
 /*!
  @brief An unmodifiable set containing some common English words that are not usually useful
- for searching.
+   for searching.
  */
-inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopAnalyzer_get_ENGLISH_STOP_WORDS_SET();
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopAnalyzer_get_ENGLISH_STOP_WORDS_SET(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCoreStopAnalyzer, ENGLISH_STOP_WORDS_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreStopAnalyzer_init(OrgApacheLuceneAnalysisCoreStopAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopAnalyzer *new_OrgApacheLuceneAnalysisCoreStopAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopAnalyzer *new_OrgApacheLuceneAnalysisCoreStopAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopAnalyzer *create_OrgApacheLuceneAnalysisCoreStopAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopAnalyzer *create_OrgApacheLuceneAnalysisCoreStopAnalyzer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCoreStopAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords);
 
@@ -113,4 +118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreStopAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopAnalyzer")

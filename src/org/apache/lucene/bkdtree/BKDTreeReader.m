@@ -3,10 +3,9 @@
 //  source: ./sandbox/src/java/org/apache/lucene/bkdtree/BKDTreeReader.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Double.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -25,6 +24,10 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
 @class OrgApacheLuceneBkdtreeBKDTreeReader_QueryState;
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/bkdtree/BKDTreeReader must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneBkdtreeBKDTreeReader () {
  @public
@@ -105,9 +108,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState)
 
 @implementation OrgApacheLuceneBkdtreeBKDTreeReader
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
-                                               withInt:(jint)maxDoc {
-  OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(self, inArg, maxDoc);
+- (instancetype)initPackagePrivateWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
+                                                             withInt:(jint)maxDoc {
+  OrgApacheLuceneBkdtreeBKDTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_(self, inArg, maxDoc);
   return self;
 }
 
@@ -141,7 +144,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState)
   jint latMaxEnc = OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(latMax);
   jint lonMinEnc = OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLonWithDouble_(lonMin);
   jint lonMaxEnc = OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLonWithDouble_(lonMax);
-  OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *state = create_OrgApacheLuceneBkdtreeBKDTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_([((OrgApacheLuceneStoreIndexInput *) nil_chk(in_)) clone], maxDoc_, latMinEnc, latMaxEnc, lonMinEnc, lonMaxEnc, filter, sndv);
+  OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *state = create_OrgApacheLuceneBkdtreeBKDTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_([((OrgApacheLuceneStoreIndexInput *) nil_chk(in_)) java_clone], maxDoc_, latMinEnc, latMaxEnc, lonMinEnc, lonMaxEnc, filter, sndv);
   jint hitCount = OrgApacheLuceneBkdtreeBKDTreeReader_intersectWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState_withInt_withInt_withInt_withInt_withInt_(self, state, 1, OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(-90.0), OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(JavaLangMath_nextAfterWithDouble_withDouble_(90.0, JavaLangDouble_POSITIVE_INFINITY)), OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLonWithDouble_(-180.0), OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLonWithDouble_(JavaLangMath_nextAfterWithDouble_withDouble_(180.0, JavaLangDouble_POSITIVE_INFINITY)));
   return [((OrgApacheLuceneUtilDocIdSetBuilder *) nil_chk(state->docs_)) buildWithLong:hitCount];
 }
@@ -176,30 +179,41 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState)
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:withInt:", "BKDTreeReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "intersectWithDouble:withDouble:withDouble:withDouble:withOrgApacheLuceneIndexSortedNumericDocValues:", "intersect", "Lorg.apache.lucene.search.DocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
-    { "intersectWithDouble:withDouble:withDouble:withDouble:withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter:withOrgApacheLuceneIndexSortedNumericDocValues:", "intersect", "Lorg.apache.lucene.search.DocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
-    { "addAllWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState:withInt:", "addAll", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "intersectWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState:withInt:withInt:withInt:withInt:withInt:", "intersect", "I", 0x2, "Ljava.io.IOException;", NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x1, 2, 3, 1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneSearchDocIdSet;", 0x1, 2, 4, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, 5, 6, 1, -1, -1, -1 },
+    { NULL, "I", 0x2, 2, 7, 1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x1, -1, -1, -1, 8, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivateWithOrgApacheLuceneStoreIndexInput:withInt:);
+  methods[1].selector = @selector(intersectWithDouble:withDouble:withDouble:withDouble:withOrgApacheLuceneIndexSortedNumericDocValues:);
+  methods[2].selector = @selector(intersectWithDouble:withDouble:withDouble:withDouble:withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter:withOrgApacheLuceneIndexSortedNumericDocValues:);
+  methods[3].selector = @selector(addAllWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState:withInt:);
+  methods[4].selector = @selector(intersectWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState:withInt:withInt:withInt:withInt:withInt:);
+  methods[5].selector = @selector(ramBytesUsed);
+  methods[6].selector = @selector(getChildResources);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "splitValues_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "leafNodeOffset_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "leafBlockFPs_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxDoc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
+    { "splitValues_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "leafNodeOffset_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "leafBlockFPs_", "[J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "maxDoc_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "in_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", "Lorg.apache.lucene.bkdtree.BKDTreeReader$LatLonFilter;", "Lorg.apache.lucene.bkdtree.BKDTreeReader$QueryState;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeReader = { 2, "BKDTreeReader", "org.apache.lucene.bkdtree", NULL, 0x10, 7, methods, 5, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;I", "LJavaIoIOException;", "intersect", "DDDDLOrgApacheLuceneIndexSortedNumericDocValues;", "DDDDLOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter;LOrgApacheLuceneIndexSortedNumericDocValues;", "addAll", "LOrgApacheLuceneBkdtreeBKDTreeReader_QueryState;I", "LOrgApacheLuceneBkdtreeBKDTreeReader_QueryState;IIIII", "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;", "LOrgApacheLuceneBkdtreeBKDTreeReader_Relation;LOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter;LOrgApacheLuceneBkdtreeBKDTreeReader_QueryState;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeReader = { "BKDTreeReader", "org.apache.lucene.bkdtree", ptrTable, methods, fields, 7, 0x10, 7, 5, -1, 9, -1, -1, -1 };
   return &_OrgApacheLuceneBkdtreeBKDTreeReader;
 }
 
 @end
 
-void OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader *self, OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc) {
+void OrgApacheLuceneBkdtreeBKDTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader *self, OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc) {
   NSObject_init(self);
   jint numLeaves = [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readVInt];
   self->leafNodeOffset_ = numLeaves;
@@ -215,12 +229,12 @@ void OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_
   JreStrongAssign(&self->in_, inArg);
 }
 
-OrgApacheLuceneBkdtreeBKDTreeReader *new_OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDTreeReader, initWithOrgApacheLuceneStoreIndexInput_withInt_, inArg, maxDoc)
+OrgApacheLuceneBkdtreeBKDTreeReader *new_OrgApacheLuceneBkdtreeBKDTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDTreeReader, initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_, inArg, maxDoc)
 }
 
-OrgApacheLuceneBkdtreeBKDTreeReader *create_OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc) {
-  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDTreeReader, initWithOrgApacheLuceneStoreIndexInput_withInt_, inArg, maxDoc)
+OrgApacheLuceneBkdtreeBKDTreeReader *create_OrgApacheLuceneBkdtreeBKDTreeReader_initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDTreeReader, initPackagePrivateWithOrgApacheLuceneStoreIndexInput_withInt_, inArg, maxDoc)
 }
 
 jint OrgApacheLuceneBkdtreeBKDTreeReader_addAllWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader *self, OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *state, jint nodeID) {
@@ -252,7 +266,7 @@ jint OrgApacheLuceneBkdtreeBKDTreeReader_addAllWithOrgApacheLuceneBkdtreeBKDTree
 jint OrgApacheLuceneBkdtreeBKDTreeReader_intersectWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState_withInt_withInt_withInt_withInt_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader *self, OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *state, jint nodeID, jint cellLatMinEnc, jint cellLatMaxEnc, jint cellLonMinEnc, jint cellLonMaxEnc) {
   if (((OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *) nil_chk(state))->latLonFilter_ != nil) {
     if (cellLatMinEnc > state->latMinEnc_ || cellLatMaxEnc < state->latMaxEnc_ || cellLonMinEnc > state->lonMinEnc_ || cellLonMaxEnc < state->lonMaxEnc_) {
-      OrgApacheLuceneBkdtreeBKDTreeReader_Relation *r = [state->latLonFilter_ compareWithDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLatWithInt_(cellLatMinEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLatWithInt_(cellLatMaxEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLonWithInt_(cellLonMinEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLonWithInt_(cellLonMaxEnc)];
+      OrgApacheLuceneBkdtreeBKDTreeReader_Relation *r = JreRetainedLocalValue([state->latLonFilter_ compareWithDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLatWithInt_(cellLatMinEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLatWithInt_(cellLatMaxEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLonWithInt_(cellLonMinEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLonWithInt_(cellLonMaxEnc)]);
       if (r == JreLoadEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE)) {
         return 0;
       }
@@ -316,7 +330,7 @@ jint OrgApacheLuceneBkdtreeBKDTreeReader_intersectWithOrgApacheLuceneBkdtreeBKDT
       }
     }
     else {
-      JreAssert((dim == 1), (@"org/apache/lucene/bkdtree/BKDTreeReader.java:339 condition failed: assert dim == 1;"));
+      JreAssert(dim == 1, @"org/apache/lucene/bkdtree/BKDTreeReader.java:339 condition failed: assert dim == 1;");
       if (state->lonMinEnc_ < splitValue) {
         count += OrgApacheLuceneBkdtreeBKDTreeReader_intersectWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState_withInt_withInt_withInt_withInt_withInt_(self, state, 2 * nodeID, cellLatMinEnc, cellLatMaxEnc, cellLonMinEnc, splitValue);
       }
@@ -360,8 +374,25 @@ OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReade
   return (OrgApacheLuceneBkdtreeBKDTreeReader_Relation_Enum)[self ordinal];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "[LOrgApacheLuceneBkdtreeBKDTreeReader_Relation;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneBkdtreeBKDTreeReader_Relation;", 0x9, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(values);
+  methods[1].selector = @selector(valueOfWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "INSIDE", "LOrgApacheLuceneBkdtreeBKDTreeReader_Relation;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
+    { "CROSSES", "LOrgApacheLuceneBkdtreeBKDTreeReader_Relation;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
+    { "OUTSIDE", "LOrgApacheLuceneBkdtreeBKDTreeReader_Relation;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+  };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, INSIDE), &JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, CROSSES), &JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE), "LOrgApacheLuceneBkdtreeBKDTreeReader;", "Ljava/lang/Enum<Lorg/apache/lucene/bkdtree/BKDTreeReader$Relation;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeReader_Relation = { "Relation", "org.apache.lucene.bkdtree", ptrTable, methods, fields, 7, 0x4018, 2, 3, 5, -1, -1, 6, -1 };
+  return &_OrgApacheLuceneBkdtreeBKDTreeReader_Relation;
 }
 
 + (void)initialize {
@@ -370,25 +401,12 @@ OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReade
     size_t allocSize = 3 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    (JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, INSIDE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initWithNSString_withInt_(e, @"INSIDE", 0);
-    (JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, CROSSES) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initWithNSString_withInt_(e, @"CROSSES", 1);
-    (JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
-    OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initWithNSString_withInt_(e, @"OUTSIDE", 2);
+    for (jint i = 0; i < 3; i++) {
+      ((void)(OrgApacheLuceneBkdtreeBKDTreeReader_Relation_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
+      OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initWithNSString_withInt_(e, JreEnumConstantName(OrgApacheLuceneBkdtreeBKDTreeReader_Relation_class_(), i), i);
+    }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneBkdtreeBKDTreeReader_Relation)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "INSIDE", "INSIDE", 0x4019, "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", &JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, INSIDE), NULL, .constantValue.asLong = 0 },
-    { "CROSSES", "CROSSES", 0x4019, "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", &JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, CROSSES), NULL, .constantValue.asLong = 0 },
-    { "OUTSIDE", "OUTSIDE", 0x4019, "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", &JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE), NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeReader_Relation = { 2, "Relation", "org.apache.lucene.bkdtree", "BKDTreeReader", 0x4018, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/bkdtree/BKDTreeReader$Relation;>;" };
-  return &_OrgApacheLuceneBkdtreeBKDTreeReader_Relation;
 }
 
 @end
@@ -410,7 +428,7 @@ OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReade
       return e;
     }
   }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
   return nil;
 }
 
@@ -427,11 +445,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDTreeReader_Relation)
 @implementation OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "acceptWithDouble:withDouble:", "accept", "Z", 0x401, NULL, NULL },
-    { "compareWithDouble:withDouble:withDouble:withDouble:", "compare", "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneBkdtreeBKDTreeReader_Relation;", 0x401, 2, 3, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter = { 2, "LatLonFilter", "org.apache.lucene.bkdtree", "BKDTreeReader", 0x608, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(acceptWithDouble:withDouble:);
+  methods[1].selector = @selector(compareWithDouble:withDouble:withDouble:withDouble:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "accept", "DD", "compare", "DDDD", "LOrgApacheLuceneBkdtreeBKDTreeReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter = { "LatLonFilter", "org.apache.lucene.bkdtree", ptrTable, methods, NULL, 7, 0x608, 2, 0, 4, -1, -1, -1, -1 };
   return &_OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter;
 }
 
@@ -464,22 +489,28 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDTreeReader_LatLonF
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:withInt:withInt:withInt:withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter:withOrgApacheLuceneIndexSortedNumericDocValues:", "QueryState", NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:withInt:withInt:withInt:withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter:withOrgApacheLuceneIndexSortedNumericDocValues:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratch_", NULL, 0x0, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "scratchReader_", NULL, 0x10, "Lorg.apache.lucene.store.ByteArrayDataInput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "docs_", NULL, 0x10, "Lorg.apache.lucene.util.DocIdSetBuilder;", NULL, NULL, .constantValue.asLong = 0 },
-    { "latMinEnc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "latMaxEnc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lonMinEnc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "lonMaxEnc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "latLonFilter_", NULL, 0x10, "Lorg.apache.lucene.bkdtree.BKDTreeReader$LatLonFilter;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sndv_", NULL, 0x10, "Lorg.apache.lucene.index.SortedNumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
+    { "in_", "LOrgApacheLuceneStoreIndexInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "scratch_", "[B", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "scratchReader_", "LOrgApacheLuceneStoreByteArrayDataInput;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "docs_", "LOrgApacheLuceneUtilDocIdSetBuilder;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "latMinEnc_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "latMaxEnc_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "lonMinEnc_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "lonMaxEnc_", "I", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "latLonFilter_", "LOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
+    { "sndv_", "LOrgApacheLuceneIndexSortedNumericDocValues;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeReader_QueryState = { 2, "QueryState", "org.apache.lucene.bkdtree", "BKDTreeReader", 0x1a, 1, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LOrgApacheLuceneStoreIndexInput;IIIIILOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter;LOrgApacheLuceneIndexSortedNumericDocValues;", "LOrgApacheLuceneBkdtreeBKDTreeReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeReader_QueryState = { "QueryState", "org.apache.lucene.bkdtree", ptrTable, methods, fields, 7, 0x1a, 1, 10, 1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneBkdtreeBKDTreeReader_QueryState;
 }
 

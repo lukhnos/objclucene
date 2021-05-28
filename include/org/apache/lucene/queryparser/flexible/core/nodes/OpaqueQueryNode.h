@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode))
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_
 
@@ -26,22 +32,19 @@
 
 /*!
  @brief A <code>OpaqueQueryNode</code> is used for specify values that are not supposed to
- be parsed by the parser.
- For example: and XPATH query in the middle of a
- query string a b @@xpath:'/bookstore/book[1]/title' c d
+  be parsed by the parser.For example: and XPATH query in the middle of a
+  query string a b @@xpath:'/bookstore/book[1]/title' c d
  */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
 
 /*!
- @param schema
- - schema identifier
- @param value
- - value that was not parsed
+ @param schema - schema identifier
+ @param value - value that was not parsed
  */
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)schema
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)value;
+- (instancetype __nonnull)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)schema
+                              withJavaLangCharSequence:(id<JavaLangCharSequence>)value;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
@@ -59,6 +62,10 @@
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode)
@@ -73,4 +80,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQuer
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode")

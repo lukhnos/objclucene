@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreSimpleAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreSimpleAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreSimpleAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisCoreSimpleAnalyzer))
 #define OrgApacheLuceneAnalysisCoreSimpleAnalyzer_
 
@@ -20,11 +26,12 @@
 #define INCLUDE_OrgApacheLuceneAnalysisAnalyzer 1
 #include "org/apache/lucene/analysis/Analyzer.h"
 
+@class OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 
 /*!
  @brief An <code>Analyzer</code> that filters <code>LetterTokenizer</code> 
- with <code>LowerCaseFilter</code>
+   with <code>LowerCaseFilter</code>
  */
 @interface OrgApacheLuceneAnalysisCoreSimpleAnalyzer : OrgApacheLuceneAnalysisAnalyzer
 
@@ -33,11 +40,15 @@
 /*!
  @brief Creates a new <code>SimpleAnalyzer</code>
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Protected
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -45,12 +56,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreSimpleAnalyzer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init(OrgApacheLuceneAnalysisCoreSimpleAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreSimpleAnalyzer *new_OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreSimpleAnalyzer *new_OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreSimpleAnalyzer *create_OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreSimpleAnalyzer *create_OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreSimpleAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreSimpleAnalyzer")

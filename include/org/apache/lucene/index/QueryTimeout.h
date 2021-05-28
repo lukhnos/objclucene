@@ -13,18 +13,24 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexQueryTimeout
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexQueryTimeout_) && (INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeout || defined(INCLUDE_OrgApacheLuceneIndexQueryTimeout))
 #define OrgApacheLuceneIndexQueryTimeout_
 
 /*!
  @brief Base for query timeout implementations, which will provide a <code>shouldExit()</code> method,
- used with <code>ExitableDirectoryReader</code>.
+  used with <code>ExitableDirectoryReader</code>.
  */
-@protocol OrgApacheLuceneIndexQueryTimeout < NSObject, JavaObject >
+@protocol OrgApacheLuceneIndexQueryTimeout < JavaObject >
 
 /*!
  @brief Called from <code>ExitableDirectoryReader.ExitableTermsEnum.next()</code> 
- to determine whether to stop processing a query.
+  to determine whether to stop processing a query.
  */
 - (jboolean)shouldExit;
 
@@ -36,4 +42,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexQueryTimeout)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeout")

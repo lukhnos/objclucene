@@ -16,6 +16,12 @@
 #define INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream))
 #define OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_
 
@@ -23,15 +29,17 @@
 #define INCLUDE_OrgApacheLuceneAnalysisTokenStream 1
 #include "org/apache/lucene/analysis/TokenStream.h"
 
+@class OrgApacheLuceneUtilAttributeFactory;
+@class OrgApacheLuceneUtilAttributeSource;
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 @class OrgApacheLuceneUtilBytesRef;
 
 /*!
  @brief Token stream which converts a provided token stream to an automaton.
- The accepted strings enumeration from the automaton are available through the
+ The accepted strings enumeration from the automaton are available through the 
  <code>org.apache.lucene.analysis.tokenattributes.TermToBytesRefAttribute</code> attribute
- The token stream uses a <code>org.apache.lucene.analysis.tokenattributes.PayloadAttribute</code> to store
- a completion's payload (see <code>CompletionTokenStream.setPayload(org.apache.lucene.util.BytesRef)</code>)
+  The token stream uses a <code>org.apache.lucene.analysis.tokenattributes.PayloadAttribute</code> to store
+  a completion's payload (see <code>CompletionTokenStream.setPayload(org.apache.lucene.util.BytesRef)</code>)
  */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream : OrgApacheLuceneAnalysisTokenStream {
  @public
@@ -57,7 +65,7 @@
 
 /*!
  @brief Converts the token stream to an automaton,
- treating the transition labels as utf-8
+  treating the transition labels as utf-8
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomaton;
 
@@ -70,17 +78,25 @@
 
 /*!
  @brief Creates a token stream to convert <code>input</code> to a token stream
- of accepted strings by its automaton.
+  of accepted strings by its automaton.
  <p>
- The token stream <code>input</code> is converted to an automaton
- with the default settings of <code>org.apache.lucene.search.suggest.document.CompletionAnalyzer</code>
+  The token stream <code>input</code> is converted to an automaton
+  with the default settings of <code>org.apache.lucene.search.suggest.document.CompletionAnalyzer</code>
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                               withBoolean:(jboolean)preserveSep
-                                               withBoolean:(jboolean)preservePositionIncrements
-                                                   withInt:(jint)maxGraphExpansions;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
+                                                         withBoolean:(jboolean)preserveSep
+                                                         withBoolean:(jboolean)preservePositionIncrements
+                                                             withInt:(jint)maxGraphExpansions;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -115,7 +131,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenSt
 /*!
  @brief Attribute providing access to the term builder and UTF-16 conversion
  */
-@protocol OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute < OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute < OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute, JavaObject >
 
 /*!
  @brief Returns the builder from which the term is derived.
@@ -160,15 +176,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenSt
 
 /*!
  @brief Sole constructor
- no-op
+  no-op
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgApacheLuceneUtilBytesRefBuilder *)builder;
 
 - (void)clear;
 
-- (OrgApacheLuceneUtilAttributeImpl *)clone;
+- (OrgApacheLuceneUtilAttributeImpl *)java_clone;
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target OBJC_METHOD_FAMILY_NONE;
 
@@ -184,12 +200,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStre
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init();
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream")

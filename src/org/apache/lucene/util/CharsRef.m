@@ -3,6 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/CharsRef.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -14,13 +15,28 @@
 #include "java/lang/annotation/Annotation.h"
 #include "java/util/Arrays.h"
 #include "java/util/Comparator.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
+#include "java/util/stream/IntStream.h"
 #include "org/apache/lucene/util/CharsRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/CharsRef must not be compiled with ARC (-fobjc-arc)"
+#endif
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 /*!
  */
-inline id<JavaUtilComparator> OrgApacheLuceneUtilCharsRef_get_utf16SortedAsUTF8SortOrder();
+inline id<JavaUtilComparator> OrgApacheLuceneUtilCharsRef_get_utf16SortedAsUTF8SortOrder(void);
 static id<JavaUtilComparator> OrgApacheLuceneUtilCharsRef_utf16SortedAsUTF8SortOrder;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilCharsRef, utf16SortedAsUTF8SortOrder, id<JavaUtilComparator>)
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneUtilCharsRef__Annotations$0(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneUtilCharsRef__Annotations$1(void);
 
 /*!
  */
@@ -37,9 +53,11 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator
 
 __attribute__((unused)) static void OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator_init(OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator *self);
 
-__attribute__((unused)) static OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator *new_OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator_init() NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator *new_OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator_init(void) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator *create_OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator_init();
+__attribute__((unused)) static OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator *create_OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator_init(void);
+
+__attribute__((unused)) static IOSObjectArray *OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator__Annotations$0(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator)
 
@@ -77,7 +95,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (OrgApacheLuceneUtilCharsRef *)clone {
+- (OrgApacheLuceneUtilCharsRef *)java_clone {
   return create_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(chars_, offset_, length_);
 }
 
@@ -96,7 +114,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return false;
   }
   if ([other isKindOfClass:[OrgApacheLuceneUtilCharsRef class]]) {
-    return [self charsEqualsWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *) cast_chk(other, [OrgApacheLuceneUtilCharsRef class])];
+    return [self charsEqualsWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *) other];
   }
   return false;
 }
@@ -120,7 +138,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilCharsRef *)other {
   cast_chk(other, [OrgApacheLuceneUtilCharsRef class]);
-  if (self == other) return 0;
+  if (JreObjectEqualsEquals(self, other)) return 0;
   IOSCharArray *aChars = self->chars_;
   jint aUpto = self->offset_;
   IOSCharArray *bChars = ((OrgApacheLuceneUtilCharsRef *) nil_chk(other))->chars_;
@@ -140,10 +158,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  return [NSString stringWithCharacters:chars_ offset:offset_ length:length_];
+  return [NSString java_stringWithCharacters:chars_ offset:offset_ length:length_];
 }
 
-- (jint)length {
+- (jint)java_length {
   return length_;
 }
 
@@ -195,12 +213,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return true;
 }
 
-+ (IOSObjectArray *)__annotations_utf16SortedAsUTF8SortOrder_ {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+- (id<JavaUtilStreamIntStream>)chars {
+  return JavaLangCharSequence_chars(self);
 }
 
-+ (IOSObjectArray *)__annotations_getUTF16SortedAsUTF8Comparator {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+- (id<JavaUtilStreamIntStream>)codePoints {
+  return JavaLangCharSequence_codePoints(self);
 }
 
 - (void)dealloc {
@@ -208,8 +226,59 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilCharsRef;", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 9, 8, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 10, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 11, -1, -1, -1, -1, -1 },
+    { NULL, "C", 0x1, 12, 0, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilComparator;", 0x9, -1, -1, -1, 15, 16, -1 },
+    { NULL, "LOrgApacheLuceneUtilCharsRef;", 0x9, 17, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:);
+  methods[2].selector = @selector(initWithCharArray:withInt:withInt:);
+  methods[3].selector = @selector(initWithNSString:);
+  methods[4].selector = @selector(java_clone);
+  methods[5].selector = @selector(hash);
+  methods[6].selector = @selector(isEqual:);
+  methods[7].selector = @selector(charsEqualsWithOrgApacheLuceneUtilCharsRef:);
+  methods[8].selector = @selector(compareToWithId:);
+  methods[9].selector = @selector(description);
+  methods[10].selector = @selector(java_length);
+  methods[11].selector = @selector(charAtWithInt:);
+  methods[12].selector = @selector(subSequenceFrom:to:);
+  methods[13].selector = @selector(getUTF16SortedAsUTF8Comparator);
+  methods[14].selector = @selector(deepCopyOfWithOrgApacheLuceneUtilCharsRef:);
+  methods[15].selector = @selector(isValid);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_CHARS", "[C", .constantValue.asLong = 0, 0x19, -1, 18, -1, -1 },
+    { "chars_", "[C", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "offset_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "length_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "utf16SortedAsUTF8SortOrder", "LJavaUtilComparator;", .constantValue.asLong = 0, 0x1a, -1, 19, 20, 21 },
+  };
+  static const void *ptrTable[] = { "I", "[CII", "LNSString;", "clone", "hashCode", "equals", "LNSObject;", "charsEquals", "LOrgApacheLuceneUtilCharsRef;", "compareTo", "toString", "length", "charAt", "subSequence", "II", "()Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;", (void *)&OrgApacheLuceneUtilCharsRef__Annotations$0, "deepCopyOf", &OrgApacheLuceneUtilCharsRef_EMPTY_CHARS, &OrgApacheLuceneUtilCharsRef_utf16SortedAsUTF8SortOrder, "Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;", (void *)&OrgApacheLuceneUtilCharsRef__Annotations$1, "LOrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator;", "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/CharsRef;>;Ljava/lang/CharSequence;Ljava/lang/Cloneable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilCharsRef = { "CharsRef", "org.apache.lucene.util", ptrTable, methods, fields, 7, 0x11, 16, 5, -1, 22, -1, 23, -1 };
+  return &_OrgApacheLuceneUtilCharsRef;
+}
+
 - (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
+  return [[self java_clone] retain];
 }
 
 + (void)initialize {
@@ -218,37 +287,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilCharsRef_utf16SortedAsUTF8SortOrder, new_OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilCharsRef)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "CharsRef", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "CharsRef", NULL, 0x1, NULL, NULL },
-    { "initWithCharArray:withInt:withInt:", "CharsRef", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:", "CharsRef", NULL, 0x1, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "charsEqualsWithOrgApacheLuceneUtilCharsRef:", "charsEquals", "Z", 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "charAtWithInt:", "charAt", "C", 0x1, NULL, NULL },
-    { "subSequenceFrom:to:", "subSequence", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "getUTF16SortedAsUTF8Comparator", NULL, "Ljava.util.Comparator;", 0x9, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;" },
-    { "deepCopyOfWithOrgApacheLuceneUtilCharsRef:", "deepCopyOf", "Lorg.apache.lucene.util.CharsRef;", 0x9, NULL, NULL },
-    { "isValid", NULL, "Z", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_CHARS", "EMPTY_CHARS", 0x19, "[C", &OrgApacheLuceneUtilCharsRef_EMPTY_CHARS, NULL, .constantValue.asLong = 0 },
-    { "chars_", NULL, 0x1, "[C", NULL, NULL, .constantValue.asLong = 0 },
-    { "offset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "length_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "utf16SortedAsUTF8SortOrder", "utf16SortedAsUTF8SortOrder", 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilCharsRef_utf16SortedAsUTF8SortOrder, "Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
-  };
-  static const char *inner_classes[] = {"Lorg.apache.lucene.util.CharsRef$UTF16SortedAsUTF8Comparator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilCharsRef = { 2, "CharsRef", "org.apache.lucene.util", NULL, 0x11, 16, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/CharsRef;>;Ljava/lang/CharSequence;Ljava/lang/Cloneable;" };
-  return &_OrgApacheLuceneUtilCharsRef;
 }
 
 @end
@@ -283,7 +321,7 @@ void OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(OrgApacheLuc
   JreStrongAssign(&self->chars_, chars);
   self->offset_ = offset;
   self->length_ = length;
-  JreAssert(([self isValid]), (@"org/apache/lucene/util/CharsRef.java:62 condition failed: assert isValid();"));
+  JreAssert([self isValid], @"org/apache/lucene/util/CharsRef.java:62 condition failed: assert isValid();");
 }
 
 OrgApacheLuceneUtilCharsRef *new_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(IOSCharArray *chars, jint offset, jint length) {
@@ -296,7 +334,7 @@ OrgApacheLuceneUtilCharsRef *create_OrgApacheLuceneUtilCharsRef_initWithCharArra
 
 void OrgApacheLuceneUtilCharsRef_initWithNSString_(OrgApacheLuceneUtilCharsRef *self, NSString *string) {
   NSObject_init(self);
-  JreStrongAssign(&self->chars_, [((NSString *) nil_chk(string)) toCharArray]);
+  JreStrongAssign(&self->chars_, [((NSString *) nil_chk(string)) java_toCharArray]);
   self->offset_ = 0;
   self->length_ = ((IOSCharArray *) nil_chk(self->chars_))->size_;
 }
@@ -319,6 +357,14 @@ OrgApacheLuceneUtilCharsRef *OrgApacheLuceneUtilCharsRef_deepCopyOfWithOrgApache
   return create_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(JavaUtilArrays_copyOfRangeWithCharArray_withInt_withInt_(((OrgApacheLuceneUtilCharsRef *) nil_chk(other))->chars_, other->offset_, other->offset_ + other->length_), 0, other->length_);
 }
 
+IOSObjectArray *OrgApacheLuceneUtilCharsRef__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *OrgApacheLuceneUtilCharsRef__Annotations$1() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCharsRef)
 
 @implementation OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator
@@ -332,7 +378,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(OrgApacheLuceneUtilCharsRef *)a
                withId:(OrgApacheLuceneUtilCharsRef *)b {
-  if (a == b) return 0;
+  if (JreObjectEqualsEquals(a, b)) return 0;
   IOSCharArray *aChars = ((OrgApacheLuceneUtilCharsRef *) nil_chk(a))->chars_;
   jint aUpto = a->offset_;
   IOSCharArray *bChars = ((OrgApacheLuceneUtilCharsRef *) nil_chk(b))->chars_;
@@ -362,16 +408,48 @@ J2OBJC_IGNORE_DESIGNATED_END
   return a->length_ - b->length_;
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "UTF16SortedAsUTF8Comparator", NULL, 0x2, NULL, NULL },
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator = { 2, "UTF16SortedAsUTF8Comparator", "org.apache.lucene.util", "CharsRef", 0xa, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;" };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compare", "LOrgApacheLuceneUtilCharsRef;LOrgApacheLuceneUtilCharsRef;", "LOrgApacheLuceneUtilCharsRef;", "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;", (void *)&OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator__Annotations$0 };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator = { "UTF16SortedAsUTF8Comparator", "org.apache.lucene.util", ptrTable, methods, NULL, 7, 0xa, 2, 0, 2, -1, -1, 3, 4 };
   return &_OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator;
 }
 
@@ -387,6 +465,10 @@ OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator *new_OrgApacheLuceneUtil
 
 OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator *create_OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator_init() {
   J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator, init)
+}
+
+IOSObjectArray *OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator__Annotations$0() {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator)

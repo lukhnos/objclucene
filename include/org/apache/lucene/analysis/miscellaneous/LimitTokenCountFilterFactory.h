@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory))
 #define OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_
 
@@ -26,33 +32,31 @@
 /*!
  @brief Factory for <code>LimitTokenCountFilter</code>.
  <pre class="prettyprint">
- &lt;fieldType name="text_lngthcnt" class="solr.TextField" positionIncrementGap="100"&gt;
- &lt;analyzer&gt;
- &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
- &lt;filter class="solr.LimitTokenCountFilterFactory" maxTokenCount="10" consumeAllTokens="false" /&gt;
- &lt;/analyzer&gt;
- 
+  &lt;fieldType name="text_lngthcnt" class="solr.TextField" positionIncrementGap="100"&gt;
+    &lt;analyzer&gt;
+      &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+      &lt;filter class="solr.LimitTokenCountFilterFactory" maxTokenCount="10" consumeAllTokens="false" /&gt;
+    &lt;/analyzer&gt;
+  &lt;/fieldType&gt;
 @endcode
- <p>
- The <code>consumeAllTokens</code> property is optional and defaults to <code>false</code>.  
- See <code>LimitTokenCountFilter</code> for an explanation of its use.
+  <p>
+  The <code>consumeAllTokens</code> property is optional and defaults to <code>false</code>.  
+  See <code>LimitTokenCountFilter</code> for an explanation of its use.
  */
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
  @public
   jint maxTokenCount_;
   jboolean consumeAllTokens_;
 }
-
-+ (NSString *)MAX_TOKEN_COUNT_KEY;
-
-+ (NSString *)CONSUME_ALL_TOKENS_KEY;
+@property (readonly, copy, class) NSString *MAX_TOKEN_COUNT_KEY NS_SWIFT_NAME(MAX_TOKEN_COUNT_KEY);
+@property (readonly, copy, class) NSString *CONSUME_ALL_TOKENS_KEY NS_SWIFT_NAME(CONSUME_ALL_TOKENS_KEY);
 
 #pragma mark Public
 
 /*!
  @brief Creates a new LimitTokenCountFilterFactory
  */
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype __nonnull)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
@@ -60,12 +64,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_get_MAX_TOKEN_COUNT_KEY();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_get_MAX_TOKEN_COUNT_KEY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_MAX_TOKEN_COUNT_KEY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory, MAX_TOKEN_COUNT_KEY, NSString *)
 
-inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_get_CONSUME_ALL_TOKENS_KEY();
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_get_CONSUME_ALL_TOKENS_KEY(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSUME_ALL_TOKENS_KEY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory, CONSUME_ALL_TOKENS_KEY, NSString *)
@@ -80,4 +84,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFi
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory")

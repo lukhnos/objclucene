@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAccountable
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAccountable_) && (INCLUDE_ALL_OrgApacheLuceneUtilAccountable || defined(INCLUDE_OrgApacheLuceneUtilAccountable))
 #define OrgApacheLuceneUtilAccountable_
 
@@ -21,11 +27,10 @@
 /*!
  @brief An object whose RAM usage can be computed.
  */
-@protocol OrgApacheLuceneUtilAccountable < NSObject, JavaObject >
+@protocol OrgApacheLuceneUtilAccountable < JavaObject >
 
 /*!
- @brief Return the memory usage of this object in bytes.
- Negative values are illegal.
+ @brief Return the memory usage of this object in bytes.Negative values are illegal.
  */
 - (jlong)ramBytesUsed;
 
@@ -44,4 +49,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAccountable)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAccountable")

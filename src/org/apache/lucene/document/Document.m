@@ -3,15 +3,23 @@
 //  source: ./core/src/java/org/apache/lucene/document/Document.java
 //
 
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Iterable.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
+#include "java/util/Spliterator.h"
+#include "java/util/function/Consumer.h"
 #include "org/apache/lucene/document/Document.h"
 #include "org/apache/lucene/index/IndexableField.h"
 #include "org/apache/lucene/util/BytesRef.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/document/Document must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @interface OrgApacheLuceneDocumentDocument () {
  @public
@@ -22,7 +30,7 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentDocument, fields_, id<JavaUtilList>)
 
-inline IOSObjectArray *OrgApacheLuceneDocumentDocument_get_NO_STRINGS();
+inline IOSObjectArray *OrgApacheLuceneDocumentDocument_get_NO_STRINGS(void);
 static IOSObjectArray *OrgApacheLuceneDocumentDocument_NO_STRINGS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentDocument, NO_STRINGS, IOSObjectArray *)
 
@@ -46,9 +54,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)removeFieldWithNSString:(NSString *)name {
-  id<JavaUtilIterator> it = [((id<JavaUtilList>) nil_chk(fields_)) iterator];
+  id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(fields_)) iterator]);
   while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
-    id<OrgApacheLuceneIndexIndexableField> field = [it next];
+    id<OrgApacheLuceneIndexIndexableField> field = JreRetainedLocalValue([it next]);
     if ([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) name])) isEqual:name]) {
       [it remove];
       return;
@@ -57,9 +65,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)removeFieldsWithNSString:(NSString *)name {
-  id<JavaUtilIterator> it = [((id<JavaUtilList>) nil_chk(fields_)) iterator];
+  id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(fields_)) iterator]);
   while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
-    id<OrgApacheLuceneIndexIndexableField> field = [it next];
+    id<OrgApacheLuceneIndexIndexableField> field = JreRetainedLocalValue([it next]);
     if ([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) name])) isEqual:name]) {
       [it remove];
     }
@@ -140,7 +148,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@"Document<"];
   for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(fields_)) size]; i++) {
-    id<OrgApacheLuceneIndexIndexableField> field = [fields_ getWithInt:i];
+    id<OrgApacheLuceneIndexIndexableField> field = JreRetainedLocalValue([fields_ getWithInt:i]);
     [buffer appendWithNSString:[((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) description]];
     if (i != [fields_ size] - 1) {
       [buffer appendWithNSString:@" "];
@@ -150,8 +158,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [buffer description];
 }
 
+- (void)forEachWithJavaUtilFunctionConsumer:(id<JavaUtilFunctionConsumer>)arg0 {
+  JavaLangIterable_forEachWithJavaUtilFunctionConsumer_(self, arg0);
+}
+
+- (id<JavaUtilSpliterator>)spliterator {
+  return JavaLangIterable_spliterator(self);
+}
+
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  return JreDefaultFastEnumeration(self, state, stackbuf);
 }
 
 - (void)dealloc {
@@ -159,35 +175,53 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super dealloc];
 }
 
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilIterator;", 0x1, -1, -1, -1, 0, -1, -1 },
+    { NULL, "V", 0x11, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 5, 4, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneUtilBytesRef;", 0x11, 6, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneUtilBytesRef;", 0x11, 7, 4, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexIndexableField;", 0x11, 8, 4, -1, -1, -1, -1 },
+    { NULL, "[LOrgApacheLuceneIndexIndexableField;", 0x1, 9, 4, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x11, -1, -1, -1, 10, -1, -1 },
+    { NULL, "[LNSString;", 0x11, 11, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, 12, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x11, 13, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(iterator);
+  methods[2].selector = @selector(addWithOrgApacheLuceneIndexIndexableField:);
+  methods[3].selector = @selector(removeFieldWithNSString:);
+  methods[4].selector = @selector(removeFieldsWithNSString:);
+  methods[5].selector = @selector(getBinaryValuesWithNSString:);
+  methods[6].selector = @selector(getBinaryValueWithNSString:);
+  methods[7].selector = @selector(getFieldWithNSString:);
+  methods[8].selector = @selector(getFieldsWithNSString:);
+  methods[9].selector = @selector(getFields);
+  methods[10].selector = @selector(getValuesWithNSString:);
+  methods[11].selector = @selector(getWithNSString:);
+  methods[12].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "fields_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 14, -1 },
+    { "NO_STRINGS", "[LNSString;", .constantValue.asLong = 0, 0x1a, -1, 15, -1, -1 },
+  };
+  static const void *ptrTable[] = { "()Ljava/util/Iterator<Lorg/apache/lucene/index/IndexableField;>;", "add", "LOrgApacheLuceneIndexIndexableField;", "removeField", "LNSString;", "removeFields", "getBinaryValues", "getBinaryValue", "getField", "getFields", "()Ljava/util/List<Lorg/apache/lucene/index/IndexableField;>;", "getValues", "get", "toString", "Ljava/util/List<Lorg/apache/lucene/index/IndexableField;>;", &OrgApacheLuceneDocumentDocument_NO_STRINGS, "Ljava/lang/Object;Ljava/lang/Iterable<Lorg/apache/lucene/index/IndexableField;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDocument = { "Document", "org.apache.lucene.document", ptrTable, methods, fields, 7, 0x11, 13, 2, -1, -1, -1, 16, -1 };
+  return &_OrgApacheLuceneDocumentDocument;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentDocument class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDocument_NO_STRINGS, [IOSObjectArray newArrayWithLength:0 type:NSString_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentDocument)
   }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "Document", NULL, 0x1, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/index/IndexableField;>;" },
-    { "addWithOrgApacheLuceneIndexIndexableField:", "add", "V", 0x11, NULL, NULL },
-    { "removeFieldWithNSString:", "removeField", "V", 0x11, NULL, NULL },
-    { "removeFieldsWithNSString:", "removeFields", "V", 0x11, NULL, NULL },
-    { "getBinaryValuesWithNSString:", "getBinaryValues", "[Lorg.apache.lucene.util.BytesRef;", 0x11, NULL, NULL },
-    { "getBinaryValueWithNSString:", "getBinaryValue", "Lorg.apache.lucene.util.BytesRef;", 0x11, NULL, NULL },
-    { "getFieldWithNSString:", "getField", "Lorg.apache.lucene.index.IndexableField;", 0x11, NULL, NULL },
-    { "getFieldsWithNSString:", "getFields", "[Lorg.apache.lucene.index.IndexableField;", 0x1, NULL, NULL },
-    { "getFields", NULL, "Ljava.util.List;", 0x11, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/IndexableField;>;" },
-    { "getValuesWithNSString:", "getValues", "[Ljava.lang.String;", 0x11, NULL, NULL },
-    { "getWithNSString:", "get", "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x11, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "fields_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/IndexableField;>;", .constantValue.asLong = 0 },
-    { "NO_STRINGS", "NO_STRINGS", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneDocumentDocument_NO_STRINGS, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDocument = { 2, "Document", "org.apache.lucene.document", NULL, 0x11, 13, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Iterable<Lorg/apache/lucene/index/IndexableField;>;" };
-  return &_OrgApacheLuceneDocumentDocument;
 }
 
 @end

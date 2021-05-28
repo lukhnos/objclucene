@@ -6,6 +6,10 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/util/automaton/StatePair.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/util/automaton/StatePair must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneUtilAutomatonStatePair
 
 - (instancetype)initWithInt:(jint)s
@@ -23,7 +27,7 @@
 
 - (jboolean)isEqual:(id)obj {
   if ([obj isKindOfClass:[OrgApacheLuceneUtilAutomatonStatePair class]]) {
-    OrgApacheLuceneUtilAutomatonStatePair *p = (OrgApacheLuceneUtilAutomatonStatePair *) cast_chk(obj, [OrgApacheLuceneUtilAutomatonStatePair class]);
+    OrgApacheLuceneUtilAutomatonStatePair *p = (OrgApacheLuceneUtilAutomatonStatePair *) obj;
     return ((OrgApacheLuceneUtilAutomatonStatePair *) nil_chk(p))->s1_ == s1_ && p->s2_ == s2_;
   }
   else return false;
@@ -38,19 +42,29 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withInt:", "StatePair", NULL, 0x0, NULL, NULL },
-    { "initWithInt:withInt:", "StatePair", NULL, 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 4, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 5, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithInt:withInt:withInt:);
+  methods[1].selector = @selector(initWithInt:withInt:);
+  methods[2].selector = @selector(isEqual:);
+  methods[3].selector = @selector(hash);
+  methods[4].selector = @selector(description);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "s_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "s1_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "s2_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "s_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "s1_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "s2_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonStatePair = { 2, "StatePair", "org.apache.lucene.util.automaton", NULL, 0x1, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "III", "II", "equals", "LNSObject;", "hashCode", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonStatePair = { "StatePair", "org.apache.lucene.util.automaton", ptrTable, methods, fields, 7, 0x1, 5, 3, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneUtilAutomatonStatePair;
 }
 

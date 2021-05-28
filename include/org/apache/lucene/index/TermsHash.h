@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTermsHash
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTermsHash_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermsHash || defined(INCLUDE_OrgApacheLuceneIndexTermsHash))
 #define OrgApacheLuceneIndexTermsHash_
 
@@ -29,12 +35,11 @@
 
 /*!
  @brief This class is passed each token produced by the analyzer
- on each field during indexing, and it stores these
- tokens in a hash table, and allocates separate byte
- streams per token.
- Consumers of this class, eg <code>FreqProxTermsWriter</code>
+   on each field during indexing, and it stores these
+   tokens in a hash table, and allocates separate byte
+   streams per token.Consumers of this class, eg <code>FreqProxTermsWriter</code>
   and <code>TermVectorsConsumer</code>,
- write their own byte streams under each term. 
+   write their own byte streams under each term.
  */
 @interface OrgApacheLuceneIndexTermsHash : NSObject {
  @public
@@ -53,9 +58,9 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter
-                                                         withBoolean:(jboolean)trackAllocations
-                                   withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)nextTermsHash;
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)docWriter
+                                                                                 withBoolean:(jboolean)trackAllocations
+                                                           withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)nextTermsHash;
 
 - (OrgApacheLuceneIndexTermsHashPerField *)addFieldWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)fieldInvertState
                                                           withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
@@ -69,6 +74,10 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 
 - (void)startDocument;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTermsHash)
@@ -80,10 +89,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermsHash, termBytePool_, OrgApacheLucen
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermsHash, bytesUsed_, OrgApacheLuceneUtilCounter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermsHash, docState_, OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexTermsHash_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexTermsHash *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, jboolean trackAllocations, OrgApacheLuceneIndexTermsHash *nextTermsHash);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexTermsHash_initPackagePrivateWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexTermsHash *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, jboolean trackAllocations, OrgApacheLuceneIndexTermsHash *nextTermsHash);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermsHash)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermsHash")

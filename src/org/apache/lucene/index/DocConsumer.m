@@ -3,14 +3,20 @@
 //  source: ./core/src/java/org/apache/lucene/index/DocConsumer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/index/AbortingException.h"
 #include "org/apache/lucene/index/DocConsumer.h"
 #include "org/apache/lucene/index/SegmentWriteState.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/DocConsumer must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexDocConsumer
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneIndexDocConsumer_initPackagePrivate(self);
+  return self;
+}
 
 - (void)processDocument {
   // can't call an abstract method
@@ -27,27 +33,29 @@
   [self doesNotRecognizeSelector:_cmd];
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexDocConsumer_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "processDocument", NULL, "V", 0x400, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "flushWithOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x400, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
-    { "abort", NULL, "V", 0x400, NULL, NULL },
-    { "init", "DocConsumer", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x400, -1, -1, 0, -1, -1, -1 },
+    { NULL, "V", 0x400, 1, 2, 0, -1, -1, -1 },
+    { NULL, "V", 0x400, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocConsumer = { 2, "DocConsumer", "org.apache.lucene.index", NULL, 0x400, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(processDocument);
+  methods[2].selector = @selector(flushWithOrgApacheLuceneIndexSegmentWriteState:);
+  methods[3].selector = @selector(abort);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LJavaIoIOException;LOrgApacheLuceneIndexAbortingException;", "flush", "LOrgApacheLuceneIndexSegmentWriteState;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocConsumer = { "DocConsumer", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x400, 4, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexDocConsumer;
 }
 
 @end
 
-void OrgApacheLuceneIndexDocConsumer_init(OrgApacheLuceneIndexDocConsumer *self) {
+void OrgApacheLuceneIndexDocConsumer_initPackagePrivate(OrgApacheLuceneIndexDocConsumer *self) {
   NSObject_init(self);
 }
 

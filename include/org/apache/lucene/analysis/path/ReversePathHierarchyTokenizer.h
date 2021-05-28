@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer))
 #define OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_
 
@@ -25,66 +31,64 @@
 /*!
  @brief Tokenizer for domain-like hierarchies.
  <p>
- Take something like:
+  Take something like: 
  @code
 
-  www.site.co.uk
+  www.site.co.uk 
   
 @endcode
- and make:
+  and make: 
  @code
 
   www.site.co.uk
   site.co.uk
   co.uk
-  uk
+  uk 
   
 @endcode
  */
 @interface OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer : OrgApacheLuceneAnalysisTokenizer
-
-+ (jchar)DEFAULT_DELIMITER;
-
-+ (jint)DEFAULT_SKIP;
+@property (readonly, class) jchar DEFAULT_DELIMITER NS_SWIFT_NAME(DEFAULT_DELIMITER);
+@property (readonly, class) jint DEFAULT_SKIP NS_SWIFT_NAME(DEFAULT_SKIP);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                   withChar:(jchar)delimiter
-                                                   withChar:(jchar)replacement
-                                                    withInt:(jint)skip;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
+                                                             withChar:(jchar)delimiter
+                                                             withChar:(jchar)replacement
+                                                              withInt:(jint)skip;
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)bufferSize
-                                                   withChar:(jchar)delimiter
-                                                   withChar:(jchar)replacement
-                                                    withInt:(jint)skip;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
+                                                              withInt:(jint)bufferSize
+                                                             withChar:(jchar)delimiter
+                                                             withChar:(jchar)replacement
+                                                              withInt:(jint)skip;
 
-- (instancetype)initWithChar:(jchar)delimiter
-                    withChar:(jchar)replacement;
+- (instancetype __nonnull)initWithChar:(jchar)delimiter
+                              withChar:(jchar)replacement;
 
-- (instancetype)initWithChar:(jchar)delimiter
-                    withChar:(jchar)replacement
-                     withInt:(jint)skip;
+- (instancetype __nonnull)initWithChar:(jchar)delimiter
+                              withChar:(jchar)replacement
+                               withInt:(jint)skip;
 
-- (instancetype)initWithChar:(jchar)delimiter
-                     withInt:(jint)skip;
+- (instancetype __nonnull)initWithChar:(jchar)delimiter
+                               withInt:(jint)skip;
 
-- (instancetype)initWithInt:(jint)skip;
+- (instancetype __nonnull)initWithInt:(jint)skip;
 
-- (instancetype)initWithInt:(jint)bufferSize
-                   withChar:(jchar)delimiter;
+- (instancetype __nonnull)initWithInt:(jint)bufferSize
+                             withChar:(jchar)delimiter;
 
-- (instancetype)initWithInt:(jint)bufferSize
-                   withChar:(jchar)delimiter
-                   withChar:(jchar)replacement;
+- (instancetype __nonnull)initWithInt:(jint)bufferSize
+                             withChar:(jchar)delimiter
+                             withChar:(jchar)replacement;
 
-- (instancetype)initWithInt:(jint)bufferSize
-                   withChar:(jchar)delimiter
-                   withChar:(jchar)replacement
-                    withInt:(jint)skip;
+- (instancetype __nonnull)initWithInt:(jint)bufferSize
+                             withChar:(jchar)delimiter
+                             withChar:(jchar)replacement
+                              withInt:(jint)skip;
 
 - (void)end;
 
@@ -92,23 +96,27 @@
 
 - (void)reset;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer)
 
-inline jchar OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_get_DEFAULT_DELIMITER();
+inline jchar OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_get_DEFAULT_DELIMITER(void);
 #define OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_DELIMITER '/'
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, DEFAULT_DELIMITER, jchar)
 
-inline jint OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_get_DEFAULT_SKIP();
+inline jint OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_get_DEFAULT_SKIP(void);
 #define OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_SKIP 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, DEFAULT_SKIP, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jint skip);
 
@@ -168,4 +176,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokeni
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer")

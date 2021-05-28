@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilBitSet
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilBitSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilBitSet || defined(INCLUDE_OrgApacheLuceneUtilBitSet))
 #define OrgApacheLuceneUtilBitSet_
 
@@ -24,7 +30,6 @@
 #define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneSearchDocIdSetIterator;
 @protocol JavaUtilCollection;
 
@@ -35,27 +40,24 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
- @brief Does in-place AND of the bits provided by the iterator.
- The state of the
- iterator after this operation terminates is undefined. 
+ @brief Does in-place AND of the bits provided by the iterator.The state of the
+   iterator after this operation terminates is undefined.
  */
 - (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
 /*!
- @brief this = this AND NOT other.
- The state of the iterator after this operation
- terminates is undefined. 
+ @brief this = this AND NOT other.The state of the iterator after this operation
+   terminates is undefined.
  */
 - (void)andNotWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
 /*!
- @brief Return an approximation of the cardinality of this set.
- Some
- implementations may trade accuracy for speed if they have the ability to
- estimate the cardinality of the set without iterating over all the data.
+ @brief Return an approximation of the cardinality of this set.Some
+  implementations may trade accuracy for speed if they have the ability to
+  estimate the cardinality of the set without iterating over all the data.
  The default implementation returns <code>cardinality()</code>.
  */
 - (jint)approximateCardinality;
@@ -84,15 +86,14 @@
 
 /*!
  @brief Build a <code>BitSet</code> from the content of the provided <code>DocIdSetIterator</code>.
- NOTE: this will fully consume the <code>DocIdSetIterator</code>. 
+ NOTE: this will fully consume the <code>DocIdSetIterator</code>.
  */
 + (OrgApacheLuceneUtilBitSet *)ofWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it
                                                                    withInt:(jint)maxDoc;
 
 /*!
- @brief Does in-place OR of the bits provided by the iterator.
- The state of the
- iterator after this operation terminates is undefined. 
+ @brief Does in-place OR of the bits provided by the iterator.The state of the
+   iterator after this operation terminates is undefined.
  */
 - (void)or__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
@@ -119,12 +120,16 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBitSet)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilBitSet *OrgApacheLuceneUtilBitSet_ofWithOrgApacheLuceneSearchDocIdSetIterator_withInt_(OrgApacheLuceneSearchDocIdSetIterator *it, jint maxDoc);
-
 FOUNDATION_EXPORT void OrgApacheLuceneUtilBitSet_init(OrgApacheLuceneUtilBitSet *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilBitSet *OrgApacheLuceneUtilBitSet_ofWithOrgApacheLuceneSearchDocIdSetIterator_withInt_(OrgApacheLuceneSearchDocIdSetIterator *it, jint maxDoc);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitSet)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBitSet")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilUnicodeUtil
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilUnicodeUtil_) && (INCLUDE_ALL_OrgApacheLuceneUtilUnicodeUtil || defined(INCLUDE_OrgApacheLuceneUtilUnicodeUtil))
 #define OrgApacheLuceneUtilUnicodeUtil_
 
@@ -24,49 +30,40 @@
 
 /*!
  @brief Class to encode java's UTF16 char[] into UTF8 byte[]
- without always allocating a new byte[] as
- String.getBytes(StandardCharsets.UTF_8) does.
+  without always allocating a new byte[] as
+  String.getBytes(StandardCharsets.UTF_8) does.
  */
 @interface OrgApacheLuceneUtilUnicodeUtil : NSObject
-
-+ (OrgApacheLuceneUtilBytesRef *)BIG_TERM;
-
-+ (jint)UNI_SUR_HIGH_START;
-
-+ (jint)UNI_SUR_HIGH_END;
-
-+ (jint)UNI_SUR_LOW_START;
-
-+ (jint)UNI_SUR_LOW_END;
-
-+ (jint)UNI_REPLACEMENT_CHAR;
-
-+ (jint)MAX_UTF8_BYTES_PER_CHAR;
-
-+ (IOSIntArray *)utf8CodeLength;
+@property (readonly, class, strong) OrgApacheLuceneUtilBytesRef *BIG_TERM NS_SWIFT_NAME(BIG_TERM);
+@property (readonly, class) jint UNI_SUR_HIGH_START NS_SWIFT_NAME(UNI_SUR_HIGH_START);
+@property (readonly, class) jint UNI_SUR_HIGH_END NS_SWIFT_NAME(UNI_SUR_HIGH_END);
+@property (readonly, class) jint UNI_SUR_LOW_START NS_SWIFT_NAME(UNI_SUR_LOW_START);
+@property (readonly, class) jint UNI_SUR_LOW_END NS_SWIFT_NAME(UNI_SUR_LOW_END);
+@property (readonly, class) jint UNI_REPLACEMENT_CHAR NS_SWIFT_NAME(UNI_REPLACEMENT_CHAR);
+@property (readonly, class) jint MAX_UTF8_BYTES_PER_CHAR NS_SWIFT_NAME(MAX_UTF8_BYTES_PER_CHAR);
+@property (readonly, class, strong) IOSIntArray *utf8CodeLength NS_SWIFT_NAME(utf8CodeLength);
 
 #pragma mark Public
 
 /*!
  @brief Returns the number of code points in this UTF8 sequence.
- <p>This method assumes valid UTF8 input. This method 
+ <p>This method assumes valid UTF8 input. This method  
  <strong>does not perform</strong> full UTF8 validation, it will check only the 
- first byte of each codepoint (for multi-byte sequences any bytes after 
- the head are skipped).  
- @throws IllegalArgumentException If invalid codepoint header byte occurs or the 
- content is prematurely truncated.
+  first byte of each codepoint (for multi-byte sequences any bytes after 
+  the head are skipped).
+ @throw IllegalArgumentExceptionIf invalid codepoint header byte occurs or the 
+     content is prematurely truncated.
  */
 + (jint)codePointCountWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
 
 /*!
- @brief Cover JDK 1.5 API.
- Create a String from an array of codePoints.
+ @brief Cover JDK 1.5 API.Create a String from an array of codePoints.
  @param codePoints The code array
  @param offset The start of the text in the code point array
  @param count The number of code points
  @return a String representing the code points between offset and count
- @throws IllegalArgumentException If an invalid code point is encountered
- @throws IndexOutOfBoundsException If the offset or count are out of bounds.
+ @throw IllegalArgumentExceptionIf an invalid code point is encountered
+ @throw IndexOutOfBoundsExceptionIf the offset or count are out of bounds.
  */
 + (NSString *)newStringWithIntArray:(IOSIntArray *)codePoints
                             withInt:(jint)offset
@@ -76,9 +73,8 @@
 
 /*!
  @brief Encode characters from a char[] source, starting at
- offset for length chars.
- It is the responsibility of the
- caller to make sure that the destination array is large enough.
+   offset for length chars.It is the responsibility of the
+   caller to make sure that the destination array is large enough.
  */
 + (jint)UTF16toUTF8WithCharArray:(IOSCharArray *)source
                          withInt:(jint)offset
@@ -87,9 +83,8 @@
 
 /*!
  @brief Encode characters from this String, starting at offset
- for length characters.
- It is the responsibility of the
- caller to make sure that the destination array is large enough.
+   for length characters.It is the responsibility of the
+   caller to make sure that the destination array is large enough.
  */
 + (jint)UTF16toUTF8WithJavaLangCharSequence:(id<JavaLangCharSequence>)s
                                     withInt:(jint)offset
@@ -97,13 +92,12 @@
                               withByteArray:(IOSByteArray *)outArg;
 
 /*!
- @brief Interprets the given byte array as UTF-8 and converts to UTF-16.
- It is the
- responsibility of the caller to make sure that the destination array is large enough.
+ @brief Interprets the given byte array as UTF-8 and converts to UTF-16.It is the
+  responsibility of the caller to make sure that the destination array is large enough.
  <p>
- NOTE: Full characters are read, even if this reads past the length passed (and
- can result in an ArrayOutOfBoundsException if invalid UTF-8 is passed).
- Explicit checks for valid UTF-8 are not performed. 
+  NOTE: Full characters are read, even if this reads past the length passed (and
+  can result in an ArrayOutOfBoundsException if invalid UTF-8 is passed).
+  Explicit checks for valid UTF-8 are not performed.
  */
 + (jint)UTF8toUTF16WithByteArray:(IOSByteArray *)utf8
                          withInt:(jint)offset
@@ -111,21 +105,21 @@
                    withCharArray:(IOSCharArray *)outArg;
 
 /*!
- @brief Utility method for <code>UTF8toUTF16(byte[],int,int,char[])</code>
- - seealso: #UTF8toUTF16(byte[],int,int,char[])
+ @brief Utility method for <code>UTF8toUTF16(byte[], int, int, char[])</code>
+ - seealso: #UTF8toUTF16(byte[], int, int, char[])
  */
 + (jint)UTF8toUTF16WithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytesRef
                                      withCharArray:(IOSCharArray *)chars;
 
 /*!
  @brief <p>This method assumes valid UTF8 input.
- This method 
+ This method  
  <strong>does not perform</strong> full UTF8 validation, it will check only the 
- first byte of each codepoint (for multi-byte sequences any bytes after 
- the head are skipped). It is the responsibility of the caller to make sure
- that the destination array is large enough.
- @throws IllegalArgumentException If invalid codepoint header byte occurs or the 
- content is prematurely truncated.
+  first byte of each codepoint (for multi-byte sequences any bytes after 
+  the head are skipped). It is the responsibility of the caller to make sure
+  that the destination array is large enough.
+ @throw IllegalArgumentExceptionIf invalid codepoint header byte occurs or the 
+     content is prematurely truncated.
  */
 + (jint)UTF8toUTF32WithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8
                                       withIntArray:(IOSIntArray *)ints;
@@ -141,43 +135,43 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilUnicodeUtil)
 
 /*!
  @brief A binary term consisting of a number of 0xff bytes, likely to be bigger than other terms
- (e.g. collation keys) one would normally encounter, and definitely bigger than any UTF-8 terms.
+   (e.g.collation keys) one would normally encounter, and definitely bigger than any UTF-8 terms.
  <p>
- WARNING: This is not a valid UTF8 Term  
+   WARNING: This is not a valid UTF8 Term
  */
-inline OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilUnicodeUtil_get_BIG_TERM();
+inline OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilUnicodeUtil_get_BIG_TERM(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilUnicodeUtil_BIG_TERM;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilUnicodeUtil, BIG_TERM, OrgApacheLuceneUtilBytesRef *)
 
-inline jint OrgApacheLuceneUtilUnicodeUtil_get_UNI_SUR_HIGH_START();
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_UNI_SUR_HIGH_START(void);
 #define OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_START 55296
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, UNI_SUR_HIGH_START, jint)
 
-inline jint OrgApacheLuceneUtilUnicodeUtil_get_UNI_SUR_HIGH_END();
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_UNI_SUR_HIGH_END(void);
 #define OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_END 56319
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, UNI_SUR_HIGH_END, jint)
 
-inline jint OrgApacheLuceneUtilUnicodeUtil_get_UNI_SUR_LOW_START();
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_UNI_SUR_LOW_START(void);
 #define OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START 56320
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, UNI_SUR_LOW_START, jint)
 
-inline jint OrgApacheLuceneUtilUnicodeUtil_get_UNI_SUR_LOW_END();
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_UNI_SUR_LOW_END(void);
 #define OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END 57343
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, UNI_SUR_LOW_END, jint)
 
-inline jint OrgApacheLuceneUtilUnicodeUtil_get_UNI_REPLACEMENT_CHAR();
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_UNI_REPLACEMENT_CHAR(void);
 #define OrgApacheLuceneUtilUnicodeUtil_UNI_REPLACEMENT_CHAR 65533
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, UNI_REPLACEMENT_CHAR, jint)
 
 /*!
  @brief Maximum number of UTF8 bytes per UTF16 character.
  */
-inline jint OrgApacheLuceneUtilUnicodeUtil_get_MAX_UTF8_BYTES_PER_CHAR();
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_MAX_UTF8_BYTES_PER_CHAR(void);
 #define OrgApacheLuceneUtilUnicodeUtil_MAX_UTF8_BYTES_PER_CHAR 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, MAX_UTF8_BYTES_PER_CHAR, jint)
 
-inline IOSIntArray *OrgApacheLuceneUtilUnicodeUtil_get_utf8CodeLength();
+inline IOSIntArray *OrgApacheLuceneUtilUnicodeUtil_get_utf8CodeLength(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilUnicodeUtil, utf8CodeLength, IOSIntArray *)
@@ -206,4 +200,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilUnicodeUtil)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilUnicodeUtil")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneBkdtreeHeapLatLonWriter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneBkdtreeHeapLatLonWriter_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonWriter || defined(INCLUDE_OrgApacheLuceneBkdtreeHeapLatLonWriter))
 #define OrgApacheLuceneBkdtreeHeapLatLonWriter_
 
@@ -34,7 +40,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)count;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)count;
 
 - (void)appendWithInt:(jint)latEnc
               withInt:(jint)lonEnc
@@ -49,6 +55,10 @@
 
 - (NSString *)description;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeHeapLatLonWriter)
@@ -58,14 +68,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeHeapLatLonWriter, lonEncs_, IOSIntArra
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeHeapLatLonWriter, docIDs_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeHeapLatLonWriter, ords_, IOSLongArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(OrgApacheLuceneBkdtreeHeapLatLonWriter *self, jint count);
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeHeapLatLonWriter_initPackagePrivateWithInt_(OrgApacheLuceneBkdtreeHeapLatLonWriter *self, jint count);
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonWriter *new_OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(jint count) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonWriter *new_OrgApacheLuceneBkdtreeHeapLatLonWriter_initPackagePrivateWithInt_(jint count) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonWriter *create_OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(jint count);
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonWriter *create_OrgApacheLuceneBkdtreeHeapLatLonWriter_initPackagePrivateWithInt_(jint count);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeHeapLatLonWriter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonWriter")

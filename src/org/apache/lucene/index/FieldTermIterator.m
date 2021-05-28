@@ -6,9 +6,18 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/index/FieldTermIterator.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/FieldTermIterator must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneIndexFieldTermIterator
+
+- (instancetype)initPackagePrivate {
+  OrgApacheLuceneIndexFieldTermIterator_initPackagePrivate(self);
+  return self;
+}
 
 - (NSString *)field {
   // can't call an abstract method
@@ -22,26 +31,26 @@
   return 0;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  OrgApacheLuceneIndexFieldTermIterator_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "field", NULL, "Ljava.lang.String;", 0x400, NULL, NULL },
-    { "delGen", NULL, "J", 0x400, NULL, NULL },
-    { "init", "FieldTermIterator", NULL, 0x0, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x400, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x400, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldTermIterator = { 2, "FieldTermIterator", "org.apache.lucene.index", NULL, 0x400, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initPackagePrivate);
+  methods[1].selector = @selector(field);
+  methods[2].selector = @selector(delGen);
+  #pragma clang diagnostic pop
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldTermIterator = { "FieldTermIterator", "org.apache.lucene.index", NULL, methods, NULL, 7, 0x400, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneIndexFieldTermIterator;
 }
 
 @end
 
-void OrgApacheLuceneIndexFieldTermIterator_init(OrgApacheLuceneIndexFieldTermIterator *self) {
+void OrgApacheLuceneIndexFieldTermIterator_initPackagePrivate(OrgApacheLuceneIndexFieldTermIterator *self) {
   NSObject_init(self);
 }
 

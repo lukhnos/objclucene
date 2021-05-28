@@ -19,6 +19,12 @@
 #define INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneStoreByteBufferIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput || defined(INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput))
 #define OrgApacheLuceneStoreByteBufferIndexInput_
 
@@ -38,14 +44,14 @@
 
 /*!
  @brief Base IndexInput implementation that uses an array
- of ByteBuffers to represent a file.
+  of ByteBuffers to represent a file.
  <p>
- Because Java's ByteBuffer uses an int to address the
- values, it's necessary to access a file greater
- Integer.MAX_VALUE in size using multiple byte buffers.
+  Because Java's ByteBuffer uses an int to address the
+  values, it's necessary to access a file greater
+  Integer.MAX_VALUE in size using multiple byte buffers. 
  <p>
- For efficiency, this class requires that the buffers
- are a power-of-two (<code>chunkSizePower</code>).
+  For efficiency, this class requires that the buffers
+  are a power-of-two (<code>chunkSizePower</code>).
  */
 @interface OrgApacheLuceneStoreByteBufferIndexInput : OrgApacheLuceneStoreIndexInput < OrgApacheLuceneStoreRandomAccessInput > {
  @public
@@ -62,7 +68,7 @@
 
 #pragma mark Public
 
-- (OrgApacheLuceneStoreByteBufferIndexInput *)clone;
+- (OrgApacheLuceneStoreByteBufferIndexInput *)java_clone;
 
 - (void)close;
 
@@ -100,8 +106,7 @@
 - (void)seekWithLong:(jlong)pos;
 
 /*!
- @brief Creates a slice of this index input, with the given description, offset, and length.
- The slice is seeked to the beginning.
+ @brief Creates a slice of this index input, with the given description, offset, and length.The slice is seeked to the beginning.
  */
 - (OrgApacheLuceneStoreByteBufferIndexInput *)sliceWithNSString:(NSString *)sliceDescription
                                                        withLong:(jlong)offset
@@ -126,12 +131,16 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)resourceDescription
-      withJavaNioByteBufferArray:(IOSObjectArray *)buffers
-                        withLong:(jlong)length
-                         withInt:(jint)chunkSizePower
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)resourceDescription
+                              withJavaNioByteBufferArray:(IOSObjectArray *)buffers
+                                                withLong:(jlong)length
+                                                 withInt:(jint)chunkSizePower
 withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:(id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner>)cleaner
-withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clones;
+                  withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clones;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -144,7 +153,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreByteBufferIndexInput, clones_, OrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreByteBufferIndexInput *OrgApacheLuceneStoreByteBufferIndexInput_newInstanceWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withBoolean_(NSString *resourceDescription, IOSObjectArray *buffers, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, jboolean trackClones);
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreByteBufferIndexInput_initWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(OrgApacheLuceneStoreByteBufferIndexInput *self, NSString *resourceDescription, IOSObjectArray *buffers, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones);
+FOUNDATION_EXPORT void OrgApacheLuceneStoreByteBufferIndexInput_initPackagePrivateWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(OrgApacheLuceneStoreByteBufferIndexInput *self, NSString *resourceDescription, IOSObjectArray *buffers, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteBufferIndexInput)
 
@@ -160,7 +169,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteBufferIndexInput)
  @brief Pass in an implementation of this interface to cleanup ByteBuffers.
  MMapDirectory implements this to allow unmapping of bytebuffers with private Java APIs.
  */
-@protocol OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner < NSObject, JavaObject >
+@protocol OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner < JavaObject >
 
 - (void)freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:(OrgApacheLuceneStoreByteBufferIndexInput *)parent
                                          withJavaNioByteBuffer:(JavaNioByteBuffer *)b;
@@ -176,6 +185,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteBufferIndexInput_BufferCleane
 #if !defined (OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_) && (INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput || defined(INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl))
 #define OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_
 
+@class IOSObjectArray;
 @class JavaNioByteBuffer;
 @class OrgApacheLuceneUtilWeakIdentityMap;
 @protocol OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;
@@ -201,12 +211,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteBufferIndexInput_BufferCleane
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)resourceDescription
-           withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
-                        withLong:(jlong)length
-                         withInt:(jint)chunkSizePower
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDescription
+                     withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
+                                  withLong:(jlong)length
+                                   withInt:(jint)chunkSizePower
 withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:(id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner>)cleaner
-withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clones;
+    withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clones;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0
+                              withJavaNioByteBufferArray:(IOSObjectArray *)arg1
+                                                withLong:(jlong)arg2
+                                                 withInt:(jint)arg3
+withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:(id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner>)arg4
+                  withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)arg5 NS_UNAVAILABLE;
 
 @end
 
@@ -257,13 +276,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteBufferIndexInput_SingleBuffer
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)resourceDescription
-      withJavaNioByteBufferArray:(IOSObjectArray *)buffers
-                         withInt:(jint)offset
-                        withLong:(jlong)length
-                         withInt:(jint)chunkSizePower
+- (instancetype __nonnull)initWithNSString:(NSString *)resourceDescription
+                withJavaNioByteBufferArray:(IOSObjectArray *)buffers
+                                   withInt:(jint)offset
+                                  withLong:(jlong)length
+                                   withInt:(jint)chunkSizePower
 withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:(id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner>)cleaner
-withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clones;
+    withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clones;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithNSString:(NSString *)arg0
+                              withJavaNioByteBufferArray:(IOSObjectArray *)arg1
+                                                withLong:(jlong)arg2
+                                                 withInt:(jint)arg3
+withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:(id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner>)arg4
+                  withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)arg5 NS_UNAVAILABLE;
 
 @end
 
@@ -279,4 +307,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferI
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput")

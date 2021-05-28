@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonRegExp
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonRegExp_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonRegExp || defined(INCLUDE_OrgApacheLuceneUtilAutomatonRegExp))
 #define OrgApacheLuceneUtilAutomatonRegExp_
 
@@ -26,318 +32,322 @@
 /*!
  @brief Regular Expression extension to <code>Automaton</code>.
  <p>
- Regular expressions are built from the following abstract syntax:
+  Regular expressions are built from the following abstract syntax: 
  <table border=0 summary="description of regular expression grammar">
+  <tr>
+  <td><i>regexp</i></td>
+  <td>::=</td>
+  <td><i>unionexp</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  </tr>
+   
  <tr>
- <td><i>regexp</i></td>
- <td>::=</td>
- <td><i>unionexp</i></td>
- <td></td>
- <td></td>
- </tr>
+  <td><i>unionexp</i></td>
+  <td>::=</td>
+  <td><i>interexp</i>&nbsp;<tt><b>|</b></tt>&nbsp;<i>unionexp</i></td>
+  <td>(union)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>interexp</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+   
  <tr>
- <td></td>
- <td>|</td>
- <td></td>
- <td></td>
- <td></td>
- </tr>
+  <td><i>interexp</i></td>
+  <td>::=</td>
+  <td><i>concatexp</i>&nbsp;<tt><b>&amp;</b></tt>&nbsp;<i>interexp</i></td>
+  <td>(intersection)</td>
+  <td><small>[OPTIONAL]</small></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>concatexp</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+   
  <tr>
- <td><i>unionexp</i></td>
- <td>::=</td>
- <td><i>interexp</i>&nbsp;<tt><b>|</b></tt>&nbsp;<i>unionexp</i></td>
- <td>(union)</td>
- <td></td>
- </tr>
+  <td><i>concatexp</i></td>
+  <td>::=</td>
+  <td><i>repeatexp</i>&nbsp;<i>concatexp</i></td>
+  <td>(concatenation)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>repeatexp</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+   
  <tr>
- <td></td>
- <td>|</td>
- <td><i>interexp</i></td>
- <td></td>
- <td></td>
- </tr>
+  <td><i>repeatexp</i></td>
+  <td>::=</td>
+  <td><i>repeatexp</i>&nbsp;<tt><b>?</b></tt></td>
+  <td>(zero or one occurrence)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>repeatexp</i>&nbsp;<tt><b>
+ *</b></tt></td> <td>(zero or more occurrences)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>repeatexp</i>&nbsp;<tt><b>+</b></tt></td>
+  <td>(one or more occurrences)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>repeatexp</i>&nbsp;<tt><b>{</b><i>n</i><b>}</b></tt></td>
+  <td>(<tt><i>n</i></tt> occurrences)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>repeatexp</i>&nbsp;<tt><b>{</b><i>n</i><b>,}</b></tt></td>
+  <td>(<tt><i>n</i></tt> or more occurrences)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>repeatexp</i>&nbsp;<tt><b>{</b><i>n</i><b>,</b><i>m</i><b>}</b></tt></td>
+  <td>(<tt><i>n</i></tt> to <tt><i>m</i></tt> occurrences, including both)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>complexp</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+   
  <tr>
- <td><i>interexp</i></td>
- <td>::=</td>
- <td><i>concatexp</i>&nbsp;<tt><b>&amp;</b></tt>&nbsp;<i>interexp</i></td>
- <td>(intersection)</td>
- <td><small>[OPTIONAL]</small></td>
- </tr>
+  <td><i>complexp</i></td>
+  <td>::=</td>
+  <td><tt><b>~</b></tt>&nbsp;<i>complexp</i></td>
+  <td>(complement)</td>
+  <td><small>[OPTIONAL]</small></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>charclassexp</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+   
  <tr>
- <td></td>
- <td>|</td>
- <td><i>concatexp</i></td>
- <td></td>
- <td></td>
- </tr>
+  <td><i>charclassexp</i></td>
+  <td>::=</td>
+  <td><tt><b>[</b></tt>&nbsp;<i>charclasses</i>&nbsp;<tt><b>]</b></tt></td>
+  <td>(character class)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><tt><b>[^</b></tt>&nbsp;<i>charclasses</i>&nbsp;<tt><b>]</b></tt></td>
+  <td>(negated character class)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>simpleexp</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+   
  <tr>
- <td><i>concatexp</i></td>
- <td>::=</td>
- <td><i>repeatexp</i>&nbsp;<i>concatexp</i></td>
- <td>(concatenation)</td>
- <td></td>
- </tr>
+  <td><i>charclasses</i></td>
+  <td>::=</td>
+  <td><i>charclass</i>&nbsp;<i>charclasses</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>charclass</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+   
  <tr>
- <td></td>
- <td>|</td>
- <td><i>repeatexp</i></td>
- <td></td>
- <td></td>
- </tr>
+  <td><i>charclass</i></td>
+  <td>::=</td>
+  <td><i>charexp</i>&nbsp;<tt><b>-</b></tt>&nbsp;<i>charexp</i></td>
+  <td>(character range, including end-points)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><i>charexp</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+   
  <tr>
- <td><i>repeatexp</i></td>
- <td>::=</td>
- <td><i>repeatexp</i>&nbsp;<tt><b>?</b></tt></td>
- <td>(zero or one occurrence)</td>
- <td></td>
- </tr>
+  <td><i>simpleexp</i></td>
+  <td>::=</td>
+  <td><i>charexp</i></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><tt><b>.</b></tt></td>
+  <td>(any single character)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><tt><b>#</b></tt></td>
+  <td>(the empty language)</td>
+  <td><small>[OPTIONAL]</small></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><tt><b>@@</b></tt></td>
+  <td>(any string)</td>
+  <td><small>[OPTIONAL]</small></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><tt><b>"</b></tt>&nbsp;&lt;Unicode string without double-quotes&gt;&nbsp; <tt><b>"</b></tt></td>
+  <td>(a string)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><tt><b>(</b></tt>&nbsp;<tt><b>)</b></tt></td>
+  <td>(the empty string)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><tt><b>(</b></tt>&nbsp;<i>unionexp</i>&nbsp;<tt><b>)</b></tt></td>
+  <td>(precedence override)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><tt><b>&lt;</b></tt>&nbsp;&lt;identifier&gt;&nbsp;<tt><b>&gt;</b></tt></td>
+  <td>(named automaton)</td>
+  <td><small>[OPTIONAL]</small></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><tt><b>&lt;</b><i>n</i>-<i>m</i><b>&gt;</b></tt></td>
+  <td>(numerical interval)</td>
+  <td><small>[OPTIONAL]</small></td>
+  </tr>
+   
  <tr>
- <td></td>
- <td>|</td>
- <td><i>repeatexp</i>&nbsp;<tt><b>*</b></tt></td>
- <td>(zero or more occurrences)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><i>repeatexp</i>&nbsp;<tt><b>+</b></tt></td>
- <td>(one or more occurrences)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><i>repeatexp</i>&nbsp;<tt><b>{</b><i>n</i><b>}</b></tt></td>
- <td>(<tt><i>n</i></tt> occurrences)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><i>repeatexp</i>&nbsp;<tt><b>{</b><i>n</i><b>,}</b></tt></td>
- <td>(<tt><i>n</i></tt> or more occurrences)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><i>repeatexp</i>&nbsp;<tt><b>{</b><i>n</i><b>,</b><i>m</i><b>}</b></tt></td>
- <td>(<tt><i>n</i></tt> to <tt><i>m</i></tt> occurrences, including both)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><i>complexp</i></td>
- <td></td>
- <td></td>
- </tr>
- <tr>
- <td><i>complexp</i></td>
- <td>::=</td>
- <td><tt><b>~</b></tt>&nbsp;<i>complexp</i></td>
- <td>(complement)</td>
- <td><small>[OPTIONAL]</small></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><i>charclassexp</i></td>
- <td></td>
- <td></td>
- </tr>
- <tr>
- <td><i>charclassexp</i></td>
- <td>::=</td>
- <td><tt><b>[</b></tt>&nbsp;<i>charclasses</i>&nbsp;<tt><b>]</b></tt></td>
- <td>(character class)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><tt><b>[^</b></tt>&nbsp;<i>charclasses</i>&nbsp;<tt><b>]</b></tt></td>
- <td>(negated character class)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><i>simpleexp</i></td>
- <td></td>
- <td></td>
- </tr>
- <tr>
- <td><i>charclasses</i></td>
- <td>::=</td>
- <td><i>charclass</i>&nbsp;<i>charclasses</i></td>
- <td></td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><i>charclass</i></td>
- <td></td>
- <td></td>
- </tr>
- <tr>
- <td><i>charclass</i></td>
- <td>::=</td>
- <td><i>charexp</i>&nbsp;<tt><b>-</b></tt>&nbsp;<i>charexp</i></td>
- <td>(character range, including end-points)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><i>charexp</i></td>
- <td></td>
- <td></td>
- </tr>
- <tr>
- <td><i>simpleexp</i></td>
- <td>::=</td>
- <td><i>charexp</i></td>
- <td></td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><tt><b>.</b></tt></td>
- <td>(any single character)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><tt><b>#</b></tt></td>
- <td>(the empty language)</td>
- <td><small>[OPTIONAL]</small></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><tt><b>@@</b></tt></td>
- <td>(any string)</td>
- <td><small>[OPTIONAL]</small></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><tt><b>"</b></tt>&nbsp;&lt;Unicode string without double-quotes&gt;&nbsp; <tt><b>"</b></tt></td>
- <td>(a string)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><tt><b>(</b></tt>&nbsp;<tt><b>)</b></tt></td>
- <td>(the empty string)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><tt><b>(</b></tt>&nbsp;<i>unionexp</i>&nbsp;<tt><b>)</b></tt></td>
- <td>(precedence override)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><tt><b>&lt;</b></tt>&nbsp;&lt;identifier&gt;&nbsp;<tt><b>&gt;</b></tt></td>
- <td>(named automaton)</td>
- <td><small>[OPTIONAL]</small></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><tt><b>&lt;</b><i>n</i>-<i>m</i><b>&gt;</b></tt></td>
- <td>(numerical interval)</td>
- <td><small>[OPTIONAL]</small></td>
- </tr>
- <tr>
- <td><i>charexp</i></td>
- <td>::=</td>
- <td>&lt;Unicode character&gt;</td>
- <td>(a single non-reserved character)</td>
- <td></td>
- </tr>
- <tr>
- <td></td>
- <td>|</td>
- <td><tt><b>\</b></tt>&nbsp;&lt;Unicode character&gt;&nbsp;</td>
- <td>(a single character)</td>
- <td></td>
- </tr>
- </table>
- <p>
- The productions marked <small>[OPTIONAL]</small> are only allowed if
- specified by the syntax flags passed to the <code>RegExp</code> constructor.
- The reserved characters used in the (enabled) syntax must be escaped with
- backslash (<tt><b>\</b></tt>) or double-quotes (<tt><b>"..."</b></tt>). (In
- contrast to other regexp syntaxes, this is required also in character
- classes.) Be aware that dash (<tt><b>-</b></tt>) has a special meaning in
+  <td><i>charexp</i></td>
+  <td>::=</td>
+  <td>&lt;Unicode character&gt;</td>
+  <td>(a single non-reserved character)</td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>|</td>
+  <td><tt><b>\</b></tt>&nbsp;&lt;Unicode character&gt;&nbsp;</td>
+  <td>(a single character)</td>
+  <td></td>
+  </tr>
+  </table>
+  <p>
+  The productions marked <small>[OPTIONAL]</small> are only allowed if
+  specified by the syntax flags passed to the <code>RegExp</code> constructor.
+  The reserved characters used in the (enabled) syntax must be escaped with
+  backslash (<tt><b>\</b></tt>) or double-quotes (<tt><b>"..."</b></tt>). (In
+  contrast to other regexp syntaxes, this is required also in character
+  classes.) Be aware that dash (<tt><b>-</b></tt>) has a special meaning in 
  <i>charclass</i> expressions. An identifier is a string not containing right
- angle bracket (<tt><b>&gt;</b></tt>) or dash (<tt><b>-</b></tt>). Numerical
- intervals are specified by non-negative decimal integers and include both end
- points, and if <tt><i>n</i></tt> and <tt><i>m</i></tt> have the same number
- of digits, then the conforming strings must have that length (i.e. prefixed
- by 0's).
+  angle bracket (<tt><b>&gt;</b></tt>) or dash (<tt><b>-</b></tt>). Numerical
+  intervals are specified by non-negative decimal integers and include both end
+  points, and if <tt><i>n</i></tt> and <tt><i>m</i></tt> have the same number
+  of digits, then the conforming strings must have that length (i.e. prefixed
+  by 0's).
  */
 @interface OrgApacheLuceneUtilAutomatonRegExp : NSObject {
  @public
   OrgApacheLuceneUtilAutomatonRegExp_Kind *kind_;
-  OrgApacheLuceneUtilAutomatonRegExp *exp1_, *exp2_;
+  OrgApacheLuceneUtilAutomatonRegExp *exp1_;
+  OrgApacheLuceneUtilAutomatonRegExp *exp2_;
   NSString *s_;
   jint c_;
-  jint min_, max_, digits_;
-  jint from_, to_;
+  jint min_;
+  jint max_;
+  jint digits_;
+  jint from_;
+  jint to_;
   jint flags_;
   jint pos_;
 }
-
-+ (jint)INTERSECTION;
-
-+ (jint)COMPLEMENT;
-
-+ (jint)EMPTY;
-
-+ (jint)ANYSTRING;
-
-+ (jint)AUTOMATON;
-
-+ (jint)INTERVAL;
-
-+ (jint)ALL;
-
-+ (jint)NONE;
+@property (readonly, class) jint INTERSECTION NS_SWIFT_NAME(INTERSECTION);
+@property (readonly, class) jint COMPLEMENT NS_SWIFT_NAME(COMPLEMENT);
+@property (readonly, class) jint EMPTY NS_SWIFT_NAME(EMPTY);
+@property (readonly, class) jint ANYSTRING NS_SWIFT_NAME(ANYSTRING);
+@property (readonly, class) jint AUTOMATON NS_SWIFT_NAME(AUTOMATON);
+@property (readonly, class) jint INTERVAL NS_SWIFT_NAME(INTERVAL);
+@property (readonly, class) jint ALL NS_SWIFT_NAME(ALL);
+@property (readonly, class) jint NONE NS_SWIFT_NAME(NONE);
 
 #pragma mark Public
 
 /*!
- @brief Constructs new <code>RegExp</code> from a string.
- Same as
+ @brief Constructs new <code>RegExp</code> from a string.Same as 
  <code>RegExp(s, ALL)</code>.
  @param s regexp string
- @exception IllegalArgumentException if an error occured while parsing the
- regular expression
+ @throw IllegalArgumentExceptionif an error occured while parsing the
+               regular expression
  */
-- (instancetype)initWithNSString:(NSString *)s;
+- (instancetype __nonnull)initWithNSString:(NSString *)s;
 
 /*!
  @brief Constructs new <code>RegExp</code> from a string.
  @param s regexp string
- @param syntax_flags boolean 'or' of optional syntax constructs to be
- enabled
- @exception IllegalArgumentException if an error occured while parsing the
- regular expression
+ @param syntax_flags boolean 'or' of optional syntax constructs to be           enabled
+ @throw IllegalArgumentExceptionif an error occured while parsing the
+               regular expression
  */
-- (instancetype)initWithNSString:(NSString *)s
-                         withInt:(jint)syntax_flags;
+- (instancetype __nonnull)initWithNSString:(NSString *)s
+                                   withInt:(jint)syntax_flags;
 
 /*!
  @brief Returns set of automaton identifiers that occur in this regular expression.
@@ -345,67 +355,59 @@
 - (id<JavaUtilSet>)getIdentifiers;
 
 /*!
- @brief The string that was used to construct the regex.
- Compare to toString.
+ @brief The string that was used to construct the regex.Compare to toString.
  */
 - (NSString *)getOriginalString;
 
 /*!
- @brief Constructs new <code>Automaton</code> from this <code>RegExp</code>.
- Same
- as <code>toAutomaton(null)</code> (empty automaton map).
+ @brief Constructs new <code>Automaton</code> from this <code>RegExp</code>.Same
+  as <code>toAutomaton(null)</code> (empty automaton map).
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomaton;
 
 /*!
- @brief Constructs new <code>Automaton</code> from this <code>RegExp</code>.
- The
- constructed automaton is minimal and deterministic and has no transitions
- to dead states.
+ @brief Constructs new <code>Automaton</code> from this <code>RegExp</code>.The
+  constructed automaton is minimal and deterministic and has no transitions
+  to dead states.
  @param automaton_provider provider of automata for named identifiers
- @param maxDeterminizedStates maximum number of states in the resulting
- automata.  If the automata would need more than this many states
- TooComplextToDeterminizeException is thrown.  Higher number require more
- space but can process more complex regexes.
- @exception IllegalArgumentException if this regular expression uses a named
- identifier that is not available from the automaton provider
- @exception TooComplexToDeterminizeException if determinizing this regexp
- requires more than maxDeterminizedStates states
+ @param maxDeterminizedStates maximum number of states in the resulting    automata.  If the automata would need more than this many states
+     TooComplextToDeterminizeException is thrown.  Higher number require more
+     space but can process more complex regexes.
+ @throw IllegalArgumentExceptionif this regular expression uses a named
+    identifier that is not available from the automaton provider
+ @throw TooComplexToDeterminizeExceptionif determinizing this regexp
+    requires more than maxDeterminizedStates states
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithOrgApacheLuceneUtilAutomatonAutomatonProvider:(id<OrgApacheLuceneUtilAutomatonAutomatonProvider>)automaton_provider
                                                                                                 withInt:(jint)maxDeterminizedStates;
 
 /*!
- @brief Constructs new <code>Automaton</code> from this <code>RegExp</code>.
- The
- constructed automaton is minimal and deterministic and has no transitions
- to dead states.
- @param maxDeterminizedStates maximum number of states in the resulting
- automata.  If the automata would need more than this many states
- TooComplextToDeterminizeException is thrown.  Higher number require more
- space but can process more complex regexes.
- @exception IllegalArgumentException if this regular expression uses a named
- identifier that is not available from the automaton provider
- @exception TooComplexToDeterminizeException if determinizing this regexp
- requires more than maxDeterminizedStates states
+ @brief Constructs new <code>Automaton</code> from this <code>RegExp</code>.The
+  constructed automaton is minimal and deterministic and has no transitions
+  to dead states.
+ @param maxDeterminizedStates maximum number of states in the resulting    automata.  If the automata would need more than this many states
+     TooComplextToDeterminizeException is thrown.  Higher number require more
+     space but can process more complex regexes.
+ @throw IllegalArgumentExceptionif this regular expression uses a named
+               identifier that is not available from the automaton provider
+ @throw TooComplexToDeterminizeExceptionif determinizing this regexp
+    requires more than maxDeterminizedStates states
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)maxDeterminizedStates;
 
 /*!
- @brief Constructs new <code>Automaton</code> from this <code>RegExp</code>.
- The
- constructed automaton is minimal and deterministic and has no transitions
- to dead states.
- @param automata a map from automaton identifiers to automata (of type
- <code>Automaton</code>).
- @param maxDeterminizedStates maximum number of states in the resulting
- automata.  If the automata would need more than this many states
- TooComplexToDeterminizeException is thrown.  Higher number require more
- space but can process more complex regexes.
- @exception IllegalArgumentException if this regular expression uses a named
- identifier that does not occur in the automaton map
- @exception TooComplexToDeterminizeException if determinizing this regexp
- requires more than maxDeterminizedStates states
+ @brief Constructs new <code>Automaton</code> from this <code>RegExp</code>.The
+  constructed automaton is minimal and deterministic and has no transitions
+  to dead states.
+ @param automata a map from automaton identifiers to automata (of type           
+  <code> Automaton </code> ).
+ @param maxDeterminizedStates maximum number of states in the resulting    automata.  If the automata would need more than this many states
+     TooComplexToDeterminizeException is thrown.  Higher number require more
+     space but can process more complex regexes.
+ @throw IllegalArgumentExceptionif this regular expression uses a named
+    identifier that does not occur in the automaton map
+ @throw TooComplexToDeterminizeExceptionif determinizing this regexp
+    requires more than maxDeterminizedStates states
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithJavaUtilMap:(id<JavaUtilMap>)automata
                                                               withInt:(jint)maxDeterminizedStates;
@@ -422,7 +424,7 @@
 
 #pragma mark Package-Private
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)getIdentifiersWithJavaUtilSet:(id<JavaUtilSet>)set;
 
@@ -504,65 +506,65 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonRegExp, s_, NSString *)
 /*!
  @brief Syntax flag, enables intersection (<tt>&amp;</tt>).
  */
-inline jint OrgApacheLuceneUtilAutomatonRegExp_get_INTERSECTION();
+inline jint OrgApacheLuceneUtilAutomatonRegExp_get_INTERSECTION(void);
 #define OrgApacheLuceneUtilAutomatonRegExp_INTERSECTION 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp, INTERSECTION, jint)
 
 /*!
  @brief Syntax flag, enables complement (<tt>~</tt>).
  */
-inline jint OrgApacheLuceneUtilAutomatonRegExp_get_COMPLEMENT();
+inline jint OrgApacheLuceneUtilAutomatonRegExp_get_COMPLEMENT(void);
 #define OrgApacheLuceneUtilAutomatonRegExp_COMPLEMENT 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp, COMPLEMENT, jint)
 
 /*!
  @brief Syntax flag, enables empty language (<tt>#</tt>).
  */
-inline jint OrgApacheLuceneUtilAutomatonRegExp_get_EMPTY();
+inline jint OrgApacheLuceneUtilAutomatonRegExp_get_EMPTY(void);
 #define OrgApacheLuceneUtilAutomatonRegExp_EMPTY 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp, EMPTY, jint)
 
 /*!
  @brief Syntax flag, enables anystring (<tt>@@</tt>).
  */
-inline jint OrgApacheLuceneUtilAutomatonRegExp_get_ANYSTRING();
+inline jint OrgApacheLuceneUtilAutomatonRegExp_get_ANYSTRING(void);
 #define OrgApacheLuceneUtilAutomatonRegExp_ANYSTRING 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp, ANYSTRING, jint)
 
 /*!
  @brief Syntax flag, enables named automata (<tt>&lt;</tt>identifier<tt>&gt;</tt>).
  */
-inline jint OrgApacheLuceneUtilAutomatonRegExp_get_AUTOMATON();
+inline jint OrgApacheLuceneUtilAutomatonRegExp_get_AUTOMATON(void);
 #define OrgApacheLuceneUtilAutomatonRegExp_AUTOMATON 16
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp, AUTOMATON, jint)
 
 /*!
- @brief Syntax flag, enables numerical intervals (
+ @brief Syntax flag, enables numerical intervals ( 
  <tt>&lt;<i>n</i>-<i>m</i>&gt;</tt>).
  */
-inline jint OrgApacheLuceneUtilAutomatonRegExp_get_INTERVAL();
+inline jint OrgApacheLuceneUtilAutomatonRegExp_get_INTERVAL(void);
 #define OrgApacheLuceneUtilAutomatonRegExp_INTERVAL 32
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp, INTERVAL, jint)
 
 /*!
  @brief Syntax flag, enables all optional regexp syntax.
  */
-inline jint OrgApacheLuceneUtilAutomatonRegExp_get_ALL();
+inline jint OrgApacheLuceneUtilAutomatonRegExp_get_ALL(void);
 #define OrgApacheLuceneUtilAutomatonRegExp_ALL 65535
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp, ALL, jint)
 
 /*!
  @brief Syntax flag, enables no optional regexp syntax.
  */
-inline jint OrgApacheLuceneUtilAutomatonRegExp_get_NONE();
+inline jint OrgApacheLuceneUtilAutomatonRegExp_get_NONE(void);
 #define OrgApacheLuceneUtilAutomatonRegExp_NONE 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp, NONE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonRegExp_init(OrgApacheLuceneUtilAutomatonRegExp *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *new_OrgApacheLuceneUtilAutomatonRegExp_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *new_OrgApacheLuceneUtilAutomatonRegExp_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *create_OrgApacheLuceneUtilAutomatonRegExp_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *create_OrgApacheLuceneUtilAutomatonRegExp_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_(OrgApacheLuceneUtilAutomatonRegExp *self, NSString *s);
 
@@ -596,13 +598,13 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomat
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeCharRangeWithInt_withInt_(jint from, jint to);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeAnyChar();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeAnyChar(void);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeEmpty();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeEmpty(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeStringWithNSString_(NSString *s);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeAnyString();
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeAnyString(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeAutomatonWithNSString_(NSString *s);
 
@@ -618,6 +620,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonRegExp)
 #define RESTRICT_JavaLangEnum 1
 #define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
+
+@class IOSObjectArray;
 
 typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum) {
   OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_UNION = 0,
@@ -638,47 +642,32 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum) {
   OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_INTERVAL = 15,
 };
 
-@interface OrgApacheLuceneUtilAutomatonRegExp_Kind : JavaLangEnum < NSCopying >
+@interface OrgApacheLuceneUtilAutomatonRegExp_Kind : JavaLangEnum
 
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_UNION;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_CONCATENATION;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_INTERSECTION;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_OPTIONAL;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_REPEAT;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_REPEAT_MIN;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_REPEAT_MINMAX;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_COMPLEMENT;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_CHAR;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_CHAR_RANGE;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_ANYCHAR;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_EMPTY;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_STRING;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_ANYSTRING;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_AUTOMATON;
-
-+ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_INTERVAL;
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_UNION NS_SWIFT_NAME(REGEXP_UNION);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_CONCATENATION NS_SWIFT_NAME(REGEXP_CONCATENATION);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_INTERSECTION NS_SWIFT_NAME(REGEXP_INTERSECTION);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_OPTIONAL NS_SWIFT_NAME(REGEXP_OPTIONAL);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_REPEAT NS_SWIFT_NAME(REGEXP_REPEAT);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_REPEAT_MIN NS_SWIFT_NAME(REGEXP_REPEAT_MIN);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_REPEAT_MINMAX NS_SWIFT_NAME(REGEXP_REPEAT_MINMAX);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_COMPLEMENT NS_SWIFT_NAME(REGEXP_COMPLEMENT);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_CHAR NS_SWIFT_NAME(REGEXP_CHAR);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_CHAR_RANGE NS_SWIFT_NAME(REGEXP_CHAR_RANGE);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_ANYCHAR NS_SWIFT_NAME(REGEXP_ANYCHAR);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_EMPTY NS_SWIFT_NAME(REGEXP_EMPTY);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_STRING NS_SWIFT_NAME(REGEXP_STRING);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_ANYSTRING NS_SWIFT_NAME(REGEXP_ANYSTRING);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_AUTOMATON NS_SWIFT_NAME(REGEXP_AUTOMATON);
+@property (readonly, class, nonnull) OrgApacheLuceneUtilAutomatonRegExp_Kind *REGEXP_INTERVAL NS_SWIFT_NAME(REGEXP_INTERVAL);
+#pragma mark Public
 
 + (OrgApacheLuceneUtilAutomatonRegExp_Kind *)valueOfWithNSString:(NSString *)name;
 
-- (id)copyWithZone:(NSZone *)zone;
++ (IOSObjectArray *)values;
+
+#pragma mark Package-Private
+
 - (OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum)toNSEnum;
 
 @end
@@ -688,55 +677,55 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilAutomatonRegExp_Kind)
 /*! INTERNAL ONLY - Use enum accessors declared below. */
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_values_[];
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_UNION();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_UNION(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_UNION)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_CONCATENATION();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_CONCATENATION(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CONCATENATION)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_INTERSECTION();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_INTERSECTION(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_INTERSECTION)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_OPTIONAL();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_OPTIONAL(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_OPTIONAL)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_REPEAT();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_REPEAT(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_REPEAT_MIN();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_REPEAT_MIN(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT_MIN)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_REPEAT_MINMAX();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_REPEAT_MINMAX(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT_MINMAX)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_COMPLEMENT();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_COMPLEMENT(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_COMPLEMENT)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_CHAR();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_CHAR(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_CHAR_RANGE();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_CHAR_RANGE(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR_RANGE)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_ANYCHAR();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_ANYCHAR(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_ANYCHAR)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_EMPTY();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_EMPTY(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_EMPTY)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_STRING();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_STRING(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_ANYSTRING();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_ANYSTRING(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_ANYSTRING)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_AUTOMATON();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_AUTOMATON(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_AUTOMATON)
 
-inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_INTERVAL();
+inline OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_get_REGEXP_INTERVAL(void);
 J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_INTERVAL)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilAutomatonRegExp_Kind_values();
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilAutomatonRegExp_Kind_values(void);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_valueOfWithNSString_(NSString *name);
 
@@ -746,4 +735,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonRegExp_Kind)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonRegExp")

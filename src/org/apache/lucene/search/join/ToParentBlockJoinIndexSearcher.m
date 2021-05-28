@@ -3,9 +3,7 @@
 //  source: ./join/src/java/org/apache/lucene/search/join/ToParentBlockJoinIndexSearcher.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/util/List.h"
 #include "java/util/concurrent/ExecutorService.h"
 #include "org/apache/lucene/index/IndexReader.h"
@@ -19,6 +17,10 @@
 #include "org/apache/lucene/search/Weight.h"
 #include "org/apache/lucene/search/join/ToParentBlockJoinIndexSearcher.h"
 #include "org/apache/lucene/util/Bits.h"
+
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/search/join/ToParentBlockJoinIndexSearcher must not be compiled with ARC (-fobjc-arc)"
+#endif
 
 @implementation OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher
 
@@ -37,7 +39,7 @@
 withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
 withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector {
   for (OrgApacheLuceneIndexLeafReaderContext * __strong ctx in nil_chk(leaves)) {
-    OrgApacheLuceneSearchScorer *scorer = [((OrgApacheLuceneSearchWeight *) nil_chk(weight)) scorerWithOrgApacheLuceneIndexLeafReaderContext:ctx];
+    OrgApacheLuceneSearchScorer *scorer = JreRetainedLocalValue([((OrgApacheLuceneSearchWeight *) nil_chk(weight)) scorerWithOrgApacheLuceneIndexLeafReaderContext:ctx]);
     if (scorer != nil) {
       id<OrgApacheLuceneSearchLeafCollector> leafCollector = [((id<OrgApacheLuceneSearchCollector>) nil_chk(collector)) getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:ctx];
       [((id<OrgApacheLuceneSearchLeafCollector>) nil_chk(leafCollector)) setScorerWithOrgApacheLuceneSearchScorer:scorer];
@@ -52,12 +54,20 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexIndexReader:withJavaUtilConcurrentExecutorService:", "ToParentBlockJoinIndexSearcher", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexIndexReader:", "ToParentBlockJoinIndexSearcher", NULL, 0x1, NULL, NULL },
-    { "searchWithJavaUtilList:withOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchCollector:", "search", "V", 0x4, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;Lorg/apache/lucene/search/Weight;Lorg/apache/lucene/search/Collector;)V" },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 2, 3, 4, 5, -1, -1 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher = { 2, "ToParentBlockJoinIndexSearcher", "org.apache.lucene.search.join", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:withJavaUtilConcurrentExecutorService:);
+  methods[1].selector = @selector(initWithOrgApacheLuceneIndexIndexReader:);
+  methods[2].selector = @selector(searchWithJavaUtilList:withOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchCollector:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LOrgApacheLuceneIndexIndexReader;LJavaUtilConcurrentExecutorService;", "LOrgApacheLuceneIndexIndexReader;", "search", "LJavaUtilList;LOrgApacheLuceneSearchWeight;LOrgApacheLuceneSearchCollector;", "LJavaIoIOException;", "(Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;Lorg/apache/lucene/search/Weight;Lorg/apache/lucene/search/Collector;)V" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher = { "ToParentBlockJoinIndexSearcher", "org.apache.lucene.search.join", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher;
 }
 

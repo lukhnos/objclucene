@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilAutomatonLevenshteinAutomata
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilAutomatonLevenshteinAutomata_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLevenshteinAutomata || defined(INCLUDE_OrgApacheLuceneUtilAutomatonLevenshteinAutomata))
 #define OrgApacheLuceneUtilAutomatonLevenshteinAutomata_
 
@@ -23,8 +29,8 @@
 /*!
  @brief Class to construct DFAs that match a word within some edit distance.
  <p>
- Implements the algorithm described in:
- Schulz and Mihov: Fast String Correction with Levenshtein Automata
+  Implements the algorithm described in:
+  Schulz and Mihov: Fast String Correction with Levenshtein Automata
  */
 @interface OrgApacheLuceneUtilAutomatonLevenshteinAutomata : NSObject {
  @public
@@ -36,47 +42,46 @@
   jint numRanges_;
   IOSObjectArray *descriptions_;
 }
-
-+ (jint)MAXIMUM_SUPPORTED_DISTANCE;
+@property (readonly, class) jint MAXIMUM_SUPPORTED_DISTANCE NS_SWIFT_NAME(MAXIMUM_SUPPORTED_DISTANCE);
 
 #pragma mark Public
 
 /*!
  @brief Expert: specify a custom maximum possible symbol
- (alphaMax); default is Character.MAX_CODE_POINT.
+  (alphaMax); default is Character.MAX_CODE_POINT.
  */
-- (instancetype)initWithIntArray:(IOSIntArray *)word
-                         withInt:(jint)alphaMax
-                     withBoolean:(jboolean)withTranspositions;
+- (instancetype __nonnull)initWithIntArray:(IOSIntArray *)word
+                                   withInt:(jint)alphaMax
+                               withBoolean:(jboolean)withTranspositions;
 
 /*!
  @brief Create a new LevenshteinAutomata for some input String.
  Optionally count transpositions as a primitive edit.
  */
-- (instancetype)initWithNSString:(NSString *)input
-                     withBoolean:(jboolean)withTranspositions;
+- (instancetype __nonnull)initWithNSString:(NSString *)input
+                               withBoolean:(jboolean)withTranspositions;
 
 /*!
  @brief Compute a DFA that accepts all strings within an edit distance of <code>n</code>.
  <p>
- All automata have the following properties:
+  All automata have the following properties: 
  <ul>
- <li>They are deterministic (DFA).
- <li>There are no transitions to dead states.
- <li>They are not minimal (some transitions could be combined).
+  <li>They are deterministic (DFA). 
+ <li>There are no transitions to dead states. 
+ <li>They are not minimal (some transitions could be combined). 
  </ul>
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)n;
 
 /*!
  @brief Compute a DFA that accepts all strings within an edit distance of <code>n</code>,
- matching the specified exact prefix.
+  matching the specified exact prefix.
  <p>
- All automata have the following properties:
+  All automata have the following properties: 
  <ul>
- <li>They are deterministic (DFA).
- <li>There are no transitions to dead states.
- <li>They are not minimal (some transitions could be combined).
+  <li>They are deterministic (DFA). 
+ <li>There are no transitions to dead states. 
+ <li>They are not minimal (some transitions could be combined). 
  </ul>
  */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)n
@@ -86,11 +91,15 @@
 
 /*!
  @brief Get the characteristic vector <code>X(x, V)</code> 
- where V is <code>substring(pos, end)</code>
+  where V is <code>substring(pos, end)</code>
  */
 - (jint)getVectorWithInt:(jint)x
                  withInt:(jint)pos
                  withInt:(jint)end;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -104,9 +113,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata, description
 
 /*!
  @brief Maximum edit distance this class can generate an automaton for.
-  
  */
-inline jint OrgApacheLuceneUtilAutomatonLevenshteinAutomata_get_MAXIMUM_SUPPORTED_DISTANCE();
+inline jint OrgApacheLuceneUtilAutomatonLevenshteinAutomata_get_MAXIMUM_SUPPORTED_DISTANCE(void);
 #define OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonLevenshteinAutomata, MAXIMUM_SUPPORTED_DISTANCE, jint)
 
@@ -135,14 +143,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata)
 /*!
  @brief A ParametricDescription describes the structure of a Levenshtein DFA for some degree n.
  <p>
- There are four components of a parametric description, all parameterized on the length
- of the word <code>w</code>:
- <ol>
- <li>The number of states: <code>size()</code>
- <li>The set of final states: <code>isAccept(int)</code>
- <li>The transition function: <code>transition(int,int,int)</code>
- <li>Minimal boundary function: <code>getPosition(int)</code>
- </ol>
+  There are four components of a parametric description, all parameterized on the length
+  of the word <code>w</code>:
+  <ol>
+  <li>The number of states: <code>size()</code>
+  <li>The set of final states: <code>isAccept(int)</code>
+  <li>The transition function: <code>transition(int, int, int)</code>
+  <li>Minimal boundary function: <code>getPosition(int)</code>
+  </ol>
  */
 @interface OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription : NSObject {
  @public
@@ -158,9 +166,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)w
-                    withInt:(jint)n
-               withIntArray:(IOSIntArray *)minErrors;
+- (instancetype __nonnull)initWithInt:(jint)w
+                              withInt:(jint)n
+                         withIntArray:(IOSIntArray *)minErrors;
 
 /*!
  @brief Returns the position in the input word for a given <code>state</code>.
@@ -180,11 +188,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata)
 
 /*!
  @brief Returns the state number for a transition from the given <code>state</code>,
- assuming <code>position</code> and characteristic vector <code>vector</code>
+  assuming <code>position</code> and characteristic vector <code>vector</code>
  */
 - (jint)transitionWithInt:(jint)state
                   withInt:(jint)position
                   withInt:(jint)vector;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -196,4 +208,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Param
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLevenshteinAutomata")

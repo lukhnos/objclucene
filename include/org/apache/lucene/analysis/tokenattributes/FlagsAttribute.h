@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesFlagsAttribute
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesFlagsAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesFlagsAttribute))
 #define OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_
 
@@ -22,14 +28,13 @@
 
 /*!
  @brief This attribute can be used to pass different flags down the <code>Tokenizer</code> chain,
- e.g. from one TokenFilter to another one.
+  e.g.from one TokenFilter to another one.
  <p>
- This is completely distinct from <code>TypeAttribute</code>, although they do share similar purposes.
- The flags can be used to encode information about the token for use by other 
+  This is completely distinct from <code>TypeAttribute</code>, although they do share similar purposes.
+  The flags can be used to encode information about the token for use by other  
  <code>org.apache.lucene.analysis.TokenFilter</code>s.
-  While we think this is here to stay, we may want to change it to be a long.
  */
-@protocol OrgApacheLuceneAnalysisTokenattributesFlagsAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
+@protocol OrgApacheLuceneAnalysisTokenattributesFlagsAttribute < OrgApacheLuceneUtilAttribute, JavaObject >
 
 /*!
  @brief Get the bitset for any bits that have been set.
@@ -52,4 +57,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesFlagsAttribute)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesFlagsAttribute")

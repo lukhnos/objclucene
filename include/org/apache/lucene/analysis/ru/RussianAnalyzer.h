@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisRuRussianAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisRuRussianAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisRuRussianAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisRuRussianAnalyzer))
 #define OrgApacheLuceneAnalysisRuRussianAnalyzer_
 
@@ -26,33 +32,30 @@
 /*!
  @brief <code>Analyzer</code> for Russian language.
  <p>
- Supports an external list of stopwords (words that
- will not be indexed at all).
- A default set of stopwords is used unless an alternative list is specified.
+  Supports an external list of stopwords (words that
+  will not be indexed at all).
+  A default set of stopwords is used unless an alternative list is specified.
  */
 @interface OrgApacheLuceneAnalysisRuRussianAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
-
-+ (NSString *)DEFAULT_STOPWORD_FILE;
+@property (readonly, copy, class) NSString *DEFAULT_STOPWORD_FILE NS_SWIFT_NAME(DEFAULT_STOPWORD_FILE);
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Builds an analyzer with the given stop words
- @param stopwords
- a stopword set
+ @param stopwords a stopword set
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
 /*!
  @brief Builds an analyzer with the given stop words
- @param stopwords
- a stopword set
+ @param stopwords a stopword set
  @param stemExclusionSet a set of words not to be stemmed
  */
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
-                    withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
+                              withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
 
 /*!
  @brief Returns an unmodifiable instance of the default stop-words set.
@@ -64,13 +67,13 @@
 
 /*!
  @brief Creates
- <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- used to tokenize all the text in the provided <code>Reader</code>.
+  <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+  used to tokenize all the text in the provided <code>Reader</code>.
  @return <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
- built from a <code>StandardTokenizer</code> filtered with
- <code>StandardFilter</code>, <code>LowerCaseFilter</code>, <code>StopFilter</code>
- , <code>SetKeywordMarkerFilter</code> if a stem exclusion set is
- provided, and <code>SnowballFilter</code>
+          built from a <code>StandardTokenizer</code> filtered with
+          <code>StandardFilter</code>, <code>LowerCaseFilter</code>, <code>StopFilter</code>
+          , <code>SetKeywordMarkerFilter</code> if a stem exclusion set is
+          provided, and <code>SnowballFilter</code>
  */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
@@ -81,18 +84,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisRuRussianAnalyzer)
 /*!
  @brief File containing default Russian stopwords.
  */
-inline NSString *OrgApacheLuceneAnalysisRuRussianAnalyzer_get_DEFAULT_STOPWORD_FILE();
+inline NSString *OrgApacheLuceneAnalysisRuRussianAnalyzer_get_DEFAULT_STOPWORD_FILE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisRuRussianAnalyzer_DEFAULT_STOPWORD_FILE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisRuRussianAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisRuRussianAnalyzer_getDefaultStopSet();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisRuRussianAnalyzer_getDefaultStopSet(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisRuRussianAnalyzer_init(OrgApacheLuceneAnalysisRuRussianAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianAnalyzer *new_OrgApacheLuceneAnalysisRuRussianAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianAnalyzer *new_OrgApacheLuceneAnalysisRuRussianAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianAnalyzer *create_OrgApacheLuceneAnalysisRuRussianAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianAnalyzer *create_OrgApacheLuceneAnalysisRuRussianAnalyzer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisRuRussianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisRuRussianAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
@@ -110,4 +113,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisRuRussianAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisRuRussianAnalyzer")

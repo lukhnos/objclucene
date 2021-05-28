@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilRecyclingByteBlockAllocator
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilRecyclingByteBlockAllocator_) && (INCLUDE_ALL_OrgApacheLuceneUtilRecyclingByteBlockAllocator || defined(INCLUDE_OrgApacheLuceneUtilRecyclingByteBlockAllocator))
 #define OrgApacheLuceneUtilRecyclingByteBlockAllocator_
 
@@ -26,47 +32,42 @@
 
 /*!
  @brief A <code>ByteBlockPool.Allocator</code> implementation that recycles unused byte
- blocks in a buffer and reuses them in subsequent calls to
+  blocks in a buffer and reuses them in subsequent calls to 
  <code>getByteBlock()</code>.
  <p>
- Note: This class is not thread-safe
+  Note: This class is not thread-safe 
  </p>
  */
 @interface OrgApacheLuceneUtilRecyclingByteBlockAllocator : OrgApacheLuceneUtilByteBlockPool_Allocator
-
-+ (jint)DEFAULT_BUFFERED_BLOCKS;
+@property (readonly, class) jint DEFAULT_BUFFERED_BLOCKS NS_SWIFT_NAME(DEFAULT_BUFFERED_BLOCKS);
 
 #pragma mark Public
 
 /*!
- @brief Creates a new <code>RecyclingByteBlockAllocator</code> with a block size of
- <code>ByteBlockPool.BYTE_BLOCK_SIZE</code>, upper buffered docs limit of
+ @brief Creates a new <code>RecyclingByteBlockAllocator</code> with a block size of 
+ <code>ByteBlockPool.BYTE_BLOCK_SIZE</code>, upper buffered docs limit of 
  <code>DEFAULT_BUFFERED_BLOCKS</code> (#DEFAULT_BUFFERED_BLOCKS).
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new <code>RecyclingByteBlockAllocator</code>.
- @param blockSize
- the block size in bytes
- @param maxBufferedBlocks
- maximum number of buffered byte block
+ @param blockSize the block size in bytes
+ @param maxBufferedBlocks maximum number of buffered byte block
  */
-- (instancetype)initWithInt:(jint)blockSize
-                    withInt:(jint)maxBufferedBlocks;
+- (instancetype __nonnull)initWithInt:(jint)blockSize
+                              withInt:(jint)maxBufferedBlocks;
 
 /*!
  @brief Creates a new <code>RecyclingByteBlockAllocator</code>
- @param blockSize
- the block size in bytes
- @param maxBufferedBlocks
- maximum number of buffered byte block
- @param bytesUsed
- <code>Counter</code> reference counting internally allocated bytes
+ @param blockSize the block size in bytes
+ @param maxBufferedBlocks maximum number of buffered byte block
+ @param bytesUsed<code>Counter</code>
+   reference counting internally allocated bytes
  */
-- (instancetype)initWithInt:(jint)blockSize
-                    withInt:(jint)maxBufferedBlocks
-withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed;
+- (instancetype __nonnull)initWithInt:(jint)blockSize
+                              withInt:(jint)maxBufferedBlocks
+       withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed;
 
 /*!
  @return the number of bytes currently allocated by this <code>Allocator</code>
@@ -75,8 +76,7 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed;
 
 /*!
  @brief Removes the given number of byte blocks from the buffer if possible.
- @param num
- the number of byte blocks to remove
+ @param num the number of byte blocks to remove
  @return the number of actually removed buffers
  */
 - (jint)freeBlocksWithInt:(jint)num;
@@ -97,11 +97,15 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed;
                                 withInt:(jint)start
                                 withInt:(jint)end;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithInt:(jint)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilRecyclingByteBlockAllocator)
 
-inline jint OrgApacheLuceneUtilRecyclingByteBlockAllocator_get_DEFAULT_BUFFERED_BLOCKS();
+inline jint OrgApacheLuceneUtilRecyclingByteBlockAllocator_get_DEFAULT_BUFFERED_BLOCKS(void);
 #define OrgApacheLuceneUtilRecyclingByteBlockAllocator_DEFAULT_BUFFERED_BLOCKS 64
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRecyclingByteBlockAllocator, DEFAULT_BUFFERED_BLOCKS, jint)
 
@@ -119,12 +123,16 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingByteBlockAllocator *create_OrgApac
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilRecyclingByteBlockAllocator_init(OrgApacheLuceneUtilRecyclingByteBlockAllocator *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingByteBlockAllocator *new_OrgApacheLuceneUtilRecyclingByteBlockAllocator_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingByteBlockAllocator *new_OrgApacheLuceneUtilRecyclingByteBlockAllocator_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingByteBlockAllocator *create_OrgApacheLuceneUtilRecyclingByteBlockAllocator_init();
+FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingByteBlockAllocator *create_OrgApacheLuceneUtilRecyclingByteBlockAllocator_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRecyclingByteBlockAllocator)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilRecyclingByteBlockAllocator")

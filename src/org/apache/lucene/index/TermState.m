@@ -8,6 +8,10 @@
 #include "java/lang/RuntimeException.h"
 #include "org/apache/lucene/index/TermState.h"
 
+#if __has_feature(objc_arc)
+#error "org/apache/lucene/index/TermState must not be compiled with ARC (-fobjc-arc)"
+#endif
+
 @implementation OrgApacheLuceneIndexTermState
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -22,12 +26,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self doesNotRecognizeSelector:_cmd];
 }
 
-- (OrgApacheLuceneIndexTermState *)clone {
+- (OrgApacheLuceneIndexTermState *)java_clone {
   @try {
-    return (OrgApacheLuceneIndexTermState *) cast_chk([super clone], [OrgApacheLuceneIndexTermState class]);
+    return (OrgApacheLuceneIndexTermState *) cast_chk([super java_clone], [OrgApacheLuceneIndexTermState class]);
   }
   @catch (JavaLangCloneNotSupportedException *cnse) {
-    @throw create_JavaLangRuntimeException_initWithNSException_(cnse);
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(cnse);
   }
 }
 
@@ -39,20 +43,30 @@ J2OBJC_IGNORE_DESIGNATED_END
   return @"TermState";
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LOrgApacheLuceneIndexTermState;", 0x1, 2, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 3, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(copyFromWithOrgApacheLuceneIndexTermState:);
+  methods[2].selector = @selector(java_clone);
+  methods[3].selector = @selector(isRealTerm);
+  methods[4].selector = @selector(description);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "copyFrom", "LOrgApacheLuceneIndexTermState;", "clone", "toString" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermState = { "TermState", "org.apache.lucene.index", ptrTable, methods, NULL, 7, 0x401, 5, 0, -1, -1, -1, -1, -1 };
+  return &_OrgApacheLuceneIndexTermState;
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "init", "TermState", NULL, 0x4, NULL, NULL },
-    { "copyFromWithOrgApacheLuceneIndexTermState:", "copyFrom", "V", 0x401, NULL, NULL },
-    { "clone", NULL, "Lorg.apache.lucene.index.TermState;", 0x1, NULL, NULL },
-    { "isRealTerm", NULL, "Z", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermState = { 2, "TermState", "org.apache.lucene.index", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneIndexTermState;
+- (id)copyWithZone:(NSZone *)zone {
+  return [[self java_clone] retain];
 }
 
 @end

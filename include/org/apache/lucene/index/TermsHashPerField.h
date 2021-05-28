@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneIndexTermsHashPerField
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneIndexTermsHashPerField_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermsHashPerField || defined(INCLUDE_OrgApacheLuceneIndexTermsHashPerField))
 #define OrgApacheLuceneIndexTermsHashPerField_
 
@@ -58,13 +64,13 @@
 
 /*!
  @brief streamCount: how many streams this field stores per term.
- E.g. doc(+freq) is 1 stream, prox+offset is a second. 
+ E.g. doc(+freq) is 1 stream, prox+offset is a second.
  */
-- (instancetype)initWithInt:(jint)streamCount
-withOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)fieldState
-withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)termsHash
-withOrgApacheLuceneIndexTermsHashPerField:(OrgApacheLuceneIndexTermsHashPerField *)nextPerField
-withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
+- (instancetype __nonnull)initPackagePrivateWithInt:(jint)streamCount
+           withOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)fieldState
+                  withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)termsHash
+          withOrgApacheLuceneIndexTermsHashPerField:(OrgApacheLuceneIndexTermsHashPerField *)nextPerField
+                  withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 - (void)addWithInt:(jint)textStart;
 
@@ -76,7 +82,7 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 /*!
  @brief Collapse the hash table and sort in-place; also sets
- this.sortedTermIDs to the results
+  this.sortedTermIDs to the results
  */
 - (IOSIntArray *)sortPostings;
 
@@ -88,10 +94,9 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 #pragma mark Package-Private
 
 /*!
- @brief Called once per inverted token.
- This is the primary
- entry point (for first TermsHash); postings use this
- API. 
+ @brief Called once per inverted token.This is the primary
+   entry point (for first TermsHash); postings use this
+   API.
  */
 - (void)add;
 
@@ -107,13 +112,13 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 /*!
  @brief Finish adding all instances of this field to the
- current document.
+   current document.
  */
 - (void)finish;
 
 /*!
  @brief Called when the postings array is initialized or
- resized.
+   resized.
  */
 - (void)newPostingsArray OBJC_METHOD_FAMILY_NONE;
 
@@ -126,8 +131,8 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 /*!
  @brief Start adding a new field instance; first is true if
- this is the first time this field name was seen in the
- document.
+   this is the first time this field name was seen in the
+   document.
  */
 - (jboolean)startWithOrgApacheLuceneIndexIndexableField:(id<OrgApacheLuceneIndexIndexableField>)field
                                             withBoolean:(jboolean)first;
@@ -137,6 +142,10 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 - (void)writeVIntWithInt:(jint)stream
                  withInt:(jint)i;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -156,10 +165,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermsHashPerField, postingsArray_, OrgAp
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermsHashPerField, sortedTermIDs_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermsHashPerField, intUptos_, IOSIntArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexTermsHashPerField_initWithInt_withOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexTermsHashPerField *self, jint streamCount, OrgApacheLuceneIndexFieldInvertState *fieldState, OrgApacheLuceneIndexTermsHash *termsHash, OrgApacheLuceneIndexTermsHashPerField *nextPerField, OrgApacheLuceneIndexFieldInfo *fieldInfo);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexTermsHashPerField_initPackagePrivateWithInt_withOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexTermsHashPerField *self, jint streamCount, OrgApacheLuceneIndexFieldInvertState *fieldState, OrgApacheLuceneIndexTermsHash *termsHash, OrgApacheLuceneIndexTermsHashPerField *nextPerField, OrgApacheLuceneIndexFieldInfo *fieldInfo);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermsHashPerField)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermsHashPerField")

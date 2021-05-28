@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentDictionary
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentDictionary || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentDictionary))
 #define OrgApacheLuceneSearchSuggestDocumentDictionary_
 
@@ -25,22 +31,22 @@
 
 /*!
  @brief <p>
- Dictionary with terms, weights, payload (optional) and contexts (optional)
- information taken from stored/indexed fields in a Lucene index.
+  Dictionary with terms, weights, payload (optional) and contexts (optional)
+  information taken from stored/indexed fields in a Lucene index.
  </p>
- <b>NOTE:</b> 
- <ul>
- <li>
- The term field has to be stored; if it is missing, the document is skipped.
+  <b>NOTE:</b> 
+   <ul>
+     <li>
+       The term field has to be stored; if it is missing, the document is skipped.    
  </li>
- <li>
- The payload and contexts field are optional and are not required to be stored.
+     <li>
+       The payload and contexts field are optional and are not required to be stored.    
  </li>
- <li>
- The weight field can be stored or can be a <code>NumericDocValues</code>.
- If the weight field is not defined, the value of the weight is <code>0</code>
- </li>
- </ul>
+     <li>
+       The weight field can be stored or can be a <code>NumericDocValues</code>.
+       If the weight field is not defined, the value of the weight is <code>0</code>
+     </li>
+   </ul>
  */
 @interface OrgApacheLuceneSearchSuggestDocumentDictionary : NSObject < OrgApacheLuceneSearchSpellDictionary > {
  @public
@@ -62,37 +68,41 @@
 
 /*!
  @brief Creates a new dictionary with the contents of the fields named <code>field</code>
- for the terms and <code>weightField</code> for the weights that will be used for
- the corresponding terms.
+  for the terms and <code>weightField</code> for the weights that will be used for
+  the corresponding terms.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                           withNSString:(NSString *)field
-                                           withNSString:(NSString *)weightField;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                                     withNSString:(NSString *)field
+                                                     withNSString:(NSString *)weightField;
 
 /*!
  @brief Creates a new dictionary with the contents of the fields named <code>field</code>
- for the terms, <code>weightField</code> for the weights that will be used for the 
- the corresponding terms and <code>payloadField</code> for the corresponding payloads
- for the entry.
+  for the terms, <code>weightField</code> for the weights that will be used for the 
+  the corresponding terms and <code>payloadField</code> for the corresponding payloads
+  for the entry.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                           withNSString:(NSString *)field
-                                           withNSString:(NSString *)weightField
-                                           withNSString:(NSString *)payloadField;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                                     withNSString:(NSString *)field
+                                                     withNSString:(NSString *)weightField
+                                                     withNSString:(NSString *)payloadField;
 
 /*!
  @brief Creates a new dictionary with the contents of the fields named <code>field</code>
- for the terms, <code>weightField</code> for the weights that will be used for the 
- the corresponding terms, <code>payloadField</code> for the corresponding payloads
- for the entry and <code>contextsField</code> for associated contexts.
+  for the terms, <code>weightField</code> for the weights that will be used for the 
+  the corresponding terms, <code>payloadField</code> for the corresponding payloads
+  for the entry and <code>contextsField</code> for associated contexts.
  */
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                           withNSString:(NSString *)field
-                                           withNSString:(NSString *)weightField
-                                           withNSString:(NSString *)payloadField
-                                           withNSString:(NSString *)contextsField;
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
+                                                     withNSString:(NSString *)field
+                                                     withNSString:(NSString *)weightField
+                                                     withNSString:(NSString *)payloadField
+                                                     withNSString:(NSString *)contextsField;
 
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -150,12 +160,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentDictionary)
 
 /*!
  @brief Creates an iterator over term, weight and payload fields from the lucene
- index. setting <code>withPayload</code> to false, implies an iterator
- over only term and weight.
+  index.setting <code>withPayload</code> to false, implies an iterator
+  over only term and weight.
  */
-- (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentDictionary:(OrgApacheLuceneSearchSuggestDocumentDictionary *)outer$
-                                                           withBoolean:(jboolean)hasPayloads
-                                                           withBoolean:(jboolean)hasContexts;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSuggestDocumentDictionary:(OrgApacheLuceneSearchSuggestDocumentDictionary *)outer$
+                                                                     withBoolean:(jboolean)hasPayloads
+                                                                     withBoolean:(jboolean)hasContexts;
 
 - (id<JavaUtilSet>)contexts;
 
@@ -174,11 +184,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentDictionary)
 /*!
  @brief Returns the value of the <code>weightField</code> for the current document.
  Retrieves the value for the <code>weightField</code> if it's stored (using <code>doc</code>)
- or if it's indexed as <code>NumericDocValues</code> (using <code>docId</code>) for the document.
- If no value is found, then the weight is 0.
+  or if it's indexed as <code>NumericDocValues</code> (using <code>docId</code>) for the document.
+  If no value is found, then the weight is 0.
  */
 - (jlong)getWeightWithOrgApacheLuceneDocumentDocument:(OrgApacheLuceneDocumentDocument *)doc
                                               withInt:(jint)docId;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -196,4 +210,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentDictionary_Docume
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentDictionary")

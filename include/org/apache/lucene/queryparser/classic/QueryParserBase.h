@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneQueryparserClassicQueryParserBase
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneQueryparserClassicQueryParserBase_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserClassicQueryParserBase || defined(INCLUDE_OrgApacheLuceneQueryparserClassicQueryParserBase))
 #define OrgApacheLuceneQueryparserClassicQueryParserBase_
 
@@ -42,7 +48,7 @@
 
 /*!
  @brief This class is overridden by QueryParser in QueryParser.jj
- and acts to separate the majority of the Java code from the .jj grammar file.
+  and acts to separate the majority of the Java code from the .jj grammar file.
  */
 @interface OrgApacheLuceneQueryparserClassicQueryParserBase : OrgApacheLuceneUtilQueryBuilder < OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration > {
  @public
@@ -65,28 +71,20 @@
   jboolean autoGeneratePhraseQueries_;
   jint maxDeterminizedStates_;
 }
-
-+ (jint)CONJ_NONE;
-
-+ (jint)CONJ_AND;
-
-+ (jint)CONJ_OR;
-
-+ (jint)MOD_NONE;
-
-+ (jint)MOD_NOT;
-
-+ (jint)MOD_REQ;
-
-+ (OrgApacheLuceneQueryparserClassicQueryParser_Operator *)AND_OPERATOR;
-
-+ (OrgApacheLuceneQueryparserClassicQueryParser_Operator *)OR_OPERATOR;
+@property (readonly, class) jint CONJ_NONE NS_SWIFT_NAME(CONJ_NONE);
+@property (readonly, class) jint CONJ_AND NS_SWIFT_NAME(CONJ_AND);
+@property (readonly, class) jint CONJ_OR NS_SWIFT_NAME(CONJ_OR);
+@property (readonly, class) jint MOD_NONE NS_SWIFT_NAME(MOD_NONE);
+@property (readonly, class) jint MOD_NOT NS_SWIFT_NAME(MOD_NOT);
+@property (readonly, class) jint MOD_REQ NS_SWIFT_NAME(MOD_REQ);
+@property (readonly, class, strong) OrgApacheLuceneQueryparserClassicQueryParser_Operator *AND_OPERATOR NS_SWIFT_NAME(AND_OPERATOR);
+@property (readonly, class, strong) OrgApacheLuceneQueryparserClassicQueryParser_Operator *OR_OPERATOR NS_SWIFT_NAME(OR_OPERATOR);
 
 #pragma mark Public
 
 /*!
  @brief Returns a String where those characters that QueryParser
- expects to be escaped are escaped by a preceding <code>\</code>.
+  expects to be escaped are escaped by a preceding <code>\</code>.
  */
 + (NSString *)escapeWithNSString:(NSString *)s;
 
@@ -108,13 +106,13 @@
 /*!
  @brief Returns the date resolution that is used by RangeQueries for the given field.
  Returns null, if no default or field specific date resolution has been set
- for the given field.
+  for the given field.
  */
 - (OrgApacheLuceneDocumentDateTools_Resolution *)getDateResolutionWithNSString:(NSString *)fieldName;
 
 /*!
  @brief Gets implicit operator setting, which will be either AND_OPERATOR
- or OR_OPERATOR.
+  or OR_OPERATOR.
  */
 - (OrgApacheLuceneQueryparserClassicQueryParser_Operator *)getDefaultOperator;
 
@@ -146,8 +144,8 @@
 
 /*!
  @return the maximum number of states that determinizing a regexp query
- can result in.  If the query results in any more states a
- TooComplexToDeterminizeException is thrown.
+    can result in.  If the query results in any more states a
+    TooComplexToDeterminizeException is thrown.
  */
 - (jint)getMaxDeterminizedStates;
 
@@ -164,18 +162,17 @@
 - (JavaUtilTimeZone *)getTimeZone;
 
 /*!
- @brief Initializes a query parser.
- Called by the QueryParser constructor
- @param f  the default field for query terms.
- @param a   used to find terms in the query text.
+ @brief Initializes a query parser.Called by the QueryParser constructor
+ @param f the default field for query terms.
+ @param a used to find terms in the query text.
  */
 - (void)init__WithNSString:(NSString *)f
 withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a OBJC_METHOD_FAMILY_NONE;
 
 /*!
  @brief Parses a query string, returning a <code>org.apache.lucene.search.Query</code>.
- @param query  the query string to be parsed.
- @throws ParseException if the parsing fails
+ @param query the query string to be parsed.
+ @throw ParseExceptionif the parsing fails
  */
 - (OrgApacheLuceneSearchQuery *)parseWithNSString:(NSString *)query;
 
@@ -184,39 +181,38 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a OBJC_ME
 /*!
  @brief Set to <code>true</code> to allow leading wildcard characters.
  <p>
- When set, <code>*</code> or <code>?</code> are allowed as
- the first character of a PrefixQuery and WildcardQuery.
- Note that this can produce very slow
- queries on big indexes.
+  When set, <code>
+ *</code> or <code>?</code> are allowed as the first character of a PrefixQuery and WildcardQuery.
+  Note that this can produce very slow
+  queries on big indexes. 
  <p>
- Default: false.
+  Default: false.
  */
 - (void)setAllowLeadingWildcardWithBoolean:(jboolean)allowLeadingWildcard;
 
 /*!
  @brief Set whether or not to analyze range terms when constructing <code>TermRangeQuery</code>s.
  For example, setting this to true can enable analyzing terms into 
- collation keys for locale-sensitive <code>TermRangeQuery</code>.
+  collation keys for locale-sensitive <code>TermRangeQuery</code>.
  @param analyzeRangeTerms whether or not terms should be analyzed for RangeQuerys
  */
 - (void)setAnalyzeRangeTermsWithBoolean:(jboolean)analyzeRangeTerms;
 
 /*!
  @brief Set to true if phrase queries will be automatically generated
- when the analyzer returns more than one term from whitespace
- delimited text.
- NOTE: this behavior may not be suitable for all languages.
+  when the analyzer returns more than one term from whitespace
+  delimited text.
+ NOTE: this behavior may not be suitable for all languages. 
  <p>
- Set to false if phrase queries should only be generated when
- surrounded by double quotes.
+  Set to false if phrase queries should only be generated when
+  surrounded by double quotes.
  */
 - (void)setAutoGeneratePhraseQueriesWithBoolean:(jboolean)value;
 
 /*!
  @brief Sets the default date resolution used by RangeQueries for fields for which no
- specific date resolutions has been set.
- Field specific resolutions can be set
- with <code>setDateResolution(String,org.apache.lucene.document.DateTools.Resolution)</code>.
+  specific date resolutions has been set.Field specific resolutions can be set
+  with <code>setDateResolution(String, org.apache.lucene.document.DateTools.Resolution)</code>.
  @param dateResolution the default date resolution to set
  */
 - (void)setDateResolutionWithOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTools_Resolution *)dateResolution;
@@ -232,10 +228,10 @@ withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTool
 /*!
  @brief Sets the boolean operator of the QueryParser.
  In default mode (<code>OR_OPERATOR</code>) terms without any modifiers
- are considered optional: for example <code>capital of Hungary</code> is equal to
+  are considered optional: for example <code>capital of Hungary</code> is equal to 
  <code>capital OR of OR Hungary</code>.<br>
- In <code>AND_OPERATOR</code> mode terms are considered to be in conjunction: the
- above mentioned query is parsed as <code>capital AND of AND Hungary</code>
+  In <code>AND_OPERATOR</code> mode terms are considered to be in conjunction: the
+  above mentioned query is parsed as <code>capital AND of AND Hungary</code>
  */
 - (void)setDefaultOperatorWithOrgApacheLuceneQueryparserClassicQueryParser_Operator:(OrgApacheLuceneQueryparserClassicQueryParser_Operator *)op;
 
@@ -246,49 +242,45 @@ withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTool
 - (void)setFuzzyMinSimWithFloat:(jfloat)fuzzyMinSim;
 
 /*!
- @brief Set the prefix length for fuzzy queries.
- Default is 0.
+ @brief Set the prefix length for fuzzy queries.Default is 0.
  @param fuzzyPrefixLength The fuzzyPrefixLength to set.
  */
 - (void)setFuzzyPrefixLengthWithInt:(jint)fuzzyPrefixLength;
 
 /*!
  @brief Set locale used by date range parsing, lowercasing, and other
- locale-sensitive operations.
+  locale-sensitive operations.
  */
 - (void)setLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
 /*!
  @brief Whether terms of wildcard, prefix, fuzzy and range queries are to be automatically
- lower-cased or not.
- Default is <code>true</code>.
+  lower-cased or not.Default is <code>true</code>.
  */
 - (void)setLowercaseExpandedTermsWithBoolean:(jboolean)lowercaseExpandedTerms;
 
 /*!
- @param maxDeterminizedStates the maximum number of states that
- determinizing a regexp query can result in.  If the query results in any
- more states a TooComplexToDeterminizeException is thrown.
+ @param maxDeterminizedStates the maximum number of states that    determinizing a regexp query can result in.  If the query results in any
+     more states a TooComplexToDeterminizeException is thrown.
  */
 - (void)setMaxDeterminizedStatesWithInt:(jint)maxDeterminizedStates;
 
 /*!
  @brief By default QueryParser uses <code>org.apache.lucene.search.MultiTermQuery.CONSTANT_SCORE_REWRITE</code>
- when creating a <code>PrefixQuery</code>, <code>WildcardQuery</code> or <code>TermRangeQuery</code>.
- This implementation is generally preferable because it
- a) Runs faster b) Does not have the scarcity of terms unduly influence score
- c) avoids any <code>TooManyClauses</code> exception.
+  when creating a <code>PrefixQuery</code>, <code>WildcardQuery</code> or <code>TermRangeQuery</code>.This implementation is generally preferable because it
+  a) Runs faster b) Does not have the scarcity of terms unduly influence score
+  c) avoids any <code>TooManyClauses</code> exception.
  However, if your application really needs to use the
- old-fashioned <code>BooleanQuery</code> expansion rewriting and the above
- points are not relevant then use this to change
- the rewrite method.
+  old-fashioned <code>BooleanQuery</code> expansion rewriting and the above
+  points are not relevant then use this to change
+  the rewrite method.
  */
 - (void)setMultiTermRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method;
 
 /*!
- @brief Sets the default slop for phrases.
- If zero, then exact phrase matches
- are required.  Default value is zero.
+ @brief Sets the default slop for phrases.If zero, then exact phrase matches
+  are required.
+ Default value is zero.
  */
 - (void)setPhraseSlopWithInt:(jint)phraseSlop;
 
@@ -298,7 +290,7 @@ withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTool
 
 #pragma mark Protected
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)addClauseWithJavaUtilList:(id<JavaUtilList>)clauses
                           withInt:(jint)conj
@@ -312,31 +304,31 @@ withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTool
 /*!
  @brief Factory method for generating query, given a set of clauses.
  By default creates a boolean query composed of clauses passed in.
- Can be overridden by extending classes, to modify query being
- returned.
- @param clauses List that contains <code>org.apache.lucene.search.BooleanClause</code> instances
- to join.
+  Can be overridden by extending classes, to modify query being
+  returned.
+ @param clauses List that contains <code>org.apache.lucene.search.BooleanClause</code>  instances
+      to join.
  @return Resulting <code>org.apache.lucene.search.Query</code> object.
- @exception org.apache.lucene.queryparser.classic.ParseException throw in overridden method to disallow
+ @throw org.apache.lucene.queryparser.classic.ParseExceptionthrow in overridden method to disallow
  */
 - (OrgApacheLuceneSearchQuery *)getBooleanQueryWithJavaUtilList:(id<JavaUtilList>)clauses;
 
 /*!
  @brief Factory method for generating query, given a set of clauses.
  By default creates a boolean query composed of clauses passed in.
- Can be overridden by extending classes, to modify query being
- returned.
- @param clauses List that contains <code>org.apache.lucene.search.BooleanClause</code> instances
- to join.
+  Can be overridden by extending classes, to modify query being
+  returned.
+ @param clauses List that contains <code>org.apache.lucene.search.BooleanClause</code>  instances
+      to join.
  @param disableCoord true if coord scoring should be disabled.
  @return Resulting <code>org.apache.lucene.search.Query</code> object.
- @exception org.apache.lucene.queryparser.classic.ParseException throw in overridden method to disallow
+ @throw org.apache.lucene.queryparser.classic.ParseExceptionthrow in overridden method to disallow
  */
 - (OrgApacheLuceneSearchQuery *)getBooleanQueryWithJavaUtilList:(id<JavaUtilList>)clauses
                                                     withBoolean:(jboolean)disableCoord;
 
 /*!
- @exception org.apache.lucene.queryparser.classic.ParseException throw in overridden method to disallow
+ @throw org.apache.lucene.queryparser.classic.ParseExceptionthrow in overridden method to disallow
  */
 - (OrgApacheLuceneSearchQuery *)getFieldQueryWithNSString:(NSString *)field
                                              withNSString:(NSString *)queryText
@@ -345,48 +337,47 @@ withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTool
 /*!
  @brief Base implementation delegates to <code>getFieldQuery(String,String,boolean)</code>.
  This method may be overridden, for example, to return
- a SpanNearQuery instead of a PhraseQuery.
- @exception org.apache.lucene.queryparser.classic.ParseException throw in overridden method to disallow
+  a SpanNearQuery instead of a PhraseQuery.
+ @throw org.apache.lucene.queryparser.classic.ParseExceptionthrow in overridden method to disallow
  */
 - (OrgApacheLuceneSearchQuery *)getFieldQueryWithNSString:(NSString *)field
                                              withNSString:(NSString *)queryText
                                                   withInt:(jint)slop;
 
 /*!
- @brief Factory method for generating a query (similar to
- <code>getWildcardQuery</code>).
- Called when parser parses
- an input term token that has the fuzzy suffix (~) appended.
+ @brief Factory method for generating a query (similar to 
+ <code>getWildcardQuery</code>).Called when parser parses
+  an input term token that has the fuzzy suffix (~) appended.
  @param field Name of the field query will use.
  @param termStr Term token to use for building term for the query
  @return Resulting <code>org.apache.lucene.search.Query</code> built for the term
- @exception org.apache.lucene.queryparser.classic.ParseException throw in overridden method to disallow
+ @throw org.apache.lucene.queryparser.classic.ParseExceptionthrow in overridden method to disallow
  */
 - (OrgApacheLuceneSearchQuery *)getFuzzyQueryWithNSString:(NSString *)field
                                              withNSString:(NSString *)termStr
                                                 withFloat:(jfloat)minSimilarity;
 
 /*!
- @brief Factory method for generating a query (similar to
- <code>getWildcardQuery</code>).
- Called when parser parses an input term
- token that uses prefix notation; that is, contains a single '*' wildcard
- character as its last character. Since this is a special case
- of generic wildcard term, and such a query can be optimized easily,
- this usually results in a different query object.
+ @brief Factory method for generating a query (similar to 
+ <code>getWildcardQuery</code>).Called when parser parses an input term
+  token that uses prefix notation; that is, contains a single '*' wildcard
+  character as its last character.
+ Since this is a special case
+  of generic wildcard term, and such a query can be optimized easily,
+  this usually results in a different query object.
  <p>
- Depending on settings, a prefix term may be lower-cased
- automatically. It will not go through the default Analyzer,
- however, since normal Analyzers are unlikely to work properly
- with wildcard templates.
+  Depending on settings, a prefix term may be lower-cased
+  automatically. It will not go through the default Analyzer,
+  however, since normal Analyzers are unlikely to work properly
+  with wildcard templates.
  <p>
- Can be overridden by extending classes, to provide custom handling for
- wild card queries, which may be necessary due to missing analyzer calls.
+  Can be overridden by extending classes, to provide custom handling for
+  wild card queries, which may be necessary due to missing analyzer calls.
  @param field Name of the field query will use.
- @param termStr Term token to use for building term for the query
- (<b>without</b> trailing '*' character!)
+ @param termStr Term token to use for building term for the query     (
+  <b> without </b>  trailing '*' character!)
  @return Resulting <code>org.apache.lucene.search.Query</code> built for the term
- @exception org.apache.lucene.queryparser.classic.ParseException throw in overridden method to disallow
+ @throw org.apache.lucene.queryparser.classic.ParseExceptionthrow in overridden method to disallow
  */
 - (OrgApacheLuceneSearchQuery *)getPrefixQueryWithNSString:(NSString *)field
                                               withNSString:(NSString *)termStr;
@@ -398,46 +389,44 @@ withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTool
                                               withBoolean:(jboolean)endInclusive;
 
 /*!
- @brief Factory method for generating a query.
- Called when parser
- parses an input term token that contains a regular expression
- query.
+ @brief Factory method for generating a query.Called when parser
+  parses an input term token that contains a regular expression
+  query.
  <p>
- Depending on settings, pattern term may be lower-cased
- automatically. It will not go through the default Analyzer,
- however, since normal Analyzers are unlikely to work properly
- with regular expression templates.
+  Depending on settings, pattern term may be lower-cased
+  automatically. It will not go through the default Analyzer,
+  however, since normal Analyzers are unlikely to work properly
+  with regular expression templates.
  <p>
- Can be overridden by extending classes, to provide custom handling for
- regular expression queries, which may be necessary due to missing analyzer
- calls.
+  Can be overridden by extending classes, to provide custom handling for
+  regular expression queries, which may be necessary due to missing analyzer
+  calls.
  @param field Name of the field query will use.
  @param termStr Term token that contains a regular expression
  @return Resulting <code>org.apache.lucene.search.Query</code> built for the term
- @exception org.apache.lucene.queryparser.classic.ParseException throw in overridden method to disallow
+ @throw org.apache.lucene.queryparser.classic.ParseExceptionthrow in overridden method to disallow
  */
 - (OrgApacheLuceneSearchQuery *)getRegexpQueryWithNSString:(NSString *)field
                                               withNSString:(NSString *)termStr;
 
 /*!
- @brief Factory method for generating a query.
- Called when parser
- parses an input term token that contains one or more wildcard
- characters (? and *), but is not a prefix term token (one
- that has just a single * character at the end)
+ @brief Factory method for generating a query.Called when parser
+  parses an input term token that contains one or more wildcard
+  characters (?
+ and *), but is not a prefix term token (one
+  that has just a single * character at the end)
  <p>
- Depending on settings, prefix term may be lower-cased
- automatically. It will not go through the default Analyzer,
- however, since normal Analyzers are unlikely to work properly
- with wildcard templates.
+  Depending on settings, prefix term may be lower-cased
+  automatically. It will not go through the default Analyzer,
+  however, since normal Analyzers are unlikely to work properly
+  with wildcard templates.
  <p>
- Can be overridden by extending classes, to provide custom handling for
- wildcard queries, which may be necessary due to missing analyzer calls.
+  Can be overridden by extending classes, to provide custom handling for
+  wildcard queries, which may be necessary due to missing analyzer calls.
  @param field Name of the field query will use.
- @param termStr Term token that contains one or more wild card
- characters (? or *), but is not simple prefix term
+ @param termStr Term token that contains one or more wild card    characters (? or *), but is not simple prefix term
  @return Resulting <code>org.apache.lucene.search.Query</code> built for the term
- @exception org.apache.lucene.queryparser.classic.ParseException throw in overridden method to disallow
+ @throw org.apache.lucene.queryparser.classic.ParseExceptionthrow in overridden method to disallow
  */
 - (OrgApacheLuceneSearchQuery *)getWildcardQueryWithNSString:(NSString *)field
                                                 withNSString:(NSString *)termStr;
@@ -452,7 +441,7 @@ withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTool
                                           withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur OBJC_METHOD_FAMILY_NONE;
 
 /*!
- @exception org.apache.lucene.queryparser.classic.ParseException throw in overridden method to disallow
+ @throw org.apache.lucene.queryparser.classic.ParseExceptionthrow in overridden method to disallow
  */
 - (OrgApacheLuceneSearchQuery *)newFieldQueryWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                                     withNSString:(NSString *)field
@@ -516,8 +505,8 @@ withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTool
 
 /*!
  @brief Returns a String where the escape char has been
- removed, or kept only once if there was a double escape.
- Supports escaped unicode characters, e. g. translates
+  removed, or kept only once if there was a double escape.
+ Supports escaped unicode characters, e. g. translates 
  <code>\\u0041</code> to <code>A</code>.
  */
 - (NSString *)discardEscapeCharWithNSString:(NSString *)input;
@@ -546,6 +535,10 @@ withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTool
  */
 + (jint)hexToIntWithChar:(jchar)c;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserClassicQueryParserBase)
@@ -558,34 +551,34 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicQueryParserBase, timeZone_,
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicQueryParserBase, dateResolution_, OrgApacheLuceneDocumentDateTools_Resolution *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicQueryParserBase, fieldToDateResolution_, id<JavaUtilMap>)
 
-inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_CONJ_NONE();
+inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_CONJ_NONE(void);
 #define OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_NONE 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserClassicQueryParserBase, CONJ_NONE, jint)
 
-inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_CONJ_AND();
+inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_CONJ_AND(void);
 #define OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_AND 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserClassicQueryParserBase, CONJ_AND, jint)
 
-inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_CONJ_OR();
+inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_CONJ_OR(void);
 #define OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_OR 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserClassicQueryParserBase, CONJ_OR, jint)
 
-inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_MOD_NONE();
+inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_MOD_NONE(void);
 #define OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_NONE 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserClassicQueryParserBase, MOD_NONE, jint)
 
-inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_MOD_NOT();
+inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_MOD_NOT(void);
 #define OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_NOT 10
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserClassicQueryParserBase, MOD_NOT, jint)
 
-inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_MOD_REQ();
+inline jint OrgApacheLuceneQueryparserClassicQueryParserBase_get_MOD_REQ(void);
 #define OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_REQ 11
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserClassicQueryParserBase, MOD_REQ, jint)
 
 /*!
  @brief Alternative form of QueryParser.Operator.AND
  */
-inline OrgApacheLuceneQueryparserClassicQueryParser_Operator *OrgApacheLuceneQueryparserClassicQueryParserBase_get_AND_OPERATOR();
+inline OrgApacheLuceneQueryparserClassicQueryParser_Operator *OrgApacheLuceneQueryparserClassicQueryParserBase_get_AND_OPERATOR(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParser_Operator *OrgApacheLuceneQueryparserClassicQueryParserBase_AND_OPERATOR;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserClassicQueryParserBase, AND_OPERATOR, OrgApacheLuceneQueryparserClassicQueryParser_Operator *)
@@ -593,7 +586,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserClassicQueryParserBase, 
 /*!
  @brief Alternative form of QueryParser.Operator.OR
  */
-inline OrgApacheLuceneQueryparserClassicQueryParser_Operator *OrgApacheLuceneQueryparserClassicQueryParserBase_get_OR_OPERATOR();
+inline OrgApacheLuceneQueryparserClassicQueryParser_Operator *OrgApacheLuceneQueryparserClassicQueryParserBase_get_OR_OPERATOR(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParser_Operator *OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserClassicQueryParserBase, OR_OPERATOR, OrgApacheLuceneQueryparserClassicQueryParser_Operator *)
@@ -611,14 +604,32 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicQueryParserBase)
 #if !defined (OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserClassicQueryParserBase || defined(INCLUDE_OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother))
 #define OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_
 
+#define RESTRICT_JavaLangThrowable 1
+#define INCLUDE_JavaLangThrowable 1
+#include "java/lang/Throwable.h"
+
 /*!
  @brief Do not catch this exception in your code, it means you are using methods that you should no longer use.
  */
-@interface OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother : NSException
+@interface OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother : JavaLangThrowable
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithJavaLangThrowable:(JavaLangThrowable *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1 NS_UNAVAILABLE;
+
+- (instancetype __nonnull)initWithNSString:(NSString *)arg0
+                     withJavaLangThrowable:(JavaLangThrowable *)arg1
+                               withBoolean:(jboolean)arg2
+                               withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -626,12 +637,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserClassicQueryParserBase_Method
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_init(OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother *new_OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother *new_OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother *create_OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_init();
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother *create_OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserClassicQueryParserBase")

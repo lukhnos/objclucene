@@ -16,6 +16,12 @@
 #define INCLUDE_OrgLukhnosPortmobileInvokeMethodHandle 1
 #endif
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgLukhnosPortmobileInvokeMethodHandle_) && (INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandle || defined(INCLUDE_OrgLukhnosPortmobileInvokeMethodHandle))
 #define OrgLukhnosPortmobileInvokeMethodHandle_
 
@@ -25,7 +31,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (OrgLukhnosPortmobileInvokeMethodHandle *)asTypeWithOrgLukhnosPortmobileInvokeMethodType:(OrgLukhnosPortmobileInvokeMethodType *)newType;
 
@@ -61,7 +67,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodHandle)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithIOSClass:(IOSClass *)clazz;
+- (instancetype __nonnull)initWithIOSClass:(IOSClass *)clazz;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -79,4 +89,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstruc
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandle")

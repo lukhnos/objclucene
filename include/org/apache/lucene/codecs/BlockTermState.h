@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneCodecsBlockTermState
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneCodecsBlockTermState_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlockTermState || defined(INCLUDE_OrgApacheLuceneCodecsBlockTermState))
 #define OrgApacheLuceneCodecsBlockTermState_
 
@@ -24,8 +30,8 @@
 
 /*!
  @brief Holds all state required for <code>PostingsReaderBase</code>
- to produce a <code>org.apache.lucene.index.PostingsEnum</code> without re-seeking the
- terms dict.
+  to produce a <code>org.apache.lucene.index.PostingsEnum</code> without re-seeking the
+  terms dict.
  */
 @interface OrgApacheLuceneCodecsBlockTermState : OrgApacheLuceneIndexOrdTermState {
  @public
@@ -47,8 +53,8 @@
   jlong blockFilePointer_;
   /*!
    @brief True if this term is "real" (e.g., not an auto-prefix term or
- some other "secret" term; currently only <code>BlockTreeTermsReader</code>
- sets this).
+   some other "secret" term; currently only <code>BlockTreeTermsReader</code>
+   sets this).
    */
   jboolean isRealTerm_;
 }
@@ -66,9 +72,9 @@
 /*!
  @brief Sole constructor.
  (For invocation by subclass 
- constructors, typically implicit.) 
+   constructors, typically implicit.)
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 @end
 
@@ -76,12 +82,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsBlockTermState)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlockTermState_init(OrgApacheLuceneCodecsBlockTermState *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlockTermState *new_OrgApacheLuceneCodecsBlockTermState_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlockTermState *new_OrgApacheLuceneCodecsBlockTermState_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlockTermState *create_OrgApacheLuceneCodecsBlockTermState_init();
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlockTermState *create_OrgApacheLuceneCodecsBlockTermState_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlockTermState)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlockTermState")

@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisStandardStandardTokenizer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisStandardStandardTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisStandardStandardTokenizer))
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_
 
@@ -26,61 +32,44 @@
 /*!
  @brief A grammar-based tokenizer constructed with JFlex.
  <p>
- This class implements the Word Break rules from the
- Unicode Text Segmentation algorithm, as specified in 
+  This class implements the Word Break rules from the
+  Unicode Text Segmentation algorithm, as specified in  
  <a href="http://unicode.org/reports/tr29/">Unicode Standard Annex #29</a>.
- <p>Many applications have specific tokenizer needs.  If this tokenizer does
- not suit your application, please consider copying this source code
- directory to your project and maintaining your own grammar-based tokenizer.
+  <p>Many applications have specific tokenizer needs.  If this tokenizer does
+  not suit your application, please consider copying this source code
+  directory to your project and maintaining your own grammar-based tokenizer.
  */
 @interface OrgApacheLuceneAnalysisStandardStandardTokenizer : OrgApacheLuceneAnalysisTokenizer
-
-+ (jint)ALPHANUM;
-
-+ (jint)APOSTROPHE;
-
-+ (jint)ACRONYM;
-
-+ (jint)COMPANY;
-
-+ (jint)EMAIL;
-
-+ (jint)HOST;
-
-+ (jint)NUM;
-
-+ (jint)CJ;
-
-+ (jint)ACRONYM_DEP;
-
-+ (jint)SOUTHEAST_ASIAN;
-
-+ (jint)IDEOGRAPHIC;
-
-+ (jint)HIRAGANA;
-
-+ (jint)KATAKANA;
-
-+ (jint)HANGUL;
-
-+ (IOSObjectArray *)TOKEN_TYPES;
-
-+ (jint)MAX_TOKEN_LENGTH_LIMIT;
+@property (readonly, class) jint ALPHANUM NS_SWIFT_NAME(ALPHANUM);
+@property (readonly, class) jint APOSTROPHE NS_SWIFT_NAME(APOSTROPHE);
+@property (readonly, class) jint ACRONYM NS_SWIFT_NAME(ACRONYM);
+@property (readonly, class) jint COMPANY NS_SWIFT_NAME(COMPANY);
+@property (readonly, class) jint EMAIL NS_SWIFT_NAME(EMAIL);
+@property (readonly, class) jint HOST NS_SWIFT_NAME(HOST);
+@property (readonly, class) jint NUM NS_SWIFT_NAME(NUM);
+@property (readonly, class) jint CJ NS_SWIFT_NAME(CJ);
+@property (readonly, class) jint ACRONYM_DEP NS_SWIFT_NAME(ACRONYM_DEP);
+@property (readonly, class) jint SOUTHEAST_ASIAN NS_SWIFT_NAME(SOUTHEAST_ASIAN);
+@property (readonly, class) jint IDEOGRAPHIC NS_SWIFT_NAME(IDEOGRAPHIC);
+@property (readonly, class) jint HIRAGANA NS_SWIFT_NAME(HIRAGANA);
+@property (readonly, class) jint KATAKANA NS_SWIFT_NAME(KATAKANA);
+@property (readonly, class) jint HANGUL NS_SWIFT_NAME(HANGUL);
+@property (readonly, class, strong) IOSObjectArray *TOKEN_TYPES NS_SWIFT_NAME(TOKEN_TYPES);
+@property (readonly, class) jint MAX_TOKEN_LENGTH_LIMIT NS_SWIFT_NAME(MAX_TOKEN_LENGTH_LIMIT);
 
 #pragma mark Public
 
 /*!
- @brief Creates a new instance of the <code>org.apache.lucene.analysis.standard.StandardTokenizer</code>.
- Attaches
- the <code>input</code> to the newly created JFlex scanner.
+ @brief Creates a new instance of the <code>org.apache.lucene.analysis.standard.StandardTokenizer</code>.Attaches
+  the <code>input</code> to the newly created JFlex scanner.
  See http://issues.apache.org/jira/browse/LUCENE-1068
  */
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Creates a new StandardTokenizer with a given <code>org.apache.lucene.util.AttributeFactory</code>
  */
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 - (void)close;
 
@@ -96,10 +85,9 @@
 - (void)reset;
 
 /*!
- @brief Set the max allowed token length.
- No tokens longer than this are emitted.
- @throws IllegalArgumentException if the given length is outside of the
- range [1, #MAX_TOKEN_LENGTH_LIMIT].
+ @brief Set the max allowed token length.No tokens longer than this are emitted.
+ @throw IllegalArgumentExceptionif the given length is outside of the
+   range [1, #MAX_TOKEN_LENGTH_LIMIT].
  */
 - (void)setMaxTokenLengthWithInt:(jint)length;
 
@@ -107,91 +95,91 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardStandardTokenizer)
 
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_ALPHANUM();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_ALPHANUM(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_ALPHANUM 0
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, ALPHANUM, jint)
 
 /*!
  */
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_APOSTROPHE();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_APOSTROPHE(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_APOSTROPHE 1
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, APOSTROPHE, jint)
 
 /*!
  */
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_ACRONYM();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_ACRONYM(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_ACRONYM 2
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, ACRONYM, jint)
 
 /*!
  */
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_COMPANY();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_COMPANY(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_COMPANY 3
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, COMPANY, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_EMAIL();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_EMAIL(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_EMAIL 4
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, EMAIL, jint)
 
 /*!
  */
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_HOST();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_HOST(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_HOST 5
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, HOST, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_NUM();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_NUM(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_NUM 6
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, NUM, jint)
 
 /*!
  */
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_CJ();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_CJ(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_CJ 7
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, CJ, jint)
 
 /*!
  */
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_ACRONYM_DEP();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_ACRONYM_DEP(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_ACRONYM_DEP 8
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, ACRONYM_DEP, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_SOUTHEAST_ASIAN();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_SOUTHEAST_ASIAN(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_SOUTHEAST_ASIAN 9
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, SOUTHEAST_ASIAN, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_IDEOGRAPHIC();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_IDEOGRAPHIC(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_IDEOGRAPHIC 10
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, IDEOGRAPHIC, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_HIRAGANA();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_HIRAGANA(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_HIRAGANA 11
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, HIRAGANA, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_KATAKANA();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_KATAKANA(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_KATAKANA 12
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, KATAKANA, jint)
 
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_HANGUL();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_HANGUL(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_HANGUL 13
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, HANGUL, jint)
 
 /*!
  @brief String token types that correspond to token type int constants
  */
-inline IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_get_TOKEN_TYPES();
+inline IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_get_TOKEN_TYPES(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisStandardStandardTokenizer, TOKEN_TYPES, IOSObjectArray *)
 
-inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_MAX_TOKEN_LENGTH_LIMIT();
+inline jint OrgApacheLuceneAnalysisStandardStandardTokenizer_get_MAX_TOKEN_LENGTH_LIMIT(void);
 #define OrgApacheLuceneAnalysisStandardStandardTokenizer_MAX_TOKEN_LENGTH_LIMIT 1048576
 J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardStandardTokenizer, MAX_TOKEN_LENGTH_LIMIT, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStandardTokenizer_init(OrgApacheLuceneAnalysisStandardStandardTokenizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardTokenizer *new_OrgApacheLuceneAnalysisStandardStandardTokenizer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardTokenizer *new_OrgApacheLuceneAnalysisStandardStandardTokenizer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardTokenizer *create_OrgApacheLuceneAnalysisStandardStandardTokenizer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardTokenizer *create_OrgApacheLuceneAnalysisStandardStandardTokenizer_init(void);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisStandardStandardTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
 
@@ -203,4 +191,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStandardTokenizer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardTokenizer")

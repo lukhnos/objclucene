@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneUtilPagedBytes
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneUtilPagedBytes_) && (INCLUDE_ALL_OrgApacheLuceneUtilPagedBytes || defined(INCLUDE_OrgApacheLuceneUtilPagedBytes))
 #define OrgApacheLuceneUtilPagedBytes_
 
@@ -28,11 +34,10 @@
 @protocol JavaUtilCollection;
 
 /*!
- @brief Represents a logical byte[] as a series of pages.
- You
- can write-once into the logical byte[] (append only),
- using copy, and then retrieve slices (BytesRef) into it
- using fill.
+ @brief Represents a logical byte[] as a series of pages.You
+   can write-once into the logical byte[] (append only),
+   using copy, and then retrieve slices (BytesRef) into it
+   using fill.
  */
 @interface OrgApacheLuceneUtilPagedBytes : NSObject < OrgApacheLuceneUtilAccountable >
 
@@ -40,14 +45,14 @@
 
 /*!
  @brief 1&lt;&lt;blockBits must be bigger than biggest single
- BytesRef slice that will be pulled
+   BytesRef slice that will be pulled
  */
-- (instancetype)initWithInt:(jint)blockBits;
+- (instancetype __nonnull)initWithInt:(jint)blockBits;
 
 /*!
  @brief Copy BytesRef in, setting BytesRef out to the result.
  Do not use this if you will use freeze(true).
- This only supports bytes.length &lt;= blockSize 
+  This only supports bytes.length &lt;= blockSize
  */
 - (void)copy__WithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes
               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)outArg OBJC_METHOD_FAMILY_NONE;
@@ -60,7 +65,7 @@
 
 /*!
  @brief Copy bytes in, writing the length as a 1 or 2 byte
- vInt prefix.
+   vInt prefix.
  */
 - (jlong)copyUsingLengthPrefixWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes OBJC_METHOD_FAMILY_NONE;
 
@@ -73,22 +78,25 @@
 
 /*!
  @brief Returns a DataInput to read values from this
- PagedBytes instance.
+   PagedBytes instance.
  */
 - (OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *)getDataInput;
 
 /*!
  @brief Returns a DataOutput that you may use to write into
- this PagedBytes instance.
- If you do this, you should
- not call the other writing methods (eg, copy);
- results are undefined. 
+   this PagedBytes instance.If you do this, you should
+   not call the other writing methods (eg, copy);
+   results are undefined.
  */
 - (OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput *)getDataOutput;
 
 - (jlong)getPointer;
 
 - (jlong)ramBytesUsed;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -116,7 +124,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes)
 
 /*!
  @brief Provides methods to read BytesRefs from a frozen
- PagedBytes.
+   PagedBytes.
  - seealso: #freeze
  */
 @interface OrgApacheLuceneUtilPagedBytes_Reader : NSObject < OrgApacheLuceneUtilAccountable >
@@ -126,8 +134,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes)
 /*!
  @brief Reads length as 1 or 2 byte vInt prefix, starting at <i>start</i>.
  <p>
- <b>Note:</b> this method does not support slices spanning across block
- borders.
+  <b>Note:</b> this method does not support slices spanning across block
+  borders. 
  </p>
  */
 - (void)fillWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b
@@ -135,13 +143,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes)
 
 /*!
  @brief Gets a slice out of <code>PagedBytes</code> starting at <i>start</i> with a
- given length.
- Iff the slice spans across a block border this method will
- allocate sufficient resources and copy the paged data.
+  given length.Iff the slice spans across a block border this method will
+  allocate sufficient resources and copy the paged data.
  <p>
- Slices spanning more than two blocks are not supported.
+  Slices spanning more than two blocks are not supported. 
  </p>
-  
  */
 - (void)fillSliceWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b
                                         withLong:(jlong)start
@@ -152,6 +158,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes)
 - (jlong)ramBytesUsed;
 
 - (NSString *)description;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -175,7 +185,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_Reader)
 
 #pragma mark Public
 
-- (OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *)clone;
+- (OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *)java_clone;
 
 /*!
  @brief Returns the current byte position.
@@ -190,13 +200,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_Reader)
 
 /*!
  @brief Seek to a position previously obtained from
- <code>getPosition</code>.
+   <code>getPosition</code>.
  */
 - (void)setPositionWithLong:(jlong)pos;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilPagedBytes:(OrgApacheLuceneUtilPagedBytes *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilPagedBytes:(OrgApacheLuceneUtilPagedBytes *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -226,7 +240,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput)
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilPagedBytes:(OrgApacheLuceneUtilPagedBytes *)outer$;
+- (instancetype __nonnull)initWithOrgApacheLuceneUtilPagedBytes:(OrgApacheLuceneUtilPagedBytes *)outer$;
 
 /*!
  @brief Return the current byte position.
@@ -238,6 +252,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput)
 - (void)writeBytesWithByteArray:(IOSByteArray *)b
                         withInt:(jint)offset
                         withInt:(jint)length;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -253,4 +271,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPagedBytes")

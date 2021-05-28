@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSpansNearSpansOrdered
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSpansNearSpansOrdered_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansOrdered || defined(INCLUDE_OrgApacheLuceneSearchSpansNearSpansOrdered))
 #define OrgApacheLuceneSearchSpansNearSpansOrdered_
 
@@ -26,32 +32,32 @@
 
 /*!
  @brief A Spans that is formed from the ordered subspans of a SpanNearQuery
- where the subspans do not overlap and have a maximum slop between them.
+  where the subspans do not overlap and have a maximum slop between them.
  <p>
- The formed spans only contains minimum slop matches.<br>
- The matching slop is computed from the distance(s) between
- the non overlapping matching Spans.<br>
- Successive matches are always formed from the successive Spans
- of the SpanNearQuery.
+  The formed spans only contains minimum slop matches.<br>
+  The matching slop is computed from the distance(s) between
+  the non overlapping matching Spans.<br>
+  Successive matches are always formed from the successive Spans
+  of the SpanNearQuery. 
  <p>
- The formed spans may contain overlaps when the slop is at least 1.
- For example, when querying using
+  The formed spans may contain overlaps when the slop is at least 1.
+  For example, when querying using 
  @code
 t1 t2 t3
 @endcode
- with slop at least 1, the fragment:
+  with slop at least 1, the fragment: 
  @code
 t1 t2 t1 t3 t2 t3
 @endcode
- matches twice:
+  matches twice: 
  @code
 t1 t2 .. t3      
 @endcode
- @code
+  @code
       t1 .. t2 t3
 @endcode
- Expert:
- Only public for subclassing.  Most implementations should not need this class
+  Expert:
+  Only public for subclassing.  Most implementations should not need this class
  */
 @interface OrgApacheLuceneSearchSpansNearSpansOrdered : OrgApacheLuceneSearchSpansNearSpans {
  @public
@@ -62,8 +68,8 @@ t1 t2 .. t3
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)query
-                                               withJavaUtilList:(id<JavaUtilList>)subSpans;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)query
+                                                         withJavaUtilList:(id<JavaUtilList>)subSpans;
 
 - (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
 
@@ -81,6 +87,11 @@ t1 t2 .. t3
 
 - (jboolean)twoPhaseCurrentDocMatches;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initPackagePrivateWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)arg0
+                                                                       withJavaUtilList:(id<JavaUtilList>)arg1 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansNearSpansOrdered)
@@ -95,4 +106,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansOrdered)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansOrdered")

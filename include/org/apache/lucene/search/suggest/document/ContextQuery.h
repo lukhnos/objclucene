@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentContextQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchSuggestDocumentContextQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentContextQuery || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentContextQuery))
 #define OrgApacheLuceneSearchSuggestDocumentContextQuery_
 
@@ -20,48 +26,50 @@
 #define INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionQuery 1
 #include "org/apache/lucene/search/suggest/document/CompletionQuery.h"
 
+@class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneSearchIndexSearcher;
+@class OrgApacheLuceneSearchSuggestBitsProducer;
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaLangCharSequence;
 
 /*!
  @brief A <code>CompletionQuery</code> that match documents specified by
- a wrapped <code>CompletionQuery</code> supporting boosting and/or filtering
- by specified contexts.
+  a wrapped <code>CompletionQuery</code> supporting boosting and/or filtering
+  by specified contexts.
  <p>
- Use this query against <code>ContextSuggestField</code>
- <p>
- Example of using a <code>CompletionQuery</code> with boosted
- contexts:
+  Use this query against <code>ContextSuggestField</code>
+  <p>
+  Example of using a <code>CompletionQuery</code> with boosted
+  contexts: 
  <pre class="prettyprint">
- CompletionQuery completionQuery = ...;
- ContextQuery query = new ContextQuery(completionQuery);
- query.addContext("context1", 2);
- query.addContext("context2", 1);
+   CompletionQuery completionQuery = ...;
+   ContextQuery query = new ContextQuery(completionQuery);
+   query.addContext("context1", 2);
+   query.addContext("context2", 1); 
  
 @endcode
- <p>
- NOTE:
+  <p>
+  NOTE: 
  <ul>
- <li>
- This query can be constructed with
+    <li>
+     This query can be constructed with    
  <code>PrefixCompletionQuery</code>, <code>RegexCompletionQuery</code>
- or <code>FuzzyCompletionQuery</code> query.
+     or <code>FuzzyCompletionQuery</code> query.
+    </li>
+    <li>
+      To suggest across all contexts, use <code>addAllContexts()</code>.
+      When no context is added, the default behaviour is to suggest across
+      all contexts.   
  </li>
- <li>
- To suggest across all contexts, use <code>addAllContexts()</code>.
- When no context is added, the default behaviour is to suggest across
- all contexts.
+    <li>
+      To apply the same boost to multiple contexts sharing the same prefix,
+      Use <code>addContext(CharSequence, float, boolean)</code> with the common
+      context prefix, boost and set <code>exact</code> to false.
+    <li>
+      Using this query against a <code>SuggestField</code> (not context enabled),
+      would yield results ignoring any context filtering/boosting   
  </li>
- <li>
- To apply the same boost to multiple contexts sharing the same prefix,
- Use <code>addContext(CharSequence,float,boolean)</code> with the common
- context prefix, boost and set <code>exact</code> to false.
- <li>
- Using this query against a <code>SuggestField</code> (not context enabled),
- would yield results ignoring any context filtering/boosting
- </li>
- </ul>
+  </ul>
  */
 @interface OrgApacheLuceneSearchSuggestDocumentContextQuery : OrgApacheLuceneSearchSuggestDocumentCompletionQuery {
  @public
@@ -75,12 +83,12 @@
 
 /*!
  @brief Constructs a context completion query that matches
- documents specified by <code>query</code>.
+  documents specified by <code>query</code>.
  <p>
- Use <code>addContext(CharSequence,float,boolean)</code>
- to add context(s) with boost
+  Use <code>addContext(CharSequence, float, boolean)</code>
+  to add context(s) with boost
  */
-- (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query;
+- (instancetype __nonnull)initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query;
 
 /*!
  @brief Add all contexts with a boost of 1f
@@ -100,7 +108,7 @@
 
 /*!
  @brief Adds a context with boost, set <code>exact</code> to false
- if the context is a prefix of any indexed contexts
+  if the context is a prefix of any indexed contexts
  */
 - (void)addContextWithJavaLangCharSequence:(id<JavaLangCharSequence>)context
                                  withFloat:(jfloat)boost
@@ -110,6 +118,11 @@
                                                                         withBoolean:(jboolean)needsScores;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)arg0
+              withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -127,4 +140,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentContextQuery")

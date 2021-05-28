@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisIdIndonesianStemmer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisIdIndonesianStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisIdIndonesianStemmer))
 #define OrgApacheLuceneAnalysisIdIndonesianStemmer_
 
@@ -21,22 +27,22 @@
 /*!
  @brief Stemmer for Indonesian.
  <p>
- Stems Indonesian words with the algorithm presented in:
+  Stems Indonesian words with the algorithm presented in: 
  <i>A Study of Stemming Effects on Information Retrieval in 
- Bahasa Indonesia</i>, Fadillah Z Tala.
- http://www.illc.uva.nl/Publications/ResearchReports/MoL-2003-02.text.pdf
+  Bahasa Indonesia</i>, Fadillah Z Tala.
+  http://www.illc.uva.nl/Publications/ResearchReports/MoL-2003-02.text.pdf
  */
 @interface OrgApacheLuceneAnalysisIdIndonesianStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 /*!
  @brief Stem a term (returning its new length).
  <p>
- Use <code>stemDerivational</code> to control whether full stemming
- or only light inflectional stemming is done.
+  Use <code>stemDerivational</code> to control whether full stemming
+  or only light inflectional stemming is done.
  */
 - (jint)stemWithCharArray:(IOSCharArray *)text
                   withInt:(jint)length
@@ -48,12 +54,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisIdIndonesianStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisIdIndonesianStemmer_init(OrgApacheLuceneAnalysisIdIndonesianStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisIdIndonesianStemmer *new_OrgApacheLuceneAnalysisIdIndonesianStemmer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisIdIndonesianStemmer *new_OrgApacheLuceneAnalysisIdIndonesianStemmer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisIdIndonesianStemmer *create_OrgApacheLuceneAnalysisIdIndonesianStemmer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisIdIndonesianStemmer *create_OrgApacheLuceneAnalysisIdIndonesianStemmer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisIdIndonesianStemmer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemmer")

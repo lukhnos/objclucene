@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchDocValuesTermsFilter
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchDocValuesTermsFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesTermsFilter || defined(INCLUDE_OrgApacheLuceneSearchDocValuesTermsFilter))
 #define OrgApacheLuceneSearchDocValuesTermsFilter_
 
@@ -27,60 +33,60 @@
 
 /*!
  @brief A <code>Filter</code> that only accepts documents whose single
- term value in the specified field is contained in the
- provided set of allowed terms.
+  term value in the specified field is contained in the
+  provided set of allowed terms.
  <p>
- This is the same functionality as TermsFilter (from
- queries/), except this filter requires that the
- field contains only a single term for all documents.
- Because of drastically different implementations, they
- also have different performance characteristics, as
- described below.
+  This is the same functionality as TermsFilter (from
+  queries/), except this filter requires that the
+  field contains only a single term for all documents.
+  Because of drastically different implementations, they
+  also have different performance characteristics, as
+  described below.  
  <p>
- With each search, this filter translates the specified
- set of Terms into a private <code>FixedBitSet</code> keyed by
- term number per unique <code>IndexReader</code> (normally one
- reader per segment).  Then, during matching, the term
- number for each docID is retrieved from the cache and
- then checked for inclusion using the <code>FixedBitSet</code>.
- Since all testing is done using RAM resident data
- structures, performance should be very fast, most likely
- fast enough to not require further caching of the
- DocIdSet for each possible combination of terms.
- However, because docIDs are simply scanned linearly, an
- index with a great many small documents may find this
- linear scan too costly.
+  With each search, this filter translates the specified
+  set of Terms into a private <code>FixedBitSet</code> keyed by
+  term number per unique <code>IndexReader</code> (normally one
+  reader per segment).  Then, during matching, the term
+  number for each docID is retrieved from the cache and
+  then checked for inclusion using the <code>FixedBitSet</code>.
+  Since all testing is done using RAM resident data
+  structures, performance should be very fast, most likely
+  fast enough to not require further caching of the
+  DocIdSet for each possible combination of terms.
+  However, because docIDs are simply scanned linearly, an
+  index with a great many small documents may find this
+  linear scan too costly.  
  <p>
- In contrast, TermsFilter builds up an <code>FixedBitSet</code>,
- keyed by docID, every time it's created, by enumerating
- through all matching docs using <code>org.apache.lucene.index.PostingsEnum</code> to seek
- and scan through each term's docID list.  While there is
- no linear scan of all docIDs, besides the allocation of
- the underlying array in the <code>FixedBitSet</code>, this
- approach requires a number of "disk seeks" in proportion
- to the number of terms, which can be exceptionally costly
- when there are cache misses in the OS's IO cache.
+  In contrast, TermsFilter builds up an <code>FixedBitSet</code>,
+  keyed by docID, every time it's created, by enumerating
+  through all matching docs using <code>org.apache.lucene.index.PostingsEnum</code> to seek
+  and scan through each term's docID list.  While there is
+  no linear scan of all docIDs, besides the allocation of
+  the underlying array in the <code>FixedBitSet</code>, this
+  approach requires a number of "disk seeks" in proportion
+  to the number of terms, which can be exceptionally costly
+  when there are cache misses in the OS's IO cache.  
  <p>
- Generally, this filter will be slower on the first
- invocation for a given field, but subsequent invocations,
- even if you change the allowed set of Terms, should be
- faster than TermsFilter, especially as the number of
- Terms being matched increases.  If you are matching only
- a very small number of terms, and those terms in turn
- match a very small number of documents, TermsFilter may
- perform faster.
+  Generally, this filter will be slower on the first
+  invocation for a given field, but subsequent invocations,
+  even if you change the allowed set of Terms, should be
+  faster than TermsFilter, especially as the number of
+  Terms being matched increases.  If you are matching only
+  a very small number of terms, and those terms in turn
+  match a very small number of documents, TermsFilter may
+  perform faster. 
  <p>
- Which filter is best is very application dependent.
+  Which filter is best is very application dependent.
  */
 @interface OrgApacheLuceneSearchDocValuesTermsFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+      withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 
-- (instancetype)initWithNSString:(NSString *)field
-               withNSStringArray:(IOSObjectArray *)terms;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                         withNSStringArray:(IOSObjectArray *)terms;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -90,6 +96,10 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 
@@ -111,4 +121,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesTermsFilter)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesTermsFilter")

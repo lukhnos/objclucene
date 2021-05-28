@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneAnalysisCoreKeywordAnalyzer
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneAnalysisCoreKeywordAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisCoreKeywordAnalyzer))
 #define OrgApacheLuceneAnalysisCoreKeywordAnalyzer_
 
@@ -20,22 +26,26 @@
 #define INCLUDE_OrgApacheLuceneAnalysisAnalyzer 1
 #include "org/apache/lucene/analysis/Analyzer.h"
 
+@class OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 
 /*!
- @brief "Tokenizes" the entire stream as a single token.
- This is useful
- for data like zip codes, ids, and some product names.
+ @brief "Tokenizes" the entire stream as a single token.This is useful
+  for data like zip codes, ids, and some product names.
  */
 @interface OrgApacheLuceneAnalysisCoreKeywordAnalyzer : OrgApacheLuceneAnalysisAnalyzer
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 #pragma mark Protected
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)arg0 NS_UNAVAILABLE;
 
 @end
 
@@ -43,12 +53,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreKeywordAnalyzer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init(OrgApacheLuceneAnalysisCoreKeywordAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordAnalyzer *new_OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordAnalyzer *new_OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordAnalyzer *create_OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordAnalyzer *create_OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreKeywordAnalyzer)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordAnalyzer")

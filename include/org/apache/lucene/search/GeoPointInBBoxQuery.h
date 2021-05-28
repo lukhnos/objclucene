@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_OrgApacheLuceneSearchGeoPointInBBoxQuery
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (OrgApacheLuceneSearchGeoPointInBBoxQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQuery || defined(INCLUDE_OrgApacheLuceneSearchGeoPointInBBoxQuery))
 #define OrgApacheLuceneSearchGeoPointInBBoxQuery_
 
@@ -23,22 +29,22 @@
 @class OrgApacheLuceneIndexIndexReader;
 
 /*!
- @brief Implements a simple bounding box query on a GeoPoint field.
- This is inspired by
+ @brief Implements a simple bounding box query on a GeoPoint field.This is inspired by 
  <code>org.apache.lucene.search.NumericRangeQuery</code> and is implemented using a
- two phase approach. First, candidate terms are queried using a numeric
- range based on the morton codes of the min and max lat/lon pairs. Terms
- passing this initial filter are passed to a final check that verifies whether
- the decoded lat/lon falls within (or on the boundary) of the query bounding box.
- The value comparisons are subject to a precision tolerance defined in
+  two phase approach.
+ First, candidate terms are queried using a numeric
+  range based on the morton codes of the min and max lat/lon pairs. Terms
+  passing this initial filter are passed to a final check that verifies whether
+  the decoded lat/lon falls within (or on the boundary) of the query bounding box.
+  The value comparisons are subject to a precision tolerance defined in 
  org.apache.lucene.util.GeoUtils#TOLERANCE
- NOTES:
- 1.  All latitude/longitude values must be in decimal degrees.
- 2.  Complex computational geometry (e.g., dateline wrapping) is not supported
- 3.  For more advanced GeoSpatial indexing and query operations see spatial module
- 4.  This is well suited for small rectangles, large bounding boxes may result
- in many terms, depending whether the bounding box falls on the boundary of
- many cells (degenerate case)
+  NOTES:
+     1.  All latitude/longitude values must be in decimal degrees.
+     2.  Complex computational geometry (e.g., dateline wrapping) is not supported
+     3.  For more advanced GeoSpatial indexing and query operations see spatial module
+     4.  This is well suited for small rectangles, large bounding boxes may result
+         in many terms, depending whether the bounding box falls on the boundary of
+         many cells (degenerate case)
  */
 @interface OrgApacheLuceneSearchGeoPointInBBoxQuery : OrgApacheLuceneSearchQuery {
  @public
@@ -51,11 +57,11 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                      withDouble:(jdouble)minLon
-                      withDouble:(jdouble)minLat
-                      withDouble:(jdouble)maxLon
-                      withDouble:(jdouble)maxLat;
+- (instancetype __nonnull)initWithNSString:(NSString *)field
+                                withDouble:(jdouble)minLon
+                                withDouble:(jdouble)minLat
+                                withDouble:(jdouble)maxLon
+                                withDouble:(jdouble)maxLat;
 
 - (jboolean)isEqual:(id)o;
 
@@ -75,6 +81,10 @@
 
 - (NSString *)toStringWithNSString:(NSString *)field;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointInBBoxQuery)
@@ -91,4 +101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQuery)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQuery")
